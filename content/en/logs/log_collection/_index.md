@@ -231,14 +231,14 @@ A TCP endpoint is not supported for this region.
 {{< /site-region >}}
 
 
-[1]: https://app.datadoghq.com/account/settings#api
+[1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: https://app.datadoghq.com/logs/livetail
 {{% /tab %}}
 {{< /tabs >}}
 
 **Notes**:
 
-* The HTTPS API supports logs of sizes up to 1MB. However, for optimal performance, it is recommended that an individual log be no greater than 25K bytes. If you use the Datadog Agent for logging, it is configured to split a log at 256KB.
+* The HTTPS API supports logs of sizes up to 1MB. However, for optimal performance, it is recommended that an individual log be no greater than 25K bytes. If you use the Datadog Agent for logging, it is configured to split a log at 256kB (256000 bytes).
 * A log event should not have more than 100 tags, and each tag should not exceed 256 characters for a maximum of 10 million unique tags per day.
 * A log event converted to JSON format should contain less than 256 attributes. Each of those attribute's keys should be less than 50 characters, nested in less than 10 successive levels, and their respective value should be less than 1024 characters if promoted as a facet.
 * Log events can be submitted up to 18h in the past and 2h in the future.
@@ -273,7 +273,7 @@ For more information, see the complete [source code attributes documentation][11
 
 Once logs are collected and ingested, they are available in **Log Explorer**. Log Explorer is where you can search, enrich, and view alerts on your logs. See the [Log Explorer][12] documentation to begin analyzing your log data, or see the additional log management documentation below.
 
-{{< img src="logs/log_explorer_view.png" alt="Log Explorer view"  >}}
+{{< img src="logs/explore.jpg" alt="Log Explorer view"  >}}
 
 ## Further Reading
 

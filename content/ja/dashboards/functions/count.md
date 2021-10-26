@@ -14,7 +14,7 @@ aliases:
 
 例: `count_nonzero(system.cpu.user{*} by {host})` は、各ポイントでシステム負荷が 0 以外のホストの数を表す時系列を返します。
 
-{{< img src="dashboards/functions/count/count_nonzero.png" alt="非ゼロをカウント"  style="width:80%;">}}
+{{< img src="dashboards/functions/count/count_nonzero.png" alt="非ゼロをカウント" style="width:80%;">}}
 
 注: `count_nonzero_finite()` は、`count_nonzero()` のエイリアスとして使用できます。
 
@@ -28,7 +28,7 @@ aliases:
 
 例: `count_not_null(system.cpu.user{*} by {host})` は、各ポイントでシステム負荷が null 以外のホストの数を表す時系列を返します。
 
-{{< img src="dashboards/functions/count/count_not_null.png" alt="非 null をカウント"  style="width:80%;">}}
+{{< img src="dashboards/functions/count/count_not_null.png" alt="非 null をカウント" style="width:80%;">}}
 
 ## その他の関数
 

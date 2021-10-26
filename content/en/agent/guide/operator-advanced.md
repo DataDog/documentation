@@ -141,4 +141,4 @@ datadog-agent-zvdbw                          1/1     Running    0          8m1s
 [7]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/datadog-agent-apm.yaml
 [8]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/datadog-agent-with-clusteragent.yaml
 [9]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/datadog-agent-with-tolerations.yaml
-[10]: https://app.datadoghq.com/account/settings#api
+[10]: https://app.datadoghq.com/organization-settings/api-keys

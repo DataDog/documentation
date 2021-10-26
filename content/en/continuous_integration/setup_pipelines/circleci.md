@@ -5,9 +5,9 @@ further_reading:
     - link: "/continuous_integration/explore_pipelines"
       tag: "Documentation"
       text: "Explore Pipeline Execution Results and Performance"
-    - link: "/continuous_integration/setup_pipelines/custom_spans/"
+    - link: "/continuous_integration/setup_pipelines/custom_commands/"
       tag: "Documentation"
-      text: "Extending Pipeline Visibility with Custom Spans"
+      text: "Extend Pipeline Visibility by tracing individual commands"
     - link: "/continuous_integration/troubleshooting/"
       tag: "Documentation"
       text: "Troubleshooting CI"
@@ -26,7 +26,7 @@ The Datadog integration for [CircleCI][1] works by using [webhooks][2] to send d
    * **Events**: Select `Workflow Completed` and `Job Completed`.
    * **Certificate verifications**: Enable this check.
 
-[1]: https://app.datadoghq.com/account/settings#api
+[1]: https://app.datadoghq.com/organization-settings/api-keys
 {{< /site-region >}}
 
 {{< site-region region="eu" >}}

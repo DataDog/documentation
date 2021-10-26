@@ -69,10 +69,16 @@ Set up the check alert:
 
     Each check run submits a single status of `OK`, `WARN`, `CRITICAL`, or `UNKNOWN`. Choose how many consecutive runs with the `CRITICAL` status trigger a notification. For example, your database might have a single blip where connection fails. If you set this value to `> 1`, the blip is ignored but a problem with more than one consecutive failure triggers a notification.
 
-3. Resolve the alert after selected consecutive successes: `<NUMBER>`
+3. If the integration check reports an `UNKNOWN` status, choose `Do not notify` or `Notify` for Unknown status.
+
+    If enabled, a state transition to `UNKNOWN` triggers a notification. In the [monitor status page][1], the status bar of a group in `UNKNOWN` state uses `NODATA` grey. The overall status of the monitor stays in `OK`.
+
+4. Resolve the alert after selected consecutive successes: `<NUMBER>`
 
     Choose how many consecutive runs with the `OK` status resolve the alert.
 
+
+[1]: /monitors/manage/status
 {{% /tab %}}
 {{% tab "Cluster Alert" %}}
 

@@ -123,7 +123,7 @@ Add your [Datadog API key][3] to your [project environment variables][4] with th
 
 [1]: https://docs.microsoft.com/en-us/azure/devops/pipelines/process/resources?view=azure-devops&tabs=schema
 [2]: https://docs.microsoft.com/en-us/azure/devops/pipelines/process/service-containers?view=azure-devops&tabs=yaml
-[3]: https://app.datadoghq.com/account/settings#api
+[3]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: https://docs.microsoft.com/en-us/azure/devops/pipelines/process/variables?view=azure-devops&tabs=yaml%2Cbatch
 {{% /tab %}}
 {{% tab "GitLab CI" %}}
@@ -182,7 +182,7 @@ Add your [Datadog API key][2] to your [project environment variables][3] with th
 
 
 [1]: https://docs.gitlab.com/ee/ci/docker/using_docker_images.html#what-is-a-service
-[2]: https://app.datadoghq.com/account/settings#api
+[2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://docs.gitlab.com/ee/ci/variables/README.html#custom-environment-variables
 {{% /tab %}}
 {{% tab "GitHub Actions" %}}
@@ -247,7 +247,7 @@ Add your [Datadog API key][2] to your [project secrets][3] with the key `DD_API_
 
 
 [1]: https://docs.github.com/en/actions/guides/about-service-containers
-[2]: https://app.datadoghq.com/account/settings#api
+[2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://docs.github.com/en/actions/reference/encrypted-secrets
 {{% /tab %}}
 {{% tab "CircleCI" %}}
@@ -334,7 +334,7 @@ Add your [Datadog API key][2] to your [project environment variables][3] with th
 
 
 [1]: https://circleci.com/developer/orbs/orb/datadog/agent
-[2]: https://app.datadoghq.com/account/settings#api
+[2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://circleci.com/docs/2.0/env-vars/
 {{% /tab %}}
 {{< /tabs >}}
@@ -475,7 +475,7 @@ DD_API_KEY=<YOUR_DD_API_KEY> docker-compose up \
 [1]: /agent/
 [2]: https://app.datadoghq.com/account/settings#agent
 [3]: https://docs.datadoghq.com/agent/cluster_agent/admission_controller/
-[4]: https://app.datadoghq.com/account/settings#api
+[4]: https://app.datadoghq.com/organization-settings/api-keys
 [5]: https://docs.docker.com/compose/
 [6]: /continuous_integration/setup_tests/containers/
 {{< /site-region >}}

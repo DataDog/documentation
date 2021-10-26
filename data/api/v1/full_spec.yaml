@@ -59,6 +59,13 @@ components:
             auto_scaling: false
             opswork: false
           type: object
+        cspm_resource_collection_enabled:
+          default: false
+          description: Whether Datadog collects cloud security posture management
+            resources from your AWS account. This includes additional resources not
+            covered under the general `resource_collection`.
+          example: true
+          type: boolean
         excluded_regions:
           description: An array of AWS regions to exclude from metrics collection.
           example:
@@ -99,6 +106,17 @@ components:
             description: The list of the the host_tags.
             type: string
           type: array
+        metrics_collection_enabled:
+          default: true
+          description: Whether Datadog collects metrics for this AWS account.
+          example: false
+          type: boolean
+        resource_collection_enabled:
+          default: false
+          description: Whether Datadog collects a standard set of resources from your
+            AWS account.
+          example: true
+          type: boolean
         role_name:
           description: Your Datadog role delegation name.
           example: DatadogAWSIntegrationRole
@@ -1341,6 +1359,8 @@ components:
       properties:
         apm_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+        apm_stats_query:
+          $ref: '#/components/schemas/ApmStatsQueryDefinition'
         event_query:
           $ref: '#/components/schemas/LogQueryDefinition'
         log_query:
@@ -3105,6 +3125,7 @@ components:
       - DELETE
       - HEAD
       - OPTIONS
+      example: GET
       type: string
       x-enum-varnames:
       - GET
@@ -5583,6 +5604,7 @@ components:
           format: int64
           maximum: 5
           minimum: 1
+          nullable: true
           type: integer
         query:
           description: The monitor query.
@@ -5594,6 +5616,7 @@ components:
           items:
             description: A role UUID.
             type: string
+          nullable: true
           type: array
         state:
           $ref: '#/components/schemas/MonitorState'
@@ -6560,6 +6583,24 @@ components:
         `markdown`, `timeseries`, `toplist`, `heatmap`, `distribution`,
 
         `log_stream`. [More information on each graph visualization type.](https://docs.datadoghq.com/dashboards/widgets/)'
+      example:
+        definition:
+          requests:
+          - display_type: line
+            q: avg:system.load.1{*}
+            style:
+              line_type: solid
+              line_width: normal
+              palette: dog_classic
+          show_legend: true
+          type: timeseries
+          yaxis:
+            scale: linear
+        graph_size: m
+        split_by:
+          keys: []
+          tags: []
+        time: null
       oneOf:
       - $ref: '#/components/schemas/NotebookMarkdownCellAttributes'
       - $ref: '#/components/schemas/NotebookTimeseriesCellAttributes'
@@ -9679,25 +9720,31 @@ components:
           $ref: '#/components/schemas/SyntheticsAPITestConfig'
         locations:
           description: Array of locations used to run the test.
+          example:
+          - aws:eu-west-3
           items:
             description: A location from which the test was run.
             type: string
           type: array
         message:
           description: Notification message associated with the test.
+          example: Notification message
           type: string
         monitor_id:
           description: The associated monitor ID.
+          example: 12345678
           format: int64
           readOnly: true
           type: integer
         name:
           description: Name of the test.
+          example: Test name
           type: string
         options:
           $ref: '#/components/schemas/SyntheticsTestOptions'
         public_id:
           description: The public ID for the test.
+          example: 123-abc-456
           readOnly: true
           type: string
         status:
@@ -9706,6 +9753,8 @@ components:
           $ref: '#/components/schemas/SyntheticsTestDetailsSubType'
         tags:
           description: Array of tags attached to the test.
+          example:
+          - env:production
           items:
             description: A tag attached to the test.
             type: string
@@ -9715,11 +9764,22 @@ components:
       type: object
     SyntheticsAPITestConfig:
       description: Configuration object for a Synthetic API test.
+      example:
+        assertions:
+        - operator: lessThan
+          target: 1000
+          type: responseTime
+        request:
+          method: GET
+          url: https://example.com
       properties:
         assertions:
           default: []
           description: Array of assertions used for the test.
-          example: []
+          example:
+          - operator: lessThan
+            target: 1000
+            type: responseTime
           items:
             $ref: '#/components/schemas/SyntheticsAssertion'
           type: array
@@ -9977,6 +10037,57 @@ components:
       required:
       - password
       - username
+      type: object
+    SyntheticsBatchDetails:
+      description: Details about a batch response.
+      properties:
+        data:
+          $ref: '#/components/schemas/SyntheticsBatchDetailsData'
+      type: object
+    SyntheticsBatchDetailsData:
+      description: Wrapper object that contains the details of a batch.
+      properties:
+        metadata:
+          $ref: '#/components/schemas/SyntheticsCIBatchMetadata'
+        results:
+          description: List of results for the batch.
+          items:
+            $ref: '#/components/schemas/SyntheticsBatchResult'
+          type: array
+        status:
+          $ref: '#/components/schemas/SyntheticsStatus'
+      type: object
+    SyntheticsBatchResult:
+      description: Object with the results of a Synthetics batch.
+      properties:
+        device:
+          $ref: '#/components/schemas/SyntheticsDeviceID'
+        duration:
+          description: Total duration in millisecond of the test.
+          format: double
+          type: number
+        execution_rule:
+          $ref: '#/components/schemas/SyntheticsTestExecutionRule'
+        location:
+          description: Name of the location.
+          type: string
+        result_id:
+          description: The ID of the result to get.
+          type: string
+        retries:
+          description: Total duration in millisecond of the test.
+          format: double
+          type: number
+        status:
+          $ref: '#/components/schemas/SyntheticsStatus'
+        test_name:
+          description: Name of the test.
+          type: string
+        test_public_id:
+          description: The public ID of the Synthetic test.
+          type: string
+        test_type:
+          $ref: '#/components/schemas/SyntheticsTestDetailsType'
       type: object
     SyntheticsBrowserError:
       description: Error response object for a browser test.
@@ -10252,6 +10363,34 @@ components:
       - GLOBAL
       - JAVASCRIPT
       - TEXT
+    SyntheticsCIBatchMetadata:
+      description: Metadata for the Synthetics tests run.
+      properties:
+        ci:
+          $ref: '#/components/schemas/SyntheticsCIBatchMetadataCI'
+        git:
+          $ref: '#/components/schemas/SyntheticsCIBatchMetadataGit'
+      type: object
+    SyntheticsCIBatchMetadataCI:
+      description: Description of the CI provider.
+      properties:
+        pipeline:
+          description: Name of the pipeline.
+          type: string
+        provider:
+          description: Name of the CI provider.
+          type: string
+      type: object
+    SyntheticsCIBatchMetadataGit:
+      description: Git information.
+      properties:
+        branch:
+          description: The branch name.
+          type: string
+        commit_sha:
+          description: The commit SHA.
+          type: string
+      type: object
     SyntheticsCITest:
       description: Test configuration for Synthetics CI
       properties:
@@ -10287,29 +10426,7 @@ components:
             type: string
           type: array
         metadata:
-          description: Metadata for the Synthetics tests run
-          properties:
-            ci:
-              description: Describe CI provider.
-              properties:
-                pipeline:
-                  description: Name of the pipeline.
-                  type: string
-                provider:
-                  description: Name of the CI provider.
-                  type: string
-              type: object
-            git:
-              description: Git information.
-              properties:
-                branch:
-                  description: Branch name.
-                  type: string
-                commit_sha:
-                  description: Commit SHA.
-                  type: string
-              type: object
-          type: object
+          $ref: '#/components/schemas/SyntheticsCIBatchMetadata'
         public_id:
           description: The public ID of the Synthetics test to trigger.
           example: aaa-aaa-aaa
@@ -10901,6 +11018,18 @@ components:
           format: date-time
           type: string
       type: object
+    SyntheticsStatus:
+      description: Determines whether or not the batch has passed, failed, or is in
+        progress.
+      enum:
+      - passed
+      - skipped
+      - failed
+      type: string
+      x-enum-varnames:
+      - PASSED
+      - skipped
+      - failed
     SyntheticsStep:
       description: The steps used in a Synthetics browser test.
       properties:
@@ -11136,6 +11265,7 @@ components:
       - dns
       - multi
       - icmp
+      example: http
       type: string
       x-enum-varnames:
       - HTTP
@@ -11153,6 +11283,17 @@ components:
       x-enum-varnames:
       - API
       - BROWSER
+    SyntheticsTestExecutionRule:
+      description: Execution rule for a Synthetics test.
+      enum:
+      - blocking
+      - non_blocking
+      - skipped
+      type: string
+      x-enum-varnames:
+      - BLOCKING
+      - NON_BLOCKING
+      - SKIPPED
     SyntheticsTestHeaders:
       additionalProperties:
         description: A single Header.
@@ -11273,6 +11414,7 @@ components:
       enum:
       - live
       - paused
+      example: live
       type: string
       x-enum-varnames:
       - LIVE
@@ -11359,6 +11501,7 @@ components:
           type: number
         url:
           description: URL to perform the test with.
+          example: https://example.com
           type: string
       type: object
     SyntheticsTestRequestCertificate:
@@ -12183,8 +12326,8 @@ components:
       - profiled_host_percentage
       - profiled_container_usage
       - profiled_container_percentage
-      - dbm_host_usage
-      - dbm_host_percentage
+      - dbm_hosts_usage
+      - dbm_hosts_percentage
       - dbm_queries_usage
       - dbm_queries_percentage
       - '*'
@@ -12218,8 +12361,8 @@ components:
       - PROFILED_HOST_PERCENTAGE
       - PROFILED_CONTAINER_USAGE
       - PROFILED_CONTAINER_PERCENTAGE
-      - DBM_HOST_USAGE
-      - DBM_HOST_PERCENTAGE
+      - DBM_HOSTS_USAGE
+      - DBM_HOSTS_PERCENTAGE
       - DBM_QUERIES_USAGE
       - DBM_QUERIES_PERCENTAGE
       - ALL
@@ -12311,11 +12454,11 @@ components:
           description: The Cloud Workload Security host usage by tag(s)
           format: double
           type: number
-        dbm_host_percentage:
+        dbm_hosts_percentage:
           description: The percentage of Database Monitoring host usage by tag(s).
           format: double
           type: number
-        dbm_host_usage:
+        dbm_hosts_usage:
           description: The Database Monitoring host usage by tag(s).
           format: double
           type: number
@@ -13188,6 +13331,37 @@ components:
             $ref: '#/components/schemas/UsageRumSessionsHour'
           type: array
       type: object
+    UsageSDSHour:
+      description: Sensitive Data Scanner usage for a given organization for a given
+        hour.
+      properties:
+        hour:
+          description: The hour for the usage.
+          format: date-time
+          type: string
+        logs_scanned_bytes:
+          description: "The total number of bytes scanned of logs usage by the Sensitive
+            Data Scanner from the start of the given hour\u2019s month until the given
+            hour."
+          format: int64
+          type: integer
+        total_scanned_bytes:
+          description: "The total number of bytes scanned across all usage types by
+            the Sensitive Data Scanner from the start of the given hour\u2019s month
+            until the given hour."
+          format: int64
+          type: integer
+      type: object
+    UsageSDSResponse:
+      description: Response containing the Sensitive Data Scanner usage for each hour
+        for a given organization.
+      properties:
+        usage:
+          description: Get hourly usage for Sensitive Data Scanner.
+          items:
+            $ref: '#/components/schemas/UsageSDSHour'
+          type: array
+      type: object
     UsageSNMPHour:
       description: The number of SNMP devices for each hour for a given organization.
       properties:
@@ -13498,6 +13672,17 @@ components:
             hours in the current date for all organizations.
           format: int64
           type: integer
+        sds_logs_scanned_bytes_sum:
+          description: Shows the sum of all bytes scanned of logs usage by the Sensitive
+            Data Scanner over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        sds_total_scanned_bytes_sum:
+          description: Shows the sum of all bytes scanned across all usage types by
+            the Sensitive Data Scanner over all hours in the current month for all
+            organizations.
+          format: int64
+          type: integer
         synthetics_browser_check_calls_count_sum:
           description: Shows the sum of all Synthetic browser tests over all hours
             in the current date for all organizations.
@@ -13727,6 +13912,17 @@ components:
             hours in the current date for the given org.
           format: int64
           type: integer
+        sds_logs_scanned_bytes_sum:
+          description: Shows the sum of all bytes scanned of logs usage by the Sensitive
+            Data Scanner over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        sds_total_scanned_bytes_sum:
+          description: Shows the sum of all bytes scanned across all usage types by
+            the Sensitive Data Scanner over all hours in the current month for all
+            organizations.
+          format: int64
+          type: integer
         synthetics_browser_check_calls_count_sum:
           description: Shows the sum of all Synthetic browser tests over all hours
             in the current date for the given org.
@@ -13754,7 +13950,8 @@ components:
           type: integer
       type: object
     UsageSummaryResponse:
-      description: Response with hourly report of all data billed by Datadog all organizations.
+      description: Response summarizing all usage aggregated across the months in
+        the request for all organizations, and broken down by month and by organization.
       properties:
         agent_host_top99p_sum:
           description: Shows the 99th percentile of all agent hosts over all hours
@@ -13994,6 +14191,17 @@ components:
             hours in the current months for all organizations.
           format: int64
           type: integer
+        sds_logs_scanned_bytes_sum:
+          description: Shows the sum of all bytes scanned of logs usage by the Sensitive
+            Data Scanner over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        sds_total_scanned_bytes_sum:
+          description: Shows the sum of all bytes scanned across all usage types by
+            the Sensitive Data Scanner over all hours in the current month for all
+            organizations.
+          format: int64
+          type: integer
         start_date:
           description: Shows the first date of usage in the current months for all
             organizations.
@@ -14116,7 +14324,8 @@ components:
           format: int64
           type: integer
         num_custom_timeseries:
-          description: Contains the number of non-aggregation custom metrics.
+          description: Contains sum of non-aggregation custom metrics and custom metrics
+            that are outputs for aggregations.
           format: int64
           type: integer
       type: object
@@ -15216,6 +15425,7 @@ paths:
             enum:
             - datadoghq.com
             - us3.datadoghq.com
+            - us5.datadoghq.com
             - datadoghq.eu
             - ddog-gov.com
           subdomain:
@@ -16035,6 +16245,12 @@ paths:
       tags:
       - Dashboard Lists
       x-codegen-request-body-name: body
+      x-given:
+        dashboard_list:
+          parameters:
+          - name: body
+            value: "{\n  \"name\": \"{{ unique }}\"\n}"
+          step: there is a valid "dashboard_list" in the system
       x-menu-order: 2
       x-undo:
         operationId: DeleteDashboardList
@@ -16778,10 +16994,22 @@ paths:
       tags:
       - Downtimes
       x-codegen-request-body-name: body
+      x-given:
+        downtime:
+          parameters:
+          - name: body
+            value: "{\n  \"message\": \"{{ unique }}\",\n  \"start\": {{ timestamp(\"now\")
+              }},\n  \"timezone\": \"Etc/UTC\",\n  \"scope\": [\"test:{{ unique_lower_alnum
+              }}\"],\n  \"recurrence\": {\n    \"type\": \"weeks\",\n    \"period\":
+              1,\n    \"week_days\": [\"Mon\", \"Tue\", \"Wed\", \"Thu\", \"Fri\"],\n
+              \   \"until_date\": {{ timestamp(\"now + 21d\")}}\n  }\n}"
+          step: there is a valid "downtime" in the system
       x-menu-order: 2
       x-undo:
-        operationId: TODO
-        parameters: []
+        operationId: CancelDowntime
+        parameters:
+        - name: downtime_id
+          source: id
         type: unsafe
   /api/v1/downtime/cancel/by_scope:
     post:
@@ -19208,12 +19436,12 @@ paths:
       - Webhooks Integration
       x-codegen-request-body-name: body
       x-given:
-        webhook-custom-variable:
+        webhook_custom_variable:
           parameters:
           - name: body
             value: "{\n  \"name\": \"{{ unique_upper_alnum }}\",\n  \"value\": \"variable-value\",\n
               \ \"is_secret\": false\n}"
-          step: there is a valid "webhook-custom-variable" in the system
+          step: there is a valid "webhook_custom_variable" in the system
       x-menu-order: 5
       x-undo:
         operationId: DeleteWebhooksIntegrationCustomVariable
@@ -20487,7 +20715,8 @@ paths:
         - **`#`** an integer or decimal number used to set the threshold.
 
 
-        **NOTE** Only available on US1-FED, US3, and in closed beta on EU and US1.
+        **NOTE** Only available on US1-FED, US3, US5 and in closed beta on EU and
+        US1.
 
 
         **Process Alert Query**
@@ -20600,7 +20829,8 @@ paths:
         - **`#`** an integer or decimal number used to set the threshold.
 
 
-        **NOTE** Only available on US1-FED and in closed beta on EU, US3, and US1.'
+        **NOTE** Only available on US1-FED and in closed beta on US1, EU, US3, and
+        US5.'
       operationId: CreateMonitor
       requestBody:
         content:
@@ -20650,6 +20880,12 @@ paths:
       tags:
       - Monitors
       x-codegen-request-body-name: body
+      x-given:
+        monitor:
+          parameters:
+          - file: monitor_payload.json
+            name: body
+          step: there is a valid "monitor" in the system
       x-menu-order: 1
       x-undo:
         operationId: DeleteMonitor
@@ -20663,6 +20899,7 @@ paths:
       operationId: CheckCanDeleteMonitor
       parameters:
       - description: The IDs of the monitor to check.
+        explode: false
         in: query
         name: monitor_ids
         required: true
@@ -20671,6 +20908,7 @@ paths:
             format: int64
             type: integer
           type: array
+        style: form
       responses:
         '200':
           content:
@@ -22936,6 +23174,36 @@ paths:
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v1/synthetics/ci/batch/{batch_id}:
+    get:
+      description: Get a batch's updated details.
+      operationId: GetSyntheticsCIBatch
+      parameters:
+      - description: The ID of the batch.
+        in: path
+        name: batch_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyntheticsBatchDetails'
+          description: OK
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Batch does not exist.
+      summary: Get details of batch
+      tags:
+      - Synthetics
+      x-menu-order: 26
+      x-undo:
+        type: safe
   /api/v1/synthetics/locations:
     get:
       description: 'Get the list of public and private locations available for Synthetic
@@ -23234,6 +23502,12 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
+      x-given:
+        synthetics_api_test:
+          parameters:
+          - file: synthetics_api_test_payload.json
+            name: body
+          step: there is a valid "synthetics_api_test" in the system
       x-menu-order: 1
       x-undo:
         operationId: DeleteTests
@@ -24786,7 +25060,7 @@ paths:
       summary: Get hourly usage for Cloud Workload Security
       tags:
       - Usage Metering
-      x-menu-order: 31
+      x-menu-order: 32
       x-undo:
         type: safe
   /api/v1/usage/dbm:
@@ -24834,7 +25108,7 @@ paths:
       summary: Get hourly usage for Database Monitoring
       tags:
       - Usage Metering
-      x-menu-order: 32
+      x-menu-order: 33
       x-undo:
         type: safe
   /api/v1/usage/fargate:
@@ -25519,6 +25793,54 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 13
+      x-undo:
+        type: safe
+  /api/v1/usage/sds:
+    get:
+      description: Get hourly usage for Sensitive Data Scanner.
+      operationId: GetUsageSDS
+      parameters:
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage beginning at this hour.'
+        in: query
+        name: start_hr
+        required: true
+        schema:
+          format: date-time
+          type: string
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage ending
+
+          **before** this hour.'
+        in: query
+        name: end_hr
+        required: false
+        schema:
+          format: date-time
+          type: string
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/UsageSDSResponse'
+          description: OK
+        '400':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+      summary: Get hourly usage for Sensitive Data Scanner
+      tags:
+      - Usage Metering
+      x-menu-order: 34
       x-undo:
         type: safe
   /api/v1/usage/snmp:
@@ -26303,6 +26625,7 @@ paths:
             enum:
             - datadoghq.com
             - us3.datadoghq.com
+            - us5.datadoghq.com
             - datadoghq.eu
             - ddog-gov.com
           subdomain:
@@ -26402,6 +26725,7 @@ servers:
       enum:
       - datadoghq.com
       - us3.datadoghq.com
+      - us5.datadoghq.com
       - datadoghq.eu
       - ddog-gov.com
     subdomain:

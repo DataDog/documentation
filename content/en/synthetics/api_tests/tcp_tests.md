@@ -127,7 +127,7 @@ You can create local variables by clicking on **Create Local Variable** at the t
 
 ### Use variables
 
-You can use the [global variables defined in the `Settings`][10] and the [locally defined variables](#create-local-variables) in the URL, Advanced Options, and assertions of your HTTP tests.
+You can use the [global variables defined in the `Settings`][10] and the [locally defined variables](#create-local-variables) in the URL, Advanced Options, and assertions of your TCP tests.
 
 To display your list of variables, type `{{` in your desired field:
 
