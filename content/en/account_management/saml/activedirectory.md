@@ -30,6 +30,6 @@ For questions regarding Datadog in-app errors pertaining to SAML, contact [the D
 
 [1]: /account_management/saml/
 [2]: https://docs.microsoft.com/en-us/powerapps/maker/portals/configure/configure-saml2-settings
-[3]: /saml/saml_setup
+[3]: https://app.datadoghq.com/saml/saml_setup
 [4]: /help/
 [5]: https://powerapps.microsoft.com/en-us/support/

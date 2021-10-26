@@ -11,13 +11,14 @@ categories:
 creates_events: false
 ddtype: crawler
 dependencies:
-  - 'https://github.com/DataDog/integrations-extras/blob/master/auth0/README.md'
+  - https://github.com/DataDog/integrations-extras/blob/master/auth0/README.md
 display_name: Auth0
 draft: false
 git_integration_title: auth0
 guid: 9308a35c-219e-4d24-ac11-af2511e5041a
 integration_id: auth0
 integration_title: Auth0
+integration_version: ''
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
@@ -107,7 +108,7 @@ auth0 には、イベントは含まれません。
 このインテグレーションの詳細は、Datadog の[ブログ記事][5]でご確認いただけます。
 
 [1]: https://manage.auth0.com
-[2]: https://app.datadoghq.com/account/settings#api
+[2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://auth0.com/docs/logs/references/log-event-type-codes
 [4]: https://docs.datadoghq.com/ja/help/
 [5]: https://www.datadoghq.com/blog/monitor-auth0-with-datadog/

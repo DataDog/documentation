@@ -373,7 +373,7 @@ Setting up the Heroku log drain also opens the door to get dyno system metrics (
 To set up the Heroku log drain from a terminal, run the following:
 
 ```shell
-heroku drains:add "https://http-intake.logs.datadoghq.com/v1/input/$DD_API_KEY?ddsource=heroku&service=$APPNAME&host=$APPNAME" -a $APPNAME
+heroku drains:add "https://http-intake.logs.datadoghq.com/api/v2/logs?dd-api-key=$DD_API_KEY&ddsource=heroku&service=$APPNAME&host=$APPNAME" -a $APPNAME
 ```
 
 To get system metrics from your dynos, apart from enabling the log drain, enable [log-runtime-metrics][18] as well:
@@ -668,7 +668,7 @@ Agent (v7.27.0)
 [6]: https://devcenter.heroku.com/articles/getting-started-with-ruby/
 [7]: https://devcenter.heroku.com/articles/heroku-postgresql#local-setup
 [8]: https://app.datadoghq.com
-[9]: https://app.datadoghq.com/account/settings#api
+[9]: https://app.datadoghq.com/organization-settings/api-keys
 [10]: https://docs.datadoghq.com/agent/basic_agent_usage/heroku/
 [11]: https://devcenter.heroku.com/articles/buildpacks/
 [12]: https://app.datadoghq.com/infrastructure/map?fillby=avg%3Adatadog.heroku_agent.running&filter=dyno%3Aweb.1

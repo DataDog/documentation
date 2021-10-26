@@ -12,6 +12,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/dynamic-template-variable-syntax-dashboards/"
   tag: "Blog"
   text: "Speed up dashboard workflows with dynamic template variable syntax"
+- link: "https://www.datadoghq.com/blog/template-variable-available-values/"
+  tag: "Blog"
+  text: "Filter dashboards faster with template variable available values"
 - link: "/dashboards/"
   tag: "Documentation"
   text: "Create Dashboards in Datadog"
@@ -31,16 +34,16 @@ To create your first template variable in the dashboard, click **Add Template Va
 
 A template variable is defined by:
 
-* **Name**: A unique name for the template variable. This name is used to filter content on your dashboard.
 * **Tag or Attribute**:
     * Tag: If you follow the recommended [tagging format][1] (`<KEY>:<VALUE>`), the *Tag* is the `<KEY>`.
     * Attribute: Use a [facet or measure as the template variable](#logs-apm-and-rum-queries).
-* **Default Value**:
-    The default value for your template variable tag or attribute.
+* **Name**: A unique name for the template variable that appears in queries on the dashboard. Template variables are automatically named after the selected tag or attribute.
+* **Default Value**: The tag or attribute value that appears automatically when the dashboard is loaded. Defaults to `*`.
+* **Available Values**: The tag or attribute values available for selection in the dropdown. Defaults to `(all)`. The list of available values always includes `*`, which queries all values of the tag or attribute.
 
-After creating a template variable, Datadog displays the number of sources using the variable. In the example below, the template variable is used in one out of two graphs:
+After creating a template variable, Datadog displays the number of sources using the variable. In the example below, the template variable `team` is used in two graphs on the dashboard:
 
-{{< img src="dashboards/template_variables/stats_tv.png" alt="statistic TV" style="width:85%;">}}
+{{< img src="dashboards/template_variables/stats_tv_modal.png" alt="Template variable with several variables set" style="width:90%;">}}
 
 [Use the template variables](#use) in individual widgets or click the **Add to All** option. To remove a template variable from all widgets, click the **Remove From All** option.
 
@@ -48,6 +51,8 @@ After creating a template variable, Datadog displays the number of sources using
 
 Template variables work with log, APM, and RUM widgets because metrics, logs, APM, and RUM share the same tags.
 Additionally, you can define log, APM, and RUM template variables based on [log][2], APM, or [RUM][3] facets. These variables start with `@`, for example: `@http.status_code`.
+
+On log, APM, and RUM widgets, you can use wildcards in the middle of a value (for example, `eng*@example.com`) or use multiple wildcards in a value (for example, `*prod*`).
 
 **Note**: Using **Add to all** for this type of template variable adds the variable to all log, APM, and RUM widgets.
 
@@ -81,6 +86,8 @@ When creating or editing a widget, existing template variables display as option
 After the widget is saved, the value of the template variable is the one selected from the top of your dashboard:
 
 {{< img src="dashboards/template_variables/selecting_template_variables.png" alt="Selecting template variables" style="width:75%;">}}
+
+To query based on just a prefix or suffix, use a wildcard character (`*`) at the beginning or end of the template variable value. For example, find all regions that begin with `us` using `us*`, or all emails under the `example.com` domain with `*@example.com`.
 
 When you change the value of a template variable, the dashboard URL updates to reflect the template variable value with the format `&tpl_var_<TEMPLATE_VARIABLE_NAME>=<TEMPLATE_VARIABLE_VALUE>`. For example, a dashboard with the template variable `$env` changed to `prod` would have the URL parameter `&tpl_var_env=prod`.
 

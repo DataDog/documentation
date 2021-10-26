@@ -56,5 +56,5 @@ Then, [start the Agent][7] using the appropriate command for your system.
 [3]: https://yum.datadoghq.com/stable/6/x86_64
 [4]: https://yum.datadoghq.com/stable/7/x86_64
 [5]: https://apt.datadoghq.com/pool/d/da
-[6]: https://app.datadoghq.com/account/settings#api
+[6]: https://app.datadoghq.com/organization-settings/api-keys
 [7]: /agent/guide/agent-commands/#start-the-agent

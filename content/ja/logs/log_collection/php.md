@@ -4,7 +4,7 @@ kind: documentation
 aliases:
   - /ja/logs/languages/php
 further_reading:
-  - link: 'https://www.datadoghq.com/blog/php-logging-guide'
+  - link: https://www.datadoghq.com/blog/php-logging-guide
     tag: ブログ
     text: PHP ログの収集、カスタマイズ、分析方法
   - link: /logs/log_configuration/processors
@@ -16,7 +16,7 @@ further_reading:
   - link: /logs/explorer/
     tag: Documentation
     text: ログの調査方法
-  - link: '/logs/explorer/#visualize'
+  - link: /logs/explorer/#visualize
     tag: Documentation
     text: ログ分析の実行
   - link: /logs/faq/log-collection-troubleshooting-guide

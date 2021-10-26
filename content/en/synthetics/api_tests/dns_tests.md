@@ -24,11 +24,11 @@ further_reading:
 
 DNS tests allow you to proactively monitor the resolvability and lookup times of your DNS records using any nameserver. If resolution is unexpectedly slow or a DNS server answers with unexpected A, AAAA, CNAME, TXT, or MX entries, Datadog sends you an alert with details on the failure, allowing you to quickly pinpoint the root cause of the issue and fix it.
 
-DNS tests can run from [managed][1] and [private locations][2], allowing you to run tests on public domains as well as internal services that might be using internal DNS.
+DNS tests can run from both [managed][1] and [private locations][2] depending on your preference for running the test from outside or inside your network. DNS tests can run on a schedule, on-demand, or directly within your [CI/CD pipelines][3].
 
 ## Configuration
 
-After choosing to create a [`DNS` test][3], define your test's request.
+After choosing to create a [`DNS` test][4], define your test's request.
 
 ### Define request
 
@@ -38,7 +38,7 @@ After choosing to create a [`DNS` test][3], define your test's request.
 2. Specify the **DNS Server** to use (optional), it can be a domain name or an IP address. If not specified, your DNS test performs resolution using `8.8.8.8`, with a fallback on `1.1.1.1` and an internal AWS DNS server.
 3. Specify your DNS Server **Port** (optional). If not specified, the DNS Server port defaults to 53.
 4. **Name** your DNS test.
-5. Add `env` **Tags** as well as any other tag to your DNS test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][4].
+5. Add `env` **Tags** as well as any other tag to your DNS test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][5].
 6. Select the **Locations** to run your DNS test from: DNS tests can run from [managed][1] and [private locations][2] depending on whether you are willing to monitor a public or a private domain.
 
 Click on **Test URL** to try out the request configuration. You will see a response preview show up on the right side of your screen.
@@ -51,7 +51,7 @@ DNS tests can run:
 
 {{< img src="synthetics/api_tests/schedule.png" alt="Run API tests on schedule"  style="width:90%;" >}}
 
-* [**Within your CI/CD pipelines**][5].
+* [**Within your CI/CD pipelines**][3].
 
 * **On-demand** to run your tests whenever makes the most sense for your teams.
 
@@ -132,7 +132,7 @@ You can create local variables by clicking on **Create Local Variable** at the t
 
 ### Use variables
 
-You can use the [global variables defined in the `Settings`][11] and the [locally defined variables](#create-local-variables) in the URL, Advanced Options, and assertions of your HTTP tests.
+You can use the [global variables defined in the `Settings`][11] and the [locally defined variables](#create-local-variables) in the URL, Advanced Options, and assertions of your DNS tests.
 
 To display your list of variables, type `{{` in your desired field:
 
@@ -168,9 +168,9 @@ If you have access to the [custom role feature][13], add your user to any custom
 
 [1]: /api/v1/synthetics/#get-all-locations-public-and-private
 [2]: /synthetics/private_locations
-[3]: /synthetics/api_tests/dns_test
-[4]: /synthetics/search/#search
-[5]: /synthetics/cicd_testing
+[3]: /synthetics/cicd_testing
+[4]: /synthetics/api_tests/dns_test
+[5]: /synthetics/search/#search
 [6]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
 [7]: /api/latest/synthetics/#edit-an-api-test
 [8]: /monitors/notify/?tab=is_alert#notification

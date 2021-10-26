@@ -22,6 +22,9 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/code-optimization-datadog-profile-comparison/'
       tags: 'Blog'
       text: 'Compare and optimize your code with Datadog Profile Comparison.'
+    - link: 'https://www.datadoghq.com/blog/engineering/how-we-optimized-our-akka-application-using-datadogs-continuous-profiler/'
+      tags: 'Blog'
+      text: 'How we optimized our Akka application using Datadog’s Continuous Profiler'
 
 ---
 
@@ -36,6 +39,12 @@ Find CPU, memory, and IO bottlenecks, broken down by method name, class name, an
 Continuous profiler is designed to run in production across all services by leveraging technologies such as JDK Flight Recorder to have minimal impact on your host's CPU and memory usage.
 
 ## Getting started
+
+{{< site-region region="us5" >}}
+<div class="alert alert-warning">
+  The Continuous Profiler is not available for the Datadog {{< region-param key="dd_site_name" >}}  site.
+</div>
+{{< /site-region >}}
 
 Profiling your service to visualize all your stack traces in one place takes just minutes.
 

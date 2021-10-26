@@ -50,17 +50,21 @@ Add tags to your monitor (optional). Monitor tags are different than metric tags
 
 Enable monitor renotification (optional) to remind your team that a problem is not solved.
 
-  {{< img src="monitors/notifications/renotify_enabled.jpg" alt="Enable renotify" style="width:70%;" >}}
+  {{< img src="monitors/notifications/renotify_options.png" alt="Enable renotify" style="width:90%;" >}}
 
-If renotification is enabled, you are given the option to include an escalation message that is sent if the monitor remains in the `alert` or `no data` state for the specified time.
+Configure the renotify interval, the monitor states from which the monitor renotifies (within `alert`, `no data`, and `warn`) and optionally set a limit to the number of renotification messages sent.
+
+For example, configure the monitor to `stop renotifying after 1 occurrence` to receive a single escalation message after the main alert.
+
+If renotification is enabled, you are given the option to include an escalation message that is sent if the monitor remains in one of the chosen states for the specified time period.
 
 The escalation message can be added in the following ways:
 
 * In the `{{#is_renotify}}` block in the original notification message (recommended).
-* In the *escalation_message* field in the app.
+* In the *Renotification message* field in the `Say what's happening` section.
 * With the `escalation_message` attribute in the API.
 
-If you use the `{{#is_renotify}}` block, keep in mind that the original notification message is also included in the renotification, so:
+If you use the `{{#is_renotify}}` block, the original notification message is also included in the renotification, so:
 
 1. Include only extra details in the `{{#is_renotify}}` block and don't repeat the original message details.
 2. Send the escalation message to a subset of groups.

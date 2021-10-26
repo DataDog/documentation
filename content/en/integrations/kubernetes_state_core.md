@@ -17,6 +17,10 @@ integration_title: Kubernetes State Metrics Core
 is_public: true
 public_title: Datadog-Kubernetes State Metrics Core Integration
 integration_id: "kubernetes_state_core"
+further_reading:
+    - link: "https://www.datadoghq.com/blog/engineering/our-journey-taking-kubernetes-state-metrics-to-the-next-level/"
+      tag: "Blog"
+      text: "Our Journey Taking Kubernetes State Metrics to the Next Level"
 ---
 
 ## Overview
@@ -533,6 +537,11 @@ The Kubernetes State Metrics Core check does not include any events.
 ## Troubleshooting
 
 Need help? Contact [Datadog support][7].
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 
 [1]: https://kubernetes.io/blog/2021/04/13/kube-state-metrics-v-2-0/
 [2]: /integrations/kubernetes_state_core/#migration-from-kubernetes_state-to-kubernetes_state_core

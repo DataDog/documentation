@@ -3,19 +3,19 @@ title: ホスト Agent ログの収集
 kind: documentation
 description: '[Datadog Agent][60] を使用してログを Datadog に送信します'
 further_reading:
-  - link: 'agent/logs/advanced_log_collection/#filter-logs'
+  - link: agent/logs/advanced_log_collection/#filter-logs
     tag: ドキュメント
     text: Datadog に送信されるログの絞り込み
-  - link: 'agent/logs/advanced_log_collection/#scrub-sensitive-data-from-your-logs'
+  - link: agent/logs/advanced_log_collection/#scrub-sensitive-data-from-your-logs
     tag: ドキュメント
     text: ログの機密データのスクラビング
-  - link: 'agent/logs/advanced_log_collection/#multi-line-aggregation'
+  - link: agent/logs/advanced_log_collection/#multi-line-aggregation
     tag: ドキュメント
     text: 複数行のログの集約
-  - link: 'agent/logs/advanced_log_collection/#tail-directories-by-using-wildcards'
+  - link: agent/logs/advanced_log_collection/#tail-directories-by-using-wildcards
     tag: ドキュメント
     text: ワイルドカードを使用したディレクトリの追跡
-  - link: 'agent/logs/advanced_log_collection/#global-processing-rules'
+  - link: agent/logs/advanced_log_collection/#global-processing-rules
     tag: ドキュメント
     text: グローバルな処理ルール
 ---
@@ -23,13 +23,11 @@ further_reading:
 
 ## ログ収集を有効にする
 
-Datadog Agent では、ログの収集はデフォルトで**無効**になっています。ホスト Agent でこれを有効にする方法については、以下の手順を参照してください。Agent を Kubernetes または Docker 環境で実行している場合は、専用の [Kubernetes ログ収集][2]または [Docker ログ収集][3]のドキュメントを参照してください。
+Datadog Agent では、ログの収集はデフォルトで**有効になっていません**。Agent を Kubernetes または Docker 環境で実行している場合は、専用の [Kubernetes ログ収集][2]または [Docker ログ収集][3]のドキュメントを参照してください。
 
-ホストで実行されている Agent でログ収集を有効にするには、Agent の[メインコンフィギュレーションファイル][4] (`datadog.yaml`) を次のように更新します。
+ホストで実行されている Agent でログ収集を有効にするには、Agent の[メインコンフィギュレーションファイル][4] (`datadog.yaml`) で `logs_enabled:false` を `logs_enabled:true` に変更します。
 
-```yaml
-logs_enabled: true
-```
+{{< agent-config type="log collection configuration" filename="datadog.yaml" collapsible="true">}}
 
 Agent v6.19+/v7.19+ 以降、使用されるデフォルトのトランスポートは HTTPS トランスポートです。HTTPS/TCP トランスポートを実行する方法の詳細については、[Agent トランスポートのドキュメント][5]を参照してください。
 
@@ -77,7 +75,7 @@ logs:
 
 {{% tab "TCP/UDP" %}}
 
-ポート **10518** 上で TCP を使用してログを転送する `<APP_NAME>` アプリケーションからログを収集するには、[Agent の構成ディレクトリ][1]のルートに以下の内容の `<APP_NAME>.d/conf.yaml` ファイルを作成します。
+TCP ポート **10518** にログを転送する `<APP_NAME>` アプリケーションからログを収集するには、[Agent の構成ディレクトリ][1]のルートに以下の内容の `<APP_NAME>.d/conf.yaml` ファイルを作成します。
 
 ```yaml
 logs:
@@ -88,6 +86,8 @@ logs:
 ```
 
 Serilog を使用している場合、UDP を使用して接続するには、`Serilog.Sinks.Network` オプションを使用します。
+
+Agent バージョン 7.31.0 以降では、TCP 接続はアイドル状態でも無期限に開いたままになります。
 
 **注**: Agent は、単純文字列、JSON、および Syslog 形式のログをサポートします。複数のログを一度に送信する場合は、改行文字を使用してログを区切ってください。
 

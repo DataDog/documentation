@@ -132,9 +132,10 @@
           "data": [
             {
               "attributes": {
-                "attributes": [
-                  {}
-                ],
+                "attributes": {
+                  "customAttribute": 123,
+                  "duration": 2345
+                },
                 "host": "i-0123",
                 "message": "Host connected to remote",
                 "service": "agent",
@@ -199,9 +200,10 @@
           "data": [
             {
               "attributes": {
-                "attributes": [
-                  {}
-                ],
+                "attributes": {
+                  "customAttribute": 123,
+                  "duration": 2345
+                },
                 "host": "i-0123",
                 "message": "Host connected to remote",
                 "service": "agent",

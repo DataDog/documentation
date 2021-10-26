@@ -32,6 +32,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-dashboards/"
   tag: "Blog"
   text: "The new Datadog dashboards experience"
+- link: "https://datadoghq.dev/integrations-core/guidelines/dashboards/#best-practices"
+  tag: "Developer docs"
+  text: "Create great integration dashboards"
 ---
 
 ## Overview
@@ -138,7 +141,7 @@ From an individual dashboard, Datadog offers suggestions for viewing related das
 
 Search, view, or create dashboards and lists on the [Dashboard List][12] page. By default, this is the landing page after you login to Datadog. To change the default landing page for your organization, contact [Datadog support][13].
 
-{{< img src="dashboards/dashboard_list2.png" alt="Dashboard List page"  >}}
+{{< img src="dashboards/dashboard_list.png" alt="Dashboard List page"  >}}
 
 ### New list
 
@@ -148,7 +151,7 @@ The list's title is automatically set with the user's first name. For example, i
 
 To add dashboards to a list, select their corresponding check boxes in the main Dashboard list. Then click on the *Add to List* button in the upper right corner of the Dashboard list:
 
-{{< img src="dashboards/dash_to_list.png" alt="Add Dashboard to list" style="width:70%;">}}
+{{< img src="dashboards/dash_to_list.png" alt="Add Dashboard to list" style="width:100%;">}}
 
 ### Lists
 
@@ -167,8 +170,16 @@ Preset lists are default dashboard lists in Datadog:
 | All Custom               | Custom dashboards made by any team member in your organization's account. |
 | All Hosts                | Automatic dashboards created by Datadog when you add a host.              |
 | All Integrations         | Automatic dashboards created by Datadog when you install an integration.  |
+| All Shared               | Dashboards with authenticated or public link sharing enabled.             |
 | Created By You           | Custom dashboards created by the current user.                            |
 | Frequently Viewed By You | All dashboards frequently viewed by the current user.                     |
+| Recently Deleted         | Dashboards deleted within the last 30 days.                               |
+
+#### Restore deleted Dashboards
+
+Use the preset **Recently Deleted** list to restore deleted dashboards. From the list, select all dashboards to restore and click **Restore to**. Select a specific list to restore the dashboards to, or select **All Custom** to restore them without a custom list. Dashboards in **Recently Deleted** are permanently deleted after 30 days.
+
+{{< img src="dashboards/recently_deleted.png" alt="Restore deleted dashboard" style="width:100%;">}}
 
 #### Shared, editable lists
 

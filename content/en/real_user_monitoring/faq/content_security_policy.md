@@ -39,6 +39,14 @@ connect-src https://*.browser-intake-us3-datadoghq.com
 
 {{< /site-region >}}
 
+{{< site-region region="us5" >}}
+
+```txt
+connect-src https://*.browser-intake-us5-datadoghq.com
+```
+
+{{< /site-region >}}
+
 
 {{< site-region region="gov" >}}
 

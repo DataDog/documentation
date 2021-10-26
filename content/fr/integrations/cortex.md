@@ -12,13 +12,14 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-extras/blob/master/cortex/README.md'
+  - https://github.com/DataDog/integrations-extras/blob/master/cortex/README.md
 display_name: cortex
 draft: false
 git_integration_title: cortex
 guid: 3c59d4a9-6f2a-4f86-91e7-84a1a3e4f43b
 integration_id: cortex
 integration_title: Cortex
+integration_version: ''
 is_public: true
 kind: integration
 maintainer: support@getcortexapp.com
