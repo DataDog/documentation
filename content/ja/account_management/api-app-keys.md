@@ -71,7 +71,7 @@ API キーが定められた上限の 50 を超えて必要な場合は、上限
 
 ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
 
-[1]: https://app.datadoghq.com/account/settings#api
+[1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: https://app.datadoghq.com/access/application-keys
 [3]: /ja/logs/log_collection/javascript/
 [4]: /ja/real_user_monitoring/

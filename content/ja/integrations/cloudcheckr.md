@@ -32,5 +32,5 @@ Datadog アカウントを CloudCheckr アカウントにバインドする手�
 
 [Datadog CloudCheckr を使用したクラウドリソースのサイズ適正化][2]の詳細については、Datadog のブログ記事を参照してください。
 
-[1]: https://app.datadoghq.com/account/settings#api
+[1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: https://www.datadoghq.com/blog/rightsizing-cloudcheckr

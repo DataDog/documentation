@@ -25,6 +25,8 @@ Datadog アプリ内には、ログをメトリクスと相関させるいくつ
 1. **Content** 列の下にあるログをクリックします。これにより、ログに関する詳細情報を含むパネルが展開されます。
 2. パネル内の **Metrics** タブをクリックします。
 
+{{< img src="logs/guide/correlate-logs-with-metrics/log-explorer-metrics-tab.png" alt="ログエクスプローラーメトリクス"  >}}
+
 ## ダッシュボード
 
 [ダッシュボード][5]でログとメトリクスを相関させるには
