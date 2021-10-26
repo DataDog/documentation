@@ -11,28 +11,28 @@ further_reading:
   tag: "Documentation"
   text: "Exclusion Filters"
 ---
+
 {{< site-region region="us3,us5,eu,gov" >}}
 
-Online Archives is only available for AWS hosted Datadog customers(US1) [site][1].
-
-[1]: https://docs.datadoghq.com/getting_started/site/
+Online Archives is only available for AWS hosted Datadog customers(US1) site.
 
 {{< /site-region >}}
 
-{{< site-region region="us" >}}
-
 <div class="alert alert-warning">
-  Online Archives is in limited availibility. To request access, contact <a href="/help/">Datadog Support</a>.</div>
+Online Archives is in limited availability. To request access, contact <a href="/help/">Datadog Support</a>.
+</div>
+
+## Overview
 
 Online Archives is a log warehousing solution that provides 15 months or more of storage, live query, and analytics capabilities for your logs in Datadog.
 
-Security, Compliance, and Engineering teams often need to query logs over large time windows. Security breaches are often detected after weeks, if not months, of an incident and legal compliance reviews and audit processes may require logs dating back more than a year. Long term analysis requirements are not limited to just security teams however. Engineering teams conducting high cardinality, year-over-year, long term analysis on millions of entites like users, hosts, IP addresses etc are better served with logs over straight metrics. 
+Security, Compliance, and Engineering teams often need to query logs over large time windows. Security breaches are often detected after weeks, if not months, of an incident and legal compliance reviews and audit processes may require logs dating back more than a year. Long term analysis requirements are not limited to just security teams however. Engineering teams conducting high cardinality, year-over-year, long term analysis on millions of entities like users, hosts, IP addresses etc are better served with logs over straight metrics.
 
 Online Archives allows you to retain and search all of your log data for 15 months or more. Security, Compliance, and Engineering teams can address use cases requiring historical investigation and analysis, like security audits, or analyze extra high-cardinality trends over long periods and correlate system forensics from metrics with application and user behavior from log data.
 
 ## Enabling Online Archives
 
-Online Archives are set up per Log index. [Index filters][1] that apply to that index also apply to Online Archives. 
+Online Archives are set up per Log index. [Index filters][1] that apply to that index also apply to Online Archives.
 
 **Note**: However, that index's [exclusion filters][2] and daily quotas don’t apply to Online Archives. For instance you may only choose to Index error logs while retaining all  logs in Online Archives by excluding non error logs from Indexes.
 
@@ -50,11 +50,11 @@ Select Online Archives from the dropdown in the Logs Explorer to begin searching
 
 {{< img src="logs/log_configuration/online_archives/searching.png" alt="How to search your online archive" style="width:100%;">}}
 
-[Search][4] by typing in queries in the search bar or by selecting the relevant facet in the facet panel. 
+[Search][4] by typing in queries in the search bar or by selecting the relevant facet in the facet panel.
 
 ## Analytics in Online Archives
 
-Switch to Analytics by either selecting **Group into Fields** or **Visualize as Timeseries/Top List/Table**. 
+Switch to Analytics by either selecting **Group into Fields** or **Visualize as Timeseries/Top List/Table**.
 
 Setting the storage type to **Online Archives** lets you query Online Archives instead of indexes. You can switch back to **Indexes** at any time.
 
@@ -82,10 +82,9 @@ Here are examples of different log retention strategies and how to implement the
 
 {{< img src="logs/log_configuration/online_archives/exclusion.png" alt="How to exclude things from your online archive" style="width:100%;">}}
 
-**Note:** Index order matters since `team:security` logs go into the first index that matches the index filter in case there are multiple indexes. 
+**Note:** Index order matters since `team:security` logs go into the first index that matches the index filter in case there are multiple indexes.
 
 **Note:** Dashboards, Log Monitors, Patterns and Transactions are not available in Online Archives.
-{{< /site-region >}}
 
 [1]: /logs/log_configuration/indexes/#indexes-filters
 [2]: /logs/log_configuration/indexes/#exclusion-filters
