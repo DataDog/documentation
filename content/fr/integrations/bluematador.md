@@ -72,6 +72,6 @@ L'intégration Blue Matador n'inclut aucun check de service.
 [1]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/bluematador/images/eventstream.png
 [2]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/bluematador/images/dashboard.png
 [3]: https://www.bluematador.com/monitored-events
-[4]: https://app.datadoghq.com/account/settings#api
+[4]: https://app.datadoghq.com/organization-settings/api-keys
 [5]: https://www.bluematador.com/docs/datadog-integration
 

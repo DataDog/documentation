@@ -288,7 +288,7 @@ Checks
 [3]: /ja/#host-setup
 [4]: /ja/integrations/docker_daemon/
 [5]: /ja/agent/kubernetes/
-[6]: https://app.datadoghq.com/account/settings#api
+[6]: https://app.datadoghq.com/organization-settings/api-keys
 [7]: https://kubernetes.io/docs/concepts/configuration/secret
 [8]: https://kubernetes.io/docs/concepts/configuration/secret/#using-secrets-as-environment-variables
 [9]: /ja/getting_started/agent/autodiscovery/

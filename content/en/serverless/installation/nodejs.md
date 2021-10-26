@@ -254,7 +254,6 @@ Replace `<TAG>` with either a specific version number (for example, `{{< latest-
 2. Set the following environment variables in AWS:
   - Set `DD_LAMBDA_HANDLER` to your original handler, for example, `myfunc.handler`.
   - Set `DD_TRACE_ENABLED` to `true`.
-  - Set `DD_FLUSH_TO_LOG` to `true`.
   - Set `DD_API_KEY` with your Datadog API key from the [API Management page][2].
 3. Optionally add `service` and `env` tags with appropriate values to your function.
 

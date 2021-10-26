@@ -169,7 +169,14 @@
           "url": "/dashboard/123-abc-456/example-dashboard-title",
           "widgets": [
             {
-              "definition": {},
+              "definition": {
+                "requests": {
+                  "fill": {
+                    "q": "system.cpu.user"
+                  }
+                },
+                "type": "hostmap"
+              },
               "id": "integer",
               "layout": {
                 "height": 0,
@@ -211,7 +218,14 @@
         "title": "",
         "widgets": [
           {
-            "definition": null,
+            "definition": {
+              "requests": {
+                "fill": {
+                  "q": "system.cpu.user"
+                }
+              },
+              "type": "hostmap"
+            },
             "layout": {
               "height": 0,
               "width": 0,
@@ -254,7 +268,14 @@
         "title": "",
         "widgets": [
           {
-            "definition": {},
+            "definition": {
+              "requests": {
+                "fill": {
+                  "q": "system.cpu.user"
+                }
+              },
+              "type": "hostmap"
+            },
             "id": "integer",
             "layout": {
               "height": 0,
@@ -739,7 +760,14 @@
           "url": "/dashboard/123-abc-456/example-dashboard-title",
           "widgets": [
             {
-              "definition": {},
+              "definition": {
+                "requests": {
+                  "fill": {
+                    "q": "system.cpu.user"
+                  }
+                },
+                "type": "hostmap"
+              },
               "id": "integer",
               "layout": {
                 "height": 0,
@@ -817,7 +845,14 @@
           "url": "/dashboard/123-abc-456/example-dashboard-title",
           "widgets": [
             {
-              "definition": {},
+              "definition": {
+                "requests": {
+                  "fill": {
+                    "q": "system.cpu.user"
+                  }
+                },
+                "type": "hostmap"
+              },
               "id": "integer",
               "layout": {
                 "height": 0,
@@ -867,7 +902,14 @@
         "title": "",
         "widgets": [
           {
-            "definition": null,
+            "definition": {
+              "requests": {
+                "fill": {
+                  "q": "system.cpu.user"
+                }
+              },
+              "type": "hostmap"
+            },
             "layout": {
               "height": 0,
               "width": 0,
@@ -910,7 +952,14 @@
         "title": "",
         "widgets": [
           {
-            "definition": {},
+            "definition": {
+              "requests": {
+                "fill": {
+                  "q": "system.cpu.user"
+                }
+              },
+              "type": "hostmap"
+            },
             "id": "integer",
             "layout": {
               "height": 0,

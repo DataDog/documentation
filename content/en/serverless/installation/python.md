@@ -220,7 +220,6 @@ More information and additional parameters can be found on the [Datadog CDK NPM 
       "aws_environment_variables": {
         "DD_LAMBDA_HANDLER": "handler.lambda_handler",
         "DD_TRACE_ENABLED": "true",
-        "DD_FLUSH_TO_LOG": "true",
         "DD_API_KEY": "<DATADOG_API_KEY>",
       }
     }
@@ -238,7 +237,6 @@ More information and additional parameters can be found on the [Datadog CDK NPM 
       "aws_environment_variables": {
         "DD_LAMBDA_HANDLER": "handler.lambda_handler",
         "DD_TRACE_ENABLED": "true",
-        "DD_FLUSH_TO_LOG": "true",
         "DD_API_KEY": "<DATADOG_API_KEY>"
       },
       }
@@ -294,7 +292,6 @@ arn:aws-us-gov:lambda:us-gov-east-1:002406178527:layer:Datadog-Extension-ARM:{{<
         "api_gateway_stage": "api",
         "environment_variables": {
           "DD_TRACE_ENABLED": "true",
-          "DD_FLUSH_TO_LOG": "true",
           "DD_API_KEY": "<DATADOG_API_KEY>",
         },
         "layers": ["arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:<EXTENSION_VERSION>"],
@@ -313,7 +310,6 @@ arn:aws-us-gov:lambda:us-gov-east-1:002406178527:layer:Datadog-Extension-ARM:{{<
         "api_gateway_stage": "api",
         "environment_variables": {
           "DD_TRACE_ENABLED": "true",
-          "DD_FLUSH_TO_LOG": "true",
           "DD_API_KEY": "<DATADOG_API_KEY>",
         },
         "layers": ["arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension:<EXTENSION_VERSION>"],

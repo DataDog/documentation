@@ -21,9 +21,9 @@ Cloudability の True Cost&trade; クラウド管理プラットフォームと 
 
 ## セットアップ
 
-Datadog アプリケーションを Cloudability アカウントにバインドする手順は、以下のとおりです。
+Datadog アカウントを Cloudability アカウントにバインドする手順は、以下のとおりです。
 
 - Cloudability >> Settings >> Vendor Credentials にログインします。
 - [Datadog API キーとアプリケーションキー][1]を追加します。
 
-[1]: https://app.datadoghq.com/account/settings#api
+[1]: https://app.datadoghq.com/organization-settings/api-keys
