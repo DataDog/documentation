@@ -77,7 +77,7 @@ Configure AWS to ensure Datadog has permissions to access the CUR and the s3 buc
  
 **Tip:** Keep the name you created for this policy handy for next steps.
  
-#### Attach the policy to the Datadog integration role
+### Attach the policy to the Datadog integration role
  
 Attach the new S3 policy to the Datadog integration role.
  
