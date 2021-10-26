@@ -38,45 +38,45 @@ Use status level settings to:
 
 {{< img src="monitors/incidents/helper_text_settings.jpeg" alt="Declare Incident Helper Text Settings" style="width:80%;">}}
 
-For the Declare Incident Helper Text settings, you can customize the helper text that appears alongside the Severity and Status Level descriptions in the [Incident Creation Modal][3]. The helper text has Markdown support to allow you to include indented lists, text formatting and hyperlinks to other instruction resources for incident responders.
+For the Declare Incident Helper Text settings, you can customize the helper text that appears alongside the severity and status level descriptions in the [Incident Creation Modal][3]. The helper text has Markdown support, which allows indented lists, text formatting, and hyperlinks to other instruction resources for incident responders.
 
-### Property Fields
+### Property fields
 
 {{< img src="monitors/incidents/property_field_settings.jpeg" alt="Property Field Settings" style="width:80%;">}}
 
-Property Fields are key pieces of metadata you can tag your incidents with. This makes it easier to search for specific subsets of incidents in the [Homepage][4] as well as for making more robust queries in [Incident Management Analytics][2]. There are 4 default property fields:
+Property fields are key pieces of metadata you can tag your incidents with. This makes it easier to search for specific subsets of incidents on the [Homepage][4] and make more robust queries in [Incident Management Analytics][2]. There are four default property fields:
 
 1. `Root Cause`
 2. `Services`
 3. `Teams`
 4. `Detection Method`
 
-If you have [Datadog APM][5] configured, the `Services` Property Field will automatically leverage your APM Service names. To edit the values of `Services` or `Teams`, upload a CSV of the values you wish to associate with each field. Your CSV file must start with your field's name in the top row, with the desired values listed immediately below it.
+If you have [Datadog APM][5] configured, the `Services` property field automatically leverages your APM Service names. To edit the values of `Services` or `Teams`, upload a CSV of the values you wish to associate with each field. Your CSV file must start with your field's name in the top row, with the desired values listed immediately below it.
 
-You can add additional Property Fields to your settings by selecting one of your existing key:value pair [metric tags][6]. When you do this the key of your Property Field will be the start case of your metric tag's key (each word is capitalized and separated by spaces) and the values for the Property Field will be equal to the values reported by the metric tag.
+You can add more property fields to your settings by selecting one of your existing `key:value` pair [metric tags][6]. When you do this the key of your property field is the start case of your metric tag's key (each word is capitalized and separated by spaces) and the values for the property field are equal to the values reported by the metric tag.
 
 ### Integrations
 
 {{< img src="monitors/incidents/integration_settings.jpeg" alt="Integration Settings" style="width:80%;">}}
 
-The Integrations settings provide you with additional configurations for setting up the Incident Management features of the Datadog [Slack App][7]. There are two settings to configure:
+The integrations settings provide you with additional configurations for setting up the Incident Management features of the Datadog [Slack App][7]. There are two settings to configure:
 
 1. Enabling automatic Slack channel creation for every new incident
-2. Enabling the Incident Updates channel 
+2. Enabling the incident updates channel
 
-Both of these settings can be configured to use any Slack Workspace you have configured in your organization's [Slack Integration Tile][8].
+Both of these settings can be configured to use any Slack workspace you have configured in your organization's [Slack integration tile][8].
 
-The Incident Updates channel will send a message whenever an incident gets declared or changes Status, Severity, or Incident Commander.
+The incident updates channel sends a message whenever an incident is declared or changes status, severity, or incident commander.
 
 ## Notifications
 
-### Message Templates
+### Message templates
 
 {{< img src="monitors/incidents/message_templates_settings.jpeg" alt="Message Template Settings" style="width:80%;">}}
 
-Message Templates are dynamic, reusable messages that can be used in [manual incident notifications][9], or automated Notification Rules. Message Templates leverage template variables (e.g. `{{incident.severity}}`) to dynamically inject the corresponding value from the incident that the notification is being sent for. Message Templates have Markdown support so that incident notifications can include text formatting, tables, indented lists, and hyperlinks as desired. To better organize a large number of Message Templates, each template requires a category during its creation process.
+Message templates are dynamic, reusable messages that can be used in [manual incident notifications][9], or automated notification rules. Message templates leverage template variables, such as `{{incident.severity}}`, to dynamically inject the corresponding value from the incident that the notification is being sent for. Message templates have Markdown support so that incident notifications can include text formatting, tables, indented lists, and hyperlinks. To better organize a large number of message templates, each template requires a category during the creation process.
 
-To create a Message Template:
+To create a message template:
 
 1. Click the **+ New Message Template** button
 2. Give the template a name
@@ -91,39 +91,39 @@ To create a Message Template:
 
 {{< img src="monitors/incidents/notification_rules_example.jpeg" alt="Notification Rules Example" style="width:80%;">}}
 
-Notification Rules allow you to configure scenarios when specific stakeholders should always be automatically notified of an incident. You can use Notification Rules to ensure key stakeholders are always made aware of high priority incidents, to notify external systems whenever a new incident is declared or updated, or to notify specific responders when a particular service or team experiences an incident.
+Notification rules allow you to configure scenarios when specific stakeholders should always be automatically notified of an incident. You can use notification rules to ensure key stakeholders are always made aware of high priority incidents, to notify external systems whenever a new incident is declared or updated, or to notify specific responders when a particular service or team experiences an incident.
 
-**Example:** Set a Notification Rule to automatically notify team stakeholder whenever a SEV-1 or SEV-2 for `service:web-store` AND `application:purchasing` incident is declared and when that incident moves through different states of progression.
+**Example:** Set a notification rule to automatically notify team stakeholders whenever a SEV-1 or SEV-2 for `service:web-store` AND `application:purchasing` incident is declared and when that incident moves through different states of progression.
 
-To configure a new Notification Rule:
+To configure a new notification rule:
 
 1. Click **New Rule**
-2. Select the incident Property Field key:value pairs you want notifications to be sent for. By default, a rule will notify your recipients on any incident.
+2. Select the incident property field `key:value` pairs you want notifications to be sent for. By default, a rule notifies your recipients on any incident.
 3. Select your notification recipients. Notifications can be sent to any of Datadog's existing [notification integrations][10].
-4. Select the desired Message Template you want the Notification Rule to use.
+4. Select the desired message template you want the notification rule to use.
 5. Choose whether you want recipients to be renotified when an incident changes its status.
 6. Click **Save**
 
-**Note:** Notification Rules will send messages only if an incident changes status (including when it is first declared) and has been tagged with the Property Fields values that match the filter of the Notification Rules.
+**Note**: Notification rules send messages only if an incident changes status (including when it is first declared) and are tagged with the property field values that match the filter of the notification rules.
 
-You can perform the following operations to manage your Notification Rules.
+You can perform the following operations to manage your notification rules.
 
-- *Search* - Filter your list of Notification Rules by their recipients
-- *Toggle* - Enable or disable any individual Notification Rule by switching the toggle in that Rule's row in the list
-- *Copy* - Hover over any individual Notification Rule and click the **Copy** icon button next to the Rule's toggle
-- *Delete* - Hover over any individual Notification Rule and click the **Delete** icon button next to the Rule's toggle
+- *Search* - Filter your list of notification rules by their recipients.
+- *Toggle* - Enable or disable any individual notification rule by switching the toggle in that rule's row in the list.
+- *Copy* - Hover over any individual notification rule and click the **Copy** icon button next to the rule's toggle.
+- *Delete* - Hover over any individual notification rule and click the **Delete** icon button next to the rule's toggle.
 
 {{< img src="monitors/incidents/notification_rules_list.jpeg" alt="Notification Rules List" style="width:80%;">}}
 
 ## Remediation
 
-### Postmortem Templates
+### Postmortem templates
 
 {{< img src="monitors/incidents/postmortem_template_settings.jpeg" alt="Postmortem Template Settings" style="width:80%;">}}
 
-Postmortem Templates are dynamic, reusable templates that can be used to create a [Datadog Notebook][11] that is automatically populated with incident information after an incident has been resolved. Postmortem Templates leverage template variables (e.g. `{{incident.severity}}`) to dynamically inject the corresponding value from the incident that the postmortem is being created for. Postmortem Templates have Markdown support so that the resulting Notebook includes text formatting, tables, indented lists, and hyperlinks as desired.
+Postmortem templates are dynamic, reusable templates used to create a [Datadog Notebook][11] that is automatically populated with incident information after an incident has been resolved. Postmortem templates leverage template variables, such as `{{incident.severity}}`, to dynamically inject the corresponding value from the incident that the postmortem is being created for. Postmortem templates have Markdown support so that the resulting notebook includes text formatting, tables, indented lists, and hyperlinks.
 
-To create a Postmortem Template:
+To create a postmortem template:
 
 1. Click the **+ New Postmortem Template** button
 2. Give the template a name
