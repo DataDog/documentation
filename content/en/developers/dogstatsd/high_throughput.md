@@ -214,10 +214,33 @@ UDS is an inter-process communication protocol used to [transport DogStatsD payl
 
 ### Client-side aggregation
 
+Client libraries can aggregate metrics on the client side, reducing number of messages that have to be submitted to the DataDog Agent, improving IO performance and throughput.
+
+{{< programming-lang-wrapper langs="go,java" >}}
+{{< programming-lang lang="go" >}}
+
 Client-side aggregation is only available in the Go client starting with v5.0.0.
 
-See [Client-side aggregation][7] for more information.
+See [Client-side aggregation](https://github.com/DataDog/datadog-go#client-side-aggregation) for more information.
 
+{{< /programming-lang >}}
+{{< programming-lang lang="java" >}}
+
+Client-side aggregation is available in java-dogstatsd-client version 2.11.0 and later, and is enabled by default starting with version 3.0.0.
+
+```java
+StatsDClient Statsd = new NonBlockingStatsDClientBuilder()
+    // regular setup
+    .enableAggregation(true)
+    .build();
+```
+
+Client-side aggregation is available for gauges, counters and sets.
+
+See [Client-side aggregation](https://github.com/DataDog/java-dogstatsd-client#aggregation) for more information.
+
+{{< /programming-lang >}}
+{{< /programming-lang-wrapper >}}
 
 ## Operating system kernel buffers
 
@@ -723,4 +746,3 @@ See [DataDog/dogstatsd-csharp-client][1] for more information about the client c
 [4]: /metrics/dogstatsd_metrics_submission/#sample-rates
 [5]: /developers/dogstatsd/high_throughput/#note-on-sysctl-in-kubernetes
 [6]: https://kubernetes.io/docs/tasks/administer-cluster/sysctl-cluster/
-[7]: https://github.com/DataDog/datadog-go#client-side-aggregation
