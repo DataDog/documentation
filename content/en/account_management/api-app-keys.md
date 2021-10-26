@@ -15,11 +15,11 @@ API keys are unique to your organization. An [API key][1] is required by the Dat
 
 [Application keys][2], in conjunction with your organization's API key, give users access to Datadog's programmatic API. Application keys are associated with the user account that created them and by default have the permissions and scopes of the user who created them.
 
-## Scopes for application keys
+## Scopes 
 
 To better protect and secure your applications, you can specify scopes for your application keys to define more granular permissions and minimize the access that applications have to your Datadog data. This gives you fine-grained access control over your applications and minimizes security vulnerabilities by limiting extraneous access. For example, an application that only reads dashboards does not need admin rights to manage users or delete any of your organization’s data.
 
-The recommended best practice for creating scoped application keys is to grant your keys the minimal privileges and least permissions necessary for an application to function as intended. Scoped application keys are granted only the scopes specified by the user, and no other additional permissions. While you can modify the scopes of your application keys anytime, consider how those changes may impact the existing functionality or access of your application. 
+The recommended best practice for scoping application keys is to grant your keys the minimal privileges and least permissions necessary for an application to function as intended. Scoped application keys are granted only the scopes specified by the user, and no other additional permissions. While you can modify the scopes of your application keys anytime, consider how those changes may impact the existing functionality or access of your application. 
 
 **Notes:**
 
@@ -54,22 +54,27 @@ To add a Datadog API key or client token:
 
 To remove a Datadog API key or client token, navigate to the list of keys or tokens, and click the **trash can** icon with **Revoke** next to the key or token you want to remove.
 
-## Add application keys and scopes
+## Add application keys
 
 To add a Datadog application key, navigate to **Organization Settings** > **Application Keys**. If you have the [permission][5] to create application keys, click **New Key**.
 
-<div class="alert alert-info"> Specifying scopes for application keys is a feature currently in private beta. Contact <a href="https://www.datadoghq.com/support/">Datadog Support</a> to enable support for scoped application keys for your organization. </div>
+**Notes:**
+
+- Application key names cannot be blank.
+
+## Remove application keys
+
+To remove a Datadog application key, navigate to **Organization Settings** > **Application Keys**. If you have the [permission][5] to create and manage application keys, you can see your own keys and click **Revoke** next to the key you want to revoke. If you have the permission to manage all org application keys, you can search for the key you want to revoke and click **Revoke** next to it.
+
+## Scope application keys 
+
+<div class="alert alert-info"> Scoping application keys is a feature in private beta. Contact <a href="https://www.datadoghq.com/support/">Datadog Support</a> to enable support for scoped application keys for your organization. </div>
 
 To specify scopes for application keys, make a request to the [Datadog API][7] to create or edit an application key. Scopes can be specified for application keys owned by [the current user][8] or a [service account][9]. If this field is unspecified, application keys by default have all the same scopes and permissions as the user who created them.
 
 **Notes:**
 
-- Application key names cannot be blank.
 - Scope names are case-sensitive.
-
-## Remove application keys
-
-To remove a Datadog application key, navigate to **Organization Settings** > **Application Keys**. If you have the [permission][5] to create and manage application keys, you can see your own keys and click **Revoke** next to the key you want to revoke. If you have the permission to manage all org application keys, you can search for the key you want to revoke and click **Revoke** next to it.
 
 ## Using multiple API keys
 
