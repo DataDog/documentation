@@ -45,7 +45,7 @@ To ensure that logs that fail through the Delivery Stream are still sent to Data
 
 [1]: https://docs.aws.amazon.com/kinesisanalytics/latest/dev/app-hotspots-prepare.html#app-hotspots-create-two-streams
 [2]: https://console.aws.amazon.com/firehose/
-[3]: https://app.datadoghq.com/account/settings#api
+[3]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=automaticcloudformation#collecting-logs-from-s3-buckets
 {{% /tab %}}
 

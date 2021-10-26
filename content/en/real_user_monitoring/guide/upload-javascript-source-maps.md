@@ -88,7 +88,7 @@ datadog-ci sourcemaps upload /path/to/dist \
 ```
 
 
-[1]: https://app.datadoghq.com/account/settings#api
+[1]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{% tab "EU" %}}
 
@@ -104,7 +104,7 @@ datadog-ci sourcemaps upload /path/to/dist \
 ```
 
 
-[1]: https://app.datadoghq.com/account/settings#api
+[1]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{< /tabs >}}
 

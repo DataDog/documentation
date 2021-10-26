@@ -6,12 +6,10 @@
           "logs": [
             {
               "content": {
-                "attributes": [
-                  {
-                    "customAttribute": 123,
-                    "duration": 2345
-                  }
-                ],
+                "attributes": {
+                  "customAttribute": 123,
+                  "duration": 2345
+                },
                 "host": "i-0123",
                 "message": "Host connected to remote",
                 "service": "agent",

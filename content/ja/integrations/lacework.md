@@ -85,5 +85,5 @@ Lacework は、イベントを送信するように構成できます。
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 
 [1]: https://www.lacework.com/datadog/
-[2]: https://app.datadoghq.com/account/settings#api
+[2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://docs.datadoghq.com/ja/help/
