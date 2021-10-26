@@ -14,7 +14,7 @@ further_reading:
 
 {{< site-region region="us3,us5,eu,gov" >}}
 
-Online Archives is only available for AWS hosted Datadog customers(US1) site.
+Online Archives is only available for AWS hosted Datadog customers (US1) site.
 
 {{< /site-region >}}
 
