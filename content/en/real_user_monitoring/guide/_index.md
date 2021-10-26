@@ -12,7 +12,4 @@ private: true
 
 {{< /whatsnext >}}
 
-{{< whatsnext desc="Session Replay:" >}}
-    {{< nextlink href="real_user_monitoring/guide/session-replay-getting-started/" >}}Getting Started with Session Replay{{< /nextlink >}}
 
-{{< /whatsnext >}}

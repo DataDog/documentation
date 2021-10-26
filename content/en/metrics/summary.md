@@ -49,7 +49,7 @@ There are two buttons that allow you to configure multiple metrics at a time:
 
 Click on any metric name to display its details sidepanel for more information regarding the metric’s metadata and tags: 
 
-{{< img src="metrics/summary/metric_panel3.png" alt="Metric panel"  style="width:75%;">}}
+{{< img src="metrics/summary/mwl_sidepanel.jpg" alt="Metric panel"  style="width:75%;">}}
 
 ### Metric name
 
@@ -108,6 +108,7 @@ Use the tags table to:
 - Sort tag keys by the **Count column** (count of unique tag values).
 - Search through the paginated table of tags for a particular tag key.
 - Export the tags table as a downloadable CSV.
+- Toggle between tags you've configured on your metric vs the metric's originally submitted tags
 
 For any particular tag key, you can:
 
@@ -116,7 +117,7 @@ For any particular tag key, you can:
 - Open a graph of this metric filtered by your tag `key:value` pair in the Metrics Explorer.
 - Copy any tag `key:value` for filtering across the application.
 
-{{< img src="metrics/summary/tags_table.gif" alt="Tags Table"  style="width:75%;">}}
+{{< img src="metrics/summary/updated_tags_table.gif" alt="Tags Table"  style="width:75%;">}}
 
 [Learn more about tagging][5].
 
