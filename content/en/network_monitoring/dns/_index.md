@@ -31,7 +31,7 @@ DNS Monitoring provides an overview of DNS server performance to help you identi
 
 ## Setup
 
-Before you can begin to use DNS Monitoring you will need to setup Network Performance Monitoring, please follow the setup instructions on this [page][5]. Please also ensure you are using the latest version of the Agent or at least Agent v7.23+ for Linux OS, and v7.28+ for Windows Server. Once installed, a ‘DNS’ tab is accessible in the Network Performance Monitoring product - no other steps are necessary.
+Before you can begin to use DNS Monitoring, [set up Network Performance Monitoring][5]. Also ensure you are using the latest version of the Agent, or at least Agent v7.23+ for Linux OS, and v7.28+ for Windows Server. Once installed, a ‘DNS’ tab is accessible in the Network Performance Monitoring product.
 
 If you are using [Kubernetes on Helm][3], to enable DNS monitoring, you need to set `collectDNSStats:` to `true` in the [values.yaml][4].
 
