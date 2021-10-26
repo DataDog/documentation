@@ -1468,7 +1468,7 @@ main:
     parent: incidents
     identifier: incidents_settings
     weight: 802
-  - name: Incident Management Analytics
+  - name: Incident Analytics
     url: monitors/incident_management/analytics
     parent: incidents
     identifier: analytics
@@ -1498,16 +1498,6 @@ main:
     parent: alerting
     identifier: incidents
     weight: 5
-  - name: Datadog Clipboard
-    url: monitors/incident_management/datadog_clipboard
-    parent: incidents
-    identifier: incidents_clipboard
-    weight: 501
-  - name: Notification Rules
-    url: monitors/incident_management/notification_rules
-    parent: incidents
-    identifier: notification_rules
-    weight: 502
   - name: Guides
     url: monitors/guide/
     weight: 100
