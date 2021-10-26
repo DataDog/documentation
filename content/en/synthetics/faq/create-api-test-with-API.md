@@ -16,7 +16,7 @@ To create a HTTP test with the Python client, see the example for your [Python c
 ## JSON Configuration
 ### HTTP test
 
-```json
+```json collapsible="true"
 {
     "status": "live",
     "tags": [
@@ -72,7 +72,7 @@ To create a HTTP test with the Python client, see the example for your [Python c
 
 ### SSL test
 
-```json
+```json collapsible="true"
 {
     "status": "live",
     "tags": [
@@ -127,7 +127,7 @@ To create a HTTP test with the Python client, see the example for your [Python c
 
 ### DNS test
 
-```json
+```json collapsible="true"
 {
     "status": "live",
     "tags": [
@@ -183,7 +183,7 @@ To create a HTTP test with the Python client, see the example for your [Python c
 
 ### TCP test
 
-```json
+```json collapsible="true"
 {
     "status": "live",
     "tags": [
@@ -228,7 +228,7 @@ To create a HTTP test with the Python client, see the example for your [Python c
 
 ### ICMP test
 
-```json
+```json collapsible="true"
 {
     "status": "live",
     "tags": [
@@ -286,7 +286,7 @@ To create a HTTP test with the Python client, see the example for your [Python c
 
 ### HTTP test
 
-```python
+```python collapsible="true"
 import os
 from dateutil.parser import parse as dateutil_parser
 from datadog_api_client.v1 import ApiClient, ApiException, Configuration
