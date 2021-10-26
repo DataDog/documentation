@@ -216,7 +216,7 @@ Salt Formula には Salt の状態が事前に記述されています。Datadog
 **注**: `datadog.config` を使用して別のマシンで異なるチェックのインスタンスを構成する場合は、Salt マスターコンフィギュレーションまたは Salt ミニオンコンフィギュレーション (マスターなしの場合) の [pillar_merge_lists][5] を必ず `True` に設定してください。
 
 [1]: http://docs.saltstack.com/en/latest/topics/development/conventions/formulas.html
-[2]: https://app.datadoghq.com/account/settings#api
+[2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://docs.datadoghq.com/ja/integrations/directory/
 [4]: https://github.com/DataDog/datadog-formula/blob/master/pillar.example
 [5]: https://docs.saltstack.com/en/latest/ref/configuration/master.html#pillar-merge-lists
