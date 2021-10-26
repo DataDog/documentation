@@ -113,9 +113,9 @@ Vous pouvez utiliser Datadog pour surveiller vos déploiements progressifs et d�
 
 {{< img src="tracing/deployment_tracking/rolling.png" alt="Déploiement progressif"  style="width:100%;">}}
 
-### Déploiements bleu/vert
+### Déploiements bleus et verts
 
-Les déploiements bleu/vert (ou toute autre combinaison de couleurs) permettent de réduire les downtimes en exécutant deux clusters de services qui acceptent tous les deux le trafic, ou en maintenant l'un d'eux en veille, mais prêt à prendre le relais en cas de problème avec l'autre.
+Les déploiements bleus et verts (ou dans toute autre combinaison de couleurs) permettent de réduire les downtimes en exécutant deux clusters de services qui acceptent tous les deux le trafic, ou en maintenant l'un d'eux en veille, mais prêt à prendre le relais en cas de problème avec l'autre.
 
 Lorsque vous définissez et affichez les tags `version` pour ces services, vous pouvez comparer les requêtes et les erreurs afin de détecter si l'un des clusters présente un taux d'erreur plus élevé que l'autre cluster, si un cluster n'est pas conforme aux SLO, ou si un cluster qui n'est pas censé recevoir de trafic en reçoit.
 
@@ -129,7 +129,7 @@ L'utilisation de tags `version` dans Datadog vous permet de comparer les taux d'
 
 Sur l'image suivante, on constate par exemple qu'une version Canary a été déployée puis supprimée après un petit nombre d'erreurs. Les traces correspondant à cette version sont disponibles à des fins d'examen sans aucun impact supplémentaire.
 
-{{< img src="tracing/deployment_tracking/CanaryDeploy.png" alt="Déploiement canary"  style="width:100%;">}}
+{{< img src="tracing/deployment_tracking/canarydeployment.png" alt="Déploiement canary"  style="width:100%;">}}
 
 ### Déploiements fantômes
 
