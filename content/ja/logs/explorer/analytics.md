@@ -96,9 +96,6 @@ further_reading:
 次のトップリストログ分析は、
 **ユニーククライアント IP** の数に基づいて、過去 1 か月の**上位 5 の URL パス**の動きを示しています。
 
-{{< img src="logs/explorer/toplists.png" alt="トップリストの例"  style="width:90%;">}}
-
-
 [1]: /ja/logs/explorer/facets/
 {{% /tab %}}
 

@@ -116,7 +116,7 @@ Go to **Settings > Webhooks** in your repository (or GitLab instance settings), 
 * **Secret Token**: leave blank
 * **Trigger**: Select `Job events` and `Pipeline events`.
 
-[1]: https://app.datadoghq.com/account/settings#api
+[1]: https://app.datadoghq.com/organization-settings/api-keys
 {{< /site-region >}}
 {{< site-region region="eu" >}}
 * **URL**: `https://webhook-intake.datadoghq.eu/api/v2/webhook/?dd-api-key=<API_KEY>` where `<API_KEY>` is [your Datadog API key][1].
@@ -150,7 +150,7 @@ After the integration is successfully configured, the [Pipelines][4] and [Pipeli
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /getting_started/site/
-[2]: https://app.datadoghq.com/account/settings#api
+[2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://docs.gitlab.com/ee/user/project/integrations/webhooks.html
 [4]: https://app.datadoghq.com/ci/pipelines
 [5]: https://app.datadoghq.com/ci/pipeline-executions

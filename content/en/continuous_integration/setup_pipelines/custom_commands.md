@@ -104,7 +104,7 @@ Additionally, configure the Datadog site to use the selected one ({{< region-par
 {{< /site-region >}}
 
 [1]: https://www.npmjs.com/package/@datadog/datadog-ci
-[2]: https://app.datadoghq.com/account/settings#api
+[2]: https://app.datadoghq.com/organization-settings/api-keys
 {{< /site-region >}}
 {{< site-region region="us5,gov" >}}
 The selected Datadog site ({{< region-param key="dd_site_name" >}}) does not support this feature.

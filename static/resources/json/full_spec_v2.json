@@ -17897,6 +17897,156 @@
         "readOnly": true,
         "type": "object"
       },
+      "MetricCustomAggregation": {
+        "description": "A time and space aggregation combination for use in query.",
+        "example": {
+          "space": "sum",
+          "time": "sum"
+        },
+        "properties": {
+          "space": {
+            "description": "A space aggregation for use in query.",
+            "enum": [
+              "avg",
+              "max",
+              "min",
+              "sum"
+            ],
+            "example": "sum",
+            "type": "string",
+            "x-enum-varnames": [
+              "AVG",
+              "MAX",
+              "MIN",
+              "SUM"
+            ]
+          },
+          "time": {
+            "description": "A time aggregation for use in query.",
+            "enum": [
+              "avg",
+              "count",
+              "max",
+              "min",
+              "sum"
+            ],
+            "example": "sum",
+            "type": "string",
+            "x-enum-varnames": [
+              "AVG",
+              "COUNT",
+              "MAX",
+              "MIN",
+              "SUM"
+            ]
+          }
+        },
+        "required": [
+          "time",
+          "space"
+        ],
+        "type": "object"
+      },
+      "MetricCustomAggregations": {
+        "description": "A list of queryable aggregation combinations for a count, rate, or gauge metric.\nBy default, count and rate metrics require the (time: sum, space: sum) aggregation and\nGauge metrics require the (time: avg, space: avg) aggregation.\nAdditional time & space combinations are also available:\n\n- time: avg, space: avg\n- time: avg, space: max\n- time: avg, space: min\n- time: avg, space: sum\n- time: count, space: sum\n- time: max, space: max\n- time: min, space: min\n- time: sum, space: avg\n- time: sum, space: sum\n\nCan only be applied to metrics that have a `metric_type` of `count`, `rate`, or `gauge`.",
+        "example": [
+          {
+            "space": "sum",
+            "time": "sum"
+          },
+          {
+            "space": "sum",
+            "time": "count"
+          }
+        ],
+        "items": {
+          "description": "A time and space aggregation combination for use in query.",
+          "example": {
+            "space": "sum",
+            "time": "sum"
+          },
+          "properties": {
+            "space": {
+              "description": "A space aggregation for use in query.",
+              "enum": [
+                "avg",
+                "max",
+                "min",
+                "sum"
+              ],
+              "example": "sum",
+              "type": "string",
+              "x-enum-varnames": [
+                "AVG",
+                "MAX",
+                "MIN",
+                "SUM"
+              ]
+            },
+            "time": {
+              "description": "A time aggregation for use in query.",
+              "enum": [
+                "avg",
+                "count",
+                "max",
+                "min",
+                "sum"
+              ],
+              "example": "sum",
+              "type": "string",
+              "x-enum-varnames": [
+                "AVG",
+                "COUNT",
+                "MAX",
+                "MIN",
+                "SUM"
+              ]
+            }
+          },
+          "required": [
+            "time",
+            "space"
+          ],
+          "type": "object"
+        },
+        "type": "array"
+      },
+      "MetricCustomSpaceAggregation": {
+        "description": "A space aggregation for use in query.",
+        "enum": [
+          "avg",
+          "max",
+          "min",
+          "sum"
+        ],
+        "example": "sum",
+        "type": "string",
+        "x-enum-varnames": [
+          "AVG",
+          "MAX",
+          "MIN",
+          "SUM"
+        ]
+      },
+      "MetricCustomTimeAggregation": {
+        "description": "A time aggregation for use in query.",
+        "enum": [
+          "avg",
+          "count",
+          "max",
+          "min",
+          "sum"
+        ],
+        "example": "sum",
+        "type": "string",
+        "x-enum-varnames": [
+          "AVG",
+          "COUNT",
+          "MAX",
+          "MIN",
+          "SUM"
+        ]
+      },
       "MetricDistinctVolume": {
         "description": "Object for a single metric's distinct volume.",
         "properties": {
@@ -18036,6 +18186,12 @@
         "description": "Object for a single metric tag configuration.",
         "example": {
           "attributes": {
+            "aggregations": [
+              {
+                "space": "avg",
+                "time": "avg"
+              }
+            ],
             "created_at": "2020-03-31T09:48:37.463835Z",
             "metric_type": "gauge",
             "modified_at": "2020-04-31T09:48:37.463835Z",
@@ -18051,6 +18207,70 @@
           "attributes": {
             "description": "Object containing the definition of a metric tag configuration attributes.",
             "properties": {
+              "aggregations": {
+                "description": "A list of queryable aggregation combinations for a count, rate, or gauge metric.\nBy default, count and rate metrics require the (time: sum, space: sum) aggregation and\nGauge metrics require the (time: avg, space: avg) aggregation.\nAdditional time & space combinations are also available:\n\n- time: avg, space: avg\n- time: avg, space: max\n- time: avg, space: min\n- time: avg, space: sum\n- time: count, space: sum\n- time: max, space: max\n- time: min, space: min\n- time: sum, space: avg\n- time: sum, space: sum\n\nCan only be applied to metrics that have a `metric_type` of `count`, `rate`, or `gauge`.",
+                "example": [
+                  {
+                    "space": "sum",
+                    "time": "sum"
+                  },
+                  {
+                    "space": "sum",
+                    "time": "count"
+                  }
+                ],
+                "items": {
+                  "description": "A time and space aggregation combination for use in query.",
+                  "example": {
+                    "space": "sum",
+                    "time": "sum"
+                  },
+                  "properties": {
+                    "space": {
+                      "description": "A space aggregation for use in query.",
+                      "enum": [
+                        "avg",
+                        "max",
+                        "min",
+                        "sum"
+                      ],
+                      "example": "sum",
+                      "type": "string",
+                      "x-enum-varnames": [
+                        "AVG",
+                        "MAX",
+                        "MIN",
+                        "SUM"
+                      ]
+                    },
+                    "time": {
+                      "description": "A time aggregation for use in query.",
+                      "enum": [
+                        "avg",
+                        "count",
+                        "max",
+                        "min",
+                        "sum"
+                      ],
+                      "example": "sum",
+                      "type": "string",
+                      "x-enum-varnames": [
+                        "AVG",
+                        "COUNT",
+                        "MAX",
+                        "MIN",
+                        "SUM"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "time",
+                    "space"
+                  ],
+                  "type": "object"
+                },
+                "type": "array"
+              },
               "created_at": {
                 "description": "Timestamp when the tag configuration was created.",
                 "example": "2020-03-31T09:48:37.463835Z",
@@ -18124,6 +18344,70 @@
       "MetricTagConfigurationAttributes": {
         "description": "Object containing the definition of a metric tag configuration attributes.",
         "properties": {
+          "aggregations": {
+            "description": "A list of queryable aggregation combinations for a count, rate, or gauge metric.\nBy default, count and rate metrics require the (time: sum, space: sum) aggregation and\nGauge metrics require the (time: avg, space: avg) aggregation.\nAdditional time & space combinations are also available:\n\n- time: avg, space: avg\n- time: avg, space: max\n- time: avg, space: min\n- time: avg, space: sum\n- time: count, space: sum\n- time: max, space: max\n- time: min, space: min\n- time: sum, space: avg\n- time: sum, space: sum\n\nCan only be applied to metrics that have a `metric_type` of `count`, `rate`, or `gauge`.",
+            "example": [
+              {
+                "space": "sum",
+                "time": "sum"
+              },
+              {
+                "space": "sum",
+                "time": "count"
+              }
+            ],
+            "items": {
+              "description": "A time and space aggregation combination for use in query.",
+              "example": {
+                "space": "sum",
+                "time": "sum"
+              },
+              "properties": {
+                "space": {
+                  "description": "A space aggregation for use in query.",
+                  "enum": [
+                    "avg",
+                    "max",
+                    "min",
+                    "sum"
+                  ],
+                  "example": "sum",
+                  "type": "string",
+                  "x-enum-varnames": [
+                    "AVG",
+                    "MAX",
+                    "MIN",
+                    "SUM"
+                  ]
+                },
+                "time": {
+                  "description": "A time aggregation for use in query.",
+                  "enum": [
+                    "avg",
+                    "count",
+                    "max",
+                    "min",
+                    "sum"
+                  ],
+                  "example": "sum",
+                  "type": "string",
+                  "x-enum-varnames": [
+                    "AVG",
+                    "COUNT",
+                    "MAX",
+                    "MIN",
+                    "SUM"
+                  ]
+                }
+              },
+              "required": [
+                "time",
+                "space"
+              ],
+              "type": "object"
+            },
+            "type": "array"
+          },
           "created_at": {
             "description": "Timestamp when the tag configuration was created.",
             "example": "2020-03-31T09:48:37.463835Z",
@@ -18177,6 +18461,70 @@
       "MetricTagConfigurationCreateAttributes": {
         "description": "Object containing the definition of a metric tag configuration to be created.",
         "properties": {
+          "aggregations": {
+            "description": "A list of queryable aggregation combinations for a count, rate, or gauge metric.\nBy default, count and rate metrics require the (time: sum, space: sum) aggregation and\nGauge metrics require the (time: avg, space: avg) aggregation.\nAdditional time & space combinations are also available:\n\n- time: avg, space: avg\n- time: avg, space: max\n- time: avg, space: min\n- time: avg, space: sum\n- time: count, space: sum\n- time: max, space: max\n- time: min, space: min\n- time: sum, space: avg\n- time: sum, space: sum\n\nCan only be applied to metrics that have a `metric_type` of `count`, `rate`, or `gauge`.",
+            "example": [
+              {
+                "space": "sum",
+                "time": "sum"
+              },
+              {
+                "space": "sum",
+                "time": "count"
+              }
+            ],
+            "items": {
+              "description": "A time and space aggregation combination for use in query.",
+              "example": {
+                "space": "sum",
+                "time": "sum"
+              },
+              "properties": {
+                "space": {
+                  "description": "A space aggregation for use in query.",
+                  "enum": [
+                    "avg",
+                    "max",
+                    "min",
+                    "sum"
+                  ],
+                  "example": "sum",
+                  "type": "string",
+                  "x-enum-varnames": [
+                    "AVG",
+                    "MAX",
+                    "MIN",
+                    "SUM"
+                  ]
+                },
+                "time": {
+                  "description": "A time aggregation for use in query.",
+                  "enum": [
+                    "avg",
+                    "count",
+                    "max",
+                    "min",
+                    "sum"
+                  ],
+                  "example": "sum",
+                  "type": "string",
+                  "x-enum-varnames": [
+                    "AVG",
+                    "COUNT",
+                    "MAX",
+                    "MIN",
+                    "SUM"
+                  ]
+                }
+              },
+              "required": [
+                "time",
+                "space"
+              ],
+              "type": "object"
+            },
+            "type": "array"
+          },
           "include_percentiles": {
             "default": false,
             "description": "Toggle to include/exclude percentiles for a distribution metric.\nDefaults to false. Can only be applied to metrics that have a `metric_type` of `distribution`.",
@@ -18239,6 +18587,70 @@
           "attributes": {
             "description": "Object containing the definition of a metric tag configuration to be created.",
             "properties": {
+              "aggregations": {
+                "description": "A list of queryable aggregation combinations for a count, rate, or gauge metric.\nBy default, count and rate metrics require the (time: sum, space: sum) aggregation and\nGauge metrics require the (time: avg, space: avg) aggregation.\nAdditional time & space combinations are also available:\n\n- time: avg, space: avg\n- time: avg, space: max\n- time: avg, space: min\n- time: avg, space: sum\n- time: count, space: sum\n- time: max, space: max\n- time: min, space: min\n- time: sum, space: avg\n- time: sum, space: sum\n\nCan only be applied to metrics that have a `metric_type` of `count`, `rate`, or `gauge`.",
+                "example": [
+                  {
+                    "space": "sum",
+                    "time": "sum"
+                  },
+                  {
+                    "space": "sum",
+                    "time": "count"
+                  }
+                ],
+                "items": {
+                  "description": "A time and space aggregation combination for use in query.",
+                  "example": {
+                    "space": "sum",
+                    "time": "sum"
+                  },
+                  "properties": {
+                    "space": {
+                      "description": "A space aggregation for use in query.",
+                      "enum": [
+                        "avg",
+                        "max",
+                        "min",
+                        "sum"
+                      ],
+                      "example": "sum",
+                      "type": "string",
+                      "x-enum-varnames": [
+                        "AVG",
+                        "MAX",
+                        "MIN",
+                        "SUM"
+                      ]
+                    },
+                    "time": {
+                      "description": "A time aggregation for use in query.",
+                      "enum": [
+                        "avg",
+                        "count",
+                        "max",
+                        "min",
+                        "sum"
+                      ],
+                      "example": "sum",
+                      "type": "string",
+                      "x-enum-varnames": [
+                        "AVG",
+                        "COUNT",
+                        "MAX",
+                        "MIN",
+                        "SUM"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "time",
+                    "space"
+                  ],
+                  "type": "object"
+                },
+                "type": "array"
+              },
               "include_percentiles": {
                 "default": false,
                 "description": "Toggle to include/exclude percentiles for a distribution metric.\nDefaults to false. Can only be applied to metrics that have a `metric_type` of `distribution`.",
@@ -18328,6 +18740,70 @@
               "attributes": {
                 "description": "Object containing the definition of a metric tag configuration to be created.",
                 "properties": {
+                  "aggregations": {
+                    "description": "A list of queryable aggregation combinations for a count, rate, or gauge metric.\nBy default, count and rate metrics require the (time: sum, space: sum) aggregation and\nGauge metrics require the (time: avg, space: avg) aggregation.\nAdditional time & space combinations are also available:\n\n- time: avg, space: avg\n- time: avg, space: max\n- time: avg, space: min\n- time: avg, space: sum\n- time: count, space: sum\n- time: max, space: max\n- time: min, space: min\n- time: sum, space: avg\n- time: sum, space: sum\n\nCan only be applied to metrics that have a `metric_type` of `count`, `rate`, or `gauge`.",
+                    "example": [
+                      {
+                        "space": "sum",
+                        "time": "sum"
+                      },
+                      {
+                        "space": "sum",
+                        "time": "count"
+                      }
+                    ],
+                    "items": {
+                      "description": "A time and space aggregation combination for use in query.",
+                      "example": {
+                        "space": "sum",
+                        "time": "sum"
+                      },
+                      "properties": {
+                        "space": {
+                          "description": "A space aggregation for use in query.",
+                          "enum": [
+                            "avg",
+                            "max",
+                            "min",
+                            "sum"
+                          ],
+                          "example": "sum",
+                          "type": "string",
+                          "x-enum-varnames": [
+                            "AVG",
+                            "MAX",
+                            "MIN",
+                            "SUM"
+                          ]
+                        },
+                        "time": {
+                          "description": "A time aggregation for use in query.",
+                          "enum": [
+                            "avg",
+                            "count",
+                            "max",
+                            "min",
+                            "sum"
+                          ],
+                          "example": "sum",
+                          "type": "string",
+                          "x-enum-varnames": [
+                            "AVG",
+                            "COUNT",
+                            "MAX",
+                            "MIN",
+                            "SUM"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "time",
+                        "space"
+                      ],
+                      "type": "object"
+                    },
+                    "type": "array"
+                  },
                   "include_percentiles": {
                     "default": false,
                     "description": "Toggle to include/exclude percentiles for a distribution metric.\nDefaults to false. Can only be applied to metrics that have a `metric_type` of `distribution`.",
@@ -18427,6 +18903,12 @@
             "description": "Object for a single metric tag configuration.",
             "example": {
               "attributes": {
+                "aggregations": [
+                  {
+                    "space": "avg",
+                    "time": "avg"
+                  }
+                ],
                 "created_at": "2020-03-31T09:48:37.463835Z",
                 "metric_type": "gauge",
                 "modified_at": "2020-04-31T09:48:37.463835Z",
@@ -18442,6 +18924,70 @@
               "attributes": {
                 "description": "Object containing the definition of a metric tag configuration attributes.",
                 "properties": {
+                  "aggregations": {
+                    "description": "A list of queryable aggregation combinations for a count, rate, or gauge metric.\nBy default, count and rate metrics require the (time: sum, space: sum) aggregation and\nGauge metrics require the (time: avg, space: avg) aggregation.\nAdditional time & space combinations are also available:\n\n- time: avg, space: avg\n- time: avg, space: max\n- time: avg, space: min\n- time: avg, space: sum\n- time: count, space: sum\n- time: max, space: max\n- time: min, space: min\n- time: sum, space: avg\n- time: sum, space: sum\n\nCan only be applied to metrics that have a `metric_type` of `count`, `rate`, or `gauge`.",
+                    "example": [
+                      {
+                        "space": "sum",
+                        "time": "sum"
+                      },
+                      {
+                        "space": "sum",
+                        "time": "count"
+                      }
+                    ],
+                    "items": {
+                      "description": "A time and space aggregation combination for use in query.",
+                      "example": {
+                        "space": "sum",
+                        "time": "sum"
+                      },
+                      "properties": {
+                        "space": {
+                          "description": "A space aggregation for use in query.",
+                          "enum": [
+                            "avg",
+                            "max",
+                            "min",
+                            "sum"
+                          ],
+                          "example": "sum",
+                          "type": "string",
+                          "x-enum-varnames": [
+                            "AVG",
+                            "MAX",
+                            "MIN",
+                            "SUM"
+                          ]
+                        },
+                        "time": {
+                          "description": "A time aggregation for use in query.",
+                          "enum": [
+                            "avg",
+                            "count",
+                            "max",
+                            "min",
+                            "sum"
+                          ],
+                          "example": "sum",
+                          "type": "string",
+                          "x-enum-varnames": [
+                            "AVG",
+                            "COUNT",
+                            "MAX",
+                            "MIN",
+                            "SUM"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "time",
+                        "space"
+                      ],
+                      "type": "object"
+                    },
+                    "type": "array"
+                  },
                   "created_at": {
                     "description": "Timestamp when the tag configuration was created.",
                     "example": "2020-03-31T09:48:37.463835Z",
@@ -18531,6 +19077,70 @@
       "MetricTagConfigurationUpdateAttributes": {
         "description": "Object containing the definition of a metric tag configuration to be updated.",
         "properties": {
+          "aggregations": {
+            "description": "A list of queryable aggregation combinations for a count, rate, or gauge metric.\nBy default, count and rate metrics require the (time: sum, space: sum) aggregation and\nGauge metrics require the (time: avg, space: avg) aggregation.\nAdditional time & space combinations are also available:\n\n- time: avg, space: avg\n- time: avg, space: max\n- time: avg, space: min\n- time: avg, space: sum\n- time: count, space: sum\n- time: max, space: max\n- time: min, space: min\n- time: sum, space: avg\n- time: sum, space: sum\n\nCan only be applied to metrics that have a `metric_type` of `count`, `rate`, or `gauge`.",
+            "example": [
+              {
+                "space": "sum",
+                "time": "sum"
+              },
+              {
+                "space": "sum",
+                "time": "count"
+              }
+            ],
+            "items": {
+              "description": "A time and space aggregation combination for use in query.",
+              "example": {
+                "space": "sum",
+                "time": "sum"
+              },
+              "properties": {
+                "space": {
+                  "description": "A space aggregation for use in query.",
+                  "enum": [
+                    "avg",
+                    "max",
+                    "min",
+                    "sum"
+                  ],
+                  "example": "sum",
+                  "type": "string",
+                  "x-enum-varnames": [
+                    "AVG",
+                    "MAX",
+                    "MIN",
+                    "SUM"
+                  ]
+                },
+                "time": {
+                  "description": "A time aggregation for use in query.",
+                  "enum": [
+                    "avg",
+                    "count",
+                    "max",
+                    "min",
+                    "sum"
+                  ],
+                  "example": "sum",
+                  "type": "string",
+                  "x-enum-varnames": [
+                    "AVG",
+                    "COUNT",
+                    "MAX",
+                    "MIN",
+                    "SUM"
+                  ]
+                }
+              },
+              "required": [
+                "time",
+                "space"
+              ],
+              "type": "object"
+            },
+            "type": "array"
+          },
           "include_percentiles": {
             "default": false,
             "description": "Toggle to include/exclude percentiles for a distribution metric.\nDefaults to false. Can only be applied to metrics that have a `metric_type` of `distribution`.",
@@ -18570,6 +19180,70 @@
           "attributes": {
             "description": "Object containing the definition of a metric tag configuration to be updated.",
             "properties": {
+              "aggregations": {
+                "description": "A list of queryable aggregation combinations for a count, rate, or gauge metric.\nBy default, count and rate metrics require the (time: sum, space: sum) aggregation and\nGauge metrics require the (time: avg, space: avg) aggregation.\nAdditional time & space combinations are also available:\n\n- time: avg, space: avg\n- time: avg, space: max\n- time: avg, space: min\n- time: avg, space: sum\n- time: count, space: sum\n- time: max, space: max\n- time: min, space: min\n- time: sum, space: avg\n- time: sum, space: sum\n\nCan only be applied to metrics that have a `metric_type` of `count`, `rate`, or `gauge`.",
+                "example": [
+                  {
+                    "space": "sum",
+                    "time": "sum"
+                  },
+                  {
+                    "space": "sum",
+                    "time": "count"
+                  }
+                ],
+                "items": {
+                  "description": "A time and space aggregation combination for use in query.",
+                  "example": {
+                    "space": "sum",
+                    "time": "sum"
+                  },
+                  "properties": {
+                    "space": {
+                      "description": "A space aggregation for use in query.",
+                      "enum": [
+                        "avg",
+                        "max",
+                        "min",
+                        "sum"
+                      ],
+                      "example": "sum",
+                      "type": "string",
+                      "x-enum-varnames": [
+                        "AVG",
+                        "MAX",
+                        "MIN",
+                        "SUM"
+                      ]
+                    },
+                    "time": {
+                      "description": "A time aggregation for use in query.",
+                      "enum": [
+                        "avg",
+                        "count",
+                        "max",
+                        "min",
+                        "sum"
+                      ],
+                      "example": "sum",
+                      "type": "string",
+                      "x-enum-varnames": [
+                        "AVG",
+                        "COUNT",
+                        "MAX",
+                        "MIN",
+                        "SUM"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "time",
+                    "space"
+                  ],
+                  "type": "object"
+                },
+                "type": "array"
+              },
               "include_percentiles": {
                 "default": false,
                 "description": "Toggle to include/exclude percentiles for a distribution metric.\nDefaults to false. Can only be applied to metrics that have a `metric_type` of `distribution`.",
@@ -18636,6 +19310,70 @@
               "attributes": {
                 "description": "Object containing the definition of a metric tag configuration to be updated.",
                 "properties": {
+                  "aggregations": {
+                    "description": "A list of queryable aggregation combinations for a count, rate, or gauge metric.\nBy default, count and rate metrics require the (time: sum, space: sum) aggregation and\nGauge metrics require the (time: avg, space: avg) aggregation.\nAdditional time & space combinations are also available:\n\n- time: avg, space: avg\n- time: avg, space: max\n- time: avg, space: min\n- time: avg, space: sum\n- time: count, space: sum\n- time: max, space: max\n- time: min, space: min\n- time: sum, space: avg\n- time: sum, space: sum\n\nCan only be applied to metrics that have a `metric_type` of `count`, `rate`, or `gauge`.",
+                    "example": [
+                      {
+                        "space": "sum",
+                        "time": "sum"
+                      },
+                      {
+                        "space": "sum",
+                        "time": "count"
+                      }
+                    ],
+                    "items": {
+                      "description": "A time and space aggregation combination for use in query.",
+                      "example": {
+                        "space": "sum",
+                        "time": "sum"
+                      },
+                      "properties": {
+                        "space": {
+                          "description": "A space aggregation for use in query.",
+                          "enum": [
+                            "avg",
+                            "max",
+                            "min",
+                            "sum"
+                          ],
+                          "example": "sum",
+                          "type": "string",
+                          "x-enum-varnames": [
+                            "AVG",
+                            "MAX",
+                            "MIN",
+                            "SUM"
+                          ]
+                        },
+                        "time": {
+                          "description": "A time aggregation for use in query.",
+                          "enum": [
+                            "avg",
+                            "count",
+                            "max",
+                            "min",
+                            "sum"
+                          ],
+                          "example": "sum",
+                          "type": "string",
+                          "x-enum-varnames": [
+                            "AVG",
+                            "COUNT",
+                            "MAX",
+                            "MIN",
+                            "SUM"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "time",
+                        "space"
+                      ],
+                      "type": "object"
+                    },
+                    "type": "array"
+                  },
                   "include_percentiles": {
                     "default": false,
                     "description": "Toggle to include/exclude percentiles for a distribution metric.\nDefaults to false. Can only be applied to metrics that have a `metric_type` of `distribution`.",
@@ -18905,6 +19643,12 @@
             "description": "Object for a single metric tag configuration.",
             "example": {
               "attributes": {
+                "aggregations": [
+                  {
+                    "space": "avg",
+                    "time": "avg"
+                  }
+                ],
                 "created_at": "2020-03-31T09:48:37.463835Z",
                 "metric_type": "gauge",
                 "modified_at": "2020-04-31T09:48:37.463835Z",
@@ -18920,6 +19664,70 @@
               "attributes": {
                 "description": "Object containing the definition of a metric tag configuration attributes.",
                 "properties": {
+                  "aggregations": {
+                    "description": "A list of queryable aggregation combinations for a count, rate, or gauge metric.\nBy default, count and rate metrics require the (time: sum, space: sum) aggregation and\nGauge metrics require the (time: avg, space: avg) aggregation.\nAdditional time & space combinations are also available:\n\n- time: avg, space: avg\n- time: avg, space: max\n- time: avg, space: min\n- time: avg, space: sum\n- time: count, space: sum\n- time: max, space: max\n- time: min, space: min\n- time: sum, space: avg\n- time: sum, space: sum\n\nCan only be applied to metrics that have a `metric_type` of `count`, `rate`, or `gauge`.",
+                    "example": [
+                      {
+                        "space": "sum",
+                        "time": "sum"
+                      },
+                      {
+                        "space": "sum",
+                        "time": "count"
+                      }
+                    ],
+                    "items": {
+                      "description": "A time and space aggregation combination for use in query.",
+                      "example": {
+                        "space": "sum",
+                        "time": "sum"
+                      },
+                      "properties": {
+                        "space": {
+                          "description": "A space aggregation for use in query.",
+                          "enum": [
+                            "avg",
+                            "max",
+                            "min",
+                            "sum"
+                          ],
+                          "example": "sum",
+                          "type": "string",
+                          "x-enum-varnames": [
+                            "AVG",
+                            "MAX",
+                            "MIN",
+                            "SUM"
+                          ]
+                        },
+                        "time": {
+                          "description": "A time aggregation for use in query.",
+                          "enum": [
+                            "avg",
+                            "count",
+                            "max",
+                            "min",
+                            "sum"
+                          ],
+                          "example": "sum",
+                          "type": "string",
+                          "x-enum-varnames": [
+                            "AVG",
+                            "COUNT",
+                            "MAX",
+                            "MIN",
+                            "SUM"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "time",
+                        "space"
+                      ],
+                      "type": "object"
+                    },
+                    "type": "array"
+                  },
                   "created_at": {
                     "description": "Timestamp when the tag configuration was created.",
                     "example": "2020-03-31T09:48:37.463835Z",
@@ -19032,6 +19840,12 @@
                   "description": "Object for a single metric tag configuration.",
                   "example": {
                     "attributes": {
+                      "aggregations": [
+                        {
+                          "space": "avg",
+                          "time": "avg"
+                        }
+                      ],
                       "created_at": "2020-03-31T09:48:37.463835Z",
                       "metric_type": "gauge",
                       "modified_at": "2020-04-31T09:48:37.463835Z",
@@ -19047,6 +19861,70 @@
                     "attributes": {
                       "description": "Object containing the definition of a metric tag configuration attributes.",
                       "properties": {
+                        "aggregations": {
+                          "description": "A list of queryable aggregation combinations for a count, rate, or gauge metric.\nBy default, count and rate metrics require the (time: sum, space: sum) aggregation and\nGauge metrics require the (time: avg, space: avg) aggregation.\nAdditional time & space combinations are also available:\n\n- time: avg, space: avg\n- time: avg, space: max\n- time: avg, space: min\n- time: avg, space: sum\n- time: count, space: sum\n- time: max, space: max\n- time: min, space: min\n- time: sum, space: avg\n- time: sum, space: sum\n\nCan only be applied to metrics that have a `metric_type` of `count`, `rate`, or `gauge`.",
+                          "example": [
+                            {
+                              "space": "sum",
+                              "time": "sum"
+                            },
+                            {
+                              "space": "sum",
+                              "time": "count"
+                            }
+                          ],
+                          "items": {
+                            "description": "A time and space aggregation combination for use in query.",
+                            "example": {
+                              "space": "sum",
+                              "time": "sum"
+                            },
+                            "properties": {
+                              "space": {
+                                "description": "A space aggregation for use in query.",
+                                "enum": [
+                                  "avg",
+                                  "max",
+                                  "min",
+                                  "sum"
+                                ],
+                                "example": "sum",
+                                "type": "string",
+                                "x-enum-varnames": [
+                                  "AVG",
+                                  "MAX",
+                                  "MIN",
+                                  "SUM"
+                                ]
+                              },
+                              "time": {
+                                "description": "A time aggregation for use in query.",
+                                "enum": [
+                                  "avg",
+                                  "count",
+                                  "max",
+                                  "min",
+                                  "sum"
+                                ],
+                                "example": "sum",
+                                "type": "string",
+                                "x-enum-varnames": [
+                                  "AVG",
+                                  "COUNT",
+                                  "MAX",
+                                  "MIN",
+                                  "SUM"
+                                ]
+                              }
+                            },
+                            "required": [
+                              "time",
+                              "space"
+                            ],
+                            "type": "object"
+                          },
+                          "type": "array"
+                        },
                         "created_at": {
                           "description": "Timestamp when the tag configuration was created.",
                           "example": "2020-03-31T09:48:37.463835Z",
@@ -47286,6 +48164,12 @@
                             "description": "Object for a single metric tag configuration.",
                             "example": {
                               "attributes": {
+                                "aggregations": [
+                                  {
+                                    "space": "avg",
+                                    "time": "avg"
+                                  }
+                                ],
                                 "created_at": "2020-03-31T09:48:37.463835Z",
                                 "metric_type": "gauge",
                                 "modified_at": "2020-04-31T09:48:37.463835Z",
@@ -47301,6 +48185,70 @@
                               "attributes": {
                                 "description": "Object containing the definition of a metric tag configuration attributes.",
                                 "properties": {
+                                  "aggregations": {
+                                    "description": "A list of queryable aggregation combinations for a count, rate, or gauge metric.\nBy default, count and rate metrics require the (time: sum, space: sum) aggregation and\nGauge metrics require the (time: avg, space: avg) aggregation.\nAdditional time & space combinations are also available:\n\n- time: avg, space: avg\n- time: avg, space: max\n- time: avg, space: min\n- time: avg, space: sum\n- time: count, space: sum\n- time: max, space: max\n- time: min, space: min\n- time: sum, space: avg\n- time: sum, space: sum\n\nCan only be applied to metrics that have a `metric_type` of `count`, `rate`, or `gauge`.",
+                                    "example": [
+                                      {
+                                        "space": "sum",
+                                        "time": "sum"
+                                      },
+                                      {
+                                        "space": "sum",
+                                        "time": "count"
+                                      }
+                                    ],
+                                    "items": {
+                                      "description": "A time and space aggregation combination for use in query.",
+                                      "example": {
+                                        "space": "sum",
+                                        "time": "sum"
+                                      },
+                                      "properties": {
+                                        "space": {
+                                          "description": "A space aggregation for use in query.",
+                                          "enum": [
+                                            "avg",
+                                            "max",
+                                            "min",
+                                            "sum"
+                                          ],
+                                          "example": "sum",
+                                          "type": "string",
+                                          "x-enum-varnames": [
+                                            "AVG",
+                                            "MAX",
+                                            "MIN",
+                                            "SUM"
+                                          ]
+                                        },
+                                        "time": {
+                                          "description": "A time aggregation for use in query.",
+                                          "enum": [
+                                            "avg",
+                                            "count",
+                                            "max",
+                                            "min",
+                                            "sum"
+                                          ],
+                                          "example": "sum",
+                                          "type": "string",
+                                          "x-enum-varnames": [
+                                            "AVG",
+                                            "COUNT",
+                                            "MAX",
+                                            "MIN",
+                                            "SUM"
+                                          ]
+                                        }
+                                      },
+                                      "required": [
+                                        "time",
+                                        "space"
+                                      ],
+                                      "type": "object"
+                                    },
+                                    "type": "array"
+                                  },
                                   "created_at": {
                                     "description": "Timestamp when the tag configuration was created.",
                                     "example": "2020-03-31T09:48:37.463835Z",
@@ -47807,6 +48755,12 @@
                       "description": "Object for a single metric tag configuration.",
                       "example": {
                         "attributes": {
+                          "aggregations": [
+                            {
+                              "space": "avg",
+                              "time": "avg"
+                            }
+                          ],
                           "created_at": "2020-03-31T09:48:37.463835Z",
                           "metric_type": "gauge",
                           "modified_at": "2020-04-31T09:48:37.463835Z",
@@ -47822,6 +48776,70 @@
                         "attributes": {
                           "description": "Object containing the definition of a metric tag configuration attributes.",
                           "properties": {
+                            "aggregations": {
+                              "description": "A list of queryable aggregation combinations for a count, rate, or gauge metric.\nBy default, count and rate metrics require the (time: sum, space: sum) aggregation and\nGauge metrics require the (time: avg, space: avg) aggregation.\nAdditional time & space combinations are also available:\n\n- time: avg, space: avg\n- time: avg, space: max\n- time: avg, space: min\n- time: avg, space: sum\n- time: count, space: sum\n- time: max, space: max\n- time: min, space: min\n- time: sum, space: avg\n- time: sum, space: sum\n\nCan only be applied to metrics that have a `metric_type` of `count`, `rate`, or `gauge`.",
+                              "example": [
+                                {
+                                  "space": "sum",
+                                  "time": "sum"
+                                },
+                                {
+                                  "space": "sum",
+                                  "time": "count"
+                                }
+                              ],
+                              "items": {
+                                "description": "A time and space aggregation combination for use in query.",
+                                "example": {
+                                  "space": "sum",
+                                  "time": "sum"
+                                },
+                                "properties": {
+                                  "space": {
+                                    "description": "A space aggregation for use in query.",
+                                    "enum": [
+                                      "avg",
+                                      "max",
+                                      "min",
+                                      "sum"
+                                    ],
+                                    "example": "sum",
+                                    "type": "string",
+                                    "x-enum-varnames": [
+                                      "AVG",
+                                      "MAX",
+                                      "MIN",
+                                      "SUM"
+                                    ]
+                                  },
+                                  "time": {
+                                    "description": "A time aggregation for use in query.",
+                                    "enum": [
+                                      "avg",
+                                      "count",
+                                      "max",
+                                      "min",
+                                      "sum"
+                                    ],
+                                    "example": "sum",
+                                    "type": "string",
+                                    "x-enum-varnames": [
+                                      "AVG",
+                                      "COUNT",
+                                      "MAX",
+                                      "MIN",
+                                      "SUM"
+                                    ]
+                                  }
+                                },
+                                "required": [
+                                  "time",
+                                  "space"
+                                ],
+                                "type": "object"
+                              },
+                              "type": "array"
+                            },
                             "created_at": {
                               "description": "Timestamp when the tag configuration was created.",
                               "example": "2020-03-31T09:48:37.463835Z",
@@ -47987,7 +49005,7 @@
         "x-unstable": "**Note: Use of this endpoint for count/gauge/rate metric types is only accessible for Metrics without Limits&trade; beta customers.\nIf you’re interested in Metrics without Limits&trade;, please contact your Customer Success Manager.**"
       },
       "patch": {
-        "description": "Update the tag configuration of a metric or percentile aggregations of a distribution metric. Can only be used with\napplication keys from users with the `Manage Tags for Metrics` permission.",
+        "description": "Update the tag configuration of a metric or percentile aggregations of a distribution metric or custom aggregations\nof a count, rate, or gauge metric.\nCan only be used with application keys from users with the `Manage Tags for Metrics` permission.",
         "operationId": "UpdateTagConfiguration",
         "parameters": [
           {
@@ -48024,6 +49042,70 @@
                       "attributes": {
                         "description": "Object containing the definition of a metric tag configuration to be updated.",
                         "properties": {
+                          "aggregations": {
+                            "description": "A list of queryable aggregation combinations for a count, rate, or gauge metric.\nBy default, count and rate metrics require the (time: sum, space: sum) aggregation and\nGauge metrics require the (time: avg, space: avg) aggregation.\nAdditional time & space combinations are also available:\n\n- time: avg, space: avg\n- time: avg, space: max\n- time: avg, space: min\n- time: avg, space: sum\n- time: count, space: sum\n- time: max, space: max\n- time: min, space: min\n- time: sum, space: avg\n- time: sum, space: sum\n\nCan only be applied to metrics that have a `metric_type` of `count`, `rate`, or `gauge`.",
+                            "example": [
+                              {
+                                "space": "sum",
+                                "time": "sum"
+                              },
+                              {
+                                "space": "sum",
+                                "time": "count"
+                              }
+                            ],
+                            "items": {
+                              "description": "A time and space aggregation combination for use in query.",
+                              "example": {
+                                "space": "sum",
+                                "time": "sum"
+                              },
+                              "properties": {
+                                "space": {
+                                  "description": "A space aggregation for use in query.",
+                                  "enum": [
+                                    "avg",
+                                    "max",
+                                    "min",
+                                    "sum"
+                                  ],
+                                  "example": "sum",
+                                  "type": "string",
+                                  "x-enum-varnames": [
+                                    "AVG",
+                                    "MAX",
+                                    "MIN",
+                                    "SUM"
+                                  ]
+                                },
+                                "time": {
+                                  "description": "A time aggregation for use in query.",
+                                  "enum": [
+                                    "avg",
+                                    "count",
+                                    "max",
+                                    "min",
+                                    "sum"
+                                  ],
+                                  "example": "sum",
+                                  "type": "string",
+                                  "x-enum-varnames": [
+                                    "AVG",
+                                    "COUNT",
+                                    "MAX",
+                                    "MIN",
+                                    "SUM"
+                                  ]
+                                }
+                              },
+                              "required": [
+                                "time",
+                                "space"
+                              ],
+                              "type": "object"
+                            },
+                            "type": "array"
+                          },
                           "include_percentiles": {
                             "default": false,
                             "description": "Toggle to include/exclude percentiles for a distribution metric.\nDefaults to false. Can only be applied to metrics that have a `metric_type` of `distribution`.",
@@ -48091,6 +49173,12 @@
                       "description": "Object for a single metric tag configuration.",
                       "example": {
                         "attributes": {
+                          "aggregations": [
+                            {
+                              "space": "avg",
+                              "time": "avg"
+                            }
+                          ],
                           "created_at": "2020-03-31T09:48:37.463835Z",
                           "metric_type": "gauge",
                           "modified_at": "2020-04-31T09:48:37.463835Z",
@@ -48106,6 +49194,70 @@
                         "attributes": {
                           "description": "Object containing the definition of a metric tag configuration attributes.",
                           "properties": {
+                            "aggregations": {
+                              "description": "A list of queryable aggregation combinations for a count, rate, or gauge metric.\nBy default, count and rate metrics require the (time: sum, space: sum) aggregation and\nGauge metrics require the (time: avg, space: avg) aggregation.\nAdditional time & space combinations are also available:\n\n- time: avg, space: avg\n- time: avg, space: max\n- time: avg, space: min\n- time: avg, space: sum\n- time: count, space: sum\n- time: max, space: max\n- time: min, space: min\n- time: sum, space: avg\n- time: sum, space: sum\n\nCan only be applied to metrics that have a `metric_type` of `count`, `rate`, or `gauge`.",
+                              "example": [
+                                {
+                                  "space": "sum",
+                                  "time": "sum"
+                                },
+                                {
+                                  "space": "sum",
+                                  "time": "count"
+                                }
+                              ],
+                              "items": {
+                                "description": "A time and space aggregation combination for use in query.",
+                                "example": {
+                                  "space": "sum",
+                                  "time": "sum"
+                                },
+                                "properties": {
+                                  "space": {
+                                    "description": "A space aggregation for use in query.",
+                                    "enum": [
+                                      "avg",
+                                      "max",
+                                      "min",
+                                      "sum"
+                                    ],
+                                    "example": "sum",
+                                    "type": "string",
+                                    "x-enum-varnames": [
+                                      "AVG",
+                                      "MAX",
+                                      "MIN",
+                                      "SUM"
+                                    ]
+                                  },
+                                  "time": {
+                                    "description": "A time aggregation for use in query.",
+                                    "enum": [
+                                      "avg",
+                                      "count",
+                                      "max",
+                                      "min",
+                                      "sum"
+                                    ],
+                                    "example": "sum",
+                                    "type": "string",
+                                    "x-enum-varnames": [
+                                      "AVG",
+                                      "COUNT",
+                                      "MAX",
+                                      "MIN",
+                                      "SUM"
+                                    ]
+                                  }
+                                },
+                                "required": [
+                                  "time",
+                                  "space"
+                                ],
+                                "type": "object"
+                              },
+                              "type": "array"
+                            },
                             "created_at": {
                               "description": "Timestamp when the tag configuration was created.",
                               "example": "2020-03-31T09:48:37.463835Z",
@@ -48297,7 +49449,7 @@
         "x-unstable": "**Note: Use of this endpoint for count/gauge/rate metric types is only accessible for Metrics without Limits&trade; beta customers.\nIf you’re interested in Metrics without Limits&trade;, please contact your Customer Success Manager.**"
       },
       "post": {
-        "description": "Create and define a list of queryable tag keys for an existing count/gauge/rate/distribution metric. Optionally, include percentile aggregations on any distribution metric.\nCan only be used with application keys of users with the `Manage Tags for Metrics` permission.",
+        "description": "Create and define a list of queryable tag keys for an existing count/gauge/rate/distribution metric.\nOptionally, include percentile aggregations on any distribution metric or configure custom aggregations\non any count, rate, or gauge metric.\nCan only be used with application keys of users with the `Manage Tags for Metrics` permission.",
         "operationId": "CreateTagConfiguration",
         "parameters": [
           {
@@ -48335,6 +49487,70 @@
                       "attributes": {
                         "description": "Object containing the definition of a metric tag configuration to be created.",
                         "properties": {
+                          "aggregations": {
+                            "description": "A list of queryable aggregation combinations for a count, rate, or gauge metric.\nBy default, count and rate metrics require the (time: sum, space: sum) aggregation and\nGauge metrics require the (time: avg, space: avg) aggregation.\nAdditional time & space combinations are also available:\n\n- time: avg, space: avg\n- time: avg, space: max\n- time: avg, space: min\n- time: avg, space: sum\n- time: count, space: sum\n- time: max, space: max\n- time: min, space: min\n- time: sum, space: avg\n- time: sum, space: sum\n\nCan only be applied to metrics that have a `metric_type` of `count`, `rate`, or `gauge`.",
+                            "example": [
+                              {
+                                "space": "sum",
+                                "time": "sum"
+                              },
+                              {
+                                "space": "sum",
+                                "time": "count"
+                              }
+                            ],
+                            "items": {
+                              "description": "A time and space aggregation combination for use in query.",
+                              "example": {
+                                "space": "sum",
+                                "time": "sum"
+                              },
+                              "properties": {
+                                "space": {
+                                  "description": "A space aggregation for use in query.",
+                                  "enum": [
+                                    "avg",
+                                    "max",
+                                    "min",
+                                    "sum"
+                                  ],
+                                  "example": "sum",
+                                  "type": "string",
+                                  "x-enum-varnames": [
+                                    "AVG",
+                                    "MAX",
+                                    "MIN",
+                                    "SUM"
+                                  ]
+                                },
+                                "time": {
+                                  "description": "A time aggregation for use in query.",
+                                  "enum": [
+                                    "avg",
+                                    "count",
+                                    "max",
+                                    "min",
+                                    "sum"
+                                  ],
+                                  "example": "sum",
+                                  "type": "string",
+                                  "x-enum-varnames": [
+                                    "AVG",
+                                    "COUNT",
+                                    "MAX",
+                                    "MIN",
+                                    "SUM"
+                                  ]
+                                }
+                              },
+                              "required": [
+                                "time",
+                                "space"
+                              ],
+                              "type": "object"
+                            },
+                            "type": "array"
+                          },
                           "include_percentiles": {
                             "default": false,
                             "description": "Toggle to include/exclude percentiles for a distribution metric.\nDefaults to false. Can only be applied to metrics that have a `metric_type` of `distribution`.",
@@ -48424,6 +49640,12 @@
                       "description": "Object for a single metric tag configuration.",
                       "example": {
                         "attributes": {
+                          "aggregations": [
+                            {
+                              "space": "avg",
+                              "time": "avg"
+                            }
+                          ],
                           "created_at": "2020-03-31T09:48:37.463835Z",
                           "metric_type": "gauge",
                           "modified_at": "2020-04-31T09:48:37.463835Z",
@@ -48439,6 +49661,70 @@
                         "attributes": {
                           "description": "Object containing the definition of a metric tag configuration attributes.",
                           "properties": {
+                            "aggregations": {
+                              "description": "A list of queryable aggregation combinations for a count, rate, or gauge metric.\nBy default, count and rate metrics require the (time: sum, space: sum) aggregation and\nGauge metrics require the (time: avg, space: avg) aggregation.\nAdditional time & space combinations are also available:\n\n- time: avg, space: avg\n- time: avg, space: max\n- time: avg, space: min\n- time: avg, space: sum\n- time: count, space: sum\n- time: max, space: max\n- time: min, space: min\n- time: sum, space: avg\n- time: sum, space: sum\n\nCan only be applied to metrics that have a `metric_type` of `count`, `rate`, or `gauge`.",
+                              "example": [
+                                {
+                                  "space": "sum",
+                                  "time": "sum"
+                                },
+                                {
+                                  "space": "sum",
+                                  "time": "count"
+                                }
+                              ],
+                              "items": {
+                                "description": "A time and space aggregation combination for use in query.",
+                                "example": {
+                                  "space": "sum",
+                                  "time": "sum"
+                                },
+                                "properties": {
+                                  "space": {
+                                    "description": "A space aggregation for use in query.",
+                                    "enum": [
+                                      "avg",
+                                      "max",
+                                      "min",
+                                      "sum"
+                                    ],
+                                    "example": "sum",
+                                    "type": "string",
+                                    "x-enum-varnames": [
+                                      "AVG",
+                                      "MAX",
+                                      "MIN",
+                                      "SUM"
+                                    ]
+                                  },
+                                  "time": {
+                                    "description": "A time aggregation for use in query.",
+                                    "enum": [
+                                      "avg",
+                                      "count",
+                                      "max",
+                                      "min",
+                                      "sum"
+                                    ],
+                                    "example": "sum",
+                                    "type": "string",
+                                    "x-enum-varnames": [
+                                      "AVG",
+                                      "COUNT",
+                                      "MAX",
+                                      "MIN",
+                                      "SUM"
+                                    ]
+                                  }
+                                },
+                                "required": [
+                                  "time",
+                                  "space"
+                                ],
+                                "type": "object"
+                              },
+                              "type": "array"
+                            },
                             "created_at": {
                               "description": "Timestamp when the tag configuration was created.",
                               "example": "2020-03-31T09:48:37.463835Z",

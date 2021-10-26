@@ -62,6 +62,6 @@ Besoin d'aide ? Consultez la [documentation Flagsmith][4] ou [contactez l'assis
 
 [1]: https://www.flagsmith.com/
 [2]: https://app.datadoghq.com/account/settings#integrations/flagsmith
-[3]: https://app.datadoghq.com/account/settings#api
+[3]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: https://docs.flagsmith.com/integrations/datadog/
 [5]: https://docs.datadoghq.com/fr/help/

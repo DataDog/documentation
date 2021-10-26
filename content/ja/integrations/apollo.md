@@ -115,7 +115,7 @@ Apollo Datadog インテグレーションは、Studio に Datadog API キーと
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/apollo/images/metrics.png
 [2]: https://app.datadoghq.com/account/settings#integrations
-[3]: https://app.datadoghq.com/account/settings#api
+[3]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: https://www.apollographql.com/docs/studio/org/graphs/#viewing-graph-information
 [5]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/apollo/images/settings-link.png
 [6]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/apollo/images/settings-toggle.png

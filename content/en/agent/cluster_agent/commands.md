@@ -121,6 +121,6 @@ The following environment variables are supported:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/account/settings#api
+[1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: /agent/cluster_agent/event_collection/
 [3]: https://golang.org/pkg/expvar

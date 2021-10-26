@@ -231,7 +231,7 @@ A TCP endpoint is not supported for this region.
 {{< /site-region >}}
 
 
-[1]: https://app.datadoghq.com/account/settings#api
+[1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: https://app.datadoghq.com/logs/livetail
 {{% /tab %}}
 {{< /tabs >}}
@@ -273,7 +273,7 @@ For more information, see the complete [source code attributes documentation][11
 
 Once logs are collected and ingested, they are available in **Log Explorer**. Log Explorer is where you can search, enrich, and view alerts on your logs. See the [Log Explorer][12] documentation to begin analyzing your log data, or see the additional log management documentation below.
 
-{{< img src="logs/log_explorer_view.png" alt="Log Explorer view"  >}}
+{{< img src="logs/explore.jpg" alt="Log Explorer view"  >}}
 
 ## Further Reading
 
