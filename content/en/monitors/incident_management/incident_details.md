@@ -12,7 +12,7 @@ further_reading:
 <div class="alert alert-warning">Incident Management is not available on the Datadog {{< region-param key="dd_site_name" >}} site.</div>
 {{< /site-region >}}
 
-Every incident in Datadog has its own Incident Details page where you can manage your incident's property fields, signals, tasks, documents, responders, and notifications. An Incident Details page is available after you've [created a new incident][1]. The Incident Details page contains a global header for quick access to key actions, while the remaining body of the page is divided into different sections using tabs in order to group related incident data together. The first of these sections is the Overview.
+Every incident in Datadog has its own Incident Details page where you can manage your incident's property fields, signals, tasks, documents, responders, and notifications. An Incident Details page is available after you [create a new incident][1]. The Incident Details page contains a global header for quick access to key actions, while the remaining body of the page is divided into different sections using tabs to group related incident data together. The first of these sections is the Overview.
 
 ## Global header
 
@@ -33,7 +33,7 @@ By default, all incidents have the following properties:
 * Teams
 * Detection Method
 
-Additional property fields can be configured in your [Incident Settings][5] by using the `<KEY>:<VALUE>` pairs reporting in your Datadog metric tags. Assigning values to an incident's properties makes it easier to search for subsets of incidents on the [Incident Homepage][6] and to form queries when using [Incident Management Analytics][7].
+You can configure additional property fields in your [Incident Settings][5] by using the `<KEY>:<VALUE>` pairs reporting in your Datadog metric tags. Assigning values to an incident's properties makes it easier to search for subsets of incidents on the [Incident Homepage][6] and to form queries when using [Incident Management Analytics][7].
 
 If your incident is customer-facing, specify the details of the impact below the Properties section under the Impact heading:
 
@@ -70,13 +70,13 @@ By default, timeline cells are sorted in `oldest first` order, but this can be c
 
 {{< img src="monitors/incidents/incident_remediation.jpeg" alt="Incident Remediation Section" style="width:80%;">}}
 
-The Remediation section is place to store any documents or resources that are relevant to the remediation process of an incident, as well as an area to track key tasks for the remediation process. 
+Use the Remediation section to store any documents or resources that are relevant to the remediation process of an incident, as well as to track key tasks for the remediation process. 
 
 Documents can be added by pasting the document URL and giving the link a human-readable name for quick access.
 
 Incident tasks are created directly in the Remediation section, as well as through Datadog's [Slack integration][10]. 
 
-From the Remediation section, type in the description of your task in the creation text box. To assign a task to a Datadog user, type `@` in the description text box or by assigning it in the `Assignees` column after the task has been created. An incident task can have more than one assignee. After a task has been created, it can also be assigned a due date. 
+From the Remediation section, type the description of your task in the creation text box. To assign a task to a Datadog user, type `@` in the description text box, or use the `Assignees` column after the task has been created. An incident task can have more than one assignee. After a task has been created, it can also be assigned a due date. 
 
 As work for different tasks is finished, individual tasks can be marked as completed by clicking the checkbox to the left of the task's description. If you have a large number of tasks, you can filter them down by searching for key words or by hiding completed tasks from view.
 
@@ -84,12 +84,13 @@ As work for different tasks is finished, individual tasks can be marked as compl
 
 {{< img src="monitors/incidents/incident_notifications.jpeg" alt="Incident Notifications" style="width:80%;">}}
 
-The Notifications section is where all stakeholder notifications for an incident are consolidated. Manually sent notifications can be created, saved as drafts, and sent directly from this page. Automated notifications sent by [Notification Rules][11] for the incident in question are also listed in this section.
+All stakeholder notifications for an incident are consolidated in the Notifications section.
+You can manually create, save as draft, and send notifications directly from this page. Automated notifications sent by [Notification Rules][11] for the incident in question are also listed in this section.
 
 To create a manual notification: 
 
 1. Click the **+ New Notification** button in the top right of the section.
-2. Enter your desired recipients. These can be any notification handle supported by Datadog including emails, Slack channels, PagerDuty handles, Webhooks, etc.
+2. Enter your desired recipients. These can be any notification handles supported by Datadog including emails, Slack channels, PagerDuty handles, webhooks, etc.
 3. Select a [Message Template][12].
 4. Edit the title and message of your notification as necessary using Markdown and any supported incident template variable by typing `{{`. 
    - Template variables are based on the properties of an incident. Before a message is sent, all template variables are replaced by the corresponding value of the referenced property that is available to the message when it was sent.
@@ -106,7 +107,7 @@ Both lists display:
 
 The Sent list also displays if a notification was manually or automatically sent by a notification rule. If the notification was automated, the rule that triggered the notification is displayed.
 
-## Ready to try it out?
+## Getting started
 
 Work through an example workflow in the [Getting Started with Incident Management][13] guide.
 

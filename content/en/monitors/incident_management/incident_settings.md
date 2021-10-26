@@ -14,7 +14,7 @@ Use [Incident Settings][1] to customize aspects of the Incident Management exper
 
 ### Information
 
-The Information subsection of Incident Settings is used to define your organization's severity levels, status levels, and declare incident helper text.
+The Information subsection of Incident Settings is used to define your organization's severity levels and status levels, and to declare incident helper text.
 
 {{< img src="monitors/incidents/severity_settings.jpeg" alt="Incident Severity Level Settings" style="width:80%;">}}
 
@@ -23,7 +23,7 @@ Use severity level settings to:
 1. Define your most critical severity as `SEV-0` or `SEV-1` (defaults to `SEV-1`).
 2. Customize the sub-labels of your severities (**Defaults:** Critical, High, Moderate, Low, Minor)
 3. Customize the descriptions of your severities.
-4. Add or delete severities from the bottom of your list, with a minimum of 3 and a maximum of 10. 
+4. Add or delete severities from the bottom of your list, with a minimum of three and a maximum of ten. 
 
 **Note**: If you attempt to delete a severity that is referenced in a notification rule, you are prompted to confirm your decision. Choosing to proceed disables the impacted notification rules as they are no longer valid. Deleting a severity or changing the starting severity does not automatically update any [Incident Management Analytics][2] queries.
 
@@ -34,7 +34,7 @@ Use status level settings to:
 1. Customize the descriptions of the statuses.
 2. Choose whether to enable the optional `Completed` status.
 
-**Note**: Deleting the `Completed` status does not automatically update any incidents that are already in the `Completed` status, nor does it automatically update any [Incident Management Analytics][2] queries that explicitly reference it. Any notification rule that references the `Completed` status is disabled as they are no longer valid.
+**Note**: Deleting the `Completed` status does not automatically update any incidents that are already in the `Completed` status, nor does it automatically update any [Incident Management Analytics][2] queries that explicitly reference it. Any notification rule that references the `Completed` status is disabled, as that rule is no longer valid.
 
 {{< img src="monitors/incidents/helper_text_settings.jpeg" alt="Declare Incident Helper Text Settings" style="width:80%;">}}
 
@@ -53,7 +53,7 @@ Property fields are key pieces of metadata you can tag your incidents with. This
 
 If you have [Datadog APM][5] configured, the `Services` property field automatically leverages your APM Service names. To edit the values of `Services` or `Teams`, upload a CSV of the values you wish to associate with each field. Your CSV file must start with your field's name in the top row, with the desired values listed immediately below it.
 
-You can add more property fields to your settings by selecting one of your existing `key:value` pair [metric tags][6]. When you do this the key of your property field is the start case of your metric tag's key (each word is capitalized and separated by spaces) and the values for the property field are equal to the values reported by the metric tag.
+You can add more property fields to your settings by selecting one of your existing `key:value` pair [metric tags][6]. When you do this, the key of your property field is the start case of your metric tag's key (each word is capitalized and separated by spaces), and the values for the property field are equal to the values reported by the metric tag.
 
 ### Integrations
 
@@ -64,7 +64,7 @@ The integrations settings provide you with additional configurations for setting
 1. Enabling automatic Slack channel creation for every new incident
 2. Enabling the incident updates channel
 
-Both of these settings can be configured to use any Slack workspace you have configured in your organization's [Slack integration tile][8].
+You can configure either of these settings to use any Slack workspace you have configured in your organization's [Slack integration tile][8].
 
 The incident updates channel sends a message whenever an incident is declared or changes status, severity, or incident commander.
 
