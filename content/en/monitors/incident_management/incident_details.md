@@ -121,7 +121,7 @@ Work through an example workflow in the [Getting Started with Incident Managemen
 [4]: /monitors/incident_management/incident_settings#postmortem-templates
 [5]: https://app.datadoghq.com/incidents/settings#Property-Fields
 [6]: https://app.datadoghq.com/incidents
-[7]: /monitors/incident_management/incident_management_analytics
+[7]: /monitors/incident_management/analytics
 [8]: /integrations/slack/?tab=slackapplicationus#using-datadog-incidents
 [9]: https://app.datadoghq.com/organization-settings/public-sharing/settings
 [10]: /integrations/slack/?tab=slackapplicationus#manage-incident-tasks

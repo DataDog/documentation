@@ -132,7 +132,7 @@ To create a postmortem template:
 5. Click **Save**
 
 [1]: https://app.datadoghq.com/incidents/settings
-[2]: /monitors/incident_management/incident_management_analytics
+[2]: /monitors/incident_management/analytics
 [3]: /monitors/incident_management/#from-the-incidents-page
 [4]: https://app.datadoghq.com/incidents
 [5]: /tracing/
