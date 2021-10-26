@@ -11,6 +11,9 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/session-replay-datadog/'
       tag: 'Blog'
       text: 'Use Datadog Session Replay to view real-time user journeys'
+    - link: 'https://www.datadoghq.com/blog/reduce-customer-friction-funnel-analysis/'
+      tag: 'Blog'
+      text: 'Use funnel analysis to understand and optimize key user flows'
 ---
 
 ## Overview
