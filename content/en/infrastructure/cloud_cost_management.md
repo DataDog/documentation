@@ -25,7 +25,6 @@ Follow AWS instructions for [Creating Cost and Usage Reports][1], and select the
  
 Select the following Delivery options:
  
-* CS3 bucket location: `us-east-1 North Virginia`
 * Time granularity: **Hourly**
 * (Optional) Report versioning: **Create new report version**. Creating a new report for each run allows for some redundancy if errors occur during CUR creation, but it is not required by Datadog. If you do not want updated reports, select the other option.
 * Compression type: **GZIP**
