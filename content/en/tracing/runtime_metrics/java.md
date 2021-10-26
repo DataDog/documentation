@@ -37,11 +37,10 @@ If you are running the Agent as a container, ensure that `DD_DOGSTATSD_NON_LOCAL
 - For the runtime UI, `dd-trace-java` >= [`0.24.0`][6] is supported.
 - To associate JVM metrics within flame graphs, ensure the `env: tag` (case-sensitive) is set and matching across your environment.
 - For JVM metrics to appear on the service page when using Fargate, ensure that `DD_DOGSTATSD_TAGS` is set on your Agent task, and matches the `env: tag` of that service.
-- For application servers (ie: Tomcat or JBoss) that serve multiple sites, metrics will not be correlated with a specific site. To request support for this setup, [contact support][10].
 
 ## Data Collected
 
-The following metrics are collected by default after enabling JVM metrics.
+The following metrics are collected by default per JVM process after enabling JVM metrics.
 
 {{< get-metrics-from-git "java" >}}
 
@@ -62,4 +61,3 @@ Additional JMX metrics can be added using configuration files that are passed on
 [7]: https://app.datadoghq.com/dash/integration/256/jvm-runtime-metrics
 [8]: https://github.com/DataDog/integrations-core/search?q=jmx_metrics&unscoped_q=jmx_metrics
 [9]: /integrations/java/#configuration
-[10]: /help/
