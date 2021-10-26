@@ -1112,6 +1112,10 @@ main:
     url: infrastructure/livecontainers/
     parent: infrastructure
     weight: 5
+  - name: Cloud Cost
+    url: infrastructure/cloud_cost_management/
+    parent: infrastructure
+    weight: 6
   - name: Serverless
     url: serverless
     pre: serverless
