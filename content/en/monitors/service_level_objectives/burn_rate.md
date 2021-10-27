@@ -77,7 +77,7 @@ The maximum error rate that you can ever observe is 1 (for example, when 100% of
 max burn rate = 1 / (1 - SLO target)
 ```
 
-Thus, the lower your SLO target, the lower your maximum possible burn rate value is. If you were to attempt to set a burn rate threshold higher than this value, it would be impossible for the alert to ever trigger. Practically what this means is that if you set a burn rate alert’s condition to a value higher than the maximum determined by the above formula, you’re telling the burn rate alert to notify you when your SLO is seeing an error rate greater than 100% (which is impossible). Thus, to avoid unhelpful alerts from being accidentally created, Datadog will block the creation of burn rate alerts that attempt to set a burn rate value beyond their maximum.
+The lower your SLO target, the lower your maximum possible burn rate value. If you were to attempt to set a burn rate threshold higher than this value, it would be impossible for the alert to trigger. If you set a burn rate alert’s condition to a value higher than the maximum determined by the above formula, you’re telling the burn rate alert to notify you when your SLO is seeing an error rate greater than 100% (which is impossible). So, to avoid unhelpful alerts from being accidentally created, Datadog blocks the creation of burn rate alerts that set a burn rate value beyond their maximum.
 
 ## Picking burn rate values
 
