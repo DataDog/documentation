@@ -119,7 +119,7 @@ burn rate = (7 days * 24 hours * 10% error budget consumed) / (1 hour * 100%) = 
 4. Set an alert to trigger when a certain burn rate is measured during a specific long window:
    * The burn rate value must be in the range 0 < burn rate <= 1/(1 - SLO Target).
    * The long window value is limited to: `1 hour <= long window <= 48 hours`.
-   * In the UI the short window will automatically be calculated as: `short window = 1/12 * long window`
+   * In the UI the short window is automatically calculated as: `short window = 1/12 * long window`.
    * You can specify a different short window value using the API or Terraform (documented below) but it must always be less than the long window
 5. Add [Notification information][4] into the **Say what’s happening** and **Notify your team** sections.
 6. Click the "Save and Exit" button on the SLO configuration page.
