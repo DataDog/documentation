@@ -109,7 +109,7 @@ For example, for a 7-day SLO, to be alerted if the theoretical error budget cons
 burn rate = (7 days * 24 hours * 10% error budget consumed) / (1 hour * 100%) = 16.8
 ```
 
-**Note:** For metric-based SLOs, the relationship in Approach #2 extrapolates the total number of occurrences contained in the long window out to the full length of the SLO target. In practice the error budget consumption observed won’t correspond exactly to this relationship, as the total occurrences tracked by the metric-based SLO in a rolling window will likely differ throughout the day. A burn rate alert is meant to predict significant amounts of error budget consumption before they occur. For monitor-based SLOs, theoretical error budget consumption and actual error budget consumption are equal because time always moves at a constant rate (i.e. 60 minutes of monitor data will always be contained in the 1 hour long window).
+**Note:** For metric-based SLOs, the relationship in Approach #2 extrapolates the total number of occurrences contained in the long window out to the full length of the SLO target. In practice, the error budget consumption observed won’t correspond exactly to this relationship, as the total occurrences tracked by the metric-based SLO in a rolling window will likely differ throughout the day. A burn rate alert is meant to predict significant amounts of error budget consumption before they occur. For monitor-based SLOs, theoretical error budget consumption and actual error budget consumption are equal because time always moves at a constant rate . For example, 60 minutes of monitor data is aways contained in the 1 hour window.
 
 ## Monitor creation
 
