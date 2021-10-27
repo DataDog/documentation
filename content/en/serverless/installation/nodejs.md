@@ -120,7 +120,7 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
 
 [1]: https://docs.datadoghq.com/serverless/serverless_integrations/plugin
 [2]: /serverless/libraries_integrations/extension
-[3]: https://app.datadoghq.com/account/settings#api
+[3]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{% tab "AWS SAM" %}}
 
@@ -166,7 +166,7 @@ More information and additional parameters can be found in the [macro documentat
 [1]: https://docs.datadoghq.com/serverless/serverless_integrations/macro
 [2]: /serverless/libraries_integrations/extension
 [3]: https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html
-[4]: https://app.datadoghq.com/account/settings#api
+[4]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{% tab "AWS CDK" %}}
 
@@ -213,7 +213,7 @@ More information and additional parameters can be found in the [Datadog CDK NPM 
 
 [1]: https://www.npmjs.com/package/datadog-cdk-constructs
 [2]: https://github.com/DataDog/datadog-lambda-js/releases
-[3]: https://app.datadoghq.com/account/settings#api
+[3]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{% tab "Container Image" %}}
 
@@ -254,12 +254,11 @@ Replace `<TAG>` with either a specific version number (for example, `{{< latest-
 2. Set the following environment variables in AWS:
   - Set `DD_LAMBDA_HANDLER` to your original handler, for example, `myfunc.handler`.
   - Set `DD_TRACE_ENABLED` to `true`.
-  - Set `DD_FLUSH_TO_LOG` to `true`.
   - Set `DD_API_KEY` with your Datadog API key from the [API Management page][2].
 3. Optionally add `service` and `env` tags with appropriate values to your function.
 
 [1]: https://gallery.ecr.aws/datadog/lambda-extension
-[2]: https://app.datadoghq.com/account/settings#api
+[2]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{% tab "Terraform" %}}
 
@@ -267,7 +266,7 @@ Replace `<TAG>` with either a specific version number (for example, `{{< latest-
 
 1. Add the following configurations to the `aws_lambda_function` resources in your .tf files:
 
-{{< site-region region="us,us3,eu" >}}
+{{< site-region region="us,us3,us5,eu" >}}
 ```hcl
 variable "dd_api_key" {
   type        = string
@@ -327,7 +326,7 @@ resource "aws_lambda_function" "my_func" {
     terraform apply -var "dd_api_key=<DD_API_KEY>"
     ```
 
-[1]: https://app.datadoghq.com/account/settings#api
+[1]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{% tab "Custom" %}}
 
@@ -335,7 +334,7 @@ resource "aws_lambda_function" "my_func" {
 
 ### Install the Datadog Lambda library
 
-The Datadog Lambda Library can be imported either as a layer _OR_ as a JavaScript package.
+The Datadog Lambda Library can be imported either as a layer (recommended) _OR_ as a JavaScript package.
 
 The minor version of the `datadog-lambda-js` package always matches the layer version. E.g., datadog-lambda-js v0.5.0 matches the content of layer version 5.
 
@@ -343,7 +342,7 @@ The minor version of the `datadog-lambda-js` package always matches the layer ve
 
 [Configure the layers][1] for your Lambda function using the ARN in the following format:
 
-{{< site-region region="us,us3,eu" >}}
+{{< site-region region="us,us3,us5,eu" >}}
 
 ```
 arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:<VERSION>
@@ -359,7 +358,7 @@ arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:<VERSION
 
 The available `RUNTIME` options are `Node10-x` and `Node12-x`. The latest `VERSION` is `{{< latest-lambda-layer-version layer="node" >}}`. For example:
 
-{{< site-region region="us,us3,eu" >}}
+{{< site-region region="us,us3,us5,eu" >}}
 
 ```
 arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Node12-x:{{< latest-lambda-layer-version layer="node" >}}
@@ -376,16 +375,18 @@ arn:aws-us-gov:lambda:us-gov-east-1:002406178527::layer:Datadog-Node12-x:{{< lat
 
 #### Using the package
 
+If you cannot use the prebuilt Datadog Lambda layer, alternatively you can install the packages `datadog-lambda-js` and `dd-trace` using your favorite package manager.
+
 **NPM**:
 
 ```
-npm install --save datadog-lambda-js
+npm install --save datadog-lambda-js dd-trace
 ```
 
 **Yarn**:
 
 ```
-yarn add datadog-lambda-js
+yarn add datadog-lambda-js dd-trace
 ```
 
 See the [latest release][2].
@@ -395,7 +396,7 @@ See the [latest release][2].
 
 [Configure the layers][1] for your Lambda function using the ARN in the following format:
 
-{{< site-region region="us,us3,eu" >}}
+{{< site-region region="us,us3,us5,eu" >}}
 
 ```
 // For x86 lambdas
@@ -431,7 +432,7 @@ Follow these steps to configure the function:
 
 [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
 [2]: https://www.npmjs.com/package/datadog-lambda-js
-[3]: https://app.datadoghq.com/account/settings#api
+[3]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -505,6 +506,8 @@ exports.handler = async (event) => {
 
 For more information on custom metric submission, see [here][6]. For additional details on custom instrumentation, see the Datadog APM documentation for [custom instrumentation][7].
 
+If your Lambda function is running in a VPC, follow the [Datadog Lambda Extension AWS PrivateLink Setup][8] guide to ensure that the extension can reach Datadog API endpoints.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -516,3 +519,4 @@ For more information on custom metric submission, see [here][6]. For additional 
 [5]: /serverless/libraries_integrations/forwarder
 [6]: /serverless/custom_metrics?tab=nodejs
 [7]: /tracing/custom_instrumentation/nodejs/
+[8]: /serverless/guide/extension_private_link/

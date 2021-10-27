@@ -32,7 +32,7 @@ In Alcide, select the _Integrations_ tab and go to the _Detections Integrations 
 
 1. Select **HTTP API** as your target.
 
-2. In the URL box, enter `https://http-intake.logs.<DATADOG_SITE>/v1/input/<DATADOG_API_KEY>?ddsource=alcide`. Replace the placeholder value `<DATADOG_SITE>` with `datadoghq.com` for the US site, or with `datadoghq.eu` for the EU site. Replace the placeholder value `<DATADOG_API_KEY>` with your [Datadog API key][1].
+2. In the URL box, enter `https://http-intake.logs.<DATADOG_SITE>/api/v2/logs?dd-api-key=<DATADOG_API_KEY>&ddsource=alcide`. Replace the placeholder value `<DATADOG_SITE>` with `datadoghq.com` for the US site, or with `datadoghq.eu` for the EU site. Replace the placeholder value `<DATADOG_API_KEY>` with your [Datadog API key][1].
 
 3. Under _Entities Types_, select the types that you want to forward threat intel about. Datadog recommends selecting all of these.
 
@@ -46,11 +46,11 @@ Then, go to the _Selected Audit Entries Integration Configuration_ section, loca
 
 1. Select **HTTP API** as your target.
 
-2. In the URL box, enter `https://http-intake.logs.<DATADOG_SITE>/v1/input/<DATADOG_API_KEY>?ddsource=alcide`. Replace the placeholder value `<DATADOG_SITE>` with `datadoghq.com` for the US site, or with `datadoghq.eu` for the EU site. Replace the placeholder value `<DATADOG_API_KEY>` with your [Datadog API key][1].
+2. In the URL box, enter `https://http-intake.logs.<DATADOG_SITE>/api/v2/logs?dd-api-key=<DATADOG_API_KEY>&ddsource=alcide`. Replace the placeholder value `<DATADOG_SITE>` with `datadoghq.com` for the US site, or with `datadoghq.eu` for the EU site. Replace the placeholder value `<DATADOG_API_KEY>` with your [Datadog API key][1].
 
 ## Troubleshooting
 
 Need help? Contact [Datadog support][2].
 
-[1]: https://app.datadoghq.com/account/settings#api
+[1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: /help/

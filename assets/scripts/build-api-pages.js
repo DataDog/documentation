@@ -265,8 +265,10 @@ const filterJson = (actionType, data, parentExample = null, requiredKeys = [], l
 
         if (value.example) {
           if (typeof value.example === 'object') {
-            prefixType = '[';
-            suffixType = ']';
+            if (value.type === 'array' || value.example instanceof Array) {
+              prefixType = '[';
+              suffixType = ']';
+            }
           }
         }
 
@@ -335,35 +337,38 @@ const filterJson = (actionType, data, parentExample = null, requiredKeys = [], l
           }
         }
 
-        // choose the example to use
-        // parent -> current level -> one deep
-        let chosenExample = parentExample;
-        if (typeof value.example !== 'undefined') {
-          chosenExample = value.example;
-        } else if (value.items && typeof value.items.example !== 'undefined' && Object.keys(value.items.example).length !== 0) {
-          chosenExample = value.items.example;
-          prefixType = '[';
-          suffixType = ']';
-        }
-
         if (childData) {
           const [jstring, childRequiredKeyMatches] = filterJson(actionType, childData, value.example, childRequiredKeys, (level + 1));
           iterationHasRequiredKeyMatches = iterationHasRequiredKeyMatches || childRequiredKeyMatches;
-          if(actionType === "curl" && !iterationHasRequiredKeyMatches) {
+          if (actionType === "curl" && !iterationHasRequiredKeyMatches) {
             // skip output
           } else {
             jsondata += `"${key}": ${prefixType}${jstring}${suffixType},`;
           }
         } else {
+          // choose the example to use
+          // parent -> current level -> one deep
           let ex = '';
+          if (typeof value.example !== 'undefined') {
+            if (value.example instanceof Array) {
+              ex = outputExample(value.example, key);
+            } else {
+              ex = safeJsonStringify(value.example, null, 2);
+            }
+          } else if (value.items && typeof value.items.example !== 'undefined' && Object.keys(value.items.example).length !== 0) {
+            ex = outputExample(value.items.example, key);
+            prefixType = '[';
+            suffixType = ']';
+          } else {
+            ex = outputExample(parentExample, key);
+          }
           // bool causes us to not go in here so check for it
-          ex = outputExample(chosenExample, key);
-          if(actionType === 'curl') {
+          if (actionType === 'curl') {
             ex = ex || null;
           } else {
             ex = ex || outputValueType(value.type, value.format);
           }
-          if(actionType === "curl" && !iterationHasRequiredKeyMatches) {
+          if (actionType === "curl" && !iterationHasRequiredKeyMatches) {
 
           } else {
             jsondata += `"${key}": ${prefixType}${ex}${suffixType},`;
@@ -460,8 +465,8 @@ const outputExample = (chosenExample, inputkey) => {
           ex = `[${outputExample(item, inputkey)}]`;
         } else if(typeof item === 'object') {
           // output 1 level of example array
-          if(inputkey && item !== null && inputkey in item) {
-            if(item[inputkey] instanceof Array) {
+          if (inputkey && item !== null && inputkey in item) {
+            if (item[inputkey] instanceof Array) {
               ex = `[${outputExample(item[inputkey])}]`;
             } else {
               ex = `${outputExample(item[inputkey])}`;
@@ -479,6 +484,8 @@ const outputExample = (chosenExample, inputkey) => {
             ex = ex.slice(0, -1);
           }
         });
+      } else if (Object.keys(chosenExample).length !== 0 && !inputkey) {
+          ex = safeJsonStringify(chosenExample, null, 2);
       }
     } else {
       ex = outputValue(chosenExample);
@@ -752,7 +759,7 @@ const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, p
           if(typeof value.items === 'object') {
             if (value.items.properties) {
               childData = value.items.properties;
-              newRequiredFields = (value.items.required) ? value.items.required : newRequiredFields;
+              newRequiredFields = (value.items.required) ? value.items.required : [];
             }
             // for items -> oneOf
             if (value.items.oneOf && value.items.oneOf instanceof Array && value.items.oneOf.length < 20) {
@@ -769,7 +776,7 @@ const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, p
           }
         } else if(typeof value === 'object' && "properties" in value) {
           childData = value.properties;
-          newRequiredFields = (value.required) ? value.required : newRequiredFields;
+          newRequiredFields = (value.required) ? value.required : [];
         } else if (typeof value === 'object' && "additionalProperties" in value) {
           // check if `additionalProperties` is an empty object
           if(Object.keys(value.additionalProperties).length !== 0){

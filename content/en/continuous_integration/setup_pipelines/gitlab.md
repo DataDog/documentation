@@ -10,7 +10,7 @@ further_reading:
       text: "Troubleshooting CI"
 ---
 
-{{< site-region region="us,eu" >}}
+{{< site-region region="us,eu,us3" >}}
 ## Compatibility
 
 Supported GitLab versions:
@@ -103,7 +103,7 @@ Fill in the integration configuration settings:
 
 You can test the integration with the **Test settings** button (only available when configuring the integration on a project). After it's successful, click **Save changes** to finish the integration set up.
 
-{{< site-region region="us,eu" >}}
+{{< site-region region="us,eu,us3" >}}
 ## Integrating through webhooks
 
 As an alternative to using the native Datadog integration, you can use [webhooks][1] to send pipeline data to Datadog.
@@ -116,7 +116,7 @@ Go to **Settings > Webhooks** in your repository (or GitLab instance settings), 
 * **Secret Token**: leave blank
 * **Trigger**: Select `Job events` and `Pipeline events`.
 
-[1]: https://app.datadoghq.com/account/settings#api
+[1]: https://app.datadoghq.com/organization-settings/api-keys
 {{< /site-region >}}
 {{< site-region region="eu" >}}
 * **URL**: `https://webhook-intake.datadoghq.eu/api/v2/webhook/?dd-api-key=<API_KEY>` where `<API_KEY>` is [your Datadog API key][1].
@@ -124,6 +124,13 @@ Go to **Settings > Webhooks** in your repository (or GitLab instance settings), 
 * **Trigger**: Select `Job events` and `Pipeline events`.
 
 [1]: https://app.datadoghq.eu/account/settings#api
+{{< /site-region >}}
+{{< site-region region="us3" >}}
+* **URL**: `https://webhook-intake.us3.datadoghq.com/api/v2/webhook/?dd-api-key=<API_KEY>` where `<API_KEY>` is [your Datadog API key][1].
+* **Secret Token**: leave blank
+* **Trigger**: Select `Job events` and `Pipeline events`.
+
+[1]: https://us3.datadoghq.com/account/settings#api
 {{< /site-region >}}
 
 To set custom `env` or `service` parameters, add more query parameters in the webhooks URL: `&env=<YOUR_ENV>&service=<YOUR_SERVICE_NAME>`
@@ -143,11 +150,11 @@ After the integration is successfully configured, the [Pipelines][4] and [Pipeli
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /getting_started/site/
-[2]: https://app.datadoghq.com/account/settings#api
+[2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://docs.gitlab.com/ee/user/project/integrations/webhooks.html
 [4]: https://app.datadoghq.com/ci/pipelines
 [5]: https://app.datadoghq.com/ci/pipeline-executions
 {{< /site-region >}}
-{{< site-region region="us3,gov" >}}
+{{< site-region region="us5,gov" >}}
 The selected Datadog site ({{< region-param key="dd_site_name" >}}) is not supported at this time.
 {{< /site-region >}}

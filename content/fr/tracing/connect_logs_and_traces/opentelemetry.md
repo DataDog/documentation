@@ -6,12 +6,15 @@ further_reading:
   - link: /tracing/setup_overview/open_standards/
     tag: Documentation
     text: Envoyer vos traces OpenTelemetry à Datadog
-  - link: 'https://opentelemetry.io/docs/collector/'
+  - link: https://opentelemetry.io/docs/collector/
     tag: OpenTelemetry
     text: Documentation Collector
-  - link: 'https://www.datadoghq.com/blog/opentelemetry-instrumentation/'
+  - link: https://www.datadoghq.com/blog/opentelemetry-instrumentation/
     tag: Blog
     text: Partenariat de Datadog avec OpenTelemetry
+  - link: /logs/guide/ease-troubleshooting-with-cross-product-correlation/
+    tag: Guide
+    text: Bénéficiez de diagnostics simplifiés grâce à la mise en corrélation entre produits.
 ---
 Le processus d'association des logs et des traces pour les SDK OpenTelemetry est similaire à celui des [logs et des traces du SDK Datadog][1]. Vous devez simplement effectuer quelques étapes supplémentaires :
 
@@ -267,12 +270,58 @@ Pour toute question, contactez [l'assistance Datadog][2].
 
 {{< programming-lang lang="go" >}}
 
-Pour mettre en corrélation des traces et des logs en Go, modifiez les [exemples de SDK Datadog Go][1] en suivant les étapes supplémentaires présentées ci-dessus.
+Pour corréler manuellement vos traces avec vos logs, ajoutez au module de journalisation que vous utilisez une fonction qui convertit les `trace_id` and `span_id` du format OpenTelemetry au format Datadog. Voici un exemple avec la [bibliothèque logrus][1].
+
+```go
+package main
+
+import (
+    "context"
+    log "github.com/sirupsen/logrus"
+    "go.opentelemetry.io/otel"
+    "strconv"
+)
+
+func main() {
+    ctx := context.Background()
+    tracer := otel.Tracer("example/main")
+    ctx, span := tracer.Start(ctx, "example")
+    defer span.End()
+
+    log.SetFormatter(&log.JSONFormatter{})
+
+    standardFields := log.Fields{
+        "dd.trace_id": convertTraceID(span.SpanContext().TraceID().String()),
+        "dd.span_id":  convertTraceID(span.SpanContext().SpanID().String()),
+        "dd.service":  "serviceName",
+        "dd.env":      "serviceEnv",
+        "dd.version":  "serviceVersion",
+    }
+
+    log.WithFields(standardFields).WithContext(ctx).Info("hello world")
+}
+
+func convertTraceID(id string) string {
+    if len(id) < 16 {
+        return ""
+    }
+    if len(id) > 16 {
+        id = id[16:]
+    }
+    intValue, err := strconv.ParseUint(id, 16, 64)
+    if err != nil {
+        return ""
+    }
+    return strconv.FormatUint(intValue, 10)
+}
+
+
+```
 
 Pour toute question, contactez [l'assistance Datadog][2].
 
 
-[1]: /fr/tracing/connect_logs_and_traces/go/
+[1]: https://github.com/sirupsen/logrus
 [2]: /fr/help/
 {{< /programming-lang >}}
 

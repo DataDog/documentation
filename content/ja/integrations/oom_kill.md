@@ -18,6 +18,7 @@ git_integration_title: oom_kill
 guid: 4b8e9c18-1a13-43b0-a03c-186eb3221147
 integration_id: oom-kill
 integration_title: OOM Killer
+integration_version: ''
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com

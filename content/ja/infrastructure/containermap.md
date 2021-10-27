@@ -18,11 +18,11 @@ further_reading:
 
 外れ値の検出、使用パターンの識別、リソースの問題の回避、コンテナの最適な管理方法の決定などを 1 箇所で行うことができます。コンテナの数が 10 個でも 100 個でも 1 万個でも関係ありません。[オートディスカバリー][3]が、新しいコンテナとそのアカウントを自動的に検出します。
 
-{{< img src="infrastructure/containermap/containermap.png" alt="コンテナマップパート 1"  style="width:80%;">}}
+{{< img src="infrastructure/containermap/containermap.png" alt="コンテナマップパート 1" style="width:80%;">}}
 
 ## インストール
 
-[Agent][4] をデプロイしたら、それ以上の設定は不要です。[Docker Agent][5] ではなく標準インストールで Docker コンテナ情報を収集するには、`dd-agent` ユーザーが `docker.sock` へのアクセス許可を持つ必要があります（`dd-agent` を `docker` グループに追加することにより）。
+[Agent][4] をデプロイしたら、それ以上の設定は不要です。[Docker Agent][5] ではなく標準インストールで Docker コンテナ情報を収集するには、`dd-agent` ユーザーが `docker.sock` へのアクセス許可を持つ必要があります。アクセス許可は `dd-agent` を `docker` グループに追加することにより付与されます。
 
 ## その他の参考資料
 

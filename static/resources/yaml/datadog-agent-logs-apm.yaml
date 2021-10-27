@@ -1,3 +1,4 @@
+---
 # Source: datadog/templates/secret-api-key.yaml
 apiVersion: v1
 kind: Secret
@@ -45,7 +46,7 @@ spec:
     spec:
       containers:
         - name: agent
-          image: "gcr.io/datadoghq/agent:7.29.1"
+          image: "gcr.io/datadoghq/agent:7.31.1"
           imagePullPolicy: IfNotPresent
           command: ["agent", "run"]
           resources: {}
@@ -154,7 +155,7 @@ spec:
             successThreshold: 1
             timeoutSeconds: 5
         - name: trace-agent
-          image: "gcr.io/datadoghq/agent:7.29.1"
+          image: "gcr.io/datadoghq/agent:7.31.1"
           imagePullPolicy: IfNotPresent
           command: ["trace-agent", "-config=/etc/datadog-agent/datadog.yaml"]
           resources: {}
@@ -190,6 +191,8 @@ spec:
               value: "true"
             - name: DD_APM_RECEIVER_PORT
               value: "8126"
+            - name: DD_APM_RECEIVER_SOCKET
+              value: "/var/run/datadog/apm.socket"
             - name: DD_DOGSTATSD_SOCKET
               value: "/var/run/datadog/dsd.socket"
           volumeMounts:
@@ -213,7 +216,7 @@ spec:
               port: 8126
             timeoutSeconds: 5
         - name: process-agent
-          image: "gcr.io/datadoghq/agent:7.29.1"
+          image: "gcr.io/datadoghq/agent:7.31.1"
           imagePullPolicy: IfNotPresent
           command: ["process-agent", "-config=/etc/datadog-agent/datadog.yaml"]
           resources: {}
@@ -272,7 +275,7 @@ spec:
               readOnly: true
       initContainers:
         - name: init-volume
-          image: "gcr.io/datadoghq/agent:7.29.1"
+          image: "gcr.io/datadoghq/agent:7.31.1"
           imagePullPolicy: IfNotPresent
           command: ["bash", "-c"]
           args:
@@ -282,7 +285,7 @@ spec:
               mountPath: /opt/datadog-agent
           resources: {}
         - name: init-config
-          image: "gcr.io/datadoghq/agent:7.29.1"
+          image: "gcr.io/datadoghq/agent:7.31.1"
           imagePullPolicy: IfNotPresent
           command: ["bash", "-c"]
           args:
@@ -339,8 +342,14 @@ spec:
         - hostPath:
             path: /sys/fs/cgroup
           name: cgroups
-        - emptyDir: {}
+        - hostPath:
+            path: /var/run/datadog/
+            type: DirectoryOrCreate
           name: dsdsocket
+        - hostPath:
+            path: /var/run/datadog/
+            type: DirectoryOrCreate
+          name: apmsocket
         - name: s6-run
           emptyDir: {}
         - hostPath:

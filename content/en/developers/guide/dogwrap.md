@@ -48,4 +48,4 @@ dogwrap -n "Vacuuming mytable" -k $DATADOG_API_KEY --submit_mode errors "psql -c
 This calls the command at the end of the script and, if it exits with a non-zero exit code (like an error), sends Datadog events. Using `--submit_mode all` sends events on every run of this command.
 
 [1]: https://github.com/DataDog/datadogpy
-[2]: https://app.datadoghq.com/account/settings#api
+[2]: https://app.datadoghq.com/organization-settings/api-keys

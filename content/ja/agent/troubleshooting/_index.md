@@ -46,7 +46,7 @@ further_reading:
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://app.datadoghq.com/metric/explorer
 [3]: /ja/agent/proxy/
-[4]: https://app.datadoghq.com/account/settings#api
+[4]: https://app.datadoghq.com/organization-settings/api-keys
 [5]: /ja/agent/troubleshooting/site/
 [6]: /ja/agent/guide/agent-commands/#agent-status-and-information
 [7]: /ja/agent/guide/agent-log-files/

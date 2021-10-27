@@ -7,12 +7,13 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Surveillez des métriques clés Azure Data Lake Analytics.
-doc_link: 'https://docs.datadoghq.com/integrations/azure_data_lake_analytics/'
+doc_link: https://docs.datadoghq.com/integrations/azure_data_lake_analytics/
 draft: false
 git_integration_title: azure_data_lake_analytics
 has_logo: true
 integration_id: azure-datalakeanalytics
 integration_title: Microsoft Azure Data Lake Analytics
+integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'

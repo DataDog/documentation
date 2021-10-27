@@ -17,6 +17,7 @@ git_integration_title: lacework
 guid: 545f8c45-038b-41e5-ae13-8550c0ee563f
 integration_id: lacework
 integration_title: Lacework
+integration_version: ''
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
@@ -84,5 +85,5 @@ Lacework は、イベントを送信するように構成できます。
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 
 [1]: https://www.lacework.com/datadog/
-[2]: https://app.datadoghq.com/account/settings#api
+[2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://docs.datadoghq.com/ja/help/

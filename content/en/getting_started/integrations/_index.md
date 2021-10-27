@@ -192,7 +192,7 @@ tagging
 [14]: /agent/guide/integration-management/
 [15]: https://app.datadoghq.com/account/settings#agent
 [16]: /account_management/api-app-keys/
-[17]: https://app.datadoghq.com/account/settings#api
+[17]: https://app.datadoghq.com/organization-settings/api-keys
 [18]: /integrations/
 [19]: https://app.datadoghq.com/account/settings#agent/docker
 [20]: https://app.datadoghq.com/account/settings#agent/kubernetes

@@ -430,7 +430,7 @@ Use the [logstash-logback-encoder][4] logging library along with Logback to stre
 
     {{< /site-region >}}
 
-    {{< site-region region="us3" >}}
+    {{< site-region region="us3,us5" >}}
   Not supported.
     {{< /site-region >}}
     {{< site-region region="gov" >}}

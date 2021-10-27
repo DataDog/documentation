@@ -39,7 +39,7 @@ aliases:
 [1]: /ja/api/
 [2]: http://docs.python-guide.org/en/latest/starting/install/win
 [3]: /resources/python/api_query_data.py
-[4]: https://app.datadoghq.com/account/settings#api
+[4]: https://app.datadoghq.com/organization-settings/api-keys
 [5]: https://app.datadoghq.com/metric/summary
 [6]: https://app.datadoghq.com/infrastructure
 [7]: /ja/api/#rate-limiting
