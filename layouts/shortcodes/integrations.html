@@ -5,7 +5,7 @@
 {{ $integration_list := $integration_list | intersect (where $integration_list ".Section" "=" "integrations") }}
 {{ $integration_list := $integration_list | intersect (where $integration_list ".Params.beta" "!=" true) }}
 {{ $integration_list := $integration_list | intersect (where $integration_list ".Params.is_public" "=" true) }}
-{{ $integration_list := $integration_list | intersect (where $integration_list ".Params.placeholder" "!=" true) }}
+{{/* $integration_list := $integration_list | intersect (where $integration_list ".Params.placeholder" "!=" true) */}}
 {{ $integration_list := $integration_list | intersect (where $integration_list ".Params.integration_id" "!=" "datadog-agent") }}
 {{ $integration_list := sort $integration_list ".File.BaseFileName" }}
 
