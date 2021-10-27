@@ -2654,7 +2654,13 @@ main:
   - name: Session Replay
     url: real_user_monitoring/session_replay/
     parent: rum
+    identifier: rum_session_replay
     weight: 5
+  - name: Privacy Options
+    url: real_user_monitoring/session_replay/privacy_options
+    parent: rum_session_replay
+    identifier: rum_session_replay_privacy_options
+    weight: 501
   - name: Dashboards
     url: real_user_monitoring/dashboards/
     parent: rum
