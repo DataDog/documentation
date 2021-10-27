@@ -11,20 +11,6 @@
 
 <!-- build filters -->
 {{ $.Scratch.Set "filters" (slice)}}
-{{ range $index, $element := $integration_list }}
-    {{ $urlname := $element.File.TranslationBaseName }}
-    {{ $src := (print "images/integrations_logos/" ($urlname | lower) ".png")}}
-    {{ $indx :=  $src }}
-    {{ range $e := $element.Params.categories }}
-        {{ if and $indx (fileExists (print "static/" $src)) }}
-          {{ with $e }}
-            {{ if not (in ($.Scratch.Get "filters") (. | lower)) }}
-                {{ $.Scratch.Add "filters" (. | lower) }}
-            {{ end }}
-          {{ end }}
-        {{ end }}
-    {{ end }}
-{{ end }}
 
 <!-- build tiles -->
 {{- $s := newScratch -}}
@@ -60,6 +46,13 @@
   {{- $s.SetInMap $path "int_logo" $int_logo -}}
   {{ if $int_logo }}
     {{- $s.SetInMap "hits" $path ($s.Get $path) -}}
+    {{ range $e := $v.Params.categories }}
+      {{ with $e }}
+        {{ if not (in ($.Scratch.Get "filters") (. | lower)) }}
+            {{ $.Scratch.Add "filters" (. | lower) }}
+        {{ end }}
+      {{ end }}
+    {{ end }}
   {{ end }}
 {{- end -}}
 {{- $integrationData := ($s.GetSortedMapValues "hits") -}}
