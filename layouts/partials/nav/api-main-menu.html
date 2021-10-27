@@ -11,6 +11,7 @@
 {{ $menu := .Scratch.Get "menu" }}
 
 {{ $currentPage := . }}
+{{ $childMenuObject := dict }}
 
 <!-- set current english url. If url in menu doesn't start with /lang/ this lets us compare still  -->
 {{ $currentEnURL := $currentPage.RelPermalink }}
@@ -22,14 +23,21 @@
 {{ range $menu }}
     <!-- check if on /api/ top level section page, don't generate sub anchors if true -->
     {{ if and (.HasChildren) (ne $currentPage.CurrentSection.RelPermalink "/api/" ) }}
-        <li class="{{ if or ($currentPage.IsMenuCurrent $apiMenu .) ($currentPage.HasMenuCurrent $apiMenu .) (eq $currentEnURL .URL) }}active{{ end }}">
+        {{ range .Children }}
+            {{ if eq .URL $currentPage.RelPermalink }}
+                {{ $childMenuObject = . }}
+            {{ end }}
+        {{ end }}
+
+        <li class="{{ if or ($currentPage.IsMenuCurrent $apiMenu .) ($currentPage.HasMenuCurrent $apiMenu .) (eq $currentEnURL .URL) (eq $childMenuObject.Parent .Identifier) }}active{{ end }}">
             <a href="{{ (strings.TrimLeft "/" .URL) | absLangURL }}">
                 <span>{{ .Name }}</span>
             </a>
             <ul class="nav">
                 {{ range sort .Children ".Params.order" "asc"  }}
                     {{ $menuChild := . }}
-                    <li class="row nav-item {{ if $currentPage.IsMenuCurrent $apiMenu . }}active{{ end }}">
+
+                    <li class="row nav-item {{ if or ($currentPage.IsMenuCurrent $apiMenu .) (eq $menuChild.URL $currentPage.RelPermalink) }}active{{ end }}">
                         <a class="col nav-link d-inline-block" href="{{ if hasPrefix .URL "#" }}#{{ .Name | anchorize }}{{ else }}{{ (strings.TrimLeft "/" .URL) | absLangURL }}{{ end }}" data-target="#{{.Identifier}}">
                           <span class="d-inline-block">{{ .Name }}</span>
                         </a>
