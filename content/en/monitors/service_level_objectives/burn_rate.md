@@ -81,7 +81,7 @@ The lower your SLO target, the lower your maximum possible burn rate value. If y
 
 ## Picking burn rate values
 
-Picking burn rate values to alert off of depends on the target and time window your SLO uses. When you configure a burn rate alert your main focus should be on the burn rate threshold itself and the long window (Datadog recommends initially keeping the short window as 1/12 of the long window as Google suggests and to adjust the value if needed after using the alert in practice). Regardless of what approach you take, your maximum possible burn rate will be bounded by the relationship described in the previous section.
+Picking burn rate values to alert off of depends on the target and time window your SLO uses. When you configure a burn rate alert, your main focus should be on setting the burn rate threshold itself and setting the long window. Datadog recommends initially keeping the short window as 1/12 of the long window, as Google suggests, and then adjust the value if needed after using the alert. Your maximum possible burn rate will be bounded by the relationship described in the previous section.
 
 ### Approach #1: Time to error budget depletion
 
