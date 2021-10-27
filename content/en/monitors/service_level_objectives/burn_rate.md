@@ -126,7 +126,7 @@ burn rate = (7 days * 24 hours * 10% error budget consumed) / (1 hour * 100%) = 
 
 ### Examples
 
-Below are tables of Datadog’s recommended values for 7, 30 and 90-day targets. 
+Below are tables of Datadog’s recommended values for 7, 30, and 90-day targets. 
 
 **Note:**
 
