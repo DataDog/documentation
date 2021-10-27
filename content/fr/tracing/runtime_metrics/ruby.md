@@ -14,7 +14,7 @@ further_reading:
     text: Implémenter Opentracing dans vos applications
   - link: tracing/visualization/
     tag: Documentation
-    text: 'Explorer vos services, ressources et traces'
+    text: Explorer vos services, ressources et traces
 ---
 <div class="alert alert-warning">
 Cette fonctionnalité est actuellement en version bêta privée. <a href="https://docs.datadoghq.com/help/">Contactez l'assistance</a> afin de demander son activation pour votre compte.
@@ -32,22 +32,22 @@ require 'datadog/statsd'
 require 'ddtrace'
 
 Datadog.configure do |c|
-  # Pour activer la collecte de métriques, définir sur `true`. Valeur par défaut : `false`
+  # Pour activer la collecte de métriques runtime, définir sur `true`. Valeur par défaut : `false`
   # Vous pouvez aussi définir DD_RUNTIME_METRICS_ENABLED=true pour configurer ce paramètre.
-  c.runtime_metrics_enabled = true
+  c.runtime_metrics.enabled = true
 
-  # Facultatif : vous pouvez configurer l'instance DogStatsD utilisée pour envoyer les métriques runtime.
+  # Facultatif : vous pouvez configurer l'instance DogStatsD instance utilisée pour envoyer les métriques runtime.
   # DogStatsD est automatiquement configuré avec les paramètres par défaut si `dogstatsd-ruby` est disponible.
-  # Vous pouvez utiliser le host et le port de l'Agent Datadog pour la configuration. Valeur par défaut : 'localhost:8125'.
+  # Vous pouvez utiliser le host et le port de l'Azgent Datadog pour la configuration. Valeur par défaut : 'localhost:8125'.
   c.runtime_metrics statsd: Datadog::Statsd.new
 end
 ```
 
 Les métriques runtime peuvent être visualisées conjointement à vos services Ruby. Consultez la [page Service][3] dans Datadog.
 
-Par défaut, les métriques runtime de votre application sont envoyées à l'Agent Datadog via DogStatsD sur le port `8125`. Veillez à ce que [DogStatsD soit activé pour l'Agent][2].
+Par défaut, les métriques runtime de votre application sont envoyées à l'Agent Datadog par le biais de DogStatsD sur le port `8125`. Veillez à ce que [DogStatsD soit activé pour l'Agent][2].
 Si vous exécutez l'Agent en tant que conteneur, assurez-vous que `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` [est défini sur true][4] et que le port `8125` est ouvert sur l'Agent.
-Dans Kubernetes, [associez le port DogstatsD à un port du host][5] ; dans ECS, [indiquez les flags pertinents dans la définition de votre tâche][6].
+Dans Kubernetes, [associez le port DogstatsD à un port de host][5] ; dans ECS, [indiquez les flags pertinents dans la définition de votre tâche][6].
 
 ## Données collectées
 
