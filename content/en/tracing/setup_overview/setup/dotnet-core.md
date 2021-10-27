@@ -475,7 +475,7 @@ Your setup for custom instrumentation depends on your automatic instrumentation 
 {{% tab "Windows" %}}
 
 <div class="alert alert-warning">
-  <strong>Note:</strong> If you are using both automatic and custom instrumentation, you need to keep the package versions (for example: MSI and NuGet) in sync.
+  <strong>Note:</strong> If you are using both automatic and custom instrumentation, you must keep the package versions (for example: MSI and NuGet) in sync.
 </div>
 
 To use custom instrumentation in your .NET application:
@@ -490,7 +490,7 @@ To use custom instrumentation in your .NET application:
 {{% tab "Linux" %}}
 
 <div class="alert alert-warning">
-  <strong>Note:</strong> If you are using both automatic and custom instrumentation, you need to keep the package versions (for example, MSI and NuGet) in sync.
+  <strong>Note:</strong> If you are using both automatic and custom instrumentation, you must keep the package versions (for example, MSI and NuGet) in sync.
 </div>
 
 To use custom instrumentation in your .NET application:
@@ -515,7 +515,7 @@ For more information on adding spans and tags for custom instrumentation, see th
 
 ## Configuring process environment variables
 
-In order to attach automatic instrumentation to your service, you need to set the required environment variables before starting the application. See [Enable the tracer for your service](#enable-the-tracer-for-your-service) section to identify which environment variables you need to set based on your .NET Tracer installation method and follow the examples below to correctly set the environment variables based on the environment of your instrumented service.
+To attach automatic instrumentation to your service, you must set the required environment variables before starting the application. See [Enable the tracer for your service](#enable-the-tracer-for-your-service) section to identify which environment variables to set based on your .NET Tracer installation method and follow the examples below to correctly set the environment variables based on the environment of your instrumented service.
 
 ### Windows
 
