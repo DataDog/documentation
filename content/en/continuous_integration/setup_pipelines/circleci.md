@@ -14,7 +14,9 @@ further_reading:
 ---
 
 {{< site-region region="us5,gov" >}}
-This feature is not supported for the selected Datadog site ({{< region-param key="dd_site_name" >}}).
+<div class="alert alert-warning">
+The selected Datadog site ({{< region-param key="dd_site_name" >}}) is not supported.
+</div>
 {{< /site-region >}}
 
 {{< site-region region="us,eu,us3" >}}
@@ -36,11 +38,13 @@ The [Pipelines][4] and [Pipeline Executions][5] pages populate with data after t
 
 **Note**: The Pipelines page shows data for only the default branch of each repository.
 
+
 {{< /site-region >}}
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 [1]: https://circleci.com/
 [2]: https://circleci.com/docs/2.0/webhooks
 [3]: https://app.datadoghq.com/organization-settings/api-keys

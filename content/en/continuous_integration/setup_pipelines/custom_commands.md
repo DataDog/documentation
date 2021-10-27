@@ -2,13 +2,15 @@
 title: Adding Custom Commands to Pipeline Traces
 kind: documentation
 further_reading:
-    - link: "/continuous_integration/setup_pipelines/custom_commands/"
-      tag: "Documentation"
-      text: "Troubleshooting CI"
+  - link: "/continuous_integration/setup_pipelines/custom_commands/"
+    tag: "Documentation"
+    text: "Troubleshooting CI"
 ---
 
 {{< site-region region="us5,gov" >}}
-The selected Datadog site ({{< region-param key="dd_site_name" >}}) does not support this feature.
+<div class="alert alert-warning">
+The selected Datadog site ({{< region-param key="dd_site_name" >}}) is not supported.
+</div>
 {{< /site-region >}}
 
 {{< site-region region="us,eu,us3" >}}
@@ -79,19 +81,18 @@ The following environment variables are supported:
 : [Datadog API key][2] used to authenticate the requests.<br/>
 **Default**: (none)
 
-
-{{< site-region region="eu" >}}
 Additionally, configure the Datadog site to use the selected one ({{< region-param key="dd_site_name" >}}):
 
-`DATADOG_SITE` (Required)
-: The [Datadog site][1] to upload results to.<br/>
+`DATADOG_SITE`
+: The [Datadog site][3] to upload results to.<br/>
 **Default**: `datadoghq.com`<br/>
 **Selected site**: {{< region-param key="dd_site" code="true" >}}
 
-[1]: /getting_started/site/
 {{< /site-region >}}
 
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 [1]: https://www.npmjs.com/package/@datadog/datadog-ci
 [2]: https://app.datadoghq.com/organization-settings/api-keys
-{{< /site-region >}}
-
+[3]: /getting_started/site/

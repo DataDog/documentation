@@ -11,7 +11,9 @@ further_reading:
 ---
 
 {{< site-region region="us5,gov" >}}
-This feature is not supported for the selected Datadog site ({{< region-param key="dd_site_name" >}}).
+<div class="alert alert-warning">
+The selected Datadog site ({{< region-param key="dd_site_name" >}}) is not supported.
+</div>
 {{< /site-region >}}
 
 {{< site-region region="us,eu,us3" >}}
@@ -38,6 +40,7 @@ The [Pipelines][4] and [Pipeline Executions][5] pages populate with data after t
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 [1]: https://buildkite.com
 [2]: https://buildkite.com/docs/apis/webhooks
 [3]: https://app.datadoghq.com/organization-settings/api-keys
