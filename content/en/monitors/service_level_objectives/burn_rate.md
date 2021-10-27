@@ -82,7 +82,7 @@ For example, for a 7-day SLO, to be alerted if the theoretical error budget cons
    * The long window value is limited to: 1 hour <= long window <= 48 hours
    * In the UI the short window will automatically be calculated as: `short window = 1/12 * long window`
    * You can specify a different short window value using the API or Terraform (documented below) but it must always be less than the long window
-5. Add Notification information into the **Say what’s happening** and **Notify your team** sections.
+5. Add [Notification information][4] into the **Say what’s happening** and **Notify your team** sections.
 6. Click the "Save and Exit" button on the SLO configuration page.
 
 ### Examples
@@ -122,13 +122,13 @@ For 90-day targets:
 
 ### API and Terraform
 
-You can create SLO burn rate alerts using the [create-monitor API endpoint][5]. Below is an example query for a burn rate alert, which alerts when a burn rate of 14.4 is measured for the past hour and past 5 minutes. Replace *slo_id* with the alphanumeric ID of the SLO you wish to configure a burn rate alert on and replace *time_window* with one of 7d, 30d or 90d - depending on which target is used to configure your SLO:
+You can create SLO burn rate alerts using the [create-monitor API endpoint][6]. Below is an example query for a burn rate alert, which alerts when a burn rate of 14.4 is measured for the past hour and past 5 minutes. Replace *slo_id* with the alphanumeric ID of the SLO you wish to configure a burn rate alert on and replace *time_window* with one of 7d, 30d or 90d - depending on which target is used to configure your SLO:
 
 ```
 burn_rate("slo_id").over("time_window").long_window("1h").short_window("5m") > 14.4
 ```
 
-In addition, SLO burn rate alerts can also be created using the [datadog_monitor resource in Terraform][6]. Below is an example .tf for configuring a burn rate alert for a metric-based SLO using the same example query as above.
+In addition, SLO burn rate alerts can also be created using the [datadog_monitor resource in Terraform][7]. Below is an example .tf for configuring a burn rate alert for a metric-based SLO using the same example query as above.
 
 **Note:** SLO burn rate alerts are only supported in Terraform provider v2.7.0 or earlier and in provider v2.13.0 or later. Versions between v2.7.0 and v2.13.0 are not supported.
 
