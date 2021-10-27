@@ -10,6 +10,9 @@ further_reading:
 - link: "/logs/log_configuration/indexes/#exclusion-filters"
   tag: "Documentation"
   text: "Exclusion Filters"
+- link: "https://www.datadoghq.com/blog/online-archives-datadog/"
+  tag: "Blog"
+  text: "Historical log analysis and investigation with Online Archives"
 ---
 
 {{< site-region region="us3,us5,eu,gov" >}}

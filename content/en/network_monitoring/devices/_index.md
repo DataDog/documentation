@@ -18,6 +18,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datacenter-monitoring-dashboards/"
   tag: "Blog"
   text: "Monitor datacenters and network devices with Datadog"
+- link: "https://www.datadoghq.com/blog/network-device-monitoring/"
+  tag: "Blog"
+  text: "Introducing Network Device Monitoring"
 ---
 
 ## Overview
