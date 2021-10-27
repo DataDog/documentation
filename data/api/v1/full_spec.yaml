@@ -907,8 +907,10 @@ components:
           type: string
         is_read_only:
           default: false
+          deprecated: true
           description: Whether this dashboard is read-only. If True, only the author
-            and admins can make changes to it.
+            and admins can make changes to it. Prefer using `restricted_roles` to
+            manage write authorization.
           example: false
           type: boolean
         layout_type:
@@ -930,9 +932,7 @@ components:
           $ref: '#/components/schemas/DashboardReflowType'
         restricted_roles:
           description: A list of role identifiers. Only the author and users associated
-            with at least one of these roles can edit this dashboard. Overrides the
-            `is_read_only` property if both are present. **This feature is currently
-            in beta.**
+            with at least one of these roles can edit this dashboard.
           items:
             description: A role UUID.
             type: string
