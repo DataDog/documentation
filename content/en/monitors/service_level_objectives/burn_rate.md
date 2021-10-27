@@ -26,7 +26,7 @@ This relationship is represented by the following formula:
 length of SLO target / burn rate = time until error budget is fully consumed
 ```
 
-To measure the observed burn rate, a burn rate alert will use the recent “error rate” in its calculation. Note that “error rate” here just means the ratio of bad behavior over total behavior during a *given time period*:
+A burn rate alert will use the recent “error rate” in its calculation to measure the observed burn rate. Note that “error rate” means the ratio of bad behavior over total behavior during a *given period*:
 
 ```
 error rate = 1 - ((good behavior during time period) / (total behavior during time period))
