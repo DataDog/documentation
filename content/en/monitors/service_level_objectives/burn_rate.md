@@ -93,7 +93,7 @@ length of SLO target / burn rate = time until error budget is fully consumed
 
 Solve for burn rate and pick a time until the error budget is fully consumed that would qualify as a significant issue. 
 
-For the long window, think of a period of time that an elevated burn rate would have to be sustained for that would indicate a real issue is occurring rather than a minor transient issue. The higher the burn rate you select, the smaller a long window you should pair it with (so that high severity issues are caught sooner).
+For the long window, choose a period of time that an elevated burn rate would have to be sustained to indicate a real issue rather than a minor transient issue. The higher the burn rate you select, the smaller a long window you should pair it with (so that high severity issues are caught sooner).
 
 ### Approach #2: Theoretical error budget consumption
 
