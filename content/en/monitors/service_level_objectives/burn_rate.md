@@ -18,7 +18,7 @@ SLO burn rate alerts notify you when the rate of consumption of your SLO error b
 
 ## How Burn Rate Alerts work
 
-A burn rate is a unitless value [coined by Google][1] that indicates how fast your error budget is being consumed relative to the length of your SLO’s target. For example, for a 30-day target a burn rate of 1 means your error budget would be fully consumed in exactly 30 days if the rate of 1 was kept constant. A burn rate of 2 means the error budget would be exhausted in 15 days if kept constant, a burn rate of 3 means 10 days, etc.
+A burn rate is a unitless value [coined by Google][1] that indicates how fast your error budget is consumed relative to your SLO’s target length. For example, a 30-day target, a burn rate of 1 means your error budget would be fully consumed in exactly 30 days if the rate of 1 was kept constant. A burn rate of 2 means the error budget would be exhausted in 15 days if kept constant, and a burn rate of 3 means 10 days, etc.
 
 This relationship is represented by the following formula:
 
