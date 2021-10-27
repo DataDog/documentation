@@ -21,7 +21,7 @@ SLO error budget alerts are threshold based and notify you when a certain percen
 1. Navigate to the [SLO status page][3].
 2. Create a new SLO or edit an existing one, then click the **Save and Set Alert** button. For existing SLOs, you can also click the **Set up Alerts** button in the SLO detail side panel to take you directly to the alert configuration.
 3. Select the **Error Budget** tab in **Step 1: Setting alerting conditions**.
-4. Set an alert to trigger when the percentage of the error budget consumed is above the `threshold`
+4. Set an alert to trigger when the percentage of the error budget consumed is above the `threshold`.
 over the past `target` number of days.
 4. Add [Notification information][4] into the **Say what’s happening** and **Notify your team** sections.
 5. Click the ‘Save and Set Alert’ button on the SLO configuration page.
