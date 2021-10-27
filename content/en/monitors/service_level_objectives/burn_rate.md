@@ -32,7 +32,7 @@ A burn rate alert will use the recent “error rate” in its calculation to mea
 error rate = 1 - ((good behavior during time period) / (total behavior during time period))
 ```
 
-The units of “behavior” will differ depending on the type of SLO. Metric-based SLOs track the number of occurrences of something (e.g. number of successful or failed requests), while monitor-based SLOs track amounts of time (e.g. downtime & uptime of monitors).
+The units of “behavior” will differ depending on the type of SLO. Metric-based SLOs track the number of occurrences of something (like number of successful or failed requests), while monitor-based SLOs track amounts of time (like downtime and uptime of monitors).
 
 When you set a target for your SLO (like 99.9%), your error budget is the amount of unreliability you’re allowed to have:
 
