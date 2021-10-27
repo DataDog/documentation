@@ -45,12 +45,12 @@ main_left:
     url: 'https://www.datadoghq.com/product/code-profiling/'
     weight: 7
     parent: product
-  - identifier: 'ci-visibility'
-    name: 'CI Visibility'
-    pre: "<i class='icon-ci'></i>"
+  - identifier: ci-visibility
+    name: CI Visibility
+    pre: <i class='icon-ci'></i>
     url: 'https://www.datadoghq.com/product/ci-cd-monitoring/'
     weight: 8
-    parent: 'product'
+    parent: product
   - identifier: synthetics
     name: Synthetic Monitoring
     pre: <i class="icon-synthetics align-middle"></i>
@@ -69,12 +69,12 @@ main_left:
     url: 'https://www.datadoghq.com/product/network-monitoring/network-performance-monitoring/'
     weight: 11
     parent: product
-  - identifier: 'network-device'
-    name: 'Network Device Monitoring'
-    pre: "<i class='icon-ndm'></i>"
+  - identifier: network-device
+    name: Network Device Monitoring
+    pre: <i class='icon-ndm'></i>
     url: 'https://www.datadoghq.com/product/network-monitoring/network-device-monitoring/'
     weight: 12
-    parent: 'product'
+    parent: product
   - identifier: security-platform
     name: Security Platform
     pre: <i class="icon-security-platform align-middle"></i>
