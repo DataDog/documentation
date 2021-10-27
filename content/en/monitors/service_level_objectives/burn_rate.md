@@ -65,7 +65,7 @@ ALERT
 
 ## Maximum burn rate values
 
-As described in the previous section, the below formula is used to evaluate the observed burn rate for both the long window and short window: 
+As noted above, you can use this formula to evaluate the observed burn rate for both the long window and short window: 
 
 ```
 (error rate) / (1 - SLO target)
