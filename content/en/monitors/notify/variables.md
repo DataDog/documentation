@@ -431,6 +431,22 @@ The monitors link is customizable with additional parameters. The most common ar
 {{% /tab %}}
 {{< /tabs >}}
 
+### Dynamic handles
+
+Use [tag variables](#attribute-and-tag-variables) to dynamically build notification handles and route notifications to the team or service that makes the most sense based on the type of issue detected by your monitor. 
+
+**Example**: If your monitor queries a metric and groups it by a `service` tag, you can have your notifications routed to different Slack channels depending on the failing service:
+
+```text
+@slack-{{service.name}} There is an ongoing issue with {{service.name}}.
+```
+
+If your monitor starts failing on the `service:ad-server` group, the notification is sent to the `#ad-server` Slack channel with the following content:
+
+```text
+@slack-ad-server There is an ongoing issue with ad-server.
+```
+
 ### Comments
 
 To include a comment in the monitor message that only displays in the monitor edit screen, use the syntax:
