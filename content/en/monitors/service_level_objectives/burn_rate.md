@@ -155,7 +155,7 @@ For 90-day targets:
 | 10.8  | 6 hours  | 30 minutes  | 3%  |
 | 4.5  | 24 hours  | 120 minutes  | 5%  |
 
-**Recommendation:** If you find that your burn rate alert is consistently too flappy, this is an indication that you should make your short window slightly larger. However, note that the larger you make your short window, the slower the monitor will be in recovering after an issue has ended.
+**Recommendation:** If you find that your burn rate alert is consistently too flaky, this is an indication that you should make your short window slightly larger. However, note that the larger you make your short window, the slower the monitor will be in recovering after an issue has ended.
 
 ### API and Terraform
 
