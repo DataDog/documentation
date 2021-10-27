@@ -71,7 +71,7 @@ As noted above, you can use this formula to evaluate the observed burn rate for 
 (error rate) / (1 - SLO target)
 ```
 
-The maximum error rate that you can ever observe is 1 (i.e. when 100% of the total behavior is bad behavior during the given time period). As such there is a maximum possible burn rate value that you can use in your burn rate alerts: 
+The maximum error rate that you can ever observe is 1 (for example, when 100% of the total behavior is bad behavior during the given time period). This means that there is a maximum possible burn rate value that you can use in your burn rate alerts: 
 
 ```
 max burn rate = 1 / (1 - SLO target)
