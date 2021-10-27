@@ -433,7 +433,7 @@ The monitors link is customizable with additional parameters. The most common ar
 
 ### Dynamic handles
 
-Use [tag variables](#attribute-and-tag-variables) to dynamically build notification handles and route notifications to the team or service that makes the most sense based on the type of issue detected by your monitor. 
+Use [tag variables](#attribute-and-tag-variables) to dynamically build notification handles and route notifications to the right team or service based on the type of issue detected by your monitor. 
 
 **Example**: If your monitor queries a metric and groups it by a `service` tag, you can have your notifications routed to different Slack channels depending on the failing service:
 
