@@ -29,9 +29,9 @@ All Technology Partners can request a dedicated sandbox Datadog account to aid i
 
 Creating a developer sandbox may take up to one or two business days. Contact [Datadog Support][5] with any questions.
 
-Please note: if you are already a member of a Datadog organization (including a trial org), you may need to switch to your newly created sandbox, following the instructions on [switching between orgs][6].
+**Note:** If you are already a member of a Datadog organization (including a trial org), you may need to switch to your newly created sandbox, following the instructions on [switching between orgs][6].
 
-Finally, once your sandbox is created, you can [invite new members][30] from your organization that you'd like to collaborate with!
+Once your sandbox is created, you can [invite new members][30] from your organization that you'd like to collaborate with.
 
 ## Develop your integration or create a Marketplace tile only listing
 
