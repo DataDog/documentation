@@ -49,7 +49,7 @@ Masks most form fields such as inputs, text areas, and checkbox values while rec
 
 {{< img src="real_user_monitoring/session_replay/mask-user-input.png" alt="Mask user input mode" style="width:80%;">}}
 
-By default, `mask-user-input` is the privacy setting when you enable Session Replay.
+**Note:** By default, `mask-user-input` is the privacy setting when you enable Session Replay.
 
 {{% /tab %}}
 {{% tab "mask" %}}
