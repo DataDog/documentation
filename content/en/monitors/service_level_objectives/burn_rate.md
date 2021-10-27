@@ -10,7 +10,7 @@ This feature is in open beta. Email <a href="mailto:slo-help@datadoghq.com">slo-
 
 ## Overview
 
-SLO burn rate alerts notify you when the rate of consumption of your SLO’s error budget has exceeded your specified threshold and has been sustained for a specific period of time. For example, alert me if a burn rate of 14.4 or more is measured for the past hour and past 5 minutes for my SLO’s 30-day target. Warn me if a burn rate of 7.2 or more is observed (note: setting up a warning threshold is optional).
+SLO burn rate alerts notify you when the rate of consumption of your SLO error budget has exceeded your specified threshold and is sustained for a specific period of time. For example, you can set an alert if a burn rate of 14.4 or more is measured for the past hour over the past 5 minutes for your SLO’s 30-day target. And you can set it to optionally warn you for a slightly lower threshold than you would want an alert, for example if a burn rate of 7.2 or more is observed.
 
 **Note:** Burn rate alerts are only available for [metric-based SLOs][2] or for [monitor-based SLOs][3] that are only composed of Metric Monitor types (Metric, Integration, APM Metric, Anomaly, Forecast, or Outlier Monitors).
 
