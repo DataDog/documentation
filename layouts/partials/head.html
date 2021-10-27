@@ -15,6 +15,21 @@
     {{- partial "meta-http-equiv.html" . -}} 
   {{- end -}}
 
+  <!-- Language redirects needs to load as soon as possible on the page. -->
+  {{ $langRedirectsCompiled := "" }}
+  {{ $langRedirectsInput := "scripts/lang-redirects.js" }}
+  {{ $devOptions := dict "sourceMap" "external" }}
+  {{ $liveOptions := dict "sourceMap" "external" "minify" true }}
+  {{ $options := cond site.IsServer $devOptions $liveOptions }}
+
+  {{ if site.IsServer }}
+    {{ $langRedirectsCompiled = resources.Get $langRedirectsInput | js.Build $options }}
+  {{ else }}
+    {{ $langRedirectsCompiled = resources.Get $langRedirectsInput | js.Build $options | resources.Fingerprint "sha512" }}
+  {{ end }}
+
+  <script src="{{ $langRedirectsCompiled.RelPermalink }}" {{ if ne site.IsServer true }}integrity="{{ $langRedirectsCompiled.Data.Integrity }}"{{ end }}></script>
+
   {{- partial "canonical.html" . -}}
   {{- partial "noindex.html" . -}}
   {{- partial "hreflang.html" . -}}

@@ -1,7 +1,6 @@
 import './api-redirect';
 import './datadog-docs';
 import './region-redirects';
-import './lang-redirects';
 import './components/copy-code';
 import './components/global-modals';
 import './components/header';
