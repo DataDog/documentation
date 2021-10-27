@@ -122,7 +122,7 @@ burn rate = (7 days * 24 hours * 10% error budget consumed) / (1 hour * 100%) = 
    * In the UI the short window is automatically calculated as: `short window = 1/12 * long window`.
    * You can specify a different short window value using the [API or Terraform](#api-and-terraform), but it must always be less than the long window.
 5. Add [Notification information][4] into the **Say what’s happening** and **Notify your team** sections.
-6. Click the "Save and Exit" button on the SLO configuration page.
+6. Click the **Save and Exit** button on the SLO configuration page.
 
 ### Examples
 
