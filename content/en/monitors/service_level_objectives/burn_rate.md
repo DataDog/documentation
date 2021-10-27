@@ -88,7 +88,8 @@ For example, for a 7-day SLO, to be alerted if the theoretical error budget cons
 2. Create a new SLO or edit an existing one, then click the **Save and Set Alert** button. For existing SLOs, you can also click the **Set up Alerts** button in the SLO detail side panel to take you directly to the alert configuration.
 3. Select the **Burn Rate** tab in **Step 1: Setting alerting conditions**
 4. Set an alert to trigger when a certain burn rate is measured during a specific long window:
-   * The burn rate value must be in the range 0 < burn rate <= 1/(1 - SLO Target).
+   * The burn rate value must be in the range
+     {{< img src="monitors/service_level_objectives/burn-rate-range.jpeg" alt="Burn rate range">}}
    * The long window value is limited to: `1 hour <= long window <= 48 hours`.
    * In the UI the short window is automatically calculated as: `short window = 1/12 * long window`.
    * You can specify a different short window value using the [API or Terraform](#api-and-terraform), but it must always be less than the long window.
