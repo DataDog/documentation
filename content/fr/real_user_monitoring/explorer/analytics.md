@@ -6,9 +6,12 @@ aliases:
   - /fr/real_user_monitoring/rum_analytics
   - /fr/real_user_monitoring/analytics
 further_reading:
+  - link: https://www.datadoghq.com/blog/datadog-geomaps/
+    tag: Blog
+    text: Utilisez des coordonnées Geomap pour visualiser les données de votre application par localisation
   - link: /real_user_monitoring/explorer/search/
     tag: Documentation
-    text: Explorez vos vues dans Datadog
+    text: Explorer vos vues dans Datadog
 ---
 ## Présentation
 
@@ -110,6 +113,18 @@ Visualisez la liste des valeurs les plus élevées d'une [facette][1] en fonctio
  Le tableau RUM Analytics suivant affiche les **5 principaux chemins URL** consultés pour **deux pays**, les États-Unis et le Japon, selon le nombre d'**ID de session uniques** ainsi que le 90e centile de **durée** au cours du dernier jour :
 
 {{< img src="real_user_monitoring/explorer/analytics/rum_table_example.png" alt="exemple de tableau RUM" style="width:90%;">}}
+
+[1]: /fr/real_user_monitoring/rum_explorer/?tab=facets#facets-measures
+[2]: /fr/real_user_monitoring/rum_explorer/?tab=measures#facets-measures
+{{% /tab %}}
+
+{{% tab "Geomap" %}}
+
+Visualisez une [mesure][1] unique (ou un total de valeurs uniques d'une [facette][2]) sur une carte du monde.
+
+La géomap analytique RUM ci-dessous affiche le 75e centile de la mesure **Largest Contentful Paint** au cours des 24 dernières heures :
+
+{{< img src="real_user_monitoring/explorer/analytics/rum_geomap_example.png" alt="Exemple geomap RUM" style="width:90%;">}}
 
 [1]: /fr/real_user_monitoring/rum_explorer/?tab=facets#facets-measures
 [2]: /fr/real_user_monitoring/rum_explorer/?tab=measures#facets-measures
