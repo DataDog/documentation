@@ -16,7 +16,7 @@ further_reading:
 ---
 Datadog の Prometheus または OpenMetrics チェックをお使いの場合に、これらのメトリクスが既存の Datadog メトリクスタイプにどのようにマッピングされるかをご説明します。
 
-詳細は、[Prometheus および OpenMetrics メトリクスの収集に関するドキュメント][1]を参照してください。
+詳細は、[Kubernetes Prometheus および OpenMetrics メトリクスの収集][1]を参照してください。
 
 ## Prometheus および OpenMetrics メトリクスのタイプ
 
@@ -27,7 +27,7 @@ Datadog の Prometheus または OpenMetrics チェックをお使いの場合�
 
 ## Datadog メトリクスにおける Prometheus/OpenMetrics メトリクスのマッピング方法
 
-Datadog のメトリクスタイプの詳細については、[Datadog メトリクスタイプのドキュメント][2]を参照してください。
+詳細は、[Datadog メトリクスタイプ][2]を参照してください。
 
 ### Counter
 

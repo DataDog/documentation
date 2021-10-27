@@ -273,6 +273,7 @@ build_live:
     - in-isolation deploy_live
     - create_artifact
     - create_artifact_untracked
+    - remove_static_from_repo
   artifacts:
     when: on_success
     paths:

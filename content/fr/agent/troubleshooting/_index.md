@@ -46,7 +46,7 @@ Si vous n'avez toujours pas résolu votre problème, vous pouvez contacter l'[é
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://app.datadoghq.com/metric/explorer
 [3]: /fr/agent/proxy/
-[4]: https://app.datadoghq.com/account/settings#api
+[4]: https://app.datadoghq.com/organization-settings/api-keys
 [5]: /fr/agent/troubleshooting/site/
 [6]: /fr/agent/guide/agent-commands/#agent-status-and-information
 [7]: /fr/agent/guide/agent-log-files/

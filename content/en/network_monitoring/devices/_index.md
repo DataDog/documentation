@@ -6,6 +6,9 @@ description: Gain visibility into your network-connected devices, such as router
 aliases:
     - /network_performance_monitoring/devices/
 further_reading:
+- link: "https://www.datadoghq.com/knowledge-center/network-monitoring/snmp-monitoring/"
+  tag: "Knowledge Center"
+  text: "SNMP Monitoring Overview"
 - link: "https://www.datadoghq.com/blog/monitor-snmp-with-datadog/"
   tag: "Blog"
   text: "Monitor SNMP with Datadog"
@@ -15,6 +18,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datacenter-monitoring-dashboards/"
   tag: "Blog"
   text: "Monitor datacenters and network devices with Datadog"
+- link: "https://www.datadoghq.com/blog/network-device-monitoring/"
+  tag: "Blog"
+  text: "Introducing Network Device Monitoring"
 ---
 
 ## Overview

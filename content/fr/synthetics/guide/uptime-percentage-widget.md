@@ -77,6 +77,6 @@ Créez un [test API Synthetic][3] pour `http://example.com/` :
 [2]: /fr/dashboards/widgets/slo/
 [3]: https://app.datadoghq.com/synthetics/list
 [4]: https://dd-corpsite.datadoghq.com/synthetics/create
-[5]: /fr/monitors/notifications/
+[5]: /fr/monitors/notify/
 [6]: https://app.datadoghq.com/slo/new
 [7]: https://app.datadoghq.com/dashboard/lists

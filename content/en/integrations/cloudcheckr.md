@@ -32,5 +32,5 @@ To bind your Datadog account to your CloudCheckr account:
 
 Learn more about [Better rightsizing your cloud resources with the Datadog CloudCheckr][2] on the Datadog blog.
 
-[1]: https://app.datadoghq.com/account/settings#api
+[1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: https://www.datadoghq.com/blog/rightsizing-cloudcheckr

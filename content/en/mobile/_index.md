@@ -8,6 +8,9 @@ further_reading:
 - link: "/dashboards/"
   tag: "Documentation"
   text: "Dashboards"
+- link: "https://www.datadoghq.com/blog/datadog-mobile-widgets/"
+  tag: "Blog"
+  text: "Improve your on-call experience with Datadog mobile dashboard widgets"
 ---
 
 The Datadog Mobile app enables you to view alerts from Datadog on your mobile device. When receiving an alert via Slack, e-mail, Pagerduty or other pager apps, you'll be able to investigate issues by opening monitor graphs and dashboards on your mobile device.
