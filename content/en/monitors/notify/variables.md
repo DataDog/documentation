@@ -373,6 +373,22 @@ See the [list of tz database time zones][6], particularly the TZ database name c
 
 ## Advanced
 
+### Dynamic handles
+
+Use [tag variables](#attribute-and-tag-variables) to dynamically build notification handles and route notifications to the right team or service based on the type of issue detected by your monitor. 
+
+**Example**: If your monitor queries a metric and groups it by a `service` tag, you can have your notifications routed to different Slack channels depending on the failing service:
+
+```text
+@slack-{{service.name}} There is an ongoing issue with {{service.name}}.
+```
+
+If your monitor starts failing on the `service:ad-server` group, the notification is sent to the `#ad-server` Slack channel with the following content:
+
+```text
+@slack-ad-server There is an ongoing issue with ad-server.
+```
+
 ### Dynamic links
 
 Use [tag variables](#attribute-and-tag-variables) to enable dynamic URL building that links your team to an appropriate resource. For example, you can provide links to pages within Datadog such as dashboards, the host map, and monitors.
@@ -430,22 +446,6 @@ The monitors link is customizable with additional parameters. The most common ar
 [1]: /monitors/create/types/
 {{% /tab %}}
 {{< /tabs >}}
-
-### Dynamic handles
-
-Use [tag variables](#attribute-and-tag-variables) to dynamically build notification handles and route notifications to the right team or service based on the type of issue detected by your monitor. 
-
-**Example**: If your monitor queries a metric and groups it by a `service` tag, you can have your notifications routed to different Slack channels depending on the failing service:
-
-```text
-@slack-{{service.name}} There is an ongoing issue with {{service.name}}.
-```
-
-If your monitor starts failing on the `service:ad-server` group, the notification is sent to the `#ad-server` Slack channel with the following content:
-
-```text
-@slack-ad-server There is an ongoing issue with ad-server.
-```
 
 ### Comments
 
