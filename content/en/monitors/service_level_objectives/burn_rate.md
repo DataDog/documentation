@@ -131,7 +131,7 @@ Below are tables of Datadog’s recommended values for 7, 30 and 90-day targets.
 **Note:**
 
 1. The below examples assume a 99.9% target, but they are reasonable for targets as low as 96% (max burn rate for 96% is 25). However, if you are using lower targets you may require lower thresholds as described in Maximum Burn Rate Values, in which case it is recommended that you use Approach #2 with either a smaller value for theoretical error budget consumed or a higher value for the long window.
-2. For metric-based SLOs, the theoretical error budget consumed is calculated by extrapolating the number of total occurrences observed in the long alerting window out to the total length of the SLO target. 
+- For metric-based SLOs, the theoretical error budget consumed is calculated by extrapolating the number of total occurrences observed in the long alerting window out to the total length of the SLO target. 
 
 For 7-day targets:
 
