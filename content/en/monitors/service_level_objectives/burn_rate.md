@@ -40,7 +40,7 @@ When you set a target for your SLO (like 99.9%), your error budget is the amount
 error budget = 100% - SLO Target
 ```
 
-In other words, your error budget (in fractional form) is the ideal error rate you should be maintaining. Thus, a burn rate can alternatively be interpreted as a multiplier of your ideal error rate. For example, for a 99.9% SLO over 30 days, if the SLO is experiencing a burn rate of 10 that means the error budget is on pace to be completely depleted in 3 days and that the observed error rate is 10 times the ideal error rate: 
+In other words, your error budget (in fractional form) is the ideal error rate you should be maintaining. So, a burn rate can alternatively be interpreted as a multiplier of your ideal error rate. For example, for a 99.9% SLO over 30 days, if the SLO is experiencing a burn rate of 10 that means the error budget is on pace to be completely depleted in 3 days and that the observed error rate is 10 times the ideal error rate: 
 
 ```
 burn rate * ideal error rate = observed error rate
