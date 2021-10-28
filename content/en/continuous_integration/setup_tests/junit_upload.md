@@ -164,7 +164,7 @@ There are some special tags that are used to identify the configuration of the e
 
 You can specify these special tags using the `--tags` parameter when calling `datadog-ci junit upload`, or by setting the `DD_TAGS` environment variable.
 
-All tags are optional, and only the provided ones will be used to differentiate between environment configurations.
+All of these tags are optional, and only the ones you specify will be used to differentiate between environment configurations.
 
 `os.platform`
 : Name of the operating system.<br/>
