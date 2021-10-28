@@ -121,7 +121,7 @@ package gpg-pubkey-fd4bf915 is not installed
 [2]: https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
 [3]: https://keys.datadoghq.com/DATADOG_APT_KEY_382E94DE.public
 [4]: https://keys.datadoghq.com/DATADOG_APT_KEY_F14F620E.public
-[5]: https://app.datadoghq.com/account/settings#agent
+[5]: https://s3.amazonaws.com/dd-agent/scripts/install_script.sh
 [6]: https://github.com/DataDog/chef-datadog
 [7]: https://github.com/DataDog/ansible-datadog
 [8]: https://github.com/DataDog/puppet-datadog-agent
