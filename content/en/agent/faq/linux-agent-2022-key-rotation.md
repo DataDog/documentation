@@ -46,6 +46,8 @@ Run the following commands on the host:
 ```bash
 $ curl -o /tmp/DATADOG_APT_KEY_F14F620E https://keys.datadoghq.com/DATADOG_APT_KEY_F14F620E.public
 $ sudo apt-key add /tmp/DATADOG_APT_KEY_F14F620E
+$ cat /tmp/DATADOG_APT_KEY_F14F620E | sudo gpg --import --batch --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg
+$ sudo chmod a+r /usr/share/keyrings/datadog-archive-keyring.gpg
 ```
 
 {{% /tab %}}
@@ -63,17 +65,10 @@ $ sudo rpm --import /tmp/DATADOG_RPM_KEY_FD4BF915
 
 ## Check if a host trusts the new GPG key
 
-
 {{< tabs >}}
 {{% tab "Debian/Ubuntu" %}}
 
-Run the following commands on the host:
-
-```bash
-$ apt-key list
-```
-
-And check the output for Datadog's key fingerprint ending in `F14F620E` or (with a space) `F14F 620E`.
+If the file `/usr/share/keyrings/datadog-archive-keyring.gpg` exists, the new key is trusted and no further action is needed.
 
 {{% /tab %}}
 {{% tab "RedHat/CentOS/SUSE" %}}
