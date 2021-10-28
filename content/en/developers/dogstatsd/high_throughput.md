@@ -517,7 +517,7 @@ with v3.6.0 of the Go client when `WithChannelMode()` is enabled.
 `datadog.dogstatsd.client.aggregated_context`
 : **Metric type**: count<br>
 The total number of contexts flushed by the client when client side aggregation is enabled. Starting v5.0.0 of the Go
-client. This metric is reported only when the aggregation is enabled (which is it by default).
+client. This metric is reported only when the aggregation is enabled (which is the default).
 
 `datadog.dogstatsd.client.aggregated_context_by_type`
 : **Metric type**: count<br>
