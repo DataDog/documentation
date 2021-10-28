@@ -42,7 +42,7 @@ Here are some example datagrams:
 - `users.online:1|c|#country:china`: Increment the active users COUNT metric and tag by country of origin.
 - `users.online:1|c|@0.5|#country:china`: Track active China users and use a sample rate.
 
-### DogStatsD protocol 1.1
+### DogStatsD protocol v1.1
 
 Starting with the Agent `>=v6.25.0` && `<v7.0.0` or `>=v7.25.0`, value packing is possible. This
 is supported for all metric types except `SET`. Values are separated by a `:`, for example:
