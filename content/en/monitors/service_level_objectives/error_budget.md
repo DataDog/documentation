@@ -1,7 +1,7 @@
 ---
 title: Error Budget Alerts
 kind: documentation
-description: "Use Monitors to alert off of Service Level Objectives"
+description: "Use Monitors to alert off of the error budget consumption of an SLO"
 ---
 
 <div class="alert alert-warning">
@@ -19,19 +19,18 @@ SLO error budget alerts are threshold based and notify you when a certain percen
 ## Monitor creation
 
 1. Navigate to the [SLO status page][3].
-2. Create a new SLO or edit an existing one, then click the ‘Save and Set Alert’ button. For existing SLOs, you can also click the “Enable Alerts” link in the SLO detail side panel to take you directly to the alert configuration.
-3. Set an alert to trigger when the percentage of the error budget consumed is above the `threshold`
+2. Create a new SLO or edit an existing one, then click the **Save and Set Alert** button. For existing SLOs, you can also click the **Set up Alerts** button in the SLO detail side panel to take you directly to the alert configuration.
+3. Select the **Error Budget** tab in **Step 1: Setting alerting conditions**.
+4. Set an alert to trigger when the percentage of the error budget consumed is above the `threshold`.
 over the past `target` number of days.
 4. Add [Notification information][4] into the **Say what’s happening** and **Notify your team** sections.
 5. Click the ‘Save and Set Alert’ button on the SLO configuration page.
-
-**Note:** Clicking the `New Condition` button adds an optional warning condition. The warning threshold must be less than the alert threshold.
 
 {{< img src="monitors/service_level_objectives/save_set_alert.png" alt="Save SLO and set up an error budget alert">}}
 
 ### API and Terraform
 
-You can create SLO error budget alerts using the [create-monitor API endpoint][5]. Below is an example query for an SLO monitor, which alerts when more than 75% of the error budget of an SLO is consumed:
+You can create SLO error budget alerts using the [create-monitor API endpoint][5]. Below is an example query for an SLO monitor, which alerts when more than 75% of the error budget of an SLO is consumed. Replace *slo_id* with the alphanumeric ID of the SLO you wish to configure a burn rate alert on and replace *time_window* with one of 7d, 30d or 90d - depending on which target is used to configure your SLO:
 
 ```
 error_budget("slo_id").over("time_window") > 75
@@ -58,13 +57,10 @@ resource "datadog_monitor" "metric-based-slo" {
 }
 ```
 
-Replace `slo_id` with the alphanumeric ID of the metric-based SLO you wish to configure an error budget alert on and replace `time_window` with one of `7d`, `30d` or `90d`- depending on which target is used to configure your metric-based SLO.
-
 ## Beta restrictions
 
 - Alerting is available only for metric-based SLOs or for monitor-based SLOs that are only composed of Metric Monitor types (Metric, Integration, APM Metric, Anomaly, Forecast, or Outlier Monitors).
 - The alert status of an SLO monitor is available in the **Alerts** tab in the SLO’s detail panel or the [Manage Monitors][7] page.
-- You can only set one alert per SLO (target + time window) in the UI, but you can set multiple alerts per SLO using the API or Terraform.
 
 [1]: /monitors/service_level_objectives/metric/
 [2]: /monitors/service_level_objectives/monitor/

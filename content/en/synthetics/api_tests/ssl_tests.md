@@ -21,11 +21,11 @@ further_reading:
 
 SSL tests allow you to proactively monitor the validity and expiration of your SSL/TLS certificates to ensure secure connections between your key services and users. If your certificate is about to expire or becomes compromised, Datadog sends you an alert with details on the failure, allowing you to quickly pinpoint the root cause of the issue and fix it.
 
-SSL tests can run from both [managed][1] and [private locations][2] depending on your preference for running the test from outside or inside your network. SSL tests can run on a schedule, on-demand, or directly within your [CI/CD pipelines][15].
+SSL tests can run from both [managed][1] and [private locations][2] depending on your preference for running the test from outside or inside your network. SSL tests can run on a schedule, on-demand, or directly within your [CI/CD pipelines][3].
 
 ## Configuration
 
-After choosing to create a [`SSL` test][3], define your test's request.
+After choosing to create a [`SSL` test][4], define your test's request.
 
 ### Define request
 
@@ -43,7 +43,7 @@ After choosing to create a [`SSL` test][3], define your test's request.
   ```
 
 3. **Name** your SSL test.
-4. Add `env` **Tags** as well as any other tag to your SSL test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][4].
+4. Add `env` **Tags** as well as any other tag to your SSL test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][5].
 5. Select the **Locations** to run your SSL test from. SSL tests can run from both [managed][1] and [private locations][2] depending on whether you want to monitor certificates from outside or inside your network.
 
 Click on **Test URL** to try out the request configuration. You should see a response preview show up on the right side of your screen.
@@ -56,7 +56,7 @@ SSL tests can run:
 
 {{< img src="synthetics/api_tests/schedule.png" alt="Run API tests on schedule"  style="width:90%;" >}}
 
-* [**Within your CI/CD pipelines**][5].
+* [**Within your CI/CD pipelines**][3].
 
 * **On-demand** to run your tests whenever makes the most sense for your teams.
 
@@ -140,7 +140,7 @@ You can create local variables by clicking on **Create Local Variable** at the t
 
 ### Use variables
 
-You can use the [global variables defined in the `Settings`][11] and the [locally defined variables](#create-local-variables) in the URL, Advanced Options, and assertions of your HTTP tests.
+You can use the [global variables defined in the `Settings`][11] and the [locally defined variables](#create-local-variables) in the URL, Advanced Options, and assertions of your SSL tests.
 
 To display your list of variables, type `{{` in your desired field:
 
@@ -179,9 +179,9 @@ If you have access to the [custom role feature][14], add your user to any custom
 
 [1]: /api/v1/synthetics/#get-all-locations-public-and-private
 [2]: /synthetics/private_locations
-[3]: /synthetics/api_tests/ssl_tests
-[4]: /synthetics/search/#search
-[5]: /synthetics/cicd_testing
+[3]: /synthetics/cicd_testing
+[4]: /synthetics/api_tests/ssl_tests
+[5]: /synthetics/search/#search
 [6]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
 [7]: /api/latest/synthetics/#edit-an-api-test
 [8]: /monitors/notify/?tab=is_alert#notification
@@ -191,4 +191,3 @@ If you have access to the [custom role feature][14], add your user to any custom
 [12]: /synthetics/api_tests/errors/#ssl-errors
 [13]: /account_management/rbac/
 [14]: /account_management/rbac#custom-roles
-[15]: /synthetics/cicd_testing

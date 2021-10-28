@@ -21,11 +21,11 @@ further_reading:
 
 TCP tests allow you to monitor whether or not low-level TCP connections can be established on the ports of given hosts, ensuring the availability of several key services such as `SSH` (22), `SMTP` (25), `DNS` (53), VPN over `HTTPS` (443), and any custom services living on other ports. With built-in response time data, track the performance of your network applications and receive alerts in case of unexpected slowness.
 
-TCP tests can run from both [managed][1] and [private locations][2] depending on your preference for running the test from outside or inside your network. TCP tests can run on a schedule, on-demand, or directly within your [CI/CD pipelines][13].
+TCP tests can run from both [managed][1] and [private locations][2] depending on your preference for running the test from outside or inside your network. TCP tests can run on a schedule, on-demand, or directly within your [CI/CD pipelines][3].
 
 ## Configuration
 
-After choosing to create a [`TCP` test][3], define your test's request.
+After choosing to create a [`TCP` test][4], define your test's request.
 
 ### Define request
 
@@ -34,7 +34,7 @@ After choosing to create a [`TCP` test][3], define your test's request.
 1. Specify the **Host** and the **Port** to run your test on. By default, the port is set to `443`.
 2. Decide whether or not to **Track number of network hops (TTL)**. This option allows you to assert on the number of network hops and to have access to a TCP Traceroute in your test results. 
 3. **Name** your TCP test.
-4. Add `env` **Tags** as well as any other tag to your TCP test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][4].
+4. Add `env` **Tags** as well as any other tag to your TCP test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][5].
 5. Select the **Locations** to run your TCP test from: TCP tests can run from both [managed][1] and [private locations][2] depending on whether you want to launch the connection from outside or inside your network.
 
 Click on **Test URL** to try out the request configuration. You should see a response preview show up on the right side of your screen.
@@ -47,7 +47,7 @@ TCP tests can run:
 
 {{< img src="synthetics/api_tests/schedule.png" alt="Run API tests on schedule"  style="width:90%;" >}}
 
-* [**Within your CI/CD pipelines**][5].
+* [**Within your CI/CD pipelines**][3].
 
 * **On-demand** to run your tests whenever makes the most sense for your teams.
 
@@ -127,7 +127,7 @@ You can create local variables by clicking on **Create Local Variable** at the t
 
 ### Use variables
 
-You can use the [global variables defined in the `Settings`][10] and the [locally defined variables](#create-local-variables) in the URL, Advanced Options, and assertions of your HTTP tests.
+You can use the [global variables defined in the `Settings`][10] and the [locally defined variables](#create-local-variables) in the URL, Advanced Options, and assertions of your TCP tests.
 
 To display your list of variables, type `{{` in your desired field:
 
@@ -163,9 +163,9 @@ If you have access to the [custom role feature][12], add your user to any custom
 
 [1]: /api/v1/synthetics/#get-all-locations-public-and-private
 [2]: /synthetics/private_locations
-[3]: /synthetics/api_tests/tcp_tests
-[4]: /synthetics/search/#search
-[5]: /synthetics/cicd_testing
+[3]: /synthetics/cicd_testing
+[4]: /synthetics/api_tests/tcp_tests
+[5]: /synthetics/search/#search
 [6]: /api/latest/synthetics/#edit-an-api-test
 [7]: /monitors/notify/?tab=is_alert#notification
 [8]: https://www.markdownguide.org/basic-syntax/
@@ -173,4 +173,3 @@ If you have access to the [custom role feature][12], add your user to any custom
 [10]: /synthetics/settings/#global-variables
 [11]: /account_management/rbac/
 [12]: /account_management/rbac#custom-roles
-[13]: /synthetics/cicd_testing

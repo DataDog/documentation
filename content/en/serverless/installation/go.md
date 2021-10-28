@@ -176,7 +176,7 @@ If your Lambda function is running in a VPC, follow the [Datadog Lambda Extensio
 [2]: /serverless/guide/datadog_forwarder_go
 [3]: https://aws.amazon.com/blogs/compute/migrating-aws-lambda-functions-to-al2/
 [4]: https://github.com/DataDog/datadog-lambda-go
-[5]: https://app.datadoghq.com/account/settings#api
+[5]: https://app.datadoghq.com/organization-settings/api-keys
 [6]: /getting_started/tagging/unified_service_tagging/#aws-lambda-functions
 [7]: https://app.datadoghq.com/functions
 [8]: /serverless/custom_metrics?tab=go

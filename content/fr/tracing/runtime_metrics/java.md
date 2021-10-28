@@ -14,11 +14,11 @@ further_reading:
     text: Implémenter Opentracing dans vos applications
   - link: tracing/visualization/
     tag: Documentation
-    text: 'Explorer vos services, ressources et traces'
+    text: Explorer vos services, ressources et traces
 ---
 ## Configuration automatique
 
-La collecte de métriques JVM est activée par défaut pour le traceur Java v0.29.0+. Elle peut être désactivée en définissant un paramètre de configuration dans le client de tracing, soit via la propriété système `-Ddd.jmxfetch.enabled=false`, soit via la variable d'environnement `DD_JMXFETCH_ENABLED=false`.
+La collecte de métriques JVM est activée par défaut pour le traceur Java v0.29.0+. Elle peut être désactivée en définissant un paramètre de configuration dans le client de tracing, soit via la propriété système `-Ddd.jmxfetch.enabled=false`, soit via la variable d'environnement `DD_JMXFETCH_ENABLED=false`. Depuis la version 0.64.0, vous pouvez également utiliser la variable d'environnement `DD_RUNTIME_METRICS_ENABLED=false` pour désactiver la collecte.
 
 Les métriques JVM peuvent être visualisées conjointement à vos services Java. Consultez la [page Service][1] dans Datadog.
 
@@ -35,6 +35,7 @@ Si vous exécutez l'Agent en tant que conteneur, vérifiez que `DD_DOGSTATSD_NON
 
 - Pour l'IU de runtime, `dd-trace-java` >= [`0.24.0`][6] est pris en charge.
 - Pour associer des métriques JVM dans des graphiques de performances, veillez à ce que `env: tag` (sensible à la casse) soit défini et corresponde sur l'ensemble de votre environnement.
+- Pour que les métriques JVM s'affichent sur la page Service lorsque vous utilisez Fargate, vérifiez que `DD_DOGSTATSD_TAGS` est défini sur la tâche de votre Agent et qu'il a pour valeur le `env: tag` de ce service.
 
 ## Données collectées
 
