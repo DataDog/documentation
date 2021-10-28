@@ -1,4 +1,5 @@
 import docsearch from 'docsearch.js';
+import searchInsights from 'search-insights';
 import configDocs from '../config/config-docs';
 
 const { env } = document.documentElement.dataset;
@@ -46,6 +47,20 @@ const handleSearchPageRedirect = () => {
 
         window.location = `${baseUrl}/search/?s=${inputValue}`;
     }
+}
+
+const initializeAlogliaInsights = () => {
+    const { appId, apiKey } = algoliaConfig;
+
+    searchInsights('init', { appId, apiKey });
+
+    searchInsights('clickedObjectIDsAfterSearch', {
+        eventName: 'Clicked Object IDs after search',
+        index: algoliaConfig.index
+        // queryID: 'queryID',
+        // objectIDs: ['objectID1', 'objectID2'],
+        // positions: [17, 19]
+    });
 }
 
 const appendHomeLinkToAutocompleteWidget = () => {

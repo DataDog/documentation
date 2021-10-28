@@ -70,6 +70,7 @@
         "picturefill": "3.0.2",
         "popper.js": "1.16.1",
         "safe-json-stringify": "^1.2.0",
+        "search-insights": "^2.1.0",
         "slugify": "^1.4.6",
         "tiny-async-pool": "^1.0.4",
         "traverse": "0.6.6",
