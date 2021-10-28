@@ -22,42 +22,39 @@ Real User Monitoring (RUM) Analytics extend the RUM Explorer page with views dat
 * The dimensions over which to split data.
 * The visualization method for aggregates and splits.
 
-From an analytics visualization, you can, additionally:
+With RUM Analytics visualizations, you can:
 
 * Create a widget in a dashboard out of that visualization.
-* Dive deeper into subsets of the events list, depending on the interactions that the visualization enables.
+* Dive deeper into subsets of the events list depending on the interactions that the visualization enables.
 
-## Build an analytics query
+## Build an Analytics query
 
-Use the query to control what's displayed in your RUM Analytics:
+In [RUM Analytics][1], customize your display by adding facets and measures to your search query. 
 
-1. Choose a [measure][1] or [facet][2] to graph. [measure][1] lets you choose the aggregation function whereas [facet][2] displays the unique count.
+1. Choose a [measure][2] or [facet][3] to graph. A [measure][2] lets you choose the aggregation function whereas a [facet][3] displays the unique count.
 
-    {{< img src="real_user_monitoring/explorer/analytics/measure_selection.png" alt="measure selection"  style="width:50%;">}}
-2. Select the aggregation function for the [measure][1] you want to graph:
+    {{< img src="real_user_monitoring/explorer/analytics/measure_selection.png" alt="measure selection" style="width:50%;">}}
+2. Select the aggregation function for the [measure][2] you want to graph:
 
     {{< img src="real_user_monitoring/explorer/analytics/aggregation.png" alt="aggregation function for RUM Analytics" style="width:50%;">}}
 
-3. Use a [facet][2] to split your graph.
+3. Use a [facet][3] to split your graph.
 
     {{< img src="real_user_monitoring/explorer/analytics/break_down.png" alt="split by facet RUM Analytics" style="width:50%;">}}
 
-4. Choose the time interval for your graph.
-  Changing the global timeframe changes the list of available timestep values.
+4. Choose the time interval for your graph. Changing the global timeframe changes the list of available timestep values.
 
     {{< img src="real_user_monitoring/explorer/analytics/roll_up.png" alt="rollup" style="width:50%;">}}
 
-5. Choose to display either the *X* **top** or **bottom** values according to the selected [measure][1].
+5. Choose to display either the **top** or **bottom** values according to the selected [measure][2].
 
     {{< img src="real_user_monitoring/explorer/analytics/top_bottom.png" alt="top bottom button" style="width:50%;">}}
 
 ## Visualizations
 
-Select a RUM Analytics visualization type using the graph selector:
+In [RUM Analytics][1], select a RUM Analytics visualization type from the dropdown menu next to **Hide Controls**.
 
-{{< img src="real_user_monitoring/explorer/analytics/graph_selector.png" alt="RUM Analytics graph selector" style="width:50%;">}}
-
-Available visualizations:
+Available visualizations include:
 
 {{< tabs >}}
 {{% tab "Timeseries" %}}
@@ -82,7 +79,7 @@ The following RUM Analytics timeseries shows:
 
 The evolution of the **Browser Family** according to the **90th percentile** of **DOM interactive time** over the last 7 days.
 
-{{< img src="real_user_monitoring/explorer/analytics/rum_timeserie_example.png" alt="timeserie rum example" style="width:90%;">}}
+{{< img src="real_user_monitoring/explorer/analytics/rum_timeserie_example.png" alt="timeseries rum example" style="width:90%;">}}
 
 [1]: /real_user_monitoring/rum_explorer/?tab=measures#facets-measures
 [2]: /real_user_monitoring/rum_explorer/?tab=facets#facets-measures
@@ -123,7 +120,7 @@ Visualize the top values from a [facet][1] according to a chosen [measure][2] (t
 
 Visualize a single [measure][1] (or a [facet][2] unique count of values) on the world map.
 
-The following RUM analytics geomap shows the 75th percentile of **Largest Contentful Paint** over the past day:
+The following RUM Analytics geomap shows the 75th percentile of **Largest Contentful Paint** over the past day:
 
 {{< img src="real_user_monitoring/explorer/analytics/rum_geomap_example.png" alt="RUM geomap example" style="width:90%;">}}
 
@@ -131,17 +128,39 @@ The following RUM analytics geomap shows the 75th percentile of **Largest Conten
 [2]: /real_user_monitoring/rum_explorer/?tab=measures#facets-measures
 {{% /tab %}}
 
+{{% tab "Funnel" %}}
+
+Visualize conversation rates across user workflows and end-to-end user journeys.
+
+To create a funnel, select **Funnel** in the visualization options dropdown menu.
+
+{{< img src="real_user_monitoring/explorer/analytics/rum_funnel_example.png" alt="RUM funnel example" style="width:100%;">}}
+
+To construct the funnel, select **View** or **Action** and choose a query from the dropdown menu. Click **+** and select another query from the dropdown menu to visualize the funnel. 
+
+{{< img src="real_user_monitoring/explorer/analytics/rum_funnel.mp4" alt="Create a funnel with queries" video="true" width="100%" >}}
+
+You can see how many session occurred for your selected queries out of your total RUM sessions. When you click on the bar graph, a side panel displaying **Converted Sessions** and **Dropped off Sessions** appears.
+
+{{< img src="real_user_monitoring/explorer/analytics/rum_funnel_details.mp4" alt="Converted and dropped off session details" video="true" width="100%" >}}
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Related events
 
-Select or click on a section of the graph to either zoom in the graph or see the list of events corresponding to your selection:
+For timeseries graphs, you can select a section of the graph or click the graph to either zoom in or see a list of events that correspond to your selection:
 
-{{< img src="real_user_monitoring/explorer/analytics/view_events.png" alt="view events" style="width:30%;" >}}
+{{< img src="real_user_monitoring/explorer/analytics/view_events.png" alt="view events" style="width:40%;" >}}
+
+For funnel graphs, click on the graph to see a list of converted and dropped off sessions that correspond to your queries.
+
+For the remaining visualization options, click on the graph and click **View events** to see a list of events that correspond to your selection. 
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/rum_explorer/?tab=measures#facets-measures
-[2]: /real_user_monitoring/rum_explorer/?tab=facets#facets-measures
+[1]: https://app.datadoghq.com/rum/analytics
+[2]: /real_user_monitoring/rum_explorer/?tab=measures#facets-measures
+[3]: /real_user_monitoring/rum_explorer/?tab=facets#facets-measures
