@@ -99,7 +99,7 @@ If Google Container Registry ([gcr.io/datadoghq][8]) is not accessible in your d
 
 **Note**:
 
-- We recommend using the public AWS ECR registry ([public.ecr.aws/datadog][9]) when the Datadog chart is deployed in an AWS environment.
+- It is recommended to use the public AWS ECR registry ([public.ecr.aws/datadog][9]) when the Datadog chart is deployed in an AWS environment.
 
 ### Upgrading from chart v1.x
 
@@ -130,7 +130,7 @@ where `<USER_ID>` is the UID to run the agent and `<DOCKER_GROUP_ID>` is the gro
 [7]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog
 [8]: https://gcr.io/datadoghq
 [9]: https://gallery.ecr.aws/datadog/
-[10]: https://hub.docker.com/r/datadog/
+[10]: https://hub.docker.com/u/datadog/
 [11]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/docs/Migration_1.x_to_2.x.md
 {{% /tab %}}
 {{% tab "DaemonSet" %}}
