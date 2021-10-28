@@ -81,7 +81,7 @@ Next, enable the Datadog features that you'd like to use: [APM][5], [Logs][6]
 
 - For a full list of the Datadog chart's configurable parameters and their default values, refer to the [Datadog Helm repository README][7].
 
-### Containers registries
+### Container registries
 
 If Google Container Registry ([gcr.io/datadoghq][8]) is not accessible in your deployment region, use another registry with the following configuration in the `values.yaml` file:
 
