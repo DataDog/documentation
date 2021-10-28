@@ -11,7 +11,7 @@ further_reading:
 
 ## Overview
 
-Session Replay provides privacy controls to ensure organizations of any scale can confidently use the product. Data is stored on Datadog-managed cloud instances and encrypted at rest. 
+Session Replay provides privacy controls to ensure organizations of any scale do not expose sensitive or personal data. Data is stored on Datadog-managed cloud instances and encrypted at rest. 
 
 Default privacy options for Session Replay are designed to protect end user privacy and prevent sensitive organizational information from being collected. 
 
@@ -90,7 +90,7 @@ The example below demonstrates how you can override certain elements in your HTM
 
 The dollar amount in the cart is replaced with astericks.
 
-{{< img src="real_user_monitoring/session_replay/example-mask.png" alt="Example mask mode" style="width:80%;">}}
+{{< img src="real_user_monitoring/session_replay/example-mask.png" alt="Example of mask mode obfuscating dollar amount" style="width:80%;">}}
 
 ## Advanced privacy options 
 
@@ -102,7 +102,7 @@ If you are concerned about the number of visible elements in sensitive fields, e
 
 In this example replay session, the username in the Datadog navigation is obfuscated.
 
-{{< img src="real_user_monitoring/session_replay/hidden.png" alt="Example hidden mode" style="width:50%;">}}
+{{< img src="real_user_monitoring/session_replay/hidden.png" alt="Example of hidden mode obfuscating a username" style="width:50%;">}}
 
 ### Override the action name
 
