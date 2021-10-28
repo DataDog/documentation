@@ -523,7 +523,7 @@ client. This metric is reported only when the aggregation is enabled (which is t
 : **Metric type**: count<br>
 The total number of contexts flushed by the client, when client side aggregation is enabled, tagged by metric type
 (`gauge`, `set`, `count`, `timing`, `histogram`, or `distribution`). Starting v5.0.0 of the Go client. This metric is
-reported only when the aggregation is enabled (which is it by default).
+reported only when the aggregation is enabled (which is the default).
 
 
 To disable telemetry, use the `WithoutTelemetry` setting:
