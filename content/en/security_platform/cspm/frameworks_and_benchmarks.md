@@ -22,17 +22,17 @@ Each [OOTB rule][1] maps to one or more controls within a compliance standard or
 
 - [CIS AWS Foundations Benchmark v1.3.0*][2]
 - [CIS Docker Benchmark v1.2.0][2]
-- [CIS Kubernetes Benchmark v1.5.1][3]
+- [CIS Kubernetes Benchmark v1.5.1**][3]
 - [PCI DSS v3.2.1][4]
 - [AICPA SOC 2][5]
 - [HIPAA][6]
 - [GDPR][7]
 
-**Notes**:
+*To pass the Monitoring Section of the [CIS AWS Foundations benchmark][2], you **must** enable [Security Monitoring][8] and forward [Cloudtrail logs to Datadog][9].
 
-- To pass the Monitoring Section of the [CIS AWS Foundations benchmark][2], you **must** enable [Security Monitoring][8] and forward [Cloudtrail logs to Datadog][9].
+**Some [CIS Kubernetes Benchmark][3] rules only apply to self-hosted Kubernetes clusters.
 
-- Datadog CSPM is designed to provide you with visibility into whether your Resources are configured in accordance with certain Rules. Datadog’s OOTB Rules address various regulatory frameworks, benchmarks, and standards (“Security Posture Frameworks”). Please note that Datadog CSPM does not provide an assessment of your actual compliance with any Security Posture Framework, and the OOTB Rules may not address all configuration settings that are relevant to the Security Posture Frameworks. To be clear: just because your Resources pass the OOTB Rules does not mean that you are meeting all the requirements under any particular Security Posture Framework. Datadog is not providing legal or compliance advice or guidance, and we recommend that you use Datadog CSPM in consultation with your legal counsel or compliance experts.
+**Note**: Datadog CSPM is designed to provide you with visibility into whether your Resources are configured in accordance with certain Rules. Datadog’s OOTB Rules address various regulatory frameworks, benchmarks, and standards (“Security Posture Frameworks”). Please note that Datadog CSPM does not provide an assessment of your actual compliance with any Security Posture Framework, and the OOTB Rules may not address all configuration settings that are relevant to the Security Posture Frameworks. To be clear: just because your Resources pass the OOTB Rules does not mean that you are meeting all the requirements under any particular Security Posture Framework. Datadog is not providing legal or compliance advice or guidance, and we recommend that you use Datadog CSPM in consultation with your legal counsel or compliance experts.
 
 ## Customize how your environment is scanned by each rule
 
