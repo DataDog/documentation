@@ -32,9 +32,31 @@ Additionally, if you are using the DEB version of the Agent version 7.31.0 or gr
 
 If you're unsure if a host trusts the new signing key, you can [check](#check-if-a-host-trusts-the-new-gpg-key).
 
-Trying to install or upgrade the Agent package without trusting the new key results in `NOKEY` errors when installing the RPM package and `NO_PUBKEY` errors when installing the DEB package.
+For hosts running older versions of the install methods listed above or older versions of the DEB package, Datadog recommends updating the install method to the latest version. Alternatively Debian and Ubuntu users can update the Agent to version 7.31.0 or greater. Otherwise, the key can be [manually updated](#manual-update).
 
-For hosts running older versions of the install methods listed above or older versions of the DEB package, Datadog recommends updating the install method to the latest version. Alternatively Debian and Ubuntu users can update the Agent to version 7.31.0 or greater. Otherwise, the keys can be manually updated:
+## What happens if I don't trust the new key by April 2022?
+
+{{< tabs >}}
+{{% tab "Debian/Ubuntu" %}}
+
+Trying to install or upgrade Agent packages without trusting the new key results in `NO_PUBKEY` errors. This applies to both newly released and existing versions of the Agent.
+
+```
+The following signatures couldn't be verified because the public key is not available: NO_PUBKEY
+```
+
+{{% /tab %}}
+{{% tab "RedHat/CentOS/SUSE" %}}
+
+Installing new versions of the Agent released since April 2022 causes `NOKEY` errors. Older versions of the Agent can still be installed.
+
+```
+The GPG keys listed for the "Datadog, Inc." repository are already installed but they are not correct for this package.
+Check that the correct key URLs are configured for this repository.
+```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Manual update
 
