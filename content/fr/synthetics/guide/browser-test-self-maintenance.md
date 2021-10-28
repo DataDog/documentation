@@ -1,5 +1,5 @@
 ---
-title: Auto-maintenance des tests Browser
+title: Adaptation automatique des tests Browser
 kind: guide
 further_reading:
   - link: synthetics/browser_tests

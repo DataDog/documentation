@@ -2,14 +2,14 @@
 title: Dépannage
 kind: documentation
 further_reading:
-  - link: 'https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/'
+  - link: https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/
     tag: Blog
     text: Real User Monitoring
   - link: /real_user_monitoring/faq/content_security_policy/
     tag: Documentation
     text: Stratégie de sécurité de contenu
 ---
-Si la fonctionnalité RUM Browser de Datadog se comporte de manière inattendue, consultez ce guide pour voir les solutions proposées. Si vous ne parvenez pas à résoudre votre problème, contactez l'[assistance Datadog][1] pour obtenir de l'aide. Assurez-vous de mettre régulièrement à jour le [SDK RUM Browser][2], car chaque version contient des améliorations et des correctifs. 
+Si la fonctionnalité RUM Browser de Datadog se comporte de manière inattendue, consultez ce guide pour découvrir rapidement des solutions. Si votre problème persiste, contactez l'[assistance Datadog][1] pour obtenir de l'aide. Assurez-vous de mettre régulièrement à jour le [SDK RUM Browser][2], car chaque version contient des améliorations et des correctifs.
 
 ## Données manquantes
 
@@ -17,14 +17,15 @@ Si vous ne voyez aucune donnée RUM ou si des données sont manquantes pour cert
 
 | Causes courantes                                                                                               | Correctif conseillé                                                                                                                                                                                          |
 | ----------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Les bloqueurs de publicités empêchent le téléchargement du SDK RUM Browser ou empêchent ce dernier d'envoyer les données à Datadog.     | Certains bloqueurs de publicités limitent également le chargement des outils de suivi de la performance et marketing. [Installez le SDK RUM Browser avec npm][3] et [transférez les données collectées par l'intermédiaire d'un proxy][4]. |
+| Les bloqueurs de publicités empêchent le téléchargement du SDK RUM Browser ou empêchent ce dernier d'envoyer les données à Datadog.     | Certains bloqueurs de publicités limitent également le chargement des outils de suivi des performances et marketing. Consultez la documentation pour [installer le SDK RUM Browser avec npm][3] et [transférer les données recueillies par l'intermédiaire d'un proxy][4]. |
 | Les règles réseau ou les VPN empêchent le téléchargement du SDK RUM Browser ou empêchent ce dernier d'envoyer les données à Datadog. | Accordez l'accès aux endpoints requis pour le téléchargement du SDK ou l'envoi des données. La liste des endpoints est disponible dans la [documentation relative à la stratégie de sécurité de contenu][5].                                        |
+| Les scripts, packages et clients initialisés avant le SDK RUM Browser peuvent entraînent la perte de logs, ressources et actions utilisateur. Par exemple, si vous initialisez ApolloClient avant le SDK RUM Browser, il est possible que les requêtes `graphql` ne soient pas enregistrées en tant que ressources XHR dans le RUM Explorer. | Vérifiez à quel moment le SDK RUM Browser est initialisé et, si besoin, déplacez-le à une étape antérieure à l'exécution du code de votre application.                                             |   
 
 Consultez les [directives relatives à la stratégie de sécurité de contenu][6] et assurez-vous que votre site Web accorde l'accès au CDN du SDK RUM Browser et à l'endpoint d'admission.
 
-### Vérifiez que le SDK RUM Browser est initialisé
+### Initialisation du SDK RUM Browser
 
-Lancez la commande `window.DD_RUM.getInternalContext()` dans votre console Browser et vérifiez que les paramètres `application_id`, `session_id`, ainsi que l'objet view sont renvoyés :
+Vérifiez si le SDK RUM Browser est initialisé en exécutant la commande `window.DD_RUM.getInternalContext()` dans la console de votre navigateur, et en vérifiant que les éléments `application_id` et `session_id` ainsi que l'objet de la vue sont bien renvoyés :
 
 {{< img src="real_user_monitoring/browser/troubleshooting/success_rum_internal_context.png" alt="Commande getInternalContext réussie">}}
 
@@ -34,9 +35,9 @@ Si le SDK n'est pas installé, ou s'il n'a pas été correctement initialisé, l
 
 Vous pouvez également consulter la console d'outils de développement de votre navigateur ou l'onglet Network si vous remarquez des erreurs liées au chargement du SDK RUM Browser.
 
-### Vérifier que les données sont envoyées à l'endpoint d'admission Datadog
+### Données vers l'endpoint d'admission Datadog
 
-Le SDK RUM Browser envoie régulièrement des lots de données à l'endpoint d'admission Datadog. Vous devriez voir des requêtes réseau ciblant `/v1/input` (la partie relative à l'origine de l'URL peut être différente selon la configuration RUM) dans la section Network des outils de développement de votre navigateur :
+Le SDK RUM Browser envoie régulièrement des lots de données à l'endpoint d'admission Datadog. Si des données sont envoyées, vous devriez voir des requêtes réseau ciblant `/v1/input` (la partie relative à l'origine de l'URL peut être différente selon la configuration RUM) dans la section Réseau des outils de développement de votre navigateur :
 
 {{< img src="real_user_monitoring/browser/troubleshooting/network_intake.png" alt="Requêtes RUM vers l'endpoint d'admission Datadog">}}
 
@@ -57,7 +58,7 @@ Le SDK RUM Browser utilise des cookies pour stocker des informations de session 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/help
-[2]: https://github.com/DataDog/browser-sdk/blob/master/CHANGELOG.md
+[2]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md
 [3]: /fr/real_user_monitoring/browser/#npm
 [4]: /fr/real_user_monitoring/faq/proxy_rum_data/?tab=npm
 [5]: /fr/real_user_monitoring/faq/content_security_policy/
