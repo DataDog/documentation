@@ -160,7 +160,7 @@ If you are running tests in non-supported CI providers or with no `.git` folder,
 
 ## Collecting environment configuration metadata
 
-There are some special tags that are used to identify the configuration of the environment where tests run, which include OS, runtime and device information (where applicable). When the same test for the same commit runs in more than one configuration (for example, in both Windows and Linux machines), they are treated as two different tests when it comes to failure and flakiness detection.
+Datadog uses special dedicated tags to identify the configuration of the environment in which tests run, including the operating system, runtime, and device information, if applicable. When the same test for the same commit runs in more than one configuration (for example, on Windows and on Linux), the tags are used to differentiate the test in failure and flakiness detection.
 
 You can specify these special tags using the `--tags` parameter when calling `datadog-ci junit upload`, or by setting the `DD_TAGS` environment variable.
 
