@@ -5,7 +5,7 @@ kind: faq
 
 ## Overview
 
-Custom metrics are used every day as a means to understand business performance alongside application and infrastructure health. However, business data is valuable in aggregate not necessarily in detail, so it may be cost prohibitive for organizations to query all metric names and tag values. Metrics without Limits provides you flexibility and control over your custom metrics volumes by decoupling custom metric ingestion and indexing  -- you only pay for custom metric tags that are valuable to your organization.
+Custom metrics are used every day as a means to understand business performance alongside application and infrastructure health. However, business data is valuable in aggregate not necessarily in detail, so it may be cost prohibitive for organizations to query all metric names and tag values. Metrics without Limits™ provides you flexibility and control over your custom metrics volumes by decoupling custom metric ingestion and indexing  -- you only pay for custom metric tags that are valuable to your organization.
 
 This guide identifies key components of Metrics without Limits™ that help you manage your custom metrics volumes within your observability budget.
 
@@ -18,7 +18,7 @@ Click on any metric name to open its details sidepanel. Then click on the **Mana
 
 {{< img src="metrics/mwl_tags.gif" alt="Configuration of Tags">}}
 
-There are also APIs available so you can [create][2], [edit][3], and [delete][4] a tag configuration. We also have an [API for estimating the potential impact of your configuration][5]
+There are also APIs available so you can [create][2], [edit][3], and [delete][4] a tag configuration. We also have an [API][5] for estimating the potential impact of your configuration.
 
 When configuring counts/rates/gauges' tags, you'll have the most frequently queried time/space aggregation combination available for query by default. Continue reading to learn more about fine-tuning and opting in for more aggregations.
 
@@ -39,12 +39,12 @@ Quickly optimize your custom metrics volumes by using our [bulk metric tag confi
 
 ## What is the pricing of Metrics without Limits™?
 
-Configuring your tags/aggregations gives you control over what custom metrics can be queried -- ultimately reducing your billable count of custom metrics. Metrics without Limits decouples ingestion costs from indexing costs -- so you can continue sending Datadog all of your data (everything is ingested) and you can specify an allowlist of tags you'd want to remain queryable in the Datadog platform. Given the volume of data Datadog is ingesting for your configured metrics now differs from the smaller, remaining volume you’ve indexed, you'll see two distinct volumes on your Usage page as well as the Metrics Summary page. 
+Configuring your tags/aggregations gives you control over what custom metrics can be queried -- ultimately reducing your billable count of custom metrics. Metrics without Limits™ decouples ingestion costs from indexing costs -- so you can continue sending Datadog all of your data (everything is ingested) and you can specify an allowlist of tags you'd want to remain queryable in the Datadog platform. Given the volume of data Datadog is ingesting for your configured metrics now differs from the smaller, remaining volume you’ve indexed, you'll see two distinct volumes on your Usage page as well as the Metrics Summary page. 
 
 - **Ingested Custom Metrics**: The original volume of custom metrics based on the all ingested tags (sent via code).
 - **Indexed Custom Metrics**: The volume of custom metrics that remains queryable in the Datadog platform (based on any Metrics without Limits™ configurations) 
 
-**Note: Only configured metrics contribute to your Ingested custom metrics volume.** If a metric is not configured with Metrics without Limits\*, you're only charged for its indexed custom metrics volume.
+**Note: Only configured metrics contribute to your Ingested custom metrics volume.** If a metric is not configured with Metrics without Limits™, you're only charged for its indexed custom metrics volume.
 
 Learn more about Custom Metrics Billing [here][8]
 
