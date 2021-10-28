@@ -208,6 +208,43 @@ For mobile apps (Swift, Android):
 `test.bundle`
 : Used to execute groups of test suites separately.<br/>
 **Examples**: `ApplicationUITests`, `ModelTests` -->
+  
+## Providing metadata through `<property>` elements
+
+In addition to the `--tags` CLI parameter and the `DD_TAGS` environment variable, which apply custom tags globally to all tests included the uploaded XML report, you can provide additional tags to specific tests by including `<property name="dd_tags[key]" value="value">` elements within the `<testsuite>` or `<testcase>` elements. If you add these tags to a `<testcase>` element, they are stored in its test span. If you add the tags to a `<testsuite>` element, they are stored in all of that suite's test spans.
+
+To be processed, the `name` attribute in the `<property>` element must have the format `dd_tags[key]`, where `key` is the name of the custom tag to be added. Other properties are ignored.
+
+**Example**: Adding tags to a `<testcase>` element
+
+{{< code-block lang="xml" >}}
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite tests="1" failures="0" time="0.030000" name="SomeTestSuiteClass">
+    <testcase classname="SomeTestSuiteClass" name="test_something" time="0.010000">
+      <properties>
+        <property name="dd_tags[custom_tag]" value="some value"></property>
+        <property name="dd_tags[runtime.name]" value="CPython"></property>
+      </properties>
+    </testcase>
+  </testsuite>
+</testsuites>
+{{< /code-block >}}
+
+**Example**: Adding tags to a `<testsuite>` element
+
+{{< code-block lang="xml" >}}
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite tests="1" failures="0" time="0.030000" name="SomeTestSuiteClass">
+    <properties>
+      <property name="dd_tags[custom_tag]" value="some value"></property>
+      <property name="dd_tags[runtime.name]" value="CPython"></property>
+    </properties>
+    <testcase classname="SomeTestSuiteClass" name="test_something" time="0.010000"></testcase>
+  </testsuite>
+</testsuites>
+{{< /code-block >}}
 
 ## Further reading
 
