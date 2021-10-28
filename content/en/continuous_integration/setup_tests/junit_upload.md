@@ -162,9 +162,9 @@ If you are running tests in non-supported CI providers or with no `.git` folder,
 
 There are some special tags that are used to identify the configuration of the environment where tests run, which include OS, runtime and device information (where applicable). When the same test for the same commit runs in more than one configuration (for example, in both Windows and Linux machines), they are treated as two different tests when it comes to failure and flakiness detection.
 
-This information is automatically collected by the tracer when instrumenting tests natively. However, when uploading JUnit XML reports, you can also specify them using the `--tags` parameter, or by using the `DD_TAGS` environment variable.
+You can specify these special tags using the `--tags` parameter when calling `datadog-ci junit upload`, or by setting the `DD_TAGS` environment variable.
 
-All tags are optional, and only the provided ones will be used to differentiate between environment configurations.
+All of these tags are optional, and only the ones you specify will be used to differentiate between environment configurations.
 
 `os.platform`
 : Name of the operating system.<br/>
@@ -180,7 +180,7 @@ All tags are optional, and only the provided ones will be used to differentiate 
 
 `runtime.name`
 : Name of the language interpreter or programming runtime.<br/>
-**Examples**: `.NET`, `.NET Core`, `AdoptOpenJDK`, `Oracle Corporation`, `CPython`
+**Examples**: `.NET`, `.NET Core`, `OpenJDK Runtime Environment`, `Java(TM) SE Runtime Environment`, `CPython`
 
 `runtime.version`
 : Version of the runtime.<br/>
@@ -188,7 +188,7 @@ All tags are optional, and only the provided ones will be used to differentiate 
 
 `runtime.vendor`
 : Name of the runtime vendor where applicable. For example, when using a Java runtime.<br/>
-**Examples**: `OpenJDK`, `Oracle`
+**Examples**: `AdoptOpenJDK`, `Oracle Corporation`
 
 `runtime.architecture`
 : Architecture of the runtime.<br/>
