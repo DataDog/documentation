@@ -23,15 +23,15 @@ Follow these steps to develop and publish your Integrations page or Marketplace 
 
 All Technology Partners can request a dedicated sandbox Datadog account to aid in their development. To request a sandbox:
 
-1. Log into the [Datadog Partner Portal][4]
-2. On your personal homepage, click on the "Learn More" button under "Sandbox Access"
-3. Select "Request Sandbox Upgrade"
+1. Log into the [Datadog Partner Portal][4].
+2. On your personal homepage, click on the "Learn More" button under "Sandbox Access".
+3. Select "Request Sandbox Upgrade".
 
 Creating a developer sandbox may take up to one or two business days. Contact [Datadog Support][5] with any questions.
 
 **Note:** If you are already a member of a Datadog organization (including a trial org), you may need to switch to your newly created sandbox, following the instructions on [switching between orgs][6].
 
-Once your sandbox is created, you can [invite new members][30] from your organization that you'd like to collaborate with.
+Once your sandbox is created, you can [invite new members][30] from your organization to collaborate with.
 
 ## Develop your integration or create a Marketplace tile only listing
 
