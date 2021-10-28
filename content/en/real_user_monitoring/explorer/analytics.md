@@ -52,7 +52,7 @@ In [RUM Analytics][1], customize your display by adding facets and measures to y
 
 ## Visualizations
 
-In [RUM Analytics][1], select a RUM Analytics visualization type from the dropdown menu next to **Hide Controls**.
+In [RUM Analytics][1], select a visualization type from the dropdown menu next to **Hide Controls**.
 
 Available visualizations include:
 
