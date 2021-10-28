@@ -160,12 +160,13 @@ If you are running tests in non-supported CI providers or with no `.git` folder,
 
 ## Providing metadata through `<property>` elements
 
-In addition to the `--tags` CLI parameter and the `DD_TAGS` environment variable which apply custom tags globally to all tests included the uploaded XML report, it is possible to provide additional tags to specific tests by including `<property name="dd_tags[key]" value="value">` elements within the `<testsuite>` or `<testcase>` elements. These tags are either stored in the test span that corresponds to the `<testcase>` element where it's added, or in all test spans within the same test suite when defined inside a `<testsuite>` element.
+In addition to the `--tags` CLI parameter and the `DD_TAGS` environment variable, which apply custom tags globally to all tests included the uploaded XML report, you can provide additional tags to specific tests by including `<property name="dd_tags[key]" value="value">` elements within the `<testsuite>` or `<testcase>` elements. If you add these tags to a `<testcase>` element, they are stored in its test span. If you add the tags to a `<testsuite>` element, they are stored in all of that suite's test spans.
 
 Only `<property>` elements with a `name` attribute with the format `dd_tags[key]` where `key` is the name of the custom tag to be added, are processed. Other properties are ignored.
 
-Example for `<testcase>`
-```xml
+**Example**: Adding tags to a `<testcase>` element
+
+{{< code-block lang="xml" >}} 
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites>
   <testsuite tests="1" failures="0" time="0.030000" name="SomeTestSuiteClass">
@@ -177,10 +178,11 @@ Example for `<testcase>`
     </testcase>
   </testsuite>
 </testsuites>
-```
+{{< /code-block >}}
 
-Example for `<testsuite>`
-```xml
+**Example**: Adding tags to a `<testsuite>` element
+
+{{< code-block lang="xml" >}}
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites>
   <testsuite tests="1" failures="0" time="0.030000" name="SomeTestSuiteClass">
@@ -191,7 +193,7 @@ Example for `<testsuite>`
     <testcase classname="SomeTestSuiteClass" name="test_something" time="0.010000"></testcase>
   </testsuite>
 </testsuites>
-```
+{{< /code-block >}}
 
 ## Further reading
 
