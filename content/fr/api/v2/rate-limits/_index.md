@@ -13,10 +13,10 @@ Pour revoir à la hausse les limites de débit par défaut, [contactez l'assista
 Quelques précisions concernant la politique de limitation de débit des API :
 
 - Datadog **n'applique aucune limite de débit** lors de l'envoi de points de données/métriques (consultez la [section relative aux métriques][2] pour en savoir plus sur le traitement du débit d'envoi des métriques). Les limites appliquées dépendent de la quantité de [métriques custom][3] prévue dans votre contrat.
-- La limite de débit pour la **récupération** de métriques est de `100` par heure et par organisation.
-- La limite de débit pour l'envoi de métriques est de `500 000` événements par heure et par organisation.
-- La limite de débit pour l'agrégation d'événements est fixée à `1000` événements par agrégat, par jour et par organisation. Un agrégat désigne un groupe d'événements similaires.
-- La limite de débit pour les appels de l'[API permettant d'interroger une série temporelle][4] est fixée à `600` appels par heure et par organisation. Cette limite peut être augmentée sur demande.
+- La limite de débit pour la **récupération** de métriques est fixée à `100` métriques par heure et par organisation.
+- La limite de débit pour l'envoi de métriques est fixée à `500 000` événements par heure et par organisation.
+- La limite de débit pour l'agrégation d'événements est fixée à `1 000` événements par agrégat, par jour et par organisation. Un agrégat désigne un groupe d'événements similaires.
+- La limite de débit pour les appels de l'[API permettant d'interroger une série temporelle][4] est fixée à `1 600` appels par heure et par organisation. Cette limite peut être augmentée sur demande.
 - La limite de débit pour les appels de l'[API permettant d'interroger des logs][5] est de `300` par heure et par organisation. Cette limite peut être augmentée sur demande.
 - La limite de débit pour les appels de l'[API permettant de représenté un snapshot][6] est de `60` par heure et par organisation. Cette limite peut être augmentée sur demande.
 - La limite de débit pour les appels de l'[API permettant de configurer des logs][7] est de `6000` par minute et par organisation. Cette limite peut être augmentée sur demande.
