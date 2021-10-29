@@ -379,8 +379,7 @@ Use the [logstash-logback-encoder][4] logging library along with Logback to stre
       <encoder class="net.logstash.logback.encoder.LogstashEncoder" />
     </appender>
     <appender name="JSON_TCP" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
-      <remoteHost>intake.logs.datadoghq.com</remoteHost>
-      <port>10514</port>
+      <destination>tcp-intake.logs.datadoghq.eu:1883</destination>
       <keepAliveDuration>20 seconds</keepAliveDuration>
       <encoder class="net.logstash.logback.encoder.LogstashEncoder">
           <prefix class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
