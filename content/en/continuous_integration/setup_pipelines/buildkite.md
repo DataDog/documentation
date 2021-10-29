@@ -17,8 +17,8 @@ The steps to activate the Datadog integration for [Buildkite][1] are:
 
 {{< site-region region="us" >}}
 1. Go to **Settings > Notification Services** in Buildkite and click add a **Datadog Pipeline Visibility** integration:
-2. Fill the form with the following:
-   * **Description**: A description to help identify the integration in the future. (e.g Datadog CI Visibility integration)
+2. Fill in the form with the following:
+   * **Description**: A description to help identify the integration in the future, such as Datadog CI Visibility integration.
    * **API key**: [your Datadog API Key][1].
    * **Datadog site**: datadoghq.com
    * **Pipelines**: Select all pipelines or the subset of pipelines you want to trace.
@@ -30,8 +30,8 @@ The steps to activate the Datadog integration for [Buildkite][1] are:
 
 {{< site-region region="eu" >}}
 1. Go to **Settings > Notification Services** in Buildkite and click add a **Datadog Pipeline Visibility** integration:
-2. Fill the form with the following:
-   * **Description**: A description to help identify the integration in the future. (e.g Datadog CI Visibility integration)
+2. Fill in the form with the following:
+   * **Description**: A description to help identify the integration in the future, such as Datadog CI Visibility integration.
    * **API key**: [your Datadog API Key][1].
    * **Datadog site**: datadoghq.eu
    * **Pipelines**: Select all pipelines or the subset of pipelines you want to trace.
@@ -43,8 +43,8 @@ The steps to activate the Datadog integration for [Buildkite][1] are:
 
 {{< site-region region="us3" >}}
 1. Go to **Settings > Notification Services** in Buildkite and click add a **Datadog Pipeline Visibility** integration:
-2. Fill the form with the following:
-   * **Description**: A description to help identify the integration in the future. (e.g Datadog CI Visibility integration)
+2. Fill in the form with the following:
+   * **Description**: A description to help identify the integration in the future, such as Datadog CI Visibility integration.
    * **API key**: [your Datadog API Key][1].
    * **Datadog site**: us3.datadoghq.com
    * **Pipelines**: Select all pipelines or the subset of pipelines you want to trace.
