@@ -65,7 +65,7 @@ Learn more about Custom Metrics Billing [here][8]
    - After saving your configuration, the Metrics Summary details sidepanel should show that your indexed custom metrics are now lower than your ingested custom metrics volume.
    - 24 hours after you've saved your configuration, you can also view the impact on your Plan & Usage page's **Top Custom Metrics** table. There should be reduction in the volume of custom metrics between the **Month-to-Date** tab and the **Most Recent Day** tab of this table.
 
-## Best Practices for Metrics without Limits
+## Best practices
 - You can set up alerts on your real-time [estimated custom metrics usage][10] metric so that you can correlate spikes in custom metrics with configurations.
 
 - [Role based access control][11] for Metrics without Limits™ is also available to control which users have permissions to use this feature that has billing implications.
