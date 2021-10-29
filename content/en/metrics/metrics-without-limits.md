@@ -19,7 +19,7 @@ Click on any metric name to open its details sidepanel. Then click **Manage Tags
 
 There are also APIs available so you can [create][2], [edit][3], and [delete][4] a tag configuration. We also have an [API][5] for estimating the potential impact of your configuration.
 
-When configuring counts/rates/gauges' tags, you'll have the most frequently queried time/space aggregation combination available for query by default. Continue reading to learn more about fine-tuning and opting in for more aggregations.
+When configuring tags for counts, rates, and gauges, the most frequently queried time/space aggregation combination is available for query by default.
 
 ### Fine-tune your aggregations
 You can further adjust your custom metrics filters by opting in to more [metrics aggregations][6] you want to query on your count, gauge, or rate metrics. To preserve the mathematical accuracy of your queries, by default Datadog only stores the most frequently queried time/space aggregation combination for a given metric type: 
