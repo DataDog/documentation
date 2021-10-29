@@ -11,7 +11,7 @@ As a common best practice, Datadog periodically rotates the keys and certificate
 Customers using Datadog's RPM or DEB packages might require a manual action to import the new key on their systems in order to install or upgrade the Agent after the rotation takes place.
 
 <div class="alert alert-info">
-<strong>Note</strong>: This DOES NOT affect the functionality of already running Agents, and only limits the ability to install or upgrade to a newer version of the Agent. This also doesn't affect Windows or MacOS Agents, nor Dockerized Linux Agents.
+<strong>Note</strong>: This DOES NOT affect the functionality of already running Agents, and only limits the ability to install the Agent or upgrade to a newer version of the Agent. This also doesn't affect Dockerized Linux Agents nor Windows or MacOS Agents.
 </div>
 
 ## Install methods that automatically trust the new GPG key
