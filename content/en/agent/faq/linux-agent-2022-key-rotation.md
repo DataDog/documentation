@@ -5,8 +5,8 @@ kind: faq
 
 As a common best practice, Datadog periodically rotates the keys and certificates used to sign Datadog's Agent packages. The following GPG keys, used to sign the Agent RPM and DEB packages, reach their end-of-life in June 2022 and will be rotated in April 2022:
 
-- The RPM signing key with hash [`A4C0B90D7443CF6E4E8AA341F1068E14E09422B3`][1] will be rotated in April 4th 2022 and will be replaced by the key with hash [`C6559B690CA882F023BDF3F63F4D1729FD4BF915`][2]
-- The DEB signing key with hash [`A2923DFF56EDA6E76E55E492D3A80E30382E94DE`][3] will be rotated in April 18th 2022 and will be replaced by the key with hash [`D75CEA17048B9ACBF186794B32637D44F14F620E`][4]
+- The RPM signing key with hash [`A4C0B90D7443CF6E4E8AA341F1068E14E09422B3`][1] will be rotated in April 11th 2022 and will be replaced by the key with hash [`C6559B690CA882F023BDF3F63F4D1729FD4BF915`][2]
+- The DEB signing key with hash [`A2923DFF56EDA6E76E55E492D3A80E30382E94DE`][3] will be rotated in May 2nd 2022 and will be replaced by the key with hash [`D75CEA17048B9ACBF186794B32637D44F14F620E`][4]
 
 Customers using Datadog's RPM or DEB packages might require a manual action to import the new key on their systems in order to install or upgrade the Agent after the rotation takes place.
 
@@ -34,7 +34,7 @@ If you're unsure if a host trusts the new signing key, you can [check](#check-if
 
 For hosts running older versions of the install methods listed above or older versions of the DEB package, Datadog recommends updating the install method to the latest version. Alternatively Debian and Ubuntu users can update the Agent to version 7.31.0 or greater. Otherwise, the key can be [manually updated](#manual-update).
 
-## What happens if I don't trust the new key by April 2022?
+## What happens if I don't trust the new key before it is rotated?
 
 {{< tabs >}}
 {{% tab "Debian/Ubuntu" %}}
