@@ -16,11 +16,14 @@ further_reading:
 - link: "/developers/community/libraries/"
   tag: "Documentation"
   text: "Official and Community created API and DogStatsD client libraries"
+- link: "https://www.datadoghq.com/blog/metrics-without-limits/"
+  tag: "Blog"
+  text: "Dynamically control your custom metrics volume with Metrics without Limits&trade;"
 ---
 
 ## Overview
 
-If a metric is not submitted from one of the [more than {{< translate key="integration_count" >}} Datadog integrations][1] it's considered a custom metric<sup>[(1)][2]</sup>. Custom metrics help you track your application KPIs: number of visitors, average customer basket size, request latency, or performance distribution for a custom algorithm.
+If a metric is not submitted from one of the [more than {{< tran&trade;slate key="integration_count" >}} Datadog integrations][1] it's considered a custom metric<sup>[(1)][2]</sup>. Custom metrics help you track your application KPIs: number of visitors, average customer basket size, request latency, or performance distribution for a custom algorithm.
 
 A custom metric is identified by **a unique combination of a metric's name and tag values (including the host tag)**. In general, any metric you send using [DogStatsD][3] or through a [custom Agent Check][4] is a custom metric.
 
