@@ -5,7 +5,7 @@ kind: documentation
 
 ## Overview
 
-Custom metrics are used every day as a means to understand business performance alongside application and infrastructure health. However, business data is valuable in aggregate not necessarily in detail, so it may be cost prohibitive for organizations to query all metric names and tag values. Metrics without Limits™ provides you flexibility and control over your custom metrics volumes by decoupling custom metric ingestion and indexing  -- you only pay for custom metric tags that are valuable to your organization.
+Metrics without Limits™ provides you flexibility and control over your custom metrics volumes by decoupling custom metric ingestion and indexing  -- you only pay for custom metric tags that are valuable to your organization.
 
 This guide identifies key components of Metrics without Limits™ that help you manage your custom metrics volumes within your observability budget.
 
