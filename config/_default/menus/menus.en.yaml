@@ -1088,6 +1088,10 @@ main:
     url: dashboards/graphing_json/request_json/
     parent: graphing_json
     weight: 1002
+  - name: Guides
+    url: dashboards/guide/
+    parent: dashboards
+    weight: 11
   - name: Mobile Application
     url: mobile/
     identifier: mobile
@@ -2467,18 +2471,22 @@ main:
     url: synthetics/api_tests/ssl_tests
     parent: api_tests
     weight: 102
-  - name: TCP
-    url: synthetics/api_tests/tcp_tests
-    parent: api_tests
-    weight: 103
   - name: DNS
     url: synthetics/api_tests/dns_tests
     parent: api_tests
+    weight: 103
+  - name: TCP
+    url: synthetics/api_tests/tcp_tests
+    parent: api_tests
     weight: 104
+  - name: UDP
+    url: synthetics/api_tests/udp_tests
+    parent: api_tests
+    weight: 105
   - name: ICMP
     url: synthetics/api_tests/icmp_tests
     parent: api_tests
-    weight: 105
+    weight: 106
   - name: Multistep API Tests
     url: synthetics/multistep
     parent: synthetics
