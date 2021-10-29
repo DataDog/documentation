@@ -1,5 +1,5 @@
 ---
-title: Metrics without Limits™ FAQ
+title: Metrics without Limits™
 kind: documentation
 ---
 
