@@ -7,7 +7,7 @@ kind: documentation
 
 Metrics without Limits™ provides you flexibility and control over your custom metrics volumes by decoupling custom metric ingestion and indexing  -- you only pay for custom metric tags that are valuable to your organization.
 
-This guide identifies key components of Metrics without Limits™ that help you manage your custom metrics volumes within your observability budget.
+This page identifies key components of Metrics without Limits™ that can help you manage your custom metrics volumes within your observability budget.
 
 ## What is Metrics without Limits™?
 
