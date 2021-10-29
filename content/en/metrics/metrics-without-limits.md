@@ -43,7 +43,7 @@ You can add or remove aggregations at any time with no required Agent or code-le
 
 Quickly optimize your custom metrics volumes by using our [bulk metric tag configuration feature][7]. By clicking **Configure Tags** on Metrics Summary, you can specify a namespace for your metrics and configure all metrics matching that namespace prefix with the same allowlist of tags.
 
-## Metrics without Limits™ cost
+## Metrics without Limits™ billing
 
 Configuring your tags and aggregations gives you control over which custom metrics can be queried -- ultimately reducing your billable count of custom metrics. Metrics without Limits™ decouples ingestion costs from indexing costs -- so you can continue sending Datadog all of your data (everything is ingested) and you can specify an allowlist of tags you want to remain queryable in the Datadog platform. If the volume of data Datadog is ingesting for your configured metrics now differs from the smaller, remaining volume you index, you can see two distinct volumes on your Usage page as well as the Metrics Summary page. 
 
@@ -52,7 +52,7 @@ Configuring your tags and aggregations gives you control over which custom metri
 
 **Note: Only configured metrics contribute to your Ingested custom metrics volume.** If a metric is not configured with Metrics without Limits™, you're only charged for its indexed custom metrics volume.
 
-Learn more about Custom Metrics Billing [here][8]
+Learn more about [Custom Metrics Billing][8].
 
 ## Getting started with Metrics without Limits™
 

@@ -1274,7 +1274,7 @@ main:
     parent: metrics_top_level
     weight: 4
   - name: Metrics Without Limits
-    url: /metrics-without-limits/
+    url: metrics-without-limits/
     parent: metrics_top_level
     weight: 5
   - name: Advanced Filtering
