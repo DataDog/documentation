@@ -22,6 +22,7 @@ There are also APIs available so you can [create][2], [edit][3], and [delete][4]
 When configuring tags for counts, rates, and gauges, the most frequently queried time/space aggregation combination is available for query by default.
 
 ### Fine-tune your aggregations
+
 You can further adjust your custom metrics filters by opting in to more [metrics aggregations][6] you want to query on your count, gauge, or rate metrics. To preserve the mathematical accuracy of your queries, by default Datadog only stores the most frequently queried time/space aggregation combination for a given metric type: 
 
 - Configured counts/rates will be queryable in time/space with SUM
