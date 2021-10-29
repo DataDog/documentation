@@ -27,7 +27,7 @@ Note: You cannot disable all Login Methods for an Organization. At least one Log
 
 ## Reviewing User Overrides ##
 
-In circumstances where an override has been set, you can example in the below image the Login Method for "Google" is disabled by default for users of the organiztion, but one user has the method enabled by having an override set.
+In circumstances where an override has been set, for example in the below image the Login Method for "Google" is disabled by default for users of the organiztion, but one user has the method enabled by having an override set.
 
 {{< img src="account_management/login_methods_disabled_overrides_set.png" alt="Login Method disabled, with User Override enabled" style="width:80%;">}}
 
