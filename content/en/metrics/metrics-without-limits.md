@@ -13,7 +13,7 @@ This page identifies key components of Metrics without Limits™ that can help y
 
 ### Configuration of tags
 
-Click on any metric name to open its details sidepanel. Then click on the **Manage Tags** button and then **“Custom”** to configure the tags you’d like remain as queryable on dashboards/monitors. Before hitting **Save**, you’ll see an estimated new volume of indexed custom metrics that results from this potential tag configuration.
+Click on any metric name to open its details sidepanel. Then click **Manage Tags** -> **“Custom”** to configure the tags you’d like to remain as queryable on dashboards and monitors. Before selecting **Save**, an estimated new volume of indexed custom metrics that results from this potential tag configuration is displayed.
 
 {{< img src="metrics/mwl_tags.gif" alt="Configuration of Tags">}}
 
