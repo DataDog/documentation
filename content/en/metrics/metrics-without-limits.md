@@ -53,10 +53,11 @@ Learn more about Custom Metrics Billing [here][8]
 
 **Note:** If you’re using the [Create Tag Configuration API][2], use the [tag configuration cardinality estimator API][5] first to validate the potential impact of your tag configurations prior to using the API above to create tag configurations. If the UI or the estimator API returns a resulting number of indexed that is larger than ingested, do not save your tag configuration.
 
-**2. Configure your unqueried metrics with empty tag configurations**
-As your teams continue cleaning up noisy metrics that are never queried in the Datadog platform, you can instantly minimize the costs of these unqueried metrics by configuring them with an empty allowlist of tags. 
+2. Configure your unqueried metrics with empty tag configurations.
 
-Ask your Customer Success Manager for an unqueried metrics report.
+   As your teams continue cleaning up noisy metrics that are never queried in the Datadog platform, you can instantly minimize the costs of these unqueried metrics by configuring them with an empty allowlist of tags. 
+
+   Ask your Customer Success Manager for an unqueried metrics report.
 
 **3. Review your usage and billing**
 After configuring your metrics, the impact of your changes can be validated in 3 ways: 
