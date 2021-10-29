@@ -33,6 +33,7 @@ You can add or remove aggregations at any time with no required Agent or code-le
 
 
 ### Configure multiple metrics at a time
+
 Quickly optimize your custom metrics volumes by using our [bulk metric tag configuration feature][7]. By clicking **Configure Tags** on Metrics Summary, you can specify a namespace for your metrics and configure all metrics matching that namespace prefix with the same allowlist of tags.
 
 ## What is the pricing of Metrics without Limits™?
