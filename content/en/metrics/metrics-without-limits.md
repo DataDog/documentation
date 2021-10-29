@@ -47,7 +47,7 @@ Configuring your tags and aggregations gives you control over which custom metri
 
 Learn more about Custom Metrics Billing [here][8]
 
-## How to get started with Metrics without Limits™?
+## Getting started with Metrics without Limits™
 
 1. Configure your Top 20 metrics on your [Plan & Usage page][9] from the Metrics Summary page or by using the [API][2].
    You can use bulk metric configuration (`*` syntax) to quickly configure tags on multiple metrics. Datadog notifies you when the bulk configuration job is completed.
