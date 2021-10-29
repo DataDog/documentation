@@ -192,7 +192,15 @@ For information about the different methods for setting environment variables, s
    Windows x64      | `<APP_DIRECTORY>\datadog\win-x64\Datadog.Trace.ClrProfiler.Native.dll`
    Windows x86      | `<APP_DIRECTORY>\datadog\win-x86\Datadog.Trace.ClrProfiler.Native.dll`
 
-2. For standalone applications, manually restart the application.
+2. For Docker images running on Linux, configure the image to run the `createLogPath.sh` script:
+  
+   ```
+   RUN /<APP_DIRECTORY>/datadog/createLogPath.sh
+   ```
+
+  Docker examples are available in the dd-trace-dotnet [repository][8].
+
+3. For standalone applications, manually restart the application.
 
 
 {{% /tab %}}
@@ -649,3 +657,4 @@ When using `systemctl` to run .NET applications as a service, you can also set e
 [5]: /tracing/setup_overview/compatibility_requirements/dotnet-core#integrations
 [6]: /tracing/setup_overview/custom_instrumentation/dotnet/
 [7]: https://www.freedesktop.org/software/systemd/man/systemctl.html#set-environment%20VARIABLE=VALUE%E2%80%A6
+[8]: https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples/NugetDeployment
