@@ -1,6 +1,6 @@
 ---
 title: Metrics without Limits™ FAQ
-kind: faq
+kind: documentation
 ---
 
 ## Overview
