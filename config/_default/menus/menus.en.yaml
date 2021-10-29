@@ -1293,7 +1293,7 @@ main:
     url: metrics/units/
     parent: metrics_top_level
     weight: 4
-  - name: Metrics Without Limits
+  - name: Metrics Without Limits™
     url: metrics/metrics-without-limits/
     parent: metrics_top_level
     weight: 5
