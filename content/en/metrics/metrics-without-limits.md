@@ -9,9 +9,6 @@ Metrics without Limits™ provides you flexibility and control over your custom 
 
 This page identifies key components of Metrics without Limits™ that can help you manage your custom metrics volumes within your observability budget.
 
-## What is Metrics without Limits™?
-
-Metrics without Limits™ provides you with the ability to configure tags on all metric types in-app and customize aggregations on counts/rates/gauges without having to redeploy or change any code. With Metrics without Limits™, you’ll be able to configure an allowlist of tags in-app to remain queryable throughout the Datadog platform -- automatically excluding nonessential tags attached to application-level or business metrics (i.e. `host`). This functionality is located in the [Metrics Summary][1] page.
 
 ### Configuration of tags
 Click on any metric name to open its details sidepanel. Then click on the **Manage Tags** button and then **“Custom”** to configure the tags you’d like remain as queryable on dashboards/monitors. Before hitting **Save**, you’ll see an estimated new volume of indexed custom metrics that results from this potential tag configuration.
