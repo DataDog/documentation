@@ -30,7 +30,6 @@ You can further adjust your custom metrics filters by opting in to more [metrics
 
 You can add or remove aggregations at any time with no required Agent or code-level changes. 
 
-Once you've clicked **Manage Tags** button and then **“Custom”** you can open the **Customize Aggregations** window to view the default aggregation available for your count/rate/gauge metric. You can opt-in to more aggregations should you need them. 
 
 {{< img src="metrics/mwl_aggrs.jpg" alt="Customize Aggregations">}}
 
