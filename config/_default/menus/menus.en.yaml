@@ -2487,6 +2487,10 @@ main:
     url: synthetics/api_tests/icmp_tests
     parent: api_tests
     weight: 106
+  - name: WebSocket
+    url: synthetics/api_tests/websocket_tests
+    parent: api_tests
+    weight: 107
   - name: Multistep API Tests
     url: synthetics/multistep
     parent: synthetics

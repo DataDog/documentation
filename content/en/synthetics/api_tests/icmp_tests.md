@@ -54,7 +54,7 @@ You can create up to 20 assertions per API test by selecting **New Assertion** o
 
 {{< img src="synthetics/api_tests/icmp_assertion.png" alt="Define assertions for your ICMP test" style="width:90%;" >}}
 
-### Select locations 
+### Select locations
 
 Select the **Locations** to run your ICMP test from. ICMP tests can run from both [managed][1] and [private locations][2] depending on whether you want to trigger the ICMP pings from outside or inside your network.
 

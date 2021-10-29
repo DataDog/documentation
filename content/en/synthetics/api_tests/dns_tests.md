@@ -40,7 +40,7 @@ After choosing to create a `DNS` test, define your test's request.
 
 {{< img src="synthetics/api_tests/dns_test_config_new.png" alt="Define DNS query" style="width:90%;" >}}
 
-Click on **Test URL** to try out the request configuration. You will see a response preview show up on the right side of your screen.
+Click **Test URL** to try out the request configuration. A response preview is displayed on the right side of your screen.
 
 ### Define assertions
 
