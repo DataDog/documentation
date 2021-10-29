@@ -17,7 +17,7 @@ Click on any metric name to open its details sidepanel. Then click **Manage Tags
 
 {{< img src="metrics/mwl_tags.gif" alt="Configuration of Tags">}}
 
-There are also APIs available so you can [create][2], [edit][3], and [delete][4] a tag configuration. We also have an [API][5] for estimating the potential impact of your configuration.
+There are also APIs available so you can [create][2], [edit][3], and [delete][4] a tag configuration. There is also an [API][5] for estimating the potential impact of your configuration.
 
 When configuring tags for counts, rates, and gauges, the most frequently queried time/space aggregation combination is available for query by default.
 
