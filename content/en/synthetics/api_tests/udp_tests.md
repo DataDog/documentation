@@ -39,7 +39,7 @@ Assertions define what an expected test result is. When you click **Test URL**, 
 | Type            | Operator                                                                        | Value Type                        |
 |-----------------|---------------------------------------------------------------------------------|-----------------------------------|
 | response time   | `is less than`                                                                  | *Integer (ms)*                    |
-| string response | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`| *String* <br> *[Regex][7]*        |
+| string response | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`| *String* <br> *[Regex][12]*        |
 
 Select the response preview directly or click **New Assertion** to create an assertion. You can create up to 20 assertions per UDP test.
 
@@ -165,3 +165,4 @@ If you have access to the [custom role feature][11], add your user to any custom
 [9]: /synthetics/settings/#global-variables
 [10]: /account_management/rbac/
 [11]: /account_management/rbac#custom-roles
+[12]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
