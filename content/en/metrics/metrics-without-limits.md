@@ -1,6 +1,13 @@
 ---
 title: Metrics without Limits™
 kind: documentation
+aliases:
+  - /metrics/faq/metrics-without-limits/
+  - /metrics/guide/metrics-without-limits-getting-started/
+further_reading:
+  - link: https://www.datadoghq.com/blog/metrics-without-limits
+  - tag: Blog
+  - text: Dynamically control custom metrics volume with Metrics without Limits™
 ---
 
 ## Overview
@@ -75,6 +82,8 @@ Learn more about Custom Metrics Billing [here][8]
 
 \*Metrics without Limits is a trademark of Datadog, Inc.
 
+
+
 [1]: https://app.datadoghq.com/metric/summary
 [2]: /api/latest/metrics/#create-a-tag-configuration
 [3]: /api/latest/metrics/#update-a-tag-configuration
@@ -87,5 +96,3 @@ Learn more about Custom Metrics Billing [here][8]
 [10]: /account_management/billing/usage_metrics/
 [11]: /account_management/rbac/permissions/?tab=ui#metrics
 [12]: https://app.datadoghq.com/event/stream
-
-
