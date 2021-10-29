@@ -101,7 +101,7 @@ To collect all logs written by running applications in your ECS containers and s
           "mountPoints": [
             (...)
             {
-              "containerPath": "/opt/datadog-agent/run",
+              "containerPath": "C:/var/log",
               "sourceVolume": "pointdir",
               "readOnly": false
             },
@@ -132,6 +132,12 @@ To collect all logs written by running applications in your ECS containers and s
       ],
       "volumes": [
         (...)
+        {
+          "host": {
+            "sourcePath": "C:/var/log"
+          },
+          "name": "pointdir"
+        },
         {
           "host": {
             "sourcePath": "c:/programdata/docker/containers"

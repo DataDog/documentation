@@ -11,6 +11,9 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/session-replay-datadog/'
       tag: 'Blog'
       text: 'Use Datadog Session Replay to view real-time user journeys'
+    - link: 'https://www.datadoghq.com/blog/reduce-customer-friction-funnel-analysis/'
+      tag: 'Blog'
+      text: 'Use funnel analysis to understand and optimize key user flows'
 ---
 
 ## Overview
@@ -135,8 +138,8 @@ Several reasons might explain why assets are not available at the time of the re
 1. The resource does not exist anymore. For example, it was part of a previous deployment.
 2. The resource is inaccessible. For example, authentication might be required, or the resource might only be accessible from an internal network.
 3. The resource is blocked by the browser due to CORS (typically web-fonts).
-   - The replay rendered on the `app.datadoghq.com` domain and the asset requests are subject to cross-origin security checks by your browser. If the given asset is not authorized for the domain, your browser blocks the request.
-   - Allow `app.datadoghq.com` through the [`Access-Control-Allow-Origin`][5] header for any font or image assets your website depends on to ensure these resources are accessible for the replay.
+   - The replay rendered on the `session-replay-datadoghq.com` sandbox domain and the asset requests are subject to cross-origin security checks by your browser. If the given asset is not authorized for the domain, your browser blocks the request.
+   - Allow `session-replay-datadoghq.com` through the [`Access-Control-Allow-Origin`][5] header for any font or image assets your website depends on to ensure these resources are accessible for the replay.
    - For more information, see [Cross Origin Resource Sharing][6].
 
 ### CSS rules not properly applied/mouse hover not replayed

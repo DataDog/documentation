@@ -14,11 +14,11 @@ further_reading:
     text: Implémenter Opentracing dans vos applications
   - link: tracing/visualization/
     tag: Documentation
-    text: 'Explorer vos services, ressources et traces'
+    text: Explorer vos services, ressources et traces
 ---
 ## Configuration automatique
 
-La collecte de métriques JVM est activée par défaut pour le traceur Java v0.29.0+. Elle peut être désactivée en définissant un paramètre de configuration dans le client de tracing, soit via la propriété système `-Ddd.jmxfetch.enabled=false`, soit via la variable d'environnement `DD_JMXFETCH_ENABLED=false`.
+La collecte de métriques JVM est activée par défaut pour le traceur Java v0.29.0+. Elle peut être désactivée en définissant un paramètre de configuration dans le client de tracing, soit via la propriété système `-Ddd.jmxfetch.enabled=false`, soit via la variable d'environnement `DD_JMXFETCH_ENABLED=false`. Depuis la version 0.64.0, vous pouvez également utiliser la variable d'environnement `DD_RUNTIME_METRICS_ENABLED=false` pour désactiver la collecte.
 
 Les métriques JVM peuvent être visualisées conjointement à vos services Java. Consultez la [page Service][1] dans Datadog.
 
@@ -28,13 +28,14 @@ Par défaut, les métriques runtime de votre application sont envoyées à l'Age
 
 Si vous exécutez l'Agent en tant que conteneur, vérifiez que `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` [est définie sur true][3] et que le port `8125` est ouvert sur l'Agent. En outre, pour :
 
-- **Kubernetes** : vous _devez_ [associer le port DogStatsD à un port du host][4].
+- **Kubernetes** : vous _devez_ [lier le port DogStatsD au port d'un host][4].
 - **ECS** : [définissez les flags adéquats dans la définition de votre tâche][5].
 
 **Remarques :**
 
 - Pour l'IU de runtime, `dd-trace-java` >= [`0.24.0`][6] est pris en charge.
 - Pour associer des métriques JVM dans des graphiques de performances, veillez à ce que `env: tag` (sensible à la casse) soit défini et corresponde sur l'ensemble de votre environnement.
+- Pour que les métriques JVM s'affichent sur la page Service lorsque vous utilisez Fargate, vérifiez que `DD_DOGSTATSD_TAGS` est défini sur la tâche de votre Agent et qu'il a pour valeur le `env: tag` de ce service.
 
 ## Données collectées
 
