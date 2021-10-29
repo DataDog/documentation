@@ -7,7 +7,7 @@ aliases:
 further_reading:
   - link: https://www.datadoghq.com/blog/metrics-without-limits
   - tag: Blog
-  - text: Dynamically control custom metrics volume with Metrics without Limits™
+  - text: Dynamically control custom metrics volume
 ---
 
 ## Overview
