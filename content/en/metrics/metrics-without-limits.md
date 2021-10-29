@@ -59,12 +59,11 @@ Learn more about Custom Metrics Billing [here][8]
 
    Ask your Customer Success Manager for an unqueried metrics report.
 
-**3. Review your usage and billing**
-After configuring your metrics, the impact of your changes can be validated in 3 ways: 
+3. Review your usage and billing. After configuring your metrics, the impact of your changes can be validated in three ways: 
 
-- Prior to saving your configuration, the tag configuration cardinality estimator will return the estimated resulting # of indexed custom metrics which should be lower than your ingested custom metrics volumes
-- After saving your configuration, the Metrics Summary details sidepanel should show that your indexed custom metrics are now lower than your ingested custom metrics volume
-- 24 hours after you've saved your configuration, you can also view the impact on your Plan&Usage page's Top Custom Metrics table. There should be reduction in the volume of custom metrics between the **Month-to-Date** tab and the **Most Recent Day** tab of this table.
+   - Prior to saving your configuration, the tag configuration cardinality estimator returns the estimated resulting number of indexed custom metrics which should be lower than your ingested custom metrics volumes.
+   - After saving your configuration, the Metrics Summary details sidepanel should show that your indexed custom metrics are now lower than your ingested custom metrics volume.
+   - 24 hours after you've saved your configuration, you can also view the impact on your Plan & Usage page's **Top Custom Metrics** table. There should be reduction in the volume of custom metrics between the **Month-to-Date** tab and the **Most Recent Day** tab of this table.
 
 ## Best Practices for Metrics without Limits
 - You can set up alerts on your real-time [estimated custom metrics usage][10] metric so that you can correlate spikes in custom metrics with configurations.
