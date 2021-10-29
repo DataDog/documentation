@@ -111,9 +111,9 @@ The next time the task starts, it pulls from `public.ecr.aws` instead of Docker 
 
 ## Cluster Agent
 
-If you’re using the Helm chart to deploy the Datadog Agent and the Datadog Cluster Agent, follow the instructions in [Kubernetes with Helm chart](/#kubernetes-with-helm-chart), and no other updates are needed. The change to the Helm `values.yaml` outlined above changes the repository that both the Cluster Agent and the Datadog Agent are pulled from.
+If you’re using the Helm chart to deploy the Datadog Agent and the Datadog Cluster Agent, follow the instructions in [Kubernetes with Helm chart](#kubernetes-with-helm-chart), and no other updates are needed. The change to the Helm `values.yaml` outlined above changes the repository that both the Cluster Agent and the Datadog Agent are pulled from.
 
-If you’re using the Datadog Operator to deploy the Datadog Cluster Agent, follow the instructions in [Kubernetes with the Datadog Operator](kubernetes-with-the-datadog-operator), and no other updates are needed. The instructions for updating the Operator configuration updates the repository that both the Cluster Agent and the Datadog Agent are pulled from.
+If you’re using the Datadog Operator to deploy the Datadog Cluster Agent, follow the instructions in [Kubernetes with the Datadog Operator](#kubernetes-with-the-datadog-operator), and no other updates are needed. The instructions for updating the Operator configuration updates the repository that both the Cluster Agent and the Datadog Agent are pulled from.
 
 For more information about the Datadog Cluster Agent, see the [Cluster Agent docs][9], and the [setup docs][10].
 
@@ -127,6 +127,7 @@ To change the default repository (`gcr.io/datadoghq`), update the `values.yaml` 
 image:
   repository: gcr.io/datadoghq/synthetics-private-location-worker
 ```
+
 [1]: https://docs.datadoghq.com/agent/docker/?tab=standard
 [2]: https://docs.datadoghq.com/agent/kubernetes/?tab=helm
 [3]: https://github.com/DataDog/helm-charts/blob/dae884481c5b3c9b67fc8dbd69c944bf3ec955e9/charts/datadog/values.yaml#L19
