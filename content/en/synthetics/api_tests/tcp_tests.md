@@ -96,10 +96,6 @@ A notification is sent by your test based on the [alerting conditions](#define-a
 
 3. Specify how often you want your test to **re-send the notification message** in case of test failure. To prevent renotification on failing tests, leave the option as `Never renotify if the monitor has not been resolved`.
 
-Email notifications include the message defined in this section as well as a summary of failed assertions. For example:
-
-{{< img src="synthetics/api_tests/notifications-example.png" alt="API Test Notifications" style="width:90%;" >}}
-
 Click on **Save** to save your test and have Datadog start executing it.
 
 ## Variables
