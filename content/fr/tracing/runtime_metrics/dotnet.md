@@ -35,7 +35,7 @@ Par défaut, les métriques runtime de votre application sont envoyées à l'Age
 
 Si vous exécutez l'Agent en tant que conteneur, vérifiez que `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` [est définie sur true][3] et que le port `8125` est ouvert sur l'Agent. En outre, pour :
 
-- **Kubernetes** : vous _devez_ [associer le port DogStatsD à un port du host][4].
+- **Kubernetes** : vous _devez_ [lier le port DogStatsD au port d'un host][4].
 - **ECS** : [définissez les flags adéquats dans la définition de votre tâche][5].
 
 ## Données collectées

@@ -140,13 +140,13 @@ This might mean your private location is unable to reach the endpoint your API t
 
 ### I’m seeing `invalid mount config for type "bind": source path must be a directory` when attempting to run a private location.
 
-This occurs when a user attempts to mount a single file in a Windows-based container, which is [currently not supported][15]. Make sure that the source of the bind mount is a local directory instead.
+This occurs when you attempt to mount a single file in a Windows-based container, which is not supported. For more information, see the [Docker Mount volume documentation][14]. Ensure that the source of the bind mount is a local directory.
 
 ## CI/CD Testing
 
 ### I'm not seeing any CI metadata in my CI Results Explorer
 
-Check whether you are using API endpoints to trigger your CI/CD test runs. To have your CI Results Explorer populate with CI metadata, you must use the [NPM package][14].
+Check whether you are using API endpoints to trigger your CI/CD test runs. To have your CI Results Explorer populate with CI metadata, you must use the [NPM package][15].
 
 ## Further Reading
 
@@ -165,5 +165,5 @@ Check whether you are using API endpoints to trigger your CI/CD test runs. To ha
 [11]: https://ip-ranges.datadoghq.com/synthetics.json
 [12]: /synthetics/api_tests/?tab=httptest#notify-your-team
 [13]: /synthetics/private_locations#private-location-total-hardware-requirements
-[14]: /synthetics/cicd_testing/?tab=apitest#cli-usage
-[15]: https://docs.docker.com/engine/reference/commandline/run/#mount-volume--v---read-only
+[14]: https://docs.docker.com/engine/reference/commandline/run/#mount-volume--v---read-only
+[15]: /synthetics/cicd_testing/?tab=apitest#cli-usage

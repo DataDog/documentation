@@ -244,7 +244,7 @@ gem install dogstatsd-ruby
 {{< programming-lang lang="go" >}}
 
 ```shell
-go get github.com/DataDog/datadog-go/statsd
+go get github.com/DataDog/datadog-go/v5/statsd
 ```
 
 {{< /programming-lang >}}
@@ -347,7 +347,7 @@ For more options, see [Datadog's GoDoc][1].
 
 
 
-[1]: https://godoc.org/github.com/DataDog/datadog-go/statsd
+[1]: https://godoc.org/github.com/DataDog/datadog-go/v5/statsd
 {{< /programming-lang >}}
 
 {{< programming-lang lang="java" >}}
@@ -462,18 +462,17 @@ For the full list of optional parameters, see the [dogstatsd-ruby repo][1] on Gi
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
-| Parameter               | Type            | Description                                                                                                                                                                                                         |
-| ----------------------- | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `Namespace`             | String          | Namespace to prefix to all metrics, events, and service checks.                                                                                                                                                     |
-| `Tags`                  | List of strings | Global tags applied to every metric, event, and service check.                                                                                                                                                      |
-| `Buffered`              | Boolean         | Used to pack multiple DogStatsD messages in one payload. When set to `true`, messages are buffered until the total size of the payload exceeds `MaxMessagesPerPayload` or 100ms after the payload started building. |
-| `MaxMessagesPerPayload` | Integer         | The maximum number of metrics, events, and/or service checks a single payload can contain. This option only takes effect when the client is buffered.                                                               |
-| `WriteTimeoutUDS`       | Integer         | The timeout after which a UDS packet is dropped.                                                                                                                                                                    |
+The Go client has multiple options for configuring the behavior of your client.
 
-For more options, see [Datadog's GoDoc][1].
+| Parameter                     | Type            | Description                                                                  |
+| ----------------------------- | --------------- | ---------------------------------------------------------------------------- |
+| `WithNamespace()`             | String          | Configure a namespace to prefix to all metrics, events, and service checks.  |
+| `WithTags()`                  | List of strings | Global tags applied to every metric, event, and service check.               |
+
+For all available options, see [Datadog's GoDoc][1].
 
 
-[1]: https://godoc.org/github.com/DataDog/datadog-go/statsd#Option
+[1]: https://godoc.org/github.com/DataDog/datadog-go/v5/statsd#Option
 {{< /programming-lang >}}
 {{< programming-lang lang="java" >}}
 
