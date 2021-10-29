@@ -34,13 +34,12 @@ Click **Test URL** to try out the request configuration. A response preview is d
 
 ### Define assertions
 
-Assertions define what an expected test result is. When you click **Test URL**, basic assertions on `response time`, `string response`, and `UDP connection` are added. You must define at least one assertion for your test to monitor.
+Assertions define what an expected test result is. When you click **Test URL**, a basic assertion on `response time` is added. You must define at least one assertion for your test to monitor.
 
-| Type            | Operator       | Value Type                        |
-|-----------------|----------------|-----------------------------------|
-| response time   | `is less than` | *Integer (ms)*                    |
-| string response | `is`           | *String*                          |
-| UDP connection  | `is`           | `established`, `timeout`, `refused` |
+| Type            | Operator                                                                        | Value Type                        |
+|-----------------|---------------------------------------------------------------------------------|-----------------------------------|
+| response time   | `is less than`                                                                  | *Integer (ms)*                    |
+| string response | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`| *String* <br> *[Regex][7]*        |
 
 Select the response preview directly or click **New Assertion** to create an assertion. You can create up to 20 assertions per UDP test.
 
