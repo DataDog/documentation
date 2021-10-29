@@ -26,7 +26,7 @@ When configuring tags for counts, rates, and gauges, the most frequently queried
 You can further adjust your custom metrics filters by opting in to more [metrics aggregations][6] you want to query on your count, gauge, or rate metrics. To preserve the mathematical accuracy of your queries, by default Datadog only stores the most frequently queried time/space aggregation combination for a given metric type: 
 
 - Configured counts and rates are queryable in time/space with SUM
-- Configured gauges will be queryable in time/space with AVG
+- Configured gauges are queryable in time/space with AVG
 
 You can add or remove aggregations at any time with no required Agent or code-level changes. 
 
