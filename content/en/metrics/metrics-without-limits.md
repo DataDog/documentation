@@ -74,6 +74,7 @@ Learn more about [Custom Metrics Billing][8].
    - 24 hours after you've saved your configuration, you can also view the impact on your Plan & Usage page's **Top Custom Metrics** table. There should be reduction in the volume of custom metrics between the **Month-to-Date** tab and the **Most Recent Day** tab of this table.
 
 ## Best practices
+
 - You can set up alerts on your real-time [estimated custom metrics usage][10] metric so that you can correlate spikes in custom metrics with configurations.
 
 - [Role based access control][11] for Metrics without Limits™ is also available to control which users have permissions to use this feature that has billing implications.
@@ -82,7 +83,9 @@ Learn more about [Custom Metrics Billing][8].
 
 \*Metrics without Limits is a trademark of Datadog, Inc.
 
+## Further reading
 
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/metric/summary
 [2]: /api/latest/metrics/#create-a-tag-configuration
