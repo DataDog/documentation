@@ -39,7 +39,6 @@ The new user receives an email with a link to log in. The user is marked with th
 
 To resend an invite in list view, click the user to open the user side panel and click **Resend Invite**. Or in grid view, hover over the user box and click **Resend Invite**.
 
-
 ## Edit a user's roles
 
 Only users with the User Access Management permission, such as users with the Datadog Admin Role, can change another user's role.
@@ -69,7 +68,7 @@ To edit a user's login methods:
 4. If enabling overrides, choose a set of login methods that the user can use to access Datadog. This can be a single option or all options that are configured for your organization.
 5. **Save** the new settings.
 
-{{< img src="account_management/users/user_login_methods_update.png" alt="User Login Method update" style="width:80%;">}}
+{{< img src="account_management/users/user_login_method_update.png" alt="User Login Method update" style="width:80%;">}}
 
 Note: Overrides can be set only to valid login methods. If you have not configured SAML you will not be able to choose that login method as an override for a user.
 

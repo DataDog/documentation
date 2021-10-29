@@ -33,10 +33,9 @@ In circumstances where an override has been set, you can example in the below im
 
 When navigating to the [User Management interface][3] you can filter users by the override methods set, or view users who have the Default login methods enabled:
 
-{{< img src="account_management/user/user_page_login_methods_override_view.png" alt="User Management view filtered to login override methods enabled." style="width:80%;">}}
+{{< img src="account_management/users/user_page_login_methods_override_view.png" alt="User Management view filtered to login override methods enabled." style="width:80%;">}}
 
 If necessary you can edit the user's overrides or remove the override altogether to allow the user to only use the defaults. See the documentation about managing the [User's override method][1].
-
 
 [1]: /account_management/users/#edit-a-users-login-methods
 [2]: https://app.datadoghq.com/organization-settings/login-methods
