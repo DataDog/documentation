@@ -89,7 +89,7 @@ Once you declare an incident from Slack, it generates an incident channel.
 For more information about the Datadog Slack integration, check out [the docs][7].
 
 {{< site-region region="eu" >}}
-For {{< region-param key="dd_site_name" >}} customers who use Slack, stay informed about the Slack app by emailing support@datadoghq.com.
+For {{< region-param key="dd_site_name" >}} customers who use Slack, stay informed about the Slack app by filing a ticket at https://help.datadoghq.com/.
 {{< /site-region >}}
 
 ### Describing the incident
