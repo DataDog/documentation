@@ -63,8 +63,8 @@ However, to route traffic to Datadog's PrivateLink offering in `us-east-1` from 
 
    {{< img src="agent/guide/private_link/vpc_endpoint_created.png" alt="VPC endpoint created" style="width:60%;" >}}
 
-1. Click on the VPC endpoint ID to check its status.
-1. Wait for the status to move from _Pending_ to _Available_. This can take up to 10 minutes. Once it shows _Available_, the AWS PrivateLink is ready to be used.
+9. Click on the VPC endpoint ID to check its status.
+10. Wait for the status to move from _Pending_ to _Available_. This can take up to 10 minutes. Once it shows _Available_, the AWS PrivateLink is ready to be used.
 
     {{< img src="agent/guide/private_link/vpc_status.png" alt="VPC status" style="width:60%;" >}}
 
@@ -130,8 +130,6 @@ However, to route traffic to Datadog's PrivateLink offering in `us-east-1` from 
 
 {{< img src="agent/guide/private_link/vpc_status.png" alt="VPC status" style="width:60%;" >}}
 
-9. Once it shows _Available_, the AWS PrivateLink is ready to be used.
-
 ### Amazon Route53
 
 1. Create a [Route53 private hosted zone][2] for each service for which you have created an AWS PrivateLink endpoint. Attach the private hosted zone to the VPC in `us-east-1`.
@@ -161,15 +159,17 @@ However, to route traffic to Datadog's PrivateLink offering in `us-east-1` from 
 
 {{< img src="agent/guide/private_link/create-an-a-record.png" alt="Create an A record" style="width:80%;" >}}
 
-3. Configure VPC peering and routing between the VPC in `us-east-1` that contains the Datadog PrivateLink endpoints and the VPC in the region where the Datadog Agents will run.
+3. Configure VPC peering and routing between the VPC in `us-east-1` that contains the Datadog PrivateLink endpoints and the VPC in the region where the Datadog Agents run.
 
-4. If the VPCs are in different AWS accounts, the VPC containing the Datadog Agent must be authorized to associate with the Route53 private hosted zones before continuing. Create a [VPC association authorization][3] for each Route53 private hosted zone using the region and VPC ID of the VPC where the Datadog Agent will run. This option is not available in the AWS web console. It must be configured using the AWS CLI, SDK, or API.
+4. If the VPCs are in different AWS accounts, the VPC containing the Datadog Agent must be authorized to associate with the Route53 private hosted zones before continuing. Create a [VPC association authorization][3] for each Route53 private hosted zone using the region and VPC ID of the VPC where the Datadog Agent runs. This option is not available in the AWS web console. It must be configured using the AWS CLI, SDK, or API.
 
 5. Edit the Route53 hosted zone to add the non-us-east-1 VPC.
 
 {{< img src="agent/guide/private_link/edit-route53-hosted-zone.png" alt="Edit a Route53 private hosted zone" style="width:80%;" >}}
 
-1. [Restart the Agent][4] to send data to Datadog through AWS PrivateLink.
+6. VPCs that have the Private Hosted Zone (PHZ) attached need to have certain settings toggled on, specifically `enableDnsHostnames` and `enableDnsSupport` need to be turned on in the VPCs that the PHZ is associated with. See the [Considerations when working with a private hosted zone][4] documentation.
+
+7. [Restart the Agent][5] to send data to Datadog through AWS PrivateLink.
 
 #### Troubleshooting DNS resolution and connectivity
 
@@ -181,9 +181,11 @@ If DNS is resolving to public IP addresses, then the Route53 zone has **not** be
 
 If DNS resolves correctly, but connections to `port 443` are failing, then VPC peering or routing may be misconfigured, or port 443 may not be allowed outbound to the CIDR block of the VPC in `us-east-1`.
 
+The VPCs that have the Private Hosted Zone (PHZ) attached need to have a couple of settings toggled on. Specifically, `enableDnsHostnames` and `enableDnsSupport` need to be turned on in the VPCs that the PHZ is associated with. See https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/hosted-zone-private-considerations.html#hosted-zone-private-considerations-vpc-settings
+
 ### Datadog Agent
 
-1. If you are collecting logs data, ensure your Agent is configured to send logs over HTTPS. If the data is not already there, add the following to the [Agent `datadog.yaml` configuration file][5]:
+1. If you are collecting logs data, ensure your Agent is configured to send logs over HTTPS. If the data is not already there, add the following to the [Agent `datadog.yaml` configuration file][6]:
 
     ```yaml
     logs_config:
@@ -196,17 +198,18 @@ If DNS resolves correctly, but connections to `port 443` are failing, then VPC p
     DD_LOGS_CONFIG_USE_HTTP=true
     ```
 
-    This configuration is required when sending logs to Datadog with AWS PrivateLink and the Datadog Agent, and is not required for the Lambda Extension. See [Agent log collection][6] for more details.
+    This configuration is required when sending logs to Datadog with AWS PrivateLink and the Datadog Agent, and is not required for the Lambda Extension. See [Agent log collection][7] for more details.
 
-2. [Restart the Agent][4].
+2. [Restart the Agent][5].
 
 
 [1]: /help/
 [2]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/hosted-zones-private.html
 [3]: https://docs.amazonaws.cn/en_us/Route53/latest/DeveloperGuide/hosted-zone-private-associate-vpcs-different-accounts.html
-[4]: /agent/guide/agent-commands/?tab=agentv6v7#restart-the-agent
-[5]: /agent/guide/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
-[6]: https://docs.datadoghq.com/agent/logs/?tab=tailexistingfiles#send-logs-over-https
+[4]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/hosted-zone-private-considerations.html#hosted-zone-private-considerations-vpc-settings
+[5]: /agent/guide/agent-commands/?tab=agentv6v7#restart-the-agent
+[6]: /agent/guide/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
+[7]: https://docs.datadoghq.com/agent/logs/?tab=tailexistingfiles#send-logs-over-https
 {{% /tab %}}
 {{< /tabs >}}
 
