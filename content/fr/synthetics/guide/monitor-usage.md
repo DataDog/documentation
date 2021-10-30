@@ -18,7 +18,7 @@ further_reading:
 Les tests Synthetic proposent des [métriques d'estimation][1] vous permettant de surveiller votre utilisation de Synthetic. Grâce à ces métriques, vous pouvez notamment :
 
 * Déterminer l'évolution de votre utilisation
-* Visualiser les équipes, applications ou services qui se servent le plus de Synthetic ou avec l'utilisation la plus exhaustive
+* Visualiser les équipes, applications ou services qui se servent le plus de Synthetic
 * Recevoir des alertes en cas de pics d'utilisation inattendue susceptibles d'augmenter vos coûts
 
 Pour visualiser votre utilisation Synthetic ou recevoir des alertes à ce sujet, utilisez les requêtes suivantes :
