@@ -32,7 +32,7 @@ With RUM Analytics visualizations, you can:
 
 ## Build a query
 
-In [RUM Analytics][1], customize your display by adding facets and measures to your search query. 
+In [RUM Analytics][1], customize your display to add facets and measures to your search query. 
 
 1. Choose a [measure][2] or [facet][3] to graph. A [measure][2] lets you choose the aggregation function whereas a [facet][3] displays the unique count.
 
