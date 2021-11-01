@@ -15,9 +15,11 @@ Session Replay provides privacy controls to ensure organizations of any scale do
 
 Default privacy options for Session Replay are designed to protect end user privacy and prevent sensitive organizational information from being collected. 
 
-By enabling Session Replay, you can automatically mask sensitive elements from being recorded through the SDK.
+By enabling Session Replay, you can automatically mask sensitive elements from being recorded through the RUM Browser SDK.
 
 ## Configuration
+
+<div class="alert alert-warning"><code>defaultPrivacyLevel</code> and <code>mask-user-input</code> are available in the SDK v3.6.0+.</div>
 
 To enable your privacy settings, set `defaultPrivacyLevel` to `mask-user-input`, `mask`, or `allow` in your JavaScript configuration.
 
