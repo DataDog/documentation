@@ -242,14 +242,15 @@ DD_API_KEY=<YOUR_DD_API_KEY> docker-compose up \
 
 **Note:** In this case, add all the required CI provider environment variables so build information can be attached to each test result, as described in [Tests in containers][6].
 
-{{< /site-region >}}
-
-## Further reading
-
-{{< partial name="whats-next/whats-next.html" >}}
 [1]: /agent/
 [2]: https://app.datadoghq.com/account/settings#agent
 [3]: https://docs.datadoghq.com/agent/cluster_agent/admission_controller/
 [4]: https://app.datadoghq.com/organization-settings/api-keys
 [5]: https://docs.docker.com/compose/
 [6]: /continuous_integration/setup_tests/containers/
+{{< /site-region >}}
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+

@@ -34,15 +34,14 @@ The [Pipelines][4] and [Pipeline Executions][5] pages populate with data after t
 
 **Note**: The Pipelines page shows data for only the default branch of each repository.
 
-
+[1]: https://buildkite.com
+[2]: https://buildkite.com/docs/apis/webhooks
+[3]: https://app.datadoghq.com/organization-settings/api-keys
+[4]: https://app.datadoghq.com/ci/pipelines
+[5]: https://app.datadoghq.com/ci/pipeline-executions
 {{< /site-region >}}
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://buildkite.com
-[2]: https://buildkite.com/docs/apis/webhooks
-[3]: https://app.datadoghq.com/organization-settings/api-keys
-[4]: https://app.datadoghq.com/ci/pipelines
-[5]: https://app.datadoghq.com/ci/pipeline-executions

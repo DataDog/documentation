@@ -129,13 +129,14 @@ After the integration is successfully configured, the [Pipelines][4] and [Pipeli
 
 **Note**: The Pipelines page shows data for only the default branch of each repository.
 
-{{< /site-region >}}
-
-## Further reading
-
-{{< partial name="whats-next/whats-next.html" >}}
 [1]: /getting_started/site/
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://docs.gitlab.com/ee/user/project/integrations/webhooks.html
 [4]: https://app.datadoghq.com/ci/pipelines
 [5]: https://app.datadoghq.com/ci/pipeline-executions
+{{< /site-region >}}
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
