@@ -198,7 +198,7 @@ For information about the different methods for setting environment variables, s
    RUN /<APP_DIRECTORY>/datadog/createLogPath.sh
    ```
 
-  Docker examples are available in the dd-trace-dotnet [repository][1].
+   Docker examples are available in the [`dd-trace-dotnet` repository][1].
 
 3. For standalone applications, manually restart the application.
 
