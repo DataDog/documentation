@@ -15,7 +15,7 @@ further_reading:
 ---
 
 <div class="alert alert-warning">
-The access to this feature is restricted. If you would access to this feature, or if you would like to be added to the Windows Private Location beta for running IE11 browser tests, reach out to the <a href="https://docs.datadoghq.com/help/">Datadog support team</a>.
+The access to this feature is restricted. For access to this feature, or if you would like to be added to the Windows Private Location beta allowing you to run IE11 browser tests, reach out to <a href="https://docs.datadoghq.com/help/">Datadog support</a>.
 </div>
 
 ## Overview
@@ -96,7 +96,7 @@ If you have access to the [custom role feature][18], add users to a custom role 
 
 ### Create your private location
 
-Go to **Synthetic Monitoring** -> **Settings** -> **Private Locations** and click **Add Private Location**:
+Navigate to **Synthetic Monitoring** > **Settings** > **Private Locations** and click **Add Private Location**.
 
 {{< img src="synthetics/private_locations/synthetics_pl_add.png" alt="create a private location"  style="width:100%;">}}
 
@@ -122,7 +122,7 @@ Configure your private location by customizing the generated configuration file.
 
 If the traffic between your private location and Datadog has to go through a proxy, specify your proxy URL with the following format: `http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT>` to add the associated `proxyDatadog` parameter to your generated configuration file.
 
-{{< img src="synthetics/private_locations/pl_proxy.png" alt="Add a proxy to your private location configuration file"  style="width:100%;">}}
+{{<img src="synthetics/private_locations/pl_proxy.png" alt="Add a proxy to your private location configuration file" style="width:100%;">}}
 
 [Advanced proxy configuration options][5] are available.
 
@@ -154,7 +154,7 @@ After adding the appropriate options to your private location configuration file
 
 ### Install your private location
 
-**Note:** If you wish to use environment variables in your task definition, you can use the following environment variables: `DATADOG_API_KEY`, `DATADOG_ACCESS_KEY`, `DATADOG_SECRET_ACCESS_KEY`, `DATADOG_PRIVATE_KEY`.
+**Note:** If you wish to use environment variables in your task definition, you can use the following environment variables: `DATADOG_API_KEY`, `DATADOG_ACCESS_KEY`, `DATADOG_SECRET_ACCESS_KEY`, and `DATADOG_PRIVATE_KEY`.
 
 Launch your private location on:
 
@@ -527,11 +527,11 @@ You can then start testing your first internal endpoint by launching a fast test
 
 {{< img src="synthetics/private_locations/pl_fast_test.mp4" alt="Fast test on private location" video="true" width="100%">}}
 
-**Note::** Datadog only sends outbound traffic from your private location, there is no inbound traffic being transmitted.
+**Note::** Datadog only sends outbound traffic from your private location, no inbound traffic is transmitted.
 
 ## Launch Synthetic tests from your private location
 
-If your private location reports correctly to Datadog you should also see a `REPORTING` health status displayed on the Private Locations list from the **Settings** page:
+If your private location reports correctly to Datadog, you should see a `REPORTING` health status displayed in the Private Locations list on the **Settings** page:
 
 {{< img src="synthetics/private_locations/pl_monitoring_table_reporting.png" alt="Private location health" style="width:100%;">}}
 
@@ -554,8 +554,6 @@ For more information, see [Dimensioning private locations][18].
 While you initially add resources that are consistent with the number and type of tests to execute from your private location, the easiest way to know if you should downscale or upscale your private location is to closely monitor them. [Private Location Monitoring][19] provides insight about the performance and state of your private location as well as out-of-the-box metrics and monitors. 
 
 For more information, see [Private Location Monitoring][19].
-
-
 
 ## Further Reading
 

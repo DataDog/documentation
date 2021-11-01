@@ -11,59 +11,57 @@ further_reading:
   text: "Dimensioning your Private Locations"
 ---
 
-## Dimension your private location
+## Overview 
 
-### Types of test runs
+Private locations can run [API][1], [multistep API][2], and [browser tests][3]. One private location can run several types of tests. Browser tests are more resource intensive than API and multistep API tests.
 
-Private locations can run [API][1], [Multistep API][2], and [Browser tests][3]. A same private location can run several types of tests. However, for dimensioning reasons, it can prove helpful to split test assignments based on test types and for instance have some private locations run only API and Multistep API tests and others run only Browser tests, which are more resource intensive than other test types. 
+To improve dimensioning, split your test assignments based on test types. For example, you can have some private locations run only API and multistep API tests while other private locations run only browser tests.
 
-### Maximum number of test runs
+### Define your maximum number of test runs
 
-Resource requirements depend on the maximum number of test runs your private location might have to execute in parallel. When defining that number, make sure to take into account spikes that might happen when performing on demand testing (for example, when running tests as part of your [CI/CD pipelines][5]).
+Resource requirements depend on the maximum number of tests runs your private location may execute in parallel and the application(s) you want to test. Take into account spikes that may happen with on-demand testing (for example, when running tests as part of your [CI/CD pipelines][4]) as well as the size and number of assets that need to be loaded.
 
-The maximum number of test runs allows you to define the [`concurrency` parameter][4] of your private location (it defaults to `10`). This parameter allows you to adjust the number of test runs your private location workers can run concurrently.
+Define the `concurrency` parameter of your private location with the maximum number of test runs. By default, the maximum number of tests executed in parallel is 10.
 
-### Private location total hardware requirements
+For more information, see [Advanced configuration][5].
 
-Once you know the [type of tests](#types-of-test-runs) you want your private location to execute and the [maximum number of test runs](#maximum-number-of-test-runs) that needs to be executed in parallel, you can define the **total** hardware requirements for your private location. 
+### Define your total hardware requirements
 
-* Base requirements: 
-  * CPU: 150mCores
-  * Memory: 150MiB
+Once you know which test type you want to execute and the maximum number of test runs you want to execute in parallel, define the total hardware requirements for your private location.  
 
-* Additional requirements are based on the type of tests run by the private location:
+The base requirement for CPU is 150mCores and for memory, is 150 MiB.
+
+Additional requirements vary based on the test type for the private location.
 
 | Test type                                     | CPU/Memory/Disk recommendation    |
 | --------------------------------------------- | --------------------------------- |
 | [API tests][1] and [Multistep API tests][2] | 20mCores/5MiB/1MiB per test run   |
 | [Browser tests][3]                           | 150mCores/1GiB/10MiB per test run |
 
-**Example:** For a private location running only Browser tests, with a maximum number of concurrent test runs of `10`, the recommendation for a safe usage is 
-~ 1.5Core CPU `(150mCores + (150mCores*10 test runs))`, ~ 10GiB memory `(150MiB + (1GiB*10 test runs))`, and ~ 100MiB disk `(10MiB*10 test runs)`.
+For example, Datadog recommends ~ 1.5 core CPU `(150mCores + (150mCores*10 test runs))`, ~ 10GiB memory `(150MiB + (1GiB*10 test runs))`, and ~ 100MiB disk `(10MiB*10 test runs)` for a private location running only Browser tests with a maximum number of concurrent test runs of `10`.
 
-**Note:** Resources requirements may vary based on the application being tested (size and number of assets to be loaded, etc.).
-
-**Note:** When running both API or Multistep API tests and Browser tests on a single private location, the recommendation is to perform computation using Browser tests resource requirements.
+**Note:** If you want to run API or multistep API tests and Browser tests on a private location, Datadog recommends computing the total hardware requirements with the Browser tests requirements.
 
 ### Assign resources to your private location
 
-Once you know about the [**total** requirements for your private location](#private-location-total-hardware-requirements), you can decide how you want these resources to be distributed:
+Once you have determined the [total requirements for your private location](#private-location-total-hardware-requirements), decide how you want these resources to be distributed: by assigning all resources to a single worker or by distributing all resources across multiple workers.
+To assign all resources to a single worker, run one container for a private location with a configuration file.
+1. Set the [`concurrency` parameter][5] to `maximum number of test runs that can be executed in parallel on your private location`.
+2. Assign your [total private location resource requirements](#private-location-total-hardware-requirements) to your unique container.
+  
+To distribute resources across multiple workers, run multiple containers for a private location with a configuration file.
+ 
+ 1. Set the [`concurrency` parameter][5] to `maximum number of test runs that can be executed on your private location / number of workers associated with your private location`.
+ 2. Assign `total private location resource requirements / number of workers` resources to every private location container.
 
-* You can assign all resources to a single worker. In this case:
-  * Set the [`concurrency` parameter][4] to `maximum number of test runs that can be executed in parallel on your private location`.
-  * Assign your [total private location resource requirements](#private-location-total-hardware-requirements) to your unique container.
-* You can distribute resources across several workers by running several containers for one private location with a single configuration file in order to spread the load. In this case:
-  * Set the [`concurrency` parameter][4] to `maximum number of test runs that can be executed on your private location / number of workers associated with your private location`.
-  * Assign `total private location resource requirements / number of workers` resources to each private location container.
 
-
-**Example:** For a private location running only Browser tests, with a maximum number of concurrent test runs of `10`, your private location requires ~ 1.5 core CPU, ~ 10GiB memory, and ~ 100MiB disk. If you want to distribute these resources across two workers, the [`concurrency` parameter][4] should be set to `5`, and each worker should be allocated ~ 750mCores CPU, ~ 5GiB memory, and ~ 50MiB disk.
+For example, Datadog recommends ~ 1.5 core CPU, ~ 10GiB memory, and ~ 100MiB disk for a private location running only Browser tests with a maximum number of concurrent test runs of `10`. To distribute these resources across two workers, set the [`concurrency` parameter][5] to 5 and allocate ~ 750mCores CPU, ~ 5GiB memory, and ~ 50MiB disk to each worker.
 
 #### Queueing mechanism
 
-When there are several workers associated with a private location, each worker requests a few tests to run that depends on its [`concurrency` parameter][4] and on the number of additional test runs that can be assigned to it.   
+When multiple workers are associated with a private location, each worker requests a couple test runs, which depend on the [`concurrency` parameter][5] and on the number of additional test runs that can be assigned.   
 
-**Example:** Ten tests are scheduled to run simultaneously on a private location that has two workers running. If worker 1 is running two tests, it can request three additional tests to run. If worker 2 is not running any tests, it can request the five following tests. The remaining two tests can be requested by which ever worker has finished running its test first (which ever worker has available slots).
+For example, ten tests are scheduled to run simultaneously on a private location that has two workers running. If Worker 1 is running two tests, Worker 1 can request three additional tests to run. If Worker 2 is not running any tests, Worker 2 can request the five following tests. The remaining two tests can be requested by whichever worker has finished running its test first (any worker that has available slots).
 
 ## Further Reading
 
@@ -73,5 +71,5 @@ When there are several workers associated with a private location, each worker r
 [1]: /synthetics/api_tests/
 [2]: /synthetics/multistep?tab=requestoptions
 [3]: /synthetics/browser_tests/?tab=requestoptions
-[4]: /synthetics/private_locations/configuration#advanced-configuration
-[5]: /synthetics/ci
+[4]: /synthetics/cicd_testing
+[5]: /synthetics/private_locations/configuration#advanced-configuration
