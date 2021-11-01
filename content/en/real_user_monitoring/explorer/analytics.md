@@ -30,7 +30,7 @@ With RUM Analytics visualizations, you can:
 * Create a widget in a dashboard out of that visualization.
 * Dive deeper into subsets of the events list depending on the interactions that the visualization enables.
 
-## Build an Analytics query
+## Build a query
 
 In [RUM Analytics][1], customize your display by adding facets and measures to your search query. 
 
@@ -123,7 +123,7 @@ Visualize the top values from a [facet][1] according to a chosen [measure][2] (t
 
 Visualize a single [measure][1] (or a [facet][2] unique count of values) on the world map.
 
-The following RUM Analytics geomap shows the 75th percentile of **Largest Contentful Paint** over the past day:
+The following RUM Analytics geomap shows the 75th percentile of the **Largest Contentful Paint** over the past day:
 
 {{< img src="real_user_monitoring/explorer/analytics/rum_geomap_example.png" alt="RUM geomap example" style="width:90%;">}}
 
@@ -143,7 +143,7 @@ To construct the funnel, select **View** or **Action** and choose a query from t
 
 {{< img src="real_user_monitoring/explorer/analytics/rum_funnel.mp4" alt="Create a funnel with queries" video="true" width="100%" >}}
 
-You can see how many session occurred for your selected queries out of your total RUM sessions. When you click on the bar graph, a side panel displaying **Converted Sessions** and **Dropped off Sessions** appears.
+The graph displays the sessions for your selected queries out of your total RUM sessions. When you click on the bar graph, a side panel displaying **Converted Sessions** and **Dropped off Sessions** appears.
 
 {{< img src="real_user_monitoring/explorer/analytics/rum_funnel_details.mp4" alt="Converted and dropped off session details" video="true" width="100%" >}}
 
