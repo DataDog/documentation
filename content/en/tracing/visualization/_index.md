@@ -37,7 +37,7 @@ The APM UI provides many tools to troubleshoot application performance and corre
 | [Retention Filters](#retention-filters) | Retention filters are tag-based controls set within the Datadog UI that determine what spans to index in Datadog for 15 days.                                                                                              |
 | [Ingestion Controls](#ingestion-controls) | Ingestion Controls are used to send up to 100% of traces to Datadog for live search and analytics for 15 minutes.
 | [Sublayer Metric](#sublayer-metric) | A sublayer metric is the execution duration of a given type / service within a trace.
-| [Execution Duration](#execution-duration) | Total time that a span is considered 'active' (not waiting for a child span to complete).
+| [Execution Time](#execution-time) | Total time that a span is considered 'active' (not waiting for a child span to complete).
 
 
 **Note:** Indexed Spans were formerly known as Analyzed Spans and renamed with the launch of Tracing Without Limits on October 20th, 2020.
@@ -152,13 +152,13 @@ After a tag has been added to a span, search and query on the tag in Analytics b
 
 ## Sublayer metric
 
-Some [Tracing Application Metrics][15] are tagged with `sublayer_service` and `sublayer_type` so that you can see the execution duration for individual services within a trace.
+Some [Tracing Application Metrics][15] are tagged with `sublayer_service` and `sublayer_type` so that you can see the execution time for individual services within a trace.
 
-## Execution duration
+## Execution time
 
 The active spans for a given time, for a given trace, are all of the leaf spans (spans without children).
 
-{{< img src="tracing/visualization/execution_duration.png" style="width:50%;" alt="Execution Duration"  style="width:50%;">}}
+{{< img src="tracing/visualization/execution_duration.png" style="width:50%;" alt="Execution Time"  style="width:50%;">}}
 
 
 ## Further Reading
