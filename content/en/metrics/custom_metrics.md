@@ -18,7 +18,7 @@ further_reading:
   text: "Official and Community created API and DogStatsD client libraries"
 - link: "https://www.datadoghq.com/blog/metrics-without-limits/"
   tag: "Blog"
-  text: "Dynamically control your custom metrics volume with Metrics without Limits&trade;"
+  text: "Dynamically control your custom metrics volume with Metrics without Limits™"
 ---
 
 ## Overview
