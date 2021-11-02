@@ -66,7 +66,7 @@ To edit a user's login methods:
 2. Click **Edit** on the right of the user line.
 3. Select the toggle next to **Override Default Login Methods** to enable or disable overrides on the user.
 4. If enabling overrides, choose a set of login methods that the user can use to access Datadog. This can be a single option or all options that are configured for your organization.
-5. **Save** the new settings.
+5. Click **Save**.
 
 {{< img src="account_management/users/user_login_method_update.png" alt="User Login Method update" style="width:80%;">}}
 
