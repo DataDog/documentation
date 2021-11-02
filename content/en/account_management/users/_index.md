@@ -68,7 +68,6 @@ To edit a user's login methods:
 4. If enabling overrides, choose a set of login methods that the user can use to access Datadog. This can be a single option or all options that are configured for your organization.
 5. Click **Save**.
 
-{{< img src="account_management/users/user_login_method_update.png" alt="User Login Method update" style="width:80%;">}}
 
 **Note**: Overrides can be set only to valid login methods. If you have not configured SAML, you cannot choose that login method as an override for a user.
 
