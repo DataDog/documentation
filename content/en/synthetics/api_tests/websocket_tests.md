@@ -55,12 +55,12 @@ Click **Test URL** to try out the request configuration. A response preview is d
 
 ### Define assertions
 
-Assertions define what an expected test result is. When you click **Test URL**, basic assertions on `response time` and `string response` are added. You must define at least one assertion for your test to monitor.
+Assertions define what an expected test result is. When you click **Test URL**, a basic assertion on `response time` is added. You must define at least one assertion for your test to monitor.
 
 | Type            | Operator                                                                         | Value Type                        |
 |-----------------|----------------------------------------------------------------------------------|-----------------------------------|
 | response time   | `is less than`                                                                   | _Integer (ms)_                    |
-| string response | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match` | _String_                          |
+| string response | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match` | _String_ <br> _[Regex][5]_        |
 | header          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match` | _String_ <br> _[Regex][5]_        |
 
 Select the response preview directly or click **New Assertion** to create an assertion. You can create up to 20 assertions per WebSocket test.
