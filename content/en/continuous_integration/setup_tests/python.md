@@ -44,6 +44,12 @@ To enable instrumentation of `pytest` tests, add the `--ddtrace` option when run
 DD_SERVICE=my-python-app DD_ENV=ci pytest --ddtrace
 {{< /code-block >}}
 
+If you also want to enable the rest of the APM integrations to get more information in your flamegraph, add the `--ddtrace-patch-all` option:
+
+{{< code-block lang="bash" >}}
+DD_SERVICE=my-python-app DD_ENV=ci pytest --ddtrace --ddtrace-patch-all
+{{< /code-block >}}
+
 ## Configuration settings
 
 The following is a list of the most important configuration settings that can be used with the tracer, either in code or using environment variables:
