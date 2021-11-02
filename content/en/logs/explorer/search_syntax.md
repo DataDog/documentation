@@ -45,7 +45,7 @@ To combine multiple terms into a complex query, you can use any of the following
 
 Use the search bar's autocomplete feature to complete your query using existing values:
 
-{{< img src="logs/explorer/search/search_bar_autocomplete.png" alt="search bar autocomplete "  style="width:80%;">}}
+{{< img src="logs/explorer/search/search_bar_autocomplete.jpg" alt="search bar autocomplete "  style="width:80%;">}}
 
 ## Escaping of special characters
 

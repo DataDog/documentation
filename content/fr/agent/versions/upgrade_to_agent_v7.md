@@ -50,7 +50,7 @@ SUSE
 **Remarque** : les liens vers les différentes versions du programme d'installation Windows sont [fournis au format JSON][3].
 
 [1]: https://ddagent-windows-stable.s3.amazonaws.com/datadog-agent-7-latest.amd64.msi
-[2]: https://app.datadoghq.com/account/settings#api
+[2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://s3.amazonaws.com/ddagent-windows-stable/installers.json
 {{% /tab %}}
 {{% tab "macOS" %}}

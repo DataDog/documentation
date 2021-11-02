@@ -22,7 +22,7 @@ On the [SLO status page][1], select **New SLO +**. Then select [**Metric**][2].
 
 ### Define queries
 
-1. There are two queries to define. The first query defines the sum of the good events, while the second query defines the sum of the total events.
+1. There are two queries to define. The numerator query defines the sum of the good events, while the denominator query defines the sum of the total events. Your queries must use either COUNT or RATE metrics to ensure the SLO calculation behaves correctly.
 2. Use the `FROM` field to include or exclude specific groups using tags.
 3. Use the `sum by` aggregator to sum up all request counts instead of averaging them, or taking the max or min of all of those requests.
 4. Optionally, break your SLI out by specific groups (for tracking and visualization) or report on an aggregation of everything included in your criteria from steps 1 and 2. 

@@ -19,7 +19,7 @@ further_reading:
 
 ## Overview
 
-Visualizations define how the outcome of filter and aggregates are displayed.
+Visualizations define how the outcome of filter and aggregates are displayed. Using the logs query editor, select the relevant visualizations to surface crucial information.
 
 ## Lists
 
@@ -77,7 +77,7 @@ Visualize the top values from a [facet][3] according to the chosen [measure][3].
 
 For example, the following top list shows the **top 15 Customers** on a merchant website according to the number of **unique sessions** they had over the last day.
 
-{{< img src="logs/explorer/toplists.png" alt="Top list example" style="width:90%;">}}
+{{< img src="logs/explorer/toplists.jpg" alt="Top list example" style="width:90%;">}}
 
 ## Nested tables
 
@@ -90,7 +90,7 @@ Visualize the top values from up to three [facets][3] according to a chosen [mea
 
 The following table log analytics show the evolution of the **Top 10 Availability zones**, and for each Availability Zone the **Top 10 Versions** according to their **number or error logs**, along with the number of unique count of **Hosts** and **Container ID** for each.
 
-{{< img src="logs/explorer/nested_tables.png" alt="Table example" style="width:90%;">}}
+{{< img src="logs/explorer/nested_tables.jpg" alt="Table example" style="width:90%;">}}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
