@@ -96,9 +96,6 @@ Visualisez les valeurs les plus élevées d'une [facette][1] en fonction de la [
 L'analyse de logs avec une Top List suivante illustre :
 l'évolution des **5 principaux chemins URL** selon le nombre d'adresses **IP client uniques** au cours du dernier mois.
 
-{{< img src="logs/explorer/toplists.png" alt="Exemple de Top List" style="width:90%;">}}
-
-
 [1]: /fr/logs/explorer/facets/
 {{% /tab %}}
 

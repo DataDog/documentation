@@ -62,8 +62,8 @@ Set up the check alert:
 
     Choose how many consecutive runs with the `OK` status resolve the alert. For example, to ensure an issue is fixed, resolve the monitor on `4` OK statuses.
 
-[1]: /monitors/manage/status
 
+[1]: /monitors/manage/status
 {{% /tab %}}
 {{% tab "Cluster Alert" %}}
 

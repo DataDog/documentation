@@ -588,6 +588,18 @@
       options:
         dest_path: '/security_platform/default_rules/'
 
+  - repo_name: apps
+    contents:
+    - action: pull-and-push-file
+      branch: master
+      globs:
+        - "docs/en/getting-started.md"
+      options:
+        dest_path: "/developers/"
+        file_name: "datadog_apps.md"
+        # front_matters:
+          # dependencies: ["https://github.com/DataDog/apps/blob/master/docs/en/gettiing-started.md"]
+
   - repo_name: datadog-agent
     contents:
     - action: pull-and-push-file

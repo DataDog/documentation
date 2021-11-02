@@ -61,7 +61,7 @@ The RUM Browser SDK no longer lets you specify the source of an error collected 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/guide/session-replay-getting-started/
+[1]: /real_user_monitoring/session_replay
 [2]: /real_user_monitoring/browser/collecting_browser_errors/
 [3]: /real_user_monitoring/browser/monitoring_resource_performance/
 [4]: /real_user_monitoring/browser/modifying_data_and_context/?tab=npm#enrich-and-control-rum-data
