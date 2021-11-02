@@ -103,10 +103,8 @@
               "type": "undefined"
             },
             "sort": {
-              "aggregation": "pc90",
-              "metric": "@duration",
-              "order": "asc",
-              "type": "string"
+              "aggregation": "count",
+              "order": "asc"
             },
             "total": {
               "description": "undefined",

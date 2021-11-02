@@ -655,116 +655,16 @@
         "json": {
           "config": {
             "assertions": [
-              []
-            ],
-            "configVariables": [
               {
-                "example": "string",
-                "id": "string",
-                "name": "VARIABLE_NAME",
-                "pattern": "string",
-                "type": "text"
+                "operator": "lessThan",
+                "target": 1000,
+                "type": "responseTime"
               }
             ],
             "request": {
-              "allow_insecure": false,
-              "basicAuth": {
-                "password": "",
-                "username": ""
-              },
-              "body": "string",
-              "certificate": {
-                "cert": {
-                  "content": "string",
-                  "filename": "string",
-                  "updatedAt": "string"
-                },
-                "key": {
-                  "content": "string",
-                  "filename": "string",
-                  "updatedAt": "string"
-                }
-              },
-              "dnsServer": "string",
-              "dnsServerPort": "integer",
-              "follow_redirects": false,
-              "headers": {
-                "<any-key>": "string"
-              },
-              "host": "string",
               "method": "GET",
-              "noSavingResponseBody": false,
-              "numberOfPackets": "integer",
-              "port": "integer",
-              "query": {},
-              "servername": "string",
-              "shouldTrackHops": false,
-              "timeout": "number",
               "url": "https://example.com"
-            },
-            "steps": [
-              {
-                "allowFailure": false,
-                "assertions": [
-                  {
-                    "operator": "contains",
-                    "property": "string",
-                    "target": "undefined",
-                    "type": "statusCode"
-                  }
-                ],
-                "extractedValues": [
-                  {
-                    "field": "content-type",
-                    "name": "string",
-                    "parser": {
-                      "type": "raw",
-                      "value": "string"
-                    },
-                    "type": "http_body"
-                  }
-                ],
-                "isCritical": false,
-                "name": "string",
-                "request": {
-                  "allow_insecure": false,
-                  "basicAuth": {
-                    "password": "",
-                    "username": ""
-                  },
-                  "body": "string",
-                  "certificate": {
-                    "cert": {
-                      "content": "string",
-                      "filename": "string",
-                      "updatedAt": "string"
-                    },
-                    "key": {
-                      "content": "string",
-                      "filename": "string",
-                      "updatedAt": "string"
-                    }
-                  },
-                  "dnsServer": "string",
-                  "dnsServerPort": "integer",
-                  "follow_redirects": false,
-                  "headers": {
-                    "<any-key>": "string"
-                  },
-                  "host": "string",
-                  "method": "GET",
-                  "noSavingResponseBody": false,
-                  "numberOfPackets": "integer",
-                  "port": "integer",
-                  "query": {},
-                  "servername": "string",
-                  "shouldTrackHops": false,
-                  "timeout": "number",
-                  "url": "https://example.com"
-                },
-                "subtype": "string"
-              }
-            ]
+            }
           },
           "locations": [
             "aws:eu-west-3"
@@ -830,152 +730,20 @@
       }
     },
     "request": {
-      "json_curl": {
-        "config": {
-          "configVariables": [
-            {
-              "name": "VARIABLE_NAME",
-              "type": "text"
-            }
-          ],
-          "request": {
-            "basicAuth": {
-              "password": "",
-              "username": ""
-            }
-          },
-          "steps": [
-            {
-              "extractedValues": [
-                {
-                  "parser": {
-                    "type": "raw"
-                  }
-                }
-              ],
-              "request": {
-                "basicAuth": {
-                  "password": "",
-                  "username": ""
-                }
-              }
-            }
-          ]
-        }
-      },
+      "json_curl": {},
       "json": {
         "config": {
           "assertions": [
-            []
-          ],
-          "configVariables": [
             {
-              "example": "string",
-              "id": "string",
-              "name": "VARIABLE_NAME",
-              "pattern": "string",
-              "type": "text"
+              "operator": "lessThan",
+              "target": 1000,
+              "type": "responseTime"
             }
           ],
           "request": {
-            "allow_insecure": false,
-            "basicAuth": {
-              "password": "",
-              "username": ""
-            },
-            "body": "string",
-            "certificate": {
-              "cert": {
-                "content": "string",
-                "filename": "string",
-                "updatedAt": "string"
-              },
-              "key": {
-                "content": "string",
-                "filename": "string",
-                "updatedAt": "string"
-              }
-            },
-            "dnsServer": "string",
-            "dnsServerPort": "integer",
-            "follow_redirects": false,
-            "headers": {
-              "<any-key>": "string"
-            },
-            "host": "string",
             "method": "GET",
-            "noSavingResponseBody": false,
-            "numberOfPackets": "integer",
-            "port": "integer",
-            "query": {},
-            "servername": "string",
-            "shouldTrackHops": false,
-            "timeout": "number",
             "url": "https://example.com"
-          },
-          "steps": [
-            {
-              "allowFailure": false,
-              "assertions": [
-                {
-                  "operator": "contains",
-                  "property": "string",
-                  "target": "undefined",
-                  "type": "statusCode"
-                }
-              ],
-              "extractedValues": [
-                {
-                  "field": "content-type",
-                  "name": "string",
-                  "parser": {
-                    "type": "raw",
-                    "value": "string"
-                  },
-                  "type": "http_body"
-                }
-              ],
-              "isCritical": false,
-              "name": "string",
-              "request": {
-                "allow_insecure": false,
-                "basicAuth": {
-                  "password": "",
-                  "username": ""
-                },
-                "body": "string",
-                "certificate": {
-                  "cert": {
-                    "content": "string",
-                    "filename": "string",
-                    "updatedAt": "string"
-                  },
-                  "key": {
-                    "content": "string",
-                    "filename": "string",
-                    "updatedAt": "string"
-                  }
-                },
-                "dnsServer": "string",
-                "dnsServerPort": "integer",
-                "follow_redirects": false,
-                "headers": {
-                  "<any-key>": "string"
-                },
-                "host": "string",
-                "method": "GET",
-                "noSavingResponseBody": false,
-                "numberOfPackets": "integer",
-                "port": "integer",
-                "query": {},
-                "servername": "string",
-                "shouldTrackHops": false,
-                "timeout": "number",
-                "url": "https://example.com"
-              },
-              "subtype": "string"
-            }
-          ]
+          }
         },
         "locations": [
           "aws:eu-west-3"
@@ -1020,116 +788,16 @@
         "json": {
           "config": {
             "assertions": [
-              []
-            ],
-            "configVariables": [
               {
-                "example": "string",
-                "id": "string",
-                "name": "VARIABLE_NAME",
-                "pattern": "string",
-                "type": "text"
+                "operator": "lessThan",
+                "target": 1000,
+                "type": "responseTime"
               }
             ],
             "request": {
-              "allow_insecure": false,
-              "basicAuth": {
-                "password": "",
-                "username": ""
-              },
-              "body": "string",
-              "certificate": {
-                "cert": {
-                  "content": "string",
-                  "filename": "string",
-                  "updatedAt": "string"
-                },
-                "key": {
-                  "content": "string",
-                  "filename": "string",
-                  "updatedAt": "string"
-                }
-              },
-              "dnsServer": "string",
-              "dnsServerPort": "integer",
-              "follow_redirects": false,
-              "headers": {
-                "<any-key>": "string"
-              },
-              "host": "string",
               "method": "GET",
-              "noSavingResponseBody": false,
-              "numberOfPackets": "integer",
-              "port": "integer",
-              "query": {},
-              "servername": "string",
-              "shouldTrackHops": false,
-              "timeout": "number",
               "url": "https://example.com"
-            },
-            "steps": [
-              {
-                "allowFailure": false,
-                "assertions": [
-                  {
-                    "operator": "contains",
-                    "property": "string",
-                    "target": "undefined",
-                    "type": "statusCode"
-                  }
-                ],
-                "extractedValues": [
-                  {
-                    "field": "content-type",
-                    "name": "string",
-                    "parser": {
-                      "type": "raw",
-                      "value": "string"
-                    },
-                    "type": "http_body"
-                  }
-                ],
-                "isCritical": false,
-                "name": "string",
-                "request": {
-                  "allow_insecure": false,
-                  "basicAuth": {
-                    "password": "",
-                    "username": ""
-                  },
-                  "body": "string",
-                  "certificate": {
-                    "cert": {
-                      "content": "string",
-                      "filename": "string",
-                      "updatedAt": "string"
-                    },
-                    "key": {
-                      "content": "string",
-                      "filename": "string",
-                      "updatedAt": "string"
-                    }
-                  },
-                  "dnsServer": "string",
-                  "dnsServerPort": "integer",
-                  "follow_redirects": false,
-                  "headers": {
-                    "<any-key>": "string"
-                  },
-                  "host": "string",
-                  "method": "GET",
-                  "noSavingResponseBody": false,
-                  "numberOfPackets": "integer",
-                  "port": "integer",
-                  "query": {},
-                  "servername": "string",
-                  "shouldTrackHops": false,
-                  "timeout": "number",
-                  "url": "https://example.com"
-                },
-                "subtype": "string"
-              }
-            ]
+            }
           },
           "locations": [
             "aws:eu-west-3"
@@ -1198,116 +866,16 @@
         "json": {
           "config": {
             "assertions": [
-              []
-            ],
-            "configVariables": [
               {
-                "example": "string",
-                "id": "string",
-                "name": "VARIABLE_NAME",
-                "pattern": "string",
-                "type": "text"
+                "operator": "lessThan",
+                "target": 1000,
+                "type": "responseTime"
               }
             ],
             "request": {
-              "allow_insecure": false,
-              "basicAuth": {
-                "password": "",
-                "username": ""
-              },
-              "body": "string",
-              "certificate": {
-                "cert": {
-                  "content": "string",
-                  "filename": "string",
-                  "updatedAt": "string"
-                },
-                "key": {
-                  "content": "string",
-                  "filename": "string",
-                  "updatedAt": "string"
-                }
-              },
-              "dnsServer": "string",
-              "dnsServerPort": "integer",
-              "follow_redirects": false,
-              "headers": {
-                "<any-key>": "string"
-              },
-              "host": "string",
               "method": "GET",
-              "noSavingResponseBody": false,
-              "numberOfPackets": "integer",
-              "port": "integer",
-              "query": {},
-              "servername": "string",
-              "shouldTrackHops": false,
-              "timeout": "number",
               "url": "https://example.com"
-            },
-            "steps": [
-              {
-                "allowFailure": false,
-                "assertions": [
-                  {
-                    "operator": "contains",
-                    "property": "string",
-                    "target": "undefined",
-                    "type": "statusCode"
-                  }
-                ],
-                "extractedValues": [
-                  {
-                    "field": "content-type",
-                    "name": "string",
-                    "parser": {
-                      "type": "raw",
-                      "value": "string"
-                    },
-                    "type": "http_body"
-                  }
-                ],
-                "isCritical": false,
-                "name": "string",
-                "request": {
-                  "allow_insecure": false,
-                  "basicAuth": {
-                    "password": "",
-                    "username": ""
-                  },
-                  "body": "string",
-                  "certificate": {
-                    "cert": {
-                      "content": "string",
-                      "filename": "string",
-                      "updatedAt": "string"
-                    },
-                    "key": {
-                      "content": "string",
-                      "filename": "string",
-                      "updatedAt": "string"
-                    }
-                  },
-                  "dnsServer": "string",
-                  "dnsServerPort": "integer",
-                  "follow_redirects": false,
-                  "headers": {
-                    "<any-key>": "string"
-                  },
-                  "host": "string",
-                  "method": "GET",
-                  "noSavingResponseBody": false,
-                  "numberOfPackets": "integer",
-                  "port": "integer",
-                  "query": {},
-                  "servername": "string",
-                  "shouldTrackHops": false,
-                  "timeout": "number",
-                  "url": "https://example.com"
-                },
-                "subtype": "string"
-              }
-            ]
+            }
           },
           "locations": [
             "aws:eu-west-3"
@@ -1373,152 +941,20 @@
       }
     },
     "request": {
-      "json_curl": {
-        "config": {
-          "configVariables": [
-            {
-              "name": "VARIABLE_NAME",
-              "type": "text"
-            }
-          ],
-          "request": {
-            "basicAuth": {
-              "password": "",
-              "username": ""
-            }
-          },
-          "steps": [
-            {
-              "extractedValues": [
-                {
-                  "parser": {
-                    "type": "raw"
-                  }
-                }
-              ],
-              "request": {
-                "basicAuth": {
-                  "password": "",
-                  "username": ""
-                }
-              }
-            }
-          ]
-        }
-      },
+      "json_curl": {},
       "json": {
         "config": {
           "assertions": [
-            []
-          ],
-          "configVariables": [
             {
-              "example": "string",
-              "id": "string",
-              "name": "VARIABLE_NAME",
-              "pattern": "string",
-              "type": "text"
+              "operator": "lessThan",
+              "target": 1000,
+              "type": "responseTime"
             }
           ],
           "request": {
-            "allow_insecure": false,
-            "basicAuth": {
-              "password": "",
-              "username": ""
-            },
-            "body": "string",
-            "certificate": {
-              "cert": {
-                "content": "string",
-                "filename": "string",
-                "updatedAt": "string"
-              },
-              "key": {
-                "content": "string",
-                "filename": "string",
-                "updatedAt": "string"
-              }
-            },
-            "dnsServer": "string",
-            "dnsServerPort": "integer",
-            "follow_redirects": false,
-            "headers": {
-              "<any-key>": "string"
-            },
-            "host": "string",
             "method": "GET",
-            "noSavingResponseBody": false,
-            "numberOfPackets": "integer",
-            "port": "integer",
-            "query": {},
-            "servername": "string",
-            "shouldTrackHops": false,
-            "timeout": "number",
             "url": "https://example.com"
-          },
-          "steps": [
-            {
-              "allowFailure": false,
-              "assertions": [
-                {
-                  "operator": "contains",
-                  "property": "string",
-                  "target": "undefined",
-                  "type": "statusCode"
-                }
-              ],
-              "extractedValues": [
-                {
-                  "field": "content-type",
-                  "name": "string",
-                  "parser": {
-                    "type": "raw",
-                    "value": "string"
-                  },
-                  "type": "http_body"
-                }
-              ],
-              "isCritical": false,
-              "name": "string",
-              "request": {
-                "allow_insecure": false,
-                "basicAuth": {
-                  "password": "",
-                  "username": ""
-                },
-                "body": "string",
-                "certificate": {
-                  "cert": {
-                    "content": "string",
-                    "filename": "string",
-                    "updatedAt": "string"
-                  },
-                  "key": {
-                    "content": "string",
-                    "filename": "string",
-                    "updatedAt": "string"
-                  }
-                },
-                "dnsServer": "string",
-                "dnsServerPort": "integer",
-                "follow_redirects": false,
-                "headers": {
-                  "<any-key>": "string"
-                },
-                "host": "string",
-                "method": "GET",
-                "noSavingResponseBody": false,
-                "numberOfPackets": "integer",
-                "port": "integer",
-                "query": {},
-                "servername": "string",
-                "shouldTrackHops": false,
-                "timeout": "number",
-                "url": "https://example.com"
-              },
-              "subtype": "string"
-            }
-          ]
+          }
         },
         "locations": [
           "aws:eu-west-3"
@@ -3249,8 +2685,8 @@
               "parse_test_options": {
                 "field": "content-type",
                 "parser": {
-                  "type": "raw",
-                  "value": "string"
+                  "type": "regex",
+                  "value": ".*"
                 },
                 "type": "http_body"
               },
@@ -3260,8 +2696,8 @@
                 "test:workflow-1"
               ],
               "value": {
-                "secure": false,
-                "value": "example-value"
+                "secure": true,
+                "value": "value"
               }
             }
           ]
@@ -3296,8 +2732,8 @@
           "parse_test_options": {
             "field": "content-type",
             "parser": {
-              "type": "raw",
-              "value": "string"
+              "type": "regex",
+              "value": ".*"
             },
             "type": "http_body"
           },
@@ -3307,8 +2743,8 @@
             "test:workflow-1"
           ],
           "value": {
-            "secure": false,
-            "value": "example-value"
+            "secure": true,
+            "value": "value"
           }
         },
         "html": "<div class=\"\"><div class=\"row  hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> attributes</p>\n    </div>\n              <div class=\"col-2 column\"><p>object</p></div>\n              <div class=\"col-6 column\"><p>Attributes of the global variable.</p></div>\n            </div>\n            <div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">restricted_roles</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>List of role identifiers that can be pulled from the Roles API.</p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">description&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>Description of the global variable.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row   isReadOnly\">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  isReadOnly\">\n              <div class=\"col-4 column\">\n      <p class=\"key\">id</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>Unique identifier of the global variable.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">name&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>Name of the global variable.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row  hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> parse_test_options</p>\n    </div>\n              <div class=\"col-2 column\"><p>object</p></div>\n              <div class=\"col-6 column\"><p>Parser options to use for retrieving a Synthetics global variable from a Synthetics Test. Used in conjunction with <code>parse_test_public_id</code>.</p></div>\n            </div>\n            <div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">field</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>When type is <code>http_header</code>, name of the header to use to extract the value.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> parser&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>object</p></div>\n              <div class=\"col-6 column\"><p>Details of the parser to use for the global variable.</p></div>\n            </div>\n            <div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">type&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>enum</p></div>\n              <div class=\"col-6 column\"><p>Type of parser for a Synthetics global variable from a synthetics test. \nAllowed enum values: <code>raw,json_path,regex,x_path</code></p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">value</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>Regex or JSON path used for the parser. Not used with type <code>raw</code>.</p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">type&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>enum</p></div>\n              <div class=\"col-6 column\"><p>Property of the Synthetics Test Response to use for a Synthetics global variable. \nAllowed enum values: <code>http_body,http_header</code></p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">parse_test_public_id</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>A Synthetic test ID to use as a test to generate the variable value.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">tags&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>Tags of the global variable.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row  hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> value&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>object</p></div>\n              <div class=\"col-6 column\"><p>Value of the global variable.</p></div>\n            </div>\n            <div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">secure</p>\n    </div>\n              <div class=\"col-2 column\"><p>boolean</p></div>\n              <div class=\"col-6 column\"><p>Determines if the value of the variable is hidden.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">value</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>Value of the global variable. When reading a global variable,\nthe value will not be present if the variable is hidden with the <code>secure</code> property.</p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div></div>"
@@ -3336,7 +2772,8 @@
         "name": "MY_VARIABLE",
         "parse_test_options": {
           "parser": {
-            "type": "raw"
+            "type": "regex",
+            "value": ".*"
           },
           "type": "http_body"
         },
@@ -3344,7 +2781,10 @@
           "team:front",
           "test:workflow-1"
         ],
-        "value": {}
+        "value": {
+          "secure": true,
+          "value": "value"
+        }
       },
       "json": {
         "attributes": {
@@ -3355,8 +2795,8 @@
         "parse_test_options": {
           "field": "content-type",
           "parser": {
-            "type": "raw",
-            "value": "string"
+            "type": "regex",
+            "value": ".*"
           },
           "type": "http_body"
         },
@@ -3366,8 +2806,8 @@
           "test:workflow-1"
         ],
         "value": {
-          "secure": false,
-          "value": "example-value"
+          "secure": true,
+          "value": "value"
         }
       },
       "html": "<div class=\"\"><div class=\"row  hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> attributes</p>\n    </div>\n              <div class=\"col-2 column\"><p>object</p></div>\n              <div class=\"col-6 column\"><p>Attributes of the global variable.</p></div>\n            </div>\n            <div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">restricted_roles</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>List of role identifiers that can be pulled from the Roles API.</p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">description&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>Description of the global variable.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row   isReadOnly\">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  isReadOnly\">\n              <div class=\"col-4 column\">\n      <p class=\"key\">id</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>Unique identifier of the global variable.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">name&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>Name of the global variable.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row  hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> parse_test_options</p>\n    </div>\n              <div class=\"col-2 column\"><p>object</p></div>\n              <div class=\"col-6 column\"><p>Parser options to use for retrieving a Synthetics global variable from a Synthetics Test. Used in conjunction with <code>parse_test_public_id</code>.</p></div>\n            </div>\n            <div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">field</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>When type is <code>http_header</code>, name of the header to use to extract the value.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> parser&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>object</p></div>\n              <div class=\"col-6 column\"><p>Details of the parser to use for the global variable.</p></div>\n            </div>\n            <div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">type&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>enum</p></div>\n              <div class=\"col-6 column\"><p>Type of parser for a Synthetics global variable from a synthetics test. \nAllowed enum values: <code>raw,json_path,regex,x_path</code></p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">value</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>Regex or JSON path used for the parser. Not used with type <code>raw</code>.</p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">type&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>enum</p></div>\n              <div class=\"col-6 column\"><p>Property of the Synthetics Test Response to use for a Synthetics global variable. \nAllowed enum values: <code>http_body,http_header</code></p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">parse_test_public_id</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>A Synthetic test ID to use as a test to generate the variable value.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">tags&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>Tags of the global variable.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row  hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> value&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>object</p></div>\n              <div class=\"col-6 column\"><p>Value of the global variable.</p></div>\n            </div>\n            <div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">secure</p>\n    </div>\n              <div class=\"col-2 column\"><p>boolean</p></div>\n              <div class=\"col-6 column\"><p>Determines if the value of the variable is hidden.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">value</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>Value of the global variable. When reading a global variable,\nthe value will not be present if the variable is hidden with the <code>secure</code> property.</p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div></div>"
@@ -3419,8 +2859,8 @@
           "parse_test_options": {
             "field": "content-type",
             "parser": {
-              "type": "raw",
-              "value": "string"
+              "type": "regex",
+              "value": ".*"
             },
             "type": "http_body"
           },
@@ -3430,8 +2870,8 @@
             "test:workflow-1"
           ],
           "value": {
-            "secure": false,
-            "value": "example-value"
+            "secure": true,
+            "value": "value"
           }
         },
         "html": "<div class=\"\"><div class=\"row  hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> attributes</p>\n    </div>\n              <div class=\"col-2 column\"><p>object</p></div>\n              <div class=\"col-6 column\"><p>Attributes of the global variable.</p></div>\n            </div>\n            <div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">restricted_roles</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>List of role identifiers that can be pulled from the Roles API.</p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">description&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>Description of the global variable.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row   isReadOnly\">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  isReadOnly\">\n              <div class=\"col-4 column\">\n      <p class=\"key\">id</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>Unique identifier of the global variable.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">name&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>Name of the global variable.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row  hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> parse_test_options</p>\n    </div>\n              <div class=\"col-2 column\"><p>object</p></div>\n              <div class=\"col-6 column\"><p>Parser options to use for retrieving a Synthetics global variable from a Synthetics Test. Used in conjunction with <code>parse_test_public_id</code>.</p></div>\n            </div>\n            <div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">field</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>When type is <code>http_header</code>, name of the header to use to extract the value.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> parser&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>object</p></div>\n              <div class=\"col-6 column\"><p>Details of the parser to use for the global variable.</p></div>\n            </div>\n            <div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">type&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>enum</p></div>\n              <div class=\"col-6 column\"><p>Type of parser for a Synthetics global variable from a synthetics test. \nAllowed enum values: <code>raw,json_path,regex,x_path</code></p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">value</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>Regex or JSON path used for the parser. Not used with type <code>raw</code>.</p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">type&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>enum</p></div>\n              <div class=\"col-6 column\"><p>Property of the Synthetics Test Response to use for a Synthetics global variable. \nAllowed enum values: <code>http_body,http_header</code></p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">parse_test_public_id</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>A Synthetic test ID to use as a test to generate the variable value.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">tags&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>Tags of the global variable.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row  hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> value&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>object</p></div>\n              <div class=\"col-6 column\"><p>Value of the global variable.</p></div>\n            </div>\n            <div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">secure</p>\n    </div>\n              <div class=\"col-2 column\"><p>boolean</p></div>\n              <div class=\"col-6 column\"><p>Determines if the value of the variable is hidden.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">value</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>Value of the global variable. When reading a global variable,\nthe value will not be present if the variable is hidden with the <code>secure</code> property.</p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div></div>"
@@ -3472,8 +2912,8 @@
           "parse_test_options": {
             "field": "content-type",
             "parser": {
-              "type": "raw",
-              "value": "string"
+              "type": "regex",
+              "value": ".*"
             },
             "type": "http_body"
           },
@@ -3483,8 +2923,8 @@
             "test:workflow-1"
           ],
           "value": {
-            "secure": false,
-            "value": "example-value"
+            "secure": true,
+            "value": "value"
           }
         },
         "html": "<div class=\"\"><div class=\"row  hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> attributes</p>\n    </div>\n              <div class=\"col-2 column\"><p>object</p></div>\n              <div class=\"col-6 column\"><p>Attributes of the global variable.</p></div>\n            </div>\n            <div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">restricted_roles</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>List of role identifiers that can be pulled from the Roles API.</p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">description&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>Description of the global variable.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row   isReadOnly\">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  isReadOnly\">\n              <div class=\"col-4 column\">\n      <p class=\"key\">id</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>Unique identifier of the global variable.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">name&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>Name of the global variable.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row  hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> parse_test_options</p>\n    </div>\n              <div class=\"col-2 column\"><p>object</p></div>\n              <div class=\"col-6 column\"><p>Parser options to use for retrieving a Synthetics global variable from a Synthetics Test. Used in conjunction with <code>parse_test_public_id</code>.</p></div>\n            </div>\n            <div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">field</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>When type is <code>http_header</code>, name of the header to use to extract the value.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> parser&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>object</p></div>\n              <div class=\"col-6 column\"><p>Details of the parser to use for the global variable.</p></div>\n            </div>\n            <div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">type&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>enum</p></div>\n              <div class=\"col-6 column\"><p>Type of parser for a Synthetics global variable from a synthetics test. \nAllowed enum values: <code>raw,json_path,regex,x_path</code></p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">value</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>Regex or JSON path used for the parser. Not used with type <code>raw</code>.</p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">type&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>enum</p></div>\n              <div class=\"col-6 column\"><p>Property of the Synthetics Test Response to use for a Synthetics global variable. \nAllowed enum values: <code>http_body,http_header</code></p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">parse_test_public_id</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>A Synthetic test ID to use as a test to generate the variable value.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">tags&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>Tags of the global variable.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row  hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> value&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>object</p></div>\n              <div class=\"col-6 column\"><p>Value of the global variable.</p></div>\n            </div>\n            <div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">secure</p>\n    </div>\n              <div class=\"col-2 column\"><p>boolean</p></div>\n              <div class=\"col-6 column\"><p>Determines if the value of the variable is hidden.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">value</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>Value of the global variable. When reading a global variable,\nthe value will not be present if the variable is hidden with the <code>secure</code> property.</p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div></div>"
@@ -3512,7 +2952,8 @@
         "name": "MY_VARIABLE",
         "parse_test_options": {
           "parser": {
-            "type": "raw"
+            "type": "regex",
+            "value": ".*"
           },
           "type": "http_body"
         },
@@ -3520,7 +2961,10 @@
           "team:front",
           "test:workflow-1"
         ],
-        "value": {}
+        "value": {
+          "secure": true,
+          "value": "value"
+        }
       },
       "json": {
         "attributes": {
@@ -3531,8 +2975,8 @@
         "parse_test_options": {
           "field": "content-type",
           "parser": {
-            "type": "raw",
-            "value": "string"
+            "type": "regex",
+            "value": ".*"
           },
           "type": "http_body"
         },
@@ -3542,8 +2986,8 @@
           "test:workflow-1"
         ],
         "value": {
-          "secure": false,
-          "value": "example-value"
+          "secure": true,
+          "value": "value"
         }
       },
       "html": "<div class=\"\"><div class=\"row  hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> attributes</p>\n    </div>\n              <div class=\"col-2 column\"><p>object</p></div>\n              <div class=\"col-6 column\"><p>Attributes of the global variable.</p></div>\n            </div>\n            <div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">restricted_roles</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>List of role identifiers that can be pulled from the Roles API.</p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">description&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>Description of the global variable.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row   isReadOnly\">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  isReadOnly\">\n              <div class=\"col-4 column\">\n      <p class=\"key\">id</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>Unique identifier of the global variable.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">name&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>Name of the global variable.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row  hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> parse_test_options</p>\n    </div>\n              <div class=\"col-2 column\"><p>object</p></div>\n              <div class=\"col-6 column\"><p>Parser options to use for retrieving a Synthetics global variable from a Synthetics Test. Used in conjunction with <code>parse_test_public_id</code>.</p></div>\n            </div>\n            <div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">field</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>When type is <code>http_header</code>, name of the header to use to extract the value.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> parser&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>object</p></div>\n              <div class=\"col-6 column\"><p>Details of the parser to use for the global variable.</p></div>\n            </div>\n            <div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">type&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>enum</p></div>\n              <div class=\"col-6 column\"><p>Type of parser for a Synthetics global variable from a synthetics test. \nAllowed enum values: <code>raw,json_path,regex,x_path</code></p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">value</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>Regex or JSON path used for the parser. Not used with type <code>raw</code>.</p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">type&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>enum</p></div>\n              <div class=\"col-6 column\"><p>Property of the Synthetics Test Response to use for a Synthetics global variable. \nAllowed enum values: <code>http_body,http_header</code></p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">parse_test_public_id</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>A Synthetic test ID to use as a test to generate the variable value.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">tags&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>Tags of the global variable.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row  hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> value&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>object</p></div>\n              <div class=\"col-6 column\"><p>Value of the global variable.</p></div>\n            </div>\n            <div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">secure</p>\n    </div>\n              <div class=\"col-2 column\"><p>boolean</p></div>\n              <div class=\"col-6 column\"><p>Determines if the value of the variable is hidden.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">value</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>Value of the global variable. When reading a global variable,\nthe value will not be present if the variable is hidden with the <code>secure</code> property.</p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div></div>"

@@ -636,23 +636,7 @@
             "series": {
               "denominator": {
                 "count": 0,
-                "metadata": {
-                  "aggr": "string",
-                  "expression": "string",
-                  "metric": "string",
-                  "query_index": "integer",
-                  "scope": "string",
-                  "unit": [
-                    {
-                      "family": "bytes",
-                      "id": 2,
-                      "name": "byte",
-                      "plural": "bytes",
-                      "scale_factor": 1,
-                      "short_name": "B"
-                    }
-                  ]
-                },
+                "metadata": {},
                 "sum": 0,
                 "values": [
                   []
@@ -662,23 +646,7 @@
               "message": "",
               "numerator": {
                 "count": 0,
-                "metadata": {
-                  "aggr": "string",
-                  "expression": "string",
-                  "metric": "string",
-                  "query_index": "integer",
-                  "scope": "string",
-                  "unit": [
-                    {
-                      "family": "bytes",
-                      "id": 2,
-                      "name": "byte",
-                      "plural": "bytes",
-                      "scale_factor": 1,
-                      "short_name": "B"
-                    }
-                  ]
-                },
+                "metadata": {},
                 "sum": 0,
                 "values": [
                   []

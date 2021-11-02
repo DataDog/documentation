@@ -536,7 +536,9 @@
     },
     "request": {
       "json_curl": {
-        "global_time": {}
+        "global_time": {
+          "live_span": "1h"
+        }
       },
       "json": {
         "global_time": {

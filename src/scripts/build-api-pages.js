@@ -318,6 +318,12 @@ const filterJson = (actionType, data, parentExample = null, requiredKeys = [], l
           childRequiredKeys = (value.required) ? value.required : [];
           prefixType = '{';
           suffixType = '}';
+          // if we have an example we should use it and stop going deeper
+          if (value.example && typeof value.example === 'object') {
+            childData = null;
+            prefixType = '';
+            suffixType = '';
+          }
         } else if (typeof value === 'object' && "additionalProperties" in value) {
           // check if `additionalProperties` is an empty object
           if (Object.keys(value.additionalProperties).length !== 0) {

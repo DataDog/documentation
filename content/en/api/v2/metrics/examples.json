@@ -141,20 +141,19 @@
             "attributes": {
               "aggregations": [
                 {
-                  "space": "sum",
-                  "time": "sum"
+                  "space": "avg",
+                  "time": "avg"
                 }
               ],
               "created_at": "2020-03-31T09:48:37.463835Z",
-              "include_percentiles": true,
-              "metric_type": "count",
-              "modified_at": "2020-03-31T09:48:37.463835Z",
+              "metric_type": "gauge",
+              "modified_at": "2020-04-31T09:48:37.463835Z",
               "tags": [
                 "app",
                 "datacenter"
               ]
             },
-            "id": "test.metric.latency",
+            "id": "http.request.latency",
             "type": "manage_tags"
           }
         },
@@ -199,20 +198,19 @@
             "attributes": {
               "aggregations": [
                 {
-                  "space": "sum",
-                  "time": "sum"
+                  "space": "avg",
+                  "time": "avg"
                 }
               ],
               "created_at": "2020-03-31T09:48:37.463835Z",
-              "include_percentiles": true,
-              "metric_type": "count",
-              "modified_at": "2020-03-31T09:48:37.463835Z",
+              "metric_type": "gauge",
+              "modified_at": "2020-04-31T09:48:37.463835Z",
               "tags": [
                 "app",
                 "datacenter"
               ]
             },
-            "id": "test.metric.latency",
+            "id": "http.request.latency",
             "type": "manage_tags"
           }
         },
@@ -255,33 +253,26 @@
       "json_curl": {
         "data": {
           "attributes": {
-            "aggregations": [
-              {
-                "space": "sum",
-                "time": "sum"
-              }
-            ]
+            "group_by": [
+              "app",
+              "datacenter"
+            ],
+            "include_percentiles": false
           },
-          "id": "test.metric.latency",
+          "id": "http.endpoint.request",
           "type": "manage_tags"
         }
       },
       "json": {
         "data": {
           "attributes": {
-            "aggregations": [
-              {
-                "space": "sum",
-                "time": "sum"
-              }
-            ],
-            "include_percentiles": true,
-            "tags": [
+            "group_by": [
               "app",
               "datacenter"
-            ]
+            ],
+            "include_percentiles": false
           },
-          "id": "test.metric.latency",
+          "id": "http.endpoint.request",
           "type": "manage_tags"
         }
       },
@@ -296,20 +287,19 @@
             "attributes": {
               "aggregations": [
                 {
-                  "space": "sum",
-                  "time": "sum"
+                  "space": "avg",
+                  "time": "avg"
                 }
               ],
               "created_at": "2020-03-31T09:48:37.463835Z",
-              "include_percentiles": true,
-              "metric_type": "count",
-              "modified_at": "2020-03-31T09:48:37.463835Z",
+              "metric_type": "gauge",
+              "modified_at": "2020-04-31T09:48:37.463835Z",
               "tags": [
                 "app",
                 "datacenter"
               ]
             },
-            "id": "test.metric.latency",
+            "id": "http.request.latency",
             "type": "manage_tags"
           }
         },
@@ -352,39 +342,28 @@
       "json_curl": {
         "data": {
           "attributes": {
-            "aggregations": [
-              {
-                "space": "sum",
-                "time": "sum"
-              }
-            ],
-            "metric_type": "count",
+            "include_percentiles": false,
+            "metric_type": "distribution",
             "tags": [
               "app",
               "datacenter"
             ]
           },
-          "id": "test.metric.latency",
+          "id": "http.endpoint.request",
           "type": "manage_tags"
         }
       },
       "json": {
         "data": {
           "attributes": {
-            "aggregations": [
-              {
-                "space": "sum",
-                "time": "sum"
-              }
-            ],
-            "include_percentiles": true,
-            "metric_type": "count",
+            "include_percentiles": false,
+            "metric_type": "distribution",
             "tags": [
               "app",
               "datacenter"
             ]
           },
-          "id": "test.metric.latency",
+          "id": "http.endpoint.request",
           "type": "manage_tags"
         }
       },

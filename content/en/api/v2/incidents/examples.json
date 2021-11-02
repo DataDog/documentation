@@ -51,6 +51,10 @@
                     {
                       "id": "00000000-0000-0000-0000-000000000000",
                       "type": "incident_integrations"
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-000000000000",
+                      "type": "incident_integrations"
                     }
                   ]
                 },
@@ -218,6 +222,10 @@
               },
               "integrations": {
                 "data": [
+                  {
+                    "id": "00000000-0000-0000-0000-000000000000",
+                    "type": "incident_integrations"
+                  },
                   {
                     "id": "00000000-0000-0000-0000-000000000000",
                     "type": "incident_integrations"
@@ -474,6 +482,10 @@
                   {
                     "id": "00000000-0000-0000-0000-000000000000",
                     "type": "incident_integrations"
+                  },
+                  {
+                    "id": "00000000-0000-0000-0000-000000000000",
+                    "type": "incident_integrations"
                   }
                 ]
               },
@@ -636,6 +648,10 @@
                   {
                     "id": "00000000-0000-0000-0000-000000000000",
                     "type": "incident_integrations"
+                  },
+                  {
+                    "id": "00000000-0000-0000-0000-000000000000",
+                    "type": "incident_integrations"
                   }
                 ]
               },
@@ -758,24 +774,10 @@
                 "type": "users"
               }
             },
-            "integrations": {
-              "data": [
-                {
-                  "id": "00000000-0000-0000-0000-000000000000",
-                  "type": "incident_integrations"
-                }
-              ]
-            },
             "last_modified_by_user": {
               "data": {
                 "id": "00000000-0000-0000-0000-000000000000",
                 "type": "users"
-              }
-            },
-            "postmortem": {
-              "data": {
-                "id": "00000000-0000-0000-0000-000000000000",
-                "type": "incident_postmortems"
               }
             }
           },
@@ -818,6 +820,10 @@
             },
             "integrations": {
               "data": [
+                {
+                  "id": "00000000-0000-0000-0000-000000000000",
+                  "type": "incident_integrations"
+                },
                 {
                   "id": "00000000-0000-0000-0000-000000000000",
                   "type": "incident_integrations"

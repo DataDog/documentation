@@ -2138,7 +2138,896 @@ describe(`filterExampleJson`, () => {
       }
     };
     expect(actual).toEqual(expected);
-  })
+  });
+
+  it('should stop going deeper when adjacent object example', () => {
+    const mockSchema = {
+      "description": "Object containing details about a Synthetic API test.",
+      "properties": {
+        "config": {
+          "description": "Configuration object for a Synthetic API test.",
+          "example": {
+            "assertions": [
+              {
+                "operator": "lessThan",
+                "target": 1000,
+                "type": "responseTime"
+              }
+            ],
+            "request": {
+              "method": "GET",
+              "url": "https://example.com"
+            }
+          },
+          "properties": {
+            "assertions": {
+              "default": [],
+              "description": "Array of assertions used for the test.",
+              "example": [
+                {
+                  "operator": "lessThan",
+                  "target": 1000,
+                  "type": "responseTime"
+                }
+              ],
+              "items": {
+                "description": "Object describing the assertions type, their associated operator,\nwhich property they apply, and upon which target.",
+                "oneOf": [
+                  {
+                    "description": "An assertion which uses a simple target.",
+                    "properties": {
+                      "operator": {
+                        "description": "Assertion operator to apply.",
+                        "enum": [
+                          "contains",
+                          "doesNotContain",
+                          "is",
+                          "isNot",
+                          "lessThan",
+                          "lessThanOrEqual",
+                          "moreThan",
+                          "moreThanOrEqual",
+                          "matches",
+                          "doesNotMatch",
+                          "validates",
+                          "isInMoreThan",
+                          "isInLessThan"
+                        ],
+                        "example": "contains",
+                        "type": "string",
+                        "x-enum-varnames": [
+                          "CONTAINS",
+                          "DOES_NOT_CONTAIN",
+                          "IS",
+                          "IS_NOT",
+                          "LESS_THAN",
+                          "LESS_THAN_OR_EQUAL",
+                          "MORE_THAN",
+                          "MORE_THAN_OR_EQUAL",
+                          "MATCHES",
+                          "DOES_NOT_MATCH",
+                          "VALIDATES",
+                          "IS_IN_MORE_DAYS_THAN",
+                          "IS_IN_LESS_DAYS_THAN"
+                        ]
+                      },
+                      "property": {
+                        "description": "The associated assertion property.",
+                        "type": "string"
+                      },
+                      "target": {
+                        "description": "Value used by the operator.",
+                        "nullable": false
+                      },
+                      "type": {
+                        "description": "Type of the assertion.",
+                        "enum": [
+                          "body",
+                          "header",
+                          "statusCode",
+                          "certificate",
+                          "responseTime",
+                          "property",
+                          "recordEvery",
+                          "recordSome",
+                          "tlsVersion",
+                          "minTlsVersion",
+                          "latency",
+                          "packetLossPercentage",
+                          "packetsReceived",
+                          "networkHop"
+                        ],
+                        "example": "statusCode",
+                        "type": "string",
+                        "x-enum-varnames": [
+                          "BODY",
+                          "HEADER",
+                          "STATUS_CODE",
+                          "CERTIFICATE",
+                          "RESPONSE_TIME",
+                          "PROPERTY",
+                          "RECORD_EVERY",
+                          "RECORD_SOME",
+                          "TLS_VERSION",
+                          "MIN_TLS_VERSION",
+                          "LATENCY",
+                          "PACKET_LOSS_PERCENTAGE",
+                          "PACKETS_RECEIVED",
+                          "NETWORK_HOP"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "type",
+                      "operator"
+                    ],
+                    "type": "object"
+                  },
+                  {
+                    "description": "An assertion for the `validatesJSONPath` operator.",
+                    "properties": {
+                      "operator": {
+                        "description": "Assertion operator to apply.",
+                        "enum": [
+                          "validatesJSONPath"
+                        ],
+                        "example": "validatesJSONPath",
+                        "type": "string",
+                        "x-enum-varnames": [
+                          "VALIDATES_JSON_PATH"
+                        ]
+                      },
+                      "property": {
+                        "description": "The associated assertion property.",
+                        "type": "string"
+                      },
+                      "target": {
+                        "description": "Composed target for `validatesJSONPath` operator.",
+                        "properties": {
+                          "jsonPath": {
+                            "description": "The JSON path to assert.",
+                            "type": "string"
+                          },
+                          "operator": {
+                            "description": "The specific operator to use on the path.",
+                            "type": "string"
+                          },
+                          "targetValue": {
+                            "description": "The path target value to compare to."
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": {
+                        "description": "Type of the assertion.",
+                        "enum": [
+                          "body",
+                          "header",
+                          "statusCode",
+                          "certificate",
+                          "responseTime",
+                          "property",
+                          "recordEvery",
+                          "recordSome",
+                          "tlsVersion",
+                          "minTlsVersion",
+                          "latency",
+                          "packetLossPercentage",
+                          "packetsReceived",
+                          "networkHop"
+                        ],
+                        "example": "statusCode",
+                        "type": "string",
+                        "x-enum-varnames": [
+                          "BODY",
+                          "HEADER",
+                          "STATUS_CODE",
+                          "CERTIFICATE",
+                          "RESPONSE_TIME",
+                          "PROPERTY",
+                          "RECORD_EVERY",
+                          "RECORD_SOME",
+                          "TLS_VERSION",
+                          "MIN_TLS_VERSION",
+                          "LATENCY",
+                          "PACKET_LOSS_PERCENTAGE",
+                          "PACKETS_RECEIVED",
+                          "NETWORK_HOP"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "type",
+                      "operator"
+                    ],
+                    "type": "object"
+                  }
+                ],
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "configVariables": {
+              "description": "Array of variables used for the test.",
+              "items": {
+                "description": "Object defining a variable that can be used in your test configuration.",
+                "properties": {
+                  "example": {
+                    "description": "Example for the variable.",
+                    "type": "string"
+                  },
+                  "id": {
+                    "description": "ID of the variable for global variables.",
+                    "type": "string"
+                  },
+                  "name": {
+                    "description": "Name of the variable.",
+                    "example": "VARIABLE_NAME",
+                    "type": "string"
+                  },
+                  "pattern": {
+                    "description": "Pattern of the variable.",
+                    "type": "string"
+                  },
+                  "type": {
+                    "description": "Type of the configuration variable.",
+                    "enum": [
+                      "global",
+                      "text"
+                    ],
+                    "example": "text",
+                    "type": "string",
+                    "x-enum-varnames": [
+                      "GLOBAL",
+                      "TEXT"
+                    ]
+                  }
+                },
+                "required": [
+                  "type",
+                  "name"
+                ],
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "request": {
+              "description": "Object describing the Synthetic test request.",
+              "properties": {
+                "allow_insecure": {
+                  "description": "Allows loading insecure content for an HTTP request in a multistep test step.",
+                  "type": "boolean"
+                },
+                "basicAuth": {
+                  "description": "Object to handle basic authentication when performing the test.",
+                  "properties": {
+                    "password": {
+                      "description": "Password to use for the basic authentication.",
+                      "example": "",
+                      "type": "string"
+                    },
+                    "username": {
+                      "description": "Username to use for the basic authentication.",
+                      "example": "",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "password",
+                    "username"
+                  ],
+                  "type": "object"
+                },
+                "body": {
+                  "description": "Body to include in the test.",
+                  "type": "string"
+                },
+                "certificate": {
+                  "description": "Client certificate to use when performing the test request.",
+                  "properties": {
+                    "cert": {
+                      "description": "Define a request certificate.",
+                      "properties": {
+                        "content": {
+                          "description": "Content of the certificate or key.",
+                          "type": "string"
+                        },
+                        "filename": {
+                          "description": "File name for the certificate or key.",
+                          "type": "string"
+                        },
+                        "updatedAt": {
+                          "description": "Date of update of the certificate or key, ISO format.",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "key": {
+                      "description": "Define a request certificate.",
+                      "properties": {
+                        "content": {
+                          "description": "Content of the certificate or key.",
+                          "type": "string"
+                        },
+                        "filename": {
+                          "description": "File name for the certificate or key.",
+                          "type": "string"
+                        },
+                        "updatedAt": {
+                          "description": "Date of update of the certificate or key, ISO format.",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                },
+                "dnsServer": {
+                  "description": "DNS server to use for DNS tests.",
+                  "type": "string"
+                },
+                "dnsServerPort": {
+                  "description": "DNS server port to use for DNS tests.",
+                  "format": "int32",
+                  "maximum": 65535,
+                  "minimum": 1,
+                  "type": "integer"
+                },
+                "follow_redirects": {
+                  "description": "Specifies whether or not the request follows redirects.",
+                  "type": "boolean"
+                },
+                "headers": {
+                  "additionalProperties": {
+                    "description": "A single Header.",
+                    "type": "string"
+                  },
+                  "description": "Headers to include when performing the test.",
+                  "type": "object"
+                },
+                "host": {
+                  "description": "Host name to perform the test with.",
+                  "type": "string"
+                },
+                "method": {
+                  "description": "The HTTP method.",
+                  "enum": [
+                    "GET",
+                    "POST",
+                    "PATCH",
+                    "PUT",
+                    "DELETE",
+                    "HEAD",
+                    "OPTIONS"
+                  ],
+                  "example": "GET",
+                  "type": "string",
+                  "x-enum-varnames": [
+                    "GET",
+                    "POST",
+                    "PATCH",
+                    "PUT",
+                    "DELETE",
+                    "HEAD",
+                    "OPTIONS"
+                  ]
+                },
+                "noSavingResponseBody": {
+                  "description": "Determines whether or not to save the response body.",
+                  "type": "boolean"
+                },
+                "numberOfPackets": {
+                  "description": "Number of pings to use per test.",
+                  "format": "int32",
+                  "maximum": 10,
+                  "minimum": 0,
+                  "type": "integer"
+                },
+                "port": {
+                  "description": "Port to use when performing the test.",
+                  "format": "int64",
+                  "type": "integer"
+                },
+                "query": {
+                  "description": "Query to use for the test.",
+                  "type": "object"
+                },
+                "servername": {
+                  "description": "For SSL tests, it specifies on which server you want to initiate the TLS handshake,\nallowing the server to present one of multiple possible certificates on\nthe same IP address and TCP port number.",
+                  "type": "string"
+                },
+                "shouldTrackHops": {
+                  "description": "Turns on a traceroute probe to discover all gateways along the path to the host destination.",
+                  "type": "boolean"
+                },
+                "timeout": {
+                  "description": "Timeout in seconds for the test.",
+                  "format": "double",
+                  "type": "number"
+                },
+                "url": {
+                  "description": "URL to perform the test with.",
+                  "example": "https://example.com",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            },
+            "steps": {
+              "description": "When the test subtype is `multi`, the steps of the test.",
+              "items": {
+                "description": "The steps used in a Synthetics multistep API test.",
+                "properties": {
+                  "allowFailure": {
+                    "description": "Determines whether or not to continue with test if this step fails.",
+                    "type": "boolean"
+                  },
+                  "assertions": {
+                    "default": [],
+                    "description": "Array of assertions used for the test.",
+                    "items": {
+                      "description": "Object describing the assertions type, their associated operator,\nwhich property they apply, and upon which target.",
+                      "oneOf": [
+                        {
+                          "description": "An assertion which uses a simple target.",
+                          "properties": {
+                            "operator": {
+                              "description": "Assertion operator to apply.",
+                              "enum": [
+                                "contains",
+                                "doesNotContain",
+                                "is",
+                                "isNot",
+                                "lessThan",
+                                "lessThanOrEqual",
+                                "moreThan",
+                                "moreThanOrEqual",
+                                "matches",
+                                "doesNotMatch",
+                                "validates",
+                                "isInMoreThan",
+                                "isInLessThan"
+                              ],
+                              "example": "contains",
+                              "type": "string",
+                              "x-enum-varnames": [
+                                "CONTAINS",
+                                "DOES_NOT_CONTAIN",
+                                "IS",
+                                "IS_NOT",
+                                "LESS_THAN",
+                                "LESS_THAN_OR_EQUAL",
+                                "MORE_THAN",
+                                "MORE_THAN_OR_EQUAL",
+                                "MATCHES",
+                                "DOES_NOT_MATCH",
+                                "VALIDATES",
+                                "IS_IN_MORE_DAYS_THAN",
+                                "IS_IN_LESS_DAYS_THAN"
+                              ]
+                            },
+                            "property": {
+                              "description": "The associated assertion property.",
+                              "type": "string"
+                            },
+                            "target": {
+                              "description": "Value used by the operator.",
+                              "nullable": false
+                            },
+                            "type": {
+                              "description": "Type of the assertion.",
+                              "enum": [
+                                "body",
+                                "header",
+                                "statusCode",
+                                "certificate",
+                                "responseTime",
+                                "property",
+                                "recordEvery",
+                                "recordSome",
+                                "tlsVersion",
+                                "minTlsVersion",
+                                "latency",
+                                "packetLossPercentage",
+                                "packetsReceived",
+                                "networkHop"
+                              ],
+                              "example": "statusCode",
+                              "type": "string",
+                              "x-enum-varnames": [
+                                "BODY",
+                                "HEADER",
+                                "STATUS_CODE",
+                                "CERTIFICATE",
+                                "RESPONSE_TIME",
+                                "PROPERTY",
+                                "RECORD_EVERY",
+                                "RECORD_SOME",
+                                "TLS_VERSION",
+                                "MIN_TLS_VERSION",
+                                "LATENCY",
+                                "PACKET_LOSS_PERCENTAGE",
+                                "PACKETS_RECEIVED",
+                                "NETWORK_HOP"
+                              ]
+                            }
+                          },
+                          "required": [
+                            "type",
+                            "operator"
+                          ],
+                          "type": "object"
+                        },
+                        {
+                          "description": "An assertion for the `validatesJSONPath` operator.",
+                          "properties": {
+                            "operator": {
+                              "description": "Assertion operator to apply.",
+                              "enum": [
+                                "validatesJSONPath"
+                              ],
+                              "example": "validatesJSONPath",
+                              "type": "string",
+                              "x-enum-varnames": [
+                                "VALIDATES_JSON_PATH"
+                              ]
+                            },
+                            "property": {
+                              "description": "The associated assertion property.",
+                              "type": "string"
+                            },
+                            "target": {
+                              "description": "Composed target for `validatesJSONPath` operator.",
+                              "properties": {
+                                "jsonPath": {
+                                  "description": "The JSON path to assert.",
+                                  "type": "string"
+                                },
+                                "operator": {
+                                  "description": "The specific operator to use on the path.",
+                                  "type": "string"
+                                },
+                                "targetValue": {
+                                  "description": "The path target value to compare to."
+                                }
+                              },
+                              "type": "object"
+                            },
+                            "type": {
+                              "description": "Type of the assertion.",
+                              "enum": [
+                                "body",
+                                "header",
+                                "statusCode",
+                                "certificate",
+                                "responseTime",
+                                "property",
+                                "recordEvery",
+                                "recordSome",
+                                "tlsVersion",
+                                "minTlsVersion",
+                                "latency",
+                                "packetLossPercentage",
+                                "packetsReceived",
+                                "networkHop"
+                              ],
+                              "example": "statusCode",
+                              "type": "string",
+                              "x-enum-varnames": [
+                                "BODY",
+                                "HEADER",
+                                "STATUS_CODE",
+                                "CERTIFICATE",
+                                "RESPONSE_TIME",
+                                "PROPERTY",
+                                "RECORD_EVERY",
+                                "RECORD_SOME",
+                                "TLS_VERSION",
+                                "MIN_TLS_VERSION",
+                                "LATENCY",
+                                "PACKET_LOSS_PERCENTAGE",
+                                "PACKETS_RECEIVED",
+                                "NETWORK_HOP"
+                              ]
+                            }
+                          },
+                          "required": [
+                            "type",
+                            "operator"
+                          ],
+                          "type": "object"
+                        }
+                      ],
+                      "type": "object"
+                    },
+                    "type": "array"
+                  },
+                  "extractedValues": {
+                    "description": "Array of values to parse and save as variables from the response.",
+                    "items": {
+                      "description": "Parsing options for variables to extract.",
+                      "example": {},
+                      "properties": {
+                        "field": {
+                          "description": "When type is `http_header`, name of the header to use to extract the value.",
+                          "example": "content-type",
+                          "type": "string"
+                        },
+                        "name": {
+                          "description": "Name of the variable to extract.",
+                          "type": "string"
+                        },
+                        "parser": {
+                          "description": "Details of the parser to use for the global variable.",
+                          "example": {
+                            "type": "regex",
+                            "value": ".*"
+                          },
+                          "properties": {
+                            "type": {
+                              "description": "Type of parser for a Synthetics global variable from a synthetics test.",
+                              "enum": [
+                                "raw",
+                                "json_path",
+                                "regex",
+                                "x_path"
+                              ],
+                              "example": "raw",
+                              "type": "string",
+                              "x-enum-varnames": [
+                                "RAW",
+                                "JSON_PATH",
+                                "REGEX",
+                                "X_PATH"
+                              ]
+                            },
+                            "value": {
+                              "description": "Regex or JSON path used for the parser. Not used with type `raw`.",
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "type"
+                          ],
+                          "type": "object"
+                        },
+                        "type": {
+                          "description": "Property of the Synthetics Test Response to use for a Synthetics global variable.",
+                          "enum": [
+                            "http_body",
+                            "http_header"
+                          ],
+                          "example": "http_body",
+                          "type": "string",
+                          "x-enum-varnames": [
+                            "HTTP_BODY",
+                            "HTTP_HEADER"
+                          ]
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  },
+                  "isCritical": {
+                    "description": "Determines whether or not to consider the entire test as failed if this step fails.\nCan be used only if `allowFailure` is `true`.",
+                    "type": "boolean"
+                  },
+                  "name": {
+                    "description": "The name of the step.",
+                    "type": "string"
+                  },
+                  "request": {
+                    "description": "Object describing the Synthetic test request.",
+                    "properties": {
+                      "allow_insecure": {
+                        "description": "Allows loading insecure content for an HTTP request in a multistep test step.",
+                        "type": "boolean"
+                      },
+                      "basicAuth": {
+                        "description": "Object to handle basic authentication when performing the test.",
+                        "properties": {
+                          "password": {
+                            "description": "Password to use for the basic authentication.",
+                            "example": "",
+                            "type": "string"
+                          },
+                          "username": {
+                            "description": "Username to use for the basic authentication.",
+                            "example": "",
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "password",
+                          "username"
+                        ],
+                        "type": "object"
+                      },
+                      "body": {
+                        "description": "Body to include in the test.",
+                        "type": "string"
+                      },
+                      "certificate": {
+                        "description": "Client certificate to use when performing the test request.",
+                        "properties": {
+                          "cert": {
+                            "description": "Define a request certificate.",
+                            "properties": {
+                              "content": {
+                                "description": "Content of the certificate or key.",
+                                "type": "string"
+                              },
+                              "filename": {
+                                "description": "File name for the certificate or key.",
+                                "type": "string"
+                              },
+                              "updatedAt": {
+                                "description": "Date of update of the certificate or key, ISO format.",
+                                "type": "string"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "key": {
+                            "description": "Define a request certificate.",
+                            "properties": {
+                              "content": {
+                                "description": "Content of the certificate or key.",
+                                "type": "string"
+                              },
+                              "filename": {
+                                "description": "File name for the certificate or key.",
+                                "type": "string"
+                              },
+                              "updatedAt": {
+                                "description": "Date of update of the certificate or key, ISO format.",
+                                "type": "string"
+                              }
+                            },
+                            "type": "object"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "dnsServer": {
+                        "description": "DNS server to use for DNS tests.",
+                        "type": "string"
+                      },
+                      "dnsServerPort": {
+                        "description": "DNS server port to use for DNS tests.",
+                        "format": "int32",
+                        "maximum": 65535,
+                        "minimum": 1,
+                        "type": "integer"
+                      },
+                      "follow_redirects": {
+                        "description": "Specifies whether or not the request follows redirects.",
+                        "type": "boolean"
+                      },
+                      "headers": {
+                        "additionalProperties": {
+                          "description": "A single Header.",
+                          "type": "string"
+                        },
+                        "description": "Headers to include when performing the test.",
+                        "type": "object"
+                      },
+                      "host": {
+                        "description": "Host name to perform the test with.",
+                        "type": "string"
+                      },
+                      "method": {
+                        "description": "The HTTP method.",
+                        "enum": [
+                          "GET",
+                          "POST",
+                          "PATCH",
+                          "PUT",
+                          "DELETE",
+                          "HEAD",
+                          "OPTIONS"
+                        ],
+                        "example": "GET",
+                        "type": "string",
+                        "x-enum-varnames": [
+                          "GET",
+                          "POST",
+                          "PATCH",
+                          "PUT",
+                          "DELETE",
+                          "HEAD",
+                          "OPTIONS"
+                        ]
+                      },
+                      "noSavingResponseBody": {
+                        "description": "Determines whether or not to save the response body.",
+                        "type": "boolean"
+                      },
+                      "numberOfPackets": {
+                        "description": "Number of pings to use per test.",
+                        "format": "int32",
+                        "maximum": 10,
+                        "minimum": 0,
+                        "type": "integer"
+                      },
+                      "port": {
+                        "description": "Port to use when performing the test.",
+                        "format": "int64",
+                        "type": "integer"
+                      },
+                      "query": {
+                        "description": "Query to use for the test.",
+                        "type": "object"
+                      },
+                      "servername": {
+                        "description": "For SSL tests, it specifies on which server you want to initiate the TLS handshake,\nallowing the server to present one of multiple possible certificates on\nthe same IP address and TCP port number.",
+                        "type": "string"
+                      },
+                      "shouldTrackHops": {
+                        "description": "Turns on a traceroute probe to discover all gateways along the path to the host destination.",
+                        "type": "boolean"
+                      },
+                      "timeout": {
+                        "description": "Timeout in seconds for the test.",
+                        "format": "double",
+                        "type": "number"
+                      },
+                      "url": {
+                        "description": "URL to perform the test with.",
+                        "example": "https://example.com",
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "subtype": {
+                    "description": "The subtype of the Synthetic multistep API test step, currently only supporting `http`.",
+                    "enum": [
+                      "http"
+                    ],
+                    "type": "string",
+                    "x-enum-varnames": [
+                      "HTTP"
+                    ]
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        },
+        "name": {
+          "description": "Name of the test.",
+          "example": "Test name",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    };
+    const actual = bp.filterExampleJson('request', mockSchema);
+    const expected = {
+      "config": {
+        "assertions": [
+          {
+            "operator": "lessThan",
+            "target": 1000,
+            "type": "responseTime"
+          }
+        ],
+        "request": {
+          "method": "GET",
+          "url": "https://example.com"
+        }
+      },
+      "name": "Test name"
+    };
+    expect(actual).toEqual(expected);
+  });
 
 });
 
