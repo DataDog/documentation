@@ -31,10 +31,10 @@ Your assertion may be missing the required `eduPersonPrincipalName` attribute. C
 
 ### No active account for a user
 
-Enabling JIT provisioning may result in the `There is no active account for` error if a user has not received an email invitation or if their account is disabled in [User settings][3]. To resolve, follow the steps below based on your scenario:
+Enabling Just-In-Time (JIT) provisioning may result in the `There is no active account for` error if a user has not received an email invitation or if their account is disabled in [User settings][3]. To resolve, follow the steps below based on your scenario:
 
-  - If a new Datadog user tries to log into a Datadog org without an email invitation and the `There is no active account for error` occurs, send the user an email invitation and check if JIT provisioning is enabled for your org. The user **must** accept the invitation to enable JIT provisioning. Once the invitation is sent, the user exists in the system and cannot use JIT provisioning until the invite is accepted. If a user needs to verify their email or the invitation is expired, have the admin send a new invitation.
-  - If a user is no longer enabled in a Datadog organization that has JIT provisioning enabled and they try to login again through SAML and the `There is no active account for error` occurs, re-enable the user in [User settings][3].
+  - If a new Datadog user tries to log in to a Datadog organization without an email invitation and the `There is no active account for error` occurs, send the user an email invitation and check if JIT provisioning is enabled for your organization. The user **must** accept the invitation to enable JIT provisioning. Once the invitation is sent, the user exists in the system and cannot use JIT provisioning until the invite is accepted. If a user needs to verify their email or the invitation is expired, have the admin send a new invitation.
+  - If a user is no longer enabled in a Datadog organization that has JIT provisioning enabled and they try to log in again through SAML and the `There is no active account for error` occurs, re-enable the user in [User settings][3].
 
 ## IdP metadata file errors
 
@@ -48,7 +48,7 @@ To validate your metadata file:
 
 ## Roles errors
 
-When mappings are enabled, users logging in with SAML to a Datadog account are stripped of their current roles and reassigned to new roles based on the details in their SAML assertion passed on from your Identity Provider.
+When mappings are enabled, users logging in with SAML to a Datadog account are stripped of their current roles and reassigned to new roles based on the details in their SAML assertion passed on from your IdP.
 
 Users who log in with SAML and do not have the values that map to a Datadog role are stripped of all roles and are not allowed to log in.
 
@@ -69,15 +69,15 @@ If you have group mappings set and are not able to see your roles, your group ma
   </saml2:Attribute>
   ```
 
-2. Navigate to the Team page in the bottom left corner of Datadog.
-3. Select the [**Mappings**][6] tab.
-4. Compare the attributes provided by your IdP in your SAML assertion to the attributes set in the [**Mappings**][6] tab.
+2. Navigate to your profile and select **Organization Settings** in the bottom left corner of Datadog.
+3. Select [**SAML Group Mappings**][6].
+4. Compare the attributes provided by your IdP in your SAML assertion to the attributes set in the [**SAML Group Mappings**][6] tab.
 
   {{< img src="account_management/saml/saml_mappings_example.png" alt="SAML mappings in Datadog" style="width:80%;">}}
 
-5. Resolve any discrepancies in either the Datadog Mappings settings, or within your IdP settings. For example, if `memberof` is a set attribute in Datadog, and it's `member_Of` in your SAML assertion, resolve accordingly.
+5. Resolve any discrepancies in either the Datadog SAML Group Mappings settings, or within your IdP settings. For example, if `memberof` is a set attribute in Datadog, and it's `member_Of` in your SAML assertion, resolve accordingly.
 
-Discrepancies may occur when there is no match or a mismatch between the attribute key and value. For example, if you see a key value pair of `memberOf` and `name_of_your_group_goes_here` in **Mappings**, you run into an issue because this pair is not included in the assertion sent over from your IdP.
+Discrepancies may occur when there is no match or a mismatch between the attribute key and value. For example, if you see a key value pair of `memberOf` and `name_of_your_group_goes_here` in **SAML Group Mappings**, you run into an issue because this pair is not included in the assertion sent over from your IdP.
 
 If you are having trouble logging in because of a role-based error, contact your Administrator to complete the troubleshooting steps above.
 
@@ -85,7 +85,7 @@ If you are having trouble logging in because of a role-based error, contact your
 
 - Each IdP provides different types of attributes, and different ways to set attributes. For example, Azure uses [object IDs][7] for their attribute, or if you're using Okta, you must set attributes in [Okta settings][8]. Reference your IdP's attribute documentation for information.
 
-- When you disable Mappings, users are allowed to login with SAML and have the same roles they are assigned to—even if the group membership changed in your IdP.
+- When you disable **SAML Group Mappings**, users are allowed to log in with SAML and have the same roles they are assigned to—even if the group membership changed in your IdP.
 
 ## Identity provider (IdP) errors
 
@@ -102,14 +102,14 @@ If you encounter an error coming from your IdP such as Google, Active Directory,
 
 ### Identity provider certificates
 
-If you are unable to login to your account, an IdP certificate may have expired and rotated, prompting a general SAML error.
+If you are unable to log in to your account, an IdP certificate may have expired and rotated, prompting a general SAML error.
 
 Some questions to ask yourself that can help narrow down whether you have a certificate issue:
 
 - Are you the only account that is unable to log in? If the issue involves multiple accounts, it could be that an IdP-based certificate has expired or rotated.
 - Did anything recently change in your SAML configuration?
-- If your users are using multiple IdPs, are you seeing issues persists across multiple IdPs, or only one?
-- Did you recently enable [Mappings](#roles-errors)?
+- If your users are using multiple IdPs, are the issues persisting across multiple IdPs, or only one?
+- Did you recently enable [**SAML Group Mappings**](#roles-errors)?
 
 To resolve, ensure IdP certificates are up-to-date within your IdP's settings and that you have uploaded the most recent metadata file from your IdP in Datadog.
 
@@ -119,8 +119,8 @@ If you are still having trouble logging into Datadog, contact [Datadog support][
 
 In your message, provide a screen recording of your login process and include responses to the following questions:
 
-- Are you the only account that is unable to login or are all users unable to login?
-- Which organization are you trying to login to and how are you trying to login?
+- Are you the only account that is unable to log in or are all users unable to log in?
+- Which organization are you trying to log in to and how are you trying to log in?
 
 Before reaching out to Datadog support, contact your Administrator. You may need to also reach out your identity provider to resolve login issues.
 
