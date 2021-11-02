@@ -70,7 +70,7 @@ To edit a user's login methods:
 
 {{< img src="account_management/users/user_login_method_update.png" alt="User Login Method update" style="width:80%;">}}
 
-Note: Overrides can be set only to valid login methods. If you have not configured SAML you will not be able to choose that login method as an override for a user.
+**Note**: Overrides can be set only to valid login methods. If you have not configured SAML, you cannot choose that login method as an override for a user.
 
 ## Disable existing members
 
