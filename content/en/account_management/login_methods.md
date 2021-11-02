@@ -19,7 +19,7 @@ As an organization managers you can enable or disable the default login methods 
 
 1. Navigate to [Login Methods][2].
 {{< img src="account_management/login_methods_all_enabled.png" alt="User Login Method update" style="width:80%;">}}
-2. Select the appropriate state for the Login Method to match your organization's preference or policy requirements.
+2. Set the **Enabled by Default** setting for each method to `On` or `Off`, according to your organization's preference or policy requirements.
 3. Confirm your selection.
 {{< img src="account_management/login_methods_disable_confirmation.png" alt="User Login Method update" style="width:80%;">}}
 
