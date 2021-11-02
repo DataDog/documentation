@@ -26,12 +26,12 @@ The overall process consists of configuring an internal endpoint in your VPC tha
 
 Datadog exposes AWS PrivateLink endpoints in **us-east-1**.
 
-However, to route traffic to Datadog's PrivateLink offering in `us-east-1` from other regions, use inter-region [Amazon VPC peering][2]. Inter-region VPC peering enables you to establish connections between VPCs across different AWS regions. This allows VPC resources in different regions to communicate with each other using private IP addresses. See [Amazon VPC peering][2] for more details.
+However, to route traffic to Datadog's PrivateLink offering in `us-east-1` from other regions, use inter-region [Amazon VPC peering][2]. Inter-region VPC peering enables you to establish connections between VPCs across different AWS regions. This allows VPC resources in different regions to communicate with each other using private IP addresses. For more details, see [Amazon VPC peering][2].
 
 {{< tabs >}}
 {{% tab "us-east-1" %}}
 
-1. Connect to the AWS console to region **us-east-1** and create a new VPC endpoint.
+1. Connect the AWS Console to region **us-east-1** and create a VPC endpoint.
 
    {{< img src="agent/guide/private_link/create_vpc_endpoint.png" alt="Create VPC endpoint" style="width:60%;" >}}
 
@@ -51,20 +51,20 @@ However, to route traffic to Datadog's PrivateLink offering in `us-east-1` from 
 
 4. Click **Verify**. If this does not return _Service name found_, reach out to [Datadog support][1].
 5. Choose the VPC and subnets that should be peered with the Datadog VPC service endpoint.
-6. Make sure that for **Enable DNS name** the _Enable for this endpoint_ is checked:
+6. Make sure that for **Enable DNS name**, _Enable for this endpoint_ is checked:
 
-   {{< img src="agent/guide/private_link/enabled_dns_private.png" alt="Enable DNS private" style="width:60%;" >}}
+   {{< img src="agent/guide/private_link/enabled_dns_private.png" alt="Enable DNS private" style="width:80%;" >}}
 
 7. Choose the security group of your choice to control what can send traffic to this VPC endpoint.
 
     **Note**: **The security group must accept inbound traffic on TCP port `443`**.
 
-8. Hit **Create endpoint** at the bottom of the screen. If successful, the following is displayed:
+8. Click **Create endpoint** at the bottom of the screen. If successful, the following is displayed:
 
    {{< img src="agent/guide/private_link/vpc_endpoint_created.png" alt="VPC endpoint created" style="width:60%;" >}}
 
 9. Click on the VPC endpoint ID to check its status.
-10. Wait for the status to move from _Pending_ to _Available_. This can take up to 10 minutes. Once it shows _Available_, the AWS PrivateLink is ready to be used.
+10. Wait for the status to move from _Pending_ to _Available_. This can take up to 10 minutes. Once it shows _Available_, you can use AWS PrivateLink.
 
     {{< img src="agent/guide/private_link/vpc_status.png" alt="VPC status" style="width:60%;" >}}
 
@@ -81,7 +81,7 @@ However, to route traffic to Datadog's PrivateLink offering in `us-east-1` from 
     DD_LOGS_CONFIG_USE_HTTP=true
     ```
 
-    This configuration is required when sending logs to Datadog with AWS PrivateLink and the Datadog Agent, and is not required for the Lambda Extension. See [Agent log collection][3] for more details.
+    This configuration is required when sending logs to Datadog with AWS PrivateLink and the Datadog Agent, and is not required for the Lambda Extension. For more details, see [Agent log collection][3].
 12. [Restart your Agent][4] to send data to Datadog through AWS PrivateLink.
 
 
@@ -96,14 +96,14 @@ However, to route traffic to Datadog's PrivateLink offering in `us-east-1` from 
 
 ### Amazon VPC peering
 
-1. Connect to the AWS console to region **us-east-1** and create a new VPC endpoint.
+1. Connect the AWS Console to region **us-east-1** and create a VPC endpoint.
 
-{{< img src="agent/guide/private_link/create_vpc_endpoint.png" alt="Create VPC endpoint" style="width:60%;" >}}
+{{< img src="agent/guide/private_link/create_vpc_endpoint.png" alt="Create VPC endpoint" style="width:80%;" >}}
 
 2. Select **Find service by name**.
-3. Fill the _Service Name_ text box according to which service you want to establish AWS PrivateLink for:
+3. Fill the _Service Name_ text box according to the service you want to establish AWS PrivateLink for:
 
-{{< img src="agent/guide/private_link/vpc_service_name.png" alt="VPC service name" style="width:70%;" >}}
+{{< img src="agent/guide/private_link/vpc_service_name.png" alt="VPC service name" style="width:90%;" >}}
 
 | Datadog             | PrivateLink service name                                  |
 |---------------------| --------------------------------------------------------- |
@@ -116,7 +116,7 @@ However, to route traffic to Datadog's PrivateLink offering in `us-east-1` from 
 
 4. Click **Verify**. If this does not return _Service name found_, reach out to [Datadog support][1].
 
-5. Next, choose the VPC and subnets that should be peered with the Datadog VPC service endpoint. **Do not select Enable DNS name** as VPC peering requires DNS to be manually configured.
+5. Next, choose the VPC and subnets that should be peered with the Datadog VPC service endpoint. Do not select **Enable DNS name** as VPC peering requires DNS to be manually configured.
 
 6. Choose the security group of your choice to control what can send traffic to this VPC endpoint.
 
@@ -124,23 +124,26 @@ However, to route traffic to Datadog's PrivateLink offering in `us-east-1` from 
 
 7. Hit **Create endpoint** at the bottom of the screen. If successful, the following is displayed:
 
-{{< img src="agent/guide/private_link/vpc_endpoint_created.png" alt="VPC endpoint created" style="width:60%;" >}}
+{{< img src="agent/guide/private_link/vpc_endpoint_created.png" alt="VPC endpoint created" style="width:80%;" >}}
 
-8. Click on the VPC endpoint ID to check its status. Wait for the status to move from _Pending_ to _Available_. This can take up to 10 minutes.
+8. Click on the VPC endpoint ID to check its status. 
+9. Wait for the status to move from _Pending_ to _Available_. This can take up to 10 minutes.
 
-{{< img src="agent/guide/private_link/vpc_status.png" alt="VPC status" style="width:60%;" >}}
+{{< img src="agent/guide/private_link/vpc_status.png" alt="VPC status" style="width:80%;" >}}
 
 ### Amazon Route53
 
-1. Create a [Route53 private hosted zone][2] for each service for which you have created an AWS PrivateLink endpoint. Attach the private hosted zone to the VPC in `us-east-1`.
+1. Create a [Route53 private hosted zone][2] for each service you have created an AWS PrivateLink endpoint for. Attach the private hosted zone to the VPC in `us-east-1`.
 
-    You can find this information by referencing the table below or interrogating the AWS APIs, `DescribeVpcEndpointServices`, or by using the following CLI command: `aws ec2 describe-vpc-endpoint-services --service-names <service-name>`. For example, in the case of the Datadog metrics endpoint:
+    Find this information in the table below or by interrogating the AWS APIs, `DescribeVpcEndpointServices`, or by using the following CLI command: `aws ec2 describe-vpc-endpoint-services --service-names <service-name>`. 
+    
+    For example, in the case of the Datadog metrics endpoint:
 
     ```bash
     aws ec2 describe-vpc-endpoint-services --service-names com.amazonaws.vpce.us-east-1.vpce-svc-09a8006e245d1e7b8 | jq '.ServiceDetails[0].PrivateDnsName'
     ```
 
-    This returns `metrics.agent.datadoghq.com`. This is the name of the private hosted zone that you need to create and associate with the VPC which the Agent traffic originates in. Overriding this record grabs all dynamic Agent-versioned hostnames that exist.
+    This returns `metrics.agent.datadoghq.com`, the private hosted zone name that you need in order to create and associate with the VPC which the Agent traffic originates in. Overriding this record grabs all existing dynamic Agent-versioned hostnames.
 
     Use the list below to map service and DNS name to different parts of Datadog:
 
@@ -157,17 +160,17 @@ However, to route traffic to Datadog's PrivateLink offering in `us-east-1` from 
 
 2. Within each new Route53 private hosted zone, create an A record with the same name. Toggle the **Alias** option, then under **Route traffic to**, choose **Alias to VPC endpoint**, **us-east-1**, and enter the DNS name of the VPC endpoint associated with the DNS name.
 
-{{< img src="agent/guide/private_link/create-an-a-record.png" alt="Create an A record" style="width:80%;" >}}
+{{< img src="agent/guide/private_link/create-an-a-record.png" alt="Create an A record" style="width:90%;" >}}
 
 3. Configure VPC peering and routing between the VPC in `us-east-1` that contains the Datadog PrivateLink endpoints and the VPC in the region where the Datadog Agents run.
 
-4. If the VPCs are in different AWS accounts, the VPC containing the Datadog Agent must be authorized to associate with the Route53 private hosted zones before continuing. Create a [VPC association authorization][3] for each Route53 private hosted zone using the region and VPC ID of the VPC where the Datadog Agent runs. This option is not available in the AWS web console. It must be configured using the AWS CLI, SDK, or API.
+4. If the VPCs are in different AWS accounts, the VPC containing the Datadog Agent must be authorized to associate with the Route53 private hosted zones before continuing. Create a [VPC association authorization][3] for each Route53 private hosted zone using the region and VPC ID of the VPC where the Datadog Agent runs. This option is not available in the AWS Console. It must be configured using the AWS CLI, SDK, or API.
 
 5. Edit the Route53 hosted zone to add the non-us-east-1 VPC.
 
 {{< img src="agent/guide/private_link/edit-route53-hosted-zone.png" alt="Edit a Route53 private hosted zone" style="width:80%;" >}}
 
-6. VPCs that have the Private Hosted Zone (PHZ) attached need to have certain settings toggled on, specifically `enableDnsHostnames` and `enableDnsSupport` need to be turned on in the VPCs that the PHZ is associated with. See the [Considerations when working with a private hosted zone][4] documentation.
+6. VPCs that have the Private Hosted Zone (PHZ) attached need to have certain settings toggled on, specifically `enableDnsHostnames` and `enableDnsSupport` in the VPCs that the PHZ is associated with. See [Considerations when working with a private hosted zone][4].
 
 7. [Restart the Agent][5] to send data to Datadog through AWS PrivateLink.
 
@@ -181,7 +184,7 @@ If DNS is resolving to public IP addresses, then the Route53 zone has **not** be
 
 If DNS resolves correctly, but connections to `port 443` are failing, then VPC peering or routing may be misconfigured, or port 443 may not be allowed outbound to the CIDR block of the VPC in `us-east-1`.
 
-The VPCs that have the Private Hosted Zone (PHZ) attached need to have a couple of settings toggled on. Specifically, `enableDnsHostnames` and `enableDnsSupport` need to be turned on in the VPCs that the PHZ is associated with. See https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/hosted-zone-private-considerations.html#hosted-zone-private-considerations-vpc-settings
+The VPCs with Private Hosted Zone (PHZ) attached need to have a couple of settings toggled on. Specifically, `enableDnsHostnames` and `enableDnsSupport` need to be turned on in the VPCs that the PHZ is associated with. See [Amazon VPC settings][4].
 
 ### Datadog Agent
 
@@ -198,7 +201,7 @@ The VPCs that have the Private Hosted Zone (PHZ) attached need to have a couple 
     DD_LOGS_CONFIG_USE_HTTP=true
     ```
 
-    This configuration is required when sending logs to Datadog with AWS PrivateLink and the Datadog Agent, and is not required for the Lambda Extension. See [Agent log collection][7] for more details.
+    This configuration is required when sending logs to Datadog with AWS PrivateLink and the Datadog Agent, and is not required for the Lambda Extension. For more details, see [Agent log collection][7].
 
 2. [Restart the Agent][5].
 
