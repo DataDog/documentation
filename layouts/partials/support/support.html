@@ -8,21 +8,21 @@
 
     <div class="container cards-dd tile-nav">
         <div class="card-deck">
-            <a class="card" href="mailto:support@datadoghq.com">
+            <a class="card" href="http://help.datadoghq.com">
                 <div class="card-body text-center py-2 px-1">
-                    {{ partial "img.html" (dict "root" . "src" "icon-mail.png" "class" "" "alt" "Email" "width" "42.5") }}
-                    <p class="title">{{ i18n "email" | safeHTML }}</p>
+                    {{ partial "img.html" (dict "root" . "src" "icon-support.png" "class" "" "alt" "Support platform" "width" "42.5") }}
+                    <p class="title">{{ i18n "platform" | safeHTML }}</p>
                 </div>
             </a>
             <a class="card" href="http://app.datadoghq.com/">
                 <div class="card-body text-center py-2 px-1">
-                    {{ partial "img.html" (dict "root" . "src" "icon-team.png" "class" "" "alt" "Email" "width" "42.5") }}
+                    {{ partial "img.html" (dict "root" . "src" "icon-team.png" "class" "" "alt" "Chat" "width" "42.5") }}
                     <p class="title">{{ i18n "live_chat" | safeHTML }}</p>
                 </div>
             </a>
             <a class="card" href="http://chat.datadoghq.com/">
                 <div class="card-body text-center py-2 px-1">
-                    {{ partial "img.html" (dict "root" . "src" "icon-chat.png" "class" "" "alt" "Email" "width" "42.5") }}
+                    {{ partial "img.html" (dict "root" . "src" "icon-chat.png" "class" "" "alt" "Slack" "width" "42.5") }}
                     <p class="title">{{ i18n "event_stream_messaging" | safeHTML }}</p>
                 </div>
             </a>

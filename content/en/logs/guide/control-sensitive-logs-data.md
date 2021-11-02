@@ -39,8 +39,6 @@ Chances are that queries such as `version:x.y.z source:python status:debug` matc
 
 This guide refers to this example query as the **sensitive outline query**.
 
-{{< img src="logs/guide/sensitive/sensitive_outline_query.png" alt="Sensitive Outline Query" style="width:80%;" >}}
-
 ### Where does sensitive data live in Datadog?
 
 Once sensitive data in logs is sent to the Datadog platform, it may exist in a number of places. As a result, check each of the following (ordered from most likely to have sensitive data to least likely):

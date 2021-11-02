@@ -50,7 +50,7 @@ package main
 
 import (
         "log"
-        "github.com/DataDog/datadog-go/statsd"
+        "github.com/DataDog/datadog-go/v5/statsd"
 )
 
 func main() {
@@ -211,6 +211,13 @@ For more information and code examples, see [DogStatsD "Sample Rate" Parameter E
 ### Use DogStatsD over UDS (Unix Domain Socket)
 
 UDS is an inter-process communication protocol used to [transport DogStatsD payloads][2]. It has very little overhead when compared to UDP and lowers the general footprint of DogStatsD on your system.
+
+### Client side aggregation
+
+Client side aggregation is only available in the Go client starting with v5.0.0.
+
+See [Client side aggregation][7] for more information.
+
 
 ## Operating system kernel buffers
 
@@ -453,7 +460,12 @@ Starting with version `3.4.0` of the Go client.
 
 `datadog.dogstatsd.client.metrics`
 : **Metric type**: count<br>
-The number of `metrics` sent to the DogStatsD client by your application (before sampling).
+The number of `metrics` sent to the DogStatsD client by your application (before sampling and aggregation).
+
+`datadog.dogstatsd.client.metrics_by_type`
+: **Metric type**: count<br>
+The number of `metrics` sent by the DogStatsD client, before sampling and aggregation, tagged by metric type (`gauge`,
+`set`, `count`, `timing`, `histogram`, or `distribution`). Starting with v5.0.0 of the Go client.
 
 `datadog.dogstatsd.client.events`
 : **Metric type**: count<br>
@@ -469,7 +481,8 @@ The number of bytes successfully sent to the Agent.
 
 `datadog.dogstatsd.client.bytes_dropped`
 : **Metric type**: count<br>
-The number of bytes dropped by the DogStatsD client.
+The number of bytes dropped by the DogStatsD client (this includes `datadog.dogstatsd.client.bytes_dropped_queue` and
+`datadog.dogstatsd.client.bytes_dropped_writer`).
 
 `datadog.dogstatsd.client.bytes_dropped_queue`
 : **Metric type**: count<br>
@@ -477,7 +490,7 @@ The number of bytes dropped because the DogStatsD client queue was full.
 
 `datadog.dogstatsd.client.bytes_dropped_writer`
 : **Metric type**: count<br>
-The number of bytes dropped because of an error while writing to Datadog.
+The number of bytes dropped because of an error while writing to Datadog due to network timeout or error.
 
 `datadog.dogstatsd.client.packets_sent`
 : **Metric type**: count<br>
@@ -485,7 +498,8 @@ The number of datagrams successfully sent to the Agent.
 
 `datadog.dogstatsd.client.packets_dropped`
 : **Metric type**: count<br>
-The number of datagrams dropped by the DogStatsD client.
+The number of datagrams dropped by the DogStatsD client (this includes `datadog.dogstatsd.client.packets_dropped_queue`
+and `datadog.dogstatsd.client.packets_dropped_writer`).
 
 `datadog.dogstatsd.client.packets_dropped_queue`
 : **Metric type**: count<br>
@@ -493,11 +507,24 @@ The number of datagrams dropped because the DogStatsD client queue was full.
 
 `datadog.dogstatsd.client.packets_dropped_writer`
 : **Metric type**: count<br>
-The number of datagrams dropped because of an error while writing to Datadog.
+The number of datagrams dropped because of an error while writing to Datadog due to network timeout or error.
 
 `datadog.dogstatsd.client.metric_dropped_on_receive` 
 : **Metric type**: count<br>
-The number of metrics dropped because the internal receiving channel is full (only when using `WithChannelMode()`). Starting with version `3.6.0` of the Go client.
+The number of metrics dropped because the internal receiving channel is full (when using `WithChannelMode()`). Starting
+with v3.6.0 of the Go client when `WithChannelMode()` is enabled.
+
+`datadog.dogstatsd.client.aggregated_context`
+: **Metric type**: count<br>
+The total number of contexts flushed by the client when client side aggregation is enabled. Starting v5.0.0 of the Go
+client. This metric is reported only when the aggregation is enabled (which is the default).
+
+`datadog.dogstatsd.client.aggregated_context_by_type`
+: **Metric type**: count<br>
+The total number of contexts flushed by the client, when client side aggregation is enabled, tagged by metric type
+(`gauge`, `set`, `count`, `timing`, `histogram`, or `distribution`). Starting v5.0.0 of the Go client. This metric is
+reported only when the aggregation is enabled (which is the default).
+
 
 To disable telemetry, use the `WithoutTelemetry` setting:
 
@@ -696,3 +723,4 @@ See [DataDog/dogstatsd-csharp-client][1] for more information about the client c
 [4]: /metrics/dogstatsd_metrics_submission/#sample-rates
 [5]: /developers/dogstatsd/high_throughput/#note-on-sysctl-in-kubernetes
 [6]: https://kubernetes.io/docs/tasks/administer-cluster/sysctl-cluster/
+[7]: https://github.com/DataDog/datadog-go#client-side-aggregation

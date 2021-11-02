@@ -6,16 +6,17 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Amazon Trusted Advisor のキーメトリクスを追跡
-doc_link: 'https://docs.datadoghq.com/integrations/amazon_trusted_advisor/'
+doc_link: https://docs.datadoghq.com/integrations/amazon_trusted_advisor/
 draft: false
 further_reading:
-  - link: 'https://docs.datadoghq.com/dashboards/faq/why-isn-t-my-aws-trusted-advisor-dashboard-showing-any-data/'
+  - link: https://docs.datadoghq.com/dashboards/faq/why-isn-t-my-aws-trusted-advisor-dashboard-showing-any-data/
     tag: よくあるご質問
     text: AWS Trusted Advisor ダッシュボードにデータが表示されないのはなぜですか？
 git_integration_title: amazon_trusted_advisor
 has_logo: true
 integration_id: amazon-trusted-advisor
 integration_title: Amazon Trusted Advisor
+integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
@@ -40,7 +41,7 @@ Amazon Trusted Advisor は、AWS ベストプラクティスに従ってリソ�
 
 ### メトリクスの収集
 
-1. IAM コンソールで、ポリシードキュメントのフィールドにアクションとして `support:describe*` および `support:refresh*` を追加します。AWS サポート API に関する詳細は、[AWS ウェブサイトのドキュメント][2]を参照してください。
+1. IAM コンソールで、ポリシードキュメントのフィールドにアクションとして `support:describe*` および `support:refresh*` を追加します。AWS サポート API に関する詳細は、[AWS サポートのアクション、リソース、条件キー][2]を参照してください。
 2. [AWS インテグレーションタイル][3]のメトリクス収集で、`TrustedAdvisor` をオンにします。
 3. [Datadog - Amazon Trusted Advisor インテグレーション][4]をインストールします。
 

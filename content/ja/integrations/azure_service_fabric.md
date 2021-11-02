@@ -81,7 +81,7 @@ Azure Service Fabric インテグレーションには、サービスのチェ�
 
 [1]: https://docs.datadoghq.com/ja/integrations/azure/
 [2]: https://docs.microsoft.com/en-us/cli/azure/?view=azure-cli-latest
-[3]: https://app.datadoghq.com/account/settings#api
+[3]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: https://github.com/DataDog/service-fabric-datadog
 [5]: https://docs.datadoghq.com/ja/getting_started/agent/#checks
 [6]: https://docs.microsoft.com/en-us/azure/azure-monitor/essentials/metrics-supported#microsoftservicefabricmeshapplications

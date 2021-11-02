@@ -20,7 +20,7 @@ The following real-time enhanced Lambda metrics are available, and they are tagg
 
 
 `aws.lambda.enhanced.invocations`     
-: Measures the number of times a function is invoked in response to an event or invocation API call.
+: Measures the number of times a function is invoked in response to an event or an invocation of an API call.
 
 `aws.lambda.enhanced.errors`          
 : Measures the number of invocations that failed due to errors in the function.

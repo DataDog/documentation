@@ -85,5 +85,5 @@ Lacework peut être configuré pour envoyer des événements.
 Besoin d'aide ? Contactez [l'assistance Datadog][3].
 
 [1]: https://www.lacework.com/datadog/
-[2]: https://app.datadoghq.com/account/settings#api
+[2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://docs.datadoghq.com/fr/help/

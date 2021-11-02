@@ -108,7 +108,7 @@ auth0 には、イベントは含まれません。
 このインテグレーションの詳細は、Datadog の[ブログ記事][5]でご確認いただけます。
 
 [1]: https://manage.auth0.com
-[2]: https://app.datadoghq.com/account/settings#api
+[2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://auth0.com/docs/logs/references/log-event-type-codes
 [4]: https://docs.datadoghq.com/ja/help/
 [5]: https://www.datadoghq.com/blog/monitor-auth0-with-datadog/

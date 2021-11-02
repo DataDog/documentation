@@ -177,19 +177,28 @@ aliases:
 
 ### Apdex
 
+`trace.<SPAN_NAME>.apdex`
+: **前提条件:** このメトリクスは、すべての HTTP/WEB APM サービスに存在します。
+<br>
+**説明:** 各ウェブサービスの [Apdex][9] スコアを計測します。<br>
+**メトリクスタイプ:** [GAUGE][6]。<br>
+**タグ:** `env`、`service`、`resource` / `resource_name`、`version`、`synthetics`、[第 2 プライマリタグ][4]。
+
+**次のレガシー apdex メトリクスは非推奨になりました。**
+
 `trace.<SPAN_NAME>.apdex.by.resource_<2ND_PRIM_TAG>_service`
 : **前提条件:** このメトリクスは、すべての HTTP/WEB APM サービスに存在します。
 <br>
 **説明:** リソース、[第 2 プライマリタグ][4]、サービスのすべての組み合わせの [Apdex][9] スコアを表します。<br>
 **メトリクスタイプ:** [GAUGE][6]。<br>
-**タグ:** `env`、`service`、`resource`、[第 2 プライマリタグ][4]。
+**タグ:** `env`、`service`、`resource` / `resource_name`、[第 2 プライマリタグ][4]。
 
 `trace.<SPAN_NAME>.apdex.by.resource_service`
 : **前提条件:** このメトリクスは、すべての HTTP/WEB APM サービスに存在します。
 <br>
 **説明:** リソースとウェブサービスの各組み合わせの [Apdex][9] スコアを計測します。<br>
 **メトリクスタイプ:** [GAUGE][6]。<br>
-**タグ:** `env`、`service`、`resource`
+**タグ:** `env`、`service`、`resource` / `resource_name`。
 
 `trace.<SPAN_NAME>.apdex.by.<2ND_PRIM_TAG>_service`
 : **前提条件:** このメトリクスは、すべての HTTP/WEB APM サービスに存在します。

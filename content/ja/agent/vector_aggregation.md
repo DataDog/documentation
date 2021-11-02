@@ -8,11 +8,11 @@ further_reading:
   - link: /agent/proxy/
     tag: ドキュメント
     text: プロキシを使用するよう Agent を構成する
-  - link: 'https://vector.dev/docs/'
+  - link: https://vector.dev/docs/
     tag: ドキュメント
     text: Vector ドキュメント
 ---
-## 概要 
+## 概要
 
 Datadog Agent は [Vector][1] と組み合わせて使用することができます。このシナリオでは、Agent が Vector に
 データを送信し、そこで複数のアップストリーム Agent からのデータ集計を行います。
@@ -43,7 +43,8 @@ Vector にログを送信するには、Agent のコンフィギュレーショ�
 logs_config:
   logs_dd_url: "<VECTOR_HOST>:<VECTOR_PORT>"
   logs_no_ssl: true # TLS/SSL が Vector 側で有効化されていない場合
-  use_http: true # Vector `datadog_logs` ソースは HTTP のみをサポートします
+  use_http: true # Vector `datadog_logs` ソースは、HTTP(S) を介したイベントのみをサポートし、生の TCP はサポートしません
+  # use_v2_api: false # v0.17.0 より前のバージョンの Vector を使用している場合は、この行のコメントを解除します
 ```
 
 `VECTOR_HOST` は Vector を実行しているシステムのホスト名で、`VECTOR_PORT` は
@@ -61,7 +62,7 @@ Vector での処理中にログに適用できるコンフィギュレーショ�
 ```yaml
 sources:
   datadog_agents:
-    type: datadog_logs
+    type: datadog_agent
     address: "[::]:8080" # 上記の <VECTOR_PORT> をここで使用するポート値に設定
 
 transforms:
@@ -70,7 +71,9 @@ transforms:
     inputs:
       - datadog_agents
     source: |
-      .ddtags = .ddtags + ",sender:vector"
+      # ここでは、`!` の省略形を `string` 関数とともに使用しています。.ddtags が "string" でない場合はエラーになります。
+      # .ddtags フィールドは、常に文字列であることが期待されています。
+      .ddtags = string!(.ddtags) + ",sender:vector"
 
 sinks:
   to_datadog:
@@ -84,9 +87,7 @@ sinks:
 
 ### Kubernetes を使用する
 
-公式の Datadog チャートを使用して、上記の [Agent コンフィギュレーション](#agent-configuration)を
-`agents.customAgentConfig` 値に追加します。**注**: `agents.customAgentConfig` を考慮するために、
-`agent.useConfigMap` を `true` に設定する必要があります。
+公式の Datadog チャートを使用して、上記の [Agent コンフィギュレーション](#agent-configuration)を `agents.customAgentConfig` 値に追加します。**注**: `agents.customAgentConfig` を考慮するために、`agent.useConfigMap` を `true` に設定する必要があります。
 
 Datadog Helm チャートの詳細については、[Kubernetes ドキュメント][13]を参照してください。
 
@@ -94,10 +95,7 @@ Vector では、Datadog のログソースがあらかじめ設定された[デ�
 Helm を使用した Vector のインストールについては
 [公式の Vector ドキュメント][15]を参照してください。
 
-Datadog にログを送信するには、Vector のコンフィギュレーションに `datadog_logs` シンクを追加する必要があります。
-Vector のチャートでは、`customConfig` フィールドを使用して、`values.yaml` ファイル内の任意の有効な Vector のコンフィギュレーションを保持することができます。
-`datadog_logs` を有効にするには、[Vector のコンフィギュレーション](#vector-configuration)で
-説明したものと同様の設定を直接 Vector のチャートのコンフィギュレーションに含めることができます。
+Datadog にログを送信するには、Vector のコンフィギュレーションに `datadog_logs` シンクを追加する必要があります。Vector のチャートでは、`customConfig` フィールドを使用して、`values.yaml` ファイル内の任意の有効な Vector のコンフィギュレーションを保持することができます。`datadog_logs` を有効にするには、[Vector のコンフィギュレーション](#vector-configuration)で説明したものと同様の設定を直接 Vector のチャートのコンフィギュレーションに含めることができます。
 
 ## Vector で Datadog ログを操作する
 
@@ -121,10 +119,10 @@ Vector が他のソースから収集したログは[高度な機能を使用し
 [7]: https://vector.dev/docs/reference/configuration/transforms/route/
 [8]: /ja/getting_started/tagging
 [9]: https://vector.dev/docs/reference/vrl/
-[10]: https://vector.dev/docs/reference/configuration/sources/datadog_logs/
+[10]: https://vector.dev/docs/reference/configuration/sources/datadog_agent/
 [11]: https://vector.dev/docs/reference/configuration/sinks/datadog_logs/
 [12]: https://vector.dev/docs/reference/configuration/
 [13]: /ja/agent/kubernetes/?tab=helm
-[14]: https://github.com/timberio/vector/tree/master/distribution/helm/vector-aggregator
+[14]: https://github.com/timberio/helm-charts/tree/master/charts/vector-aggregator
 [15]: https://vector.dev/docs/setup/installation/package-managers/helm/
-[16]: api/latest/logs/#send-logs
+[16]: /ja/api/latest/logs/#send-logs

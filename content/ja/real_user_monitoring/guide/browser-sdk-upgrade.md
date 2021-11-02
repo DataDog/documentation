@@ -60,7 +60,7 @@ RUM Browser SDK では、[addError API][5] で収集されたエラーのソー�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/real_user_monitoring/guide/session-replay-getting-started/
+[1]: /ja/real_user_monitoring/session_replay
 [2]: /ja/real_user_monitoring/browser/collecting_browser_errors/
 [3]: /ja/real_user_monitoring/browser/monitoring_resource_performance/
 [4]: /ja/real_user_monitoring/browser/modifying_data_and_context/?tab=npm#enrich-and-control-rum-data

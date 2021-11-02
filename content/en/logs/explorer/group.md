@@ -21,9 +21,11 @@ further_reading:
 
 Logs can be valuable as individual events, but sometimes valuable information lives in a subset of events. In order to expose this information, group your logs by [fields](#fields), identify [patterns](#patterns), or aggregate your logs into [transactions](#transactions).
 
-Add [multiple queries](#multiple-queries) to simultaneously analyze different sets of logs, and apply [formulas](#formulas) and [functions](#functions) to your queries for in-depth analysis.
+Switch between different aggregations of your queried logs with the logs query editor. The fields you select to group, aggregate, and measure your logs are saved as you switch between different visualizations and aggregation types.
 
-{{< img src="logs/explorer/aggregations.png" alt="Log Livetail" style="width:100%;" >}}
+{{< img src="logs/explorer/aggregations.jpg" alt="Log Livetail" style="width:100%;" >}}
+
+Add [multiple queries](#multiple-queries) to simultaneously analyze different sets of logs, and apply [formulas](#formulas) and [functions](#functions) to your queries for in-depth analysis.
 
 **Note**: Aggregations are supported for **indexed logs only**. If you need to perform aggregation on non-indexed logs, consider [temporarily disabling exclusion filters][1], using [logs to metrics][2] and/or running a [rehydration][3] on your archives.
 
@@ -93,7 +95,7 @@ You can apply a function to a formula by clicking on the `Σ` icon. Here is an e
 
 With pattern aggregation, logs that have a `message` with similar structures, belong to the same `service` and have the same `status` are grouped altogether. The patterns view is helpful for detecting and filtering noisy error patterns that could cause you to miss other issues:
 
-{{< img src="logs/explorer/aggregations_patterns.png" alt="Log Livetail" style="width:80%;" >}}
+{{< img src="logs/explorer/aggregations_patterns.jpg" alt="Log Livetail" style="width:80%;" >}}
 
 **Note**: The pattern detection is based on 10,000 log samples. Refine the search to see patterns limited to a specific subset of logs.
 
@@ -103,13 +105,13 @@ Patterns support the [List Aggregates](#list-aggregates-of-logs) visualization. 
 - Append the search filter to scope it down to logs from this pattern only
 - Get a kickstart for a [grok parsing rule][3] to extract structured information logs of that pattern
 
-{{< img src="logs/explorer/patterns_side_panel.png" alt="Log Livetail" style="width:80%;" >}}
+{{< img src="logs/explorer/patterns_side_panel.jpg" alt="Log Livetail" style="width:80%;" >}}
 
 ## Transactions
 
 Transactions aggregate indexed logs according to instances of a **sequence** of events, such as a user session or a request processed across multiple micro-services. For example, an e-commerce website groups logs across various user actions, such as catalog search, add to cart, and checkout, to build a transaction view using a common attribute such as `requestId` or `orderId`.
 
-{{< img src="logs/explorer/aggregations_transactions.png" alt="Log Livetail" style="width:80%;" >}}
+{{< img src="logs/explorer/aggregations_transactions.jpg" alt="Log Livetail" style="width:80%;" >}}
 
 **Note**: The transaction aggregation differs from the natural group aggregation, in the sense that resulting aggregates not only include logs matching the query, but also all logs belonging to the related transactions.
 
