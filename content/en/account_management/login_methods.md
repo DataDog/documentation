@@ -17,7 +17,7 @@ The following login methods are available:
 
 As an organization managers you can enable or disable the default login methods for your organization. New organizations start with **Datadog Username and Password** and **Sign in with Google** are enabled and configured for all organizations and users. After you configure SAML, **Sign in with SAML** is also enabled.
 
-1. Navigate to the [Login Methods interface][2]
+1. Navigate to [Login Methods][2].
 {{< img src="account_management/login_methods_all_enabled.png" alt="User Login Method update" style="width:80%;">}}
 2. Select the appropriate state for the Login Method to match your organization's preference or policy requirements.
 3. Confirm your selection.
