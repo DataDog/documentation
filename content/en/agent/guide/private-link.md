@@ -126,7 +126,7 @@ However, to route traffic to Datadog's PrivateLink offering in `us-east-1` from 
 
 {{< img src="agent/guide/private_link/vpc_endpoint_created.png" alt="VPC endpoint created" style="width:80%;" >}}
 
-8. Click on the VPC endpoint ID to check its status. 
+8. Click on the VPC endpoint ID to check its status.
 9. Wait for the status to move from _Pending_ to _Available_. This can take up to 10 minutes.
 
 {{< img src="agent/guide/private_link/vpc_status.png" alt="VPC status" style="width:80%;" >}}
@@ -135,28 +135,28 @@ However, to route traffic to Datadog's PrivateLink offering in `us-east-1` from 
 
 1. Create a [Route53 private hosted zone][2] for each service you have created an AWS PrivateLink endpoint for. Attach the private hosted zone to the VPC in `us-east-1`.
 
-    Find this information in the table below or by interrogating the AWS APIs, `DescribeVpcEndpointServices`, or by using the following CLI command: `aws ec2 describe-vpc-endpoint-services --service-names <service-name>`. 
-    
-    For example, in the case of the Datadog metrics endpoint:
-
-    ```bash
-    aws ec2 describe-vpc-endpoint-services --service-names com.amazonaws.vpce.us-east-1.vpce-svc-09a8006e245d1e7b8 | jq '.ServiceDetails[0].PrivateDnsName'
-    ```
-
-    This returns `metrics.agent.datadoghq.com`, the private hosted zone name that you need in order to create and associate with the VPC which the Agent traffic originates in. Overriding this record grabs all existing dynamic Agent-versioned hostnames.
-
-    Use the list below to map service and DNS name to different parts of Datadog:
-
-    | Datadog             | PrivateLink service name                                  | Private DNS name                                   |
-    |---------------------| --------------------------------------------------------- | -------------------------------------------------- |
-    | Metrics             | `com.amazonaws.vpce.us-east-1.vpce-svc-09a8006e245d1e7b8` | `metrics.agent.datadoghq.com`                     |
-    | Logs (HTTP intake)  | `com.amazonaws.vpce.us-east-1.vpce-svc-025a56b9187ac1f63` | `agent-http-intake.logs.datadoghq.com`            |
-    | API                 | `com.amazonaws.vpce.us-east-1.vpce-svc-064ea718f8d0ead77` | `api.datadoghq.com`                               |
-    | Process             | `com.amazonaws.vpce.us-east-1.vpce-svc-0ed1f789ac6b0bde1` | `process.datadoghq.com`                           |
-    | Traces              | `com.amazonaws.vpce.us-east-1.vpce-svc-0355bb1880dfa09c2` | `trace.agent.datadoghq.com`                       |
-    | Containers          | `com.amazonaws.vpce.us-east-1.vpce-svc-0ad5fb9e71f85fe99` | `orchestrator.datadoghq.com`                      |
-
 {{< img src="agent/guide/private_link/create-a-route53-private-hosted-zone.png" alt="Create a Route53 private hosted zone" style="width:80%;" >}}
+
+Use the list below to map service and DNS name to different parts of Datadog:
+
+  | Datadog             | PrivateLink service name                                  | Private DNS name                                   |
+  |---------------------| --------------------------------------------------------- | -------------------------------------------------- |
+  | Metrics             | `com.amazonaws.vpce.us-east-1.vpce-svc-09a8006e245d1e7b8` | `metrics.agent.datadoghq.com`                     |
+  | Logs (HTTP intake)  | `com.amazonaws.vpce.us-east-1.vpce-svc-025a56b9187ac1f63` | `agent-http-intake.logs.datadoghq.com`            |
+  | API                 | `com.amazonaws.vpce.us-east-1.vpce-svc-064ea718f8d0ead77` | `api.datadoghq.com`                               |
+  | Process             | `com.amazonaws.vpce.us-east-1.vpce-svc-0ed1f789ac6b0bde1` | `process.datadoghq.com`                           |
+  | Traces              | `com.amazonaws.vpce.us-east-1.vpce-svc-0355bb1880dfa09c2` | `trace.agent.datadoghq.com`                       |
+  | Containers          | `com.amazonaws.vpce.us-east-1.vpce-svc-0ad5fb9e71f85fe99` | `orchestrator.datadoghq.com`                      |
+
+  You can also find this information by interrogating the AWS API, `DescribeVpcEndpointServices`, or by using the following CLI command: `aws ec2 describe-vpc-endpoint-services --service-names <service-name>`.
+
+  For example, in the case of the Datadog metrics endpoint:
+
+  ```bash
+  aws ec2 describe-vpc-endpoint-services --service-names com.amazonaws.vpce.us-east-1.vpce-svc-09a8006e245d1e7b8 | jq '.ServiceDetails[0].PrivateDnsName'
+  ```
+
+  This returns `metrics.agent.datadoghq.com`, the private hosted zone name that you need in order to create and associate with the VPC which the Agent traffic originates in. Overriding this record grabs all existing dynamic Agent-versioned hostnames.
 
 2. Within each new Route53 private hosted zone, create an A record with the same name. Toggle the **Alias** option, then under **Route traffic to**, choose **Alias to VPC endpoint**, **us-east-1**, and enter the DNS name of the VPC endpoint associated with the DNS name.
 
