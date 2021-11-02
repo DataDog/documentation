@@ -23,7 +23,7 @@ As an organization managers you can enable or disable the default login methods 
 3. Confirm your selection.
 {{< img src="account_management/login_methods_disable_confirmation.png" alt="User Login Method update" style="width:80%;">}}
 
-Note: You cannot disable all Login Methods for an Organization. At least one Login Method must be enabled by Default for your organization.
+**Note**: You cannot disable all login methods for an organization. At least one login method must be enabled by default for your organization.
 
 ## Reviewing User Overrides
 
