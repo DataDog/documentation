@@ -1293,41 +1293,45 @@ main:
     url: metrics/units/
     parent: metrics_top_level
     weight: 4
+  - name: Metrics Without Limits™
+    url: metrics/metrics-without-limits/
+    parent: metrics_top_level
+    weight: 5
   - name: Advanced Filtering
     url: metrics/advanced-filtering/
     parent: metrics_top_level
     identifier: metrics_advanced_filtering
-    weight: 5
+    weight: 6
   - name: Custom Metrics
     url: metrics/custom_metrics/
     parent: metrics_top_level
     identifier: metrics_custom_metrics
-    weight: 6
+    weight: 7
   - name: Metric Type Modifiers
     url: metrics/type_modifiers/
     parent: metrics_custom_metrics
     identifier: metrics_modifiers
-    weight: 601
+    weight: 701
   - name: 'Submission - Agent Check '
     url: metrics/agent_metrics_submission/
     parent: metrics_custom_metrics
     identifier: dev_tools_metrics_agent
-    weight: 602
+    weight: 702
   - name: Submission - DogStatsD
     url: metrics/dogstatsd_metrics_submission/
     parent: metrics_custom_metrics
     identifier: dev_tools_metrics_dogstatsd
-    weight: 603
+    weight: 703
   - name: Submission - Powershell
     url: metrics/powershell_metrics_submission
     parent: metrics_custom_metrics
     identifier: dev_tools_metrics_powershell
-    weight: 604
+    weight: 704
   - name: 'Submission - API '
     url: api/latest/metrics/#submit-metrics
     parent: metrics_custom_metrics
     identifier: dev_tools_metrics_api
-    weight: 605
+    weight: 705
   - name: Notebooks
     url: notebooks/
     identifier: notebooks
@@ -2471,18 +2475,26 @@ main:
     url: synthetics/api_tests/ssl_tests
     parent: api_tests
     weight: 102
-  - name: TCP
-    url: synthetics/api_tests/tcp_tests
-    parent: api_tests
-    weight: 103
   - name: DNS
     url: synthetics/api_tests/dns_tests
     parent: api_tests
+    weight: 103
+  - name: TCP
+    url: synthetics/api_tests/tcp_tests
+    parent: api_tests
     weight: 104
+  - name: UDP
+    url: synthetics/api_tests/udp_tests
+    parent: api_tests
+    weight: 105
   - name: ICMP
     url: synthetics/api_tests/icmp_tests
     parent: api_tests
-    weight: 105
+    weight: 106
+  - name: WebSocket
+    url: synthetics/api_tests/websocket_tests
+    parent: api_tests
+    weight: 107
   - name: Multistep API Tests
     url: synthetics/multistep
     parent: synthetics
@@ -2663,7 +2675,13 @@ main:
   - name: Session Replay
     url: real_user_monitoring/session_replay/
     parent: rum
+    identifier: rum_session_replay
     weight: 5
+  - name: Privacy Options
+    url: real_user_monitoring/session_replay/privacy_options
+    parent: rum_session_replay
+    identifier: rum_session_replay_privacy_options
+    weight: 501
   - name: Dashboards
     url: real_user_monitoring/dashboards/
     parent: rum
