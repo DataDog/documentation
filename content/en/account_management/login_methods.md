@@ -7,7 +7,7 @@ Login Methods are how users are able to authenticate themselves and log into you
 
 When a login method is enabled by default, any user who is not explicitly denied access ([via an user login method override][1]) can use that login method to access Datadog, provided their username (their email address) matches the user that is invited to the organization.
 
-There are three login methods available to Datadog Organizations:
+The following login methods are available:
 
 - Datadog Username and Password (also known as Standard)
 - Sign in with Google
