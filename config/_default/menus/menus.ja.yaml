@@ -279,6 +279,10 @@ main_left:
     title: ユースケース
     url: "https://www.datadoghq.com/solutions/on-premises-monitoring/"
     weight: -437
+  - identifier: docs
+    name: ドキュメント
+    url: "https://docs.datadoghq.com/ja/"
+    weight: -400
 main_right:
   - identifier: about
     name: 会社情報
@@ -336,10 +340,6 @@ main_right:
     url: "https://www.datadoghq.com/ja/blog/community/"
     parent: blog
     weight: 400
-  - identifier: docs
-    name: ドキュメント
-    url: "https://docs.datadoghq.com/ja/"
-    weight: -470
   - identifier: login
     name: ログイン
     url: "https://app.datadoghq.com/"
