@@ -18,6 +18,8 @@ Built with [hugo][1], a static website generation tool.
 
 6. Download the documentation repo `git clone https://github.com/DataDog/documentation.git`
 
+7. Run `yarn` in the documentation repo
+
 ### Run the server
 
 Inside `documentation/` folder, create a `Makefile.config` file from the [Makefile.config.example][5]
