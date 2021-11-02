@@ -27,7 +27,7 @@ As an organization managers you can enable or disable the default login methods 
 
 ## Reviewing user overrides
 
-In circumstances where an override has been set, for example in the below image the Login Method for "Google" is disabled by default for users of the organiztion, but one user has the method enabled by having an override set.
+Using overrides, you can change the available login methods for individual users. In the following example, **Sign in with Google** is Off by default in the organization, but one user has it enabled by having an override set.
 
 {{< img src="account_management/login_methods_disabled_overrides_set.png" alt="Login Method disabled, with User Override enabled" style="width:80%;">}}
 
