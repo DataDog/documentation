@@ -5,7 +5,7 @@ kind: documentation
 
 Login Methods are how users are able to authenticate themselves and log into your Datadog organization. If you have  privileged access permission, as with the Datadog Admin Role, you can use Login Methods to enable and disable the default login methods for users in your organization. 
 
-When a Login Method is enabled by default any user who is not explicitly denied access ([via an user login method override][1]) can use this Login Method to access Datadog so long as their username (their email address) matches the user who is invited to the Organization.
+When a login method is enabled by default, any user who is not explicitly denied access ([via an user login method override][1]) can use that login method to access Datadog, provided their username (their email address) matches the user that is invited to the organization.
 
 There are three login methods available to Datadog Organizations:
 
