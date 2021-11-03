@@ -964,7 +964,7 @@ components:
           - definition:
               requests:
                 fill:
-                  q: system.cpu.user
+                  q: avg:system.cpu.user{*}
               type: hostmap
           items:
             $ref: '#/components/schemas/Widget'
@@ -3030,7 +3030,7 @@ components:
           - definition:
               requests:
                 fill:
-                  q: system.cpu.user
+                  q: avg:system.cpu.user{*}
               type: hostmap
           items:
             $ref: '#/components/schemas/Widget'
@@ -10404,11 +10404,9 @@ components:
       description: Description of the CI provider.
       properties:
         pipeline:
-          description: Name of the pipeline.
-          type: string
+          $ref: '#/components/schemas/SyntheticsCIBatchMetadataPipeline'
         provider:
-          description: Name of the CI provider.
-          type: string
+          $ref: '#/components/schemas/SyntheticsCIBatchMetadataProvider'
       type: object
     SyntheticsCIBatchMetadataGit:
       description: Git information.
@@ -10416,8 +10414,22 @@ components:
         branch:
           description: The branch name.
           type: string
-        commit_sha:
+        commitSha:
           description: The commit SHA.
+          type: string
+      type: object
+    SyntheticsCIBatchMetadataPipeline:
+      description: Description of the CI pipeline.
+      properties:
+        url:
+          description: URL of the pipeline.
+          type: string
+      type: object
+    SyntheticsCIBatchMetadataProvider:
+      description: Description of the CI provider.
+      properties:
+        name:
+          description: Name of the CI provider.
           type: string
       type: object
     SyntheticsCITest:
@@ -11217,7 +11229,8 @@ components:
       properties:
         assertions:
           default: []
-          description: Array of assertions used for the test.
+          description: Array of assertions used for the test. Required for single
+            API tests.
           example: []
           items:
             $ref: '#/components/schemas/SyntheticsAssertion'
