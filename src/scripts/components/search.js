@@ -20,6 +20,7 @@ const sendAlgoliaInsightClickEvent = (algoliaQueryID) => {
 
     if (objectID !== '' && typeof(position) === 'number') {
         const insightsClickEventParams = {
+            userToken: 'documentation',
             index: indexName,
             eventName: 'clickedObjectIDsAfterSearch',
             queryID: algoliaQueryID,
@@ -42,7 +43,8 @@ const attachEventListenersToPaginatedSearchResults = (algoliaQueryID) => {
               event.preventDefault();
               const url = event.target.href;
               sendAlgoliaInsightClickEvent(algoliaQueryID);
-              // window.history.pushState({ url }, '', url);
+            //   window.history.pushState({ 'page': url }, '', url);
+            //   window.location = url;
           })
       })
   }
