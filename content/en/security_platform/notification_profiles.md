@@ -16,7 +16,7 @@ Create and modify notification preferences within a notification profile to span
 
 View and search through all created Notification Profiles on the **Notification Profiles** page. Create, edit, clone, enable, disable, delete, or view Notification Profiles created by users in your organization.
 
-{{< img src="security_platform/notification-profiles-overview.png" alt="Notification Profiles" style="width:100%; >}}
+{{< img src="security_platform/notification-profiles-overview.png" alt="Notification Profiles" style="width:100%;" >}}
 
 ## Create a notification profile
 
@@ -35,7 +35,7 @@ To create a new notification profile, follow the instructions below.
 6. A panel with a preview of rules matching the notification profile appears to the right, which helps indicate if the notification profile is too specific or broad.
 7. Click **Save and Activate** to save the notification profile. This automatically activates the notification profile and navigates you back to the main **Notification Profiles** page.
 
-{{< img src="security_platform/notification-profiles-setup.png" alt="Setup of a notification profile" style="width:100%;>}}
+{{< img src="security_platform/notification-profiles-setup.png" alt="Setup of a notification profile" style="width:100%;" >}}
 
 If the notification profile is associated with a Security Rule, you can view the profile's trigger conditions in the “Set severity and notifications” section in your rules.
 
