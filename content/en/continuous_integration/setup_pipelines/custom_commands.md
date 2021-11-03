@@ -43,8 +43,8 @@ datadog-ci trace [--name <name>] -- <command>
 
 Specify a valid [Datadog API key][2] in the `DATADOG_API_KEY` environment variable. For example:
 
-<pre class="chroma">
-<code class="language-bash" data-lang="bash">
+<pre>
+<code>
 DATADOG_API_KEY=&lt;api_key&gt; DATADOG_SITE={{< region-param key="dd_site" >}} datadog-ci trace \
 --name "Greet" \
 -- \

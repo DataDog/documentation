@@ -11,7 +11,9 @@ further_reading:
 ---
 
 {{< site-region region="us5,gov" >}}
-The selected Datadog site ({{< region-param key="dd_site_name" >}}) is not supported at this time.
+<div class="alert alert-warning">
+The selected Datadog site ({{< region-param key="dd_site_name" >}}) is not supported.
+</div>
 {{< /site-region >}}
 
 {{< site-region region="us,eu,us3" >}}
