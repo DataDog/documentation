@@ -48,12 +48,20 @@ EC2 instance summaries links follow that pattern
 {{< img src="dashboards/guide/related_links/ec2-interaction.png" alt="Link Interaction" style="width:80%;" >}}
 
 
+### Triggering a webhook to a Azure Automation Runbook
+
+https://docs.microsoft.com/en-us/azure/automation/start-runbooks
+
+
 ### Linking to your Customer Support Center
 
 
 `https://acme.zendesk.com/agent/search/1?type=user&q=shane%40doe.com`
 
 https://acme.zendesk.com/agent/search/1?type=user&q={{@usr.email.value}}
+
+
+
 
 ## Overriding native links
 
