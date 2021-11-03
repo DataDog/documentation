@@ -10,44 +10,44 @@ further_reading:
 
 ## Overview
 
-Security Notification Profiles are a key component of security monitoring that keeps your team informed of issues without having to manually edit notification preferences for individual security rules.
+Security Notification Profiles play a key role in Security Monitoring by keeping your team informed of issues without you having to manually edit notification preferences for individual security rules.
 
-Create and modify notification preferences within a notification profile to span across multiple security rules and signals based on parameters such as severities, rule types, rule tags and signal attributes.
+Create and modify notification preferences within a notification profile to span across multiple security rules and signals based on parameters such as severities, rule types, rule tags, and signal attributes.
 
-On the Notification Profiles page, view and search through all created Notification Profiles. Create, edit, clone, enable, disable, delete, or view Notification Profiles created by users in your organization.
+View and search through all created Notification Profiles on the **Notification Profiles** page. Create, edit, clone, enable, disable, delete, or view Notification Profiles created by users in your organization.
 
-{{< img src="security_platform/notification-profiles-overview.png" alt="Notification Profiles" >}}
+{{< img src="security_platform/notification-profiles-overview.png" alt="Notification Profiles" style="width:100%; >}}
 
 ## Create a notification profile
 
-To create a new notification profile, follow the instructions below:
+To create a new notification profile, follow the instructions below.
 
-1. In Datadog, navigate to the [Notification Profiles tab][1].
-2. Click on the New Notification Profile button in the top right corner of the page.
-3. Input a Name for your notification profile in the *Name* field.
+1. In Datadog, navigate to the [Notification Profiles tab][1] in **Security** > **Setup & Configuration**.
+2. Click on the **+ New Notification Profile** button in the top right corner of the page.
+3. Input a name for your notification profile in the **Name** field.
 4. Define the logic for when this notification profile is triggered by conditions matching to security rule and/or security signal.
-    - For security rules, notification profiles can be made with the following conditions: severity, rule type or rule tags.
+    - For security rules, notification profiles can be made with the following conditions: severity, rule type, or rule tags.
     - For security signals, notification profiles can be made for any matching signal tag or attribute.
 
     For example, severity set as `Medium` means a signal triggers an enabled notification profile as long as the security signal rule condition set in Step 4 is met at least once.
 
-5. Using the *Recipients* field, select all relevant parties you want to notify. For example, notify individuals, teams, lists, or handles.
-6. The right side panel provides a preview of rules matching to the notification profile, which help indicate if the notification profile is too specific or broad.
-7. Save the notification profile. This automatically activates the notification profile and navigates you back to the main Notification Profiles page.
+5. Select all relevant parties you want to notify in the **Recipients** field. For example, notify individuals, teams, lists, or handles.
+6. A panel with a preview of rules matching the notification profile appears to the right, which helps indicate if the notification profile is too specific or broad.
+7. Click **Save and Activate** to save the notification profile. This automatically activates the notification profile and navigates you back to the main **Notification Profiles** page.
 
-{{< img src="security_platform/notification-profiles-setup.png" alt="Setup of a notification profile" >}}
+{{< img src="security_platform/notification-profiles-setup.png" alt="Setup of a notification profile" style="width:100%;>}}
 
-If the notification profile is associated with a Security Rule, it can be viewed in the Rule details view in the “Set severity and notifications” section.
+If the notification profile is associated with a Security Rule, you can view the profile's trigger conditions in the “Set severity and notifications” section in your rules.
 
-If the notification profile matches set conditions, the resulting notification includes details about the matched notification profile in the footer of the notification.
+If the notification profile matches set conditions, the resulting notification includes details about the matched notification profile in the notification footer.
 
 ## Manage a notification profile
 
 ### Search
 
-The free text search filters Notification Profiles by text in the Notification Profile. Selecting a tag within a rule type, rule tags, signal tags, or attributes adds the tag to the search, and displays Notification Profiles matching the value.
+The free text search filters notification profiles by text in the **Notification Profile** page. Select a tag within a rule type, rule tags, signal tags, or attributes to add the tag in the search, which displays notification profiles matching the value.
 
-Query results update in real time when the query is edited; there is no “Search” button to click.
+When you edit the search query, search results update in real-time. There is no **Search** button.
 
 ### Enable or disable
 
@@ -59,13 +59,13 @@ To edit a notification profile, hover over the notification profile card and cli
 
 ### Clone
 
-To clone a notification profile, click the menu in the top right corner of the notification profile card and select the *Clone Notification Profile* option from the menu.
+To clone a notification profile, click the kebab menu in the top right corner of the notification profile card and select the **Clone Notification Profile** option from the menu.
 
 ### Delete
 
-To delete a notification profile, click the menu in the top right corner of the notification profile card and select the *Delete Notification Profile* option from the menu.
+To delete a notification profile, click the kebab menu in the top right corner of the notification profile card and select the **Delete Notification Profile** option from the menu.
 
-## Further reading
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
