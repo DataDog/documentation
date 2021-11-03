@@ -10,7 +10,7 @@ further_reading:
 
 ## Overview
 
-Security Notification Profiles are a key component of security monitoring that keeps your team informed of issues without having to manually edit notification preferences for individual security rules.
+Security Notification Profiles play a key role in Security Monitoring by keeping your team informed of issues without you having to manually edit notification preferences for individual security rules.
 
 Create and modify notification preferences within a notification profile to span across multiple security rules and signals based on parameters such as severities, rule types, rule tags, and signal attributes.
 
