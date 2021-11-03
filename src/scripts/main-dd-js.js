@@ -1,5 +1,7 @@
 import 'bootstrap';
 
+import './jqmath-vanilla';
+
 import './datadog-docs';
 
 import './components/copy-code';
