@@ -2966,6 +2966,10 @@ main:
     url: account_management/audit_logs
     parent: organization_settings
     weight: 203
+  - name: OAuth Apps
+    url: account_management/oauth-apps
+    parent: organization_settings
+    weight: 204
   - name: RBAC
     url: account_management/rbac/
     parent: account_management
