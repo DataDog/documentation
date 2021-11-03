@@ -3,9 +3,9 @@ title: Notification Profiles
 kind: documentation
 description: "Create notification profiles to automatically notify your team and integrations when security rules trigger."
 further_reading:
-- link: "/security_platform/default_rules"
+- link: "/security_platform/detection_rules/"
   tag: "Documentation"
-  text: "Explore default security rules"
+  text: "Explore security rules"
 ---
 
 ## Overview
@@ -29,7 +29,7 @@ To create a new notification profile, follow the instructions below:
 
     For example, severity set as `Medium` means a signal triggers an enabled notification profile as long as the security signal rule condition set in Step 4 is met at least once.
 
-5. Using the *Recipients* field, select all relevant parties you want to notify. For example, notify individuals, teams, lists, or @handles.
+5. Using the *Recipients* field, select all relevant parties you want to notify. For example, notify individuals, teams, lists, or handles.
 6. The right side panel provides a preview of rules matching to the notification profile, which help indicate if the notification profile is too specific or broad.
 7. Save the notification profile. This automatically activates the notification profile and navigates you back to the main Notification Profiles page.
 
