@@ -3009,6 +3009,10 @@ main:
     url: account_management/saml/safenet/
     parent: account_management_saml
     weight: 407
+  - name: Troubleshooting
+    url: account_management/saml/troubleshooting/
+    parent: account_management_saml
+    weight: 408
   - name: API and Application Keys
     url: account_management/api-app-keys/
     parent: account_management
