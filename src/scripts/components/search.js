@@ -1,9 +1,52 @@
 /* eslint-disable */
 import algoliasearch from 'algoliasearch';
+import searchInsights from 'search-insights';
 import configDocs from '../config/config-docs';
+import { getConfig } from '../helpers/helpers';
 
 const siteEnv = document.querySelector('html').dataset.env;
 let indexName = '';
+
+const initializeAlogliaInsights = () => {
+    const { algoliaConfig } = getConfig();
+    const { appId, apiKey } = algoliaConfig;
+
+    searchInsights('init', { appId, apiKey });
+}
+
+const sendAlgoliaInsightClickEvent = (algoliaQueryID) => {
+    const objectID = event.target.dataset.object;
+    const position = parseInt(event.target.dataset.position);
+
+    if (objectID !== '' && typeof(position) === 'number') {
+        const insightsClickEventParams = {
+            index: indexName,
+            eventName: 'clickedObjectIDsAfterSearch',
+            queryID: algoliaQueryID,
+            objectIDs: [objectID],
+            positions: [position] 
+        };
+
+        searchInsights('clickedObjectIDsAfterSearch', insightsClickEventParams);
+    }
+}
+
+const attachEventListenersToPaginatedSearchResults = (algoliaQueryID) => {
+    const searchResultContainer = document.getElementById('tipue_search_content');
+
+    if (searchResultContainer) {
+      const searchResultLinksNodeList = searchResultContainer.querySelectorAll('.hit .tipue_search_content_title a');
+      
+      searchResultLinksNodeList.forEach(link => {
+          link.addEventListener('click', () => {
+              event.preventDefault();
+              const url = event.target.href;
+              sendAlgoliaInsightClickEvent(algoliaQueryID);
+              // window.history.pushState({ url }, '', url);
+          })
+      })
+  }
+}
 
 if (window.location.href.indexOf('/search/') > -1) {
   if (siteEnv === 'preview' || siteEnv === 'development') {
@@ -60,12 +103,15 @@ if (window.location.href.indexOf('/search/') > -1) {
               params: {
                   hitsPerPage: 200,
                   attributesToRetrieve: '*',
-                  facetFilters: [`language:${lang}`]
+                  facetFilters: [`language:${lang}`],
+                  clickAnalytics: true
               }
           }
       ],
       function (err, results) {
           if (!err) {
+              const queryID = results['results'][0].queryID;
+
               // format and populate results
               $('#tipue_search_input').val(decodeURIComponent(query));
               const hits = results['results'][0]['hits'];
@@ -97,6 +143,7 @@ if (window.location.href.indexOf('/search/') > -1) {
                       `<div id="tipue_search_results_count">${hits.length} results</div>`
                   );
               }
+
               $('#tipue_search_content .content').html(formatted_results);
 
               // load pagination
@@ -353,17 +400,19 @@ if (window.location.href.indexOf('/search/') > -1) {
                           let i = (page - 1) * items_per_page;
                           i < page * items_per_page && i < hits.length;
                           i++
-                      ) {
+                      ) {                          
+                          const algoliaObjectID = hits[i].objectID || '';
+                          const algoliaPosition = hits[i].weight.position || '';
+                          
                           let formatted_results = '';
                           formatted_results += '<div class="hit row">';
                           formatted_results += '<div class="col-12">';
 
                           formatted_results += `${
                               '<div class="tipue_search_content_title">' +
-                              '<a href="'
-                          }${hits[i]['url']}">${getTitle(
-                              hits[i]
-                          )}</a></div>`;
+                              '<a href="'}${hits[i]['url']}" 
+                                data-object="${algoliaObjectID}"
+                                data-position="${algoliaPosition}">${getTitle(hits[i])}</a></div>`;
                           const text =
                               hits[i]._snippetResult.content.value;
                           formatted_results += `<div class="tipue_search_content_text">${text}</div>`;
@@ -409,6 +458,8 @@ if (window.location.href.indexOf('/search/') > -1) {
                       if (!window.location.hash) {
                           $('html, body').scrollTop(0);
                       }
+
+                      attachEventListenersToPaginatedSearchResults(queryID);
                   }
 
                   // init page nums
@@ -434,3 +485,5 @@ if (window.location.href.indexOf('/search/') > -1) {
       }
   );
 }
+
+window.addEventListener('DOMContentLoaded', initializeAlogliaInsights);

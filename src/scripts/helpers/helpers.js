@@ -1,3 +1,5 @@
+import configDocs from '../config/config-docs';
+
 function updateMainContentAnchors() {
     // make header tags with ids and make clickable as anchors
     $('.main h2[id], .main h3[id], .main h4[id], .main h5[id]').each(function() {
@@ -52,4 +54,9 @@ const getCookieByName = (name) => {
     return value;
 }
 
-export {updateMainContentAnchors, reloadWistiaVidScripts, gtag, getCookieByName}
+const getConfig = () => {
+    const { env } = document.documentElement.dataset;
+    return env ? configDocs[env] : configDocs['development'];
+}
+
+export {updateMainContentAnchors, reloadWistiaVidScripts, gtag, getCookieByName, getConfig}
