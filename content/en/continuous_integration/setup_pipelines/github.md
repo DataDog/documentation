@@ -1,5 +1,5 @@
 ---
-title: Set up Tracing on a GitHub Actions
+title: Set up Tracing on a GitHub Actions workflows
 kind: documentation
 further_reading:
     - link: "/continuous_integration/explore_pipelines"
@@ -11,21 +11,28 @@ further_reading:
 ---
 
 {{< site-region region="us,eu,us3" >}}
+<div class="alert alert-info">GitHub Actions integration is in beta. There are no billing implications for activating the GitHub Actions integration during this period.
+</div>
+
 ## Compatibility
 
-GitHub enterprise is not yet supported.
+Supported GitHub versions:
+* GitHub.com (SaaS)
 
-{{< /site-region >}}
+GitHub Enterprise is not yet supported.
 
 ## Configuring the Datadog integration
 
-The GitHub Actions Datadog integration works through a private GitHub App to enable it do the following:
+The [GitHub Actions][1] Datadog integration uses a private [GitHub App][2] to collect workflow information. To create one:
+
+[1]: https://docs.github.com/en/actions
+[2]: https://docs.github.com/en/developers/apps/getting-started-with-apps/about-apps
 
 {{< site-region region="us" >}}
-1. Go to the [GitHub App Integration tile][1].
+1. Go to the [GitHub Apps Integration tile][1].
 2. Click the `Link GitHub Account` button.
 3. Follow the instructions to configure for a personal or organization account.
-4. In `Edit Permissions`, grant `read` permissions to the `Actions` permissions.
+4. In `Edit Permissions`, make sure `Actions: Read` access is granted.
 5. Click `Create App in GitHub` which takes you to GitHub to configure the app.
 6. Give the app a name.
 7. Click the `Install GitHub App` and follow the instructions on GitHub.
@@ -34,10 +41,10 @@ The GitHub Actions Datadog integration works through a private GitHub App to ena
 {{< /site-region >}}
 
 {{< site-region region="eu" >}}
-1. Go to the [GitHub App Integration tile][1].
+1. Go to the [GitHub Apps Integration tile][1].
 2. Click the `Link GitHub Account` button.
 3. Follow the instructions to configure for a personal or organization account.
-4. In `Edit Permissions`, grant `read` permissions to the `Actions` permissions.
+4. In `Edit Permissions`, make sure `Actions: Read` access is granted.
 5. Click `Create App in GitHub` which takes you to GitHub to configure the app.
 6. Give the app a name,
 7. Click the `Install GitHub App` and follow the instructions on GitHub.
@@ -46,10 +53,10 @@ The GitHub Actions Datadog integration works through a private GitHub App to ena
 {{< /site-region >}}
 
 {{< site-region region="us3" >}}
-1. Go to the [GitHub App Integration tile][1].
+1. Go to the [GitHub Apps Integration tile][1].
 2. Click the `Link GitHub Account` button.
 3. Follow the instructions to configure for a personal or organization account.
-4. In `Edit Permissions`, grant `read` permissions to the `Actions` permissions.
+4. In `Edit Permissions`, make sure `Actions: Read` access is granted.
 5. Click `Create App in GitHub` which takes you to GitHub to configure the app.
 6. Give the app a name.
 7. Click the `Install GitHub App` and follow the instructions on GitHub.
@@ -57,7 +64,7 @@ The GitHub Actions Datadog integration works through a private GitHub App to ena
 [1]: https://us3.datadoghq.com/account/settings#integrations/github-apps
 {{< /site-region >}}
 
-Once completed Datadog should immediately start tracing GitHub Workflows
+Once the GitHub App is created and installed, newly finished GitHub Actions workflows will appear on CI Visibility.
 
 ## Visualize pipeline data in Datadog
 
@@ -89,6 +96,7 @@ The [Pipelines][1] and [Pipeline Executions][2] pages populate with data after t
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+{{< /site-region >}}
 
 {{< site-region region="us5,gov" >}}
 This feature is not supported for the selected Datadog site ({{< region-param key="dd_site_name" >}}).
