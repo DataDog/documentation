@@ -49,19 +49,19 @@ The free text search filters Notification Profiles by text in the Notification P
 
 Query results update in real time when the query is edited; there is no “Search” button to click.
 
-#### Enable or disable
+### Enable or disable
 
 Use the toggle switch in the top right corner of the notification profile card to enable or disable a notification profile.
 
-#### Edit
+### Edit
 
 To edit a notification profile, hover over the notification profile card and click on it.
 
-#### Clone
+### Clone
 
 To clone a notification profile, click the menu in the top right corner of the notification profile card and select the *Clone Notification Profile* option from the menu.
 
-#### Delete
+### Delete
 
 To delete a notification profile, click the menu in the top right corner of the notification profile card and select the *Delete Notification Profile* option from the menu.
 
