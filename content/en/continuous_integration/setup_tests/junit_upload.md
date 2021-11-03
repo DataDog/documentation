@@ -10,6 +10,10 @@ further_reading:
       text: "Troubleshooting CI"
 ---
 
+{{< site-region region="us5,gov" >}}
+The selected Datadog site ({{< region-param key="dd_site_name" >}}) is not supported at this time.
+{{< /site-region >}}
+
 {{< site-region region="us,eu,us3" >}}
 JUnit test report files are XML files that contain test execution information, such as test and suite names, pass/fail status, duration, and sometimes error logs. Although it was introduced by the [JUnit][1] testing framework, many other popular frameworks are able to output results using this format.
 
@@ -35,27 +39,13 @@ datadog-ci junit upload --service <service_name> <path> [<path> ...]
 
 Specify a valid [Datadog API key][3] in the `DATADOG_API_KEY` environment variable, and the environment where tests were run (for example, `local` when uploading results from a developer workstation, or `ci` when uploading them from a CI provider) in the `DD_ENV` environment variable. For example:
 
-{{< site-region region="us" >}}
-{{< code-block lang="bash" >}}
-DD_ENV=ci DATADOG_API_KEY=<api_key> datadog-ci junit upload \
+<pre>
+<code>
+DD_ENV=ci DATADOG_API_KEY=&lt;api_key&gt; DATADOG_SITE={{< region-param key="dd_site" >}} datadog-ci junit upload \
   --service my-api-service \
   unit-tests/junit-reports e2e-tests/single-report.xml
-{{< /code-block >}}
-{{< /site-region >}}
-{{< site-region region="eu" >}}
-{{< code-block lang="bash" >}}
-DD_ENV=ci DATADOG_API_KEY=<api_key> DATADOG_SITE=datadoghq.eu datadog-ci junit upload \
-  --service my-api-service \
-  unit-tests/junit-reports e2e-tests/single-report.xml
-{{< /code-block >}}
-{{< /site-region >}}
-{{< site-region region="us3" >}}
-{{< code-block lang="bash" >}}
-DD_ENV=ci DATADOG_API_KEY=<api_key> DATADOG_SITE=us3.datadoghq.com datadog-ci junit upload \
---service my-api-service \
-unit-tests/junit-reports e2e-tests/single-report.xml
-{{< /code-block >}}
-{{< /site-region >}}
+</code>
+</pre>
 
 ## Configuration settings
 
@@ -106,7 +96,6 @@ Additionally, configure the Datadog site to use the selected one ({{< region-par
 
 [1]: /getting_started/site/
 {{< /site-region >}}
-
 
 ## Collecting repository and commit metadata
 
@@ -246,15 +235,12 @@ To be processed, the `name` attribute in the `<property>` element must have the 
 </testsuites>
 {{< /code-block >}}
 
-## Further reading
-
-{{< partial name="whats-next/whats-next.html" >}}
-
 [1]: https://junit.org/junit5/
 [2]: https://www.npmjs.com/package/@datadog/datadog-ci
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: https://git-scm.com/downloads
 {{< /site-region >}}
-{{< site-region region="us5,gov" >}}
-The selected Datadog site ({{< region-param key="dd_site_name" >}}) is not supported at this time.
-{{< /site-region >}}
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
