@@ -1,6 +1,6 @@
 ---
 title: Create an API test with the API
-kind: faq
+kind: guide
 further_reading:
 - link: "/synthetics/"
   tag: "Documentation"
@@ -9,14 +9,17 @@ further_reading:
 
 ## Overview
 
-To create API tests with the API, see the following examples for your [JSON configuration](#json-configuration). 
+See our [API page][1] for a complete documentation.
 
+This document contains examples of configuration files to create API tests.
+
+To create API tests with the API, see the following examples for your [JSON configuration](#json-configuration).  
 To create a HTTP test with the Python client, see the example for your [Python client](#python-client).
 
 ## JSON Configuration
 ### HTTP test
 
-```json collapsible="true"
+```json
 {
     "status": "live",
     "tags": [
@@ -72,7 +75,7 @@ To create a HTTP test with the Python client, see the example for your [Python c
 
 ### SSL test
 
-```json collapsible="true"
+```json
 {
     "status": "live",
     "tags": [
@@ -127,7 +130,7 @@ To create a HTTP test with the Python client, see the example for your [Python c
 
 ### DNS test
 
-```json collapsible="true"
+```json
 {
     "status": "live",
     "tags": [
@@ -181,9 +184,58 @@ To create a HTTP test with the Python client, see the example for your [Python c
 }
 ```
 
+### WebSocket test
+
+```json
+{
+    "status": "live",
+    "tags": [
+        "env:prod"
+    ],
+    "locations": [
+        "aws:eu-west-3"
+    ],
+    "message": "<NOTIFICATION MESSAGE>",
+    "name": "<TEST NAME>",
+    "type": "api",
+    "subtype": "websocket",
+    "config": {
+        "request": {
+            "url": "ws://example.com:8081",
+            "message": "websocket message"
+        },
+        "assertions": [
+            {
+                "operator": "lessThan",
+                "type": "responseTime",
+                "target": 1000
+            },
+            {
+                "operator": "is",
+                "type": "receivedMessage",
+                "target": "connected!"
+            }
+        ]
+    },
+    "options": {
+        "monitor_options": {
+            "notify_audit": false,
+            "locked": false,
+            "include_tags": true,
+            "new_host_delay": 300,
+            "notify_no_data": false,
+            "renotify_interval": 0
+        },
+        "tick_every": 60,
+        "min_failure_duration": 0,
+        "min_location_failed": 1
+    }
+}
+```
+
 ### TCP test
 
-```json collapsible="true"
+```json
 {
     "status": "live",
     "tags": [
@@ -226,9 +278,59 @@ To create a HTTP test with the Python client, see the example for your [Python c
 }
 ```
 
+### UDP test
+
+```json 
+{
+    "status": "live",
+    "tags": [
+        "env:prod"
+    ],
+    "locations": [
+        "aws:eu-west-3"
+    ],
+    "message": "<NOTIFICATION MESSAGE>",
+    "name": "<TEST NAME>",
+    "type": "api",
+    "subtype": "udp",
+    "config": {
+        "request": {
+            "host": "example.com",
+            "message": "UDP message",
+            "port": 31337
+        },
+        "assertions": [
+            {
+                "operator": "lessThan",
+                "type": "responseTime",
+                "target": 1000
+            },
+            {
+                "operator": "is",
+                "type": "receivedMessage",
+                "target": "UDP message response"
+            }
+        ]
+    },
+    "options": {
+        "monitor_options": {
+            "notify_audit": false,
+            "locked": false,
+            "include_tags": true,
+            "new_host_delay": 300,
+            "notify_no_data": false,
+            "renotify_interval": 0
+        },
+        "tick_every": 60,
+        "min_failure_duration": 0,
+        "min_location_failed": 1
+    }
+}
+```
+
 ### ICMP test
 
-```json collapsible="true"
+```json
 {
     "status": "live",
     "tags": [
@@ -286,7 +388,7 @@ To create a HTTP test with the Python client, see the example for your [Python c
 
 ### HTTP test
 
-```python collapsible="true"
+```python
 import os
 from dateutil.parser import parse as dateutil_parser
 from datadog_api_client.v1 import ApiClient, ApiException, Configuration
@@ -356,3 +458,8 @@ with ApiClient(configuration) as api_client:
         print("Exception when calling SyntheticsApi->create_synthetics_api_test: %s\n" % e)
 ```
 
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /api/v1/synthetics/
