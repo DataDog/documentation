@@ -5,7 +5,7 @@ aliases:
   - /ja/compliance_monitoring
   - /ja/security_monitoring
 ---
-{{< site-region region="us3,gov" >}}
+{{< site-region region="us3,us5,gov" >}}
 <div class="alert alert-warning">
 クラウドセキュリティポスチャ管理は、現在 US1-FED、US3 では利用できません。
 </div>

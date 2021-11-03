@@ -8,6 +8,9 @@ further_reading:
 - link: "/security_platform/cloud_workload_security/agent_expressions"
   tag: "Documentation"
   text: "Agent Expressions"
+- link: "security_platform/cloud_workload_security/backend"
+  tag: "Documentation"
+  text: "Cloud Workload Security Events"
 ---
 
 ## Overview

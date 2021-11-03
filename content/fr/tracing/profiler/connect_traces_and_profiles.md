@@ -5,12 +5,12 @@ further_reading:
   - link: tracing
     tag: Documentation
     text: Tracing distribué de l'APM
-  - link: tracing/profiler/getting_started
+  - link: /tracing/profiler/enabling
     tag: Documentation
     text: Activer le profileur en continu pour votre application
-  - link: tracing/profiler/intro_to_profiling
+  - link: getting_started/profiler
     tag: Documentation
-    text: Présentation du profiling
+    text: Débuter avec le profileur
 ---
 Si votre application présente des problèmes de performance en production, nous vous conseillons d'associer les informations de tracing distribué de l'APM au profil complet de la stack du code. Les données des processus d'application sont automatiquement liées lorsque le tracing distribué de l'APM ainsi que le profileur en continu sont activés. Vous pouvez donc passer directement des informations d'une span aux données de profiling depuis l'onglet Code Hotspots, afin d'identifier les lignes de code précises à l'origine des problèmes de performance.
 
@@ -18,7 +18,7 @@ Si votre application présente des problèmes de performance en production, nous
 
 ## Prérequis
 
-{{< programming-lang-wrapper langs="java,python" >}}
+{{< programming-lang-wrapper langs="java,python,ruby" >}}
 {{< programming-lang lang="java" >}}
 L'identification des hotspots de code est activée par défaut lorsque vous [activez le profiling pour votre service][1]. Si votre code est instrumenté manuellement, le profileur en continu nécessite l'activation des spans dans le scope :
 
@@ -33,10 +33,12 @@ try (final Scope scope = tracer.activateSpan(span)) { // obligatoire pour le pro
 
 ```
 
-Nécessite une bibliothèque de tracing version 0.65.0 ou une version ultérieure.
+Prérequis :
+- Bibliothèque de tracing version 0.65.0 ou version ultérieure
+- OpenJDK 8u282 ou ultérieur
 
 
-[1]: /fr/tracing/profiler/getting_started
+[1]: /fr/tracing/profiler/enabling/?code-lang=java
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
 
@@ -45,7 +47,16 @@ L'identification des hotspots de code est activée par défaut lorsque vous [act
 Nécessite une bibliothèque de tracing version 0.44.0 ou une version ultérieure.
 
 
-[1]: /fr/tracing/profiler/getting_started
+[1]: /fr/tracing/profiler/enabling/?code-lang=python
+{{< /programming-lang >}}
+{{< programming-lang lang="ruby" >}}
+
+L'identification des hotspots de code est activée par défaut lorsque vous [activez le profiling pour votre service][1].
+
+Nécessite une bibliothèque de tracing version 0.49.0 ou version ultérieure.
+
+
+[1]: /fr/tracing/profiler/enabling/?code-lang=ruby
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
@@ -66,6 +77,8 @@ La vue détaillée sur la gauche affiche la liste des types de temps d'exécutio
 - **Other** affiche le temps d'exécution de la span qui ne peut pas être expliqué à à partir des données de profiling.
 
 Cliquez sur l'un de ces types pour afficher la liste des méthodes les plus longues à exécuter. Cliquez sur le signe plus `+` pour développer la stack trace cette méthode **dans l'ordre inverse**.
+
+### Signification de la catégorie « Other »
 
 Il n'est pas inhabituel qu'une petite partie du temps d'exécution soit de type **Other** (moins de 10 %). Voici quelques raisons pouvant expliquer la présence de temps Other :
 

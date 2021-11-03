@@ -7,7 +7,7 @@ options = {
 
 initialize(**options)
 
-monitor_type = "metric alert"
+monitor_type = "query alert"
 query = "avg(last_1h):sum:system.net.bytes_rcvd{host:host0} > 200"
 monitor_options = {"thresholds": {"critical": 90.0}}
 

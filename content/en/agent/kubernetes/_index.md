@@ -80,21 +80,26 @@ Next, enable the Datadog features that you'd like to use: [APM][5], [Logs][6]
 **Notes**:
 
 - For a full list of the Datadog chart's configurable parameters and their default values, refer to the [Datadog Helm repository README][7].
-- If Google Container Registry ([gcr.io/datadoghq][8]) is not accessible in your deployment region, use the Docker Hub registry with the images [datadog/agent][9] and [datadog/cluster-agent][10] with the following configuration in the `values.yaml` file:
 
-    ```yaml
-    agents:
-      image:
-        repository: datadog/agent
+### Container registries
 
-    clusterAgent:
-      image:
-        repository: datadog/cluster-agent
+If Google Container Registry ([gcr.io/datadoghq][8]) is not accessible in your deployment region, use another registry with the following configuration in the `values.yaml` file:
 
-    clusterChecksRunner:
-      image:
-        repository: datadog/agent
-    ```
+- For the public AWS ECR registry ([public.ecr.aws/datadog][9]):
+
+  ```yaml
+  registry: public.ecr.aws/datadog
+  ```
+
+- For the Docker Hub registry ([docker.io/datadog][10]):
+
+  ```yaml
+  registry: docker.io/datadog
+  ```
+
+**Note**:
+
+- It is recommended to use the public AWS ECR registry ([public.ecr.aws/datadog][9]) when the Datadog chart is deployed in an AWS environment.
 
 ### Upgrading from chart v1.x
 
@@ -124,8 +129,8 @@ where `<USER_ID>` is the UID to run the agent and `<DOCKER_GROUP_ID>` is the gro
 [6]: /agent/kubernetes/log?tab=helm
 [7]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog
 [8]: https://gcr.io/datadoghq
-[9]: https://hub.docker.com/r/datadog/agent
-[10]: https://hub.docker.com/r/datadog/cluster-agent
+[9]: https://gallery.ecr.aws/datadog/
+[10]: https://hub.docker.com/u/datadog/
 [11]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/docs/Migration_1.x_to_2.x.md
 {{% /tab %}}
 {{% tab "DaemonSet" %}}

@@ -192,9 +192,18 @@ For information about the different methods for setting environment variables, s
    Windows x64      | `<APP_DIRECTORY>\datadog\win-x64\Datadog.Trace.ClrProfiler.Native.dll`
    Windows x86      | `<APP_DIRECTORY>\datadog\win-x86\Datadog.Trace.ClrProfiler.Native.dll`
 
-2. For standalone applications, manually restart the application.
+2. For Docker images running on Linux, configure the image to run the `createLogPath.sh` script:
+  
+   ```
+   RUN /<APP_DIRECTORY>/datadog/createLogPath.sh
+   ```
+
+   Docker examples are available in the [`dd-trace-dotnet` repository][1].
+
+3. For standalone applications, manually restart the application.
 
 
+[1]: https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples/NugetDeployment
 {{% /tab %}}
 
 {{< /tabs >}}

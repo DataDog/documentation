@@ -52,7 +52,7 @@
     "request_schema_description": "An application key with its associated metadata."
   },
   "SubmitServiceCheck": {
-    "description": "Submit a list of Service Checks.\n\n**Note**: A valid API key is required.",
+    "description": "Submit a list of Service Checks.\n\n**Notes**:\n- A valid API key is required.\n- Service checks can be submitted up to 10 minutes in the past.",
     "summary": "Submit a Service Check",
     "request_description": "Service Check request body.",
     "request_schema_description": "The service checks."

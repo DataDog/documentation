@@ -47,7 +47,7 @@ Les métriques runtime peuvent être visualisées conjointement à vos services 
 
 Par défaut, les métriques runtime de votre application sont envoyées à l'Agent Datadog par le biais de DogStatsD sur le port `8125`. Veillez à ce que [DogStatsD soit activé pour l'Agent][2].
 Si vous exécutez l'Agent en tant que conteneur, assurez-vous que `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` [est défini sur true][4] et que le port `8125` est ouvert sur l'Agent.
-Dans Kubernetes, [associez le port DogstatsD à un port de host][5] ; dans ECS, [indiquez les flags pertinents dans la définition de votre tâche][6].
+Dans Kubernetes, [liez le port DogstatsD au port d'un host][5] ; dans ECS, [indiquez les flags pertinents dans la définition de votre tâche][6].
 
 ## Données collectées
 
