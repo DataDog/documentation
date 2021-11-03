@@ -23,7 +23,7 @@ GitHub Enterprise is not yet supported.
 
 ## Configuring the Datadog integration
 
-The [GitHub Actions][1] Datadog integration uses a private [GitHub App][2] to collect workflow information. To create one:
+The [GitHub Actions][1] integration uses a private [GitHub App][2] to collect workflow information. To create one:
 
 [1]: https://docs.github.com/en/actions
 [2]: https://docs.github.com/en/developers/apps/getting-started-with-apps/about-apps
@@ -33,7 +33,7 @@ The [GitHub Actions][1] Datadog integration uses a private [GitHub App][2] to co
 2. Click the `Link GitHub Account` button.
 3. Follow the instructions to configure for a personal or organization account.
 4. In `Edit Permissions`, make sure `Actions: Read` access is granted.
-5. Click `Create App in GitHub` which takes you to GitHub to configure the app.
+5. Click `Create App in GitHub` which takes you to GitHub to finish the app creation process.
 6. Give the app a name.
 7. Click the `Install GitHub App` and follow the instructions on GitHub.
 
@@ -45,7 +45,7 @@ The [GitHub Actions][1] Datadog integration uses a private [GitHub App][2] to co
 2. Click the `Link GitHub Account` button.
 3. Follow the instructions to configure for a personal or organization account.
 4. In `Edit Permissions`, make sure `Actions: Read` access is granted.
-5. Click `Create App in GitHub` which takes you to GitHub to configure the app.
+5. Click `Create App in GitHub` which takes you to GitHub to finish the app creation process.
 6. Give the app a name,
 7. Click the `Install GitHub App` and follow the instructions on GitHub.
 
@@ -57,7 +57,7 @@ The [GitHub Actions][1] Datadog integration uses a private [GitHub App][2] to co
 2. Click the `Link GitHub Account` button.
 3. Follow the instructions to configure for a personal or organization account.
 4. In `Edit Permissions`, make sure `Actions: Read` access is granted.
-5. Click `Create App in GitHub` which takes you to GitHub to configure the app.
+5. Click `Create App in GitHub` which takes you to GitHub to finish the app creation process.
 6. Give the app a name.
 7. Click the `Install GitHub App` and follow the instructions on GitHub.
 
