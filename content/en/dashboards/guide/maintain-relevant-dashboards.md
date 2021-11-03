@@ -1,9 +1,9 @@
 ---
-title: Remove unused dashboards
+title: Best practices for maintaining relevant dashboards
 kind: guide
 aliases:
-  - /graphing/faq/remove-unused-dashboards
-  - /graphing/guide/remove-unused-dashboards
+  - /graphing/faq/maintain-relevant-dashboards
+  - /graphing/guide/maintain-relevant-dashboards
 ---
 
 A cluttered dashboard list page can make finding the right content difficult and pollute a search query with unused or irrelevant results. By combining bulk delete with [**Recently Deleted** dashboards][1], you can remove unwanted dashboards at scale and restore any accidental deletions. This guide includes:

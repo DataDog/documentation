@@ -25,8 +25,6 @@ Datadog Log Management, also called logs, removes these limitations by decouplin
 
 ## Collect
 
-{{< img src="/logs/collect.png" alt="Collect logs from multiple sources" style="width:80%;">}}
-
 [Log Collection & Integrations][2]: Begin ingesting logs from your hosts, containers, cloud providers, and other sources.
 
 ## Configure
