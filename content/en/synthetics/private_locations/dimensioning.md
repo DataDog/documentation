@@ -1,5 +1,5 @@
 ---
-title: Dimensioning your Private Locations
+title: Dimensioning Private Locations
 kind: documentation
 description: Dimensioning requirements for your Private Locations
 further_reading:
