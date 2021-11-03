@@ -14,7 +14,9 @@ En cas de problème avec l'un des checks de l'Agent, utilisez ces commandes pour
 - [Linux](#linux)
 - [Windows](#windows)
 - [Systemd](#systemd)
-- [Pour aller plus loin](#further-reading)
+- [Pour aller plus loin](#pour-aller-plus-loin)
+
+**Remarque** : remplacez `<NOM_CHECK>` dans les exemples ci-dessous par n'importe quel check de l'Agent. Par exemple : `activemq`, `ceph` ou `elastic`. Consultez la [documentation de l'intégration][1] pour vérifier le nom du check de l'Agent.
 
 ## Linux
 
@@ -34,11 +36,13 @@ sudo -u dd-agent datadog-agent check <NOM_CHECK> --check-rate
 ```
 
 {{% /tab %}}
-{{% tab "Agent v5" %}}
+{{% tab "Agent v5" %}}
 
 ```shell
 sudo -u dd-agent dd-agent check <NOM_CHECK>
 ```
+
+Remplacez `<NOM_CHECK>` par n'importe quel check de l'Agent. Par exemple : `activemq`, `ceph` ou `elastic`. Consultez la [documentation de l'intégration][1] pour vérifier le nom du check de l'Agent.
 
 Si vous souhaitez inclure des métriques rate, ajoutez `--check-rate` à votre commande. Par exemple, pour l'Agent v6.x, exécutez :
 
@@ -58,13 +62,13 @@ Si le problème persiste, [contactez l'équipe d'assistance Datadog][1] en envoy
 
 Exécutez le script suivant, avec le `<NOM_CHECK>` approprié :
 
-Pour les versions >= 6.12 de l'Agent: :
+Pour les versions >= 6.12 de l'Agent :
 
 ```powershell
 %PROGRAMFILES%\Datadog\Datadog Agent\bin\agent.exe check <NOM_CHECK>
 ```
 
-Pour les versions <= 6.11 de l'Agent :
+Pour les versions <= 6.11 de l'Agent :
 
 ```powershell
 %PROGRAMFILES%\Datadog\Datadog Agent\embedded\agent.exe check <NOM_CHECK>

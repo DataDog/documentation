@@ -25,7 +25,6 @@ private: true
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Container guides:" >}}
-    {{< nextlink href="agent/guide/cluster-agent-custom-metrics-server" >}}Cluster Agent and Horizontal Pod Autoscaling: Custom Metrics Server{{< /nextlink >}}
     {{< nextlink href="agent/guide/autodiscovery-with-jmx" >}}Autodiscovery with JMX{{< /nextlink >}}
     {{< nextlink href="agent/guide/build-container-agent" >}}Build a Datadog Agent image{{< /nextlink >}}
     {{< nextlink href="agent/guide/autodiscovery-management" >}}Manage container discovery with the Agent{{< /nextlink >}}
@@ -34,6 +33,7 @@ private: true
     {{< nextlink href="/agent/guide/container-images-for-docker-environments" >}}Container Images for Docker Environments{{< /nextlink >}}
     {{< nextlink href="/agent/guide/docker-deprecation" >}}Deprecating Docker in Kubernetes{{< /nextlink >}}
     {{< nextlink href="/agent/guide/podman-support-with-docker-integration" >}}Using the Docker integration with Podman container runtime{{< /nextlink >}}
+    {{< nextlink href="/agent/guide/changing_container_registry" >}}Changing Your Container Registry{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Agent v5 guides:" >}}

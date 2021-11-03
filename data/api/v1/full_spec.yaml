@@ -59,6 +59,13 @@ components:
             auto_scaling: false
             opswork: false
           type: object
+        cspm_resource_collection_enabled:
+          default: false
+          description: Whether Datadog collects cloud security posture management
+            resources from your AWS account. This includes additional resources not
+            covered under the general `resource_collection`.
+          example: true
+          type: boolean
         excluded_regions:
           description: An array of AWS regions to exclude from metrics collection.
           example:
@@ -99,6 +106,17 @@ components:
             description: The list of the the host_tags.
             type: string
           type: array
+        metrics_collection_enabled:
+          default: true
+          description: Whether Datadog collects metrics for this AWS account.
+          example: false
+          type: boolean
+        resource_collection_enabled:
+          default: false
+          description: Whether Datadog collects a standard set of resources from your
+            AWS account.
+          example: true
+          type: boolean
         role_name:
           description: Your Datadog role delegation name.
           example: DatadogAWSIntegrationRole
@@ -889,8 +907,10 @@ components:
           type: string
         is_read_only:
           default: false
+          deprecated: true
           description: Whether this dashboard is read-only. If True, only the author
-            and admins can make changes to it.
+            and admins can make changes to it. Prefer using `restricted_roles` to
+            manage write authorization.
           example: false
           type: boolean
         layout_type:
@@ -912,9 +932,7 @@ components:
           $ref: '#/components/schemas/DashboardReflowType'
         restricted_roles:
           description: A list of role identifiers. Only the author and users associated
-            with at least one of these roles can edit this dashboard. Overrides the
-            `is_read_only` property if both are present. **This feature is currently
-            in beta.**
+            with at least one of these roles can edit this dashboard.
           items:
             description: A role UUID.
             type: string
@@ -1341,6 +1359,8 @@ components:
       properties:
         apm_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+        apm_stats_query:
+          $ref: '#/components/schemas/ApmStatsQueryDefinition'
         event_query:
           $ref: '#/components/schemas/LogQueryDefinition'
         log_query:
@@ -3105,6 +3125,7 @@ components:
       - DELETE
       - HEAD
       - OPTIONS
+      example: GET
       type: string
       x-enum-varnames:
       - GET
@@ -5583,6 +5604,7 @@ components:
           format: int64
           maximum: 5
           minimum: 1
+          nullable: true
           type: integer
         query:
           description: The monitor query.
@@ -5594,6 +5616,7 @@ components:
           items:
             description: A role UUID.
             type: string
+          nullable: true
           type: array
         state:
           $ref: '#/components/schemas/MonitorState'
@@ -6560,6 +6583,24 @@ components:
         `markdown`, `timeseries`, `toplist`, `heatmap`, `distribution`,
 
         `log_stream`. [More information on each graph visualization type.](https://docs.datadoghq.com/dashboards/widgets/)'
+      example:
+        definition:
+          requests:
+          - display_type: line
+            q: avg:system.load.1{*}
+            style:
+              line_type: solid
+              line_width: normal
+              palette: dog_classic
+          show_legend: true
+          type: timeseries
+          yaxis:
+            scale: linear
+        graph_size: m
+        split_by:
+          keys: []
+          tags: []
+        time: null
       oneOf:
       - $ref: '#/components/schemas/NotebookMarkdownCellAttributes'
       - $ref: '#/components/schemas/NotebookTimeseriesCellAttributes'
@@ -7692,11 +7733,21 @@ components:
         description:
           description: Description of the correction being made.
           type: string
+        duration:
+          description: Length of time (in seconds) for a specified `rrule` recurring
+            SLO correction.
+          example: 1600000000
+          format: int64
+          type: integer
         end:
           description: Ending time of the correction in epoch seconds.
           example: 1600000000
           format: int64
           type: integer
+        rrule:
+          description: Recurrence rules as defined in the iCalendar RFC 5545.
+          example: RRULE:FREQ=DAILY;INTERVAL=10;COUNT=5
+          type: string
         slo_id:
           description: ID of the SLO that this correction will be applied to.
           example: sloId
@@ -7714,7 +7765,6 @@ components:
       required:
       - slo_id
       - start
-      - end
       - category
       type: object
     SLOCorrectionListResponse:
@@ -7744,10 +7794,20 @@ components:
         description:
           description: Description of the correction being made.
           type: string
+        duration:
+          description: Length of time (in seconds) for a specified `rrule` recurring
+            SLO correction.
+          example: 3600
+          format: int64
+          type: integer
         end:
           description: Ending time of the correction in epoch seconds.
           format: int64
           type: integer
+        rrule:
+          description: Recurrence rules as defined in the iCalendar RFC 5545.
+          example: RRULE:FREQ=DAILY;INTERVAL=10;COUNT=5
+          type: string
         slo_id:
           description: ID of the SLO that this correction will be applied to.
           type: string
@@ -7791,11 +7851,21 @@ components:
         description:
           description: Description of the correction being made.
           type: string
+        duration:
+          description: Length of time (in seconds) for a specified `rrule` recurring
+            SLO correction.
+          example: 3600
+          format: int64
+          type: integer
         end:
           description: Ending time of the correction in epoch seconds.
           example: 1600000000
           format: int64
           type: integer
+        rrule:
+          description: Recurrence rules as defined in the iCalendar RFC 5545.
+          example: RRULE:FREQ=DAILY;INTERVAL=10;COUNT=5
+          type: string
         start:
           description: Starting time of the correction in epoch seconds.
           example: 1600000000
@@ -9679,25 +9749,31 @@ components:
           $ref: '#/components/schemas/SyntheticsAPITestConfig'
         locations:
           description: Array of locations used to run the test.
+          example:
+          - aws:eu-west-3
           items:
             description: A location from which the test was run.
             type: string
           type: array
         message:
           description: Notification message associated with the test.
+          example: Notification message
           type: string
         monitor_id:
           description: The associated monitor ID.
+          example: 12345678
           format: int64
           readOnly: true
           type: integer
         name:
           description: Name of the test.
+          example: Test name
           type: string
         options:
           $ref: '#/components/schemas/SyntheticsTestOptions'
         public_id:
           description: The public ID for the test.
+          example: 123-abc-456
           readOnly: true
           type: string
         status:
@@ -9706,6 +9782,8 @@ components:
           $ref: '#/components/schemas/SyntheticsTestDetailsSubType'
         tags:
           description: Array of tags attached to the test.
+          example:
+          - env:production
           items:
             description: A tag attached to the test.
             type: string
@@ -9715,11 +9793,22 @@ components:
       type: object
     SyntheticsAPITestConfig:
       description: Configuration object for a Synthetic API test.
+      example:
+        assertions:
+        - operator: lessThan
+          target: 1000
+          type: responseTime
+        request:
+          method: GET
+          url: https://example.com
       properties:
         assertions:
           default: []
           description: Array of assertions used for the test.
-          example: []
+          example:
+          - operator: lessThan
+            target: 1000
+            type: responseTime
           items:
             $ref: '#/components/schemas/SyntheticsAssertion'
           type: array
@@ -11205,6 +11294,7 @@ components:
       - dns
       - multi
       - icmp
+      example: http
       type: string
       x-enum-varnames:
       - HTTP
@@ -11353,6 +11443,7 @@ components:
       enum:
       - live
       - paused
+      example: live
       type: string
       x-enum-varnames:
       - LIVE
@@ -11439,6 +11530,7 @@ components:
           type: number
         url:
           description: URL to perform the test with.
+          example: https://example.com
           type: string
       type: object
     SyntheticsTestRequestCertificate:
@@ -12263,8 +12355,8 @@ components:
       - profiled_host_percentage
       - profiled_container_usage
       - profiled_container_percentage
-      - dbm_host_usage
-      - dbm_host_percentage
+      - dbm_hosts_usage
+      - dbm_hosts_percentage
       - dbm_queries_usage
       - dbm_queries_percentage
       - '*'
@@ -12298,8 +12390,8 @@ components:
       - PROFILED_HOST_PERCENTAGE
       - PROFILED_CONTAINER_USAGE
       - PROFILED_CONTAINER_PERCENTAGE
-      - DBM_HOST_USAGE
-      - DBM_HOST_PERCENTAGE
+      - DBM_HOSTS_USAGE
+      - DBM_HOSTS_PERCENTAGE
       - DBM_QUERIES_USAGE
       - DBM_QUERIES_PERCENTAGE
       - ALL
@@ -12391,11 +12483,11 @@ components:
           description: The Cloud Workload Security host usage by tag(s)
           format: double
           type: number
-        dbm_host_percentage:
+        dbm_hosts_percentage:
           description: The percentage of Database Monitoring host usage by tag(s).
           format: double
           type: number
-        dbm_host_usage:
+        dbm_hosts_usage:
           description: The Database Monitoring host usage by tag(s).
           format: double
           type: number
@@ -13268,6 +13360,37 @@ components:
             $ref: '#/components/schemas/UsageRumSessionsHour'
           type: array
       type: object
+    UsageSDSHour:
+      description: Sensitive Data Scanner usage for a given organization for a given
+        hour.
+      properties:
+        hour:
+          description: The hour for the usage.
+          format: date-time
+          type: string
+        logs_scanned_bytes:
+          description: "The total number of bytes scanned of logs usage by the Sensitive
+            Data Scanner from the start of the given hour\u2019s month until the given
+            hour."
+          format: int64
+          type: integer
+        total_scanned_bytes:
+          description: "The total number of bytes scanned across all usage types by
+            the Sensitive Data Scanner from the start of the given hour\u2019s month
+            until the given hour."
+          format: int64
+          type: integer
+      type: object
+    UsageSDSResponse:
+      description: Response containing the Sensitive Data Scanner usage for each hour
+        for a given organization.
+      properties:
+        usage:
+          description: Get hourly usage for Sensitive Data Scanner.
+          items:
+            $ref: '#/components/schemas/UsageSDSHour'
+          type: array
+      type: object
     UsageSNMPHour:
       description: The number of SNMP devices for each hour for a given organization.
       properties:
@@ -13578,6 +13701,17 @@ components:
             hours in the current date for all organizations.
           format: int64
           type: integer
+        sds_logs_scanned_bytes_sum:
+          description: Shows the sum of all bytes scanned of logs usage by the Sensitive
+            Data Scanner over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        sds_total_scanned_bytes_sum:
+          description: Shows the sum of all bytes scanned across all usage types by
+            the Sensitive Data Scanner over all hours in the current month for all
+            organizations.
+          format: int64
+          type: integer
         synthetics_browser_check_calls_count_sum:
           description: Shows the sum of all Synthetic browser tests over all hours
             in the current date for all organizations.
@@ -13805,6 +13939,17 @@ components:
         rum_total_session_count_sum:
           description: Shows the sum of RUM Sessions (browser and mobile) over all
             hours in the current date for the given org.
+          format: int64
+          type: integer
+        sds_logs_scanned_bytes_sum:
+          description: Shows the sum of all bytes scanned of logs usage by the Sensitive
+            Data Scanner over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        sds_total_scanned_bytes_sum:
+          description: Shows the sum of all bytes scanned across all usage types by
+            the Sensitive Data Scanner over all hours in the current month for all
+            organizations.
           format: int64
           type: integer
         synthetics_browser_check_calls_count_sum:
@@ -14075,6 +14220,17 @@ components:
             hours in the current months for all organizations.
           format: int64
           type: integer
+        sds_logs_scanned_bytes_sum:
+          description: Shows the sum of all bytes scanned of logs usage by the Sensitive
+            Data Scanner over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        sds_total_scanned_bytes_sum:
+          description: Shows the sum of all bytes scanned across all usage types by
+            the Sensitive Data Scanner over all hours in the current month for all
+            organizations.
+          format: int64
+          type: integer
         start_date:
           description: Shows the first date of usage in the current months for all
             organizations.
@@ -14197,7 +14353,8 @@ components:
           format: int64
           type: integer
         num_custom_timeseries:
-          description: Contains the number of non-aggregation custom metrics.
+          description: Contains sum of non-aggregation custom metrics and custom metrics
+            that are outputs for aggregations.
           format: int64
           type: integer
       type: object
@@ -15297,6 +15454,7 @@ paths:
             enum:
             - datadoghq.com
             - us3.datadoghq.com
+            - us5.datadoghq.com
             - datadoghq.eu
             - ddog-gov.com
           subdomain:
@@ -15706,7 +15864,11 @@ paths:
       description: 'Submit a list of Service Checks.
 
 
-        **Note**: A valid API key is required.'
+        **Notes**:
+
+        - A valid API key is required.
+
+        - Service checks can be submitted up to 10 minutes in the past.'
       operationId: SubmitServiceCheck
       requestBody:
         content:
@@ -20586,7 +20748,8 @@ paths:
         - **`#`** an integer or decimal number used to set the threshold.
 
 
-        **NOTE** Only available on US1-FED, US3, and in closed beta on EU and US1.
+        **NOTE** Only available on US1-FED, US3, US5 and in closed beta on EU and
+        US1.
 
 
         **Process Alert Query**
@@ -20699,7 +20862,8 @@ paths:
         - **`#`** an integer or decimal number used to set the threshold.
 
 
-        **NOTE** Only available on US1-FED and in closed beta on EU, US3, and US1.'
+        **NOTE** Only available on US1-FED and in closed beta on US1, EU, US3, and
+        US5.'
       operationId: CreateMonitor
       requestBody:
         content:
@@ -24929,7 +25093,7 @@ paths:
       summary: Get hourly usage for Cloud Workload Security
       tags:
       - Usage Metering
-      x-menu-order: 31
+      x-menu-order: 32
       x-undo:
         type: safe
   /api/v1/usage/dbm:
@@ -24977,7 +25141,7 @@ paths:
       summary: Get hourly usage for Database Monitoring
       tags:
       - Usage Metering
-      x-menu-order: 32
+      x-menu-order: 33
       x-undo:
         type: safe
   /api/v1/usage/fargate:
@@ -25662,6 +25826,54 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 13
+      x-undo:
+        type: safe
+  /api/v1/usage/sds:
+    get:
+      description: Get hourly usage for Sensitive Data Scanner.
+      operationId: GetUsageSDS
+      parameters:
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage beginning at this hour.'
+        in: query
+        name: start_hr
+        required: true
+        schema:
+          format: date-time
+          type: string
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage ending
+
+          **before** this hour.'
+        in: query
+        name: end_hr
+        required: false
+        schema:
+          format: date-time
+          type: string
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/UsageSDSResponse'
+          description: OK
+        '400':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+      summary: Get hourly usage for Sensitive Data Scanner
+      tags:
+      - Usage Metering
+      x-menu-order: 34
       x-undo:
         type: safe
   /api/v1/usage/snmp:
@@ -26446,6 +26658,7 @@ paths:
             enum:
             - datadoghq.com
             - us3.datadoghq.com
+            - us5.datadoghq.com
             - datadoghq.eu
             - ddog-gov.com
           subdomain:
@@ -26545,6 +26758,7 @@ servers:
       enum:
       - datadoghq.com
       - us3.datadoghq.com
+      - us5.datadoghq.com
       - datadoghq.eu
       - ddog-gov.com
     subdomain:

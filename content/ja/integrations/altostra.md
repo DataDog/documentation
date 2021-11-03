@@ -16,13 +16,14 @@ categories:
 creates_events: false
 ddtype: crawler
 dependencies:
-  - 'https://github.com/DataDog/integrations-extras/blob/master/altostra/README.md'
+  - https://github.com/DataDog/integrations-extras/blob/master/altostra/README.md
 display_name: Altostra
 draft: false
 git_integration_title: altostra
 guid: c5b325e5-a55a-4ff2-9c91-3aac9463c6be
 integration_id: altostra
 integration_title: Altostra
+integration_version: ''
 is_public: true
 kind: integration
 maintainer: support@altostra.com

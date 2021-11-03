@@ -195,7 +195,7 @@ $statsd->event('An error occurred.',
 ```
 
 
-[1]: https://app.datadoghq.com/account/settings#api
+[1]: https://app.datadoghq.com/organization-settings/api-keys
 {{< /programming-lang >}}
 
 {{< /programming-lang-wrapper >}}

@@ -11,5 +11,5 @@ disable_sidebar: true
     {{< nextlink href="continuous_integration/setup_pipelines/github" >}}GitHub{{< /nextlink >}}
     {{< nextlink href="continuous_integration/setup_pipelines/gitlab" >}}GitLab{{< /nextlink >}}
     {{< nextlink href="continuous_integration/setup_pipelines/jenkins" >}}Jenkins{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/setup_pipelines/custom_spans" >}}Custom Spans{{< /nextlink >}}
+    {{< nextlink href="continuous_integration/setup_pipelines/custom_commands" >}}Custom Commands{{< /nextlink >}}
 {{< /whatsnext >}}

@@ -111,8 +111,8 @@ further_reading:
 [5]: /ja/logs/indexes#exclusion-filters
 [6]: /ja/logs/archives
 [7]: /ja/logs/logs_to_metrics/
-[8]: /ja/monitors/monitor_types/log/
-[9]: /ja/monitors/monitor_types/log/#notifications
+[8]: /ja/monitors/create/types/log/
+[9]: /ja/monitors/create/types/log/#notifications
 [10]: /ja/logs/explorer/live_tail/
 [11]: /ja/agent/
 [12]: /ja/agent/logs/advanced_log_collection/?tab=configurationfile#scrub-sensitive-data-from-your-logs

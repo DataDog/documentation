@@ -11,12 +11,15 @@ further_reading:
     text: Implémenter Opentracing dans vos applications
   - link: tracing/visualization/
     tag: Documentation
-    text: 'Explorer vos services, ressources et traces'
-  - link: 'https://www.datadoghq.com/blog/request-log-correlation/'
+    text: Explorer vos services, ressources et traces
+  - link: https://www.datadoghq.com/blog/request-log-correlation/
     tag: Blog
     text: Corréler automatiquement vos logs de requête avec vos traces
+  - link: /logs/guide/ease-troubleshooting-with-cross-product-correlation/
+    tag: Guide
+    text: Bénéficiez de diagnostics simplifiés grâce à la mise en corrélation entre produits.
 ---
-## Injecter manuellement les ID des traces et des spans
+## Injection manuelle
 
 L'API du traceur Go vous permet d'ajouter des informations sur les spans aux messages de log, à l'aide du spécificateur de format `%v` :
 
