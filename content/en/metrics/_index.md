@@ -81,7 +81,7 @@ After selecting a metric, you can filter your query based on tag(s). For instanc
 
 Next, choose the granularity of your data using time rollup. In this example, you've defined that there will be one data point for every six minutes (360 seconds). You can also choose how you want to aggregate the data in each time bucket. By default, _avg_ is applied, but other available options are _sum_, _min_, _max_, and _count_. If you wanted to apply max, you would use `.rollup(max, 60)`.
 
-#### 4. Configure space aggregation
+#### Configure space aggregation
 
 In Datadog, “space” refers to the way metrics are distributed over different hosts and tags. There are two different aspects of space that you can control: aggregator and grouping
 
