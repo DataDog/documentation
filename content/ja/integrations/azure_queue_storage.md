@@ -5,12 +5,13 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Azure Queue Storage のキーメトリクスを追跡
-doc_link: 'https://docs.datadoghq.com/integrations/azure_queue_storage/'
+doc_link: https://docs.datadoghq.com/integrations/azure_queue_storage/
 draft: false
 git_integration_title: azure_queue_storage
 has_logo: true
 integration_id: azure-queue-storage
 integration_title: Microsoft Azure Queue Storage
+integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
@@ -21,7 +22,7 @@ version: '1.0'
 ---
 ## 概要
 
-Azure Queue Storage は、多数のメッセージを格納するためのサービスです。メッセージには、HTTP または HTTPS を使用し、認証された呼び出しを介して世界中のどこからでもアクセスできます。
+Azure Queue Storage は、多数のメッセージを格納するためのサービスです。メッセージには、HTTP または HTTPS を使用し、認証された呼び出しで世界中のどこからでもアクセスできます。
 
 Azure Queue Storage からメトリクスを取得すると、以下のことができます。
 
