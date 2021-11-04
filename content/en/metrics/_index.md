@@ -69,7 +69,7 @@ A metric query in Datadog looks like this:
 
 You can break this query into a few steps:
 
-#### 1. Metric name
+#### Metric name
 
 First, choose the specific metric that you’d like to graph by searching or selecting it from the dropdown next to **Metric**. If you’re not sure which metric to use, start with the Metrics Explorer or a notebook. You can also see a list of actively reporting metrics on the Metrics Summary page.
 
