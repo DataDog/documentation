@@ -116,6 +116,11 @@ package gpg-pubkey-fd4bf915 is not installed
 {{% /tab %}}
 {{< /tabs >}}
 
+## Impact for Agent 5 users
+
+Agent 5 users on DEB-based systems (Debian/Ubuntu) are also required to trust the new signing key in order to install or upgrade the Agent after the rotation date. Agent 5 users on RPM-based systems (RedHat/CentOS/SUSE) are not affected by this rotation.
+
+Note that Agent 5 uses Python 2 which reached end-of-life on January 1st 2021. We recommend you [upgrade to Agent 7][12].
 
 [1]: https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
 [2]: https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
@@ -128,3 +133,4 @@ package gpg-pubkey-fd4bf915 is not installed
 [9]: https://github.com/DataDog/datadog-formula
 [10]: https://github.com/DataDog/heroku-buildpack-datadog
 [11]: https://docs.datadoghq.com/integrations/amazon_elasticbeanstalk
+[12]: https://app.datadoghq.com/account/settings#agent
