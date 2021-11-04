@@ -20,6 +20,8 @@ aliases:
 
 This page dives into the `OpenMetricsBaseCheckV2` interface for more advanced usage, including an example of a simple check that collects timing metrics and status events from [Kong][1]. For details on configuring a basic OpenMetrics check, see [Kubernetes Prometheus and OpenMetrics metrics collection][2].
 
+*Note*: `OpenMetricsBaseCheckV2` is available in Agent `7.26.x` or higher and requires Python 3.
+
 <div class="alert alert-info">
 If you are looking for the legacy implementation or <code>OpenMetricsBaseCheck</code> interface custom check guide, please see [Custom Legacy OpenMetrics Check][9].
 </div>
