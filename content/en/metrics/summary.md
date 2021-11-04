@@ -136,7 +136,8 @@ You can configure tags using our bulk metric tag configuration button or the **M
 
 **Note**: The exclusion of tags is not supported in the allowlist-based customization of tags. Adding tags starting with `!` is not accepted. And the cardinality estimator requires the metric to be 48 hours and older.
 
-### Queryable Tags 
+### Queryable tags 
+
 Once your metric has been configured with Metrics without Limits\*, you can view which tags remain Queryable -- ultimately those that contribute to _Indexed Custom Metrics_ volume. And you can toggle back to all originally submitted and ingested tags that contribute to your _Ingested Custom Metrics_ volume. 
 
 ### Fine-tune your metric with aggregations in Advanced Mode
