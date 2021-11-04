@@ -14,7 +14,7 @@ const initializeAlogliaInsights = () => {
     searchInsights('init', { appId, apiKey });
 }
 
-const sendAlgoliaInsightClickEvent = (algoliaQueryID) => {
+const sendAlgoliaInsightsClickEvent = (algoliaQueryID) => {
     const objectID = event.target.dataset.object;
     const position = parseInt(event.target.dataset.position);
 
@@ -32,6 +32,33 @@ const sendAlgoliaInsightClickEvent = (algoliaQueryID) => {
     }
 }
 
+const sendAlgoliaInsightsViewEvent = () => {
+    const searchResultContainer = document.getElementById('tipue_search_content');
+    const algoliaObjectIDs = [];
+    console.log('Gathering links to send to algolia...');
+
+    if (searchResultContainer) {
+        const searchResultLinksNodeList = searchResultContainer.querySelectorAll('.hit .tipue_search_content_title a');
+
+        searchResultLinksNodeList.forEach(link => {
+            const objectID = link.dataset.object;
+
+            if (objectID !== '') {
+                algoliaObjectIDs.push(objectID)
+            }
+        })
+
+        const insightsViewEventParams = {
+            userToken: 'documentation',
+            index: indexName,
+            eventName: 'viewedObjectIDs',
+            objectIDs: algoliaObjectIDs  
+        };
+
+        searchInsights('viewedObjectIDs', insightsViewEventParams);
+    }
+}
+
 const attachEventListenersToPaginatedSearchResults = (algoliaQueryID) => {
     const searchResultContainer = document.getElementById('tipue_search_content');
 
@@ -42,7 +69,7 @@ const attachEventListenersToPaginatedSearchResults = (algoliaQueryID) => {
           link.addEventListener('click', () => {
               event.preventDefault();
               const url = event.target.href;
-              sendAlgoliaInsightClickEvent(algoliaQueryID);
+              sendAlgoliaInsightsClickEvent(algoliaQueryID);
             //   window.history.pushState({ 'page': url }, '', url);
             //   window.location = url;
           })
@@ -462,6 +489,7 @@ if (window.location.href.indexOf('/search/') > -1) {
                       }
 
                       attachEventListenersToPaginatedSearchResults(queryID);
+                      sendAlgoliaInsightsViewEvent();
                   }
 
                   // init page nums
