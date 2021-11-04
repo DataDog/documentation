@@ -128,7 +128,7 @@ Metrics without Limits\* provides you control over the size of your custom metri
 
 **Note:** Metrics without Limits\* is only available for custom metrics.
 
-You can configure tags using our bulk metric tag configuration button or the **Manage Tags** button in a metric's details sidepanel. 
+You can configure tags using the bulk metric tag configuration button or the **Manage Tags** button in a metric's details side panel. 
 
 {{< img src="metrics/distributions/managetags.png" alt="Configuring tags on a distribution"  style="width:80%;">}}
 
