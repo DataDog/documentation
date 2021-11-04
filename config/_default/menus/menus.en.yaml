@@ -4317,6 +4317,7 @@ api:
     params:
       versions:
         - v1
+        - v2
       operationids:
         - SubmitLog
       unstable: []

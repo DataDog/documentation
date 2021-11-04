@@ -5869,10 +5869,10 @@ components:
           description: 'The number of minutes before a monitor notifies after data
             stops reporting.
 
-            Datadog recommends at least 2x the monitor timeframe for metric alerts
+            Datadog recommends at least 2x the monitor timeframe for query alerts
             or 2 minutes for service checks.
 
-            If omitted, 2x the evaluation timeframe is used for metric alerts, and
+            If omitted, 2x the evaluation timeframe is used for query alerts, and
             24 hours is used for service checks.'
           format: int64
           nullable: true
@@ -6031,7 +6031,7 @@ components:
           status: No Data
           tags:
           - service:cassandra
-          type: metric alert
+          type: query alert
       properties:
         counts:
           description: The counts of monitors per different criteria.
@@ -6325,7 +6325,7 @@ components:
       - slo alert
       - event-v2 alert
       - audit alert
-      example: metric alert
+      example: query alert
       type: string
       x-enum-varnames:
       - COMPOSITE
@@ -20608,7 +20608,7 @@ paths:
 
         - logs: `log alert`
 
-        - metric: `metric alert`
+        - metric: `query alert`
 
         - network: `service check`
 
@@ -20893,7 +20893,7 @@ paths:
                   tags:
                   - app:webserver
                   - frontend
-                  type: metric alert
+                  type: query alert
             schema:
               $ref: '#/components/schemas/Monitor'
         description: Create a monitor request body.
@@ -26658,6 +26658,7 @@ paths:
         type: safe
   /v1/input:
     post:
+      deprecated: true
       description: 'Send your logs to your Datadog platform over HTTP. Limits per
         HTTP request are:
 
