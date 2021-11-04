@@ -14,9 +14,9 @@ The **OAuth Apps** management page in [Organization Settings][1] helps you manag
 
 ## Permissions
 
-By default, users with [Datadog Admin and Datadog Standard roles][4] can access the OAuth Apps management page. 
+By default, users with [Datadog Standard and Datadog Admin roles][4] can access the OAuth Apps management page. If your organization has [custom roles][5] defined, add your user to any custom role with `org_authorized_apps_read` and `org_authorized_apps_write` permissions. 
 
-If your organization has [custom roles][5] defined, add your user to any custom role with `org_authorized_apps_read` and `org_authorized_apps_write` permissions. Only users with the `org_authorized_apps_write` permissions can manage OAuth applications on this page, such as disabling applications or revoking OAuth access for a user.
+Only users with the Datadog Admin role or the `org_authorized_apps_write` permissions can manage OAuth applications on this page, such as disabling applications or revoking OAuth access for a user.
 
 ## Disable an OAuth application
 
@@ -29,11 +29,11 @@ There are two ways to disable an application from the OAuth Apps management page
 2. Click on your application to open up a detailed breakdown of the application and reveal the *Disable Application* button.
 {{< img src="account_management/oauth_apps/disable-app-detailed.png" alt="Disable button in apps detailed view" style="width:100%;">}}
 
-**Note**:
-- Re-enabling an application allows users with necessary permissions to grant it access on their behalf. Users that have previously authorized the application are required to re-authorize the application to gain access again.
+**Note**: Re-enabling an application allows users with necessary permissions to grant it access on their behalf. Users that have previously authorized the application are required to re-authorize the application to gain access again.
 
 ## Revoke OAuth access for a user
-Revoking OAuth access to an application will remove all access that a user has to the application. If the user has the required permissions to authorize the application, they can gain access again by re-authorizing it.
+
+Revoking OAuth access to an application removes all access that a user has to the application. If the user has the required permissions to authorize the application, they can gain access again by re-authorizing it.
 {{< img src="account_management/oauth_apps/revoke-user.png" alt="Disable button in apps detailed view" style="width:100%;">}}
 
 ## Further Reading

@@ -70,7 +70,7 @@ The **Audit Log Settings** tab allows you to set the retention period of audit l
 
 #### OAuth Apps
 
-The **OAuth Apps** tab allows you to view or manage OAuth applications in your organization. 
+The [**OAuth Apps**][9] tab allows you to view or manage OAuth applications in your organization. 
 
 ### General
 
@@ -88,3 +88,4 @@ To rename your organization, click the **Rename organization** tab, enter the ne
 [6]: /account_management/api-app-keys/
 [7]: /account_management/api-app-keys/#client-tokens
 [8]: /events/guides/email/
+[9]: /account_management/oauth_apps
