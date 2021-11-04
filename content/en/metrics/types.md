@@ -223,7 +223,7 @@ This functionality allows you to control tagging for metrics where host-level gr
 **Note**: The exclusion of tags with `!` is not accepted with this feature.
 
 
-[1]: https://app.datadoghq.com/metric/metrics-without-limits
+[1]: /metrics/metrics-without-limits/
 {{% /tab %}}
 {{< /tabs >}}
 
