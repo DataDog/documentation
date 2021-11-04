@@ -182,7 +182,7 @@ For example, suppose you are submitting a HISTOGRAM metric, `request.response_ti
 | Metric Name                                    | Value  | Datadog In-App Type |
 | ---------------------------------------------- | ------ | ------------------- |
 | `request.response_time.histogram.avg`          | `1.88` | GAUGE               |
-| `request.response_time.histogram.count`        | `8`    | RATE                |
+| `request.response_time.histogram.count`        | `0.8`  | RATE                |
 | `request.response_time.histogram.median`       | `2`    | GAUGE               |
 | `request.response_time.histogram.95percentile` | `3`    | GAUGE               |
 | `request.response_time.histogram.max`          | `3`    | GAUGE               |
