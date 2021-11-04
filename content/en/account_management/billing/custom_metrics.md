@@ -81,7 +81,7 @@ Custom metrics volumes can be impacted by configuring tags and aggregations usin
 **Note: Only configured metrics contribute to your Ingested custom metrics volume.** If a metric is not configured with Metrics without Limits\*, you're only charged for its indexed custom metrics volume.
 
 #### When will you be charged for ingested vs indexed custom metrics?
-If a metric is not configured with Metrics without Limits, you're only charged for indexed custom metrics.
+If a metric is not configured with Metrics without Limits\*, you're only charged for indexed custom metrics.
 
 {{< img src="account_management/billing/custom_metrics/mwl-unconfigured-pricing.jpg" alt="Unconfigured Metrics have indexed CMs only" style="width:80%;">}}
 
