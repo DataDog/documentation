@@ -141,7 +141,7 @@ The count of custom metrics reporting from `temperature` scales with the most gr
 
 Suppose you also wanted to tag your temperature metric by `state` (which has two values: `NY` and `Florida`). This means you are tagging temperature by `country`, `region`, `state`, and `city`. Adding the state tag doesn't increase the level of granularity already present in your dataset provided by the city tag.
 
-To obtain the temperature in Florida, you can simply recombine the custom metrics of:
+To obtain the temperature in Florida, you can recombine the custom metrics of:
 
 - `temperature{country:USA, state:Florida, city:Orlando}`
 - `temperature{country:USA, state:Florida, city:Miami}`
