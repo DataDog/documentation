@@ -171,7 +171,7 @@ If a metric is configured with Metrics without Limits (tags/aggregations are con
 
 By default, Datadog stores the most frequently queried aggregation combination depending on the metric's type to preserve the mathematical accuracy of your configured metric's query as listed below: 
 
-- Configured gauges will be queryable in time/space aggregations of `AVG/AVG` 
+- Configured gauges are queryable in time/space aggregations of `AVG/AVG` 
 
 You can opt-in to more aggregations should they be valuable for your queries - your number of indexed custom metrics scales with the number of enabled aggregations.
 
