@@ -11,7 +11,7 @@ If a metric is not submitted from one of the [more than {{< translate key="integ
 
 Your monthly billable volume for custom metrics (reflected on the Usage page) is calculated from the average number of distinct custom metrics over all hours in the current month.
 
-Metrics without Limits users will see monthly billable volumes for _ingested_ and _indexed_ custom metrics on their Usage page. Learn more about ingested and indexed custom metrics and Metrics without Limits [here][25]. 
+Metrics without Limits™ users will see monthly billable volumes for _ingested_ and _indexed_ custom metrics on their Usage page. Learn more about ingested and indexed custom metrics and [Metrics without Limits™][25]. 
 
 ## Counting custom metrics
 
