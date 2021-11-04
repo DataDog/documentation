@@ -145,7 +145,7 @@ For custom metrics of the count/gauge/rate metric type, you can further fine-tun
 - Configured counts/rates are queryable with time/space aggregations of `SUM`
 - Configured gauges are queryable in time/space aggregations of `AVG`
 
-{{< img src="metrics/summary/customize_aggr_docs.jpg" alt="Fine-tune aggregations on counts/rates/gauges"  style="width:80%;">}}
+{{< img src="metrics/summary/customize_aggr_docs.jpg" alt="Refine aggregations on counts, rates, and gauges"  style="width:80%;">}}
 
 More aggregations are available should they be valuable to you. You can add or remove aggregations at any time with no required Agent or code-level changes.
 
