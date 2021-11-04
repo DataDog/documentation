@@ -89,7 +89,7 @@ If a metric is configured with Metrics without Limits\* (tags/aggregations are c
 
 {{< img src="account_management/billing/custom_metrics/mwl-pricing-configured.jpg" alt="Configured Metrics have ingested and indexed custom metrics costs" style="width:80%;">}}
 
-Suppose you wanted to use Metrics without Limits to reduce the size of your `request.Latency` metric by keeping only the `endpoint` and `status` tags. This results in the following three unique tag combinations:
+Suppose you wanted to use Metrics without Limits\* to reduce the size of your `request.Latency` metric by keeping only the `endpoint` and `status` tags. This results in the following three unique tag combinations:
 
 - `endpoint:X`, `status:200`
 - `endpoint:X`, `status:400`
