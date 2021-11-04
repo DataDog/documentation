@@ -147,7 +147,9 @@ For custom metrics of the count/gauge/rate metric type, you can further fine-tun
 
 {{< img src="metrics/summary/customize_aggr_docs.jpg" alt="Fine-tune aggregations on counts/rates/gauges"  style="width:80%;">}}
 
-More aggregations are available should they be valuable to you. You can add or remove aggregations at any time with no required Agent or code-level changes. **Note**: Configuring your count/rate/gauge metric and removing an aggregation may impact existing dashboards and monitors.
+More aggregations are available should they be valuable to you. You can add or remove aggregations at any time with no required Agent or code-level changes.
+
+**Note**: Configuring your count, rate, or gauge metric and removing an aggregation may impact existing dashboards and monitors.
 
 ## Further reading
 
