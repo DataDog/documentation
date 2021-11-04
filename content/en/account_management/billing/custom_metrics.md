@@ -167,7 +167,7 @@ If a metric is not configured with Metrics without Limits\*, you're only charged
 
 If a metric is configured with Metrics without Limits (tags/aggregations are configured), you pay for ingested custom metrics and indexed custom metrics.
 
-{{< img src="account_management/billing/custom_metrics/mwl-pricing-configured.jpg" alt="Configured Metrics have ingested and indexed CMs costs" style="width:80%;">}}
+{{< img src="account_management/billing/custom_metrics/mwl-pricing-configured.jpg" alt="Configured Metrics have ingested and indexed custom metrics costs" style="width:80%;">}}
 
 By default, Datadog stores the most frequently queried aggregation combination depending on the metric's type to preserve the mathematical accuracy of your configured metric's query as listed below: 
 
