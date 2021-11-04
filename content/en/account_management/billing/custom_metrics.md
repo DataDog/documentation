@@ -243,7 +243,7 @@ If a metric is not configured with Metrics without Limits, you're only charged f
 
 If a metric is configured with Metrics without Limits (tags/aggregations are configured), you pay for ingested custom metrics and indexed custom metrics.
 
-{{< img src="account_management/billing/custom_metrics/mwl-pricing-configured.jpg" alt="Configured Metrics have ingested and indexed CMs costs" style="width:80%;">}}
+{{< img src="account_management/billing/custom_metrics/mwl-pricing-configured.jpg" alt="Configured Metrics have ingested and indexed custom metrics costs" style="width:80%;">}}
 
 Suppose you want to keep only the `endpoint` and `status` tags associated with the `request.Latency` metric. This results in the following three unique tag combinations:
 
