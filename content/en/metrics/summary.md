@@ -132,7 +132,7 @@ You can configure tags using our bulk metric tag configuration button or the **M
 1. Click on your custom distribution metric name in the Metrics Summary table to open the metrics details sidepanel.
 2. Click the **Manage Tags** button to open the tag configuration modal.
 3. Click the **Custom...** tab to customize the tags you'd like to keep available for query. Tag configurations are _allowlists_ of the tags you'd like to keep. 
-4. Preview the effects of your proposed allowlist with the cardinality estimator before hitting Save.
+4. Preview the effects of your proposed allowlist with the cardinality estimator before selecting **Save**.
 
 **Note**: The exclusion of tags is not supported in the allowlist-based customization of tags. Adding tags starting with `!` is not accepted. And the cardinality estimator requires the metric to be 48 hours and older.
 
