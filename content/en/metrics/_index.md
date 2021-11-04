@@ -73,7 +73,7 @@ You can break this query into a few steps:
 
 First, choose the specific metric that you’d like to graph by searching or selecting it from the dropdown next to **Metric**. If you’re not sure which metric to use, start with the Metrics Explorer or a notebook. You can also see a list of actively reporting metrics on the Metrics Summary page.
 
-#### 2. Filter your metric
+#### Filter your metric
 
 After selecting a metric, you can filter your query based on tag(s). For instance, you can use `account:prod` to _scope_ your query to include only the metrics from your production hosts. For more information, refer to the [tagging documentation][16].
 
