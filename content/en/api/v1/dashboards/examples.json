@@ -172,7 +172,7 @@
               "definition": {
                 "requests": {
                   "fill": {
-                    "q": "system.cpu.user"
+                    "q": "avg:system.cpu.user{*}"
                   }
                 },
                 "type": "hostmap"
@@ -221,7 +221,7 @@
             "definition": {
               "requests": {
                 "fill": {
-                  "q": "system.cpu.user"
+                  "q": "avg:system.cpu.user{*}"
                 }
               },
               "type": "hostmap"
@@ -271,7 +271,7 @@
             "definition": {
               "requests": {
                 "fill": {
-                  "q": "system.cpu.user"
+                  "q": "avg:system.cpu.user{*}"
                 }
               },
               "type": "hostmap"
@@ -763,7 +763,7 @@
               "definition": {
                 "requests": {
                   "fill": {
-                    "q": "system.cpu.user"
+                    "q": "avg:system.cpu.user{*}"
                   }
                 },
                 "type": "hostmap"
@@ -848,7 +848,7 @@
               "definition": {
                 "requests": {
                   "fill": {
-                    "q": "system.cpu.user"
+                    "q": "avg:system.cpu.user{*}"
                   }
                 },
                 "type": "hostmap"
@@ -905,7 +905,7 @@
             "definition": {
               "requests": {
                 "fill": {
-                  "q": "system.cpu.user"
+                  "q": "avg:system.cpu.user{*}"
                 }
               },
               "type": "hostmap"
@@ -955,7 +955,7 @@
             "definition": {
               "requests": {
                 "fill": {
-                  "q": "system.cpu.user"
+                  "q": "avg:system.cpu.user{*}"
                 }
               },
               "type": "hostmap"
