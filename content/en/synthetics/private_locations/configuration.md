@@ -8,7 +8,7 @@ further_reading:
   text: "Getting Started with Private Locations"
 - link: "synthetics/private_locations/dimensioning"
   tag: "Documentation"
-  text: "Dimensioning your Private Locations"
+  text: "Dimension your Private Locations"
 ---
 
 ## Overview

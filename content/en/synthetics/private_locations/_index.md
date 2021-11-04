@@ -6,10 +6,13 @@ further_reading:
     - link: /getting_started/synthetics/private_location
       tag: 'Documentation'
       text: 'Getting Started with Private Locations'
-    - link: 'synthetics/private_locations/dimensioning'
+    - link: '/synthetics/private_locations/monitoring'
       tag: 'Documentation'
-      text: 'Dimensioning your Private Locations'
-    - link: 'synthetics/api_tests'
+      text: 'Monitor your Private Locations'
+    - link: '/synthetics/private_locations/dimensioning'
+      tag: 'Documentation'
+      text: 'Dimension your Private Locations'
+    - link: '/synthetics/api_tests'
       tag: 'Documentation'
       text: 'Configure an API Test'
 ---
@@ -579,4 +582,4 @@ For more information, see [Private Location Monitoring][19].
 [16]: /agent/
 [17]: /synthetics/metrics/
 [18]: /synthetics/private_locations/dimensioning
-[19]: /synthetics/private_locations/private_location_monitoring
+[19]: /synthetics/private_locations/monitoring
