@@ -99,7 +99,7 @@ As a result of the tag configuration, `request.Latency` reporting a total of **3
 
 By default, Datadog stores the most frequently queried aggregation combination depending on the metric's type to preserve the mathematical accuracy of your configured metric's query.
 
-- Configured counts/rates will be queryable with time/space aggregations of `SUM`
+- Configured counts/rates are queryable with time/space aggregations of `SUM`
 
 You can opt-in to more aggregations should they be valuable for your queries - your number of indexed custom metrics scales with the number of enabled aggregations. 
 
