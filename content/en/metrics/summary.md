@@ -143,7 +143,7 @@ Once your metric has been configured with Metrics without Limits\*, you can view
 For custom metrics of the count/gauge/rate metric type, you can further fine-tune your metric's configurations by optionally including additional aggregations with the advanced mode of Metrics without Limits\*. By default, Datadog stores the most frequently queried aggregation combination depending on the metric's type to preserve the mathematical accuracy of your configured metric's query as listed below: 
 
 - Configured counts/rates are queryable with time/space aggregations of `SUM`
-- Configured gauges will be queryable in time/space aggregations of `AVG`
+- Configured gauges are queryable in time/space aggregations of `AVG`
 
 {{< img src="metrics/summary/customize_aggr_docs.jpg" alt="Fine-tune aggregations on counts/rates/gauges"  style="width:80%;">}}
 
