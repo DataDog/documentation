@@ -77,7 +77,7 @@ First, choose the specific metric that you’d like to graph by searching or sel
 
 After selecting a metric, you can filter your query based on tag(s). For instance, you can use `account:prod` to _scope_ your query to include only the metrics from your production hosts. For more information, refer to the [tagging documentation][16].
 
-#### 3. Configure time aggregation
+#### Configure time aggregation
 
 Next, choose the granularity of your data using time rollup. In this example, you've defined that there will be one data point for every six minutes (360 seconds). You can also choose how you want to aggregate the data in each time bucket. By default, _avg_ is applied, but other available options are _sum_, _min_, _max_, and _count_. If you wanted to apply max, you would use `.rollup(max, 60)`.
 
