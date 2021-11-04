@@ -3,12 +3,12 @@ title: Dimensioning Private Locations
 kind: documentation
 description: Dimensioning requirements for your Private Locations
 further_reading:
-- link: "synthetics/private_location_monitoring"
+- link: "/synthetics/private_locations/monitoring"
   tag: "Documentation"
   text: "Monitor your Private Locations"
 - link: "synthetics/private_locations/dimensioning"
   tag: "Documentation"
-  text: "Dimensioning your Private Locations"
+  text: "Dimension your Private Locations"
 ---
 
 ## Overview 
@@ -17,7 +17,9 @@ Private locations can run [API][1], [multistep API][2], and [browser tests][3]. 
 
 To improve dimensioning, split your test assignments based on test types. For example, you can have some private locations run only API and multistep API tests while other private locations run only browser tests.
 
-Resource requirements depend on the maximum number of tests runs your private location may execute in parallel and the application(s) you want to test. Take into account spikes that may happen with on-demand testing (for example, when running tests as part of your [CI/CD pipelines][4]) as well as the size and number of assets that need to be loaded.
+### Define your maximum number of test runs
+
+Resource requirements depend on the maximum number of test runs your private location may execute in parallel and the application(s) you want to test. Take into account spikes that may happen with on-demand testing (for example, when running tests as part of your [CI/CD pipelines][4]) as well as the size and number of assets that need to be loaded.
 
 Define the `concurrency` parameter of your private location with the maximum number of test runs. By default, the maximum number of tests executed in parallel is 10.
 
@@ -69,5 +71,5 @@ For example, ten tests are scheduled to run simultaneously on a private location
 [1]: /synthetics/api_tests/
 [2]: /synthetics/multistep?tab=requestoptions
 [3]: /synthetics/browser_tests/?tab=requestoptions
-[4]: /synthetics/cicd_testing
+[4]: /synthetics/cicd_testing/
 [5]: /synthetics/private_locations/configuration#advanced-configuration

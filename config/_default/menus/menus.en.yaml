@@ -2533,7 +2533,7 @@ main:
     identifier: synthetics_private_location_dimensioning
     weight: 402
   - name: Monitoring
-    url: synthetics/private_locations/private_location_monitoring
+    url: synthetics/private_locations/monitoring
     parent: synthetics_private_location
     identifier: synthetics_private_location_monitoring
     weight: 403
