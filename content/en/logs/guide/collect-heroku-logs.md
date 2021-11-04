@@ -25,9 +25,9 @@ heroku drains:add 'https://http-intake.logs.{{< region-param key="dd_site" >}}/a
 ```
 
 * Replace `<DD_API_KEY>` with your [Datadog API Key][2].
-* Replace `<ENV>` with your application's [environment][4].
+* Replace `<ENV>` with your application's [environment][3].
 * Replace `<APPLICATION_NAME>` and `<SERVICE>` with your application name.
-* Replace `<HOST>` with the desired hostname. **Note**: Per the [host section][3], metrics and traces set the default host name to the dyno name. It is not yet possible to dynamically set the dyno name as the hostname for logs. For now, to correlate between metrics, traces, and logs the `dyno` and `dynotype` tags can be used.
+* Replace `<HOST>` with the desired hostname. **Note**: Per the [host section][4], metrics and traces set the default host name to the dyno name. It is not yet possible to dynamically set the dyno name as the hostname for logs. For now, to correlate between metrics, traces, and logs the `dyno` and `dynotype` tags can be used.
 
 ### Custom attributes
 
@@ -38,6 +38,6 @@ https://http-intake.logs.{{< region-param key="dd_site" >}}/api/v2/logs/?dd-api-
 ```
 
 [1]: https://devcenter.heroku.com/articles/log-drains#https-drains
-[2]: https://app.datadoghq.com/account/settings#api
-[3]: /agent/basic_agent_usage/heroku/#hostname
-[4]: /getting_started/tagging/#introduction
+[2]: https://app.datadoghq.com/organization-settings/api-keys
+[3]: /getting_started/tagging/#introduction
+[4]: /agent/basic_agent_usage/heroku/#hostname

@@ -25,9 +25,7 @@ Select a [monitor type][5] from the list.
 {{< nextlink href="/monitors/create/types/host" >}}<u>Host</u>: Check if one or more hosts are reporting to Datadog.{{< /nextlink >}}
 {{< nextlink href="/monitors/create/types/metric" >}}<u>Metric</u>: Compare values of a metric with a user-defined threshold.{{< /nextlink >}}
 {{< nextlink href="/monitors/create/types/anomaly" >}}<u>Anomaly</u>: Detect anomalous behavior for a metric based on historical data.{{< /nextlink >}}
-{{< whatsnext desc="Choose your monitor type:">}}
-{{< nextlink href="/monitors/create/types/audit_logs" >}}<u>Audit Logs</u>: Alert when a specified type of audit log exceeds a user-defined threshold over a given period of time.
-{{< /nextlink >}}
+{{< nextlink href="/monitors/create/types/audit_logs" >}}<u>Audit Logs</u>: Alert when a specified type of audit log exceeds a user-defined threshold over a given period of time.{{< /nextlink >}}
 {{< nextlink href="/monitors/create/types/outlier" >}}<u>Outlier</u>: Alert on members of a group behaving differently than the others.{{< /nextlink >}}
 {{< nextlink href="/monitors/create/types/forecasts" >}}<u>Forecast</u>: Alert when a metric is projected to cross a threshold.{{< /nextlink >}}
 {{< nextlink href="/monitors/create/types/integration" >}}<u>Integration</u>: Monitor metric values or health status from a specific integration.{{< /nextlink >}}
@@ -41,7 +39,7 @@ Select a [monitor type][5] from the list.
 {{< nextlink href="/monitors/create/types/real_user_monitoring" >}}<u>Real User Monitoring</u>: Monitor real user data gathered by Datadog.{{< /nextlink >}}
 {{< nextlink href="/monitors/create/types/watchdog" >}}<u>Watchdog</u>: Get notified when Watchdog detects anomalous behavior.{{< /nextlink >}}
 {{< nextlink href="/monitors/create/types/composite" >}}<u>Composite</u>: Alert on an expression combining multiple monitors.{{< /nextlink >}}
- {{< /whatsnext >}}
+{{< /whatsnext >}}
 
 ### Import a monitor
 

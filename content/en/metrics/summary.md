@@ -27,8 +27,9 @@ Search your metrics by name or tag using the **Metric** or **Tag** search fields
 The search bars provide the most comprehensive set of actions to filter the list of metrics. But facets can also quickly filter your metrics by:
 * **Configuration** : Quickly identify metrics with tag configurations or additional percentile aggregations
 * **Metric Type** : Quickly identify distributions vs non-distributions (counts, gauges, rates)
+* **Distribution Metric Origin**: Quickly identify which product the distribution metrics have originated from (for example, Generate Metrics from Logs, Generate Metrics from Spans, etc.) 
 
-{{< img src="metrics/summary/facets.jpg" alt="Metrics Facet Panel"  style="width:75%;">}}
+{{< img src="metrics/summary/facets2.jpg" alt="Metrics Facet Panel" style="width:75%;">}}
 
 
 ## Configuration of multiple metrics 
@@ -111,6 +112,7 @@ Use the tags table to:
 - Sort tag keys by the **Count column** (count of unique tag values).
 - Search through the paginated table of tags for a particular tag key.
 - Export the tags table as a downloadable CSV.
+- Toggle between tags you've configured on your metric vs the metric's originally submitted tags
 
 For any particular tag key, you can:
 
@@ -160,6 +162,7 @@ More aggregations are available should they be valuable to you. You can add or r
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+[10]:/metrics/metrics-without-limits
 [1]: https://app.datadoghq.com/metric/summary
 [2]: /metrics/explorer/
 [3]: /dashboards/
@@ -169,4 +172,3 @@ More aggregations are available should they be valuable to you. You can add or r
 [7]: /metrics/units/
 [8]: /metrics/types/
 [9]: /integrations/
-[10]:/metrics/metrics-without-limits

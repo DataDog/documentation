@@ -68,5 +68,5 @@ Pour surveiller le volume de logs non parsés, procédez comme suit :
 [5]: /fr/logs/archives/?tab=awss3
 [6]: /fr/logs/logs_to_metrics/
 [7]: /fr/logs/indexes#set-daily-quota
-[8]: /fr/monitors/monitor_types/metric/?tab=threshold#overview
-[9]: /fr/monitors/monitor_types/metric/?tab=threshold#set-alert-conditions
+[8]: /fr/monitors/create/types/metric/?tab=threshold#overview
+[9]: /fr/monitors/create/types/metric/?tab=threshold#set-alert-conditions

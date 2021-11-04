@@ -10,13 +10,14 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-extras/blob/master/contrastsecurity/README.md'
+  - https://github.com/DataDog/integrations-extras/blob/master/contrastsecurity/README.md
 display_name: contrastsecurity
 draft: false
 git_integration_title: contrastsecurity
 guid: 8483bcdc-3d45-48ee-8a73-75511a67ad5f
 integration_id: contrastsecurity
 integration_title: Contrast Security
+integration_version: ''
 is_public: true
 kind: インテグレーション
 maintainer: kristiana.mitchell@contrastsecurity.com
@@ -82,7 +83,7 @@ Contrast インテグレーションには、サービス チェック機能は�
 
 
 [1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/
-[2]: https://docs.contrastsecurity.com/installation-setupconfig.html#log
+[2]: https://docs.contrastsecurity.com/
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#restart-the-agent
 [4]: https://docs.datadoghq.com/ja/logs/log_collection/#getting-started-with-the-agent
 [5]: https://docs.datadoghq.com/ja/api/#create-a-dashboard

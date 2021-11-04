@@ -1,5 +1,5 @@
 ---
-title: Search Syntax
+title: Log Search Syntax
 kind: documentation
 description: "Search through all of your logs."
 aliases:
@@ -22,6 +22,8 @@ further_reading:
   text: "Automatically configure your Log Explorer"
 ---
 
+## Overview
+
 A query filter is composed of terms and operators.
 
 There are two types of terms:
@@ -43,7 +45,7 @@ To combine multiple terms into a complex query, you can use any of the following
 
 Use the search bar's autocomplete feature to complete your query using existing values:
 
-{{< img src="logs/explorer/search/search_bar_autocomplete.png" alt="search bar autocomplete "  style="width:80%;">}}
+{{< img src="logs/explorer/search/search_bar_autocomplete.jpg" alt="search bar autocomplete "  style="width:80%;">}}
 
 ## Escaping of special characters
 
@@ -201,7 +203,7 @@ In the below example, clicking on the `Peter` value in the facet returns all the
 In the following example, CloudWatch logs for Windows contain an array of JSON objects under `@Event.EventData.Data`.
 
 * `@Event.EventData.Data.Name:ObjectServer` matches all logs with the key `Name` and value `ObjectServer`.
- 
+
 {{< img src="logs/explorer/search/facetless_query_json_arrray2.png" alt="Facetless query on array of JSON objects"  style="width:80%;">}}
 <p> </p>
 {{< /site-region >}}

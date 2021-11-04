@@ -11,11 +11,11 @@ If a metric is not submitted from one of the [more than {{< translate key="integ
 
 Your monthly billable volume for custom metrics (reflected on the Usage page) is calculated from the average number of distinct custom metrics over all hours in the current month.
 
-Metrics without Limits™ users will see monthly billable volumes for _ingested_ and _indexed_ custom metrics on their Usage page. Learn more about ingested and indexed custom metrics and [Metrics without Limits™][25]. 
+Metrics without Limits™ users will see monthly billable volumes for _ingested_ and _indexed_ custom metrics on their Usage page. Learn more about ingested and indexed custom metrics and [Metrics without Limits™][3]. 
 
 ## Counting custom metrics
 
-The number of custom metrics associated with a particular metric name depends on its metric [submission type][3]. Below are examples of how to count your custom metrics based on the following scenario below:
+The number of custom metrics associated with a particular metric name depends on its metric [submission type][4]. Below are examples of how to count your custom metrics based on the following scenario below:
 
 Suppose you’re submitting a metric, `request.Latency`, from two hosts (`host:A`,`host:B`), which measures the latency of your endpoint requests. You’re submitting this metric with two tag keys:
 
@@ -73,7 +73,7 @@ To obtain the temperature in Florida, you can simply recombine the custom metric
 
 ### Configure tags and aggregations with Metrics without Limits\*
 
-Custom metrics volumes can be impacted by configuring tags and aggregations using [Metrics without Limits\*][4]. Metrics without Limits\* decouples ingestion costs from indexing costs -- so you can continue sending Datadog all of your data (everything is ingested) and you can specify an allowlist of tags you'd want to remain queryable in the Datadog platform. Given the volume of data Datadog is ingesting for your configured metrics now differs from the smaller, remaining volume you’ve indexed, you'll see two distinct volumes on your Usage page as well as the Metrics Summary page. 
+Custom metrics volumes can be impacted by configuring tags and aggregations using [Metrics without Limits\*][3]. Metrics without Limits\* decouples ingestion costs from indexing costs -- so you can continue sending Datadog all of your data (everything is ingested) and you can specify an allowlist of tags you'd want to remain queryable in the Datadog platform. Given the volume of data Datadog is ingesting for your configured metrics now differs from the smaller, remaining volume you’ve indexed, you'll see two distinct volumes on your Usage page as well as the Metrics Summary page. 
  
 - **Ingested Custom Metrics**: The original volume of custom metrics based on the all ingested tags (sent via code)
 - **Indexed Custom Metrics**: The volume of custom metrics that remains queryable in the Datadog platform (based on any Metrics without Limits\* configurations) 
@@ -103,12 +103,11 @@ By default, Datadog stores the most frequently queried aggregation combination d
 
 You can opt-in to more aggregations should they be valuable for your queries - your number of indexed custom metrics scales with the number of enabled aggregations. 
 
-Learn more about [Metrics without Limits\*][4].
+Learn more about [Metrics without Limits\*][3].
 
 [1]: /metrics/types/?tab=count#metric-types
 [2]: /metrics/types/?tab=rate#metric-types
-[3]: /metrics/types/?tab=gauge#metric-types
-[4]: /metrics/metrics-without-limits
+[3]: /metrics/metrics-without-limits
 {{% /tab %}}
 {{% tab "Gauge" %}}
 The number of unique tag value combinations submitted for a GAUGE metric with this tagging scheme is **four**:
@@ -221,11 +220,11 @@ You can include percentile aggregations (`p50`, `p75`, `p90`, `p95`, and `p99`) 
 
 This table summarizes the effect of adding percentile aggregations to any distribution metric. 
 
-| Metrics                                                                                    | Number of Billable Custom Metrics |
-|--------------------------------------------------------------------------------------------|-----------------------------------|
-| Number of custom metrics from a baseline distribution (count, sum, min, max, avg)          | `5*(tag value combinations)`      |
-| Number of custom metrics from including percentile aggregations (p50, p75, p90, p95, p99)  | `5*(tag value combinations)`      |
-| Total                                                                                      | `2*5(tag value combinations)`     |
+| Metrics                                                                                   | Number of Billable Custom Metrics |
+|-------------------------------------------------------------------------------------------|-----------------------------------|
+| Number of custom metrics from a baseline distribution (count, sum, min, max, avg)         | `5*(tag value combinations)`      |
+| Number of custom metrics from including percentile aggregations (p50, p75, p90, p95, p99) | `5*(tag value combinations)`      |
+| Total                                                                                     | `2*5(tag value combinations)`     |
 
 ### Configure tags with Metrics without Limits\*
 
@@ -253,19 +252,18 @@ Suppose you want to keep only the `endpoint` and `status` tags associated with t
 
 The number of custom metrics from a [DISTRIBUTION metric][1] is five times the unique combination of metric name and tag values. As a result of the tag customization, `request.Latency` reporting a total of **5\*3 = 15 indexed custom metrics**. Based on the original tags sent on this metric, the original **ingested** custom metrics volume of `request.Latency` is **20 ingested custom metrics**.
 
-Learn more about [Metrics without Limits][3].
+Learn more about [Metrics without Limits][2].
 
 [1]: /metrics/types/?tab=distribution#definition
-[2]: /metrics/distributions/#customize-tagging
-[3]: /metrics/metrics-without-limits
+[2]: /metrics/metrics-without-limits
 {{% /tab %}}
 {{< /tabs >}}
 
 ## Tracking custom metrics
 
-Administrative users (those with [Datadog Admin roles][4]) can see the monthly average number of **ingested** and **indexed** custom metrics per hour. The top custom metrics table also lists the average number of **indexed** custom metrics  on the [usage details page][5]. See the [Usage Details][6] documentation for more information.
+Administrative users (those with [Datadog Admin roles][5]) can see the monthly average number of **ingested** and **indexed** custom metrics per hour. The top custom metrics table also lists the average number of **indexed** custom metrics  on the [usage details page][6]. See the [Usage Details][7] documentation for more information.
 
-For more real-time tracking of the count of custom metrics for a particular metric name, click into the metric name on the [Metrics Summary page][7]. You can view the number of **ingested** custom metrics and **indexed** custom metrics on the metric's details sidepanel. 
+For more real-time tracking of the count of custom metrics for a particular metric name, click into the metric name on the [Metrics Summary page][8]. You can view the number of **ingested** custom metrics and **indexed** custom metrics on the metric's details sidepanel. 
 {{< img src="account_management/billing/custom_metrics/mwl_sidepanel_ingested.png" alt="Metrics Summary sidepanel" style="width:80%;">}}
 
 
@@ -280,47 +278,46 @@ These allocations are counted across your entire infrastructure. For example, if
 
 {{< img src="account_management/billing/custom_metrics/host_custom_metrics.png" alt="Allocations for Custom Metrics"  >}}
 
-The billable number of indexed custom metrics is based on the average number of custom metrics (from all paid hosts) per hour over a given month. The billable number of ingested custom metrics only grows if you've used Metrics without Limits\* to configure your metric.  Contact [Sales][8] or your [Customer Success][9] Manager to discuss custom metrics for your account or to purchase an additional custom metrics package.
+The billable number of indexed custom metrics is based on the average number of custom metrics (from all paid hosts) per hour over a given month. The billable number of ingested custom metrics only grows if you've used Metrics without Limits\* to configure your metric.  Contact [Sales][9] or your [Customer Success][10] Manager to discuss custom metrics for your account or to purchase an additional custom metrics package.
 
 ## Standard integrations
 
 The following standard integrations can potentially emit custom metrics.
 
-| Type of integrations                           | Integrations                                                                                   |
-|------------------------------------------------|------------------------------------------------------------------------------------------------|
-| Limited to 350 custom metrics by default.      | [ActiveMQ XML][10] / [Go-Expvar][11] / [Java-JMX][12]                                          |
-| No default limit on custom metrics collection. | [Nagios][13] /[PDH Check][14] /[Prometheus][15] /[SNMP][16] /[Windows Services][17] /[WMI][18] |
-| Can be configured to collect custom metrics.   | [MySQL][19] /[Oracle][20] /[Postgres][21] /[SQL Server][22]                                    |
-| Custom metrics sent from cloud integrations    | [AWS][23]                                                                                      |
+| Type of integrations                           | Integrations                                                                       |
+|------------------------------------------------|------------------------------------------------------------------------------------|
+| Limited to 350 custom metrics by default.      | [ActiveMQ XML][11] / [Go-Expvar][12] / [Java-JMX][13]                              |
+| No default limit on custom metrics collection. | [Nagios][14] /[PDH Check][15] /[Prometheus][16] /[Windows Services][17] /[WMI][18] |
+| Can be configured to collect custom metrics.   | [MySQL][19] /[Oracle][20] /[Postgres][21] /[SQL Server][22]                        |
+| Custom metrics sent from cloud integrations    | [AWS][23]                                                                          |
 
 ## Troubleshooting
 
 For technical questions, contact [Datadog support][24].
 
-For billing questions, contact your [Customer Success][9] Manager.
+For billing questions, contact your [Customer Success][10] Manager.
 
 [1]: /integrations/
 [2]: /metrics/custom_metrics/
-[3]: /metrics/types/#metric-types
-[4]: /account_management/users/default_roles/
-[5]: https://app.datadoghq.com/account/usage/hourly
-[6]: /account_management/billing/usage_details/
-[7]: https://app.datadoghq.com/metric/summary
-[8]: mailto:sales@datadoghq.com
-[9]: mailto:success@datadoghq.com
-[10]: /integrations/activemq/#activemq-xml-integration
-[11]: /integrations/go_expvar/
-[12]: /integrations/java/
-[13]: /integrations/nagios/
-[14]: /integrations/pdh_check/
-[15]: /integrations/prometheus/
-[16]: /integrations/snmp/
-[17]: /integrations/windows_service/
-[18]: /integrations/wmi_check/
-[19]: /integrations/mysql/
-[20]: /integrations/oracle/
-[21]: /integrations/postgres/
-[22]: /integrations/sqlserver/
-[23]: /integrations/amazon_web_services/
-[24]: /help/
-[25]: /metrics/metrics-without-limits
+[3]: /metrics/metrics-without-limits
+[4]: /metrics/types/#metric-types
+[5]: /account_management/users/default_roles/
+[6]: https://app.datadoghq.com/account/usage/hourly
+[7]: /account_management/billing/usage_details/
+[8]: https://app.datadoghq.com/metric/summary
+[9]: mailto:sales@datadoghq.com
+[10]: mailto:success@datadoghq.com
+[11]: /integrations/activemq/#activemq-xml-integration
+[12]: /integrations/go_expvar/
+[13]: /integrations/java/
+[14]: /integrations/nagios/
+[15]: /integrations/pdh_check/
+[16]: /integrations/prometheus/
+[17]: /integrations/snmp/
+[18]: /integrations/windows_service/
+[19]: /integrations/wmi_check/
+[20]: /integrations/mysql/
+[21]: /integrations/oracle/
+[22]: /integrations/postgres/
+[23]: /integrations/sqlserver/
+[24]: /integrations/amazon_web_services/

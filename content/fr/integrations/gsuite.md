@@ -4,68 +4,75 @@ categories:
   - security
 ddtype: crawler
 dependencies: []
-description: "Importez vos logs de sécurité et d'audit G\_Suite dans Datadog."
-doc_link: 'https://docs.datadoghq.com/integrations/gsuite/'
+description: "Importez vos logs d'audit et de sécurité Google\_Workspace dans Datadog."
+doc_link: https://docs.datadoghq.com/integrations/gsuite/
 draft: false
 git_integration_title: gsuite
 has_logo: true
 integration_id: ''
-integration_title: G Suite
+integration_title: "Google\_Workspace"
+integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'
 name: gsuite
-public_title: "Intégration Datadog/G\_Suite"
-short_description: "Importez vos logs de sécurité et d'audit G\_Suite dans Datadog."
+public_title: "Intégration Datadog/Google\_Workspace"
+short_description: "Importez vos logs d'audit et de sécurité Google\_Workspace dans Datadog."
 version: '1.0'
 ---
 ## Présentation
 
-Cette intégration permet d'importer vos logs de sécurité G Suite dans Datadog. Une fois activée, Datadog commence automatiquement à recueillir les logs à partir des services G Suite suivants :
+Cette intégration permet d'importer vos logs de sécurité Google Workspace dans Datadog. Une fois activée, Datadog commence automatiquement à recueillir les logs à partir des services Google Workspace suivants :
 
-| Service G Suite     | Description                                                                                                                                                                                |
+| Service             | Description                                                                                                                                                                                |
 |---------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Access Transparency | Les rapports d'activité pour G Suite Access Transparency offrent des informations sur les différents types d'événements liés aux activités dans Access Transparency.                                                          |
+| Access Transparency | Les rapports d'activité Access Transparency pour Google Workspace offrent des informations sur les différents types d'événements liés aux activités dans Access Transparency.                                                          |
 | Admin               | Les rapports d'activité pour l'application Console d'administration offrent des informations sur les différents types d'événements liés aux activités des administrateurs.                                                        |
-| Calendar            | Les rapports d'activité pour l'application G Suite Agenda offrent des informations sur les différents types d'événements liés aux activités dans Agenda.                                                                             |
-| Drive               | Les rapports d'activité pour l'application Google Drive offrent des informations sur les différents types d'événements liés aux activités dans Google Drive. Ces rapports sont uniquement disponibles pour les clients G Suite Business. |
+| Agenda            | Les rapports d'activité pour l'application Agenda Google offrent des informations sur les différents types d'événements liés aux activités dans Agenda.                                                                             |
+| Drive               | Les rapports d'activité pour l'application Google Drive offrent des informations sur les différents types d'événements liés aux activités dans Google Drive. Ces rapports sont uniquement disponibles pour les clients Google Workspace Business. |
 | Gplus               | Les rapports d'activité pour l'application Google+ offrent des informations sur les différents événements liés aux activités dans Google+.                                                                                       |
-| Group               | Les rapports d'activité pour l'application Google Groups offrent des informations sur les différents événements liés aux activités dans Google Groups.                                                                                  |
-| Groups              | Enterprise : les rapports d'activité pour l'application Enterprise Groups offrent des informations sur les différents événements liés aux activités dans Enterprise Groups.                                                                      |
-| Login               | Les rapports d'activité pour l'application G Suite Login offrent des informations sur les différents types d'événements liés aux activités de connexion.                                                                |
-| Mobile              | Les rapports d'activité pour l'audit des appareils mobiles G Suite offrent des informations sur les différents types d'événements liés aux activités des appareils mobiles.                                                                         |
-| Rules               | Les rapports d'activité pour les règles G Suite offrent des informations sur les différents types d'événements liés aux règles.                                                                                       |
-| Token               | Les rapports d'activité pour l'application G Suite Token offrent des informations sur les différents types d'événements liés aux tokens.                                                                |
-| Comptes utilisateur       | Les rapports d'activité pour l'application G Suite User Accounts offrent des informations sur les différents types d'événements liés aux comptes utilisateur.                                                 |
+| Groupes              | Les rapports d'activité pour l'application Google Groups offrent des informations sur les différents événements liés aux activités dans Google Groups.                                                                                  |
+| Groupes Enterprise   | Les rapports d'activité pour les groupes Enterprise offrent des informations sur les différents événements liés aux activités des groupes Enterprise.                                                                      |
+| Connexion               | Les rapports d'activité de connexion offrent des informations sur les différents types d'événements liés aux activités de connexion.                                                                |
+| Mobile              | Les rapports d'activité pour l'audit des appareils mobiles offrent des informations sur les différents types d'événements liés aux activités d'audit des appareils mobiles.                                                                         |
+| Règles               | Les rapports d'activité pour les règles offrent des informations sur les différents types d'événements liés aux règles.                                                                                       |
+| Token               | Les rapports d'activité sur les tokens offrent des informations sur les différents types d'événements liés aux activités des tokens.                                                                |
+| Comptes utilisateur    | Les rapports d'activité sur les comptes utilisateur offrent des informations sur les différents types d'événements liés aux activités des comptes utilisateur.                                                 |
 
 ## Implémentation
 ### Installation
 
-Pour configurer l'intégration Datadog/G Suite, cliquez sur le bouton *Connect a new G Suite domain* dans votre [carré d'intégration Datadog/G Suite][1] et autorisez Datadog à accéder à l'API d'administration G Suite.
+Suivez les instructions de la section [API Reports : prérequis][1] du SDK Admin Google Workspace (en anglais) avant de configurer l'intégration Datadog/Google Workspace.
+
+**Remarque** : certaines habilitations OAuth peuvent être requises pour la configuration. Consultez la section [Autoriser les requêtes][2] du SDK Admin Google Workspace (en anglais).
+
+Pour configurer l'intégration Datadog/Google Workspace, cliquez sur le bouton *Connect a new Google Workspace domain* dans votre [carré d'intégration Datadog/Google Workspace][3] et autorisez Datadog à accéder à l'API Admin Google Workspace. 
 
 ## Données collectées
 ### Logs
 
-Consultez la [documentation sur le SDK G Suite Admin][2] (en anglais) pour obtenir la liste complète des logs recueillis ainsi que leur contenu.
+Consultez la [documentation sur le SDK Admin Google Workspace][4] (en anglais) pour obtenir la liste complète des logs recueillis ainsi que leur contenu.
 
-**Remarque** : les logs de sécurité G Suite sont indexés toutes les 90 minutes, car Google s'impose une limite de fréquence pour la récupération de ces logs. Les logs de cette intégration sont transmis toutes les 90 à 120 minutes.
+**Remarque** : les logs de sécurité Google Workspace sont indexés toutes les 90 minutes, car Google s'impose une limite de fréquence pour la récupération de ces logs. Les logs de cette intégration sont transmis toutes les 90 à 120 minutes.
 
 ### Métriques
 
-L'intégration G Suite n'inclut aucune métrique.
+L'intégration Google Workspace n'inclut aucune métrique.
 
 ### Événements
 
-L'intégration G Suite n'inclut aucun événement.
+L'intégration Google Workspace n'inclut aucun événement.
 
 ### Checks de service
 
-L'intégration G Suite n'inclut aucun check de service.
+L'intégration Google Workspace n'inclut aucun check de service.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][3].
+Besoin d'aide ? Contactez [l'assistance Datadog][5].
 
-[1]: https://app.datadoghq.com/account/settings#integrations/gsuite
-[2]: https://developers.google.com/admin-sdk/reports/v1/reference/activities/list
-[3]: https://docs.datadoghq.com/fr/help/
+[1]: https://developers.google.com/admin-sdk/reports/v1/guides/prerequisites
+[2]: https://developers.google.com/admin-sdk/reports/v1/guides/authorizing#OAuth2Authorizing
+[3]: https://app.datadoghq.com/account/settings#integrations/gsuite
+[4]: https://developers.google.com/admin-sdk/reports/v1/reference/activities/list
+[5]: https://docs.datadoghq.com/fr/help/

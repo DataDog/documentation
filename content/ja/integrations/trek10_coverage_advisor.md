@@ -23,6 +23,7 @@
 "guid": "785bbfd8-e95c-44ce-863f-29b0e092c6b0"
 "integration_id": "trek10-coverage-advisor"
 "integration_title": "Trek10 AWS Coverage Advisor"
+"integration_version": ""
 "is_public": true
 "kind": "integration"
 "maintainer": "trek10-coverage-advisor@trek10.com"
@@ -57,7 +58,7 @@ Coverage Advisor は Datadog アカウントの重要な AWS CloudWatch メト�
 {{< img src="marketplace/trek10_coverage_advisor/images/maindashview.png" alt="" >}}
 
 
-*Datadog のツールに関して特別なリクエストがおありですか？Datadog 上に構築したプラットフォームで年中無休で稼働する、AWS の管理型サービスをお探しですか？AWS または Datadog に関する専門知識をお求めですか？セールスチーム[sales team](trek10.com/contact)がお客様のご要望に対応いたしますので、お気軽にお問い合わせください。*
+*Datadog のツールに関して特別なリクエストがおありですか？Datadog 上に構築したプラットフォームで年中無休で稼働する、AWS の管理型サービスをお探しですか？AWS または Datadog に関する専門知識をお求めですか？セールスチーム[sales team](https://trek10.com/contact)がお客様のご要望に対応いたしますので、お気軽にお問い合わせください。*
 
 ### メトリクス
 * Trek10 は毎晩、(メトリクスに対するモニターを持たない) Datadog アカウントに現在取り込まれているメトリクスの数を計算するメトリクス trek10.coverage.aws_metric_count をプッシュします。このメトリクスにはタグ `metric_type` が含まれており、`all_metrics`、`metrics_monitored`、`monitoring_recommendations` という値に絞り込むことができます。

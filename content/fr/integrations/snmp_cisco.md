@@ -16,13 +16,14 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/snmp_cisco/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/snmp_cisco/README.md
 display_name: Cisco
 draft: false
 git_integration_title: snmp_cisco
 guid: 4109f288-7460-4ed2-b0c3-04e708fbd5bd
 integration_id: snmp-cisco
 integration_title: Cisco
+integration_version: ''
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com
