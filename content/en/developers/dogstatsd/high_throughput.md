@@ -221,8 +221,9 @@ Client libraries can aggregate metrics on the client side, reducing number of me
 
 Client-side aggregation is only available in the Go client starting with v5.0.0.
 
-See [Client-side aggregation](https://github.com/DataDog/datadog-go#client-side-aggregation) for more information.
+See [Client-side aggregation][1] for more information.
 
+[1]: https://github.com/DataDog/datadog-go#client-side-aggregation
 {{< /programming-lang >}}
 {{< programming-lang lang="java" >}}
 
@@ -237,8 +238,9 @@ StatsDClient Statsd = new NonBlockingStatsDClientBuilder()
 
 Client-side aggregation is available for gauges, counters and sets.
 
-See [Client-side aggregation](https://github.com/DataDog/java-dogstatsd-client#aggregation) for more information.
+See [Client-side aggregation][1] for more information.
 
+[1]: https://github.com/DataDog/java-dogstatsd-client#aggregation
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
