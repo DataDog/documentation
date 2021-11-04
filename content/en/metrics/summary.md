@@ -124,7 +124,9 @@ For any particular tag key, you can:
 [Learn more about tagging][5].
 
 ## Metrics without Limits\*
-Metrics without Limits provides you control over the size of your custom metrics without requiring any agent/code-level changes (more details here).  Note: Metrics without Limits is only available for custom metrics.
+Metrics without Limits\* provides you control over the size of your custom metrics without requiring any agent or code-level changes. 
+
+**Note:** Metrics without Limits\* is only available for custom metrics.
 
 You can configure tags using our bulk metric tag configuration button or the **Manage Tags** button in a metric's details sidepanel. 
 
