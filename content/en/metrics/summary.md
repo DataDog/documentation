@@ -61,7 +61,8 @@ A metric name may emit multiple ingested custom metrics depending on its associa
 Learn more in the [custom metrics][4] documentation.
 
 ### Indexed Custom Metrics
-Unlike ingested custom metrics, indexed custom metrics represent those that remain queryable across the Datadog platform. This number may be impacted by adding/removing percentile aggregations or use of Metrics without Limits. Learn more in the [Metrics without Limits][10] documentation
+
+Unlike ingested custom metrics, indexed custom metrics represent those that remain queryable across the Datadog platform. This number may be impacted by adding or removing percentile aggregations or by use of Metrics without Limits™. Learn more in the [Metrics without Limits™][10] documentation.
 
 ### Hosts
 
