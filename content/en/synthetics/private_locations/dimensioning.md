@@ -1,5 +1,5 @@
 ---
-title: Dimensioning your Private Locations
+title: Dimensioning Private Locations
 kind: documentation
 description: Dimensioning requirements for your Private Locations
 further_reading:
@@ -16,8 +16,6 @@ further_reading:
 Private locations can run [API][1], [multistep API][2], and [browser tests][3]. One private location can run several types of tests. Browser tests are more resource intensive than API and multistep API tests.
 
 To improve dimensioning, split your test assignments based on test types. For example, you can have some private locations run only API and multistep API tests while other private locations run only browser tests.
-
-### Define your maximum number of test runs
 
 Resource requirements depend on the maximum number of tests runs your private location may execute in parallel and the application(s) you want to test. Take into account spikes that may happen with on-demand testing (for example, when running tests as part of your [CI/CD pipelines][4]) as well as the size and number of assets that need to be loaded.
 
