@@ -103,7 +103,7 @@ By default, Datadog stores the most frequently queried aggregation combination d
 
 You can opt-in to more aggregations should they be valuable for your queries - your number of indexed custom metrics scales with the number of enabled aggregations. 
 
-Learn more about [Metrics without Limits][4].
+Learn more about [Metrics without Limits\*][4].
 
 [1]: /metrics/types/?tab=count#metric-types
 [2]: /metrics/types/?tab=rate#metric-types
