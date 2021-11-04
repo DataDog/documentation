@@ -68,6 +68,10 @@ The **Audit Logs** tab in the Organization Settings page opens a new tab to the 
 
 The **Audit Log Settings** tab allows you to set the retention period of audit logs and enable archiving to other cloud storage services.
 
+#### OAuth Apps
+
+The **OAuth Apps** tab allows you to view or manage OAuth applications in your organization. 
+
 ### General
 
 #### Rename organization
