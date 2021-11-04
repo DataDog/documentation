@@ -23,13 +23,13 @@ Only users with the Datadog Admin role or the `org_authorized_apps_write` permis
 Disabling OAuth access for an application revokes access to this application for all users in your organization. While the application remains installed, users are no longer able to use the application and will be prompted with an error if they attempt to authorize it.
 
 There are two ways to disable an application from the OAuth Apps management page:
-1. Hover over your application in the apps list to reveal the *Disable* button on the right-hand side of the row.
+1. Hover over your application in the apps list to reveal the **Disable** button on the right-hand side of the row.
 {{< img src="account_management/oauth_apps/disable-app-table.png" alt="Disable button on apps overview table" style="width:100%;">}}
 
-2. Click on your application to open up a detailed breakdown of the application and reveal the *Disable Application* button.
+2. Click on your application to open up a detailed breakdown of the application and reveal the **Disable Application** button.
 {{< img src="account_management/oauth_apps/disable-app-detailed.png" alt="Disable button in apps detailed view" style="width:100%;">}}
 
-**Note**: Re-enabling an application allows users with necessary permissions to grant it access on their behalf. Users that have previously authorized the application are required to re-authorize the application to gain access again.
+**Note**: Enabled application allows users with necessary permissions to grant it access on their behalf. When re-enabled, users that have previously authorized the application are required to re-authorize the application to gain access again.
 
 ## Revoke OAuth access for a user
 
