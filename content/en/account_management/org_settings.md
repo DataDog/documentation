@@ -88,4 +88,4 @@ To rename your organization, click the **Rename organization** tab, enter the ne
 [6]: /account_management/api-app-keys/
 [7]: /account_management/api-app-keys/#client-tokens
 [8]: /events/guides/email/
-[9]: /account_management/oauth_apps
+[9]: /account_management/org_settings/oauth_apps
