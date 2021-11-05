@@ -5,34 +5,34 @@ kind: faq
 
 As a common best practice, Datadog periodically rotates the keys and certificates used to sign Datadog's Agent packages. The following GPG keys, used to sign the Agent RPM and DEB packages, reach their end-of-life in June 2022 and will be rotated in April 2022:
 
-- The RPM signing key with hash [`A4C0B90D7443CF6E4E8AA341F1068E14E09422B3`][1] will be rotated in April 11th 2022 and will be replaced by the key with hash [`C6559B690CA882F023BDF3F63F4D1729FD4BF915`][2]
-- The DEB signing key with hash [`A2923DFF56EDA6E76E55E492D3A80E30382E94DE`][3] will be rotated in May 2nd 2022 and will be replaced by the key with hash [`D75CEA17048B9ACBF186794B32637D44F14F620E`][4]
+- The RPM signing key with hash [`A4C0B90D7443CF6E4E8AA341F1068E14E09422B3`][1] will be rotated on April 11, 2022 and replaced by the key with hash [`C6559B690CA882F023BDF3F63F4D1729FD4BF915`][2]
+- The DEB signing key with hash [`A2923DFF56EDA6E76E55E492D3A80E30382E94DE`][3] will be rotated on May 2, 2022 and replaced by the key with hash [`D75CEA17048B9ACBF186794B32637D44F14F620E`][4]
 
-Customers using Datadog's RPM or DEB packages might require a manual action to import the new key on their systems in order to install or upgrade the Agent after the rotation takes place.
+Customers using Datadog's RPM or DEB packages might require a manual action to import the new key on their systems to install or upgrade the Agent after the rotation takes place.
 
 <div class="alert alert-info">
-<strong>Note</strong>: This DOES NOT affect the functionality of already running Agents, and only limits the ability to install the Agent or upgrade to a newer version of the Agent. This also doesn't affect Dockerized Linux Agents nor Windows or MacOS Agents.
+<strong>Note</strong>: This DOES NOT affect the functionality of already running Agents, and only limits the ability to install or upgrade to a newer version of the Agent. Also, this doesn't affect Dockerized Linux Agents, Windows, or macOS Agents.
 </div>
 
 ## Install methods that automatically trust the new GPG key
 
-If you're using one of the following install methods, your hosts trust the key automatically and no further action is needed:
+Your host automatically trusts the new key (no further action is required) if you're using one of the following install methods:
 
-* [Agent install script][5] v1.6.0 or later (released Jul 26, 2021)
-* [Chef cookbook][6] v4.11.0 or later (released Aug 10, 2021)
-* [Ansible role][7] v4.10.0 or later (released May 25, 2021)
-* [Puppet module][8] v3.13.0 or later (released Aug 11, 2021)
-* [SaltStack formula][9] v3.4 or later (released Aug 12, 2021)
-* [Heroku buildpack][10] v1.26 or later (released May 26, 2021)
-* [Elastic Beanstalk][11] config templates updated as of Mar 29, 2021 or later (should contain `DATADOG_RPM_KEY_FD4BF915.public` under `gpgkey`)
-* Containerized Agents (Docker/Kubernetes): No action needed on any version
-* Windows/MacOS Agents: No action needed on any version.
+- [Agent install script][5] v1.6.0+ (released Jul 26, 2021)
+- [Chef cookbook][6] v4.11.0+ (released Aug 10, 2021)
+- [Ansible role][7] v4.10.0+ (released May 25, 2021)
+- [Puppet module][8] v3.13.0+ (released Aug 11, 2021)
+- [SaltStack formula][9] v3.4+ (released Aug 12, 2021)
+- [Heroku buildpack][10] v1.26+ (released May 26, 2021)
+- [Elastic Beanstalk][11] config templates updated as of Mar 29, 2021 or later (should contain `DATADOG_RPM_KEY_FD4BF915.public` under `gpgkey`)
+- Containerized Agents (Docker/Kubernetes) for any version
+- Windows/MacOS Agents for any version
 
-Additionally, if you are using the DEB version of the Agent version 7.31.0 or greater, your hosts should have the `datadog-signing-keys` package installed, which will make APT recognize the signature by the new key on the Datadog APT repository.
+Additionally, if you are using the DEB package and Agent v7.31.0+, your hosts should have the `datadog-signing-keys` package installed, which automatically adds the new key (no further action is needed).
 
 If you're unsure if a host trusts the new signing key, you can [check](#check-if-a-host-trusts-the-new-gpg-key).
 
-For hosts running older versions of the install methods listed above or older versions of the DEB package, Datadog recommends updating the install method to the latest version. Alternatively Debian and Ubuntu users can update the Agent to version 7.31.0 or greater. Otherwise, the key can be [manually updated](#manual-update).
+For hosts running older versions of the install methods listed above or older versions of the DEB package, Datadog recommends updating the install method to the latest version. Alternatively Debian and Ubuntu users can update the Agent to version 7.31.0+. Otherwise, the key can be [manually updated](#manual-update).
 
 ## What happens if I don't trust the new key before it is rotated?
 
@@ -95,7 +95,7 @@ If the file `/usr/share/keyrings/datadog-archive-keyring.gpg` exists, the new ke
 {{% /tab %}}
 {{% tab "RedHat/CentOS/SUSE" %}}
 
-Run the following commands on the host:
+Run the following command on the host:
 
 ```bash
 $ rpm -q gpg-pubkey-fd4bf915
@@ -116,11 +116,11 @@ package gpg-pubkey-fd4bf915 is not installed
 {{% /tab %}}
 {{< /tabs >}}
 
-## Impact for Agent 5 users
+## Impact for Agent v5 users
 
-Agent 5 users on DEB-based systems (Debian/Ubuntu) are also required to trust the new signing key in order to install or upgrade the Agent after the rotation date. Agent 5 users on RPM-based systems (RedHat/CentOS/SUSE) are not affected by this rotation.
+Agent v5 users on DEB-based systems (Debian/Ubuntu) are also required to trust the new signing key to install or upgrade the Agent after the rotation date. Agent v5 users on RPM-based systems (RedHat/CentOS/SUSE) are not affected by this rotation.
 
-Note that Agent 5 uses Python 2 which reached end-of-life on January 1st 2021. We recommend you [upgrade to Agent 7][12].
+**Note**: Agent v5 uses Python 2 which reached end-of-life on January 1, 2021. Datadog recommends [upgrading to Agent v7][12].
 
 [1]: https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
 [2]: https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
