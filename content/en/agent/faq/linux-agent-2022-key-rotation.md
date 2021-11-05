@@ -23,7 +23,7 @@ If you're using one of the following install methods, your hosts trust the key a
 * [Ansible role][7] v4.10.0 or later (released May 25, 2021)
 * [Puppet module][8] v3.13.0 or later (released Aug 11, 2021)
 * [SaltStack formula][9] v3.4 or later (released Aug 12, 2021)
-* [Heroku buildpack][10] v1.26  or later (released May 26, 2021)
+* [Heroku buildpack][10] v1.26 or later (released May 26, 2021)
 * [Elastic Beanstalk][11] config templates updated as of Mar 29, 2021 or later (should contain `DATADOG_RPM_KEY_FD4BF915.public` under `gpgkey`)
 * Containerized Agents (Docker/Kubernetes): No action needed on any version
 * Windows/MacOS Agents: No action needed on any version.
