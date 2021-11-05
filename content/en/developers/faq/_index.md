@@ -23,6 +23,7 @@ private: true
 * [Is it possible to integrate with ThousandEyes?][7]
 * [Deploying the Agent on RaspberryPI][8]
 * [Hubot Script - Request snapshots in chat using the Datadog API][9]
+* [Custom Legacy OpenMetrics Check][10]
 
 [1]: /developers/faq/data-collection-resolution-retention/
 [2]: /developers/faq/use-our-webhook-integration-to-create-a-trello-card/
@@ -33,3 +34,4 @@ private: true
 [7]: /developers/faq/is-it-possible-to-integrate-with-thousandeyes/
 [8]: /developers/faq/deploying-the-agent-on-raspberrypi/
 [9]: /developers/faq/hubot-script-request-snapshots-in-chat-using-the-datadog-api/
+[10]: /developers/faq/legacy-openmetrics/
