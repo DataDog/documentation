@@ -2,15 +2,15 @@
 title: Custom Legacy OpenMetrics Check
 kind: documentation
 further_reading:
-- link: "/agent/prometheus/"
+- link: "/agent/kubernetes/prometheus/"
   tag: "Documentation"
   text: "Configuring an OpenMetrics Check"
-- link: "/developers/agent_checks/"
+- link: "/developers/custom_checks/write_agent_check/"
   tag: "Documentation"
   text: "Write a Custom Check"
 - link: "/developers/integrations/"
   tag: "Documentation"
-  text: "Create a new Integration"
+  text: "Introduction to Agent-based Integrations"
 ---
 
 ## Overview
@@ -239,10 +239,10 @@ Available types are: `counter`, `gauge`, `summary`, `untyped`, and `histogram`.
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/kube_dns/datadog_checks/kube_dns/kube_dns.py
-[2]: /agent/prometheus/
+[2]: /agent/kubernetes/prometheus/
 [3]: https://github.com/DataDog/dd-agent/blob/master/checks/prometheus_check.py
-[4]: /agent/agent_checks/#configuration
+[4]: /developers/integrations/
 [5]: https://github.com/DataDog/integrations-core/blob/master/datadog_checks_base/datadog_checks/base/checks/openmetrics/base_check.py
-[6]: https://docs.datadoghq.com/integrations/guide/prometheus-metrics/
-[7]: /agent/guide/agent-commands/#agent-status-and-information
+[6]: /integrations/guide/prometheus-metrics/
+[7]: /agent/guide/agent-commands/?tab=agentv6v7#agent-status-and-information
 [8]: https://datadoghq.dev/integrations-core/base/openmetrics/

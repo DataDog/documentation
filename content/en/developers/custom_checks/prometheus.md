@@ -5,12 +5,12 @@ further_reading:
 - link: "/agent/kubernetes/prometheus"
   tag: "Documentation"
   text: "Configuring an OpenMetrics Check"
-- link: "/developers/agent_checks/"
+- link: "/developers/custom_checks/write_agent_check/"
   tag: "Documentation"
   text: "Write a Custom Check"
 - link: "/developers/integrations/"
   tag: "Documentation"
-  text: "Create a new Integration"
+  text: "Introduction to Agent-based Integrations"
 aliases:
   - /developers/openmetrics/
   - /developers/prometheus/
@@ -270,13 +270,13 @@ exposed metrics from which to share labels, and the values are mappings that con
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/kube_dns/datadog_checks/kube_dns/kube_dns.py
-[2]: /agent/prometheus/
+[2]: /agent/kubernetes/prometheus/
 [3]: https://github.com/DataDog/integrations-core/tree/master/datadog_checks_base/datadog_checks/base/checks/openmetrics/v2
 [4]: https://github.com/DataDog/integrations-core/blob/459e8c12a9c828a0b3faff59df69c2e1f083309c/kong/datadog_checks/kong/check.py#L22-L45
-[5]: /agent/agent_checks/#configuration
+[5]: /developers/integrations/
 [6]: https://github.com/DataDog/integrations-core/tree/master/datadog_checks_base/datadog_checks/base/checks/openmetrics/v2/base.py
 [7]: https://github.com/DataDog/integrations-core/blob/459e8c12a9c828a0b3faff59df69c2e1f083309c/openmetrics/datadog_checks/openmetrics/data/conf.yaml.example#L65-L104
 [8]: https://github.com/DataDog/integrations-core/blob/459e8c12a9c828a0b3faff59df69c2e1f083309c/datadog_checks_base/datadog_checks/base/checks/openmetrics/v2/base.py#L86-L87
-[9]: /agent/guide/agent-commands/#agent-status-and-information
+[9]: /agent/guide/agent-commands/?tab=agentv6v7#agent-status-and-information
 [10]: https://datadoghq.dev/integrations-core/base/openmetrics/
 [11]: https://github.com/DataDog/integrations-core/blob/master/openmetrics/datadog_checks/openmetrics/data/conf.yaml.example
