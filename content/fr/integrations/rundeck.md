@@ -11,13 +11,14 @@ categories:
 creates_events: false
 ddtype: crawler
 dependencies:
-  - 'https://github.com/DataDog/integrations-extras/blob/master/rundeck/README.md'
+  - https://github.com/DataDog/integrations-extras/blob/master/rundeck/README.md
 display_name: Rundeck
 draft: false
 git_integration_title: rundeck
 guid: 2e3492d3-14fd-409d-b339-fb1bc14d7db9
 integration_id: rundeck
 integration_title: Rundeck
+integration_version: ''
 is_public: true
 kind: integration
 maintainer: forrest@rundeck.com
@@ -56,7 +57,7 @@ Préparez au moins une tâche Rundeck qui doit se déclencher en réponse à une
 
 ### Configuration
 
-#### Configuration de Rundeck
+#### Rundeck
 
 1. Dans votre projet Rundeck, cliquez sur l'option de navigation **Webhooks**.
 2. Cliquez sur **Add**.
@@ -74,19 +75,18 @@ Préparez au moins une tâche Rundeck qui doit se déclencher en réponse à une
 1. Ouvrez Datadog et accédez à **Integrations** > **Integrations**.
 2. Recherchez « webhooks ».
 
-![search-dd][3]
-
+    ![search-dd][3]
 
 3. Cliquez sur le carré Webhooks illustré ci-dessus. La fenêtre de configuration s'ouvre alors.
 
-![webhooks-config][4]
+    ![webhooks-config][4]
 
 4. Cliquez sur le bouton **New** et remplissez le formulaire :
   - Donnez un nom au webhook. (a)
   - Collez l'URL associée à votre webhook Rundeck dans le champ URL. Cela correspond à l'étape 7 dans la section ci-dessus. (b)
   - Cliquez sur **Save**. (c)
 
-![webhook-fill][5]
+    ![webhook-fill][5]
 
 Ajoutez cette intégration à n'importe quelle notification d'alerte dans Datadog en ajoutant le destinataire `@webhook-Rundeck_Restart_Service`. Le nom varie en fonction du nom que vous avez donné au webhook à l'étape 4a. Lorsque le monitor déclenche une alerte, le webhook exécute la tâche associée.
 

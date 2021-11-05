@@ -47,10 +47,7 @@ To enable trace collection with your Agent, follow the instructions below:
 
  - Set your operating system. Add `targetSystem: linux` or `targetSystem: windows` to the top of your `values.yaml`.
  - Set the API key: `apiKey: <DATADOG_API_KEY>`
-{{< site-region region="us3,us5,eu,gov" >}} 
- - Set your site so that the Agent sends data to the right Datadog location: `site: `{{< region-param key="dd_site" code="true" >}}
-{{< /site-region >}}
-
+ - Set your Datadog site to: {{< region-param key="dd_site" code="true" >}} (defaults to `site: datadoghq.com`).
  - Then, upgrade your Datadog Helm chart using the following command: `helm upgrade -f values.yaml <RELEASE NAME> datadog/datadog`. If you did not set your operating system in `values.yaml`, add `--set targetSystem=linux` or `--set targetSystem=windows` to this command.
 
 [1]: /agent/kubernetes/?tab=helm
@@ -72,9 +69,7 @@ To enable APM trace collection, open the DaemonSet configuration file and edit t
      # (...)
     ```
 
-{{< site-region region="us3,us5,eu,gov" >}} 
-- Ensure the Agent sends data to the correct Datadog location by setting `site: `{{< region-param key="dd_site" code="true" >}}
-{{< /site-region >}}
+- Set your Datadog site to: {{< region-param key="dd_site" code="true" >}} (defaults to `site: datadoghq.com`).
 
 - **If using an old agent version (7.17 or lower)**, in addition to the steps above, set the `DD_APM_NON_LOCAL_TRAFFIC` and `DD_APM_ENABLED` variable to `true` in your *env* section of the `datadog.yaml` trace Agent manifest:
 
@@ -93,17 +88,7 @@ To enable APM trace collection, open the DaemonSet configuration file and edit t
 {{% tab "Operator" %}}
 
 Update your `datadog-agent.yaml` manifest with:
-{{< site-region region="us" >}} 
-```
-agent:
-  image:
-    name: "gcr.io/datadoghq/agent:latest"
-  apm:
-    enabled: true
-    hostPort: 8126
-```
-{{< /site-region >}}
-{{< site-region region="us3,us5,eu,gov" >}} 
+
 ```
 agent:
   image:
@@ -113,8 +98,7 @@ agent:
     hostPort: 8126
 site: <DATADOG_SITE>
 ```
-Where `<DATADOG_SITE>` is {{< region-param key="dd_site" code="true" >}}, so that the Agent sends data to the right Datadog location.
-{{< /site-region >}}
+Where your `<DATADOG_SITE>` is {{< region-param key="dd_site" code="true" >}} (defaults to `datadoghq.com`).
 
 See the sample [manifest with APM and metrics collection enabled][1] for a complete example.
 

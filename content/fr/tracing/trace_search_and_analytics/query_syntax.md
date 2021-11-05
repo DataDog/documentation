@@ -170,7 +170,7 @@ Les facettes vous permettent de faire pivoter ou de filtrer vos ensembles de don
 
 {{< img src="tracing/app_analytics/search/facets_demo.png" alt="Démonstration facettes" style="width:80%;">}}
 
-### Facettes quantitatives : les mesures
+### Facettes quantitatives (mesures)
 
 **Les mesures vous permettent d'accomplir les tâches suivantes :**
 * Agréger des valeurs à partir de plusieurs traces. Vous pouvez par exemple créer une mesure sur le nombre de lignes dans Cassandra et visualiser le 95e centile ou les principaux référents selon la somme des tailles de fichiers demandée.
@@ -195,23 +195,23 @@ Pour commencer à utiliser un attribut en tant que facette ou dans une recherche
 
 Lorsque vous avez terminé, la valeur de cet attribut est stockée **pour toutes les nouvelles traces** et peut être utilisée dans [la barre de recherche](#barre-de-recherche), [le volet Facettes](#volet-facettes) et la requête de graphique de trace.
 
-### Volet Facettes
+### Volet des facettes
 
 Utilisez les facettes pour filtrer vos traces. La barre de recherche et l'URL s'adaptent automatiquement à vos sélections.
 
 {{< img src="tracing/app_analytics/search/facet_panel.png" alt="Volet Facettes"  style="width:30%;">}}
 
-## Présentation d'Analytics
+## Présentation de la fonctionnalité d'analyse
 
-Utilisez [Analytics][4] pour filtrer les métriques de performance des applications et les [spans indexées][5] en fonction de tags. Cette fonctionnalité vous permet de plonger au cœur des requêtes Web transitant par votre service.
+Utilisez les [Analyses][4] pour filtrer les métriques de performance des applications et les [spans indexées][5] en fonction de tags. Cette fonctionnalité vous permet de plonger au cœur des requêtes Web transitant par votre service.
 
-Analytics est automatiquement activé pour tous les [services][6] d'APM, avec 100 % de données ingérées pendant 15 minutes (période mobile). Les spans indexées à l'aide de [filtres de rétention][7] personnalisés et à l'aide de l'ancien système App Analytics sont disponibles dans Analytics pendant 15 jours.
+Les analyses sont automatiquement activées pour tous les [services][6] d'APM, avec 100 % de données ingérées pendant 15 minutes (période mobile). Les spans indexées à l'aide de [filtres de rétention][7] personnalisés et à l'aide de l'ancien système App Analytics sont disponibles dans les analyses pendant 15 jours.
 
 Les services en aval comme les bases de données et les couches du cache ne font pas partie des services disponibles (car ils ne génèrent pas leurs propres traces), mais les informations les concernant sont récupérées par les services de haut niveau qui les appellent.
 
-## Requête Analytics
+## Requête d'analyse
 
-Créez une requête pour contrôler les données affichées dans votre analyse Analytics :
+Créez une requête pour contrôler les données affichées dans votre analyse :
 
 1. Choisissez la métrique `Duration` ou une [facette][8] à analyser. La métrique `Duration` vous permet de choisir la fonction d'agrégation, tandis qu'une facette affiche le nombre de valeurs uniques.
 
@@ -236,11 +236,11 @@ Créez une requête pour contrôler les données affichées dans votre analyse A
 
 ## Visualisations
 
-Sélectionnez un type de visualisation Analytics à l'aide du sélecteur d'analyse :
+Sélectionnez un type de visualisation à l'aide du sélecteur d'analyse :
 
-* [Série temporelle](#timeseries)
+* [Série temporelle](#serie-temporelle)
 * [Top List](#top-list)
-* [Tableau](#table)
+* [Tableau](#tableau)
 
 ### Série temporelle
 
@@ -250,7 +250,7 @@ L'analyse sous forme de série temporelle suivante illustre l'évolution de la *
 
 {{< img src="tracing/app_analytics/analytics/timeserie_example.png" alt="exemple de série temporelle"  style="width:90%;">}}
 
-### Top List (Valeurs les plus élevées)
+### Top list
 
 Visualisez les valeurs les plus élevées d'une facette en fonction de leur `Duration` (ou d'une facette correspondant à un nombre unique de valeurs).
 
@@ -309,7 +309,7 @@ Exportez votre [analyse][4] depuis la recherche de traces ou créez-en une direc
 [8]: /fr/tracing/trace_search_and_analytics/query_syntax/#facets
 [9]: /fr/tracing/trace_search_and_analytics/query_syntax/#measures
 [10]: /fr/tracing/visualization/#trace
-[11]: /fr/monitors/monitor_types/apm/
+[11]: /fr/monitors/create/types/apm/
 [12]: /fr/dashboards/timeboard/
 [13]: /fr/help/
 [14]: /fr/tracing/visualization/#indexed-span

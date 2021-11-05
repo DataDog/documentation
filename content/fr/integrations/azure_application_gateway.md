@@ -7,12 +7,13 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Surveillez des métriques clés d'Azure Application Gateway.
-doc_link: 'https://docs.datadoghq.com/integrations/azure_application_gateway/'
+doc_link: https://docs.datadoghq.com/integrations/azure_application_gateway/
 draft: false
 git_integration_title: azure_application_gateway
 has_logo: true
 integration_id: azure-applicationgateway
 integration_title: Microsoft Azure Application Gateway
+integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'

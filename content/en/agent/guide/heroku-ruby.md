@@ -668,7 +668,7 @@ Agent (v7.27.0)
 [6]: https://devcenter.heroku.com/articles/getting-started-with-ruby/
 [7]: https://devcenter.heroku.com/articles/heroku-postgresql#local-setup
 [8]: https://app.datadoghq.com
-[9]: https://app.datadoghq.com/account/settings#api
+[9]: https://app.datadoghq.com/organization-settings/api-keys
 [10]: https://docs.datadoghq.com/agent/basic_agent_usage/heroku/
 [11]: https://devcenter.heroku.com/articles/buildpacks/
 [12]: https://app.datadoghq.com/infrastructure/map?fillby=avg%3Adatadog.heroku_agent.running&filter=dyno%3Aweb.1

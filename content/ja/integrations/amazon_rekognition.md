@@ -6,12 +6,13 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Amazon Rekognition のキーメトリクスを追跡
-doc_link: 'https://docs.datadoghq.com/integrations/amazon_rekognition/'
+doc_link: https://docs.datadoghq.com/integrations/amazon_rekognition/
 draft: false
 git_integration_title: amazon_rekognition
 has_logo: true
 integration_id: amazon-rekognition
 integration_title: Amazon Rekognition
+integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'

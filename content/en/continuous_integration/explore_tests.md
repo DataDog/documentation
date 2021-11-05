@@ -14,7 +14,7 @@ The [Tests][1] page, under the CI menu in Datadog, provides a test-first view in
 
 ## Explore tests
 
-The Tests page shows the _Branches_ view and the _Test Services_ view.
+The Tests page shows the _Branches_ view and the _Default Branches_ view.
 
 ### Branches view
 
@@ -42,11 +42,11 @@ Click into one of the test runs to see the test trace as a flame graph or a span
 
 Click the CI provider link to drill down to the Resource, Service, or Analytics page for the test. You can also find complete tags information and links to related log events and network monitoring events.
 
-### Test services view
+### Default Branches view
 
-A _test service_ is a group of tests associated with, for example, a project or repo. It contains all the individual tests for your code, optionally organized into _test suites_ (which are like folders for your tests). The [Test Services][3] view of the Tests page shows aggregated health metrics for the _default_ branch of each test service. This view is useful for teams to understand the overall health of the service over time.
+A _test service_ is a group of tests associated with, for example, a project or repo. It contains all the individual tests for your code, optionally organized into _test suites_ (which are like folders for your tests). The [Default Branches][3] view of the Tests page shows aggregated health metrics for the _default_ branch of each test service. This view is useful for teams to understand the overall health of the service over time.
 
-The Test Services view shows the same information as the Branches view, but applied to the default branch, and sorted by most recent. It compares the current wall time with the average default branch wall time, to give you an indication of how your test suite performance is trending over time.
+The Default Branches view shows similar information to the Branches view, but applied to the default branch, and sorted by most recent. It compares the current wall time with the average default branch wall time, to give you an indication of how your test suite performance is trending over time.
 
 Click on a row to see the analytics for tests run on the default branch, similar to drilling down for test run details from the Branches view.
 
@@ -74,7 +74,7 @@ Test execution data is available when you create widgets in [Dashboards][8] and 
 
 [1]: https://app.datadoghq.com/ci/test-services
 [2]: https://app.datadoghq.com/ci/test-services?view=branches
-[3]: https://app.datadoghq.com/ci/test-services?view=test-services
+[3]: https://app.datadoghq.com/ci/test-services?view=default-branches
 [4]: https://app.datadoghq.com/ci/test-runs
 [5]: https://www.datadoghq.com/auto-instrumentation/
 [6]: https://app.datadoghq.com/ci/test-runs?viz=timeseries

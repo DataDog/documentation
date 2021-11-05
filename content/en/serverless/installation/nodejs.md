@@ -120,7 +120,7 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
 
 [1]: https://docs.datadoghq.com/serverless/serverless_integrations/plugin
 [2]: /serverless/libraries_integrations/extension
-[3]: https://app.datadoghq.com/account/settings#api
+[3]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{% tab "AWS SAM" %}}
 
@@ -166,7 +166,7 @@ More information and additional parameters can be found in the [macro documentat
 [1]: https://docs.datadoghq.com/serverless/serverless_integrations/macro
 [2]: /serverless/libraries_integrations/extension
 [3]: https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html
-[4]: https://app.datadoghq.com/account/settings#api
+[4]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{% tab "AWS CDK" %}}
 
@@ -213,7 +213,7 @@ More information and additional parameters can be found in the [Datadog CDK NPM 
 
 [1]: https://www.npmjs.com/package/datadog-cdk-constructs
 [2]: https://github.com/DataDog/datadog-lambda-js/releases
-[3]: https://app.datadoghq.com/account/settings#api
+[3]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{% tab "Container Image" %}}
 
@@ -254,12 +254,11 @@ Replace `<TAG>` with either a specific version number (for example, `{{< latest-
 2. Set the following environment variables in AWS:
   - Set `DD_LAMBDA_HANDLER` to your original handler, for example, `myfunc.handler`.
   - Set `DD_TRACE_ENABLED` to `true`.
-  - Set `DD_FLUSH_TO_LOG` to `true`.
   - Set `DD_API_KEY` with your Datadog API key from the [API Management page][2].
 3. Optionally add `service` and `env` tags with appropriate values to your function.
 
 [1]: https://gallery.ecr.aws/datadog/lambda-extension
-[2]: https://app.datadoghq.com/account/settings#api
+[2]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{% tab "Terraform" %}}
 
@@ -327,7 +326,7 @@ resource "aws_lambda_function" "my_func" {
     terraform apply -var "dd_api_key=<DD_API_KEY>"
     ```
 
-[1]: https://app.datadoghq.com/account/settings#api
+[1]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{% tab "Custom" %}}
 
@@ -433,7 +432,7 @@ Follow these steps to configure the function:
 
 [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
 [2]: https://www.npmjs.com/package/datadog-lambda-js
-[3]: https://app.datadoghq.com/account/settings#api
+[3]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{< /tabs >}}
 
