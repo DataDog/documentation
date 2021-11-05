@@ -37,7 +37,7 @@ For more information about computing Apdex with service monitoring data, see [Co
 
 In the example below, you can use the View RUM events and the Largest Contentful Paint performance metric to calculate Apdex. 
 
-With a threshold of `T = 2 sec` and the minimum frustrating latency of `4T = 8 sec`, compute three queries with a formula in a Query Value widget to visualize your Apex score on a quick graph.
+Let's use a hypothetical threshold of `T = 2 sec`. The minimum frustrating latency is `4T = 8 sec`. Compute three queries with a formula in a Query Value widget to visualize your Apex score on a quick graph.
 
 ### Create a quick graph
 
