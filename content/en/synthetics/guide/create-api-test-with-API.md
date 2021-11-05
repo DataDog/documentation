@@ -16,7 +16,7 @@ This guide contains examples of configuration files you can use to create API te
 
 To create API tests with the API, see the [JSON configuration examples](#json-configuration). To create a HTTP test with the Python client, see the [Python client example](#python-client).
 
-For more information, see [Create an API test][1] in the API Documentation.
+For more information, see [Create an API test][1] in the API documentation.
 
 ## JSON configuration
 
