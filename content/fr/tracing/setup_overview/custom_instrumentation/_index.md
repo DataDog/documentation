@@ -22,8 +22,8 @@ further_reading:
   - link: tracing/opentracing
     text: Implémenter OpenTracing dans vos applications
   - link: tracing/visualization/
-    text: 'Explorer vos services, ressources et traces'
-  - link: 'https://www.datadoghq.com/blog/opentelemetry-instrumentation/'
+    text: Explorer vos services, ressources et traces
+  - link: https://www.datadoghq.com/blog/opentelemetry-instrumentation/
     text: En savoir plus sur Datadog et l'initiative OpenTelemetry
 ---
 L'instrumentation personnalisée consiste à écrire du code afin de créer, modifier ou supprimer des traces à envoyer à Datadog. Cela vous permet d'effectuer un tracing du code interne qui n'est pas couvert par l'instrumentation automatique, de supprimer les spans non pertinentes de vos traces, de renforcer votre visibilité et de profiter d'un contexte plus complet dans les spans, notamment via l'ajout de [tags de span][1].

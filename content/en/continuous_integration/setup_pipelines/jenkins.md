@@ -5,9 +5,9 @@ further_reading:
     - link: "/continuous_integration/explore_pipelines"
       tag: "Documentation"
       text: "Explore Pipeline Execution Results and Performance"
-    - link: "/continuous_integration/setup_pipelines/custom_spans/"
+    - link: "/continuous_integration/setup_pipelines/custom_commands/"
       tag: "Documentation"
-      text: "Extending Pipeline Visibility with Custom Spans"
+      text: "Extend Pipeline Visibility by tracing individual commands"
     - link: "/continuous_integration/troubleshooting/"
       tag: "Documentation"
       text: "Troubleshooting CI"
@@ -26,7 +26,7 @@ If the Jenkins controller and the Datadog Agent have been deployed to a Kubernet
 
 ## Install the Datadog Jenkins plugin
 
-Install and enable the [Datadog Jenkins plugin][3] v3.1.0 or newer:
+Install and enable the [Datadog Jenkins plugin][3] v3.3.0 or newer:
 
 1. In your Jenkins instance web interface, go to **Manage Jenkins > Manage Plugins**.
 2. In the [Update Center][4] on the **Available** tab, search for `Datadog Plugin`.
@@ -261,6 +261,88 @@ pipeline {
     stages {
         ...
     }
+}
+{{< /code-block >}}
+
+## Set Git information manually
+
+The Jenkins plugin uses environment variables to determine the Git information. However, these environment variables are not always set
+automatically due to dependencies on the Git plugin that is being used in the pipeline.
+
+If the Git information is not detected automatically, you can set the following environment variables manually.
+
+**Note:** These variables are optional, but if they are set, they take precedence over the Git information set by other Jenkins plugins.
+
+`DD_GIT_REPOSITORY` (Optional)
+: The repository URL of your service.<br/>
+**Example**: `https://github.com/my-org/my-repo.git`
+
+`DD_GIT_BRANCH` (Optional)
+: The branch name.<br/>
+**Example**: `main`
+
+`DD_GIT_TAG` (Optional)
+: The tag of the commit (if any).<br/>
+**Example**: `0.1.0`
+
+`DD_GIT_COMMIT_SHA` (Optional)
+: The commit expressed in the hex 40 chars length form.<br/>
+**Example**: `faaca5c59512cdfba9402c6e67d81b4f5701d43c`
+
+`DD_GIT_COMMIT_MESSAGE` (Optional)
+: The commit message.<br/>
+**Example**: `Initial commit message`
+
+`DD_GIT_COMMIT_AUTHOR_NAME` (Optional)
+: The name of the author of the commit.<br/>
+**Example**: `John Smith`
+
+`DD_GIT_COMMIT_AUTHOR_EMAIL` (Optional)
+: The email of the author of the commit.<br/>
+**Example**: `john@example.com`
+
+`DD_GIT_COMMIT_AUTHOR_DATE` (Optional)
+: The date when the author submitted the commit expressed in ISO 8601 format.<br/>
+**Example**: `2021-08-16T15:41:45.000Z`
+
+`DD_GIT_COMMIT_COMMITTER_NAME` (Optional)
+: The name of the committer of the commit.<br/>
+**Example**: `Jane Smith`
+
+`DD_GIT_COMMIT_COMMITTER_EMAIL` (Optional)
+: The email of the committer of the commit.<br/>
+**Example**: `jane@example.com`
+
+`DD_GIT_COMMIT_COMMITTER_DATE` (Optional)
+: The date when the committer submitted the commit expressed in ISO 8601 format.<br/>
+**Example**: `2021-08-16T15:41:45.000Z`
+
+If you set only repository, branch and commit, the plugin will try to extract the rest of the Git information from the `.git` folder.
+
+An example of usage:
+
+{{< code-block lang="groovy" >}}
+pipeline {
+  agent any
+  stages {
+    stage('Checkout') {
+      steps {
+        script {
+          def gitVars = git url:'https://github.com/my-org/my-repo.git', branch:'some/feature-branch'
+
+          // Setting Git information manually via environment variables.
+          env.DD_GIT_REPOSITORY_URL=gitVars.GIT_URL
+          env.DD_GIT_BRANCH=gitVars.GIT_BRANCH
+          env.DD_GIT_COMMIT_SHA=gitVars.GIT_COMMIT
+        }
+      }
+    }
+    stage('Test') {
+      steps {
+        // Execute the rest of the pipeline.
+      }
+    }
+  }
 }
 {{< /code-block >}}
 

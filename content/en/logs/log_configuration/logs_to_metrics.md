@@ -28,7 +28,7 @@ To generate a new log-based metric, go to the [Configuration page][4] of your Da
 
 You can also create metrics from an Analytics search by selecting the "Generate new metric" option from the Export menu.
 
-{{< img src="logs/processing/logs_to_metrics/metrics_from_analytics.png" alt="Generate Logs to metric"  style="width:80%;">}}
+{{< img src="logs/processing/logs_to_metrics/metrics_from_analytics.jpg" alt="Generate Logs to metric"  style="width:80%;">}}
 
 ### Add a new log-based metric
 

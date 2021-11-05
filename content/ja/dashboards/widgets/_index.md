@@ -25,7 +25,6 @@ aliases:
     {{< nextlink href="/dashboards/widgets/image" >}}イメージ{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/log_stream" >}}ログストリーム{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/monitor_summary" >}}モニターサマリー{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/network" >}}ネットワーク{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/note" >}}ノート &amp; リンク{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/query_value" >}}クエリ値{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/scatter_plot" >}}散布図{{< /nextlink >}}

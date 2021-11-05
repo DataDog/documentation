@@ -3,11 +3,11 @@ title: Datadog クリップボード
 kind: documentation
 description: インシデントの作成と管理
 further_reading:
-  - link: 'https://www.datadoghq.com/blog/datadog-clipboard/'
+  - link: https://www.datadoghq.com/blog/datadog-clipboard/
     tag: ブログ
     text: Datadog クリップボードでデータを楽に検索
 ---
-# 概要
+## 概要
 
 Datadog クリップボードは、さまざまなコンテキストを収集して共有するためのクロスプラットフォーム型ツールです。各ユーザーが個別に使用でき、コピーしたすべてのグラフを保存したリンクと一緒に保存できます。また、シグナルは分類して、ダッシュボード、ノートブック、インシデントにエクスポートできます。
 

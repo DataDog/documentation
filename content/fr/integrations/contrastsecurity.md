@@ -10,13 +10,14 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-extras/blob/master/contrastsecurity/README.md'
+  - https://github.com/DataDog/integrations-extras/blob/master/contrastsecurity/README.md
 display_name: contrastsecurity
 draft: false
 git_integration_title: contrastsecurity
 guid: 8483bcdc-3d45-48ee-8a73-75511a67ad5f
 integration_id: contrastsecurity
 integration_title: Contrast Security
+integration_version: ''
 is_public: true
 kind: integration
 maintainer: kristiana.mitchell@contrastsecurity.com
@@ -38,7 +39,7 @@ L'intégration Datadog/Contrast Security vous permet de transmettre vos logs Co
 
 ## Configuration
 
-### Activer la collecte de logs Contrast Security
+### Collecte de logs
 
 Sur les plateformes Linux, l'activation de la collecte de logs pour l'Agent Datadog se fait dans `/etc/datadog-agent/datadog.yaml`. Sur les autres plateformes, consultez la [section Fichiers de configuration de l'Agent][1] pour connaître l'emplacement de votre fichier de configuration :
 
@@ -58,13 +59,13 @@ logs_enabled: true
         source: contrastsecurity
     ```
 
-Pour en savoir plus sur les logs : https://docs.contrastsecurity.com/installation-setupconfig.html#log
+Pour en savoir plus sur les logs, consultez la [documentation de Contrast Security][2].
 
-- [Redémarrez l'Agent Datadog][2].
+- [Redémarrez l'Agent Datadog][3].
 
-Pour en savoir plus, consultez la [documentation sur la collecte de logs][3].
-
-Pour en savoir plus, consultez la [documentation sur la création d'un dashboard via l'API Datadog][4].
+Pour en savoir plus, consultez les ressources suivantes :
+- [Documentation Datadog sur les logs][4]
+- [Documentation Datadog sur l'API permettant de créer des dashboards][5]
 
 ## Données collectées
 
@@ -79,7 +80,10 @@ L'intégration Contrast n'envoie aucun événement.
 ### Checks de service
 
 L'intégration Contrast n'inclut aucun check de service.
-[1]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/?tab=agentv6
-[2]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#restart-the-agent
-[3]: https://docs.datadoghq.com/fr/logs/log_collection/?tab=tailexistingfiles#getting-started-with-the-agent
-[4]: https://docs.datadoghq.com/fr/api/?lang=bash#create-a-dashboard
+
+
+[1]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/
+[2]: https://docs.contrastsecurity.com/
+[3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#restart-the-agent
+[4]: https://docs.datadoghq.com/fr/logs/log_collection/#getting-started-with-the-agent
+[5]: https://docs.datadoghq.com/fr/api/#create-a-dashboard

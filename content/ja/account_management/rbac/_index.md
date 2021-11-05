@@ -11,7 +11,7 @@ further_reading:
   - link: /api/v2/roles/
     tag: Documentation
     text: Roles API を使用してロールとアクセス許可を管理する
-  - link: '/api/v2/roles/#list-permissions'
+  - link: /api/v2/roles/#list-permissions
     tag: Documentation
     text: Permission API を使用してアクセス許可を管理する
   - link: /account_management/rbac/permissions
@@ -60,7 +60,7 @@ Datadog アプリケーション、[Datadog ロール API][6]、または SAML �
 3. ロールに名前を付けます。
 4. 任意 - ロールにアクセス許可セットを割り当てます。利用可能なアクセス許可の詳細については、[Datadog ロールのアクセス許可][2]ドキュメントを参照してください。
 
-{{< img src="account_management/rbac/create_role.png" alt="カスタムロールの作成"  style="width:90%;">}}
+{{< img src="account_management/rbac/create_role.png" alt="カスタムロールの作成" style="width:90%;">}}
 
 ロールを作成したら、[このロールを既存のユーザーに追加][3]できます。
 
@@ -90,7 +90,7 @@ Datadog アプリケーション、[Datadog ロール API][6]、または SAML �
 3. ロールのアクセス許可セットを変更します。利用可能なアクセス許可の詳細については、[Datadog ロールのアクセス許可][2]ドキュメントを参照してください。
 4. 変更を保存します。
 
-{{< img src="account_management/rbac/edit_role.png" alt="ロールの編集"  style="width:90%;">}}
+{{< img src="account_management/rbac/edit_role.png" alt="ロールの編集" style="width:90%;">}}
 
 ロールが変更されると、そのロールを持つすべてのユーザーのアクセス許可が更新されます。
 
@@ -118,11 +118,11 @@ Datadog アプリケーション、[Datadog ロール API][6]、または SAML �
 2. 削除するロールの削除ボタンを選択します。
 3. 決定を確認します。
 
-{{< img src="account_management/rbac/delete_role.png" alt="ロールの削除"  style="width:90%;">}}
+{{< img src="account_management/rbac/delete_role.png" alt="ロールの削除" style="width:90%;">}}
 
-{{< img src="account_management/users/delete_role_confirmation.png" alt="ロールの削除"  style="width:90%;">}}
+{{< img src="account_management/users/delete_role_confirmation.png" alt="ロールの削除" style="width:90%;">}}
 
-ロールが削除されると、そのロールを持つすべてのユーザーのアクセス許可が更新されます。ユーザーは、ロールがないと Datadog を効果的に使用できませんが、それでも制限されたアクセス権を持つことができます。ユーザーが組織へのアクセスを必要としない場合は、ユーザーがロールを持っているか、無効になっていることを必ず確認する必要があります。
+ロールが削除されると、そのロールを持つすべてのユーザーのアクセス許可が更新されます。ロールのないユーザーは Datadog を効果的に使用できませんが、それでも制限されたアクセス権を持つことができます。ユーザーが組織へのアクセスを必要としない場合は、ユーザーがロールを持っているか、無効になっていることを必ず確認する必要があります。
 
 
 [1]: https://app.datadoghq.com/access/roles
@@ -152,4 +152,4 @@ RBAC ロールをセットアップしたら、ユーザーロール別にダッ
 [6]: /ja/api/v2/roles/
 [7]: /ja/account_management/rbac/permissions/
 [8]: /ja/dashboards/#restrict-access
-[9]: /ja/getting_started/application/monitors/#restrict-access
+[9]: /ja/getting_started/monitors/#restrict-access

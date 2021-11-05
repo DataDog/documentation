@@ -5,16 +5,17 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Datadog を使用して Azure Deployment Manager でのカナリアデプロイを監視
-doc_link: 'https://docs.datadoghq.com/integrations/azure_deployment_manager/'
+doc_link: https://docs.datadoghq.com/integrations/azure_deployment_manager/
 draft: false
 further_reading:
-  - link: 'https://www.datadoghq.com/blog/canary-deployments-with-azure-and-datadog/'
+  - link: https://www.datadoghq.com/blog/canary-deployments-with-azure-and-datadog/
     tag: ブログ
     text: Azure Deployment Manager と Datadog を使用したカナリアリリース
 git_integration_title: azure_deployment_manager
 has_logo: true
 integration_id: ''
 integration_title: Microsoft Azure Deployment Manager
+integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'
@@ -39,7 +40,7 @@ Datadog を ADM の健全性チェックとして使用するには、アクテ�
 
 1. 最初に、デプロイ用のモニターを Datadog でセットアップします。リージョンごとのモニターのセットアップから始めます。アプリケーションの複雑さによっては、各リージョンで、デプロイのさまざまな部分にそれぞれモニターが必要になる場合があります。[チュートリアル: Resource Manager テンプレートで Azure Deployment Manager を使用する][1]に従うと、何を監視するかを決定する際に役立ちます。モニターの考え方については、[こちらのブログ記事][2]を参照してください。
 2. リージョンごとに複数のモニターをセットアップすることにした場合は、ロールアウト手順ごと、またはリージョンごとに[複合条件モニター][3]を作成します。複合条件モニターは、複数のモニターを論理的に組み合わることで、1 つのデプロイ手順の全体的なステータスを示します。
-3. 次に、[ロールアウトの一環として][4]、Azure Deployment Manager のトポロジー内で Datadog を健全性チェックとして構成します。この健全性チェックは、デプロイ手順間の依存関係として設定します。[こちらのテンプレート](#Full-configuration-example)を使用し、`<API_KEY>` と `<APP_KEY>` をそれぞれ Datadog API キーとアプリケーションキーに置き換えてください。また、前の手順で作成した各モニター (または複合条件モニター) の `resources` にセクションを作成し、`<MONITOR_ID>` をモニター ID に置き換えます。1 つの[健全性チェック手順](#Example-health-check-step)に複数のチェックを追加することは可能ですが、健全性チェック手順ごとに[チェック](#Example-health-check)を 1 つ作成し、複合条件モニターごとに複数の健全性チェック手順を作成することをお勧めします。複合条件モニター以外を使用してチェックを設定している場合は、適宜 `regex` を更新してください。
+3. 次に、[ロールアウトの一環として][4]、Azure Deployment Manager のトポロジー内で Datadog を健全性チェックとして構成します。この健全性チェックは、デプロイ手順間の依存関係として設定します。[テンプレート](#full-configuration-example)を使用し、`<API_KEY>` と `<APP_KEY>` をそれぞれ Datadog API キーとアプリケーションキーに置き換えてください。また、前の手順で作成した各モニター (または複合条件モニター) の `resources` にセクションを作成し、`<MONITOR_ID>` をモニター ID に置き換えます。1 つの[健全性チェック手順](#example-health-check-step)に複数のチェックを追加することは可能ですが、健全性チェック手順ごとに[チェック](#example-health-check)を 1 つ作成し、複合条件モニターごとに複数の健全性チェック手順を作成することをお勧めします。複合条件モニター以外を使用してチェックを設定している場合は、適宜 `regex` を更新してください。
 4. [Microsoft のドキュメント][5]に従って、デプロイを開始します。
 
 #### 健全性チェック例

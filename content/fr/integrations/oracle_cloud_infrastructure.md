@@ -6,12 +6,14 @@ categories:
   - log collection
 dependencies: []
 description: Permet d'envoyer des logs personnalisés et des logs de services depuis Oracle Cloud Infrastructure vers Datadog.
-doc_link: 'https://docs.datadoghq.com/integrations/oracle_cloud_infrastructure/'
+doc_link: https://docs.datadoghq.com/integrations/oracle_cloud_infrastructure/
 draft: false
 further_reading: []
 git_integration_title: oracle_cloud_infrastructure
 has_logo: true
+integration_id: oracle-cloud-infrastructure
 integration_title: Oracle Cloud Infrastructure
+integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'
@@ -25,7 +27,7 @@ version: '1.0'
 
 Oracle Cloud Infrastructure (OCI) est une infrastructure en tant que service (IaaS) et une plateforme en tant que service (PaaS) utilisée par les plus grandes entreprises. Celle-ci inclut un ensemble complet de services gérés pour l'hébergement, le stockage, la mise en réseau, les bases de données, et bien plus encore.
 
-Grâce à notre nouvelle intégration, les utilisateurs d'OCI peuvent transmettre directement l'ensemble de leurs logs vers Datadog, où ils peuvent alors être stockés indéfiniment, analysés à des fins de dépannage, et surveillés à des fins de sécurité et de conformité.
+Grâce à l'intégration Datadog, les utilisateurs d'OCI peuvent transmettre directement l'ensemble de leurs logs vers Datadog, où ils peuvent alors être stockés indéfiniment, analysés à des fins de dépannage, et surveillés à des fins de sécurité et de conformité.
 
 ## Configuration
 
@@ -34,8 +36,6 @@ Grâce à notre nouvelle intégration, les utilisateurs d'OCI peuvent transmettr
 Pour envoyer des logs depuis Oracle Cloud Infrastructure vers Datadog, suivez l'une des méthodes ci-dessous :
 
 {{< tabs >}}
-
-
 {{% tab "Service Connector Hub" %}}
 
 1. Configurez un log OCI.
@@ -57,18 +57,17 @@ Les instructions ci-dessous utilisent le portail OCI pour configurer l'intégrat
 9. Sous **Configure Log**, sélectionnez "Write Access Events" comme **Log Category**, puis saisissez le nom de votre choix dans le champ **Name**.
 10. Cliquez sur **Enable Log** pour créer un nouveau log OCI.
 
-Pour en savoir plus sur les logs OCI, consultez la [documentation Oracle sur les logs][1].
+Pour en savoir plus sur les logs OCI, consultez la section [Activation de la journalisation pour une ressource][1].
 
 #### Fonction OCI
 
 1. Depuis le portail OCI, accédez à *Solutions and Platform -> Developer Services -> Functions.*
 2. Sélectionnez une application existante ou cliquez sur **Create Application**.
-3. Créez une nouvelle fonction OCI au sein de votre application. Consultez la [documentation Oracle sur les fonctions][2] pour en savoir plus.
+3. Créez une nouvelle fonction OCI au sein de votre application. Consultez la section [Présentation de Functions][2] de la documentation Oracle pour en savoir plus.
 4. Il est conseillé de commencer par créer une fonction Python réutilisable et de remplacer les fichiers générés automatiquement par le code source de Datadog :
    - Remplacez `func.py` par le code se trouvant dans le [référentiel OCI de Datadog][3].
    - Remplacez `func.yaml` par le code se trouvant dans le [référentiel OCI de Datadog][4]. Remplacez `DATADOG_TOKEN` et `DATADOG_HOST` par votre clé d'API Datadog et le lien d'admission des logs pour votre région.
    - Remplacez `requirements.txt` par le code se trouvant dans le [référentiel OCI de Datadog][5].
-
 
 #### Service Connector Hub OCI
 
@@ -81,7 +80,7 @@ Pour en savoir plus sur les logs OCI, consultez la [documentation Oracle sur les
 7. Si vous êtes invité à créer une stratégie, cliquez sur **Create**.
 8. Cliquez sur **Save Changes** pour terminer la création de votre Service Connector.
 
-Pour en savoir plus sur le stockage d'objets OCI, consultez la [documentation Oracle sur les Service Connectors][6].
+Pour en savoir plus sur Object Storage OCI, consultez l'[article de blog sur Service Connector][6] (en anglais).
 
 
 [1]: https://docs.cloud.oracle.com/en-us/iaas/Content/Logging/Concepts/service_logs.htm#enabling_logging
@@ -91,9 +90,7 @@ Pour en savoir plus sur le stockage d'objets OCI, consultez la [documentation Or
 [5]: https://github.com/DataDog/Oracle_Logs_Integration/blob/master/Service%20Connector%20%20Hub/requirements.txt
 [6]: https://blogs.oracle.com/cloud-infrastructure/oracle-cloud-infrastructure-service-connector-hub-now-generally-available
 {{% /tab %}}
-
-
-{{% tab "Object Store" %}}
+{{% tab "Stockage d'objets" %}}
 
 1. Configurez un log OCI.
 2. Créez un stockage d'objets OCI et autorisez l'accès en lecture/écriture pour les logs OCI.
@@ -115,9 +112,9 @@ Les instructions ci-dessous utilisent le portail OCI pour configurer l'intégrat
 9. Définissez le type d'entrée sur **Log Path**, indiquez le nom d'entrée de votre choix et utilisez "/" pour les chemins d'accès des fichiers.
 10. Après avoir cliqué sur **Create Custom Log**, votre log OCI est créé et devient disponible sur la page des logs.
 
-Pour en savoir plus sur les logs OCI, consultez la [documentation Oracle sur les logs][1].
+Pour en savoir plus sur les logs OCI, consultez la section [Activation de la journalisation pour une ressource][1].
 
-#### Stockage d'objets OCI
+#### Object Storage OCI
 
 1. Depuis le portail OCI, accédez à *Core Infrastructure -> Object Storage -> Object Storage*.
 2. Cliquez sur **Create Bucket** pour être redirigé vers le formulaire **Create Bucket**.
@@ -129,18 +126,17 @@ Pour en savoir plus sur les logs OCI, consultez la [documentation Oracle sur les
 8. Sélectionnez le même **Compartment** et le même **Log Group** que pour votre log OCI.
 9. Saisissez un nom via le champ **Log Name**, puis sélectionnez la rétention des logs de votre choix.
 
-Pour en savoir plus sur le stockage d'objets OCI, consultez la [documentation Oracle sur le Stockage d'objets][2].
+Pour en savoir plus sur Object Storage OCI, consultez la section [Stockage de données dans Object Storage][2].
 
-#### Fonction OCI
+#### Fonciton OCI
 
 1. Depuis le portail OCI, accédez à *Solutions and Platform -> Developer Services -> Functions.*
 2. Sélectionnez une application existante ou cliquez sur **Create Application**.
-3. Créez une nouvelle fonction OCI au sein de votre application. Consultez la [documentation Oracle sur les fonctions][3] pour en savoir plus.
+3. Créez une nouvelle fonction OCI au sein de votre application. Consultez la [section Présentation de Functions][3] de la documentation Oracle pour en savoir plus.
 4. Il est conseillé de commencer par créer une fonction Python réutilisable et de remplacer les fichiers générés automatiquement par le code source de Datadog :
    - Remplacez `func.py` par le code se trouvant dans le [référentiel OCI de Datadog][4].
    - Remplacez `func.yaml` par le code se trouvant dans le [référentiel OCI de Datadog][5]. Remplacez `DATADOG_TOKEN` et `DATADOG_HOST` par votre clé d'API Datadog et le lien d'admission des logs pour votre région.
    - Remplacez `requirements.txt` par le code se trouvant dans le [référentiel OCI de Datadog][6].
-
 
 #### Événement OCI
 
@@ -153,7 +149,7 @@ Pour en savoir plus sur le stockage d'objets OCI, consultez la [documentation Or
 7. Sélectionnez l'application et la fonction selon l'étape d'installation précédente.
 8. Après avoir cliqué sur **Create Rule**, votre règle est créée et devient disponible dans la liste des règles.
 
-Pour en savoir plus sur les événements OCI, consultez la [documentation Oracle sur les événements][7].
+Pour en savoir plus sur Object Storage OCI, consultez la section [Introduction à Events][7].
 
 
 [1]: https://docs.cloud.oracle.com/en-us/iaas/Content/Logging/Concepts/service_logs.htm#enabling_logging
