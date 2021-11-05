@@ -70,7 +70,7 @@ The **Audit Log Settings** tab allows you to set the retention period of audit l
 
 #### OAuth Apps
 
-The [**OAuth Apps**][9] tab allows you to view or manage OAuth applications in your organization. 
+The [**OAuth Apps**][9] page allows you to view or manage OAuth applications in your organization. 
 
 ### General
 
