@@ -27,7 +27,7 @@ There are two ways to disable an application from the OAuth Apps management page
 1. Hover over your application in the apps table to reveal the **Disable** button on the right side of the row.
 {{< img src="account_management/oauth_apps/disable-app-table.png" alt="Disable button in apps table" style="width:100%;">}}
 
-2. Click on your application to open the detailed view of the application and reveal the **Disable Application** button.
+2. Click on your application to open the detailed view of the application and click the **Disable Application** button.
 {{< img src="account_management/oauth_apps/disable-app-detailed.png" alt="Disable button in app's detailed view" style="width:100%;">}}
 
 **Note**: Enabled applications allow users with necessary permissions to grant it access on their behalf. When re-enabled, users that previously authorized the application are required to re-authorize the application to regain access.
