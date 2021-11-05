@@ -45,7 +45,7 @@
                                   {{ delimit $sec_val "," }}
                               {{ end }}
                               {{ range $scope := $sec_val }}
-                                {{ $s.SetInMap "scopes" $scope (index $spec.components.securitySchemes.AuthZ.flows.implicit.scopes $scope) }}
+                                {{ $s.SetInMap "scopes" $scope (index $spec.components.securitySchemes.AuthZ.flows.authorizationCode.scopes $scope) }}
                               {{ end }}
                           {{ end }}
                         {{ end }}
