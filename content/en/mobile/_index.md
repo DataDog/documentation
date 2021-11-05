@@ -83,11 +83,120 @@ On the Incidents page, you can view, search and filter all incidents that you ha
 
 ## Widgets
 
+### Open Incidents widget
+
+{{< img src="mobile/incident_widget.png" alt="widget page" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
+
+View your [open incidents][13] from your mobile home screen with Datadog widgets.
+
+You can tap any open incident displayed in the widget to have it open with more details in the Datadog mobile app - perfect for diving deeper into issues. 
+
+Also, you can customize your Open Incidents widgets by filtering on:
+- Organization
+- Serverity levels
+- Customers impacted
+- Ordering
+
+#### Create an Open Incidents widget
+
+{{< tabs >}}
+{{% tab "iOS" %}}
+
+- Long press on your home screen.
+- Tap the “+” button on the top left corner of the screen.
+- Search for "Datadog" widgets.
+- Select your prefered size (small, medium, or large).
+- Drag the widget to your desired, on-screen location.
+
+
+{{% /tab %}}
+{{% tab "Android" %}}
+
+- Long press on your home screen.
+- Tap the "Widgets" button on your home screen editor. If you have app shortcuts, it might appear as just an icon on the top right corner of the bubble.
+- Drag the widget to your desired, on-screen home screen.
+- Resize the widget to fit your preference.
+
+
+{{% /tab %}}
+{{< /tabs >}}
+
+#### Edit an Open Incidents widget
+
+{{< tabs >}}
+{{% tab "iOS" %}}
+
+- Long press on the widget to configure.
+- Tap "Edit Widget."
+- Tap "Choose" next to the Organzation label to fetch open incidents from the selected organization.
+- Tap "SEV-1 and SEV-2" next to the Severities label to specify severity filters.
+- Tap "Both" next to the Customer Impacted label to filter on open incidents that have impacted customers.
+- Type in the "Type additional filters" text box to specify any further filtering.
+- Tap "Ordering" to specify the order of how incidents will be listed.
+- Tap out of the widget to validate your selection and exit the configuration screen.
+
+
+{{% /tab %}}
+{{% tab "Android" %}}
+
+- Tap the widget title to configure.
+- Tap "Organization" to fetch open incidents from the selected organization.
+- Tap "Severities" to specify severity filters.
+- Tap "Customer impacted" to filter on open incidents that have impacted customers.
+- Tap "Query" to specify any further filtering.
+- Tap "Sorted by" to specify the order of how incidents will be listed.
+- Tap "Save" or "Apply" to validate your selection and exit the configuration screen.
+- Long press and resize the widget to fit your preference.
+
+
+{{% /tab %}}
+{{< /tabs >}}
+
+#### Display Open Incidents from multiple organizations
+
+You can display open incidents from multiple organizations on your mobile home screen. 
+
+{{< tabs >}}
+{{% tab "iOS" %}}
+- Tap "Choose" next to the Organzation label to fetch open incidents from the selected organization.
+
+
+
+{{% /tab %}}
+{{% tab "Android" %}}
+
+- Tap the widget title to configure.
+- From the configuration screen, tap "Organization".
+- Select a new organization (You might need to sign in).
+- Size the widget to fit your preference.
+- Tap "Save" or "Apply". 
+
+
+{{% /tab %}}
+{{< /tabs >}}
+
+#### Delete an Open Incidents widget
+
+{{< tabs >}}
+{{% tab "iOS" %}}
+
+Delete a widget by tapping the "-" button at the top left of the widget when editing your home screen, or by long pressing on the widget and selecting "Remove Widget".
+
+
+{{% /tab %}}
+{{% tab "Android" %}}
+
+Delete a widget by long pressing, dragging, and dropping the widget to the "Remove" button.
+
+
+{{% /tab %}}
+{{< /tabs >}}
+
 ### SLOs widget
 
 {{< img src="mobile/slo_widget.png" alt="widget page" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
 
-View your [SLOs][13] from your mobile home screen with Datadog widgets. You can add any SLOs from your organization as a widget, along with a timeframe.
+View your [SLOs][14] from your mobile home screen with Datadog widgets. You can add any SLOs from your organization as a widget, along with a timeframe.
 
 Timeframe options are:
 - 7 days
@@ -195,9 +304,9 @@ Delete a widget by long pressing, dragging, and dropping the widget to the "Remo
 
 ### Monitors widget
 
-{{< img src="mobile/widgets.png" alt="widget page" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
+{{< img src="mobile/monitor_widget.png" alt="widget page" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
 
-View your [monitors][14] from your home screen with Datadog widgets. Tap on any cell to open the "Monitor Search" screen in the app, with your monitors already filled in.
+View your [monitors][15] from your home screen with Datadog widgets. Tap on any cell to open the "Monitor Search" screen in the app, with your monitors already filled in.
 
 **Note**: If you do not have any monitor saved views, the widget shows you all monitors by default.
 
@@ -295,7 +404,7 @@ Delete a widget by long pressing, dragging, and dropping the widget on the "Remo
 
 {{< img src="mobile/shortcut_shadow.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Quick Actions">}}
 
-Long-press on the app icon to surface a quick-action sheet of your top five [Frequently Viewed By Me][15] dashboards for iOS (measured by view count and recency) and your five most opened dashboards on mobile for Android. Press on a result to open the dashboard in-app.
+Long-press on the app icon to surface a quick-action sheet of your top five [Frequently Viewed By Me][16] dashboards for iOS (measured by view count and recency) and your five most opened dashboards on mobile for Android. Press on a result to open the dashboard in-app.
 
 ## Search from home screen
 
@@ -317,7 +426,7 @@ With the shortcut, you can access your dashboards and monitors through three key
 
 {{< img src="mobile/siri_shadow.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Shortcuts">}}
 
-For more information on Siri Shortcuts and Suggestions, refer to the [Apple Siri Documentation][16].
+For more information on Siri Shortcuts and Suggestions, refer to the [Apple Siri Documentation][17].
 
 ## Handoff
 
@@ -330,7 +439,7 @@ For Handoff to work, each device must:
 - Have Wi-Fi enabled
 - Have Handoff enabled
 
-For more information on Handoff, refer to the [Apple Handoff Documentation][17].
+For more information on Handoff, refer to the [Apple Handoff Documentation][18].
 
 ## Account
 
@@ -338,7 +447,7 @@ Switch organizations or log out from the Account page.
 
 ## Troubleshooting
 
-For help with troubleshooting, [contact Datadog support][18]. You can also send a message in the [Datadog public Slack][19] [#mobile-app][20] channel.
+For help with troubleshooting, [contact Datadog support][19]. You can also send a message in the [Datadog public Slack][20] [#mobile-app][21] channel.
 
 ### Further Reading
 
@@ -356,11 +465,12 @@ For help with troubleshooting, [contact Datadog support][18]. You can also send 
 [10]: https://app.datadoghq.com/dashboard/lists
 [11]: /dashboards/
 [12]: /monitors/incident_management
-[13]: https://docs.datadoghq.com/dashboards/widgets/slo/#setup
-[14]: /logs/explorer/saved_views/
-[15]: https://app.datadoghq.com/dashboard/lists/preset/5
-[16]: https://support.apple.com/en-us/HT209055
-[17]: https://support.apple.com/en-us/HT209455
-[18]: /help/
-[19]: https://chat.datadoghq.com/
-[20]: https://datadoghq.slack.com/archives/C0114D5EHNG
+[13]: /monitors/incident_management
+[14]: /dashboards/widgets/slo/#setup
+[15]: /logs/explorer/saved_views/
+[16]: https://app.datadoghq.com/dashboard/lists/preset/5
+[17]: https://support.apple.com/en-us/HT209055
+[18]: https://support.apple.com/en-us/HT209455
+[19]: /help/
+[20]: https://chat.datadoghq.com/
+[21]: https://datadoghq.slack.com/archives/C0114D5EHNG
