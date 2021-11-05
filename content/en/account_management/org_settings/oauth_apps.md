@@ -19,7 +19,7 @@ By default, users with [Datadog Standard and Datadog Admin roles][4] can access 
 
 Only users with the Datadog Admin role or the `org_authorized_apps_write` permission can manage OAuth applications on this page, such as disabling applications or revoking OAuth access for a user.
 
-## Disable an OAuth application
+### Disable
 
 Disabling OAuth access for an application revokes access to this application for all users in your organization. While the application remains installed, users are no longer able to use the application and are prompted with an error if they attempt to authorize it.
 
