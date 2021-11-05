@@ -32,7 +32,7 @@ There are two ways to disable an application from the OAuth Apps management page
 
 **Note**: Enabled applications allow users with necessary permissions to grant it access on their behalf. When re-enabled, users that previously authorized the application are required to re-authorize the application to regain access.
 
-## Revoke OAuth access for a user
+### Revoke access
 
 Revoking a user's OAuth access to an application removes all access to that application. If the user has the required permissions to authorize the application, they can regain access by re-authorizing it.
 {{< img src="account_management/oauth_apps/revoke-user.png" alt="Disable button in apps detailed view" style="width:100%;">}}
