@@ -20,13 +20,14 @@ further_reading:
     tag: Documentation
     text: Comprendre comment lire une trace Datadog
 ---
-## Services dans l'APM
+## Services APM
 
-Les services APM calculent des métriques de trace portant sur les erreurs, le débit et la latence. Ces données sont calculées en tenant compte des ressources correspondant à un nom de span unique, à savoir l'opération primaire. Ces métriques de service sont utilisées dans l'ensemble du produit, que ce soit dans la page Service par défaut, la liste des services ou encore la Service map.
+Les services APM calculent des métriques de trace portant sur les erreurs, le débit et la latence. Ces données sont calculées en tenant compte des ressources correspondant à un nom de span unique, à savoir l'opération primaire. Ces métriques de service sont utilisées dans l'ensemble du produit, que ce soit dans la page Service par défaut, la liste des services ou encore la Service Map.
 
 **Remarque** : vous pouvez interroger les métriques de trace en indiquant `trace.*` [espacedenommage][1].
 
-## Définition d'une opération primaire pour un service
+## Opérations primaires
+### Définition
 
 Le nom de l'opération primaire d'un service détermine sa représentation dans l'interface. Le backend Datadog sélectionne automatiquement le nom d'opération avec le plus haut débit de requêtes afin d'en faire le point d'entrée vers le service.
 
@@ -38,7 +39,7 @@ Imaginons qu'un service `web-store` dispose de plusieurs endpoints, instrumenté
 | db                     | `postgres.query`, `db.query`                      |
 | custom-instrumentation | `trace.annotation`, `method.call`                 |
 
-### Configuration de l'opération primaire
+### Configuration
 
 Lorsque plusieurs opérations primaires sont définies pour un service, c'est l'opération avec le plus haut débit de requêtes qui est automatiquement sélectionnée en tant que point d'entrée vers le service. Un administrateur peut également définir manuellement l'opération primaire :
 
@@ -51,13 +52,13 @@ Lorsque plusieurs opérations primaires sont définies pour un service, c'est l'
 
 {{< img src="tracing/guide/primary_operation/configuring-primary-option.png" alt="Enregistrement depuis l'APM" >}}
 
-## Affichage de statistiques sur des noms de span supplémentaires
+## Afficher des statistiques sur des noms de span supplémentaires
 
 Pour vérifier que toutes les traces sont correctement envoyées à Datadog en dehors des instrumentations, vous pouvez consulter vos ressources en appliquant un filtre supplémentaire. Pour ce faire, sélectionnez dans un menu déroulant des noms de span supplémentaires considérés comme des opérations secondaires. Veuillez toutefois noter que ces noms de span ne sont pas utilisés pour calculer les statistiques au niveau des services.
 
 {{< img src="tracing/guide/primary_operation/configuring-primary-option.png" alt="Enregistrement depuis l'APM" >}}
 
-## Configuration de l'opération primaire dans une instrumentation manuelle
+## Instrumentation manuelle
 
 Lorsque vous instrumentez manuellement votre code, définissez de façon statique le nom de la span afin de veiller à ce que vos ressources soient regroupées en fonction de la même opération primaire (par exemple, `web.request`). Si le nom de la span est dynamique, définissez la span en tant que ressource.
 
@@ -78,7 +79,7 @@ Le nom de la ressource est défini manuellement, avec `MainHandler.action`.
 
 Le nom de la ressource prend par défaut cette valeur, car il s'agit du nom de la fonction et de la classe de la ressource dans Tornado.
 
-## Opérations primaires OpenTracing
+## OpenTracing
 
 Dans Datadog, le nom d'opération Opentracing correspond à une ressource, tandis que le tag « component » correspond au nom de la span de Datadog. Pour définir une span avec la ressource « /user/profile » et le nom « http.request » de manière compréhensible pour OpenTracing, utilisez cet exemple en Go : 
 

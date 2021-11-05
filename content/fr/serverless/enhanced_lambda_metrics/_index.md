@@ -19,7 +19,7 @@ Les métriques Lambda optimisées en temps réel suivantes sont disponibles. Ell
 
 
 `aws.lambda.enhanced.invocations`     
-: Mesure le nombre de fois qu'une fonction est appelée en réponse à un appel d'API d'événement ou d'invocation.
+: Mesure le nombre de fois qu'une fonction est appelée en réponse à un événement ou à une invocation d'un appel API.
 
 `aws.lambda.enhanced.errors`          
 : Mesure le nombre d'invocations ayant échoué en raison d'erreurs dans la fonction.

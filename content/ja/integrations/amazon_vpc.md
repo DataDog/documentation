@@ -8,12 +8,13 @@ categories:
 ddtype: crawler
 dependencies: []
 description: AWS VPC ログを収集
-doc_link: 'https://docs.datadoghq.com/integrations/amazon_vpc/'
+doc_link: https://docs.datadoghq.com/integrations/amazon_vpc/
 draft: false
 git_integration_title: amazon_vpc
 has_logo: false
 integration_id: ''
 integration_title: Amazon VPC
+integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
@@ -56,7 +57,7 @@ VPC フローログは、S3 バケットまたは CloudWatch ロググループ�
 
 1. [Datadog ログコレクション AWS Lambda 関数][4] をまだ設定していない場合は、設定を行ってください。
 
-2. Lambda 関数がインストールされたら、AWS コンソールから Amazon VPC フローログを含む S3 バケットまたは CloudWatch のロググループに手動でトリガーを追加します。次に、Lambda のトリガー一覧で S3 または CloudWatch をクリックします。
+2. Lambda 関数がインストールされたら、AWS コンソールを使って Amazon VPC フローログを含む S3 バケットまたは CloudWatch のロググループに手動でトリガーを追加します。次に、Lambda のトリガー一覧で S3 または CloudWatch をクリックします。
 
     {{< img src="integrations/amazon_vpc/s3_trigger_configuration.png" alt="S3 トリガーのコンフィギュレーション" style="width:75%;" >}}
 

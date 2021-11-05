@@ -189,7 +189,7 @@ A full example Kubernetes manifest for deploying the OpenTelemetry Collector as 
 
 1. The example demonstrates deploying the OpenTelemetry Collectors in [agent mode via daemonset][14], which collect relevant k8s node and pod specific metadata, and then forward telemetry data to an OpenTelemetry Collector in [standalone collector mode][15]. This OpenTelemetry Collector in standalone collector mode then exports to the Datadog backend. See [this diagram of this deployment model][16].
 
-2. For OpenTelemetry Collectors deployed as agent by daemonset, in the daemonset, `spec.containers.env` should use the downward API to capture `status.podIP` and add it as part of the `OTEL_RESOURCE` environment variable. This is used by the OpenTelemetry Collector's `resourcedetection` and `k8sattributes` processors, which should be included along with a `batch` processor and added to the `traces` pipeline.
+2. For OpenTelemetry Collectors deployed as agent by daemonset, in the daemonset, `spec.containers.env` should use the downward API to capture `status.podIP` and add it as part of the `OTEL_RESOURCE_ATTRIBUTES` environment variable. This is used by the OpenTelemetry Collector's `resourcedetection` and `k8sattributes` processors, which should be included along with a `batch` processor and added to the `traces` pipeline.
 
     In the daemonset's `spec.containers.env` section:
 
@@ -202,7 +202,7 @@ A full example Kubernetes manifest for deploying the OpenTelemetry Collector as 
             fieldRef:
               fieldPath: status.podIP
           # This is picked up by the resource detector
-        - name: OTEL_RESOURCE
+        - name: OTEL_RESOURCE_ATTRIBUTES
           value: "k8s.pod.ip=$(POD_IP)"
       # ...
     ```
@@ -223,7 +223,6 @@ A full example Kubernetes manifest for deploying the OpenTelemetry Collector as 
       # collector k8sattributes to complete
       k8sattributes:
         passthrough: true
-      batch:
       # ...
     ```
 
@@ -232,7 +231,7 @@ A full example Kubernetes manifest for deploying the OpenTelemetry Collector as 
     ```yaml
       # ...
       # resourcedetection must come before k8sattributes
-      processors: [resourcedetection, k8sattributes, batch]
+      processors: [batch, resourcedetection, k8sattributes]
       # ...
     ```
 
@@ -261,7 +260,7 @@ A full example Kubernetes manifest for deploying the OpenTelemetry Collector as 
 
     ```yaml
       # ...
-      processors: [k8sattributes, batch]
+      processors: [batch, k8sattributes]
       exporters: [datadog]
       # ...
     ```

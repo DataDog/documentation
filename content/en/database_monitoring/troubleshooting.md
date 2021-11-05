@@ -137,12 +137,12 @@ You can also explicitly execute a check by running the `check` CLI command on th
 
 ```bash
 # For self-hosted installations of the Agent
-datadog-agent check postgres -t 2
-datadog-agent check mysql -t 2
+DD_LOG_LEVEL=debug DBM_THREADED_JOB_RUN_SYNC=true datadog-agent check postgres -t 2
+DD_LOG_LEVEL=debug DBM_THREADED_JOB_RUN_SYNC=true datadog-agent check mysql -t 2
 
 # For container-based installations of the Agent
-agent check postgres -t 2
-agent check mysql -t 2
+DD_LOG_LEVEL=debug DBM_THREADED_JOB_RUN_SYNC=true agent check postgres -t 2
+DD_LOG_LEVEL=debug DBM_THREADED_JOB_RUN_SYNC=true agent check mysql -t 2
 ```
 
 ### Query metrics are missing

@@ -83,7 +83,7 @@ Contrast インテグレーションには、サービス チェック機能は�
 
 
 [1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/
-[2]: https://docs.contrastsecurity.com/installation-setupconfig.html#log
+[2]: https://docs.contrastsecurity.com/
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#restart-the-agent
 [4]: https://docs.datadoghq.com/ja/logs/log_collection/#getting-started-with-the-agent
 [5]: https://docs.datadoghq.com/ja/api/#create-a-dashboard
