@@ -2,7 +2,7 @@
 title: Custom OpenMetrics Check
 kind: documentation
 further_reading:
-- link: "/agent/prometheus/"
+- link: "agent/kubernetes/prometheus"
   tag: "Documentation"
   text: "Configuring an OpenMetrics Check"
 - link: "/developers/agent_checks/"
