@@ -2967,7 +2967,7 @@ main:
     parent: organization_settings
     weight: 203
   - name: OAuth Apps
-    url: account_management/oauth_apps
+    url: account_management/org_settings/oauth_apps
     parent: organization_settings
     weight: 204
   - name: RBAC
