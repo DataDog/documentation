@@ -8,7 +8,7 @@ further_reading:
 ---
 ## Overview
 
-The **OAuth Apps** management page in [Organization Settings][1] helps you manage and gain visibility into your organization’s OAuth applications, such as the scopes and permissions granted to an application and the users that have authorized access for it. This includes the Datadog Mobile App and your custom [Datadog Apps][2] that have [OAuth API Access][3] enabled. 
+Use the **OAuth Apps** management page under [Organization Settings][1] to manage and gain visibility into your organization's OAuth applications, such as the scopes and permissions granted to an application and the users that have authorized access for it.
 
 {{< img src="account_management/oauth_apps/org-management-page.png" alt="OAuth Apps management page in Datadog" style="width:100%;">}}
 
