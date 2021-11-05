@@ -137,12 +137,12 @@ You can also explicitly execute a check by running the `check` CLI command on th
 
 ```bash
 # For self-hosted installations of the Agent
-datadog-agent check postgres -t 2
-datadog-agent check mysql -t 2
+DD_LOG_LEVEL=debug DBM_THREADED_JOB_RUN_SYNC=true datadog-agent check postgres -t 2
+DD_LOG_LEVEL=debug DBM_THREADED_JOB_RUN_SYNC=true datadog-agent check mysql -t 2
 
 # For container-based installations of the Agent
-agent check postgres -t 2
-agent check mysql -t 2
+DD_LOG_LEVEL=debug DBM_THREADED_JOB_RUN_SYNC=true agent check postgres -t 2
+DD_LOG_LEVEL=debug DBM_THREADED_JOB_RUN_SYNC=true agent check mysql -t 2
 ```
 
 ### Query metrics are missing
@@ -308,6 +308,30 @@ Some or all queries may not have plans available. This can be due to unsupported
 {{% /tab %}}
 {{< /tabs >}}
 
+### Setup fails on `create extension pg_stat_statements`
+
+{{< tabs >}}
+{{% tab "Postgres" %}}
+
+Example error output from `create extension pg_stat_statements`: 
+```
+create extension pg_stat_statements;
+ERROR:  could not open extension control file "<path>/share/postgresql/extension/pg_stat_statements.control": No such file or directory
+SQL State: 58P01
+```
+
+This error happens when you are missing the `postgresql-contrib` package that includes the `pg_stat_statements` extension. How to install the missing package varies depending on the host's distribution and your Postgres version. As an example, to install the `contrib` package on Ubuntu for Postgres 10, run: 
+
+```
+sudo apt-get install postgresql-contrib-10
+```
+
+See the appropriate version of the [Postgres `contrib` documentation][1] for more information.
+
+
+[1]: https://www.postgresql.org/docs/12/contrib.html
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Need more help?
 

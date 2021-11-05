@@ -182,7 +182,7 @@ For example, suppose you are submitting a HISTOGRAM metric, `request.response_ti
 | Metric Name                                    | Value  | Datadog In-App Type |
 | ---------------------------------------------- | ------ | ------------------- |
 | `request.response_time.histogram.avg`          | `1.88` | GAUGE               |
-| `request.response_time.histogram.count`        | `8`    | RATE                |
+| `request.response_time.histogram.count`        | `0.8`  | RATE                |
 | `request.response_time.histogram.median`       | `2`    | GAUGE               |
 | `request.response_time.histogram.95percentile` | `3`    | GAUGE               |
 | `request.response_time.histogram.max`          | `3`    | GAUGE               |
@@ -218,12 +218,12 @@ That is, for a distribution metric with added percentile aggregations during a g
 
 #### Customization of tagging
 
-This functionality allows you to control tagging for metrics where host-level granularity is not necessary. See the [Distribution Metric page][1] to learn more about whitelist-based tagging control.
+This functionality allows you to control tagging for metrics where host-level granularity is not necessary. Learn more about [Metrics withhout Limits™][1].
 
 **Note**: The exclusion of tags with `!` is not accepted with this feature.
 
 
-[1]: https://app.datadoghq.com/metric/distribution_metrics
+[1]: /metrics/metrics-without-limits/
 {{% /tab %}}
 {{< /tabs >}}
 

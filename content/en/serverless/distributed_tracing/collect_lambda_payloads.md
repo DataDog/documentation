@@ -5,23 +5,26 @@ description: 'Resolve AWS Lambda function failures faster by monitoring invocati
 further_reading:
     - link: 'serverless'
       text: 'Serverless Monitoring with Datadog'
+    - link: 'https://www.datadoghq.com/blog/troubleshoot-lambda-function-request-response-payloads/'
+      text: 'Resolve AWS Lambda function failures faster by monitoring invocation payloads'
+      tag: 'Blog'
 ---
 
 {{< img src="serverless/serverless_collect_lambda_payloads.png" alt="Collect AWS Lambda Payloads"  style="width:100%;" >}}
 
 ## Overview
 
-You can use Datadog to collect and visualize the JSON request and response payloads of AWS Lambda functions, giving you [deeper insight into your serverless applications and helping troubleshoot Lambda function failures][6].
+You can use Datadog to collect and visualize the JSON request and response payloads of AWS Lambda functions, giving you [deeper insight into your serverless applications and helping troubleshoot Lambda function failures][1].
 
 ## Configuration
 
-To instrument your Lambda functions for the first time, follow the [serverless installation instructions][1]. AWS Lambda payload ingestion requires [APM to be configured on your functions][4] and is available for the following Lambda runtimes:
-- Python ([v49+][2])
-- Node.js ([v64+][3])
+To instrument your Lambda functions for the first time, follow the [serverless installation instructions][2]. AWS Lambda payload ingestion requires [APM to be configured on your functions][3] and is available for the following Lambda runtimes:
+- Python ([v49+][4])
+- Node.js ([v64+][5])
 
 Set the `DD_CAPTURE_LAMBDA_PAYLOAD` environment variable to `true` on each of your functions send Lambda request and response payloads to Datadog.
 
-This functionality is also compatible with AWS X-Ray. Follow the steps in the [Datadog-AWS X-Ray integration][5] to enrich AWS Lambda function X-Ray segments with Datadog's Lambda Libraries.
+This functionality is also compatible with AWS X-Ray. Follow the steps in the [Datadog-AWS X-Ray integration][6] to enrich AWS Lambda function X-Ray segments with Datadog's Lambda Libraries.
 
 ## Obfuscating payload contents
 
@@ -72,10 +75,10 @@ DD_APM_REPLACE_TAGS=[
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /serverless/installation
-[2]: https://github.com/DataDog/datadog-lambda-python/releases/tag/v49
-[3]: https://github.com/DataDog/datadog-lambda-js/releases/tag/v4.64.0
-[4]: /serverless/distributed_tracing
-[5]: https://docs.datadoghq.com/integrations/amazon_xray/?tab=nodejs#enriching-xray-segments-with-datadog-libraries
-[6]: https://www.datadoghq.com/blog/troubleshoot-lambda-function-request-response-payloads
+[1]: https://www.datadoghq.com/blog/troubleshoot-lambda-function-request-response-payloads
+[2]: /serverless/installation
+[3]: /serverless/distributed_tracing
+[4]: https://github.com/DataDog/datadog-lambda-python/releases/tag/v49
+[5]: https://github.com/DataDog/datadog-lambda-js/releases/tag/v4.64.0
+[6]: https://docs.datadoghq.com/integrations/amazon_xray/?tab=nodejs#enriching-xray-segments-with-datadog-libraries
 [7]: /tracing/setup_overview/configure_data_security/?tab=mongodb#replace-rules-for-tag-filtering

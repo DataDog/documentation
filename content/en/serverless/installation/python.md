@@ -119,7 +119,7 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
 
 [1]: https://docs.datadoghq.com/serverless/serverless_integrations/plugin
 [2]: https://docs.datadoghq.com/serverless/libraries_integrations/extension
-[3]: https://app.datadoghq.com/account/settings#api
+[3]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{% tab "AWS SAM" %}}
 
@@ -165,7 +165,7 @@ More information and additional parameters can be found in the [macro documentat
 [1]: https://docs.datadoghq.com/serverless/serverless_integrations/macro
 [2]: https://docs.datadoghq.com/serverless/libraries_integrations/extension
 [3]: https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html
-[4]: https://app.datadoghq.com/account/settings#api
+[4]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{% tab "AWS CDK" %}}
 
@@ -200,7 +200,7 @@ Replace `<DATADOG_API_KEY>` with your Datadog API key on the [API Management pag
 
 More information and additional parameters can be found on the [Datadog CDK NPM page][2].
 
-[1]: https://app.datadoghq.com/account/settings#api
+[1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: https://www.npmjs.com/package/datadog-cdk-constructs
 {{% /tab %}}
 {{% tab "Zappa" %}}
@@ -220,7 +220,6 @@ More information and additional parameters can be found on the [Datadog CDK NPM 
       "aws_environment_variables": {
         "DD_LAMBDA_HANDLER": "handler.lambda_handler",
         "DD_TRACE_ENABLED": "true",
-        "DD_FLUSH_TO_LOG": "true",
         "DD_API_KEY": "<DATADOG_API_KEY>",
       }
     }
@@ -238,7 +237,6 @@ More information and additional parameters can be found on the [Datadog CDK NPM 
       "aws_environment_variables": {
         "DD_LAMBDA_HANDLER": "handler.lambda_handler",
         "DD_TRACE_ENABLED": "true",
-        "DD_FLUSH_TO_LOG": "true",
         "DD_API_KEY": "<DATADOG_API_KEY>"
       },
       }
@@ -277,7 +275,7 @@ arn:aws-us-gov:lambda:us-gov-east-1:002406178527:layer:Datadog-Extension-ARM:{{<
 ```
 {{< /site-region >}}
 
-[1]: https://app.datadoghq.com/account/settings#api
+[1]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{% tab "Chalice" %}}
 
@@ -294,7 +292,6 @@ arn:aws-us-gov:lambda:us-gov-east-1:002406178527:layer:Datadog-Extension-ARM:{{<
         "api_gateway_stage": "api",
         "environment_variables": {
           "DD_TRACE_ENABLED": "true",
-          "DD_FLUSH_TO_LOG": "true",
           "DD_API_KEY": "<DATADOG_API_KEY>",
         },
         "layers": ["arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:<EXTENSION_VERSION>"],
@@ -313,7 +310,6 @@ arn:aws-us-gov:lambda:us-gov-east-1:002406178527:layer:Datadog-Extension-ARM:{{<
         "api_gateway_stage": "api",
         "environment_variables": {
           "DD_TRACE_ENABLED": "true",
-          "DD_FLUSH_TO_LOG": "true",
           "DD_API_KEY": "<DATADOG_API_KEY>",
         },
         "layers": ["arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension:<EXTENSION_VERSION>"],
@@ -345,7 +341,7 @@ arn:aws-us-gov:lambda:us-gov-east-1:002406178527:layer:Datadog-Extension-ARM:{{<
     ```
 
 [1]: /serverless/libraries_integrations/extension/
-[2]: https://app.datadoghq.com/account/settings#api
+[2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://aws.github.io/chalice/topics/middleware.html?highlight=handler#registering-middleware
 {{% /tab %}}
 {{% tab "Terraform" %}}
@@ -414,7 +410,7 @@ resource "aws_lambda_function" "my_func" {
     terraform apply -var "dd_api_key=<DD_API_KEY>"
     ```
 
-[1]: https://app.datadoghq.com/account/settings#api
+[1]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{% tab "Container Image" %}}
 
@@ -448,7 +444,7 @@ Replace `<TAG>` with either a specific version number (for example, `{{< latest-
 3. Optionally add `service` and `env` tags with appropriate values to your function.
 
 [1]: https://gallery.ecr.aws/datadog/lambda-extension
-[2]: https://app.datadoghq.com/account/settings#api
+[2]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{% tab "Custom" %}}
 
@@ -498,11 +494,13 @@ arn:aws-us-gov:lambda:us-gov-east-1:002406178527:layer:Datadog-Python37-ARM:{{< 
 
 #### Using the package
 
-Install `datadog-lambda` and its dependencies locally to your function project folder. **Note**: `datadog-lambda` depends on `ddtrace`, which uses native extensions; therefore they must be installed and compiled in a Linux environment. For example, you can use [dockerizePip][2] for the Serverless Framework and [--use-container][3] for AWS SAM. For more details, see [how to add dependencies to your function deployment package][4].
+If you cannot use the prebuilt Datadog Lambda layer for some reason, alternatively install the `datadog-lambda` package and its dependencies locally to your function project folder using your favorite Python package manager, such as `pip`. 
 
 ```sh
 pip install datadog-lambda -t ./
 ```
+
+**Note**: `datadog-lambda` depends on `ddtrace`, which uses native extensions; therefore they must be installed and compiled in a Linux environment on the right architecture (`x86_64` or `arm64`). For example, you can use [dockerizePip][2] for the Serverless Framework and [--use-container][3] for AWS SAM. For more details, see [how to add dependencies to your function deployment package][4].
 
 See the [latest release][5].
 
@@ -545,7 +543,7 @@ Follow these steps to configure the function:
 [3]: https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-cli-command-reference-sam-build.html
 [4]: https://docs.aws.amazon.com/lambda/latest/dg/python-package.html#python-package-dependencies
 [5]: https://pypi.org/project/datadog-lambda/
-[6]: https://app.datadoghq.com/account/settings#api
+[6]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{< /tabs >}}
 

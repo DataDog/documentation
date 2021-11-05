@@ -329,7 +329,7 @@ A list of method annotations to treat as `@Trace`.
 `dd.trace.methods`
 : **Environment Variable**: `DD_TRACE_METHODS`<br>
 **Default**: `null`<br>
-**Example**: `"package.ClassName[method1,method2,...];AnonymousClass$1[call];package.ClassName[*]"`<br>
+**Example**: `package.ClassName[method1,method2,...];AnonymousClass$1[call];package.ClassName[*]`<br>
 List of class/interface and methods to trace. Similar to adding `@Trace`, but without changing code. **Note:** The wildcard method support (`[*]`) does not accommodate constructors, getters, setters, synthetic, toString, equals, hashcode, or finalizer method calls
 
 `dd.trace.classes.exclude`
@@ -658,7 +658,7 @@ Java APM has minimal impact on the overhead of an application:
 - No collections maintained by Java APM grow unbounded in memory
 - Reporting traces does not block the application thread
 - Java APM loads additional classes for trace collection and library instrumentation
-- If you observe the Java APM frequently adding substantially more than a 3% increase in CPU or JVM heap usage, in a way that degrades your application's performance, contact [the Support team][20].
+
 
 
 ## Further Reading
@@ -684,4 +684,3 @@ Java APM has minimal impact on the overhead of an application:
 [17]: /tracing/compatibility_requirements/java#disabling-integrations
 [18]: /integrations/java/?tab=host#metric-collection
 [19]: https://github.com/openzipkin/b3-propagation
-[20]: /help/

@@ -50,7 +50,7 @@ nav_sections:
             desc: 'Recueillir, traiter, explorer, surveiller et archiver vos logs'
           - title: Security Monitoring
             link: security_monitoring/
-            icon: security
+            icon: siem
             desc: Détecter les menaces en temps réel et analyser les alertes de sécurité
           - title: Surveillance synthétique
             link: synthetics/

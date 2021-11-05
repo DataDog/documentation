@@ -37,13 +37,7 @@ To enable debug mode for the Datadog Python Tracer, set the environment variable
 
 {{< programming-lang lang="ruby" >}}
 
-To enable debug mode for the Datadog Ruby Tracer, set the `debug` option to `true` in the tracer initialization configuration:
-
-```ruby
-Datadog.configure do |c|
-  c.tracer debug: true
-end
-```
+To enable debug mode for the Datadog Ruby Tracer, set the environment variable `DD_TRACE_DEBUG=true`.
 
 **Application Logs**
 
