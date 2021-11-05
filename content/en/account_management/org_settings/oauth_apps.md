@@ -12,7 +12,8 @@ The **OAuth Apps** management page in [Organization Settings][1] helps you manag
 
 {{< img src="account_management/oauth_apps/org-management-page.png" alt="OAuth Apps management page in Datadog" style="width:100%;">}}
 
-## Permissions
+## Setup
+### Permissions
 
 By default, users with [Datadog Standard and Datadog Admin roles][4] can access the OAuth Apps management page. If your organization has [custom roles][5] defined, add your user to any custom role with `org_authorized_apps_read` and `org_authorized_apps_write` permissions. 
 
