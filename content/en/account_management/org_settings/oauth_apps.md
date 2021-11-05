@@ -21,7 +21,8 @@ Only users with the Datadog Admin role or the `org_authorized_apps_write` permis
 
 ### Enable
 
-OAuth applications include the Datadog Mobile App and your custom [Datadog Apps][2] that have [OAuth API Access][3]. 
+Enabled OAuth applications allow users with necessary permissions to authorize access on their behalf.  OAuth applications include the Datadog Mobile App and your custom [Datadog Apps][2] that have [OAuth API Access][3]. 
+
 ### Disable
 
 Disabling OAuth access for an application revokes access to this application for all users in your organization. While the application remains installed, users are no longer able to use the application and are prompted with an error if they attempt to authorize it.
@@ -33,7 +34,7 @@ There are two ways to disable an application from the OAuth Apps management page
 2. Click on your application to open the detailed view of the application and click the **Disable Application** button.
 {{< img src="account_management/oauth_apps/disable-app-detailed.png" alt="Disable button in app's detailed view" style="width:100%;">}}
 
-**Note**: Enabled applications allow users with necessary permissions to grant it access on their behalf. When re-enabled, users that previously authorized the application are required to re-authorize the application to regain access.
+**Note**: When re-enabled, users that previously authorized the application are required to re-authorize the application to regain access.
 
 ### Revoke access
 
