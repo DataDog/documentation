@@ -258,7 +258,7 @@ A test is considered `FAILED` if a step does not satisfy one or several assertio
   - `TIMEOUT: Retrieving the response couldn’t be completed in a reasonable time.` indicates that the timeout happened on the overall run (which includes TCP socket connection, data transfer, and assertions).
 
 `MALFORMED_RESPONSE` 
-: The remote server responded with a payload that did not comply with HTTP specifications.
+: The remote server responded with a payload that does not comply with HTTP specifications.
 
 ## Permissions
 
