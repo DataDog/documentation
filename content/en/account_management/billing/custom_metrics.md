@@ -297,6 +297,8 @@ For technical questions, contact [Datadog support][24].
 
 For billing questions, contact your [Customer Success][10] Manager.
 
+\*Metrics without Limits is a trademark of Datadog, Inc.
+
 [1]: /integrations/
 [2]: /metrics/custom_metrics/
 [3]: /metrics/metrics-without-limits
