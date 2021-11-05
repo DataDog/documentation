@@ -2,7 +2,7 @@
 title: Custom OpenMetrics Check
 kind: documentation
 further_reading:
-- link: "agent/kubernetes/prometheus"
+- link: "/agent/kubernetes/prometheus"
   tag: "Documentation"
   text: "Configuring an OpenMetrics Check"
 - link: "/developers/agent_checks/"
@@ -20,10 +20,10 @@ aliases:
 
 This page dives into the `OpenMetricsBaseCheckV2` interface for more advanced usage, including an example of a simple check that collects timing metrics and status events from [Kong][1]. For details on configuring a basic OpenMetrics check, see [Kubernetes Prometheus and OpenMetrics metrics collection][2].
 
-*Note*: `OpenMetricsBaseCheckV2` is available in Agent `7.26.x` or higher and requires Python 3.
+**Note**: `OpenMetricsBaseCheckV2` is available in Agent v`7.26.x`+ and requires Python 3.
 
 <div class="alert alert-info">
-If you are looking for the legacy implementation or <code>OpenMetricsBaseCheck</code> interface custom check guide, please see [Custom Legacy OpenMetrics Check][9].
+If you are looking for the legacy implementation or <code>OpenMetricsBaseCheck</code> interface custom check guide, please see <a href="https://docs.datadoghq.com/developers/faq/legacy-openmetrics/">Custom Legacy OpenMetrics Check</a>.
 </div>
 
 ## Advanced usage: OpenMetrics check interface
@@ -34,7 +34,7 @@ If you have more advanced needs than the generic check, such as metrics preproce
 - Implementing the `check()` method AND/OR:
 - Creating a method named after the OpenMetric metric handled (see `self.prometheus_metric_name`).
 
-  See this [example in the Kong integration][11] where the Prometheus metric `kong_upstream_target_health` value is used as service check.
+See this [example in the Kong integration][4] where the Prometheus metric `kong_upstream_target_health` value is used as service check.
 
 ## Writing a custom OpenMetrics check
 
@@ -64,7 +64,7 @@ instances:
 The names of the configuration and check files must match. If your check is called <code>mycheck.py</code> your configuration file <em>must</em> be named <code>mycheck.yaml</code>.
 </div>
 
-Configuration for an Openmetrics check is almost the same as a regular [Agent check][4]. The main difference is to include the variable `openmetrics_endpoint` in your `check.yaml` file. This goes into `conf.d/kong.yaml`:
+Configuration for an Openmetrics check is almost the same as a regular [Agent check][5]. The main difference is to include the variable `openmetrics_endpoint` in your `check.yaml` file. This goes into `conf.d/kong.yaml`:
 
 ```yaml
 init_config:
@@ -76,7 +76,7 @@ instances:
 
 ### Writing the check
 
-All OpenMetrics checks inherit from the [`OpenMetricsBaseCheckV2` class][5]:
+All OpenMetrics checks inherit from the [`OpenMetricsBaseCheckV2` class][6]:
 
 ```python
 from datadog_checks.base import OpenMetricsBaseCheckV2
@@ -98,7 +98,7 @@ class KongCheck(OpenMetricsBaseCheckV2):
 
 #### Define a metrics mapping
 
-The [metrics][10] mapping allows you to rename the metric name and override the native metric type.
+The [metrics][7] mapping allows you to rename the metric name and override the native metric type.
 
 ```python
 from datadog_checks.base import OpenMetricsBaseCheckV2
@@ -128,7 +128,7 @@ class KongCheck(OpenMetricsBaseCheckV2):
 #### Define a default instance
 
 A default instance is the basic configuration used for the check. The default instance should override `metrics`, and `openmetrics_endpoint`.
-[Override][12] the `get_default_config` in OpenMetricsBaseCheckV2 with your default instance.
+[Override][8] the `get_default_config` in OpenMetricsBaseCheckV2 with your default instance.
 
 ```python
 from datadog_checks.base import OpenMetricsBaseCheckV2
@@ -173,7 +173,7 @@ def check(self, instance):
 
 ##### Exceptions
 
-If a check cannot run because of improper configuration, a programming error, or because it could not collect any metrics, it should raise a meaningful exception. This exception is logged and is shown in the Agent [status command][7] for easy debugging. For example:
+If a check cannot run because of improper configuration, a programming error, or because it could not collect any metrics, it should raise a meaningful exception. This exception is logged and is shown in the Agent [status command][9] for easy debugging. For example:
 
     $ sudo /etc/init.d/datadog-agent info
 
@@ -249,9 +249,9 @@ class KongCheck(OpenMetricsBaseCheckV2):
 
 ## Going further
 
-To read more about Prometheus and OpenMetrics base integrations, see the integrations [developer docs][8].
+To read more about Prometheus and OpenMetrics base integrations, see the integrations [developer docs][10].
 
-To see all configuration options available in Openmetrics, see the [conf.yaml.example][13].
+To see all configuration options available in Openmetrics, see the [conf.yaml.example][11].
 You can improve your OpenMetrics check by including default values for additional configuration options:
 
 `exclude_metrics`
@@ -272,13 +272,11 @@ exposed metrics from which to share labels, and the values are mappings that con
 [1]: https://github.com/DataDog/integrations-core/blob/master/kube_dns/datadog_checks/kube_dns/kube_dns.py
 [2]: /agent/prometheus/
 [3]: https://github.com/DataDog/integrations-core/tree/master/datadog_checks_base/datadog_checks/base/checks/openmetrics/v2
-[4]: /agent/agent_checks/#configuration
-[5]: https://github.com/DataDog/integrations-core/tree/master/datadog_checks_base/datadog_checks/base/checks/openmetrics/v2/base.py
-[6]: https://docs.datadoghq.com/integrations/guide/prometheus-metrics/
-[7]: /agent/guide/agent-commands/#agent-status-and-information
-[8]: https://datadoghq.dev/integrations-core/base/openmetrics/
-[9]: /developers/faq/legacy-openmetrics/
-[10]: https://github.com/DataDog/integrations-core/blob/459e8c12a9c828a0b3faff59df69c2e1f083309c/openmetrics/datadog_checks/openmetrics/data/conf.yaml.example#L65-L104
-[11]: https://github.com/DataDog/integrations-core/blob/459e8c12a9c828a0b3faff59df69c2e1f083309c/kong/datadog_checks/kong/check.py#L22-L45
-[12]: https://github.com/DataDog/integrations-core/blob/459e8c12a9c828a0b3faff59df69c2e1f083309c/datadog_checks_base/datadog_checks/base/checks/openmetrics/v2/base.py#L86-L87
-[13]: https://github.com/DataDog/integrations-core/blob/master/openmetrics/datadog_checks/openmetrics/data/conf.yaml.example
+[4]: https://github.com/DataDog/integrations-core/blob/459e8c12a9c828a0b3faff59df69c2e1f083309c/kong/datadog_checks/kong/check.py#L22-L45
+[5]: /agent/agent_checks/#configuration
+[6]: https://github.com/DataDog/integrations-core/tree/master/datadog_checks_base/datadog_checks/base/checks/openmetrics/v2/base.py
+[7]: https://github.com/DataDog/integrations-core/blob/459e8c12a9c828a0b3faff59df69c2e1f083309c/openmetrics/datadog_checks/openmetrics/data/conf.yaml.example#L65-L104
+[8]: https://github.com/DataDog/integrations-core/blob/459e8c12a9c828a0b3faff59df69c2e1f083309c/datadog_checks_base/datadog_checks/base/checks/openmetrics/v2/base.py#L86-L87
+[9]: /agent/guide/agent-commands/#agent-status-and-information
+[10]: https://datadoghq.dev/integrations-core/base/openmetrics/
+[11]: https://github.com/DataDog/integrations-core/blob/master/openmetrics/datadog_checks/openmetrics/data/conf.yaml.example
