@@ -32,7 +32,7 @@ datadog:
   api:
     key: "<API key>"
 ```
-To send the data to a different Datadog site, also set the `site` parameter:
+To send the data to a different [Datadog site](https://docs.datadoghq.com/getting_started/site/), also set the `site` parameter:
 ```
 datadog:
   api:
