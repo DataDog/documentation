@@ -57,10 +57,10 @@ Configure AWS to ensure Datadog has permissions to access the CUR and the s3 buc
       {
           "Sid": "CostExplorerAccuracyCheck",
           "Effect": "Allow",
-              "Action": [
-                  "ce:Get*"
+          "Action": [
+              "ce:Get*"
           ],
-              "Resource": "*"
+          "Resource": "*"
       },
       {
           "Sid": "CURReportDefinition",
