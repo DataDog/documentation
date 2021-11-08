@@ -1,41 +1,18 @@
 /* eslint-disable */
 import algoliasearch from 'algoliasearch';
-import searchInsights from 'search-insights';
 import configDocs from '../config/config-docs';
-import { getConfig } from '../helpers/helpers';
+import { 
+    initializeAlogliaInsights, 
+    sendAlgoliaInsightsClickEvent, 
+    sendAlgoliaInsightsViewEvent 
+} from '../algolia-insights';
 
 const siteEnv = document.querySelector('html').dataset.env;
 let indexName = '';
 
-const initializeAlogliaInsights = () => {
-    const { algoliaConfig } = getConfig();
-    const { appId, apiKey } = algoliaConfig;
-
-    searchInsights('init', { appId, apiKey });
-}
-
-const sendAlgoliaInsightsClickEvent = (algoliaQueryID) => {
-    const objectID = event.target.dataset.object;
-    const position = parseInt(event.target.dataset.position);
-
-    if (objectID !== '' && typeof(position) === 'number') {
-        const insightsClickEventParams = {
-            userToken: 'documentation',
-            index: indexName,
-            eventName: 'clickedObjectIDsAfterSearch',
-            queryID: algoliaQueryID,
-            objectIDs: [objectID],
-            positions: [position] 
-        };
-
-        searchInsights('clickedObjectIDsAfterSearch', insightsClickEventParams);
-    }
-}
-
-const sendAlgoliaInsightsViewEvent = () => {
+const handleAlgoliaInsightsViewEvents = () => {
     const searchResultContainer = document.getElementById('tipue_search_content');
     const algoliaObjectIDs = [];
-    console.log('Gathering links to send to algolia...');
 
     if (searchResultContainer) {
         const searchResultLinksNodeList = searchResultContainer.querySelectorAll('.hit .tipue_search_content_title a');
@@ -43,19 +20,14 @@ const sendAlgoliaInsightsViewEvent = () => {
         searchResultLinksNodeList.forEach(link => {
             const objectID = link.dataset.object;
 
-            if (objectID !== '') {
-                algoliaObjectIDs.push(objectID)
+            if (objectID && objectID !== '') {
+                algoliaObjectIDs.push(objectID);
             }
         })
 
-        const insightsViewEventParams = {
-            userToken: 'documentation',
-            index: indexName,
-            eventName: 'viewedObjectIDs',
-            objectIDs: algoliaObjectIDs  
-        };
-
-        searchInsights('viewedObjectIDs', insightsViewEventParams);
+        if (algoliaObjectIDs.length > 0) {
+            sendAlgoliaInsightsViewEvent(algoliaObjectIDs);
+        }
     }
 }
 
@@ -68,8 +40,14 @@ const attachEventListenersToPaginatedSearchResults = (algoliaQueryID) => {
       searchResultLinksNodeList.forEach(link => {
           link.addEventListener('click', () => {
               event.preventDefault();
+              const objectID = event.target.dataset.object;
+              const position = parseInt(event.target.dataset.position);
               const url = event.target.href;
-              sendAlgoliaInsightsClickEvent(algoliaQueryID);
+
+              if (objectID !== '' && typeof(position) === 'number') {
+                  sendAlgoliaInsightsClickEvent(algoliaQueryID, objectID, position);
+              }
+              
             //   window.history.pushState({ 'page': url }, '', url);
             //   window.location = url;
           })
@@ -489,7 +467,7 @@ if (window.location.href.indexOf('/search/') > -1) {
                       }
 
                       attachEventListenersToPaginatedSearchResults(queryID);
-                      sendAlgoliaInsightsViewEvent();
+                      handleAlgoliaInsightsViewEvents();
                   }
 
                   // init page nums
