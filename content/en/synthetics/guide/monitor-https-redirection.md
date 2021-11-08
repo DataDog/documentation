@@ -20,16 +20,16 @@ To monitor the redirection of your HTTP traffic into HTTPS:
 
 1. Create an HTTP test and [define the request][1].
 2. Click **Test URL**. The response preview generates a **Request Preview** and **Response Preview**.
-3. Assert on the redirection
-    - Define an assertion on the `location` header.  
-    e.g.: under **Headers**, the `location` header for `http://datadoghq.com` is `https://datadoghq.com`.
+3. Add an assertion about the redirection to HTTPS.
+    - Define an assertion on the `location` header. For example, under **Headers**, the `location` header for `http://datadoghq.com` is `https://datadoghq.com`.
+    
     {{< img src="synthetics/guide/monitor-https-redirections/location-header-https.png" alt="Location header in the response preview" style="width:100%;" >}}
-    - or select `body` `contains` and insert `"https:"===window.location.protocol` in the text field. 
+    - Optionally, select `body` `contains` and paste `"https:"===window.location.protocol` in the text field. 
     {{< img src="synthetics/guide/monitor-https-redirections/https-assertion.png" alt="Define your assertion" style="width:100%;" >}}
 
+Complete the rest of the test creation workflow and save your HTTP test. 
 
-
-Complete the rest of the test creation workflow and save your HTTP test. After defining the notification, Datadog can alert you when your HTTP traffic does not correctly redirect into HTTPS.
+After defining the notification, Datadog can alert you when your HTTP traffic does not correctly redirect into HTTPS.
 
 ## Further Reading
 
