@@ -1,7 +1,7 @@
 ---
 title: Enabling the Node.js Profiler
 kind: Documentation
-code_lang: node
+code_lang: nodejs
 type: multi-code-lang
 code_lang_weight: 40
 further_reading:
