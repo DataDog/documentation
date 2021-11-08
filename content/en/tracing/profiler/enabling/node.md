@@ -30,7 +30,7 @@ The profiler is shipped within Datadog tracing libraries. If you are already usi
 
 ## Requirements
 
-The Datadog Profiler requires Node.js 12+, but Node.js 16+ is recommended. Some applications will see tail latency spikes every minute while starting the next profile on Node.js < 16. 
+The Datadog Profiler requires Node.js 12+, but Node.js 16+ is recommended. **Some applications will see tail latency spikes every minute while starting the next profile on Node.js < 16.**
 
 ## Installation
 
@@ -77,6 +77,10 @@ To begin profiling applications:
 ## Not sure what to do next?
 
 The [Getting Started with Profiler][5] guide takes a sample service with a performance problem and shows you how to use Continuous Profiler to understand and fix the problem.
+
+## Experiencing High Overhead?
+
+Node.js 16+ is recommended. Some applications will see tail latency spikes every minute while starting the next profile on Node.js < 16.
 
 ## Further Reading
 
