@@ -22,8 +22,8 @@ The Agent collects telemetry directly from the database by logging in as a read-
 Do the following setup steps to enable Database Monitoring with your database:
 
 1. [Configure the database](#configure-sql-server-settings)
-1. [Grant the Agent access to the database](#grant-the-agent-access)
-1. [Install the Agent](#install-the-agent)
+2. [Grant the Agent access to the database](#grant-the-agent-access)
+3. [Install the Agent](#install-the-agent)
 
 ## Before you begin
 
