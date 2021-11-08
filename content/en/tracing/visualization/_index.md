@@ -86,19 +86,26 @@ For the example below, the span `rack.request` is the entry-point span of the tr
 
 {{< img src="tracing/visualization/span_with_metadata.png" alt="span" >}}
 
-## Span Summary
-The span summary widget on APM resource pages provides you with an aggregated view of spans for all traces. Here you can see span-level summaries of how often a given span shows up among all traces, what percent of traces contain a particular span, the average duration for a span and its typical share of total execution time of the requests. This helps you detect N+1 problems in your code to improve your application performance. Span summary table contains four columns:
+## Span summary
 
-**Avg Spans/trace**
-Average number of occurrences of the span, for traces including the current resource, where the span is present at least once.
-**% of Traces**
-Percentage of traces including the current resource where the span is present at least once.
-**Avg Duration**
-Average duration of the span, for traces including the current resource, where the span is present at least once.
-**Avg % Exec Time**
-Average ratio of execution time for which the span was active, for traces including the current resource, where the span is present at least once.
+The span summary table shows metrics for spans aggregated across all traces, including how often the span shows up among all traces, what percent of traces contain the span, the average duration for the span, and its typical share of total execution time of the requests. This helps you detect N+1 problems in your code so you can improve your application performance. 
 
-[link to image in https://docs.google.com/document/d/1nHdgE2qveE1zXTMlgMD5Q2biJcNkolzc7Yose1TGCd0/edit?usp=sharing]
+The span summary table contains the following columns:
+
+Average spans per trace
+: Average number of occurrences of the span for traces, including the current resource, where the span is present at least once.
+
+Percentage of traces
+: Percentage of traces, including the current resource, where the span is present at least once.
+
+Average duration
+: Average duration of the span for traces, including the current resource, where the span is present at least once.
+
+Average percentage of execution time
+: Average ratio of execution time for which the span was active for traces, including the current resource, where the span is present at least once.
+
+{{< img src="tracing/visualization/span-summary.png" alt="Span summary table" >}}
+
 
 ## Service entry span
 
