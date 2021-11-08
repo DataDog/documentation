@@ -327,3 +327,4 @@ Datadog recommends you use the OpenTelemetry Collector Datadog exporter in conju
 [19]: /tracing/setup_overview/open_standards/python#opentelemetry
 [20]: /tracing/setup_overview/open_standards/ruby#opentelemetry
 [21]: /tracing/setup_overview/open_standards/nodejs#opentelemetry
+[22]: /getting_started/site/
