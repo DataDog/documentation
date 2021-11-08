@@ -173,7 +173,7 @@ If you haven't already installed the Agent for your SQL Server database host, se
 
 ## Troubleshooting
 
-If you have installed and configured the integrations and Agent as described and it is not working as expected, see [Troubleshooting][13]
+If you have installed and configured the integrations and Agent as described and it is not working as expected, read about [Troubleshooting Database Monitoring][13].
 
 ## Further reading
 
