@@ -605,6 +605,10 @@ components:
     AzureAccount:
       description: Datadog-Azure integrations configured for your organization.
       properties:
+        automute:
+          description: Silence monitors for expected Azure VM shutdowns.
+          example: true
+          type: boolean
         client_id:
           description: Your Azure web application ID.
           example: testc7f6-1234-5678-9101-3fcbf464test
@@ -6315,6 +6319,7 @@ components:
       - composite
       - event alert
       - log alert
+      - metric alert
       - process alert
       - query alert
       - rum alert
@@ -23508,7 +23513,47 @@ paths:
         content:
           application/json:
             examples:
-              multistep-api-test:
+              1-simple-api-test:
+                description: Example of an API test.
+                summary: Create an API test.
+                value:
+                  config:
+                    assertions:
+                    - operator: lessThan
+                      target: 1000
+                      type: responseTime
+                    - operator: is
+                      target: 200
+                      type: statusCode
+                    - operator: is
+                      property: content-type
+                      target: text/html; charset=UTF-8
+                      type: header
+                    request:
+                      method: GET
+                      url: https://example.com
+                  locations:
+                  - azure:eastus
+                  - aws:eu-west-3
+                  message: <NOTIFICATION MESSAGE>
+                  name: <TEST NAME>
+                  options:
+                    min_failure_duration: 0
+                    min_location_failed: 1
+                    monitor_options:
+                      include_tags: true
+                      locked: false
+                      new_host_delay: 300
+                      notify_audit: false
+                      notify_no_data: false
+                      renotify_interval: 0
+                    tick_every: 60
+                  status: live
+                  subtype: http
+                  tags:
+                  - env:production
+                  type: api
+              2-multistep-api-test:
                 description: 'Example of a multistep API test running on a fake furniture
                   store.
 
@@ -23585,46 +23630,6 @@ paths:
                   subtype: multi
                   tags:
                   - env:prod
-                  type: api
-              simple-api-test:
-                description: Example of an API test.
-                summary: Create an API test.
-                value:
-                  config:
-                    assertions:
-                    - operator: lessThan
-                      target: 1000
-                      type: responseTime
-                    - operator: is
-                      target: 200
-                      type: statusCode
-                    - operator: is
-                      property: content-type
-                      target: text/html; charset=UTF-8
-                      type: header
-                    request:
-                      method: GET
-                      url: https://example.com
-                  locations:
-                  - azure:eastus
-                  - aws:eu-west-3
-                  message: <NOTIFICATION MESSAGE>
-                  name: <TEST NAME>
-                  options:
-                    min_failure_duration: 0
-                    min_location_failed: 1
-                    monitor_options:
-                      include_tags: true
-                      locked: false
-                      new_host_delay: 300
-                      notify_audit: false
-                      notify_no_data: false
-                      renotify_interval: 0
-                    tick_every: 60
-                  status: live
-                  subtype: http
-                  tags:
-                  - env:production
                   type: api
             schema:
               $ref: '#/components/schemas/SyntheticsAPITest'
