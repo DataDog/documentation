@@ -192,4 +192,4 @@ If you have installed and configured the integrations and Agent as described and
 [10]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [11]: /agent/guide/agent-commands/#agent-status-and-information
 [12]: https://app.datadoghq.com/databases
-[13]: /database_monitoring/troubleshooting/?tab=postgres
+[13]: /database_monitoring/troubleshooting/?tab=sqlserver
