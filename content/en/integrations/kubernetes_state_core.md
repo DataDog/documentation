@@ -127,6 +127,8 @@ The Kubernetes State Metrics Core check is not backward compatible, be sure to r
 `kubernetes_state.pod.status_phase`
 : The metric is tagged with pod level tags, like `pod_name`.
 
+`kubernetes_state.node.count`
+: The metric is not tagged with `host` anymore. It aggregates the nodes count by `kernel_version` `os_image` `container_runtime_version` `kubelet_version`.
 
 {{< tabs >}}
 {{% tab "Helm" %}}
@@ -284,12 +286,6 @@ datadog:
 
 `kubernetes_state.container.waiting`
 : Describes whether the container is in a waiting state. Tags:`kube_namespace` `pod_name` `kube_container_name` (`env` `service` `version` from standard labels).
-
-`kubernetes_state.container.status_report.count.waiting`
-: Describes the reason the container is in a waiting state. Tags:`kube_namespace` `pod_name` `kube_container_name` `reason` (`env` `service` `version` from standard labels).
-
-`kubernetes_state.container.status_report.count.terminated`
-: Describes the reason the container is in a terminated state. Tags:`kube_namespace` `pod_name` `kube_container_name` `reason` (`env` `service` `version` from standard labels).
 
 `kubernetes_state.container.status_report.count.waiting`
 : Describes the reason the container is in a waiting state. Tags:`kube_namespace` `pod_name` `kube_container_name` `reason` (`env` `service` `version` from standard labels).

@@ -88,11 +88,11 @@ Additionally, configure the Datadog site to use the selected one ({{< region-par
 **Default**: `datadoghq.com`<br/>
 **Selected site**: {{< region-param key="dd_site" code="true" >}}
 
-[1]: https://www.npmjs.com/package/@datadog/datadog-ci
-[2]: https://app.datadoghq.com/organization-settings/api-keys
-[3]: /getting_started/site/
 {{< /site-region >}}
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+[1]: https://www.npmjs.com/package/@datadog/datadog-ci
+[2]: https://app.datadoghq.com/organization-settings/api-keys
+[3]: /getting_started/site/

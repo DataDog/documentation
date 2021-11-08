@@ -1,8 +1,8 @@
 ---
 dependencies:
-  - 'https://github.com/DataDog/dd-sdk-android/blob/master/docs/configure_rum_android_sdk.md'
+  - https://github.com/DataDog/dd-sdk-android/blob/master/docs/configure_rum_android_sdk.md
 further_reading:
-  - link: 'https://github.com/DataDog/dd-sdk-android'
+  - link: https://github.com/DataDog/dd-sdk-android
     tag: Github
     text: Code source dd-sdk-android
   - link: /real_user_monitoring
@@ -32,6 +32,18 @@ En plus du [suivi automatique des vues][4], vous pouvez effectuer le suivi de vu
         GlobalRum.get().stopView(viewKey, viewAttributes)        
       }
    ```
+
+### Ajouter vos propres durées de performance
+
+En plus des attributs RUM par défaut, vous pouvez tirer profit de l'API `addTiming` pour découvrir combien de temps votre application consacre à chaque tâche. Les mesures de temps sont exprimées en fonction du début de la vue RUM actuelle. Par exemple, vous pouvez mesurer le temps nécessaire pour afficher votre bannière :
+
+   ```kotlin
+       fun onHeroImageLoaded() {
+           GlobalRum.get().addTiming("hero_image")
+       } 
+   ```
+
+Une fois la durée envoyée, elle est accessible via `@view.custom_timings.<nom_durée>` (p. ex., `@view.custom_timings.hero_image`). Vous devez [créer une mesure](https://docs.datadoghq.com/real_user_monitoring/explorer/?tab=measures#configurer-des-facettes-et-des-mesures) avant de pouvoir la représenter dans des analyses RUM ou dans des dashboards.
 
 ### Actions personnalisées
 

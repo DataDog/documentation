@@ -257,7 +257,7 @@ The Java DataDog StatsD Client is distributed with maven central, and can be [do
 <dependency>
     <groupId>com.datadoghq</groupId>
     <artifactId>java-dogstatsd-client</artifactId>
-    <version>2.10.1</version>
+    <version>3.0.0</version>
 </dependency>
 ```
 
@@ -360,11 +360,20 @@ public class DogStatsdClient {
 
     public static void main(String[] args) throws Exception {
 
-        StatsDClient Statsd = new NonBlockingStatsDClientBuilder()
+        StatsDClient statsd = new NonBlockingStatsDClientBuilder()
             .prefix("statsd")
             .hostname("localhost")
             .port(8125)
             .build();
+
+
+        // alternatively
+        StatsDClient statsdAlt = new NonBlockingStatsDClient(
+            new NonBlockingStatsDClientBuilder(
+                .prefix("statsd")
+                .hostname("localhost")
+                .port(8125)
+                .resolve()));
 
     }
 }
@@ -476,17 +485,35 @@ For all available options, see [Datadog's GoDoc][1].
 {{< /programming-lang >}}
 {{< programming-lang lang="java" >}}
 
-| Parameter      | Type            | Description                                                          |
-| -------------- | --------------- | -------------------------------------------------------------------- |
-| `prefix`       | String          | The prefix to apply to all metrics, events, and service checks.      |
-| `hostname`     | String          | The host name of the targeted StatsD server.                         |
-| `port`         | Integer         | The port of the targeted StatsD server.                              |
-| `constantTags` | List of strings | Global tags to be applied to every metric, event, and service check. |
+As of v2.10.0 the recommended way to instantiate the client is via the NonBlockingStatsDClientBuilder. You
+can use the following builder methods to define the client parameters.
 
-For more information, see the [NonBlockingStatsDClient Class][1] documentation.
+| Builder Method                               | Type           | Default   | Description                                                                         |
+| -------------------------------------------- | -------------- | --------- | ----------------------------------------------------------------------------------- |
+| `prefix(String val)`                         | String         | null      | The prefix to apply to all metrics, events, and service checks.                     |
+| `hostname(String val)`                       | String         | localhost | The host name of the targeted StatsD server.                                        |
+| `port(int val)`                              | Integer        | 8125      | The port of the targeted StatsD server.                                             |
+| `constantTags(String... val)`                | String varargs | null      | Global tags to be applied to every metric, event, and service check.                |
+| `blocking(boolean val)`                      | Boolean        | false     | The type of client to instantiate: blocking vs non-blocking.                        |
+| `socketBufferSize(int val)`                  | Integer        | -1        | The size of the underlying socket buffer.                                           |
+| `enableTelemetry(boolean val)`               | Boolean        | false     | Client telemetry reporting.                                                         |
+| `entityID(String val)`                       | String         | null      | Entitity ID for origin detection.                                                   |
+| `errorHandler(StatsDClientErrorHandler val)` | Integer        | null      | Error handler in case of an internal client error.                                  |
+| `maxPacketSizeBytes(int val)`                | Integer        | 8192/1432 | The maxumum packet size; 8192 over UDS, 1432 for UDP.                               |
+| `processorWorkers(int val)`                  | Integer        | 1         | The number of processor worker threads assembling buffers for submission.           |
+| `senderWorkers(int val)`                     | Integer        | 1         | The number of sender worker threads submitting buffers to the socket.               |
+| `poolSize(int val)`                          | Integer        | 512       | Network packet buffer pool size.                                                    |
+| `queueSize(int val)`                         | Integer        | 4096      | Maximum number of unprocessed messages in the queue.                                |
+| `timeout(int val)`                           | Integer        | 100       | the timeout in milliseconds for blocking operations. Applies to unix sockets only.  |
+
+For more information, see the [NonBlockingStatsDClient Class][1] and [NonBlockingStatsDClientBuilder Class][2] documentation.
+
+If you are on an older client release, please see the deprecated constructor documentation [here][3].
 
 
-[1]: https://jar-download.com/artifacts/com.datadoghq/java-dogstatsd-client/2.1.1/documentation
+[1]: https://jar-download.com/javaDoc/com.datadoghq/java-dogstatsd-client/2.13.0/com/timgroup/statsd/NonBlockingStatsDClient.html
+[2]: https://jar-download.com/javaDoc/com.datadoghq/java-dogstatsd-client/2.13.0/com/timgroup/statsd/NonBlockingStatsDClientBuilder.html
+[3]: https://javadoc.io/static/com.datadoghq/java-dogstatsd-client/2.9.0/com/timgroup/statsd/NonBlockingStatsDClient.html
 {{< /programming-lang >}}
 {{< programming-lang lang="PHP" >}}
 

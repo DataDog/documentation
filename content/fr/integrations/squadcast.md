@@ -13,13 +13,14 @@ categories:
 creates_events: false
 ddtype: crawler
 dependencies:
-  - 'https://github.com/DataDog/integrations-extras/blob/master/squadcast/README.md'
+  - https://github.com/DataDog/integrations-extras/blob/master/squadcast/README.md
 display_name: Squadcast
 draft: false
 git_integration_title: squadcast
 guid: a2b0e9fe-f824-460b-864a-50c4bda759a0
 integration_id: squadcast
 integration_title: Squadcast
+integration_version: ''
 is_public: true
 kind: integration
 maintainer: it@squadcast.com
@@ -46,11 +47,11 @@ Associez Squadcast à Datadog pour :
 
 ## Configuration
 
-**Remarque** :
-Seuls les utilisateurs dont le rôle est Account Owner ou Admin peuvent configurer des services sur Squadcast.
-Au moins une politique d'escalade doit être configurée pour que vous puissiez ajouter un service.
+**Remarque** : seuls les utilisateurs dont le rôle est Account Owner ou Admin peuvent configurer des services sur Squadcast. Au moins une politique d'escalade doit être configurée pour que vous puissiez ajouter un service.
 
-### Suivez ces étapes dans Squadcast :
+### Squadcast
+
+Suivez ces étapes dans Squadcast :
 
 1. Ouvrez la page **Services** à partir de la barre latérale.
 
@@ -60,7 +61,9 @@ Au moins une politique d'escalade doit être configurée pour que vous puissiez 
 
 5. Copiez le lien **Datadog Webhook URL** indiqué et cliquez sur **Done**.
 
-### Suivez ces étapes dans Datadog :
+### Datadog
+
+Suivez ces étapes dans Datadog :
 
 1. Ouvrez la page **Integrations** à partir de la barre latérale.
 
