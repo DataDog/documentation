@@ -71,25 +71,25 @@ To obtain the temperature in Florida, you can simply recombine the custom metric
 - `temperature{country:USA, state:Florida, city:Miami}`
 - `temperature{state:Florida, city:Miami, country:USA}`
 
-### Configure tags and aggregations with Metrics without Limits\*
+### Configure tags and aggregations with Metrics without Limits™
 
-Custom metrics volumes can be impacted by configuring tags and aggregations using [Metrics without Limits\*][3]. Metrics without Limits\* decouples ingestion costs from indexing costs -- so you can continue sending Datadog all of your data (everything is ingested) and you can specify an allowlist of tags you'd want to remain queryable in the Datadog platform. Given the volume of data Datadog is ingesting for your configured metrics now differs from the smaller, remaining volume you’ve indexed, you'll see two distinct volumes on your Usage page as well as the Metrics Summary page. 
+Custom metrics volumes can be impacted by configuring tags and aggregations using [Metrics without Limits™][3]. Metrics without Limits™ decouples ingestion costs from indexing costs -- so you can continue sending Datadog all of your data (everything is ingested) and you can specify an allowlist of tags you'd want to remain queryable in the Datadog platform. Given the volume of data Datadog is ingesting for your configured metrics now differs from the smaller, remaining volume you’ve indexed, you'll see two distinct volumes on your Usage page as well as the Metrics Summary page. 
  
 - **Ingested Custom Metrics**: The original volume of custom metrics based on the all ingested tags (sent via code)
-- **Indexed Custom Metrics**: The volume of custom metrics that remains queryable in the Datadog platform (based on any Metrics without Limits\* configurations) 
+- **Indexed Custom Metrics**: The volume of custom metrics that remains queryable in the Datadog platform (based on any Metrics without Limits™ configurations) 
 
-**Note: Only configured metrics contribute to your Ingested custom metrics volume.** If a metric is not configured with Metrics without Limits\*, you're only charged for its indexed custom metrics volume.
+**Note: Only configured metrics contribute to your Ingested custom metrics volume.** If a metric is not configured with Metrics without Limits™, you're only charged for its indexed custom metrics volume.
 
 #### When will you be charged for ingested vs indexed custom metrics?
-If a metric is not configured with Metrics without Limits\*, you're only charged for indexed custom metrics.
+If a metric is not configured with Metrics without Limits™, you're only charged for indexed custom metrics.
 
 {{< img src="account_management/billing/custom_metrics/mwl-unconfigured-pricing.jpg" alt="Unconfigured Metrics have indexed custom metrics only" style="width:80%;">}}
 
-If a metric is configured with Metrics without Limits\* (tags/aggregations are configured), you pay for ingested custom metrics and indexed custom metrics.
+If a metric is configured with Metrics without Limits™ (tags/aggregations are configured), you pay for ingested custom metrics and indexed custom metrics.
 
 {{< img src="account_management/billing/custom_metrics/mwl-pricing-configured.jpg" alt="Configured Metrics have ingested and indexed custom metrics costs" style="width:80%;">}}
 
-Suppose you wanted to use Metrics without Limits\* to reduce the size of your `request.Latency` metric by keeping only the `endpoint` and `status` tags. This results in the following three unique tag combinations:
+Suppose you wanted to use Metrics without Limits™ to reduce the size of your `request.Latency` metric by keeping only the `endpoint` and `status` tags. This results in the following three unique tag combinations:
 
 - `endpoint:X`, `status:200`
 - `endpoint:X`, `status:400`
@@ -103,7 +103,7 @@ By default, Datadog stores the most frequently queried aggregation combination d
 
 You can opt-in to more aggregations should they be valuable for your queries - your number of indexed custom metrics scales with the number of enabled aggregations. 
 
-Learn more about [Metrics without Limits\*][3].
+Learn more about [Metrics without Limits™][3].
 
 [1]: /metrics/types/?tab=count#metric-types
 [2]: /metrics/types/?tab=rate#metric-types
@@ -150,21 +150,21 @@ To obtain the temperature in Florida, you can recombine the custom metrics of:
 - `temperature{country:USA, state:Florida, city:Miami}`
 - `temperature{state:Florida, city:Miami, country:USA}`
 
-### Configure tags and aggregations with Metrics without Limits\*
+### Configure tags and aggregations with Metrics without Limits™
 
-Custom metrics volumes can be impacted by configuring tags and aggregations using [Metrics without Limits\*][4]. Metrics without Limits\* decouples ingestion costs from indexing costs -- so you can continue sending Datadog all of your data (everything is ingested) and you can specify an allowlist of tags you want to remain queryable in the Datadog platform. Given the volume of data Datadog is ingesting for your configured metrics now differs from the smaller, remaining volume you’ve indexed, you'll see two distinct volumes on your Usage page as well as the Metrics Summary page. 
+Custom metrics volumes can be impacted by configuring tags and aggregations using [Metrics without Limits™][4]. Metrics without Limits™ decouples ingestion costs from indexing costs -- so you can continue sending Datadog all of your data (everything is ingested) and you can specify an allowlist of tags you want to remain queryable in the Datadog platform. Given the volume of data Datadog is ingesting for your configured metrics now differs from the smaller, remaining volume you’ve indexed, you'll see two distinct volumes on your Usage page as well as the Metrics Summary page. 
  
 - **Ingested Custom Metrics**: The original volume of custom metrics based on the all ingested tags (sent via code)
-- **Indexed Custom Metrics**: The volume of custom metrics that remains queryable in the Datadog platform (based on any Metrics without Limits\* configurations) 
+- **Indexed Custom Metrics**: The volume of custom metrics that remains queryable in the Datadog platform (based on any Metrics without Limits™ configurations) 
 
-**Note: Only configured metrics contribute to your Ingested custom metrics volume.** If a metric is not configured with Metrics without Limits\*, you're only charged for its indexed custom metrics volume.
+**Note: Only configured metrics contribute to your Ingested custom metrics volume.** If a metric is not configured with Metrics without Limits™, you're only charged for its indexed custom metrics volume.
 
 #### When will you be charged for ingested vs indexed custom metrics?
-If a metric is not configured with Metrics without Limits\*, you're only charged for indexed custom metrics.
+If a metric is not configured with Metrics without Limits™, you're only charged for indexed custom metrics.
 
 {{< img src="account_management/billing/custom_metrics/mwl-unconfigured-pricing.jpg" alt="Unconfigured metrics have indexed custom metrics only" style="width:80%;">}}
 
-If a metric is configured with Metrics without Limits\* (tags/aggregations are configured), you pay for ingested custom metrics and indexed custom metrics.
+If a metric is configured with Metrics without Limits™ (tags/aggregations are configured), you pay for ingested custom metrics and indexed custom metrics.
 
 {{< img src="account_management/billing/custom_metrics/mwl-pricing-configured.jpg" alt="Configured Metrics have ingested and indexed custom metrics costs" style="width:80%;">}}
 
@@ -174,7 +174,7 @@ By default, Datadog stores the most frequently queried aggregation combination d
 
 You can opt-in to more aggregations should they be valuable for your queries - your number of indexed custom metrics scales with the number of enabled aggregations.
 
-Learn more about [Metrics without Limits\*][1].
+Learn more about [Metrics without Limits™][1].
 
 [1]: /metrics/metrics-without-limits
 {{% /tab %}}
@@ -226,21 +226,21 @@ This table summarizes the effect of adding percentile aggregations to any distri
 | Number of custom metrics from including percentile aggregations (p50, p75, p90, p95, p99) | `5*(tag value combinations)`      |
 | Total                                                                                     | `2*5(tag value combinations)`     |
 
-### Configure tags with Metrics without Limits\*
+### Configure tags with Metrics without Limits™
 
-Custom metrics volumes can be impacted by configuring tags and aggregations using [Metrics without Limits\*][4]. Metrics without Limits\* decouples ingestion costs from indexing costs -- so you can continue sending Datadog all of your data (everything is ingested) and you can specify an allowlist of tags you'd want to remain queryable in the Datadog platform. Given the volume of data Datadog is ingesting for your configured metrics now differs from the smaller, remaining volume you’ve indexed, you'll see two distinct volumes on your Usage page as well as the Metrics Summary page. 
+Custom metrics volumes can be impacted by configuring tags and aggregations using [Metrics without Limits™][4]. Metrics without Limits™ decouples ingestion costs from indexing costs -- so you can continue sending Datadog all of your data (everything is ingested) and you can specify an allowlist of tags you'd want to remain queryable in the Datadog platform. Given the volume of data Datadog is ingesting for your configured metrics now differs from the smaller, remaining volume you’ve indexed, you'll see two distinct volumes on your Usage page as well as the Metrics Summary page. 
  
 - **Ingested Custom Metrics**: The original volume of custom metrics based on the all ingested tags (sent via code)
-- **Indexed Custom Metrics**: The volume of custom metrics that remains queryable in the Datadog platform (based on any Metrics without Limits\* configurations) 
+- **Indexed Custom Metrics**: The volume of custom metrics that remains queryable in the Datadog platform (based on any Metrics without Limits™ configurations) 
 
-**Note: Only configured metrics contribute to your Ingested custom metrics volume.** If a metric is not configured with Metrics without Limits\*, you're only charged for its indexed custom metrics volume.
+**Note: Only configured metrics contribute to your Ingested custom metrics volume.** If a metric is not configured with Metrics without Limits™, you're only charged for its indexed custom metrics volume.
 
 #### When will you be charged for ingested vs indexed custom metrics?
-If a metric is not configured with Metrics without Limits\*, you're only charged for indexed custom metrics.
+If a metric is not configured with Metrics without Limits™, you're only charged for indexed custom metrics.
 
 {{< img src="account_management/billing/custom_metrics/mwl-unconfigured-pricing.jpg" alt="Unconfigured Metrics have indexed custom metrics only" style="width:80%;">}}
 
-If a metric is configured with Metrics without Limits\* (tags/aggregations are configured), you pay for ingested custom metrics and indexed custom metrics.
+If a metric is configured with Metrics without Limits™ (tags/aggregations are configured), you pay for ingested custom metrics and indexed custom metrics.
 
 {{< img src="account_management/billing/custom_metrics/mwl-pricing-configured.jpg" alt="Configured Metrics have ingested and indexed custom metrics costs" style="width:80%;">}}
 
@@ -278,7 +278,7 @@ These allocations are counted across your entire infrastructure. For example, if
 
 {{< img src="account_management/billing/custom_metrics/host_custom_metrics.png" alt="Allocations for Custom Metrics"  >}}
 
-The billable number of indexed custom metrics is based on the average number of custom metrics (from all paid hosts) per hour over a given month. The billable number of ingested custom metrics only grows if you've used Metrics without Limits\* to configure your metric.  Contact [Sales][9] or your [Customer Success][10] Manager to discuss custom metrics for your account or to purchase an additional custom metrics package.
+The billable number of indexed custom metrics is based on the average number of custom metrics (from all paid hosts) per hour over a given month. The billable number of ingested custom metrics only grows if you've used Metrics without Limits™ to configure your metric.  Contact [Sales][9] or your [Customer Success][10] Manager to discuss custom metrics for your account or to purchase an additional custom metrics package.
 
 ## Standard integrations
 
@@ -297,7 +297,6 @@ For technical questions, contact [Datadog support][24].
 
 For billing questions, contact your [Customer Success][10] Manager.
 
-\*Metrics without Limits is a trademark of Datadog, Inc.
 
 [1]: /integrations/
 [2]: /metrics/custom_metrics/
