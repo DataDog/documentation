@@ -13,7 +13,7 @@ further_reading:
 <div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
 {{< /site-region >}}
 
-<div class="alert alert-warning">Database Monitoring for SQL Server is currently in private BETA.</div>
+<div class="alert alert-warning">Database Monitoring for SQL Server is currently in private BETA. Reach out to your Customer Success Manager to request access to the BETA.</div>
 
 Database Monitoring provides deep visibility into your Microsoft SQL Server databases by exposing query metrics, query samples, explain plans, database states, failovers, and events.
 
