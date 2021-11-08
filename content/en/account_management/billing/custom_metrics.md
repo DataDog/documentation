@@ -252,7 +252,7 @@ Suppose you want to keep only the `endpoint` and `status` tags associated with t
 
 The number of custom metrics from a [DISTRIBUTION metric][1] is five times the unique combination of metric name and tag values. As a result of the tag customization, `request.Latency` reporting a total of **5\*3 = 15 indexed custom metrics**. Based on the original tags sent on this metric, the original **ingested** custom metrics volume of `request.Latency` is **20 ingested custom metrics**.
 
-Learn more about [Metrics without Limits][2].
+Learn more about [Metrics without Limits™][2].
 
 [1]: /metrics/types/?tab=distribution#definition
 [2]: /metrics/metrics-without-limits
