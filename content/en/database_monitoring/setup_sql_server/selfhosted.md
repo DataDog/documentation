@@ -17,7 +17,9 @@ further_reading:
 
 Database Monitoring provides deep visibility into your Microsoft SQL Server databases by exposing query metrics, query samples, explain plans, database states, failovers, and events.
 
-The Agent collects telemetry directly from the database by logging in as a read-only user. Do the following setup to enable Database Monitoring with your database:
+The Agent collects telemetry directly from the database by logging in as a read-only user.
+
+Do the following setup steps to enable Database Monitoring with your database:
 
 1. [Configure the database](#configure-sql-server-settings)
 1. [Grant the Agent access to the database](#grant-the-agent-access)
