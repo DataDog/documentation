@@ -149,7 +149,7 @@ If you haven't already installed the Agent for your SQL Server database host, se
     logs_enabled: true
     ```
 
-2. Add this configuration block to your `sqlserver.d/conf.yaml` file to start collecting your SQL Server logs:
+2. To start collecting your SQL Server logs, add this configuration block to your `sqlserver.d/conf.yaml` file:
 
     ```yaml
     logs:
