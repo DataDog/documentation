@@ -32,12 +32,12 @@ datadog:
   api:
     key: "<API key>"
 ```
-To send the data to the Datadog EU site, also set the `site` parameter:
+To send the data to a different [Datadog site][22], also set the `site` parameter:
 ```
 datadog:
   api:
     key: "<API key>"
-    site: datadoghq.eu
+    site: {{< region-param key="dd_site" code="true" >}}
 ```
 
 On each OpenTelemetry-instrumented application, set the resource attributes `deployment.environment`, `service.name`, and `service.version` using [the language's SDK][1]. As a fall-back, you can also configure hostname (optionally), environment, service name, and service version at the collector level for unified service tagging by following the [example configuration file][7]. If you don't specify the hostname explicitly, the exporter attempts to get an automatic default by checking the following sources in order, falling back to the next one if the current one is unavailable or invalid:
@@ -327,3 +327,4 @@ Datadog recommends you use the OpenTelemetry Collector Datadog exporter in conju
 [19]: /tracing/setup_overview/open_standards/python#opentelemetry
 [20]: /tracing/setup_overview/open_standards/ruby#opentelemetry
 [21]: /tracing/setup_overview/open_standards/nodejs#opentelemetry
+[22]: /getting_started/site/
