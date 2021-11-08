@@ -41,7 +41,7 @@ Proxies, load balancers, and connection poolers
 : The Agent must connect directly to the host being monitored. For self-hosted databases, `127.0.0.1` or the socket is preferred. The Agent should not connect to the database through a proxy, load balancer, or connection pooler. While this can be an anti-pattern for client applications, each Agent must have knowledge of the underlying host and should stick to a single host for its lifetime, even in cases of failover. If the Datadog Agent connects to different hosts while it is running, the values of metrics will be incorrect.
 
 Data security considerations
-: See [Sensitive information][2] for information about what data the Agent collects from your databases and how to ensure it is secure.
+: Read about how Database Management handles [sensitive information][2] for information about what data the Agent collects from your databases and how to ensure it is secure.
 
 ## Configure SQL Server settings
 
