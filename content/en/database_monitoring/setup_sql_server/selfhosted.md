@@ -108,7 +108,7 @@ If you haven't already installed the Agent for your SQL Server database host, se
 {{% /tab %}}
 {{% tab "Linux" %}}
 
-    For SQL Server installations running on Linux hosts, use the `odbc` connector and specify the proper driver as indicated in the `odbcinst.ini` file.
+   For SQL Server installations running on Linux hosts, use the `odbc` connector and specify the proper driver as indicated in the `odbcinst.ini` file.
 
     ```yaml
     init_config:
