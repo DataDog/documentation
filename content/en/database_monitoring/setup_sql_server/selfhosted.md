@@ -48,7 +48,7 @@ Data security considerations
 1. In the server properties for your SQL Server instance, navigate to **Server Properties** -> **Security** -> **SQL Server and Windows Authentication mode** and ensure that your SQL Server instance supports SQL Server authentication by enabling `SQL Server and Windows Authentication mode`.
 
 
-2. Ensure that your SQL Server instance is listening on a specific fixed port. By default, named instances and SQL Server Express are configured for dynamic ports. See [Microsoft's documentation][3] for more details.
+2. Ensure that your SQL Server instance is listening on a specific fixed port. By default, named instances and SQL Server Express are configured for dynamic ports. Read Microsoft's documentation about [TCP/IP Properties][3] for more details.
 
 ### Linux installation
 
