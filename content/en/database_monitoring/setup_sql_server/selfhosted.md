@@ -88,8 +88,7 @@ If you haven't already installed the Agent for your SQL Server database host, se
 
 1. Edit the Agent's `conf.d/sqlserver.d/conf.yaml` file to point to your `host` / `port` and set the hosts to monitor. See the [sample sqlserver.d/conf.yaml][7] for all available configuration options.
 
-{{< tabs >}}
-{{% tab "Windows" %}}
+   **Windows:**
 
     ```yaml
     init_config:
@@ -105,8 +104,7 @@ If you haven't already installed the Agent for your SQL Server database host, se
           - 'env:<CUSTOM_ENV>'
     ```
 
-{{% /tab %}}
-{{% tab "Linux" %}}
+   **Linux**:
 
    For SQL Server installations running on Linux hosts, use the `odbc` connector and specify the proper driver as indicated in the `odbcinst.ini` file.
 
@@ -124,8 +122,6 @@ If you haven't already installed the Agent for your SQL Server database host, se
           - 'env:<CUSTOM_ENV>'
     ```
 
-{{% /tab %}}
-{{< /tabs >}}
 
 
    The `service` and `env` tags allow you to link your database telemetry to other telemetry through a common tagging scheme. To learn how these tags are used throughout Datadog, read the documentation on [unified service tagging][8].
