@@ -128,7 +128,7 @@ If you haven't already installed the Agent for your SQL Server database host, se
 {{< /tabs >}}
 
 
-  The `service` and `env` tags allow you to link your database telemetry to other telemetry through a common tagging scheme. To see how these tags are used throughout Datadog, see the documentation on [unified service tagging][8].
+   The `service` and `env` tags allow you to link your database telemetry to other telemetry through a common tagging scheme. To learn how these tags are used throughout Datadog, read the documentation on [unified service tagging][8].
 
   See the [example check configuration][7] for a comprehensive description of all options, including how to use custom SQL queries to create your own metrics.
 
