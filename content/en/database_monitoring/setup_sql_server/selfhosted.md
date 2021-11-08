@@ -130,20 +130,20 @@ If you haven't already installed the Agent for your SQL Server database host, se
 
    The `service` and `env` tags allow you to link your database telemetry to other telemetry through a common tagging scheme. To learn how these tags are used throughout Datadog, read the documentation on [unified service tagging][8].
 
-  See the [example check configuration][7] for a comprehensive description of all options, including how to use custom SQL queries to create your own metrics.
+   See the [example check configuration][7] for a comprehensive description of all options, including how to use custom SQL queries to create your own metrics.
 
-  **Note**: The (default) provider `SQLOLEDB` is being deprecated. To use the newer `MSOLEDBSQL` provider, set the `adoprovider` variable to `MSOLEDBSQL` in your `sqlserver.d/conf.yaml` file after having downloaded the new provider from [Microsoft][9]. It is also possible to use the Windows Authentication and not specify the username/password with:
+   **Note**: The (default) provider `SQLOLEDB` is deprecated and no longer maintained. To use the newer `MSOLEDBSQL` provider, set the `adoprovider` variable to `MSOLEDBSQL` in your `sqlserver.d/conf.yaml` file after having downloaded the new provider from [Microsoft][9]. It is also possible to use the Windows Authentication and not specify the username and password with:
 
-  ```yaml
-  connection_string: "Trusted_Connection=yes"
-  ```
+   ```yaml
+   connection_string: "Trusted_Connection=yes"
+   ```
 
 2. [Restart the Agent][10].
 
 
 ### Collecting logs (optional)
 
-1. Collecting logs is disabled by default in the Datadog Agent, enable it in your `datadog.yaml` file:
+1. Collecting logs is disabled by default in the Datadog Agent. To enable it, set `logs_enabled: true` in your `datadog.yaml` file:
 
     ```yaml
     logs_enabled: true
