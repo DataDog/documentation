@@ -76,7 +76,7 @@ To collect file size metrics per database, ensure the user you created (`datadog
 GRANT CONNECT ANY DATABASE to datadog;
 ```
 
-Additionally to collect AlwaysOn and `sys.master_files` metrics, grant the following additional permission:
+To collect AlwaysOn and `sys.master_files` metrics, grant the following additional permission:
 
 ```SQL
 GRANT VIEW ANY DEFINITION to datadog;
