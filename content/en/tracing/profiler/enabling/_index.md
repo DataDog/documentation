@@ -25,7 +25,7 @@ Select your language below to learn how to enable a profiler for your applicatio
 
 {{< partial name="profiling/profiling-languages.html" >}}
 
-To get notified when a private beta is available for the **Node**, **PHP**, or **.NET** Profiler, [sign up here][2].
+To get notified when a private beta is available for the **PHP**, or **.NET** Profiler, [sign up here][2].
 
 
 ## Further Reading

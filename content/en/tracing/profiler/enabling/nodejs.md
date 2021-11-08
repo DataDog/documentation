@@ -3,7 +3,7 @@ title: Enabling the Node.js Profiler
 kind: Documentation
 code_lang: nodejs
 type: multi-code-lang
-code_lang_weight: 40
+code_lang_weight: 50
 further_reading:
     - link: 'getting_started/profiler'
       tag: 'Documentation'
