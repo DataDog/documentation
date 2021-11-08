@@ -169,7 +169,7 @@ If you haven't already installed the Agent for your SQL Server database host, se
 
 ### Validate
 
-[Run the Agent's status subcommand][11] and look for `sqlserver` under the Checks section. Or visit the [Databases][12] page to get started!
+[Run the Agent's status subcommand][11] and look for `sqlserver` under the **Checks** section. Or navigate to the [Databases][12] page in Datadog to get started!
 
 ## Troubleshooting
 
