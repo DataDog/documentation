@@ -10,7 +10,10 @@ further_reading:
       text: "Troubleshooting CI"
 ---
 
-{{< site-region region="us,eu,us3" >}}
+{{< site-region region="us5,gov" >}}
+<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
+{{< /site-region >}}
+
 JUnit test report files are XML files that contain test execution information, such as test and suite names, pass/fail status, duration, and sometimes error logs. Although it was introduced by the [JUnit][1] testing framework, many other popular frameworks are able to output results using this format.
 
 As an alternative to instrumenting your tests natively using Datadog tracers, which is the recommended option as it provides the most comprehensive test results, you can also upload JUnit XML test reports.
@@ -36,25 +39,25 @@ datadog-ci junit upload --service <service_name> <path> [<path> ...]
 Specify a valid [Datadog API key][3] in the `DATADOG_API_KEY` environment variable, and the environment where tests were run (for example, `local` when uploading results from a developer workstation, or `ci` when uploading them from a CI provider) in the `DD_ENV` environment variable. For example:
 
 {{< site-region region="us" >}}
-{{< code-block lang="bash" >}}
-DD_ENV=ci DATADOG_API_KEY=<api_key> datadog-ci junit upload \
+<pre class="chroma">
+<code class="language-bash" data-lang="bash">
+DD_ENV=ci DATADOG_API_KEY=&lt;key&gt; datadog-ci junit upload \
   --service my-api-service \
   unit-tests/junit-reports e2e-tests/single-report.xml
-{{< /code-block >}}
+</code>
+</pre>
 {{< /site-region >}}
-{{< site-region region="eu" >}}
-{{< code-block lang="bash" >}}
-DD_ENV=ci DATADOG_API_KEY=<api_key> DATADOG_SITE=datadoghq.eu datadog-ci junit upload \
+{{< site-region region="eu,us3" >}}
+<pre class="chroma">
+<code class="language-bash" data-lang="bash">
+DD_ENV=ci DATADOG_API_KEY=&lt;key&gt; DATADOG_SITE={{< region-param key="dd_site" >}} datadog-ci junit upload \
   --service my-api-service \
   unit-tests/junit-reports e2e-tests/single-report.xml
-{{< /code-block >}}
+</code>
+</pre>
 {{< /site-region >}}
-{{< site-region region="us3" >}}
-{{< code-block lang="bash" >}}
-DD_ENV=ci DATADOG_API_KEY=<api_key> DATADOG_SITE=us3.datadoghq.com datadog-ci junit upload \
---service my-api-service \
-unit-tests/junit-reports e2e-tests/single-report.xml
-{{< /code-block >}}
+{{< site-region region="us5,gov" >}}
+<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
 ## Configuration settings
@@ -100,11 +103,9 @@ The following environment variables are supported:
 Additionally, configure the Datadog site to use the selected one ({{< region-param key="dd_site_name" >}}):
 
 `DATADOG_SITE` (Required)
-: The [Datadog site][1] to upload results to.<br/>
+: The Datadog site to upload results to.<br/>
 **Default**: `datadoghq.com`<br/>
 **Selected site**: {{< region-param key="dd_site" code="true" >}}
-
-[1]: /getting_started/site/
 {{< /site-region >}}
 
 
@@ -208,7 +209,7 @@ For mobile apps (Swift, Android):
 `test.bundle`
 : Used to execute groups of test suites separately.<br/>
 **Examples**: `ApplicationUITests`, `ModelTests` -->
-  
+
 ## Providing metadata through `<property>` elements
 
 In addition to the `--tags` CLI parameter and the `DD_TAGS` environment variable, which apply custom tags globally to all tests included the uploaded XML report, you can provide additional tags to specific tests by including `<property name="dd_tags[key]" value="value">` elements within the `<testsuite>` or `<testcase>` elements. If you add these tags to a `<testcase>` element, they are stored in its test span. If you add the tags to a `<testsuite>` element, they are stored in all of that suite's test spans.
@@ -254,7 +255,3 @@ To be processed, the `name` attribute in the `<property>` element must have the 
 [2]: https://www.npmjs.com/package/@datadog/datadog-ci
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: https://git-scm.com/downloads
-{{< /site-region >}}
-{{< site-region region="us5,gov" >}}
-The selected Datadog site ({{< region-param key="dd_site_name" >}}) is not supported at this time.
-{{< /site-region >}}
