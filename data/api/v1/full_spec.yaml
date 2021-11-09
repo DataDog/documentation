@@ -12664,8 +12664,8 @@ components:
           type: string
         ratio_in_month:
           description: Shows usage aggregation for a billing period.
-          format: int64
-          type: integer
+          format: double
+          type: number
         start_date:
           description: Shows the first date of usage.
           format: date-time
