@@ -13,7 +13,9 @@ further_reading:
 
 ## Overview 
 
-Private locations can run [API][1], [multistep API][2], and [browser tests][3]. One private location can run several types of tests. Browser tests are more resource intensive than API and multistep API tests.
+Private locations can run [API][1], [multistep API][2], and [browser tests][3]. Browser tests are more resource intensive than API and multistep API tests. One private location can also run several types of tests.
+
+By defining a test type, maximum number of test runs, and total hardware requirements, you can calculate your private locations' dimensions and distribute resources across multiple workers to improve the efficiency of your test runs.
 
 To improve dimensioning, split your test assignments based on test types. For example, you can have some private locations run only API and multistep API tests while other private locations run only browser tests.
 
