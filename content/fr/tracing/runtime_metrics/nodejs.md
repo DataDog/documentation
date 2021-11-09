@@ -14,7 +14,7 @@ further_reading:
     text: Implémenter Opentracing dans vos applications
   - link: tracing/visualization/
     tag: Documentation
-    text: 'Explorer vos services, ressources et traces'
+    text: Explorer vos services, ressources et traces
 ---
 <div class="alert alert-warning">
 Cette fonctionnalité est actuellement en version bêta privée. <a href="https://docs.datadoghq.com/help/">Contactez l'assistance</a> afin de demander son activation pour votre compte.
@@ -28,7 +28,7 @@ Les métriques runtime peuvent être visualisées conjointement à vos services 
 
 Par défaut, les métriques runtime de votre application sont envoyées à l'Agent Datadog par le biais de DogStatsD sur le port `8125`. Veillez à ce que [DogStatsD soit activé pour l'Agent][2].
 Si vous exécutez l'Agent en tant que conteneur, assurez-vous que `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` [est défini sur true][3] et que le port `8125` est ouvert sur l'Agent.
-Dans Kubernetes, [associez le port DogstatsD à un port de host][4] ; dans ECS, [indiquez les flags pertinents dans la définition de votre tâche][5].
+Dans Kubernetes, [liez le port DogstatsD au port d'un host][4] ; dans ECS, [indiquez les flags pertinents dans la définition de votre tâche][5].
 
 ## Données collectées
 
@@ -43,7 +43,7 @@ Datadog fournit non seulement ces métriques sur votre page Service de l'APM, ma
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/apm/services
-[2]: /fr/developers/metrics/dogstatsd_metrics_submission/#setup
+[2]: /fr/metrics/dogstatsd_metrics_submission/#setup
 [3]: /fr/agent/docker/#dogstatsd-custom-metrics
 [4]: /fr/developers/dogstatsd/?tab=kubernetes#agent
 [5]: /fr/integrations/amazon_ecs/?tab=python#create-an-ecs-task

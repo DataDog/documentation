@@ -16,6 +16,9 @@ further_reading:
 - link: "/developers/community/libraries/"
   tag: "Documentation"
   text: "Official and Community created API and DogStatsD client libraries"
+- link: "https://www.datadoghq.com/blog/metrics-without-limits/"
+  tag: "Blog"
+  text: "Dynamically control your custom metrics volume with Metrics without Limits™"
 ---
 
 ## Overview
@@ -54,9 +57,9 @@ The following custom metric naming convention must be followed:
 ## Submitting custom metrics
 
 {{< whatsnext desc="There are multiple ways to send metrics to Datadog:">}}
-    {{< nextlink href="/developers/metrics/agent_metrics_submission" >}}Custom Agent check{{< /nextlink >}}
-    {{< nextlink href="/developers/metrics/dogstatsd_metrics_submission" >}}DogStatsD{{< /nextlink >}}
-    {{< nextlink href="/developers/metrics/powershell_metrics_submission" >}}PowerShell{{< /nextlink >}}
+    {{< nextlink href="/metrics/agent_metrics_submission" >}}Custom Agent check{{< /nextlink >}}
+    {{< nextlink href="/metrics/dogstatsd_metrics_submission" >}}DogStatsD{{< /nextlink >}}
+    {{< nextlink href="/metrics/powershell_metrics_submission" >}}PowerShell{{< /nextlink >}}
     {{< nextlink href="/serverless/custom_metrics" >}}AWS Lambda{{< /nextlink >}}
     {{< nextlink href="/api/v1/metrics/#submit-metrics" >}}Datadog's HTTP API{{< /nextlink >}}
     {{< nextlink href="/logs/log_configuration/logs_to_metrics/#generate-a-log-based-metric" >}}Generate Log-based metrics{{< /nextlink >}}
@@ -76,13 +79,13 @@ You can also use one of the [Datadog official and community contributed API and 
 
 [1]: /integrations/
 [2]: /account_management/billing/custom_metrics/#standard-integrations
-[3]: /developers/metrics/dogstatsd_metrics_submission/
-[4]: /developers/metrics/agent_metrics_submission/
+[3]: /metrics/dogstatsd_metrics_submission/
+[4]: /metrics/agent_metrics_submission/
 [5]: https://app.datadoghq.com/account/usage/hourly
 [6]: /account_management/billing/custom_metrics/#counting-custom-metrics
 [7]: /metrics
-[8]: /developers/metrics/types/
-[9]: /developers/metrics/types/?tab=rate#metric-types
-[10]: /developers/metrics/types/?tab=count#metric-types
+[8]: /metrics/types/
+[9]: /metrics/types/?tab=rate#metric-types
+[10]: /metrics/types/?tab=count#metric-types
 [11]: /developers/dogstatsd/data_aggregation/#how-is-aggregation-performed-with-the-dogstatsd-server
 [12]: /developers/community/libraries/

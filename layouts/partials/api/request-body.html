@@ -16,7 +16,7 @@
 
   <div class="tab-content">
       {{ range $contentType, $content := $body.content }}
-          {{- if hasPrefix $contentType "application/json" -}}
+          {{- if (or (hasPrefix $contentType "application/json") (hasPrefix $contentType "text/json")) -}}
               {{ range $itemKey, $schema := $content }}
                   {{ if eq $itemKey "schema" }}
                       <!-- Get Json and HTML -->

@@ -5,10 +5,17 @@ further_reading:
     - link: "/continuous_integration/explore_pipelines"
       tag: "Documentation"
       text: "Explore Pipeline Execution Results and Performance"
+    - link: "/continuous_integration/setup_pipelines/custom_commands/"
+      tag: "Documentation"
+      text: "Extend Pipeline Visibility by tracing individual commands"
     - link: "/continuous_integration/troubleshooting/"
       tag: "Documentation"
       text: "Troubleshooting CI"
 ---
+
+{{< site-region region="us5,gov" >}}
+<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
+{{< /site-region >}}
 
 ## Compatibility
 
@@ -23,7 +30,7 @@ If the Jenkins controller and the Datadog Agent have been deployed to a Kubernet
 
 ## Install the Datadog Jenkins plugin
 
-Install and enable the [Datadog Jenkins plugin][3] v3.1.0 or newer:
+Install and enable the [Datadog Jenkins plugin][3] v3.3.0 or newer:
 
 1. In your Jenkins instance web interface, go to **Manage Jenkins > Manage Plugins**.
 2. In the [Update Center][4] on the **Available** tab, search for `Datadog Plugin`.
@@ -31,6 +38,9 @@ Install and enable the [Datadog Jenkins plugin][3] v3.1.0 or newer:
 4. To verify that the plugin is installed, search for `Datadog Plugin` on the **Installed** tab.
 
 ## Enabling CI Visibility on the plugin
+
+{{< tabs >}}
+{{% tab "Using UI" %}}
 
 1. In your Jenkins instance web interface, go to **Manage Jenkins > Configure System**.
 2. Go to the `Datadog Plugin` section, scrolling down the configuration screen.
@@ -41,14 +51,93 @@ Install and enable the [Datadog Jenkins plugin][3] v3.1.0 or newer:
 7. (Optional) Configure your CI Instance name.
 8. Check the connectivity with the Datadog Agent.
 9. Save your configuration.
-10. To verify that CI Visibility is enabled, go to `Jenkins Log` and search for:
+
+{{< img src="ci/ci-jenkins-plugin-config.png" alt="Datadog Plugin configuration for Jenkins" style="width:100%;">}}
+{{% /tab %}}
+{{% tab "Using configuration-as-code" %}}
+If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
+
+1. Create or modify the configuration YAML by adding an entry for `datadogGlobalConfiguration`:
+    ```yaml
+    unclassified:
+        datadogGlobalConfiguration:
+            # Select the `Datadog Agent` mode.
+            reportWith: "DSD"
+            # Configure the `Agent` host
+            targetHost: "agent-host"
+            # Configure the `Traces Collection` port (default `8126`).
+            targetTraceCollectionPort: 8126
+            # Enable CI Visibility flag
+            enableCiVisibility: true
+            # (Optional) Configure your CI Instance name
+            ciInstanceName: "jenkins"
+    ```
+2. In your Jenkins instance web interface, go to **Manage Jenkins > Configuration as Code**.
+3. Apply or reload the configuration.
+4. Check the configuration using the `View Configuration` button.
+
+[1]: https://github.com/jenkinsci/configuration-as-code-plugin/blob/master/README.md
+{{% /tab %}}
+{{% tab "Using Groovy" %}}
+
+1. In your Jenkins instance web interface, go to **Manage Jenkins > Script Console**.
+2. Run the configuration script:
+    ```groovy
+    import jenkins.model.*
+    import org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration
+
+    def j = Jenkins.getInstance()
+    def d = j.getDescriptor("org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration")
+
+    // Select the Datadog Agent mode
+    d.setReportWith('DSD')
+
+    // Configure the Agent host.
+    d.setTargetHost('<agent host>')
+
+    // Configure the Traces Collection port (default 8126)
+    d.setTargetTraceCollectionPort(8126)
+
+    // Enable CI Visibility
+    d.setEnableCiVisibility(true)
+
+    // (Optional) Configure your CI Instance name
+    d.setCiInstanceName("jenkins")
+
+    // Save config
+    d.save()
+    ```
+{{% /tab %}}
+{{% tab "Using Environment Variables" %}}
+
+1. Set the following environment variables on your Jenkins instance machine:
+    ```bash
+    # Select the Datadog Agent mode
+    DATADOG_JENKINS_PLUGIN_REPORT_WITH=DSD
+
+    # Configure the Agent host
+    DATADOG_JENKINS_PLUGIN_TARGET_HOST=agent-host
+
+    # Configure the Traces Collection port (default 8126)
+    DATADOG_JENKINS_PLUGIN_TARGET_TRACE_COLLECTION_PORT=8126
+
+    # Enable CI Visibility
+    DATADOG_JENKINS_PLUGIN_ENABLE_CI_VISIBILITY=true
+
+    # (Optional) Configure your CI Instance name
+    DATADOG_JENKINS_PLUGIN_CI_VISIBILITY_CI_INSTANCE_NAME=jenkins
+    ```
+2. Restart your Jenkins instance.
+
+{{% /tab %}}
+{{< /tabs >}}
+
+To verify that CI Visibility is enabled, go to `Jenkins Log` and search for:
 
 {{< code-block lang="text" >}}
 Re/Initialize Datadog-Plugin Agent Http Client
 TRACE -> http://<HOST>:<TRACE_PORT>/v0.3/traces
 {{< /code-block >}}
-
-{{< img src="ci/ci-jenkins-plugin-config.png" alt="Datadog Plugin configuration for Jenkins" style="width:100%;">}}
 
 ## Enable job log collection
 
@@ -78,6 +167,9 @@ With this setup, the Agent listens in port `10518` for logs.
 
 Second, enable job log collection on the Datadog Plugin:
 
+{{< tabs >}}
+{{% tab "Using UI" %}}
+
 1. In the web interface of your Jenkins instance, go to **Manage Jenkins > Configure System**.
 2. Go to the `Datadog Plugin` section, scrolling down the configuration screen.
 3. Select the `Datadog Agent` mode.
@@ -86,6 +178,76 @@ Second, enable job log collection on the Datadog Plugin:
 6. Click on `Enable Log Collection` checkbox to activate it.
 7. Check the connectivity with the Datadog Agent.
 8. Save your configuration.
+{{% /tab %}}
+{{% tab "Using configuration-as-code" %}}
+If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
+
+1. Create or modify the configuration YAML for the entry `datadogGlobalConfiguration`:
+    ```yaml
+    unclassified:
+    datadogGlobalConfiguration:
+        # Select the `Datadog Agent` mode.
+        reportWith: "DSD"
+        # Configure the `Agent` host
+        targetHost: "agent-host"
+        # Configure the `Log Collection` port, as configured in the previous step.
+        targetLogCollectionPort: 10518
+        # Enable Log collection
+        collectBuildLogs: true
+    ```
+2. In your Jenkins instance web interface, go to **Manage Jenkins > Configuration as Code**.
+3. Apply or reload the configuration.
+4. Check the configuration using the `View Configuration` button.
+
+[1]: https://github.com/jenkinsci/configuration-as-code-plugin/blob/master/README.md
+{{% /tab %}}
+{{% tab "Using Groovy" %}}
+
+1. In your Jenkins instance web interface, go to **Manage Jenkins > Script Console**.
+2. Run the configuration script:
+    ```groovy
+    import jenkins.model.*
+    import org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration
+
+    def j = Jenkins.getInstance()
+    def d = j.getDescriptor("org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration")
+
+    // Select the Datadog Agent mode
+    d.setReportWith('DSD')
+
+    // Configure the Agent host, if not previously configured.
+    d.setTargetHost('<agent host>')
+
+    // Configure the Log Collection port, as configured in the previous step.
+    d.setTargetLogCollectionPort(10518)
+
+    // Enable log collection
+    d.setCollectBuildLogs(true)
+
+    // Save config
+    d.save()
+    ```
+{{% /tab %}}
+{{% tab "Using Environment Variables" %}}
+
+1. Set the following environment variables on your Jenkins instance machine:
+    ```bash
+    # Select the Datadog Agent mode
+    DATADOG_JENKINS_PLUGIN_REPORT_WITH=DSD
+
+    # Configure the Agent host
+    DATADOG_JENKINS_PLUGIN_TARGET_HOST=agent-host
+
+    # Configure the Log Collection port, as configured in the previous step.
+    DATADOG_JENKINS_PLUGIN_TARGET_LOG_COLLECTION_PORT=10518
+
+    # Enable log collection
+    DATADOG_JENKINS_PLUGIN_COLLECT_BUILD_LOGS=true
+    ```
+2. Restart your Jenkins instance.
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Set the default branch name
 
@@ -103,6 +265,88 @@ pipeline {
     stages {
         ...
     }
+}
+{{< /code-block >}}
+
+## Set Git information manually
+
+The Jenkins plugin uses environment variables to determine the Git information. However, these environment variables are not always set
+automatically due to dependencies on the Git plugin that is being used in the pipeline.
+
+If the Git information is not detected automatically, you can set the following environment variables manually.
+
+**Note:** These variables are optional, but if they are set, they take precedence over the Git information set by other Jenkins plugins.
+
+`DD_GIT_REPOSITORY` (Optional)
+: The repository URL of your service.<br/>
+**Example**: `https://github.com/my-org/my-repo.git`
+
+`DD_GIT_BRANCH` (Optional)
+: The branch name.<br/>
+**Example**: `main`
+
+`DD_GIT_TAG` (Optional)
+: The tag of the commit (if any).<br/>
+**Example**: `0.1.0`
+
+`DD_GIT_COMMIT_SHA` (Optional)
+: The commit expressed in the hex 40 chars length form.<br/>
+**Example**: `faaca5c59512cdfba9402c6e67d81b4f5701d43c`
+
+`DD_GIT_COMMIT_MESSAGE` (Optional)
+: The commit message.<br/>
+**Example**: `Initial commit message`
+
+`DD_GIT_COMMIT_AUTHOR_NAME` (Optional)
+: The name of the author of the commit.<br/>
+**Example**: `John Smith`
+
+`DD_GIT_COMMIT_AUTHOR_EMAIL` (Optional)
+: The email of the author of the commit.<br/>
+**Example**: `john@example.com`
+
+`DD_GIT_COMMIT_AUTHOR_DATE` (Optional)
+: The date when the author submitted the commit expressed in ISO 8601 format.<br/>
+**Example**: `2021-08-16T15:41:45.000Z`
+
+`DD_GIT_COMMIT_COMMITTER_NAME` (Optional)
+: The name of the committer of the commit.<br/>
+**Example**: `Jane Smith`
+
+`DD_GIT_COMMIT_COMMITTER_EMAIL` (Optional)
+: The email of the committer of the commit.<br/>
+**Example**: `jane@example.com`
+
+`DD_GIT_COMMIT_COMMITTER_DATE` (Optional)
+: The date when the committer submitted the commit expressed in ISO 8601 format.<br/>
+**Example**: `2021-08-16T15:41:45.000Z`
+
+If you set only repository, branch and commit, the plugin will try to extract the rest of the Git information from the `.git` folder.
+
+An example of usage:
+
+{{< code-block lang="groovy" >}}
+pipeline {
+  agent any
+  stages {
+    stage('Checkout') {
+      steps {
+        script {
+          def gitVars = git url:'https://github.com/my-org/my-repo.git', branch:'some/feature-branch'
+
+          // Setting Git information manually via environment variables.
+          env.DD_GIT_REPOSITORY_URL=gitVars.GIT_URL
+          env.DD_GIT_BRANCH=gitVars.GIT_BRANCH
+          env.DD_GIT_COMMIT_SHA=gitVars.GIT_COMMIT
+        }
+      }
+    }
+    stage('Test') {
+      steps {
+        // Execute the rest of the pipeline.
+      }
+    }
+  }
 }
 {{< /code-block >}}
 

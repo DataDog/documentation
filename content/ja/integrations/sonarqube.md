@@ -19,11 +19,11 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/sonarqube/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/sonarqube/README.md
 display_name: SonarQube
 draft: false
 further_reading:
-  - link: 'https://www.datadoghq.com/blog/datadog-sonarqube-integration/'
+  - link: https://www.datadoghq.com/blog/datadog-sonarqube-integration/
     tag: ブログ
     text: SonarQube で Datadog のコード品質を監視
 git_integration_title: sonarqube

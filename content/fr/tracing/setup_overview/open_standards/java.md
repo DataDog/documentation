@@ -105,7 +105,7 @@ try (final Scope scope = tracer.activateSpan(span)) {
 
 ### Injecter et extraire du contexte pour le tracing distribué
 
-Créez une trace distribuée avec une instrumentation manuelle à l'aide d'Opentracing :
+Créez une trace distribuée avec une instrumentation manuelle à l'aide d'OpenTracing :
 
 ```java
 // 1re étape : injecter les en-têtes Datadog dans le code du client

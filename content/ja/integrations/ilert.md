@@ -13,13 +13,14 @@ categories:
 creates_events: false
 ddtype: crawler
 dependencies:
-  - 'https://github.com/DataDog/integrations-extras/blob/master/ilert/README.md'
+  - https://github.com/DataDog/integrations-extras/blob/master/ilert/README.md
 display_name: iLert
 draft: false
 git_integration_title: ilert
 guid: 875497b9-a27e-4099-92e9-968a70c592fa
 integration_id: ilert
 integration_title: iLert
+integration_version: ''
 is_public: true
 kind: integration
 maintainer: support@ilert.com

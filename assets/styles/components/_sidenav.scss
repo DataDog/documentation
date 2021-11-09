@@ -47,6 +47,25 @@ body {
     padding-right: 15px;
     padding-bottom: 50px;
 
+    i[class*='icon-'] {
+        display: inline-block;
+        width: 20px;
+        margin-top: 4px;
+    }
+
+    // Exception for main sidenav since APM's title wraps to a second line
+    .en &:not(.navbar-sidenav .sidenav) .icon-apm,
+    .en &:not(.navbar-sidenav .sidenav) .icon-cog,
+    // Exceptions for FR site
+    .fr &:not(.navbar-sidenav .sidenav) .icon-security,
+    .fr &:not(.navbar-sidenav .sidenav) .icon-synthetics,
+    .fr &:not(.navbar-sidenav .sidenav) .icon-dev-code {
+        @include media-breakpoint-only(lg) {
+            align-self: flex-start;
+            margin-top: 8px;
+        }
+    }
+
     .sticky {
         .col {
             padding-right: 0;
@@ -373,6 +392,29 @@ body {
                 font-size: 18px;
                 padding-top: 15px;
             }
+        }
+    }
+}
+
+.ja .sidenav {
+    i[class*='icon-'] {
+        margin-top: 0;
+    }
+
+    &:not(.navbar-sidenav .sidenav) [data-path='ja/security_monitoring'] .icon-security {
+        align-self: flex-start;
+        margin-top: 4px;
+    }
+
+    @include media-breakpoint-only(lg) {
+        &:not(.navbar-sidenav .sidenav) .icon-mobile,
+        &:not(.navbar-sidenav .sidenav) .icon-host-map,
+        &:not(.navbar-sidenav .sidenav) .icon-apm,
+        &:not(.navbar-sidenav .sidenav) .icon-rum,
+        &:not(.navbar-sidenav .sidenav) .icon-network,
+        &:not(.navbar-sidenav .sidenav) [data-path='ja/security_monitoring'] .icon-security {
+            align-self: flex-start;
+            margin-top: 4px;
         }
     }
 }

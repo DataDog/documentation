@@ -48,8 +48,9 @@ Here is an example of how to apply a timeshift function on your error logs to co
     {{< nextlink href="/dashboards/functions/rollup" >}}Rollup: Control the number of raw data points used. {{< /nextlink >}}
     {{< nextlink href="/dashboards/functions/smoothing" >}}Smoothing: Smooth your metric variations.{{< /nextlink >}}
     {{< nextlink href="/dashboards/functions/timeshift" >}}Timeshift: Shift your metric data point along the timeline. {{< /nextlink >}}
+    {{< nextlink href="/dashboards/functions/beta" >}}Beta: Compute the rolling average of a metric.{{< /nextlink >}}
 {{< /whatsnext >}}
 
 
-[1]: /metrics/introduction/#time-aggregation
-[2]: /metrics/introduction/#space-aggregation
+[1]: /metrics/#time-aggregation
+[2]: /metrics/#space-aggregation

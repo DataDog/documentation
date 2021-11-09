@@ -2,16 +2,18 @@
 title: Installing the Datadog Agent to Collect Tests Data
 kind: documentation
 further_reading:
-    - link: "/continuous_integration/setup_tests/containers/"
-      tag: "Documentation"
-      text: "Forwarding Environment Variables for Tests in Containers"
-    - link: "/continuous_integration/setup_tests/"
-      tag: "Next step"
-      text: "Instrumenting tests in your language"
-
+  - link: "/continuous_integration/setup_tests/containers/"
+    tag: "Documentation"
+    text: "Forwarding Environment Variables for Tests in Containers"
+  - link: "/continuous_integration/setup_tests/"
+    tag: "Next step"
+    text: "Instrumenting tests in your language"
 ---
 
-{{< site-region region="us,eu" >}}
+{{< site-region region="us5,gov" >}}
+<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
+{{< /site-region >}}
+
 To report test results to Datadog, the [Datadog Agent][1] is required.
 
 There are two ways to set up the Agent in a CI environment:
@@ -31,7 +33,7 @@ If you are using a Kubernetes executor, Datadog recommends using the [Admission 
 
 If you are using a SaaS CI provider with no access to the underlying worker nodes, run the Datadog Agent in a container as a build service. This method is also available for an on-premises CI provider that uses a container-based executor if [installing the Datadog Agent on each worker node](#installing-the-agent-on-each-ci-worker-node) is not an option.
 
-To run the Datadog Agent as a container acting as a simple results forwarder, use the Docker image `datadog/agent:latest` and the following environment variables:
+To run the Datadog Agent as a container acting as a simple results forwarder, use the Docker image `gcr.io/datadoghq/agent:latest` and the following environment variables:
 
 `DD_API_KEY` (Required)
 : The [Datadog API key][4] used to upload the test results.<br/>
@@ -47,16 +49,13 @@ To run the Datadog Agent as a container acting as a simple results forwarder, us
 **Default**: (autodetected)<br/>
 **Required value**: `none`
 
-
-{{< site-region region="eu" >}}
+{{< site-region region="us3,eu" >}}
 Additionally, configure the Datadog site to use the selected one ({{< region-param key="dd_site_name" >}}):
 
-`DD_SITE` (Required)
-: The [Datadog site][1] to upload results to.<br/>
+`DD_SITE`
+: The Datadog site to upload results to.<br/>
 **Default**: `datadoghq.com`<br/>
 **Selected site**: {{< region-param key="dd_site" code="true" >}}
-
-[1]: /getting_started/site/
 {{< /site-region >}}
 
 ### CI provider configuration examples
@@ -66,7 +65,7 @@ The following sections provide CI provider-specific instructions to run and conf
 {{< tabs >}}
 {{% tab "Azure Pipelines" %}}
 
-To run the Datadog Agent in Azure Pipelines, define a new container in the [`resources` section][1] and link it with the job declaring it as a [`service` container][2]:
+To run the Datadog Agent in Azure Pipelines, define a new container in the [resources section][1] and link it with the job declaring it as a [service container][2].
 
 {{< site-region region="us" >}}
 {{< code-block lang="yaml" filename="azure-pipeline.yml" >}}
@@ -76,7 +75,7 @@ variables:
 resources:
   containers:
     - container: dd_agent
-      image: datadog/agent:latest
+      image: gcr.io/datadoghq/agent:latest
       ports:
         - 8126:8126
       env:
@@ -92,7 +91,9 @@ jobs:
       - script: make test
 {{< /code-block >}}
 {{< /site-region >}}
-{{< site-region region="eu" >}}
+{{< site-region region="us3,eu" >}}
+Replace `<DD_SITE>` with the selected site: {{< region-param key="dd_site" code="true" >}}.
+
 {{< code-block lang="yaml" filename="azure-pipeline.yml" >}}
 variables:
   ddApiKey: $(DD_API_KEY)
@@ -100,14 +101,14 @@ variables:
 resources:
   containers:
     - container: dd_agent
-      image: datadog/agent:latest
+      image: gcr.io/datadoghq/agent:latest
       ports:
         - 8126:8126
       env:
         DD_API_KEY: $(ddApiKey)
         DD_INSIDE_CI: "true"
         DD_HOSTNAME: "none"
-        DD_SITE: "datadoghq.eu"
+        DD_SITE: "<DD_SITE>"
 
 jobs:
   - job: test
@@ -120,15 +121,14 @@ jobs:
 
 Add your [Datadog API key][3] to your [project environment variables][4] with the key `DD_API_KEY`.
 
-
 [1]: https://docs.microsoft.com/en-us/azure/devops/pipelines/process/resources?view=azure-devops&tabs=schema
 [2]: https://docs.microsoft.com/en-us/azure/devops/pipelines/process/service-containers?view=azure-devops&tabs=yaml
-[3]: https://app.datadoghq.com/account/settings#api
+[3]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: https://docs.microsoft.com/en-us/azure/devops/pipelines/process/variables?view=azure-devops&tabs=yaml%2Cbatch
 {{% /tab %}}
 {{% tab "GitLab CI" %}}
 
-To run the Agent in GitLab, define the Agent container under [`services`][1]:
+To run the Agent in GitLab, define the Agent container under [services][1].
 
 {{< site-region region="us" >}}
 {{< code-block lang="yaml" filename=".gitlab-ci.yml" >}}
@@ -140,23 +140,26 @@ variables:
 
 test:
   services:
-    - name: datadog/agent:latest
+    - name: gcr.io/datadoghq/agent:latest
   script:
     - make test
 {{< /code-block >}}
 {{< /site-region >}}
-{{< site-region region="eu" >}}
+{{< site-region region="us3,eu" >}}
+
+Replace `<DD_SITE>` with the selected site: {{< region-param key="dd_site" code="true" >}}.
+
 {{< code-block lang="yaml" filename=".gitlab-ci.yml" >}}
 variables:
   DD_API_KEY: $DD_API_KEY
   DD_INSIDE_CI: "true"
   DD_HOSTNAME: "none"
   DD_AGENT_HOST: "datadog-agent"
-  DD_SITE: "datadoghq.eu"
+  DD_SITE: "<DD_SITE>"
 
 test:
   services:
-    - name: datadog/agent:latest
+    - name: gcr.io/datadoghq/agent:latest
   script:
     - make test
 {{< /code-block >}}
@@ -164,14 +167,13 @@ test:
 
 Add your [Datadog API key][2] to your [project environment variables][3] with the key `DD_API_KEY`.
 
-
 [1]: https://docs.gitlab.com/ee/ci/docker/using_docker_images.html#what-is-a-service
-[2]: https://app.datadoghq.com/account/settings#api
+[2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://docs.gitlab.com/ee/ci/variables/README.html#custom-environment-variables
 {{% /tab %}}
 {{% tab "GitHub Actions" %}}
 
-To run the Agent in GitHub Actions, define the Agent container under [`services`][1]:
+To run the Agent in GitHub Actions, define the Agent container under [services][1].
 
 {{< site-region region="us" >}}
 {{< code-block lang="yaml" >}}
@@ -179,7 +181,7 @@ jobs:
   test:
     services:
       datadog-agent:
-        image: datadog/agent:latest
+        image: gcr.io/datadoghq/agent:latest
         ports:
           - 8126:8126
         env:
@@ -190,20 +192,23 @@ jobs:
       - run: make test
 {{< /code-block >}}
 {{< /site-region >}}
-{{< site-region region="eu" >}}
+{{< site-region region="us3,eu" >}}
+
+Replace `<DD_SITE>` with the selected site: {{< region-param key="dd_site" code="true" >}}.
+
 {{< code-block lang="yaml" >}}
 jobs:
   test:
     services:
       datadog-agent:
-        image: datadog/agent:latest
+        image: gcr.io/datadoghq/agent:latest
         ports:
           - 8126:8126
         env:
           DD_API_KEY: ${{ secrets.DD_API_KEY }}
           DD_INSIDE_CI: "true"
           DD_HOSTNAME: "none"
-          DD_SITE: "datadoghq.eu"
+          DD_SITE: "<DD_SITE>"
     steps:
       - run: make test
 {{< /code-block >}}
@@ -211,16 +216,13 @@ jobs:
 
 Add your [Datadog API key][2] to your [project secrets][3] with the key `DD_API_KEY`.
 
-
 [1]: https://docs.github.com/en/actions/guides/about-service-containers
-[2]: https://app.datadoghq.com/account/settings#api
+[2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://docs.github.com/en/actions/reference/encrypted-secrets
 {{% /tab %}}
 {{% tab "CircleCI" %}}
 
 To run the Agent in CircleCI, launch the Agent container before running tests by using the [datadog/agent CircleCI orb][1], and stop it after to ensure results are sent to Datadog.
-
-For example:
 
 {{< site-region region="us" >}}
 {{< code-block lang="yaml" filename=".circleci/config.yml" >}}
@@ -245,7 +247,10 @@ workflows:
       - test
 {{< /code-block >}}
 {{< /site-region >}}
-{{< site-region region="eu" >}}
+{{< site-region region="us3,eu" >}}
+
+Replace `<DD_SITE>` with the selected site: {{< region-param key="dd_site" code="true" >}}.
+
 {{< code-block lang="yaml" filename=".circleci/config.yml" >}}
 version: 2.1
 
@@ -257,7 +262,7 @@ jobs:
     docker:
       - image: circleci/<language>:<version_tag>
     environment:
-      DD_SITE: "datadoghq.eu"
+      DD_SITE: "<DD_SITE>"
     steps:
       - checkout
       - datadog-agent/setup
@@ -273,23 +278,22 @@ workflows:
 
 Add your [Datadog API key][2] to your [project environment variables][3] with the key `DD_API_KEY`.
 
-
 [1]: https://circleci.com/developer/orbs/orb/datadog/agent
-[2]: https://app.datadoghq.com/account/settings#api
+[2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://circleci.com/docs/2.0/env-vars/
 {{% /tab %}}
 {{< /tabs >}}
 
 ### Using Docker Compose
 
-Regardless of which CI provider you use, if tests are run using [Docker Compose][5], the Datadog Agent can be run as one service:
+Regardless of which CI provider you use, if tests are run using [Docker Compose][5], the Datadog Agent can be run as one service.
 
 {{< site-region region="us" >}}
 {{< code-block lang="yaml" filename="docker-compose.yml" >}}
 version: '3'
 services:
   datadog-agent:
-    image: "datadog/agent:latest"
+    image: "gcr.io/datadoghq/agent:latest"
     environment:
       - DD_API_KEY
       - DD_INSIDE_CI=true
@@ -303,17 +307,20 @@ services:
       - DD_AGENT_HOST=datadog-agent
 {{< /code-block >}}
 {{< /site-region >}}
-{{< site-region region="eu" >}}
+{{< site-region region="us3,eu" >}}
+
+Replace `<DD_SITE>` with the selected site: {{< region-param key="dd_site" code="true" >}}.
+
 {{< code-block lang="yaml" filename="docker-compose.yml" >}}
 version: '3'
 services:
   datadog-agent:
-    image: "datadog/agent:latest"
+    image: "gcr.io/datadoghq/agent:latest"
     environment:
       - DD_API_KEY
       - DD_INSIDE_CI=true
       - DD_HOSTNAME=none
-      - DD_SITE=datadoghq.eu
+      - DD_SITE=<DD_SITE>
     ports:
       - 8126/tcp
 
@@ -331,7 +338,7 @@ Alternatively, share the same network namespace between the Agent container and 
 version: '3'
 services:
   datadog-agent:
-    image: "datadog/agent:latest"
+    image: "gcr.io/datadoghq/agent:latest"
     environment:
       - DD_API_KEY
       - DD_INSIDE_CI=true
@@ -342,17 +349,20 @@ services:
     network_mode: "service:datadog-agent"
 {{< /code-block >}}
 {{< /site-region >}}
-{{< site-region region="eu" >}}
+{{< site-region region="us3,eu" >}}
+
+Replace `<DD_SITE>` with the selected site: {{< region-param key="dd_site" code="true" >}}.
+
 {{< code-block lang="yaml" filename="docker-compose.yml" >}}
 version: '3'
 services:
   datadog-agent:
-    image: "datadog/agent:latest"
+    image: "gcr.io/datadoghq/agent:latest"
     environment:
       - DD_API_KEY
       - DD_INSIDE_CI=true
       - DD_HOSTNAME=none
-      - DD_SITE=datadoghq.eu
+      - DD_SITE=<DD_SITE>
 
   tests:
     build: .
@@ -379,10 +389,6 @@ DD_API_KEY=<YOUR_DD_API_KEY> docker-compose up \
 [1]: /agent/
 [2]: https://app.datadoghq.com/account/settings#agent
 [3]: https://docs.datadoghq.com/agent/cluster_agent/admission_controller/
-[4]: https://app.datadoghq.com/account/settings#api
+[4]: https://app.datadoghq.com/organization-settings/api-keys
 [5]: https://docs.docker.com/compose/
 [6]: /continuous_integration/setup_tests/containers/
-{{< /site-region >}}
-{{< site-region region="us3,gov" >}}
-The selected Datadog site ({{< region-param key="dd_site_name" >}}) is not supported at this time.
-{{< /site-region >}}

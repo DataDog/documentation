@@ -1,57 +1,58 @@
 // bootstrap customization & font setup
-@import "bootstrap-custom";
-@import "webfonts";
-@import "icons";
+@import 'bootstrap-custom';
+@import 'webfonts';
+@import 'icons';
 
 // base
-@import "base/variables";
-@import "base/mixins";
-@import "base/colors";
-@import "base/typography";
-@import "base/helpers";
+@import 'base/variables';
+@import 'base/mixins';
+@import 'base/colors';
+@import 'base/typography';
+@import 'base/helpers';
 
 // vendor
-@import "vendor/chroma-styles";
+@import 'vendor/chroma-styles';
 
 // docsearch
-@import "main_docsearch";
+@import 'main_docsearch';
 
 // global to all pages
-@import "pages/global";
+@import 'pages/global';
 // language specific
-@import "pages/ja";
-@import "pages/fr";
+@import 'pages/ja';
+@import 'pages/fr';
 
 // page specific styles that aren't partials go here
 // partial css lives with partial
+
 @import "pages/api";
 @import "pages/search";
 @import "pages/404";
 @import "pages/home";
-@import "pages/help";
 @import "pages/security_monitoring";
 
 // Components
+@import 'components/iconfont'; // imported from websites-modules
 @import 'components/announcement-banner'; // imported from websites-modules
-@import "components/badge";
-@import "components/cards";
-@import "components/footer";
-@import "components/global-modals";
-@import "components/header";
-@import "components/integration-labels";
-@import "components/integration-breadcrumbs";
-@import "components/integrations";
-@import "components/platforms";
-@import "components/preview_banner";
-@import "components/questions";
-@import "components/language-region-select";
-@import "components/sidenav";
-@import "components/support";
-@import "components/table-of-contents";
-@import "components/tile-nav";
-@import "components/whats-next";
-@import "components/schema-table";
-@import "components/tab-toggle";
+@import 'components/badge';
+@import 'components/cards';
+@import 'components/footer';
+@import 'components/global-modals';
+@import 'components/header';
+@import 'components/integration-labels';
+@import 'components/integration-breadcrumbs';
+@import 'components/integrations';
+@import 'components/platforms';
+@import 'components/preview_banner';
+@import 'components/questions';
+@import 'components/language-region-select';
+@import 'components/sidenav';
+@import 'components/support';
+@import 'components/table-of-contents';
+@import 'components/tile-nav';
+@import 'components/whats-next';
+@import 'components/schema-table';
+@import 'components/tab-toggle';
 
 // for now just include ie fixes
-@import "ie";
+@import 'ie';

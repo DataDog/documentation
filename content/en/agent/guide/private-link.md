@@ -28,16 +28,6 @@ The overall process consists of configuring an internal endpoint in your VPC tha
 
 ## Setup
 
-### Datadog Agent
-
-Update the `dd_url` parameter in your [datadog.yaml][2]:
-
-```yaml
-dd_url: https://agent.datadoghq.com
-```
-
-### AWS VPC endpoint
-
 1. Connect to the AWS console to region **us-east-1** and create a new VPC endpoint:
    {{< img src="agent/guide/private_link/create_vpc_endpoint.png" alt="Create VPC endpoint" style="width:60%;" >}}
 2. Select **Find service by name**.
@@ -57,8 +47,8 @@ dd_url: https://agent.datadoghq.com
 
 | Forwarder | Datadog Logs Service Name |
 | --------- | ------------------------- |
-| Datadog Agent | `com.amazonaws.vpce.us-east-1.vpce-svc-025a56b9187ac1f63` |
-| Lambda or custom forwarder | `com.amazonaws.vpce.us-east-1.vpce-svc-06394d10ccaf6fb97` |
+| Datadog Agent or Lambda Extension | `com.amazonaws.vpce.us-east-1.vpce-svc-025a56b9187ac1f63` |
+| Lambda forwarder or custom forwarder | `com.amazonaws.vpce.us-east-1.vpce-svc-06394d10ccaf6fb97` |
 
 {{% /tab %}}
 {{% tab "API" %}}
@@ -91,7 +81,7 @@ dd_url: https://agent.datadoghq.com
 {{% /tab %}}
 {{< /tabs >}}
 
-4. Hit the _verify_ button. If it does not return _Service name found_, reach out to the [Datadog support team][3].
+4. Click **Verify**. If this does not return _Service name found_, reach out to [Datadog support][2].
 5. Choose the VPC and subnets that should be peered with the Datadog VPC service endpoint.
 6. Make sure that for **Enable DNS name** the _Enable for this endpoint_ is checked:
    {{< img src="agent/guide/private_link/enabled_dns_private.png" alt="Enable DNS private" style="width:60%;" >}}
@@ -105,8 +95,8 @@ dd_url: https://agent.datadoghq.com
 10. Wait for the status to move from _Pending_ to _Available_. This can take up to 10 minutes.
     {{< img src="agent/guide/private_link/vpc_status.png" alt="VPC status" style="width:60%;" >}}
 
-    Once it shows _Available_, the AWS PrivateLink is ready to be used. 
-11. If you are collecting logs data, ensure your Agent is configured to send logs over HTTPS. If it's not already there, add the following to the [Agent `datadog.yaml` configuration file][2]:
+    Once it shows _Available_, the AWS PrivateLink is ready to be used.
+11. If you are collecting logs data, ensure your Agent is configured to send logs over HTTPS. If the data is not already there, add the following to the [Agent `datadog.yaml` configuration file][3]:
 
     ```yaml
     logs_config:
@@ -119,14 +109,14 @@ dd_url: https://agent.datadoghq.com
     DD_LOGS_CONFIG_USE_HTTP=true
     ```
 
-    This configuration is required when sending logs to Datadog with AWS PrivateLink. See [Agent log collection][4] for more details.
+    This configuration is required when sending logs to Datadog with AWS PrivateLink and the Datadog Agent, and is not required for the Lambda Extension. See [Agent log collection][4] for more details.
 12. [Restart your Agent][5] to send data to Datadog through AWS PrivateLink.
 
 ## Advanced usage
 
 ### Inter-region peering
 
-To route traffic to Datadog's PrivateLink offering in `us-east-1` from other regions, use inter-region [Amazon VPC peering][6]. 
+To route traffic to Datadog's PrivateLink offering in `us-east-1` from other regions, use inter-region [Amazon VPC peering][6].
 
 Inter-region VPC peering enables you to establish connections between VPCs across different AWS regions. This allows VPC resources in different regions to communicate with each other using private IP addresses.
 
@@ -137,8 +127,8 @@ See [Amazon VPC peering][6] for more details.
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://aws.amazon.com/privatelink/
-[2]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-[3]: /help/
+[2]: /help/
+[3]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 [4]: /agent/logs/?tab=tailexistingfiles#send-logs-over-https
 [5]: /agent/guide/agent-commands/#restart-the-agent
 [6]: https://docs.aws.amazon.com/vpc/latest/peering/what-is-vpc-peering.html

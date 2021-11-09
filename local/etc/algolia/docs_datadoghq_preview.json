@@ -259,7 +259,7 @@
     ],
     "conversation_id": ["620036890"],
     "custom_settings": {
-        "separatorsToIndex": "_@.",
+        "separatorsToIndex": "_@.#",
         "attributeForDistinct": "url_without_anchor",
         "attributesForFaceting": ["language", "tags"],
         "optionalWords": ["the", "without"],

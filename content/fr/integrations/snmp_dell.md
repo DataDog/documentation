@@ -14,13 +14,14 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/snmp_dell/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/snmp_dell/README.md
 display_name: Dell
 draft: false
 git_integration_title: snmp_dell
 guid: 67aa0ef7-7c1d-4c03-8723-6beb4f531f6b
 integration_id: snmp-dell
 integration_title: Dell Inc.
+integration_version: ''
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com

@@ -2,7 +2,7 @@
 title: メトリクスタイプのモディファイアー
 kind: documentation
 aliases:
-  - /ja/developers/metrics/metric_type_modifiers
+  - /ja/metrics/metric_type_modifiers
   - /ja/graphing/faq/as_count_validation
 further_reading:
   - link: /developers/dogstatsd/
@@ -77,7 +77,7 @@ further_reading:
 
 通常は必要ありませんが、[メトリクスサマリーページ][4]でメトリクスのタイプを変更することができます。
 
-{{< img src="developers/metrics/type_modifiers/metric_type.png" alt="メトリクスタイプ"  style="width:70%;">}}
+{{< img src="metrics/type_modifiers/metric_type.png" alt="メトリクスタイプ"  style="width:70%;">}}
 
 使用例：
 
@@ -95,7 +95,7 @@ further_reading:
 
 **注**: Agent チェックの `self.increment` は、単調増加カウンターの増分を計算するのではなく、チェック実行時に渡された値を報告します。単調増加カウンターの増分値を送信する場合は、`self.monotonic_count` を使用してください。
 
-[1]: /ja/developers/metrics/types/
+[1]: /ja/metrics/types/
 [2]: /ja/metrics/introduction/#time-aggregation
 [3]: /ja/dashboards/faq/why-does-zooming-out-a-timeframe-also-smooth-out-my-graphs/
 [4]: https://app.datadoghq.com/metric/summary

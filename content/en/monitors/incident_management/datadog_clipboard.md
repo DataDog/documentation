@@ -8,7 +8,7 @@ further_reading:
       text: "Explore your data effortlessly with the Datadog Clipboard"
 ---
 
-# Overview
+## Overview
 
 The Datadog Clipboard is a cross-platform tool for collecting and sharing signals across contexts. It is personal to each user and stores all copied graphs alongside any saved links. Signals can be grouped and exported to a dashboard, notebook, or incident.
 

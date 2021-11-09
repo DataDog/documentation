@@ -15,9 +15,9 @@ further_reading:
   text: "Kubernetes Prometheus and OpenMetrics metrics collection"
 ---
 
-If you are using Datadog's Prometheus or OpenMetrics checks, you may be interested in how these metrics map to existing Datadog metrics types. 
+If you are using Datadog's Prometheus or OpenMetrics checks, you may be interested in how these metrics map to existing Datadog metrics types.
 
-See the [Prometheus and OpenMetrics metrics collection documentation][1] for more information.
+See [Kubernetes Prometheus and OpenMetrics Metrics Collection][1] for more information.
 
 ## Prometheus and OpenMetrics metric types
 
@@ -28,7 +28,7 @@ See the [Prometheus and OpenMetrics metrics collection documentation][1] for mor
 
 ## How Prometheus/OpenMetrics metrics map to Datadog metrics
 
-For more information about Datadog metric types, see the [Datadog Metric Types documentation][2].
+For more information, see [Datadog Metric Types][2].
 
 ### Counter
 
@@ -59,9 +59,9 @@ If the parameter `send_distribution_buckets` is `true`, the histogram is convert
 If the parameter `send_distribution_counts_as_monotonic` is `true`, each metric ending in `_count` is submitted as `monotonic_count`. [Read more about monotonic counters][4].
 
 [1]: /agent/kubernetes/prometheus/
-[2]: /developers/metrics/types/
+[2]: /metrics/types/
 [3]: https://prometheus.io/docs/concepts/metric_types/#counter
-[4]: /developers/metrics/agent_metrics_submission/?tab=count#monotonic-count
+[4]: /metrics/agent_metrics_submission/?tab=count#monotonic-count
 [5]: https://prometheus.io/docs/concepts/metric_types/#gauge
 [6]: https://prometheus.io/docs/concepts/metric_types/#histogram
 [7]: https://www.datadoghq.com/blog/engineering/computing-accurate-percentiles-with-ddsketch/

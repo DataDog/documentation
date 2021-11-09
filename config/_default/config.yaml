@@ -41,6 +41,14 @@ module:
        target: layouts/partials/announcement_banner.html
      - source: assets/scss/components/_announcement-banner.scss
        target: assets/styles/components/_announcement-banner.scss
+     - source: assets/scss/base/_iconfont.scss
+       target: assets/styles/components/_iconfont.scss
+     - source: static/fonts/icon-font/iconfont.woff2
+       target: static/fonts/iconfont.woff2
+     - source: static/fonts/icon-font/iconfont.woff
+       target: static/fonts/iconfont.woff
+     - source: static/fonts/icon-font/iconfont.woff2
+       target: static/fonts/iconfont.woff2
 
   mounts:
     # default mounts

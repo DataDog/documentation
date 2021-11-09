@@ -11,13 +11,14 @@ categories:
 creates_events: true
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/oom_kill/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/oom_kill/README.md
 display_name: OOM Killer
 draft: false
 git_integration_title: oom_kill
 guid: 4b8e9c18-1a13-43b0-a03c-186eb3221147
 integration_id: oom-kill
 integration_title: OOM Killer
+integration_version: ''
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
@@ -54,8 +55,8 @@ yum install -y kernel-headers-$(uname -r)
 yum install -y kernel-devel-$(uname -r)
 ```
 
-**注**: Kernel バージョン 4.11 以降では、機能を使用するために OOM Kill チェックが必要です。
-また、バージョン 8 以前の Windows、Container-Optimized OS、CentOS/RHEL はサポートされません。
+**注**: OOM Kill チェックが動作するためにはKernel バージョン 4.11 以降が必要です。
+また、Windows、Container-Optimized OS、バージョン 8 以前の CentOS/RHEL はサポートされません。
 
 ### コンフィギュレーション
 

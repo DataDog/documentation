@@ -2,10 +2,10 @@
 title: Why am I getting so many No Data alerts?
 kind: faq
 further_reading:
-- link: "/monitors/notifications/"
+- link: "/monitors/notify/"
   tag: "Documentation"
   text: "Configure your monitor notifications"
-- link: "/monitors/downtimes/"
+- link: "/monitors/notify/downtimes/"
   tag: "Documentation"
   text: "Schedule a downtime to mute a monitor"
 ---

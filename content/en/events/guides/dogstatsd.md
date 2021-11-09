@@ -57,9 +57,6 @@ options = {
 initialize(**options)
 
 statsd.event('An error occurred', 'Error message', alert_type='error', tags=['env:dev'])
-
-# Optional manual flush (only available in client versions >= 0.43.0)
-statsd.flush()
 ```
 {{< /programming-lang >}}
 
@@ -198,7 +195,7 @@ $statsd->event('An error occurred.',
 ```
 
 
-[1]: https://app.datadoghq.com/account/settings#api
+[1]: https://app.datadoghq.com/organization-settings/api-keys
 {{< /programming-lang >}}
 
 {{< /programming-lang-wrapper >}}

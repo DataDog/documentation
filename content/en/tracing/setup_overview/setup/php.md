@@ -61,7 +61,7 @@ Install and configure the Datadog Agent to receive traces from your now instrume
     `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`.
 
     See [environment variable configuration](#environment-variable-configuration) for more information on how to set these variables.
-{{< site-region region="us3,eu,gov" >}}
+{{< site-region region="us3,us5,eu,gov" >}}
 
 4. Set `DD_SITE` in the Datadog Agent to {{< region-param key="dd_site" code="true" >}} to ensure the Agent sends data to the right Datadog location.
 
@@ -244,15 +244,15 @@ The Agent URL; takes precedence over `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`; 
 
 `DD_TRACE_AUTO_FLUSH_ENABLED`
 : **Default**: `false`<br>
-Automatically flush the tracer when all the spans are closed; set to `true` in conjunction with `DD_TRACE_GENERATE_ROOT_SPAN=0` to trace long-running processes
+Automatically flush the tracer when all the spans are closed; set to `true` in conjunction with `DD_TRACE_GENERATE_ROOT_SPAN=0` to trace [long-running processes](#long-running-cli-scripts).
 
 `DD_TRACE_CLI_ENABLED`
 : **Default**: `false`<br>
-Enable tracing of PHP scripts from the CLI
+Enable tracing of PHP scripts from the CLI. See [Tracing CLI scripts](#tracing-cli-scripts).
 
 `DD_TRACE_DEBUG`
 : **Default**: `false`<br>
-Enable [debug mode](#custom-url-to-resource-mapping) for the tracer
+Enable debug mode. When `true`, log messages are sent to the device or file set in the `error_log` INI setting. The actual value of `error_log` might be different than the output of `php -i` as it can be overwritten in the PHP-FPM/Apache configuration files.
 
 `DD_TRACE_ENABLED`
 : **Default**: `true`<br>
@@ -260,7 +260,7 @@ Enable the tracer globally
 
 `DD_TRACE_GENERATE_ROOT_SPAN`
 : **Default**: `true`<br>
-Automatically generate a top-level span; set to `false` in conjunction with `DD_TRACE_AUTO_FLUSH_ENABLED=1` to trace long-running processes
+Automatically generate a top-level span; set to `false` in conjunction with `DD_TRACE_AUTO_FLUSH_ENABLED=1` to trace [long-running processes](#long-running-cli-scripts).
 
 `DD_TAGS`
 : **Default**: `null`<br>
@@ -330,27 +330,27 @@ The table below specifies the default service names for each integration. Change
 
 Use the name when setting integration-specific configuration such as, `DD_TRACE_<INTEGRATION>_ENABLED`, for example: Laravel is `DD_TRACE_LARAVEL_ENABLED`.
 
-| Integration       | Service Name      |
-|-------------------|-------------------|
-| CakePHP           | `cakephp`         |
-| CodeIgniter       | `codeigniter`     |
-| cURL              | `curl`            |
-| ElasticSearch     | `elasticsearch`   |
-| Eloquent          | `eloquent`        |
-| Guzzle            | `guzzle`          |
-| Laravel           | `laravel`         |
-| Lumen             | `lumen`           |
-| Memcached         | `memcached`       |
-| Mongo             | `mongo`           |
-| Mysqli            | `mysqli`          |
-| PDO               | `pdo`             |
-| PhpRedis          | `phpredis`        |
-| Predis            | `predis`          |
-| Slim              | `slim`            |
-| Symfony           | `symfony`         |
-| WordPress         | `wordpress`       |
-| Yii               | `yii`             |
-| ZendFramework     | `zendframework`   |
+| Integration   | Service Name    |
+| ------------- | --------------- |
+| CakePHP       | `cakephp`       |
+| CodeIgniter   | `codeigniter`   |
+| cURL          | `curl`          |
+| ElasticSearch | `elasticsearch` |
+| Eloquent      | `eloquent`      |
+| Guzzle        | `guzzle`        |
+| Laravel       | `laravel`       |
+| Lumen         | `lumen`         |
+| Memcached     | `memcached`     |
+| Mongo         | `mongo`         |
+| Mysqli        | `mysqli`        |
+| PDO           | `pdo`           |
+| PhpRedis      | `phpredis`      |
+| Predis        | `predis`        |
+| Slim          | `slim`          |
+| Symfony       | `symfony`       |
+| WordPress     | `wordpress`     |
+| Yii           | `yii`           |
+| ZendFramework | `zendframework` |
 
 #### Map resource names to normalized URI
 
@@ -363,14 +363,14 @@ Note that setting any of the following: <code>DD_TRACE_RESOURCE_URI_FRAGMENT_REG
 For HTTP server and client integrations, the URL is used to form the trace resource name in the format `<HTTP_REQUEST_METHOD> <NORMALIZED_URL>`, with the query string removed from the URL. This allows better visibility in any custom framework that is not automatically instrumented by normalizing the URLs and grouping together generic endpoints under one resource.
 
 | HTTP Request                       | Resource Name |
-|:-----------------------------------|:--------------|
+| :--------------------------------- | :------------ |
 | **GET** request to `/foo?a=1&b=2`  | `GET /foo`    |
 | **POST** request to `/bar?foo=bar` | `POST /bar`   |
 
 Numeric IDs, UUIDs (with and without dashes), and 32-to-512-bit hexadecimal hashes are automatically replaced with a `?` character.
 
 | URL (GET request)                              | Resource Name      |
-|:-----------------------------------------------|:-------------------|
+| :--------------------------------------------- | :----------------- |
 | `/user/123/show`                               | `GET /user/?/show` |
 | `/widget/b7a992e0-3300-4030-8617-84553b11c993` | `GET /widget/?`    |
 | `/api/v2/b7a992e033004030861784553b11c993/123` | `GET /api/v2/?/?`  |
@@ -383,8 +383,8 @@ You can turn this functionality OFF using `DD_TRACE_URL_AS_RESOURCE_NAMES_ENABLE
 There are a few cases that are not covered by the automatic normalization that is applied.
 
 | URL (GET request)                | Expected Resource Name        |
-|:---------------------------------|:------------------------------|
-| `/using/prefix/id123/for/id`    | `GET /using/prefix/?/for/id`  |
+| :------------------------------- | :---------------------------- |
+| `/using/prefix/id123/for/id`     | `GET /using/prefix/?/for/id`  |
 | `/articles/slug-of-title`        | `GET /articles/?`             |
 | `/cities/new-york/rivers`        | `GET /cities/?/rivers`        |
 | `/nested/cities/new-york/rivers` | `GET /nested/cities/?/rivers` |
@@ -399,7 +399,7 @@ There are two classes of scenarios that are not covered by automatic normalizati
 This setting is a CSV of one or more regular expressions that are applied to every path fragment independently. For example, setting `DD_TRACE_RESOURCE_URI_FRAGMENT_REGEX` to `^id\d+$` for a path of `/using/prefix/id123/for/id` applies the regex to each of the fragments: `using`, `prefix`, `id123`, `for`, and `id`.
 
 | URL                          | regex     | Expected Resource Name       |
-|:-----------------------------|:----------|:-----------------------------|
+| :--------------------------- | :-------- | :--------------------------- |
 | `/using/prefix/id123/for/id` | `^id\d+$` | `GET /using/prefix/?/for/id` |
 
 Note that because the format of this variable is a CSV, the comma character `,` is not escaped and cannot be used in your regular expressions.
@@ -416,6 +416,168 @@ Note that `DD_TRACE_RESOURCE_URI_MAPPING_INCOMING` applies to only incoming requ
 
 When [`open_basedir`][12] setting is used, then `/opt/datadog-php` should be added to the list of allowed directories.
 When the application runs in a docker container, the path `/proc/self` should also be added to the list of allowed directories.
+
+## Tracing CLI scripts
+
+### Short-running CLI scripts
+
+A short-running script typically runs for a few seconds or minutes and the expected behavior is to receive one trace each time the script is executed.
+
+By default, tracing is disabled for PHP scripts that run from the command line. Opt in by setting `DD_TRACE_CLI_ENABLED` to `true`.
+
+```
+$ export DD_TRACE_CLI_ENABLED=true
+
+# Optionally, set the agent host and port if different from localhost and 8126, respectively
+$ export DD_AGENT_HOST=agent
+$ export DD_TRACE_AGENT_PORT=8126
+```
+
+For example, assume the following `script.php` runs a Curl request:
+
+```
+<?php
+
+sleep(1);
+
+$ch = curl_init('https://httpbin.org/delay/1');
+curl_exec($ch);
+
+sleep(1);
+
+```
+
+Run the script:
+
+```
+$ php script.php
+```
+
+Once run, the trace is generated and sent to the Datadog backend when the script terminates.
+
+{{< img src="tracing/setup/php/short-running-cli.jpg" alt="Trace for a short running PHP CLI script" >}}
+
+### Long-running CLI scripts
+
+A long-running script runs for hours or days. Typically, such scripts repetitively execute a specific task, for example processing new incoming messages or new lines added to a table in a database. The expected behavior is that one trace is generated for each "unit of work", for example the processing of a message.
+
+By default, tracing is disabled for PHP scripts that run from the command line. Opt in by setting `DD_TRACE_CLI_ENABLED` to `true`.
+
+```
+$ export DD_TRACE_CLI_ENABLED=true
+# With this pair of settings, traces for each "unit of work" is sent as soon as the method execution terminates.
+$ export DD_TRACE_GENERATE_ROOT_SPAN=false
+$ export DD_TRACE_AUTO_FLUSH_ENABLED=true
+
+# Optionally, set service name, env, etc...
+$ export DD_SERVICE=my_service
+
+# Optionally, set the agent host and port if different from localhost and 8126, respectively
+$ export DD_AGENT_HOST=agent
+$ export DD_TRACE_AGENT_PORT=8126
+```
+
+For example, assume the following `long_running.php` script:
+
+```
+<?php
+
+
+/* Datadog specific code. It can be in a separate files and required in this script */
+use function DDTrace\trace_method;
+use function DDTrace\trace_function;
+use DDTrace\SpanData;
+
+trace_function('processMessage', function(SpanData $span, $args) {
+    // Access method arguments and change resource name
+    $span->resource =  'message:' . $args[0]->id;
+    $span->meta['message.content'] = $args[0]->content;
+    $span->service = 'my_service';
+});
+
+trace_method('ProcessingStage1', 'process', function (SpanData $span, $args) {
+    $span->service = 'my_service';
+    // Resource name defaults to the fully qualified method name.
+});
+
+trace_method('ProcessingStage2', 'process', function (SpanData $span, $args) {
+    $span->service = 'my_service';
+    $span->resource = 'message:' . $args[0]->id;
+});
+/* Enf of Datadog code */
+
+/** Represents a message to be received and processed */
+class Message
+{
+    public $id;
+    public $content;
+
+    public function __construct($id, $content)
+    {
+        $this->id   = $id;
+        $this->content = $content;
+    }
+}
+
+/** One of possibly many processing stages, each of which should have a Span */
+class ProcessingStage1
+{
+    public function process(Message $message)
+    {
+        sleep(1);
+        $ch = curl_init('https://httpbin.org/delay/1');
+        curl_exec($ch);
+    }
+}
+
+/** One of possibly many processing stages, each of which should have a Span */
+class ProcessingStage2
+{
+    public function process(Message $message)
+    {
+        sleep(1);
+    }
+}
+
+/** In a real world application, this will read new messages from a source, for example a queue */
+function waitForNewMessages()
+{
+    return [
+        new Message($id = (time() + rand(1, 1000)), 'content of a message: ' . $id),
+        new Message($id = (time() + rand(1, 1000)), 'content of a message: ' . $id),
+        new Message($id = (time() + rand(1, 1000)), 'content of a message: ' . $id),
+    ];
+}
+
+/** This function is the "unit of work", each execution of it will generate one single trace */
+function processMessage(Message $m, array $processors)
+{
+    foreach ($processors as $processor) {
+        $processor->process($m);
+        usleep(100000);
+    }
+}
+
+$processors = [new ProcessingStage1(), new ProcessingStage2()];
+
+/** A loop that runs forever waiting for new messages */
+while (true) {
+    $messages = waitForNewMessages();
+    foreach ($messages as $message) {
+        processMessage($message, $processors);
+    }
+}
+```
+
+Run the script:
+
+```
+$ php long_running.php
+```
+
+Once run, one trace is generated and sent to the Datadog backend every time a new message is processed.
+
+{{< img src="tracing/setup/php/long-running-cli.jpg" alt="Trace for a long running PHP CLI script" >}}
 
 ## Upgrading
 
@@ -617,7 +779,7 @@ apt-key adv --keyserver keyserver.ubuntu.com --recv-keys <SIGNING KEY FROM UBUNT
 apt update
 ```
 
-Try againg the canonical package names for debug symbols. For example, if the package name is `php7.2-fpm` try:
+Try adding the canonical package names for debug symbols. For example, if the package name is `php7.2-fpm` try:
 
 ```
 apt install -y php7.2-fpm-dbgsym

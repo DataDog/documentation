@@ -287,7 +287,7 @@ ActiveMQ XML チェックには、サービスのチェック機能は含まれ�
 [8]: https://www.datadoghq.com/blog/monitor-activemq-metrics-performance
 [9]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [10]: https://github.com/DataDog/integrations-core/blob/master/activemq_xml/datadog_checks/activemq_xml/data/conf.yaml.example
-[11]: https://docs.datadoghq.com/ja/developers/metrics/custom_metrics/
+[11]: https://docs.datadoghq.com/ja/metrics/custom_metrics/
 [12]: https://docs.datadoghq.com/ja/account_management/billing/custom_metrics/
 [13]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [14]: https://docs.datadoghq.com/ja/agent/guide/autodiscovery-with-jmx/?tab=containerizedagent

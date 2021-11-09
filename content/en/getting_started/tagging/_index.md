@@ -112,7 +112,7 @@ After you have [assigned tags][3] at the host and [integration][9] level, start 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /getting_started/tagging/using_tags/
-[2]: /developers/metrics/
+[2]: /metrics/
 [3]: /getting_started/tagging/assigning_tags/
 [4]: /getting_started/tagging/assigning_tags/#configuration-files
 [5]: /getting_started/tagging/assigning_tags/#ui

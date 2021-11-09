@@ -10,6 +10,10 @@ further_reading:
       text: "Troubleshooting CI"
 ---
 
+{{< site-region region="us5,gov" >}}
+<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
+{{< /site-region >}}
+
 ## Compatibility
 
 Supported test frameworks:
@@ -19,6 +23,8 @@ Supported test frameworks:
 * Mocha >= 5.2.0
   * Mocha >= 9.0.0 has [partial support](#known-limitations).
 * Cucumber-js >= 7.0.0
+* Cypress >= 6.7.0
+  * From `dd-trace>=1.4.0`
 
 ## Prerequisites
 
@@ -124,6 +130,43 @@ DD_ENV=ci npm test
 {{< /code-block >}}
 
 {{% /tab %}}
+
+{{% tab "Cypress" %}}
+
+1. Set [`pluginsFile`][1] to `"dd-trace/cypress/plugin"`, for example through [`cypress.json`][2]:
+{{< code-block lang="json" filename="cypress.json" >}}
+{
+  "pluginsFile": "dd-trace/cypress/plugin"
+}
+{{< /code-block >}}
+
+If you've already defined a `pluginsFile`, you can still initialize the instrumentation with:
+{{< code-block lang="javascript" filename="cypress/plugins/index.js" >}}
+module.exports = (on, config) => {
+  // your previous code is before this line
+  require('dd-trace/cypress/plugin')(on, config)
+}
+{{< /code-block >}}
+
+2. Add the following line to the [`supportFile`][3]:
+{{< code-block lang="javascript" filename="cypress/support/index.js" >}}
+// your previous code is before this line
+require('dd-trace/cypress/support')
+{{< /code-block >}}
+
+
+Run your tests as you normally do, specifying the environment where test are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable. For example:
+
+{{< code-block lang="bash" >}}
+DD_ENV=ci npm test
+{{< /code-block >}}
+
+
+
+[1]: https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests#Plugins-file
+[2]: https://docs.cypress.io/guides/references/configuration#cypress-json
+[3]: https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests#Support-file
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Configuration settings
@@ -148,6 +191,56 @@ The following is a list of the most important configuration settings that can be
 **Default**: `http://localhost:8126`
 
 All other [Datadog Tracer configuration][7] options can also be used.
+
+### Collecting Git metadata
+
+Datadog uses Git information for visualizing your test results and grouping them by repository, branch, and commit. Git metadata is automatically collected by the test instrumentation from CI provider environment variables and the local `.git` folder in the project path, if available.
+
+If you are running tests in non-supported CI providers or with no `.git` folder, you can set the Git information manually using environment variables. These environment variables take precedence over any auto-detected information. Set the following environment variables to provide Git information:
+
+`DD_GIT_REPOSITORY_URL`
+: URL of the repository where the code is stored. Both HTTP and SSH URLs are supported.<br/>
+**Example**: `git@github.com:MyCompany/MyApp.git`, `https://github.com/MyCompany/MyApp.git`
+
+`DD_GIT_BRANCH`
+: Git branch being tested. Leave empty if providing tag information instead.<br/>
+**Example**: `develop`
+
+`DD_GIT_TAG`
+: Git tag being tested (if applicable). Leave empty if providing branch information instead.<br/>
+**Example**: `1.0.1`
+
+`DD_GIT_COMMIT_SHA`
+: Full commit hash.<br/>
+**Example**: `a18ebf361cc831f5535e58ec4fae04ffd98d8152`
+
+`DD_GIT_COMMIT_MESSAGE`
+: Commit message.<br/>
+**Example**: `Set release number`
+
+`DD_GIT_COMMIT_AUTHOR_NAME`
+: Commit author name.<br/>
+**Example**: `John Smith`
+
+`DD_GIT_COMMIT_AUTHOR_EMAIL`
+: Commit author email.<br/>
+**Example**: `john@example.com`
+
+`DD_GIT_COMMIT_AUTHOR_DATE`
+: Commit author date in ISO 8601 format.<br/>
+**Example**: `2021-03-12T16:00:28Z`
+
+`DD_GIT_COMMIT_COMMITTER_NAME`
+: Commit committer name.<br/>
+**Example**: `Jane Smith`
+
+`DD_GIT_COMMIT_COMMITTER_EMAIL`
+: Commit committer email.<br/>
+**Example**: `jane@example.com`
+
+`DD_GIT_COMMIT_COMMITTER_DATE`
+: Commit committer date in ISO 8601 format.<br/>
+**Example**: `2021-03-12T16:00:28Z`
 
 
 ## Known limitations

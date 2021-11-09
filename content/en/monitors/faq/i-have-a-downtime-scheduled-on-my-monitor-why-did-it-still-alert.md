@@ -2,13 +2,13 @@
 title: I have a downtime scheduled on my monitor, why did it still alert?!
 kind: faq
 further_reading:
-- link: "/monitors/monitor_types/"
+- link: "/monitors/create/types/"
   tag: "Documentation"
   text: "Learn how to create a monitor"
-- link: "/monitors/notifications/"
+- link: "/monitors/notify/"
   tag: "Documentation"
   text: "Configure your monitor notifications"
-- link: "/monitors/downtimes/"
+- link: "/monitors/notify/downtimes/"
   tag: "Documentation"
   text: "Learn more about downtimes"
 ---
@@ -23,7 +23,7 @@ One easy way you can take advantage of this is to create new host-tags directly 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /monitors/downtimes/
+[1]: /monitors/notify/downtimes/
 [2]: /infrastructure/
 [3]: /infrastructure/hostmap/
 [4]: /api/v1/tags/#add-tags-to-a-host

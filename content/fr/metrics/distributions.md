@@ -6,7 +6,7 @@ aliases:
   - /fr/developers/faq/characteristics-of-datadog-histograms/
   - /fr/graphing/metrics/distributions/
 further_reading:
-  - link: /developers/metrics/dogstatsd_metrics_submission/
+  - link: /metrics/dogstatsd_metrics_submission/
     tag: Documentation
     text: Utilisation des distributions dans DogStatsD
 ---
@@ -52,5 +52,5 @@ Pour en savoir plus sur le nombre de métriques custom créées à partir de mé
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/developers/metrics/types/
+[1]: /fr/metrics/types/
 [2]: https://app.datadoghq.com/metric/distribution_metrics

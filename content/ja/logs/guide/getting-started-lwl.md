@@ -46,8 +46,6 @@ further_reading:
 
 除外するログパターンをクリックし、そこに含まれるログのサンプルを表示。
 
-{{< img src="logs/guide/getting-started-lwl/patterns_context_panel.png" alt="パターンコンテキスト" style="width:100%;">}}
-
 パターンビューは、ノイズの多いパターンを特定しフィルタリングする際に役立ちます。パターンに一致するログ数を、サービスとステータスに分けて表示します。一番上のパターンをクリックすると、ステータスに関連するイベントの詳細なログが表示されます。コンテキストパネルには、最もノイズの多いステータスパターンに関する情報が表示されます。
 
 ## 3. 除外フィルターログパターンを作成
@@ -71,8 +69,6 @@ further_reading:
 **注**: ログが複数の除外フィルターに一致した場合は、最初の除外フィルター規則だけが適用されます。複数の除外フィルターによってログが何度もサンプリングされたり除外されることはありません。
 
 ここでは、サービスステータス `INFO` パターン `Updating recommendations with customer_id=* & url=shops/*/*` が除外フィルターで絞り込まれます。これに似た大量のログパターンをログエクスポローラーから除外することで、問題を素早く見つけ特定するのに役立ちます。ただし、これらのログはログエクスポローラービューから**のみ**削除されるだけなので、収集し、[ライブテイル][5]での表示、[ログアーカイブ][6]への送信、[メトリクスの生成][7]に使用することができます。
-
-{{< img src="logs/guide/getting-started-lwl/live_tail.gif" alt="Live Tail" style="width:100%;">}}
 
 除外フィルターは、フィルターの右にある [無効] オプションを切り替えることで無効にできます。修正または削除するには、フィルターの上にカーソルを合わせ、[編集] または [削除] オプションを選択します。
 
@@ -111,7 +107,7 @@ further_reading:
 
 ここでは、Logging without Limits™ を以下に適用する方法について説明しました：
 
-1. [最多ログのサービスステータスを特定](#1-identify-your-most-logging-service-status)
+1. [最多ログのサービスステータスを特定](#1-identify-your-most-logged-service-status)
 2. [大量のログパターンを特定](#2-identify-high-volume-logging-patterns)
 3. [除外フィルターログパターンを作成](#3-create-a-log-pattern-exclusion-filter)
 4. [メトリクスを生成し除外されたログを追跡](#4-generate-metrics-to-track-excluded-logs)
@@ -130,7 +126,7 @@ Logging Without Limits™ の詳細やログエクスポローラー、Live Tail
 [4]: https://app.datadoghq.com/logs/patterns
 [5]: /ja/logs/live_tail/
 [6]: /ja/logs/archives/
-[7]: /ja/developers/metrics/
+[7]: /ja/metrics/
 [8]: /ja/logs/logs_to_metrics/
 [9]: /ja/monitors/monitor_types/anomaly/
 [10]: https://app.datadoghq.com/monitors#/triggered

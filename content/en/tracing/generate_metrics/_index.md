@@ -79,12 +79,12 @@ After a metric is created, only two fields can be updated:
 
 [1]: /tracing/trace_retention_and_ingestion
 [2]: /account_management/billing/custom_metrics/
-[3]: https://docs.datadoghq.com/developers/metrics/#overview
-[4]: /monitors/monitor_types/anomaly/#overview
+[3]: https://docs.datadoghq.com/metrics/#overview
+[4]: /monitors/create/types/anomaly/#overview
 [5]: /tracing/trace_search_and_analytics/
 [6]: /tracing/trace_search_and_analytics/query_syntax/#analytics-query
-[7]: /monitors/monitor_types/forecasts/
+[7]: /monitors/create/types/forecasts/
 [8]: https://app.datadoghq.com/apm/getting-started
 [9]: https://app.datadoghq.com/apm/traces/generate-metrics
 [10]: /tracing/trace_search_and_analytics/query_syntax/
-[11]: /developers/metrics/#naming-metrics
+[11]: /metrics/#naming-metrics

@@ -3,11 +3,14 @@ title: Developers
 kind: documentation
 description: Reference materials for developing for Datadog, including config and code examples
 aliases:
-- /developers/faq/how-to-monitor-logs-with-loggly-live-tail-and-datadog'
+- /developers/faq/how-to-monitor-logs-with-loggly-live-tail-and-datadog
 further_reading:
 - link: "/api"
   tag: "Documentation"
   text: "Datadog API"
+- link: "https://datadoghq.dev/integrations-core/guidelines/dashboards/#best-practices"
+  tag: "Best Practices"
+  text: "Create great integration dashboards"
 ---
 
 ## Overview
@@ -72,7 +75,7 @@ A [custom check][11], also know as a custom Agent check, lets you send internal 
 ### Sending data by data types
 
 {{< whatsnext desc="Learn about the types of data you can submit to Datadog and how to submit them:" >}}
-    {{< nextlink href="/developers/metrics" >}}<u>Custom Metrics</u>: A deep-dive into custom metrics at Datadog. This section explains metrics types, what they represent, how to submit them, and how they are used throughout Datadog.{{< /nextlink >}}
+    {{< nextlink href="/metrics" >}}<u>Custom Metrics</u>: A deep-dive into custom metrics at Datadog. This section explains metrics types, what they represent, how to submit them, and how they are used throughout Datadog.{{< /nextlink >}}
     {{< nextlink href="events/guides/" >}}<u>Events</u>: Explore how to submit events to Datadog with custom Agent checks, DogStatsD, or the Datadog API.{{< /nextlink >}}
     {{< nextlink href="/developers/service_checks" >}}<u>Service Checks</u>: Explore how to submit the up or down status of a specific service to Datadog.{{< /nextlink >}}
 {{< /whatsnext >}}

@@ -87,7 +87,7 @@ For technical questions, contact [Datadog support][5].
 Contact [Sales][6] or your [Customer Success][7] Manager to discuss hourly pricing or billing for your account.
 
 [1]: https://www.datadoghq.com/pricing
-[2]: /developers/metrics/custom_metrics/
+[2]: /metrics/custom_metrics/
 [3]: /tracing/trace_retention_and_ingestion/#retention-filters
 [4]: /tracing/trace_retention_and_ingestion/
 [5]: /help/

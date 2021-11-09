@@ -199,7 +199,7 @@ Agent のコンフィギュレーションでデフォルト `postgres` 以外�
 
 [1]: /ja/database_monitoring/data_collected/#which-queries-are-tracked
 [2]: https://www.postgresql.org/docs/current/pgstatstatements.html#id-1.11.7.38.8
-[3]: /ja/database_monitoring/setup_postgres/advanced_configuration/TODO
+[3]: /ja/database_monitoring/setup_postgres/advanced_configuration/
 {{% /tab %}}
 {{% tab "MySQL" %}}
 

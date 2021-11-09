@@ -126,7 +126,7 @@ docker run -d --name datadog-agent \
         -e DD_APM_IGNORE_RESOURCES="Api::HealthchecksController#index$" \
               -e DD_APM_ENABLED=true \
               -e DD_APM_NON_LOCAL_TRAFFIC=true \
-              datadog/agent:latest
+              gcr.io/datadoghq/agent:latest
 {{< /code-block >}}
 
 {{% /tab %}}

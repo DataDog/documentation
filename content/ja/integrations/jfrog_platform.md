@@ -19,7 +19,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-extras/blob/master/jfrog_platform/README.md'
+  - https://github.com/DataDog/integrations-extras/blob/master/jfrog_platform/README.md
 display_name: JFrog Platform
 draft: false
 git_integration_title: jfrog_platform
