@@ -51,9 +51,8 @@ Use the search bar's autocomplete feature to complete your query using existing 
 
 The following characters are considered special: `+` `-` `=` `&&` `||` `>` `<` `!` `(` `)` `{` `}` `[` `]` `^` `"` `“` `”` `~` `*` `?` `:` `\`, and `/` require escaping with the `\` character. You can’t search for special characters in a log message. However, you can search for special characters when they’re inside of  an attribute. To search for special characters, parse them into an attribute with the [grok parser][1], and then search for logs that contain the attribute.
 
-## Attributes searchå
 
-### Attributes search
+## Attributes search
 
 {{< site-region region="gov,us3,us5" >}}
 To search on a specific attribute, first [add it as a facet][1] and then add `@` to specify you are searching on a facet.
