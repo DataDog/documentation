@@ -12,28 +12,24 @@ further_reading:
 
 ## Overview
 
-The goal of this guide is to show how to create alerts that would not notify for each single group meeting the condition but only when a given percent of them do.
-Indeed it might be needed to look at each individual group like hosts or containers but the situation might be fine until a given percentage of them reach a critical state.
+This guide shows how to create alerts that would not notify for each single group meeting the condition, but only when a given percent of them do.
+This is helpful, for example, if you want a monitor that alerts only when a given percentage of hosts or containers reach a critical state.
 
-Let's see this over a couple examples:
+### Example: Alert for a percentage of hosts with high CPU usage
 
-### Alert for a percentage of host with a high CPU
+In this example, you want to receive a notification when 40 percent of hosts have a CPU usage above 50 percent. Leverage the `min_cutoff` and `count_nonzero` functions:
 
-If you don't want to be notified for each host that have a high CPU but only if a given percentage is in that situation, the overall idea is to leverage the `min_cutoff` and `count_nonzero` function available on metrics to do this. 
-
-For example, to get notified when 40% of hosts have a CPU above 50%, the idea is to split this in two parts:
-
-* Use the `min_cutoff` function to count the number of host that have a CPU above 50%
-* Use the `count_nonzero` function to count the total number of hosts
-* Divide one by the other to get the percentage of host with a high CPU
+* Use the `min_cutoff` function to count the number of hosts that have CPU usage above 50 percent.
+* Use the `count_nonzero` function to count the total number of hosts.
+* Divide one by the other for the resulting percentage of hosts with CPU usage above 50 percent.
 
 {{< img src="monitors/faq/cluster-condition.png" alt="cluster-alert-condition"  >}}
 
-* Then set the condition to alert if the percentage of hosts in that condition reaches 40%
+* Then, set the condition to alert if the percentage of hosts in that condition reaches 40 percent.
 
 {{< img src="monitors/faq/cluster-trigger.png" alt="cluster-alert-trigger"  >}}
 
-This monitor then track the percentage of host that have a CPU above 50% within the last 10 minutes and generate a notification if more than 40% of those hosts meet the condition.
+This monitor tracks the percentage of host that have a CPU usage above 50 percent within the last ten minutes and generates a notification if more than 40 percent of those hosts meet the specified condition.
 
 {{< img src="monitors/faq/cluster-status.png" alt="cluster-alert-status"  >}}
 
