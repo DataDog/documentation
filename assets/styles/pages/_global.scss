@@ -952,6 +952,9 @@ dl {
     .container {
         max-width: 1170px !important;
     }
+    .container__content {
+        max-width: 1440px !important;
+    }
 }
 
 //@include media-breakpoint-up(xs) { ... }
