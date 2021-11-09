@@ -616,7 +616,7 @@
     "request_schema_description": "Object describing a monitor update request."
   },
   "ListMonitorDowntimes": {
-    "description": "Get all downtimes for the specified monitor",
+    "description": "Get all active downtimes for the specified monitor.",
     "summary": "Get all downtimes for a monitor"
   },
   "MuteMonitor": {

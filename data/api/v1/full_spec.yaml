@@ -21391,7 +21391,7 @@ paths:
         type: idempotent
   /api/v1/monitor/{monitor_id}/downtimes:
     get:
-      description: Get all downtimes for the specified monitor
+      description: Get all active downtimes for the specified monitor.
       operationId: ListMonitorDowntimes
       parameters:
       - description: The id of the monitor
