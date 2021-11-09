@@ -1127,7 +1127,12 @@ main:
   - name: Live Containers
     url: infrastructure/livecontainers/
     parent: infrastructure
+    identifier: infrastructure_livecontainers
     weight: 5
+  - name: Configuration
+    url: infrastructure/livecontainers/configuration
+    parent: infrastructure_livecontainers
+    weight: 501
   - name: Cloud Cost
     url: infrastructure/cloud_cost_management/
     parent: infrastructure
