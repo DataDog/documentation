@@ -17,7 +17,7 @@ Les règles de détection définissent la logique conditionnelle appliquée à l
 
 {{< img src="security_platform/security_monitoring/detection_rules/detection_rules.png" alt="Règles de détection" width="75%">}}
 
-Chaque option de surveillance inclut des [règles de détection par défaut][1] prêtes à l'emploi dont l'intégration peut être configurée.
+Chaque option de surveillance inclut des [règles de détection par défaut][1]. Il vous suffit de configurer une intégration pour pouvoir les utiliser.
 
 - La solution [Security Monitoring][2] tire profit de la détection des logs pour analyser en temps réel les logs ingérés. Vous pouvez également créer des [règles personnalisées][3] pour répondre aux besoins de votre environnement.
 
