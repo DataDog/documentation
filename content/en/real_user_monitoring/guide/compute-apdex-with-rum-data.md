@@ -53,19 +53,19 @@ The example below calculates an Apdex score using the Largest Contentful Paint p
 #### Query A
 
 1. In **Graph your data**, select `RUM` as the data source for query `a` and enter `@view.largest_contentful_paint:<2s`.
-2. Click **Update query** in the dropdown menu. The `Largest Contentful Paint:<2s` query appears next to `RUM` for query `a`.
+2. Press Enter or click **Update query** in the dropdown menu. The `Largest Contentful Paint:<2s` query appears next to `RUM` for query `a`.
 
 #### Query B
 
 1. To create query `b`, click **+ Add Query**.
 2. Select `RUM` as the data source for query `b` and enter `@view.largest_contentful_paint:[2s TO 8s]`.
-3. Click **Update query** in the dropdown menu. The `Largest Contentful Paint:[2s - 3s]` query appears next to `RUM` for query `b`.
+3. Press Enter or click **Update query** in the dropdown menu. The `Largest Contentful Paint:[2s - 3s]` query appears next to `RUM` for query `b`.
 
 #### Query C
 
 1. To create query `c`, click **+ Add Query**.
 2. Select `RUM` as the data source for query `c` and enter `@Type:view`.
-3. Click **Update query** in the dropdown menu. The `Type:view` query appears next to `RUM` for query `c`.
+3. Press Enter or click **Update query** in the dropdown menu. The `Type:view` query appears next to `RUM` for query `c`.
 
 {{< img src="real_user_monitoring/guide/quick-graph.png" alt="Apdex score in a quick graph" style="width:100%;">}}
 
