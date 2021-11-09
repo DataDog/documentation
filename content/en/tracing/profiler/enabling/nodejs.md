@@ -49,17 +49,6 @@ To begin profiling applications:
     export DD_VERSION=1.0.3
     ```
 
-    or in code:
-
-    ```js
-    const tracer = require('dd-trace').init({
-      profiling: true,
-      env: 'prod',
-      service: 'my-web-app',
-      version: '1.0.3'
-    })
-    ```
-
     **Note**: If you’re already using Datadog APM, you should already be calling `init` and don’t need to do so again. If you are not, ensure the tracer and the profiler are loaded together:
 
     ```node
@@ -70,6 +59,17 @@ To begin profiling applications:
 
     ```node
     const tracer = require('dd-trace/init')
+    ```
+
+    or in code:
+
+    ```js
+    const tracer = require('dd-trace').init({
+      profiling: true,
+      env: 'prod',
+      service: 'my-web-app',
+      version: '1.0.3'
+    })
     ```
 
 4. A minute or two after starting your Node.js application, your profiles will show up on the [Datadog APM > Profiler page][4].
