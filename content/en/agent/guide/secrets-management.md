@@ -220,15 +220,15 @@ instances:
 
 Many Datadog integrations require credentials to retrieve metrics. To avoid hardcoding these credentials in an [Autodiscovery template][1], you can use secrets management to separate them from the template itself.
 
-Starting with version 7.32.0, [the script][2] is available in the Docker image as `/readsecret_multiple_providers.sh` and can be used to fetch secrets from files and Kubernetes secrets. The two scripts provided in previous versions (`readsecret.sh` and `readsecret.py`) are still supported, but can only read from files.
+Starting with version 7.32.0, the [helper script][2] is available in the Docker image as `/readsecret_multiple_providers.sh`, and you can use it to fetch secrets from files and Kubernetes secrets. The two scripts provided in previous versions (`readsecret.sh` and `readsecret.py`) are supported, but can only read from files.
 
 #### Script for reading from multiple secret providers (`readsecret_multiple_providers.sh`)
 
 ##### Usage
 
-The secrets need to follow the format `ENC[provider@some/path]`. For example, for reading from files, a valid secret would be `ENC[file@/some/path]`. For Kubernetes secrets the format is `ENC[k8s_secret@some_namespace/some_name/a_key]`.
+Secrets must follow the format `ENC[provider@some/path]`. For example, for reading from files, a valid secret would be `ENC[file@/some/path]`. For Kubernetes secrets, the format is `ENC[k8s_secret@some_namespace/some_name/a_key]`.
 
-In order to read from Kubernetes, you need to make sure that the agent can access them by setting the appropriate Kubernetes roles and bindings.
+To read from Kubernetes, ensure that the Agent can access your secrets by setting the appropriate Kubernetes roles and bindings.
 
 ##### Setup examples
 
