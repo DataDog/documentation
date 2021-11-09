@@ -30,25 +30,25 @@ For more information about computing Apdex with service monitoring data, see [Co
 
 ## Prerequisites
 
-- Your web or mobile application instrumented with the RUM SDK. To set up instrumentation, see [RUM Browser Monitoring][3], [RUM Android Monitoring][4], and [RUM iOS Monitoring][5].
-- Events from your application available in Datadog.
+- Your web or mobile application is instrumented with the RUM SDK. To set up instrumentation, see [RUM Browser Monitoring][3], [RUM Android Monitoring][4], and [RUM iOS Monitoring][5].
+- Events from your application are available in Datadog.
 
 ## Compute an Apdex score
 
-In the example below, you can use the View RUM events and the Largest Contentful Paint performance metric to calculate Apdex. 
-
-Let's use a hypothetical threshold of `T = 2 sec`. The minimum frustrating latency is `4T = 8 sec`. Compute three queries with a formula in a Query Value widget to visualize your Apex score on a quick graph.
+The example below calculates an Apdex score using the Largest Contentful Paint performance metric from RUM events, and a hypothetical threshold of `T = 2 sec`. The minimum frustrating latency is `4T = 8 sec`. The resulting value is shown in a Query Value widget quick graph that you can export to dashboards or notebooks.
 
 ### Create a quick graph
 
 1. Navigate to **Dashboards** > **Quick Graph**.
-2. Create three RUM queries: [Query `a`](#query-a) for all satisfying page loads (RUM views where Largest Contentful Paint takes less than 2 seconds to load), [Query `b`](#query-b) for all tolerating page loads (RUM views where Largest Contentful Paint takes less than 2 to 8 seconds to load), and [Query `c`](#query-c) for all page loads (all RUM views).
-3. In the **Formula** field, enter `(a + 0.5 * b) / c`.
+2. Create three RUM queries:
+   * [Query `a`](#query-a) for all satisfying page loads (RUM views where Largest Contentful Paint takes less than 2 seconds to load).
+   * [Query `b`](#query-b) for all tolerated page loads (RUM views where Largest Contentful Paint takes less than 8 seconds to load).
+   * [Query `c`](#query-c) for all page loads (all RUM views).
+3. In the **Formula** field, enter the Apdex formula `(a + 0.5 * b) / c`.
 4. Under **Select a visualization**, click **Query Value**. A query value widget appears.
-4. On the top right corner, select **Past 1 Day**. By default, the widget displays in Global Time.
-5. Enter a name for your graph, such as `Apdex Score`.
-6. Click **Export** and choose between a dashboard or notebook. Optionally, click **Copy to Clipboard**.
-7. Under **Export graph**, select the dashboard or notebook you want to export your quick graph to and click **Export**. Optionally, click **New Dashboard** to create a dashboard with this quick graph. 
+5. In the time frame selector, select **Past 1 Day**. By default, the widget displays in Global Time.
+6. Enter a name for your graph, such as `Apdex Score`.
+7. Optionally, export or copy and paste the quick graph to a dashboard or notebook, or click **Export** > **New Dashboard** to create a dashboard with this quick graph. 
 
 #### Query A
 
@@ -71,10 +71,7 @@ Let's use a hypothetical threshold of `T = 2 sec`. The minimum frustrating laten
 
 ### JSON configuration
 
-Your quick graph contains the Apdex performance indicator for your applications in the past day. 
-
-1. On the upper right, select `1d` Past 1 Day to include data collected over the past day.
-2. Click the **JSON** tab next to **Edit**.
+To access the JSON code for this graph, click the **JSON** tab next to **Edit**.
 
 Click the copy icon on the right hand corner to copy the quick graph JSON to your clipboard.
 
@@ -149,7 +146,7 @@ You can also calculate other Apdex scores with the following methods:
 
 - To see the Apdex score trend over time, select `Timeseries` instead of `Query Value` in **Select your visualization**.
 - To compute the Apdex score for a specific application, add an additional `@application.id` query and update your formula.
-- To compute the Apdex score with another RUM performance metric such as First Contentful Paint, replace `@view.LargestContentfulPaint` with `@view.FirstContentfulPaint` in the query.
+- To compute the Apdex score with another RUM performance metric such as First Contentful Paint, replace `@view.LargestContentfulPaint` with `@view.FirstContentfulPaint` in the queries.
 
 To compute additional performance indicators for your applications, determine what data points you need and which RUM events are relevant for you before [creating a quick graph](#create-a-quick-graph).
 
