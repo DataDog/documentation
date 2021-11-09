@@ -35,6 +35,7 @@ For example, to get notified when 40% of hosts have a CPU above 50%, the idea is
 
 This monitor then track the percentage of host that have a CPU above 50% within the last 10 minutes and generate a notification if more than 40% of those hosts meet the condition.
 
+{{< img src="monitors/faq/cluster-status.png" alt="cluster-alert-status"  >}}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
