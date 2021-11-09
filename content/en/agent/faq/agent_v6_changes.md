@@ -229,16 +229,16 @@ If you're unsure which init system your distribution uses by default, see the ta
 
 | distribution \ init system      | upstart                   | systemd                   | sysvinit                                  | Notes                         |
 |---------------------------------|---------------------------|---------------------------|-------------------------------------------|-------------------------------|
-| Amazon Linux (<= 2017.09)       | <i class="icon-tick"></i> |                           |                                           |                               |
-| Amazon Linux 2 (>= 2017.12)     |                           | <i class="icon-tick"></i> |                                           |                               |
-| CentOS/RHEL 6                   | <i class="icon-tick"></i> |                           |                                           |                               |
-| CentOS/RHEL 7                   |                           | <i class="icon-tick"></i> |                                           |                               |
-| Debian 7 (wheezy)               |                           |                           | <i class="icon-tick"></i> (Agent v6.6.0+) |                               |
-| Debian 8 (jessie) & 9 (stretch) |                           | <i class="icon-tick"></i> |                                           |                               |
+| Amazon Linux (<= 2017.09)       | <i class="icon-check-bold"></i> |                           |                                           |                               |
+| Amazon Linux 2 (>= 2017.12)     |                           | <i class="icon-check-bold"></i> |                                           |                               |
+| CentOS/RHEL 6                   | <i class="icon-check-bold"></i> |                           |                                           |                               |
+| CentOS/RHEL 7                   |                           | <i class="icon-check-bold"></i> |                                           |                               |
+| Debian 7 (wheezy)               |                           |                           | <i class="icon-check-bold"></i> (Agent v6.6.0+) |                               |
+| Debian 8 (jessie) & 9 (stretch) |                           | <i class="icon-check-bold"></i> |                                           |                               |
 | SUSE 11                         |                           |                           |                                           | Unsupported without `systemd` |
-| SUSE 12                         |                           | <i class="icon-tick"></i> |                                           |                               |
-| Ubuntu < 15.04                  | <i class="icon-tick"></i> |                           |                                           |                               |
-| Ubuntu >= 15.04                 |                           | <i class="icon-tick"></i> |                                           |                               |
+| SUSE 12                         |                           | <i class="icon-check-bold"></i> |                                           |                               |
+| Ubuntu < 15.04                  | <i class="icon-check-bold"></i> |                           |                                           |                               |
+| Ubuntu >= 15.04                 |                           | <i class="icon-check-bold"></i> |                                           |                               |
 
 #### Agent commands
 
