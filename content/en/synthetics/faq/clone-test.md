@@ -5,9 +5,6 @@ further_reading:
 - link: "/synthetics/"
   tag: "Documentation"
   text: "Manage your checks"
-- link: "/synthetics/"
-  tag: "Documentation"
-  text: "Manage your checks"
 ---
 
 You can clone your Synthetic tests using our API:
