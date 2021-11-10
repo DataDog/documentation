@@ -37,7 +37,7 @@ Consultez la section [Clé KMS par défaut pour le chiffrement EBS][1] pour déc
 
 3. Exécutez `modify-ebs-default-kms-key-id` avec votre `--kms-key-id` pour [modifier la clé principale client (CMK) par défaut utilisée pour chiffrer les volumes EBS][3].
 
-Consultez la section [get-ebs-default-kms-key-id][2] (en anglais) pour en savoir plus.
+Consultez la documentation relative à la [définition des valeurs de chiffrement par défaut avec l'API et l'interface de ligne de commande][6] (en anglais) pour en savoir plus.
 
 [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#EBSEncryption_key_mgmt
 [2]: https://awscli.amazonaws.com/v2/documentation/api/latest/reference/ec2/get-ebs-default-kms-key-id.html

@@ -1127,7 +1127,12 @@ main:
   - name: Live Containers
     url: infrastructure/livecontainers/
     parent: infrastructure
+    identifier: infrastructure_livecontainers
     weight: 5
+  - name: Configuration
+    url: infrastructure/livecontainers/configuration
+    parent: infrastructure_livecontainers
+    weight: 501
   - name: Cloud Cost
     url: infrastructure/cloud_cost_management/
     parent: infrastructure
@@ -2049,26 +2054,31 @@ main:
     parent: ci
     identifier: setup_pipelines
     weight: 2
-  - name: GitLab
-    url: continuous_integration/setup_pipelines/gitlab/
-    parent: setup_pipelines
-    identifier: ci_gitlab
-    weight: 201
-  - name: Jenkins
-    url: continuous_integration/setup_pipelines/jenkins/
-    parent: setup_pipelines
-    identifier: ci_jenkins
-    weight: 202
   - name: Buildkite
     url: continuous_integration/setup_pipelines/buildkite/
     parent: setup_pipelines
     identifier: ci_buildkite
-    weight: 203
+    weight: 201
   - name: CircleCI
     url: continuous_integration/setup_pipelines/circleci/
     parent: setup_pipelines
     identifier: ci_circleci
+    weight: 202
+  - name: GitHub
+    url: continuous_integration/setup_pipelines/github/
+    parent: setup_pipelines
+    identifier: ci_github
+    weight: 203
+  - name: GitLab
+    url: continuous_integration/setup_pipelines/gitlab/
+    parent: setup_pipelines
+    identifier: ci_gitlab
     weight: 204
+  - name: Jenkins
+    url: continuous_integration/setup_pipelines/jenkins/
+    parent: setup_pipelines
+    identifier: ci_jenkins
+    weight: 205
   - name: Custom Commands
     url: continuous_integration/setup_pipelines/custom_commands/
     parent: setup_pipelines
@@ -2527,6 +2537,16 @@ main:
     parent: synthetics_private_location
     identifier: synthetics_private_location_configuration
     weight: 401
+  - name: Dimensioning
+    url: synthetics/private_locations/dimensioning
+    parent: synthetics_private_location
+    identifier: synthetics_private_location_dimensioning
+    weight: 402
+  - name: Monitoring
+    url: synthetics/private_locations/monitoring
+    parent: synthetics_private_location
+    identifier: synthetics_private_location_monitoring
+    weight: 403
   - name: CI/CD Testing
     url: /synthetics/cicd_testing
     parent: synthetics
@@ -2957,10 +2977,19 @@ main:
     parent: organization_settings
     identifier: account_management_users
     weight: 201
+  - name: Login Methods
+    url: account_management/login_methods/
+    parent: organization_settings
+    identifier: login_methods
+    weight: 202
   - name: Audit Logs
     url: account_management/audit_logs
     parent: organization_settings
-    weight: 202
+    weight: 203
+  - name: OAuth Apps
+    url: account_management/org_settings/oauth_apps
+    parent: organization_settings
+    weight: 204
   - name: RBAC
     url: account_management/rbac/
     parent: account_management
@@ -3004,6 +3033,10 @@ main:
     url: account_management/saml/safenet/
     parent: account_management_saml
     weight: 407
+  - name: Troubleshooting
+    url: account_management/saml/troubleshooting/
+    parent: account_management_saml
+    weight: 408
   - name: API and Application Keys
     url: account_management/api-app-keys/
     parent: account_management
@@ -4308,6 +4341,7 @@ api:
     params:
       versions:
         - v1
+        - v2
       operationids:
         - SubmitLog
       unstable: []

@@ -71,10 +71,10 @@ Follow these steps to instrument the function:
 2. Configure the following environment variables on your function:
 
     ```yaml
-    JAVA_TOOL_OPTIONS: "-javaagent:\"/opt/java/lib/dd-java-agent.jar\""
-    DD_LOGS_INJECTION: "true"
-    DD_JMXFETCH_ENABLED: "false"
-    DD_TRACE_ENABLED: "true"
+    JAVA_TOOL_OPTIONS: -javaagent:"/opt/java/lib/dd-java-agent.jar"
+    DD_LOGS_INJECTION: true
+    DD_JMXFETCH_ENABLED: false
+    DD_TRACE_ENABLED: true
     ```
 
 3. Wrap your Lambda handler function using the wrapper provided by the Datadog Lambda Library:

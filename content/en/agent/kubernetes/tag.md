@@ -61,6 +61,9 @@ The Agent can autodiscover and attach tags to all data emitted by the entire pod
 
 </div>
 
+**Note:** To apply these [Out-Of-The-Box tags](?tab=containerizedagent#out-of-the-box-tags) to custom metrics sent over UDS, [Origin Detection](?tab=host#origin-detection) needs to be enabled. To properly detect the origin for DogStatsD metrics and to tag appropriately set  'useHostPID: true' in your deployment file. 
+
+
 ### Host tag
 
 The Agent can attach Kubernetes environment information as "host tags".
@@ -298,6 +301,49 @@ For example, you could set up:
 
 ```yaml
 kubernetes_namespace_labels_as_tags:
+  app: kube_app
+```
+
+[1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+{{% /tab %}}
+{{< /tabs >}}
+
+## Container environment variables as tags
+
+Starting with Agent v7.32+, the Agent can collect container environment variables and use them as tags to attach to all metrics corresponding to the container. Both `docker` and `containerd` containers are supported:
+
+{{< tabs >}}
+{{% tab "Containerized Agent" %}}
+
+To extract a given environment variable `<ENV_VAR>` and transform it as a tag key `<TAG_KEY>` within Datadog, add the following environment variable to the Datadog Agent:
+
+```shell
+DD_CONTAINER_ENV_AS_TAGS='{"<ENV_VAR>": "<TAG_KEY>"}'
+```
+
+For example:
+
+```shell
+DD_CONTAINER_ENV_AS_TAGS='{"app":"kube_app"}'
+```
+
+**Note**: Custom metrics may impact billing. See [Custom Metrics Billing][1] for more details.
+
+[1]: /account_management/billing/custom_metrics
+{{% /tab %}}
+{{% tab "Agent" %}}
+
+To extract a given environment variable `<ENV_VAR>` and transform it as a tag key `<TAG_KEY>` within Datadog, add the following configuration block in the [Agent `datadog.yaml` configuration file][1]:
+
+```yaml
+container_env_as_tags:
+  <ENV_VAR>: <TAG_KEY>
+```
+
+For example:
+
+```yaml
+container_env_as_tags:
   app: kube_app
 ```
 

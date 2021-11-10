@@ -5,9 +5,6 @@ further_reading:
 - link: "/synthetics/"
   tag: "Documentation"
   text: "Manage your checks"
-- link: "/synthetics/"
-  tag: "Documentation"
-  text: "Manage your checks"
 ---
 
 Monitor your internal staging/intranet environment by appending authentication credentials in the **Advanced options** of your API test to satisfy security concerns.

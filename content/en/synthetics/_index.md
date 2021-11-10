@@ -28,7 +28,7 @@ With **end-to-end testing in production and CI environments**, your development 
 
 ## Set up API tests and multistep API tests
 
-API tests allow you to launch [single][1] or [chained][2] requests to perform verifications on your key systems at various network levels: [HTTP test][3], [SSL test][5], [DNS test][6], [TCP test][4], [UDP test][8], [ICMP test][7], and [WebSocket test][9]. 
+API tests allow you to launch [single][1] or [chained][2] requests to perform verifications on your key systems at various network levels: [HTTP test][3], [SSL test][4], [DNS test][5], [TCP test][6], [UDP test][7], [ICMP test][8], and [WebSocket test][9]. 
 
 {{< img src="synthetics/api_test.png" alt="API tests" style="width:100%;">}}
 
@@ -64,14 +64,15 @@ See [Getting Started with Synthetic Monitoring][14] for instructions on creating
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+
 [1]: /synthetics/api_tests/
 [2]: /synthetics/multistep
 [3]: /synthetics/api_tests/http_tests
-[4]: /synthetics/api_tests/tcp_tests
-[5]: /synthetics/api_tests/ssl_tests
-[6]: /synthetics/api_tests/dns_tests
-[7]: /synthetics/api_tests/icmp_tests
-[8]: /synthetics/api_tests/udp_tests
+[4]: /synthetics/api_tests/ssl_tests
+[5]: /synthetics/api_tests/dns_tests
+[6]: /synthetics/api_tests/tcp_tests
+[7]: /synthetics/api_tests/udp_tests
+[8]: /synthetics/api_tests/icmp_tests
 [9]: /synthetics/api_tests/websocket_tests
 [10]: /synthetics/browser_tests
 [11]: /synthetics/private_locations
@@ -79,4 +80,3 @@ See [Getting Started with Synthetic Monitoring][14] for instructions on creating
 [13]: /synthetics/apm/
 [14]: /getting_started/synthetics
 [15]: /getting_started/synthetics/private_location
-

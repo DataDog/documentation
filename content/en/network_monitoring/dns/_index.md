@@ -31,11 +31,11 @@ DNS Monitoring provides an overview of DNS server performance to help you identi
 
 ## Setup
 
-Before you can begin to use DNS Monitoring, [set up Network Performance Monitoring][5]. Also ensure you are using the latest version of the Agent, or at least Agent v7.23+ for Linux OS, and v7.28+ for Windows Server. Once installed, a ‘DNS’ tab is accessible in the Network Performance Monitoring product.
+Before you can begin to use DNS Monitoring, [set up Network Performance Monitoring][1]. Also ensure you are using the latest version of the Agent, or at least Agent v7.23+ for Linux OS, and v7.28+ for Windows Server. Once installed, a ‘DNS’ tab is accessible in the Network Performance Monitoring product.
 
-If you are using [Kubernetes on Helm][3], to enable DNS monitoring, you need to set `collectDNSStats:` to `true` in the [values.yaml][4].
+If you are using [Kubernetes on Helm][2], to enable DNS monitoring, you need to set `collectDNSStats:` to `true` in the [values.yaml][3].
 
-Are you looking for Network Device Monitoring instead? See the [NPM setup instructions][2].
+Are you looking for Network Device Monitoring instead? See the [NPM setup instructions][4].
 
 ## Queries
 
@@ -82,7 +82,7 @@ The network table breaks down the above metrics by each _source_ and _destinatio
 
 Configure the columns in your table using the **Customize** button at the top right of the table.
 
-Narrow down the traffic in your view with the **Filter Traffic** [options][1].
+Narrow down the traffic in your view with the **Filter Traffic** [options][5].
 
 ## Sidepanel
 
@@ -99,8 +99,8 @@ The sidepanel provides contextual telemetry to help you quickly debug DNS server
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /network_monitoring/performance/network_page#table
-[2]: /network_monitoring/devices/setup?tab=snmpv2
-[3]: /agent/kubernetes/?tab=helm
-[4]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml#L299-L300
-[5]: /network_monitoring/performance/
+[1]: /network_monitoring/performance/
+[2]: /agent/kubernetes/?tab=helm
+[3]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml#L299-L300
+[4]: /network_monitoring/devices/setup?tab=snmpv2
+[5]: /network_monitoring/performance/network_page#table

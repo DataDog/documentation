@@ -49,6 +49,7 @@ After choosing to create an `HTTP` test, define your test's request.
    * **HTTP Basic Auth**: Add HTTP basic authentication credentials.
    * **AWS Signature V4**: Enter your Access Key ID and Secret Access Key. Datadog generates the signature for your request.
    This option uses the basic implementation of SigV4. Specific signatures such as AWS S3 are not implemented.
+   * **NTLM v1**: Add NTLM authentication credentials.
 
    {{% /tab %}}
 
@@ -214,6 +215,9 @@ These reasons include the following:
 : The request couldn't be completed in a reasonable time. Two types of `TIMEOUT` can happen:
   - `TIMEOUT: The request couldn’t be completed in a reasonable time.` indicates that the timeout happened at the TCP socket connection level. 
   - `TIMEOUT: Retrieving the response couldn’t be completed in a reasonable time.` indicates that the timeout happened on the overall run (which includes TCP socket connection, data transfer, and assertions).
+
+`MALFORMED_RESPONSE` 
+: The remote server responded with a payload that does not comply with HTTP specifications.
 
 ## Permissions
 

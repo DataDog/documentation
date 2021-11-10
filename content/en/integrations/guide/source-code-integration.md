@@ -20,6 +20,12 @@ The source code integration is an integration with Git that allows you to link y
 
 With the source code and GitHub Apps integrations, you can also see inline code snippets in your errors. For more information, see [Inline Source Code](#inline-source-code).
 
+| Integration Name            | Stack Trace Links | Issue and PR Previews | Inline Code Snippets |
+|-----------------------------|-------------------|-----------------------|----------------------|
+| Source Code                 | {{< X >}}         | X                     | X                    |
+| GitHub Apps                 | X                 | {{< X >}}             | X                    |
+| Source Code and GitHub Apps | X                 | X                     | {{< X >}}            |
+
 ## Configuration
 
 To map telemetry data with your source code, you need to send metadata to Datadog from your CI pipeline.

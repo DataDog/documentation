@@ -31,7 +31,7 @@ Ruby トレーサーをインストールするには
 
     {{< code-block lang="ruby" filename="Gemfile" >}}
 ソース 'https://rubygems.org'
-gem 'ddtrace', ">=0.51.0"
+gem 'ddtrace', ">=0.53.0"
 {{< /code-block >}}
 
 2. `bundle install` を実行して gem をインストールします
