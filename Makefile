@@ -70,6 +70,7 @@ clean-integrations:  ## Remove built integrations files.
 		-a -not -name 'cloudability.md' \
 		-a -not -name 'cloudcheckr.md' \
 		-a -not -name 'fluentbit.md' \
+		-a -not -name 'apache_apisix.md' \
 		-a -not -name 'iam_access_analyzer.md' \
 		-a -not -name 'integration_sdk.md' \
 		-a -not -name 'journald.md' \
