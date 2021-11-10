@@ -33,7 +33,8 @@ Network Device Monitoring is designed to give you visibility into your on-premis
 
 1. Install the Datadog Agent.
 2. Configure the SNMP integration by either [monitoring individual devices][1], or using [device autodiscovery][2].
-3. View metrics collected on Datadog's out-of-the-box dashboards:
+3. Start monitoring your entire network infrastructure on the Network Devices explore page.
+4. View metrics collected on Datadog's out-of-the-box dashboards:
     - [Overview of all devices monitored][3]
     - [Across the performance on all interfaces][4]
 4. Catch issues before they arise with proactive monitoring on any [SNMP metric][5].
