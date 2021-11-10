@@ -12,9 +12,6 @@ further_reading:
     tag: Documentation
     text: Utilisez des requêtes et des monitors Analytics basés sur les traces conservées.
 ---
-<div class="alert alert-warning">
-Cette fonctionnalité est actuellement en version bêta publique. Tant qu'une version stable n'est pas disponible nous vous déconseillons d'utiliser les métriques générées à partir des spans pour vos monitors ou vos opérations en production.
-</div>
 
 ## Générer des métriques basées sur des spans
 
