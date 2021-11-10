@@ -8,7 +8,7 @@ further_reading:
 ---
 
 {{< site-region region="us5,gov" >}}
-<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
+<div class="alert alert-warning">CI Visibility is not available for the selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 Custom commands provide a way to trace individual commands in your CI pipelines, allowing you to measure the time your command takes without taking into account any setup or teardown actions that the job might have (for example, downloading Docker images or waiting for an available node in a Kubernetes-based infrastructure). These spans appear as part of the pipeline's trace:
@@ -40,18 +40,9 @@ datadog-ci trace [--name <name>] -- <command>
 
 Specify a valid [Datadog API key][2] in the `DATADOG_API_KEY` environment variable. For example:
 
+{{< site-region region="us,us3,eu" >}}
 <pre>
 <code>
-DATADOG_API_KEY=&lt;api_key&gt; DATADOG_SITE={{< region-param key="dd_site" >}} datadog-ci trace \
---name "Greet" \
--- \
-echo "Hello World"
-</code>
-</pre>
-{{< /site-region >}}
-{{< site-region region="us3,eu" >}}
-<pre class="chroma">
-<code class="language-bash" data-lang="bash">
 DATADOG_API_KEY=&lt;key&gt; DATADOG_SITE={{< region-param key="dd_site" >}} datadog-ci trace \
 --name "Greet" \
 -- \
@@ -60,7 +51,7 @@ echo "Hello World"
 </pre>
 {{< /site-region >}}
 {{< site-region region="us5,gov" >}}
-<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
+<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 ## Configuration settings
