@@ -5598,6 +5598,7 @@ components:
           type: boolean
         name:
           description: The monitor name.
+          example: My monitor
           type: string
         options:
           $ref: '#/components/schemas/MonitorOptions'
