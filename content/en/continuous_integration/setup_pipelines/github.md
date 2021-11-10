@@ -35,7 +35,7 @@ The [GitHub Actions][1] integration uses a private [GitHub App][2] to collect wo
 6. Give the app a name, for example, `Datadog CI Visibility`.
 7. Click **Install GitHub App** and follow the instructions on GitHub.
 
-After the GitHub App is created and installed, recently finished GitHub Actions workflows will appear on CI Visibility.
+After the GitHub App is created and installed, recently finished GitHub Actions workflows appear in CI Visibility pages.
 
 ## Visualize pipeline data in Datadog
 
