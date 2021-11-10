@@ -22,9 +22,9 @@ With the source code and GitHub Apps integrations, you can also see inline code 
 
 | Integration Name            | Stack Trace Links | Issue and PR Previews | Inline Code Snippets |
 |-----------------------------|-------------------|-----------------------|----------------------|
-| Source Code                 | {{< X >}}         | x                     | x                    |
-| GitHub Apps                 | x                 | {{< X >}}             | x                    |
-| Source Code and GitHub Apps | x                 | x                     | {{< X >}}            |
+| Source Code                 | {{< X >}}         | X                     | X                    |
+| GitHub Apps                 | X                 | {{< X >}}             | X                    |
+| Source Code and GitHub Apps | X                 | X                     | {{< X >}}            |
 
 ## Configuration
 
