@@ -130,6 +130,9 @@ The Kubernetes State Metrics Core check is not backward compatible, be sure to r
 `kubernetes_state.node.count`
 : The metric is not tagged with `host` anymore. It aggregates the nodes count by `kernel_version` `os_image` `container_runtime_version` `kubelet_version`.
 
+`kubernetes_state.container.waiting` and `kubernetes_state.container.status_report.count.waiting`
+: These metrics no longer emit a 0 value if no pods are waiting. They only report non-zero values.
+
 {{< tabs >}}
 {{% tab "Helm" %}}
 
