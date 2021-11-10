@@ -444,7 +444,7 @@ More examples:
 | {"date": "2018-01-02"    | `\{"date": "\d{4}-\d{2}-\d{2}`                |
 
 ### Automatic Multi-line aggregation
-With Agent 7.32+ `auto_multi_line_detection` can be enabled which allows the Agent to detect [common multi-line patterns](https://github.com/DataDog/datadog-agent/blob/main/pkg/logs/decoder/auto_multiline_handler.go#L195) automatically. This feature is currently in beta. 
+With Agent 7.32+ `auto_multi_line_detection` can be enabled which allows the Agent to detect [common multi-line patterns][6] automatically. This feature is currently in beta. 
 
 Enable `auto_multi_line_detection` globally in the `datadog.yaml` file:
 
@@ -640,3 +640,4 @@ All the logs collected by the Datadog Agent are impacted by the global processin
 [3]: https://docs.datadoghq.com/logs/explorer/#overview
 [4]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 [5]: /agent/guide/agent-commands/#agent-information
+[6]: https://github.com/DataDog/datadog-agent/blob/main/pkg/logs/decoder/auto_multiline_handler.go#L195
