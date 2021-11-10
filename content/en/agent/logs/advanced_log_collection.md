@@ -446,7 +446,7 @@ More examples:
 ### Automatic Multi-line aggregation
 With Agent 7.32+ `auto_multi_line_detection` can be enabled which allows the Agent to detect [common multi-line patterns](https://github.com/DataDog/datadog-agent/blob/main/pkg/logs/decoder/auto_multiline_handler.go#L195) automatically. This feature is currently in beta. 
 
-`auto_multi_line_detection` can be enabled globally in the `datadog.yaml`
+Enable `auto_multi_line_detection` globally in the `datadog.yaml` file:
 
 ```yaml
 logs_config:
