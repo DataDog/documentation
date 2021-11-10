@@ -17,7 +17,7 @@ further_reading:
 
 ## Installation
 
-Network Device Monitoring uses the SNMP protocol included in the [Datadog Agent][1] package. No additional installation is necessary.
+Network Device Monitoring relies on the SNMP Integration included in the [Datadog Agent][1] package. Ensure you are using Agent v7.32+. No additional installation is necessary. 
 
 ## Configuration
 

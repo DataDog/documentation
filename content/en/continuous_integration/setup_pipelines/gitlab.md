@@ -11,12 +11,9 @@ further_reading:
 ---
 
 {{< site-region region="us5,gov" >}}
-<div class="alert alert-warning">
-The selected Datadog site ({{< region-param key="dd_site_name" >}}) is not supported.
-</div>
+<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
-{{< site-region region="us,eu,us3" >}}
 ## Compatibility
 
 Supported GitLab versions:
@@ -90,7 +87,6 @@ Fill in the integration configuration settings:
 : Specifies which [Datadog site][1] to send data to.<br/>
 **Default**: `datadoghq.com`<br/>
 **Selected site**: {{< region-param key="dd_site" code="true" >}}<br/>
-**Possible values**: `datadoghq.com`, `datadoghq.eu`
 
 **API URL** (optional)
 : Allows overriding the API URL used for sending data directly, only used in advanced scenarios.<br/>
@@ -129,14 +125,12 @@ After the integration is successfully configured, the [Pipelines][4] and [Pipeli
 
 **Note**: The Pipelines page shows data for only the default branch of each repository.
 
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /getting_started/site/
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://docs.gitlab.com/ee/user/project/integrations/webhooks.html
 [4]: https://app.datadoghq.com/ci/pipelines
 [5]: https://app.datadoghq.com/ci/pipeline-executions
-{{< /site-region >}}
-
-## Further reading
-
-{{< partial name="whats-next/whats-next.html" >}}
-

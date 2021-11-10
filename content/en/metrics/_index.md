@@ -16,6 +16,7 @@ aliases:
     {{< nextlink href="/metrics/advanced-filtering" >}}<u>Advanced Filtering</u> - Filter your data to narrow the scope of metrics returned.{{< /nextlink >}}
     {{< nextlink href="/metrics/summary" >}}<u>Metrics Summary</u> - Understand your actively reporting Datadog metrics.{{< /nextlink >}}
     {{< nextlink href="metrics/distributions/" >}}<u>Distribution Metrics</u> - Learn about Distribution Metrics and globally accurate percentiles.{{< /nextlink >}}
+    {{< nextlink href="metrics/metrics-without-limits/" >}}<u>Metrics without Limits™</u> - Learn how to control custom metrics volumes with tags and aggregations configurations using Metrics without Limits™.{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ### What are metrics?
@@ -64,7 +65,7 @@ The graphing experience is consistent whether you are using dashboards, notebook
 
 A metric query in Datadog looks like this:
 
-{{< img src="metrics/introduction/color-query2.png" alt="Example query with color-coded sections"  style="width:70%;">}}
+{{< img src="metrics/introduction/newanatomy.jpg" alt="Example query with color-coded sections"  style="width:70%;">}}
 
 You can break this query into a few steps:
 
@@ -76,17 +77,17 @@ First, choose the specific metric that you’d like to graph by searching or sel
 
 After selecting a metric, you can filter your query based on tag(s). For instance, you can use `account:prod` to _scope_ your query to include only the metrics from your production hosts. For more information, refer to the [tagging documentation][16].
 
-#### Configure time
+#### Configure time aggregation
 
 Next, choose the granularity of your data using time rollup. In this example, you've defined that there will be one data point for every six minutes (360 seconds). You can also choose how you want to aggregate the data in each time bucket. By default, _avg_ is applied, but other available options are _sum_, _min_, _max_, and _count_. If you wanted to apply max, you would use `.rollup(max, 60)`.
 
-#### Configure space
+#### Configure space aggregation
 
-In Datadog, “space” refers to the way metrics are distributed over different hosts and tags. There are two different aspects of space that you can control: grouping and aggregation.
+In Datadog, “space” refers to the way metrics are distributed over different hosts and tags. There are two different aspects of space that you can control: aggregator and grouping
+
+_Aggregator_ defines how the metrics in each group are combined. There are four aggregations available: sum, min, max, and avg.
 
 _Grouping_ defines what constitutes a line on the graph. For example, if you have hundreds of hosts spread across four regions, grouping by region allows you to graph one line for every region, reducing the number of timeseries to four.
-
-_Aggregation_ defines how the metrics in each group are combined. There are four aggregations available: sum, min, max, and avg.
 
 #### Apply functions (optional)
 
@@ -106,9 +107,9 @@ It’s important to remember that time aggregation is _always_ applied in every 
 
 #### Space aggregation
 
-Space aggregation splits a single metric into multiple time series by tags such as host, container, and region. For instance, if you were interested in viewing the latency of your EC2 instances by region, you would need to use space aggregation to combine each region’s hosts.
+Space aggregation splits a single metric into multiple time series by tags such as host, container, and region. For instance, if you were interested in viewing the latency of your EC2 instances by region, you would need to use space aggregation's grouping by functionality to combine each region’s hosts.
 
-There are four aggregations that can be applied when using space aggregation: _sum_, _min_, _max_, and _avg_. Using the above example, say that your hosts are spread across four regions: us-east-1, us-east-2, us-west-1, and us-west-2. The hosts in each region need to be combined using an aggregator function. Using the _max_ aggregator would result in the maximum latency experienced across hosts in each region, while the _avg_ aggregator would yield the average latency per region.
+There are four aggregators that can be applied when using space aggregation: _sum_, _min_, _max_, and _avg_. Using the above example, say that your hosts are spread across four regions: us-east-1, us-east-2, us-west-1, and us-west-2. The hosts in each region need to be combined using an aggregator function. Using the _max_ aggregator would result in the maximum latency experienced across hosts in each region, while the _avg_ aggregator would yield the average latency per region.
 
 ## Metric types and real-time metrics visibility
 
@@ -145,6 +146,7 @@ See the [full Metrics Summary documentation][21] for more details.
 {{< whatsnext desc="To continue with metrics, check out:">}}
     {{< nextlink href="/metrics/advanced-filtering" >}}<u>Advanced Filtering</u> - Filter your data to narrow the scope of metrics returned.{{< /nextlink >}}
     {{< nextlink href="/metrics/distributions" >}}<u>Distribution metrics</u> - Compute global percentiles across your entire dataset.{{< /nextlink >}}
+    {{< nextlink href="metrics/metrics-without-limits/" >}}<u>Metrics without Limits™</u> - Learn how to control custom metrics volumes with tags and aggregations configurations using Metrics without Limits™.{{< /nextlink >}}
 {{< /whatsnext >}}
 
 [1]: /logs

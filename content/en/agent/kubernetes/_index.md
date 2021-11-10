@@ -163,12 +163,12 @@ To install the Datadog Agent on your Kubernetes cluster:
 
     | Metrics                   | Logs                      | APM                       | Process                   | NPM                       | Security                       | Linux                   | Windows                 |
     |---------------------------|---------------------------|---------------------------|---------------------------|---------------------------|-------------------------|-------------------------|-------------------------|
-    | <i class="icon-tick"></i> | <i class="icon-tick"></i> | <i class="icon-tick"></i> | <i class="icon-tick"></i> |                           | <i class="icon-tick"></i> | [Manifest template][3]  | [Manifest template][4] (no security)  |
-    | <i class="icon-tick"></i> | <i class="icon-tick"></i> | <i class="icon-tick"></i> |                           |                           |                           | [Manifest template][5]  | [Manifest template][6]  |
-    | <i class="icon-tick"></i> | <i class="icon-tick"></i> |                           |                           |                           |                           | [Manifest template][7]  | [Manifest template][8]  |
-    | <i class="icon-tick"></i> |                           | <i class="icon-tick"></i> |                           |                           |                           | [Manifest template][9]  | [Manifest template][10] |
-    |                           |                           |                           |                           | <i class="icon-tick"></i> | <i class="icon-tick"></i> | [Manifest template][11] | no template             |
-    | <i class="icon-tick"></i> |                           |                           |                           |                           |                           | [Manifest template][12] | [Manifest template][13] |
+    | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |                           | <i class="icon-check-bold"></i> | [Manifest template][3]  | [Manifest template][4] (no security)  |
+    | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |                           |                           |                           | [Manifest template][5]  | [Manifest template][6]  |
+    | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |                           |                           |                           |                           | [Manifest template][7]  | [Manifest template][8]  |
+    | <i class="icon-check-bold"></i> |                           | <i class="icon-check-bold"></i> |                           |                           |                           | [Manifest template][9]  | [Manifest template][10] |
+    |                           |                           |                           |                           | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> | [Manifest template][11] | no template             |
+    | <i class="icon-check-bold"></i> |                           |                           |                           |                           |                           | [Manifest template][12] | [Manifest template][13] |
 
      To enable trace collection completely, [extra steps are required on your application Pod configuration][14]. Refer also to the [logs][15], [APM][16], [processes][17], and [Network Performance Monitoring][18], and [Security][19] documentation pages to learn how to enable each feature individually.
 

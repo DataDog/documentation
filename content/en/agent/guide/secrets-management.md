@@ -216,13 +216,37 @@ instances:
     password: decrypted_db_prod_password
 ```
 
-### Helper script for Autodiscovery
+### Helper scripts for Autodiscovery
 
 Many Datadog integrations require credentials to retrieve metrics. To avoid hardcoding these credentials in an [Autodiscovery template][1], you can use secrets management to separate them from the template itself.
 
-[The script][2] is available in the Docker image as `/readsecret.py`.
+Starting with version 7.32.0, the [helper script][2] is available in the Docker image as `/readsecret_multiple_providers.sh`, and you can use it to fetch secrets from files and Kubernetes secrets. The two scripts provided in previous versions (`readsecret.sh` and `readsecret.py`) are supported, but can only read from files.
 
-#### Script usage
+#### Script for reading from multiple secret providers (`readsecret_multiple_providers.sh`)
+
+##### Usage
+
+Secrets must follow the format `ENC[provider@some/path]`. For example, for reading from files, a valid secret would be `ENC[file@/some/path]`. For Kubernetes secrets, the format is `ENC[k8s_secret@some_namespace/some_name/a_key]`.
+
+To read from Kubernetes, ensure that the Agent can access your secrets by setting the appropriate Kubernetes roles and bindings.
+
+##### Setup examples
+
+To use the `db_prod_password` secret value exposed in the `/run/secrets/db_prod_password` file, insert `ENC[file@/run/secrets/db_prod_password]` in your template and set the following environment variable:
+
+```
+DD_SECRET_BACKEND_COMMAND=/readsecret_multiple_providers.sh
+```
+
+To read the `db_prod_password` secret value exposed in the `password` key of the Kubernetes `db_credentials` secret present in the `db` namespace, insert `ENC[k8s_secret@db/db_credentials/password]` in your template and set the following environment variable:
+
+```
+DD_SECRET_BACKEND_COMMAND=/readsecret_multiple_providers.sh
+```
+
+#### Scripts for reading from files (`readsecret.py` and `readsecret.sh`)
+
+##### Usage
 
 The script requires a folder passed as an argument. Secret handles are interpreted as file names, relative to this folder. The script refuses to access any file out of the root folder (including symbolic link targets) to avoid leaking sensitive information.
 
@@ -230,9 +254,9 @@ This script is incompatible with [OpenShift restricted SCC operations][3] and re
 
 Starting with version 6.10.0, `ENC[]` tokens in config values passed as environment variables are supported. Previous versions only support `ENC[]` tokens found in `datadog.yaml` and in Autodiscovery templates.
 
-#### Setup examples
+##### Setup examples
 
-##### Docker Swarm secrets
+###### Docker Swarm secrets
 
 [Docker secrets][4] are mounted in the `/run/secrets` folder. Pass the following environment variables to your Agent container:
 
@@ -243,7 +267,7 @@ DD_SECRET_BACKEND_ARGUMENTS=/run/secrets
 
 To use the `db_prod_password` secret value, exposed in the `/run/secrets/db_prod_password` file, just insert `ENC[db_prod_password]` in your template.
 
-##### Kubernetes secrets
+###### Kubernetes secrets
 
 Kubernetes supports [exposing secrets as files][5] inside a pod.
 
@@ -442,7 +466,7 @@ If you have secrets in `datadog.yaml` and the Agent refuses to start:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/kubernetes/integrations/
-[2]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/agent/secrets-helper/readsecret.py
+[2]: https://github.com/DataDog/datadog-agent/blob/main/Dockerfiles/agent/secrets-helper/readsecret_multiple_providers.sh
 [3]: https://github.com/DataDog/datadog-agent/blob/6.4.x/Dockerfiles/agent/OPENSHIFT.md#restricted-scc-operations
 [4]: https://docs.docker.com/engine/swarm/secrets/
 [5]: https://kubernetes.io/docs/tasks/inject-data-application/distribute-credentials-secure/#create-a-pod-that-has-access-to-the-secret-data-through-a-volume

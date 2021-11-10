@@ -10,6 +10,10 @@ further_reading:
       text: "Troubleshooting CI"
 ---
 
+{{< site-region region="us5,gov" >}}
+<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
+{{< /site-region >}}
+
 The [Tests][1] page, under the CI menu in Datadog, provides a test-first view into your CI health by showing you important metrics and results from your tests. It can help you drill down into performance problems and test failures that concern you primarily because you work on the related code (and less because you maintain the pipelines they are run in).
 
 ## Explore tests

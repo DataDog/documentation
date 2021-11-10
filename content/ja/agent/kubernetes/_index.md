@@ -157,12 +157,12 @@ Datadog Agent を Kubernetes クラスターにインストールするには:
 
     | メトリクス                   | ログ                      | APM                       | Process                   | NPM                       | セキュリティ                       | Linux                   | Windows                 |
     |---------------------------|---------------------------|---------------------------|---------------------------|---------------------------|-------------------------|-------------------------|-------------------------|
-    | <i class="icon-tick"></i> | <i class="icon-tick"></i> | <i class="icon-tick"></i> | <i class="icon-tick"></i> |                           | <i class="icon-tick"></i> | [マニフェストテンプレート][3]  | [マニフェストテンプレート][4] (セキュリティなし)  |
-    | <i class="icon-tick"></i> | <i class="icon-tick"></i> | <i class="icon-tick"></i> |                           |                           |                           | [マニフェストテンプレート][5]  | [マニフェストテンプレート][6]  |
-    | <i class="icon-tick"></i> | <i class="icon-tick"></i> |                           |                           |                           |                           | [マニフェストテンプレート][7]  | [マニフェストテンプレート][8]  |
-    | <i class="icon-tick"></i> |                           | <i class="icon-tick"></i> |                           |                           |                           | [マニフェストテンプレート][9]  | [マニフェストテンプレート][10] |
-    |                           |                           |                           |                           | <i class="icon-tick"></i> | <i class="icon-tick"></i> | [マニフェストテンプレート][11] | テンプレートなし             |
-    | <i class="icon-tick"></i> |                           |                           |                           |                           |                           | [マニフェストテンプレート][12] | [マニフェストテンプレート][13] |
+    | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |                           | <i class="icon-check-bold"></i> | [マニフェストテンプレート][3]  | [マニフェストテンプレート][4] (セキュリティなし)  |
+    | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |                           |                           |                           | [マニフェストテンプレート][5]  | [マニフェストテンプレート][6]  |
+    | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |                           |                           |                           |                           | [マニフェストテンプレート][7]  | [マニフェストテンプレート][8]  |
+    | <i class="icon-check-bold"></i> |                           | <i class="icon-check-bold"></i> |                           |                           |                           | [マニフェストテンプレート][9]  | [マニフェストテンプレート][10] |
+    |                           |                           |                           |                           | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> | [マニフェストテンプレート][11] | テンプレートなし             |
+    | <i class="icon-check-bold"></i> |                           |                           |                           |                           |                           | [マニフェストテンプレート][12] | [マニフェストテンプレート][13] |
 
    トレース収集を完全に有効にするには、[アプリケーションのポッドコンフィギュレーションで追加の手順が必要となります][14]。それぞれの機能を個別に有効にする方法については、[ログ][15]、[APM][16]、[プロセス][17]、[ネットワークパフォーマンスモニタリング][18]、[セキュリティ][19]に関するドキュメントページを参照してください。
 

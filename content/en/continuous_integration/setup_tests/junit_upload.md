@@ -194,7 +194,7 @@ For mobile apps (Swift, Android):
 `test.bundle`
 : Used to execute groups of test suites separately.<br/>
 **Examples**: `ApplicationUITests`, `ModelTests` -->
-  
+
 ## Providing metadata through `<property>` elements
 
 In addition to the `--tags` CLI parameter and the `DD_TAGS` environment variable, which apply custom tags globally to all tests included the uploaded XML report, you can provide additional tags to specific tests by including `<property name="dd_tags[key]" value="value">` elements within the `<testsuite>` or `<testcase>` elements. If you add these tags to a `<testcase>` element, they are stored in its test span. If you add the tags to a `<testsuite>` element, they are stored in all of that suite's test spans.
