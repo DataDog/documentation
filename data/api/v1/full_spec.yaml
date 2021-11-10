@@ -12664,8 +12664,8 @@ components:
           type: string
         ratio_in_month:
           description: Shows usage aggregation for a billing period.
-          format: int64
-          type: integer
+          format: double
+          type: number
         start_date:
           description: Shows the first date of usage.
           format: date-time
@@ -21391,7 +21391,7 @@ paths:
         type: idempotent
   /api/v1/monitor/{monitor_id}/downtimes:
     get:
-      description: Get all downtimes for the specified monitor
+      description: Get all active downtimes for the specified monitor.
       operationId: ListMonitorDowntimes
       parameters:
       - description: The id of the monitor
