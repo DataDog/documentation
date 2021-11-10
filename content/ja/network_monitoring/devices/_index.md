@@ -18,7 +18,7 @@ further_reading:
 ---
 ## 概要
 
-{{< img src="network_performance_monitoring/devices/datacenter_dashboard.jpg" alt="データセンター概要ダッシュボード" responsive="true" style="width:100%;">}}
+{{< img src="network_performance_monitoring/devices/ndm-overview.png" alt="データセンター概要ダッシュボード" responsive="true" style="width:100%;">}}
 
 ネットワークデバイスモニタリングは、ルーター、スイッチ、ファイアウォールなどのオンプレミスおよびバーチャルのネットワークデバイスを可視化するように設計されています。任意のネットワーク上のデバイスを自動的に検出し、帯域幅使用率、送信されたバイト数、デバイスのアップ/ダウンなどのメトリクスを迅速に収集します。
 
