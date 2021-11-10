@@ -1,6 +1,5 @@
 import 'bootstrap';
 
-import './jqmath-vanilla';
 
 import './datadog-docs';
 
