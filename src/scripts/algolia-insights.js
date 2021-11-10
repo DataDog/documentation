@@ -1,4 +1,5 @@
 import searchInsights from 'search-insights';
+import { createAlgoliaInsightsPlugin } from '@algolia/autocomplete-plugin-algolia-insights';
 import { getConfig } from './helpers/helpers';
 
 const getAlogliaIndexName = () => {
@@ -11,6 +12,25 @@ export const initializeAlogliaInsights = () => {
   const { appId, apiKey } = algoliaConfig;
 
   searchInsights('init', { appId, apiKey });
+}
+
+export const getAlogliaInsightsAutocompletePlugin = () => {
+  const algoliaInsightsPlugin = createAlgoliaInsightsPlugin({
+    searchInsights,
+    onSelect({ insights, insightsEvents }) {
+      console.log('autocomplete item clicked.')
+      console.log(insights)
+      console.log(insightsEvents);
+      const events = insightsEvents.map((insightsEvent) => ({
+        ...insightsEvent,
+        eventName: 'clickedObjectIDsAfterSearch - Autocomplete'
+      }));
+
+      insights.clickedObjectIDsAfterSearch(...events);
+    }
+  });
+
+  return algoliaInsightsPlugin;
 }
 
 /**

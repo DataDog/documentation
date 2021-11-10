@@ -1,4 +1,5 @@
 import docsearch from 'docsearch.js';
+import { getAlogliaInsightsAutocompletePlugin } from '../algolia-insights';
 import configDocs from '../config/config-docs';
 
 const { env } = document.documentElement.dataset;
@@ -33,6 +34,7 @@ let algoliaTimer;
 
 const isApiPage = () => document.body.classList.value.includes('api');
 const alogliaApiDocsearchInput = document.getElementById('search-input-api');
+const algoliaInsightsAutocompleteObject = getAlogliaInsightsAutocompletePlugin();
 
 const handleSearchPageRedirect = () => {
     const docsearchInput = document.querySelector('.docssearch-input.ds-input');
@@ -110,8 +112,10 @@ const searchDesktop = docsearch({
     apiKey: algoliaConfig.apiKey,
     indexName: isApiPage() ? algoliaConfig.api_index : algoliaConfig.index,
     inputSelector: '.docssearch-input',
+    plugins: [algoliaInsightsAutocompleteObject],
     algoliaOptions: {
-        facetFilters: [`language:${lang}`]
+        facetFilters: [`language:${lang}`],
+        clickAnalytics: true
     },
     autocompleteOptions: {
         autoselect: false
@@ -137,8 +141,10 @@ const searchDesktop = docsearch({
             }, 1000);
         }
     },
-    debug: false // Set debug to true if you want to inspect the dropdown
-});
+    debug: true // Set debug to true if you want to inspect the dropdown
+})
+
+console.log(searchDesktop);
 
 let desktopEnableEnter = true;
 const searchBtn = document.querySelector('.js-search-btn');
@@ -185,6 +191,15 @@ searchDesktop.autocomplete.on('autocomplete:shown', function() {
         setApiEndpointAsSubcategory();
         appendHomeLinkToAutocompleteWidget();
     }
+
+    const resultLinks = document.querySelectorAll('a.algolia-docsearch-suggestion');
+    
+    resultLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            console.log(link);
+        })
+    })
 })
 
 searchDesktop.autocomplete.on('autocomplete:closed', function(e) {
