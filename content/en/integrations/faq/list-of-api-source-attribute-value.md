@@ -5,7 +5,16 @@ disable_toc: true
 private: true
 ---
 
-| Integration name              | source_type_name              | Event stream search term   |
+## Overview
+
+Post events for specific integrations using the [Events API][1] and the `source_type_name`.
+
+Search for events in the event stream using `sources:<SEARCH_TERM>`.
+
+
+## Parameters
+
+| Integration name              | source_type_name              | Search term                |
 |-------------------------------|-------------------------------|----------------------------|
 | Dotnet                        | dotnet                        | dotnet                     |
 | Activemq                      | activemq                      | activemq                   |
@@ -302,3 +311,4 @@ private: true
 | Zendesk                       | zendesk                       | zendesk                    |
 | Zookeeper                     | zookeeper                     | zookeeper                  |
 
+[1]: /api/latest/events/
