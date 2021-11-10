@@ -31,10 +31,10 @@ The Agent can autodiscover and attach tags to all data emitted by the entire pod
   | `display_container_name`      | High         | Pod status                                                              | N/A                                                 |
   | `pod_name`                    | Orchestrator | Pod metadata                                                            | N/A                                                 |
   | `oshift_deployment`           | Orchestrator | Pod annotation `openshift.io/deployment.name`                           | OpenShift environment and pod annotation must exist |
-  | `kube_ownerref_name`          | Orchestrator | Pod ownerref                                                            | Pod must have an owner                              |
-  | `kube_job`                    | Orchestrator | Pod ownerref                                                            | Pod must be attached to a job                       |
-  | `kube_replica_set`            | Orchestrator | Pod ownerref                                                            | Pod must be attached to a replica set               |
-  | `kube_service`                | Orchestrator | Kubernetes service discovery                                            | Pod is behind a Kubernetes service                  |
+  | `kube_ownerref_name`          | Low          | Pod ownerref                                                            | Pod must have an owner                              |
+  | `kube_job`                    | Low          | Pod ownerref                                                            | Pod must be attached to a job                       |
+  | `kube_replica_set`            | Low          | Pod ownerref                                                            | Pod must be attached to a replica set               |
+  | `kube_service`                | Low          | Kubernetes service discovery                                            | Pod is behind a Kubernetes service                  |
   | `kube_daemon_set`             | Low          | Pod ownerref                                                            | Pod must be attached to a DaemonSet                 |
   | `kube_container_name`         | Low          | Pod status                                                              | N/A                                                 |
   | `kube_namespace`              | Low          | Pod metadata                                                            | N/A                                                 |
