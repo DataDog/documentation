@@ -58,6 +58,7 @@ content/en/integrations/guide/amazon_cloudformation.md
 !content/en/integrations/iam_access_analyzer.md
 !content/en/integrations/kubernetes_audit_logs.md
 !content/en/integrations/apigee.md
+!content/en/integrations/apisix.md
 !content/en/integrations/snyk.md
 
 # Ignore the marketplace images that get pulled
