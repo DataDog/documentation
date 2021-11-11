@@ -25,11 +25,11 @@ In order to start collecting your application traces you must be [running the Da
 
 ## Setup
 
-To enable trace collection with your Agent, follow the instructions below:
+To enable trace collection with your Agent, follow the instructions below. You can configure the agent to intake traces via UDP or Unix Domain Socket:
 
 1. **Configure the Datadog Agent to accept traces**:
     {{< tabs >}}
-{{% tab "Helm" %}}
+{{% tab "Helm UDP" %}}
 
 - If you haven't already, [install][1] the Helm chart.
 - Update your `values.yaml` file with the following APM configuration:
@@ -52,7 +52,31 @@ To enable trace collection with your Agent, follow the instructions below:
 
 [1]: /agent/kubernetes/?tab=helm
 {{% /tab %}}
-{{% tab "DaemonSet" %}}
+{{% tab "Helm Unix Domain Socket" %}}
+
+- If you haven't already, [install][1] the Helm chart.
+- Update your `values.yaml` file with the following APM configuration:
+    ```yaml
+    datadog:
+      ## @param apm - object - required
+      ## Enable apm agent and provide custom configs
+      #
+      apm:
+        # datadog.apm.socketEnabled -- Enable APM over Socket (Unix Socket or windows named pipe)
+        ## ref: https://docs.datadoghq.com/agent/kubernetes/apm/
+        socketEnabled: true
+        # datadog.apm.socketPath -- Path to the trace-agent socket
+        socketPath: /var/run/datadog/apm.socket
+    ```
+
+ - Set your operating system. Add `targetSystem: linux` or `targetSystem: windows` to the top of your `values.yaml`.
+ - Set the API key: `apiKey: <DATADOG_API_KEY>`
+ - Set your Datadog site to: {{< region-param key="dd_site" code="true" >}} (defaults to `site: datadoghq.com`).
+ - Then, upgrade your Datadog Helm chart using the following command: `helm upgrade -f values.yaml <RELEASE NAME> datadog/datadog`. If you did not set your operating system in `values.yaml`, add `--set targetSystem=linux` or `--set targetSystem=windows` to this command.
+
+[1]: /agent/kubernetes/?tab=helm
+{{% /tab %}}
+{{% tab "DaemonSet UDP" %}}
 
 To enable APM trace collection, open the DaemonSet configuration file and edit the following:
 
@@ -85,7 +109,32 @@ To enable APM trace collection, open the DaemonSet configuration file and edit t
     ```
 
 {{% /tab %}}
-{{% tab "Operator" %}}
+{{% tab "DaemonSet Unix Domain Socket" %}}
+
+To enable APM trace collection, open the DaemonSet configuration file and edit the following:
+
+- This config creates a directory on the host and mounts it to the agent. Then creates a socket file in that directory with `DD_APM_RECEIVER_SOCKET`. This will allow incoming data from the socket and make it available to the application containers to access on the host:
+
+    ```yaml
+     # (...)
+        env:
+        - name: DD_APM_ENABLED
+          value: "true"
+        - name: DD_APM_RECEIVER_SOCKET
+          value: "/var/run/datadog/apm.socket"
+     # (...)
+        volumeMounts:
+        - name: apmsocket
+          mountPath: /var/run/datadog/
+      volumes:
+      - hostPath:
+          path: /var/run/datadog/
+          type: DirectoryOrCreate
+     # (...)
+    ```
+
+{{% /tab %}}
+{{% tab "Operator UDP" %}}
 
 Update your `datadog-agent.yaml` manifest with:
 
@@ -110,11 +159,43 @@ $ kubectl apply -n $DD_NAMESPACE -f datadog-agent.yaml
 
 [1]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/datadog-agent-apm.yaml
 {{% /tab %}}
+{{% tab "Operator Unix Domain Socket" %}}
+
+Update your `datadog-agent.yaml` manifest with:
+
+```
+agent:
+  image:
+    name: "gcr.io/datadoghq/agent:latest"
+  agent:
+    apm:
+      enabled: true
+      unixDomainSocket:
+        enabled: true
+    config:
+        unixDomainSocket:
+          enabled: true
+site: <DATADOG_SITE>
+```
+Where your `<DATADOG_SITE>` is {{< region-param key="dd_site" code="true" >}} (defaults to `datadoghq.com`).
+
+See the sample [manifest with APM and metrics collection enabled][1] for a complete example.
+
+Then apply the new configuration:
+
+```shell
+$ kubectl apply -n $DD_NAMESPACE -f datadog-agent.yaml
+```
+
+[1]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/datadog-agent-apm.yaml
+{{% /tab %}}
 {{< /tabs >}}
    **Note**: On minikube, you may receive an `Unable to detect the kubelet URL automatically` error. In this case, set `DD_KUBELET_TLS_VERIFY=false`.
 
-2. **Configure your application pods to pull the host IP in order to communicate with the Datadog Agent**:
-
+2. **Configure your application pods in order to communicate with the Datadog Agent**:
+    {{< tabs >}}
+{{% tab "UDP" %}}
+If sending traces to the agent via UDP (`<ip_address>:8126`):
   - Automatically with the [Datadog Admission Controller][2], or
   - Manually using the downward API to pull the host IP; the application container needs the `DD_AGENT_HOST` environment variable that points to `status.hostIP`.
 
@@ -133,7 +214,52 @@ $ kubectl apply -n $DD_NAMESPACE -f datadog-agent.yaml
                         fieldPath: status.hostIP
     ```
 
+    ```yaml
+        apiVersion: apps/v1
+        kind: Deployment
+         # ...
+            spec:
+              containers:
+              - name: "<CONTAINER_NAME>"
+                image: "<CONTAINER_IMAGE>"/"<TAG>"
+                env:
+                  - name: DD_AGENT_HOST
+                    valueFrom:
+                      fieldRef:
+                        fieldPath: status.hostIP
+    ```
+
 3. **Configure your application tracers to emit traces**: Point your application-level tracers to where the Datadog Agent host is using the environment variable `DD_AGENT_HOST`. Refer to the [language-specific APM instrumentation docs][3] for more examples.
+{{% /tab %}}
+{{% tab "Unix Domain Socket" %}}
+If sending traces to the agent via Unix Domain Socket you need to mount the directory the socket is in to the application container and specify the path with `DD_TRACE_AGENT_URL`.
+
+    ```yaml
+        apiVersion: apps/v1
+        kind: Deployment
+        # ...
+            spec:
+              containers:
+              - name: "<CONTAINER_NAME>"
+                image: "<CONTAINER_IMAGE>"/"<TAG>"
+                imagePullPolicy: Never
+                volumeMounts:
+                - name: apmsocketpath
+                  mountPath: /var/run/datadog
+                ports:
+                - containerPort: 9390
+                env:
+                - name: DD_TRACE_AGENT_URL
+                  value: 'unix:///var/run/datadog/apm.socket'
+                # ...
+              volumes:
+                - hostPath:
+                    path: /var/run/datadog/
+                  name: apmsocketpath
+    ```
+3. **Configure your application tracers to emit traces**: Point your application-level tracers to where the Datadog Agent host is using the environment variable `DD_APM_RECEIVER_SOCKET` or for Helm `apm.socketPath`. For Helm and Operator the default for this value is `"/var/run/datadog/apm.socket"`. Some tracers do not yet support sending via UDS, refer to the [language-specific APM instrumentation docs][3] to see if this is supported for the tracr you're using.
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Agent environment variables
 
