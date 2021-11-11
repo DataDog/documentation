@@ -49,21 +49,10 @@ Use the search bar's autocomplete feature to complete your query using existing 
 
 ## Escaping of special characters
 
-The following characters are considered special: `+` `-` `=` `&&` `||` `>` `<` `!` `(` `)` `{` `}` `[` `]` `^` `"` `“` `”` `~` `*` `?` `:` `\`, and `/` require escaping with the `\` character.
+The following characters are considered special: `+` `-` `=` `&&` `||` `>` `<` `!` `(` `)` `{` `}` `[` `]` `^` `"` `“` `”` `~` `*` `?` `:` `\`, and `/` require escaping with the `\` character. You can’t search for special characters in a log message. However, you can search for special characters when they’re inside of  an attribute. To search for special characters, parse them into an attribute with the [grok parser][1], and then search for logs that contain the attribute.
 
-**Note**: These characters can be escaped, but are not searchable in logs search. To search for special characters, parse them into an attribute with the [grok parser][1], and then search for logs that contain the attribute.
 
 ## Attributes search
-
-### Message attribute search
-
-To search for logs that contain `user=JaneDoe` in the message attribute use the following search:
-
-```
-user\=JaneDoe
-```
-
-### Attributes search
 
 {{< site-region region="gov,us3,us5" >}}
 To search on a specific attribute, first [add it as a facet][1] and then add `@` to specify you are searching on a facet.
@@ -73,7 +62,6 @@ For instance, if your attribute name is **url** and you want to filter on the **
 ```
 @url:www.datadoghq.com
 ```
-
 
 **Notes**:
 
@@ -124,6 +112,8 @@ To perform a multi-character wildcard search, use the `*` symbol as follows:
 * `service:web*` matches every log message that has a service starting with `web`.
 * `web*` matches all log messages starting with `web`
 * `*web` matches all log messages that end with `web`
+
+**Note**: Wildcards only work as wildcards outside of double quotes. For example, `”*test*”` matches a log which has the string `*test*` in its message. `*test*` matches a log which has the string test anywhere in its message.
 
 {{< site-region region="gov,us3,us5" >}}
 Wildcard searches work within facets with this syntax. This query returns all the services that end with the string `mongo`:
