@@ -45,7 +45,7 @@ If the notification profile matches set conditions, the resulting notification i
 
 ### Search
 
-The free text search filters notification profiles by text in the **Notification Profile** page. Select a tag within a rule type, rule tags or signal tags to add the tag in the search, which displays notification profiles matching the value.
+The free text search filters notification profiles by text in the **Notification Profile** page. Select a tag within a rule type, rule tags, or signal tags to add the tag in the search, which displays notification profiles matching the value.
 
 When you edit the search query, search results update in real-time. There is no **Search** button.
 
