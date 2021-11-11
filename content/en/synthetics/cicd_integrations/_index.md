@@ -1,5 +1,5 @@
 ---
-title: Synthetic and CI/CD
+title: Synthetics and CI/CD
 kind: documentation
 description: Run Synthetic tests on-demand in your CI/CD pipelines.
 aliases: 
