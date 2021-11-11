@@ -1,0 +1,6 @@
+<script>
+    const head = document.querySelector("head")
+    const jqmathSrc = document.createElement('script')
+    jqmathSrc.src = '{{ (index $.Site.Data.manifest "jqmath-vanilla.js") | relURL }}'
+    head.appendChild(jqmathSrc)
+</script>

@@ -3,6 +3,7 @@ title: Burn Rate Alerts
 kind: documentation
 description: "Use Monitors to alert off of the burn rate of an SLO"
 ---
+{{< jqmath-vanilla >}}
 
 <div class="alert alert-warning">
 This feature is in open beta. Email <a href="mailto:slo-help@datadoghq.com">slo-help@datadoghq.com</a> to ask questions or to provide feedback on this feature.
@@ -22,8 +23,7 @@ A burn rate is a unitless value [coined by Google][3] that indicates how fast yo
 
 This relationship is represented by the following formula:
 
-$$\text"length of SLO target(7,30 or 90 days)" / \text"burn rate" = \text"time until error budget is fully consumed"\$$
-
+$${\text"length of SLO target" \text" (7, 30 or 90 days)"} / \text"burn rate" = \text"time until error budget is fully consumed"\$$
 
 A burn rate alert will use the recent “error rate” in its calculation to measure the observed burn rate. Note that “error rate” means the ratio of bad behavior over total behavior during a *given period*:
 
