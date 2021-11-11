@@ -1,5 +1,5 @@
 ---
-title: Integrations
+title: test
 kind: documentation
 disable_sidebar: true
 aliases:
