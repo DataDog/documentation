@@ -2532,51 +2532,67 @@ main:
     parent: synthetics_private_location
     identifier: synthetics_private_location_configuration
     weight: 401
-  - name: CI/CD Testing
-    url: /synthetics/cicd_testing
+  - name: CI/CD Integrations
+    url: /synthetics/cicd_integrations
     parent: synthetics
-    identifier: synthetics_cicd_testing
+    identifier: synthetics_cicd_integrations
     weight: 5
-  - name: CI Results Explorer
-    url: /synthetics/cicd_testing/ci_results_explorer
-    parent: synthetics_cicd_testing
+  - name: GitHub Actions
+    url: /synthetics/cicd_integrations/github_actions
+    parent: synthetics_cicd_integrations
+    identifier: synthetics_integrations_github_actions
     weight: 501
+  - name: Jenkins
+    url: /synthetics/cicd_integrations/jenkins
+    parent: synthetics_cicd_integrations
+    identifier: synthetics_cicd_integrations_jenkins
+    weight: 502
+  - name: Configuration
+    url: /synthetics/cicd_integrations/configuration
+    parent: synthetics_cicd_integrations
+    identifier: synthetics_cicd_integrations_configuration
+    weight: 503
+  - name: CI Results Explorer
+    url: /synthetics/ci_results_explorer
+    parent: synthetics
+    identifier: synthetics_ci_results_explorer
+    weight: 7
   - name: Testing Tunnel
     url: /synthetics/testing_tunnel
     parent: synthetics
     identifier: synthetics_testing_tunnel
-    weight: 6
+    weight: 8
   - name: APM Integration
     url: synthetics/apm/
     parent: synthetics
     identifier: synthetics_apm
-    weight: 7
+    weight: 9
   - name: Settings
     url: synthetics/settings/
     parent: synthetics
-    weight: 8
+    weight: 10
   - name: Search and Manage
     url: synthetics/search/
     parent: synthetics
-    weight: 9
+    weight: 11
   - name: Metrics
     url: synthetics/metrics/
     parent: synthetics
-    weight: 10
+    weight: 12
   - name: Guides
     url: synthetics/guide/
     parent: synthetics
     identifier: synthetics_guides
-    weight: 12
+    weight: 13
   - name: Troubleshooting
     url: synthetics/troubleshooting/
     parent: synthetics
     identifier: synthetics_troubleshooting
-    weight: 13
+    weight: 14
   - name: Security
     url: security/synthetics/
     parent: synthetics
-    weight: 14
+    weight: 15
   - name: RUM & Session Replay
     url: real_user_monitoring/
     pre: rum

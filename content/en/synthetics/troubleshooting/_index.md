@@ -166,4 +166,4 @@ Check whether you are using API endpoints to trigger your CI/CD test runs. To ha
 [12]: /synthetics/api_tests/?tab=httptest#notify-your-team
 [13]: /synthetics/private_locations#private-location-total-hardware-requirements
 [14]: https://docs.docker.com/engine/reference/commandline/run/#mount-volume--v---read-only
-[15]: /synthetics/cicd_testing/?tab=apitest#cli-usage
+[15]: /synthetics/cicd_integrations?tab=apitest#cli-usage
