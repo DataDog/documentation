@@ -127,8 +127,12 @@ clean-auto-doc: ##Remove all doc automatically created
 	rm -f content/en/real_user_monitoring/android/integrated_libraries.md ;fi
 	@if [ content/en/real_user_monitoring/error_tracking/android.md ]; then \
 	rm -f content/en/real_user_monitoring/error_tracking/android.md ;fi
+	@if [ content/en/real_user_monitoring/error_tracking/ios.md ]; then \
+	rm -f content/en/real_user_monitoring/error_tracking/ios.md ;fi
 	@if [ content/en/real_user_monitoring/browser/_index.md ]; then \
 	rm -f content/en/real_user_monitoring/browser/_index.md ;fi
+	@if [ content/en/real_user_monitoring/ios/crash_reporting.md ]; then \
+	rm -f content/en/real_user_monitoring/ios/crash_reporting.md ;fi
 	@if [ -d content/en/real_user_monitoring/ios ]; then \
 	find ./content/en/real_user_monitoring/ios -type f -maxdepth 1 -exec rm -rf {} \; ;fi
 	@if [ content/en/real_user_monitoring/reactnative.md ]; then \
@@ -245,27 +249,28 @@ EXAMPLES_DIR = $(shell pwd)/examples/content/en/api
 
 examples/go: examples/datadog-api-client-go clean-go-examples
 	echo $(EXAMPLES_DIR)
-	@cd examples/datadog-api-client-go; ./extract-code-blocks.sh $(EXAMPLES_DIR) || (echo "Error copying Go code examples, aborting build."; exit 1)
+	@cd examples/datadog-api-client-go; ./extract-code-blocks.sh $(EXAMPLES_DIR) || (echo "Error copying Go code examples, aborting build."; exit 1); if [ -d examples ]; then cp -R examples/* $(EXAMPLES_DIR)/; fi
 
 	-cp -Rn examples/content ./
 
 examples/java: examples/datadog-api-client-java clean-java-examples
-	@cd examples/datadog-api-client-java; ./extract-code-blocks.sh $(EXAMPLES_DIR) || (echo "Error copying Java code examples, aborting build."; exit 1)
+	@cd examples/datadog-api-client-java; ./extract-code-blocks.sh $(EXAMPLES_DIR) || (echo "Error copying Java code examples, aborting build."; exit 1); if [ -d examples ]; then cp -R examples/* $(EXAMPLES_DIR)/; fi
 
 	-cp -Rn examples/content ./
 
 examples/python: examples/datadog-api-client-python clean-python-examples
-	@cd examples/datadog-api-client-python; ./extract-code-blocks.sh $(EXAMPLES_DIR) || (echo "Error copying Python code examples, aborting build."; exit 1)
+	@cd examples/datadog-api-client-python; ./extract-code-blocks.sh $(EXAMPLES_DIR) || (echo "Error copying Python code examples, aborting build."; exit 1); if [ -d examples ]; then cp -R examples/* $(EXAMPLES_DIR)/; fi
+	@find examples/content -iname \*.py -exec mv {} {}beta \;
 
 	-cp -Rn examples/content ./
 
 examples/ruby: examples/datadog-api-client-ruby clean-ruby-examples
-	@cd examples/datadog-api-client-ruby; ./extract-code-blocks.sh $(EXAMPLES_DIR) || (echo "Error copying Ruby code examples, aborting build."; exit 1)
+	@cd examples/datadog-api-client-ruby; ./extract-code-blocks.sh $(EXAMPLES_DIR) || (echo "Error copying Ruby code examples, aborting build."; exit 1); if [ -d examples ]; then cp -R examples/* $(EXAMPLES_DIR)/; fi
 
 	-cp -Rn examples/content ./
 
 examples/typescript: examples/datadog-api-client-typescript clean-typescript-examples
-	@cd examples/datadog-api-client-typescript; ./extract-code-blocks.sh $(EXAMPLES_DIR) || (echo "Error copying Typescript code examples, aborting build."; exit 1)
+	@cd examples/datadog-api-client-typescript; ./extract-code-blocks.sh $(EXAMPLES_DIR) || (echo "Error copying Typescript code examples, aborting build."; exit 1); if [ -d examples ]; then cp -R examples/* $(EXAMPLES_DIR)/; fi
 
 	-cp -Rn examples/content ./
 

@@ -17,6 +17,7 @@ git_integration_title: tcp_queue_length
 guid: 0468b098-43bd-4157-8a01-14065cfdcb7b
 integration_id: tcp-queue-length
 integration_title: TCP Queue Length
+integration_version: ''
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com

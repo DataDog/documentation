@@ -367,7 +367,7 @@ While actively working with the Live Processes, metrics are collected at 2s reso
 [3]: /getting_started/tagging/
 [4]: /getting_started/tagging/unified_service_tagging
 [5]: https://app.datadoghq.com/process
-[6]: /monitors/monitor_types/process/
+[6]: /monitors/create/types/process/
 [7]: https://app.datadoghq.com/monitors#create/live_process
 [8]: /dashboards/widgets/timeseries/#pagetitle
 [9]: /infrastructure/livecontainers/

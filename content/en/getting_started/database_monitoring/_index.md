@@ -8,7 +8,7 @@ further_reading:
     - link: '/database_monitoring/troubleshooting/'
       tag: 'Documentation'
       text: 'Troubleshooting'
-    - link: '/blog/database-performance-monitoring-datadog/'
+    - link: 'https://www.datadoghq.com/blog/database-performance-monitoring-datadog/'
       tag: 'Blog'
       text: 'Database performance monitoring with Datadog'
 ---
@@ -131,6 +131,6 @@ You can clone and modify out-of-the-box dashboards to suit your needs.
 [1]: https://www.datadoghq.com/free-datadog-trial/
 [2]: https://www.gnu.org/software/make/
 [3]: https://www.docker.com/
-[4]: https://app.datadoghq.com/account/settings#api
+[4]: https://app.datadoghq.com/organization-settings/api-keys
 [5]: https://github.com/DataDog/dd-database-monitoring-example
 [6]: https://app.datadoghq.com/databases

@@ -34,37 +34,36 @@ containerDefinitions": [
     ...
   {{< /code-block >}}
 
-    {{< site-region region="us3,eu,gov" >}} 
-  To ensure the Agent sends data to the right Datadog location, set the following environment variable, where `<DATADOG_SITE>` is {{< region-param key="dd_site" code="true" >}}:
+    To ensure the Agent sends data to the right Datadog location, set the following environment variable, where `<DATADOG_SITE>` is {{< region-param key="dd_site" code="true" >}}:
 
-  ```json
-  "environment": [
-       ...
-     {
-       "name": "DD_SITE",
-       "value": "<DATADOG_SITE>"
-     },
-     ...
-     ]
-   ...
-  ```
-  {{< /site-region >}}
-  For **Agent v7.17 or lower**, add the following environment variables:
-   ```json
-   "environment": [
+    ```json
+    "environment": [
         ...
       {
-        "name": "DD_APM_ENABLED",
-        "value": "true"
-      },
-      {
-        "name": "DD_APM_NON_LOCAL_TRAFFIC",
-        "value": "true"
+        "name": "DD_SITE",
+        "value": "<DATADOG_SITE>"
       },
       ...
       ]
-   ...
-   ```
+    ...
+    ```
+
+    For **Agent v7.17 or lower**, add the following environment variables:
+    ```json
+    "environment": [
+          ...
+        {
+          "name": "DD_APM_ENABLED",
+          "value": "true"
+        },
+        {
+          "name": "DD_APM_NON_LOCAL_TRAFFIC",
+          "value": "true"
+        },
+        ...
+        ]
+    ...
+    ```
 
    [See all environment variables available for Agent trace collection][1].
 

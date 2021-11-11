@@ -6,12 +6,13 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Meraki インテグレーションで、ネットワークイベントログを収集できます。
-doc_link: 'https://docs.datadoghq.com/integrations/meraki/'
+doc_link: https://docs.datadoghq.com/integrations/meraki/
 draft: false
 git_integration_title: meraki
 has_logo: true
 integration_id: ''
 integration_title: Meraki
+integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'

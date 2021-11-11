@@ -20,6 +20,7 @@
 "guid": "02b6d170-8b2e-4de4-b3a9-afb67183cb5e"
 "integration_id": "signl4"
 "integration_title": "SIGNL4  for Datadog"
+"integration_version": ""
 "is_public": true
 "kind": "integration"
 "maintainer": "success@signl4.com"

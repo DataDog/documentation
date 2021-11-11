@@ -44,12 +44,18 @@ Add the Datadog Lambda Extension layer for your Lambda function using the ARN in
 
 {{< site-region region="us,us3,eu" >}}
 ```
+// For x86 lambdas
 arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:<EXTENSION_VERSION>
+// For arm64 lambdas
+arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension-ARM:<EXTENSION_VERSION>
 ```
 {{< /site-region >}}
 {{< site-region region="gov" >}}
 ```
+// For x86 lambdas
 arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension:<EXTENSION_VERSION>
+// For arm64 lambdas
+arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension-ARM:<EXTENSION_VERSION>
 ```
 {{< /site-region >}}
 
@@ -160,6 +166,8 @@ func myHandler(ctx context.Context, event MyEvent) (string, error) {
 
 For more information, see the [Custom Metrics documentation][8].
 
+If your Lambda function is running in a VPC, follow the [Datadog Lambda Extension AWS PrivateLink Setup][9] guide to ensure that the extension can reach Datadog API endpoints.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -168,7 +176,8 @@ For more information, see the [Custom Metrics documentation][8].
 [2]: /serverless/guide/datadog_forwarder_go
 [3]: https://aws.amazon.com/blogs/compute/migrating-aws-lambda-functions-to-al2/
 [4]: https://github.com/DataDog/datadog-lambda-go
-[5]: https://app.datadoghq.com/account/settings#api
+[5]: https://app.datadoghq.com/organization-settings/api-keys
 [6]: /getting_started/tagging/unified_service_tagging/#aws-lambda-functions
 [7]: https://app.datadoghq.com/functions
 [8]: /serverless/custom_metrics?tab=go
+[9]: /serverless/guide/extension_private_link/

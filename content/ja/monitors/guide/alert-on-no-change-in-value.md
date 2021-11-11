@@ -1,13 +1,13 @@
 ---
-title: 値に変化がないことを警告するようにメトリクスモニターを構成します
+title: 値に変化がない場合のアラート
 kind: ガイド
 aliases:
   - /ja/monitors/faq/how-can-i-configure-a-metric-monitor-to-alert-on-no-change-in-value
 further_reading:
-  - link: /monitors/monitor_types/
+  - link: /monitors/create/types/
     tag: Documentation
     text: モニターの作成方法
-  - link: /monitors/notifications/
+  - link: /monitors/notify/
     tag: Documentation
     text: モニター通知の設定
 ---
@@ -40,4 +40,4 @@ further_reading:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/api/
-[2]: /ja/monitors/monitor_types/#define-the-conditions
+[2]: /ja/monitors/create/types/#define-the-conditions

@@ -39,7 +39,7 @@ Datadog Agent をドメイン環境にインストールするには、[Agent �
 4. インストールが終了したら、オプションから Datadog Agent Manager を起動できます。
 
 [1]: https://s3.amazonaws.com/ddagent-windows-stable/datadog-agent-7-latest.amd64.msi
-[2]: https://app.datadoghq.com/account/settings#api
+[2]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{% tab "コマンドライン" %}}
 

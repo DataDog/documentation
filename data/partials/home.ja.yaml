@@ -50,7 +50,7 @@ nav_sections:
             desc: ログの収集、処理、確認、監視、アーカイブ
           - title: セキュリティプラットフォーム
             link: security_platform/
-            icon: security
+            icon: security-platform
             desc: アプリケーションとインフラストラクチャー全体の脅威と構成ミスを検出する
           - title: Synthetic モニタリング
             link: synthetics/
@@ -72,7 +72,7 @@ nav_sections:
             link: mobile/
             icon: mobile
             desc: Datadog アラートとダッシュボード をモバイル端末で表示
-          - title: Watchdog
+          - title: Datadog Watchdog
             link: watchdog/
             icon: watchdog
             desc: アプリケーションとインフラストラクチャーメトリクスの傾向を自動的に確認する

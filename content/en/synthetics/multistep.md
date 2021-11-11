@@ -74,13 +74,14 @@ To create an HTTP request step, click **Create Your First Step**.
 
    * **HTTP Basic Auth**: Add HTTP basic authentication credentials.
    * **AWS Signature V4**: Enter your Access Key ID and Secret Access Key. Datadog generates the signature for your request.
-   This option uses the basic implementation of SigV4. The AWS S3 specific signature is not implemented.
+   This option uses the basic implementation of SigV4. Specific signatures such as AWS S3 are not implemented.
+   * **NTLM v1**: Add NTLM authentication credentials.
 
    {{% /tab %}}
 
    {{% tab "Request Body" %}}
 
-   * **Body type**: Select the type of the request body (`text/plain`, `application/json`, `text/xml`, `text/html`, `application/x-www-form-urlendcoded`, or `None`) you want to add to your HTTP request.
+   * **Body type**: Select the type of the request body (`text/plain`, `application/json`, `text/xml`, `text/html`, `application/x-www-form-urlencoded`, or `None`) you want to add to your HTTP request.
    * **Request body**: Add the content of your HTTP request body. **Note**: The request body is limited to a maximum size of 50 kilobytes.
 
    {{% /tab %}}
@@ -147,7 +148,7 @@ To parse your variable:
 2. Decide whether to extract your variable from the response headers, or from the response body:
 
     * Extract the value from **response header**: use the full response header of your HTTP request as the variable value, or parse it with a [`regex`][10].
-    * Extract the value from **response body**: use the full response body of your HTTP request as the variable value, parse it with a [`regex`][10], [`JSONPath`][8], or [`XPath`][11].
+    * Extract the value from **response body**: use the full response body of your HTTP request as the variable value, parse it with a [`regex`][10], [`JSONPath`][8], or [`XPath`][9].
 
 {{< img src="synthetics/api_tests/ms_extract_variable3.png" alt="Extract variables from HTTP requests in Multistep API test" style="width:90%;" >}}
 
@@ -177,7 +178,7 @@ When you set the alert conditions to: `An alert is triggered if any assertion fa
 
 #### Fast retry
 
-Your test can trigger retries in case of a failed test result. By default, the retries are performed 300 ms after the first failed test result. The retry interval can be configured with the [API][11].
+Your test can trigger retries `X` times after `Y` ms in case of a failed test result. Customize the retry interval to suit your alerting sensibility.
 
 Location uptime is computed on a per-evaluation basis (whether the last test result before evaluation was up or down). The total uptime is computed based on the configured alert conditions. Notifications sent are based on the total uptime.
 
@@ -185,9 +186,9 @@ Location uptime is computed on a per-evaluation basis (whether the last test res
 
 A notification is sent by your test based on the [alerting conditions](#define-alert-conditions) previously defined. Use this section to define how and what message to send to your teams.
 
-1. [Similar to monitors][12], select **users and/or services** that should receive notifications either by adding an `@notification` to the message or by searching for team members and connected integrations with the drop-down box.
+1. [Similar to monitors][11], select **users and/or services** that should receive notifications either by adding an `@notification` to the message or by searching for team members and connected integrations with the drop-down box.
 
-2. Enter the notification **message** for your test. This field allows standard [Markdown formatting][13] and supports the following [conditional variables][14]:
+2. Enter the notification **message** for your test. This field allows standard [Markdown formatting][12] and supports the following [conditional variables][13]:
 
     | Conditional Variable       | Description                                                         |
     |----------------------------|---------------------------------------------------------------------|
@@ -229,7 +230,7 @@ You can create local variables by clicking on **Create Local Variable** at the t
 
 ### Use variables
 
-You can use the [global variables defined in the `Settings`][15] and the [locally defined variables](#create-local-variables) in the URL, advanced options, and assertions of your HTTP tests.
+You can use the [global variables defined in the `Settings`][14] and the [locally defined variables](#create-local-variables) in the URL, advanced options, and assertions of your HTTP tests.
 
 To display your list of variables, type `{{` in your desired field.
 
@@ -249,18 +250,21 @@ A test is considered `FAILED` if a step does not satisfy one or several assertio
 : The configuration of the test is invalid (for example, a typo in the URL).
 
 `SSL`
-: The SSL connection couldn't be performed. [See the dedicated error page for more information][16].
+: The SSL connection couldn't be performed. [See the dedicated error page for more information][15].
 
 `TIMEOUT`
 : The request couldn't be completed in a reasonable time. Two types of `TIMEOUT` can happen:
   - `TIMEOUT: The request couldn’t be completed in a reasonable time.` indicates that the timeout happened at the TCP socket connection level.
   - `TIMEOUT: Retrieving the response couldn’t be completed in a reasonable time.` indicates that the timeout happened on the overall run (which includes TCP socket connection, data transfer, and assertions).
 
+`MALFORMED_RESPONSE` 
+: The remote server responded with a payload that does not comply with HTTP specifications.
+
 ## Permissions
 
-By default, only users with the [Datadog Admin and Datadog Standard roles][17] can create, edit, and delete Synthetic multistep API tests. To get create, edit, and delete access to Synthetic multistep API tests, upgrade your user to one of those two [default roles][17].
+By default, only users with the [Datadog Admin and Datadog Standard roles][16] can create, edit, and delete Synthetic multistep API tests. To get create, edit, and delete access to Synthetic multistep API tests, upgrade your user to one of those two [default roles][16].
 
-If you have access to the [custom role feature][18], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions for Synthetic Monitoring.
+If you have access to the [custom role feature][17], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions for Synthetic Monitoring.
 
 ## Further Reading
 
@@ -276,11 +280,10 @@ If you have access to the [custom role feature][18], add your user to any custom
 [8]: https://restfulapi.net/json-jsonpath/
 [9]: https://www.w3schools.com/xml/xpath_syntax.asp
 [10]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
-[11]: /api/latest/synthetics/#edit-an-api-test
-[12]: /monitors/notifications/?tab=is_alert#notification
-[13]: http://daringfireball.net/projects/markdown/syntax
-[14]: /monitors/notifications/?tab=is_recoveryis_alert_recovery#conditional-variables
-[15]: /synthetics/settings/#global-variables
-[16]: /synthetics/api_tests/errors/#ssl-errors
-[17]: /account_management/rbac/
-[18]: /account_management/rbac#custom-roles
+[11]: /monitors/notify/?tab=is_alert#notification
+[12]: http://daringfireball.net/projects/markdown/syntax
+[13]: /monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables
+[14]: /synthetics/settings/#global-variables
+[15]: /synthetics/api_tests/errors/#ssl-errors
+[16]: /account_management/rbac/
+[17]: /account_management/rbac#custom-roles

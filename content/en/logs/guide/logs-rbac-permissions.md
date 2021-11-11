@@ -77,7 +77,7 @@ This permission can be assigned either globally or restricted to a subset of ind
 {{< img src="account_management/rbac/logs_write_exclusion_filters.png" alt="Logs Write Exclusion Filters"  style="width:75%;" >}}
 
 
-[1]: /logs/pipelines/indexes
+[1]: /logs/log_configuration/indexes/
 {{% /tab %}}
 {{% tab "API" %}}
 

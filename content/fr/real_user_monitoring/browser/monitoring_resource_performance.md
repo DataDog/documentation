@@ -2,7 +2,7 @@
 title: Surveillance des performances de ressources
 kind: documentation
 further_reading:
-  - link: 'https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/'
+  - link: https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/
     tag: Blog
     text: Real User Monitoring
   - link: /real_user_monitoring/explorer/

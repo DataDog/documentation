@@ -3,7 +3,7 @@ title: Développeurs
 kind: documentation
 description: 'Références sur le développement pour Datadog, avec des exemples de configuration et de code'
 aliases:
-  - /fr/developers/faq/how-to-monitor-logs-with-loggly-live-tail-and-datadog'
+  - /fr/developers/faq/how-to-monitor-logs-with-loggly-live-tail-and-datadog
 further_reading:
   - link: /api
     tag: Documentation

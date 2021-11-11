@@ -5,7 +5,7 @@ description: API テストのタイミングと各バリエーションのトラ
 aliases:
   - /ja/synthetics/api_test_timing_variations
 further_reading:
-  - link: 'https://docs.datadoghq.com/synthetics/metrics/#api-tests'
+  - link: https://docs.datadoghq.com/synthetics/metrics/#api-tests
     tag: ドキュメント
     text: Synthetics API テストのメトリクス
 ---
@@ -75,7 +75,7 @@ Synthetic テストは以下を測定する[メトリクス][1]を収集しま�
 
 `*.response.time` メトリクスは、Synthetics が起動してから Synthetics がリクエストを終了するまでの時間を測定します。応答時間はすべてのネットワーク時間の合計となります。
 
-例えば、HTTPS エンドポイントでリダイレクトを行わない HTTP テストの総応答時間などがこれにあたります: `synthetics.http.response.time = synthetics.http.dns.time + synthetics.http.connect.time+synthetics.http.ssl.time + synthetics.http.download.time` 
+例えば、HTTPS エンドポイントでリダイレクトを行わない HTTP テストの総応答時間などがこれにあたります: `synthetics.http.response.time = synthetics.http.dns.time + synthetics.http.connect.time + synthetics.http.ssl.time + synthetics.http.firstbyte.time + synthetics.http.download.time`
 
 ## タイミングのバリエーション
 

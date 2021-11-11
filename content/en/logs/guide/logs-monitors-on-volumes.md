@@ -37,7 +37,7 @@ To define anomaly detection monitors to be alerted of any unexpected indexing lo
 1. [Create a new Anomaly monitor][4]
 2. Select the `datadog.estimated_usage.logs.ingested_events` metric
 3. Add `datadog_is_excluded:false` in the `from` section (to monitor indexed logs and not ingested ones)
-4. Add the tag `service` and `datadog_index` in **group by** (to be notified if a specific service spikes or stops sending logs in any indexes)
+4. Add the tag `service` and `datadog_index` in **count by** (to be notified if a specific service spikes or stops sending logs in any indexes)
 5. Set the alert condition to match your use case (e.g., evaluation window, number of times outside the expected range, etc.)
 6. Set the notification message with actionable instructions:
 
@@ -92,7 +92,7 @@ Here is an example of what the notification would look like in Slack:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /logs/logs_to_metrics/#recommended-usage-metrics
-[2]: /monitors/monitor_types/anomaly/
+[2]: /monitors/create/types/anomaly/
 [3]: https://app.datadoghq.com/metric/summary?filter=datadog.estimated_usage.logs.ingested_bytes&metric=datadog.estimated_usage.logs.ingested_bytes
 [4]: https://app.datadoghq.com/monitors#create/anomaly
 [5]: /resources/json/estimated_log_usage_dashboard_configuration.json

@@ -32,19 +32,20 @@ The Datadog Lambda Library is responsible for:
 - Submitting [custom metrics][2] (synchronously and asynchronously).
 - Enabling [Datadog APM and Distributed Tracing][3] for Node.js, Python, and Ruby.
 
-You **must** also install and configure the Datadog Forwarder to ingest traces, enhanced Lambda metrics, or custom metrics (asynchronously) from your Lambda functions.
+If you are using the Datadog Lambda library for **Ruby** or **Java**, you **must** also install and configure the Datadog Forwarder to ingest traces, enhanced Lambda metrics, or custom metrics (asynchronously) from your Lambda functions.
+If you are using the Datadog Lambda library for **Python**, **Node**, or **Go**, you may use the [Datadog Lambda Extension][4] to ingest traces, enhanced Lambda metrics, or custom metrics; or you may continue to use the Datadog Forwarder.
 
 The Datadog Lambda Library is **NOT** responsible for collecting:
 
-- Lambda metrics from CloudWatch (see [AWS Lambda Integration][4])
-- Lambda traces from X-Ray (see [AWS X-Ray integration][5])
-- Lambda logs from CloudWatch (see [Datadog Forwarder][6])
+- Lambda metrics from CloudWatch (see [AWS Lambda Integration][5])
+- Lambda traces from X-Ray (see [AWS X-Ray integration][6])
+- Lambda logs from CloudWatch (see [Datadog Forwarder][7])
 
 Datadog distributes the Lambda library as a package for Python, Node.js, Ruby, Go, and Java. Packages are installed through the common package managers, such as pip, npm, gem, maven, etc.
 
-The Datadog Lambda library is also available as [Lambda layers][7] for Python, Node.js, and Ruby.
+The Datadog Lambda library is also available as [Lambda layers][8] for Python, Node.js, and Ruby.
 
-To install the Datadog Lambda library and instrument your serverless applications, see the [installation instructions][8].
+To install the Datadog Lambda library and instrument your serverless applications, see the [installation instructions][9].
 
 ## Further Reading
 
@@ -54,8 +55,9 @@ To install the Datadog Lambda library and instrument your serverless application
 [1]: /serverless/enhanced_lambda_metrics/
 [2]: /serverless/custom_metrics/
 [3]: /tracing/
-[4]: /integrations/amazon_lambda/
-[5]: /integrations/amazon_xray/
-[6]: /serverless/forwarder/
-[7]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
-[8]: /serverless/installation/
+[4]: /serverless/libraries_integrations/extension/
+[5]: /integrations/amazon_lambda/
+[6]: /integrations/amazon_xray/
+[7]: /serverless/forwarder/
+[8]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
+[9]: /serverless/installation/

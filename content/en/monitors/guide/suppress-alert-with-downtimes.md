@@ -7,7 +7,7 @@ further_reading:
 - link: "api/v1/downtimes/"
   tag: "Documentation"
   text: "Downtime API reference"
-- link: "/monitors/downtimes/"
+- link: "/monitors/notify/downtimes/"
   tag: "Documentation"
   text: "Downtime documentation"
 ---
@@ -231,6 +231,6 @@ Open the [manage Downtime page][1] and add a new downtime. Select `recurring`:
 
 [1]: https://docs.datadoghq.com/api/v1/downtimes/
 [2]: https://docs.datadoghq.com/api/v1/authentication/
-[3]: https://docs.datadoghq.com/monitors/downtimes/?tab=bymonitorname
+[3]: https://docs.datadoghq.com/monitors/notify/downtimes/
 [4]: https://icalendar.org/iCalendar-RFC-5545/3-8-5-3-recurrence-rule.html
 [5]: https://icalendar.org/rrule-tool.html

@@ -4,7 +4,11 @@ kind: guide
 aliases: /continuous_integration/guides/find_flaky_tests/
 ---
 
-_Flaky tests_ are tests that exhibit both a passing and failing status across multiple test runs for the same commit. If you commit some code and run it through CI, and a test fails, and you run it through CI again and the test passes, that test is unreliable as proof of quality code. 
+{{< site-region region="us5,gov" >}}
+<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
+{{< /site-region >}}
+
+_Flaky tests_ are tests that exhibit both a passing and failing status across multiple test runs for the same commit. If you commit some code and run it through CI, and a test fails, and you run it through CI again and the test passes, that test is unreliable as proof of quality code.
 
 Flaky tests introduce risk and unpredictability into your CI system and into your end product. When people have to remember which tests are flaky, they lose trust in their test results, and a tremendous amount of time and resources are wasted on pipeline retries.
 
@@ -32,5 +36,5 @@ If a flaky test has not failed in the past 30 days, it is automatically removed 
 
 2. Filter the table to see branches, services, or commits of interest to you.
 
-3. Look at the **New Flaky** column to see the number of new flaky tests that were introduced by the latest commit. These are tests that exhibit flaky behavior and didn’t previously exist in the Flaky Tests table. 
+3. Look at the **New Flaky** column to see the number of new flaky tests that were introduced by the latest commit. These are tests that exhibit flaky behavior and didn’t previously exist in the Flaky Tests table.
 

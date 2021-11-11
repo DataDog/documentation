@@ -192,12 +192,12 @@ To view, edit, and delete existing status corrections, click on the **Correction
 [2]: /dashboards/widgets/slo/
 [3]: /monitors/service_level_objectives/metric/
 [4]: /monitors/service_level_objectives/monitor/
-[5]: /monitors/monitor_types/metric/?tab=threshold#alert-grouping
+[5]: /monitors/create/types/metric/?tab=threshold#alert-grouping
 [6]: /monitors/service_level_objectives/metric/#define-queries
 [7]: /monitors/service_level_objectives/monitor/#set-your-slo-targets
 [8]: /monitors/service_level_objectives/metric/#set-your-slo-targets
 [9]: /monitors/service_level_objectives/#saved-views
 [10]: /api/v1/events/#query-the-event-stream
-[11]: /monitors/monitor_types/event/
+[11]: /monitors/create/types/event/
 [12]: /api/latest/service-level-objective-corrections/
 [13]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/slo_correction

@@ -37,7 +37,8 @@ Integrate the Go tracer with the following list of web frameworks using one of t
 | [gRPC][7]        | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/grpc][8]     |
 | [gRPC v1.2][7]   | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/grpc.v12][9] |
 | [chi][10]         | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi][11] |
-| [echo][12]        | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/labstack/echo][13]              |
+| [echo v4][12]     | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/labstack/echo.v4][13]           |
+| [echo v3][12]     | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/labstack/echo][67]              |
 
 #### Library compatibility
 
@@ -96,7 +97,7 @@ import "gopkg.in/DataDog/dd-trace-go.v1/contrib/<PACKAGE_DIR>/<PACKAGE_NAME>"
 [10]: https://github.com/go-chi/chi
 [11]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi
 [12]: https://github.com/labstack/echo
-[13]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/labstack/echo
+[13]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/labstack/echo.v4
 [14]: https://aws.amazon.com/sdk-for-go
 [15]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/aws/aws-sdk-go/aws
 [16]: https://github.com/olivere/elastic
@@ -150,3 +151,4 @@ import "gopkg.in/DataDog/dd-trace-go.v1/contrib/<PACKAGE_DIR>/<PACKAGE_NAME>"
 [64]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/k8s.io/client-go/kubernetes
 [65]: https://github.com/bradfitz/gomemcache/memcache
 [66]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/bradfitz/gomemcache/memcache
+[67]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/labstack/echo

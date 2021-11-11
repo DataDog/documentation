@@ -80,21 +80,26 @@ Next, enable the Datadog features that you'd like to use: [APM][5], [Logs][6]
 **Notes**:
 
 - For a full list of the Datadog chart's configurable parameters and their default values, refer to the [Datadog Helm repository README][7].
-- If Google Container Registry ([gcr.io/datadoghq][8]) is not accessible in your deployment region, use the Docker Hub registry with the images [datadog/agent][9] and [datadog/cluster-agent][10] with the following configuration in the `values.yaml` file:
 
-    ```yaml
-    agents:
-      image:
-        repository: datadog/agent
+### Container registries
 
-    clusterAgent:
-      image:
-        repository: datadog/cluster-agent
+If Google Container Registry ([gcr.io/datadoghq][8]) is not accessible in your deployment region, use another registry with the following configuration in the `values.yaml` file:
 
-    clusterChecksRunner:
-      image:
-        repository: datadog/agent
-    ```
+- For the public AWS ECR registry ([public.ecr.aws/datadog][9]):
+
+  ```yaml
+  registry: public.ecr.aws/datadog
+  ```
+
+- For the Docker Hub registry ([docker.io/datadog][10]):
+
+  ```yaml
+  registry: docker.io/datadog
+  ```
+
+**Note**:
+
+- It is recommended to use the public AWS ECR registry ([public.ecr.aws/datadog][9]) when the Datadog chart is deployed in an AWS environment.
 
 ### Upgrading from chart v1.x
 
@@ -118,14 +123,14 @@ where `<USER_ID>` is the UID to run the agent and `<DOCKER_GROUP_ID>` is the gro
 
 [1]: https://v3.helm.sh/docs/intro/install/
 [2]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
-[3]: https://app.datadoghq.com/account/settings#api
+[3]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-state-metrics
 [5]: /agent/kubernetes/apm?tab=helm
 [6]: /agent/kubernetes/log?tab=helm
 [7]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog
 [8]: https://gcr.io/datadoghq
-[9]: https://hub.docker.com/r/datadog/agent
-[10]: https://hub.docker.com/r/datadog/cluster-agent
+[9]: https://gallery.ecr.aws/datadog/
+[10]: https://hub.docker.com/u/datadog/
 [11]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/docs/Migration_1.x_to_2.x.md
 {{% /tab %}}
 {{% tab "DaemonSet" %}}
@@ -158,12 +163,12 @@ To install the Datadog Agent on your Kubernetes cluster:
 
     | Metrics                   | Logs                      | APM                       | Process                   | NPM                       | Security                       | Linux                   | Windows                 |
     |---------------------------|---------------------------|---------------------------|---------------------------|---------------------------|-------------------------|-------------------------|-------------------------|
-    | <i class="icon-tick"></i> | <i class="icon-tick"></i> | <i class="icon-tick"></i> | <i class="icon-tick"></i> |                           | <i class="icon-tick"></i> | [Manifest template][3]  | [Manifest template][4] (no security)  |
-    | <i class="icon-tick"></i> | <i class="icon-tick"></i> | <i class="icon-tick"></i> |                           |                           |                           | [Manifest template][5]  | [Manifest template][6]  |
-    | <i class="icon-tick"></i> | <i class="icon-tick"></i> |                           |                           |                           |                           | [Manifest template][7]  | [Manifest template][8]  |
-    | <i class="icon-tick"></i> |                           | <i class="icon-tick"></i> |                           |                           |                           | [Manifest template][9]  | [Manifest template][10] |
-    |                           |                           |                           |                           | <i class="icon-tick"></i> | <i class="icon-tick"></i> | [Manifest template][11] | no template             |
-    | <i class="icon-tick"></i> |                           |                           |                           |                           |                           | [Manifest template][12] | [Manifest template][13] |
+    | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |                           | <i class="icon-check-bold"></i> | [Manifest template][3]  | [Manifest template][4] (no security)  |
+    | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |                           |                           |                           | [Manifest template][5]  | [Manifest template][6]  |
+    | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |                           |                           |                           |                           | [Manifest template][7]  | [Manifest template][8]  |
+    | <i class="icon-check-bold"></i> |                           | <i class="icon-check-bold"></i> |                           |                           |                           | [Manifest template][9]  | [Manifest template][10] |
+    |                           |                           |                           |                           | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> | [Manifest template][11] | no template             |
+    | <i class="icon-check-bold"></i> |                           |                           |                           |                           |                           | [Manifest template][12] | [Manifest template][13] |
 
      To enable trace collection completely, [extra steps are required on your application Pod configuration][14]. Refer also to the [logs][15], [APM][16], [processes][17], and [Network Performance Monitoring][18], and [Security][19] documentation pages to learn how to enable each feature individually.
 
@@ -213,7 +218,7 @@ To install the Datadog Agent on your Kubernetes cluster:
 where `<USER_ID>` is the UID to run the agent and `<DOCKER_GROUP_ID>` is the group ID owning the docker or containerd socket.
 
 [1]: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#nodeselector
-[2]: https://app.datadoghq.com/account/settings#api
+[2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: /resources/yaml/datadog-agent-all-features.yaml
 [4]: /resources/yaml/datadog-agent-windows-all-features.yaml
 [5]: /resources/yaml/datadog-agent-logs-apm.yaml
@@ -326,7 +331,7 @@ where `<USER_ID>` is the UID to run the agent and `<DOCKER_GROUP_ID>` is the gro
 [3]: https://kubernetes.io/docs/tasks/tools/install-kubectl/
 [4]: https://github.com/DataDog/helm-charts/tree/master/charts/datadog-operator
 [5]: https://artifacthub.io/packages/helm/datadog/datadog-operator
-[6]: https://app.datadoghq.com/account/settings#api
+[6]: https://app.datadoghq.com/organization-settings/api-keys
 [7]: /agent/guide/operator-advanced
 [8]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.md
 {{% /tab %}}

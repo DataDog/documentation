@@ -2,10 +2,10 @@
 title: Can I send SMS notifications in Datadog?
 kind: faq
 further_reading:
-- link: "/monitors/monitor_types/"
+- link: "/monitors/create/types/"
   tag: "Documentation"
   text: "Learn how to create a monitor"
-- link: "/monitors/notifications/"
+- link: "/monitors/notify/"
   tag: "Documentation"
   text: "Configure your monitor notifications"
 ---

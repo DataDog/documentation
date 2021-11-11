@@ -3,11 +3,14 @@ title: Developers
 kind: documentation
 description: Reference materials for developing for Datadog, including config and code examples
 aliases:
-- /developers/faq/how-to-monitor-logs-with-loggly-live-tail-and-datadog'
+- /developers/faq/how-to-monitor-logs-with-loggly-live-tail-and-datadog
 further_reading:
 - link: "/api"
   tag: "Documentation"
   text: "Datadog API"
+- link: "https://datadoghq.dev/integrations-core/guidelines/dashboards/#best-practices"
+  tag: "Best Practices"
+  text: "Create great integration dashboards"
 ---
 
 ## Overview

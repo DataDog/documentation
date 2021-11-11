@@ -17,6 +17,10 @@ integration_title: Kubernetes State Metrics Core
 is_public: true
 public_title: Datadog-Kubernetes State Metrics Core Integration
 integration_id: "kubernetes_state_core"
+further_reading:
+    - link: "https://www.datadoghq.com/blog/engineering/our-journey-taking-kubernetes-state-metrics-to-the-next-level/"
+      tag: "Blog"
+      text: "Our Journey Taking Kubernetes State Metrics to the Next Level"
 ---
 
 ## Overview
@@ -123,6 +127,11 @@ The Kubernetes State Metrics Core check is not backward compatible, be sure to r
 `kubernetes_state.pod.status_phase`
 : The metric is tagged with pod level tags, like `pod_name`.
 
+`kubernetes_state.node.count`
+: The metric is not tagged with `host` anymore. It aggregates the nodes count by `kernel_version` `os_image` `container_runtime_version` `kubelet_version`.
+
+`kubernetes_state.container.waiting` and `kubernetes_state.container.status_report.count.waiting`
+: These metrics no longer emit a 0 value if no pods are waiting. They only report non-zero values.
 
 {{< tabs >}}
 {{% tab "Helm" %}}
@@ -280,12 +289,6 @@ datadog:
 
 `kubernetes_state.container.waiting`
 : Describes whether the container is in a waiting state. Tags:`kube_namespace` `pod_name` `kube_container_name` (`env` `service` `version` from standard labels).
-
-`kubernetes_state.container.status_report.count.waiting`
-: Describes the reason the container is in a waiting state. Tags:`kube_namespace` `pod_name` `kube_container_name` `reason` (`env` `service` `version` from standard labels).
-
-`kubernetes_state.container.status_report.count.terminated`
-: Describes the reason the container is in a terminated state. Tags:`kube_namespace` `pod_name` `kube_container_name` `reason` (`env` `service` `version` from standard labels).
 
 `kubernetes_state.container.status_report.count.waiting`
 : Describes the reason the container is in a waiting state. Tags:`kube_namespace` `pod_name` `kube_container_name` `reason` (`env` `service` `version` from standard labels).
@@ -533,6 +536,11 @@ The Kubernetes State Metrics Core check does not include any events.
 ## Troubleshooting
 
 Need help? Contact [Datadog support][7].
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 
 [1]: https://kubernetes.io/blog/2021/04/13/kube-state-metrics-v-2-0/
 [2]: /integrations/kubernetes_state_core/#migration-from-kubernetes_state-to-kubernetes_state_core

@@ -46,8 +46,6 @@ Un contexte est constitué d'un intervalle et d'une requête de recherche. Les p
 
 Cliquez sur le pattern de log à exclure pour afficher un échantillon de logs sous-jacents.
 
-{{< img src="logs/guide/getting-started-lwl/patterns_context_panel.png" alt="Contexte des patterns" style="width:100%;">}}
-
 La vue Pattern vous aide à identifier et à filtrer les patterns inutiles. Elle présente le nombre de logs correspondant à un pattern, répartis en fonction de leur service et de leur statut. Cliquez sur le premier pattern pour visualiser un log détaillé des événements associés au statut. Les informations sur le pattern de statut transmettant le plus de données parasites s'affichent dans une fenêtre contextuelle.
 
 ## 3. Créer un filtre d'exclusion de pattern de log
@@ -71,8 +69,6 @@ Le volet de contexte des patterns répertorie toutes les instances (tous les év
 **Remarque** : si un log correspond à plusieurs filtres d'exclusion, seule la règle du premier filtre d'exclusion est appliquée. Un log ne peut pas être échantillonné ou exclu plusieurs fois par différents filtres d'exclusion.
 
 Dans cet exemple, le pattern `Updating recommendations with customer_id=* & url=shops/*/*` du statut de service `INFO` est exclus à l'aide d'un filtre d'exclusion. En supprimant les patterns de journalisation volumineuse comme celui-ci de votre vue Log Explorer, vous pouvez parcourir vos données et identifier vos problèmes plus facilement. Sachez cependant que ces logs sont **uniquement** retirés de la vue Log Explorer. Ils sont toujours ingérés et consultables dans la vue [Live Tail][5]. Ils peuvent également être envoyés vers les [archives de logs][6] ou utilisés pour [générer des métriques][7].
-
-{{< img src="logs/guide/getting-started-lwl/live_tail.gif" alt="Live Tail" style="width:100%;">}}
 
 Vous pouvez désactiver à tout moment un filtre d'exclusion à l'aide du bouton situé sur sa droite. Pour modifier ou supprimer un filtre, il vous suffit de passer votre curseur dessus pour afficher les options pertinentes.
 

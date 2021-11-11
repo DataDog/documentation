@@ -8,6 +8,9 @@ further_reading:
 - link: "/dashboards/"
   tag: "Documentation"
   text: "Dashboards"
+- link: "https://www.datadoghq.com/blog/datadog-mobile-widgets/"
+  tag: "Blog"
+  text: "Improve your on-call experience with Datadog mobile dashboard widgets"
 ---
 
 The Datadog Mobile app enables you to view alerts from Datadog on your mobile device. When receiving an alert via Slack, e-mail, Pagerduty or other pager apps, you'll be able to investigate issues by opening monitor graphs and dashboards on your mobile device.
@@ -34,7 +37,7 @@ Optionally, you may also authenticate through a QR Code or manual entry, outline
 ##### QR code
 
 1. Start by logging in to your [Datadog account profile page][4] in a browser and click the **Link mobile device** button of the organization you want to log into. This pops up a QR code.
-    {{< img src="mobile/link-device.png" alt="Account Profiles - Link mobile device">}}
+    {{< img src="mobile/link-device.png" alt="Link mobile device" style="width:80%;">}}
 2. Use your default phone camera app to scan the QR code and then tap the suggested link to open the Datadog App. The org UDID is automatically inserted into the login screen.
 
 ##### Manual entry
@@ -346,9 +349,9 @@ For help with troubleshooting, [contact Datadog support][18]. You can also send 
 [3]: /account_management/saml/#pagetitle
 [4]: https://app.datadoghq.com/account/profile
 [5]: /account_management/saml/mobile-idp-login/
-[6]: /monitors/manage_monitor/#search
+[6]: /monitors/manage/#search
 [7]: https://app.datadoghq.com/monitors
-[8]: /monitors/monitor_types/
+[8]: /monitors/create/types/
 [9]: /dashboards/template_variables/#saved-views
 [10]: https://app.datadoghq.com/dashboard/lists
 [11]: /dashboards/

@@ -77,6 +77,7 @@
       - "*/manifest.json"
       - "*/assets/service_checks.json"
       - "*/README.md"
+      - "*/datadog_checks/*/__about__.py"
 
     - action: pull-and-push-folder
       branch: master
@@ -98,6 +99,7 @@
       - "*/manifest.json"
       - "*/assets/service_checks.json"
       - "*/README.md"
+      - "*/datadog_checks/*/__about__.py"
 
   - repo_name: marketplace
     contents:
@@ -118,7 +120,7 @@
     contents:
 
     - action: pull-and-push-file
-      branch: master
+      branch: main
       globs:
       - README.md
       options:
@@ -127,7 +129,7 @@
         front_matters:
           title: Ansible
           kind: documentation
-          dependencies: ["https://github.com/DataDog/ansible-datadog/blob/master/README.md"]
+          dependencies: ["https://github.com/DataDog/ansible-datadog/blob/main/README.md"]
 
   - repo_name: chef-datadog
     contents:
@@ -223,13 +225,8 @@
       options:
         dest_path: '/serverless/libraries_integrations/'
         file_name: 'forwarder.md'
-        front_matters:
-          dependencies: ["https://github.com/DataDog/datadog-serverless-functions/blob/master/aws/logs_monitoring/README.md"]
-          title: Datadog Forwarder
-          kind: documentation
-          aliases:
-            - /serverless/troubleshooting/installing_the_forwarder/
-            - /serverless/forwarder/
+        # front_matters:
+        #   dependencies: ["https://github.com/DataDog/datadog-serverless-functions/blob/master/aws/logs_monitoring/README.md"]
 
   - repo_name: serverless-plugin-datadog
     contents:
@@ -240,12 +237,8 @@
       options:
         dest_path: '/serverless/libraries_integrations/'
         file_name: 'plugin.md'
-        front_matters:
-          dependencies: ["https://github.com/DataDog/serverless-plugin-datadog/blob/master/README.md"]
-          title: Datadog Serverless Plugin
-          kind: documentation
-          aliases:
-            - /serverless/serverless_integrations/plugin/
+        # front_matters:
+        #   dependencies: ["https://github.com/DataDog/serverless-plugin-datadog/blob/master/README.md"]
 
   - repo_name: datadog-cloudformation-macro
     contents:
@@ -478,7 +471,7 @@
               text: "dd-sdk-android Source code"
             - link: "tracing/visualization/"
               tag: "Documentation"
-              text: "Explore your services, resources and traces"
+              text: "Explore your services, resources, and traces"
 
   - repo_name: dd-sdk-ios
     contents:
@@ -522,7 +515,7 @@
               text: "dd-sdk-ios Source code"
             - link: "tracing/visualization/"
               tag: "Documentation"
-              text: "Explore your services, resources and traces"
+              text: "Explore your services, resources, and traces"
 
     - action: pull-and-push-folder
       branch: master
@@ -533,6 +526,16 @@
         path_to_remove: 'docs/rum_collection/'
         front_matters:
           dependencies: [ "https://github.com/DataDog/dd-sdk-ios/blob/master/docs/rum_collection/" ]
+
+    - action: pull-and-push-folder
+      branch: master
+      globs:
+        - docs/error_tracking/*
+      options:
+        dest_dir: '/real_user_monitoring/error_tracking/'
+        path_to_remove: 'docs/error_tracking/'
+        front_matters:
+          dependencies: [ "https://github.com/DataDog/dd-sdk-ios/blob/master/docs/error_tracking/" ]
 
   - repo_name: dd-sdk-reactnative
     contents:
@@ -583,6 +586,18 @@
         - "runtime/**/*.md"
       options:
         dest_path: '/security_platform/default_rules/'
+
+  - repo_name: apps
+    contents:
+    - action: pull-and-push-file
+      branch: master
+      globs:
+        - "docs/en/getting-started.md"
+      options:
+        dest_path: "/developers/"
+        file_name: "datadog_apps.md"
+        # front_matters:
+        #   dependencies: ["https://github.com/DataDog/apps/blob/master/docs/en/gettiing-started.md"]
 
   - repo_name: datadog-agent
     contents:

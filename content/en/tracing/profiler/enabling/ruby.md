@@ -16,6 +16,12 @@ further_reading:
       text: 'Fix problems you encounter while using the profiler'
 ---
 
+{{< site-region region="us5" >}}
+<div class="alert alert-warning">
+  The Continuous Profiler is not available for the Datadog {{< region-param key="dd_site_name" >}} site.
+</div>
+{{< /site-region >}}
+
 <div class="alert alert-warning">
 Datadog Ruby Profiler is currently in public beta. Datadog recommends evaluating the profiler in a non-sensitive environment before deploying in production.
 </div>
@@ -35,7 +41,7 @@ To begin profiling applications:
 2. Add the `ddtrace` and `google-protobuf` gems to your `Gemfile` or `gems.rb` file:
 
     ```ruby
-    gem 'ddtrace', '>= 0.49.0'
+    gem 'ddtrace', '>= 0.53.0'
     gem 'google-protobuf', '~> 3.0'
     ```
 

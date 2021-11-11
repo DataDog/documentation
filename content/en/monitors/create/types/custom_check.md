@@ -5,13 +5,13 @@ description: "Monitor status of arbitrary custom checks."
 aliases :
     - /monitors/monitor_types/custom_check
 further_reading:
-- link: "/monitors/notifications/"
+- link: "/monitors/notify/"
   tag: "Documentation"
   text: "Configure your monitor notifications"
-- link: "/monitors/downtimes/"
+- link: "/monitors/notify/downtimes/"
   tag: "Documentation"
   text: "Schedule a downtime to mute a monitor"
-- link: "/monitors/monitor_status/"
+- link: "/monitors/manage/status/"
   tag: "Documentation"
   text: "Consult your monitor status"
 ---
@@ -56,10 +56,14 @@ Set up the check alert:
 
 3. Choose `Do not notify` or `Notify` for Unknown status.
 
+    If enabled, a state transition to `UNKNOWN` triggers a notification. In the [monitor status page][1], the status bar of a group in `UNKNOWN` state uses `NODATA` grey. The overall status of the monitor stays in `OK`.
+
 4. Resolve the alert after selected consecutive successes: `<NUMBER>`.
 
     Choose how many consecutive runs with the `OK` status resolve the alert. For example, to ensure an issue is fixed, resolve the monitor on `4` OK statuses.
 
+
+[1]: /monitors/manage/status
 {{% /tab %}}
 {{% tab "Cluster Alert" %}}
 
@@ -100,4 +104,4 @@ For detailed instructions on the **Say what's happening** and **Notify your team
 [7]: /monitors/create/configuration/#no-data
 [8]: /monitors/create/configuration/#auto-resolve
 [9]: /monitors/create/configuration/#new-group-delay
-[10]: /monitors/notifications/
+[10]: /monitors/notify/

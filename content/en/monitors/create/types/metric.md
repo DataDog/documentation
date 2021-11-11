@@ -4,14 +4,15 @@ kind: documentation
 description: "Compare values of a metric with a user defined threshold"
 aliases:
 - /monitors/monitor_types/metric
+- /monitors/faq/what-is-the-do-not-require-a-full-window-of-data-for-evaluation-monitor-parameter
 further_reading:
-- link: "/monitors/notifications/"
+- link: "/monitors/notify/"
   tag: "Documentation"
   text: "Configure your monitor notifications"
-- link: "/monitors/downtimes/"
+- link: "/monitors/notify/downtimes/"
   tag: "Documentation"
   text: "Schedule a downtime to mute a monitor"
-- link: "/monitors/monitor_status/"
+- link: "/monitors/manage/status/"
   tag: "Documentation"
   text: "Consult your monitor status"
 ---
@@ -51,7 +52,7 @@ On each alert evaluation, Datadog calculates the percentage of the series that f
 
 For more detailed information, see the [Anomaly Monitor][1] page.
 
-[1]: /monitors/monitor_types/anomaly/
+[1]: /monitors/create/types/anomaly/
 {{% /tab %}}
 {{% tab "Outliers" %}}
 
@@ -61,7 +62,7 @@ On each alert evaluation, Datadog checks whether or not all groups are clustered
 
 For more detailed information, see the [Outlier Monitor][1] page.
 
-[1]: /monitors/monitor_types/outlier/
+[1]: /monitors/create/types/outlier/
 {{% /tab %}}
 {{% tab "Forecast" %}}
 
@@ -71,7 +72,7 @@ On each alert evaluation, a forecast alert predicts the future values of the met
 
 For more detailed information, see the [Forecast Monitor][1] page.
 
-[1]: /monitors/monitor_types/forecasts/
+[1]: /monitors/create/types/forecasts/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -172,9 +173,34 @@ As you change a threshold, the preview graph in the editor displays a marker sho
 
 This setting allows you to change when the alerting engine considers a monitor as a candidate for evaluation.
 
-**Require** (default) - A monitor is not evaluated until the evaluation window is filled with data. For example, if a new host is provisioned it may have high CPU for a minute or two. You don't want alerts to trigger if the CPU drops shortly after.
+**Do not require** (Default): A monitor is evaluated as soon as it is recognized. Consider using this value if your data points might be sparse. With this configuration, the monitor evaluates even if there is a single data point in the evaluation timeframe.
 
-**Do not require** - A monitor is evaluated as soon as it is recognized. Consider using this value if your data points are very sparse. Otherwise, the monitor may not be evaluated because the window is never considered "full".
+**Require**: A monitor is not evaluated until the evaluation window is considered to be `filled` with data. To be notified if there is data over the entire evaluation timeframe, use this option.
+
+To define if the evaluation timeframe is `filled` with data, the timeframe is split into smaller buckets.
+
+The following logic determines the bucket size:
+
+* Evaluation timeframe in minutes: bucket size is 1 minute
+* Evaluation timeframe in hours: bucket size is 10 minutes
+* Evaluation timeframe in days: bucket size is 1 hour
+* Evaluation timeframe in month: bucket size is 4 hours
+
+In order to be considered as a "full window", the monitor requires:
+
+1. At least one data point in the first bucket.
+2. At most three buckets in total with no data points (including the first one).
+
+If the conditions are met, the monitor is evaluated. Otherwise, the evaluation is canceled and the monitor state is unchanged.
+
+For example, a monitor that evaluates over the last `2h` is split in 12 buckets of 10 minutes. The monitor is considered full if the first bucket has data and at most three buckets in total are empty.
+
+| data   | B0 | B1 | B2 | B3 | B4 | B5 | B6 | B7 | B8 | B9 | B10 | B11 | Full window?|
+|--------|----|----|----|----|----|----|----|----|----|----|-----|-----|-------------|
+| case 1 | 1  | 1  | 1  | 1  | 1  | 1  | 1  | 1  | 1  | 1  | 1   | 1   | Yes         |
+| case 2 | x  | 1  | 1  | 1  | 1  | 1  | 1  | 1  | 1  | 1  | 1   | 1   | No          |
+| case 3 | 1  | 1  | x  | x  | x  | 1  | 1  | 1  | 1  | 1  | 1   | 1   | Yes         |
+| case 4 | 1  | x  | x  | x  | 1  | 1  | 1  | 1  | x  | x  | 1   | 1   | No          |
 
 #### Other options
 
@@ -191,7 +217,7 @@ For detailed instructions on the **Say what's happening** and **Notify your team
 [1]: https://app.datadoghq.com/monitors#create/metric
 [2]: /getting_started/tagging/using_tags/?tab=assignment
 [3]: /dashboards/querying/#advanced-graphing
-[4]: /monitors/notifications/?tab=is_alert#tag-variables
+[4]: /monitors/notify/?tab=is_alert#tag-variables
 [5]: /monitors/faq/what-are-recovery-thresholds/
 [6]: /monitors/create/configuration/#advanced-alert-conditions
-[7]: /monitors/notifications/
+[7]: /monitors/notify/
