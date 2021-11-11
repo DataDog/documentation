@@ -41,6 +41,7 @@ To learn more about how to install a full-fledged datadog agent, visit [here][2]
 
   1. First create an account by visiting www.datadoghq.com.
   2. Generate an API Key.
+  {{< img src="integrations/apisix/generate_api_key.png" alt="Generate an API Key" popup="true">}}
 
 3. APISIX-Datadog plugin requires only the dogstatsd component of `datadog/agent` as the plugin asynchronously send metrics to the dogstatsd server following the statsd protocol over standard UDP socket. That's why APISIX recommends using the standalone `datadog/dogstatsd` image instead of using the full agent. It's extremely lightweight (only ~11 MB in size) compared to ~2.8GB of `datadog/agent` image.
 
