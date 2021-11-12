@@ -25,7 +25,7 @@ In order to start collecting your application traces you must be [running the Da
 
 ## Setup
 
-To enable trace collection with your Agent, follow the instructions below. You can configure the agent to intake traces via UDP or Unix Domain Socket:
+To enable trace collection with your Agent, follow the instructions below. You can configure the Agent to intake traces via UDP or Unix Domain Socket:
 
 1. **Configure the Datadog Agent to accept traces**:
     {{< tabs >}}
@@ -232,7 +232,7 @@ If sending traces to the agent via UDP (`<ip_address>:8126`):
 3. **Configure your application tracers to emit traces**: Point your application-level tracers to where the Datadog Agent host is using the environment variable `DD_AGENT_HOST`. Refer to the [language-specific APM instrumentation docs][3] for more examples.
 {{% /tab %}}
 {{% tab "Unix Domain Socket" %}}
-If sending traces to the agent via Unix Domain Socket you need to mount the directory the socket is in to the application container and specify the path with `DD_TRACE_AGENT_URL`.
+If you are sending traces to the Agent by using Unix Domain Socket, mount the directory the socket is in to the application container and specify the path with `DD_TRACE_AGENT_URL`.
 
     ```yaml
         apiVersion: apps/v1
@@ -257,7 +257,7 @@ If sending traces to the agent via Unix Domain Socket you need to mount the dire
                     path: /var/run/datadog/
                   name: apmsocketpath
     ```
-3. **Configure your application tracers to emit traces**: Point your application-level tracers to where the Datadog Agent host is using the environment variable `DD_APM_RECEIVER_SOCKET` or for Helm `apm.socketPath`. For Helm and Operator the default for this value is `"/var/run/datadog/apm.socket"`. Some tracers do not yet support sending via UDS, refer to the [language-specific APM instrumentation docs][3] to see if this is supported for the tracr you're using.
+3. **Configure your application tracers to emit traces**: Point your application-level tracers to where the Datadog Agent host is using the environment variable `DD_APM_RECEIVER_SOCKET` or for Helm `apm.socketPath`. For Helm and Operator the default for this value is `"/var/run/datadog/apm.socket"`. Some tracers do not support Unix Domain Socket. Refer to the [language-specific APM instrumentation docs][3] to see if this is supported for your tracer.
 {{% /tab %}}
 {{< /tabs >}}
 
