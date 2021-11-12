@@ -85,14 +85,14 @@ Now any requests to endpoint uri `/hello` will generate the above metrics and pu
 
 In default configuration, the plugin expects the dogstatsd service to be available at `127.0.0.1:8125`. If you wish to update the config, please update the plugin metadata:
 
+#### Metadata Schema
+
 |Name|Type|Required|Default|Description|
 |----|----|--------|-------|-----------|
 |hosts|string|optional|"127.0.0.1"|The DogStatsD server host address|
 |port|integer|optional|8125|The DogStatsD server host port|
 |namespace|string|optional|"apisix"|Prefix for all the custom metrics sent by APISIX agent. Useful for finding entities for metric graph. e.g. (apisix.request.counter)|
 |constant_tags|array|optional|["source:apisix"]|Static tags embedded into generated metrics. Useful for grouping metric over certain signals.|
-
-#### Metadata Schema
 
 To know more about how to effectively write tags, please visit [here][3]
 
