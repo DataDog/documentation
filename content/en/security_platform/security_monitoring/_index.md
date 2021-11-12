@@ -1,11 +1,18 @@
 ---
 title: Security Monitoring
 kind: documentation
+further_reading:
+- link: "/security_platform/default_rules#cat-log-detection"
+  tag: "Documentation"
+  text: "Start using out-of-the-box Security Monitoring rules"
+- link: "/security_platform/detection_rules"
+  tag: "Documentation"
+  text: "Create your own custom detection rules"
 ---
 
 ## Overview
 
-{{< img src="security_platform/security_monitoring/overview_top.png" alt="Datadog Security Monitoring" >}}
+{{< img src="security_platform/security_monitoring/overview_top.png" alt="Security Monitoring in Datadog" >}}
 
 Datadog Security Monitoring unifies developer, operation, and security teams through one platform. Use a single dashboard to display DevOps content, business metrics, and security content. Detect threats, like a targeted attack, a threat intel listed IP communicating with your systems, or an insecure configuration, to your application and infrastructure in real time, and notify your team of security issues by email, slack, Jira, PagerDuty, or a webhook.
 
@@ -17,6 +24,8 @@ Threats are surfaced in Datadog as Security Signals and can be correlated and tr
 
 ## Get started
 
+Follow the [setup documentation][4] to get started with Security Monitoring.
+
 {{< whatsnext >}}
   {{< nextlink href="/security_platform/security_monitoring/getting_started">}}Get started with Security Monitoring{{< /nextlink >}}
   {{< nextlink href="/security_platform/default_rules">}}Start using out-of-the-box security rules in your environment{{< /nextlink >}}
@@ -26,3 +35,4 @@ Threats are surfaced in Datadog as Security Signals and can be correlated and tr
 [1]: https://app.datadoghq.com/security
 [2]: https://app.datadoghq.com/security/configuration/rules
 [3]: https://app.datadoghq.com/security/configuration/rules/new
+[4]: /security_platform/setup/

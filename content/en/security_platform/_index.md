@@ -6,13 +6,13 @@ aliases:
   - security_monitoring
 further_reading:
 - link: "/security_platform/security_monitoring/"
-  tag: "Blog"
+  tag: "Documentation"
   text: "Begin detecting threats with Security Monitoring"
-- link: "https://www.datadoghq.com/blog/announcing-security-monitoring/"
-  tag: "Blog"
+- link: "/security_platform/cspm/"
+  tag: "Documentation"
   text: "Start tracking misconfigurations with Cloud Security Posture Management"
-- link: "https://www.datadoghq.com/blog/announcing-security-monitoring/"
-  tag: "Blog"
+- link: "/security_platform/cloud_workload_security"
+  tag: "Documentation"
   text: "Uncover kernel-level threats with Cloud Workload Security"
 ---
 
