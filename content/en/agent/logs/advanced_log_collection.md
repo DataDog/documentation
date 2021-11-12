@@ -447,7 +447,7 @@ More examples:
 With Agent 7.32+ `auto_multi_line_detection` can be enabled which allows the Agent to detect [common multi-line patterns][6] automatically. 
 
 <div class="alert alert-warning">
-Automatic Multi-line aggregation is currently in beta. 
+Automatic Multi-line aggregation is in public beta.
 </div>
 
 Enable `auto_multi_line_detection` globally in the `datadog.yaml` file:
@@ -529,7 +529,7 @@ logs_config:
    - [A-Za-z_]+ \d+, \d+ \d+:\d+:\d+ (AM|PM)
 ```
 
-With this feature enabled, when a new log file is opened the Agent tries to detect a pattern. During this process the logs are sent as single lines. Once the detection threshold is met all future logs for that source are aggregated with the detected pattern, or as single lines if no pattern is found. Detection takes at most 30 seconds or the first 500 logs (whichever comes first).
+With this feature enabled, when a new log file is opened the Agent tries to detect a pattern. During this process the logs are sent as single lines. After the detection threshold is met, all future logs for that source are aggregated with the detected pattern, or as single lines if no pattern is found. Detection takes at most 30 seconds or the first 500 logs (whichever comes first).
 
 **Note**: If you can control the naming pattern of the rotated log, ensure that the rotated file replaces the previously active file with the same name. The Agent reuses a previously detected pattern on the newly rotated file to avoid re-running detection. 
 
