@@ -80,7 +80,7 @@ From the Remediation section, type the description of your task in the creation 
 
 As work for different tasks is finished, individual tasks can be marked as completed by clicking the checkbox to the left of the task's description. If you have a large number of tasks, you can filter them down by searching for key words or by hiding completed tasks from view.
   
-## Responders Section
+## Responders section
 
 <div class="alert alert-warning">
 This feature is in open beta.
@@ -88,7 +88,7 @@ This feature is in open beta.
 
 {{< img src="monitors/incidents/incident_responders.jpeg" alt="Incident Responders"  style="width:80%;">}}
 
-The Responders Section is where you form your response team by adding fellow Datadog users and assigning them a role to carry out in the process of resolving the incident. The three default roles provided by Datadog are:
+The Responders section is where you form your response team by adding fellow Datadog users and assigning them a role to carry out in the process of resolving the incident. The three default roles provided by Datadog are:
 
 1. `Incident Commander` - The individual responsible for leading the response team 
 2. `Communications Lead` - The individual responsible for managing stakeholder communications throughout the lifecycle of the incident
