@@ -4,13 +4,13 @@ kind: documentation
 aliases:
   - /ja/getting_started/application/monitors
 further_reading:
-  - link: 'https://www.datadoghq.com/blog/monitoring-101-alerting/'
+  - link: https://www.datadoghq.com/blog/monitoring-101-alerting/
     tag: ブログ
     text: モニター入門 重要事項をアラート
-  - link: /monitors/monitor_types/metric/
+  - link: /monitors/create/types/metric/
     tag: ドキュメント
     text: メトリクスモニター
-  - link: /monitors/notifications/
+  - link: /monitors/notify/
     tag: ドキュメント
     text: モニター通知
 ---
@@ -76,14 +76,14 @@ Steps to free up disk space:
 
 電子メール、Slack、PagerDuty などを使用してチームに通知を送信するには、このセクションを使用してください。ドロップダウンボックスから、チームメンバーおよび接続済みアカウントを検索できます。このボックスに `@notification` が追加されている場合、通知は自動的にメッセージボックスに追加されます。
 
-{{< img src="getting_started/application/message_notify.png" alt="メッセージと通知"  style="width:70%;" >}}
+{{< img src="getting_started/application/message_notify.png" alt="メッセージと通知" style="width:70%;" >}}
 
 片方のセクションから `@notification` を削除すると、両方のセクションから削除されます。
 
 ### アクセス制限
 
 <div class="alert alert-warning">
-RBAC のモニターへのアクセス制限は、現在ベータ版です。アクセスをリクエストするには、<a href="https://docs.datadoghq.com/help/">Datadog サポート</a>までお問い合わせください。</div>
+RBAC のモニターアクセス制限はベータ版です。アクセスをリクエストするには、<a href="https://docs.datadoghq.com/help/">Datadog サポート</a>までお問い合わせください。</div>
 
 このセクションを使用して、あなた、あなたのロールを持つ組織内の全員、または組織の特定のロールへのアクセスを制限します。ロールに関する詳細は、[RBAC][9] ドキュメントを参照してください。
 
@@ -91,12 +91,12 @@ RBAC のモニターへのアクセス制限は、現在ベータ版です。ア
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/monitors/monitor_types/metric/
+[1]: /ja/monitors/create/types/metric/
 [2]: https://www.datadoghq.com
 [3]: https://app.datadoghq.com/account/settings#agent
 [4]: https://app.datadoghq.com/infrastructure
 [5]: https://app.datadoghq.com/monitors#create/metric
 [6]: /ja/integrations/disk/
-[7]: /ja/monitors/monitor_types/metric/?tab=threshold#set-alert-conditions
-[8]: /ja/monitors/notifications/#conditional-variables
+[7]: /ja/monitors/create/types/metric/?tab=threshold#set-alert-conditions
+[8]: /ja/monitors/notify/#conditional-variables
 [9]: /ja/account_management/rbac/
