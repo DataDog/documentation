@@ -345,9 +345,9 @@ See the [Live Containers][7] documentation for configuration instructions and ad
 {{< tabs >}}
 {{% tab "Helm" %}}
 
-If you want the Kubernetes events to be collected by the cluster agent, set the `clusterAgent.enabled`, `datadog.collectEvents` and `clusterAgent.rbac.create` options to `true` in your `value.yaml` file.
+If you want Kubernetes events to be collected by the Datadog Cluster Agent, set the `clusterAgent.enabled`, `datadog.collectEvents` and `clusterAgent.rbac.create` options to `true` in your `value.yaml` file.
 
-If you don’t want the cluster agent, you can still have the Kubernetes events be collected by a node agent by setting `datadog.leaderElection`, `datadog.collectEvents` and `agents.rbac.create` options to `true` in your `value.yaml` file.
+If you don’t want to use the Cluster Agent, you can still have a node Agent collect Kubernetes events by setting `datadog.leaderElection`, `datadog.collectEvents` and `agents.rbac.create` options to `true` in your `value.yaml` file.
 
 {{% /tab %}}
 {{% tab "DaemonSet" %}}
@@ -358,7 +358,7 @@ If you want to collect events from your Kubernetes cluster set the environment v
 {{% /tab %}}
 {{% tab "Operator" %}}
 
-In order to collect the Kubernetes events with the cluster agent, set `clusterAgent.config.collectEvents` to `true` in your `datadog-agent.yaml` manifest.
+To collect the Kubernetes events with the Cluster Agent, set `clusterAgent.config.collectEvents` to `true` in your `datadog-agent.yaml` manifest.
 
 For example:
 
@@ -368,7 +368,7 @@ clusterAgent:
     collectEvents: true
 ```
 
-Alternatively, in order to collect the Kubernetes events with a node agent, set `agent.config.collectEvents` to `true` in your `datadog-agent.yaml` manifest.
+Alternatively, to collect the Kubernetes events with a node Agent, set `agent.config.collectEvents` to `true` in your `datadog-agent.yaml` manifest.
 
 For example:
 
