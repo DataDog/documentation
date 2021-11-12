@@ -5900,6 +5900,18 @@ api:
         - GetUsageRumSessions
       unstable: []
       order: 13
+  - name: Get hourly usage for RUM Units
+    url: '#get-hourly-usage-for-rum-units'
+    identifier: get-hourly-usage-for-rum-units
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetUsageRumUnits
+      unstable: []
+      order: 35
   - name: Get hourly usage for profiled hosts
     url: '#get-hourly-usage-for-profiled-hosts'
     identifier: get-hourly-usage-for-profiled-hosts

@@ -1010,6 +1010,10 @@
     "description": "Get hourly usage for profiled hosts.",
     "summary": "Get hourly usage for profiled hosts"
   },
+  "GetUsageRumUnits": {
+    "description": "Get hourly usage for [RUM](https://docs.datadoghq.com/real_user_monitoring/) Units.",
+    "summary": "Get hourly usage for RUM Units"
+  },
   "GetUsageRumSessions": {
     "description": "Get hourly usage for [RUM](https://docs.datadoghq.com/real_user_monitoring/) Sessions.",
     "summary": "Get hourly usage for RUM Sessions"
