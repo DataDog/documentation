@@ -736,6 +736,12 @@ components:
           $ref: '#/components/schemas/WidgetCompareTo'
         event_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+        formulas:
+          description: List of formulas that operate on queries. **This feature is
+            currently in beta.**
+          items:
+            $ref: '#/components/schemas/WidgetFormula'
+          type: array
         increase_good:
           description: Whether to show increase as good.
           type: boolean
@@ -754,6 +760,14 @@ components:
         q:
           description: Query definition.
           type: string
+        queries:
+          description: List of queries that can be returned directly or used in formulas.
+            **This feature is currently in beta.**
+          items:
+            $ref: '#/components/schemas/FormulaAndFunctionQueryDefinition'
+          type: array
+        response_format:
+          $ref: '#/components/schemas/FormulaAndFunctionResponseFormat'
         rum_query:
           $ref: '#/components/schemas/LogQueryDefinition'
         security_query:
@@ -7804,6 +7818,7 @@ components:
             SLO correction.
           example: 3600
           format: int64
+          nullable: true
           type: integer
         end:
           description: Ending time of the correction in epoch seconds.
@@ -7812,6 +7827,7 @@ components:
         rrule:
           description: Recurrence rules as defined in the iCalendar RFC 5545.
           example: RRULE:FREQ=DAILY;INTERVAL=10;COUNT=5
+          nullable: true
           type: string
         slo_id:
           description: ID of the SLO that this correction will be applied to.
