@@ -25,7 +25,7 @@ In order to start collecting your application traces you must be [running the Da
 
 ## Setup
 
-To enable trace collection with your Agent, follow the instructions below. You can configure the Agent to intake traces via UDP or Unix Domain Socket:
+To enable trace collection with your Agent, follow the instructions below. You can configure the Agent to intake traces with UDP or Unix Domain Socket:
 
 1. **Configure the Datadog Agent to accept traces**:
     {{< tabs >}}
