@@ -8,22 +8,24 @@ aliases:
     - /logs/logging_without_limits
 further_reading:
 - link: "/logs/log_collection/"
-  tag: "Guide"
+  tag: "Documentation"
   text: "Starting collecting your logs"
 - link: "https://learn.datadoghq.com"
   tag: "Learning Center"
   text: "Learn more about Datadog Log Management"
 ---
 
-{{< vimeo 293195142 >}}
-
-</br>
+## Overview
 
 Logging the important parts of your system's operations is crucial for maintaining infrastructure health. Modern infrastructure has the capability to generate thousands of log events per minute. In this situation, you need to choose which logs to send to a log management solution, and which logs to archive. Filtering your logs before sending them, however, may lead to gaps in coverage or the accidental removal of valuable data.
 
 Datadog Log Management, also referred to as Datadog logs or logging, removes these limitations by decoupling log ingestion from indexing. This enables you to cost-effectively collect, process, archive, explore, and monitor all of your logs without limitations, also known as Logging without Limits\*.
 
 Logging without Limits\* enables a streamlined troubleshooting experience in the [Log Explorer][1], which empowers you and your teams to quickly assess and fix your infrastructure issues. It provides intuitive archiving to support your security and IT teams during audits and assessments. Logging without Limits* also powers [Datadog Security Monitoring][2], which detects security threats in your environment, without requiring you to index logs.
+
+{{< vimeo 293195142 >}}
+
+</br>
 
 ## Collect
 
