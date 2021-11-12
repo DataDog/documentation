@@ -1,6 +1,6 @@
 ---
-title: Latest Lambda Version
-url: /meta/latest-lambda-version.json
+title: Latest Lambda Layer Version
+url: /meta/latest-lambda-layer-version.json
 outputs:
   - json
 ---
