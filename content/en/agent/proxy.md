@@ -249,7 +249,7 @@ frontend database_monitoring_metrics_frontend
 
 # This declares the endpoint where your Agents connects for
 # sending database monitoring samples (e.g the value of "database_monitoring.samples.dd_url")
-frontend database_monitoring_metrics_frontend
+frontend database_monitoring_samples_frontend
     bind *:3839
     mode http
     option tcplog
@@ -418,7 +418,7 @@ frontend database_monitoring_metrics_frontend
 
 # This declares the endpoint where your Agents connects for
 # sending database monitoring samples (e.g the value of "database_monitoring.samples.dd_url")
-frontend database_monitoring_metrics_frontend
+frontend database_monitoring_samples_frontend
     bind *:3839
     mode http
     option tcplog
