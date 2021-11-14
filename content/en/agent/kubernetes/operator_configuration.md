@@ -96,12 +96,6 @@ spec:
 `agent.config.securityContext.allowPrivilegeEscalation`
 : Controls whether a process can gain more privileges than its parent process. This boolean determines whether or not the `no_new_privs` flag is set on the container process. `AllowPrivilegeEscalation` is always true when the container is run as both `Privileged` and has `CAP_SYS_ADMIN`.
 
-`agent.config.securityContext.capabilities.add`
-: Added capabilities.
-
-`agent.config.securityContext.capabilities.drop`
-: Removed capabilities.
-
 `agent.config.securityContext.privileged`
 : Run the container in privileged mode. Processes in privileged containers are essentially equivalent to root on the host. Defaults to `false`.
 
