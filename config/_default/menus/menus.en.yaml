@@ -2297,10 +2297,6 @@ main:
     url: logs/log_configuration/rehydrating
     parent: log_configuration
     weight: 209
-  - name: Sensitive Data Detection
-    url: logs/log_configuration/sensitive_data_detection/
-    parent: log_configuration
-    weight: 210
   - name: Connect Logs and Traces
     url: tracing/connect_logs_and_traces/
     parent: log_management
