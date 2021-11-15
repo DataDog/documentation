@@ -10059,6 +10059,7 @@ components:
       - packetLossPercentage
       - packetsReceived
       - networkHop
+      - receivedMessage
       example: statusCode
       type: string
       x-enum-varnames:
@@ -10076,6 +10077,7 @@ components:
       - PACKET_LOSS_PERCENTAGE
       - PACKETS_RECEIVED
       - NETWORK_HOP
+      - RECEIVED_MESSAGE
     SyntheticsBasicAuth:
       description: Object to handle basic authentication when performing the test.
       properties:
@@ -11322,7 +11324,7 @@ components:
     SyntheticsTestDetailsSubType:
       description: 'The subtype of the Synthetic API test, `http`, `ssl`, `tcp`,
 
-        `dns`, `icmp` or `multi`.'
+        `dns`, `icmp`, `udp` or `multi`.'
       enum:
       - http
       - ssl
@@ -11330,6 +11332,7 @@ components:
       - dns
       - multi
       - icmp
+      - udp
       example: http
       type: string
       x-enum-varnames:
@@ -11339,6 +11342,7 @@ components:
       - DNS
       - MULTI
       - ICMP
+      - UDP
     SyntheticsTestDetailsType:
       description: Type of the Synthetic test, either `api` or `browser`.
       enum:
@@ -11529,6 +11533,9 @@ components:
           $ref: '#/components/schemas/SyntheticsTestHeaders'
         host:
           description: Host name to perform the test with.
+          type: string
+        message:
+          description: Message to send for UDP tests.
           type: string
         method:
           $ref: '#/components/schemas/HTTPMethod'
