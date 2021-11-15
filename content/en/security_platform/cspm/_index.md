@@ -44,7 +44,7 @@ View your cloud security posture at a high level with the [Posture Management][2
 ## Get started
 
 {{< whatsnext >}}
-  {{< nextlink href="/security_platform/setup">}}Complete setup and configuration{{< /nextlink >}}
+  {{< nextlink href="/security_platform/cspm/getting_started">}}Complete setup and configuration{{< /nextlink >}}
   {{< nextlink href="/security_platform/default_rules/#cat-cloud-configuration">}}Implement out-of-the-box Posture Management rules{{< /nextlink >}}
   {{< nextlink href="/security_platform/cspm/findings">}} Learn about Posture Management findings{{< /nextlink >}}
 {{< /whatsnext >}}

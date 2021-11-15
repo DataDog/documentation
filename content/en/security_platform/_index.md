@@ -5,13 +5,13 @@ aliases:
   - compliance_monitoring
   - security_monitoring
 further_reading:
-- link: "/security_platform/security_monitoring/"
+- link: "/security_platform/security_monitoring/getting_started"
   tag: "Documentation"
   text: "Begin detecting threats with Security Monitoring"
-- link: "/security_platform/cspm/"
+- link: "/security_platform/cspm/getting_started"
   tag: "Documentation"
   text: "Start tracking misconfigurations with Cloud Security Posture Management"
-- link: "/security_platform/cloud_workload_security"
+- link: "/security_platform/cloud_workload_security/getting_started"
   tag: "Documentation"
   text: "Uncover kernel-level threats with Cloud Workload Security"
 ---
@@ -49,7 +49,7 @@ The Datadog Security Platform includes [Security Monitoring](#security-monitorin
 
 {{< img src="security_platform/cws_overview.png" alt="Cloud Workload Security coverage views in Datadog" width="100%">}}
 
-To get started with the Datadog Security Platform, see the [setup documentation][6].
+To get started with the Datadog Security Platform, navigate to the [Setup & Configuration][7] section in the Datadog app, which has detailed information for single or multi-configuration, or follow the getting started sections below to get learn more about each area of the platform.
 
 ## Further Reading
 
@@ -60,4 +60,3 @@ To get started with the Datadog Security Platform, see the [setup documentation]
 [3]: https://www.datadoghq.com/blog/automated-vulnerability-remediation-datadog/
 [4]: /security_platform/cspm/
 [5]: /security_platform/cloud_workload_security/
-[6]: /security_platform/setup/
