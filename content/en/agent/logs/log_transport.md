@@ -1,5 +1,5 @@
 ---
-title: Agent Transport for logs
+title: Agent Transport for Logs
 kind: documentation
 description: Use the Datadog Agent to collect your logs and send them to Datadog
 further_reading:
