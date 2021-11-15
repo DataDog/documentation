@@ -3,7 +3,9 @@
 @import 'webfonts';
 @import 'icons';
 
-@import 'jqmath-0.4.3';
+// jqmath 
+@import 'jqmath-vanilla/jqmath-0.4.3';
+@import 'jqmath-vanilla/jqmath-vanilla-overrides';
 
 // base
 @import 'base/variables';
