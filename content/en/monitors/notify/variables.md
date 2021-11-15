@@ -90,7 +90,7 @@ To send a notification message when a monitor recovers, use the format:
 {{% /tab %}}
 {{% tab "is_match" %}}
 
-Search for a substring in a tag variable with the format:
+Search for a substring in a [tag variable](#attribute-and-tag-variables) with the format:
 
 ```text
 {{#is_match "<TAG_VARIABLE>.name" "<COMPARISON_STRING>"}}
@@ -142,7 +142,7 @@ Or use the `{{else}}` parameter in the first example:
 {{% /tab %}}
 {{% tab "is_exact_match" %}}
 
-Search for an exact string in a tag variable with the format:
+Search for an exact string in a [tag variable](#attribute-and-tag-variables) with the format:
 
 ```text
 {{#is_exact_match "<TAG_VARIABLE>.name" "<COMPARISON_STRING>"}}
@@ -303,7 +303,7 @@ For any `key:value` pair, the variable `{{log.tags.key}}` renders `value` in the
 
 The message renders the `error.message` attribute of a chosen log matching the query, **if the attribute exists**.
 
-<div class="alert alert-info"><strong>Note</strong>: If the selected event does not contain the attribute or the tag key, the variable renders empty in the notification message. To avoid missing notifications, use these variables for routing notification with <code>{{#is_match}}</code> handles.</div>
+<div class="alert alert-info"><strong>Note</strong>: If the selected event does not contain the attribute or the tag key, the variable renders empty in the notification message. To avoid missing notifications, do not use these variables for routing notification with <code>{{#is_match}}</code> handles.</div>
 
 #### Reserved attributes
 
@@ -319,7 +319,7 @@ If the matching event does not contain the attribute in its definition, the vari
 
 #### Explorer link
 
-Use `{{log.link}}`, `{{span.link}}`, and `{{rum.link}}` to enrich the notification with a link to the Log Explore, Trace Explorer, or RUM Explorer, scoped on the events matching the query.
+Use `{{log.link}}`, `{{span.link}}`, and `{{rum.link}}` to enrich the notification with a link to the Log Explorer, Trace Explorer, or RUM Explorer, scoped on the events matching the query.
 
 ### Check monitor variables
 
