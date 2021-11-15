@@ -172,15 +172,15 @@ Used for Agent services communicating with each other locally within the host on
 : Port for most Agent data (Metrics, APM, Live Processes/Containers)
 
 123/udp
-: Port for NTP ([more details on the importance of NTP][1]).
-
+: Port for NTP ([more details on the importance of NTP][1]).<br>
+See [default NTP targets][2].
 #### Inbound
 
 8125/udp
 : Port for DogStatsD unless `dogstatsd_non_local_traffic` is set to true. This port is available on localhost: `127.0.0.1`, `::1`, `fe80::1`.
 
 8126/tcp
-: Port for the [APM Receiver][2]
+: Port for the [APM Receiver][3]
 
 17123/tcp
 : Agent forwarder, used to buffer traffic in case of network splits between the Agent and Datadog
@@ -189,7 +189,8 @@ Used for Agent services communicating with each other locally within the host on
 : Optional graphite adapter
 
 [1]: /agent/faq/network-time-protocol-ntp-offset-issues/
-[2]: /tracing/
+[2]: /integrations/ntp/#overview
+[3]: /tracing/
 {{% /tab %}}
 {{< /tabs >}}
 
