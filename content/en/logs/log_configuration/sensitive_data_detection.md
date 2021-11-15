@@ -13,8 +13,6 @@ further_reading:
   text: "Build a modern data compliance strategy with Datadog's Sensitive Data Scanner"
 ---
 
-<div class="alert alert-info">This page is about Sensitive Data Scanner, which is currently in private beta. Contact <a href="https://www.datadoghq.com/support/">Datadog Support</a> if you want to learn more or participate in the beta program. </div>
-
 ## Overview
 
 Sensitive data, such as US Social Security Numbers (SSN), credit card numbers, bank routing numbers, API keys, etc., are often exposed unintentionally in application logs and trace events, which can expose your organization to financial and privacy risks.
