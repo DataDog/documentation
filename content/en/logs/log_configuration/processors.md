@@ -276,7 +276,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following log message re
 
 ## Remapper
 
-The remapper processor remaps any source attribute(s) or tags to another target attribute or tag. For example, remap `user` by `firstname` to target your in the Log Explorer:
+The remapper processor remaps any source attribute(s) or tags to another target attribute or tag. For example, remap `user` by `firstname` to target your logs in the Log Explorer:
 
 {{< img src="logs/processing/processors/attribute_post_remapping.png" alt="Attribute after remapping" style="width:50%;">}}
 
