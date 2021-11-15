@@ -66,7 +66,7 @@ The panel on the left side of the page lists several facets you can use to searc
 | Facet          | Description                                 |
 |----------------|---------------------------------------------|
 | `CI Provider`  | The CI provider associated with the batch.  |
-| `Job URL`      | The job name associated with the batch.     |
+| `Job Name`      | The job name associated with the batch.     |
 | `Job URL`      | The job URL associated with the batch.      |
 | `Pipeline ID`  | The pipeline ID associated with the batch.  |
 | `Pipeline Name` | The pipeline or repository name associated with the batch. |
