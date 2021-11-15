@@ -51,6 +51,14 @@ further_reading:
 
 {{< dashboards-widgets-api >}}
 
+## 数式と関数
+
+さまざまなデータソースに、テーブルウィジェットの数式と関数を使用できます。
+
+以下の例では、Enterprise 顧客ティアのデータのログイベントの the `cart_value` に対する `Total Enterprise Customers` / `Total Revenue Enterprises` の割合が、`Average` 列で計算されています。
+
+{{< img src="dashboards/widgets/table/table_formulas_functions.png" alt="テーブルの数式と関数" style="width:80%;">}}
+
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
