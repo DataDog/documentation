@@ -333,17 +333,19 @@ See the appropriate version of the [Postgres `contrib` documentation][1] for mor
 {{% /tab %}}
 {{< /tabs >}}
 
+### Schema or Database missing on MySQL Query Metrics & Samples
+
+The `schema` tag (also known as "database") is present on MySQL Query Metrics and Samples only when a Default Database is set on the connection that made the query. The Default Database is configured by the application by specifying the "schema" in the database connection parameters, or by executing the [USE Statement][5] on an already existing connection. 
+
+If there is no Default Database configured for a connection then none of the queries made by that connection will have the `schema` tag on them. 
+
 ## Need more help?
 
 If you are still experiencing problems, contact [Datadog Support][4] for help.
-
-
-
-
-
 
 
 [1]: /database_monitoring/#getting-started
 [2]: /agent/troubleshooting/
 [3]: /agent/guide/agent-log-files
 [4]: /help/
+[5]: https://dev.mysql.com/doc/refman/8.0/en/use.html
