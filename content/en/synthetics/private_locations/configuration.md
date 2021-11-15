@@ -6,9 +6,9 @@ further_reading:
 - link: "getting_started/synthetics/private_location"
   tag: "Documentation"
   text: "Getting Started with Private Locations"
-- link: "/synthetics/private_locations/"
+- link: "synthetics/private_locations/dimensioning"
   tag: "Documentation"
-  text: "Run Synthetic Tests from Private Locations"
+  text: "Dimension your Private Locations"
 ---
 
 ## Overview

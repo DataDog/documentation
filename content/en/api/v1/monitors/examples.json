@@ -14,7 +14,7 @@
           "message": "string",
           "modified": "2019-09-19T10:00:00.000Z",
           "multi": false,
-          "name": "string",
+          "name": "My monitor",
           "options": {
             "aggregation": {
               "group_by": "host",
@@ -116,7 +116,7 @@
           "message": "string",
           "modified": "2019-09-19T10:00:00.000Z",
           "multi": false,
-          "name": "string",
+          "name": "My monitor",
           "options": {
             "aggregation": {
               "group_by": "host",
@@ -204,7 +204,7 @@
       },
       "json": {
         "message": "string",
-        "name": "string",
+        "name": "My monitor",
         "options": {
           "enable_logs_sample": false,
           "escalation_message": "string",
@@ -478,7 +478,7 @@
       },
       "json": {
         "message": "string",
-        "name": "string",
+        "name": "My monitor",
         "options": {
           "enable_logs_sample": false,
           "escalation_message": "string",
@@ -586,7 +586,7 @@
           "message": "string",
           "modified": "2019-09-19T10:00:00.000Z",
           "multi": false,
-          "name": "string",
+          "name": "My monitor",
           "options": {
             "aggregation": {
               "group_by": "host",
@@ -696,7 +696,7 @@
           "message": "string",
           "modified": "2019-09-19T10:00:00.000Z",
           "multi": false,
-          "name": "string",
+          "name": "My monitor",
           "options": {
             "aggregation": {
               "group_by": "host",
@@ -858,7 +858,7 @@
           "message": "string",
           "modified": "2019-09-19T10:00:00.000Z",
           "multi": false,
-          "name": "string",
+          "name": "My monitor",
           "options": {
             "aggregation": {
               "group_by": "host",
@@ -968,7 +968,7 @@
           "message": "string",
           "modified": "2019-09-19T10:00:00.000Z",
           "multi": false,
-          "name": "string",
+          "name": "My monitor",
           "options": {
             "aggregation": {
               "group_by": "host",
@@ -1078,7 +1078,7 @@
           "message": "string",
           "modified": "2019-09-19T10:00:00.000Z",
           "multi": false,
-          "name": "string",
+          "name": "My monitor",
           "options": {
             "aggregation": {
               "group_by": "host",

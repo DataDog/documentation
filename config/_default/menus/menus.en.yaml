@@ -2054,26 +2054,31 @@ main:
     parent: ci
     identifier: setup_pipelines
     weight: 2
-  - name: GitLab
-    url: continuous_integration/setup_pipelines/gitlab/
-    parent: setup_pipelines
-    identifier: ci_gitlab
-    weight: 201
-  - name: Jenkins
-    url: continuous_integration/setup_pipelines/jenkins/
-    parent: setup_pipelines
-    identifier: ci_jenkins
-    weight: 202
   - name: Buildkite
     url: continuous_integration/setup_pipelines/buildkite/
     parent: setup_pipelines
     identifier: ci_buildkite
-    weight: 203
+    weight: 201
   - name: CircleCI
     url: continuous_integration/setup_pipelines/circleci/
     parent: setup_pipelines
     identifier: ci_circleci
+    weight: 202
+  - name: GitHub
+    url: continuous_integration/setup_pipelines/github/
+    parent: setup_pipelines
+    identifier: ci_github
+    weight: 203
+  - name: GitLab
+    url: continuous_integration/setup_pipelines/gitlab/
+    parent: setup_pipelines
+    identifier: ci_gitlab
     weight: 204
+  - name: Jenkins
+    url: continuous_integration/setup_pipelines/jenkins/
+    parent: setup_pipelines
+    identifier: ci_jenkins
+    weight: 205
   - name: Custom Commands
     url: continuous_integration/setup_pipelines/custom_commands/
     parent: setup_pipelines
@@ -2292,6 +2297,10 @@ main:
     url: logs/log_configuration/rehydrating
     parent: log_configuration
     weight: 209
+  - name: Sensitive Data Detection
+    url: logs/log_configuration/sensitive_data_detection/
+    parent: log_configuration
+    weight: 210
   - name: Connect Logs and Traces
     url: tracing/connect_logs_and_traces/
     parent: log_management
@@ -2452,6 +2461,10 @@ main:
     parent: security_platform
     identifier: security_rules
     weight: 4
+  - name: Notification Profiles
+    url: security_platform/notification_profiles/
+    parent: security_platform
+    weight: 5
   - name: Signals Explorer
     url: security_platform/explorer
     parent: security_platform
@@ -2532,6 +2545,16 @@ main:
     parent: synthetics_private_location
     identifier: synthetics_private_location_configuration
     weight: 401
+  - name: Dimensioning
+    url: synthetics/private_locations/dimensioning
+    parent: synthetics_private_location
+    identifier: synthetics_private_location_dimensioning
+    weight: 402
+  - name: Monitoring
+    url: synthetics/private_locations/monitoring
+    parent: synthetics_private_location
+    identifier: synthetics_private_location_monitoring
+    weight: 403
   - name: CI/CD Integrations
     url: /synthetics/cicd_integrations
     parent: synthetics
@@ -5897,6 +5920,18 @@ api:
         - GetUsageRumSessions
       unstable: []
       order: 13
+  - name: Get hourly usage for RUM Units
+    url: '#get-hourly-usage-for-rum-units'
+    identifier: get-hourly-usage-for-rum-units
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetUsageRumUnits
+      unstable: []
+      order: 35
   - name: Get hourly usage for profiled hosts
     url: '#get-hourly-usage-for-profiled-hosts'
     identifier: get-hourly-usage-for-profiled-hosts

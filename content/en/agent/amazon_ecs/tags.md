@@ -38,7 +38,7 @@ If you do not have unified service tagging enabled, complete the following steps
 
 ### Notes
 
-- Ensure the IAM role is associated with your [Amazon ECS container instances][2] and not the underlying EC2 instance.
+- Ensure the IAM role is associated with your [Amazon ECS container instances][2] and not the task role of the Datadog agent container.
 - ECS resource tags can be collected from EC2 instances, but not from AWS Fargate.
 - This feature requires Datadog Agent v6.17+ or v7.17+.
 - The Agent supports ECS tag collection from the `tasks`, `services`, and `container instances` ECS resources.
