@@ -27,7 +27,7 @@ To create a new notification profile, follow the instructions below.
 3. Input a name for your notification profile in the **Name** field.
 4. Define the logic for when this notification profile is triggered by conditions matching to security rule and/or security signal.
     - For security rules, notification profiles can be made with the following conditions: severity, rule type, or rule tags.
-    - For security signals, notification profiles can be made for any matching signal attribute and/or signal tag.
+    - For security signals, notification profiles can be made for any matching signal attribute and signal tag.
 
     For example, severity set as `Medium` means a signal triggers an enabled notification profile as long as the security signal rule condition set in Step 4 is met at least once.
 
