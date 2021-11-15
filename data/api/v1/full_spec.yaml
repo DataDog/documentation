@@ -11633,6 +11633,17 @@ components:
           format: double
           type: number
       type: object
+    SyntheticsTriggerBody:
+      description: Object describing the synthetics tests to trigger.
+      properties:
+        tests:
+          description: Individual synthetics test.
+          items:
+            $ref: '#/components/schemas/SyntheticsTriggerTest'
+          type: array
+      required:
+      - tests
+      type: object
     SyntheticsTriggerCITestLocation:
       description: Synthetics location.
       properties:
@@ -11682,6 +11693,18 @@ components:
             description: The public ID of the Synthetics test.
             type: string
           type: array
+      type: object
+    SyntheticsTriggerTest:
+      description: Test configuration for Synthetics
+      properties:
+        metadata:
+          $ref: '#/components/schemas/SyntheticsCIBatchMetadata'
+        public_id:
+          description: The public ID of the Synthetics test to trigger.
+          example: aaa-aaa-aaa
+          type: string
+      required:
+      - public_id
       type: object
     SyntheticsUpdateTestPauseStatusPayload:
       description: Object to start or pause an existing Synthetic test.
@@ -24276,6 +24299,36 @@ paths:
       x-menu-order: 14
       x-undo:
         type: idempotent
+  /api/v1/synthetics/tests/trigger:
+    post:
+      description: Trigger a set of Synthetics tests.
+      operationId: TriggerTests
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SyntheticsTriggerBody'
+        description: The identifiers of the tests to trigger.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyntheticsTriggerCITestsResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+      summary: Trigger some Synthetics tests
+      tags:
+      - Synthetics
+      x-codegen-request-body-name: body
+      x-undo:
+        type: safe
   /api/v1/synthetics/tests/trigger/ci:
     post:
       description: Trigger a set of Synthetics tests for continuous integration.
