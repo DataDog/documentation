@@ -7,10 +7,10 @@ aliases:
   - /ja/logs/languages
   - /ja/integrations/windows_event_log/
 further_reading:
-  - link: /logs/processing/
+  - link: /logs/log_configuration/processors
     tag: Documentation
     text: ログの処理方法について
-  - link: /logs/processing/parsing/
+  - link: /logs/log_configuration/parsing
     tag: Documentation
     text: パースの詳細
   - link: /logs/live_tail/
@@ -87,13 +87,13 @@ Datadog で、AWS Lambda からログを収集できます。これを有効に�
 
 {{< partial name="logs/logs-cloud.html" >}}
 
-Datadog のインテグレーションとログ収集は連携しています。インテグレーションのデフォルト構成ファイルを使用すると、Datadog で専用の[処理][1]、[パース][2]、および[ファセット][3]を有効にできます。
+Datadog のインテグレーションとログ収集は連携しています。インテグレーションのデフォルト構成ファイルを使用すると、Datadog で専用の[プロセッサー][1]、[パース][2]、および[ファセット][3]を有効にできます。
 
 [利用可能なサポートされているインテグレーションのリスト][4]を参照してください。
 
 
-[1]: /ja/logs/processing/
-[2]: /ja/logs/processing/parsing/
+[1]: /ja/logs/log_configuration/processors
+[2]: /ja/logs/log_configuration/parsing
 [3]: /ja/logs/explorer/facets/
 [4]: /ja/integrations/#cat-log-collection
 {{% /tab %}}
@@ -109,16 +109,16 @@ SSL で暗号化された接続において、Datadog へのログの送信に�
 
 
 `{{< region-param key="tcp_endpoint" code="true" >}}`
-: **ポート**: `{{< region-param key="tcp_endpoint_port" code="true" >}}` <br>
+: **ポート**: `{{< region-param key="tcp_endpoint_port_ssl" code="true" >}}` <br>
 SSL で暗号化された TCP 接続を介して protobuf 形式のログを送信するために Agent が使用。
 
 `{{< region-param key="agent_http_endpoint" code="true" >}}`
 : **ポート**: `{{< region-param key="agent_http_port" code="true" >}}`<br>
-HTTPS 経由で JSON 形式のログを送信するために Agent が使用。[HTTP 経由のログ送信方法ドキュメント][7]参照。
+HTTPS 経由で JSON 形式のログを送信するために Agent が使用。[ホスト Agent ログの収集ドキュメント][7]参照。
 
 `{{< region-param key="http_endpoint" code="true" >}}`
 : **ポート**: `{{< region-param key="http_port" code="true" >}}`<br>
-HTTPS 経由で JSON またはプレーンテキスト形式のログを送信するためにカスタムフォワーダーが使用。[HTTP 経由のログ送信方法ドキュメント][7]参照。
+HTTPS 経由で JSON またはプレーンテキスト形式のログを送信するためにカスタムフォワーダーが使用。[ログ HTTP API ドキュメント][8]参照。
 
 `{{< region-param key="web_integrations_endpoint" code="true" >}}`
 : **ポート**: `{{< region-param key="web_integrations_port" code="true" >}}`<br>
@@ -225,19 +225,19 @@ telnet tcp-intake.logs.datadoghq.eu 1883
 
 {{< /site-region >}}
 
-{{< site-region region="us3,gov" >}}
+{{< site-region region="us3,us5,gov" >}}
 TCP エンドポイントはこのリージョンでサポートされていません。
 {{< /site-region >}}
 
 
-[1]: https://app.datadoghq.com/account/settings#api
+[1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: https://app.datadoghq.com/logs/livetail
 {{% /tab %}}
 {{< /tabs >}}
 
 **注**:
 
-* 最適な利用のために、Datadog ではログイベントのサイズが 25KB を超えないようにすることをお勧めしています。Datadog Agent を使用する場合、ログイベントは 256KB を超え、いくつかのエントリに分割されます。Datadog TCP または HTTP API を直接使用する場合、許容可能なログイベントは最大 1MB までとなります。
+* HTTPS API は、最大で 1MB のサイズのログをサポートします。ただし、最適なパフォーマンスには各ログが 25K バイトを超えないことをおすすめします。ログ作成に Datadog Agent を使用する場合、ログは 256kB (256000 バイト) に分割されるよう構成されています。
 * 1 つのログイベントが持つことができるタグは 100 個以下です。1 日あたり最大 1,000 万個の一意のタグに対して、各タグは 256 文字を超えてはなりません。
 * JSON 形式に変換されたログイベントが保持できる属性は 256 未満です。これらの各属性のキーは 50 文字未満、連続するネストのレベルは 10 未満、 それぞれの値は (ファセットに昇格した場合) 1024 文字未満となります。
 * ログイベントは過去 18 時間、未来の 2 時間まで送信が可能です。
@@ -246,7 +246,7 @@ TCP エンドポイントはこのリージョンでサポートされていま�
 
 ### 属性とタグ
 
-属性は、ログエクスプローラーでのフィルタリングと検索に使用される[ログファセット][8]を規定します。予約済み属性および標準属性のリストと、ログ属性とエイリアス設定を使用した命名規則のサポート方法については、専用の[属性とエイリアス設定][9]ドキュメントをご参照ください。
+属性は、ログエクスプローラーでのフィルタリングと検索に使用される[ログファセット][9]を規定します。予約済み属性および標準属性のリストと、ログ属性とエイリアス設定を使用した命名規則のサポート方法については、専用の[属性とエイリアス設定][10]ドキュメントをご参照ください。
 
 #### スタックトレースの属性
 
@@ -266,11 +266,11 @@ TCP エンドポイントはこのリージョンでサポートされていま�
 
 **注**: インテグレーションパイプラインは、デフォルトのログライブラリパラメーターをこれらの属性に再マップし、スタックトレースをパースまたはトレースバックして、自動的に `error.message` と `error.kind` を抽出しようとします。
 
-詳しくは、[ソースコードと属性ドキュメント][10]をご覧ください。
+詳しくは、[ソースコードと属性ドキュメント][11]をご覧ください。
 
 ## 次のステップ
 
-ログが収集されて取り込まれると、**ログエクスプローラー**で利用できるようになります。ログエクスプローラーでは、ログのアラートを検索、強化、表示できます。[ログエクスプローラー][11]のドキュメントを参照してログデータの分析を開始するか、以下の追加のログ管理ドキュメントを参照してください。
+ログが収集されて取り込まれると、**ログエクスプローラー**で利用できるようになります。ログエクスプローラーでは、ログのアラートを検索、強化、表示できます。[ログエクスプローラー][12]のドキュメントを参照してログデータの分析を開始するか、以下の追加のログ管理ドキュメントを参照してください。
 
 {{< img src="logs/log_explorer_view.png" alt="Log Explorer ビュー" >}}
 
@@ -287,7 +287,8 @@ TCP エンドポイントはこのリージョンでサポートされていま�
 [5]: /ja/integrations/logstash/#log-collection
 [6]: /ja/security/logs/#information-security
 [7]: /ja/agent/logs/#send-logs-over-https
-[8]: /ja/logs/explorer/facets/
-[9]: /ja/logs/processing/attributes_naming_convention
-[10]: /ja/logs/processing/attributes_naming_convention/#source-code
-[11]: /ja/logs/explore/
+[8]: /ja/api/v1/logs/#send-logs
+[9]: /ja/logs/explorer/facets/
+[10]: /ja/logs/log_configuration/attributes_naming_convention
+[11]: /ja/logs/log_configuration/attributes_naming_convention/#source-code
+[12]: /ja/logs/explore/

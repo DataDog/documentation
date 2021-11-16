@@ -31,7 +31,7 @@ Regarding the API rate limit policy:
 
 [1]: /help/
 [2]: /api/v1/metrics/
-[3]: /developers/metrics/custom_metrics/
+[3]: /metrics/custom_metrics/
 [4]: /api/v1/metrics/#query-timeseries-points
 [5]: /api/v1/logs/#get-a-list-of-logs
 [6]: /api/v1/snapshots/

@@ -6,12 +6,12 @@ aliases:
   - /ja/developers/faq/reduce-submission-rate
   - /ja/developers/faq/why-is-my-counter-metric-showing-decimal-values
   - /ja/developers/faq/dog-statsd-sample-rate-parameter-explained
-  - /ja/developers/metrics/dogstatsd_metrics_submission/
+  - /ja/metrics/dogstatsd_metrics_submission/
 further_reading:
   - link: /developers/dogstatsd/
     tag: ドキュメント
     text: DogStatsD 入門
-  - link: /developers/metrics/types/
+  - link: /metrics/types/
     tag: ドキュメント
     text: Datadog メトリクスタイプ
 ---
@@ -203,11 +203,11 @@ while (TRUE) {
 
 上のコードを実行すると、メトリクスデータを Datadog でグラフ化できます。
 
-{{< img src="developers/metrics/dogstatsd_metrics_submission/increment_decrement.png" alt="Increment Decrement" >}}
+{{< img src="metrics/dogstatsd_metrics_submission/increment_decrement.png" alt="Increment Decrement" >}}
 
 値は `COUNT` として送信されるため、Datadog に `RATE` として保存されます。Datadog で未加工のカウントを取得するには、[累積合計][3] や [積分][4] などの関数を系列に適用します。
 
-{{< img src="developers/metrics/dogstatsd_metrics_submission/increment_decrement_cumsum.png" alt="Increment Decrement with Cumsum" >}}
+{{< img src="metrics/dogstatsd_metrics_submission/increment_decrement_cumsum.png" alt="Increment Decrement with Cumsum" >}}
 
 ### GAUGE
 
@@ -366,7 +366,7 @@ while (TRUE) {
 
 上のコードを実行すると、メトリクスデータを Datadog でグラフ化できます。
 
-{{< img src="developers/metrics/dogstatsd_metrics_submission/gauge.png" alt="Gauge" >}}
+{{< img src="metrics/dogstatsd_metrics_submission/gauge.png" alt="Gauge" >}}
 
 ### SET
 
@@ -502,7 +502,7 @@ while (TRUE) {
 
 上のコードを実行すると、メトリクスデータを Datadog でグラフ化できます。
 
-{{< img src="developers/metrics/dogstatsd_metrics_submission/set.png" alt="Set" >}}
+{{< img src="metrics/dogstatsd_metrics_submission/set.png" alt="Set" >}}
 
 ### HISTOGRAM
 
@@ -671,7 +671,7 @@ while (TRUE) {
 
 上のコードを実行すると、メトリクスデータを Datadog でグラフ化できます。
 
-{{< img src="developers/metrics/dogstatsd_metrics_submission/histogram.png" alt="Histogram" >}}
+{{< img src="metrics/dogstatsd_metrics_submission/histogram.png" alt="Histogram" >}}
 
 #### タイマー
 
@@ -776,7 +776,7 @@ DogStatsD はタイマーメトリクスデータを受け取ると、レンダ�
 
 DogStatsD は `TIMER` を `HISTOGRAM` メトリクスとして扱います。使用するメトリクスのタイプが `TIMER` であろうと `HISTOGRAM` であろうと、Datadog に送信されるのは同じデータです。上のコードを実行すると、メトリクスデータを Datadog でグラフ化できます。
 
-{{< img src="developers/metrics/dogstatsd_metrics_submission/timer.png" alt="Timer" >}}
+{{< img src="metrics/dogstatsd_metrics_submission/timer.png" alt="Timer" >}}
 
 ### DISTRIBUTION
 
@@ -1056,11 +1056,11 @@ $statsd->increment('example_metric.increment', array('environment' => 'dev', 'ac
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/developers/dogstatsd/
-[2]: /ja/developers/metrics/types/?tab=count#definition
+[2]: /ja/metrics/types/?tab=count#definition
 [3]: /ja/dashboards/functions/arithmetic/#cumulative-sum
 [4]: /ja/dashboards/functions/arithmetic/#integral
-[5]: /ja/developers/metrics/types/?tab=gauge#definition
-[6]: /ja/developers/metrics/types/?tab=histogram#definition
+[5]: /ja/metrics/types/?tab=gauge#definition
+[6]: /ja/metrics/types/?tab=histogram#definition
 [7]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
 [8]: /ja/metrics/distributions/
-[9]: /ja/developers/metrics/types/?tab=distribution#definition
+[9]: /ja/metrics/types/?tab=distribution#definition

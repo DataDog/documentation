@@ -11,15 +11,14 @@ While grouping by service is the default, you can also group your resources by A
 
 ## Setup
 
-To instrument your Lambda functions for the first time, follow the [serverless installation instructions][3].
+To instrument your Lambda functions for the first time, follow the [serverless installation instructions][1].
 
 Managed resources are automatically connected to your AWS Lambda functions if all of the following are true:
 - Your functions are written in Node.js or Python Lambda runtimes.
-- [APM with Datadog's X-Ray integration][2] is configured on your functions and [configured Datadog's Lambda Library is configured to enrich AWS X-Ray segments][4], **OR** [APM with Datadog's tracing libraries][2] (`dd-trace`) is configured on your functions.
+- [APM with Datadog's X-Ray integration][2] is configured on your functions and [configured Datadog's Lambda Library is configured to enrich AWS X-Ray segments][3], **OR** [APM with Datadog's tracing libraries][2] (`dd-trace`) is configured on your functions.
 - The managed resource invoking your function is one of the following: API Gateway, SQS, SNS, EventBridge, Kinesis, DynamoDB, S3.
 - Your functions are instrumented with a recent version of Datadog's Lambda Library (>= `v3.46.0` for Node, >= `v28` for Python).
 
-[1]: /logs/explorer/saved_views
+[1]: /serverless/installation
 [2]: /serverless/distributed_tracing#choose-your-tracing-library
-[3]: /serverless/installation
-[4]: /integrations/amazon_xray/#enriching-xray-segments-with-datadog-libraries
+[3]: /integrations/amazon_xray/#enriching-xray-segments-with-datadog-libraries

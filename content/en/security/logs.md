@@ -40,11 +40,15 @@ These features are not available to customers who have signed Datadog's BAA:
 * Notifications from Log Monitors cannot include log samples.
 * You cannot configure Log Monitors with a `group-by` clause.
 * You cannot [share][7] logs, security signals, or traces from the explorer through web integrations.
-* Security rules cannot send notifications.
+* Security rules cannot include triggering group-by values in notification title.
+* Security rules cannot include message template variables.
+* Security rules cannot notify by webhooks.
 
 If you have any questions about how the Log Management Service satisfies the applicable requirements under HIPAA, contact your account manager.
 
 **Note:**
+
+Logs can be viewed through various pages in the Datadog platform. All manifestations of logs in the Datadog platform, including pages such as Traces are part of the log management product.
 
 Previously, HIPAA-enabled customers needed to use specific endpoints to submit logs in order to enforce specific encryptions. This is no longer necessary. The encryptions are enabled on all log submission endpoints.
 

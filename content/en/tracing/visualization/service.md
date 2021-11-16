@@ -28,7 +28,7 @@ Selecting a service on the services page leads you to the detailed service page.
 Consult on this page:
 
 * [Service monitor states](#service-monitor)
-* [Out of the box graphs](#out-of-the-box-graphs)
+* [Out-of-the-box graphs](#out-of-the-box-graphs)
 * [Resources associated to this service][2]
 
 ## Service monitor
@@ -41,9 +41,9 @@ Enable them directly or create your own [APM monitors][3].
 
 **Note**: Tag any monitor with `service:<SERVICE_NAME>` to attach it to an APM service.
 
-## Out of the box graphs
+## Out-of-the-box graphs
 
-Datadog provides out of the box graphs for any given Service:
+Datadog provides out-of-the-box graphs for any given Service:
 
 * Requests - Choose to display:
     *  The **Total amount of requests**
@@ -111,7 +111,7 @@ Choose what to display in your resources list:
 
 [1]: /tracing/visualization/
 [2]: /tracing/visualization/resource/
-[3]: /monitors/monitor_types/apm/
+[3]: /monitors/create/types/apm/
 [4]: /tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm/
 [5]: /dashboards/
 [6]: /tracing/visualization/#resources

@@ -82,7 +82,7 @@ Configure Rsyslog to gather logs from your host, containers, & services.
 
 6. Associate those logs with the host metrics and tags.
    To make sure that these logs are associated with the metrics and tags from the same host in your Datadog account, set the `HOSTNAME` in your `rsyslog.conf` to match the hostname of your Datadog metrics.
-   If you did not specify any hostname in your configuration file for the metrics via `datadog.conf` or `datadog.yaml`, then you do not need to change anything.
+   If you did not specify any hostname in your configuration file for the metrics using `datadog.conf` or `datadog.yaml`, then you do not need to change anything.
    If you did specify a custom hostname for your metric, replace the **%HOSTNAME%** value in the format to match the same custom name.
 
 7. Use Datadog integrations.
@@ -166,7 +166,7 @@ Configure Rsyslog to gather logs from your host, containers, & services.
 
 6. Associate those logs with the host metrics and tags.
    To make sure these logs are associated with the metrics and tags from the same host in your Datadog account, set the same `HOSTNAME` in your `rsyslog.conf` so that its value matches the hostname of your Datadog metrics.
-   **Note**: If you did not specify any hostname in your configuration file for the metrics via `datadog.conf` or `datadog.yaml`, you do not need to change anything. If you did specify a custom hostname for your metric, make sure to replace the **%HOSTNAME%** value in the format to match the same custom name.
+   **Note**: If you did not specify any hostname in your configuration file for the metrics using `datadog.conf` or `datadog.yaml`, you do not need to change anything. If you did specify a custom hostname for your metric, make sure to replace the **%HOSTNAME%** value in the format to match the same custom name.
 
 7. Use Datadog integrations.
    To get the best use out of your logs in Datadog, set the source on your logs. The source can be set directly in the Agent if you forward your logs to the Datadog Agent.
@@ -263,7 +263,7 @@ Configure Rsyslog to gather logs from your host, containers, & services.
 
 6. Associate those logs with the host metrics and tags.
    To make sure these logs are associated with the metrics and tags from the same host in your Datadog account, set the same `HOSTNAME` in your `rsyslog.conf` so that its value matches the hostname of your Datadog metrics.
-   **Note**: If you did not specify any hostname in your configuration file for the metrics via `datadog.conf` or `datadog.yaml`, you do not need to change anything. If you did specify a custom hostname for your metric, make sure to replace the **%HOSTNAME%** value in the format to match the same custom name.
+   **Note**: If you did not specify any hostname in your configuration file for the metrics using `datadog.conf` or `datadog.yaml`, you do not need to change anything. If you did specify a custom hostname for your metric, make sure to replace the **%HOSTNAME%** value in the format to match the same custom name.
 
 7. Use Datadog integrations.
    To get the best use out of your logs in Datadog, set the source on your logs. The source can be set directly in the Agent if you forward your logs to the Datadog Agent.
@@ -356,7 +356,7 @@ Configure Rsyslog to gather logs from your host, containers, & services.
 
 6. Associate those logs with the host metrics and tags.
    To make sure these logs are associated with the metrics and tags from the same host in your Datadog account, set the same `HOSTNAME` in your `rsyslog.conf` so that its value matches the hostname of your Datadog metrics.
-   **Note**: If you did not specify any hostname in your configuration file for the metrics via `datadog.conf` or `datadog.yaml`, you do not need to change anything. If you did specify a custom hostname for your metric, make sure to replace the **%HOSTNAME%** value in the format to match the same custom name.
+   **Note**: If you did not specify any hostname in your configuration file for the metrics using `datadog.conf` or `datadog.yaml`, you do not need to change anything. If you did specify a custom hostname for your metric, make sure to replace the **%HOSTNAME%** value in the format to match the same custom name.
 
 7. Use Datadog integrations.
    To get the best use out of your logs in Datadog, set the source on your logs. The source can be set directly in the Agent if you forward your logs to the Datadog Agent.

@@ -69,7 +69,7 @@ nginx-758655469f-lk9p6   1/1     Running   0          20h
       ...
 ```
 
-By design, endpoints checks are scheduled by Agents that run on the same node as the pods that back the endpoints of the `nginx` service, so only Agents running on the nodes `gke-cluster-default-pool-4658d5d4-k2sn` and `gke-cluster-default-pool-4658d5d4-p39c` will schedule the checks on the `nginx` pods.
+By design, endpoint checks are scheduled by Agents that run on the same node as the pods that back the endpoints of the `nginx` service, so only Agents running on the nodes `gke-cluster-default-pool-4658d5d4-k2sn` and `gke-cluster-default-pool-4658d5d4-p39c` schedule the checks on the `nginx` pods.
 
 This works like that to leverage [Autodiscovery][3], and attach pod and container tags to the metrics coming from these pods.
 

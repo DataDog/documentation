@@ -2,7 +2,7 @@
 aliases:
   - /ja/real_user_monitoring/setup
 dependencies:
-  - 'https://github.com/DataDog/browser-sdk/blob/main/packages/rum/README.md'
+  - https://github.com/DataDog/browser-sdk/blob/main/packages/rum/README.md
 kind: ドキュメント
 title: RUM ブラウザモニタリング
 ---
@@ -166,6 +166,12 @@ RUM アプリケーションの ID。
 **種類**: 文字列<br/>
 アプリケーションのバージョン (例: 1.2.3、6c44da20、2020.02.13)。
 
+`trackViewsManually`
+: オプション<br/>
+**タイプ**: Boolean<br/>
+**デフォルト**: `false` <br/>
+RUM ビューの作成を制御します。[デフォルトの RUM ビュー名をオーバーライドする][10]を参照してください。
+
 `trackInteractions`
 : 任意<br/>
 **種類**: Boolean<br/>
@@ -189,10 +195,10 @@ RUM アプリケーションの ID。
 **デフォルト**: `false`<br/>
 Datadog の RUM がページ上ですでに初期化されている場合、初期化が暗黙に失敗します。
 
-`proxyHost`
+`proxyUrl`
 : 任意<br/>
 **種類**: 文字列<br/>
-オプションのプロキシホスト (例: www.proxy.com)。詳細については、完全な[プロキシ設定ガイド][7]を参照してください。
+オプションのプロキシ URL (例: https://www.proxy.com/path)。詳細については、完全な[プロキシ設定ガイド][7]を参照してください。
 
 `allowedTracingOrigins`
 : 任意<br/>
@@ -250,3 +256,4 @@ init(configuration: {
 [7]: https://docs.datadoghq.com/ja/real_user_monitoring/faq/proxy_rum_data/
 [8]: https://github.com/DataDog/browser-sdk/blob/main/packages/rum/BROWSER_SUPPORT.md
 [9]: https://docs.datadoghq.com/ja/real_user_monitoring/browser/tracking_user_actions#declaring-a-name-for-click-actions
+[10]: https://docs.datadoghq.com/ja/real_user_monitoring/browser/modifying_data_and_context/?tab=npm#override-default-rum-view-names

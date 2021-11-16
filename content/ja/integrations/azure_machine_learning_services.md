@@ -5,12 +5,13 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Azure Machine Learning の主要メトリクスを追跡。
-doc_link: 'https://docs.datadoghq.com/integrations/azure_machine_learning_services/'
+doc_link: https://docs.datadoghq.com/integrations/azure_machine_learning_services/
 draft: false
 git_integration_title: azure_machine_learning_services
 has_logo: true
 integration_id: ''
 integration_title: Microsoft Azure Machine Learning
+integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'

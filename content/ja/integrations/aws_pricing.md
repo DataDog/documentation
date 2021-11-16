@@ -59,23 +59,18 @@ AWS Pricing チェックは [Datadog Agent][2] パッケージに含まれてい
 {{< get-metrics-from-git "aws_pricing" >}}
 
 
-### サービスのチェック
-
-`aws_pricing.status`:
-
-Boto3 料金クライアントを使用してメトリクスを収集しているときに Agent がエラーを検出した場合は、`CRITICAL` を返します。
-
-Boto3 料金クライアントを使用して見つけられないレートコードが `aws_pricing.d/conf.yaml` に定義されている場合は、`WARNING` を返します。
-
-エラーが検出されず、目的のすべてのサービスレートコードの料金データが収集された場合は、`OK` を返します。
-
 ### イベント
 
 AWS Pricing には、イベントは含まれません。
 
+### サービスのチェック
+{{< get-service-checks-from-git "aws_pricing" >}}
+
+
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][7]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
+
 
 [1]: https://aws.amazon.com/pricing/
 [2]: https://github.com/DataDog/integrations-extras/blob/master/aws_pricing/datadog_checks/aws_pricing/data/conf.yaml.example
@@ -83,4 +78,5 @@ AWS Pricing には、イベントは含まれません。
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#restart-the-agent
 [5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-information
 [6]: https://github.com/DataDog/integrations-extras/blob/master/aws_pricing/metadata.csv
-[7]: https://docs.datadoghq.com/ja/help/
+[7]: https://github.com/DataDog/integrations-extras/blob/master/aws_pricing/assets/service_checks.json
+[8]: https://docs.datadoghq.com/ja/help/

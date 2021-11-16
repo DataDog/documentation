@@ -1,8 +1,8 @@
 ---
 dependencies:
-  - 'https://github.com/DataDog/dd-sdk-android/blob/master/docs/rum_getting_started.md'
+  - https://github.com/DataDog/dd-sdk-android/blob/master/docs/rum_getting_started.md
 further_reading:
-  - link: 'https://github.com/DataDog/dd-sdk-android'
+  - link: https://github.com/DataDog/dd-sdk-android
     tag: Github
     text: dd-sdk-android ソースコード
   - link: /real_user_monitoring
@@ -11,7 +11,7 @@ further_reading:
 kind: documentation
 title: RUM Android モニタリング
 ---
-Datadog *Real User Monitoring (RUM)* を使用すると、アプリケーションの個々のユーザーのリアルタイムパフォーマンスとユーザージャーニーを視覚化して分析できます。
+Datadog Real User Monitoring (RUM) を使用すると、アプリケーションの個々のユーザーのリアルタイムパフォーマンスとユーザージャーニーを視覚化して分析できます。
 
 ## セットアップ
 

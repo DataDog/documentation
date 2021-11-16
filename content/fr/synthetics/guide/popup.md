@@ -1,20 +1,25 @@
 ---
-title: Gérer les fenêtres contextuelles lors des tests Browser
+title: Gestion des fenêtres contextuelles lors des tests Browser
 kind: guide
 further_reading:
-  - link: 'https://www.datadoghq.com/blog/browser-tests/'
+  - link: https://www.datadoghq.com/blog/browser-tests/
     tag: Blog
     text: Surveillance de l'expérience utilisateur avec les tests Browser de Datadog
   - link: synthetics/browser_tests
     tag: Documentation
     text: Configurer un test Browser
 ---
-## Fenêtres modales JavaScript et d'authentification de base
+## Fenêtres modales
 
-Les tests Browser Synthetic gèrent automatiquement [les fenêtres modales JavaScript][1] :
+### JavaScript
+
+Les tests Browser Synthetic gèrent automatiquement les [fenêtres modales JavaScript][1] :
  - Les fenêtres modales `alert` sont fermées.
- - Une réponse `Lorem Ipsum` est fournie pour les fenêtre modales `prompt` et `confirm`.
-Pour les fenêtres contextuelles d'authentification de base, spécifiez les identifiants requis dans la configuration de votre test Browser, sous [**Advanced options > Auth HTTP**][2] :
+ - Une réponse `Lorem Ipsum` est fournie pour les fenêtres modales `prompt` et `confirm`.
+
+### Authentification de base
+
+Pour les fenêtres contextuelles d'authentification de base, spécifiez les identifiants requis dans la configuration de votre test Browser, sous [**Advanced options > HTTP Auth**][2] :
 
 {{< img src="synthetics/guide/popup/http_auth_option.png" alt="Fenêtre contextuelle d'authentification de base">}}
 

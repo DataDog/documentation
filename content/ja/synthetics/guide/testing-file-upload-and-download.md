@@ -2,7 +2,7 @@
 title: テストファイルのアップロードとダウンロード
 kind: ガイド
 further_reading:
-  - link: 'https://www.datadoghq.com/blog/introducing-synthetic-monitoring/'
+  - link: https://www.datadoghq.com/blog/introducing-synthetic-monitoring/
     tag: ブログ
     text: Datadog Synthetic モニタリングの紹介
   - link: synthetics/

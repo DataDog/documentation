@@ -73,12 +73,12 @@ AWS から取得される各メトリクスには、ホスト名やセキュリ�
 
 ホワイトリストを削除し、Datadog Amazon ECS インテグレーションからすべてのイベントを取得できるようにするには、[Datadog のサポートチーム][6]までお問い合わせください。
 
-### サービスチェック
+### サービスのチェック
+{{< get-service-checks-from-git "amazon_ecs" >}}
 
-**aws.ecs.agent_connected**: <br>
-Agent が接続できない場合は `CRITICAL`、それ以外の場合は `OK` を返します。
 
 ## トラブルシューティング
+
 ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
 
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=automaticcloudformation#setup
@@ -87,3 +87,4 @@ Agent が接続できない場合は `CRITICAL`、それ以外の場合は `OK` 
 [4]: https://www.datadoghq.com/blog/monitoring-ecs-with-datadog/#get-comprehensive-visibility-with-datadog-dashboards
 [5]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_ecs/amazon_ecs_metadata.csv
 [6]: https://docs.datadoghq.com/ja/help/
+[7]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_ecs/service_checks.json

@@ -163,9 +163,8 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 Couch チェックには、イベントは含まれません。
 
 ### サービスのチェック
+{{< get-service-checks-from-git "couch" >}}
 
-**couchdb.can_connect**:<br>
-Agent が CouchDB に接続してメトリクスを収集できない場合は、`Critical` を返します。それ以外の場合は、`OK` を返します。
 
 ## トラブルシューティング
 

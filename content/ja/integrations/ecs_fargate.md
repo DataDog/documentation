@@ -82,7 +82,7 @@ Fargate の主要な作業単位はタスクで、これはタスク定義内で
 6. ニーズに合わせて **Task memory** と **Task CPU** を選択します。
 7. **Add container** ボタンをクリックします。
 8. **Container name** に `datadog-agent` と入力します。
-9. **Image** に `datadog/agent:latest` と入力します。
+9. **Image** に `gcr.io/datadoghq/agent:latest` と入力します。
 10. **Memory Limits** に、ソフト制限として `256` を入力します。
 11. **Advanced container configuration** セクションまでスクロールし、**CPU units** に `10` と入力します。
 12. **Env Variables** に**キー** `DD_API_KEY` を追加し、[Datadog API キー][5]を値として入力します。_シークレットを s3 に保存する場合は、[ECS 構成ガイド][6]を参照してください_。

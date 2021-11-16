@@ -35,8 +35,8 @@ try (final Scope scope = tracer.activateSpan(span)) { // mandatory for Datadog c
 ```
 
 Requires:
-- tracing library version 0.65.0 or greater
-- OpenJDK 8u282 or greater
+- OpenJDK 11 or greater and tracing library version 0.65.0 or greater; or
+- If on OpenJDK 8: 8u282 or greater and tracing library version 0.77.0 or greater.
 
 
 [1]: /tracing/profiler/enabling/?code-lang=java

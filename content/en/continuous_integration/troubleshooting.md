@@ -3,6 +3,10 @@ title: Troubleshooting CI Visibility
 kind: documentation
 ---
 
+{{< site-region region="us5,gov" >}}
+<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
+{{< /site-region >}}
+
 ### Your Jenkins instance is instrumented, but Datadog isn't showing any data
 
 1. Make sure that at least one pipeline has finished executing. Pipeline execution information is only sent after the pipeline has finished.
@@ -20,9 +24,55 @@ kind: documentation
 
 If you can see test results data in the **Test Runs** tab, but not the **Tests** tab, Git metadata (repository, commit and/or branch) is probably missing. To confirm this is the case, open a test execution in the [Test Runs][3] section, and check that there is no `git.repository_url`, `git.commit.sha`, or `git.branch`. If these tags are not populated, nothing shows in the [Tests][4] section.
 
-1. Tracers first try to fetch Git metadata using the local `.git` folder by executing `git` commands. This is the preferred approach, as it populates all Git metadata fields, including commit message, author and committer information. Ensure the `.git` folder is present and the `git` binary is installed and in `$PATH`.
-2. If the `.git` folder is not present, or the `git` binary is not installed, tracers fallback to use the environment variables set by the CI provider to collect Git information. See the [Running tests inside a container][6] page for a list of environment variables that the tracer attempts to read for each supported CI provider. At a minimum, this populates the repository, commit hash, and branch information.
-3. If no CI provider environment variables are found, tests results are sent with no Git metadata.
+1. Tracers first use the environment variables, if any, set by the CI provider to collect Git information. See [Running tests inside a container][6] for a list of environment variables that the tracer attempts to read for each supported CI provider. At a minimum, this populates the repository, commit hash, and branch information.
+2. Next, tracers fetch Git metadata using the local `.git` folder, if present, by executing `git` commands. This populates all Git metadata fields, including commit message, author, and committer information. Ensure the `.git` folder is present and the `git` binary is installed and in `$PATH`. This information is used to populate attributes not detected in the previous step.
+3. You can also provide Git information manually using environment variables, which override information detected by any of the previous steps. The supported environment variables for providing Git information are the following:
+
+   `DD_GIT_REPOSITORY_URL`
+   : URL of the repository where the code is stored. Both HTTP and SSH URLs are supported.<br/>
+   **Example**: `git@github.com:MyCompany/MyApp.git`, `https://github.com/MyCompany/MyApp.git`
+
+   `DD_GIT_BRANCH`
+   : Git branch being tested. Leave empty if providing tag information instead.<br/>
+   **Example**: `develop`
+
+   `DD_GIT_TAG`
+   : Git tag being tested (if applicable). Leave empty if providing branch information instead.<br/>
+   **Example**: `1.0.1`
+
+   `DD_GIT_COMMIT_SHA`
+   : Full commit hash.<br/>
+   **Example**: `a18ebf361cc831f5535e58ec4fae04ffd98d8152`
+
+   `DD_GIT_COMMIT_MESSAGE`
+   : Commit message.<br/>
+   **Example**: `Set release number`
+
+   `DD_GIT_COMMIT_AUTHOR_NAME`
+   : Commit author name.<br/>
+   **Example**: `John Smith`
+
+   `DD_GIT_COMMIT_AUTHOR_EMAIL`
+   : Commit author email.<br/>
+   **Example**: `john@example.com`
+
+   `DD_GIT_COMMIT_AUTHOR_DATE`
+   : Commit author date in ISO 8601 format.<br/>
+   **Example**: `2021-03-12T16:00:28Z`
+
+   `DD_GIT_COMMIT_COMMITTER_NAME`
+   : Commit committer name.<br/>
+   **Example**: `Jane Smith`
+
+   `DD_GIT_COMMIT_COMMITTER_EMAIL`
+   : Commit committer email.<br/>
+   **Example**: `jane@example.com`
+
+   `DD_GIT_COMMIT_COMMITTER_DATE`
+   : Commit committer date in ISO 8601 format.<br/>
+   **Example**: `2021-03-12T16:00:28Z`
+
+4. If no CI provider environment variables are found, tests results are sent with no Git metadata.
 
 ### Need further help?
 

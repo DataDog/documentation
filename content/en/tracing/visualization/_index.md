@@ -30,14 +30,14 @@ The APM UI provides many tools to troubleshoot application performance and corre
 | [Monitors][1]                   | APM metric monitors work like regular metric monitors, but with controls tailored specifically to APM. Use these monitors to receive alerts at the service level on hits, errors, and a variety of latency measures. |
 | [Trace](#trace)                 | A trace is used to track the time spent by an application processing a request and the status of this request. Each trace consists of one or more spans.                                                             |
 | [Span](#spans)                  | A span represents a logical unit of work in a distributed system for a given time period. Multiple spans construct a trace.                                                                                          |
-| [Service entry span](#service-entry-span) | A span is a service entry span when it is the entrypoint method for a request to a service. You can visualize this within Datadog APM when the color of the immediate parent on a flamegraph is a different color.                                                                                            |
-| [Trace metrics](#trace-metrics) | Trace metrics are automatically collected and kept with a 15-month retention policy similar to other [Datadog metrics][2]. They can be used to identify and alert on hits, errors, or latency.                       |
+| [Service entry span](#service-entry-span) | A span is a service entry span when it is the entrypoint method for a request to a service. You can visualize this within Datadog APM when the color of the immediate parent on a flame graph is a different color.                                                                                            |
+| [Trace metrics](#trace-metrics) | Trace metrics are automatically collected and kept with a 15-month retention policy similar to other [Datadog metrics][2]. They can be used to identify and alert on hits, errors, or latency. Statistics and metrics are always calculated based on _all_ traces, and are not impacted by ingestion controls.                       |
 | [Indexed Span](#indexed-span) | Indexed Spans represent all spans indexed by retention filters or legacy App Analytics analyzed spans and can be used to search, query, and monitor in *Analytics*.                                                                                                |
 | [Span tags](#span-tags)         | Tag spans in the form of key-value pairs to correlate a request in the *Trace View* or filter in *Analytics*.                                                                                                    |
 | [Retention Filters](#retention-filters) | Retention filters are tag-based controls set within the Datadog UI that determine what spans to index in Datadog for 15 days.                                                                                              |
 | [Ingestion Controls](#ingestion-controls) | Ingestion Controls are used to send up to 100% of traces to Datadog for live search and analytics for 15 minutes.
 | [Sublayer Metric](#sublayer-metric) | A sublayer metric is the execution duration of a given type / service within a trace.
-| [Execution Duration](#execution-duration) | Total time that a span is considered 'active' (not waiting for a child span to complete).
+| [Execution Time](#execution-time) | Total time that a span is considered 'active' (not waiting for a child span to complete).
 
 
 **Note:** Indexed Spans were formerly known as Analyzed Spans and renamed with the launch of Tracing Without Limits on October 20th, 2020.
@@ -74,7 +74,7 @@ Resources represent a particular domain of a customer application. They could ty
 
 ## Trace
 
-A trace is used to track the time spent by an application processing a request and the status of this request. Each trace consists of one or more spans. During the lifetime of the request, you can see distributed calls across services (because a [trace-id is injected/extracted through HTTP headers][8]), [automatically instrumented libraries][3], and [manual instrumentation][9] using open-source tools like [OpenTracing][10] in the flamegraph view. In the Trace View page, each trace collects information that connects it to other parts of the platform, including [connecting logs to traces][11], [adding tags to spans][12], and [collecting runtime metrics][13].
+A trace is used to track the time spent by an application processing a request and the status of this request. Each trace consists of one or more spans. During the lifetime of the request, you can see distributed calls across services (because a [trace-id is injected/extracted through HTTP headers][8]), [automatically instrumented libraries][3], and [manual instrumentation][9] using open-source tools like [OpenTracing][10] in the flame graph view. In the Trace View page, each trace collects information that connects it to other parts of the platform, including [connecting logs to traces][11], [adding tags to spans][12], and [collecting runtime metrics][13].
 
 {{< img src="tracing/visualization/trace_view.png" alt="trace view" >}}
 
@@ -86,9 +86,30 @@ For the example below, the span `rack.request` is the entry-point span of the tr
 
 {{< img src="tracing/visualization/span_with_metadata.png" alt="span" >}}
 
+## Span summary
+
+The span summary table shows metrics for spans aggregated across all traces, including how often the span shows up among all traces, what percent of traces contain the span, the average duration for the span, and its typical share of total execution time of the requests. This helps you detect N+1 problems in your code so you can improve your application performance. 
+
+The span summary table contains the following columns:
+
+Average spans per trace
+: Average number of occurrences of the span for traces, including the current resource, where the span is present at least once.
+
+Percentage of traces
+: Percentage of traces, including the current resource, where the span is present at least once.
+
+Average duration
+: Average duration of the span for traces, including the current resource, where the span is present at least once.
+
+Average percentage of execution time
+: Average ratio of execution time for which the span was active for traces, including the current resource, where the span is present at least once.
+
+{{< img src="tracing/visualization/span-summary.png" alt="Span summary table" >}}
+
+
 ## Service entry span
 
-A span is a service entry span when it is the entrypoint method for a request to a service. You can visualize this within Datadog APM when the color of the immediate parent on a flamegraph is a different color.  Services are also listed on the right when viewing a flamegraph.
+A span is a service entry span when it is the entrypoint method for a request to a service. You can visualize this within Datadog APM when the color of the immediate parent on a flame graph is a different color.  Services are also listed on the right when viewing a flame graph.
 
 For the example below, the service entry spans are:
 - rack.request
@@ -152,20 +173,20 @@ After a tag has been added to a span, search and query on the tag in Analytics b
 
 ## Sublayer metric
 
-Some [Tracing Application Metrics][15] are tagged with `sublayer_service` and `sublayer_type` so that you can see the execution duration for individual services within a trace.
+Some [Tracing Application Metrics][15] are tagged with `sublayer_service` and `sublayer_type` so that you can see the execution time for individual services within a trace.
 
-## Execution duration
+## Execution time
 
 The active spans for a given time, for a given trace, are all of the leaf spans (spans without children).
 
-{{< img src="tracing/visualization/execution_duration.png" style="width:50%;" alt="Execution Duration"  style="width:50%;">}}
+{{< img src="tracing/visualization/execution_duration.png" style="width:50%;" alt="Execution Time"  style="width:50%;">}}
 
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /monitors/monitor_types/apm/
+[1]: /monitors/create/types/apm/
 [2]: /developers/faq/data-collection-resolution-retention/
 [3]: /tracing/setup/
 [4]: /tracing/visualization/services_list/

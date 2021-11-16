@@ -24,7 +24,7 @@ kind: ドキュメント
 - すべてのオプションパラメーターはデフォルトでコメントにされます。
 - プレースホルダーにインテグレーションのデフォルト値がある場合 (たとえば、インテグレーションのステータスエンドポイント)、それを汎用プレースホルダーの代わりに使用できます。
 
-### @param の指定
+### `@param` の指定
 
 事実上 `@param` が唯一のコマンドです。`@param` は、主に文書化の目的で構成ブロックについて説明するために使用され、以下のいずれかの形式を使用して実装されます。
 
@@ -138,6 +138,6 @@ YAML 構文の詳細については、[Wikipedia][2] を参照してください
 [3]: http://yaml-online-parser.appspot.com/
 [4]: https://docs.datadoghq.com/ja/integrations/
 [5]: https://www.uuidgenerator.net
-[6]: https://docs.datadoghq.com/ja/developers/metrics/metrics_type/
-[7]: https://docs.datadoghq.com/ja/developers/metrics/metrics_units/
+[6]: https://docs.datadoghq.com/ja/metrics/metrics_type/
+[7]: https://docs.datadoghq.com/ja/metrics/metrics_units/
 [8]: https://docs.datadoghq.com/ja/getting_started/tagging/

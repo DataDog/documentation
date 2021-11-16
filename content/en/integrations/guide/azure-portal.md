@@ -2,7 +2,7 @@
 title: Datadog in the Azure Portal
 kind: guide
 further_reading:
-  - link: "integration/azure"
+  - link: "/integrations/azure/"
     tag: "Documentation"
     text: "Azure integration"
   - link: "https://www.datadoghq.com/blog/azure-datadog-partnership"
@@ -140,7 +140,7 @@ If the Agent was installed using a different method, you can not use the Datadog
 
 ### App Service extension
 
-Select "App Service extension" in the left sidebar to see a list of app services in the subscription. On this page, you can install the Datadog extension on Azure App Services to enable APM tracing and custom metrics.
+Select "App Service extension" in the left sidebar to see a list of app services in the subscription. On this page, you can install the Datadog extension on Azure App Service to enable APM tracing and custom metrics.
 
 For each app service, the following information is displayed:
 

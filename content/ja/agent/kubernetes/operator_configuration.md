@@ -81,10 +81,10 @@ spec:
 : ロギングの詳細度を設定します。有効なログレベルは、`trace`、`debug`、`info`、`warn`、`error`、`critical`、`off` です。
 
 `agent.config.podAnnotationsAsTags`
-: Kubernetes アノテーションの Datadog タグへのマッピングを提供します。`<KUBERNETES_ANNOTATIONS>: <DATADOG_TAG_KEY>`  
+: Kubernetes アノテーションの Datadog タグへのマッピングを提供します。`<KUBERNETES_ANNOTATIONS>: <DATADOG_TAG_KEY>`
 
 `agent.config.podLabelsAsTags`
-: Kubernetes ラベルの Datadog タグへのマッピングを提供します。`<KUBERNETES_LABEL>: <DATADOG_TAG_KEY>`      
+: Kubernetes ラベルの Datadog タグへのマッピングを提供します。`<KUBERNETES_LABEL>: <DATADOG_TAG_KEY>`
 
 `agent.config.resources.limits`
 : 許可されるコンピューティングリソースの最大量を表します。[Kubernetes のドキュメントを参照してください][3]。
@@ -93,7 +93,7 @@ spec:
 : 必要なコンピューティングリソースの最小量を表します。コンテナの `requests` が省略されている場合、明示的に指定されている場合はデフォルトで `limits` になり、それ以外の場合は実装定義の値になります。[Kubernetes のドキュメント][3]を参照してください。
 
 `agent.config.securityContext.allowPrivilegeEscalation`
-: プロセスがその親プロセスよりも多くの特権を取得できるかどうかを制御します。このブール値は、コンテナプロセスに `no_new_privs` フラグを設定するかどうかを直接制御します。`AllowPrivilegeEscalation` は、コンテナが両方とも `Privileged` として実行され、`CAP_SYS_ADMIN` を持っている場合に常に true になります。
+: プロセスがその親プロセスよりも多くの特権を取得できるかどうかを制御します。このブール値は、コンテナプロセスに `no_new_privs` フラグを設定するかどうかを決めます。`AllowPrivilegeEscalation` は、コンテナが両方とも `Privileged` として実行され、`CAP_SYS_ADMIN` を持っている場合に常に true になります。
 
 `agent.config.securityContext.capabilities.add`
 : 機能追加。
@@ -138,7 +138,7 @@ spec:
 : `GMSACredentialSpecName` は、使用する GMSA 資格情報仕様の名前です。このフィールドはアルファレベルで、WindowsGMSA 機能フラグを有効にするサーバーによってのみ尊重されます。
 
 `agent.config.securityContext.windowsOptions.runAsUserName`
-: コンテナプロセスのエントリポイントを実行するための Windows の `UserName`。指定されていない場合、デフォルトは画像メタデータで指定されたユーザーです。`PodSecurityContext` で設定することもできます。`SecurityContext` と `PodSecurityContext` の両方に設定されている場合、`SecurityContext` で指定された値が優先されます。このフィールドはベータレベルで、`WindowsRunAsUserName` 機能フラグで無効にできます。     
+: コンテナプロセスのエントリポイントを実行するための Windows の `UserName`。指定されていない場合、デフォルトは画像メタデータで指定されたユーザーです。`PodSecurityContext` で設定することもできます。`SecurityContext` と `PodSecurityContext` の両方に設定されている場合、`SecurityContext` で指定された値が優先されます。このフィールドはベータレベルで、`WindowsRunAsUserName` 機能フラグで無効にできます。
 
 `agent.config.tags`
 : この Agent により収集されるすべてのメトリクス、イベント、サービスチェックにアタッチされるタグのリスト。[タグ付けドキュメント][8]を参照してください。
@@ -165,13 +165,13 @@ spec:
 : 作成または移行元の DaemonSet の名前。
 
 `agent.deploymentStrategy.canary.duration`
-: 
+:
 
 `agent.deploymentStrategy.canary.paused`
-: 
+:
 
 `agent.deploymentStrategy.canary.replicas`
-: 
+:
 
 `agent.deploymentStrategy.reconcileFrequency`
 : ExtendDaemonSet の調整頻度。
@@ -216,7 +216,7 @@ spec:
 : ホストの PID ネームスペースを使用します。オプション: デフォルトは `false` です。
 
 `agent.image.name`
-: 使用するイメージを定義します。Datadog Agent 6 には `gcr.io/datadoghq/agent:latest` を使用します。スタンドアロンの Datadog Agent DogStatsD に `datadog/dogstatsd:latest` を使用します。Datadog Cluster Agent には `gcr.io/datadoghq/cluster-agent:latest` を使用します。
+: 使用するイメージを定義します。Datadog Agent 6 には `gcr.io/datadoghq/agent:latest` を使用します。スタンドアロンの Datadog Agent DogStatsD に `gcr.io/datadoghq/dogstatsd:latest` を使用します。Datadog Cluster Agent には `gcr.io/datadoghq/cluster-agent:latest` を使用します。
 
 `agent.image.pullPolicy`
 : Kubernetes プルポリシー。`Always`、`Never`、または `IfNotPresent` を使用します。
@@ -246,7 +246,7 @@ spec:
 : このパス (常にホストからマウントされます) は、処理されたログファイルに関する情報を格納するために Datadog Agent によって使用されます。Datadog Agent を再起動すると、適切なオフセットからログファイルのテーリングを開始できます。デフォルトは `/var/lib/datadog-agent/logs` です。
 
 `agent.priorityClassName`
-: 指定されている場合、ポッドの優先度を示します。`system-node-critical` と `system-cluster-critical` は、最高の優先度を示す 2 つの特別なキーワードで、前者が最高の優先順位です。その他の名前は、その名前で `PriorityClass` オブジェクトを作成して定義する必要があります。指定しない場合、ポッドの優先度はデフォルトになり、デフォルトがない場合はゼロになります。
+: 指定されている場合、ポッドの優先度を示します。`system-node-critical` と `system-cluster-critical` は、最高の優先度を示す 2 つの特別なキーワードで、前者が最高の優先順位です。その他の名前は、その名前で `PriorityClass` オブジェクトを作成して定義する必要があります。指定しない場合、ポッドの優先度はデフォルトに設定され、デフォルトがない場合はゼロに設定されます。
 
 `agent.process.enabled`
 : これを有効にすると、ライブプロセス監視がアクティブになります。 注: `/etc/passwd` は、ユーザー名を解決できるように自動的にマウントされます。[プロセスのドキュメントを参照してください][12]。
@@ -300,7 +300,7 @@ spec:
 : seccomp プロファイルのルートディレクトリを指定します。
 
 `agent.systemProbe.securityContext.allowPrivilegeEscalation`
-: プロセスがその親プロセスよりも多くの特権を取得できるかどうかを制御します。このブール値は、コンテナプロセスに `no_new_privs` フラグを設定するかどうかを直接制御します。`AllowPrivilegeEscalation` は、コンテナが 1) `Privileged` として実行され、2) `CAP_SYS_ADMIN` を持っている場合に常に true になります。
+: プロセスがその親プロセスよりも多くの特権を取得できるかどうかを制御します。このブール値は、コンテナプロセスに `no_new_privs` フラグを設定するかどうかを決めます。`AllowPrivilegeEscalation` は、コンテナが 1) `Privileged` として実行され、2) `CAP_SYS_ADMIN` を持っている場合に常に true になります。
 
 `agent.systemProbe.securityContext.capabilities.add`
 : 機能追加。
@@ -345,7 +345,7 @@ spec:
 : `GMSACredentialSpecName` は、使用する GMSA 資格情報仕様の名前です。このフィールドはアルファレベルで、WindowsGMSA 機能フラグを有効にするサーバーによってのみ尊重されます。
 
 `agent.systemProbe.securityContext.windowsOptions.runAsUserName`
-: Windows の `UserName` を使用して、コンテナプロセスのエントリポイントを実行します。指定されていない場合、デフォルトは画像メタデータで指定されたユーザーです。`PodSecurityContext` で設定することもできます。`SecurityContext` と `PodSecurityContext` の両方に設定されている場合、`SecurityContext` で指定された値が優先されます。このフィールドはベータレベルで、`WindowsRunAsUserName` 機能フラグで無効にできます。     
+: Windows の `UserName` を使用して、コンテナプロセスのエントリポイントを実行します。指定されていない場合、デフォルトは画像メタデータで指定されたユーザーです。`PodSecurityContext` で設定することもできます。`SecurityContext` と `PodSecurityContext` の両方に設定されている場合、`SecurityContext` で指定された値が優先されます。このフィールドはベータレベルで、`WindowsRunAsUserName` 機能フラグで無効にできます。
 
 `agent.useExtendedDaemonset`
 : Agent のデプロイには ExtendedDaemonset を使用します。デフォルト値は false です。
@@ -357,22 +357,22 @@ spec:
 : `AdditionalLabels` は、クラスターチェックランナーポッドに追加されるラベルを提供します。
 
 `clusterAgent.affinity.nodeAffinity.preferredDuringSchedulingIgnoredDuringExecution`
-: スケジューラーは、このフィールドで指定されたアフィニティ式を満たすノードにポッドをスケジュールすることを優先しますが、1 つ以上の式に違反するノードを選択する場合があります。最も優先されるノードは、重みの合計が最大のノードです。つまり、すべてのスケジューリング要件 (リソース要求、`requiredDuringScheduling` アフィニティ式など) を満たすノードごとに、このフィールドの要素を反復処理し、ノードが対応する `matchExpressions` に一致する場合は合計に「重み」を追加して合計を計算します。合計が最も高いノードが最も優先されます。
+: スケジューラーは、このフィールドで指定されたアフィニティ式を満たすノードにポッドをスケジュールすることを優先しますが、1 つ以上の式に違反するノードを選択する場合があります。最も優先されるノードは、重みの合計が最大のノードです。すべてのスケジューリング要件 (リソース要求と `requiredDuringScheduling` アフィニティ式) を満たすノードごとに、このフィールドの要素を反復処理し、ノードが対応する `matchExpressions` に一致する場合は合計に「重み」を追加して合計を計算します。合計が最も高いノードが最も優先されます。
 
 `clusterAgent.affinity.nodeAffinity.requiredDuringSchedulingIgnoredDuringExecution.nodeSelectorTerms`
 : 必須。ノードセレクター用語のリスト。用語は `OR` されています。
 
 `clusterAgent.affinity.podAffinity.preferredDuringSchedulingIgnoredDuringExecution`
-: スケジューラーは、このフィールドで指定されたアフィニティ式を満たすノードにポッドをスケジュールすることを優先しますが、1 つ以上の式に違反するノードを選択する場合があります。最も優先されるノードは、重みの合計が最大のノードです。つまり、すべてのスケジューリング要件 (リソース要求、`requiredDuringScheduling` アフィニティ式など) を満たすノードごとに、このフィールドの要素を反復処理し、ノードが対応する `podAffinityTerm` に一致するポッドを持つ場合は合計に「重み」を追加して合計を計算します。合計が最も高いノードが最も優先されます。
+: スケジューラーは、このフィールドで指定されたアフィニティ式を満たすノードにポッドをスケジュールすることを優先しますが、1 つ以上の式に違反するノードを選択する場合があります。最も優先されるノードは、重みの合計が最大のノードです。すべてのスケジューリング要件 (リソース要求や `requiredDuringScheduling` アフィニティ式など) を満たすノードごとに、このフィールドの要素を反復処理し、ノードが対応する `podAffinityTerm` に一致するポッドを持つ場合は合計に「重み」を追加して合計を計算します。合計が最も高いノードが最も優先されます。
 
 `clusterAgent.affinity.podAffinity.requiredDuringSchedulingIgnoredDuringExecution`
-: このフィールドで指定されたアフィニティ要件がスケジュール時に満たされない場合、ポッドはノードにスケジュールされません。このフィールドで指定されたアフィニティ要件がポッド実行中のある時点で満たされない場合 (ポッドラベルの更新など)、システムは最終的にポッドをノードから削除しようとする場合としない場合があります。複数の要素がある場合、各 `podAffinityTerm` に対応するノードのリストが交差します。つまり、すべての条件が満たされる必要があります。
+: このフィールドで指定されたアフィニティ要件がスケジュール時に満たされない場合、ポッドはノードにスケジュールされません。このフィールドで指定されたアフィニティ要件がポッド実行中のある時点で満たされない場合 (ポッドラベルの更新など)、システムは最終的にポッドをノードから削除しようとする場合としない場合があります。複数の要素がある場合、各 `podAffinityTerm` に対応するノードのリストが交差します。すべての条件が満たされる必要があります。
 
 `clusterAgent.affinity.podAntiAffinity.preferredDuringSchedulingIgnoredDuringExecution`
-: スケジューラーは、このフィールドで指定された非アフィニティ式を満たすノードにポッドをスケジュールすることを優先しますが、1 つ以上の式に違反するノードを選択する場合があります。最も優先されるノードは、重みの合計が最大のノードです。つまり、すべてのスケジューリング要件 (リソース要求、`requiredDuringScheduling` 非アフィニティ式など) を満たすノードごとに、このフィールドの要素を反復処理し、ノードが対応する `podAffinityTerm` に一致するポッドを持つ場合は合計に「重み」を追加して合計を計算します。合計が最も高いノードが最も優先されます。
+: スケジューラーは、このフィールドで指定された非アフィニティ式を満たすノードにポッドをスケジュールすることを優先しますが、1 つ以上の式に違反するノードを選択する場合があります。最も優先されるノードは、重みの合計が最大のノードです。すべてのスケジューリング要件 (リソース要求と `requiredDuringScheduling` 非アフィニティ式) を満たすノードごとに、このフィールドの要素を反復処理し、ノードが対応する `podAffinityTerm` に一致するポッドを持つ場合は合計に「重み」を追加して合計を計算します。合計が最も高いノードが最も優先されます。
 
 `clusterAgent.affinity.podAntiAffinity.requiredDuringSchedulingIgnoredDuringExecution`
-: このフィールドで指定された非アフィニティ要件がスケジュール時に満たされない場合、ポッドはノードにスケジュールされません。このフィールドで指定された非アフィニティ要件がポッド実行中のある時点で満たされない場合 (ポッドラベルの更新など)、システムは最終的にポッドをノードから削除しようとする場合としない場合があります。複数の要素がある場合、各 podAffinityTerm に対応するノードのリストが交差します。つまり、すべての条件が満たされる必要があります。
+: このフィールドで指定された非アフィニティ要件がスケジュール時に満たされない場合、ポッドはノードにスケジュールされません。このフィールドで指定された非アフィニティ要件がポッド実行中のある時点で満たされない場合 (ポッドラベルの更新など)、システムは最終的にポッドをノードから削除しようとする場合としない場合があります。複数の要素がある場合、各 podAffinityTerm に対応するノードのリストが交差します。すべての条件が満たされる必要があります。
 
 `clusterAgent.config.admissionController.enabled`
 : アドミッションコントローラーを有効にして、APM/DogStatsD コンフィギュレーションと標準タグ (env、service、version) をポッドに自動的に挿入できるようにします。
@@ -429,7 +429,7 @@ spec:
 : 作成または移行元の Cluster Agent デプロイの名前。
 
 `clusterAgent.image.name`
-: 使用するイメージを定義します。Datadog Agent 6 には `gcr.io/datadoghq/agent:latest` を使用します。スタンドアロンの Datadog Agent DogStatsD には `datadog/dogstatsd:latest` を使用します。Datadog Cluster Agent には `gcr.io/datadoghq/cluster-agent:latest` を使用します。
+: 使用するイメージを定義します。Datadog Agent 6 には `gcr.io/datadoghq/agent:latest` を使用します。スタンドアロンの Datadog Agent DogStatsD には `gcr.io/datadoghq/dogstatsd:latest` を使用します。Datadog Cluster Agent には `gcr.io/datadoghq/cluster-agent:latest` を使用します。
 
 `clusterAgent.image.pullPolicy`
 : Kubernetes プルポリシー。`Always`、`Never`、または `IfNotPresent` を使用します。
@@ -441,7 +441,7 @@ spec:
 : ポッドがノードに収まるために true でなければならないセレクター。そのノードでスケジュールされるポッドのノードのラベルと一致する必要があるセレクター。[Kubernetes のドキュメント][15]を参照してください。
 
 `clusterAgent.priorityClassName`
-: 指定されている場合、ポッドの優先度を示します。`system-node-critical` と `system-cluster-critical` は、最高の優先度を示す 2 つの特別なキーワードで、前者が最高の優先順位です。その他の名前は、その名前で `PriorityClass` オブジェクトを作成して定義する必要があります。指定しない場合、ポッドの優先度はデフォルトになり、デフォルトがない場合はゼロになります。
+: 指定されている場合、ポッドの優先度を示します。`system-node-critical` と `system-cluster-critical` は、最高の優先度を示す 2 つの特別なキーワードで、前者が最高の優先順位です。その他の名前は、その名前で `PriorityClass` オブジェクトを作成して定義する必要があります。指定しない場合、ポッドの優先度はデフォルトに設定され、デフォルトがない場合はゼロに設定されます。
 
 `clusterAgent.rbac.create`
 : RBAC リソースの作成を構成するために使用されます。
@@ -462,22 +462,22 @@ spec:
 : クラスターチェックランナーポッドに追加されるラベルを提供します。
 
 `clusterChecksRunner.affinity.nodeAffinity.preferredDuringSchedulingIgnoredDuringExecution`
-: スケジューラーは、このフィールドで指定されたアフィニティ式を満たすノードにポッドをスケジュールすることを優先しますが、1 つ以上の式に違反するノードを選択する場合があります。最も優先されるノードは、重みの合計が最大のノードです。つまり、すべてのスケジューリング要件 (リソース要求、`requiredDuringScheduling` アフィニティ式など) を満たすノードごとに、このフィールドの要素を反復処理し、ノードが対応する matchExpressions に一致する場合は合計に「重み」を追加して合計を計算します。合計が最も高いノードが最も優先されます。
+: スケジューラーは、このフィールドで指定されたアフィニティ式を満たすノードにポッドをスケジュールすることを優先しますが、1 つ以上の式に違反するノードを選択する場合があります。最も優先されるノードは、重みの合計が最大のノードです。すべてのスケジューリング要件 (リソース要求と `requiredDuringScheduling` アフィニティ式) を満たすノードごとに、このフィールドの要素を反復処理し、ノードが対応する matchExpressions に一致する場合は合計に「重み」を追加して合計を計算します。合計が最も高いノードが最も優先されます。
 
 `clusterChecksRunner.affinity.nodeAffinity.requiredDuringSchedulingIgnoredDuringExecution.nodeSelectorTerms`
 : 必須。ノードセレクター用語のリスト。用語は `OR` されています。
 
 `clusterChecksRunner.affinity.podAffinity.preferredDuringSchedulingIgnoredDuringExecution`
-: スケジューラーは、このフィールドで指定されたアフィニティ式を満たすノードにポッドをスケジュールすることを優先しますが、1 つ以上の式に違反するノードを選択する場合があります。最も優先されるノードは、重みの合計が最大のノードです。つまり、すべてのスケジューリング要件 (リソース要求、`requiredDuringScheduling` アフィニティ式など) を満たすノードごとに、このフィールドの要素を反復処理し、ノードが対応する `podAffinityTerm` に一致するポッドを持つ場合は合計に「重み」を追加して合計を計算します。合計が最も高いノードが最も優先されます。
+: スケジューラーは、このフィールドで指定されたアフィニティ式を満たすノードにポッドをスケジュールすることを優先しますが、1 つ以上の式に違反するノードを選択する場合があります。最も優先されるノードは、重みの合計が最大のノードです。すべてのスケジューリング要件 (リソース要求と `requiredDuringScheduling` アフィニティ式) を満たすノードごとに、このフィールドの要素を反復処理し、ノードが対応する `podAffinityTerm` に一致するポッドを持つ場合は合計に「重み」を追加して合計を計算します。合計が最も高いノードが最も優先されます。
 
 `clusterChecksRunner.affinity.podAffinity.requiredDuringSchedulingIgnoredDuringExecution`
-: このフィールドで指定されたアフィニティ要件がスケジュール時に満たされない場合、ポッドはノードにスケジュールされません。このフィールドで指定されたアフィニティ要件がポッド実行中のある時点で満たされない場合 (ポッドラベルの更新など)、システムは最終的にポッドをノードから削除しようとする場合としない場合があります。複数の要素がある場合、各 `podAffinityTerm` に対応するノードのリストが交差します。つまり、すべての条件が満たされる必要があります。
+: このフィールドで指定されたアフィニティ要件がスケジュール時に満たされない場合、ポッドはノードにスケジュールされません。このフィールドで指定されたアフィニティ要件がポッド実行中のある時点で満たされない場合 (ポッドラベルの更新など)、システムは最終的にポッドをノードから削除しようとする場合としない場合があります。複数の要素がある場合、各 `podAffinityTerm` に対応するノードのリストが交差します。すべての条件が満たされる必要があります。
 
 `clusterChecksRunner.affinity.podAntiAffinity.preferredDuringSchedulingIgnoredDuringExecution`
-: スケジューラーは、このフィールドで指定された非アフィニティ式を満たすノードにポッドをスケジュールすることを優先しますが、1 つ以上の式に違反するノードを選択する場合があります。最も優先されるノードは、重みの合計が最大のノードです。つまり、すべてのスケジューリング要件 (リソース要求、`requiredDuringScheduling` 非アフィニティ式など) を満たすノードごとに、このフィールドの要素を反復処理し、ノードが対応する `podAffinityTerm` に一致するポッドを持つ場合は合計に「重み」を追加して合計を計算します。合計が最も高いノードが最も優先されます。
+: スケジューラーは、このフィールドで指定された非アフィニティ式を満たすノードにポッドをスケジュールすることを優先しますが、1 つ以上の式に違反するノードを選択する場合があります。最も優先されるノードは、重みの合計が最大のノードです。すべてのスケジューリング要件 (リソース要求と `requiredDuringScheduling` 非アフィニティ式) を満たすノードごとに、このフィールドの要素を反復処理し、ノードが対応する `podAffinityTerm` に一致するポッドを持つ場合は合計に「重み」を追加して合計を計算します。合計が最も高いノードが最も優先されます。
 
 `clusterChecksRunner.affinity.podAntiAffinity.requiredDuringSchedulingIgnoredDuringExecution`
-: このフィールドで指定された非アフィニティ要件がスケジュール時に満たされない場合、ポッドはノードにスケジュールされません。このフィールドで指定された非アフィニティ要件がポッド実行中のある時点で満たされない場合 (ポッドラベルの更新など)、システムは最終的にポッドをノードから削除しようとする場合としない場合があります。複数の要素がある場合、各 podAffinityTerm に対応するノードのリストが交差します。つまり、すべての条件が満たされる必要があります。
+: このフィールドで指定された非アフィニティ要件がスケジュール時に満たされない場合、ポッドはノードにスケジュールされません。このフィールドで指定された非アフィニティ要件がポッド実行中のある時点で満たされない場合 (ポッドラベルの更新など)、システムは最終的にポッドをノードから削除しようとする場合としない場合があります。複数の要素がある場合、各 podAffinityTerm に対応するノードのリストが交差します。すべての条件が満たされる必要があります。
 
 `clusterChecksRunner.config.env`
 : Datadog Agent は、多くの[環境変数][2]をサポートしています。
@@ -510,7 +510,7 @@ spec:
 : 作成または移行元のクラスターチェックデプロイの名前。
 
 `clusterChecksRunner.image.name`
-: 使用するイメージを定義します。Datadog Agent 6 には `gcr.io/datadoghq/agent:latest` を使用します。スタンドアロンの Datadog Agent DogStatsD には `datadog/dogstatsd:latest` を使用します。Datadog Cluster Agent には `gcr.io/datadoghq/cluster-agent:latest` を使用します。
+: 使用するイメージを定義します。Datadog Agent 6 には `gcr.io/datadoghq/agent:latest` を使用します。スタンドアロンの Datadog Agent DogStatsD には `gcr.io/datadoghq/dogstatsd:latest` を使用します。Datadog Cluster Agent には `gcr.io/datadoghq/cluster-agent:latest` を使用します。
 
 `clusterChecksRunner.image.pullPolicy`
 : Kubernetes プルポリシー。`Always`、`Never`、または `IfNotPresent` を使用します。
@@ -522,7 +522,7 @@ spec:
 : ポッドがノードに収まるために true でなければならないセレクター。そのノードでスケジュールされるポッドのノードのラベルと一致する必要があるセレクター。[Kubernetes のドキュメント][15]を参照してください。
 
 `clusterChecksRunner.priorityClassName`
-: 指定されている場合、ポッドの優先度を示します。`system-node-critical` と `system-cluster-critical` は、最高の優先度を示す 2 つの特別なキーワードで、前者が最高の優先順位です。その他の名前は、その名前で `PriorityClass` オブジェクトを作成して定義する必要があります。指定しない場合、ポッドの優先度はデフォルトになり、デフォルトがない場合はゼロになります。
+: 指定されている場合、ポッドの優先度を示します。`system-node-critical` と `system-cluster-critical` は、最高の優先度を示す 2 つの特別なキーワードで、前者が最高の優先順位です。その他の名前は、その名前で `PriorityClass` オブジェクトを作成して定義する必要があります。指定しない場合、ポッドの優先度はデフォルトに設定され、デフォルトがない場合はゼロに設定されます。
 
 `clusterChecksRunner.rbac.create`
 : RBAC リソースの作成を構成するために使用されます。

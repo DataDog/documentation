@@ -49,6 +49,8 @@ In addition to the 'Spans Indexed' column per retention filter, there is also th
 
 For more information, refer to the [Usage Metrics][1] documentation, or see the [dashboard][3] available in your account.
 
+<div class="alert alert-info"><strong>Note</strong>: Retention filters do not affect what traces are collected by the Agent and sent to Datadog ("ingested"). The only way to change how much tracing data is ingested is through <a href="#ingestion-controls">ingestion controls</a>.</div>
+
 ### Datadog intelligent retention filter
 
 Intelligent retention is always active for your services, and it keeps a proportion of traces to help you monitor the health of your applications. All [service entry spans][4] are indexed for the traces kept by the intelligent retention filter.
@@ -60,7 +62,7 @@ For 30 days, intelligent retention retains:
  - All Resources with any traffic will have associated Traces in the past for any time window selection.
  - True maximum duration trace for each time window.
 
-**Note**: Because intelligent retention is not indiscriminate when choosing what spans to retain, spans that are retained only by the intelligent filter are _not_ included in trace analytics. Trace analytics is available only for spans retained by [custom retention filters](#create-your-own-retention-filter).
+**Note**: Because intelligent retention chooses spans intentionally and not randomly, spans that are retained only by the intelligent filter are _not_ included in trace analytics. Trace analytics is available only for spans retained by [custom retention filters](#create-your-own-retention-filter).
 
 If there are specific tags, facets, or groups of traces that you want to investigate _in detail_, meaning you want to retain more than what Intelligent Retention retains, then [create your own retention filter](#create-your-own-retention-filter). For example, you might want to keep more than a representative selection of errors from your production environment. To ensure _all_ production errors are retained and available for search and analytics for 15 days, create a 100 percent retention filter scoped to `env:prod` and `status:error`. As discussed below, this may have an impact on your bill.
 

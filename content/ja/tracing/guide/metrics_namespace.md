@@ -177,19 +177,28 @@ aliases:
 
 ### Apdex
 
+`trace.<SPAN_NAME>.apdex`
+: **前提条件:** このメトリクスは、すべての HTTP/WEB APM サービスに存在します。
+<br>
+**説明:** 各ウェブサービスの [Apdex][9] スコアを計測します。<br>
+**メトリクスタイプ:** [GAUGE][6]。<br>
+**タグ:** `env`、`service`、`resource` / `resource_name`、`version`、`synthetics`、[第 2 プライマリタグ][4]。
+
+**次のレガシー apdex メトリクスは非推奨になりました。**
+
 `trace.<SPAN_NAME>.apdex.by.resource_<2ND_PRIM_TAG>_service`
 : **前提条件:** このメトリクスは、すべての HTTP/WEB APM サービスに存在します。
 <br>
 **説明:** リソース、[第 2 プライマリタグ][4]、サービスのすべての組み合わせの [Apdex][9] スコアを表します。<br>
 **メトリクスタイプ:** [GAUGE][6]。<br>
-**タグ:** `env`、`service`、`resource`、[第 2 プライマリタグ][4]。
+**タグ:** `env`、`service`、`resource` / `resource_name`、[第 2 プライマリタグ][4]。
 
 `trace.<SPAN_NAME>.apdex.by.resource_service`
 : **前提条件:** このメトリクスは、すべての HTTP/WEB APM サービスに存在します。
 <br>
 **説明:** リソースとウェブサービスの各組み合わせの [Apdex][9] スコアを計測します。<br>
 **メトリクスタイプ:** [GAUGE][6]。<br>
-**タグ:** `env`、`service`、`resource`
+**タグ:** `env`、`service`、`resource` / `resource_name`。
 
 `trace.<SPAN_NAME>.apdex.by.<2ND_PRIM_TAG>_service`
 : **前提条件:** このメトリクスは、すべての HTTP/WEB APM サービスに存在します。
@@ -213,8 +222,8 @@ aliases:
 [2]: /ja/tracing/setup/
 [3]: /ja/tracing/visualization/#trace-metrics
 [4]: /ja/tracing/guide/setting_primary_tags_to_scope/#add-a-second-primary-tag-in-datadog
-[5]: /ja/developers/metrics/types/?tab=count#metric-types
-[6]: /ja/developers/metrics/types/?tab=gauge#metric-types
+[5]: /ja/metrics/types/?tab=count#metric-types
+[6]: /ja/metrics/types/?tab=gauge#metric-types
 [7]: /ja/tracing/visualization/services_list/#services-types
 [8]: /ja/tracing/visualization/#services
 [9]: /ja/tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm/

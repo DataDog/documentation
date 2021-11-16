@@ -26,11 +26,13 @@ If not already configured, install the [AWS integration][1]. This allows Datadog
 
 If you previously set up Datadog Serverless using the Datadog Forwarder, see the [installation instructions][2].
 
+If your Go Lambda functions are still using runtime `go1.x`, consider either [migrating][3] to `provided.al2` or using the [Datadog Forwarder][2] instead of the Datadog Lambda Extension.
+
 ## Configuration
 
 ### Install the Datadog Lambda library
 
-Install the [Datadog Lambda library][3] locally by running the following command:
+Install the [Datadog Lambda library][4] locally by running the following command:
 
 ```
 go get github.com/DataDog/datadog-lambda-go
@@ -42,12 +44,18 @@ Add the Datadog Lambda Extension layer for your Lambda function using the ARN in
 
 {{< site-region region="us,us3,eu" >}}
 ```
+// For x86 lambdas
 arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:<EXTENSION_VERSION>
+// For arm64 lambdas
+arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension-ARM:<EXTENSION_VERSION>
 ```
 {{< /site-region >}}
 {{< site-region region="gov" >}}
 ```
+// For x86 lambdas
 arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension:<EXTENSION_VERSION>
+// For arm64 lambdas
+arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension-ARM:<EXTENSION_VERSION>
 ```
 {{< /site-region >}}
 
@@ -57,8 +65,8 @@ The latest `EXTENSION_VERSION` is {{< latest-lambda-layer-version layer="extensi
 
 Follow these steps to instrument the function:
 
-1. Set the environment variable `DD_API_KEY` to your Datadog API key from [API Management][4]. 
-1. Set environment variable `DD_FLUSH_TO_LOG` and `DD_TRACE_ENABLED` to `true`.
+1. Set the environment variable `DD_API_KEY` to your Datadog API key from [API Management][5].
+1. Set the environment variable `DD_TRACE_ENABLED` to `true`.
 1. Import the required packages in the file declaring your Lambda function handler.
 
     ```go
@@ -76,9 +84,9 @@ Follow these steps to instrument the function:
     ```go
     func main() {
       // Wrap your lambda handler like this
-      lambda.Start(ddlambda.WrapHandler(myHandler, nil))
+      lambda.Start(ddlambda.WrapFunction(myHandler, nil))
       /* OR with manual configuration options
-      lambda.Start(ddlambda.WrapHandler(myHandler, &ddlambda.Config{
+      lambda.Start(ddlambda.WrapFunction(myHandler, &ddlambda.Config{
         BatchInterval: time.Second * 15
         APIKey: "my-api-key",
       }))
@@ -107,11 +115,11 @@ Follow these steps to instrument the function:
 
 ### Tag
 
-Although it's optional, Datadog highly recommends tagging you serverless applications with the `env`, `service`, and `version` tags following the [unified service tagging documentation][5].
+Optionally, tag your serverless applications with `env`, `service`, and `version`. For more information, see the [Unified Service Tagging documentation][6].
 
 ## Explore
 
-After configuring your function following the steps above, view your metrics, logs, and traces on the [Serverless homepage][6].
+After configuring your function following the steps above, view your metrics, logs, and traces on the [Serverless homepage][7].
 
 ## Monitor custom business logic
 
@@ -127,7 +135,7 @@ import (
 
 func main() {
   // Wrap your handler function
-  lambda.Start(ddlambda.WrapHandler(myHandler, nil))
+  lambda.Start(ddlambda.WrapFunction(myHandler, nil))
 }
 
 func myHandler(ctx context.Context, event MyEvent) (string, error) {
@@ -145,7 +153,7 @@ func myHandler(ctx context.Context, event MyEvent) (string, error) {
     time.Now(), // Timestamp, must be within last 20 mins
     "product:latte", "order:online" // Associated tags
   )
-  
+
   req, err := http.NewRequest("GET", "http://example.com/status")
 
   // Add the datadog distributed tracing headers
@@ -156,7 +164,9 @@ func myHandler(ctx context.Context, event MyEvent) (string, error) {
 }
 ```
 
-For more information on custom metric submission, see [here][7].
+For more information, see the [Custom Metrics documentation][8].
+
+If your Lambda function is running in a VPC, follow the [Datadog Lambda Extension AWS PrivateLink Setup][9] guide to ensure that the extension can reach Datadog API endpoints.
 
 ## Further Reading
 
@@ -164,8 +174,10 @@ For more information on custom metric submission, see [here][7].
 
 [1]: /integrations/amazon_web_services/
 [2]: /serverless/guide/datadog_forwarder_go
-[3]: https://github.com/DataDog/datadog-lambda-go
-[4]: https://app.datadoghq.com/account/settings#api
-[5]: /getting_started/tagging/unified_service_tagging/#aws-lambda-functions
-[6]: https://app.datadoghq.com/functions
-[7]: /serverless/custom_metrics?tab=go
+[3]: https://aws.amazon.com/blogs/compute/migrating-aws-lambda-functions-to-al2/
+[4]: https://github.com/DataDog/datadog-lambda-go
+[5]: https://app.datadoghq.com/organization-settings/api-keys
+[6]: /getting_started/tagging/unified_service_tagging/#aws-lambda-functions
+[7]: https://app.datadoghq.com/functions
+[8]: /serverless/custom_metrics?tab=go
+[9]: /serverless/guide/extension_private_link/

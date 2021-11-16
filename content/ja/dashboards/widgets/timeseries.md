@@ -14,7 +14,7 @@ further_reading:
   - link: /dashboards/graphing_json/
     tag: ドキュメント
     text: JSON を使用したダッシュボードの構築
-  - link: 'https://www.datadoghq.com/blog/full-screen-graphs'
+  - link: https://www.datadoghq.com/blog/full-screen-graphs
     tag: ブログ
     text: 全画面モードでグラフを表示しデータを調べる
 ---
@@ -24,13 +24,13 @@ further_reading:
 
 ## セットアップ
 
-{{< img src="dashboards/widgets/timeseries/timeseries_setup.png" alt="時系列のセットアップ"  style="width:80%;" >}}
+{{< img src="dashboards/widgets/timeseries/timeseries_setup.png" alt="時系列のセットアップ" style="width:80%;" >}}
 
 ### コンフィギュレーション
 
 1. グラフ化するデータを選択します。
     * メトリクス:  メトリクスクエリの構成については、[クエリ][3]に関するドキュメントを参照してください。
-    * Indexed Span : Indexed Span クエリの構成については、[トレース検索に関するドキュメント][4]を参照してください。
+    * Indexed Span: Indexed Span クエリの構成については、[トレース検索に関するドキュメント][4]を参照してください。
     * ログイベント: ログイベントクエリの構成については、[ログ検索に関するドキュメント][5]を参照してください。
 
 2. [オプション](#options)を使用して、グラフをカスタマイズします。
@@ -65,7 +65,7 @@ further_reading:
 
 任意の[絞り込みタグ][6]を使用して、クエリまたは式ごとにエイリアスを作成できます。エイリアスは、グラフや凡例の表示を上書きし、メトリクス名やフィルターのリストが長い場合に便利です。クエリ/式の末尾にある **as...** をクリックして、メトリクスのエイリアスを入力します。
 
-{{< img src="dashboards/querying/metric_alias.png" alt="メトリクスエイリアス"  style="width:75%;" >}}
+{{< img src="dashboards/querying/metric_alias.png" alt="メトリクスエイリアス" style="width:75%;" >}}
 
 ##### イベントオーバーレイ
 
@@ -77,15 +77,15 @@ further_reading:
 | `tag:role:web`              | タグ `role:web` が付いたすべてのイベントを表示します。                  |
 | `tags:$<TEMPLATE_VARIABLE>` | 選択された[テンプレート変数][8]から取得されたすべてのイベントを表示します。 |
 
-有効になると、イベントがグラフに赤いバーで重ねて表示されます。
+有効にすると、イベントがグラフに赤いバーで重ねて表示されます。
 
-{{< img src="dashboards/widgets/timeseries/event_overlay.png" alt="イベントを重ねて表示"  style="width:75%;" >}}
+{{< img src="dashboards/widgets/timeseries/event_overlay.png" alt="イベントを重ねて表示" style="width:75%;" >}}
 
 ##### 凡例のコンフィギュレーション
 
 グラフエディタの凡例セクションでオプションから 1 つ選択し、スクリーンボードに構成可能な凡例を追加します。
 
-{{< img src="dashboards/widgets/timeseries/legend-config.jpg" alt="凡例のコンフィギュレーション"  style="width:100%;" >}}
+{{< img src="dashboards/widgets/timeseries/legend-config.jpg" alt="凡例のコンフィギュレーション" style="width:100%;" >}}
 
 オプション
 
@@ -98,7 +98,7 @@ further_reading:
 
 ##### Y 軸コントロール
 
-Y 軸コントロールは、UI または JSON エディターから使用できます。以下を実行できます。
+Y 軸の制御は、UI または JSON エディターから使用できます。以下を実行できます。
 
 * 可視化のために 1 つ以上のデータセットを含む 2 つ目の Y 軸を追加します。
 * Y 軸を特定の範囲にクリップできます。

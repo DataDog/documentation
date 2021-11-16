@@ -14,7 +14,7 @@ further_reading:
 
 ---
 
-## Overview 
+## Overview
 
 The Datadog Agent can be used along with [Vector][1]. In this scenario Agents send data
 to Vector, which aggregates data from multiple upstream Agents:
@@ -45,7 +45,8 @@ Only the logs data type is supported. Update the following values in the `datado
 logs_config:
   logs_dd_url: "<VECTOR_HOST>:<VECTOR_PORT>"
   logs_no_ssl: true # If TLS/SSL is not enabled on the Vector side
-  use_http: true # Vector `datadog_logs` source only supports HTTP
+  use_http: true # Vector `datadog_logs` source only supports events over HTTP(S) and not raw TCP
+  # use_v2_api: false # Uncomment this line if you use a version of Vector before v0.17.0
 ```
 
 Where `VECTOR_HOST` is the hostname of the system running Vector and `VECTOR_PORT` is the TCP port on which
@@ -63,7 +64,7 @@ Here is a configuration example that adds a tag to every log using the Vector Re
 ```yaml
 sources:
   datadog_agents:
-    type: datadog_logs
+    type: datadog_agent
     address: "[::]:8080" # The <VECTOR_PORT> mentioned above should be set to the port value used here
 
 transforms:
@@ -72,7 +73,9 @@ transforms:
     inputs:
       - datadog_agents
     source: |
-      .ddtags = .ddtags + ",sender:vector"
+      # The `!` shorthand is used here with the `string` function, it errors if .ddtags is not a "string".
+      # The .ddtags field is always expected to be a string.
+      .ddtags = string!(.ddtags) + ",sender:vector"
 
 sinks:
   to_datadog:
@@ -86,7 +89,7 @@ sinks:
 
 ### Using Kubernetes
 
-Using the official Datadog chart the [Agent configuration settings](#agent-configuration) described above can be added 
+Using the official Datadog chart the [Agent configuration settings](#agent-configuration) described above can be added
 to the `agents.customAgentConfig` value. **Note**: `agent.useConfigMap` must be set to `true`
 for `agents.customAgentConfig` to be taken into account.
 
@@ -98,7 +101,7 @@ see to the [official Vector documentation][15].
 
 To send logs to Datadog, a `datadog_logs` sink need to be added to the Vector
 configuration. Vector's chart can hold any valid Vector configuration in the `values.yaml` file using the
-`customConfig` field. To enable `datadog_logs` the same kind of configuration as 
+`customConfig` field. To enable `datadog_logs` the same kind of configuration as
 described under [Vector configuration](#vector-configuration) can be directly included as-is in the Vector chart configuration.
 
 ## Manipulating Datadog logs with Vector
@@ -109,7 +112,7 @@ submitting logs directly to the Datadog API, see the [API documentation][16]
 for a complete schema description.
 
 Logs collected by Vector from other sources can be [fully enriched][8]. VRL can be used to adjust those logs
-to fill relevant fields according to the expected schema. 
+to fill relevant fields according to the expected schema.
 
 ## Further Reading
 
@@ -124,10 +127,10 @@ to fill relevant fields according to the expected schema.
 [7]: https://vector.dev/docs/reference/configuration/transforms/route/
 [8]: /getting_started/tagging
 [9]: https://vector.dev/docs/reference/vrl/
-[10]: https://vector.dev/docs/reference/configuration/sources/datadog_logs/
+[10]: https://vector.dev/docs/reference/configuration/sources/datadog_agent/
 [11]: https://vector.dev/docs/reference/configuration/sinks/datadog_logs/
 [12]: https://vector.dev/docs/reference/configuration/
 [13]: /agent/kubernetes/?tab=helm
-[14]: https://github.com/timberio/vector/tree/master/distribution/helm/vector-aggregator
+[14]: https://github.com/timberio/helm-charts/tree/master/charts/vector-aggregator
 [15]: https://vector.dev/docs/setup/installation/package-managers/helm/
-[16]: api/latest/logs/#send-logs
+[16]: /api/latest/logs/#send-logs

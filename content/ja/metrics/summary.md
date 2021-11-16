@@ -125,9 +125,9 @@ further_reading:
 [1]: https://app.datadoghq.com/metric/summary
 [2]: /ja/metrics/explorer/
 [3]: /ja/dashboards/
-[4]: /ja/developers/metrics/custom_metrics/
+[4]: /ja/metrics/custom_metrics/
 [5]: /ja/getting_started/tagging/
 [6]: /ja/api/v1/metrics/#edit-metric-metadata
-[7]: /ja/developers/metrics/units/
-[8]: /ja/developers/metrics/types/
+[7]: /ja/metrics/units/
+[8]: /ja/metrics/types/
 [9]: /ja/integrations/

@@ -19,7 +19,7 @@ integration_title: Redis Sentinel
 is_public: true
 kind: インテグレーション
 maintainer: '@krasnoukhov'
-manifest_version: 1.1.0
+manifest_version: 1.0.0
 metric_prefix: redis.
 metric_to_check: redis.sentinel.known_sentinels
 name: redis_sentinel
@@ -77,38 +77,13 @@ Agent v6.8 以降を使用している場合は、以下の手順に従って、
 Redis の Sentinel チェックには、イベントは含まれません。
 
 ### サービスのチェック
+{{< get-service-checks-from-git "redis_sentinel" >}}
 
-**`redis.sentinel.master_is_down`**
-
-チェックは次の内容を返します。
-
-- マスターが動作している場合は、`OK`。
-- マスターが停止している場合は、`CRITICAL`。
-
-**`redis.sentinel.master_is_disconnected`**
-
-チェックは次の内容を返します。
-
-- マスターが切断されていない場合は、`OK`。
-- マスターが切断されている場合は、`CRITICAL`。
-
-**`redis.sentinel.slave_master_link_down`**
-
-チェックは次の内容を返します。
-
-- マスターのリンクステータスが OK の場合は、`OK`。
-- マスターのリンクステータスが OK でない場合は、`CRITICAL`。
-
-**`redis.sentinel.slave_is_disconnected`**
-
-チェックは次の内容を返します。
-
-- スレーブが切断されていない場合は、`OK`。
-- スレーブが切断されている場合は、`CRITICAL`。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][13]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][12]までお問合せください。
+
 
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://docs.datadoghq.com/ja/agent/guide/community-integrations-installation-with-docker-agent/
@@ -120,3 +95,5 @@ Redis の Sentinel チェックには、イベントは含まれません。
 [8]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [9]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#service-status
 [10]: https://github.com/DataDog/integrations-extras/blob/master/redis_sentinel/metadata.csv
+[11]: https://github.com/DataDog/integrations-extras/blob/master/redis_sentinel/assets/service_checks.json
+[12]: http://docs.datadoghq.com/help

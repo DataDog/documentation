@@ -54,9 +54,9 @@ With both of those webhooks set, you can go to your monitors (the ones your team
 {{#is_recovery}} @webhook-mymonitorgroup-ok-check {{/is_recovery}}
 ```
 
-Once your monitors are set and alerting (they'll all need to alert at least once in either OK or CRITICAL state in order to be included in the complete status count), you can then set up a "check status" widget in a [screenboard][4] over your "mymonitorgroup.check"—grouped out by, in this case, the "monitor" tag.
+Once your monitors are set and alerting (they need to alert at least once in either OK or CRITICAL state in order to be included in the complete status count), you can then set up a "check status" widget in a [screenboard][4] over your "mymonitorgroup.check"—grouped out by, in this case, the "monitor" tag.
 
-Here's an example of one such widget (although in this example, the check's name was "composite.status" and only one monitor in our group has yet triggered as "alert" and then "ok" again):
+Here's an example of one such widget (although in this example, the check's name was "composite.status" and only one monitor in the group has yet triggered as "alert" and then "ok" again):
 
 {{< img src="developers/faq/check_status_editor.png" alt="check_status_editor"  >}}
 

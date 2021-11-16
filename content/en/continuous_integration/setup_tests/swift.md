@@ -10,7 +10,10 @@ further_reading:
       text: "Troubleshooting CI"
 ---
 
-{{< site-region region="us,eu" >}}
+{{< site-region region="us5,gov" >}}
+<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
+{{< /site-region >}}
+
 ## Compatibility
 
 Supported languages:
@@ -18,16 +21,16 @@ Supported languages:
 * Objective-C >= 2.0
 
 Supported platforms:
-* iOS >= 12.0
+* iOS >= 11.0
 * macOS >= 10.13
-* tvOS >= 12.0
+* tvOS >= 11.0
 
 ## Installing the Swift testing SDK
 
 There are two ways of installing the testing framework:
 
 {{< tabs >}}
-{{% tab "Using Swift Package Manager" %}}
+{{% tab "Swift Package Manager" %}}
 
 1. Add `dd-sdk-swift-testing` package to your project. It is located at [`https://github.com/DataDog/dd-sdk-swift-testing`][1].
 
@@ -43,7 +46,25 @@ There are two ways of installing the testing framework:
 
 [1]: https://github.com/DataDog/dd-sdk-swift-testing
 {{% /tab %}}
-{{% tab "Adding the framework directly" %}}
+{{% tab "Cocoapods" %}}
+
+1. Add the `DatadogSDKTesting` dependency to the test targets of your `Podfile`:
+
+{{< code-block lang="ruby" >}}
+target 'MyApp' do
+  # ...
+
+  target 'MyAppTests' do
+    inherit! :search_paths
+    pod 'DatadogSDKTesting'
+  end
+end
+{{< /code-block >}}
+
+2. If you run UITests, also add the dependency to the app running the tests.
+
+{{% /tab %}}
+{{% tab "Framework linking" %}}
 
 1. Download and decompress `DatadogSDKTesting.zip` from the [release][1] page.
 
@@ -53,17 +74,17 @@ There are two ways of installing the testing framework:
 
 3. If you run UITests, also link the app running the tests with this library.
 
-
 [1]: https://github.com/DataDog/dd-sdk-swift-testing/releases
 {{% /tab %}}
 {{< /tabs >}}
+<div class="alert alert-warning"><strong>Note</strong>: This framework is useful only for testing and should only be linked with the application when running tests. Do not distribute the framework to your users. </div>
 
 
 ## Instrumenting your tests
 
 ### Configuring Datadog
 
-To enable testing instrumentation, add the following environment variables to your test target. You must also select your main target in `Expand variables based on` or `Target for Variable Expansion` if using test plans:
+To enable testing instrumentation, add the following environment variables to your test target (or in the `Info.plist` file as [described below](#using-infoplist-for-configuration)). You must also select your main target in `Expand variables based on` or `Target for Variable Expansion` if using test plans:
 
 {{< img src="continuous_integration/swift_env.png" alt="Swift Environments" >}}
 
@@ -99,44 +120,95 @@ Set all these variables in your test target:
 **Recommended**: `$(SRCROOT)`<br/>
 **Example**: `/Users/ci/source/MyApp`
 
-{{< site-region region="eu" >}}
+{{< site-region region="eu,us3" >}}
 Additionally, configure the Datadog site to use the selected one ({{< region-param key="dd_site_name" >}}):
 
 `DD_SITE` (Required)
-: The [Datadog site][1] to upload results to.<br/>
+: The Datadog site to upload results to.<br/>
 **Default**: `datadoghq.com`<br/>
 **Selected site**: {{< region-param key="dd_site" code="true" >}}
-
-[1]: /getting_started/site/
 {{< /site-region >}}
 
-### Collecting Git and build metadata
+### Collecting Git metadata
 
-Git metadata and build information is automatically collected using CI provider environment variables, that must be forwarded to the test application (see the section [CI provider environment variables](#CI-provider-environment-variables) below for a full list).
+Datadog uses Git information for visualizing your test results and grouping them by repository, branch, and commit. Git metadata is automatically collected using CI provider environment variables, that must be forwarded to the test application (see the section [CI provider environment variables](#CI-provider-environment-variables) below for a full list).
 
 When running tests in a simulator, full Git metadata is collected using the local `.git` folder. In this case, Git-related environment variables don't have to be forwarded.
+
+If you are running tests in non-supported CI providers or with no `.git` folder, you can set the Git information manually using environment variables. These environment variables take precedence over any auto-detected information. Set the following environment variables to provide Git information:
+
+`DD_GIT_REPOSITORY_URL`
+: URL of the repository where the code is stored. Both HTTP and SSH URLs are supported.<br/>
+**Example**: `git@github.com:MyCompany/MyApp.git`
+
+`DD_GIT_BRANCH`
+: Git branch being tested. Leave empty if providing tag information instead.<br/>
+**Example**: `develop`
+
+`DD_GIT_TAG`
+: Git tag being tested (if applicable). Leave empty if providing branch information instead.<br/>
+**Example**: `1.0.1`
+
+`DD_GIT_COMMIT_SHA`
+: Full commit hash.<br/>
+**Example**: `a18ebf361cc831f5535e58ec4fae04ffd98d8152`
+
+`DD_GIT_COMMIT_MESSAGE`
+: Commit message.<br/>
+**Example**: `Set release number`
+
+`DD_GIT_COMMIT_AUTHOR_NAME`
+: Commit author name.<br/>
+**Example**: `John Smith`
+
+`DD_GIT_COMMIT_AUTHOR_EMAIL`
+: Commit author email.<br/>
+**Example**: `john@example.com`
+
+`DD_GIT_COMMIT_AUTHOR_DATE`
+: Commit author date in ISO 8601 format.<br/>
+**Example**: `2021-03-12T16:00:28Z`
+
+`DD_GIT_COMMIT_COMMITTER_NAME`
+: Commit committer name.<br/>
+**Example**: `Jane Smith`
+
+`DD_GIT_COMMIT_COMMITTER_EMAIL`
+: Commit committer email.<br/>
+**Example**: `jane@example.com`
+
+`DD_GIT_COMMIT_COMMITTER_DATE`
+: Commit committer date in ISO 8601 format.<br/>
+**Example**: `2021-03-12T16:00:28Z`
 
 ### Running tests
 
 After installation, run your tests as you normally do, for example using the `xcodebuild test` command. Tests, network requests, and application logs are instrumented automatically. Pass your environment variables when running your tests in the CI, for example:
 
 {{< site-region region="us" >}}
-{{< code-block lang="bash" >}}
+<pre class="chroma">
+<code class="language-bash" data-lang="bash">
 DD_TEST_RUNNER=1 DD_ENV=ci xcodebuild \
   -project "MyProject.xcodeproj" \
   -scheme "MyScheme" \
   -destination "platform=macOS,arch=x86_64" \
   test
-{{< /code-block >}}
+</code>
+</pre>
 {{< /site-region >}}
-{{< site-region region="eu" >}}
-{{< code-block lang="bash" >}}
-DD_TEST_RUNNER=1 DD_ENV=ci DD_SITE=datadoghq.eu xcodebuild \
+{{< site-region region="eu,us3" >}}
+<pre class="chroma">
+<code class="language-bash" data-lang="bash">
+DD_TEST_RUNNER=1 DD_ENV=ci DD_SITE={{< region-param key="dd_site" >}} xcodebuild \
   -project "MyProject.xcodeproj" \
   -scheme "MyScheme" \
   -destination "platform=macOS,arch=x86_64" \
   test
-{{< /code-block >}}
+</code>
+</pre>
+{{< /site-region >}}
+{{< site-region region="us5,gov" >}}
+<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
 ### UI tests
@@ -151,7 +223,7 @@ For the following configuration settings:
 
 ### Disabling auto-instrumentation
 
-The framework enables auto-instrumentation of all supported libraries, but in some cases this might not be desired. You can disable auto-instrumentation of certain libraries by setting the following environment variables:
+The framework enables auto-instrumentation of all supported libraries, but in some cases this might not be desired. You can disable auto-instrumentation of certain libraries by setting the following environment variables (or in the `Info.plist` file as [described below](#using-infoplist-for-configuration)):
 
 `DD_DISABLE_NETWORK_INSTRUMENTATION`
 : Disables all network instrumentation (Boolean)
@@ -189,6 +261,44 @@ For Network auto-instrumentation, you can configure these additional settings:
 : Sets the maximum size reported from the payload. Default `1024` (Integer)
 
 You can also disable or enable specific auto-instrumentation in some of the tests from Swift or Objective-C by importing the module `DatadogSDKTesting` and using the class: `DDInstrumentationControl`.
+
+## Custom tags
+
+### Environment variables
+
+You can use `DD_TAGS` environment variable  (or in the `Info.plist` file as [described below](#using-infoplist-for-configuration)). It must contain pairs of `key:tag` separated by spaces. For example:
+{{< code-block lang="bash" >}}
+DD_TAGS=tag-key-0:tag-value-0 tag-key-1:tag-value-1
+{{< /code-block >}}
+
+If one of the values starts with the `$` character, it is replaced with an environment variable of the same name (if it exists), for example:
+{{< code-block lang="bash" >}}
+DD_TAGS=home:$HOME
+{{< /code-block >}}
+
+Using the `$` character also supports replacing an environment variable at the beginning of a value if contains non-environment variable supported characters (`a-z`,  `A-Z` or `_`), for example:
+{{< code-block lang="bash" >}}
+FOO = BAR
+DD_TAGS=key1:$FOO-v1 // expected: key1:BAR-v1
+{{< /code-block >}}
+
+### OpenTelemetry
+
+**Note**: Using OpenTelemetry is only supported for Swift.
+
+Datadog Swift testing framework uses [OpenTelemetry][2] as the tracing technology under the hood. You can access the OpenTelemetry tracer using `DDInstrumentationControl.openTelemetryTracer` and use any OpenTelemetry API. For example, to add a tag or attribute:
+
+{{< code-block lang="swift" >}}
+let tracer = DDInstrumentationControl.openTelemetryTracer
+tracer?.activeSpan?.setAttribute(key: "OTelTag", value: "OTelValue")
+{{< /code-block >}}
+
+The test target needs to link explicitly with `opentelemetry-swift`.
+
+
+## Using Info.plist for configuration
+
+Alternatively to setting environment variables, all configuration values can be provided by adding them to the `Info.plist` file of the Test bundle (not the App bundle). If the same setting is set both in an environment variable and in the `Info.plist` file, the environment variable takes precedence.
 
 ## CI provider environment variables
 
@@ -258,6 +368,8 @@ Additional Git configuration for physical device testing:
 | `CI_COMMIT_BRANCH`   | `$(CI_COMMIT_BRANCH)`  |
 | `CI_COMMIT_TAG`      | `$(CI_COMMIT_TAG)`     |
 | `CI_COMMIT_MESSAGE`  | `$(CI_COMMIT_MESSAGE)` |
+| `CI_COMMIT_AUTHOR`  | `$(CI_COMMIT_AUTHOR)` |
+| `CI_COMMIT_TIMESTAMP`  | `$(CI_COMMIT_TIMESTAMP)` |
 
 {{% /tab %}}
 {{% tab "Travis" %}}
@@ -383,6 +495,8 @@ Additional Git configuration for physical device testing:
 | `SYSTEM_TEAMFOUNDATIONSERVERURI` | `$(SYSTEM_TEAMFOUNDATIONSERVERURI)` |
 | `SYSTEM_JOBID`                   | `$(SYSTEM_JOBID)`                   |
 | `SYSTEM_TASKINSTANCEID`          | `$(SYSTEM_TASKINSTANCEID)`          |
+| `SYSTEM_JOBDISPLAYNAME`          | `$(SYSTEM_JOBDISPLAYNAME)`          |
+| `SYSTEM_STAGEDISPLAYNAME`          | `$(SYSTEM_STAGEDISPLAYNAME)`          |
 
 Additional Git configuration for physical device testing:
 
@@ -434,7 +548,3 @@ Additional Git configuration for physical device testing:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/organization-settings/client-tokens
-{{< /site-region >}}
-{{< site-region region="us3,gov" >}}
-The selected Datadog site ({{< region-param key="dd_site_name" >}}) is not supported at this time.
-{{< /site-region >}}

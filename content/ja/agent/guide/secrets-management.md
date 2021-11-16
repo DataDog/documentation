@@ -18,11 +18,11 @@ Agent は、`secrets` パッケージを利用してユーザー指定の実行�
 
 `ENC[]` 表記を使用して、構成内の任意の YAML フィールドの値としてシークレットを示します。
 
-シークレットは、あらゆる構成バックエンド（ファイル、etcd、consul など）および環境変数でサポートされています。
+シークレットは、ファイル、etcd、consul などのあらゆる構成バックエンドおよび環境変数でサポートされています。
 
 また、シークレットは `datadog.yaml` でもサポートされています。Agent は最初にメイン構成をロードし、シークレットを復号化した後にそれをリロードします。これは、シークレットを `secret_*` 設定で使用できないことを意味します。
 
-シークレットは常に文字列です。つまり、シークレットを使用して整数またはブール値を設定することはできません。
+シークレットは常に文字列です。シークレットを使用して整数またはブール値を設定することはできません。
 
 例:
 
@@ -252,6 +252,14 @@ Kubernetes では、ポッド内で[シークレットをファイルとして�
 DD_SECRET_BACKEND_COMMAND=/readsecret.py
 DD_SECRET_BACKEND_ARGUMENTS=/etc/secret-volume
 ```
+
+**注**: Datadog Cluster Agent は Datadog Agent とは異なるコマンドを使用します:
+
+```
+DD_SECRET_BACKEND_COMMAND=/readsecret.sh
+DD_SECRET_BACKEND_ARGUMENTS=/etc/secret-volume
+```
+Datadog Cluster Agent はまた、シークレットヘルパーのコマンドも異なるものを使用します。Node Agent で使用する `agent secret` の代わりに、Cluster Agent では `cluster-agent secret-helper` が用いられます。
 
 この例のようにリンクさせると、パスワードフィールドが `/etc/secret-volume/password` ファイルに格納され、`ENC[password]` トークンを介してアクセス可能になります。
 

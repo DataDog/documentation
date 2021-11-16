@@ -105,7 +105,7 @@ This is an example of using a custom Agent check to send one event periodically.
 
 7. Finally, go to your [Datadog Event stream][5] to see your events:
 
-{{< img src="developers/events/agent_check/event_stream_example.png" alt="Event stream example"  style="width:80%;">}}
+{{< img src="developers/events/agent_check/event_stream_example.png" alt="Event stream example" style="width:80%;">}}
 
 ## Further reading
 

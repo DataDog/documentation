@@ -129,14 +129,14 @@ This section sets the record straight (for the Docs site, not for all humankind)
 ### Commas
 
 Use the Oxford/Harvard/serial comma:
-- **Not recommended**: "Metrics, events and service checks".
 - **Recommended**: "Metrics, events, and service checks."
+- **Not recommended**: "Metrics, events and service checks".
 
 ### Dashes
 
 Use the em dash (—) with no spaces between adjacent words
-- **Not recommended**: "The rest - Ok, Skipped, and No Data - are not alert-worthy".
 - **Recommended**: "The rest—Ok, Skipped, and No Data—are not alert-worthy."
+- **Not recommended**: "The rest - Ok, Skipped, and No Data - are not alert-worthy".
 
 ### Spaces
 

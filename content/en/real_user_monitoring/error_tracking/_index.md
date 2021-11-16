@@ -10,7 +10,7 @@ further_reading:
   text: "Official repository of the Datadog CLI"
 - link: "/real_user_monitoring/guide/upload-javascript-source-maps"
   tag: "Guide"
-  text: "Upload javascript source maps"
+  text: "Upload Javascript source maps"
 - link: "https://app.datadoghq.com/error-tracking"
   tag: "UI"
   text: "Error tracking"

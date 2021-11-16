@@ -28,7 +28,7 @@ Most of the time the symptoms can be alleviated by tweaking some configuration o
 
 ### Use Datadog official clients
 
-We recommend that you use the latest version of the [official DogStatsD clients][3] provided by Datadog for every major programming language.
+Datadog recommends using the latest version of the [official DogStatsD clients][3] for every major programming language.
 
 ### Enable buffering on your client
 
@@ -50,7 +50,7 @@ package main
 
 import (
         "log"
-        "github.com/DataDog/datadog-go/statsd"
+        "github.com/DataDog/datadog-go/v5/statsd"
 )
 
 func main() {
@@ -68,26 +68,27 @@ func main() {
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
 
-By using Datadog's official Python library [datadogpy][1], the example below uses a buffered DogStatsD client that sends metrics in a minimal number of packets. In client versions v0.43.0 and higher, buffering is enabled by default and automatic flushing is performed at packet size limit and every 300ms (configurable).
+By using Datadog's official Python library [datadogpy][1], the example below uses a buffered DogStatsD client that sends metrics in a minimal number of packets. With buffering automatic flushing is performed at packet size limit and every 300ms (configurable).
 
 ```python
 from datadog import DogStatsd
 
-dsd = DogStatsd(host="127.0.0.1", port=8125)
 
-# If using client v0.43.0+, buffering is enabled by default with automatic flushing every 300ms.
+# If using client v0.43.0+
+dsd = DogStatsd(host="127.0.0.1", port=8125, disable_buffering=False)
 dsd.gauge('example_metric.gauge_1', 123, tags=["environment:dev"])
 dsd.gauge('example_metric.gauge_2', 1001, tags=["environment:dev"])
 dsd.flush()  # Optional manual flush
 
 # If using client before v0.43.0, context manager is needed to use buffering
+dsd = DogStatsd(host="127.0.0.1", port=8125)
 with dsd:
     dsd.gauge('example_metric.gauge_1', 123, tags=["environment:dev"])
     dsd.gauge('example_metric.gauge_2', 1001, tags=["environment:dev"])
 ```
 
 <div class="alert alert-warning">
-  By default, Python DogStatsD client instances (including the <code>statsd</code> global instance) cannot be shared across processes but are thread-safe. Because of this, the parent process and each child process must create their own instances of the client or the buffering must be explicitly disabled by setting <code>disable_buffering</code> to <code>True</code>. For more information, please refer to the <a href="https://datadogpy.readthedocs.io/en/latest/#datadog-dogstatsd">Python client documentation</a>.
+  By default, Python DogStatsD client instances (including the <code>statsd</code> global instance) cannot be shared across processes but are thread-safe. Because of this, the parent process and each child process must create their own instances of the client or the buffering must be explicitly disabled by setting <code>disable_buffering</code> to <code>True</code>. See the documentation on <a href="https://datadogpy.readthedocs.io/en/latest/#datadog-dogstatsd">datadog.dogstatsd</a> for more details.
 </div>
 
 
@@ -110,7 +111,7 @@ statsd.flush(sync: true)
 ```
 
 <div class="alert alert-warning">
-  By default, Ruby DogStatsD client instances cannot be shared across processes but are thread-safe. Because of this, the parent process and each child process must create their own instances of the client or the buffering must be explicitly disabled by setting <code>single_thread</code> to <code>true</code>. For more information, please refer to the <a href="https://github.com/DataDog/dogstatsd-ruby">Ruby client documentation</a>.
+  By default, Ruby DogStatsD client instances cannot be shared across processes but are thread-safe. Because of this, the parent process and each child process must create their own instances of the client or the buffering must be explicitly disabled by setting <code>single_thread</code> to <code>true</code>. See the <a href="https://github.com/DataDog/dogstatsd-ruby">dogstatsd-ruby repo</a> on GitHub for more details.
 </div>
 
 {{< /programming-lang >}}
@@ -211,6 +212,38 @@ For more information and code examples, see [DogStatsD "Sample Rate" Parameter E
 
 UDS is an inter-process communication protocol used to [transport DogStatsD payloads][2]. It has very little overhead when compared to UDP and lowers the general footprint of DogStatsD on your system.
 
+### Client-side aggregation
+
+Client libraries can aggregate metrics on the client side, reducing number of messages that have to be submitted to the DataDog Agent, improving IO performance and throughput.
+
+{{< programming-lang-wrapper langs="go,java" >}}
+{{< programming-lang lang="go" >}}
+
+Client-side aggregation is only available in the Go client starting with v5.0.0.
+
+See [Client-side aggregation][1] for more information.
+
+[1]: https://github.com/DataDog/datadog-go#client-side-aggregation
+{{< /programming-lang >}}
+{{< programming-lang lang="java" >}}
+
+Client-side aggregation is available in java-dogstatsd-client version 2.11.0 and later, and is enabled by default starting with version 3.0.0.
+
+```java
+StatsDClient Statsd = new NonBlockingStatsDClientBuilder()
+    // regular setup
+    .enableAggregation(true)
+    .build();
+```
+
+Client-side aggregation is available for gauges, counters and sets.
+
+See [Client-side aggregation][1] for more information.
+
+[1]: https://github.com/DataDog/java-dogstatsd-client#aggregation
+{{< /programming-lang >}}
+{{< /programming-lang-wrapper >}}
+
 ## Operating system kernel buffers
 
 Most operating systems add incoming UDP and UDS datagrams containing your metrics to a buffer with a maximum size. Once the max is reached, datagrams containing your metrics start getting dropped. It is possible to adjust the values to give the Agent more time to process incoming metrics:
@@ -250,7 +283,7 @@ See the [Note on sysctl in Kubernetes][5] section if you are deploying the Agent
 
 #### Linux
 
-For UDS sockets, Linux is internally buffering datagrams in a queue if the reader is slower than the writer. The size of this queue represents the maximum number of datagrams that Linux will buffer per socket. This value can be queried with the following command:
+For UDS sockets, Linux is internally buffering datagrams in a queue if the reader is slower than the writer. The size of this queue represents the maximum number of datagrams that Linux buffers per socket. This value can be queried with the following command:
 
 ```bash
 sysctl net.unix.max_dgram_qlen
@@ -283,7 +316,7 @@ dogstatsd_so_rcvbuf: 4194304
 
 #### Note on sysctl in Kubernetes
 
-If you are using Kubernetes to deploy the Agent and/or DogStatsD and you want to configure the sysctls as mentioned above, setting their value will have to be done per container. The `net.*` sysctls being namespaced, you will be able to set them per pod: see [the official Kubernetes documentation][6] on how to allow the access to the sysctls in the containers and how to set their value.
+If you are using Kubernetes to deploy the Agent and/or DogStatsD and you want to configure the sysctls as mentioned above, set their value per container. If the `net.*` sysctls is namespaced, you can set them per pod. See the Kubernetes documentation on [Using sysctls in a Kubernetes Cluster][6].
 
 ### Ensure proper packet sizes
 
@@ -293,7 +326,7 @@ You can skip this section if you are using one of the latest Datadog DogStatsD c
 
 If the packets sent are too small, the Datadog Agent packs several together to process them in batches later in the pipeline. The official DogStatsD clients are capable of grouping metrics to have the best ratio of the number of metrics per packet.
 
-The Datadog Agent performs most optimally if the DogStatsD clients send packets the size of the `dogstatsd_buffer_size`. The packets must not be larger than the buffer size, otherwise, the Agent won't be able to load them completely in the buffer and some of metrics will be malformed. Use the corresponding configuration field in your DogStatsD clients.
+The Datadog Agent performs most optimally if the DogStatsD clients send packets the size of the `dogstatsd_buffer_size`. The packets must not be larger than the buffer size, otherwise, the Agent can't load them completely in the buffer without the metrics being malformed. Use the corresponding configuration field in your DogStatsD clients.
 
 <div class="alert alert-info">
   <strong>Note for UDP</strong>: Because UDP packets usually go through the Ethernet and IP layer, you can avoid IP packets fragmentation by limiting the packet size to a value lower than a single Ethernet frame on your network. Most of the time, IPv4 networks are configured with a MTU of 1500 bytes, so in this situation the packet size of sent packets should be limited to 1472.
@@ -337,15 +370,15 @@ To enable the stats mode, you can either:
 - Set the environment variable `DD_DOGSTATSD_STATS_ENABLE` to `true`
 - Use the `datadog-agent config set dogstatsd_stats true` command to enable it at runtime. You can disable it at runtime using the command `datadog-agent config set dogstatsd_stats false`.
 
-When this mode is enabled, run the command `datadog-agent dogstatsd-stats`. A list of the processed metrics will be returned ordered by the ones received the most.
+When this mode is enabled, run the command `datadog-agent dogstatsd-stats`. A list of the processed metrics is returned in descending order by the metrics received.
 
-While running in this mode, the DogStatsD server runs a burst detection mechanism. If a burst is detected, a warning log will be emitted. For example:
+While running in this mode, the DogStatsD server runs a burst detection mechanism. If a burst is detected, a warning log is emitted. For example:
 
 ```text
 A burst of metrics has been detected by DogStatSd: here is the last 5 seconds count of metrics: [250 230 93899 233 218]
 ```
 
-## Client side telemetry
+## Client-side telemetry
 
 DogStatsD clients send telemetry metrics by default to the Agent. This allows you to better troubleshoot where bottlenecks exist. Each metric is tagged with the client language and the client version. These metrics are not counted as custom metrics.
 
@@ -357,8 +390,7 @@ Each client shares a set of common tags.
 | `client_version`   | The version of the client                         | `client_version:1.2.3` |
 | `client_transport` | The transport used by the client (`udp` or `uds`) | `client_transport:uds` |
 
-**Note**: When using UDP, network errors can't be detected by the client
-and the corresponding metrics will not reflect bytes/packets drop.
+**Note**: When using UDP, network errors can't be detected by the client and the corresponding metrics do not reflect byte or packet drops.
 
 {{< programming-lang-wrapper langs="python,ruby,go,java,PHP,.NET" >}}
 {{< programming-lang lang="python" >}}
@@ -453,7 +485,12 @@ Starting with version `3.4.0` of the Go client.
 
 `datadog.dogstatsd.client.metrics`
 : **Metric type**: count<br>
-The number of `metrics` sent to the DogStatsD client by your application (before sampling).
+The number of `metrics` sent to the DogStatsD client by your application (before sampling and aggregation).
+
+`datadog.dogstatsd.client.metrics_by_type`
+: **Metric type**: count<br>
+The number of `metrics` sent by the DogStatsD client, before sampling and aggregation, tagged by metric type (`gauge`,
+`set`, `count`, `timing`, `histogram`, or `distribution`). Starting with v5.0.0 of the Go client.
 
 `datadog.dogstatsd.client.events`
 : **Metric type**: count<br>
@@ -469,7 +506,8 @@ The number of bytes successfully sent to the Agent.
 
 `datadog.dogstatsd.client.bytes_dropped`
 : **Metric type**: count<br>
-The number of bytes dropped by the DogStatsD client.
+The number of bytes dropped by the DogStatsD client (this includes `datadog.dogstatsd.client.bytes_dropped_queue` and
+`datadog.dogstatsd.client.bytes_dropped_writer`).
 
 `datadog.dogstatsd.client.bytes_dropped_queue`
 : **Metric type**: count<br>
@@ -477,7 +515,7 @@ The number of bytes dropped because the DogStatsD client queue was full.
 
 `datadog.dogstatsd.client.bytes_dropped_writer`
 : **Metric type**: count<br>
-The number of bytes dropped because of an error while writing to Datadog.
+The number of bytes dropped because of an error while writing to Datadog due to network timeout or error.
 
 `datadog.dogstatsd.client.packets_sent`
 : **Metric type**: count<br>
@@ -485,7 +523,8 @@ The number of datagrams successfully sent to the Agent.
 
 `datadog.dogstatsd.client.packets_dropped`
 : **Metric type**: count<br>
-The number of datagrams dropped by the DogStatsD client.
+The number of datagrams dropped by the DogStatsD client (this includes `datadog.dogstatsd.client.packets_dropped_queue`
+and `datadog.dogstatsd.client.packets_dropped_writer`).
 
 `datadog.dogstatsd.client.packets_dropped_queue`
 : **Metric type**: count<br>
@@ -493,11 +532,24 @@ The number of datagrams dropped because the DogStatsD client queue was full.
 
 `datadog.dogstatsd.client.packets_dropped_writer`
 : **Metric type**: count<br>
-The number of datagrams dropped because of an error while writing to Datadog.
+The number of datagrams dropped because of an error while writing to Datadog due to network timeout or error.
 
 `datadog.dogstatsd.client.metric_dropped_on_receive` 
 : **Metric type**: count<br>
-The number of metrics dropped because the internal receiving channel is full (only when using `WithChannelMode()`). Starting with version `3.6.0` of the Go client.
+The number of metrics dropped because the internal receiving channel is full (when using `WithChannelMode()`). Starting
+with v3.6.0 of the Go client when `WithChannelMode()` is enabled.
+
+`datadog.dogstatsd.client.aggregated_context`
+: **Metric type**: count<br>
+The total number of contexts flushed by the client when client side aggregation is enabled. Starting v5.0.0 of the Go
+client. This metric is reported only when the aggregation is enabled (which is the default).
+
+`datadog.dogstatsd.client.aggregated_context_by_type`
+: **Metric type**: count<br>
+The total number of contexts flushed by the client, when client-side aggregation is enabled, tagged by metric type
+(`gauge`, `set`, `count`, `timing`, `histogram`, or `distribution`). Starting v5.0.0 of the Go client. This metric is
+reported only when the aggregation is enabled (which is the default).
+
 
 To disable telemetry, use the `WithoutTelemetry` setting:
 
@@ -596,9 +648,8 @@ The number of datagrams successfully sent to the Agent.
 The number of datagrams dropped by the DogStatsD client.
 
 To enable or disable telemetry use the `disable_telemetry` argument. Beware,
-using the telemetry with the `DogStatsd` client will increase network usage
-significantly, it is advise to use the `BatchedDogStatsd` when using the
-telemetry.
+using telemetry with the `DogStatsd` client increases network usage
+significantly. It is advised to use the `BatchedDogStatsd` when using telemetry.
 
 To enable it on the `DogStatsd` client:
 
@@ -694,6 +745,6 @@ See [DataDog/dogstatsd-csharp-client][1] for more information about the client c
 [1]: /agent/
 [2]: /developers/dogstatsd/unix_socket/
 [3]: /developers/dogstatsd/#code
-[4]: /developers/metrics/dogstatsd_metrics_submission/#sample-rates
+[4]: /metrics/dogstatsd_metrics_submission/#sample-rates
 [5]: /developers/dogstatsd/high_throughput/#note-on-sysctl-in-kubernetes
 [6]: https://kubernetes.io/docs/tasks/administer-cluster/sysctl-cluster/

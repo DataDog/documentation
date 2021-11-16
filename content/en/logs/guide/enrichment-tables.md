@@ -12,7 +12,8 @@ further_reading:
 ---
 
 <div class="alert alert-warning">
-The Enrichment Tables feature is currently in private beta. For more information, contact <a href="https://docs.datadoghq.com/help/">Datadog support</a>.
+The Enrichment Tables feature is currently in public beta. There are no billing implications for defining and querying enrichment tables. For more information, contact <a href="https://docs.datadoghq.com/help/">Datadog support</a>.
+During the beta, there is a limit of 100 enrichment tables per account.
 </div>
 
 ## Overview
@@ -29,6 +30,9 @@ Define new entities in Datadog like customer details, service names and informat
 Click **New Enrichment Table +**, then upload a CSV file, name the appropriate columns, and define the primary key for lookups.
 
 {{< img src="logs/guide/enrichment-tables/configure-enrichment-table.png" alt="Create an Enrichment Table" style="width:100%;">}}
+
+**Note**: The manual CSV upload method supports files up to 5MB.
+
 {{% /tab %}}
 
 {{% tab "AWS S3 upload" %}}
@@ -63,6 +67,8 @@ Click **New Enrichment Table +**, then add a name, select AWS S3, fill out all f
 
 {{< img src="logs/guide/enrichment-tables/configure-s3-enrichment-table.png" alt="Create an Enrichment Table" style="width:100%;">}}
 
+**Note**: The upload from an S3 bucket method supports files up to 200MB.
+
 [1]: https://app.datadoghq.com/account/settings#integrations/amazon-web-services
 [2]: https://docs.datadoghq.com/integrations/amazon_web_services/?tab=automaticcloudformation#installation
 {{% /tab %}}
@@ -72,7 +78,14 @@ This enrichment table can now be used to add additional attributes to logs with 
 
 ## Modify an enrichment table
 
-To modify an existing enrichment table with new data, select a table then click **Update Data +** in the top right corner. The selected CSV is upserted into the table, meaning that all existing rows with the same primary key are updated, and all new rows are added. Once the table is saved, the upserted rows are processed asynchronously and updated in the preview. It may take up to 10 minutes for the updated rows to appear in affected logs.
+To modify an existing enrichment table with new data, select a table then click **Update Data +** in the top right corner.
+The selected CSV is upserted into the table, meaning that:
+
+* All existing rows with the same primary key are updated
+* All new rows are added
+* All old rows that are not in the new file are deleted
+ 
+Once the table is saved, the upserted rows are processed asynchronously and updated in the preview. It may take up to 10 minutes for the update to complete. 
 
 ## Further Reading
 

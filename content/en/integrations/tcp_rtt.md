@@ -26,7 +26,7 @@ This check is only shipped with the 64-bit DEB and RPM Datadog Agent v5 packages
 
 ### Installation
 
-The check uses timestamps provided by the PCAP library to compute the time between any outgoing packet and the corresponding TCP acknowledgement. As such, PCAP must be installed and configured.
+The check uses timestamps provided by the PCAP library to compute the time between any outgoing packet and the corresponding TCP acknowledgment. As such, PCAP must be installed and configured.
 
 Debian-based systems should use one of the following:
 
@@ -95,7 +95,7 @@ Main PID: 10025 (supervisord)
 
 If the TCP RTT check has started you should see something similar to the go-metro line above.
 
-This is a passive check, so unless there are packets actively being sent to the hosts mentioned in the yaml file, the metrics will not be reported.
+This is a passive check, so unless there are packets actively being sent to the hosts mentioned in the yaml file, the metrics are not reported.
 
 ## Data Collected
 

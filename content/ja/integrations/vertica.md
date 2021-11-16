@@ -15,7 +15,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/vertica/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/vertica/README.md
 display_name: Vertica
 draft: false
 git_integration_title: vertica

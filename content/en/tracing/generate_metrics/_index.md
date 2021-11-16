@@ -12,9 +12,6 @@ further_reading:
       tag: "Documentation"
       text: 'Use Analytics queries and monitors based on retained traces.'
 ---
-<div class="alert alert-warning">
-This feature is currently in public beta.  While this feature is in beta it is not recommended to use metrics generated from spans for monitors or production operations use cases.
-</div>
 
 ## Generate span-based metrics
 
@@ -22,7 +19,7 @@ With Tracing without Limits™, you can generate metrics from 100% of ingested s
 
 You can pair these metrics with retention filters and Analytics monitors, or use them on their own.
 
-Use custom metrics for specific fixed queries and comparisons, while creating retention filters to allow arbitrary querying and investigation of the retained trace and its flamegraph.
+Use custom metrics for specific fixed queries and comparisons, while creating retention filters to allow arbitrary querying and investigation of the retained trace and its flame graph.
 
 **Billing Note:** Metrics created from ingested spans are billed as [Custom Metrics][2].
 
@@ -79,12 +76,12 @@ After a metric is created, only two fields can be updated:
 
 [1]: /tracing/trace_retention_and_ingestion
 [2]: /account_management/billing/custom_metrics/
-[3]: https://docs.datadoghq.com/developers/metrics/#overview
-[4]: /monitors/monitor_types/anomaly/#overview
+[3]: https://docs.datadoghq.com/metrics/#overview
+[4]: /monitors/create/types/anomaly/#overview
 [5]: /tracing/trace_search_and_analytics/
 [6]: /tracing/trace_search_and_analytics/query_syntax/#analytics-query
-[7]: /monitors/monitor_types/forecasts/
+[7]: /monitors/create/types/forecasts/
 [8]: https://app.datadoghq.com/apm/getting-started
 [9]: https://app.datadoghq.com/apm/traces/generate-metrics
 [10]: /tracing/trace_search_and_analytics/query_syntax/
-[11]: /developers/metrics/#naming-metrics
+[11]: /metrics/#naming-metrics

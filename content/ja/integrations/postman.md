@@ -19,6 +19,7 @@
 "guid": "c678faae-1fc2-420b-83af-e973441b99de"
 "integration_id": "postman"
 "integration_title": "Postman"
+"integration_version": ""
 "is_public": true
 "kind": "integration"
 "maintainer": "integrations-partnerships@postman.com"
@@ -90,7 +91,7 @@ Postman でモニターが実行されるたびにイベントが生成されま
 [1]: https://www.postman.com/
 [2]: https://learning.postman.com/docs/integrations/available-integrations/datadog/
 [3]: https://www.postman.com/pricing/
-[4]: https://app.datadoghq.com/account/settings#api
+[4]: https://app.datadoghq.com/organization-settings/api-keys
 [5]: https://go.postman.co/integrations/service/datadog
 [6]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/postman/images/add-integration-datadog.jpeg
 [7]: https://github.com/DataDog/integrations-extras/blob/master/postman/metadata.csv

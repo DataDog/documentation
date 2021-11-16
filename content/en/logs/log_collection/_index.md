@@ -90,13 +90,18 @@ Select your Cloud provider below to see how to automatically collect your logs a
 
 Datadog integrations and log collection are tied together. Use an integration default configuration file to enable dedicated [processors][1], [parsing][2], and [facets][3] in Datadog.
 
-Consult the [list of available supported integrations][4].
+## Enabling log collection from integrations
 
+To collect logs for a given integration, uncomment the logs section in that integration's `conf.yaml` file and configure it for your environment. If you are running the Agent in a Kubernetes or Docker environment, see the dedicated [Kubernetes Log Collection][4] or [Docker Log Collection][5] documentation.
+
+Consult the [list of available supported integrations][6].
 
 [1]: /logs/log_configuration/processors
 [2]: /logs/log_configuration/parsing
 [3]: /logs/explorer/facets/
-[4]: /integrations/#cat-log-collection
+[4]: /agent/kubernetes/log/#autodiscovery
+[5]: /agent/docker/log/#log-integrations
+[6]: /integrations/#cat-log-collection
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -115,11 +120,11 @@ Used by the Agent to send logs in protobuf format over an SSL-encrypted TCP conn
 
 `{{< region-param key="agent_http_endpoint" code="true" >}}`
 : **Port**: `{{< region-param key="agent_http_port" code="true" >}}`<br>
-Used by the Agent to send logs in JSON format over HTTPS. See the [How to send logs over HTTP documentation][7].
+Used by the Agent to send logs in JSON format over HTTPS. See the [Host Agent Log collection documentation][7].
 
 `{{< region-param key="http_endpoint" code="true" >}}`
 : **Port**: `{{< region-param key="http_port" code="true" >}}`<br>
-Used by custom forwarder to send logs in JSON or plain text format over HTTPS. See the [How to send logs over HTTP documentation][7].
+Used by custom forwarder to send logs in JSON or plain text format over HTTPS. See the [Logs HTTP API documentation][8].
 
 `{{< region-param key="web_integrations_endpoint" code="true" >}}`
 : **Port**: `{{< region-param key="web_integrations_port" code="true" >}}`<br>
@@ -226,19 +231,19 @@ telnet tcp-intake.logs.datadoghq.eu 1883
 
 {{< /site-region >}}
 
-{{< site-region region="us3,gov" >}}
+{{< site-region region="us3,us5,gov" >}}
 A TCP endpoint is not supported for this region.
 {{< /site-region >}}
 
 
-[1]: https://app.datadoghq.com/account/settings#api
+[1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: https://app.datadoghq.com/logs/livetail
 {{% /tab %}}
 {{< /tabs >}}
 
 **Notes**:
 
-* For optimal use, Datadog recommends a log event should not exceed 25K bytes in size. When using the Datadog Agent, log events greater than 256KB are split into several entries. When using the Datadog TCP or HTTP API directly, log events up to 1MB are accepted.
+* The HTTPS API supports logs of sizes up to 1MB. However, for optimal performance, it is recommended that an individual log be no greater than 25K bytes. If you use the Datadog Agent for logging, it is configured to split a log at 256kB (256000 bytes).
 * A log event should not have more than 100 tags, and each tag should not exceed 256 characters for a maximum of 10 million unique tags per day.
 * A log event converted to JSON format should contain less than 256 attributes. Each of those attribute's keys should be less than 50 characters, nested in less than 10 successive levels, and their respective value should be less than 1024 characters if promoted as a facet.
 * Log events can be submitted up to 18h in the past and 2h in the future.
@@ -247,7 +252,7 @@ Log events that do not comply with these limits might be transformed or truncate
 
 ### Attributes and tags
 
-Attributes prescribe [logs facets][8], which are used for filtering and searching in Log Explorer. See the dedicated [attributes and aliasing][9] documentation for a list of reserved and standard attributes and to learn how to support a naming convention with logs attributes and aliasing.
+Attributes prescribe [logs facets][9], which are used for filtering and searching in Log Explorer. See the dedicated [attributes and aliasing][10] documentation for a list of reserved and standard attributes and to learn how to support a naming convention with logs attributes and aliasing.
 
 #### Attributes for stack traces
 
@@ -267,13 +272,13 @@ To enable these functionalities use the following attribute names:
 
 **Note**: By default, integration Pipelines attempt to remap default logging library parameters to those specific attributes and parse stack traces or traceback to automatically extract the `error.message` and `error.kind`.
 
-For more information, see the complete [source code attributes documentation][10].
+For more information, see the complete [source code attributes documentation][11].
 
 ## Next steps
 
-Once logs are collected and ingested, they are available in **Log Explorer**. Log Explorer is where you can search, enrich, and view alerts on your logs. See the [Log Explorer][11] documentation to begin analyzing your log data, or see the additional log management documentation below.
+Once logs are collected and ingested, they are available in **Log Explorer**. Log Explorer is where you can search, enrich, and view alerts on your logs. See the [Log Explorer][12] documentation to begin analyzing your log data, or see the additional log management documentation below.
 
-{{< img src="logs/log_explorer_view.png" alt="Log Explorer view"  >}}
+{{< img src="logs/explore.jpg" alt="Log Explorer view"  >}}
 
 ## Further Reading
 
@@ -288,7 +293,8 @@ Once logs are collected and ingested, they are available in **Log Explorer**. Lo
 [5]: /integrations/logstash/#log-collection
 [6]: /security/logs/#information-security
 [7]: /agent/logs/#send-logs-over-https
-[8]: /logs/explorer/facets/
-[9]: /logs/log_configuration/attributes_naming_convention
-[10]: /logs/log_configuration/attributes_naming_convention/#source-code
-[11]: /logs/explore/
+[8]: /api/v1/logs/#send-logs
+[9]: /logs/explorer/facets/
+[10]: /logs/log_configuration/attributes_naming_convention
+[11]: /logs/log_configuration/attributes_naming_convention/#source-code
+[12]: /logs/explore/

@@ -23,7 +23,7 @@ further_reading:
 
 ## Overview
 
-Watchdog is an algorithmic feature for APM performances and infrastructure metrics that automatically detects potential application and infrastructure issues. It leverages the same seasonal algorithms that power anomalies and dashboards. Watchdog observes trends and patterns in:
+Watchdog is an algorithmic feature for APM performance and infrastructure metrics that automatically detects potential application and infrastructure issues. It leverages the same seasonal algorithms that power anomalies and dashboards. Watchdog observes trends and patterns in:
 
 * APM metrics:
   * Hits (request rate)
@@ -101,6 +101,20 @@ Monitors associated with your stories are displayed at the bottom. Each monitor 
 
 Additionally, Watchdog suggests one or more monitors that are configured to trigger if the story happens again. Click the **Enable Monitor** button to enable them for your organization. See the [Watchdog monitor documentation][13] to learn how to create a Watchdog monitor.
 
+## Watchdog Impact Analysis
+
+Whenever Watchdog finds a new APM anomaly, it simultaneously analyzes a variety of latency and error metrics that are submitted from the RUM SDKs to evaluate if the anomaly is adversely impacting any web or mobile pages visited by your users. 
+
+If Watchdog determines that the end-user experience is impacted, it provides a summary of the impacts in Watchdog APM Alert. This includes:
+
+- A list of impacted RUM views
+- An estimated number of impacted users
+- A link to the list of impacted users, so that you can reach out to them, if needed. 
+
+{{< img src="watchdog/rum_impact_analysis.png" alt="Watchdog Impact Analysis"  style="width:75%;">}}
+
+This feature is automatically enabled for all APM and RUM users. Whenever Watchdog APM alerts are associated with end-user impacts, affected **users** and **view paths** appear in the **Impacts** section of your Watchdog stories. Click **users** to view the affected users’ contact information if you need to reach out to them. Click **view paths** to access the impacted RUM views for additional information.
+
 ## Filter stories
 
 You can use the time range, search bar, or facets to filter your Watchdog stories:
@@ -161,7 +175,7 @@ Need help? Contact [Datadog support][18].
 [10]: /monitors/
 [11]: https://app.datadoghq.com/watchdog
 [12]: /getting_started/tagging/unified_service_tagging
-[13]: /monitors/monitor_types/watchdog/
+[13]: /monitors/create/types/watchdog/
 [14]: /tracing/send_traces/#configure-your-environment
 [15]: /tracing/guide/setting_primary_tags_to_scope/
 [16]: /tracing/visualization/#services

@@ -14,11 +14,13 @@ kind: guide
 
 - **`new_host_delay`** Time (in seconds) to allow a host to boot and applications to fully start before starting the evaluation of monitor results. Should be a non negative integer. **Deprecated: Use `new_group_delay` instead**
 
-- **`notify_no_data`** a Boolean indicating whether this monitor notifies when data stops reporting. Default: **false**
+- **`notify_no_data`** a Boolean indicating whether this monitor notifies when data stops reporting. Default: **False**.
 - **`no_data_timeframe`** The number of minutes before a monitor notifies after data stops reporting. Datadog recommends at least 2x the monitor timeframe for metric alerts or 2 minutes for service checks.  **If omitted, 2x the evaluation timeframe is used for metric alerts, and 24 hours is used for service checks.**
 - **`timeout_h`** the number of hours of the monitor not reporting data before it automatically resolves from a triggered state. Default: **None**.
--  **`require_full_window`** a Boolean indicating whether this monitor needs a full window of data before it's evaluated. We highly recommend you set this to `False` for sparse metrics, otherwise some evaluations are skipped. Default: **True** for "on average", "at all times" and "in total" aggregation. **False** otherwise.
+-  **`require_full_window`** a Boolean indicating whether this monitor needs a full window of data before it's evaluated. Datadog recommends you set this to `False` for sparse metrics, otherwise some evaluations are skipped. Default: **False**.
 - **`renotify_interval`** the number of minutes after the last notification before a monitor re-notifies on the current status. It only re-notifies if it's not resolved. Default: **None**.
+- **`renotify_statuses`** the states from which a monitor re-notifies. It can only be set if `renotify_interval` is set. Default: **None**. Without `renotify_states` set, it renotifies from `Alert` and `No Data` states.
+- **`renotify_occurrences`** the number of times a monitor re-notifies. It can only be set if `renotify_interval` is set. Default: **None**, it renotifies without a limit.
 - **`escalation_message`** a message to include with a re-notification. Supports the '@username' notification we allow elsewhere. Not applicable if `renotify_interval` is `None`. Default: **None**.
 - **`notify_audit`** a Boolean indicating whether tagged users is notified on changes to this monitor. Default: **False**
 - **`locked`** a Boolean indicating whether changes to to this monitor should be restricted to the creator or admins. Default: **False**
@@ -64,10 +66,10 @@ _These options only apply to logs alerts._
 
 Example: `{'ok': 1, 'critical': 1, 'warning': 1}`
 
-- **`aggregation`** a dictionary of `type`, `metric` and `groupeBy`:
-  - `type`  3 types are supported: `count`, `cardinality` and `avg`
+- **`aggregation`** A dictionary of `type`, `metric`, and `groupBy`.
+  - `type`: Three types are supported: `count`, `cardinality`, and `avg`.
   - `metric`:  For `cardinality`, use the name of the facet. For `avg`, use the name of the metric. For `count`, put `count` as metric.
-  - `groupeBy` name of the facet on which you want to group by.
+  - `groupBy`: Name of the facet on which you want to group by.
 
 Example: `{"metric": "count","type": "count","groupBy": "core_service"}`
 

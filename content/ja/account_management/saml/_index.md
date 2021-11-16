@@ -62,12 +62,12 @@ Access Management アクセス許可を持つユーザーは、ユーザーの S
 
     {{< img src="account_management/saml/create_mapping.png" alt="Datadog ロールへ SAML マッピングを作成"  >}}
 
-4. まだの場合は、**Enable Mappings** をクリックしてマッピングを有効化します。 
+4. まだの場合は、**Enable Mappings** をクリックしてマッピングを有効化します。
 
 指定された ID プロバイダー属性を持つユーザーがログインすると、自動的に Datadog ロールが割り当てられます。同様に、ユーザーの ID プロバイダー属性が削除されると、ロールへのアクセスも失います（別のマッピングが追加された場合を除く）。
 
 <div class="alert alert-warning">
-  <strong>重要:</strong> いずれのマッピングにも一致<i>しない</i>ユーザーは、それまで割り当てられていたロールを失い、SAML でオーガニゼーションにログインできなくなります。マッピング定義をよく確認してください。 
+  <strong>重要:</strong> いずれのマッピングにも一致<i>しない</i>ユーザーは、それまで割り当てられていたロールを失い、SAML でオーガニゼーションにログインできなくなります。マッピング定義をよく確認してください。
 </div>
 
 マッピングに変更を加えるには鉛筆アイコンを、マッピングを削除する場合はゴミ箱アイコンをクリックします。この操作はマッピングのみに適用され、ID プロバイダー属性または Datadog ロールへの影響はありません。
@@ -163,6 +163,6 @@ SAML 限定モードを有効にした場合、すべてのユーザーが SAML 
 [10]: /ja/account_management/saml/auth0/
 [11]: /ja/account_management/saml/azure/
 [12]: /ja/account_management/saml/google/
-[13]: /ja/account_management/saml/nopassword/
+[13]: /ja/account_management/saml/lastpass/
 [14]: /ja/account_management/saml/okta/
 [15]: /ja/account_management/saml/safenet/

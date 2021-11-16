@@ -31,5 +31,8 @@ In containerized, serverless, or certain other environments, there may be APM-sp
 
 To instrument an application written in a language that does not yet have official library support, see the list of [community tracing libraries][2].
 
+After you set up tracing, you are [one step from accessing profiling data by enabling Continuous Profiler][3]. Profiler is available for Java, Python, Go, and (beta) Ruby.
+
 [1]: /tracing/visualization/#trace
 [2]: /developers/community/libraries/#apm-tracing-client-libraries
+[3]: /tracing/profiler/enabling/
