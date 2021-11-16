@@ -20,9 +20,9 @@ To use Cloud Cost Management, you must have an AWS account with access to Cost U
 
 To configure a data source, access the Cloud Costs product by clicking **Infrastructure > Cloud Costs** using the main navigation.
 
-- If there are no configured data sources, you will be redirected to a data source setup page with prompts for generating and configuring access to your account's [Cost and Usage Report (CUR)][5].
+If there are no configured data sources, you'll be redirected to a data source setup page with instructions for generating and configuring access to your AWS account's [Cost and Usage Report (CUR)][5].
 
-- Once configured, data sources may be viewed and modified by accessing the **Settings tab** directly from the top of the page.
+Once configured, data sources may be viewed and modified by accessing the **Settings tab** directly from the top of the page.
 
 {{< img src="infrastructure/cloudcost/cloud_cost_data_source_config.png" alt="Configure the AWS data source for Cloud Costs"  >}}
 
@@ -98,11 +98,11 @@ Attach the new S3 policy to the Datadog integration role.
 
 ## Investigating your costs
 
-Navigate to your costs within Datadog by clicking **Infrastructure > Cloud Costs** in the UI. This Analyze view lets you to quickly filter and group your spending to hone in on what’s changing over time, allowing you to answer questions such as:
+Navigate to your costs within Datadog by clicking **Infrastructure > Cloud Costs** in the UI. This view lets you quickly filter and group your spending to hone in on what’s changing over time, answering questions such as:
 
 - Which teams and applications are responsible for changes in spend?
 - What cloud products and usage types (i.e. EC2 Data Transfer) are driving the increase in spend?
-- How effective is the coverage and utilization of my discount plan?
+- How effective is the coverage and utilization of my discount plans?
 
 {{< img src="infrastructure/cloudcost/cloud_cost_analyze_page.png" alt="Slice and dice your costs by tag using the Cloud Cost UI"  >}}
 
