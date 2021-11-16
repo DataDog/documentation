@@ -36,7 +36,7 @@ export const sendAlgoliaInsightsClickAfterSearchEvent = (queryID, objectID, posi
   searchInsights('clickedObjectIDsAfterSearch', insightsClickEventParams);
 }
 
-export const sendAlgoliaClickedObjectIDEvent = (objectID) => {
+const sendAlgoliaClickedObjectIDEvent = (objectID) => {
   const insightsClickedObjectParams = {
     userToken: 'documentation',
     index: getAlogliaIndexName(),
@@ -74,8 +74,10 @@ const getAlgoliaSearchDataByUrl = (url) => {
   const urlPathnameWithHash = getUrlWithPathnameAndHash(url);
 
   return index.search(urlPathnameWithHash, {
+    // Todo:  should this pagination number change?
     hitsPerPage: 50,
-    attributesToRetrieve: ['url']
+    attributesToRetrieve: ['url', 'url_without_anchor'],
+    restrictSearchableAttributes: ['url']
   })
 }
 
@@ -101,5 +103,23 @@ export const handleAlgoliaViewEventOnPageLoad = (url) => {
         })
       })
   }
+}
+
+export const handleAlgoliaClickedObjectEventOnAutocomplete = (url) => {
+  initializeAlogliaInsights();
+  const urlPathnameWithHash = getUrlWithPathnameAndHash(url);
+
+  getAlgoliaSearchDataByUrl(url)
+      .then(({ hits }) => {
+        hits.forEach(hit => {
+          const resultUrlPathnameWithHash = getUrlWithPathnameAndHash(hit.url);
+
+          if (urlPathnameWithHash === resultUrlPathnameWithHash) {
+            const { objectID } = hit;
+            sendAlgoliaClickedObjectIDEvent(objectID);
+          }
+        })
+      })
+
 }
 

@@ -1,6 +1,6 @@
 import docsearch from 'docsearch.js';
 import configDocs from '../config/config-docs';
-import { handleAlgoliaViewEventOnPageLoad } from '../algolia-insights';
+import { handleAlgoliaViewEventOnPageLoad, handleAlgoliaClickedObjectEventOnAutocomplete } from '../algolia-insights';
 
 const { env } = document.documentElement.dataset;
 const lang = document.documentElement.lang || 'en';
@@ -188,6 +188,22 @@ searchDesktop.autocomplete.on('autocomplete:shown', function() {
         setApiEndpointAsSubcategory();
         appendHomeLinkToAutocompleteWidget();
     }
+
+    const links = document.querySelectorAll('a.algolia-docsearch-suggestion');
+
+    links.forEach(link => {
+        link.addEventListener('click', (event) => {
+            event.preventDefault();
+            let suggestionAnchorElement = event.target;
+
+            if (event.target.nodeName.toLowerCase() !== 'a') {
+                suggestionAnchorElement = event.target.closest('a.algolia-docsearch-suggestion');
+            }
+
+            const clickedSuggestionUrl = suggestionAnchorElement.href;
+            handleAlgoliaClickedObjectEventOnAutocomplete(clickedSuggestionUrl);
+        })
+    })
 })
 
 searchDesktop.autocomplete.on('autocomplete:closed', function(e) {
@@ -208,9 +224,11 @@ searchDesktop.autocomplete.on('autocomplete:closed', function(e) {
         window.location = `${baseUrl}/search/?s=${value}`;
     }
 });
+
 searchDesktop.autocomplete.on('autocomplete:cursorchanged', function() {
     desktopEnableEnter = false;
 });
+
 searchDesktop.autocomplete.on('autocomplete:cursorremoved', function() {
     desktopEnableEnter = true;
 });
