@@ -239,6 +239,21 @@ frontend logs_http_frontend
 #    option tcplog
 #    default_backend datadog-logs
 
+# This declares the endpoint where your Agents connects for
+# sending database monitoring metrics and activity (e.g the value of "database_monitoring.metrics.dd_url" and "database_monitoring.activity.dd_url")
+frontend database_monitoring_metrics_frontend
+    bind *:3838
+    mode http
+    option tcplog
+    default_backend datadog-database-monitoring-metrics
+
+# This declares the endpoint where your Agents connects for
+# sending database monitoring samples (e.g the value of "database_monitoring.samples.dd_url")
+frontend database_monitoring_samples_frontend
+    bind *:3839
+    mode http
+    option tcplog
+    default_backend datadog-database-monitoring-samples
 
 # This is the Datadog server. In effect any TCP request coming
 # to the forwarder frontends defined above are proxied to
@@ -288,6 +303,20 @@ backend datadog-logs-http
     server-template mothership 5 agent-http-intake.logs.datadoghq.com:443  check port 443 ssl verify none check resolvers my-dns init-addr none resolve-prefer ipv4
     # Uncomment the following configuration for older HAProxy versions
     # server datadog agent-http-intake.logs.datadoghq.com:443 check port 443 ssl verify none
+
+backend datadog-database-monitoring-metrics
+    balance roundrobin
+    # The following configuration is for HAProxy 1.8 and newer
+    server-template mothership 5 dbm-metrics-intake.datadoghq.com:443  check port 443 ssl verify none check resolvers my-dns init-addr none resolve-prefer ipv4
+    # Uncomment the following configuration for older HAProxy versions
+    # server datadog agent-http-intake.logs.datadoghq.eu:443 check port 443 ssl verify none
+
+backend datadog-database-monitoring-samples
+    balance roundrobin
+    # The following configuration is for HAProxy 1.8 and newer
+    server-template mothership 5 dbquery-intake.datadoghq.com:443  check port 443 ssl verify none check resolvers my-dns init-addr none resolve-prefer ipv4
+    # Uncomment the following configuration for older HAProxy versions
+    # server datadog agent-http-intake.logs.datadoghq.eu:443 check port 443 ssl verify none
 
 ```
 
@@ -379,6 +408,22 @@ frontend logs_http_frontend
     option tcplog
     default_backend datadog-logs-http
 
+# This declares the endpoint where your Agents connects for
+# sending database monitoring metrics and activity (e.g the value of "database_monitoring.metrics.dd_url" and "database_monitoring.activity.dd_url")
+frontend database_monitoring_metrics_frontend
+    bind *:3838
+    mode http
+    option tcplog
+    default_backend datadog-database-monitoring-metrics
+
+# This declares the endpoint where your Agents connects for
+# sending database monitoring samples (e.g the value of "database_monitoring.samples.dd_url")
+frontend database_monitoring_samples_frontend
+    bind *:3839
+    mode http
+    option tcplog
+    default_backend datadog-database-monitoring-samples
+
 # This is the Datadog server. In effect any TCP request coming
 # to the forwarder frontends defined above are proxied to
 # Datadog's public endpoints.
@@ -422,6 +467,20 @@ backend datadog-logs-http
     # Uncomment the following configuration for older HAProxy versions
     # server datadog agent-http-intake.logs.datadoghq.eu:443 check port 443 ssl verify none
 
+backend datadog-database-monitoring-metrics
+    balance roundrobin
+    # The following configuration is for HAProxy 1.8 and newer
+    server-template mothership 5 dbm-metrics-intake.datadoghq.eu:443  check port 443 ssl verify none check resolvers my-dns init-addr none resolve-prefer ipv4
+    # Uncomment the following configuration for older HAProxy versions
+    # server datadog agent-http-intake.logs.datadoghq.eu:443 check port 443 ssl verify none
+
+backend datadog-database-monitoring-samples
+    balance roundrobin
+    # The following configuration is for HAProxy 1.8 and newer
+    server-template mothership 5 dbquery-intake.datadoghq.eu:443  check port 443 ssl verify none check resolvers my-dns init-addr none resolve-prefer ipv4
+    # Uncomment the following configuration for older HAProxy versions
+    # server datadog agent-http-intake.logs.datadoghq.eu:443 check port 443 ssl verify none
+
 ```
 
 **Note**: Download the certificate with the following command:
@@ -459,6 +518,14 @@ logs_config:
     use_http: true
     logs_dd_url: haproxy.example.com:3837
     logs_no_ssl: true
+
+database_monitoring:
+    metrics:
+        dd_url: http://haproxy.example.com:3838
+    activity:
+        dd_url: http://haproxy.example.com:3838
+    samples:
+        dd_url: http://haproxy.example.com:3839
 ```
 
 Then edit the `datadog.yaml` Agent configuration file and set `skip_ssl_validation` to `true`. This is needed to make the Agent ignore the discrepancy between the hostname on the SSL certificate (`app.datadoghq.com` or `app.datadoghq.eu`) and your HAProxy hostname:
@@ -578,6 +645,16 @@ stream {
         proxy_ssl on;
         proxy_pass agent-http-intake.logs.datadoghq.com:443;
     }
+    server {
+        listen 3838; #listen for database monitoring metrics
+        proxy_ssl on;
+        proxy_pass dbm-metrics-intake.datadoghq.com:443;
+    }
+    server {
+        listen 3839; #listen for database monitoring samples
+        proxy_ssl on;
+        proxy_pass dbquery-intake.datadoghq.com:443;
+    }
 }
 ```
 
@@ -628,6 +705,16 @@ stream {
         proxy_ssl on;
         proxy_pass agent-http-intake.logs.datadoghq.eu:443;
     }
+    server {
+        listen 3838; #listen for database monitoring metrics
+        proxy_ssl on;
+        proxy_pass dbm-metrics-intake.datadoghq.eu:443;
+    }
+    server {
+        listen 3839; #listen for database monitoring samples
+        proxy_ssl on;
+        proxy_pass dbquery-intake.datadoghq.eu:443;
+    }
 }
 ```
 
@@ -642,6 +729,14 @@ logs_config:
   use_http: true
   logs_dd_url: "<PROXY_SERVER_DOMAIN>:3837"
   logs_no_ssl: true
+
+database_monitoring:
+    metrics:
+        dd_url: "<PROXY_SERVER_DOMAIN>:3838"
+    activity:
+        dd_url: "<PROXY_SERVER_DOMAIN>:3838"
+    samples:
+        dd_url: "<PROXY_SERVER_DOMAIN>:3839"
 ```
 
 When sending logs over TCP, see <a href="/agent/logs/proxy">TCP Proxy for Logs</a>.
