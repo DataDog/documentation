@@ -33,7 +33,7 @@ Here's a two-minute video walkthrough:
 
 ### Create
 
-1. After the feature is enabled, visit the [New Account Page][3].
+1. After the feature is enabled, see the [New Account Page][3].
 2. Enter the name of the child-organization you wish to create and click the **Create** button. **The child-organization name cannot exceed 32 characters.**
 
 The new child-organization inherits the parent-organization's plan and is added to the parent-organization's billing account. If you want to update the child-organization's billing, [contact your sales representative][4].
@@ -48,11 +48,11 @@ The custom sub-domain feature is not enabled by default. Contact [Datadog suppor
 
 If you are a member of multiple organizations, custom sub-domains help you identify the source of an alert or notification. Also, they can immediately switch you to the organization associated with the sub-domain.
 
-For example, the URL `https://app.datadoghq.com/event/event?id=1` is associated with an event in Organization A. If a user is a member of both Organization A and Organization B, but is currently viewing Datadog within the context of Organization B, then that URL returns a `404 Not Found error`. The user must switch to Organization A using the [user account settings menu][1], then revisit the URL. However, with custom sub-domains, the user could visit `https://org-a.datadoghq.com/event/event?id=1` which would automatically switch the user's context to Organization A and display the correct page.
+For example, the URL `https://app.datadoghq.com/event/event?id=1` is associated with an event in Organization A. If a user is a member of both Organization A and Organization B, but is viewing Datadog within the context of Organization B, then that URL returns a `404 Not Found error`. The user must switch to Organization A using the [user account settings menu][1], then revisit the URL. However, with custom sub-domains, the user could navigate to `https://org-a.datadoghq.com/event/event?id=1` which would automatically switch the user's context to Organization A and display the correct page.
 
-Note: when using a custom subdomain, you will have to manually edit the links from the Datadog documentation with your subdomain name. For example a link redirecting to `https://**app**.datadoghq.com/account/settings` will become `https://**<custom_sub-domain_name>**.datadoghq.com/account/settings`.
+**Note**: If you have a custom Datadog subdomain, manually edit the links from the Datadog documentation with your subdomain name. For example, a link redirecting to `https://**app**.datadoghq.com/account/settings` becomes `https://**<custom_sub-domain_name>**.datadoghq.com/account/settings`.
 
-## Setting up SAML
+## Set up SAML
 
 SAML setup is _not_ inherited by child-organizations from the parent-organization. SAML must be configured for each child-organization individually. 
 
@@ -97,9 +97,9 @@ This data can be downloaded as a CSV file.
 
 {{< img src="account_management/multi-org-v2-logs-by-index.png" alt="Multi-org Logs Usage by Index" >}}
 
-### Individual Organization usage
+### Individual organization usage
 
-In the Individual Organization usage tab, you are able to view the usage of your child organizations in either absolute units or as a percent of total usage.
+On the Individual Organization usage tab, you are able to view the usage of your child organizations in either absolute units or as a percent of total usage.
 
 {{< img src="account_management/multi-org-percent-billable-v2.png" alt="Individual Percent Usage" >}}
 
@@ -111,7 +111,7 @@ To view the [Usage Details][9] of a child-organization, you can click on the chi
 
 The parent-organization can view the usage of child-organizations by existing tag keys in the [Usage Attribution][10] page. Admins can hover over their username at the bottom left, then navigate to: `Plan & Usage`--> `Usage Attribution`.
 
-When enabled at the parent-organization level, usage attribution will show usage aggregated across all organizations. This can be useful if you would like to attribute the usage of your child-organizations to certain projects, teams, or other groupings.
+When enabled at the parent-organization level, usage attribution shows usage aggregated across all organizations. This can be useful if you would like to attribute the usage of your child-organizations to certain projects, teams, or other groupings.
 
 Functionalities include:
 
@@ -144,6 +144,6 @@ Usage Attribution is an advanced feature included in the Enterprise plan. For al
 [5]: /api/
 [6]: https://www.datadoghq.com/blog/managing-datadog-with-terraform
 [7]: /dashboards/screenboards/#backup-my-screenboard
-[8]: /monitors/manage_monitor/
+[8]: /monitors/manage/
 [9]: /account_management/billing/usage_details/
 [10]: /account_management/billing/usage_attribution/

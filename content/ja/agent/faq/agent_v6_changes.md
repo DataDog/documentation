@@ -228,16 +228,16 @@ Linux 上の Agent v6 の主な変更点は次のとおりです。
 
 | ディストリビューション \ init システム      | upstart                   | systemd                   | sysvinit                                  | 注                         |
 |---------------------------------|---------------------------|---------------------------|-------------------------------------------|-------------------------------|
-| Amazon Linux (<= 2017.09)       | <i class="icon-tick"></i> |                           |                                           |                               |
-| Amazon Linux 2 (>= 2017.12)     |                           | <i class="icon-tick"></i> |                                           |                               |
-| CentOS/RHEL 6                   | <i class="icon-tick"></i> |                           |                                           |                               |
-| CentOS/RHEL 7                   |                           | <i class="icon-tick"></i> |                                           |                               |
-| Debian 7 (wheezy)               |                           |                           | <i class="icon-tick"></i> (Agent v6.6.0+) |                               |
-| Debian 8 (jessie) & 9 (stretch) |                           | <i class="icon-tick"></i> |                                           |                               |
+| Amazon Linux (<= 2017.09)       | <i class="icon-check-bold"></i> |                           |                                           |                               |
+| Amazon Linux 2 (>= 2017.12)     |                           | <i class="icon-check-bold"></i> |                                           |                               |
+| CentOS/RHEL 6                   | <i class="icon-check-bold"></i> |                           |                                           |                               |
+| CentOS/RHEL 7                   |                           | <i class="icon-check-bold"></i> |                                           |                               |
+| Debian 7 (wheezy)               |                           |                           | <i class="icon-check-bold"></i> (Agent v6.6.0+) |                               |
+| Debian 8 (jessie) & 9 (stretch) |                           | <i class="icon-check-bold"></i> |                                           |                               |
 | SUSE 11                         |                           |                           |                                           | `systemd` がないとサポートされません |
-| SUSE 12                         |                           | <i class="icon-tick"></i> |                                           |                               |
-| Ubuntu < 15.04                  | <i class="icon-tick"></i> |                           |                                           |                               |
-| Ubuntu >= 15.04                 |                           | <i class="icon-tick"></i> |                                           |                               |
+| SUSE 12                         |                           | <i class="icon-check-bold"></i> |                                           |                               |
+| Ubuntu < 15.04                  | <i class="icon-check-bold"></i> |                           |                                           |                               |
+| Ubuntu >= 15.04                 |                           | <i class="icon-check-bold"></i> |                                           |                               |
 
 #### Agent のコマンド
 

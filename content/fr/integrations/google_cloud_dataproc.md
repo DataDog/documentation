@@ -10,6 +10,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/google_cloud_dataproc/'
 draft: false
 git_integration_title: google_cloud_dataproc
 has_logo: true
+integration_id: google-cloud-dataproc
 integration_title: "Google\_Cloud\_Dataproc"
 is_public: true
 kind: integration
@@ -25,7 +26,7 @@ Cloud Dataproc est un service cloud rapide, facile à utiliser et entièrement 
 
 Utilisez l'intégration Datadog/Google Cloud Platform pour recueillir des métriques de Google Cloud Dataproc.
 
-## Implémentation
+## Configuration
 
 ### Installation
 

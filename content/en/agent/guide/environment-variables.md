@@ -26,7 +26,7 @@ For Agent v6, most of the configuration options in the [Agent's main configurati
 
 ## Recommendations
 
-As a best practice, Datadog recommends using unified service tagging when assigning tags. Unified service tagging ties Datadog telemetry together through the use of three standard tags: `env`, `service`, and `version`. To learn how to configure your environment with unified tagging, refer to the dedicated [unified service tagging][2] documentation.
+As a best practice, Datadog recommends using unified service tagging when assigning tags. Unified service tagging ties Datadog telemetry together through the use of three standard tags: `env`, `service`, and `version`. To learn how to configure your environment with unified tagging, see the [unified service tagging documentation][2].
 
 ## General use
 
@@ -60,7 +60,7 @@ In general, use the following rules:
 
 ### Exceptions
 
-- Not all `datadog.yaml` options are available with environment variables. Refer to [config.go][4] in the Datadog Agent GitHub repo. Options with environment variables start with `config.BindEnv*`.
+- Not all `datadog.yaml` options are available with environment variables. See [config.go][4] in the Datadog Agent GitHub repo. Options with environment variables start with `config.BindEnv*`.
 
 - Component-specific environment variables not listed in [config.go][4] may also be supported.
  

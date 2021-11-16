@@ -19,7 +19,7 @@ integration_title: Convox
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
-manifest_version: 1.0.1
+manifest_version: 1.0.0
 name: convox
 public_title: Datadog-Convox インテグレーション
 short_description: Convox は、プライバシーの完全保護を保全なしで実現できるよう設計されたオープンソースの PaaS です。

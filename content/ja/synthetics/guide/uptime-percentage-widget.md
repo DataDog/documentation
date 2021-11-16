@@ -34,7 +34,7 @@ further_reading:
 
     {{< img src="synthetics/guide/uptime_slo/synthetics_message.png" alt="Synthetic テストメッセージ" >}}
 
-## Slo ウィジェット構成
+## SLO ウィジェットコンフィギュレーション
 
 ### SLO を作成する
 
@@ -77,6 +77,6 @@ further_reading:
 [2]: /ja/dashboards/widgets/slo/
 [3]: https://app.datadoghq.com/synthetics/list
 [4]: https://dd-corpsite.datadoghq.com/synthetics/create
-[5]: /ja/monitors/notifications/
+[5]: /ja/monitors/notify/
 [6]: https://app.datadoghq.com/slo/new
 [7]: https://app.datadoghq.com/dashboard/lists

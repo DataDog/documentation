@@ -17,6 +17,7 @@ dependencies:
 public_title: Intégration Datadog/Rsyslog
 supported_os:
   - linux
+integration_id: rsyslog
 ---
 ## Présentation
 
@@ -56,13 +57,13 @@ Configurez Rsyslog pour rassembler les logs de votre host, de vos conteneurs et 
 4. (Facultatif) Chiffrement TLS :
     Si vous souhaitez ajouter le chiffrement TLS lors de l'envoi de logs directement de Rsyslog à votre compte Datadog, suivez les étapes ci-dessous.
 
-    * Installez rsyslog-gnutls :
+    - Installez rsyslog-gnutls :
 
-        ```
+        ```shell
         sudo apt-get install rsyslog-gnutls ca-certificates
         ```
 
-    * Modifiez votre fichier `/etc/rsyslog.d/datadog.conf` de façon à ce qu'il se termine par le contenu suivant :
+    - Modifiez votre fichier `/etc/rsyslog.d/datadog.conf` de façon à ce qu'il se termine par le contenu suivant :
 
         ```conf
         ## Define the destination for the logs
@@ -74,7 +75,7 @@ Configurez Rsyslog pour rassembler les logs de votre host, de vos conteneurs et 
 
 5. Redémarrez Rsyslog. Vos nouveaux logs sont maintenant transférés directement vers votre compte Datadog.
 
-    ```
+    ```shell
     sudo service rsyslog restart
     ```
 
@@ -100,17 +101,15 @@ Configurez Rsyslog pour rassembler les logs de votre host, de vos conteneurs et 
     $template DatadogFormat,"<DATADOG_API_KEY> <%pri%>%protocol-version% %timestamp:::date-rfc3339% %HOSTNAME% %app-name% - - [metas ddsource=\"<MY_SOURCE_NAME>\" ddtags=\"env:dev,<KEY:VALUE>\"] %msg%\n"
     ```
 
-8. (Facultatif) Datadog met fin aux connexions après une certaine période d'inactivité.
-    Certaines versions de Rsyslog ne parviennent pas à se reconnecter correctement lorsque cela est nécessaire. Pour résoudre ce problème, utilisez des marqueurs temporels pour que la connexion ne se termine jamais. Ajoutez les deux lignes de code suivantes dans votre configuration Rsyslog :
+8. (Facultatif) Datadog met fin aux connexions après une certaine période d'inactivité. Certaines versions de Rsyslog ne parviennent pas à se reconnecter correctement lorsque cela est nécessaire. Pour résoudre ce problème, utilisez des marqueurs temporels pour que la connexion ne se termine jamais. Ajoutez la ligne de code suivante dans votre configuration Rsyslog :
 
-    ```
-    $ModLoad immark
-    $MarkMessagePeriod 20
+    ```conf
+    module(load="immark" interval="20")
     ```
 
     N'oubliez pas d'effectuer un redémarrage :
 
-    ```
+    ```shell
     sudo service rsyslog restart
     ```
 
@@ -119,7 +118,7 @@ Configurez Rsyslog pour rassembler les logs de votre host, de vos conteneurs et 
 
 1. (Facultatif) Activez le module de surveillance de fichiers Rsyslog. Si vous souhaitez consulter ou surveiller des fichiers de log spécifiques, activez le module `imfile` en ajoutant ce qui suit à votre fichier `rsyslog.conf` :
 
-    ```
+    ```conf
     module(load="imfile" PollingInterval="10") #needs to be done just once
     ```
 
@@ -142,13 +141,13 @@ Configurez Rsyslog pour rassembler les logs de votre host, de vos conteneurs et 
 4. (Facultatif) Chiffrement TLS :
     Si vous souhaitez ajouter le chiffrement TLS lors de l'envoi de logs directement de Rsyslog à votre compte Datadog, suivez les étapes ci-dessous.
 
-    * Installez rsyslog-gnutls :
+    - Installez rsyslog-gnutls :
 
-        ```
+        ```shell
         sudo apt-get install rsyslog-gnutls ca-certificates
         ```
 
-    * Modifiez votre fichier `/etc/rsyslog.d/datadog.conf` de façon à ce qu'il se termine par le contenu suivant :
+    - Modifiez votre fichier `/etc/rsyslog.d/datadog.conf` de façon à ce qu'il se termine par le contenu suivant :
 
         ```conf
         ## Define the destination for the logs
@@ -160,7 +159,7 @@ Configurez Rsyslog pour rassembler les logs de votre host, de vos conteneurs et 
 
 5. Redémarrez Rsyslog. Vos nouveaux logs sont maintenant transférés directement à votre compte Datadog.
 
-    ```
+    ```shell
     sudo service rsyslog restart
     ```
 
@@ -186,16 +185,15 @@ Configurez Rsyslog pour rassembler les logs de votre host, de vos conteneurs et 
     ```
 
 8. (Facultatif) Datadog met fin aux connexions après une certaine période d'inactivité.
-    Certaines versions de Rsyslog ne parviennent pas à se reconnecter correctement lorsque cela est nécessaire. Pour résoudre ce problème, utilisez des marqueurs temporels pour que la connexion ne se termine jamais. Ajoutez les deux lignes de code suivantes dans votre configuration Rsyslog :
+   Certaines versions de Rsyslog ne parviennent pas à se reconnecter correctement lorsque cela est nécessaire. Pour résoudre ce problème, utilisez des marqueurs temporels pour que la connexion ne se termine jamais. Ajoutez la ligne de code suivante dans votre configuration Rsyslog :
 
-    ```
-    $ModLoad immark
-    $MarkMessagePeriod 20
+    ```conf
+    module(load="immark" interval="20")
     ```
 
     N'oubliez pas d'effectuer un redémarrage :
 
-    ```
+    ```shell
     sudo service rsyslog restart
     ```
 
@@ -237,13 +235,13 @@ Configurez Rsyslog pour rassembler les logs de votre host, de vos conteneurs et 
 4. (Facultatif) Chiffrement TLS :
     Si vous souhaitez ajouter le chiffrement TLS lors de l'envoi de logs directement de Rsyslog à votre compte Datadog, suivez les étapes ci-dessous.
 
-    * Installez rsyslog-gnutls :
+    - Installez rsyslog-gnutls :
 
-        ```
+        ```shell
         sudo apt-get install rsyslog-gnutls ca-certificates
         ```
 
-    * Modifiez votre fichier `/etc/rsyslog.d/datadog.conf` de façon à ce qu'il se termine par le contenu suivant :
+    - Modifiez votre fichier `/etc/rsyslog.d/datadog.conf` de façon à ce qu'il se termine par le contenu suivant :
 
         ```conf
         #Define the destination for the logs
@@ -257,7 +255,8 @@ Configurez Rsyslog pour rassembler les logs de votre host, de vos conteneurs et 
         ```
 
 5. Redémarrez Rsyslog. Vos nouveaux logs sont maintenant transférés directement vers votre compte Datadog.
-    ```
+
+    ```shell
     sudo service rsyslog restart
     ```
 
@@ -275,6 +274,7 @@ Configurez Rsyslog pour rassembler les logs de votre host, de vos conteneurs et 
     ```conf
     $template DatadogFormat,"<DATADOG_API_KEY> <%pri%>%protocol-version% %timestamp:::date-rfc3339% %HOSTNAME% %app-name% - - [metas ddsource=\"<MY_SOURCE_NAME>\"] %msg%\n"
     ```
+
     Vous pouvez également ajouter des tags personnalisés avec l'attribut `ddtags` :
 
     ```conf
@@ -284,14 +284,14 @@ Configurez Rsyslog pour rassembler les logs de votre host, de vos conteneurs et 
 8. (Facultatif) Datadog met fin aux connexions après une certaine période d'inactivité.
     Certaines versions de Rsyslog ne parviennent pas à se reconnecter correctement lorsque cela est nécessaire. Pour résoudre ce problème, utilisez des marqueurs temporels pour que la connexion ne se termine jamais. Ajoutez les deux lignes de code suivantes dans votre configuration Rsyslog :
 
-    ```
+    ```conf
     $ModLoad immark
     $MarkMessagePeriod 20
     ```
 
     N'oubliez pas d'effectuer un redémarrage :
 
-    ```
+    ```shell
     sudo service rsyslog restart
     ```
 
@@ -328,13 +328,13 @@ Configurez Rsyslog pour rassembler les logs de votre host, de vos conteneurs et 
 4. (Facultatif) Chiffrement TLS :
     Si vous souhaitez ajouter le chiffrement TLS lors de l'envoi de logs directement de Rsyslog à votre compte Datadog, suivez les étapes ci-dessous.
 
-    * Installez rsyslog-gnutls :
+    - Installez rsyslog-gnutls :
 
-        ```
+        ```shell
         sudo apt-get install rsyslog-gnutls ca-certificates
         ```
 
-    * Modifiez votre fichier `/etc/rsyslog.d/datadog.conf` de façon à ce qu'il se termine par le contenu suivant :
+    - Modifiez votre fichier `/etc/rsyslog.d/datadog.conf` de façon à ce qu'il se termine par le contenu suivant :
 
         ```conf
         #Define the destination for the logs
@@ -348,7 +348,8 @@ Configurez Rsyslog pour rassembler les logs de votre host, de vos conteneurs et 
         ```
 
 5. Redémarrez Rsyslog. Vos nouveaux logs sont maintenant transférés directement vers votre compte Datadog.
-    ```
+
+    ```shell
     sudo service rsyslog restart
     ```
 
@@ -376,14 +377,14 @@ Configurez Rsyslog pour rassembler les logs de votre host, de vos conteneurs et 
 8. (Facultatif) Datadog met fin aux connexions après une certaine période d'inactivité.
     Certaines versions de Rsyslog ne parviennent pas à se reconnecter correctement lorsque cela est nécessaire. Pour résoudre ce problème, utilisez des marqueurs temporels pour que la connexion ne se termine jamais. Ajoutez les deux lignes de code suivantes dans votre configuration Rsyslog :
 
-    ```
+    ```conf
     $ModLoad immark
     $MarkMessagePeriod 20
     ```
 
     N'oubliez pas d'effectuer un redémarrage :
 
-    ```
+    ```shell
     sudo service rsyslog restart
     ```
 
@@ -394,4 +395,4 @@ Configurez Rsyslog pour rassembler les logs de votre host, de vos conteneurs et 
 
 Besoin d'aide ? Contactez [l'assistance Datadog][1].
 
-[1]: /fr/help
+[1]: /fr/help/

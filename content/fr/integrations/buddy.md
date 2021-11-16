@@ -19,7 +19,7 @@ integration_title: Buddy
 is_public: true
 kind: integration
 maintainer: support@buddy.works
-manifest_version: 1.0.2
+manifest_version: 1.0.0
 name: buddy
 public_title: Intégration Datadog/Buddy
 short_description: Automatisation de la livraison en un seul clic grâce à des aperçus de sites Web actifs pour les développeurs Web.

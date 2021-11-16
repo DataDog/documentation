@@ -2,7 +2,8 @@
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
-  dashboards: {}
+  dashboards:
+    varnish: assets/dashboards/varnish_dashboard.json
   logs:
     source: varnish
   metrics_metadata: metadata.csv
@@ -12,6 +13,7 @@ assets:
     5xx_errors: assets/saved_views/5xx_errors.json
     bot_errors: assets/saved_views/bot_errors.json
     status_code_overview: assets/saved_views/status_code_overview.json
+    varnish_processes: assets/saved_views/varnish_processes.json
   service_checks: assets/service_checks.json
 categories:
   - web
@@ -20,7 +22,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/varnish/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/varnish/README.md
 display_name: Varnish
 draft: false
 git_integration_title: varnish
@@ -174,9 +176,8 @@ _Agent バージョン 6.0 以降で利用可能_
 Varnish チェックには、イベントは含まれません。
 
 ### サービスのチェック
+{{< get-service-checks-from-git "varnish" >}}
 
-**varnish.backend_healthy**:<br>
-`varnishadm` を構成すると、Agent がこのサービスチェックを送信します。各 Varnish バックエンドのサービスチェックが `backend:<バックエンド名>` でタグ付けされて送信されます。
 
 ## トラブルシューティング
 

@@ -40,8 +40,8 @@ further_reading:
 - `users.online:1|c|@0.5|#country:china`: アクティブな中国ユーザーを追跡し、サンプルレートを使用します。
 
 
-[1]: /ja/developers/metrics/#naming-metrics
-[2]: /ja/developers/metrics/types/
+[1]: /ja/metrics/#naming-metrics
+[2]: /ja/metrics/types/
 [3]: /ja/getting_started/tagging/
 {{% /tab %}}
 {{% tab "Events" %}}
@@ -210,7 +210,7 @@ PS C:\> .\send-statsd.ps1 "_sc|Redis 接続|2|#env:dev|m:Redis 接続が 10 秒�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/developers/libraries/#api-and-dogstatsd-client-libraries
+[1]: /ja/developers/community/libraries/#api-and-dogstatsd-client-libraries
 [2]: https://github.com/joehack3r/powershell-statsd/blob/master/send-statsd.ps1
 [3]: /ja/developers/dogstatsd/
 [4]: /ja/agent/kubernetes/apm/

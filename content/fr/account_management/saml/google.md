@@ -15,7 +15,7 @@ further_reading:
 
 [Consultez les instructions Google spécifiques][1].
 
-## Pour la catégorie « Service Provider Details »
+## Détails du prestataire de services
 
 **Pré-requis** ; vous devez avoir coché « IDP initiated SSO » sur la page de configuration de SAML de Datadog.
 
@@ -27,7 +27,7 @@ further_reading:
 * **Signed Response** : ne cochez pas cette case.
 * **Name ID** : « informations de base » « principale adresse e-mail »
 
-## Pour la catégorie « Attribute Mapping »
+## Mappage des attributs
 
 * « urn:oid:1.3.6.1.4.1.5923.1.1.1.6 » « informations de base » « principale adresse e-mail »
 

@@ -43,7 +43,7 @@ supported_os:
 ---
 ## Présentation
 
-Ce check permet de surveiller [Hazelcast][1].
+Ce check permet de surveiller [Hazelcast][1] 4.0 et ultérieur.
 
 ## Configuration
 

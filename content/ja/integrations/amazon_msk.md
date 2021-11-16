@@ -1,16 +1,18 @@
 ---
 categories:
   - cloud
-  - aws
+  - AWS
   - ログの収集
 ddtype: check
 dependencies: []
 description: Amazon Managed Streaming for Apache Kafka (MSK) のキーメトリクスを追跡
-doc_link: 'https://docs.datadoghq.com/integrations/amazon_msk/'
+doc_link: https://docs.datadoghq.com/integrations/amazon_msk/
 draft: false
 git_integration_title: amazon_msk
 has_logo: true
+integration_id: amazon-msk
 integration_title: Amazon Managed Streaming for Apache Kafka
+integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
@@ -25,7 +27,7 @@ Amazon Managed Streaming for Apache Kafka (MSK) は、Apache Kafka を使用し�
 
 このインテグレーションからメトリクスを収集する方法は、[Datadog Agent](#agent-check) を使用する方法と、[クローラー](#crawler)を使用して CloudWatch からメトリクスを収集する方法の 2 通りあります。
 
-## Agentチェック
+## Agent チェック
 
 Agent チェックは、Datadog Agent を通じて、Amazon Managed Streaming for Apache Kafka ([Amazon MSK][1]) を監視します。
 
@@ -95,10 +97,10 @@ Amazon MSK から S3 バケットまたは CloudWatch のいずれかにログ�
 #### ログを Datadog に送信する方法
 
 1. [Datadog ログ コレクション AWS Lambda 関数][16]をまだ実行していない場合は、セットアップします。
-2. lambda 関数がインストールされたら、AWS コンソールから、Amazon MSK ログを含む S3 バケットまたは CloudWatch のロググループに手動でトリガーを追加します。
+2. Lambda 関数がインストールされたら、AWS コンソールから、Amazon MSK ログを含む S3 バケットまたは CloudWatch のロググループに手動でトリガーを追加します。
 
     - [S3 バケットに手動トリガーを追加][17]
-    - [Cloudwatch ロググループに手動でトリガーを追加][18]
+    - [CloudWatch ロググループに手動トリガーを追加][18]
 
 ### 収集データ
 

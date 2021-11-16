@@ -12,6 +12,7 @@ categories:
   - containers
   - network
   - security
+  - log collection
 creates_events: false
 ddtype: check
 dependencies:
@@ -43,7 +44,7 @@ Ce check permet de surveiller [Cilium][1] avec l'Agent Datadog. L'intégration p
 
 ## Configuration
 
-Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la [documentation relative aux modèles d'intégration Autodiscovery][2] pour découvrir comment appliquer ces instructions à un environnement conteneurisé.
+Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la [documentation relative aux modèles d'intégration Autodiscovery][2] pour découvrir comment appliquer ces instructions à des environnements conteneurisés.
 
 ### Installation
 

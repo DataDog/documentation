@@ -3,6 +3,11 @@ title: RPM GPG Key Rotation
 kind: faq
 ---
 
+<div class="alert alert-warning">
+This page pertains to the 2019 key rotation. For the 2022 key rotation, consult the <a href="/agent/faq/linux-agent-2022-key-rotation">2022 Linux Agent Key Rotation</a> documentation.
+</div>
+
+
 Starting with v6.14.0, the Agent RPM packages are signed with a different GPG key. As a common best practice, Datadog periodically updates the GPG key.
 
 Hosts using RPM packages located in the [Datadog Yum repository][1] are affected by this change and need to trust the key by importing the associated public key in their hosts' keyrings.
@@ -11,7 +16,7 @@ Trying to install or upgrade the Agent package without trusting the key results 
 
 The fingerprint of the associated public key is: `A4C0B90D7443CF6E4E8AA341F1068E14E09422B3`.
 
-If you're using the latest version for one of the following officially supported install methods, your hosts will automatically trust the key and no further action is needed.
+If you're using the latest version for one of the following officially supported install methods, your hosts trust the key automatically and no further action is needed.
 
 * [Agent installation page][2]
 * [Chef cookbook][3]

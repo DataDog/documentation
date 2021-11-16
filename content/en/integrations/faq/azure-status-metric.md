@@ -9,7 +9,7 @@ aliases:
 
 Datadog generates two additional metrics for each resource monitored with the [Azure integration][1]: `azure.*.status` and `azure.*.count`. For example, Azure Virtual Machines monitored by Datadog reports `azure.vm.status` and `azure.vm.count`. These two metrics cover similar information.
 
-The `azure.*.count` metric is an improvement over `azure.*.status`, which will be deprecated.
+The `azure.*.count` metric is an improvement over `azure.*.status`, which is deprecated.
 
 ## Count metric
 
@@ -28,7 +28,7 @@ Use the `azure.*.count` metric to:
 - Create query widgets in dashboards to display the number of a given resource type. Use any available tags to scope the count to a relevant aggregation such as region, resource group, kind, or status.
 - Create monitors to alert you about the status of different Azure resources.
 
-**Note**: In some cases, the default visualization settings can make it appear as though resources are being double counted intermittently in charts or query widgets. This will not affect monitors or widgets scoped to a specific status.
+**Note**: In some cases, the default visualization settings can make it appear as though resources are being double counted intermittently in charts or query widgets. This does not affect monitors or widgets scoped to a specific status.
 You can reduce this effect by turning off [interpolation][2] in charts or query widgets by setting Interpolation > none or using ‘.fill(null)’. 
 
 For most resource types, the possible statuses are:

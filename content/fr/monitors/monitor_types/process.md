@@ -40,7 +40,7 @@ Une fois votre recherche définie, un graphique s'affiche au-dessus des critère
 ### Définir vos conditions d'alerte
 
 * Le total était `above`, `above or equal to`, `below` ou `below or equal to` (supérieur, supérieur ou égal à, inférieur, inférieur ou égal à)
-* au seuil durant les `5 minutes`, `15 minutes` ou encore `1 hour` précédentes.
+* au seuil sur un intervalle de `5 minutes`, `15 minutes` ou `1 hour` ou sur un intervalle `custom` (entre 1 minute et 48 heures).
 
 Les seuils vous permettent de déclencher une alerte lorsqu'une certaine valeur numérique est dépassée. Datadog dispose de deux types de notifications : les alertes et les avertissements. Les monitors de live processes se rétablissent automatiquement en fonction du seuil d'alerte ou d'avertissement.
 

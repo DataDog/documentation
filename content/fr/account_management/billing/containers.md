@@ -10,11 +10,11 @@ Les conteneurs supplémentaires sont facturés [en supplément][1], par conteneu
 
 ### Kubernetes
 
-Kubernetes crée des conteneurs pause pour obtenir l'adresse IP du pod respectif et configurer l'espace de nommage du réseau pour tous les autres conteneurs qui rejoigne ce pod. Datadog exclut les conteneurs pause de votre quota et ne les facture pas (nécessite l'Agent 5.8+).
+Kubernetes crée des conteneurs pause (nécessite l'Agent v5.8+) pour obtenir l'adresse IP du pod respectif et configurer l'espace de nommage du réseau pour tous les autres conteneurs qui rejoigne ce pod. Datadog exclut les conteneurs pause de votre quota et ne les facture pas (nécessite l'Agent v7.20+ pour l'exclusion de conteneurs pause AWS EKS).
 
 ### Fargate
 
-Fargate est facturé en fonction du nombre de tâches simultanées. Pour découvrir les tarifs, consultez la section [Serverless][4] de la page des tarifs.
+Fargate est facturé en fonction du nombre de tâches simultanées. Pour découvrir les tarifs, consultez la section [Infrastructure][4] de la page des tarifs.
 
 ## Dépannage
 
@@ -25,5 +25,5 @@ Pour toute question concernant la facturation, contactez votre [chargé de compt
 [1]: https://www.datadoghq.com/pricing/#tab-faq-infrastructure
 [2]: mailto:sales@datadoghq.com
 [3]: mailto:success@datadoghq.com
-[4]: https://www.datadoghq.com/pricing/#section-infrastructure
+[4]: https://www.datadoghq.com/pricing/#section-infra
 [5]: /fr/help/

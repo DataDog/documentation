@@ -21,7 +21,7 @@ Les monitors réseau sont destinés aux checks TCP et HTTP disponibles dans l'Ag
 
 Pour créer un [monitor réseau][3] dans Datadog, utilisez la navigation principale : *Monitors --> New Monitor --> Network*.
 
-### Statut réseau
+### Statut du réseau
 
 #### Choisir un check
 
@@ -78,7 +78,7 @@ Consultez la documentation relative aux [monitors de métrique][4] pour en savoi
 
 Pour obtenir des instructions détaillées sur l'utilisation des sections **Say what's happening** et **Notify your team**, consultez la page [Notifications][8].
 
-### Métriques réseau
+### Métrique réseau
 
 Créez un monitor de métrique réseau en suivant les instructions dans la documentation relative aux [monitors de métrique][8]. Sélectionnez cette option pour permettre à la facette correspondant au type de monitor réseau de sélectionner le monitor sur la page [Gérer les monitors][9].
 

@@ -147,21 +147,18 @@ _Agent バージョン 6.0 以降で利用可能_
 {{< get-metrics-from-git "druid" >}}
 
 
-### サービスのチェック
-
-**druid.process.can_connect**:<br>
-チェックが Druid プロセスに接続できない場合は `CRITICAL` を返します。それ以外の場合は `OK` を返します。
-
-**druid.process.health**:<br>
-Druid プロセスが不健全な場合は `CRITICAL` を返します。それ以外の場合は `OK` を返します。
-
 ### イベント
 
 Druid チェックには イベントは含まれません。
 
+### サービスのチェック
+{{< get-service-checks-from-git "druid" >}}
+
+
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][12]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][13]までお問合せください。
+
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/druid/images/druid_dashboard_overview.png
 [2]: https://docs.datadoghq.com/ja/developers/dogstatsd/
@@ -174,4 +171,5 @@ Druid チェックには イベントは含まれません。
 [9]: https://druid.apache.org/docs/latest/operations/including-extensions.html
 [10]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [11]: https://github.com/DataDog/integrations-core/blob/master/druid/metadata.csv
-[12]: https://docs.datadoghq.com/ja/help/
+[12]: https://github.com/DataDog/integrations-core/blob/master/druid/assets/service_checks.json
+[13]: https://docs.datadoghq.com/ja/help/

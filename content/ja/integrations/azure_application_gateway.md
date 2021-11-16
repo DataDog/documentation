@@ -7,11 +7,13 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Azure Application Gateway のキーメトリクスを追跡
-doc_link: 'https://docs.datadoghq.com/integrations/azure_application_gateway/'
+doc_link: https://docs.datadoghq.com/integrations/azure_application_gateway/
 draft: false
 git_integration_title: azure_application_gateway
 has_logo: true
+integration_id: azure-applicationgateway
 integration_title: Microsoft Azure Application Gateway
+integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
@@ -30,7 +32,7 @@ Datadog Azure インテグレーションを使用して、Azure Application Gat
 
 ### インストール
 
-[Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。これ以上のインストール手順はありません。
+[Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
 
 ## 収集データ
 

@@ -17,7 +17,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/proxysql/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/proxysql/README.md
 display_name: ProxySQL
 draft: false
 git_integration_title: proxysql
@@ -148,21 +148,18 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 {{< get-metrics-from-git "proxysql" >}}
 
 
-### サービスのチェック
-
-**proxysql.can_connect**:<br>
-Agent が ProxySQL に接続できない場合は `CRITICAL` を返します。それ以外の場合は `OK` を返します。このサービスチェックは `server` と `port` でタグ付けされます。
-
-**proxysql.backend.status**:<br>
-ProxySQL がバックエンドホストを SHUNNED または OFFLINE_HARD とみなす場合は `CRITICAL` を返します。バックエンドホストが `OFFLINE_SOFT` の場合は `WARNING` を返します。それ以外の場合は `OK` を返します。このサービスチェックは`hostgroup`、`srv_host`、`srv_port` でタグ付けされます。
-
 ### イベント
 
 ProxySQL チェックにはイベントは含まれません。
 
+### サービスのチェック
+{{< get-service-checks-from-git "proxysql" >}}
+
+
 ## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
+
 
 
 [1]: https://proxysql.com/

@@ -21,6 +21,7 @@ kind: integration
 maintainer: '@platinummonkey'
 manifest_version: 1.0.0
 metric_prefix: storm.
+metric_to_check: storm.bolt.last_60.acked
 name: storm
 public_title: Intégration Datadog/Storm
 short_description: Statistiques d'exécution des topologies Apache Storm 1.x.x

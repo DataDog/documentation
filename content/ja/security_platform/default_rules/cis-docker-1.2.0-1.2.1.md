@@ -54,7 +54,7 @@ mountpoint -- "$(docker info -f '{{ .DockerRootDir }}')"
 
 1. [https://www.projectatomic.io/docs/docker-storage-recommendation/][1]
 
-## CIS Controls
+## CIS コントロール
 
 Need to Knowの原則に基づくバージョン 6.14 のアクセス制御                
 

@@ -49,12 +49,12 @@ Configuring `env` closer to the source of the data, such as APM traces or logs, 
 
 Kubernetes users can continue to use these general tags. However, using the specific labels has a few benefits:
 
-- You can directly reference them for environment variable injection via the Kubernetes downward API.
+- You can directly reference them for environment variable injection with the Kubernetes downward API.
 - The service standard label can simplify the definition of service for logs.
 
 ### Using standard labels for specific containers
 
-Since the `DD` environment variables are injected at the container level, they can differ from container to container. However, if you want to use the standard labels as well for specific containers, then you will need to use their container-specific variants:
+Since the `DD` environment variables are injected at the container level, they can differ from container to container. However, if you want to use the standard labels as well for specific containers, then you need to use the container-specific variants:
 
 ```yaml
 tags.datadoghq.com/<container>.env
@@ -84,5 +84,5 @@ The admission controller looks for this information in the pod labels. If not fo
 [1]: /getting_started/tagging/unified_service_tagging
 [2]: /tracing/guide/setting_primary_tags_to_scope/
 [3]: /metrics/distributions/#customize-tagging
-[4]: /logs/processing/pipelines/
+[4]: /logs/log_configuration/pipelines
 [5]: /agent/cluster_agent/admission_controller/

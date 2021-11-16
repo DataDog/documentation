@@ -2,14 +2,17 @@
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
-  dashboards: {}
-  logs: {}
+  dashboards:
+    Twemproxy - Overview: assets/dashboards/twemproxy_overview.json
+  logs:
+    source: twemproxy
   metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
   - web
   - autodiscovery
+  - log collection
 creates_events: false
 ddtype: check
 dependencies:
@@ -61,10 +64,32 @@ Pour configurer ce check lorsque l'Agent est exécuté sur un host :
 
    instances:
      - host: localhost
-       port: 22222
+       port: 2222
    ```
 
 2. [Redémarrez l'Agent][3] pour commencer à envoyer vos métriques Twemproxy à Datadog.
+
+##### Collecte de logs
+
+1. La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans `datadog.yaml` :
+
+   ```yaml
+   logs_enabled: true
+   ```
+
+2. Ajoutez ce bloc de configuration à votre fichier `twemproxy.d/conf.yaml` pour commencer à recueillir vos logs Apache :
+
+   ```yaml
+   logs:
+     - type: file
+       path: "<LOG_FILE_PATH>"
+       source: twemproxy
+       service: "<SERVICE_NAME>"
+   ```
+
+    Modifiez les valeurs des paramètres `path` et `service` et configurez-les pour votre environnement. Consultez le [fichier d'exemple twemproxy.d/conf.yaml][2] pour découvrir toutes les options de configuration disponibles.
+
+3. [Redémarrez l'Agent][3].
 
 [1]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/twemproxy/datadog_checks/twemproxy/data/conf.yaml.example
@@ -82,7 +107,16 @@ Consultez la [documentation relative aux modèles d'intégration Autodiscovery][
 | `<CONFIG_INIT>`      | vide ou `{}`                          |
 | `<CONFIG_INSTANCE>`  | `{"host": "%%host%%", "port":"22222"}` |
 
+##### Collecte de logs
+
+La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Kubernetes][2].
+
+| Paramètre      | Valeur                                            |
+| -------------- | ------------------------------------------------ |
+| `<CONFIG_LOG>` | `{"source": "twemproxy", "service": "<NOM_SERVICE>"}` |
+
 [1]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
+[2]: https://docs.datadoghq.com/fr/agent/kubernetes/log/
 {{% /tab %}}
 {{< /tabs >}}
 

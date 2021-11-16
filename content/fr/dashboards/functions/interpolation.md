@@ -20,7 +20,7 @@ La fonction `fill()` comprend deux paramètres :
 
 * `LIMITE` [*facultatif*, *défaut*=**300**, *maximum*=**600**] : la limite d'interpolation (en secondes), c'est-à-dire la taille maximale d'un intervalle manquant que vous souhaitez interpoler.
 
-## Default Zero
+## Default zero
 
 | Fonction         | Description                             | Exemple                          |
 | ---------------- | --------------------------------------- | -------------------------------- |
@@ -100,4 +100,4 @@ default_zero(avg:custom_metric{*})
 
 [1]: /fr/getting_started/from_the_query_to_the_graph/#proceed-to-space-aggregation
 [2]: /fr/monitors/guide/as-count-in-monitor-evaluations/
-[3]: /fr/developers/metrics/
+[3]: /fr/metrics/

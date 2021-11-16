@@ -10,6 +10,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/google_cloud_apis/'
 draft: false
 git_integration_title: api_google_cloud
 has_logo: true
+integration_id: google-cloud-apis
 integration_title: "API Google\_Cloud"
 is_public: true
 kind: integration
@@ -25,7 +26,7 @@ Les API Google Cloud vous permettent d'accéder aux produits de la Google Clou
 
 Utilisez l'intégration Datadog/Google Cloud Platform pour recueillir des métriques des API Google Cloud.
 
-## Implémentation
+## Configuration
 
 ### Installation
 

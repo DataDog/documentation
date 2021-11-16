@@ -85,14 +85,13 @@ Directory チェックは [Datadog Agent][1] パッケージに含まれてい�
 Directory チェックには、イベントは含まれません。
 
 ### サービスのチェック
-
-**system.disk.directory.exists**:<br>
-Agent が監視するディレクトリを見つけられない、またはアクセスできない場合は、`WARNING` を返します。それ以外の場合は、`OK` を返します。
+{{< get-service-checks-from-git "directory" >}}
 
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][7]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
+
 
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
@@ -100,4 +99,5 @@ Agent が監視するディレクトリを見つけられない、またはア�
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [6]: https://github.com/DataDog/integrations-core/blob/master/directory/metadata.csv
-[7]: https://docs.datadoghq.com/ja/help/
+[7]: https://github.com/DataDog/integrations-core/blob/master/directory/assets/service_checks.json
+[8]: https://docs.datadoghq.com/ja/help/

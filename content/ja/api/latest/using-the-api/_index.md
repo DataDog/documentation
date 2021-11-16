@@ -74,7 +74,7 @@ Datadog へのデータ送信が始まると、API を使用してデータの�
 [11]: /ja/events/
 [12]: /ja/api/v1/synthetics/
 [13]: /ja/synthetics/
-[14]: /ja/api/v1/tracing/
+[14]: /ja/tracing/guide/send_traces_to_agent_by_api/
 [15]: /ja/api/v1/dashboards/
 [16]: /ja/api/v1/dashboard-lists/
 [17]: /ja/api/v1/hosts/

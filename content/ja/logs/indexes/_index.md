@@ -20,8 +20,6 @@ further_reading:
 ---
 ログインデックスでは、さまざまな保持、割り当て、使用状況の監視、および課金のためにデータを値グループにセグメント化できるようにすることで、ログ管理予算をきめ細かく制御できます。インデックスは、[Configuration ページ][1]の Indexes セクションにあります。インデックスをダブルクリックするか、*Edit* ボタンをクリックすると、過去 3 日間にインデックス化されたログの数とそれらの保存期間に関する情報が表示されます。
 
-{{< img src="logs/indexes/index_details.png" alt="インデックスの詳細"  style="width:70%;">}}
-
 インデックス化されたログは、[ファセット検索][2]、[パターン][3]、[分析][4]、[ダッシュボード][5]、および[監視][6]に使用できます。
 
 ## 複数のインデックス
@@ -71,7 +69,7 @@ Log Explorer は、[複数のインデックスにわたるクエリ][7]をサ�
 
 {{< img src="logs/indexes/reorder_index_filters.png" alt="インデックスフィルターの順序変更"  style="width:80%;">}}
 
-### 除外フィルターの例
+### 例
 
 #### オンとオフを切り替える
 
@@ -112,7 +110,6 @@ Log Explorer は、[複数のインデックスにわたるクエリ][7]をサ�
 * `DEBUG` ログは、`request_id` サンプリングルールで一貫してインデックス化されます。ただし、デバッグログ除外フィルターが適用されている場合は、サンプリングされます。
 * 実際の `request_id` を持つ `2XX` ウェブアクセスログの 50% は、保持されます。その他の `2XX` ウェブアクセスログは、90% 除外フィルタールールに基づき、すべてサンプリングされます。
 
-
 ## ログの保持を更新
 
 インデックス保持設定は、ログが Datadog に保存され、検索できる期間を決定します。保持は、アカウントコンフィギュレーションで許可されている任意の値に設定できます。
@@ -129,13 +126,13 @@ Log Explorer は、[複数のインデックスにわたるクエリ][7]をサ�
 
 {{< img src="logs/indexes/index_quota.png" alt="インデックスの詳細"  style="width:70%;">}}
 
-**注**: インデックスの 1 日の割り当ては、UTC 時間の 2:00pm (CET 4:00pm、EDT 10:00am、PDT 7:00am) に自動的にリセットされます。
+**注**: インデックスの 1 日の割り当ては、[UTC 時間の 2:00pm][19] に自動的にリセットされます。
 
 日別の割り当てに達したらイベントが生成されます。
 
 {{< img src="logs/indexes/index_quota_event.png" alt="インデックスの割り当て数通知"  style="width:70%;">}}
 
- [ログ使用ガイド][19]に従って、現在の使用量を監視し、アラートを発動させる方法をご確認ください。
+[ログ使用ガイド][20]に従って、現在の使用量を監視し、アラートを発動させる方法をご確認ください。
 
 ## その他の参考資料
 
@@ -161,4 +158,5 @@ Log Explorer は、[複数のインデックスにわたるクエリ][7]をサ�
 [16]: /ja/logs/processing/processors/?tab=ui#trace-remapper
 [17]: /ja/help/
 [18]: /ja/logs/live_tail/#overview
-[19]: /ja/logs/guide/logs-monitors-on-volumes/#monitor-indexed-logs-with-fixed-threshold
+[19]: https://www.timeanddate.com/worldclock/converter.html
+[20]: /ja/logs/guide/logs-monitors-on-volumes/#monitor-indexed-logs-with-fixed-threshold

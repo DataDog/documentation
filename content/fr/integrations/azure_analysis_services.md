@@ -7,11 +7,13 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Surveillez des métriques clés d'Azure Analysis Services.
-doc_link: 'https://docs.datadoghq.com/integrations/azure_analysis_services/'
+doc_link: https://docs.datadoghq.com/integrations/azure_analysis_services/
 draft: false
 git_integration_title: azure_analysis_services
 has_logo: true
+integration_id: azure-analysisservices
 integration_title: Microsoft Azure Analysis Services
+integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'
@@ -26,7 +28,7 @@ Azure Analysis Services est une plateforme entièrement gérée en tant que serv
 
 Utilisez l'intégration Datadog/Azure pour recueillir des métriques d'Azure Analysis Services.
 
-## Implémentation
+## Configuration
 
 ### Installation
 

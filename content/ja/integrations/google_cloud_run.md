@@ -15,6 +15,7 @@ further_reading:
     text: Datadog を使用した Google Cloud Run の監視
 git_integration_title: google_cloud_run
 has_logo: true
+integration_id: google-cloud-run
 integration_title: Google Cloud Run
 is_public: true
 kind: インテグレーション

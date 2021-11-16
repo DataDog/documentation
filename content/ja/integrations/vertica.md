@@ -15,7 +15,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/vertica/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/vertica/README.md
 display_name: Vertica
 draft: false
 git_integration_title: vertica
@@ -50,6 +50,12 @@ Vertica チェックは [Datadog Agent][2] パッケージに含まれていま�
 ### コンフィギュレーション
 
 vertica のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `vertica.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、サンプル [vertica.d/conf.yaml][3] を参照してください。
+
+#### SSL の有効化
+
+Vertica インテグレーションは、SSL を使用した Vertica への接続をサポートします。これを有効にするには、`conf.yaml` の `use_tls` を `true` にします。
+
+注: Vertica インテグレーションのバージョン 1.9.0 以前では、`tls_verify` を `true` にします。レガシーのサポートとして、`tls_verify` が明示的に `true` に設定されている場合、`use_tls` は `true` に設定されます。
 
 #### Vertica の準備
 
@@ -101,21 +107,18 @@ _Agent バージョン 6.0 以降で利用可能_
 {{< get-metrics-from-git "vertica" >}}
 
 
-### サービスのチェック
-
-**vertica.can_connect**:<br> 
-Agent が監視対象の Vertica データベースに接続できる場合、`OK` を返します。それ以外の場合は、`CRITICAL` を返します。
-
-**vertica.node_state**:<br>
-UP 状態の各ノードに対して `OK` を、UP への可能なパス上にあるノードに対して `WARNING` を、それ以外の場合は `CRITICAL` を返します。
-
 ### イベント
 
 Vertica には、イベントは含まれません。
 
+### サービスのチェック
+{{< get-service-checks-from-git "vertica" >}}
+
+
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][11]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][12]までお問合せください。
+
 
 [1]: https://www.vertica.com
 [2]: https://docs.datadoghq.com/ja/agent/
@@ -127,4 +130,5 @@ Vertica には、イベントは含まれません。
 [8]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/?#start-stop-and-restart-the-agent
 [9]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/?#agent-status-and-information
 [10]: https://github.com/DataDog/integrations-core/blob/master/vertica/metadata.csv
-[11]: https://docs.datadoghq.com/ja/help/
+[11]: https://github.com/DataDog/integrations-core/blob/master/vertica/assets/service_checks.json
+[12]: https://docs.datadoghq.com/ja/help/

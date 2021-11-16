@@ -14,6 +14,7 @@ categories:
   - security
   - containers
   - configuration & deployment
+  - log collection
 creates_events: false
 ddtype: check
 dependencies:

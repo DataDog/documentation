@@ -10,6 +10,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/google_cloud_ml/'
 draft: false
 git_integration_title: google_cloud_ml
 has_logo: true
+integration_id: google-cloud-ml
 integration_title: Google Machine Learning
 is_public: true
 kind: インテグレーション

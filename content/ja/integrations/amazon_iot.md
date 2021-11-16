@@ -12,6 +12,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/amazon_iot/'
 draft: false
 git_integration_title: amazon_iot
 has_logo: true
+integration_id: amazon-iot
 integration_title: Amazon Internet of Things
 is_public: true
 kind: インテグレーション
@@ -52,7 +53,7 @@ Amazon IoT から S3 バケットまたは CloudWatch のいずれかにログ�
 2. lambda 関数がインストールされたら、AWS コンソールから、Amazon IoT ログを含む S3 バケットまたは CloudWatch のロググループに手動でトリガーを追加します。
 
     - [S3 バケットに手動トリガーを追加][5]
-    - [Cloudwatch ロググループに手動トリガーを追加][6]
+    - [CloudWatch ロググループに手動トリガーを追加][6]
 
 ## 収集データ
 

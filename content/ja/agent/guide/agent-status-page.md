@@ -150,7 +150,7 @@ Agent の一般情報は Agent バージョンで見つけることができま�
 
 ## Forwarder
 
-Forwarder は複数のワーカーを使用して Datadog にペイロードを送信します。
+Forwarder はいくつかのワーカーを使用して Datadog にペイロードを送信します。
 
 `the forwarder dropped transactions, there is probably an issue with your network` という警告文は、全てのワーカーがビジー状態であることを意味します。ネットワークのパフォーマンスを確認し、 `forwarder_num_workers` と `forwarder_timeout` オプションを調整する必要があります。
 

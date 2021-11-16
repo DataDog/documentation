@@ -13,6 +13,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/amazon_sns/'
 draft: false
 git_integration_title: amazon_sns
 has_logo: true
+integration_id: amazon-sns
 integration_title: Amazon SNS
 is_public: true
 kind: インテグレーション
@@ -52,9 +53,11 @@ SNS を Datadog に接続すると、以下のことができます。
 
 ### イベント収集
 
-#### イベントストリームでの SNS メッセージの受信
+#### SNS メッセージの受信
 
-1. SNS マネジメントコンソールの Topics セクションで、目的のトピックを選択し、Create Subscription をクリックします。
+Datadog イベントストリームで SNS メッセージを受信するには
+
+1. SNS マネジメントコンソールの Topics セクションで、目的のトピックを選択し、**Create Subscription** をクリックします。
 2. HTTPS を選択し、次の Webhook URL を入力します。
 
     ```text
@@ -67,7 +70,9 @@ SNS を Datadog に接続すると、以下のことができます。
 
 3. "Enable raw message delivery" はオフにします。
 
-#### Datadog からの SNS 通知の送信
+#### SNS 通知の送信
+
+Datadog から SNS 通知を送信するには
 
 1. AWS インテグレーションタイルで、SNS サービスと関連付けられている AWS アカウントを構成します。
 2. [SNS インテグレーションをインストール][5]します。
@@ -107,11 +112,7 @@ AWS SNS インテグレーションには、サービスのチェック機能は
 
 ## トラブルシューティング
 
-### AWS GovCloud と AWS China
-
-現在、AWS GovCloud および AWS China では、Datadog からトピックへの SNS 通知をサポートしていません。
-
-### その他の問題
+Datadog では、Datadog から GovCloud または 中国のトピックへの SNS 通知をサポートしていません。
 
 ご不明な点は、[Datadog のサポートチーム][7]までお問合せください。
 

@@ -12,7 +12,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/kube_controller_manager/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/kube_controller_manager/README.md
 display_name: Kubernetes Controller Manager
 draft: false
 git_integration_title: kube_controller_manager
@@ -38,17 +38,19 @@ supported_os:
 
 このチェックは、Kubernetes Control Plane の一部である [Kubernetes Controller Manager][1] を監視します。
 
+**注**: サービスが公開されていないため、このチェックは Amazon EKS クラスターのデータを収集しません。
+
 ## セットアップ
 
 ### インストール
 
-Kube_controller_manager チェックは [Datadog Agent][2] パッケージに含まれているため、
+Kubernetes Controller Manager チェックは [Datadog Agent][2] パッケージに含まれているため、
 サーバーに追加でインストールする必要はありません。
 
 ### コンフィギュレーション
 
 このインテグレーションは、コントローラーマネージャーのメトリクスエンドポイントにアクセスする必要があります。通常、これは 
-Container-as-a-Service クラスターでは公開されません。
+サービスとしてのコンテナ クラスターでは公開されません。
 
 1. kube_controller_manager のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `kube_controller_manager.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル kube_controller_manager.d/conf.yam][2] を参照してください。
 
@@ -64,22 +66,23 @@ Container-as-a-Service クラスターでは公開されません。
 {{< get-metrics-from-git "kube_controller_manager" >}}
 
 
-### サービスのチェック
-
-**kube_controller_manager.prometheus.health**:<br>
-Agent がメトリクスのエンドポイントに到達できない場合は `CRITICAL` を返します。
-
 ### イベント
 
-Kube_controller_manager には、イベントは含まれません。
+Kubernetes Controller Manager チェックには、イベントは含まれません。
+
+### サービスのチェック
+{{< get-service-checks-from-git "kube_controller_manager" >}}
+
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][7]までお問合せください。
+
 
 [1]: https://kubernetes.io/docs/reference/command-line-tools-reference/kube-controller-manager
 [2]: https://github.com/DataDog/integrations-core/blob/master/kube_controller_manager/datadog_checks/kube_controller_manager/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [5]: https://github.com/DataDog/integrations-core/blob/master/kube_controller_manager/metadata.csv
-[6]: https://docs.datadoghq.com/ja/help/
+[6]: https://github.com/DataDog/integrations-core/blob/master/kube_controller_manager/assets/service_checks.json
+[7]: https://docs.datadoghq.com/ja/help/

@@ -5,7 +5,7 @@ app_key = '<DATADOG_APPLICATION_KEY>'
 
 dog = Dogapi::Client.new(api_key, app_key)
 
-type = 'metric alert'
+type = 'query alert'
 query = 'THIS IS A BAD QUERY'
 parameters = {
   name: 'Bytes received on host0',

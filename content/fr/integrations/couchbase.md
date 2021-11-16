@@ -2,14 +2,18 @@
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
-  dashboards: {}
+  dashboards:
+    couchbase: assets/dashboards/couchbase_dashboard.json
   logs: {}
   metrics_metadata: metadata.csv
   monitors: {}
+  saved_views:
+    couchbase_processes: assets/saved_views/couchbase_processes.json
   service_checks: assets/service_checks.json
 categories:
   - data store
   - autodiscovery
+  - log collection
 creates_events: false
 ddtype: check
 dependencies:

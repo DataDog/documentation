@@ -2,7 +2,7 @@
 title: "Quelles sont les bonnes pratiques à adopter pour nommer les métriques et les tags\_?"
 kind: faq
 further_reading:
-  - link: /developers/metrics/
+  - link: /metrics/
     tag: Documentation
     text: En savoir plus sur les métriques Datadog
   - link: /getting_started/tagging/
@@ -32,6 +32,7 @@ Datadog vous conseille d'utiliser le tagging de service unifié lorsque vous att
 * Les tags doivent commencer par une lettre.
 * Ils peuvent contenir des caractères alphanumériques, des underscores, des signes moins, des deux-points, des points et des barres obliques. Les autres caractères sont convertis en underscores.
 * Lorsqu'un tag se termine par un underscore, que ce soit à la suite de la conversion d'un caractère ou tout simplement parce que son nom finit par un « _ », l'underscore est supprimé.
+* Les underscores adjacents sont modifiés de façon à ne garder qu'un seul underscore.
 * Les noms de tag peuvent comporter jusqu'à 200 caractères et prennent en charge la norme Unicode.
 * Les tags sont convertis en minuscule.
 * Pour un fonctionnement optimal, nous conseillons d'utiliser la syntaxe `key:value`.

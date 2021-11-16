@@ -6,6 +6,8 @@ assets:
   logs: {}
   metrics_metadata: metadata.csv
   monitors: {}
+  saved_views:
+    teamcity_processes: assets/saved_views/teamcity_processes.json
   service_checks: assets/service_checks.json
 categories:
   - configuration & deployment
@@ -14,7 +16,7 @@ categories:
 creates_events: true
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/teamcity/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/teamcity/README.md
 display_name: Teamcity
 draft: false
 git_integration_title: teamcity

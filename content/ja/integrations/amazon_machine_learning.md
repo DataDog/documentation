@@ -12,6 +12,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/amazon_machine_learning/'
 draft: false
 git_integration_title: amazon_machine_learning
 has_logo: true
+integration_id: amazon-machine-learning
 integration_title: Amazon Machine Learning
 is_public: true
 kind: インテグレーション
@@ -52,7 +53,7 @@ Amazon Machine Learning から S3 バケットまたは CloudWatch のいずれ�
 2. lambda 関数がインストールされたら、AWS コンソールから、Amazon Machine Learning ログを含む S3 バケットまたは CloudWatch のロググループに手動でトリガーを追加します。
 
     - [S3 バケットに手動トリガーを追加][5]
-    - [Cloudwatch ロググループに手動トリガーを追加][6]
+    - [CloudWatch ロググループに手動トリガーを追加][6]
 
 ## 収集データ
 

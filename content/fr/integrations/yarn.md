@@ -2,9 +2,12 @@
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
-  dashboards: {}
+  dashboards:
+    hadoop: assets/dashboards/hadoop_dashboard.json
+    yarn: assets/dashboards/yarn_dashboard.json
   logs:
     source: yarn
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -16,6 +19,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/yarn/README.md'
 display_name: Yarn
+draft: false
 git_integration_title: yarn
 guid: 3223c2e3-29dd-4cfb-82a2-51b951c648eb
 integration_id: yarn
@@ -159,12 +163,10 @@ Le check Yarn n'inclut aucun événement.
 
 ### Checks de service
 
-**yarn.can_connect** :
-
+**yarn.can_connect** :<br>
 Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter à l'URI ResourceManager pour recueillir des métriques. Si ce n'est pas le cas, renvoie `OK`.
 
-**yarn.application.status** :
-
+**yarn.application.status** :<br>
 Renvoie le statut de chaque application selon le mappage spécifié dans le fichier [`conf.yaml`][4].
 
 ## Dépannage

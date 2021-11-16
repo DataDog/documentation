@@ -29,34 +29,16 @@ Cela sert généralement à indiquer la fonction générale du dashboard.
 
 ## API
 
-Le [schéma JSON][2] utilisé pour le widget Texte libre est le suivant :
+Ce widget peut être utilisé avec l'**API Dashboards**. Consultez la [documentation à ce sujet][2] pour en savoir plus.
 
-```text
-FREE_TEXT_SCHEMA = {
-    "type": "object",
-    "properties": {
-        "type": {"enum": ["free_text"]},
-        "text": {"type": "string"},
-        "color": {"type": "string"},
-        "font_size": {"type": "string"},
-        "text_align": {"enum": ["center", "left", "right"]}
-    },
-    "required": ["type", "text"],
-    "additionalProperties": false
-}
-```
+Le [schéma JSON][3] utilisé pour le widget Texte libre est le suivant :
 
-| Paramètre    | Type   | Obligatoire | Description                                                                             |
-|--------------|--------|----------|-----------------------------------------------------------------------------------------|
-| `type`       | chaîne | oui      | Type de widget (utilisez `free_text` pour le widget Texte libre)                            |
-| `text`       | chaîne | oui      | Texte à afficher                                                                         |
-| `color`      | chaîne | non       | Couleur du texte                                                                       |
-| `font_size`  | chaîne | non       | Taille du texte.                                                                        |
-| `text_align` | chaîne | non       | Alignement du texte sur le widget. Valeurs disponibles : `center`, `left`, ou `right`. |
+{{< dashboards-widgets-api >}}
 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/dashboards/screenboard/
-[2]: /fr/dashboards/graphing_json/widget_json/
+[2]: /fr/api/v1/dashboards/
+[3]: /fr/dashboards/graphing_json/widget_json/

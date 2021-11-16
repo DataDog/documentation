@@ -7,9 +7,10 @@ Datadog propose différents sites disponibles dans le monde entier. Les sites so
 
 | Site    | URL du site                   | Région |
 |---------|----------------------------|----------|
-| US1     | https://app.datadoghq.com/ | États-Unis       |
-| EU1     | https://app.datadoghq.eu/  | Union européenne       |
-| US1-FED | https://app.ddog-gov.com   | États-Unis       |
+| US1     | `https://app.datadoghq.com`| États-Unis       |
+| US3     | `https://us3.datadoghq.com`| États-Unis       |
+| EU1     | `https://app.datadoghq.eu` | Union européenne       |
+| US1-FED | `https://app.ddog-gov.com` | États-Unis       |
 
 ## Comment vérifier le site Datadog que vous utilisez ?
 

@@ -144,18 +144,18 @@ cert_manager チェックをホストにインストールするには
 {{< get-metrics-from-git "cert_manager" >}}
 
 
-### サービスのチェック
-
-`cert_manager.prometheus.health`:
-Agent が Prometheus エンドポイントへの接続に失敗した場合は、CRITICAL を返します。それ以外の場合は、UP を返します。
-
 ### イベント
 
 cert_manager には、イベントは含まれません。
 
+### サービスのチェック
+{{< get-service-checks-from-git "cert_manager" >}}
+
+
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][11]までお問合せください。
+
 
 [1]: https://github.com/jetstack/cert-manager
 [2]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/cert_manager/images/overview_dashboard.png
@@ -166,4 +166,5 @@ cert_manager には、イベントは含まれません。
 [7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [8]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [9]: https://github.com/DataDog/integrations-core/blob/master/cert_manager/metadata.csv
-[10]: https://docs.datadoghq.com/ja/help/
+[10]: https://github.com/DataDog/integrations-extras/blob/master/cert_manager/assets/service_checks.json
+[11]: https://docs.datadoghq.com/ja/help/

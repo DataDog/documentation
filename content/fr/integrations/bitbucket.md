@@ -7,12 +7,14 @@ ddtype: crawler
 dependencies: []
 description: Visualisez les commits et les pull requests qui affectent les performances de l'ensemble de vos services.
 doc_link: 'https://docs.datadoghq.com/integrations/bitbucket/'
+draft: false
 further_reading:
   - link: 'https://www.datadoghq.com/blog/understand-code-changes-impact-system-performance-bitbucket-datadog/'
     tag: Blog
     text: "Bitbucket et Datadog\_: découvrez l'impact des changements de code sur votre infrastructure"
 git_integration_title: bitbucket
 has_logo: true
+integration_id: bitbucket
 integration_title: Bitbucket
 is_public: true
 kind: integration
@@ -34,13 +36,13 @@ Enregistrez les événements de commit et de pull request directement depuis Bit
 
 Une fois l'intégration configurée, les éléments que vous sélectionnez (à savoir, les commits et/ou les pull requests) se propagent dans votre flux d'événements Datadog.
 
-**Exemples d'événements** :
+**Exemples** :
 
 - Lors de la réalisation de commits
 - Lors de la création d'une pull request
 - Lorsqu'un commentaire sur une pull request est publié ou supprimé
 
-## Implémentation
+## Configuration
 
 ### Installation
 
@@ -78,7 +80,7 @@ L'intégration Bitbucket n'inclut aucune métrique.
 
 ### Événements
 
-L'intégration Bitbucket n'inclut aucun événement.
+Les événements Bitbucket, y compris les commits et les pull requests provenant de Bitbucket Cloud et Server, sont transmis à votre application Datadog.
 
 ### Checks de service
 

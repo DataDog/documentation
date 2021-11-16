@@ -11,6 +11,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/google_cloud_big_query/'
 draft: false
 git_integration_title: google_cloud_big_query
 has_logo: true
+integration_id: google-cloud-bigquery
 integration_title: Google BigQuery
 is_public: true
 kind: インテグレーション

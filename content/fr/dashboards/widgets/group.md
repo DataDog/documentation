@@ -22,45 +22,16 @@ Choisissez un nom pour votre groupe en utilisant l'icône en forme d'engrenage d
 
 ## API
 
-Le [schéma JSON][2] utilisé pour le widget Groupe est le suivant :
+Ce widget peut être utilisé avec l'**API Dashboards**. Consultez la [documentation à ce sujet][2] pour en savoir plus.
 
-```text
-GROUP_SCHEMA = {
-    "type": "object",
-    "properties": {
-        "type": {"enum": ["group"]},
-        "layout_type": {"enum": ["ordered"]},
-        "widgets": {
-            "type": "array",
-            "items": {
-                "type": "object",
-                "properties": {
-                    "definition": {
-                        "oneOf": [WIDGET_DEFINITION]
-                    },
-                    "id": {"type": "integer"}
-                },
-                "required": ["definition"],
-                "additionalProperties": false
-            }
-        },
-        "title": {"type": "string"}
-    },
-    "required": ["type", "layout_type", "widgets"],
-    "additionalProperties": false
-}
-```
+Le [schéma JSON][3] utilisé pour le widget Groupe est le suivant :
 
-| Paramètre     | Type             | Obligatoire | Description                                                                                                                                             |
-|---------------|------------------|----------|---------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `type`        | chaîne           | oui      | Type de widget (utilisez `group` pour le widget Groupe)                                                                                                       |
-| `widgets`     | tableau d'objets | oui      | Liste des widgets appartenant au widget Groupe. Consultez la [documentation relative au schéma JSON des widgets][2] pour apprendre à élaborer le `WIDGET_DEFINITION`. |
-| `layout_type` | chaîne           | oui      | Type de disposition du groupe. Valeur possible : `ordered`                                                                                                  |
-| `title`       | chaîne           | non       | Titre de votre widget.                                                                                                                                   |
+{{< dashboards-widgets-api >}}
 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/dashboards/timeboard/
-[2]: /fr/dashboards/graphing_json/widget_json/
+[2]: /fr/api/v1/dashboards/
+[3]: /fr/dashboards/graphing_json/widget_json/

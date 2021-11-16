@@ -44,7 +44,7 @@ Along with displaying these metrics in your APM Service Page, Datadog provides a
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/apm/services
-[2]: /developers/metrics/dogstatsd_metrics_submission/#setup
+[2]: /metrics/dogstatsd_metrics_submission/#setup
 [3]: /agent/docker/#dogstatsd-custom-metrics
 [4]: /developers/dogstatsd/?tab=kubernetes#agent
 [5]: /integrations/amazon_ecs/?tab=python#create-an-ecs-task

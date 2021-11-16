@@ -20,14 +20,14 @@ PHP APM supports the following PHP versions:
 
 | Version    | Support type                          |
 |:-----------|:--------------------------------------|
-| 8.0.x      | Fully Supported (as of `0.52.0`)      |
+| 8.0.x      | Fully Supported (tracer `0.52.0+`)    |
 | 7.4.x      | Fully Supported                       |
 | 7.3.x      | Fully Supported                       |
 | 7.2.x      | Fully Supported                       |
 | 7.1.x      | Fully Supported                       |
 | 7.0.x      | Fully Supported                       |
 | 5.6.x      | Fully Supported                       |
-| 5.5.x      | Fully Supported (as of `0.49.0`)      |
+| 5.5.x      | Fully Supported (tracer `0.49.0+`)    |
 | 5.4.x      | Fully Supported                       |
 
 PHP APM supports the following SAPI's:
@@ -60,11 +60,11 @@ The following table enumerates some of the frameworks and versions Datadog succe
 | CodeIgniter    | 2.x                  | PHP 7+                     | Framework-level instrumentation |
 | CodeIgniter    | 3.x                  | PHP 7+                     | Generic web tracing             |
 | Laravel        | 4.2, 5.x, 6.x        | All supported PHP versions | Framework-level instrumentation |
-| Laravel 8      | 8.x (as of `0.52.0`) | All supported PHP versions | Framework-level instrumentation |
+| Laravel 8      | 8.x (tracer `0.52.0+`) | All supported PHP versions | Framework-level instrumentation |
 | Lumen          | 5.2+                 | All supported PHP versions | Framework-level instrumentation |
 | Symfony 3      | 3.3, 3.4             | All supported PHP versions | Framework-level instrumentation |
 | Symfony 4      | 4.x                  | All supported PHP versions | Framework-level instrumentation |
-| Symfony 5      | 5.x (as of `0.50.0`) | All supported PHP versions | Framework-level instrumentation |
+| Symfony 5      | 5.x (tracer `0.50.0+`) | All supported PHP versions | Framework-level instrumentation |
 | WordPress      | 4.x, 5.x             | PHP 7+                     | Framework-level instrumentation |
 | Zend Framework | 1.12                 | All supported PHP versions | Framework-level instrumentation |
 | Zend Framework | 2.x                  | All supported PHP versions | Generic web tracing             |
@@ -102,7 +102,7 @@ To request support for additional CLI libraries, contact our awesome [support te
 | MongoDB - via [mongo][3] extension                                      | 1.4.x                      | Fully Supported |
 | MySQLi                                                                  | *(Any Supported PHP)*      | Fully Supported |
 | PDO (MySQL, PostgreSQL, MariaDB)                                        | *(Any Supported PHP)*      | Fully Supported |
-| PhpRedis                                                                | 3, 4, 5                    | Fully Supported |
+| PhpRedis                                                                | 3, 4, 5                    | PHP 7           |
 | Predis                                                                  | 1.1                        | Fully Supported |
 
 To request support for additional datastores, contact our awesome [support team][2].
@@ -119,15 +119,17 @@ To request support for additional libraries, contact our awesome [support team][
 
 #### Deep call stacks on PHP 5
 
-The call stack is limited on PHP 5. See the [deep call stack troubleshooting page][5] for more details.
+The call stack is limited on PHP 5. See the [deep call stack troubleshooting page][4] for more details.
 
 ### Generators
 
-Instrumenting [generators][6] is not supported on PHP 5 and PHP 7.
+Instrumenting [generators][5] is not supported on PHP 5 and PHP 7.
 
 ### PCNTL
 
-We currently do not offer support for [PCNTL][7] (Process control). Tracing applications that use functions such as `pcntl_fork` may result in unpredictable results.
+We do not offer support for tracing processes forked using [pcntl][6]. When a call to `pcntl_fork` is detected, we disable tracing in the forked process. The main process is still be traced.
+
+If the application invokes `pcntl_unshare(CLONE_NEWUSER);` and the tracer is installed, the application will fatally crash. This happens because `unshare` with `CLONE_NEWUSER` requires the process [not to be threaded][7], while the PHP tracer uses a separate thread to send traces to the Datadog Agent without blocking the main process.
 
 ## Further Reading
 
@@ -136,7 +138,7 @@ We currently do not offer support for [PCNTL][7] (Process control). Tracing appl
 [1]: https://github.com/DataDog/dd-trace-php
 [2]: /help
 [3]: https://pecl.php.net/package/mongo
-[4]: https://pecl.php.net/package/mongodb
-[5]: /tracing/troubleshooting/php_5_deep_call_stacks
-[6]: https://www.php.net/manual/en/language.generators.overview.php
-[7]: https://www.php.net/manual/en/book.pcntl.php
+[4]: /tracing/troubleshooting/php_5_deep_call_stacks
+[5]: https://www.php.net/manual/en/language.generators.overview.php
+[6]: https://www.php.net/manual/en/book.pcntl.php
+[7]: https://man7.org/linux/man-pages/man2/unshare.2.html

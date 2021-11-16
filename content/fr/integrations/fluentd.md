@@ -4,10 +4,13 @@ aliases:
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
-  dashboards: {}
+  dashboards:
+    fluentd: assets/dashboards/fluentd_dashboard.json
   logs: {}
   metrics_metadata: metadata.csv
   monitors: {}
+  saved_views:
+    fluentd_processes: assets/saved_views/fluentd_processes.json
   service_checks: assets/service_checks.json
 categories:
   - log collection
@@ -17,6 +20,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/fluentd/README.md'
 display_name: fluentd
+draft: false
 git_integration_title: fluentd
 guid: 68100352-b993-43e6-9dc8-5ecd498e160b
 integration_id: fluentd
@@ -149,8 +153,7 @@ Il est possible d'utiliser des paramètres supplémentaires pour changer l'endpo
 - `use_ssl` : indique à l'Agent d'initialiser une connexion TCP/SSL sécurisée vers Datadog. Valeur par défaut : `true`.
 - `no_ssl_validation` : désactive la validation du hostname SSL. Valeur par défaut : `false`.
 
-
-Ce paramètre peut également être utilisé pour l'envoi de logs au **site européen de Datadog** en définissant :
+**Remarque** : définissez `host` et `port` sur votre région {{< region-param key="http_endpoint" code="true" >}} {{< region-param key="http_port" code="true" >}}.
 
 ```conf
 <match datadog.**>

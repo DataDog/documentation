@@ -84,34 +84,13 @@ Datadog Agent の 5.17.0 リリース版では、Kubernetes イベントコレ�
 
 ## サービスチェック
 
-Kubernetes チェックは、次のサービスチェックを含みます。
+### Kubelet
 
-`kubernetes.kubelet.check`
-: CRITICAL` の場合、`kubernetes.kubelet.check.ping` または `kubernetes.kubelet.check.syncloop` は、`CRITICAL` または `NO DATA` の状態になります。
+{{< get-service-checks-from-git "kubelet" >}}
 
-`kubernetes.kubelet.check.ping`
-: `CRITICAL` または `NO DATA` の場合、Kubelet の API は使用できません
+### Kubernetes State
 
-`kubernetes.kubelet.check.syncloop`
-: `CRITICAL` または `NO DATA` の場合、コンテナを更新する Kubelet の同期ループは機能しません。
-
-`kubernetes_state.node.ready`
-: クラスターノードの準備ができていない場合は `CRITICAL` を返します。それ以外の場合は `OK` を返します。
-
-`kubernetes_state.node.out_of_disk`
-: クラスターノードにディスク容量がない場合は `CRITICAL` を返します。それ以外の場合は`OK` を返します。
-
-`kubernetes_state.node.disk_pressure`
-: クラスターノードがディスク圧縮状態の場合は `CRITICAL` を返します。それ以外の場合は `OK` を返します。
-
-`kubernetes_state.node.memory_pressure`
-: クラスターノードがメモリ圧縮状態の場合は `CRITICAL` を返します。それ以外の場合は `OK` を返します。
-
-`kubernetes_state.node.network_unavailable`
-: クラスターノードがネットワーク使用不可能状態の場合は `CRITICAL` を返します。それ以外の場合は `OK` を返します。
-
-`kubernetes_state.cronjob.on_schedule_check`
-: cron ジョブの予約時間が過ぎている場合は `CRITICAL` を返します。それ以外の場合は `OK` を返します。
+{{< get-service-checks-from-git "kubernetes_state" >}}
 
 ## その他の参考資料
 

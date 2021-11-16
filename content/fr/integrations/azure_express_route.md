@@ -7,11 +7,13 @@ categories:
 ddtype: crawler
 dependencies: []
 description: "Surveillez les métriques clés de Azure\_ExpressRoute."
-doc_link: 'https://docs.datadoghq.com/integrations/azure_express_route/'
+doc_link: https://docs.datadoghq.com/integrations/azure_express_route/
 draft: false
 git_integration_title: azure_express_route
 has_logo: true
+integration_id: azure-expressroute
 integration_title: "Microsoft\_Azure\_ExpressRoute"
+integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'
@@ -26,7 +28,7 @@ Utilisez le service Azure ExpressRoute pour étendre vos réseaux locaux à Mic
 
 Utilisez l'intégration Datadog/Azure pour recueillir les métriques d'Azure ExpressRoute.
 
-## Implémentation
+## Configuration
 
 ### Installation
 

@@ -25,7 +25,7 @@ Pour activer le mode debugging pour le traceur Java Datadog, définissez le flag
 
 {{< programming-lang lang="python" >}}
 
-Pour activer le mode debugging pour le traceur Python Datadog, définissez la variable d'environnement `DATADOG_TRACE_DEBUG=true` lorsque vous utilisez `ddtrace-run`.
+Pour activer le mode debugging pour le traceur Python Datadog, définissez la variable d'environnement `DD_TRACE_DEBUG=true` lorsque vous utilisez `ddtrace-run`.
 <p></p>
 
 {{< /programming-lang >}}

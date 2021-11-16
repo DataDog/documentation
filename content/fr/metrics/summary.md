@@ -101,9 +101,9 @@ Pour chaque clé de tag spécifique, vous pouvez également effectuer les opéra
 [1]: https://app.datadoghq.com/metric/summary
 [2]: /fr/metrics/explorer/
 [3]: /fr/dashboards/
-[4]: /fr/developers/metrics/custom_metrics/
+[4]: /fr/metrics/custom_metrics/
 [5]: /fr/getting_started/tagging/
 [6]: /fr/api/v1/metrics/#edit-metric-metadata
-[7]: /fr/developers/metrics/units/
-[8]: /fr/developers/metrics/types/
+[7]: /fr/metrics/units/
+[8]: /fr/metrics/types/
 [9]: /fr/integrations/

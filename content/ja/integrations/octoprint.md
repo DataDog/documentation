@@ -12,10 +12,11 @@ assets:
 categories:
   - web
   - orchestration
+  - ログの収集
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-extras/blob/master/octoprint/README.md'
+  - https://github.com/DataDog/integrations-extras/blob/master/octoprint/README.md
 display_name: OctoPrint
 draft: false
 git_integration_title: octoprint
@@ -47,6 +48,11 @@ supported_os:
 
 OctoPrint チェックをホストにインストールするには
 
+1. `sudo -u dd-agent -- datadog-agent integration install datadog-octoprint==<VERSION>`を実行します
+    - 現在のバージョンは `1.0.0` です。これは `./datadog_checks/octoprint/__about__.py` で検証可能です。
+
+
+#### ソースからインストール (オプション)
 
 1. マシンに[開発ツールキット][3]をインストールします。
 
@@ -60,9 +66,11 @@ OctoPrint チェックをホストにインストールするには
 
 ### コンフィギュレーション
 
-1. OctoPrint パフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `octoprint.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル octoprint.d/conf.yaml][5]を参照してください。
+1. OctoPrint の Web インターフェースから、Datadog で使用する API キーを作成します。作成したキーは Settings --> Application Keys に表示されます。
 
-2. [Agent を再起動します][6]。
+2. Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `octoprint.d/conf.yaml` ファイルを編集します。OctoPrint API キーを `octo_api_key` の値として貼り付けます。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル octoprint.d/conf.yaml][5]を参照してください。
+
+3. [Agent を再起動します][6]。
 
 ### 検証
 
@@ -80,7 +88,7 @@ OctoPrint チェックをホストにインストールするには
 
 これらの一部またはすべてを変更したり削除したりするには、インテグレーションの `conf.yaml` ファイルを変更します。
 
-#### ログの処理
+#### ログ処理
 
 OctoPrint は独自のログ形式（オブジェクト形式ではない）を使用するため、ログを活用するにはパース規則を使用してログ処理パイプラインを作成する必要があります。たとえば、
 
@@ -100,17 +108,18 @@ OctoPrint は独自のログ形式（オブジェクト形式ではない）を�
 {{< get-metrics-from-git "octoprint" >}}
 
 
-### サービスのチェック
-
-OctoPrint には、サービスチェックは含まれません。
-
 ### イベント
 
 OctoPrint には、イベントは含まれません。
 
+### サービスのチェック
+{{< get-service-checks-from-git "octoprint" >}}
+
+
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][11]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][12]までお問合せください。
+
 
 [1]: https://octoprint.org/
 [2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
@@ -122,4 +131,5 @@ OctoPrint には、イベントは含まれません。
 [8]: https://octoprint.org/download/
 [9]: https://docs.datadoghq.com/ja/logs/processing/
 [10]: https://github.com/DataDog/integrations-extras/blob/master/octoprint/metadata.csv
-[11]: https://docs.datadoghq.com/ja/help/
+[11]: https://github.com/DataDog/integrations-extras/blob/master/octoprint/assets/service_checks.json
+[12]: https://docs.datadoghq.com/ja/help/

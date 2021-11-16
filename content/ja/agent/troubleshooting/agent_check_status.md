@@ -14,7 +14,7 @@ further_reading:
 - [Linux](#linux)
 - [Windows](#windows)
 - [Systemd](#systemd)
-- [その他の参考資料](#further-reading)
+- [参考文献](#further-reading)
 
 **注**: 以下の例の `<CHECK_NAME>` を Agent チェックに置き換えます。例: `activemq`、`ceph`、または `elastic`。[インテグレーションのドキュメント][1]を確認して、Agent チェック名を確認します。
 

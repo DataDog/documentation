@@ -26,7 +26,7 @@ integration_id: "pivotal-platform"
 
 ## Overview
 
-Any Pivotal Platform (formerly known as Cloud Foundry) deployment can send metrics and events to Datadog. The data helps you track the health and availability of all nodes in the deployment, monitor the jobs they run, collect metrics from the Loggregator Firehose, and more. Use this page to learn how to monitor your [application on Pivotal Platform](#monitor-your-applications-on-pivotal-platform) and your [Pivotal Platform cluster](#monitor-your-pivotal-platform-cluster).
+Any Pivotal Platform (formerly known as Cloud Foundry) deployment can send metrics and events to Datadog. The data helps you track the health and availability of all nodes in the deployment, monitor the jobs they run, collect metrics from the Loggregator Firehose, and more. Use this page to learn how to monitor your application on Pivotal Platform and your Pivotal Platform cluster.
 
 There are three main components for the Pivotal Platform integration with Datadog. First, use the buildpack to collect custom metrics from your applications. Then, use the BOSH Release to collect metrics from the platform. Finally, use the Loggregator Firehose Nozzle to collect all of the other metrics from your infrastructure.
 
@@ -37,9 +37,9 @@ For Pivotal Platform, you have the option to install the Datadog integration til
 
 ## PKS
 
-PKS environments can utilize the Datadog [Cluster Monitoring tile][1] and the [pivotal_pks][3] integration together to monitor your cluster.
+PKS environments can use the Datadog [Cluster Monitoring tile][1] and the [pivotal_pks][3] integration together to monitor your cluster.
 
-For kubelet cluster based workloads, utilize the [pivotal_pks integration][3] to install the Datadog Agent with your workers.
+For kubelet cluster based workloads, use the [pivotal_pks integration][3] to install the Datadog Agent with your workers.
 
 Use the [Cluster Monitoring Tile][1] to install the Datadog Agent on each non worker VM in your PKS environment. In environments without PAS installed, select the `Resource Config` section of the tile and set `instances` of the `datadog-firehose-nozzle` to `0`.
 
@@ -51,7 +51,7 @@ Use the **Datadog Pivotal Platform Buildpack** to monitor your Pivotal Platform 
 
 #### Pivotal Platform < 1.12
 
-Our buildpack uses the Pivotal Platform [multi-buildpack][6] feature that was introduced in version `1.12`.
+The Datadog buildpack uses the Pivotal Platform [multi-buildpack][6] feature that was introduced in version `1.12`.
 
 For older versions, Pivotal Platform provides a back-port of this feature in the form of a [buildpack][7]. You must install and configure this backport in order to use Datadog's buildpack:
 
@@ -76,7 +76,7 @@ For older versions, Pivotal Platform provides a back-port of this feature in the
 
       Do not use the `latest` version here (replace `x.y.z` by the specific version you want to use).
 
-      **Important**: Your regular buildpack should be the last in the manifest to act as a final buildpack. To learn more refer to  [Pivotal Platform documentation][9] about buildpacks.
+      **Important**: Your regular buildpack should be the last in the manifest to act as a final buildpack. To learn more see [Pivotal Platform's How Buildpacks Work][9].
 
 3. **Push your application with the multi-buildpack**. Ensure that the `multi-buildpack` is the buildpack selected by Pivotal Platform for your application:
 
@@ -99,7 +99,7 @@ For older versions, Pivotal Platform provides a back-port of this feature in the
     cf v3-push <YOUR_APP> -b datadog-cloudfoundry-buildpack -b <YOUR-BUILDPACK-1> -b <YOUR-FINAL-BUILDPACK>
     ```
 
-      **Important**: If you were using a single buildpack before, it should be the last one loaded so it acts as a final buildpack. To learn more refer to [Pivotal Platform documentation][9] about buildpacks.
+      **Important**: If you were using a single buildpack before, it should be the last one loaded so it acts as a final buildpack. To learn more see [Pivotal Platform's How Buildpacks Work][9].
 
 #### Meta-Buildpack **(deprecated)**
 
@@ -125,6 +125,14 @@ cf restage <YOUR_APP>
 The Datadog Trace Agent (APM) is enabled by default. Learn more about setup for your specific language in [APM Setup][12].
 
 #### Log collection
+
+{{< site-region region="us3" >}}
+
+Log collection is not supported for this site.
+
+{{< /site-region >}}
+
+{{< site-region region="us,us5,eu,gov" >}}
 
 ##### Enable
 
@@ -165,11 +173,15 @@ cf set-env app01 LOGS_CONFIG '[{"type":"tcp","port":"10514","source":"java","ser
 
 ##### Notification in case of misconfigured proxy
 
-For Agent v6.12+, when using a [proxy configuration][13] with the Buildpack, a verification is made to check if the connection can be established. Log collection is started depending on the result of this test.
+For Agent v6.12+, when using a [proxy configuration][1] with the Buildpack, a verification is made to check if the connection can be established. Log collection is started depending on the result of this test.
 
 If the connection fails to be established and the log collection is not started, an event like the one below is sent to your Datadog event stream. Set up a monitor to track these events and be notified when a misconfigured Buildpack is deployed:
 
 {{< img src="integrations/cloud_foundry/logs_misconfigured_proxy.png" alt="cloud-foundry-log-misconfigured_proxy"  >}}
+
+[1]: /agent/logs/proxy/
+
+{{< /site-region >}}
 
 ### Build
 
@@ -177,7 +189,7 @@ To build this buildpack, edit the relevant files and run the `./build` script. T
 
 ### DogStatsD
 
-See [the DogStatsD documentation][5] for more information. There is [a list of DogStatsD libraries][14] compatible with a wide range of applications.
+See [Metric Submission: DogStatsD][5] for more information. There is a list of [DogStatsD libraries][14] compatible with a wide range of applications.
 
 ## Monitor your Pivotal Platform cluster
 
@@ -212,7 +224,7 @@ If you'd like to create your own release, see the [Datadog Agent BOSH Release re
 
 #### Configure the Agent as an addon in your BOSH Director
 
-Add the following to your BOSH Director's runtime configuration file (e.g. `runtime.yml`):
+Add the following to your BOSH Director's runtime configuration file (`runtime.yml`):
 
 ```text
 ---
@@ -342,7 +354,7 @@ Redeploy the deployment to add the user.
 
 #### Add Firehose Nozzle jobs
 
-Configure one or more Nozzle jobs in your main Pivotal Platform deployment manifest (e.g. cf-manifest.yml):
+Configure one or more Nozzle jobs in your main Pivotal Platform deployment manifest (`cf-manifest.yml`):
 
 ```yaml
 jobs:
@@ -433,7 +445,7 @@ Your specific list of metrics may vary based on the PCF version and the deployme
 [2]: https://network.pivotal.io/products/datadog-application-monitoring
 [3]: /integrations/pivotal_pks/
 [4]: https://docs.cloudfoundry.org/buildpacks/understand-buildpacks.html#supply-script
-[5]: /developers/metrics/dogstatsd_metrics_submission/
+[5]: /metrics/dogstatsd_metrics_submission/
 [6]: https://docs.cloudfoundry.org/buildpacks/use-multiple-buildpacks.html
 [7]: https://github.com/cloudfoundry/multi-buildpack
 [8]: https://github.com/cloudfoundry/multi-buildpack#usage
@@ -441,7 +453,6 @@ Your specific list of metrics may vary based on the PCF version and the deployme
 [10]: https://cloudfoundry.datadoghq.com/datadog-cloudfoundry-buildpack/datadog-cloudfoundry-buildpack-latest.zip
 [11]: https://github.com/cf-platform-eng/meta-buildpack
 [12]: /tracing/setup/
-[13]: /agent/logs/proxy/
 [14]: /libraries/
 [15]: https://bosh.io/docs/bosh-cli.html
 [16]: https://bosh.io/docs/cli-v2.html#install

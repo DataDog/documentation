@@ -19,7 +19,7 @@ integration_title: Split
 is_public: true
 kind: integration
 maintainer: jeremy-lq
-manifest_version: 1.0.1
+manifest_version: 1.0.0
 name: split
 public_title: Intégration Datadog/Split
 short_description: Plateforme d'expérimentation de fonctionnalités pour équipes d'ingénierie et de conception produit.

@@ -160,7 +160,7 @@ root@datadog-agent-9d5bl:/# cat /var/log/datadog/agent.log | grep "metadata-coll
 Or look for error logs, such as:
 
 ```shell
-2018-06-10 08:03:02 UTC | ERROR | Could not initialise the communication with the Datadog Cluster Agent, falling back to local service mapping: [...]
+2018-06-10 08:03:02 UTC | ERROR | Could not initialize the communication with the Datadog Cluster Agent, falling back to local service mapping: [...]
 ```
 
 ## Custom metric server

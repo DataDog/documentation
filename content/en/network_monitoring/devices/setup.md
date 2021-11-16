@@ -7,6 +7,9 @@ further_reading:
 - link: "/network_monitoring/devices/profiles"
   tag: "Documentation"
   text: "Using Profiles with Network Device Monitoring"
+- link: "https://www.datadoghq.com/knowledge-center/network-monitoring/snmp-monitoring/"
+  tag: "Knowledge Center"
+  text: "SNMP Monitoring Overview"
 - link: "https://www.datadoghq.com/blog/monitor-snmp-with-datadog/"
   tag: "Blog"
   text: "Monitor SNMP with Datadog"
@@ -14,7 +17,7 @@ further_reading:
 
 ## Installation
 
-Network Device Monitoring uses the SNMP protocol included in the [Datadog Agent][1] package. No additional installation is necessary.
+Network Device Monitoring relies on the SNMP Integration included in the [Datadog Agent][1] package. Ensure you are using Agent v7.32+. No additional installation is necessary. 
 
 ## Configuration
 
@@ -161,7 +164,7 @@ snmp_listener:
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**: The Datadog Agent automatically configures the SNMP check with each of the IPs that are discover. A discovered device is an IP that responds successfully when being polled using SNMP.
+**Note**: The Datadog Agent automatically configures the SNMP check with each of the IPs that are discovered. A discovered device is an IP that responds successfully when being polled using SNMP.
 
 ## Validation
 

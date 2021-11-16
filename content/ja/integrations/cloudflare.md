@@ -24,20 +24,19 @@ Datadog を Cloudflare アカウントに接続して、Web トラフィック�
 
 ## セットアップ
 
+始める前に、[Datadog アカウント][1]と [API キー][2]、そして [Cloudflare Logpush][3] へのアクセスが必要です (Enterprise アカウントプランのご契約が必要です)。
+
+Cloudflare API トークンを使用する場合は、**Zone** > **Zone** > **Read** および **Zone** > **Analytics** > **Read** の権限を保有していることを確認してください。
+
 ### インストール
 
-Datadog の [Cloudflare インテグレーションタイル][1]を使用して、インテグレーションをインストールします。
+Datadog の [Cloudflare インテグレーションタイル][4]を使用して、インテグレーションをインストールします。
 
-### コンフィグレーション
+### コンフィギュレーション
 
-1. Datadog [Cloudflare インテグレーションタイル][1]内の Configuration タブに移動します。
-2. 監視するアカウントのメールアドレスと、API キーまたはトークンを入力します。Cloudflare API キーと API トークンは、Cloudflare アカウントの _My profile > Api Tokens_ で確認できます。
+1. Datadog [Cloudflare インテグレーションタイル][4]内の **Configuration** タブに移動します。
+2. 監視するアカウントの電子メールアドレスと、API キーまたはトークンを入力します。Cloudflare API キーと API トークンは、Cloudflare アカウントの **My profile** > **Api Tokens** の下にあります。
 3. アカウントの名前を追加します。この名前は任意で、メトリクスの `account` タグ内で使用されます。
-
-API トークンを使用する際は、トークンに以下のアクセス許可があることを確認してください。
-
-- _Zone_ > _Zone_ > _Read_
-- _Zone_ > _Analytics_ > _Read_
 
 ### ログの収集
 
@@ -52,8 +51,8 @@ Cloudflare では、Cloudflare Logpush を使用して顧客がログを直接 D
         * `service` (任意): サービス名を指定。
         * `host` (任意): ホスト名を指定。
         * `ddtags` (任意): タグを指定。
-    * `dataset`: 受信するログのカテゴリー。サポートされるすべてのデータセットについては、[Cloudflare ドキュメント][2]を参照。
-    * `logpull_options` (任意): フィールド、サンプルレート、タイムスタンプの形式を構成するには、[Logpush API オプション][3]を参照。
+    * `dataset`: 受信するログのカテゴリー。サポートされるすべてのデータセットについては、[Cloudflare ドキュメント][5]を参照。
+    * `logpull_options` (任意): フィールド、サンプルレート、タイムスタンプの形式を構成するには、[Logpush API オプション][6]を参照。
 
     **リクエスト例**:
 
@@ -139,10 +138,13 @@ Cloudflare インテグレーションには、サービスのチェック機能
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 
-[1]: https://app.datadoghq.com/account/settings#integrations/cloudflare
-[2]: https://developers.cloudflare.com/logs/log-fields
-[3]: https://developers.cloudflare.com/logs/logpush/logpush-configuration-api/understanding-logpush-api#options
-[4]: https://github.com/DataDog/dogweb/blob/prod/integration/cloudflare/cloudflare_metadata.csv
-[5]: https://docs.datadoghq.com/ja/help/
+[1]: https://www.datadoghq.com/free-datadog-trial/
+[2]: /ja/account_management/api-app-keys/#api-keys
+[3]: https://developers.cloudflare.com/logs/about
+[4]: https://app.datadoghq.com/account/settings#integrations/cloudflare
+[5]: https://developers.cloudflare.com/logs/log-fields
+[6]: https://developers.cloudflare.com/logs/logpush/logpush-configuration-api/understanding-logpush-api#options
+[7]: https://github.com/DataDog/dogweb/blob/prod/integration/cloudflare/cloudflare_metadata.csv
+[8]: https://docs.datadoghq.com/ja/help/

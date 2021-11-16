@@ -1,7 +1,6 @@
 {{ $ctx := .ctx }}
 {{ $type := .type}}
-{{ $.Scratch.Set "editURL" "" }}
-
+{{ $editLink := "" }}
 {{ if $ctx.Params.dependencies }}
 {{/* Files with dependencies link to corresponding URL */}}
 
@@ -15,11 +14,12 @@
             {{ if in $dep "/blob/" }}
 
                 {{/* Find Replace /blob/ to /edit/ */}}
-                {{ $tmpURL := replace $dep "/blob/" "/edit/" }}
+                {{ $editLink = replace $dep "/blob/" "/edit/" }}
 
-                {{/* Set Scratch */}}
-                {{ $ctx.Scratch.Set "editURL" $tmpURL }}
-                {{ $editLink := $ctx.Scratch.Get "editURL" }}
+                {{/* if url is a directory try map it to the same filename */}}
+                {{ if or (strings.HasSuffix $editLink "/") }}
+                    {{ $editLink = (print $editLink $ctx.File.TranslationBaseName ".md") }}
+                {{ end }}
 
                 {{ with $ctx.File }}
                     {{ partial "page-edit-body.html" (dict "ctx" $ctx "link" $editLink "type" $type) }}
@@ -37,7 +37,7 @@
 {{/* Not in integrations edit existing docs file */}}
 
     {{ with $ctx.File }}
-        {{ $editLink := ( printf "https://github.com/DataDog/documentation/edit/master/content/%s/%s/" $ctx.Page.Lang $ctx.File.Path ) }}
+        {{ $editLink = ( printf "https://github.com/DataDog/documentation/edit/master/content/%s/%s/" $ctx.Page.Lang $ctx.File.Path ) }}
         {{ partial "page-edit-body.html" (dict "ctx" $ctx "link" $editLink "type" $type) }}
     {{ end }}
 

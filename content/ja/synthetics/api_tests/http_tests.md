@@ -9,6 +9,9 @@ further_reading:
   - link: 'https://www.datadoghq.com/blog/introducing-synthetic-monitoring/'
     tag: ブログ
     text: Datadog Synthetic モニタリングの紹介
+  - link: 'https://learn.datadoghq.com/course/view.php?id=39'
+    tag: ラーニングセンター
+    text: Synthetic テストの紹介
   - link: /getting_started/synthetics/api_test
     tag: Documentation
     text: HTTP テストの概要
@@ -24,7 +27,7 @@ HTTP テストは、ネットワークの外部または内部のどちらから
 
 ## コンフィギュレーション
 
-作成するテストのタイプ ([`HTTP`][4]、[`SSL`][5]、[`TCP`][6]、または [`DNS` テスト][7]) を選択した後、テストのリクエストを定義できます。
+作成するテストのタイプを選択した後 ([`HTTP`][4]、[`SSL`][5]、[`TCP`][6]、[`DNS`][7]、または [`ICMP` テスト][8])、テストのリクエストを定義できます。
 
 ### リクエストを定義する
 
@@ -54,7 +57,12 @@ HTTP テストは、ネットワークの外部または内部のどちらから
   {{% tab "証明書" %}}
 
   * **Ignore server certificate error**: 選択すると、SSL 証明書の検証時にエラーが発生した場合でも、HTTP テストが接続を続行します。
-  * **Client certificate**: クライアント証明書と関連する秘密キーをアップロードして、mTLS を介して認証します。
+  * **クライアント証明書**: クライアント証明書 (`.crt`) と関連する秘密キー (`.key`) を `PEM` 形式でアップロードして、mTLS を介して認証します。`openssl` ライブラリを使用して証明書を変換することができます。たとえば、`PKCS12` 証明書を `PEM` 形式の秘密キーと証明書に変換できます。
+
+  ```
+  openssl pkcs12 -in <CERT>.p12 -out <CERT_KEY>.key -nodes -nocerts
+  openssl pkcs12 -in <CERT>.p12 -out <CERT>.cert -nokeys
+  ```
 
   {{% /tab %}}
 
@@ -65,10 +73,18 @@ HTTP テストは、ネットワークの外部または内部のどちらから
 
   {{% /tab %}}
 
+  {{% tab "Privacy" %}}
+
+  * **Do not save response body**: レスポンスの本文が実行時に保存されないようにするには、このオプションを選択します。テスト結果に機密データを含めたくない場合に有用です。障害発生時のトラブルシューティングに影響を及ぼす可能性があるため、慎重に使用してください。セキュリティに関する詳細は、[こちら][1]でご確認ください。
+
+
+[1]: /ja/security/synthetics
+  {{% /tab %}}
+
   {{< /tabs >}}
 
 3. HTTP テストに**名前**を付けます。
-4. HTTP テストに `env` **タグ**とその他のタグを追加します。次に、これらのタグを使用して、[Synthetic Monitoring ホームページ][8]で Synthetic テストをすばやくフィルタリングできます。
+4. HTTP テストに `env` **タグ**とその他のタグを追加します。次に、これらのタグを使用して、[Synthetic Monitoring ホームページ][9]で Synthetic テストをすばやくフィルタリングできます。
 6. HTTP テストを実行する**ロケーション**を選択します。HTTP テストは、ネットワークの外部または内部のどちらからエンドポイントを監視するかによって、[管理ロケーション][1]と[プライベートロケーション][2]から実行できます。
 
 **Test URL** をクリックして、リクエストのコンフィギュレーションをテストします。画面の右側に応答プレビューが表示されます。
@@ -90,14 +106,14 @@ HTTP テストは次の頻度で実行できます。
 
 | タイプ          | 演算子                                                                                               | 値の型                                                      |
 |---------------|--------------------------------------------------------------------------------------------------------|----------------------------------------------------------------|
-| 本文          | `contains`、`does not contain`、`is`、`is not`、<br> `matches`、`does not match`、<br> [`jsonpath`][9] | _String_ <br> _[Regex][10]_ <br> _String_、_[Regex][10]_ |
-| ヘッダー        | `contains`、`does not contain`、`is`、`is not`、<br> `matches`、`does not match`                       | _String_ <br> _[Regex][10]                                      |
+| 本文          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, <br> [`jsonpath`][10] | _String_ <br> _[Regex][11]_ <br> _String_, _[Regex][11]_ |
+| ヘッダー        | `contains`、`does not contain`、`is`、`is not`、<br> `matches`、`does not match`                       | _String_ <br> _[Regex][11]                                      |
 | response time | `is less than`                                                                                         | 整数 (ms)                                                  |
 | ステータスコード   | `is`、`is not`                                                                                         | 整数                                                      |
 
 **注**: HTTP テストでは、`br`、`deflate`、`gzip`、`identity` の `content-encoding` ヘッダーを使用して本文の圧縮を解除することが可能です。
 
-**New Assertion** をクリックするか、応答プレビューを直接クリックすることで、API テストごとに最大 10 個のアサーションを作成できます。
+**New Assertion** をクリックするか、応答プレビューを直接クリックすることで、API テストごとに最大 20 個のアサーションを作成できます。
 
 {{< img src="synthetics/api_tests/assertions.png" alt="HTTP テストのアサーションを定義する" style="width:90%;" >}}
 
@@ -112,9 +128,9 @@ HTTP テストは次の頻度で実行できます。
 * 直近 *X* 分間に、最低 1 個のロケーションで失敗 (最低 1 つのアサーションが失敗)、
 * 直近 *X* 分間に、ある時点で最低 *n* 個のロケーションで失敗。
 
-#### Fast Retry
+#### 高速再試行
 
-テスト結果が失敗した場合、テストによって再試行をトリガーすることができます。デフォルトでは、再試行は最初に失敗したテスト結果の 300 ミリ秒後に実行されます。この間隔は [API][11] を介して構成できます。
+テスト結果が失敗した場合、テストによって再試行をトリガーすることができます。デフォルトでは、再試行は最初に失敗したテスト結果の 300 ミリ秒後に実行されます。この間隔は [API][12] を介して構成できます。
 
 ロケーションのアップタイムは、評価ごとに計算されます (評価前の最後のテスト結果がアップかダウンか)。合計アップタイムは、構成されたアラート条件に基づいて計算されます。送信される通知は、合計アップタイムに基づきます。
 
@@ -122,14 +138,14 @@ HTTP テストは次の頻度で実行できます。
 
 以前に定義された[アラート条件](#define-alert-conditions)に基づいて、テストによって通知が送信されます。このセクションを使用して、チームに送信するメッセージの方法と内容を定義します。
 
-1. [モニターと同様][12]、メッセージに `@notification` を追加するか、ドロップダウンボックスでチームメンバーと接続されたインテグレーションを検索して、通知を受信する**ユーザーやサービス**を選択します。
+1. [モニターと同様][13]、メッセージに`@notification` を追加するか、ドロップダウンボックスでチームメンバーと接続されたインテグレーションを検索して、通知を受信する**ユーザーやサービス**を選択します。
 
-2. テストの通知**メッセージ**を入力します。このフィールドでは、標準の[マークダウン形式][13]のほか、以下の[条件付き変数][14]を使用できます。
+2. テストの通知**メッセージ**を入力します。このフィールドでは、標準の[マークダウン形式][14]のほか、以下の[条件付き変数][15]を使用できます。
 
     | 条件付き変数       | 説明                                                         |
     |----------------------------|---------------------------------------------------------------------|
-    | `{{#is_alert}}`            |モニターがアラートする場合に表示します。                                          |
-    | `{{^is_alert}}`            |テストが警告しない限り表示します。                                        |
+    | `{{#is_alert}}`            |テストがアラートを発する場合に表示します。                                          |
+    | `{{^is_alert}}`            |テストがアラートを発しない限り表示します。                                        |
     | `{{#is_recovery}}`         |テストがアラートから回復したときに表示します。                             |
     | `{{^is_recovery}}`         |テストがアラートから回復しない限り表示します。                           |
 
@@ -146,19 +162,26 @@ HTTP テストは次の頻度で実行できます。
 
 ### ローカル変数を作成する
 
-以下の利用可能な組み込みの 1 つから値を定義してローカル変数を作成できます。
+テストコンフィギュレーションフォームの右上隅にある **Create Local Variable** をクリックすると、ローカル変数を作成できます。以下の利用可能なビルトインのいずれかから値を定義できます。
 
-| パターン                    | 説明                                                                                                 |
-|----------------------------|-------------------------------------------------------------------------------------------------------------|
-| `{{ numeric(n) }}`         | `n` 桁の数字列を生成します。                                                                 |
-| `{{ alphabetic(n) }}`      | `n` 文字のアルファベット文字列を生成します。                                                            |
-| `{{ alphanumeric(n) }}`    | `n` 文字の英数字文字列を生成します。                                                       |
-| `{{ date(n, format) }}`    | テストが開始された日付 + `n` 日の値を使用して、許容される形式のいずれかで日付を生成します。        |
-| `{{ timestamp(n, unit) }}` | テストが +/- `n` 選択単位で開始されたタイムスタンプの値を使用して、許容される単位のいずれかでタイムスタンプを生成します。 |
+`{{ numeric(n) }}`
+: `n` 桁の数字列を生成します。
+
+`{{ alphabetic(n) }}`
+: `n` 文字のアルファベット文字列を生成します。
+
+`{{ alphanumeric(n) }}`
+: `n` 文字の英数字文字列を生成します。
+
+`{{ date(n, format) }}`
+: テストが開始された日付 + `n` 日の値を使用して、許容される形式のいずれかで日付を生成します。
+
+`{{ timestamp(n, unit) }}` 
+: テストが +/- `n` 選択単位で開始されたタイムスタンプの値を使用して、許容される単位のいずれかでタイムスタンプを生成します。
 
 ### 変数を使用する
 
-HTTP テストの URL、高度なオプション、アサーションで、[`Settings` で定義されたグローバル変数][15]と[ローカルで定義された変数](#create-local-variables)を使用できます。
+HTTP テストの URL、高度なオプション、アサーションで、[`Settings` で定義されたグローバル変数][16]と[ローカルで定義された変数](#create-local-variables)を使用できます。 
 変数のリストを表示するには、目的のフィールドに `{{` と入力します。
 
 {{< img src="synthetics/api_tests/use_variable.mp4" alt="API テストでの変数の使用" video="true" width="90%" >}}
@@ -167,13 +190,24 @@ HTTP テストの URL、高度なオプション、アサーションで、[`Set
 
 テストが 1 つまたは複数のアサーションを満たさない場合、またはリクエストが時期尚早に失敗した場合、テストは `FAILED` と見なされます。場合によっては、エンドポイントに対してアサーションをテストできずにテストが実際に失敗することがあります。これらの理由には次のものがあります。
 
-| エラー             | 説明                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-|-------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `CONNRESET`       | 接続がリモートサーバーによって突然閉じられました。Web サーバーにエラーが発生した、応答中にシステムが停止した、Web サーバーへの接続が失われた、などの原因が考えられます。                                                                                                                                                                                                                                                         |
-| DNS               | テスト URL に対応する DNS エントリが見つかりませんでした。テスト URL の構成の誤り、DNS エントリの構成の誤りなどの原因が考えられます。                                                                                                                                                                                                                                                                                                                  |
-| `INVALID_REQUEST` | テストのコンフィギュレーションが無効です (URL に入力ミスがあるなど)。                                                                                                                                                                                                                                                                                                                                                                                     |
-| `SSL`             | SSL 接続を実行できませんでした。[詳細については、個別のエラーページを参照してください][16]。                                                                                                                                                                                                                                                                                                                                                      |
-| `TIMEOUT`         | リクエストを一定時間内に完了できなかったことを示します。`TIMEOUT` には 2 種類あります。<br> - `TIMEOUT: The request couldn’t be completed in a reasonable time.`  は、タイムアウトが TCP ソケットの接続レベルで発生したことを示します。<br> - `TIMEOUT: Retrieving the response couldn’t be completed in a reasonable time.` は、タイムアウトがリクエストの実行全体 (TCP ソケット接続、データ転送、アサーション) で発生したことを示します。 |
+
+
+`CONNRESET`
+: 接続がリモートサーバーによって突然閉じられました。Web サーバーにエラーが発生した、応答中にシステムが停止した、Web サーバーへの接続が失われた、などの原因が考えられます。
+
+`DNS`
+: テスト URL に対応する DNS エントリが見つかりませんでした。テスト URL の構成の誤り、DNS エントリの構成の誤りなどの原因が考えられます。
+
+`INVALID_REQUEST` 
+: テストのコンフィギュレーションが無効です (URL に入力ミスがあるなど)。
+
+`SSL`
+: SSL 接続を実行できませんでした。[詳細については、個別のエラーページを参照してください][17]。
+
+`TIMEOUT`
+: リクエストを一定時間内に完了できなかったことを示します。`TIMEOUT` には 2 種類あります。
+  - `TIMEOUT: The request couldn’t be completed in a reasonable time.` は、タイムアウトが TCP ソケットの接続レベルで発生したことを示します。
+  - `TIMEOUT: Retrieving the response couldn’t be completed in a reasonable time.` は、タイムアウトがリクエストの実行全体 (TCP ソケット接続、データ転送、アサーション) で発生したことを示します。
 
 ## その他の参考資料
 
@@ -186,12 +220,13 @@ HTTP テストの URL、高度なオプション、アサーションで、[`Set
 [5]: /ja/synthetics/api_tests/ssl_tests
 [6]: /ja/synthetics/api_tests/tcp_tests
 [7]: /ja/synthetics/api_tests/dns_tests
-[8]: /ja/synthetics/search/#search
-[9]: https://restfulapi.net/json-jsonpath/
-[10]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
-[11]: /ja/api/v1/synthetics/#create-a-test
-[12]: /ja/monitors/notifications/?tab=is_alert#notification
-[13]: https://www.markdownguide.org/basic-syntax/
-[14]: /ja/monitors/notifications/?tab=is_recoveryis_alert_recovery#conditional-variables
-[15]: /ja/synthetics/settings/#global-variables
-[16]: /ja/synthetics/api_tests/errors/#ssl-errors
+[8]: /ja/synthetics/api_tests/icmp_tests
+[9]: /ja/synthetics/search/#search
+[10]: https://restfulapi.net/json-jsonpath/
+[11]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
+[12]: /ja/api/v1/synthetics/#create-a-test
+[13]: /ja/monitors/notifications/?tab=is_alert#notification
+[14]: https://www.markdownguide.org/basic-syntax/
+[15]: /ja/monitors/notifications/?tab=is_recoveryis_alert_recovery#conditional-variables
+[16]: /ja/synthetics/settings/#global-variables
+[17]: /ja/synthetics/api_tests/errors/#ssl-errors

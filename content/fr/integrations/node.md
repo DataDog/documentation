@@ -77,7 +77,7 @@ Besoin d'aide ? Contactez [l'assistance Datadog][5].
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/brightcove/hot-shots
-[2]: https://docs.datadoghq.com/fr/developers/metrics/
+[2]: https://docs.datadoghq.com/fr/metrics/
 [3]: https://docs.datadoghq.com/fr/tracing/setup/nodejs/
 [4]: https://docs.datadoghq.com/fr/logs/log_collection/nodejs/
 [5]: https://docs.datadoghq.com/fr/help/

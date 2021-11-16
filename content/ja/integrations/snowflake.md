@@ -16,7 +16,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/snowflake/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/snowflake/README.md
 display_name: Snowflake
 draft: false
 git_integration_title: snowflake
@@ -142,6 +142,11 @@ datadog-agent integration install datadog-snowflake==2.0.1
         ## so to minimize unnecessary queries the `min_collection_interval` defaults to 1 hour.
         #
         min_collection_interval: 3600
+
+        # @param disable_generic_tags - boolean - optional - default: false
+        # Generic tags such as `cluster` will be replaced by <integration_name>_cluster to avoid
+        # getting mixed with other integraton tags.
+        # disable_generic_tags: true
     ```
 
     <div class="alert alert-info">By default, the <code>min_collection_interval</code> is 1 hour. 
@@ -239,18 +244,18 @@ custom_queries:
 {{< get-metrics-from-git "snowflake" >}}
 
 
-### サービスのチェック
-
-**snowflake.can_connect**:<br>
-Agent が認証して Snowflake に接続できない場合は `CRITICAL`、それ以外の場合は `OK` を返します。
-
 ### イベント
 
 Snowflake には、イベントは含まれません。
 
+### サービスのチェック
+{{< get-service-checks-from-git "snowflake" >}}
+
+
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][13]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][14]までお問合せください。
+
 
 [1]: https://www.snowflake.com/
 [2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
@@ -264,4 +269,5 @@ Snowflake には、イベントは含まれません。
 [10]: https://raw.githubusercontent.com/DataDog/integrations-core/master/snowflake/images/custom_query.png
 [11]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [12]: https://github.com/DataDog/integrations-core/blob/master/snowflake/metadata.csv
-[13]: https://docs.datadoghq.com/ja/help/
+[13]: https://github.com/DataDog/integrations-core/blob/master/snowflake/assets/service_checks.json
+[14]: https://docs.datadoghq.com/ja/help/

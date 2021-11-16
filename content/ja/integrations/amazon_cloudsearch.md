@@ -13,6 +13,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/awscloudsearch/'
 draft: false
 git_integration_title: amazon_cloudsearch
 has_logo: true
+integration_id: amazon-cloudsearch
 integration_title: Amazon CloudSearch
 is_public: true
 kind: インテグレーション
@@ -50,10 +51,10 @@ Amazon CloudSearch から S3 バケットまたは CloudWatch のいずれかに
 #### ログを Datadog に送信する方法
 
 1. [Datadog ログコレクション AWS Lambda 関数][4] をまだ設定していない場合は、設定を行ってください。
-2. lambda 関数がインストールされたら、AWS コンソールから、Amazon CloudSearch ログを含む S3 バケットまたは CloudWatch のロググループに手動でトリガーを追加します。
+2. Lambda 関数がインストールされたら、AWS コンソールから、Amazon CloudSearch ログを含む S3 バケットまたは CloudWatch のロググループに手動でトリガーを追加します。
 
     - [S3 バケットに手動トリガーを追加][5]
-    - [Cloudwatch ロググループに手動トリガーを追加][6]
+    - [CloudWatch ロググループに手動トリガーを追加][6]
 
 ## 収集データ
 

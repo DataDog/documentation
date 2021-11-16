@@ -3,19 +3,19 @@ title: Transport de l'Agent pour les logs
 kind: documentation
 description: Utiliser l'Agent Datadog pour recueillir vos logs et les envoyer à Datadog
 further_reading:
-  - link: 'agent/logs/advanced_log_collection/#filtrer-les-logs'
+  - link: agent/logs/advanced_log_collection/#filtrer-les-logs
     tag: Documentation
     text: Filtrer les logs envoyés à Datadog
-  - link: 'agent/logs/advanced_log_collection/#nettoyer-les-donnees-sensibles-de-vos-logs'
+  - link: agent/logs/advanced_log_collection/#nettoyer-les-donnees-sensibles-de-vos-logs
     tag: Documentation
     text: Nettoyer les données sensibles de vos logs
-  - link: 'agent/logs/advanced_log_collection/#agregation-multiligne'
+  - link: agent/logs/advanced_log_collection/#agregation-multiligne
     tag: Documentation
     text: Agrégation de logs multiligne
-  - link: 'agent/logs/advanced_log_collection/#suivre-des-repertoires-a-l-aide-de-wildcards'
+  - link: agent/logs/advanced_log_collection/#suivre-des-repertoires-a-l-aide-de-wildcards
     tag: Documentation
     text: Suivre des répertoires à l'aide de wildcards
-  - link: 'agent/logs/advanced_log_collection/#regles-globales-de-traitement'
+  - link: agent/logs/advanced_log_collection/#regles-globales-de-traitement
     tag: Documentation
     text: Règles globales de traitement
 ---
@@ -55,6 +55,7 @@ Pour envoyer des logs avec des variables d'environnement, configurez ce qui suit
 * `DD_LOGS_ENABLED=true`
 * `DD_LOGS_CONFIG_USE_HTTP=true`
 
+Par défaut, l'Agent Datadog utilise le port `443` pour envoyer ses logs à Datadog via HTTPS.
 
 [1]: /fr/agent/guide/agent-configuration-files/
 {{% /tab %}}

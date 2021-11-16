@@ -1,6 +1,7 @@
 ---
 assets:
   dashboards: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -10,6 +11,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/vespa/README.md'
 display_name: Vespa
+draft: false
 git_integration_title: vespa
 guid: 810e2a6e-4aa4-4b03-b5a4-563f3752f0eb
 integration_id: vespa
@@ -34,38 +36,37 @@ Recueillez des métriques de votre système [Vespa][1] en temps réel pour :
 - Visualiser et surveiller l'état et les performances de Vespa
 - Envoyer des alertes sur l'état et la disponibilité
 
-## Implémentation
+## Configuration
 
-Le check Vespa n'est pas inclus avec le paquet de l'[Agent Datadog][2].
+Le check Vespa n'est pas inclus avec le package de l'[Agent Datadog][2].
 
 ### Installation
 
-Pour installer le check sur votre host :
+Si vous utilisez la version 6.8 ou une version ultérieure de l'Agent, suivez les instructions ci-dessous pour installer le check Vesoa sur votre host. Consultez le guide relatif à l'[installation d'intégrations développées par la communauté][3] pour installer des checks avec une [version < 6.8 de l'Agent][4] ou avec l'[Agent Docker][5] :
 
-1. Installez le [kit de développement][3] sur n'importe quelle machine.
-2. Exécutez `ddev release build vespa` pour générer le paquet.
-3. [Téléchargez l'Agent Datadog][2].
-4. Importez l'artefact du build sur tous les hosts avec un Agent et exécutez :
+1. [Téléchargez et lancez l'Agent Datadog][2].
+2. Exécutez la commande suivante pour installer le wheel de l'intégration à l'aide de l'Agent :
 
    ```shell
-   datadog-agent integration install -w path/to/vespa/dist/<ARTIFACT_NAME>.whl
+   datadog-agent integration install -t datadog-vespa==<INTEGRATION_VERSION>
    ```
+3. Configurez votre intégration comme [n'importe quelle autre intégration du paquet][6].
 
 ### Configuration
 
 Pour configurer le check Vespa :
 
-1. Créez un dossier `vespa.d/` dans le dossier `conf.d/` à la racine du [répertoire de configuration de l'Agent][4].
+1. Créez un dossier `vespa.d/` dans le dossier `conf.d/` à la racine du [répertoire de configuration de l'Agent][7].
 2. Créez un fichier `conf.yaml` dans le dossier `vespa.d/` précédemment créé.
-3. Consultez le [fichier d'exemple vespa.d/conf.yaml][5] et copiez son contenu dans le fichier `conf.yaml`.
+3. Consultez le [fichier d'exemple vespa.d/conf.yaml][8] et copiez son contenu dans le fichier `conf.yaml`.
 4. Modifiez le fichier `conf.yaml` pour configurer le `consumer`, qui détermine l'ensemble de métriques transmises par le check :
-   - `consumer` : consommateur pour lequel recueillir les métriques. Peut être défini sur `default` ou un [consommateur personnalisé][6]
+   - `consumer` : consommateur pour lequel recueillir les métriques. Peut être défini sur `default` ou un [consommateur personnalisé][9]
      à partir du services.xml de votre application Vespa.
-5. [Redémarrez l'Agent][7].
+5. [Redémarrez l'Agent][3].
 
 ### Validation
 
-[Lancez la sous-commande status de l'Agent][8] et cherchez `vespa` dans la section Checks.
+[Lancez la sous-commande status de l'Agent][4] et cherchez `vespa` dans la section Checks.
 
 ## Données collectées
 
@@ -88,16 +89,15 @@ L'intégration Vespa n'inclut aucun événement.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][11].
+Besoin d'aide ? Contactez [l'assistance Datadog][5].
 
 [1]: https://vespa.ai/
 [2]: https://app.datadoghq.com/account/settings#agent
-[3]: https://docs.datadoghq.com/fr/developers/integrations/new_check_howto/#developer-toolkit
-[4]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
-[5]: https://github.com/DataDog/integrations-extras/blob/master/vespa/datadog_checks/vespa/data/conf.yaml.example
-[6]: https://docs.vespa.ai/documentation/reference/services-admin.html#metrics
-[7]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[8]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
-[9]: https://github.com/DataDog/integrations-extras/blob/master/vespa/metadata.csv
+[3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
+[5]: https://docs.datadoghq.com/fr/help/
+[6]: https://docs.datadoghq.com/fr/getting_started/integrations/
+[7]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
+[8]: https://github.com/DataDog/integrations-extras/blob/master/vespa/datadog_checks/vespa/data/conf.yaml.example
+[9]: https://docs.vespa.ai/documentation/reference/services-admin.html#metrics
 [10]: https://docs.vespa.ai/documentation/reference/metrics.html#node-metrics-api
-[11]: https://docs.datadoghq.com/fr/help/

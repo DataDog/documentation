@@ -58,18 +58,26 @@ hello()
 
 ### No standard library logging
 
-If you are not using the standard library `logging` module, you can use the `ddtrace.helpers.get_correlation_ids()` to inject tracer information into your logs.
+If you are not using the standard library `logging` module, you can use the following code snippet to inject tracer information into your logs:
+
+```python
+from ddtrace import tracer
+
+span = tracer.current_span()
+correlation_ids = (span.trace_id, span.span_id) if span else (None, None)
+```
 As an illustration of this approach, the following example defines a function as a *processor* in `structlog` to add tracer fields to the log output:
 
 ``` python
 import ddtrace
-from ddtrace.helpers import get_correlation_ids
+from ddtrace import tracer
 
 import structlog
 
 def tracer_injection(logger, log_method, event_dict):
     # get correlation ids from current tracer context
-    trace_id, span_id = get_correlation_ids()
+    span = tracer.current_span()
+    trace_id, span_id = (span.trace_id, span.span_id) if span else (None, None)
 
     # add ids to structlog event dictionary
     event_dict['dd.trace_id'] = str(trace_id or 0)
@@ -98,7 +106,7 @@ Once the logger is configured, executing a traced function that logs an event yi
 {"event": "In tracer context", "dd.trace_id": 9982398928418628468, "dd.span_id": 10130028953923355146, "dd.env": "dev", "dd.service": "hello", "dd.version": "abc123"}
 ```
 
-**Note**: If you are not using a [Datadog Log Integration][3] to parse your logs, custom log parsing rules need to ensure that `dd.trace_id` and `dd.span_id` are being parsed as strings. More information can be found in the [FAQ on this topic][4].
+**Note**: If you are not using a [Datadog Log Integration][3] to parse your logs, custom log parsing rules need to ensure that `dd.trace_id` and `dd.span_id` are being parsed as strings and remapped using the [Trace Remapper][4]. For more information, see [Why can’t I see my correlated logs in the Trace ID panel?][5].
 
 [See the Python logging documentation][3] to ensure that the Python Log Integration is properly configured so that your Python logs are automatically parsed.
 
@@ -109,4 +117,5 @@ Once the logger is configured, executing a traced function that logs an event yi
 [1]: /getting_started/tagging/unified_service_tagging
 [2]: /tracing/visualization/#trace
 [3]: /logs/log_collection/python/#configure-the-datadog-agent
-[4]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel/?tab=custom
+[4]: /logs/log_configuration/processors/#trace-remapper
+[5]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel/?tab=custom

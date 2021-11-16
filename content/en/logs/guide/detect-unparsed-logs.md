@@ -62,12 +62,12 @@ To monitor the volume of unparsed logs:
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /logs/processing/
+[1]: /logs/log_configuration/pipelines
 [2]: /integrations/#cat-log-collection
 [3]: /logs/explorer/
 [4]: /logs/explorer/#patterns
 [5]: /logs/archives/?tab=awss3
 [6]: /logs/logs_to_metrics/
 [7]: /logs/indexes#set-daily-quota
-[8]: /monitors/monitor_types/metric/?tab=threshold#overview
-[9]: /monitors/monitor_types/metric/?tab=threshold#set-alert-conditions
+[8]: /monitors/create/types/metric/?tab=threshold#overview
+[9]: /monitors/create/types/metric/?tab=threshold#set-alert-conditions

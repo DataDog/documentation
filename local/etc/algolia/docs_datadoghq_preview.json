@@ -25,7 +25,8 @@
                     "real_user_monitoring",
                     "developers",
                     "account_management",
-                    "synthetics"
+                    "synthetics",
+                    "database_monitoring"
                 ]
             },
             "tags": ["faq"],
@@ -46,12 +47,22 @@
                     "network_monitoring/devices",
                     "serverless",
                     "real_user_monitoring",
-                    "developers"
+                    "developers",
+                    "database_monitoring"
                 ],
                 "localisation": ["", "/fr", "/ja"]
             },
             "tags": ["guide"],
             "page_rank": 10
+        },
+        {
+            "url": "https://docs.datadoghq.com(?P<localisation>.*?)/account_management/rbac/permissions",
+            "selectors_key": "docs",
+            "variables": {
+                "localisation": ["", "/fr", "/ja"]
+            },
+            "tags": ["rbac_permissions"],
+            "page_rank": 110
         },
         {
             "url": "https://docs.datadoghq.com(?P<localisation>.*?)/getting_started/",
@@ -88,6 +99,7 @@
                 "section": [
                     "account_management",
                     "agent",
+                    "continuous_integration",
                     "dashboards",
                     "developers",
                     "events",
@@ -104,7 +116,8 @@
                     "synthetics",
                     "tracing",
                     "serverless",
-                    "watchdog"
+                    "watchdog",
+                    "database_monitoring"
                 ]
             },
             "tags": ["docs"],
@@ -246,7 +259,7 @@
     ],
     "conversation_id": ["620036890"],
     "custom_settings": {
-        "separatorsToIndex": "_@.",
+        "separatorsToIndex": "_@.#",
         "attributeForDistinct": "url_without_anchor",
         "attributesForFaceting": ["language", "tags"],
         "optionalWords": ["the", "without"],
@@ -256,7 +269,7 @@
             ["gcp", "google cloud platform"],
             ["aws", "amazon web service"],
             ["RUM", "rum", "real user monitoring"],
-            ["Role Permissions", "permissions"]
+            ["Role Permissions", "permissions", "Datadog Role Permissions", "RBAC"]
         ]
     },
     "only_content_level": true,

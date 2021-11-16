@@ -9,6 +9,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/azure_iot_hub/'
 draft: false
 git_integration_title: azure_iot_hub
 has_logo: true
+integration_id: azure-iot-hub
 integration_title: Microsoft Azure IoT Hub
 is_public: true
 kind: integration

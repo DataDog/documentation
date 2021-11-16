@@ -4,10 +4,13 @@ aliases:
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
-  dashboards: {}
+  dashboards:
+    fluentd: assets/dashboards/fluentd_dashboard.json
   logs: {}
   metrics_metadata: metadata.csv
   monitors: {}
+  saved_views:
+    fluentd_processes: assets/saved_views/fluentd_processes.json
   service_checks: assets/service_checks.json
 categories:
   - log collection
@@ -150,8 +153,7 @@ Datadog で[インテグレーションの自動セットアップ][7]をトリ�
 - `use_ssl`: Datadog へのセキュリティ保護された TCP/SSL 接続を初期化するよう Agent に指示します (デフォルト値は `true`)。
 - `no_ssl_validation`: SSL ホスト名の検証を無効化します (デフォルト値は `false`)。
 
-
-以下のように設定することで、ログを **Datadog EU** に送信するためにも使用できます。
+**注**: `host` および `port` をリージョン {{< region-param key="http_endpoint" code="true" >}} {{< region-param key="http_port" code="true" >}} に設定します。
 
 ```conf
 <match datadog.**>
@@ -229,9 +231,8 @@ Datadog Agent は Docker と Kubernetes のメタデータを自動的に収集�
 FluentD チェックには、イベントは含まれません。
 
 ### サービスのチェック
+{{< get-service-checks-from-git "fluentd" >}}
 
-**fluentd.is_ok**:<br>
-Agent が FluentD に接続してメトリクスを収集できない場合は `CRITICAL` を返します。それ以外の場合は `OK` を返します。
 
 ## トラブルシューティング
 

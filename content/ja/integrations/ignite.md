@@ -142,14 +142,13 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 {{< get-metrics-from-git "ignite" >}}
 
 
-### サービスのチェック
-
-**ignite.can_connect**:<br>
-Agent が監視対象の Ignite インスタンスに接続できず、メトリクスを収集できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
-
 ### イベント
 
 Ignite インテグレーションには、イベントは含まれません。
+
+### サービスのチェック
+{{< get-service-checks-from-git "ignite" >}}
+
 
 ## トラブルシューティング
 

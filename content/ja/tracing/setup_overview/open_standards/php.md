@@ -18,12 +18,19 @@ composer require opentracing/opentracing:1.0.0-beta5
 
 ```php
 <?php
+// Composer autoload.php のインポート後すぐにグローバルトレーサーを設定します。
 $otTracer = new \DDTrace\OpenTracer\Tracer(\DDTrace\GlobalTracer::get());
 \OpenTracing\GlobalTracer::set($otTracer);
-$span = $otTracer->startActiveSpan('web.request')->getSpan();
+
+// スパンが必要なすべての場所に
+$scope = $otTracer->startActiveSpan('web.request');
+$span = $scope->getSpan();
+$span->setTag('service.name', 'service_name');
+$span->setTag('resource.name', 'resource_name');
 $span->setTag('span.type', 'web');
 $span->setTag('http.method', $_SERVER['REQUEST_METHOD']);
 // ...既定の方法で OpenTracing を使用します
+$scope->close();
 ?>
 ```
 

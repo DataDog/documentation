@@ -5,6 +5,7 @@ aliases:
   - /ja/security_monitoring/default_rules/aws-s3-publicaccess
 cloud: AWS
 disable_edit: true
+integration_id: amazon-s3
 kind: documentation
 rule_category:
   - クラウドコンフィギュレーション

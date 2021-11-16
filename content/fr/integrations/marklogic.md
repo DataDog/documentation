@@ -2,12 +2,17 @@
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
-  dashboards: {}
+  dashboards:
+    MarkLogic - Overview: assets/dashboards/overview.json
   logs:
     source: marklogic
   metrics_metadata: metadata.csv
-  monitors: {}
-  saved_views: {}
+  monitors:
+    Marklogic high load: assets/recommended_monitors/marklogic_high_load.json
+    Marklogic long requests: assets/recommended_monitors/marklogic_long_requests.json
+    Marklogic low cache: assets/recommended_monitors/marklogic_low_cache.json
+  saved_views:
+    marklogic_processes: assets/saved_views/marklogic_processes.json
   service_checks: assets/service_checks.json
 categories:
   - data store
@@ -106,7 +111,7 @@ Si vous prévoyez d'utiliser la configuration `enable_health_service_checks`, at
 
 #### Collecte de logs
 
-_Disponible à partir des versions > 6.0 de l'Agent_
+_Disponible à partir des versions > 6.0 de l'Agent_
 
 1. La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans `datadog.yaml` :
 
@@ -142,13 +147,13 @@ _Disponible à partir des versions > 6.0 de l'Agent_
 
 ### Checks de service
 
-**marklogic.can_connect** : 
-Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter à l'endpoint de requête. Dans le cas contraire, renvoie `OK`.
+**marklogic.can_connect** :<br>
+Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter à l'endpoint de requête. Si ce n'est pas le cas, renvoie `OK`.
 
-**marklogic.forest.health** :
+**marklogic.forest.health** :<br>
 Renvoie `CRITICAL` si l'état de la base de données est `critical` ; `WARNING` si l'état est `maintenance`, `offline` ou `at-risk` ; et `OK` pour les autres cas.
 
-**marklogic.forest.health** :
+**marklogic.forest.health** :<br>
 Renvoie `CRITICAL` si l'état de la forêt est `critical` ; `WARNING` si l'état est `maintenance`, `offline` ou `at-risk` ; et `OK` pour les autres cas.
 
 ### Événements

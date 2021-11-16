@@ -1,5 +1,5 @@
 ---
-title: Custom time frames
+title: Custom Time Frames
 kind: guide
 ---
 
@@ -43,15 +43,15 @@ Both fixed and relative custom time frames are supported:
 
 ### Relative dates
 
-| Format       | Examples                                                        | Notes                                               |
-|--------------|-----------------------------------------------------------------|-----------------------------------------------------|
-| `N{unit}`    | 3m<br>3 min<br>3h<br>3 hours<br>3d<br>3 days<br>3mo<br>3 months | Displays the past N units (e.g., the past 3 months) |
-| `today`      |                                                                 | Displays the current calendar day until now         |
-| `yesterday`  |                                                                 | Displays the full previous calendar day             |
-| `this month` |                                                                 | Displays the current calendar month until now       |
-| `last month` |                                                                 | Displays the full previous calendar month           |
-| `this year`  |                                                                 | Displays the current calendar year until now        |
-| `last year`  |                                                                 | Displays the full previous calendar year            |
+| Format       | Examples                                                        | Notes                                                     |
+|--------------|-----------------------------------------------------------------|-----------------------------------------------------------|
+| `N{unit}`    | 3m<br>3 min<br>3h<br>3 hours<br>3d<br>3 days<br>3mo<br>3 months | Displays the past N units, for example: the past 3 months |
+| `today`      |                                                                 | Displays the current calendar day until present           |
+| `yesterday`  |                                                                 | Displays the full previous calendar day                   |
+| `this month` |                                                                 | Displays the current calendar month until present         |
+| `last month` |                                                                 | Displays the full previous calendar month                 |
+| `this year`  |                                                                 | Displays the current calendar year until present          |
+| `last year`  |                                                                 | Displays the full previous calendar year                  |
 
 * The following strings are accepted for any `{unit}` in a relative date:
   * Minutes: `m`, `min`, `mins`, `minute`, `minutes`

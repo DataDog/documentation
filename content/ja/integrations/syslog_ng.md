@@ -14,10 +14,11 @@ integration_title: syslog_ng
 is_public: true
 public_title: Datadog-Syslog-ng インテグレーション
 dependencies:
-  - 'https://github.com/DataDog/documentation/blob/master/content/en/integrations/syslog_ng.md'
+  - https://github.com/DataDog/documentation/blob/master/content/en/integrations/syslog_ng.md
 supported_os:
   - linux
   - windows
+integration_id: syslog_ng
 ---
 ## 概要
 
@@ -96,9 +97,21 @@ Syslog-ng を構成して、ホスト、コンテナ、サービスからログ�
         destination d_datadog { tcp("intake.logs.datadoghq.com" port(10516)     tls(peer-verify(required-trusted)) template(DatadogFormat)); };
         ```
 
-    TLS のパラメーターの詳細、および syslog-ng が使用可能かどうかは、[公式ドキュメント][1]を参照してください。
+    TLS のパラメーターと可能性について詳しくは、[syslog-ng オープンソース版管理ガイド][1]を参照してください。
 
-5. syslog-ng を再起動します。
+5. (オプション) ログにソースを設定します。ソースを設定するには、以下の形式を使用します (ソースが複数ある場合は、ファイルごとに形式の名前を変えてください)。
+
+    ```conf
+    template DatadogFormat { template("<API_KEY> <${PRI}>1 ${ISODATE} ${HOST:--} ${PROGRAM:--} ${PID:--} ${MSGID:--} [metas@0 ddsource=\"test\"] $MSG\n"); };
+    ```
+
+    `ddtags` 属性を使用してカスタムタグを追加することもできます。
+
+    ```conf
+    template DatadogFormat { template("<API_KEY> <${PRI}>1 ${ISODATE} ${HOST:--} ${PROGRAM:--} ${PID:--} ${MSGID:--} [metas@0 ddsource=\"test\" ddtags=\"env:test,user:test_user,<KEY:VALUE>\"] $MSG\n"); };
+    ```
+
+6. syslog-ng を再起動します。
 
 
 [1]: https://syslog-ng.com/documents/html/syslog-ng-ose-latest-guides/en/syslog-ng-ose-guide-admin/html/tlsoptions.html
@@ -171,7 +184,7 @@ Syslog-ng を構成して、ホスト、コンテナ、サービスからログ�
         destination d_datadog { tcp("tcp-intake.logs.datadoghq.eu" port(443)     tls(peer-verify(required-trusted)) template(DatadogFormat)); };
         ```
 
-    TLS のパラメーターの詳細、および syslog-ng が使用可能かどうかは、[公式ドキュメント][1]を参照してください。
+    TLS のパラメーターと可能性について詳しくは、[syslog-ng オープンソース版管理ガイド][1]を参照してください。
 
 5. syslog-ng を再起動します。
 

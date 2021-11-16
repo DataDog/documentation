@@ -7,10 +7,11 @@ assets:
 categories:
   - コンテナ
   - オーケストレーション
+  - ログの収集
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/pivotal_pks/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/pivotal_pks/README.md
 display_name: Pivotal PKS
 draft: false
 git_integration_title: pivotal_pks

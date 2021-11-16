@@ -5,3 +5,4 @@ src/scripts/components/global-modals.js
 src/scripts/components/header.js
 src/scripts/components/platforms.js
 src/scripts/components/sidenav.js
+src/scripts/jqmath-vanilla.js

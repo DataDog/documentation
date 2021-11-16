@@ -4,11 +4,14 @@ aliases:
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
-  dashboards: {}
+  dashboards:
+    gearman: assets/dashboards/gearman_dashboard.json
   logs:
     source: gearman
   metrics_metadata: metadata.csv
   monitors: {}
+  saved_views:
+    gearman_processes: assets/saved_views/gearman_processes.json
   service_checks: assets/service_checks.json
 categories:
   - processing
@@ -134,9 +137,8 @@ Kubernetes 環境でログを収集する Agent を構成するためのその�
 Gearmand チェックには、イベントは含まれません。
 
 ### サービスのチェック
+{{< get-service-checks-from-git "gearmand" >}}
 
-**gearman.can_connect**:<br>
-Agent が Gearman に接続してメトリクスを収集できない場合は、`CRITICAL` を返します。
 
 ## トラブルシューティング
 

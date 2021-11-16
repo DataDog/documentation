@@ -78,8 +78,14 @@ Steps to free up disk space:
 
 片方のセクションから `@notification` を削除すると、両方のセクションから削除されます。
 
-## その他の参考資料
+### アクセス制限
 
+<div class="alert alert-warning">
+RBAC のモニターへのアクセス制限は、現在ベータ版です。アクセスをリクエストするには、<a href="https://docs.datadoghq.com/help/">Datadog サポート</a>までお問い合わせください。</div>
+
+このセクションを使用して、あなた、あなたのロールを持つ組織内の全員、または組織の特定のロールへのアクセスを制限します。ロールに関する詳細は、[RBAC][9] ドキュメントを参照してください。
+
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -91,3 +97,4 @@ Steps to free up disk space:
 [6]: /ja/integrations/disk/
 [7]: /ja/monitors/monitor_types/metric/?tab=threshold#set-alert-conditions
 [8]: /ja/monitors/notifications/#conditional-variables
+[9]: /ja/account_management/rbac/

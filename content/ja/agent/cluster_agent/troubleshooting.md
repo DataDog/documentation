@@ -2,10 +2,10 @@
 title: Cluster Agent のトラブルシューティング
 kind: documentation
 further_reading:
-  - link: 'https://www.datadoghq.com/blog/datadog-cluster-agent/'
+  - link: https://www.datadoghq.com/blog/datadog-cluster-agent/
     tag: ブログ
     text: Datadog Cluster Agent のご紹介
-  - link: 'https://www.datadoghq.com/blog/autoscale-kubernetes-datadog/'
+  - link: https://www.datadoghq.com/blog/autoscale-kubernetes-datadog/
     tag: ブログ
     text: Datadog メトリクスを使用して Kubernetes のワークロードをオートスケーリングする
   - link: /agent/cluster_agent/clusterchecks/
@@ -17,7 +17,7 @@ further_reading:
   - link: /agent/kubernetes/integrations/
     tag: ドキュメント
     text: カスタムインテグレーション
-  - link: 'https://github.com/DataDog/datadog-agent/blob/master/docs/cluster-agent/GETTING_STARTED.md#troubleshooting'
+  - link: https://github.com/DataDog/datadog-agent/blob/master/docs/cluster-agent/GETTING_STARTED.md#troubleshooting
     tag: Github
     text: Datadog Cluster Agent のトラブルシューティング
 ---
@@ -159,7 +159,7 @@ root@datadog-agent-9d5bl:/# cat /var/log/datadog/agent.log | grep "metadata-coll
 または、次のようなエラーログを探します。
 
 ```shell
-2018-06-10 08:03:02 UTC | ERROR | Could not initialise the communication with the Datadog Cluster Agent, falling back to local service mapping: [...]
+2018-06-10 08:03:02 UTC | ERROR | Could not initialize the communication with the Datadog Cluster Agent, falling back to local service mapping: [...]
 ```
 
 ## カスタムメトリクスサーバー

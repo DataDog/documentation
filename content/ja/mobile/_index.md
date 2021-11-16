@@ -43,7 +43,9 @@ QR コードを使用または手動入力で認証することも可能です�
 
 ログイン時に **Authorize** をクリックすると、このモバイルデバイスがアカウントにリンクされます。セキュリティ上の理由から、このフローを月に 1 回実行する必要があります。
 
-**注**: モバイルアプリの SAML IdP 始動ログインは、現在ベータ版です。 SAML IdP 始動のベータアクセスをリクエストする、または SAML 認証に問題がある場合は、[Datadog サポート][5]までお問い合わせください。
+##### SAML IdP 始動のログイン
+
+SAML でログインしようとしているときにエラーが発生し続ける場合は、ID プロバイダーが IdP 始動のログインを強制する可能性があります。IdP 始動の SAML の有効化の詳細については、IdP 始動の SAML のページ [IdP 始動の SAML のページ][5]を参照してください。
 
 ## モニター
 
@@ -55,7 +57,7 @@ QR コードを使用または手動入力で認証することも可能です�
 
 **注:** モニター、通知、または保存済みビューの設定または編集は、[Datadog ウェブアプリ][7]で行う必要があります。ウェブアプリで設定されたすべてのモニターがモバイルアプリで表示されます。詳細については、[モニターの作成][8]を参照してください。
 
-## ダッシュボード
+## ダッシュボード  
 
 {{< img src="mobile/dashboards_doc.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="ダッシュボードページ">}}
 
@@ -63,12 +65,113 @@ QR コードを使用または手動入力で認証することも可能です�
 
 **注:** ダッシュボードを設定または編集するには、[Datadog ブラウザアプリにログイン][10]する必要があります。詳細については、[ダッシュボード][11]を参照してください。
 
+## インシデント
+
+{{< img src="mobile/incidents.png" alt="インシデントページ" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
+
+インシデントページでは、Datadog モバイルアプリから Datadog アカウントでアクセスできるすべてのインシデントを表示、検索、およびフィルタリングして、どこからでも迅速な対応と解決を保証できます。また、Slack、Zoom などとの統合を通じて、インシデントを宣言および編集し、チームとシームレスに通信することもできます。インシデントの詳細については、[Datadog インシデント管理ドキュメント][12]を参照してください。
+
+### インシデントを作成
+
+1. 下部のバーにある Incidents タブをクリックして、インシデントリストに移動します。
+2. 右上の “+” ボタンをクリックします。
+3. インシデントにタイトル、重大度、およびコマンダーを付けます。
+
+## ウィジェット
+
+### モニターに保存されたビュー
+
+{{< img src="mobile/widgets.png" alt="ウィジェットページ" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
+
+Datadog ウィジェットを使用して、ホーム画面から[モニターに保存されたビュー][13]を表示します。保存されたビューのセルをタップして、保存されたビューがすでに入力された状態で、アプリで "Monitor Search" 画面を開きます。
+
+**注**: モニターに保存されたビューがない場合、ウィジェットにはデフォルトですべてのモニターが表示されます。
+
+#### ウィジェットを作成する
+
+{{< tabs >}}
+{{% tab "iOS" %}}
+
+- ホーム画面を長押しします。
+- 画面左上の “+” ボタンをタップします。
+- "Datadog" ウィジェットを検索します。
+- 好みのサイズを選択します (小は 2 つのモニター保存ビュー、中は最大 3 つのモニター保存ビュー、大は最大 6 つのモニター保存ビューを表示します)。
+- ウィジェットを画面上の希望の場所に配置します。
+
+
+{{% /tab %}}
+{{% tab "Android" %}}
+
+- Android ウィジェットピッカーを開きます。
+- ホーム画面を長押しするか、Datadog アプリアイコンを長押しします。
+- "Widgets" をタップします。アプリのショートカットがある場合は、バブルの右上隅にアイコンとして表示されることがあります。
+- モニターに保存されたビューウィジェットをホーム画面にドラッグします。
+
+{{% /tab %}}
+{{< /tabs >}}
+#### ウィジェットを編集する
+
+{{< tabs >}}
+{{% tab "iOS" %}}
+
+- ウィジェットを長押しして構成します。
+- "Edit Widget" をタップします。
+- 個々の保存されたビューのセルをタップして、選択および選択解除します。
+- 各セルをドラッグアンドドロップして、ビューを並べ替えます。
+- ウィジェットをタップして選択を検証し、コンフィギュレーション画面を終了します。
+
+{{% /tab %}}
+{{% tab "Android" %}}
+
+- ウィジェットのタイトルをタップして構成します。
+- "Saved views" をタップします。
+- 個々の保存されたビューのセルをタップして、選択および選択解除します。
+- 各セルをドラッグアンドドロップして、ビューを並べ替えます。
+- "Save" をタップして選択を検証し、コンフィギュレーション画面を終了します。
+- ウィジェットをスクロールして、保存されたビューをさらに表示します。ウィジェットを長押ししてサイズを変更し、好みに合わせます。
+
+{{% /tab %}}
+{{< /tabs >}}
+#### 複数オーガニゼーション
+
+同じウィジェット内に複数のオーガニゼーションからの保存ビューを表示できます。
+
+{{< tabs >}}
+{{% tab "iOS" %}}
+
+ログインしたすべてのオーガニゼーションがコンフィギュレーション画面に表示されます。オーガニゼーションが表示されない場合は、再度サインインする必要がある場合があります。
+
+{{% /tab %}}
+{{% tab "Android" %}}
+
+- コンフィギュレーション画面で "Organization" をタップします。
+- 新しいオーガニゼーションを選択します (サインインが必要な場合があります)。
+- "Saved Views" をタップします。保存されたビューを選択して表示するか、そのままにします。
+- "Save" をタップします。これで、ウィジェットは別のオーガニゼーションから保存されたビューで構成されます。
+{{% /tab %}}
+{{< /tabs >}}
+#### ウィジェットを削除する
+
+{{< tabs >}}
+{{% tab "iOS" %}}
+
+ホーム画面を編集するときにウィジェットの左上にある "-" ボタンを押すか、ウィジェットを長押ししてから "Remove Widget" を選択することにより、ウィジェットを削除します。
+
+
+{{% /tab %}}
+{{% tab "Android" %}}
+
+ウィジェットを長押しし、ドラッグして、"Remove" ボタンにドロップしてウィジェットを削除します。
+
+{{% /tab %}}
+{{< /tabs >}}
+
 ## クイックアクション
 
 {{< img src="mobile/shortcut_shadow.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="クイックアクション">}}
 
 
-アプリアイコンを長押しすると、iOS 用の上位 5 つの [Frequently Viewed By Me][12] ダッシュボード (表示数と最新性で測定) と Android 用モバイルで最も開いている 5 つのダッシュボードのクイックアクションシートが表示されます。結果を押して、アプリ内ダッシュボードを開きます。
+アプリアイコンを長押しすると、iOS 用の上位 5 つの [Frequently Viewed By Me][14] ダッシュボード (表示数と最新性で測定) と Android 用モバイルで最も開いている 5 つのダッシュボードのクイックアクションシートが表示されます。結果を押して、アプリ内ダッシュボードを開きます。
 
 ## ホーム画面から検索
 
@@ -90,7 +193,7 @@ QR コードを使用または手動入力で認証することも可能です�
 
 {{< img src="mobile/siri_shadow.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="ショートカット">}}
 
-Siri のショートカットと提案の詳細については、[Apple Siri のドキュメント][13]を参照してください。
+Siri のショートカットと提案の詳細については、[Apple Siri のドキュメント][15]を参照してください。
 
 ## Handoff
 
@@ -103,7 +206,7 @@ Handoff が機能するには、各デバイスが次の条件を満たしてい
 - Wi-Fi が有効になっている
 - Handoff が有効になっている
 
-Handoff の詳細については、[Apple Handoff のドキュメント][14]を参照してください。
+Handoff の詳細については、[Apple Handoff のドキュメント][16]を参照してください。
 
 ## アカウント
 
@@ -111,7 +214,7 @@ Handoff の詳細については、[Apple Handoff のドキュメント][14]を�
 
 ## トラブルシューティング
 
-トラブルシューティングのヘルプについては、[Datadog のサポートチームにお問い合わせください][5]。また、[Datadog 公開 Slack][15] [#mobile-app][16] チャンネルでメッセージをお送りいただくことも可能です。
+トラブルシューティングのヘルプについては、[Datadog のサポートチームにお問い合わせください][17]。また、[Datadog 公開 Slack][18] [#mobile-app][19] チャンネルでメッセージをお送りいただくことも可能です。
 
 ### その他の参考資料
 
@@ -121,15 +224,18 @@ Handoff の詳細については、[Apple Handoff のドキュメント][14]を�
 [2]: https://play.google.com/store/apps/details?id=com.datadog.app
 [3]: /ja/account_management/saml/#pagetitle
 [4]: https://app.datadoghq.com/account/profile
-[5]: /ja/help/
+[5]: /ja/account_management/saml/mobile-idp-login/
 [6]: /ja/monitors/manage_monitor/#search
 [7]: https://app.datadoghq.com/monitors
 [8]: /ja/monitors/monitor_types/
 [9]: /ja/dashboards/template_variables/#saved-views
 [10]: https://app.datadoghq.com/dashboard/lists
 [11]: /ja/dashboards/
-[12]: https://app.datadoghq.com/dashboard/lists/preset/5
-[13]: https://support.apple.com/en-us/HT209055
-[14]: https://support.apple.com/en-us/HT209455
-[15]: https://chat.datadoghq.com/
-[16]: https://datadoghq.slack.com/archives/C0114D5EHNG
+[12]: /ja/monitors/incident_management
+[13]: /ja/logs/explorer/saved_views/
+[14]: https://app.datadoghq.com/dashboard/lists/preset/5
+[15]: https://support.apple.com/en-us/HT209055
+[16]: https://support.apple.com/en-us/HT209455
+[17]: /ja/help/
+[18]: https://chat.datadoghq.com/
+[19]: https://datadoghq.slack.com/archives/C0114D5EHNG

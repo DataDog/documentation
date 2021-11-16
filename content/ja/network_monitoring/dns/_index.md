@@ -6,16 +6,16 @@ aliases:
   - /ja/network_performance_monitoring/network_table
   - /ja/network_performance_monitoring/dns_monitoring
 further_reading:
-  - link: 'https://www.datadoghq.com/blog/monitor-dns-with-datadog/'
+  - link: https://www.datadoghq.com/blog/monitor-dns-with-datadog/
     tag: ブログ
     text: Datadog での DNS モニタリング
-  - link: 'https://www.datadoghq.com/blog/monitor-coredns-with-datadog/'
+  - link: https://www.datadoghq.com/blog/monitor-coredns-with-datadog/
     tag: ブログ
     text: Datadog での CoreDNS モニタリング
   - link: /network_monitoring/performance/network_page
     tag: Documentation
     text: 各ソースと宛先間のネットワークデータを探索。
-  - link: 'https://www.datadoghq.com/blog/dns-resolution-datadog/'
+  - link: https://www.datadoghq.com/blog/dns-resolution-datadog/
     tag: ブログ
     text: DNS 解決を使用してクラウドおよび外部エンドポイントを監視
 ---
@@ -30,7 +30,7 @@ DNS モニタリングにより提供される DNS サーバーのパフォー�
 
 ## セットアップ
 
-ホスト上を含め、Agent の最新バージョンを使用している場合、DNS モニタリングのメトリクスは、Agent v7.23 以降のシステムプローブにより自動的に収集されます。インストールすると、デフォルトでネットワークパフォーマンスモニタリング製品の ‘DNS’ タブにアクセス可能になります。他の操作は必要ありません。
+ホスト上を含め、Agent の最新バージョンを使用している場合、DNS モニタリングのメトリクスは、Linux OS の場合は Agent v7.23 以降、Windows Server の場合は v7.28 以降のシステムプローブにより自動的に収集されます。インストールすると、デフォルトでネットワークパフォーマンスモニタリング製品の ‘DNS’ タブにアクセス可能になります。他の操作は必要ありません。
 
 [Helm で Kubernetes][3] を使用している場合、DNS モニタリングを有効にするには [values.yaml][4] で `collectDNSStats:` を `true` に設定する必要があります。
 

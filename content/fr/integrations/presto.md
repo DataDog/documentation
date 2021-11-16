@@ -1,8 +1,19 @@
 ---
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards:
     Presto Overview: assets/dashboards/overview.json
+  logs:
+    source: presto
+  metrics_metadata: metadata.csv
   monitors: {}
+  saved_views:
+    4xx_errors: assets/saved_views/4xx_errors.json
+    5xx_errors: assets/saved_views/5xx_errors.json
+    error_patterns: assets/saved_views/error_patterns.json
+    response_time_overview: assets/saved_views/response_time.json
+    status_code_overview: assets/saved_views/status_code_overview.json
   service_checks: assets/service_checks.json
 categories:
   - data store
@@ -12,6 +23,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/presto/README.md'
 display_name: Presto
+draft: false
 git_integration_title: presto
 guid: a05766fc-8760-464b-9e5d-a784500b7b90
 integration_id: presto
@@ -38,13 +50,13 @@ Ce check recueille des métriques [Presto][1] comme :
 - Des métriques relatives aux activités générales (requêtes complétées/échouées, taille des entrées et des sorties de données, délai d'exécution)
 - Des métriques de performance (mémoire du cluster, entrées processeur, temps d'exécution processeur)
 
-## Implémentation
+## Configuration
 
 Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la [documentation relative aux modèles d'intégration Autodiscovery][2] pour découvrir comment appliquer ces instructions à un environnement conteneurisé.
 
 ### Installation
 
-Le check Presto est inclus avec le paquet de l'[Agent Datadog][3].
+Le check Presto est inclus avec le package de l'[Agent Datadog][3].
 Vous n'avez rien d'autre à installer sur vos serveurs. Installez l'Agent sur chacun des nœuds coordinateur ou worker depuis lesquels vous souhaitez recueillir des métriques d'utilisation et de performance.
 
 ### Configuration
@@ -100,18 +112,18 @@ Presto n'inclut aucun événement.
 ### Checks de service
 
 **presto.can_connect** :<br>
-Renvoie `CRITICAL` si l'Agent n'est pas capable de se connecter à l'instance Presto qu'il surveille et d'y recueillir des métriques. Si ce n'est pas le cas, renvoie `OK`.
+Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter à l'instance Presto qu'il surveille et à y recueillir des métriques. Si ce n'est pas le cas, renvoie `OK`.
 
 ## Dépannage
 
 Besoin d'aide ? Contactez [l'assistance Datadog][6].
 
-[1]: https://docs.datadoghq.com/fr/integrations/presto
-[2]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations
+[1]: https://docs.datadoghq.com/fr/integrations/presto/
+[2]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
 [3]: https://app.datadoghq.com/account/settings#agent
 [4]: https://github.com/DataDog/integrations-core/blob/master/presto/datadog_checks/presto/data/conf.yaml.example
-[5]: https://docs.datadoghq.com/fr/integrations/java
-[6]: https://docs.datadoghq.com/fr/help
+[5]: https://docs.datadoghq.com/fr/integrations/java/
+[6]: https://docs.datadoghq.com/fr/help/
 [7]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [8]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
 [9]: https://github.com/DataDog/integrations-core/blob/master/presto/metadata.csv

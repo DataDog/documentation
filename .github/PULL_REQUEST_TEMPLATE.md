@@ -22,4 +22,5 @@ https://docs-staging.datadoghq.com/<BRANCH_NAME>/<PATH>
 ### Reviewer checklist
 - [ ] Review the changed files.
 - [ ] Review the URLs listed in the [Preview](#preview) section.
+- [ ] Check images for PII
 - [ ] Review any mentions of "Contact Datadog support" for internal support documentation.

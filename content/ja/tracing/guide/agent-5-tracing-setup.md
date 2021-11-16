@@ -1,5 +1,5 @@
 ---
-title: Agent v5 を使用した APM と分散型トレーシング
+title: APM & Continuous Profiler と Agent v5
 kind: ガイド
 private: true
 aliases:
@@ -76,7 +76,7 @@ Datadog Agent の詳細については、[専用ドキュメントページ][9]�
 [5]: https://app.datadoghq.com/account/settings#agent
 [6]: https://gcr.io/datadoghq/docker-dd-agent
 [7]: /ja/tracing/docker/
-[8]: /ja/api/v1/tracing/
+[8]: /ja/tracing/guide/send_traces_to_agent_by_api/
 [9]: /ja/agent/
 [10]: https://github.com/DataDog/dd-agent/blob/master/datadog.conf.example
 [11]: /ja/tracing/setup/?tab=agent5250#trace-search

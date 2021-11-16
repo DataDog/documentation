@@ -55,7 +55,7 @@ IBM WAS Datadog インテグレーションは、有効になっている PMI �
 
 IBM WAS チェックは [Datadog Agent][4] パッケージに含まれています。
 
-#### PerfServlet の有効化
+#### `PerfServlet` の有効化
 
 サーブレットの .ear ファイル (PerfServletApp.ear) は、`<WAS_HOME>/installableApps` ディレクトリにあります。ここで、`<WAS_HOME>` は WebSphere Application Server のインストールパスです。
 
@@ -150,14 +150,13 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 {{< get-metrics-from-git "ibm_was" >}}
 
 
-### サービスのチェック
-
-**ibm_was.can_connect**:<br>
-何らかの理由で Agent が PerfServlet サーバーに接続できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
-
 ### イベント
 
 IBM WAS には、イベントは含まれません。
+
+### サービスのチェック
+{{< get-service-checks-from-git "ibm_was" >}}
+
 
 ## トラブルシューティング
 

@@ -7,11 +7,13 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Azure パブリック IP アドレスのキーメトリクスを追跡
-doc_link: 'https://docs.datadoghq.com/integrations/azure_public_ip_address/'
+doc_link: https://docs.datadoghq.com/integrations/azure_public_ip_address/
 draft: false
 git_integration_title: azure_public_ip_address
 has_logo: true
+integration_id: azure-publicipaddress
 integration_title: Microsoft Azure パブリック IP アドレス
+integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
@@ -30,7 +32,7 @@ Datadog Azure インテグレーションを使用して、Azure パブリック
 
 ### インストール
 
-[Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。これ以外のインストール手順はありません。
+[Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
 
 ## 収集データ
 

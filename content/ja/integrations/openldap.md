@@ -3,7 +3,8 @@ aliases: []
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
-  dashboards: {}
+  dashboards:
+    OpenLDAP Overview: assets/dashboards/openldap_overview.json
   logs:
     source: openldap
   metrics_metadata: metadata.csv
@@ -104,10 +105,8 @@ OpenLDAP インテグレーションは Agent とパッケージ化されてい�
 
 #### OpenLDAP インテグレーションの構成
 
-#{{< tabs >}}
+{{< tabs >}}
 {{% tab "Host" %}}
-#{{% /tab %}}
-{{% tab "Containerized" %}}
 
 #### ホスト
 
@@ -166,6 +165,33 @@ _Agent バージョン 6.0 以降で利用可能_
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/openldap/datadog_checks/openldap/data/conf.yaml.example
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+{{% /tab %}}
+{{% tab "Containerized" %}}
+
+#### コンテナ化
+
+###### メトリクスの収集
+
+コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
+
+| パラメーター            | 値                                                                                           |
+| -------------------- | ----------------------------------------------------------------------------------------------- |
+| `<インテグレーション名>` | `openldap`                                                                                      |
+| `<初期コンフィギュレーション>`      | 空白または `{}`                                                                                   |
+| `<インスタンスコンフィギュレーション>`  | `{"url":"ldaps://%%host%%:636","username":"<ユーザーの識別名>","password":"<パスワード>"}` |
+
+###### ログの収集
+
+_Agent バージョン 6.0 以降で利用可能_
+
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集のドキュメント][2]を参照してください。
+
+| パラメーター      | 値                                                 |
+| -------------- | ----------------------------------------------------- |
+| `<LOG_CONFIG>` | `{"source": "openldap", "service": "<サービス名>"}` |
+
+[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
+[2]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
 {{% /tab %}}
 {{< /tabs >}}
 

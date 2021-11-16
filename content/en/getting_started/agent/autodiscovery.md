@@ -28,7 +28,7 @@ further_reading:
 
 When you are monitoring a containerized infrastructure, one challenge that arises is that containers can shift from host to host. The dynamic nature of containerized systems makes them difficult to manually monitor.
 
-To solve this issue, you can use Datadog’s Autodiscovery feature to automatically identify the services running on a specific container and gather data from those services. Whenever a container starts, the Datadog Agent identifies which services are running on this new container, looks for the corresponding monitoring configuration, and starts to collect metrics.
+To solve this issue, you can use Datadog's Autodiscovery feature to automatically identify the services running on a specific container and gather data from those services. Whenever a container starts, the Datadog Agent identifies which services are running on this new container, looks for the corresponding monitoring configuration, and starts to collect metrics.
 
 Autodiscovery lets you define configuration templates for Agent checks and specify which containers each checks should apply to.
 
@@ -36,7 +36,7 @@ The Agent watches for events like container creation, destruction, starts, and s
 
 ## How it works
 
-{{< img src="agent/autodiscovery/ad_1.png" alt="Autodiscovery Overview"  style="width:80%;">}}
+{{< img src="agent/autodiscovery/ad_1.png" alt="Autodiscovery Overview" style="width:80%;">}}
 
 In the figure above, there is a host node with three pods, including a Redis pod and an Agent pod. The Kubelet, which schedules containers, runs as a binary on this node, and exposes the endpoints `/metrics` and `/pods`. Every 10 seconds, the Agent queries `/pods` and finds the Redis spec. It can also see information about the Redis pod itself.
 
@@ -63,7 +63,7 @@ annotations:
 
 In the example above, the `tags.datadoghq.com` labels set the `env`, `service`, and even `version` as tags for all logs and metrics emitted for the Redis pod. These standard labels are part of [Unified Service Tagging][3]. As a best practice, Datadog recommends using unified service tagging when configuring tags and environment variables.
 
-`check_names` includes the names of the check to run, and `init_configs` contains some configuration parameters, such as minimum collection interval. Each item in `instances` represents the configuration to run for one instance of a check. Note that in this example, `%%host%%` is a template variable that is dynamically populated with your container's IP.
+`check_names` includes the names of the check to run, and `init_configs` contains some configuration parameters, such as minimum collection interval. Each item in `instances` represents the configuration to run for one instance of a check. **Note**: In this example, `%%host%%` is a template variable that is dynamically populated with your container's IP.
 
 From this, the Agent generates a static check configuration.
 
@@ -72,7 +72,7 @@ From this, the Agent generates a static check configuration.
 Setting up Autodiscovery for your infrastructure requires the following two steps:
 
 1. [Enable Autodiscovery](#enable-autodiscovery) for your Datadog Agent.
-2. Create [integration-specific configuration templates](#integration-templates) for each service you wish to monitor. Note that Datadog provides auto-configuration templates for [some common containerized services][4], including Apache and Redis.
+2. Create [integration-specific configuration templates](#integration-templates) for each service you wish to monitor. **Note**: Datadog provides auto-configuration templates for [some common containerized services][4], including Apache and Redis.
 
 ### Enable Autodiscovery
 
@@ -149,7 +149,7 @@ ECS_FARGATE=true
 
 ### Integration templates
 
-Once Autodiscovery is enabled, the Datadog Agent automatically attempts Autodiscovery [for a number of services][4], including Apache and Redis, based on default Autodiscovery configuration files.
+Once Autodiscovery is enabled, the Datadog Agent automatically attempts Autodiscovery for several [services][4], including Apache and Redis, based on default Autodiscovery configuration files.
 
 You can define an integration template in multiple forms: as Kubernetes pod annotations, Docker labels, a configuration file mounted within the Agent, a ConfigMap, and key-value stores.
 

@@ -1,8 +1,14 @@
 ---
 assets:
-  dashboards: {}
+  configuration:
+    spec: assets/configuration/spec.yaml
+  dashboards:
+    riakcs: assets/dashboards/riakcs_dashboard.json
   logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
+  saved_views:
+    riak-cs_processes: assets/saved_views/riak-cs_processes.json
   service_checks: assets/service_checks.json
 categories:
   - data store
@@ -10,7 +16,8 @@ creates_events: false
 ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/riakcs/README.md'
-display_name: Riak CS
+display_name: RiakCS
+draft: false
 git_integration_title: riakcs
 guid: 55ba6b94-8eeb-486b-aa94-6366a044fdf0
 integration_id: riak-cs
@@ -45,7 +52,7 @@ Enregistrez vos métriques Riak CS dans Datadog pour :
 
 ### Installation
 
-Le check RiakCS est inclus avec le paquet de l'[Agent Datadog][2] : vous n'avez donc rien d'autre à installer sur vos nœuds RiakCS.
+Le check RiakCS est inclus avec le package de l'[Agent Datadog][2] : vous n'avez donc rien d'autre à installer sur vos nœuds RiakCS.
 
 ### Configuration
 
@@ -97,8 +104,7 @@ Le check RiakCS n'inclut aucun événement.
 ### Checks de service
 
 **riakcs.can_connect** :
-
-Renvoie CRITICAL si l'Agent ne parvient pas à se connecter à l'endpoint Riak CS pour recueillir des métriques. Si ce n'est pas le cas, renvoie OK.
+Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter à l'endpoint RiakCS pour recueillir des métriques. Si ce n'est pas le cas, renvoie `OK`.
 
 ## Dépannage
 

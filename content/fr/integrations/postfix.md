@@ -1,9 +1,15 @@
 ---
 assets:
-  dashboards: {}
+  configuration:
+    spec: assets/configuration/spec.yaml
+  dashboards:
+    postfix: assets/dashboards/postfix_dashboard.json
   logs:
     source: postfix
+  metrics_metadata: metadata.csv
   monitors: {}
+  saved_views:
+    postfix_processes: assets/saved_views/postfix_processes.json
   service_checks: assets/service_checks.json
 categories:
   - Collaboration
@@ -13,6 +19,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/postfix/README.md'
 display_name: Postfix
+draft: false
 git_integration_title: postfix
 guid: 7f03c5b7-ee54-466e-8854-5896d62c82b4
 integration_id: postfix
@@ -156,7 +163,7 @@ Vous pouvez également configurer l'agent de façon à le faire utiliser une com
 
 #### Collecte de logs
 
-_Disponible à partir des versions > 6.0 de l'Agent_
+_Disponible à partir des versions > 6.0 de l'Agent_
 
 Postfix envoie des logs au daemon syslog, qui enregistre alors les logs dans le système de fichiers. La convention de nommage et les destinations des fichiers log sont configurables :
 

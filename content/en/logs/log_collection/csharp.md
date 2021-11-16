@@ -7,10 +7,10 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/c-logging-guide/"
   tag: "Blog"
   text: "How to collect, customize, and analyze C# logs"
-- link: "/logs/processing/"
+- link: "/logs/log_configuration/processors"
   tag: "Documentation"
   text: "Learn how to process your logs"
-- link: "/logs/processing/parsing/"
+- link: "/logs/log_configuration/parsing"
   tag: "Documentation"
   text: "Learn more about parsing"
 - link: "/logs/explorer/"
@@ -251,7 +251,7 @@ If you have followed the instructions you should see in your file (for example `
 }
 ```
 
-If, despite the benefits of logging in JSON, you wish to log in raw string format, we recommend you update the `log4net convertion pattern` to automatically parse your logs with the C# integration Pipeline as follows:
+If, despite the benefits of logging in JSON, you wish to log in raw string format, we recommend you update the `log4net conversion pattern` to automatically parse your logs with the C# integration Pipeline as follows:
 
 ```text
 <param name="ConversionPattern" value="%date{yyyy-MM-dd HH:mm:ss.SSS} %level [%thread] %logger %method:%line - %message%n" />
@@ -410,8 +410,8 @@ In the `Serilog.WriteTo` array, add an entry for `DatadogLogs`. An example is sh
 ```
 
 [1]: https://www.nuget.org/packages/Serilog.Sinks.Datadog.Logs
-[2]: https://app.datadoghq.com/account/settings#api
-[3]: /logs/processing/attributes_naming_convention/#reserved-attributes
+[2]: https://app.datadoghq.com/organization-settings/api-keys
+[3]: /logs/log_configuration/attributes_naming_convention/#reserved-attributes
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -419,5 +419,5 @@ In the `Serilog.WriteTo` array, add an entry for `DatadogLogs`. An example is sh
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/processing/parsing/
+[1]: /logs/log_configuration/parsing
 [2]: /tracing/connect_logs_and_traces/dotnet/

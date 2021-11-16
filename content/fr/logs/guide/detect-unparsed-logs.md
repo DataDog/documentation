@@ -61,12 +61,12 @@ Pour surveiller le volume de logs non parsés, procédez comme suit :
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /fr/logs/processing/
+[1]: /fr/logs/log_configuration/pipelines
 [2]: /fr/integrations/#cat-log-collection
 [3]: /fr/logs/explorer/
 [4]: /fr/logs/explorer/#patterns
 [5]: /fr/logs/archives/?tab=awss3
 [6]: /fr/logs/logs_to_metrics/
 [7]: /fr/logs/indexes#set-daily-quota
-[8]: /fr/monitors/monitor_types/metric/?tab=threshold#overview
-[9]: /fr/monitors/monitor_types/metric/?tab=threshold#set-alert-conditions
+[8]: /fr/monitors/create/types/metric/?tab=threshold#overview
+[9]: /fr/monitors/create/types/metric/?tab=threshold#set-alert-conditions

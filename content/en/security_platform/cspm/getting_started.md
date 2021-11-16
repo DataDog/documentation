@@ -13,15 +13,9 @@ further_reading:
   text: "Learn about frameworks and industry benchmarks"
 ---
 
-{{< site-region region="us" >}}
+{{< site-region region="us3,us5,gov" >}}
 <div class="alert alert-warning">
-Cloud Security Posture Management is currently in <a href="https://app.datadoghq.com/security/configuration">public beta</a>.
-</div>
-{{< /site-region >}}
-
-{{< site-region region="us3,gov,eu" >}}
-<div class="alert alert-warning">
-Cloud Security Posture Management is not currently available in US1-FED, US3, or EU.
+Cloud Security Posture Management is not currently available in this site.
 </div>
 {{< /site-region >}}
 

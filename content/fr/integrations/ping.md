@@ -1,6 +1,7 @@
 ---
 assets:
   dashboards: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -10,6 +11,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/ping/README.md'
 display_name: Ping
+draft: false
 git_integration_title: ping
 guid: c3be63cb-678e-4421-b470-79c03b3fe3f1
 integration_id: ping
@@ -19,6 +21,7 @@ kind: integration
 maintainer: jim.stanton@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: network.
+metric_to_check: network.ping.response_time
 name: ping
 public_title: Intégration Datadog/Ping
 short_description: Surveillez la connectivité vers les hosts à distance.
@@ -38,51 +41,36 @@ au host cible. Elle attend ensuite une réponse d'écho ICMP.
 
 Ce check utilise la commande ping système au lieu de générer la demande d'écho du protocole ICMP. En effet, la création d'un paquet ICMP nécessitant un socket brut, ce qui requiert des privilèges root que l'Agent ne détient pas. La commande ping utilise le flag d'accès `setuid` pour s'exécuter avec des privilèges élevés afin d'éviter ce problème.
 
-## Implémentation
+## Configuration
 
-Le check Ping n'est **PAS** inclus avec le paquet de l'[Agent Datadog][2].
+Le check Ping n'est **PAS** inclus avec le package de l'[Agent Datadog][2].
 
 ### Installation
 
-Si vous utilisez la version 6.8 ou ultérieure de l'Agent, suivez les instructions ci-dessous pour installer le check Ping sur votre host. Consultez notre guide relatif à l'[installation d'intégrations développées par la communauté][3] pour installer des checks avec une [version < 6.8 de l'Agent][4] ou avec l'[Agent Docker][5] :
+Si vous utilisez la version 6.8 ou une version ultérieure de l'Agent, suivez les instructions ci-dessous pour installer le check Ping sur votre host. Consultez le guide relatif à l'[installation d'intégrations développées par la communauté][3] pour installer des checks avec une [version < 6.8 de l'Agent][4] ou avec l'[Agent Docker][5] :
 
-1. Installez le [kit de développement][6].
-2. Clonez le dépôt integrations-extras :
-
+1. [Téléchargez et lancez l'Agent Datadog][2].
+2. Exécutez la commande suivante pour installer le wheel de l'intégration à l'aide de l'Agent :
+   **`Linux`** :
    ```shell
-   git clone https://github.com/DataDog/integrations-extras.git
+      datadog-agent integration install -t datadog-ping==<INTEGRATION_VERSION>
    ```
-
-3. Mettez à jour votre configuration `ddev` avec le chemin `integrations-extras/` :
-
+   **`Windows`** :
    ```shell
-   ddev config set extras ./integrations-extras
+      agent.exe integration install -t datadog-ping==<INTEGRATION_VERSION>
    ```
-
-4. Pour générer le paquet `ping`, exécutez :
-
-   ```shell
-   ddev -e release build ping
-   ```
-
-5. [Téléchargez et lancez l'Agent Datadog][7].
-6. Exécutez la commande suivante pour installer le wheel de l'intégration à l'aide de l'Agent :
-
-   ```shell
-   sudo -u dd-agent datadog-agent integration install -w <PATH_OF_PING_ARTIFACT_>/<PING_ARTIFACT_NAME>.whl
-   ```
-
-7. Configurez votre intégration comme [n'importe quelle autre intégration du paquet][8].
+   <INTEGRATION_VERSION> correspond à la version de l'intégration. La première version de datadog-pin disponible est la version 1.0.0. D'autres versions figurent dans le [CHANGELOG][6].
+3. Configurez votre intégration comme [n'importe quelle autre intégration fournie avec l'Agent][7].
 
 ### Configuration
 
-1. Modifiez le fichier `ping.d/conf.yaml` dans le dossier `conf.d/` à la racine du répertoire de configuration de votre Agent pour commencer à recueillir vos données de performance Ping. Consultez le [fichier d'exemple ping.d/conf.yaml][3] pour découvrir toutes les options de configuration disponibles.
+1. Modifiez le fichier `ping.d/conf.yaml` dans le dossier `conf.d/` à la racine du répertoire de configuration de votre Agent pour commencer à recueillir vos données de performance Ping. Consultez le [fichier d'exemple ping.d/conf.yaml][8] pour découvrir toutes les options de configuration disponibles.
 
-2. [Redémarrez l'Agent][10].
+2. [Redémarrez l'Agent][9].
 
 ### Validation
 
-[Lancez la sous-commande status de l'Agent][11] et cherchez `ping` dans la section Checks.
+[Lancez la sous-commande status de l'Agent][10] et cherchez `ping` dans la section Checks.
 
 ## Données collectées
 
@@ -94,7 +82,7 @@ Si vous utilisez la version 6.8 ou ultérieure de l'Agent, suivez les instructi
 
 **`network.ping.can_connect`** :
 
-Renvoie `CRITICAL` si l'Agent n'est pas capable de communiquer avec le host cible. Si ce n'est pas le cas, renvoie `OK`.
+Renvoie `CRITICAL` si l'Agent ne parvient pas à communiquer avec le host cible. Si ce n'est pas le cas, renvoie `OK`.
 
 ### Événements
 
@@ -102,18 +90,17 @@ Le check Ping n'inclut aucun événement.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][13].
+Besoin d'aide ? Contactez [l'assistance Datadog][12].
 
-[1]: https://en.wikipedia.org/wiki/Ping_(networking_utility)
+[1]: https://en.wikipedia.org/wiki/Ping_(networking_utility%29
 [2]: https://app.datadoghq.com/account/settings#agent
-[3]: https://docs.datadoghq.com/fr/agent/guide/community-integrations-installation-with-docker-agent
+[3]: https://docs.datadoghq.com/fr/agent/guide/community-integrations-installation-with-docker-agent/
 [4]: https://docs.datadoghq.com/fr/agent/guide/community-integrations-installation-with-docker-agent/?tab=agentpriorto68
 [5]: https://docs.datadoghq.com/fr/agent/guide/community-integrations-installation-with-docker-agent/?tab=docker
-[6]: https://docs.datadoghq.com/fr/developers/integrations/new_check_howto/#developer-toolkit
-[7]: https://app.datadoghq.com/account/settings#agent
-[8]: https://docs.datadoghq.com/fr/getting_started/integrations
-[9]: https://github.com/DataDog/integrations-extras/blob/master/ping/datadog_checks/ping/data/conf.yaml.example
-[10]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[11]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#service-status
-[12]: https://github.com/DataDog/integrations-extras/blob/master/ping/metadata.csv
-[13]: https://docs.datadoghq.com/fr/help
+[6]: https://github.com/DataDog/integrations-extras/blob/master/ping/CHANGELOG.md
+[7]: https://docs.datadoghq.com/fr/getting_started/integrations/
+[8]: https://github.com/DataDog/integrations-extras/blob/master/ping/datadog_checks/ping/data/conf.yaml.example
+[9]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[10]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#service-status
+[11]: https://github.com/DataDog/integrations-extras/blob/master/ping/metadata.csv
+[12]: https://docs.datadoghq.com/fr/help/

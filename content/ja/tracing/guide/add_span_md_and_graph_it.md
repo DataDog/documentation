@@ -40,7 +40,7 @@ Datadog APM を使用すると、[トレース][1]をカスタマイズして、
 Datadog の UI では、タグを使用してスパンレベルのメタデータを設定します。グローバルトレーサーからアクティブスパンを取得して `setTag` メソッドでタグを設定することで、自動インスツルメンテーションにカスタムタグを設定できます。
 
 ```java
-import io.opentracing.Tracer;
+import io.opentracing.Span;
 import io.opentracing.util.GlobalTracer;
 
 @WebServlet

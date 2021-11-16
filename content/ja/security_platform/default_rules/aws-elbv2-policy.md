@@ -5,6 +5,7 @@ aliases:
   - /ja/security_monitoring/default_rules/aws-elbv2-policy
 cloud: AWS
 disable_edit: true
+integration_id: amazon-elbv2
 kind: documentation
 rule_category:
   - クラウドコンフィギュレーション
@@ -32,11 +33,11 @@ type: security_rules
 
 [リスナーおよび推奨される SSL ポリシーの ARN][2] を使用して `modify-listener` を実行します。
 
-    {{< code-block lang="bash" filename="create-listener.sh" >}}
-    aws elbv2 create-listener
-        --load-balancer-arn arn:aws:elasticloadbalancing:region:123456789012:loadbalancer/app/my-load-balancer/12ab3c456d7e8912
-        --ssl-policy ELBSecurityPolicy-2016-08 --default-actions Type=forward,TargetGroupArn=arn:aws:elasticloadbalancing:region:123456789012:targetgroup/my-targets/12ab3c456d7e8912
-    {{< /code-block >}}
+{{< code-block lang="bash" filename="create-listener.sh" >}}
+aws elbv2 create-listener
+    --load-balancer-arn arn:aws:elasticloadbalancing:region:123456789012:loadbalancer/app/my-load-balancer/12ab3c456d7e8912
+    --ssl-policy ELBSecurityPolicy-2016-08 --default-actions Type=forward,TargetGroupArn=arn:aws:elasticloadbalancing:region:123456789012:targetgroup/my-targets/12ab3c456d7e8912
+{{< /code-block >}}
 
 [セキュリティポリシー][3]ドキュメントで、Amazon が推奨するセキュリティポリシーを確認します。
 

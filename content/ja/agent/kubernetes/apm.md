@@ -45,8 +45,12 @@ Agent でのトレース収集を有効にするには、以下の手順に従�
     ```
 
  - オペレーティングシステムを設定します。`values.yaml` の 最上部に `targetSystem: linux` または `targetSystem: windows` を追加します。
+ - API キーを設定: `apiKey: <DATADOG_API_KEY>`
+{{< site-region region="us3,eu,gov" >}} 
+ - Agent が適切な Datadog の場所にデータを送信できるよう、サイトを設定します: `site: `{{< region-param key="dd_site" code="true" >}}
+{{< /site-region >}}
 
- - 続いて、次のコマンド `helm upgrade -f values.yaml <RELEASE NAME> datadog/datadog` を使用して Datadog Helm チャートをアップグレードします。忘れずに YAML ファイルに API キーを設定します。`values.yaml` にオペレーディングシステムを設定していない場合は、このコマンドに `--set targetSystem=linux` または `--set targetSystem=windows` を追加します。
+ - 続いて、次のコマンド `helm upgrade -f values.yaml <RELEASE NAME> datadog/datadog` を使用して Datadog Helm チャートをアップグレードします。`values.yaml` にオペレーディングシステムを設定していない場合は、このコマンドに `--set targetSystem=linux` または `--set targetSystem=windows` を追加します。
 
 [1]: /ja/agent/kubernetes/?tab=helm
 {{% /tab %}}
@@ -67,6 +71,10 @@ APM トレースの収集を有効にするには、DaemonSet コンフィギュ
      # (...)
     ```
 
+{{< site-region region="us3,eu,gov" >}} 
+- サイト `site: `{{< region-param key="dd_site" code="true" >}} を設定し、Agent が適切な Datadog の場所にデータを送信できるようにします
+{{< /site-region >}}
+
 - **古いバージョンの Agent（7.17 以前）を使用している場合は**、上記の手順に加えて、`datadog.yaml` トレース Agent マニフェストの *env* セクションで `DD_APM_NON_LOCAL_TRAFFIC` 変数と `DD_APM_ENABLED` 変数を `true` に設定してください。
 
     ```yaml
@@ -83,8 +91,8 @@ APM トレースの収集を有効にするには、DaemonSet コンフィギュ
 {{% /tab %}}
 {{% tab "Operator" %}}
 
-`datadog-agent.yaml` マニフェストを次のように更新します。
-
+`datadog-agent.yaml` マニフェストを、以下で更新します:
+{{< site-region region="us" >}} 
 ```
 agent:
   image:
@@ -93,6 +101,19 @@ agent:
     enabled: true
     hostPort: 8126
 ```
+{{< /site-region >}}
+{{< site-region region="us3,eu,gov" >}} 
+```
+agent:
+  image:
+    name: "gcr.io/datadoghq/agent:latest"
+  apm:
+    enabled: true
+    hostPort: 8126
+site: <DATADOG_SITE>
+```
+`DD_SITE` が {{< region-param key="dd_site" code="true" >}} である場所: Agent が正しい Datadog の場所にデータを送信。
+{{< /site-region >}}
 
 完全な例については、[APM とメトリクス収集が有効になっているマニフェスト][1]の例を参照してください。
 
@@ -102,7 +123,7 @@ agent:
 $ kubectl apply -n $DD_NAMESPACE -f datadog-agent.yaml
 ```
 
-[1]: https://github.com/DataDog/datadog-operator/blob/master/examples/datadog-agent-apm.yaml
+[1]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/datadog-agent-apm.yaml
 {{% /tab %}}
 {{< /tabs >}}
    **注**: minikube では、`Unable to detect the kubelet URL automatically` エラーを受け取る可能性があります。その場合は、`DD_KUBELET_TLS_VERIFY=false` を設定してください。

@@ -20,10 +20,11 @@ Datadog の HTTP API は、コンテンツヘッダー `application/logplex-1` �
 * 以下のコマンドを使用して HTTPS ドレインをセットアップします。
 
 ```text
-heroku drains:add 'https://http-intake.logs.{{< region-param key="dd_site" >}}/v1/input/<DD_API_KEY>?ddsource=heroku&service=<SERVICE>&host=<HOST>' -a <APPLICATION_NAME>
+heroku drains:add 'https://http-intake.logs.{{< region-param key="dd_site" >}}/v1/input/<DD_API_KEY>?ddsource=heroku&env=<ENV>&service=<SERVICE>&host=<HOST>' -a <APPLICATION_NAME>
 ```
 
 * `<DD_API_KEY>` は [Datadog API キー][2]に置き換えます。
+* `<ENV>` をアプリケーションの[環境][4]で置き換えます。
 * `<APPLICATION_NAME>` と `<SERVICE>` はアプリケーション名に置き換えます。
 * `<HOST>` は目的のホスト名に置き換えます。**注**: この[ホストセクション][3]に基づいて、メトリクスとトレースはデフォルトのホスト名を dyno 名に設定します。dyno 名をログのホスト名として動的に設定することは、現時点ではできません。現在、メトリクス、トレース、ログの関連付けに使用できるのは、`dyno` タグと `dynotype` タグです。
 
@@ -38,3 +39,4 @@ https://http-intake.logs.{{< region-param key="dd_site" >}}/v1/input/<DD_API_KEY
 [1]: https://devcenter.heroku.com/articles/log-drains#https-drains
 [2]: https://app.datadoghq.com/account/settings#api
 [3]: /ja/agent/basic_agent_usage/heroku/#hostname
+[4]: /ja/getting_started/tagging/#introduction

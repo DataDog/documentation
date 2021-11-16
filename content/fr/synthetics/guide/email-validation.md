@@ -48,7 +48,7 @@ Vous pouvez désormais confirmer l'envoi d'un e-mail. Cliquez sur le bouton **As
 
 SI vous souhaitez vérifier que votre e-mail respecte des directives précises en matière de contenu, vous pouvez ajouter des vérifications supplémentaires concernant son objet et son corps.
 
-Dans l'exemple ci-dessus, l'assertion réussit si l'objet de l'e-mail est `Welcome to Shopist!` et si son corps contient l'expression `Your verification code is` ainsi qu'un code de vérification correspondant à l'[expression régulière][2] `\d{1,6}`.
+Dans l'exemple ci-dessus, l'assertion réussit si l'objet de l'e-mail est `Welcome to Shopist!` et si son corps contient l'expression `Your verification code is` ainsi qu'un code de vérification correspondant à l'expression régulière `\d{1,6}`.
 
 ## Parcourir des liens dans un e-mail
 
@@ -68,4 +68,3 @@ Vous pouvez désormais créer une dernière assertion pour tester le contenu `di
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/synthetics/browser_tests
-[2]: 2

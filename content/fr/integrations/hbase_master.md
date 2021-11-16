@@ -26,6 +26,7 @@ kind: integration
 maintainer: everpeace
 manifest_version: 1.0.0
 metric_prefix: hbase.
+metric_to_check: hbase.master.assignmentmanager.rit_oldest_age
 name: hbase_master
 public_title: "Intégration Datadog/Hbase\_Master"
 short_description: "Intégration de HBase\_Master."

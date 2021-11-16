@@ -7,10 +7,10 @@ further_reading:
   - link: /logs/guide/log-parsing-best-practice/
     tag: FAQ
     text: ログのパース - ベストプラクティス
-  - link: /logs/processing/
+  - link: /logs/log_configuration/processors
     tag: Documentation
     text: ログの処理方法
-  - link: /logs/processing/parsing/
+  - link: /logs/log_configuration/parsing
     tag: Documentation
     text: パースの詳細
 ---
@@ -71,6 +71,8 @@ getfacl /var/log/apache/access.log
 ```
 
 **注**: **PostgreSQL v10** 以前の場合、アクセス許可を **0700** に設定します。**PostgreSQL v11** の場合は、**0700** または **0750** を設定します。0700 または 0750 とは異なるアクセス許可を持つ基本データフォルダーでサーバーを起動しようとすると、postmater プロセスが失敗します。
+
+**注**: PostgreSQL のログディレクトリは、ベースとなる PostgreSQL のインストールと同じディレクトリに配置できません。
 
 ## ACL がない場合のアクセス許可の設定
 

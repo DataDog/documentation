@@ -12,6 +12,7 @@
 "has_logo": true
 "integration_id": ""
 "integration_title": "SolarWinds"
+"integration_version": ""
 "is_public": true
 "kind": "integration"
 "manifest_version": "1.0"
@@ -29,7 +30,9 @@ Pour que cette intégration fonctionne, vous devez abonner Datadog à toutes vos
 
 ## Configuration
 
-### Créer une action de déclenchement dans SolarWinds
+### Créer des actions de déclenchement
+
+Pour créer une action de déclenchement dans SolarWinds :
 
 1. Accédez à Alerts > Manage Alerts.
 2. Sélectionnez une alerte et cliquez sur Edit Alert, ou créez une alerte si vous n'en avez aucune.
@@ -50,13 +53,13 @@ Pour que cette intégration fonctionne, vous devez abonner Datadog à toutes vos
 9. Cliquez sur Next.
 10. Cliquez sur Submit sur la page de résumé.
 
-### Attribuer l'action aux alertes de votre choix
+### Attribuer des actions à des alertes
 
 1. Dans la vue du gestionnaire des alertes, sélectionnez toutes les alertes que vous souhaitez envoyer à Datadog, puis accédez à Assign Action > Assign Trigger Action.
 2. Sélectionnez l'action de déclenchement « Envoyer une alerte à Datadog », puis cliquez sur Assign.
 3. Répétez cette procédure pour Assign Action > Assign Reset Action en utilisant l'action de réinitialisation « Envoyer une alerte à Datadog ».
 
-### Body to Post de l'action de déclenchement
+### Body to post de l'action de déclenchement
 ``` 
 {
     "alert_message": "${N=Alerting;M=AlertMessage}",
@@ -71,7 +74,7 @@ Pour que cette intégration fonctionne, vous devez abonner Datadog à toutes vos
 }
 ``` 
 
-### Body to Post pour l'action de réinitialisation
+### Body to post de l'action de réinitialisation
 ``` 
 {
     "alert_message": "${N=Alerting;M=AlertMessage}",

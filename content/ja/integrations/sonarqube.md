@@ -2,7 +2,8 @@
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
-  dashboards: {}
+  dashboards:
+    Sonarqube Overview: assets/dashboards/overview.json
   logs:
     source: sonarqube
   metrics_metadata: metadata.csv
@@ -18,11 +19,11 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/sonarqube/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/sonarqube/README.md
 display_name: SonarQube
 draft: false
 further_reading:
-  - link: 'https://www.datadoghq.com/blog/datadog-sonarqube-integration/'
+  - link: https://www.datadoghq.com/blog/datadog-sonarqube-integration/
     tag: ブログ
     text: SonarQube で Datadog のコード品質を監視
 git_integration_title: sonarqube
@@ -66,7 +67,8 @@ SonarQube の Web API に関するドキュメントは、SonarQube Web UI の `
 デフォルトのメトリクスのコンフィギュレーションは、[sonarqube.d/metrics.yaml][3] ファイルにあります。Bean に関するドキュメントは、
 [SonarQube のウェブサイト][4]をご覧ください。
 
-SonarQube の JMX サーバーは、デフォルトで無効になっています。有効化して SonarQube 内で JMX を構成する方法について、
+SonarQube の JMX サーバーは、デフォルトで無効になっています。つまり、有効にしない限り `sonarqube.server.*` メトリクス
+は収集されません。有効化して SonarQube 内で JMX を構成する方法について、
 詳細は [SonarQube ドキュメント][5]をご参照ください。
 
 これは、SonarQube および JMX のデフォルトに基づく基本的な `sonarqube.d/conf.yaml` 例です。ホストベースまたはコンテナベースで
@@ -284,25 +286,22 @@ Collector
 {{< get-metrics-from-git "sonarqube" >}}
 
 
-### サービスのチェック
-
-**sonarqube.can_connect**:<br>
-Agent が監視対象の SonarQube インスタンスの JMX エンドポイントに接続できず、メトリクスを収集できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
-
-**sonarqube.api_access**:<br>
-Agent が監視対象の SonarQube インスタンスの Web エンドポイントに接続できず、メトリクスを収集できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
-
 ### イベント
 
 SonarQube には、イベントは含まれません。
 
+### サービスのチェック
+{{< get-service-checks-from-git "sonarqube" >}}
+
+
 ## トラブルシューティング
+
+ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 
 
 [1]: https://www.sonarqube.org

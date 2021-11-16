@@ -39,11 +39,22 @@
     - action: npm-integrations
       branch: main
       globs:
+      # https://github.com/aws/aws-sdk-go/blob/main/aws/endpoints/defaults.go
       - aws/endpoints/defaults.go
 
 - org_name: DataDog
 
   repos:
+  - repo_name: dd-go
+
+    contents:
+
+    - action: npm-integrations
+      branch: prod
+      globs:
+      # https://github.com/DataDog/dd-go/blob/prod/networks/model/domain/gcp_services.go
+      - networks/model/domain/gcp_services.go
+
   - repo_name: dogweb
 
     contents:
@@ -67,6 +78,7 @@
       - "*/manifest.json"
       - "*/assets/service_checks.json"
       - "*/README.md"
+      - "*/datadog_checks/*/__about__.py"
 
     - action: pull-and-push-folder
       branch: master
@@ -75,6 +87,8 @@
       options:
         dest_dir: '/developers/integrations/'
         path_to_remove: 'docs/dev/'
+        front_matters:
+          dependencies: [ "https://github.com/DataDog/integrations-core/blob/master/docs/dev/" ]
 
   - repo_name: integrations-extras
     contents:
@@ -86,6 +100,7 @@
       - "*/manifest.json"
       - "*/assets/service_checks.json"
       - "*/README.md"
+      - "*/datadog_checks/*/__about__.py"
 
   - repo_name: marketplace
     contents:
@@ -106,7 +121,7 @@
     contents:
 
     - action: pull-and-push-file
-      branch: master
+      branch: main
       globs:
       - README.md
       options:
@@ -115,7 +130,7 @@
         front_matters:
           title: Ansible
           kind: documentation
-          dependencies: ["https://github.com/DataDog/ansible-datadog/blob/master/README.md"]
+          dependencies: ["https://github.com/DataDog/ansible-datadog/blob/main/README.md"]
 
   - repo_name: chef-datadog
     contents:
@@ -168,7 +183,7 @@
     contents:
 
     - action: pull-and-push-file
-      branch: master
+      branch: main
       globs:
       - README.md
       options:
@@ -177,7 +192,7 @@
         front_matters:
           title: SaltStack
           kind: documentation
-          dependencies: ["https://github.com/DataDog/datadog-formula/blob/master/README.md"]
+          dependencies: ["https://github.com/DataDog/datadog-formula/blob/main/README.md"]
 
   - repo_name: dd-trace-rb
     contents:
@@ -211,13 +226,8 @@
       options:
         dest_path: '/serverless/libraries_integrations/'
         file_name: 'forwarder.md'
-        front_matters:
-          dependencies: ["https://github.com/DataDog/datadog-serverless-functions/blob/master/aws/logs_monitoring/README.md"]
-          title: Datadog Forwarder
-          kind: documentation
-          aliases:
-            - /serverless/troubleshooting/installing_the_forwarder/
-            - /serverless/forwarder/
+        # front_matters:
+        #   dependencies: ["https://github.com/DataDog/datadog-serverless-functions/blob/master/aws/logs_monitoring/README.md"]
 
   - repo_name: serverless-plugin-datadog
     contents:
@@ -228,12 +238,8 @@
       options:
         dest_path: '/serverless/libraries_integrations/'
         file_name: 'plugin.md'
-        front_matters:
-          dependencies: ["https://github.com/DataDog/serverless-plugin-datadog/blob/master/README.md"]
-          title: Datadog Serverless Plugin
-          kind: documentation
-          aliases:
-            - /serverless/serverless_integrations/plugin/
+        # front_matters:
+        #   dependencies: ["https://github.com/DataDog/serverless-plugin-datadog/blob/master/README.md"]
 
   - repo_name: datadog-cloudformation-macro
     contents:
@@ -415,12 +421,14 @@
       globs:
       - 'README.md'
       options:
-        dest_path: '/developers/'
+        dest_path: '/integrations/guide/'
         file_name: 'amazon_cloudformation.md'
         front_matters:
           dependencies: ["https://github.com/DataDog/datadog-cloudformation-resources/blob/master/README.md"]
           title: Datadog-Amazon CloudFormation
           kind: documentation
+          aliases:
+            - /developers/amazon_cloudformation/
 
   - repo_name: dd-sdk-android
     contents:
@@ -508,21 +516,27 @@
               text: "dd-sdk-ios Source code"
             - link: "tracing/visualization/"
               tag: "Documentation"
-              text: "Explore your services, resources and traces"
+              text: "Explore your services, resources, and traces"
 
-    - action: pull-and-push-file
+    - action: pull-and-push-folder
       branch: master
       globs:
-      - 'docs/rum_collection.md'
+        - docs/rum_collection/*
       options:
-        dest_path: '/real_user_monitoring/'
-        file_name: 'ios.md'
+        dest_dir: '/real_user_monitoring/ios/'
+        path_to_remove: 'docs/rum_collection/'
         front_matters:
-          title: iOS RUM Collection
-          kind: documentation
-          beta: true
-          description: "Collect RUM data from your iOS applications."
-          dependencies: ["https://github.com/DataDog/dd-sdk-ios/blob/master/docs/rum_collection.md"]
+          dependencies: [ "https://github.com/DataDog/dd-sdk-ios/blob/master/docs/rum_collection/" ]
+
+    - action: pull-and-push-folder
+      branch: master
+      globs:
+        - docs/error_tracking/*
+      options:
+        dest_dir: '/real_user_monitoring/error_tracking/'
+        path_to_remove: 'docs/error_tracking/'
+        front_matters:
+          dependencies: [ "https://github.com/DataDog/dd-sdk-ios/blob/master/docs/error_tracking/" ]
 
   - repo_name: dd-sdk-reactnative
     contents:
@@ -573,3 +587,33 @@
         - "runtime/**/*.md"
       options:
         dest_path: '/security_platform/default_rules/'
+
+  - repo_name: apps
+    contents:
+    - action: pull-and-push-file
+      branch: master
+      globs:
+        - "docs/en/getting-started.md"
+      options:
+        dest_path: "/developers/"
+        file_name: "datadog_apps.md"
+        # front_matters:
+          # dependencies: ["https://github.com/DataDog/apps/blob/master/docs/en/gettiing-started.md"]
+
+  - repo_name: datadog-agent
+    contents:
+    - action: pull-and-push-file
+      branch: main
+      globs:
+        - "pkg/config/config_template.yaml"
+      options:
+        file_name: 'agent_config.yaml'
+        output_content: false
+    - action: pull-and-push-folder
+      branch: main
+      globs:
+      - 'docs/cloud-workload-security/agent_expressions.md'
+      - 'docs/cloud-workload-security/backend.md'
+      options:
+        dest_dir: '/security_platform/cloud_workload_security/'
+        path_to_remove: 'docs/cloud-workload-security/'

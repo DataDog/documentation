@@ -1,6 +1,10 @@
 ---
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards: {}
+  logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -10,6 +14,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/directory/README.md'
 display_name: Directory
+draft: false
 git_integration_title: directory
 guid: 0c38c4ef-5266-4667-9fb1-de8f2b73708a
 integration_id: system
@@ -38,11 +43,11 @@ Capturez des métriques à partir des répertoires et des fichiers de votre choi
 - La date de dernière modification
 - La date de création
 
-## Implémentation
+## Configuration
 
 ### Installation
 
-Le check Directory est inclus avec le paquet de l'[Agent Datadog][1] : vous n'avez donc rien d'autre à installer sur votre serveur.
+Le check Directory est inclus avec le package de l'[Agent Datadog][1] : vous n'avez donc rien d'autre à installer sur votre serveur.
 
 ### Configuration
 
@@ -65,13 +70,9 @@ Le check Directory est inclus avec le paquet de l'[Agent Datadog][1] : vous n'a
 
 2. [Redémarrez l'Agent][4].
 
-#### Collecte de métriques
-
-Le check Directory peut potentiellement générer des [métriques custom][5], ce qui peut avoir une incidence sur votre [facture][6].
-
 ### Validation
 
-[Lancez la sous-commande status de l'Agent][7] et cherchez `directory` dans la section Checks.
+[Lancez la sous-commande status de l'Agent][5] et cherchez `directory` dans la section Checks.
 
 ## Données collectées
 
@@ -85,18 +86,18 @@ Le check Directory n'inclut aucun événement.
 
 ### Checks de service
 
-Le check Directory n'inclut aucun check de service.
+**system.disk.directory.exists** :<br>
+Renvoie `WARNING` si l'Agent ne parvient pas à trouver ou à accéder au répertoire à surveiller. Si ce n'est pas le cas, renvoie `OK`.
+
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][9].
+Besoin d'aide ? Contactez [l'assistance Datadog][7].
 
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
 [3]: https://github.com/DataDog/integrations-core/blob/master/directory/datadog_checks/directory/data/conf.yaml.example
 [4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[5]: https://docs.datadoghq.com/fr/developers/metrics/custom_metrics/
-[6]: https://docs.datadoghq.com/fr/account_management/billing/custom_metrics/
-[7]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
-[8]: https://github.com/DataDog/integrations-core/blob/master/directory/metadata.csv
-[9]: https://docs.datadoghq.com/fr/help/
+[5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
+[6]: https://github.com/DataDog/integrations-core/blob/master/directory/metadata.csv
+[7]: https://docs.datadoghq.com/fr/help/

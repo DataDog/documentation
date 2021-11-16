@@ -2,7 +2,8 @@
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
-  dashboards: {}
+  dashboards:
+    JBoss WildFly: assets/dashboards/jboss_wildfly.json
   logs:
     source: jboss_wildfly
   metrics_metadata: metadata.csv
@@ -27,7 +28,7 @@ kind: インテグレーション
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: jboss.
-metric_to_check: ''
+metric_to_check: jboss.jdbc_connections.count
 name: jboss_wildfly
 public_title: Datadog-JBoss/WildFly インテグレーション
 short_description: JBoss および WildFly アプリケーションからさまざまな JMX メトリクスを収集

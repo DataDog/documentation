@@ -1,5 +1,5 @@
 ---
-title: Usage attribution
+title: Usage Attribution
 kind: documentation
 aliases:
     - /account_management/billing/advanced_usage_reporting/
@@ -21,9 +21,14 @@ Administrators can access the Usage Attribution tab from the Plan & Usage sectio
 
 **Note**: The following usage types are not supported in this tool:
 
+- Analyzed Logs (Security)
+- Incident Management
 - Indexed Log Events
 - Ingested Logs
 - Indexed Spans
+- Ingested Spans
+- Network Flows
+- Real User Monitoring
 
 **Note: Indexed Spans were formerly known as Analyzed Spans and renamed with the launch of Tracing Without Limits on October 20th, 2020.**
 
@@ -42,7 +47,7 @@ The **Applied Tags** section enables the following:
 
 - Once the tags are configured, it takes a full 24-hour period for the first report to be generated.
 - The reports are generated on an ongoing basis.
-- If tags are changed, the new reports will reflect the new tags. However, the previous reports will keep the old ones.
+- If tags are changed, the new report reflects the new tags. However, the previous reports keep the old tags.
 - Monthly reports reflect the latest set of tags. If you change tags mid-month, the usage percentages might not match up.
 
 ### Monthly usage attribution
@@ -61,7 +66,7 @@ Monthly data can also be pulled using the tool's public API. (See the [API endpo
 
 ### Daily usage attribution
 
-This section provides daily reports at an hourly granularity to dig into timeframes. It also provides a concatenation of all reports during a given month.
+This section provides daily reports at an hourly granularity to dig into time frames. It also provides a concatenation of all reports during a given month.
 
 - Clicking on a specific time period expands a view on the right where reports can be downloaded as a `.tsv`.
 - Data can be downloaded daily or at the end of the month.

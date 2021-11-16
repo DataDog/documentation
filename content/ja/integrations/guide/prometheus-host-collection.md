@@ -130,7 +130,7 @@ Prometheus によって公開されたメトリクスの収集を開始するに
 [2]: /ja/integrations/prometheus/
 [3]: https://github.com/DataDog/integrations-core/tree/master/openmetrics
 [4]: https://github.com/DataDog/integrations-core/tree/master/prometheus
-[5]: /ja/developers/prometheus/
+[5]: /ja/developers/custom_checks/prometheus/
 [6]: https://app.datadoghq.com/account/settings#agent
 [7]: /ja/getting_started/tagging/
 [8]: /ja/agent/guide/agent-configuration-files/#agent-configuration-directory

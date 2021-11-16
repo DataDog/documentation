@@ -10,6 +10,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/google_cloud_functions/'
 draft: false
 git_integration_title: google_cloud_functions
 has_logo: true
+integration_id: google-cloud-functions
 integration_title: Google Cloud Functions
 is_public: true
 kind: integration

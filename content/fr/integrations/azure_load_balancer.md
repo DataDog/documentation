@@ -7,11 +7,13 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Surveillez des métriques clés d'Azure Load Balancer.
-doc_link: 'https://docs.datadoghq.com/integrations/azure_load_balancer/'
+doc_link: https://docs.datadoghq.com/integrations/azure_load_balancer/
 draft: false
 git_integration_title: azure_load_balancer
 has_logo: true
+integration_id: azure-load-balancer
 integration_title: Microsoft Azure Load Balancer
+integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'
@@ -26,7 +28,7 @@ Azure Load Balancer prend en charge les scénarios entrants et sortants, offre u
 
 Utilisez l'intégration Datadog/Azure pour recueillir des métriques d'Azure Load Balancer.
 
-## Implémentation
+## Configuration
 
 ### Installation
 

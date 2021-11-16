@@ -2,10 +2,14 @@
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
-  dashboards: {}
+  dashboards:
+    ceph: assets/dashboards/overview.json
   logs:
     source: ceph
+  metrics_metadata: metadata.csv
   monitors: {}
+  saved_views:
+    ceph_processes: assets/saved_views/ceph_processes.json
   service_checks: assets/service_checks.json
 categories:
   - data store
@@ -16,6 +20,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/ceph/README.md'
 display_name: Ceph
+draft: false
 git_integration_title: ceph
 guid: 8a60c34f-ecde-4269-bcae-636e6cbce98f
 integration_id: ceph
@@ -52,7 +57,7 @@ Activez l'intégration Datadog/Ceph pour :
 
 ### Installation
 
-Le check Ceph est inclus avec le paquet de l'[Agent Datadog][2] : vous n'avez donc rien d'autre à installer sur vos serveurs Ceph.
+Le check Ceph est inclus avec le package de l'[Agent Datadog][2] : vous n'avez donc rien d'autre à installer sur vos serveurs Ceph.
 
 ### Configuration
 
@@ -75,7 +80,7 @@ dd-agent ALL=(ALL) NOPASSWD:/chemin/vers/votre/ceph
 
 #### Collecte de logs
 
-_Disponible à partir des versions > 6.0 de l'Agent_
+_Disponible à partir des versions > 6.0 de l'Agent_
 
 1. La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans `datadog.yaml` :
 

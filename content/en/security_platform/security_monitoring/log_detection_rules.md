@@ -14,6 +14,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/detect-unauthorized-third-parties-aws/"
   tag: "Blog"
   text: "Detect unauthorized third parties in your AWS account"
+- link: "https://www.datadoghq.com/blog/anomaly-detection-rules-datadog/"
+  tag: "Blog"
+  text: "Detect security threats with anomaly detection rules"
 aliases:
     - /security_monitoring/detection_rules/security_monitoring/
     - /security_platform/detection_rules/security_monitoring/
@@ -21,13 +24,13 @@ aliases:
 
 ## Overview
 
-To create a new log detection detection rule in Datadog, hover over **Security**, select **Security Rules**, and select the **New Rule** button in the top right corner of the page.
+To create a new log detection rule in Datadog, hover over **Security**, select **Security Rules**, and select the **New Rule** button in the top right corner of the page.
 
 ## Rule Type
 
 For Security Monitoring, select **Log Detection** to analyze ingested logs in real-time.
 
-## Choose a Detection Method
+## Choose a detection method
 
 ### Threshold
 
@@ -45,7 +48,7 @@ Anomaly detection is currently in <a href="https://app.datadoghq.com/security/co
 
 When configuring a specific threshold isn't an option, you can define an anomaly detection rule instead. With anomaly detection, a dynamic threshold is automatically derived from the past observations of the events.
 
-## Define a Search Query
+## Define a search query
 
 {{< tabs >}}
 {{% tab "Threshold" %}}
@@ -61,7 +64,6 @@ Optionally, define a unique count and signal grouping. Count the number of uniqu
 Add additional queries with the Add Query button.
 
 **Note**: The query applies to all Datadog events and ingested logs which do not require indexing.
-
 
 #### Advanced options
 
@@ -126,7 +128,7 @@ Anomaly detection inspects how the `group by` attribute has behaved in the past.
 {{% /tab %}}
 {{< /tabs >}}
 
-## Set a Rule Case
+## Set a rule case
 
 {{< tabs >}}
 {{% tab "Threshold" %}}
@@ -139,7 +141,7 @@ Rule cases, such as `a > 3`, are evaluated as case statements. Thus, the first c
 
 A rule case contains logical operations (`>, >=, &&, ||`) to determine if a signal should be generated based on the event counts in the previously defined queries. The ASCII lowercase [query labels](#define-a-search-query) are referenced in this section.
 
-**Note**: The query label must precede the operator. For example, `a < 3` is allowed; `3 > a` is not allowed.
+**Note**: The query label must precede the operator. For example, `a > 3` is allowed; `3 < a` is not allowed.
 
 Provide a **name**, for example "Case 1", for each rule case. This name is appended to the rule name when a signal is generated.
 
@@ -161,7 +163,7 @@ Additional cases can be added by clicking the **Add Case** button.
 
 **Note**: The `evaluation window` must be less than or equal to the `keep alive` and `maximum signal duration`.
 
-[1]: /monitors/notifications/?tab=is_alert#integrations
+[1]: /monitors/notify/?tab=is_alert#integrations
 {{% /tab %}}
 
 {{% tab "New Term" %}}
@@ -184,7 +186,7 @@ Set a maximum duration to keep updating a signal if new values are detected with
 
 **Note**: If a unique signal is required for every new value, configure this value to `0 minutes`.
 
-[1]: /monitors/notifications/?tab=is_alert#integrations
+[1]: /monitors/notify/?tab=is_alert#integrations
 {{% /tab %}}
 
 {{% tab "Anomaly" %}}
@@ -204,11 +206,13 @@ Once a signal is generated, the signal will remain "open" if the data remains an
 A signal will "close" regardless of whether or not the anomaly is still anomalous once the time exceeds the maximum signal duration. This time is calculated from the first seen timestamp.
 
 
-[1]: /monitors/notifications/?tab=is_alert#integrations
+[1]: /monitors/notify/?tab=is_alert#integrations
 {{% /tab %}}
 {{< /tabs >}}
 
-## Say What's Happening
+## Say what's happening
+
+The **Rule name** section allows you to configure the rule name that appears in the rules list view, as well as the title of the Security Signal.
 
 The notification box has the same Markdown and preview features as those of [monitor notifications][1]. In addition to the features, you can reference the tags associated with the signal and the event attributes. The attributes can be seen on a signal in the “event attributes” tab, and you can access the attributes with the following syntax: `{{@attribute}}`. You can access inner keys of the event attributes by using JSON dot notation (for example, `{{@attribute.inner_key}}`).
 
@@ -236,7 +240,7 @@ This JSON object is an example of event attributes which may be associated with 
 You could use the following in the “say what’s happening” section:
 
 ```
-{{@usr.id}} just logged in without MFA from {@network.client.ip}.
+{{@usr.id}} just logged in without MFA from {{@network.client.ip}}.
 ```
 
 And this would be rendered as the following:
@@ -257,15 +261,33 @@ You can use if-else logic to see if an attribute matches a value:
 {{#is_exact_match "@network.client.ip" "1.2.3.4"}}The ip matched.{{/is_exact_match}}
 ```
 
-You can read more about template variables [here][1].
-
-The **Rule name** section allows you to configure the rule name that appears in the rules list view, as well as the title of the Security Signal.
-
 Tag your signals with different tags, for example, `security:attack` or `technique:T1110-brute-force`.
 
 **Note**: the tag `security` is special. This tag is used to classify the security signal. The recommended options are: `attack`, `threat-intel`, `compliance`, `anomaly`, and `data-leak`.
 
+### Template variables
+
+Security rules support template variables within the markdown notification box. Template variables permit injection of dynamic context from triggered logs directly into a security signal and its associated notifications.
+
+For example, if a security rule detects when a user logs in from an IP address known to be malicious, the message states which user and IP address triggered a given signal when using the specified template variable.
+
+```text
+The user {{@usr.id}} just successfully authenticated from {{@network.client.ip}} which is a known malicious IP address.
+```
+
+Template variables also permit deep linking into Datadog or a partner portal for quick access to next steps for investigation.
+
+```text
+* [Investigate user in the authentication dashboard](https://app.datadoghq.com/example/integration/security-monitoring---authentication-events?tpl_var_username={{@usr.id}})
+```
+
+Epoch template variables create a human-readable string or math-friendly number within a notification. For example, use values such as `first_seen`, `last_seen`, or `timestamp` (in milliseconds) within a function to receive a readable string in a notification.
+
+```text
+{{eval "first_seen_epoch-15*60*1000"}}
+```
+
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /monitors/notifications/?tab=is_alert
+[1]: /monitors/notify/?tab=is_alert

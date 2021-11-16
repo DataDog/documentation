@@ -2,7 +2,8 @@
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
-  dashboards: {}
+  dashboards:
+    gunicorn: assets/dashboards/gunicorn_dashboard.json
   logs:
     source: gunicorn
   metrics_metadata: metadata.csv
@@ -11,6 +12,7 @@ assets:
     4xx_errors: assets/saved_views/4xx_errors.json
     5xx_errors: assets/saved_views/5xx_errors.json
     bot_errors: assets/saved_views/bot_errors.json
+    gunicorn_processes: assets/saved_views/gunicorn_processes.json
     status_code_overview: assets/saved_views/status_code_overview.json
   service_checks: assets/service_checks.json
 categories:
@@ -152,9 +154,8 @@ udp        0      0 127.0.0.1:38374         127.0.0.1:8125          ESTABLISHED 
 Gunicorn チェックには、イベントは含まれません。
 
 ### サービスのチェック
+{{< get-service-checks-from-git "gunicorn" >}}
 
-**gunicorn.is_running**:<br>
-Agent が Gunicorn マスタープロセスまたは稼働中/アイドル状態のワーカープロセスを見つけられない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
 
 ## トラブルシューティング
 
@@ -194,7 +195,7 @@ ubuntu   18463 18457  0 20:26 pts/0    00:00:00 gunicorn: worker [my_app]
 
 ## その他の参考資料
 
-- [Datadog を使用した Gunicorn パフォーマンスの監視][12]
+- [Datadog を使用した Gunicorn パフォーマンスの監視][13]
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/gunicorn/images/gunicorn-dash.png
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
@@ -207,4 +208,5 @@ ubuntu   18463 18457  0 20:26 pts/0    00:00:00 gunicorn: worker [my_app]
 [9]: https://docs.gunicorn.org/en/stable/settings.html#errorlog
 [10]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [11]: https://github.com/DataDog/integrations-core/blob/master/gunicorn/metadata.csv
-[12]: https://www.datadoghq.com/blog/monitor-gunicorn-performance
+[12]: https://github.com/DataDog/integrations-core/blob/master/gunicorn/assets/service_checks.json
+[13]: https://www.datadoghq.com/blog/monitor-gunicorn-performance

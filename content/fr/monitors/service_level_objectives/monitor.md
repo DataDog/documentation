@@ -29,7 +29,7 @@ Par exemple, si votre monitor de métrique est configuré pour lancer une alerte
 
 **Types de monitors pris en charge** :
 
-- Types de monitors de métrique (métrique, intégration, APM, anomalie, prévisions, outlier)
+- Types de monitors de métrique (métrique, intégration, métrique APM, anomalie, prévisions, outlier)
 - Synthetic
 - Checks de service (fonctionnalité en bêta ouverte)
 
@@ -43,6 +43,8 @@ Exemple : 99 % du temps, les requêtes doivent présenter une latence inférie
 
 Tant que le SLO reste au-dessus du pourcentage cible, le statut du SLO s'affiche en vert. En cas de violation du pourcentage cible, le statut du SLO s'affiche en rouge. Vous pouvez également spécifier une valeur d'avertissement supérieure à la valeur cible afin de savoir lorsque le SLO est sur le point de ne plus être satisfait. En cas de violation du pourcentage d'avertissement (mais pas du pourcentage cible), le statut du SLO s'affiche en jaune.
 
+**Remarque :** le nombre de décimales pouvant être spécifiées pour vos SLO basés sur des monitors dépend de l'intervalle de temps choisi. Jusqu'à deux décimales sont autorisées pour les objectifs à 7 et 30 jours, et jusqu'à trois décimales sont autorisées pour les objectifs à 90 jours. La précision affichée dans la vue détaillée d'un SLO correspond à `num_target_decimal_places`, c'est-à-dire deux décimales pour les objectifs à 7 et 30 jours et trois décimales pour les objectifs à 90 jours. Ces limites sont en place parce que le budget d'indisponibilité des SLO basés sur des monitors est exprimé en temps. Un objectif de 99,999 % pour des objectifs à 7 et 30 jours donne lieu à des budgets d'indisponibilité de 6 secondes et 26 secondes, respectivement. Les monitors étant évalués toutes les minutes, la granularité d'un SLO basé sur un monitor est elle aussi de 1 minute. Par conséquent, les budgets d'indisponibilité de 6 et 26 secondes décrits plus haut seraient entièrement consommés et dépassés par une seule alerte (si vous avez besoin d'une plus grande granularité, nous vous conseillons plutôt d'utiliser des [SLO basés sur des métriques][7]). En outre, il est peu probable qu'un budget d'indisponibilité aussi faible puisse être respecté dans la pratique.
+
 ### Identifier cet indicateur
 
 Cette section vous permet d'ajouter des informations contextuelles sur l'intérêt de votre SLO. Vous pouvez notamment spécifier une description, les ressources connexes, ainsi que les tags à associer au SLO.
@@ -55,7 +57,7 @@ Le statut global peut être considéré comme le pourcentage de temps durant leq
 
 Prenons l'exemple suivant pour 3 monitors (cela vaut également pour un SLO basé sur un monitor unique à alertes multiples) :
 
-| Monitor            | t1 | t2 | t3    | t4 | t5    | t6 | t7 | t8 | t9    | t10 | Status |
+| Surveiller            | t1 | t2 | t3    | t4 | t5    | t6 | t7 | t8 | t9    | t10 | Status |
 |--------------------|----|----|-------|----|-------|----|----|----|-------|-----|--------|
 | Monitor 1          | OK | OK | OK    | OK | ALERT | OK | OK | OK | OK    | OK  | 90 %    |
 | Monitor 2          | OK | OK | OK    | OK | OK    | OK | OK | OK | ALERT | OK  | 90 %    |

@@ -40,8 +40,8 @@ Voici quelques exemples de datagrammes :
 - `users.online:1|c|@0.5|#country:china` : surveille les utilisateurs chinois actifs et utilisez un taux d'échantillonnage.
 
 
-[1]: /fr/developers/metrics/#naming-metrics
-[2]: /fr/developers/metrics/types/
+[1]: /fr/metrics/#naming-metrics
+[2]: /fr/metrics/types/
 [3]: /fr/getting_started/tagging/
 {{% /tab %}}
 {{% tab "Événements" %}}
@@ -210,7 +210,7 @@ Pour envoyer des métriques, des événements ou des checks de service sur des e
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/developers/libraries/#api-and-dogstatsd-client-libraries
+[1]: /fr/developers/community/libraries/#api-and-dogstatsd-client-libraries
 [2]: https://github.com/joehack3r/powershell-statsd/blob/master/send-statsd.ps1
 [3]: /fr/developers/dogstatsd/
 [4]: /fr/agent/kubernetes/apm/

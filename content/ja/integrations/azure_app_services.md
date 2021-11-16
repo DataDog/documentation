@@ -9,6 +9,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/azure_app_services/'
 draft: false
 git_integration_title: azure_app_services
 has_logo: true
+integration_id: azure-app-services
 integration_title: Microsoft Azure App Service
 is_public: true
 kind: インテグレーション

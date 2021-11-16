@@ -4,6 +4,7 @@ kind: documentation
 type: multi-code-lang
 aliases:
   - /ja/tracing/languages
+  - /ja/tracing/setup_overview/setup/undefined
 ---
 次の公式 Datadog トレースライブラリのいずれかを使用して[トレース][1]を送信するようにアプリケーションを構成します。
 
@@ -16,4 +17,4 @@ aliases:
 
 
 [1]: /ja/tracing/visualization/#trace
-[2]: /ja/developers/libraries/#apm-tracing-client-libraries
+[2]: /ja/developers/community/libraries/#apm-tracing-client-libraries

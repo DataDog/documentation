@@ -1,0 +1,49 @@
+requests:
+  - name: OpenMetrics
+    description: L'Agent inclut des checks OpenMetrics et Prometheus capables de scraper des endpoints Prometheus.
+    link: /agent/docker/prometheus
+    image: int_openmetrics.png
+  - name: Compteurs de performances Windows
+    description: Les services ou applications Windows qui exposent des compteurs de performances peuvent être recueillis grâce à l'intégration PDH.
+    link: /integrations/pdh_check
+    image: int_wpc.png
+  - name: Beans JMX
+    description: Les applications basées sur la JVM exposent des métriques JMX que vous pouvez recueillir grâce à l'intégration JMX. Cette intégration est exploitée par des intégrations officielles comme Solr, Tomcat ou encore Cassandra.
+    link: /integrations/java
+    image: int_jmx.png
+  - name: Logs
+    description: La plupart des applications génèrent des logs. Il est donc généralement possible d'utiliser la solution Log Management pour effectuer une surveillance de base de vos logs.
+    link: /logs
+    image: int_logs.png
+  - name: APM
+    description: L'APM et le profileur en continu Datadog proposent des dashboards de performance prêts à l'emploi pour des services Web, files d'attente et bases de données, afin de surveiller vos requêtes, vos erreurs et votre latence.
+    link: /tracing
+    image: int_apm.png
+  - name: Métriques custom
+    description: Des métriques custom peuvent être envoyées à l'aide d'outils de développement comme l'API et DogStatsD afin d'obtenir des statistiques métier.
+    link: /developers/metrics
+    image: int_custom_metrics.png
+  - name: Intégrations personnalisées
+    description: Les intégrations de l'Agent Datadog sont des fichiers Python qui transmettent des requêtes afin d'obtenir des métriques. Le code de l'Agent est entièrement open source. Vous pouvez donc rédiger votre propre intégration personnalisée. Le référentiel GitHub integrations-extra contient de nombreuses intégrations personnalisées de l'Agent développées par notre communauté.
+    link: /developers/integrations/new_check_howto
+    image: int_custom_int.png
+  - name: Trafic réseau/SNMP
+    description: Les périphériques réseau, comme les routeurs, commutateurs et imprimantes, génèrent des métriques SNMP (Simple Network Management Protocol) qui peuvent être recueillies par la solution Network Device Monitoring. Notre solution Network Performance Monitoring vous permet également de suivre tout le trafic réseau entrant et sortant d'un host.
+    link: /network_monitoring
+    image: int_network.png
+  - name: Endpoint
+    description: Utilisez un check HTTP ou la solution Synthetic Monitoring pour vous assurer de la disponibilité de vos URL et vérifier si vos endpoints et URL sont fonctionnels et accessibles. Ces deux alternatives gèrent aussi bien les endpoints publics que privés.
+    link: /synthetics
+    image: int_endpoint.png
+  - name: Processus
+    description: Utilisez l'intégration Processus pour recueillir des métriques sur l'utilisation de ressources (CPU, mémoire, E/S, etc.) de certains processus sur un host précis. Pour interroger tous vos processus en cours d'exécution afin de procéder à un debugging flexible, tirez profit de la fonctionnalité de surveillance des live processes (par exemple pour utiliser htop sans SSH).
+    link: /infrastructure/process
+    image: int_processes.png
+  - name: Fichiers/Répertoires
+    description: Le check Directory vous permet de mesurer le temps écoulé depuis la création de fichiers, le nombre de fichiers dans un répertoire ou la taille d'un répertoire.
+    link: /integrations/directory
+    image: int_files.png
+  - name: Fournisseurs de cloud
+    description: Tous les principaux fournisseurs de cloud (AWS, GCP, Azure et Alibaba) génèrent des métriques par l'intermédiaire d'API. Utilisez les carrés d'intégration Datadog de votre compte pour configurer les intégrations qui se servent des serveurs Datadog pour récupérer et stocker vos métriques.
+    link: /integrations/#cat-cloud
+    image: int_cloud.png

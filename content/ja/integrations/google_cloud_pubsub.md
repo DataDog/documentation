@@ -12,6 +12,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/google_cloud_pubsub/'
 draft: false
 git_integration_title: google_cloud_pubsub
 has_logo: true
+integration_id: google-cloud-pubsub
 integration_title: Google Pub/Sub
 is_public: true
 kind: インテグレーション
@@ -52,7 +53,7 @@ Google Cloud Pub/Sub のログは Stackdriver により収集され、HTTP プ�
 2. **シンクを作成**し、シンクに適宜名前を付けます。
 3. エクスポート先として「Cloud Pub/Sub」を選択し、エクスポート用に作成された Pub/Sub を選択します。**注**: この Pub/Sub は別のプロジェクト内に配置することもできます。
 
-    {{< img src="integrations/google_cloud_pubsub/creating_sink.png" alt="Google Cloud Pub/Sub ログを Pub Sub へエクスポート" >}}
+    {{< img src="integrations/google_cloud_pubsub/creating_sink2.png" alt="Google Cloud Pub/Sub ログを Pub Sub へエクスポート" >}}
 
 4. **作成**をクリックし、確認メッセージが表示されるまで待ちます。
 

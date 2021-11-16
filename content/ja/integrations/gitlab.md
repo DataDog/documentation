@@ -160,20 +160,8 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 Gitlab チェックには、イベントは含まれません。
 
 ### サービスのチェック
+{{< get-service-checks-from-git "gitlab" >}}
 
-Gitlab チェックには、サービスのチェック機能として Health、Readiness、Liveness が含まれます。 
-
-**gitlab.prometheus_endpoint_up**:<br>
-チェックが Gitlab インスタンスの Prometheus メトリクスエンドポイントにアクセスできない場合は `CRITICAL` を返します。
-
-**gitlab.health**:<br>
-チェックが Gitlab インスタンスにアクセスできない場合は `CRITICAL` を返します。
-
-**gitlab.liveness**:<br>
-Rails Controllers とのデッドロックのためにチェックが Gitlab インスタンスにアクセスできない場合は `CRITICAL` を返します。
-
-**gitlab.readiness**:<br>
-Gitlab インスタンスが Rails Controllers を介してトラフィックを受け入れることができる場合は `CRITICAL` を返します。
 
 ## トラブルシューティング
 
@@ -247,9 +235,9 @@ Runner の Prometheus メトリクスエンドポイントおよびサービス�
        source: gitlab-runner
    ```
 
-    使用可能なすべての構成オプションの詳細については、[サンプル gitlab_runner.d/conf.yaml][7] を参照してください。
+    使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル gitlab_runner.d/conf.yaml][8] を参照してください。
 
-5. [Agent を再起動します][8]。
+5. [Agent を再起動します][10]。
 
 ### イベント
 
@@ -274,3 +262,4 @@ Gitlab Runner チェックは、Runner が Gitlab マスターと通信できる
 [7]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [8]: https://github.com/DataDog/integrations-core/blob/master/gitlab_runner/datadog_checks/gitlab_runner/data/conf.yaml.example
 [9]: https://docs.gitlab.com/runner/configuration/advanced-configuration.html
+[10]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent

@@ -13,13 +13,14 @@ categories:
 creates_events: false
 ddtype: crawler
 dependencies:
-  - 'https://github.com/DataDog/integrations-extras/blob/master/pliant/README.md'
+  - https://github.com/DataDog/integrations-extras/blob/master/pliant/README.md
 display_name: Pliant
 draft: false
 git_integration_title: pliant
 guid: 3beeb950-4020-4e0e-914e-35281dad9719
 integration_id: pliant
 integration_title: Pliant
+integration_version: ''
 is_public: true
 kind: インテグレーション
 maintainer: hello@pliant.io
@@ -43,8 +44,6 @@ Pliant.io により、Datadog の通知をローコードの自動ワークフ�
 
 例:
 
-
-
 - サービスの再起動
 - ロードバランサーのコンフィギュレーション
 - システムプロビジョニング
@@ -52,18 +51,15 @@ Pliant.io により、Datadog の通知をローコードの自動ワークフ�
 - ロードに応じてさらに VM またはコンテナノードをプロビジョン
 - ロードが低いときリソースの使用を停止
 
-
 ## セットアップ
-
 ### インストール
 
 Datadog の通知からトリガーするワークフローを作成します。
 
 ### コンフィギュレーション
+#### Pliant
 
-#### Pliant の設定
-**Pliant API キーを作成します。**
-1. Pliant にログインし、画面右上のユーザー名をクリックしてメニューを開きます。"API Keys" をクリックします。
+1. **Pliant API キーを作成します** - Pliant にログインし、画面右上のユーザー名をクリックしてメニューを開きます。"API Keys" をクリックします。
 
 ![API キー メニューステップ 1][2]
 

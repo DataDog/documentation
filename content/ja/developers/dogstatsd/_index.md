@@ -42,7 +42,7 @@ DogStatsD は、UDP 経由で[カスタムメトリクス][5]、[イベント][6
 
 UDP を使用するため、アプリケーションはメトリクスを DogStatsD に送信した後、応答を待たずに自身の作業を再開できます。DogStatsD を利用できなくなった場合でも、アプリケーションは中断しません。
 
-{{< img src="developers/metrics/dogstatsd_metrics_submission/dogstatsd.png" alt="dogstatsd"   >}}
+{{< img src="metrics/dogstatsd_metrics_submission/dogstatsd.png" alt="dogstatsd"   >}}
 
 DogStatsD は、データを受け取ると共に、_フラッシュ間隔_と呼ばれる時間間隔（デフォルトで 10 秒）でメトリクスごとに複数のデータポイントを 1 つのデータポイントに集計します。
 
@@ -84,11 +84,10 @@ DogStatsD は、Agent v6 以上の UDP ポート `8125` でデフォルトで有
 デフォルトでは、DogStatsD は UDP ポート **8125** でリッスンするため、コンテナで Agent を実行する場合、このポートをホストポートにバインドする必要があります。StatsD メトリクスが `localhost` の外部から取得される場合、メトリクスの収集を許可するには、`DD_DOGSTATSD_NON_LOCAL_TRAFFIC` を `true` に設定する必要があります。DogStatsd サーバーを起動した状態で Agent を実行するには、次のコマンドを実行します。
 
 ```shell
-DOCKER_CONTENT_TRUST=1 \
 docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
               -v /proc/:/host/proc/:ro \
               -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
-              -e DD_API_KEY="<DATADOG_API_KEY>" \
+              -e DD_API_KEY=<DATADOG_API_KEY> \
               -e DD_DOGSTATSD_NON_LOCAL_TRAFFIC="true" \
               -p 8125:8125/udp \
               gcr.io/datadoghq/agent:latest
@@ -175,7 +174,7 @@ env:
 [3]: https://kubernetes.io/docs/setup/independent/troubleshooting-kubeadm/#hostport-services-do-not-work
 [4]: /ja/developers/dogstatsd/unix_socket/#using-origin-detection-for-container-tagging
 [5]: /ja/getting_started/tagging/assigning_tags/#environment-variables
-[6]: /ja/developers/metrics/custom_metrics/
+[6]: /ja/metrics/custom_metrics/
 {{% /tab %}}
 {{% tab "Helm" %}}
 
@@ -211,7 +210,7 @@ env:
 
      これにより、アプリケーションを実行しているポッドは、`$DD_AGENT_HOST` のポート `8125` から DogStatsD メトリクスを送信できるようになります。
 
-[1]: /ja/developers/metrics/dogstatsd_metrics_submission/
+[1]: /ja/metrics/dogstatsd_metrics_submission/
 [2]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
 [3]: https://github.com/containernetworking/cni
 [4]: https://kubernetes.io/docs/setup/independent/troubleshooting-kubeadm/#hostport-services-do-not-work
@@ -262,8 +261,8 @@ Java DataDog StatsD Client は maven central とともに配布され、[Maven �
 ```
 
 
-[1]: https://search.maven.org/search?q=g:com.datadoghq%20a:java-dogstatsd-client
 
+[1]: https://search.maven.org/search?q=g:com.datadoghq%20a:java-dogstatsd-client
 {{< /programming-lang >}}
 
 {{< programming-lang lang="PHP" >}}
@@ -279,16 +278,16 @@ Java DataDog StatsD Client は maven central とともに配布され、[Maven �
 または、[github.com/DataDog/php-datadogstatsd][1] でリポジトリを手動でクローンし、`require './src/DogStatsd.php'` でセットアップします。
 
 
-[1]: https://github.com/DataDog/php-datadogstatsd#php-datadog-statsd-client
 
+[1]: https://github.com/DataDog/php-datadogstatsd#php-datadog-statsd-client
 {{< /programming-lang >}}
 
 {{< programming-lang lang=".NET" >}}
 
 - [NuGet からパッケージ][1]を取得してインストールします。
 
-[1]: https://www.nuget.org/packages/DogStatsD-CSharp-Client
 
+[1]: https://www.nuget.org/packages/DogStatsD-CSharp-Client
 {{< /programming-lang >}}
 
 {{< /programming-lang-wrapper >}}
@@ -338,8 +337,8 @@ if err != nil {
 その他のオプションについては、[Datadog の GoDoc][1] を参照してください。
 
 
-[1]: https://godoc.org/github.com/DataDog/datadog-go/statsd
 
+[1]: https://godoc.org/github.com/DataDog/datadog-go/statsd
 {{< /programming-lang >}}
 
 {{< programming-lang lang="java" >}}
@@ -453,7 +452,6 @@ using (var dogStatsdService = new DogStatsdService())
 | `Tags`                  | 文字列のリスト | すべてのメトリクス、イベント、サービスチェックに適用されるグローバルタグ。                                                                                                                                                      |
 | `Buffered`              | Boolean         | 1 つのペイロードに複数の DogStatsD メッセージをパックするために使用されます。`true` に設定すると、ペイロードの合計サイズが `MaxMessagesPerPayload` またはペイロードの構築開始から 100ms を超えるまでメッセージがバッファリングされます。 |
 | `MaxMessagesPerPayload` | 整数         | 単一のペイロードに含めることができるメトリクス、イベント、サービスチェックの最大数。このオプションは、クライアントがバッファリングされている場合にのみ有効です。                                                               |
-| `AsyncUDS`              | Boolean         | UDS の非同期モードとブロッキングモードを切り替えるために使用されます。ブロッキングモードはエラーチェックを可能にしますが、呼び出しが実行をブロックしないことを保証しません。                                                        |
 | `WriteTimeoutUDS`       | 整数         | UDS パケットがドロップされるまでのタイムアウト。                                                                                                                                                                    |
 
 その他のオプションについては、[Datadog の GoDoc][1] を参照してください。
@@ -502,20 +500,20 @@ using (var dogStatsdService = new DogStatsdService())
 DogStatsD と StatsD はほぼ同じですが、DogStatsD には、使用可能なデータ型、イベント、サービスチェック、タグなど、Datadog に固有の高度な機能が含まれています。
 
 {{< whatsnext desc="">}}
-    {{< nextlink href="/developers/metrics/dogstatsd_metrics_submission/" >}}DogStatsD でメトリクスを Datadog に送信します。{{< /nextlink >}}
-    {{< nextlink href="/developers/events/dogstatsd/" >}}DogStatsD でイベントを Datadog に送信します。{{< /nextlink >}}
+    {{< nextlink href="/metrics/dogstatsd_metrics_submission/" >}}DogStatsD でメトリクスを Datadog に送信します。{{< /nextlink >}}
+    {{< nextlink href="/events/guides/dogstatsd/" >}}DogStatsD でイベントを Datadog に送信します。{{< /nextlink >}}
     {{< nextlink href="/developers/service_checks/dogstatsd_service_checks_submission/" >}}DogStatsD でサービスチェックを Datadog に送信します。{{< /nextlink >}}
 {{< /whatsnext >}}
 
 DogStatsD が使用するデータグラム形式についてさらに理解を深めたい場合、または独自の Datadog ライブラリを開発したい場合は、[データグラムとシェルの使用][10]を参照してください。ここでは、メトリクスとイベントをコマンドラインから直接送信する方法についても説明しています。
 
 [1]: https://github.com/etsy/statsd
-[2]: /ja/developers/metrics/dogstatsd_metrics_submission/
+[2]: /ja/metrics/dogstatsd_metrics_submission/
 [3]: https://hub.docker.com/r/datadog/dogstatsd
 [4]: https://gcr.io/datadoghq/dogstatsd
-[5]: /ja/developers/metrics/custom_metrics/
-[6]: /ja/developers/events/dogstatsd/
+[5]: /ja/metrics/custom_metrics/
+[6]: /ja/events/guides/dogstatsd/
 [7]: /ja/developers/service_checks/dogstatsd_service_checks_submission/
-[8]: /ja/developers/libraries/#api-and-dogstatsd-client-libraries
+[8]: /ja/developers/community/libraries/#api-and-dogstatsd-client-libraries
 [9]: /ja/getting_started/tagging/unified_service_tagging
-[10]: /ja/developers/metrics/
+[10]: /ja/metrics/

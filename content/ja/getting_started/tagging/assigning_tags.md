@@ -95,7 +95,7 @@ hostname: mymachine.mydomain
 [1]: /ja/getting_started/integrations/
 [2]: /ja/agent/guide/agent-configuration-files/
 [3]: /ja/getting_started/tagging/#defining-tags
-[4]: /ja/developers/metrics/dogstatsd_metrics_submission/#host-tag-key
+[4]: /ja/metrics/dogstatsd_metrics_submission/#host-tag-key
 [5]: /ja/dashboards/querying/#arithmetic-between-two-metrics
 {{% /tab %}}
 {{% tab "Agent v5" %}}
@@ -137,7 +137,7 @@ hostname: mymachine.mydomain
 [1]: /ja/getting_started/integrations/
 [2]: /ja/agent/guide/agent-configuration-files/
 [3]: /ja/getting_started/tagging/#defining-tags
-[4]: /ja/developers/metrics/dogstatsd_metrics_submission/#host-tag-key
+[4]: /ja/metrics/dogstatsd_metrics_submission/#host-tag-key
 [5]: /ja/dashboards/querying/#arithmetic-between-two-metrics
 {{% /tab %}}
 {{< /tabs >}}
@@ -262,17 +262,17 @@ Datadog トレーサーは環境変数、システムプロパティ、または
 {{< tabs >}}
 {{% tab "Host Map" %}}
 
-[Host Map ページ][1]を介して UI でホストタグを割り当てます。ページの下部にホストオーバーレイを表示するには、六角形（ホスト）をクリックします。次に、*User* セクションで **Edit Tags** ボタンをクリックします。タグをカンマ区切りリストで入力し、**Save Tags** をクリックします。**注**: UI を介して行われたメトリクスタグの変更が適用されるまでに最大 30 分かかる場合があります。
+[Host Map ページ][1]を使って UI でホストタグを割り当てます。ページの下部にホストオーバーレイを表示するには、六角形（ホスト）をクリックします。次に、*User* セクションで **Edit Tags** ボタンをクリックします。タグをカンマ区切りリストで入力し、**Save Tags** をクリックします。**注**: UI で行われたメトリクスタグの変更が適用されるまでに最大 30 分かかる場合があります。
 
-{{< img src="tagging/assigning_tags/hostmapuitags.png" alt="ホストマップタグ"  style="width:80%;">}}
+{{< img src="tagging/assigning_tags/hostmapuitags.png" alt="ホストマップタグ" style="width:80%;">}}
 
 [1]: /ja/infrastructure/hostmap/
 {{% /tab %}}
 {{% tab "Infrastructure List" %}}
 
-[Infrastructure List ページ][1]を介して UI でホストタグを割り当てます。ページの右にホストオーバーレイを表示するには、ホストをクリックします。次に、*User* セクションで **Edit Tags** ボタンをクリックします。タグをカンマ区切りリストで入力し、**Save Tags** をクリックします。**注**: UI を介して行われたメトリクスタグの変更が適用されるまでに最大 30 分かかる場合があります。
+[Infrastructure List ページ][1]を使って UI でホストタグを割り当てます。ページの右にホストオーバーレイを表示するには、ホストをクリックします。次に、*User* セクションで **Edit Tags** ボタンをクリックします。タグをカンマ区切りリストで入力し、**Save Tags** をクリックします。**注**: UI で行われたメトリクスタグの変更が適用されるまでに最大 30 分かかる場合があります。
 
-{{< img src="tagging/assigning_tags/hostuitags.png" alt="インフラストラクチャーリストタグ"  style="width:80%;">}}
+{{< img src="tagging/assigning_tags/hostuitags.png" alt="インフラストラクチャーリストタグ" style="width:80%;">}}
 
 [1]: /ja/infrastructure/
 {{% /tab %}}
@@ -280,30 +280,30 @@ Datadog トレーサーは環境変数、システムプロパティ、または
 
 [Manage Monitors][1] ページで、各モニターの隣にあるチェックボックスをオンにしてタグを追加します (1 つ以上のモニターを選択します)。**Edit Tags** ボタンをクリックします。タグを入力するか、以前に使用したタグを選択します。次に **Add Tag `tag:name`** または **Apply Changes** をクリックします。以前にタグを追加してある場合は、タグ チェックボックスを使用して一度に複数のタグを割り当てることができます。
 
-{{< img src="tagging/assigning_tags/monitortags.png" alt="モニタータグを管理"  style="width:80%;">}}
+{{< img src="tagging/assigning_tags/monitortags.png" alt="モニタータグを管理" style="width:80%;">}}
 
 モニターを作成する場合は、ステップ 4 *Say what's happening* でモニタータグを割り当てます。
 
-{{< img src="tagging/assigning_tags/monitorindivdualtags.png" alt="モニタータグを作成"  style="width:80%;">}}
+{{< img src="tagging/assigning_tags/monitorindivdualtags.png" alt="モニタータグを作成" style="width:80%;">}}
 
-[1]: /ja/monitors/manage_monitor/
+[1]: /ja/monitors/manage/
 {{% /tab %}}
 {{% tab "Distribution Metrics" %}}
 
-最大 10 個のタグのホワイトリストをメトリクスに適用することにより、[Distribution Metrics][1] 内でパーセンタイル集計を作成します。これにより、タグ値の潜在的にクエリ可能な組み合わせの時系列が作成されます。ディストリビューションメトリクスから出力されるカスタムメトリクスと時系列のカウントの詳細については、[カスタムメトリクス][2]を参照してください。
+最大 10 個のタグの許可リストをメトリクスに適用することにより、[Distribution Metrics][1] 内でパーセンタイル集計を作成します。これにより、タグ値の潜在的にクエリ可能な組み合わせの時系列が作成されます。ディストリビューションメトリクスから出力されるカスタムメトリクスと時系列のカウントの詳細については、[カスタムメトリクス][2]を参照してください。
 
 **最大 10 個のタグを適用します。除外タグは使用できません**。
 
-{{< img src="tagging/assigning_tags/global_metrics_selection.png" alt="モニタータグを作成"  style="width:80%;">}}
+{{< img src="tagging/assigning_tags/global_metrics_selection.png" alt="モニタータグを作成" style="width:80%;">}}
 
 [1]: /ja/metrics/distributions/
-[2]: /ja/developers/metrics/custom_metrics/
+[2]: /ja/metrics/custom_metrics/
 {{% /tab %}}
 {{% tab "Integrations" %}}
 
 [AWS][1] インテグレーション タイルでは、アカウント レベルですべてのメトリクスに追加のタグを割り当てることができます。`<KEY>:<VALUE>` の形式で、タグのカンマ区切りのリストを使用します。
 
-{{< img src="tagging/assigning_tags/integrationtags.png" alt="AWS タグ"  style="width:80%;">}}
+{{< img src="tagging/assigning_tags/integrationtags.png" alt="AWS タグ" style="width:80%;">}}
 
 [1]: /ja/integrations/amazon_web_services/
 {{% /tab %}}
@@ -311,7 +311,7 @@ Datadog トレーサーは環境変数、システムプロパティ、または
 
 SLO を作成する場合は、ステップ 3 *Add name and tags* でタグを割り当てます。
 
-{{< img src="tagging/assigning_tags/slo_individual_tags.png" alt="SLO タグを作成"  style="width:80%;">}}
+{{< img src="tagging/assigning_tags/slo_individual_tags.png" alt="SLO タグを作成" style="width:80%;">}}
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -340,7 +340,7 @@ SLO を作成する場合は、ステップ 3 *Add name and tags* でタグを�
 [6]: /ja/api/v1/monitors/#edit-a-monitor
 [7]: /ja/api/v1/tags/#add-tags-to-a-host
 [8]: /ja/api/v1/tags/#update-host-tags
-[9]: /ja/api/v1/tracing/
+[9]: /ja/tracing/guide/send_traces_to_agent_by_api/
 [10]: /ja/api/v1/service-level-objectives/#create-a-slo-object
 [11]: /ja/api/v1/service-level-objectives/#update-a-slo
 {{% /tab %}}
@@ -406,5 +406,5 @@ def algorithm_two():
 [6]: /ja/agent/docker/?tab=standard#tagging
 [7]: /ja/tracing/setup/
 [8]: /ja/developers/dogstatsd/
-[9]: /ja/developers/libraries/
-[10]: /ja/developers/metrics/dogstatsd_metrics_submission/#host-tag-key
+[9]: /ja/developers/community/libraries/
+[10]: /ja/metrics/dogstatsd_metrics_submission/#host-tag-key

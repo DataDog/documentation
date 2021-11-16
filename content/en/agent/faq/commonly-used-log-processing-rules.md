@@ -2,10 +2,10 @@
 title: Commonly Used Log Scrubbing Rules
 kind: faq
 further_reading:
-- link: "logs/processing"
+- link: "/logs/log_configuration/processors"
   tag: "Documentation"
   text: "Discover how to process your logs"
-- link: "logs/processing/parsing"
+- link: "/logs/log_configuration/parsing"
   tag: "Documentation"
   text: "Learn more about parsing"
 - link: "logs/live_tail"
@@ -106,7 +106,7 @@ Redact postal codes (US).
 
 ## Between parentheses
 
-Redact characters after string `ExampleConfig(` until the closing paranthesis.
+Redact characters after string `ExampleConfig(` until the closing parentheses.
 
 ```yaml
 - type: mask_sequences

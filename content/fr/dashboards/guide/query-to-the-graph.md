@@ -150,9 +150,9 @@ Les opérations arithmétiques sont également appliquées après l'agrégation 
 
 {{< img src="dashboards/faq/metric_graph_8.png" alt="Graphique avec métriques_8"  style="width:75%;">}}
 
-#### as_count et as_rate
+#### Count et rate
 
-`As_count` et `as_rate` sont des agrégateurs temporels spécifiques aux rates et counters envoyés via StatsD/DogStatsD. Ils permettent d'afficher les métriques sous forme de taux par seconde ou de les visualiser sous forme de nombres bruts.
+`as_count` et `as_rate` sont des agrégateurs temporels spécifiques aux rates et counters envoyés via StatsD/DogStatsD. Ils permettent d'afficher les métriques sous forme de taux par seconde ou de les visualiser sous forme de nombres bruts.
 Syntaxe : au lieu d'ajouter un cumul, vous pouvez ajouter `.as_count()` ou `.as_rate()`.
 
 Consultez [cet article de notre blog][9] pour en savoir plus.
@@ -161,10 +161,10 @@ Documentation relative à [StatsD/DogStatsD][10].
 [1]: /fr/dashboards/timeboard/
 [2]: /fr/dashboards/screenboard/
 [3]: /fr/agent/
-[4]: /fr/developers/metrics/custom_metrics/
+[4]: /fr/metrics/custom_metrics/
 [5]: /fr/dashboards/faq/how-is-data-aggregated-in-graphs/
 [6]: /fr/dashboards/faq/why-does-zooming-out-a-timeframe-also-smooth-out-my-graphs/
 [7]: /fr/dashboards/functions/rollup/
 [8]: /fr/dashboards/faq/i-m-switching-between-the-sum-min-max-avg-aggregators-but-the-values-look-the-same/
 [9]: https://www.datadoghq.com/blog/visualize-statsd-metrics-counts-graphing
-[10]: /fr/developers/metrics/dogstatsd_metrics_submission/
+[10]: /fr/metrics/dogstatsd_metrics_submission/

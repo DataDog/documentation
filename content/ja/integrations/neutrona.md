@@ -23,7 +23,7 @@ kind: インテグレーション
 maintainer: david@neutrona.com
 manifest_version: 1.0.0
 metric_prefix: neutrona.
-metric_to_check: ''
+metric_to_check: neutrona.azure.expressroute.egress_bps
 name: neutrona
 public_title: Datadog-Neutrona インテグレーション
 short_description: Neutrona Telemetry

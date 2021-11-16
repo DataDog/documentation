@@ -7,11 +7,13 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Surveillez les métriques clés d'Azure Event Grid.
-doc_link: 'https://docs.datadoghq.com/integrations/azure_event_grid/'
+doc_link: https://docs.datadoghq.com/integrations/azure_event_grid/
 draft: false
 git_integration_title: azure_event_grid
 has_logo: true
+integration_id: azure-eventgrid
 integration_title: Microsoft Azure Event Grid
+integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'
@@ -26,7 +28,7 @@ Azure Event Grid est un service intelligent entièrement géré pour le routage 
 
 Utilisez l'intégration Datadog/Azure pour recueillir les métriques d'Azure Event Grid.
 
-## Implémentation
+## Configuration
 
 ### Installation
 

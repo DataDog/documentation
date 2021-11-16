@@ -47,7 +47,7 @@ pip install ddtrace
 **注:** このコマンドは pip バージョン `18.0.0` 以上が必要です。Ubuntu、Debian、またはその他のパッケージマネージャーをお使いの場合は、以下のコマンドで pip バージョンを更新してください。
 
 ```python
-sudo -H pip3 install --upgrade pip
+pip install --upgrade pip
 ```
 
 Python アプリケーションをインスツルメントするには、記載されている `ddtrace-run` コマンドを使用します。これを使用するには、Python エントリーポイントコマンドを `ddtrace-run` でプレフィックスします。
@@ -60,12 +60,12 @@ ddtrace-run python app.py
 
 ### APM に Datadog Agent を構成する
 
-インスツルメントされたアプリケーションからトレースを受信するように Datadog Agent をインストールして構成します。デフォルトでは、Datadog Agent は `datadog.yaml` ファイルの `apm_enabled: true` で有効になっており、`localhost:8126` でトレーストラフィックをリッスンします。コンテナ化環境の場合、以下のリンクに従って、Datadog Agent 内でトレース収集を有効にします。
+インスツルメントされたアプリケーションからトレースを受信するように Datadog Agent をインストールして構成します。デフォルトでは、Datadog Agent は `apm_config` 下にある  `datadog.yaml` ファイルの `enabled: true` で有効になっており、`localhost:8126` でトレーストラフィックをリッスンします。コンテナ化環境の場合、以下のリンクに従って、Datadog Agent 内でトレース収集を有効にします。
 
 {{< tabs >}}
 {{% tab "コンテナ" %}}
 
-1. メインの [`datadog.yaml` コンフィギュレーションファイル][1]で `apm_non_local_traffic: true` を設定します
+1. メイン [`datadog.yaml` コンフィギュレーションファイル][1]の `apm_config` セクションで `apm_non_local_traffic: true` を設定します
 
 2. コンテナ化された環境でトレースを受信するように Agent を構成する方法については、それぞれの説明を参照してください。
 
@@ -136,7 +136,7 @@ AWS Lambda で Datadog APM を設定するには、[サーバーレス関数の�
 : アプリケーションの環境 (例: `prod`、`pre-prod`、`staging`) を設定します。詳細については、[環境の設定方法][6]を参照してください。バージョン 0.38 以降で利用可能。
 
 `DD_SERVICE`
-: このアプリケーションで使用するサービス名。値は、Web フレームワークのインテグレーション (例: Pylons、Flask、Django) 用のミドルウェアを設定する際にパススルーされます。Web インテグレーションを行わずにトレースする場合は、[コード内でサービス名を設定する](#integrations)ことをお勧めします。バージョン 0.38 以降で利用可能。
+: このアプリケーションで使用するサービス名。値は、Web フレームワークのインテグレーション (例: Pylons、Flask、Django) 用のミドルウェアを設定する際にパススルーされます。Web インテグレーションを行わずにトレースする場合は、コード内でサービス名を設定する ([Django ドキュメントで例をご確認ください][7]) ことをお勧めします。バージョン 0.38 以降で利用可能。
 
 `DD_SERVICE_MAPPING`
 : サービス名のマッピングを定義し、トレース内におけるサービスの名前変更を許可します (例: `postgres:postgresql,defaultdb:postgresql`)。バージョン 0.47 以降で利用可能。
@@ -164,7 +164,7 @@ Web フレームワークとライブラリインスツルメンテーション�
 
 `DD_LOGS_INJECTION`
 : **デフォルト**: `false`<br>
-[ログとトレースの挿入を接続する][7]を有効にします。
+[ログとトレースの挿入を接続する][8]を有効にします。
 
 ## その他の参考資料
 
@@ -176,4 +176,5 @@ Web フレームワークとライブラリインスツルメンテーション�
 [4]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#ddtracerun
 [5]: /ja/getting_started/tagging/unified_service_tagging
 [6]: /ja/tracing/guide/setting_primary_tags_to_scope/
-[7]: /ja/tracing/connect_logs_and_traces/python/
+[7]: https://ddtrace.readthedocs.io/en/stable/integrations.html#django
+[8]: /ja/tracing/connect_logs_and_traces/python/

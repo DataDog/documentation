@@ -24,7 +24,7 @@ kind: ドキュメント
 - すべてのオプションパラメーターはデフォルトでコメントにされます。
 - プレースホルダーにインテグレーションのデフォルト値がある場合 (たとえば、インテグレーションのステータスエンドポイント)、それを汎用プレースホルダーの代わりに使用できます。
 
-### @param の指定
+### `@param` の指定
 
 事実上 `@param` が唯一のコマンドです。`@param` は、主に文書化の目的で構成ブロックについて説明するために使用され、以下のいずれかの形式を使用して実装されます。
 
@@ -83,7 +83,7 @@ YAML 構文の詳細については、[Wikipedia][2] を参照してください
 | `maintainer`                | 文字列          | 必須          | インテグレーションの所有者の電子メール。                                                                                                                                                                                   |
 | `manifest_version`          | 文字列          | 必須          | 現在のマニフェストのバージョン。                                                                                                                                                                                         |
 | `name`                      | 文字列          | 必須          | インテグレーションの一意の名前。このパラメーターにはフォルダー名を使用します。                                                                                                                                                 |
-| `public_title`              | 文字列          | 必須          | ドキュメントに表示されるインテグレーションのタイトル。`Datadog-<INTEGRATION_NAME> integration` の形式に従う必要があります。                                                                                   |
+| `public_title`              | 文字列          | 必須          | ドキュメントに表示されるインテグレーションのタイトル。`<INTEGRATION_NAME>` の形式に従う必要があります。                                                                                   |
 | `short_description`         | 文字列          | 必須          | このテキストは、インテグレーションページで、インテグレーションタイルの先頭およびインテグレーションのロールオーバーテキストに表示されます。最大 80 文字。                                                                         |
 | `support`                   | 文字列          | 必須          | インテグレーションの所有者。                                                                                                                                                                                                |
 | `supported_os`              | 文字列の配列 | 必須          | サポートされている OS のリスト。`linux`、`mac_os`、`windows` から選択します。                                                                                                                                                     |
@@ -138,6 +138,6 @@ YAML 構文の詳細については、[Wikipedia][2] を参照してください
 [3]: http://yaml-online-parser.appspot.com/
 [4]: https://docs.datadoghq.com/ja/integrations/
 [5]: https://www.uuidgenerator.net
-[6]: https://docs.datadoghq.com/ja/developers/metrics/metrics_type/
-[7]: https://docs.datadoghq.com/ja/developers/metrics/metrics_units/
+[6]: https://docs.datadoghq.com/ja/metrics/metrics_type/
+[7]: https://docs.datadoghq.com/ja/metrics/metrics_units/
 [8]: https://docs.datadoghq.com/ja/getting_started/tagging/

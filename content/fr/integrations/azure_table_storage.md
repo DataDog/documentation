@@ -5,11 +5,13 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Surveillez des métriques clés de Stockage Table Azure.
-doc_link: 'https://docs.datadoghq.com/integrations/azure_table_storage/'
+doc_link: https://docs.datadoghq.com/integrations/azure_table_storage/
 draft: false
 git_integration_title: azure_table_storage
 has_logo: true
+integration_id: azure-table-storage
 integration_title: Stockage Table Microsoft Azure
+integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'
@@ -27,7 +29,7 @@ Recueillez des métriques de Stockage Table Azure pour :
 - Visualiser les performances de votre stockage de tables
 - Corréler les performances de votre stockage de tables avec vos applications
 
-## Implémentation
+## Configuration
 
 ### Installation
 

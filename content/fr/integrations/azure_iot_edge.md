@@ -2,7 +2,8 @@
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
-  dashboards: {}
+  dashboards:
+    azure_iot_edge: assets/dashboards/overview.json
   logs:
     source: azure.iot_edge
   metrics_metadata: metadata.csv
@@ -89,7 +90,7 @@ Suivez les étapes ci-dessous pour configurer l'appareil IoT Edge, les modules d
 
 3. Installez et configurez l'Agent Datadog en tant que **module personnalisé** :
     - Définissez le nom du module. Par exemple : `datadog-agent`.
-    - Définissez l'URI de l'image de l'Agent. Par exemple : `datadog/agent:7`.
+    - Définissez l'URI de l'image de l'Agent. Par exemple : `gcr.io/datadoghq/agent:7`.
     - Sous « Environment Variables », configurez votre `DD_API_KEY`. Vous pouvez également définir d'autres paramètres de configuration ici (voir [Variables d'environnement de l'Agent][6]).
     - Sous « Container Create Options », ajoutez la configuration suivante en fonction du système d'exploitation de votre appareil. **Remarque** : `NetworkId` doit correspondre au nom de réseau défini dans le fichier `config.yaml` de l'appareil.
 
@@ -168,6 +169,10 @@ Azure IoT Edge n'inclut aucun événement.
 
 Besoin d'aide ? Contactez [l'assistance Datadog][9].
 
+## Pour aller plus loin
+
+- [Surveiller Azure IoT Edge avec Datadog][10]
+
 [1]: https://azure.microsoft.com/en-us/services/iot-edge/
 [2]: https://docs.datadoghq.com/fr/agent/
 [3]: https://docs.microsoft.com/en-us/azure/iot-edge/how-to-deploy-modules-portal
@@ -177,3 +182,4 @@ Besoin d'aide ? Contactez [l'assistance Datadog][9].
 [7]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
 [8]: https://github.com/DataDog/integrations-core/blob/master/azure_iot_edge/metadata.csv
 [9]: https://docs.datadoghq.com/fr/help/
+[10]: https://www.datadoghq.com/blog/monitor-azure-iot-edge-with-datadog/

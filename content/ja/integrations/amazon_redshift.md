@@ -12,6 +12,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/amazon_redshift/'
 draft: false
 git_integration_title: amazon_redshift
 has_logo: true
+integration_id: amazon-redshift
 integration_title: Amazon Redshift
 is_public: true
 kind: インテグレーション
@@ -48,7 +49,7 @@ Amazon Redshift は、ペタバイトスケールの高速なフルマネージ�
 
 ### ログの収集
 
-#### AWS Redshift ログの有効化
+#### ログの有効化
 
 ログを収集するには、まず Redshift Cluster でログを有効にします。Redshift ログを AWS S3 バケットに書き込み、[Lambda 関数で使用][6]します。[詳細については、AWS のドキュメントを参照してください][7]。
 

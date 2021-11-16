@@ -20,7 +20,7 @@ Datadog Lambda 拡張機能は以下を担当します。
 
 Datadog 拡張機能は、カスタムメトリクス、拡張メトリクス、トレース、およびログを[非同期的に][4]送信します。拡張機能を使用した Lambda ログの送信は、すべての Lambda ランタイムでサポートされています。カスタム メトリクス、強化されたメトリクス、およびトレースの送信は、Node.js および Python Lambda ランタイムでサポートされています。
 
-## Datadog Lambda 拡張機能のセットアップ
+## Datadog Lambda 拡張機能
 
 AWS サーバーレスアプリケーションをインスツルメントするには、[サーバーレスインストール手順][5]を参照してください。
 
@@ -38,7 +38,7 @@ Datadog Lambda 拡張機能は、独自の Lambda レイヤー ([Datadog Lambda 
 
     ARN のプレイスホルダーの値を次のように置き換えます。
     - Replace `<AWS_REGION>` を Lambda 関数と同じ AWS リージョンに置き換えます。例、 `us-east-1`
-    - <EXTENSION_VERSION>` を使用する Datadog Lambda 拡張機能のバージョン（たとえば `7`）に置き換えます。 現在のバージョンを確認するには、[Amazon ECR リポジトリ][9]で最新のイメージタグを表示します。
+    - `<EXTENSION_VERSION>` を使用したい Datadog Lambda 拡張機能のバージョンに置き換えます。最新バージョンは `{{< latest-lambda-layer-version layer="extension" >}} です。
 
     **注**: このレイヤーは Datadog Lambda ライブラリとは別のものです。Datadog Lambda ライブラリを Lambda レイヤーとしてインストールした場合、
     関数には 2 つの Lambda レイヤーがアタッチされることになります。
@@ -59,7 +59,7 @@ Datadog Lambda 拡張機能は、独自の Lambda レイヤー ([Datadog Lambda 
 COPY --from=public.ecr.aws/datadog/lambda-extension:<TAG> /opt/extensions/ /opt/extensions
 ```
 
-`<TAG>` を特定のバージョン番号（たとえば `7`) または `latest` に置き換えます。利用可能なタグのリストは、[Amazon ECR リポジトリ][9]で確認できます。
+`<TAG>` を特定のバージョン番号 (たとえば `{{< latest-lambda-layer-version layer="python" >}}`) または `latest` に置き換えます。利用可能なタグのリストは、[Amazon ECR リポジトリ][9]で確認できます。
 
 3. 環境変数 `DD_API_KEY` を追加し、[API 管理ページ][10]で Datadog API キーに値を設定します。
 

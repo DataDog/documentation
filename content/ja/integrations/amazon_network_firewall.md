@@ -9,6 +9,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/amazon_network_firewall/'
 draft: false
 git_integration_title: amazon_network_firewall
 has_logo: true
+integration_id: amazon-network-firewall
 integration_title: Amazon Network Firewall
 is_public: true
 kind: インテグレーション
@@ -50,7 +51,7 @@ Amazon Network Firewall から S3 バケットまたは CloudWatch のいずれ�
 2. lambda 関数がインストールされたら、AWS コンソールで、Amazon Network Firewall ログを含む S3 バケットまたは CloudWatch のロググループに手動でトリガーを追加します。
 
     - [S3 バケットに手動トリガーを追加][5]
-    - [Cloudwatch ロググループに手動トリガーを追加][6]
+    - [CloudWatch ロググループに手動トリガーを追加][6]
 
 ## 収集データ
 

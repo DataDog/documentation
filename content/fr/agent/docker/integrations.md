@@ -19,7 +19,7 @@ further_reading:
     text: Attribuer des tags à toutes les données émises par un conteneur
 ---
 <div class="alert alert-info">
-<a href="/getting_started/agent/autodiscovery">Consultez la documentation Débuter avec Autodiscovery pour découvrir les concepts sous-jacents de cette fonctionnalité</a>.
+Consultez la documentation <a href="/getting_started/agent/autodiscovery">Débuter avec Autodiscovery</a> pour découvrir les concepts sous-jacents de cette fonctionnalité.
 </div>
 
 Cette page traite de la configuration des intégrations Autodiscovery avec Docker. Si vous utilisez Kubernetes, consultez la [documentation relative aux intégrations Autodiscovery avec Kubernetes][1]. 
@@ -38,9 +38,9 @@ Utilisez les paramètres suivants afin de configurer une intégration avec Autod
 
 Chaque onglet des sections ci-dessous présente une façon différente d'appliquer des modèles d'intégration à un conteneur donné. Vous pouvez utiliser les éléments suivants :
 
-* [Des étiquettes Docker](?tab=docker#configuration)
-* [Un fichier de configuration monté dans l'Agent](?tab=file#configuration)
-* [Des stockages key/value](?tab=keyvaluestore#configuration)
+* [Étiquettes Docker](?tab=docker#configuration)
+* [Un fichier de configuration monté dans l'Agent](?tab=fichier#configuration)
+* [Stockages clé-valeur](?tab=stockagecle-valeur#configuration)
 
 **Remarque** : certaines intégrations prises en charge ne fonctionnent pas avec Autodiscovery par défaut, car elles nécessitent un accès à l'arborescence des processus ou au système de fichiers : c'est le cas de [Ceph][4], [Varnish][5], [Postfix][6], [Cassandra Nodetools][7] et [Gunicorn][8]. Pour activer Autodiscovery pour ces intégrations, utilisez l'exportateur Prometheus officiel dans le pod, puis faites appel à Autodiscovery dans l'Agent pour identifier le pod et interroger l'endpoint.
 
@@ -93,8 +93,10 @@ services:
 
 ```
 
-**Remarque** : lors de la configuration d'Autodiscovery, Datadog recommande l'utilisation des étiquettes Docker afin d'unifier la télémétrie au sein de votre environnement conteneurisé. Consultez la documentation relative au [tagging de service unifié][11] pour en savoir plus.
+**Remarque** : lors de la configuration d'Autodiscovery, Datadog recommande l'utilisation des étiquettes Docker afin d'unifier la télémétrie au sein de votre environnement conteneurisé. Consultez la documentation relative au [tagging de service unifié][1] pour en savoir plus.
 
+
+[1]: /fr/getting_started/tagging/unified_service_tagging/?tab=docker
 {{% /tab %}}
 {{% tab "Fichier" %}}
 
@@ -223,8 +225,8 @@ Cette [configuration d'intégration Redis][1] peut sembler succincte, mais notez
 
 Si votre Redis requiert un `password` supplémentaire pour accéder à son endpoint stats :
 
-1. Créez les dossiers `conf.d/` et `conf.d/redis.d` sur votre host.
-2. Ajoutez le fichier de configuration automatique personnalisé ci-dessous à `conf.d/redis.d/conf.yaml` sur votre host.
+1. Créez les dossiers `conf.d/` et `conf.d/redisdb.d` sur votre host.
+2. Ajoutez le fichier de configuration automatique personnalisé ci-dessous à `conf.d/redisdb.d/conf.yaml` sur votre host.
 3. Montez le répertoire `conf.d/` du host dans le répertoire `conf.d/` de l'Agent conteneurisé.
 
 ```yaml
@@ -261,7 +263,7 @@ Notez que chacune des trois valeurs est une liste. Autodiscovery assemble les é
 
 **Remarque** : la logique de template variable `"%%env_<ENV_VAR>%%"` est utilisée afin d'éviter de stocker le mot de passe en clair. La variable d'environnement `REDIS_PASSWORD` doit donc être transmise à l'Agent. Consultez la [documentation relative aux template variables Autodiscovery][1].
 
-Contrairement aux fichiers de configuration automatique, **les stockages clé-valeur peuvent utiliser la version courte OU la version longue du nom d'image comme identificateur de conteneur**, p. ex. `redis` OU `redis:latest`.
+Contrairement aux fichiers de configuration automatique, **les stockages clé-valeur peuvent utiliser la version courte OU la version longue du nom d'image comme identificateur de conteneur**, par exemple : `redis` OU `redis:latest`.
 
 [1]: /fr/agent/faq/template_variables/
 {{% /tab %}}

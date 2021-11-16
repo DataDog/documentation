@@ -5,6 +5,7 @@ aliases:
   - /ja/security_monitoring/default_rules/aws-cloudtrail-enabled
 cloud: AWS
 disable_edit: true
+integration_id: amazon-cloudtrail
 kind: documentation
 rule_category:
   - クラウドコンフィギュレーション
@@ -26,12 +27,12 @@ AWS CloudTrail を使用すると、1 か所からリージョンを構成しイ
 
 ### コンソール
 
-CloudTrail のご利用を開始するには、[AWS CloudTrail チュートリアル][3]ドキュメントを参照してください。
+CloudTrail のご利用を開始するには、[AWS CloudTrail チュートリアル][1]ドキュメントを参照してください。
 
 ### CLI
 
 1. `aws cloudtrail describe-trails` を実行
-2. 上記で返された証跡の名前に `update-trail` を実行し、[multi-region-trail を有効][1]にします。
+2. 上記で返された証跡の名前に `update-trail` を実行し、[multi-region-trail を有効][2]にします。
 
     {{< code-block lang="bash" filename="update-trail.sh" >}}
     aws cloudtrail update-trail
@@ -39,5 +40,5 @@ CloudTrail のご利用を開始するには、[AWS CloudTrail チュートリ�
         --is-multi-region-trail
     {{< /code-block >}}
 
-[1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-create-and-update-a-trail-by-using-the-aws-cli-update-trail.html
-[2]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-tutorial.html#tutorial-step2
+[1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-tutorial.html#tutorial-step2
+[2]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-create-and-update-a-trail-by-using-the-aws-cli-update-trail.html

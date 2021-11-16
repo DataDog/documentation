@@ -2,6 +2,7 @@
 title: Widget Résumé des monitors
 kind: documentation
 description: Affichez une vue synthétique de tous vos monitors Datadog ou d'un sous-ensemble filtré selon une requête.
+widget_type: manage_status
 aliases:
   - /fr/graphing/widgets/monitor_summary/
 further_reading:
@@ -62,42 +63,11 @@ Vous pouvez aussi définir sa taille et son alignement si vous le souhaitez.
 
 ## API
 
-Le [schéma JSON][3] utilisé pour le widget Résumé des monitors est le suivant :
+Ce widget peut être utilisé avec l'**API Dashboards**. Consultez la [documentation à ce sujet][3] pour en savoir plus.
 
-```text
-MANAGE_STATUS_SCHEMA = {
-    "type": "object",
-    "properties": {
-        "type": {"enum": ["manage_status"]},
-        "query": {"type": "string"},
-        "summary_type": {"enum": ["monitors", "groups", "combined"]},
-        "sort": {"type": "string"},
-        "display_format": {"enum": ["counts", "countsAndList", "list"]},
-        "color_preference": {"enum": ["background", "text"]},
-        "hide_zero_counts": {"type": "boolean"},
-        "show_last_triggered": {"type": "boolean"},
-        "title": {"type": "string"},
-        "title_size": {"type": "string"},
-        "title_align": {"enum": ["center", "left", "right"]}
-    },
-    "required": ["type", "query"],
-    "additionalProperties": false
-}
-```
+Le [schéma JSON][4] utilisé pour le widget Résumé des monitors est le suivant :
 
-| Paramètre             | Type    | Obligatoire | Description                                                                              |
-|-----------------------|---------|----------|------------------------------------------------------------------------------------------|
-| `type`                | chaîne  | oui      | Type du widget (utilisez `manage_status` pour le widget Résumé des monitors).                   |
-| `query`               | chaîne  | oui      | Requête à l'aide de laquelle les monitors sont filtrés.                                                        |
-| `summary_type`        | chaîne  | non       | Type de résumé à utiliser.                                                        |
-| `sort`                | chaîne  | non       | Le critère de tri des résultats : `status,asc`, par exemple. Valeurs de champ disponibles : `group`, `name`, `status` ou `triggered`. Valeurs d'ordre disponibles : `asc` ou `desc`. Valeur par défaut : `status,asc`.|
-| `display_format`      | chaîne  | non       | Les éléments à afficher sur le widget. Valeurs disponibles : `counts`, `countsAndList` ou `list`. |
-| `color_preference`    | chaîne  | non       | La couleur du widget. Valeurs disponibles : `background` ou `text`           |
-| `hide_zero_counts`    | Booléen | non       | Afficher ou masquer le nombre lorsque celui-ci est de 0.                                                       |
-| `show_last_triggered` | Booléen | non       | Permet d'afficher ou non le temps écoulé depuis le déclenchement du monitor/groupe.              |
-| `title`               | chaîne  | non       | Titre du widget.                                                                      |
-| `title_size`          | chaîne  | non       | Taille du titre.                                                                        |
-| `title_align`         | chaîne  | non       | Définit comment aligner le titre. Valeurs disponibles : `center`, `left` ou `right`.               |
+{{< dashboards-widgets-api >}}
 
 ## Pour aller plus loin
 
@@ -105,4 +75,5 @@ MANAGE_STATUS_SCHEMA = {
 
 [1]: /fr/monitors/manage_monitor/
 [2]: /fr/monitors/manage_monitor/#manage-triggered-monitors-with-group-level-granularity
-[3]: /fr/dashboards/graphing_json/widget_json/
+[3]: /fr/api/v1/dashboards/
+[4]: /fr/dashboards/graphing_json/widget_json/

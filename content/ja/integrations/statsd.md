@@ -11,10 +11,11 @@ assets:
 categories:
   - monitoring
   - autodiscovery
+  - log collection
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/statsd/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/statsd/README.md
 display_name: StatsD
 draft: false
 git_integration_title: statsd
@@ -126,12 +127,8 @@ StatsD チェックは [Datadog Agent][1] パッケージに含まれていま�
 StatsD チェックには、イベントは含まれません。
 
 ### サービスのチェック
+{{< get-service-checks-from-git "statsd" >}}
 
-**statsd.is_up**:<br>
-StatsD サーバーが Agent の健全性ステータスリクエストに応答しない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
-
-**statsd.can_connect**:<br>
-Agent が StatsD に関するメトリクスを収集できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
 
 ## トラブルシューティング
 

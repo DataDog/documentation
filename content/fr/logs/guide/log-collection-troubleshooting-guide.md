@@ -4,10 +4,10 @@ kind: guide
 aliases:
   - /fr/logs/faq/log-collection-troubleshooting-guide
 further_reading:
-  - link: /logs/log_collection
+  - link: /logs/log_collection/
     tag: Documentation
     text: Apprendre à recueillir vos logs
-  - link: /logs/explorer
+  - link: /logs/explorer/
     tag: Documentation
     text: Apprendre à explorer vos logs
   - link: /logs/faq/why-do-my-logs-not-have-the-expected-timestamp/
@@ -19,7 +19,7 @@ further_reading:
 ---
 Plusieurs problèmes courants peuvent survenir lors de [l'envoi de nouveaux logs à Datadog][1] via le collecteur de logs dans `dd-agent`. Si vous rencontrez des problèmes lors de l'envoi de nouveaux logs à Datadog, la liste suivante peut vous aider à les corriger. Si vous ne parvenez pas à résoudre votre problème, [contactez l'assistance Datadog][2] pour obtenir de l'aide.
 
-## L'Agent doit être redémarré
+## Redémarrez l'Agent
 
 Les modifications de la configuration de `datadog-agent` prennent uniquement effet une fois [l'Agent Datadog redémarré][3].
 
@@ -95,9 +95,9 @@ Définissez les autorisations sur `644` dans la configuration de la rotation de 
 
 ## Problème d'autorisation et Journald
 
-Lorsque vous recueillez des logs à partir de journald, assurez-vous que l'utilisateur de l'Agent Datadog est ajouté au groupe systemd en suivant les instructions de l'[intégration journald][7].
+Lorsque vous recueillez des logs à partir de Journald, assurez-vous que l'utilisateur de l'Agent Datadog est ajouté au groupe systemd en suivant les instructions de l'[intégration Journald][7].
 
-Notez que journald envoie une charge utile vide si les autorisations du fichier sont incorrectes. Il n'est donc pas possible de générer ou d'envoyer un message d'erreur explicite dans ce cas.
+Remarque : Journald envoie une charge utile vide si les autorisations du fichier sont incorrectes. Il n'est donc pas possible de générer ou d'envoyer un message d'erreur explicite dans ce cas.
 
 ## Problèmes de configuration
 
@@ -125,38 +125,25 @@ Consulter le [Guide de dépannage pour la collecte de logs Docker][9]
 
 ## Environnement sans serveur
 
-### Les logs des fonctions lambda ne sont pas visibles sur la page Log Explorer
+Consulter le [guide de dépannage pour la collecte de logs Lambda][10]
 
-Consultez l'[intégration Datadog/AWS][10] pour configurer votre environnement. Si vous ne voyez toujours pas vos logs, vérifiez à nouveau les points suivants :
+## Filtrage inattendu de logs
 
-#### Configuration de la fonction lambda
-
-Vérifiez le paramètre de configuration du lambda de Datadog :
-
-* `<CLÉ_API>` : doit être remplacé par votre [clé d'API Datadog][11], soit directement dans le code Python, soit via une variable d'environnement. Si vous gérez plusieurs plateformes, vérifiez à nouveau que vous utilisez la bonne clé d'API pour chaque plateforme.
-
-#### Fonction lambda déclenchée
-
-Vérifiez que la fonction lambda de Datadog est bien déclenchée en utilisant les métriques `aws.lambda.invocations` et `aws.lambda.errors` avec le tag `functionname` de votre fonction lambda dans Datadog. Vous pouvez également vérifier la présence d'erreurs dans les logs lambda de Datadog dans Cloudwatch.
-
-## Filtrage attendu des logs
-
-Vérifiez que les logs apparaissent bien sur la page [Live Tail de Datadog][12]. Si c'est le cas, recherchez sur la page de configuration des index tout [filtre d'exclusion][13] qui pourrait entraîner le filtrage de vos logs.
+Vérifiez que les logs apparaissent bien sur la page [Live Tail de Datadog][11]. Si c'est le cas, recherchez sur la page de configuration des index tout [filtre d'exclusion][12] qui pourrait entraîner le filtrage de vos logs.
 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/logs
-[2]: /fr/help
+[1]: /fr/logs/
+[2]: /fr/help/
 [3]: /fr/agent/guide/agent-commands/#restart-the-agent
 [4]: /fr/agent/logs/log_transport?tab=https#enforce-a-specific-transport
 [5]: /fr/agent/guide/agent-commands/#agent-status-and-information
 [6]: https://en.wikipedia.org/wiki/Chmod
 [7]: /fr/integrations/journald/
 [8]: https://codebeautify.org/yaml-validator
-[9]: /fr/logs/guide/docker-logs-collection-troubleshooting-guide
-[10]: /fr/integrations/amazon_web_services/?tab=allpermissions#set-up-the-datadog-lambda-function
-[11]: https://app.datadoghq.com/account/settings#api
-[12]: https://app.datadoghq.com/logs/livetail
-[13]: /fr/logs/indexes/#exclusion-filters
+[9]: /fr/logs/guide/docker-logs-collection-troubleshooting-guide/
+[10]: /fr/logs/guide/lambda-logs-collection-troubleshooting-guide/
+[11]: https://app.datadoghq.com/logs/livetail
+[12]: /fr/logs/indexes/#exclusion-filters

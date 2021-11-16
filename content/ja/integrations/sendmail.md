@@ -64,17 +64,18 @@ Agent v6.8 以降を使用している場合は、以下の手順に従って、
 {{< get-metrics-from-git "sendmail" >}}
 
 
-### サービスのチェック
-
-`sendmail.returns.output`: sendmail コマンドが出力を返さない場合は CRITICAL を返し、それ以外の場合は OK を返します。
-
 ### イベント
 
 Sendmail には、イベントは含まれません。
 
+### サービスのチェック
+{{< get-service-checks-from-git "sendmail" >}}
+
+
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][11]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][12]までお問合せください。
+
 
 [1]: https://www.proofpoint.com/us/open-source-email-solution
 [2]: https://docs.datadoghq.com/ja/agent/guide/community-integrations-installation-with-docker-agent/
@@ -86,4 +87,5 @@ Sendmail には、イベントは含まれません。
 [8]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [9]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [10]: https://github.com/DataDog/integrations-extras/blob/master/sendmail/metadata.csv
-[11]: https://docs.datadoghq.com/ja/help/
+[11]: https://github.com/DataDog/integrations-extras/blob/master/sendmail/assets/service_checks.json
+[12]: https://docs.datadoghq.com/ja/help/

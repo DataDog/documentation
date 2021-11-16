@@ -10,24 +10,16 @@ further_reading:
       text: "Troubleshooting CI"
 ---
 
+{{< site-region region="us5,gov" >}}
+<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
+{{< /site-region >}}
+
 ## Compatibility
 
-Supported Test frameworks:
-* JUnit 4.10+
-* JUnit 5.3+
-* TestNG 6.4+
-* Frameworks that are based on JUnit, such as Spock Framework and Cucumber-Junit
-
-Supported CI providers:
-* Appveyor
-* Azure Pipelines
-* BitBucket
-* BuildKite
-* CircleCI
-* GitHub Actions
-* GitLab
-* Jenkins
-* TravisCI
+Supported test frameworks:
+* JUnit >= 4.10 and >= 5.3
+  * Also includes any test framework based on JUnit, such as Spock Framework and Cucumber-Junit
+* TestNG >= 6.4
 
 ## Prerequisites
 
@@ -35,66 +27,81 @@ Supported CI providers:
 
 ## Installing the Java tracer
 
-### Using Maven
+{{< tabs >}}
+{{% tab "Maven" %}}
 
-Add a new Maven profile in your root `pom.xml` configuring the Datadog Java tracer dependency and the `javaagent` arg property, replacing `$VERSION` with the latest version of the tracer accessible from the [Maven Repository][2]: 
+Add a new Maven profile in your root `pom.xml` configuring the Datadog Java tracer dependency and the `javaagent` arg property, replacing `$VERSION` with the latest version of the tracer accessible from the [Maven Repository][1] (without the preceding `v`): ![Maven Central][2]
 
-{{< code-block lang="xml" >}}
+{{< code-block lang="xml" filename="pom.xml" >}}
 <profile>
-  <id>ci-app</id>
+  <id>dd-civisibility</id>
   <activation>
     <activeByDefault>false</activeByDefault>
   </activation>
-
   <properties>
-    <dd.java.agent.arg>-javaagent:${settings.localRepository}/com/datadoghq/dd-java-agent/$VERSION/dd-java-agent-$VERSION.jar</dd.java.agent.arg>
+    <dd.java.agent.arg>-javaagent:${settings.localRepository}/com/datadoghq/dd-java-agent/$VERSION/dd-java-agent-$VERSION.jar -Ddd.service=my-java-app -Ddd.prioritization.type=ENSURE_TRACE -Ddd.jmxfetch.enabled=false -Ddd.integrations.enabled=false -Ddd.integration.junit.enabled=true -Ddd.integration.testng.enabled=true</dd.java.agent.arg>
   </properties>
-
   <dependencies>
     <dependency>
         <groupId>com.datadoghq</groupId>
         <artifactId>dd-java-agent</artifactId>
         <version>$VERSION</version>
         <scope>provided</scope>
-    </dependency>  
-  </dependencies> 
+    </dependency>
+  </dependencies>
 </profile>
 {{< /code-block >}}
 
-### Using Gradle
 
-Add the `ddTracerAgent` entry to the `configurations` task block, and add the Datadog Java tracer dependency, replacing `$VERSION` with the latest version of the tracer available in the [Maven Repository][2].
+[1]: https://mvnrepository.com/artifact/com.datadoghq/dd-java-agent
+[2]: https://img.shields.io/maven-central/v/com.datadoghq/dd-java-agent?style=flat-square
+{{% /tab %}}
+{{% tab "Gradle" %}}
 
-{{< code-block lang="groovy" >}}
+Add the `ddTracerAgent` entry to the `configurations` task block, and add the Datadog Java tracer dependency, replacing `$VERSION` with the latest version of the tracer available in the [Maven Repository][1] (without the preceding `v`): ![Maven Central][2]
+
+{{< code-block lang="groovy" filename="build.gradle" >}}
 configurations {
     ddTracerAgent
 }
-
 dependencies {
     ddTracerAgent "com.datadoghq:dd-java-agent:$VERSION"
 }
 {{< /code-block >}}
 
+
+[1]: https://mvnrepository.com/artifact/com.datadoghq/dd-java-agent
+[2]: https://img.shields.io/maven-central/v/com.datadoghq/dd-java-agent?style=flat-square
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Instrumenting your tests
 
-### Using Maven
+{{< tabs >}}
+{{% tab "Maven" %}}
 
-Configure the [Maven Surefire Plugin][3] and/or the [Maven Failsafe Plugin][4] to use Datadog Java agent (use `-Ddd.integration.testng.enabled=true` if your testing framework is TestNG rather than JUnit):
+Configure the [Maven Surefire Plugin][1] or the [Maven Failsafe Plugin][2] (or both if you use both) to use Datadog Java agent, specifying the name of the service or library under test with the `-Ddd.service` property:
 
-{{< code-block lang="xml" >}}
+* If using the [Maven Surefire Plugin][1]:
+
+{{< code-block lang="xml" filename="pom.xml" >}}
 <plugin>
   <groupId>org.apache.maven.plugins</groupId>
   <artifactId>maven-surefire-plugin</artifactId>
   <configuration>
-    <argLine>${dd.java.agent.arg} -Ddd.prioritization.type=ENSURE_TRACE -Ddd.jmxfetch.enabled=false -Ddd.integrations.enabled=false -Ddd.integration.junit.enabled=true</argLine>
+    <argLine>${dd.java.agent.arg}</argLine>
   </configuration>
 </plugin>
+{{< /code-block >}}
 
+* If using the [Maven Failsafe Plugin][2]:
+
+{{< code-block lang="xml" filename="pom.xml" >}}
 <plugin>
   <groupId>org.apache.maven.plugins</groupId>
   <artifactId>maven-failsafe-plugin</artifactId>
   <configuration>
-     <argLine>${dd.java.agent.arg} -Ddd.prioritization.type=ENSURE_TRACE -Ddd.jmxfetch.enabled=false -Ddd.integrations.enabled=false -Ddd.integration.junit.enabled=true</argLine>
+     <argLine>${dd.java.agent.arg}</argLine>
   </configuration>
   <executions>
       <execution>
@@ -107,95 +114,115 @@ Configure the [Maven Surefire Plugin][3] and/or the [Maven Failsafe Plugin][4] t
 </plugin>
 {{< /code-block >}}
 
-Run your tests using the `ci-app` profile, for example:
+Run your tests as you normally do, specifying the environment where tests are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable. For example:
 
 {{< code-block lang="bash" >}}
-mvn clean verify -P ci-app
+DD_ENV=ci mvn clean verify -Pdd-civisibility
 {{< /code-block >}}
 
-### Using Gradle
 
-Configure the `test` Gradle task by adding to the `jvmArgs` attribute the `-javaagent` argument targeting the Datadog Java tracer based on the `configurations.ddTracerAgent` property (use `-Ddd.integration.testng.enabled=true` if your testing framework is TestNG rather than JUnit):
+[1]: https://maven.apache.org/surefire/maven-surefire-plugin/
+[2]: https://maven.apache.org/surefire/maven-failsafe-plugin/
+{{% /tab %}}
+{{% tab "Gradle" %}}
 
-{{< code-block lang="groovy" >}}
+Configure the `test` Gradle task by adding to the `jvmArgs` attribute the `-javaagent` argument targeting the Datadog Java tracer based on the `configurations.ddTracerAgent` property, specifying the name of the service or library under test with the `-Ddd.service` property:
+
+{{< code-block lang="groovy" filename="build.gradle" >}}
 test {
-    jvmArgs = ["-javaagent:${configurations.ddTracerAgent.asPath}", "-Ddd.prioritization.type=ENSURE_TRACE", "-Ddd.jmxfetch.enabled=false", "-Ddd.integrations.enabled=false", "-Ddd.integration.junit.enabled=true"]
+  if(project.hasProperty("dd-civisibility")) {
+    jvmArgs = ["-javaagent:${configurations.ddTracerAgent.asPath}", "-Ddd.service=my-java-app", "-Ddd.prioritization.type=ENSURE_TRACE", "-Ddd.jmxfetch.enabled=false", "-Ddd.integrations.enabled=false", "-Ddd.integration.junit.enabled=true", "-Ddd.integration.testng.enabled=true"]
+  }
 }
 {{< /code-block >}}
 
-Run your tests as you normally do, for example:
+Run your tests as you normally do, specifying the environment where test are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable. For example:
 
 {{< code-block lang="bash" >}}
-./gradlew cleanTest test --rerun-tasks
+DD_ENV=ci ./gradlew cleanTest test -Pdd-civisibility --rerun-tasks
 {{< /code-block >}}
 
-**Important:** As Gradle builds can be customizable programmatically, you may need to adapt these steps to your specific build configuration.
+**Note:** As Gradle builds can be customizable programmatically, you may need to adapt these steps to your specific build configuration.
 
-## Configuration options
+{{% /tab %}}
+{{< /tabs >}}
+
+## Configuration settings
 
 The following system properties set configuration options and have environment variable equivalents. If the same key type is set for both, the system property configuration takes priority. System properties can be set as JVM flags.
 
-`dd.integration.junit.enabled`
-: When `true`, tests based on JUnit runners are reported.<br/>
-**Environment variable**: `DD_INTEGRATION_JUNIT_ENABLED`<br/>
-**Default**: `false`
+`dd.service`
+: Name of the service or library under test.<br/>
+**Environment variable**: `DD_SERVICE`<br/>
+**Default**: `unnamed-java-app`<br/>
+**Example**: `my-java-app`
 
-`dd.integration.testng.enabled`
-: When `true`, tests based on TestNG are reported.<br/>
-**Environment variable**: `DD_INTEGRATION_TESTNG_ENABLED`<br/>
-**Default**: `false`
+`dd.env`
+: Name of the environment where tests are being run.<br/>
+**Environment variable**: `DD_ENV`<br/>
+**Default**: `none`<br/>
+**Examples**: `local`, `ci`
 
-Additionally, set the tracer prioritization type to `EnsureTrace` to avoid dropping test spans.
+`dd.trace.agent.url`
+: Datadog Agent URL for trace collection in the form `http://hostname:port`.<br/>
+**Environment variable**: `DD_TRACE_AGENT_URL`<br/>
+**Default**: `http://localhost:8126`
 
-`dd.prioritization.type`
-: Set to `ENSURE_TRACE` to avoid dropping tests spans by the tracer.<br/>
-**Environment variable**: `DD_PRIORITIZATION_TYPE`<br/>
-**Default**: `FAST_LANE`
+All other [Datadog Tracer configuration][2] options can also be used.
 
-All [Datadog tracer configuration][5] options can be used during the test phase.
-
-### Recommended configuration
-
-To improve the Datadog Java Agent startup, follow these configuration settings:
-
-System property: `dd.service`
-: **Environment variable**: `DD_SERVICE`<br/>
-**Default**: `unnamed-java-app`</br>
-**Set to**: The name of the Test Service that will appear in the CI Tests tab.
-
-System property: `dd.agent.host`
-: **Environment variable**: `DD_AGENT_HOST`<br/>
-**Default**: `localhost`</br>
-**Set to**: The Datadog Agent host.
-
-System property: `dd.trace.agent.port`
-: **Environment variable**: `DD_TRACE_AGENT_PORT`<br/>
-**Default**: `8126`</br>
-**Set to**: The Datadog Agent port.
-
-System property: `dd.integrations.enabled`
-: **Environment variable**: `DD_INTEGRATIONS_ENABLED`<br/>
-**Default**: `true`</br>
-**Recommendation**: `false`
-
-System property: `dd.integration.junit.enabled` or `dd.integration.testng.enabled`
-: **Environment variable**: `DD_INTEGRATION_JUNIT_ENABLED` or `DD_INTEGRATION_TESTNG_ENABLED`<br/>
-**Default**: `false`</br>
-**Recommendation**: `true`
-
-System property: `dd.prioritization.type`
-: **Environment variable**: `DD_PRIORITIZATION_TYPE`<br/>
-**Default**: `FAST_LANE`</br>
-**Recommendation**: `ENSURE_TRACE`
-
-System property: `dd.jmxfetch.enabled`
-: **Environment variable**: `DD_JMXFETCH_ENABLED`<br/>
-**Default**: `true`</br>
-**Recommendation**: `false`
-
-**Important:** You may want to enable more integrations if you have integration tests. To enable a specific integration, use the [Datadog Tracer Compatibility][6] table to create your custom setup for your integration tests.
+**Important:** You may want to enable more integrations if you have integration tests. To enable a specific integration, use the [Datadog Tracer Compatibility][3] table to create your custom setup for your integration tests.
 
 For example, to enable `OkHttp3` client request integration, add `-Ddd.integration.okhttp-3.enabled=true` to your setup.
+
+### Collecting Git metadata
+
+Datadog uses Git information for visualizing your test results and grouping them by repository, branch, and commit. Git metadata is automatically collected by the test instrumentation from CI provider environment variables and the local `.git` folder in the project path, if available.
+
+If you are running tests in non-supported CI providers or with no `.git` folder, you can set the Git information manually using environment variables. These environment variables take precedence over any auto-detected information. Set the following environment variables to provide Git information:
+
+`DD_GIT_REPOSITORY_URL`
+: URL of the repository where the code is stored. Both HTTP and SSH URLs are supported.<br/>
+**Example**: `git@github.com:MyCompany/MyApp.git`, `https://github.com/MyCompany/MyApp.git`
+
+`DD_GIT_BRANCH`
+: Git branch being tested. Leave empty if providing tag information instead.<br/>
+**Example**: `develop`
+
+`DD_GIT_TAG`
+: Git tag being tested (if applicable). Leave empty if providing branch information instead.<br/>
+**Example**: `1.0.1`
+
+`DD_GIT_COMMIT_SHA`
+: Full commit hash.<br/>
+**Example**: `a18ebf361cc831f5535e58ec4fae04ffd98d8152`
+
+`DD_GIT_COMMIT_MESSAGE`
+: Commit message.<br/>
+**Example**: `Set release number`
+
+`DD_GIT_COMMIT_AUTHOR_NAME`
+: Commit author name.<br/>
+**Example**: `John Smith`
+
+`DD_GIT_COMMIT_AUTHOR_EMAIL`
+: Commit author email.<br/>
+**Example**: `john@example.com`
+
+`DD_GIT_COMMIT_AUTHOR_DATE`
+: Commit author date in ISO 8601 format.<br/>
+**Example**: `2021-03-12T16:00:28Z`
+
+`DD_GIT_COMMIT_COMMITTER_NAME`
+: Commit committer name.<br/>
+**Example**: `Jane Smith`
+
+`DD_GIT_COMMIT_COMMITTER_EMAIL`
+: Commit committer email.<br/>
+**Example**: `jane@example.com`
+
+`DD_GIT_COMMIT_COMMITTER_DATE`
+: Commit committer date in ISO 8601 format.<br/>
+**Example**: `2021-03-12T16:00:28Z`
 
 
 ## Further reading
@@ -203,8 +230,5 @@ For example, to enable `OkHttp3` client request integration, add `-Ddd.integrati
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /continuous_integration/setup_tests/agent/
-[2]: https://mvnrepository.com/artifact/com.datadoghq/dd-java-agent
-[3]: https://maven.apache.org/surefire/maven-surefire-plugin/
-[4]: https://maven.apache.org/surefire/maven-failsafe-plugin/
-[5]: /tracing/setup_overview/setup/java/?tab=containers#configuration
-[6]: /tracing/setup_overview/compatibility_requirements/java
+[2]: /tracing/setup_overview/setup/java/?tab=containers#configuration
+[3]: /tracing/setup_overview/compatibility_requirements/java

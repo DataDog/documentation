@@ -14,6 +14,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/amazon_kinesis/'
 draft: false
 git_integration_title: amazon_kinesis
 has_logo: true
+integration_id: amazon-kinesis
 integration_title: Amazon Kinesis
 is_public: true
 kind: インテグレーション
@@ -65,7 +66,7 @@ AWS Firehose コンソールで Kinesis Firehose Delivery Stream を設定する
 2. lambda 関数がインストールされたら、AWS コンソールから、Amazon Kinesis ログを含む S3 バケットまたは CloudWatch のロググループに手動でトリガーを追加します。
 
     - [S3 バケットに手動トリガーを追加][9]
-    - [Cloudwatch ロググループに手動トリガーを追加][10]
+    - [CloudWatch ロググループに手動トリガーを追加][10]
 
 ## 収集データ
 

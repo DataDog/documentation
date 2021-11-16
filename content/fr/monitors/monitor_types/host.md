@@ -25,8 +25,15 @@ Pour créer un [monitor de host][1] dans Datadog, utilisez la navigation princip
 
 Sélectionnez les hosts à surveiller en spécifiant les hostnames ou des tags, ou sélectionnez `All Monitored Hosts`. Si vous souhaitez exclure certains hosts, spécifiez leurs hostnames ou des tags dans le second champ.
 
-* Le champ Include utilise la logique `AND`. Tous les hostnames et tags spécifiés doivent correspondre à un host pour que celui-ci soit inclus.
-* Le champ Exclude utilise la logique `OR`. Tout host correspondant à l'un des hostnames ou tags est exclu.
+- Le champ Include utilise la logique `AND`. Tous les hostnames et tags spécifiés doivent correspondre à un host pour que celui-ci soit inclus.
+- Le champ Exclude utilise la logique `OR`. Tout host correspondant à l'un des hostnames ou tags est exclu.
+
+#### Scénarios
+
+| Monitor                                                | Include               | Exclude     |
+|--------------------------------------------------------|-----------------------|-------------|
+| Inclure tous les hosts avec le tag `env:prod`              | `env:prod`            | Laisser vide |
+| Inclure tous les hosts, à l'exception de ceux avec le tag `env:test` | `All Monitored Hosts` | `env:test`  |
 
 ### Définir vos conditions d'alerte
 

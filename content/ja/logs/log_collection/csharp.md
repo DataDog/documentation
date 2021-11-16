@@ -1,22 +1,22 @@
 ---
-title: 'C# ログ収集'
+title: C# ログ収集
 kind: documentation
 aliases:
   - /ja/logs/languages/csharp
 further_reading:
-  - link: 'https://www.datadoghq.com/blog/c-logging-guide/'
+  - link: https://www.datadoghq.com/blog/c-logging-guide/
     tag: ブログ
-    text: 'C# ログの収集、カスタマイズ、分析方法'
-  - link: /logs/processing/
+    text: C# ログの収集、カスタマイズ、分析方法
+  - link: /logs/log_configuration/processors
     tag: Documentation
     text: ログの処理方法
-  - link: /logs/processing/parsing/
+  - link: /logs/log_configuration/parsing
     tag: Documentation
     text: パースの詳細
   - link: /logs/explorer/
     tag: Documentation
     text: ログの調査方法
-  - link: '/logs/explorer/#visualize'
+  - link: /logs/explorer/#visualize
     tag: Documentation
     text: ログ分析の実行
   - link: /logs/faq/log-collection-troubleshooting-guide/
@@ -408,8 +408,8 @@ using (var log = new LoggerConfiguration()
 ```
 
 [1]: https://www.nuget.org/packages/Serilog.Sinks.Datadog.Logs
-[2]: https://app.datadoghq.com/account/settings#api
-[3]: /ja/logs/processing/attributes_naming_convention/#reserved-attributes
+[2]: https://app.datadoghq.com/organization-settings/api-keys
+[3]: /ja/logs/log_configuration/attributes_naming_convention/#reserved-attributes
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -417,5 +417,5 @@ using (var log = new LoggerConfiguration()
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/logs/processing/parsing/
+[1]: /ja/logs/log_configuration/parsing
 [2]: /ja/tracing/connect_logs_and_traces/dotnet/

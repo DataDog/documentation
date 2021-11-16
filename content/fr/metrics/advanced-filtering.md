@@ -34,6 +34,9 @@ Vous pouvez utiliser la syntaxe suivante pour générer des requêtes de métriq
 - `IN`, `in`
 - `NOT IN`, `not in`
 
+**Remarque :** il n'est pas possible de combiner des symboles booléens (`!`, `,`) avec des opérateurs fonctionnels (`NOT`, `AND`, `OR`, `IN`, `NOT IN`). La requête suivante est considérée comme _non valide_ : 
+`avg:mymetric{env:prod AND resource_name NOT IN (!resource_name:A, !resource_name:B)}`
+
 #### Exemples de requête avec un filtre basé sur des booléens
 
 ```
@@ -49,11 +52,21 @@ avg:system.cpu.user{env:shop.ist AND availability-zone IN (us-east-1a, us-east-1
 {{< img src="metrics/advanced-filtering/ex2.gif" alt="Exemple 2"  style="width:80%;" >}}
 
 
+```
+avg:system.cpu.user{env:prod AND location NOT IN (atlanta,seattle,las-vegas)}
+```
+
+{{< img src="metrics/advanced-filtering/NOTIN.jpg" alt="Exemple 3"  style="width:80%;" >}}
+
+
 ### Requêtes avec des filtres basés sur des wildcards
 
 Vous pouvez utiliser un wildcard afin d'inclure plusieurs valeurs de préfixe et de suffixe pour vos tags :
 -  `pod_name: web-*` 
--  `cluster:*-trace`.
+-  `cluster:*-trace`
+
+**Remarque** : il n'est pas possible d'utiliser un wildcard afin d'inclure plusieurs valeurs de préfixe et de suffixe.
+
 
 #### Exemple de requêtes avec un filtre basé sur un wildcard
 
@@ -67,7 +80,8 @@ avg:system.disk.in_use{!device:/dev/loop*} by {device}
 sum:kubernetes.pods.running{service:*-canary} by {service}
 ```
 
-{{< img src="metrics/advanced-filtering/wildcards2.png" alt="Exemple 2"  style="width:80%;" >}}
+{{< img src="metrics/advanced-filtering/wildcards2.jpg" alt="Exemple 2"  style="width:80%;" >}}
+
 
 ## Pour aller plus loin
 

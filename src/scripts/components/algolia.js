@@ -38,7 +38,13 @@ const handleSearchPageRedirect = () => {
     const docsearchInput = document.querySelector('.docssearch-input.ds-input');
 
     if (docsearchInput.value !== '') {
-        window.location = `${baseUrl}/search/?s=${docsearchInput.value}`;
+        let inputValue = docsearchInput.value;
+
+        if (inputValue.indexOf('#') > -1) {
+            inputValue = inputValue.replace("#", encodeURIComponent("#"));
+        }
+
+        window.location = `${baseUrl}/search/?s=${inputValue}`;
     }
 }
 
@@ -149,7 +155,11 @@ searchDesktop.autocomplete.on('keyup', function(e) {
         $('.algolia-autocomplete').css('borderBottomLeftRadius', '3px');
     }
     if (e.keyCode === 13 && desktopEnableEnter) {
-        window.location = `${baseUrl}/search/?s=${this.value}`;
+        let { value } = this;
+        if (value.indexOf('#') > -1) {
+            value = value.replace("#", encodeURIComponent("#"));
+        }
+        window.location = `${baseUrl}/search/?s=${value}`;
     }
 
     if (isApiPage()) {
@@ -188,7 +198,11 @@ searchDesktop.autocomplete.on('autocomplete:closed', function(e) {
         $('.algolia-autocomplete').css('borderBottomLeftRadius', '3px');
     }
     if (e.keyCode === 13 && desktopEnableEnter) {
-        window.location = `${baseUrl}/search/?s=${this.value}`;
+        let { value } = this;
+        if (value.indexOf('#') > -1) {
+            value = value.replace("#", encodeURIComponent("#"));
+        }
+        window.location = `${baseUrl}/search/?s=${value}`;
     }
 });
 searchDesktop.autocomplete.on('autocomplete:cursorchanged', function() {
@@ -220,7 +234,11 @@ let mobileEnableEnter = true;
 
 searchMobile.autocomplete.on('keyup', function(e) {
     if (e.keyCode === 13 && mobileEnableEnter) {
-        window.location = `${baseUrl}/search/?s=${this.value}`;
+        let { value } = this;
+        if (value.indexOf('#') > -1) {
+            value = value.replace("#", encodeURIComponent("#"));
+        }
+        window.location = `${baseUrl}/search/?s=${value}`;
     }
 });
 
