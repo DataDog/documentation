@@ -16,6 +16,12 @@ To use Cloud Cost Management, you must have an AWS account with access to Cost U
  
 **Note:** Data can take up to 48 to 72 hours after setup to stabilize in Datadog.
  
+### Configure the AWS data source
+
+TKTK
+
+{{< img src="infrastructure/cloudcost/cloud_cost_data_source_config.png" alt="Configure the AWS data source for Cloud Costs"  >}}
+
 ### Generate the CUR
  
 Follow AWS instructions for [Creating Cost and Usage Reports][1], and select the following Content options:
@@ -85,7 +91,23 @@ Attach the new S3 policy to the Datadog integration role.
 3. Click **Attach policies**.
 4. Enter the name of the S3 bucket policy created above.
 5. Click **Attach policy**.
+
+## Investigating your costs
+
+Navigate to your costs within Datadog by clicking **Infrastructure > Cloud Costs** in the UI. This Analyze view lets you to quickly filter and group your spend to hone in on what’s changing over time, allowing you to answer questions such as:
+
+- Which teams and applications are responsible for changes in spend?
+- What cloud products and usage types (i.e. EC2 Data Transfer) are driving the increase in spend?
+- How effective is the coverage and utilization of my discount plan?
+
+{{< img src="infrastructure/cloudcost/cloud_cost_analyze_page.png" alt="The Cloud Cost UI allows you to slice and dice your costs"  >}}
+
+## Cloud costs in dashboards
+
+Visualizing infrastructure spend alongside related utilization metrics can help you spot potential inefficiencies and savings opportunities. You can add cloud costs to widgets in Datadog dashboards by selecting the *Cloud Cost* data source.
  
+{{< img src="infrastructure/cloudcost/cloud_cost_data_source.png" alt="Cloud Cost available as a data source in dashboard widget creation"  >}}
+
 ## Cost types
  
 You can visualize your ingested data using the following cost types:
@@ -114,12 +136,6 @@ The following tags are also available for filtering and grouping data:
 | `cloud_purchase_type`      | Whether the usage is Reserved, Spot, or On Demand.|
 | `cloud_account`            | The ID of the account that used this item.|
 | `cloud_billing_account_id` | The ID of the account paying for this usage.|
- 
-## Cloud costs in dashboards
- 
-Visualizing infrastructure spend alongside related utilization metrics can help you spot potential inefficiencies and savings opportunities. You can add cloud costs to widgets in Datadog dashboards by selecting the *Cloud Cost* data source.
- 
-{{< img src="infrastructure/cloudcost/cloud_cost_data_source.png" alt="Cloud Cost available as a data source in dashboard widget creation"  >}}
  
 [1]: https://docs.aws.amazon.com/cur/latest/userguide/cur-create.html
 [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create-console.html
