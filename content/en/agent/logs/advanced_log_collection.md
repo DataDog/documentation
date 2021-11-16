@@ -444,7 +444,7 @@ More examples:
 | {"date": "2018-01-02"    | `\{"date": "\d{4}-\d{2}-\d{2}`                |
 
 ### Automatic Multi-line aggregation
-With Agent 7.32+ `auto_multi_line_detection` can be enabled which allows the Agent to detect [common multi-line patterns][6] automatically. 
+With Agent 7.32+ `auto_multi_line_detection` can be enabled which allows the Agent to detect [common multi-line patterns][2] automatically. 
 
 <div class="alert alert-warning">
 Automatic Multi-line aggregation is in public beta.
@@ -535,7 +535,7 @@ With this feature enabled, when a new log file is opened the Agent tries to dete
 
 ## Commonly used log processing rules
 
-See the dedicated [Commonly Used Log Processing Rules FAQ][2] to see a list of examples.
+See the dedicated [Commonly Used Log Processing Rules FAQ][3] to see a list of examples.
 
 ## Tail directories by using wildcards
 
@@ -569,7 +569,7 @@ The example above will match `/var/log/myapp/log/myfile.log` but `/var/log/myapp
 
 ## Encode UTF-16 format logs
 
-If applications logs are written in UTF-16 format, starting with Datadog Agent **v6.23/v7.23**, users can encode these logs so that they are parsed as expected in the [Logs Explorer][3]. Use the `encoding` parameter in the logs configuration section. Set it to `utf-16-le` for UTF16 little-endian and `utf-16-be` for UTF16 big-endian. Any other value will be ignored and the Agent will read the file as UTF8.
+If applications logs are written in UTF-16 format, starting with Datadog Agent **v6.23/v7.23**, users can encode these logs so that they are parsed as expected in the [Logs Explorer][4]. Use the `encoding` parameter in the logs configuration section. Set it to `utf-16-le` for UTF16 little-endian and `utf-16-be` for UTF16 big-endian. Any other value will be ignored and the Agent will read the file as UTF8.
 
 Configuration example:
 
@@ -587,7 +587,7 @@ logs:
 
 ## Global processing rules
 
-For Datadog Agent v6.10+, the `exclude_at_match`, `include_at_match`, and `mask_sequences` processing rules can be defined globally in the Agent's [main configuration file][4] or through an environment variable:
+For Datadog Agent v6.10+, the `exclude_at_match`, `include_at_match`, and `mask_sequences` processing rules can be defined globally in the Agent's [main configuration file][5] or through an environment variable:
 
 {{< tabs >}}
 {{% tab "Configuration files" %}}
@@ -630,7 +630,7 @@ env:
 {{< /tabs >}}
 All the logs collected by the Datadog Agent are impacted by the global processing rules.
 
-**Note**: The Datadog Agent does not start the log collector if there is a format issue in the global processing rules. Run the Agent's [status subcommand][5] to troubleshoot any issues.
+**Note**: The Datadog Agent does not start the log collector if there is a format issue in the global processing rules. Run the Agent's [status subcommand][6] to troubleshoot any issues.
 
 ## Further Reading
 
@@ -640,8 +640,8 @@ All the logs collected by the Datadog Agent are impacted by the global processin
 *Logging without Limits is a trademark of Datadog, Inc.
 
 [1]: https://golang.org/pkg/regexp/syntax/
-[2]: /agent/faq/commonly-used-log-processing-rules
-[3]: https://docs.datadoghq.com/logs/explorer/#overview
-[4]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-[5]: /agent/guide/agent-commands/#agent-information
-[6]: https://github.com/DataDog/datadog-agent/blob/main/pkg/logs/decoder/auto_multiline_handler.go#L195
+[2]: https://github.com/DataDog/datadog-agent/blob/main/pkg/logs/decoder/auto_multiline_handler.go#L195
+[3]: /agent/faq/commonly-used-log-processing-rules
+[4]: https://docs.datadoghq.com/logs/explorer/#overview
+[5]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[6]: /agent/guide/agent-commands/#agent-information

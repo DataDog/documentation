@@ -330,7 +330,7 @@ arn:aws-us-gov:lambda:us-gov-east-1:002406178527:layer:Datadog-Extension-ARM:{{<
 - If the lambda is using the arm64 architecture, add -ARM to the layer name.
 
 3. Add `datadog_lambda` to your `requirements.txt`.
-4. Register `datadog_lambda_wrapper` as a [middleware][3] in your `app.py`:
+4. Register `datadog_lambda_wrapper` as a [middleware][2] in your `app.py`:
     ```python
     from chalice import Chalice, ConvertToMiddleware
     from datadog_lambda.wrapper import datadog_lambda_wrapper
@@ -345,8 +345,7 @@ arn:aws-us-gov:lambda:us-gov-east-1:002406178527:layer:Datadog-Extension-ARM:{{<
     ```
 
 [1]: /serverless/libraries_integrations/extension/
-[2]: https://app.datadoghq.com/organization-settings/api-keys
-[3]: https://aws.github.io/chalice/topics/middleware.html?highlight=handler#registering-middleware
+[2]: https://aws.github.io/chalice/topics/middleware.html?highlight=handler#registering-middleware
 {{% /tab %}}
 {{% tab "Terraform" %}}
 
