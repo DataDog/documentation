@@ -16,9 +16,13 @@ To use Cloud Cost Management, you must have an AWS account with access to Cost U
  
 **Note:** Data can take up to 48 to 72 hours after setup to stabilize in Datadog.
  
-### Configure the AWS data source
+### Configuration
 
-TKTK
+To configure a data source, access the Cloud Costs product by clicking **Infrastructure > Cloud Costs** using the main navigation.
+
+- If there are no configured data sources, you will be redirected to a data source setup page with prompts for generating and configuring access to your account's [Cost and Usage Report (CUR)][5].
+
+- Once configured, data sources may be viewed and modified by accessing the **Settings tab** directly from the top of the page.
 
 {{< img src="infrastructure/cloudcost/cloud_cost_data_source_config.png" alt="Configure the AWS data source for Cloud Costs"  >}}
 
@@ -36,7 +40,7 @@ Select the following Delivery options:
 * Compression type: **GZIP**
 * Format: `text/csv`
  
-### Configure access to the CUR
+### Allow access to the CUR
  
 Configure AWS to ensure Datadog has permissions to access the CUR and the s3 bucket it is stored in by [creating a policy][2] using the following JSON:
  
@@ -94,13 +98,13 @@ Attach the new S3 policy to the Datadog integration role.
 
 ## Investigating your costs
 
-Navigate to your costs within Datadog by clicking **Infrastructure > Cloud Costs** in the UI. This Analyze view lets you to quickly filter and group your spend to hone in on what’s changing over time, allowing you to answer questions such as:
+Navigate to your costs within Datadog by clicking **Infrastructure > Cloud Costs** in the UI. This Analyze view lets you to quickly filter and group your spending to hone in on what’s changing over time, allowing you to answer questions such as:
 
 - Which teams and applications are responsible for changes in spend?
 - What cloud products and usage types (i.e. EC2 Data Transfer) are driving the increase in spend?
 - How effective is the coverage and utilization of my discount plan?
 
-{{< img src="infrastructure/cloudcost/cloud_cost_analyze_page.png" alt="The Cloud Cost UI allows you to slice and dice your costs"  >}}
+{{< img src="infrastructure/cloudcost/cloud_cost_analyze_page.png" alt="Slice and dice your costs by tag using the Cloud Cost UI"  >}}
 
 ## Cloud costs in dashboards
 
@@ -141,3 +145,4 @@ The following tags are also available for filtering and grouping data:
 [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create-console.html
 [3]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
 [4]: https://docs.aws.amazon.com/cur/latest/userguide/data-dictionary.html
+[5]: https://docs.aws.amazon.com/cur/latest/userguide/what-is-cur.html
