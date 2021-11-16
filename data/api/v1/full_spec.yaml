@@ -12951,6 +12951,10 @@ components:
     UsageFargateHour:
       description: Number of Fargate tasks run and hourly usage.
       properties:
+        avg_profiled_fargate_tasks:
+          description: The average profiled task count for Fargate Profiling.
+          format: int64
+          type: integer
         hour:
           description: The hour for the usage.
           format: date-time
@@ -13635,6 +13639,10 @@ components:
             the current date for all organizations.
           format: int64
           type: integer
+        avg_profiled_fargate_tasks:
+          description: The average profiled task count for Fargate Profiling.
+          format: int64
+          type: integer
         aws_host_top99p:
           description: Shows the 99th percentile of all AWS hosts over all hours in
             the current date for all organizations.
@@ -13906,6 +13914,10 @@ components:
             in the current date for the given org.
           format: int64
           type: integer
+        avg_profiled_fargate_tasks:
+          description: The average profiled task count for Fargate Profiling.
+          format: int64
+          type: integer
         aws_host_top99p:
           description: Shows the 99th percentile of all AWS hosts over all hours in
             the current date for the given org.
@@ -14173,6 +14185,11 @@ components:
           type: integer
         audit_logs_lines_indexed_agg_sum:
           description: Shows the sum of all audit logs lines indexed over all hours
+            in the current months for all organizations.
+          format: int64
+          type: integer
+        avg_profiled_fargate_tasks_sum:
+          description: Shows the average of all profiled Fargate tasks over all hours
             in the current months for all organizations.
           format: int64
           type: integer

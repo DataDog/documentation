@@ -15,7 +15,7 @@ further_reading:
     text: Implémenter Opentracing dans vos applications
   - link: /tracing/visualization/
     tag: Utiliser l'UI de l'APM
-    text: 'Explorer vos services, ressources et traces'
+    text: Explorer vos services, ressources et traces
 ---
 ## Définition
 
@@ -40,7 +40,7 @@ Vous pouvez également définir manuellement le tag `env` comme tag global pour 
 #### Environnement de l'Agent
 
 Le tag `env` peut être défini dans la configuration de votre Agent.
-**Toutefois, si `env` est déjà présent dans les données de trace, alors il remplacera tout tag `env` défini dans l'Agent.**
+**Ne définissez pas des tags `env` différents sur le traceur et l'Agent. Cela pourrait entraîner la duplication des tags pour les [métriques de trace][6].**
 
 Options :
 
@@ -75,11 +75,13 @@ Remarque :
 
 * Seuls les administrateurs d'organisation peuvent accéder à cette page.
 * Les modifications peuvent prendre jusqu'à deux heures avant d'être appliquées dans l'IU.
+* Le traceur ajoute systématiquement aux spans les tags `resource`, `name` et `service`. Nous vous recommandons de ne jamais ajouter ces tags au niveau des hosts, afin d'éviter toute ambiguïté.
 
 Si vous modifiez un tag primaire défini, prenez en compte ce qui suit :
 
 * Vous ne pourrez plus accéder aux données historiques de l'APM agrégées par ce tag primaire.
 * Les monitors d'APM associés à l'ancien tag afficheront le statut _No Data_.
+
 
 ### Afficher des données selon un tag primaire
 
@@ -94,3 +96,4 @@ Les tags primaires apparaissent en haut des pages APM. Utilisez ces sélecteurs 
 [3]: /fr/getting_started/tagging/unified_service_tagging
 [4]: /fr/getting_started/tagging/assigning_tags/#traces
 [5]: https://app.datadoghq.com/apm/settings
+[6]: /fr/tracing/guide/metrics_namespace/

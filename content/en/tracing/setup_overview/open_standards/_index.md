@@ -32,7 +32,7 @@ datadog:
   api:
     key: "<API key>"
 ```
-To send the data to a different [Datadog site][22], also set the `site` parameter:
+To send the data to a different [Datadog site][7], also set the `site` parameter:
 ```
 datadog:
   api:
@@ -40,7 +40,7 @@ datadog:
     site: {{< region-param key="dd_site" code="true" >}}
 ```
 
-On each OpenTelemetry-instrumented application, set the resource attributes `deployment.environment`, `service.name`, and `service.version` using [the language's SDK][1]. As a fall-back, you can also configure hostname (optionally), environment, service name, and service version at the collector level for unified service tagging by following the [example configuration file][7]. If you don't specify the hostname explicitly, the exporter attempts to get an automatic default by checking the following sources in order, falling back to the next one if the current one is unavailable or invalid:
+On each OpenTelemetry-instrumented application, set the resource attributes `deployment.environment`, `service.name`, and `service.version` using [the language's SDK][1]. As a fall-back, you can also configure hostname (optionally), environment, service name, and service version at the collector level for unified service tagging by following the [example configuration file][8]. If you don't specify the hostname explicitly, the exporter attempts to get an automatic default by checking the following sources in order, falling back to the next one if the current one is unavailable or invalid:
 
 <!--- 1. Hostname set by another OpenTelemetry component -->
 1. Manually set hostname in configuration
@@ -51,9 +51,9 @@ On each OpenTelemetry-instrumented application, set the resource attributes `dep
 
 ### Ingesting OpenTelemetry traces with the collector
 
-The OpenTelemetry Collector is configured by adding a [pipeline][8] to your `otel-collector-configuration.yml` file. Supply the relative path to this configuration file when you start the collector by passing it in via the `--config=<path/to/configuration_file>` command line argument. For examples of supplying a configuration file, see the [environment specific setup](#environment-specific-setup) section below or the [OpenTelemetry Collector documentation][9].
+The OpenTelemetry Collector is configured by adding a [pipeline][9] to your `otel-collector-configuration.yml` file. Supply the relative path to this configuration file when you start the collector by passing it in via the `--config=<path/to/configuration_file>` command line argument. For examples of supplying a configuration file, see the [environment specific setup](#environment-specific-setup) section below or the [OpenTelemetry Collector documentation][10].
 
-The exporter assumes you have a pipeline that uses the `datadog` exporter, and includes a [batch processor][10] configured with the following:
+The exporter assumes you have a pipeline that uses the `datadog` exporter, and includes a [batch processor][11] configured with the following:
   - A required `timeout` setting of `10s` (10 seconds). A batch representing 10 seconds of traces is a constraint of Datadog's API Intake for Trace Related Statistics.
   <div class="alert alert-info"><strong>Important!</strong> Without this <code>timeout</code> setting, trace related metrics including <code>.hits</code>, <code>.errors</code>, and <code>.duration</code> for different services and service resources will be inaccurate over periods of time.</div>
 
@@ -100,7 +100,7 @@ service:
 
 #### Host
 
-1. Download the appropriate binary from [the project repository latest release][11].
+1. Download the appropriate binary from [the project repository latest release][12].
 
 2. Create a `otel_collector_config.yaml` file. [Here is an example template](#ingesting-opentelemetry-traces-with-the-collector) to get started. It enables the collector's OTLP Receiver and Datadog Exporter.
 
@@ -118,7 +118,7 @@ Run an Opentelemetry Collector container to receive traces either from the [inst
 
 1. Create a `otel_collector_config.yaml` file. [Here is an example template](#ingesting-opentelemetry-traces-with-the-collector) to get started. It enables the collector's OTLP receiver and the Datadog exporter.
 
-2. Choose a published Docker image such as [`otel/opentelemetry-collector-contrib:latest`][12].
+2. Choose a published Docker image such as [`otel/opentelemetry-collector-contrib:latest`][13].
 
 3.  Determine which ports to open on your container. OpenTelemetry traces are sent to the OpenTelemetry Collector over TCP or UDP on a number of ports, which must be exposed on the container.  By default, traces are sent over OTLP/gRPC on port `55680`, but common protocols and their ports include:
 
@@ -185,9 +185,9 @@ On the application container, use the downward API to pull the host IP. The appl
 
 ##### Example Kubernetes OpenTelemetry collector configuration
 
-A full example Kubernetes manifest for deploying the OpenTelemetry Collector as both daemonset and standalone collector [can be found here][13]. Modify the example to suit your environment. The key sections that are specific to Datadog are as follows:
+A full example Kubernetes manifest for deploying the OpenTelemetry Collector as both daemonset and standalone collector [can be found here][14]. Modify the example to suit your environment. The key sections that are specific to Datadog are as follows:
 
-1. The example demonstrates deploying the OpenTelemetry Collectors in [agent mode via daemonset][14], which collect relevant k8s node and pod specific metadata, and then forward telemetry data to an OpenTelemetry Collector in [standalone collector mode][15]. This OpenTelemetry Collector in standalone collector mode then exports to the Datadog backend. See [this diagram of this deployment model][16].
+1. The example demonstrates deploying the OpenTelemetry Collectors in [agent mode via daemonset][15], which collect relevant k8s node and pod specific metadata, and then forward telemetry data to an OpenTelemetry Collector in [standalone collector mode][16]. This OpenTelemetry Collector in standalone collector mode then exports to the Datadog backend. See [this diagram of this deployment model][17].
 
 2. For OpenTelemetry Collectors deployed as agent by daemonset, in the daemonset, `spec.containers.env` should use the downward API to capture `status.podIP` and add it as part of the `OTEL_RESOURCE_ATTRIBUTES` environment variable. This is used by the OpenTelemetry Collector's `resourcedetection` and `k8sattributes` processors, which should be included along with a `batch` processor and added to the `traces` pipeline.
 
@@ -292,15 +292,15 @@ To see more information and additional examples of how you might configure your 
 
 ## Connect OpenTelemetry traces and logs
 
-To connect OpenTelemetry traces and logs so that your application logs monitoring and analysis has the additional context provided by the OpenTelemetry traces, see [Connect OpenTelemetry Traces and Logs][17] for language specific instructions and example code.
+To connect OpenTelemetry traces and logs so that your application logs monitoring and analysis has the additional context provided by the OpenTelemetry traces, see [Connect OpenTelemetry Traces and Logs][18] for language specific instructions and example code.
 
 ## Alternatives to the OpenTelemetry Collector Datadog exporter
 
 Datadog recommends you use the OpenTelemetry Collector Datadog exporter in conjunction with OpenTelemetry tracing clients. However, if that doesn't work for you:
 
-  - Each of the supported languages also has support for [sending OpenTracing data to Datadog][18].
+  - Each of the supported languages also has support for [sending OpenTracing data to Datadog][19].
 
-  - [Python][19], [Ruby][20], and [NodeJS][21] also have language-specific OpenTelemetry Datadog span exporters, which export traces directly from OpenTelemetry tracing clients to a Datadog Agent.
+  - [Python][20], [Ruby][21], and [NodeJS][22] also have language-specific OpenTelemetry Datadog span exporters, which export traces directly from OpenTelemetry tracing clients to a Datadog Agent.
 
 ## Further Reading
 
@@ -312,19 +312,19 @@ Datadog recommends you use the OpenTelemetry Collector Datadog exporter in conju
 [4]: https://opentelemetry.io/docs/collector/getting-started/#deployment
 [5]: https://opentelemetry.io/docs/collector/configuration/
 [6]: https://app.datadoghq.com/organization-settings/api-keys
-[7]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/example/config.yaml
-[8]: https://github.com/open-telemetry/opentelemetry-collector/blob/main/docs/design.md#pipelines
-[9]: https://github.com/open-telemetry/opentelemetry-collector/tree/main/examples
-[10]: https://github.com/open-telemetry/opentelemetry-collector/tree/main/processor/batchprocessor#batch-processor
-[11]: https://github.com/open-telemetry/opentelemetry-collector-contrib/releases/latest
-[12]: https://hub.docker.com/r/otel/opentelemetry-collector-contrib/tags
-[13]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/example/example_k8s_manifest.yaml
-[14]: https://github.com/open-telemetry/opentelemetry-collector/blob/main/docs/design.md#running-as-an-agent
-[15]: https://github.com/open-telemetry/opentelemetry-collector/blob/main/docs/design.md#running-as-a-standalone-collector
-[16]: https://github.com/open-telemetry/opentelemetry-collector/blob/main/docs/images/opentelemetry-service-deployment-models.png
-[17]: /tracing/connect_logs_and_traces/opentelemetry
-[18]: /tracing/setup_overview/open_standards/java
-[19]: /tracing/setup_overview/open_standards/python#opentelemetry
-[20]: /tracing/setup_overview/open_standards/ruby#opentelemetry
-[21]: /tracing/setup_overview/open_standards/nodejs#opentelemetry
-[22]: /getting_started/site/
+[7]: /getting_started/site/
+[8]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/example/config.yaml
+[9]: https://github.com/open-telemetry/opentelemetry-collector/blob/main/docs/design.md#pipelines
+[10]: https://github.com/open-telemetry/opentelemetry-collector/tree/main/examples
+[11]: https://github.com/open-telemetry/opentelemetry-collector/tree/main/processor/batchprocessor#batch-processor
+[12]: https://github.com/open-telemetry/opentelemetry-collector-contrib/releases/latest
+[13]: https://hub.docker.com/r/otel/opentelemetry-collector-contrib/tags
+[14]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/example/example_k8s_manifest.yaml
+[15]: https://github.com/open-telemetry/opentelemetry-collector/blob/main/docs/design.md#running-as-an-agent
+[16]: https://github.com/open-telemetry/opentelemetry-collector/blob/main/docs/design.md#running-as-a-standalone-collector
+[17]: https://github.com/open-telemetry/opentelemetry-collector/blob/main/docs/images/opentelemetry-service-deployment-models.png
+[18]: /tracing/connect_logs_and_traces/opentelemetry
+[19]: /tracing/setup_overview/open_standards/java
+[20]: /tracing/setup_overview/open_standards/python#opentelemetry
+[21]: /tracing/setup_overview/open_standards/ruby#opentelemetry
+[22]: /tracing/setup_overview/open_standards/nodejs#opentelemetry
