@@ -11,6 +11,8 @@ further_reading:
   - link: serverless/custom_metrics/
     tag: Documentation
     text: Envoyer des métriques custom depuis des applications sans serveur
+aliases:
+  - /fr/serverless/datadog_lambda_library/ruby/
 ---
 ## Configuration requise
 
@@ -23,7 +25,7 @@ Après avoir installé l'[intégration AWS][1] et le [Forwarder Datadog][2], sui
 
 ## Configuration
 
-### Installer la bibliothèque Lambda Datadog
+### Install
 
 La bibliothèque Lambda Datadog peut être installée en tant que couche ou en tant que gem. Pour la plupart des fonctions, nous vous recommandons d'installer la bibliothèque en tant que couche. Si votre fonction lambda est déployée sous la forme d'une image de conteneur, vous devez installer la bibliothèque en tant que gem.
 
@@ -35,19 +37,19 @@ La version mineure du gem `datadog-lambda` correspond toujours à la version de 
 
 ```
 # Pour les régions standard
-arn:aws:lambda:<RÉGION_VERSION>:464622532012:layer:Datadog-<RUNTIME>:<VERSION>
+arn:aws:lambda:<RÉGION_AWS>:464622532012:layer:Datadog-<RUNTIME>:{{< latest-lambda-layer-version layer="ruby" >}}
 
 # Pour les régions us-gov
-arn:aws-us-gov:lambda:<RÉGION_AWS>:002406178527:layer:Datadog-<RUNTIME>:<VERSION>
+arn:aws-us-gov:lambda:<RÉGION_AWS>:002406178527:layer:Datadog-<RUNTIME>:{{< latest-lambda-layer-version layer="ruby" >}}
 ```
 
-Les options `RUNTIME` disponibles sont `Ruby2-5` et `Ruby2-7`. Pour `VERSION`, consultez la [dernière version][4]. Exemple :
+Les options `RUNTIME` disponibles sont `Ruby2-5` et `Ruby2-7`. Exemple :
 
 ```
-arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Ruby2-7:5
+arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Ruby2-7:{{< latest-lambda-layer-version layer="ruby" >}}
 ```
 
-Si votre fonction Lambda est configurée de façon à utiliser la signature de code, vous devez ajouter l'ARN du profil de signature de Datadog (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) à la [configuration de la signature de code][3] de votre fonction avant de pouvoir ajouter la bibliothèque Lambda Datadog en tant que couche.
+Si votre fonction Lambda est configurée de façon à utiliser la signature de code, vous devez ajouter l'ARN du profil de signature de Datadog (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) à la [configuration de la signature de code][4] de votre fonction avant de pouvoir ajouter la bibliothèque Lambda Datadog en tant que couche.
 
 #### Utiliser le gem
 
@@ -96,20 +98,20 @@ def handler(event:, context:)
 end
 ```
 
-### Abonner le Forwarder Datadog aux groupes de logs
+### S'abonner
 
-Pour pouvoir envoyer des métriques, traces et logs à Datadog, vous devez abonner la fonction Lambda du Forwarder Datadog à chaque groupe de logs de votre fonction.
+Pour pouvoir envoyer des métriques, traces et logs à Datadog, abonnez la fonction Lambda du Forwarder Datadog à chaque groupe de logs de votre fonction.
 
 1. [Si ce n'est pas déjà fait, installez le Forwarder Datadog][2].
-2. [Abonnez le Forwarder Datadog aux groupes de logs de votre fonction][6].
+2. [Abonnez le Forwarder Datadog aux groupes de logs de votre fonction][5].
 
-### Tagging de service unifié
+### Tag
 
-Bien que cette opération soit facultative, nous vous recommandons fortement d'ajouter les tags env`, `service` et `version` à vos applications sans serveur. Pour ce faire, suivez la [documentation relative au tagging de service unifié][7].
+Bien que cette opération soit facultative, nous vous recommandons fortement d'ajouter les tags `env`, `service` et `version` à vos applications sans serveur. Pour ce faire, suivez la [documentation relative au tagging de service unifié][6].
 
-## Explorer la surveillance sans serveur de Datadog
+## Utilisation
 
-Après avoir configuré votre fonction en suivant la procédure ci-dessus, vous devriez pouvoir visualiser vos métriques, logs et traces sur la [page Serverless principale][8].
+Une fois votre fonction configurée, suivez les étapes ci-dessous pour visualiser vos métriques, logs et traces sur la [page Serverless principale][7].
 
 ## Surveiller une logique opérationnelle personnalisée
 
@@ -156,7 +158,7 @@ def some_operation()
 end
 ```
 
-Pour en savoir plus sur l'envoi de métriques custom, consultez [cette page][9]. Pour obtenir plus d'informations sur l'instrumentation personnalisée, consultez la [documentation de l'APM Datadog à ce sujet][10].
+Pour en savoir plus sur l'envoi de métriques custom, consultez [cette page][8]. Pour obtenir plus d'informations sur l'instrumentation personnalisée, consultez la [documentation sur l'APM Datadog dédiée][9].
 
 ## Pour aller plus loin
 
@@ -165,10 +167,9 @@ Pour en savoir plus sur l'envoi de métriques custom, consultez [cette page][9].
 [1]: /fr/integrations/amazon_web_services/
 [2]: /fr/serverless/forwarder/
 [3]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
-[4]: https://github.com/DataDog/datadog-lambda-layer-rb/releases
-[5]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
-[6]: /fr/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
-[7]: /fr/getting_started/tagging/unified_service_tagging/#aws-lambda-functions
-[8]: https://app.datadoghq.com/functions
-[9]: /fr/serverless/custom_metrics?tab=ruby
-[10]: /fr/tracing/custom_instrumentation/ruby/
+[4]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
+[5]: /fr/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
+[6]: /fr/getting_started/tagging/unified_service_tagging/#aws-lambda-functions
+[7]: https://app.datadoghq.com/functions
+[8]: /fr/serverless/custom_metrics?tab=ruby
+[9]: /fr/tracing/custom_instrumentation/ruby/

@@ -8,7 +8,7 @@ description: Analyse et recherche de traces
 ---
 {{< img src="tracing/live_search_and_analytics/tracing_without_limits_lifecycle-0.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Parcours d'une trace" >}}
 
-## Présentation de la fonctionnalité Analyse et recherche de traces
+## Présentation
 
 La fonctionnalité [Analyse et recherche de traces][1] vous permet de rechercher parmi toutes les spans ingérées ou indexées à l'aide de n'importe quel tag sur n'importe quelle span. Les spans renvoyées par votre requête dépendent du type de recherche effectué. Une recherche en mode Live renvoie toutes les spans ingérées au cours des 15 dernières minutes avec mise à jour en temps réel, tandis qu'une recherche parmi les spans indexées renvoie les spans retenues pendant 15 jours par vos filtres personnalisés.
 
@@ -18,9 +18,11 @@ L'application Datadog affiche un indicateur **Live** à côté du sélecteur d'i
 
 {{< img src="tracing/live_search/LiveSearch.png" alt="Indicateur Live Search" >}}
 
-Toutes les traces ingérées passent par des [filtres de rétention][3] personnalisés que vous pouvez créer pour indiquer les spans à indexer, ainsi que par le [filtre de rétention intelligent][4] par défaut qui conserve un ensemble diversifié de traces.
+Toutes les traces ingérées passent par des [filtres de rétention personnalisés][3] que vous pouvez créer pour indiquer les spans à indexer, ainsi que par le [filtre de rétention intelligent][4] par défaut qui conserve un ensemble diversifié de traces.
 
-Une fois indexées, les traces sont disponibles pour une utilisation dans la section Analyse et recherche de traces, et elles sont conservées pendant 15 jours.
+Une fois indexées par un filtre de rétention personnalisé, les traces peuvent faire l'objet de recherches et d'analyses et sont conservées pendant 15 jours.
+
+Lorsqu'elles sont indexées par un filtre de rétention intelligent, les traces peuvent faire l'objet de recherches (mais pas d'analyses) et sont conservées pendant 30 jours.
 
 L'application Datadog affiche un indicateur « Retained traces  à côté du sélecteur d'intervalle lorsque vous recherchez des [spans indexées][5] :
 
@@ -28,7 +30,7 @@ L'application Datadog affiche un indicateur « Retained traces  à côté du s
 
 Vous pouvez personnaliser les paramètres [de rétention et d'ingestion][6] afin d'envoyer et de conserver uniquement les données qui vous intéressent.
 
-### (Conseillé) Activer Tracing Without Limits
+### Tracing Without Limits (recommandé)
 
 Des contrôles d'ingestion avancés peuvent être définis pour chaque service instrumenté par l'APM Datadog. Consultez la documentation relative aux [contrôles d'ingestion][2] pour en savoir plus. Par défaut, l'intégralité des traces sont conservées pour les services qui n'envoient pas plus de 50 traces par seconde. Pour faire en sorte que tous vos services envoient l'ensemble de leur trafic, définissez la variable d'environnement suivante :
 
@@ -39,7 +41,6 @@ DD_TRACE_SAMPLE_RATE=1.0
 Après avoir instrumenté vos services et ingéré des traces, définissez des [filtres de rétention][3] basés sur des tags dans l'application Datadog pour que Datadog conserve uniquement les spans qui vous intéressent.
 
 **Remarque** : les spans ingérées et indexées peuvent augmenter vos coûts. Pour en savoir plus, consultez la page [Tarification de l'APM][7].
-
 
 ## Live Search pendant 15 minutes
 
@@ -66,7 +67,7 @@ Le mode Live Search est sélectionné par défaut sur la page Traces. Lorsque vo
 
 **Remarque** : lorsque vous sélectionnez une span, le flux s'interrompt et les détails de la span sélectionnée s'affichent dans le volet latéral de la trace.
 
-### Filtrer le flux de traces avec une requête de recherche
+### Filtrage
 {{< img src="tracing/live_search/toplevelspan2.gif" alt="Requête en mode Live Search" >}}
 
 Définissez une requête valide dans la barre de recherche pour afficher les traces qui correspondent à vos critères de recherche pour **toutes les spans**. La syntaxe de recherche de la vue Live Search est la même que celle des autres vues de trace. Toutefois, avec la vue Live Search, la recherche se fait dans toutes les traces ingérées, pour n'importe quel tag et span, et non pas uniquement dans celles qui ont été indexées.
@@ -129,9 +130,7 @@ Le mode Retained Analytics est disponible sur la même page que le mode Live Ana
 
 {{< img src="tracing/live_search/HistoricalAnalytics2.gif" alt="Analyse des données historiques" >}}
 
-Toutes les spans indexées par des filtres de rétention ou d'anciens filtres App Analytics peuvent être recherchées via l'analyse de traces. Ces spans sont conservées par Datadog pendant 15 jours après avoir été indexées par un filtre de rétention.
-
-**Remarque :** À compter du 20 octobre 2020, la fonctionnalité App Analytics a été remplacée par Tracing without Limits, une façon plus flexible d'ingérer 100 % de vos traces et de conserver celles qui intéressent le plus votre entreprise.
+Toutes les spans indexées par des filtres de rétention _personnalisés_ (et non par un filtre de rétention intelligent) peuvent être recherchées via l'analyse de traces. Ces spans sont conservées par Datadog pendant 15 jours à compter de leur indexation par un filtre de rétention.
 
 Vous pouvez personnaliser les spans qui sont conservées et leurs taux de rétention. Par défaut, la fonctionnalité de [rétention intelligente de Datadog][4] est appliquée. Elle conserve automatiquement les traces associées à une variété d'erreurs et de latences ainsi que les traces liées à des ressources présentant un débit faible. Pour en savoir plus sur le filtre de rétention des spans par défaut et découvrir comment créer vos propres filtres, consultez la section relative aux [filtres de rétention][3]. Accédez à la page [Retention Filters][8] dans l'application Datadog pour créer ou modifier vos propres filtres.
 

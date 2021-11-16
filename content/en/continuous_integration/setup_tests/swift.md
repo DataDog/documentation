@@ -398,14 +398,16 @@ Additional Git configuration for physical device testing:
 {{% /tab %}}
 {{% tab "GitHub Actions" %}}
 
-| Environment variable | Value                  |
-| -------------------- | ---------------------- |
-| `GITHUB_WORKSPACE`   | `$(GITHUB_WORKSPACE)`  |
-| `GITHUB_REPOSITORY`  | `$(GITHUB_REPOSITORY)` |
-| `GITHUB_RUN_ID`      | `$(GITHUB_RUN_ID)`     |
-| `GITHUB_RUN_NUMBER`  | `$(GITHUB_RUN_NUMBER)` |
-| `GITHUB_WORKFLOW`    | `$(GITHUB_WORKFLOW)`   |
-| `GITHUB_SHA`         | `$(GITHUB_SHA)`        |
+| Environment variable | Value                   |
+| -------------------- | ----------------------- |
+| `GITHUB_WORKSPACE`   | `$(GITHUB_WORKSPACE)`   |
+| `GITHUB_REPOSITORY`  | `$(GITHUB_REPOSITORY)`  |
+| `GITHUB_RUN_ID`      | `$(GITHUB_RUN_ID)`      |
+| `GITHUB_RUN_NUMBER`  | `$(GITHUB_RUN_NUMBER)`  |
+| `GITHUB_WORKFLOW`    | `$(GITHUB_WORKFLOW)`    |
+| `GITHUB_SHA`         | `$(GITHUB_SHA)`         |
+| `GITHUB_SERVER_URL`  | `$(GITHUB_SERVER_URL)`  |
+| `GITHUB_RUN_ATTEMPT` | `$(GITHUB_RUN_ATTEMPT)` |
 
 Additional Git configuration for physical device testing:
 
