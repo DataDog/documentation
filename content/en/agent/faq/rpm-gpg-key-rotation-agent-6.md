@@ -3,6 +3,11 @@ title: RPM GPG Key Rotation
 kind: faq
 ---
 
+<div class="alert alert-warning">
+This page refers to the key rotation that happened in 2019, there's a separate documentation page for the <a href="agent/faq/linux-agent-2022-key-rotation">2022 Key Rotation</a>.
+</div>
+
+
 Starting with v6.14.0, the Agent RPM packages are signed with a different GPG key. As a common best practice, Datadog periodically updates the GPG key.
 
 Hosts using RPM packages located in the [Datadog Yum repository][1] are affected by this change and need to trust the key by importing the associated public key in their hosts' keyrings.
