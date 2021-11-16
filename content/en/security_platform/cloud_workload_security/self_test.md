@@ -1,0 +1,34 @@
+---
+title: Troubleshooting
+kind: documentation
+description: "Troubleshooting guide for Datadog Cloud Workload Security."
+---
+
+## Self tests
+
+In order to ensure that:
+- the communication between the `security-agent` and the `system-probe` is
+working as expected
+- the Cloud Workload Security probe is able to respond to system events
+
+you can manually trigger self tests by running the following command:
+
+| Platform     | Command                                                                                           |
+| --------     | -------                                                                                           |
+| Docker       | `docker exec -it datadog-agent security-agent runtime self-test`                                  |
+| Kubernetes   | `kubectl exec -it datadog-1636981026-wlv5s -c security-agent -- security-agent runtime self-test` |
+| Host         | `sudo /opt/datadog-agent/embedded/bin/security-agent runtime self-test`                           |
+
+The self-test procedure will create some temporary files, create rules monitoring
+those files, and then trigger this rules.
+
+If everything is working as expected, you should see:
+```
+Runtime self test: OK
+```
+
+In the case of an error, you will see:
+```
+Runtime self test: ERROR_MESSAGE
+```
+where `ERROR_MESSAGE` is a description of the error encountered during the test.
