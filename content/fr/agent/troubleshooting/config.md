@@ -43,4 +43,5 @@ La configuration complète du runtime peut également être affichée en utilisa
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /fr/agent/basic_agent_usage/windows/#agent-v6

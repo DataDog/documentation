@@ -1,5 +1,5 @@
 ---
-title: Google を SAML IdP として構成する方法
+title: Google SAML IdP
 kind: documentation
 aliases:
   - /ja/account_management/faq/how-do-i-configure-google-as-a-saml-idp/
@@ -15,7 +15,7 @@ further_reading:
 
 [Google のヘルプを参照してください][1]。
 
-## 「サービスプロバイダーの詳細」の設定
+## サービスプロバイダーの詳細
 
 **前提条件**: Datadog の SAML 構成ページで、IdP 始動の SSO がオンになっている必要があります。
 
@@ -27,7 +27,7 @@ further_reading:
 * **署名付き応答**: オフのままにします。
 * **名前 ID**: 基本情報、メインのメールアドレス
 
-## 「属性のマッピング」の設定
+## 属性のマッピング
 
 * urn:oid:1.3.6.1.4.1.5923.1.1.1.6、基本情報、メインのメールアドレス
 
@@ -36,7 +36,7 @@ further_reading:
 * urn:oid:2.5.4.4、基本情報、姓
 * urn:oid:2.5.4.42、基本情報、名
 
-{{< img src="account_management/saml/zAttributeMapping.png" alt="zAttributeMapping"  style="width:75%;">}}
+{{< img src="account_management/saml/zAttributeMapping.png" alt="zAttributeMapping" style="width:75%;">}}
 
 ## その他の参考資料
 

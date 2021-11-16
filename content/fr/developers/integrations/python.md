@@ -19,8 +19,8 @@ Toutes les versions récentes de macOS sont livrées avec Python pré-installé.
 
 Options disponibles :
 
-- [[Homebrew][2]]: Follow the "[Doing it Right][3]" instructions.
-- [[Miniconda][4]]: Follow the "[Conda installation][5]" instructions.
+- [Homebrew][2] : suivez les instructions de la section [Doing it Right][3].
+- [Miniconda][4] : suivez les instructions de la section [Conda installation][5].
 
 Nous vous conseillons d'installer un [gestionnaire d'environnement](#gestionnaire-d-environnement-virtuel) pour ne pas altérer l'installation système de Python.
 
@@ -48,7 +48,7 @@ Miniconda intègre un outil de gestion des environnements virtuels. Consultez le
 [2]: https://brew.sh/#install
 [3]: https://docs.python-guide.org/en/latest/starting/install/osx/#doing-it-right
 [4]: https://repo.continuum.io/miniconda/Miniconda2-latest-MacOSX-x86_64.sh
-[5]: https://conda.io/docs/user-guide/install/macos.html
+[5]: https://docs.conda.io/projects/continuumio-conda/en/latest/user-guide/install/macos.html
 [6]: https://docs.python.org/2.7/using/windows.html
 [7]: https://pypi.python.org/pypi/virtualenv
 [8]: https://virtualenvwrapper.readthedocs.io/en/latest/index.html

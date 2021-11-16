@@ -58,6 +58,8 @@ Avec cette configuration, les métriques StatsD sont envoyées à l'IP du host, 
 
 Consultez la [documentation dédiée à Ambassador][3] pour en savoir plus.
 
+Vous pouvez également envoyer des données de tracing depuis Ambassador vers l'APM Datadog. Consultez la [documentation d'Ambassador relative au tracing avec l'APM Datadog][4] pour en savoir plus.
+
 ## Données collectées
 
 ### Métriques
@@ -74,10 +76,11 @@ Le check Ambassador n'inclut aucun check de service.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][5].
+Besoin d'aide ? Contactez [l'assistance Datadog][6].
 
 [1]: https://www.getambassador.io
 [2]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/ambassador/images/upstream-req-time.png
 [3]: https://www.getambassador.io/docs/latest/topics/running/statistics/#exposing-statistics-via-statsd
-[4]: https://github.com/DataDog/integrations-extras/blob/master/ambassador/metadata.csv
-[5]: https://docs.datadoghq.com/fr/help/
+[4]: https://www.getambassador.io/docs/latest/howtos/tracing-datadog/
+[5]: https://github.com/DataDog/integrations-extras/blob/master/ambassador/metadata.csv
+[6]: https://docs.datadoghq.com/fr/help/

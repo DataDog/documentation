@@ -1,7 +1,7 @@
 ---
 title: SLO Summary Widget
 kind: documentation
-description: "Track your SLOs."
+description: "Track your SLOs"
 aliases:
  - /monitors/monitor_uptime_widget/
  - /monitors/slo_widget/
@@ -15,7 +15,7 @@ further_reading:
 
 ## Setup
 
-Use the SLO Summary widget to track your [SLOs (Service Level Objectives)][1] on screenboards and timeboards. You can use Datadog’s [Service Level Objectives page][2] to create new SLOs and view all existing ones. You can then select an existing SLO and use the SLO Summary widget to display it on any dashboard.
+Use the SLO Summary widget to track your [SLOs (Service Level Objectives)][1] on screenboards and timeboards. You can use Datadog's [Service Level Objectives][2] page to create new SLOs and view all existing ones. You can then select an existing SLO and use the SLO Summary widget to display it on any dashboard.
 
 {{< img src="dashboards/widgets/slo/slo_summary_editor.png" alt="slo summary widget"  >}}
 
@@ -25,7 +25,7 @@ Use the SLO Summary widget to track your [SLOs (Service Level Objectives)][1] on
 2. Select an SLO from the dropdown menu.
 3. Select up to three different time windows.
 
-**Note:** The `Global Time` allows you to display your SLO’s status and error budget over arbitrary time periods within the past 90 days. Additionally, you will also be able to specify an optional unique SLO target for the arbitrary time period. Specifying an SLO target is required to display an error budget and for being able to color code the SLO status value as green or red. If no SLO target is specified only the SLO status will be shown and the font color will remain gray.
+**Note:** The `Global Time` allows you to display your SLO's status and error budget over arbitrary time periods within the past 90 days. Additionally, you can specify an optional unique SLO target for the arbitrary time period. Specifying an SLO target is required to display an error budget and for being able to color code the SLO status value as green or red. If no SLO target is specified only the SLO status is shown and the font color remains gray.
 
 ### Options
 
@@ -57,7 +57,7 @@ You can optionally define the title’s size and alignment.
 
 ## API
 
-This widget can be used with the **Dashboards API**. Refer to the [Dashboards API][3] documentation for additional reference.
+This widget can be used with the **Dashboards API**. See the [Dashboards API documentation][3] for additional reference.
 
 The dedicated [widget JSON schema definition][4] for the service map widget is:
 

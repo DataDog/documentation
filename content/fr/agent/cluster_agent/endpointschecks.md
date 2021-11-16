@@ -12,7 +12,7 @@ further_reading:
     tag: Documentation
     text: Documentation sur l'Agent de cluster
 ---
-## Fonctionnement
+## Présentation
 
 La fonction Check de cluster permet de découvrir automatiquement des services de cluster à charge équilibrée (p. ex., les services Kubernetes) et d'effectuer des checks sur ces derniers.
 
@@ -131,7 +131,7 @@ ad.datadoghq.com/endpoints.logs: '[<CONFIG_LOGS>]'
 
 La [template variable][7] `%%host%%` est prise en charge et remplacée par les IP des endpoints. Les tags `kube_namespace`, `kube_service` et `kube_endpoint_ip` sont automatiquement ajoutés aux instances.
 
-### Source du modèle : Étiquettes standard
+### Source du modèle : étiquettes standard
 
 ```yaml
 tags.datadoghq.com/env: "<ENV>"

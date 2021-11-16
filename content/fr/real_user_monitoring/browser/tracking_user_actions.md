@@ -18,17 +18,29 @@ further_reading:
     tag: Documentation
     text: Dashboards RUM
 ---
-Le SDK Real User Monitoring (RUM) détecte les interactions effectuées par un utilisateur durant son parcours. Pour activer cette fonctionnalité, définissez le [paramètre de lancement][1] `trackInteractions` sur `true`.
+Le SDK Browser Real User Monitoring (RUM) détecte automatiquement les interactions des utilisateurs lors de leur parcours.
 
-**Remarque** : le paramètre d'initialisation `trackInteractions` active la collecte des clics utilisateur dans votre application. **Des données sensibles et privées** présentes sur vos pages sont susceptibles d'être recueillies pour identifier les éléments ayant fait l'objet d'une interaction.
+La collecte automatique des actions utilisateur vous permet de mieux comprendre le comportement de vos utilisateurs, sans avoir à instrumenter manuellement chaque clic dans votre application. Grâce à cette fonctionnalité, vous disposez de toutes les informations dont vous avez besoin pour :
+* Mesurer les performances des interactions clés (par exemple, un clic sur le bouton « Ajouter au panier »)
+* Quantifier l'adoption d'une fonction
+* Identifier les étapes menant à une erreur spécifique dans un navigateur
 
-Lorsqu'une interaction est détectée, tous les nouveaux événements RUM sont associés à l'action en cours jusqu'à ce qu'elle soit considérée comme terminée. L'action dispose également des attributs de la vue parent : informations sur le navigateur, données de géolocalisation ou encore [contexte global][2].
+Vous pouvez recueillir des interactions utilisateur supplémentaires en [envoyant vos propres actions personnalisées](actions-personnalisees).
+
+**Remarque** : le paramètre d'initialisation `trackInteractions` active la collecte des clics utilisateur dans votre application. Les **données sensibles et confidentielles** figurant sur vos pages peuvent être recueillies, afin d'identifier les éléments ayant fait l'objet d'une interaction. Vous pouvez contrôler les informations envoyées à Datadog en [définissant manuellement un nom d'action](#declarer-un-nom-pour-les-actions-de-clic) ou en [appliquant des règles globales de scrubbing dans le SDK Browser][1].
+
+## Quelles sont les interactions surveillées ?
+
+Le SDK Browser surveille automatiquement les clics. Une action de clic est créée lorsque **toutes** les conditions suivantes sont respectées :
+* Une activité est détectée dans un délai de 100 ms après le clic (une activité correspond au lancement d'une requête réseau ou à une mutation DOM).
+* Le clic n'entraîne pas le chargement d'une nouvelle page, auquel cas le SDK Browser génère un nouvel événement de vue RUM.
+* Un nom peut être déterminé pour l'action ([en savoir plus sur le nommage d'actions](declarer-un-nom-pour-les-actions-de-clic)).
 
 ## Métriques de durée des actions
 
 Pour en savoir plus sur les attributs par défaut de tous les types d'événements RUM, consultez la section relative à la [collecte de données RUM][3]. Pour obtenir des instructions afin de configurer l'échantillonnage ou le contexte global, consultez la section [Configuration avancée du RUM][4].
 
-| Métrique    | Type   | Description              |
+| Métrique    | Type   | Rôle              |
 |--------------|--------|--------------------------|
 | `action.loading_time` | nombre (ns) | La durée de chargement de l'action.  |
 | `action.long_task.count`        | nombre      | Nombre total de tâches longues recueillies pour cette action. |
@@ -37,11 +49,11 @@ Pour en savoir plus sur les attributs par défaut de tous les types d'événemen
 
 ### Méthode de calcul de la durée de chargement d'une action
 
-Lorsqu'une interaction est détectée, le SDK RUM surveille les requêtes réseau et les mutations DOM. L'action utilisateur est considérée comme terminée lorsqu'aucune activité n'est effectuée sur la page pendant plus de 100 ms (une activité étant définie comme des requêtes réseau actives ou une mutation DOM).
+Lorsqu'une interaction est détectée, le SDK RUM surveille les requêtes réseau et les mutations DOM. L'action est considérée comme terminée lorsqu'aucune activité n'est effectuée sur la page pendant plus de 100 ms (une activité étant définie comme des requêtes réseau actives ou une mutation DOM).
 
 ## Attributs d'action
 
-| Attribut    | Type   | Description              |
+| Attribut    | Type   | Rôle              |
 |--------------|--------|--------------------------|
 | `action.id` | chaîne | UUID de l'action utilisateur. |
 | `action.type` | chaîne | Type d'action utilisateur. Pour les actions utilisateur personnalisées, cet attribut est défini sur `custom`. |
@@ -50,7 +62,7 @@ Lorsqu'une interaction est détectée, le SDK RUM surveille les requêtes résea
 
 ## Déclarer un nom pour les actions de clic
 
-La bibliothèque RUM utilise diverses stratégies pour nommer les actions de clic. Si vous souhaitez contrôler davantage les noms utilisés, définissez un attribut `data-dd-action-name` sur les éléments cliquables (ou l'un de leurs parents) afin de nommer l'action. Exemple :
+La bibliothèque RUM utilise diverses stratégies pour nommer les actions de clic. Si vous souhaitez contrôler davantage les noms utilisés, définissez un attribut `data-dd-action-name` sur les éléments cliquables (ou sur l'un de leurs parents) afin de nommer l'action. Exemple :
 
 ```html
 <a class="btn btn-default" href="#" role="button" data-dd-action-name="Bouton de connexion">Essayer</a>
@@ -61,11 +73,9 @@ La bibliothèque RUM utilise diverses stratégies pour nommer les actions de cli
   Saisissez une adresse e-mail valide
 </div>
 ```
-## Actions utilisateur personnalisées
+## Actions personnalisées
 
-Les actions utilisateur personnalisées sont des actions déclarées et envoyées manuellement via l'API `addAction`. Elles permettent d'envoyer des informations relatives à un événement qui a lieu au cours d'un parcours utilisateur (telles qu'un délai personnalisé ou des informations sur le panier client).
-
-Une fois la fonctionnalité RUM initialisée, générez des actions utilisateur pour surveiller des interactions spécifiques sur les pages de votre application ou mesurer des délais personnalisés avec l'appel d'API `addAction(name: string, context: Context)`. Dans l'exemple ci-dessus, le SDK RUM recueille le nombre d'articles d'un panier, la nature de ces articles, ainsi que le montant total du panier.
+Les actions personnalisées correspondent à des actions utilisateur déclarées et envoyées manuellement, via l'API `addAction`. Elles servent à envoyer des informations sur un événement qui s'est produit lors d'un parcours utilisateur. Dans l'exemple suivant, le SDK RUM recueille les données du panier d'un utilisateur lorsqu'il appuie sur le bouton de paiement. Cette action récupère le nombre d'articles dans le panier, la liste des articles et le montant total du panier.
 
 {{< tabs >}}
 {{% tab "NPM" %}}
@@ -131,7 +141,6 @@ window.DD_RUM &&
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /fr/real_user_monitoring/browser/?tab=us#initialization-parameters
-[2]: /fr/real_user_monitoring/browser/advanced_configuration/?tab=npm#add-global-context
+[1]: /fr/real_user_monitoring/browser/advanced_configuration/?tab=npm#scrub-sensitive-data-from-your-rum-data
 [3]: /fr/real_user_monitoring/browser/data_collected/#default-attributes
 [4]: /fr/real_user_monitoring/browser/advanced_configuration/

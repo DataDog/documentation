@@ -12,7 +12,7 @@ To downgrade the Datadog Agent to a prior major version, follow the instructions
 **Notes**:
 
 * These instructions only work for Datadog Agent version 6.x and above.
-* The instructions below for configuration management tools only work with the latest major version of these tools: v4.x for the Chef cookbook, v3.x for the Puppet module, and v4.x for the Ansible role. If you are using a prior version, refer to the documentation for that version on the tools' repositories: [Chef cookbook v3.x][2], [Puppet module v2.x][3], or [Ansible role v3.x][4].
+* The instructions below for configuration management tools only work with the latest major version of these tools: v4.x for the Chef cookbook, v3.x for the Puppet module, and v4.x for the Ansible role. If you are using a prior version, see the documentation for that version on the tools' repositories: [Chef cookbook v3.x][2], [Puppet module v2.x][3], or [Ansible role v3.x][4].
 
 ## Debian/Ubuntu
 

@@ -6,11 +6,13 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Amazon VPN のキーメトリクスを追跡
-doc_link: 'https://docs.datadoghq.com/integrations/amazon_vpn/'
+doc_link: https://docs.datadoghq.com/integrations/amazon_vpn/
 draft: false
 git_integration_title: amazon_vpn
 has_logo: true
+integration_id: amazon-vpn
 integration_title: Amazon VPN
+integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
@@ -44,13 +46,13 @@ Amazon VPN から S3 バケットまたは CloudWatch のいずれかにログ�
 
 **注**: S3 バケットにログを送る場合は、_Target prefix_ が `amazon_vpn` に設定されているかを確認してください。
 
-#### Datadog へのログの送信
+#### ログを Datadog に送信する方法
 
-1. [Datadog ログ コレクション AWS Lambda 関数][4]をまだ実行していない場合は、セットアップします。
+1. [Datadog ログコレクション AWS Lambda 関数][4] をまだ設定していない場合は、設定を行ってください。
 2. lambda 関数がインストールされたら、AWS コンソールから、Amazon VPN ログを含む S3 バケットまたは CloudWatch のロググループに手動でトリガーを追加します。
 
     - [S3 バケットに手動トリガーを追加][5]
-    - [Cloudwatch ロググループに手動トリガーを追加][6]
+    - [CloudWatch ロググループに手動トリガーを追加][6]
 
 ## 収集データ
 

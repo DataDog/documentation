@@ -4,7 +4,8 @@ assets:
     spec: assets/configuration/spec.yaml
   dashboards:
     CockroachDB Overview: assets/dashboards/overview.json
-  logs: {}
+  logs:
+    source: cockroachdb
   metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
@@ -12,6 +13,7 @@ categories:
   - cloud
   - data store
   - オートディスカバリー
+  - ログの収集
 creates_events: false
 ddtype: check
 dependencies:
@@ -60,6 +62,33 @@ CockroachDB チェックは [Datadog Agent][2] パッケージに含まれてい
 1. CockroachDB のパフォーマンスデータの収集を開始するには、[Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `cockroachdb.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル cockroachdb.d/conf.yaml][2] を参照してください。
 
 2. [Agent を再起動します][3]。
+##### ログの収集
+
+_Agent バージョン 6.0 以降で利用可能_
+
+1. Datadog Agent で、ログの収集はデフォルトで無効になっています。`datadog.yaml` で有効にします。
+
+   ```yaml
+   logs_enabled: true
+   ```
+
+2. CockroachDB のログの収集を開始するには、次のコンフィギュレーションブロックを `cockroachdb.d/conf.yaml` ファイルに追加します。
+
+   ```yaml
+   logs:
+    - type: file
+      path: /var/lib/cockroach/logs/cockroach.log
+      source: cockroachdb
+      service: cockroachdb
+      log_processing_rules:
+      - type: multi_line
+        name: new_log_start_with_status_and_date
+        pattern: [A-Z]\d{6}\s\d+\:\d+\:\d+\.\d+
+   ```
+
+    `path` パラメーターと `service` パラメーターの値を変更し、環境に合わせて構成してください。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル cockroachdb.d/conf.yaml][2] を参照してください。
+
+3. [Agent を再起動します][3]。
 
 [1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/
 [2]: https://github.com/DataDog/integrations-core/blob/master/cockroachdb/datadog_checks/cockroachdb/data/conf.yaml.example
@@ -77,7 +106,18 @@ CockroachDB チェックは [Datadog Agent][2] パッケージに含まれてい
 | `<初期コンフィギュレーション>`      | 空白または `{}`                                            |
 | `<インスタンスコンフィギュレーション>`  | `{"prometheus_url":"http://%%host%%:8080/_status/vars"}` |
 
+##### ログの収集
+
+ログの収集は、Datadog Agent ではデフォルトで無効になっています。有効にするには、[Docker ログ収集ドキュメント][2]を参照してください。
+
+次に、[ログインテグレーション][2]を Docker ラベルとして設定します。
+
+```yaml
+LABEL "com.datadoghq.ad.logs"='[{"source": "cockroachdb", "service": "<SERVICE_NAME>"}]'
+```
+
 [1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
+[2]: https://docs.datadoghq.com/ja/agent/docker/log/?tab=containerinstallation#log-integrations
 {{% /tab %}}
 {{< /tabs >}}
 

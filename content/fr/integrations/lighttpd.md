@@ -2,11 +2,14 @@
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
-  dashboards: {}
+  dashboards:
+    lighttpd: assets/dashboards/lighttpd_dashboard.json
   logs:
     source: lighttpd
   metrics_metadata: metadata.csv
   monitors: {}
+  saved_views:
+    lighttpd_processes: assets/saved_views/lighttpd_processes.json
   service_checks: assets/service_checks.json
 categories:
   - web
@@ -109,7 +112,6 @@ Consultez la [documentation relative aux modèles d'intégration Autodiscovery][
    ```yaml
    logs:
      - type: file
-       encoding: utf-16-le
        path: /path/to/my/directory/file.log
        source: lighttpd
    ```
@@ -136,9 +138,8 @@ Le check lighttpd n'inclut aucun événement.
 
 ### Checks de service
 
-`- lighttpd.can_connect` :
-
-Renvoie CRITICAL si l'Agent ne parvient pas à se connecter à lighttpd pour recueillir des métriques. Si ce n'est pas le cas, renvoie OK.
+**lighttpd.can_connect** :<br>
+Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter à lighttpd pour recueillir des métriques. Si ce n'est pas le cas, renvoie `OK`.
 
 ## Dépannage
 

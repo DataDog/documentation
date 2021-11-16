@@ -1,15 +1,15 @@
 ---
 beta: true
 dependencies:
-  - 'https://github.com/DataDog/dd-sdk-android/blob/master/docs/trace_collection.md'
+  - https://github.com/DataDog/dd-sdk-android/blob/master/docs/trace_collection.md
 description: Recueillez des traces à partir de vos applications Android.
 further_reading:
-  - link: 'https://github.com/DataDog/dd-sdk-android'
+  - link: https://github.com/DataDog/dd-sdk-android
     tag: Github
     text: Code source dd-sdk-android
   - link: tracing/visualization/
     tag: Documentation
-    text: 'Explorer vos services, ressources et traces'
+    text: Explorer vos services, ressources et traces
 kind: documentation
 title: Collecte de traces Android
 ---
@@ -73,16 +73,16 @@ Envoyez des [traces][1] à Datadog à partir de vos applications Android avec la
    * Si vous la remplacez par `TrackingConsent.GRANTED` : le SDK envoie tous les lots de données actuels, ainsi que toutes les données ultérieures, directement au endpoint de collecte de données.
    * Si vous la remplacez par `TrackingConsent.NOT_GRANTED` : le SDK supprime tous les lots de données et ne recueille plus aucune donnée par la suite.
 
-   Attention, vous devez également spécifier le nom de la variante de votre application dans les identifiants requis pour l'initialisation. Cette opération est primordiale, car elle permet d'importer automatiquement le bon fichier `mapping.txt` ProGuard au moment de la conception. Un dashboard Datadog peut alors annuler l'obfuscation des stack traces.
+**Remarque** : dans les identifiants requis pour l'initialisation, vous devez également spécifier le nom de variante de votre application. Pour ce faire, utilisez votre valeur `BuildConfig.FLAVOR` (ou une chaîne vide si vous n'avez pas de variante). Cette étape est essentielle, car elle permet d'importer automatiquement le bon fichier `mapping.txt` ProGuard au moment du build, afin d'afficher les stack traces des erreurs RUM désobfusquées. Pour en savoir plus, consultez le [guide d'importation de fichiers de mapping source Android][8].
 
-   Utilisez la méthode utilitaire `isInitialized` pour vérifier si le SDK est bien initialisé :
+   Utilisez la méthode utilitaire `isInitialized` pour vérifier que le SDK est bien initialisé :
 
    ```kotlin
     if (Datadog.isInitialized()) {
-        // your code here
+        // votre code ici
     }
    ```
-   Lors de la création de votre application, vous pouvez activer les logs de développement en appelant la méthode `setVerbosity`. Tous les messages internes de la bibliothèque dont la priorité est supérieure ou égale au niveau spécifié sont alors enregistrés dans le Logcat d'Android :
+   Lors de la création de votre application, vous pouvez activer les logs de développement en appelant la méthode `setVerbosity`. Tous les messages internes de la bibliothèque dont la priorité est égale ou supérieure au niveau spécifié sont alors enregistrés dans le Logcat d'Android :
    ```kotlin
    Datadog.setVerbosity(Log.INFO)
    ```

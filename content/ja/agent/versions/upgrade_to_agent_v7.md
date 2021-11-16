@@ -17,15 +17,27 @@ Agent v7 は Python 3 のカスタムチェックにのみ対応しています�
 
 Agent をバージョン 6 からバージョン 7 にアップグレードするには、環境変数 `DD_AGENT_MAJOR_VERSION=7` を使用して Agent インストールコマンドを実行します。
 
-| プラットフォーム     | コマンド                                                                                                                                                                   |
-|--------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Amazon Linux | `DD_AGENT_MAJOR_VERSION=7 DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"` |
-| CentOS       | `DD_AGENT_MAJOR_VERSION=7 DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"` |
-| Debian       | `DD_AGENT_MAJOR_VERSION=7 DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"` |
-| Fedora       | `DD_AGENT_MAJOR_VERSION=7 DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"` |
-| Red Hat      | `DD_AGENT_MAJOR_VERSION=7 DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"` |
-| Ubuntu       | `DD_AGENT_MAJOR_VERSION=7 DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"` |
-| SUSE         | `DD_AGENT_MAJOR_VERSION=7 DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"` |
+
+Amazon Linux 
+: `DD_AGENT_MAJOR_VERSION=7 DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"`
+
+CentOS       
+: `DD_AGENT_MAJOR_VERSION=7 DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"`
+
+Debian       
+: `DD_AGENT_MAJOR_VERSION=7 DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"`
+
+Fedora       
+: `DD_AGENT_MAJOR_VERSION=7 DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"`
+
+Red Hat      
+: `DD_AGENT_MAJOR_VERSION=7 DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"`
+
+Ubuntu       
+: `DD_AGENT_MAJOR_VERSION=7 DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"`
+
+SUSE         
+: `DD_AGENT_MAJOR_VERSION=7 DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"`
 
 {{% /tab %}}
 {{% tab "Windows" %}}
@@ -38,7 +50,7 @@ Agent をバージョン 6 からバージョン 7 にアップグレードす�
 **注**: Windows インストーラーの利用可能な全バージョンのリンクは、[JSON 形式で提供されています][3]。
 
 [1]: https://ddagent-windows-stable.s3.amazonaws.com/datadog-agent-7-latest.amd64.msi
-[2]: https://app.datadoghq.com/account/settings#api
+[2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://s3.amazonaws.com/ddagent-windows-stable/installers.json
 {{% /tab %}}
 {{% tab "MacOS" %}}
@@ -59,15 +71,26 @@ DD_AGENT_MAJOR_VERSION=7 DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https
 
 Agent をバージョン 5 からバージョン 7 にアップグレードするには、環境変数 `DD_AGENT_MAJOR_VERSION=7` と `DD_UPGRADE="true"` を使用して Agent インストールコマンドを実行します。Agent v7 インストーラーにより、v5 のコンフィギュレーションがアップグレード中に自動的に変換されます。
 
-| プラットフォーム     | コマンド                                                                                                                                                      |
-|--------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Amazon Linux | `DD_AGENT_MAJOR_VERSION=7 DD_UPGRADE="true" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"` |
-| CentOS       | `DD_AGENT_MAJOR_VERSION=7 DD_UPGRADE="true" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"` |
-| Debian       | `DD_AGENT_MAJOR_VERSION=7 DD_UPGRADE="true" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"` |
-| Fedora       | `DD_AGENT_MAJOR_VERSION=7 DD_UPGRADE="true" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"` |
-| Red Hat      | `DD_AGENT_MAJOR_VERSION=7 DD_UPGRADE="true" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"` |
-| Ubuntu       | `DD_AGENT_MAJOR_VERSION=7 DD_UPGRADE="true" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"` |
-| SUSE         | `DD_AGENT_MAJOR_VERSION=7 DD_UPGRADE="true" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"` |
+Amazon Linux 
+: `DD_AGENT_MAJOR_VERSION=7 DD_UPGRADE="true" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"`
+
+CentOS       
+: `DD_AGENT_MAJOR_VERSION=7 DD_UPGRADE="true" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"`
+
+Debian       
+: `DD_AGENT_MAJOR_VERSION=7 DD_UPGRADE="true" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"`
+
+Fedora       
+: `DD_AGENT_MAJOR_VERSION=7 DD_UPGRADE="true" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"`
+
+Red Hat      
+: `DD_AGENT_MAJOR_VERSION=7 DD_UPGRADE="true" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"`
+
+Ubuntu       
+: `DD_AGENT_MAJOR_VERSION=7 DD_UPGRADE="true" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"`
+
+SUSE         
+: `DD_AGENT_MAJOR_VERSION=7 DD_UPGRADE="true" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"`
 
 {{% /tab %}}
 {{% tab "Windows" %}}

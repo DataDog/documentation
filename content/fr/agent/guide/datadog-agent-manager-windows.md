@@ -8,7 +8,7 @@ further_reading:
 ---
 ## Présentation
 
-L'interface graphique de Datadog Agent Manager v6 repose sur l'utilisation d'un navigateur. Vous pouvez configurer le port sur lequel elle s'exécute dans votre fichier `datadog.yaml`. L'interface graphique est désactivée lorsque le port est défini sur `-1`. Par défaut, elle est activée sur le port 5002, pour Windows et Mac, et désactivée sur Linux.
+L'interface graphique de Datadog Agent Manager repose sur l'utilisation d'un navigateur. Vous pouvez configurer le port sur lequel elle s'exécute dans votre fichier `datadog.yaml`. L'interface graphique est désactivée lorsque le port est défini sur `-1`. Par défaut, elle est activée sur le port 5002, pour Windows et Mac, et désactivée sur Linux.
 
 ### Exigences
 

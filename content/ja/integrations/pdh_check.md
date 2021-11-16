@@ -12,7 +12,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/pdh_check/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/pdh_check/README.md
 display_name: PDH
 draft: false
 git_integration_title: pdh_check
@@ -57,7 +57,7 @@ PDH チェックは [Datadog Agent][1] パッケージに含まれています�
 
 ### メトリクス
 
-PHD チェックにより収集されたすべてのメトリクスは、[カスタムメトリクス][6]として Datadog に送信できますが、これはお客様への[請求][7]に影響します。
+PDH チェックにより収集されたすべてのメトリクスは、[カスタムメトリクス][6]として Datadog に送信できますが、これはお客様への[請求][7]に影響します。
 
 ### イベント
 

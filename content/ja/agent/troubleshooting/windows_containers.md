@@ -33,7 +33,7 @@ Hyper-V 分離モードはサポートされていません。
 
 ライブプロセスはコンテナに表示されません (Datadog Agent を除く)。
 
-### 複合クラスター (Linux + Windows) に Datadog Agent および Kube State メトリクスをスケジュールする
+### 複合クラスター (Linux + Windows)
 
 複合クラスターに Datadog Agent をデプロイするには、Helm チャートの 2 つのインストールを異なる `targetSystem` で実行することが推奨されます。
 
@@ -57,7 +57,7 @@ kube-state-metrics:
 
 **注**: 2 つの Datadog インストール (`targetSystem: linux`、`targetSystem: windows`) を使用する場合、2 つ目のインストールで `datadog.kubeStateMetricsEnabled` を必ず `false` に設定してください。Kube State メトリクスのインスタンスを 2 つデプロイしないようにするためです。
 
-### APM/DogStatsD の HostPort 
+### APM または DogStatsD の HostPort 
 
 `HostPort` は、基となる OS バージョンおよび CNI プラグインにより、Kubernetes で一部サポートされています。
 `HostPort` が正常に動作するための要件は以下のとおりです。

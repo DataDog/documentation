@@ -2,7 +2,8 @@
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
-  dashboards: {}
+  dashboards:
+    ASP.NET - Overview: assets/dashboards/overview.json
   logs: {}
   metrics_metadata: metadata.csv
   monitors: {}
@@ -10,6 +11,7 @@ assets:
 categories:
   - web
   - languages
+  - log collection
 creates_events: false
 ddtype: check
 dependencies:
@@ -52,9 +54,14 @@ ASP.NET チェックは [Datadog Agent][1] パッケージに含まれていま�
 
 2. [Agent を再起動します][4]。
 
+#### ログの収集
+ASP.NET は IIS ロギングを使用します。ASP.NET リクエストおよび失敗に関するログを表示するには、[IIS のセットアップ手順][5]に従います。
+
+ASP.NET アプリケーションに関する未処理の 500 レベルの例外およびイベントは、Windows Application EventLog を使用して表示できます。
+
 ### 検証
 
-[Agent の `status` サブコマンドを実行][5]し、Checks セクションで `aspdotnet` を探します。
+[Agent の `status` サブコマンドを実行][6]し、Checks セクションで `aspdotnet` を探します。
 
 ## 収集データ
 
@@ -72,12 +79,13 @@ ASP.NET チェックには、サービスのチェック機能は含まれませ
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][7]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [3]: https://github.com/DataDog/integrations-core/blob/master/aspdotnet/datadog_checks/aspdotnet/data/conf.yaml.example
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[6]: https://github.com/DataDog/integrations-core/blob/master/aspdotnet/metadata.csv
-[7]: https://docs.datadoghq.com/ja/help/
+[5]: https://docs.datadoghq.com/ja/integrations/iis/?tab=host#setup
+[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[7]: https://github.com/DataDog/integrations-core/blob/master/aspdotnet/metadata.csv
+[8]: https://docs.datadoghq.com/ja/help/

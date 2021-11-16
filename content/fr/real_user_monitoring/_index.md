@@ -69,9 +69,6 @@ Affinez vos [métriques d'infrastructure, vos logs et vos traces backend][1] jus
 
 Recevez des alertes automatisées en cas d'anomalies et de groupes d'erreurs, de timeouts et de crashs pour réduire considérablement votre MTTR avec le [suivi des erreurs][4].
 
-{{< img src="real_user_monitoring/error_tracking/rum_errors.gif" alt="Suivi des erreurs RUM">}}
-
-
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}

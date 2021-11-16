@@ -50,7 +50,7 @@ Dans le code de votre fonction, vous devez importer les méthodes nécessaires �
 from datadog_lambda.metric import lambda_metric
 from datadog_lambda.wrapper import datadog_lambda_wrapper
 
-# Vous devez uniquement ajouter un wrapper autour du gestionnaire de votre fonction (et non autour des fonctions auxiliaires). 
+# Vous devez uniquement ajouter un wrapper autour du gestionnaire de votre fonction (et non autour des fonctions auxiliaires).
 @datadog_lambda_wrapper
 def lambda_handler(event, context):
     lambda_metric(
@@ -98,8 +98,8 @@ import (
 )
 
 func main() {
-  // Vous devez uniquement ajouter un wrapper autour du gestionnaire de votre fonction (et non autour des fonctions auxiliaires). 
-  lambda.Start(ddlambda.WrapHandler(myHandler, nil))
+  // Vous devez uniquement ajouter un wrapper autour du gestionnaire de votre fonction (et non autour des fonctions auxiliaires).
+  lambda.Start(ddlambda.WrapFunction(myHandler, nil))
   /* OU utiliser les options de configuration manuelle
   lambda.Start(ddlambda.WrapHandler(myHandler, &ddlambda.Config{
     BatchInterval: time.Second * 15
@@ -250,7 +250,7 @@ Où :
 [2]: /fr/tracing/generate_metrics/
 [3]: https://docs.datadoghq.com/fr/metrics/distributions/
 [4]: /fr/serverless/forwarder/
-[5]: /fr/developers/metrics/
+[5]: /fr/metrics/
 [6]: /fr/serverless/installation/
 [7]: /fr/metrics/distributions/#customize-tagging
 [8]: https://aws.amazon.com/premiumsupport/knowledge-center/internet-access-lambda-function

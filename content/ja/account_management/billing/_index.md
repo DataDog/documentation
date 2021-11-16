@@ -48,7 +48,7 @@ IoT のご請求に関する詳細については、[Datadog 料金ページ][7]
 
 ## その他の参考資料
 
-{{< whatsnext desc="請求に関するトピック:">}}
+{{< whatsnext desc="課金に関するトピック:">}}
     {{< nextlink href="account_management/billing/pricing/" >}}料金{{< /nextlink >}}
     {{< nextlink href="account_management/billing/usage_details/" >}}使用料の詳細{{< /nextlink >}}
     {{< nextlink href="account_management/billing/usage_metrics/" >}}使用量のメトリクス{{< /nextlink >}}
@@ -56,10 +56,9 @@ IoT のご請求に関する詳細については、[Datadog 料金ページ][7]
     {{< nextlink href="account_management/billing/custom_metrics/" >}}カスタムメトリクス{{< /nextlink >}}
     {{< nextlink href="account_management/billing/containers/" >}}コンテナ{{< /nextlink >}}
     {{< nextlink href="account_management/billing/log_management/" >}}ログ管理{{< /nextlink >}}
-    {{< nextlink href="account_management/billing/apm_distributed_tracing/" >}}APM と分散型トレース{{< /nextlink >}}
+    {{< nextlink href="account_management/billing/apm_tracing_profiler/" >}}APM (分散型トレーシング & 継続的プロファイリング){{< /nextlink >}}
     {{< nextlink href="account_management/billing/serverless/" >}}サーバーレス{{< /nextlink >}}
     {{< nextlink href="account_management/billing/rum/" >}}リアルユーザーモニタリングに関するよくあるご質問{{< /nextlink >}}
-    {{< nextlink href="account_management/billing/profiler/" >}}継続的なプロファイリングに関するよくあるご質問{{< /nextlink >}}
     {{< nextlink href="account_management/billing/aws/" >}}AWS インテグレーション{{< /nextlink >}}
     {{< nextlink href="account_management/billing/azure/" >}}Azure インテグレーション{{< /nextlink >}}
     {{< nextlink href="account_management/billing/alibaba/" >}}Alibaba インテグレーション{{< /nextlink >}}

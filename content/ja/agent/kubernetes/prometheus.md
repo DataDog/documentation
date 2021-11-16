@@ -87,7 +87,7 @@ spec:
 
 1. [Datadog Agent を起動します][10]。
 
-2. [この Prometheus DaemonSet `prometheus.yaml`][11] を使用して、設定済みのオートディスカバリーコンフィギュレーションで Prometheus ポッドを起動します。
+2. [この Prometheus DaemonSet `prometheus.yaml`][11] を使用して、オートディスカバリーコンフィギュレーションを設定済みの Prometheus ポッドを起動します。
 
     オートディスカバリーのコンフィギュレーション:
 
@@ -224,7 +224,7 @@ datadog:
 [2]: /ja/integrations/prometheus/
 [3]: https://github.com/DataDog/integrations-core/tree/master/openmetrics
 [4]: https://github.com/DataDog/integrations-core/tree/master/prometheus
-[5]: /ja/developers/prometheus/
+[5]: /ja/developers/custom_checks/prometheus/
 [6]: /ja/integrations/guide/prometheus-metrics
 [7]: /ja/agent/kubernetes/#installation
 [8]: /ja/getting_started/tagging/

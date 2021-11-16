@@ -2,7 +2,8 @@
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
-  dashboards: {}
+  dashboards:
+    varnish: assets/dashboards/varnish_dashboard.json
   logs:
     source: varnish
   metrics_metadata: metadata.csv
@@ -12,6 +13,7 @@ assets:
     5xx_errors: assets/saved_views/5xx_errors.json
     bot_errors: assets/saved_views/bot_errors.json
     status_code_overview: assets/saved_views/status_code_overview.json
+    varnish_processes: assets/saved_views/varnish_processes.json
   service_checks: assets/service_checks.json
 categories:
   - web
@@ -22,6 +24,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/varnish/README.md'
 display_name: Varnish
+draft: false
 git_integration_title: varnish
 guid: d2052eae-89b8-4cb1-b631-f373010da4b8
 integration_id: varnish
@@ -102,7 +105,7 @@ sudo usermod -G varnish -a dd-agent
 
 ##### Collecte de logs
 
-_Disponible à partir des versions > 6.0 de l'Agent_
+_Disponible à partir des versions > 6.0 de l'Agent_
 
 1. Pour activer la journalisation de Varnish, supprimez la mise en commentaires de ce qui suit dans `/etc/default/varnishncsa` :
 

@@ -2,11 +2,14 @@
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
-  dashboards: {}
+  dashboards:
+    kyototycoon: assets/dashboards/kyototycoon_dashboard.json
   logs:
     source: kyototycoon
   metrics_metadata: metadata.csv
   monitors: {}
+  saved_views:
+    kyoto-tycoon_processes: assets/saved_views/kyoto-tycoon_processes.json
   service_checks: assets/service_checks.json
 categories:
   - data store

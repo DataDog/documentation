@@ -38,15 +38,16 @@ Une fois la métrique définie, le monitor de détection des anomalies génère 
 
 ### Définir vos conditions d'alerte
 
-* Déclencher une alerte si les valeurs sont `above or below`, `above` ou `below`
-* aux limites depuis `15 minutes`, `1 hour` ou une période `custom` (comprise entre 15 minutes et 24 heures).
-* Rétablir si les valeurs sont comprises entre les limites pendant une durée minimale de `15 minutes`, `1 hour` `custom` (comprise entre 15 minutes et 24 heures).
+Déclencher une alerte si les valeurs sont `above or below`, `above` ou `below` des limites sur un intervalle de `15 minutes`, `1 hour`, etc. ou `custom` (valeur personnalisée comprise entre 15 minutes et 24 heures). Rétablir si les valeurs sont comprises dans les limites pendant une durée minimale de `15 minutes`, `1 hour`, etc. ou `custom` (valeur personnalisée comprise entre 15 minutes et 24 heures).
 
-**Détection des anomalies** : avec l'option par défaut (`above ou below`), une métrique est considérée comme anormale si elle sort de la bande grise représentant les valeurs normales. Choisissez l'option `above` ou `below` pour être alerté uniquement si la métrique passe au-dessus ou en dessous de la bande grise.
+Détection d'anomalies
+: Avec l'option par défaut (`above ou below`), une métrique est considérée comme anormale si elle sort de la bande grise représentant les valeurs normales. Choisissez l'option `above` ou `below` pour être alerté uniquement si la métrique passe au-dessus ou en dessous de la bande grise.
 
-**Période de déclenchement** : la durée pendant laquelle une métrique doit être anormale pour qu'une alerte se déclenche. **Remarque** : si la période d'alerte est trop courte, vous risquez de recevoir de fausses alertes pour de simples irrégularités.
+Fenêtre de déclenchement
+: Durée pendant laquelle une métrique doit être anormale pour qu'une alerte se déclenche. **Remarque** : si la période d'alerte est trop courte, vous risquez de recevoir de fausses alertes pour de simples irrégularités.
 
-**Période de rétablissement** : la durée pendant laquelle une métrique anormale doit afficher un comportement normal pour que l'alerte soit annulée.
+Fenêtre de rétablissement
+: Durée pendant laquelle une métrique anormale doit afficher un comportement normal pour que l'alerte soit annulée.
 
 #### Options avancées
 
@@ -54,32 +55,48 @@ Datadog analyse automatiquement la métrique choisie et définit plusieurs param
 
 {{< img src="monitors/monitor_types/anomaly/advanced_options.png" alt="options avancées" style="width:80%;">}}
 
-| Option                      | Description                                                                                                                |
-|-----------------------------|----------------------------------------------------------------------------------------------------------------------------|
-| Déviations                  | La largeur de la bande grise. Elle correspond au paramètre des limites utilisé pour la [fonction anomalies][3].                |
-| Algorithme                   | L'[algorithme de détection des anomalies](#algorithme-de-detection-des-anomalies) (`basic`, `agile` ou `robust`).                          |
-| [Caractère saisonnier](#seasonality) | Caractère saisonnier d'une prévision (`hourly`, `daily` ou `weekly`) pour l'algorithme saisonnier `agile` ou `robust` afin d'analyser la métrique. |
-| [Changement d'heure][4]  | Disponible pour la détection d'anomalies `agile` ou `robost` avec le caractère saisonnier `weekly` ou `daily`.                                  |
-| [Rollup][5]                 | L'intervalle de cumul.                                                                                                       |
-| Seuils                  | Le pourcentage de points qui doivent être anormaux pour déclencher une alerte, un avertissement ou un rétablissement.                                    |
 
-##### Caractère saisonnier
+Deviations 
+: Largeur de la bande grise. Elle correspond au paramètre des limites utilisé pour la [fonction anomalies][3].
 
-| Option | Description                                                                                                                                   |
-|--------|-----------------------------------------------------------------------------------------------------------------------------------------------|
-| Hourly | L'algorithme s'attend à ce qu'une même minute d'une heure donnée se comporte comme celles des heures précédentes. Par exemple, les données de 17 h 15 doivent être similaires à celles de 16 h 15, 15 h 15, etc. |
-| Daily  | L'algorithme s'attend à ce qu'une heure donnée se comporte comme celles des jours précédents. Par exemple, les données du jour pour 17 h doivent être similaires à celles de 17 h la veille.                           |
-| Weekly | L'algorithme s'attend à ce qu'un jour de la semaine donné se comporte comme ceux des semaines précédentes. Par exemple, les données d'un mardi doivent être similaires à celles des mardis précédents.   |
+Algorithm
+: L'[algorithme de détection des anomalies](#algorithme-de-detection-des-anomalies) (`basic`, `agile` ou `robust`).
+
+Seasonality
+: [Saisonnalité](#saisonnalite) (`hourly`, `daily` ou `weekly`) en fonction de laquelle l'algorithme `agile` ou `robust` doit analyser la métrique.
+
+Daylight savings
+: Disponible pour la détection d'anomalies `agile` ou `robust` avec la saisonnalité `weekly` ou `daily`. Pour en savoir plus, consultez [la page sur la détection d'anomalies et les fuseaux horaires][4].
+
+Rollup  
+: [Intervalle de cumul][5].
+
+Thresholds
+: Pourcentage des points qui doivent être anormaux pour déclencher une alerte, un avertissement ou un rétablissement.
+
+##### Saisonnalité
+
+Hourly
+: L'algorithme s'attend à ce qu'une même minute donnée d'une heure donnée se comporte comme les minutes des heures précédentes. Par exemple, les données de 17 h 15 doivent être similaires à celles de 16 h 15, 15 h 15, etc.
+
+Daily
+: L'algorithme s'attend à ce qu'une heure donnée se comporte comme celles des jours précédents. Par exemple, les données du jour pour 17 h doivent être similaires à celles de 17 h la veille.
+
+Weekly
+: L'algorithme s'attend à ce qu'un jour de la semaine donné se comporte comme les jours des semaines précédentes. Par exemple, les données d'un mardi doivent être similaires à celles des mardis précédents.
 
 **Remarque** : pour être réellement efficaces, les algorithmes d'apprentissage automatique nécessitent au moins deux fois plus de données historiques que l'intervalle saisonnier choisi.
 
 ##### Algorithmes de détection des anomalies
 
-| Option | Cas d'utilisation                                                                                       | Description                                                                                                                                                                                                                                                           |
-|--------|------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Basic  | Les métriques qui n'ont pas de tendance saisonnière récurrente.                                                     | Utilise un calcul simple reposant sur des quantiles cumulés avec un délai pour déterminer la plage de valeurs attendues. Cet algorithme utilise très peu de données et s'ajuste rapidement aux changements de conditions. Toutefois, il ne prend pas en compte le comportement saisonnier ni les tendances à plus long terme.                                         |
-| Agile  | Les métriques saisonnières sont amenées à évoluer. L'algorithme doit être en mesure de s'adapter rapidement à ces évolutions. | Cet algorithme est une version robuste de l'algorithme [SARIMA][6]. Il intègre les dernières données historiques à ses prédictions, ce qui lui permet de s'adapter rapidement aux changements de niveaux, mais qui lui vaut d'être moins robuste pour les anomalies récentes sur le long terme.                                                |
-| Robust | Les métriques saisonnières sont normalement stables. Les changements de niveaux légers sont considérés comme des anomalies.             | Un algorithme de [décomposition de tendance saisonnière][7] (article en anglais) particulièrement stable. Ses prédictions restent constantes même en cas d'anomalies sur le long terme, ce qui lui vaut un temps de réponse plus long en cas de changement de niveau attendu (par exemple, si le niveau d'une métrique change à la suite d'une modification du code). |
+Basic
+: Utilisez cet algorithme lorsque les métriques n'ont pas de modèle saisonnier récurrent. L'algorithme Basic utilise un calcul simple reposant sur des quantiles cumulés avec un délai pour déterminer la plage de valeurs attendues. Il utilise très peu de données et s'ajuste rapidement aux changements de conditions sans prendre en compte les comportements saisonniers ni les tendances à plus long terme. 
+
+Agile
+: Utilisez cet algorithme lorsque les métriques sont saisonnières et sont censées changer. Cet algorithme s'ajuste rapidement aux changements de niveaux de la métrique. Cet algorithme est une version robuste de l'algorithme [SARIMA][6]. Il intègre les dernières données historiques à ses prédictions, ce qui lui permet de s'adapter rapidement aux changements de niveaux, mais qui lui vaut d'être moins robuste pour les anomalies récentes sur le long terme.
+
+Robust
+: Utilisez cet algorithme lorsque les métriques saisonnières sont censées être stables et lorsque les changements de niveaux légers sont considérés comme des anomalies. Il s'agit d'un algorithme de [décomposition de tendance saisonnière][7] très stable. Ses prédictions restent constantes même en cas d'anomalies sur le long terme, ce qui lui vaut un temps de réponse plus long pour les changements de niveaux prévus (par exemple, si le niveau d'une métrique change en cas de modification de code).
 
 Tous les algorithmes saisonniers peuvent utiliser au maximum deux mois de données historiques lors du calcul de la plage normale de comportement attendue d'une métrique. En utilisant un volume conséquent de données passées, les algorithmes peuvent éviter de donner trop d'importance à un comportement anormal qui aurait pu avoir lieu il y a peu de temps.
 
@@ -94,7 +111,7 @@ Dans cet exemple, la métrique affiche un changement de niveau soudain. L'algori
 
 {{< img src="monitors/monitor_types/anomaly/alg_comparison_2.png" alt="comparaison d'algorithmes 2" style="width:90%;">}}
 
-Cet exemple montre la réaction des algorithmes face à une anomalie d'une heure. L'algorithme `Robust` l'ignore complètement. Les autres se mettent à agir comme si l'anomalie représentait le nouveau critère de normalité. L'algorithme `Agile` considère même que le retour à la normale de la métrique est une anomalie.
+Cet exemple montre la réaction des algorithmes face à une anomalie d'une heure. L'algorithme `Robust` n'ajuste pas les limites pour l'anomalie dans ce scénario, car il réagit plus lentement aux changements soudains. Les autres algorithmes se mettent à agir comme si l'anomalie était le nouveau critère de normalité. L'algorithme `Agile` considère même que le retour à la normale de la métrique est une anomalie.
 
 {{< img src="monitors/monitor_types/anomaly/alg_comparison_3.png" alt="comparaison d'algorithmes 3" style="width:90%;">}}
 
@@ -116,26 +133,45 @@ Les clients Enterprise peuvent créer un monitor de détection d'anomalies avec 
 
 **Remarque** : les monitors de détection d'anomalies sont uniquement disponibles pour les clients Enterprise. Si vous disposez d'un abonnement Pro et que vous souhaitez utiliser la fonctionnalité de détection d'anomalies, contactez votre chargé de compte ou envoyez un e-mail à l'[équipe de facturation Datadog][11].
 
-Les monitors d'anomalies sont gérés à l'aide de la [même API][12] que les autres monitors. Les champs suivants sont uniquement disponibles pour les monitors d'anomalies :
+Les monitors d'anomalies sont gérés via la [même API][12] que les autres monitors. Les champs suivants sont uniquement disponibles pour les monitors d'anomalies :
 
 ### `query`
 
 La propriété `query` dans le corps de la requête doit contenir une chaîne de requête au format suivant :
 
 ```text
-avg(<période_requête>):anomalies(<requête_métrique>, '<algorithme>', <déviations>, direction='<direction>', alert_window='<période_alerte>', interval=<intervalle>, count_default_zero='<zéro_défaut>' [, seasonality='<caractère_saisonnier>']) >= <seuil>
+avg(<période_requête>):anomalies(<requête_métrique>, '<algorithme>', <déviations>, direction='<direction>', alert_window='<période_alerte>', interval=<intervalle>, count_default_zero='<count_zéro_défaut>' [, seasonality='<saisonnalité>']) >= <seuil>
 ```
 
-* `période_requête` : intervalle, par exemple `last_4h` ou `last_7d`. Correspond à l'intervalle affiché dans les graphiques des notifications. Cette valeur ne doit pas être inférieure à `période_alerte`. Valeur recommandée : environ 5 fois la valeur de `période_alerte`.
-* `requête_métrique` : requête de métrique Datadog standard. Exemple : `sum:trace.flask.request.hits{service:web-app}.as_count()`.
-* `algorithme` : `basic`, `agile` ou `robust`.
-* `déviations` : nombre positif permettant de régler la réactivité de la détection des anomalies.
-* `direction` : indique si l'alerte doit être déclenchée lorsque les points se trouvent au-dessus de la bande de valeurs autorisées (`above`), en dessous (`below`) ou au-dessus et en dessous (`both`).
-* `période_alerte`: intervalle de vérification des anomalies (p. ex., `last_5m` ou `last_1h`).
-* `intervalle` : nombre entier positif représentant le nombre de secondes de l'intervalle de cumul. Valeur recommandée : au moins un cinquième de la durée de `alert_window`.
-* `zéro_défaut` : indiquez la valeur `true` pour la plupart des monitors. Définissez uniquement la valeur `false` si l'envoi d'une métrique count sans valeur ne doit _pas_ être considérée comme une valeur nulle.
-* `caractère_saisonnier`: `hourly`, `daily` ou `weekly`. Excluez ce paramètre si vous utilisez l'algorithme `basic`.
-* `seuil` : nombre positif inférieur ou égal à 1. Correspond à la fraction de points de `période_alerte` qui doivent être anormaux pour déclencher une alerte critique.
+`période_requête`
+: Intervalle, par exemple `last_4h` ou `last_7d`. Correspond à l'intervalle affiché dans les graphiques des notifications. Cette valeur ne doit pas être inférieure à `période_alerte`. Valeur recommandée : environ 5 fois la valeur de `période_alerte`.
+
+`requête_métrique`
+: Requête de métrique Datadog standard. Exemple : `sum:trace.flask.request.hits{service:web-app}.as_count()`.
+
+`algorithme`
+: `basic`, `agile` ou `robust`.
+
+`déviations`
+: Nombre positif permettant de régler la réactivité de la détection des anomalies.
+
+`direction`
+: Détermine si l'alerte doit être déclenchée lorsque les points se trouvent au-dessus de la bande de valeurs autorisées (`above`), en dessous (`below`) ou au-dessus et en dessous (`both`).
+
+`période_alerte`
+: Intervalle de vérification des anomalies (p. ex., `last_5m` ou `last_1h`).
+
+`intervalle`
+: Nombre entier positif représentant le nombre de secondes de l'intervalle de cumul. Valeur recommandée : au moins un cinquième de la durée de `période_alerte`.
+
+`count_zéro_défaut`
+: À définir sur `true` pour la plupart des monitors. Définir sur `false` uniquement si l'envoi d'une métrique count sans valeur ne doit _pas_ être considéré comme nul.
+
+`saisonnalité`
+: `hourly`, `daily` ou `weekly`. Excluez ce paramètre si vous utilisez l'algorithme `basic`.
+
+`seuil`
+: Nombre positif inférieur ou égal à 1. Correspond à la fraction de points de `période_alerte` qui doivent être anormaux pour déclencher une alerte critique.
 
 Vous trouverez ci-dessous un exemple pour un monitor de détection d'anomalies qui vous informe lorsque la charge processeur moyenne de votre nœud Cassandra dépasse la valeur ordinaire par plus de trois fois l'écart type au cours des 5 dernières minutes :
 
@@ -147,15 +183,12 @@ avg(last_1h):anomalies(avg:system.cpu.system{name:cassandra}, 'basic', 3, direct
 
 La plupart des propriétés sous `options` dans le corps de requête sont identiques aux autres alertes de requête, à l'exception de `thresholds` et `threshold_windows`.
 
-**`thresholds`**
+`thresholds`
+: Les monitors d'anomalies prennent en charge les seuils `critical`, `critical_recovery`, `warning` et `warning_recovery`. Les seuils sont exprimés sous la forme de chiffres compris entre 0 et 1. Ces valeurs représentent la fraction d'anomalies de la période associée. Par exemple, si le seuil `critical` a pour valeur `0.9`, une alerte critique se déclenche lorsque 90 % des points de `trigger_window` (décrit ci-dessous) sont anormaux. De même, si la valeur de `warning_recovery` est définie sur 0, le monitor passe de l'état d'avertissement à l'état normal uniquement lorsque 0 % des points de `recovery_window` sont anormaux.
+: Le `threshold` `critical` doit correspondre au `threshold` utilisé dans la `query`.
 
-Les monitors d'anomalies prennent en charge les seuils `critical`, `critical_recovery`, `warning` et `warning_recovery`. Les seuils sont exprimés sous la forme de chiffres compris entre 0 et 1. Ces valeurs représentent la fraction d'anomalies de la période associée. Par exemple, si le seuil `critical` a pour valeur `0.9`, une alerte critique se déclenche lorsque 90 % des points de `trigger_window` (décrit ci-dessous) sont anormaux. De même, si la valeur de `warning_recovery` est définie sur 0, le monitor passe de l'état d'avertissement à l'état normal uniquement lorsque 0 % des points de `recovery_window` sont anormaux.
-
-Le seuil `critical` doit correspondre au seuil utilisé dans la `query`.
-
-**`threshold_windows`**
-
-Les monitors d'anomalies possèdent une propriété `threshold_windows` dans `options`. Celle-ci doit inclure les deux propriétés suivantes : `trigger_window` et `recovery_window`. Ces périodes sont exprimées sous la forme de chaînes d'intervalle, par exemple `last_10m` ou `last_1h`. `trigger_window` doit correspondre à la propriété `alert_window` de `query`. `trigger_window` correspond à l'intervalle d'analyse des anomalies utilisé pour initier ou non le déclenchement d'un monitor. `recovery_window` correspond à l'intervalle d'analyse des anomalies utilisé pour initier ou non le rétablissement d'un monitor déclenché.
+`threshold_windows`
+: Les monitors d'anomalies ont une propriété `threshold_windows` dans `options`. `threshold_windows` doit inclure les deux propriétés suivantes : `trigger_window` et `recovery_window`. Ces périodes sont exprimées sous la forme de chaînes d'intervalle, par exemple `last_10m` ou `last_1h`. `trigger_window` doit correspondre à la propriété `alert_window` de `query`. `trigger_window` correspond à l'intervalle d'analyse des anomalies utilisé pour déterminer si un monitor doit être déclenché. `recovery_window` correspond à l'intervalle d'analyse des anomalies utilisé pour déterminer si un monitor déclenché doit être rétabli.
 
 Voici à quoi ressemble une configuration standard des seuils et périodes de seuil :
 

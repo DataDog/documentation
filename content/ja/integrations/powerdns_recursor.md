@@ -4,11 +4,14 @@ aliases:
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
-  dashboards: {}
+  dashboards:
+    powerdns: assets/dashboards/powerdns_dashboard.json
   logs:
     source: powerdns
   metrics_metadata: metadata.csv
   monitors: {}
+  saved_views:
+    powerdns_processes: assets/saved_views/powerdns_processes.json
   service_checks: assets/service_checks.json
 categories:
   - web
@@ -18,7 +21,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/powerdns_recursor/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/powerdns_recursor/README.md
 display_name: PowerDNS Recursor
 draft: false
 git_integration_title: powerdns_recursor
@@ -191,15 +194,13 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 {{< get-metrics-from-git "powerdns_recursor" >}}
 
 
-
 ### イベント
 
 PowerDNS Recursor チェックには、イベントは含まれません。
 
 ### サービスのチェック
+{{< get-service-checks-from-git "powerdns_recursor" >}}
 
-**powerdns.recursor.can_connect**:<br>
-Agent が Recursor の統計 API に接続できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
 
 ## トラブルシューティング
 

@@ -23,9 +23,9 @@ further_reading:
 
 すべてのデータを制御することは、特に大規模で高度なコラボレーションプラットフォームでは困難な場合があります。このガイドでは、コンプライアンスに敏感なデータが Datadog に取り込まれた際に実行すべき 3 つの手順について説明します。
 
-1. [送信されるデータのスコープを決定する](#determine-the-scope-of-the-data-being-sent)
+1. [送信されるデータの範囲を決定する](#determine-the-scope-of-the-data-being-sent)
 2. [アップストリームのデータのソースを修正する](#fix-the-source-of-the-data-upstream)
-3. [Datadog にすでに送信されているデータを処理する](#handle-data-already-sent-to-datadog)
+3. [すでに Datadog に送信されたデータを処理する](#handle-data-already-sent-to-datadog)
 
 ## 送信されるデータのスコープを決定する
 
@@ -111,8 +111,8 @@ further_reading:
 [5]: /ja/logs/indexes#exclusion-filters
 [6]: /ja/logs/archives
 [7]: /ja/logs/logs_to_metrics/
-[8]: /ja/monitors/monitor_types/log/
-[9]: /ja/monitors/monitor_types/log/#notifications
+[8]: /ja/monitors/create/types/log/
+[9]: /ja/monitors/create/types/log/#notifications
 [10]: /ja/logs/explorer/live_tail/
 [11]: /ja/agent/
 [12]: /ja/agent/logs/advanced_log_collection/?tab=configurationfile#scrub-sensitive-data-from-your-logs

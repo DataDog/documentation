@@ -38,12 +38,12 @@ The `clamp_min()` and `clamp_max()` functions take one parameter:
 
 The `cutoff_min()` and `cutoff_max()` functions take one parameter:
 
--   `THRESHOLD`: the threshold value you’ve specified.
-    -   `cutoff_min()` will remove all metric values lower than this threshold value from your graph, while `cutoff_max()` will remove all metric values higher than this threshold value.
+- `THRESHOLD`: the threshold value you've specified.
+    - `cutoff_min()` removes all metric values lower than this threshold value from your graph, while `cutoff_max()` removes all metric values higher than this threshold value.
 
-The cutoff functions will not remove values that are equal to the threshold value.
+The cutoff functions do not remove values that are equal to the threshold value.
 
-In addition, the functions will not delete datapoints from Datadog entirely; it will only remove them from your visualization. Disabling the function will bring your datapoints back.
+In addition, the functions do not delete datapoints from Datadog entirely; it only removes them from your visualization. Disabling the function brings your datapoints back.
 
 **Tip**: For both the clamp and cutoff functions, it may be helpful to see the threshold value you have chosen. You can [set a horizontal marker][1] in Dashboards to indicate this value.
 

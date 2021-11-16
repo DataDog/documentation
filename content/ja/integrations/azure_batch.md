@@ -10,6 +10,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/azure_batch/'
 draft: false
 git_integration_title: azure_batch
 has_logo: true
+integration_id: azure-batch
 integration_title: Microsoft Azure Batch
 is_public: true
 kind: インテグレーション

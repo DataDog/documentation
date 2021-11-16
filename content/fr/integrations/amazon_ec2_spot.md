@@ -6,11 +6,13 @@ categories:
 ddtype: crawler
 dependencies: []
 description: "Surveillez des métriques clés d'Amazon\_EC2\_Spot."
-doc_link: 'https://docs.datadoghq.com/integrations/amazon_ec2_spot/'
+doc_link: https://docs.datadoghq.com/integrations/amazon_ec2_spot/
 draft: false
 git_integration_title: amazon_ec2_spot
 has_logo: true
+integration_id: amazon-ec2-spot
 integration_title: "Amazon\_EC2\_Spot"
+integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'
@@ -25,7 +27,7 @@ Les instances Amazon EC2 Spot vous permettent de tirer parti des capacités de
 
 Activez cette intégration pour visualiser dans Datadog toutes vos métriques d'EC2 Spot.
 
-## Implémentation
+## Configuration
 
 ### Installation
 

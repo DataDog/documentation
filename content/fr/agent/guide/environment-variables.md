@@ -33,7 +33,7 @@ Dans la plupart des cas, les règles suivantes doivent être respectées :
 
 * Les noms d'option doivent être écrits en majuscules et précédés de `DD_` : `hostname` -> `DD_HOSTNAME`
 
-* Les différentes valeurs doivent être séparées par des espaces :
+* Les valeurs de la liste doivent être séparées par des espaces. Les règles d'inclusion prennent en charge les expressions régulières et sont définies sous forme de liste de chaînes séparées par des virgules :
    ```yaml
       container_include:
         - "image:cp-kafka"
@@ -99,5 +99,5 @@ Dans la plupart des cas, les règles suivantes doivent être respectées :
 [3]: /fr/agent/proxy/#environment-variables
 [4]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config.go
 [5]: https://docs.datadoghq.com/fr/agent/docker/apm/#docker-apm-agent-environment-variables
-[6]: https://github.com/DataDog/datadog-agent/blob/master/pkg/trace/config/env.go
+[6]: https://github.com/DataDog/datadog-agent/blob/master/pkg/trace/config/env_test.go
 [7]: https://github.com/DataDog/datadog-agent/blob/master/pkg/process/config/config.go

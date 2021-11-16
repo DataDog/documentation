@@ -1,5 +1,5 @@
 ---
-title: セキュリティモニタリング API を使用してセキュリティフィルターを設定する方法
+title: セキュリティモニタリング API を使用したセキュリティフィルター
 kind: ガイド
 aliases:
   - /ja/security_monitoring/guide/how-to-setup-security-filters-using-security-monitoring-api/
@@ -15,6 +15,8 @@ Datadog は、Datadog セキュリティモニタリングサービスによっ�
 * [特定のログを除外するようにデフォルトのセキュリティフィルターを構成する](#add-an-exclusion-to-the-default-security-filter)
 * [カスタムセキュリティフィルターを作成して、分析するログソースを指定する](#create-a-custom-security-filter)
 
+**注**: セキュリティフィルターは、セキュリティモニタリング製品によって分析されたログを制御するためにのみ必要です。クラウドワークロードセキュリティ (`source:runtime-security-agent`) およびクラウドセキュリティポスチャ管理 (`source:compliance-agent`) 製品の一部として Datadog Agent によって生成されたログを除外するために、セキュリティフィルターを作成する必要はありません。分析ログとして請求されないためです。
+
 ## 前提条件
 
 * API を使用するには**管理者ユーザーが保有する** API キーとアプリケーションキーが必要です。これらは [Datadog アカウントの API キーページ][3]で確認できます。`<DATADOG_API_KEY>` と `<DATADOG_APP_KEY>` を Datadog API キーおよび Datadog アプリケーションキーで置き換えてください。
@@ -23,7 +25,7 @@ Datadog は、Datadog セキュリティモニタリングサービスによっ�
 
 ## 例
 
-### デフォルトのセキュリティフィルターに除外を追加する
+### 除外を追加する
 
 デフォルトでは、取り込んだすべてのログを分析する単一のセキュリティフィルターが存在します。これは `all ingested logs` という名前で、クエリは `*` です。タグに基づいてログのサブセットを除外する除外を追加することで、カスタマイズできます。そのためには、まず、フィルターの `id` を取得するために、セキュリティフィルターのリストを取得する必要があります。
 
@@ -110,7 +112,7 @@ curl -L -X PATCH 'https://api.{{< region-param key="dd_site" code="true" >}}/api
 }
 ```
 
-### カスタムセキュリティフィルターを作成する
+### カスタムフィルターを作成する
 
 分析を明示的に指定されたログに制限するために、カスタムセキュリティフィルターを作成することもできます。たとえば、`source:cloudtrail` のみに一致するフィルターを使用して AWS Cloudtrail からのログを分析することを選択できます。
 

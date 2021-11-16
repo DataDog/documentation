@@ -48,7 +48,7 @@ Kubernetes のステートメトリクスに `env`、`service`、`version` の�
 
 Kubernetes ユーザーは、これらの一般的なタグを引き続き使用できます。ただし、特定のラベルを使用すると、いくつかの利点があります。
 
-- Kubernetes Downward API を介して、環境変数を挿入するためにこれを直接参照できます。
+- Kubernetes Downward API で、環境変数を挿入するためにこれを直接参照できます。
 - サービス標準ラベルは、ログのサービスの定義を簡略化できます。
 
 ### 特定のコンテナに標準ラベルを使用する
@@ -83,5 +83,5 @@ Admission Controller は、ポッドラベルでこの情報を探します。�
 [1]: /ja/getting_started/tagging/unified_service_tagging
 [2]: /ja/tracing/guide/setting_primary_tags_to_scope/
 [3]: /ja/metrics/distributions/#customize-tagging
-[4]: /ja/logs/processing/pipelines/
+[4]: /ja/logs/log_configuration/pipelines
 [5]: /ja/agent/cluster_agent/admission_controller/

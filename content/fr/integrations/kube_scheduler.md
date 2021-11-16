@@ -1,6 +1,12 @@
 ---
 assets:
-  dashboards: {}
+  configuration:
+    spec: assets/configuration/spec.yaml
+  dashboards:
+    kube_scheduler: assets/dashboards/overview.json
+  logs:
+    source: kube_scheduler
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -12,6 +18,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/kube_scheduler/README.md'
 display_name: Kube_scheduler
+draft: false
 git_integration_title: kube_scheduler
 guid: ec7c029f-86c2-4202-9368-1904998a646c
 integration_id: kube-scheduler
@@ -35,41 +42,32 @@ supported_os:
 
 Ce check surveille [Kubernetes Scheduler ][1] qui fait partie du plan de contrôle de Kubernetes.
 
-## Implémentation
+**Remarque** : ce check ne recueille pas de données à partir des clusters Amazon EKS, car ces services ne sont pas exposés.
+
+## Configuration
 
 ### Installation
 
-Le check Kubernetes Scheduler est inclus avec le paquet de l'[Agent Datadog][2].
+Le check Kubernetes Scheduler est inclus avec le package de l'[Agent Datadog][2].
 Vous n'avez donc rien d'autre à installer sur votre serveur.
 
 ### Configuration
+
+Consultez la [documentation relative aux modèles d'intégration Autodiscovery][3] pour découvrir comment appliquer les paramètres ci-dessous.
 
 #### Collecte de métriques
 
 1. Modifiez le fichier `kube_scheduler.d/conf.yaml` dans le dossier `conf.d/` à la racine du répertoire de configuration de votre Agent pour commencer à recueillir vos données de performance kube_scheduler. Consultez le [fichier d'exemple kube_scheduler.d/conf.yaml][2] pour découvrir toutes les options de configuration disponibles.
 
-2. [Redémarrez l'Agent][3].
+2. [Redémarrez l'Agent][4].
 
 #### Collecte de logs
 
-_Disponible à partir des versions > 6.0 de l'Agent_
+La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Kubernetes][5].
 
-1. La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans votre [configuration daemonSet][4] :
-
-   ```yaml
-     # (...)
-     env:
-       # (...)
-       - name: DD_LOGS_ENABLED
-           value: "true"
-       - name: DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL
-           value: "true"
-     # (...)
-   ```
-
-2. Assurez-vous que le socket Docker est monté sur l'Agent Datadog comme dans [ce manifeste][5].
-
-3. [Redémarrez l'Agent][3].
+| Paramètre      | Valeur                                     |
+|----------------|-------------------------------------------|
+| `<CONFIG_LOG>` | `{"source": "kube_scheduler", "service": "<NOM_SERVICE>"}` |
 
 ### Validation
 
@@ -96,9 +94,9 @@ Besoin d'aide ? Contactez [l'assistance Datadog][8].
 
 [1]: https://kubernetes.io/docs/reference/command-line-tools-reference/kube-scheduler
 [2]: https://github.com/DataDog/integrations-core/blob/master/kube_scheduler/datadog_checks/kube_scheduler/data/conf.yaml.example
-[3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#restart-the-agent
-[4]: https://docs.datadoghq.com/fr/agent/kubernetes/daemonset_setup/#log-collection
-[5]: https://docs.datadoghq.com/fr/agent/kubernetes/daemonset_setup/#create-manifest
+[3]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
+[4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#restart-the-agent
+[5]: https://docs.datadoghq.com/fr/agent/kubernetes/log/
 [6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
 [7]: https://github.com/DataDog/integrations-core/blob/master/kube_scheduler/metadata.csv
 [8]: https://docs.datadoghq.com/fr/help/

@@ -39,18 +39,6 @@ For example, the following command allows the Agent to receive traces from your 
 {{< tabs >}}
 {{% tab "Linux" %}}
 
-{{< site-region region="us" >}} 
-```shell
-docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
-              -v /proc/:/host/proc/:ro \
-              -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
-              -p 127.0.0.1:8126:8126/tcp \
-              -e DD_API_KEY=<DATADOG_API_KEY> \
-              -e DD_APM_ENABLED=true \
-              gcr.io/datadoghq/agent:latest
-```
-{{< /site-region >}}
-{{< site-region region="us3,eu,gov" >}} 
 ```shell
 docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
               -v /proc/:/host/proc/:ro \
@@ -61,21 +49,11 @@ docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
               -e DD_SITE=<DATADOG_SITE> \
               gcr.io/datadoghq/agent:latest
 ```
-Where `<DATADOG_SITE>` is {{< region-param key="dd_site" code="true" >}}, so that the Agent sends data to the right Datadog location.
-{{< /site-region >}}
+Where your `<DATADOG_SITE>` is {{< region-param key="dd_site" code="true" >}} (defaults to `datadoghq.com`).
 
 {{% /tab %}}
 {{% tab "Windows" %}}
 
-{{< site-region region="us" >}} 
-```shell
-docker run -d -p 127.0.0.1:8126:8126/tcp \
-              -e DD_API_KEY=<DATADOG_API_KEY> \
-              -e DD_APM_ENABLED=true \
-              gcr.io/datadoghq/agent:latest
-```
-{{< /site-region >}}
-{{< site-region region="us3,eu,gov" >}} 
 ```shell
 docker run -d -p 127.0.0.1:8126:8126/tcp \
               -e DD_API_KEY=<DATADOG_API_KEY> \
@@ -83,8 +61,7 @@ docker run -d -p 127.0.0.1:8126:8126/tcp \
               -e DD_SITE=<DATADOG_SITE> \
               gcr.io/datadoghq/agent:latest
 ```
-Where `<DATADOG_SITE>` is {{< region-param key="dd_site" code="true" >}}, so that the Agent sends data to the right Datadog location.
-{{< /site-region >}}
+Where your `<DATADOG_SITE>` is {{< region-param key="dd_site" code="true" >}} (defaults to `datadoghq.com`).
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -100,19 +77,17 @@ List of all environment variables available for tracing within the Docker Agent:
 | `DD_APM_REPLACE_TAGS`      | [Scrub sensitive data from your span’s tags][2].                                                                                                                                                                                                                                                                                                     |
 | `DD_APM_FILTER_TAGS_REQUIRE`      | Defines required tags that traces must have in order to be sent to Datadog.                                                                                                                                                                                                                                                                                                     |
 | `DD_APM_FILTER_TAGS_REJECT`      | Defines rejection tags. The Agent drops traces that have these tags.       |
-| `DD_HOSTNAME`              | Manually set the hostname to use for metrics if autodection fails, or when running the Datadog Cluster Agent.                                                                                                                                                                                                                                        |
+| `DD_HOSTNAME`              | Manually set the hostname to use for metrics if autodetection fails, or when running the Datadog Cluster Agent.                                                                                                                                                                                                                                        |
 | `DD_DOGSTATSD_PORT`        | Set the DogStatsD port.                                                                                                                                                                                                                                                                                                                              |
 | `DD_APM_RECEIVER_SOCKET`   | Collect your traces through a Unix Domain Sockets and takes priority over hostname and port configuration if set. Off by default, when set it must point to a valid sock file.                                                                                                                                                                       |
 | `DD_BIND_HOST`             | Set the StatsD & receiver hostname.                                                                                                                                                                                                                                                                                                                  |
 | `DD_LOG_LEVEL`             | Set the logging level. (`trace`/`debug`/`info`/`warn`/`error`/`critical`/`off`)                                                                                                                                                                                                                                                                      |
-| `DD_APM_ENABLED`           | When set to `true`, the Datadog Agent accepts trace metrics.                                                                                                                                                                                                                                                                                         |
+| `DD_APM_ENABLED`           | When set to `true`, the Datadog Agent accepts traces and trace metrics.                                                                                                                                                                                                                                                                                         |
 | `DD_APM_CONNECTION_LIMIT`  | Sets the maximum connection limit for a 30 second time window. The default limit is 2000 connections.                                                                                                                                                                                                                                                    |
 | `DD_APM_DD_URL`            | Set the Datadog API endpoint where your traces are sent: `https://trace.agent.{{< region-param key="dd_site" >}}`. Defaults to `https://trace.agent.datadoghq.com`.                                                                                                                                                                                                                            |
 | `DD_APM_RECEIVER_PORT`     | Port that the Datadog Agent's trace receiver listens on. Default value is `8126`.                                                                                                                                                                                                                                                                    |
 | `DD_APM_NON_LOCAL_TRAFFIC` | Allow non-local traffic when [tracing from other containers](#tracing-from-other-containers).                                                                                                                                                                                                                                                        |
-| `DD_APM_IGNORE_RESOURCES`  | Configure resources for the Agent to ignore. Format should be comma separated, regular expressions. Example: <code>GET /ignore-me,(GET\|POST) /and-also-me</code>.                                                                                                                                                                                       |
-| `DD_APM_ANALYZED_SPANS`    | Configure the spans to analyze for transactions. Format should be comma separated instances of <code>\<SERVICE_NAME>\|;\<OPERATION_NAME>=1</code>. i.e. <code>my-express-app\|;express.request=1,my-dotnet-app\|;aspnet_core_mvc.request=1</code>. You can also [enable it automatically][3] with the configuration parameter in the Tracing Client. |
-| `DD_APM_MAX_EPS`           | Sets the maximum Indexed Spans per second. Default is 200 events per second.                                                                                                                                                                                                                                                                        |
+| `DD_APM_IGNORE_RESOURCES`  | Configure resources for the Agent to ignore. Format should be comma separated, regular expressions. Example: <code>GET /ignore-me,(GET\|POST) /and-also-me</code>.                                                                                                                                                                                |                                                                                                                                                                                                                                                                                        
 
 ## Tracing from other containers
 
@@ -130,26 +105,6 @@ Then start the Agent and the application container, connected to the network pre
 
 {{< tabs >}}
 {{% tab "Standard" %}}
-{{< site-region region="us" >}} 
-```bash
-# Datadog Agent
-docker run -d --name datadog-agent \
-              --network <NETWORK_NAME> \
-              -v /var/run/docker.sock:/var/run/docker.sock:ro \
-              -v /proc/:/host/proc/:ro \
-              -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
-              -e DD_API_KEY=<DATADOG_API_KEY> \
-              -e DD_APM_ENABLED=true \
-              -e DD_APM_NON_LOCAL_TRAFFIC=true \
-              gcr.io/datadoghq/agent:latest
-# Application
-docker run -d --name app \
-              --network <NETWORK_NAME> \
-              -e DD_AGENT_HOST=datadog-agent \
-              company/app:latest
-```
-{{< /site-region >}}
-{{< site-region region="us3,eu,gov" >}}
 
 ```bash
 # Datadog Agent
@@ -170,28 +125,11 @@ docker run -d --name app \
               company/app:latest
 ```
 
-Where `<DATADOG_SITE>` is {{< region-param key="dd_site" code="true" >}}, so that the Agent sends data to the right Datadog location.
-{{< /site-region >}}
+Where your `<DATADOG_SITE>` is {{< region-param key="dd_site" code="true" >}} (defaults to `datadoghq.com`).
+
 {{% /tab %}}
 {{% tab "Windows" %}}
-{{< site-region region="us" >}} 
 
-```bash
-# Datadog Agent
-docker run -d --name datadog-agent \
-              --network "<NETWORK_NAME>" \
-              -e DD_API_KEY=<DATADOG_API_KEY> \
-              -e DD_APM_ENABLED=true \
-              -e DD_APM_NON_LOCAL_TRAFFIC=true \
-              gcr.io/datadoghq/agent:latest
-# Application
-docker run -d --name app \
-              --network "<NETWORK_NAME>" \
-              -e DD_AGENT_HOST=datadog-agent \
-              company/app:latest
-```
-{{< /site-region >}}
-{{< site-region region="us3,eu,gov" >}} 
 ```bash
 # Datadog Agent
 docker run -d --name datadog-agent \
@@ -207,9 +145,8 @@ docker run -d --name app \
               -e DD_AGENT_HOST=datadog-agent \
               company/app:latest
 ```
-Where `<DATADOG_SITE>` is {{< region-param key="dd_site" code="true" >}}, so that the Agent sends data to the right Datadog location.
+Where your `<DATADOG_SITE>` is {{< region-param key="dd_site" code="true" >}} (defaults to `datadoghq.com`).
 
-{{< /site-region >}}
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -224,7 +161,7 @@ Alternately, see the examples below to set the Agent host manually in each suppo
 
 {{< programming-lang lang="java" >}}
 
-Either update the Java Agent configuration via environment variables:
+Either update the Java Agent configuration with environment variables:
 
 ```bash
 DD_AGENT_HOST=datadog-agent \
@@ -232,7 +169,7 @@ DD_TRACE_AGENT_PORT=8126 \
 java -javaagent:/path/to/the/dd-java-agent.jar -jar /your/app.jar
 ```
 
-or via system properties:
+or through system properties:
 
 ```bash
 java -javaagent:/path/to/the/dd-java-agent.jar \
@@ -334,6 +271,5 @@ tracer.configure(hostname='172.17.0.1', port=8126)
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/account/settings#api
+[1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: /tracing/guide/security/#replace-rules
-[3]: /tracing/app_analytics/#automatic-configuration

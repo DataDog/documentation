@@ -5,6 +5,7 @@ aliases:
   - /ja/security_monitoring/default_rules/aws_lambda_public
 cloud: AWS
 disable_edit: true
+integration_id: amazon-lambda
 kind: documentation
 rule_category:
   - クラウドコンフィギュレーション

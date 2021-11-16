@@ -5,10 +5,12 @@ disable_sidebar: true
 aliases:
   - /ja/graphing/metrics/
   - /ja/metrics/introduction/
+  - /ja/graphing/faq/inconsistent-sum-aggregation-between-different-time-windows-on-graph/
+  - /ja/dashboards/faq/inconsistent-sum-aggregation-between-different-time-windows-on-graph/
 ---
 {{< whatsnext desc="このセクションには、次のトピックが含まれています。">}}
     {{< nextlink href="/metrics/explorer" >}}<u>メトリクスエクスプローラー</u> - すべてのメトリクスを探索し分析します。{{< /nextlink >}}
-    {{< nextlink href="/developers/metrics/types" >}}<u>メトリクスタイプ</u> - Datadog に送信可能なメトリクスの種類。{{< /nextlink >}}
+    {{< nextlink href="/metrics/types" >}}<u>メトリクスタイプ</u> - Datadog に送信可能なメトリクスの種類。{{< /nextlink >}}
     {{< nextlink href="/metrics/advanced-filtering" >}}<u>高度なフィルタリング</u> - データをフィルタリングして、返されるメトリクスのスコープを絞り込みます。{{< /nextlink >}}
     {{< nextlink href="/metrics/summary" >}}<u>メトリクスの概要</u> - Datadog にレポートされるすべてのメトリクスをリストします。{{< /nextlink >}}
     {{< nextlink href="metrics/distributions/" >}}<u>ディストリビューションメトリクス</u> - データセット全体のグローバルパーセンタイルを計算します。{{< /nextlink >}}
@@ -22,7 +24,7 @@ aliases:
 
 メトリクスは、システムの全体像を提供します。それを使用して、環境の状態を一目で評価できます。たとえば、ユーザーが Web サイトをロードする速度や、サーバーの平均メモリ消費量などです。問題を特定したら、[ログ][1]と[トレース][2]を使用して、トラブルシューティングします。
 
-システムの状態を追跡するメトリクスは、400 以上のサービスと Datadog のインテグレーションによって自動的に取得されます。ただし、ユーザーログインの数からユーザーカートのサイズ、チームのコードコミットの頻度まで、ビジネスに固有のメトリクス (カスタムメトリクスとも呼ばれます) を追跡することもできます。
+システムの状態を追跡するメトリクスは、{{< translate key="integration_count" >}} 以上のサービスと Datadog のインテグレーションによって自動的に取得されます。ただし、ユーザーログインの数からユーザーカートのサイズ、チームのコードコミットの頻度まで、ビジネスに固有のメトリクス (カスタムメトリクスとも呼ばれます) を追跡することもできます。
 
 さらに、メトリクスは、顧客からの需要を満たすために環境の規模を調整するのに役立ちます。リソースをどれだけ消費する必要があるかを正確に知ることは、お金を節約したり、パフォーマンスを向上させたりするのに役立ちます。
 
@@ -152,12 +154,12 @@ Datadog Agent が、送信するデータポイントごとに Datadog のサー
 [7]: /ja/integrations/
 [8]: /ja/integrations/amazon_ec2/
 [9]: /ja/logs/logs_to_metrics/
-[10]: /ja/developers/metrics/
+[10]: /ja/metrics/custom_metrics/
 [11]: /ja/agent/
-[12]: /ja/developers/metrics/dogstatsd_metrics_submission/
+[12]: /ja/metrics/dogstatsd_metrics_submission/
 [13]: /ja/api/
 [14]: https://docs.datadoghq.com/ja/agent/basic_agent_usage/
-[15]: /ja/developers/metrics/types/
+[15]: /ja/metrics/types/
 [16]: /ja/getting_started/tagging/using_tags/
 [17]: /ja/dashboards/functions/
 [18]: /ja/metrics/distributions/

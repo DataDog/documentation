@@ -32,9 +32,9 @@
               <tr>
                 <td>{{ if eq $i 0}}<strong>{{ $libName }}</strong>{{ end }}</td>
                 <td><a href="{{ $el.link }}">{{ $el.name }}</a></td>
-                <td>{{ if $el.official}}<i class="icon-tick"></i>{{ end }}</td>
-                <td>{{ if $el.api}}<i class="icon-tick"></i>{{ end }}</td>
-                <td>{{ if $el.dogstatsd }}<i class="icon-tick"></i>{{ end }}</td>
+                <td>{{ if $el.official}}<i class="icon-check-bold"></i>{{ end }}</td>
+                <td>{{ if $el.api}}<i class="icon-check-bold"></i>{{ end }}</td>
+                <td>{{ if $el.dogstatsd }}<i class="icon-check-bold"></i>{{ end }}</td>
                 <td>{{ if $el.authors }}{{ $el.authors }}{{ end }}</td>
                 <td>{{ if $el.notes }}{{ $el.notes }}{{ end }}</td>
               </tr>

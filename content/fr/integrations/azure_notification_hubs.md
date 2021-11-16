@@ -7,11 +7,13 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Surveillez des métriques clés d'Azure Notification Hubs.
-doc_link: 'https://docs.datadoghq.com/integrations/azure_notification_hubs/'
+doc_link: https://docs.datadoghq.com/integrations/azure_notification_hubs/
 draft: false
 git_integration_title: azure_notification_hubs
 has_logo: true
+integration_id: azure-notificationhubs
 integration_title: Microsoft Azure Notification Hubs
+integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'
@@ -26,7 +28,7 @@ Azure Notification Hubs est un service de notifications Push facile à utiliser 
 
 Utilisez l'intégration Datadog/Azure pour recueillir des métriques d'Azure Notification Hubs.
 
-## Implémentation
+## Configuration
 
 ### Installation
 

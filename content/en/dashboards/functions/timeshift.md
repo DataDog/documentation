@@ -17,7 +17,7 @@ Here is a set of functions of the pattern `<TIMEPERIOD>_before()`. These functio
 |:--------------|:-----------------------------------------------------------------------------------------------|:-------------------------------------------------|
 | `timeshift()` | Graph values from an arbitrary `<TIME_IN_SECOND>` before the current timestamp for the metric. | `timeshift(<METRIC_NAME>{*}, -<TIME_IN_SECOND>)` |
 
-For example, if you wanted to use this to compare current system load with load from 2 weeks ago (60*60*24*14 = 1209600), your query would be:
+For example, if you wanted to use this to compare current system load with load from 2 weeks ago (60\*60\*24\*14 = 1209600), your query would be:
 
 ```text
 timeshift(avg:system.load.1{*}, -1209600)
@@ -31,7 +31,7 @@ timeshift(avg:system.load.1{*}, -1209600)
 
 Here is an example of `system.load.1` with the `hour_before()` value shown as a dotted line. In this particular example, you can see the machine was started at 6:30am and the `hour_before()` values show up at the 7:30 mark. Of course, this example was created specifically so that you can see the `hour_before()` values match up with the actual values.
 
-{{< img src="dashboards/functions/timeshift/simple_hour_before_example.png" alt="simple hour before example"  style="width:80%;">}}
+{{< img src="dashboards/functions/timeshift/simple_hour_before_example.png" alt="simple hour before example" style="width:80%;">}}
 
 ## Day before
 
@@ -41,7 +41,7 @@ Here is an example of `system.load.1` with the `hour_before()` value shown as a 
 
 Here is an example of `nginx.net.connections` with the `day_before()` value shown as a lighter, thinner line. In this example, you can see a week's worth of data, which makes the `day_before()` data easy to identify.
 
-{{< img src="dashboards/functions/timeshift/simple_day_before_example.png" alt="simple day before example"  style="width:80%;">}}
+{{< img src="dashboards/functions/timeshift/simple_day_before_example.png" alt="simple day before example" style="width:80%;">}}
 
 ## Week before
 
@@ -51,7 +51,7 @@ Here is an example of `nginx.net.connections` with the `day_before()` value show
 
 Here is an example of `cassandra.db.read_count` with the `week_before()` value shown as a dotted line. In this example, you can see about three weeks' worth of data, which makes the `week_before()` data easy to identify.
 
-{{< img src="dashboards/functions/timeshift/simple_week_before_example.png" alt="simple week before example"  style="width:80%;">}}
+{{< img src="dashboards/functions/timeshift/simple_week_before_example.png" alt="simple week before example" style="width:80%;">}}
 
 ### Month before
 
@@ -61,7 +61,7 @@ Here is an example of `cassandra.db.read_count` with the `week_before()` value s
 
 Here is an example of `aws.ec2.cpuutilization` with the `month_before()` value shown as a thin, solid line.
 
-{{< img src="dashboards/functions/timeshift/simple_month_before_example.png" alt="simple month before example"  style="width:80%;">}}
+{{< img src="dashboards/functions/timeshift/simple_month_before_example.png" alt="simple month before example" style="width:80%;">}}
 
 ## Other functions
 

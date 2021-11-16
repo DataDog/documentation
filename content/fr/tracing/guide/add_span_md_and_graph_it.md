@@ -40,14 +40,14 @@ La méthode à employer pour ajouter des [tags][3] à vos spans dépend du langa
 L'interface utilisateur de Datadog utilise les tags pour définir des métadonnées au niveau des spans. Vous pouvez configurer une instrumentation automatique pour les tags personnalisés en récupérant la span active à partir du traceur global et en définissant un tag avec `setTag`.
 
 ```java
-import io.opentracing.Tracer;
+import io.opentracing.Span;
 import io.opentracing.util.GlobalTracer;
 
 @WebServlet
 class ShoppingCartServlet extends AbstractHttpServlet {
   @Override
   void doGet(HttpServletRequest req, HttpServletResponse resp) {
-    // Get the active span
+    // Récupérer la span active
     final Span span = GlobalTracer.get().activeSpan();
     if (span != null) {
       // customer_id -> 254889

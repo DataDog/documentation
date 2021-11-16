@@ -4,16 +4,16 @@ kind: documentation
 aliases:
   - /ja/logs/languages/java
 further_reading:
-  - link: /logs/processing/
+  - link: /logs/log_configuration/processors
     tag: Documentation
     text: ログの処理方法
-  - link: /logs/processing/parsing/
+  - link: /logs/log_configuration/parsing
     tag: Documentation
     text: パースの詳細
   - link: /logs/explorer/
     tag: Documentation
     text: ログの調査方法
-  - link: '/logs/explorer/#visualize'
+  - link: /logs/explorer/#visualize
     tag: Documentation
     text: ログ分析の実行
   - link: /tracing/connect_logs_and_traces/java/
@@ -22,7 +22,7 @@ further_reading:
   - link: /logs/faq/log-collection-troubleshooting-guide/
     tag: よくあるご質問
     text: ログ収集のトラブルシューティングガイド
-  - link: 'https://www.datadoghq.com/blog/java-logging-guide/'
+  - link: https://www.datadoghq.com/blog/java-logging-guide/
     tag: ブログ
     text: Java ログの収集、カスタマイズ、標準化方法
 ---
@@ -517,8 +517,8 @@ logger.info("Emitted 1001 messages during the last 93 seconds");
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: http://logback.qos.ch/manual/mdc.html
-[2]: /ja/logs/processing/parsing/
+[2]: /ja/logs/log_configuration/parsing
 [3]: /ja/tracing/connect_logs_and_traces/java/
 [4]: https://github.com/logstash/logstash-logback-encoder
 [5]: https://github.com/logstash/logstash-logback-encoder#prefixsuffix
-[6]: /ja/logs/processing/parsing/#key-value-or-logfmt
+[6]: /ja/logs/log_configuration/parsing/#key-value-or-logfmt

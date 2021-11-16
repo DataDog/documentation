@@ -11,6 +11,9 @@ further_reading:
   - link: /security/agent/
     tag: Documentation
     text: Sécurité de l'Agent
+  - link: /security/synthetics/
+    tag: Documentation
+    text: Sécurité de la surveillance Synthetic@
   - link: /security/other/
     tag: Documentation
     text: Considérations de sécurité supplémentaires

@@ -6,6 +6,7 @@ assets:
     spec: assets/configuration/spec.yaml
   dashboards: {}
   logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -16,6 +17,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/dns_check/README.md'
 display_name: DNS
+draft: false
 git_integration_title: dns_check
 guid: 31e4c84c-fc4b-4cd4-97ed-0331bf4e2023
 integration_id: dns
@@ -43,7 +45,7 @@ Surveillez les délais de résolution et de correspondance des enregistrements D
 
 ### Installation
 
-Le check DNS est inclus avec le paquet de l'[Agent Datadog][1] : vous n'avez donc rien d'autre à installer sur le serveur à partir duquel vous souhaitez sonder vos serveurs DNS.
+Le check DNS est inclus avec le package de l'[Agent Datadog][1] : vous n'avez donc rien d'autre à installer sur le serveur à partir duquel vous souhaitez sonder vos serveurs DNS.
 
 Bien qu'il soit généralement préférable d'exécuter les checks axés sur des métriques sur le même host que celui du service surveillé, ce check axé sur des statuts peut être lancé sur des hosts qui n'exécutent pas les services DNS surveillés.
 
@@ -93,9 +95,8 @@ Ce check d'Agent applique les tags suivants à l'ensemble des checks de service 
 - `nameserver:<serveurdenoms_en_yaml>`
 - `resolved_hostname:<hostname_en_yaml>`
 
-`dns.can_resolve` :
-
-Renvoie CRITICAL si l'Agent ne parvient pas à résoudre la requête. Si ce n'est pas le cas, renvoie UP.
+**dns.can_resolve** :<br>
+Renvoie `CRITICAL` si l'Agent ne parvient pas à résoudre la requête. Si ce n'est pas le cas, renvoie `OK`.
 
 Tags appliqués : `hostname` et `record_type`.
 

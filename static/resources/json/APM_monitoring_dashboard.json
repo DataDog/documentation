@@ -21,7 +21,7 @@
                 "x": 0,
                 "y": 0,
                 "width": 2,
-                "height": 1
+                "height": 2
             }
         },
         {
@@ -43,7 +43,7 @@
                 "x": 2,
                 "y": 0,
                 "width": 2,
-                "height": 1
+                "height": 2
             }
         },
         {
@@ -65,7 +65,7 @@
                 "x": 4,
                 "y": 0,
                 "width": 2,
-                "height": 1
+                "height": 2
             }
         },
         {
@@ -94,9 +94,9 @@
                     }
                 ],
                 "yaxis": {
+                    "include_zero": true,
                     "scale": "linear",
                     "label": "",
-                    "include_zero": true,
                     "min": "auto",
                     "max": "auto"
                 },
@@ -128,7 +128,7 @@
                 "x": 10,
                 "y": 0,
                 "width": 2,
-                "height": 1
+                "height": 2
             }
         },
         {
@@ -144,7 +144,7 @@
             },
             "layout": {
                 "x": 0,
-                "y": 1,
+                "y": 2,
                 "width": 2,
                 "height": 3
             }
@@ -162,7 +162,7 @@
             },
             "layout": {
                 "x": 2,
-                "y": 1,
+                "y": 2,
                 "width": 2,
                 "height": 3
             }
@@ -180,25 +180,7 @@
             },
             "layout": {
                 "x": 4,
-                "y": 1,
-                "width": 2,
-                "height": 3
-            }
-        },
-        {
-            "id": 3583405495730638,
-            "definition": {
-                "title": "# indexed spans per env",
-                "type": "toplist",
-                "requests": [
-                    {
-                        "q": "top(sum:datadog.estimated_usage.apm.indexed_spans{$hostname,$env,$service} by {env}.as_count(), 10, 'sum', 'desc')"
-                    }
-                ]
-            },
-            "layout": {
-                "x": 10,
-                "y": 1,
+                "y": 2,
                 "width": 2,
                 "height": 3
             }
@@ -229,9 +211,9 @@
                     }
                 ],
                 "yaxis": {
+                    "include_zero": true,
                     "scale": "linear",
                     "label": "",
-                    "include_zero": true,
                     "min": "auto",
                     "max": "auto"
                 },
@@ -241,7 +223,25 @@
                 "x": 6,
                 "y": 2,
                 "width": 4,
-                "height": 2
+                "height": 3
+            }
+        },
+        {
+            "id": 3583405495730638,
+            "definition": {
+                "title": "# indexed spans per env",
+                "type": "toplist",
+                "requests": [
+                    {
+                        "q": "top(sum:datadog.estimated_usage.apm.indexed_spans{$hostname,$env,$service} by {env}.as_count(), 10, 'sum', 'desc')"
+                    }
+                ]
+            },
+            "layout": {
+                "x": 10,
+                "y": 2,
+                "width": 2,
+                "height": 3
             }
         },
         {
@@ -350,9 +350,9 @@
                                 }
                             ],
                             "yaxis": {
+                                "include_zero": true,
                                 "scale": "linear",
                                 "label": "",
-                                "include_zero": true,
                                 "min": "auto",
                                 "max": "auto"
                             },
@@ -366,6 +366,12 @@
                         }
                     }
                 ]
+            },
+            "layout": {
+                "x": 0,
+                "y": 5,
+                "width": 12,
+                "height": 1
             }
         },
         {
@@ -423,9 +429,9 @@
                                 }
                             ],
                             "yaxis": {
+                                "include_zero": true,
                                 "scale": "linear",
                                 "label": "",
-                                "include_zero": true,
                                 "min": "auto",
                                 "max": "auto"
                             },
@@ -481,9 +487,9 @@
                                 }
                             ],
                             "yaxis": {
+                                "include_zero": true,
                                 "scale": "linear",
                                 "label": "",
-                                "include_zero": true,
                                 "min": "auto",
                                 "max": "auto"
                             },
@@ -539,9 +545,9 @@
                                 }
                             ],
                             "yaxis": {
+                                "include_zero": true,
                                 "scale": "linear",
                                 "label": "",
-                                "include_zero": true,
                                 "min": "auto",
                                 "max": "auto"
                             },
@@ -555,6 +561,12 @@
                         }
                     }
                 ]
+            },
+            "layout": {
+                "x": 0,
+                "y": 6,
+                "width": 12,
+                "height": 9
             }
         },
         {
@@ -614,9 +626,9 @@
                                 }
                             ],
                             "yaxis": {
+                                "include_zero": true,
                                 "scale": "linear",
                                 "label": "",
-                                "include_zero": true,
                                 "min": "auto",
                                 "max": "auto"
                             },
@@ -691,9 +703,9 @@
                                 }
                             ],
                             "yaxis": {
+                                "include_zero": true,
                                 "scale": "linear",
                                 "label": "",
-                                "include_zero": true,
                                 "min": "auto",
                                 "max": "auto"
                             },
@@ -781,6 +793,12 @@
                         }
                     }
                 ]
+            },
+            "layout": {
+                "x": 0,
+                "y": 15,
+                "width": 12,
+                "height": 11
             }
         },
         {
@@ -840,9 +858,9 @@
                                 }
                             ],
                             "yaxis": {
+                                "include_zero": true,
                                 "scale": "linear",
                                 "label": "",
-                                "include_zero": true,
                                 "min": "auto",
                                 "max": "auto"
                             },
@@ -917,9 +935,9 @@
                                 }
                             ],
                             "yaxis": {
+                                "include_zero": true,
                                 "scale": "linear",
                                 "label": "",
-                                "include_zero": true,
                                 "min": "auto",
                                 "max": "auto"
                             },
@@ -1009,6 +1027,10 @@
                 ]
             },
             "layout": {
+                "x": 0,
+                "y": 26,
+                "width": 12,
+                "height": 11,
                 "is_column_break": true
             }
         },
@@ -1068,9 +1090,9 @@
                                 }
                             ],
                             "yaxis": {
+                                "include_zero": true,
                                 "scale": "linear",
                                 "label": "",
-                                "include_zero": true,
                                 "min": "auto",
                                 "max": "auto"
                             },
@@ -1164,6 +1186,12 @@
                         }
                     }
                 ]
+            },
+            "layout": {
+                "x": 0,
+                "y": 37,
+                "width": 12,
+                "height": 7
             }
         },
         {
@@ -1212,8 +1240,8 @@
                                 }
                             },
                             "xaxis": {
-                                "scale": "log",
-                                "include_zero": false
+                                "include_zero": false,
+                                "scale": "log"
                             },
                             "yaxis": {
                                 "include_zero": false,
@@ -1263,11 +1291,11 @@
                             "requests": [
                                 {
                                     "q": "sum:datadog.estimated_usage.apm.indexed_spans{$env,$service} by {service}",
-                                    "order_by": "change",
+                                    "change_type": "relative",
                                     "order_dir": "desc",
                                     "compare_to": "week_before",
                                     "increase_good": false,
-                                    "change_type": "relative"
+                                    "order_by": "change"
                                 }
                             ]
                         },
@@ -1291,11 +1319,11 @@
                             "requests": [
                                 {
                                     "q": "sum:datadog.estimated_usage.apm.indexed_spans{$env,$service} by {service}",
-                                    "order_by": "change",
+                                    "change_type": "absolute",
                                     "order_dir": "desc",
                                     "compare_to": "week_before",
                                     "increase_good": false,
-                                    "change_type": "absolute"
+                                    "order_by": "change"
                                 }
                             ]
                         },
@@ -1319,11 +1347,11 @@
                             "requests": [
                                 {
                                     "q": "sum:datadog.estimated_usage.apm.indexed_spans{$env,$service} by {service}",
-                                    "order_by": "change",
+                                    "change_type": "relative",
                                     "order_dir": "desc",
                                     "compare_to": "month_before",
                                     "increase_good": false,
-                                    "change_type": "relative"
+                                    "order_by": "change"
                                 }
                             ]
                         },
@@ -1347,11 +1375,11 @@
                             "requests": [
                                 {
                                     "q": "sum:datadog.estimated_usage.apm.indexed_spans{$env,$service} by {service}",
-                                    "order_by": "change",
+                                    "change_type": "absolute",
                                     "order_dir": "desc",
                                     "compare_to": "month_before",
                                     "increase_good": false,
-                                    "change_type": "absolute"
+                                    "order_by": "change"
                                 }
                             ]
                         },
@@ -1363,6 +1391,12 @@
                         }
                     }
                 ]
+            },
+            "layout": {
+                "x": 0,
+                "y": 44,
+                "width": 12,
+                "height": 10
             }
         }
     ],
@@ -1386,5 +1420,7 @@
     "layout_type": "ordered",
     "is_read_only": false,
     "notify_list": [],
-    "reflow_type": "fixed"
+    "restricted_roles": [],
+    "reflow_type": "fixed",
+    "id": "cza-k9k-ayj"
 }

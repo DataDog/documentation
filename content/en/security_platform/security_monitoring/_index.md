@@ -15,7 +15,7 @@ Threats are surfaced in Datadog as Security Signals and can be correlated and tr
 
 {{< img src="security_platform/security_monitoring/explorer.png" alt="Security Signals Explorer"  >}}
 
-## Get Started
+## Get started
 
 {{< whatsnext >}}
   {{< nextlink href="/security_platform/security_monitoring/getting_started">}}Get started with Security Monitoring{{< /nextlink >}}

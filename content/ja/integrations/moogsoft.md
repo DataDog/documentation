@@ -24,12 +24,13 @@
 "guid": "f3d748da-28e2-4212-985f-bf736a39ba98"
 "integration_id": "moogsoft"
 "integration_title": "Moogsoft"
+"integration_version": ""
 "is_public": true
 "kind": "integration"
 "maintainer": "support@moogsoft.com"
 "manifest_version": "1.0.0"
 "metric_prefix": "moogsoft."
-"metric_to_check": ""
+"metric_to_check": "datadog.marketplace.moogsoft"
 "name": "moogsoft"
 "pricing":
 - "billing_type": tag_count
@@ -89,5 +90,4 @@ Moogsoft サポート ([https://support.moogsoft.com][1]) までお問い合わ�
 
 [1]: https://support.moogsoft.com
 [2]: https://app.datadoghq.com/marketplace/app/moogsoft/pricing
-
 

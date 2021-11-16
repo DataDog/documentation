@@ -72,7 +72,7 @@ The `kubernetes_state` check, which monitors `kube-state-metrics`, is enabled au
 
 4. Deploy the Agent.
 
-Refer to the [Running Cluster Checks with Autodiscovery][2] documentation for more information. See options that begin with `clusterchecksDeployment` in the Helm chart [README.md][3].
+See the [Running Cluster Checks with Autodiscovery][2] documentation for more information. See options that begin with `clusterchecksDeployment` in the Helm chart [README.md][3].
 
 ### Verify check dispatching
 
@@ -110,7 +110,7 @@ The Agent running on the node returned above should also have a `kubernetes_stat
 
 ## Background
 
-If you use Autodiscovery from the DaemonSet, one of your Agents (the one running on the same node as `kube-state-metrics`) runs the check and uses a significant amount of memory, while other Agents in the DaemonSet use far less. To prevent the outlier Agent from getting killed, you could increase the memory limit for all Agents, but this wastes resources. The alternative is to use the DaemonSet for lightweight checks to keep the general memory usage low, and use a small (e.g. 2-3 pods) dedicated deployment for heavy checks, where each pod has a large amont of RAM and only runs cluster checks.
+If you use Autodiscovery from the DaemonSet, one of your Agents (the one running on the same node as `kube-state-metrics`) runs the check and uses a significant amount of memory, while other Agents in the DaemonSet use far less. To prevent the outlier Agent from getting killed, you could increase the memory limit for all Agents, but this wastes resources. The alternative is to use the DaemonSet for lightweight checks to keep the general memory usage low, and use a small (2-3 pods) dedicated deployment for heavy checks, where each pod has a large amount of RAM and only runs cluster checks.
 
 ## Further Reading
 

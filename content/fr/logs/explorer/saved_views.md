@@ -16,15 +16,13 @@ Afin de résoudre efficacement vos problèmes, vous devez disposer du **contexte
 
 La résolution de problèmes dépend grandement du contexte. Les vues enregistrées permettent à tous les membres de votre équipe de passer facilement d'un contexte à un autre. Vous pouvez accéder aux vues enregistrées dans le coin supérieur gauche du [Log Explorer][2].
 
-{{< img src="logs/explorer/saved_views/overview.png" alt="Sélection de vues enregistrées"  style="width:90%;" >}}
-
 Techniquement, une vue enregistrée permet de surveiller les éléments suivants :
 
-- Une [requête de recherche][3]
-- Une visualisation par défaut personnalisée ([flux de logs][4], [pattern de logs][5] ou [analyse de logs][6] avec leurs propriétés de visualisation spécifiques)
-- Un [sous-ensemble de facettes][1] à afficher dans la liste de facettes
+- Une [requête de recherche][3] ainsi que son intervalle. **Remarque** : les vues enregistrées sont destinées à la surveillance d'intervalles de temps dynamiques (tels que la dernière heure ou la dernière semaine). Les intervalles fixes sont donc convertis en intervalles dynamiques après enregistrement.
+- Une visualisation par défaut personnalisée ([flux de logs][4], [pattern de logs][5] ou [analyse de logs][6] avec leurs propriétés de visualisation spécifiques).
+- Un [sous-ensemble de facettes][1] à afficher dans la liste de facettes.
 
-## Votre vue enregistrée par défaut
+## Vue par défaut
 
 {{< img src="logs/explorer/saved_views/default.png" alt="Vue par défaut"  style="width:50%;" >}}
 
@@ -38,7 +36,7 @@ Vous pouvez exécuter les actions suivantes à tout moment depuis l'entrée de l
 * **Mettre à jour** votre vue par défaut avec les paramètres actuels.
 * **Rétablir** votre vue par défaut sur les valeurs par défaut de Datadog, afin de repartir de zéro.
 
-## Vues enregistrées de votre organisation
+## Vues enregistrées
 
 {{< img src="logs/explorer/saved_views/custom.png" alt="Vues enregistrées de toute l'organisation"  style="width:50%;" >}}
 

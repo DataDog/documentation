@@ -11,7 +11,7 @@ Once this feature has been enabled, you can access the [organization creation pa
 
 Note: your new organization name must be **32 characters or fewer**.
 
-Administrators users can access this organization creation page from the menu that appears when hovering over their avatar in the lower lefthand corner, and then clicking on "Create New Organization":
+Administrators users can access this organization creation page from the menu that appears when hovering over their avatar in the lower left corner, and then clicking on "Create New Organization":
 
 {{< img src="account_management/faq/createorg2.png" alt="createorg2"  >}}
 

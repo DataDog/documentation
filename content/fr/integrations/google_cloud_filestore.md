@@ -10,6 +10,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/google_cloud_filestore/'
 draft: false
 git_integration_title: google_cloud_filestore
 has_logo: true
+integration_id: google-cloud-filestore
 integration_title: "Google\_Cloud\_Filestore"
 is_public: true
 kind: integration
@@ -25,7 +26,7 @@ Google Cloud Filestore est un service géré de stockage de fichiers destiné 
 
 Utilisez l'intégration Datadog Google Cloud Platform pour recueillir des métriques de Google Cloud Filestore.
 
-## Implémentation
+## Configuration
 
 ### Installation
 

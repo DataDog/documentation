@@ -41,14 +41,15 @@ further_reading:
 
 以下の各セクションのタブで、特定のコンテナにインテグレーションテンプレートを適用するそれぞれの方法を示します。次の方法があります。
 
-* [Kubernetesポッドアノテーション](?tab=kubernetes#configuration)
+* [Kubernetes ポッドアノテーション](?tab=kubernetes#configuration)
 * [ConfigMap](?tab=configmap#configuration)
-* [key-value ストア](?tab=keyvaluestore#configuration)
+* [Key-Value ストア](?tab=keyvaluestore#configuration)
+* [Helm チャート](?tab=helm#configuration)
 
 **注**: サポートされているインテグレーションの一部 ([Ceph][4]、[Varnish][5]、[Postfix][6]、[Cassandra Nodetools][7]、[Gunicorn][8]) は、プロセスツリーデータまたはファイルシステムへのアクセスを必要とするため、標準のオートディスカバリーに対応していません。
 標準のオートディスカバリーと互換性のないインテグレーションを設定するには、ポッドで公式の Prometheus エクスポーターを使用し、次に Agent で OpenMetrics チェックとオートディスカバリーを使用してポッドを見つけ、エンドポイントをクエリします。たとえば、Kubernetes の標準パターンは、ノードレベルまたはクラスターレベルのコレクターを持つサイドカーアダプターです。この設定によってエクスポーターはデータにアクセスでき、HTTP エンドポイントを使用してそのデータを公開します。これにより、OpenMetrics チェックと Datadog オートディスカバリーはこのデータにアクセスできます。
 
-## 構成
+## コンフィギュレーション
 
 {{< tabs >}}
 {{% tab "Kubernetes" %}}
@@ -101,6 +102,22 @@ spec:
 `kind: Pod` を使用して Kubernetes ポッドを直接定義する場合は、各ポッドのアノテーションを `metadata` セクションの真下に追加します。レプリケーションコントローラー、レプリカセット、またはデプロイメントを使用してポッドを間接的に定義する場合は、ポッドアノテーションを `.spec.template.metadata` の下に追加します。
 
 **注:** Datadog では、コンテナ化環境のベストプラクティスとして、タグを付ける際に統合サービスタグ付けを使用することをおすすめしています。統合サービスタグ付けは、`env`、`service`、`version` の 3 つの標準タグを使用して Datadog テレメトリーと結合します。ご使用環境で統合タグ付けを構成する方法に関する詳細は、[統合サービスタグ付け][1]ドキュメントをご参照ください。
+
+
+### 準備のできていないポッドを許容する
+
+デフォルトでは、`unready` ポッドは Datadog Agent がチェックをスケジュールしたときに無視されます。そのため、これらのポッドからメトリクス、サービスチェック、およびログは収集されません。この挙動をオーバーライドするためには、アノテーション `ad.datadoghq.com/tolerate-unready` を `"true"` に設定してください。例:
+
+```yaml
+apiVersion: v1
+kind: Pod
+# (...)
+metadata:
+  name: '<POD_NAME>'
+  annotations:
+    ad.datadoghq.com/tolerate-unready: "true"
+  ...
+```
 
 
 [1]: /ja/getting_started/tagging/unified_service_tagging
@@ -221,6 +238,28 @@ key-value ストアがテンプレートソースとして有効になってい�
 [1]: /ja/integrations/consul/
 [2]: /ja/agent/guide/agent-commands/
 {{% /tab %}}
+{{% tab "Helm" %}}
+
+`values.yaml` ファイルには、静的およびオートディスカバリーのインテグレーションチェックの両方を定義する `confd` セクションが含まれています。サンプル [values.yaml][1] に、インラインの例があります。各キーは、Agent の `conf.d` ディレクトリのファイルになります。
+
+```yaml
+  confd:
+    <INTEGRATION_NAME>.yaml: |-
+      ad_identifiers:
+        - <INTEGRATION_AUTODISCOVERY_IDENTIFIER>
+      init_config:
+        - <INIT_CONFIG>
+      instances:
+        - <INSTANCES_CONFIG>
+```
+`<INTEGRATION_AUTODISCOVERY_IDENTIFIER>` の詳細については、[オートディスカバリーコンテナ識別子][1]のドキュメントを参照してください。
+
+**注**: Helm チャートには 2 つの `confd` セクション（Agent チェック用とクラスターチェック用）があります。Cluster Agent を使用しクラスターチェックにオートディスカバリーを構成する場合は、[クラスターチェックのコンフィギュレーション例][2]に従い、必ず `cluster_check: true` を含めます。詳しいコンテキストについては、[クラスターチェックのドキュメント][3]を参照してください。
+
+[1]: https://github.com/helm/charts/blob/fbdaa84049d93d8e40bc8c26b0987f3883fa1cac/stable/datadog/values.yaml#L244-L261
+[2]: https://github.com/helm/charts/blob/fbdaa84049d93d8e40bc8c26b0987f3883fa1cac/stable/datadog/values.yaml#L426-L438
+[3]: /ja/agent/cluster_agent/clusterchecks
+{{% /tab %}}
 {{< /tabs >}}
 
 ## 例
@@ -323,11 +362,30 @@ auto-conf ファイルとは異なり、**key-value ストアの場合は、コ�
 
 [1]: /ja/agent/faq/template_variables/
 {{% /tab %}}
+{{% tab "Helm" %}}
+
+以下のコンフィギュレーションは、カスタムパスワードパラメーターを使用して Redis コンテナのインテグレーションテンプレートを定義します。
+```yaml
+  confd
+    redisdb.yaml: |-
+      ad_identifiers:
+        - redis
+      init_config:
+      instances:
+        - host: %%host%%
+          port: 6379
+          password: %%env_REDIS_PASSWORD%%
+```
+結果として、Agent には `/confd` ディレクトリに上記のコンフィギュレーションで `redis.yaml` ファイルが含まれます。
+**注**: パスワードがプレーンテキストで保存されることを避けるために、`"%%env_<ENV_VAR>%%"` テンプレート変数ロジックが使用されています。そのため、`REDIS_PASSWORD` 環境変数を Agent に渡す必要があります。[オートディスカバリーテンプレート変数のドキュメント][1]を参照してください。
+
+[1]: /ja/agent/faq/template_variables/
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Datadog Apache および HTTP チェックインテグレーション
 
-以下の構成は、`<コンテナ識別子>`: `httpd` を持つ Apache コンテナイメージに適用されます。オートディスカバリーテンプレートは、Apache コンテナからメトリクスを収集し、2 つのエンドポイントをテストするためのインスタンスで Datadog-HTTP チェックをセットアップするように構成されます。
+以下の構成は、`<CONTAINER_IDENTIFIER>` : `apache` を持つ Apache コンテナイメージに適用されます。オートディスカバリーテンプレートは、Apache コンテナからメトリクスを収集し、2 つのエンドポイントをテストするためのインスタンスで Datadog-HTTP チェックをセットアップするように構成されます。
 
 チェック名は、`apache`、`http_check`、これらの `<初期コンフィギュレーション>`、および `<インスタンスコンフィギュレーション>` です。完全な構成は、それぞれのドキュメントの [Datadog-Apache インテグレーション][9]と [Datadog-HTTP チェックインテグレーション][10]のページにあります。
 

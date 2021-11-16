@@ -19,6 +19,9 @@ further_reading:
     - link: 'tracing/visualization/'
       tag: 'Documentation'
       text: 'Explore your services, resources, and traces'
+    - link: 'https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples'
+      tag: 'GitHub'
+      text: '.NET code samples'
 ---
 <div class="alert alert-info">
 For instructions on how to setup the .NET Tracer and enable automatic instrumentation, see the <a href="https://docs.datadoghq.com/tracing/setup/dotnet/">.NET setup instructions</a>.
@@ -75,7 +78,7 @@ public class ShoppingCartController : Controller
 
 ### Adding tags globally to all spans
 
-Use the `DD_TAGS` environment variable to set tags across all generated spans for an application. This can be useful for grouping stats for your applications, data centers, regions, etc. within the Datadog UI. For example:
+Use the `DD_TAGS` environment variable (at the Agent level) to set tags across all generated spans for an application. This can be useful for grouping stats for your applications, data centers, regions, etc. within the Datadog UI. For example:
 
 ```ini
 DD_TAGS=datacenter:njc,key2:value2
@@ -106,10 +109,12 @@ Customize your observability by programmatically creating spans around any block
 using (var parentScope =
        Tracer.Instance.StartActive("manual.sortorders"))
 {
+    parentScope.Span.ResourceName = "<RESOURCE NAME>";
     using (var childScope =
            Tracer.Instance.StartActive("manual.sortorders.child"))
     {
         // Nest using statements around the code to trace
+        childScope.Span.ResourceName = "<RESOURCE NAME>";
         SortOrders();
     }
 }

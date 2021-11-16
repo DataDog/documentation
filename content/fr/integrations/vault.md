@@ -7,7 +7,8 @@ assets:
   logs:
     source: vault
   metrics_metadata: metadata.csv
-  monitors: {}
+  monitors:
+    '[Vault] S3 time to access secrets is high': assets/monitors/vault_S3_time_high.json
   saved_views:
     error_warning_status: assets/saved_views/error_warning_status.json
     service_name_overview: assets/saved_views/service_name_overview.json
@@ -55,59 +56,59 @@ Le check Vault est inclus avec le package de l'[Agent Datadog][2]. Vous n'avez d
 
 #### Prérequis
 
-Pour garantir le bon fonctionnement du check Vault, vous devez : a) activer l'accès non authentifié aux métriques Vault ; ou b) fournir un token client Vault.
+1. Vérifiez que vous avez activé les [métriques Prometheus dans la configuration de Vault][3].
 
-a) Définissez le paramètre de configuration Vault [`unauthenticated_metrics_access`][3] sur `true`.
+2. Pour garantir le bon fonctionnement du check Vault, vous devez activer l'accès non authentifié aux métriques Vault (Vault 1.3.0+) ou fournir un token client Vault :
 
-Cela autorise l'accès non authentifié au endpoint `/v1/sys/metrics`.
+   **Pour activer l'accès non authentifié**, définissez le paramètre [`unauthenticated_metrics_access`][4] de Vault sur `true`. Cette opération permet d'accéder sans authentification à l'endpoint `/v1/sys/metrics`.
 
-b) Utilisez un token client Vault.
+     **Remarque** : pour recueillir des métriques, l'endpoint `/sys/metrics` requiert Vault 1.1.0 ou ultérieur.
 
-Vous trouverez ci-dessous un exemple reposant sur la méthode d'authentification JWT. Vous pouvez toutefois utiliser d'autres [méthodes d'authentification][4].
+    **Pour utiliser un token client Vault**, suivez l'exemple ci-dessous reposant sur la méthode d'authentification JWT. Vous pouvez toutefois utiliser d'autres [méthodes d'authentification][5]. 
 
-Voici les fonctionnalités requises pour que l'intégration Vault fonctionne correctement :
+L'intégration Vault nécessite la configuration suivante :
 
-Contenu de `metrics_policy.hcl` :
-```text
-path "sys/metrics*" {
-  capabilities = ["read", "list"]
-}
-```
+     Contenu de `metrics_policy.hcl` :
+   ```text
+   path "sys/metrics*" {
+     capabilities = ["read", "list"]
+   }
+   ```
 
-Rôle et stratégie de configuration :
+      Rôle et stratégie de configuration :
 
-```text
-$ vault policy write metrics /chemin/vers/strategie_metriques.hcl
-$ vault auth enable jwt
-$ vault write auth/jwt/config jwt_supported_algs=RS256 jwt_validation_pubkeys=@<CHEMIN_VERS_PEM_PUBLIC>
-$ vault write auth/jwt/role/datadog role_type=jwt bound_audiences=<AUDIENCE> user_claim=name token_policies=metrics
-$ vault agent -config=/chemin/vers/config_agent.hcl
-```
+   ```text
+   $ vault policy write metrics /path/to/metrics_policy.hcl
+   $ vault auth enable jwt
+   $ vault write auth/jwt/config jwt_supported_algs=RS256 jwt_validation_pubkeys=@<CHEMIN_VERS_PEM_PUBLIC>
+   $ vault write auth/jwt/role/datadog role_type=jwt bound_audiences=<AUDIENCE> user_claim=name token_policies=metrics
+   $ vault agent -config=/path/to/agent_config.hcl
+   ```
 
-Contenu de `agent_config.hcl` :
-```
-exit_after_auth = true
-pid_file = "/tmp/agent_pid"
+   Contenu de `agent_config.hcl` :
+   ```
+   exit_after_auth = true
+   pid_file = "/tmp/agent_pid"
 
-auto_auth {
-  method "jwt" {
-    config = {
-      path = "<CHEMIN_REVENDICATION_JWT>"
-      role = "datadog"
-    }
-  }
+   auto_auth {
+     method "jwt" {
+       config = {
+         path = "<CHEMIN_CLAIM_JWT>"
+         role = "datadog"
+       }
+     }
 
-  sink "file" {
-    config = {
-      path = "<CHEMIN_TOKEN_CLIENT>"
-    }
-  }
-}
+     sink "file" {
+       config = {
+         path = "<CHEMIN_TOKEN_CLIENT>"
+       }
+     }
+   }
 
-vault {
-  address = "http://0.0.0.0:8200"
-}
-```
+   vault {
+     address = "http://0.0.0.0:8200"
+   }
+   ```
 
 ### Configuration
 
@@ -182,7 +183,7 @@ Consultez la [documentation relative aux modèles d'intégration Autodiscovery][
 
 #### Collecte de logs
 
-_Disponible à partir des versions > 6.0 de l'Agent_
+_Disponible à partir des versions > 6.0 de l'Agent_
 
 1. La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans `datadog.yaml` :
 
@@ -232,7 +233,7 @@ _Disponible à partir des versions > 6.0 de l'Agent_
 
 ### Validation
 
-[Lancez la sous-commande status de l'Agent][5] et cherchez `vault` dans la section Checks.
+[Lancez la sous-commande status de l'Agent][6] et cherchez `vault` dans la section Checks.
 
 ## Données collectées
 
@@ -247,33 +248,40 @@ Cet événement se déclenche en cas de changement de leader du cluster.
 
 ### Checks de service
 
-`vault.can_connect` :
-Renvoie CRITICAL si l'Agent ne parvient pas à se connecter à Vault. Si ce n'est pas le cas, renvoie OK.
+**vault.can_connect** :<br>
+Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter à Vault. Si ce n'est pas le cas, renvoie `OK`.
 
-`vault.unsealed` :
-Renvoie CRITICAL si Vault est scellé. Si ce n'est pas le cas, renvoie OK.
+**vault.unsealed** :<br>
+Renvoie `CRITICAL` si Vault est scellé. Si ce n'est pas le cas, renvoie `OK`.
 
-`vault.initialized` :
-Renvoie CRITICAL si Vault n'est pas encore initialisé. Si ce n'est pas le cas, renvoie OK.
+**vault.initialized** :<br>
+Renvoie `CRITICAL` si Vault n'est pas encore initialisé. Si ce n'est pas le cas, renvoie `OK`.
 
-`vault.prometheus.health`:
-Renvoie CRITICAL si le check ne parvient pas à se connecter à l'endpoint de métriques. Si ce n'est pas le cas, renvoie OK.
+**vault.prometheus.health** :<br>
+Renvoie `CRITICAL` si le check ne parvient pas à se connecter à l'endpoint de métriques. Si ce n'est pas le cas, renvoie `OK`.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][6].
+Besoin d'aide ? Contactez [l'assistance Datadog][7].
 
 ## Pour aller plus loin
 
 Documentation, liens et articles supplémentaires utiles :
 
-- [Surveiller HashiCorp Vault avec Datadog][7]
+- [Surveiller HashiCorp Vault avec Datadog][8]
+- [Surveiller les métriques et les logs d'HashiCorp Vault][9]
+- [Outils pour la surveillance d'HashiCorp Vault][10]
+- [Comment surveiller HashiCorp Vault avec Datadog][11]
 
 
 [1]: https://www.vaultproject.io
 [2]: https://app.datadoghq.com/account/settings#agent
-[3]: https://www.vaultproject.io/docs/configuration/listener/tcp#unauthenticated_metrics_access
-[4]: https://www.vaultproject.io/docs/auth
-[5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
-[6]: https://docs.datadoghq.com/fr/help/
-[7]: https://www.datadoghq.com/blog/monitor-hashicorp-vault-with-datadog
+[3]: https://www.vaultproject.io/docs/configuration/telemetry#prometheus
+[4]: https://www.vaultproject.io/docs/configuration/listener/tcp#unauthenticated_metrics_access
+[5]: https://www.vaultproject.io/docs/auth
+[6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
+[7]: https://docs.datadoghq.com/fr/help/
+[8]: https://www.datadoghq.com/blog/monitor-hashicorp-vault-with-datadog
+[9]: https://www.datadoghq.com/blog/monitor-vault-metrics-and-logs/
+[10]: https://www.datadoghq.com/blog/vault-monitoring-tools
+[11]: https://www.datadoghq.com/blog/vault-monitoring-with-datadog

@@ -61,7 +61,7 @@ further_reading:
 
 3. <mrk mid="33" mtype="seg"/><mrk mid="34" mtype="seg"/>
 4. **Select your tags**: タグはブラウザテストに紐付いています。`<KEY>:<VALUE>` フォーマットを使用して `<VALUE>` に Synthetic テストページ上の任意の `<KEY>` でフィルターを適用します。
-5. **Browsers & Devices**: テストを実行するブラウザ (`Chrome`、`Firefox`) とデバイス (`Laptop Large`、`Tablet`、`Mobile Small`)。
+5. **Browsers & Devices**: テストを実行するブラウザ (`Chrome`、`Firefox`、`Edge`) とデバイス (`Laptop Large`、`Tablet`、`Mobile Small`)。
 6. **Locations**: Datadog 管理下のロケーションからテストを実行します。世界中どこからでも使用できる AWS ロケーションが各サイトに多数用意されています。Datadog for Government site には、West US (AWS GovCloud) ロケーションがサポートされています。また、[プライベートロケーション][1]をセットアップして、カスタムロケーションまたはプライベートネットワーク内からブラウザテストを実行することもできます。[Datadog アプリ][2]でロケーションの完全なリストを参照するか、[API][3] を使用してください。
 7. **How often should Datadog run the test?**: 5 分間隔から週に一度までの間でインターバルを設定します。1 分の頻度は[リクエストに応じて][4]利用できます。
 

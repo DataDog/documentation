@@ -16,6 +16,8 @@ Exemple : `count_nonzero(system.cpu.user{*} by {host})` renvoie une série temp
 
 {{< img src="dashboards/functions/count/count_nonzero.png" alt="total sans les zéros" style="width:80%;">}}
 
+Remarque : `count_nonzero_finite()` peut être utilisé en tant qu'alias de `count_nonzero()`.
+
 ## Total sans les null
 
 | Fonction           | Description                           | Exemple                            |
@@ -32,9 +34,10 @@ Exemple : `count_not_null(system.cpu.user{*} by {host})` renvoie une série tem
 
 {{< whatsnext desc="Consultez les autres fonctions disponibles :" >}}
     {{< nextlink href="/dashboards/functions/algorithms" >}}Algorithme : mettez en place un système de détection d'anomalies ou de singularités sur votre métrique.{{< /nextlink >}}
-    {{< nextlink href="/dashboards/functions/arithmetic" >}}Opérations arithmétiques : effectuez des opérations arithmétiques sur votre métrique. {{< /nextlink >}}
+    {{< nextlink href="/dashboards/functions/arithmetic" >}}Opérations arithmétiques : effectuez des opérations arithmétiques sur votre métrique.  {{< /nextlink >}}
+    {{< nextlink href="/dashboards/functions/exclusion" >}}Exclusion : excluez certaines valeurs de votre métrique.{{< /nextlink >}}
     {{< nextlink href="/dashboards/functions/interpolation" >}}Interpolation : saisissez ou définissez des valeurs par défaut pour votre métrique.{{< /nextlink >}}
-    {{< nextlink href="/dashboards/functions/rank" >}}Rang : sélectionnez seulement un sous-ensemble de métriques. {{< /nextlink >}}
+    {{< nextlink href="/dashboards/functions/rank" >}}Rang : sélectionnez uniquement un sous-ensemble de métriques. {{< /nextlink >}}
     {{< nextlink href="/dashboards/functions/rate" >}}Taux : calculez une dérivée personnalisée sur votre métrique.{{< /nextlink >}}
     {{< nextlink href="/dashboards/functions/regression" >}}Régression : appliquez une fonction d'apprentissage automatique sur votre métrique.{{< /nextlink >}}
     {{< nextlink href="/dashboards/functions/rollup" >}}Cumul : contrôlez le nombre de points bruts utilisés dans votre métrique. {{< /nextlink >}}

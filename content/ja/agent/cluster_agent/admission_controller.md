@@ -64,7 +64,7 @@ Admission Controller で Datadog 演算子を有効にするには、カスタ�
 
 ### 手動セットアップ
 
-Helm または Datadog 演算子を使用せずに Admission Controller を有効にするには、コンフィギュレーションに以下を追加する必要があります。
+Helm または Datadog 演算子を使用せずに Admission Controller を有効にするには、コンフィギュレーションに以下を追加します。
 
 まず、[Cluster Agent RBAC アクセス許可][2]のマニフェストをダウンロードし、`rules` の下に以下を追加します。
 
@@ -88,7 +88,7 @@ Helm または Datadog 演算子を使用せずに Admission Controller を有�
 `agent-services.yaml` の下に以下を追加します。
 
 {{< code-block lang="yaml" filename="agent-services.yaml" disable_copy="true" >}}
----
+
 apiVersion: v1
 kind: Service
 metadata:
@@ -150,6 +150,7 @@ DogStatsD クライアントと APM トレーサーを自動で構成するに�
 - Admission Controller は環境変数 `DD_VERSION, DD_ENV` および `DD_SERVICE` が既に存在する場合は挿入を行いません。
 - Admission Controller の挿入機能を無効化するには、Cluster Agent のコンフィギュレーション: `DD_ADMISSION_CONTROLLER_INJECT_CONFIG_ENABLED=false` を使用します。
 - Datadog Admission Controller を使用すれば、ユーザーは Downward API ([Kubernetes トレースコレクション設定のステップ 2 ][3]) を利用してアプリケーションポッドの構成をスキップすることができます。
+- プライベートクラスターを使用していて、コンフィギュレーションがポッドに挿入されない場合は、Control Plane のファイアウォールルールを開き Datadog Webhook と通信します、
 
 
 ## その他の参考資料

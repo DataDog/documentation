@@ -68,7 +68,7 @@ appkey = <YOUR_APPLICATION_KEY>
 * `dog search`
 * `dog comment`
 
-### 例: 実際の Dogshell
+### 実際の Dogshell
 
 以下を使用して、Datadog アカウントにメトリクスをポストできます。
 
@@ -91,6 +91,6 @@ dog metric post -h
 {{< img src="developers/faq/dogshell_test.png" alt="dogshell_test"  >}}
 
 [1]: https://github.com/DataDog/datadogpy
-[2]: /ja/developers/metrics/dogstatsd_metrics_submission/
+[2]: /ja/metrics/dogstatsd_metrics_submission/
 [3]: https://github.com/DataDog/datadogpy#installation
 [4]: https://github.com/DataDog/datadogpy/tree/master/datadog/dogshell

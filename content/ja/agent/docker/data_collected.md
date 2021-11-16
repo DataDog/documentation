@@ -26,12 +26,4 @@ Docker Agent は以下のイベントを生成します。
 
 ## サービスチェック
 
-- **docker.service_up**:
-    Agent が Docker デーモンからコンテナのリストを収集できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
-
-- **docker.container_health**:
-  このサービスチェックは、Agent v5 でのみ使用できます。コンテナが正常でない場合は `CRITICAL`、健全性が不明な場合は `UNKNOWN`、それ以外の場合は `OK` を返します。
-
-- **docker.exit**:
-    コンテナが 0 以外の終了コードで終了した場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
-
+{{< get-service-checks-from-git "docker" >}}

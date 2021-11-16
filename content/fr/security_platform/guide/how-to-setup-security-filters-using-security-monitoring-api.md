@@ -1,5 +1,5 @@
 ---
-title: Configuration des filtres de sécurité à l'aide de l'API Security Monitoring
+title: Filtres de sécurité avec l'API Security Monitoring
 kind: guide
 aliases:
   - /fr/security_monitoring/guide/how-to-setup-security-filters-using-security-monitoring-api/
@@ -15,6 +15,8 @@ Les scénarios suivants sont abordés dans ce guide :
 * [Configurer le filtre de sécurité par défaut pour exclure certains logs](ajouter-une-exclusion-au-filtre-de-securite-par-defaut)
 * [Créer des filtres de sécurité personnalisés pour spécifier les sources de logs à analyser](#creer-un-filtre-de-securite-personnalise)
 
+**Remarque** : les filtres de sécurité sont uniquement requis pour contrôler les logs analysés par la solution Security Monitoring. Vous n'avez pas besoin d'écrire des filtres de sécurité pour exclure les logs générés par l'Agent Datadog avec les solutions Cloud Workload Security (`source:runtime-security-agent`) et Cloud Security Posture Management (`source:compliance-agent`). En effet, ces logs ne sont pas facturés comme des logs analysés.
+
 ## Prérequis
 
 * Pour utiliser l'API, il est nécessaire de disposer de la clé d'API et de la clé d'application **d'un utilisateur admin**. Ces informations sont disponibles sur la [page des clés API de votre compte Datadog][3]. Remplacez `<CLÉ_API_DATADOG>` et `<CLÉ_APPLICATION_DATADOG>` par votre clé d'API et votre clé d'application Datadog.
@@ -23,7 +25,7 @@ Les scénarios suivants sont abordés dans ce guide :
 
 ## Scénarios
 
-### Ajouter une exclusion au filtre de sécurité par défaut
+### Ajouter une exclusion
 
 Par défaut, vous disposez d'un filtre de sécurité capable d'analyser tous les logs ingérés : `all ingested logs`, avec la requête `*`. Vous pouvez personnaliser ce filtre en ajoutant une exclusion, afin d'exclure un sous-ensemble de logs en fonction de leurs tags. Pour ce faire, récupérez d'abord la liste des filtres de sécurité, afin d'obtenir l'`id` du filtre.
 
@@ -110,7 +112,7 @@ curl -L -X PATCH 'https://api.{{< region-param key="dd_site" code="true" >}}/api
 }
 ```
 
-### Créer un filtre de sécurité personnalisé
+### Créer un filtre personnalisé
 
 Vous pouvez également créer des filtres de sécurité personnalisés, afin de limiter l'analyse à certains logs de votre choix. Par exemple, il est possible d'analyser les logs d'AWS Cloudtrail en appliquant un filtre qui renvoie uniquement les logs avec le tag `source:cloudtrail`.
 

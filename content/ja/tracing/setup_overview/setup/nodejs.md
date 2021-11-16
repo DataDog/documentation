@@ -28,17 +28,26 @@ further_reading:
 ---
 ## 互換性要件
 
-NodeJS トレーサーはバージョン `8 以降`を公式にサポートします。8.x や 10.x など、偶数バージョンのみが公式なサポート対象です。9.x や 11.x などの奇数バージョンは動作しますが、公式なサポート対象ではありません。サポートするライブラリの一覧については、[互換性要件][1]ページをご覧ください。
+Nodejs トレーサーの最新バージョンは、バージョン `>=12` を公式にサポートしています。バージョン `8` および `10` は `0.x` リリースラインのメンテナンスモードでサポートされます。Node のバージョンサポートおよび対応するバージョンについて詳しくは、[互換性要件][1]ページを参照してください。 
 
 ## インストールと利用開始
 
 Datadog トレースライブラリを Node.js アプリケーションに追加するには、次の手順に従います。
 
-1. 以下の npm を使用して Datadog Tracing ライブラリをインストールします。
+1. Node.js 12 以降に対応する npm を使用して Datadog Tracing ライブラリをインストールします。
 
-```sh
-npm install --save dd-trace
-```
+    ```sh
+    npm install dd-trace --save
+    ```
+   発売終了済みの Node.js バージョン 10 または 8 をトレースしたい場合は、以下を実行して `dd-trace` のバージョン 0.x をインストールしてください。
+    ```
+    npm install dd-trace@latest-node10
+    ```
+   または
+    ```
+    npm install dd-trace@latest-node8
+    ```
+   ディストリビューションタグおよび Node.js のランタイムばージョンサポートについて詳しくは、[互換性要件][1] ページを参照してください。
 
 2. コードまたはコマンドライン引数を使用して、トレーサーをインポートして初期化します。Node.js トレースライブラリは、他のモジュールの**前**にインポートして初期化する必要があります。
 
@@ -91,12 +100,12 @@ node --require dd-trace/init app.js
 
 ### APM に Datadog Agent を構成する
 
-インスツルメントされたアプリケーションからトレースを受信するように Datadog Agent をインストールして構成します。デフォルトでは、Datadog Agent は `datadog.yaml` ファイルの `apm_enabled: true` で有効になっており、`localhost:8126` でトレーストラフィックをリッスンします。コンテナ化環境の場合、以下のリンクに従って、Datadog Agent 内でトレース収集を有効にします。
+インスツルメントされたアプリケーションからトレースを受信するように Datadog Agent をインストールして構成します。デフォルトでは、Datadog Agent は `apm_config` 下にある  `datadog.yaml` ファイルの `enabled: true` で有効になっており、`localhost:8126` でトレーストラフィックをリッスンします。コンテナ化環境の場合、以下のリンクに従って、Datadog Agent 内でトレース収集を有効にします。
 
 {{< tabs >}}
 {{% tab "コンテナ" %}}
 
-1. メインの [`datadog.yaml` コンフィギュレーションファイル][1]で `apm_non_local_traffic: true` を設定します
+1. メイン [`datadog.yaml` コンフィギュレーションファイル][1]の `apm_config` セクションで `apm_non_local_traffic: true` を設定します。
 
 2. コンテナ化された環境でトレースを受信するように Agent を構成する方法については、それぞれの説明を参照してください。
 
@@ -105,18 +114,23 @@ node --require dd-trace/init app.js
 
 3. アプリケーションをインスツルメント化した後、トレースクライアントはデフォルトでトレースを `localhost:8126` に送信します。これが正しいホストとポートでない場合は、以下の環境変数を設定して変更します。
 
-`DD_AGENT_HOST` と `DD_TRACE_AGENT_PORT`
+   `DD_AGENT_HOST` と `DD_TRACE_AGENT_PORT`
 
-```sh
-DD_AGENT_HOST=<HOSTNAME> DD_TRACE_AGENT_PORT=<PORT> ノードサーバー
-```
+    ```sh
+    DD_AGENT_HOST=<HOSTNAME> DD_TRACE_AGENT_PORT=<PORT> node server
+    ```
 
-UDS などの異なるプロトコルを使用するには、URL 全体を単一の環境変数 `DD_TRACE_AGENT_URL` として指定します。
+    UDS などの異なるプロトコルを使用するには、URL 全体を単一の環境変数 `DD_TRACE_AGENT_URL` として指定します。
 
-```sh
-DD_TRACE_AGENT_URL=unix:<SOCKET_PATH>ノードサーバー
-```
+    ```sh
+    DD_TRACE_AGENT_URL=unix:<SOCKET_PATH> node server
+    ```
 
+{{< site-region region="us3,eu,gov" >}}
+
+4. Datadog Agent の `DD_SITE` を {{< region-param key="dd_site" code="true" >}} に設定して、Agent が正しい Datadog の場所にデータを送信するようにします。
+
+{{< /site-region >}}
 
 [1]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
 {{% /tab %}}
@@ -151,34 +165,99 @@ AWS Lambda で Datadog APM を設定するには、[サーバーレス関数の�
 
 ### タグ付け
 
-| 構成         | 環境変数         | デフォルト     | 説明                                                                                                                                                                                                                                                                |
-| -------------- | ---------------------------- | ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| env            | `DD_ENV`                     | `null`      | アプリケーションの環境 (例: `prod`、`pre-prod`、`stage`) を設定します。バージョン 0.20 以降で利用可能。                                                                                                                                                                                                     |
-| サービス        | `DD_SERVICE`            | `null`      | このプログラムで使用するサービス名。バージョン 0.20 以降で利用可能。                                                                                                                                                                                                                              |
-| version        | `DD_VERSION`            | `null`      | アプリケーションのバージョン番号。デフォルトは、package.json のバージョンフィールドの値です。バージョン 0.20 以降で利用可能。
-| タグ           | `DD_TAGS`                    | `{}`        | すべてのスパンおよびメトリクスに適用されるべきグローバルタグを設定します。環境変数としてパスした場合、フォーマットは `key:value,key:value` となります。プログラム的に設定する場合は、`tracer.init({ tags: { foo: 'bar' } })` となり、バージョン 0.20 以降で使用できます                                                                                                                            |
+
+`env`
+: **環境変数**: `DD_ENV`<br>
+**デフォルト**: `null`<br>
+アプリケーションの環境 (例: `prod`、`pre-prod`、`stage` ) を設定します。バージョン 0.20 以降で利用可能。
+
+`service`
+: **環境変数**: `DD_SERVICE`<br>
+**デフォルト**: `null`<br>
+このプログラムで使用するサービス名。バージョン 0.20 以降で利用可能。
+
+`version`
+: **環境変数**: `DD_VERSION`<br>
+**デフォルト**: `null`<br>
+アプリケーションのバージョン番号。デフォルトは、package.json のバージョンフィールドの値です。バージョン 0.20 以降で利用可能。
+
+`tags`
+: **環境変数**: `DD_TAGS`<br>
+**デフォルト**: `{}`<br>
+すべてのスパンおよびメトリクスに適用されるべきグローバルタグを設定します。環境変数としてパスした場合、フォーマットは `key:value,key:value` となります。プログラム的に設定する場合は、`tracer.init({ tags: { foo: 'bar' } })` となり、バージョン 0.20 以降で利用可能。
 
 サービスに `env`、`service`、`version` を設定するには、`DD_ENV`、`DD_SERVICE`、`DD_VERSION` を使用することをおすすめします。このような環境変数の構成におすすめの方法については、[統合サービスタグ付け][2]のドキュメントをご参照ください。
 
 ### インスツルメンテーション
 
-| 構成         | 環境変数         | デフォルト     | 説明                                                                                                                                                                                                                                                                |
-| -------------- | ---------------------------- | ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| enabled        | `DD_TRACE_ENABLED`           | `true`      | トレーサーを有効にするかどうか。                                                                                                                                                                                                                                              |
-| debug          | `DD_TRACE_DEBUG`             | `false`     | トレーサーでデバッグロギングを有効化します。                                                                                                                                                                                                                                        |
-| url            | `DD_TRACE_AGENT_URL`         | `null`      | トレーサーが送信するトレース Agent の URL。設定した場合、ホスト名およびポートより優先されます。`datadog.yaml` ファイルの `apm_config.receiver_socket` または `DD_APM_RECEIVER_SOCKET` 環境変数と組み合わせて、Unix ドメインソケットをサポートします。 |
-| hostname       | `DD_TRACE_AGENT_HOSTNAME`    | `localhost` | トレーサーが送信する Agent のアドレス。                                                                                                                                                                                                                       |
-| port           | `DD_TRACE_AGENT_PORT`        | `8126`      | トレーサーが送信するトレース Agent のポート。                                                                                                                                                                                                                    |
-| dogstatsd.port | `DD_DOGSTATSD_PORT`          | `8125`      | メトリクスが送信される DogStatsD Agent のポート。                                                                                                                                                                                                             |
-| logInjection   | `DD_LOGS_INJECTION`          | `false`     | 対応するログライブラリのログにトレース ID の自動挿入を有効にします。                                                                                                                                                                                           |
-| sampleRate     | -                            | `1`         | スパンのサンプリング率: `0` ～ `1` 間の浮動小数点。                                                                                                                                                                                                              |
-| flushInterval  | -                            | `2000`      | トレーサーが Agent へトレースを送信する際のインターバル (ミリセカンド)。                                                                                                                                                                                                |
-| runtimeMetrics | `DD_RUNTIME_METRICS_ENABLED` | `false`     | ランタイムメトリクスのキャプチャを有効にするかどうか。ポート `8125` (または `dogstatsd.port` で構成) が UDP 用に Agent で開いている必要があります。                                                                                                                                        |
-| experimental   | -                            | `{}`        | 試験機能は、 Boolean の true を使用して一度に、またはキー/値のペアを使用して個々に有効にできます。試験機能に関する詳細は、[サポート][4]までお問合せください。                                                                                   |
-| plugins        | -                            | `true`      | ビルトインプラグインを使用して、外部ライブラリの自動インスツルメンテーションを有効にするかどうか。                                                                                                                                                                       |
-| - | `DD_TRACE_DISABLED_PLUGINS` | - | トレーサーが初期化された際に自動で無効となるインテグレーション名のカンマ区切り文字列。`DD_TRACE_DISABLED_PLUGINS=express,dns` などの環境変数のみとなります。 |
-| clientToken    | `DD_CLIENT_TOKEN`            | `null`      | ブラウザーのトレーシング用クライアントトークン。Datadog の **Integrations** -> **APIs** で生成できます。                                                                                                                                                                             |
-| logLevel       | `DD_TRACE_LOG_LEVEL`         | `debug`     | デバッグロギングが有効な場合に使用する、トレーサーの最小ログレベル用ストリング (例: `error`, `debug`)。                                                                                                                                                             |
+`enabled`
+: **環境変数**: `DD_TRACE_ENABLED`<br>
+**デフォルト**: `true`<br>
+トレーサーを有効にするかどうか。
+
+`debug`
+: **環境変数**: `DD_TRACE_DEBUG`<br>
+**デフォルト**: `false`<br>
+トレーサーでデバッグロギングを有効化します。
+
+`url`
+: **環境変数**: `DD_TRACE_AGENT_URL`<br>
+**デフォルト**: `null`<br>
+トレーサーが送信するトレース Agent の URL。設定した場合、ホスト名およびポートより優先されます。`datadog.yaml` ファイルの `apm_config.receiver_socket` または `DD_APM_RECEIVER_SOCKET` 環境変数と組み合わせて、Unix ドメインソケットをサポートします。
+
+`hostname`
+: **環境変数**: `DD_TRACE_AGENT_HOSTNAME`<br>
+**デフォルト**: `localhost`<br>
+トレーサーが送信する Agent のアドレス。
+
+`port`
+: **環境変数**: `DD_TRACE_AGENT_PORT`<br>
+**デフォルト**: `8126`<br>
+トレーサーが送信するトレース Agent のポート。
+
+`dogstatsd.port` 
+: **環境変数**: `DD_DOGSTATSD_PORT`<br>
+**デフォルト**: `8125`<br>
+メトリクスが送信される DogStatsD Agent のポート。
+
+`logInjection`
+: **環境変数**: `DD_LOGS_INJECTION`<br>
+**デフォルト**: `false`<br>
+対応するログライブラリのログにトレース ID の自動挿入を有効にします。
+
+`sampleRate`
+: **デフォルト**: `1`<br>
+スパンのサンプリング率:  `0`〜`1` 間の浮動小数点。
+
+`flushInterval`
+: **デフォルト**: `2000`<br>
+トレーサーが Agent へトレースを送信する際のインターバル (ミリセカンド)。
+
+`runtimeMetrics` 
+: **環境変数**: `DD_RUNTIME_METRICS_ENABLED`<br>
+**デフォルト**:  `false`<br>
+ランタイムメトリクスのキャプチャを有効にするかどうか。ポート `8125` (または `dogstatsd.port` で構成) が UDP 用に Agent で開いている必要があります。
+
+: **環境変数**: `DD_SERVICE_MAPPING`<br>
+**デフォルト**: `null`<br>
+**例**: `mysql:my-mysql-service-name-db,pg:my-pg-service-name-db`<br>
+各プラグインのサービス名を提供します。カンマ区切りの `plugin:service-name` ペア (スペースありまたはなし) を許容します。
+
+`experimental`
+: **デフォルト**: `{}`<br>
+試験機能は、 Boolean の true を使用して一度に、またはキー/値のペアを使用して個々に有効にできます。試験機能に関する詳細は、[サポート][4]までお問合せください。
+
+`plugins`
+: **デフォルト**: `true`<br>
+ビルトインプラグインを使用して、外部ライブラリの自動インスツルメンテーションを有効にするかどうか。
+
+`DD_TRACE_DISABLED_PLUGINS`
+: トレーサーが初期化された際に自動で無効となるインテグレーション名のカンマ区切り文字列。`DD_TRACE_DISABLED_PLUGINS=express,dns` などの環境変数のみとなります。
+
+`logLevel`
+: **環境変数**: `DD_TRACE_LOG_LEVEL`<br>
+**デフォルト**: `debug`<br>
+デバッグロギングが有効な場合に使用する、トレーサーの最小ログレベル用ストリング (例: `error`、`debug`)。
 
 ## その他の参考資料
 

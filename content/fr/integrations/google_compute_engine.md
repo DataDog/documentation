@@ -8,8 +8,10 @@ ddtype: crawler
 dependencies: []
 description: Surveillez les instances hautement sollicitées et comparez les métriques d'utilisation de compte aux limites de quota.
 doc_link: 'https://docs.datadoghq.com/integrations/google_compute_engine/'
+draft: false
 git_integration_title: google_compute_engine
 has_logo: true
+integration_id: google-compute-engine
 integration_title: Google Compute Engine
 is_public: true
 kind: integration
@@ -28,13 +30,17 @@ Recueillez des métriques de Google Compute Engine pour :
 - Visualiser les performances de vos machines virtuelles Compute Engine
 - Corréler les performances de vos machines virtuelles Compute Engine avec vos applications
 
-## Implémentation
+## Configuration
 
 ### Collecte de métriques
 
 #### Installation
 
 Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Google Cloud Platform][1]. Aucune autre procédure d'installation n'est requise.
+
+#### Configuration
+
+Pour recueillir des étiquettes Compute Engine personnalisées sous forme de tags, activez l'autorisation Cloud Asset Inventory.
 
 ### Collecte de logs
 
@@ -43,10 +49,10 @@ Les logs Google Compute Engine sont recueillis avec Stackdriver et envoyés à
 Une fois cette opération effectuée, exportez vos logs Google Compute Engine depuis Stackdriver vers le Pub/Sub :
 
 1. Accédez à la [page Stackdriver][3] et filtrez les logs de Google Compute Engine.
-2. Cliquez sur **Create Export** et nommez le récepteur.
+2. Cliquez sur **Create Sink** et nommez le récepteur.
 3. Choisissez Cloud Pub/Sub comme destination et sélectionnez le Pub/Sub créé à cette fin. **Remarque** : le Pub/Sub peut se situer dans un autre projet.
 
-    {{< img src="integrations/google_compute_engine/export_gce_instance.png" alt="Exporter les logs Google Compute Engine vers le Pub Sub" >}}
+    {{< img src="integrations/google_cloud_pubsub/creating_sink.png" alt="Exporter les logs Google Cloud Pub/Sub vers le Pub Sub" >}}
 
 4. Cliquez sur **Create** et attendez que le message de confirmation s'affiche.
 

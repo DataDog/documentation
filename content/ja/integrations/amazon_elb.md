@@ -16,6 +16,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/amazon_elb/'
 draft: false
 git_integration_title: amazon_elb
 has_logo: true
+integration_id: amazon-elb
 integration_title: Amazon Load Balancer
 is_public: true
 kind: インテグレーション
@@ -61,15 +62,15 @@ Datadog は、AWS が提供する 3 つのバリエーションの Elastic Load 
 
 {{< img src="integrations/amazon_elb/aws_elb_log_enable.png" alt="AWS ELB ログ有効" popup="true" style="width:70%;" >}}
 
-間隔を 5 分に設定し、S3 バケットを定義します。
+間隔を 5 分に設定し、S3 バケットとプレフィックスを定義します。[S3 イベント通知設定をあいまいに定義する][8]のを回避するには、他のロードバランサーのログの場所と重複しない**一意の場所**を使用してください。複数のロードバランサーが同じバケットにログを記録している場合は、必ず `my-bucket-for-elb-logs/my-elb-name` などの**一意のプレフィックス**を使用して、ログを別々の場所に保存してください。
 
 {{< img src="integrations/amazon_elb/aws_elb_configure_log.png" alt="AWS ELB ログ構成" popup="true" style="width:70%;">}}
 
 #### ログを Datadog に送信する方法
 
-1. AWS アカウントで [Datadog Forwarder Lambda 関数][8] をまだセットアップしていない場合は、セットアップします。
-2. ELB ログを含む S3 バケットで、[自動][9] または [手動][10] のトリガーをセットアップします。手動セットアップでは、`Object Created (All)`  のイベントタイプを使用します。
-3. [Datadog Log セクション][11] を使用して、ログを確認します。
+1. AWS アカウントで [Datadog Forwarder Lambda 関数][9]をまだセットアップしていない場合は、セットアップします。
+2. ELB ログを含む S3 バケットで、[自動][10]または [手動][11]のトリガーをセットアップします。手動セットアップでは、`Object Created (All)` のイベントタイプを使用します。
+3. [Datadog Log セクション][12]を使用して、ログを確認します。
 
 ## 収集データ
 
@@ -97,11 +98,11 @@ AWS Elastic Load Balancing インテグレーションには、サービスの�
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][12]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][13]までお問合せください。
 
 ## その他の参考資料
 
-ELB のパフォーマンスメトリクスをモニターする方法については、[記事一覧][13] を参照してください。キーパフォーマンスメトリクスや、これらメトリクスの収集方法、Datadog を使用して ELB をモニターする方法について詳しく説明しています。
+ELB のパフォーマンスメトリクスをモニターする方法については、[記事一覧][14]を参照してください。キーパフォーマンスメトリクスや、これらメトリクスの収集方法、Datadog を使用して ELB をモニターする方法について詳しく説明しています。
 
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
@@ -110,9 +111,10 @@ ELB のパフォーマンスメトリクスをモニターする方法につい�
 [5]: https://app.datadoghq.com/account/settings#integrations/amazon_elb
 [6]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/#create-a-new-lambda-function
 [7]: https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-access-logs.html
-[8]: https://docs.datadoghq.com/ja/serverless/forwarder/
-[9]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=awsconsole#automatically-set-up-triggers
-[10]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=awsconsole#collecting-logs-from-s3-buckets
-[11]: https://app.datadoghq.com/logs
-[12]: https://docs.datadoghq.com/ja/help/
-[13]: https://www.datadoghq.com/blog/top-elb-health-and-performance-metrics
+[8]: https://aws.amazon.com/premiumsupport/knowledge-center/lambda-s3-event-configuration-error/
+[9]: https://docs.datadoghq.com/ja/serverless/forwarder/
+[10]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=awsconsole#automatically-set-up-triggers
+[11]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=awsconsole#collecting-logs-from-s3-buckets
+[12]: https://app.datadoghq.com/logs
+[13]: https://docs.datadoghq.com/ja/help/
+[14]: https://www.datadoghq.com/blog/top-elb-health-and-performance-metrics

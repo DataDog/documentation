@@ -7,11 +7,13 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Surveillez des métriques clés du service Gestion des API Azure.
-doc_link: 'https://docs.datadoghq.com/integrations/azure_api_management/'
+doc_link: https://docs.datadoghq.com/integrations/azure_api_management/
 draft: false
 git_integration_title: azure_api_management
 has_logo: true
+integration_id: azure-apimanagement
 integration_title: Gestion des API de Microsoft Azure
+integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'
@@ -26,7 +28,7 @@ Le service Gestion des API Azure est un service entièrement géré qui permet a
 
 Utilisez l'intégration Datadog/Azure pour recueillir les métriques du service Gestion des API Azure.
 
-## Implémentation
+## Configuration
 
 ### Installation
 

@@ -19,7 +19,7 @@ integration_title: Lighthouse
 is_public: true
 kind: インテグレーション
 maintainer: mustin.eric@gmail.com
-manifest_version: 2.0.0
+manifest_version: 1.0.0
 metric_prefix: lighthouse.
 metric_to_check: lighthouse.performance
 name: lighthouse

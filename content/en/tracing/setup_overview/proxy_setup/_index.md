@@ -222,13 +222,16 @@ The available [environment variables][2] depend on the version of the C++ tracer
 
 | Envoy Version | C++ Tracer Version |
 |---------------|--------------------|
+| v1.18 | v1.2.1 |
+| v1.17 | v1.1.5 |
+| v1.16 | v1.1.5 |
+| v1.15 | v1.1.5 |
 | v1.14 | v1.1.3 |
 | v1.13 | v1.1.1 |
 | v1.12 | v1.1.1 |
 | v1.11 | v0.4.2 |
 | v1.10 | v0.4.2 |
 | v1.9 | v0.3.6 |
-
 
 [1]: https://github.com/DataDog/dd-opentracing-cpp/tree/master/examples/envoy-tracing
 [2]: /tracing/setup/cpp/#environment-variables
@@ -289,6 +292,8 @@ The `http` block enables the OpenTracing module and loads the Datadog tracer:
     # Load the Datadog tracing implementation, and the given config file.
     opentracing_load_tracer /usr/local/lib/libdd_opentracing_plugin.so /etc/nginx/dd-config.json;
 ```
+
+The `log_format with_trace_id` block is for correlating logs and traces. See the [example NGINX config][5] file for the complete format. The `$opentracing_context_x_datadog_trace_id` value captures the trace ID, and `$opentracing_context_x_datadog_parent_id` captures the span ID. 
 
 The `location` block within the server where tracing is desired should add the following:
 

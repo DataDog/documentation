@@ -6,10 +6,10 @@ further_reading:
   - link: /getting_started/synthetics/
     tag: Documentation
     text: Synthetic モニタリングの概要
-  - link: 'https://www.datadoghq.com/blog/test-creation-best-practices/'
+  - link: https://www.datadoghq.com/blog/test-creation-best-practices/
     tag: ブログ
     text: エンドツーエンドテスト作成のベストプラクティス
-  - link: 'https://www.datadoghq.com/blog/test-maintenance-best-practices/'
+  - link: https://www.datadoghq.com/blog/test-maintenance-best-practices/
     tag: ブログ
     text: エンドツーエンドテスト維持のベストプラクティス
   - link: /synthetics/guide/
@@ -70,7 +70,7 @@ further_reading:
 
 ### 監査イベント
 
-Synthetic テストとグローバル変数の作成、追加、削除により、[イベントストリーム][2]にイベントが作成されます。生成されたイベントには変更の説明と、変更を実行したユーザーが表示されます。
+Synthetic テスト、グローバル変数、プライベートロケーションの作成、追加、削除により、[イベントストリーム][2]にイベントが作成されます。生成されたイベントには変更の説明と、変更を実行したユーザーが表示されます。
 
 イベントストリームで `#audit synthetics` を検索して、Synthetic モニタリングに関連するすべての変更を見つけます。テストの ID を検索して、特定のテストで行われた変更を取得します。たとえば、`tags:public_id:4m7-bqy-mxq` です。
 

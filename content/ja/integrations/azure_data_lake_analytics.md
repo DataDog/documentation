@@ -7,11 +7,13 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Azure Data Lake Analytics のキーメトリクスを追跡
-doc_link: 'https://docs.datadoghq.com/integrations/azure_data_lake_analytics/'
+doc_link: https://docs.datadoghq.com/integrations/azure_data_lake_analytics/
 draft: false
 git_integration_title: azure_data_lake_analytics
 has_logo: true
+integration_id: azure-datalakeanalytics
 integration_title: Microsoft Azure Data Lake Analytics
+integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
@@ -30,7 +32,7 @@ Datadog Azure インテグレーションを使用して、Data Lake Analytics �
 
 ### インストール
 
-[Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。これ以外のインストール手順はありません。
+[Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
 
 ## 収集データ
 

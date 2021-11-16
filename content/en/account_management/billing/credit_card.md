@@ -1,5 +1,5 @@
 ---
-title: Credit card billing
+title: Credit Card Billing
 kind: documentation
 ---
 
@@ -9,11 +9,17 @@ Datadog accepts payment by credit card through the [Plan][1] page. Administrator
 
 By default, when you sign up with a credit card you are on a monthly plan. If you want to switch to an annual plan, contact your [Customer Success][2] Manager.
 
-## Update
+## Payment
+
+Payment is collected by Datadog near the 10th business day of each month. Datadog reattempts failed charges up to two more times. If you have recently changed your payment method from invoicing to credit card, connect with your [Customer Success][2] Manager to ensure past items are queued to be charged. Future bills are auto charged. Only one payment method is stored on file at a time.
+
+## Edit
+
+### Update
 
 Update your credit card through the [Plan][1] page by clicking the **Edit** button.
 
-## Remove
+### Remove
 
 To remove your credit card from Datadog, first downgrade to the **Free** plan. Then use the **Remove Card** button on the [Plan][1] page.
 

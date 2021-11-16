@@ -20,8 +20,8 @@ further_reading:
 
 上記のユースケースをセットアップする手順は以下のとおりです。
 
-- [サーバーレスメイン環境におけるトレースのマージ](#trace-merging-in-a-serverless-first-environment)
-- [AWS Lambda およびホスト全体でのトレースのマージ](#trace-merging-across-aws-lambda-and-hosts)
+- [サーバーレスファースト環境でのトレースマージ](#trace-merging-in-a-serverless-first-environment)
+- [AWS Lambda とホスト間でのトレースマージ](#trace-merging-across-aws-lambda-and-hosts)
 
 ### AWS サーバーレス環境におけるトレースのマージ
 

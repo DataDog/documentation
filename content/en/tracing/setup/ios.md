@@ -164,7 +164,7 @@ Datadog.initialize(
         request.addValue(value, forHTTPHeaderField: headerField)
     }
     ```
-    This will set additional tracing headers on your request, so that your backend can extract it and continue distributed tracing. Once the request is done, within a completion handler, call `span.finish()`. If your backend is also instrumented with [Datadog APM & Distributed Tracing][8] you will see the entire front-to-back trace in Datadog dashboard.
+    This will set additional tracing headers on your request, so that your backend can extract it and continue distributed tracing. Once the request is done, within a completion handler, call `span.finish()`. If your backend is also instrumented with [Datadog APM & Continuous Profiler][8] you will see the entire front-to-back trace in Datadog dashboard.
 
     * To have the SDK automatically trace all network requests made to given hosts, specify `tracedHosts` array during Datadog initialization:
 

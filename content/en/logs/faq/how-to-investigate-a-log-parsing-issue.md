@@ -5,10 +5,10 @@ further_reading:
 - link: "/logs/faq/log-parsing-best-practice/"
   tag: "FAQ"
   text: "Log Parsing - Best Practice"
-- link: "/logs/processing/"
+- link: "/logs/log_configuration/processors"
   tag: "Documentation"
   text: "Learn how to process your logs"
-- link: "/logs/processing/parsing/"
+- link: "/logs/log_configuration/parsing"
   tag: "Documentation"
   text: "Learn more about parsing"
 ---
@@ -16,7 +16,7 @@ further_reading:
 Integration Pipelines support the default log format for a given technology. So if you have customized the log format or written a custom parser which is not working, your logs might not get properly parsed.
 Here are some guidelines on how to find the root cause of the issue and correct the parser.
 
-Before you go ahead and troubleshoot your parser, it might be interesting for you to read our documentation on Datadog [log processing][1] and [log parsing][2], as well as our [parsing best practice article][3].
+Before troubleshooting your parser, read the Datadog log [processors][1] and [parsing][2] documentation, and the [parsing best practice article][3].
 
 1. **Identify your log's pipeline**:
     Thanks to the Pipeline filters, you can easily find the processing Pipeline your log went through. Integration Pipeline take the source as filter, so check that your log source is correctly set.
@@ -85,7 +85,7 @@ Before you go ahead and troubleshoot your parser, it might be interesting for yo
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/processing/
-[2]: /logs/processing/parsing/
+[1]: /logs/log_configuration/processors
+[2]: /logs/log_configuration/parsing
 [3]: /logs/faq/log-parsing-best-practice/
 [4]: /help/

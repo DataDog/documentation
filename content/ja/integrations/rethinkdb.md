@@ -4,13 +4,12 @@ assets:
     spec: assets/configuration/spec.yaml
   dashboards:
     RethinkDB Overview: assets/dashboards/overview.json
-  docs:
-    spec: assets/docs/spec.yaml
   logs:
     source: rethinkdb
   metrics_metadata: metadata.csv
   monitors: {}
-  saved_views: {}
+  saved_views:
+    rethinkdb_processes: assets/saved_views/rethinkdb_processes.json
   service_checks: assets/service_checks.json
 categories:
   - data store
@@ -18,7 +17,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/rethinkdb/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/rethinkdb/README.md
 display_name: RethinkDB
 draft: false
 git_integration_title: rethinkdb
@@ -92,7 +91,6 @@ RethinkDB チェックは [Datadog Agent][3] パッケージに含まれてい�
 
 #### ログの収集
 
-_Agent バージョン 6.0 以降で利用可能_
 
 1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
 
@@ -100,7 +98,7 @@ _Agent バージョン 6.0 以降で利用可能_
     logs_enabled: true
     ```
 
-2. RethinkDB のログを収集するには、次のコンフィギュレーションブロックを `rethinkdb.d/conf.yaml` ファイルに追加します。
+2. RethinkDB ログの収集を開始するには、次のコンフィギュレーションブロックを `rethinkdb.d/conf.yaml` ファイルで編集します。
 
     ```yaml
     logs:
@@ -111,11 +109,11 @@ _Agent バージョン 6.0 以降で利用可能_
     ```
 
 
-`path` パラメーターと `service` パラメーターの値を環境に合わせて変更してください。使用可能なすべてのコンフィギュレーションオプションの詳細については、https://github.com/DataDog/integrations-core/blob/master/rethinkdb/datadog_checks/rethinkdb/data/conf.yaml.example を参照してください。
+    `path` パラメーターの値を環境に合わせて変更します。使用可能なすべてのコンフィギュレーションオプションについては、[conf.yaml のサンプル][7]を参照してください。
 
-  3. [Agent を再起動します][8]。
+3. [Agent を再起動します][8]。
 
-  Kubernetes 環境でログを収集する Agent を構成する追加の情報に関しては、[Datadog ドキュメント][9]を参照してください。
+Kubernetes 環境でログを収集する Agent を構成する追加の情報に関しては、[Datadog ドキュメント][9]を参照してください。
 
 ### 検証
 
@@ -123,28 +121,22 @@ _Agent バージョン 6.0 以降で利用可能_
 
 ## 収集データ
 
-
-
 ### メトリクス
 {{< get-metrics-from-git "rethinkdb" >}}
-
-
-### サービスのチェック
-
-- `rethinkdb.can_connect`: 構成された RethinkDB サーバーに Agent が到達できない場合は `CRITICAL` を返します。それ以外の場合は、`OK` を返します。
-- `rethinkdb.table_status.status.ready_for_outdated_reads`: テーブルのすべてのシャードで旧バージョンの読み取りクエリの処理が可能であれば `OK` を、それ以外の場合は `WARNING` を返します。
-- `rethinkdb.table_status.status.ready_for_outdated_reads`: テーブルのすべてのシャードで読み取りクエリの処理が可能であれば `OK` を、それ以外の場合は `WARNING` を返します。
-- `rethinkdb.table_status.status.ready_for_writes`: テーブルのすべてのシャードで書き込みクエリの処理が可能であれば `OK` を、それ以外の場合は `WARNING` を返します。
-- `rethinkdb.table_status.status.all_replicas_ready`: すべてのレプリカで読み取りと書き込みの処理が可能であれば `OK` を、それ以外の場合（バックフィルが進行中であるなど）は `WARNING` を返します。
 
 
 ### イベント
 
 RethinkDB には、イベントは含まれません。
 
+### サービスのチェック
+{{< get-service-checks-from-git "rethinkdb" >}}
+
+
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][12]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][13]までお問合せください。
+
 
 [1]: https://rethinkdb.com
 [2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
@@ -157,4 +149,5 @@ RethinkDB には、イベントは含まれません。
 [9]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
 [10]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [11]: https://github.com/DataDog/integrations-core/blob/master/rethinkdb/metadata.csv
-[12]: https://docs.datadoghq.com/ja/help/
+[12]: https://github.com/DataDog/integrations-core/blob/master/rethinkdb/assets/service_checks.json
+[13]: https://docs.datadoghq.com/ja/help/

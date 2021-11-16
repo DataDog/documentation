@@ -43,6 +43,8 @@ SLO ターゲットは、ターゲットパーセンテージとタイムウィ�
 
 SLO がターゲットパーセンテージを上回っている間、SLO のステータスは緑色のフォントで表示されます。ターゲットパーセンテージに違反すると、SLO のステータスは赤色のフォントで表示されます。オプションで、ターゲットパーセンテージより大きい警告パーセンテージを含めて、SLO 違反に近づいていることを示すこともできます。警告パーセンテージに違反している場合 (ただし、ターゲットパーセンテージには違反していない場合)、SLO ステータスは黄色のフォントで表示されます。
 
+**注:** モニターベースの SLO に指定できる小数の桁数は、タイムウィンドウに応じて異なります。7 日および 30 日目標の場合は小数第 2 位まで、90 日目標の場合は小数第 3 位まで許可されます。SLO の詳細 UI に表示される精度は最大 `num_target_decimal_places`、つまり 7 日および 30 日目標の場合は小数第 2 位まで、90 日目標の場合は小数第 3 位までです。モニターベースの SLO エラーバジェット時間に基づき指定されるため、このような制限が設けられています。7 日および 30 日目標の 99.999% の結果は、それぞれ 6 秒および 26 秒のエラーバジェットとなります。モニターは毎分評価をするため、モニターベースの SLO の粒度も 1 分です。これは、上記の例では 1 件のアラートは 6 秒および 26 秒のエラーバジェットを完全に消費し過剰利用することを意味します (さらに粒度が必要なユースケースについては、[メトリクスベースの SLO][6] を使用することをご検討ください)。さらに、このように小さなエラーバジェットは、実際に達成するには非現実的である場合が多いです。
+
 ### この指標を特定する
 
 ここでは、説明および SLO と関連付けたいタグ内に、SLO の目的についてのコンテキスト情報を関連情報またはリソースも含めて追加できます。
@@ -73,7 +75,7 @@ SLO がターゲットパーセンテージを上回っている間、SLO のス
 
 これらの条件のいずれかをデフォルト以外に変更することにより、その 1 つの Synthetic テストのみを使用するモニターベースの SLO の全体的なステータスは、Synthetic テストの個々のグループの集計ステータスよりも優れているように見える可能性があります。
 
-Synthetic テストのアラート条件の詳細については、Synthetic モニタリング[ドキュメント][6]にアクセスしてください。
+Synthetic テストのアラート条件の詳細については、Synthetic モニタリング[ドキュメント][7]にアクセスしてください。
 
 ## 基底のモニターと SLO 履歴
 
@@ -85,7 +87,7 @@ Datadog は、`Alert Recovery Threshold` と `Warning Recovery Threshold` を備
 
 SLO の計算には、モニターが手動で解決される場合、または **_After x hours automatically resolve this monitor from a triggered state_**（x 時間後に、このモニターをトリガー状態から自動的に解決する）設定の結果として解決される場合は考慮されません。これらがワークフローにとって重要なツールである場合は、モニターを複製し、自動解決設定と `@-notification` を削除して、SLO に複製を使用することを検討してください。
 
-ユースケースに適した SLI タイプを使用していることを確認してください。[SLO イベントのドキュメント][7]に記載の通り、Datadog は、モニターベースの SLI とメトリクスベースの SLI をサポートしています。
+ユースケースに適した SLI タイプを使用していることを確認してください。[SLO イベントのドキュメント][6]に記載の通り、Datadog は、モニターベースの SLI とメトリクスベースの SLI をサポートしています。
 
 ## その他の参考資料
 
@@ -95,6 +97,6 @@ SLO の計算には、モニターが手動で解決される場合、または 
 [2]: https://app.datadoghq.com/slo
 [3]: https://app.datadoghq.com/slo/new/monitor
 [4]: https://app.datadoghq.com/monitors#create
-[5]: /ja/monitors/monitor_types/metric/?tab=threshold#alert-grouping
-[6]: /ja/synthetics/api_tests/?tab=httptest#alert-conditions
-[7]: /ja/monitors/service_level_objectives/metric/
+[5]: /ja/monitors/create/types/metric/?tab=threshold#alert-grouping
+[6]: /ja/monitors/service_level_objectives/metric/
+[7]: /ja/synthetics/api_tests/?tab=httptest#alert-conditions

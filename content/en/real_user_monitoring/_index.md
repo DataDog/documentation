@@ -1,5 +1,5 @@
 ---
-title: Real User Monitoring
+title: RUM & Session Replay
 kind: documentation
 description: "Visualize and analyze the performance of your front end applications as seen by your users."
 disable_sidebar: true
@@ -26,54 +26,62 @@ further_reading:
   text: "RUM Browser Data Collected"
 ---
 
-{{< img src="real_user_monitoring/rum_full_dashboard.png" alt="RUM Dashboard"  >}}
+{{< img src="real_user_monitoring/RUM-perf-dashboard.jpeg" alt="RUM Dashboard" >}}
 
 ## What is Real User Monitoring?
 
-Datadog's Real User Monitoring (RUM) gives you end-to-end visibility into the real-time activity and experience of individual users. It is designed to solve 4 types of use cases for web and mobile applications:
+Datadog's *Real User Monitoring (RUM)* gives you end-to-end visibility into the real-time activity and experience of individual users. RUM is designed to solve four types of use cases for web and mobile applications:
 
 * **Performance**: Track the performance of web pages, mobile application screens, user actions, network requests, and your front-end code.
 * **Error Management**: Monitor the ongoing bugs and issues and track them over time and versions.
-* **Analytics / Usage**: Understand who is using your application (country, device, OS), monitor individual users journeys, and analyze how users interact with your application (most common page visited, clicks, interactions, feature usage).
-* **Support**: Retrieve all of the information related to one user session to troubleshoot an issue (session duration, pages visited, interactions, resources loaded, errors).
+* **Analytics / Usage**: Understand who is using your application (country, device, OS), monitor individual users journeys, and analyze how users interact with your application (most common page visited, clicks, interactions, and feature usage).
+* **Support**: Retrieve all of the information related to one user session to troubleshoot an issue (session duration, pages visited, interactions, resources loaded, and errors).
 
-## Getting started
+## What is Session Replay?
+
+Datadog's *Session Replay* allows you to capture and visually replay the web browsing experience of your users. 
+
+Combined with RUM performance data, Session Replay is beneficial for error identification, reproduction, and resolution, and provides insights into your web application’s usage patterns and design pitfalls. 
+
+## Get started
 
 Select your application type to start collecting RUM data:
 
 {{< partial name="rum/rum-getting-started.html" >}}
+
 </br>
+
 ## Explore Datadog RUM
 
-### Out of the box dashboards
+### Out-of-the-box dashboards
 
-Analyze information about your user journeys, performance, network requests, and errors collected automatically with [out of the box dashboards][1].
+Analyze information about your user journeys, performance, network requests, and errors collected automatically with [out-of-the-box dashboards][1].
 
-{{< img src="real_user_monitoring/dashboards/rum_dashboard.png" alt="RUM dashboard" >}}
+{{< img src="real_user_monitoring/RUM-session-dashboard.jpeg" alt="RUM dashboard" >}}
 
 ### RUM explorer and analytics
 
 View user sessions in segments, such as checking when latency impacts your premium customers with [customizable analytics widgets][2]. Explore, save views, and create monitors on your customized searches.
 
-{{< img src="real_user_monitoring/explorer/analytics/rum_analytics.gif" alt="RUM Analytics"  >}}
+{{< img src="real_user_monitoring/explorer/analytics/rum_analytics.gif" alt="RUM Analytics" >}}
 
 ### Integration with logs, APM, and profiler
 
-View your [backend traces, logs, infrastructure metrics][1] down to the exact line of code impacting your application performance, corresponding to user experiences and reported issues.
+View your [backend traces, logs, and infrastructure metrics][3] down to the exact line of code impacting your application performance, corresponding to user experiences and reported issues.
 
-{{< img src="real_user_monitoring/connect_rum_and_traces/rum_apm_logs.png" alt="RUM and APM">}}
+{{< img src="real_user_monitoring/connect_rum_and_traces/rum_apm_logs.png" alt="RUM and APM" >}}
 
 ### Error tracking and crash reporting
 
 Get automated alerts on outliers and groups of errors, timeouts, and crashes to significantly reduce your MTTR with [Error Tracking][4].
 
-{{< img src="real_user_monitoring/error_tracking/rum_errors.gif" alt="RUM error tracking">}}
+{{< img src="real_user_monitoring/error_tracking/errors_rum.gif" alt="RUM error tracking" >}}
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]:/real_user_monitoring/dashboards
-[2]:/real_user_monitoring/explorer/analytics
-[4]:/real_user_monitoring/error_tracking
-[1]: /real_user_monitoring/connect_rum_and_traces
+[1]: /real_user_monitoring/dashboards/
+[2]: /real_user_monitoring/explorer/analytics/
+[3]: /real_user_monitoring/connect_rum_and_traces/
+[4]: /real_user_monitoring/error_tracking/

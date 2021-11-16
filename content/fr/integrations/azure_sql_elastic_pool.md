@@ -12,6 +12,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/azure_sql_elastic_pool/'
 draft: false
 git_integration_title: azure_sql_elastic_pool
 has_logo: true
+integration_id: azure-sql-elastic-pool
 integration_title: Microsoft Azure SQL Elastic Pool
 is_public: true
 kind: integration

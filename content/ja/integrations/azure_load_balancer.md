@@ -7,11 +7,13 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Azure Load Balancer のキーメトリクスを追跡
-doc_link: 'https://docs.datadoghq.com/integrations/azure_load_balancer/'
+doc_link: https://docs.datadoghq.com/integrations/azure_load_balancer/
 draft: false
 git_integration_title: azure_load_balancer
 has_logo: true
+integration_id: azure-load-balancer
 integration_title: Microsoft Azure Load Balancer
+integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
@@ -30,7 +32,7 @@ Datadog Azure インテグレーションを使用して、Azure Load Balancer �
 
 ### インストール
 
-[Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。これ以外のインストール手順はありません。
+[Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
 
 ## 収集データ
 

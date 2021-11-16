@@ -83,5 +83,5 @@ Le contrôleur d'admission recherche ces informations dans les étiquettes des p
 [1]: /fr/getting_started/tagging/unified_service_tagging
 [2]: /fr/tracing/guide/setting_primary_tags_to_scope/
 [3]: /fr/metrics/distributions/#customize-tagging
-[4]: /fr/logs/processing/pipelines/
+[4]: /fr/logs/log_configuration/pipelines
 [5]: /fr/agent/cluster_agent/admission_controller/

@@ -39,7 +39,7 @@ Kubernetes State Metrics Core チェックは [Datadog Cluster Agent][4] イメ�
 
 ### 要件
 
-- Datadog Cluster Agent v1.12+ 
+- Datadog Cluster Agent v1.12+
 
 ### コンフィギュレーション
 
@@ -158,6 +158,9 @@ datadog:
 `kubernetes_state.deployment.condition`
 : デプロイの現在のステータス条件。タグ: `kube_deployment` `kube_namespace` (標準ラベルの `env` `service` `version`)。
 
+`kubernetes_state.endpoint.count`
+: エンドポイントの数。タグ:`kube_namespace`。
+
 `kubernetes_state.endpoint.address_available`
 : エンドポイントで使用可能なアドレスの数。タグ: `endpoint` `kube_namespace`。
 
@@ -179,6 +182,9 @@ datadog:
 `kubernetes_state.node.pods_allocatable`
 : スケジューリングに使用できるノードの割り当て可能なメモリ。タグ: `node` `resource` `unit`。
 
+`kubernetes_state.node.ephemeral_storage_allocatable`
+: スケジューリングに使用できるノードの割り当て可能なエフェメラルストレージ。タグ:`node` `resource` `unit`。
+
 `kubernetes_state.node.cpu_capacity`
 : ノードの CPU 容量。タグ: `node` `resource` `unit`。
 
@@ -187,6 +193,9 @@ datadog:
 
 `kubernetes_state.node.pods_capacity`
 : ノードのポッド容量。タグ: `node` `resource` `unit`。
+
+`kubernetes_state.node.ephemeral_storage_capacity`
+: ノードのエフェメラルストレージ容量。タグ:`node` `resource` `unit`。
 
 `kubernetes_state.node.by_condition`
 : クラスターノードの状態。タグ: `condition` `node` `status`。
@@ -335,6 +344,9 @@ datadog:
 `kubernetes_state.statefulset.replicas_updated`
 : StatefulSet ごとの更新されたレプリカの数。タグ: `kube_namespace` `kube_stateful_set` (標準ラベルの `env` `service` `version`)。
 
+`kubernetes_state.hpa.count`
+: 水平ポッドオートスケーラーの数。タグ: `kube_namespace`。
+
 `kubernetes_state.hpa.min_replicas`
 : オートスケーラーで設定できるポッド数の下限、デフォルトは 1。タグ: `kube_namespace` `horizontalpodautoscaler`。
 
@@ -352,6 +364,9 @@ datadog:
 
 `kubernetes_state.hpa.spec_target_metric`
 : このオートスケーラーが望ましいレプリカ数を計算するときに使用するメトリクス仕様。タグ: `kube_namespace` `horizontalpodautoscaler` `metric_name` `metric_target_type`。
+
+`kubernetes_state.vpa.count`
+: 垂直ポッドオートスケーラーの数。タグ: `kube_namespace`。
 
 `kubernetes_state.vpa.lower_bound`
 : VerticalPodAutoscaler アップデーターが削除する前にコンテナが使用できる最小リソース。タグ: `kube_namespace` `verticalpodautoscaler` `kube_container_name` `resource` `target_api_version` `target_kind` `target_name` `unit`。
@@ -373,6 +388,9 @@ datadog:
 
 `kubernetes_state.vpa.spec_container_maxallowed`
 : 名前に一致するコンテナに VerticalPodAutoscaler が設定できる最大リソース。タグ: `kube_namespace` `verticalpodautoscaler` `kube_container_name` `resource` `target_api_version` `target_kind` `target_name` `unit`。
+
+`kubernetes_state.cronjob.count`
+: cronjobs の数。タグ:`kube_namespace`。
 
 `kubernetes_state.cronjob.spec_suspend`
 : 一時停止フラグは、後続の実行を一時停止するようにコントローラーに指示します。タグ: `kube_namespace` `kube_cronjob` (標準ラベルの `env` `service` `version`)。

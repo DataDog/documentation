@@ -3,10 +3,10 @@ title: ログの収集
 kind: documentation
 description: Datadog Agent を使用してログを収集し、Datadog に送信
 further_reading:
-  - link: /logs/processing/
+  - link: /logs/log_configuration/processors
     tag: ドキュメント
     text: ログの処理方法について
-  - link: /logs/processing/parsing/
+  - link: /logs/log_configuration/parsing
     tag: ドキュメント
     text: パースの詳細
   - link: /logs/live_tail/
@@ -21,7 +21,7 @@ further_reading:
 ---
 特定のログ収集構成にログ処理ルールを適用することで、以下が可能です。
 
-* [ログの絞り込み](#filter-logs)
+* [ログをフィルター](#filter-logs)
 * [ログの機密データのスクラビング](#scrub-sensitive-data-from-your-logs)
 * [複数行の集約の実行](#multi-line-aggregation)
 * [ワイルドカードを使用したディレクトリの追跡](#tail-directories-by-using-wildcards)

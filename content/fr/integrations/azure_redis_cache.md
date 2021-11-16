@@ -11,6 +11,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/azure_redis_cache/'
 draft: false
 git_integration_title: azure_redis_cache
 has_logo: true
+integration_id: azure-redis-cache
 integration_title: Microsoft Azure Redis Cache
 is_public: true
 kind: integration

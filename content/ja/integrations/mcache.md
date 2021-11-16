@@ -11,6 +11,8 @@ assets:
     source: memcached
   metrics_metadata: metadata.csv
   monitors: {}
+  saved_views:
+    memcached_processes: assets/saved_views/memcached_processes.json
   service_checks: assets/service_checks.json
 categories:
   - web

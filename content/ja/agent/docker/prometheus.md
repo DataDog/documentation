@@ -36,7 +36,6 @@ Datadog Agent と [Datadog-OpenMetrics][1] または [Datadog-Prometheus][2] イ
 {{% tab "標準" %}}
 
 ```shell
-DOCKER_CONTENT_TRUST=1 \
 docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
               -v /proc/:/host/proc/:ro \
               -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
@@ -49,7 +48,6 @@ docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
 {{% tab "Amazon Linux バージョン <2" %}}
 
 ```shell
-DOCKER_CONTENT_TRUST=1 \
 docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro \
                               -v /proc/:/host/proc/:ro \
                               -v /cgroup/:/host/sys/fs/cgroup:ro \
@@ -63,7 +61,6 @@ docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro \
 {{% tab "Windows" %}}
 
 ```shell
-DOCKER_CONTENT_TRUST=1 \
 docker run -d -e DD_API_KEY="<DATADOG_API_KEY>" \
               -e DD_SITE="<YOUR_DATADOG_SITE>" \
               gcr.io/datadoghq/agent:latest
@@ -94,12 +91,17 @@ LABEL "com.datadoghq.ad.instances"='["{\"prometheus_url\":\"http://%%host%%:<PRO
 labels:
     com.datadoghq.ad.check_names: '["openmetrics"]'
     com.datadoghq.ad.init_configs: '[{}]'
-    com.datadoghq.ad.instances:  >
+    com.datadoghq.ad.instances: |
     [
-      "{\
-        "prometheus_url\":\"http://%%host%%:<PROMETHEUS_PORT>/<PROMETHEUS_ENDPOINT> \",\"namespace\":\"<NAMESPACE>\",
-        \"metrics\":[{\"<METRIC_TO_FETCH>\": \"<NEW_METRIC_NAME>\"}]
-      }"
+      {
+        "prometheus_url": "http://%%host%%:<PROMETHEUS_PORT>/<PROMETHEUS_ENDPOINT>",
+        "namespace": "<NAMESPACE>",
+        "metrics": [
+          {
+            "<METRIC_TO_FETCH>": "<NEW_METRIC_NAME>"
+          }
+        ]
+      }
     ]
 ```
 
@@ -136,7 +138,6 @@ labels:
     {{% tab "Standard" %}}
 
 ```shell
-DOCKER_CONTENT_TRUST=1 \
 docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
               -v /proc/:/host/proc/:ro \
               -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
@@ -147,7 +148,6 @@ docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
     {{% tab "Windows" %}}
 
 ```shell
-DOCKER_CONTENT_TRUST=1 \
 docker run -d -e DD_API_KEY="<DATADOG_API_KEY>" \
               gcr.io/datadoghq/agent:latest \
               -v \\.\pipe\docker_engine:\\.\pipe\docker_engine
@@ -185,7 +185,7 @@ docker run -d -e DD_API_KEY="<DATADOG_API_KEY>" \
 [2]: /ja/integrations/prometheus/
 [3]: https://github.com/DataDog/integrations-core/tree/master/openmetrics
 [4]: https://github.com/DataDog/integrations-core/tree/master/prometheus
-[5]: /ja/developers/prometheus/
+[5]: /ja/developers/custom_checks/prometheus/
 [6]: https://github.com/DataDog/integrations-core/blob/master/openmetrics/datadog_checks/openmetrics/data/conf.yaml.example
 [7]: https://app.datadoghq.com/metric/summary
 [8]: https://github.com/DataDog/integrations-core/tree/master/kube_proxy

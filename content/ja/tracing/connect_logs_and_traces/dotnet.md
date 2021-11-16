@@ -15,6 +15,9 @@ further_reading:
   - link: 'https://www.datadoghq.com/blog/request-log-correlation/'
     tag: ブログ
     text: 自動的にリクエストログとトレースに相関性を持たせる
+  - link: /logs/guide/ease-troubleshooting-with-cross-product-correlation/
+    tag: ガイド
+    text: クロスプロダクト相関で容易にトラブルシューティング。
 ---
 トレースとスパンの ID がアプリケーションログに挿入されるようロギングライブラリおよび .NET トレーシングのコンフィギュレーションを設定し、ログデータと相関したアプリケーションのパフォーマンスモニタリングデータを取得することができます。
 
@@ -56,7 +59,7 @@ var log = new LoggerConfiguration()
 その他の例については、GitHub の [Serilog トレース ID 自動挿入プロジェクト][1]を参照してください。
 
 
-[1]: https://github.com/DataDog/dd-trace-dotnet/blob/master/samples/AutomaticTraceIdInjection/SerilogExample/Program.cs
+[1]: https://github.com/DataDog/dd-trace-dotnet/blob/master/tracer/samples/AutomaticTraceIdInjection/SerilogExample/Program.cs
 {{% /tab %}}
 {{% tab "log4net" %}}
 トレースおよびスパン ID は、マップされた診断コンテキスト (MDC) を有効にした後にのみアプリケーションログに挿入されます。以下のコード例を参照してください。
@@ -78,7 +81,7 @@ var log = new LoggerConfiguration()
 その他の例については、GitHub の [log4net トレース ID 自動挿入プロジェクト][1]を参照してください。
 
 
-[1]: https://github.com/DataDog/dd-trace-dotnet/blob/master/samples/AutomaticTraceIdInjection/Log4NetExample/log4net.config
+[1]: https://github.com/DataDog/dd-trace-dotnet/blob/master/tracer/samples/AutomaticTraceIdInjection/Log4NetExample/log4net.config
 {{% /tab %}}
 {{% tab "NLog" %}}
 
@@ -108,21 +111,21 @@ NLog バージョン 4.5 の場合
 その他の例については、GitHub で [NLog 4.0][1]、[NLog 4.5][2]、[NLog 4.6][3] を使用したトレース ID 自動挿入プロジェクトを参照してください。
 
 
-[1]: https://github.com/DataDog/dd-trace-dotnet/blob/master/samples/AutomaticTraceIdInjection/NLog40Example/NLog.config
-[2]: https://github.com/DataDog/dd-trace-dotnet/blob/master/samples/AutomaticTraceIdInjection/NLog45Example/NLog.config
-[3]: https://github.com/DataDog/dd-trace-dotnet/blob/master/samples/AutomaticTraceIdInjection/NLog46Example/NLog.config
+[1]: https://github.com/DataDog/dd-trace-dotnet/blob/master/tracer/samples/AutomaticTraceIdInjection/NLog40Example/NLog.config
+[2]: https://github.com/DataDog/dd-trace-dotnet/blob/master/tracer/samples/AutomaticTraceIdInjection/NLog45Example/NLog.config
+[3]: https://github.com/DataDog/dd-trace-dotnet/blob/master/tracer/samples/AutomaticTraceIdInjection/NLog46Example/NLog.config
 {{% /tab %}}
 {{< /tabs >}}
 
 次に、自動または手動挿入のセットアップを完了します。
 
-## トレースおよびスパン ID を自動的に挿入
+## 自動挿入
 
 アプリケーションログが JSON 形式の場合、トレース ID の自動挿入のセットアップの最後に以下を実行します。
 
 4. .NET トレーサーの環境変数で、`DD_LOGS_INJECTION=true` を有効にします。.NET トレーサーを構成するその他の方法については、[.NET トレーサーの構成][6]をご参照ください。
 
-## トレースおよびスパン ID を手動で挿入
+## 手動挿入
 
 アプリケーションログが JSON 形式でない場合は、APM データを使用して手動でログを加工します。
   | 必要なキー   | 説明                                  |

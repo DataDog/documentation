@@ -1,17 +1,24 @@
 ---
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards:
     OpenStack Controller Overview: assets/dashboards/openstack-controller.json
-  logs: {}
+    openstack: assets/dashboards/openstack_dashboard.json
+  logs:
+    source: openstack
   metrics_metadata: metadata.csv
   monitors: {}
+  saved_views:
+    openstack_processes: assets/saved_views/openstack_processes.json
   service_checks: assets/service_checks.json
 categories:
   - cloud
+  - log collection
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/openstack/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/openstack/README.md
 display_name: OpenStack
 draft: false
 git_integration_title: openstack
@@ -113,7 +120,7 @@ openstack role add datadog_monitoring \
 
 **注**: OpenStack インテグレーションをインストールすると、Datadog が監視する VM 数が増える可能性があります。これが課金にどのように影響するかについては、課金に関する FAQ を参照してください。
 
-#### Agent 構成
+#### Agent の構成
 
 1. Datadog Agent が Keystone サーバーに接続するように構成し、監視するプロジェクトを個別に指定します。以下の構成で [Agent の構成ディレクトリ][3]のルートにある `conf.d/` フォルダーの `openstack.d/conf.yaml` ファイルを編集します。使用可能なすべての構成オプションの詳細については、[サンプル openstack.d/conf.yaml][4] を参照してください。
 
@@ -150,6 +157,26 @@ openstack role add datadog_monitoring \
 
 2. [Agent を再起動します][5]。
 
+##### ログの収集
+
+1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` でこれを有効にできます。
+
+   ```yaml
+   logs_enabled: true
+   ```
+
+2. Openstack ログの収集を開始するには、次のコンフィギュレーションブロックを `openstack.d/conf.yaml` ファイルに追加します。
+
+   ```yaml
+   logs:
+     - type: file
+       path: "<LOG_FILE_PATH>"
+       source: openstack
+   ```
+
+    `path` パラメーターの値を変更し、環境に合わせて構成します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル openstack.d/conf.yaml][4] を参照してください。
+
+
 ### 検証
 
 [Agent の `status` サブコマンドを実行][6]し、Checks セクションで `openstack` を探します。
@@ -165,34 +192,21 @@ openstack role add datadog_monitoring \
 OpenStack チェックには、イベントは含まれません。
 
 ### サービスのチェック
+{{< get-service-checks-from-git "openstack" >}}
 
-**openstack.neutron.api.up**:<br>
-Agent が Neutron API をクエリできない場合は `CRITICAL` を、Keystone API に問題がある場合は `UNKNOWN` を返します。それ以外の場合は、`OK` を返します。
-
-**openstack.nova.api.up**:<br>
-Agent が Nova API をクエリできない場合は `CRITICAL` を、Keystone API に問題がある場合は `UNKNOWN` を返します。それ以外の場合は、`OK` を返します。
-
-**openstack.keystone.api.up**:<br>
-Agent が Keystone API をクエリできない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
-
-**openstack.nova.hypervisor.up**:<br>
-Agent がハイパーバイザーの状態を取得できない場合は `UNKNOWN`、ハイパーバイザーがダウンしている場合は `CRITICAL` を返します。それ以外の場合は、`OK` を返します。
-
-**openstack.neutron.network.up**:<br>
-Agent がネットワークの状態を取得できない場合は `UNKNOWN`、ネットワークがダウンしている場合は `CRITICAL` を返します。それ以外の場合は、`OK` を返します。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
 
 ## その他の参考資料
 
-Nova OpenStack コンピューティングモジュールを Datadog と統合する方法 (または理由) について理解するには、Datadog の[一連のブログ記事][9]を参照してください。
+Nova OpenStack コンピューティングモジュールを Datadog と統合する方法 (または理由) について理解するには、Datadog の[一連のブログ記事][10]を参照してください。
 
 Datadog の以下のブログ記事も参照してください。
 
-- [開発/テスト用の 2 つのコマンドを使用した OpenStack のインストール][10]
-- [OpenStack: ホストアグリゲート、フレーバー、アベイラビリティーゾーン][11]
+- [開発/テスト用の 2 つのコマンドを使用した OpenStack のインストール][11]
+- [OpenStack: ホストアグリゲート、フレーバー、アベイラビリティーゾーン][12]
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/openstack/images/openstack_dashboard.png
 [2]: https://app.datadoghq.com/account/settings#agent
@@ -201,7 +215,8 @@ Datadog の以下のブログ記事も参照してください。
 [5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [7]: https://github.com/DataDog/integrations-core/blob/master/openstack/metadata.csv
-[8]: https://docs.datadoghq.com/ja/help/
-[9]: https://www.datadoghq.com/blog/openstack-monitoring-nova
-[10]: https://www.datadoghq.com/blog/install-openstack-in-two-commands
-[11]: https://www.datadoghq.com/blog/openstack-host-aggregates-flavors-availability-zones
+[8]: https://github.com/DataDog/integrations-core/blob/master/openstack/assets/service_checks.json
+[9]: https://docs.datadoghq.com/ja/help/
+[10]: https://www.datadoghq.com/blog/openstack-monitoring-nova
+[11]: https://www.datadoghq.com/blog/install-openstack-in-two-commands
+[12]: https://www.datadoghq.com/blog/openstack-host-aggregates-flavors-availability-zones

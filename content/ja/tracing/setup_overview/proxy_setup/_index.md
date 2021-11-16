@@ -5,28 +5,28 @@ further_reading:
   - link: /tracing/visualization/
     tag: APM の UI を利用する
     text: サービス、リソース、トレースを調査する
-  - link: 'https://www.envoyproxy.io/'
+  - link: https://www.envoyproxy.io/
     tag: Documentation
     text: Envoy Web サイト
-  - link: 'https://www.envoyproxy.io/docs/envoy/latest/'
+  - link: https://www.envoyproxy.io/docs/envoy/latest/
     tag: Documentation
     text: Envoy ドキュメント
-  - link: 'https://www.nginx.com/'
+  - link: https://www.nginx.com/
     tag: Documentation
     text: NGINX ウェブサイト
-  - link: 'https://kubernetes.github.io/ingress-nginx/user-guide/third-party-addons/opentracing/'
+  - link: https://kubernetes.github.io/ingress-nginx/user-guide/third-party-addons/opentracing/
     tag: Documentation
     text: NGINX Ingress Controller OpenTracing
-  - link: 'https://github.com/opentracing-contrib/nginx-opentracing'
+  - link: https://github.com/opentracing-contrib/nginx-opentracing
     tag: ソースコード
     text: OpenTracing 対応 NGINX プラグイン
-  - link: 'https://istio.io/'
+  - link: https://istio.io/
     tag: Documentation
     text: Istio ウェブサイト
-  - link: 'https://istio.io/docs/'
+  - link: https://istio.io/docs/
     tag: Documentation
     text: Istio ドキュメント
-  - link: 'https://github.com/DataDog/dd-opentracing-cpp'
+  - link: https://github.com/DataDog/dd-opentracing-cpp
     tag: ソースコード
     text: Datadog OpenTracing C++ クライアント
 aliases:
@@ -109,7 +109,7 @@ tracing:
 
 このコンフィギュレーションが完了すると、Envoy への HTTP リクエストが起動し、Datadog トレースに伝播して、リクエストが APM UI に表示されます。
 
-## Envoy コンフィギュレーションの例 (Envoy v1.14 用)
+## Envoy v1.14 コンフィギュレーションの例
 
 Datadog APM を使用してトレースを実行するために必要な各項目の配置を示すために、コンフィギュレーションの例を紹介します。
 
@@ -221,15 +221,16 @@ stats_config:
 
 | Envoy バージョン | C++ トレーサーバージョン |
 |---------------|--------------------|
+| v1.18 | v1.2.1 |
+| v1.17 | v1.1.5 |
+| v1.16 | v1.1.5 |
+| v1.15 | v1.1.5 |
 | v1.14 | v1.1.3 |
 | v1.13 | v1.1.1 |
 | v1.12 | v1.1.1 |
 | v1.11 | v0.4.2 |
 | v1.10 | v0.4.2 |
 | v1.9 | v0.3.6 |
-
-
-
 
 [1]: https://github.com/DataDog/dd-opentracing-cpp/tree/master/examples/envoy-tracing
 [2]: /ja/tracing/setup/cpp/#environment-variables
@@ -239,7 +240,7 @@ stats_config:
 プラグインとコンフィギュレーションを組み合わせて使用することで、NGINX で Datadog APM に対応できます。
 公式 [Linux レポジトリ][1]の NGINX を使用して、プラグインのバイナリを事前構築する手順を以下に記載しました。
 
-## オープンソース NGINX
+## NGINX オープンソース
 
 ### プラグインのインストール
 
@@ -248,7 +249,7 @@ stats_config:
 
 次のプラグインをインストールする必要があります。
 
-- OpenTracing 対応 NGINX プラグイン - [linux-amd64-nginx-${NGINX_VERSION}-ngx_http_module.so.tgz][3] - `/usr/lib/nginx/modules` にインストール
+- OpenTracing 対応 NGINX プラグイン - [linux-amd64-nginx-${NGINX_VERSION}-ot16-ngx_http_module.so.tgz][3] - `/usr/lib/nginx/modules` にインストール
 - Datadog OpenTracing C++ プラグイン - [linux-amd64-libdd_opentracing_plugin.so.gz][4] - `/usr/local/lib` など、NGINX にアクセス可能な場所にインストール
 
 次のコマンドを使用してモジュールをダウンロードしてインストールします。
@@ -264,8 +265,8 @@ NGINX_VERSION=1.17.3
 OPENTRACING_NGINX_VERSION="$(get_latest_release opentracing-contrib/nginx-opentracing)"
 DD_OPENTRACING_CPP_VERSION="$(get_latest_release DataDog/dd-opentracing-cpp)"
 # OpenTracing 用の NGINX プラグインをインストールします
-wget https://github.com/opentracing-contrib/nginx-opentracing/releases/download/${OPENTRACING_NGINX_VERSION}/linux-amd64-nginx-${NGINX_VERSION}-ngx_http_module.so.tgz
-tar zxf linux-amd64-nginx-${NGINX_VERSION}-ngx_http_module.so.tgz -C /usr/lib/nginx/modules
+wget https://github.com/opentracing-contrib/nginx-opentracing/releases/download/${OPENTRACING_NGINX_VERSION}/linux-amd64-nginx-${NGINX_VERSION}-ot16-ngx_http_module.so.tgz
+tar zxf linux-amd64-nginx-${NGINX_VERSION}-ot16-ngx_http_module.so.tgz -C /usr/lib/nginx/modules
 # Datadog Opentracing C++ プラグインをインストールします
 wget https://github.com/DataDog/dd-opentracing-cpp/releases/download/${DD_OPENTRACING_CPP_VERSION}/linux-amd64-libdd_opentracing_plugin.so.gz
 gunzip linux-amd64-libdd_opentracing_plugin.so.gz -c > /usr/local/lib/libdd_opentracing_plugin.so
@@ -290,6 +291,8 @@ load_module modules/ngx_http_opentracing_module.so;
     # Datadog トレーシングの実装と既定のコンフィグファイルを読み込む。
     opentracing_load_tracer /usr/local/lib/libdd_opentracing_plugin.so /etc/nginx/dd-config.json;
 ```
+
+`log_format with_trace_id` ブロックは、ログとトレースの相関関係を構築するためのものです。完全なフォーマットについては、[NGINX config][5] のサンプルファイルを参照してください。値 `$opentracing_context_x_datadog_trace_id` はトレース ID をキャプチャし、`$opentracing_context_x_datadog_parent_id` はスパン ID をキャプチャします。
 
 トレーシングが必要なサーバー内の `location` ブロックに次の指示を追加します。
 
@@ -370,7 +373,6 @@ data:
 上記はデフォルトの `nginx-ingress-controller.ingress-nginx` サービス名をオーバーライドします。
 
 
-
 [1]: http://nginx.org/en/linux_packages.html#stable
 [2]: https://github.com/DataDog/dd-opentracing-cpp/blob/master/examples/nginx-tracing/Dockerfile
 [3]: https://github.com/opentracing-contrib/nginx-opentracing/releases/latest
@@ -387,7 +389,7 @@ Datadog は、Istio 環境のあらゆる側面を監視するため、以下を
 - リクエスト、帯域幅、リソース消費の[メトリクス][1]でサービスメッシュのパフォーマンスを詳しく確認。
 - [ネットワークパフォーマンスモニタリング][2]で、コンテナ、ポッド、サービス間のネットワークコミュニケーションをメッシュ状にマッピング。
 
-Datadog を使用した Istio 環境の監視について、詳しくは [Istio ブログ][10]を参照してください。
+Istio 環境での Datadog の使用について、詳細は [Istio のブログをご参照ください][3]。
 
 ## コンフィギュレーション
 
@@ -395,14 +397,14 @@ Datadog APM は、Kubernetes クラスターの Istio v1.1.3 以降で使用可�
 
 ### Datadog Agent のインストール
 
-1. [Agent のインストール][3]
-2. [Agent に APM が有効になっていることを確認します][4]。
+1. [Agent のインストール][4]
+2. [Agent に APM が有効になっていることを確認します][5]。
 3. `hostPort` 設定のコメントを解除し、Istio のサイドカーが Agent に接続してトレースを送信できるようにします。
 
 
 ### Istio のコンフィギュレーションとインストール
 
-Datadog APM を有効にするには、[Istio をカスタムインストール][5]して、Istio のインストール時に 2 つの追加オプションを設定する必要があります。
+Datadog APM を有効にするには、[Istio をカスタムインストール][6]して、Istio のインストール時に 2 つの追加オプションを設定する必要があります。
 
 - `--set values.global.proxy.tracer=datadog`
 - `--set values.pilot.traceSampling=100.0`
@@ -418,7 +420,7 @@ kubectl label namespace example-ns istio-injection=enabled
 ```
 
 Istio で、トラフィックが HTTP ベースのプロトコルを使用していることが判断できると、トレースが生成されます。
-デフォルトで、Istio は自動的にこれを検出します。アプリケーションのデプロイメントおよびサービスでポートに名前を付けることで、手動で構成することも可能です。詳細は、Istio のドキュメントの[プロトコルの選択][6]をご確認ください。
+デフォルトで、Istio は自動的にこれを検出します。アプリケーションのデプロイメントおよびサービスでポートに名前を付けることで、手動で構成することも可能です。詳細は、Istio のドキュメントの[プロトコルの選択][7]をご確認ください。
 
 デフォルトの場合、トレース作成時に用いられるサービス名はデプロイ名とネームスペースをもとに生成されます。これは
 デプロイのポッドテンプレートに `app` ラベルを追加することで手動で設定できます。
@@ -430,7 +432,7 @@ template:
       app: <SERVICE_NAME>
 ```
 
-[CronJobs][7] の場合、生成された名前がより高レベルの `CronJob` ではなく `Job` から来る場合があるため、`app` ラベルをジョブテンプレートに追加する必要があります
+[CronJobs][8] の場合、生成された名前がより高レベルの `CronJob` ではなく `Job` から来る場合があるため、`app` ラベルをジョブテンプレートに追加する必要があります
 
 ### 環境変数
 
@@ -441,7 +443,7 @@ Istio サイドカーの環境変数は `apm.datadoghq.com/env` アノテーシ�
         apm.datadoghq.com/env: '{ "DD_ENV": "prod", "DD_TRACE_ANALYTICS_ENABLED": "true" }'
 ```
 
-使用可能な[環境変数][8]は、Istio サイドカーのプロキシに埋め込まれた C++ トレーサーのバージョンによって異なります。
+使用可能な[環境変数][9]は、Istio サイドカーのプロキシに埋め込まれた C++ トレーサーのバージョンによって異なります。
 
 | Istio バージョン | C++ トレーサーバージョン |
 |---------------|--------------------|
@@ -454,7 +456,7 @@ Istio サイドカーの環境変数は `apm.datadoghq.com/env` アノテーシ�
 | v1.1.3 | v0.4.2 |
 
 
-### Agent をデプロイおよびサービスとして実行
+### デプロイおよびサービス
 
 クラスター上の Agent がデフォルトの DaemonSet ではなくデプロイおよびサービスとして実行されている場合は、DNS アドレスと Agent のポートを指定するための追加オプションが必要です。
 `default` ネームスペース内のサービス `datadog-agent` の場合、アドレスは `datadog-agent.default.svc.cluster.local:8126` のようになります。
@@ -486,7 +488,7 @@ spec:
 ```
 
 プロトコルの自動選択でサイドカーと Agent 間のトラフィックが HTTP であることを確認し、トレーシングを有効にすることができます。
-この機能は、この特定のサービスについての[プロトコルの手動選択][9]を使用することで無効にすることが可能です。`datadog-agent` サービス内のポート名は `tcp-traceport` に変更できます。
+この機能は、この特定のサービスについての[プロトコルの手動選択][10]を使用することで無効にすることが可能です。`datadog-agent` サービス内のポート名は `tcp-traceport` に変更できます。
 Kubernetes 1.18+ を使用している場合は、ポートの指定に `appProtocol: tcp` を追加できます。
 
 
@@ -494,14 +496,14 @@ Kubernetes 1.18+ を使用している場合は、ポートの指定に `appProt
 
 [1]: /ja/integrations/istio/
 [2]: /ja/network_monitoring/performance/setup/#istio
-[3]: /ja/agent/kubernetes/
-[4]: /ja/agent/kubernetes/apm/
-[5]: https://istio.io/docs/setup/install/istioctl/
-[6]: https://istio.io/docs/ops/configuration/traffic-management/protocol-selection/
-[7]: https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/
-[8]: /ja/tracing/setup/cpp/#environment-variables
-[9]: https://istio.io/docs/ops/configuration/traffic-management/protocol-selection/#manual-protocol-selection
-[10]: https://www.datadoghq.com/blog/istio-datadog/
+[3]: https://www.datadoghq.com/blog/istio-datadog/
+[4]: /ja/agent/kubernetes/
+[5]: /ja/agent/kubernetes/apm/
+[6]: https://istio.io/docs/setup/install/istioctl/
+[7]: https://istio.io/docs/ops/configuration/traffic-management/protocol-selection/
+[8]: https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/
+[9]: /ja/tracing/setup/cpp/#environment-variables
+[10]: https://istio.io/docs/ops/configuration/traffic-management/protocol-selection/#manual-protocol-selection
 {{% /tab %}}
 {{< /tabs >}}
 

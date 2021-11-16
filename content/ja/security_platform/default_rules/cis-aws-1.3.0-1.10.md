@@ -5,6 +5,7 @@ aliases:
   - /ja/security_monitoring/default_rules/cis-aws-1.3.0-1.10
 cloud: AWS
 disable_edit: true
+integration_id: amazon-iam
 kind: documentation
 rule_category:
   - クラウドコンフィギュレーション
@@ -42,7 +43,7 @@ MFA を有効にすると、時間が重要となるキーを生成し資格情�
 4. [https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa_enable_virtual.html][5]
 5. CCE-78901-6
 
-## CIS Controls
+## CIS コントロール
 
 4.5 すべての管理者アクセスに多要素認証を使用 - すえての管理者アカウントへのアクセスには多要素認証および暗号化チャネルを使用します。
 

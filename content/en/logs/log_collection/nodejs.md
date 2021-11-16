@@ -4,10 +4,10 @@ kind: documentation
 aliases:
   - /logs/languages/nodejs
 further_reading:
-- link: "/logs/processing/"
+- link: "/logs/log_configuration/processors"
   tag: "Documentation"
   text: "Learn how to process your logs"
-- link: "/logs/processing/parsing/"
+- link: "/logs/log_configuration/parsing"
   tag: "Documentation"
   text: "Learn more about parsing"
 - link: "/logs/explorer/"
@@ -146,7 +146,7 @@ const { createLogger, format, transports } = require('winston');
 
 const httpTransportOptions = {
   host: 'http-intake.logs.datadoghq.com',
-  path: '/v1/input/<APIKEY>?ddsource=nodejs&service=<APPLICATION_NAME>',
+  path: '/api/v2/logs?dd-api-key=<DATADOG_API_KEY>&ddsource=nodejs&service=<APPLICATION_NAME>',
   ssl: true
 };
 
@@ -178,7 +178,7 @@ const { createLogger, format, transports } = require('winston');
 
 const httpTransportOptions = {
   host: 'http-intake.logs.datadoghq.eu',
-  path: '/v1/input/<APIKEY>?ddsource=nodejs&service=<APPLICATION_NAME>',
+  path: '/api/v2/logs?dd-api-key=<DATADOG_API_KEY>&ddsource=nodejs&service=<APPLICATION_NAME>',
   ssl: true
 };
 

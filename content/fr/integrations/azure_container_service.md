@@ -8,11 +8,13 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Surveillez des métriques clés Azure Kubernetes Service.
-doc_link: 'https://docs.datadoghq.com/integrations/azure_container_service/'
+doc_link: https://docs.datadoghq.com/integrations/azure_container_service/
 draft: false
 git_integration_title: azure_container_service
 has_logo: true
+integration_id: azure-containerservice
 integration_title: Microsoft Azure Kubernetes Service
+integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'
@@ -27,7 +29,7 @@ Azure Kubernetes Service vous permet de déployer rapidement un cluster Kubernet
 
 Utilisez l'intégration Datadog/Azure pour recueillir des métriques d'Azure Kubernetes Service.
 
-## Implémentation
+## Configuration
 
 ### Installation
 

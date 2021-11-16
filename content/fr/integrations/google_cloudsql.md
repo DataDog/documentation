@@ -11,6 +11,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/google_cloudsql/'
 draft: false
 git_integration_title: google_cloudsql
 has_logo: true
+integration_id: google-cloudsql
 integration_title: Google CloudSQL
 is_public: true
 kind: integration
@@ -22,7 +23,7 @@ version: '1.0'
 ---
 ## Présentation
 
-Google Cloud SQL est un service de base de données entièrement géré qui vous permet de configurer, maintenir, gérer et administrer facilement vos bases de données MySQL dans le cloud.
+Google Cloud SQL est un service de base de données entièrement géré qui vous permet de configurer, maintenir, gérer et administrer facilement vos bases de données SQL dans le cloud.
 
 Recueillez des métriques de Google Cloud SQL pour :
 
@@ -50,9 +51,6 @@ Une fois cette opération effectuée, exportez vos logs Google Cloud SQL depui
 1. Accédez à la [page Stackdriver][3] et filtrez les logs Google Cloud SQL.
 2. Cliquez sur **Create Sink** et nommez le récepteur.
 3. Choisissez Cloud Pub/Sub comme destination et sélectionnez le Pub/Sub créé à cette fin. **Remarque** : le Pub/Sub peut se situer dans un autre projet.
-
-    {{< img src="integrations/google_cloud_pubsub/creating_sink.png" alt="Exporter les logs Google Cloud Pub/Sub vers le Pub Sub" >}}
-
 4. Cliquez sur **Create** et attendez que le message de confirmation s'affiche.
 
 ## Données collectées

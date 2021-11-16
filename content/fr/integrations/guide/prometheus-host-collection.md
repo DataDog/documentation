@@ -130,7 +130,7 @@ Les intégrations officielles utilisent des répertoires dédiés. Le check gén
 [2]: /fr/integrations/prometheus/
 [3]: https://github.com/DataDog/integrations-core/tree/master/openmetrics
 [4]: https://github.com/DataDog/integrations-core/tree/master/prometheus
-[5]: /fr/developers/prometheus/
+[5]: /fr/developers/custom_checks/prometheus/
 [6]: https://app.datadoghq.com/account/settings#agent
 [7]: /fr/getting_started/tagging/
 [8]: /fr/agent/guide/agent-configuration-files/#agent-configuration-directory

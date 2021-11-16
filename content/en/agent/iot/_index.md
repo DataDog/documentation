@@ -87,7 +87,7 @@ To manually install the IoT Agent on Debian-based operating systems, run the fol
 4. Update `apt` and install the IoT Agent:
     ```bash
     sudo apt-get update
-    sudo apt-get install datadog-iot-agent
+    sudo apt-get install datadog-iot-agent datadog-signing-keys
     ```
 
 5. Copy the example config and plug in your API key:

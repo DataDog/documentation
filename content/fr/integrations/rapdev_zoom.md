@@ -11,6 +11,7 @@ assets:
   logs: {}
   metrics_metadata: metadata.csv
   monitors:
+    Zoom API Limit Was Encountered: assets/monitors/zoom_api_rate_limit.json
     Zoom Room's Component is Offline or Not Working Properly: assets/monitors/zoom_room_component_has_problem.json
     Zoom Room's Health is in Warning or Critical State: assets/monitors/zoom_room_has_problem.json
   saved_views: {}

@@ -42,6 +42,8 @@ supported_os:
 
 このチェックは、Kubernetes Control Plane の一部である [Kubernetes Scheduler][1] を監視します。
 
+**注**: サービスが公開されていないため、このチェックは Amazon EKS クラスターのデータを収集しません。
+
 ## セットアップ
 
 ### インストール
@@ -77,18 +79,18 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 {{< get-metrics-from-git "kube_scheduler" >}}
 
 
-### サービスのチェック
-
-**kube_scheduler.prometheus.health**:<br>
-Agent がメトリクスのエンドポイントに到達できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
-
 ### イベント
 
 Kube Scheduler には、イベントは含まれません。
 
+### サービスのチェック
+
+このインテグレーションによって提供されるサービスチェックのリストについては、[service_checks.json][8] を参照してください。
+
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
+
 
 [1]: https://kubernetes.io/docs/reference/command-line-tools-reference/kube-scheduler
 [2]: https://github.com/DataDog/integrations-core/blob/master/kube_scheduler/datadog_checks/kube_scheduler/data/conf.yaml.example
@@ -97,4 +99,5 @@ Kube Scheduler には、イベントは含まれません。
 [5]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
 [6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [7]: https://github.com/DataDog/integrations-core/blob/master/kube_scheduler/metadata.csv
-[8]: https://docs.datadoghq.com/ja/help/
+[8]: https://github.com/DataDog/integrations-core/blob/master/kube_scheduler/assets/service_checks.json
+[9]: https://docs.datadoghq.com/ja/help/

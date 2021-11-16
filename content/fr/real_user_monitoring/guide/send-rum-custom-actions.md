@@ -49,5 +49,5 @@ Une fois vos facettes et mesures créées, vous pouvez utiliser les attributs de
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/real_user_monitoring/browser/data_collected/?tab=useraction#automatic-collection-of-actions
-[2]: /fr/real_user_monitoring/browser/advanced_configuration/#replace-global-context
+[2]: /fr/real_user_monitoring/browser/modifying_data_and_context/#replace-global-context
 [3]: /fr/real_user_monitoring/explorer

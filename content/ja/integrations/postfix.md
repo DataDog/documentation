@@ -2,11 +2,14 @@
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
-  dashboards: {}
+  dashboards:
+    postfix: assets/dashboards/postfix_dashboard.json
   logs:
     source: postfix
   metrics_metadata: metadata.csv
   monitors: {}
+  saved_views:
+    postfix_processes: assets/saved_views/postfix_processes.json
   service_checks: assets/service_checks.json
 categories:
   - Collaboration
@@ -14,7 +17,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/postfix/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/postfix/README.md
 display_name: Postfix
 draft: false
 git_integration_title: postfix
@@ -78,8 +81,9 @@ Postfix チェックは [Datadog Agent][2] パッケージに含まれていま�
      postfix_user: postfix
 
    instances:
-     ## @param directory - string - required
-     ## Path to the postfix directory.
+     ## @param directory - string - optional - default: /var/spool/postfix
+     ## Path to the postfix directory. The directory option is required if `postqueue: false` is set. For more 
+     ## information see https://docs.datadoghq.com/integrations/postfix/#using-sudo.
      #
      - directory: /var/spool/postfix
 

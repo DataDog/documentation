@@ -11,13 +11,14 @@ categories:
 creates_events: false
 ddtype: crawler
 dependencies:
-  - 'https://github.com/DataDog/integrations-extras/blob/master/rundeck/README.md'
+  - https://github.com/DataDog/integrations-extras/blob/master/rundeck/README.md
 display_name: Rundeck
 draft: false
 git_integration_title: rundeck
 guid: 2e3492d3-14fd-409d-b339-fb1bc14d7db9
 integration_id: rundeck
 integration_title: Rundeck
+integration_version: ''
 is_public: true
 kind: インテグレーション
 maintainer: forrest@rundeck.com
@@ -56,7 +57,7 @@ Datadog アラートを使ってトリガーしたい Rundeck ジョブを最低
 
 ### コンフィギュレーション
 
-#### Rundeck のセットアップ
+#### Rundeck
 
 1. Rundeck プロジェクト内でナビゲーションの **Webhooks** オプションをクリックします。
 2. **Add** をクリックします。
@@ -74,19 +75,18 @@ Datadog アラートを使ってトリガーしたい Rundeck ジョブを最低
 1. Datadog を開いて **Integrations** > **Integrations** を開きます。
 2. "webhooks" を検索します。
 
-![search-dd][3]
-
+    ![search-dd][3]
 
 3. 上記の Webhook エントリをクリックします。するとコンフィギュレーションウィンドウが開きます。
 
-![webhooks-config][4]
+    ![webhooks-config][4]
 
 4. **New** ボタンをクリックしてフォームに必要な情報を入力します。
   - Webhook に名前を付けます。(a)
   - URL 行に Rundeck Webhook から URL をコピーして貼り付けます。これは上記セクションのステップ 7 に該当します。(b)
   - **Save** をクリックします。(c)
 
-![webhook-fill][5]
+    ![webhook-fill][5]
 
 `@webhook-Rundeck_Restart_Service` の受信者を追加して、このインテグレーションを Datadog 内の任意の通知に追加します。ここでの名前は、ステップ 4a で設定した Webhook 名によって異なります。モニターからアラートがトリガーされると、Webhook が関連するジョブを実行します。
 

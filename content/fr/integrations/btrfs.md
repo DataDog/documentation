@@ -2,7 +2,8 @@
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
-  dashboards: {}
+  dashboards:
+    btrfs: assets/dashboards/btrfs_dashboard.json
   logs: {}
   metrics_metadata: metadata.csv
   monitors: {}

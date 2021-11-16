@@ -7,7 +7,7 @@ private: true
 ## Standard Agent configuration
 
 **Live Processes is available in Datadog Agent version 5.16.0.**
-Refer to the instructions for standard [Agent installation][1] for platform-specific details.
+See the instructions for standard [Agent installation][1] for platform-specific details.
 
 Once the Datadog Agent is installed, enable Live Processes collection by editing the [configuration file][2] at:
 
@@ -55,7 +55,7 @@ In the [dd-agent.yaml][5] manifest used to create the DaemonSet, add the followi
       name: passwd
 ```
 
-Refer to the standard [DaemonSet installation][6] and the [docker-dd-agent][4] information pages for further documentation.
+See the standard [DaemonSet installation][6] and the [docker-dd-agent][4] information pages for further documentation.
 
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: /agent/faq/where-is-the-configuration-file-for-the-agent/

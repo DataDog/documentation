@@ -103,7 +103,7 @@ App Analytics は、PHP トレースクライアントのバージョン 0.17.0 
 {{< /programming-lang >}}
 {{< programming-lang lang="cpp" >}}
 
-App Analytics は、C++ トレースクライアントのバージョン 1.0.0 以降で使用できます。環境変数 `DD_TRACE_ANALYTICS_ENABLED` を `true` に設定することで、すべてのトップレベルスパンに対してグローバルに有効にすることができます。なお、この設定は、コードで直接設定することもできます。
+App Analytics は、C++ トレースクライアントのバージョン 1.0.0 以降で使用できます。環境変数 `DD_TRACE_ANALYTICS_ENABLED` を `true` に設定することで、すべてのサービスエントリスパンに対してグローバルに有効にすることができます。**注**: この設定は、コードで直接設定することもできます。
 
 ```csharp
 datadog::opentracing::TracerOptions tracer_options;
@@ -278,8 +278,8 @@ Tracer.Instance.Settings.Integrations["AspNetMvc"].AnalyticsEnabled = true;
 
 デフォルトでは、App Analytics はデータベーストレースをキャプチャしないため、各インテグレーションに対して手動で収集を有効にする必要があります。例:
 
-* トレーサー構成: `ddtrace.config.postgres.analytics_enabled = True`
-* 環境変数: `DD_POSTGRES_ANALYTICS_ENABLED=true`
+* トレーサーコンフィギュレーション: `ddtrace.config.psycopg.analytics_enabled = True`
+* 環境変数: `DD_PSYCOPG_ANALYTICS_ENABLED=true`
 
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}

@@ -2,17 +2,14 @@
 title: サーバーレスモニタリングガイド
 kind: ガイド
 ---
-これらのガイドでは、お使いのサーバーレスエコシステムにメトリクス、トレース、ログをセットアップする方法についてご説明します。
 
-- 初めに、**Datadog Lambda 拡張メトリクス** をセットアップして、Lambda インフラストラクチャーのコールドスタートのグラフを作成する方法を確認します。
-- 次に、Lambda の **ログ取り込み** を有効にして、Lambda のエラーログを使用する方法を確認します。その後、Lambda の **分散型トレース** を有効にしてすばやく根本原因を分析するためのツールをご紹介します。
-- 最後に、お使いのサーバーレスエコシステムの **カスタムメトリクス** およびサービスをモニタリングする方法についてご説明します。
+{{< whatsnext desc="Datadog Forwarder の使用:" >}}
+    {{< nextlink href="/serverless/guide/datadog_forwarder_node" >}}Datadog Forwarder を使用したサーバーレスのインストール - Node.js{{< /nextlink >}}
+    {{< nextlink href="/serverless/guide/datadog_forwarder_python" >}}Datadog Forwarder を使用したサーバーレスのインストール - Python{{< /nextlink >}}
+{{< /whatsnext >}}
 
-# 言語を選択
-
-{{< partial name="serverless/serverless-guide.html" >}}
-
-<br></br>  
-その他の言語については、[AWS Lambda インテグレーション用ドキュメント][1]で、詳しいセットアップ方法をご確認ください。
-
-[1]: https://docs.datadoghq.com/ja/integrations/amazon_lambda/#overview
+{{< whatsnext desc="Datadog Lambda 拡張機能の使用:" >}}
+    {{< nextlink href="/serverless/guide/extension_motivation" >}}Datadog Lambda  拡張機能への移行を決定Extension{{< /nextlink >}}
+    {{< nextlink href="/serverless/guide/forwarder_extension_migration" >}}Datadog Forwarder から Datadog Lambda 拡張機能への移行{{< /nextlink >}}
+    {{< nextlink href="/serverless/guide/extension_private_link" >}}Datadog Lambda  拡張機能 AWS PrivateLink のセットアップ{{< /nextlink >}}
+{{< /whatsnext >}}

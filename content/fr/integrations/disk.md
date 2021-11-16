@@ -4,6 +4,7 @@ assets:
     spec: assets/configuration/spec.yaml
   dashboards: {}
   logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -13,6 +14,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/disk/README.md'
 display_name: Disk
+draft: false
 git_integration_title: disk
 guid: 94588b23-111e-4ed2-a2af-fd6e4caeea04
 integration_id: system
@@ -40,12 +42,11 @@ Recueillez les métriques relatives à l'utilisation du disque et aux E/S.
 
 ### Installation
 
-Le check Disk est inclus avec le paquet de l'[Agent Datadog][1] : vous n'avez donc rien d'autre à installer sur votre serveur.
+Le check Disk est inclus avec le package de l'[Agent Datadog][1] : vous n'avez donc rien d'autre à installer sur votre serveur.
 
 ### Configuration
 
-Le check Disk est activé par défaut et l'Agent recueille des métriques sur toutes les partitions locales.
-Si vous souhaitez configurer le check avec des options personnalisées, modifiez le fichier `disk.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][2]. Consultez le [fichier d'exemple disk.d/conf.yaml][3] pour découvrir toutes les options de configuration disponibles.
+Le check Disk est activé par défaut et l'Agent recueille des métriques sur toutes les partitions locales. Pour configurer le check avec des options personnalisées, modifiez le fichier `disk.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][2]. Consultez le [fichier d'exemple disk.d/conf.yaml][3] pour découvrir toutes les options de configuration disponibles.
 
 ### Validation
 
@@ -63,8 +64,8 @@ Le check Disk n'inclut aucun événement.
 
 ### Checks de service
 
-**`disk.read_write`** :
-Renvoie `CRITICAL` si le système de fichiers est en mode lecture seule.
+**disk.read_write** :<br>
+Renvoie `CRITICAL` si le système de fichiers est en mode lecture seule. **Remarque** : ce check de service doit être activé depuis la section `service_check_rw` du fichier [disk.d/conf.yaml][3].
 
 ## Dépannage
 

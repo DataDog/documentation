@@ -84,5 +84,5 @@ Vous cherchez à prendre en main l'application ? Consultez notre documentation 
 [3]: https://run.pstmn.io/button.svg
 [4]: /fr/api/v1/using-the-api/
 [5]: https://brew.sh
-[6]: https://docs.datadoghq.com/fr/developers/libraries/
+[6]: https://docs.datadoghq.com/fr/developers/community/libraries/
 [7]: /fr/getting_started/application/

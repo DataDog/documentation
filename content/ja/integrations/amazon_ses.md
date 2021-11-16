@@ -13,6 +13,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/amazon_ses/'
 draft: false
 git_integration_title: amazon_ses
 has_logo: true
+integration_id: amazon-ses
 integration_title: Amazon SES
 is_public: true
 kind: インテグレーション
@@ -60,7 +61,7 @@ Amazon SES から S3 バケットまたは CloudWatch のいずれかにログ�
 2. lambda 関数がインストールされたら、AWS コンソールから、Amazon SES ログを含む S3 バケットまたは CloudWatch のロググループに手動でトリガーを追加します。
 
     - [S3 バケットに手動トリガーを追加][7]
-    - [Cloudwatch ロググループに手動トリガーを追加][8]
+    - [CloudWatch ロググループに手動トリガーを追加][8]
 
 ## 収集データ
 

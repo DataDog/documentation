@@ -2,10 +2,15 @@
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
-  dashboards: {}
+  dashboards:
+    Active Directory: assets/dashboards/active_directory.json
   logs:
     source: ruby
-  monitors: {}
+  metrics_metadata: metadata.csv
+  monitors:
+    '[Active Directory] Anomalous number of sessions for connected LDAP clients for host: {{host.name}}': assets/monitors/ldap_client_sessions.json
+    '[Active Directory] Anomalous number of successful LDAP bindings for host: {{host.name}}': assets/monitors/ldap_binding_successful.json
+    '[Active Directory] Elevated LDAP binding duration for host {{host.name}}': assets/monitors/ldap_binding.json
   service_checks: assets/service_checks.json
 categories:
   - os & system
@@ -16,6 +21,7 @@ dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/active_directory/README.md'
 description: "Recueillez et représentez graphiquement des métriques de Microsoft Active\_Directory."
 display_name: Active Directory
+draft: false
 git_integration_title: active_directory
 guid: ba667ff3-cf6a-458c-aa4b-1172f33de562
 integration_id: active-directory
@@ -41,7 +47,7 @@ Recueillez des métriques et des logs à partir de Microsoft Active Directory 
 
 ### Installation
 
-Le check Active Directory de l'Agent est inclus avec le paquet de l'[Agent Datadog][1] : vous n'avez donc rien d'autre à installer sur votre serveur.
+Le check Active Directory de l'Agent est inclus avec le package de l'[Agent Datadog][1] : vous n'avez donc rien d'autre à installer sur votre serveur.
 
 Si vous installez l'Agent Datadog dans un environnement de domaine, consultez [les exigences d'installation de l'Agent][2]
 
@@ -55,7 +61,7 @@ Si vous installez l'Agent Datadog dans un environnement de domaine, consultez [l
 
 #### Collecte de logs
 
-_Disponible à partir des versions > 6.0 de l'Agent_
+_Disponible à partir des versions > 6.0 de l'Agent_
 
 1. La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans `datadog.yaml` :
 
@@ -76,7 +82,7 @@ _Disponible à partir des versions > 6.0 de l'Agent_
    Modifiez les valeurs des paramètres `path` et `service` et configurez-les pour votre environnement.
     Consultez le [fichier d'exemple active_directory.d/conf.yaml][4] pour découvrir toutes les options de configuration disponibles.
 
-3. Cette intégration doit être utilisée avec le [module Active Directory pour Ruby][6]. Si vous n'utilisez pas le module Ruby, remplacez la valeur de la source ci-dessus par `active_directory` et configurez le `path` de votre environnement.
+3. Cette intégration doit être utilisée avec le [module Active Directory pour Ruby][6]. Si vous n'utilisez pas le module Ruby, définissez la valeur de `source` sur `active_directory` et configurez le `path` de votre environnement.
 
 4. [Redémarrez l'Agent][5].
 

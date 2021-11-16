@@ -76,8 +76,6 @@ dogstatsd_mapper_profiles:
 
 メトリクス `custom_metric.process` にタグ `tag_key_1:value_1` および `tag_key_2:value_2` が付与され、Datadog に送られます。
 
-**注**: 受信するメトリクスに最低 1 つのタグが含まれていた場合、マッピングは適用されません。
-
 ## 正規表現の一致パターン
 
 正規表現の一致パターンは、正規表現パターンを使用したメトリクス名と一致します。ワイルドカードの一致パターンとは異なり、`.` を含むキャプチャされたグループを定義することができます。
@@ -99,8 +97,6 @@ dogstatsd_mapper_profiles:
 ```
 
 メトリクス `custom_metric.process` にタグ `tag_key_1:value_1` および `tag_key_2:value.with.dots._2` が付与され、Datadog に送られます。
-
-**注**: 受信するメトリクスに最低 1 つのタグが含まれていた場合、マッピングは適用されません。
 
 ## メトリクス名でグループを展開する
 

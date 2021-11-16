@@ -23,7 +23,7 @@ Datadog Agent のコミュニティ開発のインテグレーションは、[In
 2. 次のコマンドを実行して、Agent でインテグレーションをインストールします。
 
     ```
-    datadog-agent integration install -t <INTEGRATION_NAME>==<INTEGRATION_VERSION>
+    datadog-agent integration install -t datadog-<INTEGRATION_NAME>==<INTEGRATION_VERSION>
     ```
 
 3. [他のパッケージ化されたインテグレーション][2]と同様にインテグレーションを構成します。
@@ -39,7 +39,7 @@ integrations-extra からの Docker Agent とのインテグレーションを�
 
 ```dockerfile
 FROM gcr.io/datadoghq/agent:latest
-RUN agent integration install -r -t <INTEGRATION_NAME>==<INTEGRATION_VERSION>
+RUN agent integration install -r -t datadog-<INTEGRATION_NAME>==<INTEGRATION_VERSION>
 ```
 
 Docker 内で実行された `agent Integration install` コマンドは、無害な警告 `Error loading config: Config File "datadog" Not Found in "[/etc/datadog-agent]": warn` を発行します。この警告は無視してかまいません。

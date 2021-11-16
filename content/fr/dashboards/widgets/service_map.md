@@ -2,6 +2,7 @@
 title: Widget Service Map
 kind: documentation
 description: 'Affiche une carte de service avec tous les services qui l''appellent, et tous les services appelés.'
+widget_type: servicemap
 aliases:
   - /fr/graphing/widgets/service_map/
 further_reading:
@@ -32,28 +33,11 @@ Les services connectés au service mappé sont triés vers l'extérieur à parti
 
 ## API
 
-Le [schéma JSON][4] utilisé pour le widget Service Map est le suivant :
+Ce widget peut être utilisé avec l'**API Dashboards**. Consultez la documentation relative à l'[API Dashboards][4] pour en savoir plus.
 
-```text
-SERVICEMAP_SCHEMA = {
-        "type": "object",
-        "properties": {
-            "type": {"enum": ["servicemap"]},
-            "filters": {"type": "array", "items": {"type": "string"}, "minItems": 1},
-            "service": {"type": "string"},
-            "title": WidgetSchema.TITLE
-        },
-        "required": ["type", "filters", "service"],
-        "additionalProperties": False,
-    }
-```
+Le [schéma JSON][5] utilisé pour le widget Service Map est le suivant :
 
-| Paramètre | Type   | Obligatoire | Description                                                       |
-|-----------|--------|----------|-------------------------------------------------------------------|
-| type      | chaîne | oui      | Le type du widget (utilisez `servicemap` pour le widget Service Map). |
-| service   | chaîne | oui      | L'ID du service que vous souhaitez mapper.                            |
-| filters   | objet | oui      | Votre environnement et votre tag principal (ou `*` si cette option est activée sur votre compte).    |
-| title     | chaîne | non       | Le titre de votre widget.                                         |
+{{< dashboards-widgets-api >}}
 
 ## Pour aller plus loin
 
@@ -62,4 +46,5 @@ SERVICEMAP_SCHEMA = {
 [1]: /fr/tracing/send_traces/
 [2]: /fr/tracing/guide/setting_primary_tags_to_scope/
 [3]: /fr/tracing/visualization/service/
-[4]: /fr/dashboards/graphing_json/widget_json/
+[4]: /fr/api/v1/dashboards/
+[5]: /fr/dashboards/graphing_json/widget_json/

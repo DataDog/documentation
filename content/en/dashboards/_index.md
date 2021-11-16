@@ -32,17 +32,116 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-dashboards/"
   tag: "Blog"
   text: "The new Datadog dashboards experience"
+- link: "https://datadoghq.dev/integrations-core/guidelines/dashboards/#best-practices"
+  tag: "Developer docs"
+  text: "Create great integration dashboards"
 ---
 
 ## Overview
 
 A dashboard is Datadog's tool for visually tracking, analyzing, and displaying key performance metrics, which enable you to monitor the health of your infrastructure.
 
+**Note**: View Dashboards with the [Datadog Mobile App][1], available on the [Apple App Store][2] and [Google Play Store][3].
+
+## New dashboard
+
+To create a dashboard, click **+New Dashboard** on the [Dashboard List][1] page or **New Dashboard** from the navigation menu. Enter a dashboard name and choose a layout option.
+
+{{< img src="dashboards/create-dashboard.png" alt="Adding a new dashboard" style="width:70%;">}}
+
+### Dashboards
+[Dashboards][4] are on a next-gen grid based layout which can include a variety of objects such as images, graphs, and logs. They are commonly used as status boards or storytelling view, which update in real-time and can represent fixed points in the past. They also work well for debugging.
+
+### Timeboards
+[Timeboards][5] have automatic layouts, and represent a single point in time—either fixed or real-time—across the entire dashboard. They are commonly used for troubleshooting, correlation, and general data exploration.
+
+### Screenboards
+[Screenboards][6] are dashboards with free-form layouts which can include a variety of objects such as images, graphs, and logs. They are commonly used as status boards or storytelling views that update in real-time or represent fixed points in the past.
+
+## Configuring dashboards
+
+### Global time selector
+To use the global time selector, at least one time-based widget must be set to use `Global Time`. Make the selection in the widget editor under **Set display preferences**, or add a widget (global time is the default time setting).
+
+The global time selector sets the same time frame for all widgets using the `Global Time` option on the same dashboard. Select a moving window in the past (`Past 1 Hour`, `Past 1 Day`, etc.) or a fixed period with the `Select from calendar…` option or [enter a custom time frame][7]. If a moving window is chosen, the widgets are updated to move along with the time window.
+
+Widgets not linked to global time show the data for their local time frame as applied to the global window. For example, if the global time selector is set to January 1, 2019 through January 2, 2019, a widget set with the local time frame for `Past 1 Minute` shows the last minute of January 2, 2019 from 11:59 pm.
+
+### TV mode
+
+Dashboards are useful for displaying key performance metrics on large screens or TVs. To enable TV mode, use the keyboard shortcut `F` or click the TV icon on the dashboard.
+
+### Settings
+
+#### Generate public URL
+
+Share a dashboard with external users by generating a public URL. For more details, see [Sharing dashboards][8].
+
+#### Display UTC time
+
+Toggle between UTC time and your default time zone.
+
+#### Notifications
+
+If notifications are activated for a dashboard, an event is created in the [event stream][9]. This event provides information on text changes, widget changes, dashboard cloning, and dashboard deletion along with the name of the user performing the action.
+
+Additionally, individual users who activate the notification receive an email alert. Any user in the organization, regardless of administrative privileges, can sign up to receive change notifications for a dashboard.
+
+Change events for dashboards with notifications enabled are seen in the event stream by searching:
+
+```text
+tags:audit,dash
+```
+
+To limit the search to a specific dashboard, include the dashboard's name in the search.
+
+#### Permissions
+
+At the top of the dashboard, click on settings and select *Permissions*.
+
+{{< img src="dashboards/dashboard-menu-permissions.png" alt="The dashboard settings menu" style="width:50%;">}}
+
+Use the pop up to restrict access to you, everyone in your organization with your role, or to specific roles in your organization.
+
+{{< img src="dashboards/dashboard-role-restrictions.png" alt="Role restrictions in settings" style="width:70%;">}}
+
+Creators are always able to edit the dashboard, but other users who are allowed to edit the dashboard can add or remove any role from the access control list (ACL) so long as the final ACL includes one of their roles. For more information about roles, see the [RBAC documentation][10].
+
+If you used the deprecated "read only" check box, the access control list is pre-populated with a list of Admin roles with the "Privileged Access" permission.
+
+If you manage your Dashboards with Terraform, you can use the latest version of the Datadog Terraform provider to control which roles can edit your Dashboards. For more information, see the [Terraform Dashboard role restriction guide][11].
+
+#### Clone dashboard
+
+Use this option to copy the entire dashboard to a new dashboard. You are prompted to name the clone.
+
+#### Copy, import, or export dashboard JSON
+
+From an individual dashboard, copy, import, or export a dashboard's JSON using the settings cog (upper right) with the following options:
+
+| Option                          | Description                                                                                                                                                                |
+|---------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Copy&nbsp;dashboard&nbsp;JSON   | Copy the dashboard's JSON to your clipboard.                                                                                                                               |
+| Import&nbsp;dashboard&nbsp;JSON | Paste or import your JSON to the dashboard. This option overwrites all content on the dashboard. If the JSON is already on your clipboard, use `Ctrl V` (`Cmd V` for Mac). |
+| Export&nbsp;dashboard&nbsp;JSON | Download a JSON file containing the JSON of your dashboard.                                                                                                                |
+
+{{< img src="dashboards/copy_dashboard.png" alt="Copy dashboard" style="width:30%;">}}
+
+#### Delete dashboard
+
+Use this option to permanently delete your dashboard. You are prompted to confirm deletion.
+
+## Suggested dashboards and active users
+
+From an individual dashboard, Datadog offers suggestions for viewing related dashboards. To view suggested dashboards and active users, click on the caret icon next to the dashboard title. These dashboards are recommended based on the user activity in your organization and how often users go from this dashboard to other existing dashboards. You can also add or update Markdown-supported dashboard descriptions in this view by clicking `edit`.
+
+{{< img src="dashboards/suggested_dashboards.png" alt="Suggested dashboards" >}}
+
 ## Dashboard list
 
-Search, view, or create dashboards and lists on the [Dashboard List][1] page. By default, this is the landing page after you login to Datadog. To change the default landing page for your organization, contact [Datadog support][2].
+Search, view, or create dashboards and lists on the [Dashboard List][12] page. By default, this is the landing page after you login to Datadog. To change the default landing page for your organization, contact [Datadog support][13].
 
-{{< img src="dashboards/dashboard_list2.png" alt="Dashboard List page"  >}}
+{{< img src="dashboards/dashboard_list.png" alt="Dashboard List page"  >}}
 
 ### New list
 
@@ -52,7 +151,7 @@ The list's title is automatically set with the user's first name. For example, i
 
 To add dashboards to a list, select their corresponding check boxes in the main Dashboard list. Then click on the *Add to List* button in the upper right corner of the Dashboard list:
 
-{{< img src="dashboards/dash_to_list.png" alt="Add Dashboard to list"  style="width:70%;">}}
+{{< img src="dashboards/dash_to_list.png" alt="Add Dashboard to list" style="width:100%;">}}
 
 ### Lists
 
@@ -71,8 +170,16 @@ Preset lists are default dashboard lists in Datadog:
 | All Custom               | Custom dashboards made by any team member in your organization's account. |
 | All Hosts                | Automatic dashboards created by Datadog when you add a host.              |
 | All Integrations         | Automatic dashboards created by Datadog when you install an integration.  |
-| Created By You           | Custom dashboards created by the currently logged in user.                |
-| Frequently Viewed By You | All dashboards frequently viewed by the currently logged in user.         |
+| All Shared               | Dashboards with authenticated or public link sharing enabled.             |
+| Created By You           | Custom dashboards created by the current user.                            |
+| Frequently Viewed By You | All dashboards frequently viewed by the current user.                     |
+| Recently Deleted         | Dashboards deleted within the last 30 days.                               |
+
+#### Restore deleted Dashboards
+
+Use the preset **Recently Deleted** list to restore deleted dashboards. From the list, select all dashboards to restore and click **Restore to**. Select a specific list to restore the dashboards to, or select **All Custom** to restore them without a custom list. Dashboards in **Recently Deleted** are permanently deleted after 30 days.
+
+{{< img src="dashboards/recently_deleted.png" alt="Restore deleted dashboard" style="width:100%;">}}
 
 #### Shared, editable lists
 
@@ -84,7 +191,7 @@ All dashboards listed are sortable using the column headers *Star*, *Name*, *Mod
 
 | Column     | Description                                                                              |
 |------------|------------------------------------------------------------------------------------------|
-| Star       | All dashboards starred by the currently logged in user.                                  |
+| Star       | All dashboards starred by the current user.                                              |
 | Icon       | An icon indicating the type of dashboard (timeboard or screenboard).                     |
 | Name       | The name of the custom or preset dashboard.                                              |
 | Modified   | The last modified date of a custom dashboard.                                            |
@@ -97,68 +204,20 @@ An organization's most popular dashboard displays five popularity bars. All othe
 
 **Note**: Traffic to public dashboard URLs is ignored for popularity.
 
-## New dashboard
-
-
-To create a dashboard, click on the **New Dashboard +** button in the upper right. Enter a dashboard name and choose a layout option.
-
-{{< img src="dashboards/create-dashboard.jpeg" alt="Adding a new dashboard"  style="width:70%;">}}
-
-### Dashboard layout
-
-<div class="alert alert-warning">The Dashboard layout is in public beta. Screenboards and Timeboards remain the same.</div>
-
-The Dashboard layout uses a flexible, grid-based system that combines the simplicity of Timeboards and the control of Screenboards. To understand the difference between layout options, consider the following:
-
-#### Dashboards, timeboards, and screenboards
- 
-|                                                                   | Dashboards | Timeboards                                            | Screenboards |
-|-------------------------------------------------------------------|------------|-------------------------------------------------------|--------------|
-| Widgets maintain position and can be flexibly sized               | Yes        | No                                                    | Yes          |
-| Widgets scale depending on screen-size                            | Yes        | Yes                                                   | No           |
-| Group actions (copy, move, delete) available on multiple widgets  | Yes        | No                                                    | Yes          |
-| “Group” supported                                                 | Yes        | Yes                                                   | No           |
-| All widget types supported                                        | Yes        | No                                                    | Yes          |
-| Graphs can have individual time scopes                            | Yes        | No                                                    | Yes          |
-| TV mode fits the entire dashboard on-screen                       | Yes        | No (dashboard scrolls in TV mode)                     | Yes          |
-| Legends are optional                                              | Yes        | No (legends appear automatically based on graph size) | Yes          |
-
-
-#### High-density mode
-
-High-density mode displays the top and bottom halves of a dashboard side-by-side for increased widget density. This mode turns on by default for large screens.
-
-{{< img src="dashboards/high-density-mode.png" alt="The high-density mode display"  style="width:70%;">}}
-
-### Copy / import / export
-
-From an individual dashboard, you can copy, import, or export a dashboard's JSON using the settings cog (upper right) with the following options:
-
-| Option                          | Description                                                                                                                                                                |
-|---------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Copy&nbsp;dashboard&nbsp;JSON   | Copy the dashboard's JSON to your clipboard.                                                                                                                               |
-| Import&nbsp;dashboard&nbsp;JSON | Paste or import your JSON to the dashboard. This option overwrites all content on the dashboard. If the JSON is already on your clipboard, use `Ctrl V` (`Cmd V` for Mac). |
-| Export&nbsp;dashboard&nbsp;JSON | Download a JSON file containing the JSON of your dashboard.                                                                                                                |
-
-{{< img src="dashboards/copy_dashboard.png" alt="Copy dashboard"  style="width:30%;">}}
-
-### Suggested dashboards and active users
-
-From an individual dashboard, Datadog offers suggestions for viewing related dashboards. To view suggested dashboards and active users, click on the caret icon next to the dashboard title. These dashboards are recommended based on the user activity in your organization and how often users go from this dashboard to other existing dashboards. You can also add or update Markdown-supported dashboard descriptions in this view by clicking `edit`.
-
-{{< img src="dashboards/suggested_dashboards.png" alt="Suggested dashboards" >}}
-
-### Restrict access
-
-<div class="alert alert-warning">
-RBAC restrict access to dashboards is currently in beta. To request access, contact <a href="https://docs.datadoghq.com/help/">Datadog support</a>.</div>
-
-Click the settings modal for the whole dashboard, and select *Permissions*. Use the pop up to restrict access to you, everyone in your org with your role, or to specific roles in your org. For more information about roles, see the [RBAC][3] documentation.
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/dashboard/lists
-[2]: /help/
-[3]: /account_management/rbac/
+[1]: /mobile
+[2]: https://apps.apple.com/app/datadog/id1391380318
+[3]: https://play.google.com/store/apps/details?id=com.datadog.app
+[4]: /dashboards/dashboards
+[5]: /dashboards/timeboards
+[6]: /dashboards/screenboards
+[7]: /dashboards/guide/custom_time_frames/
+[8]: /dashboards/sharing/#dashboards
+[9]: /events/
+[10]: /account_management/rbac/
+[11]: /dashboards/guide/how-to-use-terraform-to-restrict-dashboard-edit/
+[12]: https://app.datadoghq.com/dashboard/lists
+[13]: /help/

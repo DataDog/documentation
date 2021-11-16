@@ -25,6 +25,8 @@ private: true
     {{< nextlink href="agent/guide/ad_identifiers" >}}ad_identifers パラメーターを使用して、オートディスカバリーコンフィギュレーションファイルテンプレートを特定のコンテナに適用します。{{< /nextlink >}}
    {{< nextlink href="agent/guide/operator-advanced" >}}Datadog Operator の高度なセットアップ。{{< /nextlink >}} 
    {{< nextlink href="/agent/guide/container-images-for-docker-environments" >}}Docker 環境のコンテナイメージ{{< /nextlink >}}
+    {{< nextlink href="/agent/guide/docker-deprecation" >}}Kubernetes での Docker の非推奨{{< /nextlink >}}
+{{< nextlink href="/agent/guide/heroku-ruby" >}}Datadog を使用して Heroku で Ruby on Rails アプリケーションをインスツルメントする{{< /nextlink >}}
 {{< /whatsnext >}}
 <br>
 {{< whatsnext desc="Agent 5 Guides:" >}}

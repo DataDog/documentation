@@ -13,8 +13,11 @@ further_reading:
   - link: 'https://www.datadoghq.com/blog/npm-windows-support/'
     tag: ブログ
     text: ネットワークパフォーマンスモニタリングで Windows ホストを監視する
+  - link: 'https://www.datadoghq.com/blog/cloud-service-autodetection-datadog/'
+    tag: ブログ
+    text: クラウドサービスの自動検出でクラウドエンドポイントの健全性を監視する
   - link: /network_monitoring/devices
-    tag: Documentation
+    tag: ドキュメント
     text: ネットワークデバイスモニタリング
 ---
 ## 概要

@@ -90,7 +90,7 @@ IoT Edge メトリクスの収集を開始するには、下記の手順で IoT 
 
 3. Datadog Agent を**カスタムモジュール**としてインストールし、構成します。
     - モジュール名を設定します。(例: `datadog-agent`)
-    - Agent のイメージ URI を設定します。(例: `datadog/agent:7`)
+    - Agent のイメージ URI を設定します。(例: `gcr.io/datadoghq/agent:7`)
     - "Environment Variables" で `DD_API_KEY` を構成します。ここで、追加の Agent コンフィギュレーションを設定することも可能です ([Agent の環境変数][6]参照)。
     - "Container Create Options" で、デバイスの OS に基づき以下のコンフィギュレーションを入力します。**注**: `NetworkId` は、デバイスの `config.yaml` ファイルに設定されたネットワーク名と一致する必要があります。
 
@@ -153,21 +153,21 @@ Agent がデバイスにデプロイされたら、[Agent の status サブコ�
 {{< get-metrics-from-git "azure_iot_edge" >}}
 
 
-### サービスのチェック
-
-**azure.iot_edge.edge_agent.prometheus.health**:<br>
-Agent が Edge Agent メトリクスの Prometheus エンドポイントに到達できない場合は `CRITICAL` を返します。それ以外の場合は、`OK` を返します。
-
-**azure.iot_edge.edge_hub.prometheus.health**:<br>
-Agent が Edge Hub メトリクスの Prometheus エンドポイントに到達できない場合は `CRITICAL` を返します。それ以外の場合は、`OK` を返します。
-
 ### イベント
 
 Azure IoT Edge には、イベントは含まれません。
 
+### サービスのチェック
+{{< get-service-checks-from-git "azure_iot_edge" >}}
+
+
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
+ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
+
+## その他の参考資料
+
+- [Datadog を使用した Azure IoT Edge の監視][11]
 
 [1]: https://azure.microsoft.com/en-us/services/iot-edge/
 [2]: https://docs.datadoghq.com/ja/agent/
@@ -177,4 +177,6 @@ Azure IoT Edge には、イベントは含まれません。
 [6]: https://docs.datadoghq.com/ja/agent/guide/environment-variables/
 [7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [8]: https://github.com/DataDog/integrations-core/blob/master/azure_iot_edge/metadata.csv
-[9]: https://docs.datadoghq.com/ja/help/
+[9]: https://github.com/DataDog/integrations-core/blob/master/azure_iot_edge/assets/service_checks.json
+[10]: https://docs.datadoghq.com/ja/help/
+[11]: https://www.datadoghq.com/blog/monitor-azure-iot-edge-with-datadog/

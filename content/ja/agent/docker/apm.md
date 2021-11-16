@@ -38,6 +38,7 @@ _任意のホスト_ からトレースを利用するには、`-p 8126:8126/tcp
 {{< tabs >}}
 {{% tab "Linux" %}}
 
+{{< site-region region="us" >}} 
 ```shell
 docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
               -v /proc/:/host/proc/:ro \
@@ -47,16 +48,42 @@ docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
               -e DD_APM_ENABLED=true \
               gcr.io/datadoghq/agent:latest
 ```
+{{< /site-region >}}
+{{< site-region region="us3,eu,gov" >}} 
+```shell
+docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
+              -v /proc/:/host/proc/:ro \
+              -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
+              -p 127.0.0.1:8126:8126/tcp \
+              -e DD_API_KEY=<DATADOG_API_KEY> \
+              -e DD_APM_ENABLED=true \
+              -e DD_SITE=<DATADOG_SITE> \
+              gcr.io/datadoghq/agent:latest
+```
+`<DATADOG_SITE>` が {{< region-param key="dd_site" code="true" >}} である場所: Agent が正しい Datadog の場所にデータを送信。
+{{< /site-region >}}
 
 {{% /tab %}}
 {{% tab "Windows" %}}
 
+{{< site-region region="us" >}} 
 ```shell
 docker run -d -p 127.0.0.1:8126:8126/tcp \
               -e DD_API_KEY=<DATADOG_API_KEY> \
               -e DD_APM_ENABLED=true \
               gcr.io/datadoghq/agent:latest
 ```
+{{< /site-region >}}
+{{< site-region region="us3,eu,gov" >}} 
+```shell
+docker run -d -p 127.0.0.1:8126:8126/tcp \
+              -e DD_API_KEY=<DATADOG_API_KEY> \
+              -e DD_APM_ENABLED=true \
+              -e DD_SITE=<DATADOG_SITE> \
+              gcr.io/datadoghq/agent:latest
+```
+`<DATADOG_SITE>` が {{< region-param key="dd_site" code="true" >}} である場所: Agent が正しい Datadog の場所にデータを送信。
+{{< /site-region >}}
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -101,8 +128,8 @@ docker network create <NETWORK_NAME>
 次に、先ほど作成したネットワークに接続されている Agent とアプリケーションコンテナを起動します。
 
 {{< tabs >}}
-{{% tab "標準" %}}
-
+{{% tab "Standard" %}}
+{{< site-region region="us" >}} 
 ```bash
 # Datadog Agent
 docker run -d --name datadog-agent \
@@ -114,16 +141,39 @@ docker run -d --name datadog-agent \
               -e DD_APM_ENABLED=true \
               -e DD_APM_NON_LOCAL_TRAFFIC=true \
               gcr.io/datadoghq/agent:latest
+# アプリケーション
+docker run -d --name app \
+              --network <NETWORK_NAME> \
+              -e DD_AGENT_HOST=datadog-agent \
+              company/app:latest
+```
+{{< /site-region >}}
+{{< site-region region="us3,eu,gov" >}}
 
-# Application
+```bash
+# Datadog Agent
+docker run -d --name datadog-agent \
+              --network <NETWORK_NAME> \
+              -v /var/run/docker.sock:/var/run/docker.sock:ro \
+              -v /proc/:/host/proc/:ro \
+              -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
+              -e DD_API_KEY=<DATADOG_API_KEY> \
+              -e DD_APM_ENABLED=true \
+              -e DD_SITE=<DATADOG_SITE> \
+              -e DD_APM_NON_LOCAL_TRAFFIC=true \
+              gcr.io/datadoghq/agent:latest
+# アプリケーション
 docker run -d --name app \
               --network <NETWORK_NAME> \
               -e DD_AGENT_HOST=datadog-agent \
               company/app:latest
 ```
 
+`<DATADOG_SITE>` が {{< region-param key="dd_site" code="true" >}} である場所: Agent が正しい Datadog の場所にデータを送信。
+{{< /site-region >}}
 {{% /tab %}}
 {{% tab "Windows" %}}
+{{< site-region region="us" >}} 
 
 ```bash
 # Datadog Agent
@@ -133,14 +183,32 @@ docker run -d --name datadog-agent \
               -e DD_APM_ENABLED=true \
               -e DD_APM_NON_LOCAL_TRAFFIC=true \
               gcr.io/datadoghq/agent:latest
-
-# Application
+# アプリケーション
 docker run -d --name app \
               --network "<NETWORK_NAME>" \
               -e DD_AGENT_HOST=datadog-agent \
               company/app:latest
 ```
+{{< /site-region >}}
+{{< site-region region="us3,eu,gov" >}} 
+```bash
+# Datadog Agent
+docker run -d --name datadog-agent \
+              --network "<NETWORK_NAME>" \
+              -e DD_API_KEY=<DATADOG_API_KEY> \
+              -e DD_APM_ENABLED=true \
+              -e DD_SITE=<DATADOG_SITE> \
+              -e DD_APM_NON_LOCAL_TRAFFIC=true \
+              gcr.io/datadoghq/agent:latest
+# アプリケーション
+docker run -d --name app \
+              --network "<NETWORK_NAME>" \
+              -e DD_AGENT_HOST=datadog-agent \
+              company/app:latest
+```
+`<DATADOG_SITE>` が {{< region-param key="dd_site" code="true" >}} である場所: Agent が正しい Datadog の場所にデータを送信。
 
+{{< /site-region >}}
 {{% /tab %}}
 {{< /tabs >}}
 

@@ -5,13 +5,13 @@ further_reading:
   - link: /agent/amazon_ecs/apm/
     tag: Documentation
     text: アプリケーショントレースの収集
-  - link: '/agent/amazon_ecs/data_collected/#metrics'
+  - link: /agent/amazon_ecs/data_collected/#metrics
     tag: Documentation
     text: ECS リソースの収集
 ---
 ## 概要
 
-Datadog Agent 6 以降は、コンテナからログを収集します。ECS コンテナからログを収集するための推奨される方法は、`datadog-agent-ecs.json` または `datadog-agent-ecs1.json` ファイル内でコンテナ化されたログを有効にすることです。ただし、アプリケーションが任意の容量のファイルにログ (`stdout`/`stderr` に書き込まれないログ) を出力する場合は、[ホストに Datadog Agent をデプロイ](#custom-log-collection)し、カスタムログ収集を使用してファイルを調整する必要があります。
+Datadog Agent 6 以降は、コンテナからログを収集します。ECS コンテナからログを収集するための推奨される方法は、`datadog-agent-ecs.json` または `datadog-agent-ecs1.json` ファイル内でコンテナ化されたログを有効にすることです。ただし、アプリケーションが任意の容量のファイルにログ (`stdout`/`stderr` に書き込まれないログ) を出力する場合は、[オートディスカバリー][2]を[コンテナラベル](#container-label)とともに使用するか (Agent v7.25.0+/6.25.0+ で使用可能)、[ホストに Datadog Agent をデプロイ](#custom-log-collection)し、カスタムログ収集を使用してファイルを調整する必要があります。
 
 ## インストール
 
@@ -36,6 +36,11 @@ ECS コンテナ内で実行中のアプリケーションにより書き込ま�
               "sourceVolume": "pointdir",
               "readOnly": false
             },
+            {
+              "containerPath": "/var/lib/docker/containers",
+              "sourceVolume": "containers_root",
+              "readOnly": true
+            },
             (...)
           ],
           "environment": [
@@ -46,6 +51,10 @@ ECS コンテナ内で実行中のアプリケーションにより書き込ま�
             },
             {
               "name": "DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL",
+              "value": "true"
+            },
+            {
+              "name": "DD_LOGS_CONFIG_DOCKER_CONTAINER_USE_FILE",
               "value": "true"
             },
             (...)
@@ -59,6 +68,12 @@ ECS コンテナ内で実行中のアプリケーションにより書き込ま�
             "sourcePath": "/opt/datadog-agent/run"
           },
           "name": "pointdir"
+        },
+        {
+          "host": {
+            "sourcePath": "/var/lib/docker/containers/"
+          },
+          "name": "containers_root"
         },
         (...)
       ],
@@ -82,6 +97,20 @@ ECS コンテナ内で実行中のアプリケーションにより書き込ま�
     {
       "containerDefinitions": [
         (...)
+          "mountPoints": [
+            (...)
+            {
+              "containerPath": "/opt/datadog-agent/run",
+              "sourceVolume": "pointdir",
+              "readOnly": false
+            },
+            {
+              "containerPath": "c:/programdata/docker/containers",
+              "sourceVolume": "containers_root",
+              "readOnly": true
+            },
+            (...)
+          ],
           "environment": [
             (...)
             {
@@ -92,10 +121,24 @@ ECS コンテナ内で実行中のアプリケーションにより書き込ま�
               "name": "DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL",
               "value": "true"
             },
+            {
+              "name": "DD_LOGS_CONFIG_DOCKER_CONTAINER_USE_FILE",
+              "value": "true"
+            },
             (...)
           ]
         }
       ],
+      "volumes": [
+        (...)
+        {
+          "host": {
+            "sourcePath": "c:/programdata/docker/containers"
+          },
+          "name": "containers_root"
+        },
+        (...)
+      ]
       "family": "datadog-agent-task"
     }
     ```
@@ -108,13 +151,15 @@ ECS コンテナ内で実行中のアプリケーションにより書き込ま�
 {{% /tab %}}
 {{< /tabs >}}
 
+**注:** `DD_LOGS_CONFIG_DOCKER_CONTAINER_USE_FILE` には、Datadog Agent v6.27.0/7.27.0 が必要です。これ以前のバージョンでは、このオプションは暗黙に無視されます。
+
 ### カスタムログ収集
 
 #### 構成ファイル
 
 コンテナがログをファイルに書き込む場合は、[カスタムログ収集のドキュメント][1]に従って、ログのファイルを調整します。
 
-`<PATH_LOG_FILE>/<LOG_FILE_NAME>.log` に保存されているログを `<APP_NAME>` アプリケーションから収集するには、[Agent のコンフィギュレーションディレクトリ][2]のルートに以下の内容の `<APP_NAME>.d/conf.yaml` ファイルを作成します。
+`<PATH_LOG_FILE>/<LOG_FILE_NAME>.log` に保存されているログを `<APP_NAME>` アプリケーションから収集するには、[Agent のコンフィギュレーションディレクトリ][6]のルートに以下の内容の `<APP_NAME>.d/conf.yaml` ファイルを作成します。
 
 ```yaml
 logs:
@@ -130,7 +175,7 @@ logs:
 
 Agent v7.25.0+/6.25.0+ では、コンテナラベルを使用してファイルの追跡を有効化することができます。こうすることで、ラベルが送信されたコンテナのタグを収集対象のログで受け取ることができます。使用すべき正確なラベルの詳細は、この[例][4]を参照してください。 
 
-**注**: ファイルパスは常に Agent との相対パスになります。ファイルに書き込みを行うコンテナと Agent コンテナ間でディレクトリを共有するために、関連する ECS タスクでの追加コンフィギュレーションが必要です。ECS でのボリュームマネジメントの詳細については、[AWS ドキュメント][5]を参照してください。
+**注**: ファイルパスは常に Agent との相対パスになります。ファイルに書き込みを行うコンテナと Agent コンテナ間でディレクトリを共有するために、関連する ECS タスクでの追加コンフィギュレーションが必要です。ECS でのボリュームマネジメントの詳細については、[AWS Bind マウントのドキュメント][5]を参照してください。
 
 ## ログのインテグレーションを有効にする
 
@@ -141,7 +186,8 @@ Agent v7.25.0+/6.25.0+ では、コンテナラベルを使用してファイル
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/agent/logs/?tab=tailfiles#custom-log-collection
-[2]: /ja/agent/logs/#custom-log-collection
+[2]: /ja/agent/docker/log/?tab=containerinstallation#log-integrations
 [3]: /ja/getting_started/tagging/assigning_tags/?tab=noncontainerizedenvironments#methods-for-assigning-tags
 [4]: /ja/agent/docker/log/?tab=logcollectionfromfile#examples
 [5]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/bind-mounts.html
+[6]: /ja/agent/logs/#custom-log-collection

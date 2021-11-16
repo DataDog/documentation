@@ -16,7 +16,7 @@ categories:
 creates_events: true
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/tokumx/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/tokumx/README.md
 display_name: TokuMX
 draft: false
 git_integration_title: tokumx
@@ -148,9 +148,8 @@ MongoDB でのユーザーの作成と管理の詳細については、[MongoDB 
 このチェックは、TokuMX ノードでレプリケーション状態が変化するたびにイベントを送信します。
 
 ### サービスのチェック
+{{< get-service-checks-from-git "tokumx" >}}
 
-**tokumx.can_connect**:<br>
-Agent が TokuMX に接続してメトリクスを収集できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
 
 ## トラブルシューティング
 

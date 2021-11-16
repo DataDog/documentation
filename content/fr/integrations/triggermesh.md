@@ -22,6 +22,7 @@
 "guid": "1107b2a5-31e9-4247-b159-fb929f79f607"
 "integration_id": "triggermesh-oci"
 "integration_title": "TriggerMesh"
+"integration_version": ""
 "is_public": true
 "kind": "integration"
 "maintainer": "support@triggermesh.com"
@@ -68,7 +69,7 @@ Cliquez sur le lien ci-dessous pour accéder à la liste complète des métrique
 
 ## Assistance
 
-Si vous avez des questions concernant l'intégration Datadog/TriggerMesh pour OCI, veuillez envoyer un e-mail à l'adresse [info@triggermesh.com](mailto:info@triggermesh.com) ou créer un problème dans ce référentiel GitHub.
+Si vous avez des questions concernant l'intégration Datadog/TriggerMesh pour OCI, veuillez envoyer un e-mail à l'adresse [info@triggermesh.com](mailto:info@triggermesh.com).
 
 Si vous souhaitez planifier une démonstration pour un déploiement sur site, veuillez envoyer un e-mail à l'adresse [sales@triggermesh.com](mailto:sales@triggermesh.com).
 

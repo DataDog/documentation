@@ -5,11 +5,13 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Azure Cosmos DB のキーメトリクスを追跡
-doc_link: 'https://docs.datadoghq.com/integrations/azure_cosmosdb/'
+doc_link: https://docs.datadoghq.com/integrations/azure_cosmosdb/
 draft: false
 git_integration_title: azure_cosmosdb
 has_logo: true
+integration_id: azure-cosmosdb
 integration_title: Microsoft Azure Cosmos DB
+integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'
@@ -28,7 +30,7 @@ Datadog Azure インテグレーションを使用して、Cosmos DB からメ�
 
 ### インストール
 
-[Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。これ以外のインストール手順はありません。
+[Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
 
 ## 収集データ
 

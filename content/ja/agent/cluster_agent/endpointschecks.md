@@ -12,7 +12,7 @@ further_reading:
     tag: ドキュメント
     text: Cluster Agent のドキュメント
 ---
-## オートディスカバリーの動作
+## 概要
 
 クラスターチェックは、負荷分散型のクラスターサービス（Kubernetes サービスなど）でオートディスカバリーを行い、チェックを実行する働きを持ちます。
 
@@ -118,7 +118,7 @@ DD_EXTRA_CONFIG_PROVIDERS="endpointschecks clusterchecks"
 
 [Agent を再起動][5]して、コンフィギュレーションへの変更を適用します。
 
-## Kubernetes サービスのアノテーションによるチェックコンフィギュレーションの設定
+## Kubernetes サービスのアノテーションでチェックコンフィギュレーションを設定
 
 [Kubernetes ポッドへのアノテーション][6]と同様に、次の構文でサービスにアノテーションを追加できます。
 

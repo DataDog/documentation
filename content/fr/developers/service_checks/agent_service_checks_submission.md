@@ -38,13 +38,13 @@ Voici un exemple de check d'Agent test qui envoie un seul check de service régu
 4. Dans ce dossier, créez un fichier de check custom `service_check_example.py` avec le contenu ci-dessous :
 
     {{< code-block lang="python" filename="service_check_example.py" >}}
-    from datadog_checks.base import AgentCheck
+from datadog_checks.base import AgentCheck
 
-    __version__ = "1.0.0"
+__version__ = "1.0.0"
 
-    class MyClass(AgentCheck):
-      def check(self, instance):
-          self.service_check('example_service_check', 0, message='Example application is up and running.')
+class MyClass(AgentCheck):
+    def check(self, instance):
+        self.service_check('example_service_check', 0, message='Example application is up and running.')
     {{< /code-block >}}
 
 5. [Redémarrez l'Agent][3].

@@ -14,6 +14,7 @@ further_reading:
     text: Intégrez Akamai à Datadog pour surveiller les performances de vos CDN
 git_integration_title: akamai_datastream
 has_logo: true
+integration_id: ''
 integration_title: "Akamai\_DataStream"
 is_public: true
 kind: integration
@@ -58,7 +59,7 @@ Akamai DataStream 1.0 et 2.0 prennent en charge l'envoi de logs à Datadog via 
 
 1. **Name** : saisissez une description lisible de l'endpoint.
 
-2. **Endpoint** : saisissez l'endpoint Datadog pour l'envoi et le stockage des logs : `https://http-intake.logs.datadoghq.com/v1/input`.
+2. **Endpoint** : saisissez l'endpoint Datadog pour l'envoi et le stockage des logs : `{{< region-param key="http_endpoint" code="true" >}}/v1/input`.
 
 3. **Tags** (facultatif) : saisissez une liste de tags séparés par des virgules, par exemple `env:staging,team:web`, pour filtrer et regrouper vos logs dans Datadog.
 

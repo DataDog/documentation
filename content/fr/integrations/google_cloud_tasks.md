@@ -10,6 +10,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/google_cloud_tasks/'
 draft: false
 git_integration_title: google_cloud_tasks
 has_logo: true
+integration_id: google-cloud-tasks
 integration_title: "Google\_Cloud\_Tasks"
 is_public: true
 kind: integration
@@ -25,7 +26,7 @@ Google Cloud Tasks est un service entièrement géré qui vous permet d'admini
 
 Utilisez l'intégration Datadog/Google Cloud Platform pour recueillir des métriques de Google Cloud Tasks.
 
-## Implémentation
+## Configuration
 
 ### Installation
 

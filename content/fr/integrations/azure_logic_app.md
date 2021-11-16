@@ -11,6 +11,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/azure_logic_app/'
 draft: false
 git_integration_title: azure_logic_app
 has_logo: true
+integration_id: azure-logic-app
 integration_title: Microsoft Azure Logic App
 is_public: true
 kind: integration

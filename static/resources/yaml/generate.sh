@@ -16,19 +16,12 @@ helm repo update
 TMPDIR=$(mktemp -d)
 trap 'rm -r $TMPDIR' EXIT
 
-cat > "$TMPDIR/cleanup_instructions.yaml" <<EOF
-- command: delete
-  path: metadata.labels."helm.sh/chart"
-- command: delete
-  path: metadata.labels."app.kubernetes.io/*"
-- command: delete
-  path: spec.template.metadata.annotations.checksum/*
-EOF
+CLEANUP_INSTRUCTIONS='del(.metadata.labels."helm.sh/chart") | del(.metadata.labels."app.kubernetes.io/*") | del(.spec.template.metadata.labels."helm.sh/chart") | del(.spec.template.metadata.labels."app.kubernetes.io/*") | del(.metadata.annotations.checksum/*) | del(.spec.template.metadata.annotations.checksum/*)'
 
 for values in *_values.yaml; do
     type=${values%%_values.yaml}
     helm template --namespace default datadog-agent "${HELM_DATADOG_CHART:-datadog/datadog}" --values "$values" \
-        | yq write -d'*' --script "$TMPDIR/cleanup_instructions.yaml" - \
+        | yq eval $CLEANUP_INSTRUCTIONS - \
         | sed -E 's/(api-key: )".*"/\1PUT_YOUR_BASE64_ENCODED_API_KEY_HERE/;
                   s/(token: ).*/\1PUT_A_BASE64_ENCODED_RANDOM_STRING_HERE/;
                   s/((tool|tool_version|installer_version): ).*/\1kubernetes sample manifests/;

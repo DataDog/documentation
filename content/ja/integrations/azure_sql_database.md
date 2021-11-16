@@ -11,6 +11,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/azure_sql_database/'
 draft: false
 git_integration_title: azure_sql_database
 has_logo: true
+integration_id: azure-sql-database
 integration_title: Microsoft Azure SQL Database
 is_public: true
 kind: インテグレーション

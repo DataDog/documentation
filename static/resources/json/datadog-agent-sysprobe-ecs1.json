@@ -17,7 +17,7 @@
         }
       ],
       "essential": true,
-      "image": "datadog/agent:latest",
+      "image": "public.ecr.aws/datadog/agent:latest",
       "linuxParameters": {
         "capabilities": {
           "add": [

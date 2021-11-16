@@ -68,6 +68,17 @@ PgBouncer チェックは [Datadog Agent][1] パッケージに含まれてい�
    "datadog" "<PASSWORD>"
    ```
 
+3. 認証情報を確認するには、次のコマンドを実行します。
+
+   ```shell
+   psql -h localhost -U datadog -p 6432 pgbouncer -c \
+   "SHOW VERSION;" \
+   && echo -e "\e[0;32mpgBouncer connection - OK\e[0m" \
+   || echo -e "\e[0;31mCannot connect to pgBouncer\e[0m"
+   ```
+
+   パスワードの入力を要求されたら、`userlist.txt` に追加したパスワードを入力します。
+
 ### コンフィギュレーション
 
 {{< tabs >}}
@@ -86,12 +97,12 @@ PgBouncer チェックは [Datadog Agent][1] パッケージに含まれてい�
 
    instances:
      ## @param database_url - string - required
-     ## `database_url` parameter should point to PgBouncer stats database url
+     ## `database_url` parameter should point to PgBouncer stats database url (ie. "pgbouncer")
      #
      - database_url: "postgresql://datadog:<PASSWORD>@<HOSTNAME>:<PORT>/<DATABASE_URL>?sslmode=require"
    ```
 
-  **注**: PgBouncer のインスタンスに SSL サポートがない場合は、`sslmode=require` を `sslmode=allow` と置換してサーバーエラーを防ぎます。SSL サポートに関する詳細は、[Postgres ドキュメント][3]を参照してください。
+   **注**: PgBouncer のインスタンスに SSL サポートがない場合は、`sslmode=require` を `sslmode=allow` と置換してサーバーエラーを防ぎます。SSL サポートに関する詳細は、[Postgres ドキュメント][3]を参照してください。
 
 2. [Agent を再起動します][4]。
 
@@ -115,7 +126,7 @@ _Agent バージョン 6.0 以降で利用可能_
        service: "<SERVICE_NAME>"
    ```
 
-    `path` パラメーターと `service` パラメーターの値を変更し、環境に合わせて構成してください。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル pgbouncer.d/conf.yaml][2] を参照してください。
+   `path` パラメーターと `service` パラメーターの値を変更し、環境に合わせて構成してください。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル pgbouncer.d/conf.yaml][2] を参照してください。
 
 3. [Agent を再起動します][5]。
 
@@ -135,7 +146,7 @@ _Agent バージョン 6.0 以降で利用可能_
 
 | パラメーター            | 値                                                                                                  |
 | -------------------- | ------------------------------------------------------------------------------------------------------ |
-| `<インテグレーション名>` | `pgbouncer`                                                                                               |
+| `<インテグレーション名>` | `pgbouncer`                                                                                            |
 | `<初期コンフィギュレーション>`      | 空白または `{}`                                                                                          |
 | `<インスタンスコンフィギュレーション>`  | `{"database_url": "postgresql://datadog:<パスワード>@%%host%%:%%port%%/<データベース_URL>?sslmode=require"}` |
 

@@ -59,9 +59,7 @@ Agent v6.8 以降を使用している場合は、以下の手順に従って、
 
 3. [他のパッケージ化されたインテグレーション][7]と同様にインテグレーションを構成します。
 
-
-#### APCu のセットアップ
-
+#### APCu
 
 APCu はデフォルトでメトリクスを公開しないため、このインテグレーションには、次の場所にあるメトリクスエクスポーターが含まれます。
 
@@ -100,17 +98,18 @@ Alias /apcu-status /opt/datadog-agent/embedded/lib/python3.8/site-packages/datad
 {{< get-metrics-from-git "php_apcu" >}}
 
 
-### サービスのチェック
-
-`php_apcu` には、サービスのチェック機能は含まれません。
-
 ### イベント
 
-`php_apcu` には、イベントは含まれません。
+PHP APCu インテグレーションには、イベントは含まれません。
+
+### サービスのチェック
+{{< get-service-checks-from-git "php_apcu" >}}
+
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][12]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][13]までお問合せください。
+
 
 [1]: https://www.php.net/manual/en/book.apcu.php
 [2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
@@ -123,4 +122,5 @@ Alias /apcu-status /opt/datadog-agent/embedded/lib/python3.8/site-packages/datad
 [9]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [10]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [11]: https://github.com/DataDog/integrations-extras/blob/master/php_apcu/metadata.csv
-[12]: https://docs.datadoghq.com/ja/help/
+[12]: https://github.com/DataDog/integrations-extras/blob/master/php_apcu/assets/service_checks.json
+[13]: https://docs.datadoghq.com/ja/help/

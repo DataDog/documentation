@@ -96,7 +96,7 @@ hostname: mamachine.mondomaine
 [1]: /fr/getting_started/integrations/
 [2]: /fr/agent/guide/agent-configuration-files/
 [3]: /fr/getting_started/tagging/#defining-tags
-[4]: /fr/developers/metrics/dogstatsd_metrics_submission/#host-tag-key
+[4]: /fr/metrics/dogstatsd_metrics_submission/#host-tag-key
 [5]: /fr/dashboards/querying/#arithmetic-between-two-metrics
 {{% /tab %}}
 {{% tab "Agent v5" %}}
@@ -138,7 +138,7 @@ hostname: mamachine.mondomaine
 [1]: /fr/getting_started/integrations/
 [2]: /fr/agent/guide/agent-configuration-files/
 [3]: /fr/getting_started/tagging/#defining-tags
-[4]: /fr/developers/metrics/dogstatsd_metrics_submission/#host-tag-key
+[4]: /fr/metrics/dogstatsd_metrics_submission/#host-tag-key
 [5]: /fr/dashboards/querying/#arithmetic-between-two-metrics
 {{% /tab %}}
 {{< /tabs >}}
@@ -217,7 +217,7 @@ services:
       - DD_API_KEY= "<CLÉ_API_DATADOG>"
       - DD_DOCKER_LABELS_AS_TAGS={"my.custom.label.project":"projecttag","my.custom.label.version":"versiontag"}
       - DD_TAGS="key1:value1 key2:value2 key3:value3"
-    image: 'datadog/agent:latest'
+    image: 'gcr.io/datadoghq/agent:latest'
     deploy:
       restart_policy:
         condition: on-failure
@@ -298,7 +298,7 @@ Créez des agrégations par centile dans les [métriques de distribution][1] en 
 {{< img src="tagging/assigning_tags/global_metrics_selection.png" alt="Tags création de monitor"  style="width:80%;">}}
 
 [1]: /fr/metrics/distributions/
-[2]: /fr/developers/metrics/custom_metrics/
+[2]: /fr/metrics/custom_metrics/
 {{% /tab %}}
 {{% tab "Intégrations" %}}
 
@@ -341,7 +341,7 @@ Les tags peuvent être assignés de diverses façons avec l'[API Datadog][1]. Cl
 [6]: /fr/api/v1/monitors/#edit-a-monitor
 [7]: /fr/api/v1/tags/#add-tags-to-a-host
 [8]: /fr/api/v1/tags/#update-host-tags
-[9]: /fr/api/v1/tracing/
+[9]: /fr/tracing/guide/send_traces_to_agent_by_api/
 [10]: /fr/api/v1/service-level-objectives/#create-a-slo-object
 [11]: /fr/api/v1/service-level-objectives/#update-a-slo
 {{% /tab %}}
@@ -407,5 +407,5 @@ Des précautions particulières doivent être prises pour l'assignation du tag `
 [6]: /fr/agent/docker/?tab=standard#tagging
 [7]: /fr/tracing/setup/
 [8]: /fr/developers/dogstatsd/
-[9]: /fr/developers/libraries/
-[10]: /fr/developers/metrics/dogstatsd_metrics_submission/#host-tag-key
+[9]: /fr/developers/community/libraries/
+[10]: /fr/metrics/dogstatsd_metrics_submission/#host-tag-key

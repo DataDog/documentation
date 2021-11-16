@@ -2,14 +2,18 @@
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
-  dashboards: {}
+  dashboards:
+    couchbase: assets/dashboards/couchbase_dashboard.json
   logs: {}
   metrics_metadata: metadata.csv
   monitors: {}
+  saved_views:
+    couchbase_processes: assets/saved_views/couchbase_processes.json
   service_checks: assets/service_checks.json
 categories:
   - data store
   - autodiscovery
+  - log collection
 creates_events: false
 ddtype: check
 dependencies:
@@ -119,17 +123,8 @@ Couchbase チェックは [Datadog Agent][2] パッケージに含まれてい�
 Couchbase チェックは、クラスターのバランスが再調整されるたびに Datadog にイベントを送信します。
 
 ### サービスのチェック
+{{< get-service-checks-from-git "couchbase" >}}
 
-**couchbase.can_connect**:<br>
-Agent が Couchbase に接続してメトリクスを収集できない場合は、`Critical` を返します。
-
-**couchbase.by_node.cluster_membership**:<br>
-ノードがフェイルオーバーした場合は、`Critical` を返します。
-ノードがクラスターに追加され、バランスの再調整を待っている場合は、`Warning` を返します。
-それ以外の場合は、`OK` を返します。
-
-**couchbase.by_node.health**:<br>
-ノードが正常でない場合は、`Critical` を返します。それ以外の場合は、`OK` を返します。
 
 ## トラブルシューティング
 

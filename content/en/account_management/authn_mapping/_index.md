@@ -14,7 +14,7 @@ If you are using Federated Authentication mechanisms, this API allows you to aut
 
 **Note**: If you are a SAML user, and you have been using the existing beta Federated Mapping mechanism (`roles_v2_saml`), Datadog strongly recommends that you transition to using this API.
 
-You can also create and manage mappings in the Datadog app UI, on the **Mappings** tab in User Management. See [Mapping SAML attributes to Datadog roles][1] for more information.
+You can also create and manage mappings in the Datadog UI, on the **Mappings** tab in User Management. See [Mapping SAML attributes to Datadog roles][1] for more information.
 
 ## Requests
 
@@ -544,7 +544,7 @@ curl -X GET \
 ### Enable or disable all mappings
 
 <div class="alert alert-warning">
-When enabled all users logging in with SAML will be stripped of any roles they have currently and reassigned roles based on the values in their SAML Assertion. It's important that you confirm you are receiving the expected SAML Assertions in your login before enabling the Mapping enforcement.
+When mappings are enabled, all users logging in with SAML are stripped of their roles and reassigned roles based on the values in their SAML assertion. It's important to confirm you are receiving the expected SAML assertions in your login before enabling the mapping enforcement.
 </div>
 
 Enables/disables the enforcement of all AuthN Mappings.

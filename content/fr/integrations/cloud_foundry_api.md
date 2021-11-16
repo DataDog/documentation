@@ -26,7 +26,7 @@ kind: integration
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: api_cloud_foundry.
-metric_to_check: ''
+metric_to_check: cloud_foundry_api.events.count
 name: api_cloud_foundry
 public_title: "Intégration Datadog/API Cloud\_Foundry"
 short_description: "Collectez les événements d'audit Cloud\_Foundry."

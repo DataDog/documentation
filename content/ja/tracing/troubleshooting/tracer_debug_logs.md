@@ -2,7 +2,7 @@
 title: トレーサーデバッグログ
 kind: Documentation
 ---
-### トレーサーデバッグモードを有効にする
+## デバッグモードを有効にする
 
 Datadog デバッグ設定を使用して、問題を診断したり、トレースデータを監査したりできます。ロガーに送信されるイベントの数が増えるため、実稼働システムでデバッグモードを有効にすることはお勧めできません。デバッグ目的でのみ慎重に使用してください。
 
@@ -19,8 +19,8 @@ Datadog Java トレーサーのデバッグモードを有効にするには、J
 -Ddatadog.slf4j.simpleLogger.logFile=<NEW_LOG_FILE_PATH>`
 ```
 
-[1]: https://www.slf4j.org/api/org/slf4j/impl/SimpleLogger.html
 
+[1]: https://www.slf4j.org/api/org/slf4j/impl/SimpleLogger.html
 {{< /programming-lang >}}
 
 {{< programming-lang lang="python" >}}
@@ -40,7 +40,7 @@ Datadog.configure do |c|
 end
 ```
 
-**アプリケーションログ**:
+**アプリケーションログ**
 
 デフォルトでは、デフォルトの Ruby ロガーによってすべてのログが処理されます。Rails を使用している場合は、アプリケーションログファイルにメッセージが表示されます。
 
@@ -59,8 +59,8 @@ Datadog::Tracer.log.info { &quot;this is typically called by tracing code&quot; 
 
 詳細については、[API に関するドキュメント][1]を参照してください。
 
-[1]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#custom-logging
 
+[1]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#custom-logging
 {{< /programming-lang >}}
 
 {{< programming-lang lang="go" >}}
@@ -90,7 +90,7 @@ const tracer = require('dd-trace').init({
 })
 ```
 
-**アプリケーションログ**:
+**アプリケーションログ**
 
 デフォルトでは、このライブラリからのログは無効です。ログに送信するデバッグ情報やエラーを取得するには、[init()][1] メソッドで `debug` オプションを `true` に設定します。
 
@@ -124,12 +124,12 @@ const tracer = require('dd-trace').init({
 
 トレーサー設定の詳細については、[API ドキュメント][5] を参照してください。
 
+
 [1]: https://datadog.github.io/dd-trace-js/Tracer.html#init
 [2]: /ja/agent/troubleshooting/
 [3]: /ja/help/
 [4]: /ja/agent/troubleshooting/#send-a-flare
 [5]: https://datadog.github.io/dd-trace-js/#tracer-settings
-
 {{< /programming-lang >}}
 
 {{< programming-lang lang=".NET" >}}
@@ -156,12 +156,12 @@ GlobalSettings.SetDebugEnabled(true);
 .NET Tracer の構成方法の詳細については、[構成][1]セクションを参照してください。
 
 これらのパスで作成されるログには、次の 2 つのタイプがあります。
-1. **ネイティブコードからのログ:** 1.21.0 以降では、これらのログは `dotnet-tracer-native.log` として保存されます。1.20.x 以前のバージョンでは、これは `dotnet-profiler.log` として保存されていました。
+1. **ネイティブコードからのログ:** 1.26.0 以降では、これらのログは `dotnet-tracer-native-<processname>-<processid>.log` として保存されます。バージョン 1.21.0〜1.25.x では、これらのログは `dotnet-tracer-native.log` として保存されていました。1.20.x 以前のバージョンでは、これは `dotnet-profiler.log` として保存されていました。
 2. **マネージコードからのログ:** 1.21.0 以降では、これらのログは `dotnet-tracer-managed-<processname>-<date>.log` に保存されます。1.20.x 以前のバージョンでは、これは `dotnet-tracer-<processname>-<date>.log` として保存されていました。
 
 
-[1]: /ja/tracing/setup/dotnet/#configuration
 
+[1]: /ja/tracing/setup/dotnet/#configuration
 {{< /programming-lang >}}
 
 {{< programming-lang lang="php" >}}
@@ -174,8 +174,8 @@ GlobalSettings.SetDebugEnabled(true);
 <mrk mid="82" mtype="seg">NGINX サーバーを使用している場合は、`error_log` ディレクティブを使用します。</mrk>
 <mrk mid="83" mtype="seg">PHP レベルで構成する場合は、PHP の `error_log` 初期化パラメーターを使用します。</mrk>
 
-[1]: https://www.php-fig.org/psr/psr-3
 
+[1]: https://www.php-fig.org/psr/psr-3
 {{< /programming-lang >}}
 
 {{< programming-lang lang="cpp" >}}
@@ -193,7 +193,7 @@ make install
 
 {{< /programming-lang-wrapper >}}
 
-### トレーサーデバッグログのレビュー
+## デバッグログを確認する
 
 トレーサーのデバッグモードが有効になっている場合、トレーサー固有のログメッセージはトレーサーの初期化方法およびトレーサーが Agent に送信されたかを報告します。**このログは、フレアでは Datadog Agent に送信できません。また、ロギングコンフィギュレーションによっては別のパスに保存されます**。以下は、ご使用のログファイルに表示されるログの例になります。
 
@@ -349,7 +349,6 @@ YYYY/MM/DD 16:06:35 Datadog Tracer <バージョン> DEBUG: Sending payload: siz
 {{< /programming-lang >}}
 
 {{< programming-lang lang=".NET" >}}
-
 
 **ネイティブコードからのログ:**
 

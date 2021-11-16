@@ -23,7 +23,7 @@ Choose a name for your group by using the cog icon in the upper right corner of 
 
 ## API
 
-This widget can be used with the **Dashboards API**. Refer to the [Dashboards API][2] documentation for additional reference.
+This widget can be used with the **Dashboards API**. See the [Dashboards API documentation][2] for additional reference.
 
 The dedicated [widget JSON schema definition][3] for the change widget is:
 

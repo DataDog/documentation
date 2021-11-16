@@ -8,10 +8,10 @@ further_reading:
   - link: /tracing/setup/
     tag: Documentation
     text: アプリケーションで APM トレースをセットアップする方法
-  - link: 'https://www.datadoghq.com/blog/service-map/'
+  - link: https://www.datadoghq.com/blog/service-map/
     tag: ブログ
     text: Datadog のサービスマップの紹介
-  - link: 'https://www.datadoghq.com/videos/dash-keynote-creating-context-with-service-maps/'
+  - link: https://www.datadoghq.com/videos/dash-keynote-creating-context-with-service-maps/
     tag: ブログ
     text: サービスマップ（Datadog + Airbnb）を使用してコンテキストを作成
 ---
@@ -21,7 +21,7 @@ further_reading:
 
 ## セットアップ
 
-サービスマップには、Datadog APM により収集されたデータが視覚的に表示されます。[サービス][1]を表示するためにセットアップをする必要はありません。
+サービスマップには、Datadog APM および RUM により収集されたデータが視覚的に表示されます。[サービス][1]を表示するためにセットアップをする必要はありません。
 
 ## 使い方
 

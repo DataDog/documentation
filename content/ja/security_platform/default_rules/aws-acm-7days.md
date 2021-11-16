@@ -5,13 +5,14 @@ aliases:
   - /ja/security_monitoring/default_rules/aws-acm-7days
 cloud: AWS
 disable_edit: true
+integration_id: amazon-acm
 kind: documentation
 rule_category:
   - クラウドコンフィギュレーション
 scope: acm
 security: コンプライアンス
 source: acm
-title: ACM 証明書は 7 日以内に期限が切れます
+title: ACM 証明書は 7 日以上で期限切れになります
 type: security_rules
 ---
 ## 説明

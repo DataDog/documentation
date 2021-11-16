@@ -139,7 +139,7 @@ Agent がクラスターで実行されており、JMX メトリクスを収集�
     | [confluent_platform][7] | [metrics.yaml][8]  | [conf.yaml.example][9] |
     | [hive][10]              | [metrics.yaml][11] | [conf.yaml.example][12] |
     | [jboss_wildfly][13]     | [metrics.yaml][14] | [conf.yaml.example][15] |
-    | [kafka][16]             | [metrics.yaml][17] | [conf.yaml.example][18] |
+    | [kafka][29]             | [metrics.yaml][17] | [conf.yaml.example][18] |
     | [solr][19]              | [metrics.yaml][20] | [conf.yaml.example][21] |
     | [presto][22]            | [metrics.yaml][23] | [conf.yaml.example][24] |
     | [tomcat][16]            | [metrics.yaml][25] | [conf.yaml.example][26] |
@@ -226,6 +226,7 @@ Agent がクラスターで実行されており、JMX メトリクスを収集�
 [26]: https://github.com/DataDog/integrations-core/blob/master/tomcat/datadog_checks/tomcat/data/conf.yaml.example
 [27]: /ja/agent/faq/template_variables/
 [28]: /ja/agent/guide/ad_identifiers/#short-image-container-identifiers
+[29]: /ja/integrations/kafka/
 {{% /tab %}}
 {{% tab "ホスト Agent" %}}
 

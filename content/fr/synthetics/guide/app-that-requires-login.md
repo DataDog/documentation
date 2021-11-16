@@ -14,7 +14,7 @@ further_reading:
 ---
 Il se peut que vous cherchiez à surveiller les parcours utilisateur qui nécessitent une connexion. Il existe deux façons de faire en sorte que vos tests Browser Datadog réussissent le processus de connexion sur votre application afin d'effectuer la validation sur les pages réservées aux utilisateurs identifiés :
 
-- [Ajouter les étapes de connexion à votre enregistrement](#include-the-login-in-your-recording)
+- [Ajouter les étapes de connexion à votre enregistrement](#include-the-login-steps-in-your-recording)
 - [Tirer parti des options de configuration des tests Browser](#leverage-browser-test-configuration-options)
 
 Vous pouvez également vous assurer que vos identifiants sont stockés et obfusqués de façon sécurisée dans l'application [à l'aide de variables globales sécurisées](#sécurite-du-compte).
@@ -73,7 +73,7 @@ Ces configurations sont appliquées à chaque exécution de test et vous permett
 
 Stockez vos identifiants sous la forme de [variables globales][5] (par exemple, une variable globale pour le nom d'utilisateur et une pour le mot de passe) et sécurisez ces variables. Leurs valeurs seront ainsi obfusquées et ne pourront pas être consultées par tout utilisateur ayant accès à votre instance Datadog.
 
-Après avoir créé les variables sécurisées, vous pouvez [importer ces variables globales][6] dans vos tests Browser et les utiliser pour vos étapes de connexion. 
+Après avoir créé les variables sécurisées, vous pouvez [importer ces variables globales][6] dans vos tests Browser et les utiliser pour vos étapes de connexion.
 
 **Remarque** : bien que les variables globales de Datadog soient stockées et chiffrées de façon sécurisée, nous vous recommandons fortement d'utiliser un compte dédié au testing, avec des identifiants fictifs, pour réaliser vos tests.
 

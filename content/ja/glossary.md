@@ -60,11 +60,11 @@ Datadog は、APM インテグレーションを通して分散トレーシン�
 
 [1]: /ja/agent/
 [2]: /ja/api/
-[3]: /ja/developers/libraries/
+[3]: /ja/developers/community/libraries/
 [4]: /ja/dashboards/screenboard/
 [5]: /ja/dashboards/timeboard/
 [6]: https://www.datadoghq.com/blog/statsd
 [7]: /ja/developers/dogstatsd/
 [8]: /ja/developers/integrations/
-[9]: /ja/developers/libraries/#apm-distributed-tracing-client-libraries
+[9]: /ja/developers/community/libraries/#apm-distributed-tracing-client-libraries
 [10]: /ja/tracing/

@@ -9,6 +9,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/azure_queue_storage/'
 draft: false
 git_integration_title: azure_queue_storage
 has_logo: true
+integration_id: azure-queue-storage
 integration_title: Stockage File d'attente Microsoft Azure
 is_public: true
 kind: integration
@@ -27,7 +28,7 @@ Recueillez des métriques de Stockage File d'attente Azure pour :
 - Visualiser les performances de votre stockage de file d'attente
 - Corréler les performances de votre stockage de file d'attente avec vos applications
 
-## Implémentation
+## Configuration
 
 ### Installation
 

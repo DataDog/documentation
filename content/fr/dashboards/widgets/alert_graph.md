@@ -15,9 +15,11 @@ further_reading:
     tag: Documentation
     text: Créer des dashboards avec JSON
 ---
-Les graphiques d'alertes sont des graphiques de séries temporelles affichant l'état actuel de tous les monitors définis sur votre système :
+Les graphiques d'alertes sont des graphiques de séries temporelles affichant l'état actuel de la plupart des monitors définis sur votre système :
 
 {{< img src="dashboards/widgets/alert_graph/alert_graph.png" alt="Graphique d'alerte" >}}
+
+Ce widget fonctionne avec les monitors de métrique, d'anomalie, de singularité, de prévision, d'APM et d'intégration.
 
 ## Configuration
 
@@ -55,31 +57,15 @@ Définissez sa taille et son alignement si vous le souhaitez.
 
 ## API
 
-Le [schéma JSON][1] utilisé pour le widget Graphique des alertes est le suivant :
+Ce widget peut être utilisé avec l'**API Dashboards**. Consultez la [documentation à ce sujet][1] pour en savoir plus.
 
-```text
-ALERT_GRAPH_SCHEMA = {
-    "type": "object",
-    "properties": {
-        "type": {"enum": ["alert_graph"]},
-        "alert_id": {"type": "string"},
-        "viz_type": {"enum": ["timeseries", "toplist"]},
-        "title": {"type": "string"}
-    },
-    "required": ["type", "alert_id", "viz_type"],
-    "additionalProperties": false
-}
-```
+Le [schéma JSON][2] utilisé pour le widget Graphique des alertes est le suivant :
 
-| Paramètre  | Type   | Obligatoire | Description                                                                                                       |
-|------------|--------|----------|-------------------------------------------------------------------------------------------------------------------|
-| `type`     | chaîne | oui      | Type de widget (utilisez `alert_graph` pour le widget Graphique des alertes)                                                  |
-| `alert_id` | chaîne | oui      | ID de l'alerte à utiliser dans le widget                                                                              |
-| `viz_type` | chaîne | oui      | Indique si le graphique d'alerte doit être affiché en tant que série temporelle ou top list. Valeurs disponibles : `timeseries` ou `toplist`. |
-| `title`    | chaîne | non       | Titre du widget.                                                                                               |
+{{< dashboards-widgets-api >}}
 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/dashboards/graphing_json/widget_json/
+[1]: /fr/api/v1/dashboards/
+[2]: /fr/dashboards/graphing_json/widget_json/

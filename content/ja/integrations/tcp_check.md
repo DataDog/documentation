@@ -21,7 +21,7 @@ display_name: TCP
 draft: false
 git_integration_title: tcp_check
 guid: c514029e-0ed8-4c9f-abe5-2fd4096726ba
-integration_id: system
+integration_id: システム
 integration_title: TCP チェック
 is_public: true
 kind: インテグレーション
@@ -117,20 +117,16 @@ instances:
 TCP チェックには、イベントは含まれません。
 
 ### サービスのチェック
+{{< get-service-checks-from-git "tcp_check" >}}
 
-**`tcp.can_connect`**:
-
-設定した`ホスト`および`ポート`に Agent が接続できない場合は、DOWN を返します。それ以外の場合は、UP を返します。
-
-Datadog でこのサービスチェックのアラート条件を作成するには、[Create Monitor][4] ページで **Integration** ではなく **Network** をクリックしてください。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
+
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/tcp_check/images/netgraphs.png
 [2]: https://app.datadoghq.com/account/settings#agent
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[4]: https://app.datadoghq.com/monitors#/create
-[5]: https://docs.datadoghq.com/ja/help/
+[4]: https://docs.datadoghq.com/ja/help/

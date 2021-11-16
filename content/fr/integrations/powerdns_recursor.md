@@ -2,19 +2,28 @@
 aliases:
   - /fr/integrations/powerdns
 assets:
-  dashboards: {}
-  logs: {}
+  configuration:
+    spec: assets/configuration/spec.yaml
+  dashboards:
+    powerdns: assets/dashboards/powerdns_dashboard.json
+  logs:
+    source: powerdns
+  metrics_metadata: metadata.csv
   monitors: {}
+  saved_views:
+    powerdns_processes: assets/saved_views/powerdns_processes.json
   service_checks: assets/service_checks.json
 categories:
   - web
   - network
   - autodiscovery
+  - log collection
 creates_events: false
 ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/powerdns_recursor/README.md'
 display_name: "PowerDNS\_Recursor"
+draft: false
 git_integration_title: powerdns_recursor
 guid: ae533b67-a2af-45ce-8e23-235acb3a3893
 integration_id: powerdns
@@ -53,7 +62,7 @@ Et bien plus encore.
 
 ### Installation
 
-Le check PowerDNS Recursor est inclus avec le paquet de l'[Agent Datadog][1] : vous n'avez donc rien d'autre à installer sur vos recursors.
+Le check PowerDNS Recursor est inclus avec le package de l'[Agent Datadog][1] : vous n'avez donc rien d'autre à installer sur vos recursors.
 
 ### Configuration
 
@@ -75,11 +84,14 @@ Si vous utilisez pdns_recursor >= 4.1, définissez simplement le paramètre `a
 
 Redémarrez votre recursor pour activer l'API de statistiques.
 
+{{< tabs >}}
+{{% tab "Host" %}}
+
 #### Host
 
-Suivez les instructions ci-dessous pour configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
+Pour configurer ce check lorsque l'Agent est exécuté sur un host :
 
-1. Modifiez le fichier `powerdns_recursor.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][2]. Consultez le [fichier d'exemple powerdns_recursor.d/conf.yaml][3] pour découvrir toutes les options de configuration disponibles :
+1. Modifiez le fichier `powerdns_recursor.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][1]. Consultez le [fichier d'exemple powerdns_recursor.d/conf.yaml][2] pour découvrir toutes les options de configuration disponibles :
 
    ```yaml
    init_config:
@@ -116,11 +128,42 @@ Suivez les instructions ci-dessous pour configurer ce check lorsque l'Agent est 
        version: 3
    ```
 
-2. [Redémarrez l'Agent][4].
+2. [Redémarrez l'Agent][3].
+
+##### Collecte de logs
+
+1. La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans `datadog.yaml` :
+
+   ```yaml
+   logs_enabled: true
+   ```
+
+2. Ajoutez l'utilisateur `dd-agent` au groupe `systemd-journal` en exécutant la commande :
+   ```text
+   usermod -a -G systemd-journal dd-agent
+   ```
+
+3. Ajoutez ce bloc de configuration à votre fichier `powerdns_recursor.d/conf.yaml` pour commencer à recueillir vos logs PowerDNS Recursor :
+
+   ```yaml
+   logs:
+     - type: journald
+       source: powerdns
+   ```
+
+    Consultez le [fichier d'exemple powerdns_recursor.d/conf.yaml][2] pour découvrir toutes les options de configuration disponibles.
+
+4. [Redémarrez l'Agent][3].
+
+[1]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
+[2]: https://github.com/DataDog/integrations-core/blob/master/powerdns_recursor/datadog_checks/powerdns_recursor/data/conf.yaml.example
+[3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+{{% /tab %}}
+{{% tab "Environnement conteneurisé" %}}
 
 #### Environnement conteneurisé
 
-Consultez la [documentation relative aux modèles d'intégration Autodiscovery][5] pour découvrir comment appliquer les paramètres ci-dessous à un environnement conteneurisé.
+Consultez la [documentation relative aux modèles d'intégration Autodiscovery][1] pour découvrir comment appliquer les paramètres ci-dessous à un environnement conteneurisé.
 
 | Paramètre            | Valeur                                                                            |
 | -------------------- | -------------------------------------------------------------------------------- |
@@ -128,14 +171,28 @@ Consultez la [documentation relative aux modèles d'intégration Autodiscovery][
 | `<CONFIG_INIT>`      | vide ou `{}`                                                                    |
 | `<CONFIG_INSTANCE>`  | `{"host":"%%host%%", "port":8082, "api_key":"<CLÉ_API_POWERDNS>", "version": 3}` |
 
+##### Collecte de logs
+
+La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Kubernetes][2].
+
+| Paramètre      | Valeur                                     |
+|----------------|-------------------------------------------|
+| `<CONFIG_LOG>` | `{"source": "powerdns"}`                  |
+
+[1]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
+[2]: https://docs.datadoghq.com/fr/agent/kubernetes/log/
+{{% /tab %}}
+{{< /tabs >}}
+
 ### Validation
 
-[Lancez la sous-commande `status` de l'Agent][6] et cherchez `powerdns_recursor` dans la section Checks.
+[Lancez la sous-commande `status` de l'Agent][2] et cherchez `powerdns_recursor` dans la section Checks.
 
 ## Données collectées
 
 ### Métriques
 {{< get-metrics-from-git "powerdns_recursor" >}}
+
 
 
 ### Événements
@@ -144,19 +201,15 @@ Le check PowerDNS n'inclut aucun événement.
 
 ### Checks de service
 
-**`powerdns.recursor.can_connect`** :
-
-Renvoie CRITICAL si l'Agent ne parvient pas à se connecter à l'API de statistiques du recursor. Si ce n'est pas le cas, renvoie OK.
+**powerdns.recursor.can_connect** :<br>
+Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter à l'API de statistiques du recursor. Si ce n'est pas le cas, renvoie `OK`.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][8].
+Besoin d'aide ? Contactez [l'assistance Datadog][3].
+
+
 
 [1]: https://app.datadoghq.com/account/settings#agent
-[2]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
-[3]: https://github.com/DataDog/integrations-core/blob/master/powerdns_recursor/datadog_checks/powerdns_recursor/data/conf.yaml.example
-[4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[5]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
-[6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
-[7]: https://github.com/DataDog/integrations-core/blob/master/powerdns_recursor/metadata.csv
-[8]: https://docs.datadoghq.com/fr/help/
+[2]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
+[3]: https://docs.datadoghq.com/fr/help/

@@ -187,17 +187,13 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 {{< get-metrics-from-git "ibm_db2" >}}
 
 
-### サービスのチェック
-
-**ibm_db2.can_connect**:<br>
-監視対象の IBM Db2 データベースに Agent が接続できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
-
-**ibm_db2.status**:<br>
-監視対象の IBM Db2 データベースが静止状態の場合は `CRITICAL`、静止ペンディングまたはロールフォワードの場合は `WARNING`、それ以外の場合は `OK` を返します。
-
 ### イベント
 
 - テーブルスペースの状態が変化するたびに、`ibm_db2.tablespace_state_change` がトリガーされます。
+
+### サービスのチェック
+{{< get-service-checks-from-git "ibm_db2" >}}
+
 
 ## トラブルシューティング
 

@@ -268,12 +268,23 @@ ddev test -m integration awesome
 
 チェックが含まれると見なされるためには、ddev スキャフォールディングによって作成されたアセットのセットにデータを入力する必要があります。
 
-- **`README.md`**: これには、チェックのドキュメント、その設定方法、収集するデータなどが含まれます。
-- **`spec.yaml`**: これは、`ddev` ツールを使用して `conf.yaml.example` を生成するのに使用されます（下記 "コンフィギュレーションテンプレート" タブ参照）。[詳細はコンフィギュレーション仕様書をご覧ください。][16]
-- **`conf.yaml.example`**: これには、Agent チェックのデフォルト（または一例として）のコンフィギュレーションオプションが含まれます。このファイルを手動で編集しないでください！これは `spec.yaml` のコンテンツから生成されます。[そのロジックについては、コンフィギュレーションファイルのリファレンスドキュメントを参照してください。][10]
-- **`manifest.json`**: これには、タイトルやカテゴリなどの Agent チェックのメタデータが含まれます。[詳細については、マニフェストのリファレンスドキュメントを参照してください。][11]
-- **`metadata.csv`**: これには、Agent チェックによって収集されたすべてのメトリクスのリストが含まれます。[詳細については、メトリクスメタデータのリファレンスドキュメントを参照してください。][12]
-- **`service_check.json`**: これには、Agent チェックによって収集されたすべてのサービスチェックのリストが含まれます。[詳細については、サービスチェックのリファレンスドキュメントを参照してください。][13]
+`README.md`
+: これには、チェックのドキュメント、その設定方法、収集するデータなどが含まれます。
+
+`spec.yaml`
+: これは、`ddev` ツールを使用して `conf.yaml.example` を生成するのに使用されます（下記 "コンフィギュレーションテンプレート" タブ参照）。[詳細はコンフィギュレーション仕様書をご覧ください。][16]
+
+`conf.yaml.example`
+: これには、Agent チェックのデフォルト（または一例として）のコンフィギュレーションオプションが含まれます。このファイルを手動で編集しないでください！これは `spec.yaml` のコンテンツから生成されます。[そのロジックについては、コンフィギュレーションファイルのリファレンスドキュメントを参照してください。][10]
+
+`manifest.json`
+: これには、タイトルやカテゴリなどの Agent チェックのメタデータが含まれます。[詳細については、マニフェストのリファレンスドキュメントを参照してください。][11]
+
+`metadata.csv`
+: これには、Agent チェックによって収集されたすべてのメトリクスのリストが含まれます。[詳細については、メトリクスメタデータのリファレンスドキュメントを参照してください。][12]
+
+`service_check.json`
+: これには、Agent チェックによって収集されたすべてのサービスチェックのリストが含まれます。[詳細については、サービスチェックのリファレンスドキュメントを参照してください。][13]
 
 この例では、これらのファイルは次の形式になります。
 
@@ -430,7 +441,7 @@ Agent バージョン >= 6.12 の場合
 [2]: /ja/developers/integrations/python
 [3]: https://github.com/DataDog/integrations-extras
 [4]: https://github.com/DataDog/integrations-core/tree/master/datadog_checks_dev
-[5]: https://docs.datadoghq.com/ja/developers/metrics/agent_metrics_submission/
+[5]: https://docs.datadoghq.com/ja/metrics/agent_metrics_submission/
 [6]: https://github.com/DataDog/datadog-agent/blob/6.2.x/docs/dev/checks/python/check_api.md
 [7]: https://docs.pytest.org/en/latest
 [8]: https://tox.readthedocs.io/en/latest

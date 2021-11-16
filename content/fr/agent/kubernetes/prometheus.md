@@ -130,11 +130,91 @@ Pour obtenir la liste complète des paramètres disponibles pour les instances, 
 
     {{< img src="integrations/guide/prometheus_kubernetes/prometheus_collected_metric_kubernetes.png" alt="Métriques Prometheus recueillies Kubernetes">}}
 
+## Collecte de métriques avec des annotations Prometheus
+
+Grâce à la fonctionnalité Autodiscovery Prometheus, l'Agent Datadog peut détecter les annotations Prometheus natives (comme `prometheus.io/scrape`, `prometheus.io/path` ou `prometheus.io/port`) et planifier automatiquement des checks OpenMetrics de façon à recueillir des métriques Prometheus dans Kubernetes.
+
+### Prérequis
+
+- Agent Datadog v7.27+ ou v6.27+ (pour les checks de pod)
+- Agent de cluster Datadog v1.11+ (pour les checks de service et d'endpoint)
+
+### Configuration
+
+#### Configuration de base
+
+Ajoutez ce qui suit dans votre fichier `values.yaml` Helm :
+
+```
+...
+datadog:
+...
+  prometheusScrape:
+    enabled: true
+...
+```
+
+Grâce à ces lignes, l'Agent Datadog détecte les pods qui possèdent des annotations Prometheus natives et génère les checks OpenMetrics correspondants.
+
+En outre, lorsqu'il est activé, l'Agent de cluster Datadog détecte également les services qui possèdent des annotations Prometheus natives et génère les checks OpenMetrics correspondants.
+
+- `prometheus.io/scrape=true` : requis.
+- `prometheus.io/path` : facultatif (valeur par défaut : `/metrics`).
+- `prometheus.io/port` : facultatif (valeur par défaut : `%%port%%`). [Template variable][13] remplacée par le port du conteneur ou service.
+
+Ces paramètres permettent de générer un check qui recueille toutes les métriques exposées, en se basant sur la configuration par défaut de l'[intégration OpenMetrics][1].
+
+#### Configuration avancée
+
+Vous pouvez définir des configurations de check OpenMetrics avancées ou des règles Autodiscovery personnalisées qui diffèrent des annotations Prometheus natives. Pour ce faire, utilisez le champ de configuration `additionalConfigs` du fichier `values.yaml`.
+
+`additionalConfigs` liste les structures contenant des configurations de check OpenMetrics et des règles Autodiscovery.
+
+Chaque [champ de configuration][14] pris en charge par le check OpenMetrics peut être transmis dans la liste des configurations.
+
+La configuration Autodiscovery peut reposer sur des noms de conteneur, des annotations Kubernetes ou un mélange des deux. Si vous définissez `kubernetes_container_names` et `kubernetes_annotations`, une logique d'addition (AND) s'applique, à savoir que les deux règles doivent être respectées.
+
+`kubernetes_container_names` liste les noms de conteneur à cibler. Le wildcard `*` peut être utilisé.
+
+`kubernetes_annotations` contient deux maps d'étiquettes permettant de définir les règles de découverte : `include` et `exclude`.
+
+**Remarque** : dans la configuration de l'Agent Datadog, `kubernetes_annotations` a par défaut la valeur suivante : 
+
+```
+kubernetes_annotations:
+  include:
+    - prometheus.io/scrape: "true"
+  exclude:
+    - prometheus.io/scrape: "false"
+```
+
+**Exemple :**
+
+Dans l'exemple ci-dessous, nous définissons une configuration avancée ciblant le conteneur `my-app`, qui exécute le pod `app=my-app`. Nous personnalisons également la configuration du check OpenMetrics, en activant l'option `send_distribution_buckets` et en définissant un délai d'expiration personnalisé de cinq secondes.
+
+```
+datadog:
+...
+  prometheusScrape:
+    enabled: true
+    additionalConfigs:
+      -
+        configurations:
+        - timeout: 5
+          send_distribution_buckets: true
+        autodiscovery:
+          kubernetes_container_names:
+            - my-app
+          kubernetes_annotations:
+            include:
+              app: my-app
+```
+
 ## Proposer une intégration personnalisée comme intégration officielle
 
 Par défaut, toutes les métriques récupérées par le check Prometheus générique sont considérées comme des métriques custom. Si vous surveillez un logiciel prêt à l'emploi et que vous pensez qu'il mérite une intégration officielle, n'hésitez pas à apporter votre [contribution][5] !
 
-Les intégrations officielles utilisent des répertoires dédiés. Le check générique intègre un système de création d'instances qui se charge de coder en dur la configuration par défaut et les métadonnées des métriques. Reportez-vous au référentiel sur l'intégration [kube-proxy][13] pour obtenir un exemple.
+Les intégrations officielles utilisent des répertoires dédiés. Le check générique intègre un système de création d'instances qui se charge de coder en dur la configuration par défaut et les métadonnées des métriques. Reportez-vous au référentiel sur l'intégration [kube-proxy][15] pour obtenir un exemple.
 
 ## Pour aller plus loin
 
@@ -144,7 +224,7 @@ Les intégrations officielles utilisent des répertoires dédiés. Le check gén
 [2]: /fr/integrations/prometheus/
 [3]: https://github.com/DataDog/integrations-core/tree/master/openmetrics
 [4]: https://github.com/DataDog/integrations-core/tree/master/prometheus
-[5]: /fr/developers/prometheus/
+[5]: /fr/developers/custom_checks/prometheus/
 [6]: /fr/integrations/guide/prometheus-metrics
 [7]: /fr/agent/kubernetes/#installation
 [8]: /fr/getting_started/tagging/
@@ -152,4 +232,6 @@ Les intégrations officielles utilisent des répertoires dédiés. Le check gén
 [10]: https://app.datadoghq.com/account/settings#agent/kubernetes
 [11]: /resources/yaml/prometheus.yaml
 [12]: https://app.datadoghq.com/metric/summary
-[13]: https://github.com/DataDog/integrations-core/tree/master/kube_proxy
+[13]: /fr/agent/faq/template_variables/
+[14]: https://github.com/DataDog/integrations-core/blob/7.27.x/openmetrics/datadog_checks/openmetrics/data/conf.yaml.example
+[15]: https://github.com/DataDog/integrations-core/tree/master/kube_proxy

@@ -17,15 +17,16 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-extras/blob/master/n2ws/README.md'
+  - https://github.com/DataDog/integrations-extras/blob/master/n2ws/README.md
 display_name: N2WS Backup & Recovery
-doc_link: 'https://docs.datadoghq.com/integrations/n2ws/'
+doc_link: https://docs.datadoghq.com/integrations/n2ws/
 draft: false
 git_integration_title: n2ws
 guid: 315aa71c-cc41-4f8c-b0f3-37882c1fa766
 has_logo: true
 integration_id: n2ws
 integration_title: N2WS
+integration_version: ''
 is_public: true
 kind: インテグレーション
 maintainer: eliad.eini@n2ws.com
@@ -62,7 +63,7 @@ N2WS Backup and Recovery インスタンスは、Datadog モニタリングサ�
         [external_monitoring]
         enabled=True
         ```
-    - `service apache2 restart` を実行します。
+    - `service apache2 restart` を実行します
 
 3.  ##### N2WS インスタンスに Datadog Agent をインストールします。
     Datadog にログインし、Integrations -> Agent -> Ubuntu に移動します

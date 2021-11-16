@@ -25,7 +25,7 @@ kind: integration
 maintainer: kealan.maas@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: flume.
-metric_to_check: ''
+metric_to_check: flume.channel.capacity
 name: flume
 public_title: flume
 short_description: Apache Flume Agent のシンク、チャンネル、ソースを追跡
@@ -60,7 +60,7 @@ Agent v6.8 以降を使用している場合は、以下の手順に従って、
 1. 以下の JVM 引数を [flume-env.sh][7] に追加して、Flume Agent を構成し JMX を有効にします。
 
 ```
-export JAVA_OPTS=”-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=5445 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false”
+export JAVA_OPTS="-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=5445 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false"
 
 ```
 
@@ -89,15 +89,13 @@ export JAVA_OPTS=”-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremot
 {{< get-metrics-from-git "flume" >}}
 
 
-### サービスのチェック
-
-**flume.can_connect**:
-
-Agent が監視対象の Flume インスタンスに接続できず、メトリクスを収集できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
-
 ### イベント
 
 Flume には、イベントは含まれません。
+
+### サービスのチェック
+{{< get-service-checks-from-git "flume" >}}
+
 
 ## トラブルシューティング
 
@@ -117,3 +115,4 @@ Flume には、イベントは含まれません。
 [11]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [12]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [13]: https://github.com/DataDog/integrations-extras/blob/master/flume/metadata.csv
+[14]: https://github.com/DataDog/integrations-extras/blob/master/flume/assets/service_checks.json

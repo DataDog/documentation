@@ -19,7 +19,7 @@ integration_title: Logz.io
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com
-manifest_version: 1.0.2
+manifest_version: 1.0.0
 name: logzio
 public_title: Intégration Datadog/Logz.io
 short_description: Suite ELK avec apprentissage automatique en tant que service

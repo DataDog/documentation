@@ -19,52 +19,41 @@ integration_id: "carbonblack"
 
 ## Overview
 
-Use the Datadog-Carbon Black integration in order to forward your Carbon Black Defense logs to Datadog.
+Use the Datadog-Carbon Black integration to forward your Carbon Black EDR events and alerts as Datadog logs.
+
 
 ## Setup
 
 ### Installation
 
-First, install and setup the [Carbon Black Defense log shipper][1].
+Datadog uses Carbon Black's event forwarder and Datadog's Lambda forwarder to collect Carbon Black events and alerts from your S3 bucket.
 
-### Configuration
+Carbon Black provides a [Postman collection][10] for the API that you use to create the Carbon Black event forwarder.
 
-The configuration file below enables your Carbon Black Defense shipper to forward your logs to Datadog:
+#### Configuration
 
-```conf
-[general]
+1. [Install the Datadog Forwarder][1].
+2. [Create a bucket in your AWS Management Console][2] to forward events to. 
+3. [Configure the S3 bucket to allow the Carbon Black forwarder to write data][3]. 
+   - **Important**: The S3 bucket must have a prefix with the keyword `carbon-black` in which the CB events come in. This allows Datadog to recognize the source of the logs correctly.
+5. [Create an access level in the Carbon Black Cloud console][4].
+6. [Create an API key in the Carbon Black Cloud console][5].
+7. [Configure the API in Postman][6] by updating the value of the following Postman environment variables with the key created above: `cb_url`, `cb_org_key`, `cb_custom_id`, and `cb_custom_key`.
+8. [Create two Carbon Black event forwarders][7] with different names for Carbon Black alerts (`"type": "alert"`) and endpoint events (`"type": "endpoint.event"`).
+9. [Setup the Datadog Forwarder to trigger on the S3 bucket][8].
 
-template = {{source}}|{{version}}|{{vendor}}|{{product}}|{{dev_version}}|{{signature}}|{{name}}|{{severity}}|{{extension}}
-policy_action_severity = 4
-output_format=json
-output_type=http
-http_out={{< region-param key="http_endpoint" code="true" >}}<DATADOG_API_KEY>?ddsource=cbdefense
-http_headers={"content-type": "application/json"}
-https_ssl_verify=True
-
-[cbdefense1]
-server_url = <CB_DEFENSE_SERVER_URL>
-siem_connector_id=<CB_DEFENSE_API_ID>
-siem_api_key=<CB_DEFENSE_API_SECRET_KEY>
-```
-
-Replace the `<DATADOG_API_KEY>`, `<CB_DEFENSE_API_SECRET_KEY>`, `<CB_DEFENSE_API_ID>`, and `<CB_DEFENSE_SERVER_URL>` placeholders to complete your configuration.
-
-First, replace `<DATADOG_API_KEY>` with your Datadog API key, found on the [Datadog API key][2] page.
-
-Next, to obtain your Carbon Black Defense API key and API ID, generate them from within Carbon Black:
-
-1. Go to _Settings_ -> _API KEYS_ -> _Add API Key_.
-2. Enter a name for your key.
-3. Select the **SIEM** access level for the key.
-4. Once the key is created, use your new API key and API ID to replace the `<CB_DEFENSE_API_SECRET_KEY>` and `<CB_DEFENSE_API_ID>` placeholder in your Carbon Black Defense log shipper configuration file.
-
-You can find your Carbon Black Defense server URL within your Carbon Black dashboard. Go to _Settings_ -> _API KEYS_ -> _Download_ to find this URL and its access level descriptions. Use this value to replace the `<CB_DEFENSE_SERVER_URL>` placeholder.
 
 ## Troubleshooting
 
-Need help? Contact [Datadog support][3].
+Need help? Contact [Datadog support][9].
 
-[1]: https://github.com/carbonblack/cb-defense-syslog-tls
-[2]: https://app.datadoghq.com/account/settings#api
-[3]: /help/
+[1]: /serverless/libraries_integrations/forwarder/
+[2]: https://community.carbonblack.com/t5/Developer-Relations/Carbon-Black-Cloud-Data-Forwarder-Quick-Setup-amp-S3-Bucket/td-p/89194#create-a-bucket
+[3]: https://community.carbonblack.com/t5/Developer-Relations/Carbon-Black-Cloud-Data-Forwarder-Quick-Setup-amp-S3-Bucket/td-p/89194#configure-bucket-to-write-events
+[4]: https://community.carbonblack.com/t5/Developer-Relations/Carbon-Black-Cloud-Data-Forwarder-Quick-Setup-amp-S3-Bucket/td-p/89194#create-access-level
+[5]: https://community.carbonblack.com/t5/Developer-Relations/Carbon-Black-Cloud-Data-Forwarder-Quick-Setup-amp-S3-Bucket/td-p/89194#create-new-api-key
+[6]: https://community.carbonblack.com/t5/Developer-Relations/Carbon-Black-Cloud-Data-Forwarder-Quick-Setup-amp-S3-Bucket/td-p/89194#configure-api-in-postman
+[7]: https://community.carbonblack.com/t5/Developer-Relations/Carbon-Black-Cloud-Data-Forwarder-Quick-Setup-amp-S3-Bucket/td-p/89194#create-new-forwarder
+[8]: /logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=awsconsole#collecting-logs-from-s3-buckets
+[9]: /help/
+[10]: https://documenter.getpostman.com/view/7740922/SWE9YGSs?version=latest

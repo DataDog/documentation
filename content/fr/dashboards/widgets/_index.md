@@ -17,10 +17,11 @@ aliases:
     {{< nextlink href="/dashboards/widgets/event_stream" >}}Flux d'événements{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/event_timeline" >}}Chronologie des événements{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/free_text" >}}Texte libre{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/geomap" >}}Geomap{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/group" >}}Groupe{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/heat_map" >}}Carte thermique{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/hostmap" >}}Hostmap{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/iframe" >}}iframe{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/iframe" >}}Iframe{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/image" >}}Image{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/log_stream" >}}Flux de logs{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/monitor_summary" >}}Résumé des monitors{{< /nextlink >}}

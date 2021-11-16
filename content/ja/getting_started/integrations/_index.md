@@ -183,7 +183,7 @@ tagging
 [7]: /ja/api/
 [8]: /ja/integrations/node/
 [9]: /ja/integrations/python/
-[10]: /ja/developers/write_agent_check/
+[10]: /ja/developers/custom_checks/write_agent_check/
 [11]: https://github.com/DataDog/integrations-core
 [12]: https://github.com/DataDog/integrations-extras
 [13]: /ja/developers/integrations/new_check_howto/#developer-toolkit
@@ -197,7 +197,7 @@ tagging
 [21]: /ja/agent/guide/agent-commands/#restart-the-agent
 [22]: /ja/developers/integrations/new_check_howto/#param-specification
 [23]: https://github.com/DataDog/integrations-core/blob/master/apache/datadog_checks/apache/data/conf.yaml.example
-[24]: /ja/developers/write_agent_check/#collection-interval
+[24]: /ja/developers/custom_checks/write_agent_check/#collection-interval
 [25]: /ja/getting_started/tagging/
 [26]: /ja/getting_started/agent/#setup
 [27]: /ja/agent/guide/agent-commands/#agent-status-and-information
@@ -214,6 +214,6 @@ tagging
 [38]: /ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [39]: https://app.datadoghq.com/event/stream
 [40]: https://github.com/DataDog/integrations-core/blob/master/http_check/datadog_checks/http_check/data/conf.yaml.example#L13
-[41]: /ja/developers/metrics/
-[42]: /ja/developers/metrics/custom_metrics/
+[41]: /ja/metrics/
+[42]: /ja/metrics/custom_metrics/
 [43]: /ja/monitors/guide/visualize-your-service-check-in-the-datadog-ui/

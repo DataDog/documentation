@@ -18,6 +18,7 @@
 "guid": "f22e08ca-b524-45ad-815c-9ad654015158"
 "integration_id": "statsig"
 "integration_title": "Statsig"
+"integration_version": ""
 "is_public": true
 "kind": "integration"
 "maintainer": "support@statsig.com"
@@ -59,7 +60,7 @@ Statsig インテグレーションでは、Datadog からのデータは収集�
 
 ### メトリクス
 {{< get-metrics-from-git "statsig" >}}
-and the description of each.
+
 
 ### サービスのチェック
 
@@ -67,13 +68,20 @@ Statsig インテグレーションには、サービスのチェック機能は
 
 ### イベント
 
-Statsig インテグレーションにより、Statsig でのコンフィギュレーション変更イベントが Datadog に送信されます（たとえば、新規または更新された機能ゲートまたは新しいインテグレーションが有効になった時）。
+Statsig インテグレーションにより、Statsig でのコンフィギュレーション変更イベントが Datadog に送信されます（たとえば、更新された機能ゲートまたは新しいインテグレーション）。
 
 ## トラブルシューティング
 
 ヘルプが必要な場合は、Statsig サポート（support@statsig.com）または[弊社までお問い合わせ][3]ください。
 
-[1]: https://console.statsig.com/integration
+## その他の参考資料
+
+お役に立つドキュメント、リンクや記事:
+
+- [Datadog マーケットプレイスの Statsig の提供とモニター機能のリリース][4]
+
+[1]: https://console.statsig.com/integrations
 [2]: https://github.com/DataDog/integrations-extras/blob/master/statsig/metadata.csv
 [3]: https://www.statsig.com/contact
+[4]: https://www.datadoghq.com/blog/feature-monitoring-statsig-datadog-marketplace/
 

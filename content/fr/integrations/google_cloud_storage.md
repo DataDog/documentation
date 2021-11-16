@@ -11,6 +11,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/google_cloud_storage/'
 draft: false
 git_integration_title: google_cloud_storage
 has_logo: true
+integration_id: google-cloud-storage
 integration_title: Google Storage
 is_public: true
 kind: integration

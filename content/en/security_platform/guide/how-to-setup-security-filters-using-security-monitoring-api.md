@@ -1,5 +1,5 @@
 ---
-title: How To Setup Security Filters By Using The Security Monitoring API
+title: Security Filters with the Security Monitoring API
 kind: guide
 aliases:
   - /security_monitoring/guide/how-to-setup-security-filters-using-security-monitoring-api/
@@ -26,7 +26,7 @@ The following examples are covered in this guide:
 
 ## Examples
 
-### Add an exclusion to the default Security Filter
+### Add an exclusion
 
 By default, a single Security Filter exists that analyzes all ingested logs. It's named `all ingested logs` and has a query of `*`. You can customize it by adding an exclusion to exclude a subset of logs based on their tags. To do so, you first need to retrieve the list of Security Filters in order to get the filter's `id`.
 
@@ -113,7 +113,7 @@ curl -L -X PATCH 'https://api.{{< region-param key="dd_site" code="true" >}}/api
 }
 ```
 
-### Create a custom Security Filter
+### Create a custom filter
 
 You can also create custom Security Filters in order to restrict analysis to explicitly specified logs. For example, you can choose to analyze logs from AWS Cloudtrail with a filter that matches only `source:cloudtrail`.
 

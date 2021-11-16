@@ -155,5 +155,5 @@ DogStatsd.Increment("sample.startup");
 [13]: /ja/logs/log_collection/csharp/?tab=serilog#agentless-logging
 [14]: https://www.nuget.org/packages/DogStatsD-CSharp-Client
 [15]: /ja/developers/dogstatsd/?tab=net#code
-[16]: /ja/developers/metrics/
+[16]: /ja/metrics/
 [17]: /ja/help

@@ -2,7 +2,8 @@
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
-  dashboards: {}
+  dashboards:
+    Kubernetes API Server - Overview: assets/dashboards/overview.json
   logs: {}
   metrics_metadata: metadata.csv
   monitors: {}
@@ -12,7 +13,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/kube_apiserver_metrics/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/kube_apiserver_metrics/README.md
 display_name: Kubernetes API サーバーメトリクス
 draft: false
 git_integration_title: kube_apiserver_metrics
@@ -62,8 +63,8 @@ annotations:
 
 これで、Datadog Cluster Agent は、各エンドポイントのチェックを Datadog Agent にスケジューリングします。
 
-このチェックは、エンドポイントを直接 `kube_apiserver_metrics.d/conf.yaml` ファイルで構成することによって実行することもできます。このファイルは、[Agent の構成ディレクトリ][4]のルートの `conf.d/` フォルダー内にあります。
-使用可能なすべての構成オプションの詳細については、[サンプル kube_apiserver_metrics.d/conf.yaml][2] を参照してください。
+このチェックは、エンドポイントを直接 `kube_apiserver_metrics.d/conf.yaml` ファイルで構成することによって実行することもできます。このファイルは、[Agent のコンフィギュレーションディレクトリ][4]のルートの `conf.d/` フォルダー内にあります。
+使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル kube_apiserver_metrics.d/conf.yaml][2] を参照してください。
 
 チェックを実行する Agent は、デフォルトで、APIServer に対する認証に使用するサービスアカウントのベアラートークンを取得しようとします。RBAC を使用していない場合は、`bearer_token_auth` を `false` に設定してください。
 

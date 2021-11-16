@@ -21,6 +21,7 @@ kind: integration
 maintainer: '@platinummonkey'
 manifest_version: 1.0.0
 metric_prefix: upsc.
+metric_to_check: upsc.battery.charge
 name: upsc
 public_title: Intégration Datadog/UPSC
 short_description: Collecteur de statistiques UPSC pour les batteries d'onduleurs (UPS)

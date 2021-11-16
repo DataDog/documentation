@@ -307,7 +307,7 @@ Si votre service a accès à `DD_ENV`, `DD_SERVICE` et `DD_VERSION`, alors le cl
 
 **Remarque** : les clients Datadog DogStatsD pour .NET et PHP ne prennent pas encore en charge cette fonctionnalité.
 
-[1]: /fr/developers/metrics/
+[1]: /fr/metrics/
 {{% /tab %}}
 
 {{% tab "Métriques système" %}}

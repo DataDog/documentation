@@ -13,6 +13,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/amazon_emr/'
 draft: false
 git_integration_title: amazon_emr
 has_logo: true
+integration_id: amazon-emr
 integration_title: Amazon Elastic Map Reduce
 is_public: true
 kind: インテグレーション
@@ -57,10 +58,10 @@ Amazon EMR から S3 バケットまたは CloudWatch のいずれかにログ�
 #### ログを Datadog に送信する方法
 
 1. [Datadog ログ コレクション AWS Lambda 関数][6]をまだ実行していない場合は、セットアップします。
-2. lambda 関数がインストールされたら、AWS コンソールから、Amazon EMR ログを含む S3 バケットまたは CloudWatch のロググループに手動でトリガーを追加します。
+2. Lambda 関数がインストールされたら、AWS コンソールから、Amazon EMR ログを含む S3 バケットまたは CloudWatch のロググループに手動でトリガーを追加します。
 
     - [S3 バケットに手動トリガーを追加][7]
-    - [Cloudwatch ロググループに手動トリガーを追加][8]
+    - [CloudWatch ロググループに手動トリガーを追加][8]
 
 ## 収集データ
 

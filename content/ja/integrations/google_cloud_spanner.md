@@ -11,6 +11,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/google_cloud_spanner/'
 draft: false
 git_integration_title: google_cloud_spanner
 has_logo: true
+integration_id: google-cloud-spanner
 integration_title: Google Spanner
 is_public: true
 kind: インテグレーション

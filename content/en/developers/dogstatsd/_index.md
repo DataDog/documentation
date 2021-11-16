@@ -27,9 +27,9 @@ The easiest way to get your custom application metrics into Datadog is to send t
 - Events
 - Tagging
 
-Any compliant StatsD client works with DogStatsD and the Agent, but you won't be able to use the [Datadog-specific extensions](#dive-into-dogstatsd).
+Any compliant StatsD client works with DogStatsD and the Agent, but does not include the [Datadog-specific extensions](#dive-into-dogstatsd).
 
-**Note**: DogStatsD does NOT implement Timers from StatsD as a native metric type (though it [does support them via histograms][2]).
+**Note**: DogStatsD does NOT implement timers from StatsD as a native metric type (though it does support them through [histograms][2]).
 
 DogStatsD is available on Docker Hub and GCR:
 
@@ -41,9 +41,9 @@ DogStatsD is available on Docker Hub and GCR:
 
 DogStatsD accepts [custom metrics][5], [events][6], and [service checks][7] over UDP and periodically aggregates and forwards them to Datadog.
 
-Because it uses UDP, your application can send metrics to DogStatsD and resume its work without waiting for a response. If DogStatsD ever becomes unavailable, your application won't experience an interruption.
+Because it uses UDP, your application can send metrics to DogStatsD and resume its work without waiting for a response. If DogStatsD ever becomes unavailable, your application doesn't experience an interruption.
 
-{{< img src="developers/metrics/dogstatsd_metrics_submission/dogstatsd.png" alt="dogstatsd"   >}}
+{{< img src="metrics/dogstatsd_metrics_submission/dogstatsd.png" alt="dogstatsd"   >}}
 
 As it receives data, DogStatsD aggregates multiple data points for each unique metric into a single data point over a period of time called _the flush interval_ (ten seconds, by default).
 
@@ -85,7 +85,6 @@ By default, DogStatsD listens on UDP port **8125**. If you need to change this, 
 By default, DogStatsD listens on UDP port **8125**, so you need to bind this port to your host port when running the Agent in a container. If your StatsD metrics come from outside of `localhost`you must set `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` to `true` to allow metric collection. In order to run the Agent with the DogStatsd server up, execute the following command:
 
 ```shell
-DOCKER_CONTENT_TRUST=1 \
 docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
               -v /proc/:/host/proc/:ro \
               -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
@@ -113,9 +112,9 @@ To start collecting your StatsD metrics, you need to bind the DogStatsD port to 
           protocol: UDP
     ```
 
-     This enables your applications to send metrics via DogStatsD on port `8125` on whichever node they happen to be running.
+     This enables your applications to send metrics with DogStatsD on port `8125` on whichever node they happen to be running.
 
-     **Note**: `hostPort` functionality requires a networking provider that adheres to the [CNI specification][2], such as Calico, Canal, or Flannel. For more information, including a workaround for non-CNI network providers, consult the [Kubernetes documentation][3].
+     **Note**: `hostPort` functionality requires a networking provider that adheres to the [CNI specification][2], such as Calico, Canal, or Flannel. For more information, including a workaround for non-CNI network providers, see the Kubernetes documentation: [HostPort services do not work][3].
 
 2. Enable DogStatsD non local traffic to allow StatsD data collection, set `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` to `true` in your `datadog-agent.yaml` manifest:
 
@@ -132,12 +131,11 @@ To start collecting your StatsD metrics, you need to bind the DogStatsD port to 
     kubectl apply -f datadog-agent.yaml
     ```
 
-**Warning**: The `hostPort` parameter opens a port on your host. Make sure your firewall only allows access from your applications or trusted sources. Another word of caution: some network plugins don't support `hostPorts` yet, so this won't work.
-The workaround in this case is to add `hostNetwork: true` in your Agent pod specifications. This shares the network namespace of your host with the Datadog Agent. It also means that all ports opened on the container are also opened on the host. If a port is used both on the host and in your container, they conflict (since they share the same network namespace) and the pod will not start. Not all Kubernetes installations allow this.
+**Warning**: The `hostPort` parameter opens a port on your host. Make sure your firewall only allows access from your applications or trusted sources. If your network plugin doesn't support `hostPorts`, so add `hostNetwork: true` in your Agent pod specifications. This shares the network namespace of your host with the Datadog Agent. It also means that all ports opened on the container are opened on the host. If a port is used both on the host and in your container, they conflict (since they share the same network namespace) and the pod does not start. Some Kubernetes installations do not allow this.
 
 ### Send StatsD metrics to the Agent
 
-Your application needs now a reliable way to determine the IP address of its host. This is made simple in Kubernetes 1.7, which expands the set of attributes you can pass to your pods as environment variables. In versions 1.7 and above, you can pass the host IP to any pod by adding an environment variable to the PodSpec. For instance, your application manifest might look like this:
+Your application needs a reliable way to determine the IP address of its host. This is made simple in Kubernetes 1.7, which expands the set of attributes you can pass to your pods as environment variables. In versions 1.7 and above, you can pass the host IP to any pod by adding an environment variable to the PodSpec. For instance, your application manifest might look like this:
 
 ```yaml
 env:
@@ -147,13 +145,13 @@ env:
               fieldPath: status.hostIP
 ```
 
-With this, any pod running your application is able to send DogStatsD metrics via port `8125` on `$DD_AGENT_HOST`.
+With this, any pod running your application is able to send DogStatsD metrics with port `8125` on `$DD_AGENT_HOST`.
 
-**Note**: As a best practice, Datadog recommends using unified service tagging when assigning attributes. Unified service tagging ties Datadog telemetry together through the use of three standard tags: `env`, `service`, and `version`. To learn how to unify your environment, refer to the dedicated [unified service tagging][8] documentation.
+**Note**: As a best practice, Datadog recommends using unified service tagging when assigning attributes. Unified service tagging ties Datadog telemetry together through the use of three standard tags: `env`, `service`, and `version`. To learn how to unify your environment, see [unified service tagging][8].
 
 #### Origin detection over UDP
 
-Origin detection is supported in Agent 6.10.0+ and allows DogStatsD to detect where the container metrics come from, and tag metrics automatically. When this mode is enabled, all metrics received via UDP are tagged by the same container tags as Autodiscovery metrics.
+Origin detection is supported in Agent 6.10.0+ and allows DogStatsD to detect where the container metrics come from, and tag metrics automatically. When this mode is enabled, all metrics received through UDP are tagged by the same container tags as Autodiscovery metrics.
 
 **Note**: An alternative to UDP is [Unix Domain Sockets][4].
 
@@ -176,7 +174,7 @@ To set [tag cardinality][5] for the metrics collected using origin detection, se
 [3]: https://kubernetes.io/docs/setup/independent/troubleshooting-kubeadm/#hostport-services-do-not-work
 [4]: /developers/dogstatsd/unix_socket/#using-origin-detection-for-container-tagging
 [5]: /getting_started/tagging/assigning_tags/#environment-variables
-[6]: /developers/metrics/custom_metrics/
+[6]: /metrics/custom_metrics/
 {{% /tab %}}
 {{% tab "Helm" %}}
 
@@ -191,8 +189,9 @@ To gather custom metrics with [DogStatsD][1] with helm:
         nonLocalTraffic: true
     ```
 
-     **Note**: `hostPort` functionality requires a networking provider that adheres to the [CNI specification][3], such as Calico, Canal, or Flannel. For more information, including a workaround for non-CNI network providers, consult the [Kubernetes documentation][4]. The `hostPort` parameter opens a port on your host. Make sure your firewall only allows access from your applications or trusted sources. Another word of caution: some network plugins don't support `hostPorts` yet, so this won't work.
-     The workaround in this case is to add `hostNetwork: true` in your Agent pod specifications. This shares the network namespace of your host with the Datadog Agent. It also means that all ports opened on the container are also opened on the host. If a port is used both on the host and in your container, they conflict (since they share the same network namespace) and the pod will not start. Not all Kubernetes installations allow this.
+     **Note**: `hostPort` functionality requires a networking provider that adheres to the [CNI specification][3], such as Calico, Canal, or Flannel. For more information, including a workaround for non-CNI network providers, see the Kubernetes documentation: [HostPort services do not work][4].
+
+     **Warning**: The `hostPort` parameter opens a port on your host. Make sure your firewall only allows access from your applications or trusted sources. If your network plugin doesn't support `hostPorts`, so add `hostNetwork: true` in your Agent pod specifications. This shares the network namespace of your host with the Datadog Agent. It also means that all ports opened on the container are opened on the host. If a port is used both on the host and in your container, they conflict (since they share the same network namespace) and the pod does not start. Some Kubernetes installations do not allow this.
 
 2. Upgrade your Agent configuration:
 
@@ -200,7 +199,7 @@ To gather custom metrics with [DogStatsD][1] with helm:
     helm upgrade -f datadog-values.yaml <RELEASE_NAME> datadog/datadog
     ```
 
-3. Update your application pods: Your application needs now a reliable way to determine the IP address of its host. This is made simple in Kubernetes 1.7, which expands the set of attributes you can pass to your pods as environment variables. In versions 1.7 and above, you can pass the host IP to any pod by adding an environment variable to the PodSpec. For instance, your application manifest might look like this:
+3. Update your application pods: Your application needs a reliable way to determine the IP address of its host. This is made simple in Kubernetes 1.7, which expands the set of attributes you can pass to your pods as environment variables. In versions 1.7 and above, you can pass the host IP to any pod by adding an environment variable to the PodSpec. For instance, your application manifest might look like this:
 
     ```yaml
     env:
@@ -210,9 +209,9 @@ To gather custom metrics with [DogStatsD][1] with helm:
                   fieldPath: status.hostIP
     ```
 
-     With this, any pod running your application is able to send DogStatsD metrics via port `8125` on `$DD_AGENT_HOST`.
+     With this, any pod running your application is able to send DogStatsD metrics through port `8125` on `$DD_AGENT_HOST`.
 
-[1]: /developers/metrics/dogstatsd_metrics_submission/
+[1]: /metrics/dogstatsd_metrics_submission/
 [2]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
 [3]: https://github.com/containernetworking/cni
 [4]: https://kubernetes.io/docs/setup/independent/troubleshooting-kubeadm/#hostport-services-do-not-work
@@ -223,7 +222,7 @@ To gather custom metrics with [DogStatsD][1] with helm:
 
 #### Install the DogStatsD client
 
-Official Datadog-DogStatsD client libraries are available for the following languages. You _can_ use any [generic StatsD client][8] to send metrics to DogStatsD, but you won't be able to use any of the Datadog-specific features mentioned above:
+Official Datadog-DogStatsD client libraries are available for the following languages. Any compliant StatsD client works with DogStatsD and the Agent, but does not include the Datadog-specific features mentioned above:
 {{< programming-lang-wrapper langs="python,ruby,go,java,PHP,.NET" >}}
 
 {{< programming-lang lang="python" >}}
@@ -245,7 +244,7 @@ gem install dogstatsd-ruby
 {{< programming-lang lang="go" >}}
 
 ```shell
-go get github.com/DataDog/datadog-go/statsd
+go get github.com/DataDog/datadog-go/v5/statsd
 ```
 
 {{< /programming-lang >}}
@@ -258,7 +257,7 @@ The Java DataDog StatsD Client is distributed with maven central, and can be [do
 <dependency>
     <groupId>com.datadoghq</groupId>
     <artifactId>java-dogstatsd-client</artifactId>
-    <version>2.10.1</version>
+    <version>3.0.0</version>
 </dependency>
 ```
 
@@ -313,6 +312,10 @@ options = {
 initialize(**options)
 ```
 
+<div class="alert alert-warning">
+  By default, Python DogStatsD client instances (including the <code>statsd</code> global instance) cannot be shared across processes but are thread-safe. Because of this, the parent process and each child process must create their own instances of the client or the buffering must be explicitly disabled by setting <code>disable_buffering</code> to <code>True</code>. See the documentation on <a href="https://datadogpy.readthedocs.io/en/latest/#datadog-dogstatsd">datadog.dogstatsd</a> for more details.
+</div>
+
 {{< /programming-lang >}}
 
 {{< programming-lang lang="ruby" >}}
@@ -324,6 +327,10 @@ require 'datadog/statsd'
 # Create a DogStatsD client instance.
 statsd = Datadog::Statsd.new('localhost', 8125)
 ```
+
+<div class="alert alert-warning">
+  By default, Ruby DogStatsD client instances cannot be shared across processes but are thread-safe. Because of this, the parent process and each child process must create their own instances of the client or the buffering must be explicitly disabled by setting <code>single_thread</code> to <code>true</code>. See the <a href="https://github.com/DataDog/dogstatsd-ruby">dogstatsd-ruby repo</a> on GitHub for more details.
+</div>
 
 {{< /programming-lang >}}
 
@@ -340,7 +347,7 @@ For more options, see [Datadog's GoDoc][1].
 
 
 
-[1]: https://godoc.org/github.com/DataDog/datadog-go/statsd
+[1]: https://godoc.org/github.com/DataDog/datadog-go/v5/statsd
 {{< /programming-lang >}}
 
 {{< programming-lang lang="java" >}}
@@ -353,11 +360,20 @@ public class DogStatsdClient {
 
     public static void main(String[] args) throws Exception {
 
-        StatsDClient Statsd = new NonBlockingStatsDClientBuilder()
+        StatsDClient statsd = new NonBlockingStatsDClientBuilder()
             .prefix("statsd")
             .hostname("localhost")
             .port(8125)
             .build();
+
+
+        // alternatively
+        StatsDClient statsdAlt = new NonBlockingStatsDClient(
+            new NonBlockingStatsDClientBuilder(
+                .prefix("statsd")
+                .hostname("localhost")
+                .port(8125)
+                .resolve()));
 
     }
 }
@@ -412,11 +428,13 @@ using (var dogStatsdService = new DogStatsdService())
 
 {{< /programming-lang-wrapper >}}
 
-**Note**: If you use DogStatsD with the Container Agent or in Kubernetes, you must instantiate the host to which StatsD metrics are forwarded to with the `$DD_DOGSTATSD_SOCKET` environment variable if using a Unix Domain Socket, or with the `$DD_AGENT_HOST` environment variable if you are using the host port binding method.
+<div class="alert alert-info">
+  If you use DogStatsD with the Container Agent or in Kubernetes, you must instantiate the host to which StatsD metrics are forwarded to with the <code>$DD_DOGSTATSD_SOCKET</code> environment variable if using a Unix Domain Socket, or with the <code>$DD_AGENT_HOST</code> environment variable if you are using the host port binding method.
+</div>
 
 ### Client instantiation parameters
 
-**Note**: As a best practice, Datadog recommends using unified service tagging when assigning tags. Unified service tagging ties Datadog telemetry together through the use of three standard tags: `env`, `service`, and `version`. To learn how to unify your environment, refer to the dedicated [unified service tagging][9] documentation.
+**Note**: As a best practice, Datadog recommends using unified service tagging when assigning tags. Unified service tagging ties Datadog telemetry together through the use of three standard tags: `env`, `service`, and `version`. To learn how to unify your environment, see [unified service tagging][8].
 
 In addition to the required DogStatsD configuration (`url` and `port`), the following optional parameters are available for your DogStatsD client:
 
@@ -430,50 +448,72 @@ In addition to the required DogStatsD configuration (`url` and `port`), the foll
 | `statsd_constant_tags` | List of strings | `null`      | Tags to apply to all metrics, events, and service checks.                                                      |
 | `statsd_namespace`     | String          | `null`      | Namespace to prefix all metrics, events, and service checks.                                                   |
 
-For more information, see the [DogStatsD module][1] documentation.
+For the full list of optional parameters available for `datadog.initialize()` as well as parameters only available when explicitly instantiating `datadog.dogstatsd.DogStatsd` instances, see the [Datadog Python library][1].
 
 
 [1]: https://datadogpy.readthedocs.io/en/latest
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
-| Parameter     | Type            | Default     | Description                                                                                                    |
-| ------------- | --------------- | ----------- | -------------------------------------------------------------------------------------------------------------- |
-| `host`        | String          | `localhost` | The host of your DogStatsD server.                                                                             |
-| `port`        | Integer         | `8125`      | The port of your DogStatsD server.                                                                             |
-| `socket_path` | String          | `null`      | The path to the DogStatsD Unix domain socket (overrides `host` and `port`, only supported with the Agent v6+). |
-| `tags`        | List of strings | `null`      | Tags to apply to all metrics, events, and service checks.                                                      |
-| `namespace`   | String          | `null`      | Namespace to prefix to all metrics, events, and service checks.                                                |
+| Parameter       | Type            | Default     | Description                                                                                                    |
+| --------------- | --------------- | ----------- | -------------------------------------------------------------------------------------------------------------- |
+| `host`          | String          | `localhost` | The host of your DogStatsD server.                                                                             |
+| `port`          | Integer         | `8125`      | The port of your DogStatsD server.                                                                             |
+| `socket_path`   | String          | `null`      | The path to the DogStatsD Unix domain socket (overrides `host` and `port`, only supported with the Agent v6+). |
+| `tags`          | List of strings | `null`      | Tags to apply to all metrics, events, and service checks.                                                      |
+| `namespace`     | String          | `null`      | Namespace to prefix to all metrics, events, and service checks.                                                |
+| `single_thread` | Boolean         | `false`     | Makes the client send the metrics on the main thread when enabled rather than in a companion thread.           |
 
+For the full list of optional parameters, see the [dogstatsd-ruby repo][1] on GitHub.
+
+
+[1]: https://github.com/DataDog/dogstatsd-ruby
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
-| Parameter               | Type            | Description                                                                                                                                                                                                         |
-| ----------------------- | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `Namespace`             | String          | Namespace to prefix to all metrics, events, and service checks.                                                                                                                                                     |
-| `Tags`                  | List of strings | Global tags applied to every metric, event, and service check.                                                                                                                                                      |
-| `Buffered`              | Boolean         | Used to pack multiple DogStatsD messages in one payload. When set to `true`, messages are buffered until the total size of the payload exceeds `MaxMessagesPerPayload` or 100ms after the payload started building. |
-| `MaxMessagesPerPayload` | Integer         | The maximum number of metrics, events, and/or service checks a single payload can contain. This option only takes effect when the client is buffered.                                                               |
-| `WriteTimeoutUDS`       | Integer         | The timeout after which a UDS packet is dropped.                                                                                                                                                                    |
+The Go client has multiple options for configuring the behavior of your client.
 
-For more options, see [Datadog's GoDoc][1].
+| Parameter                     | Type            | Description                                                                  |
+| ----------------------------- | --------------- | ---------------------------------------------------------------------------- |
+| `WithNamespace()`             | String          | Configure a namespace to prefix to all metrics, events, and service checks.  |
+| `WithTags()`                  | List of strings | Global tags applied to every metric, event, and service check.               |
+
+For all available options, see [Datadog's GoDoc][1].
 
 
-[1]: https://godoc.org/github.com/DataDog/datadog-go/statsd#Option
+[1]: https://godoc.org/github.com/DataDog/datadog-go/v5/statsd#Option
 {{< /programming-lang >}}
 {{< programming-lang lang="java" >}}
 
-| Parameter      | Type            | Description                                                          |
-| -------------- | --------------- | -------------------------------------------------------------------- |
-| `prefix`       | String          | The prefix to apply to all metrics, events, and service checks.      |
-| `hostname`     | String          | The host name of the targeted StatsD server.                         |
-| `port`         | Integer         | The port of the targeted StatsD server.                              |
-| `constantTags` | List of strings | Global tags to be applied to every metric, event, and service check. |
+As of v2.10.0 the recommended way to instantiate the client is via the NonBlockingStatsDClientBuilder. You
+can use the following builder methods to define the client parameters.
 
-For more information, see the [NonBlockingStatsDClient Class][1] documentation.
+| Builder Method                               | Type           | Default   | Description                                                                         |
+| -------------------------------------------- | -------------- | --------- | ----------------------------------------------------------------------------------- |
+| `prefix(String val)`                         | String         | null      | The prefix to apply to all metrics, events, and service checks.                     |
+| `hostname(String val)`                       | String         | localhost | The host name of the targeted StatsD server.                                        |
+| `port(int val)`                              | Integer        | 8125      | The port of the targeted StatsD server.                                             |
+| `constantTags(String... val)`                | String varargs | null      | Global tags to be applied to every metric, event, and service check.                |
+| `blocking(boolean val)`                      | Boolean        | false     | The type of client to instantiate: blocking vs non-blocking.                        |
+| `socketBufferSize(int val)`                  | Integer        | -1        | The size of the underlying socket buffer.                                           |
+| `enableTelemetry(boolean val)`               | Boolean        | false     | Client telemetry reporting.                                                         |
+| `entityID(String val)`                       | String         | null      | Entitity ID for origin detection.                                                   |
+| `errorHandler(StatsDClientErrorHandler val)` | Integer        | null      | Error handler in case of an internal client error.                                  |
+| `maxPacketSizeBytes(int val)`                | Integer        | 8192/1432 | The maxumum packet size; 8192 over UDS, 1432 for UDP.                               |
+| `processorWorkers(int val)`                  | Integer        | 1         | The number of processor worker threads assembling buffers for submission.           |
+| `senderWorkers(int val)`                     | Integer        | 1         | The number of sender worker threads submitting buffers to the socket.               |
+| `poolSize(int val)`                          | Integer        | 512       | Network packet buffer pool size.                                                    |
+| `queueSize(int val)`                         | Integer        | 4096      | Maximum number of unprocessed messages in the queue.                                |
+| `timeout(int val)`                           | Integer        | 100       | the timeout in milliseconds for blocking operations. Applies to unix sockets only.  |
+
+For more information, see the [NonBlockingStatsDClient Class][1] and [NonBlockingStatsDClientBuilder Class][2] documentation.
+
+If you are on an older client release, please see the deprecated constructor documentation [here][3].
 
 
-[1]: https://jar-download.com/artifacts/com.datadoghq/java-dogstatsd-client/2.1.1/documentation
+[1]: https://jar-download.com/javaDoc/com.datadoghq/java-dogstatsd-client/2.13.0/com/timgroup/statsd/NonBlockingStatsDClient.html
+[2]: https://jar-download.com/javaDoc/com.datadoghq/java-dogstatsd-client/2.13.0/com/timgroup/statsd/NonBlockingStatsDClientBuilder.html
+[3]: https://javadoc.io/static/com.datadoghq/java-dogstatsd-client/2.9.0/com/timgroup/statsd/NonBlockingStatsDClient.html
 {{< /programming-lang >}}
 {{< programming-lang lang="PHP" >}}
 
@@ -502,20 +542,19 @@ For more information, see the [NonBlockingStatsDClient Class][1] documentation.
 DogStatsD and StatsD are broadly similar, however, DogStatsD contains advanced features which are specific to Datadog, including available data types, events, service checks, and tags:
 
 {{< whatsnext desc="">}}
-{{< nextlink href="/developers/metrics/dogstatsd_metrics_submission/" >}}Send metrics to Datadog with DogStatsD.{{< /nextlink >}}
-{{< nextlink href="/developers/events/dogstatsd/" >}}Send events to Datadog with DogStatsD.{{< /nextlink >}}
+{{< nextlink href="/metrics/dogstatsd_metrics_submission/" >}}Send metrics to Datadog with DogStatsD.{{< /nextlink >}}
+{{< nextlink href="/events/guides/dogstatsd/" >}}Send events to Datadog with DogStatsD.{{< /nextlink >}}
 {{< nextlink href="/developers/service_checks/dogstatsd_service_checks_submission/" >}}Send service checks to Datadog with DogStatsD.{{< /nextlink >}}
 {{< /whatsnext >}}
 
-If you're interested in learning more about the datagram format used by DogStatsD, or want to develop your own Datadog library, see the [datagram and shell usage][10] section, which also explains how to send metrics and events straight from the command line.
+If you're interested in learning more about the datagram format used by DogStatsD, or want to develop your own Datadog library, see the [datagram and shell usage][9] section, which also explains how to send metrics and events straight from the command line.
 
 [1]: https://github.com/etsy/statsd
-[2]: /developers/metrics/dogstatsd_metrics_submission/
+[2]: /metrics/dogstatsd_metrics_submission/
 [3]: https://hub.docker.com/r/datadog/dogstatsd
 [4]: https://gcr.io/datadoghq/dogstatsd
-[5]: /developers/metrics/custom_metrics/
-[6]: /developers/events/dogstatsd/
+[5]: /metrics/custom_metrics/
+[6]: /events/guides/dogstatsd/
 [7]: /developers/service_checks/dogstatsd_service_checks_submission/
-[8]: /developers/libraries/#api-and-dogstatsd-client-libraries
-[9]: /getting_started/tagging/unified_service_tagging
-[10]: /developers/metrics/
+[8]: /getting_started/tagging/unified_service_tagging
+[9]: /metrics/

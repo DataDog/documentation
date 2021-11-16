@@ -60,11 +60,11 @@ Consultez la [documentation relative au tracing][10] pour en savoir plus.
 
 [1]: /fr/agent/
 [2]: /fr/api/
-[3]: /fr/developers/libraries/
+[3]: /fr/developers/community/libraries/
 [4]: /fr/dashboards/screenboard/
 [5]: /fr/dashboards/timeboard/
 [6]: https://www.datadoghq.com/blog/statsd
 [7]: /fr/developers/dogstatsd/
 [8]: /fr/developers/integrations/
-[9]: /fr/developers/libraries/#apm-distributed-tracing-client-libraries
+[9]: /fr/developers/community/libraries/#apm-distributed-tracing-client-libraries
 [10]: /fr/tracing/

@@ -126,18 +126,18 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 {{< get-metrics-from-git "clickhouse" >}}
 
 
-### サービスのチェック
-
-**clickhouse.can_connect**:<br>
-Agent が監視対象の ClickHouse データベースに接続できない場合は `CRITICAL` を返します。それ以外の場合は `OK` を返します。
-
 ### イベント
 
 ClickHouse チェックにはイベントは含まれません。
 
+### サービスのチェック
+{{< get-service-checks-from-git "clickhouse" >}}
+
+
 ## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
+
 
 
 [1]: https://clickhouse.yandex

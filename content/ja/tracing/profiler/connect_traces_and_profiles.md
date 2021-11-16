@@ -5,12 +5,12 @@ further_reading:
   - link: トレーシング
     tag: Documentation
     text: APM 分散型トレーシング
-  - link: tracing/profiler/getting_started
+  - link: /tracing/profiler/enabling
     tag: Documentation
     text: アプリケーションの継続的なプロファイラーを有効にします。
-  - link: tracing/profiler/intro_to_profiling
+  - link: getting_started/profiler
     tag: Documentation
-    text: プロファイリング入門
+    text: プロファイラーの概要
 ---
 アプリケーションの本番環境でパフォーマンスの問題が発生し始めた場合、役立つ手法のひとつが APM からの分散型トレース情報をコードスタックのフルプロファイルに接続することです。APM 分散型トレーシングと Continuous Profiler の双方が有効化されたアプリケーションプロセスは自動的にリンクされるため、Code Hotspots タブでスパン情報からプロファイリングデータを直接開き、パフォーマンスの問題に関連する特定のコード行を見つけることができます。
 
@@ -18,7 +18,7 @@ further_reading:
 
 ## 前提条件
 
-{{< programming-lang-wrapper langs="java,python" >}}
+{{< programming-lang-wrapper langs="java,python,ruby" >}}
 {{< programming-lang lang="java" >}}
 [サービスのプロファイリングを起動する][1]と、コードのホットスポット識別がデフォルトで有効化されます。手動でインスツルメントされたコードの場合、Continuous Profiler はスパンのスコープアクティベーションを要求します。
 
@@ -33,10 +33,12 @@ try (final Scope scope = tracer.activateSpan(span)) { // mandatory for Datadog c
 
 ```
 
-トレーシングライブラリのバージョン 0.65.0 以降が必要です。
+以下が必要です:
+- トレーシングライブラリのバージョン 0.65.0 以降
+- OpenJDK 8u282 以降
 
 
-[1]: /ja/tracing/profiler/getting_started
+[1]: /ja/tracing/profiler/enabling/?code-lang=java
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
 
@@ -45,7 +47,16 @@ try (final Scope scope = tracer.activateSpan(span)) { // mandatory for Datadog c
 トレーシングライブラリのバージョン 0.44.0 以降が必要です。
 
 
-[1]: /ja/tracing/profiler/getting_started
+[1]: /ja/tracing/profiler/enabling/?code-lang=python
+{{< /programming-lang >}}
+{{< programming-lang lang="ruby" >}}
+
+[サービスのプロファイリングを起動する][1]と、コードのホットスポット識別がデフォルトで有効化されます。
+
+トレーシングライブラリのバージョン 0.49.0 以降が必要です。
+
+
+[1]: /ja/tracing/profiler/enabling/?code-lang=ruby
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
@@ -66,6 +77,8 @@ try (final Scope scope = tracer.activateSpan(span)) { // mandatory for Datadog c
 - **その他**は、プロファイリングデータで説明不能なスパンの実行に費やした時間を示します。
 
 これらのタイプのうちひとつをクリックし、時間を要したメソッドに対応するリスト (開始時間順) を確認します。プラス (`+`) マークをクリックすると当該メソッドのスタックトレースが**逆の順で**開きます。
+
+### 'Other' カテゴリで費やされた時間とはどういう意味ですか？
 
 **その他**の説明のつかない時間の記録が少ない (10% 未満) ことは通常ありません。その他の時間が記録される可能性は次の通りです。
 

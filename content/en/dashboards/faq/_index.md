@@ -27,7 +27,6 @@ aliases:
     {{< nextlink href="dashboards/faq/how-does-datadog-render-graphs-my-graph-doesn-t-show-the-values-i-m-expecting" >}}How does Datadog render graphs? My graph doesn't show the values I'm expecting.{{< /nextlink >}}
     {{< nextlink href="dashboards/faq/what-is-the-granularity-of-my-graphs-am-i-seeing-raw-data-or-aggregates-on-my-graph" >}}What is the granularity of my graphs? Am I seeing raw data or aggregates on my graph?{{< /nextlink >}}
     {{< nextlink href="dashboards/faq/how-can-i-graph-host-uptime-percentage" >}}How can I graph host uptime percentage?{{< /nextlink >}}
-    {{< nextlink href="dashboards/faq/inconsistent-sum-aggregation-between-different-time-windows-on-graph" >}}Inconsistent sum aggregation between different time windows on graph{{< /nextlink >}}
     {{< nextlink href="dashboards/faq/why-does-zooming-out-a-timeframe-also-smooth-out-my-graphs" >}}Why does zooming out a timeframe also smooth out my graphs?{{< /nextlink >}}
     {{< nextlink href="dashboards/faq/why-is-a-counter-metric-being-displayed-as-a-decimal-value" >}}Why is a counter metric being displayed as a decimal value?{{< /nextlink >}}
     {{< nextlink href="dashboards/faq/the-same-color-is-used-twice-in-my-graph" >}}The same color is used twice in my graph!{{< /nextlink >}}

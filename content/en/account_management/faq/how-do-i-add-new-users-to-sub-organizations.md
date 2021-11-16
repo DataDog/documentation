@@ -3,9 +3,9 @@ title: How do I add new users to sub-organizations?
 kind: faq
 ---
 
-Datadog offers 3 ways to quickly provision users to their respective organizations:
+Datadog offers the following ways to provision users to their respective organizations:
 
-* Batches of users can be added via Datadog within the [Team tab][1]
+* Batches of users can be added through Datadog within the [Team tab][1]
 * [API user creation][2]
 * Use an authentication service like [SAML][3]. [Just-In-Time (JIT) provisioning][4] can be enabled allowing users with valid single sign-on credentials to have their Datadog organization automatically created when they attempt to log in.
 
