@@ -19,6 +19,9 @@ further_reading:
 - link: "/tracing/visualization/"
   tag: "Documentation"
   text: "Learn to use the APM UI"
+- link: "https://www.datadoghq.com/blog/span-based-metrics/"
+  tag: "Blog"
+  text: "Generate span-based metrics to track historical trends in application performance"
 aliases:
   - /tracing/faq/terminology
   - /tracing/guide/terminology
