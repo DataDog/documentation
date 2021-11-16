@@ -19,8 +19,8 @@ you can manually trigger self tests by running the following command:
 | Kubernetes   | `kubectl exec -it datadog-1636981026-wlv5s -c security-agent -- security-agent runtime self-test` |
 | Host         | `sudo /opt/datadog-agent/embedded/bin/security-agent runtime self-test`                           |
 
-The self-test procedure will create some temporary files, create rules monitoring
-those files, and then trigger this rules.
+The self-test procedure creates some temporary files and rules monitoring
+those files, and then triggers those rules.
 
 If everything is working as expected, you should see:
 ```
