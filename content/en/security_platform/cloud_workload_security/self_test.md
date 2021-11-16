@@ -27,7 +27,7 @@ If everything is working as expected, you should see:
 Runtime self test: OK
 ```
 
-In the case of an error, you will see:
+In the case of an error, you should see:
 ```
 Runtime self test: ERROR_MESSAGE
 ```
