@@ -337,7 +337,7 @@ See the appropriate version of the [Postgres `contrib` documentation][1] for mor
 
 The `schema` tag (also known as "database") is present on MySQL Query Metrics and Samples only when a Default Database is set on the connection that made the query. The Default Database is configured by the application by specifying the "schema" in the database connection parameters, or by executing the [USE Statement][5] on an already existing connection. 
 
-If there is no Default Database configured for a connection then none of the queries made by that connection will have the `schema` tag on them. 
+If there is no default database configured for a connection, then none of the queries made by that connection have the `schema` tag on them. 
 
 ## Need more help?
 
