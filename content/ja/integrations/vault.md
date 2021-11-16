@@ -22,7 +22,7 @@ categories:
 creates_events: true
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/vault/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/vault/README.md
 display_name: Vault
 draft: false
 git_integration_title: vault
@@ -247,18 +247,8 @@ _Agent バージョン 6.0 以降で利用可能_
 このイベントは、クラスターリーダーが変更されると発生します。
 
 ### サービスのチェック
+{{< get-service-checks-from-git "vault" >}}
 
-**vault.can_connect**:<br>
-Agent が Vault に接続できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
-
-**vault.unsealed**:<br>
-Vault がシールされている場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
-
-**vault.initialized**:<br>
-Vault がまだ初期化されていない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
-
-**vault.prometheus.health**:<br>
-チェックがメトリクスのエンドポイントにアクセスできない場合は `CRITICAL` を返します。それ以外の場合は `OK` を返します。
 
 ## トラブルシューティング
 

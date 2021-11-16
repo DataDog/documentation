@@ -19,15 +19,14 @@
         "build:webpack:preview": "NODE_ENV=preview webpack --config webpack.prod.js",
         "build:hugo:live": "yarn run build:hugo -- -D -F --environment live",
         "build:live": "run-s build:webpack build:hugo:live",
-        "deploy:previewAssets": "./node_modules/.bin/hugo deploy --target previewAssets -e preview --maxDeletes 0 --log --verbose --debug",
-        "deploy:preview": "./node_modules/.bin/hugo deploy --target preview -e preview --maxDeletes -1 --invalidateCDN --log --verbose --debug",
+        "deploy:previewAssets": "./node_modules/.bin/hugo deploy --target previewAssets -e preview --maxDeletes 0 --log --verbose",
+        "deploy:preview": "./node_modules/.bin/hugo deploy --target preview -e preview --maxDeletes -1 --invalidateCDN --log --verbose",
         "deploy:liveAssets": "./node_modules/.bin/hugo deploy --target liveAssets -e live --maxDeletes 0 --log --verbose --debug",
         "deploy:live": "./node_modules/.bin/hugo deploy --target live -e live --maxDeletes -1 --log --verbose --debug",
         "build:apiPages": "node -e 'require(\"./src/scripts/build-api-pages.js\").init()'",
         "dereference": "node ./src/scripts/dereference.js",
         "analyze": "webpack --config webpack.prod.js --env.BUNDLE_ANALYZE=true",
-        "test": "./node_modules/.bin/jest",
-        "check-links": "node node_modules/link-checker/dd-link-checker.js"
+        "test": "./node_modules/.bin/jest"
     },
     "repository": {
         "type": "git",
@@ -45,8 +44,8 @@
     "dependencies": {
         "@apidevtools/json-schema-ref-parser": "^8.0.0",
         "@babel/polyfill": "^7.4.4",
-        "@datadog/browser-logs": "^1.24.1",
-        "@datadog/browser-rum": "^1.24.1",
+        "@datadog/browser-logs": "^3.6.4",
+        "@datadog/browser-rum": "^3.6.4",
         "a11y": "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/a11y-v1.0.1.tgz",
         "algoliasearch": "^3.35.1",
         "bootstrap": "4.3.1",
@@ -61,7 +60,6 @@
         "jshint-stylish": "2.2.1",
         "json2csv": "^4.5.2",
         "lazypipe": "1.0.2",
-        "link-checker": "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/link-checker-v1.0.74.tgz",
         "lodash": "^4.17.20",
         "marked": "^1.2.7",
         "merge-stream": "2.0.0",
@@ -74,7 +72,6 @@
         "safe-json-stringify": "^1.2.0",
         "slugify": "^1.4.6",
         "tiny-async-pool": "^1.0.4",
-        "translate": "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/translate-v1.0.37.tgz",
         "traverse": "0.6.6",
         "webpack": "^4.42.1",
         "yaml-lint": "^1.2.4"

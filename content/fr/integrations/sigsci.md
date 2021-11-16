@@ -10,13 +10,14 @@ categories:
 creates_events: true
 ddtype: crawler
 dependencies:
-  - 'https://github.com/DataDog/integrations-extras/blob/master/sigsci/README.md'
+  - https://github.com/DataDog/integrations-extras/blob/master/sigsci/README.md
 display_name: "Signal\_Sciences"
 draft: false
 git_integration_title: sigsci
 guid: 0c92b7cd-0736-4f9d-82ed-16f1bba8c8d0
 integration_id: sigsci
 integration_title: "Signal\_Sciences"
+integration_version: ''
 is_public: true
 kind: integration
 maintainer: info@signalsciences.com
@@ -146,7 +147,7 @@ Pour vous inscrire au service de surveillance Datadog/Signal Sciences, un outil
 [2]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/sigsci/images/datadog-sigsci-security.png
 [3]: https://docs.signalsciences.net/install-guides/
 [4]: https://docs.datadoghq.com/fr/agent/kubernetes/dogstatsd/
-[5]: https://app.datadoghq.com/account/settings#api
+[5]: https://app.datadoghq.com/organization-settings/api-keys
 [6]: https://dashboard.signalsciences.net
 [7]: https://player.vimeo.com/video/347360711
 [8]: https://docs.signalsciences.net/integrations/datadog/

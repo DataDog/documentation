@@ -1,5 +1,5 @@
 ---
-title: Datadog へのログの送信
+title: ログの使用を開始する
 kind: documentation
 further_reading:
   - link: 'https://learn.datadoghq.com/enrol/index.php?id=15'
@@ -14,240 +14,134 @@ further_reading:
 ---
 ## 概要
 
-Datadog ログ管理は、アプリケーションからログを収集するために使用されます。このページでは、ログを Datadog に取得する方法を説明します。はじめに、以下を確認してください。
+Datadog のログ管理を使用して、サーバー、コンテナ、クラウド環境、アプリケーション、既存のログプロセッサやフォワーダーなど、複数のロギングソースにまたがるログを収集します。従来のロギングでは、コスト効率を維持するために分析・保持するログを選択する必要がありました。Datadog Logging without Limits* では、ログの収集、処理、アーカイブ、探索、監視をログの制限なく行うことができます。
 
-1. [Datadog アカウント][1]を作成し、[Datadog ログ管理][2]を有効にします (まだ実行していない場合)。
-2. 以下のコマンドを使用して [Vagrant Ubuntu 16.04 仮想マシン][3]を設定します。Vagrant の詳細については、[Getting Started][4] ページを参照してください。
+このページでは、Datadog でログ管理を始めるための方法を説明します。まだお持ちでない方は、[Datadog アカウント][1]を作成してください。
 
-    ```text
-    vagrant init ubuntu/xenial64
-    vagrant up
-    vagrant ssh
-    ```
+## ロギングソースを構成する
 
-確認したら、これ以降のセクションに従って以下の方法を学びます。
+ログ管理では、ログエクスプローラーでデータを分析・探索したり、[トレーシング][2]や[メトリクス][3]を接続して Datadog 全体で有益なデータを関連付けたり、取り込んだログを Datadog の[セキュリティモニタリング][4]で使用したりすることができます。Datadog 内でのログのライフサイクルは、ログソースからログを取り込むところから始まります。
 
-- [手動でログを送信](#sending-logs-manually)
-- [Agent を使用してファイルからログを送信](#send-logs-from-a-file)
+{{< img src="/getting_started/logs/getting-started-overview.png" alt="様々なタイプのログコンフィギュレーション">}}
 
-## 手動でのログの送信
+### サーバー
 
-手動でログを送信するには、Vagrant 仮想マシンで `telnet` コマンドと [Datadog API キー][5]を使用します。
-
-ログは全文メッセージにすることができます。
-
-安全な TCP エンドポイントは telnet intake.logs.datadoghq.com で、ポート `{{< region-param key="tcp_endpoint_port" code="true" >}}` (telnet を使用しない安全な接続の場合はポート `{{< region-param key="tcp_endpoint_port_ssl" >}}`) を使用します。
-
-{{< site-region region="us,us3" >}}
-
-```
-telnet intake.logs.datadoghq.com 10514
-
-<DATADOG_API_KEY> Plain text log sent through TCP
-```
-
-{{< /site-region >}}
-
-{{< site-region region="eu" >}}
-
-```
-telnet intake.logs.datadoghq.com 1883
-
-<DATADOG_API_KEY> TCP 経由で送信されるプレーンテキストログ
-```
-
-{{< /site-region >}}
-
-{{< site-region region="gov" >}}
-
-この機能はサポートされていません。
-
-{{< /site-region >}}
-
-これにより、[Log Explorer ページ][2]には以下の結果が生成されます。
-
-{{< img src="getting_started/logs/plain_text_log.png" alt="カスタム Telnet" >}}
-
-あるいは、Datadog によって自動的に解析される以下の JSON オブジェクトが生成されます。
-
-{{< site-region region="us,us3" >}}
-
-```text
-telnet intake.logs.datadoghq.com 10514
-
-<DATADOG_API_キー> {"message":"TCP 経由で直接送信される JSON 形式ログ", "ddtags":"env:dev", "ddsource":"terminal", "hostname":"gs-hostame", "service":"user"}
-```
-
-{{< /site-region >}}
-
-{{< site-region region="eu" >}}
-
-```text
-telnet tcp-intake.logs.datadoghq.eu 1883
-
-<DATADOG_API_キー> {"message":"TCP 経由で直接送信される JSON 形式ログ", "ddtags":"env:dev", "ddsource":"terminal", "hostname":"gs-hostame", "service":"user"}
-```
-
-{{< /site-region >}}
-
-{{< site-region region="gov" >}}
-
-この機能はサポートされていません。
-
-{{< /site-region >}}
-
-これにより、[Log Explorer ページ][2]には以下の結果が生成されます。
-
-{{< img src="getting_started/logs/json_log.png" alt="JSON ログ" >}}
-
-## ファイルからのログの送信
-
-### Agent のインストール
-
-Vagrant ホストに Datadog Agent をインストールするには、[Datadog API キー][5]で更新した [1 行のインストールコマンド][6]を使用します。
-
-
-{{< site-region region="us" >}}
-
-```shell
-DD_API_KEY=<DATADOG_API_KEY>  bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"
-```
-
-{{< /site-region >}}
-
-{{< site-region region="eu" >}}
-
-```shell
-DD_API_KEY=<DATADOG_API_KEY> DD_SITE="datadoghq.eu" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"
-```
-
-{{< /site-region >}}
-
-{{< site-region region="gov" >}}
-
-```shell
-DD_API_KEY=<DATADOG_API_KEY> DD_SITE="ddog-gov.com" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"
-```
-
-{{< /site-region >}}
-
-{{< site-region region="us3" >}}
-
-```shell
-DD_API_KEY=<DATADOG_API_KEY> DD_SITE="us3.datadoghq.com" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"
-```
-
-{{< /site-region >}}
-
-#### 検証
-
-[ステータスコマンド][7] `sudo datadog-agent status` を使用して、Agent が実行されていることを確認します。まだログ収集を有効にしていないので、以下のように表示されるはずです。
-
-```text
-==========
-Logs Agent
-==========
-
-  Logs Agent is not running
-```
-
-**注**: 数分経過したら、Datadog で [Infrastructure List][8] をチェックして、Agent がアカウントに接続されていることを確認できます。
-
-### ログ収集の有効化
-
-Agent によるログ収集を有効にするには、`/etc/datadog-agent/datadog.yaml` にある `datadog.yaml` [構成ファイル][9]を編集し、`logs_enabled:true` と設定します。
+サーバーから Datadog にログを転送する際には、いくつかの[インテグレーション][5]を使用することができます。インテグレーションは、サーバーから Datadog にログを転送するために、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダの `conf.yaml` ファイル内のログコンフィギュレーションブロックを使用します。
 
 ```yaml
-## @param logs_enabled - boolean - optional - default: false
-## logs_enabled を true に設定して Datadog Agent ログ収集を有効化する。
-#
-logs_enabled: true
+logs:
+  - type: file
+    path: /path/to/your/integration/access.log
+    source: integration_name
+    service: integration_name
+    sourcecategory: http_web_access
 ```
 
-### カスタムファイルの監視
+サーバーからログの収集を開始するには
 
-#### ログファイルの作成
+1. まだインストールしていない場合は、お使いのプラットフォームに応じた [Datadog Agent][6] をインストールしてください。
 
-カスタムファイルからログを収集するには、まずファイルを作成し、それに 1 行のログを追加します。
+    **注意**: ログ収集には Datadog Agent v6 以降が必要です。
 
-```shell
-$ touch log_file_to_monitor.log
+2. Datadog Agent では、ログの収集はデフォルトで無効になっています。ログ収集を有効にするには、`datadog.yaml` ファイルで `logs_enabled` を `true` に設定してください。
 
-$ echo "ログの最初の行" >> log_file_to_monitor.log
-```
+3. [Datadog Agent を再起動][7]します。
 
-#### Agent の構成
+4. Datadog アプリのインテグレーション[起動手順][8]またはカスタムファイルのログ収集手順に従ってください。
 
-Agent がこのログファイルを監視するように指定するには、以下のようにします。
+    **注**: カスタムファイルからログを収集していて、テールファイル、TCP/UDP、journald、Windows Events の例が必要な場合は、[カスタムログ収集のドキュメント][9]を参照してください。
 
-1. [Agent の構成ディレクトリ][10]内に新しい構成フォルダーを作成します。
+### コンテナ
 
-    ```shell
-    sudo mkdir /etc/datadog-agent/conf.d/custom_log_collection.d/
-    ```
+Datadog Agent v6 では、Agent がコンテナからログを収集することができるようになりました。それぞれのコンテナ化サービスには、Agent をどこにデプロイまたは実行するか、ログをどのようにルーティングするかなどに関する特定のコンフィギュレーション手順があります。
 
-2. この新しい構成フォルダー内に構成ファイルを作成します。
+例えば、[Docker][10] では、Agent を Docker 環境の外部に設置するお客様のホスト上でのインストールと、コンテナ化された Agent を Docker 環境にデプロイするという 2 つの異なるタイプが用意されています。
 
-    ```shell
-    sudo touch /etc/datadog-agent/conf.d/custom_log_collection.d/conf.yaml
-    ```
+[Kubernetes][11] では、Kubernetes クラスター内で Datadog Agent を動作させる必要があります。ログ収集の設定は DaemonSet spec、Helm チャート、または Datadog Operator を使用して行います。
 
-3. 以下の内容をコピーして、この `conf.yaml` ファイル内に貼り付けます。
+コンテナサービスからのログ収集を開始するには、[アプリ内の手順][12]に従ってください。
 
-    ```yaml
-    logs:
-        - type: file
-          path: /home/ubuntu/log_file_to_monitor.log
-          source: custom
-          service: user
-    ```
+### クラウド
 
-4. 次のように入力して Agent を再起動します。`sudo service datadog-agent restart`
+AWS、Azure、GCP など、複数のクラウドプロバイダーのログを Datadog に転送することができます。各クラウドプロバイダーにより、それぞれコンフィギュレーション手順が異なります。
 
-##### 検証
+例えば、AWS サービスのログは通常、S3 バケットや CloudWatch ロググループに保存されています。これらのログを購読し、Amazon Kinesis ストリームに転送して、1 つまたは複数の宛先に転送することができます。Datadog は、Amazon Kinesis 配信ストリームのデフォルトの転送先の1つです。
 
-ログ構成が正しければ、[ステータスコマンド][7] `sudo datadog-agent status` によって以下のように出力されます。
+クラウドサービスからのログ収集を開始するには、[アプリ内の手順][13]に従ってください。
 
-```text
-==========
-Logs Agent
-==========
-    LogsProcessed: 0
-    LogsSent: 0
+### クライアント
 
-  custom_log_collection
-  ---------------------
-    Type: file
-    Path: /home/ubuntu/log_file_to_monitor.log
-    Status: OK
-    Inputs: /home/ubuntu/log_file_to_monitor.log
-```
+Datadog では、SDK やライブラリを使ってクライアントからログを収集することができます。たとえば、`datadog-logs` SDKを使用して、JavaScript クライアントから Datadog にログを送信します。
 
-### ファイルへの新しいログの追加
+クラウドサービスからのログ収集を開始するには、[アプリ内の手順][14]に従ってください。
 
-すべて適切に構成されたので、新しいエントリをログファイルに追加して、Datadog で確認します。
+### その他
 
-```shell
-$ echo "ログファイルのログの新しい行" >> log_file_to_monitor.log
-```
+rsyslog、flutend、logstash などの既存のログサービスやユーティリティを使用している場合は、Datadog のプラグインやログ転送オプションをご利用いただけます。
 
-これにより、[Log Explorer ページ][2]には以下の結果が生成されます。
+インテグレーションが表示されない場合は、*other integrations* ボックスに入力すると、そのインテグレーションが利用可能になったときに通知を受け取ることができます。
 
-{{< img src="getting_started/logs/file_log_example.png" alt="ファイルログ例" >}}
+クラウドサービスからのログ収集を開始するには、[アプリ内の手順][15]に従ってください。
 
-**注**: Datadog Agent を使用している場合、256KB 以上のログイベントは複数のエントリに分割されます。
+## ログの探索
+
+ロギングソースを構成すると、ログを[ログエクスプローラー][16]で確認できます。ここでログをフィルタリング・集約・可視化することができます。
+
+例えば、あるサービスから流れてくるログをドリルダウンしたい場合は、`Service:your-service-name` でフィルタリングします。さらに、`ERROR` などの `status` などでフィルタリングし、[パターン別集計][17]を選択すると、サービスのどの部分で最も多くのエラーが記録されているかを確認することができます。
+
+{{< img src="/getting_started/logs/error-pattern.png" alt="ログエクスプローラーでのエラーパターンによるフィルタリング">}}
+
+`Source` の `Field` でログを集計し、**トップリスト**の表示オプションに切り替えると、上位のログサービスを確認することができます。`error` のようなソースを選択し、ドロップダウンメニューから **View Logs** を選択します。サイドパネルにはエラーに基づくログが表示されるため、注意が必要なホストやサービスをすぐに確認することができます。
+
+{{< img src="/getting_started/logs/top-list-view.png" alt="ログエクスプローラーのトップリスト">}}
+
+## 次のステップ
+
+ログソースが設定され、ログがログエクスプローラーに表示されるようになったら、ログ管理の他のいくつかのエリアの探索をはじめることができます。
+
+### ログコンフィギュレーション
+
+* [属性とエイリアス][18]を設定して、ログ環境を統一します。
+* [パイプライン][19]や[プロセッサー][20]を使って、ログの処理方法をコントロールすることができます。
+* Logging without Limits* では、ログの取り込みとインデックス処理を分離しているため、インデックス化するもの、保持するもの、アーカイブするものを選択して[ログを構成[21]することができます。
+
+### ログの相関付け
+
+* [ログとトレースを接続][2]して、特定の `env`、`service,`、または `version` に関連する正確なログを表示します。
+* Datadog ですでにメトリクスを使用している場合は、[ログとメトリクスを相関付ける][3]ことで、問題のコンテキストを取得することができます。
+
+### ガイド
+
+* [Logging without Limits*][22] の詳細
+* [RBAC 設定][23]による機密ログデータの管理
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+<br>
+*Logging without Limits は Datadog, Inc. の商標です。
+
 [1]: https://www.datadoghq.com
-[2]: https://app.datadoghq.com/logs
-[3]: https://app.vagrantup.com/ubuntu/boxes/xenial64
-[4]: https://www.vagrantup.com/intro/getting-started
-[5]: https://app.datadoghq.com/account/settings#api
-[6]: https://app.datadoghq.com/account/settings#agent/ubuntu
-[7]: /ja/agent/guide/agent-commands/#agent-information
-[8]: https://app.datadoghq.com/infrastructure
-[9]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
-[10]: /ja/agent/guide/agent-configuration-files/#agent-configuration-directory
+[2]: /ja/tracing/connect_logs_and_traces/
+[3]: /ja/logs/guide/correlate-logs-with-metrics/
+[4]: /ja/security_platform/security_monitoring/
+[5]: /ja/getting_started/integrations/
+[6]: /ja/agent/
+[7]: https://github.com/DataDog/datadog-agent/blob/main/docs/agent/changes.md#cli
+[8]: https://app.datadoghq.com/logs/onboarding/server
+[9]: /ja/agent/logs/?tab=tailfiles#custom-log-collection
+[10]: /ja/agent/docker/log/?tab=containerinstallation
+[11]: /ja/agent/kubernetes/log/?tab=daemonset
+[12]: https://app.datadoghq.com/logs/onboarding/container
+[13]: https://app.datadoghq.com/logs/onboarding/cloud
+[14]: https://app.datadoghq.com/logs/onboarding/client
+[15]: https://app.datadoghq.com/logs/onboarding/other
+[16]: /ja/logs/explorer/
+[17]: /ja/logs/explorer/#patterns
+[18]: /ja/logs/log_configuration/attributes_naming_convention/
+[19]: /ja/logs/log_configuration/pipelines/
+[20]: /ja/logs/log_configuration/processors/
+[21]: /ja/logs/log_configuration/
+[22]: /ja/logs/guide/getting-started-lwl/
+[23]: /ja/logs/guide/logs-rbac/

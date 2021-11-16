@@ -14,7 +14,7 @@ integration_title: syslog_ng
 is_public: true
 public_title: Datadog-Syslog-ng インテグレーション
 dependencies:
-  - 'https://github.com/DataDog/documentation/blob/master/content/en/integrations/syslog_ng.md'
+  - https://github.com/DataDog/documentation/blob/master/content/en/integrations/syslog_ng.md
 supported_os:
   - linux
   - windows
@@ -97,7 +97,7 @@ Syslog-ng を構成して、ホスト、コンテナ、サービスからログ�
         destination d_datadog { tcp("intake.logs.datadoghq.com" port(10516)     tls(peer-verify(required-trusted)) template(DatadogFormat)); };
         ```
 
-    TLS のパラメーターの詳細、および syslog-ng が使用可能かどうかは、[公式ドキュメント][1]を参照してください。
+    TLS のパラメーターと可能性について詳しくは、[syslog-ng オープンソース版管理ガイド][1]を参照してください。
 
 5. (オプション) ログにソースを設定します。ソースを設定するには、以下の形式を使用します (ソースが複数ある場合は、ファイルごとに形式の名前を変えてください)。
 
@@ -184,7 +184,7 @@ Syslog-ng を構成して、ホスト、コンテナ、サービスからログ�
         destination d_datadog { tcp("tcp-intake.logs.datadoghq.eu" port(443)     tls(peer-verify(required-trusted)) template(DatadogFormat)); };
         ```
 
-    TLS のパラメーターの詳細、および syslog-ng が使用可能かどうかは、[公式ドキュメント][1]を参照してください。
+    TLS のパラメーターと可能性について詳しくは、[syslog-ng オープンソース版管理ガイド][1]を参照してください。
 
 5. syslog-ng を再起動します。
 

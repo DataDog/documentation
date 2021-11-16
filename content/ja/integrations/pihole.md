@@ -9,6 +9,7 @@ assets:
   service_checks: assets/service_checks.json
 categories:
   - ネットワーク
+  - ログの収集
 creates_events: false
 ddtype: check
 dependencies:
@@ -24,7 +25,7 @@ kind: integration
 maintainer: monganai@tcd.ie
 manifest_version: 1.0.0
 metric_prefix: pihole.
-metric_to_check: ''
+metric_to_check: pihole.clients_ever_seen
 name: pihole
 public_title: Datadog-Pi-hole インテグレーション
 short_description: Pi-hole のデフォルトメトリクスを収集するインテグレーション
@@ -66,27 +67,39 @@ Agent v6.8 以降を使用している場合は、以下の手順に従って、
 
 [Agent の status サブコマンドを実行][9]し、Checks セクションで `pihole` を探します。
 
+### ログの収集
+
+Linux プラットフォームの場合は、`/etc/datadog-agent/datadog.yaml` で Datadog Agent のログ収集を有効にします。その他のプラットフォームの場合は、[Agent コンフィギュレーションファイルガイド][10] を参照し、コンフィギュレーションファイルの場所を調べてください。
+
+```yaml
+logs_enabled: true
+```
+
+- ログの収集を開始するには、次のコンフィギュレーションブロックを `pihole.d/conf.yaml` ファイルに対して有効化します。
+    ```yaml
+    logs:
+      - type: file
+        path: /var/log/pihole.log
+        source: pihole
+    ```
+
+## 収集データ
 
 ### メトリクス
 {{< get-metrics-from-git "pihole" >}}
 
 
-### サービスのチェック
-
-**`pihole.running`**:
-
-Agent がターゲットホストと通信できない場合は、`CRITICAL` を返します。Pi-hole への接続が成功すると、`OK` を返します。
-
 ### イベント
 
 Pi-hole には、イベントは含まれません。
 
+### サービスのチェック
+{{< get-service-checks-from-git "pihole" >}}
+
+
 ## トラブルシューティング
 
-
-ご不明な点は、[Datadog のサポートチーム][11]までお問合せください。
-
-
+ご不明な点は、[Datadog のサポートチーム][13]までお問合せください。
 
 
 [1]: https://pi-hole.net/
@@ -98,5 +111,7 @@ Pi-hole には、イベントは含まれません。
 [7]: https://github.com/DataDog/integrations-extras/blob/master/pihole/datadog_checks/pihole/data/conf.yaml.example
 [8]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [9]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[10]: https://github.com/DataDog/integrations-extras/blob/master/pihole/metadata.csv
-[11]: https://docs.datadoghq.com/ja/help/
+[10]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/
+[11]: https://github.com/DataDog/integrations-extras/blob/master/pihole/metadata.csv
+[12]: https://github.com/DataDog/integrations-extras/blob/master/pihole/assets/service_checks.json
+[13]: https://docs.datadoghq.com/ja/help/

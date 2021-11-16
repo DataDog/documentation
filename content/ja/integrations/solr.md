@@ -18,7 +18,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/solr/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/solr/README.md
 display_name: Solr
 draft: false
 git_integration_title: solr
@@ -240,9 +240,8 @@ Docker環境でログを収集する Agent を構成する追加の情報に関�
 Solr チェックには、イベントは含まれません。
 
 ### サービスのチェック
+{{< get-service-checks-from-git "solr" >}}
 
-**solr.can_connect**:<br>
-Agent が監視対象の SolR インスタンスに接続できず、メトリクスを収集できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
 
 ## トラブルシューティング
 

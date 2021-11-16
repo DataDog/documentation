@@ -21,6 +21,7 @@
 "guid": "294cd3d0-1412-475a-9c85-d8369719b805"
 "integration_id": "sleuth"
 "integration_title": "Sleuth"
+"integration_version": ""
 "is_public": true
 "kind": "インテグレーション"
 "maintainer": "support@sleuth.io"

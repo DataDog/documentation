@@ -56,4 +56,4 @@ Error Tracking により、問題は事前定義された属性リストに自�
 
 
 [1]: /ja/events
-[2]: /ja/monitors/monitor_types/event/
+[2]: /ja/monitors/create/types/event/

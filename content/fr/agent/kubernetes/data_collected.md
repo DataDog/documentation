@@ -37,13 +37,13 @@ Métriques recueillies par l'Agent lorsqu'il est déployé sur votre cluster Kub
 
 {{< get-metrics-from-git "kubelet" >}}
 
-### kube-state-metrics
+### Kubernetes state
 
 Notez que les métriques `kubernetes_state.*` sont rassemblées depuis l'API `kube-state-metrics`.
 
 {{< get-metrics-from-git "kubernetes_state" >}}
 
-### kube-dns
+### DNS Kubernetes
 
 {{< get-metrics-from-git "kube_dns" >}}
 
@@ -84,34 +84,13 @@ Depuis la version 5.17.0, l'Agent Datadog prend en charge [l'option d'élection
 
 ## Checks de service
 
-Le check Kubernetes contient les checks de service suivants :
+### Kubelet
 
-- `kubernetes.kubelet.check` : <br>
-    S'il renvoie `CRITICAL`, `kubernetes.kubelet.check.ping` ou `kubernetes.kubelet.check.syncloop` est dans un état `CRITICAL` ou `NO DATA`.
+{{< get-service-checks-from-git "kubelet" >}}
 
-- `kubernetes.kubelet.check.ping` :<br>
-    S'il renvoie `CRITICAL` ou `NO DATA`, l'API Kubelet n'est pas disponible.
+### Kubernetes state
 
-- `kubernetes.kubelet.check.syncloop` :<br>
-    S'il renvoie `CRITICAL` ou `NO DATA`, la boucle de synchronisation de Kubelet qui met à jour les conteneurs ne fonctionne pas.
-
-- `kubernetes_state.node.ready` :<br>
-    Renvoie `CRITICAL` si le nœud du cluster n'est pas prêt. Si ce n'est pas le cas, renvoie `OK`.
-
-- `kubernetes_state.node.out_of_disk` :<br>
-    Renvoie `CRITICAL` si un nœud de cluster manque d'espace disque. Si ce n'est pas le cas, renvoie `OK`.
-
-- `kubernetes_state.node.disk_pressure` :<br>
-    Renvoie `CRITICAL` s'il existe une pression sur la taille du disque d'un nœud de cluster. Si ce n'est pas le cas, renvoie `OK`.
-
-- `kubernetes_state.node.memory_pressure` :<br>
-    Renvoie `CRITICAL` s'il existe une pression sur la taille de la mémoire d'un nœud de cluster. Si ce n'est pas le cas, renvoie `OK`.
-
-- `kubernetes_state.node.network_unavailable` :<br>
-    Renvoie `CRITICAL` si un nœud de cluster enregistre un état d'indisponibilité du réseau. Si ce n'est pas le cas, renvoie `OK`.
-
-- `kubernetes_state.cronjob.on_schedule_check` :<br>
-    Renvoie `CRITICAL` si la date de planification d'une tâche cron est située dans le passé. Si ce n'est pas le cas, renvoie `OK`.
+{{< get-service-checks-from-git "kubernetes_state" >}}
 
 ## Pour aller plus loin
 

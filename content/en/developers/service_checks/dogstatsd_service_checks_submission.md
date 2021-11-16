@@ -36,7 +36,7 @@ Service check function parameters:
 
 ### Code examples
 
-Choose your language for a service check code example:
+Run the following code to submit a service check through DogStatsD to Datadog. Remember to `flush`/`close` the client when it is no longer needed.
 
 {{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php" >}}
 
@@ -171,4 +171,4 @@ After a service check is reported, use it to trigger a [custom check monitor][2]
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /developers/dogstatsd/
-[2]: /monitors/monitor_types/custom_check/
+[2]: /monitors/create/types/custom_check/

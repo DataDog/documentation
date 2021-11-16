@@ -1,5 +1,5 @@
 ---
-title: APMと分散型トレーシング
+title: APM & Continuous Profiler
 kind: documentation
 description: パフォーマンス向上のためにコードを操作する
 further_reading:
@@ -30,7 +30,7 @@ aliases:
 
 </br>
 
-Datadog APM と分散型トレーシングは、Web サービス、キュー、データベースがリクエスト、エラー、レイテンシーを監視するための**標準のパフォーマンスダッシュボード**を使用して、アプリケーションを詳細に可視化します。分散型トレースは、ホスト、コンテナ、プロキシ、サーバーレス機能全体で、ブラウザセッション、ログ、synthetic チェック、ネットワーク、プロセス、インフラストラクチャーのメトリクスに**シームレスに関連付けられます**。システム停止中、**サンプリングなしで、トレースの 100% を収集**して、最近 15 分間について検索、分析し、タグベースの保持フィルターを使用してビジネスに必要なトレースを 15 日間保持します。
+Datadog APM と Continuous Profiler は、Web サービス、キュー、データベースがリクエスト、エラー、レイテンシーを監視するための**標準のパフォーマンスダッシュボード**を使用して、アプリケーションを詳細に可視化します。分散型トレースは、ホスト、コンテナ、プロキシ、サーバーレス機能全体で、ブラウザセッション、ログ、プロファイル、synthetic チェック、ネットワーク、プロセス、インフラストラクチャーのメトリクスに**シームレスに関連付けられます**。コードのホットスポットで、遅延しているトレースの調査から、パフォーマンスのボトルネックになっている**特定のコード行**を識別へ直接移動できます。
 
 #### Tracing Without Limits: トレースジャーニー
 
@@ -64,59 +64,60 @@ Datadog APM と分散型トレーシングは、Web サービス、キュー、�
 
 {{< img src="tracing/index/ServicePage.gif" alt="サービスページ"  style="width:100%;">}}
 
-### Live Search
+### Continuous Profiler
 
-タグを使用して、サンプリングなしのライブで 15 分間、[トレースの 100% を検索][9]します。
+CPU、メモリ、または I/O を最も多く消費するコード行を特定するために、常時稼働の本番環境プロファイリングにより[アプリケーションのレイテンシーを向上][9]し、リソースの計算を最適化します。
+
+{{< img src="tracing/index/Profiling.png" alt="プロファイリング"  style="width:100%;">}}
+
+### Live search
+
+タグを使用して、サンプリングなしのライブで 15 分間、[トレースの 100% を検索][10]します。
 
 {{< img src="tracing/live_search/LiveSearch.mp4" alt="Live Search" video="true" >}}
 
-### Live Analytics
+### Live analytics
 
-停止中に、15 分間ライブで[任意のタグにより任意のスパンのパフォーマンスを分析][10]し、影響を受けたユーザーまたはトランザクションを特定します。
+停止中に、15 分間ライブで[任意のタグにより任意のスパンのパフォーマンスを分析][11]し、影響を受けたユーザーまたはトランザクションを特定します。
 
 {{< img src="tracing/live_search/LiveAnalytics.mp4" alt="Live Analytics" video="true" >}}
 
-### トレースの取り込みと保存
-
-タグベースの保持フィルターで、[最も重要なトレースを保持][11]し、インデックス化されたすべてのスパンで 15 日間分析を実行します。
-
-{{< img src="tracing/index/RetentionFilterTracingPage.png" alt="トレースの保持と収集"  style="width:100%;">}}
-
-### すべてのスパンからカスタムメトリクスを生成する
-
-取り込んだすべてのスパンから 15 か月間保持される[メトリクスを生成][12]して、主要なビジネスおよびパフォーマンスの指標を作成、監視します。
-
-{{< img src="tracing/index/SpantoMetricsPreview.png" alt="取り込んだスパンからカスタムメトリクスを生成する"  style="width:100%;">}}
-
 ### デプロイ追跡
 
-[サービスパフォーマンスを監視][13]して、ローリング、ブルー/グリーン、シャドウ、またはカナリアデプロイに対しバージョン間で比較します。
+[サービスパフォーマンスを監視][12]して、ローリング、ブルー/グリーン、シャドウ、またはカナリアデプロイに対しバージョン間で比較します。
 
 {{< img src="tracing/deployment_tracking/VersionComparison.png" alt="サービス詳細画面のバージョン"  style="width:100%;">}}
 
+### トレースの取り込みと保存
+
+タグベースの保持フィルターで、[最も重要なトレースを保持][13]し、インデックス化されたすべてのスパンで 15 日間分析を実行します。
+
+{{< img src="tracing/index/RetentionFilterTracingPage.png" alt="トレースの保持と収集"  style="width:100%;">}}
+
+### すべてのスパンからカスタムメトリクスを生成
+
+取り込んだすべてのスパンから 15 か月間保持される[メトリクスを生成][14]して、主要なビジネスおよびパフォーマンスの指標を作成、監視します。
+
+{{< img src="tracing/index/SpantoMetricsPreview.png" alt="取り込んだスパンからカスタムメトリクスを生成する"  style="width:100%;">}}
+
 ### ログと分散型トレースの接続
 
-自動トレース ID インジェクションを使用した単一の分散リクエストのトレースと[アプリケーションログを並べて表示][14]します。
+自動トレース ID インジェクションを使用した単一の分散リクエストのトレースと[アプリケーションログを並べて表示][15]します。
 
 {{< img src="tracing/index/ConnectLogsWithTraces.png" alt="ログとトレースをつなげる"  style="width:100%;">}}
 
-### リアルユーザーモニタリングとトレースを接続する
+### リアルユーザーモニタリングとトレースの接続
 
-[リアルユーザーセッションとトレースをリンク][15]して、ユーザーエクスペリエンスと報告された問題に対応する正確なトレースを確認します。
+[リアルユーザーセッションとトレースをリンク][16]して、ユーザーエクスペリエンスと報告された問題に対応する正確なトレースを確認します。
 
 {{< img src="tracing/index/RumTraces.gif" alt="RUM セッションとトレースを接続する"  style="width:100%;">}}
 
 ### Synthetic テストデータとトレースの接続
 
-トレースに[シュミレーションされた API テストをリンクして][16]、フロントエンド、ネットワーク、バックエンドリクエスト全体における障害の根本原因を突き止めます。
+トレースに[シュミレーションされた API テストをリンクして][17]、フロントエンド、ネットワーク、バックエンドリクエスト全体における障害の根本原因を突き止めます。
 
 {{< img src="tracing/index/Synthetics.gif" alt="Synthetic テスト"  style="width:100%;">}}
 
-### 連続プロファイラ
-
-CPU、メモリ、または I/O を最も多く消費するコード行を特定するため、常時稼働の本番環境プロファイラーにより[コードの効率を向上][17]します。
-
-{{< img src="tracing/index/Profiling.png" alt="プロファイリング"  style="width:100%;">}}
 
 ## その他の参考資料
 
@@ -130,12 +131,12 @@ CPU、メモリ、または I/O を最も多く消費するコード行を特定
 [6]: /ja/tracing/setup_overview/open_standards/
 [7]: /ja/tracing/visualization/services_map/
 [8]: /ja/tracing/visualization/service/
-[9]: /ja/tracing/trace_search_and_analytics/#live-search-for-15-minutes
-[10]: /ja/tracing/trace_search_and_analytics/#live-analytics-for-15-minutes
-[11]: /ja/tracing/trace_retention_and_ingestion/
-[12]: /ja/tracing/generate_metrics/
-[13]: /ja/tracing/deployment_tracking/
-[14]: /ja/tracing/connect_logs_and_traces/
-[15]: /ja/real_user_monitoring/connect_rum_and_traces
-[16]: /ja/synthetics/apm/
-[17]: /ja/tracing/profiler/
+[9]: /ja/tracing/profiler/
+[10]: /ja/tracing/trace_search_and_analytics/#live-search-for-15-minutes
+[11]: /ja/tracing/trace_search_and_analytics/#live-analytics-for-15-minutes
+[12]: /ja/tracing/deployment_tracking/
+[13]: /ja/tracing/trace_retention_and_ingestion/
+[14]: /ja/tracing/generate_metrics/
+[15]: /ja/tracing/connect_logs_and_traces/
+[16]: /ja/real_user_monitoring/connect_rum_and_traces
+[17]: /ja/synthetics/apm/

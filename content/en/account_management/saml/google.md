@@ -1,5 +1,5 @@
 ---
-title: Configuring Google as a SAML IdP
+title: Google SAML IdP
 kind: documentation
 aliases:
   - /account_management/faq/how-do-i-configure-google-as-a-saml-idp/
@@ -37,7 +37,7 @@ Also add:
 * "urn:oid:2.5.4.4" "Basic Information" "Last Name"
 * "urn:oid:2.5.4.42" "Basic Information" "First Name"
 
-{{< img src="account_management/saml/zAttributeMapping.png" alt="zAttributeMapping"  style="width:75%;">}}
+{{< img src="account_management/saml/zAttributeMapping.png" alt="zAttributeMapping" style="width:75%;">}}
 
 ## Further Reading
 

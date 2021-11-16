@@ -125,7 +125,7 @@ This command removes the Agent, but does not remove:
 {{< tabs >}}
 {{% tab "Agent v6 & v7" %}}
 
-1. Stop and close the Datadog Agent via the bone icon in the tray.
+1. Stop and close the Datadog Agent with the bone icon in the tray.
 2. Drag the Datadog application from the application folder to the trash bin.
 3. Run:
 
@@ -144,7 +144,7 @@ This method removes the Agent, as well as all Agent configuration files.
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
-1. Stop and close the Datadog Agent via the bone icon in the tray.
+1. Stop and close the Datadog Agent with the bone icon in the tray.
 2. Drag the Datadog application from the application folder to the trash bin.
 3. Run:
 

@@ -148,12 +148,8 @@ Etcd メトリクスは、ノードのステータスに応じて `etcd_state:le
 Etcd チェックには、イベントは含まれません。
 
 ### サービスのチェック
+{{< get-service-checks-from-git "etcd" >}}
 
-**etcd.can_connect**:<br>
-Agent が Etcd API エンドポイントからメトリクスを収集できない場合は、'CRITICAL' を返します。
-
-**etcd.healthy**:<br>
-メンバーノードが異常である場合は、'CRITICAL' を返します。Agent が `/health` エンドポイントに到達できない場合、あるいは健全性ステータスが見つからない場合は、'Unknown' を返します。
 
 ## トラブルシューティング
 

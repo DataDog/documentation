@@ -48,7 +48,7 @@ java -javaagent:dd-java-agent.jar -Ddd.profiling.enabled=true -Ddd.profiling.jfr
 
 ## Enabling the allocation profiler
 
-The allocation profiler is turned off by default because it can overwhelm the profiler in allocation-heavy applications.
+On Java 15 and lower, the allocation profiler is turned off by default because it can overwhelm the profiler in allocation-heavy applications.
 
 To enable the allocation profiler, start your application with the `-Ddd.profiling.allocation.enabled=true` JVM setting or the `DD_PROFILING_ALLOCATION_ENABLED=true` environment variable.
 
@@ -57,6 +57,18 @@ Alternatively, you can enable the following events in your `jfp` [override templ
 ```
 jdk.ObjectAllocationInNewTLAB#enabled=true
 jdk.ObjectAllocationOutsideTLAB#enabled=true
+```
+
+[Learn how to use override templates.](#creating-and-using-a-jfr-template-override-file)
+
+## Enabling the heap profiler
+<div class="alert alert-info">The Java heap profiler feature is in beta.</div>
+To enable the heap profiler, start your application with the `-Ddd.profiling.heap.enabled=true` JVM setting or the `DD_PROFILING_HEAP_ENABLED=true` environment variable.
+
+Alternatively, you can enable the following events in your `jfp` [override template file](#creating-and-using-a-jfr-template-override-file):
+
+```
+jdk.OldObjectSample#enabled=true
 ```
 
 [Learn how to use override templates.](#creating-and-using-a-jfr-template-override-file)

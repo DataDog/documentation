@@ -1,5 +1,5 @@
 ---
-title: vSphere integration billing
+title: vSphere Integration Billing
 kind: documentation
 ---
 

@@ -6,7 +6,7 @@ aliases:
   - /ja/logs/logs_to_metrics/
 description: 取り込んだログからメトリクスを生成します。
 further_reading:
-  - link: logs/processing/processors
+  - link: logs/log_configuration/processors
     tag: ドキュメント
     text: ログの処理方法
   - link: logs/logging_without_limits
@@ -51,7 +51,7 @@ Export メニューで "Generate new metric" を選択し、Analytics の検索�
 
 メトリクスタイプまたは名前を変更するには、新しいメトリクスを作成する必要があります。
 
-## 推奨される使用量メトリクス
+## ログ使用メトリクス
 
 {{< img src="logs/processing/logs_to_metrics/estimated_usage_metrics.png" alt="推奨される使用量メトリクス" style="width:80%;">}}
 
@@ -86,7 +86,7 @@ Export メニューで "Generate new metric" を選択し、Analytics の検索�
 [6]: /ja/logs/search_syntax/
 [7]: /ja/logs/explorer/facets/#quantitative-facets-measures
 [8]: /ja/getting_started/tagging/
-[9]: /ja/developers/metrics/custom_metrics/
+[9]: /ja/metrics/custom_metrics/
 [10]: /ja/security/logs/#hipaa-enabled-customers
 [11]: /ja/account_management/billing/custom_metrics/?tab=countrategauge
-[12]: /ja/developers/metrics/#naming-metrics
+[12]: /ja/metrics/#naming-metrics

@@ -32,6 +32,8 @@ The official repositories and/or binary packages of the Agent are signed. Verify
 - MacOS PKG:
   - Apple certificate fingerprint `FDD2ADF623EA75E62C6DC6DBFBA7520CA549AB7314E660D78B0E3DCCF15B2FBA`
 
+On Debian and Ubuntu, the `datadog-agent` package has a soft dependency on the `datadog-signing-keys` package, which makes the above keys trusted by APT. Keeping the package updated ensures the latest signing keys are present on your system.
+
 ## Information security
 
 The Datadog Agent submits data to Datadog over a TLS-encrypted TCP connection by default. As of version 6, the Agent can be configured to enforce TLS 1.2 when connecting to Datadog. Customers who require the use of "strong cryptography," for example, to meet PCI requirements, should use Agent v6 and set the `force_tls_12: true` setting in the Agent's configuration file.
@@ -77,8 +79,8 @@ For more information, see the [Secrets Management][20] documentation.
 [1]: /security/
 [2]: /agent/
 [3]: /api/
-[4]: https://keyserver.ubuntu.com/pks/lookup?op=hget&search=d1402d39517b9f8888abfc98d6936dab
-[5]: https://keyserver.ubuntu.com/pks/lookup?op=hget&search=3e8510ce571008616b42bd67916e83f8
+[4]: https://keys.datadoghq.com/DATADOG_APT_KEY_382E94DE.public
+[5]: https://keys.datadoghq.com/DATADOG_APT_KEY_F14F620E.public
 [6]: https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
 [7]: https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
 [8]: https://keys.datadoghq.com/DATADOG_RPM_KEY.public

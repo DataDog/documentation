@@ -151,7 +151,7 @@ This section displays a list of initialized and failed JMX checks even if there 
 
 ## Forwarder
 
-The forwarder uses a number of workers to send payloads to Datadog.
+The forwarder uses several workers to send payloads to Datadog.
 
 If you see the warning `the forwarder dropped transactions, there is probably an issue with your network`, this means that all the workers were busy. You should review your network performance and tune the `forwarder_num_workers` and `forwarder_timeout` options.
 

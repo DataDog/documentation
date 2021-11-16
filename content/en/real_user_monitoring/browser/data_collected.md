@@ -21,14 +21,14 @@ further_reading:
 - link: "/real_user_monitoring/explorer/analytics/"
   tag: "Documentation"
   text: "Build analytics upon your events"
-- link: "/logs/processing/attributes_naming_convention/"
+- link: "/logs/log_configuration/attributes_naming_convention"
   tag: "Documentation"
   text: "Datadog Standard Attributes"
 ---
 
-The RUM SDK generates events that have associated metrics and attributes. Every RUM event has all of the [default attributes](#default-attributes), for example, the URL of the page (`view.url`) and user information such as their device type (`device.type`) and their country (`geo.country`). 
+The RUM SDK generates events that have associated metrics and attributes. Every RUM event has all of the [default attributes](#default-attributes), for example, the URL of the page (`view.url`) and user information such as their device type (`device.type`) and their country (`geo.country`).
 
-There are additional [metrics and attributes that are specific to a given event type](#event-specific-metrics-and-attributes). For example, the metric `view.loading_time` is associated with "view" events and the attribute `resource.method` is associated with "resource" events. 
+There are additional [metrics and attributes that are specific to a given event type](#event-specific-metrics-and-attributes). For example, the metric `view.loading_time` is associated with "view" events and the attribute `resource.method` is associated with "resource" events.
 
 This page provides descriptions of each of the metrics and attributes collected. For guidance on what you can do with this data, see:
 - [Modifying Data and Context][1]
@@ -100,7 +100,7 @@ The following attributes are related to the geolocation of IP addresses:
 | `geo.continent`       | string | Name of the continent (`Europe`, `Australia`, `North America`, `Africa`, `Antartica`, `South America`, `Oceania`).                    |
 | `geo.city`            | string | The name of the city (example `Paris`, `New York`).                                                                                   |
 
-**Note**: By default, Datadog stores the client IP address. If you want to stop collecting IP addresses, [contact Support][8]. This does not impact the collection of geolocation attributes listed above. 
+**Note**: By default, Datadog stores the client IP address. If you want to stop collecting IP addresses, [contact Support][8]. This does not impact the collection of geolocation attributes listed above.
 
 ### User attributes
 
@@ -156,7 +156,7 @@ The following diagram illustrates the RUM event hierarchy:
 | `session.last_view.url_query` | object | The query string parts of the URL decomposed as query params key/value attributes. |
 | `session.last_view.url_scheme` | object | The scheme part of the URL. |
 
-### View timing metrics 
+### View timing metrics
 
 
 | Attribute                       | Type        | Description                                                                                                                                                                                                           |
@@ -224,22 +224,6 @@ Detailed network timing data for the loading of an application’s resources are
 | `error.message` | string | A concise, human-readable, one-line message explaining the event. |
 | `error.stack`   | string | The stack trace or complementary information about the error.     |
 
-#### Network errors
-
-Network errors include information about failing HTTP requests. The following facets are also collected:
-
-| Attribute                      | Type   | Description                                                                             |
-|--------------------------------|--------|-----------------------------------------------------------------------------------------|
-| `error.resource.status_code`             | number | The response status code.                                                               |
-| `error.resource.method`                | string | The HTTP method (for example `POST`, `GET`).           |
-| `error.resource.url`                     | string | The resource URL.                                                                       |
-| `error.resource.url_host`        | string | The host part of the URL.                                                          |
-| `error.resource.url_path`        | string | The path part of the URL.                                                          |
-| `error.resource.url_query` | object | The query string parts of the URL decomposed as query params key/value attributes. |
-| `error.resource.url_scheme`      | string | The protocol name of the URL (HTTP or HTTPS).                                            |
-| `error.resource.provider.name`      | string | The resource provider name. Default is `unknown`.                                            |
-| `error.resource.provider.domain`      | string | The resource provider domain.                                            |
-| `error.resource.provider.type`      | string | The resource provider type (for example `first-party`, `cdn`, `ad`, `analytics`).                                            |
 
 #### Source errors
 

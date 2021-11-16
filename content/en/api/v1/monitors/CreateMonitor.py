@@ -14,7 +14,7 @@ monitor_options = {
 }
 tags = ["app:webserver", "frontend"]
 api.Monitor.create(
-    type="metric alert",
+    type="query alert",
     query="avg(last_5m):sum:system.net.bytes_rcvd{host:host0} > 100",
     name="Bytes received on host0",
     message="We may need to add web hosts if this is consistently high.",

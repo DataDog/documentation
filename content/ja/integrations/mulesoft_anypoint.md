@@ -47,7 +47,7 @@ pricing:
     metric: datadog.marketplace.ioconnect.mulesoft_anypoint
     tag: vcoreid
     unit_label: プロダクション vCore
-    unit_price: 350
+    unit_price: 200
 public_title: Mule® インテグレーション
 short_description: MuleSoft 製品からメトリクスを収集し、Datadog にアップロードします。
 support: パートナー
@@ -143,10 +143,9 @@ Datadog Mule® インテグレーションには、イベントは含まれま�
 
 ## サポート
 
-サポートが必要な場合は、[support_ddp@ioconnectservices.com][9] までお問い合わせください。
-
----
 このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、[こちらをクリック][13]してください。
+
+サポートが必要な場合は、IO Connect Services ([support_ddp@ioconnectservices.com][9]) までお問い合わせください。
 
 ## エンドユーザーライセンス契約
 

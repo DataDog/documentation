@@ -9,13 +9,14 @@ categories:
 creates_events: false
 ddtype: crawler
 dependencies:
-  - 'https://github.com/DataDog/integrations-extras/blob/master/bonsai/README.md'
+  - https://github.com/DataDog/integrations-extras/blob/master/bonsai/README.md
 display_name: Bonsai
 draft: false
 git_integration_title: bonsai
 guid: 3c3a1e28-7fd3-443e-a3e1-0c223326a572
 integration_id: bonsai
 integration_title: Bonsai
+integration_version: ''
 is_public: true
 kind: インテグレーション
 maintainer: dev@onemorecloud.com
@@ -44,13 +45,13 @@ Bonsai クラスターのリクエストレベルのメトリクスを追跡す�
 
 クラスターを Datadog と統合するには、API キーを bonsai アプリに送信する必要があります。
 
-### 手順 1 - API キーの取得
+### API キーを取得する
 
 Datadog で、[Integrations --> API][2] に移動して、API キーをコピーします。
 
 ![スナップショット][3]
 
-### 手順 2 - API キーの送信
+### API キーを送信する
 
 [Bonsai --> Clusters][4] に移動し、統合するクラスターをクリックします。Manage タブに移動し、ページ最下部までスクロールします。
 
@@ -58,7 +59,7 @@ Datadog で、[Integrations --> API][2] に移動して、API キーをコピー
 
 ![スナップショット][5]
 
-### 手順 3 - 検証
+### 検証する
 
 キーが有効であれば、インテグレーションが Active として表示されます。
 
@@ -95,7 +96,7 @@ Bonsai インテグレーションには、サービスのチェック機能は�
 インフラストラクチャーの監視の詳細および Datadog の全インテグレーションについては、[ブログ記事][9]を参照してください。
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/bonsai/images/snapshot.png
-[2]: https://app.datadoghq.com/account/settings#api
+[2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/bonsai/images/copy_key.png
 [4]: https://app.bonsai.io/clusters
 [5]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/bonsai/images/activate_datadog.png

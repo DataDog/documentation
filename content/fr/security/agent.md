@@ -76,8 +76,8 @@ Pour en savoir plus, consultez la documentation relative à la [gestion des secr
 [1]: /fr/security/
 [2]: /fr/agent/
 [3]: /fr/api/
-[4]: https://keyserver.ubuntu.com/pks/lookup?op=hget&search=d1402d39517b9f8888abfc98d6936dab
-[5]: https://keyserver.ubuntu.com/pks/lookup?op=hget&search=3e8510ce571008616b42bd67916e83f8
+[4]: https://keys.datadoghq.com/DATADOG_APT_KEY_382E94DE.public
+[5]: https://keys.datadoghq.com/DATADOG_APT_KEY_F14F620E.public
 [6]: https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
 [7]: https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
 [8]: https://keys.datadoghq.com/DATADOG_RPM_KEY.public

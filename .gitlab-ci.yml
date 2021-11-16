@@ -25,20 +25,19 @@ before_script:
   - "[ -d local/etc ] && find local/etc/ -type f -exec cp {} /etc \\;"  # load configs
   - "[ -f /usr/local/bin/helpers.sh ] && source /usr/local/bin/helpers.sh"  # source helpers so they are available in the container
   - "[ -f /etc/profile ] && source /etc/profile" # for golang on path
+  - mkdir -p logs
 
 cache: &cache
-  key:
-    files:
-      - yarn.lock
+  key: $CI_COMMIT_REF_SLUG-$CI_PROJECT_DIR
   paths:
     - node_modules/
+    - tmp/.htmltest/
 
 # ================== templates ================== #
 .base_template: &base_template
   image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/corp-ci:master
   tags:
     - "runner:main"
-    - "size:2xlarge"
   except:
     - tags
   only:
@@ -64,9 +63,6 @@ install_dependencies:
   only:
     changes:
       - yarn.lock
-  except:
-    # skip on automated translation prs
-    - /^guacbot\/translation-[0-9]+$/i
 
 # ================== preview ================== #
 # If the branch has a name of <slack-user>/<feature-name> then ci builds a preview site
@@ -95,7 +91,7 @@ build_preview:
     - yarn run build:preview
     # remove service_checks json as we don't need to s3 push that..
     - rm -rf data/service_checks
-    - in-isolation deploy_preview
+    - in-isolation deploy_preview > logs/deploy.txt
     # remove static images so we can skip from artifact passed in gitlab
     - remove_static_from_repo
     - notify_slack "<https://github.com/DataDog/documentation/commit/${CI_COMMIT_SHA}|${CI_COMMIT_REF_NAME}> is ready for preview. <${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}| checks running>." "#31b834"
@@ -105,6 +101,8 @@ build_preview:
       - ./integrations_data
       - .github/
       - .vale.ini
+      - .htmltest.yml
+      - ./logs
   only:
     - /.+?\/[a-zA-Z0-9_-]+/
   interruptible: true
@@ -123,6 +121,7 @@ build_preview:
 #     - post_dd_event "documentation deploy ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info"
 #     - version_static_assets
 #     - touch Makefile.config
+#     - make clean-examples
 #     - make examples
 #     - sync_integration_descriptions
 #     #- sync_integration_descriptions_cached
@@ -148,26 +147,33 @@ build_preview:
 link_checks_preview:
   <<: *base_template
   stage: post-deploy
-  cache:
-    <<: *cache
-    policy: pull
+  cache: {}
   environment: "preview"
   variables:
     URL: ${PREVIEW_DOMAIN}
-    DISALLOW_BOTS: "1"
+    GIT_STRATEGY: none
   script:
-    - node ./node_modules/link-checker/dd-link-checker.js --env preview --configFilePath ${CI_PROJECT_DIR}/local/etc/link-check-config.js
+    - post_dd_event "documentation htmltest ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info"
+    - find ./public -name "*.html" -exec sed -i -e "s#https://docs-staging.datadoghq.com/$CI_COMMIT_REF_NAME/#/#g" {} +
+    - find ./public -name "*.html" -exec sed -i -e "s#/api/v1/#/api/latest/#g" {} +
+    - find ./public -name "*.html" -exec sed -i -e "s#/api/v2/#/api/latest/#g" {} +
+    - htmltest
   after_script:
-    - if [ -e ${CI_PROJECT_DIR}/broken-links.csv  ]; then aws s3 cp --content-type "text/csv; charset=utf-8" --acl "public-read" --cache-control "no-cache" ${CI_PROJECT_DIR}/broken-links.csv s3://origin-static-assets/documentation/brokenlinks/${CI_COMMIT_REF_NAME}/; fi
+    - "[ -f /usr/local/bin/helpers.sh ] && source /usr/local/bin/helpers.sh"  # source helpers
+    - RESULT="⛈ htmltest result; the following issues were found:\n$(tail -n +2 ./tmp/.htmltest/htmltest.log)\n--------------------" # output all but first line
+    - if grep -q "not exist" tmp/.htmltest/htmltest.log; then notify_slack "${RESULT}" "#31b834"; fi
   only:
     - /.+?\/[a-zA-Z0-9_-]+/
+  artifacts:
+    paths:
+      - ./tmp/.htmltest
   interruptible: true
 
 missing_tms_preview:
   image:
     name: 486234852809.dkr.ecr.us-east-1.amazonaws.com/vale:v4036929-ee9929a-2.9.1
     entrypoint: [ "" ]
-  tags: ["runner:main", "size:2xlarge"]
+  tags: ["runner:main"]
   stage: post-deploy
   cache: {}
   environment: "preview"
@@ -187,7 +193,7 @@ index_algolia_preview:
   image:
     name: 486234852809.dkr.ecr.us-east-1.amazonaws.com/docsearch-scraper:v2978988-4692ed5-0.8
     entrypoint: [""] # force an empty entrypoint (see https://gitlab.com/gitlab-org/gitlab-runner/issues/2692)
-  tags: [ "runner:main","size:2xlarge" ]
+  tags: ["runner:main"]
   stage: post-deploy
   cache:
     <<: *cache
@@ -259,6 +265,7 @@ build_live:
     - post_dd_event "documentation deploy ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info"
     - notify_slack "<https://github.com/DataDog/documentation/commit/${CI_COMMIT_SHA}|${CI_COMMIT_SHA:0:8}> sent to gitlab for production deployment. <${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}|details>" "#FFD700"
     - touch Makefile.config
+    - make clean-examples
     - make examples
     - sync_integration_descriptions
     - sync_integration_metrics
@@ -268,12 +275,14 @@ build_live:
     - in-isolation deploy_live
     - create_artifact
     - create_artifact_untracked
+    - remove_static_from_repo
   artifacts:
     when: on_success
     paths:
       - ${ARTIFACT_RESOURCE}
       - ./integrations_data
       - content/en
+      - .htmltest.yml
     expire_in: 1 week
   only:
     - master
@@ -289,31 +298,39 @@ index_internal_doc:
   only:
     - master
   except: [ tags, schedules ]
-  tags: [ "runner:main", "size:2xlarge" ]
+  tags: ["runner:main"]
   script:
     - INDEXING_SERVICE=https://datadoc.ddbuild.io index-repository hugo https://docs.datadoghq.com/ "Datadog" "Public Documentation" --source_folder=content/en --tags="team:Documentation,source:hugo-website,visibility:public,github-repository:documentation"
 
 test_live_link_checks:
   <<: *base_template
   stage: post-deploy
-  cache:
-    <<: *cache
-    policy: pull
+  cache: {}
   environment: "live"
   variables:
     URL: ${LIVE_DOMAIN}
+    GIT_STRATEGY: none
   script:
-    - node ./node_modules/link-checker/dd-link-checker.js --env production --configFilePath ${CI_PROJECT_DIR}/local/etc/link-check-config.js
+    - post_dd_event "documentation htmltest ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info"
+    - find ./public -name "*.html" -exec sed -i -e "s#https://docs.datadoghq.com/#/#g" {} +
+    - find ./public -name "*.html" -exec sed -i -e "s#/api/v1/#/api/latest/#g" {} +
+    - find ./public -name "*.html" -exec sed -i -e "s#/api/v2/#/api/latest/#g" {} +
+    - htmltest
   after_script:
-    - if [ -e ${CI_PROJECT_DIR}/broken-links.csv  ]; then aws s3 cp --content-type "text/csv; charset=utf-8" --acl "public-read" --cache-control "no-cache" ${CI_PROJECT_DIR}/broken-links.csv s3://origin-static-assets/documentation/brokenlinks/${CI_COMMIT_REF_NAME}/; fi
+    - "[ -f /usr/local/bin/helpers.sh ] && source /usr/local/bin/helpers.sh"  # source helpers
+    - RESULT="⛈ htmltest result; the following issues were found:\n$(tail -n +2 ./tmp/.htmltest/htmltest.log)\n--------------------" # output all but first line
+    - if grep -q "not exist" tmp/.htmltest/htmltest.log; then notify_slack "${RESULT}" "#31b834"; fi
   only:
     - master
+  artifacts:
+    paths:
+      - ./tmp/.htmltest
 
 index_algolia:
   image:
     name: 486234852809.dkr.ecr.us-east-1.amazonaws.com/docsearch-scraper:v2978988-4692ed5-0.8
     entrypoint: [ "" ] # force an empty entrypoint (see https://gitlab.com/gitlab-org/gitlab-runner/issues/2692)
-  tags: ["runner:main","size:2xlarge"]
+  tags: ["runner:main"]
   stage: post-deploy
   cache:
     <<: *cache
@@ -376,16 +393,23 @@ evaluate_missing_metrics:
 manage_translations:on-schedule:
   <<: *base_template
   stage: post-deploy
-  cache:
-    <<: *cache
-    policy: pull
+  cache: {}
   environment: "live"
   variables:
     URL: ${PREVIEW_DOMAIN}
     CONFIG: ${PREVIEW_CONFIG}
   script:
-    - if [[ $(date +%u) -lt 6 ]]; then manage_translations "${APIKEY}"; fi
-    - chmod +x ./local/bin/py/translate_metrics.py && ./local/bin/py/translate_metrics.py -k "${APIKEY}" -a $(get_secret 'dd_api_key')
+    - |-
+      if [[ $(date +%u) -lt 6 ]]; then
+        nodenv shell 14.15.0
+        [ -d ./node_modules ] && rm -rf ./node_modules
+        yarn add https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/translate-v1.0.42.tgz
+        DATADOG_API_KEY="$(get_secret 'dd_synthetic_api_key_prod')" manage_translations "${APIKEY}";
+      fi
+      chmod +x ./local/bin/py/translate_metrics.py && ./local/bin/py/translate_metrics.py -k "${APIKEY}" -a $(get_secret 'dd_api_key')
+  artifacts:
+    paths:
+      - translate-debug.log
   only:
     - schedules
 

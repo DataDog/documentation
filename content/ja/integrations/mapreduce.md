@@ -131,14 +131,8 @@ Docker 環境でログを収集する Agent を構成する追加の情報に関
 Mapreduce チェックには、イベントは含まれません。
 
 ### サービスのチェック
+{{< get-service-checks-from-git "mapreduce" >}}
 
-**mapreduce.resource_manager.can_connect**:<br>
-Agent が ResourceManager に接続できない場合は `CRITICAL` を返します。
-それ以外の場合は、`OK` を返します。
-
-**mapreduce.application_master.can_connect**:<br>
-Agent が ApplicationMaster に接続できない場合は `CRITICAL` を返します。
-それ以外の場合は、`OK` を返します。
 
 ## トラブルシューティング
 

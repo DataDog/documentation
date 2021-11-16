@@ -2,6 +2,8 @@
 title: Log Configuration
 kind: Documentation
 description: "Process, enrich, control, and manage your logs from the Logs Configuration page"
+aliases:
+  - /logs/processing
 further_reading:
 - link: "https://www.datadoghq.com/blog/logging-without-limits/"
   tag: "Blog"
@@ -39,8 +41,8 @@ Once you've completed configuration, start investigating and troubleshooting log
 *Logging without Limits is a trademark of Datadog, Inc.
 
 [1]: https://app.datadoghq.com/logs/pipelines
-[2]: /logs/processing/pipelines/
-[3]: /logs/processing/processors/
+[2]: /logs/log_configuration/pipelines
+[3]: /logs/log_configuration/processors
 [4]: /logs/log_configuration/attributes_naming_convention/
 [5]: /logs/log_configuration/logs_to_metrics/
 [6]: /logs/log_configuration/indexes

@@ -7,10 +7,10 @@ further_reading:
   - link: /logs/guide/log-parsing-best-practice/
     tag: FAQ
     text: ログのパース - ベストプラクティス
-  - link: /logs/processing/
+  - link: /logs/log_configuration/processors
     tag: Documentation
     text: ログの処理方法
-  - link: /logs/processing/parsing/
+  - link: /logs/log_configuration/parsing
     tag: Documentation
     text: パースの詳細
 ---

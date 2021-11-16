@@ -24,7 +24,7 @@ HDFS DataNode チェックは [Datadog Agent][3] パッケージに含まれて�
 
 ### コンフィグレーション
 
-#### DataNode の準備
+#### ノードを準備する
 
 1. Agent は、DataNode の JMX リモートインターフェイスからメトリクスを収集します。このインターフェイスはデフォルトでは無効になっています。`hadoop-env.sh` (通常は $HADOOP_HOME/conf にあります) で以下のオプションを設定して、これを有効にしてください。
 
@@ -39,7 +39,7 @@ HDFS DataNode チェックは [Datadog Agent][3] パッケージに含まれて�
 
 #### Agent の接続
 
-##<!-- xxx tabs xxx -->
+<!-- xxx tabs xxx -->
 <!-- xxx tab "ホスト" xxx -->
 
 #### ホスト
@@ -121,9 +121,8 @@ HDFS DataNode チェックは [Datadog Agent][3] パッケージに含まれて�
 HDFS-datanode チェックには、イベントは含まれません。
 
 ### サービスのチェック
+{{< get-service-checks-from-git "hdfs_datanode" >}}
 
-**hdfs.datanode.jmx.can_connect**:<br>
-何らかの理由 (誤ったポートの指定、タイムアウト、パースできない JSON 応答など) で Agent が DataNode の JMX インターフェイスに接続できない場合は、`CRITICAL` を返します。
 
 ## トラブルシューティング
 
@@ -159,7 +158,7 @@ HDFS NameNode チェックは [Datadog Agent][3] パッケージに含まれて�
 
 ### コンフィギュレーション
 
-#### NameNode の準備
+#### ノードを準備する
 
 1. Agent は、NameNode の JMX リモートインターフェイスからメトリクスを収集します。このインターフェイスはデフォルトでは無効になっています。`hadoop-env.sh` (通常は $HADOOP_HOME/conf にあります) で以下のオプションを設定して、これを有効にしてください。
 
@@ -174,7 +173,7 @@ HDFS NameNode チェックは [Datadog Agent][3] パッケージに含まれて�
 
 #### Agent の接続
 
-##<!-- xxx tabs xxx -->
+<!-- xxx tabs xxx -->
 <!-- xxx tab "ホスト" xxx -->
 
 #### ホスト
@@ -256,9 +255,8 @@ HDFS NameNode チェックは [Datadog Agent][3] パッケージに含まれて�
 HDFS-namenode チェックには、イベントは含まれません。
 
 ### サービスのチェック
+{{< get-service-checks-from-git "hdfs_namenode" >}}
 
-**hdfs.namenode.jmx.can_connect**:<br>
-何らかの理由 (誤ったポートの指定、タイムアウト、パースできない JSON 応答など) で Agent が NameNode の JMX インターフェイスに接続できない場合は、`CRITICAL` を返します。
 
 ## トラブルシューティング
 

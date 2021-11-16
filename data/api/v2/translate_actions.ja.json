@@ -29,6 +29,10 @@
     "description": "アプリケーションキーの削除",
     "summary": "アプリケーションキーの削除"
   },
+  "GetApplicationKey": {
+    "description": "オーガニゼーションのアプリケーションキーを取得します。",
+    "summary": "アプリケーションキーの取得"
+  },
   "UpdateApplicationKey": {
     "description": "アプリケーションキーの編集",
     "summary": "アプリケーションキーの編集",
@@ -378,6 +382,33 @@
     "description": "検索クエリと一致するセキュリティシグナルを返します。\nこのエンドポイントと GET エンドポイントは、セキュリティシグナルを一覧表示する際に互いに交換して使用できます。",
     "summary": "セキュリティシグナルのリストの取得",
     "request_schema_description": "セキュリティシグナルのリストをリクエスト"
+  },
+  "CreateServiceAccount": {
+    "description": "オーガニゼーションのサービスアカウントを作成します。",
+    "summary": "サービスアカウントを作成する",
+    "request_schema_description": "サービスアカウントを作成します。"
+  },
+  "ListServiceAccountApplicationKeys": {
+    "description": "このサービスアカウントで利用できるすべてのアプリケーションキーを一覧表示します。",
+    "summary": "このサービスアカウントのアプリケーションキーを一覧表示する"
+  },
+  "CreateServiceAccountApplicationKey": {
+    "description": "このサービスアカウントのアプリケーションキーを作成します。",
+    "summary": "このサービスアカウントのアプリケーションキーを作成する",
+    "request_schema_description": "アプリケーションキーの作成に使用されるリクエスト。"
+  },
+  "DeleteServiceAccountApplicationKey": {
+    "description": "このサービスアカウントが所有するアプリケーションキーを削除します。",
+    "summary": "このサービスアカウントのアプリケーションキーを削除する"
+  },
+  "GetServiceAccountApplicationKey": {
+    "description": "このサービスアカウントが所有するアプリケーションキーを取得します。",
+    "summary": "このサービスアカウントのアプリケーションキーを 1 つ取得する"
+  },
+  "UpdateServiceAccountApplicationKey": {
+    "description": "このサービスアカウントが所有するアプリケーションキーを編集します。",
+    "summary": "このサービスアカウントのアプリケーションキーを編集する",
+    "request_schema_description": "アプリケーションキーの更新に使用されるリクエスト。"
   },
   "ListIncidentServices": {
     "description": "要求するユーザーのオーガニゼーションにアップロードされたすべてのインシデントサービスを取得します。 `include[users]` クエリパラメータが指定される場合、included 属性にはこれらのインシデントサービスに関連するユーザーが含まれます。",

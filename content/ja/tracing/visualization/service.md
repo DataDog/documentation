@@ -14,7 +14,7 @@ further_reading:
   - link: /tracing/visualization/trace/
     tag: Documentation
     text: Datadog トレースの読み方を理解する
-  - link: 'https://www.datadoghq.com/blog/datadog-clipboard/'
+  - link: https://www.datadoghq.com/blog/datadog-clipboard/
     tag: ブログ
     text: APM サービス詳細画面の URL をクリップボードに追加する
 ---
@@ -62,11 +62,11 @@ Datadog は、特定のサービスに対してすぐに使用できるグラフ
 
 {{< img src="tracing/visualization/service/out_of_the_box_service_graph.png" alt="すぐに使えるサービスグラフ"  style="width:90%;">}}
 
-### Export to Timeboard
+### タイムボードにエクスポート
 
-グラフを既存の[タイムボード][5]にエクスポートするには、各グラフの右上隅にある矢印をクリックします。
+グラフを既存の[ダッシュボード][5]にエクスポートするには、各グラフの右上隅にある矢印をクリックします。
 
-{{< img src="tracing/visualization/service/save_to_timeboard.png" alt="タイムボードに保存"  style="width:40%;">}}
+{{< img src="tracing/visualization/service/save_to_dashboard.png" alt="ダッシュボードに保存" style="width:80%;">}}
 
 ### レイテンシー分布
 
@@ -110,7 +110,7 @@ Datadog は、特定のサービスに対してすぐに使用できるグラフ
 
 [1]: /ja/tracing/visualization/
 [2]: /ja/tracing/visualization/resource/
-[3]: /ja/monitors/monitor_types/apm/
+[3]: /ja/monitors/create/types/apm/
 [4]: /ja/tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm/
-[5]: /ja/dashboards/timeboard/
+[5]: /ja/dashboards/
 [6]: /ja/tracing/visualization/#resources

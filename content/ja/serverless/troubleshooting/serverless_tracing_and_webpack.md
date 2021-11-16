@@ -1,16 +1,17 @@
 ---
-title: Node.js Lambda トレースと Webpack の互換性 
+title: Node.js Lambda トレースと Webpack の互換性
 kind: documentation
 further_reading:
-    - link: serverless/installation/node
-      tag: ドキュメント
+  - link: /serverless/installation/nodejs
+    tag: ドキュメント
+    text: Node.js アプリケーションのインスツルメンテーション
 ---
-
 # 互換性
 
-Datadog のトレースライブラリ (`dd-trace`) は、条件付きインポートの使用やその他の問題により、[webpack][1] と互換性がないことが知られています。webpack を使用し、Node.js サーバーレス関数をトレースする場合:
+Datadog のトレーシングライブラリ (`dd-trace`) は、条件付きインポートの使用やその他の問題により、[Webpack][1] と互換性がないことが知られています。Webpack は `dd-trace` をビルドできませんが、アプリケーションは、ビルド済みの Datadog Lambda レイヤーによって提供される `dd-trace` および `datadog-lambda-js` ライブラリを引き続き使用できます。以下の手順に従ってください。
 
-1. `datadog-lambda-js` と `dd-trace` を webpack の[外部][2]としてマークします。これにより、webpack はこれらの依存関係が Lambda ランタイムで利用可能になることを認識します。
+1. [Node.js のインストール手順][2]に従い、Datadog Lambda レイヤーが Lambda 関数に追加されていることを確認します。
+2. Webpack の [externals][3] として `datadog-lambda-js` と `dd-trace` をマークします。これは、Datadog Lambda レイヤーによって提供される Lambda ランタイムですでに利用可能であるため、依存関係としてのビルドをスキップするように Webpack に指示します。
 
     **webpack.config.js**
 
@@ -24,8 +25,8 @@ Datadog のトレースライブラリ (`dd-trace`) は、条件付きインポ�
     };
     ```
 
-2. `package.json` とビルドプロセスから `datadog-lambda-js` と `dd-trace` を削除します。代わりに、[Lambda レイヤー][3]を介してこれらのパッケージをインポートしていることを確認してください。
-3. `serverless-webpack` と Serverless Framework を使用している場合は、`serverless.yml` から `datadog-lambda-js` と `dd-trace` を除外します。
+3. `package.json` とビルドプロセスから `datadog-lambda-js` と `dd-trace` を削除します。
+4. `serverless-webpack` と Serverless Framework を使用している場合は、`serverless.yml` から `datadog-lambda-js` と `dd-trace` を除外します。
 
     **serverless.yml**
 
@@ -38,7 +39,10 @@ Datadog のトレースライブラリ (`dd-trace`) は、条件付きインポ�
             - datadog-lambda-js
     ```
 
+## その他の参考資料
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://webpack.js.org
-[2]: https://webpack.js.org/configuration/externals/
-[3]: https://github.com/DataDog/datadog-lambda-js/releases
+[2]: /ja/serverless/installation/nodejs
+[3]: https://webpack.js.org/configuration/externals/

@@ -57,7 +57,7 @@ further_reading:
 
 [1]: /ja/real_user_monitoring/explorer/analytics/?tab=timeseries#build-an-analytics-query
 [2]: /ja/logs/search_syntax/
-[3]: /ja/logs/processing/processors/?tab=ui#geoip-parser
+[3]: /ja/logs/log_configuration/processors/#geoip-parser
 [4]: /ja/getting_started/tagging/#defining-tags
 [5]: /ja/dashboards/querying/
 [6]: /ja/logs/logs_to_metrics/

@@ -21,7 +21,7 @@ supported_os:
   - mac_os
   - windows
 dependencies:
-  - 'https://github.com/DataDog/documentation/blob/master/content/en/integrations/system.md'
+  - https://github.com/DataDog/documentation/blob/master/content/en/integrations/system.md
 integration_id: システム
 ---
 ## 概要
@@ -103,7 +103,7 @@ System コアチェックには、イベントは含まれません。
 
 #### サービスチェック
 
-System コアチェックには、サービスのチェック機能は含まれません。
+{{< get-service-checks-from-git "system_core" >}}
 
 ## System スワップ
 

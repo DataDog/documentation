@@ -28,11 +28,13 @@ further_reading:
 
 Python versions `2.7+` and `3.5+` are supported.  For a full list of supported libraries, visit the [Compatibility Requirements][1] page.
 
+When you set up tracing, you're also setting up Continuous Profiler, and you need only [enable Profiler][2] to start receiving profiling data from your app.
+
 ## Installation and getting started
 
 ### Follow the in-app documentation (recommended)
 
-Follow the [Quickstart instructions][2] within the Datadog app for the best experience, including:
+Follow the [Quickstart instructions][3] within the Datadog app for the best experience, including:
 
 - Step-by-step instructions scoped to your deployment configuration (hosts, Docker, Kubernetes, or Amazon ECS).
 - Dynamically set `service`, `env`, and `version` tags.
@@ -47,7 +49,7 @@ pip install ddtrace
 **Note:** This command requires pip version `18.0.0` or greater.  For Ubuntu, Debian, or another package manager, update your pip version with the following command:
 
 ```python
-sudo -H pip3 install --upgrade pip
+pip install --upgrade pip
 ```
 
 Then to instrument your Python application use the included `ddtrace-run` command. To use it, prefix your Python entry-point command with `ddtrace-run`.
@@ -87,7 +89,7 @@ Install and configure the Datadog Agent to receive traces from your now instrume
         port="1234",
     )
     ```
-{{< site-region region="us3,eu,gov" >}} 
+{{< site-region region="us3,us5,eu,gov" >}} 
 
 4. Set `DD_SITE` in the Datadog Agent to {{< region-param key="dd_site" code="true" >}} to ensure the Agent sends data to the right Datadog location.
 
@@ -104,7 +106,7 @@ To set up Datadog APM in AWS Lambda, see the [Tracing Serverless Functions][1] d
 {{% /tab %}}
 {{% tab "Other Environments" %}}
 
-Tracing is available for a number of other environments, such as  [Heroku][1], [Cloud Foundry][2], [AWS Elastic Beanstalk][3], and [Azure App Services Extension][4].
+Tracing is available for a number of other environments, such as  [Heroku][1], [Cloud Foundry][2], [AWS Elastic Beanstalk][3], and [Azure App Service][4].
 
 For other environments, please refer to the [Integrations][5] documentation for that environment and [contact support][6] if you are encountering any setup issues.
 
@@ -123,7 +125,7 @@ For more advanced usage, configuration, and fine-grain control, see Datadog's [A
 
 ## Configuration
 
-When using **ddtrace-run**, the following [environment variable options][4] can be used:
+When using **ddtrace-run**, the following [environment variable options][5] can be used:
 
 `DD_TRACE_DEBUG`
 : **Default**: `false`<br>
@@ -132,13 +134,13 @@ Enable debug logging in the tracer.
 `DATADOG_PATCH_MODULES`
 : Override the modules patched for this application execution. Follow the format: `DATADOG_PATCH_MODULES=module:patch,module:patch...`
 
-It is recommended to use `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `env`, `service`, and `version` for your services. Refer to the [Unified Service Tagging][5] documentation for recommendations on how to configure these environment variables.
+It is recommended to use `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `env`, `service`, and `version` for your services. Refer to the [Unified Service Tagging][6] documentation for recommendations on how to configure these environment variables.
 
 `DD_ENV`
-: Set the application’s environment, for example: `prod`, `pre-prod`, `staging`. Learn more about [how to setup your environment][6]. Available in version 0.38+.
+: Set the application’s environment, for example: `prod`, `pre-prod`, `staging`. Learn more about [how to setup your environment][7]. Available in version 0.38+.
 
 `DD_SERVICE`
-: The service name to be used for this application. The value is passed through when setting up middleware for web framework integrations like Pylons, Flask, or Django. For tracing without a web integration, it is recommended that you set the service name in code ([for example, see these Django docs][7]). Available in version 0.38+.
+: The service name to be used for this application. The value is passed through when setting up middleware for web framework integrations like Pylons, Flask, or Django. For tracing without a web integration, it is recommended that you set the service name in code ([for example, see these Django docs][8]). Available in version 0.38+.
 
 `DD_SERVICE_MAPPING`
 : Define service name mappings to allow renaming services in traces, for example: `postgres:postgresql,defaultdb:postgresql`. Available in version 0.47+.
@@ -157,26 +159,38 @@ Enable web framework and library instrumentation. When `false`, the application 
 : **Default**: `localhost`<br>
 Override the address of the trace Agent host that the default tracer attempts to submit traces to.
 
-`DATADOG_TRACE_AGENT_PORT`
+`DD_AGENT_PORT`
 : **Default**: `8126`<br>
 Override the port that the default tracer submit traces to.
 
 `DD_TRACE_AGENT_URL`
-: The URL of the Trace Agent that the tracer submits to. Takes priority over hostname and port, if set. Supports Unix Domain Sockets in combination with the `apm_config.receiver_socket` in your `datadog.yaml` file, or the `DD_APM_RECEIVER_SOCKET` environment variable.
+: The URL of the Trace Agent that the tracer submits to. If set, this takes priority over hostname and port. Supports Unix Domain Sockets (UDS) in combination with the `apm_config.receiver_socket` configuration in your `datadog.yaml` file or the `DD_APM_RECEIVER_SOCKET` environment variable set on the Datadog Agent. For example, `DD_TRACE_AGENT_URL=http://localhost:8126` for HTTP URL and `DD_TRACE_AGENT_URL=unix:///var/run/datadog/apm.socket` for UDS.
+
+`DD_DOGSTATSD_URL`
+: The URL used to connect to the Datadog Agent for DogStatsD metrics. If set, this takes priority over hostname and port. Supports Unix Domain Sockets (UDS) in combination with the `dogstatsd_socket` configuration in your `datadog.yaml` file or the `DD_DOGSTATSD_SOCKET` environment variable set on the Datadog Agent. For example, `DD_DOGSTATSD_URL=udp://localhost:8126` for UDP URL and `DD_DOGSTATSD_URL=unix:///var/run/datadog/dsd.socket` for UDS.
+
+`DD_DOGSTATSD_HOST`
+: **Default**: `localhost`<br>
+Override the address of the trace Agent host that the default tracer attempts to submit DogStatsD metrics to. Use `DD_AGENT_HOST` to override `DD_DOGSTATSD_HOST`.
+
+`DD_DOGSTATSD_PORT`
+: **Default**: `8126`<br>
+Override the port that the default tracer submits DogStatsD metrics to.
 
 `DD_LOGS_INJECTION`
 : **Default**: `false`<br>
-Enable [connecting logs and trace injection][8].
+Enable [connecting logs and trace injection][9].
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/compatibility_requirements/python
-[2]: https://app.datadoghq.com/apm/docs
-[3]: https://ddtrace.readthedocs.io/en/stable/
-[4]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#ddtracerun
-[5]: /getting_started/tagging/unified_service_tagging
-[6]: /tracing/guide/setting_primary_tags_to_scope/
-[7]: https://ddtrace.readthedocs.io/en/stable/integrations.html#django
-[8]: /tracing/connect_logs_and_traces/python/
+[2]: /tracing/profiler/enabling/?tab=python
+[3]: https://app.datadoghq.com/apm/docs
+[4]: https://ddtrace.readthedocs.io/en/stable/
+[5]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#ddtracerun
+[6]: /getting_started/tagging/unified_service_tagging
+[7]: /tracing/guide/setting_primary_tags_to_scope/
+[8]: https://ddtrace.readthedocs.io/en/stable/integrations.html#django
+[9]: /tracing/connect_logs_and_traces/python/

@@ -579,14 +579,7 @@ MySQL チェックには、イベントは含まれません。
 
 ### サービスのチェック
 
-**mysql.replication.replica_running**:<br>
-`Replica_IO_Running` および `Replica_SQL_Running` の両方を実行していないレプリカに `CRITICAL` を、いずれかのみが実行していない場合は `WARNING` を返します。それ以外の場合は、`OK` を返します。詳細については、[こちら][8]を参照してください。
-
-**mysql.replication.slave_running**:<br>
-`mysql.replication.replica_running` に置き換えられ、非推奨となりました。`Replica_IO_Running` および `Replica_SQL_Running` の両方を実行していないレプリカに `CRITICAL` を、いずれかのみが実行していない場合は `WARNING` を返します。それ以外の場合は、`OK` を返します。詳細については、[こちら][8]を参照してください。
-
-**mysql.can_connect**:<br>
-Agent が MySQL に接続してメトリクスを収集できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
+このインテグレーションによって提供されるサービスチェックのリストについては、[service_checks.json][8] を参照してください。
 
 ## トラブルシューティング
 
@@ -612,7 +605,7 @@ Datadog を使用した MySQL の監視については、[一連のブログ記�
 [5]: https://dev.mysql.com/doc/refman/8.0/en/creating-accounts.html
 [6]: https://docs.datadoghq.com/ja/integrations/faq/mysql-localhost-error-localhost-vs-127-0-0-1/
 [7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[8]: https://github.com/DataDog/integrations-core/blob/master/mysql/assets/SERVICE_CHECK_CLARIFICATION.md
+[8]: https://github.com/DataDog/integrations-core/blob/master/mysql/assets/service_checks.json
 [9]: https://docs.datadoghq.com/ja/integrations/faq/connection-issues-with-the-sql-server-integration/
 [10]: https://docs.datadoghq.com/ja/integrations/faq/can-i-use-a-named-instance-in-the-sql-server-integration/
 [11]: https://docs.datadoghq.com/ja/integrations/faq/can-i-set-up-the-dd-agent-mysql-check-on-my-google-cloudsql/

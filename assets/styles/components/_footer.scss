@@ -93,6 +93,7 @@ footer {
       &:lang(ja),
       &:lang(ko) {
         font-size: 14px;
+        white-space: normal;
       }
 
       &:hover {

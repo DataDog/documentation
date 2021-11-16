@@ -40,7 +40,7 @@ event(<TITLE>, <TEXT>, <TIMESTAMP>, <HOSTNAME>, <AGGREGATION_KEY>, <PRIORITY>, <
 
 ### Examples
 
-View errors and exceptions in Datadog with a DogStatsD event:
+Run the following code to view errors and exceptions in Datadog with a DogStatsD event. Remember to `flush`/`close` the client when it is no longer needed.
 
 {{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php" >}}
 
@@ -171,7 +171,7 @@ $statsd->event('An error occurred.',
   );
 ```
 
-With the DogStatsD-PHP library you can submit events via TCP directly to the Datadog API. It's slower but more reliable than using the Agent DogStatsD instance since events are forwarded from your application to the Agent using UDP.
+With the DogStatsD-PHP library you can submit events through TCP directly to the Datadog API. It's slower but more reliable than using the Agent DogStatsD instance since events are forwarded from your application to the Agent using UDP.
 To use this, you must configure the library with your [Datadog API and application keys][1] instead of the local DogStatS instance:
 
 ```php
@@ -195,7 +195,7 @@ $statsd->event('An error occurred.',
 ```
 
 
-[1]: https://app.datadoghq.com/account/settings#api
+[1]: https://app.datadoghq.com/organization-settings/api-keys
 {{< /programming-lang >}}
 
 {{< /programming-lang-wrapper >}}

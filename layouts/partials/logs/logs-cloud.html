@@ -1,24 +1,24 @@
 {{ $dot := . }}
 <div class="logs-cloud">
-    <div class="container cards-dd">
+    <div class="container cards-dd col-num-4">
         <div class="card-deck">
             <a class="card" href="/integrations/amazon_web_services/?tab=allpermissions#log-collection">
-                <div class="card-body text-center py-2 px-1">
+                <div class="card-body text-center py-2 px-1 d-flex flex-column justify-content-center">
                     {{ partial "img.html" (dict "root" . "src" "integrations_logos/amazon_web_services.png" "class" "img-fluid" "alt" "Docker" "width" "400") }}
                 </div>
             </a>
             <a class="card" href="/integrations/azure/?tab=azurecliv20#log-collection">
-                <div class="card-body text-center py-2 px-1">
+                <div class="card-body text-center py-2 px-1 d-flex flex-column justify-content-center">
                     {{ partial "img.html" (dict "root" . "src" "integrations_logos/azure.png" "class" "img-fluid" "alt" "Kubernetes" "width" "400") }}
                 </div>
             </a>
             <a class="card" href="/integrations/google_cloud_platform/?tab=datadogussite#log-collection">
-                <div class="card-body text-center py-2 px-1">
+                <div class="card-body text-center py-2 px-1 d-flex flex-column justify-content-center">
                     {{ partial "img.html" (dict "root" . "src" "integrations_logos/google_cloud_platform.png" "class" "img-fluid" "alt" "Amazon ECS" "width" "400") }}
                 </div>
             </a>
             <a class="card" href="/logs/guide/collect-heroku-logs/">
-                <div class="card-body text-center py-2 px-1">
+                <div class="card-body text-center py-2 px-1 d-flex flex-column justify-content-center">
                     {{ partial "img.html" (dict "root" . "src" "integrations_logos/heroku.png" "class" "img-fluid" "alt" "Amazon ECS" "width" "400") }}
                 </div>
             </a>

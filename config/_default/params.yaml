@@ -10,25 +10,25 @@ imgix:
 code_languages:
   'py':
     extension: py
-    name: python
+    name: python-legacy
     syntax: python
     command: python
     example_file: example.py
   'pybeta':
     extension: py
-    name: python-beta
+    name: python
     syntax: python
     command: python3
     example_file: example.py
   'rb':
     extension: rb
-    name: ruby
+    name: ruby-legacy
     syntax: ruby
     command: rb
     example_file: example.rb
   'rbbeta':
     extension: rbbeta
-    name: ruby-beta
+    name: ruby
     syntax: ruby
     command: rb
     example_file: example.rb
@@ -68,10 +68,10 @@ code_language_ids:
     cpp: 'C++'
     php: PHP
     nodejs: NodeJS
+    python-legacy: Python [legacy]
     python: Python
-    python-beta: Python [beta]
+    ruby-legacy: Ruby [legacy]
     ruby: Ruby
-    ruby-beta: Ruby [beta]
     go: Go
     typescript: Typescript
     ".NET": ".NET"
@@ -105,8 +105,12 @@ allowedRegions:
     domain: datadoghq.com
   - name: US3
     value: us3
-    weight: 15
+    weight: 13
     domain: us3.datadoghq.com
+  - name: US5
+    value: us5
+    weight: 15
+    domain: us5.datadoghq.com
   - name: EU
     value: eu
     weight: 20

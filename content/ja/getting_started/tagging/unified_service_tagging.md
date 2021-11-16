@@ -10,7 +10,7 @@ further_reading:
   - link: /tracing/version_tracking
     tag: Documentation
     text: Datadog APM 内の Version タグを使用してデプロイを監視する
-  - link: 'https://www.datadoghq.com/blog/autodiscovery-docker-monitoring/'
+  - link: https://www.datadoghq.com/blog/autodiscovery-docker-monitoring/
     tag: ブログ
     text: オートディスカバリーの詳細
 ---
@@ -21,7 +21,7 @@ further_reading:
 
 - バージョンでフィルタリングされたトレースおよびコンテナメトリクスでデプロイへの影響を特定する
 - 一貫性のあるタグを使用して、トレース、メトリクス、ログ間をシームレスに移動する
-- Datadog アプリ内で統一された方法で環境またはバージョンに基づいてサービスデータを表示する
+- Datadog サイト内で統一された方法で環境またはバージョンに基づいてサービスデータを表示する
 
 {{< img src="tagging/unified_service_tagging/overview.gif" alt="統合サービスタグ付け"  >}}
 
@@ -43,7 +43,7 @@ further_reading:
 | Python  |  0.38.0+      |
 | Ruby  |  0.34.0+      |
 
-- 統合サービスタグ付けには、タグの構成に関する知識が必要です。タグの構成方法がわからない場合は、コンフィギュレーションに進む前に、[タグの概要][4]および[タグの付け方][5]のドキュメントをお読みください。
+- 統合サービスタグ付けには、タグの構成に関する知識が必要です。タグの構成方法がわからない場合は、コンフィギュレーションに進む前に、[タグの概要][1]および[タグの付け方][4]のドキュメントをお読みください。
 
 ## コンフィギュレーション
 
@@ -58,9 +58,9 @@ further_reading:
 
 コンテナ化環境で統合サービスタグ付けをセットアップするには
 
-1. [オートディスカバリー][6]を有効にします。これにより、Datadog Agent は特定のコンテナで実行されているサービスを自動的に識別し、そのサービスからデータを収集して、環境変数を `env`、`service`、`version` タグにマッピングできます。
+1. [オートディスカバリー][5]を有効にします。これにより、Datadog Agent は特定のコンテナで実行されているサービスを自動的に識別し、そのサービスからデータを収集して、環境変数を `env`、`service`、`version` タグにマッピングできます。
 
-2. [Docker][7] を使用している場合は、Agent がコンテナの [Docker ソケット][8]にアクセスできることを確認してください。これにより、Agent は環境変数を検出し、それを標準タグにマッピングできます。
+2. [Docker][6] を使用している場合は、Agent がコンテナの [Docker ソケット][7]にアクセスできることを確認してください。これにより、Agent は環境変数を検出し、それを標準タグにマッピングできます。
 
 4. 以下に詳述する完全なコンフィギュレーションまたは部分的なコンフィギュレーションのいずれかに基づいて環境を構成します。
 
@@ -135,7 +135,7 @@ tags.datadoghq.com/<container-name>.version
 
 1. [コンフィギュレーションファイル][3]で `join_standard_tags` を `true` に設定します。
 
-2. 同じ標準ラベルを親リソース (デプロイなど) のラベルのコレクションに追加します。
+2. 同じ標準ラベルを親リソース (`Deployment` など) のラベルのコレクションに追加します。
 
   ```yaml
   apiVersion: apps/v1
@@ -277,13 +277,13 @@ com.datadoghq.tags.version
 
 サービスのバイナリまたは実行可能ファイルをどのように構築およびデプロイするかによって、環境変数を設定するためのオプションをいくつか利用できる場合があります。ホストごとに 1 つ以上のサービスを実行する可能性があるため、これらの環境変数のスコープを単一プロセスにすることをお勧めします。
 
-[トレース][9]、[ログ][10]、[StatsD メトリクス][11]のサービスのランタイムから直接送信されるすべてのテレメトリーのコンフィギュレーションの単一ポイントを形成するには、次のいずれかを実行します。
+[トレース][8]、[ログ][9]、[StatsD メトリクス][10]のサービスのランタイムから直接送信されるすべてのテレメトリーのコンフィギュレーションの単一ポイントを形成するには、次のいずれかを実行します。
 
 1. 実行可能ファイルのコマンドで環境変数をエクスポートします。
 
     `DD_ENV=<env> DD_SERVICE=<service> DD_VERSION=<version> /bin/my-service`
 
-2. または、[Chef][12]、[Ansible][13]、または別のオーケストレーションツールを使用して、サービスの systemd または initd コンフィギュレーションファイルに `DD` 環境変数を設定します。これにより、サービスプロセスが開始されると、その変数にアクセスできるようになります。
+2. または、[Chef][11]、[Ansible][12]、または別のオーケストレーションツールを使用して、サービスの systemd または initd コンフィギュレーションファイルに `DD` 環境変数を設定します。これにより、サービスプロセスが開始されると、その変数にアクセスできるようになります。
 
 {{< tabs >}}
 {{% tab "トレース" %}}
@@ -294,9 +294,9 @@ com.datadoghq.tags.version
 
 2. `DD_VERSION` でスパンを構成して、トレーサーに属するサービス (通常は `DD_SERVICE`) に属するすべてのスパンにバージョンを追加します。これは、サービスが外部サービスの名前でスパンを作成する場合、そのスパンはタグとして `version` を受信しないことを意味します。
 
-   バージョンがスパンに存在する限り、そのスパンから生成されたメトリクスをトレースするために追加されます。バージョンは、手動でコード内に追加するか、APM トレーサーによって自動的に追加できます。構成すると、少なくともこれらは APM および [Dogstatsd クライアント][2]によって使用され、トレースデータと StatsD メトリクスに `env`、`service`、`version` でタグ付けします。有効にすると、APM トレーサーはこの変数の値もログに挿入します。
+   バージョンがスパンに存在する限り、そのスパンから生成されたメトリクスをトレースするために追加されます。バージョンは、手動でコード内に追加するか、APM トレーサーによって自動的に追加できます。構成すると、少なくともこれらは APM および [DogStatsD クライアント][2]によって使用され、トレースデータと StatsD メトリクスに `env`、`service`、`version` でタグ付けします。有効にすると、APM トレーサーはこの変数の値もログに挿入します。
 
-   **注: スパンごとに 1 つのサービスしか存在できません。**トレースメトリクスには、通常、単一のサービスもあります。ただし、ホストのタグで異なるサービスが定義されている場合、その構成されたサービスタグは、そのホストから発行されたすべてのトレースメトリクスに表示されます。
+   **注**: **スパンごとに 1 つのサービス**しか存在できません。トレースメトリクスには、通常、単一のサービスもあります。ただし、ホストのタグで異なるサービスが定義されている場合、その構成されたサービスタグは、そのホストから発行されたすべてのトレースメトリクスに表示されます。
 
 [1]: /ja/tracing/setup/
 [2]: /ja/developers/dogstatsd/
@@ -319,7 +319,7 @@ com.datadoghq.tags.version
 
 **注**: .NET および PHP 用の Datadog DogStatsD クライアントは、まだこの機能をサポートしていません。
 
-[1]: /ja/developers/metrics/
+[1]: /ja/metrics/
 {{% /tab %}}
 
 {{% tab "システムメトリクス" %}}
@@ -364,9 +364,7 @@ instances:
       service: nginx-web-app
 ```
 
-**注**: Agent のメインコンフィギュレーションファイルで既に `service` タグをグローバルに設定している場合は、プロセスのメトリクスが 2 つのサービスにタグ付けされます。
-これによってメトリクスの解釈に相違が生じることがあるため、
-`service` タグはプロセスチェックのコンフィギュレーションのみで構成することをお勧めします。
+**注**: Agent のメインコンフィギュレーションファイルで既に `service` タグをグローバルに設定している場合は、プロセスのメトリクスが 2 つのサービスにタグ付けされます。これによってメトリクスの解釈に相違が生じることがあるため、`service` タグはプロセスチェックのコンフィギュレーションのみで構成することをお勧めします。
 
 [1]: /ja/agent/guide/agent-configuration-files
 [2]: /ja/integrations/process
@@ -379,7 +377,7 @@ instances:
 
 AWS Lambda ベースのサーバーレスアプリケーションの構築およびデプロイ方法により、`env`、`service`、`version` タグをメトリクス、トレース、およびログに適用する方法はいくつかあります。
 
-*注*: これらのタグは、環境変数の代わりに AWS リソースタグにより指定されます。特に、`DD_ENV`、`DD_SERVICE`、`DD_VERSION` の環境変数には対応していません。
+*注*: これらのタグは、環境変数ではなく AWS リソースタグを介して指定されます。
 
 {{< tabs >}}
 
@@ -489,7 +487,7 @@ class CdkStack extends cdk.Stack {
 
 {{< /tabs >}}
 
-CloudFormation スタックで、[Datadog Forwarder][14] 用に `DdFetchLambdaTags` オプションが `true` に設定されていることを確認します。バージョン `3.19.0` 以降、このオプションはデフォルトで `true` になっています。
+CloudFormation スタックで、[Datadog Forwarder][13] 用に `DdFetchLambdaTags` オプションが `true` に設定されていることを確認します。バージョン `3.19.0` 以降、このオプションはデフォルトで `true` になっています。
 
 ## その他の参考資料
 
@@ -499,14 +497,13 @@ CloudFormation スタックで、[Datadog Forwarder][14] 用に `DdFetchLambdaTa
 [1]: /ja/getting_started/tagging/
 [2]: /ja/getting_started/agent
 [3]: /ja/tracing/setup
-[4]: /ja/getting_started/tagging/
-[5]: /ja/getting_started/tagging/assigning_tags?tab=noncontainerizedenvironments
-[6]: /ja/getting_started/agent/autodiscovery
-[7]: /ja/agent/docker/integrations/?tab=docker
-[8]: /ja/agent/docker/?tab=standard#optional-collection-agents
-[9]: /ja/getting_started/tracing/
-[10]: /ja/getting_started/logs/
-[11]: /ja/integrations/statsd/
-[12]: https://www.chef.io/
-[13]: https://www.ansible.com/
-[14]: /ja/serverless/forwarder/
+[4]: /ja/getting_started/tagging/assigning_tags?tab=noncontainerizedenvironments
+[5]: /ja/getting_started/agent/autodiscovery
+[6]: /ja/agent/docker/integrations/?tab=docker
+[7]: /ja/agent/docker/?tab=standard#optional-collection-agents
+[8]: /ja/getting_started/tracing/
+[9]: /ja/getting_started/logs/
+[10]: /ja/integrations/statsd/
+[11]: https://www.chef.io/
+[12]: https://www.ansible.com/
+[13]: /ja/serverless/forwarder/

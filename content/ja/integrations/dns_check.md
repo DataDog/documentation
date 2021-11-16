@@ -89,20 +89,13 @@ DNS チェックは [Datadog Agent][1] パッケージに含まれているた�
 DNS チェックには、イベントは含まれません。
 
 ### サービスのチェック
+{{< get-service-checks-from-git "dns_check" >}}
 
-この Agent チェックは、収集するすべてのサービスチェックに次のタグを付けます。
-
-- `nameserver:<nameserver_in_yaml>`
-- `resolved_hostname:<hostname_in_yaml>`
-
-**dns.can_resolve**:<br>
-Agent がリクエストの解決に失敗した場合は、`CRITICAL` を返します。それ以外の場合は `OK` を返します。
-
-`hostname` および `record_type` でタグ付けされます。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][7]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
+
 
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
@@ -110,4 +103,5 @@ Agent がリクエストの解決に失敗した場合は、`CRITICAL` を返し
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [6]: https://github.com/DataDog/integrations-core/blob/master/dns_check/metadata.csv
-[7]: https://docs.datadoghq.com/ja/help/
+[7]: https://github.com/DataDog/integrations-core/blob/master/dns_check/assets/service_checks.json
+[8]: https://docs.datadoghq.com/ja/help/

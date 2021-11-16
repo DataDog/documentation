@@ -288,7 +288,7 @@ Besoin d'aide ? Contactez [l'assistance Datadog][6].
 [8]: https://www.datadoghq.com/blog/monitor-activemq-metrics-performance
 [9]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
 [10]: https://github.com/DataDog/integrations-core/blob/master/activemq_xml/datadog_checks/activemq_xml/data/conf.yaml.example
-[11]: https://docs.datadoghq.com/fr/developers/metrics/custom_metrics/
+[11]: https://docs.datadoghq.com/fr/metrics/custom_metrics/
 [12]: https://docs.datadoghq.com/fr/account_management/billing/custom_metrics/
 [13]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [14]: https://docs.datadoghq.com/fr/agent/guide/autodiscovery-with-jmx/?tab=containerizedagent

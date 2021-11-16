@@ -10,11 +10,15 @@ further_reading:
       text: "Troubleshooting CI"
 ---
 
+{{< site-region region="us5,gov" >}}
+<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
+{{< /site-region >}}
+
 The [Tests][1] page, under the CI menu in Datadog, provides a test-first view into your CI health by showing you important metrics and results from your tests. It can help you drill down into performance problems and test failures that concern you primarily because you work on the related code (and less because you maintain the pipelines they are run in).
 
 ## Explore tests
 
-The Tests page shows the _Branches_ view and the _Test Services_ view.
+The Tests page shows the _Branches_ view and the _Default Branches_ view.
 
 ### Branches view
 
@@ -24,13 +28,13 @@ In this page, you can filter the list by name, test service, or commit SHA, or t
 
 #### Test results
 
-For each branch, the list shows test results for its latest commit: a consolidated number of tests broken down by status (which takes into account retries) and the number of new flaky tests introduced by the commit (a flaky test is defined as a test that both passes and fails on the same commit). 
+For each branch, the list shows test results for its latest commit: a consolidated number of tests broken down by status (which takes into account retries) and the number of new flaky tests introduced by the commit (a flaky test is defined as a test that both passes and fails on the same commit).
 
 #### Test suite performance
 
 There's also information about the wall time of the most recent test suite run, and a comparison to the average wall time of the default branch. _Wall time_ is the real time elapsed while the test suite runs, which is less than the sum of all test times when tests are run concurrently. The comparison of your branch's wall time to the default branch's wall time can help you determine if your commit is introducing performance regressions to your test suite.
 
-Hovering over the commit author avatar shows detailed information about the latest commit. 
+Hovering over the commit author avatar shows detailed information about the latest commit.
 
 #### Drill down for more details
 
@@ -42,23 +46,23 @@ Click into one of the test runs to see the test trace as a flame graph or a span
 
 Click the CI provider link to drill down to the Resource, Service, or Analytics page for the test. You can also find complete tags information and links to related log events and network monitoring events.
 
-### Test services view
+### Default Branches view
 
-A _test service_ is a group of tests associated with, for example, a project or repo. It contains all the individual tests for your code, optionally organized into _test suites_ (which are like folders for your tests). The [Test Services][3] view of the Tests page shows aggregated health metrics for the _default_ branch of each test service. This view is useful for teams to understand the overall health of the service over time.
+A _test service_ is a group of tests associated with, for example, a project or repo. It contains all the individual tests for your code, optionally organized into _test suites_ (which are like folders for your tests). The [Default Branches][3] view of the Tests page shows aggregated health metrics for the _default_ branch of each test service. This view is useful for teams to understand the overall health of the service over time.
 
-The Test Services view shows the same information as the Branches view, but applied to the default branch, and sorted by most recent. It compares the current wall time with the average default branch wall time, to give you an indication of how your test suite performance is trending over time. 
+The Default Branches view shows similar information to the Branches view, but applied to the default branch, and sorted by most recent. It compares the current wall time with the average default branch wall time, to give you an indication of how your test suite performance is trending over time.
 
 Click on a row to see the analytics for tests run on the default branch, similar to drilling down for test run details from the Branches view.
 
 ## Explore test runs
 
-On the [Test Runs][4] page, you can see the list of all runs over the selected time frame, filter by facet, and drill down into individual test run details. Each test run is reported as a trace, which in the case of integration tests includes calls made to datastores or third party services using regular [APM instrumentation][5]. 
+On the [Test Runs][4] page, you can see the list of all runs over the selected time frame, filter by facet, and drill down into individual test run details. Each test run is reported as a trace, which in the case of integration tests includes calls made to datastores or third party services using regular [APM instrumentation][5].
 
 Click into a particular test run to see the flame graph or span list for a test, for each time it's been run, similar to clicking into a test run from the Tests page.
 
 You can also interactively plot graphs and top lists using the [Analytics][6] tab.
 
-{{< img src="ci/ci-test-runs.png" alt="Test Runs analytics"  style="width:100%;">}}
+{{< img src="ci/ci-test-runs.png" alt="Test Runs analytics" style="width:100%;">}}
 
 ### How third-party services data is shown
 
@@ -66,15 +70,15 @@ Spans generated by third party services that are instrumented with APM and that 
 
 ## Communicate about CI tests data
 
-Test execution data is available when you create widgets in [Dashboards][8] and [Notebooks][9]. 
+Test execution data is available when you create widgets in [Dashboards][8] and [Notebooks][9].
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/ci/test-services
-[2]: https://app.datadoghq.com/ci/test-services?viz=branches
-[3]: https://app.datadoghq.com/ci/test-services?viz=test-services
+[2]: https://app.datadoghq.com/ci/test-services?view=branches
+[3]: https://app.datadoghq.com/ci/test-services?view=default-branches
 [4]: https://app.datadoghq.com/ci/test-runs
 [5]: https://www.datadoghq.com/auto-instrumentation/
 [6]: https://app.datadoghq.com/ci/test-runs?viz=timeseries

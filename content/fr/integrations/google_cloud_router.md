@@ -10,6 +10,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/google_cloud_router/'
 draft: false
 git_integration_title: google_cloud_router
 has_logo: true
+integration_id: google-cloud-router
 integration_title: "Google\_Cloud\_Router"
 is_public: true
 kind: integration
@@ -25,7 +26,7 @@ Google Cloud Router permet l'échange dynamique de routes entre votre cloud pr
 
 Utilisez l'intégration Datadog Google Cloud Platform pour recueillir des métriques de Google Cloud Router.
 
-## Implémentation
+## Configuration
 
 ### Installation
 

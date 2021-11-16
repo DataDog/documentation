@@ -20,7 +20,7 @@ The service summary displays the graphs of a chosen [service][1] in your screenb
 
 ## Setup
 
-{{< img src="dashboards/widgets/service_summary/service_summary_setup.png" alt="service summary setup"  style="width:80%;">}}
+{{< img src="dashboards/widgets/service_summary/service_summary_setup.png" alt="service summary setup" style="width:80%;">}}
 
 ### Configuration
 
@@ -38,7 +38,7 @@ The service summary displays the graphs of a chosen [service][1] in your screenb
 
 ## API
 
-This widget can be used with the **Dashboards API**. Refer to the [Dashboards API][3] documentation for additional reference.
+This widget can be used with the **Dashboards API**. See the [Dashboards API documentation][3] for additional reference.
 
 The dedicated [widget JSON schema definition][4] for the service summary widget is:
 

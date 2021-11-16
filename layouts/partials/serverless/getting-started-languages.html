@@ -1,6 +1,6 @@
 {{ $dot := . }}
 <div class="logs-containers">
-    <div class="container cards-dd">
+    <div class="container cards-dd col-num-3">
         <div class="card-deck">
             <a class="card" href="/serverless/installation/python/">
                 <div class="card-body text-center py-2 px-1">
@@ -17,9 +17,6 @@
                     {{ partial "img.html" (dict "root" . "src" "integrations_logos/ruby.png" "class" "img-fluid" "alt" "Ruby" "width" "400") }}
                 </div>
             </a>
-        </div>
-    </br>
-        <div class="card-deck">
             <a class="card" href="/serverless/installation/java/">
                 <div class="card-body text-center py-2 px-1">
                     {{ partial "img.html" (dict "root" . "src" "integrations_logos/java.png" "class" "img-fluid" "alt" "Java" "width" "400") }}

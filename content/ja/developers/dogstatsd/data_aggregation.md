@@ -11,11 +11,11 @@ further_reading:
   - link: developers/libraries
     tag: ドキュメント
     text: 公式/コミュニティ作成の API および DogStatsD クライアントライブラリ
-  - link: 'https://github.com/DataDog/datadog-agent/tree/master/pkg/dogstatsd'
+  - link: https://github.com/DataDog/datadog-agent/tree/master/pkg/dogstatsd
     tag: GitHub
     text: DogStatsD ソースコード
 ---
-Datadog の DogStatsD は、StatsD プロトコルを、いくつか固有の機能を追加して実装します。DogStatsD を使用すると、アプリケーションコードのメトリクス送信や監視を、コードをブロックせずに行うことができます。データはアプリケーションから UDP 経由でローカルの（Datadog Agent に組み込まれた） [DogStatsD サーバー][2]に送信され、そこで集計されてから、Datadog の API エンドポイントに送られます。[DogStatsD のセットアップについてはこちらを参照してください][2]。
+Datadog の DogStatsD は、StatsD プロトコルを、いくつか固有の機能を追加して実装します。DogStatsD を使用すると、アプリケーションコードのメトリクス送信や監視を、コードをブロックせずに行うことができます。データはアプリケーションから UDP を通じてローカルの（Datadog Agent に組み込まれた） [DogStatsD サーバー][2]に送信され、そこで集計されてから、Datadog の API エンドポイントに送られます。[DogStatsD のセットアップについてはこちらを参照してください][2]。
 
 この記事では、データを集計する理由と、その方法について説明します。
 
@@ -27,7 +27,7 @@ Datadog の DogStatsD は、StatsD プロトコルを、いくつか固有の機
 
 ## DogStatsD サーバーで集計が行われる方法
 
-[DogStatsD][2] は 10 秒の_フラッシュ間隔_を使用します。10 秒ごとに、[DogStatsD][2] は前回のフラッシュ以降に受信した（つまり 10 秒前からの）すべてのデータをチェックし、同じメトリクス名で同じタグを持つすべての値を 1 つの値に集計します。
+[DogStatsD][2] は 10 秒の_フラッシュ間隔_を使用します。10 秒ごとに、[DogStatsD][2] は前回のフラッシュ以降に受信したすべてのデータをチェックし、同じメトリクス名で同じタグを持つすべての値を 1 つの値に集計します。
 
 **注**: StatsD プロトコルの場合、StatsD クライアントはメトリクスにタイムスタンプを付けて送信しません。タイムスタンプはフラッシュ時に追加されます。したがって、10:00:10 にフラッシュが発生する場合、（Datadog Agent に組み込まれた）[DogStatsD][2] サーバーは、10:00:00 から 10:00:10 の間に受信したすべてのデータを 1 つのデータポイントに集計し、10:00:00 のタイムスタンプを付けます。
 
@@ -35,22 +35,22 @@ Datadog の DogStatsD は、StatsD プロトコルを、いくつか固有の機
 
 同じフラッシュ間隔の間に受信するすべての値を集計して送信される値は、[メトリクスのタイプ][4]によって次のように異なります。
 
-| メトリクスタイプ       | フラッシュ間隔ごとに行われる集計方法                                                                                                                    |
-| ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [GAUGE][5]        | 最後に受信したデータポイントが送信されます。                                                                                                                           |
-| [COUNT][3]        | 受信したすべてのデータポイントの合計が送信されます。                                                                                                                      |
-| [HISTOGRAM][6]    | 受信したすべてのデータポイントの最小、最大、合計、平均、95 パーセンタイル、カウント、中央値が送信されます。詳しくは、[HISTOGRAM メトリクスのドキュメントページ][6]を参照してください。 |
-| SET               | 一意なデータポイントの数が送信されます。                                                                                                                      |
-| [DISTRIBUTION][7] | グローバルな分布として集計します。                                                                                                                              |
+| メトリクスタイプ       | フラッシュ間隔ごとに行われる集計方法                                                 |
+|-------------------|-----------------------------------------------------------------------------------------------|
+| [GAUGE][5]        | 最後に受信したデータポイントが送信されます。                                                        |
+| [COUNT][3]        | 受信したすべてのデータポイントの合計が送信されます。                                                   |
+| [HISTOGRAM][6]    | 受信したすべてのデータポイントの最小、最大、合計、平均、95 パーセンタイル、カウント、および中央値が送信されます。 |
+| SET               | 一意なデータポイントの数が送信されます。                                                   |
+| [DISTRIBUTION][7] | グローバルな分布として集計します。                                                           |
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/developers/dogstatsd/
-[2]: /ja/developers/metrics/dogstatsd_metrics_submission/
-[3]: /ja/developers/metrics/types/?tab=count#metric-types
-[4]: /ja/developers/metrics/types/
-[5]: /ja/developers/metrics/types/?tab=gauge#metric-types
-[6]: /ja/developers/metrics/types/?tab=histogram#metric-types
-[7]: /ja/developers/metrics/types/?tab=distribution#metric-types
+[2]: /ja/metrics/dogstatsd_metrics_submission/
+[3]: /ja/metrics/types/?tab=count#metric-types
+[4]: /ja/metrics/types/
+[5]: /ja/metrics/types/?tab=gauge#metric-types
+[6]: /ja/metrics/types/?tab=histogram#metric-types
+[7]: /ja/metrics/types/?tab=distribution#metric-types

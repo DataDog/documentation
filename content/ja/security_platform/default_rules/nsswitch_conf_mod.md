@@ -3,15 +3,12 @@ aliases:
   - /ja/pzv-32s-1sa
   - /ja/security_monitoring/default_rules/pzv-32s-1sa
   - /ja/security_monitoring/default_rules/nsswitch_conf_mod
-control: ''
 disable_edit: true
-framework: ''
+fim: 'true'
 integration_id: ファイル整合性モニタリング
 kind: documentation
 rule_category:
   - ワークロードセキュリティ
-scope: ''
-security: コンプライアンス
 source: ファイル整合性モニタリング
 title: Nsswitch コンフィギュレーションの変更
 type: security_rules

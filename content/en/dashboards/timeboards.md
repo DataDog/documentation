@@ -20,7 +20,7 @@ Timeboards have automatic layouts, and represent a single point in time—either
 
 To switch from the [Dashboard layout][1] to the Timeboard layout, use `Pick Layout` in the cog menu and select `Automatic`.
 
-{{< img src="dashboards/auto-layout.png" alt="Auto layout option for a dashboard"  style="width:70%;">}}
+{{< img src="dashboards/auto-layout.png" alt="Auto layout option for a dashboard" style="width:70%;">}}
 
 ## Search
 
@@ -28,7 +28,7 @@ To switch from the [Dashboard layout][1] to the Timeboard layout, use `Pick Layo
 
 Set up an overlay of events by clicking the **Search...** link in the upper left, select **Events**, and enter a [query][2] in the search box. This replaces event overlays added at design time, and applies to all graphs on the timeboard. The overlay shows the occurrence of events on your timeseries graphs with a list of events on the right.
 
-{{< img src="dashboards/timeboard/events_overlay.png" alt="Events overlay"  style="width:75%;">}}
+{{< img src="dashboards/timeboard/events_overlay.png" alt="Events overlay" style="width:75%;">}}
 
 ### Logs
 

@@ -1,5 +1,5 @@
 ---
-title: AWS integration billing
+title: AWS Integration Billing
 kind: documentation
 aliases:
 - /integrations/faq/i-can-t-filter-out-my-elb-instances-will-i-be-charged-for-them/

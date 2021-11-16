@@ -6,12 +6,13 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Segment インテグレーションは、配信先ワークスペースのイベント配信メトリクスを収集
-doc_link: 'https://docs.datadoghq.com/integrations/segment/'
+doc_link: https://docs.datadoghq.com/integrations/segment/
 draft: false
 git_integration_title: segment
 has_logo: true
 integration_id: ''
 integration_title: Segment
+integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'

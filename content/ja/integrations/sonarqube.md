@@ -2,7 +2,8 @@
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
-  dashboards: {}
+  dashboards:
+    Sonarqube Overview: assets/dashboards/overview.json
   logs:
     source: sonarqube
   metrics_metadata: metadata.csv
@@ -18,11 +19,11 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/sonarqube/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/sonarqube/README.md
 display_name: SonarQube
 draft: false
 further_reading:
-  - link: 'https://www.datadoghq.com/blog/datadog-sonarqube-integration/'
+  - link: https://www.datadoghq.com/blog/datadog-sonarqube-integration/
     tag: ブログ
     text: SonarQube で Datadog のコード品質を監視
 git_integration_title: sonarqube
@@ -285,25 +286,22 @@ Collector
 {{< get-metrics-from-git "sonarqube" >}}
 
 
-### サービスのチェック
-
-**sonarqube.can_connect**:<br>
-Agent が監視対象の SonarQube インスタンスの JMX エンドポイントに接続できず、メトリクスを収集できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
-
-**sonarqube.api_access**:<br>
-Agent が監視対象の SonarQube インスタンスの Web エンドポイントに接続できず、メトリクスを収集できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
-
 ### イベント
 
 SonarQube には、イベントは含まれません。
 
+### サービスのチェック
+{{< get-service-checks-from-git "sonarqube" >}}
+
+
 ## トラブルシューティング
+
+ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 
 
 [1]: https://www.sonarqube.org

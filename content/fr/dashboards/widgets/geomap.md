@@ -57,7 +57,7 @@ Définissez sa taille et son alignement si vous le souhaitez.
 
 [1]: /fr/real_user_monitoring/explorer/analytics/?tab=timeseries#build-an-analytics-query
 [2]: /fr/logs/search_syntax/
-[3]: /fr/logs/processing/processors/?tab=ui#geoip-parser
+[3]: /fr/logs/log_configuration/processors/#geoip-parser
 [4]: /fr/getting_started/tagging/#defining-tags
 [5]: /fr/dashboards/querying/
 [6]: /fr/logs/logs_to_metrics/

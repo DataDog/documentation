@@ -17,5 +17,4 @@ Network Device Monitoring does not include any events.
 
 ## Service checks
 
-**snmp.can_check**:<br>
-Returns `CRITICAL` if the Agent cannot collect SNMP metrics, otherwise returns `OK`.
+{{< get-service-checks-from-git "snmp" >}}

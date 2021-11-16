@@ -4,10 +4,10 @@ kind: guide
 aliases:
   - /logs/faq/log-parsing-best-practice
 further_reading:
-- link: "/logs/processing/"
+- link: "/logs/log_configuration/processors"
   tag: "Documentation"
   text: "Learn how to process your logs"
-- link: "/logs/processing/parsing/"
+- link: "/logs/log_configuration/parsing"
   tag: "Documentation"
   text: "Learn more about parsing"
 - link: "/logs/faq/how-to-investigate-a-log-parsing-issue/"
@@ -64,6 +64,6 @@ This article walks through parsing a log from the Datadog Agent's collector log:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/processing/parsing/
-[2]: /logs/processing/parsing/?tab=matcher#matcher-and-filter
-[3]: /logs/processing/parsing/#key-value
+[1]: /logs/log_configuration/parsing
+[2]: /logs/log_configuration/parsing/#matcher-and-filter
+[3]: /logs/log_configuration/parsing/#key-value-or-logfmt

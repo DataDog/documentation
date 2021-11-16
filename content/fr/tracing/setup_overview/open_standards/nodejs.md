@@ -148,7 +148,7 @@ new DatadogExporter({
 
 Les tags qui sont définis directement sur des spans spécifiques remplacement les tags définis au niveau de l'application en cas de conflit.
 
-### Liens OpenTelemetry
+### OpenTelemetry liens
 
 - Consultez [npm][2] ou [Github][3] pour en savoir plus sur l'utilisation de l'exportateur Datadog pour OpenTelemetry dans une application NodeJS.
 

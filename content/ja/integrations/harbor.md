@@ -130,24 +130,18 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 {{< get-metrics-from-git "harbor" >}}
 
 
-### サービスのチェック
-
-**harbor.can_connect**:<br>
-Harbor API が到達可能で、認証が成功した場合は `OK` を返し、それ以外の場合には `CRITICAL` を返します。
-
-**harbor.status**:<br>
-指定された Harbor コンポーネントが健全な場合は `OK` を返し、それ以外の場合は `CRITICAL` を返します。v1.5 以前の Harbor については `UNKNOWN` を返します。
-
-**harbor.registry.status**:<br>
-サービスが健全な場合は `OK` を返し、それ以外の場合は `CRITICAL` を返します。Harbor が使用するレプリケーション用外部レジストリの健全性を監視します。
-
 ### イベント
 
 Harbor インテグレーションには、イベントは含まれません。
 
+### サービスのチェック
+{{< get-service-checks-from-git "harbor" >}}
+
+
 ## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
+
 
 
 [1]: https://goharbor.io

@@ -2,7 +2,7 @@ import { getQueryParameterByName } from '../helpers/browser';
 
 function codeTabs() {
     const tab = getQueryParameterByName('tab');
-    
+
     if ($('.code-tabs').length > 0) {
         // page load set code tab titles
         $('.code-tabs .tab-content')
@@ -13,7 +13,7 @@ function codeTabs() {
                     .find('.nav-tabs-mobile .dropdown-menu');
                 const navTabs = $(this).closest('.code-tabs').find('.nav-tabs');
                 const title = $(this).attr('title');
-                const lang = title.toLowerCase().replace(/\W/g, '');
+                const lang = $(this).data('lang');
                 navTabs.append(
                     `<li><a href="#" data-lang="${lang}">${title}</a></li>`
                 );

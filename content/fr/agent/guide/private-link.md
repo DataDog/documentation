@@ -39,7 +39,7 @@ Pour utiliser PrivateLink, vous devez configurer un endpoint interne dans votre 
 
 | Nom de service des métriques Datadog                                |
 | ---------------------------------------------------------- |
-| `com.amazonaws.vpce.us-east-1.vpce-svc-056576c12b36056ca`  |
+| `com.amazonaws.vpce.us-east-1.vpce-svc-09a8006e245d1e7b8`  |
 
 {{% /tab %}}
 {{% tab "Logs" %}}

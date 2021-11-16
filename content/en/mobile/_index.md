@@ -8,6 +8,9 @@ further_reading:
 - link: "/dashboards/"
   tag: "Documentation"
   text: "Dashboards"
+- link: "https://www.datadoghq.com/blog/datadog-mobile-widgets/"
+  tag: "Blog"
+  text: "Improve your on-call experience with Datadog mobile dashboard widgets"
 ---
 
 The Datadog Mobile app enables you to view alerts from Datadog on your mobile device. When receiving an alert via Slack, e-mail, Pagerduty or other pager apps, you'll be able to investigate issues by opening monitor graphs and dashboards on your mobile device.
@@ -34,7 +37,7 @@ Optionally, you may also authenticate through a QR Code or manual entry, outline
 ##### QR code
 
 1. Start by logging in to your [Datadog account profile page][4] in a browser and click the **Link mobile device** button of the organization you want to log into. This pops up a QR code.
-    {{< img src="mobile/link-device.png" alt="Account Profiles - Link mobile device">}}
+    {{< img src="mobile/link-device.png" alt="Link mobile device" style="width:80%;">}}
 2. Use your default phone camera app to scan the QR code and then tap the suggested link to open the Datadog App. The org UDID is automatically inserted into the login screen.
 
 ##### Manual entry
@@ -80,15 +83,125 @@ On the Incidents page, you can view, search and filter all incidents that you ha
 
 ## Widgets
 
-### Monitor saved views
+### SLOs widget
+
+{{< img src="mobile/slo_widget.png" alt="widget page" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
+
+View your [SLOs][13] from your mobile home screen with Datadog widgets. You can add any SLOs from your organization as a widget, along with a timeframe.
+
+Timeframe options are:
+- 7 days
+- 30 days
+- 90 days
+- Previous week
+- Previous month
+- Week to date
+- Month to date
+
+You can also specify a dashboard that opens by default when you tap on an SLOs widget, allowing you to quickly dig deeper into your metrics.
+
+**Note**: If you do not specify a dashboard that opens by default, tapping an SLOs widget opens the Datadog app.
+
+#### Create an SLOs widget
+
+{{< tabs >}}
+{{% tab "iOS" %}}
+
+- Long press on your home screen.
+- Tap the “+” button on the top left corner of the screen.
+- Search for "Datadog" widgets.
+- Select your prefered size (small shows one SLO and medium shows one SLO along with a visualized timeframe of its health).
+- Drag the widget to your desired, on-screen location.
+
+
+{{% /tab %}}
+{{% tab "Android" %}}
+
+- Long press on your home screen.
+- Tap the "Widgets" button on your home screen editor. If you have app shortcuts, it might appear as just an icon on the top right corner of the bubble.
+- Drag the widget to your desired, on-screen home screen.
+- Resize the widget to fit your preference. It always shows one SLO. If you size the widget to take up the width of your mobile home screen, it displays the selected SLO along with a visualized timeframe of its health.
+
+
+{{% /tab %}}
+{{< /tabs >}}
+
+#### Edit an SLOs widget
+
+{{< tabs >}}
+{{% tab "iOS" %}}
+
+- Long press on the widget to configure.
+- Tap "Edit Widget."
+- Tap "Choose" next to the SLO label to choose an SLO to track.
+- Depending on the SLO chosen, a "Timeframe" label may appear. Tap "Choose" next to the "Timeframe" label to choose the SLO timeframe. 
+- Tap "Choose" next to the "Dashboard to open" label to choose a dashboard that opens when the SLOs widget is tapped. 
+- Tap out of the widget to validate your selection and exit the configuration screen.
+
+
+{{% /tab %}}
+{{% tab "Android" %}}
+
+- Tap the widget title to configure.
+- Tap "Selected SLO" to choose an SLO to track.
+- Tap "Selected Time Window" to choose the SLO timeframe.
+- Tap "Dashboard to open" to choose a dashboard that opens when the SLOs widget is tapped.
+- Tap "Save" or "Apply" to validate your selection and exit the configuration screen.
+- Long press and resize the widget to fit your preference.
+
+
+{{% /tab %}}
+{{< /tabs >}}
+
+#### Display SLOs from multiple organizations
+
+You can display SLOs from multiple organizations on your mobile home screen. 
+
+{{< tabs >}}
+{{% tab "iOS" %}}
+
+All organizations you’ve logged into are displayed in the configuration screen. If you do not see your organization, sign into it again.
+
+
+{{% /tab %}}
+{{% tab "Android" %}}
+
+- Tap the widget title to configure.
+- From the configuration screen, tap "Organization".
+- Select a new organization (You might need to sign in).
+- Size the widget to fit your preference.
+- Tap "Save" or "Apply". 
+
+
+{{% /tab %}}
+{{< /tabs >}}
+
+#### Delete an SLOs widget
+
+{{< tabs >}}
+{{% tab "iOS" %}}
+
+Delete a widget by tapping the "-" button at the top left of the widget when editing your home screen, or by long pressing on the widget and selecting "Remove Widget".
+
+
+{{% /tab %}}
+{{% tab "Android" %}}
+
+Delete a widget by long pressing, dragging, and dropping the widget to the "Remove" button.
+
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### Monitors widget
 
 {{< img src="mobile/widgets.png" alt="widget page" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
 
-View your [monitor saved views][13] from your home screen with Datadog widgets. Tap on any saved view cell to open the "Monitor Search" screen in the app, with your saved view already filled in.
+View your [monitors][14] from your home screen with Datadog widgets. Tap on any cell to open the "Monitor Search" screen in the app, with your monitors already filled in.
 
 **Note**: If you do not have any monitor saved views, the widget shows you all monitors by default.
 
-#### Create a widget
+#### Create a Monitors widget
 
 {{< tabs >}}
 {{% tab "iOS" %}}
@@ -97,20 +210,22 @@ View your [monitor saved views][13] from your home screen with Datadog widgets. 
 - Tap the “+” button on the top left corner of the screen.
 - Search for "Datadog" widgets.
 - Select your prefered size (small shows two monitor saved views, medium allows up to three monitor saved views, and large up to six monitor saved views).
-- Place the widget in your desired, onscreen location.
+- Drag the widget to your desired, on-screen location.
 
 
 {{% /tab %}}
 {{% tab "Android" %}}
 
-- Open the Android Widget Picker.
-- Either long press your home screen, or long press the Datadog app icon.
-- Tap on "Widgets". If you have app shortcuts, it might appear as just an icon on the top right corner of the bubble.
-- Drag the Monitor Saved Views widget on your home screen.
+- Long press on your home screen.
+- Tap "Widgets" on your home screen editor. If you have app shortcuts, it might appear as just an icon on the top right corner of the bubble.
+- Drag the widget to your desired, on-screen home screen.
+- Resize the widget to fit your preference. To show more saved views, increase the length of the widget on your mobile home screen.
+
 
 {{% /tab %}}
 {{< /tabs >}}
-#### Edit a widget
+
+#### Edit a Monitors widget
 
 {{< tabs >}}
 {{% tab "iOS" %}}
@@ -121,37 +236,45 @@ View your [monitor saved views][13] from your home screen with Datadog widgets. 
 - Reorder the views by dragging and dropping each cell.
 - Tap out of the widget to validate your selection and exit the configuration screen.
 
+
 {{% /tab %}}
 {{% tab "Android" %}}
 
 - Tap on the widget title to configure.
-- Tap on "Saved views".
+- Tap on "Saved Views".
 - Tap on the individual saved view cell to select and deselect.
 - Reorder the views by dragging and dropping each cell.
-- Tap "Save" to validate your selection and exit the configuration screen.
-- Scroll the widget to see more saved views. Long press and resize the widget to fit your preference.
+- Tap "Save" or "Apply" to validate your selection and exit the configuration screen.
+- Scroll inside the widget to see more saved views. Long press and resize the widget to fit your preference.
+
 
 {{% /tab %}}
 {{< /tabs >}}
-#### Multiple organizations
 
-You can display Saved Views from multiple organizations within the same widget. 
+#### Display Monitors from multiple organizations
+
+You can display Monitors from multiple organizations within the same widget. 
 
 {{< tabs >}}
 {{% tab "iOS" %}}
 
 All organizations you’ve logged-in are displayed in the configuration screen. If you do not see your organization, you may need to sign in again.
 
+
 {{% /tab %}}
 {{% tab "Android" %}}
 
-- From the configuration screen, tap on "Organization".
+- Tap the widget title to configure.
+- From the configuration screen, tap "Organization".
 - Select a new organization (you might need to sign in).
-- Tap "Saved Views". Select saved views to display or leave it as is.
-- Tap "Save". The widget is now configured with saved views from a different organization.
+- Edit the widget to fit your preference.
+- Tap "Save" or "Apply". 
+
+
 {{% /tab %}}
 {{< /tabs >}}
-#### Delete a widget
+
+#### Delete a Monitors widget
 
 {{< tabs >}}
 {{% tab "iOS" %}}
@@ -164,6 +287,7 @@ Delete a widget pressing the "-" button at the top left of the widget when editi
 
 Delete a widget by long pressing, dragging, and dropping the widget on the "Remove" button.
 
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -171,7 +295,7 @@ Delete a widget by long pressing, dragging, and dropping the widget on the "Remo
 
 {{< img src="mobile/shortcut_shadow.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Quick Actions">}}
 
-Long-press on the app icon to surface a quick-action sheet of your top five [Frequently Viewed By Me][14] dashboards for iOS (measured by view count and recency) and your five most opened dashboards on mobile for Android. Press on a result to open the dashboard in-app.
+Long-press on the app icon to surface a quick-action sheet of your top five [Frequently Viewed By Me][15] dashboards for iOS (measured by view count and recency) and your five most opened dashboards on mobile for Android. Press on a result to open the dashboard in-app.
 
 ## Search from home screen
 
@@ -193,7 +317,7 @@ With the shortcut, you can access your dashboards and monitors through three key
 
 {{< img src="mobile/siri_shadow.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Shortcuts">}}
 
-For more information on Siri Shortcuts and Suggestions, refer to the [Apple Siri Documentation][15].
+For more information on Siri Shortcuts and Suggestions, refer to the [Apple Siri Documentation][16].
 
 ## Handoff
 
@@ -206,7 +330,7 @@ For Handoff to work, each device must:
 - Have Wi-Fi enabled
 - Have Handoff enabled
 
-For more information on Handoff, refer to the [Apple Handoff Documentation][16].
+For more information on Handoff, refer to the [Apple Handoff Documentation][17].
 
 ## Account
 
@@ -214,7 +338,7 @@ Switch organizations or log out from the Account page.
 
 ## Troubleshooting
 
-For help with troubleshooting, [contact Datadog support][17]. You can also send a message in the [Datadog public Slack][18] [#mobile-app][19] channel.
+For help with troubleshooting, [contact Datadog support][18]. You can also send a message in the [Datadog public Slack][19] [#mobile-app][20] channel.
 
 ### Further Reading
 
@@ -225,17 +349,18 @@ For help with troubleshooting, [contact Datadog support][17]. You can also send 
 [3]: /account_management/saml/#pagetitle
 [4]: https://app.datadoghq.com/account/profile
 [5]: /account_management/saml/mobile-idp-login/
-[6]: /monitors/manage_monitor/#search
+[6]: /monitors/manage/#search
 [7]: https://app.datadoghq.com/monitors
-[8]: /monitors/monitor_types/
+[8]: /monitors/create/types/
 [9]: /dashboards/template_variables/#saved-views
 [10]: https://app.datadoghq.com/dashboard/lists
 [11]: /dashboards/
 [12]: /monitors/incident_management
-[13]: /logs/explorer/saved_views/
-[14]: https://app.datadoghq.com/dashboard/lists/preset/5
-[15]: https://support.apple.com/en-us/HT209055
-[16]: https://support.apple.com/en-us/HT209455
-[17]: /help/
-[18]: https://chat.datadoghq.com/
-[19]: https://datadoghq.slack.com/archives/C0114D5EHNG
+[13]: https://docs.datadoghq.com/dashboards/widgets/slo/#setup
+[14]: /logs/explorer/saved_views/
+[15]: https://app.datadoghq.com/dashboard/lists/preset/5
+[16]: https://support.apple.com/en-us/HT209055
+[17]: https://support.apple.com/en-us/HT209455
+[18]: /help/
+[19]: https://chat.datadoghq.com/
+[20]: https://datadoghq.slack.com/archives/C0114D5EHNG

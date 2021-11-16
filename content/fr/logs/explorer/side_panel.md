@@ -5,7 +5,7 @@ description: Effectuer des recherches et des analyses sur l'ensemble de vos logs
 aliases:
   - /fr/logs/explorer/sidepanel
 further_reading:
-  - link: logs/processing
+  - link: /logs/log_configuration/processors
     tag: Documentation
     text: Apprendre √† traiter vos logs
   - link: /tracing/connect_logs_and_traces
@@ -84,10 +84,10 @@ Utilisez le bouton de **partage** pour partager le log ouvert dans le volet lat√
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/logs/processing/pipelines/
+[1]: /fr/logs/log_configuration/pipelines
 [2]: /fr/integrations/#cat-log-collection
 [3]: /fr/agent/autodiscovery/integrations/?tab=kubernetes
-[4]: /fr/logs/processing/attributes_naming_convention/
+[4]: /fr/logs/log_configuration/attributes_naming_convention
 [5]: /fr/dashboards/#preset-lists
 [6]: /fr/network_monitoring/performance/network_page/
 [7]: /fr/infrastructure/livecontainers/?tab=linuxwindows#introduction

@@ -62,7 +62,7 @@ MarkLogic チェックは [Datadog Agent][2] パッケージに含まれてい�
 API または Admin インターフェイスで、Datadog Agent に [`manage-user`][3] ロール権限が最小限のユーザーを作成します。
 `enable_health_service_checks` コンフィギュレーションを使用する予定の場合は、Datadog MarkLogic ユーザーにu少なくとも [`manage-admin`][4] ロールを付与します。
 
-##### API の使用
+##### API
 
 1. 特定の値でこのリクエストを調整し、Datadog ユーザーを作成します。
     ```shell
@@ -76,7 +76,7 @@ API または Admin インターフェイスで、Datadog Agent に [`manage-use
     curl -X GET --anyauth --user <USER>:<PASSWORD> -i http://<HOSTNAME>:8002/manage/v2
     ```
 
-##### Admin インターフェイスを使用する場合
+##### Admin インターフェイス
 
 1. 監理者アカウントで QConsole にログインします。デフォルトで、QConsole は `http://<HOSTNAME>:8000/qconsole` で使用可能です。
 
@@ -145,24 +145,18 @@ _Agent バージョン 6.0 以降で利用可能_
 {{< get-metrics-from-git "marklogic" >}}
 
 
-### サービスのチェック
-
-**marklogic.can_connect**:<br>
-Agent がクエリのエンドポイントに到達できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
-
-**marklogic.database.health**:<br>
-データベースのステータスが `critical` の場合は `CRITICAL`、`maintenance`、`offline` または `at-risk` の場合は `WARNING`、それ以外の場合は `OK` を返します。
-
-**marklogic.forest.health**:<br>
-フォレストのステータスが `critical` の場合は `CRITICAL`、`maintenance`、`offline` または `at-risk` の場合は `WARNING`、それ以外の場合は `OK` を返します。
-
 ### イベント
 
 MarkLogic には、イベントは含まれません。
 
+### サービスのチェック
+{{< get-service-checks-from-git "marklogic" >}}
+
+
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][11]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][12]までお問合せください。
+
 
 [1]: https://www.marklogic.com
 [2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations
@@ -174,4 +168,5 @@ MarkLogic には、イベントは含まれません。
 [8]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [9]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [10]: https://github.com/DataDog/integrations-core/blob/master/marklogic/metadata.csv
-[11]: https://docs.datadoghq.com/ja/help
+[11]: https://github.com/DataDog/integrations-core/blob/master/marklogic/assets/service_checks.json
+[12]: https://docs.datadoghq.com/ja/help

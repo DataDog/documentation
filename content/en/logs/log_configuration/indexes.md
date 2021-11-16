@@ -9,10 +9,10 @@ further_reading:
 - link: "/logs/explorer/#visualize"
   tag: "Documentation"
   text: "Perform Log Analytics"
-- link: "/logs/processing/"
+- link: "/logs/log_configuration/processors"
   tag: "Documentation"
   text: "Learn how to process your logs"
-- link: "/logs/processing/parsing/"
+- link: "/logs/log_configuration/parsing"
   tag: "Documentation"
   text: "Learn more about parsing"
 - link: "https://www.datadoghq.com/blog/logging-without-limits/"
@@ -22,7 +22,7 @@ further_reading:
 
 Log Indexes provide fine-grained control over your Log Management budget by allowing you to segment data into value groups for differing retention, quotas, usage monitoring, and billing. Indexes are located on the [Configuration page][1] in the Indexes section. Double click on them or click on the *edit* button to see more information about the number of logs that were indexed in the past 3 days, as well as the retention period for those logs:
 
-{{< img src="logs/indexes/index_details.png" alt="index details"  style="width:70%;">}}
+{{< img src="logs/indexes/index_details.jpg" alt="index details"  style="width:70%;">}}
 
 You can use indexed logs for [faceted searching][2], [patterns][3], [analytics][4], [dashboarding][5], and [monitoring][6].
 
@@ -149,17 +149,17 @@ Follow our [Log Usage guide][20] to see how to monitor and alert on your usage.
 [3]: /logs/explorer/patterns/
 [4]: /logs/explorer/analytics/
 [5]: /logs/explorer/analytics/#dashboard
-[6]: /monitors/monitor_types/log/
+[6]: /monitors/create/types/log/
 [7]: /logs/explorer/facets/#the-index-facet
 [8]: /logs/live_tail/
 [9]: /logs/logs_to_metrics/
 [10]: /logs/archives/
 [11]: /logs/search_syntax/
 [12]: /api/v1/logs-indexes/#update-an-index
-[13]: /logs/processing/processors/?tab=ui#user-agent-parser
-[14]: /logs/processing/processors/?tab=ui#geoip-parser
+[13]: /logs/log_configuration/processors/#user-agent-parser
+[14]: /logs/log_configuration/processors/#geoip-parser
 [15]: /tracing/connect_logs_and_traces/
-[16]: /logs/processing/processors/?tab=ui#trace-remapper
+[16]: /logs/log_configuration/processors/#trace-remapper
 [17]: /help/
 [18]: /logs/live_tail/#overview
 [19]: https://www.timeanddate.com/worldclock/converter.html

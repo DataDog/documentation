@@ -1,5 +1,5 @@
 ---
-title: Google Cloud integration billing
+title: Google Cloud Integration Billing
 kind: documentation
 ---
 

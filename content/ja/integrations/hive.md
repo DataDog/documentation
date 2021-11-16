@@ -162,14 +162,13 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 {{< get-metrics-from-git "hive" >}}
 
 
-### サービスのチェック
-
-**hive.can_connect**:<br>
-Agent が監視対象の HiveServer2/Hive Metastore インスタンスに接続できず、メトリクスを収集できない場合は `CRITICAL` を返します。それ以外の場合は `OK` を返します。
-
 ### イベント
 
 Hive チェックには、イベントは含まれません。
+
+### サービスのチェック
+{{< get-service-checks-from-git "hive" >}}
+
 
 ## トラブルシューティング
 

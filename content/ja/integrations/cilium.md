@@ -153,14 +153,13 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 {{< get-metrics-from-git "cilium" >}}
 
 
-### サービスのチェック
-
-**cilium.prometheus.health**: <br>
- Agent がメトリクスのエンドポイントに到達できない場合は `CRITICAL` を返します。それ以外の場合は、`OK` を返します。
-
 ### イベント
 
 Cilium には、イベントは含まれません。
+
+### サービスのチェック
+{{< get-service-checks-from-git "cilium" >}}
+
 
 ## トラブルシューティング
 

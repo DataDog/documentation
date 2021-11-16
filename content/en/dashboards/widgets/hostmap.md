@@ -26,7 +26,7 @@ The host map widget graphs any metric across your hosts using the same visualiza
 
 ### Configuration
 
-Configuration of the host map widget is similar to the main [host map page][1]:
+Configuration of the host map widget is similar to the main [host map][1] page:
 
 1. **Type**: Choose to display `hosts` or `containers`.
 2. **Filter by**: Choose the hosts or containers to display.
@@ -44,13 +44,13 @@ Configuration of the host map widget is similar to the main [host map page][1]:
 
 Display a custom title for your widget by activating the `Show a Title` check box:
 
-{{< img src="dashboards/widgets/options/title.png" alt="Widget title"  style="width:80%;">}}
+{{< img src="dashboards/widgets/options/title.png" alt="Widget title" style="width:80%;">}}
 
 Optionally define its size and alignment.
 
 ## API
 
-This widget can be used with the **Dashboards API**. Refer to the [Dashboards API][2] documentation for additional reference.
+This widget can be used with the **Dashboards API**. See the [Dashboards API documentation][2] for additional reference.
 
 The dedicated [widget JSON schema definition][3] for the host map widget is:
 

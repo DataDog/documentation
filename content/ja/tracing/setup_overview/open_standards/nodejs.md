@@ -105,7 +105,7 @@ function doWork(parent) {
 }
 ```
 
-### 構成オプション
+### コンフィギュレーションオプション
 
 Datadog Agent の URL とスパンタグの値は、環境と Agent の場所次第で必要または希望に応じて構成できます。
 

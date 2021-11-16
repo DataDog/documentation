@@ -11,7 +11,7 @@ further_reading:
 - link: "/developers/dogstatsd/"
   tag: "Documentation"
   text: "Introduction to DogStatsD"
-- link: "/developers/metrics/types/"
+- link: "/metrics/types/"
   tag: "Documentation"
   text: "Datadog Metric Types"
 ---
@@ -51,7 +51,7 @@ After you [install DogStatsD][1], the following functions are available for subm
 
 Emit a `COUNT` metric-stored as a `RATE` metric-to Datadog. Learn more about the `COUNT` type in the [metric types][2] documentation.
 
-Run the following code to submit a DogStatsD `COUNT` metric to Datadog. Remember to `close` the client when it is no longer needed.
+Run the following code to submit a DogStatsD `COUNT` metric to Datadog. Remember to `flush`/`close` the client when it is no longer needed.
 
 {{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php" >}}
 
@@ -204,11 +204,11 @@ while (TRUE) {
 
 After running the code above, your metrics data is available to graph in Datadog:
 
-{{< img src="developers/metrics/dogstatsd_metrics_submission/increment_decrement.png" alt="Increment Decrement" >}}
+{{< img src="metrics/dogstatsd_metrics_submission/increment_decrement.png" alt="Increment Decrement" >}}
 
 Since the value is submitted as a `COUNT` it's stored as `RATE` in Datadog. To get raw counts within Datadog, apply a function to your series such as the [Cumulative Sum][3] or [Integral][4] function:
 
-{{< img src="developers/metrics/dogstatsd_metrics_submission/increment_decrement_cumsum.png" alt="Increment Decrement with Cumsum" >}}
+{{< img src="metrics/dogstatsd_metrics_submission/increment_decrement_cumsum.png" alt="Increment Decrement with Cumsum" >}}
 
 ### GAUGE
 
@@ -219,7 +219,7 @@ Since the value is submitted as a `COUNT` it's stored as `RATE` in Datadog. To g
 
 Emit a `GAUGE` metric-stored as a `GAUGE` metric-to Datadog. Learn more about the `GAUGE` type in the [metric types][5] documentation.
 
-Run the following code to submit a DogStatsD `GAUGE` metric to Datadog. Remember to `close` the client when it is no longer needed.
+Run the following code to submit a DogStatsD `GAUGE` metric to Datadog. Remember to `flush`/`close` the client when it is no longer needed.
 
 {{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php" >}}
 
@@ -367,7 +367,7 @@ while (TRUE) {
 
 After running the code above, your metric data is available to graph in Datadog:
 
-{{< img src="developers/metrics/dogstatsd_metrics_submission/gauge.png" alt="Gauge" >}}
+{{< img src="metrics/dogstatsd_metrics_submission/gauge.png" alt="Gauge" >}}
 
 ### SET
 
@@ -378,7 +378,7 @@ After running the code above, your metric data is available to graph in Datadog:
 
 Emit a `SET` metric-stored as a `GAUGE` metric-to Datadog.
 
-Run the following code to submit a DogStatsD `SET` metric to Datadog. Remember to `close` the client when it is no longer needed.
+Run the following code to submit a DogStatsD `SET` metric to Datadog. Remember to `flush`/`close` the client when it is no longer needed.
 
 {{< programming-lang-wrapper langs="python,ruby,go,.NET,PHP" >}}
 
@@ -503,7 +503,7 @@ while (TRUE) {
 
 After running the code above, your metrics data is available to graph in Datadog:
 
-{{< img src="developers/metrics/dogstatsd_metrics_submission/set.png" alt="Set" >}}
+{{< img src="metrics/dogstatsd_metrics_submission/set.png" alt="Set" >}}
 
 ### HISTOGRAM
 
@@ -520,7 +520,7 @@ After running the code above, your metrics data is available to graph in Datadog
 The `HISTOGRAM` metric type is specific to DogStatsD. Emit a `HISTOGRAM` metric—stored as a `GAUGE` and `RATE` metric—to Datadog. Learn more about the `HISTOGRAM` type in the [metric types][6] documentation.
 
 
-Run the following code to submit a DogStatsD `HISTOGRAM` metric to Datadog. Remember to `close` the client when it is no longer needed.
+Run the following code to submit a DogStatsD `HISTOGRAM` metric to Datadog. Remember to `flush`/`close` the client when it is no longer needed.
 
 {{< programming-lang-wrapper langs="python,ruby,go,.NET,PHP" >}}
 
@@ -672,7 +672,7 @@ The above instrumentation produces the following metrics:
 
 After running the code above, your metrics data is available to graph in Datadog:
 
-{{< img src="developers/metrics/dogstatsd_metrics_submission/histogram.png" alt="Histogram" >}}
+{{< img src="metrics/dogstatsd_metrics_submission/histogram.png" alt="Histogram" >}}
 
 #### TIMER
 
@@ -687,7 +687,7 @@ For a `TIMER`, the `HISTOGRAM` [configuration](#configuration) rules apply.
 
 ##### Code examples
 
-Emit a `TIMER` metric—stored as a `GAUGE` and `RATE` metric—to Datadog. Learn more about the `HISTOGRAM` type in the [metric types][6] documentation. Remember to `close` the client when it is no longer needed.
+Emit a `TIMER` metric—stored as a `GAUGE` and `RATE` metric—to Datadog. Learn more about the `HISTOGRAM` type in the [metric types][6] documentation. Remember to `flush`/`close` the client when it is no longer needed.
 
 {{< programming-lang-wrapper langs="python,PHP" >}}
 
@@ -777,7 +777,7 @@ As DogStatsD receives the timer metric data, it calculates the statistical distr
 
 DogStatsD treats `TIMER` as a `HISTOGRAM` metric. Whether you use the `TIMER` or `HISTOGRAM` metric type, you are sending the same data to Datadog. After running the code above, your metrics data is available to graph in Datadog:
 
-{{< img src="developers/metrics/dogstatsd_metrics_submission/timer.png" alt="Timer" >}}
+{{< img src="metrics/dogstatsd_metrics_submission/timer.png" alt="Timer" >}}
 
 ### DISTRIBUTION
 
@@ -788,7 +788,7 @@ DogStatsD treats `TIMER` as a `HISTOGRAM` metric. Whether you use the `TIMER` or
 
 The `DISTRIBUTION` metric type is specific to DogStatsD. Emit a `DISTRIBUTION` metric-stored as a `DISTRIBUTION` metric-to Datadog. Learn more about the `DISTRIBUTION` type in the [metric types][9] documentation.
 
-Run the following code to submit a DogStatsD `DISTRIBUTION` metric to Datadog. Remember to `close` the client when it is no longer needed.
+Run the following code to submit a DogStatsD `DISTRIBUTION` metric to Datadog. Remember to `flush`/`close` the client when it is no longer needed.
 
 {{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php" >}}
 
@@ -1057,11 +1057,11 @@ The host tag is assigned automatically by the Datadog Agent aggregating the metr
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /developers/dogstatsd/
-[2]: /developers/metrics/types/?tab=count#definition
+[2]: /metrics/types/?tab=count#definition
 [3]: /dashboards/functions/arithmetic/#cumulative-sum
 [4]: /dashboards/functions/arithmetic/#integral
-[5]: /developers/metrics/types/?tab=gauge#definition
-[6]: /developers/metrics/types/?tab=histogram#definition
+[5]: /metrics/types/?tab=gauge#definition
+[6]: /metrics/types/?tab=histogram#definition
 [7]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 [8]: /metrics/distributions/
-[9]: /developers/metrics/types/?tab=distribution#definition
+[9]: /metrics/types/?tab=distribution#definition

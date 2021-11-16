@@ -146,8 +146,6 @@ Agent は、メトリクスを統計エンドポイント経由で収集しま�
 
 ##### ログの収集
 
-_Agent バージョン 6.0 以降で利用可能_
-
 デフォルトで、Haproxy はログを UDP 経由で 514 ポートに送信します。Agent はこのポートでログをリッスンできますが、1024 よりも下のポート番号にバインディングするため、管理者特権が必要になります。以下ではこの設定方法について説明します。別のポートを使用することも可能で、その場合は手順 3 をスキップしてください。
 
 1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
@@ -193,32 +191,138 @@ _Agent バージョン 6.0 以降で利用可能_
 [2]: https://github.com/DataDog/integrations-core/blob/master/haproxy/datadog_checks/haproxy/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
-{{% tab "Containerized" %}}
+{{% tab "Docker" %}}
 
-#### コンテナ化
+#### Docker
 
-コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
+コンテナで実行中の Agent に対してこのチェックを構成するには:
 
 ##### メトリクスの収集
 
-| パラメーター            | 値                                     |
-| -------------------- | ----------------------------------------- |
-| `<インテグレーション名>` | `haproxy`                                 |
-| `<初期コンフィギュレーション>`      | 空白または `{}`                             |
-| `<インスタンスコンフィギュレーション>`  | `{"url": "https://%%host%%/admin?stats"}` |
+アプリケーションのコンテナで、[オートディスカバリーのインテグレーションテンプレート][1]を Docker ラベルとして設定します。
+
+```yaml
+LABEL "com.datadoghq.ad.check_names"='["haproxy"]'
+LABEL "com.datadoghq.ad.init_configs"='[{}]'
+LABEL "com.datadoghq.ad.instances"='[{"url": "https://%%host%%/admin?stats"}]'
+```
+
+##### ログの収集
+
+ログの収集は、Datadog Agent ではデフォルトで無効になっています。有効にするには、[Docker ログ収集ドキュメント][2]を参照してください。
+
+次に、[ログインテグレーション][3]を Docker ラベルとして設定します。
+
+```yaml
+LABEL "com.datadoghq.ad.logs"='[{"source":"haproxy","service":"<SERVICE_NAME>"}]'
+```
+
+[1]: https://docs.datadoghq.com/ja/agent/docker/integrations/?tab=docker
+[2]: https://docs.datadoghq.com/ja/agent/docker/log/?tab=containerinstallation#installation
+[3]: https://docs.datadoghq.com/ja/agent/docker/log/?tab=containerinstallation#log-integrations
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
+
+#### Kubernetes
+
+このチェックを、Kubernetes で実行している Agent に構成します。
+
+##### メトリクスの収集
+
+アプリケーションのコンテナで、[オートディスカバリーのインテグレーションテンプレート][1]をポッドアノテーションとして設定します。他にも、[ファイル、ConfigMap、または key-value ストア][2]を使用してテンプレートを構成できます。
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: haproxy
+  annotations:
+    ad.datadoghq.com/haproxy.check_names: '["haproxy"]'
+    ad.datadoghq.com/haproxy.init_configs: '[{}]'
+    ad.datadoghq.com/haproxy.instances: |
+      [
+        {
+          "url": "https://%%host%%/admin?stats"
+        }
+      ]
+spec:
+  containers:
+    - name: haproxy
+```
 
 ##### ログの収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
-Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集のドキュメント][2]を参照してください。
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集のドキュメント][3]を参照してください。
 
-| パラメーター      | 値                                                |
-| -------------- | ---------------------------------------------------- |
-| `<LOG_CONFIG>` | `{"source": "haproxy", "service": "<SERVICE_NAME>"}` |
+次に、[ログのインテグレーション][4]をポッドアノテーションとして設定します。これは、[ファイル、ConfigMap、または key-value ストア][5]を使用して構成することも可能です。
 
-[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-[2]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: haproxy
+  annotations:
+    ad.datadoghq.com/haproxy.logs: '[{"source":"haproxy","service":"<SERVICE_NAME>"}]'
+spec:
+  containers:
+    - name: haproxy
+```
+
+[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/?tab=kubernetes
+[2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/?tab=kubernetes#configuration
+[3]: https://docs.datadoghq.com/ja/agent/kubernetes/log/?tab=containerinstallation#setup
+[4]: https://docs.datadoghq.com/ja/agent/docker/log/?tab=containerinstallation#log-integrations
+[5]: https://docs.datadoghq.com/ja/agent/kubernetes/log/?tab=daemonset#configuration
+{{% /tab %}}
+{{% tab "ECS" %}}
+
+#### ECS
+
+このチェックを、ECS で実行している Agent に構成するには:
+
+##### メトリクスの収集
+
+アプリケーションのコンテナで、[オートディスカバリーのインテグレーションテンプレート][1]を Docker ラベルとして設定します。
+
+```json
+{
+  "containerDefinitions": [{
+    "name": "haproxy",
+    "image": "haproxy:latest",
+    "dockerLabels": {
+      "com.datadoghq.ad.check_names": "[\"haproxy\"]",
+      "com.datadoghq.ad.init_configs": "[{}]",
+      "com.datadoghq.ad.instances": "[{\"url\": \"https://%%host%%/admin?stats\"}]"
+    }
+  }]
+}
+```
+
+##### ログの収集
+
+_Agent バージョン 6.0 以降で利用可能_
+
+ログの収集は、Datadog Agent ではデフォルトで無効になっています。有効にするには、[ECS ログ収集ドキュメント][2]を参照してください。
+
+次に、[ログインテグレーション][3]を Docker ラベルとして設定します。
+
+```json
+{
+  "containerDefinitions": [{
+    "name": "haproxy",
+    "image": "haproxy:latest",
+    "dockerLabels": {
+      "com.datadoghq.ad.logs": "[{\"source\":\"haproxy\",\"service\":\"<SERVICE_NAME>\"}]"
+    }
+  }]
+}
+```
+
+[1]: https://docs.datadoghq.com/ja/agent/docker/integrations/?tab=docker
+[2]: https://docs.datadoghq.com/ja/agent/amazon_ecs/logs/?tab=linux
+[3]: https://docs.datadoghq.com/ja/agent/docker/log/?tab=containerinstallation#log-integrations
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -238,22 +342,19 @@ Haproxy チェックには、イベントは含まれません。
 
 ### サービスのチェック
 
-**haproxy.backend_up**:<br>
-HAProxy のステータスページをサービスチェックに変換します。
-特定のサービスについて、HAProxy が `down` と報告している場合は、`CRITICAL` を返します。
-`maint`、`ok` などの他の状態の場合は、`OK` を返します。
+このインテグレーションによって提供されるサービスチェックのリストについては、[service_checks.json][8] を参照してください。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
 
 ## その他の参考資料
 
-- [HAProxy パフォーマンスメトリクスの監視][9]
-- [HAProxy メトリクスの収集方法][10]
-- [Datadog を使用した HAProxy の監視][11]
-- [HAProxy のマルチプロセスコンフィギュレーション][12]
-- [HAProxy メトリクスの収集方法][10]
+- [HAProxy パフォーマンスメトリクスの監視][10]
+- [HAProxy メトリクスの収集方法][11]
+- [Datadog を使用した HAProxy の監視][12]
+- [HAProxy のマルチプロセスコンフィギュレーション][13]
+- [HAProxy メトリクスの収集方法][11]
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/haproxy/images/haproxy-dash.png
@@ -263,8 +364,9 @@ HAProxy のステータスページをサービスチェックに変換します
 [5]: https://www.haproxy.org/download/1.7/doc/management.txt
 [6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[8]: https://docs.datadoghq.com/ja/help/
-[9]: https://www.datadoghq.com/blog/monitoring-haproxy-performance-metrics
-[10]: https://www.datadoghq.com/blog/how-to-collect-haproxy-metrics
-[11]: https://www.datadoghq.com/blog/monitor-haproxy-with-datadog
-[12]: https://docs.datadoghq.com/ja/integrations/faq/haproxy-multi-process/
+[8]: https://github.com/DataDog/integrations-core/blob/master/haproxy/assets/service_checks.json
+[9]: https://docs.datadoghq.com/ja/help/
+[10]: https://www.datadoghq.com/blog/monitoring-haproxy-performance-metrics
+[11]: https://www.datadoghq.com/blog/how-to-collect-haproxy-metrics
+[12]: https://www.datadoghq.com/blog/monitor-haproxy-with-datadog
+[13]: https://docs.datadoghq.com/ja/integrations/faq/haproxy-multi-process/

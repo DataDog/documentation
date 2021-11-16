@@ -1,9 +1,9 @@
 ---
 dependencies:
-  - 'https://github.com/DataDog/dd-sdk-ios/blob/master/docs/log_collection.md'
+  - https://github.com/DataDog/dd-sdk-ios/blob/master/docs/log_collection.md
 description: iOS アプリケーションからログを収集する。
 further_reading:
-  - link: 'https://github.com/DataDog/dd-sdk-ios'
+  - link: https://github.com/DataDog/dd-sdk-ios
     tag: Github
     text: dd-sdk-ios ソースコード
   - link: logs/explorer
@@ -82,7 +82,7 @@ Datadog.initialize(
     configuration: Datadog.Configuration
         .builderUsing(clientToken: "<client_token>", environment: "<environment_name>")
         .set(serviceName: "app-name")
-        .set(endpoint: .eu1)
+        .set(endpoint: .eu)
         .build()
 )
 ```

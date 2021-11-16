@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
+import os
 
 import requests
 
 from github_connect import GitHub
 from functools import partial
+from multiprocessing import cpu_count
 from multiprocessing.pool import ThreadPool as Pool
 from os import sep, getenv
 from os.path import isdir, sys
@@ -21,7 +23,7 @@ def download_from_repo(github_token, org, repo, branch, globs, extract_dir, comm
     :param commit_sha: sha if we want to provide one
     :return:
     """
-    pool_size = 5
+    pool_size = cpu_count()
 
     with GitHub(github_token) as gh:
         listing = gh.list(org, repo, branch, commit_sha, globs)

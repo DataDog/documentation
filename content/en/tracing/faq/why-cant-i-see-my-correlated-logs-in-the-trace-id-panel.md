@@ -56,7 +56,7 @@ If this isn't working as expected, ensure the name of the logs attribute that co
 
 [1]: /tracing/visualization/#trace
 [2]: /tracing/visualization/#spans
-[3]: /logs/processing/#edit-reserved-attributes
+[3]: /logs/log_configuration/processors/#remapper
 [4]: https://app.datadoghq.com/logs/pipelines/remapping
 {{% /tab %}}
 {{% tab "With Log integration" %}}
@@ -83,7 +83,7 @@ For raw logs without any integration:
 
 [1]: /tracing/visualization/#trace
 [2]: /tracing/visualization/#spans
-[3]: /logs/processing/processors/#trace-remapper
+[3]: /logs/log_configuration/processors/#trace-remapper
 {{% /tab %}}
 {{< /tabs >}}
 

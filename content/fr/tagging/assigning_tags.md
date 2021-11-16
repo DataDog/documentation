@@ -131,7 +131,7 @@ services:
       - DD_API_KEY= "<CLÉ_API_DATADOG>"
       - DD_DOCKER_LABELS_AS_TAGS={"my.custom.label.project":"projecttag","my.custom.label.version":"versiontag"}
       - DD_TAGS="key1:value1 key2:value2 key3:value3"
-    image: 'datadog/agent:latest'
+    image: 'gcr.io/datadoghq/agent:latest'
     deploy:
       restart_policy:
         condition: on-failure
@@ -263,7 +263,7 @@ Créez des agrégations par centile dans les [métriques de distribution][1] en 
 {{< img src="tagging/assigning_tags/global_metrics_selection.png" alt="Tags création de monitor"  style="width:80%;">}}
 
 [1]: /fr/metrics/distributions/
-[2]: /fr/developers/metrics/custom_metrics/
+[2]: /fr/metrics/custom_metrics/
 {{% /tab %}}
 {{% tab "Intégrations" %}}
 
@@ -434,7 +434,7 @@ Les intégrations web sont basées sur un système d'authentification. Les métr
 [1]: /fr/getting_started/tagging/#defining-tags
 [2]: /fr/agent/docker/#environment-variables
 [3]: /fr/api/
-[4]: /fr/developers/metrics/dogstatsd_metrics_submission/
+[4]: /fr/metrics/dogstatsd_metrics_submission/
 [5]: /fr/integrations/
 [6]: /fr/agent/faq/how-datadog-agent-determines-the-hostname/
 [7]: /fr/dashboards/querying/#arithmetic-between-two-metrics
@@ -444,7 +444,7 @@ Les intégrations web sont basées sur un système d'authentification. Les métr
 [11]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/ecs_extract.go
 [12]: /fr/tracing/guide/setting_primary_tags_to_scope/
 [13]: /fr/libraries/
-[14]: /fr/developers/metrics/dogstatsd_metrics_submission/#host-tag-key
+[14]: /fr/metrics/dogstatsd_metrics_submission/#host-tag-key
 [15]: /fr/agent/faq/why-should-i-install-the-agent-on-my-cloud-instances/
 [16]: /fr/integrations/amazon_api_gateway/
 [17]: /fr/integrations/amazon_auto_scaling/

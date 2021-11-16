@@ -50,7 +50,7 @@ stat -c %a /etc/kubernetes/manifests/kube-apiserver.yaml
 
 1. https://kubernetes.io/docs/admin/kube-apiserver/
 
-## CIS Controls
+## CIS コントロール
 
 バージョン 6
 

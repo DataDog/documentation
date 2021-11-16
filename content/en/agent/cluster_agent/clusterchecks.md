@@ -24,6 +24,8 @@ Metrics, events, and service checks collected by cluster checks are submitted wi
 
 This feature is supported on Kubernetes for versions 6.9.0+ of the Agent, and versions 1.2.0+ of the Cluster Agent.
 
+This strategy can be used if your infrastructure is configured for high availability (HA).
+
 ## Set up cluster checks
 
 ### Cluster Agent
@@ -39,12 +41,12 @@ Starting with version 1.2.0, the Datadog Cluster Agent extends the Autodiscovery
 3. The recommended leader election lease duration is 15 seconds. Set it with the `DD_LEADER_LEASE_DURATION` environment variable.
 4. If the service name is different from the default `datadog-cluster-agent`, ensure the `DD_CLUSTER_AGENT_KUBERNETES_SERVICE_NAME` environment variable reflects the service name.
 
-The following two configuration sources are supported. [They are described in the Autodiscovery documentation][1]:
+The following two configuration sources are supported. They are described in the [Autodiscovery documentation][1]:
 
 - You can mount YAML files from a ConfigMap in the `/conf.d` folder. They are automatically imported by the image's entrypoint.
 - Kubernetes Service Annotations require setting both the `DD_EXTRA_CONFIG_PROVIDERS` and `DD_EXTRA_LISTENERS` environment variables to `kube_services`.
 
-Note that hostnames are not linked to cluster checks metrics, which limits the use of host tags and the `DD_TAGS` environment variable. To add tags to cluster checks metrics, use the `DD_CLUSTER_CHECKS_EXTRA_TAGS` environment variable.
+**Note**: hostnames are not linked to cluster checks metrics, which limits the use of host tags and the `DD_TAGS` environment variable. To add tags to cluster checks metrics, use the `DD_CLUSTER_CHECKS_EXTRA_TAGS` environment variable.
 
 ### Agent
 
@@ -66,7 +68,7 @@ Enable the `clusterchecks` configuration provider on the Datadog **Node** Agent.
 
 [Restart the Agent][1] to apply the configuration change.
 
-**Note**: The [Datadog Helm Chart][4] offers the possibility to deploy, via the `clusterChecksRunner` field, a set of Datadog Agents configured to run cluster checks only.
+**Note**: The [Datadog Helm Chart][4] offers the possibility to deploy, through the `clusterChecksRunner` field, a set of Datadog Agents configured to run cluster checks only.
 
 ### Custom checks
 
@@ -194,7 +196,7 @@ metadata:
     control-plane.alpha.kubernetes.io/leader: '{"holderIdentity":"cluster-agent-rhttz", ...''
 ```
 
-In this case, the leader pod is `cluster-agent-rhttz`. If it is deleted or unresponsive, another pod will automatically take over.
+In this case, the leader pod is `cluster-agent-rhttz`. If the pod is deleted or unresponsive, another pod takes over automatically.
 
 ### Autodiscovery in the Cluster Agent
 
@@ -256,7 +258,7 @@ Init Config:
 ===
 ```
 
-**Note:** the Instance ID will be different from the `configcheck` command, as the instance is modified to add tags and options.
+**Note:** the Instance ID is different from the `configcheck` command, as the instance is modified to add tags and options.
 
 In this case, this configuration is dispatched to the `default-pool-bce5cd34-ttw6` node. Troubleshooting continues from there.
 

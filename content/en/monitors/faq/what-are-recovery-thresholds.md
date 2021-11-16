@@ -2,7 +2,7 @@
 title: What are recovery thresholds?
 kind: faq
 further_reading:
-- link: "/monitors/monitor_types/metric/"
+- link: "/monitors/create/types/metric/"
   tag: "Documentation"
   text: "Metric monitor"
 ---

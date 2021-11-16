@@ -18,11 +18,11 @@ If running the Agent as a binary on a host, configure your Autodiscovery perimet
 
 ## Exclude containers
 
-Exclude containers from the Agent Autodiscovery perimeter with an exclude rule based on their `name`, `image`, or `kube_namespace` to collect **NO DATA** from these containers. If a container matches an exclude rule, it won't be included unless it first matches an include rule.
+Exclude containers from the Agent Autodiscovery perimeter with an exclude rule based on their `name`, `image`, or `kube_namespace` to collect **NO DATA** from these containers. If a container matches an exclude rule, it is not included unless it first matches an include rule.
 
 **Note**: Exclude rules support regexes, which are defined as a list of comma-separated strings.
 
-**Note**: To exclude every container, you can use `name:.*`, `image:.*`, or `kube_namespace:.*`. Note that configuring `.*` without a `name:`, `image:`, or `kube_namespace:` prefix will not work.
+**Note**: To exclude every container, you can use `name:.*`, `image:.*`, or `kube_namespace:.*`. Configuring `.*` without a `name:`, `image:`, or `kube_namespace:` prefix does not work.
 
 {{< tabs >}}
 {{% tab "Containerized Agent" %}}
@@ -53,7 +53,7 @@ As before, the following configuration instructs the Agent to ignore some contai
 DD_AC_EXCLUDE = "image:dockercloud/network-daemon image:dockercloud/cleanup image:dockercloud/logrotate image:dockercloud/events image:dockercloud/ntpd"
 ```
 
-Note that `DD_AC_EXCLUDE` is **deprecated for Agent >= v7.20+**. 
+**Note**: `DD_AC_EXCLUDE` is **deprecated for Agent >= v7.20+**. 
 
 In **Agent v7.20+**, to remove a given Docker container with the **name** `<NAME>` from Autodiscovery, and thus exclude the **logs and metrics**, add the following environment variable to the Datadog Agent:
 
@@ -157,7 +157,7 @@ In **Agent <= v7.19+**, to include a given Docker container with the **image** `
 DD_AC_INCLUDE = "image:<IMAGE_NAME>"
 ```
 
-Note that `DD_AC_INCLUDE` is **deprecated for Agent >= v7.20+**.
+**Note**: `DD_AC_INCLUDE` is **deprecated for Agent >= v7.20+**.
 
 In **Agent v7.20+**, to include a given Docker container with the **name** `<NAME>` from Autodiscovery, add the following environment variable to the Datadog Agent:
 

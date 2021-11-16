@@ -2,7 +2,8 @@
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
-  dashboards: {}
+  dashboards:
+    Kubernetes API Server - Overview: assets/dashboards/overview.json
   logs: {}
   metrics_metadata: metadata.csv
   monitors: {}

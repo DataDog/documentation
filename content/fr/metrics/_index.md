@@ -151,12 +151,12 @@ Consultez la section [Metrics Summary][21] pour en savoir plus.
 [7]: /fr/integrations/
 [8]: /fr/integrations/amazon_ec2/
 [9]: /fr/logs/logs_to_metrics/
-[10]: /fr/developers/metrics/
+[10]: /fr/metrics/
 [11]: /fr/agent/
-[12]: /fr/developers/metrics/dogstatsd_metrics_submission/
+[12]: /fr/metrics/dogstatsd_metrics_submission/
 [13]: /fr/api/
 [14]: https://docs.datadoghq.com/fr/agent/basic_agent_usage/
-[15]: /fr/developers/metrics/types/
+[15]: /fr/metrics/types/
 [16]: /fr/getting_started/tagging/using_tags/
 [17]: /fr/dashboards/functions/
 [18]: /fr/metrics/distributions/

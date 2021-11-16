@@ -11,13 +11,14 @@ categories:
 creates_events: true
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/oom_kill/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/oom_kill/README.md
 display_name: OOM Killer
 draft: false
 git_integration_title: oom_kill
 guid: 4b8e9c18-1a13-43b0-a03c-186eb3221147
 integration_id: oom-kill
 integration_title: OOM Killer
+integration_version: ''
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
@@ -54,7 +55,8 @@ yum install -y kernel-headers-$(uname -r)
 yum install -y kernel-devel-$(uname -r)
 ```
 
-**注**: CentOS/RHEL バージョン < 8 はサポートされていません。
+**注**: OOM Kill チェックが動作するためにはKernel バージョン 4.11 以降が必要です。
+また、Windows、Container-Optimized OS、バージョン 8 以前の CentOS/RHEL はサポートされません。
 
 ### コンフィギュレーション
 
@@ -95,7 +97,7 @@ OOM Killer チェックでは、強制終了されたプロセス ID とプロ�
 
 ご不明な点は、[Datadog のサポートチーム][7]までお問合せください。
 
-[1]: https://docs.datadoghq.com/ja/agent/guide/
+[1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/dist/conf.d/oom_kill.d/conf.yaml.example
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [4]: https://github.com/helm/charts/tree/master/stable/datadog

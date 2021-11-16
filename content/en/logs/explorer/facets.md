@@ -11,7 +11,7 @@ further_reading:
     - link: 'logs/explorer/patterns'
       tag: 'Documentation'
       text: 'Detect patterns inside your logs'
-    - link: 'logs/processing'
+    - link: '/logs/log_configuration/processors'
       tag: 'Documentation'
       text: 'Learn how to process your logs'
     - link: 'logs/explorer/saved_views'
@@ -31,17 +31,17 @@ Facets are user-defined tags and attributes from your indexed logs. They are mea
 
 Facets also allow you to manipulate your logs in your [log monitors][4], log widgets in [dashboards][5], and [notebooks][6].
 
-{{< site-region region="gov,us3" >}}
+{{< site-region region="gov,us3,us5" >}}
 
 **Note**: You do not need facets to support [log processing][1], [livetail search][2], [archive][3] forwarding, rehydration, or [metric generation][4] from logs. You also do not need facets for routing logs through to [Pipelines][5] and [Indexes][6] with filters, or excluding or sampling logs from indexes with [exclusion filters][7]. 
 
 In all these contexts, autocomplete capabilities rely on existing facets, but any input matching incoming logs would work.
 
-[1]: /logs/processing/processors/
+[1]: /logs/log_configuration/processors
 [2]: /logs/live_tail/
 [3]: /logs/archives/
 [4]: /logs/logs_to_metrics/
-[5]: /logs/processing/pipelines/
+[5]: /logs/log_configuration/pipelines
 [6]: /logs/indexes/#indexes-filters
 [7]: /logs/indexes/#exclusion-filters
 
@@ -53,14 +53,14 @@ In all these contexts, autocomplete capabilities rely on existing facets, but an
 
 In all these contexts, autocomplete capabilities rely on existing facets, but any input matching incoming logs would work.
 
-[1]: /logs/processing/processors/
+[1]: /logs/log_configuration/processors
 [2]: /logs/live_tail/
 [3]: /logs/archives/
 [4]: /logs/logs_to_metrics/
-[5]: /logs/processing/pipelines/
+[5]: /logs/log_configuration/pipelines
 [6]: /logs/indexes/#indexes-filters
 [7]: /logs/indexes/#exclusion-filters
-[8]: /logs/processing/attributes_naming_convention/#standard-attribute-list
+[8]: /logs/log_configuration/attributes_naming_convention/#standard-attributes
 [9]: /logs/archives/rehydrating/
 
 {{< /site-region >}}
@@ -75,7 +75,7 @@ Use qualitative facets when you need:
 
 - To **count unique values**. For instance, create a facet on `user.email` from your [Kong][18] logs to know how many users connect every day to your website.
 
-{{< site-region region="gov,us3" >}}
+{{< site-region region="gov,us3,us5" >}}
 - To **filter** your logs against specific value(s). For instance, create a facet on an `environment` [tag][1] to scope troubleshooting down to development, staging, or production environments.
 
 [1]: /getting_started/tagging/assigning_tags/
@@ -257,18 +257,18 @@ This is the best option if you onboard logs flowing from new sources. Rather tha
 [1]: /logs/search_syntax/
 [2]: /logs/explorer/patterns/
 [3]: /logs/explorer/analytics/
-[4]: /monitors/monitor_types/log/
+[4]: /monitors/create/types/log/
 [5]: /dashboards/widgets/
 [6]: /notebooks/
 [15]: /logs/log_configuration/rehydrating
 [16]: /integrations/nginx/
-[17]: /logs/processing/processors/?tab=ui#geoip-parser
+[17]: /logs/log_configuration/processors/#geoip-parser
 [18]: /integrations/kong/
 [20]: /integrations/varnish/
 [21]: /integrations/ansible/
 [22]: /integrations/python/
-[23]: /logs/processing/processors/?tab=ui#arithmetic-processor
+[23]: /logs/log_configuration/processors/#arithmetic-processor
 [24]: /logs/explorer/saved_views/
-[25]: /logs/processing/attributes_naming_convention/#reserved-attributes
-[26]: /logs/processing/attributes_naming_convention/
+[25]: /logs/log_configuration/attributes_naming_convention/#reserved-attributes
+[26]: /logs/log_configuration/attributes_naming_convention
 [27]: /logs/indexes/#indexes

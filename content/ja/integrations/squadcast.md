@@ -13,13 +13,14 @@ categories:
 creates_events: false
 ddtype: crawler
 dependencies:
-  - 'https://github.com/DataDog/integrations-extras/blob/master/squadcast/README.md'
+  - https://github.com/DataDog/integrations-extras/blob/master/squadcast/README.md
 display_name: Squadcast
 draft: false
 git_integration_title: Squadcast
 guid: a2b0e9fe-f824-460b-864a-50c4bda759a0
 integration_id: Squadcast
 integration_title: Squadcast
+integration_version: ''
 is_public: true
 kind: インテグレーション
 maintainer: it@squadcast.com
@@ -50,7 +51,9 @@ Squadcast を Datadog に接続すると、以下のことができます。
 Account Owner または Admin 権限を持つユーザーのみが、Squadcast でサービスを構成できます。
 サービスを追加するには、Escalation Policy を最低1つ設定する必要があります。
 
-### Squadcast で以下の手順に従います。
+### Squadcast
+
+Squadcast で以下の手順に従います。
 
 1. サイドバーから **Services** ページを開きます。
 
@@ -60,7 +63,9 @@ Account Owner または Admin 権限を持つユーザーのみが、Squadcast �
 
 5. 表示された **Datadog Webhook URL** をコピーし、**Done** をクリックします。
 
-### Datadog で以下の手順に従います。
+### Datadog
+
+Datadog で以下の手順に従います。
 
 1. サイドバーから **Integrations** ページを開きます。
 

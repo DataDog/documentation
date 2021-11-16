@@ -1,5 +1,5 @@
 ---
-title: Is there an alternative to DogStatsD and the API to submit metrics? Threadstats.
+title: Submit Metrics to Datadog with Threadstats
 kind: faq
 further_reading:
 - link: "https://github.com/DataDog/datadogpy/blob/master/datadog/threadstats/"
@@ -10,7 +10,7 @@ further_reading:
   text: "Threadstats Documentation"
 ---
 
-There is an alternative, but it is **only in Python**. Threadstats comes with the [Datadog Python Library][1] and includes:
+Threadstats is an alternative method to DogStatsD and the API for submitting metrics to Datadog, but it is **only in Python**. Threadstats comes with the [Datadog Python Library][1] and includes:
 
 1. API, a Python wrapper around [Datadog's API][2]
 2. Dogshell, that makes it possible to make direct and simple API calls with "dog" shell commands as soon as you have installed datadogpy on your machine
@@ -28,7 +28,7 @@ Threadstats leverage the power of Python threads, to collect metrics asynchronou
 To get started with Threadstats:
 
 1. Install [datadogpy][4].
-2. Initialize and start threadstats, as shown in this example.
+2. Initialize and start Threadstats, as shown in this example.
 3. Use gauge/rate/increment/timing/etc. exactly as you would with DogStatsD.
 
 Threadstats is good for you if...
@@ -44,7 +44,7 @@ As in [DogStatsD][5], Threadstats performs data aggregation for performance reas
 ### Variations
 
 * Unlike with DogStatsD, metrics received by Threadstats may already have timestamps.
-* Metrics are not aggregated via a centralized server; rather, they are aggregated and flushed in a Python thread in your script. Thus, aggregation is per script rather than per host.
+* Metrics are not aggregated using a centralized server; rather, they are aggregated and flushed in a Python thread in your script. Thus, aggregation is per script rather than per host.
 
 To handle timestamps, Threadstats uses 2 parameters: a flush interval and a roll-up interval.
 
@@ -70,7 +70,7 @@ For more information, see the [Threadstats aggregation][6] documentation.
 ### Rollup buckets
 
 * By default, the default flush period is 10 seconds. At each flush, all data received during the flush period is aggregated in rollup buckets of 10 seconds. All datapoints within a bucket are rolled-up into a single value that is submitted.
-* For gauge/rate, this module only sents the last value if there is more than one in the rollup bucket.
+* For gauge and rate, this module only sends the last value if there is more than one in the rollup bucket.
 * You can modify the rollup interval and the flush period when initializing the Threadstats module.
 
 ### Custom timestamps
@@ -84,7 +84,7 @@ For more information, see the [Threadstats aggregation][6] documentation.
 
 [1]: https://github.com/DataDog/datadogpy/tree/master/datadog
 [2]: /api/
-[3]: /developers/metrics/dogstatsd_metrics_submission/
+[3]: /metrics/dogstatsd_metrics_submission/
 [4]: https://github.com/DataDog/datadogpy
 [5]: /developers/dogstatsd/
 [6]: https://github.com/DataDog/datadogpy/blob/master/datadog/threadstats/metrics.py

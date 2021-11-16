@@ -13,7 +13,7 @@ Datadog-Mongo インテグレーションでカスタムメトリクスを収集
 `custom_queries` には以下のオプションがあります:
 
 * **`metric_prefix`**: 各メトリクスは選択したプレフィックスで始まります。
-* **`query`**: JSON オブジェクトとして実行する [Mongo runCommand][3] クエリです。Agent では `count`、`find`、`aggregates` クエリのみサポートされます。
+* **`query`**: JSON オブジェクトとして実行する [Mongo runCommand][3] クエリです。**注**: Agent では `count`、`find`、`aggregates` クエリのみサポートされます。
 * **`fields`**: `count` クエリでは無視されます。各フィールドを表す順不同のリストです。未指定および欠落フィールドは無視します。各 `fields` には 3 つの必須データがあります:
   * `field_name`: データを取得するフィールドの名前。
   * `name`: 完全なメトリクス名を形成するために metric_prefix に付けるサフィックス。`type` が `tag` である場合、この列はタグとして扱われ、この特定のクエリによって収集されたすべてのメトリクスに適用されます。
@@ -55,17 +55,17 @@ custom_queries:
 
 これにより、`user:active` という 1 つのタグを持つ 1 つの `gauge` メトリクス `mongo.users` が生成されます。
 
-**注**: 定義されているメトリクスタイプは `gauge` です。詳細については、[メトリクスタイプのドキュメント][2] を参照してください。
+**注**: 定義されている[メトリクスタイプ][2]は `gauge` です。
 
 [1]: https://docs.mongodb.com/manual/reference/command/count/#dbcmd.count
-[2]: /ja/developers/metrics/types/
+[2]: /ja/metrics/types/
 {{% /tab %}}
 {{% tab "Find" %}}
 
 ユーザーの平均年齢を監視するには、次のような [Mongo find コマンド][1]を実行します。
 
 ```text
-db.runCommand( {find: user_colleciton, filter: {active:true} )
+db.runCommand( {find: user_collection, filter: {active:true} )
 ```
 
 `mongo.d/conf.yaml` ファイル内の次の `custom_queries` YAML コンフィギュレーションに対応するクエリ:
@@ -73,7 +73,7 @@ db.runCommand( {find: user_colleciton, filter: {active:true} )
 ```yaml
 custom_queries:
   - metric_prefix: mongo.example2
-    query: {"find": "user_colleciton", "filter": {"active":"true"}}
+    query: {"find": "user_collection", "filter": {"active":"true"}}
     fields:
       - field_name: name
         name: name
@@ -86,10 +86,10 @@ custom_queries:
 
 これにより、`name:foo` と `name:foobar` の 2 つのタグを持つ 1 つの `gauge` メトリクス `mongo.example2.user.age` が生成されます。
 
-**注**: 定義されているメトリクスタイプは `gauge` です。詳細については、[メトリクスタイプのドキュメント][2] を参照してください。
+**注**: 定義されている[メトリクスタイプ][2]は `gauge` です。
 
 [1]: https://docs.mongodb.com/manual/reference/command/find/#dbcmd.find
-[2]: /ja/developers/metrics/types/
+[2]: /ja/metrics/types/
 {{% /tab %}}
 {{% tab "Aggregate" %}}
 
