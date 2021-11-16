@@ -280,7 +280,7 @@ For example:
           "environment_variables": {
             "DD_TRACE_ENABLED": "true",
             "DD_FLUSH_TO_LOG": "true",
-            "DD_API_KEY_SECRET_ARN": "<SECRET_ARN_DATADOG_API_KEY>",
+            "DD_API_KEY": "<DATADOG_API_KEY>",
           },
           "layers": ["arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:<EXTENSION_VERSION>"],
         }
@@ -299,7 +299,7 @@ For example:
           "environment_variables": {
             "DD_TRACE_ENABLED": "true",
             "DD_FLUSH_TO_LOG": "true",
-            "DD_API_KEY_SECRET_ARN": "<SECRET_ARN_DATADOG_API_KEY>",
+            "DD_API_KEY": "<DATADOG_API_KEY>",
           },
           "layers": ["arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension:<EXTENSION_VERSION>"],
         }
@@ -307,9 +307,11 @@ For example:
     }
     ```
     {{< /site-region >}}
+    
+    **Note**: For security, you may wish to store your Datadog API key in AWS Secrets Manager. In this case, set the environment variable `DD_API_KEY_SECRET_ARN` with the ARN of the Secrets Manager secret containing your Datadog API key. In other words, you can replace the line `"DD_API_KEY": "<DATADOG_API_KEY>"` in the configuration above with `"DD_API_KEY_SECRET_ARN": "<SECRET_ARN_DATADOG_API_KEY>"`. Accessing this key during a cold start adds extra latency.
+    
 2. Replace the following placeholders with appropriate values: 
 
-- Replace `<SECRET_ARN_DATADOG_API_KEY>` with the ARN of the Secret Manager secret containing your Datadog API key.
 - Replace `<AWS_REGION>` with the AWS region to which your Lambda functions are deployed.
 - Replace `<EXTENSION_VERSION>` with the desired version of the Datadog Lambda Extension. The latest version is `{{< latest-lambda-layer-version layer="extension" >}}`.
 
