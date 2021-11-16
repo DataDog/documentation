@@ -71,6 +71,7 @@ The Go tracer includes support for the following data stores and libraries.
 | [Vault][57]             | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/hashicorp/vault][58]                   |
 | [Consul][59]            | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/hashicorp/consul][60]                  |
 | [Gorm][61]              | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/jinzhu/gorm][62]                       |
+| [Gorm v2][68]           | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/gorm.io/gorm.v1][69]                   |
 | [Kubernetes][63]        | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/k8s.io/client-go/kubernetes][64]       |
 | [Memcache][65]          | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/bradfitz/gomemcache/memcache][66]      |
 
@@ -152,3 +153,5 @@ import "gopkg.in/DataDog/dd-trace-go.v1/contrib/<PACKAGE_DIR>/<PACKAGE_NAME>"
 [65]: https://github.com/bradfitz/gomemcache/memcache
 [66]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/bradfitz/gomemcache/memcache
 [67]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/labstack/echo
+[68]: https://gorm.io/
+[69]: https://gopkg.in/DataDog/dd-trace-go.v1/contrib/gorm.io/gorm.v1
