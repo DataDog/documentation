@@ -26,7 +26,7 @@ further_reading:
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Incident Management is not available on the Datadog for Government site.</div>
+<div class="alert alert-warning">Incident Management is not available for your selected Datadog site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 ## Overview

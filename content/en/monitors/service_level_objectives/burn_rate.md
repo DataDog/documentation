@@ -3,6 +3,7 @@ title: Burn Rate Alerts
 kind: documentation
 description: "Use Monitors to alert off of the burn rate of an SLO"
 ---
+{{< jqmath-vanilla >}}
 
 <div class="alert alert-warning">
 This feature is in open beta. Email <a href="mailto:slo-help@datadoghq.com">slo-help@datadoghq.com</a> to ask questions or to provide feedback on this feature.
@@ -22,7 +23,7 @@ A burn rate is a unitless value [coined by Google][3] that indicates how fast yo
 
 This relationship is represented by the following formula:
 
-{{< img src="monitors/service_level_objectives/time-to-depletion.jpeg" alt="Time to depletion formula">}}
+$${\text"length of SLO target" \text" (7, 30 or 90 days)"} / \text"burn rate" = \text"time until error budget is fully consumed"\$$
 
 A burn rate alert will use the recent “error rate” in its calculation to measure the observed burn rate. Note that “error rate” means the ratio of bad behavior over total behavior during a *given period*:
 
@@ -35,7 +36,6 @@ When you set a target for your SLO (like 99.9%), your error budget is the amount
 {{< img src="monitors/service_level_objectives/error-budget-definition.jpeg" alt="Error budget definition">}}
 
 In other words, your error budget (in fractional form) is the ideal error rate you should be maintaining. So, a burn rate can alternatively be interpreted as a multiplier of your ideal error rate. For example, for a 99.9% SLO over 30 days, if the SLO is experiencing a burn rate of 10 that means the error budget is on pace to be completely depleted in 3 days and that the observed error rate is 10 times the ideal error rate: 
-
 {{< img src="monitors/service_level_objectives/observed-error-rate-example.jpeg" alt="Observed error rate example">}}
 
 Ideally, you should always try to maintain a burn rate of 1 over the course of your SLO’s target (as you invest in evolving your application with new features). However, in practice, your burn rate will fluctuate as issues or incidents cause your burn rate to increase rapidly until the issue is resolved. Therefore, alerting on burn rates allows you to be proactively notified when an issue is consuming your error budget at an elevated rate that could potentially cause you to miss your SLO target.
