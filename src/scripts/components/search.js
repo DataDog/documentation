@@ -3,7 +3,7 @@ import algoliasearch from 'algoliasearch';
 import configDocs from '../config/config-docs';
 import { 
     initializeAlogliaInsights, 
-    sendAlgoliaInsightsClickEvent, 
+    sendAlgoliaInsightsClickAfterSearchEvent, 
     sendAlgoliaInsightsViewEvent 
 } from '../algolia-insights';
 
@@ -45,7 +45,7 @@ const attachEventListenersToPaginatedSearchResults = (algoliaQueryID) => {
               const url = event.target.href;
 
               if (objectID !== '' && typeof(position) === 'number') {
-                  sendAlgoliaInsightsClickEvent(algoliaQueryID, objectID, position);
+                  sendAlgoliaInsightsClickAfterSearchEvent(algoliaQueryID, objectID, position);
               }
               
             //   window.history.pushState({ 'page': url }, '', url);

@@ -36,3 +36,10 @@ export const getQueryParameterByName = (name, currentURL) => {
 
   return decodeURIComponent(results[2].replace(/\+/g, ' '));
 }
+
+// Returns the given URL with only it's pathname and hash.
+//  ex: https://docs.datadoghq.com/agent/basic_agent_usage/?tab=agentv6v7#cli => /agent/basic_agent_usage/#cli
+export const getUrlWithPathnameAndHash = (url) => {
+  const urlObject = new URL(url);
+  return `${urlObject.pathname}${urlObject.hash}`;
+}
