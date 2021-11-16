@@ -7,7 +7,7 @@ further_reading:
     text: "Troubleshooting CI"
 ---
 
-{{< site-region region="us5,gov" >}}
+{{< site-region region="gov" >}}
 <div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
@@ -50,7 +50,7 @@ echo "Hello World"
 </code>
 </pre>
 {{< /site-region >}}
-{{< site-region region="us3,eu" >}}
+{{< site-region region="us3,us5,eu" >}}
 <pre class="chroma">
 <code class="language-bash" data-lang="bash">
 DATADOG_API_KEY=&lt;key&gt; DATADOG_SITE={{< region-param key="dd_site" >}} datadog-ci trace \
@@ -60,7 +60,7 @@ echo "Hello World"
 </code>
 </pre>
 {{< /site-region >}}
-{{< site-region region="us5,gov" >}}
+{{< site-region region="gov" >}}
 <div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
@@ -93,7 +93,7 @@ The following environment variables are supported:
 : [Datadog API key][2] used to authenticate the requests.<br/>
 **Default**: (none)
 
-{{< site-region region="us3,eu" >}}
+{{< site-region region="us3,us5,eu" >}}
 Additionally, configure the Datadog site to use the selected one ({{< region-param key="dd_site_name" >}}):
 
 `DATADOG_SITE`

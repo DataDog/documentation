@@ -10,7 +10,7 @@ further_reading:
       text: "Troubleshooting CI"
 ---
 
-{{< site-region region="us5,gov" >}}
+{{< site-region region="gov" >}}
 <div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
@@ -47,7 +47,7 @@ DD_ENV=ci DATADOG_API_KEY=&lt;key&gt; datadog-ci junit upload \
 </code>
 </pre>
 {{< /site-region >}}
-{{< site-region region="eu,us3" >}}
+{{< site-region region="us3,us5,eu" >}}
 <pre class="chroma">
 <code class="language-bash" data-lang="bash">
 DD_ENV=ci DATADOG_API_KEY=&lt;key&gt; DATADOG_SITE={{< region-param key="dd_site" >}} datadog-ci junit upload \
@@ -56,7 +56,7 @@ DD_ENV=ci DATADOG_API_KEY=&lt;key&gt; DATADOG_SITE={{< region-param key="dd_site
 </code>
 </pre>
 {{< /site-region >}}
-{{< site-region region="us5,gov" >}}
+{{< site-region region="gov" >}}
 <div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
@@ -99,7 +99,7 @@ The following environment variables are supported:
 **Default**: (none)
 
 
-{{< site-region region="eu,us3" >}}
+{{< site-region region="us3,us5,eu" >}}
 Additionally, configure the Datadog site to use the selected one ({{< region-param key="dd_site_name" >}}):
 
 `DATADOG_SITE` (Required)

@@ -10,7 +10,7 @@ further_reading:
       text: "Troubleshooting CI"
 ---
 
-{{< site-region region="us5,gov" >}}
+{{< site-region region="gov" >}}
 <div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
@@ -120,7 +120,7 @@ Set all these variables in your test target:
 **Recommended**: `$(SRCROOT)`<br/>
 **Example**: `/Users/ci/source/MyApp`
 
-{{< site-region region="eu,us3" >}}
+{{< site-region region="us3,us5,eu" >}}
 Additionally, configure the Datadog site to use the selected one ({{< region-param key="dd_site_name" >}}):
 
 `DD_SITE` (Required)
@@ -196,7 +196,7 @@ DD_TEST_RUNNER=1 DD_ENV=ci xcodebuild \
 </code>
 </pre>
 {{< /site-region >}}
-{{< site-region region="eu,us3" >}}
+{{< site-region region="us3,us5,eu" >}}
 <pre class="chroma">
 <code class="language-bash" data-lang="bash">
 DD_TEST_RUNNER=1 DD_ENV=ci DD_SITE={{< region-param key="dd_site" >}} xcodebuild \
@@ -207,7 +207,7 @@ DD_TEST_RUNNER=1 DD_ENV=ci DD_SITE={{< region-param key="dd_site" >}} xcodebuild
 </code>
 </pre>
 {{< /site-region >}}
-{{< site-region region="us5,gov" >}}
+{{< site-region region="gov" >}}
 <div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
