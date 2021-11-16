@@ -20,11 +20,11 @@ To use Cloud Cost Management, you must have an AWS account with access to Cost U
 
 To configure a data source, access the Cloud Costs product by clicking **Infrastructure > Cloud Costs** using the main navigation.
 
-If there are no configured data sources, you'll be redirected to a data source setup page with instructions for generating and configuring access to your AWS account's [Cost and Usage Report (CUR)][5].
-
-Once configured, data sources may be viewed and modified by accessing the **Settings tab** directly from the top of the page.
+If there are no configured data sources, you'll be redirected to a setup page with instructions for generating and enabling access to your AWS account's [Cost and Usage Report (CUR)][5].
 
 {{< img src="infrastructure/cloudcost/cloud_cost_data_source_config.png" alt="Configure the AWS data source for Cloud Costs"  >}}
+
+Once configured, data sources may be viewed and modified by accessing the **Settings tab** at the top of the page.
 
 ### Generate the CUR
  
