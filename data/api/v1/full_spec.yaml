@@ -11324,7 +11324,7 @@ components:
     SyntheticsTestDetailsSubType:
       description: 'The subtype of the Synthetic API test, `http`, `ssl`, `tcp`,
 
-        `dns`, `icmp`, `udp` or `multi`.'
+        `dns`, `icmp`, `udp`, `websocket` or `multi`.'
       enum:
       - http
       - ssl
@@ -11333,6 +11333,7 @@ components:
       - multi
       - icmp
       - udp
+      - websocket
       example: http
       type: string
       x-enum-varnames:
@@ -11343,6 +11344,7 @@ components:
       - MULTI
       - ICMP
       - UDP
+      - WEBSOCKET
     SyntheticsTestDetailsType:
       description: Type of the Synthetic test, either `api` or `browser`.
       enum:
@@ -11535,7 +11537,7 @@ components:
           description: Host name to perform the test with.
           type: string
         message:
-          description: Message to send for UDP tests.
+          description: Message to send for UDP or WebSocket tests.
           type: string
         method:
           $ref: '#/components/schemas/HTTPMethod'
