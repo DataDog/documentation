@@ -411,4 +411,3 @@ Special consideration is necessary when assigning the `host` tag to DogStatsD me
 [9]: /tracing/setup/
 [10]: /developers/dogstatsd/
 [11]: /developers/community/libraries/
-[12]: /metrics/dogstatsd_metrics_submission/#host-tag-key

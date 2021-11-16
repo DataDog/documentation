@@ -267,7 +267,7 @@ The execution rule associated with the test is always the most restrictive one t
 
 #### Start URL
 
-You can configure on which url your test starts by providing a `startUrl` to your test object and build your own starting URL using any part of your test's original starting URL and the following environment variables:
+You can configure on which url your test starts by providing a `startUrl` to your test object and build your own starting URL using any part of your test's original starting URL with the following variables:
 
 
 `URL`
@@ -320,9 +320,11 @@ For instance, if your test's starting URL is `https://www.example.org:81/path/to
 * `{{PROTOCOL}}//{{HOST}}{{PATHNAME}}{{PARAMS}}{{HASH}}`
 * `{{URL}}`
 
+You can also leverage your own environment variables to customize your start URL. 
+
 **Note:** If you have environment variables with names corresponding to one of the above reserved variables, your environment variables will be ignored and replaced by the corresponding component parsed from your test `startUrl`.
 
-### Run tests
+### Running tests
 
 You can decide to have the CLI autodiscover all your `**/*.synthetics.json` Synthetic tests (or all the tests associated to the path specified in your [global configuration file](#setup-the-client)) or to specify the tests you want to run using the `-p,--public-id` flag.
 
