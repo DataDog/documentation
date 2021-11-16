@@ -236,6 +236,8 @@ After configuring your Datadog Agent to collect traces and giving your Applicati
 
 Refer to the [language-specific APM instrumentation docs][1] for more examples.
 
+**Note:** The .NET Tracer does not currently support sending traces over Unix Domain Socket (UDS).
+
 [1]: /tracing/setup/
 
 ## Agent environment variables
