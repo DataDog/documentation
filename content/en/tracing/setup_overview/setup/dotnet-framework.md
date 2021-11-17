@@ -48,7 +48,11 @@ further_reading:
 ## Compatibility requirements
 
 ### Supported .NET Framework runtimes
-The .NET Tracer supports instrumentation on .NET Framework 4.5 and above.
+The .NET Tracer supports instrumentation on .NET Framework 4.5 and above. If you do not know which .NET Framework version you're currently using, you can execute the following Powershell command: 
+
+```cmd
+Get-ItemProperty -Path HKLM:\SOFTWARE\Microsoft\'NET Framework Setup'\NDP\v4\Full -Name "Version"
+```
 
 For a full list of supported libraries and processor architectures, see [Compatibility Requirements][1].
 
