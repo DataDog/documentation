@@ -10059,6 +10059,7 @@ components:
       - packetLossPercentage
       - packetsReceived
       - networkHop
+      - receivedMessage
       example: statusCode
       type: string
       x-enum-varnames:
@@ -10076,6 +10077,7 @@ components:
       - PACKET_LOSS_PERCENTAGE
       - PACKETS_RECEIVED
       - NETWORK_HOP
+      - RECEIVED_MESSAGE
     SyntheticsBasicAuth:
       description: Object to handle basic authentication when performing the test.
       properties:
@@ -11322,7 +11324,7 @@ components:
     SyntheticsTestDetailsSubType:
       description: 'The subtype of the Synthetic API test, `http`, `ssl`, `tcp`,
 
-        `dns`, `icmp` or `multi`.'
+        `dns`, `icmp`, `udp`, `websocket` or `multi`.'
       enum:
       - http
       - ssl
@@ -11330,6 +11332,8 @@ components:
       - dns
       - multi
       - icmp
+      - udp
+      - websocket
       example: http
       type: string
       x-enum-varnames:
@@ -11339,6 +11343,8 @@ components:
       - DNS
       - MULTI
       - ICMP
+      - UDP
+      - WEBSOCKET
     SyntheticsTestDetailsType:
       description: Type of the Synthetic test, either `api` or `browser`.
       enum:
@@ -11530,6 +11536,9 @@ components:
         host:
           description: Host name to perform the test with.
           type: string
+        message:
+          description: Message to send for UDP or WebSocket tests.
+          type: string
         method:
           $ref: '#/components/schemas/HTTPMethod'
         noSavingResponseBody:
@@ -11633,6 +11642,17 @@ components:
           format: double
           type: number
       type: object
+    SyntheticsTriggerBody:
+      description: Object describing the synthetics tests to trigger.
+      properties:
+        tests:
+          description: Individual synthetics test.
+          items:
+            $ref: '#/components/schemas/SyntheticsTriggerTest'
+          type: array
+      required:
+      - tests
+      type: object
     SyntheticsTriggerCITestLocation:
       description: Synthetics location.
       properties:
@@ -11682,6 +11702,18 @@ components:
             description: The public ID of the Synthetics test.
             type: string
           type: array
+      type: object
+    SyntheticsTriggerTest:
+      description: Test configuration for Synthetics
+      properties:
+        metadata:
+          $ref: '#/components/schemas/SyntheticsCIBatchMetadata'
+        public_id:
+          description: The public ID of the Synthetics test to trigger.
+          example: aaa-aaa-aaa
+          type: string
+      required:
+      - public_id
       type: object
     SyntheticsUpdateTestPauseStatusPayload:
       description: Object to start or pause an existing Synthetic test.
@@ -12919,6 +12951,10 @@ components:
     UsageFargateHour:
       description: Number of Fargate tasks run and hourly usage.
       properties:
+        avg_profiled_fargate_tasks:
+          description: The average profiled task count for Fargate Profiling.
+          format: int64
+          type: integer
         hour:
           description: The hour for the usage.
           format: date-time
@@ -13603,6 +13639,10 @@ components:
             the current date for all organizations.
           format: int64
           type: integer
+        avg_profiled_fargate_tasks:
+          description: The average profiled task count for Fargate Profiling.
+          format: int64
+          type: integer
         aws_host_top99p:
           description: Shows the 99th percentile of all AWS hosts over all hours in
             the current date for all organizations.
@@ -13874,6 +13914,10 @@ components:
             in the current date for the given org.
           format: int64
           type: integer
+        avg_profiled_fargate_tasks:
+          description: The average profiled task count for Fargate Profiling.
+          format: int64
+          type: integer
         aws_host_top99p:
           description: Shows the 99th percentile of all AWS hosts over all hours in
             the current date for the given org.
@@ -14141,6 +14185,11 @@ components:
           type: integer
         audit_logs_lines_indexed_agg_sum:
           description: Shows the sum of all audit logs lines indexed over all hours
+            in the current months for all organizations.
+          format: int64
+          type: integer
+        avg_profiled_fargate_tasks_sum:
+          description: Shows the average of all profiled Fargate tasks over all hours
             in the current months for all organizations.
           format: int64
           type: integer
@@ -24276,6 +24325,36 @@ paths:
       x-menu-order: 14
       x-undo:
         type: idempotent
+  /api/v1/synthetics/tests/trigger:
+    post:
+      description: Trigger a set of Synthetics tests.
+      operationId: TriggerTests
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SyntheticsTriggerBody'
+        description: The identifiers of the tests to trigger.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyntheticsTriggerCITestsResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+      summary: Trigger some Synthetics tests
+      tags:
+      - Synthetics
+      x-codegen-request-body-name: body
+      x-undo:
+        type: safe
   /api/v1/synthetics/tests/trigger/ci:
     post:
       description: Trigger a set of Synthetics tests for continuous integration.
