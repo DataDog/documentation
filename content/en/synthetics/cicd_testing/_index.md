@@ -715,4 +715,4 @@ curl -G \
 [2]: https://github.com/TooTallNate/node-proxy-agent
 [3]: /api/v1/synthetics/#get-test
 [4]: /synthetics/testing_tunnel/
-[5]: /synthetics/ci_results_explorer
+[5]: /synthetics/cicd_testing/ci_results_explorer
