@@ -48,8 +48,8 @@ const attachEventListenersToPaginatedSearchResults = (algoliaQueryID) => {
                   sendAlgoliaInsightsClickAfterSearchEvent(algoliaQueryID, objectID, position);
               }
               
-            //   window.history.pushState({ 'page': url }, '', url);
-            //   window.location = url;
+              window.history.pushState({ 'page': url }, '', url);
+              window.location = url;
           })
       })
   }
