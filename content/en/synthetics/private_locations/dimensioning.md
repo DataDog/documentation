@@ -73,5 +73,5 @@ For example, ten tests are scheduled to run simultaneously on a private location
 [1]: /synthetics/api_tests/
 [2]: /synthetics/multistep?tab=requestoptions
 [3]: /synthetics/browser_tests/?tab=requestoptions
-[4]: /synthetics/cicd_testing/
+[4]: /synthetics/cicd_integrations
 [5]: /synthetics/private_locations/configuration#advanced-configuration

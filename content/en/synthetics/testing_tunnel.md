@@ -101,4 +101,4 @@ datadog-ci synthetics run-tests --config <GLOBAL_CONFIG_FILE>.json --tunnel
 [1]: /synthetics/private_locations
 [2]: https://www.npmjs.com/package/@datadog/datadog-ci
 [3]: https://github.com/DataDog/datadog-ci/releases/tag/v0.11.0
-[4]: /synthetics/cicd_testing/#cli-usage
+[4]: /synthetics/cicd_integrations/#use-the-cli
