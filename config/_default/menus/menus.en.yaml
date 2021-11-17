@@ -5520,6 +5520,18 @@ api:
         - TriggerCITests
       unstable: []
       order: 6
+  - name: Trigger some Synthetics tests
+    url: '#trigger-some-synthetics-tests'
+    identifier: trigger-some-synthetics-tests
+    parent: synthetics
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - TriggerTests
+      unstable: []
+      order: 0
   - name: Delete tests
     url: '#delete-tests'
     identifier: delete-tests
