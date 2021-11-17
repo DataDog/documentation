@@ -4,7 +4,7 @@ import algoliasearch from 'algoliasearch';
 import { getConfig } from './helpers/helpers';
 import { getUrlWithPathnameAndHash } from './helpers/browser';
 
-const getAlogliaIndexName = () => {
+export const getAlogliaIndexName = () => {
   const { algoliaConfig } = getConfig();
   return algoliaConfig.index;
 }
@@ -14,6 +14,11 @@ export const initializeAlogliaInsights = () => {
   const { appId, apiKey } = algoliaConfig;
 
   searchInsights('init', { appId, apiKey });
+}
+
+const pageIsEligibleToSendAlgoliaInsightsData = (url) => {
+  const urlObject = new URL(url);
+  return window._DATADOG_SYNTHETICS_BROWSER === undefined && urlObject.pathname !== '/';
 }
 
 /**
@@ -36,7 +41,12 @@ export const sendAlgoliaInsightsClickAfterSearchEvent = (queryID, objectID, posi
   searchInsights('clickedObjectIDsAfterSearch', insightsClickEventParams);
 }
 
-const sendAlgoliaClickedObjectIDEvent = (objectID) => {
+/**
+  * Sends click event data to Algolia Insights, without a search.  This is currently used from the autocomplete dropdown.
+  * @param {String} objectID - Algolia's identifier correlating to the autocomplete result link that was clicked.
+  * Info: https://www.algolia.com/doc/api-reference/api-methods/clicked-object-ids/
+*/
+const sendAlgoliaClickedObjectIDEvent = (objectID) => {  
   const insightsClickedObjectParams = {
     userToken: 'documentation',
     index: getAlogliaIndexName(),
@@ -74,16 +84,10 @@ const getAlgoliaSearchDataByUrl = (url) => {
   const urlPathnameWithHash = getUrlWithPathnameAndHash(url);
 
   return index.search(urlPathnameWithHash, {
-    // Todo:  should this pagination number change?
     hitsPerPage: 50,
     attributesToRetrieve: ['url', 'url_without_anchor'],
     restrictSearchableAttributes: ['url']
   })
-}
-
-const pageIsEligibleToSendAlgoliaInsightsData = (url) => {
-  const urlObject = new URL(url);
-  return window._DATADOG_SYNTHETICS_BROWSER === undefined && urlObject.pathname !== '/';
 }
 
 export const handleAlgoliaViewEventOnPageLoad = (url) => {
@@ -105,6 +109,10 @@ export const handleAlgoliaViewEventOnPageLoad = (url) => {
   }
 }
 
+/**
+  * Sends click event data from the autocomplete dropdown to Algolia Insights
+  * @param {String} url - url of the clicked suggestion link from the autocomplete dropdown.
+*/
 export const handleAlgoliaClickedObjectEventOnAutocomplete = (url) => {
   initializeAlogliaInsights();
   const urlPathnameWithHash = getUrlWithPathnameAndHash(url);
@@ -120,6 +128,5 @@ export const handleAlgoliaClickedObjectEventOnAutocomplete = (url) => {
           }
         })
       })
-
 }
 

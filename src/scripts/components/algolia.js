@@ -196,6 +196,7 @@ searchDesktop.autocomplete.on('autocomplete:shown', function() {
             event.preventDefault();
             let suggestionAnchorElement = event.target;
 
+            // Sometimes the captured click event target is on a child div element of the anchor tag.
             if (event.target.nodeName.toLowerCase() !== 'a') {
                 suggestionAnchorElement = event.target.closest('a.algolia-docsearch-suggestion');
             }
