@@ -99,9 +99,7 @@ Cloud Functions is Google's serverless execution environment. See the [Google Cl
 
 | Concept                         | Description                                                                                                                                                                                                          |
 |---------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Azure Functions          | Microsoft's FaaS offering.                          |
-| Azure App Service          | A hostiing service for building web applications, services, and APIs.                               |
-| Azure Resource Manager (ARM) template          | A JSON document that defines the infrastructure and configuration for your project.                         |
+| Cloud Functions          | Google's FaaS offering.                          |
 
 [13]: https://cloud.google.com/functions/docs
 {{% /tab %}}
