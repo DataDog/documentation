@@ -1,9 +1,10 @@
 ---
-title: Synthetic CI/CD Testing
+title: Synthetics and CI/CD
 kind: documentation
 description: Run Synthetic tests on-demand in your CI/CD pipelines.
 aliases: 
   - /synthetics/ci
+  - /synthetics/cicd_testing
 further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-synthetic-ci-cd-testing/"
   tag: "Blog"
@@ -23,19 +24,19 @@ further_reading:
 
 ---
 
-In addition to running tests at predefined intervals, you can also run Datadog Synthetic tests on-demand using API endpoints. You can run Datadog Synthetic tests in your continuous integration (CI) pipelines, letting you block the deployment of branches that would break your product.
+In addition to running tests at predefined intervals, you can run Datadog Synthetic tests on-demand using API endpoints. Run Datadog Synthetic tests in your continuous integration (CI) pipelines to block branches from being deployed and breaking your application in production.
 
-Synthetic CI/CD testing can also be used to **run tests as part of your CD process**, evaluating the state of your production application immediately after a deployment finishes. This lets you detect potential regressions that could impact your users—and automatically trigger a rollback whenever a critical test fails.
+Use Synthetic CI/CD testing to also run tests as part of your continuous delivery (CD) process and evaluate the state of your applications and services in production immediately after a deployment finishes. You can detect potential regressions that may impact your users and automatically trigger a rollback when a critical test fails.
 
-This function allows you to avoid spending time fixing issues on production, and to catch bugs and regressions earlier in the process.
+This functionality reduces time spent fixing issues in production by proactively catching bugs and regressions earlier in the process, allowing your engineering teams to focus on non-urgent work instead. 
 
-On top of these API endpoints, Datadog provides and maintains a command line interface (CLI), allowing you to easily integrate Datadog Synthetic tests with your CI tooling. Synthetic CI/CD testing is open-source, and its source code is available on GitHub at [DataDog/datadog-ci][1].
+To get started, see [Integrations](#integrations) and [use the API](#use-the-api) or the [open-source CLI package](#use-the-cli). 
 
 ## CLI usage
 
 ### Package installation
 
-The package is published under [@datadog/datadog-ci][2] in the NPM registry.
+The package is published under [@datadog/datadog-ci][1] in the NPM registry.
 
 {{< tabs >}}
 {{% tab "NPM" %}}
@@ -97,7 +98,7 @@ In the global configuration file, you can configure the following options:
 : Overrides of synthetic tests applied to all tests ([see below for description of each field](#configure-tests)).
 
 `proxy`
-: The proxy to be used for outgoing connections to Datadog. `host` and `port` keys are mandatory arguments, `protocol` key defaults to `http`. Supported values for `protocol` key are `http`, `https`, `socks`, `socks4`, `socks4a`, `socks5`, `socks5h`, `pac+data`, `pac+file`, `pac+ftp`, `pac+http`, `pac+https`. The library used to configure the proxy is [proxy-agent][3] library.
+: The proxy to be used for outgoing connections to Datadog. `host` and `port` keys are mandatory arguments, `protocol` key defaults to `http`. Supported values for `protocol` key are `http`, `https`, `socks`, `socks4`, `socks4a`, `socks5`, `socks5h`, `pac+data`, `pac+file`, `pac+ftp`, `pac+http`, `pac+https`. The library used to configure the proxy is [proxy-agent][2] library.
 
 `subdomain`
 : The name of the custom subdomain set to access your Datadog application. If the URL used to access Datadog is `myorg.datadoghq.com` the `subdomain` value then needs to be set to `myorg`.
@@ -160,7 +161,7 @@ By default, the client automatically discovers and runs all tests specified in `
 
 #### Further configuration
 
-The default configurations used for the tests are the original tests' configurations (visible in the UI or when [getting your tests' configurations from the API][4]).
+The default configurations used for the tests are the original tests' configurations (visible in the UI or when [getting your tests' configurations from the API][3]).
 
 However, in the context of your CI deployment, you can optionally decide to override some (or all) of your tests parameters by using the below overrides. If you want to define overrides for all of your tests, these same parameters can be set at the [global configuration file](#setup-the-client) level.
 
@@ -267,7 +268,7 @@ The execution rule associated with the test is always the most restrictive one t
 
 #### Start URL
 
-You can configure on which url your test starts by providing a `startUrl` to your test object and build your own starting URL using any part of your test's original starting URL and the following environment variables:
+You can configure on which url your test starts by providing a `startUrl` to your test object and build your own starting URL using any part of your test's original starting URL with the following variables:
 
 
 `URL`
@@ -320,9 +321,11 @@ For instance, if your test's starting URL is `https://www.example.org:81/path/to
 * `{{PROTOCOL}}//{{HOST}}{{PATHNAME}}{{PARAMS}}{{HASH}}`
 * `{{URL}}`
 
+You can also leverage your own environment variables to customize your start URL. 
+
 **Note:** If you have environment variables with names corresponding to one of the above reserved variables, your environment variables will be ignored and replaced by the corresponding component parsed from your test `startUrl`.
 
-### Run tests
+### Running tests
 
 You can decide to have the CLI autodiscover all your `**/*.synthetics.json` Synthetic tests (or all the tests associated to the path specified in your [global configuration file](#setup-the-client)) or to specify the tests you want to run using the `-p,--public-id` flag.
 
@@ -363,9 +366,9 @@ npm run datadog-ci-synthetics
 
 ### Use the testing tunnel
 
-The [@datadog/datadog-ci][2] NPM package also comes with a tunnel functionality allowing you to swiftly trigger Synthetic tests on your internal applications. The testing tunnel creates an end-to-end encrypted HTTP proxy between your infrastructure and Datadog<span class="x x-first x-last">,</span> allowing all test requests sent <span class="x x-first x-last">through</span> the CLI to be <span class="x x-first x-last">automatically </span>routed through the `datadog-ci` client, consequently <span class="x x-first x-last">enabling</span> Datadog to run test on your internal applications.
+The [@datadog/datadog-ci][1] NPM package also comes with a tunnel functionality allowing you to swiftly trigger Synthetic tests on your internal applications. The testing tunnel creates an end-to-end encrypted HTTP proxy between your infrastructure and Datadog<span class="x x-first x-last">,</span> allowing all test requests sent <span class="x x-first x-last">through</span> the CLI to be <span class="x x-first x-last">automatically </span>routed through the `datadog-ci` client, consequently <span class="x x-first x-last">enabling</span> Datadog to run test on your internal applications.
 
-To learn how to get started using the testing tunnel, see the [Synthetics testing tunnel documentation][5].
+To learn how to get started using the testing tunnel, see the [Synthetics testing tunnel documentation][4].
 
 ### Visualize test results
 
@@ -381,7 +384,7 @@ You can identify what caused a test to fail by looking at the execution logs and
 
 #### In Datadog application
 
-You can also see your CI test results listed in the [CI Results Explorer][6] and on test details pages:
+You can also see your CI test results listed in the [CI Results Explorer][5] and on test details pages:
 
 {{< img src="synthetics/ci/ci_results_explorer/ci_results_explorer.png" alt="CI Results Explorer" style="width:100%;">}}
 
@@ -708,9 +711,8 @@ curl -G \
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://github.com/DataDog/datadog-ci
-[2]: https://www.npmjs.com/package/@datadog/datadog-ci
-[3]: https://github.com/TooTallNate/node-proxy-agent
-[4]: /api/v1/synthetics/#get-test
-[5]: /synthetics/testing_tunnel/
-[6]: /synthetics/cicd_testing/ci_results_explorer
+[1]: https://www.npmjs.com/package/@datadog/datadog-ci
+[2]: https://github.com/TooTallNate/node-proxy-agent
+[3]: /api/v1/synthetics/#get-test
+[4]: /synthetics/testing_tunnel/
+[5]: /synthetics/ci_results_explorer

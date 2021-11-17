@@ -1,15 +1,15 @@
 ---
 beta: true
 dependencies:
-  - 'https://github.com/DataDog/dd-sdk-ios/blob/master/docs/trace_collection.md'
+  - https://github.com/DataDog/dd-sdk-ios/blob/master/docs/trace_collection.md
 description: Recueillez des traces à partir de vos applications iOS.
 further_reading:
-  - link: 'https://github.com/DataDog/dd-sdk-ios'
+  - link: https://github.com/DataDog/dd-sdk-ios
     tag: Github
     text: Code source dd-sdk-ios
   - link: tracing/visualization/
     tag: Documentation
-    text: 'Explorer vos services, ressources et traces'
+    text: Explorer vos services, ressources et traces
 kind: documentation
 title: Collecte de traces iOS
 ---
@@ -164,7 +164,7 @@ Datadog.initialize(
         request.addValue(value, forHTTPHeaderField: headerField)
     }
     ```
-    Des en-têtes de tracing supplémentaires seront alors définis sur votre requête, afin que votre backend puisse procéder à l'extraction et poursuivre le tracing distribué. Une fois la requête terminée, appelez `span.finish()` dans un gestionnaire de complétion. Si votre backend est également instrumenté avec [l'APM et le tracing distribué de Datadog][8], vous verrez la trace frontend/backend complète sur le dashboard Datadog.
+    Des en-têtes de tracing supplémentaires seront alors définis sur votre requête, afin que votre backend puisse procéder à l'extraction et poursuivre le tracing distribué. Une fois la requête terminée, appelez `span.finish()` dans un gestionnaire d'achèvement. Si votre backend est également instrumenté avec [l'APM et le profileur en continu Datadog][8], la trace frontend/backend complète s'affiche dans le dashboard Datadog.
 
     * Pour que le SDK trace automatiquement toutes les requêtes réseau vers des hosts donnés, spécifiez le tableau `tracedHosts` lors de l'initialisation de Datadog :
 

@@ -179,7 +179,7 @@ If you have access to the [custom role feature][11], add your user to any custom
 
 [1]: /api/latest/synthetics/#get-all-locations-public-and-private
 [2]: /synthetics/private_locations
-[3]: /synthetics/cicd_testing
+[3]: /synthetics/cicd_integrations
 [4]: /synthetics/search/#search
 [5]: /synthetics/settings/#global-variables
 [6]: /monitors/notify/#notify-your-team

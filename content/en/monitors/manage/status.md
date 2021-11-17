@@ -93,15 +93,21 @@ The evaluation graph represents the exact query behavior within the timeframe br
 
 {{< img src="monitors/monitor_status/status_monitor_history.mp4" alt="status monitor history" video="true"  width="80%" >}}
 
-For further investigation into your metrics evolution, use a [dashboard][6] or [notebook][7].
+For further investigation into your metrics evolution, click **Open in a notebook** by the status graph. This generates an investigation [notebook][6] with a formatted graph of the monitor query.
+
+{{< img src="monitors/monitor_status/notebook-button.png" alt="Open in notebook button"  style="width:60%;">}}
+
+The notebook matches the monitor evaluation period time range and includes related logs where relevant.
+
+{{< img src="monitors/monitor_status/investigation-notebook.jpg" alt="Example investigation notebook" style="width:60%;">}}
 
 ## Events
 
-Events generated from your monitor (alerts, warnings, recoveries, etc.) are shown in this section based on the time selector above the **Status & History** section. The events are also displayed in your [event stream][8].
+Events generated from your monitor (alerts, warnings, recoveries, etc.) are shown in this section based on the time selector above the **Status & History** section. The events are also displayed in your [event stream][7].
 
 ### Audit events
 
-For all monitor types, monitor changes (monitor edits for instance) create an event in the [event stream][8]. This event explains the change and displays the user that made the change.
+For all monitor types, monitor changes (monitor edits for instance) create an event in the [event stream][7]. This event explains the change and displays the user that made the change.
 
 If you made changes to a monitor, you can see examples with the following event search:
 
@@ -111,13 +117,13 @@ https://app.datadoghq.com/event/stream?per_page=30&query=tags%3Aaudit%20status%3
 
 Datadog also provides a notification option for changes to monitors you create. At the bottom of the monitor editor, under **Notify your team**, choose **Notify** in the drop-down next to: *alert recipients when this alert is modified*.
 
-The notify setting sends an email with the monitor audit event to all people who are alerted in the specific monitor. The monitor audit event also appears in the [event stream][9].
+The notify setting sends an email with the monitor audit event to all people who are alerted in the specific monitor. The monitor audit event also appears in the [event stream][8].
 
 ## Export and import
 
 You can obtain a JSON export of any monitor from the monitor's status page. Click the settings cog (top right) and choose **Export** from the menu.
 
-[Import a monitor][10] to Datadog with JSON using the main navigation: *Monitors --> New Monitor --> Import*.
+[Import a monitor][9] to Datadog with JSON using the main navigation: *Monitors --> New Monitor --> Import*.
 
 ## Further Reading
 
@@ -128,8 +134,7 @@ You can obtain a JSON export of any monitor from the monitor's status page. Clic
 [3]: /api/v1/monitors/
 [4]: /dashboards/querying/
 [5]: /monitors/notify/
-[6]: /dashboards/
-[7]: /notebooks/
-[8]: /events/
-[9]: https://app.datadoghq.com/event/stream
-[10]: https://app.datadoghq.com/monitors#create/import
+[6]: /notebooks
+[7]: /events/
+[8]: https://app.datadoghq.com/event/stream
+[9]: https://app.datadoghq.com/monitors#create/import

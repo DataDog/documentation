@@ -86,6 +86,27 @@ For the example below, the span `rack.request` is the entry-point span of the tr
 
 {{< img src="tracing/visualization/span_with_metadata.png" alt="span" >}}
 
+## Span summary
+
+The span summary table shows metrics for spans aggregated across all traces, including how often the span shows up among all traces, what percent of traces contain the span, the average duration for the span, and its typical share of total execution time of the requests. This helps you detect N+1 problems in your code so you can improve your application performance. 
+
+The span summary table contains the following columns:
+
+Average spans per trace
+: Average number of occurrences of the span for traces, including the current resource, where the span is present at least once.
+
+Percentage of traces
+: Percentage of traces, including the current resource, where the span is present at least once.
+
+Average duration
+: Average duration of the span for traces, including the current resource, where the span is present at least once.
+
+Average percentage of execution time
+: Average ratio of execution time for which the span was active for traces, including the current resource, where the span is present at least once.
+
+{{< img src="tracing/visualization/span-summary.png" alt="Span summary table" >}}
+
+
 ## Service entry span
 
 A span is a service entry span when it is the entrypoint method for a request to a service. You can visualize this within Datadog APM when the color of the immediate parent on a flame graph is a different color.  Services are also listed on the right when viewing a flame graph.
