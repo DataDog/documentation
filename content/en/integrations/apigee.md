@@ -22,6 +22,10 @@ further_reading:
 integration_id: "apigee"
 ---
 
+{{< site-region region="us3" >}}
+<div class="alert alert-warning">The Apigee integration is not supported for your selected Datadog site ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
 ## Overview
 
 Collect Apigee proxy logs to track errors, response time, duration, latency, monitor performance, and proxy issues aggregated in one place.
@@ -29,14 +33,6 @@ Collect Apigee proxy logs to track errors, response time, duration, latency, mon
 ## Setup
 
 #### Log collection
-
-{{< site-region region="us3" >}}
-
-Log collection is not supported for this site.
-
-{{< /site-region >}}
-
-{{< site-region region="us,us5,eu,gov" >}}
 
 There are two methods available for collecting Apigee logs:
 
@@ -153,19 +149,17 @@ httpClient.send(myLoggingRequest);
 
 **Note**: Add more flow variables into JavaScript from the official [Apigee flow variable reference][4].
 
-[1]: https://docs.apigee.com/api-platform/reference/policies/javascript-policy
-[2]: https://docs.apigee.com/api-platform/reference/policies/message-logging-policy#samples
-[3]: /logs/log_configuration/attributes_naming_convention/#standard-attributes
-[4]: https://docs.apigee.com/api-platform/reference/variables-reference
-
-{{< /site-region >}}
-
 ## Troubleshooting
 
-Need help? Contact [Datadog support][1].
+Need help? Contact [Datadog support][5].
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /help/
+
+[1]: https://docs.apigee.com/api-platform/reference/policies/javascript-policy
+[2]: https://docs.apigee.com/api-platform/reference/policies/message-logging-policy#samples
+[3]: /logs/log_configuration/attributes_naming_convention/#standard-attributes
+[4]: https://docs.apigee.com/api-platform/reference/variables-reference
+[5]: /help/

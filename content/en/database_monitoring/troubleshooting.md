@@ -313,14 +313,14 @@ Some or all queries may not have plans available. This can be due to unsupported
 {{< tabs >}}
 {{% tab "Postgres" %}}
 
-Example error output from `create extension pg_stat_statements`: 
+Example error output from `create extension pg_stat_statements`:
 ```
 create extension pg_stat_statements;
 ERROR:  could not open extension control file "<path>/share/postgresql/extension/pg_stat_statements.control": No such file or directory
 SQL State: 58P01
 ```
 
-This error happens when you are missing the `postgresql-contrib` package that includes the `pg_stat_statements` extension. How to install the missing package varies depending on the host's distribution and your Postgres version. As an example, to install the `contrib` package on Ubuntu for Postgres 10, run: 
+This error happens when you are missing the `postgresql-contrib` package that includes the `pg_stat_statements` extension. How to install the missing package varies depending on the host's distribution and your Postgres version. As an example, to install the `contrib` package on Ubuntu for Postgres 10, run:
 
 ```
 sudo apt-get install postgresql-contrib-10
@@ -333,17 +333,19 @@ See the appropriate version of the [Postgres `contrib` documentation][1] for mor
 {{% /tab %}}
 {{< /tabs >}}
 
+### Schema or Database missing on MySQL Query Metrics & Samples
+
+The `schema` tag (also known as "database") is present on MySQL Query Metrics and Samples only when a Default Database is set on the connection that made the query. The Default Database is configured by the application by specifying the "schema" in the database connection parameters, or by executing the [USE Statement][5] on an already existing connection.
+
+If there is no default database configured for a connection, then none of the queries made by that connection have the `schema` tag on them.
+
 ## Need more help?
 
 If you are still experiencing problems, contact [Datadog Support][4] for help.
-
-
-
-
-
 
 
 [1]: /database_monitoring/#getting-started
 [2]: /agent/troubleshooting/
 [3]: /agent/guide/agent-log-files
 [4]: /help/
+[5]: https://dev.mysql.com/doc/refman/8.0/en/use.html

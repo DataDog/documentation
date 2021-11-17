@@ -44,5 +44,5 @@ Find below a summary of Datadog data collection, resolution, and retention:
 
 [1]: /tracing/guide/trace_sampling_and_storage/?tab=java#trace-storage
 [2]: /integrations/faq/cloud-metric-delay/#faster-metrics
-[3]: /synthetics/cicd_testing/?tab=apitest#trigger-tests-endpoint
-[4]: /synthetics/cicd_testing/?tab=apitest#cli-usage
+[3]: /synthetics/cicd_integrations/?tab=apitest#trigger-tests-endpoint
+[4]: /synthetics/cicd_integrations/?tab=apitest#cli-usage

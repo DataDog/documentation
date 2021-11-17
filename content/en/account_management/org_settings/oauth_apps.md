@@ -15,13 +15,13 @@ Use the **OAuth Apps** management page under [Organization Settings][1] to manag
 ## Setup
 ### Permissions
 
-By default, users with [Datadog Standard and Datadog Admin roles][4] can access the OAuth Apps management page. If your organization has [custom roles][5] defined, add your user to any custom role with `org_authorized_apps_read` and `org_authorized_apps_write` permissions. 
+By default, users with [Datadog Standard and Datadog Admin roles][2] can access the OAuth Apps management page. If your organization has [custom roles][3] defined, add your user to any custom role with `org_authorized_apps_read` and `org_authorized_apps_write` permissions. 
 
 Only users with the Datadog Admin role or the `org_authorized_apps_write` permission can manage OAuth applications on this page, such as disabling applications or revoking OAuth access for a user.
 
 ### Enable
 
-Enabled OAuth applications allow users with necessary permissions to authorize access on their behalf. OAuth applications include the Datadog Mobile App and your custom [Datadog Apps][2] that have [OAuth API Access][3]. 
+Enabled OAuth applications allow users with necessary permissions to authorize access on their behalf. OAuth applications include the Datadog Mobile App and your custom [Datadog Apps][4] that have [OAuth API Access][5]. 
 
 ### Disable
 
@@ -46,7 +46,7 @@ Revoking a user's OAuth access to an application removes all access to that appl
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/organization-settings/
-[2]: /developers/datadog_apps/
-[3]: /developers/datadog_apps/#oauth-api-access
-[4]: /account_management/rbac/permissions/#general-permissions
-[5]: /account_management/rbac/?tab=datadogapplication#custom-role
+[2]: /account_management/rbac/permissions/#general-permissions
+[3]: /account_management/rbac/?tab=datadogapplication#custom-role
+[4]: /developers/datadog_apps/
+[5]: /developers/datadog_apps/#oauth-api-access
