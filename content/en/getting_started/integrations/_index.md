@@ -192,7 +192,7 @@ tagging
 [14]: /agent/guide/integration-management/
 [15]: https://app.datadoghq.com/account/settings#agent
 [16]: /account_management/api-app-keys/
-[17]: https://app.datadoghq.com/account/settings#api
+[17]: https://app.datadoghq.com/organization-settings/api-keys
 [18]: /integrations/
 [19]: https://app.datadoghq.com/account/settings#agent/docker
 [20]: https://app.datadoghq.com/account/settings#agent/kubernetes
@@ -216,6 +216,6 @@ tagging
 [38]: /agent/guide/agent-configuration-files/#agent-configuration-directory
 [39]: https://app.datadoghq.com/event/stream
 [40]: https://github.com/DataDog/integrations-core/blob/master/http_check/datadog_checks/http_check/data/conf.yaml.example#L13
-[41]: /developers/metrics/
-[42]: /developers/metrics/custom_metrics/
+[41]: /metrics/
+[42]: /metrics/custom_metrics/
 [43]: /monitors/guide/visualize-your-service-check-in-the-datadog-ui/

@@ -63,12 +63,12 @@ The Agent forwarder send metrics over HTTPS to Datadog. Buffering prevents netwo
 
 In v6, DogStatsD is a Golang implementation of [Etsy's StatsD][5] metric aggregation daemon. It is used to receive and roll up arbitrary metrics over UDP or Unix socket, thus allowing custom code to be instrumented without adding latency. Learn more about [DogStatsD][6].
 
-[1]: /developers/metrics/dogstatsd_metrics_submission/#metrics
+[1]: /metrics/dogstatsd_metrics_submission/#metrics
 [2]: /tracing/guide/terminology/
 [3]: /agent/guide/network/#open-ports
 [4]: /developers/custom_checks/write_agent_check/
 [5]: https://github.com/etsy/statsd
-[6]: /developers/metrics/dogstatsd_metrics_submission/
+[6]: /metrics/dogstatsd_metrics_submission/
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
@@ -105,7 +105,7 @@ minfds = 100  # Your hard limit
 ```
 
 [1]: /integrations/
-[2]: /developers/metrics/custom_metrics/
+[2]: /metrics/custom_metrics/
 [3]: /agent/guide/network/?tab=agentv5v4#open-ports
 [4]: /agent/proxy/?tab=agentv5
 [5]: /agent/faq/network/
@@ -142,8 +142,9 @@ When the Agent is running, use the `datadog-agent launch-gui` command to open th
 | [RedHat/CentOS][4]                       | RedHat/CentOS 6+                                          |
 | [Docker][5]                              | Version 1.12+                                             |
 | [Kubernetes][6]                          | Version 1.3+                                              |
-| [SUSE Enterprise Linux][7] with systemd  | SUSE 11 SP4+                                              |
-| [SUSE Enterprise Linux][7] with SysVinit | SUSE 11 SP4 in Agent 7.16.0+                              |
+| [SUSE Enterprise Linux][7] with systemd  | SUSE 11 SP4+ in Agent < 6.33.0/7.33.0, SUSE 12+ in Agent 6.33.0+/7.33.0+                     |
+| [SUSE Enterprise Linux][7] with SysVinit | SUSE 11 SP4 in Agent 6.16.0/7.16.0 - 6.33.0/7.33.0        |
+| [OpenSUSE][7] with systemd               | OpenSUSE 15+ in Agent 6.33.0+/7.33.0+                     |
 | [Fedora][8]                              | Fedora 26+                                                |
 | [macOS][9]                               | macOS 10.12+                                              |
 | [Windows Server][10]                     | Windows Server 2008 R2+ and Server Core (not Nano Server) |

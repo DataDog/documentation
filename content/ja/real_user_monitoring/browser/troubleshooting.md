@@ -2,7 +2,7 @@
 title: トラブルシューティング
 kind: documentation
 further_reading:
-  - link: 'https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/'
+  - link: https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/
     tag: ブログ
     text: リアルユーザーモニタリング
   - link: /real_user_monitoring/faq/content_security_policy/

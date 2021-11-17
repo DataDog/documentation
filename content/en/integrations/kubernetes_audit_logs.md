@@ -33,7 +33,7 @@ integration_id: "kubernetes-audit-logs"
 
 ## Overview
 
-Collect [Kubernetes audit logs][1] to track everything that happens inside your Kubernetes clusters, including every call made to the Kubernetes API by any service. This includes the control plane (built-in controllers, the scheduler), node daemons (the kubelet, kube-proxy, and others), cluster services (e.g., the cluster autoscaler), users making `kubectl` requests, and even the Kubernetes API itself.
+Collect [Kubernetes audit logs][1] to track everything that happens inside your Kubernetes clusters, including every call made to the Kubernetes API by any service. This includes the control plane (built-in controllers, the scheduler), node daemons (the kubelet, kube-proxy, and others), cluster services (such as the cluster autoscaler), users making `kubectl` requests, and even the Kubernetes API itself.
 
 With the Kubernetes audit logs integration, you can diagnose permission issues, identify RBAC policies that need to be updated, and track slow API requests that are impacting your whole cluster. Deep dive into these topics with the [Datadog talk at KubeCon 2019][2].
 
@@ -43,7 +43,7 @@ This integration is **available for Agent >6.0**
 
 ### Configuration
 
-For more information about setting up Kubernetes audit logs, refer to [the official Kubernetes documentation][3].
+For more information about setting up Kubernetes audit logs, see [Kubernetes Auditing][3].
 
 To enable audit logs in Kubernetes:
 
@@ -109,9 +109,9 @@ rules:
 
 This example policy file configures the API server to log at the highest level of detail for certain types of cluster-changing operations (update, patch, create, delete). It also tracks requests to the `subjectaccessreviews` resource at the highest level to help troubleshoot authentication delegation issues.
 
-You may want to reduce the level of verbosity to `Metadata` for endpoints that contain sensitive data (e.g., `tokenreviews` resource). Datadog also omits the `RequestReceived` stage from logs.
+You may want to reduce the level of verbosity to `Metadata` for endpoints that contain sensitive data, such as the `tokenreviews` resource. Datadog also omits the `RequestReceived` stage from logs.
 
-In the last section, for everything that was not explicitly configured by the previous rules, the policy is configured to log at `Metadata` level. As audit logs might be verbose, you can choose to exclude less critical actions/verbs (e.g., operations that don't change the cluster state like list, watch, and get).
+In the last section, for everything that was not explicitly configured by the previous rules, the policy is configured to log at `Metadata` level. As audit logs might be verbose, you can choose to exclude less critical actions/verbs, such as operations that don't change the cluster state like list, watch, and get.
 
 ### Log collection
 

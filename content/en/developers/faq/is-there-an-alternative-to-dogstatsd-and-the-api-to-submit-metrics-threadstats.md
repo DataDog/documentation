@@ -84,7 +84,7 @@ For more information, see the [Threadstats aggregation][6] documentation.
 
 [1]: https://github.com/DataDog/datadogpy/tree/master/datadog
 [2]: /api/
-[3]: /developers/metrics/dogstatsd_metrics_submission/
+[3]: /metrics/dogstatsd_metrics_submission/
 [4]: https://github.com/DataDog/datadogpy
 [5]: /developers/dogstatsd/
 [6]: https://github.com/DataDog/datadogpy/blob/master/datadog/threadstats/metrics.py

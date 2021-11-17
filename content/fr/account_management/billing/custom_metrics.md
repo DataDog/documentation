@@ -68,9 +68,9 @@ Pour connaître la température en Floride, il vous suffit de combiner les métr
 - `temperature{country:USA, state:Florida, city:Miami}`
 - `temperature{state:Florida, city:Miami, country:USA}`
 
-[1]: /fr/developers/metrics/types/?tab=count#metric-types
-[2]: /fr/developers/metrics/types/?tab=rate#metric-types
-[3]: /fr/developers/metrics/types/?tab=gauge#metric-types
+[1]: /fr/metrics/types/?tab=count#metric-types
+[2]: /fr/metrics/types/?tab=rate#metric-types
+[3]: /fr/metrics/types/?tab=gauge#metric-types
 {{% /tab %}}
 {{% tab "Histogram" %}}
 
@@ -91,8 +91,8 @@ Par défaut, l'Agent génère cinq métriques custom pour chacune des quatre com
 - Configurez les agrégations par centile que vous souhaitez envoyer à Datadog à l'aide du paramètre `histogram_percentiles` dans votre [fichier de configuration datadog.yaml][2]. Par défaut, seul le 95e centile, `95percentile`, est envoyé à Datadog.
 
 
-[1]: /fr/developers/metrics/types/?tab=histogram#metric-types
-[2]: /fr/developers/metrics/types/?tab=histogram#definition
+[1]: /fr/metrics/types/?tab=histogram#metric-types
+[2]: /fr/metrics/types/?tab=histogram#definition
 [3]: /fr/agent/guide/agent-configuration-files/#agent-main-configuration-file
 {{% /tab %}}
 {{% tab "Distribution" %}}
@@ -130,7 +130,7 @@ Vous avez la possibilité de personnaliser les agrégations de [combinaisons de 
 
 Le nombre de métriques custom envoyées par une [métrique DISTRIBUTION][1] correspond au nombre de combinaisons uniques de nom de métrique et de valeurs de tag multiplié par cinq. Ainsi, une fois les tags personnalisés, la métrique `request.Latency` envoie **5\*3 = 15 métriques custom** au total.
 
-[1]: /fr/developers/metrics/types/?tab=distribution#definition
+[1]: /fr/metrics/types/?tab=distribution#definition
 [2]: /fr/metrics/distributions/#customize-tagging
 {{% /tab %}}
 {{< /tabs >}}
@@ -174,8 +174,8 @@ Pour toute question technique, contactez [l'assistance Datadog][24].
 Pour toute question concernant la facturation, contactez votre [chargé de compte][9].
 
 [1]: /fr/integrations/
-[2]: /fr/developers/metrics/custom_metrics/
-[3]: /fr/developers/metrics/types/#metric-types
+[2]: /fr/metrics/custom_metrics/
+[3]: /fr/metrics/types/#metric-types
 [4]: /fr/account_management/users/default_roles/
 [5]: https://app.datadoghq.com/account/usage/hourly
 [6]: /fr/account_management/billing/usage_details/

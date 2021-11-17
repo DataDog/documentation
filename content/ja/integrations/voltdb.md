@@ -18,11 +18,11 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/voltdb/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/voltdb/README.md
 display_name: VoltDB
 draft: false
 further_reading:
-  - link: 'https://www.datadoghq.com/blog/monitor-voltdb-with-datadog/'
+  - link: https://www.datadoghq.com/blog/monitor-voltdb-with-datadog/
     tag: ブログ
     text: Datadog を使用した VoltDB の監視
 git_integration_title: voltdb

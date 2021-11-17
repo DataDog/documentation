@@ -15,7 +15,7 @@ categories:
 creates_events: true
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/vsphere/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/vsphere/README.md
 display_name: vSphere
 draft: false
 git_integration_title: vsphere

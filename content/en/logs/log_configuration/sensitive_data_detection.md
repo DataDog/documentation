@@ -1,7 +1,6 @@
 ---
 title: Sensitive Data Detection
 kind: documentation
-beta: true
 further_reading:
 - link: "/security/logs/"
   tag: "Documentation"
@@ -9,9 +8,10 @@ further_reading:
 - link: "/logs/explorer/"
   tag: "Documentation"
   text: "Log Explorer"
+- link: "https://www.datadoghq.com/blog/sensitive-data-scanner/"
+  tag: "Blog"
+  text: "Build a modern data compliance strategy with Datadog's Sensitive Data Scanner"
 ---
-
-<div class="alert alert-info">This page is about Sensitive Data Scanner, which is currently in private beta. Contact <a href="https://www.datadoghq.com/support/">Datadog Support</a> if you want to learn more or participate in the beta program. </div>
 
 ## Overview
 

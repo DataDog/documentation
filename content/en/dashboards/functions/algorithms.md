@@ -70,6 +70,6 @@ Several of the graphing options disappear, as forecasts have a unique visualizat
     {{< nextlink href="/dashboards/functions/timeshift" >}}Timeshift: Shift your metric data point along the timeline. {{< /nextlink >}}
 {{< /whatsnext >}}
 
-[1]: /monitors/monitor_types/anomaly/
-[2]: /monitors/monitor_types/outlier/
-[3]: /monitors/monitor_types/forecasts/#forecast-algorithms
+[1]: /monitors/create/types/anomaly/
+[2]: /monitors/create/types/outlier/
+[3]: /monitors/create/types/forecasts/#forecast-algorithms

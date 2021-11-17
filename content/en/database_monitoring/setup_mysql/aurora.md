@@ -9,7 +9,7 @@ further_reading:
 
 ---
 
-{{< site-region region="us3,gov" >}}
+{{< site-region region="us3,us5,gov" >}}
 <div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
 {{< /site-region >}}
 
@@ -51,11 +51,9 @@ Configure the following in the [DB Parameter Group][3] and then **restart the se
 | Parameter | Value | Description |
 | --- | --- | --- |
 | `performance_schema` | `ON` | Required. Enables the [Performance Schema][1]. |
-| <code style="word-break:break-all;">`performance_schema_consumer_events_statements_current`</code> | `ON` | Required. Enables monitoring of currently running queries. |
-| <code style="word-break:break-all;">`performance_schema_consumer_events_statements_history`</code> | `ON` | Optional. Enables tracking recent query history per thread. If enabled it increases the likelihood of capturing execution details from infrequent queries. |
-| <code style="word-break:break-all;">`performance_schema_consumer_events_statements_history_long`</code> | `ON` | Optional. Enables tracking of a larger number of recent queries across all threads. If enabled it increases the likelihood of capturing execution details from infrequent queries. |
-| `max_digest_length` | `4096` | Required for collection of larger queries. Increases the size of SQL digest text in `events_statements_*` tables. If left at the default value then queries longer than `1024` characters will not be collected. |
-| <code style="word-break:break-all;">`performance_schema_max_digest_length`</code> | `4096` | Must match `max_digest_length`. |
+| <code style="word-break:break-all;">performance_schema_consumer_events_statements_current</code> | `ON` | Required. Enables monitoring of currently running queries. |
+| <code style="word-break:break-all;">performance_schema_consumer_events_statements_history</code> | `ON` | Optional. Enables tracking recent query history per thread. If enabled it increases the likelihood of capturing execution details from infrequent queries. |
+| <code style="word-break:break-all;">performance_schema_consumer_events_statements_history_long</code> | `ON` | Optional. Enables tracking of a larger number of recent queries across all threads. If enabled it increases the likelihood of capturing execution details from infrequent queries. |
 
 [1]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema-quick-start.html
 {{% /tab %}}
@@ -64,12 +62,11 @@ Configure the following in the [DB Parameter Group][3] and then **restart the se
 | Parameter | Value | Description |
 | --- | --- | --- |
 | `performance_schema` | `ON` | Required. Enables the [Performance Schema][1]. |
-| <code style="word-break:break-all;">`performance_schema_consumer_events_statements_current`</code> | `ON` | Required. Enables monitoring of currently running queries. |
-| <code style="word-break:break-all;">`performance_schema_consumer_events_statements_history`</code> | `ON` | Optional. Enables tracking recent query history per thread. If enabled it increases the likelihood of capturing execution details from infrequent queries. |
-| <code style="word-break:break-all;">`performance_schema_consumer_events_statements_history_long`</code> | `ON` | Optional. Enables tracking of a larger number of recent queries across all threads. If enabled it increases the likelihood of capturing execution details from infrequent queries. |
-| `max_digest_length` | `4096` | Required for collection of larger queries. Increases the size of SQL digest text in `events_statements_*` tables. If left at the default value then queries longer than `1024` characters will not be collected. |
-| <code style="word-break:break-all;">`performance_schema_max_digest_length`</code> | `4096` | Must match `max_digest_length`. |
-| <code style="word-break:break-all;">`performance_schema_max_sql_text_length`</code> | `4096` | Must match `max_digest_length`. |
+| <code style="word-break:break-all;">performance_schema_consumer_events_statements_current</code> | `ON` | Required. Enables monitoring of currently running queries. |
+| <code style="word-break:break-all;">performance_schema_consumer_events_statements_history</code> | `ON` | Optional. Enables tracking recent query history per thread. If enabled it increases the likelihood of capturing execution details from infrequent queries. |
+| <code style="word-break:break-all;">performance_schema_consumer_events_statements_history_long</code> | `ON` | Optional. Enables tracking of a larger number of recent queries across all threads. If enabled it increases the likelihood of capturing execution details from infrequent queries. |
+| <code style="word-break:break-all;">performance_schema_max_digest_length</code> | `4096` | Increases the size of SQL digest text in `events_statements_*` tables. If left at the default value then queries longer than `1024` characters will not be collected. |
+| <code style="word-break:break-all;">performance_schema_max_sql_text_length</code> | `4096` | Must match <code style="word-break:break-all;">performance_schema_max_digest_length</code>. |
 
 [1]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema-quick-start.html
 {{% /tab %}}
@@ -206,7 +203,7 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
     "username": "datadog",
     "password": "<UNIQUEPASSWORD>"
   }]' \
-  datadog/agent:${DD_AGENT_VERSION}
+  gcr.io/datadoghq/agent:${DD_AGENT_VERSION}
 ```
 
 ### Dockerfile
@@ -214,7 +211,7 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
 Labels can also be specified in a `Dockerfile`, so you can build and deploy a custom agent without changing any infrastructure configuration:
 
 ```Dockerfile
-FROM datadog/agent:7.30.0
+FROM gcr.io/datadoghq/agent:7.30.0
 
 LABEL "com.datadoghq.ad.check_names"='["mysql"]'
 LABEL "com.datadoghq.ad.init_configs"='[{}]'

@@ -5,12 +5,13 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Surveillez des métriques clés d'Azure Service Bus.
-doc_link: 'https://docs.datadoghq.com/integrations/azure_service_bus/'
+doc_link: https://docs.datadoghq.com/integrations/azure_service_bus/
 draft: false
 git_integration_title: azure_service_bus
 has_logo: true
 integration_id: azure-service-bus
 integration_title: Microsoft Azure Service Bus
+integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'

@@ -29,13 +29,13 @@ If your `.dogrc` file has not yet been created (i.e, the dogshell has not yet be
 Submit "Y". It then responds:
 
 ```text
-What is your api key? (Get it here: https://app.datadoghq.com/account/settings#api)
+What is your api key? (Get it here: https://app.datadoghq.com/organization-settings/api-keys)
 ```
 
 You can paste your API key, and then:
 
 ```text
-What is your application key? (Generate one here: https://app.datadoghq.com/account/settings#api)
+What is your application key? (Generate one here: https://app.datadoghq.com/organization-settings/api-keys)
 ```
 
 You can paste your application key. It finishes with:
@@ -93,6 +93,6 @@ dog metric post -h
 {{< img src="developers/faq/dogshell_test.png" alt="dogshell_test"  >}}
 
 [1]: https://github.com/DataDog/datadogpy
-[2]: /developers/metrics/dogstatsd_metrics_submission/
+[2]: /metrics/dogstatsd_metrics_submission/
 [3]: https://github.com/DataDog/datadogpy#installation
 [4]: https://github.com/DataDog/datadogpy/tree/master/datadog/dogshell

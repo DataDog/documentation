@@ -28,7 +28,7 @@ To generate a new log-based metric, go to the [Configuration page][4] of your Da
 
 You can also create metrics from an Analytics search by selecting the "Generate new metric" option from the Export menu.
 
-{{< img src="logs/processing/logs_to_metrics/metrics_from_analytics.png" alt="Generate Logs to metric"  style="width:80%;">}}
+{{< img src="logs/processing/logs_to_metrics/metrics_from_analytics.jpg" alt="Generate Logs to metric"  style="width:80%;">}}
 
 ### Add a new log-based metric
 
@@ -87,7 +87,7 @@ An extra `status` tag is available on the `datadog.estimated_usage.logs.ingested
 [6]: /logs/search_syntax/
 [7]: /logs/explorer/facets/#quantitative-facets-measures
 [8]: /getting_started/tagging/
-[9]: /developers/metrics/custom_metrics/
+[9]: /metrics/custom_metrics/
 [10]: /security/logs/#hipaa-enabled-customers
 [11]: /account_management/billing/custom_metrics/?tab=countrategauge
-[12]: /developers/metrics/#naming-metrics
+[12]: /metrics/#naming-metrics

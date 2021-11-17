@@ -111,7 +111,7 @@ For help troubleshooting the Agent:
 {{< /whatsnext >}}
 
 [1]: /integrations/
-[2]: /developers/metrics/dogstatsd_metrics_submission/
+[2]: /metrics/dogstatsd_metrics_submission/
 [3]: /api/
 [4]: /infrastructure/process/
 [5]: /logs/
@@ -119,7 +119,7 @@ For help troubleshooting the Agent:
 [7]: https://www.datadoghq.com
 [8]: https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles/agent
 [9]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-[10]: https://app.datadoghq.com/account/settings#api
+[10]: https://app.datadoghq.com/organization-settings/api-keys
 [11]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
 [12]: https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles/agent#environment-variables
 [13]: /agent/guide/agent-commands/#agent-status-and-information

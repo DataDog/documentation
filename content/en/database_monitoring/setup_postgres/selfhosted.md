@@ -9,7 +9,7 @@ further_reading:
 
 ---
 
-{{< site-region region="us3,gov" >}}
+{{< site-region region="us3,us5,gov" >}}
 <div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
 {{< /site-region >}}
 
@@ -26,26 +26,29 @@ The Agent collects telemetry directly from the database by logging in as a read-
 Supported PostgreSQL versions
 : 9.6, 10, 11, 12, 13
 
+Prerequisites
+: Postgres additional supplied modules must be installed. For most installations, this is included by default but less conventional installations might require an additional installation of your version of [the `postgresql-contrib` package][1].
+
 Supported Agent versions
 : 7.30.0+
 
 Performance impact
 : The default Agent configuration for Database Monitoring is conservative, but you can adjust settings such as the collection interval and query sampling rate to better suit your needs. For most workloads, the Agent represents less than one percent of query execution time on the database and less than one percent of CPU. <br/><br/>
-Database Monitoring runs as an integration on top of the base Agent ([see benchmarks][1]).
+Database Monitoring runs as an integration on top of the base Agent ([see benchmarks][2]).
 
 Proxies, load balancers, and connection poolers
 : The Agent must connect directly to the host being monitored. For self-hosted databases, `127.0.0.1` or the socket is preferred. The Agent should not connect to the database through a proxy, load balancer, or connection pooler such as `pgbouncer`. While this can be an anti-pattern for client applications, each Agent must have knowledge of the underlying hostname and should stick to a single host for its lifetime, even in cases of failover. If the Datadog Agent connects to different hosts while it is running, the values of metrics will be incorrect.
 
 Data security considerations
-: See [Sensitive information][2] for information about what data the Agent collects from your databases and how to ensure it is secure.
+: See [Sensitive information][3] for information about what data the Agent collects from your databases and how to ensure it is secure.
 
 ## Configure Postgres settings
 
-Configure the following [parameters][3] in the `postgresql.conf` file and then **restart the server** for the settings to take effect. For more information about these parameters, see the [Postgres documentation][4].
+Configure the following [parameters][4] in the `postgresql.conf` file and then **restart the server** for the settings to take effect. For more information about these parameters, see the [Postgres documentation][5].
 
 | Parameter | Value | Description |
 | --- | --- | --- |
-| `shared_preload_libraries` | `pg_stat_statements` | Required for `postgresql.queries.*` metrics. Enables collection of query metrics via the the [pg_stat_statements][4] extension. |
+| `shared_preload_libraries` | `pg_stat_statements` | Required for `postgresql.queries.*` metrics. Enables collection of query metrics via the the [pg_stat_statements][5] extension. |
 | `track_activity_query_size` | `4096` | Required for collection of larger queries. Increases the size of SQL text in `pg_stat_activity` and `pg_stat_statements`. If left at the default value then queries longer than `1024` characters will not be collected. |
 | `pg_stat_statements.track` | `ALL` | Optional. Enables tracking of statements within stored procedures and functions. |
 | `pg_stat_statements.max` | `10000` | Optional. Increases the number of normalized queries tracked in `pg_stat_statements`. This setting is recommended for high-volume databases that see many different types of queries from many different clients. |
@@ -54,9 +57,9 @@ Configure the following [parameters][3] in the `postgresql.conf` file and then *
 
 The Datadog Agent requires read-only access to the database server in order to collect statistics and queries.
 
-Choose a PostgreSQL database on the database server to which the Agent will connect. The Agent can collect telemetry from all databases on the database server regardless of which one it connects to, so a good option is to use the default `postgres` database. Choose a different database only if you need the Agent to run [custom queries against data unique to that database][5].
+Choose a PostgreSQL database on the database server to which the Agent will connect. The Agent can collect telemetry from all databases on the database server regardless of which one it connects to, so a good option is to use the default `postgres` database. Choose a different database only if you need the Agent to run [custom queries against data unique to that database][6].
 
-Connect to the chosen database as a superuser (or another user with sufficient permissions). For example, if your chosen database is `postgres`, connect as the `postgres` user using [psql][6] by running:
+Connect to the chosen database as a superuser (or another user with sufficient permissions). For example, if your chosen database is `postgres`, connect as the `postgres` user using [psql][7] by running:
 
  ```bash
  psql -h mydb.example.com -d postgres -U postgres
@@ -110,7 +113,7 @@ SECURITY DEFINER;
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**: When generating custom metrics that require querying additional tables, you may need to grant the `SELECT` permission on those tables to the `datadog` user. Example: `grant SELECT on <TABLE_NAME> to datadog;`. See [PostgreSQL custom metric collection explained][5] for more information.
+**Note**: When generating custom metrics that require querying additional tables, you may need to grant the `SELECT` permission on those tables to the `datadog` user. Example: `grant SELECT on <TABLE_NAME> to datadog;`. See [PostgreSQL custom metric collection explained][6] for more information.
 
 Create the function **in every database** to enable the Agent to collect explain plans.
 
@@ -176,9 +179,9 @@ When it prompts for a password, use the password you entered when you created th
 
 ## Install the Agent
 
-Installing the Datadog Agent also installs the Postgres check which is required for Database Monitoring on Postgres. If you haven't already installed the Agent for your Postgres database host, see the [Agent installation instructions][7].
+Installing the Datadog Agent also installs the Postgres check which is required for Database Monitoring on Postgres. If you haven't already installed the Agent for your Postgres database host, see the [Agent installation instructions][8].
 
-1. Edit the Agent's `conf.d/postgres.d/conf.yaml` file to point to your `host` / `port` and set the hosts to monitor. See the [sample postgres.d/conf.yaml][8] for all available configuration options.
+1. Edit the Agent's `conf.d/postgres.d/conf.yaml` file to point to your `host` / `port` and set the hosts to monitor. See the [sample postgres.d/conf.yaml][9] for all available configuration options.
 
 {{< tabs >}}
 {{% tab "Postgres ≥ 10" %}}
@@ -215,11 +218,11 @@ Installing the Datadog Agent also installs the Postgres check which is required 
 {{% /tab %}}
 {{< /tabs >}}
 
-2. [Restart the Agent][9].
+2. [Restart the Agent][10].
 
 ### Collecting logs (optional)
 
-PostgreSQL default logging is to `stderr`, and logs do not include detailed information. It is recommended to log into a file with additional details specified in the log line prefix. Refer to the PostgreSQL [documentation][10] on this topic for additional details.
+PostgreSQL default logging is to `stderr`, and logs do not include detailed information. It is recommended to log into a file with additional details specified in the log line prefix. Refer to the PostgreSQL [documentation][11] on this topic for additional details.
 
 1. Logging is configured within the file `/etc/postgresql/<VERSION>/main/postgresql.conf`. For regular log results, including statement outputs, uncomment the following parameters in the log section:
    ```conf
@@ -234,7 +237,7 @@ PostgreSQL default logging is to `stderr`, and logs do not include detailed info
      ## For Windows
      #log_destination = 'eventlog'
    ```
-2. To gather detailed duration metrics and make them searchable in the Datadog interface, they should be configured inline with the statement themselves. See below for the recommended configuration differences from above and note that both `log_statement` and `log_duration` options are commented out. See discussion on this topic [here][11].
+2. To gather detailed duration metrics and make them searchable in the Datadog interface, they should be configured inline with the statement themselves. See below for the recommended configuration differences from above and note that both `log_statement` and `log_duration` options are commented out. See discussion on this topic [here][12].
  
  This config logs all statements, but to reduce the output to those which have a certain duration, set the `log_min_duration_statement` value to the desired minimum duration in milliseconds (check that logging the full SQL statement complies with your organization's privacy requirements):
    ```conf
@@ -262,33 +265,34 @@ PostgreSQL default logging is to `stderr`, and logs do not include detailed info
        #    pattern: \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
        #    name: new_log_start_with_date
    ```
-      Change the `service` and `path` parameter values to configure for your environment. See the [sample postgres.d/conf.yaml][8] for all available configuration options.
-5. [Restart the Agent][9].
+      Change the `service` and `path` parameter values to configure for your environment. See the [sample postgres.d/conf.yaml][9] for all available configuration options.
+5. [Restart the Agent][10].
 
 ### Validate
 
-[Run the Agent's status subcommand][12] and look for `postgres` under the Checks section. Or visit the [Databases][13] page to get started!
+[Run the Agent's status subcommand][13] and look for `postgres` under the Checks section. Or visit the [Databases][14] page to get started!
 
 ## Troubleshooting
 
-If you have installed and configured the integrations and Agent as described and it is not working as expected, see [Troubleshooting][14]
+If you have installed and configured the integrations and Agent as described and it is not working as expected, see [Troubleshooting][15]
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /agent/basic_agent_usage#agent-overhead
-[2]: /database_monitoring/data_collected/#sensitive-information
-[3]: https://www.postgresql.org/docs/current/config-setting.html
-[4]: https://www.postgresql.org/docs/current/pgstatstatements.html
-[5]: /integrations/faq/postgres-custom-metric-collection-explained/
-[6]: https://www.postgresql.org/docs/current/app-psql.html
-[7]: https://app.datadoghq.com/account/settings#agent
-[8]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example
-[9]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[10]: https://www.postgresql.org/docs/11/runtime-config-logging.html
-[11]: https://www.postgresql.org/message-id/20100210180532.GA20138@depesz.com
-[12]: /agent/guide/agent-commands/#agent-status-and-information
-[13]: https://app.datadoghq.com/databases
-[14]: /database_monitoring/troubleshooting/?tab=postgres
+[1]: https://www.postgresql.org/docs/12/contrib.html
+[2]: /agent/basic_agent_usage#agent-overhead
+[3]: /database_monitoring/data_collected/#sensitive-information
+[4]: https://www.postgresql.org/docs/current/config-setting.html
+[5]: https://www.postgresql.org/docs/current/pgstatstatements.html
+[6]: /integrations/faq/postgres-custom-metric-collection-explained/
+[7]: https://www.postgresql.org/docs/current/app-psql.html
+[8]: https://app.datadoghq.com/account/settings#agent
+[9]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example
+[10]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[11]: https://www.postgresql.org/docs/11/runtime-config-logging.html
+[12]: https://www.postgresql.org/message-id/20100210180532.GA20138@depesz.com
+[13]: /agent/guide/agent-commands/#agent-status-and-information
+[14]: https://app.datadoghq.com/databases
+[15]: /database_monitoring/troubleshooting/?tab=postgres

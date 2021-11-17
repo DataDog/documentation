@@ -24,6 +24,7 @@
 "guid": "f3d748da-28e2-4212-985f-bf736a39ba98"
 "integration_id": "moogsoft"
 "integration_title": "Moogsoft"
+"integration_version": ""
 "is_public": true
 "kind": "integration"
 "maintainer": "support@moogsoft.com"

@@ -6,10 +6,10 @@ further_reading:
   - link: /real_user_monitoring/explorer/search/
     tag: ドキュメント
     text: RUM Explorer での検索について
-  - link: 'https://www.datadoghq.com/blog/core-web-vitals-monitoring-datadog-rum-synthetics/#what-are-the-core-web-vitals'
+  - link: https://www.datadoghq.com/blog/core-web-vitals-monitoring-datadog-rum-synthetics/#what-are-the-core-web-vitals
     tag: ブログ
     text: RUM でウェブに関する主な指標を監視
-  - link: 'https://www.datadoghq.com/blog/datadog-mobile-rum/'
+  - link: https://www.datadoghq.com/blog/datadog-mobile-rum/
     tag: ブログ
     text: Datadog Mobile RUM でモバイルユーザーエクスペリエンスを向上
 ---
@@ -18,7 +18,7 @@ further_reading:
 Datadog Real User Monitoring (RUM) は、RUM Explorer のコンテキストインサイトに関する問題の根本原因の特定に役立つ Watchdog Insights を提供します。Watchdog Insights は、ユーザーのサブセットに影響を与える外れ値と潜在的なパフォーマンスのボトルネックを推奨することで、専門知識や能力を補完します。
 
 <div class="alert alert-warning">
-Watchdog Insights for RUM はベータ版です。この機能へのアクセスは、Real User Monitoring を使用してお客様にロビジョニングされます。フィードバックがある場合は、<a href="https://docs.datadoghq.com/help/">Datadog サポート</a>にお問い合わせください。
+Watchdog Insights for RUM はベータ版です。この機能へのアクセスは、Real User Monitoring を使用してお客様にプロビジョニングされます。フィードバックがある場合は、<a href="https://docs.datadoghq.com/help/">Datadog サポート</a>にお問い合わせください。
 </div>
 
 この例では、Watchdog Insights は、`view.url_host:www.shopist.io` にデプロイされたアプリケーションインスタンスが、指定された時間範囲 (たとえば、過去 1 日) でほとんどのエラーを引き起こしたことを識別します。

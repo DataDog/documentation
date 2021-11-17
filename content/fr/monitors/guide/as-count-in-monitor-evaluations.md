@@ -29,11 +29,11 @@ Imaginez que vous souhaitez surveiller un taux d'erreur pendant 5 minutes à l'
 ```text
 | Timestamp           | Value |
 |:--------------------|:------|
-| 2018-03-13 11:00:30 | 5     |
-| 2018-03-13 11:01:30 | 5     |
-| 2018-03-13 11:02:40 | 5     |
-| 2018-03-13 11:03:30 | 5     |
-| 2018-03-13 11:04:40 | 5     |
+| 2018-03-13 11:00:30 | 10    |
+| 2018-03-13 11:01:30 | 10    |
+| 2018-03-13 11:02:40 | 10    |
+| 2018-03-13 11:03:30 | 10    |
+| 2018-03-13 11:04:40 | 10    |
 ```
 
 ### 2 méthodes de calcul
@@ -52,10 +52,10 @@ sum(last_5m): sum:requests.error{*}.as_count() / sum:requests.total{*}.as_count(
 
 Comparez les résultats de l'évaluation en fonction du chemin emprunté :
 
-| Chemin                     | Comportement                                       | Expression développée         | Résultat  |
-|:-------------------------|:-----------------------------------------------|:----------------------------|:--------|
-| **`classic_eval_path`**  | Fonction d'agrégation appliquée _après_ division  | **(1/5 + 2/5 + ... + 5/5)** | **3**   |
-| **`as_count_eval_path`** | Fonction d'agrégation appliquée _avant_ division | **(1+2+...+5)/(5+5+...+5)** | **0,6** |
+| Chemin                     | Comportement                                       | Expression développée                    | Résultat  |
+|:-------------------------|:-----------------------------------------------|:---------------------------------------|:--------|
+| **`classic_eval_path`**  | Fonction d'agrégation appliquée _après_ division  | **(1/10 + 2/10 + 3/10 + 4/10 + 5/10)** | **1.5** |
+| **`as_count_eval_path`** | Fonction d'agrégation appliquée _avant_ division | **(1+2+3+4+5) / (10+10+10+10+10)**     | **0.3** |
 
 _Notez que les évaluations sont toutes deux mathématiquement exactes. Choisissez une méthode en accord avec vos intentions._
 

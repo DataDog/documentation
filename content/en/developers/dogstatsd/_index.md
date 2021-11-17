@@ -43,7 +43,7 @@ DogStatsD accepts [custom metrics][5], [events][6], and [service checks][7] over
 
 Because it uses UDP, your application can send metrics to DogStatsD and resume its work without waiting for a response. If DogStatsD ever becomes unavailable, your application doesn't experience an interruption.
 
-{{< img src="developers/metrics/dogstatsd_metrics_submission/dogstatsd.png" alt="dogstatsd"   >}}
+{{< img src="metrics/dogstatsd_metrics_submission/dogstatsd.png" alt="dogstatsd"   >}}
 
 As it receives data, DogStatsD aggregates multiple data points for each unique metric into a single data point over a period of time called _the flush interval_ (ten seconds, by default).
 
@@ -174,7 +174,7 @@ To set [tag cardinality][5] for the metrics collected using origin detection, se
 [3]: https://kubernetes.io/docs/setup/independent/troubleshooting-kubeadm/#hostport-services-do-not-work
 [4]: /developers/dogstatsd/unix_socket/#using-origin-detection-for-container-tagging
 [5]: /getting_started/tagging/assigning_tags/#environment-variables
-[6]: /developers/metrics/custom_metrics/
+[6]: /metrics/custom_metrics/
 {{% /tab %}}
 {{% tab "Helm" %}}
 
@@ -211,7 +211,7 @@ To gather custom metrics with [DogStatsD][1] with helm:
 
      With this, any pod running your application is able to send DogStatsD metrics through port `8125` on `$DD_AGENT_HOST`.
 
-[1]: /developers/metrics/dogstatsd_metrics_submission/
+[1]: /metrics/dogstatsd_metrics_submission/
 [2]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
 [3]: https://github.com/containernetworking/cni
 [4]: https://kubernetes.io/docs/setup/independent/troubleshooting-kubeadm/#hostport-services-do-not-work
@@ -244,7 +244,7 @@ gem install dogstatsd-ruby
 {{< programming-lang lang="go" >}}
 
 ```shell
-go get github.com/DataDog/datadog-go/statsd
+go get github.com/DataDog/datadog-go/v5/statsd
 ```
 
 {{< /programming-lang >}}
@@ -257,7 +257,7 @@ The Java DataDog StatsD Client is distributed with maven central, and can be [do
 <dependency>
     <groupId>com.datadoghq</groupId>
     <artifactId>java-dogstatsd-client</artifactId>
-    <version>2.10.1</version>
+    <version>3.0.0</version>
 </dependency>
 ```
 
@@ -347,7 +347,7 @@ For more options, see [Datadog's GoDoc][1].
 
 
 
-[1]: https://godoc.org/github.com/DataDog/datadog-go/statsd
+[1]: https://godoc.org/github.com/DataDog/datadog-go/v5/statsd
 {{< /programming-lang >}}
 
 {{< programming-lang lang="java" >}}
@@ -360,11 +360,20 @@ public class DogStatsdClient {
 
     public static void main(String[] args) throws Exception {
 
-        StatsDClient Statsd = new NonBlockingStatsDClientBuilder()
+        StatsDClient statsd = new NonBlockingStatsDClientBuilder()
             .prefix("statsd")
             .hostname("localhost")
             .port(8125)
             .build();
+
+
+        // alternatively
+        StatsDClient statsdAlt = new NonBlockingStatsDClient(
+            new NonBlockingStatsDClientBuilder(
+                .prefix("statsd")
+                .hostname("localhost")
+                .port(8125)
+                .resolve()));
 
     }
 }
@@ -462,32 +471,49 @@ For the full list of optional parameters, see the [dogstatsd-ruby repo][1] on Gi
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
-| Parameter               | Type            | Description                                                                                                                                                                                                         |
-| ----------------------- | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `Namespace`             | String          | Namespace to prefix to all metrics, events, and service checks.                                                                                                                                                     |
-| `Tags`                  | List of strings | Global tags applied to every metric, event, and service check.                                                                                                                                                      |
-| `Buffered`              | Boolean         | Used to pack multiple DogStatsD messages in one payload. When set to `true`, messages are buffered until the total size of the payload exceeds `MaxMessagesPerPayload` or 100ms after the payload started building. |
-| `MaxMessagesPerPayload` | Integer         | The maximum number of metrics, events, and/or service checks a single payload can contain. This option only takes effect when the client is buffered.                                                               |
-| `WriteTimeoutUDS`       | Integer         | The timeout after which a UDS packet is dropped.                                                                                                                                                                    |
+The Go client has multiple options for configuring the behavior of your client.
 
-For more options, see [Datadog's GoDoc][1].
+| Parameter                     | Type            | Description                                                                  |
+| ----------------------------- | --------------- | ---------------------------------------------------------------------------- |
+| `WithNamespace()`             | String          | Configure a namespace to prefix to all metrics, events, and service checks.  |
+| `WithTags()`                  | List of strings | Global tags applied to every metric, event, and service check.               |
+
+For all available options, see [Datadog's GoDoc][1].
 
 
-[1]: https://godoc.org/github.com/DataDog/datadog-go/statsd#Option
+[1]: https://godoc.org/github.com/DataDog/datadog-go/v5/statsd#Option
 {{< /programming-lang >}}
 {{< programming-lang lang="java" >}}
 
-| Parameter      | Type            | Description                                                          |
-| -------------- | --------------- | -------------------------------------------------------------------- |
-| `prefix`       | String          | The prefix to apply to all metrics, events, and service checks.      |
-| `hostname`     | String          | The host name of the targeted StatsD server.                         |
-| `port`         | Integer         | The port of the targeted StatsD server.                              |
-| `constantTags` | List of strings | Global tags to be applied to every metric, event, and service check. |
+As of v2.10.0 the recommended way to instantiate the client is via the NonBlockingStatsDClientBuilder. You
+can use the following builder methods to define the client parameters.
 
-For more information, see the [NonBlockingStatsDClient Class][1] documentation.
+| Builder Method                               | Type           | Default   | Description                                                                         |
+| -------------------------------------------- | -------------- | --------- | ----------------------------------------------------------------------------------- |
+| `prefix(String val)`                         | String         | null      | The prefix to apply to all metrics, events, and service checks.                     |
+| `hostname(String val)`                       | String         | localhost | The host name of the targeted StatsD server.                                        |
+| `port(int val)`                              | Integer        | 8125      | The port of the targeted StatsD server.                                             |
+| `constantTags(String... val)`                | String varargs | null      | Global tags to be applied to every metric, event, and service check.                |
+| `blocking(boolean val)`                      | Boolean        | false     | The type of client to instantiate: blocking vs non-blocking.                        |
+| `socketBufferSize(int val)`                  | Integer        | -1        | The size of the underlying socket buffer.                                           |
+| `enableTelemetry(boolean val)`               | Boolean        | false     | Client telemetry reporting.                                                         |
+| `entityID(String val)`                       | String         | null      | Entitity ID for origin detection.                                                   |
+| `errorHandler(StatsDClientErrorHandler val)` | Integer        | null      | Error handler in case of an internal client error.                                  |
+| `maxPacketSizeBytes(int val)`                | Integer        | 8192/1432 | The maxumum packet size; 8192 over UDS, 1432 for UDP.                               |
+| `processorWorkers(int val)`                  | Integer        | 1         | The number of processor worker threads assembling buffers for submission.           |
+| `senderWorkers(int val)`                     | Integer        | 1         | The number of sender worker threads submitting buffers to the socket.               |
+| `poolSize(int val)`                          | Integer        | 512       | Network packet buffer pool size.                                                    |
+| `queueSize(int val)`                         | Integer        | 4096      | Maximum number of unprocessed messages in the queue.                                |
+| `timeout(int val)`                           | Integer        | 100       | the timeout in milliseconds for blocking operations. Applies to unix sockets only.  |
+
+For more information, see the [NonBlockingStatsDClient Class][1] and [NonBlockingStatsDClientBuilder Class][2] documentation.
+
+If you are on an older client release, please see the deprecated constructor documentation [here][3].
 
 
-[1]: https://jar-download.com/artifacts/com.datadoghq/java-dogstatsd-client/2.1.1/documentation
+[1]: https://jar-download.com/javaDoc/com.datadoghq/java-dogstatsd-client/2.13.0/com/timgroup/statsd/NonBlockingStatsDClient.html
+[2]: https://jar-download.com/javaDoc/com.datadoghq/java-dogstatsd-client/2.13.0/com/timgroup/statsd/NonBlockingStatsDClientBuilder.html
+[3]: https://javadoc.io/static/com.datadoghq/java-dogstatsd-client/2.9.0/com/timgroup/statsd/NonBlockingStatsDClient.html
 {{< /programming-lang >}}
 {{< programming-lang lang="PHP" >}}
 
@@ -516,7 +542,7 @@ For more information, see the [NonBlockingStatsDClient Class][1] documentation.
 DogStatsD and StatsD are broadly similar, however, DogStatsD contains advanced features which are specific to Datadog, including available data types, events, service checks, and tags:
 
 {{< whatsnext desc="">}}
-{{< nextlink href="/developers/metrics/dogstatsd_metrics_submission/" >}}Send metrics to Datadog with DogStatsD.{{< /nextlink >}}
+{{< nextlink href="/metrics/dogstatsd_metrics_submission/" >}}Send metrics to Datadog with DogStatsD.{{< /nextlink >}}
 {{< nextlink href="/events/guides/dogstatsd/" >}}Send events to Datadog with DogStatsD.{{< /nextlink >}}
 {{< nextlink href="/developers/service_checks/dogstatsd_service_checks_submission/" >}}Send service checks to Datadog with DogStatsD.{{< /nextlink >}}
 {{< /whatsnext >}}
@@ -524,11 +550,11 @@ DogStatsD and StatsD are broadly similar, however, DogStatsD contains advanced f
 If you're interested in learning more about the datagram format used by DogStatsD, or want to develop your own Datadog library, see the [datagram and shell usage][9] section, which also explains how to send metrics and events straight from the command line.
 
 [1]: https://github.com/etsy/statsd
-[2]: /developers/metrics/dogstatsd_metrics_submission/
+[2]: /metrics/dogstatsd_metrics_submission/
 [3]: https://hub.docker.com/r/datadog/dogstatsd
 [4]: https://gcr.io/datadoghq/dogstatsd
-[5]: /developers/metrics/custom_metrics/
+[5]: /metrics/custom_metrics/
 [6]: /events/guides/dogstatsd/
 [7]: /developers/service_checks/dogstatsd_service_checks_submission/
 [8]: /getting_started/tagging/unified_service_tagging
-[9]: /developers/metrics/
+[9]: /metrics/

@@ -16,13 +16,14 @@ categories:
 creates_events: true
 ddtype: crawler
 dependencies:
-  - 'https://github.com/DataDog/integrations-extras/blob/master/stackpulse/README.md'
+  - https://github.com/DataDog/integrations-extras/blob/master/stackpulse/README.md
 display_name: StackPulse
 draft: false
 git_integration_title: stackpulse
 guid: cbfbe4be-1720-4c9e-b565-cef70fcc5b2b
 integration_id: stackpulse
 integration_title: StackPulse
+integration_version: ''
 is_public: true
 kind: インテグレーション
 maintainer: support@stackpulse.io

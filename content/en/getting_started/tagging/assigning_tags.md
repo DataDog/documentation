@@ -55,7 +55,7 @@ If Autodiscovery is not in use, the Agent automatically assigns the [host tag](#
 
 The Agent configuration file (`datadog.yaml`) is used to set host tags which apply to all metrics, traces, and logs forwarded by the Datadog Agent.
 
-Tags for the [integrations][1] installed with the Agent are configured with YAML files located in the **conf.d** directory of the Agent install. To locate the configuration files, refer to [Agent configuration files][2].
+Tags for the [integrations][1] installed with the Agent are configured with YAML files located in the **conf.d** directory of the Agent install. To locate the configuration files, see [Agent configuration files][2].
 
 #### YAML format
 
@@ -97,7 +97,7 @@ hostname: mymachine.mydomain
 [1]: /getting_started/integrations/
 [2]: /agent/guide/agent-configuration-files/
 [3]: /getting_started/tagging/#defining-tags
-[4]: /developers/metrics/dogstatsd_metrics_submission/#host-tag-key
+[4]: /metrics/dogstatsd_metrics_submission/#host-tag-key
 [5]: /dashboards/querying/#arithmetic-between-two-metrics
 {{% /tab %}}
 {{% tab "Agent v5" %}}
@@ -106,7 +106,7 @@ hostname: mymachine.mydomain
 
 The Agent configuration file (`datadog.conf`) is used to set host tags which apply to all metrics, traces, and logs forwarded by the Datadog Agent.
 
-Tags for the [integrations][1] installed with the Agent are configured with YAML files located in the **conf.d** directory of the Agent install. To locate the configuration files, refer to [Agent configuration files][2].
+Tags for the [integrations][1] installed with the Agent are configured with YAML files located in the **conf.d** directory of the Agent install. To locate the configuration files, see [Agent configuration files][2].
 
 #### YAML format
 
@@ -139,7 +139,7 @@ hostname: mymachine.mydomain
 [1]: /getting_started/integrations/
 [2]: /agent/guide/agent-configuration-files/
 [3]: /getting_started/tagging/#defining-tags
-[4]: /developers/metrics/dogstatsd_metrics_submission/#host-tag-key
+[4]: /metrics/dogstatsd_metrics_submission/#host-tag-key
 [5]: /dashboards/querying/#arithmetic-between-two-metrics
 {{% /tab %}}
 {{< /tabs >}}
@@ -164,13 +164,13 @@ After installing the containerized Datadog Agent, you can set your host tags usi
 
 Datadog automatically collects common tags from [Docker, Kubernetes, ECS, Swarm, Mesos, Nomad, and Rancher][6]. To extract even more tags, use the following options:
 
-| Environment Variable               | Description                                    |
-|------------------------------------|------------------------------------------------|
-| `DD_DOCKER_LABELS_AS_TAGS`         | Extract docker container labels                |
-| `DD_DOCKER_ENV_AS_TAGS`            | Extract docker container environment variables |
-| `DD_KUBERNETES_POD_LABELS_AS_TAGS` | Extract pod labels                             |
-| `DD_CHECKS_TAG_CARDINALITY`        | Add tags to check metrics                      |
-| `DD_DOGSTATSD_TAG_CARDINALITY`     | Add tags to custom metrics                     |
+| Environment Variable               | Description                                          |
+|------------------------------------|------------------------------------------------------|
+| `DD_DOCKER_LABELS_AS_TAGS`         | Extract docker container labels                      |
+| `DD_DOCKER_ENV_AS_TAGS`            | Extract docker container environment variables       |
+| `DD_KUBERNETES_POD_LABELS_AS_TAGS` | Extract pod labels                                   |
+| `DD_CHECKS_TAG_CARDINALITY`        | Add tags to check metrics (low, orchestrator, high)  |
+| `DD_DOGSTATSD_TAG_CARDINALITY`     | Add tags to custom metrics (low, orchestrator, high) |
 
 **Examples:**
 
@@ -238,15 +238,15 @@ services:
 
 Either define the variables in your custom `datadog.yaml`, or set them as JSON maps in these environment variables. The map key is the source (`label/envvar`) name, and the map value is the Datadog tag name.
 
-There are two environment variables that set tag cardinality: `DD_CHECKS_TAG_CARDINALITY` and `DD_DOGSTATSD_TAG_CARDINALITY`—as DogStatsD is priced differently, its tag cardinality setting is separated in order to provide the opportunity for finer configuration. Otherwise, these variables function the same way: they can have values `low`, `orchestrator`, or `high`. They both default to `low`, which pulls in host-level tags.
+##### Tags cardinality
 
-Setting the variable to `orchestrator` adds the following tags: `pod_name` (Kubernetes), `oshift_deployment` (OpenShift), `task_arn` (ECS and Fargate), `mesos_task` (Mesos).
+There are two environment variables that set tag cardinality: `DD_CHECKS_TAG_CARDINALITY` and `DD_DOGSTATSD_TAG_CARDINALITY`. Because DogStatsD is priced differently, the DogStatsD tag cardinality setting is separated to provide the opportunity for finer configuration. Otherwise, these variables function the same way: they can have values `low`, `orchestrator`, or `high`. They both default to `low`, which pulls in host-level tags.
 
-Setting the variable to `high` additionally adds the following tags: `container_name` (Docker), `container_id` (Docker), `display_container_name` (Kubelet).
+Depending on the cardinality, there is a different set of out-of-the box tags for [Kubernetes and OpenShift][7], and for [Docker, Rancher, and Mesos][8]. For ECS and Fargate, setting the variable to `orchestrator` adds the `task_arn` tag.
 
 #### Traces
 
-The Datadog tracer can be configured with environment variables, system properties, or through configuration in code. The [Datadog tracing setup][7] documentation has information on tagging options and configuration for each tracer. You can also follow the [unified service tagging][2] documentation to configure your tracer for unified service tagging.
+The Datadog tracer can be configured with environment variables, system properties, or through configuration in code. The [Datadog tracing setup][9] documentation has information on tagging options and configuration for each tracer. You can also follow the [unified service tagging][2] documentation to configure your tracer for unified service tagging.
 
 Regardless of the tracer used, span metadata must respect a typed tree structure. Each node of the tree is split by a `.` and is of a single type.
 
@@ -257,24 +257,24 @@ For instance, a node can't be both an object (with sub-nodes) and a string:
   "key.subkey": "value_2"
 }
 ```
-The span metadata above is invalid since the value of `key` cannot refer to a string (`"value"`) and also a subtree (`{"subkey": "value_2"}`).
+The span metadata above is invalid since the value of `key` cannot reference a string (`"value"`) and also a subtree (`{"subkey": "value_2"}`).
 
 ### UI
 
 {{< tabs >}}
 {{% tab "Host Map" %}}
 
-Assign host tags in the UI via the [Host Map page][1]. Click on any hexagon (host) to show the host overlay on the bottom of the page. Then, under the *User* section, click the **Edit Tags** button. Enter the tags as a comma separated list, then click **Save Tags**. **Note**: Changes to metric tags made via the UI may take up to 30 minutes to apply.
+Assign host tags in the UI using the [Host Map page][1]. Click on any hexagon (host) to show the host overlay on the bottom of the page. Then, under the *User* section, click the **Edit Tags** button. Enter the tags as a comma separated list, then click **Save Tags**. **Note**: Changes to metric tags made with the UI may take up to 30 minutes to apply.
 
-{{< img src="tagging/assigning_tags/hostmapuitags.png" alt="Host Map Tags"  style="width:80%;">}}
+{{< img src="tagging/assigning_tags/hostmapuitags.png" alt="Host Map Tags" style="width:80%;">}}
 
 [1]: /infrastructure/hostmap/
 {{% /tab %}}
 {{% tab "Infrastructure List" %}}
 
-Assign host tags in the UI via the [Infrastructure List page][1]. Click on any host to show the host overlay on the right of the page. Then, under the *User* section, click the **Edit Tags** button. Enter the tags as a comma separated list, then click **Save Tags**. **Note**: Changes to metric tags made via the UI may take up to 30 minutes to apply.
+Assign host tags in the UI using the [Infrastructure List page][1]. Click on any host to show the host overlay on the right of the page. Then, under the *User* section, click the **Edit Tags** button. Enter the tags as a comma separated list, then click **Save Tags**. **Note**: Changes to metric tags made with the UI may take up to 30 minutes to apply.
 
-{{< img src="tagging/assigning_tags/hostuitags.png" alt="Infrastructure List Tags"  style="width:80%;">}}
+{{< img src="tagging/assigning_tags/hostuitags.png" alt="Infrastructure List Tags" style="width:80%;">}}
 
 [1]: /infrastructure/
 {{% /tab %}}
@@ -282,30 +282,30 @@ Assign host tags in the UI via the [Infrastructure List page][1]. Click on any h
 
 From the [Manage Monitors][1] page, select the checkbox next to each monitor to add tags (select one or multiple monitors). Click the **Edit Tags** button. Enter a tag or select one used previously. Then click **Add Tag `tag:name`** or **Apply Changes**. If tags were added previously, multiple tags can be assigned at once using the tag checkboxes.
 
-{{< img src="tagging/assigning_tags/monitortags.png" alt="Manage Monitors Tags"  style="width:80%;">}}
+{{< img src="tagging/assigning_tags/monitortags.png" alt="Manage Monitors Tags" style="width:80%;">}}
 
 When creating a monitor, assign monitor tags under step 4 *Say what's happening*:
 
-{{< img src="tagging/assigning_tags/monitorindivdualtags.png" alt="Create Monitor Tags"  style="width:80%;">}}
+{{< img src="tagging/assigning_tags/monitorindivdualtags.png" alt="Create Monitor Tags" style="width:80%;">}}
 
-[1]: /monitors/manage_monitor/
+[1]: /monitors/manage/
 {{% /tab %}}
 {{% tab "Distribution Metrics" %}}
 
-Create percentile aggregations within [Distribution Metrics][1] by applying a whitelist of up to ten tags to a metric. This creates a timeseries for every potentially queryable combination of tag values. For more information on counting custom metrics and timeseries emitted from distribution metrics, see [Custom Metrics][2].
+Create percentile aggregations within [Distribution Metrics][1] by applying an allow list of up to ten tags to a metric. This creates a timeseries for every potentially queryable combination of tag values. For more information on counting custom metrics and timeseries emitted from distribution metrics, see [Custom Metrics][2].
 
-**Apply up to ten tags. Exclusionary tags will not be accepted**:
+**Apply up to ten tags. Exclusionary tags are not accepted**:
 
-{{< img src="tagging/assigning_tags/global_metrics_selection.png" alt="Create Monitor Tags"  style="width:80%;">}}
+{{< img src="tagging/assigning_tags/global_metrics_selection.png" alt="Create Monitor Tags" style="width:80%;">}}
 
 [1]: /metrics/distributions/
-[2]: /developers/metrics/custom_metrics/
+[2]: /metrics/custom_metrics/
 {{% /tab %}}
 {{% tab "Integrations" %}}
 
 The [AWS][1] integration tile allows you to assign additional tags to all metrics at the account level. Use a comma separated list of tags in the form `<KEY>:<VALUE>`.
 
-{{< img src="tagging/assigning_tags/integrationtags.png" alt="AWS Tags"  style="width:80%;">}}
+{{< img src="tagging/assigning_tags/integrationtags.png" alt="AWS Tags" style="width:80%;">}}
 
 [1]: /integrations/amazon_web_services/
 {{% /tab %}}
@@ -313,7 +313,7 @@ The [AWS][1] integration tile allows you to assign additional tags to all metric
 
 When creating an SLO, assign tags under step 3 *Add name and tags*:
 
-{{< img src="tagging/assigning_tags/slo_individual_tags.png" alt="Create SLO Tags"  style="width:80%;">}}
+{{< img src="tagging/assigning_tags/slo_individual_tags.png" alt="Create SLO Tags" style="width:80%;">}}
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -379,7 +379,7 @@ sum:page.views{domain:example.com} by {host}
 
 ### DogStatsD
 
-Add tags to any metric, event, or service check you send to [DogStatsD][8]. For example, compare the performance of two algorithms by tagging a timer metric with the algorithm version:
+Add tags to any metric, event, or service check you send to [DogStatsD][9]. For example, compare the performance of two algorithms by tagging a timer metric with the algorithm version:
 
 ```python
 
@@ -392,9 +392,9 @@ def algorithm_two():
     # Do fancy things (maybe faster?) here ...
 ```
 
-**Note**: Tagging is a [Datadog-specific extension][9] to StatsD.
+**Note**: Tagging is a [Datadog-specific extension][10] to StatsD.
 
-Special consideration is necessary when assigning the `host` tag to DogStatsD metrics. For more information on the host tag key, see the [DogStatsD section][10].
+Special consideration is necessary when assigning the `host` tag to DogStatsD metrics. For more information on the host tag key, see the [DogStatsD section][11].
 
 ## Further Reading
 
@@ -406,7 +406,9 @@ Special consideration is necessary when assigning the `host` tag to DogStatsD me
 [4]: /getting_started/agent/#setup
 [5]: /integrations/#cat-web
 [6]: /agent/docker/?tab=standard#tagging
-[7]: /tracing/setup/
-[8]: /developers/dogstatsd/
-[9]: /developers/community/libraries/
-[10]: /developers/metrics/dogstatsd_metrics_submission/#host-tag-key
+[7]: /agent/kubernetes/tag/?tab=containerizedagent#out-of-the-box-tags
+[8]: /agent/docker/tag/?tab=containerizedagent#out-of-the-box-tagging
+[9]: /tracing/setup/
+[10]: /developers/dogstatsd/
+[11]: /developers/community/libraries/
+[12]: /metrics/dogstatsd_metrics_submission/#host-tag-key

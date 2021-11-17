@@ -16,7 +16,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/spark/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/spark/README.md
 display_name: Spark
 draft: false
 git_integration_title: spark

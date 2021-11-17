@@ -225,4 +225,4 @@ Where:
 [7]: /agent/guide/private-link/
 [8]: /agent/proxy/
 [9]: /serverless/forwarder/
-[10]: /developers/metrics/
+[10]: /metrics/

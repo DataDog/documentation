@@ -22,6 +22,7 @@
 "guid": "87b8f343-3e3b-473f-91d5-cbc79b8ad962"
 "integration_id": "rapdev-oracle-timesten"
 "integration_title": "Oracle TimesTen"
+"integration_version": ""
 "is_public": true
 "kind": "integration"
 "maintainer": "integrations@rapdev.io"

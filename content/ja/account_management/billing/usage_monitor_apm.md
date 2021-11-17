@@ -45,6 +45,6 @@ APM および分散型トレーシングの請求の仕組みについては、[
 [2]: /ja/account_management/billing/apm_distributed_tracing/
 [3]: https://app.datadoghq.com/account/usage
 [4]: https://app.datadoghq.com/monitors#create/metric
-[5]: /ja/monitors/monitor_types/apm/?tab=traceanalytics#monitor-creation
+[5]: /ja/monitors/create/types/apm/?tab=traceanalytics#monitor-creation
 [6]: https://app.datadoghq.com/apm/analytics
 [7]: /ja/tracing/trace_retention_and_ingestion/

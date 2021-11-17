@@ -686,6 +686,6 @@ dogstatsdConfig.Advanced.TelemetryFlushInterval = null;
 [1]: /ja/agent/
 [2]: /ja/developers/dogstatsd/unix_socket/
 [3]: /ja/developers/dogstatsd/#code
-[4]: /ja/developers/metrics/dogstatsd_metrics_submission/#sample-rates
+[4]: /ja/metrics/dogstatsd_metrics_submission/#sample-rates
 [5]: /ja/developers/dogstatsd/high_throughput/#note-on-sysctl-in-kubernetes
 [6]: https://kubernetes.io/docs/tasks/administer-cluster/sysctl-cluster/

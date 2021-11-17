@@ -66,7 +66,7 @@ If you do not enter a title, one is automatically generated based on your select
 
 Click **Export** to save your work to a Dashboard or Notebook. You can always come back to the editor to change the graph. If want to share a link directly to your graph without a Dashboard or Notebook, click **Copy to Clipboard**.
 
-[1]: dashboards/querying/#choose-the-metric-to-graph
+[1]: /dashboards/querying/#choose-the-metric-to-graph
 [2]: /dashboards/querying/#filter
 [3]: /dashboards/querying/#aggregate-and-rollup
 [4]: /dashboards/querying/#advanced-graphing

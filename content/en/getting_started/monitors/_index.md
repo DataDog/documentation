@@ -7,10 +7,10 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/monitoring-101-alerting/"
   tag: "Blog"
   text: "Monitoring 101: Alerting on what matters"
-- link: "/monitors/monitor_types/metric/"
+- link: "/monitors/create/types/metric/"
   tag: "Documentation"
   text: "Metric Monitors"
-- link: "/monitors/notifications/"
+- link: "/monitors/notify/"
   tag: "Documentation"
   text: "Monitor Notifications"
 ---
@@ -92,12 +92,12 @@ Use this section to restrict access to you, everyone in your org with your role,
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /monitors/monitor_types/metric/
+[1]: /monitors/create/types/metric/
 [2]: https://www.datadoghq.com
 [3]: https://app.datadoghq.com/account/settings#agent
 [4]: https://app.datadoghq.com/infrastructure
 [5]: https://app.datadoghq.com/monitors#create/metric
 [6]: /integrations/disk/
-[7]: /monitors/monitor_types/metric/?tab=threshold#set-alert-conditions
-[8]: /monitors/notifications/#conditional-variables
+[7]: /monitors/create/types/metric/?tab=threshold#set-alert-conditions
+[8]: /monitors/notify/#conditional-variables
 [9]: /account_management/rbac/

@@ -5,7 +5,7 @@ description: Parser vos logs à l'aide du processeur Grok
 aliases:
   - /fr/logs/processing/pipelines/
 further_reading:
-  - link: /logs/processing/processors/
+  - link: /logs/log_configuration/processors
     tag: Documentation
     text: Consulter la liste complète des processeurs disponibles
   - link: /logs/logging_without_limits/
@@ -14,101 +14,47 @@ further_reading:
   - link: /logs/explorer/
     tag: Documentation
     text: Apprendre à explorer vos logs
-  - link: 'https://learn.datadoghq.com/course/view.php?id=10'
+  - link: https://learn.datadoghq.com/course/view.php?id=10
     tag: Centre d'apprentissage
     text: Aller plus loin avec les logs grâce au parsing
 ---
-{{< img src="logs/processing/pipelines/pipelines_overview.png" alt="log d'origine" >}}
-
 ## Présentation
 
-Datadog analyse automatiquement les logs au format JSON. Lorsque les logs ne sont pas au format JSON, vous pouvez optimiser leur utilisation en les faisant passer par un pipeline de traitement.
+Datadog [parse][1] automatiquement les logs JSON. Lorsque les logs ne sont pas au format JSON, vous pouvez enrichir leurs données brutes en les faisant passer par un pipeline de traitement. Les pipelines traitent la grande majorité des formats de logs et les convertissent en un format commun dans Datadog. La mise en œuvre de pipelines de logs et d'une stratégie de traitement vous permet également de bénéficier d'une [convention de nommage des attributs][2] à l'échelle de votre organisation.
 
-Avec les pipelines, les logs sont analysés et enrichis grâce à un ensemble de [processeurs][1]. Cela vous permet d'extraire des informations ou des attributs utiles à partir de texte semi-structuré pour les réutiliser en tant que [facettes][2].
+Avec les pipelines, les logs sont assemblés de façon séquentielle via des [processeurs][3] afin d'être parsés et enrichis. Cette étape permet d'extraire des informations ou des attributs utiles à partir de texte semi-structuré, afin de les réutiliser sous la forme de [facettes][4]. Lorsqu'un log passe par les pipelines, tous les filtres de pipeline lui sont appliqués. S'il répond aux critères d'un filtre, tous les processeurs associés lui sont appliqués de façon séquentielle. Il passe ensuite au prochain pipeline.
 
-Chaque log qui passe par les pipelines est testé avec chaque filtre de pipeline. Si l'un des logs correspond à un filtre, tous les processeurs du pipeline sont appliqués de façon séquentielle avant de passer au pipeline suivant.
+Les pipelines et les processeurs peuvent être appliqués à tout type de log. Vous n'avez pas besoin de modifier la configuration de votre journalisation ni de déployer des modifications dans les règles de traitement côté serveur. Vous pouvez gérer l'ensemble des paramètres depuis la [page de configuration des pipelines][5].
 
-Ainsi, un pipeline de traitement peut transformer ce log :
+**Remarque** : pour une utilisation optimale de la solution Log Management, Datadog recommande d'utiliser au maximum 20 processeurs par pipeline et 10 règles de parsing dans un processeur Grok. 
+Datadog se réserve le droit de désactiver les règles de parsing, les processeurs ou les pipelines peu optimisés qui pourraient avoir une incidence sur les performances du service de Datadog.
 
-{{< img src="logs/processing/pipelines/log_pre_processing.png" alt="log d'origine" style="width:50%;">}}
+## Prétraitement
 
-En ce log :
+Le prétraitement des logs JSON intervient avant le traitement par le pipeline. Le prétraitement consiste à effectuer une série d'opérations basées sur des attributs réservés, tels que `timestamp`, `status`, `host`, `service` et `message`. Si les attributs figurant dans vos logs JSON présentent des noms différents, utilisez le prétraitement pour mapper les noms d'attribut de vos logs à ceux figurant dans la liste d'attributs réservés.
 
-{{< img src="logs/processing/pipelines/log_post_processing.png" alt="Log après traitement" style="width:50%;">}}
+Le prétraitement des logs JSON inclut une configuration par défaut qui prend en charge les redirecteurs de log standard. Pour modifier cette configuration afin de l'adapter à une stratégie de transmission des logs personnalisée ou spécifique, procédez comme suit :
 
-Avec un seul pipeline :
+1. Accédez à la section [Pipelines][6] de l'application Datadog, puis sélectionnez [Preprocessing for JSON logs][7].
 
-{{< img src="logs/processing/pipelines/pipeline_example.png" alt="Exemple de pipelines" style="width:75%;">}}
+    **Remarque** : le prétraitement des logs JSON est le seul moyen de définir l'un de vos attributs de log en tant que `host` pour vos logs.
 
-Les pipelines traitent tous les formats de logs et les convertissent en un format commun dans Datadog.
+2. Modifiez le mapping par défaut en fonction de l'attribut réservé :
 
-Par exemple, un premier pipeline peut être défini pour extraire le préfixe du log d'application. Chaque équipe est ensuite libre de définir son propre pipeline pour traiter le reste du message du log.
-
-## Filtres de pipeline
-
-Les filtres vous permettent de limiter les types de logs auxquels un pipeline s'applique.
-
-La syntaxe d'un filtre est identique à celle de la [barre de recherche][3].
-
-**Remarque** : les filtres de pipeline sont appliqués avant tout traitement par les processeurs du pipeline. Par conséquent, vous ne pouvez pas appliquer de filtre à partir d'un attribut qui est extrait dans le pipeline.
-
-Le flux de logs affiche les logs auxquels votre pipeline s'applique :
-
-{{< img src="logs/processing/pipelines/pipeline_filters.png" alt="Filtres de pipeline" style="width:80%;">}}
-
-## Pipelines imbriqués
-
-Les pipelines imbriqués sont des pipelines au sein d'un autre pipeline. Utilisez les pipelines imbriqués pour diviser le traitement en deux étapes. Par exemple, vous pouvez commencer par appliquer un filtre de niveau supérieur tel que l'équipe, puis un deuxième niveau de filtrage basé sur l'intégration, le service ou tout autre tag ou attribut.
-
-Un pipeline peut contenir des pipelines imbriqués et des processeurs, tandis qu'un pipeline imbriqué peut seulement contenir des processeurs.
-
-{{< img src="logs/processing/pipelines/nested_pipeline.png" alt="Pipelines imbriqués" style="width:80%;">}}
-
-Il est possible de faire glisser un pipeline vers un autre pipeline pour le transformer en pipeline imbriqué :
-
-{{< img src="logs/processing/pipelines/nested_pipeline_drag_drop.mp4" alt="Faire glisser et déposer des pipelines imbriqués" video="true" width="80%" >}}
-
-## Pipelines spéciaux
-
-### Prétraitement de logs JSON
-
-Le prétraitement des logs JSON intervient avant le traitement par le pipeline. Le pré-traitement consiste à effectuer une série d'opérations basées sur des [attributs réservés][4], tels que `timestamp`, `status`, `host`, `service` et `message`. Si les attributs figurant dans vos logs JSON présentent des noms différents, utilisez le pré-traitement pour mapper les noms d'attribut de vos logs à ceux figurant dans la liste d'attributs réservés.
-
-Le prétraitement vous permet d'effectuer les opérations suivantes :
-
-* Déclencher de nouvelles [intégrations de log](#pipelines-des-integrations) selon la [source](#attribut-source) des logs entrants.
-* Appliquer des tags [host](#attribut-host) aux logs entrants.
-* Appliquer un processeur de remappage d'attribut réservé (tel que le [remappeur de dates](#attribut-date), le [remappeur de statuts](#attribut-status), le [remappeur de services](#attribut-service), le [remappeur de messages](#attribut-message) et le [remappeur d'ID de trace](#attribut-trace-id)) pour les attributs JSON associés de tous les logs JSON entrants.
-
-Par exemple, imaginons un service qui génère le log suivant :
-
-```json
-{
-  "myhost": "host123",
-  "myapp": "test-web-2",
-  "logger_severity": "Error",
-  "log": "cannot establish connection with /api/v1/test",
-  "status_code": 500
-}
-```
-
-Le prétraitement des logs JSON inclut une configuration par défaut qui prend en charge les redirecteurs de log standard. Vous pouvez modifier cette configuration si vous utilisez une stratégie de transmission des logs personnalisée ou spécifique.
-
-Ouvrez le pipeline **Pre processing for JSON logs** et modifiez les mappages par défaut :
-
-{{< img src="logs/processing/pipelines/reserved_attribute_remapper.png" alt="Remappage de l'attribut réservé" style="width:70%;">}}
-
-On obtient alors le log suivant :
-
-{{< img src="logs/processing/pipelines/log_post_remapping.png" alt="log après remappage" style="width:70%;">}}
-
-**Remarque** : le prétraitement des logs JSON est le seul moyen de définir l'un de vos attributs de log en tant que `host` pour vos logs.
+{{< tabs >}}
+{{% tab "Source" %}}
 
 #### Attribut source
 
-Si un fichier de log au format JSON comprend l'attribut `ddsource`, Datadog interprète sa valeur en tant que source du log. Pour utiliser les mêmes noms de source que ceux de Datadog, consultez la [bibliothèque des pipelines d'intégration][5].
+Si un fichier de log au format JSON comprend l'attribut `ddsource`, Datadog interprète sa valeur en tant que source du log. Pour utiliser les mêmes noms de source que ceux de Datadog, consultez la [bibliothèque des pipelines d'intégration][1].
 
-**Remarque** : les logs provenant d'un environnement conteneurisé nécessitent l'utilisation d'une [variable d'environnement][6] pour remplacer les valeurs source et service par défaut.
+**Remarque** : les logs provenant d'un environnement conteneurisé nécessitent l'utilisation d'une [variable d'environnement][2] pour remplacer les valeurs source et service par défaut.
+
+
+[1]: https://app.datadoghq.com/logs/pipelines/pipeline/library
+[2]: /fr/agent/docker/log/?tab=containerinstallation#examples
+{{% /tab %}}
+{{% tab "Host" %}}
 
 #### Attribut host
 
@@ -118,9 +64,12 @@ Utilisez l'Agent Datadog ou le format RFC 5424 pour définir automatiquement la
 * `hostname`
 * `syslog.hostname`
 
+{{% /tab %}}
+{{% tab "Date" %}}
+
 #### Attribut date
 
-Par défaut, Datadog génère un timestamp et l'ajoute à un attribut de date lors de la réception des logs. Cependant, si un fichier de log au format JSON comprend l'un des attributs suivants, Datadog interprète sa valeur en que date officielle du log :
+Par défaut, Datadog génère un timestamp et l'ajoute à un attribut de date lors de la réception des logs. Cependant, si un fichier de log au format JSON comprend l'un des attributs suivants, Datadog interprète sa valeur en tant que date officielle du log :
 
 * `@timestamp`
 * `timestamp`
@@ -131,7 +80,7 @@ Par défaut, Datadog génère un timestamp et l'ajoute à un attribut de date lo
 * `published_date`
 * `syslog.timestamp`
 
-Vous pouvez préciser des attributs alternatifs à utiliser comme source pour la date d'un log en définissant un [processeur de remappage de dates de logs][7].
+Vous pouvez préciser des attributs alternatifs à utiliser comme source pour la date d'un log en définissant un [processeur de remappage de dates de log][1].
 
 **Remarque** : Datadog rejette un log si sa date officielle est antérieure de plus de 18 heures.
 
@@ -139,11 +88,23 @@ Vous pouvez préciser des attributs alternatifs à utiliser comme source pour la
 Les formats de date reconnus sont : <a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO 8601</a>, <a href="https://en.wikipedia.org/wiki/Unix_time">UNIX (le format EPOCH en millisecondes)</a> et <a href="https://www.ietf.org/rfc/rfc3164.txt">RFC 3164</a>.
 </div>
 
+
+[1]: /fr/logs/log_configuration/processors/#log-date-remapper
+{{% /tab %}}
+{{% tab "Message" %}}
+
 #### Attribut message
 
-Par défaut, Datadog ingère la valeur du message comme corps de l'entrée du log. Cette valeur est alors mise en évidence et affichée dans le [flux de logs][8], où elle est indexée pour d'éventuelles [recherches plein texte][9].
+Par défaut, Datadog ingère la valeur du message comme corps de l'entrée du log. Cette valeur est alors mise en évidence et affichée dans le [Log Explorer][1], où elle est indexée pour d'éventuelles [recherches en texte intégral][2].
 
-Vous pouvez préciser des attributs alternatifs à utiliser comme source pour le message d'un log en définissant un [processeur de remappage de messages de logs][10].
+Vous pouvez préciser des attributs alternatifs à utiliser comme source pour le message d'un log en définissant un [processeur de remappage de messages de log][3].
+
+
+[1]: /fr/logs/explorer/
+[2]: /fr/logs/explorer/#filters-logs
+[3]: /fr/logs/log_configuration/processors/#log-message-remapper
+{{% /tab %}}
+{{% tab "Status" %}}
 
 #### Attribut status
 
@@ -154,7 +115,11 @@ Chaque entrée de log peut spécifier un niveau de statut. Celui-ci peut est dis
 * `level`
 * `syslog.severity`
 
-Pour remapper un statut existant dans l'attribut `status`, utilisez le [remappeur de statuts de log][11].
+Pour remapper un statut existant dans l'attribut `status`, utilisez le [remappeur de statuts de log][1].
+
+[1]: /fr/logs/log_configuration/processors/#log-status-remapper
+{{% /tab %}}
+{{% tab "Service" %}}
 
 #### Attribut service
 
@@ -163,16 +128,41 @@ Utilisez l'Agent Datadog ou le format RFC 5424 pour définir automatiquement la
 * `service`
 * `syslog.appname`
 
-Vous pouvez préciser des attributs alternatifs à utiliser comme source pour le service d'un log en définissant un [processeur de remappage de services de log][12].
+Vous pouvez préciser des attributs alternatifs à utiliser comme source pour le service d'un log en définissant un [processeur de remappage de services de log][1].
+
+
+[1]: /fr/logs/log_configuration/processors/#service-remapper
+{{% /tab %}}
+{{% tab "Trace ID" %}}
 
 #### Attribut Trace ID
 
-Par défaut, [les traceurs de Datadog peuvent automatiquement injecter les ID de trace et de span dans les logs][13]. Cependant, si un log au format JSON comprend les attributs suivants, Datadog interprète sa valeur en tant que `trace_id` du log :
+Par défaut, [les traceurs de Datadog peuvent automatiquement injecter les ID de trace et de span dans les logs][1]. Cependant, si un log JSON comprend les attributs suivants, Datadog interprète sa valeur en tant que `trace_id` du log :
 
 * `dd.trace_id`
 * `contextMap.dd.trace_id`
 
-Vous pouvez préciser des attributs alternatifs à utiliser comme source pour l'ID de trace d'un log en définissant un [processeur de remappage d'ID de trace de logs][14].
+Vous pouvez préciser des attributs alternatifs à utiliser comme source pour l'ID de trace d'un log en définissant un [processeur de remappage d'ID de trace][2].
+
+
+[1]: /fr/tracing/connect_logs_and_traces/
+[2]: /fr/logs/log_configuration/#trace-remapper
+{{% /tab %}}
+{{< /tabs >}}
+
+## Créer un pipeline
+
+1. Accédez à la section [Pipelines][6] de l'application Datadog.
+2. Sélectionnez **New Pipeline**.
+3. Sélectionnez un log dans l'aperçu Live Tail pour appliquer un filtre, ou utilisez votre propre filtre. Choisissez un filtre dans le menu déroulant ou créez votre propre requête de filtre avec l'icône **</>**. Les filtres vous permettent de limiter les types de logs qui passent par un pipeline.
+
+    **Remarque** : les filtres de pipeline sont appliqués avant tout traitement par les processeurs du pipeline. Par conséquent, vous ne pouvez pas appliquer un filtre basé sur un attribut qui est extrait dans le pipeline.
+
+4. Attribuez un nom à votre pipeline, puis cliquez sur **Save**.
+
+Voici un exemple de log converti par un pipeline :
+
+{{< img src="logs/processing/pipelines/log_post_processing.png" alt="Un exemple de log converti par un pipeline" style="width:50%;">}}
 
 ### Pipelines d'intégration
 
@@ -180,9 +170,9 @@ Vous pouvez préciser des attributs alternatifs à utiliser comme source pour l'
 Consultez la <a href="/integrations/#cat-log-collection">liste des intégrations prises en charge disponibles</a>.
 </div>
 
-Les pipelines de traitement d'intégration sont disponibles pour certaines sources lorsqu'elles sont configurées pour recueillir les logs. Un pipeline d'intégration est automatiquement installé pour les logs d'intégration, afin de prendre en charge leur parsing et d'ajouter la facette correspondante dans Log Explorer.
+Les pipelines de traitement d'intégration sont disponibles pour certaines sources lorsqu'elles sont configurées pour recueillir les logs. Ces pipelines disposent d'un accès en **lecture seule** et effectuent le parsing de vos logs en tenant compte de la source en question. Un pipeline d'intégration est automatiquement installé pour les logs d'intégration, afin de prendre en charge leur parsing et d'ajouter la facette correspondante dans Log Explorer.
 
-Ces pipelines sont en mode **lecture seule** et analysent vos logs en s'adaptant à chaque source. Pour modifier le pipeline d'intégration, clonez-le, puis modifiez le clone :
+Pour afficher un pipeline d'intégration, accédez à la page [Pipelines][5]. Pour modifier un pipeline d'intégration, clonez-le, puis modifiez le doublon :
 
 {{< img src="logs/processing/pipelines/cloning_pipeline.png" alt="cloner un pipeline" style="width:80%;">}}
 
@@ -192,15 +182,37 @@ Consultez l'exemple de logs ELB ci-dessous :
 
 ### Bibliothèque de pipelines d'intégration
 
-Pour afficher la liste complète des pipelines d'intégration proposés par Datadog, consultez la [Bibliothèque de pipelines d'intégration][5]. La Bibliothèque de pipelines indique comment Datadog traite les différents formats de log par défaut.
+Pour afficher la liste complète des pipelines d'intégration proposés par Datadog, consultez la [bibliothèque de pipelines d'intégration][6]. Elle précise également comment Datadog traite les différents formats de log par défaut.
 
 {{< img src="logs/processing/pipelines/integration-pipeline-library.gif" alt="Bibliothèque de pipelines d'intégration" style="width:80%;">}}
 
-Pour utiliser un pipeline d'intégration, nous vous conseillons d'installer l'intégration en configurant la `source` de log correspondante. Lorsque Datadog reçoit le premier log avec cette source, l'installation se déclenche automatiquement et le pipeline d'intégration est ajouté à la liste des pipelines de traitement. Pour configurer la source de log, consultez la [documentation relative à l'intégration][15] correspondante.
+Pour utiliser un pipeline d'intégration, nous vous conseillons d'installer l'intégration en configurant la `source` de logs correspondante. Lorsque Datadog reçoit le premier log avec cette source, l'installation se déclenche automatiquement et le pipeline d'intégration est ajouté à la liste des pipelines de traitement. Pour configurer la source de logs, consultez la [documentation de l'intégration][8] correspondante.
 
-Il est également possible de copier un pipeline d'intégration à l'aide du bouton Copy.
+Il est également possible de copier un pipeline d'intégration à l'aide du bouton Clone.
 
 {{< img src="logs/processing/pipelines/clone-pipeline-from-library.gif" alt="Cloner un pipeline à partir de la bibliothèque" style="width:80%;">}}
+
+## Ajouter un processeur ou un pipeline imbriqué
+
+1. Accédez à la section [Pipelines][6] de l'application Datadog.
+2. Passez le curseur sur un pipeline, puis cliquez sur la flèche en regard du pipeline pour développer la section relative aux processeurs pipelines imbriqués.
+3. Sélectionnez **Add Processor** ou **Add Nested Pipeline**.
+
+### Processeurs
+
+Un processeur s'exécute dans un pipeline afin d'effectuer une action de structuration de données. Consultez la [documentation relative aux processeurs][3] pour découvrir comment ajouter et configurer chaque type de processeur, que ce soit dans l'application ou avec l'API.
+
+### Pipelines imbriqués
+
+Les pipelines imbriqués sont des pipelines au sein d'un autre pipeline. Utilisez les pipelines imbriqués pour diviser le traitement en deux étapes. Par exemple, vous pouvez commencer par appliquer un filtre de niveau supérieur basé par exemple sur l'équipe, puis un deuxième niveau de filtrage basé sur l'intégration, le service ou tout autre tag ou attribut.
+
+Un pipeline peut inclure des pipelines imbriqués et des processeurs, tandis qu'un pipeline imbriqué peut seulement contenir des processeurs.
+
+{{< img src="logs/processing/pipelines/nested_pipeline.png" alt="Pipelines imbriqués" style="width:80%;">}}
+
+Il est possible de déplacer un pipeline vers un autre pipeline pour le transformer en pipeline imbriqué :
+
+{{< img src="logs/processing/pipelines/move_to_pipeline.mp4" alt="Faire glisser et déposer des pipelines imbriqués" video="true"  width="80%" >}}
 
 ## Pour aller plus loin
 
@@ -209,18 +221,11 @@ Il est également possible de copier un pipeline d'intégration à l'aide du bou
 <br>
 *Logging without Limits est une marque déposée de Datadog, Inc.
 
-[1]: /fr/logs/processing/processors/
-[2]: /fr/logs/explorer/facets/
-[3]: /fr/logs/explorer/search/
-[4]: /fr/logs/processing/pipelines/#source-attribute
-[5]: https://app.datadoghq.com/logs/pipelines/pipeline/library
-[6]: /fr/agent/docker/log/?tab=containerinstallation#examples
-[7]: /fr/logs/processing/processors/#log-date-remapper
-[8]: /fr/logs/explorer/
-[9]: /fr/logs/explorer/#filters-logs
-[10]: /fr/logs/processing/processors/?tab=ui#log-message-remapper
-[11]: /fr/logs/processing/processors/#log-status-remapper
-[12]: /fr/logs/processing/processors/?tab=ui#service-remapper
-[13]: /fr/tracing/connect_logs_and_traces/
-[14]: /fr/logs/processing/processors/?tab=ui#trace-remapper
-[15]: /fr/integrations/#cat-log-collection
+[1]: /fr/logs/log_configuration/parsing/
+[2]: /fr/logs/log_collection/?tab=host#attributes-and-tags
+[3]: /fr/logs/log_configuration/processors/
+[4]: /fr/logs/explorer/facets/
+[5]: https://app.datadoghq.com/logs/pipelines
+[6]: https://app.datadoghq.com/logs/pipelines/pipeline/library
+[7]: https://app.datadoghq.com/logs/pipelines/remapping
+[8]: /fr/integrations/#cat-log-collection

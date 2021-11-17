@@ -84,6 +84,10 @@ body > header.scrolled ~ .container .mobile-toc-toggle {
         padding-bottom: 150px;
         overflow-x: hidden;
         overflow-y: auto;
+        @media (min-width: 991px) {
+            max-width: 220px !important;
+            padding-right: 20px !important;
+        }    
         @media (min-width: 1440px) {
             margin-right: -40%;
         }

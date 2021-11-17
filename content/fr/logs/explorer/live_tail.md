@@ -12,7 +12,7 @@ further_reading:
   - link: logs/explorer/side_panel
     tag: Documentation
     text: Volet latéral des logs
-  - link: 'logs/explorer/#list-of-logs'
+  - link: logs/explorer/#list-of-logs
     tag: Documentation
     text: Liste des logs
 ---

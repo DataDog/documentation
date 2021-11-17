@@ -53,19 +53,19 @@ Pour obtenir un flare de chaque container, exécutez les commandes suivantes :
 ### Agent
 
 ```bash
-kubectl exec -it <agent-pod-name> -c agent -- agent flare <case-id>
+kubectl exec -it <NOM_POD_AGENT> -c agent -- agent flare <ID_TICKET>
 ```
 
 ### Agent de processus
 
 ```bash
-kubectl exec -it <AGENT_POD_NAME> -c process-agent -- agent flare <CASE_ID> --local
+kubectl exec -it <NOM_POD_AGENT> -c process-agent -- agent flare <ID_TICKET> --local
 ```
 
 ### Agent de trace
 
 ```bash
-kubectl exec -it <AGENT_POD_NAME> -c trace-agent -- agent flare <CASE_ID> --local
+kubectl exec -it <NOM_POD_AGENT> -c trace-agent -- agent flare <ID_TICKET> --local
 ```
 
 ### System probe
@@ -76,10 +76,25 @@ Le conteneur system-probe ne peut pas envoyer de flare. Vous devez donc récupé
 kubectl logs <NOM_POD_AGENT> -c system-probe > system-probe.log
 ```
 
+## ECS Fargate
+
+Si vous utilisez la version 1.4.0 de la plateforme ECS Fargate, les tâches et services ECS peuvent être configurés de façon à autoriser l'accès aux conteneurs Linux en cours d'exécution. Pour ce faire, vous devez activer [Amazon ECS Exec][5]. Une fois la configuration terminée, exécutez la commande suivante pour envoyer un flare :
+
+```bash
+aws ecs execute-command --cluster <NOM_CLUSTER> \
+    --task <ID_TÂCHE> \
+    --container datadog-agent \
+    --interactive \
+    --command "agent flare <ID_TICKET>"
+```
+
+**Remarque :** vous pouvez uniquement activer ECS Exec pour les nouvelles tâches. Pour utiliser ECS Exec pour les tâches existantes, vous devrez les recréer.
+
 [1]: /fr/agent/basic_agent_usage/#gui
 [2]: /fr/agent/basic_agent_usage/windows/#agent-v6
 [3]: /fr/agent/faq/heroku-troubleshooting/#send-a-flare
 [4]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/CHANGELOG.md
+[5]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-exec.html
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 

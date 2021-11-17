@@ -80,7 +80,7 @@ Pour toute question technique, contactez [l'assistance Datadog][5].
 Contactez le [service commercial][6] ou votre [chargé de compte][7] pour toute question concernant la tarification horaire ou la facturation pour votre compte.
 
 [1]: https://www.datadoghq.com/pricing
-[2]: /fr/developers/metrics/custom_metrics/
+[2]: /fr/metrics/custom_metrics/
 [3]: /fr/tracing/trace_retention_and_ingestion/#retention-filters
 [4]: /fr/tracing/trace_retention_and_ingestion/
 [5]: /fr/help/

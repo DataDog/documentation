@@ -8,7 +8,7 @@ aliases:
 code_lang: ruby
 code_lang_weight: 15
 dependencies:
-  - 'https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md'
+  - https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md
 kind: documentation
 title: Ruby アプリケーションのトレース
 type: multi-code-lang
@@ -98,6 +98,8 @@ type: multi-code-lang
          - [アプリケーションランタイムの場合](#for-application-runtime)
      - [OpenTracing](#opentracing)
      - [プロファイリング](#profiling)
+         - [トラブルシューティング](#troubleshooting)
+         - [Resque ジョブのプロファイリング](#profiling-resque-jobs)
  - [既知の問題と推奨されるコンフィギュレーション](#known-issues-and-suggested-configurations)
     - [Payload too large](#payload-too-large)
     - [Stack level too deep](#stack-level-too-deep)
@@ -175,7 +177,7 @@ type: multi-code-lang
 
 2. `bundle install` で gem をインストールします
 
-3. [Rails 手動コンフィギュレーション](#rails-manual-configuration)ファイルを追加することで、特定のインテグレーション設定を構成、オーバーライド、または無効にすることができます。
+3. Rails 手動インスツルメンテーションコンフィギュレーションファイル (次) を追加することで、特定のインテグレーション設定を構成、オーバーライド、または無効にすることができます。
 
 #### 手動インスツルメンテーション
 
@@ -215,7 +217,7 @@ type: multi-code-lang
     require 'ddtrace/auto_instrument'
     ```
 
-   [Ruby 手動コンフィギュレーションブロック](#ruby-manual-configuration)を追加することで、特定のインテグレーション設定を構成、オーバーライド、または無効にすることができます。
+   Ruby 手動コンフィギュレーションブロック (次) を追加することで、特定のインテグレーション設定を構成、オーバーライド、または無効にすることができます。
 
 #### 手動インスツルメンテーション
 
@@ -415,7 +417,7 @@ end
 | Grape                    | `grape`                    | `>= 1.0`                 | `>= 1.0`                  | *[リンク](#grape)*                    | *[リンク](https://github.com/ruby-grape/grape)*                                  |
 | GraphQL                  | `graphql`                  | `>= 1.7.9`               | `>= 1.7.9`                | *[リンク](#graphql)*                  | *[リンク](https://github.com/rmosolgo/graphql-ruby)*                             |
 | gRPC                     | `grpc`                     | `>= 1.7`                 | *gem の利用不可*       | *[リンク](#grpc)*                     | *[リンク](https://github.com/grpc/grpc/tree/master/src/rubyc)*                   |
-| http.rb                  | `httprb`                   | `>= 2.0`                 | `>= 2.0`                  | *[Link](#http-rb)*                  | *[リンク](https://github.com/httprb/http)*                                       |
+| http.rb                  | `httprb`                   | `>= 2.0`                 | `>= 2.0`                  | *[リンク](#httprb)*                  | *[リンク](https://github.com/httprb/http)*                                       |
 | httpclient                | `httpclient`              | `>= 2.2`                 | `>= 2.2`                  | *[リンク](#httpclient)*               | *[リンク](https://github.com/nahi/httpclient)*                                     |
 | httpx                     | `httpx`                   | `>= 0.11`                | `>= 0.11`                 | *[リンク](#httpx)*                    | *[リンク](https://gitlab.com/honeyryderchuck/httpx)*                             |
 | Kafka                    | `ruby-kafka`               | `>= 0.7.10`              | `>= 0.7.10`               | *[リンク](#kafka)*                    | *[Link](https://github.com/zendesk/ruby-kafka)*                                |
@@ -1040,6 +1042,7 @@ client.my_endpoint(DemoMessage.new(contents: 'hello!'))
 | キー | 説明 | デフォルト |
 | --- | ----------- | ------- |
 | `service_name` | `grpc` インスツルメンテーションに使用されるサービス名 | `'grpc'` |
+| `error_handler` | リクエストがエラーになったときに呼び出されるカスタムエラーハンドラです。`span` および `error` パラメータを許容する `Proc` となります。デフォルトでスパンにエラーを設定します。 | `proc { |スパン、エラー| span.set_error(error) unless span.nil? }` |
 
 **クライアントを構成してさまざまな設定を使用する**
 
@@ -2134,7 +2137,7 @@ Service C:
 - [Rack](#rack)
 - [Rails](#rails)
 - [Sinatra](#sinatra)
-- [http.rb](#http-rb)
+- [http.rb](#httprb)
 - [httpclient](#httpclient)
 - [httpx](#httpx)
 
@@ -2252,7 +2255,7 @@ Datadog::Pipeline.before_flush(
 
 ##### 自動
 
-Rails アプリケーションの場合は、デフォルトのロガー (`ActiveSupport::TaggedLogging`) または `lograge` を使用し、`rails` インスツルメンテーションのコンフィギュレーションオプション `log_injection` を `true` に設定するか、環境変数を `DD_LOGS_INJECTION=true` に設定することでトレース相関インジェクションを自動的に有効化できます。
+Rails アプリケーションの場合は、デフォルトのロガー (`ActiveSupport::TaggedLogging`)、`semantic_logger`、または `lograge` を使用し、`rails` インスツルメンテーションのコンフィギュレーションオプション `log_injection` を `true` に設定するか、環境変数を `DD_LOGS_INJECTION=true` に設定することでトレース相関インジェクションを自動的に有効化できます。
 
 ```ruby
 # config/initializers/datadog.rb
@@ -2262,8 +2265,6 @@ Datadog.configure do |c|
   c.use :rails, log_injection: true
 end
 ```
-
-_注:_ `lograge` ユーザーで `initializers/lograge.rb` コンフィギュレーションファイルに `lograge.custom_options` を定義している場合は、Rails がイニシャライザーを読み込む順番 (アルファベット順) の関係で自動のトレース相関付けがうまく機能しない場合があります。これは、`initializers/datadog.rb` が `initializers/lograge.rb` イニシャライザーで上書きされてしまうためです。_既存の_ `lograge.custom_options` で自動のトレース相関付けを行う場合は、以下の[マニュアル (Lograge)](#manual-lograge) をご利用ください。
 
 ##### 手動 (Lograge)
 
@@ -2424,7 +2425,7 @@ end
 メトリクスの収集のためにアプリケーションを構成するには
 
 1. [StatsD 用 Datadog Agent を構成](https://docs.datadoghq.com/developers/dogstatsd/#setup)
-2. `gem 'dogstatsd-ruby', '~> 4.0'` を Gemfile に追加します ([この問題が解決するまで](https://github.com/DataDog/dogstatsd-ruby/issues/182) v4.x を固定することをお勧めします)
+2. `gem 'dogstatsd-ruby', '~> 5.2'` を Gemfile に追加します
 
 #### アプリケーションランタイムの場合
 
@@ -2503,7 +2504,11 @@ OpenTracing.global_tracer = Datadog::OpenTracer::Tracer.new(options)
 
 **セットアップ**
 
-プロファイリングを開始するには、[プロファイラー入門ガイド](https://docs.datadoghq.com/tracing/profiler/getting_started/?code-lang=ruby)に従ってください。
+プロファイリングを開始するには、[Ruby プロファイラーの有効化](https://docs.datadoghq.com/tracing/profiler/enabling/ruby/)ガイドに従ってください。
+
+#### トラブルシューティング
+
+プロファイリングで問題が発生した場合は、[プロファイラーのトラブルシューティングガイド](https://docs.datadoghq.com/tracing/profiler/profiler_troubleshooting/?code-lang=ruby)をご確認ください。
 
 #### Resque ジョブのプロファイリング
 

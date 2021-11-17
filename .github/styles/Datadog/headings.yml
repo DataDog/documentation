@@ -54,6 +54,7 @@ exceptions:
   - Datadog Lambda Extension
   - Datadog Operator
   - Datadog Plugin
+  - Datadog Watchdog
   - DatadogHook
   - Debian
   - Detection Rules

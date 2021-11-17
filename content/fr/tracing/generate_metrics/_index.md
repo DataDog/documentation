@@ -12,9 +12,6 @@ further_reading:
     tag: Documentation
     text: Utilisez des requêtes et des monitors Analytics basés sur les traces conservées.
 ---
-<div class="alert alert-warning">
-Cette fonctionnalité est actuellement en version bêta publique. Tant qu'une version stable n'est pas disponible nous vous déconseillons d'utiliser les métriques générées à partir des spans pour vos monitors ou vos opérations en production.
-</div>
 
 ## Générer des métriques basées sur des spans
 
@@ -79,7 +76,7 @@ Lorsqu'une métrique est créée, seuls deux champs peuvent être mis à jour :
 
 [1]: /fr/tracing/trace_retention_and_ingestion
 [2]: /fr/account_management/billing/custom_metrics/
-[3]: https://docs.datadoghq.com/fr/developers/metrics/#overview
+[3]: https://docs.datadoghq.com/fr/metrics/#overview
 [4]: /fr/monitors/monitor_types/anomaly/#overview
 [5]: /fr/tracing/trace_search_and_analytics/
 [6]: /fr/tracing/trace_search_and_analytics/query_syntax/#analytics-query
@@ -87,4 +84,4 @@ Lorsqu'une métrique est créée, seuls deux champs peuvent être mis à jour :
 [8]: https://app.datadoghq.com/apm/getting-started
 [9]: https://app.datadoghq.com/apm/traces/generate-metrics
 [10]: /fr/tracing/trace_search_and_analytics/query_syntax/
-[11]: /fr/developers/metrics/#naming-metrics
+[11]: /fr/metrics/#naming-metrics
