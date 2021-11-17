@@ -231,7 +231,7 @@ If you have access to the [custom role feature][14], add your user to any custom
 
 [1]: /api/v1/synthetics/#get-all-locations-public-and-private
 [2]: /synthetics/private_locations
-[3]: /synthetics/cicd_integrations
+[3]: /synthetics/cicd_testing
 [4]: /synthetics/search/#search
 [5]: https://restfulapi.net/json-jsonpath/
 [6]: https://www.w3schools.com/xml/xpath_syntax.asp

@@ -82,5 +82,5 @@ To query the CI Results Explorer data, use the [same query syntax][2] as on the 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /synthetics/cicd_integrations
+[1]: /synthetics/cicd_testing
 [2]: /synthetics/search/
