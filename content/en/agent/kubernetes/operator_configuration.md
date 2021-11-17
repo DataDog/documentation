@@ -577,7 +577,7 @@ spec:
 : Configures the Kubernetes State Metrics Core check as a cluster check.
 
 `features.kubeStateMetricsCore.enabled`
-: Enable this to start the Kubernetes State Metrics Core check. See the [Kubernetes State Metrics Core][16]
+: Enable this to start the Kubernetes State Metrics Core check. See the [Kubernetes State Metrics Core documentation][16].
 
 `features.kubeStateMetricsCore.conf.configData`
 : Corresponds to the configuration file content.
@@ -630,9 +630,6 @@ spec:
 `features.orchestratorExplorer.conf.configMap.name`
 : Name the ConfigMap.
 
-`features.orchestratorExplorer.conf.configMap.name`
-: Name the ConfigMap.
-
 `features.orchestratorExplorer.ddUrl`
 : Set this for the Datadog endpoint for the orchestrator explorer.
 
@@ -640,16 +637,16 @@ spec:
 : Enable this to activate live Kubernetes monitoring. See [Live Containers][18].
 
 `features.orchestratorExplorer.extraTags`
-: Additional tags for the collected data in the form of `a b c` Difference to `DD_TAGS`: this is a cluster agent option that is used to define custom cluster tags.
+: Additional tags for the collected data in the form of `a b c`. In contrast to `DD_TAGS`, this is a Cluster Agent option that is used to define custom cluster tags.
 
 `features.orchestratorExplorer.scrubbing.containers`
 : Deactivate this to stop the scrubbing of sensitive container data (passwords, tokens, etc.).
 
 `features.prometheusScrape.additionalConfigs`
-: AdditionalConfigs allows adding advanced prometheus check configurations with custom discovery rules.
+: AdditionalConfigs allows adding advanced Prometheus check configurations with custom discovery rules.
 
 `features.prometheusScrape.enabled`
-: Enable autodiscovering pods and services exposing prometheus metrics.
+: Enable Autodiscovering pods and services exposing Prometheus metrics.
 
 `features.prometheusScrape.serviceEndpoints`
 : Enable generating dedicated checks for service endpoints.
