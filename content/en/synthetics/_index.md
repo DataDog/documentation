@@ -76,7 +76,7 @@ See [Getting Started with Synthetic Monitoring][14] for instructions on creating
 [9]: /synthetics/api_tests/websocket_tests
 [10]: /synthetics/browser_tests
 [11]: /synthetics/private_locations
-[12]: /synthetics/cicd_testing
+[12]: /synthetics/cicd_integrations
 [13]: /synthetics/apm/
 [14]: /getting_started/synthetics
 [15]: /getting_started/synthetics/private_location

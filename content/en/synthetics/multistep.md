@@ -272,7 +272,7 @@ If you have access to the [custom role feature][17], add your user to any custom
 
 [1]: /synthetics/api_tests/http_tests
 [2]: /synthetics/api_tests/http_tests?tab=requestoptions#notify-your-team
-[3]: /synthetics/cicd_testing
+[3]: /synthetics/cicd_integrations
 [4]: /api/v1/synthetics/#get-all-locations-public-and-private
 [5]: /synthetics/private_locations
 [6]: /synthetics/api_tests/

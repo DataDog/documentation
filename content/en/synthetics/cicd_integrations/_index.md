@@ -1,9 +1,10 @@
 ---
-title: Synthetic CI/CD Testing
+title: Synthetics and CI/CD
 kind: documentation
 description: Run Synthetic tests on-demand in your CI/CD pipelines.
 aliases: 
   - /synthetics/ci
+  - /synthetics/cicd_testing
 further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-synthetic-ci-cd-testing/"
   tag: "Blog"
@@ -23,13 +24,13 @@ further_reading:
 
 ---
 
-In addition to running tests at predefined intervals, you can also run Datadog Synthetic tests on-demand using API endpoints. You can run Datadog Synthetic tests in your continuous integration (CI) pipelines, letting you block the deployment of branches that would break your product.
+In addition to running tests at predefined intervals, you can run Datadog Synthetic tests on-demand using API endpoints. Run Datadog Synthetic tests in your continuous integration (CI) pipelines to block branches from being deployed and breaking your application in production.
 
-Synthetic CI/CD testing can also be used to **run tests as part of your CD process**, evaluating the state of your production application immediately after a deployment finishes. This lets you detect potential regressions that could impact your users—and automatically trigger a rollback whenever a critical test fails.
+Use Synthetic CI/CD testing to also run tests as part of your continuous delivery (CD) process and evaluate the state of your applications and services in production immediately after a deployment finishes. You can detect potential regressions that may impact your users and automatically trigger a rollback when a critical test fails.
 
-This function allows you to avoid spending time fixing issues on production, and to catch bugs and regressions earlier in the process.
+This functionality reduces time spent fixing issues in production by proactively catching bugs and regressions earlier in the process, allowing your engineering teams to focus on non-urgent work instead. 
 
-On top of these API endpoints, Datadog provides and maintains a command line interface (CLI), allowing you to easily integrate Datadog Synthetic tests with your CI tooling. Synthetic CI/CD testing is open-source, and its source code is available on GitHub at [DataDog/datadog-ci][1].
+To get started, see Integrations and use the API or the [open-source CLI package][1]. 
 
 ## CLI usage
 
@@ -715,4 +716,4 @@ curl -G \
 [3]: https://github.com/TooTallNate/node-proxy-agent
 [4]: /api/v1/synthetics/#get-test
 [5]: /synthetics/testing_tunnel/
-[6]: /synthetics/cicd_testing/ci_results_explorer
+[6]: /synthetics/ci_results_explorer
