@@ -2,8 +2,6 @@
 title: CI Results Explorer
 kind: documentation
 description: Drill down into CI jobs executing Synthetic tests.
-aliases: 
-  - /synthetics/cicd_testing/ci_results_explorer
 further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-synthetic-ci-cd-testing/"
   tag: "Blog"
@@ -82,5 +80,5 @@ To query the CI Results Explorer data, use the [same query syntax][2] as on the 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /synthetics/cicd_integrations
+[1]: /synthetics/cicd_testing
 [2]: /synthetics/search/
