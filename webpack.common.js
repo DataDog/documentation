@@ -38,8 +38,7 @@ const commonConfig = env => {
             'region-redirects': './scripts/region-redirects.js',
             'api-redirect': './scripts/api-redirect.js',
             'dd-browser-logs-rum': './scripts/components/dd-browser-logs-rum.js',
-            'search': './scripts/components/search.js',
-            'jqmath-vanilla': './scripts/jqmath-vanilla.js'
+            'search': './scripts/components/search.js'
         },
         output: {
             path: path.join(__dirname, 'public', 'static'),

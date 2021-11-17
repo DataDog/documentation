@@ -16,4 +16,5 @@ La solution Network Device Monitoring n'inclut aucun événement.
 
 ## Checks de service
 
-{{< get-service-checks-from-git "snmp" >}}
+**snmp.can_check** :<br>
+Renvoie `CRITICAL` si l'Agent ne parvient pas à recueillir les métriques SNMP. Si ce n'est pas le cas, renvoie `OK`.

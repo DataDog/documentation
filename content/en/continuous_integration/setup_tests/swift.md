@@ -11,12 +11,9 @@ further_reading:
 ---
 
 {{< site-region region="us5,gov" >}}
-<div class="alert alert-warning">
-The selected Datadog site ({{< region-param key="dd_site_name" >}}) is not supported.
-</div>
+<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
-{{< site-region region="us,eu,us3" >}}
 ## Compatibility
 
 Supported languages:
@@ -123,12 +120,14 @@ Set all these variables in your test target:
 **Recommended**: `$(SRCROOT)`<br/>
 **Example**: `/Users/ci/source/MyApp`
 
+{{< site-region region="eu,us3" >}}
 Additionally, configure the Datadog site to use the selected one ({{< region-param key="dd_site_name" >}}):
 
 `DD_SITE` (Required)
-: The [Datadog site][2] to upload results to.<br/>
+: The Datadog site to upload results to.<br/>
 **Default**: `datadoghq.com`<br/>
 **Selected site**: {{< region-param key="dd_site" code="true" >}}
+{{< /site-region >}}
 
 ### Collecting Git metadata
 
@@ -186,8 +185,20 @@ If you are running tests in non-supported CI providers or with no `.git` folder,
 
 After installation, run your tests as you normally do, for example using the `xcodebuild test` command. Tests, network requests, and application logs are instrumented automatically. Pass your environment variables when running your tests in the CI, for example:
 
-<pre>
-<code>
+{{< site-region region="us" >}}
+<pre class="chroma">
+<code class="language-bash" data-lang="bash">
+DD_TEST_RUNNER=1 DD_ENV=ci xcodebuild \
+  -project "MyProject.xcodeproj" \
+  -scheme "MyScheme" \
+  -destination "platform=macOS,arch=x86_64" \
+  test
+</code>
+</pre>
+{{< /site-region >}}
+{{< site-region region="eu,us3" >}}
+<pre class="chroma">
+<code class="language-bash" data-lang="bash">
 DD_TEST_RUNNER=1 DD_ENV=ci DD_SITE={{< region-param key="dd_site" >}} xcodebuild \
   -project "MyProject.xcodeproj" \
   -scheme "MyScheme" \
@@ -195,6 +206,10 @@ DD_TEST_RUNNER=1 DD_ENV=ci DD_SITE={{< region-param key="dd_site" >}} xcodebuild
   test
 </code>
 </pre>
+{{< /site-region >}}
+{{< site-region region="us5,gov" >}}
+<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
+{{< /site-region >}}
 
 ### UI tests
 
@@ -383,16 +398,14 @@ Additional Git configuration for physical device testing:
 {{% /tab %}}
 {{% tab "GitHub Actions" %}}
 
-| Environment variable | Value                   |
-| -------------------- | ----------------------- |
-| `GITHUB_WORKSPACE`   | `$(GITHUB_WORKSPACE)`   |
-| `GITHUB_REPOSITORY`  | `$(GITHUB_REPOSITORY)`  |
-| `GITHUB_RUN_ID`      | `$(GITHUB_RUN_ID)`      |
-| `GITHUB_RUN_NUMBER`  | `$(GITHUB_RUN_NUMBER)`  |
-| `GITHUB_WORKFLOW`    | `$(GITHUB_WORKFLOW)`    |
-| `GITHUB_SHA`         | `$(GITHUB_SHA)`         |
-| `GITHUB_SERVER_URL`  | `$(GITHUB_SERVER_URL)`  |
-| `GITHUB_RUN_ATTEMPT` | `$(GITHUB_RUN_ATTEMPT)` |
+| Environment variable | Value                  |
+| -------------------- | ---------------------- |
+| `GITHUB_WORKSPACE`   | `$(GITHUB_WORKSPACE)`  |
+| `GITHUB_REPOSITORY`  | `$(GITHUB_REPOSITORY)` |
+| `GITHUB_RUN_ID`      | `$(GITHUB_RUN_ID)`     |
+| `GITHUB_RUN_NUMBER`  | `$(GITHUB_RUN_NUMBER)` |
+| `GITHUB_WORKFLOW`    | `$(GITHUB_WORKFLOW)`   |
+| `GITHUB_SHA`         | `$(GITHUB_SHA)`        |
 
 Additional Git configuration for physical device testing:
 
@@ -530,11 +543,8 @@ Additional Git configuration for physical device testing:
 {{% /tab %}}
 {{< /tabs >}}
 
-[1]: https://app.datadoghq.com/organization-settings/client-tokens
-[2]: /getting_started/site/
-
-{{< /site-region >}}
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://app.datadoghq.com/organization-settings/client-tokens
