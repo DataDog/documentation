@@ -42,7 +42,6 @@
         "node": ">= 14.8.0"
     },
     "dependencies": {
-        "@algolia/autocomplete-plugin-algolia-insights": "^1.5.0",
         "@apidevtools/json-schema-ref-parser": "^8.0.0",
         "@babel/polyfill": "^7.4.4",
         "@datadog/browser-logs": "^1.24.1",
