@@ -12,7 +12,7 @@ further_reading:
 
 Security Notification Profiles play a key role in Security Monitoring by keeping your team informed of issues without you having to manually edit notification preferences for individual security rules.
 
-Create and modify notification preferences within a notification profile to span across multiple security rules and signals based on parameters such as severities, rule types, rule tags, signal attributes, and signal tags.
+Create and modify notification preferences within a notification profile to span across multiple security rules and signals based on parameters such as severities, rule types, rule tags, and signal tags.
 
 View and search through all created Notification Profiles on the **Notification Profiles** page. Create, edit, clone, enable, disable, delete, or view Notification Profiles created by users in your organization.
 
@@ -27,7 +27,7 @@ To create a new notification profile, follow the instructions below.
 3. Input a name for your notification profile in the **Name** field.
 4. Define the logic for when this notification profile is triggered by conditions matching to security rule and/or security signal.
     - For security rules, notification profiles can be made with the following conditions: severity, rule type, or rule tags.
-    - For security signals, notification profiles can be made for any matching signal attribute and signal tag.
+    - For security signals, notification profiles can be made for any matching signal tag.
 
     For example, severity set as `Medium` means a signal triggers an enabled notification profile as long as the security signal rule condition set in Step 4 is met at least once.
 
@@ -45,7 +45,7 @@ If the notification profile matches set conditions, the resulting notification i
 
 ### Search
 
-The free text search filters notification profiles by text in the **Notification Profile** page. Select a tag within a rule type, rule tags, signal attributes, or signal tags to add the tag in the search, which displays notification profiles matching the value.
+The free text search filters notification profiles by text in the **Notification Profile** page. Select a tag within a rule type, rule tags, or signal tags to add the tag in the search, which displays notification profiles matching the value.
 
 When you edit the search query, search results update in real-time. There is no **Search** button.
 

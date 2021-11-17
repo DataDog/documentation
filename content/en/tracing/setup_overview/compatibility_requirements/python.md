@@ -54,7 +54,6 @@ The `ddtrace` library includes support for the following data stores:
 | [Cassandra][19]                    | >= 3.5            | https://ddtrace.readthedocs.io/en/stable/integrations.html#cassandra                           |
 | [Elasticsearch][20]                | >= 1.6            | https://ddtrace.readthedocs.io/en/stable/integrations.html#elasticsearch                       |
 | [Flask Cache][21]                  | >= 0.12           | https://ddtrace.readthedocs.io/en/stable/integrations.html#flask-cache                         |
-| [Mariadb][57]                      | >= 1.0.0          | https://ddtrace.readthedocs.io/en/stable/integrations.html#mariadb                             |
 | [Memcached][22] [pylibmc][23]      | >= 1.4            | https://ddtrace.readthedocs.io/en/stable/integrations.html#pylibmc                             |
 | [Memcached][22] [pymemcache][24]   | >= 1.3            | https://ddtrace.readthedocs.io/en/stable/integrations.html#pymemcache                          |
 | [MongoDB][25] [Mongoengine][26]    | >= 0.11           | https://ddtrace.readthedocs.io/en/stable/integrations.html#mongoengine                         |
@@ -154,4 +153,3 @@ The `ddtrace` library includes support for the following libraries:
 [54]: https://www.makotemplates.org
 [55]: https://requests.readthedocs.io/en/master/
 [56]: https://urllib3.readthedocs.io/en/stable/
-[57]: https://mariadb-corporation.github.io/mariadb-connector-python/index.html
