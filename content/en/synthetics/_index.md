@@ -46,7 +46,7 @@ Use [Synthetic private locations][11] to monitor internal APIs and websites or c
 
 ## Run tests with your integration and deployment processes
 
-Leverage your Synthetic tests as [canaries][12] or run them directly within your [CI pipelines][12] to start shipping without fear that faulty code may impact your customers' experience.
+Leverage your Synthetic tests as [canary deployments][12] or run them directly within your [CI pipelines][12] to start shipping without fear that faulty code may impact your customers' experience.
 
  {{< img src="synthetics/ci.png" alt="CI tests" style="width:100%;">}}
 

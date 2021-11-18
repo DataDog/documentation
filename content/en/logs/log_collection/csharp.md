@@ -312,7 +312,7 @@ Then, initialize the logger directly in your application. Do not forget to [add 
 
 ```csharp
 using (var log = new LoggerConfiguration()
-    .WriteTo.DatadogLogs("<API_KEY>", configuration: new DatadogConfiguration { Url = "https://http-intake.logs.datadoghq.com" })
+    .WriteTo.DatadogLogs("<API_KEY>", configuration: new DatadogConfiguration(){ Url = "https://http-intake.logs.datadoghq.com" })
     .CreateLogger())
 {
     // Some code
@@ -324,7 +324,7 @@ using (var log = new LoggerConfiguration()
 
 ```csharp
 using (var log = new LoggerConfiguration()
-    .WriteTo.DatadogLogs("<API_KEY>", configuration: new DatadogConfiguration { Url = "https://http-intake.logs.datadoghq.eu" })
+    .WriteTo.DatadogLogs("<API_KEY>", configuration: new DatadogConfiguration(){ Url = "https://http-intake.logs.datadoghq.eu" })
     .CreateLogger())
 {
     // Some code

@@ -852,6 +852,12 @@
     "request_description": "Public ID list of the Synthetic tests to be deleted.",
     "request_schema_description": "A JSON list of the ID or IDs of the Synthetic tests that you want\nto delete."
   },
+  "TriggerTests": {
+    "description": "Trigger a set of Synthetics tests.",
+    "summary": "Trigger some Synthetics tests",
+    "request_description": "The identifiers of the tests to trigger.",
+    "request_schema_description": "Object describing the synthetics tests to trigger."
+  },
   "TriggerCITests": {
     "description": "Trigger a set of Synthetics tests for continuous integration.",
     "summary": "Trigger tests from CI/CD pipelines",
