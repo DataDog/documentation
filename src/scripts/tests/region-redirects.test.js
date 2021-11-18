@@ -1,4 +1,4 @@
-import { redirectToRegion } from '../region-redirects';
+import { redirectToRegion, getFormattedDatadogAppUrl } from '../region-redirects';
 
 let regionUSSnippet;
 let regionEUSnippet;
@@ -242,4 +242,27 @@ describe(`On main page load (not home or api pages, nor loaded via async)`, () =
             });
         });
     });
+
+    describe('Datadog app links are formatted properly when changing site', () => {
+        it('Retains query string parameter correctly', () => {
+            const anchor = document.createElement('a');
+            const region = 'us';
+            anchor.href = 'https://app.datadoghq.com/infrastructure/map?node_type=container';
+            const expected = 'https://app.datadoghq.com/infrastructure/map?node_type=container'
+            const formatted = getFormattedDatadogAppUrl(anchor, region);
+
+            expect(formatted).toEqual(expected);
+        })
+
+        it('Retains hash correctly', () => {
+            const anchor = document.createElement('a');
+            const region = 'eu';
+            anchor.href = 'https://app.datadoghq.com/account/settings#agent';
+            const expected = 'https://app.datadoghq.eu/account/settings#agent';
+            const formatted = getFormattedDatadogAppUrl(anchor, region);
+
+            
+            expect(formatted).toEqual(expected);
+        })
+    })
 });

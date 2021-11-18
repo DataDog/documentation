@@ -65,6 +65,10 @@ function regionOnChangeHandler(region) {
     }
 }
 
+function getFormattedDatadogAppUrl(link, region) {
+    return `https://${config.dd_full_site[region]}${link.pathname}${link.search}${link.hash}`;
+}
+
 function showRegionSnippet(newSiteRegion) {
     const regionSnippets = document.querySelectorAll('[data-region]');
     const regionParams = document.querySelectorAll('[data-region-param]');
@@ -109,7 +113,7 @@ function showRegionSnippet(newSiteRegion) {
 
     if (externalLinks) {
         externalLinks.forEach(link => {
-            link.href = `https://${config.dd_full_site[newSiteRegion]}${link.pathname}${link.search}${link.hash}`;
+            link.href = getFormattedDatadogAppUrl(link, newSiteRegion);
         });
     }
 }
@@ -169,4 +173,4 @@ function redirectToRegion(region = '') {
 
 redirectToRegion();
 
-export { redirectToRegion, showRegionSnippet, regionOnChangeHandler };
+export { redirectToRegion, showRegionSnippet, regionOnChangeHandler, getFormattedDatadogAppUrl };
