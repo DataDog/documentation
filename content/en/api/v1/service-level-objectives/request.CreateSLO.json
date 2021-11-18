@@ -1,0 +1,27 @@
+{
+  "type": "metric",
+  "description": "string",
+  "groups": [
+    "env:test",
+    "role:mysql"
+  ],
+  "monitor_ids": [],
+  "name": "Example-Create_an_SLO_object_returns_OK_response",
+  "query": {
+    "denominator": "sum:httpservice.hits{!code:3xx}.as_count()",
+    "numerator": "sum:httpservice.hits{code:2xx}.as_count()"
+  },
+  "tags": [
+    "env:prod",
+    "app:core"
+  ],
+  "thresholds": [
+    {
+      "target": 95.0,
+      "target_display": "95.0",
+      "timeframe": "7d",
+      "warning": 98,
+      "warning_display": "98.0"
+    }
+  ]
+}
