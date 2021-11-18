@@ -1,0 +1,12 @@
+{
+  "data": {
+    "attributes": {
+      "category": "Deployment",
+      "description": "Example-Update_an_SLO_correction_returns_OK_response",
+      "end": 1637231627,
+      "start": 1637228027,
+      "timezone": "UTC"
+    },
+    "type": "correction"
+  }
+}
