@@ -274,7 +274,7 @@ And retrieve the credentials from HEROKU by running the following command:
 heroku config -a $APPNAME | grep REDIS_URL
 ```
 
-Create a configuration file called /datadog/conf.d/redisdb.yaml at the root of your application replacing your host, port and password with the information you got in the previous command:
+Create a configuration file called `/datadog/conf.d/redisdb.yaml` at the root of your application replacing your host, port and password with the information you got in the previous command:
 
 ```yaml
 init_config:
@@ -285,7 +285,7 @@ instances:
     port: <YOUR_REDIS_PORT>
 ```
 
-Instead of manually replacing and harcoding the configuration, you can also set up your Redis integration based on Heroku environment variables, using the [prerun script][25] to replace those values before starting the Datadog agent:
+Instead of manually replacing and harcoding the configuration, you can also set up your Redis integration based on Heroku environment variables, using the [prerun script][14] to replace those values before starting the Datadog agent:
 
 ```shell
 #!/usr/bin/env bash
@@ -444,7 +444,7 @@ And retrieve the credentials from HEROKU by running the following command:
 heroku config | grep MEMCACHEDCLOUD
 ```
 
-Create a configuration file called /datadog/conf.d/mcache.yaml at the root of your application replacing your host, port, username and password with the information you got in the previous command:
+Create a configuration file called `/datadog/conf.d/mcache.yaml` at the root of your application replacing your host, port, username and password with the information you got in the previous command:
 
 ```yaml
 instances:
