@@ -7,6 +7,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/introducing-synthetic-monitoring/"
   tag: "Blog"
   text: "Introducing Datadog Synthetic Monitoring"
+- link: "https://www.datadoghq.com/blog/udp-websocket-api-tests/"
+  tag: "Blog"
+  text: "Run UDP and WebSocket tests to monitor latency-critical applications"
 - link: 'https://learn.datadoghq.com/course/view.php?id=39'
   tag: 'Learning Center'
   text: 'Introduction to Synthetic Tests'

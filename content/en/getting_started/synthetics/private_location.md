@@ -2,6 +2,9 @@
 title: Getting Started with Private Locations
 kind: documentation
 further_reading:
+    - link: "https://www.datadoghq.com/blog/synthetic-private-location-monitoring-datadog/"
+      tag: "Blog"
+      text: "Monitor your Synthetic private locations with Datadog"
     - link: '/getting_started/synthetics/api_test'
       tag: 'Documentation'
       text: 'Create your first API test'
