@@ -115,7 +115,7 @@ Follow these steps to instrument the function:
 
 ### Unified service tagging
 
-Datadog highly recommends tagging your serverless applications your serverless applications with `DD_ENV`, `DD_SERVICE`, `DD_VERSION`, and `DD_TAGS`. See the [Lambda extension][10] documentation for details.
+Datadog recommends tagging your serverless applications with `DD_ENV`, `DD_SERVICE`, `DD_VERSION`, and `DD_TAGS`. See the [Lambda extension documentation][10] for more details.
 
 ## Explore
 
