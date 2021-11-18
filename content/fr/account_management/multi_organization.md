@@ -47,11 +47,11 @@ La fonctionnalité de sous-domaine personnalisé n'est pas activée par défaut.
 
 Si vous faites partie de plusieurs organisations, les sous-domaines personnalisés vous aident à identifier la source d'une alerte ou d'une notification. Ils peuvent également vous rediriger immédiatement vers l'organisation associée au sous-domaine.
 
-Par exemple, l'URL `https://app.datadoghq.com/event/event?id=1` est associée à un événement dans l'organisation A. Si un utilisateur fait partie de l'organisation A et de l'organisation B, mais qu'il consulte Datadog dans le contexte de l'organisation B, alors cette URL renvoie une erreur `404 Not Found`. L'utilisateur doit revenir sur l'organisation A à l'aide du [menu des paramètres du compte utilisateur][1] et consulter de nouveau l'URL. À l'inverse, avec des sous-domaines personnalisés, l'utilisateur peut consulter l'URL `https://org-a.datadoghq.com/event/event?id=1`, car le contexte de l'utilisateur sera automatiquement basculé vers l'organisation A afin d'afficher la page appropriée.
+Par exemple, l'URL `https://app.datadoghq.com/event/event?id=1` est associée à un événement dans l'organisation A. Si un utilisateur fait partie de l'organisation A et de l'organisation B, mais qu'il consulte Datadog dans le contexte de l'organisation B, alors cette URL renvoie une erreur `404 Not Found`. L'utilisateur doit revenir sur l'organisation A à l'aide du [menu des paramètres du compte utilisateur][1] et consulter de nouveau l'URL. À l'inverse, avec des sous-domaines personnalisés, l'utilisateur peut consulter l'URL `https://org-a.datadoghq.com/event/event?id=1`, car le contexte de l'utilisateur est automatiquement basculé vers l'organisation A afin d'afficher la page appropriée.
 
-Remarque : lorsque vous utilisez un sous-domaine personnalisé, vous devez modifier manuellement les liens de la documentation Datadog en indiquant le nom de votre sous-domaine. Par exemple, remplacez un lien redirigeant vers `https://**app**.datadoghq.com/account/settings` par `https://**<nom_sous-domaine_personnalisé>**.datadoghq.com/account/settings`.
+**Remarque** : si vous utilisez un sous-domaine personnalisé, modifiez manuellement les liens de la documentation Datadog en indiquant le nom de votre sous-domaine. Par exemple, remplacez un lien redirigeant vers `https://**app**.datadoghq.com/account/settings` par `https://**<nom_sous-domaine_personnalisé>**.datadoghq.com/account/settings`.
 
-## Configuration SAML
+## Configurer SAML
 
 La configuration SAML n'est pas _pas_ transmise de l'organisation parent aux organisations enfant. Le protocole SAML doit être configuré pour chaque organisation enfant.
 
@@ -65,32 +65,46 @@ Pour configurer le protocole SAML pour plusieurs organisations :
 
 L'organisation parent peut consulter l'utilisation totale et l'utilisation facturée de toutes ses organisations (parent et enfant) en survolant son nom d'utilisateur en bas à gauche, puis en accédant à : `Plan & Usage`--> `Multi-Org Usage`.
 
-L'onglet Multi-Org Usage indique l'utilisation globale de l'organisation parent et de toutes ses organisations enfant. L'onglet Multi-Org Usage comprend deux sous-onglets :
+La page Multi-Org Usage indique l'utilisation globale de l'organisation parent et de toutes ses organisations enfant. Elle comprend deux onglets :
 
-* Month-to-date Usage
-* Long-Term Trends
+* Overall
+* Individual Organization
 
-### Month-to-date Usage
+### Utilisation globale
 
-Cette vue comprend une section Overall Usage et une section Individual Organization Usage.
+L'onglet Overall comporte les sections Month-to-Date Total Usage et Overall Usage.
 
-La section Overall Usage résume votre utilisation mensuelle des hosts, des conteneurs, des métriques custom et de toute autre partie de la plateforme que vous avez utilisée au cours du mois. Ces données englobent votre organisation parent et toutes ses organisations enfant.
+La première section résume votre utilisation mensuelle des hosts, des conteneurs, des métriques custom et de toute autre partie de la plateforme que vous avez utilisée au cours du mois. Ces données englobent votre organisation parent et toutes ses organisations enfant.
 
-{{< img src="account_management/managing-multiorgs-01.png" alt="Month-to-Date Usage" >}}
+{{< img src="account_management/multi-org-v2.png" alt="Month-to-Date Usage" >}}
 
-La section Individual Organization Usage comprend deux vues qui présentent votre utilisation mensuelle des produits par organisation. La vue All est un tableau qui répertorie par produit l'utilisation brute non ajustée de votre organisation parent et de toutes les organisations enfant. Pour afficher les [détails d'utilisation][9] d'une organisation enfant, vous pouvez cliquer sur le nom de l'organisation enfant.
+Par défaut, la plupart des comptes peuvent consulter dans la vue Billable les données d'utilisation facturables. Cette vue détaille également l'utilisation à la demande dépassant vos engagements et vos allocations. La vue All affiche l'ensemble de vos données d'utilisation, y compris les données d'utilisation non facturables (par exemple, pour les versions d'essai).
 
-{{< img src="account_management/managing-multiorgs-02.png" alt="Month-to-Date Usage" >}}
+La section Overall Usage indique l'utilisation globale mensuelle de toutes les organisations au cours des 6 derniers mois. Il s'agit de l'utilisation totale, et non de l'utilisation facturable, ce qui signifie qu'elle ne tient pas compte des périodes d'évaluation ni d'autres ajustements effectués pour calculer votre facture finale. Vous pouvez télécharger ces données sous forme de fichier CSV.
 
-Pour afficher uniquement l'utilisation qui sera prise en compte dans votre facture, vous pouvez passer à la vue Billable. Cela permet de ne pas prendre en compte les organisations qui ne sont pas facturables, comme les organisations en version d'essai, en plus d'effectuer d'autres ajustements afin d'établir un descriptif plus précis des frais comptabilisés dans votre facture.
+{{< img src="account_management/multi-org-v2-trends.png" alt="Tendances à long terme de l'utilisation globale" >}}
 
-Les données sur l'utilisation pour le mois en cours et le mois précédent peuvent être téléchargées sous forme de fichier CSV.
+Vous pouvez filtrer les données de ces deux sections en cliquant sur les sous-onglets de chaque solution. L'onglet Log Management contient le tableau Logs Usage by Index. Ce dernier présente votre utilisation des logs indexés pour le mois en cours et le mois précédent en fonction des éléments suivants :
 
-### Long-Term Trends
-
-Cet onglet indique l'utilisation mensuelle globale de toutes les organisations au cours des 6 derniers mois. L'utilisation indiquée ici est l'utilisation totale et non l'utilisation facturable, ce qui signifie qu'elle ne tient pas compte des périodes d'évaluation ou d'autres ajustements effectués pour calculer votre facture finale.
+* Le nom de l'index
+* L'organisation
+* La période de rétention en jours
+* Le nombre de logs indexés, réparti entre les logs actuels et les logs réintégrés
+* Le pourcentage de contribution de l'index à l'utilisation globale des logs indexés
 
 Ces données peuvent être téléchargées sous forme de fichier CSV.
+
+{{< img src="account_management/multi-org-v2-logs-by-index.png" alt="Utilisation des logs de plusieurs organisations par index" >}}
+
+### Utilisation de chaque organisation
+
+Vous pouvez consulter depuis l'onglet Individual Organization l'utilisation de vos organisations enfant, que ce soit en unités absolues ou sous la forme d'un pourcentage de l'utilisation totale.
+
+{{< img src="account_management/multi-org-percent-billable-v2.png" alt="Utilisation individuelle en pourcentage" >}}
+
+Par défaut, la vue Billable est sélectionnée. Elle indique l'utilisation prise en compte dans votre facture finale. Cette vue n'affiche pas les organisations enfant qui ne sont pas facturables, notamment les organisations en version d'essai, et tient compte d'autres ajustements permettant d'établir un descriptif plus précis des frais comptabilisés votre facture. Basculez sur la vue All pour afficher l'utilisation brute et non ajustée de votre organisation parent et de toutes vos organisations enfant. Vous pouvez télécharger les données de ces deux vues sous forme de fichier CSV.
+
+Pour consulter les [détails d'utilisation][9] d'une organisation enfant, cliquez sur son nom.
 
 ## Attribution de l'utilisation
 
@@ -129,6 +143,6 @@ L'attribution de l'utilisation est une fonction avancée incluse dans la formule
 [5]: /fr/api/
 [6]: https://www.datadoghq.com/blog/managing-datadog-with-terraform
 [7]: /fr/dashboards/screenboards/#backup-my-screenboard
-[8]: /fr/monitors/manage_monitor/
+[8]: /fr/monitors/manage/
 [9]: /fr/account_management/billing/usage_details/
 [10]: /fr/account_management/billing/usage_attribution/
