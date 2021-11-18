@@ -157,7 +157,7 @@ Optional collection Agents are disabled by default for security or performance r
 | Env Variable               | Description                                                                                                                                                                                                                                                      |
 |----------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `DD_APM_ENABLED`           | Enable trace collection. Read about additional trace collection environment variables in [Tracing Docker Applications][15].   |
-| `DD_APM_NON_LOCAL_TRAFFIC` | Allow non-local traffic when [tracing from other containers][16]. Defaults to `false` for Agent version 6 and before version 7.26.0.   |
+| `DD_APM_NON_LOCAL_TRAFFIC` | Allow non-local traffic when [tracing from other containers][16].       |
 | `DD_LOGS_ENABLED`          | Enable [log collection][17] with the Logs Agent.                                                                                                                                                                                                                 |
 | `DD_PROCESS_AGENT_ENABLED` | Enable [live process collection][18] with the Process Agent. The [live container view][19] is already enabled by default if the Docker socket is available. If set to `false`, the [live process collection][18] and the [live container view][19] are disabled. |
 
