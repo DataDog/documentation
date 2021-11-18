@@ -113,9 +113,9 @@ Follow these steps to instrument the function:
     }
     ```
 
-### Tag
+### Unified service tagging
 
-Optionally, tag your serverless applications with `env`, `service`, and `version`. For more information, see the [Unified Service Tagging documentation][6].
+Datadog recommends tagging your serverless applications with `DD_ENV`, `DD_SERVICE`, `DD_VERSION`, and `DD_TAGS`. See the [Lambda extension documentation][10] for more details.
 
 ## Explore
 
@@ -181,3 +181,4 @@ If your Lambda function is running in a VPC, follow the [Datadog Lambda Extensio
 [7]: https://app.datadoghq.com/functions
 [8]: /serverless/custom_metrics?tab=go
 [9]: /serverless/guide/extension_private_link/
+[10]: /serverless/libraries_integrations/extension/#tagging
