@@ -556,7 +556,7 @@ After you have configured your function following the steps above, you can view 
 
 ### Unified service tagging
 
-Although it's optional, Datadog highly recommends tagging you serverless applications with the `env`, `service`, and `version` tags following the [unified service tagging documentation][5].
+Although it is optional, Datadog highly recommends tagging your serverless applications your serverless applications with `DD_ENV`, `DD_SERVICE`, `DD_VERSION`, and `DD_TAGS`. See the [Lambda extension][10] documentation for details.
 
 ### Collect logs from AWS serverless resources
 
@@ -623,3 +623,4 @@ If your Lambda function is running in a VPC, follow the [Datadog Lambda Extensio
 [7]: /serverless/custom_metrics?tab=python
 [8]: /tracing/custom_instrumentation/python/
 [9]: /serverless/guide/extension_private_link/
+[10]: /serverless/libraries_integrations/extension/#tagging
