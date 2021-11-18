@@ -353,8 +353,8 @@ If you already have the [Agent running with a manifest][4]:
 apiVersion: datadoghq.com/v1alpha1
 kind: DatadogAgent
 metadata:
-  name: datadog
-  namespace: datadog
+  name: placeholder
+  namespace: placeholder
 spec:
   # (...)
   features:
