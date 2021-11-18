@@ -444,7 +444,7 @@ After you have configured your function following the steps above, you can view 
 
 ### Unified service tagging
 
-Although it is optional, Datadog highly recommends tagging your serverless applications your serverless applications with `DD_ENV`, `DD_SERVICE`, `DD_VERSION`, and `DD_TAGS`. See the [Lambda extension][9] documentation for details.
+Datadog highly recommends tagging your serverless applications your serverless applications with `DD_ENV`, `DD_SERVICE`, `DD_VERSION`, and `DD_TAGS`. See the [Lambda extension][9] documentation for details.
 
 ### Collect logs from AWS serverless resources
 
