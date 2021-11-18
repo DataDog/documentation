@@ -1,4 +1,10 @@
 Classic:
+  - Apache:
+    - name: APISIX
+      link: https://apisix.apache.org/docs/apisix/next/plugins/datadog/
+      dogstatsd: true
+      authors: Apache APISIX
+      notes: Send custom metrics to DogStatsD using the UDP protocol.
   - Arduino:
     - name: ArduinoStatsd
       link: https://github.com/aelse/ArduinoStatsd
