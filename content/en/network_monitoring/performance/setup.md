@@ -344,6 +344,44 @@ If you already have the [Agent running with a manifest][4]:
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: /agent/kubernetes/
 {{% /tab %}}
+{{% tab "Operator" %}}
+[The Datadog Operator][1] is a way to deploy the Datadog Agent on Kubernetes and OpenShift. It reports deployment status, health, and errors in its Custom Resource status, and it limits the risk of misconfiguration thanks to higher-level configuration options.
+
+1. To enable Network Performance Monitoring in Operator, use the following configuration:
+
+```yaml
+apiVersion: datadoghq.com/v1alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+  namespace: datadog
+spec:
+  # (...)
+  features:
+    networkMonitoring:
+      enabled: true
+  agent:
+    # (...)
+    systemProbe:
+      enabled: true
+```
+
+2. Add the following volumes to your manifest:
+
+```yaml
+spec:
+  containers:
+  # (...)
+  volumes:
+      - name: sysprobe-socket-dir
+        emptyDir: {}
+      - name: debugfs
+        hostPath:
+            path: /sys/kernel/debug
+```
+
+[1]: https://github.com/DataDog/datadog-operator
+{{% /tab %}}
 {{% tab "Docker" %}}
 
 To enable Network Performance Monitoring in Docker, use the following configuration when starting the container Agent:
