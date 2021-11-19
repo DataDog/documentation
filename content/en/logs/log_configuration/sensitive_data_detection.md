@@ -14,11 +14,9 @@ further_reading:
   text: "Build a modern data compliance strategy with Datadog's Sensitive Data Scanner"
 ---
 
-<div class="alert alert-info">This page is about Sensitive Data Scanner, which is currently in private beta. Contact <a href="https://www.datadoghq.com/support/">Datadog Support</a> if you want to learn more or participate in the beta program. </div>
-
 ## Overview
 
-Sensitive data, such as US Social Security Numbers (SSN), credit card numbers, bank routing numbers, API keys, etc., are often exposed unintentionally in application logs and trace events, which can expose your organization to financial and privacy risks.
+Sensitive data, such as credit card numbers, bank routing numbers, API keys, OAuth tokens etc., are often exposed unintentionally in application logs and trace events, which can expose your organization to financial and privacy risks.
 
 Often businesses are required to identify, remediate, and prevent the exposure of such sensitive data within their logs due to organizational policies, compliance requirements, industry regulations, and privacy concerns. This is especially true for industries such as banking, financial services, healthcare, and insurance among others.
 
@@ -26,7 +24,7 @@ Often businesses are required to identify, remediate, and prevent the exposure o
 
 Sensitive data scanner is a stream-based, pattern matching service that you can use to identify, tag, and optionally redact or hash sensitive data. With implementation, your security and compliance teams can introduce a new line of defense in preventing sensitive data from leaking outside your organization.
 
-Datadog's Scanner Library offers a wide variety of rules for commonly detected patterns such as email addresses, SSN, credit card numbers, API keys, authorization tokens, and others.
+Datadog's Scanner Library offers a wide variety of rules for commonly detected patterns such as email addresses, credit card numbers, API keys, authorization tokens, and others.
 {{< img src="logs/sensitive_data_scanner/sensitive_data_scanner2.png" alt="Sensitive data scanner"  style="width:90%;">}}
 
 ### Setting up scanning groups
