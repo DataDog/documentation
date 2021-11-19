@@ -133,7 +133,7 @@ Datadog [Security Monitoring][20] automatically detects threats to your applicat
 [1]: https://app.datadoghq.com
 [2]: http://www.datadoghq.com/integrations
 [3]: /api/
-[4]: https://github.com/DataDog/dd-agent
+[4]: https://github.com/DataDog/datadog-agent
 [5]: /logs/
 [6]: /tracing/
 [7]: /infrastructure/
