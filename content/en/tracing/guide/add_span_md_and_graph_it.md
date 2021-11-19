@@ -1,5 +1,5 @@
 ---
-title: Add span tags and slice and dice your application performance
+title: Add span tags and filter and group your application performance
 kind: guide
 further_reading:
 - link: "/tracing/guide/alert_anomalies_p99_database/"
