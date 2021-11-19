@@ -57,7 +57,7 @@ To begin profiling applications:
         -jar <YOUR_SERVICE>.jar <YOUR_SERVICE_FLAGS>
     ```
 
-    **Recommendation**: Specify `dd.service`, `dd.env`, and `dd.version` so you can slice and dice your profiles across these dimensions.
+    **Recommendation**: Specify `dd.service`, `dd.env`, and `dd.version` so you can filter and group your profiles across these dimensions.
 
     You can also [use environment variables](#environment-variables) to set the parameters as such:
 

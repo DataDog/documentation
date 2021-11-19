@@ -9,7 +9,7 @@ further_reading:
   text: "Add primary and secondary tags to your traces"
 - link: "/tracing/guide/add_span_md_and_graph_it/"
   tag: "Documentation"
-  text: "Add custom tags to your spans to slice and dice performance"
+  text: "Add custom tags to your spans to filter and group performance"
 - link: "/tracing/guide/security/"
   tag: "Documentation"
   text: "Automatically scrub PII from your traces"
