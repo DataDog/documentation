@@ -24,12 +24,12 @@ Often businesses are required to identify, remediate, and prevent the exposure o
 
 Sensitive data scanner is a stream-based, pattern matching service that you can use to identify, tag, and optionally redact or hash sensitive data. With implementation, your security and compliance teams can introduce a new line of defense in preventing sensitive data from leaking outside your organization.
 
-Datadog's Scanner Library offers a wide variety of rules for commonly detected patterns such as email addresses, credit card numbers, API keys, authorization tokens, and others.
+Sensitive data scanner can be found under [Organization Settings][1]. The Scanner Library offers a wide variety of rules for commonly detected patterns such as email addresses, credit card numbers, API keys, authorization tokens, and others.
 {{< img src="logs/sensitive_data_scanner/sensitive_data_scanner3.png" alt="Sensitive data scanner"  style="width:90%;">}}
 
 ### Setting up scanning groups
 
-- **Define Scanning Groups:** Customize what data must be scanned using Pipelines. Define a query to indicate which logs must be included in the rule scope. See the [Logs search syntax page][1] for syntax on building searches.
+- **Define Scanning Groups:** Customize what data must be scanned using Pipelines. Define a query to indicate which logs must be included in the rule scope. See the [Logs search syntax page][2] for syntax on building searches.
 - **Define Scanning Rule:** Create a new rule using predefined regex patterns from Datadog’s Scanner Library or create a custom rule.
 
 ### Custom rules
@@ -48,7 +48,7 @@ Select the rule that you want from the Scanner Library and click **Add** to star
 
 ### Permissions
 
-By default, users with the Datadog Admin role have access to view and define the scanning rules. To allow other user access, grant the permission for Data Scanner under **Access Management**. See the [Custom RBAC documentation][2] for details on Roles and Permissions.
+By default, users with the Datadog Admin role have access to view and define the scanning rules. To allow other user access, grant the permission for Data Scanner under **Access Management**. See the [Custom RBAC documentation][3] for details on Roles and Permissions.
 {{< img src="logs/sensitive_data_scanner/scanner_permission.png" alt="Scanner Permission"  style="width:90%;">}}
 
 ### Using tags with Query based RBAC
@@ -65,5 +65,6 @@ Control who can access log events containing sensitive data. Use tags added by S
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /logs/explorer/search_syntax/
-[2]: /logs/guide/logs-rbac-permissions/?tab=ui#overview
+[1]: /organization-settings/sensitive-data-scanner
+[2]: /logs/explorer/search_syntax/
+[3]: /logs/guide/logs-rbac-permissions/?tab=ui#overview
