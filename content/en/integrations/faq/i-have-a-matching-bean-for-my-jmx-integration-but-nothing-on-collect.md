@@ -74,8 +74,7 @@ instances:
               values:
                 true: 1
                 false: 0
-              # Note: If using Agent 6, boolean keys must be in quotes
-              # values: {"true": 1, "false": 0, default: 0}
+              # Note: If using Agent 6, boolean keys must be in quotes values: {"true": 1, "false": 0, default: 0}
 ```
 
 Jmxfetch then knows it's a string and uses this rule to transform that into a numeric metric.
