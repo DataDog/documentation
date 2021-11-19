@@ -2,6 +2,8 @@
 title: Sensitive Data Detection
 kind: documentation
 beta: true
+aliases:
+    - /logs/log_configuration/sensitive_data_detection
 further_reading:
 - link: "/security/logs/"
   tag: "Documentation"
