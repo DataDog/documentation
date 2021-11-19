@@ -47,7 +47,7 @@ The default **sort** for logs in the list visualization is by timestamp, with th
 {{< site-region region="us,eu" >}}
 The default **sort** for logs in the list visualization is by timestamp, with the most recent logs on top. This is the fastest and therefore recommended sorting method for general purposes. Surface logs with lowest or highest value for a measure first, or sort your logs lexicographically for the unique value of facet, ordering a column according to that facet.
 
-**Note**: Although any attributes or tags can be added as a column, sorting your table will be most reliable if you [declare a facet][1] beforehand. Non-faceted attributes can be added as columns, but will not produce reliable sorting.
+**Note**: Although any attributes or tags can be added as a column, sorting your table is most reliable if you [declare a facet][1] beforehand. Non-faceted attributes can be added as columns, but will not produce reliable sorting.
 {{< /site-region >}}
 
 The configuration of the log table is stored alongside other elements of your troubleshooting context in [Saved Views][2].
