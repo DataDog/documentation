@@ -1,5 +1,5 @@
 ---
-title: Sensitive Data Detection
+title: Sensitive Data Scanner
 kind: documentation
 beta: true
 aliases:
@@ -28,7 +28,7 @@ Sensitive data scanner is a stream-based, pattern matching service that you can 
 
 Sensitive data scanner can be found under [Organization Settings][1]. The Scanner Library offers a wide variety of rules for commonly detected patterns such as email addresses, credit card numbers, API keys, authorization tokens, and others.
 
-{{< img src="logs/sensitive_data_scanner/sensitive_data_scanner3.png" alt="Sensitive Data Detection in Organization Settings" style="width:90%;">}}
+{{< img src="logs/sensitive_data_scanner/sensitive_data_scanner3.png" alt="Sensitive Data Scanner in Organization Settings" style="width:90%;">}}
 
 ### Setting up scanning groups
 
@@ -43,7 +43,7 @@ Sensitive data scanner can be found under [Organization Settings][1]. The Scanne
 - **Process matching values:** Optionally, specify whether you want to redact or hash the matching values. If you choose the redaction option, specify the placeholder text that you would like to replace the matching values so that data is redacted or hashed before it gets stored in Datadog or sent to your archive.
 - **Name the rule:** Provide an easy to understand name for the rule.
 
-{{< img src="logs/sensitive_data_scanner/scanner_custom_rule2.png" alt="A Sensitive Data Detection custom rule"  style="width:90%;">}}
+{{< img src="logs/sensitive_data_scanner/scanner_custom_rule2.png" alt="A Sensitive Data Scanner custom rule" style="width:90%;">}}
 
 ### Scanner library
 
@@ -54,7 +54,7 @@ Select the rule that you want from the Scanner Library and click **Add** to star
 
 By default, users with the Datadog Admin role have access to view and define the scanning rules. To allow other user access, grant the permission for Data Scanner under **Access Management**. See the [Custom RBAC documentation][3] for details on Roles and Permissions.
 
-{{< img src="logs/sensitive_data_scanner/scanner_permission.png" alt="Permissions for Sensitive Data Detection" style="width:90%;">}}
+{{< img src="logs/sensitive_data_scanner/scanner_permission.png" alt="Permissions for Sensitive Data Scanner" style="width:90%;">}}
 
 ### Using tags with Query based RBAC
 
