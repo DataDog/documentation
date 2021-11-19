@@ -29,6 +29,6 @@ Runtime self test: OK
 
 In the case of an error, you should see:
 ```
-Runtime self test: <ERROR_MESSAGE>
+Runtime self test: ERROR_MESSAGE
 ```
 where `ERROR_MESSAGE` is a description of the error encountered during the test.
