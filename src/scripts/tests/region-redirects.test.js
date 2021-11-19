@@ -246,9 +246,9 @@ describe(`On main page load (not home or api pages, nor loaded via async)`, () =
     describe('Datadog app links are formatted properly when changing site', () => {
         it('Retains query string parameter correctly', () => {
             const anchor = document.createElement('a');
-            const region = 'us';
+            const region = 'us3';
             anchor.href = 'https://app.datadoghq.com/infrastructure/map?node_type=container';
-            const expected = 'https://app.datadoghq.com/infrastructure/map?node_type=container'
+            const expected = 'https://us3.datadoghq.com/infrastructure/map?node_type=container'
             const formatted = getFormattedDatadogAppUrl(anchor, region);
 
             expect(formatted).toEqual(expected);
