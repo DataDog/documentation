@@ -13,7 +13,7 @@ further_reading:
   text: "Create a Dashboard to track and correlate APM metrics"
 - link: "/tracing/guide/add_span_md_and_graph_it/"
   tag: "7 mins"
-  text: "Add span tags and slice and dice your application performance"
+  text: "Add span tags and filter and group your application performance"
 - link: "/tracing/guide/"
   tag: ""
   text: "All guides"
