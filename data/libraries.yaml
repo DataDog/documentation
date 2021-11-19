@@ -1,5 +1,5 @@
 Classic:
-  - Apache:
+  - Apache APISIX:
     - name: APISIX
       link: https://apisix.apache.org/docs/apisix/next/plugins/datadog/
       dogstatsd: true
