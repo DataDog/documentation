@@ -105,7 +105,9 @@ If you open the [Host Map in Datadog][12] you can see that your dyno is reportin
 
 ## Setting up integrations
 
-Datadog comes with more than 400 turn-key integrations that collect metrics from different tech stacks. The Datadog buildpack allows you to enable these integrations for your Heroku application. We have added four examples to this guide for commonly used integrations in Heroku.
+Datadog comes with more than 400 turn-key integrations that collect metrics from different tech stacks. The Datadog buildpack allows you to enable these integrations for your Heroku application. 
+
+Four commonly-used Heroku integration configuration examples are listed below.
 
 ### Postgres
 
@@ -143,7 +145,7 @@ Migrating to CreateWidgets (20140707111715)
 
 After, you can successfully see the `/widgets` endpoint of your application, which uses that database.
 
-To enable the Postgres Datadog integration you need to retrieve the database credentials from Heroku:
+To enable the Postgres Datadog integration, retrieve the database credentials from Heroku:
 
 ```shell
 # Enter in the psql terminal
@@ -175,7 +177,7 @@ instances:
     ssl: True
 ```
 
-Instead of manually replacing and harcoding the configuration, you can also set up your Postgres integration based on Heroku environment variables, using the [prerun script][14] to replace those values before starting the Datadog agent:
+Instead of manually updating the configuration, you can set up your Postgres integration based on Heroku environment variables using the [prerun script][14] to replace those values before starting the Datadog Agent:
 
 ```shell
 #!/usr/bin/env bash
@@ -244,13 +246,13 @@ Once you have checked that the Postgres check is running correctly, you can star
 
 ### Redis
 
-For Redis, we will attach the [Heroku Redis addon][16] to our Heroku application:
+For Redis, attach the [Heroku Redis add on][16] to your Heroku application:
 
 ```shell
 heroku addons:create heroku-redis:hobby-dev
 ```
 
-To check that Redis has been succesfully attached to your application, you can run the following command:
+To validate that Redis has successfully attached to your application, run the following command:
 
  ```shell
 heroku addons:info REDIS
@@ -268,13 +270,13 @@ Price:        free
 State:        created
 ```
 
-And retrieve the credentials from HEROKU by running the following command:
+Retrieve the credentials from Heroku by running the following command:
 
 ```shell
 heroku config -a $APPNAME | grep REDIS_URL
 ```
 
-Create a configuration file called `/datadog/conf.d/redisdb.yaml` at the root of your application replacing your host, port and password with the information you got in the previous command:
+Create a configuration file named `/datadog/conf.d/redisdb.yaml` at the root of your application to replace your host, port, and password with information from the previous command:
 
 ```yaml
 init_config:
@@ -285,7 +287,7 @@ instances:
     port: <YOUR_REDIS_PORT>
 ```
 
-Instead of manually replacing and harcoding the configuration, you can also set up your Redis integration based on Heroku environment variables, using the [prerun script][14] to replace those values before starting the Datadog agent:
+Instead of manually updating the configuration, you can set up your Redis integration based on Heroku environment variables using the [prerun script][14] to replace those values before starting the Datadog Agent:
 
 ```shell
 #!/usr/bin/env bash
@@ -310,7 +312,9 @@ git commit -m "Enable redis integration"
 git push heroku main
 ```
 
-Once the build finishes, the Datadog Agent starts the Redis check. Run the Datadog Agent status as explained in the [appendix section](#appendix-getting-the-datadog-agent-status) to make sure the Redis check is running correctly. You should look out for the following section:
+Once the build finishes, the Datadog Agent starts the Redis check. [Run the Datadog Agent status](#appendix-getting-the-datadog-agent-status) to make sure the Redis check is running correctly. 
+
+The following output displays:
 
 ```
 
@@ -349,15 +353,15 @@ Collector
 
 ### Sidekiq
 
-Sidekiq is a background processing framework for Ruby. If you are using Sidekiq Pro or Enterprise you can install the Datadog integration for Sidekiq following these instructions.
+Sidekiq is a background processing framework for Ruby. If you are using Sidekiq Pro or Enterprise, you can install the Datadog integration for Sidekiq.
 
-Install the `dogstatsd-ruby`:
+Install the `dogstatsd-ruby` package:
 
 ```shell
 gem install dogstatsd-ruby
 ```
 
-Enable Sidekiq Pro metric collection by including this in your initializer:
+Enable Sidekiq Pro metric collection in your initializer:
 
 ```ruby
     require 'datadog/statsd' # gem 'dogstatsd-ruby'
@@ -372,7 +376,7 @@ Enable Sidekiq Pro metric collection by including this in your initializer:
     end
 ```
 
-If you are using Sidekiq Enterprise and would like to collect historical metrics, include this line as well:
+If you are using Sidekiq Enterprise and want to collect historical metrics, include the following:
 
 ```ruby
       Sidekiq.configure_server do |config|
@@ -415,36 +419,36 @@ git commit -m "Enable sidekiq integration"
 git push heroku main
 ```
 
-Once the build finishes, the Datadog Agent starts the Sidekiq check. Run the Datadog Agent status as explained in the [appendix section](#appendix-getting-the-datadog-agent-status) to make sure the Sidekiq check is running correctly.
+Once the build finishes, the Datadog Agent starts the Sidekiq check. [Run the Datadog Agent status](#appendix-getting-the-datadog-agent-status) to make sure the Sidekiq check is running correctly.
 
 ### Memcached
 
-Memcached is a distributed memory object caching system that is very popular in Rails applications. For this example, we will attach the [Heroku Memcached Cloud Addon][17] to our Heroku application:
+Memcached is a distributed memory object caching system that is popular in Rails applications. In this example, you can attach the [Heroku Memcached Cloud add on][17] to your Heroku application:
 
 ```
 heroku addons:create memcachedcloud:30
 ```
 
-To check that Memcached has been succesfully attached to your application, you can run the following command:
+To check that Memcached has been successfully attached to your application, run the following command:
 
 ```shell
 heroku addons | grep -A2 memcachedcloud
 ```
 
-You should get an output similar to this one:
+The following output displays:
 
 ```shell
 memcachedcloud (memcachedcloud-fluffy-34783)   30         free   created
  └─ as MEMCACHEDCLOUD
 ```
 
-And retrieve the credentials from HEROKU by running the following command:
+Retrieve the credentials from Heroku by running the following:
 
 ```shell
 heroku config | grep MEMCACHEDCLOUD
 ```
 
-Create a configuration file called `/datadog/conf.d/mcache.yaml` at the root of your application replacing your host, port, username and password with the information you got in the previous command:
+Create a configuration file named `/datadog/conf.d/mcache.yaml` at the root of your application to replace your host, port, username, and password with information from the previous command:
 
 ```yaml
 instances:
@@ -454,7 +458,7 @@ instances:
     password: <YOUR_MCACHE_PASSWORD>
 ```
 
-Instead of manually replacing and harcoding the configuration, you can also set up your Memcached integration based on Heroku environment variables, using the [prerun script][14] to replace those values before starting the Datadog agent:
+Instead of manually updating the configuration, you can set up your Memcached integration based on Heroku environment variables using the [prerun script][14] to replace those values before starting the Datadog Agent:
 
 ```shell
 #!/usr/bin/env bash
@@ -480,7 +484,9 @@ git commit -m "Enable memcached integration"
 git push heroku main
 ```
 
-Once the build finishes, the Datadog Agent starts the Memcached check. Run the Datadog Agent status as explained in the [appendix section](#appendix-getting-the-datadog-agent-status) to make sure the Memcached check is running correctly. You should look out for the following section:
+Once the build finishes, the Datadog Agent starts the Memcached check. [Run the Datadog Agent status](#appendix-getting-the-datadog-agent-status) to make sure the Memcached check is running correctly. 
+
+The following output displays:
 
 ```
 
