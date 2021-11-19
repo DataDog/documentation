@@ -11691,6 +11691,7 @@ components:
       properties:
         batch_id:
           description: The public ID of the batch triggered.
+          nullable: true
           type: string
         locations:
           description: List of Synthetics locations.
