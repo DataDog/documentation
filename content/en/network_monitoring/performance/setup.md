@@ -361,10 +361,6 @@ spec:
   features:
     networkMonitoring:
       enabled: true
-  agent:
-    # (...)
-    systemProbe:
-      enabled: true
 ```
 
 [1]: https://github.com/DataDog/datadog-operator
