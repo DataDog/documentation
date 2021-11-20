@@ -24,7 +24,7 @@ further_reading:
 
 ---
 
-In addition to running tests at predefined intervals, you can run Datadog Synthetic tests on-demand using API endpoints. Run Datadog Synthetic tests in your continuous integration (CI) pipelines to block branches from being deployed and breaking your application in production.
+In addition to running tests at pre-defined intervals, you can run Datadog Synthetic tests on-demand by using the `@datadog/datadog-ci` package or the API. Run Datadog Synthetic tests in your continuous integration (CI) pipelines to block branches from being deployed and breaking your application in production.
 
 Use Synthetic CI/CD testing to also run tests as part of your continuous delivery (CD) process and evaluate the state of your applications and services in production immediately after a deployment finishes. You can detect potential regressions that may impact your users and automatically trigger a rollback when a critical test fails.
 
@@ -715,4 +715,4 @@ curl -G \
 [2]: https://github.com/TooTallNate/node-proxy-agent
 [3]: /api/v1/synthetics/#get-test
 [4]: /synthetics/testing_tunnel/
-[5]: /synthetics/cicd_testing/ci_results_explorer
+[5]: /synthetics/ci_results_explorer

@@ -32,7 +32,7 @@ You can:
 
 ## Exploring batches
 
-The CI Results Explorer displays batches of tests that were run through the [Synthetic CI/CD testing integration][1]. Every batch corresponds to a call to the Datadog API (through the NPM package or directly through the API endpoint) to trigger one or several test executions. 
+The CI Results Explorer displays batches of tests that were run through [Synthetics and CI/CD][1]. Every batch corresponds to a call to the Datadog API (through the NPM package or directly through the API endpoint) to trigger one or several test executions. 
 
 Click on a batch to open a side panel containing batch CI metadata and batch test results. Explore the test executions performed as part of the batch and pinpoint test failures. Click on a failing test result to see the detailed **Test Result** page and investigate the root cause of the issue.
 
@@ -82,5 +82,5 @@ To query the CI Results Explorer data, use the [same query syntax][2] as on the 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /synthetics/cicd_testing
+[1]: /synthetics/cicd_integrations
 [2]: /synthetics/search/
