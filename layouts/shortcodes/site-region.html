@@ -4,4 +4,4 @@
 
 {{ $region := .Get "region" }}
 
-<div class="d-none" data-region="{{ $region }}"><p>{{- .Inner | markdownify -}}</p></div>
+<div class="d-none site-region-container" data-region="{{ $region }}"><p>{{- .Inner | markdownify -}}</p></div>
