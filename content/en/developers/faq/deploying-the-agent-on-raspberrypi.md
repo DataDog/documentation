@@ -29,7 +29,7 @@ kind: faq
 Example output after successful installation:
 {{< img src="developers/faq/rasberypi_install.png" alt="rasberypi_install" >}}
 
-The Agent runs in the foreground. Some users find benefit in creating a systemd service for the agent like this:
+The Agent runs in the foreground. Some users find benefit in creating a `systemd` service for the Agent like this:
 
 ```text
 #/etc/systemd/system/datadog.service
@@ -44,7 +44,7 @@ ExecStart=/path/to/.datadog-agent/bin/agent
 WantedBy=multi-user.target
 ```
 
-and then running
+Then, run:
 
 ```shell
 systemctl daemon-reload
@@ -52,7 +52,7 @@ sudo systemctl enable datadog
 systemctl start datadog
 ```
 
-Please note that the Datadog Agent is installed in the working directory where you ran the installation command, for example `/home/pi/.datadog-agent/`. 
+The Datadog Agent is installed in the working directory where you ran the installation command, for example: `/home/pi/.datadog-agent/`. 
 
 Example of metrics being ingested from your Raspberry PI device:
 {{< img src="developers/faq/rasberry_dashboard.png" alt="raspberry_dashboard" >}}
