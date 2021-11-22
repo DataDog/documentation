@@ -83,21 +83,7 @@ The following settings are required to enable Datadog APM in Envoy:
 
    Change the `address` value if Envoy is running in a container or orchestrated environment.
 
-2. Set Envoy's tracing configuration to use the Datadog APM extension:
-
-   ```yaml
-    tracing:
-      provider:
-        name: envoy.tracers.datadog
-        typed_config:
-          "@type": type.googleapis.com/envoy.config.trace.v3.DatadogConfig
-          collector_cluster: datadog_agent # matched against the named cluster
-          service_name: envoy-v1.19        # user-defined service name
-   ```
-
-   The `collector_cluster` value must match the name provided for the Datadog Agent cluster. The `service_name` can be changed to a meaningful value for your usage of Envoy.
-
-3. Include the following additional configuration in the `http_connection_manager` sections to enable tracing:
+2. Include the following additional configuration in the `http_connection_manager` sections to enable tracing:
 
    ```yaml
     - name: envoy.filters.network.http_connection_manager
@@ -111,8 +97,8 @@ The following settings are required to enable Datadog APM in Envoy:
               "@type": type.googleapis.com/envoy.config.trace.v3.DatadogConfig
               collector_cluster: datadog_agent
               service_name: envoy-v1.19 
-
    ```
+   The `collector_cluster` value must match the name provided for the Datadog Agent cluster. The `service_name` can be changed to a meaningful value for your usage of Envoy.
 
 With this configuration, HTTP requests to Envoy initiate and propagate Datadog traces, and appear in the APM UI.
 
