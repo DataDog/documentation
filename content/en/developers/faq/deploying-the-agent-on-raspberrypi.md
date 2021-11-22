@@ -52,7 +52,7 @@ sudo systemctl enable datadog
 systemctl start datadog
 ```
 
-n.b. that the Datadog Agent is installed in the working directory where you ran the installation command, e.g. `/home/pi/.datadog-agent/`. 
+Please note that the Datadog Agent is installed in the working directory where you ran the installation command, for example `/home/pi/.datadog-agent/`. 
 
 Example of metrics being ingested from your Raspberry PI device:
 {{< img src="developers/faq/rasberry_dashboard.png" alt="raspberry_dashboard" >}}
