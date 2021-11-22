@@ -2049,10 +2049,8 @@ components:
           maxLength: 4000
           type: string
         title:
-          description: The event title. Limited to 100 characters. Use `msg_title`
-            with the Datadog Ruby library.
+          description: The event title.
           example: Did you hear the news today?
-          maxLength: 100
           type: string
         url:
           description: URL of the event.
