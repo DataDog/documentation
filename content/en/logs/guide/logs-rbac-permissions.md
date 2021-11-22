@@ -364,7 +364,7 @@ This permission is global, and grants access to the livetail regardless of [Log 
 {{< partial name="whats-next/whats-next.html" >}}
 
 <br>
-\*Log Rehydration is a trademark of Datadog, Inc.
+*Log Rehydration is a trademark of Datadog, Inc.
 
 [1]: /logs/guide/logs-rbac/
 [2]: /account_management/rbac/permissions
