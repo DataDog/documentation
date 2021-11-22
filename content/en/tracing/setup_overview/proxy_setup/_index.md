@@ -59,7 +59,6 @@ Example configurations for other versions can be found [in the `dd-opentracing-c
 The following settings are required to enable Datadog APM in Envoy:
 
 - a cluster for submitting traces to the Datadog Agent
-- `tracing` configuration to enable the Datadog APM extension
 - `http_connection_manager` configuration to activate tracing
 
 1. Add a cluster for submitting traces to the Datadog Agent:
@@ -78,7 +77,7 @@ The following settings are required to enable Datadog APM in Envoy:
           - endpoint:
               address:
                 socket_address:
-                  address: dd-agent
+                  address: localhost
                   port_value: 8126
    ```
 
@@ -105,7 +104,14 @@ The following settings are required to enable Datadog APM in Envoy:
       typed_config:
         "@type": type.googleapis.com/envoy.extensions.filters.network.http_connection_manager.v3.HttpConnectionManager
         generate_request_id: true
-        tracing: {}
+        tracing: 
+          provider:
+            name: envoy.tracers.datadog
+            typed_config:
+              "@type": type.googleapis.com/envoy.config.trace.v3.DatadogConfig
+              collector_cluster: datadog_agent
+              service_name: envoy-v1.19 
+
    ```
 
 With this configuration, HTTP requests to Envoy initiate and propagate Datadog traces, and appear in the APM UI.
@@ -136,14 +142,6 @@ static_resources:
                 "@type": type.googleapis.com/envoy.config.trace.v3.DatadogConfig
                 collector_cluster: datadog_agent   # matched against the named cluster
                 service_name: envoy-v1.19          # user-defined service name
-          access_log:
-          - name: envoy.access_loggers.file
-            typed_config:
-              "@type": type.googleapis.com/envoy.extensions.access_loggers.file.v3.FileAccessLog
-              path: /dev/stdout
-              log_format:
-                text_format_source:
-                  inline_string: "[%START_TIME%] \"%REQ(:METHOD)% %REQ(X-ENVOY-ORIGINAL-PATH?:PATH):256% %PROTOCOL%\" %RESPONSE_CODE% %RESPONSE_FLAGS% %BYTES_RECEIVED% %BYTES_SENT% %DURATION% %RESP(X-ENVOY-UPSTREAM-SERVICE-TIME)% \"%REQ(X-FORWARDED-FOR)%\" \"%REQ(USER-AGENT)%\" \"%REQ(X-REQUEST-ID)%\" \"%REQ(:AUTHORITY)%\" \"%UPSTREAM_HOST%\" \"%RESP(X-AMZN-RequestId)%\" \"%REQ(X-DATADOG-TRACE-ID)%\" \"%REQ(X-DATADOG-PARENT-ID)%\"\n"
           codec_type: auto
           stat_prefix: ingress_http
           route_config:
@@ -196,7 +194,7 @@ static_resources:
         - endpoint:
             address:
               socket_address:
-                address: dd-agent
+                address: localhost
                 port_value: 8126
 
 admin:
@@ -227,6 +225,7 @@ The available [environment variables][2] depend on the version of the C++ tracer
 
 | Envoy Version | C++ Tracer Version |
 |---------------|--------------------|
+| v1.19 | v1.2.1 |
 | v1.18 | v1.2.1 |
 | v1.17 | v1.1.5 |
 | v1.16 | v1.1.5 |
