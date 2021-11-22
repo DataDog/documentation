@@ -71,7 +71,7 @@ DD_APM_REPLACE_TAGS=[
 ]
 ```
 
-Payload obfuscation is available in when using the Datadog Lambda Extension. It is not available in the Datadog Forwarder.
+Payload obfuscation is available when using the Datadog Lambda Extension. It is not available in the Datadog Forwarder.
 
 ## Further Reading
 
