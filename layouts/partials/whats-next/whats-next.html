@@ -23,7 +23,12 @@
       {{- end -}}
       {{- $link := $.Scratch.Get "link" -}}
       <a class="list-group-item list-group-item-action list-group-item-white  d-flex justify-content-between align-items-center" href="{{- $link -}}">
-        <span><span class="text">{{- .text -}}</span>{{- if .tag -}}<span class="badge badge-white">{{- .tag | upper -}}</span>{{- end -}}</span>
+        <span class="w-100 d-flex justify-content-between">
+            <span class="text">{{- .text -}}</span>
+            {{- if .tag -}}
+                <span class="badge badge-white pr-2">{{- .tag | upper -}}</span>
+            {{- end -}}
+        </span>
         {{- partial "img.html" (dict "root" $dot "src" "icons/list-group-whats-next-arrow-1.png" "class" "img-fluid static" "alt" "more") -}}
         {{- partial "img.html" (dict "root" $dot "src" "icons/list-group-whats-next-arrow-2.png" "class" "img-fluid hover" "alt" "more") -}}
       </a>
