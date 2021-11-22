@@ -1,9 +1,9 @@
 ---
 dependencies:
-  - 'https://github.com/DataDog/dd-sdk-android/blob/master/docs/log_collection.md'
+  - https://github.com/DataDog/dd-sdk-android/blob/master/docs/log_collection.md
 description: Recueillez des logs à partir de vos applications Android.
 further_reading:
-  - link: 'https://github.com/DataDog/dd-sdk-android'
+  - link: https://github.com/DataDog/dd-sdk-android
     tag: Github
     text: Code source dd-sdk-android
   - link: logs/explorer
@@ -25,10 +25,6 @@ Envoyez des logs à Datadog à partir de vos applications Android avec la [bibli
 1. Ajoutez la dépendance Gradle en définissant la bibliothèque en tant que dépendance dans le fichier `build.gradle` au niveau du module :
 
     ```conf
-    repositories {
-        maven { url "https://dl.bintray.com/datadog/datadog-maven" }
-    }
-
     dependencies {
         implementation "com.datadoghq:dd-sdk-android:x.x.x"
     }
@@ -42,8 +38,8 @@ Envoyez des logs à Datadog à partir de vos applications Android avec la [bibli
     class SampleApplication : Application() {
         override fun onCreate() {
             super.onCreate()
-            val configuration = Configuration.Builder().build()
-            val credentials = Credentials(<CLIENT_TOKEN>,<ENV_NAME>,<APP_VARIANT_NAME>,<APPLICATION_ID>)
+            val configuration = Configuration.Builder(logsEnabled = true, ...).build()
+            val credentials = Credentials(<CLIENT_TOKEN>, <ENV_NAME>, <APP_VARIANT_NAME>, <APPLICATION_ID>)
             Datadog.initialize(this, credentials, configuration, trackingConsent)
         }
     }
@@ -54,10 +50,10 @@ Envoyez des logs à Datadog à partir de vos applications Android avec la [bibli
    class SampleApplication : Application() {
        override fun onCreate() {
           super.onCreate()
-          val configuration = Configuration.Builder()
+          val configuration = Configuration.Builder(logsEnabled = true, ...)
              .useEUEndpoints()
              .build()
-          val credentials = Credentials(<CLIENT_TOKEN>,<ENV_NAME>,<APP_VARIANT_NAME>,<APPLICATION_ID>)
+          val credentials = Credentials(<CLIENT_TOKEN>, <ENV_NAME>, <APP_VARIANT_NAME>, <APPLICATION_ID>)
           Datadog.initialize(this, credentials, configuration, trackingConsent)
        }
    }
@@ -78,16 +74,16 @@ Envoyez des logs à Datadog à partir de vos applications Android avec la [bibli
    * Si vous la remplacez par `TrackingConsent.GRANTED` : le SDK envoie tous les lots de données actuels, ainsi que toutes les données ultérieures, directement au endpoint de collecte de données.
    * Si vous la remplacez par `TrackingConsent.NOT_GRANTED` : le SDK supprime tous les lots de données et ne recueille plus aucune donnée par la suite.
 
-   Attention, vous devez également spécifier le nom de la variante de votre application dans les identifiants requis pour l'initialisation. Cette opération est primordiale, car elle permet d'importer automatiquement le bon fichier `mapping.txt` ProGuard au moment de la génération. Un dashboard Datadog peut alors annuler l'obfuscation des stack traces.
+**Remarque** : dans les identifiants requis pour l'initialisation, vous devez également spécifier le nom de variante de votre application. Pour ce faire, utilisez votre valeur `BuildConfig.FLAVOR` (ou une chaîne vide si vous n'avez pas de variante). Cette étape est essentielle, car elle permet d'importer automatiquement le bon fichier `mapping.txt` ProGuard au moment du build, afin d'afficher les stack traces des erreurs RUM désobfusquées. Pour en savoir plus, consultez le [guide d'importation de fichiers de mapping source Android][8].
 
    Utilisez la méthode utilitaire `isInitialized` pour vérifier que le SDK est bien initialisé :
 
    ```kotlin
-    if(Datadog.isInitialized()){
-        // your code here
+    if (Datadog.isInitialized()) {
+        // votre code ici
     }
    ```
-   Lors de la création de votre application, vous pouvez activer les logs de développement en appelant la méthode `setVerbosity`. Tous les messages internes de la bibliothèque dont la priorité est supérieure ou égale au niveau spécifié sont alors enregistrés dans le Logcat Android :
+   Lors de la création de votre application, vous pouvez activer les logs de développement en appelant la méthode `setVerbosity`. Tous les messages internes de la bibliothèque dont la priorité est égale ou supérieure au niveau spécifié sont alors enregistrés dans le Logcat d'Android :
    ```kotlin
    Datadog.setVerbosity(Log.INFO)
    ```
@@ -119,7 +115,7 @@ Envoyez des logs à Datadog à partir de vos applications Android avec la [bibli
     ```kotlin
     try {
         doSomething()
-    } catch (e : IOException) {
+    } catch (e: IOException) {
         logger.e("Error while doing something", e)
     }
     ```
@@ -129,31 +125,35 @@ Envoyez des logs à Datadog à partir de vos applications Android avec la [bibli
 5. (Facultatif) - Fournissez une map avec votre message de log pour ajouter des attributs au log envoyé. Chaque entrée de la map est ajoutée en tant qu'attribut.
 
     ```kotlin
-    logger.i("onPageStarted", attributes = mapOf("http.url", url))
+    logger.i("onPageStarted", attributes = mapOf("http.url" to url))
     ```
 
     En Java, cela donnerait :
 
     ```java
-    Logger.d(
-            "onPageStarted",
-            null,
-            new HashMap<String, Object>() {{
-                put("http.url", url);
-            }}
-    );
+    Map<String, Object> attributes = new HashMap<>();
+    attributes.put("http.url", url);
+    Logger.d("onPageStarted", null, attributes);
     ```
+
+6. Si vous devez modifier certains attributs de vos événements de log avant de les rassembler, vous pouvez implémenter `EventMapper<événement_log>` lors de l'initialisation du SDK :
+   ```kotlin
+      val config = Configuration.Builder(logsEnabled = true, ...)
+                        // ...
+                        .setLogEventMapper(logEventMapper)
+                        .build()
+   ```
+   **Remarque** : si vous renvoyez une valeur nulle ou une autre instance à partir de l'implémentation `EventMapper<événement_log>`, l'événement sera ignoré.
 
 ## Logging avancé
 
 ### Initialisation de la bibliothèque
 
-Les méthodes suivantes dans `DatadogConfig.Builder` peuvent être utilisées lors de la création de la configuration Datadog pour initialiser la bibliothèque :
+Les méthodes suivantes dans `Configuration.Builder` peuvent être utilisées lors de la création de la configuration Datadog pour initialiser la bibliothèque :
 
 | Méthode                           | Description                                                                                                                                                                                                                                                             |
 |----------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `setServiceName(<NOM_SERVICE>)` | Définir `<NOM_SERVICE>` en tant que valeur par défaut pour l'[attribut standard][4] `service` joint à tous les logs envoyés à Datadog (cette valeur peut être remplacée dans chaque logger).                                                                                                                                                           |
-| `setLogsEnabled(true)`     | Définir sur `true` pour activer l'envoi de logs à Datadog.                                                                                                                                                                                                                                  |
+| `constructor(logsEnabled = true)`     | Définir sur `true` pour activer l'envoi de logs à Datadog.                                                                                                                                                                                                                                  |
 | `addPlugin(DatadogPlugin, Feature)`   | Ajoute une implémentation de plugin pour une fonctionnalité spécifique (CRASH, LOG, TRACE, RUM). Le plugin sera enregistré une fois la fonctionnalité réinitialisée, puis désenregistré lorsque la fonctionnalité sera arrêtée. |
 
 ### Initialisation du logger
@@ -169,7 +169,6 @@ Les méthodes suivantes dans `Logger.Builder` peuvent être utilisées lors de l
 | `setBundleWithTraceEnabled(true)`| Définir sur `true` (valeur par défaut) pour associer les logs à la trace active dans votre application. Ce paramètre vous permet de visualiser tous les logs envoyés lors d'une trace spécifique depuis le dashboard Datadog.                                                        |
 | `setBundleWithRumEnabled(true)`| Définir sur `true` (valeur par défaut) pour associer les logs au contexte RUM actuel dans votre application. Ce paramètre vous permet de visualiser tous les logs envoyés pendant qu'une vue spécifique est active depuis le RUM Explorer Datadog.                                                        |
 | `setLoggerName(<NOM_LOGGER>)`   | Définir `<NOM_LOGGER>` en tant que valeur pour l'attribut `logger.name` joint à tous les logs envoyés à Datadog.                                                                                                                                                                  |
-| `setVerbosity(Log.INFO)`         | Définir le niveau de détail du logger. Tous les messages internes dans la bibliothèque dont la priorité est égale ou supérieure au niveau spécifié sont enregistrés dans le Logcat d'Android.                                                                                                       |
 | `setSampleRate(<TAUX_ÉCHANTILLONNAGE>)`   | Définir le taux d'échantillonnage de ce logger. Tous les logs générés par l'instance du logger sont échantillonnés de manière aléatoire selon le taux d'échantillonnage fourni (par défaut 1.0 = tous les logs). **Remarque** : les logs Logcat ne sont pas échantillonnés.            |
 | `build()`                        | Créer une instance de logger avec toutes les options définies.                                                                                                                                                                                                                       |
 
@@ -181,7 +180,7 @@ Vous trouverez ci-dessous les fonctions pour ajouter/supprimer des tags et des a
 
 ##### Ajouter des tags
 
-Utilisez la fonction `addTag("<CLÉ_TAG>","<VALEUR_TAG>")` pour ajouter des tags à tous les logs envoyés par un logger spécifique :
+Utilisez la fonction `addTag("<CLÉ_TAG>", "<VALEUR_TAG>")` pour ajouter des tags à tous les logs envoyés par un logger spécifique :
 
 ```kotlin
 // Ajouter un tag build_type:debug ou build_type:release

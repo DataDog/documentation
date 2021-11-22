@@ -2,6 +2,9 @@
 title: Getting Started with Private Locations
 kind: documentation
 further_reading:
+    - link: "https://www.datadoghq.com/blog/synthetic-private-location-monitoring-datadog/"
+      tag: "Blog"
+      text: "Monitor your Synthetic private locations with Datadog"
     - link: '/getting_started/synthetics/api_test'
       tag: 'Documentation'
       text: 'Create your first API test'
@@ -24,7 +27,7 @@ Private locations allow you to **monitor internal-facing applications** or priva
 You can also use private locations to:
 
 - **Create custom locations** in mission-critical areas of your business.
-- **Verify the application performance in your internal testing environment** before you release new features to production with [Synthetic CI/CD Testing][1].
+- **Verify the application performance in your internal testing environment** before you release new features to production with [Synthetics and CI/CD][1].
 - **Compare the application performance** from inside and outside your internal network.
 
 Private locations are Docker containers that you can install anywhere inside your private network. You can access the [private location worker image][2] on Google Container Registry.

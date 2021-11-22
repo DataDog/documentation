@@ -51,7 +51,7 @@
 
 	{{ if isset .Params "source" }}
 		{{ with .Site.GetPage (print "/integrations/" .Params.source ) }}
-			<p>Set up the <a href="{{ (printf "integrations/%s" $dot.Params.source) | absLangURL }}">{{ $dot.Params.source }}</a> integration.</p>
+			<p>Set up the <a href="{{ (strings.TrimLeft "/" .RelPermalink) | absLangURL }}">{{ $dot.Params.source }}</a> integration.</p>
 		{{ end }}
 	{{ end }}
 

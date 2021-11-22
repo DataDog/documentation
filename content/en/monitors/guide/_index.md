@@ -12,5 +12,6 @@ disable_sidebar: true
     {{< nextlink href="monitors/guide/monitor-for-value-within-a-range" >}}Monitoring Ranges{{< /nextlink >}}
     {{< nextlink href="monitors/guide/suppress-alert-with-downtimes" >}}Suppress Alerts with Downtimes{{< /nextlink >}}
     {{< nextlink href="monitors/guide/alert-on-no-change-in-value" >}}Alert on No Change in Value{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/create-cluster-alert" >}}Create Cluster alerts for Metrics monitor{{< /nextlink >}}
     {{< nextlink href="monitors/guide/slo-checklist" >}}SLO Checklist{{< /nextlink >}}
 {{< /whatsnext >}}

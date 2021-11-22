@@ -148,7 +148,7 @@ further_reading:
 
 {{< img src="tagging/using_tags/newmonitortags.png" alt="新しいモニタータグ" style="width:80%;">}}
 
-[1]: /ja/monitors/monitor_types/
+[1]: /ja/monitors/create/types/
 {{% /tab %}}
 {{% tab "Manage Downtime" %}}
 
@@ -156,7 +156,7 @@ further_reading:
 
 {{< img src="tagging/using_tags/managedowntimetags.png" alt="モニターの管理タグ" style="width:80%;">}}
 
-[1]: /ja/monitors/downtimes/
+[1]: /ja/monitors/notify/downtimes/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -248,7 +248,7 @@ datadog:monitored,env:production,!env:staging,instance-type:c1.*
 
 [1]: /ja/getting_started/tagging/assigning_tags/
 [2]: /ja/tracing/app_analytics/search/
-[3]: /ja/monitors/manage_monitor/
+[3]: /ja/monitors/manage/
 [4]: /ja/logs/explorer/search/
 [5]: /ja/infrastructure/hostmap/
 {{% /tab %}}

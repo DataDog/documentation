@@ -2,7 +2,7 @@
 title: Monitoring HCP Consul with Datadog
 kind: guide
 further_reading:
-  - link: "integrations/consul"
+  - link: "/integrations/consul/"
     tag: "Documentation"
     text: "Consul integration"
 ---
@@ -12,19 +12,19 @@ The [Datadog Consul Integration][1] can collect information about your HCP Consu
 
 ## Overview
 
-HCP Consul is a version of Consul in which the control plane is managed by HashiCorp Cloud Platform. 
+HCP Consul is a version of Consul in which the control plane is managed by HashiCorp Cloud Platform.
 
-## Setup 
+## Setup
 
 To start collecting your Consul metrics:
-1. Ensure you have set up HCP Consul according to the [Consul documentation][2].
+1. Ensure you have set up HCP Consul according to the [HCP Consul Introduction][2].
 2. Install the Datadog agent on your [Consul client][3].
 3. Edit the [`consul.d/conf.yaml` file][4], in the `conf.d/` folder at the root of your [Agent's configuration directory][5] and set the `url` configuration option to your Consul client URL.
 5. Restart the [Agent][6].
 
-## Metrics Collected 
+## Metrics collected
 
-Using The Datadog Consul Integration with HCP Consul collects a subset of the Consul Integration's [default metrics][7] that do not pertain to [server health][8], including:   
+Using The Datadog Consul Integration with HCP Consul collects a subset of the Consul Integration's [default metrics][7] that do not pertain to [server health][8], including:
 - Information about Consul nodes
 - Network coordinates - inter- and intra-datacenter latencies
 - Cluster health [metrics][9]

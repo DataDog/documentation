@@ -37,37 +37,9 @@ vagrant ssh
 
 To install the Datadog Agent on a host, use the [one line install command][6] updated with your [Datadog API key][7]:
 
-{{< site-region region="us" >}}
-
 ```shell
-DD_API_KEY=<DATADOG_API_KEY>  bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"
+DD_API_KEY=<DATADOG_API_KEY> DD_SITE="{{< region-param key="dd_site" >}}" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"
 ```
-
-{{< /site-region >}}
-
-{{< site-region region="eu" >}}
-
-```shell
-DD_API_KEY=<DATADOG_API_KEY> DD_SITE="datadoghq.eu" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"
-```
-
-{{< /site-region >}}
-
-{{< site-region region="gov" >}}
-
-```shell
-DD_API_KEY=<DATADOG_API_KEY> DD_SITE="ddog-gov.com" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"
-```
-
-{{< /site-region >}}
-
-{{< site-region region="us3" >}}
-
-```shell
-DD_API_KEY=<DATADOG_API_KEY> DD_SITE="us3.datadoghq.com" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"
-```
-
-{{< /site-region >}}
 
 ### Validation
 
@@ -192,7 +164,7 @@ After a few minutes, your trace displays in Datadog under the `hello` service. C
 [4]: https://app.vagrantup.com/ubuntu/boxes/xenial64
 [5]: https://www.vagrantup.com/intro/getting-started
 [6]: https://app.datadoghq.com/account/settings#agent/ubuntu
-[7]: https://app.datadoghq.com/account/settings#api
+[7]: https://app.datadoghq.com/organization-settings/api-keys
 [8]: /agent/guide/agent-commands/#agent-information
 [9]: https://app.datadoghq.com/infrastructure
 [10]: https://app.datadoghq.com/apm/docs

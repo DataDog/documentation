@@ -2,23 +2,28 @@
 title: イベントガイド
 kind: documentation
 further_reading:
-  - link: /events/
+  - link: /events/explorer/
     tag: ドキュメント
-    text: Datadog イベントストリーム
-  - link: /monitors/monitor_types/event/
+    text: Datadog イベントエクスプローラー
+  - link: /monitors/create/types/event/
     tag: ドキュメント
     text: イベントモニター
 aliases:
-  - /ja/events/
+  - /ja/developers/events/
 ---
-イベントは、エンジニア (開発、運用、セキュリティ) にとって注目に値するアクティビティの記録です。次のガイドを使用して、イベントをプログラムで送信します。
+イベントは、エンジニア (開発、運用、セキュリティ) が注目すべきアクティビティの記録です。
 
-{{< whatsnext desc="次の方法で Datadog にイベントを送信します。">}}
+{{< whatsnext desc="カスタムイベントを Datadog に送信します。">}}
     {{< nextlink href="/events/guides/agent/" >}}カスタム Agent チェック{{< /nextlink >}}
     {{< nextlink href="/events/guides/dogstatsd/" >}}DogStatsD{{< /nextlink >}}
     {{< nextlink href="/events/guides/email/" >}}メール{{< /nextlink >}}
     {{< nextlink href="/api/v1/events/#post-an-event" >}}Datadog API{{< /nextlink >}}
 {{< /whatsnext >}}
+
+{{< whatsnext desc="その他のガイド:">}}
+    {{< nextlink href="/events/guides/migrating_to_new_events_features/" >}}新しいイベント機能への移行{{< /nextlink >}}
+{{< /whatsnext >}}
+
 
 ## その他の参考資料
 

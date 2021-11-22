@@ -318,7 +318,7 @@ While this page deals with modifying data once it has reached the Datadog Agent,
 * Python: [Trace Filtering][10]
 
 
-[1]: /tracing/help
+[1]: /help/
 [2]: /tracing/visualization/#trace
 [3]: /tracing/visualization/#spans
 [4]: /agent/guide/agent-configuration-files/#agent-main-configuration-file

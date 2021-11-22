@@ -53,66 +53,62 @@ Datadog APM is included in Envoy v1.9.0 and newer.
 
 ## Enabling Datadog APM
 
-**Note**: The example configuration below is for Envoy v1.14.
-Example configurations for older versions can be found [here][1]
+**Note**: The example configuration below is for Envoy v1.19.
+Example configurations for other versions can be found [in the `dd-opentracing-cpp` GitHub repo][1].
 
-Three settings are required to enable Datadog APM in Envoy:
+The following settings are required to enable Datadog APM in Envoy:
 
 - a cluster for submitting traces to the Datadog Agent
-- `tracing` configuration to enable the Datadog APM extension
 - `http_connection_manager` configuration to activate tracing
 
-A cluster for submitting traces to the Datadog Agent needs to be added.
+1. Add a cluster for submitting traces to the Datadog Agent:
 
-```yaml
-  clusters:
-  ... existing cluster configs ...
-  - name: datadog_agent
-    connect_timeout: 1s
-    type: strict_dns
-    lb_policy: round_robin
-    load_assignment:
-      cluster_name: datadog_agent
-      endpoints:
-      - lb_endpoints:
-        - endpoint:
-            address:
-              socket_address:
-                address: localhost
-                port_value: 8126
-```
+   ```yaml
+    clusters:
+    ... existing cluster configs ...
+    - name: datadog_agent
+      connect_timeout: 1s
+      type: strict_dns
+      lb_policy: round_robin
+      load_assignment:
+        cluster_name: datadog_agent
+        endpoints:
+        - lb_endpoints:
+          - endpoint:
+              address:
+                socket_address:
+                  address: localhost
+                  port_value: 8126
+   ```
 
-The `address` value may need to be changed if Envoy is running in a container or orchestrated environment.
+   Change the `address` value if Envoy is running in a container or orchestrated environment.
 
-Envoy's tracing configuration needs to use the Datadog APM extension.
+2. Include the following additional configuration in the `http_connection_manager` sections to enable tracing:
 
-```yaml
-tracing:
-  http:
-    name: envoy.tracers.datadog
-    typed_config:
-      "@type": type.googleapis.com/envoy.config.trace.v2.DatadogConfig
-      collector_cluster: datadog_agent   # matched against the named cluster
-      service_name: envoy-example        # user-defined service name
-```
+   ```yaml
+    - name: envoy.filters.network.http_connection_manager
+      typed_config:
+        "@type": type.googleapis.com/envoy.extensions.filters.network.http_connection_manager.v3.HttpConnectionManager
+        generate_request_id: true
+        request_id_extension:
+          typed_config:
+            "@type": type.googleapis.com/envoy.extensions.request_id.uuid.v3.UuidRequestIdConfig
+            use_request_id_for_trace_sampling: false
+        tracing: 
+          provider:
+            name: envoy.tracers.datadog
+            typed_config:
+              "@type": type.googleapis.com/envoy.config.trace.v3.DatadogConfig
+              collector_cluster: datadog_agent
+              service_name: envoy-v1.19 
+   ```
+   The `collector_cluster` value must match the name provided for the Datadog Agent cluster. The `service_name` can be changed to a meaningful value for your usage of Envoy.
 
-The `collector_cluster` value must match the name provided for the Datadog Agent cluster.
-The `service_name` can be changed to a meaningful value for your usage of Envoy.
+With this configuration, HTTP requests to Envoy initiate and propagate Datadog traces, and appear in the APM UI.
 
-Finally, the `http_connection_manager` sections need to include additional configuration to enable tracing.
+## Example Envoy v1.19 configuration
 
-```yaml
-      - name: envoy.http_connection_manager
-        typed_config:
-          "@type": type.googleapis.com/envoy.config.filter.network.http_connection_manager.v2.HttpConnectionManager
-          tracing: {}
-```
-
-After completing this configuration, HTTP requests to Envoy will initiate and propagate Datadog traces, and will appear in the APM UI.
-
-## Example Envoy v1.14 configuration
-
-An example configuration is provided here to demonstrate the placement of items required to enable tracing using Datadog APM.
+The following example configuration demonstrates the placement of items required to enable tracing using Datadog APM.
 
 ```yaml
 static_resources:
@@ -124,11 +120,22 @@ static_resources:
     traffic_direction: OUTBOUND
     filter_chains:
     - filters:
-      - name: envoy.http_connection_manager
+      - name: envoy.filters.network.http_connection_manager
         typed_config:
-          "@type": type.googleapis.com/envoy.config.filter.network.http_connection_manager.v2.HttpConnectionManager
+          "@type": type.googleapis.com/envoy.extensions.filters.network.http_connection_manager.v3.HttpConnectionManager
           generate_request_id: true
-          tracing: {}
+          request_id_extension:
+            typed_config:
+              "@type": type.googleapis.com/envoy.extensions.request_id.uuid.v3.UuidRequestIdConfig
+              use_request_id_for_trace_sampling: false
+          tracing:
+          # Use the datadog tracer
+            provider:
+              name: envoy.tracers.datadog
+              typed_config:
+                "@type": type.googleapis.com/envoy.config.trace.v3.DatadogConfig
+                collector_cluster: datadog_agent   # matched against the named cluster
+                service_name: envoy-v1.19          # user-defined service name
           codec_type: auto
           stat_prefix: ingress_http
           route_config:
@@ -142,11 +149,11 @@ static_resources:
                   prefix: "/"
                 route:
                   cluster: service1
-          http_filters:
           # Traces for healthcheck requests should not be sampled.
+          http_filters:
           - name: envoy.filters.http.health_check
             typed_config:
-              "@type": type.googleapis.com/envoy.config.filter.http.health_check.v2.HealthCheck
+              "@type": type.googleapis.com/envoy.extensions.filters.http.health_check.v3.HealthCheck
               pass_through_mode: false
               headers:
                 - exact_match: /healthcheck
@@ -159,7 +166,6 @@ static_resources:
     connect_timeout: 0.250s
     type: strict_dns
     lb_policy: round_robin
-    http2_protocol_options: {}
     load_assignment:
       cluster_name: service1
       endpoints:
@@ -169,7 +175,7 @@ static_resources:
               socket_address:
                 address: service1
                 port_value: 80
-  # Configure this cluster with the address of the datadog agent
+  # Configure this cluster with the address of the datadog Agent
   # for sending traces.
   - name: datadog_agent
     connect_timeout: 1s
@@ -184,15 +190,6 @@ static_resources:
               socket_address:
                 address: localhost
                 port_value: 8126
-
-tracing:
-  # Use the datadog tracer
-  http:
-    name: envoy.tracers.datadog
-    typed_config:
-      "@type": type.googleapis.com/envoy.config.trace.v2.DatadogConfig
-      collector_cluster: datadog_agent   # matched against the named cluster
-      service_name: envoy-example        # user-defined service name
 
 admin:
   access_log_path: "/dev/null"
@@ -222,6 +219,7 @@ The available [environment variables][2] depend on the version of the C++ tracer
 
 | Envoy Version | C++ Tracer Version |
 |---------------|--------------------|
+| v1.19 | v1.2.1 |
 | v1.18 | v1.2.1 |
 | v1.17 | v1.1.5 |
 | v1.16 | v1.1.5 |

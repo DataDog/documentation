@@ -40,19 +40,19 @@ further_reading:
       def check(self, instance):
         self.gauge('hello.world', 1)
   ```
-6. [Agent を再起動します][3]。1 分以内に、[メトリクスサマリーページ][4]に `hello.world` という新しいメトリクスが表示されます。
+6. [Agent を再起動します][3]。1 分以内に、[メトリクスサマリー][4]に `hello.world` という新しいメトリクスが表示されます。
 
 **注**: コンフィギュレーションファイルとチェックファイルの名前は一致している必要があります。チェックの名前が `checkvalue.py` の場合、コンフィギュレーションファイルの名前は `checkvalue.yaml` である必要があります。
 
 ### 結果
 
-1 分以内に、[メトリクスサマリーページ][4]に `hello.world` という新しいメトリクスが表示されます。これは `1` の値を送信します。
+1 分以内に、[メトリクスサマリー][4]に `hello.world` という新しいメトリクスが表示されます。これは `1` の値を送信します。
 
 **注**: カスタムチェックの名前を選択する際は、既存の Datadog Agent インテグレーションの名前との競合を避けるため、名前の前に `custom_` を付けてください。たとえば、カスタム Postfix チェックの場合、チェックファイルの名前は、`postfix.py` と `postfix.yaml` ではなく、`custom_postfix.py` と `custom_postfix.yaml` にします。
 
 ### 収集間隔の更新
 
-チェックの収集間隔を変更するには、`checkvalue.yaml` ファイルで `min_collection_interval` を使用します。デフォルト値は `15` です。Agent 6 の場合、`min_collection_interval` をインスタンスレベルで追加し、インスタンスごとに個別に構成する必要があります。例:
+チェックの収集間隔を変更するには、`checkvalue.yaml` ファイルで `min_collection_interval` を使用します。デフォルト値は `15` です。Agent v6 の場合、`min_collection_interval` をインスタンスレベルで追加し、インスタンスごとに個別に構成する必要があります。例:
 
 ```yaml
 init_config:
@@ -137,7 +137,7 @@ class LSCheck(AgentCheck):
     instances:
       - ipaddress: 1.2.3.4
   ```
-3. [Agent を再起動します][3]。1 分以内に、ロードバランサーからメトリクスを送信する `coreapp.update.value` という新しいメトリクスが[メトリクスサマリーページ][4]に表示されます。
+3. [Agent を再起動します][3]。1 分以内に、ロードバランサーからメトリクスを送信する `coreapp.update.value` という新しいメトリクスが[メトリクスサマリー][4]に表示されます。
 4. このメトリクスの[ダッシュボードを作成][6]します。
 
 ## Agent のバージョン管理

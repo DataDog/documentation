@@ -32,6 +32,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-dashboards/"
   tag: "Blog"
   text: "The new Datadog dashboards experience"
+- link: "https://datadoghq.dev/integrations-core/guidelines/dashboards/#best-practices"
+  tag: "Developer docs"
+  text: "Create great integration dashboards"
 ---
 
 ## Overview
@@ -94,9 +97,19 @@ To limit the search to a specific dashboard, include the dashboard's name in the
 
 #### Permissions
 
-For a dashboard, the creator or any [administrator][10] can activate read-only mode, which disables all non-admin edits to the dashboard.
+At the top of the dashboard, click on settings and select *Permissions*.
 
-In read-only mode, non-administrative users can clone the dashboard, rearrange tiles, snapshot a tile, and view a tile in full-screen. Any tile rearrangement by a non-administrative user does not persist.
+{{< img src="dashboards/dashboard-menu-permissions.png" alt="The dashboard settings menu" style="width:50%;">}}
+
+Use the pop up to restrict access to you, everyone in your organization with your role, or to specific roles in your organization.
+
+{{< img src="dashboards/dashboard-role-restrictions.png" alt="Role restrictions in settings" style="width:70%;">}}
+
+Creators are always able to edit the dashboard, but other users who are allowed to edit the dashboard can add or remove any role from the access control list (ACL) so long as the final ACL includes one of their roles. For more information about roles, see the [RBAC documentation][10].
+
+If you used the deprecated "read only" check box, the access control list is pre-populated with a list of Admin roles with the "Privileged Access" permission.
+
+If you manage your Dashboards with Terraform, you can use the latest version of the Datadog Terraform provider to control which roles can edit your Dashboards. For more information, see the [Terraform Dashboard role restriction guide][11].
 
 #### Clone dashboard
 
@@ -126,9 +139,9 @@ From an individual dashboard, Datadog offers suggestions for viewing related das
 
 ## Dashboard list
 
-Search, view, or create dashboards and lists on the [Dashboard List][11] page. By default, this is the landing page after you login to Datadog. To change the default landing page for your organization, contact [Datadog support][12].
+Search, view, or create dashboards and lists on the [Dashboard List][12] page. By default, this is the landing page after you login to Datadog. To change the default landing page for your organization, contact [Datadog support][13].
 
-{{< img src="dashboards/dashboard_list2.png" alt="Dashboard List page"  >}}
+{{< img src="dashboards/dashboard_list.png" alt="Dashboard List page"  >}}
 
 ### New list
 
@@ -138,7 +151,7 @@ The list's title is automatically set with the user's first name. For example, i
 
 To add dashboards to a list, select their corresponding check boxes in the main Dashboard list. Then click on the *Add to List* button in the upper right corner of the Dashboard list:
 
-{{< img src="dashboards/dash_to_list.png" alt="Add Dashboard to list" style="width:70%;">}}
+{{< img src="dashboards/dash_to_list.png" alt="Add Dashboard to list" style="width:100%;">}}
 
 ### Lists
 
@@ -157,8 +170,16 @@ Preset lists are default dashboard lists in Datadog:
 | All Custom               | Custom dashboards made by any team member in your organization's account. |
 | All Hosts                | Automatic dashboards created by Datadog when you add a host.              |
 | All Integrations         | Automatic dashboards created by Datadog when you install an integration.  |
+| All Shared               | Dashboards with authenticated or public link sharing enabled.             |
 | Created By You           | Custom dashboards created by the current user.                            |
 | Frequently Viewed By You | All dashboards frequently viewed by the current user.                     |
+| Recently Deleted         | Dashboards deleted within the last 30 days.                               |
+
+#### Restore deleted Dashboards
+
+Use the preset **Recently Deleted** list to restore deleted dashboards. From the list, select all dashboards to restore and click **Restore to**. Select a specific list to restore the dashboards to, or select **All Custom** to restore them without a custom list. Dashboards in **Recently Deleted** are permanently deleted after 30 days.
+
+{{< img src="dashboards/recently_deleted.png" alt="Restore deleted dashboard" style="width:100%;">}}
 
 #### Shared, editable lists
 
@@ -183,15 +204,6 @@ An organization's most popular dashboard displays five popularity bars. All othe
 
 **Note**: Traffic to public dashboard URLs is ignored for popularity.
 
-
-
-### Restrict access
-
-<div class="alert alert-warning">
-RBAC restrict access to dashboards is in beta. To request access, contact <a href="https://docs.datadoghq.com/help/">Datadog support</a>.</div>
-
-Click the settings modal for the whole dashboard, and select *Permissions*. Use the pop up to restrict access to you, everyone in your org with your role, or to specific roles in your org. For more information about roles, see the [RBAC documentation][13].
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -205,7 +217,7 @@ Click the settings modal for the whole dashboard, and select *Permissions*. Use 
 [7]: /dashboards/guide/custom_time_frames/
 [8]: /dashboards/sharing/#dashboards
 [9]: /events/
-[10]: /account_management/users/default_roles/
-[11]: https://app.datadoghq.com/dashboard/lists
-[12]: /help/
-[13]: /account_management/rbac/
+[10]: /account_management/rbac/
+[11]: /dashboards/guide/how-to-use-terraform-to-restrict-dashboard-edit/
+[12]: https://app.datadoghq.com/dashboard/lists
+[13]: /help/

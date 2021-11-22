@@ -39,7 +39,7 @@
             {{- with $requestBody.examples -}}
                 {{- range $exampleId, $exampleDefinition := . -}}
                     {{- $exampleValue := $exampleDefinition.value -}}
-                    {{- if hasPrefix $contentType "application/json" -}}
+                    {{- if (or (hasPrefix $contentType "application/json") (hasPrefix $contentType "text/json")) -}}
                         {{- $exampleValue = $exampleValue | jsonify (dict "indent" "  ") -}}
                     {{- end -}}
 ## {{ default $exampleId $exampleDefinition.summary }}

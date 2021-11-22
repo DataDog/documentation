@@ -61,7 +61,7 @@ To collect all instances of a counter with multiple instances use the special, c
   tag_by: db
 ```
 
-The default table from which counters are drawn is the `sys.dm_os_performance_counters` table.  The Datadog-SQL server check also supports `sys.dm_os_wait_stats`, `sys.dm_os_memory_clerks`, and `sys.dm_io_virtual_file_stats`.
+The default table from which counters are drawn is the `sys.dm_os_performance_counters` table. The Datadog-SQL server check also supports `sys.dm_os_wait_stats`, `sys.dm_os_memory_clerks`, and `sys.dm_io_virtual_file_stats`.
 
 To report a metric drawn from one of the additional tables, specify the table in the counter definition with the `table` parameter, as well as the counter columns to be reported with the `columns` parameter:
 
@@ -198,4 +198,4 @@ If your custom metrics are not appearing in Datadog, check the Agent log file. I
 [1]: /integrations/sqlserver/
 [2]: https://docs.microsoft.com/en-us/sql/relational-databases/performance-monitor/sql-server-databases-object
 [3]: /metrics/#metric-types
-[4]: /metrics/histograms/
+[4]: /metrics/types/?tab=histogram#metric-types

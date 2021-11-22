@@ -16,6 +16,12 @@ further_reading:
       text: 'Fix problems you encounter while using the profiler'
 ---
 
+{{< site-region region="us5" >}}
+<div class="alert alert-warning">
+  The Continuous Profiler is not available for the Datadog {{< region-param key="dd_site_name" >}} site.
+</div>
+{{< /site-region >}}
+
 The profiler is shipped within Datadog tracing libraries. If you are already using [APM to collect traces][1] for your application, you can skip installing the library and go directly to enabling the profiler.
 
 ## Requirements
@@ -51,7 +57,7 @@ To begin profiling applications:
         -jar <YOUR_SERVICE>.jar <YOUR_SERVICE_FLAGS>
     ```
 
-    **Recommendation**: Specify `dd.service`, `dd.env`, and `dd.version` so you can slice and dice your profiles across these dimensions.
+    **Recommendation**: Specify `dd.service`, `dd.env`, and `dd.version` so you can filter and group your profiles across these dimensions.
 
     You can also [use environment variables](#environment-variables) to set the parameters as such:
 

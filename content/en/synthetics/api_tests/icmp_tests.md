@@ -25,31 +25,19 @@ ICMP tests can run from both [managed][1] and [private locations][2] depending o
 
 ## Configuration
 
-After choosing to create an [`ICMP` test][4], define your test's request.
+After choosing to create an `ICMP` test, define your test's request.
 
 ### Define request
-
-{{< img src="synthetics/api_tests/icmp_test_config.png" alt="Define ICMP request" style="width:90%;" >}}
 
 1. Specify the **Domain Name** or **IP address** to run your test on.
 2. Select or deselect **Track number of network hops (TTL)**. When selected, this option turns on a "traceroute" probe to discover all gateways along the path to the host destination.
 3. Select the **Number of Pings** to trigger per test session. By default, the number of pings is set to four. You can choose to decrease this number or increase it up to ten.
 4. **Name** your ICMP test.
-5. Add `env` **Tags** as well as any other tags to your ICMP test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][5].
-6. Select the **Locations** to run your ICMP test from. ICMP tests can run from both [managed][1] and [private locations][2] depending on whether you want to trigger the ICMP pings from outside or inside your network.
+5. Add `env` **Tags** as well as any other tags to your ICMP test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][4].
+
+{{< img src="synthetics/api_tests/icmp_test_config.png" alt="Define ICMP request" style="width:90%;" >}}
 
 Click **Test URL** to try out the request configuration. A response preview is displayed on the right side of your screen.
-
-### Specify test frequency
-
-ICMP tests can run:
-
-* **On a schedule** to ensure your most important services are always accessible to your users. Select the frequency with which you want Datadog to run your ICMP test.
-
-{{< img src="synthetics/api_tests/schedule.png" alt="Run API tests on schedule"  style="width:90%;" >}}
-
-* [**Within your CI/CD pipelines**][3].
-* **On-demand** to run your tests whenever makes the most sense for your teams.
 
 ### Define assertions
 
@@ -66,6 +54,18 @@ You can create up to 20 assertions per API test by selecting **New Assertion** o
 
 {{< img src="synthetics/api_tests/icmp_assertion.png" alt="Define assertions for your ICMP test" style="width:90%;" >}}
 
+### Select locations
+
+Select the **Locations** to run your ICMP test from. ICMP tests can run from both [managed][1] and [private locations][2] depending on whether you want to trigger the ICMP pings from outside or inside your network.
+
+### Specify test frequency
+
+ICMP tests can run:
+
+* **On a schedule** to ensure your most important services are always accessible to your users. Select the frequency at which you want Datadog to run your ICMP test.
+* [**Within your CI/CD pipelines**][3].
+* **On-demand** to run your tests whenever makes the most sense for your team.
+
 ### Define alert conditions
 
 You can set alert conditions to determine the circumstances under which a test should fail and trigger an alert.
@@ -79,7 +79,7 @@ When you set the alert conditions to: `An alert is triggered if any assertion fa
 
 #### Fast retry
 
-Your test can trigger retries in case of a failed test result. By default, the retries are performed 300 ms after the first failed test result. The retry interval can be configured with the [API][6].
+Your test can trigger retries `X` times after `Y` ms in case of a failed test result. Customize the retry interval to suit your alerting sensibility.
 
 Location uptime is computed on a per-evaluation basis (whether the last test result before evaluation was up or down). The total uptime is computed based on the configured alert conditions. Notifications sent are based on the total uptime.
 
@@ -87,9 +87,9 @@ Location uptime is computed on a per-evaluation basis (whether the last test res
 
 Your test sends a notification based on the [alerting conditions](#define-alert-conditions) previously defined. Use this section to define what messages to send to your teams and how to send them.
 
-1. [Similar to monitors][7], select **users and/or services** that should receive notifications either by adding a `@notification` to the message or by searching for team members and connected integrations with the drop-down box.
+1. [Similar to how you configure monitors][5], select **users and/or services** that should receive notifications either by adding a `@notification` to the message or by searching for team members and connected integrations with the drop-down box.
 
-2. Enter the notification **message** for your test. This field allows standard [Markdown formatting][8] and supports the following [conditional variables][9]:
+2. Enter the notification **message** for your test. This field allows standard [Markdown formatting][6] and supports the following [conditional variables][7]:
 
     | Conditional Variable       | Description                                                         |
     |----------------------------|---------------------------------------------------------------------|
@@ -99,11 +99,6 @@ Your test sends a notification based on the [alerting conditions](#define-alert-
     | `{{^is_recovery}}`         | Show unless the test recovers from alert.                           |
 
 3. Specify how often you want your test to **resend the notification message** in the case of test failure. To prevent renotifications from failing tests, leave the option as `Never renotify if the monitor has not been resolved`.
-
-Email notifications include the message defined in this section as well as a summary of failed assertions.
-Notifications example:
-
-{{< img src="synthetics/api_tests/notifications-example.png" alt="API Test Notifications"  style="width:90%;" >}}
 
 Click **Save** to save your test and have Datadog start executing it.
 
@@ -130,7 +125,7 @@ You can create local variables by clicking on **Create Local Variable** at the t
 
 ### Use variables
 
-You can use the [global variables defined in the `Settings`][10] and the [locally defined variables](#create-local-variables) in the URL and assertions of your ICMP tests.
+You can use the [global variables defined in the `Settings`][8] and the [locally defined variables](#create-local-variables) in the URL and assertions of your ICMP tests.
 
 To display your list of variables, type `{{` in your desired field:
 
@@ -138,16 +133,18 @@ To display your list of variables, type `{{` in your desired field:
 
 ## Test failure
 
-A test is considered `FAILED` if it does not satisfy one or several assertions or if the request prematurely failed. In some cases, the test can fail without being able to test the assertions against the endpoint. These reasons include:
+A test is considered `FAILED` if it does not satisfy one or more assertions or if the request prematurely failed. In some cases, the test can fail without testing the assertions against the endpoint. 
+
+These reasons include the following:
 
 `DNS`
 : DNS entry not found for the test URL. Possible causes include misconfigured test URL or the wrong configuration of your DNS entries.
 
 ## Permissions
 
-By default, only users with the [Datadog Admin and Datadog Standard roles][11] can create, edit, and delete Synthetic ICMP tests. To get create, edit, and delete access to Synthetic ICMP tests, upgrade your user to one of those two [default roles][11].
+By default, only users with the [Datadog Admin and Datadog Standard roles][9] can create, edit, and delete Synthetic ICMP tests. To get create, edit, and delete access to Synthetic ICMP tests, upgrade your user to one of those two [default roles][9].
 
-If you have access to the [custom role feature][12], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions.
+If you have access to the [custom role feature][10], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions.
 
 ## Further Reading
 
@@ -156,12 +153,10 @@ If you have access to the [custom role feature][12], add your user to any custom
 [1]: /api/v1/synthetics/#get-all-locations-public-and-private
 [2]: /synthetics/private_locations
 [3]: /synthetics/cicd_testing
-[4]: /synthetics/api_tests/icmp_tests
-[5]: /synthetics/search/#search
-[6]: /api/latest/synthetics/#edit-an-api-test
-[7]: /monitors/notifications/?tab=is_alert#notification
-[8]: https://www.markdownguide.org/basic-syntax/
-[9]: /monitors/notifications/?tab=is_recoveryis_alert_recovery#conditional-variables
-[10]: /synthetics/settings/#global-variables
-[11]: /account_management/rbac/
-[12]: /account_management/rbac#custom-roles
+[4]: /synthetics/search/#search
+[5]: /monitors/notify/#notify-your-team
+[6]: https://www.markdownguide.org/basic-syntax/
+[7]: /monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables
+[8]: /synthetics/settings/#global-variables
+[9]: /account_management/rbac/
+[10]: /account_management/rbac#custom-roles

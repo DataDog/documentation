@@ -30,9 +30,10 @@ Start by [logging into Postman][4]. Datadog recommends [downloading the Postman 
 
 </br>
 <div class="postman-run-button"
-data-postman-action="collection/import"
-data-postman-var-1="b82586cb783eb6f7cf6d"
-data-postman-param="env%5BDatadog%20Authentication%5D=W3sia2V5IjoiYXBwbGljYXRpb25fa2V5IiwidmFsdWUiOiIiLCJlbmFibGVkIjp0cnVlLCJ0eXBlIjoidGV4dCJ9LHsia2V5IjoiYXBpX2tleSIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZSwidHlwZSI6InRleHQifV0="></div>
+data-postman-action="collection/fork"
+data-postman-var-1="7274195-66ef21d8-e159-4d7d-8ded-c511e1abe189"
+data-postman-collection-url="entityId=7274195-66ef21d8-e159-4d7d-8ded-c511e1abe189&entityType=collection&workspaceId=bf049f54-c695-4e91-b879-0cad1854bafa"
+data-postman-param="env%5BDatadog%20Authentication%5D=W3sia2V5IjoiYXBpX2tleSIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZX0seyJrZXkiOiJhcHBsaWNhdGlvbl9rZXkiLCJ2YWx1ZSI6IiIsImVuYWJsZWQiOnRydWV9XQ=="></div>
 <script type="text/javascript">
   (function (p,o,s,t,m,a,n) {
     !p[s] && (p[s] = function () { (p[t] || (p[t] = [])).push(arguments); });
@@ -61,25 +62,19 @@ Follow these steps to set up your environment:
 
 3. Edit the **Datadog Authentication** environment to add in your Datadog [API key][2] as the initial value and current value for the `api_key` variable, and add your Datadog [application key][2] as the initial value and current value for the `application_key` variable.
 
-{{< site-region region="eu" >}}
-
-#### Switch to the EU API endpoint
+#### Switch the API endpoint
  
-If you are accessing the Datadog site in the EU region, instead of the default endpoint URL, you need to switch the Postman collection to access from the EU endpoint URL `https://api.datadoghq.eu`.
+If you are accessing a Datadog site other than `https://api.datadoghq.com`, you need to switch the Postman collection to access a different endpoint URL.
 
-Follow these steps to update to the EU instance:
+Follow these steps to update the instance to your selected site ({{< region-param key="dd_site_name" >}}):
 
 1. In the Datadog API Collection folder on the left pane, click the three dot menu, and then select **Edit**.
 
-{{< img src="getting_started/postman/view-more-actions.png" alt="View more actions">}}
+    {{< img src="getting_started/postman/view-more-actions.png" alt="View more actions">}}
 
-2. On the **Variables** tab, deselect the `site` variable with the value `datadoghq.com` and select the `site` with the variable `datadoghq.eu`.
-
-{{< img src="getting_started/postman/variables.png" alt="Update the site variable">}}
+2. On the **Variables** tab, deselect the `site` variable with the value `datadoghq.com` and select the `site` with the variable {{< region-param key="dd_site" code="true" >}}.
 
 3. Click **Update**.
-
-{{< /site-region >}}
 
 ## Working with the collection
 
@@ -111,7 +106,7 @@ This tab is an alternative to viewing the `param1:value1&param2:value2` structur
 - All placeholders follow the format: `<PLACEHOLDER>` . They should be replaced before running a query.
 
 [1]: https://www.postman.com/
-[2]: https://app.datadoghq.com/account/settings#api
+[2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://identity.getpostman.com/signup
 [4]: https://identity.getpostman.com/login
 [5]: https://www.postman.com/downloads/

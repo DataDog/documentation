@@ -144,6 +144,6 @@ Usage Attribution is an advanced feature included in the Enterprise plan. For al
 [5]: /api/
 [6]: https://www.datadoghq.com/blog/managing-datadog-with-terraform
 [7]: /dashboards/screenboards/#backup-my-screenboard
-[8]: /monitors/manage_monitor/
+[8]: /monitors/manage/
 [9]: /account_management/billing/usage_details/
 [10]: /account_management/billing/usage_attribution/

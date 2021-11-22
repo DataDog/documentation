@@ -4,7 +4,7 @@ kind: documentation
 description: Troubleshoot Database Monitoring setup
 
 ---
-{{< site-region region="us3,gov" >}}
+{{< site-region region="us3,us5,gov" >}}
 <div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
 {{< /site-region >}}
 
@@ -137,12 +137,12 @@ You can also explicitly execute a check by running the `check` CLI command on th
 
 ```bash
 # For self-hosted installations of the Agent
-datadog-agent check postgres -t 2
-datadog-agent check mysql -t 2
+DD_LOG_LEVEL=debug DBM_THREADED_JOB_RUN_SYNC=true datadog-agent check postgres -t 2
+DD_LOG_LEVEL=debug DBM_THREADED_JOB_RUN_SYNC=true datadog-agent check mysql -t 2
 
 # For container-based installations of the Agent
-agent check postgres -t 2
-agent check mysql -t 2
+DD_LOG_LEVEL=debug DBM_THREADED_JOB_RUN_SYNC=true agent check postgres -t 2
+DD_LOG_LEVEL=debug DBM_THREADED_JOB_RUN_SYNC=true agent check mysql -t 2
 ```
 
 ### Query metrics are missing
@@ -200,7 +200,7 @@ If you have data from some queries, but are expecting to see a particular query 
 
 [1]: /database_monitoring/data_collected/#which-queries-are-tracked
 [2]: https://www.postgresql.org/docs/current/pgstatstatements.html#id-1.11.7.38.8
-[3]: /database_monitoring/setup_postgres/advanced_configuration/TODO
+[3]: /database_monitoring/setup_postgres/advanced_configuration/
 {{% /tab %}}
 {{% tab "MySQL" %}}
 
@@ -308,18 +308,44 @@ Some or all queries may not have plans available. This can be due to unsupported
 {{% /tab %}}
 {{< /tabs >}}
 
+### Setup fails on `create extension pg_stat_statements`
+
+{{< tabs >}}
+{{% tab "Postgres" %}}
+
+Example error output from `create extension pg_stat_statements`:
+```
+create extension pg_stat_statements;
+ERROR:  could not open extension control file "<path>/share/postgresql/extension/pg_stat_statements.control": No such file or directory
+SQL State: 58P01
+```
+
+This error happens when you are missing the `postgresql-contrib` package that includes the `pg_stat_statements` extension. How to install the missing package varies depending on the host's distribution and your Postgres version. As an example, to install the `contrib` package on Ubuntu for Postgres 10, run:
+
+```
+sudo apt-get install postgresql-contrib-10
+```
+
+See the appropriate version of the [Postgres `contrib` documentation][1] for more information.
+
+
+[1]: https://www.postgresql.org/docs/12/contrib.html
+{{% /tab %}}
+{{< /tabs >}}
+
+### Schema or Database missing on MySQL Query Metrics & Samples
+
+The `schema` tag (also known as "database") is present on MySQL Query Metrics and Samples only when a Default Database is set on the connection that made the query. The Default Database is configured by the application by specifying the "schema" in the database connection parameters, or by executing the [USE Statement][5] on an already existing connection.
+
+If there is no default database configured for a connection, then none of the queries made by that connection have the `schema` tag on them.
 
 ## Need more help?
 
 If you are still experiencing problems, contact [Datadog Support][4] for help.
 
 
-
-
-
-
-
 [1]: /database_monitoring/#getting-started
 [2]: /agent/troubleshooting/
 [3]: /agent/guide/agent-log-files
 [4]: /help/
+[5]: https://dev.mysql.com/doc/refman/8.0/en/use.html

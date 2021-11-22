@@ -7,6 +7,10 @@ further_reading:
       text: "Troubleshooting CI"
 ---
 
+{{< site-region region="us5,gov" >}}
+<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
+{{< /site-region >}}
+
 Your pipelines appear in the [Pipelines][1] page under the CI menu.
 
 ## Pipelines health overview
@@ -41,7 +45,7 @@ On the [Pipeline Executions][2] page, you can see aggregated data about pipeline
 
 Each pipeline execution is reported as a trace, which includes stage and job information. Access individual pipeline, stage, and job execution traces by clicking on an execution in the list (similar to clicking into a pipeline execution from the Pipeline Details page).
 
-Alternatively, click the [Analytics][3] button to interactively slice and dice pipelines execution data into visualizations you can use to answer questions and to share on dashboards.
+Alternatively, click the [Analytics][3] button to interactively filter and group pipelines execution data into visualizations you can use to answer questions and to share on dashboards.
 
 {{< img src="ci/ci-pipelines-execution.png" alt="Analytics for a pipeline execution" style="width:100%;">}}
 

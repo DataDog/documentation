@@ -49,7 +49,7 @@ A context is composed of a time range and a search query. Each pattern comes wit
 
 Click on the log pattern that you would like to exclude to see a sample of underlying logs.
 
-{{< img src="logs/guide/getting-started-lwl/patterns_context_panel.png" alt="Patterns Context" style="width:100%;">}}
+{{< img src="logs/guide/getting-started-lwl/patterns_context_panel.jpg" alt="Patterns Context" style="width:100%;">}}
 
 The patterns view is helpful when identifying and filtering noisy patterns. It shows the number of logs matching a pattern, split by service and status. Click on the first pattern to view a detailed log of events relating to your status. A contextual panel will populate with information about your noisiest status pattern.
 
@@ -75,7 +75,7 @@ The pattern context panel lists every instance (event) of a log pattern and crea
 
 In this example, the service status `INFO` pattern `Updating recommendations with customer_id=* & url=shops/*/*` is filtered with an exclusion filter. Removing any high volume logging pattern similar to this one from Log Explorer will help you drill down and identify issues quicker. However, these logs are **only** removed from the Log Explorer view. They are still ingested, and available to view in [Live Tail][5], sent to [log archives][6], or used to [generate metrics][7].
 
-{{< img src="logs/guide/getting-started-lwl/live_tail.gif" alt="Live Tail" style="width:100%;">}}
+{{< img src="logs/guide/getting-started-lwl/live_tail.jpg" alt="Live Tail" style="width:100%;">}}
 
 Exclusion filters can be disabled at any time by toggling the disable option to the right of the filter. They can also be modified and removed by hovering over the filter and selecting the edit or delete option.
 
@@ -135,5 +135,5 @@ To learn more about Logging Without Limits™ and how to better utilize features
 [6]: /logs/archives/
 [7]: /metrics/
 [8]: /logs/logs_to_metrics/
-[9]: /monitors/monitor_types/anomaly/
+[9]: /monitors/create/types/anomaly/
 [10]: https://app.datadoghq.com/monitors#/triggered

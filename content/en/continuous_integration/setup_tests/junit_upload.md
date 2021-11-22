@@ -10,7 +10,13 @@ further_reading:
       text: "Troubleshooting CI"
 ---
 
-{{< site-region region="us,eu" >}}
+{{< site-region region="us5,gov" >}}
+<div class="alert alert-warning">
+The selected Datadog site ({{< region-param key="dd_site_name" >}}) is not supported.
+</div>
+{{< /site-region >}}
+
+{{< site-region region="us,eu,us3" >}}
 JUnit test report files are XML files that contain test execution information, such as test and suite names, pass/fail status, duration, and sometimes error logs. Although it was introduced by the [JUnit][1] testing framework, many other popular frameworks are able to output results using this format.
 
 As an alternative to instrumenting your tests natively using Datadog tracers, which is the recommended option as it provides the most comprehensive test results, you can also upload JUnit XML test reports.
@@ -35,20 +41,13 @@ datadog-ci junit upload --service <service_name> <path> [<path> ...]
 
 Specify a valid [Datadog API key][3] in the `DATADOG_API_KEY` environment variable, and the environment where tests were run (for example, `local` when uploading results from a developer workstation, or `ci` when uploading them from a CI provider) in the `DD_ENV` environment variable. For example:
 
-{{< site-region region="us" >}}
-{{< code-block lang="bash" >}}
-DD_ENV=ci DATADOG_API_KEY=<api_key> datadog-ci junit upload \
+<pre>
+<code>
+DD_ENV=ci DATADOG_API_KEY=&lt;api_key&gt; DATADOG_SITE={{< region-param key="dd_site" >}} datadog-ci junit upload \
   --service my-api-service \
   unit-tests/junit-reports e2e-tests/single-report.xml
-{{< /code-block >}}
-{{< /site-region >}}
-{{< site-region region="eu" >}}
-{{< code-block lang="bash" >}}
-DD_ENV=ci DATADOG_API_KEY=<api_key> DATADOG_SITE=datadoghq.eu datadog-ci junit upload \
-  --service my-api-service \
-  unit-tests/junit-reports e2e-tests/single-report.xml
-{{< /code-block >}}
-{{< /site-region >}}
+</code>
+</pre>
 
 ## Configuration settings
 
@@ -88,32 +87,158 @@ The following environment variables are supported:
 : [Datadog API key][3] used to authenticate the requests.<br/>
 **Default**: (none)
 
-
-{{< site-region region="eu" >}}
 Additionally, configure the Datadog site to use the selected one ({{< region-param key="dd_site_name" >}}):
 
 `DATADOG_SITE` (Required)
-: The [Datadog site][1] to upload results to.<br/>
+: The [Datadog site][4] to upload results to.<br/>
 **Default**: `datadoghq.com`<br/>
 **Selected site**: {{< region-param key="dd_site" code="true" >}}
 
-[1]: /getting_started/site/
-{{< /site-region >}}
-
-
 ## Collecting repository and commit metadata
 
-The Datadog CI CLI tries to extract git repository and commit metadata from CI provider environment variables and from the local `.git` directory and attach it to test executions. In order to read this directory, the [`git`][4] binary is required.
+Datadog uses Git information for visualizing your test results and grouping them by repository and commit. Git metadata is collected by the Datadog CI CLI from CI provider environment variables and the local `.git` folder in the project path, if available. To read this directory, the [`git`][5] binary is required.
+
+If you are running tests in non-supported CI providers or with no `.git` folder, you can set the Git information manually using environment variables. These environment variables take precedence over any auto-detected information. Set the following environment variables to provide Git information:
+
+`DD_GIT_REPOSITORY_URL`
+: URL of the repository where the code is stored. Both HTTP and SSH URLs are supported.<br/>
+**Example**: `git@github.com:MyCompany/MyApp.git`, `https://github.com/MyCompany/MyApp.git`
+
+`DD_GIT_BRANCH`
+: Git branch being tested. Leave empty if providing tag information instead.<br/>
+**Example**: `develop`
+
+`DD_GIT_TAG`
+: Git tag being tested (if applicable). Leave empty if providing branch information instead.<br/>
+**Example**: `1.0.1`
+
+`DD_GIT_COMMIT_SHA`
+: Full commit hash.<br/>
+**Example**: `a18ebf361cc831f5535e58ec4fae04ffd98d8152`
+
+`DD_GIT_COMMIT_MESSAGE`
+: Commit message.<br/>
+**Example**: `Set release number`
+
+`DD_GIT_COMMIT_AUTHOR_NAME`
+: Commit author name.<br/>
+**Example**: `John Smith`
+
+`DD_GIT_COMMIT_AUTHOR_EMAIL`
+: Commit author email.<br/>
+**Example**: `john@example.com`
+
+`DD_GIT_COMMIT_AUTHOR_DATE`
+: Commit author date in ISO 8601 format.<br/>
+**Example**: `2021-03-12T16:00:28Z`
+
+`DD_GIT_COMMIT_COMMITTER_NAME`
+: Commit committer name.<br/>
+**Example**: `Jane Smith`
+
+`DD_GIT_COMMIT_COMMITTER_EMAIL`
+: Commit committer email.<br/>
+**Example**: `jane@example.com`
+
+`DD_GIT_COMMIT_COMMITTER_DATE`
+: Commit committer date in ISO 8601 format.<br/>
+**Example**: `2021-03-12T16:00:28Z`
+
+## Collecting environment configuration metadata
+
+Datadog uses special dedicated tags to identify the configuration of the environment in which tests run, including the operating system, runtime, and device information, if applicable. When the same test for the same commit runs in more than one configuration (for example, on Windows and on Linux), the tags are used to differentiate the test in failure and flakiness detection.
+
+You can specify these special tags using the `--tags` parameter when calling `datadog-ci junit upload`, or by setting the `DD_TAGS` environment variable.
+
+All of these tags are optional, and only the ones you specify will be used to differentiate between environment configurations.
+
+`os.platform`
+: Name of the operating system.<br/>
+**Examples**: `windows`, `linux`, `darwin`
+
+`os.version`
+: Version of the operating system.<br/>
+**Examples**: `10.15.4`, `14.3.2`, `95`
+
+`os.architecture`
+: Architecture of the operating system.<br/>
+**Examples**: `x64`, `x86`, `arm64`
+
+`runtime.name`
+: Name of the language interpreter or programming runtime.<br/>
+**Examples**: `.NET`, `.NET Core`, `OpenJDK Runtime Environment`, `Java(TM) SE Runtime Environment`, `CPython`
+
+`runtime.version`
+: Version of the runtime.<br/>
+**Examples**: `5.0.0`, `3.1.7`
+
+`runtime.vendor`
+: Name of the runtime vendor where applicable. For example, when using a Java runtime.<br/>
+**Examples**: `AdoptOpenJDK`, `Oracle Corporation`
+
+`runtime.architecture`
+: Architecture of the runtime.<br/>
+**Examples**: `x64`, `x86`, `arm64`
+
+For mobile apps (Swift, Android):
+
+`device.model`
+: The model of the device being tested.<br/>
+**Examples**: `iPhone11,4`, `AppleTV5,3`
+
+`device.name`
+: The name of the device being tested.<br/>
+**Examples**: `iPhone 12 Pro Simulator`, `iPhone 13 (QA team)`
+
+<!-- TODO: uncomment once added in backend
+`test.bundle`
+: Used to execute groups of test suites separately.<br/>
+**Examples**: `ApplicationUITests`, `ModelTests` -->
+
+## Providing metadata through `<property>` elements
+
+In addition to the `--tags` CLI parameter and the `DD_TAGS` environment variable, which apply custom tags globally to all tests included the uploaded XML report, you can provide additional tags to specific tests by including `<property name="dd_tags[key]" value="value">` elements within the `<testsuite>` or `<testcase>` elements. If you add these tags to a `<testcase>` element, they are stored in its test span. If you add the tags to a `<testsuite>` element, they are stored in all of that suite's test spans.
+
+To be processed, the `name` attribute in the `<property>` element must have the format `dd_tags[key]`, where `key` is the name of the custom tag to be added. Other properties are ignored.
+
+**Example**: Adding tags to a `<testcase>` element
+
+{{< code-block lang="xml" >}}
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite tests="1" failures="0" time="0.030000" name="SomeTestSuiteClass">
+    <testcase classname="SomeTestSuiteClass" name="test_something" time="0.010000">
+      <properties>
+        <property name="dd_tags[custom_tag]" value="some value"></property>
+        <property name="dd_tags[runtime.name]" value="CPython"></property>
+      </properties>
+    </testcase>
+  </testsuite>
+</testsuites>
+{{< /code-block >}}
+
+**Example**: Adding tags to a `<testsuite>` element
+
+{{< code-block lang="xml" >}}
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite tests="1" failures="0" time="0.030000" name="SomeTestSuiteClass">
+    <properties>
+      <property name="dd_tags[custom_tag]" value="some value"></property>
+      <property name="dd_tags[runtime.name]" value="CPython"></property>
+    </properties>
+    <testcase classname="SomeTestSuiteClass" name="test_something" time="0.010000"></testcase>
+  </testsuite>
+</testsuites>
+{{< /code-block >}}
+
+[1]: https://junit.org/junit5/
+[2]: https://www.npmjs.com/package/@datadog/datadog-ci
+[3]: https://app.datadoghq.com/organization-settings/api-keys
+[4]: /getting_started/site/
+[5]: https://git-scm.com/downloads
+{{< /site-region >}}
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
-[1]: https://junit.org/junit5/
-[2]: https://www.npmjs.com/package/@datadog/datadog-ci
-[3]: https://app.datadoghq.com/account/settings#api
-[4]: https://git-scm.com/downloads
-{{< /site-region >}}
-{{< site-region region="us3,gov" >}}
-The selected Datadog site ({{< region-param key="dd_site_name" >}}) is not supported at this time.
-{{< /site-region >}}
