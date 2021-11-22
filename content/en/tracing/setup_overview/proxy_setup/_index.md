@@ -90,6 +90,10 @@ The following settings are required to enable Datadog APM in Envoy:
       typed_config:
         "@type": type.googleapis.com/envoy.extensions.filters.network.http_connection_manager.v3.HttpConnectionManager
         generate_request_id: true
+        request_id_extension:
+          typed_config:
+            "@type": type.googleapis.com/envoy.extensions.request_id.uuid.v3.UuidRequestIdConfig
+            use_request_id_for_trace_sampling: false
         tracing: 
           provider:
             name: envoy.tracers.datadog
@@ -120,6 +124,10 @@ static_resources:
         typed_config:
           "@type": type.googleapis.com/envoy.extensions.filters.network.http_connection_manager.v3.HttpConnectionManager
           generate_request_id: true
+          request_id_extension:
+            typed_config:
+              "@type": type.googleapis.com/envoy.extensions.request_id.uuid.v3.UuidRequestIdConfig
+              use_request_id_for_trace_sampling: false
           tracing:
           # Use the datadog tracer
             provider:
