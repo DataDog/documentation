@@ -1,5 +1,5 @@
 ---
-title: Posture Management
+title: Cloud Security Posture Management
 kind: documentation
 ---
 
@@ -11,7 +11,7 @@ Cloud Security Posture Management is not currently available in this site.
 
 ## Overview
 
-Datadog Posture Management makes it easier to assess and visualize the current and historic security posture of your cloud environment, automate audit evidence collection, and catch misconfigurations that leave your organization vulnerable to attacks.
+Datadog Cloud Security Posture Management (CSPM) makes it easier to assess and visualize the current and historic security posture of your cloud environment, automate audit evidence collection, and catch misconfigurations that leave your organization vulnerable to attacks.
 
 {{< img src="security_platform/cspm/landing_page.png" alt="Cloud Security Posture Management" width="100%">}}
 
@@ -33,20 +33,20 @@ View your cloud security posture at a high level with the [Posture Management][2
 
 - **Rule**: A rule evaluates the configuration of a resource to validate an element related to one or more controls. Rules may map to multiple controls, requirements, and frameworks.
 
-{{< img src="security_platform/cspm/getting_started/rules.png" alt="A list of Posture Management rules" style="width:65%;">}}
+{{< img src="security_platform/cspm/getting_started/rules.png" alt="A list of Cloud Security Posture Management rules" style="width:65%;">}}
 
 - **Findings**: A finding is the primary primitive for a rule evaluation against a resource. Every time a resource is evaluated against a rule, a finding is generated with a Pass or Fail status.
 
 - **Framework**: A collection of requirements that map to an industry benchmark or regulatory standard.
 
-{{< img src="security_platform/cspm/getting_started/frameworks.png" alt="The frameworks overview in the Posture Management landing page" style="width:100%;">}}
+{{< img src="security_platform/cspm/getting_started/frameworks.png" alt="The frameworks overview in the Cloud Security Posture Management landing page" style="width:100%;">}}
 
 ## Get started
 
 {{< whatsnext >}}
   {{< nextlink href="/security_platform/cspm/getting_started">}}Complete setup and configuration{{< /nextlink >}}
-  {{< nextlink href="/security_platform/default_rules/#cat-cloud-configuration">}}Implement out-of-the-box Posture Management rules{{< /nextlink >}}
-  {{< nextlink href="/security_platform/cspm/findings">}} Learn about Posture Management findings{{< /nextlink >}}
+  {{< nextlink href="/security_platform/default_rules/#cat-cloud-configuration">}}Implement out-of-the-box Cloud Security Posture Management rules{{< /nextlink >}}
+  {{< nextlink href="/security_platform/cspm/findings">}} Learn about Cloud Security Posture Management findings{{< /nextlink >}}
 {{< /whatsnext >}}
 
 [1]: /security_platform/default_rules/#cat-cloud-configuration
