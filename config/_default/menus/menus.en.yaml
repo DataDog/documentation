@@ -1904,6 +1904,11 @@ main:
     parent: profiler_enabling
     identifier: profiler_enabling_ruby
     weight: 104
+  - name: Enabling the Node.js Profiler
+    url: tracing/profiler/enabling/nodejs/
+    parent: profiler_enabling
+    identifier: profiler_enabling_nodejs
+    weight: 105
   - name: Search Profiles
     url: tracing/profiler/search_profiles/
     parent: profiler
