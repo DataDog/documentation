@@ -39,7 +39,7 @@ The Datadog Security Platform includes [Security Monitoring](#security-monitorin
 
 ## Cloud Security Posture Management
 
-[Cloud Security Posture Management (CSPM)][4] tracks the security hygiene and compliance posture of your production environment, automate audit evidence collection, and catch misconfigurations that leave your organization vulnerable to attacks. See security posture scores across your infrastructure and trace each score back to the applicable benchmark or framework criteria.
+[Cloud Security Posture Management (CSPM)][4] tracks the security hygiene and compliance posture of your production environment, can automate audit evidence collection, and catch misconfigurations that leave your organization vulnerable to attacks. See security posture scores across your infrastructure and trace each score back to the applicable benchmark or framework criteria.
 
 {{< img src="security_platform/cspm_overview.png" alt="Cloud Security Posture Management scores in Datadog" width="100%">}}
 
@@ -49,7 +49,7 @@ The Datadog Security Platform includes [Security Monitoring](#security-monitorin
 
 {{< img src="security_platform/cws_overview.png" alt="Cloud Workload Security coverage views in Datadog" width="100%">}}
 
-To get started with the Datadog Security Platform, navigate to the [Setup & Configuration][7] section in the Datadog app, which has detailed information for single or multi-configuration, or follow the getting started sections below to get learn more about each area of the platform.
+To get started with the Datadog Security Platform, navigate to the [Setup & Configuration][7] section in the Datadog app, which has detailed information for single or multi-configuration, or follow the getting started sections below to learn more about each area of the platform.
 
 ## Further Reading
 
