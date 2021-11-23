@@ -13,7 +13,7 @@ A session expires after 15 minutes of inactivity, and its duration is limited to
 
 ## What data does Datadog Real User Monitoring (RUM) collect?
 
-Datadog collects all the pages visited by your end users along with the telemetry that matters: resources loading (XHRs, images, CSS files, JS scripts, etc), frontend errors, crash reports, and long tasks. All of this is included in the user session. Datadog charges per ten thousand (10,000) sessions ingested in the Datadog Real User Monitoring (RUM) service.
+Datadog collects all the pages visited by your end users along with the telemetry that matters: resources loading (XHRs, images, CSS files, JS scripts, etc), frontend errors, crash reports, and long tasks. All of this is included in the user session. In the case of session replay, Datadog creates an iframe rebuilt based on snapshots of the DOM. Datadog charges per one thousand (1,000) sessions ingested in the Datadog Real User Monitoring (RUM) service.
 
 ## Does Datadog handle single page applications?
 
