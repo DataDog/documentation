@@ -19,7 +19,7 @@ However some investigations require a **deeper dive into specialised pages**:
 * in the Datadog application, where built-in features would make a difference to spot the root cause of a problem or the core answer to a specific question,
 * in a third-party application, to access external data or perform specific follow-up actions.
 
-{{< img src="dashboards/guide/related_links/overview.gif" alt="Dashboards Assessment" style="width:80%;" >}}
+{{< img src="dashboards/guide/related_links/overview.mp4" alt="Dashboards Assessment" style="width:80%;" >}}
 
 Dashboards widgets come with **default links** to other relevant datadog pages, contextualised with the current scope (timerange, underlying queries and when applicable series identified on a graph). For [generic widgets][4], those links are **customisable** for you to point towards external applications, or override default behaviour to fine-tune the context of the landing page.
 
