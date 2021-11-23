@@ -1,5 +1,5 @@
 ---
-title: C# log collection
+title: C# Log Collection
 kind: documentation
 aliases:
   - /logs/languages/csharp
@@ -7,6 +7,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/c-logging-guide/"
   tag: "Blog"
   text: "How to collect, customize, and analyze C# logs"
+- link: "/tracing/connect_logs_and_traces/dotnet/?tab=serilog"
+  tag: "Documentation"
+  text: "Connecting .NET Logs and Traces"
 - link: "/logs/log_configuration/processors"
   tag: "Documentation"
   text: "Learn how to process your logs"
@@ -24,76 +27,74 @@ further_reading:
   text: "Log Collection Troubleshooting Guide"
 ---
 
-To send your C# logs to Datadog, we recommend logging to a file and then tailing that file with your Datadog Agent. Here are setup examples for the `Serilog`, `NLog`, and `log4net` logging libraries
+To send your C# logs to Datadog, we recommend [logging to a file][1] and then [configuring the Datadog Agent][2] to tail the file. See example logging configurations for [Serilog][3], [NLog][4], and [log4net][5]. Datadog recommends setting up your logging library to output logs in JSON format to avoid the need for [custom parsing rules][6].  
 
-We strongly encourage setting up your logging library to produce your logs in JSON format to avoid the need for [custom parsing rules][1].
+The Datadog Agent is required for the [example configurations][1]. If needed, there is an [Agentless logging][7] option for Serilog.
+
+Once logs are submitted to Datadog, and if [APM][8] is enabled for the application, [connect your logs and traces][9] by automatically adding trace IDs, span IDs, `env`, `service`, and `version` to your logs.
+
+**Note:** If the APM tracer injects `service` tags into your logs, the tracer's `service` tag overrides the `service` tag set in the [Agent configuration][10].
 
 ## Configure your logger
 
 {{< tabs >}}
 {{% tab "Serilog" %}}
 
-Like many other libraries for .NET, Serilog provides diagnostic logging into files, console, and elsewhere. It is easy to set up, has a clean API, and is portable between recent .NET platforms.
+1. To install [Serilog via NuGet][1], run the following command in the Package Manager Console:
 
-Unlike other logging libraries, Serilog is built with powerful structured event data in mind.
+    ```text
+    PM> Install-Package Serilog.Sinks.File
+    ```
 
-Install Serilog via NuGet. Run the following command in the Package Manager Console:
+2. Add the following code to initialize the logger directly in your application:
 
-```text
-PM> Install-Package Serilog.Sinks.File
-```
+    ```csharp
+    // Instantiate the logger
+    var log = new LoggerConfiguration()  // using Serilog;
 
-Then, initialize the logger directly to your application:
+        // using Serilog.Formatting.Json;
+        .WriteTo.File(new JsonFormatter(renderMessage: true), "log.json")
 
-```csharp
-// Instantiate the logger
-var log = new LoggerConfiguration()  // using Serilog;
+        // using Serilog.Formatting.Compact;
+        // .WriteTo.File(new RenderedCompactJsonFormatter(), "log.json")
 
-    // using Serilog.Formatting.Json;
-    .WriteTo.File(new JsonFormatter(renderMessage: true), "log.json")
+        .CreateLogger();
 
-    // using Serilog.Formatting.Compact;
-    // .WriteTo.File(new RenderedCompactJsonFormatter(), "log.json")
+    // An example
+    var position = new { Latitude = 25, Longitude = 134 };
+    var elapsedMs = 34;
 
-    .CreateLogger();
+    log.Information("Processed {@Position} in {Elapsed:000} ms.", position, elapsedMs);
+    ```
 
-// An example
-var position = new { Latitude = 25, Longitude = 134 };
-var elapsedMs = 34;
+3. In the `log.json` file, confirm the logger instantiated successfully:
 
-log.Information("Processed {@Position} in {Elapsed:000} ms.", position, elapsedMs);
-```
+    - If using `JsonFormatter(renderMessage: true)`, look for the following event for confirmation:
 
-Then check the `log.json` file to see the following event:
+      ```json
+      {
+      "MessageTemplate": "Processed {@Position} in {Elapsed:000} ms.",
+      "Level": "Information",
+      "Timestamp": "2016-09-02T15:02:29.648Z",
+      "Renderings": {"Elapsed": [{"Format": "000", "Rendering": "034"}]},
+      "RenderedMessage":"Processed { Latitude: 25, Longitude: 134 } in 034 ms.",
+      "Properties": {"Position": {"Latitude": 25, "Longitude": 134}, "Elapsed": 34}
+      }
+      ```
 
-- If using `JsonFormatter(renderMessage: true)`:
+    - If using `RenderedCompactJsonFormatter()`, look for the following event for confirmation:
 
-```json
-{
-  "MessageTemplate": "Processed {@Position} in {Elapsed:000} ms.",
-  "Level": "Information",
-  "Timestamp": "2016-09-02T15:02:29.648Z",
-  "Renderings": {"Elapsed": [{"Format": "000", "Rendering": "034"}]},
-  "RenderedMessage":"Processed { Latitude: 25, Longitude: 134 } in 034 ms.",
-  "Properties": {"Position": {"Latitude": 25, "Longitude": 134}, "Elapsed": 34}
-}
-```
+      ```json
+      {
+        "@t": "2020-05-20T04:15:28.6898801Z",
+        "@m": "Processed { Latitude: 25, Longitude: 134 } in 034 ms.",
+        "@i": "d1eb2146",
+        "Position": {"Latitude": 25, "Longitude": 134 },
+        "Elapsed": 34
+      }
+      ```
 
-- If using `RenderedCompactJsonFormatter()`
-
-```json
-{
-  "@t": "2020-05-20T04:15:28.6898801Z",
-  "@m": "Processed { Latitude: 25, Longitude: 134 } in 034 ms.",
-  "@i": "d1eb2146",
-  "Position": {"Latitude": 25, "Longitude": 134 },
-  "Elapsed": 34
-}
-```
-
-[Monitor now your log file with your Agent][1] to send your logs to your Datadog application
-
-[1]: /logs/#tail-existing-files
+[1]: https://www.nuget.org/packages/Serilog/
 {{% /tab %}}
 {{% tab "NLog" %}}
 
@@ -162,9 +163,6 @@ namespace Datadog
 }
 ```
 
-[Monitor now your log file with your Agent][1] to send your logs to your Datadog application.
-
-[1]: /logs/#tail-existing-files
 {{% /tab %}}
 {{% tab "Log4Net" %}}
 Log4Net is a logging platform for .NET inspired from Log4j with rich log routing and management capabilities. It can help you produce and manage high-quality logs for your application regardless of its size or complexity.
@@ -260,53 +258,51 @@ If, despite the benefits of logging in JSON, you wish to log in raw string forma
 {{% /tab %}}
 {{< /tabs >}}
 
-## Connect your service across logs and traces
-
-If APM is enabled for this application, connect your logs and traces by automatically adding trace IDs, span IDs,
-`env`, `service`, and `version` to your logs by [following the APM .NET instructions][2]
-
-**Note**: If the APM tracer injects `service` into your logs, it overrides the value set in the agent configuration.
-
 ## Configure your Datadog Agent
 
-Create a `csharp.d/conf.yaml` file in your `conf.d/` folder with the following content:
+To start submitting logs to Datadog, once [log collection is enabled][10], set up [custom log collection][11] to tail the log file by doing the following:
 
-```yaml
-init_config:
+1. Create a `csharp.d/` folder in the `conf.d/` [Agent configuration directory][12].
+2. Create a `conf.yaml` file in `csharp.d/` with the following content:
 
-instances:
+      ```yaml
+      init_config:
 
-##Log section
-logs:
+      instances:
 
-  - type: file
-    path: "/path/to/your/csharp/log.log"
-    service: csharp
-    source: csharp
-    sourcecategory: sourcecode
-    # For multiline logs, if they start by the date with the format yyyy-mm-dd uncomment the following processing rule
-    #log_processing_rules:
-    #  - type: multi_line
-    #    name: new_log_start_with_date
-    #    pattern: \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
-```
+      ##Log section
+      logs:
 
-That's it! Now, all your logs are going to be in proper JSON automatically understood by your Datadog application.
+        - type: file
+          path: "/path/to/your/csharp/log.log"
+          service: csharp
+          source: csharp
+          sourcecategory: sourcecode
+          # For multiline logs, if they start by the date with the format yyyy-mm-dd uncomment the following processing rule
+          #log_processing_rules:
+          #  - type: multi_line
+          #    name: new_log_start_with_date
+          #    pattern: \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
+      ```
+3. [Restart the Agent][13]
+4. Run the [Agent’s status subcommand][14] and look for `csharp` under the `Checks` section to confirm logs are successfully submitted to Datadog.
+
+If logs are in JSON format, Datadog automatically [parses the log messages][15] to extract log attributes. Use the [Log Explorer][16] to view and troubleshoot your logs.
 
 ## Agentless logging
 
-It is possible to stream logs from your application to Datadog or to the Datadog Agent directly. This is not the recommended setup as handling connection issues should not be done directly in your application, but it might not be possible to log to a file when your application is running on a machine that cannot be accessed.
+In cases where logs cannot be logged to a file because the application is running on an inaccessible host, logs can be sent directly from the application to Datadog. Outside of this specific use case, Datadog does not recommend this setup because handling connection issues should not be done directly in the application.
+
 {{< tabs >}}
 {{% tab "Serilog" %}}
 
-Install the Datadog [Serilog sink][1], which sends events and logs to Datadog. By default the sink forwards logs through HTTPS on port 443.
-Run the following command in the Package Manager Console:
+1. To install the [Datadog Serilog sink][1], which sends events and logs to Datadog, run the following command in the Package Manager Console:
 
-```text
-PM> Install-Package Serilog.Sinks.Datadog.Logs
-```
+    ```text
+    PM> Install-Package Serilog.Sinks.Datadog.Logs
+    ```
 
-Then, initialize the logger directly in your application. Do not forget to [add your `<API_KEY>`][2].
+2. Add the following code to initialize the logger directly in your application (do not forget to add your [API key][2]):
 
 {{< site-region region="us" >}}
 
@@ -333,11 +329,11 @@ using (var log = new LoggerConfiguration()
 
 {{< /site-region >}}
 
-You can also override the default behaviour and forward logs in TCP by manually specifying the following required properties: `url`, `port`, `useSSL`, and `useTCP`. [Optionally, specify the `source`, `service`, `host`, and custom tags.][3]
+By default the sink forwards logs through HTTPS on port 443. To override the default setting and forward logs using TCP, manually specify the following required properties: `url`, `port`, `useSSL`, and `useTCP`. Optionally, specify the [`source`, `service`, `host`, and custom tags.][3]
 
 {{< site-region region="us" >}}
 
-For instance to forward logs to the Datadog US region in TCP you would use the following sink configuration:
+For example, to forward logs to the Datadog US region using TCP, use the following sink configuration:
 
 ```csharp
 var config = new DatadogConfiguration(url: "intake.logs.datadoghq.com", port: 10516, useSSL: true, useTCP: true);
@@ -359,7 +355,7 @@ using (var log = new LoggerConfiguration()
 {{< /site-region >}}
 {{< site-region region="eu" >}}
 
-For instance to forward logs to the Datadog EU region in TCP you would use the following sink configuration:
+For example, to forward logs to the Datadog EU region using TCP, use the following sink configuration:
 
 ```csharp
 var config = new DatadogConfiguration(url: "tcp-intake.logs.datadoghq.eu", port: 443, useSSL: true, useTCP: true);
@@ -380,11 +376,9 @@ using (var log = new LoggerConfiguration()
 
 {{< /site-region >}}
 
-New logs are now directly sent to Datadog.
+Alternatively, for [Datadog Serilog sink][1] `0.2.0+`, configure the Datadog sink in the `appsettings.json` file with the `Serilog.Setting.Configuration` package.
 
-Alternately, since `0.2.0`, you can configure the Datadog sink by using an `appsettings.json` file with the `Serilog.Setting.Configuration` package.
-
-In the `Serilog.WriteTo` array, add an entry for `DatadogLogs`. An example is shown below:
+In the `Serilog.WriteTo` array, add an entry for `DatadogLogs` by adding the following:
 
 ```json
 "Serilog": {
@@ -409,9 +403,12 @@ In the `Serilog.WriteTo` array, add an entry for `DatadogLogs`. An example is sh
 }
 ```
 
+Use the [Log Explorer][4] to view and troubleshoot logs.
+
 [1]: https://www.nuget.org/packages/Serilog.Sinks.Datadog.Logs
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: /logs/log_configuration/attributes_naming_convention/#reserved-attributes
+[4]: /logs/explorer/#overview
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -419,5 +416,19 @@ In the `Serilog.WriteTo` array, add an entry for `DatadogLogs`. An example is sh
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/log_configuration/parsing
-[2]: /tracing/connect_logs_and_traces/dotnet/
+[1]: /logs/log_collection/csharp/#configure-your-logger
+[2]: /logs/log_collection/csharp/?tab=serilog#configure-your-datadog-agent
+[3]: /logs/log_collection/csharp/?tab=serilog#configure-your-logger
+[4]: /logs/log_collection/csharp/?tab=nlog#configure-your-logger
+[5]: /logs/log_collection/csharp/?tab=log4net#configure-your-logger
+[6]: /logs/log_configuration/parsing
+[7]: logs/log_collection/csharp/?tab=log4net#agentless-logging
+[8]: /tracing/#pagetitle
+[9]: /tracing/connect_logs_and_traces/dotnet/
+[10]: /agent/logs/?tab=tailfiles#activate-log-collection
+[11]: /agent/logs/?tab=tailfiles#custom-log-collection
+[12]: /agent/guide/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
+[13]: /agent/guide/agent-commands/?tab=agentv6v7#restart-the-agent
+[14]: /agent/guide/agent-commands/?tab=agentv6v7#agent-status-and-information
+[15]: /logs/log_configuration/parsing/?tab=matchers
+[16]: /logs/explorer/#overview
