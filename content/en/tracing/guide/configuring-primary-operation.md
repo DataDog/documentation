@@ -162,6 +162,8 @@ For more information on how to set up Node.js and OpenTracing, refer to this [ar
 
 
 ```csharp
+using OpenTracing;
+
 using (IScope scope = GlobalTracer.Instance.BuildSpan("http.request").StartActive(finishSpanOnDispose: true))
 {
     scope.Span.SetTag("resource.name", "/user/profile");
