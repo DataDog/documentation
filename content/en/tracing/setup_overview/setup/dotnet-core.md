@@ -464,10 +464,6 @@ The following configuration variables are for features that are available for us
 `DD_TRACE_LOG_PATH`
 : Sets the path for the automatic instrumentation log file and determines the directory of all other .NET Tracer log files. Ignored if `DD_TRACE_LOG_DIRECTORY` is set. 
 
-`DD_TRACE_ADONET_EXCLUDED_TYPES`
-: **TracerSettings property**: `AdoNetExcludedTypes` <br>
-Sets a list of `AdoNet` types (for example, `System.Data.SqlClient.SqlCommand`) that will be excluded from automatic instrumentation. Unused in version 2.0+.
-
 `DD_TRACE_ROUTE_TEMPLATE_RESOURCE_NAMES_ENABLED`
 : Enables improved resource names for web spans when set to `true`. Uses route template information where available, adds an additional span for ASP.NET Core integrations, and enables additional tags. Added in version 1.26.0. Enabled by default in 2.0.0<br>
 **Default**: `true`
