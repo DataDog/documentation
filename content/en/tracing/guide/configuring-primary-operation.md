@@ -108,7 +108,7 @@ For more information on how to set up Java and OpenTracing, see this [article][3
 {{< programming-lang lang="python" >}}
 
 ```python
-  span = opentracing.tracer.start_span(‘http.request')
+  span = opentracing.tracer.start_span('http.request')
   span.set_tag(Tags.RESOURCE_NAME, '/user/profile')
   span.set_tag(Tags.SPAN_TYPE, 'web')
 
@@ -175,7 +175,7 @@ For more information on how to set up .NET and OpenTracing, see this [article][8
 
 
 ```php
-$scope = $otTracer->startActiveSpan(‘http.request');
+$scope = $otTracer->startActiveSpan('http.request');
 $span = $scope->getSpan();
 $span->setTag('service.name', 'service_name');
 $span->setTag('resource.name', ‘/user/profile’);
