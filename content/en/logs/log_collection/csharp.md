@@ -422,7 +422,7 @@ Use the [Log Explorer][4] to view and troubleshoot logs.
 [4]: /logs/log_collection/csharp/?tab=nlog#configure-your-logger
 [5]: /logs/log_collection/csharp/?tab=log4net#configure-your-logger
 [6]: /logs/log_configuration/parsing
-[7]: logs/log_collection/csharp/?tab=log4net#agentless-logging
+[7]: /logs/log_collection/csharp/?tab=serilog#agentless-logging
 [8]: /tracing/#pagetitle
 [9]: /tracing/connect_logs_and_traces/dotnet/
 [10]: /agent/logs/?tab=tailfiles#activate-log-collection
