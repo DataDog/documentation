@@ -82,11 +82,112 @@ By default, the resource name would be set to this as it’s the name of the fun
 
 ## OpenTracing
 
-When using Datadog, the Opentracing operation name is a resource and the Opentracing "component" tag is Datadog's span name. To define (in Opentracing terms) a span that has the resource "/user/profile", and the span name "http.request", use this Go example:
+When using Datadog, the OpenTracing operation name is a resource and the Opentracing "component" tag is Datadog's span name. For example, to define (in OpenTracing terms) a span that has the resource "/user/profile", and the span name "http.request":
 
-```text
+{{< programming-lang-wrapper langs="java,python,ruby,go,nodejs,.NET,php" >}}
+{{< programming-lang lang="java" >}}
+
+
+
+```java
+Span span = tracer.buildSpan("http.request").start();
+
+try (Scope scope = tracer.activateSpan(span)) {
+    span.setTag("service.name", "service_name");
+    span.setTag("resource.name", "/user/profile");
+    // code being traced
+} finally {
+    span.finish();
+}
+
+```
+
+For more information on how to set up Java and OpenTracing, refer to this [article][3].
+
+{{< /programming-lang >}}
+{{< programming-lang lang="python" >}}
+
+```python
+  span = opentracing.tracer.start_span(‘http.request')
+  span.set_tag(Tags.RESOURCE_NAME, '/user/profile')
+  span.set_tag(Tags.SPAN_TYPE, 'web')
+
+# ...
+  span.finish()
+
+```
+
+For more information on how to set up Python and OpenTracing, refer to this [article][4].
+
+{{< /programming-lang >}}
+{{< programming-lang lang="ruby" >}}
+
+
+```ruby
+  OpenTracing.start_active_span('http.request') do |scope|
+    scope.span.datadog_span.resource = '/user/profile'
+    # code being traced
+  end
+```
+For more information on how to set up Ruby and OpenTracing, refer to this [article][5].
+
+{{< /programming-lang >}}
+{{< programming-lang lang="go" >}}
+
+
+```go
 opentracing.StartSpan("http.request", opentracer.ResourceName("/user/profile"))
 ```
+
+For more information on how to set up Go and OpenTracing, refer to this [article][6].
+
+{{< /programming-lang >}}
+{{< programming-lang lang="nodejs" >}}
+
+
+```javascript
+  const span = tracer.startSpan('http.request');
+  span.setTag('resource.name',  ‘/user/profile’)
+  span.setTag('span.type', 'web')
+// code being traced
+  span.finish();
+```
+
+For more information on how to set up Node.js and OpenTracing, refer to this [article][7].
+
+{{< /programming-lang >}}
+{{< programming-lang lang=".NET" >}}
+
+
+```csharp
+using (IScope scope = GlobalTracer.Instance.BuildSpan("http.request").StartActive(finishSpanOnDispose: true))
+{
+    scope.Span.SetTag("resource.name", "/user/profile");
+    // code being traced
+}
+
+```
+
+For more information on how to set up .NET and OpenTracing, refer to this [article][8].
+
+{{< /programming-lang >}}
+{{< programming-lang lang="php" >}}
+
+
+```php
+$scope = $otTracer->startActiveSpan(‘http.request');
+$span = $scope->getSpan();
+$span->setTag('service.name', 'service_name');
+$span->setTag('resource.name', ‘/user/profile’);
+$span->setTag('span.type', 'web');
+// ...Use OpenTracing as expected
+$scope->close();
+```
+
+For more information on how to set up PHP and OpenTracing, refer to this [article][9].
+{{< /programming-lang >}}
+{{< /programming-lang-wrapper >}}
+
 
 ## Further Reading
 
@@ -94,3 +195,10 @@ opentracing.StartSpan("http.request", opentracer.ResourceName("/user/profile"))
 
 [1]: /tracing/guide/metrics_namespace/
 [2]: https://app.datadoghq.com/apm/settings
+[3]: https://docs.datadoghq.com/tracing/setup_overview/open_standards/java/#opentracing
+[4]: https://docs.datadoghq.com/tracing/setup_overview/open_standards/python/#opentracing
+[5]: https://docs.datadoghq.com/tracing/setup_overview/open_standards/ruby/#opentracing
+[6]: https://docs.datadoghq.com/tracing/setup_overview/open_standards/go/#opentracing
+[7]: https://docs.datadoghq.com/tracing/setup_overview/open_standards/nodejs/#opentracing
+[8]: https://docs.datadoghq.com/tracing/setup_overview/open_standards/dotnet/#opentracing
+[9]: https://docs.datadoghq.com/tracing/setup_overview/open_standards/php/#opentracing
