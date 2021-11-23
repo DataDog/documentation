@@ -1,7 +1,8 @@
 ---
 title: Developers FAQ
 kind: faq
-private: true
+cascade: 
+  - private: true
 ---
 
 ## General
