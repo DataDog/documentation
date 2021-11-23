@@ -1914,7 +1914,7 @@ main:
     parent: profiler
     identifier: profiler_search_profiles
     weight: 1302
-  - name: Investigate Code Hotspots from Traces
+  - name: Investigate Slow Traces or Endpoints
     url: tracing/profiler/connect_traces_and_profiles/
     parent: profiler
     identifier: profiler_traces_profiles
