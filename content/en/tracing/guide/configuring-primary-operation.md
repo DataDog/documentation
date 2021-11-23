@@ -102,7 +102,7 @@ try (Scope scope = tracer.activateSpan(span)) {
 
 ```
 
-For more information on how to set up Java and OpenTracing, refer to this [article][3].
+For more information on how to set up Java and OpenTracing, see this [article][3].
 
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
@@ -117,7 +117,7 @@ For more information on how to set up Java and OpenTracing, refer to this [artic
 
 ```
 
-For more information on how to set up Python and OpenTracing, refer to this [article][4].
+For more information on how to set up Python and OpenTracing, see this [article][4].
 
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
@@ -129,7 +129,7 @@ For more information on how to set up Python and OpenTracing, refer to this [art
     # code being traced
   end
 ```
-For more information on how to set up Ruby and OpenTracing, refer to this [article][5].
+For more information on how to set up Ruby and OpenTracing, see this [article][5].
 
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
@@ -139,7 +139,7 @@ For more information on how to set up Ruby and OpenTracing, refer to this [artic
 opentracing.StartSpan("http.request", opentracer.ResourceName("/user/profile"))
 ```
 
-For more information on how to set up Go and OpenTracing, refer to this [article][6].
+For more information on how to set up Go and OpenTracing, see this [article][6].
 
 {{< /programming-lang >}}
 {{< programming-lang lang="nodejs" >}}
@@ -168,7 +168,7 @@ using (IScope scope = GlobalTracer.Instance.BuildSpan("http.request").StartActiv
 
 ```
 
-For more information on how to set up .NET and OpenTracing, refer to this [article][8].
+For more information on how to set up .NET and OpenTracing, see this [article][8].
 
 {{< /programming-lang >}}
 {{< programming-lang lang="php" >}}
@@ -184,7 +184,7 @@ $span->setTag('span.type', 'web');
 $scope->close();
 ```
 
-For more information on how to set up PHP and OpenTracing, refer to this [article][9].
+For more information on how to set up PHP and OpenTracing, see this [article][9].
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
@@ -195,10 +195,10 @@ For more information on how to set up PHP and OpenTracing, refer to this [articl
 
 [1]: /tracing/guide/metrics_namespace/
 [2]: https://app.datadoghq.com/apm/settings
-[3]: https://docs.datadoghq.com/tracing/setup_overview/open_standards/java/#opentracing
-[4]: https://docs.datadoghq.com/tracing/setup_overview/open_standards/python/#opentracing
-[5]: https://docs.datadoghq.com/tracing/setup_overview/open_standards/ruby/#opentracing
-[6]: https://docs.datadoghq.com/tracing/setup_overview/open_standards/go/#opentracing
-[7]: https://docs.datadoghq.com/tracing/setup_overview/open_standards/nodejs/#opentracing
-[8]: https://docs.datadoghq.com/tracing/setup_overview/open_standards/dotnet/#opentracing
-[9]: https://docs.datadoghq.com/tracing/setup_overview/open_standards/php/#opentracing
+[3]: /tracing/setup_overview/open_standards/java/#opentracing
+[4]: /tracing/setup_overview/open_standards/python/#opentracing
+[5]: /tracing/setup_overview/open_standards/ruby/#opentracing
+[6]: /tracing/setup_overview/open_standards/go/#opentracing
+[7]: /tracing/setup_overview/open_standards/nodejs/#opentracing
+[8]: /tracing/setup_overview/open_standards/dotnet/#opentracing
+[9]: /tracing/setup_overview/open_standards/php/#opentracing
