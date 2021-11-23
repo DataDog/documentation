@@ -108,6 +108,8 @@ For more information on how to set up Java and OpenTracing, see this [article][3
 {{< programming-lang lang="python" >}}
 
 ```python
+  from ddtrace.opentracer.tags import Tags
+  import opentracing
   span = opentracing.tracer.start_span('http.request')
   span.set_tag(Tags.RESOURCE_NAME, '/user/profile')
   span.set_tag(Tags.SPAN_TYPE, 'web')
