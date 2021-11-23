@@ -114,7 +114,7 @@ For more information on how to set up Java and OpenTracing, see this [article][3
   span.set_tag(Tags.RESOURCE_NAME, '/user/profile')
   span.set_tag(Tags.SPAN_TYPE, 'web')
 
-# ...
+  # ...
   span.finish()
 
 ```
