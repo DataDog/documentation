@@ -52,7 +52,7 @@ Profiling your service to visualize all your stack traces in one place takes jus
 
 {{< partial name="profiling/profiling-languages.html" >}}
 
-To get notified when a private beta is available for the **PHP** or **.NET** Profiler, [sign up here][1].
+To get notified when a private beta is available for the **PHP** or **.NET** Profiler, complete the [Continuous Profiler - Product Access Request form][1].
 
 ## Guide to using the profiler
 
