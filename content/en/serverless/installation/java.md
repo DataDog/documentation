@@ -1,5 +1,5 @@
 ---
-title: Instrumenting Java Applications
+title: Instrumenting Java Serverless Applications
 kind: documentation
 further_reading:
 - link: 'serverless/serverless_tagging/'

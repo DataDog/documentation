@@ -1,5 +1,5 @@
 ---
-title: Instrumenting Node.js Applications
+title: Instrumenting Node.js Serverless Applications
 kind: documentation
 further_reading:
 - link: "/serverless/serverless_integrations/plugin/"
@@ -444,7 +444,7 @@ After you have configured your function following the steps above, you can view 
 
 ### Unified service tagging
 
-Datadog recommends tagging your serverless applications with `DD_ENV`, `DD_SERVICE`, `DD_VERSION`, and `DD_TAGS`. See the [Lambda extension documentation][9] for more details.
+Datadog recommends tagging your serverless applications with `DD_ENV`, `DD_SERVICE`, `DD_VERSION`, and `DD_TAGS`. See the [Lambda extension documentation][4] for more details.
 
 ### Collect logs from AWS serverless resources
 
@@ -517,9 +517,8 @@ If your Lambda function is running in a VPC, follow the [Datadog Lambda Extensio
 [1]: /integrations/amazon_web_services/
 [2]: /serverless/guide/datadog_forwarder_node
 [3]: https://app.datadoghq.com/functions
-[4]: /getting_started/tagging/unified_service_tagging/#aws-lambda-functions
+[4]: /serverless/libraries_integrations/extension/#tagging
 [5]: /serverless/libraries_integrations/forwarder
 [6]: /serverless/custom_metrics?tab=nodejs
 [7]: /tracing/custom_instrumentation/nodejs/
 [8]: /serverless/guide/extension_private_link/
-[9]: /serverless/libraries_integrations/extension/#tagging
