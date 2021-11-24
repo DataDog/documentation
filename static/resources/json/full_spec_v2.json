@@ -24912,13 +24912,15 @@
                       "enum": [
                         "threshold",
                         "new_value",
-                        "anomaly_detection"
+                        "anomaly_detection",
+                        "third_party"
                       ],
                       "type": "string",
                       "x-enum-varnames": [
                         "THRESHOLD",
                         "NEW_VALUE",
-                        "ANOMALY_DETECTION"
+                        "ANOMALY_DETECTION",
+                        "THIRD_PARTY"
                       ]
                     },
                     "evaluationWindow": {
@@ -25049,6 +25051,55 @@
                         }
                       },
                       "type": "object"
+                    },
+                    "thirdPartyOptions": {
+                      "description": "Options for third-party rules.",
+                      "properties": {
+                        "defaultNotifications": {
+                          "description": "Notification targets for the root query.",
+                          "items": {
+                            "description": "Notification",
+                            "type": "string"
+                          },
+                          "type": "array"
+                        },
+                        "defaultStatus": {
+                          "description": "Severity of the Security Signal.",
+                          "enum": [
+                            "info",
+                            "low",
+                            "medium",
+                            "high",
+                            "critical"
+                          ],
+                          "example": "critical",
+                          "type": "string",
+                          "x-enum-varnames": [
+                            "INFO",
+                            "LOW",
+                            "MEDIUM",
+                            "HIGH",
+                            "CRITICAL"
+                          ]
+                        },
+                        "firstSeenOverride": {
+                          "description": "(Optional): the name of an attribute to override the first seen value of the third party signal.",
+                          "type": "string"
+                        },
+                        "lastSeenOverride": {
+                          "description": "(Optional): the name of an attribute to override the last seen value of the third party signal.",
+                          "type": "string"
+                        },
+                        "rootQuery": {
+                          "description": "Root query of the rule.",
+                          "type": "string"
+                        },
+                        "signalId": {
+                          "description": "Optional mapping of the third-party signal ID.",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
                     }
                   },
                   "type": "object"
@@ -25080,7 +25131,8 @@
                           "cardinality",
                           "sum",
                           "max",
-                          "new_value"
+                          "new_value",
+                          "none"
                         ],
                         "type": "string",
                         "x-enum-varnames": [
@@ -25088,7 +25140,8 @@
                           "CARDINALITY",
                           "SUM",
                           "MAX",
-                          "NEW_VALUE"
+                          "NEW_VALUE",
+                          "NONE"
                         ]
                       },
                       "distinctFields": {
@@ -25378,13 +25431,15 @@
                 "enum": [
                   "threshold",
                   "new_value",
-                  "anomaly_detection"
+                  "anomaly_detection",
+                  "third_party"
                 ],
                 "type": "string",
                 "x-enum-varnames": [
                   "THRESHOLD",
                   "NEW_VALUE",
-                  "ANOMALY_DETECTION"
+                  "ANOMALY_DETECTION",
+                  "THIRD_PARTY"
                 ]
               },
               "evaluationWindow": {
@@ -25515,6 +25570,55 @@
                   }
                 },
                 "type": "object"
+              },
+              "thirdPartyOptions": {
+                "description": "Options for third-party rules.",
+                "properties": {
+                  "defaultNotifications": {
+                    "description": "Notification targets for the root query.",
+                    "items": {
+                      "description": "Notification",
+                      "type": "string"
+                    },
+                    "type": "array"
+                  },
+                  "defaultStatus": {
+                    "description": "Severity of the Security Signal.",
+                    "enum": [
+                      "info",
+                      "low",
+                      "medium",
+                      "high",
+                      "critical"
+                    ],
+                    "example": "critical",
+                    "type": "string",
+                    "x-enum-varnames": [
+                      "INFO",
+                      "LOW",
+                      "MEDIUM",
+                      "HIGH",
+                      "CRITICAL"
+                    ]
+                  },
+                  "firstSeenOverride": {
+                    "description": "(Optional): the name of an attribute to override the first seen value of the third party signal.",
+                    "type": "string"
+                  },
+                  "lastSeenOverride": {
+                    "description": "(Optional): the name of an attribute to override the last seen value of the third party signal.",
+                    "type": "string"
+                  },
+                  "rootQuery": {
+                    "description": "Root query of the rule.",
+                    "type": "string"
+                  },
+                  "signalId": {
+                    "description": "Optional mapping of the third-party signal ID.",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
               }
             },
             "type": "object"
@@ -25547,7 +25651,8 @@
                     "cardinality",
                     "sum",
                     "max",
-                    "new_value"
+                    "new_value",
+                    "none"
                   ],
                   "type": "string",
                   "x-enum-varnames": [
@@ -25555,7 +25660,8 @@
                     "CARDINALITY",
                     "SUM",
                     "MAX",
-                    "NEW_VALUE"
+                    "NEW_VALUE",
+                    "NONE"
                   ]
                 },
                 "distinctFields": {
@@ -25635,13 +25741,15 @@
         "enum": [
           "threshold",
           "new_value",
-          "anomaly_detection"
+          "anomaly_detection",
+          "third_party"
         ],
         "type": "string",
         "x-enum-varnames": [
           "THRESHOLD",
           "NEW_VALUE",
-          "ANOMALY_DETECTION"
+          "ANOMALY_DETECTION",
+          "THIRD_PARTY"
         ]
       },
       "SecurityMonitoringRuleEvaluationWindow": {
@@ -25817,13 +25925,15 @@
             "enum": [
               "threshold",
               "new_value",
-              "anomaly_detection"
+              "anomaly_detection",
+              "third_party"
             ],
             "type": "string",
             "x-enum-varnames": [
               "THRESHOLD",
               "NEW_VALUE",
-              "ANOMALY_DETECTION"
+              "ANOMALY_DETECTION",
+              "THIRD_PARTY"
             ]
           },
           "evaluationWindow": {
@@ -25954,6 +26064,55 @@
               }
             },
             "type": "object"
+          },
+          "thirdPartyOptions": {
+            "description": "Options for third-party rules.",
+            "properties": {
+              "defaultNotifications": {
+                "description": "Notification targets for the root query.",
+                "items": {
+                  "description": "Notification",
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "defaultStatus": {
+                "description": "Severity of the Security Signal.",
+                "enum": [
+                  "info",
+                  "low",
+                  "medium",
+                  "high",
+                  "critical"
+                ],
+                "example": "critical",
+                "type": "string",
+                "x-enum-varnames": [
+                  "INFO",
+                  "LOW",
+                  "MEDIUM",
+                  "HIGH",
+                  "CRITICAL"
+                ]
+              },
+              "firstSeenOverride": {
+                "description": "(Optional): the name of an attribute to override the first seen value of the third party signal.",
+                "type": "string"
+              },
+              "lastSeenOverride": {
+                "description": "(Optional): the name of an attribute to override the last seen value of the third party signal.",
+                "type": "string"
+              },
+              "rootQuery": {
+                "description": "Root query of the rule.",
+                "type": "string"
+              },
+              "signalId": {
+                "description": "Optional mapping of the third-party signal ID.",
+                "type": "string"
+              }
+            },
+            "type": "object"
           }
         },
         "type": "object"
@@ -25983,7 +26142,8 @@
               "cardinality",
               "sum",
               "max",
-              "new_value"
+              "new_value",
+              "none"
             ],
             "type": "string",
             "x-enum-varnames": [
@@ -25991,7 +26151,8 @@
               "CARDINALITY",
               "SUM",
               "MAX",
-              "NEW_VALUE"
+              "NEW_VALUE",
+              "NONE"
             ]
           },
           "distinctFields": {
@@ -26032,7 +26193,8 @@
           "cardinality",
           "sum",
           "max",
-          "new_value"
+          "new_value",
+          "none"
         ],
         "type": "string",
         "x-enum-varnames": [
@@ -26040,7 +26202,8 @@
           "CARDINALITY",
           "SUM",
           "MAX",
-          "NEW_VALUE"
+          "NEW_VALUE",
+          "NONE"
         ]
       },
       "SecurityMonitoringRuleQueryCreate": {
@@ -26068,7 +26231,8 @@
               "cardinality",
               "sum",
               "max",
-              "new_value"
+              "new_value",
+              "none"
             ],
             "type": "string",
             "x-enum-varnames": [
@@ -26076,7 +26240,8 @@
               "CARDINALITY",
               "SUM",
               "MAX",
-              "NEW_VALUE"
+              "NEW_VALUE",
+              "NONE"
             ]
           },
           "distinctFields": {
@@ -26234,13 +26399,15 @@
                 "enum": [
                   "threshold",
                   "new_value",
-                  "anomaly_detection"
+                  "anomaly_detection",
+                  "third_party"
                 ],
                 "type": "string",
                 "x-enum-varnames": [
                   "THRESHOLD",
                   "NEW_VALUE",
-                  "ANOMALY_DETECTION"
+                  "ANOMALY_DETECTION",
+                  "THIRD_PARTY"
                 ]
               },
               "evaluationWindow": {
@@ -26371,6 +26538,55 @@
                   }
                 },
                 "type": "object"
+              },
+              "thirdPartyOptions": {
+                "description": "Options for third-party rules.",
+                "properties": {
+                  "defaultNotifications": {
+                    "description": "Notification targets for the root query.",
+                    "items": {
+                      "description": "Notification",
+                      "type": "string"
+                    },
+                    "type": "array"
+                  },
+                  "defaultStatus": {
+                    "description": "Severity of the Security Signal.",
+                    "enum": [
+                      "info",
+                      "low",
+                      "medium",
+                      "high",
+                      "critical"
+                    ],
+                    "example": "critical",
+                    "type": "string",
+                    "x-enum-varnames": [
+                      "INFO",
+                      "LOW",
+                      "MEDIUM",
+                      "HIGH",
+                      "CRITICAL"
+                    ]
+                  },
+                  "firstSeenOverride": {
+                    "description": "(Optional): the name of an attribute to override the first seen value of the third party signal.",
+                    "type": "string"
+                  },
+                  "lastSeenOverride": {
+                    "description": "(Optional): the name of an attribute to override the last seen value of the third party signal.",
+                    "type": "string"
+                  },
+                  "rootQuery": {
+                    "description": "Root query of the rule.",
+                    "type": "string"
+                  },
+                  "signalId": {
+                    "description": "Optional mapping of the third-party signal ID.",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
               }
             },
             "type": "object"
@@ -26402,7 +26618,8 @@
                     "cardinality",
                     "sum",
                     "max",
-                    "new_value"
+                    "new_value",
+                    "none"
                   ],
                   "type": "string",
                   "x-enum-varnames": [
@@ -26410,7 +26627,8 @@
                     "CARDINALITY",
                     "SUM",
                     "MAX",
-                    "NEW_VALUE"
+                    "NEW_VALUE",
+                    "NONE"
                   ]
                 },
                 "distinctFields": {
@@ -26500,6 +26718,55 @@
           "HIGH",
           "CRITICAL"
         ]
+      },
+      "SecurityMonitoringRuleThirdPartyOptions": {
+        "description": "Options for third-party rules.",
+        "properties": {
+          "defaultNotifications": {
+            "description": "Notification targets for the root query.",
+            "items": {
+              "description": "Notification",
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "defaultStatus": {
+            "description": "Severity of the Security Signal.",
+            "enum": [
+              "info",
+              "low",
+              "medium",
+              "high",
+              "critical"
+            ],
+            "example": "critical",
+            "type": "string",
+            "x-enum-varnames": [
+              "INFO",
+              "LOW",
+              "MEDIUM",
+              "HIGH",
+              "CRITICAL"
+            ]
+          },
+          "firstSeenOverride": {
+            "description": "(Optional): the name of an attribute to override the first seen value of the third party signal.",
+            "type": "string"
+          },
+          "lastSeenOverride": {
+            "description": "(Optional): the name of an attribute to override the last seen value of the third party signal.",
+            "type": "string"
+          },
+          "rootQuery": {
+            "description": "Root query of the rule.",
+            "type": "string"
+          },
+          "signalId": {
+            "description": "Optional mapping of the third-party signal ID.",
+            "type": "string"
+          }
+        },
+        "type": "object"
       },
       "SecurityMonitoringRuleTypeCreate": {
         "description": "The rule type.",
@@ -26628,13 +26895,15 @@
                 "enum": [
                   "threshold",
                   "new_value",
-                  "anomaly_detection"
+                  "anomaly_detection",
+                  "third_party"
                 ],
                 "type": "string",
                 "x-enum-varnames": [
                   "THRESHOLD",
                   "NEW_VALUE",
-                  "ANOMALY_DETECTION"
+                  "ANOMALY_DETECTION",
+                  "THIRD_PARTY"
                 ]
               },
               "evaluationWindow": {
@@ -26765,6 +27034,55 @@
                   }
                 },
                 "type": "object"
+              },
+              "thirdPartyOptions": {
+                "description": "Options for third-party rules.",
+                "properties": {
+                  "defaultNotifications": {
+                    "description": "Notification targets for the root query.",
+                    "items": {
+                      "description": "Notification",
+                      "type": "string"
+                    },
+                    "type": "array"
+                  },
+                  "defaultStatus": {
+                    "description": "Severity of the Security Signal.",
+                    "enum": [
+                      "info",
+                      "low",
+                      "medium",
+                      "high",
+                      "critical"
+                    ],
+                    "example": "critical",
+                    "type": "string",
+                    "x-enum-varnames": [
+                      "INFO",
+                      "LOW",
+                      "MEDIUM",
+                      "HIGH",
+                      "CRITICAL"
+                    ]
+                  },
+                  "firstSeenOverride": {
+                    "description": "(Optional): the name of an attribute to override the first seen value of the third party signal.",
+                    "type": "string"
+                  },
+                  "lastSeenOverride": {
+                    "description": "(Optional): the name of an attribute to override the last seen value of the third party signal.",
+                    "type": "string"
+                  },
+                  "rootQuery": {
+                    "description": "Root query of the rule.",
+                    "type": "string"
+                  },
+                  "signalId": {
+                    "description": "Optional mapping of the third-party signal ID.",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
               }
             },
             "type": "object"
@@ -26796,7 +27114,8 @@
                     "cardinality",
                     "sum",
                     "max",
-                    "new_value"
+                    "new_value",
+                    "none"
                   ],
                   "type": "string",
                   "x-enum-varnames": [
@@ -26804,7 +27123,8 @@
                     "CARDINALITY",
                     "SUM",
                     "MAX",
-                    "NEW_VALUE"
+                    "NEW_VALUE",
+                    "NONE"
                   ]
                 },
                 "distinctFields": {
@@ -57962,13 +58282,15 @@
                                 "enum": [
                                   "threshold",
                                   "new_value",
-                                  "anomaly_detection"
+                                  "anomaly_detection",
+                                  "third_party"
                                 ],
                                 "type": "string",
                                 "x-enum-varnames": [
                                   "THRESHOLD",
                                   "NEW_VALUE",
-                                  "ANOMALY_DETECTION"
+                                  "ANOMALY_DETECTION",
+                                  "THIRD_PARTY"
                                 ]
                               },
                               "evaluationWindow": {
@@ -58099,6 +58421,55 @@
                                   }
                                 },
                                 "type": "object"
+                              },
+                              "thirdPartyOptions": {
+                                "description": "Options for third-party rules.",
+                                "properties": {
+                                  "defaultNotifications": {
+                                    "description": "Notification targets for the root query.",
+                                    "items": {
+                                      "description": "Notification",
+                                      "type": "string"
+                                    },
+                                    "type": "array"
+                                  },
+                                  "defaultStatus": {
+                                    "description": "Severity of the Security Signal.",
+                                    "enum": [
+                                      "info",
+                                      "low",
+                                      "medium",
+                                      "high",
+                                      "critical"
+                                    ],
+                                    "example": "critical",
+                                    "type": "string",
+                                    "x-enum-varnames": [
+                                      "INFO",
+                                      "LOW",
+                                      "MEDIUM",
+                                      "HIGH",
+                                      "CRITICAL"
+                                    ]
+                                  },
+                                  "firstSeenOverride": {
+                                    "description": "(Optional): the name of an attribute to override the first seen value of the third party signal.",
+                                    "type": "string"
+                                  },
+                                  "lastSeenOverride": {
+                                    "description": "(Optional): the name of an attribute to override the last seen value of the third party signal.",
+                                    "type": "string"
+                                  },
+                                  "rootQuery": {
+                                    "description": "Root query of the rule.",
+                                    "type": "string"
+                                  },
+                                  "signalId": {
+                                    "description": "Optional mapping of the third-party signal ID.",
+                                    "type": "string"
+                                  }
+                                },
+                                "type": "object"
                               }
                             },
                             "type": "object"
@@ -58130,7 +58501,8 @@
                                     "cardinality",
                                     "sum",
                                     "max",
-                                    "new_value"
+                                    "new_value",
+                                    "none"
                                   ],
                                   "type": "string",
                                   "x-enum-varnames": [
@@ -58138,7 +58510,8 @@
                                     "CARDINALITY",
                                     "SUM",
                                     "MAX",
-                                    "NEW_VALUE"
+                                    "NEW_VALUE",
+                                    "NONE"
                                   ]
                                 },
                                 "distinctFields": {
@@ -58424,13 +58797,15 @@
                         "enum": [
                           "threshold",
                           "new_value",
-                          "anomaly_detection"
+                          "anomaly_detection",
+                          "third_party"
                         ],
                         "type": "string",
                         "x-enum-varnames": [
                           "THRESHOLD",
                           "NEW_VALUE",
-                          "ANOMALY_DETECTION"
+                          "ANOMALY_DETECTION",
+                          "THIRD_PARTY"
                         ]
                       },
                       "evaluationWindow": {
@@ -58561,6 +58936,55 @@
                           }
                         },
                         "type": "object"
+                      },
+                      "thirdPartyOptions": {
+                        "description": "Options for third-party rules.",
+                        "properties": {
+                          "defaultNotifications": {
+                            "description": "Notification targets for the root query.",
+                            "items": {
+                              "description": "Notification",
+                              "type": "string"
+                            },
+                            "type": "array"
+                          },
+                          "defaultStatus": {
+                            "description": "Severity of the Security Signal.",
+                            "enum": [
+                              "info",
+                              "low",
+                              "medium",
+                              "high",
+                              "critical"
+                            ],
+                            "example": "critical",
+                            "type": "string",
+                            "x-enum-varnames": [
+                              "INFO",
+                              "LOW",
+                              "MEDIUM",
+                              "HIGH",
+                              "CRITICAL"
+                            ]
+                          },
+                          "firstSeenOverride": {
+                            "description": "(Optional): the name of an attribute to override the first seen value of the third party signal.",
+                            "type": "string"
+                          },
+                          "lastSeenOverride": {
+                            "description": "(Optional): the name of an attribute to override the last seen value of the third party signal.",
+                            "type": "string"
+                          },
+                          "rootQuery": {
+                            "description": "Root query of the rule.",
+                            "type": "string"
+                          },
+                          "signalId": {
+                            "description": "Optional mapping of the third-party signal ID.",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
                       }
                     },
                     "type": "object"
@@ -58593,7 +59017,8 @@
                             "cardinality",
                             "sum",
                             "max",
-                            "new_value"
+                            "new_value",
+                            "none"
                           ],
                           "type": "string",
                           "x-enum-varnames": [
@@ -58601,7 +59026,8 @@
                             "CARDINALITY",
                             "SUM",
                             "MAX",
-                            "NEW_VALUE"
+                            "NEW_VALUE",
+                            "NONE"
                           ]
                         },
                         "distinctFields": {
@@ -58804,13 +59230,15 @@
                           "enum": [
                             "threshold",
                             "new_value",
-                            "anomaly_detection"
+                            "anomaly_detection",
+                            "third_party"
                           ],
                           "type": "string",
                           "x-enum-varnames": [
                             "THRESHOLD",
                             "NEW_VALUE",
-                            "ANOMALY_DETECTION"
+                            "ANOMALY_DETECTION",
+                            "THIRD_PARTY"
                           ]
                         },
                         "evaluationWindow": {
@@ -58941,6 +59369,55 @@
                             }
                           },
                           "type": "object"
+                        },
+                        "thirdPartyOptions": {
+                          "description": "Options for third-party rules.",
+                          "properties": {
+                            "defaultNotifications": {
+                              "description": "Notification targets for the root query.",
+                              "items": {
+                                "description": "Notification",
+                                "type": "string"
+                              },
+                              "type": "array"
+                            },
+                            "defaultStatus": {
+                              "description": "Severity of the Security Signal.",
+                              "enum": [
+                                "info",
+                                "low",
+                                "medium",
+                                "high",
+                                "critical"
+                              ],
+                              "example": "critical",
+                              "type": "string",
+                              "x-enum-varnames": [
+                                "INFO",
+                                "LOW",
+                                "MEDIUM",
+                                "HIGH",
+                                "CRITICAL"
+                              ]
+                            },
+                            "firstSeenOverride": {
+                              "description": "(Optional): the name of an attribute to override the first seen value of the third party signal.",
+                              "type": "string"
+                            },
+                            "lastSeenOverride": {
+                              "description": "(Optional): the name of an attribute to override the last seen value of the third party signal.",
+                              "type": "string"
+                            },
+                            "rootQuery": {
+                              "description": "Root query of the rule.",
+                              "type": "string"
+                            },
+                            "signalId": {
+                              "description": "Optional mapping of the third-party signal ID.",
+                              "type": "string"
+                            }
+                          },
+                          "type": "object"
                         }
                       },
                       "type": "object"
@@ -58972,7 +59449,8 @@
                               "cardinality",
                               "sum",
                               "max",
-                              "new_value"
+                              "new_value",
+                              "none"
                             ],
                             "type": "string",
                             "x-enum-varnames": [
@@ -58980,7 +59458,8 @@
                               "CARDINALITY",
                               "SUM",
                               "MAX",
-                              "NEW_VALUE"
+                              "NEW_VALUE",
+                              "NONE"
                             ]
                           },
                           "distinctFields": {
@@ -59425,13 +59904,15 @@
                           "enum": [
                             "threshold",
                             "new_value",
-                            "anomaly_detection"
+                            "anomaly_detection",
+                            "third_party"
                           ],
                           "type": "string",
                           "x-enum-varnames": [
                             "THRESHOLD",
                             "NEW_VALUE",
-                            "ANOMALY_DETECTION"
+                            "ANOMALY_DETECTION",
+                            "THIRD_PARTY"
                           ]
                         },
                         "evaluationWindow": {
@@ -59562,6 +60043,55 @@
                             }
                           },
                           "type": "object"
+                        },
+                        "thirdPartyOptions": {
+                          "description": "Options for third-party rules.",
+                          "properties": {
+                            "defaultNotifications": {
+                              "description": "Notification targets for the root query.",
+                              "items": {
+                                "description": "Notification",
+                                "type": "string"
+                              },
+                              "type": "array"
+                            },
+                            "defaultStatus": {
+                              "description": "Severity of the Security Signal.",
+                              "enum": [
+                                "info",
+                                "low",
+                                "medium",
+                                "high",
+                                "critical"
+                              ],
+                              "example": "critical",
+                              "type": "string",
+                              "x-enum-varnames": [
+                                "INFO",
+                                "LOW",
+                                "MEDIUM",
+                                "HIGH",
+                                "CRITICAL"
+                              ]
+                            },
+                            "firstSeenOverride": {
+                              "description": "(Optional): the name of an attribute to override the first seen value of the third party signal.",
+                              "type": "string"
+                            },
+                            "lastSeenOverride": {
+                              "description": "(Optional): the name of an attribute to override the last seen value of the third party signal.",
+                              "type": "string"
+                            },
+                            "rootQuery": {
+                              "description": "Root query of the rule.",
+                              "type": "string"
+                            },
+                            "signalId": {
+                              "description": "Optional mapping of the third-party signal ID.",
+                              "type": "string"
+                            }
+                          },
+                          "type": "object"
                         }
                       },
                       "type": "object"
@@ -59593,7 +60123,8 @@
                               "cardinality",
                               "sum",
                               "max",
-                              "new_value"
+                              "new_value",
+                              "none"
                             ],
                             "type": "string",
                             "x-enum-varnames": [
@@ -59601,7 +60132,8 @@
                               "CARDINALITY",
                               "SUM",
                               "MAX",
-                              "NEW_VALUE"
+                              "NEW_VALUE",
+                              "NONE"
                             ]
                           },
                           "distinctFields": {
@@ -59864,13 +60396,15 @@
                         "enum": [
                           "threshold",
                           "new_value",
-                          "anomaly_detection"
+                          "anomaly_detection",
+                          "third_party"
                         ],
                         "type": "string",
                         "x-enum-varnames": [
                           "THRESHOLD",
                           "NEW_VALUE",
-                          "ANOMALY_DETECTION"
+                          "ANOMALY_DETECTION",
+                          "THIRD_PARTY"
                         ]
                       },
                       "evaluationWindow": {
@@ -60001,6 +60535,55 @@
                           }
                         },
                         "type": "object"
+                      },
+                      "thirdPartyOptions": {
+                        "description": "Options for third-party rules.",
+                        "properties": {
+                          "defaultNotifications": {
+                            "description": "Notification targets for the root query.",
+                            "items": {
+                              "description": "Notification",
+                              "type": "string"
+                            },
+                            "type": "array"
+                          },
+                          "defaultStatus": {
+                            "description": "Severity of the Security Signal.",
+                            "enum": [
+                              "info",
+                              "low",
+                              "medium",
+                              "high",
+                              "critical"
+                            ],
+                            "example": "critical",
+                            "type": "string",
+                            "x-enum-varnames": [
+                              "INFO",
+                              "LOW",
+                              "MEDIUM",
+                              "HIGH",
+                              "CRITICAL"
+                            ]
+                          },
+                          "firstSeenOverride": {
+                            "description": "(Optional): the name of an attribute to override the first seen value of the third party signal.",
+                            "type": "string"
+                          },
+                          "lastSeenOverride": {
+                            "description": "(Optional): the name of an attribute to override the last seen value of the third party signal.",
+                            "type": "string"
+                          },
+                          "rootQuery": {
+                            "description": "Root query of the rule.",
+                            "type": "string"
+                          },
+                          "signalId": {
+                            "description": "Optional mapping of the third-party signal ID.",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
                       }
                     },
                     "type": "object"
@@ -60032,7 +60615,8 @@
                             "cardinality",
                             "sum",
                             "max",
-                            "new_value"
+                            "new_value",
+                            "none"
                           ],
                           "type": "string",
                           "x-enum-varnames": [
@@ -60040,7 +60624,8 @@
                             "CARDINALITY",
                             "SUM",
                             "MAX",
-                            "NEW_VALUE"
+                            "NEW_VALUE",
+                            "NONE"
                           ]
                         },
                         "distinctFields": {
@@ -60222,13 +60807,15 @@
                           "enum": [
                             "threshold",
                             "new_value",
-                            "anomaly_detection"
+                            "anomaly_detection",
+                            "third_party"
                           ],
                           "type": "string",
                           "x-enum-varnames": [
                             "THRESHOLD",
                             "NEW_VALUE",
-                            "ANOMALY_DETECTION"
+                            "ANOMALY_DETECTION",
+                            "THIRD_PARTY"
                           ]
                         },
                         "evaluationWindow": {
@@ -60359,6 +60946,55 @@
                             }
                           },
                           "type": "object"
+                        },
+                        "thirdPartyOptions": {
+                          "description": "Options for third-party rules.",
+                          "properties": {
+                            "defaultNotifications": {
+                              "description": "Notification targets for the root query.",
+                              "items": {
+                                "description": "Notification",
+                                "type": "string"
+                              },
+                              "type": "array"
+                            },
+                            "defaultStatus": {
+                              "description": "Severity of the Security Signal.",
+                              "enum": [
+                                "info",
+                                "low",
+                                "medium",
+                                "high",
+                                "critical"
+                              ],
+                              "example": "critical",
+                              "type": "string",
+                              "x-enum-varnames": [
+                                "INFO",
+                                "LOW",
+                                "MEDIUM",
+                                "HIGH",
+                                "CRITICAL"
+                              ]
+                            },
+                            "firstSeenOverride": {
+                              "description": "(Optional): the name of an attribute to override the first seen value of the third party signal.",
+                              "type": "string"
+                            },
+                            "lastSeenOverride": {
+                              "description": "(Optional): the name of an attribute to override the last seen value of the third party signal.",
+                              "type": "string"
+                            },
+                            "rootQuery": {
+                              "description": "Root query of the rule.",
+                              "type": "string"
+                            },
+                            "signalId": {
+                              "description": "Optional mapping of the third-party signal ID.",
+                              "type": "string"
+                            }
+                          },
+                          "type": "object"
                         }
                       },
                       "type": "object"
@@ -60390,7 +61026,8 @@
                               "cardinality",
                               "sum",
                               "max",
-                              "new_value"
+                              "new_value",
+                              "none"
                             ],
                             "type": "string",
                             "x-enum-varnames": [
@@ -60398,7 +61035,8 @@
                               "CARDINALITY",
                               "SUM",
                               "MAX",
-                              "NEW_VALUE"
+                              "NEW_VALUE",
+                              "NONE"
                             ]
                           },
                           "distinctFields": {

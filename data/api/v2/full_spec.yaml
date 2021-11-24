@@ -4667,11 +4667,13 @@ components:
       - threshold
       - new_value
       - anomaly_detection
+      - third_party
       type: string
       x-enum-varnames:
       - THRESHOLD
       - NEW_VALUE
       - ANOMALY_DETECTION
+      - THIRD_PARTY
     SecurityMonitoringRuleEvaluationWindow:
       description: 'A time window is specified to match when at least one of the cases
         matches true. This is a sliding window
@@ -4811,6 +4813,8 @@ components:
           $ref: '#/components/schemas/SecurityMonitoringRuleMaxSignalDuration'
         newValueOptions:
           $ref: '#/components/schemas/SecurityMonitoringRuleNewValueOptions'
+        thirdPartyOptions:
+          $ref: '#/components/schemas/SecurityMonitoringRuleThirdPartyOptions'
       type: object
     SecurityMonitoringRuleQuery:
       description: Query for matching rule.
@@ -4851,6 +4855,7 @@ components:
       - sum
       - max
       - new_value
+      - none
       type: string
       x-enum-varnames:
       - COUNT
@@ -4858,6 +4863,7 @@ components:
       - SUM
       - MAX
       - NEW_VALUE
+      - NONE
     SecurityMonitoringRuleQueryCreate:
       description: Query for matching rule.
       properties:
@@ -4975,6 +4981,32 @@ components:
       - MEDIUM
       - HIGH
       - CRITICAL
+    SecurityMonitoringRuleThirdPartyOptions:
+      description: Options for third-party rules.
+      properties:
+        defaultNotifications:
+          description: Notification targets for the root query.
+          items:
+            description: Notification
+            type: string
+          type: array
+        defaultStatus:
+          $ref: '#/components/schemas/SecurityMonitoringRuleSeverity'
+        firstSeenOverride:
+          description: '(Optional): the name of an attribute to override the first
+            seen value of the third party signal.'
+          type: string
+        lastSeenOverride:
+          description: '(Optional): the name of an attribute to override the last
+            seen value of the third party signal.'
+          type: string
+        rootQuery:
+          description: Root query of the rule.
+          type: string
+        signalId:
+          description: Optional mapping of the third-party signal ID.
+          type: string
+      type: object
     SecurityMonitoringRuleTypeCreate:
       description: The rule type.
       enum:
