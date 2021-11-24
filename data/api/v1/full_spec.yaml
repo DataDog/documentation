@@ -6145,6 +6145,10 @@ components:
           format: int64
           readOnly: true
           type: integer
+        query:
+          description: The monitor query.
+          example: avg(last_5m):sum:system.net.bytes_rcvd{host:host0} > 100
+          type: string
         scopes:
           description: 'The scope(s) to which the downtime applies, e.g. `host:app2`.
 
