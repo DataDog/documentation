@@ -44,33 +44,38 @@ To begin profiling applications:
 
      **Note**: Profiler is available in the `dd-java-agent.jar` library in versions 0.55+.
 
-3. Set `-Ddd.profiling.enabled` flag or `DD_PROFILING_ENABLED` environment variable to `true`. Your service invocation should look like:
+3. Enable the profiler by setting `-Ddd.profiling.enabled` flag or `DD_PROFILING_ENABLED` environment variable to `true`. Specify `dd.service`, `dd.env`, and `dd.version` so you can filter and group your profiles across these dimensions:
+   {{< tabs >}}
+{{% tab "Command arguments" %}}
 
-    ```diff
-    java \
-        -javaagent:dd-java-agent.jar \
-        -Ddd.service=<YOUR_SERVICE> \
-        -Ddd.env=<YOUR_ENVIRONMENT> \
-        -Ddd.version=<YOUR_VERSION> \
-        -Ddd.profiling.enabled=true \
-        -XX:FlightRecorderOptions=stackdepth=256 \
-        -jar <YOUR_SERVICE>.jar <YOUR_SERVICE_FLAGS>
-    ```
+Invoke your service: 
+```diff
+java \
+    -javaagent:dd-java-agent.jar \
+    -Ddd.service=<YOUR_SERVICE> \
+    -Ddd.env=<YOUR_ENVIRONMENT> \
+    -Ddd.version=<YOUR_VERSION> \
+    -Ddd.profiling.enabled=true \
+    -XX:FlightRecorderOptions=stackdepth=256 \
+    -jar <YOUR_SERVICE>.jar <YOUR_SERVICE_FLAGS>
+```
 
-    **Recommendation**: Specify `dd.service`, `dd.env`, and `dd.version` so you can filter and group your profiles across these dimensions.
+{{% /tab %}}
+{{% tab "Environment variables" %}}
 
-    You can also [use environment variables](#environment-variables) to set the parameters as such:
+```diff
+export DD_SERVICE=<YOUR_SERVICE>
+export DD_ENV=<YOUR_ENV>
+export DD_VERSION=<YOUR_VERSION>
+export DD_PROFILING_ENABLED=true
+java \
+    -javaagent:dd-java-agent.jar \
+    -XX:FlightRecorderOptions=stackdepth=256 \
+    -jar <YOUR_SERVICE>.jar <YOUR_SERVICE_FLAGS>
+```
 
-    ```diff
-    export DD_SERVICE=<YOUR_SERVICE>
-    export DD_ENV=<YOUR_ENV>
-    export DD_VERSION=<YOUR_VERSION>
-    export DD_PROFILING_ENABLED=true
-    java \
-        -javaagent:dd-java-agent.jar \
-        -XX:FlightRecorderOptions=stackdepth=256 \
-        -jar <YOUR_SERVICE>.jar <YOUR_SERVICE_FLAGS>
-    ```
+{{% /tab %}}
+{{< /tabs >}}
 
     **Note**: The `-javaagent` argument needs to be before `-jar`, adding it as a JVM option rather than an application argument. For more information, see the [Oracle documentation][6]:
 
