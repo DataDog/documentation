@@ -72,7 +72,7 @@
     contents:
 
     - action: integrations
-      branch: cswatt/oke-docs
+      branch: master
       globs:
       - "*/metadata.csv"
       - "*/manifest.json"
@@ -81,7 +81,7 @@
       - "*/datadog_checks/*/__about__.py"
 
     - action: pull-and-push-folder
-      branch: cswatt/oke-docs
+      branch: master
       globs:
       - docs/dev/*.md
       options:
