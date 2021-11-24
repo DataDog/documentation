@@ -593,6 +593,12 @@ class DDTestSession {
     // - Parameters:
     //   - endTime: Optional. The time the session ended.
     func end(endTime: Date? = nil)
+    // Adds a tag/attribute to the test session. Any number of tags can be added.
+    // - Parameters:
+    //   - key: The name of the tag. If a tag with the same name already exists, 
+    //     its value will be replaced by the new value.
+    //   - value: The value of the tag. Can be a number or a string.
+    func setTag(key: String, value: Any)
     //
     // Starts a suite in this session.
     // - Parameters:
@@ -605,7 +611,13 @@ public class DDTestSuite : NSObject {
     // Ends the test suite.
     // - Parameters:
     //   - endTime: Optional. The time the suite ended.
-		func end(endTime: Date? = nil)
+    func end(endTime: Date? = nil)
+    // Adds a tag/attribute to the test suite. Any number of tags can be added.
+    // - Parameters:
+    //   - key: The name of the tag. If a tag with the same name already exists, 
+    //     its value will be replaced by the new value.
+    //   - value: The value of the tag. Can be a number or a string.
+    func setTag(key: String, value: Any)
     //
     // Starts a test in this suite.
     // - Parameters:
@@ -615,12 +627,12 @@ public class DDTestSuite : NSObject {
 }
     //
 public class DDTest : NSObject {
-    // Adds an attribute/tag to the test. Any number of attributes can be added.
+    // Adds a tag/attribute to the test. Any number of tags can be added.
     // - Parameters:
-    //   - key: The name of the attribute. If an attribute with the same name already exists, 
+    //   - key: The name of the tag. If a tag with the same name already exists, 
     //     its value will be replaced by the new value.
-    //   - value: The value of the attribute. Can be a number or a string.
-    func setAttribute(key: String, value: Any)
+    //   - value: The value of the tag. Can be a number or a string.
+    func setTag(key: String, value: Any)
     //
     // Adds error information to the test. Only one errorInfo can be reported by a test.
     // - Parameters:
@@ -628,13 +640,6 @@ public class DDTest : NSObject {
     //   - message: The message associated with the error.
     //   - callstack: Optional. The callstack associated with the error.
     func setErrorInfo(type: String, message: String, callstack: String? = nil)
-    //
-  	// Adds benchmark information to the test. Changes the test to be of type benchmark.
-    // - Parameters:
-    //   - name: Name of the measure benchmarked.
-    //   - samples: Array for values sampled for the measure.
-    //   - info: Optional. Extra information about the benchmark.
-    func addBenchmark(name: String, samples: [Double], info: String?)
     //
     // Ends the test.
     // - Parameters:
@@ -665,7 +670,7 @@ import DatadogSDKTesting
 let session = DDTestSession.start(bundleName: "ManualSession")
 let suite1 = session.suiteStart(name: "ManualSuite 1")
 let test1 = suite1.testStart(name: "Test 1")
-test1.setAttribute(key: "key", value: "value")
+test1.setTag(key: "key", value: "value")
 test1.end(status: .pass)
 let test2 = suite1.testStart(name: "Test 2")
 test2.SetErrorInfo(type: "Error Type", message: "Error message", callstack: "Optional callstack")
