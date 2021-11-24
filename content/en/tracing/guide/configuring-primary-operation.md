@@ -180,6 +180,16 @@ For more information on how to set up .NET and OpenTracing, see this [article][8
 
 
 ```php
+// Once, at the beginning of your index.php, right after composer's autoloader import.
+// For OpenTracing <= 1.0-beta6
+$otTracer = new \DDTrace\OpenTracer\Tracer(\DDTrace\GlobalTracer::get());
+// For OpenTracing >= 1.0
+$otTracer = new \DDTrace\OpenTracer1\Tracer(\DDTrace\GlobalTracer::get());
+// Register the global tracer wrapper
+ \OpenTracing\GlobalTracer::set($otTracer);
+
+// Anywhere in your application code
+$otTracer = \OpenTracing\GlobalTracer::get();
 $scope = $otTracer->startActiveSpan('http.request');
 $span = $scope->getSpan();
 $span->setTag('service.name', 'service_name');
