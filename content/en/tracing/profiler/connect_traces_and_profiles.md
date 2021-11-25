@@ -104,7 +104,7 @@ Click the **Span/Trace/Full profile** selector to define the scope of the data:
 - **Trace** scopes the profiling data to all spans of the same service process of the previously selected span.
 - **Full profile** scopes the data to 60 seconds of the whole service process that executed the previously selected span.
 
-## Break-down code performance by API Endpoints
+## Break down code performance by API endpoints
 
 ### Prerequisites
 
