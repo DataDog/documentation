@@ -10395,7 +10395,7 @@ components:
           description: Example for the variable.
           type: string
         id:
-          description: ID for the variable.
+          description: ID for the variable. Global variables require an ID.
           type: string
         name:
           description: Name of the variable.
