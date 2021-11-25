@@ -1874,6 +1874,11 @@ main:
     parent: tracing_runtime_metrics
     identifier: tracing_runtime_metrics_dotnet
     weight: 1205
+  - name: Go
+    url: tracing/runtime_metrics/go/
+    parent: tracing_runtime_metrics
+    identifier: tracing_runtime_metrics_go
+    weight: 1206
   - name: Continuous Profiler
     url: tracing/profiler/
     parent: tracing
