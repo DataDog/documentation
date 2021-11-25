@@ -7817,6 +7817,10 @@ components:
       properties:
         category:
           $ref: '#/components/schemas/SLOCorrectionCategory'
+        created_at:
+          description: The epoch timestamp of when the correction was created at
+          format: int64
+          type: integer
         creator:
           $ref: '#/components/schemas/Creator'
         description:
@@ -7833,6 +7837,24 @@ components:
           description: Ending time of the correction in epoch seconds.
           format: int64
           type: integer
+        modified_at:
+          description: The epoch timestamp of when the correction was modified at
+          format: int64
+          type: integer
+        modifier:
+          description: Modifier of the object.
+          nullable: true
+          properties:
+            email:
+              description: Email of the Modifier.
+              type: string
+            handle:
+              description: Handle of the Modifier.
+              type: string
+            name:
+              description: Name of the Modifier.
+              type: string
+          type: object
         rrule:
           description: Recurrence rules as defined in the iCalendar RFC 5545.
           example: RRULE:FREQ=DAILY;INTERVAL=10;COUNT=5
@@ -23681,6 +23703,57 @@ paths:
       x-menu-order: 3
       x-undo:
         type: idempotent
+  /api/v1/slo/{slo_id}/corrections:
+    get:
+      description: Get corrections applied to an SLO
+      operationId: GetSLOCorrections
+      parameters:
+      - description: The ID of the service level objective object.
+        in: path
+        name: slo_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SLOCorrectionListResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Get Corrections For an SLO
+      tags:
+      - Service Level Objectives
+      x-menu-order: 6
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v1/slo/{slo_id}/history:
     get:
       description: "Get a specific SLO\u2019s history, regardless of its SLO type.\n\nThe
@@ -23722,6 +23795,16 @@ paths:
           maximum: 100
           minimum: 0
           type: number
+      - description: 'Defaults to `true`. If any SLO corrections are applied and this
+          parameter is set to `false`,
+
+          then the corrections will not be applied and the SLI values will not be
+          affected.'
+        in: query
+        name: apply_correction
+        required: false
+        schema:
+          type: boolean
       responses:
         '200':
           content:

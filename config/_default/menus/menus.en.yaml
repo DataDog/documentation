@@ -5182,6 +5182,19 @@ api:
       unstable:
         - v1
       order: 6
+  - name: Get Corrections For an SLO
+    url: '#get-corrections-for-an-slo'
+    identifier: get-corrections-for-an-slo
+    parent: service-level-objectives
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetSLOCorrections
+      unstable:
+        - v1
+      order: 6
   - name: Update an SLO
     url: '#update-an-slo'
     identifier: update-an-slo
