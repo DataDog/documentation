@@ -40,8 +40,6 @@ The following metrics are collected by default after enabling Go metrics.
 
 {{< get-metrics-from-git "go" >}}
 
-<!-- Along with displaying these metrics in your APM Service Page, Datadog provides a [default Go Runtime Dashboard][?] with the `service` and `runtime-id` tags that are applied to these metrics.
--->
 
 ## Further Reading
 
