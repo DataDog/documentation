@@ -3,9 +3,9 @@
     "attributes": {
       "category": "Scheduled Maintenance",
       "description": "Example-Create_an_SLO_correction_returns_OK_response",
-      "end": 1637850958,
+      "end": 1637926288,
       "slo_id": "string",
-      "start": 1637847358,
+      "start": 1637922688,
       "timezone": "UTC"
     },
     "type": "correction"

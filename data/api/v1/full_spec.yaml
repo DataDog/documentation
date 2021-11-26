@@ -24483,8 +24483,10 @@ paths:
       x-codegen-request-body-name: body
       x-menu-order: 2
       x-undo:
-        operationId: TODO
-        parameters: []
+        operationId: DeleteTests
+        parameters:
+        - name: body
+          template: '{"public_ids": ["{{ public_id }}"]}'
         type: unsafe
   /api/v1/synthetics/tests/browser/{public_id}:
     get:
