@@ -13,4 +13,5 @@ cascade:
     {{< nextlink href="tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel" >}}Why can't I see my correlated logs in the Trace ID panel?{{< /nextlink >}}
     {{< nextlink href="tracing/faq/trace-agent-from-source" >}}Installing the trace Agent from source and on Windows{{< /nextlink >}}
     {{< nextlink href="tracing/faq/profiling_migration" >}}How do I migrate Continuous Profiling from agentless to agent mode? {{< /nextlink >}}
+    {{< nextlink href="tracing/faq/span_and_trace_id_format" >}}What is the format of span and trace IDs that are generated or accepted by the tracing libraries? {{< /nextlink >}}
 {{< /whatsnext >}}
