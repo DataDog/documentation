@@ -27,7 +27,7 @@ Once the threshold is defined and your requests are categorized, the Apdex is de
 $$\bo\text"Apdex"=({\bo\text"Satisfied"\text" requests" + {{\bo\text"Tolerated"\text"  requests"}
  / 2}})/{\bo\text"Total"\text" requests"} $$
 
-Selecting the correct threshold is important since the Frustrated requests are 4 times slower than "normal". If T=3 the user waits 3 seconds for a page to load but does not tolerate waiting 12 seconds.
+Selecting the correct threshold is important because the Frustrated requests are 4 times slower than "normal". If T=3 the user waits 3 seconds for a page to load but does not tolerate waiting 12 seconds.
 
 Apdex thresholds must be set by admins, per service, before Apdex scores calculated.
 
@@ -35,7 +35,7 @@ Apdex thresholds must be set by admins, per service, before Apdex scores calcula
 
 To visualize your application or service Apdex: 
 
-1. On your service dashboard select Apdex instead of latency:
+1. On your service dashboard, select Apdex instead of latency:
 
    {{< img src="tracing/faq/apdex_selection.png" alt="Apdex Selection"  >}}
 
