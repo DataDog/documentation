@@ -216,7 +216,7 @@ UDS is an inter-process communication protocol used to [transport DogStatsD payl
 
 Client libraries can aggregate metrics on the client side, reducing number of messages that have to be submitted to the DataDog Agent, improving IO performance and throughput.
 
-{{< programming-lang-wrapper langs="go,java" >}}
+{{< programming-lang-wrapper langs="go,java,csharp" >}}
 {{< programming-lang lang="go" >}}
 
 Client-side aggregation is only available in the Go client starting with v5.0.0.
@@ -242,6 +242,26 @@ See [Client-side aggregation][1] for more information.
 
 [1]: https://github.com/DataDog/java-dogstatsd-client#aggregation
 {{< /programming-lang >}}
+
+{{< programming-lang lang="csharp" >}}
+
+Client-side aggregation is available in dogstatsd-csharp-client version 7.0.0 and later, and is enabled by default.
+
+```csharp
+var dogstatsdConfig = new StatsdConfig
+{
+    StatsdServerName = "127.0.0.1",
+    StatsdPort = 8125,
+    ClientSideAggregation = new ClientSideAggregationConfig()
+};
+```
+
+Client-side aggregation is available for gauges, counters and sets.
+
+See [Client-side aggregation][https://github.com/DataDog/dogstatsd-csharp-client#client-side-aggregation] for more information.
+
+{{< /programming-lang >}}
+
 {{< /programming-lang-wrapper >}}
 
 ## Operating system kernel buffers
