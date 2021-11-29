@@ -180,6 +180,96 @@ If multiple extraction styles are enabled, extraction attempts are made
 in the order that those styles are specified. The first successfully
 extracted value is used.
 
+## Integration instrumentation
+
+Many popular libraries are supported out-of-the-box, which can be auto-instrumented.
+
+### gRPC
+
+The `gRPC` integration adds both client and server interceptors, which run as middleware before executing the service’s remote procedure call. As gRPC applications are often distributed, the integration shares trace information between client and server.
+
+Server side:
+
+```go
+import (
+	dd_grpc "gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/grpc"
+	"google.golang.org/grpc"
+	"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+)
+
+func main() {
+	tracer.Start()
+	defer tracer.Stop()
+
+	// (...)
+
+	s := grpc.NewServer(
+			dd_grpc.UnaryServerInterceptor(),
+			dd_grpc.StreamServerInterceptor(),
+		),
+	)
+
+	// (...)
+}
+```
+
+Client side:
+
+```go
+import (
+	"context"
+
+	dd_grpc "gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/grpc"
+	"google.golang.org/grpc"
+	"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+)
+
+func main() {
+	tracer.Start()
+	defer tracer.Stop()
+
+	// (...)
+
+	conn, err := grpc.DialContext(
+		context.Background(),
+		":8080",
+		dd_grpc.UnaryClientInterceptor(),
+		dd_grpc.StreamClientInterceptor(),
+	)
+
+	// (...)
+}
+```
+
+### net/http
+
+```go
+import (
+	"net/http"
+
+	dd_http "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http"
+	"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+)
+
+func main() {
+	tracer.Start()
+	defer tracer.Stop()
+
+	// (...)
+
+	s := &http.Server{
+		Addr: ":8080",
+		Handler: dd_http.WrapHandler(
+			http.DefaultServeMux,
+			"your_service",
+			"your_resource",
+		),
+	}
+
+	// (...)
+}
+```
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
