@@ -69,9 +69,14 @@ Cloud Foundry API チェックは [Datadog Agent][2] パッケージに含まれ
 
 Cloud Foundry API インテグレーションは、構成された監査イベントを収集します。
 
+### サービスのチェック
+{{< get-service-checks-from-git "cloud_foundry_api" >}}
+
+
 ## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
+
 
 [1]: http://v3-apidocs.cloudfoundry.org
 [2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations

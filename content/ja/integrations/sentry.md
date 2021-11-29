@@ -10,7 +10,7 @@
 "draft": false
 "git_integration_title": "sentry"
 "has_logo": true
-"integration_id": "sentry"
+"integration_id": ""
 "integration_title": "Sentry"
 "is_public": true
 "kind": "インテグレーション"

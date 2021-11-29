@@ -23,7 +23,7 @@ By default, your Agent is installed in its own sandbox at `~/.datadog-agent`. Yo
 
 ## Commands
 
-Datadog Agent has some commands and only the _lifecycle commands_ (i.e. `start`/`stop`/`restart`/`status` on the Agent) should be run with `sudo`.
+Datadog Agent has some commands and only the _lifecycle commands_, such as `start`/`stop`/`restart`/`status`, should be run with `sudo`.
 
 {{< tabs >}}
 {{% tab "Agent v6 & v7" %}}
@@ -80,7 +80,7 @@ Configuration files for [Integrations][1]:
 
 ## Troubleshooting
 
-[Refer to the dedicated Agent Troubleshooting documentation][2].
+See the [Agent Troubleshooting documentation][2].
 
 ## Further Reading
 

@@ -14,7 +14,7 @@ Vacuum is particularly resource-intensive though, so you might want Datadog even
 
     0 0 * * * /path/to/dogwrap -n "Vacuuming mytable" -k $API_KEY --submit_mode errors "psql -c 'vacuum verbose my_table' 2>&1 /var/log/postgres_vacuums.log"
 
-This calls the command at the end of the script and send Datadog events if it exits with a non-zero exit code (i.e. an error). `--submit_mode all` sends events on every run.
+This calls the command at the end of the script and send Datadog events if it exits with a non-zero exit code, such as an error. `--submit_mode all` sends events on every run.
 
 (To get the python client lib install it with `pip install datadog`).
 

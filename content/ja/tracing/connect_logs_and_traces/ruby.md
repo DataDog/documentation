@@ -3,7 +3,7 @@ title: Ruby ログとトレースの接続
 kind: ドキュメント
 description: Ruby ログとトレースを接続して Datadog で関連付けます。
 further_reading:
-  - link: 'https://www.datadoghq.com/blog/request-log-correlation/'
+  - link: https://www.datadoghq.com/blog/request-log-correlation/
     tag: ブログ
     text: 自動的にリクエストログとトレースに相関性を持たせる
   - link: /logs/guide/ease-troubleshooting-with-cross-product-correlation/
@@ -29,7 +29,7 @@ Datadog.configure do |c|
 end
 ```
 
-**注:** `lograge` ユーザーで `initializers/lograge.rb` コンフィギュレーションファイルに `lograge.custom_options` を定義している場合は、Rails がイニシャライザーをアルファベット順で読み込む関係で自動のトレース相関付けがうまく機能しない場合があります。これは、`initializers/datadog.rb` が `initializers/lograge.rb` イニシャライザーで上書きされてしまうためです。_既存の_ `lograge.custom_options` で自動のトレース相関付けを行う場合は、以下の[マニュアル (Lograge)](#manual-lograge) をご利用ください。
+**注:** `lograge` ユーザーで `initializers/lograge.rb` コンフィギュレーションファイルに `lograge.custom_options` を定義している場合は、Rails がイニシャライザーをアルファベット順で読み込む関係で自動のトレース相関付けがうまく機能しない場合があります。これは、`initializers/datadog.rb` が `initializers/lograge.rb` イニシャライザーで上書きされてしまうためです。_既存の_ `lograge.custom_options` で自動のトレース相関付けを行う場合は、以下の[マニュアル (Lograge)](#lograge) をご利用ください。
 
 #### 手動挿入
 ##### Lograge

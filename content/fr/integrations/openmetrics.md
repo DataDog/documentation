@@ -37,7 +37,7 @@ supported_os:
 
 Extrayez des métriques custom depuis des endpoints OpenMetrics.
 
-<div class="alert alert-warning">Toutes les métriques récupérées par cette intégration sont considérées comme des <a href="https://docs.datadoghq.com/developers/metrics/custom_metrics">métriques custom</a>.</div>
+<div class="alert alert-warning">Toutes les métriques récupérées par cette intégration sont considérées comme des <a href="https://docs.datadoghq.com/metrics/custom_metrics">métriques custom</a>.</div>
 
 ## Configuration
 

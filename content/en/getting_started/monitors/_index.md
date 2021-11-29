@@ -7,10 +7,10 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/monitoring-101-alerting/"
   tag: "Blog"
   text: "Monitoring 101: Alerting on what matters"
-- link: "/monitors/monitor_types/metric/"
+- link: "/monitors/create/types/metric/"
   tag: "Documentation"
   text: "Metric Monitors"
-- link: "/monitors/notifications/"
+- link: "/monitors/notify/"
   tag: "Documentation"
   text: "Monitor Notifications"
 ---
@@ -77,14 +77,14 @@ For different messages based on alert vs. warning thresholds, see the [Notificat
 
 Use this section to send notifications to your team through Email, Slack, PagerDuty, etc. You can search for team members and connected accounts with the drop-down box. When an `@notification` is added to this box, the notification is automatically added to the message box:
 
-{{< img src="getting_started/application/message_notify.png" alt="Message and Notifications"  style="width:70%;" >}}
+{{< img src="getting_started/application/message_notify.png" alt="Message and Notifications" style="width:70%;" >}}
 
 Removing the `@notification` from either section removes it from both sections.
 
 ### Restrict access
 
 <div class="alert alert-warning">
-RBAC restrict access to monitors is currently in beta. To request access, contact <a href="https://docs.datadoghq.com/help/">Datadog support</a>.</div>
+RBAC restrict access to monitors is in beta. To request access, contact <a href="https://docs.datadoghq.com/help/">Datadog support</a>.</div>
 
 Use this section to restrict access to you, everyone in your org with your role, or to specific roles in your org. For more information about roles, see the [RBAC][9] documentation.
 
@@ -92,12 +92,12 @@ Use this section to restrict access to you, everyone in your org with your role,
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /monitors/monitor_types/metric/
+[1]: /monitors/create/types/metric/
 [2]: https://www.datadoghq.com
 [3]: https://app.datadoghq.com/account/settings#agent
 [4]: https://app.datadoghq.com/infrastructure
 [5]: https://app.datadoghq.com/monitors#create/metric
 [6]: /integrations/disk/
-[7]: /monitors/monitor_types/metric/?tab=threshold#set-alert-conditions
-[8]: /monitors/notifications/#conditional-variables
+[7]: /monitors/create/types/metric/?tab=threshold#set-alert-conditions
+[8]: /monitors/notify/#conditional-variables
 [9]: /account_management/rbac/

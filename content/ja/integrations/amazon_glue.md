@@ -6,12 +6,13 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Amazon Glue のキーメトリクスを追跡
-doc_link: 'https://docs.datadoghq.com/integrations/amazon_glue/'
+doc_link: https://docs.datadoghq.com/integrations/amazon_glue/
 draft: false
 git_integration_title: amazon_glue
 has_logo: true
 integration_id: amazon-glue
 integration_title: Amazon Glue
+integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'

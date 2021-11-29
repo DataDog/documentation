@@ -5,7 +5,7 @@ further_reading:
   - link: /real_user_monitoring/guide/send-rum-custom-actions/
     tag: ガイド
     text: RUM カスタムアクションをコードから送信
-  - link: 'https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/'
+  - link: https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/
     tag: ブログ
     text: リアルユーザーモニタリング
   - link: /real_user_monitoring/explorer/

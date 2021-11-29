@@ -13,14 +13,14 @@ further_reading:
 
 This page gives a high level overview of the capabilities for the [Datadog site][1].
 
-**Note**: The navigation of the Datadog application switches based on browser width. It's possible to get three different types of navigation. To change navigation types, adjust the width of your browser.
+**Note**: The navigation of the Datadog site switches based on browser width. It's possible to get three different types of navigation. To change navigation types, adjust the width of your browser.
 
 ## Integrations
 
 {{< img src="getting_started/integrations.png" alt="integrations"  >}}
 
 - Datadog has over {{< translate key="integration_count" >}} integrations [officially listed][2].
-- Custom integrations are available [via the Datadog API][3].
+- Custom integrations are available through the [Datadog API][3].
 - The Agent is [open source][4].
 - Once integrations have been configured, all data is treated the same throughout Datadog, whether it is living in a datacenter or in an online service.
 
@@ -46,7 +46,7 @@ This page gives a high level overview of the capabilities for the [Datadog site]
 
 ## Host map
 
-{{< img src="getting_started/hostmap-overview.png" alt="hostmap overview"  >}}
+{{< img src="getting_started/hostmap-overview.png" alt="Host Map overview"  >}}
 
 The [host map][9] can be found under the Infrastructure menu. It offers the ability to:
 
@@ -55,7 +55,7 @@ The [host map][9] can be found under the Infrastructure menu. It offers the abil
 - Detect usage patterns
 - Optimize resources
 
-To learn more about the host map, visit the [host map documentation][9].
+See [Host Map][9] for more details.
 
 ## Events
 
@@ -75,26 +75,26 @@ For each incident, users can:
 - [@ notify team members][13], who receive an email
 - `@support-datadog` to ask for [assistance][14]
 
-{{< img src="getting_started/event_stream_event.png" alt="event stream event"  style="width:70%;">}}
+{{< img src="getting_started/event_stream_event.png" alt="event stream event" style="width:70%;">}}
 
 ## Dashboards
 
 {{< img src="getting_started/dashboard.png" alt="dashboard"  >}}
 
-[Dashboards][15] contain graphs with real-time performance metrics.
+[Dashboards][12] contain graphs with real-time performance metrics.
 
-- Synchronous mousing across all graphs in a [screenboard][16].
+- Synchronous mousing across all graphs in a [screenboard][13].
 - Vertical bars are events. They put a metric into context.
 - Click and drag on a graph to zoom in on a particular timeframe.
 - As you hover over the graph, the event stream moves with you.
 - Display by zone, host, or total usage.
-- Datadog exposes a JSON editor for the graph, allowing for [arithmetic][17] and [functions][18] to be applied to metrics.
+- Datadog exposes a JSON editor for the graph, allowing for [arithmetic][14] and [functions][15] to be applied to metrics.
 - Share a graph snapshot that appears in the stream.
 - Graphs can be embedded in an iframe. This enables you to give a 3rd party access to a live graph without also giving access to your data or any other information.
 
 ## Monitors
 
-[Monitors][19] provide alerts and notifications based on metric thresholds, integration availability, network endpoints, and more.
+[Monitors][16] provide alerts and notifications based on metric thresholds, integration availability, network endpoints, and more.
 
 - Use any metric reporting to Datadog
 - Set up multi-alerts (by device, host, etc.)
@@ -107,24 +107,24 @@ For each incident, users can:
 
 {{< img src="getting_started/npm.png" alt="npm"  >}}
 
-Datadog [Network Performance Monitoring][20] (NPM) gives you visibility into your network traffic across any tagged object in Datadog: from containers to hosts, services, and availability zones. Group by anything—from datacenters to teams to individual containers. Use tags to filter traffic by source and destination. The filters then aggregate into flows, each showing traffic between one source and one destination, through a customizable network page and network map. Each flow contains network metrics such as throughput, bandwidth, retransmit count, and source/destination information down to the IP, port, and PID levels. It then reports key metrics such as traffic volume and TCP retransmits.
+Datadog [Network Performance Monitoring][17] (NPM) gives you visibility into your network traffic across any tagged object in Datadog: from containers to hosts, services, and availability zones. Group by anything—from datacenters to teams to individual containers. Use tags to filter traffic by source and destination. The filters then aggregate into flows, each showing traffic between one source and one destination, through a customizable network page and network map. Each flow contains network metrics such as throughput, bandwidth, retransmit count, and source/destination information down to the IP, port, and PID levels. It then reports key metrics such as traffic volume and TCP retransmits.
 
 ## Real User Monitoring
 
 {{< img src="getting_started/rum.png" alt="rum"  >}}
 
-Datadog [Real User Monitoring][21] (RUM) enables you to visualize and analyze the real-time activities and experiences of individual users to prioritize engineering work on the features with the highest business impact.
+Datadog [Real User Monitoring][18] (RUM) enables you to visualize and analyze the real-time activities and experiences of individual users to prioritize engineering work on the features with the highest business impact.
 You can visualize load times, frontend errors, and page dependencies, and then correlate business and application metrics so that you can troubleshoot quickly with application, infrastructure, and business metrics in a single dashboard.
 
 ## Serverless
 
-[Serverless][22] lets you write event-driven code and upload it to a cloud provider, which manages all of the underlying compute resources. Datadog Serverless brings together metrics, traces, and logs from your AWS Lambda functions running serverless applications into one view, so that you can optimize performance by filtering to functions that are generating errors, high latency, or cold starts.
+[Serverless][19] lets you write event-driven code and upload it to a cloud provider, which manages all of the underlying compute resources. Datadog Serverless brings together metrics, traces, and logs from your AWS Lambda functions running serverless applications into one view, so that you can optimize performance by filtering to functions that are generating errors, high latency, or cold starts.
 
 ## Security Monitoring
 
-{{< img src="getting_started/security.png" alt="security"  >}}
+{{< img src="getting_started/security.png" alt="security" >}}
 
-Datadog [Security Monitoring][23] automatically detects threats to your application or infrastructure. For example, a targeted attack, an IP communicating with your systems matching a threat intel list, or an insecure configuration. These threats are surfaced in Datadog as Security Signals and can be correlated and triaged in the Security Explorer.
+Datadog [Security Monitoring][20] automatically detects threats to your application or infrastructure. For example, a targeted attack, an IP communicating with your systems matching a threat intel list, or an insecure configuration. These threats are surfaced in Datadog as Security Signals and can be correlated and triaged in the Security Explorer.
 
 ## Further Reading
 
@@ -133,7 +133,7 @@ Datadog [Security Monitoring][23] automatically detects threats to your applicat
 [1]: https://app.datadoghq.com
 [2]: http://www.datadoghq.com/integrations
 [3]: /api/
-[4]: https://github.com/DataDog/dd-agent
+[4]: https://github.com/DataDog/datadog-agent
 [5]: /logs/
 [6]: /tracing/
 [7]: /infrastructure/
@@ -150,6 +150,3 @@ Datadog [Security Monitoring][23] automatically detects threats to your applicat
 [18]: https://www.datadoghq.com/blog/rank-filter-performance-monitoring-metrics-top-function
 [19]: /monitors/
 [20]: /network_monitoring/performance
-[21]: /real_user_monitoring/
-[22]: /infrastructure/serverless/
-[23]: /security_monitoring/

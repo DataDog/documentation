@@ -9,7 +9,7 @@ categories:
 creates_events: true
 ddtype: crawler
 dependencies:
-  - 'https://github.com/DataDog/integrations-extras/blob/master/split/README.md'
+  - https://github.com/DataDog/integrations-extras/blob/master/split/README.md
 display_name: Split
 draft: false
 git_integration_title: split
@@ -19,7 +19,7 @@ integration_title: Split
 is_public: true
 kind: インテグレーション
 maintainer: jeremy-lq
-manifest_version: 1.0.1
+manifest_version: 1.0.0
 name: split
 public_title: Datadog-Split インテグレーション
 short_description: エンジニアリングチームや製品チームに実験用プラットフォームを提供。

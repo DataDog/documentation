@@ -85,8 +85,8 @@ kubeletArguments:
 ## 収集データ
 
 ### サービスのチェック
+{{< get-service-checks-from-git "kubelet" >}}
 
-このインテグレーションによって提供されるサービスチェックのリストについては、[service_checks.json][5] を参照してください。
 
 ## トラブルシューティング
 

@@ -4,20 +4,20 @@ kind: documentation
 further_reading:
   - link: /serverless/libraries_integrations/extension/
     tag: ドキュメント
-    text: Datadog Lambda 拡張機能 (プレビュー)
-  - link: 'https://github.com/DataDog/datadog-lambda-python/blob/master/README.md'
+    text: Datadog Lambda 拡張機能
+  - link: https://github.com/DataDog/datadog-lambda-python/blob/master/README.md
     tag: Github
     text: Datadog Lambda Library for Python
-  - link: 'https://github.com/DataDog/datadog-lambda-js/blob/master/README.md'
+  - link: https://github.com/DataDog/datadog-lambda-js/blob/master/README.md
     tag: Github
     text: Datadog Lambda Library for Node.js
-  - link: 'https://github.com/DataDog/datadog-lambda-rb/blob/master/README.md'
+  - link: https://github.com/DataDog/datadog-lambda-rb/blob/master/README.md
     tag: Github
     text: Ruby 向け Datadog Lambda ライブラリ
-  - link: 'https://github.com/DataDog/datadog-lambda-go/blob/master/README.md'
+  - link: https://github.com/DataDog/datadog-lambda-go/blob/master/README.md
     tag: Github
     text: Go 向け Datadog Lambda ライブラリ
-  - link: 'https://github.com/DataDog/datadog-lambda-java/blob/master/README.md'
+  - link: https://github.com/DataDog/datadog-lambda-java/blob/master/README.md
     tag: Github
     text: Datadog Lambda Library for Java
 aliases:
@@ -31,7 +31,8 @@ Datadog Lambda ライブラリでは以下を実行します。
 - [カスタムメトリクス][2]を送信（同期および非同期）します。
 - Node.js、Python、Ruby 向けに [Datadog APM および分散型トレース][3]を有効化します。
 
-また、Lambda 関数からトレース、拡張 Lambda メトリクス、またはカスタムメトリクス (非同期) を取り込むには、Datadog Forwarder をインストールおよび構成する**必要があります**。
+**Ruby** または **Java** 用の Datadog Lambda ライブラリを使用している場合は、Datadog Forwarder をインストールして構成し、Lambda 関数からトレース、拡張 Lambda メトリクス、またはカスタムメトリクスを (非同期で) 取り込む必要があります。
+**Python**、**Node**、または **Go** 用の Datadog Lambda ライブラリを使用している場合は、[Datadog Lambda 拡張機能][9]を使用して、トレース、拡張 Lambda メトリクス、またはカスタムメトリクスを取り込むことができます。または、Datadog Forwarder を引き続き使用できます。
 
 Datadog Lambda ライブラリは以下の収集には**対応していません**。
 
@@ -58,3 +59,4 @@ Datadog Lambda ライブラリをインストールしてお使いのサーバ�
 [6]: /ja/serverless/forwarder/
 [7]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
 [8]: /ja/serverless/installation/
+[9]: /ja/serverless/libraries_integrations/extension/

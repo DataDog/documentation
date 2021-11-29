@@ -84,18 +84,13 @@ gnatsd チェックは、すべての主要プラットフォームと互換性�
 gnatsd チェックには、イベントは含まれません。
 
 ### サービスのチェック
+{{< get-service-checks-from-git "gnatsd" >}}
 
-この gnatsd チェックは、収集するすべてのサービスチェックに次のタグを付けます。
-
-- `server_name:<server_name_in_yaml>`
-- `url:<host_in_yaml>`
-
-`gnatsd.can_connect`:
-Agent が _monitoring_ エンドポイントから 200 を受信できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][11]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][12]までお問合せください。
+
 
 [1]: https://docs.datadoghq.com/ja/agent/guide/community-integrations-installation-with-docker-agent/
 [2]: https://docs.datadoghq.com/ja/agent/guide/community-integrations-installation-with-docker-agent/?tab=agentpriorto68
@@ -107,4 +102,5 @@ Agent が _monitoring_ エンドポイントから 200 を受信できない場�
 [8]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [9]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#service-status
 [10]: https://github.com/DataDog/datadog-sdk-testing/blob/master/lib/config/metadata.csv
-[11]: https://docs.datadoghq.com/ja/help/
+[11]: https://github.com/DataDog/integrations-extras/blob/master/gnatsd/assets/service_checks.json
+[12]: https://docs.datadoghq.com/ja/help/

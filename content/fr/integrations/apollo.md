@@ -12,17 +12,18 @@ categories:
 creates_events: false
 ddtype: crawler
 dependencies:
-  - 'https://github.com/DataDog/integrations-extras/blob/master/apollo/README.md'
+  - https://github.com/DataDog/integrations-extras/blob/master/apollo/README.md
 display_name: "Apollo\_Engine"
 draft: false
 git_integration_title: apollo
 guid: a0b142ff-0637-4c2f-814c-0f1a012bc65c
 integration_id: apollo
 integration_title: Apollo
+integration_version: ''
 is_public: true
 kind: integration
 maintainer: sachin@apollographql.com
-manifest_version: 1.2.0
+manifest_version: 1.0.0
 metric_prefix: apollo.
 metric_to_check:
   - apollo.operations.count
@@ -114,7 +115,7 @@ Pour en savoir plus sur la surveillance d'infrastructure et pour découvrir tout
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/apollo/images/metrics.png
 [2]: https://app.datadoghq.com/account/settings#integrations
-[3]: https://app.datadoghq.com/account/settings#api
+[3]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: https://www.apollographql.com/docs/studio/org/graphs/#viewing-graph-information
 [5]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/apollo/images/settings-link.png
 [6]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/apollo/images/settings-toggle.png

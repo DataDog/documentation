@@ -85,7 +85,7 @@ The commands related to log collection are:
 : Adds a log configuration that enables log collection for all containers.
 
 `-e DD_LOGS_CONFIG_DOCKER_CONTAINER_USE_FILE=true`            
-: Adds a log configuration that enables Docker container log collection from file. Available in the Datadog Agent 7.27.0/6.27.0+. Check the [dedicated section](#docker-containers-log-collection-from-file) for additional details.
+: Adds a log configuration that enables Docker container log collection from file. Available in the Datadog Agent 7.27.0/6.27.0+. Check the [dedicated section](#docker-container-log-collection-from-file) for additional details.
 
 `-v /opt/datadog-agent/run:/opt/datadog-agent/run:rw`         
 : To prevent loss of container logs during restarts or network issues, the last log line collected for each container in this directory is stored on the host.
@@ -157,7 +157,7 @@ The commands related to log collection are:
 
 - Logs coming from container `Stderr` have a default status of `Error`.
 
-- If using the _journald_ logging driver instead of Docker's default json-file logging driver, see the [journald integration][2] documentation for details regarding the setup for containerized environments. Refer to the [journald filter units][2] documentation for more information on parameters for filtering.
+- If using the _journald_ logging driver instead of Docker's default json-file logging driver, see the [journald integration documentation][2] for details regarding the setup for containerized environments. See the [journald filter units documentation][2] for more information on parameters for filtering.
 
 ## Docker container log collection from file
 
@@ -212,7 +212,7 @@ Add the following label as a run command:
 
 Where `<LOG_CONFIG>` is the log collection configuration you would find inside an integration configuration file. [See log collection configuration to learn more][5].
 
-**Note**: When configuring the `service` value through docker labels, Datadog recommends using unified service tagging as a best practice. Unified service tagging ties all Datadog telemetry together, including logs, through the use of three standard tags: `env`, `service`, and `version`. To learn how to configure your environment with unified tagging, refer to the dedicated [unified service tagging][6] documentation.
+**Note**: When configuring the `service` value through docker labels, Datadog recommends using unified service tagging as a best practice. Unified service tagging ties all Datadog telemetry together, including logs, through the use of three standard tags: `env`, `service`, and `version`. To learn how to configure your environment with unified tagging, see the [unified service tagging documentation][6].
 
 ### Examples
 
@@ -276,7 +276,7 @@ Logs collected from a file are tagged with the container metadata. Log collectio
 
 - The file path is **relative** to the Agent, so the directory containing the file should be shared between the container running the application and the Agent container. For example, if the container mounts `/logs` each container logging to file may mount a volume such as `/logs/app` where the log file is written.
 
-- When using this kind of label on a container, its `stderr`/`stdout` logs are not collected automatically. If collection from both `stderr`/`stdout` and a file are needed it should be explicity enabled by using a label, for example:
+- When using this kind of label on a container, its `stderr`/`stdout` logs are not collected automatically. If collection from both `stderr`/`stdout` and a file are needed it should be explicitly enabled by using a label, for example:
 ```yaml
 labels:
     com.datadoghq.ad.logs: '[{"type":"file", "source": "java", "service": "app", "path": "/logs/app/prod.log"}, {"type": "docker", "source": "app_container", "service": "app"}]'
@@ -311,7 +311,7 @@ For a Docker environment, the Agent receives container updates in real time thro
 
 Since Agent v6.14+, the Agent collects logs for all containers (running or stopped) which means that short lived containers logs that have started and stopped in the past second are still collected as long as they are not removed.
 
-For Kubernetes environments, refer to the [Kubernetes short lived container documentation][11].
+For Kubernetes environments, see the [Kubernetes short lived container documentation][11].
 
 ## Further Reading
 

@@ -289,7 +289,7 @@ DD_APM_REPLACE_TAGS=[
 * Python: [トレースフィルター][10]
 
 
-[1]: /ja/tracing/help
+[1]: /ja/help
 [2]: /ja/tracing/visualization/#trace
 [3]: /ja/tracing/visualization/#spans
 [4]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file

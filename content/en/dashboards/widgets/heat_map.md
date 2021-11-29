@@ -27,11 +27,11 @@ This visualization displays only a single metric query; additional queries are d
 
 ## Setup
 
-{{< img src="dashboards/widgets/heat_map/heat_map_setup.png" alt="Heat Map setup"  style="width:80%;">}}
+{{< img src="dashboards/widgets/heat_map/heat_map_setup.png" alt="Heat Map setup" style="width:80%;">}}
 
 ### Configuration
 
-Configure your metric query as usual. Note that this visualization type is useful only when metrics are aggregated across tag keys , e.g. for each `host`.
+Configure your metric query as usual. **Note**: This visualization type is useful only when metrics are aggregated across tag keys, such as for each `host`.
 
 Make a selection in the "`avg`/`max`/`min`/`sum by`/etc." control to see your data across the associated tags.
 
@@ -49,7 +49,9 @@ Add events from related systems to add more context to your graph. For example, 
 
 #### Y-axis controls
 
-Y-axis controls are available via the UI and the JSON editor. They allow you to:
+Y-axis controls are available through the UI and the JSON editor. 
+
+They allow you to:
 
 * Clip the y-axis to specific ranges.
 * Automatically change y-axis bounds based on a percentage or an absolute value threshold. This threshold can be applied to one of both ends of the graph (lower and upper) in order to remove "outliers" series.
@@ -69,7 +71,7 @@ The following configuration options are available:
 
 ## API
 
-This widget can be used with the **Dashboards API**. Refer to the [Dashboards API][3] documentation for additional reference.
+This widget can be used with the **Dashboards API**. See the [Dashboards API documentation][3] for additional reference.
 
 The dedicated [widget JSON schema definition][4] for the heat map widget is:
 

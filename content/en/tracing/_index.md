@@ -9,7 +9,7 @@ further_reading:
   text: "Add primary and secondary tags to your traces"
 - link: "/tracing/guide/add_span_md_and_graph_it/"
   tag: "Documentation"
-  text: "Add custom tags to your spans to slice and dice performance"
+  text: "Add custom tags to your spans to filter and group performance"
 - link: "/tracing/guide/security/"
   tag: "Documentation"
   text: "Automatically scrub PII from your traces"
@@ -19,6 +19,9 @@ further_reading:
 - link: "/tracing/visualization/"
   tag: "Documentation"
   text: "Learn to use the APM UI"
+- link: "https://www.datadoghq.com/blog/span-based-metrics/"
+  tag: "Blog"
+  text: "Generate span-based metrics to track historical trends in application performance"
 aliases:
   - /tracing/faq/terminology
   - /tracing/guide/terminology
@@ -68,7 +71,7 @@ Now that you've configured your application to send traces to Datadog, start get
 
 ### Continuous Profiler
 
-[Improve application latency][9] and optimize compute resources with always on production profiling to pinpoint the lines of code consuming the most CPU, memory, or I/O.
+[Improve application latency][9] and optimize compute resources with always-on production profiling to pinpoint the lines of code consuming the most CPU, memory, or I/O.
 
 {{< img src="tracing/index/Profiling.png" alt="Profiling"  style="width:100%;">}}
 

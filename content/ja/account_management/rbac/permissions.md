@@ -8,11 +8,11 @@ further_reading:
   - link: /account_management/rbac/
     tag: ドキュメント
     text: ロールの作成、更新、削除
-  - link: '/api/v2/roles/#list-permissions'
+  - link: /api/v2/roles/#list-permissions
     tag: ドキュメント
     text: Permission API を使用してアクセス許可を管理する
 ---
-ロールを作成すると、[Datadog アプリケーションでロールを更新][1]するか [Datadog Permission API][2] を使用して、このロールへアクセス許可を直接割り当てたり削除したりできます。利用可能なアクセス許可の一覧は次のとおりです。
+ロールを作成した後、[Datadog でロールを更新][1]するか [Datadog Permission API][2] を使用して、このロールへアクセス許可を直接割り当てたり削除したりできます。利用可能なアクセス許可の一覧は次のとおりです。
 
 ## 概要
 

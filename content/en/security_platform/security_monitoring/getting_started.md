@@ -1,7 +1,7 @@
 ---
 title: Getting Started with Security Monitoring
 kind: documentation
-description: "Learn the main concepts of Datadog Security Monitoring, how to enable threat detection, and discover out of the box threat detection rules."
+description: "Learn the main concepts of Datadog Security Monitoring, how to enable threat detection, and discover out-of-the-box threat detection rules."
 aliases:
   - /security_monitoring/getting_started/
   - /security_platform/getting_started/
@@ -30,7 +30,7 @@ Datadog’s [Log Collection documentation][2] provides detailed information on c
 
 ## Review Detection Rules
 
-Datadog provides out of the box [Detection Rules][4], which begin detecting threats in your environment immediately. The default enabled Detection Rules detect threats according to known best practices. More mature security organizations may wish to enable more rules to begin detecting more advanced threats. Additionally, more advanced templates are included to provide guidance on how to detect threats in your custom applications. Refer to the [Detection Rules documentation][5] for further details.
+Datadog provides out-of-the-box [Detection Rules][4], which begin detecting threats in your environment immediately. The default enabled Detection Rules detect threats according to known best practices. More mature security organizations may wish to enable more rules to begin detecting more advanced threats. Additionally, more advanced templates are included to provide guidance on how to detect threats in your custom applications. Refer to the [Detection Rules documentation][5] for further details.
 
 ## Explore Security Signals
 

@@ -1,0 +1,16 @@
+{{ $size := "inherit" }}
+{{ $color := "" }}
+{{ $style := "" }}
+
+{{ if .size }}
+{{ $size = .size }}
+{{ end }}
+
+{{ if .color }}
+{{ $color = .color }}
+{{ end }}
+
+{{/* Combine contextual params into inline style */}}
+{{ $style = print "style='" (delimit (slice (print "font-size: " ($size)) (print "color: " ($color))) "; ") "'" }}
+
+<i class="icon-{{ .name }}" {{ $style | safeHTMLAttr }}></i>

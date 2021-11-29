@@ -106,7 +106,7 @@ Redact postal codes (US).
 
 ## Between parentheses
 
-Redact characters after string `ExampleConfig(` until the closing paranthesis.
+Redact characters after string `ExampleConfig(` until the closing parentheses.
 
 ```yaml
 - type: mask_sequences

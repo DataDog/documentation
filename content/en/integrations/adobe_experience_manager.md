@@ -26,6 +26,10 @@ further_reading:
 integration_id: "adobe"
 ---
 
+{{< site-region region="us3" >}}
+<div class="alert alert-warning">The Adobe Experience Manager integration is not supported for your selected Datadog site ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
 ## Overview
 
 Collect Adobe Experience Manager logs to track errors, request response time, and track badly performing web pages.

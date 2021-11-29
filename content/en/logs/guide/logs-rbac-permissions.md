@@ -77,7 +77,7 @@ This permission can be assigned either globally or restricted to a subset of ind
 {{< img src="account_management/rbac/logs_write_exclusion_filters.png" alt="Logs Write Exclusion Filters"  style="width:75%;" >}}
 
 
-[1]: /logs/pipelines/indexes
+[1]: /logs/log_configuration/indexes/
 {{% /tab %}}
 {{% tab "API" %}}
 
@@ -364,7 +364,7 @@ This permission is global, and grants access to the livetail regardless of [Log 
 {{< partial name="whats-next/whats-next.html" >}}
 
 <br>
-\*Log Rehydration is a trademark of Datadog, Inc.
+*Log Rehydration is a trademark of Datadog, Inc.
 
 [1]: /logs/guide/logs-rbac/
 [2]: /account_management/rbac/permissions

@@ -23,7 +23,7 @@ categories:
 creates_events: true
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/rabbitmq/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/rabbitmq/README.md
 display_name: RabbitMQ
 draft: false
 git_integration_title: rabbitmq
@@ -39,6 +39,7 @@ metric_to_check: rabbitmq.queue.messages
 name: rabbitmq
 process_signatures:
   - rabbitmq
+  - rabbitmq-server
 public_title: Datadog-RabbitMQ インテグレーション
 short_description: キューサイズ、コンシューマーカウント、未承認メッセージなどを追跡
 support: コア
@@ -187,12 +188,8 @@ Agent は、キュー名に基づいて `rabbitmq.queue.*` メトリクスをタ
 エクスチェンジ、キュー、またはノードの数を増やす必要がある場合は、[Datadog のサポートチーム][7]までお問合せください。
 
 ### サービスのチェック
+{{< get-service-checks-from-git "rabbitmq" >}}
 
-**rabbitmq.aliveness**:<br>
-Agent は、すべての vhost (`vhosts` が構成されていない場合) または一部の vhost (`vhosts` が構成されている場合) にこのサービスチェックを送信します。各サービスチェックは、`vhost:<vhost_name>` でタグ付けされます。すべての死活情報チェックが失敗した場合は `CRITICAL` を返します。それ以外の場合は、`OK` を返します。
-
-**rabbitmq.status**:<br>
-Agent が RabbitMQ に接続してメトリクスを収集できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
 
 ## トラブルシューティング
 

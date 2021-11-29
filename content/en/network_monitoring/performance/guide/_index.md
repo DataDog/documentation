@@ -11,4 +11,5 @@ disable_sidebar: true
     {{< nextlink href="network_monitoring/performance/guide/manage_traffic_costs_with_npm" >}}Manage traffic costs with NPM{{< /nextlink >}}
     {{< nextlink href="network_monitoring/performance/guide/detecting_a_network_outage" >}}Detecting a Network Outage{{< /nextlink >}}
     {{< nextlink href="network_monitoring/performance/guide/aws_supported_services/" >}}NPM AWS Supported Services{{< /nextlink >}}
+    {{< nextlink href="network_monitoring/performance/guide/gcp_supported_services/" >}}NPM GCP Supported Services{{< /nextlink >}}
 {{< /whatsnext >}}

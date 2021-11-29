@@ -31,7 +31,7 @@ Facets are user-defined tags and attributes from your indexed logs. They are mea
 
 Facets also allow you to manipulate your logs in your [log monitors][4], log widgets in [dashboards][5], and [notebooks][6].
 
-{{< site-region region="gov,us3" >}}
+{{< site-region region="gov,us3,us5" >}}
 
 **Note**: You do not need facets to support [log processing][1], [livetail search][2], [archive][3] forwarding, rehydration, or [metric generation][4] from logs. You also do not need facets for routing logs through to [Pipelines][5] and [Indexes][6] with filters, or excluding or sampling logs from indexes with [exclusion filters][7]. 
 
@@ -75,7 +75,7 @@ Use qualitative facets when you need:
 
 - To **count unique values**. For instance, create a facet on `user.email` from your [Kong][18] logs to know how many users connect every day to your website.
 
-{{< site-region region="gov,us3" >}}
+{{< site-region region="gov,us3,us5" >}}
 - To **filter** your logs against specific value(s). For instance, create a facet on an `environment` [tag][1] to scope troubleshooting down to development, staging, or production environments.
 
 [1]: /getting_started/tagging/assigning_tags/
@@ -123,7 +123,7 @@ Unit is a property of the measure itself, not of the field. For example, conside
 
 ## Facet panel
 
-The search bar provides the most comprehensive set of interactions to slice and dice your data. However, for most cases, the facet panel is likely to be a more straightforward way to navigate into your data. Open a facet to see a summary of its content for the scope of the current query.
+The search bar provides the most comprehensive set of interactions to filter and group your data. However, for most cases, the facet panel is likely to be a more straightforward way to navigate into your data. Open a facet to see a summary of its content for the scope of the current query.
 
 **Facets (qualitative)** come with a top list of unique values, and a count of logs matching each of them:
 
@@ -257,7 +257,7 @@ This is the best option if you onboard logs flowing from new sources. Rather tha
 [1]: /logs/search_syntax/
 [2]: /logs/explorer/patterns/
 [3]: /logs/explorer/analytics/
-[4]: /monitors/monitor_types/log/
+[4]: /monitors/create/types/log/
 [5]: /dashboards/widgets/
 [6]: /notebooks/
 [15]: /logs/log_configuration/rehydrating

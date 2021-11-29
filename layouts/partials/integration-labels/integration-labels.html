@@ -29,13 +29,14 @@
     <div class="row integration-os">
         <div class="agent col-12">
             <p class="mb-3">
+                <strong class="supported-os-text">Supported OS</strong>
                 {{ range .Params.supported_os }}
                     {{ if eq . "linux" }}
                         <span>
                             {{ partial "img.html" (dict "root" $dot "src" "os-linux.png" "class" "static" "alt" "Linux" "width" "24") }}
                         </span>
                     {{ end }}
-                    {{ if eq . "mac_os" }}
+                    {{ if (or (eq . "mac_os") (eq . "mac os")) }}
                         <span>
                             {{ partial "img.html" (dict "root" $dot "src" "os-macos.png" "class" "static" "alt" "Mac OS" "width" "24") }}
                         </span>
@@ -45,8 +46,27 @@
                             {{ partial "img.html" (dict "root" $dot "src" "os-windows-bw.png" "class" "static" "alt" "Windows" "width" "24") }}
                         </span>
                     {{ end }}
+                    {{ if eq . "solaris" }}
+                        <span>
+                            {{ partial "img.html" (dict "root" $dot "src" "os-solaris.png" "class" "static" "alt" "Solaris" "width" "64") }}
+                        </span>
+                    {{ end }}
+                    {{ if eq . "hp-ux" }}
+                        <span>
+                            {{ partial "img.html" (dict "root" $dot "src" "os-hp-ux.png" "class" "static" "alt" "HP UX" "width" "48") }}
+                        </span>
+                    {{ end }}
+                    {{ if eq . "ibm i/os" }}
+                        <span>
+                            {{ partial "img.html" (dict "root" $dot "src" "os-ibm-ios.png" "class" "static" "alt" "IBM I/OS" "width" "48") }}
+                        </span>
+                    {{ end }}
+                    {{ if eq . "ibm z/os" }}
+                        <span>
+                            {{ partial "img.html" (dict "root" $dot "src" "os-ibm-zos.png" "class" "static" "alt" "IBM Z/OS" "width" "80") }}
+                        </span>
+                    {{ end }}
                 {{ end }}
-                <strong class="supported-os-text">OS Supported</strong>
             </p>
         </div>
     </div>
@@ -54,6 +74,15 @@
 
 {{ if in .Params.categories "marketplace" }}
     {{ partial "badge.html" (dict "context" . "text" "marketplace") }}
+{{ end }}
+
+{{ with .Params.integration_version }}
+<div class="row integration-labels">
+    <div class="integration-version col-12">
+        <span>{{ i18n "integration_version" }}</span><span>v{{ . }}</span>
+    </div>
+
+</div>
 {{ end }}
 
 <div class="mb-2"></div>

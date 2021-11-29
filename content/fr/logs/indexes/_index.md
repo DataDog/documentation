@@ -20,8 +20,6 @@ further_reading:
 ---
 Les index de logs offrent un contrôle précis sur le coût de votre gestion de logs. Ils vous permettent de répartir vos données en plusieurs groupes de valeurs, afin d'appliquer différents critères de rétention, de quotas, de surveillance de l'utilisation ou de facturation. Les index se trouvent sur la [page Configuration][1], dans la section Indexes. Cliquez deux fois sur les index ou sur le bouton *edit* pour découvrir le nombre de logs indexés au cours des trois derniers jours, ainsi que la période de rétention de ces logs :
 
-{{< img src="logs/indexes/index_details.png" alt="détails de l'index"  style="width:70%;">}}
-
 Vous pouvez utiliser des logs indexés pour la [recherche à facettes][2], les [patterns][3], les [analyses][4], la [création de dashboards][5] et la [surveillance][6].
 
 ## Utilisation de plusieurs index

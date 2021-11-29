@@ -14,6 +14,8 @@ further_reading:
 
 If your front-end Javascript source code is minified, you will need to upload your source maps to Datadog so that we are able to deobfuscate your different stack traces. For a given error, you will then get access to the file path, the line number, as well as a code snippet for each frame of the related stack trace.
 
+<div class="alert alert-info"><strong>Note</strong>: Only errors collected by <a href="/real_user_monitoring/">Real User Monitoring (RUM)</a> can be unminified and processed by <a href="/real_user_monitoring/error_tracking/">Error Tracking</a>.</div>
+
 ## Instrument your code
 You must configure your Javascript bundler so that, when minifying your source code, it generates source maps which directly include the related source code in the `sourcesContent` attribute. In addition, ensure that the size of each source map augmented with the size of the related minified file does not exceed __our limit of 50MB__. Check below for some configurations for popular Javascript bundlers.
 
@@ -32,7 +34,7 @@ module.exports = {
   plugins: [
     new webpack.SourceMapDevToolPlugin({
       noSources: false,
-      filename: '[name].[fullhash].js.map'
+      filename: '[file].map'
     }),
     // ...
   ],
@@ -86,7 +88,7 @@ datadog-ci sourcemaps upload /path/to/dist \
 ```
 
 
-[1]: https://app.datadoghq.com/account/settings#api
+[1]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{% tab "EU" %}}
 
@@ -102,13 +104,13 @@ datadog-ci sourcemaps upload /path/to/dist \
 ```
 
 
-[1]: https://app.datadoghq.com/account/settings#api
+[1]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{< /tabs >}}
 
 **Note**: The CLI has been optimized to upload as many source maps as you need in a very short amount of time (typically a few seconds) to minimize the overhead on your CI's performance.
 
-By running this command against our example `dist` directory (see previous section), Datadog will expect your server or your CDN to deliver the javascript files at `https://hostname.com/static/js/javascript.364758.min.js` and `https://hostname.com/static/js/subdirectory/javascript.464388.min`.js.  When an error occurs in a session of one of your users, the RUM SDK instantaneously collects it. Whenever the given error originated in a file that were downloaded from one of those urls and is also tagged with `version:v35.2395005` and `service:my-service`, the related source map will be used to deobfuscate the stack trace (in this case, the `javascript.464388.js.map` file).
+By running this command against our example `dist` directory (see previous section), Datadog will expect your server or your CDN to deliver the javascript files at `https://hostname.com/static/js/javascript.364758.min.js` and `https://hostname.com/static/js/subdirectory/javascript.464388.min.js`.  When an error occurs in a session of one of your users, the RUM SDK instantaneously collects it. Whenever the given error originated in a file that were downloaded from one of those urls and is also tagged with `version:v35.2395005` and `service:my-service`, the related source map will be used to deobfuscate the stack trace (in this case, the `javascript.464388.js.map` file).
 
 **Note**: Only source maps with the `.js.map` extension work to correctly unminify stack traces in the error tracking UI. Source maps with other extensions, such as `.mjs.map`, are accepted but do not unminify stack traces.
 

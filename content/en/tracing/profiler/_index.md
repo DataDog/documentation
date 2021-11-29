@@ -19,6 +19,12 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/datadog-github-action-vulnerability-analysis/'
       tags: 'Blog'
       text: 'Datadog GitHub Action for continuous vulnerability analysis.'
+    - link: 'https://www.datadoghq.com/blog/code-optimization-datadog-profile-comparison/'
+      tags: 'Blog'
+      text: 'Compare and optimize your code with Datadog Profile Comparison.'
+    - link: 'https://www.datadoghq.com/blog/engineering/how-we-optimized-our-akka-application-using-datadogs-continuous-profiler/'
+      tags: 'Blog'
+      text: 'How we optimized our Akka application using Datadog’s Continuous Profiler'
 
 ---
 
@@ -34,13 +40,19 @@ Continuous profiler is designed to run in production across all services by leve
 
 ## Getting started
 
+{{< site-region region="us5" >}}
+<div class="alert alert-warning">
+  The Continuous Profiler is not available for the Datadog {{< region-param key="dd_site_name" >}}  site.
+</div>
+{{< /site-region >}}
+
 Profiling your service to visualize all your stack traces in one place takes just minutes.
 
 ### Instrument your application
 
 {{< partial name="profiling/profiling-languages.html" >}}
 
-To get notified when a private beta is available for the **Node**, **PHP**, or **.NET** Profiler, [sign up here][1].
+To get notified when a private beta is available for the **PHP** or **.NET** Profiler, complete the [Continuous Profiler - Product Access Request form][1].
 
 ## Guide to using the profiler
 
@@ -68,6 +80,10 @@ Application processes that have both [APM distributed tracing][4] and continuous
 
 {{< img src="tracing/profiling/code_hotspots_tab.gif" alt="Code Hotspots tab shows profiling information for a APM trace span">}}
 
+### Find changes in performance by comparing profiles
+
+Comparing similar profiles from different times, environments, or deployments can help you understand the possible causes of and solutions to performance problems. The Datadog profiler offers [comparison visualizations][6] to make sense of why profiles are different based on time frames or tags that you scope by. 
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -77,3 +93,4 @@ Application processes that have both [APM distributed tracing][4] and continuous
 [3]: /tracing/profiling/search_profiles
 [4]: /tracing/
 [5]: /tracing/profiler/connect_traces_and_profiles/
+[6]: /tracing/profiler/compare_profiles/

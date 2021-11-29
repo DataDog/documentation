@@ -13,10 +13,11 @@ If your application does not have an existing [Datadog integration][1], and you 
 Before you can send events with email, you need a dedicated email address from Datadog:
 
 1. Log in to your [Datadog account][3].
-2. Go to the **Integrations** menu, choose **APIs**.
-3. Expand **Events API emails**.
+2. From the **Account** menu at the bottom left, select **Organization Settings**.
+3. Click the **Events API emails** tab.
 4. Choose the format for your messages from the **Format** dropdown (`Plain text` or `JSON`).
 5. Click the **Create API email** button.
+6. See the [APIs page][5] for your results.
 
 The **Events API emails** section displays all the emails available for your applications and who created them.
 
@@ -36,13 +37,13 @@ With a JSON-formatted email, the following fields are controllable:
 * The sender's email address
 * All arguments from the [Datadog Events API][1]
 
-**Note**: If your JSON is not properly formatted, or the email is sent without a subject, the event won't show in your event stream.
+**Note**: If your JSON is not properly formatted, or the email is sent without a subject, the event doesn't show in your event stream.
 
 ### Datadog event {#datadog-event-1}
 
 In a JSON-formatted email, the subject of the email doesn't appear in the event. The value of the title attribute is used for the event title. All data that appears in the event should be defined in JSON in the body of the email. Furthermore, the body must be pure, well-formed JSON—if not, the message is ignored. Example event sent with JSON:
 
-{{< img src="developers/events/json-event.png" alt="json event"  >}}
+{{< img src="developers/events/json-event.png" alt="json event" >}}
 
 **Note**: If you are testing the email with a standard email client, the body may be converted to HTML. This causes the body to no longer be pure JSON, resulting in an ignored email.
 
@@ -74,7 +75,7 @@ Body: This is a test message showing that env:test is at 50% CPU - #test
 
 The subject of the email becomes the title of the event and the body of the email becomes the event message. The sender of the email appears at the bottom of the event. Tags can be added by using `#` in message body. Example event sent with plain text:
 
-{{< img src="developers/events/plain-event.png" alt="plain event"  >}}
+{{< img src="developers/events/plain-event.png" alt="plain event" >}}
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -107,3 +108,4 @@ http://catchpoint.com/session_id%3A123456
 [2]: /agent/agent_checks/
 [3]: https://app.datadoghq.com
 [4]: http://daringfireball.net/projects/markdown/syntax#lin
+[5]: https://app.datadoghq.com/account/settings#api

@@ -78,18 +78,13 @@ Agent v6.8 以降を使用している場合は、以下の手順に従って、
 Neo4j チェックには、イベントは含まれません。
 
 ### サービスのチェック
+{{< get-service-checks-from-git "neo4j" >}}
 
-この Neo4j チェックは、収集するすべてのサービスチェックに次のタグを付けます。
-
-- `server_name:<server_name_in_yaml>`
-- `url:<neo4j_url_in_yaml>`
-
-`neo4j.can_connect`:
-Agent が _monitoring_ エンドポイントから 200 を受信できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][11]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][12]までお問合せください。
+
 
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://docs.datadoghq.com/ja/agent/guide/community-integrations-installation-with-docker-agent/
@@ -101,4 +96,5 @@ Agent が _monitoring_ エンドポイントから 200 を受信できない場�
 [8]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [9]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#service-status
 [10]: https://github.com/DataDog/integrations-extras/blob/master/neo4j/metadata.csv
-[11]: http://docs.datadoghq.com/help
+[11]: https://github.com/DataDog/integrations-extras/blob/master/neo4j/assets/service_checks.json
+[12]: http://docs.datadoghq.com/help

@@ -9,7 +9,7 @@ aliases:
 
 [APM & Continuous Profiler][1] powers you to find service bottlenecks, analyze distributed traces and code performance across your microservices architecture.
 
-There are two options available for pricing, depending on whether APM and Profiling are bundled. Additionally, using the [Tracing Without Limits][2] feature with APM allows you to slice and dice your application data with spans indexed by [tagged-based custom retention filters][3].
+There are two options available for pricing, depending on whether APM and Profiling are bundled. Additionally, using the [Tracing Without Limits][2] feature with APM allows you to filter and group your application data with spans indexed by [tagged-based custom retention filters][3].
 
 | Billing Parameter  | Price                                      | Ingested and Indexed Spans                                                                 | Billing                                                                                                                                                                                                                                                                                                                          |
 |--------------------|--------------------------------------------|-------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -22,6 +22,15 @@ There are two options available for pricing, depending on whether APM and Profil
 **Note**: If you're using a container based environment, you get billed for the underlying host deploying the Datadog Agent.
 
 **Note**: One profiled container is a container that is running the Continuous Profiler service. This does not include containers that are not being profiled. For instance, a DNS service container that is NOT profiled, running concurrently with your application container that IS profiled, is not counted towards the four profiler containers allotment.
+
+For more information, see the [Pricing page][7].
+
+## Database Monitoring
+
+| Billing Parameter  | Normalized Queries                | Billing                                          |
+|--------------------|-----------------------------------|--------------------------------------------------|
+| Database host      | 200 normalized queries are included per month with every database host. | Datadog records the number of database hosts you are concurrently monitoring with Database Monitoring once an hour. On a high watermark plan (HWMP), these hourly measurements are ordered from highest to lowest at the end of the month, and Datadog charges based on the eighth highest measurement. |
+| Normalized Queries | Billed when the configured threshold is in excess of normalized queries that are included with every database host. | A _normalized query_ represents an aggregate of queries with similar structure, differing only by the query parameters. Datadog charges based on the total number of configured normalized queries being tracked at any given time. |
 
 For more information, see the [Pricing page][7].
 

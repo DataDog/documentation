@@ -63,12 +63,12 @@ The Agent forwarder send metrics over HTTPS to Datadog. Buffering prevents netwo
 
 In v6, DogStatsD is a Golang implementation of [Etsy's StatsD][5] metric aggregation daemon. It is used to receive and roll up arbitrary metrics over UDP or Unix socket, thus allowing custom code to be instrumented without adding latency. Learn more about [DogStatsD][6].
 
-[1]: /developers/metrics/dogstatsd_metrics_submission/#metrics
+[1]: /metrics/dogstatsd_metrics_submission/#metrics
 [2]: /tracing/guide/terminology/
 [3]: /agent/guide/network/#open-ports
 [4]: /developers/custom_checks/write_agent_check/
 [5]: https://github.com/etsy/statsd
-[6]: /developers/metrics/dogstatsd_metrics_submission/
+[6]: /metrics/dogstatsd_metrics_submission/
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
@@ -85,7 +85,7 @@ Agent v5 is composed of four major components, each written in Python running as
 
 ### Supervision, privileges, and network ports
 
-A SupervisorD master process runs as the `dd-agent` user, and all forked subprocesses run as the same user. This also applies to any system call (`iostat`/`netstat`) initiated by the Datadog Agent. The Agent configuration resides at `/etc/dd-agent/datadog.conf` and `/etc/dd-agent/conf.d`. All configuration must be readable by `dd-agent`. The recommended permissions are 0600 since configuration files contain your API key and other credentials needed to access metrics.
+A SupervisorD primary process runs as the `dd-agent` user, and all forked subprocesses run as the same user. This also applies to any system call (`iostat`/`netstat`) initiated by the Datadog Agent. The Agent configuration resides at `/etc/dd-agent/datadog.conf` and `/etc/dd-agent/conf.d`. All configuration must be readable by `dd-agent`. The recommended permissions are 0600 since configuration files contain your API key and other credentials needed to access metrics.
 
 The following [ports][3] are open for operations:
 
@@ -97,7 +97,7 @@ The following [ports][3] are open for operations:
 
 All listening processes are bound by default to `127.0.0.1` and/or `::1` on v3.4.1+ of the Agent. In earlier versions, they were bound to `0.0.0.0` (all interfaces). For information on running the Agent through a proxy see [Agent proxy configuration][4]. For information on IP ranges to allow, see [Network Traffic][5].
 
-The recommended number of open file descriptors is 1024. You can see this value with the command `ulimit -a`. If you have a hard limitation below the recommended value, for example Shell Fork Bomb Protection, one solution is to add the following in `superisord.conf`:
+The recommended number of open file descriptors is 1024. You can see this value with the command `ulimit -a`. If you have a hard limitation below the recommended value, for example Shell Fork Bomb Protection, one solution is to add the following in `supervisord.conf`:
 
 ```conf
 [supervisord]
@@ -105,7 +105,7 @@ minfds = 100  # Your hard limit
 ```
 
 [1]: /integrations/
-[2]: /developers/metrics/custom_metrics/
+[2]: /metrics/custom_metrics/
 [3]: /agent/guide/network/?tab=agentv5v4#open-ports
 [4]: /agent/proxy/?tab=agentv5
 [5]: /agent/faq/network/
@@ -142,8 +142,9 @@ When the Agent is running, use the `datadog-agent launch-gui` command to open th
 | [RedHat/CentOS][4]                       | RedHat/CentOS 6+                                          |
 | [Docker][5]                              | Version 1.12+                                             |
 | [Kubernetes][6]                          | Version 1.3+                                              |
-| [SUSE Enterprise Linux][7] with systemd  | SUSE 11 SP4+                                              |
-| [SUSE Enterprise Linux][7] with SysVinit | SUSE 11 SP4 in Agent 7.16.0+                              |
+| [SUSE Enterprise Linux][7] with systemd  | SUSE 11 SP4+ in Agent < 6.33.0/7.33.0, SUSE 12+ in Agent 6.33.0+/7.33.0+                     |
+| [SUSE Enterprise Linux][7] with SysVinit | SUSE 11 SP4 in Agent 6.16.0/7.16.0 - 6.33.0/7.33.0        |
+| [OpenSUSE][7] with systemd               | OpenSUSE 15+ in Agent 6.33.0+/7.33.0+                     |
 | [Fedora][8]                              | Fedora 26+                                                |
 | [macOS][9]                               | macOS 10.12+                                              |
 | [Windows Server][10]                     | Windows Server 2008 R2+ and Server Core (not Nano Server) |
@@ -325,11 +326,11 @@ The results below are obtained from a collection of *110KB of logs per seconds* 
 
 To manually update the Datadog Agent core between two minor versions on a given host, run the [corresponding install command for your platform][7].
 
-Note: If you want to manually update one specific Agent integration refer to the [Integration Management guide][8].
+Note: If you want to manually update one specific Agent integration see the [Integration Management guide][8].
 
 ### Configuration files
 
-[See the dedicated documentation for Agent configuration files][9].
+See the [Agent configuration files documentation][9].
 
 ### Datadog site
 
@@ -341,7 +342,7 @@ site: {{< region-param key="dd_site" >}}
 
 ### Log location
 
-[See the dedicated documentation for Agent log files][11]
+See the [Agent log files documentation][11].
 
 ## Further Reading
 

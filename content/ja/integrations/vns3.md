@@ -9,7 +9,7 @@ categories:
 creates_events: false
 ddtype: crawler
 dependencies:
-  - 'https://github.com/DataDog/integrations-extras/blob/master/vns3/README.md'
+  - https://github.com/DataDog/integrations-extras/blob/master/vns3/README.md
 display_name: VNS3
 draft: false
 git_integration_title: vns3
@@ -19,7 +19,7 @@ integration_title: VNS3
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
-manifest_version: 1.0.2
+manifest_version: 1.0.0
 metric_prefix: vns3.
 metric_to_check: vns3.peering
 name: vns3

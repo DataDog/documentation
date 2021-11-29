@@ -5,15 +5,9 @@ aliases:
   - /ja/compliance_monitoring
   - /ja/security_monitoring
 ---
-{{< site-region region="us" >}}
+{{< site-region region="us3,us5,gov" >}}
 <div class="alert alert-warning">
-クラウドセキュリティポスチャ管理とクラウドワークロードセキュリティは、現在<a href="https://app.datadoghq.com/security/configuration">公開ベータ版</a>です。
-</div>
-{{< /site-region >}}
-
-{{< site-region region="us3,gov,eu" >}}
-<div class="alert alert-warning">
-クラウドセキュリティポスチャ管理は、現在 US1-FED、US3、EU では利用できません。
+クラウドセキュリティポスチャ管理は、現在 US1-FED、US3 では利用できません。
 </div>
 {{< /site-region >}}
 

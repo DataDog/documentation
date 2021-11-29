@@ -5,11 +5,12 @@ aliases:
   - /ja/security_monitoring/default_rules/cis-azure-1.3.0-4.1.1
 cloud: azure
 disable_edit: true
-integration_id: ''
+integration_id: azure.sql
 kind: documentation
 rule_category:
   - クラウドコンフィギュレーション
 security: コンプライアンス
+source: azure.sql
 title: SQL Server で監査が有効になっている
 type: security_rules
 ---

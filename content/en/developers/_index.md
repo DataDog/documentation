@@ -3,22 +3,25 @@ title: Developers
 kind: documentation
 description: Reference materials for developing for Datadog, including config and code examples
 aliases:
-- /developers/faq/how-to-monitor-logs-with-loggly-live-tail-and-datadog'
+- /developers/faq/how-to-monitor-logs-with-loggly-live-tail-and-datadog
 further_reading:
 - link: "/api"
   tag: "Documentation"
   text: "Datadog API"
+- link: "https://datadoghq.dev/integrations-core/guidelines/dashboards/#best-practices"
+  tag: "Best Practices"
+  text: "Create great integration dashboards"
 ---
 
 ## Overview
 
-The Developers section contains reference materials for developing on Datadog. You may want to develop on Datadog if there is data you want to see in the product that you are not seeing. If this is the case, Datadog may already support the technology you need. Refer to the table of [commonly requested technologies](#commonly-requested-technologies) to find the product or integration that may fulfill your needs.
+The Developers section contains reference materials for developing on Datadog. You may want to develop on Datadog if there is data you want to see in the product that you are not seeing. If this is the case, Datadog may already support the technology you need. See the table of [commonly requested technologies](#commonly-requested-technologies) to find the product or integration that may fulfill your needs.
 
 If the solution you require is truly unavailable, you can contact [Datadog Support][1] to request a feature. You may also wish to [create your own solution](#creating-your-own-solution) by using the reference materials in this section.
 
 ### Partners and the Datadog Marketplace
 
-Additionally, you may also be a partner who wants to build on Datadog and contribute to the Datadog Marketplace or to Datadog's community integrations. For more information about becoming a Datadog partner, see the [Partner program page][2].
+Additionally, you may also be a partner who wants to build on Datadog and contribute to the Datadog Marketplace or to Datadog's community integrations. See the [Partner program][2] details for information about becoming a Datadog partner.
 
 ## Commonly requested technologies
 
@@ -34,18 +37,18 @@ Still not seeing the type of data that you need? Developers have several choices
 
 - [**Custom checks**][4] enable you to collect metrics from custom applications or systems. [Custom Agent checks][4] are suitable for many needs. For more advanced requirements like metrics preprocessing, you may choose to write an [OpenMetrics][5] check.
 
-- [**Integrations**][6] also enable you to collect metrics, events, and service checks from custom applications or systems. Integrations are reusable. You may keep your integration private, or  write a public integration contributing to Datadog's [repository of community integrations][7] to be used by other developers.
+- [**Integrations**][6] also enable you to collect metrics, events, and service checks from custom applications or systems. Integrations are reusable. You may keep your integration private, or write a public integration contributing to Datadog's [repository of community integrations][7] to be used by other developers.
 
 
-### Should I write a custom check or an integration?
+### Custom check versus integration
 
 The primary difference between custom checks and integrations is that integrations are reusable components that can become part of the Datadog's ecosystem. They generally take more effort (time to develop) and are best suited for general use-cases such as application frameworks, open source projects, or commonly used software. For more niche scenarios, such as monitoring services that are not widely used outside your team or organization, writing a custom check may be the most efficient option. 
 
-However, you may choose to write an integration instead of a custom check if your particular use-case requires you to publish and deploy your solution as a Python wheel (`.whl`). Metrics emitted through custom checks are considered custom metrics, which have a cost associated based on your subscription plan. However, once an integration gets accepted into the Datadog ecosystem, metrics that it emits are no longer considered custom metrics, and do not count against your custom metric count. For more information about how this might impact cost, see the [Datadog Pricing Page][8]. 
+However, you may choose to write an integration instead of a custom check if your particular use-case requires you to publish and deploy your solution as a Python wheel (`.whl`). Metrics emitted through custom checks are considered custom metrics, which have a cost associated based on your subscription plan. However, once an integration gets accepted into the Datadog ecosystem, metrics that it emits are no longer considered custom metrics, and do not count against your custom metric count. For more information about how this might impact cost, see [Datadog Pricing][8].
 
-Note that writing a public integration (that is, one that is part of Datadog's ecosystem, can be installed with the `datadog-agent integration` command, and is accepted into Datadog's [integrations-extras][7] or [integrations-core][9] repositories) requires more work than a private integration. These integrations must pass all `ddev validate` steps, have usable tests, and undergo code review. You, as the code author, are the active maintainer of the integration and are responsible for ensuring its functionality.
+**Note**: Writing a public integration (that is, one that is part of Datadog's ecosystem, can be installed with the `datadog-agent integration` command, and is accepted into Datadog's [integrations-extras][7] or [integrations-core][9] repositories) requires more work than a private integration. These integrations must pass all `ddev validate` steps, have usable tests, and undergo code review. You, as the code author, are the active maintainer of the integration and are responsible for ensuring its functionality.
 
-When deciding how to send unsupported data to Datadog, the main considerations are effort (time to develop) and budget (cost of custom metrics). If you are trying to see data that Datadog doesn't currently support, start by deciding which method makes the most sense to start sending data:
+When deciding how to send unsupported data to Datadog, the main considerations are effort (time to develop) and budget (cost of custom metrics). If you are trying to see data that Datadog doesn't support, start by deciding which method makes the most sense to start sending data:
 
 | Type                | Effort | Custom Metrics | Language |
 |---------------------|--------|----------------|----------|
@@ -72,7 +75,7 @@ A [custom check][11], also know as a custom Agent check, lets you send internal 
 ### Sending data by data types
 
 {{< whatsnext desc="Learn about the types of data you can submit to Datadog and how to submit them:" >}}
-    {{< nextlink href="/developers/metrics" >}}<u>Custom Metrics</u>: A deep-dive into custom metrics at Datadog. This section explains metrics types, what they represent, how to submit them, and how they are used throughout Datadog.{{< /nextlink >}}
+    {{< nextlink href="/metrics" >}}<u>Custom Metrics</u>: A deep-dive into custom metrics at Datadog. This section explains metrics types, what they represent, how to submit them, and how they are used throughout Datadog.{{< /nextlink >}}
     {{< nextlink href="events/guides/" >}}<u>Events</u>: Explore how to submit events to Datadog with custom Agent checks, DogStatsD, or the Datadog API.{{< /nextlink >}}
     {{< nextlink href="/developers/service_checks" >}}<u>Service Checks</u>: Explore how to submit the up or down status of a specific service to Datadog.{{< /nextlink >}}
 {{< /whatsnext >}}

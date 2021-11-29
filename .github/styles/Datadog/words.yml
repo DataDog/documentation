@@ -11,7 +11,8 @@ swap:
   'auto-complete': 'autocomplete'
   'a number of': few|several|many
   'back end': backend
-  'Datadog app': Datadog
+  'Datadog app': 'Datadog|Datadog site'
+  'Datadog application': 'Datadog|Datadog site'
   'Datadog product': 'Datadog|Datadog service'
   'front end': 'frontend'
   'Note that': '**Note**:'
@@ -22,7 +23,7 @@ swap:
   'screen board': screenboard
   'time board': timeboard
   'time series': timeseries
-  'top list': toplist
+  'toplist': top list
   'turnkey': turn-key
   'utilize': use
   'via': with|through

@@ -1,5 +1,5 @@
 ---
-title: How to post AppDynamics events to Datadog
+title: Post AppDynamics Events to Datadog
 kind: faq
 ---
 

@@ -30,7 +30,7 @@ aliases:
 
 {{< img src="serverless/serverless_monitoring_installation_instructions.png" alt="AWS サーバーレスアプリケーションをインスツルメントする"  style="width:100%;">}}
 
-Python Lambda 関数が [Python 3.6 以前][2]のバージョンで記述されていて、以前に Datadog Forwarder 使用して Datadog サーバーレスをセットアップした場合や、Lambda 関数が `us-east-1`、`eu-west-1`、`eu-south-1` リージョンにデプロイされない場合は、[こちら][3]のインストール手順を参照してください。
+Python Lambda 関数が [Python 3.6 以前][2]のバージョンで記述されていて、以前に Datadog Forwarder を使用して Datadog サーバーレスをセットアップした場合は、[こちらの手順][3]を参照してください。
 
 ## コンフィギュレーション
 
@@ -91,13 +91,16 @@ Transform:
   - Name: DatadogServerless
     Parameters:
       stackName: !Ref "AWS::StackName"
-      nodeLayerVersion: "<LAYER_VERSION>"
-      extensionLayerVersion: "<EXTENSION_VERSION>"
+      apiKey: <DATADOG_API_KEY>
+      pythonLayerVersion: {{< latest-lambda-layer-version layer="python" >}}
+      extensionLayerVersion: {{< latest-lambda-layer-version layer="extension" >}}
       service: "<SERVICE>" # オプション
       env: "<ENV>" # オプション
 ```
 
-`<SERVICE>` と `<ENV>` を適切な値に、`<LAYER_VERSION>` を [目的のバージョン][4] の Datadog Lambda ライブラリに、`<EXTENSION_VERSION>` を [目的のバージョン][5] の Datadog Lambda 拡張機能にそれぞれ置き換えます。
+関数をインスツルメントするには、AWS CDK アプリの `Stack` オブジェクトに `DatadogServerless` 変換と `CfnMapping` を追加します。以下の Python のサンプルコードを参照してください (他の言語での使用方法も同様です)。
+- `<DATADOG_API_KEY>` を [API Management ページ][4]にある Datadog API キーに置き換えます。
+- `<SERVICE>` と `<ENV>` を適切な値に置き換えます。
 
 [マクロのドキュメント][1]に詳細と追加のパラメーターがあります。
 
@@ -105,15 +108,14 @@ Transform:
 [1]: https://docs.datadoghq.com/ja/serverless/serverless_integrations/macro
 [2]: https://docs.datadoghq.com/ja/serverless/libraries_integrations/extension
 [3]: https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html
-[4]: https://github.com/DataDog/datadog-lambda-python/releases
-[5]: https://gallery.ecr.aws/datadog/lambda-extension
+[4]: https://app.datadoghq.com/account/settings#api
 {{% /tab %}}
 {{% tab "AWS CDK" %}}
 
 
 [Datadog CDK コンストラクト][1] は、Lambda レイヤーを使用して Datadog Lambda ライブラリを関数に自動的に追加し、[Datadog Lambda 拡張機能][2] を介してメトリクス、トレース、ログを Datadog に送信するように関数を構成します。
 
-### Datadog CDK コンストラクトライブラリをインストール
+### Datadog CDK コンストラクトライブラリのインストール
 
 CDK プロジェクトで以下のコマンドを実行します。
 
@@ -130,26 +132,19 @@ AWS CDK アプリで `datadog-cdk-construct` モジュールをインポート�
 from datadog_cdk_constructs import Datadog
 
 datadog = Datadog(self, "Datadog",
-    python_layer_version=<LAYER_VERSION>,
-    extension_layer_version=<EXTENSION_LAYER_VERSION>,
-    dd_api_key=<DATADOG_API_KEY>
+    python_layer_version={{< latest-lambda-layer-version layer="python" >}},
+    extension_layer_version={{< latest-lambda-layer-version layer="extension" >}},
+    api_key=<DATADOG_API_KEY>
 )
 datadog.add_lambda_functions([<LAMBDA_FUNCTIONS>])
 ```
 
-関数をインスツルメントするには、AWS CDK アプリの `Stack` オブジェクトに `DatadogServerless` 変換と `CfnMapping` を追加します。以下の Python のサンプルコードを参照してください (他の言語での使用方法も同様です)。
+`<DATADOG_API_KEY>` を [API Management ページ][1]にある Datadog API キーに置き換えます。
 
-- `<DATADOG_API_KEY>` を [API Management ページ][3]の Datadog API キーに置き換えます。
-- `<LAYER_VERSION>` を目的のバージョンの Datadog Lambda レイヤーに置き換えます（[最新リリース]を参照ください[2]）。
-- `<EXTENSION_VERSION>` を目的のバージョンの Datadog Lambda 拡張機能に置き換えます（[最新リリース]を参照ください[4]）。
+さらに詳しい情報や、追加パラメーターについては、[Datadog CDK NPM ページ][2]をご覧ください。
 
-さらに詳しい情報や、追加パラメーターについては、[Datadog CDK NPM ページ][1]をご覧ください。
-
-
-[1]: https://www.npmjs.com/package/datadog-cdk-constructs
-[2]: https://github.com/DataDog/datadog-lambda-python/releases
-[3]: https://app.datadoghq.com/account/settings#api
-[4]: https://gallery.ecr.aws/datadog/lambda-extension
+[1]: https://app.datadoghq.com/account/settings#api
+[2]: https://www.npmjs.com/package/datadog-cdk-constructs
 {{% /tab %}}
 {{% tab "Zappa" %}}
 
@@ -192,9 +187,9 @@ datadog.add_lambda_functions([<LAMBDA_FUNCTIONS>])
 
 - `<AWS_REGION>` を Lambda 関数をデプロイする AWS リージョンに置き換えます。
 - `<RUNTIME>` を適切な Python ランタイムに置き換えます。利用可能な `RUNTIME` オプションは、`Python27`、`Python36`、`Python37`、`Python38`です。
-- `<LIBRARY_VERSION>` を [Datadog Lambda ライブラリの最新リリース][1]に置き換えます。
-- `<EXTENSION_VERSION>` を [Datadog Lambda 拡張機能の最新リリース][2]に置き換えます。
-- `<DATADOG_API_KEY>` を [API Management ページ][3]の Datadog API キーに置き換えます。 
+- `<LIBRARY_VERSION>` を目的のバージョンの Datadog Lambda ライブラリに置き換えます。最新バージョンは `{{< latest-lambda-layer-version layer="python" >}}` です。
+- `<EXTENSION_VERSION>` を目的のバージョンの Datadog Lambda 拡張機能に置き換えます。最新バージョンは `{{< latest-lambda-layer-version layer="extension" >}}` です。
+- `<DATADOG_API_KEY>` を [API Management ページ][1]にある Datadog API キーに置き換えます。
 
 例:
 
@@ -211,10 +206,7 @@ datadog.add_lambda_functions([<LAMBDA_FUNCTIONS>])
     ```
 {{< /site-region >}}
 
-
-[1]: https://github.com/DataDog/datadog-lambda-python/releases
-[2]: https://gallery.ecr.aws/datadog/lambda-extension
-[3]: https://app.datadoghq.com/account/settings#api
+[1]: https://app.datadoghq.com/account/settings#api
 {{% /tab %}}
 {{% tab "Chalice" %}}
 
@@ -253,7 +245,7 @@ datadog.add_lambda_functions([<LAMBDA_FUNCTIONS>])
             "DD_FLUSH_TO_LOG": "true",
             "DD_API_KEY": "<DATADOG_API_KEY>",
           },
-          "layers": ["arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension:<VERSION_NUMBER>"],
+          "layers": ["arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension:<EXTENSION_VERSION>"],
         }
       }
     }
@@ -262,8 +254,8 @@ datadog.add_lambda_functions([<LAMBDA_FUNCTIONS>])
 2. 以下のプレイスホルダーを適切な値に置き換えます。
 
 - `<DATADOG_API_KEY>` を [API Management ページ][2]にある Datadog API キーに置き換えます。
--  `<AWS_REGION>` を Lambda 関数をデプロイする AWS リージョンに置き換えます。
-- `<EXTENSION_VERSION>` を [Datadog Lambda 拡張機能の最新リリース][3]に置き換えます。
+- `<AWS_REGION>` を Lambda 関数をデプロイする AWS リージョンに置き換えます。
+- `<EXTENSION_VERSION>` を目的のバージョンの Datadog Lambda 拡張機能に置き換えます。最新バージョンは `{{< latest-lambda-layer-version layer="extension" >}}` です。
 
 3. `requirements.txt` に `datadog_lambda` を追加します。
 4. `datadog_lambda_wrapper`を `app.py` の[ミドルウェア][4]として登録します。
@@ -287,9 +279,7 @@ datadog.add_lambda_functions([<LAMBDA_FUNCTIONS>])
 {{% /tab %}}
 {{% tab "Datadog CLI" %}}
 
-<div class="alert alert-warning"> このサービスは公開ベータ版です。フィードバックがございましたら、<a href="/help">Datadog サポートチーム</a>までお寄せください。</div>
-
-Datadog CLI を使用して、CI/CD パイプラインの Lambda 関数にインスツルメンテーションを設定します。CLI コマンドは、Lambda レイヤーを使用して Datadog Lambda ライブラリを関数に自動的に追加し、メトリクス、トレース、ログを Datadog に送信するように関数を構成します。
+Datadog CLI を使用して、CI/CD パイプラインまたはローカルのコマンドラインインターフェースから Lambda 関数にインスツルメンテーションを設定します。CLI コマンドは、Lambda レイヤーを使用して Datadog Lambda ライブラリおよび拡張機能を関数に自動的に追加し、メトリクス、トレース、ログを Datadog に送信するように関数を構成します。
 
 ### Install
 
@@ -305,31 +295,28 @@ yarn global add @datadog/datadog-ci
 
 ### インスツルメントする
 
-関数をインスツルメントするには、[AWS 認証情報][1]を使用して次のコマンドを実行します。`<functionname>`と `<another_functionname>` を Lambda 関数名に、`<aws_region>` を AWS リージョン名に、`<layer_version>` を [目的のバージョン][2]の Datadog Lambda ライブラリに、`<extension_version>` を  [目的のバージョン][3]の Datadog Lambda 拡張機能にそれぞれ置き換えます。
+関数をインスツルメントするには、[AWS 資格情報][1]を使用して次のコマンドを実行します。
 
 ```sh
 datadog-ci lambda instrument -f <functionname> -f <another_functionname> -r <aws_region> -v <layer_version> -e <extension_version>
 ```
 
+関数をインスツルメントするには、AWS CDK アプリの `Stack` オブジェクトに `DatadogServerless` 変換と `CfnMapping` を追加します。以下の Python のサンプルコードを参照してください (他の言語での使用方法も同様です)。
+- `<functionname>` と `<another_functionname>` を Lambda 関数名に置き換えます。
+- `<aws_region>` を AWS リージョン名に置き換えます。
+- `<layer_version>` を目的のバージョンの Datadog Lambda ライブラリに置き換えます。最新バージョンは `{{< latest-lambda-layer-version layer="python" >}}` です。
+- `<extension_version>` を目的のバージョンの Datadog Lambda 拡張機能に置き換えます。最新バージョンは `{{< latest-lambda-layer-version layer="extension" >}}` です。
+
 例:
 
-{{< site-region region="us,us3,eu" >}}
 ```sh
-datadog-ci lambda instrument -f my-function -f another-function -r us-east-1 -v 19 -e 8
+datadog-ci lambda instrument -f my-function -f another-function -r us-east-1 -v {{< latest-lambda-layer-version layer="python" >}} -e {{< latest-lambda-layer-version layer="extension" >}}
 ```
-{{< /site-region >}}
-{{< site-region region="gov" >}}
-```sh
-datadog-ci lambda instrument -f my-function -f another-function -r us-east-1 -v 19 -e 8
-```
-{{< /site-region >}}
 
-[CLI のドキュメント][4]に詳細と追加のパラメーターがあります。
+[CLI のドキュメント][2]に詳細と追加のパラメーターがあります。
 
 [1]: https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/setting-credentials-node.html
-[2]: https://github.com/DataDog/datadog-lambda-python/releases
-[3]: https://gallery.ecr.aws/datadog/lambda-extension
-[4]: https://docs.datadoghq.com/ja/serverless/serverless_integrations/cli
+[2]: https://docs.datadoghq.com/ja/serverless/serverless_integrations/cli
 {{% /tab %}}
 {{% tab "Container Image" %}}
 
@@ -351,7 +338,7 @@ Dockerfile に以下を追加して、Datadog Lambda 拡張機能をコンテナ
 COPY --from=public.ecr.aws/datadog/lambda-extension:<TAG> /opt/extensions/ /opt/extensions
 ```
 
-`<TAG>` を特定のバージョン番号（たとえば `7`) または `latest` に置き換えます。利用可能なタグのリストは、[Amazon ECR リポジトリ][1]で確認できます。
+`<TAG>` を特定のバージョン番号 (たとえば `{{< latest-lambda-layer-version layer="extension" >}}`) または `latest` に置き換えます。利用可能なタグのリストは、[Amazon ECR リポジトリ][1]で確認できます。
 
 ### 関数の構成
 
@@ -367,9 +354,11 @@ COPY --from=public.ecr.aws/datadog/lambda-extension:<TAG> /opt/extensions/ /opt/
 {{% /tab %}}
 {{% tab "Custom" %}}
 
-### Install
+<div class="alert alert-info">Serverless Framework や AWS CDK といった Datadog をサポートするサーバーレス開発ツールを使用していない場合は、お使いのサーバーレスアプリケーションを <a href="./?tab=datadogcli#configuration">Datadog CLI</a> でインスツルメントすることを推奨します。</div>
 
-Datadog Lambda ライブラリは、レイヤー (推奨) または Python パッケージとしてインストールできます。
+### Datadog Lambda ライブラリのインストール
+
+Datadog Lambda ライブラリは、レイヤー (推奨) _または_ Python パッケージのいずれかとしてインポートすることができます。
 
 `datadog-lambda` パッケージのマイナーバージョンは、常にレイヤーのバージョンに一致します。例: datadog-lambda v0.5.0 は、レイヤーバージョン 5 のコンテンツに一致。
 
@@ -388,16 +377,16 @@ arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:<VERSION
 ```
 {{< /site-region >}}
 
-使用できる `RUNTIME` オプションは、`Python27`、`Python36`、`Python37`、`Python38` です。`VERSION` については、[最新リリース][2]を参照してください。例:
+使用できる `RUNTIME` オプションは、`Python27`、`Python36`、`Python37`、`Python38` です。最新の `VERSION` は `{{< latest-lambda-layer-version layer="python" >}}` です。例:
 
 {{< site-region region="us,us3,eu" >}} 
 ```
-arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Python37:19
+arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Python37:{{< latest-lambda-layer-version layer="python" >}}
 ```
 {{< /site-region >}}
 {{< site-region region="gov" >}}
 ```
-arn:aws-us-gov:lambda:us-gov-east-1:002406178527:layer:Datadog-Python37:19
+arn:aws-us-gov:lambda:us-gov-east-1:002406178527:layer:Datadog-Python37:{{< latest-lambda-layer-version layer="python" >}}
 ```
 {{< /site-region >}}
 
@@ -426,7 +415,7 @@ arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension:<EXTENSI
 ```
 {{< /site-region >}}
 
-`EXTENSION_VERSION`については、[最新リリース][7]を参照してください。
+最新の `EXTENSION_VERSION` は {{< latest-lambda-layer-version layer="extension" >}} です。
 
 ### 構成
 
@@ -440,12 +429,10 @@ arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension:<EXTENSI
 
 
 [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
-[2]: https://github.com/DataDog/datadog-lambda-python/releases
 [3]: https://github.com/UnitedIncome/serverless-python-requirements#cross-compiling
 [4]: https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-cli-command-reference-sam-build.html
 [5]: https://docs.aws.amazon.com/lambda/latest/dg/python-package.html#python-package-dependencies
 [6]: https://pypi.org/project/datadog-lambda/
-[7]: https://gallery.ecr.aws/datadog/lambda-extension
 [8]: https://app.datadoghq.com/account/settings#api
 {{% /tab %}}
 {{< /tabs >}}

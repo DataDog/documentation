@@ -11,7 +11,7 @@ L'injection des ID de traces, des ID de spans et des tags `env`, `service` et `v
 
 Nous vous conseillons de configurer le traceur de votre application avec `DD_ENV`, `DD_SERVICE` et `DD_VERSION` afin d'ajouter les tags `env`, `service` et `version` de manière optimale. Pour en savoir plus, consultez la documentation sur le [tagging de service unifié][2].
 
-**Remarque** : les traceurs Java et PHP ne prennent pas en charge la configuration du tagging de service unifié pour les logs.
+**Remarque** : le traceur PHP ne prend pas actuellement en charge la configuration du tagging de service unifié pour les logs.
 
 Avant de corréler des traces à des logs, assurez-vous que vos logs sont envoyés au format JSON ou [parsés par le bon processeur de log pour le langage utilisé][3]. Vos logs de langage _doivent_ être convertis en attributs Datadog pour que la corrélation entre les traces et les logs fonctionne.
 

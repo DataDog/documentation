@@ -14,4 +14,4 @@ tokens:
   - we'(?:ve|re)
   - \b[Uu]s\b
   - \b[Oo]ur\b
-  - let's
+  - \blet's\b

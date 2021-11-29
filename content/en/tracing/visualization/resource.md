@@ -24,9 +24,9 @@ A resource is a particular action for a given [service][1] (typically an individ
 * Monitor status for all monitors associated with this service
 * List and metrics for all resources associated with this service
 
-## Out of the box graphs
+## Out-of-the-box graphs
 
-Datadog provides out of the box graphs for any given resource:
+Datadog provides out-of-the-box graphs for any given resource:
 
 * Requests - Choose to display:
     *  The **Total amount of requests**
@@ -76,7 +76,7 @@ The displayed metrics represent, per span:
 `Avg Duration`
 : Average duration of the span, for traces including the current resource, where the span is present at least once.
 
-`Avg % Exec Time` 
+`Avg % Exec Time`
 : Average ratio of execution time for which the span was active, for traces including the current resource, where the span is present at least once.
 
 **Note**: A span is considered active when it's not waiting for a child span to complete. The active spans at a given time, for a given trace, are all the leaf spans (i.e.: spans without children).

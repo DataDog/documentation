@@ -160,20 +160,8 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 Gitlab チェックには、イベントは含まれません。
 
 ### サービスのチェック
+{{< get-service-checks-from-git "gitlab" >}}
 
-Gitlab チェックには、サービスのチェック機能として Health、Readiness、Liveness が含まれます。 
-
-**gitlab.prometheus_endpoint_up**:<br>
-チェックが Gitlab インスタンスの Prometheus メトリクスエンドポイントにアクセスできない場合は `CRITICAL` を返します。
-
-**gitlab.health**:<br>
-チェックが Gitlab インスタンスにアクセスできない場合は `CRITICAL` を返します。
-
-**gitlab.liveness**:<br>
-Rails Controllers とのデッドロックのためにチェックが Gitlab インスタンスにアクセスできない場合は `CRITICAL` を返します。
-
-**gitlab.readiness**:<br>
-Gitlab インスタンスが Rails Controllers を介してトラフィックを受け入れることができる場合は `CRITICAL` を返します。
 
 ## トラブルシューティング
 

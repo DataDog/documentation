@@ -20,6 +20,7 @@
 "guid": "d9535bd9-569e-4da9-ba3c-47f4dd262007"
 "integration_id": "statsig-statsig"
 "integration_title": "Statsig"
+"integration_version": ""
 "is_public": true
 "kind": "integration"
 "maintainer": "support@statsig.com"
@@ -32,7 +33,7 @@
   "metric": datadog.marketplace.statsig.log
   "tag": イベント
   "unit_label": 1000 件の Statsig ログイベント
-  "unit_price": !!float "0.05"
+  "unit_price": !!float "0.1"
 "public_title": "Statsig"
 "short_description": "顧客が必要とする機能をすばやく構築、計測、そして納品。"
 "support": "パートナー"

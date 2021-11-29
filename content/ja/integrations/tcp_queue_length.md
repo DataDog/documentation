@@ -10,13 +10,14 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/tcp_queue_length/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/tcp_queue_length/README.md
 display_name: TCP Queue Length
 draft: false
 git_integration_title: tcp_queue_length
 guid: 0468b098-43bd-4157-8a01-14065cfdcb7b
 integration_id: tcp-queue-length
 integration_title: TCP Queue Length
+integration_version: ''
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
@@ -53,7 +54,7 @@ yum install -y kernel-headers-$(uname -r)
 yum install -y kernel-devel-$(uname -r)
 ```
 
-**注**: CentOS/RHEL バージョン < 8 はサポートされていません。
+**注**: バージョン 8 以前の Windows、Container-Optimized OS、および CentOS/RHEL はサポートされません。
 
 ### コンフィギュレーション
 

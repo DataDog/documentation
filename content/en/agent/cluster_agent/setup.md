@@ -24,7 +24,9 @@ To set up the Datadog Cluster Agent on your Kubernetes cluster, follow these ste
 {{< tabs >}}
 {{% tab "Helm" %}}
 
-To enable the Cluster Agent collection with Helm, update your [datadog-values.yaml][1] file with the following Cluster Agent configuration, then upgrade your Datadog Helm chart:
+The Cluster Agent is enabeld by default since Helm Chart `2.7.0`.
+
+To activate it on older versions or if you use a custom [datadog-values.yaml][1] overriding the `clusterAgent` key, update your [datadog-values.yaml][1] file with the following Cluster Agent configuration, then upgrade your Datadog Helm chart:
 
   ```yaml
   clusterAgent:
@@ -40,6 +42,24 @@ When set manually this token must be 32 alphanumeric characters.
 
 [1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
 {{% /tab %}}
+{{% tab "Operator" %}}
+
+The Cluster Agent is enabeld by default since Datadog Operator `v0.7.0`.
+
+To activate it explicitly, update your `DatadogAgent` object with the following configuration:
+
+  ```yaml
+spec:
+  clusterAgent:
+    # clusterAgent.enabled -- Set this to false to disable Datadog Cluster Agent
+    enabled: true
+  ```
+
+The Operator then creates the necessary RBACs, deploys the Cluster Agent and modifies the Agent DaemonSet configuration to use a randomly generated token (to secure communication between Agent and Cluster Agent). You can manually specify this token by setting the `credentials.token` field.
+
+When set manually this token must be 32 alphanumeric characters.
+
+{{% /tab %}}
 {{% tab "Daemonset" %}}
 
 1. [Set up the Datadog Cluster Agent](#configure-the-datadog-cluster-agent).
@@ -51,7 +71,7 @@ When set manually this token must be 32 alphanumeric characters.
 
 The Datadog Cluster Agent needs a proper RBAC to be up and running:
 
-1. Review the manifests in the [Datadog Cluster Agent RBAC folder][1]. Note that when using the Cluster Agent, your node Agents are not able to interact with the Kubernetes API server—only the Cluster Agent is able to do so.
+1. Review the manifests in the [Datadog Cluster Agent RBAC folder][1]. **Note**: When using the Cluster Agent, your node Agents are not able to interact with the Kubernetes API server—only the Cluster Agent is able to do so.
 
 2. To configure Cluster Agent RBAC permissions, apply the following manifests. (You may have done this already when setting up the [node Agent daemonset][2].)
 
@@ -74,7 +94,7 @@ To create this token run this one line command to generate a `Secret` named `dat
   ```
 **Note:** This creates a `Secret` in the default namespace. If you are in a custom namespace, update the namespace parameter of the command before running it.
 
-The default `cluster-agent-deployment.yaml` provided for the Cluster Agent is already configured to refer to this `Secret` with the environment variable configuration:
+The default `cluster-agent-deployment.yaml` provided for the Cluster Agent is already configured to see this `Secret` with the environment variable configuration:
   ```yaml
   - name: DD_CLUSTER_AGENT_AUTH_TOKEN
     valueFrom:
@@ -101,7 +121,7 @@ This environment variable must be configured (using the same setup) when [Config
     echo -n '<Your API key>' | base64
     ```
 3. In the `secrets-application-key.yaml` manifest, replace `PUT_YOUR_BASE64_ENCODED_APP_KEY_HERE` with [your Datadog Application key][11] encoded in base64.
-4. The `cluster-agent-deployment.yaml` manifest will refers to the token created previously in the `Secret` `datadog-cluster-agent` by *default*. If you are storing this token in an *alternative* way, configure your `DD_CLUSTER_AGENT_AUTH_TOKEN` environment variable accordingly.
+4. By default, the `cluster-agent-deployment.yaml` manifest refers to the token created previously in the `Secret` `datadog-cluster-agent`. If you are storing this token in an alternative way, configure your `DD_CLUSTER_AGENT_AUTH_TOKEN` environment variable accordingly.
 5. Deploy these resources for the Cluster Agent Deployment to use:
     ```shell
     kubectl apply -f agent-services.yaml
@@ -170,7 +190,7 @@ After redeploying your `Daemonset` with these configurations in place, the Datad
 [7]: https://raw.githubusercontent.com/DataDog/datadog-agent/main/Dockerfiles/manifests/cluster-agent/secret-application-key.yaml
 [8]: https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/cluster-agent-deployment.yaml
 [9]: https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/install_info-configmap.yaml
-[10]: https://app.datadoghq.com/account/settings#api
+[10]: https://app.datadoghq.com/organization-settings/api-keys
 [11]: https://app.datadoghq.com/access/application-keys
 [12]: /agent/cluster_agent/setup/?tab=daemonset#configure-rbac-permissions
 [13]: https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/daemonset.yaml

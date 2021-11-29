@@ -3,10 +3,10 @@ title: ログの収集
 kind: documentation
 description: Datadog Agent を使用してログを収集し、Datadog に送信
 further_reading:
-  - link: /logs/processing/
+  - link: /logs/log_configuration/processors
     tag: ドキュメント
     text: ログの処理方法について
-  - link: /logs/processing/parsing/
+  - link: /logs/log_configuration/parsing
     tag: ドキュメント
     text: パースの詳細
   - link: /logs/live_tail/

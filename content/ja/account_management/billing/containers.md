@@ -1,5 +1,5 @@
 ---
-title: コンテナの課金
+title: コンテナの請求
 kind: documentation
 ---
 ## 概要

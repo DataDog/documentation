@@ -24,11 +24,11 @@ This page outlines the basic features of the Datadog Agent for Debian. If you ha
 
 Packages are available for 64-bit x86 and Arm v8 architectures. For other architectures, use the source install.
 
-**Note**: Debian 7 (wheezy) and above (we support SysVinit in Agent 6.6.0 above) are supported.
+**Note**: Debian 7 (wheezy) and above is supported. SysVinit is supported in Agent v6.6.0+.
 
 ## Commands
 
-In Agent v6 and v7, the service manager provided by the operating system is responsible for the Agent lifecycle, while other commands must be run via the Agent binary directly. In Agent v5, almost everything is done via the service manager.
+In Agent v6 and v7, the service manager provided by the operating system is responsible for the Agent lifecycle, while other commands must be run through the Agent binary directly. In Agent v5, almost everything is done through the service manager.
 
 {{< tabs >}}
 {{% tab "Agent v6 & v7" %}}
@@ -98,7 +98,7 @@ Configuration files for [Integrations][1]:
 
 ## Troubleshooting
 
-[Refer to the dedicated Agent Troubleshooting documentation][3].
+See the [Agent Troubleshooting documentation][3].
 
 ## Working with the embedded Agent
 

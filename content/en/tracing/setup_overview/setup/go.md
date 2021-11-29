@@ -31,17 +31,19 @@ The Go Tracer requires Go `1.12+` and Datadog Agent `>= 5.21.1`.  For a full lis
 
 ## Installation and getting started
 
-For configuration instructions and details about using the API, see the Datadog [API documentation][2]. For manual instrumentation, use the [integrations section](#integrations) below for Go libraries and frameworks supporting automatic instrumentation.
+For configuration instructions and details about using the API, see the Datadog [API documentation][2].
 
 For a description of the terminology used in APM, see the [Getting started with APM section][3]. For details about contributing, check the official repository [README.md][4].
 
 Consult the [migration document][5] if you need to migrate from an older version of the tracer (e.g. v<0.6.x) to the newest version.
 
+When you set up tracing, you're also setting up Continuous Profiler, and you need only [enable Profiler][6] to start receiving profiling data from your app.
+
 ### Installation
 
 #### Follow the in-app documentation (recommended)
 
-Follow the [Quickstart instructions][6] within the Datadog app for the best experience, including:
+Follow the [Quickstart instructions][7] within the Datadog app for the best experience, including:
 
 - Step-by-step instructions scoped to your deployment configuration (hosts, Docker, Kubernetes, or Amazon ECS).
 - Dynamically set `service`, `env`, and `version` tags.
@@ -57,10 +59,10 @@ Datadog has a series of pluggable packages which provide out-of-the-box support 
 ## Configuration
 
 The Go tracer supports additional environment variables and functions for configuration.
-See all available options in the [configuration documentation][7].
+See all available options in the [configuration documentation][8].
 
 We highly recommend using `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `env`, `service`, and `version` for your services.
-Check out the [Unified Service Tagging][8] documentation for recommendations on how to configure these environment variables. These variables are available for versions 1.24.0+ of the Go tracer.
+Check out the [Unified Service Tagging][9] documentation for recommendations on how to configure these environment variables. These variables are available for versions 1.24.0+ of the Go tracer.
 
 You may also elect to provide `env`, `service`, and `version` through the tracer's API:
 
@@ -122,7 +124,7 @@ Install and configure the Datadog Agent to receive traces from your now instrume
         defer tracer.Stop()
     }
     ```
-{{< site-region region="us3,eu,gov" >}} 
+{{< site-region region="us3,us5,eu,gov" >}} 
 
 4. Set `DD_SITE` in the Datadog Agent to {{< region-param key="dd_site" code="true" >}} to ensure the Agent sends data to the right Datadog location.
 
@@ -139,7 +141,7 @@ To set up Datadog APM in AWS Lambda, see the [Tracing Serverless Functions][1] d
 {{% /tab %}}
 {{% tab "Other Environments" %}}
 
-Tracing is available for a number of other environments, such as  [Heroku][1], [Cloud Foundry][2], [AWS Elastic Beanstalk][3], and [Azure App Services Extension][4].
+Tracing is available for a number of other environments, such as  [Heroku][1], [Cloud Foundry][2], [AWS Elastic Beanstalk][3], and [Azure App Service][4].
 
 For other environments, please refer to the [Integrations][5] documentation for that environment and [contact support][6] if you are encountering any setup issues.
 
@@ -154,11 +156,11 @@ For other environments, please refer to the [Integrations][5] documentation for 
 
 ## Configure APM environment name
 
-The [APM environment name][9] may be configured [in the agent][10] or using the [WithEnv][7] start option of the tracer.
+The [APM environment name][10] may be configured [in the agent][11] or using the [WithEnv][8] start option of the tracer.
 
 ### B3 headers extraction and injection
 
-The Datadog APM tracer supports [B3 headers extraction][11] and injection for distributed tracing.
+The Datadog APM tracer supports [B3 headers extraction][12] and injection for distributed tracing.
 
 Distributed headers injection and extraction is controlled by
 configuring injection/extraction styles. Two styles are
@@ -187,9 +189,10 @@ extracted value is used.
 [3]: /tracing/visualization/
 [4]: https://github.com/DataDog/dd-trace-go/tree/v1#contributing
 [5]: https://github.com/DataDog/dd-trace-go/tree/v1/MIGRATING.md
-[6]: https://app.datadoghq.com/apm/docs
-[7]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#StartOption
-[8]: /getting_started/tagging/unified_service_tagging
-[9]: /tracing/advanced/setting_primary_tags_to_scope/#environment
-[10]: /getting_started/tracing/#environment-name
-[11]: https://github.com/openzipkin/b3-propagation
+[6]: /tracing/profiler/enabling/?code-lang=go
+[7]: https://app.datadoghq.com/apm/docs
+[8]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#StartOption
+[9]: /getting_started/tagging/unified_service_tagging
+[10]: /tracing/advanced/setting_primary_tags_to_scope/#environment
+[11]: /getting_started/tracing/#environment-name
+[12]: https://github.com/openzipkin/b3-propagation

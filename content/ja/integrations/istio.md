@@ -150,33 +150,19 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 Istio チェックには、イベントは含まれません。
 
 ### サービスのチェック
+{{< get-service-checks-from-git "istio" >}}
 
-Istio バージョン `1.5` 以降の場合
-
-**istio.prometheus.health**: <br>
-Agent がメトリクスのエンドポイントに到達できない場合は `CRITICAL` を返します。それ以外の場合は、`OK` を返します。
-
-Istio の他のすべてのバージョンの場合
-
-**istio.pilot.prometheus.health**:<br>
-Agent がメトリクスのエンドポイントに到達できない場合は `CRITICAL` を返します。それ以外の場合は、`OK` を返します。
-
-**istio.galley.prometheus.health**:<br>
-Agent がメトリクスのエンドポイントに到達できない場合は `CRITICAL` を返します。それ以外の場合は、`OK` を返します。
-
-**istio.citadel.prometheus.health**:<br>
-Agent がメトリクスのエンドポイントに到達できない場合は `CRITICAL` を返します。それ以外の場合は、`OK` を返します。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][17]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][18]までお問合せください。
 
 ## その他の参考資料
 
 お役に立つドキュメント、リンクや記事:
 
-- [Datadog を使用した Istio サービスメッシュの監視][18]
-- [Datadog でキーメトリクスを収集して Istio を監視する][19]
+- [Datadog を使用した Istio サービスメッシュの監視][19]
+- [Datadog でキーメトリクスを収集して Istio を監視する][20]
 - [Datadog を使用した Istio の監視方法][3]
 
 [1]: https://www.datadoghq.com/blog/monitor-istio-with-npm/
@@ -195,6 +181,7 @@ Agent がメトリクスのエンドポイントに到達できない場合は `
 [14]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
 [15]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [16]: https://github.com/DataDog/integrations-core/blob/master/istio/metadata.csv
-[17]: https://docs.datadoghq.com/ja/help/
-[18]: https://www.datadoghq.com/blog/monitor-istio-with-datadog
-[19]: https://www.datadoghq.com/blog/istio-metrics/
+[17]: https://github.com/DataDog/integrations-core/blob/master/istio/assets/service_checks.json
+[18]: https://docs.datadoghq.com/ja/help/
+[19]: https://www.datadoghq.com/blog/monitor-istio-with-datadog
+[20]: https://www.datadoghq.com/blog/istio-metrics/

@@ -34,37 +34,36 @@ containerDefinitions": [
     ...
   {{< /code-block >}}
 
-    {{< site-region region="us3,eu,gov" >}} 
-  To ensure the Agent sends data to the right Datadog location, set the following environment variable, where `<DATADOG_SITE>` is {{< region-param key="dd_site" code="true" >}}:
+    To ensure the Agent sends data to the right Datadog location, set the following environment variable, where `<DATADOG_SITE>` is {{< region-param key="dd_site" code="true" >}}:
 
-  ```json
-  "environment": [
-       ...
-     {
-       "name": "DD_SITE",
-       "value": "<DATADOG_SITE>"
-     },
-     ...
-     ]
-   ...
-  ```
-  {{< /site-region >}}
-  For **Agent v7.17 or lower**, add the following environment variables:
-   ```json
-   "environment": [
+    ```json
+    "environment": [
         ...
       {
-        "name": "DD_APM_ENABLED",
-        "value": "true"
-      },
-      {
-        "name": "DD_APM_NON_LOCAL_TRAFFIC",
-        "value": "true"
+        "name": "DD_SITE",
+        "value": "<DATADOG_SITE>"
       },
       ...
       ]
-   ...
-   ```
+    ...
+    ```
+
+    For **Agent v7.17 or lower**, add the following environment variables:
+    ```json
+    "environment": [
+          ...
+        {
+          "name": "DD_APM_ENABLED",
+          "value": "true"
+        },
+        {
+          "name": "DD_APM_NON_LOCAL_TRAFFIC",
+          "value": "true"
+        },
+        ...
+        ]
+    ...
+    ```
 
    [See all environment variables available for Agent trace collection][1].
 
@@ -87,7 +86,7 @@ curl http://169.254.169.254/latest/meta-data/local-ipv4
 The [Amazon's ECS container metadata file][1] allows discovery of the private IP address. To get the private IP address for each host, run the following command:
 
 {{< code-block lang="curl" >}}
-cat $ECS_CONTAINER_METADATA_FILE | jq .HostPrivateIPv4Address
+cat $ECS_CONTAINER_METADATA_FILE | jq -r .HostPrivateIPv4Address
 {{< /code-block >}}
 
     
@@ -123,8 +122,7 @@ def get_aws_ip():
 tracer.configure(hostname=get_aws_ip())
 ```
 
-For more examples of setting the Agent hostname in other languages, refer to the [change agent hostname documentation][1].
-
+For more examples of setting the Agent hostname in other languages, see the [change Agent hostname][1] documentation.
 
 
 [1]: https://docs.datadoghq.com/tracing/setup/python/#change-agent-hostname
@@ -142,7 +140,7 @@ const axios = require('axios');
 })();
 ```
 
-For more examples of setting the Agent hostname in other languages, refer to the [change agent hostname documentation][1].
+For more examples of setting the Agent hostname in other languages, see the [change Agent hostname documentation][1].
 
 
 [1]: https://docs.datadoghq.com/tracing/setup/nodejs/#change-agent-hostname
@@ -197,7 +195,7 @@ Copy this script into the `entryPoint` field of your ECS task definition, updati
 ]
 ```
 
-For more examples of setting the Agent hostname in other languages, refer to the [change agent hostname documentation][1].
+For more examples of setting the Agent hostname in other languages, see the [change Agent hostname documentation][1].
 
 
 [1]: https://docs.datadoghq.com/tracing/setup/java/#change-agent-hostname

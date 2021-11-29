@@ -26,7 +26,6 @@ aliases:
     {{< nextlink href="/dashboards/widgets/image" >}}Image{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/log_stream" >}}Log Stream{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/monitor_summary" >}}Monitor Summary{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/network" >}}Network{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/note" >}}Notes and Links{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/query_value" >}}Query Value{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/scatter_plot" >}}Scatter Plot{{< /nextlink >}}
@@ -99,7 +98,7 @@ To download a widget in PNG format, click the export button in the upper right h
 
 ### CSV
 
-To download data from a timeseries, table, or toplist widget in CSV format, click the export button in the upper right hand side of the widget, and select “Download as CSV”.
+To download data from a timeseries, table, or top list widget in CSV format, click the export button in the upper right hand side of the widget, and select “Download as CSV”.
 
 [1]: /dashboards/widgets/timeseries/#full-screen
 [2]: /dashboards/

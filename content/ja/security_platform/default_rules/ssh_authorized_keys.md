@@ -3,15 +3,12 @@ aliases:
   - /ja/e59-lrj-bki
   - /ja/security_monitoring/default_rules/e59-lrj-bki
   - /ja/security_monitoring/default_rules/ssh_authorized_keys
-control: ''
 disable_edit: true
-framework: ''
+fim: 'true'
 integration_id: ファイル整合性モニタリング
 kind: documentation
 rule_category:
   - ワークロードセキュリティ
-scope: ''
-security: コンプライアンス
 source: ファイル整合性モニタリング
 title: 修正された SSH 認証キーの変更
 type: security_rules

@@ -28,7 +28,7 @@ See the section below to learn how to connect your PHP Logs and traces manually.
 ## Manual injection
 
 <div class="alert alert-warning">
-Note that the function <code>\DDTrace\trace_id()</code> has been introduced in version <a href="https://github.com/DataDog/dd-trace-php/releases/tag/0.53.0">0.53.0</a>.
+Note that the function <code>\DDTrace\current_context()</code> has been introduced in version <a href="https://github.com/DataDog/dd-trace-php/releases/tag/0.61.0">0.61.0</a>.
 </div>
 
 To connect your logs and traces together, your logs must contain the `dd.trace_id` and `dd.span_id` attributes that respectively contain your trace ID and your span ID.
@@ -39,10 +39,11 @@ For instance, you would append those two attributes to your logs with:
 
 ```php
   <?php
+  $context = \DDTrace\current_context();
   $append = sprintf(
       ' [dd.trace_id=%d dd.span_id=%d]',
-      \DDTrace\trace_id(),
-      \dd_trace_peek_span_id()
+      $context['trace_id'],
+      $context['span_id']
   );
   my_error_logger('Error message.' . $append);
 ?>
@@ -53,10 +54,11 @@ If the logger implements the [**monolog/monolog** library][4], use `Logger::push
 ```php
 <?php
   $logger->pushProcessor(function ($record) {
+      $context = \DDTrace\current_context();
       $record['message'] .= sprintf(
           ' [dd.trace_id=%d dd.span_id=%d]',
-          \DDTrace\trace_id(),
-          \dd_trace_peek_span_id()
+          $context['trace_id'],
+          $context['span_id']
       );
       return $record;
   });
@@ -67,10 +69,11 @@ If your application uses json logs format instead of appending trace_id and span
 
 ```php
 <?php
+  $context = \DDTrace\current_context();
   $logger->pushProcessor(function ($record) {
       $record['dd'] = [
-          'trace_id' => \DDTrace\trace_id(),
-          'span_id'  => \dd_trace_peek_span_id(),
+          'trace_id' => $context['trace_id'],
+          'span_id'  => $context['span_id'],
       ];
 
       return $record;

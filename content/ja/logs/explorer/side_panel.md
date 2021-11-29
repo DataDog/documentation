@@ -1,5 +1,5 @@
 ---
-title: サイドパネル
+title: ログサイドパネル
 kind: documentation
 description: すべてのログを検索し、ログ分析を実行します
 aliases:

@@ -6,12 +6,13 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Amazon Elastic Transcoder のキーメトリクスを追跡
-doc_link: 'https://docs.datadoghq.com/integrations/amazon_elastic_transcoder/'
+doc_link: https://docs.datadoghq.com/integrations/amazon_elastic_transcoder/
 draft: false
 git_integration_title: amazon_elastic_transcoder
 has_logo: true
 integration_id: amazon-elastic-transcoder
 integration_title: Amazon Elastic Transcoder
+integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'

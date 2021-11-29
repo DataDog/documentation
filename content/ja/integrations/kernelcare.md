@@ -73,19 +73,18 @@ Agent v6.8 以降を使用している場合は、以下の手順に従って、
 {{< get-metrics-from-git "kernelcare" >}}
 
 
-### サービスのチェック
-
-**`kernelcare.can_connect`**:
-
-Agent が KernelCare に接続してメトリクスを収集できない場合は、`Critical` を返します。それ以外の場合は、`OK` を返します。
-
 ### イベント
 
 KernelCare には、イベントは含まれません。
 
+### サービスのチェック
+{{< get-service-checks-from-git "kernelcare" >}}
+
+
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][12]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][13]までお問合せください。
+
 
 [1]: https://www.kernelcare.com
 [2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
@@ -98,4 +97,5 @@ KernelCare には、イベントは含まれません。
 [9]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [10]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [11]: https://github.com/DataDog/integrations-extras/blob/master/kernelcare/metadata.csv
-[12]: https://docs.datadoghq.com/ja/help/
+[12]: https://github.com/DataDog/integrations-extras/blob/master/kernelcare/assets/service_checks.json
+[13]: https://docs.datadoghq.com/ja/help/

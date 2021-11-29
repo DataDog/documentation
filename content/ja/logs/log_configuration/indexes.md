@@ -6,16 +6,16 @@ aliases:
   - /ja/logs/dynamic_volume_control
   - /ja/logs/indexes/
 further_reading:
-  - link: '/logs/explorer/#visualize'
+  - link: /logs/explorer/#visualize
     tag: ドキュメント
     text: ログ分析の実行
-  - link: /logs/processing/
+  - link: /logs/log_configuration/processors
     tag: ドキュメント
     text: ログの処理方法
-  - link: /logs/processing/parsing/
+  - link: /logs/log_configuration/parsing
     tag: ドキュメント
     text: パースの詳細
-  - link: 'https://www.datadoghq.com/blog/logging-without-limits/'
+  - link: https://www.datadoghq.com/blog/logging-without-limits/
     tag: ブログ
     text: Logging without Limits*
 ---
@@ -148,17 +148,17 @@ Log Explorer は、[複数のインデックスにわたるクエリ][7]をサ�
 [3]: /ja/logs/explorer/patterns/
 [4]: /ja/logs/explorer/analytics/
 [5]: /ja/logs/explorer/analytics/#dashboard
-[6]: /ja/monitors/monitor_types/log/
+[6]: /ja/monitors/create/types/log/
 [7]: /ja/logs/explorer/facets/#the-index-facet
 [8]: /ja/logs/live_tail/
 [9]: /ja/logs/logs_to_metrics/
 [10]: /ja/logs/archives/
 [11]: /ja/logs/search_syntax/
 [12]: /ja/api/v1/logs-indexes/#update-an-index
-[13]: /ja/logs/processing/processors/?tab=ui#user-agent-parser
-[14]: /ja/logs/processing/processors/?tab=ui#geoip-parser
+[13]: /ja/logs/log_configuration/processors/#user-agent-parser
+[14]: /ja/logs/log_configuration/processors/#geoip-parser
 [15]: /ja/tracing/connect_logs_and_traces/
-[16]: /ja/logs/processing/processors/?tab=ui#trace-remapper
+[16]: /ja/logs/log_configuration/processors/#trace-remapper
 [17]: /ja/help/
 [18]: /ja/logs/live_tail/#overview
 [19]: https://www.timeanddate.com/worldclock/converter.html

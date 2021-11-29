@@ -14,6 +14,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/detect-unauthorized-third-parties-aws/"
   tag: "Blog"
   text: "Detect unauthorized third parties in your AWS account"
+- link: "https://www.datadoghq.com/blog/anomaly-detection-rules-datadog/"
+  tag: "Blog"
+  text: "Detect security threats with anomaly detection rules"
 aliases:
     - /security_monitoring/detection_rules/security_monitoring/
     - /security_platform/detection_rules/security_monitoring/
@@ -160,7 +163,7 @@ Additional cases can be added by clicking the **Add Case** button.
 
 **Note**: The `evaluation window` must be less than or equal to the `keep alive` and `maximum signal duration`.
 
-[1]: /monitors/notifications/?tab=is_alert#integrations
+[1]: /monitors/notify/?tab=is_alert#integrations
 {{% /tab %}}
 
 {{% tab "New Term" %}}
@@ -183,7 +186,7 @@ Set a maximum duration to keep updating a signal if new values are detected with
 
 **Note**: If a unique signal is required for every new value, configure this value to `0 minutes`.
 
-[1]: /monitors/notifications/?tab=is_alert#integrations
+[1]: /monitors/notify/?tab=is_alert#integrations
 {{% /tab %}}
 
 {{% tab "Anomaly" %}}
@@ -203,7 +206,7 @@ Once a signal is generated, the signal will remain "open" if the data remains an
 A signal will "close" regardless of whether or not the anomaly is still anomalous once the time exceeds the maximum signal duration. This time is calculated from the first seen timestamp.
 
 
-[1]: /monitors/notifications/?tab=is_alert#integrations
+[1]: /monitors/notify/?tab=is_alert#integrations
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -237,7 +240,7 @@ This JSON object is an example of event attributes which may be associated with 
 You could use the following in the “say what’s happening” section:
 
 ```
-{{@usr.id}} just logged in without MFA from {@network.client.ip}.
+{{@usr.id}} just logged in without MFA from {{@network.client.ip}}.
 ```
 
 And this would be rendered as the following:
@@ -287,4 +290,4 @@ Epoch template variables create a human-readable string or math-friendly number 
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /monitors/notifications/?tab=is_alert
+[1]: /monitors/notify/?tab=is_alert

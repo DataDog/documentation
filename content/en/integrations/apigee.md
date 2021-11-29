@@ -22,9 +22,13 @@ further_reading:
 integration_id: "apigee"
 ---
 
+{{< site-region region="us3" >}}
+<div class="alert alert-warning">The Apigee integration is not supported for your selected Datadog site ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
 ## Overview
 
-Collect Apigee proxy logs to track errors, response time, duration, latency and monitor performance, and proxy issues aggregated in one place.
+Collect Apigee proxy logs to track errors, response time, duration, latency, monitor performance, and proxy issues aggregated in one place.
 
 ## Setup
 
@@ -60,7 +64,7 @@ The JavaScript has been configured to capture the essential flow variables as lo
 1. Select the Apigee proxy from which you want to send logs to Datadog.
 2. In the selected proxy overview page, click on the 'DEVELOP' tab located in the top-right corner.
 
-{{< img src="integrations/apigee/apigee_develop.png" alt="Develop"  style="width:75%;">}}
+{{< img src="integrations/apigee/apigee_develop.png" alt="Develop" style="width:75%;">}}
 
 3. Under 'Navigator', go to add a new JavaScript policy. Then edit the JavaScript file that has been created under the 'Resources --> jsc' dropdown.
 4. Add the following JavaScript code snippet in it. Make sure to set your Datadog **API KEY** in the `dd_api_url` variable.
@@ -68,7 +72,7 @@ The JavaScript has been configured to capture the essential flow variables as lo
 ```
 // Set the Datadog API URL here.
 // Note: If you are in the Datadog EU site (app.datadoghq.eu), the HTTP log endpoint is http-intake.logs.datadoghq.eu.
-var dd_api_url = "https://http-intake.logs.datadoghq.com/v1/input/<API_KEY>?ddsource=apigee";
+var dd_api_url = "https://http-intake.logs.datadoghq.com/api/v2/logs?dd-api-key=<DATADOG_API_KEY>&ddsource=apigee";
 
 // Debug
 // print(dd_api_url);
@@ -143,7 +147,7 @@ var myLoggingRequest = new Request(dd_api_url, "POST", headers, JSON.stringify(l
 httpClient.send(myLoggingRequest);
 ```
 
-**Note**: Add more flow variables into JavaScript from the official [Apigee flow variable documentation][4].
+**Note**: Add more flow variables into JavaScript from the official [Apigee flow variable reference][4].
 
 ## Troubleshooting
 
@@ -152,6 +156,7 @@ Need help? Contact [Datadog support][5].
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 
 [1]: https://docs.apigee.com/api-platform/reference/policies/javascript-policy
 [2]: https://docs.apigee.com/api-platform/reference/policies/message-logging-policy#samples

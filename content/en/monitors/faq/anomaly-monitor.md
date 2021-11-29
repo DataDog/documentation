@@ -87,7 +87,7 @@ Datadog monitors use UTC time and by default are agnostic to local time zones. U
 Datadog allows you to configure a timezone for each anomaly detection monitor that automatically corrects for the time shift. For more details, see [How to update an anomaly detection monitor to account for local timezone][5].
 
 [1]: https://www.datadoghq.com/blog/anti-patterns-metric-graphs-101
-[2]: /monitors/monitor_types/metric/
-[3]: /monitors/monitor_types/composite/
+[2]: /monitors/create/types/metric/
+[3]: /monitors/create/types/composite/
 [4]: /monitors/faq/what-are-recovery-thresholds/
 [5]: /monitors/faq/how-to-update-anomaly-monitor-timezone/

@@ -9,13 +9,14 @@ categories:
 creates_events: false
 ddtype: crawler
 dependencies:
-  - 'https://github.com/DataDog/integrations-extras/blob/master/concourse_ci/README.md'
+  - https://github.com/DataDog/integrations-extras/blob/master/concourse_ci/README.md
 display_name: Concourse CI
 draft: false
 git_integration_title: concourse_ci
 guid: 054cc9fb-01c4-4f05-98b5-fae828746787
 integration_id: concourse-ci
 integration_title: Concourse-CI
+integration_version: ''
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com

@@ -1,5 +1,5 @@
 ---
-title: AWS インテグレーションの課金
+title: AWS インテグレーションの請求
 kind: documentation
 aliases:
   - /ja/integrations/faq/i-can-t-filter-out-my-elb-instances-will-i-be-charged-for-them/

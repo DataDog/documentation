@@ -146,7 +146,7 @@ const { createLogger, format, transports } = require('winston');
 
 const httpTransportOptions = {
   host: 'http-intake.logs.datadoghq.com',
-  path: '/v1/input/<APIKEY>?ddsource=nodejs&service=<APPLICATION_NAME>',
+  path: '/api/v2/logs?dd-api-key=<DATADOG_API_KEY>&ddsource=nodejs&service=<APPLICATION_NAME>',
   ssl: true
 };
 
@@ -178,7 +178,7 @@ const { createLogger, format, transports } = require('winston');
 
 const httpTransportOptions = {
   host: 'http-intake.logs.datadoghq.eu',
-  path: '/v1/input/<APIKEY>?ddsource=nodejs&service=<APPLICATION_NAME>',
+  path: '/api/v2/logs?dd-api-key=<DATADOG_API_KEY>&ddsource=nodejs&service=<APPLICATION_NAME>',
   ssl: true
 };
 

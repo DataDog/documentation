@@ -16,6 +16,7 @@
 "guid": "f51704ed-a327-4132-9f04-a25a47791693"
 "integration_id": "rigor"
 "integration_title": "Rigor"
+"integration_version": ""
 "is_public": true
 "kind": "インテグレーション"
 "maintainer": "support@rigor.com"

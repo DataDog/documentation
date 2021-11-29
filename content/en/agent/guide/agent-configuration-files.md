@@ -7,7 +7,7 @@ aliases:
 
 ## Agent main configuration file
 
-The Agent v6 configuration file uses **YAML** to better support complex configurations, and to provide a consistent configuration experience, as Checks also use YAML configuration files. Therefore, `datadog.conf` (v5) is now retired in favor of `datadog.yaml` (v6).
+The Agent v6 configuration file uses **YAML** to better support complex configurations, and to provide a consistent configuration experience, as Checks also use YAML configuration files. Therefore, `datadog.conf` (v5) is retired in favor of `datadog.yaml` (v6).
 
 {{< tabs >}}
 {{% tab "Agent v6 & v7" %}}

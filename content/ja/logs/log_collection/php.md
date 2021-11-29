@@ -4,19 +4,19 @@ kind: documentation
 aliases:
   - /ja/logs/languages/php
 further_reading:
-  - link: 'https://www.datadoghq.com/blog/php-logging-guide'
+  - link: https://www.datadoghq.com/blog/php-logging-guide
     tag: ブログ
     text: PHP ログの収集、カスタマイズ、分析方法
-  - link: /logs/processing/
+  - link: /logs/log_configuration/processors
     tag: Documentation
     text: ログの処理方法
-  - link: /logs/processing/parsing/
+  - link: /logs/log_configuration/parsing
     tag: Documentation
     text: パースの詳細
   - link: /logs/explorer/
     tag: Documentation
     text: ログの調査方法
-  - link: '/logs/explorer/#visualize'
+  - link: /logs/explorer/#visualize
     tag: Documentation
     text: ログ分析の実行
   - link: /logs/faq/log-collection-troubleshooting-guide
@@ -444,7 +444,7 @@ monolog:
 ### Laravel
 
 <div class="alert alert-warning">
-注: 関数 <code>\DDTrace\trace_id()</code> は、バージョン <a href="https://github.com/DataDog/dd-trace-php/releases/tag/0.53.0">0.53.0</a> で導入されています。
+注: 関数 <code>\DDTrace\current_context()</code> は、バージョン <a href="https://github.com/DataDog/dd-trace-php/releases/tag/0.61.0">0.61.0</a> で導入されています。
 </div>
 
 ```php
@@ -480,16 +480,17 @@ class AppServiceProvider extends ServiceProvider
 
         // トレースおよびスパン ID を挿入してログエントリを APM トレースと接続
         $monolog->pushProcessor(function ($record) use ($useJson) {
+            $context = \DDTrace\current_context();
             if ($useJson === true) {
                 $record['dd'] = [
-                    'trace_id' => \DDTrace\trace_id(),
-                    'span_id'  => \dd_trace_peek_span_id(),
+                    'trace_id' => $context['trace_id'],
+                    'span_id'  => $context['span_id'],
                 ];
             } else {
                 $record['message'] .= sprintf(
                     ' [dd.trace_id=%d dd.span_id=%d]',
-                    \DDTrace\trace_id(),
-                    \dd_trace_peek_span_id()
+                    $context['trace_id'],
+                    $context['span_id']
                 );
             }
             return $record;
