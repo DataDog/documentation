@@ -4,7 +4,7 @@ kind: documentation
 ---
 ## Tarification
 
-À la fin du mois, nous calculons le nombre total d'événements de log indexés :
+À la fin du mois, Datadog calcule le nombre total d'événements de log indexés :
 
 - Si le nombre total est inférieur à la limite de votre engagement, votre facture reste la même.
 - Si vous dépassez votre quota, le prix de l'engagement est soustrait et le service est alors facturé **à la demande** avec une majoration de 50 %.
