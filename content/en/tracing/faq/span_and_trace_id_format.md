@@ -6,7 +6,7 @@ kind: faq
 
 If you write code that interacts directly with Datadog tracing spans and traces, here's what you need to know about how span IDs and trace IDs are generated and accepted by Datadog tracing libraries.
 
-Generally, the libraries generate IDs that are 64-bit unsigned integers. Specifics and exceptions noted below.
+Generally, the libraries generate IDs that are 64-bit unsigned integers. Specifics and exceptions noted below:
 
 | Language   | Generated IDs            | Valid Accepted 64-bit int IDs |
 | ---------- | ------------------------ | ----------------------------- |
