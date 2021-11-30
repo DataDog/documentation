@@ -59,7 +59,7 @@ Then, upgrade your Datadog Helm chart using the following command: `helm upgrade
         socketEnabled: true
     ```
 
-This configuration creates a directory on the host and mounts it to the Agent. The Agent then creates and listens on a socket file `/var/run/datadog/apm.socket`. Application pods will then similarly mount this volume and write to this same socket. This path and socket can be modified with the `datadog.apm.hostSocketPath` and `datadog.apm.socketPath` configuration values.
+This configuration creates a directory on the host and mounts it within the Agent. The Agent then creates and listens on a socket file `/var/run/datadog/apm.socket`. The Application pods can then similarly mount this volume and write to this same socket. This path and socket can be modified with the `datadog.apm.hostSocketPath` and `datadog.apm.socketPath` configuration values.
 
 Then, upgrade your Datadog Helm chart using the following command: `helm upgrade -f values.yaml <RELEASE NAME> datadog/datadog`. If you did not set your operating system in `values.yaml`, add `--set targetSystem=linux` or `--set targetSystem=windows` to this command.
 
@@ -124,7 +124,7 @@ To enable APM trace collection, open the DaemonSet configuration file and edit t
     # (...)
   ```
 
-This configuration creates a directory on the host and mounts it to the Agent. The Agent then creates and listens on a socket file in that directory with the `DD_APM_RECEIVER_SOCKET` value of `/var/run/datadog/apm.socket`. Application pods will then similarly mount this volume and write to this same socket.
+This configuration creates a directory on the host and mounts it within the Agent. The Agent then creates and listens on a socket file in that directory with the `DD_APM_RECEIVER_SOCKET` value of `/var/run/datadog/apm.socket`. The Application pods can then similarly mount this volume and write to this same socket.
 {{% /tab %}}
 {{% tab "Operator" %}}
 
@@ -236,7 +236,7 @@ After configuring your Datadog Agent to collect traces and giving your Applicati
 
 Refer to the [language-specific APM instrumentation docs][1] for more examples.
 
-**Note:** The .NET Tracer does not currently support sending traces over Unix Domain Socket (UDS).
+**Note:** The .NET and PHP Tracers do not currently support sending traces over Unix Domain Socket (UDS).
 
 [1]: /tracing/setup/
 
