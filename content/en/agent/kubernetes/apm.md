@@ -59,7 +59,7 @@ Then, upgrade your Datadog Helm chart using the following command: `helm upgrade
         socketEnabled: true
     ```
 
-This configuration creates a directory on the host and mounts it within the Agent. The Agent then creates and listens on a socket file `/var/run/datadog/apm.socket`. The Application pods can then similarly mount this volume and write to this same socket. This path and socket can be modified with the `datadog.apm.hostSocketPath` and `datadog.apm.socketPath` configuration values.
+This configuration creates a directory on the host and mounts it within the Agent. The Agent then creates and listens on a socket file `/var/run/datadog/apm.socket`. The application pods can then similarly mount this volume and write to this same socket. You can modify the path and socket with the `datadog.apm.hostSocketPath` and `datadog.apm.socketPath` configuration values.
 
 Then, upgrade your Datadog Helm chart using the following command: `helm upgrade -f values.yaml <RELEASE NAME> datadog/datadog`. If you did not set your operating system in `values.yaml`, add `--set targetSystem=linux` or `--set targetSystem=windows` to this command.
 
@@ -124,7 +124,7 @@ To enable APM trace collection, open the DaemonSet configuration file and edit t
     # (...)
   ```
 
-This configuration creates a directory on the host and mounts it within the Agent. The Agent then creates and listens on a socket file in that directory with the `DD_APM_RECEIVER_SOCKET` value of `/var/run/datadog/apm.socket`. The Application pods can then similarly mount this volume and write to this same socket.
+This configuration creates a directory on the host and mounts it within the Agent. The Agent then creates and listens on a socket file in that directory with the `DD_APM_RECEIVER_SOCKET` value of `/var/run/datadog/apm.socket`. The application pods can then similarly mount this volume and write to this same socket.
 {{% /tab %}}
 {{% tab "Operator" %}}
 
@@ -185,7 +185,7 @@ $ kubectl apply -n $DD_NAMESPACE -f datadog-agent.yaml
 
 {{< tabs >}}
 {{% tab "IP:Port" %}}
-If you are sending traces to the Agent by using (`<IP_ADDRESS>:8126`) you will supply this IP Address to your application pods either automatically with the [Datadog Admission Controller][1] or manually using the downward API to pull the host IP. The application container needs the `DD_AGENT_HOST` environment variable that points to `status.hostIP`:
+If you are sending traces to the Agent by using (`<IP_ADDRESS>:8126`) supply this IP address to your application pods—either automatically with the [Datadog Admission Controller][1], or manually using the downward API to pull the host IP. The application container needs the `DD_AGENT_HOST` environment variable that points to `status.hostIP`:
 
 ```yaml
 apiVersion: apps/v1
@@ -232,11 +232,11 @@ kind: Deployment
 {{< /tabs >}}
 
 ### Configure your application tracers to emit traces:
-After configuring your Datadog Agent to collect traces and giving your Application Pods the configuration on *where* to send Traces, you will need to install the Datadog Tracer into your applications in order to emit the traces. Once this is done the Tracer should automatically send the traces to the relative `DD_AGENT_HOST` (for `IP:Port`) or `DD_TRACE_AGENT_URL` (for UDS) endpoint.
+After configuring your Datadog Agent to collect traces and giving your application pods the configuration on *where* to send traces, install the Datadog Tracer into your applications to emit the traces. Once this is done, the tracer automatically sends the traces to the relative `DD_AGENT_HOST` (for `IP:Port`) or `DD_TRACE_AGENT_URL` (for UDS) endpoint.
 
 Refer to the [language-specific APM instrumentation docs][1] for more examples.
 
-**Note:** The .NET and PHP Tracers do not currently support sending traces over Unix Domain Socket (UDS).
+**Note:** The .NET and PHP tracers do not support sending traces over Unix Domain Socket (UDS).
 
 [1]: /tracing/setup/
 
