@@ -19,7 +19,7 @@ further_reading:
 
 ## Automatic configuration
 
-Enable Go runtime metrics collection, start the tracer using the `WithRuntimeMetrics` option:
+To enable Go runtime metrics collection, start the tracer using the `WithRuntimeMetrics` option:
 
 ```go
 tracer.Start(tracer.WithRuntimeMetrics())
