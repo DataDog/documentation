@@ -108,14 +108,14 @@ For more information on how to set up Java and OpenTracing, see this [article][3
 {{< programming-lang lang="python" >}}
 
 ```python
-  from ddtrace.opentracer.tags import Tags
-  import opentracing
-  span = opentracing.tracer.start_span('http.request')
-  span.set_tag(Tags.RESOURCE_NAME, '/user/profile')
-  span.set_tag(Tags.SPAN_TYPE, 'web')
+from ddtrace.opentracer.tags import Tags
+import opentracing
+span = opentracing.tracer.start_span('http.request')
+span.set_tag(Tags.RESOURCE_NAME, '/user/profile')
+span.set_tag(Tags.SPAN_TYPE, 'web')
 
-  # ...
-  span.finish()
+# ...
+span.finish()
 
 ```
 
@@ -126,10 +126,10 @@ For more information on how to set up Python and OpenTracing, see this [article]
 
 
 ```ruby
-  OpenTracing.start_active_span('http.request') do |scope|
-    scope.span.datadog_span.resource = '/user/profile'
-    # code being traced
-  end
+OpenTracing.start_active_span('http.request') do |scope|
+  scope.span.datadog_span.resource = '/user/profile'
+  # code being traced
+end
 ```
 For more information on how to set up Ruby and OpenTracing, see this [article][5].
 
@@ -148,11 +148,11 @@ For more information on how to set up Go and OpenTracing, see this [article][6].
 
 
 ```javascript
-  const span = tracer.startSpan('http.request');
-  span.setTag('resource.name',  ‘/user/profile’)
-  span.setTag('span.type', 'web')
+const span = tracer.startSpan('http.request');
+span.setTag('resource.name',  ‘/user/profile’)
+span.setTag('span.type', 'web')
 // code being traced
-  span.finish();
+span.finish();
 ```
 
 For more information on how to set up Node.js and OpenTracing, refer to this [article][7].
@@ -165,7 +165,7 @@ For more information on how to set up Node.js and OpenTracing, refer to this [ar
 using OpenTracing;
 using OpenTracing.Util;
 
-using (IScope scope = GlobalTracer.Instance.BuildSpan("http.request").StartActive(finishSpanOnDispose: true))
+using (var scope = GlobalTracer.Instance.BuildSpan("http.request").StartActive(finishSpanOnDispose: true))
 {
     scope.Span.SetTag("resource.name", "/user/profile");
     // code being traced
