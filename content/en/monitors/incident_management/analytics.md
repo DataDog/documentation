@@ -2,10 +2,6 @@
 title: Incident Management Analytics
 kind: documentation
 description: Track and analyze aggregated incident management statistics in Dashboards and Notebooks
-further_reading:
-- link: "dashboards/querying/#incident-management-analytics"
-  tag: "Documentation"
-  text: "Incident Management Analytics"
 ---
 
 ## Overview
@@ -46,10 +42,6 @@ To configure your graph using Incident Management Analytics data, follow these s
 7. Group: `Services`, limit to top 5
 
 {{< img src="monitors/incidents/incident_analytics_query_example.jpeg" alt="Incident Analytics Query Example" style="width:80%;">}}
-
-## Further Reading
-
-{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /dashboards/
 [2]: /notebooks/
