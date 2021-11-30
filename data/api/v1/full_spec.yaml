@@ -12459,6 +12459,8 @@ components:
       - dbm_hosts_percentage
       - dbm_queries_usage
       - dbm_queries_percentage
+      - estimated_indexed_logs_usage
+      - estimated_indexed_logs_percentage
       - '*'
       type: string
       x-enum-varnames:
@@ -12494,6 +12496,8 @@ components:
       - DBM_HOSTS_PERCENTAGE
       - DBM_QUERIES_USAGE
       - DBM_QUERIES_PERCENTAGE
+      - ESTIMATED_INDEXED_LOGS_USAGE
+      - ESTIMATED_INDEXED_LOGS_PERCENTAGE
       - ALL
     UsageAttributionTagNames:
       additionalProperties:
@@ -12598,6 +12602,16 @@ components:
           type: number
         dbm_queries_usage:
           description: The Database Monitoring normalized queries usage by tag(s).
+          format: double
+          type: number
+        estimated_indexed_logs_percentage:
+          description: The percentage of estimated live indexed logs usage by tag(s).
+            Note this field is in private beta.
+          format: double
+          type: number
+        estimated_indexed_logs_usage:
+          description: The estimated live indexed logs usage by tag(s). Note this
+            field is in private beta.
           format: double
           type: number
         infra_host_percentage:
