@@ -13,7 +13,7 @@ Si vous utilisez un système d'authentification fédérée, cette API vous perme
 
 **Remarque** : si vous êtes un utilisateur SAML et que vous faites partie de la bêta du système de mappage fédéré existant (`roles_v2_saml`), Datadog vous conseille fortement de migrer vers cette API.
 
-Vous pouvez également créer et gérer des mappages dans l'interface de l'application Datadog, sous l'onglet **Mappings** de la rubrique User Management. Consultez la section [Mappage d'attributs SAML avec des rôles Datadog][1] pour en savoir plus.
+Vous pouvez également créer et gérer des mappages dans l'interface Datadog, sous l'onglet **Mappings** de la rubrique User Management. Consultez la section [Mapper des attributs SAML à des rôles Datadog][1] pour en savoir plus.
 
 ## Requêtes
 
@@ -543,7 +543,7 @@ curl -X GET \
 ### Activer ou désactiver tous les mappages
 
 <div class="alert alert-warning">
-Lorsque les mappages sont activés, tous les utilisateurs qui se connectent via SAML verront leur rôles retirés puis réattribués en fonction des valeurs dans leur assertion SAML. Assurez-vous de vérifier que vous recevez bien les assertions SAML prévues dans votre connexion avant d'activer l'application des mappages.
+Lorsque les mappages sont activés, tous les utilisateurs qui se connectent via SAML verront leurs rôles retirés puis réattribués en fonction des valeurs de leur assertion SAML. Assurez-vous de vérifier que vous recevez bien les assertions SAML prévues dans votre connexion avant d'activer l'application des mappages.
 </div>
 
 Active/désactive l'application de tous les mappages d'authentification.
