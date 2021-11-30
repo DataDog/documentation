@@ -43,10 +43,6 @@ To configure your graph using Incident Management Analytics data, follow these s
 
 {{< img src="monitors/incidents/incident_analytics_query_example.jpeg" alt="Incident Analytics Query Example" style="width:80%;">}}
 
-## Further Reading
-
-{{< partial name="whats-next/whats-next.html" >}}
-
 [1]: /dashboards/
 [2]: /notebooks/
 [3]: https://app.datadoghq.com/dash/integration/30523/incident-management-overview?from_ts=1632093826308&to_ts=1634685826308&live=true
