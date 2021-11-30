@@ -71,8 +71,7 @@ Surveillez les exceptions gérées, les objets Promise rejetés et les autres er
 {{< code-block lang="javascript" >}}
 addError(
     error: unknown,
-    context?: Context,
-    source: ErrorSource.CUSTOM | ErrorSource.NETWORK | ErrorSource.SOURCE = ErrorSource.CUSTOM
+    context?: Context
 );
 {{< /code-block >}}
 
@@ -93,14 +92,14 @@ datadogRum.addError(error, {
 
 // Envoyer une erreur network
 fetch('<UNE_URL>').catch(function(error) {
-    datadogRum.addError(error, undefined, 'network');
+    datadogRum.addError(error, undefined);
 })
 
 // Envoyer une erreur d'exception gérée
 try {
     //Logique de code
 } catch (error) {
-    datadogRum.addError(error, undefined, 'source');
+    datadogRum.addError(error, undefined);
 }
 ```
 {{% /tab %}}
