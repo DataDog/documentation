@@ -26,7 +26,7 @@ At any moment, and depending on your current aggregation, **export** your log ex
 - **CSV** (for individual logs and transactions). You can export up to 5,000 logs at once for individual logs, 500 for Transactions.
 - **Share** View: Share a link to the current view with your teammates through email, Slack, and more. See all of the [Datadog notification integrations][5] available for this feature.
 
-{{< img src="logs/explorer/export.jpg" alt="Search Filter" style="width:100%;" >}}
+{{< img src="logs/explorer/export2.png" alt="Search Filter" style="width:100%;" >}}
 
 You can also export your Log Explorer view to reuse later or in different contexts. For example, download a List view or Table view in a CSV file to do offline processing of your logs or share the results of your query with your teammates.
 
