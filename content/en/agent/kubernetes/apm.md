@@ -236,7 +236,7 @@ After configuring your Datadog Agent to collect traces and giving your applicati
 
 Refer to the [language-specific APM instrumentation docs][1] for more examples.
 
-**Note:** The .NET and PHP tracers do not support sending traces over Unix Domain Socket (UDS).
+**Note:** The .NET and PHP tracers do not currently support sending traces over Unix Domain Socket (UDS). For updates on UDS for PHP and .NET, contact support.
 
 [1]: /tracing/setup/
 
