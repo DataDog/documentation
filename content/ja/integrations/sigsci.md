@@ -147,7 +147,7 @@ Signal Sciences のサブスクリプションなしで、アプリケーショ�
 [2]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/sigsci/images/datadog-sigsci-security.png
 [3]: https://docs.signalsciences.net/install-guides/
 [4]: https://docs.datadoghq.com/ja/agent/kubernetes/dogstatsd/
-[5]: https://app.datadoghq.com/account/settings#api
+[5]: https://app.datadoghq.com/organization-settings/api-keys
 [6]: https://dashboard.signalsciences.net
 [7]: https://player.vimeo.com/video/347360711
 [8]: https://docs.signalsciences.net/integrations/datadog/

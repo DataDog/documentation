@@ -6,12 +6,13 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Google Cloud Firestore のキーメトリクスを追跡
-doc_link: 'https://docs.datadoghq.com/integrations/google_cloud_firestore/'
+doc_link: https://docs.datadoghq.com/integrations/google_cloud_firestore/
 draft: false
 git_integration_title: google_cloud_firestore
 has_logo: true
 integration_id: google-cloud-firestore
 integration_title: Google Cloud Firestore
+integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'
@@ -34,11 +35,11 @@ Datadog Google Cloud Platform インテグレーションを使用して、Googl
 
 ### ログの収集
 
-Google Cloud Firestore のログは Stackdriver により収集され、HTTP プッシュフォワーダーを使用して Cloud Pub/Sub へ送信されます。[HTTP プッシュフォワーダーを使用した Cloud Pub/Sub][2] をまだセットアップしていない場合は、これをセットアップしてください。
+Google Cloud Firestore のログは Google Cloud Logging により収集され、HTTP プッシュフォワーダーを使用して Cloud Pub/Sub へ送信されます。[HTTP プッシュフォワーダーを使用した Cloud Pub/Sub][2] をまだセットアップしていない場合は、これをセットアップしてください。
 
-セットアップが完了したら、Google Cloud Firestore のログを Stackdriver から Pub/Sub へエクスポートします。
+これが完了したら、Google Cloud Firestore のログを Google Cloud Logging から Pub/Sub へエクスポートします。
 
-1. [Stackdriver ページ][3]に移動し、Google Cloud Firestore のログを絞り込みます。
+1. [Google Cloud Logging のページ][3]に移動し、Google Cloud Firestore のログを絞り込みます。
 2. **Create Export** をクリックし、シンクに名前を付けます。
 3. エクスポート先として「Cloud Pub/Sub」を選択し、エクスポート用に作成された Pub/Sub を選択します。**注**: この Pub/Sub は別のプロジェクト内に配置することもできます。
 4. **作成**をクリックし、確認メッセージが表示されるまで待ちます。

@@ -10,13 +10,14 @@ categories:
 creates_events: true
 ddtype: crawler
 dependencies:
-  - 'https://github.com/DataDog/integrations-extras/blob/master/gremlin/README.md'
+  - https://github.com/DataDog/integrations-extras/blob/master/gremlin/README.md
 display_name: Gremlin
 draft: false
 git_integration_title: gremlin
 guid: 087cb38a-d119-4db6-8c54-30700fc1f355
 integration_id: gremlin
 integration_title: Gremlin
+integration_version: ''
 is_public: true
 kind: インテグレーション
 maintainer: support@gremlin.com

@@ -1,5 +1,5 @@
 ---
-title: Distributed Tracing
+title: Distributed Tracing with Serverless Applications
 kind: documentation
 aliases:
   - /tracing/serverless_functions

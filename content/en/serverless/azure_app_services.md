@@ -253,7 +253,7 @@ Still need help? Contact [Datadog support][26].
 [9]: /integrations/azure
 [10]: /tracing/setup/dotnet/
 [11]: https://portal.azure.com
-[12]: https://app.datadoghq.com/account/settings#api
+[12]: https://app.datadoghq.com/organization-settings/api-keys
 [13]: /tracing/setup_overview/setup/dotnet-framework/#additional-optional-configuration
 [14]: /logs/log_collection/csharp/?tab=serilog#agentless-logging
 [15]: https://www.nuget.org/packages/DogStatsD-CSharp-Client

@@ -22,9 +22,10 @@ further_reading:
 
 ## Overview
 
-Synthetic tests allow you to observe how your systems and applications are performing using **simulated requests and actions from around the globe**. Datadog tracks the performance of your webpages and APIs from the backend to the frontend, and at various network levels (`HTTP`, `TCP`, `SSL`, `DNS`, and `ICMP`) in a controlled and stable way, alerting you in case of faulty behavior (such as regression, broken feature, high response time, or unexpected status code).
+Synthetic tests allow you to observe how your systems and applications are performing using **simulated requests and actions from around the globe**. Datadog tracks the performance of your webpages and APIs from the backend to the frontend, and at various network levels (`HTTP`, `SSL`, `DNS`, `TCP`, `UDP`, `ICMP`, and `WebSocket`) in a controlled and stable way, alerting you about faulty behavior such as regressions, broken features, high response times, and unexpected status codes.
 
 There are three ways to monitor your applications: 
+
 - [API tests][1] to monitor the uptime of your API endpoints
 - [Multistep API tests][2] to link several HTTP requests
 - [Browser tests][3] to test key user journeys
@@ -54,7 +55,7 @@ If you haven't already, create a [Datadog account][6].
 [2]: /synthetics/multistep
 [3]: /synthetics/browser_tests/
 [4]: /synthetics/private_locations
-[5]: /synthetics/cicd_testing/
+[5]: /synthetics/cicd_testing
 [6]: https://www.datadoghq.com/
 [7]: /getting_started/synthetics/api_test/
 [8]: /getting_started/synthetics/api_test/#create-a-multistep-api-test

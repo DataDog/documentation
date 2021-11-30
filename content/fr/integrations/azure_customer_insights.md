@@ -7,12 +7,13 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Surveillez des métriques clés d'Azure Customer Insights.
-doc_link: 'https://docs.datadoghq.com/integrations/azure_customer_insights/'
+doc_link: https://docs.datadoghq.com/integrations/azure_customer_insights/
 draft: false
 git_integration_title: azure_customer_insights
 has_logo: true
 integration_id: azure-customerinsights
 integration_title: Microsoft Azure Customer Insights
+integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'

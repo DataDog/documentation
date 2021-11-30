@@ -1,5 +1,5 @@
 ---
-title: Instrumenting Node.js Applications
+title: Instrumenting Node.js Serverless Applications
 kind: documentation
 further_reading:
 - link: "/serverless/serverless_integrations/plugin/"
@@ -70,6 +70,8 @@ export AWS_SECRET_ACCESS_KEY="<ACCESS KEY>"
 
 ### Instrument
 
+**Note**: Instrument your Lambda functions in a dev or staging environment first. Should the instrumentation result be unsatisfactory, run `uninstrument` with the same arguments to revert the changes.
+
 To instrument the function, run the following command:
 
 ```sh
@@ -120,7 +122,7 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
 
 [1]: https://docs.datadoghq.com/serverless/serverless_integrations/plugin
 [2]: /serverless/libraries_integrations/extension
-[3]: https://app.datadoghq.com/account/settings#api
+[3]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{% tab "AWS SAM" %}}
 
@@ -166,7 +168,7 @@ More information and additional parameters can be found in the [macro documentat
 [1]: https://docs.datadoghq.com/serverless/serverless_integrations/macro
 [2]: /serverless/libraries_integrations/extension
 [3]: https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html
-[4]: https://app.datadoghq.com/account/settings#api
+[4]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{% tab "AWS CDK" %}}
 
@@ -213,7 +215,7 @@ More information and additional parameters can be found in the [Datadog CDK NPM 
 
 [1]: https://www.npmjs.com/package/datadog-cdk-constructs
 [2]: https://github.com/DataDog/datadog-lambda-js/releases
-[3]: https://app.datadoghq.com/account/settings#api
+[3]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{% tab "Container Image" %}}
 
@@ -254,12 +256,11 @@ Replace `<TAG>` with either a specific version number (for example, `{{< latest-
 2. Set the following environment variables in AWS:
   - Set `DD_LAMBDA_HANDLER` to your original handler, for example, `myfunc.handler`.
   - Set `DD_TRACE_ENABLED` to `true`.
-  - Set `DD_FLUSH_TO_LOG` to `true`.
   - Set `DD_API_KEY` with your Datadog API key from the [API Management page][2].
 3. Optionally add `service` and `env` tags with appropriate values to your function.
 
 [1]: https://gallery.ecr.aws/datadog/lambda-extension
-[2]: https://app.datadoghq.com/account/settings#api
+[2]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{% tab "Terraform" %}}
 
@@ -327,7 +328,7 @@ resource "aws_lambda_function" "my_func" {
     terraform apply -var "dd_api_key=<DD_API_KEY>"
     ```
 
-[1]: https://app.datadoghq.com/account/settings#api
+[1]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{% tab "Custom" %}}
 
@@ -433,7 +434,7 @@ Follow these steps to configure the function:
 
 [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
 [2]: https://www.npmjs.com/package/datadog-lambda-js
-[3]: https://app.datadoghq.com/account/settings#api
+[3]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -443,7 +444,7 @@ After you have configured your function following the steps above, you can view 
 
 ### Unified service tagging
 
-Although it's optional, Datadog highly recommends tagging you serverless applications with the `env`, `service`, and `version` tags following the [unified service tagging documentation][4].
+Datadog recommends tagging your serverless applications with `DD_ENV`, `DD_SERVICE`, `DD_VERSION`, and `DD_TAGS`. See the [Lambda extension documentation][4] for more details.
 
 ### Collect logs from AWS serverless resources
 
@@ -516,7 +517,7 @@ If your Lambda function is running in a VPC, follow the [Datadog Lambda Extensio
 [1]: /integrations/amazon_web_services/
 [2]: /serverless/guide/datadog_forwarder_node
 [3]: https://app.datadoghq.com/functions
-[4]: /getting_started/tagging/unified_service_tagging/#aws-lambda-functions
+[4]: /serverless/libraries_integrations/extension/#tagging
 [5]: /serverless/libraries_integrations/forwarder
 [6]: /serverless/custom_metrics?tab=nodejs
 [7]: /tracing/custom_instrumentation/nodejs/

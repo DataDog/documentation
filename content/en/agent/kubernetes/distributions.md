@@ -72,23 +72,6 @@ spec:
     config:
       criSocket:
         criSocketPath: /run/dockershim.sock
-  agent:
-    image:
-      name: "gcr.io/datadoghq/agent:latest"
-    apm:
-      enabled: false
-    process:
-      enabled: true
-      processCollectionEnabled: false
-    log:
-      enabled: false
-    systemProbe:
-      enabled: false
-    security:
-      compliance:
-        enabled: false
-      runtime:
-        enabled: false
   clusterAgent:
     image:
       name: "gcr.io/datadoghq/cluster-agent:latest"
@@ -146,23 +129,6 @@ spec:
             fieldPath: spec.nodeName
         hostCAPath: /etc/kubernetes/certs/kubeletserver.crt
         # tlsVerify: false # If Kubelet integration fails with provided configuration
-  agent:
-    image:
-      name: "gcr.io/datadoghq/agent:latest"
-    apm:
-      enabled: false
-    process:
-      enabled: true
-      processCollectionEnabled: false
-    log:
-      enabled: false
-    systemProbe:
-      enabled: false
-    security:
-      compliance:
-        enabled: false
-      runtime:
-        enabled: false
   clusterAgent:
     image:
       name: "gcr.io/datadoghq/cluster-agent:latest"

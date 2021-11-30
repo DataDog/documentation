@@ -90,13 +90,18 @@ Select your Cloud provider below to see how to automatically collect your logs a
 
 Datadog integrations and log collection are tied together. Use an integration default configuration file to enable dedicated [processors][1], [parsing][2], and [facets][3] in Datadog.
 
-Consult the [list of available supported integrations][4].
+## Enabling log collection from integrations
 
+To collect logs for a given integration, uncomment the logs section in that integration's `conf.yaml` file and configure it for your environment. If you are running the Agent in a Kubernetes or Docker environment, see the dedicated [Kubernetes Log Collection][4] or [Docker Log Collection][5] documentation.
+
+Consult the [list of available supported integrations][6].
 
 [1]: /logs/log_configuration/processors
 [2]: /logs/log_configuration/parsing
 [3]: /logs/explorer/facets/
-[4]: /integrations/#cat-log-collection
+[4]: /agent/kubernetes/log/#autodiscovery
+[5]: /agent/docker/log/#log-integrations
+[6]: /integrations/#cat-log-collection
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -231,7 +236,7 @@ A TCP endpoint is not supported for this region.
 {{< /site-region >}}
 
 
-[1]: https://app.datadoghq.com/account/settings#api
+[1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: https://app.datadoghq.com/logs/livetail
 {{% /tab %}}
 {{< /tabs >}}
@@ -273,7 +278,7 @@ For more information, see the complete [source code attributes documentation][11
 
 Once logs are collected and ingested, they are available in **Log Explorer**. Log Explorer is where you can search, enrich, and view alerts on your logs. See the [Log Explorer][12] documentation to begin analyzing your log data, or see the additional log management documentation below.
 
-{{< img src="logs/log_explorer_view.png" alt="Log Explorer view"  >}}
+{{< img src="logs/explore.jpg" alt="Log Explorer view"  >}}
 
 ## Further Reading
 

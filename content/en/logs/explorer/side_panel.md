@@ -53,11 +53,11 @@ In case logs comes from a serverless source, the Host Section is replaced with a
 
 Make sure you enable [trace injection in logs][9] and follow the [Unified Service Tagging][10] best practices to benefit from all the capabilities of Logs and APM correlation.
 
-Click on the **APM Tab** and see a log in the context of its whole trace, with upstream and downstream services running. Deep dive in APM data and the [trace in APM][11] feature.
+Click on the **Trace tab** and see a log in the context of its entire trace, with upstream and downstream services running. Deep dive into the corresponding APM data by clicking on [View Trace Details][11].
 
-Interact with the **Service** section to refocus the search in the Log Explorer and see all other logs from the same trace.
+Interact with the **Service** section to highlight the part of the trace that corresponds with the selected service. Use this information to refocus your query in the Log Explorer and view other logs from the same trace.
 
-{{< img src="logs/explorer/side_panel/infra.gif" alt="Hub to APM" style="width:100%;">}}
+{{< img src="logs/explorer/side_panel/trace.gif" alt="Hub to APM" style="width:100%;">}}
 
 ## Configure your troubleshooting context
 
@@ -66,7 +66,7 @@ Interact with the attributes names and values in the lower JSON section to:
 - Add or remove a column from the logs table
 - Append the search request with specific values (include or exclude)
 
-{{< img src="logs/explorer/side_panel/context.gif" alt="Side Panel context"  style="width:100%;">}}
+{{< img src="logs/explorer/side_panel/context.jpg" alt="Side Panel context"  style="width:50%;">}} {{< img src="logs/explorer/side_panel/context2.jpg" alt="Side Panel context"  style="width:50%;">}}
 
 - Build or edit a facet or measure from an attribute. See [Log Facets][12].
 
@@ -78,8 +78,6 @@ Use the **Share** button to share the log opened in side panel to other contexts
 
 - **Copy to clipboard** or `Ctrl+C` / `Cmd+C` copies the log JSON to your clipboard.
 - **Share Event** shares the log (along with the underlying view) with teammates through email, Slack, and more. See all [Datadog notification integrations][13] available.
-
-{{< img src="logs/explorer/side_panel/upper_log_panel.png" alt="Upper Log Panel"  style="width:80%;">}}
 
 ## Further Reading
 

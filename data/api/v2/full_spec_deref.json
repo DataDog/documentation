@@ -3005,6 +3005,18 @@
           "APPLICATION_KEYS"
         ]
       },
+      "ContentEncoding": {
+        "description": "HTTP header used to compress the media-type.",
+        "enum": [
+          "gzip",
+          "deflate"
+        ],
+        "type": "string",
+        "x-enum-varnames": [
+          "GZIP",
+          "DEFLATE"
+        ]
+      },
       "Creator": {
         "description": "Creator of the object.",
         "properties": {
@@ -3894,6 +3906,130 @@
             "type": "string"
           }
         },
+        "type": "object"
+      },
+      "HTTPLog": {
+        "description": "Structured log message.",
+        "items": {
+          "description": "Logs that are sent over HTTP.",
+          "properties": {
+            "ddsource": {
+              "description": "The integration name associated with your log: the technology from which the log originated.\nWhen it matches an integration name, Datadog automatically installs the corresponding parsers and facets.\nSee [reserved attributes](https://docs.datadoghq.com/logs/log_collection/#reserved-attributes).",
+              "example": "nginx",
+              "type": "string"
+            },
+            "ddtags": {
+              "description": "Tags associated with your logs.",
+              "example": "env:staging,version:5.1",
+              "type": "string"
+            },
+            "hostname": {
+              "description": "The name of the originating host of the log.",
+              "example": "i-012345678",
+              "type": "string"
+            },
+            "message": {
+              "description": "The message [reserved attribute](https://docs.datadoghq.com/logs/log_collection/#reserved-attributes)\nof your log. By default, Datadog ingests the value of the message attribute as the body of the log entry.\nThat value is then highlighted and displayed in the Logstream, where it is indexed for full text search.",
+              "example": "2019-11-19T14:37:58,995 INFO [process.name][20081] Hello World",
+              "type": "string"
+            },
+            "service": {
+              "description": "The name of the application or service generating the log events.\nIt is used to switch from Logs to APM, so make sure you define the same value when you use both products.\nSee [reserved attributes](https://docs.datadoghq.com/logs/log_collection/#reserved-attributes).",
+              "example": "payment",
+              "type": "string"
+            }
+          },
+          "required": [
+            "name"
+          ],
+          "type": "object"
+        },
+        "type": "array"
+      },
+      "HTTPLogError": {
+        "description": "List of errors.",
+        "properties": {
+          "detail": {
+            "description": "Error message.",
+            "example": "Malformed payload",
+            "type": "string"
+          },
+          "status": {
+            "description": "Error code.",
+            "example": 400,
+            "type": "string"
+          },
+          "title": {
+            "description": "Error title.",
+            "example": "Bad Request",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "HTTPLogErrors": {
+        "description": "Invalid query performed.",
+        "properties": {
+          "errors": {
+            "description": "Structured errors.",
+            "items": {
+              "description": "List of errors.",
+              "properties": {
+                "detail": {
+                  "description": "Error message.",
+                  "example": "Malformed payload",
+                  "type": "string"
+                },
+                "status": {
+                  "description": "Error code.",
+                  "example": 400,
+                  "type": "string"
+                },
+                "title": {
+                  "description": "Error title.",
+                  "example": "Bad Request",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "HTTPLogItem": {
+        "description": "Logs that are sent over HTTP.",
+        "properties": {
+          "ddsource": {
+            "description": "The integration name associated with your log: the technology from which the log originated.\nWhen it matches an integration name, Datadog automatically installs the corresponding parsers and facets.\nSee [reserved attributes](https://docs.datadoghq.com/logs/log_collection/#reserved-attributes).",
+            "example": "nginx",
+            "type": "string"
+          },
+          "ddtags": {
+            "description": "Tags associated with your logs.",
+            "example": "env:staging,version:5.1",
+            "type": "string"
+          },
+          "hostname": {
+            "description": "The name of the originating host of the log.",
+            "example": "i-012345678",
+            "type": "string"
+          },
+          "message": {
+            "description": "The message [reserved attribute](https://docs.datadoghq.com/logs/log_collection/#reserved-attributes)\nof your log. By default, Datadog ingests the value of the message attribute as the body of the log entry.\nThat value is then highlighted and displayed in the Logstream, where it is indexed for full text search.",
+            "example": "2019-11-19T14:37:58,995 INFO [process.name][20081] Hello World",
+            "type": "string"
+          },
+          "service": {
+            "description": "The name of the application or service generating the log events.\nIt is used to switch from Logs to APM, so make sure you define the same value when you use both products.\nSee [reserved attributes](https://docs.datadoghq.com/logs/log_collection/#reserved-attributes).",
+            "example": "payment",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name"
+        ],
         "type": "object"
       },
       "IncidentCreateAttributes": {
@@ -17897,6 +18033,156 @@
         "readOnly": true,
         "type": "object"
       },
+      "MetricCustomAggregation": {
+        "description": "A time and space aggregation combination for use in query.",
+        "example": {
+          "space": "sum",
+          "time": "sum"
+        },
+        "properties": {
+          "space": {
+            "description": "A space aggregation for use in query.",
+            "enum": [
+              "avg",
+              "max",
+              "min",
+              "sum"
+            ],
+            "example": "sum",
+            "type": "string",
+            "x-enum-varnames": [
+              "AVG",
+              "MAX",
+              "MIN",
+              "SUM"
+            ]
+          },
+          "time": {
+            "description": "A time aggregation for use in query.",
+            "enum": [
+              "avg",
+              "count",
+              "max",
+              "min",
+              "sum"
+            ],
+            "example": "sum",
+            "type": "string",
+            "x-enum-varnames": [
+              "AVG",
+              "COUNT",
+              "MAX",
+              "MIN",
+              "SUM"
+            ]
+          }
+        },
+        "required": [
+          "time",
+          "space"
+        ],
+        "type": "object"
+      },
+      "MetricCustomAggregations": {
+        "description": "A list of queryable aggregation combinations for a count, rate, or gauge metric.\nBy default, count and rate metrics require the (time: sum, space: sum) aggregation and\nGauge metrics require the (time: avg, space: avg) aggregation.\nAdditional time & space combinations are also available:\n\n- time: avg, space: avg\n- time: avg, space: max\n- time: avg, space: min\n- time: avg, space: sum\n- time: count, space: sum\n- time: max, space: max\n- time: min, space: min\n- time: sum, space: avg\n- time: sum, space: sum\n\nCan only be applied to metrics that have a `metric_type` of `count`, `rate`, or `gauge`.",
+        "example": [
+          {
+            "space": "sum",
+            "time": "sum"
+          },
+          {
+            "space": "sum",
+            "time": "count"
+          }
+        ],
+        "items": {
+          "description": "A time and space aggregation combination for use in query.",
+          "example": {
+            "space": "sum",
+            "time": "sum"
+          },
+          "properties": {
+            "space": {
+              "description": "A space aggregation for use in query.",
+              "enum": [
+                "avg",
+                "max",
+                "min",
+                "sum"
+              ],
+              "example": "sum",
+              "type": "string",
+              "x-enum-varnames": [
+                "AVG",
+                "MAX",
+                "MIN",
+                "SUM"
+              ]
+            },
+            "time": {
+              "description": "A time aggregation for use in query.",
+              "enum": [
+                "avg",
+                "count",
+                "max",
+                "min",
+                "sum"
+              ],
+              "example": "sum",
+              "type": "string",
+              "x-enum-varnames": [
+                "AVG",
+                "COUNT",
+                "MAX",
+                "MIN",
+                "SUM"
+              ]
+            }
+          },
+          "required": [
+            "time",
+            "space"
+          ],
+          "type": "object"
+        },
+        "type": "array"
+      },
+      "MetricCustomSpaceAggregation": {
+        "description": "A space aggregation for use in query.",
+        "enum": [
+          "avg",
+          "max",
+          "min",
+          "sum"
+        ],
+        "example": "sum",
+        "type": "string",
+        "x-enum-varnames": [
+          "AVG",
+          "MAX",
+          "MIN",
+          "SUM"
+        ]
+      },
+      "MetricCustomTimeAggregation": {
+        "description": "A time aggregation for use in query.",
+        "enum": [
+          "avg",
+          "count",
+          "max",
+          "min",
+          "sum"
+        ],
+        "example": "sum",
+        "type": "string",
+        "x-enum-varnames": [
+          "AVG",
+          "COUNT",
+          "MAX",
+          "MIN",
+          "SUM"
+        ]
+      },
       "MetricDistinctVolume": {
         "description": "Object for a single metric's distinct volume.",
         "properties": {
@@ -18036,6 +18322,12 @@
         "description": "Object for a single metric tag configuration.",
         "example": {
           "attributes": {
+            "aggregations": [
+              {
+                "space": "avg",
+                "time": "avg"
+              }
+            ],
             "created_at": "2020-03-31T09:48:37.463835Z",
             "metric_type": "gauge",
             "modified_at": "2020-04-31T09:48:37.463835Z",
@@ -18051,6 +18343,70 @@
           "attributes": {
             "description": "Object containing the definition of a metric tag configuration attributes.",
             "properties": {
+              "aggregations": {
+                "description": "A list of queryable aggregation combinations for a count, rate, or gauge metric.\nBy default, count and rate metrics require the (time: sum, space: sum) aggregation and\nGauge metrics require the (time: avg, space: avg) aggregation.\nAdditional time & space combinations are also available:\n\n- time: avg, space: avg\n- time: avg, space: max\n- time: avg, space: min\n- time: avg, space: sum\n- time: count, space: sum\n- time: max, space: max\n- time: min, space: min\n- time: sum, space: avg\n- time: sum, space: sum\n\nCan only be applied to metrics that have a `metric_type` of `count`, `rate`, or `gauge`.",
+                "example": [
+                  {
+                    "space": "sum",
+                    "time": "sum"
+                  },
+                  {
+                    "space": "sum",
+                    "time": "count"
+                  }
+                ],
+                "items": {
+                  "description": "A time and space aggregation combination for use in query.",
+                  "example": {
+                    "space": "sum",
+                    "time": "sum"
+                  },
+                  "properties": {
+                    "space": {
+                      "description": "A space aggregation for use in query.",
+                      "enum": [
+                        "avg",
+                        "max",
+                        "min",
+                        "sum"
+                      ],
+                      "example": "sum",
+                      "type": "string",
+                      "x-enum-varnames": [
+                        "AVG",
+                        "MAX",
+                        "MIN",
+                        "SUM"
+                      ]
+                    },
+                    "time": {
+                      "description": "A time aggregation for use in query.",
+                      "enum": [
+                        "avg",
+                        "count",
+                        "max",
+                        "min",
+                        "sum"
+                      ],
+                      "example": "sum",
+                      "type": "string",
+                      "x-enum-varnames": [
+                        "AVG",
+                        "COUNT",
+                        "MAX",
+                        "MIN",
+                        "SUM"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "time",
+                    "space"
+                  ],
+                  "type": "object"
+                },
+                "type": "array"
+              },
               "created_at": {
                 "description": "Timestamp when the tag configuration was created.",
                 "example": "2020-03-31T09:48:37.463835Z",
@@ -18124,6 +18480,70 @@
       "MetricTagConfigurationAttributes": {
         "description": "Object containing the definition of a metric tag configuration attributes.",
         "properties": {
+          "aggregations": {
+            "description": "A list of queryable aggregation combinations for a count, rate, or gauge metric.\nBy default, count and rate metrics require the (time: sum, space: sum) aggregation and\nGauge metrics require the (time: avg, space: avg) aggregation.\nAdditional time & space combinations are also available:\n\n- time: avg, space: avg\n- time: avg, space: max\n- time: avg, space: min\n- time: avg, space: sum\n- time: count, space: sum\n- time: max, space: max\n- time: min, space: min\n- time: sum, space: avg\n- time: sum, space: sum\n\nCan only be applied to metrics that have a `metric_type` of `count`, `rate`, or `gauge`.",
+            "example": [
+              {
+                "space": "sum",
+                "time": "sum"
+              },
+              {
+                "space": "sum",
+                "time": "count"
+              }
+            ],
+            "items": {
+              "description": "A time and space aggregation combination for use in query.",
+              "example": {
+                "space": "sum",
+                "time": "sum"
+              },
+              "properties": {
+                "space": {
+                  "description": "A space aggregation for use in query.",
+                  "enum": [
+                    "avg",
+                    "max",
+                    "min",
+                    "sum"
+                  ],
+                  "example": "sum",
+                  "type": "string",
+                  "x-enum-varnames": [
+                    "AVG",
+                    "MAX",
+                    "MIN",
+                    "SUM"
+                  ]
+                },
+                "time": {
+                  "description": "A time aggregation for use in query.",
+                  "enum": [
+                    "avg",
+                    "count",
+                    "max",
+                    "min",
+                    "sum"
+                  ],
+                  "example": "sum",
+                  "type": "string",
+                  "x-enum-varnames": [
+                    "AVG",
+                    "COUNT",
+                    "MAX",
+                    "MIN",
+                    "SUM"
+                  ]
+                }
+              },
+              "required": [
+                "time",
+                "space"
+              ],
+              "type": "object"
+            },
+            "type": "array"
+          },
           "created_at": {
             "description": "Timestamp when the tag configuration was created.",
             "example": "2020-03-31T09:48:37.463835Z",
@@ -18177,6 +18597,70 @@
       "MetricTagConfigurationCreateAttributes": {
         "description": "Object containing the definition of a metric tag configuration to be created.",
         "properties": {
+          "aggregations": {
+            "description": "A list of queryable aggregation combinations for a count, rate, or gauge metric.\nBy default, count and rate metrics require the (time: sum, space: sum) aggregation and\nGauge metrics require the (time: avg, space: avg) aggregation.\nAdditional time & space combinations are also available:\n\n- time: avg, space: avg\n- time: avg, space: max\n- time: avg, space: min\n- time: avg, space: sum\n- time: count, space: sum\n- time: max, space: max\n- time: min, space: min\n- time: sum, space: avg\n- time: sum, space: sum\n\nCan only be applied to metrics that have a `metric_type` of `count`, `rate`, or `gauge`.",
+            "example": [
+              {
+                "space": "sum",
+                "time": "sum"
+              },
+              {
+                "space": "sum",
+                "time": "count"
+              }
+            ],
+            "items": {
+              "description": "A time and space aggregation combination for use in query.",
+              "example": {
+                "space": "sum",
+                "time": "sum"
+              },
+              "properties": {
+                "space": {
+                  "description": "A space aggregation for use in query.",
+                  "enum": [
+                    "avg",
+                    "max",
+                    "min",
+                    "sum"
+                  ],
+                  "example": "sum",
+                  "type": "string",
+                  "x-enum-varnames": [
+                    "AVG",
+                    "MAX",
+                    "MIN",
+                    "SUM"
+                  ]
+                },
+                "time": {
+                  "description": "A time aggregation for use in query.",
+                  "enum": [
+                    "avg",
+                    "count",
+                    "max",
+                    "min",
+                    "sum"
+                  ],
+                  "example": "sum",
+                  "type": "string",
+                  "x-enum-varnames": [
+                    "AVG",
+                    "COUNT",
+                    "MAX",
+                    "MIN",
+                    "SUM"
+                  ]
+                }
+              },
+              "required": [
+                "time",
+                "space"
+              ],
+              "type": "object"
+            },
+            "type": "array"
+          },
           "include_percentiles": {
             "default": false,
             "description": "Toggle to include/exclude percentiles for a distribution metric.\nDefaults to false. Can only be applied to metrics that have a `metric_type` of `distribution`.",
@@ -18239,6 +18723,70 @@
           "attributes": {
             "description": "Object containing the definition of a metric tag configuration to be created.",
             "properties": {
+              "aggregations": {
+                "description": "A list of queryable aggregation combinations for a count, rate, or gauge metric.\nBy default, count and rate metrics require the (time: sum, space: sum) aggregation and\nGauge metrics require the (time: avg, space: avg) aggregation.\nAdditional time & space combinations are also available:\n\n- time: avg, space: avg\n- time: avg, space: max\n- time: avg, space: min\n- time: avg, space: sum\n- time: count, space: sum\n- time: max, space: max\n- time: min, space: min\n- time: sum, space: avg\n- time: sum, space: sum\n\nCan only be applied to metrics that have a `metric_type` of `count`, `rate`, or `gauge`.",
+                "example": [
+                  {
+                    "space": "sum",
+                    "time": "sum"
+                  },
+                  {
+                    "space": "sum",
+                    "time": "count"
+                  }
+                ],
+                "items": {
+                  "description": "A time and space aggregation combination for use in query.",
+                  "example": {
+                    "space": "sum",
+                    "time": "sum"
+                  },
+                  "properties": {
+                    "space": {
+                      "description": "A space aggregation for use in query.",
+                      "enum": [
+                        "avg",
+                        "max",
+                        "min",
+                        "sum"
+                      ],
+                      "example": "sum",
+                      "type": "string",
+                      "x-enum-varnames": [
+                        "AVG",
+                        "MAX",
+                        "MIN",
+                        "SUM"
+                      ]
+                    },
+                    "time": {
+                      "description": "A time aggregation for use in query.",
+                      "enum": [
+                        "avg",
+                        "count",
+                        "max",
+                        "min",
+                        "sum"
+                      ],
+                      "example": "sum",
+                      "type": "string",
+                      "x-enum-varnames": [
+                        "AVG",
+                        "COUNT",
+                        "MAX",
+                        "MIN",
+                        "SUM"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "time",
+                    "space"
+                  ],
+                  "type": "object"
+                },
+                "type": "array"
+              },
               "include_percentiles": {
                 "default": false,
                 "description": "Toggle to include/exclude percentiles for a distribution metric.\nDefaults to false. Can only be applied to metrics that have a `metric_type` of `distribution`.",
@@ -18328,6 +18876,70 @@
               "attributes": {
                 "description": "Object containing the definition of a metric tag configuration to be created.",
                 "properties": {
+                  "aggregations": {
+                    "description": "A list of queryable aggregation combinations for a count, rate, or gauge metric.\nBy default, count and rate metrics require the (time: sum, space: sum) aggregation and\nGauge metrics require the (time: avg, space: avg) aggregation.\nAdditional time & space combinations are also available:\n\n- time: avg, space: avg\n- time: avg, space: max\n- time: avg, space: min\n- time: avg, space: sum\n- time: count, space: sum\n- time: max, space: max\n- time: min, space: min\n- time: sum, space: avg\n- time: sum, space: sum\n\nCan only be applied to metrics that have a `metric_type` of `count`, `rate`, or `gauge`.",
+                    "example": [
+                      {
+                        "space": "sum",
+                        "time": "sum"
+                      },
+                      {
+                        "space": "sum",
+                        "time": "count"
+                      }
+                    ],
+                    "items": {
+                      "description": "A time and space aggregation combination for use in query.",
+                      "example": {
+                        "space": "sum",
+                        "time": "sum"
+                      },
+                      "properties": {
+                        "space": {
+                          "description": "A space aggregation for use in query.",
+                          "enum": [
+                            "avg",
+                            "max",
+                            "min",
+                            "sum"
+                          ],
+                          "example": "sum",
+                          "type": "string",
+                          "x-enum-varnames": [
+                            "AVG",
+                            "MAX",
+                            "MIN",
+                            "SUM"
+                          ]
+                        },
+                        "time": {
+                          "description": "A time aggregation for use in query.",
+                          "enum": [
+                            "avg",
+                            "count",
+                            "max",
+                            "min",
+                            "sum"
+                          ],
+                          "example": "sum",
+                          "type": "string",
+                          "x-enum-varnames": [
+                            "AVG",
+                            "COUNT",
+                            "MAX",
+                            "MIN",
+                            "SUM"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "time",
+                        "space"
+                      ],
+                      "type": "object"
+                    },
+                    "type": "array"
+                  },
                   "include_percentiles": {
                     "default": false,
                     "description": "Toggle to include/exclude percentiles for a distribution metric.\nDefaults to false. Can only be applied to metrics that have a `metric_type` of `distribution`.",
@@ -18427,6 +19039,12 @@
             "description": "Object for a single metric tag configuration.",
             "example": {
               "attributes": {
+                "aggregations": [
+                  {
+                    "space": "avg",
+                    "time": "avg"
+                  }
+                ],
                 "created_at": "2020-03-31T09:48:37.463835Z",
                 "metric_type": "gauge",
                 "modified_at": "2020-04-31T09:48:37.463835Z",
@@ -18442,6 +19060,70 @@
               "attributes": {
                 "description": "Object containing the definition of a metric tag configuration attributes.",
                 "properties": {
+                  "aggregations": {
+                    "description": "A list of queryable aggregation combinations for a count, rate, or gauge metric.\nBy default, count and rate metrics require the (time: sum, space: sum) aggregation and\nGauge metrics require the (time: avg, space: avg) aggregation.\nAdditional time & space combinations are also available:\n\n- time: avg, space: avg\n- time: avg, space: max\n- time: avg, space: min\n- time: avg, space: sum\n- time: count, space: sum\n- time: max, space: max\n- time: min, space: min\n- time: sum, space: avg\n- time: sum, space: sum\n\nCan only be applied to metrics that have a `metric_type` of `count`, `rate`, or `gauge`.",
+                    "example": [
+                      {
+                        "space": "sum",
+                        "time": "sum"
+                      },
+                      {
+                        "space": "sum",
+                        "time": "count"
+                      }
+                    ],
+                    "items": {
+                      "description": "A time and space aggregation combination for use in query.",
+                      "example": {
+                        "space": "sum",
+                        "time": "sum"
+                      },
+                      "properties": {
+                        "space": {
+                          "description": "A space aggregation for use in query.",
+                          "enum": [
+                            "avg",
+                            "max",
+                            "min",
+                            "sum"
+                          ],
+                          "example": "sum",
+                          "type": "string",
+                          "x-enum-varnames": [
+                            "AVG",
+                            "MAX",
+                            "MIN",
+                            "SUM"
+                          ]
+                        },
+                        "time": {
+                          "description": "A time aggregation for use in query.",
+                          "enum": [
+                            "avg",
+                            "count",
+                            "max",
+                            "min",
+                            "sum"
+                          ],
+                          "example": "sum",
+                          "type": "string",
+                          "x-enum-varnames": [
+                            "AVG",
+                            "COUNT",
+                            "MAX",
+                            "MIN",
+                            "SUM"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "time",
+                        "space"
+                      ],
+                      "type": "object"
+                    },
+                    "type": "array"
+                  },
                   "created_at": {
                     "description": "Timestamp when the tag configuration was created.",
                     "example": "2020-03-31T09:48:37.463835Z",
@@ -18531,6 +19213,70 @@
       "MetricTagConfigurationUpdateAttributes": {
         "description": "Object containing the definition of a metric tag configuration to be updated.",
         "properties": {
+          "aggregations": {
+            "description": "A list of queryable aggregation combinations for a count, rate, or gauge metric.\nBy default, count and rate metrics require the (time: sum, space: sum) aggregation and\nGauge metrics require the (time: avg, space: avg) aggregation.\nAdditional time & space combinations are also available:\n\n- time: avg, space: avg\n- time: avg, space: max\n- time: avg, space: min\n- time: avg, space: sum\n- time: count, space: sum\n- time: max, space: max\n- time: min, space: min\n- time: sum, space: avg\n- time: sum, space: sum\n\nCan only be applied to metrics that have a `metric_type` of `count`, `rate`, or `gauge`.",
+            "example": [
+              {
+                "space": "sum",
+                "time": "sum"
+              },
+              {
+                "space": "sum",
+                "time": "count"
+              }
+            ],
+            "items": {
+              "description": "A time and space aggregation combination for use in query.",
+              "example": {
+                "space": "sum",
+                "time": "sum"
+              },
+              "properties": {
+                "space": {
+                  "description": "A space aggregation for use in query.",
+                  "enum": [
+                    "avg",
+                    "max",
+                    "min",
+                    "sum"
+                  ],
+                  "example": "sum",
+                  "type": "string",
+                  "x-enum-varnames": [
+                    "AVG",
+                    "MAX",
+                    "MIN",
+                    "SUM"
+                  ]
+                },
+                "time": {
+                  "description": "A time aggregation for use in query.",
+                  "enum": [
+                    "avg",
+                    "count",
+                    "max",
+                    "min",
+                    "sum"
+                  ],
+                  "example": "sum",
+                  "type": "string",
+                  "x-enum-varnames": [
+                    "AVG",
+                    "COUNT",
+                    "MAX",
+                    "MIN",
+                    "SUM"
+                  ]
+                }
+              },
+              "required": [
+                "time",
+                "space"
+              ],
+              "type": "object"
+            },
+            "type": "array"
+          },
           "include_percentiles": {
             "default": false,
             "description": "Toggle to include/exclude percentiles for a distribution metric.\nDefaults to false. Can only be applied to metrics that have a `metric_type` of `distribution`.",
@@ -18570,6 +19316,70 @@
           "attributes": {
             "description": "Object containing the definition of a metric tag configuration to be updated.",
             "properties": {
+              "aggregations": {
+                "description": "A list of queryable aggregation combinations for a count, rate, or gauge metric.\nBy default, count and rate metrics require the (time: sum, space: sum) aggregation and\nGauge metrics require the (time: avg, space: avg) aggregation.\nAdditional time & space combinations are also available:\n\n- time: avg, space: avg\n- time: avg, space: max\n- time: avg, space: min\n- time: avg, space: sum\n- time: count, space: sum\n- time: max, space: max\n- time: min, space: min\n- time: sum, space: avg\n- time: sum, space: sum\n\nCan only be applied to metrics that have a `metric_type` of `count`, `rate`, or `gauge`.",
+                "example": [
+                  {
+                    "space": "sum",
+                    "time": "sum"
+                  },
+                  {
+                    "space": "sum",
+                    "time": "count"
+                  }
+                ],
+                "items": {
+                  "description": "A time and space aggregation combination for use in query.",
+                  "example": {
+                    "space": "sum",
+                    "time": "sum"
+                  },
+                  "properties": {
+                    "space": {
+                      "description": "A space aggregation for use in query.",
+                      "enum": [
+                        "avg",
+                        "max",
+                        "min",
+                        "sum"
+                      ],
+                      "example": "sum",
+                      "type": "string",
+                      "x-enum-varnames": [
+                        "AVG",
+                        "MAX",
+                        "MIN",
+                        "SUM"
+                      ]
+                    },
+                    "time": {
+                      "description": "A time aggregation for use in query.",
+                      "enum": [
+                        "avg",
+                        "count",
+                        "max",
+                        "min",
+                        "sum"
+                      ],
+                      "example": "sum",
+                      "type": "string",
+                      "x-enum-varnames": [
+                        "AVG",
+                        "COUNT",
+                        "MAX",
+                        "MIN",
+                        "SUM"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "time",
+                    "space"
+                  ],
+                  "type": "object"
+                },
+                "type": "array"
+              },
               "include_percentiles": {
                 "default": false,
                 "description": "Toggle to include/exclude percentiles for a distribution metric.\nDefaults to false. Can only be applied to metrics that have a `metric_type` of `distribution`.",
@@ -18636,6 +19446,70 @@
               "attributes": {
                 "description": "Object containing the definition of a metric tag configuration to be updated.",
                 "properties": {
+                  "aggregations": {
+                    "description": "A list of queryable aggregation combinations for a count, rate, or gauge metric.\nBy default, count and rate metrics require the (time: sum, space: sum) aggregation and\nGauge metrics require the (time: avg, space: avg) aggregation.\nAdditional time & space combinations are also available:\n\n- time: avg, space: avg\n- time: avg, space: max\n- time: avg, space: min\n- time: avg, space: sum\n- time: count, space: sum\n- time: max, space: max\n- time: min, space: min\n- time: sum, space: avg\n- time: sum, space: sum\n\nCan only be applied to metrics that have a `metric_type` of `count`, `rate`, or `gauge`.",
+                    "example": [
+                      {
+                        "space": "sum",
+                        "time": "sum"
+                      },
+                      {
+                        "space": "sum",
+                        "time": "count"
+                      }
+                    ],
+                    "items": {
+                      "description": "A time and space aggregation combination for use in query.",
+                      "example": {
+                        "space": "sum",
+                        "time": "sum"
+                      },
+                      "properties": {
+                        "space": {
+                          "description": "A space aggregation for use in query.",
+                          "enum": [
+                            "avg",
+                            "max",
+                            "min",
+                            "sum"
+                          ],
+                          "example": "sum",
+                          "type": "string",
+                          "x-enum-varnames": [
+                            "AVG",
+                            "MAX",
+                            "MIN",
+                            "SUM"
+                          ]
+                        },
+                        "time": {
+                          "description": "A time aggregation for use in query.",
+                          "enum": [
+                            "avg",
+                            "count",
+                            "max",
+                            "min",
+                            "sum"
+                          ],
+                          "example": "sum",
+                          "type": "string",
+                          "x-enum-varnames": [
+                            "AVG",
+                            "COUNT",
+                            "MAX",
+                            "MIN",
+                            "SUM"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "time",
+                        "space"
+                      ],
+                      "type": "object"
+                    },
+                    "type": "array"
+                  },
                   "include_percentiles": {
                     "default": false,
                     "description": "Toggle to include/exclude percentiles for a distribution metric.\nDefaults to false. Can only be applied to metrics that have a `metric_type` of `distribution`.",
@@ -18905,6 +19779,12 @@
             "description": "Object for a single metric tag configuration.",
             "example": {
               "attributes": {
+                "aggregations": [
+                  {
+                    "space": "avg",
+                    "time": "avg"
+                  }
+                ],
                 "created_at": "2020-03-31T09:48:37.463835Z",
                 "metric_type": "gauge",
                 "modified_at": "2020-04-31T09:48:37.463835Z",
@@ -18920,6 +19800,70 @@
               "attributes": {
                 "description": "Object containing the definition of a metric tag configuration attributes.",
                 "properties": {
+                  "aggregations": {
+                    "description": "A list of queryable aggregation combinations for a count, rate, or gauge metric.\nBy default, count and rate metrics require the (time: sum, space: sum) aggregation and\nGauge metrics require the (time: avg, space: avg) aggregation.\nAdditional time & space combinations are also available:\n\n- time: avg, space: avg\n- time: avg, space: max\n- time: avg, space: min\n- time: avg, space: sum\n- time: count, space: sum\n- time: max, space: max\n- time: min, space: min\n- time: sum, space: avg\n- time: sum, space: sum\n\nCan only be applied to metrics that have a `metric_type` of `count`, `rate`, or `gauge`.",
+                    "example": [
+                      {
+                        "space": "sum",
+                        "time": "sum"
+                      },
+                      {
+                        "space": "sum",
+                        "time": "count"
+                      }
+                    ],
+                    "items": {
+                      "description": "A time and space aggregation combination for use in query.",
+                      "example": {
+                        "space": "sum",
+                        "time": "sum"
+                      },
+                      "properties": {
+                        "space": {
+                          "description": "A space aggregation for use in query.",
+                          "enum": [
+                            "avg",
+                            "max",
+                            "min",
+                            "sum"
+                          ],
+                          "example": "sum",
+                          "type": "string",
+                          "x-enum-varnames": [
+                            "AVG",
+                            "MAX",
+                            "MIN",
+                            "SUM"
+                          ]
+                        },
+                        "time": {
+                          "description": "A time aggregation for use in query.",
+                          "enum": [
+                            "avg",
+                            "count",
+                            "max",
+                            "min",
+                            "sum"
+                          ],
+                          "example": "sum",
+                          "type": "string",
+                          "x-enum-varnames": [
+                            "AVG",
+                            "COUNT",
+                            "MAX",
+                            "MIN",
+                            "SUM"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "time",
+                        "space"
+                      ],
+                      "type": "object"
+                    },
+                    "type": "array"
+                  },
                   "created_at": {
                     "description": "Timestamp when the tag configuration was created.",
                     "example": "2020-03-31T09:48:37.463835Z",
@@ -19032,6 +19976,12 @@
                   "description": "Object for a single metric tag configuration.",
                   "example": {
                     "attributes": {
+                      "aggregations": [
+                        {
+                          "space": "avg",
+                          "time": "avg"
+                        }
+                      ],
                       "created_at": "2020-03-31T09:48:37.463835Z",
                       "metric_type": "gauge",
                       "modified_at": "2020-04-31T09:48:37.463835Z",
@@ -19047,6 +19997,70 @@
                     "attributes": {
                       "description": "Object containing the definition of a metric tag configuration attributes.",
                       "properties": {
+                        "aggregations": {
+                          "description": "A list of queryable aggregation combinations for a count, rate, or gauge metric.\nBy default, count and rate metrics require the (time: sum, space: sum) aggregation and\nGauge metrics require the (time: avg, space: avg) aggregation.\nAdditional time & space combinations are also available:\n\n- time: avg, space: avg\n- time: avg, space: max\n- time: avg, space: min\n- time: avg, space: sum\n- time: count, space: sum\n- time: max, space: max\n- time: min, space: min\n- time: sum, space: avg\n- time: sum, space: sum\n\nCan only be applied to metrics that have a `metric_type` of `count`, `rate`, or `gauge`.",
+                          "example": [
+                            {
+                              "space": "sum",
+                              "time": "sum"
+                            },
+                            {
+                              "space": "sum",
+                              "time": "count"
+                            }
+                          ],
+                          "items": {
+                            "description": "A time and space aggregation combination for use in query.",
+                            "example": {
+                              "space": "sum",
+                              "time": "sum"
+                            },
+                            "properties": {
+                              "space": {
+                                "description": "A space aggregation for use in query.",
+                                "enum": [
+                                  "avg",
+                                  "max",
+                                  "min",
+                                  "sum"
+                                ],
+                                "example": "sum",
+                                "type": "string",
+                                "x-enum-varnames": [
+                                  "AVG",
+                                  "MAX",
+                                  "MIN",
+                                  "SUM"
+                                ]
+                              },
+                              "time": {
+                                "description": "A time aggregation for use in query.",
+                                "enum": [
+                                  "avg",
+                                  "count",
+                                  "max",
+                                  "min",
+                                  "sum"
+                                ],
+                                "example": "sum",
+                                "type": "string",
+                                "x-enum-varnames": [
+                                  "AVG",
+                                  "COUNT",
+                                  "MAX",
+                                  "MIN",
+                                  "SUM"
+                                ]
+                              }
+                            },
+                            "required": [
+                              "time",
+                              "space"
+                            ],
+                            "type": "object"
+                          },
+                          "type": "array"
+                        },
                         "created_at": {
                           "description": "Timestamp when the tag configuration was created.",
                           "example": "2020-03-31T09:48:37.463835Z",
@@ -29323,6 +30337,31 @@
               }
             },
             "description": "Forbidden"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
           }
         },
         "summary": "Get all API keys",
@@ -29830,6 +30869,31 @@
               }
             },
             "description": "Forbidden"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
           }
         },
         "summary": "Create an API key",
@@ -29928,6 +30992,31 @@
               }
             },
             "description": "Not Found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
           }
         },
         "summary": "Delete an API key",
@@ -30404,6 +31493,31 @@
               }
             },
             "description": "Not Found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
           }
         },
         "summary": "Get API key",
@@ -30953,6 +32067,31 @@
               }
             },
             "description": "Not Found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
           }
         },
         "summary": "Edit an API key",
@@ -31566,6 +32705,31 @@
               }
             },
             "description": "Not Found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
           }
         },
         "summary": "Get all application keys",
@@ -31645,6 +32809,31 @@
               }
             },
             "description": "Not Found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
           }
         },
         "summary": "Delete an application key",
@@ -32196,6 +33385,31 @@
               }
             },
             "description": "Not Found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
           }
         },
         "summary": "Get an application key",
@@ -32794,6 +34008,31 @@
               }
             },
             "description": "Not Found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
           }
         },
         "summary": "Edit an application key",
@@ -33407,6 +34646,31 @@
               }
             },
             "description": "Not Found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
           }
         },
         "summary": "Get all application keys owned by current user",
@@ -33963,6 +35227,31 @@
               }
             },
             "description": "Forbidden"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
           }
         },
         "summary": "Create an application key for current user",
@@ -34061,6 +35350,31 @@
               }
             },
             "description": "Not Found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
           }
         },
         "summary": "Delete an application key owned by current user",
@@ -34576,6 +35890,31 @@
               }
             },
             "description": "Not Found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
           }
         },
         "summary": "Get one application key owned by current user",
@@ -35174,6 +36513,31 @@
               }
             },
             "description": "Not Found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
           }
         },
         "summary": "Edit an application key owned by current user",
@@ -35381,6 +36745,31 @@
               }
             },
             "description": "Not Found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
           }
         },
         "summary": "Delete items from a dashboard list",
@@ -35586,6 +36975,31 @@
               }
             },
             "description": "Not Found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
           }
         },
         "security": [
@@ -35802,6 +37216,31 @@
               }
             },
             "description": "Not Found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
           }
         },
         "summary": "Add Items to a Dashboard List",
@@ -36008,6 +37447,31 @@
               }
             },
             "description": "Not Found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
           }
         },
         "summary": "Update items of a dashboard list",
@@ -37051,6 +38515,31 @@
               }
             },
             "description": "Not Found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
           }
         },
         "security": [
@@ -38152,6 +39641,31 @@
               }
             },
             "description": "Not Found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
           }
         },
         "security": [
@@ -38312,6 +39826,31 @@
               }
             },
             "description": "Not Found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
           }
         },
         "security": [
@@ -39187,6 +40726,31 @@
               }
             },
             "description": "Not Found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
           }
         },
         "security": [
@@ -40460,6 +42024,31 @@
               }
             },
             "description": "Not Found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
           }
         },
         "security": [
@@ -40482,6 +42071,524 @@
           "type": "idempotent"
         },
         "x-unstable": "**Note**: This endpoint is in public beta.\nIf you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/)."
+      }
+    },
+    "/api/v2/logs": {
+      "post": {
+        "description": "Send your logs to your Datadog platform over HTTP. Limits per HTTP request are:\n\n- Maximum content size per payload (uncompressed): 5MB\n- Maximum size for a single log: 1MB\n- Maximum array size if sending multiple logs in an array: 1000 entries\n\nAny log exceeding 1MB is accepted and truncated by Datadog:\n- For a single log request, the API truncates the log at 1MB and returns a 2xx.\n- For a multi-logs request, the API processes all logs, truncates only logs larger than 1MB, and returns a 2xx.\n\nDatadog recommends sending your logs compressed.\nAdd the `Content-Encoding: gzip` header to the request when sending compressed logs.\n\nThe status codes answered by the HTTP API are:\n- 202: Accepted: the request has been accepted for processing\n- 400: Bad request (likely an issue in the payload formatting)\n- 401: Unauthorized (likely a missing API Key)\n- 403: Permission issue (likely using an invalid API Key)\n- 408: Request Timeout, request should be retried after some time\n- 413: Payload too large (batch is above 5MB uncompressed)\n- 429: Too Many Requests, request should be retried after some time\n- 500: Internal Server Error, the server encountered an unexpected condition that prevented it from fulfilling the request, request should be retried after some time\n- 503: Service Unavailable, the server is not ready to handle the request probably because it is overloaded, request should be retried after some time",
+        "operationId": "SubmitLog",
+        "parameters": [
+          {
+            "description": "HTTP header used to compress the media-type.",
+            "in": "header",
+            "name": "Content-Encoding",
+            "required": false,
+            "schema": {
+              "description": "HTTP header used to compress the media-type.",
+              "enum": [
+                "gzip",
+                "deflate"
+              ],
+              "type": "string",
+              "x-enum-varnames": [
+                "GZIP",
+                "DEFLATE"
+              ]
+            }
+          },
+          {
+            "description": "Log tags can be passed as query parameters with `text/plain` content type.",
+            "example": "env:prod,user:my-user",
+            "in": "query",
+            "name": "ddtags",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "examples": {
+                "multi-json-messages": {
+                  "description": "Pass multiple log objects at once.",
+                  "summary": "Multi JSON Messages",
+                  "value": [
+                    {
+                      "message": "hello"
+                    },
+                    {
+                      "message": "world"
+                    }
+                  ]
+                },
+                "simple-json-message": {
+                  "description": "Log attributes can be passed as `key:value` pairs in valid JSON messages.",
+                  "summary": "Simple JSON Message",
+                  "value": {
+                    "ddsource": "agent",
+                    "ddtags": "env:prod,user:joe.doe",
+                    "hostname": "fa1e1e739d95",
+                    "message": "hello world"
+                  }
+                }
+              },
+              "schema": {
+                "description": "Structured log message.",
+                "items": {
+                  "description": "Logs that are sent over HTTP.",
+                  "properties": {
+                    "ddsource": {
+                      "description": "The integration name associated with your log: the technology from which the log originated.\nWhen it matches an integration name, Datadog automatically installs the corresponding parsers and facets.\nSee [reserved attributes](https://docs.datadoghq.com/logs/log_collection/#reserved-attributes).",
+                      "example": "nginx",
+                      "type": "string"
+                    },
+                    "ddtags": {
+                      "description": "Tags associated with your logs.",
+                      "example": "env:staging,version:5.1",
+                      "type": "string"
+                    },
+                    "hostname": {
+                      "description": "The name of the originating host of the log.",
+                      "example": "i-012345678",
+                      "type": "string"
+                    },
+                    "message": {
+                      "description": "The message [reserved attribute](https://docs.datadoghq.com/logs/log_collection/#reserved-attributes)\nof your log. By default, Datadog ingests the value of the message attribute as the body of the log entry.\nThat value is then highlighted and displayed in the Logstream, where it is indexed for full text search.",
+                      "example": "2019-11-19T14:37:58,995 INFO [process.name][20081] Hello World",
+                      "type": "string"
+                    },
+                    "service": {
+                      "description": "The name of the application or service generating the log events.\nIt is used to switch from Logs to APM, so make sure you define the same value when you use both products.\nSee [reserved attributes](https://docs.datadoghq.com/logs/log_collection/#reserved-attributes).",
+                      "example": "payment",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "name"
+                  ],
+                  "type": "object"
+                },
+                "type": "array"
+              }
+            },
+            "application/logplex-1": {
+              "examples": {
+                "multi-raw-message": {
+                  "description": "Submit log messages.",
+                  "summary": "Multi Logplex Messages",
+                  "value": "hello\nworld"
+                },
+                "simple-logplex-message": {
+                  "description": "Submit log string.",
+                  "summary": "Simple Logplex Message",
+                  "value": "hello world"
+                }
+              },
+              "schema": {
+                "type": "string"
+              }
+            },
+            "text/plain": {
+              "examples": {
+                "multi-raw-message": {
+                  "description": "Submit log string.",
+                  "summary": "Multi Raw Messages",
+                  "value": "hello\nworld\n"
+                },
+                "simple-raw-message": {
+                  "description": "Submit log string. Log attributes can be passed as query parameters in the URL. This enables the addition of tags or the source by using the `ddtags` and `ddsource` parameters: `?host=my-hostname&service=my-service&ddsource=my-source&ddtags=env:prod,user:my-user`.",
+                  "summary": "Simple Raw Message",
+                  "value": "hello world"
+                }
+              },
+              "schema": {
+                "type": "string"
+              }
+            }
+          },
+          "description": "Log to send (JSON format).",
+          "required": true
+        },
+        "responses": {
+          "202": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Request accepted for processing (always 202 empty JSON)."
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Invalid query performed.",
+                  "properties": {
+                    "errors": {
+                      "description": "Structured errors.",
+                      "items": {
+                        "description": "List of errors.",
+                        "properties": {
+                          "detail": {
+                            "description": "Error message.",
+                            "example": "Malformed payload",
+                            "type": "string"
+                          },
+                          "status": {
+                            "description": "Error code.",
+                            "example": 400,
+                            "type": "string"
+                          },
+                          "title": {
+                            "description": "Error title.",
+                            "example": "Bad Request",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Invalid query performed.",
+                  "properties": {
+                    "errors": {
+                      "description": "Structured errors.",
+                      "items": {
+                        "description": "List of errors.",
+                        "properties": {
+                          "detail": {
+                            "description": "Error message.",
+                            "example": "Malformed payload",
+                            "type": "string"
+                          },
+                          "status": {
+                            "description": "Error code.",
+                            "example": 400,
+                            "type": "string"
+                          },
+                          "title": {
+                            "description": "Error title.",
+                            "example": "Bad Request",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Invalid query performed.",
+                  "properties": {
+                    "errors": {
+                      "description": "Structured errors.",
+                      "items": {
+                        "description": "List of errors.",
+                        "properties": {
+                          "detail": {
+                            "description": "Error message.",
+                            "example": "Malformed payload",
+                            "type": "string"
+                          },
+                          "status": {
+                            "description": "Error code.",
+                            "example": 400,
+                            "type": "string"
+                          },
+                          "title": {
+                            "description": "Error title.",
+                            "example": "Bad Request",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "408": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Invalid query performed.",
+                  "properties": {
+                    "errors": {
+                      "description": "Structured errors.",
+                      "items": {
+                        "description": "List of errors.",
+                        "properties": {
+                          "detail": {
+                            "description": "Error message.",
+                            "example": "Malformed payload",
+                            "type": "string"
+                          },
+                          "status": {
+                            "description": "Error code.",
+                            "example": 400,
+                            "type": "string"
+                          },
+                          "title": {
+                            "description": "Error title.",
+                            "example": "Bad Request",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Request Timeout"
+          },
+          "413": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Invalid query performed.",
+                  "properties": {
+                    "errors": {
+                      "description": "Structured errors.",
+                      "items": {
+                        "description": "List of errors.",
+                        "properties": {
+                          "detail": {
+                            "description": "Error message.",
+                            "example": "Malformed payload",
+                            "type": "string"
+                          },
+                          "status": {
+                            "description": "Error code.",
+                            "example": 400,
+                            "type": "string"
+                          },
+                          "title": {
+                            "description": "Error title.",
+                            "example": "Bad Request",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Payload Too Large"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Invalid query performed.",
+                  "properties": {
+                    "errors": {
+                      "description": "Structured errors.",
+                      "items": {
+                        "description": "List of errors.",
+                        "properties": {
+                          "detail": {
+                            "description": "Error message.",
+                            "example": "Malformed payload",
+                            "type": "string"
+                          },
+                          "status": {
+                            "description": "Error code.",
+                            "example": 400,
+                            "type": "string"
+                          },
+                          "title": {
+                            "description": "Error title.",
+                            "example": "Bad Request",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Invalid query performed.",
+                  "properties": {
+                    "errors": {
+                      "description": "Structured errors.",
+                      "items": {
+                        "description": "List of errors.",
+                        "properties": {
+                          "detail": {
+                            "description": "Error message.",
+                            "example": "Malformed payload",
+                            "type": "string"
+                          },
+                          "status": {
+                            "description": "Error code.",
+                            "example": 400,
+                            "type": "string"
+                          },
+                          "title": {
+                            "description": "Error title.",
+                            "example": "Bad Request",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Invalid query performed.",
+                  "properties": {
+                    "errors": {
+                      "description": "Structured errors.",
+                      "items": {
+                        "description": "List of errors.",
+                        "properties": {
+                          "detail": {
+                            "description": "Error message.",
+                            "example": "Malformed payload",
+                            "type": "string"
+                          },
+                          "status": {
+                            "description": "Error code.",
+                            "example": 400,
+                            "type": "string"
+                          },
+                          "title": {
+                            "description": "Error title.",
+                            "example": "Bad Request",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ],
+        "servers": [
+          {
+            "url": "https://{subdomain}.{site}",
+            "variables": {
+              "site": {
+                "default": "datadoghq.com",
+                "description": "The regional site for customers.",
+                "enum": [
+                  "datadoghq.com",
+                  "us3.datadoghq.com",
+                  "us5.datadoghq.com",
+                  "datadoghq.eu",
+                  "ddog-gov.com"
+                ]
+              },
+              "subdomain": {
+                "default": "http-intake.logs",
+                "description": "The subdomain where the API is deployed."
+              }
+            }
+          },
+          {
+            "url": "{protocol}://{name}",
+            "variables": {
+              "name": {
+                "default": "http-intake.logs.datadoghq.com",
+                "description": "Full site DNS name."
+              },
+              "protocol": {
+                "default": "https",
+                "description": "The protocol for accessing the API."
+              }
+            }
+          },
+          {
+            "url": "https://{subdomain}.{site}",
+            "variables": {
+              "site": {
+                "default": "datadoghq.com",
+                "description": "Any Datadog deployment."
+              },
+              "subdomain": {
+                "default": "http-intake.logs",
+                "description": "The subdomain where the API is deployed."
+              }
+            }
+          }
+        ],
+        "summary": "Send logs",
+        "tags": [
+          "Logs"
+        ],
+        "x-codegen-request-body-name": "body",
+        "x-menu-order": 1,
+        "x-undo": {
+          "type": "safe"
+        }
       }
     },
     "/api/v2/logs/analytics/aggregate": {
@@ -40990,6 +43097,31 @@
               }
             },
             "description": "Not Authorized"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
           }
         },
         "summary": "Aggregate events",
@@ -41089,6 +43221,31 @@
               }
             },
             "description": "Forbidden"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
           }
         },
         "summary": "Get archive order",
@@ -41293,6 +43450,31 @@
               }
             },
             "description": "Unprocessable Entity"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
           }
         },
         "summary": "Update archive order",
@@ -41607,6 +43789,31 @@
               }
             },
             "description": "Forbidden"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
           }
         },
         "summary": "Get all archives",
@@ -42183,6 +44390,31 @@
               }
             },
             "description": "Forbidden"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
           }
         },
         "summary": "Create an archive",
@@ -42296,6 +44528,31 @@
               }
             },
             "description": "Not found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
           }
         },
         "summary": "Delete an archive",
@@ -42664,6 +44921,31 @@
               }
             },
             "description": "Not found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
           }
         },
         "summary": "Get an archive",
@@ -43276,6 +45558,31 @@
               }
             },
             "description": "Not found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
           }
         },
         "summary": "Update an archive",
@@ -43418,6 +45725,31 @@
               }
             },
             "description": "Not found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
           }
         },
         "summary": "Revoke role from an archive",
@@ -43649,6 +45981,31 @@
               }
             },
             "description": "Not found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
           }
         },
         "summary": "List read roles for an archive",
@@ -43789,6 +46146,31 @@
               }
             },
             "description": "Not found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
           }
         },
         "summary": "Grant role to an archive",
@@ -45035,6 +47417,31 @@
               }
             },
             "description": "Authentication error"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
           }
         },
         "summary": "List restriction queries",
@@ -45198,6 +47605,31 @@
               }
             },
             "description": "Authentication error"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
           }
         },
         "summary": "Create a restriction query",
@@ -45344,6 +47776,31 @@
               }
             },
             "description": "Authentication error"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
           }
         },
         "summary": "Get restriction query for a given role",
@@ -45482,6 +47939,31 @@
               }
             },
             "description": "Authentication error"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
           }
         },
         "summary": "Get all restriction queries for a given user",
@@ -45588,6 +48070,31 @@
               }
             },
             "description": "Not found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
           }
         },
         "summary": "Delete a restriction query",
@@ -45835,6 +48342,31 @@
               }
             },
             "description": "Not found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
           }
         },
         "summary": "Get a restriction query",
@@ -46035,6 +48567,31 @@
               }
             },
             "description": "Not found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
           }
         },
         "summary": "Update a restriction query",
@@ -46178,6 +48735,31 @@
               }
             },
             "description": "Not found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
           }
         },
         "summary": "Revoke role from a restriction query",
@@ -46350,6 +48932,31 @@
               }
             },
             "description": "Not found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
           }
         },
         "summary": "List roles for a restriction query",
@@ -46491,6 +49098,31 @@
               }
             },
             "description": "Not found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
           }
         },
         "summary": "Grant role to a restriction query",
@@ -46813,6 +49445,31 @@
               }
             },
             "description": "Not Authorized"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
           }
         },
         "summary": "Get a list of logs",
@@ -47148,6 +49805,31 @@
               }
             },
             "description": "Not Authorized"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
           }
         },
         "summary": "Search logs",
@@ -47286,6 +49968,12 @@
                             "description": "Object for a single metric tag configuration.",
                             "example": {
                               "attributes": {
+                                "aggregations": [
+                                  {
+                                    "space": "avg",
+                                    "time": "avg"
+                                  }
+                                ],
                                 "created_at": "2020-03-31T09:48:37.463835Z",
                                 "metric_type": "gauge",
                                 "modified_at": "2020-04-31T09:48:37.463835Z",
@@ -47301,6 +49989,70 @@
                               "attributes": {
                                 "description": "Object containing the definition of a metric tag configuration attributes.",
                                 "properties": {
+                                  "aggregations": {
+                                    "description": "A list of queryable aggregation combinations for a count, rate, or gauge metric.\nBy default, count and rate metrics require the (time: sum, space: sum) aggregation and\nGauge metrics require the (time: avg, space: avg) aggregation.\nAdditional time & space combinations are also available:\n\n- time: avg, space: avg\n- time: avg, space: max\n- time: avg, space: min\n- time: avg, space: sum\n- time: count, space: sum\n- time: max, space: max\n- time: min, space: min\n- time: sum, space: avg\n- time: sum, space: sum\n\nCan only be applied to metrics that have a `metric_type` of `count`, `rate`, or `gauge`.",
+                                    "example": [
+                                      {
+                                        "space": "sum",
+                                        "time": "sum"
+                                      },
+                                      {
+                                        "space": "sum",
+                                        "time": "count"
+                                      }
+                                    ],
+                                    "items": {
+                                      "description": "A time and space aggregation combination for use in query.",
+                                      "example": {
+                                        "space": "sum",
+                                        "time": "sum"
+                                      },
+                                      "properties": {
+                                        "space": {
+                                          "description": "A space aggregation for use in query.",
+                                          "enum": [
+                                            "avg",
+                                            "max",
+                                            "min",
+                                            "sum"
+                                          ],
+                                          "example": "sum",
+                                          "type": "string",
+                                          "x-enum-varnames": [
+                                            "AVG",
+                                            "MAX",
+                                            "MIN",
+                                            "SUM"
+                                          ]
+                                        },
+                                        "time": {
+                                          "description": "A time aggregation for use in query.",
+                                          "enum": [
+                                            "avg",
+                                            "count",
+                                            "max",
+                                            "min",
+                                            "sum"
+                                          ],
+                                          "example": "sum",
+                                          "type": "string",
+                                          "x-enum-varnames": [
+                                            "AVG",
+                                            "COUNT",
+                                            "MAX",
+                                            "MIN",
+                                            "SUM"
+                                          ]
+                                        }
+                                      },
+                                      "required": [
+                                        "time",
+                                        "space"
+                                      ],
+                                      "type": "object"
+                                    },
+                                    "type": "array"
+                                  },
                                   "created_at": {
                                     "description": "Timestamp when the tag configuration was created.",
                                     "example": "2020-03-31T09:48:37.463835Z",
@@ -47807,6 +50559,12 @@
                       "description": "Object for a single metric tag configuration.",
                       "example": {
                         "attributes": {
+                          "aggregations": [
+                            {
+                              "space": "avg",
+                              "time": "avg"
+                            }
+                          ],
                           "created_at": "2020-03-31T09:48:37.463835Z",
                           "metric_type": "gauge",
                           "modified_at": "2020-04-31T09:48:37.463835Z",
@@ -47822,6 +50580,70 @@
                         "attributes": {
                           "description": "Object containing the definition of a metric tag configuration attributes.",
                           "properties": {
+                            "aggregations": {
+                              "description": "A list of queryable aggregation combinations for a count, rate, or gauge metric.\nBy default, count and rate metrics require the (time: sum, space: sum) aggregation and\nGauge metrics require the (time: avg, space: avg) aggregation.\nAdditional time & space combinations are also available:\n\n- time: avg, space: avg\n- time: avg, space: max\n- time: avg, space: min\n- time: avg, space: sum\n- time: count, space: sum\n- time: max, space: max\n- time: min, space: min\n- time: sum, space: avg\n- time: sum, space: sum\n\nCan only be applied to metrics that have a `metric_type` of `count`, `rate`, or `gauge`.",
+                              "example": [
+                                {
+                                  "space": "sum",
+                                  "time": "sum"
+                                },
+                                {
+                                  "space": "sum",
+                                  "time": "count"
+                                }
+                              ],
+                              "items": {
+                                "description": "A time and space aggregation combination for use in query.",
+                                "example": {
+                                  "space": "sum",
+                                  "time": "sum"
+                                },
+                                "properties": {
+                                  "space": {
+                                    "description": "A space aggregation for use in query.",
+                                    "enum": [
+                                      "avg",
+                                      "max",
+                                      "min",
+                                      "sum"
+                                    ],
+                                    "example": "sum",
+                                    "type": "string",
+                                    "x-enum-varnames": [
+                                      "AVG",
+                                      "MAX",
+                                      "MIN",
+                                      "SUM"
+                                    ]
+                                  },
+                                  "time": {
+                                    "description": "A time aggregation for use in query.",
+                                    "enum": [
+                                      "avg",
+                                      "count",
+                                      "max",
+                                      "min",
+                                      "sum"
+                                    ],
+                                    "example": "sum",
+                                    "type": "string",
+                                    "x-enum-varnames": [
+                                      "AVG",
+                                      "COUNT",
+                                      "MAX",
+                                      "MIN",
+                                      "SUM"
+                                    ]
+                                  }
+                                },
+                                "required": [
+                                  "time",
+                                  "space"
+                                ],
+                                "type": "object"
+                              },
+                              "type": "array"
+                            },
                             "created_at": {
                               "description": "Timestamp when the tag configuration was created.",
                               "example": "2020-03-31T09:48:37.463835Z",
@@ -47987,7 +50809,7 @@
         "x-unstable": "**Note: Use of this endpoint for count/gauge/rate metric types is only accessible for Metrics without Limits&trade; beta customers.\nIf you’re interested in Metrics without Limits&trade;, please contact your Customer Success Manager.**"
       },
       "patch": {
-        "description": "Update the tag configuration of a metric or percentile aggregations of a distribution metric. Can only be used with\napplication keys from users with the `Manage Tags for Metrics` permission.",
+        "description": "Update the tag configuration of a metric or percentile aggregations of a distribution metric or custom aggregations\nof a count, rate, or gauge metric.\nCan only be used with application keys from users with the `Manage Tags for Metrics` permission.",
         "operationId": "UpdateTagConfiguration",
         "parameters": [
           {
@@ -48024,6 +50846,70 @@
                       "attributes": {
                         "description": "Object containing the definition of a metric tag configuration to be updated.",
                         "properties": {
+                          "aggregations": {
+                            "description": "A list of queryable aggregation combinations for a count, rate, or gauge metric.\nBy default, count and rate metrics require the (time: sum, space: sum) aggregation and\nGauge metrics require the (time: avg, space: avg) aggregation.\nAdditional time & space combinations are also available:\n\n- time: avg, space: avg\n- time: avg, space: max\n- time: avg, space: min\n- time: avg, space: sum\n- time: count, space: sum\n- time: max, space: max\n- time: min, space: min\n- time: sum, space: avg\n- time: sum, space: sum\n\nCan only be applied to metrics that have a `metric_type` of `count`, `rate`, or `gauge`.",
+                            "example": [
+                              {
+                                "space": "sum",
+                                "time": "sum"
+                              },
+                              {
+                                "space": "sum",
+                                "time": "count"
+                              }
+                            ],
+                            "items": {
+                              "description": "A time and space aggregation combination for use in query.",
+                              "example": {
+                                "space": "sum",
+                                "time": "sum"
+                              },
+                              "properties": {
+                                "space": {
+                                  "description": "A space aggregation for use in query.",
+                                  "enum": [
+                                    "avg",
+                                    "max",
+                                    "min",
+                                    "sum"
+                                  ],
+                                  "example": "sum",
+                                  "type": "string",
+                                  "x-enum-varnames": [
+                                    "AVG",
+                                    "MAX",
+                                    "MIN",
+                                    "SUM"
+                                  ]
+                                },
+                                "time": {
+                                  "description": "A time aggregation for use in query.",
+                                  "enum": [
+                                    "avg",
+                                    "count",
+                                    "max",
+                                    "min",
+                                    "sum"
+                                  ],
+                                  "example": "sum",
+                                  "type": "string",
+                                  "x-enum-varnames": [
+                                    "AVG",
+                                    "COUNT",
+                                    "MAX",
+                                    "MIN",
+                                    "SUM"
+                                  ]
+                                }
+                              },
+                              "required": [
+                                "time",
+                                "space"
+                              ],
+                              "type": "object"
+                            },
+                            "type": "array"
+                          },
                           "include_percentiles": {
                             "default": false,
                             "description": "Toggle to include/exclude percentiles for a distribution metric.\nDefaults to false. Can only be applied to metrics that have a `metric_type` of `distribution`.",
@@ -48091,6 +50977,12 @@
                       "description": "Object for a single metric tag configuration.",
                       "example": {
                         "attributes": {
+                          "aggregations": [
+                            {
+                              "space": "avg",
+                              "time": "avg"
+                            }
+                          ],
                           "created_at": "2020-03-31T09:48:37.463835Z",
                           "metric_type": "gauge",
                           "modified_at": "2020-04-31T09:48:37.463835Z",
@@ -48106,6 +50998,70 @@
                         "attributes": {
                           "description": "Object containing the definition of a metric tag configuration attributes.",
                           "properties": {
+                            "aggregations": {
+                              "description": "A list of queryable aggregation combinations for a count, rate, or gauge metric.\nBy default, count and rate metrics require the (time: sum, space: sum) aggregation and\nGauge metrics require the (time: avg, space: avg) aggregation.\nAdditional time & space combinations are also available:\n\n- time: avg, space: avg\n- time: avg, space: max\n- time: avg, space: min\n- time: avg, space: sum\n- time: count, space: sum\n- time: max, space: max\n- time: min, space: min\n- time: sum, space: avg\n- time: sum, space: sum\n\nCan only be applied to metrics that have a `metric_type` of `count`, `rate`, or `gauge`.",
+                              "example": [
+                                {
+                                  "space": "sum",
+                                  "time": "sum"
+                                },
+                                {
+                                  "space": "sum",
+                                  "time": "count"
+                                }
+                              ],
+                              "items": {
+                                "description": "A time and space aggregation combination for use in query.",
+                                "example": {
+                                  "space": "sum",
+                                  "time": "sum"
+                                },
+                                "properties": {
+                                  "space": {
+                                    "description": "A space aggregation for use in query.",
+                                    "enum": [
+                                      "avg",
+                                      "max",
+                                      "min",
+                                      "sum"
+                                    ],
+                                    "example": "sum",
+                                    "type": "string",
+                                    "x-enum-varnames": [
+                                      "AVG",
+                                      "MAX",
+                                      "MIN",
+                                      "SUM"
+                                    ]
+                                  },
+                                  "time": {
+                                    "description": "A time aggregation for use in query.",
+                                    "enum": [
+                                      "avg",
+                                      "count",
+                                      "max",
+                                      "min",
+                                      "sum"
+                                    ],
+                                    "example": "sum",
+                                    "type": "string",
+                                    "x-enum-varnames": [
+                                      "AVG",
+                                      "COUNT",
+                                      "MAX",
+                                      "MIN",
+                                      "SUM"
+                                    ]
+                                  }
+                                },
+                                "required": [
+                                  "time",
+                                  "space"
+                                ],
+                                "type": "object"
+                              },
+                              "type": "array"
+                            },
                             "created_at": {
                               "description": "Timestamp when the tag configuration was created.",
                               "example": "2020-03-31T09:48:37.463835Z",
@@ -48297,7 +51253,7 @@
         "x-unstable": "**Note: Use of this endpoint for count/gauge/rate metric types is only accessible for Metrics without Limits&trade; beta customers.\nIf you’re interested in Metrics without Limits&trade;, please contact your Customer Success Manager.**"
       },
       "post": {
-        "description": "Create and define a list of queryable tag keys for an existing count/gauge/rate/distribution metric. Optionally, include percentile aggregations on any distribution metric.\nCan only be used with application keys of users with the `Manage Tags for Metrics` permission.",
+        "description": "Create and define a list of queryable tag keys for an existing count/gauge/rate/distribution metric.\nOptionally, include percentile aggregations on any distribution metric or configure custom aggregations\non any count, rate, or gauge metric.\nCan only be used with application keys of users with the `Manage Tags for Metrics` permission.",
         "operationId": "CreateTagConfiguration",
         "parameters": [
           {
@@ -48335,6 +51291,70 @@
                       "attributes": {
                         "description": "Object containing the definition of a metric tag configuration to be created.",
                         "properties": {
+                          "aggregations": {
+                            "description": "A list of queryable aggregation combinations for a count, rate, or gauge metric.\nBy default, count and rate metrics require the (time: sum, space: sum) aggregation and\nGauge metrics require the (time: avg, space: avg) aggregation.\nAdditional time & space combinations are also available:\n\n- time: avg, space: avg\n- time: avg, space: max\n- time: avg, space: min\n- time: avg, space: sum\n- time: count, space: sum\n- time: max, space: max\n- time: min, space: min\n- time: sum, space: avg\n- time: sum, space: sum\n\nCan only be applied to metrics that have a `metric_type` of `count`, `rate`, or `gauge`.",
+                            "example": [
+                              {
+                                "space": "sum",
+                                "time": "sum"
+                              },
+                              {
+                                "space": "sum",
+                                "time": "count"
+                              }
+                            ],
+                            "items": {
+                              "description": "A time and space aggregation combination for use in query.",
+                              "example": {
+                                "space": "sum",
+                                "time": "sum"
+                              },
+                              "properties": {
+                                "space": {
+                                  "description": "A space aggregation for use in query.",
+                                  "enum": [
+                                    "avg",
+                                    "max",
+                                    "min",
+                                    "sum"
+                                  ],
+                                  "example": "sum",
+                                  "type": "string",
+                                  "x-enum-varnames": [
+                                    "AVG",
+                                    "MAX",
+                                    "MIN",
+                                    "SUM"
+                                  ]
+                                },
+                                "time": {
+                                  "description": "A time aggregation for use in query.",
+                                  "enum": [
+                                    "avg",
+                                    "count",
+                                    "max",
+                                    "min",
+                                    "sum"
+                                  ],
+                                  "example": "sum",
+                                  "type": "string",
+                                  "x-enum-varnames": [
+                                    "AVG",
+                                    "COUNT",
+                                    "MAX",
+                                    "MIN",
+                                    "SUM"
+                                  ]
+                                }
+                              },
+                              "required": [
+                                "time",
+                                "space"
+                              ],
+                              "type": "object"
+                            },
+                            "type": "array"
+                          },
                           "include_percentiles": {
                             "default": false,
                             "description": "Toggle to include/exclude percentiles for a distribution metric.\nDefaults to false. Can only be applied to metrics that have a `metric_type` of `distribution`.",
@@ -48424,6 +51444,12 @@
                       "description": "Object for a single metric tag configuration.",
                       "example": {
                         "attributes": {
+                          "aggregations": [
+                            {
+                              "space": "avg",
+                              "time": "avg"
+                            }
+                          ],
                           "created_at": "2020-03-31T09:48:37.463835Z",
                           "metric_type": "gauge",
                           "modified_at": "2020-04-31T09:48:37.463835Z",
@@ -48439,6 +51465,70 @@
                         "attributes": {
                           "description": "Object containing the definition of a metric tag configuration attributes.",
                           "properties": {
+                            "aggregations": {
+                              "description": "A list of queryable aggregation combinations for a count, rate, or gauge metric.\nBy default, count and rate metrics require the (time: sum, space: sum) aggregation and\nGauge metrics require the (time: avg, space: avg) aggregation.\nAdditional time & space combinations are also available:\n\n- time: avg, space: avg\n- time: avg, space: max\n- time: avg, space: min\n- time: avg, space: sum\n- time: count, space: sum\n- time: max, space: max\n- time: min, space: min\n- time: sum, space: avg\n- time: sum, space: sum\n\nCan only be applied to metrics that have a `metric_type` of `count`, `rate`, or `gauge`.",
+                              "example": [
+                                {
+                                  "space": "sum",
+                                  "time": "sum"
+                                },
+                                {
+                                  "space": "sum",
+                                  "time": "count"
+                                }
+                              ],
+                              "items": {
+                                "description": "A time and space aggregation combination for use in query.",
+                                "example": {
+                                  "space": "sum",
+                                  "time": "sum"
+                                },
+                                "properties": {
+                                  "space": {
+                                    "description": "A space aggregation for use in query.",
+                                    "enum": [
+                                      "avg",
+                                      "max",
+                                      "min",
+                                      "sum"
+                                    ],
+                                    "example": "sum",
+                                    "type": "string",
+                                    "x-enum-varnames": [
+                                      "AVG",
+                                      "MAX",
+                                      "MIN",
+                                      "SUM"
+                                    ]
+                                  },
+                                  "time": {
+                                    "description": "A time aggregation for use in query.",
+                                    "enum": [
+                                      "avg",
+                                      "count",
+                                      "max",
+                                      "min",
+                                      "sum"
+                                    ],
+                                    "example": "sum",
+                                    "type": "string",
+                                    "x-enum-varnames": [
+                                      "AVG",
+                                      "COUNT",
+                                      "MAX",
+                                      "MIN",
+                                      "SUM"
+                                    ]
+                                  }
+                                },
+                                "required": [
+                                  "time",
+                                  "space"
+                                ],
+                                "type": "object"
+                              },
+                              "type": "array"
+                            },
                             "created_at": {
                               "description": "Timestamp when the tag configuration was created.",
                               "example": "2020-03-31T09:48:37.463835Z",
@@ -49016,6 +52106,31 @@
               }
             },
             "description": "Authentication error"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
           }
         },
         "security": [
@@ -49267,6 +52382,31 @@
               }
             },
             "description": "Authentication Error"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
           }
         },
         "security": [
@@ -49509,6 +52649,31 @@
               }
             },
             "description": "Authentication error"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
           }
         },
         "security": [
@@ -49826,6 +52991,31 @@
               }
             },
             "description": "Authentication error"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
           }
         },
         "security": [
@@ -49936,6 +53126,31 @@
               }
             },
             "description": "Not found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
           }
         },
         "security": [
@@ -50127,6 +53342,31 @@
               }
             },
             "description": "Not found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
           }
         },
         "security": [
@@ -50426,6 +53666,31 @@
               }
             },
             "description": "Unprocessable Entity"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
           }
         },
         "security": [
@@ -50652,6 +53917,31 @@
               }
             },
             "description": "Not found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
           }
         },
         "security": [
@@ -50816,6 +54106,31 @@
               }
             },
             "description": "Not found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
           }
         },
         "security": [
@@ -51038,6 +54353,31 @@
               }
             },
             "description": "Not found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
           }
         },
         "security": [
@@ -51709,6 +55049,31 @@
               }
             },
             "description": "Not found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
           }
         },
         "security": [
@@ -52338,6 +55703,31 @@
               }
             },
             "description": "Not found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
           }
         },
         "security": [
@@ -52989,6 +56379,31 @@
               }
             },
             "description": "Not found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
           }
         },
         "security": [
@@ -53068,6 +56483,31 @@
               }
             },
             "description": "Not Authorized"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
           }
         },
         "security": [
@@ -54825,6 +58265,31 @@
               }
             },
             "description": "Bad Request"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
           }
         },
         "security": [
@@ -55640,6 +59105,31 @@
               }
             },
             "description": "Not Authorized"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
           }
         },
         "security": [
@@ -55750,6 +59240,31 @@
               }
             },
             "description": "Not Found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
           }
         },
         "security": [
@@ -56186,6 +59701,31 @@
               }
             },
             "description": "Not Found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
           }
         },
         "security": [
@@ -57033,6 +60573,31 @@
               }
             },
             "description": "Not Found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
           }
         },
         "security": [
@@ -57299,6 +60864,31 @@
               }
             },
             "description": "Not Authorized"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
           }
         },
         "security": [
@@ -57557,6 +61147,31 @@
               }
             },
             "description": "Not Authorized"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
           }
         },
         "security": [
@@ -58213,6 +61828,31 @@
               }
             },
             "description": "Authentication error"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
           }
         },
         "summary": "Create a service account",
@@ -58855,6 +62495,31 @@
               }
             },
             "description": "Not Found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
           }
         },
         "summary": "List application keys for this service account",
@@ -59423,6 +63088,31 @@
               }
             },
             "description": "Forbidden"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
           }
         },
         "summary": "Create an application key for this service account",
@@ -59539,6 +63229,31 @@
               }
             },
             "description": "Not Found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
           }
         },
         "summary": "Delete an application key for this service account",
@@ -60060,6 +63775,31 @@
               }
             },
             "description": "Not Found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
           }
         },
         "summary": "Get one application key for this service account",
@@ -60664,6 +64404,31 @@
               }
             },
             "description": "Not Found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
           }
         },
         "summary": "Edit an application key for this service account",
@@ -61263,6 +65028,31 @@
               }
             },
             "description": "Not Found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
           }
         },
         "security": [
@@ -61908,6 +65698,31 @@
               }
             },
             "description": "Not Found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
           }
         },
         "security": [
@@ -62068,6 +65883,31 @@
               }
             },
             "description": "Not Found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
           }
         },
         "security": [
@@ -62609,6 +66449,31 @@
               }
             },
             "description": "Not Found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
           }
         },
         "security": [
@@ -63270,6 +67135,31 @@
               }
             },
             "description": "Not Found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
           }
         },
         "security": [
@@ -63879,6 +67769,31 @@
               }
             },
             "description": "Not Found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
           }
         },
         "security": [
@@ -64520,6 +68435,31 @@
               }
             },
             "description": "Not Found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
           }
         },
         "security": [
@@ -64680,6 +68620,31 @@
               }
             },
             "description": "Not Found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
           }
         },
         "security": [
@@ -65217,6 +69182,31 @@
               }
             },
             "description": "Not Found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
           }
         },
         "security": [
@@ -65874,6 +69864,31 @@
               }
             },
             "description": "Not Found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
           }
         },
         "security": [
@@ -66103,6 +70118,31 @@
               }
             },
             "description": "Authentication error"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
           }
         },
         "security": [
@@ -66264,6 +70304,31 @@
               }
             },
             "description": "Not found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
           }
         },
         "security": [
@@ -66916,6 +70981,31 @@
               }
             },
             "description": "Authentication error"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
           }
         },
         "security": [
@@ -67561,6 +71651,31 @@
               }
             },
             "description": "Authentication error"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
           }
         },
         "security": [
@@ -67672,6 +71787,31 @@
               }
             },
             "description": "Not found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
           }
         },
         "security": [
@@ -68232,6 +72372,31 @@
               }
             },
             "description": "Not found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
           }
         },
         "security": [
@@ -68902,6 +73067,31 @@
               }
             },
             "description": "Unprocessable Entity"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
           }
         },
         "security": [
@@ -69464,6 +73654,31 @@
               }
             },
             "description": "Not found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
           }
         },
         "security": [
@@ -69629,6 +73844,31 @@
               }
             },
             "description": "Not found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
           }
         },
         "security": [

@@ -21,12 +21,15 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-geomaps/"
   tag: "Blog"
   text: "Use geomaps to visualize your app data by location"
+- link: "https://www.datadoghq.com/blog/datadog-rum-react-components/#tune-up-your-react-data-collection"
+  tag: "Blog"
+  text: "Get better RUM data with our custom React components"
 - link: "/real_user_monitoring/browser/data_collected/"
   tag: "Documentation"
   text: "RUM Browser Data Collected"
 ---
 
-{{< img src="real_user_monitoring/RUM-perf-dashboard.jpeg" alt="RUM Dashboard"  >}}
+{{< img src="real_user_monitoring/RUM-perf-dashboard.jpeg" alt="RUM Dashboard" >}}
 
 ## What is Real User Monitoring?
 
@@ -39,10 +42,9 @@ Datadog's *Real User Monitoring (RUM)* gives you end-to-end visibility into the 
 
 ## What is Session Replay?
 
-Datadog's _Session Replay_ allows you to capture and visually replay the web browsing experience of your users. Combined with RUM performance data, Session Replay is beneficial for error identification, reproduction, and resolution, and provides insights into your web application’s usage patterns and design pitfalls. For more information, see [Getting Started with Session Replay][1].
+Datadog's *Session Replay* allows you to capture and visually replay the web browsing experience of your users. 
 
-<div class="alert alert-info"><p>Session Replay is in open beta. There are no billing implications for your Session Replays during this period.</p><p>Session Replay is available on <a href="/getting_started/site/">US1 and EU Datadog sites</a>.</p>
-</div>
+Combined with RUM performance data, Session Replay is beneficial for error identification, reproduction, and resolution, and provides insights into your web application’s usage patterns and design pitfalls. 
 
 ## Get started
 
@@ -56,25 +58,25 @@ Select your application type to start collecting RUM data:
 
 ### Out-of-the-box dashboards
 
-Analyze information about your user journeys, performance, network requests, and errors collected automatically with [out-of-the-box dashboards][2].
+Analyze information about your user journeys, performance, network requests, and errors collected automatically with [out-of-the-box dashboards][1].
 
 {{< img src="real_user_monitoring/RUM-session-dashboard.jpeg" alt="RUM dashboard" >}}
 
 ### RUM explorer and analytics
 
-View user sessions in segments, such as checking when latency impacts your premium customers with [customizable analytics widgets][3]. Explore, save views, and create monitors on your customized searches.
+View user sessions in segments, such as checking when latency impacts your premium customers with [customizable analytics widgets][2]. Explore, save views, and create monitors on your customized searches.
 
 {{< img src="real_user_monitoring/explorer/analytics/rum_analytics.gif" alt="RUM Analytics" >}}
 
 ### Integration with logs, APM, and profiler
 
-View your [backend traces, logs, and infrastructure metrics][4] down to the exact line of code impacting your application performance, corresponding to user experiences and reported issues.
+View your [backend traces, logs, and infrastructure metrics][3] down to the exact line of code impacting your application performance, corresponding to user experiences and reported issues.
 
 {{< img src="real_user_monitoring/connect_rum_and_traces/rum_apm_logs.png" alt="RUM and APM" >}}
 
 ### Error tracking and crash reporting
 
-Get automated alerts on outliers and groups of errors, timeouts, and crashes to significantly reduce your MTTR with [Error Tracking][5].
+Get automated alerts on outliers and groups of errors, timeouts, and crashes to significantly reduce your MTTR with [Error Tracking][4].
 
 {{< img src="real_user_monitoring/error_tracking/errors_rum.gif" alt="RUM error tracking" >}}
 
@@ -82,8 +84,7 @@ Get automated alerts on outliers and groups of errors, timeouts, and crashes to 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/guide/session-replay-getting-started/
-[2]: /real_user_monitoring/dashboards/
-[3]: /real_user_monitoring/explorer/analytics/
-[4]: /real_user_monitoring/connect_rum_and_traces/
-[5]: /real_user_monitoring/error_tracking/
+[1]: /real_user_monitoring/dashboards/
+[2]: /real_user_monitoring/explorer/analytics/
+[3]: /real_user_monitoring/connect_rum_and_traces/
+[4]: /real_user_monitoring/error_tracking/

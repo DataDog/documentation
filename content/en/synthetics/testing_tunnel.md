@@ -35,7 +35,7 @@ The testing tunnel is a functionality that comes with the [@datadog/datadog-ci][
 
 {{< img src="synthetics/tunnel_diagram.png" alt="Synthetic testing tunnel diagram"  style="width:100%;">}}
 
-`datadog-ci` first gets a presigned URL from Datadog for authentication. It then opens a WebSocket Secure connection (wss) to Datadog's managed locations using the presigned URL. Using SSH connections through the websocket connection, tests are triggered by `datadog-ci` and executed through Datadog's managed locations.  
+`datadog-ci` first gets a presigned URL from Datadog for authentication. It then opens a WebSocket Secure connection (wss) to Datadog's managed locations using the presigned URL. Using SSH connections through the WebSocket connection, tests are triggered by `datadog-ci` and executed through Datadog's managed locations.  
 
 Because DNS resolution is performed through the tunnel, you can test applications with internal domains or even on the `localhost` of the machine running `datadog-ci`.
 
@@ -101,4 +101,4 @@ datadog-ci synthetics run-tests --config <GLOBAL_CONFIG_FILE>.json --tunnel
 [1]: /synthetics/private_locations
 [2]: https://www.npmjs.com/package/@datadog/datadog-ci
 [3]: https://github.com/DataDog/datadog-ci/releases/tag/v0.11.0
-[4]: /synthetics/cicd_testing/#cli-usage
+[4]: /synthetics/cicd_testing/?tab=npm#cli-usage

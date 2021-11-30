@@ -16,8 +16,6 @@ Afin de résoudre efficacement vos problèmes, vous devez disposer du **contexte
 
 La résolution de problèmes dépend grandement du contexte. Les vues enregistrées permettent à tous les membres de votre équipe de passer facilement d'un contexte à un autre. Vous pouvez accéder aux vues enregistrées dans le coin supérieur gauche du [Log Explorer][2].
 
-{{< img src="logs/explorer/saved_views/overview.png" alt="Sélection de vues enregistrées"  style="width:90%;" >}}
-
 Techniquement, une vue enregistrée permet de surveiller les éléments suivants :
 
 - Une [requête de recherche][3] ainsi que son intervalle. **Remarque** : les vues enregistrées sont destinées à la surveillance d'intervalles de temps dynamiques (tels que la dernière heure ou la dernière semaine). Les intervalles fixes sont donc convertis en intervalles dynamiques après enregistrement.

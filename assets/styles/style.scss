@@ -1,7 +1,10 @@
 // bootstrap customization & font setup
 @import 'bootstrap-custom';
 @import 'webfonts';
-@import 'icons';
+
+// jqmath 
+@import 'jqmath-vanilla/jqmath-0.4.3';
+@import 'jqmath-vanilla/jqmath-vanilla-overrides';
 
 // base
 @import 'base/variables';

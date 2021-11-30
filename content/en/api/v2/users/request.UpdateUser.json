@@ -1,0 +1,10 @@
+{
+  "data": {
+    "id": "string",
+    "type": "users",
+    "attributes": {
+      "name": "updated",
+      "disabled": true
+    }
+  }
+}

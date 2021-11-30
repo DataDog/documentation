@@ -10,6 +10,12 @@ further_reading:
       text: "Troubleshooting CI"
 ---
 
+{{< site-region region="us5,gov" >}}
+<div class="alert alert-warning">
+The selected Datadog site ({{< region-param key="dd_site_name" >}}) is not supported.
+</div>
+{{< /site-region >}}
+
 {{< site-region region="us,eu,us3" >}}
 ## Compatibility
 
@@ -71,12 +77,10 @@ end
 
 3. If you run UITests, also link the app running the tests with this library.
 
-<div class="alert alert-warning"><strong>Note</strong>: This framework is useful only for testing and should only be linked with the application when running tests. Do not distribute the framework to your users. </div>
-
-
 [1]: https://github.com/DataDog/dd-sdk-swift-testing/releases
 {{% /tab %}}
 {{< /tabs >}}
+<div class="alert alert-warning"><strong>Note</strong>: This framework is useful only for testing and should only be linked with the application when running tests. Do not distribute the framework to your users. </div>
 
 
 ## Instrumenting your tests
@@ -119,16 +123,12 @@ Set all these variables in your test target:
 **Recommended**: `$(SRCROOT)`<br/>
 **Example**: `/Users/ci/source/MyApp`
 
-{{< site-region region="eu,us3" >}}
 Additionally, configure the Datadog site to use the selected one ({{< region-param key="dd_site_name" >}}):
 
 `DD_SITE` (Required)
-: The [Datadog site][1] to upload results to.<br/>
+: The [Datadog site][2] to upload results to.<br/>
 **Default**: `datadoghq.com`<br/>
 **Selected site**: {{< region-param key="dd_site" code="true" >}}
-
-[1]: /getting_started/site/
-{{< /site-region >}}
 
 ### Collecting Git metadata
 
@@ -186,33 +186,15 @@ If you are running tests in non-supported CI providers or with no `.git` folder,
 
 After installation, run your tests as you normally do, for example using the `xcodebuild test` command. Tests, network requests, and application logs are instrumented automatically. Pass your environment variables when running your tests in the CI, for example:
 
-{{< site-region region="us" >}}
-{{< code-block lang="bash" >}}
-DD_TEST_RUNNER=1 DD_ENV=ci xcodebuild \
+<pre>
+<code>
+DD_TEST_RUNNER=1 DD_ENV=ci DD_SITE={{< region-param key="dd_site" >}} xcodebuild \
   -project "MyProject.xcodeproj" \
   -scheme "MyScheme" \
   -destination "platform=macOS,arch=x86_64" \
   test
-{{< /code-block >}}
-{{< /site-region >}}
-{{< site-region region="eu" >}}
-{{< code-block lang="bash" >}}
-DD_TEST_RUNNER=1 DD_ENV=ci DD_SITE=datadoghq.eu xcodebuild \
-  -project "MyProject.xcodeproj" \
-  -scheme "MyScheme" \
-  -destination "platform=macOS,arch=x86_64" \
-  test
-{{< /code-block >}}
-{{< /site-region >}}
-{{< site-region region="us3" >}}
-{{< code-block lang="bash" >}}
-DD_TEST_RUNNER=1 DD_ENV=ci DD_SITE=us3.datadoghq.com xcodebuild \
-  -project "MyProject.xcodeproj" \
-  -scheme "MyScheme" \
-  -destination "platform=macOS,arch=x86_64" \
-  test
-{{< /code-block >}}
-{{< /site-region >}}
+</code>
+</pre>
 
 ### UI tests
 
@@ -406,14 +388,16 @@ Additional Git configuration for physical device testing:
 {{% /tab %}}
 {{% tab "GitHub Actions" %}}
 
-| Environment variable | Value                  |
-| -------------------- | ---------------------- |
-| `GITHUB_WORKSPACE`   | `$(GITHUB_WORKSPACE)`  |
-| `GITHUB_REPOSITORY`  | `$(GITHUB_REPOSITORY)` |
-| `GITHUB_RUN_ID`      | `$(GITHUB_RUN_ID)`     |
-| `GITHUB_RUN_NUMBER`  | `$(GITHUB_RUN_NUMBER)` |
-| `GITHUB_WORKFLOW`    | `$(GITHUB_WORKFLOW)`   |
-| `GITHUB_SHA`         | `$(GITHUB_SHA)`        |
+| Environment variable | Value                   |
+| -------------------- | ----------------------- |
+| `GITHUB_WORKSPACE`   | `$(GITHUB_WORKSPACE)`   |
+| `GITHUB_REPOSITORY`  | `$(GITHUB_REPOSITORY)`  |
+| `GITHUB_RUN_ID`      | `$(GITHUB_RUN_ID)`      |
+| `GITHUB_RUN_NUMBER`  | `$(GITHUB_RUN_NUMBER)`  |
+| `GITHUB_WORKFLOW`    | `$(GITHUB_WORKFLOW)`    |
+| `GITHUB_SHA`         | `$(GITHUB_SHA)`         |
+| `GITHUB_SERVER_URL`  | `$(GITHUB_SERVER_URL)`  |
+| `GITHUB_RUN_ATTEMPT` | `$(GITHUB_RUN_ATTEMPT)` |
 
 Additional Git configuration for physical device testing:
 
@@ -684,13 +668,11 @@ session.end()
 
 Always call `session.end()` at the end so that all the test info is flushed to Datadog.
 
+[1]: https://app.datadoghq.com/organization-settings/client-tokens
+[2]: /getting_started/site/
+
+{{< /site-region >}}
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
-[1]: https://app.datadoghq.com/organization-settings/client-tokens
-
-{{< /site-region >}}
-{{< site-region region="us5,gov" >}}
-The selected Datadog site ({{< region-param key="dd_site_name" >}}) is not supported at this time.
-{{< /site-region >}}

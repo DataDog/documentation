@@ -70,6 +70,14 @@
           ]
         },
         "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>Array of errors returned by the API.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      },
+      "429": {
+        "json": {
+          "errors": [
+            "Bad Request"
+          ]
+        },
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>Array of errors returned by the API.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
       }
     },
     "request": {
@@ -97,7 +105,32 @@
               },
               "cells": [
                 {
-                  "attributes": {},
+                  "attributes": {
+                    "definition": {
+                      "requests": [
+                        {
+                          "display_type": "line",
+                          "q": "avg:system.load.1{*}",
+                          "style": {
+                            "line_type": "solid",
+                            "line_width": "normal",
+                            "palette": "dog_classic"
+                          }
+                        }
+                      ],
+                      "show_legend": true,
+                      "type": "timeseries",
+                      "yaxis": {
+                        "scale": "linear"
+                      }
+                    },
+                    "graph_size": "m",
+                    "split_by": {
+                      "keys": [],
+                      "tags": []
+                    },
+                    "time": null
+                  },
                   "id": "abcd1234",
                   "type": "notebook_cells"
                 }
@@ -136,6 +169,14 @@
           ]
         },
         "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>Array of errors returned by the API.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      },
+      "429": {
+        "json": {
+          "errors": [
+            "Bad Request"
+          ]
+        },
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>Array of errors returned by the API.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
       }
     },
     "request": {
@@ -144,34 +185,32 @@
           "attributes": {
             "cells": [
               {
-                "attributes": [
-                  {
-                    "definition": {
-                      "requests": [
-                        {
-                          "display_type": "line",
-                          "q": "avg:system.load.1{*}",
-                          "style": {
-                            "line_type": "solid",
-                            "line_width": "normal",
-                            "palette": "dog_classic"
-                          }
+                "attributes": {
+                  "definition": {
+                    "requests": [
+                      {
+                        "display_type": "line",
+                        "q": "avg:system.load.1{*}",
+                        "style": {
+                          "line_type": "solid",
+                          "line_width": "normal",
+                          "palette": "dog_classic"
                         }
-                      ],
-                      "show_legend": true,
-                      "type": "timeseries",
-                      "yaxis": {
-                        "scale": "linear"
                       }
-                    },
-                    "graph_size": "m",
-                    "split_by": {
-                      "keys": [],
-                      "tags": []
-                    },
-                    "time": null
-                  }
-                ],
+                    ],
+                    "show_legend": true,
+                    "type": "timeseries",
+                    "yaxis": {
+                      "scale": "linear"
+                    }
+                  },
+                  "graph_size": "m",
+                  "split_by": {
+                    "keys": [],
+                    "tags": []
+                  },
+                  "time": null
+                },
                 "type": "notebook_cells"
               }
             ],
@@ -186,34 +225,32 @@
           "attributes": {
             "cells": [
               {
-                "attributes": [
-                  {
-                    "definition": {
-                      "requests": [
-                        {
-                          "display_type": "line",
-                          "q": "avg:system.load.1{*}",
-                          "style": {
-                            "line_type": "solid",
-                            "line_width": "normal",
-                            "palette": "dog_classic"
-                          }
+                "attributes": {
+                  "definition": {
+                    "requests": [
+                      {
+                        "display_type": "line",
+                        "q": "avg:system.load.1{*}",
+                        "style": {
+                          "line_type": "solid",
+                          "line_width": "normal",
+                          "palette": "dog_classic"
                         }
-                      ],
-                      "show_legend": true,
-                      "type": "timeseries",
-                      "yaxis": {
-                        "scale": "linear"
                       }
-                    },
-                    "graph_size": "m",
-                    "split_by": {
-                      "keys": [],
-                      "tags": []
-                    },
-                    "time": null
-                  }
-                ],
+                    ],
+                    "show_legend": true,
+                    "type": "timeseries",
+                    "yaxis": {
+                      "scale": "linear"
+                    }
+                  },
+                  "graph_size": "m",
+                  "split_by": {
+                    "keys": [],
+                    "tags": []
+                  },
+                  "time": null
+                },
                 "type": "notebook_cells"
               }
             ],
@@ -259,6 +296,14 @@
           ]
         },
         "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>Array of errors returned by the API.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      },
+      "429": {
+        "json": {
+          "errors": [
+            "Bad Request"
+          ]
+        },
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>Array of errors returned by the API.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
       }
     },
     "request": {
@@ -286,7 +331,32 @@
               },
               "cells": [
                 {
-                  "attributes": {},
+                  "attributes": {
+                    "definition": {
+                      "requests": [
+                        {
+                          "display_type": "line",
+                          "q": "avg:system.load.1{*}",
+                          "style": {
+                            "line_type": "solid",
+                            "line_width": "normal",
+                            "palette": "dog_classic"
+                          }
+                        }
+                      ],
+                      "show_legend": true,
+                      "type": "timeseries",
+                      "yaxis": {
+                        "scale": "linear"
+                      }
+                    },
+                    "graph_size": "m",
+                    "split_by": {
+                      "keys": [],
+                      "tags": []
+                    },
+                    "time": null
+                  },
                   "id": "abcd1234",
                   "type": "notebook_cells"
                 }
@@ -333,6 +403,14 @@
           ]
         },
         "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>Array of errors returned by the API.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      },
+      "429": {
+        "json": {
+          "errors": [
+            "Bad Request"
+          ]
+        },
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>Array of errors returned by the API.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
       }
     },
     "request": {
@@ -360,7 +438,32 @@
               },
               "cells": [
                 {
-                  "attributes": {},
+                  "attributes": {
+                    "definition": {
+                      "requests": [
+                        {
+                          "display_type": "line",
+                          "q": "avg:system.load.1{*}",
+                          "style": {
+                            "line_type": "solid",
+                            "line_width": "normal",
+                            "palette": "dog_classic"
+                          }
+                        }
+                      ],
+                      "show_legend": true,
+                      "type": "timeseries",
+                      "yaxis": {
+                        "scale": "linear"
+                      }
+                    },
+                    "graph_size": "m",
+                    "split_by": {
+                      "keys": [],
+                      "tags": []
+                    },
+                    "time": null
+                  },
                   "id": "abcd1234",
                   "type": "notebook_cells"
                 }
@@ -415,6 +518,14 @@
           ]
         },
         "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>Array of errors returned by the API.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      },
+      "429": {
+        "json": {
+          "errors": [
+            "Bad Request"
+          ]
+        },
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>Array of errors returned by the API.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
       }
     },
     "request": {
@@ -435,34 +546,32 @@
           "attributes": {
             "cells": [
               {
-                "attributes": [
-                  {
-                    "definition": {
-                      "requests": [
-                        {
-                          "display_type": "line",
-                          "q": "avg:system.load.1{*}",
-                          "style": {
-                            "line_type": "solid",
-                            "line_width": "normal",
-                            "palette": "dog_classic"
-                          }
+                "attributes": {
+                  "definition": {
+                    "requests": [
+                      {
+                        "display_type": "line",
+                        "q": "avg:system.load.1{*}",
+                        "style": {
+                          "line_type": "solid",
+                          "line_width": "normal",
+                          "palette": "dog_classic"
                         }
-                      ],
-                      "show_legend": true,
-                      "type": "timeseries",
-                      "yaxis": {
-                        "scale": "linear"
                       }
-                    },
-                    "graph_size": "m",
-                    "split_by": {
-                      "keys": [],
-                      "tags": []
-                    },
-                    "time": null
-                  }
-                ],
+                    ],
+                    "show_legend": true,
+                    "type": "timeseries",
+                    "yaxis": {
+                      "scale": "linear"
+                    }
+                  },
+                  "graph_size": "m",
+                  "split_by": {
+                    "keys": [],
+                    "tags": []
+                  },
+                  "time": null
+                },
                 "type": "notebook_cells"
               }
             ],

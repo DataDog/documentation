@@ -17,13 +17,14 @@ categories:
 creates_events: false
 ddtype: crawler
 dependencies:
-  - 'https://github.com/DataDog/integrations-extras/blob/master/federatorai/README.md'
+  - https://github.com/DataDog/integrations-extras/blob/master/federatorai/README.md
 display_name: Federator.ai
 draft: false
 git_integration_title: federatorai
 guid: ec0fd93a-ee4c-4652-9996-cc68cb5a4d45
 integration_id: federatorai
 integration_title: Federator.ai
+integration_version: ''
 is_public: true
 kind: integration
 maintainer: support@prophetstor.com
@@ -32,31 +33,38 @@ metric_prefix: federatorai.
 metric_to_check: federatorai.integration.status
 name: federatorai
 public_title: Intégration Datadog/Federator.ai
-short_description: Intégrez Federator.ai de ProphetStor à Datadog pour optimiser les performances de votre application
+short_description: Intégrez ProphetStor Federator.ai à Datadog pour optimiser les performances de votre application
 support: contrib
 supported_os:
   - linux
 ---
 ## Présentation
 
-[Federator.ai de ProphetStor][1] est une solution basée sur l'IA qui permet aux entreprises de gérer, optimiser et redimensionner automatiquement les ressources de toutes les applications sur Kubernetes. En utilisant des algorithmes d'apprentissage automatique avancés pour prévoir la charge de travail des applications, Federator.ai déploie la bonne quantité de ressources au bon moment pour optimiser les performances des applications.
 
-* Prévision de la charge de travail basée sur l'IA pour Kafka ou toute autre application
-* Recommandations relatives aux ressources basées sur des métriques de prévision de la charge de travail, d'application, Kubernetes et d'autres métriques pertinentes
-* Scaling automatique des conteneurs d'applications via le [Watermark Pod Autoscaler (WPA) de Datadog][2] 
+[ProphetStor Federator.ai][1] est une solution soutenue par l'IA aidant les organisations à gérer et à optimiser des ressources pour des applications sur Kubernetes et pour des machines virtuelles dans des clusters VMware.
 
-En intégrant Federator.ai de ProphetStor à Datadog, les utilisateurs peuvent facilement suivre les taux de consommation/production des messages Kafka, ainsi que la prévision des taux de production des messages à partir du dashboard Federator.ai. En fonction de la prévision ou du taux de production de messages, Federator.ai met automatiquement à l'échelle les réplicas de consommateurs Kafka pour gérer la charge de travail. Il est possible de visualiser ce comportement à partir du dashboard Federator.ai, où sont affichés les réplicas de consommateurs recommandés et le nombre actuel de réplicas de consommateurs. De plus, le retard global des consommateurs ainsi que la latence moyenne dans la file d'attente avant qu'un message ne soit reçu par un consommateur sont également affichés sur le dashboard pour un meilleur suivi des performances.
+Grâce à ses algorithmes avancés d'apprentissage automatique capables de prédire les charges des applications, Federator.ai propose les fonctionnalités suivantes :
+* Un système de prédiction des charges soutenu par l'IA pour les applications conteneurisées dans des clusters Kubernetes ainsi que pour les VM dans les clusters VMWare et le service Elastic Compute Cloud (EC2) d'Amazon Web Services (AWS)
+* Des recommandations de ressources basées sur des métriques relatives à la prédiction des charges, aux applications ou encore à Kubernetes
+* Un provisionnement automatique du CPU et de la mémoire pour les contrôleurs et espaces de nommage des applications Kubernetes génériques
+* Un autoscaling des conteneurs d'application Kubernetes, des groupes de consommateurs Kafka et des services en amont NGINX Ingress
+* Des analyses de coûts pour des environnements avec plusieurs clouds, ainsi que des recommandations reposant sur les prédictions de charge pour les clusters Kubernetes et clusters de VM
+* Un système de calcul des coûts réels et des réductions de coûts potentielles reposant sur les recommandations de clusters, d'applications Kubernetes, de VM et d'espaces de nommage Kubernetes
+
+L'intégration de ProphetStor Federator.ai vous permet de surveiller et de prédire l'utilisation des ressources de vos conteneurs Kubernetes, espaces de nommage et nœuds de cluster. Vous pouvez ainsi formuler des recommandations pertinentes afin d'éviter tout coût supplémentaire lié à un surprovisionnement ou tout problème de performance lié à un sous-provisionnement. Grâce à son intégration fluide au pipeline CI/CD, Federator.ai vous permet d'optimiser en permanence vos conteneurs, où qu'ils soient déployés dans votre cluster Kubernetes. À l'aide de ses prédictions de charge pour les applications, Federator.ai effectue au moment opportun l'autoscaling des conteneurs d'application. Cette solution optimise également vos performances en utilisant le nombre optimal de réplicas de conteneurs, par l'intermédiaire de l'Autoscaler de pods horizontaux de Kubernetes ou de la solution [Watermark Pod Autoscaling (WPA) de Datadog][2].
+
+Pour en savoir plus sur Federator.ai, consultez les vidéos de [démonstration des fonctionnalités de ProphetStor Federator.ai][3] et de [présentation de ProphetStor Federator.ai pour Datadog][4] (en anglais).
 
 
 **Vue d'ensemble de cluster ProphetStor Federator.ai**
 
-![dashboard_vue d'ensemble_cluster][3]
+![Vue d'ensemble de cluster ProphetStor Federator.ai][5]
 
 * Cluster Resource Usage Predictions and Recommendations
-   - Ce tableau présente les valeurs maximale/minimale/moyenne des charges CPU/mémoire prévues, ainsi que les charges CPU/mémoire recommandées par Federator.ai dans le cadre de la planification des ressources du cluster.
+   - Ce tableau présente les valeurs maximales, minimales et moyennes des charges CPU/mémoire prévues, ainsi que les charges CPU/mémoire recommandées par Federator.ai dans le cadre de la planification des ressources du cluster.
 
 * Cluster Node Resource Usage Predictions and Recommendations
-   - Ce tableau présente les valeurs maximale/minimale/moyenne des charges CPU/mémoire prévues, ainsi que les charges CPU/mémoire recommandées par Federator.ai dans le cadre de la planification des ressources des nœuds.
+   - Ce tableau présente les valeurs maximales, minimales et moyennes des charges CPU/mémoire prévues, ainsi que les charges CPU/mémoire recommandées par Federator.ai dans le cadre de la planification des ressources du nœud.
 
 * Node Current/Predicted Memory Usage (Daily)
    - Ce graphique présente la charge mémoire quotidienne prévue par Federator.ai, ainsi que la charge mémoire des nœuds.
@@ -79,16 +87,16 @@ En intégrant Federator.ai de ProphetStor à Datadog, les utilisateurs peuvent f
 
 **Vue d'ensemble d'application ProphetStor Federator.ai**
 
-![dashboard_vue d'ensemble_application][4]
+![Dashboard de vue d'ensemble d'une application][6]
 
 * Workload Prediction for Next 24 Hours
-   - Ce tableau présente les valeurs maximale/minimale/moyenne des charges CPU/mémoire prévues, ainsi que les charges CPU/mémoire recommandées par Federator.ai dans le cadre de la planification des ressources des contrôleurs sur les 24 prochaines heures.
+   - Ce tableau présente les valeurs maximales, minimales et moyennes des charges CPU/mémoire prévues, ainsi que les charges CPU/mémoire recommandées par Federator.ai dans le cadre de la planification des ressources des contrôleurs sur les 24 prochaines heures.
 
 * Workload Prediction for Next 7 Days
-   - Ce tableau présente les valeurs maximale/minimale/moyenne des charges CPU/mémoire prévues, ainsi que les charges CPU/mémoire recommandées par Federator.ai dans le cadre de la planification des ressources des contrôleurs sur les 7 prochains jours.
+   - Ce tableau présente les valeurs maximales, minimales et moyennes des charges CPU/mémoire prévues, ainsi que les charges CPU/mémoire recommandées par Federator.ai dans le cadre de la planification des ressources des contrôleurs sur les 7 prochains jours.
 
 * Workload Prediction for Next 30 Days
-   - Ce tableau présente les valeurs maximale/minimale/moyenne des charges CPU/mémoire prévues, ainsi que les charges CPU/mémoire recommandées par Federator.ai dans le cadre de la planification des ressources des contrôleurs sur les 30 prochains jours.
+   - Ce tableau présente les valeurs maximales, minimales et moyennes des charges CPU/mémoire prévues, ainsi que les charges CPU/mémoire recommandées par Federator.ai dans le cadre de la planification des ressources des contrôleurs sur les 30 prochains jours.
 
 * Current/Predicted CPU Usage (Daily)
    - Ce graphique présente la charge CPU quotidienne prévue par Federator.ai, ainsi que la charge CPU des contrôleurs.
@@ -123,7 +131,7 @@ En intégrant Federator.ai de ProphetStor à Datadog, les utilisateurs peuvent f
 
 **Vue d'ensemble Kafka ProphetStor Federator.ai**
 
-![dashboard_vue d'ensemble][5]
+![Vue d'ensemble du dashboard][7]
 
 * Recommended Replicas vs Current/Desired Replicas
    - Ce graphique de série temporelle affiche les réplicas recommandés par Federator.ai et les réplicas actuels et souhaités dans le système.
@@ -146,7 +154,7 @@ En intégrant Federator.ai de ProphetStor à Datadog, les utilisateurs peuvent f
 
 **Vue d'ensemble de l'analyse des coûts ProphetStor Federator.ai**
 
-![vue d'ensemble_analyse_coûts][6]
+![Vue d'ensemble des analyses des coûts][8]
 
 * Current Cluster Cost et Current Cluster Configuration
    - Ces tableaux présentent le coût actuel et la configuration de l'environnement des clusters.
@@ -169,22 +177,26 @@ En intégrant Federator.ai de ProphetStor à Datadog, les utilisateurs peuvent f
 
 ## Configuration
 
+* Suivez les instructions ci-dessous pour télécharger et configurer Federator.ai.
+
 ### Installation
 
-1. Connectez-vous à votre cluster OpenShift/Kubernetes
+1. Connectez-vous à votre cluster OpenShift/Kubernetes.
 2. Installez Federator.ai pour OpenShift/Kubernetes à l'aide de la commande suivante :
 
    ```shell
-   $ curl https://raw.githubusercontent.com/containers-ai/federatorai-operator/master/deploy/federatorai-launcher.sh | bash
+   $ curl https://raw.githubusercontent.com/containers-ai/prophetstor/master/deploy/federatorai-launcher.sh | bash
    ```
 
    ```shell
-   curl https://raw.githubusercontent.com/containers-ai/federatorai-operator/master/deploy/federatorai-launcher.sh | bash
-   Please input Federator.ai version tag: datadog
+   $ curl https://raw.githubusercontent.com/containers-ai/prophetstor/master/deploy/federatorai-launcher.sh | bash
+   ...
+   Please enter Federator.ai version tag [default: latest]:latest
+   Please enter the path of Federator.ai directory [default: /opt]:
 
-   Downloading scripts ...
+   Downloading v4.5.1-b1562 tgz file ...
    Done
-   Do you want to use private repository URL? [default: n]:
+   Do you want to use a private repository URL? [default: n]:
    Do you want to launch Federator.ai installation script? [default: y]:
 
    Executing install.sh ...
@@ -192,6 +204,29 @@ En intégrant Federator.ai de ProphetStor à Datadog, les utilisateurs peuvent f
    ...Passed
    Enter the namespace you want to install Federator.ai [default: federatorai]:
    .........
+   Downloading Federator.ai alamedascaler sample files ...
+   Done
+   ========================================
+   Which storage type you would like to use? ephemeral or persistent?
+   [default: persistent]:
+   Specify log storage size [e.g., 2 for 2GB, default: 2]:
+   Specify AI engine storage size [e.g., 10 for 10GB, default: 10]:
+   Specify InfluxDB storage size [e.g., 100 for 100GB, default: 100]:
+   Specify storage class name: managed-nfs-storage
+   Do you want to expose dashboard and REST API services for external access? [default: y]:
+
+   ----------------------------------------
+   install_namespace = federatorai
+   storage_type = persistent
+   log storage size = 2 GB
+   AI engine storage size = 10 GB
+   InfluxDB storage size = 100 GB
+   storage class name = managed-nfs-storage
+   expose service = y
+   ----------------------------------------
+   Is the above information correct [default: y]:
+   Processing...
+
    (snipped)
    .........
    All federatorai pods are ready.
@@ -201,22 +236,22 @@ En intégrant Federator.ai de ProphetStor à Datadog, les utilisateurs peuvent f
    Default login credential is admin/admin
 
    Also, you can start to apply alamedascaler CR for the target you would like to monitor.
-   Review administration guide for further details.Review administration guide for further details.
+   Review administration guide for further details. 
    ========================================
-   .........
-   (snipped)
-   .........
-   Install Federator.ai successfully
-   Do you want to monitor this cluster? [default: y]:
-   Use "cluster-demo" as cluster name and DD_TAGS
-   Applying file alamedascaler_federatorai.yaml ...
-   alamedascaler.autoscaling.containers.ai/clusterscaler created
-   Done
+   ========================================
+   You can now access Federatorai REST API through https://<YOUR IP>:31011
+   The default login credential is admin/admin
+   The REST API online document can be found in https://<YOUR IP>:31011/apis/v1/swagger/index.html
+   ========================================
 
-   Downloaded YAML files are located under /tmp/install-op 
+   Install Federator.ai v4.5.1-b1562 successfully
+
+   Downloaded YAML files are located under /opt/federatorai/installation
+
+   Downloaded files are located under /opt/federatorai/repo/v4.5.1-b1562
    ```
 
-3. Vérifiez le bon fonctionnement des pods Federator.ai
+3. Vérifiez que les pods Federator.ai s'exécutent correctement.
 
    ```shell
    $ kubectl get pod -n federatorai
@@ -226,67 +261,15 @@ En intégrant Federator.ai de ProphetStor à Datadog, les utilisateurs peuvent f
 
 ### Configuration
 
-1. Vous devez posséder un compte Datadog pour vous connecter et utiliser Datadog. Si vous n'en avez pas, accédez au [site web de Datadog][7] et inscrivez-vous pour commencer un essai gratuit.
+1. Connectez-vous à votre compte Datadog et obtenez une [clé d'API et une clé d'application][9] pour utiliser l'API Datadog.
 
-2. Connectez-vous à votre compte Datadog et obtenez une [clé d'API et une clé d'application][8] pour utiliser l'API Datadog.
+2. Configurez Federator.ai en tant que source de données des métriques pour chaque cluster.
+    - Lancez l'interface graphique Federator.ai, accédez à Configuration -> Clusters, puis cliquez sur Add Cluster.
+    - Saisissez la clé d'API et la clé d'application.
 
-3. Configurez le Data-Adapter Federator.ai.
-   - Le script de configuration du Data-Adapter a normalement déjà été téléchargé dans le répertoire /tmp/federatorai-scripts/datadog/. Dans le cas contraire, exécutez à nouveau le script federatorai-launcher.sh décrit à l'étape 2 de l'installation, sans lancer une nouvelle fois le script d'installation de Federator.ai.
+    ![Fenêtre Add Cluster][10] 
 
-   ```shell
-   $ curl https://raw.githubusercontent.com/containers-ai/federatorai-operator/master/deploy/federatorai-launcher.sh | bash
-   Please input Federator.ai version tag: datadog
-
-   Downloading scripts ...
-   Done
-   Do you want to use private repository URL? [default: n]:
-   Do you want to launch Federator.ai installation script? [default: y]: n
-   ```
-
-   - Modifiez l'autorisation d'exécution.
-
-   ```shell
-   $ chomd +x /tmp/federatorai-scripts/datadog/federatorai-setup-for-datadog.sh
-   ```
-
-   - Exécutez le script de configuration et suivez les étapes pour renseigner les paramètres de configuration : 
-
-   ```shell
-   $ ./federatorai-setup-for-datadog.sh -k .kubeconfig
-   Checking environment version...
-   ...Passed
-   You are connecting to cluster: https://<YOUR IP>:6443/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
-
-   Getting Datadog info...
-   Input a Datadog API Key []:xxxxx9273dxxcbc155xx3a7331xxxxx
-   Input a Datadog Application Key []:xxxxx7220db1478xxxxxcb5c323fcb02a11xxxxx
-
-   Getting Kafka info... No.1
-
-   You can use command "kubectl get cm cluster-info -n <namespace> --template={{.metadata.uid}}" to get cluster name
-   Where '<namespace>' is either 'default' or 'kube-public' or 'kube-service-catalog'.
-   If multiple cluster-info exist, pick either one would work as long as you always use the same one to configure Datadog Agent/Cluster Agent/WPA and other data source agents.
-   Input cluster name []: cluster-demo
-   Input Kafka exporter namespace []: myproject
-   Input Kafka consumer group kind (Deployment/DeploymentConfig/StatefulSet) []: Deployment
-   Input Kafka consumer group kind name []: consumer1-topic0001-group-0001
-   Input Kafka consumer group namespace []: myproject
-   Input Kafka consumer topic name []: topic0001
-
-   You can use Kafka command-line tool 'kafka-consumer-group.sh' (download separately or enter into a broker pod, in /bin directory) to list consumer groups.
-   e.g.: "/bin/kafka-consumer-groups.sh --bootstrap-server <kafka-bootstrap-service>:9092 --describe --all-groups --members"
-   The first column of output is the 'kafkaConsumerGroupId'.
-   Input Kafka consumer group id []: group0001
-   Input Kafka consumer minimum replica number []: 1
-   Input Kafka consumer maximum replica number []: 20
-
-   Do you want to input another set? [default: n]: 
-   .........
-   (snipped)
-   .........
-   ```
-
-4. Consultez le [guide de configuration et d'installation dédié à l'intégration Federator.ai/Datadog][9] pour en savoir plus.
+3. Pour en savoir plus, consultez le [guide d'installation et de configuration de Federator.ai][11] ainsi que le [guide d'utilisation][12] (en anglais).
 
 
 ## Données collectées
@@ -306,17 +289,19 @@ Federator.ai n'inclut aucun événement.
 
 ## Dépannage
 
-Besoin d'aide ? Consultez la [documentation dédiée à Federator.ai de ProphetStor][11] ou contactez l'[assistance Datadog][12].
+Besoin d'aide ? Consultez le [guide d'installation et de configuration de Federator.ai][11] (en anglais) ou contactez l'[assistance Datadog][14].
 
-[1]: https://www.prophetstor.com/federator-ai-for-aiops/federator-ai-datadog-integration/
+[1]: https://prophetstor.com/federator-ai-2/
 [2]: https://github.com/DataDog/watermarkpodautoscaler
-[3]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/federatorai/images/cluster_overview_dashboard.png
-[4]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/federatorai/images/application_overview_dashboard.png
-[5]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/federatorai/images/dashboard_overview.png
-[6]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/federatorai/images/cost_analysis_overview.png
-[7]: https://www.datadoghq.com/
-[8]: https://docs.datadoghq.com/fr/account_management/api-app-keys/
-[9]: http://www.prophetstor.com/wp-content/uploads/2020/05/Federator.ai%20for%20Datadog%20-%20Installation%20and%20Configuration%20Guide.pdf
-[10]: https://github.com/DataDog/integrations-extras/blob/master/federatorai/metadata.csv
-[11]: https://github.com/containers-ai/federatorai-operator
-[12]: https://docs.datadoghq.com/fr/help/
+[3]: https://youtu.be/IooFJnB8bb8
+[4]: https://youtu.be/qX_HF_zZ4BA
+[5]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/federatorai/images/cluster_overview_dashboard.png
+[6]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/federatorai/images/application_overview_dashboard.png
+[7]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/federatorai/images/dashboard_overview.png
+[8]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/federatorai/images/cost_analysis_overview.png
+[9]: https://docs.datadoghq.com/fr/account_management/api-app-keys/
+[10]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/federatorai/images/add_cluster_window.png
+[11]: https://prophetstor.com/wp-content/uploads/documentation/Federator.ai/Latest%20Version/ProphetStor%20Federator.ai%20Installation%20Guide.pdf
+[12]: https://prophetstor.com/wp-content/uploads/documentation/Federator.ai/Latest%20Version/ProphetStor%20Federator.ai%20User%20Guide.pdf
+[13]: https://github.com/DataDog/integrations-extras/blob/master/federatorai/metadata.csv
+[14]: https://docs.datadoghq.com/fr/help/

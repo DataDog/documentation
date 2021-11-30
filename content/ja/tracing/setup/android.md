@@ -1,10 +1,10 @@
 ---
 beta: true
 dependencies:
-  - 'https://github.com/DataDog/dd-sdk-android/blob/master/docs/trace_collection.md'
+  - https://github.com/DataDog/dd-sdk-android/blob/master/docs/trace_collection.md
 description: Android アプリケーションからトレースを収集する。
 further_reading:
-  - link: 'https://github.com/DataDog/dd-sdk-android'
+  - link: https://github.com/DataDog/dd-sdk-android
     tag: Github
     text: dd-sdk-android ソースコード
   - link: tracing/visualization/

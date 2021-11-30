@@ -3,6 +3,10 @@ title: Troubleshooting CI Visibility
 kind: documentation
 ---
 
+{{< site-region region="us5,gov" >}}
+<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
+{{< /site-region >}}
+
 ### Your Jenkins instance is instrumented, but Datadog isn't showing any data
 
 1. Make sure that at least one pipeline has finished executing. Pipeline execution information is only sent after the pipeline has finished.

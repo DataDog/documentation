@@ -1,0 +1,35 @@
+{
+  "layout_type": "ordered",
+  "title": "Example-Create_a_new_dashboard_returns_OK_response with Profile Metrics Query",
+  "widgets": [
+    {
+      "definition": {
+        "type": "timeseries",
+        "requests": [
+          {
+            "profile_metrics_query": {
+              "compute": {
+                "aggregation": "sum",
+                "facet": "@prof_core_cpu_cores"
+              },
+              "search": {
+                "query": "runtime:jvm"
+              },
+              "group_by": [
+                {
+                  "facet": "service",
+                  "limit": 10,
+                  "sort": {
+                    "aggregation": "sum",
+                    "order": "desc",
+                    "facet": "@prof_core_cpu_cores"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

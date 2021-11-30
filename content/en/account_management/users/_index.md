@@ -39,10 +39,9 @@ The new user receives an email with a link to log in. The user is marked with th
 
 To resend an invite in list view, click the user to open the user side panel and click **Resend Invite**. Or in grid view, hover over the user box and click **Resend Invite**.
 
-
 ## Edit a user's roles
 
-Only users with the Access Management permission, such as users with the Datadog Admin Role, can change another user's role.
+Only users with the User Access Management permission, such as users with the Datadog Admin Role, can change another user's role.
 
 To edit a user's roles:
 
@@ -54,6 +53,23 @@ To edit a user's roles:
 {{< img src="account_management/users/user_role_update.png" alt="User role update" style="width:80%;">}}
 
 To discover all of the roles available and how to create custom ones, see the [Role Based Access Control documentation][2].
+
+## Edit a user's login methods
+
+Only users with the User Access Management permission, such as users with the Datadog Admin Role, can change another user's login methods.
+
+Default login methods for an organization can be set through the Login Methods page. There you can allow or disallow all users in your organization to use a Datadog username and password, to sign in with Google, or to sign in with SAML. In User Management you can override on a per-user basis to allow a specific user to use one method or multiple methods. This is helpful in circumstances where you want all users to use SAML but need to enable a set of users to log in with username and password in an emergency.
+
+To edit a user's login methods:
+
+1. Go to the **Users** tab of **Organization Settings**.
+2. Click **Edit** on the right of the user line.
+3. Switch the toggle beside **Override Default Login Methods** to enable or disable overrides for the user.
+4. If enabling overrides, choose a set of login methods that the user can use to access Datadog. This can be a single option or all options that are configured for your organization.
+5. Click **Save**.
+
+
+**Note**: Overrides can be set only to valid login methods. If you have not configured SAML, you cannot choose that login method as an override for a user.
 
 ## Disable existing members
 
