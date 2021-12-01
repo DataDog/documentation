@@ -26,7 +26,7 @@ Logs may contain sensitive data, and should be handled carefully. If you are ing
 Controlling all of your data can be challenging, especially on a large and highly collaborative platform. This guide walks you through the different options to discovery and manage sensitive data that is ingested into Datadog.
 
 ## Sensitive Data Scanner
-Sensitive data scanner is a stream-based, pattern matching service that you can use to identify, tag, and optionally redact or hash sensitive data. With implementation, your security and compliance teams can introduce a new line of defense in preventing sensitive data from leaking outside your organization. Sensitive data scanner can be found under Organization Settings. [Learn more.][19]
+Sensitive data scanner is a stream-based, pattern matching service that you can use to identify, tag, and optionally redact or hash sensitive data. With this capability, your security and compliance teams can introduce a new line of defense in preventing sensitive data from leaking outside your organization. Sensitive data scanner can be found under Organization Settings. [Learn more.][19]
 
 If you have already indexed logs that contain sensitive data, then follow these three steps.
 
