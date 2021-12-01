@@ -9,7 +9,7 @@ description: "Troubleshooting guide for Datadog Cloud Workload Security."
 In order to ensure that:
 - the communication between the `security-agent` and the `system-probe` is
 working as expected
-- the Cloud Workload Security probe is able to respond to system events
+- the Cloud Workload Security probe is able to detect system events
 
 you can manually trigger self tests by running the following command:
 
@@ -26,6 +26,9 @@ If everything is working as expected, you should see:
 ```
 Runtime self test: OK
 ```
+and then see events coming from the `runtime-security-agent` in your logs
+
+<DEMO_IMAGE>
 
 In the case of an error, you should see:
 ```
