@@ -88,6 +88,10 @@ The [`@datadog/datadog-ci` package][3] allows you to run Synthetics tests direct
 
 To use the [`@datadog/datadog-ci` NPM package][4], see [Configuration][5].
 
+You can also trigger tests by searching with tags. For example: `"ci": "datadog-ci synthetics run-tests --config fileconfig.json -s 'tag:staging'"`.
+
+**Note:** This command works as an argument. Do not use this in your configuration files.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
