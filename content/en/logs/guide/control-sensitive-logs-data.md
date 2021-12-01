@@ -62,7 +62,7 @@ Once sensitive data in logs is sent to the Datadog platform, it may exist in a n
 
 ### Redact sensitive data in streaming logs using Sensitive Data Scanner
 
-Use out-of-the-box or custom rules to identify and redact sensitive data in your logs.[Learn more.][19]
+Use out-of-the-box or custom rules to identify and redact other kinds of sensitive data still coming in your logs.[Learn more.][19]
 
 ### Stop indexing sensitive logs
 
