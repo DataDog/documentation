@@ -51,6 +51,7 @@ The default mapping is as follows:
 2. cumulative non-monotonic sums are exported as Datadog gauges and
 3. Delta sums are exported as Datadog counts.
 
+[1]: https://docs.datadoghq.com/dashboards/functions/arithmetic/#cumulative-sum
 {{% /tab %}}
 {{% tab "Gauge" %}}
 
@@ -88,6 +89,8 @@ The Datadog Agent and the OpenTelemetry Collector Datadog exporter allow changin
 
 **Note**: `send_count_sum_metrics` is only useful when not using the distributions mode.
 
+[1]: https://docs.datadoghq.com/dashboards/functions/arithmetic/#cumulative-sum
+[2]: https://docs.datadoghq.com/metrics/distributions
 {{% /tab %}}
 {{% tab "Summary" %}}
 
@@ -187,6 +190,7 @@ Alternatively, if using the `counters` mode and enabling the `send_count_sum_met
 | `request.response_time.distribution.bucket` | `6`    | `lower_bound:-inf`, `upper_bound:2` | GAUGE               |
 | `request.response_time.distribution.bucket` | `2`    | `lower_bound:2`, `upper_bound:inf`  | GAUGE               |
 
+[2]: https://docs.datadoghq.com/metrics/distributions
 {{% /tab %}}
 {{% tab "Summary" %}}
 
