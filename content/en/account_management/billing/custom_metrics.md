@@ -85,7 +85,7 @@ For metrics not configured with Metrics without Limits™, you pay for for index
 
 |                                      | Indexed Custom Metrics<br>(based on monthly average number of Custom Metrics per hour)                                        |
 |--------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|
-| Account allotment                    | - Pro: 100 indexed Custom Metrics per host <br>- Enterprise: 200 indexed Custom Metrics  per host                             |
+| Account allotment                    | - Pro: 100 indexed Custom Metrics per host <br>- Enterprise: 200 indexed Custom Metrics per host                             |
 | Usage greater than account allotment | For each 100 indexed custom metrics over the account allotment, you pay an amount that is specified in your current contract. |
 
 For metrics configured with Metrics without Limits™ (tags/aggregations are configured), you pay for ingested custom metrics and indexed custom metrics.
@@ -296,7 +296,7 @@ These allocations are counted across your entire infrastructure. For example, if
 
 {{< img src="account_management/billing/custom_metrics/host_custom_metrics.png" alt="Allocations for Custom Metrics"  >}}
 
-The billable number of indexed custom metrics is based on the average number of custom metrics (from all paid hosts) per hour over a given month. The billable number of ingested custom metrics only grows if you've used Metrics without Limits™ to configure your metric.  Contact [Sales][9] or your [Customer Success][10] Manager to discuss custom metrics for your account or to purchase an additional custom metrics package.
+The billable number of indexed custom metrics is based on the average number of custom metrics (from all paid hosts) per hour over a given month. The billable number of ingested custom metrics only grows if you've used Metrics without Limits™ to configure your metric. Contact [Sales][9] or your [Customer Success][10] Manager to discuss custom metrics for your account or to purchase an additional custom metrics package.
 
 ## Standard integrations
 
