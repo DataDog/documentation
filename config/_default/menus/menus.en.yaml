@@ -5427,7 +5427,7 @@ api:
       operationids:
         - EditGlobalVariable
       unstable: []
-      order: 17
+      order: 18
   - name: Get a global variable
     url: '#get-a-global-variable'
     identifier: get-a-global-variable
@@ -5439,7 +5439,7 @@ api:
       operationids:
         - GetGlobalVariable
       unstable: []
-      order: 18
+      order: 19
   - name: Delete a global variable
     url: '#delete-a-global-variable'
     identifier: delete-a-global-variable
@@ -5451,7 +5451,7 @@ api:
       operationids:
         - DeleteGlobalVariable
       unstable: []
-      order: 19
+      order: 20
   - name: Create a global variable
     url: '#create-a-global-variable'
     identifier: create-a-global-variable
@@ -5463,7 +5463,7 @@ api:
       operationids:
         - CreateGlobalVariable
       unstable: []
-      order: 16
+      order: 17
   - name: Get all global variables
     url: '#get-all-global-variables'
     identifier: get-all-global-variables
@@ -5475,7 +5475,7 @@ api:
       operationids:
         - ListGlobalVariables
       unstable: []
-      order: 15
+      order: 16
   - name: Pause or start a test
     url: '#pause-or-start-a-test'
     identifier: pause-or-start-a-test
@@ -5499,7 +5499,7 @@ api:
       operationids:
         - GetAPITestResult
       unstable: []
-      order: 10
+      order: 11
   - name: Get an API test's latest results summaries
     url: '#get-an-api-tests-latest-results-summaries'
     identifier: get-an-api-tests-latest-results-summaries
@@ -5511,7 +5511,7 @@ api:
       operationids:
         - GetAPITestLatestResults
       unstable: []
-      order: 12
+      order: 13
   - name: Edit a test
     url: '#edit-a-test'
     identifier: edit-a-test
@@ -5535,7 +5535,7 @@ api:
       operationids:
         - GetTest
       unstable: []
-      order: 25
+      order: 26
   - name: Trigger tests from CI/CD pipelines
     url: '#trigger-tests-from-ci/cd-pipelines'
     identifier: trigger-tests-from-ci/cd-pipelines
@@ -5548,9 +5548,9 @@ api:
         - TriggerCITests
       unstable: []
       order: 6
-  - name: Trigger some Synthetics tests
-    url: '#trigger-some-synthetics-tests'
-    identifier: trigger-some-synthetics-tests
+  - name: Trigger Synthetics tests
+    url: '#trigger-synthetics-tests'
+    identifier: trigger-synthetics-tests
     parent: synthetics
     generated: true
     params:
@@ -5559,7 +5559,7 @@ api:
       operationids:
         - TriggerTests
       unstable: []
-      order: 0
+      order: 7
   - name: Delete tests
     url: '#delete-tests'
     identifier: delete-tests
@@ -5571,7 +5571,7 @@ api:
       operationids:
         - DeleteTests
       unstable: []
-      order: 14
+      order: 15
   - name: Get a browser test result
     url: '#get-a-browser-test-result'
     identifier: get-a-browser-test-result
@@ -5583,7 +5583,7 @@ api:
       operationids:
         - GetBrowserTestResult
       unstable: []
-      order: 11
+      order: 12
   - name: Get a browser test's latest results summaries
     url: '#get-a-browser-tests-latest-results-summaries'
     identifier: get-a-browser-tests-latest-results-summaries
@@ -5595,7 +5595,7 @@ api:
       operationids:
         - GetBrowserTestLatestResults
       unstable: []
-      order: 13
+      order: 14
   - name: Edit a browser test
     url: '#edit-a-browser-test'
     identifier: edit-a-browser-test
@@ -5619,7 +5619,7 @@ api:
       operationids:
         - GetBrowserTest
       unstable: []
-      order: 8
+      order: 9
   - name: Create a browser test
     url: '#create-a-browser-test'
     identifier: create-a-browser-test
@@ -5655,7 +5655,7 @@ api:
       operationids:
         - GetAPITest
       unstable: []
-      order: 7
+      order: 8
   - name: Create an API test
     url: '#create-an-api-test'
     identifier: create-an-api-test
@@ -5691,7 +5691,7 @@ api:
       operationids:
         - ListTests
       unstable: []
-      order: 9
+      order: 10
   - name: Edit a private location
     url: '#edit-a-private-location'
     identifier: edit-a-private-location
@@ -5703,7 +5703,7 @@ api:
       operationids:
         - UpdatePrivateLocation
       unstable: []
-      order: 22
+      order: 23
   - name: Get a private location
     url: '#get-a-private-location'
     identifier: get-a-private-location
@@ -5715,7 +5715,7 @@ api:
       operationids:
         - GetPrivateLocation
       unstable: []
-      order: 21
+      order: 22
   - name: Delete a private location
     url: '#delete-a-private-location'
     identifier: delete-a-private-location
@@ -5727,7 +5727,7 @@ api:
       operationids:
         - DeletePrivateLocation
       unstable: []
-      order: 24
+      order: 25
   - name: Create a private location
     url: '#create-a-private-location'
     identifier: create-a-private-location
@@ -5739,7 +5739,7 @@ api:
       operationids:
         - CreatePrivateLocation
       unstable: []
-      order: 20
+      order: 21
   - name: Get all locations (public and private)
     url: '#get-all-locations-public-and-private'
     identifier: get-all-locations-public-and-private
@@ -5751,7 +5751,7 @@ api:
       operationids:
         - ListLocations
       unstable: []
-      order: 23
+      order: 24
   - name: Get details of batch
     url: '#get-details-of-batch'
     identifier: get-details-of-batch
@@ -5763,7 +5763,7 @@ api:
       operationids:
         - GetSyntheticsCIBatch
       unstable: []
-      order: 26
+      order: 27
   - name: Tags
     url: /api/latest/tags/
     identifier: tags
