@@ -426,7 +426,7 @@ With the shortcut, you can access your dashboards and monitors through three key
 
 {{< img src="mobile/siri_shadow.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Shortcuts">}}
 
-For more information on Siri Shortcuts and Suggestions, refer to the [Apple Siri Documentation][17].
+For more information about Siri shortcuts and suggestions, read the [Apple Siri documentation][17].
 
 ## Handoff
 
