@@ -29,7 +29,7 @@ These different OTLP metric types are mapped to Datadog in-app metric types foun
 - GAUGE
 - DISTRIBUTION
 
-A single OTLP metric may be mapped to several Datadog metrics which will have a suffix indicating their meaning.
+A single OTLP metric may be mapped to several Datadog metrics with a suffix indicating their meaning.
 
 **Note**: OTLP metric types are commonly produced by but different from OpenTelemetry metrics API instruments. The OpenTelemetry SDK allows for customization of the OTLP metrics produced by a given instrument.
 
@@ -66,7 +66,7 @@ An OTLP Histogram represents the statistical distribution of a set of values on 
 - *Aggregation temporality*, which can be cumulative or delta. Delta metrics have no overlap in their time windows, while cumulative metrics represent a time window from a fixed start point in time.
 
 The default mapping is as follows:
-1. delta histograms are reported as Datadog distributions. Read the [distributions documentation][2] to understand the available aggregations.
+1. delta histograms are reported as Datadog distributions. [Read more about distributions][2] to understand the available aggregations.
 2. For cumulative histograms, the delta between consecutive points is calculated and reported to Datadog as a distribution. You may use the [`cumsum` arithmetic function][1] on individual aggregations to recover the value in the OTLP payload.
 
 The Datadog Agent and the OpenTelemetry Collector Datadog exporter allow changing the Histogram export in the `histogram` subsection.
@@ -112,13 +112,13 @@ An OTLP Summary is a legacy type that conveys quantile information about a popul
 
 OTLP supports two kinds of attributes: datapoint-level attributes and resource attributes. These attributes may follow OpenTelemetry semantic conventions and have well-known semantics.
 
-The Datadog Agent and the OpenTelemetry Collector Datadog exporter will map the datapoints-level attributes as tags. Resource attributes following OpenTelemetry semantic conventions will be mapped to the equivalent Datadog conventions if they exist.
+The Datadog Agent and the OpenTelemetry Collector Datadog exporter map the datapoints-level attributes as tags. Resource attributes following OpenTelemetry semantic conventions are mapped to the equivalent Datadog conventions if they exist.
 
 You may add all resource attributes as tags by using the `resource_attributes_as_tags` flag.
 
 ### Hostname resolution
 
-OpenTelemetry defines certain semantic conventions that refer to host names. If an OTLP payload has a known hostname attribute, Datadog products will honor these conventions and try to use its value as a hostname. The semantic conventions are considered in the following order:
+OpenTelemetry defines certain semantic conventions related to host names. If an OTLP payload has a known hostname attribute, Datadog products honor these conventions and try to use its value as a hostname. The semantic conventions are considered in the following order:
 
 1. `datadog.host.name`, a Datadog-specific hostname convention,
 2. `k8s.node.name`, the Kubernetes node name,
@@ -127,8 +127,8 @@ OpenTelemetry defines certain semantic conventions that refer to host names. If 
 5. `host.name` the system hostname and
 6. `container.id` the container ID.
 
-If none are present, Datadog products will assign a system-level hostname to payloads.
-On the OpenTelemetry Collector, we recommend adding the ['resource detection' processor][3] to your pipelines for accurate hostname resolution.
+If none are present, Datadog products assign a system-level hostname to payloads.
+On the OpenTelemetry Collector, add the ['resource detection' processor][3] to your pipelines for accurate hostname resolution.
 
 ### Example
 
@@ -166,7 +166,7 @@ The following table summarizes the behavior of Datadog products in this case:
 {{% /tab %}}
 {{% tab "Histogram" %}}
 
-Suppose you are using an OpenTelemetry Histogram instrument, `request.response_time.histogram`, from two webservers: `webserver:web_1` and `webserver:web_2`. Suppose in a given collection period, `webserver:web_1` reports the metric with the values `[1,1,1,2,2,2,3,3]`, and `webserver:web_2` reports the same metric with the values `[1,1,2]`. Over this collection period, the following five aggregations will represent the global statistical distribution of all values collected from both webservers:
+Suppose you are using an OpenTelemetry Histogram instrument, `request.response_time.histogram`, from two webservers: `webserver:web_1` and `webserver:web_2`. Suppose in a given collection period, `webserver:web_1` reports the metric with the values `[1,1,1,2,2,2,3,3]`, and `webserver:web_2` reports the same metric with the values `[1,1,2]`. Over this collection period, the following five aggregations represent the global statistical distribution of all values collected from both webservers:
 
 | Metric Name                                | Value  | Datadog In-App Type |
 | ------------------------------------------ | ------ | ------------------- |
@@ -176,7 +176,7 @@ Suppose you are using an OpenTelemetry Histogram instrument, `request.response_t
 | `min:request.response_time.distribution`   | `1`    | GAUGE               |
 | `sum:request.response_time.distribution`   | `19`   | COUNT               |
 
-Further quantile aggregations may be configured as documented in the [distributions documentation][2].
+[Read more about distributions][2] to understand how to configure further aggregations.
 
 Alternatively, if using the `counters` mode and enabling the `send_count_sum_metrics` flag, the following metrics would be reported if the histogram bucket boundaries are set to `[-inf, 2, inf]`:
 
@@ -190,7 +190,7 @@ Alternatively, if using the `counters` mode and enabling the `send_count_sum_met
 {{% /tab %}}
 {{% tab "Summary" %}}
 
-Suppose you are submitting a legacy OTLP Summary metric, `request.response_time.summary`, from one webserver. Suppose in a given collection period, the webserver reports the metric with the values `[1,1,1,2,2,2,3,3]`. The following metrics would be reported, if min, max and median quantiles are enabled:
+Suppose you are submitting a legacy OTLP Summary metric, `request.response_time.summary`, from one web server. Suppose in a given collection period, the web server reports the metric with the values `[1,1,1,2,2,2,3,3]`. The following metrics would be reported, if min, max, and median quantiles are enabled:
 
 | Metric Name                                   | Value  | Tags                                | Datadog In-App Type |
 | --------------------------------------------- | ------ | ------------------------------------| ------------------- |
