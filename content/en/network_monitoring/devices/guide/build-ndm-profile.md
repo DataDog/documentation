@@ -71,9 +71,159 @@ metrics:
 
 **Note**: `sysobjectid` can be a wildcard pattern to match a sub-tree of devices, for example: `1.3.6.1.131.12.4.*`.
 
-## Test the profile
+### Generate a profile file from a collection of MIBs
 
-Second, test the profile by targeting an IP address of a device that will use the profile.
+You can use [ddev][5], part of the Datadog integrations developer's toolkit, to create a profile from a list of mibs.
+
+```console
+$  ddev meta snmp generate-profile-from-mibs --help
+```
+
+This script requires a list of ASN1 MIB files as input argument, and copies to the clipboard a list of metrics that can be used to create a profile.
+
+### Options
+
+`-f, --filters` is an option to provide the path to a YAML file containing a collection of MIB names and their list of node names to be included.
+
+For example, include `system`, `interfaces` and `ip` nodes from `RFC1213-MIB`, no node from `CISCO-SYSLOG-MIB`, and node `snmpEngine` from `SNMP-FRAMEWORK-MIB`.
+
+
+```yaml
+RFC1213-MIB:
+- system
+- interfaces
+- ip
+CISCO-SYSLOG-MIB: []
+SNMP-FRAMEWORK-MIB:
+- snmpEngine
+```
+
+**Note**: Each `MIB:node_name` correspond to exactly one and only one OID. However, some MIBs report legacy nodes that are overwritten. To resolve, edit the MIB by removing legacy values manually before loading them with this profile generator. If a MIB is fully supported, it can be omitted from the filter as MIBs not found in a filter will be fully loaded. If a MIB is **not** fully supported, it can be listed with an empty node list, such as `CISCO-SYSLOG-MIB` in the example.
+
+`-a, --aliases` is an option to provide the path to a YAML file containing a list of aliases to be used as metric tags for tables, in the following format:
+
+```yaml
+aliases:
+- from:
+    MIB: ENTITY-MIB
+    name: entPhysicalIndex
+  to:
+    MIB: ENTITY-MIB
+    name: entPhysicalName
+```
+
+MIBs tables most of the time define one or more indexes, as columns within the same table, or columns from a different table and even a different MIB. The index value can be used to tag table's metrics. This is defined in the `INDEX` field in `row` nodes.
+
+As an example, `entPhysicalContainsTable` in `ENTITY-MIB` is as follows:
+
+```txt
+entPhysicalContainsEntry OBJECT-TYPE
+SYNTAX      EntPhysicalContainsEntry
+MAX-ACCESS  not-accessible
+STATUS      current
+DESCRIPTION
+        "A single container/'containee' relationship."
+INDEX       { entPhysicalIndex, entPhysicalChildIndex }  <== this is the index definition
+::= { entPhysicalContainsTable 1 }
+```
+
+or, for example, its JSON dump, where `INDEX` is replaced by `indices`:
+
+```json
+"entPhysicalContainsEntry": {
+    "name": "entPhysicalContainsEntry",
+    "oid": "1.3.6.1.2.1.47.1.3.3.1",
+    "nodetype": "row",
+    "class": "objecttype",
+    "maxaccess": "not-accessible",
+    "indices": [
+      {
+        "module": "ENTITY-MIB",
+        "object": "entPhysicalIndex",
+        "implied": 0
+      },
+      {
+        "module": "ENTITY-MIB",
+        "object": "entPhysicalChildIndex",
+        "implied": 0
+      }
+    ],
+    "status": "current",
+    "description": "A single container/'containee' relationship."
+  },
+```
+
+Indexes can be replaced by another MIB symbol that is more human-readable. You might prefer to see the interface name versus its numerical table index. This can be achieved using `metric_tag_aliases`.
+
+### Add unit tests
+
+Add a unit test in `test_profiles.py` to verify that the metric is successfully collected by the integration when the profile is enabled. These unit tests are mostly used to prevent regressions and will help with maintenance.
+
+For example:
+
+```python
+def test_hp_ilo4(aggregator):
+    run_profile_check('hp_ilo4')
+
+    common_tags = common.CHECK_TAGS + ['snmp_profile:hp-ilo4']
+
+    aggregator.assert_metric('snmp.cpqHeSysUtilLifeTime', metric_type=aggregator.MONOTONIC_COUNT, tags=common_tags, count=1)
+    aggregator.assert_all_metrics_covered()
+```
+
+This test will initially fail as there is no simulation data.
+
+```console
+$ ddev test -k test_hp_ilo4 snmp:py38
+[...]
+======================================= FAILURES ========================================
+_____________________________________ test_hp_ilo4 ______________________________________
+tests/test_profiles.py:1464: in test_hp_ilo4
+    aggregator.assert_metric('snmp.cpqHeSysUtilLifeTime', metric_type=aggregator.GAUGE, tags=common.CHECK_TAGS, count=1)
+../datadog_checks_base/datadog_checks/base/stubs/aggregator.py:253: in assert_metric
+    self._assert(condition, msg=msg, expected_stub=expected_metric, submitted_elements=self._metrics)
+../datadog_checks_base/datadog_checks/base/stubs/aggregator.py:295: in _assert
+    assert condition, new_msg
+E   AssertionError: Needed exactly 1 candidates for 'snmp.cpqHeSysUtilLifeTime', got 0
+[...]
+```
+
+### Add simultation data
+
+Add a `.snmprec` file named after the `community_string`, which is the value we gave to `run_profile_check()`:
+
+```
+$ touch snmp/tests/compose/data/hp_ilo4.snmprec
+```
+
+Add lines to the `.snmprec` file to specify the `sysobjectid` and the OID listed in the profile:
+
+```console
+1.3.6.1.2.1.1.2.0|6|1.3.6.1.4.1.232.9.4.10
+1.3.6.1.4.1.232.6.2.8.1.0|2|1051200
+```
+
+Run the test again, and make sure it passes this time:
+
+```console
+$ ddev test -k test_hp_ilo4 snmp:py38
+[...]
+
+tests/test_profiles.py::test_hp_ilo4 PASSED                                                                                        [100%]
+
+=================================================== 1 passed, 107 deselected in 9.87s ====================================================
+________________________________________________________________ summary _________________________________________________________________
+  py38: commands succeeded
+  congratulations :)
+```
+
+To learn more about simulation data format, see the [Simulation Data Format Reference][TK] documentation.
+
+
+### Next steps
+
+The basic workflow of adding metrics, expanding tests, and adding simulation data is complete. You can now add more metrics to your basic SNMP profile. To learn more about SNMP profile formatting, see the [Profile Format Reference][TK] documentation.
+
 
 ## Further Reading
 
@@ -84,3 +234,5 @@ Second, test the profile by targeting an IP address of a device that will use th
 [2]: https://en.wikipedia.org/wiki/HP_Integrated_Lights-Out
 [3]: https://support.hpe.com/hpsc/swd/public/detail?swItemId=MTX_53293d026fb147958b223069b6
 [4]: https://en.wikipedia.org/wiki/Networking_hardware
+[5]: https://github.com/DataDog/integrations-core/tree/master/datadog_checks_dev
+[6]: https://github.com/DataDog/integrations-core/tree/master/snmp/tests/compose/data
