@@ -81,19 +81,19 @@ Custom metrics volumes can be impacted by configuring tags and aggregations usin
 **Note: Only configured metrics contribute to your Ingested custom metrics volume.** If a metric is not configured with Metrics without Limits™, you're only charged for its indexed custom metrics volume.
 
 #### When are you charged for ingested vs indexed custom metrics?
-For metrics not configured with Metrics without Limits™, you only pay for for indexed custom metrics.
+For metrics not configured with Metrics without Limits™, you pay for for indexed custom metrics.
 
-|                                  | Indexed Custom Metrics<br>(based on monthly average number of Custom Metrics per hour)                                        |
-|----------------------------------|-------------------------------------------------------------------------------------------------------------------------------|
-| Account allotment                | - Pro: 100 indexed Custom Metrics per host <br>- Enterprise: 200 indexed Custom Metrics  per host                             |
-| If account allotment is exceeded | For each 100 indexed custom metrics over the account allotment, you pay an amount that is specified in your current contract. |
+|                                      | Indexed Custom Metrics<br>(based on monthly average number of Custom Metrics per hour)                                        |
+|--------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|
+| Account allotment                    | - Pro: 100 indexed Custom Metrics per host <br>- Enterprise: 200 indexed Custom Metrics  per host                             |
+| Usage greater than account allotment | For each 100 indexed custom metrics over the account allotment, you pay an amount that is specified in your current contract. |
 
 For metrics configured with Metrics without Limits™ (tags/aggregations are configured), you pay for ingested custom metrics and indexed custom metrics.
 
-|                                  | Ingested Custom Metrics                                                                           | Indexed Custom Metrics                                                                                                        |
-|----------------------------------|---------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|
-| Account Allotment                | - Pro: 100 ingested Custom Metrics per host<br>- Enterprise: 200 ingested Custom Metrics per host | - Pro: 100 indexed Custom Metrics per host<br>- Enterprise: 200 indexed Custom Metrics per host                               |
-| If account allotment is exceeded | An additional $0.10 per 100 ingested custom metrics applied.                                      | For each 100 indexed custom metrics over the account allotment, you pay an amount that is specified in your current contract. |
+|                                      | Ingested Custom Metrics                                                                           | Indexed Custom Metrics                                                                                                        |
+|--------------------------------------|---------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|
+| Account Allotment                    | - Pro: 100 ingested Custom Metrics per host<br>- Enterprise: 200 ingested Custom Metrics per host | - Pro: 100 indexed Custom Metrics per host<br>- Enterprise: 200 indexed Custom Metrics per host                               |
+| Usage greater than account allotment | For each 100 ingested custom metrics over the account allotment, you pay $0.10.                   | For each 100 indexed custom metrics over the account allotment, you pay an amount that is specified in your current contract. |
 
 Suppose you wanted to use Metrics without Limits™ to reduce the size of your `request.Latency` metric by keeping only the `endpoint` and `status` tags. This results in the following three unique tag combinations:
 
@@ -166,19 +166,19 @@ Custom metrics volumes can be impacted by configuring tags and aggregations usin
 **Note: Only configured metrics contribute to your Ingested custom metrics volume.** If a metric is not configured with Metrics without Limits™, you're only charged for its indexed custom metrics volume.
 
 #### When are you charged for ingested vs indexed custom metrics?
-For metrics not configured with Metrics without Limits™, you only pay for for indexed custom metrics.
+For metrics not configured with Metrics without Limits™, you pay for for indexed custom metrics.
 
-|                                  | Indexed Custom Metrics<br>(based on monthly average number of Custom Metrics per hour)                                        |
-|----------------------------------|-------------------------------------------------------------------------------------------------------------------------------|
-| Account allotment                | - Pro: 100 indexed Custom Metrics per host <br>- Enterprise: 200 indexed Custom Metrics  per host                             |
-| If account allotment is exceeded | For each 100 indexed custom metrics over the account allotment, you pay an amount that is specified in your current contract. |
+|                                      | Indexed Custom Metrics<br>(based on monthly average number of Custom Metrics per hour)                                        |
+|--------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|
+| Account allotment                    | - Pro: 100 indexed Custom Metrics per host <br>- Enterprise: 200 indexed Custom Metrics  per host                             |
+| Usage greater than account allotment | For each 100 indexed custom metrics over the account allotment, you pay an amount that is specified in your current contract. |
 
 For metrics configured with Metrics without Limits™ (tags/aggregations are configured), you pay for ingested custom metrics and indexed custom metrics.
 
-|                                  | Ingested Custom Metrics                                                                           | Indexed Custom Metrics                                                                                                        |
-|----------------------------------|---------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|
-| Account Allotment                | - Pro: 100 ingested Custom Metrics per host<br>- Enterprise: 200 ingested Custom Metrics per host | - Pro: 100 indexed Custom Metrics per host<br>- Enterprise: 200 indexed Custom Metrics per host                               |
-| If account allotment is exceeded | An additional $0.10 per 100 ingested custom metrics applied.                                      | For each 100 indexed custom metrics over the account allotment, you pay an amount that is specified in your current contract. |
+|                                      | Ingested Custom Metrics                                                                           | Indexed Custom Metrics                                                                                                        |
+|--------------------------------------|---------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|
+| Account Allotment                    | - Pro: 100 ingested Custom Metrics per host<br>- Enterprise: 200 ingested Custom Metrics per host | - Pro: 100 indexed Custom Metrics per host<br>- Enterprise: 200 indexed Custom Metrics per host                               |
+| Usage greater than account allotment | For each 100 ingested custom metrics over the account allotment, you pay $0.10.                   | For each 100 indexed custom metrics over the account allotment, you pay an amount that is specified in your current contract. |
 
 By default, Datadog stores the most frequently queried aggregation combination depending on the metric's type to preserve the mathematical accuracy of your configured metric's query as listed below: 
 
@@ -240,7 +240,7 @@ This table summarizes the effect of adding percentile aggregations to any distri
 
 ### Configure tags with Metrics without Limits™
 
-Custom metrics volumes can be impacted by configuring tags and aggregations using [Metrics without Limits™][4]. Metrics without Limits™ decouples ingestion costs from indexing costs -- so you can continue sending Datadog all of your data (everything is ingested) and you can specify an allowlist of tags you'd want to remain queryable in the Datadog platform. Given the volume of data Datadog is ingesting for your configured metrics now differs from the smaller, remaining volume you’ve indexed, you'll see two distinct volumes on your Usage page as well as the Metrics Summary page. 
+Custom metrics volumes can be impacted by configuring tags and aggregations using [Metrics without Limits™][2]. Metrics without Limits™ decouples ingestion costs from indexing costs -- so you can continue sending Datadog all of your data (everything is ingested) and you can specify an allowlist of tags you'd want to remain queryable in the Datadog platform. Given the volume of data Datadog is ingesting for your configured metrics now differs from the smaller, remaining volume you’ve indexed, you'll see two distinct volumes on your Usage page as well as the Metrics Summary page. 
  
 - **Ingested Custom Metrics**: The original volume of custom metrics based on the all ingested tags (sent via code)
 - **Indexed Custom Metrics**: The volume of custom metrics that remains queryable in the Datadog platform (based on any Metrics without Limits™ configurations) 
@@ -248,19 +248,19 @@ Custom metrics volumes can be impacted by configuring tags and aggregations usin
 **Note: Only configured metrics contribute to your Ingested custom metrics volume.** If a metric is not configured with Metrics without Limits™, you're only charged for its indexed custom metrics volume.
 
 #### When are you charged for ingested vs indexed custom metrics?
-For metrics not configured with Metrics without Limits™, you only pay for for indexed custom metrics.
+For metrics not configured with Metrics without Limits™, you pay for for indexed custom metrics.
 
-|                                  | Indexed Custom Metrics<br>(based on monthly average number of Custom Metrics per hour)                                        |
-|----------------------------------|-------------------------------------------------------------------------------------------------------------------------------|
-| Account allotment                | - Pro: 100 indexed Custom Metrics per host <br>- Enterprise: 200 indexed Custom Metrics  per host                             |
-| If account allotment is exceeded | For each 100 indexed custom metrics over the account allotment, you pay an amount that is specified in your current contract. |
+|                                      | Indexed Custom Metrics<br>(based on monthly average number of Custom Metrics per hour)                                        |
+|--------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|
+| Account allotment                    | - Pro: 100 indexed Custom Metrics per host <br>- Enterprise: 200 indexed Custom Metrics  per host                             |
+| Usage greater than account allotment | For each 100 indexed custom metrics over the account allotment, you pay an amount that is specified in your current contract. |
 
 For metrics configured with Metrics without Limits™ (tags/aggregations are configured), you pay for ingested custom metrics and indexed custom metrics.
 
-|                                  | Ingested Custom Metrics                                                                           | Indexed Custom Metrics                                                                                                        |
-|----------------------------------|---------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|
-| Account Allotment                | - Pro: 100 ingested Custom Metrics per host<br>- Enterprise: 200 ingested Custom Metrics per host | - Pro: 100 indexed Custom Metrics per host<br>- Enterprise: 200 indexed Custom Metrics per host                               |
-| If account allotment is exceeded | An additional $0.10 per 100 ingested custom metrics applied.                                      | For each 100 indexed custom metrics over the account allotment, you pay an amount that is specified in your current contract. |
+|                                      | Ingested Custom Metrics                                                                           | Indexed Custom Metrics                                                                                                        |
+|--------------------------------------|---------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|
+| Account Allotment                    | - Pro: 100 ingested Custom Metrics per host<br>- Enterprise: 200 ingested Custom Metrics per host | - Pro: 100 indexed Custom Metrics per host<br>- Enterprise: 200 indexed Custom Metrics per host                               |
+| Usage greater than account allotment | For each 100 ingested custom metrics over the account allotment, you pay $0.10.                   | For each 100 indexed custom metrics over the account allotment, you pay an amount that is specified in your current contract. |
 
 Suppose you want to keep only the `endpoint` and `status` tags associated with the `request.Latency` metric. This results in the following three unique tag combinations:
 
