@@ -194,7 +194,7 @@ Delete a widget by long pressing, dragging, and dropping the widget to the "Remo
 
 ### SLOs widget
 
-{{< img src="mobile/slo_widget.png" alt="widget page" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
+{{< img src="mobile/slo_widget.png" alt="Application Uptime SLO widgets displayed on Android and iOS devices" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
 
 View your [SLOs][14] from your mobile home screen with Datadog widgets. You can add any SLOs from your organization as a widget, along with a timeframe.
 
