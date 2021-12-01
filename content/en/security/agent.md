@@ -66,6 +66,8 @@ If you believe you've discovered a bug in Datadog's security, get in touch at [s
 
 By default, the Agent runs as the `dd-agent` user on Linux and as the `ddagentuser` account on [Windows][18]. Note there are some exceptions to this: the `system-probe` which runs as `root` on Linux and as `LOCAL_SYSTEM` on Windows, the `process-agent` which runs as `LOCAL_SYSTEM` on Windows, and the `security-agent` which runs as `root` on Linux.
 
+The `process-agent` can be configured to run as the unprivileged `ddagentuser` on Windows, but some functionality will be missing. In specific, the command line of each process won't be available in Datadog.
+
 ## Secrets management
 
 Customers with a requirement to avoid storing secrets in plaintext in the Agent's configuration files can leverage the [secrets management][19] package. This package allows the Agent to call a user-provided executable to handle retrieval or decryption of secrets, which are then loaded in memory by the Agent. Users have the flexibility to design their executable according to their preferred key management service, authentication method, and continuous integration workflow.
