@@ -142,17 +142,17 @@ Suppose you are using an OpenTelemetry Counter instrument from a single applicat
 
 | Collection period | Counter values    | OTLP Sum value | Value reported to Datadog | Datadog In-App Type | Notes                                          |
 |-------------------|-------------------|----------------|---------------------------| ------------------- |------------------------------------------------|
-| #0                | [1,1,1,2,2,2,3,3] | 15             | None                      |  COUNT              | First collection period value is not reported. |
-| #1                | [3,4,1,2]         | 25             | 10                        |  COUNT              | The difference between values is reported.     |
-| #2                | []                | 25             | 0                         |  COUNT              | No new values were reported in this period.    |
+| #1                | [1,1,1,2,2,2,3,3] | 15             | None                      |  COUNT              | First collection period value is not reported. |
+| #2                | [3,4,1,2]         | 25             | 10                        |  COUNT              | The difference between values is reported.     |
+| #3                | []                | 25             | 0                         |  COUNT              | No new values were reported in this period.    |
 
 Suppose you are using an OpenTelemetry UpDownCounter instrument from a single application, which, by default, exports metrics of a cumulative Sum type. The following table summarizes the behavior of Datadog products:
 
 | Collection period | UpDownCounter values | OTLP Sum value | Value reported to Datadog | Datadog In-App Type |
 |-------------------|----------------------|----------------|---------------------------| ------------------- |
-| #0                | [1,1,1,2,2,2,3,3]    | 15             | 15                        | GAUGE               |
-| #1                | [3,-4,1,2]           | 17             | 17                        | GAUGE               |
-| #2                | [-1]                 | 16             | 16                        | GAUGE               |
+| #1                | [1,1,1,2,2,2,3,3]    | 15             | 15                        | GAUGE               |
+| #2                | [3,-4,1,2]           | 17             | 17                        | GAUGE               |
+| #3                | [-1]                 | 16             | 16                        | GAUGE               |
 
 {{% /tab %}}
 {{% tab "Gauge" %}}
@@ -162,9 +162,9 @@ The following table summarizes the behavior of Datadog products in this case:
 
 | Collection period | Gauge instrument | OTLP Gauge value | Value reported to Datadog | Datadog In-App Type |
 |-------------------|------------------|------------------|---------------------------| ------------------- |
-| #0                | 71.5             | 71.5             | 71.5                      | GAUGE               |
-| #1                | 72               | 72               | 72                        | GAUGE               |
-| #2                | 70               | 70               | 70                        | GAUGE               |
+| #1                | 71.5             | 71.5             | 71.5                      | GAUGE               |
+| #2                | 72               | 72               | 72                        | GAUGE               |
+| #3                | 70               | 70               | 70                        | GAUGE               |
 
 {{% /tab %}}
 {{% tab "Histogram" %}}
