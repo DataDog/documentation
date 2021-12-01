@@ -306,7 +306,7 @@ Delete a widget by long pressing, dragging, and dropping the widget to the "Remo
 
 {{< img src="mobile/monitor_widget.png" alt="widget page" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
 
-View your [monitors][15] from your home screen with Datadog widgets. Tap on any cell to open the "Monitor Search" screen in the app, with your monitors already filled in.
+View your [monitors][15] from your home screen with Datadog widgets. Tap any cell to open the **Monitor Search** screen in the app, with your monitors already filled in.
 
 **Note**: If you do not have any monitor saved views, the widget shows you all monitors by default.
 
