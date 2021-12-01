@@ -102,11 +102,10 @@ Also, you can customize your Open Incidents widgets by filtering on:
 {{< tabs >}}
 {{% tab "iOS" %}}
 
-- Long press on your home screen.
-- Tap the “+” button on the top left corner of the screen.
-- Search for "Datadog" widgets.
-- Select your prefered size (small, medium, or large).
-- Drag the widget to your desired, on-screen location.
+1. Tap the **+** button on the top left corner of the screen.
+2. Search for "Datadog" widgets.
+3. Select your preferred size (small, medium, or large).
+4. Drag the widget to your desired, on-screen location.
 
 
 {{% /tab %}}
