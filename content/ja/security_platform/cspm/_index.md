@@ -8,9 +8,9 @@ kind: documentation
 </div>
 {{< /site-region >}}
 
-{{< site-region region="us3,gov" >}}
+{{< site-region region="us3,us5,gov" >}}
 <div class="alert alert-warning">
-クラウドセキュリティポスチャ管理は、現在 US1-FED、US3 では利用できません。
+クラウドセキュリティポスチャ管理は、現在このサイトでは利用できません。
 </div>
 {{< /site-region >}}
 
