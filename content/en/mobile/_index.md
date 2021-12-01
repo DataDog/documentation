@@ -85,7 +85,7 @@ On the Incidents page, you can view, search and filter all incidents that you ha
 
 ### Open Incidents widget
 
-{{< img src="mobile/incident_widget.png" alt="widget page" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
+{{< img src="mobile/incident_widget.png" alt="Datadog incident mobile widget displayed on Android and iOS devices" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
 
 View your [open incidents][13] from your mobile home screen with Datadog widgets.
 
