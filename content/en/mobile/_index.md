@@ -404,7 +404,7 @@ Delete a widget by long pressing, dragging, and dropping the widget on the "Remo
 
 {{< img src="mobile/shortcut_shadow.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Quick Actions">}}
 
-Long-press on the app icon to surface a quick-action sheet of your top five [Frequently Viewed By Me][16] dashboards for iOS (measured by view count and recency) and your five most opened dashboards on mobile for Android. Press on a result to open the dashboard in-app.
+Long-press the app icon to display a quick-action sheet of your top five [Frequently Viewed By Me][16] dashboards for iOS (measured by view count and recency), or your five most opened dashboards on mobile for Android. Tap a result to open the dashboard in-app.
 
 ## Search from home screen
 
