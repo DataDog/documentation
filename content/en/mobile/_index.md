@@ -112,10 +112,10 @@ Also, you can customize your Open Incidents widgets by filtering on:
 {{% /tab %}}
 {{% tab "Android" %}}
 
-- Long press on your home screen.
-- Tap the "Widgets" button on your home screen editor. If you have app shortcuts, it might appear as just an icon on the top right corner of the bubble.
-- Drag the widget to your desired, on-screen home screen.
-- Resize the widget to fit your preference.
+1. Long press on your home screen.
+2. Tap the **Widgets** button on your home screen editor. If you have app shortcuts, it might appear as only an icon on the top right corner of the bubble.
+3. Drag the widget to your desired, on-screen home screen.
+4. Resize the widget to fit your preference.
 
 
 {{% /tab %}}
