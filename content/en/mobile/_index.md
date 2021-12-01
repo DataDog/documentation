@@ -439,7 +439,7 @@ For Handoff to work, each device must:
 - Have Wi-Fi enabled
 - Have Handoff enabled
 
-For more information on Handoff, refer to the [Apple Handoff Documentation][18].
+For more information about Handoff, read the [Apple Handoff documentation][18].
 
 ## Account
 
