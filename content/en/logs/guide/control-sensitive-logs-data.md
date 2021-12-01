@@ -23,7 +23,12 @@ Logs may contain sensitive data, and should be handled carefully. If you are ing
 - If you have intentionally set up your logs to have sensitive data for legitimate troubleshooting and auditing purposes, use the **Roles Based Access Control** to ensure that you have set up appropriate restrictions so only authorized users who have access to your Datadog account can access this data. For more information, see the [Logs Roles Based Access Control (RBAC) User's Guide][1] to learn how to configure it for your organization.
 - Address any unintentional logging of sensitive data to preemptively address any concerns down the road. Continue with this guide to learn more.
 
-Controlling all of your data can be challenging, especially on a large and highly collaborative platform. This guide walks you through the three steps you should take if you have compliance-sensitive data that is ingested into Datadog:
+Controlling all of your data can be challenging, especially on a large and highly collaborative platform. This guide walks you through the different options to discovery and manage sensitive data that is ingested into Datadog.
+
+## Sensitive Data Scanner
+Sensitive data scanner is a stream-based, pattern matching service that you can use to identify, tag, and optionally redact or hash sensitive data. With implementation, your security and compliance teams can introduce a new line of defense in preventing sensitive data from leaking outside your organization. Sensitive data scanner can be found under Organization Settings. [Learn more.][19]
+
+If you have already indexed logs that contain sensitive data, then follow these three steps.
 
 1. [Determine the scope of the data being sent](#determine-the-scope-of-the-data-being-sent)
 2. [Fix the source of the data upstream](#fix-the-source-of-the-data-upstream)
@@ -55,17 +60,22 @@ Once sensitive data in logs is sent to the Datadog platform, it may exist in a n
 
 ## Fix the source of the data upstream
 
+### Redact sensitive data in streaming logs using Sensitive Data Scanner
+
+Use out-of-the-box or custom rules to identify and redact sensitive data in your logs.[Learn more.][19]
+
 ### Stop indexing sensitive logs
 
-This is an optional step to prevent additional sensitive data from being sent to Datadog. However keep in mind that you’ll still need to address the sensitive data already sent to Datadog.
+If not using the Sensitive Data Scanner, determine whether you want to exclude any new logs containing sensitive data from being indexed entirely. You’ll still need to address the logs containing sensitive data already indexed in Datadog.
 
-* Find which index(es) that hold sensitive data are susceptible to routing.
+* Find which index(es) hold logs with sensitive data.
 * For each index, add an exclusion filter based on the sensitive outline query.
 
 {{< img src="logs/guide/sensitive/sensitive_exclusion-filters.png" alt="Sensitive Exclusion Filters" style="width:80%;" >}}
 
 ### Stop sending sensitive data to Datadog
 
+If certain kinds of sensitive data are totally prohibited from leaving your environments and coming to Datadog, then add scrubbing rules at source collection.
 If you have way to change the loggers themselves, Datadog provides you with solutions to prevent compliance-sensitive data from being sent outside of your platform when using the [Datadog Agent][11] for Log Collection:
 
 * [Scrub sensitive data][12] from your logs before you send them to Datadog.
@@ -73,7 +83,7 @@ If you have way to change the loggers themselves, Datadog provides you with solu
 
 Similar scrubbing capabilities exist for the [Serverless Forwarder][14].
 
-## Handle data already sent to Datadog
+## Handle data already sent to and indexed in Datadog
 
 Take the following steps according to your compliance requirements. You might not need to complete all steps.
 
@@ -96,9 +106,11 @@ If you have to patch your archives to remove sensitive data, refer to the [forma
 If you have a specific compliance questions or need help, contact Datadog [support][18]. When you contact support, it is helpful for you to have the following information available:
 
 * The sensitive outline query or anything that could define sensitive data such as a timerange, a service, or an environment.
+* Whether you use [Sensitive Data Scanner.][20]
 * Whether the sensitive data is still being sent into Datadog.
 * Whether sensitive data has been indexed (in which index(es)) or turned into metrics.
 * Whether you have already made sensitive data unqueryable.
+
 
 ## Further Reading
 
@@ -122,3 +134,5 @@ If you have a specific compliance questions or need help, contact Datadog [suppo
 [16]: /account_management/rbac/permissions/?tab=ui#logs_read_data
 [17]: /logs/archives/?tab=awss3#format-of-the-archives
 [18]: /help/
+[19]: /account_management/org_settings/sensitive_data_detection/
+[20]: https://www.datadoghq.com/blog/sensitive-data-scanner/
