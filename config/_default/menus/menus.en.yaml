@@ -1,383 +1,3 @@
-main_left:
-  - identifier: product
-    name: Product
-    url: 'https://www.datadoghq.com/product/'
-    weight: -500
-  - identifier: features
-    name: Features
-    pre: <i class="icon-features align-middle"></i>
-    url: 'https://www.datadoghq.com/product/'
-    weight: 1
-    parent: product
-  - identifier: integrations
-    name: Integrations
-    pre: <i class="icon-integrations align-middle"></i>
-    url: 'https://www.datadoghq.com/product/platform/integrations/'
-    weight: 2
-    parent: product
-  - identifier: dashboarding
-    name: Dashboards
-    pre: <i class="icon-dashboard align-middle"></i>
-    url: 'https://www.datadoghq.com/product/platform/dashboards/'
-    weight: 3
-    parent: product
-  - identifier: infrastructure
-    name: Infrastructure Monitoring
-    pre: <i class="icon-host-map align-middle"></i>
-    url: 'https://www.datadoghq.com/product/infrastructure-monitoring/'
-    weight: 4
-    parent: product
-  - identifier: logs
-    name: Log Management
-    pre: <i class="icon-log align-middle"></i>
-    url: 'https://www.datadoghq.com/product/log-management/'
-    weight: 5
-    parent: product
-  - identifier: apm
-    name: APM
-    pre: <i class="icon-apm align-middle"></i>
-    url: 'https://www.datadoghq.com/product/apm/'
-    weight: 6
-    parent: product
-  - identifier: profiler
-    name: Continuous Profiler
-    pre: <i class="icon-profiling-1 align-middle"></i>
-    url: 'https://www.datadoghq.com/product/code-profiling/'
-    weight: 7
-    parent: product
-  - identifier: ci-visibility
-    name: CI Visibility
-    pre: <i class='icon-ci'></i>
-    url: 'https://www.datadoghq.com/product/ci-cd-monitoring/'
-    weight: 8
-    parent: product
-  - identifier: synthetics
-    name: Synthetic Monitoring
-    pre: <i class="icon-synthetics align-middle"></i>
-    url: 'https://www.datadoghq.com/product/synthetic-monitoring/'
-    weight: 9
-    parent: product
-  - identifier: rum
-    name: RUM & Session Replay
-    pre: <i class="icon-rum align-middle"></i>
-    url: 'https://www.datadoghq.com/product/real-user-monitoring/'
-    weight: 10
-    parent: product
-  - identifier: network-performance
-    name: Network Performance Monitoring
-    pre: <i class="icon-network align-middle"></i>
-    url: 'https://www.datadoghq.com/product/network-monitoring/network-performance-monitoring/'
-    weight: 11
-    parent: product
-  - identifier: network-device
-    name: Network Device Monitoring
-    pre: <i class='icon-ndm'></i>
-    url: 'https://www.datadoghq.com/product/network-monitoring/network-device-monitoring/'
-    weight: 12
-    parent: product
-  - identifier: security-platform
-    name: Security Platform
-    pre: <i class="icon-security-platform align-middle"></i>
-    url: 'https://www.datadoghq.com/product/security-platform/'
-    weight: 13
-    parent: product
-  - identifier: cloud-siem
-    name: Cloud SIEM
-    pre: <i class="icon-siem align-middle"></i>
-    url: 'https://www.datadoghq.com/product/security-platform/cloud-siem/'
-    weight: 14
-    parent: product
-  - identifier: cloud-security-posture-management
-    name: CSPM
-    pre: <i class="icon-cspm align-middle"></i>
-    url: 'https://www.datadoghq.com/product/security-platform/cloud-security-posture-management/'
-    weight: 15
-    parent: product
-  - identifier: cloud-workload-security
-    name: Cloud Workload Security
-    pre: <i class="icon-cws align-middle"></i>
-    url: 'https://www.datadoghq.com/product/security-platform/cloud-workload-security/'
-    weight: 16
-    parent: product
-  - identifier: sensitive-data-scanner
-    name: Sensitive Data Scanner
-    pre: <i class='icon-sds'></i>
-    url: 'https://www.datadoghq.com/product/sensitive-data-scanner/'
-    weight: 17
-    parent: product
-  - identifier: error-tracking
-    name: Error Tracking
-    pre: <i class="icon-error-tracking align-middle"></i>
-    url: 'https://www.datadoghq.com/product/security-platform/error-tracking/'
-    weight: 17
-    parent: product
-  - identifier: incident
-    name: Incident Management
-    pre: <i class="icon-incidents align-middle"></i>
-    url: 'https://www.datadoghq.com/product/incident-management'
-    weight: 18
-    parent: product
-  - identifier: database
-    name: Database Monitoring
-    pre: <i class="icon-database-2 align-middle"></i>
-    url: 'https://www.datadoghq.com/product/database-monitoring'
-    weight: 19
-    parent: product
-  - identifier: serverless
-    name: Serverless
-    pre: <i class="icon-serverless align-middle"></i>
-    url: 'https://www.datadoghq.com/product/serverless-monitoring/'
-    weight: 20
-    parent: product
-  - identifier: alerts
-    name: Alerts
-    pre: <i class="icon-monitor align-middle"></i>
-    url: 'https://www.datadoghq.com/product/alerts/'
-    weight: 21
-    parent: product
-  - identifier: api
-    name: API
-    pre: <i class="icon-api align-middle"></i>
-    url: 'https://docs.datadoghq.com/api'
-    weight: 22
-    parent: product
-  - identifier: customers
-    name: Customers
-    url: 'https://www.datadoghq.com/customers/'
-    weight: -480
-  - identifier: pricing
-    name: Pricing
-    url: 'https://www.datadoghq.com/pricing/'
-    weight: -480
-  - identifier: solutions
-    name: Solutions
-    url: '#'
-    weight: -460
-  - identifier: industry-financial
-    name: Financial Services
-    parent: solutions
-    title: industry
-    url: 'https://www.datadoghq.com/solutions/financial-services/'
-    weight: -460
-  - identifier: industry-manufacturing
-    name: Manufacturing & Logistics
-    parent: solutions
-    title: industry
-    url: 'https://www.datadoghq.com/solutions/manufacturing-logistics/'
-    weight: -459
-  - identifier: industry-healthcare
-    name: Healthcare/Life Sciences
-    parent: solutions
-    title: industry
-    url: 'https://www.datadoghq.com/solutions/healthcare/'
-    weight: -458
-  - identifier: industry-retail
-    name: Retail/E-Commerce
-    parent: solutions
-    title: industry
-    url: 'https://www.datadoghq.com/solutions/retail-ecommerce/'
-    weight: -457
-  - identifier: industry-government
-    name: Government
-    parent: solutions
-    title: industry
-    url: 'https://www.datadoghq.com/solutions/government/'
-    weight: -456
-  - identifier: industry-education
-    name: Education
-    parent: solutions
-    title: industry
-    url: 'https://www.datadoghq.com/solutions/education/'
-    weight: -455
-  - identifier: industry-media
-    name: Media & Entertainment
-    parent: solutions
-    title: industry
-    url: 'https://www.datadoghq.com/solutions/media-entertainment/'
-    weight: -454
-  - identifier: industry-technology
-    name: Technology
-    parent: solutions
-    title: industry
-    url: 'https://www.datadoghq.com/solutions/technology/'
-    weight: -453
-  - identifier: industry-gaming
-    name: Gaming
-    parent: solutions
-    title: industry
-    url: 'https://www.datadoghq.com/solutions/gaming/'
-    weight: -452
-  - identifier: technology-aws
-    name: Amazon Web Services
-    parent: solutions
-    title: technology
-    url: 'https://www.datadoghq.com/solutions/aws/'
-    weight: -451
-  - identifier: technology-azure
-    name: Azure
-    parent: solutions
-    title: technology
-    url: 'https://www.datadoghq.com/solutions/azure/'
-    weight: -450
-  - identifier: technology-gcp
-    name: Google Cloud Platform
-    parent: solutions
-    title: technology
-    url: 'https://www.datadoghq.com/solutions/gcp/'
-    weight: -449
-  - identifier: technology-kubernetes
-    name: Kubernetes
-    parent: solutions
-    title: technology
-    url: 'https://www.datadoghq.com/solutions/kubernetes/'
-    weight: -448
-  - identifier: technology-openshift
-    name: Red Hat OpenShift
-    parent: solutions
-    title: technology
-    url: 'https://www.datadoghq.com/solutions/openshift/'
-    weight: -447
-  - identifier: usecase-migration
-    name: Cloud Migration
-    parent: solutions
-    title: usecase
-    url: 'https://www.datadoghq.com/solutions/cloud-migration/'
-    weight: -446
-  - identifier: usecase-consolidate
-    name: Monitoring Consolidation
-    parent: solutions
-    title: usecase
-    url: 'https://www.datadoghq.com/solutions/monitoring-consolidation/'
-    weight: -445
-  - identifier: usecase-devops
-    name: DevOps
-    parent: solutions
-    title: usecase
-    url: 'https://www.datadoghq.com/solutions/devops/'
-    weight: -444
-  - identifier: usecase-testing
-    name: Shift-Left Testing
-    parent: solutions
-    title: usecase
-    url: 'https://www.datadoghq.com/solutions/shift-left-testing/'
-    weight: -443
-  - identifier: usecase-security
-    name: Security Analytics
-    parent: solutions
-    title: usecase
-    url: 'https://www.datadoghq.com/solutions/security-analytics/'
-    weight: -442
-  - identifier: usecase-compliance
-    name: Compliance for CIS Benchmarks
-    parent: solutions
-    title: usecase
-    url: 'https://www.datadoghq.com/solutions/security/cis-benchmarks/'
-    weight: -441
-  - identifier: usecase-hybrid
-    name: Hybrid Cloud Monitoring
-    parent: solutions
-    title: usecase
-    url: 'https://www.datadoghq.com/solutions/hybrid-cloud-monitoring/'
-    weight: -440
-  - identifier: usecase-iot
-    name: IoT Monitoring
-    parent: solutions
-    title: usecase
-    url: 'https://www.datadoghq.com/solutions/iot-monitoring/'
-    weight: -439
-  - identifier: usecase-machine
-    name: Machine Learning
-    parent: solutions
-    title: usecase
-    url: 'https://www.datadoghq.com/solutions/machine-learning/'
-    weight: -438
-  - identifier: usecase-analytics
-    name: Real-Time BI
-    parent: solutions
-    title: usecase
-    url: 'https://www.datadoghq.com/solutions/business-analytics/'
-    weight: -437
-  - identifier: usecase-onprem
-    name: On-Premises Monitoring
-    parent: solutions
-    title: usecase
-    url: 'https://www.datadoghq.com/solutions/on-premises-monitoring/'
-    weight: -436
-  - identifier: usecase-log
-    name: Log Analysis & Correlation
-    parent: solutions
-    title: usecase
-    url: 'https://www.datadoghq.com/solutions/log-analysis-and-correlation/'
-    weight: -435
-main_right:
-  - identifier: about
-    name: About
-    url: 'https://www.datadoghq.com/about/leadership/'
-    weight: -490
-  - name: Contact
-    parent: about
-    url: 'https://www.datadoghq.com/about/contact/'
-    weight: -490
-  - name: Partners
-    parent: about
-    url: 'https://www.datadoghq.com/partner'
-    weight: -480
-  - name: Latest News
-    parent: about
-    url: 'https://www.datadoghq.com/about/latest-news/press-releases/'
-    weight: -460
-  - name: Leadership
-    parent: about
-    url: 'https://www.datadoghq.com/about/leadership/'
-    weight: -440
-  - name: Careers
-    parent: about
-    url: 'https://www.datadoghq.com/careers/'
-    weight: -420
-  - name: Analyst Reports
-    parent: about
-    url: 'https://www.datadoghq.com/about/analyst/'
-    weight: -415
-  - name: Investor Relations
-    parent: about
-    url: 'https://investors.datadoghq.com/'
-    weight: -410
-  - name: Awards
-    parent: about
-    url: 'https://www.datadoghq.com/about/awards/'
-    weight: -405
-  - identifier: blog
-    name: Blog
-    url: 'https://www.datadoghq.com/blog/'
-    weight: -480
-  - name: The Monitor
-    url: 'https://www.datadoghq.com/blog/'
-    weight: 100
-    parent: blog
-  - name: Engineering
-    url: 'https://www.datadoghq.com/blog/engineering/'
-    parent: blog
-    weight: 200
-  - name: Pup Culture
-    url: 'https://www.datadoghq.com/blog/pup-culture/'
-    parent: blog
-    weight: 300
-  - name: Community
-    url: 'https://www.datadoghq.com/blog/community/'
-    parent: blog
-    weight: 400
-  - identifier: docs
-    name: Docs
-    url: 'https://docs.datadoghq.com/'
-    weight: -470
-  - identifier: login
-    name: Login
-    url: 'https://app.datadoghq.com/'
-    weight: -460
-  - identifier: get_started
-    name: Get Started Free
-    url: '#'
-    weight: -440
 main:
   - name: Getting Started
     identifier: getting_started
@@ -748,106 +368,101 @@ main:
     parent: agent_amazon_ecs
     identifier: agent_amazon_ecs_data_collected
     weight: 504
-  - name: AWS Fargate
-    url: integrations/ecs_fargate/
-    parent: agent
-    identifier: ecs_fargate
-    weight: 6
   - name: IoT
     url: agent/iot/
     parent: agent
     identifier: agent_iot
-    weight: 7
+    weight: 6
   - name: Log Collection
     url: agent/logs/
     identifier: agent_logs
     parent: agent
-    weight: 8
+    weight: 7
   - name: Advanced Log Collection
     url: agent/logs/advanced_log_collection
     parent: agent_logs
-    weight: 801
+    weight: 701
   - name: Proxy
     url: agent/logs/proxy
     parent: agent_logs
-    weight: 802
+    weight: 702
   - name: Transport
     url: agent/logs/log_transport
     parent: agent_logs
-    weight: 803
+    weight: 703
   - name: Proxy
     url: agent/proxy/
     parent: agent
     identifier: agent_proxy
-    weight: 9
+    weight: 8
   - name: Versions
     url: agent/versions
     parent: agent
     identifier: agent_versions
-    weight: 10
+    weight: 9
   - name: Upgrade to Agent v7
     url: agent/versions/upgrade_to_agent_v7/
     parent: agent_versions
-    weight: 1001
+    weight: 901
   - name: Upgrade to Agent v6
     url: agent/versions/upgrade_to_agent_v6/
     parent: agent_versions
-    weight: 1002
+    weight: 902
   - name: Troubleshooting
     url: agent/troubleshooting/
     parent: agent
-    weight: 11
+    weight: 10
     identifier: agent_troubleshooting
   - name: Debug Mode
     url: agent/troubleshooting/debug_mode/
     parent: agent_troubleshooting
-    weight: 1101
+    weight: 1001
   - name: Agent Flare
     url: agent/troubleshooting/send_a_flare/
     parent: agent_troubleshooting
-    weight: 1102
+    weight: 1002
   - name: Agent Check Status
     url: agent/troubleshooting/agent_check_status/
     parent: agent_troubleshooting
-    weight: 1103
+    weight: 1003
   - name: NTP Issues
     url: agent/troubleshooting/ntp/
     parent: agent_troubleshooting
-    weight: 1104
+    weight: 1004
   - name: Permission Issues
     url: agent/troubleshooting/permissions/
     parent: agent_troubleshooting
-    weight: 1105
+    weight: 1005
   - name: Integrations Issues
     url: agent/troubleshooting/integrations/
     parent: agent_troubleshooting
-    weight: 1106
+    weight: 1006
   - name: Site Issues
     url: agent/troubleshooting/site/
     parent: agent_troubleshooting
-    weight: 1107
+    weight: 1007
   - name: Autodiscovery Issues
     url: agent/troubleshooting/autodiscovery/
     parent: agent_troubleshooting
-    weight: 1108
+    weight: 1008
   - name: Windows Container Issues
     url: agent/troubleshooting/windows_containers
-    weight: 1109
+    weight: 1009
     parent: agent_troubleshooting
   - name: Agent Runtime Configuration
     url: agent/troubleshooting/config
-    weight: 1110
+    weight: 1010
     parent: agent_troubleshooting
   - name: Guides
     url: agent/guide/
     identifier: agent_guides
     parent: agent
-    weight: 12
+    weight: 11
   - name: Security
     identifier: agent_security
     url: security/agent/
     parent: agent
-    weight: 13
+    weight: 12
   - name: Integrations
     url: integrations/
     identifier: integrations_top_level
@@ -1766,8 +1381,8 @@ main:
     parent: tracing_setup_overview
     identifier: tracing_configure_data_security
     weight: 107
-  - name: Trace Explorer
-    url: tracing/trace_explorer/
+  - name: Trace Search and Analytics
+    url: tracing/trace_search_and_analytics/
     parent: tracing
     identifier: trace_explorer
     weight: 2
@@ -2165,7 +1780,7 @@ main:
     weight: 6
   - name: Database Monitoring
     url: database_monitoring/
-    pre: database-2
+    pre: dbm
     identifier: dbm
     weight: 160000
   - name: Setting Up Postgres
@@ -2670,53 +2285,37 @@ main:
     parent: synthetics_private_location
     identifier: synthetics_private_location_monitoring
     weight: 403
-  - name: CI/CD Integrations
-    url: /synthetics/cicd_integrations
+  - name: CI/CD Testing
+    url: /synthetics/cicd_testing
     parent: synthetics
-    identifier: synthetics_cicd_integrations
+    identifier: synthetics_cicd_testing
     weight: 5
-  - name: Configuration
-    url: /synthetics/cicd_integrations/configuration
-    parent: synthetics_cicd_integrations
-    identifier: synthetics_cicd_integrations_configuration
-    weight: 501
-  - name: GitHub Actions
-    url: /synthetics/cicd_integrations/github_actions
-    parent: synthetics_cicd_integrations
-    identifier: synthetics_cicd_integrations_github_actions
-    weight: 502
-  - name: Jenkins
-    url: /synthetics/cicd_integrations/jenkins
-    parent: synthetics_cicd_integrations
-    identifier: synthetics_cicd_integrations_jenkins
-    weight: 503
   - name: CI Results Explorer
-    url: /synthetics/ci_results_explorer
-    parent: synthetics
-    identifier: synthetics_ci_results_explorer
-    weight: 6
+    url: /synthetics/cicd_testing/ci_results_explorer
+    parent: synthetics_cicd_testing
+    weight: 501
   - name: Testing Tunnel
     url: /synthetics/testing_tunnel
     parent: synthetics
     identifier: synthetics_testing_tunnel
-    weight: 7
+    weight: 6
   - name: APM Integration
     url: synthetics/apm/
     parent: synthetics
     identifier: synthetics_apm
-    weight: 8
+    weight: 7
   - name: Settings
     url: synthetics/settings/
     parent: synthetics
-    weight: 9
+    weight: 8
   - name: Search and Manage
     url: synthetics/search/
     parent: synthetics
-    weight: 10
+    weight: 9
   - name: Metrics
     url: synthetics/metrics/
     parent: synthetics
-    weight: 11
+    weight: 10
   - name: Guides
     url: synthetics/guide/
     parent: synthetics
@@ -2791,21 +2390,16 @@ main:
     parent: rum_android
     identifier: rum_android_advanced
     weight: 202
-  - name: Mobile Vitals
-    url: real_user_monitoring/android/mobile_vitals/
+  - name: Troubleshooting
+    url: real_user_monitoring/android/troubleshooting/
     parent: rum_android
-    identifier: rum_android_mobile_vitals
+    identifier: rum_troubleshooting_android
     weight: 203
   - name: Integrated Libraries
     url: real_user_monitoring/android/integrated_libraries/
     parent: rum_android
     identifier: rum_android_libraries
     weight: 204
-  - name: Troubleshooting
-    url: real_user_monitoring/android/troubleshooting/
-    parent: rum_android
-    identifier: rum_troubleshooting_android
-    weight: 205
   - name: iOS Monitoring
     url: real_user_monitoring/ios/
     parent: rum
@@ -3113,7 +2707,7 @@ main:
     weight: 220000
   - name: Account Management
     url: account_management/
-    pre: cog-2
+    pre: cog
     identifier: account_management
     weight: 230000
   - name: Switching Between Orgs
@@ -3245,143 +2839,6 @@ main:
     parent: agent
     identifier: vector_aggregation
     weight: 13
-footer_product:
-  - name: Features
-    url: 'https://www.datadoghq.com/product/'
-    weight: 100
-  - name: Integrations
-    url: 'https://www.datadoghq.com/product/platform/integrations/'
-    weight: 105
-  - name: Dashboards
-    url: 'https://www.datadoghq.com/product/platform/dashboards/'
-    weight: 110
-  - name: Log Management
-    url: 'https://www.datadoghq.com/product/log-management/'
-    weight: 115
-  - name: APM
-    url: 'https://www.datadoghq.com/product/apm/'
-    weight: 120
-  - name: Continuous Profiler
-    url: 'https://www.datadoghq.com/product/code-profiling/'
-    weight: 125
-  - name: Synthetic Monitoring
-    url: 'https://www.datadoghq.com/product/synthetic-monitoring/'
-    weight: 130
-  - name: RUM & Session Replay
-    url: 'https://www.datadoghq.com/product/real-user-monitoring/'
-    weight: 135
-footer_product_two:
-  - name: Security Platform
-    url: 'https://www.datadoghq.com/product/security-platform/'
-    weight: 140
-  - name: Cloud SIEM
-    url: 'https://www.datadoghq.com/product/security-platform/cloud-siem'
-    weight: 145
-  - name: CSPM
-    url: 'https://www.datadoghq.com/product/security-platform/cloud-security-posture-management/'
-    weight: 150
-  - name: Network Monitoring
-    url: 'https://www.datadoghq.com/product/network-monitoring/'
-    weight: 155
-  - name: Incident Management
-    url: 'https://www.datadoghq.com/product/incident-management/'
-    weight: 160
-  - name: Serverless
-    url: 'https://www.datadoghq.com/product/serverless-monitoring/'
-    weight: 165
-  - name: Alerts
-    url: 'https://www.datadoghq.com/product/alerts/'
-    weight: 170
-  - name: API
-    url: 'https://docs.datadoghq.com/api/'
-    weight: 175
-footer_product_three:
-  - name: Pricing
-    url: 'https://www.datadoghq.com/pricing/'
-    weight: 100
-  - name: Documentation
-    url: 'https://docs.datadoghq.com/'
-    weight: 105
-  - name: Support
-    url: 'https://www.datadoghq.com/support/'
-    weight: 110
-  - name: Learning Center
-    url: 'https://learn.datadoghq.com/'
-    weight: 115
-  - name: Resources
-    url: 'https://www.datadoghq.com/resources/'
-    weight: 150
-  - name: Webinars
-    url: 'https://www.datadoghq.com/webinars/'
-    weight: 160
-  - name: Security
-    url: 'https://www.datadoghq.com/security/'
-    weight: 180
-footer_about:
-  - name: COVID-19 Update
-    url: 'https://www.datadoghq.com/coronavirus/'
-    weight: 90
-  - name: Contact Us
-    url: 'https://www.datadoghq.com/about/contact/'
-    weight: 100
-  - name: Partners
-    url: 'https://www.datadoghq.com/partner-with-datadog/'
-    weight: 120
-  - name: Press
-    url: 'https://www.datadoghq.com/about/press/'
-    weight: 130
-  - name: Leadership
-    url: 'https://www.datadoghq.com/about/leadership/'
-    weight: 140
-  - name: Careers
-    url: 'https://www.datadoghq.com/careers/'
-    weight: 160
-  - name: Legal
-    url: 'https://www.datadoghq.com/legal/'
-    weight: 170
-  - name: Investor Relations
-    url: 'https://investors.datadoghq.com/'
-    weight: 175
-  - name: Analyst Reports
-    url: 'https://www.datadoghq.com/about/analyst/'
-    weight: 180
-footer_blog:
-  - name: English
-    url: 'https://www.datadoghq.com/blog/'
-    weight: 100
-  - name: Español
-    url: 'https://www.datadoghq.com/es/blog/'
-    weight: 110
-  - name: 日本語
-    url: 'https://www.datadoghq.com/ja/blog/'
-    weight: 120
-footer_social:
-  - name: Twitter
-    url: 'https://twitter.com/datadoghq'
-    weight: 130
-    pre: twitter.svg
-  - name: Instagram
-    url: 'https://www.instagram.com/datadoghq/'
-    weight: 140
-    pre: instagram.svg
-  - name: LinkedIn
-    url: 'https://www.LinkedIn.com/company/datadog/'
-    weight: 160
-    pre: linkedin.svg
-  - name: Youtube
-    url: 'https://www.youtube.com/user/DatadogHQ'
-    weight: 150
-    pre: youtube.svg
-footer_sub:
-  - name: Terms
-    url: 'https://www.datadoghq.com/legal/terms/'
-    weight: 100
-  - name: Privacy
-    url: 'https://www.datadoghq.com/legal/privacy/'
-    weight: 120
-  - name: Cookies
-    url: 'https://www.datadoghq.com/legal/cookies/'
-    weight: 130
 api:
   - name: Overview
     url: /api/latest/
@@ -3391,15 +2848,10 @@ api:
     url: /api/latest/using-the-api/
     parent: API overview
     weight: 5
-  - name: Authorization Scopes
-    url: /api/latest/scopes/
-    identifier: API Scopes
-    parent: API overview
-    weight: 6
   - name: Rate Limits
     url: /api/latest/rate-limits/
     parent: API overview
-    weight: 7
+    weight: 6
     identifier: rate-limits
   - name: AWS Integration
     url: /api/latest/aws-integration/
@@ -6073,7 +5525,7 @@ api:
       operationids:
         - GetUsageSDS
       unstable: []
-      order: 36
+      order: 34
   - name: Get hourly usage for RUM Sessions
     url: '#get-hourly-usage-for-rum-sessions'
     identifier: get-hourly-usage-for-rum-sessions
@@ -6097,7 +5549,7 @@ api:
       operationids:
         - GetUsageRumUnits
       unstable: []
-      order: 37
+      order: 35
   - name: Get hourly usage for profiled hosts
     url: '#get-hourly-usage-for-profiled-hosts'
     identifier: get-hourly-usage-for-profiled-hosts
@@ -6134,19 +5586,6 @@ api:
         - GetUsageNetworkFlows
       unstable: []
       order: 15
-  - name: Get Monthly Usage Attribution
-    url: '#get-monthly-usage-attribution'
-    identifier: get-monthly-usage-attribution
-    parent: usage-metering
-    generated: true
-    params:
-      versions:
-        - v1
-      operationids:
-        - GetMonthlyUsageAttribution
-      unstable:
-        - v1
-      order: 31
   - name: Get hourly usage for Logs by Index
     url: '#get-hourly-usage-for-logs-by-index'
     identifier: get-hourly-usage-for-logs-by-index
@@ -6231,19 +5670,6 @@ api:
         - GetIncidentManagement
       unstable: []
       order: 27
-  - name: Get Hourly Usage Attribution
-    url: '#get-hourly-usage-attribution'
-    identifier: get-hourly-usage-attribution
-    parent: usage-metering
-    generated: true
-    params:
-      versions:
-        - v1
-      operationids:
-        - GetHourlyUsageAttribution
-      unstable:
-        - v1
-      order: 30
   - name: Get hourly usage for hosts and containers
     url: '#get-hourly-usage-for-hosts-and-containers'
     identifier: get-hourly-usage-for-hosts-and-containers
@@ -6279,7 +5705,7 @@ api:
       operationids:
         - GetUsageDBM
       unstable: []
-      order: 35
+      order: 33
   - name: Get hourly usage for Cloud Workload Security
     url: '#get-hourly-usage-for-cloud-workload-security'
     identifier: get-hourly-usage-for-cloud-workload-security
@@ -6291,7 +5717,7 @@ api:
       operationids:
         - GetUsageCWS
       unstable: []
-      order: 34
+      order: 32
   - name: Get hourly usage for CSPM
     url: '#get-hourly-usage-for-cspm'
     identifier: get-hourly-usage-for-cspm
@@ -6303,7 +5729,7 @@ api:
       operationids:
         - GetUsageCloudSecurityPostureManagement
       unstable: []
-      order: 32
+      order: 30
   - name: Get billable usage across your account
     url: '#get-billable-usage-across-your-account'
     identifier: get-billable-usage-across-your-account
@@ -6339,7 +5765,7 @@ api:
       operationids:
         - GetUsageAuditLogs
       unstable: []
-      order: 33
+      order: 31
   - name: Get Usage Attribution
     url: '#get-usage-attribution'
     identifier: get-usage-attribution
@@ -7407,18 +6833,6 @@ api:
         - RemovePermissionFromRole
       unstable: []
       order: 8
-  - name: Create a new role by cloning an existing role
-    url: '#create-a-new-role-by-cloning-an-existing-role'
-    identifier: create-a-new-role-by-cloning-an-existing-role
-    parent: roles
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - CloneRole
-      unstable: []
-      order: 12
   - name: Update a role
     url: '#update-a-role'
     identifier: update-a-role
