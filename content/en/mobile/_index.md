@@ -89,7 +89,7 @@ On the Incidents page, you can view, search and filter all incidents that you ha
 
 View your [open incidents][13] from your mobile home screen with Datadog widgets.
 
-You can tap any open incident displayed in the widget to have it open with more details in the Datadog mobile app - perfect for diving deeper into issues. 
+To dive deeper into issues, tap any open incident displayed in the widget to have it open with more details in the Datadog mobile app. 
 
 Also, you can customize your Open Incidents widgets by filtering on:
 
