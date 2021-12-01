@@ -1824,7 +1824,7 @@ main:
     identifier: compliance_monitoring
     weight: 2
   - name: Règles par défaut
-    url: security_monitoring/default_rules
+    url: security_platform/default_rules/
     parent: security_compliance_monitoring
     identifier: security_monitoring_default_detection_rules
     weight: 3
