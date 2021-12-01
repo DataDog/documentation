@@ -272,6 +272,24 @@
           aliases:
             - /serverless/datadog_lambda_library/
             - /serverless/serverless_integrations/cli/
+  
+  - repo_name: synthetics-ci-github-action
+    contents:
+    - action: pull-and-push-file
+      branch: main
+      globs:
+      - 'README.md'
+      options:
+        dest_path: '/synthetics/cicd_integrations/'
+        file_name: 'github_actions.md'
+        front_matters:
+          dependencies: ["https://github.com/DataDog/synthetics-ci-github-action/blob/main/README.md"]
+          title: Synthetics and CI GitHub Actions
+          kind: documentation
+          further_reading:
+            - link: "https://github.com/DataDog/synthetics-ci-github-action/blob/main/README.md"
+              tag: "GitHub"
+              text: "Datadog Synthetics CI GitHub Action"
 
   - repo_name: dd-sdk-android
     contents:
