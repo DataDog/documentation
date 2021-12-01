@@ -79,11 +79,11 @@ The Datadog Agent and the OpenTelemetry Collector Datadog exporter allow changin
 - If the `send_count_sum_metrics` flag is enabled, the following metrics are produced:
 
 `<METRIC_NAME>.sum`
-: Represents the sum of the values submitted during the time window.
+: Represents the sum of the values submitted during the time window.<br>
 **Datadog In-App Type**: COUNT
 
 `<METRIC_NAME>.count`
-: Represents the number of values submitted during the time window.
+: Represents the number of values submitted during the time window.<br>
 **Datadog In-App Type**: COUNT
 
 **Note**: `send_count_sum_metrics` is only useful when not using the distributions mode.
