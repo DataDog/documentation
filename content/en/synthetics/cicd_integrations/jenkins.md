@@ -1,7 +1,7 @@
 ---
 title: Jenkins
 kind: documentation
-description: 
+description: Configure your Jenkins instance to run Synthetic tests in your CI/CD pipelines.
 further_reading:
 - link: "/continuous_integration/setup_pipelines/jenkins/"
   tag: "Documentation"
@@ -48,17 +48,17 @@ pipeline {
     agent any
     stages {
         stage(‘Run e2e tests’) {
-environment {
-        DD_API_KEY     = credentials('jenkins-datadog-api-key')
-        DD_APP_KEY = credentials('jenkins-datadog-application-key')
-    }
+            environment {
+                DD_API_KEY = credentials('jenkins-datadog-api-key')
+                DD_APP_KEY = credentials('jenkins-datadog-application-key')
+            }
             steps {
                 nodejs(nodeJSInstallationName: 'Node 10.24.x') {
                     configFileProvider(
-       		 [configFile(fileId: 'datadog-ci-config-file-id', variable: 'DATADOG_CI_CONFIG')]) {
-       			 sh ‘datadog-ci run-tests -s ‘tag:e2e-test’ --config $DATADOG_CI_CONFIG '
-  			  }
-              	  }
+                        [configFile(fileId: 'datadog-ci-config-file-id', variable: 'DATADOG_CI_CONFIG')]) {
+                        sh‘ datadog - ci run - tests - s‘ tag: e2e - test’--config $DATADOG_CI_CONFIG '
+                    }
+                }
             }
         }
     }
@@ -71,24 +71,23 @@ To run Synthetic tests with a custom test file in a Jenkins Declarative pipeline
 
 {{< code-block lang="groovy" disable_copy="false" collapsible="true" >}}
 pipeline {
-  agent any
-  stages {
-    stage(‘Run e2e tests’) {
-configFileProvider(
-       		 [configFile(fileId: 'datadog-ci-config-file-id', variable: 'DATADOG_CI_CONFIG')]) {
- steps {
-                	nodejs(nodeJSInstallationName: 'Node 10.24.x') {
-                    	configFileProvider(
-       		 [configFile(fileId: 'datadog-ci-test-file-id', variable: 'DATADOG_CI_TEST_FILE')]) {
-       			 sh ‘datadog-ci run-tests -f $DATADOG_CI_TEST_FILE --config $DATADOG_CI_CONFIG '
-  		  }
-              }
+    agent any
+    stages {
+        stage(‘Run e2e tests’) {
+            configFileProvider(
+                [configFile(fileId: 'datadog-ci-config-file-id', variable: 'DATADOG_CI_CONFIG')]) {
+                steps {
+                    nodejs(nodeJSInstallationName: 'Node 10.24.x') {
+                        configFileProvider(
+                            [configFile(fileId: 'datadog-ci-test-file-id', variable: 'DATADOG_CI_TEST_FILE')]) {
+                            sh‘ datadog - ci run - tests - f $DATADOG_CI_TEST_FILE--config $DATADOG_CI_CONFIG '
+                        }
+                    }
+                }
             }
-  	}
+        }
     }
-  }
 }
-
 {{< /code-block >}}
 
 ## Further Reading

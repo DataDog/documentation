@@ -352,11 +352,11 @@ npm run datadog-ci-synthetics
 
 ### Use the testing tunnel
 
-The [@datadog/datadog-ci][1] NPM package also comes with a tunnel functionality, allowing you to trigger Synthetic tests on your internal applications. 
+The [@datadog/datadog-ci][1] NPM package also comes with secure tunnelling, allowing you to trigger Synthetic tests on your internal applications. 
 
 The testing tunnel creates an end-to-end encrypted HTTP proxy between your infrastructure and Datadog that allows all test requests sent through the CLI to be automatically routed through the `datadog-ci` client. 
 
-This allows Datadog to run tests on your internal applications. For more information, see [Testing Tunnel][4].
+For more information, see [Testing Tunnel][4].
 
 ### Visualize test results
 
