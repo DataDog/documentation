@@ -17,7 +17,7 @@ description: "Trace Search and Analytics"
 
 The Datadog app shows a **Live** indicator next to the time selector whenever you are in Live mode:
 
-{{< img src="tracing/live_search/LiveSearch.png" alt="Live Search Indicator" >}}
+{{< img src="tracing/live_search/live-search.png" alt="Live Search Indicator" >}}
 
 All ingested traces are passed through [custom retention filters][3] that you can create to determine which spans to index, along with the default [intelligent retention filter][4] that retains a diverse set of traces.
 
@@ -62,7 +62,7 @@ With the APM Live Search you can:
 
 The number of received spans per second is displayed at the top of the traces table. Since a stream of thousands of spans per second is not human readable, high throughput span streams show spans for visual clarity but all spans are still searchable. Use the Live Search query bar filtering features to filter the spans stream and the **Pause/Play** button at the top right of the screen to pause or resume the stream.
 
-{{< img src="tracing/live_search/PausePlaystream.png" alt="Pause or Play the Live Stream" >}}
+{{< img src="tracing/live_search/play-pause-button.png" alt="Pause or Play the Live Stream" >}}
 
 Live Search is the default view on the Traces page, and when you're viewing retained traces, you can choose the **LIVE** option in the time range selector to switch to using Live Search for the past 15 minutes of traces.
 
