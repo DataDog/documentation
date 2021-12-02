@@ -28,7 +28,7 @@ Runtime self test: OK
 ```
 and then see events coming from the `runtime-security-agent` in your logs
 
-<DEMO_IMAGE>
+{{< img src="security_platform/cws/self_test_logs.png" alt="Self Test events in Logs explorer" style="width:90%;">}}
 
 In the case of an error, you should see:
 ```
