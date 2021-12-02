@@ -53,7 +53,7 @@ Seeing a new issue as soon as it happens gives you the chance to proactively ide
 
 Each event generated is tagged with the version, the service, and the environment so that you have a fine-grained control over issues you want to be alerted for. You can directly export your search query from the explorer to create an event monitor on the related scope:
 
-{{< img src="real_user_monitoring/error_tracking/export_search_query_to_monitor.gif" alt="Export to monitor in Error Tracking"  >}}
+{{< img src="real_user_monitoring/error_tracking/export_search_query_to_monitor.mp4" alt="Export to monitor in Error Tracking" video=true >}}
 
 
 [1]: /events

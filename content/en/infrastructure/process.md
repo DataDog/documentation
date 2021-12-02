@@ -334,7 +334,7 @@ You can customize integration views (for example, when aggregating a query for N
 
 ## Processes across the platform
 
-{{< img src="infrastructure/process/process_platform.gif" alt="Processes across the Platform" >}}
+{{< img src="infrastructure/process/process_platform.mp4" alt="Processes across the Platform" video=true >}}
 
 ### Live containers
 

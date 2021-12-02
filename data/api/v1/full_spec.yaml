@@ -2049,10 +2049,8 @@ components:
           maxLength: 4000
           type: string
         title:
-          description: The event title. Limited to 100 characters. Use `msg_title`
-            with the Datadog Ruby library.
+          description: The event title.
           example: Did you hear the news today?
-          maxLength: 100
           type: string
         url:
           description: URL of the event.
@@ -5960,7 +5958,8 @@ components:
         timeout_h:
           default: none
           description: The number of hours of the monitor not reporting data before
-            it automatically resolves from a triggered state.
+            it automatically resolves from a triggered state. The minimum allowed
+            value is 0 hours. The maximum allowed value is 24 hours.
           format: int64
           nullable: true
           type: integer
@@ -6147,6 +6146,10 @@ components:
           format: int64
           readOnly: true
           type: integer
+        query:
+          description: The monitor query.
+          example: avg(last_5m):sum:system.net.bytes_rcvd{host:host0} > 100
+          type: string
         scopes:
           description: 'The scope(s) to which the downtime applies, e.g. `host:app2`.
 
@@ -7814,6 +7817,10 @@ components:
       properties:
         category:
           $ref: '#/components/schemas/SLOCorrectionCategory'
+        created_at:
+          description: The epoch timestamp of when the correction was created at
+          format: int64
+          type: integer
         creator:
           $ref: '#/components/schemas/Creator'
         description:
@@ -7830,6 +7837,24 @@ components:
           description: Ending time of the correction in epoch seconds.
           format: int64
           type: integer
+        modified_at:
+          description: The epoch timestamp of when the correction was modified at
+          format: int64
+          type: integer
+        modifier:
+          description: Modifier of the object.
+          nullable: true
+          properties:
+            email:
+              description: Email of the Modifier.
+              type: string
+            handle:
+              description: Handle of the Modifier.
+              type: string
+            name:
+              description: Name of the Modifier.
+              type: string
+          type: object
         rrule:
           description: Recurrence rules as defined in the iCalendar RFC 5545.
           example: RRULE:FREQ=DAILY;INTERVAL=10;COUNT=5
@@ -10393,7 +10418,7 @@ components:
           description: Example for the variable.
           type: string
         id:
-          description: ID for the variable.
+          description: ID for the variable. Global variables require an ID.
           type: string
         name:
           description: Name of the variable.
@@ -12434,6 +12459,8 @@ components:
       - dbm_hosts_percentage
       - dbm_queries_usage
       - dbm_queries_percentage
+      - estimated_indexed_logs_usage
+      - estimated_indexed_logs_percentage
       - '*'
       type: string
       x-enum-varnames:
@@ -12469,6 +12496,8 @@ components:
       - DBM_HOSTS_PERCENTAGE
       - DBM_QUERIES_USAGE
       - DBM_QUERIES_PERCENTAGE
+      - ESTIMATED_INDEXED_LOGS_USAGE
+      - ESTIMATED_INDEXED_LOGS_PERCENTAGE
       - ALL
     UsageAttributionTagNames:
       additionalProperties:
@@ -12573,6 +12602,16 @@ components:
           type: number
         dbm_queries_usage:
           description: The Database Monitoring normalized queries usage by tag(s).
+          format: double
+          type: number
+        estimated_indexed_logs_percentage:
+          description: The percentage of estimated live indexed logs usage by tag(s).
+            Note this field is in private beta.
+          format: double
+          type: number
+        estimated_indexed_logs_usage:
+          description: The estimated live indexed logs usage by tag(s). Note this
+            field is in private beta.
           format: double
           type: number
         infra_host_percentage:
@@ -12965,6 +13004,12 @@ components:
         hour:
           description: The hour for the usage.
           format: date-time
+          type: string
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
           type: string
         tasks_count:
           description: The number of Fargate tasks run.
@@ -13499,6 +13544,12 @@ components:
             hour."
           format: int64
           type: integer
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
+          type: string
         total_scanned_bytes:
           description: "The total number of bytes scanned across all usage types by
             the Sensitive Data Scanner from the start of the given hour\u2019s month
@@ -14643,8 +14694,6 @@ components:
     User:
       description: Create, edit, and disable users.
       properties:
-        access_role:
-          $ref: '#/components/schemas/AccessRole'
         disabled:
           description: The new disabled status of the user.
           example: false
@@ -23666,6 +23715,57 @@ paths:
       x-menu-order: 3
       x-undo:
         type: idempotent
+  /api/v1/slo/{slo_id}/corrections:
+    get:
+      description: Get corrections applied to an SLO
+      operationId: GetSLOCorrections
+      parameters:
+      - description: The ID of the service level objective object.
+        in: path
+        name: slo_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SLOCorrectionListResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Get Corrections For an SLO
+      tags:
+      - Service Level Objectives
+      x-menu-order: 6
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v1/slo/{slo_id}/history:
     get:
       description: "Get a specific SLO\u2019s history, regardless of its SLO type.\n\nThe
@@ -23707,6 +23807,16 @@ paths:
           maximum: 100
           minimum: 0
           type: number
+      - description: 'Defaults to `true`. If any SLO corrections are applied and this
+          parameter is set to `false`,
+
+          then the corrections will not be applied and the SLI values will not be
+          affected.'
+        in: query
+        name: apply_correction
+        required: false
+        schema:
+          type: boolean
       responses:
         '200':
           content:
@@ -23776,7 +23886,7 @@ paths:
       summary: Get details of batch
       tags:
       - Synthetics
-      x-menu-order: 26
+      x-menu-order: 27
       x-undo:
         type: safe
   /api/v1/synthetics/locations:
@@ -23802,7 +23912,7 @@ paths:
       summary: Get all locations (public and private)
       tags:
       - Synthetics
-      x-menu-order: 23
+      x-menu-order: 24
       x-undo:
         type: safe
   /api/v1/synthetics/private-locations:
@@ -23841,7 +23951,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 20
+      x-menu-order: 21
       x-undo:
         operationId: DeletePrivateLocation
         parameters:
@@ -23875,7 +23985,7 @@ paths:
       summary: Delete a private location
       tags:
       - Synthetics
-      x-menu-order: 24
+      x-menu-order: 25
       x-undo:
         type: idempotent
     get:
@@ -23908,7 +24018,7 @@ paths:
       summary: Get a private location
       tags:
       - Synthetics
-      x-menu-order: 21
+      x-menu-order: 22
       x-undo:
         type: safe
     put:
@@ -23949,7 +24059,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 22
+      x-menu-order: 23
       x-undo:
         type: idempotent
   /api/v1/synthetics/tests:
@@ -23985,7 +24095,7 @@ paths:
       summary: Get the list of all tests
       tags:
       - Synthetics
-      x-menu-order: 9
+      x-menu-order: 10
       x-undo:
         type: safe
     post:
@@ -24074,8 +24184,8 @@ paths:
                   locations:
                   - azure:eastus
                   - aws:eu-west-3
-                  message: <NOTIFICATION MESSAGE>
-                  name: <TEST NAME>
+                  message: MY_NOTIFICATION_MESSAGE
+                  name: MY_TEST_NAME
                   options:
                     min_failure_duration: 0
                     min_location_failed: 1
@@ -24152,8 +24262,8 @@ paths:
                       subtype: http
                   locations:
                   - aws:us-west-2
-                  message: <NOTIFICATION MESSAGE>
-                  name: Multistep API test
+                  message: MY_NOTIFICATION_MESSAGE
+                  name: MY_TEST_NAME
                   options:
                     ci:
                       executionRule: blocking
@@ -24269,7 +24379,7 @@ paths:
       summary: Get an API test
       tags:
       - Synthetics
-      x-menu-order: 7
+      x-menu-order: 8
       x-undo:
         type: safe
     put:
@@ -24385,8 +24495,10 @@ paths:
       x-codegen-request-body-name: body
       x-menu-order: 2
       x-undo:
-        operationId: TODO
-        parameters: []
+        operationId: DeleteTests
+        parameters:
+        - name: body
+          template: '{"public_ids": ["{{ public_id }}"]}'
         type: unsafe
   /api/v1/synthetics/tests/browser/{public_id}:
     get:
@@ -24432,7 +24544,7 @@ paths:
       summary: Get a browser test
       tags:
       - Synthetics
-      x-menu-order: 8
+      x-menu-order: 9
       x-undo:
         type: safe
     put:
@@ -24565,7 +24677,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 13
+      x-menu-order: 14
       x-undo:
         type: safe
   /api/v1/synthetics/tests/browser/{public_id}/results/{result_id}:
@@ -24618,7 +24730,7 @@ paths:
       summary: Get a browser test result
       tags:
       - Synthetics
-      x-menu-order: 11
+      x-menu-order: 12
       x-undo:
         type: safe
   /api/v1/synthetics/tests/delete:
@@ -24675,7 +24787,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 14
+      x-menu-order: 15
       x-undo:
         type: idempotent
   /api/v1/synthetics/tests/trigger:
@@ -24704,10 +24816,11 @@ paths:
           description: Bad Request
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      summary: Trigger some Synthetics tests
+      summary: Trigger Synthetics tests
       tags:
       - Synthetics
       x-codegen-request-body-name: body
+      x-menu-order: 7
       x-undo:
         type: safe
   /api/v1/synthetics/tests/trigger/ci:
@@ -24780,7 +24893,7 @@ paths:
       summary: Get a test configuration
       tags:
       - Synthetics
-      x-menu-order: 25
+      x-menu-order: 26
       x-undo:
         type: safe
     put:
@@ -24913,7 +25026,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 12
+      x-menu-order: 13
       x-undo:
         type: safe
   /api/v1/synthetics/tests/{public_id}/results/{result_id}:
@@ -24964,7 +25077,7 @@ paths:
       summary: Get an API test result
       tags:
       - Synthetics
-      x-menu-order: 10
+      x-menu-order: 11
       x-undo:
         type: safe
   /api/v1/synthetics/tests/{public_id}/status:
@@ -25053,7 +25166,7 @@ paths:
       summary: Get all global variables
       tags:
       - Synthetics
-      x-menu-order: 15
+      x-menu-order: 16
       x-undo:
         type: safe
     post:
@@ -25091,7 +25204,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 16
+      x-menu-order: 17
       x-undo:
         operationId: DeleteGlobalVariable
         parameters:
@@ -25140,7 +25253,7 @@ paths:
       summary: Delete a global variable
       tags:
       - Synthetics
-      x-menu-order: 19
+      x-menu-order: 20
       x-undo:
         type: idempotent
     get:
@@ -25182,7 +25295,7 @@ paths:
       summary: Get a global variable
       tags:
       - Synthetics
-      x-menu-order: 18
+      x-menu-order: 19
       x-undo:
         type: safe
     put:
@@ -25227,7 +25340,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 17
+      x-menu-order: 18
       x-undo:
         type: idempotent
   /api/v1/tags/hosts:
@@ -27940,7 +28053,12 @@ tags:
 
     **Note**: Usage data is delayed by up to 72 hours from when it was incurred.
 
-    It is retained for the past 15 months.'
+    It is retained for the past 15 months.
+
+
+    You can retrieve up to 24 hours of hourly usage data for multiple organizations,
+
+    and up to two months of hourly usage data for a single organization in one request.'
   externalDocs:
     description: Find out more at
     url: https://docs.datadoghq.com/account_management/billing/usage_details/

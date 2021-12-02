@@ -55,7 +55,7 @@ Search through your Synthetic tests by clicking on the facets on the left panel 
 
 If you want to exclusively search for browser tests, click **Browser Test** in the left panel. Click again to reselect all your tests, regardless of their type.
 
-{{< img src="synthetics/search/facet-search.gif" alt="Facet Search" >}}
+{{< img src="synthetics/search/facet-search.mp4" alt="Facet Search" video=true >}}
 
 ## Manage tests
 
