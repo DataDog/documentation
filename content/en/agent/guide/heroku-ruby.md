@@ -26,6 +26,7 @@ This guide uses [Heroku’s Rails sample application][5]. This is a barebone Rai
 
 The sample application has a dependency pg which only resolves if you have [Postgres installed locally][7]. Install Postgres before you proceed.
 You can verify that Postgres is installed successfully by running the `psql` command. It returns output similar to the following:
+
 ```shell
 which psql
 /usr/local/bin/psql
@@ -104,7 +105,11 @@ If you open the [Host Map in Datadog][12] you can see that your dyno is reportin
 
 ## Setting up integrations
 
-Datadog comes with more than 400 turn-key integrations that collect metrics from different tech stacks. The Datadog buildpack allows you to enable these integrations for your Heroku application.
+Datadog comes with more than 400 turn-key integrations that collect metrics from different tech stacks. The Datadog buildpack allows you to enable these integrations for your Heroku application. 
+
+Four commonly-used Heroku integration configuration examples are listed below.
+
+### Postgres
 
 Heroku adds a Postgres database through an addon for every Rails application that gets deployed to Heroku. Check that the application has the Postgres addon enabled:
 
@@ -140,15 +145,12 @@ Migrating to CreateWidgets (20140707111715)
 
 After, you can successfully see the `/widgets` endpoint of your application, which uses that database.
 
-Enable the Postgres Datadog integration.
-
-The first thing that you need to do is to retrieve the database credentials from Heroku:
+To enable the Postgres Datadog integration, retrieve the database credentials from Heroku:
 
 ```shell
 # Enter in the psql terminal
 heroku pg:credentials:url DATABASE -a $APPNAME
 ```
-
 Integrations are enabled in a particular way when using the Datadog buildpack. You can learn how to enable any of the integrations in the [buildpack documentation][13].
 
 Create a `datadog/conf.d` folder at the root of your application:
@@ -164,41 +166,33 @@ mkdir -p datadog/conf.d/
 Create a configuration file called `postgres.yaml` replacing with your host, dbname, username, and password with the information you got in the previous command:
 
 ```yaml
-   init_config:
+init_config:
 
-   instances:
-     ## @param host - string - required
-     ## The hostname to connect to.
-     ## NOTE: Even if the server name is "localhost", the agent connects to
-     ## PostgreSQL using TCP/IP, unless you also provide a value for the sock key.
-     #
-     - host: "<HOST>"
+instances:
+  - host: <YOUR HOSTNAME>
+    port: <YOUR PORT>
+    username: <YOUR USERNAME>
+    password: <YOUR PASSWORD>
+    dbname: <YOUR DBNAME>
+    ssl: True
+```
 
-       ## @param port - integer - required
-       ## Port to use when connecting to PostgreSQL.
-       #
-       port: 5432
+Instead of manually updating the configuration, you can set up your Postgres integration based on Heroku environment variables using the [prerun script][14] to replace those values before starting the Datadog Agent:
 
-       ## @param user - string - required
-       ## Datadog Username created to connect to PostgreSQL.
-       #
-       username: <USERNAME>
+```shell
+#!/usr/bin/env bash
 
-       ## @param pass - string - required
-       ## Password associated with the Datadog user.
-       #
-       password: "<PASSWORD>"
-
-       ## @param dbname - string - optional - default: postgres
-       ## Name of the PostgresSQL database to monitor.
-       ## Note: If omitted, the default system postgres database is queried.
-       #
-       dbname: "<DB_NAME>"
-
-       ## @param ssl - string - optional - default: false
-       ## This option determines whether or not and with what priority a secure SSL TCP/IP connection
-       ## is negotiated with the server. There are six modes:
-       ssl: 'true'
+# Update the Postgres configuration from above using the Heroku application environment variable
+if [ -n "$DATABASE_URL" ]; then
+  POSTGREGEX='^postgres://([^:]+):([^@]+)@([^:]+):([^/]+)/(.*)$'
+  if [[ $DATABASE_URL =~ $POSTGREGEX ]]; then
+    sed -i "s/<YOUR HOSTNAME>/${BASH_REMATCH[3]}/" "$DD_CONF_DIR/conf.d/postgres.d/conf.yaml"
+    sed -i "s/<YOUR USERNAME>/${BASH_REMATCH[1]}/" "$DD_CONF_DIR/conf.d/postgres.d/conf.yaml"
+    sed -i "s/<YOUR PASSWORD>/${BASH_REMATCH[2]}/" "$DD_CONF_DIR/conf.d/postgres.d/conf.yaml"
+    sed -i "s/<YOUR PORT>/${BASH_REMATCH[4]}/" "$DD_CONF_DIR/conf.d/postgres.d/conf.yaml"
+    sed -i "s/<YOUR DBNAME>/${BASH_REMATCH[5]}/" "$DD_CONF_DIR/conf.d/postgres.d/conf.yaml"
+  fi
+fi
 ```
 
 Deploy to Heroku:
@@ -225,32 +219,309 @@ Collector
 
 [...]
 
-    postgres (5.4.0)
-    ----------------
-      Instance ID: postgres:e07ef94b907fe733 [OK]
-      Configuration Source: file:/app/.apt/etc/datadog-agent/conf.d/postgres.d/conf.yaml
-      Total Runs: 9
-      Metric Samples: Last Run: 15, Total: 135
-      Events: Last Run: 0, Total: 0
-      Service Checks: Last Run: 1, Total: 9
-      Average Execution Time : 102ms
-      Last Execution Date : 2021-05-11 14:14:34 UTC (1620742474000)
-      Last Successful Execution Date : 2021-05-11 14:14:34 UTC (1620742474000)
-      metadata:
-        version.major: 13
-        version.minor: 2
-        version.patch: 0
-        version.raw: 13.2 (Ubuntu 13.2-1.pgdg20.04+1)
-        version.scheme: semver
-
+  postgres (5.4.0)
+  ----------------
+    Instance ID: postgres:e07ef94b907fe733 [OK]
+    Configuration Source: file:/app/.apt/etc/datadog-agent/conf.d/postgres.d/conf.yaml
+    Total Runs: 9
+    Metric Samples: Last Run: 15, Total: 135
+    Events: Last Run: 0, Total: 0
+    Service Checks: Last Run: 1, Total: 9
+    Average Execution Time : 102ms
+    Last Execution Date : 2021-05-11 14:14:34 UTC (1620742474000)
+    Last Successful Execution Date : 2021-05-11 14:14:34 UTC (1620742474000)
+    metadata:
+      version.major: 13
+      version.minor: 2
+      version.patch: 0
+      version.raw: 13.2 (Ubuntu 13.2-1.pgdg20.04+1)
+      version.scheme: semver
 
 [...]
 ```
 
-Once you have checked that the Postgres check is running correctly, you can start looking at the Postgres metrics available on the [Metrics Summary][14] page:
+Once you have checked that the Postgres check is running correctly, you can start looking at the Postgres metrics available on the [Metrics Summary][15] page:
 
 {{< img src="agent/guide/heroku_ruby/postgres_metrics.png" alt="Datadog Metrics Explorer" >}}
 
+### Redis
+
+For Redis, attach the [Heroku Redis add on][16] to your Heroku application:
+
+```shell
+heroku addons:create heroku-redis:hobby-dev
+```
+
+To validate that Redis has successfully attached to your application, run the following command:
+
+ ```shell
+heroku addons:info REDIS
+```
+
+You should get an output similar to the following:
+
+```shell
+=== redis-cylindrical-59589
+Attachments:  ruby-heroku-datadog::REDIS
+Installed at: Wed Nov 17 2021 14:14:13 GMT+0100 (Central European Standard Time)
+Owning app:   ruby-heroku-datadog
+Plan:         heroku-redis:hobby-dev
+Price:        free
+State:        created
+```
+
+Retrieve the credentials from Heroku by running the following command:
+
+```shell
+heroku config -a $APPNAME | grep REDIS_URL
+```
+
+Create a configuration file named `/datadog/conf.d/redisdb.yaml` at the root of your application to replace your host, port, and password with information from the previous command:
+
+```yaml
+init_config:
+
+instances:
+  - host: <YOUR_REDIS_HOST>
+    password: <YOUR_REDIS_PASSWORD>
+    port: <YOUR_REDIS_PORT>
+```
+
+Instead of manually updating the configuration, you can set up your Redis integration based on Heroku environment variables using the [prerun script][14] to replace those values before starting the Datadog Agent:
+
+```shell
+#!/usr/bin/env bash
+
+# Update the Redis configuration from above using the Heroku application environment variable
+if [ -n "$REDIS_URL" ]; then
+  REDISREGEX='redis://([^:]*):([^@]+)@([^:]+):([^/]+)$'
+  if [[ $REDIS_URL =~ $REDISREGEX ]]; then
+    sed -i "s/<YOUR_REDIS_HOST>/${BASH_REMATCH[3]}/" "$DD_CONF_DIR/conf.d/redisdb.d/conf.yaml"
+    sed -i "s/<YOUR_REDIS_PASSWORD>/${BASH_REMATCH[2]}/" "$DD_CONF_DIR/conf.d/redisdb.d/conf.yaml"
+    sed -i "s/<YOUR_REDIS_PORT>/${BASH_REMATCH[4]}/" "$DD_CONF_DIR/conf.d/redisdb.d/conf.yaml"
+  fi
+fi
+```
+
+Deploy to Heroku:
+
+```shell
+# Deploy to Heroku
+git add .
+git commit -m "Enable redis integration"
+git push heroku main
+```
+
+Once the build finishes, the Datadog Agent starts the Redis check. [Run the Datadog Agent status](#appendix-getting-the-datadog-agent-status) to make sure the Redis check is running correctly. 
+
+The following output displays:
+
+```
+
+[...]
+
+=========
+Collector
+=========
+
+  Running Checks
+  ==============
+
+[...]
+
+  redisdb (4.1.0)
+  ---------------
+    Instance ID: redisdb:eb3a3807075f89f0 [OK]
+    Configuration Source: file:/app/.apt/etc/datadog-agent/conf.d/redisdb.d/conf.yaml
+    Total Runs: 3
+    Metric Samples: Last Run: 45, Total: 135
+    Events: Last Run: 0, Total: 0
+    Service Checks: Last Run: 1, Total: 3
+    Average Execution Time : 6ms
+    Last Execution Date : 2021-11-17 13:56:17 UTC (1637157377000)
+    Last Successful Execution Date : 2021-11-17 13:56:17 UTC (1637157377000)
+    metadata:
+      version.major: 6
+      version.minor: 2
+      version.patch: 3
+      version.raw: 6.2.3
+      version.scheme: semver
+
+[...]
+
+```
+
+### Sidekiq
+
+Sidekiq is a background processing framework for Ruby. If you are using Sidekiq Pro or Enterprise, you can install the Datadog integration for Sidekiq.
+
+Install the `dogstatsd-ruby` package:
+
+```shell
+gem install dogstatsd-ruby
+```
+
+Enable Sidekiq Pro metric collection in your initializer:
+
+```ruby
+    require 'datadog/statsd' # gem 'dogstatsd-ruby'
+
+    Sidekiq::Pro.dogstatsd = ->{ Datadog::Statsd.new('localhost', 8125, namespace:'sidekiq') }
+
+    Sidekiq.configure_server do |config|
+      config.server_middleware do |chain|
+        require 'sidekiq/middleware/server/statsd'
+        chain.add Sidekiq::Middleware::Server::Statsd
+      end
+    end
+```
+
+If you are using Sidekiq Enterprise and want to collect historical metrics, include the following:
+
+```ruby
+      Sidekiq.configure_server do |config|
+        # history is captured every 30 seconds by default
+        config.retain_history(30)
+      end
+```
+
+Add the following to your [`datadog/prerun.sh`][14] script:
+
+```
+cat << 'EOF' >> "$DATADOG_CONF"
+
+dogstatsd_mapper_profiles:
+  - name: sidekiq
+    prefix: "sidekiq."
+    mappings:
+      - match: 'sidekiq\.sidekiq\.(.*)'
+        match_type: "regex"
+        name: "sidekiq.$1"
+      - match: 'sidekiq\.jobs\.(.*)\.perform'
+        name: "sidekiq.jobs.perform"
+        match_type: "regex"
+        tags:
+          worker: "$1"
+      - match: 'sidekiq\.jobs\.(.*)\.(count|success|failure)'
+        name: "sidekiq.jobs.worker.$2"
+        match_type: "regex"
+        tags:
+          worker: "$1"
+EOF
+```
+
+Deploy to Heroku:
+
+```shell
+# Deploy to Heroku
+git add .
+git commit -m "Enable sidekiq integration"
+git push heroku main
+```
+
+Once the build finishes, the Datadog Agent starts the Sidekiq check. [Run the Datadog Agent status](#appendix-getting-the-datadog-agent-status) to make sure the Sidekiq check is running correctly.
+
+### Memcached
+
+Memcached is a distributed memory object caching system that is popular in Rails applications. In this example, you can attach the [Heroku Memcached Cloud add on][17] to your Heroku application:
+
+```
+heroku addons:create memcachedcloud:30
+```
+
+To check that Memcached has been successfully attached to your application, run the following command:
+
+```shell
+heroku addons | grep -A2 memcachedcloud
+```
+
+The following output displays:
+
+```shell
+memcachedcloud (memcachedcloud-fluffy-34783)   30         free   created
+ └─ as MEMCACHEDCLOUD
+```
+
+Retrieve the credentials from Heroku by running the following:
+
+```shell
+heroku config | grep MEMCACHEDCLOUD
+```
+
+Create a configuration file named `/datadog/conf.d/mcache.yaml` at the root of your application to replace your host, port, username, and password with information from the previous command:
+
+```yaml
+instances:
+  - url: <YOUR_MCACHE_HOST> 
+    port: <YOUR_MCACHE_PORT>
+    username: <YOUR_MCACHE_USERNAME>
+    password: <YOUR_MCACHE_PASSWORD>
+```
+
+Instead of manually updating the configuration, you can set up your Memcached integration based on Heroku environment variables using the [prerun script][14] to replace those values before starting the Datadog Agent:
+
+```shell
+#!/usr/bin/env bash
+
+# Update the Memcached configuration from above using the Heroku application environment variable
+if [ -n "$MEMCACHEDCLOUD_SERVERS" ]; then
+  MCACHEREGEX='([^:]+):([^/]+)$'
+  if [[ $MEMCACHEDCLOUD_SERVERS =~ $MCACHEREGEX ]]; then
+    sed -i "s/<YOUR_MCACHE_HOST>/${BASH_REMATCH[1]}/" "$DD_CONF_DIR/conf.d/mcache.d/conf.yaml"
+    sed -i "s/<YOUR_MCACHE_PORT>/${BASH_REMATCH[2]}/" "$DD_CONF_DIR/conf.d/mcache.d/conf.yaml"
+  fi
+  sed -i "s/<YOUR_MCACHE_USERNAME>/${MEMCACHEDCLOUD_USERNAME}/" "$DD_CONF_DIR/conf.d/mcache.d/conf.yaml"
+  sed -i "s/<YOUR_MCACHE_PASSWORD>/${MEMCACHEDCLOUD_PASSWORD}/" "$DD_CONF_DIR/conf.d/mcache.d/conf.yaml"
+fi
+```
+
+Deploy to Heroku:
+
+```shell
+# Deploy to Heroku
+git add .
+git commit -m "Enable memcached integration"
+git push heroku main
+```
+
+Once the build finishes, the Datadog Agent starts the Memcached check. [Run the Datadog Agent status](#appendix-getting-the-datadog-agent-status) to make sure the Memcached check is running correctly. 
+
+The following output displays:
+
+```
+
+[...]
+
+=========
+Collector
+=========
+
+  Running Checks
+  ==============
+
+[...]
+
+  mcache (2.0.0)
+  --------------
+    Instance ID: mcache:ca47ee7a0c236107 [OK]
+    Configuration Source: file:/app/.apt/etc/datadog-agent/conf.d/mcache.d/conf.yaml
+    Total Runs: 2
+    Metric Samples: Last Run: 27, Total: 54
+    Events: Last Run: 0, Total: 0
+    Service Checks: Last Run: 1, Total: 2
+    Average Execution Time : 9ms
+    Last Execution Date : 2021-11-18 12:28:45 UTC (1637238525000)
+    Last Successful Execution Date : 2021-11-18 12:28:45 UTC (1637238525000)
+    metadata:
+      version.major: 1
+      version.minor: 4
+      version.patch: 17
+      version.raw: 1.4.17
+      version.scheme: semver
+
+[...]
+
+```
 ## Traces
 
 To get distributed tracing from your Heroku Ruby application, enable instrumentation.
@@ -273,7 +544,7 @@ Install the gem with `bundle install`:
 bundle install
 ```
 
-Before committing the changes and pushing to Heroku, set [Unified Tagging][15] for the application:
+Before committing the changes and pushing to Heroku, set [Unified Tagging][18] for the application:
 
 ```shell
 # Set the environment of your application
@@ -341,11 +612,11 @@ APM Agent
 
 That output shows that the APM Agent is running correctly and sending traces to Datadog. 
 
-Navigate to the [APM traces section][16] to see your traces:
+Navigate to the [APM traces section][19] to see your traces:
 
 {{< img src="agent/guide/heroku_ruby/traces.png" alt="Ruby application traces in Datadog" >}}
 
-Navigate to the [Service list][17] to see all your application services and your application service view:
+Navigate to the [Service list][20] to see all your application services and your application service view:
 
 {{< img src="agent/guide/heroku_ruby/ruby_service.png" alt="Service list view in Datadog" >}}
 {{< img src="agent/guide/heroku_ruby/service_page.png" alt="Ruby application service view in Datadog" >}}
@@ -376,7 +647,7 @@ To set up the Heroku log drain from a terminal, run the following:
 heroku drains:add "https://http-intake.logs.datadoghq.com/api/v2/logs?dd-api-key=$DD_API_KEY&ddsource=heroku&service=$APPNAME&host=$APPNAME" -a $APPNAME
 ```
 
-To get system metrics from your dynos, apart from enabling the log drain, enable [log-runtime-metrics][18] as well:
+To get system metrics from your dynos, apart from enabling the log drain, enable [log-runtime-metrics][21] as well:
 
 ```shell
 heroku labs:enable log-runtime-metrics -a $APPNAME
@@ -385,7 +656,7 @@ heroku labs:enable log-runtime-metrics -a $APPNAME
 heroku restart -a $APPNAME
 ```
 
-Once the drain has been set up, your Heroku logs appear in the [log section of Datadog][19].
+Once the drain has been set up, your Heroku logs appear in the [log section of Datadog][22].
 
 #### Generating metrics from Heroku router logs
 
@@ -416,7 +687,7 @@ Once the rule has been created, wait for a few minutes to gather the new metrics
 
 #### Generating Datadog metrics from Heroku metric logs
 
-If [log-runtime-metrics][18] is set up for your application, Heroku generates log entries with system metrics for each of the dynos:
+If [log-runtime-metrics][21] is set up for your application, Heroku generates log entries with system metrics for each of the dynos:
 
 {{< img src="agent/guide/heroku_ruby/dyno_memory_log.png" alt="Dyno memory usage log entry" >}}
 {{< img src="agent/guide/heroku_ruby/dyno_cpu_log.png" alt="Dyno CPU usage log entry" >}}
@@ -434,7 +705,7 @@ These logs are also automatically parsed by the Heroku log integration pipeline,
 @heroku.memory.total
 ```
 
-You can learn about what each of these values mean in the official [Heroku documentation][20].
+You can learn about what each of these values mean in the official [Heroku documentation][23].
 
 Follow the same steps explained on the previous section to generate metrics with 15 month retention for each of those measures.
 
@@ -560,7 +831,7 @@ Logs Agent
 
 That output shows that the Logs Agent is running correctly and sending your Ruby application logs to Datadog. 
 
-Navigate to [logs in Datadog][21] and filter by `Source:ruby` to start seeing your Rails logs in Datadog.
+Navigate to [logs in Datadog][24] and filter by `Source:ruby` to start seeing your Rails logs in Datadog.
 
 {{< img src="agent/guide/heroku_ruby/ruby_logs.png" alt="Application generated logs" >}}
 
@@ -604,7 +875,7 @@ git commit -m "Add log traces correlation"
 git push heroku main
 ```
 
-If you navigate to [logs in Datadog][22], the newer Rails logs have their correlated trace:
+If you navigate to [logs in Datadog][25], the newer Rails logs have their correlated trace:
 
 {{< img src="agent/guide/heroku_ruby/log_trace_correlation.png" alt="Log and traces correlation" >}}
 
@@ -612,7 +883,7 @@ If you navigate to [logs in Datadog][22], the newer Rails logs have their correl
 
 In this guide you have taken a sample Rails application, deployed it to Heroku, and instrumented it with Datadog to get metrics, dyno system metrics, logs, traces, and integrations set up.
 
-To continue instrumenting your application with other Datadog integrations, follow the same steps taken for the Postgres integration one, with the configuration files documented in the official [integrations documentation][23].
+To continue instrumenting your application with other Datadog integrations, follow the same steps taken for the Postgres integration one, with the configuration files documented in the official [integrations documentation][26].
 
 ## Appendix: Getting the Datadog Agent status
 
@@ -629,7 +900,7 @@ heroku ps:exec -a $APPNAME
 ~ $
 ```
 
-You can ignore the warnings about the `DD_API_KEY` not being set. This is normal. The reason is that [Heroku doesn’t set configuration variables for the SSH session itself][24], but the Datadog Agent process was able to access those.
+You can ignore the warnings about the `DD_API_KEY` not being set. This is normal. The reason is that [Heroku doesn’t set configuration variables for the SSH session itself][27], but the Datadog Agent process was able to access those.
 
 Once inside the SSH session, execute the Datadog status command:
 
@@ -673,14 +944,17 @@ Agent (v7.27.0)
 [11]: https://devcenter.heroku.com/articles/buildpacks/
 [12]: https://app.datadoghq.com/infrastructure/map?fillby=avg%3Adatadog.heroku_agent.running&filter=dyno%3Aweb.1
 [13]: https://docs.datadoghq.com/agent/basic_agent_usage/heroku/#enabling-integrations
-[14]: https://app.datadoghq.com/metric/summary?filter=postgresql
-[15]: https://docs.datadoghq.com/getting_started/tagging/unified_service_tagging/
-[16]: https://app.datadoghq.com/apm/traces
-[17]: https://app.datadoghq.com/apm/services
-[18]: https://devcenter.heroku.com/articles/log-runtime-metrics/
-[19]: https://app.datadoghq.com/logs/livetail
-[20]: https://devcenter.heroku.com/articles/log-runtime-metrics#cpu-load-averages
-[21]: https://app.datadoghq.com/logs?cols=core_host%2Ccore_service&index=%2A&messageDisplay=inline&query=source%3Aruby&stream_sort=desc
-[22]: https://app.datadoghq.com/logs/livetail?cols=core_host%2Ccore_service&from_ts=0&index=%2A&live=true&messageDisplay=inline&query=source%3Aruby&stream_sort=desc&to_ts=-1
-[23]: https://docs.datadoghq.com/integrations/
-[24]: https://devcenter.heroku.com/articles/exec#environment-variables
+[14]: https://docs.datadoghq.com/agent/basic_agent_usage/heroku/#prerun-script
+[15]: https://app.datadoghq.com/metric/summary?filter=postgresql
+[16]: https://elements.heroku.com/addons/heroku-redis
+[17]: https://elements.heroku.com/addons/memcachedcloud
+[18]: https://docs.datadoghq.com/getting_started/tagging/unified_service_tagging/
+[19]: https://app.datadoghq.com/apm/traces
+[20]: https://app.datadoghq.com/apm/services
+[21]: https://devcenter.heroku.com/articles/log-runtime-metrics/
+[22]: https://app.datadoghq.com/logs/livetail
+[23]: https://devcenter.heroku.com/articles/log-runtime-metrics#cpu-load-averages
+[24]: https://app.datadoghq.com/logs?cols=core_host%2Ccore_service&index=%2A&messageDisplay=inline&query=source%3Aruby&stream_sort=desc
+[25]: https://app.datadoghq.com/logs/livetail?cols=core_host%2Ccore_service&from_ts=0&index=%2A&live=true&messageDisplay=inline&query=source%3Aruby&stream_sort=desc&to_ts=-1
+[26]: https://docs.datadoghq.com/integrations/
+[27]: https://devcenter.heroku.com/articles/exec#environment-variables

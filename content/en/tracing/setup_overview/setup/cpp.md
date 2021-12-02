@@ -101,7 +101,7 @@ get_latest_release() {
     sed -E 's/.*"([^"]+)".*/\1/';
 }
 DD_OPENTRACING_CPP_VERSION="$(get_latest_release DataDog/dd-opentracing-cpp)"
-OPENTRACING_VERSION="v1.5.1"
+OPENTRACING_VERSION="$(get_latest_release opentracing/opentracing-cpp)"
 # Download and install OpenTracing-cpp
 wget https://github.com/opentracing/opentracing-cpp/archive/${OPENTRACING_VERSION}.tar.gz -O opentracing-cpp.tar.gz
 mkdir -p opentracing-cpp/.build

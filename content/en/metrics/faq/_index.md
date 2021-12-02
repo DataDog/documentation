@@ -1,7 +1,8 @@
 ---
 title: Metrics FAQ
 kind: faq
-private: true
+cascade:
+  - private: true
 ---
 
 {{< whatsnext desc="List of Frequently Asked Questions:" >}}

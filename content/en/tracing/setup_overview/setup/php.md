@@ -435,7 +435,7 @@ $ export DD_TRACE_AGENT_PORT=8126
 
 For example, assume the following `script.php` runs a Curl request:
 
-```
+```php
 <?php
 
 sleep(1);
@@ -479,7 +479,7 @@ $ export DD_TRACE_AGENT_PORT=8126
 
 For example, assume the following `long_running.php` script:
 
-```
+```php
 <?php
 
 

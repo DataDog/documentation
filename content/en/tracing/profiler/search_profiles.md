@@ -15,7 +15,7 @@ further_reading:
       text: 'Introducing always-on production profiling in Datadog'
 ---
 
-{{< img src="tracing/profiling/search_profiles.gif" alt="Search profiles by tags">}}
+{{< img src="tracing/profiling/search_profiles.mp4" alt="Search profiles by tags" video=true >}}
 
 Each row is a profile of a process for a short amount of time. By default, profiles are uploaded once a minute. Depending on the language, these processes are profiled between 15s and 60s.
 
@@ -42,7 +42,7 @@ The following measures are available:
 
 Click on a line to view a specific profile:
 
-{{< img src="tracing/profiling/profiling_flamegraph.gif" alt="A specific profile">}}
+{{< img src="tracing/profiling/profiling_flamegraph.mp4" alt="A specific profile" video=true >}}
 
 The header contains information associated with your profile, like the service that generated it, or the environment and code version associated to it.
 

@@ -306,6 +306,7 @@ backend datadog-logs-http
 
 backend datadog-database-monitoring-metrics
     balance roundrobin
+    mode http
     # The following configuration is for HAProxy 1.8 and newer
     server-template mothership 5 dbm-metrics-intake.datadoghq.com:443  check port 443 ssl verify none check resolvers my-dns init-addr none resolve-prefer ipv4
     # Uncomment the following configuration for older HAProxy versions
@@ -313,6 +314,7 @@ backend datadog-database-monitoring-metrics
 
 backend datadog-database-monitoring-samples
     balance roundrobin
+    mode http
     # The following configuration is for HAProxy 1.8 and newer
     server-template mothership 5 dbquery-intake.datadoghq.com:443  check port 443 ssl verify none check resolvers my-dns init-addr none resolve-prefer ipv4
     # Uncomment the following configuration for older HAProxy versions
@@ -469,6 +471,7 @@ backend datadog-logs-http
 
 backend datadog-database-monitoring-metrics
     balance roundrobin
+    mode http
     # The following configuration is for HAProxy 1.8 and newer
     server-template mothership 5 dbm-metrics-intake.datadoghq.eu:443  check port 443 ssl verify none check resolvers my-dns init-addr none resolve-prefer ipv4
     # Uncomment the following configuration for older HAProxy versions
@@ -476,6 +479,7 @@ backend datadog-database-monitoring-metrics
 
 backend datadog-database-monitoring-samples
     balance roundrobin
+    mode http
     # The following configuration is for HAProxy 1.8 and newer
     server-template mothership 5 dbquery-intake.datadoghq.eu:443  check port 443 ssl verify none check resolvers my-dns init-addr none resolve-prefer ipv4
     # Uncomment the following configuration for older HAProxy versions
@@ -521,11 +525,14 @@ logs_config:
 
 database_monitoring:
     metrics:
-        dd_url: http://haproxy.example.com:3838
+        logs_dd_url: haproxy.example.com:3838
+        logs_no_ssl: true
     activity:
-        dd_url: http://haproxy.example.com:3838
+        logs_dd_url: haproxy.example.com:3838
+        logs_no_ssl: true
     samples:
-        dd_url: http://haproxy.example.com:3839
+        logs_dd_url: haproxy.example.com:3839
+        logs_no_ssl: true
 ```
 
 Then edit the `datadog.yaml` Agent configuration file and set `skip_ssl_validation` to `true`. This is needed to make the Agent ignore the discrepancy between the hostname on the SSL certificate (`app.datadoghq.com` or `app.datadoghq.eu`) and your HAProxy hostname:
