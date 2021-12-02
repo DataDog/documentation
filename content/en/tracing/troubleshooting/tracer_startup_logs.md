@@ -8,7 +8,7 @@ further_reading:
 ---
 ## Startup logs
 
-Tracer startup logs capture all obtainable information at startup and log it either as `DATADOG TRACER CONFIGURATION` or `DATADOG TRACER DIAGNOSTICS` to simplify searching within your logs. Some languages may log to a separate file depending on language conventions and the safety of accessing `Stdout` or equivalent.  In those cases, the location of logs are noted in the language tab below.
+Tracer startup logs capture all obtainable information at startup and log it either as `DATADOG TRACER CONFIGURATION` or `DATADOG TRACER DIAGNOSTICS` to simplify searching within your logs. Some languages may log to a separate file depending on language conventions and the safety of accessing `Stdout` or equivalent. In those cases, the location of logs are noted in the language tab below.
 
 `DIAGNOSTICS` log entries happen when the tracer encounters an error during application startup, while  `CONFIGURATION` logs are a JSON formatted representation of settings applied to your tracer. In languages where an Agent connectivity check is performed, the configuration JSON will also include an 'agent_error' key, which indicates whether the Agent is reachable.
 
