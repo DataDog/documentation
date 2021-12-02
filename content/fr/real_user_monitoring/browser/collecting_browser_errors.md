@@ -99,7 +99,7 @@ fetch('<UNE_URL>').catch(function(error) {
 try {
     //Logique de code
 } catch (error) {
-    datadogRum.addError(error, undefined);
+    datadogRum.addError(error);
 }
 ```
 {{% /tab %}}
