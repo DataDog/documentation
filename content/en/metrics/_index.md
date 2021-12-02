@@ -140,6 +140,22 @@ When you look at the data separated by host, `net.bytes_rcvd` is submitted at sl
 
 {{< img src="metrics/introduction/mismatched-time-series.png" alt="Mismatched Time Series" >}}
 
+### Breaking down the metric query
+
+In Datadog, the metric query looks like this:
+
+{{< img src="metrics/introduction/ui-query.png" alt="UI Query"  style="width:70%;">}}
+
+Looking at the JSON, the query can be broken out by space aggregation, metric name, scope, and grouping:
+
+{{< img src="metrics/introduction/color-query.png" alt="Query explained"  style="width:70%;">}}
+
+* **Scope** is the set of tags used to choose time series for the query.
+* **Grouping** is the set of tags over which to apply space aggregation.
+* **Time aggregation** is done implicitly, but can be set manually with the rollup function:
+
+{{< img src="metrics/introduction/color-query2.png" alt="Query explained"  style="width:70%;">}}
+
 ## Metric types and real-time metrics visibility
 
 ### Metric types
