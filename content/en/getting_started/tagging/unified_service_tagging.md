@@ -24,7 +24,7 @@ With these three tags you can:
 - Navigate seamlessly across traces, metrics, and logs with consistent tags
 - View service data based on environment or version in a unified fashion within the Datadog site
 
-{{< img src="tagging/unified_service_tagging/overview.gif" alt="Unified Service Tagging"  >}}
+{{< img src="tagging/unified_service_tagging/overview.mp4" alt="Unified Service Tagging" video=true >}}
 
 ### Requirements
 

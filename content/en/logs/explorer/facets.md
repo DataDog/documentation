@@ -19,7 +19,7 @@ further_reading:
       text: 'Automatically configure your Log Explorer'
 ---
 
-{{< img src="logs/explorer/facet/facets_in_explorer.gif" alt="Facets in Explorer Facet" style="width:100%;">}}
+{{< img src="logs/explorer/facet/facets_in_explorer.mp4" alt="Facets in Explorer Facet" video=true style="width:100%;">}}
 
 ## Overview
 

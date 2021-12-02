@@ -13,7 +13,7 @@ When you create a RUM application dashboards are created within Datadog to analy
 
 You can also access these dashboards through your [RUM application page][2]. Click on the **Dashboard** links associated with your application:
 
-{{< img src="real_user_monitoring/dashboards/rum_applications.gif" alt="RUM applications" >}}
+{{< img src="real_user_monitoring/dashboards/rum_applications.mp4" alt="RUM applications" video=true >}}
 
 {{< whatsnext desc="The following dashboards are available:" >}}
   {{< nextlink href="/real_user_monitoring/dashboards/performance_overview_dashboard" >}}<u>Performance Overview</u>: get a global idea about your website’s performance and demographics. {{< /nextlink >}}
@@ -29,13 +29,13 @@ You can customize your dashboards as you would with [any other one][3], or direc
 
 RUM dashboards are generated for all your applications with a set of default template variables automatically created. Use the template variables on top of it to start filtering RUM dashboards. For instance, use the `applicationId` template variable to filter down to a specific application.
 
-{{< img src="real_user_monitoring/dashboards/template_variables.gif" alt="Template variable" style="width:50%;" >}}
+{{< img src="real_user_monitoring/dashboards/template_variables.mp4" alt="Template variable" video=true style="width:50%;" >}}
 
 ### View RUM events
 
 To explore all the individual events, click on any graph and select _View RUM events_ to be redirected to the RUM Explorer with the currently selected filters.
 
-{{< img src="real_user_monitoring/dashboards/view_rum_events.gif" alt="View RUM events" style="width:80%;" >}}
+{{< img src="real_user_monitoring/dashboards/view_rum_events.mp4" alt="View RUM events" video=true style="width:80%;" >}}
 
 ### Customize dashboards
 

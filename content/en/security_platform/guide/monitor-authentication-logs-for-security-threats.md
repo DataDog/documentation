@@ -95,7 +95,7 @@ Datadog provides out-of-the-box dashboards, such as the [IP investigation dashbo
 
 For example, if a specific IP address or user is triggering multiple security signals, click on the IP address or user in a dashboard list or graph and select **View related Security Signals**. This populates all triggered security signals for that IP address or user in the Security Signals Explorer. If the data permits, this view is helpful when trying to correlate an IP address to a specific user, or vice versa. From here, you can drill down into each rule to remediate attacks. Click on any rule and review the triage and response information in the **Message** tab to properly assess and remediate the issue.
 
-{{< img src="security_platform/security_monitoring/guide/monitor-authentication-logs-for-security-threats/investigation-dashboard-example.gif" alt="Analyze triggered security signals in the IP investigation dashboard">}}
+{{< img src="security_platform/security_monitoring/guide/monitor-authentication-logs-for-security-threats/investigation-dashboard-example.mp4" alt="Analyze triggered security signals in the IP investigation dashboard" video=true >}}
 
 You can also create custom dashboards to visualize key authentication data like counts of logins by source and outcome. This provides you with a high-level view of activity across your entire user base and helps you see trends to identify suspicious spikes that you should investigate.
 
