@@ -105,9 +105,6 @@ spec:
             # hostPort: 8125
             name: dogstatsdport
             protocol: UDP
-          - containerPort: 8126
-            name: traceport
-            protocol: TCP
         env:
           ## Set the Datadog API Key related to your Organization
           ## If you use the Kubernetes Secret use the following env variable:
