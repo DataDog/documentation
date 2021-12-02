@@ -64,7 +64,7 @@ jdk.ObjectAllocationOutsideTLAB#enabled=true
 <div class="alert alert-info">La fonctionnalité de profileur de tas Java est en version bêta.</div>
 Pour activer le profileur de tas, lancez votre application avec le paramètre JVM `-Ddd.profiling.heap.enabled=true` ou la variable d'environnement `DD_PROFILING_HEAP_ENABLED=true`.
 
-Vous avez également la possibilité d'activer les événements suivants dans votre [fichier modèle de remplacement](#creation-et-utilisation-d-un-fichier-modele-de-remplacement) `jfp` :
+Vous avez également la possibilité d'activer les événements suivants dans votre [fichier modèle de remplacement](#creation-et-utilisation-d-un-fichier-modele-de-remplacement-jfr) `jfp` :
 
 ```
 jdk.OldObjectSample#enabled=true
