@@ -3,7 +3,7 @@ title: How to Make a Trello Card using Webhooks
 kind: faq
 ---
 
-You can easily use our [Webhook Integration][1] to instantly create a trello card using our @-notification feature.
+You can use the Datadog [Webhook Integration][1] to instantly create a Trello card using the `@-notification` feature.
 
 This flow uses the Trello REST POST card api endpoint to post the @notification to a relevant Trello list.
 

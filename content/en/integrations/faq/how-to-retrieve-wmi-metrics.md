@@ -112,7 +112,7 @@ WorkingSetPeak          : 45273088
 
 This command returns details about the Powershell process. It includes a lot of information including memory usage and I/O operations.
 
-For those who can run third-party applications on their machine the tool WMI Explorer makes it very easy to browse the information exposed by WMI. It's available here https://www.ks-soft.net/hostmon.eng/wmi/, it's a self-contained .exe file so you don't have to install it, and it's virus-free https://www.virustotal.com/en/file/df8e909491da38556a6c9a50abf42b3b906127e0d4b35d0198ef491139d1622c/analysis/.
+For those who can run third-party applications on their machine the tool WMI Explorer is great for browsing the information exposed by WMI. It's available here https://www.ks-soft.net/hostmon.eng/wmi/, it's a self-contained .exe file so you don't have to install it, and it's virus-free https://www.virustotal.com/en/file/df8e909491da38556a6c9a50abf42b3b906127e0d4b35d0198ef491139d1622c/analysis/.
 
 ## Leveraging WMI in Datadog
 

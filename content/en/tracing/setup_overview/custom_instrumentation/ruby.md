@@ -165,7 +165,7 @@ end
 
 ## Adding spans
 
-If you aren't using supported library instrumentation (see [library compatibility][4]), you may want to to manually instrument your code. Adding tracing to your code is easy using the `Datadog.tracer.trace` method, which you can wrap around any Ruby code:
+If you aren't using supported library instrumentation (see [library compatibility][4]), you can manually instrument your code. Add tracing to your code by using the `Datadog.tracer.trace` method, which you can wrap around any Ruby code:
 
 To trace any Ruby code, you can use the `Datadog.tracer.trace` method:
 

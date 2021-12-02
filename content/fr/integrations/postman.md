@@ -19,6 +19,7 @@
 "guid": "c678faae-1fc2-420b-83af-e973441b99de"
 "integration_id": "postman"
 "integration_title": "Postman"
+"integration_version": ""
 "is_public": true
 "kind": "integration"
 "maintainer": "integrations-partnerships@postman.com"
@@ -48,25 +49,22 @@ L'intégration vous permet de surveiller en permanence la santé de vos monitors
 - Générer des événements en cas de réussite ou d'échec d'une exécution
 ## Configuration
 
-Vous trouverez des instructions détaillées sur la [page de documentation de Postman][2].
-
-
-
+Vous trouverez des instructions détaillées dans la [documentation de Postman][2] (en anglais). Les intégrations Postman nécessitent une offre [Team, Business ou Enterprise][3] Postman.
 
 ### Configuration
 
-1. Générez une [clé d'API][6] Datadog.
-2. Connectez-vous à votre compte Postman, puis accédez à l'[intégration Datadog][4].
-3. Sélectionnez "Add Integration."
+1. Générez une [clé d'API][4] Datadog.
+2. Connectez-vous à votre compte Postman, puis accédez à l'[intégration Datadog][5].
+3. Sélectionnez Add Integration
 4. Pour envoyer vos métriques de monitor et vos événements à Datadog :
    - Donnez un nom à votre intégration.
    - Sélectionnez le monitor dont vous souhaitez envoyer les données à Datadog.
    - Saisissez votre clé d'API Datadog.
    - Sélectionnez la région Datadog que vous souhaitez utiliser.
    - Vous pouvez choisir d'envoyer les événements uniquement, les métriques uniquement, ou les deux à chaque exécution.
-5. Ensuite, sélectionnez *Add Integration* pour finir de configurer l'intégration.
+5. Ensuite, sélectionnez Add Integration pour finir de configurer l'intégration.
 
-![Configurer l'integration][5]
+![Configurer l'intégration][6]
 
 ### Validation
 
@@ -88,13 +86,14 @@ Un événement est généré à chaque fois qu'un monitor est exécuté dans Pos
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Postman][7].
+Besoin d'aide ? Contactez l'[assistance Postman][8].
 
 [1]: https://www.postman.com/
 [2]: https://learning.postman.com/docs/integrations/available-integrations/datadog/
-[3]: https://app.datadoghq.com/account/settings#api
-[4]: https://go.postman.co/integrations/service/datadog
-[5]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/postman/images/add-integration-datadog.jpeg
-[6]: https://github.com/DataDog/integrations-extras/blob/master/postman/metadata.csv
-[7]: https://www.postman.com/support/
+[3]: https://www.postman.com/pricing/
+[4]: https://app.datadoghq.com/organization-settings/api-keys
+[5]: https://go.postman.co/integrations/service/datadog
+[6]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/postman/images/add-integration-datadog.jpeg
+[7]: https://github.com/DataDog/integrations-extras/blob/master/postman/metadata.csv
+[8]: https://www.postman.com/support/
 

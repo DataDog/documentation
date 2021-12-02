@@ -184,13 +184,13 @@ See the ELB logs example below:
 
 To see the full list of integration pipelines that Datadog offers, browse the [integration pipeline library][6]. The pipeline library shows how Datadog processes different log formats by default.
 
-{{< img src="logs/processing/pipelines/integration-pipeline-library.gif" alt="Integration pipeline library" style="width:80%;">}}
+{{< img src="logs/processing/pipelines/integration-pipeline-library.mp4" alt="Integration pipeline library" video=true style="width:80%;">}}
 
 To use an integration pipeline, Datadog recommends installing the integration by configuring the corresponding log `source`. Once Datadog receives the first log with this source, the installation is automatically triggered and the integration pipeline is added to the processing pipelines list. To configure the log source, refer to the corresponding [integration documentation][8].
 
 It's also possible to copy an integration pipeline using the clone button.
 
-{{< img src="logs/processing/pipelines/clone-pipeline-from-library.gif" alt="Cloning pipeline from Library" style="width:80%;">}}
+{{< img src="logs/processing/pipelines/clone-pipeline-from-library.mp4" alt="Cloning pipeline from Library" video=true style="width:80%;">}}
 
 ## Add a processor or nested pipeline
 
