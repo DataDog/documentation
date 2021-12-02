@@ -12,7 +12,7 @@ further_reading:
 
 ## Overview
 
-Monitoring your application end-to-end is crucial to understanding your users' experience. The [Datadog test recorder][1] allows you to easily configure these complex testing workflows. However, you may want to manage your Synthetics resources programmatically and define browser tests with the API.
+Monitoring your application end-to-end is crucial to understanding your users' experience. The [Datadog test recorder][1] allows you to simplify configuration for these complex testing workflows. However, you may want to manage your Synthetics resources programmatically and define browser tests with the API.
 
 ## Manage your browser tests with the API
 

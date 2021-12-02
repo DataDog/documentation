@@ -39,7 +39,7 @@ Logs that contain the "who" (John Doe), "what" (login success), and when (2020-0
 
 ### Log in a standard, parsable format
 
-Ensure your application writes logs in a key-value format using `=` as a separator. Using this format means that a key-value parser, such as Datadog's [Grok Parser][3], can easily process them. For example, if a log is in the following format:
+Ensure your application writes logs in a key-value format using `=` as a separator. Using this format means that a key-value parser, such as Datadog's [Grok Parser][3], can process them. For example, if a log is in the following format:
 
 {{< code-block lang="bash" >}}
 INFO 2020-01-01 12:00:01 usr.id="John Doe" evt.category=authentication evt.name="google oauth" evt.outcome=success network.client.ip=1.2.3.4

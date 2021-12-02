@@ -197,7 +197,7 @@ View streaming logs for any container like `docker logs -f` or `kubectl logs -f`
 
 #### Live tail
 
-With live tail, all container logs are streamed. Pausing the stream allows you to easily read logs that are quickly being written; unpause to continue streaming.
+With live tail, all container logs are streamed. Pausing the stream helps you read logs that are quickly being written; unpause to continue streaming.
 
 Streaming logs can be searched with simple string matching. See [Live Tail][13] for more details.
 
