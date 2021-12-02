@@ -19,7 +19,7 @@ Here are some guidelines on how to find the root cause of the issue and correct 
 Before troubleshooting your parser, read the Datadog log [processors][1] and [parsing][2] documentation, and the [parsing best practice article][3].
 
 1. **Identify your log's pipeline**:
-    Thanks to the Pipeline filters, you can easily find the processing Pipeline your log went through. Integration Pipeline take the source as filter, so check that your log source is correctly set.
+    Because of the Pipeline filters, you can find the processing Pipeline that your log went through. Integration Pipeline takes the source as filter, so check that your log source is correctly set.
 
     {{< img src="logs/faq/integrationpipeline.png" alt="integrationpipeline"  >}}
 

@@ -23,7 +23,7 @@ _3 minutes to complete_
 
 {{< img src="tracing/guide/slowest_request_daily/slowest_trace_1.mp4" video="true" alt="Identifying the slowest trace and finding the Host metrics for it"  style="width:90%;">}}
 
-With Datadog APM, you can easily investigate the performance of your endpoints, identify slow requests, and investigate the root cause of latency issues. This example shows the slowest [trace][1] of the day for an e-commerce checkout endpoint and how it slows down because of high CPU usage.
+With Datadog APM, you can investigate the performance of your endpoints, identify slow requests, and investigate the root cause of latency issues. This example shows the slowest [trace][1] of the day for an e-commerce checkout endpoint and how it slows down because of high CPU usage.
 
 1. **Open the [Services page][2]**.
 

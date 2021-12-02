@@ -174,7 +174,7 @@ The _Timeline_ shows additions and changes to incident fields and information in
 
     {{< img src="getting_started/incident_management/add_from_slack.png" alt="Add from Slack" responsive="true" style="width:40%;">}}
 
-    You can add any Slack comment in the incident channel to the timeline so that you can easily consolidate important communications related to the investigation and mitigation of the incident.
+    You can add any Slack comment in the incident channel to the timeline so that you can consolidate important communications related to the investigation and mitigation of the incident.
 
 #### Remediation
 
