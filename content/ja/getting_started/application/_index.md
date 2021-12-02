@@ -131,7 +131,7 @@ Datadog [セキュリティモニタリング][20]は、アプリケーション
 [1]: https://app.datadoghq.com
 [2]: http://www.datadoghq.com/integrations
 [3]: /ja/api/
-[4]: https://github.com/DataDog/dd-agent
+[4]: https://github.com/DataDog/datadog-agent
 [5]: /ja/logs/
 [6]: /ja/tracing/
 [7]: /ja/infrastructure/

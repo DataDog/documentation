@@ -7,6 +7,9 @@ further_reading:
     - link: '/real_user_monitoring/session_replay'
       tag: Documentation
       text: Session Replay
+    - link: "https://www.datadoghq.com/blog/default-privacy-session-replay/"
+      tag: "Blog"
+      text: "Obfuscate user data with Session Replay default privacy settings"
 ---
 
 ## Overview

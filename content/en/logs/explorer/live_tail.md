@@ -27,7 +27,7 @@ For example, Live Tail is specifically useful to check if a process has correctl
 
 In the [Log Explorer][3], choose the Live Tail option in the timerange to query logs as they flow into Datadog.
 
-{{< img src="logs/explorer/live_tail/livetail.gif" alt="Log Live Tail" style="width:100%;" >}}
+{{< img src="logs/explorer/live_tail/livetail.mp4" alt="Log Live Tail" video=true style="width:100%;" >}}
 
 Contrary to queries on indexed logs happening in the [Log Explorer][3], queries in the Live Tail do *not* require that you [declare a facet][4] beforehand.
 

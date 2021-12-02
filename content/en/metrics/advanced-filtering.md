@@ -49,7 +49,7 @@ avg:system.cpu.user{env:staging AND (availability-zone:us-east-1a OR availabilit
 avg:system.cpu.user{env:shop.ist AND availability-zone IN (us-east-1a, us-east-1b, us-east4-b)} by {availability-zone}
 ```
 
-{{< img src="metrics/advanced-filtering/ex2.gif" alt="Example 2"  style="width:80%;" >}}
+{{< img src="metrics/advanced-filtering/ex2.mp4" alt="Example 2" video=true style="width:80%;" >}}
 
 
 ```
@@ -74,7 +74,7 @@ Tag value prefix and suffix wildcard matching is supported:
 avg:system.disk.in_use{!device:/dev/loop*} by {device}
 ```
 
-{{< img src="metrics/advanced-filtering/wildcards1.gif" alt="Example 1"  style="width:80%;" >}}
+{{< img src="metrics/advanced-filtering/wildcards1.mp4" alt="Example 1" video=true style="width:80%;" >}}
 
 ```
 sum:kubernetes.pods.running{service:*-canary} by {service}

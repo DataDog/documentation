@@ -21,10 +21,10 @@
     "notify_no_data": false,
     "renotify_interval": 60,
     "require_full_window": true,
+    "timeout_h": 24,
     "thresholds": {
       "critical": 2,
       "warning": 1
-    },
-    "timeout_h": 60
+    }
   }
 }

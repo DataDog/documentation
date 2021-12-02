@@ -32,7 +32,7 @@ Datadog.setVerbosity(Log.INFO)
 GDPR 規定を遵守するため、SDK は初期化時に追跡に関する同意を求めます。
 追跡の同意は以下のいずれかの値になります。
 
-- `TrackingConsent.PENDING`: (デフォルト) SDK はデータの収集とバッチ処理を開始しますが、データへの送信はしません。
+- `TrackingConsent.PENDING`: (デフォルト) SDK はデータの収集とバッチ処理を開始しますが、
  収集エンドポイントへの送信は行われません。SDK はバッチ処理が完了したデータをどうするかについての新たな同意値が得られるまで待機します。
 - `TrackingConsent.GRANTED`: SDK はデータの収集を開始し、それをデータ収集エンドポイントに送信します。
 - `TrackingConsent.NOT_GRANTED`: SDK がデータを収集することはありません。手動でログやトレース、

@@ -1,7 +1,8 @@
 ---
 title: Logs FAQ
 kind: faq
-private: true
+cascade: 
+  - private: true
 aliases:
     - /logs/faq/instance-initialization-error-while-sending-logs-from-datadog-agent/
 ---

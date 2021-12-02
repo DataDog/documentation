@@ -21,7 +21,7 @@ further_reading:
 
 The CI Results Explorer provides visibility into the CI jobs executing your Synthetic tests. 
 
-{{< img src="synthetics/ci/ci_results_explorer/ci_results_explorer.png" alt="CI Results Explorer" style="width:100%;">}}
+{{< img src="synthetics/ci_results_explorer/ci_results_explorer.png" alt="CI Results Explorer" style="width:100%;">}}
 
 You can:
 

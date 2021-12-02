@@ -1,12 +1,12 @@
 ---
-title: Facturation de l'intégration Azure
+title: Facturation des intégrations Azure
 kind: documentation
 ---
 ## Présentation
 
 Datadog facture chaque [machine virtuelle Azure surveillée dans Datadog][1], que l'Agent Datadog y soit installé ou non. Vous n'êtes pas facturé en double si vous exécutez l'Agent sur une machine virtuelle Azure reconnue par l'intégration Azure.
 
-En outre, les nœuds associés à vos plans Azure App Service sont également considérés comme des hosts facturables par Datadog. Notez que les plans App Service Partage, Dynamique et Gratuit n'incluent pas de nœuds et n'auront aucune incidence sur votre facturation Datadog.
+En outre, les nœuds associés à vos plans Azure App Service sont également considérés comme des hosts facturables par Datadog. **Remarque** : les plans App Service Partage, Dynamique et Gratuit n'incluent pas de nœuds et n'ont donc aucune incidence sur votre facturation Datadog.
 L'intégration Azure recueille des métriques à partir de toutes les autres ressources Azure (Azure SQL DB, Azure Redis Cache, Azure Load Balancer, etc.) sans frais supplémentaires.
 
 ## Exclure des machines virtuelles Azure

@@ -101,7 +101,7 @@ To collect all logs written by running applications in your ECS containers and s
           "mountPoints": [
             (...)
             {
-              "containerPath": "C:/var/log",
+              "containerPath": "C:/programdata/datadog/run",
               "sourceVolume": "pointdir",
               "readOnly": false
             },
@@ -133,10 +133,12 @@ To collect all logs written by running applications in your ECS containers and s
       "volumes": [
         (...)
         {
-          "host": {
-            "sourcePath": "C:/var/log"
-          },
-          "name": "pointdir"
+          "name": "pointdir",
+          "dockerVolumeConfiguration": {
+            "autoprovision": true,
+            "scope": "shared",
+            "driver": "local"
+          }
         },
         {
           "host": {

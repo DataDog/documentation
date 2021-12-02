@@ -96,7 +96,7 @@ Duration
 Size
 : The size of the request response.
 
-The maximum number of resources that can be displayed is 50. Resources are ordered by the time when they start and then are displayed in Datadog by the first 50.
+The maximum number of resources that can be displayed is 100. Resources are ordered by the time when they start and then are displayed in Datadog by the first 100.
 
 #### Filter and search
 

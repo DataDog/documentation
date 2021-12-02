@@ -45,7 +45,7 @@ The Fields aggregation supports one dimension for the [Top list][4] visualizatio
 
 Multiple queries are supported in [Timeseries][5] and [Top list][4] visualizations. Add multiple queries by clicking on the `+ Add` button next to the query editor. When you add a new query, it is a copy of the last query and its grouping options:
 
-{{< img src="logs/explorer/group/add_multiple_queries.gif" alt="Log Live Tail" style="width:100%;" >}}
+{{< img src="logs/explorer/group/add_multiple_queries.mp4" alt="Log Live Tail" video=true style="width:100%;" >}}
 
 Select or deselect queries to display in the current visualization by clicking on their letters in the query editor:
 
@@ -63,7 +63,7 @@ Display the timeline for one of your queries by selecting that query in the `Tim
 
 Apply functions to your logs by clicking on the `Fields` aggregation in the query editor. Optionally select a faceted field to apply the function to, then click on the `Σ` icon next to that measure. Select or search for a function to apply to the selected log field.
 
-{{< img src="logs/explorer/group/add_function.gif" alt="Log Live Tail" style="width:100%;" >}}
+{{< img src="logs/explorer/group/add_function.mp4" alt="Log Live Tail" video=true style="width:100%;" >}}
 
 All functions available for logs in the graphing editor in Dashboards can be applied to logs in the Log Explorer:
 

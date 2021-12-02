@@ -1,5 +1,5 @@
 ---
-title: Custom Metrics
+title: Custom Metrics from Serverless Applications
 kind: documentation
 ---
 

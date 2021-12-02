@@ -43,7 +43,7 @@ Click on the **Metrics** tab and access underlying infrastructure metrics in a 3
 
 Interact with **Host** in the upper reserved attributes section, the related [host dashboard][5], or [network page][6]. Interact with **Container** sections to jump to the [container page][7] scoped with the underlying parameters.
 
-{{< img src="logs/explorer/side_panel/infra.gif" alt="Hub to Infra" style="width:100%;">}}
+{{< img src="logs/explorer/side_panel/infra.mp4" alt="Hub to Infra" video=true style="width:100%;">}}
 
 In case logs comes from a serverless source, the Host Section is replaced with a Serverless section that links jump to the corresponding [serverless page][8].
 
@@ -57,7 +57,7 @@ Click on the **Trace tab** and see a log in the context of its entire trace, wit
 
 Interact with the **Service** section to highlight the part of the trace that corresponds with the selected service. Use this information to refocus your query in the Log Explorer and view other logs from the same trace.
 
-{{< img src="logs/explorer/side_panel/trace.gif" alt="Hub to APM" style="width:100%;">}}
+{{< img src="logs/explorer/side_panel/trace.mp4" alt="Hub to APM" video=true style="width:100%;">}}
 
 ## Configure your troubleshooting context
 
@@ -70,7 +70,7 @@ Interact with the attributes names and values in the lower JSON section to:
 
 - Build or edit a facet or measure from an attribute. See [Log Facets][12].
 
-{{< img src="logs/explorer/side_panel/facets.gif" alt="Side Panel Facets"  style="width:100%;">}}
+{{< img src="logs/explorer/side_panel/facets.mp4" alt="Side Panel Facets" video=true style="width:100%;">}}
 
 ## Share a log
 

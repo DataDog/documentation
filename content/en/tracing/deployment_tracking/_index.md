@@ -93,7 +93,7 @@ From this table, you can pivot into live or historical traces corresponding to t
 
 **Note:** Error comparison is based on _observed_ error types. If an error type is rare, it might be listed as no longer appearing only because it has not been seen _yet_.
 
-{{< img src="tracing/deployment_tracking/ErrorComparison.gif" alt="Error Comparison"  style="width:100%;">}}
+{{< img src="tracing/deployment_tracking/ErrorComparison.mp4" alt="Error Comparison" video=true style="width:100%;">}}
 
 ### Endpoint comparison
 
@@ -160,7 +160,7 @@ All of these can be exported to dashboards and monitors.
 
 ### Trace search and analytics
 
-{{< img src="tracing/deployment_tracking/AnalyticsErrorsByVersion.gif" alt="Version in App Analytics"  style="width:100%;">}}
+{{< img src="tracing/deployment_tracking/AnalyticsErrorsByVersion.mp4" alt="Version in App Analytics" video=true style="width:100%;">}}
 
 When available, `version` can be used as a tag for both Trace Search and Analytics, either to filter the live search mode and indexed traces, or to filter or group analytics queries.
 

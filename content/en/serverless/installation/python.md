@@ -1,5 +1,5 @@
 ---
-title: Instrumenting Python Applications
+title: Instrumenting Python Serverless Applications
 kind: documentation
 further_reading:
 - link: "/serverless/serverless_integrations/plugin/"
@@ -556,7 +556,7 @@ After you have configured your function following the steps above, you can view 
 
 ### Unified service tagging
 
-Datadog recommends tagging your serverless applications with `DD_ENV`, `DD_SERVICE`, `DD_VERSION`, and `DD_TAGS`. See the [Lambda extension documentation][10] for more details.
+Datadog recommends tagging your serverless applications with `DD_ENV`, `DD_SERVICE`, `DD_VERSION`, and `DD_TAGS`. See the [Lambda extension documentation][5] for more details.
 
 ### Collect logs from AWS serverless resources
 
@@ -618,9 +618,8 @@ If your Lambda function is running in a VPC, follow the [Datadog Lambda Extensio
 [2]: https://docs.aws.amazon.com/lambda/latest/dg/runtimes-extensions-api.html
 [3]: /serverless/guide/datadog_forwarder_python
 [4]: https://app.datadoghq.com/functions
-[5]: /getting_started/tagging/unified_service_tagging/#aws-lambda-functions
+[5]: /serverless/libraries_integrations/extension/#tagging
 [6]: /serverless/libraries_integrations/forwarder
 [7]: /serverless/custom_metrics?tab=python
 [8]: /tracing/custom_instrumentation/python/
 [9]: /serverless/guide/extension_private_link/
-[10]: /serverless/libraries_integrations/extension/#tagging
