@@ -89,6 +89,12 @@ In the global configuration file, you can configure the following options:
 `subdomain`
 : The name of the custom subdomain set to access your Datadog application. If the URL used to access Datadog is `myorg.datadoghq.com`, the `subdomain` value then needs to be set to `myorg`.
 
+`tunnel`
+: Use the [secure tunnel][3] to execute your test batch.
+
+`testSearchQuery`
+: Passes a query to select which Synthetic tests to run. If you are running tests in the CLI, use the `-s` flag.
+
 For example: 
 
 {{< code-block lang="json" filename="Global Configuration File" disable_copy="false" collapsible="true" >}}
@@ -122,7 +128,8 @@ For example:
       "port": 3128,
       "protocol": "http"
     },
-    "subdomain": "subdomainname"
+    "subdomain": "subdomainname",
+    "tunnel": true
 }
 {{< /code-block >}}
 
@@ -149,7 +156,7 @@ For example:
 
 #### Additional configuration
 
-The default configurations used for the tests are the original tests' configurations, which are visible in the UI or by [getting your tests' configurations from the API][3].
+The default configurations used for the tests are the original tests' configurations, which are visible in the UI or by [getting your tests' configurations from the API][4].
 
 However, in the context of your CI deployment, you may decide to override some or all of your test parameters with the overrides below. To define overrides for all of your tests, set the same parameters at the [global configuration file](#setup-a-client) level.
 
@@ -303,7 +310,7 @@ Whether you use Synthetic tests to control your CI/CD deployments in production 
 
 To trigger an existing Synthetics test on a staging endpoint instead of in production, set the `$SUBDOMAIN` environment variable to `staging-example` and the `$PORT` environment variable to a port used for staging. Your Synthetic tests run against the generated staging URL instead of running in production. 
 
-For example, you can write `https://www.example.org:81/path/to/something?abc=123#target` as:
+For example, you can write `https://app.datadoghq.com/synthetics/details/abc-123-zyx?live=1h#test-results` as:
 
 * `{{PROTOCOL}}//{{SUBDOMAIN}}.{{DOMAIN}}:{{PORT}}{{PATHNAME}}{{PARAMS}}{{HASH}}`
 * `{{PROTOCOL}}//{{HOST}}{{PATHNAME}}{{PARAMS}}{{HASH}}`
@@ -356,7 +363,7 @@ The [@datadog/datadog-ci][1] NPM package also comes with secure tunnelling, allo
 
 The testing tunnel creates an end-to-end encrypted HTTP proxy between your infrastructure and Datadog that allows all test requests sent through the CLI to be automatically routed through the `datadog-ci` client. 
 
-For more information, see [Testing Tunnel][4].
+For more information, see [Testing Tunnel][3].
 
 ### Visualize test results
 
@@ -382,6 +389,6 @@ You can also see your CI test results listed in the [CI Results Explorer][5] and
 
 [1]: https://www.npmjs.com/package/@datadog/datadog-ci
 [2]: https://github.com/TooTallNate/node-proxy-agent
-[3]: /api/latest/synthetics/#get-a-test-configuration
-[4]: /synthetics/testing_tunnel/
+[3]: /synthetics/testing_tunnel/
+[4]: /api/latest/synthetics/#get-a-test-configuration
 [5]: /synthetics/ci_results_explorer

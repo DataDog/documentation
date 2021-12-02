@@ -66,7 +66,7 @@ The test triggering endpoint supports up to 50 tests in one request.
 }
 ```
 
-The `TEST_TO_TRIGGER` objects compose of the required `public_id` for the test you want to trigger and the optional configuration overrides. For descriptions of each field, see [Configure tests](#configure-tests).
+The `TEST_TO_TRIGGER` objects compose of the required `public_id` for the test you want to trigger and the optional configuration overrides. For descriptions of each field, see [Configure tests][3].
 
 A test's public identifier is either the identifier of the test found in the URL of a test's details page (for example: the identifier for `https://app.datadoghq.com/synthetics/details/abc-def-ghi` is `abc-def-ghi`) or the full URL of a test's details page (for example: `https://app.datadoghq.com/synthetics/details/abc-def-ghi`).
 
@@ -74,19 +74,19 @@ For more information, see the [Synthetics API endpoint documentation][1].
 
 ### Get details of batch
 
-The get batch details endpoint [@Beth to add description here]...
+The get batch details endpoint retrieves results for the group of tests triggered in your CI/CD pipeline, otherwise known as a batch. You must provide the `batch_id` for the relevant CI execution.
 
-* **Endpoint**: `https://api.{{< region-param key="dd_site" >}}/api/v1/synthetics/tests/poll_results`
+* **Endpoint**: `https://api.{{< region-param key="dd_site" >}}/api/v1/synthetics/ci/batch/{batch_id}`
 * **Method**: `GET`
-* **Parameters**: A JSON array containing the list of result identifiers to obtain results from.
+* **Parameters**: The `batch_id` for the batch of test results you want to inspect.
 
 For more information, see the [Synthetics API endpoint documentation][2].
 
 ## Use the CLI
 
-The [`@datadog/datadog-ci` package][3] allows you to run Synthetics tests directly within your CI/CD pipeline.
+The [`@datadog/datadog-ci` package][4] allows you to run Synthetics tests directly within your CI/CD pipeline.
 
-To use the [`@datadog/datadog-ci` NPM package][4], see [Configuration][5].
+To use the [`@datadog/datadog-ci` NPM package][5], see [Configuration][6].
 
 You can also trigger tests by searching with tags. For example: `"ci": "datadog-ci synthetics run-tests --config fileconfig.json -s 'tag:staging'"`.
 
@@ -98,6 +98,7 @@ You can also trigger tests by searching with tags. For example: `"ci": "datadog-
 
 [1]: /api/latest/synthetics/#trigger-tests-from-cicd-pipelines
 [2]: /api/latest/synthetics/#get-details-of-batch
-[3]: https://github.com/DataDog/datadog-ci
-[4]: https://www.npmjs.com/package/@datadog/datadog-ci
-[5]: /synthetics/cicd_integrations/configuration
+[3]: /synthetics/cicd_integrations/configuration#configure-tests
+[4]: https://github.com/DataDog/datadog-ci
+[5]: https://www.npmjs.com/package/@datadog/datadog-ci
+[6]: /synthetics/cicd_integrations/configuration
