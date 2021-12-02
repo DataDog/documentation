@@ -19,7 +19,7 @@ further_reading:
   text: "Automated root cause analysis with Watchdog RCA"
 - link: "https://www.datadoghq.com/blog/watchdog-impact-analysis/"
   tag: "Blog"
-  text: "Understand user impact scope with Watchdog Impact Analysis
+  text: "Understand user impact scope with Watchdog Impact Analysis"
 ---
 
 {{< img src="watchdog/watchdog_page.png" alt="Watchdog page"  >}}
