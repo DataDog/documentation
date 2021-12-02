@@ -30,7 +30,7 @@ No additional configuration is required to use these flow maps, and they are pow
 
 - RUM Applications are represented on the request flow map if you have [connected RUM and Traces][4].
 
-{{< img src="tracing/live_search_and_analytics/request_flow_map/RUMService.gif" alt="RUM service link from flow map" style="width:100%;">}}
+{{< img src="tracing/live_search_and_analytics/request_flow_map/RUMService.mp4" alt="RUM service link from flow map" video=true style="width:100%;">}}
 
 Try the [request flow map in the app][5]. To get started, scope a simple query such as a single service or endpoint.
 

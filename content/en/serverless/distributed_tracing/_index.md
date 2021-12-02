@@ -113,7 +113,7 @@ Datadog's [AWS X-Ray integration][3] only provides traces for Lambda functions. 
 
 ## Enable Datadog APM
 
-{{< img src="tracing/live_search/livesearchmain.gif" alt="Live Search" >}}
+{{< img src="tracing/live_search/livesearchmain.mp4" alt="Live Search" video=true >}}
 
 The Datadog Python, Node.js, Ruby, Go and Java tracing libraries support distributed tracing for AWS Lambda. To enable tracing on your functions, follow [the installation instructions][7].
 

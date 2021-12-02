@@ -94,7 +94,6 @@ All spans that are indexed by retention filters are accessible from search.  The
 
 {{< img src="tracing/live_search/searching-retained-traces.mp4" alt="Searching retained traces" video="true" >}}
 
-
 For example, if you filter by a tag that appears only on spans that are not indexed by any retention filter, your search will return no results, unlike when using Live Search.
 
 You can customize what spans are retained and at what retention rates. By default, [Datadog Intelligent Retention][4] will be applied. To learn more about the default span retention filter and how to create your own additional filters, see the [Retention Filters][3] documentation. Go to the [Retention Filters][8] page within the Datadog app to create or modify your own filters.

@@ -33,11 +33,11 @@ We strongly encourage setting up your logging library to produce your logs in JS
 {{< tabs >}}
 {{% tab "Serilog" %}}
 
-Like many other libraries for .NET, Serilog provides diagnostic logging into files, console, and elsewhere. It is easy to set up, has a clean API, and is portable between recent .NET platforms.
+Like many other libraries for .NET, Serilog provides diagnostic logging into files, the console, and elsewhere. It has a clean API and is portable between recent .NET platforms.
 
 Unlike other logging libraries, Serilog is built with powerful structured event data in mind.
 
-Install Serilog via NuGet. Run the following command in the Package Manager Console:
+Install Serilog with NuGet. Run the following command in the Package Manager Console:
 
 ```text
 PM> Install-Package Serilog.Sinks.File

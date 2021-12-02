@@ -55,7 +55,7 @@ yum install -y kernel-headers-$(uname -r)
 yum install -y kernel-devel-$(uname -r)
 ```
 
-**Remarque** : pour que le check OOM Kill fonctionne, vous devez utiliser la version 4.11+ du kernel. De plus, la version 8 et les versions antérieures de Windows, Container-Optimized OS et CenOS/RHEL ne sont pas prises en charge.
+**Remarque** : pour que le check OOM Kill fonctionne, vous devez utiliser la version 4.11+ du kernel. De plus, seules les versions 8 et ultérieures de Windows, Container-Optimized OS et CenOS/RHEL sont prises en charge.
 
 ### Configuration
 

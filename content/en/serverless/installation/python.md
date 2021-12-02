@@ -35,7 +35,7 @@ If your Python Lambda functions are written in [Python 3.6 or less][2] or you pr
 
 ## Configuration
 
-Datadog offers many different ways to enable instrumentation for your serverless applications. Choose a method below that best suits your needs. Datadog generally recommends using the Datadog CLI, which does not require redeploying your whole application. The CLI can also be easily added to your CI/CD pipelines to enable instrumentation for applications across your entire organization.
+Datadog offers many different ways to enable instrumentation for your serverless applications. Choose a method below that best suits your needs. Datadog generally recommends using the Datadog CLI, which does not require redeploying your whole application. The CLI can also be added to your CI/CD pipelines to enable instrumentation for applications across your entire organization.
 
 
 {{< tabs >}}

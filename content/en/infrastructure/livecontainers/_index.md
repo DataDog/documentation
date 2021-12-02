@@ -136,11 +136,11 @@ Each of these views includes a data table to help you better organize your data 
 
 Group pods by tags or Kubernetes labels to get an aggregated view which allows you to find information quicker. You can perform a group by using the “Group by” bar on the top right of the page or by clicking on a particular tag or label and locating the group by function in the context menu as shown below.
 
-{{< img src="infrastructure/livecontainers/group-by.gif" alt="An example of grouping by team" style="width:80%;">}}
+{{< img src="infrastructure/livecontainers/group-by.mp4" alt="An example of grouping by team" video=true style="width:80%;">}}
 
 You can also leverage facets on the left hand side of the page to quickly group resources or filter for resources you care most about, such as pods with a CrashLoopBackOff pod status.
 
-{{< img src="infrastructure/livecontainers/crashloopbackoff.gif" alt="An example of grouping the CrashLoopBackOff pod status" style="width:80%;">}}
+{{< img src="infrastructure/livecontainers/crashloopbackoff.mp4" alt="An example of grouping the CrashLoopBackOff pod status" video=true style="width:80%;">}}
 
 #### Cluster map
 
@@ -150,13 +150,13 @@ Drill down into resources from Cluster Maps by click on any circle or group to p
 
 You can see all of your resources together on one screen with customized groups and filters, and choose which metrics to fill the color of the pods by.
 
-{{< img src="infrastructure/livecontainers/cluster-map.gif" alt="A cluster map with customized groups and filters" style="width:80%;">}}
+{{< img src="infrastructure/livecontainers/cluster-map.mp4" alt="A cluster map with customized groups and filters" video=true style="width:80%;">}}
 
 #### Information panel
 
 Click on any row in the table or on any object in a Cluster Map to view information about a specific resource in a side panel.
 
-{{< img src="infrastructure/livecontainers/information-panel.gif" alt="A view of resources in the side panel" style="width:80%;">}}
+{{< img src="infrastructure/livecontainers/information-panel.mp4" alt="A view of resources in the side panel" video=true style="width:80%;">}}
 
 For a detailed dashboard of this resource, click the View Dashboard in the top right corner of this panel.
 
@@ -197,7 +197,7 @@ View streaming logs for any container like `docker logs -f` or `kubectl logs -f`
 
 #### Live tail
 
-With live tail, all container logs are streamed. Pausing the stream allows you to easily read logs that are quickly being written; unpause to continue streaming.
+With live tail, all container logs are streamed. Pausing the stream helps you read logs that are quickly being written; unpause to continue streaming.
 
 Streaming logs can be searched with simple string matching. See [Live Tail][13] for more details.
 

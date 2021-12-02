@@ -7,7 +7,7 @@ aliases:
 
 ## Problem
 
-When using a grouped query there are sometimes too many lines displayed on the graph, and you might end up with something not easy to read e.g.:
+When using a grouped query there are sometimes too many lines displayed on the graph, and you might end up with something complicated to read, for example:
 
 {{< img src="dashboards/faq/too_many_metrics_1.png" alt="too_many_metrics_1"  >}}
 

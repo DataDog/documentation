@@ -17,7 +17,7 @@ When you [schedule a downtime][1] over a specific tag scope, the downtime will a
 
 If you want to schedule a downtime over a subset of hosts, a good way to do so is to find a host-tag common to all those hosts and scope the downtime by that tag.
 
-One easy way you can take advantage of this is to create new host-tags directly in the Datadog UI from your [Infrastructure List][2] and [Host Map][3] by selecting a host and hitting the **Edit Tags** button (shown below), or via [our API][4].
+One way you can take advantage of this is to create new host-tags directly in the Datadog UI from your [Infrastructure List][2] and [Host Map][3] by selecting a host and hitting the **Edit Tags** button (shown below), or with the [Datadog API][4].
 
 {{< img src="monitors/faq/edit_tag.png" alt="edit tag"  >}}
 

@@ -173,7 +173,7 @@ def check(self, instance):
 
 ##### Exceptions
 
-If a check cannot run because of improper configuration, a programming error, or because it could not collect any metrics, it should raise a meaningful exception. This exception is logged and is shown in the Agent [status command][9] for easy debugging. For example:
+If a check cannot run because of improper configuration, a programming error, or because it could not collect any metrics, it should raise a meaningful exception. This exception is logged and is shown in the Agent [status command][9] for debugging. For example:
 
     $ sudo /etc/init.d/datadog-agent info
 
