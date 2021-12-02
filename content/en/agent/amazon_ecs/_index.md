@@ -27,7 +27,7 @@ This page covers Amazon ECS setup with the [Datadog Container Agent v6][1]. For 
 - [Datadog Container Agent v5 setup for Amazon ECS][2]
 - [Datadog Host Agent setup with Autodiscovery][3]
 
-**Note**: **If you are looking to set up ECS on Fargate, follow [this doc instead][4].** AWS Batch is not supported.
+**Note**: **If you are looking to set up ECS on Fargate, see [Amazon ECS on AWS Fargate][4].** AWS Batch is not supported.
 
 ## Setup
 
