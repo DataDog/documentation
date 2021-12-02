@@ -66,19 +66,19 @@ After you've configured your application to send profiles to Datadog, start gett
 
 [Use tags to search profiles][3] across any dimension—whether it’s a specific host, service, version, or any combination.
 
-{{< img src="tracing/profiling/search_profiles.gif" alt="Search profiles by tags">}}
+{{< img src="tracing/profiling/search_profiles.mp4" alt="Search profiles by tags" video=true >}}
 
 ### Track function performance over deployments
 
 Obtain key profiling metrics from services such as top CPU usage by method, top memory allocations by thread, and CPU usage by version to visualize in your dashboards.
 
-{{< img src="tracing/profiling/profiling-metric-dashboard.gif" alt="Add profiling metrics to your dashboards.">}}
+{{< img src="tracing/profiling/profiling-metric-dashboard.mp4" alt="Add profiling metrics to your dashboards." video=true >}}
 
 ### Connect traces to profiling data
 
 Application processes that have both [APM distributed tracing][4] and continuous profiler enabled are automatically linked, so you can move directly from span information to profiling data on the [Code Hotspots tab][5] to find specific lines of code related to performance issues.
 
-{{< img src="tracing/profiling/code_hotspots_tab.gif" alt="Code Hotspots tab shows profiling information for a APM trace span">}}
+{{< img src="tracing/profiling/code_hotspots_tab.mp4" alt="Code Hotspots tab shows profiling information for a APM trace span" video=true >}}
 
 ### Find changes in performance by comparing profiles
 

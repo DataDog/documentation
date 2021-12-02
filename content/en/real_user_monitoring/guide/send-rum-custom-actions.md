@@ -33,7 +33,7 @@ To easily filter on your new custom Actions, use the `Action Target Name` attrib
 
 Once you click on the action, all metadata is available in the side panel. You can find your action attributes in the Custom Attributes sections. The next step is to create facets or measures for these attributes by clicking on them. For example, create a facet for the cart items and a measure for the cart value.
 
-{{< img src="real_user_monitoring/guide/send-custom-user-actions/facet-from-user-action.gif" alt="Create a facet for custom RUM actions" style="width:100%;">}}
+{{< img src="real_user_monitoring/guide/send-custom-user-actions/facet-from-user-action.mp4" alt="Create a facet for custom RUM actions" video=true style="width:100%;">}}
 
 **Note**: Use facets for distinctive values (IDs) and measures for quantitative values (timings, latency, etc.).
 

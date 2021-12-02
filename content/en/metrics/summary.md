@@ -20,7 +20,7 @@ The [Metrics Summary page][1] displays a list of your metrics reported to Datado
 
 Search your metrics by name or tag using the **Metric** or **Tag** search fields:
 
-{{< img src="metrics/summary/tagexplorer2.gif" alt="Filter by Tag"  style="width:75%;">}}
+{{< img src="metrics/summary/tagexplorer2.mp4" alt="Filter by Tag" video=true style="width:75%;">}}
 
 ## Facet panel
 
@@ -43,7 +43,7 @@ There are two buttons that allow you to configure multiple metrics at a time:
 
 * **Configure Tags**: Configure tags on multiple custom metrics matching a namespace using Metrics without Limits™
 
-{{< img src="metrics/summary/bulkconfig.gif" alt="Bulk Metric Tag Configuration"  style="width:75%;">}} 
+{{< img src="metrics/summary/bulkconfig.mp4" alt="Bulk Metric Tag Configuration" video=true style="width:75%;">}} 
 
 ## Metric details sidepanel
 
@@ -121,7 +121,7 @@ For any particular tag key, you can:
 - Open a graph of this metric filtered by your tag `key:value` pair in the Metrics Explorer.
 - Copy any tag `key:value` for filtering across the application.
 
-{{< img src="metrics/summary/updated_tags_table.gif" alt="Tags Table"  style="width:75%;">}}
+{{< img src="metrics/summary/updated_tags_table.mp4" alt="Tags Table" video=true style="width:75%;">}}
 
 [Learn more about tagging][5].
 
