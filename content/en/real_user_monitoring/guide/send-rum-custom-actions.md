@@ -29,7 +29,7 @@ All RUM context will be automatically attached (current page view information, g
 ## Create facets and measures on your new attributes
 Once you have deployed the code that creates your custom actions, you will start seeing actions appear in the [RUM Explorer][3], in the **Actions** tab.
 
-To filter on your new custom Actions, use the `Action Target Name` attribute as follow: `@action.target.name:<ACTION_NAME>`. In the example, we use the following filter: `@action.target.name:checkout`
+To filter on your new custom Actions, use the `Action Target Name` attribute as follow: `@action.target.name:<ACTION_NAME>`. The example uses the following filter: `@action.target.name:checkout`
 
 Once you click on the action, all metadata is available in the side panel. You can find your action attributes in the Custom Attributes sections. The next step is to create facets or measures for these attributes by clicking on them. For example, create a facet for the cart items and a measure for the cart value.
 
