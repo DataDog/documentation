@@ -12,9 +12,9 @@ further_reading:
 ---
 
 ## Overview
-To build a SLO from new or existing Datadog monitors, create a monitor-based SLO.
+To build an SLO from new or existing Datadog monitors, create a monitor-based SLO.
 
-Time-based data sets usually map easily to monitor-based SLOs. Using a monitor-based SLO, you can calculate the Service Level Indicator (SLI) by dividing amount of time your system exhibits good behavior by the total time.
+Time-based data sets usually map well to monitor-based SLOs. Using a monitor-based SLO, you can calculate the Service Level Indicator (SLI) by dividing the amount of time your system exhibits good behavior by the total time.
 
 {{< img src="monitors/service_level_objectives/grouped_monitor_based_slo.png" alt="monitor-based SLO example"  >}}
 
@@ -43,24 +43,22 @@ Select a **target** percentage, **time window**, and optional **warning** level.
 
 The target percentage specifies the portion of time the underlying monitor(s) of the SLO should be in an OK state.
 
-The time window specifies the rolling time period over which the target should be tracked.
+The time window specifies the rolling time period over which the SLO runs its calculation.
 
-Depending on the value of the SLI, the Datadog UI displays the SLO status in a different font color:
-- While the SLI remains above the target, the UI displays the SLO status in a green font.
-- When the SLI falls below the target, the UI displays the SLO status in a red font.
-- If you included a warning level, and the SLI falls above the warning but below the target level, the UI displays the SLO status in a yellow font.
+Depending on the value of the SLI, the Datadog UI displays the SLO status in a different color:
+- While the SLI remains above the target, the UI displays the SLO status in green.
+- When the SLI falls below the target, the UI displays the SLO status in red.
+- If you included a warning level, and the SLI falls above the warning but below the target level, the UI displays the SLO status in yellow.
 
 The time window you choose changes the available precision for your monitor-based SLOs:
-- 7-day and 30-day targets allow up to two decimal places.
-- 90-day targets allow up to three decimal places.
+- 7-day and 30-day time windows allow up to two decimal places.
+- 90-day time windows allow up to three decimal places.
 
-In the details UI for the SLO, Datadog will display two decimal places for 7-day and 30-day targets, and three decimal places for 90-day targets.
+In the details UI for the SLO, Datadog displays two decimal places for SLOs configured with 7-day and 30-day time windows, and three decimal places for SLOs configured with 90-day time windows.
 
-Datadog evaluates monitors once a minute, which limits the granularity of monitor-based SLOs. If you need more granularity, consider using [metric-based SLOs][3] instead.
+A 99.999% target for a 7-day or 30-day time window results in an error budget of 6 seconds or 26 seconds, respectively. Monitors evaluate every minute, so the granularity of a monitor-based SLO is also 1 minute. Therefore, one alert would fully consume and overspend the 6 second or 26 second error budget in the previous example. In practice, teams cannot satisfy such small error budgets.
 
-You specify monitor-based SLO error budgets using units of time, which limits their precision. A 99.999% target for a 7-day or 30-day target results in an error budgets of 6 seconds or 26 seconds, respectively. Monitors evaluate every minute, so the granularity of a monitor-based SLO is also 1 minute. Therefore, one alert would fully consume and overspend the 6 second or 26 second error budget in the previous example. In practice, teams cannot satisfy such small error budgets.
-
-For use cases requiring finer granularity, consider using [metric-based SLOs][3] instead.
+If you need finer granularity than the once a minute monitor evaluation, consider using [metric-based SLOs][3] instead.
 
 ### Add name and tags
 
@@ -94,13 +92,13 @@ In certain cases, there is an exception to the status calculation for monitor-ba
 - Wait until a specified number of the groups are failing (default: 1)
 - Retry a specified number of times before a location's test is considered a failure (default: 0)
 
-By changing any of these conditions to something other than their defaults, the overall status for a monitor-based SLO using just that one Synthetic test could appear to be better than the aggregated statuses of the Synthetic test's individual groups.
+If you change any of these conditions to something other than their defaults, the overall status for a monitor-based SLO using one Synthetic test could appear to be better than the aggregated statuses of the Synthetic test's individual groups.
 
 For more information on Synthetic test alerting conditions, visit the Synthetic Monitoring [documentation][4].
 
 ### Impact of manual and automatic resolution, and muting
 
-When a monitor is resolved manually or as a result of the **_After x hours automatically resolve this monitor from a triggered state_** setting, SLO calculations do not change. If these are important tools for your workflow, consider cloning your monitor, removing auto-resolve settings and `@-notification`s, and using the clone for your SLO. (Note for Mark Azer - This paragraph was in the original doc. I copied it, moved it here, and tried to reword it to be clearer, but I may have changed the meaning? Please review and clarify.)
+When a monitor is resolved manually or as a result of the **_After x hours automatically resolve this monitor from a triggered state_** setting, SLO calculations do not change. If these are important tools for your workflow, consider cloning your monitor, removing auto-resolve settings and `@-notification` settings, and using the clone for your SLO. (**Note for Mark Azer:** This paragraph was in the original doc. I copied it, moved it here, and tried to reword it to be clearer, but I may have changed the meaning? Please review and clarify.)
 
 Datadog recommends against using monitors with `Alert Recovery Threshold` and `Warning Recovery Threshold` as they can also affect your SLO calculations and do not allow you to cleanly differentiate between a SLI's good behavior and bad behavior.
 
@@ -112,11 +110,11 @@ To exclude time periods from an SLO calculation, use the [SLO status corrections
 
 SLOs based on the metric monitor types have a feature called SLO Replay that backfills SLO statuses with historical data pulled from the underlying monitors' metrics and query configurations. This means that if you create a new Metric Monitor and set an SLO on that new monitor, rather than having to wait a full 7, 30, or 90 days for the SLO's status to fill out, SLO Replay triggers and look at the underlying metric of that monitor and the monitor's query to get the status sooner. SLO Replay also triggers when the underlying metric monitor's query is changed (for example, the threshold is changed) to correct the status based on the new monitor configuration. As a result of SLO Replay recalculating an SLO's status history, the monitor's status history and the SLO's status history may not match after a monitor update.
 
-**Note:** SLO Replay is not supported for SLOs based on Synthetic tests or Service Checks.
+**Note:** SLOs based on Synthetic tests or Service Checks do not support SLO Replay.
 
 ## Other considerations
 
-Confirm you are using the preferred SLI type for your use case. Datadog supports monitor-based SLIs and metric-based SLIs as [described in the SLO metric documentation][3].
+Confirm you are using the preferred SLI type for your use case. Datadog supports monitor-based SLIs and metric-based SLIs as described in the [SLO metric documentation][3].
 
 ## Further Reading
 
