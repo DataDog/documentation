@@ -262,7 +262,7 @@ The duration in milliseconds after which `datadog-ci` stops polling for test res
 
 The _execution rule_ of each test can also be defined in-app, at the test level. Use the drop-down menu next to **CI Execution**.
 
-{{< img src="synthetics/ci/execution_rule.mp4" alt="CI Execution Rule" video="true" width="100%">}}
+{{< img src="synthetics/cicd_integrations/execution_rule.mp4" alt="CI/CD Integrations Execution Rule" video="true" width="100%">}}
 
 The execution rule associated with the test is always the most restrictive one that was set in the configuration file. From the most restrictive to the least restrictive: `skipped`, `non_blocking`, `blocking`. For example, if your test is configured to be `skipped` in the UI but to `blocking` in the configuration file, it is `skipped` when running your tests.
 
@@ -376,17 +376,17 @@ To learn how to get started using the testing tunnel, see the [Synthetics testin
 
 You can see the outcome of test executions directly in your CI as your tests are being executed.
 
-{{< img src="synthetics/ci/successful_test_result.png" alt="Successful Test Result"  style="width:100%;">}}
+{{< img src="synthetics/cicd_integrations/successful_test_result.png" alt="Successful Test Result"  style="width:100%;">}}
 
 You can identify what caused a test to fail by looking at the execution logs and searching for causes of the failed assertion:
 
-{{< img src="synthetics/ci/failed_test_result.png" alt="Failed Test Result" style="width:100%;">}}
+{{< img src="synthetics/cicd_integrations/failed_test_result.png" alt="Failed Test Result" style="width:100%;">}}
 
 #### In Datadog application
 
 You can also see your CI test results listed in the [CI Results Explorer][5] and on test details pages:
 
-{{< img src="synthetics/ci/ci_results_explorer/ci_results_explorer.png" alt="CI Results Explorer" style="width:100%;">}}
+{{< img src="synthetics/ci_results_explorer.png" alt="CI Results Explorer" style="width:100%;">}}
 
 ## API usage
 
