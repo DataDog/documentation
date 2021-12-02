@@ -53,7 +53,7 @@
   },
   "logs": {
     "name": "Logs",
-    "description": "Envoyez vos logs à votre plateforme Datadog via HTTP. Les limites par requête HTTP sont les suivantes :\n\n- Taille maximale du contenu par charge utile : 5 Mo\n- Taille maximale d'un log : 256 Ko\n- Taille maximale d'un tableau en cas d'envoi de plusieurs logs dans un tableau : 500 entrées\n\nTous les logs dépassant 256 Ko sont acceptés et tronqués par Datadog :\n- Pour une requête avec un seul log, l'API réduit le log de façon à ce qu'il fasse 256 Ko et renvoie un code 2xx.\n- Pour une requête avec plusieurs logs, l'API traite tous les logs, réduit uniquement les logs dépassant 256 Ko et renvoie un code 2xx.\n\nNous vous conseillons de compresser vos logs avant de les envoyer. Ajoutez l'en-tête `Content-Encoding: gzip` à la requête pour envoyer vos logs compressés."
+    "description": "Envoyez vos logs à votre plateforme Datadog via HTTP. Les limites par requête HTTP sont les suivantes :\n\n- Taille maximale du contenu par charge utile : 5 Mo\n- Taille maximale d'un log : 1 Mo\n- Taille maximale d'un tableau en cas d'envoi de plusieurs logs dans un tableau : 500 entrées\n\nTous les logs dépassant 1 Mo sont acceptés et tronqués par Datadog :\n- Pour une requête avec un seul log, l'API réduit le log de façon à ce qu'il fasse 1 Mo et renvoie un code 2xx.\n- Pour une requête avec plusieurs logs, l'API traite tous les logs, réduit uniquement les logs dépassant 1 Mo et renvoie un code 2xx.\n\nNous vous conseillons de compresser vos logs avant de les envoyer. Ajoutez l'en-tête `Content-Encoding: gzip` à la requête pour envoyer vos logs compressés."
   },
   "logs-archives": {
     "name": "Archives de logs",
