@@ -75,7 +75,7 @@ It's important to use a [standard naming convention][4] for the attributes in yo
 
 Use the same format across all of your authentication logs so you can properly use log attributes to filter and organize log data in Datadog. For example, with standard attributes you can look for which users (`usr.id`) have the highest number of failed logins (`evt.outcome:failure`).
 
-A key-value format also makes it easy to add custom attributes to logs. For example, adding a [reCAPTCHA v3][9] score to identify possible bot activity. Use quotes to wrap any attribute values that may contain spaces. This ensures that you capture the full value in a way that is easily parsable.
+A key-value format also simplifies the process to add custom attributes to logs. For example, you could add a [reCAPTCHA v3][9] score to identify possible bot activity. Use quotes to wrap any attribute values that may contain spaces. This ensures that you capture the full value in a way that is parsable.
 
 ## Monitor and detect security threats
 
