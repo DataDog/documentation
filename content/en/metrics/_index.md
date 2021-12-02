@@ -23,6 +23,23 @@ aliases:
 
 Metrics are numerical values that can track anything about your environment over time, from latency to error rates to user signups.
 
+In Datadog, metric data is ingested and stored as data points with a value and timestamp:
+
+```text
+[ 17.82,  22:11:01 ]
+```
+
+A sequence of data points is stored as a time series:
+
+```text
+[ 17.82,  22:11:01 ]
+[  6.38,  22:11:12 ]
+[  2.87,  22:11:38 ]
+[  7.06,  22:12:00 ]
+```
+
+Datadog stores metric points at a 1 second resolution. However, it is recommended that you only submit points every 15 seconds. Any metrics with fractions of a second timestamps are rounded to the nearest second. If any points have the same timestamp, the latest point overwrites the previous ones.
+
 ### Why are metrics useful?
 
 Metrics provide an overall picture of your system. You can use them to assess the health of your environment at a glance—how quickly users are loading your website or the average memory consumption of your servers, for instance. Once you identify a problem, you can use [logs][1] and [tracing][2] to further troubleshoot.
