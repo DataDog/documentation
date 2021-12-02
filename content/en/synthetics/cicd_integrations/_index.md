@@ -386,7 +386,7 @@ You can identify what caused a test to fail by looking at the execution logs and
 
 You can also see your CI test results listed in the [CI Results Explorer][5] and on test details pages:
 
-{{< img src="synthetics/ci_results_explorer.png" alt="CI Results Explorer" style="width:100%;">}}
+{{< img src="synthetics/ci_results_explorer/ci_results_explorer.png" alt="CI Results Explorer" style="width:100%;">}}
 
 ## API usage
 
