@@ -52,7 +52,7 @@ After you set up the SLO, select it from the [Service Level Objectives list view
 
 **Example:** If you create a monitor-based SLO to track latency per availability-zone, the status percentages and remaining error budget for the overall SLO and for each individual availability-zone that the SLO is tracking are displayed.
 
-**Note:** Remaining error budget is displayed as a percentage and is calculated using the following formula: 
+**Note:** The remaining error budget is displayed as a percentage and is calculated using the following formula: 
 {{< img src="monitors/service_level_objectives/error_budget_remaining.jpeg" alt="Remaining error budget formula" >}}
 
 ### Setting SLO targets
