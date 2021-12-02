@@ -92,7 +92,7 @@ datadogRum.addError(error, {
 
 // Envoyer une erreur network
 fetch('<UNE_URL>').catch(function(error) {
-    datadogRum.addError(error, undefined);
+    datadogRum.addError(error);
 })
 
 // Envoyer une erreur d'exception gérée
