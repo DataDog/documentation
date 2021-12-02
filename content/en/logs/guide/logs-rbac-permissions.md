@@ -259,7 +259,7 @@ This view lists:
 
 Create a new restriction query defining its query filter. The new query appears in the list of restrictions with no role attached to it.
 
-{{< img src="account_management/rbac/logs_rq-create.mp4" alt="Create a Restriction Query" video=true  style="width:70%;">}}
+{{< img src="account_management/rbac/logs_rq-create.mp4" alt="Create a Restriction Query" video=true style="width:70%;">}}
 
 
 ### Assign a role to a restriction query
