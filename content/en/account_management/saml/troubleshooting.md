@@ -32,7 +32,7 @@ Your assertion may be missing the required `eduPersonPrincipalName` attribute. C
 ### No active account for a user
 
 This error can occur as a result of the following scenarios:
-  - If you've enabled Just-In-Time (JIT) provisioning, and a user still sees this error when trying to log in, check to see if you have already sent an email invitation to this user prior to enabling JIT. JIT does not apply to users who have already been invited. To resolve this, simply have the user accept the email invitation. Or, if the invitation has expired, have the admin send a new invitation.
+  - If you've enabled Just-In-Time (JIT) provisioning, and a user still sees this error when trying to log in, check to see if you have already sent an email invitation to this user prior to enabling JIT. JIT does not apply to users who have already been invited. To resolve this, have the user accept the email invitation. Or, if the invitation has expired, have the admin send a new invitation.
   - If a user is no longer enabled in a Datadog organization that has JIT provisioning enabled and they try to log in again through SAML and the `There is no active account for error` occurs, re-enable the user in [User settings][3].
 
 ## IdP metadata file errors
