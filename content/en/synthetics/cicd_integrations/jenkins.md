@@ -29,7 +29,7 @@ You can store environment variables directly within the global configuration fil
  
 Install and run the Node.js and npm packages within your Jenkins environment with the Jenkins Node.js plugin.
  
-For more information about the Datadog-Jenkins integration, see [Set up Tracing on a Jenkins Pipeline][5].
+For more information about the existing Datadog-Jenkins integration, see [Set up Tracing on a Jenkins Pipeline][5].
  
 ### Add a NodeJS installation
  
@@ -37,7 +37,7 @@ Navigate to the global Jenkins Configuration panel and add a Node.js installatio
  
 {{< img src="synthetics/cicd_integrations/jenkins/nodejs-installation.png" alt="NodeJS Installations in Jenkins" style="width:80%;">}}
  
-Install `@datadog-ci` globally for all relevant Node.js installations.
+Install `@datadog/datadog-ci` globally for all relevant Node.js installations.
  
 #### Tags
  

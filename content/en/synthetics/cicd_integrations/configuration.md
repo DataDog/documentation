@@ -93,7 +93,7 @@ In the global configuration file, you can configure the following options:
 : Use the [secure tunnel][3] to execute your test batch.
 
 `testSearchQuery`
-: Passes a query to select which Synthetic tests to run. If you are running tests in the CLI, use the `-s` flag.
+: Pass a query to select which Synthetic tests to run. If you are running tests in the CLI, use the `-s` flag.
 
 For example: 
 
