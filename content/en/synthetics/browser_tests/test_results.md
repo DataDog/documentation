@@ -81,7 +81,7 @@ A resource corresponds to the combination of requests and assets.
 
 {{< img src="synthetics/browser_tests/resources_panel.png" alt="Resources Panel"  >}}
 
-Above the resources tab you can find:
+Above the resources tab you can find the following:
 - The total step duration time
 - The CDN providers serving the resources with a summary of the cache status for each of them
 
@@ -91,8 +91,8 @@ Resource
 : The URL of the resource.
 
 CDN
-: The CDN provider that served the resource. Hovering it will showcase the raw cache status.  
-We detect Akamai, Cloudflare, Fastly, Amazon Cloudfront, Netlify, Google Cloud CDN, Imperva, and Sucuri.
+: The CDN provider that served the resource. Hovering it showcases the raw cache status.  
+Datadog detects Akamai, Cloudflare, Fastly, Amazon Cloudfront, Netlify, Google Cloud CDN, Imperva, and Sucuri.
 
 Type
 : The type of resource (HTML, CSS, Image, Javascript, XHR, or Other).
