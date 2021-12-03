@@ -74,6 +74,27 @@ If you can see test results data in the **Test Runs** tab, but not the **Tests**
 
 4. If no CI provider environment variables are found, tests results are sent with no Git metadata.
 
+### The tests wall time is empty
+
+If you cannot see the tests wall time calculated, CI provider metadata is probably missing. To confirm this is the case, open a test execution in the [Test Runs][3] section, and check that there is no `ci.pipeline.id`, `ci.pipeline.name`, `ci.pipeline.number` or `ci.job.url` tags. If these tags are not populated, nothing shows in the wall time column.
+
+1. Tracers use the environment variables, if any, set by the CI provider to collect this information. See [Running tests inside a container][6] for a list of environment variables that the tracer attempts to read for each supported CI provider.
+2. Check you are running your tests in a supported CI provider from the previous link. Only these CI providers can extract the information to enrich the test metadata with CI information.
+3. If you still don't see the wall time, [contact Support][1] for troubleshooting help.
+
+### The tests wall time is not what I expect
+
+We can define the wall time as the clock time that passes between the start time of the first test and the end time of the last test for a particular pipeline.
+
+To do so, we use the following algorithm:
+
+1. We calculate a hash based on CI information to group the tests.
+  a. If the tests have `ci.job.url`, we use that piece of info to calculate the hash.
+  b. If the tests don’t have `ci.job.url`, we calculate the hash using `ci.pipeline.id` + `ci.pipeline.name` + `ci.pipeline.number`.
+2. We calculate the wall time associated with every hash we have. Notice that we can have multiple wall times for a certain pipeline, for example, if we have multiple jobs that execute tests.
+3. If we have multiple wall times, we will use the maximum of all wall times calculated for a given pipeline in a certain commit.
+
+
 ### Need further help?
 
 If you have another issue, or the above solutions don't work, [contact Support][1] for troubleshooting help.
