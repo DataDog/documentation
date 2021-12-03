@@ -27,13 +27,13 @@ However, this default timestamp does not always reflect the actual value that mi
 
     Check your [user settings][1] to understand if this could be linked to a bad timezone on your profile:
     {{< img src="logs/faq/log_timestamp_2.png" alt="User setting"  style="width:75%;">}}
-    But we can extract the timestamp from the message to override the actual log date for both raw and JSON logs.
+    But you can extract the timestamp from the message to override the actual log date for both raw and JSON logs.
 
 2. **Raw logs**.
 
     2.1 **Extract the timestamp value with a parser**.
         While writing a parsing rule for your logs, you need to extract the timestamp in a specific attribute. [Refer to some specific date parsing examples to help you][2].
-        For the above log, we would use the following rule with the `date()` [matcher][3] to extract the date and pass it into a custom date attribute:
+        For the above log, you would use the following rule with the `date()` [matcher][3] to extract the date and pass it into a custom date attribute:
         {{< img src="logs/faq/log_timestamp_3.png" alt="Parsing date"  style="width:75%;">}}
 
     2.2 **Define a Log Date Remapper**.
@@ -49,10 +49,10 @@ However, this default timestamp does not always reflect the actual value that mi
     3.1 **Supported Date formats**.
         JSON logs are automatically parsed in Datadog.
         The log `date` attribute is one of the [reserved attributes][5] in Datadog which means JSON logs that use those attributes have their values treated specially - in this case to derive the log's date. Change the default remapping for these attributes at the top of your [Pipeline][6].
-        So let's imagine that the actual timestamp of the log is contained in the attribute mytimestamp.
+        Imagine that the actual timestamp of the log is contained in the attribute mytimestamp.
         {{< img src="logs/faq/log_timestamp_6.png" alt="log with mytimestamp attribute"  style="width:75%;">}}
-        To make sure this attribute value is taken to override the log date, we would simply need to add it in the list of Date attributes.
-        The date remapper looks for each of the reserved attributes in the order in which they are configured in the reserved attribute mapping, so to be 100% sure that our `mytimestamp` attribute is used to derive the date, we can place it first in the list.
+        To make sure this attribute value is taken to override the log date, you must add it in the list of Date attributes.
+        The date remapper looks for each of the reserved attributes in the order in which they are configured in the reserved attribute mapping, so to be 100% sure that our `mytimestamp` attribute is used to derive the date, you can place it first in the list.
         **Note**: Any modification on the Pipeline only impacts new logs as all the processing is done at ingestion.
         There are specific date formats to respect for the remapping to work. The recognized date formats are: [ISO8601][7], [UNIX (the milliseconds EPOCH format)][8] and [RFC3164][9].
         If the format is different from one of the above (so if your logs still do not have the right timestamp), there is a solution.

@@ -117,7 +117,7 @@ This example shows how the algorithms react to an hour-long anomaly. `Robust` do
 
 {{< img src="monitors/monitor_types/anomaly/alg_comparison_3.png" alt="algorithm comparison 3"  style="width:90%;">}}
 
-The algorithms deal with scale differently. `Basic` and `robust` are scale-insensitive, while `agile` is not. The graphs on the left below show `agile` and `robust` mark the level-shift as being anomalous. On the right, we add 1000 to the same metric, and `agile` no longer calls out the level-shift as being anomalous whereas `robust` continues do so.
+The algorithms deal with scale differently. `Basic` and `robust` are scale-insensitive, while `agile` is not. The graphs on the left below show `agile` and `robust` mark the level-shift as being anomalous. On the right, 1000 is added to the same metric, and `agile` no longer calls out the level-shift as being anomalous whereas `robust` continues do so.
 
 {{< img src="monitors/monitor_types/anomaly/alg_comparison_scale.png" alt="algorithm comparison scale"  style="width:90%;">}}
 
@@ -168,7 +168,7 @@ avg(<query_window>):anomalies(<metric_query>, '<algorithm>', <deviations>, direc
 : The timeframe which will be checked for anomalies (e.g., `last_5m`, `last_1h`).
 
 `interval`
-: A positive integer representing the number of seconds in the rollup interval. We recommend that the `interval` be at least a fifth of the `alert_window` duration.
+: A positive integer representing the number of seconds in the rollup interval. The `interval` should be at least a fifth of the `alert_window` duration.
 
 `count_default_zero`
 : Use `true` for most monitors. Set to `false` only if submitting a count metric in which the lack of a value should _not_ be interpreted as a zero.
