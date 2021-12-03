@@ -17,7 +17,7 @@ description: "Trace Search and Analytics"
 
 The Datadog app shows a **Live** indicator next to the time selector whenever you are in Live mode:
 
-{{< img src="tracing/live_search/live-search.png" alt="Live Search Indicator"   style="width:80%;" >}}
+{{< img src="tracing/live_search/live-search.png" alt="Live Search Indicator" style="width:80%;" >}}
 
 All ingested traces are passed through [custom retention filters][3] that you can create to determine which spans to index, along with the default [intelligent retention filter][4] that retains a diverse set of traces.
 
@@ -90,7 +90,7 @@ You can also filter on attributes that are not defined as facets. For example, t
 
 You can search retained traces in the same way as you do a Live Search. To switch from searching live to retained data, change the time selector to any period of time greater than 15 minutes.
 
-All spans that are indexed by retention filters are accessible from search.  These spans are kept by Datadog for 15 days after being indexed by a retention filter.
+All spans that are indexed by retention filters are accessible from search. These spans are kept by Datadog for 15 days after being indexed by a retention filter.
 
 {{< img src="tracing/live_search/searching-retained-traces.mp4" alt="Searching retained traces" video="true" >}}
 
