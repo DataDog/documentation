@@ -126,27 +126,27 @@ Also, you can customize your Open Incidents widgets by filtering on:
 {{< tabs >}}
 {{% tab "iOS" %}}
 
-- Long press on the widget to configure.
-- Tap "Edit Widget."
-- Tap "Choose" next to the Organzation label to fetch open incidents from the selected organization.
-- Tap "SEV-1 and SEV-2" next to the Severities label to specify severity filters.
-- Tap "Both" next to the Customer Impacted label to filter on open incidents that have impacted customers.
-- Type in the "Type additional filters" text box to specify any further filtering.
-- Tap "Ordering" to specify the order of how incidents will be listed.
-- Tap out of the widget to validate your selection and exit the configuration screen.
+1. Long press the widget to configure.
+2. Tap **Edit Widget**.
+2. Tap **Choose** next to the **Organzation** label to fetch open incidents from the selected organization.
+3. Tap **SEV-1 and SEV-2** next to the Severities label to specify severity filters.
+4. Tap **Both** next to the **Customer Impacted** label to filter on open incidents that have impacted customers.
+5. Type in the **Type additional filters** text box to specify any further filtering.
+6. Tap **Ordering** to specify the order of how incidents are listed.
+7. Tap outside of the widget to save your selection and exit the configuration screen.
 
 
 {{% /tab %}}
 {{% tab "Android" %}}
 
-- Tap the widget title to configure.
-- Tap "Organization" to fetch open incidents from the selected organization.
-- Tap "Severities" to specify severity filters.
-- Tap "Customer impacted" to filter on open incidents that have impacted customers.
-- Tap "Query" to specify any further filtering.
-- Tap "Sorted by" to specify the order of how incidents will be listed.
-- Tap "Save" or "Apply" to validate your selection and exit the configuration screen.
-- Long press and resize the widget to fit your preference.
+1. Tap the widget title to configure.
+2. Tap **Organization** to fetch open incidents from the selected organization.
+3. Tap **Severities** to specify severity filters.
+4. Tap **Customer impacted** to filter on open incidents that have impacted customers.
+5. Tap **Query** to specify any further filtering.
+6. Tap **Sorted by** to specify the order of how incidents are listed.
+7. Tap **Save** or **Apply** to save your selection and exit the configuration screen.
+8. Long press and resize the widget to fit your preference.
 
 
 {{% /tab %}}
@@ -158,18 +158,18 @@ You can display open incidents from multiple organizations on your mobile home s
 
 {{< tabs >}}
 {{% tab "iOS" %}}
-- Tap "Choose" next to the Organzation label to fetch open incidents from the selected organization.
+- Tap **Choose** next to the Organization label to fetch open incidents from the selected organization.
 
 
 
 {{% /tab %}}
 {{% tab "Android" %}}
 
-- Tap the widget title to configure.
-- From the configuration screen, tap "Organization".
-- Select a new organization (You might need to sign in).
-- Size the widget to fit your preference.
-- Tap "Save" or "Apply". 
+1. Tap the widget title to configure.
+2. From the configuration screen, tap **Organization**.
+3. Select a new organization (you may need to sign in).
+4. Size the widget to fit your preference.
+5. Tap **Save** or **Apply**. 
 
 
 {{% /tab %}}
@@ -180,13 +180,13 @@ You can display open incidents from multiple organizations on your mobile home s
 {{< tabs >}}
 {{% tab "iOS" %}}
 
-Delete a widget by tapping the "-" button at the top left of the widget when editing your home screen, or by long pressing on the widget and selecting "Remove Widget".
+Delete a widget by tapping the **-** button at the top left of the widget when editing your home screen, or by long pressing the widget and selecting **Remove Widget**.
 
 
 {{% /tab %}}
 {{% tab "Android" %}}
 
-Delete a widget by long pressing, dragging, and dropping the widget to the "Remove" button.
+Delete a widget by long pressing, dragging, and dropping the widget to the **Remove** button.
 
 
 {{% /tab %}}
@@ -304,7 +304,7 @@ Delete a widget by long pressing, dragging, and dropping the widget to the "Remo
 
 ### Monitors widget
 
-{{< img src="mobile/monitor_widget.png" alt="widget page" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
+{{< img src="mobile/monitor_widget.png" alt="Configured monitor widgets displayed on Android and iOS screens" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
 
 View your [monitors][15] from your home screen with Datadog widgets. Tap any cell to open the **Monitor Search** screen in the app, with your monitors already filled in.
 
