@@ -14694,6 +14694,8 @@ components:
     User:
       description: Create, edit, and disable users.
       properties:
+        access_role:
+          $ref: '#/components/schemas/AccessRole'
         disabled:
           description: The new disabled status of the user.
           example: false
