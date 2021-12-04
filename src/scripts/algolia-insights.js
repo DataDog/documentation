@@ -86,7 +86,7 @@ const getAlgoliaSearchDataByUrl = (url) => {
   return index.search(urlPathnameWithHash, {
     hitsPerPage: 50,
     attributesToRetrieve: ['url', 'url_without_anchor'],
-    restrictSearchableAttributes: ['url']
+    // restrictSearchableAttributes: ['url']
   })
 }
 

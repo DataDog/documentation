@@ -26,7 +26,8 @@
         "build:apiPages": "node -e 'require(\"./src/scripts/build-api-pages.js\").init()'",
         "dereference": "node ./src/scripts/dereference.js",
         "analyze": "webpack --config webpack.prod.js --env.BUNDLE_ANALYZE=true",
-        "test": "./node_modules/.bin/jest"
+        "test": "./node_modules/.bin/jest",
+        "algolia-object-map": "node ./local/bin/js/algolia-url-object-map.js"
     },
     "repository": {
         "type": "git",
@@ -47,7 +48,7 @@
         "@datadog/browser-logs": "^1.24.1",
         "@datadog/browser-rum": "^1.24.1",
         "a11y": "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/a11y-v1.0.1.tgz",
-        "algoliasearch": "^3.35.1",
+        "algoliasearch": "4.11.0",
         "bootstrap": "4.3.1",
         "del": "4.1.1",
         "docsearch.js": "^2.6.3",
