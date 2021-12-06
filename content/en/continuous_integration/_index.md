@@ -1,6 +1,8 @@
 ---
 title: Continuous Integration Visibility
 kind: documentation
+aliases:
+  - /CI
 further_reading:
     - link: "/continuous_integration/explore_pipelines/"
       tag: "Documentation"
