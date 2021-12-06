@@ -11,8 +11,15 @@
     font-family: "NationalWeb", Helvetica, Arial, sans-serif !important;
     text-rendering: optimizeLegibility;
     font-kerning: normal;     
-    overflow-x: scroll;
     font-weight: 200;
-    height: 50px;
+    overflow-x: auto;
+    padding: 8px;
+    mtext{
+        font-size: 16px;
+        @include media-breakpoint-down(xs) {
+            font-size: 14px;
+        }
+    }
+
 }
 
