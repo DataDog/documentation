@@ -36,7 +36,7 @@ PS C:\> (Get-WmiObject -List).count
 931
 ```
 
-We can find classes about a specific topic by using the where statement. To display classes that hold processes information, run:
+You can find classes about a specific topic by using the `where` statement. To display classes that hold processes information, run:
 
 ```text
 PS C:\> Get-WmiObject -List | where {$_.name -match "process"} | select Name
@@ -55,9 +55,9 @@ Win32_PerfFormattedData_PerfProc_Process
 [...]
 ```
 
-To browse the data exposed by a class, we can use a syntax similar to SQL called [WQL][1].
+To browse the data exposed by a class, you can use a syntax similar to SQL called [WQL][1].
 
-Many performance related metrics are reported by the PerfMon tool, and are called `Win32_PerfFormattedData_`. In this example we want to look at processes information so we query the `Win32_PerfFormattedData_PerfProc_Process` class:
+Many performance related metrics are reported by the PerfMon tool, and are called `Win32_PerfFormattedData_`. In this example, look at the processes information so you can query the `Win32_PerfFormattedData_PerfProc_Process` class:
 
 ```text
 PS C:\> Get-WmiObject -Query "select * from Win32_PerfFormattedData_PerfProc_Process where Name = 'Powershell'"
@@ -116,9 +116,9 @@ For those who can run third-party applications on their machine the tool WMI Exp
 
 ## Leveraging WMI in Datadog
 
-Now that we understand WMI better, let's see how we can get this data into Datadog. Open the Datagog Agent Manager and click on the WMI Check integration in the left panel.
+After understanding a little bit about how WMI works, you can get this data into Datadog. Open the Datadog Agent Manager and click on the WMI Check integration in the left panel.
 
-Let's start with a simple example: monitoring the number of processes on the machine:
+Start with a simple example: monitoring the number of processes on the machine:
 
 ```yaml
 init_config:
@@ -142,7 +142,7 @@ Save the configuration, enable the integration and restart then go to 'Logs and 
 wmi_check Instance #0 OK Collected 1 metrics, 0 events and 1 service check
 ```
 
-Now let's monitor the Windows Powershell process we were looking at earlier:
+Monitor the Windows Powershell process you were looking at earlier:
 
 ```yaml
 init_config:
@@ -174,7 +174,7 @@ wmi_check
   Collected 0 metrics, 0 events and 1 service check
 ```
 
-This is because the Agent cannot report on 2 different metrics that have the same set of name and tags. To be able to differentiate between the 2 we can use the `tag_by: Instance_Property_Name statement` to use the value of an instance's property as an additional tag:
+This is because the Agent cannot report on 2 different metrics that have the same set of name and tags. To be able to differentiate between the 2 you can use the `tag_by: Instance_Property_Name statement` to use the value of an instance's property as an additional tag:
 
 ```yaml
 init_config:
@@ -193,7 +193,7 @@ instances:
 # values for your WMI query. The examples below show how you can tag your
 # process metrics with the process name (giving a tag of "name:app_name").
     tag_by: Name
-# Note that bellow works on Window >= 2008, as process names are appended a `#XYZ` where `XYZ` is an incremental numebr
+# Note that bellow works on Window >= 2008, as process names are appended a `#XYZ` where `XYZ` is an incremental number
 # If running on Windows 2003, use a different uniq value like `tag_by: IDProcess`
 ```
 
@@ -208,7 +208,7 @@ wmi_check
 
 If the information that you would like to use as a tag is not part of the class you're getting the data from, you have the possibility to use the tag_queries list to link data from different tables.
 
-Let's say I want to report on PoolNonPagedBytes from Win32_PerfFormattedData_PerfProc_Process and I want to addCreationDate from Win32_Process as a tag. These 2 classes expose the PID with different names: IDProcess inWin32_PerfFormattedData_PerfProc_Process and Handle in Win32_Process. So the former is thelink source property and the later the target property:
+Say you want to report on PoolNonPagedBytes from Win32_PerfFormattedData_PerfProc_Process and you want to addCreationDate from Win32_Process as a tag. These 2 classes expose the PID with different names: IDProcess inWin32_PerfFormattedData_PerfProc_Process and Handle in Win32_Process. So the former is the link source property and the later the target property:
 
 ```yaml
 # `tag_queries` optionally lets you specify a list of queries, to tag metrics

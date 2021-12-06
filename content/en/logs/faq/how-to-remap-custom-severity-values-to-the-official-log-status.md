@@ -17,7 +17,7 @@ By default, the [Log Status Remapper][1] relies on the [Syslog severity standard
 However there might be other systems having different severity values that you might want to remap on the official log status.
 This is possible thanks to the [Category Processor][3] that defines a mapping between your custom values and the expected ones.
 
-In this article, we show how to do this with 2 examples: Bunyan levels and web access logs.
+This page describes how to do this with 2 examples: Bunyan levels and web access logs.
 
 ## Web access logs
 
@@ -28,7 +28,7 @@ The status code of the request can be used to determine the log status. Our inte
 * 4xx: Warning
 * 5xx: Error
 
-Let's assume the status code of your log is stored in the `http.status_code` attribute.
+Assume the status code of your log is stored in the `http.status_code` attribute.
 Add a Category Processor in your Pipeline that creates a new attribute to reflect the above mapping:
 
 {{< img src="logs/faq/category_processor.png" alt="Category Processor "  >}}
@@ -48,7 +48,7 @@ Bunyan levels are similar to those of Syslog, but their values are multiplied by
 * 50 = ERROR
 * 60 = FATAL
 
-Let's assume the bunyan level is stored in the `bunyan_level` attribute.
+Assume the bunyan level is stored in the `bunyan_level` attribute.
 Add a Category Processor in your Pipeline that creates a new attribute to reflect the above mapping:
 
 {{< img src="logs/faq/category_processor_bunyan.png" alt="category Processor  bunyan"  >}}
