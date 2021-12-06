@@ -46,14 +46,14 @@ Wrote ~/.dogrc.
 
 Next, use your `dog` commands to quickly use the Datadog API from your terminal/shell. For further help and information on the `dog` commands, run `dog -h`.
 
-In the event that you would rather just write the `.dogrc` file yourself (perhaps you'd like to push the file to many of your servers programmatically so that you can run `dog` commands from any of your servers), the content of this file should be as follows:
+If you would rather write the `.dogrc` file yourself, the content of this file should be as follows:
 
 ```text
 [Connection]
 apikey = <DATADOG_API_KEY>
 appkey = <YOUR_APPLICATION_KEY>
 ```
-
+This is useful if you'd like to push the file to many of your servers programmatically so that you can run `dog` commands from any of your servers.
 ## Dogshell commands
 
 For reference, [find the code for Dogshell][4]. But once you have Dogshell installed and initialized, you can append the `-h` option to the following commands to get more information on specific Dogshell usage:
