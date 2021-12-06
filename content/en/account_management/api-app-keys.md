@@ -98,7 +98,7 @@ Alternatively, organizations have asked whether they can create a “service acc
 
 Need help? Contact [Datadog support][6].
 
-[1]: https://app.datadoghq.com/account/settings#api
+[1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: https://app.datadoghq.com/access/application-keys
 [3]: /logs/log_collection/javascript/
 [4]: /real_user_monitoring/

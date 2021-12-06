@@ -1,5 +1,5 @@
 ---
-title: Custom Metrics
+title: Custom Metrics from Serverless Applications
 kind: documentation
 ---
 
@@ -28,7 +28,7 @@ You can also generate metrics from 100% of ingested spans, regardless of whether
 
 Datadog recommends using the [Datadog Lambda Extension][1] to submit custom metrics from supported Lambda runtimes.
 
-1. Follow the general [serverless installation instructions][6] to configure your Lambda function and install the Datadog Lambda Library and Extension.
+1. Follow the general [serverless installation instructions][6] appropriate for your Lambda runtime.
 1. If you are not interested in collecting traces from your Lambda function, set the environment variable `DD_TRACE_ENABLED` to `false`.
 1. If you are not interested in collecting logs from your Lambda function, set the environment variable `DD_SERVERLESS_LOGS_ENABLED` to `false`.
 1. Import and use the helper function from the Datadog Lambda Library, such as `lambda_metric` or `sendDistributionMetric`, to submit your custom metrics following the [sample code](#custom-metrics-sample-code).

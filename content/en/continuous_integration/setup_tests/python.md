@@ -9,6 +9,14 @@ further_reading:
       tag: "Documentation"
       text: "Troubleshooting CI"
 ---
+
+{{< site-region region="us5,gov" >}}
+<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
+{{< /site-region >}}
+
+<div class="alert alert-info">Python test instrumentation is in beta. There are no billing implications for instrumenting Python tests during this period.
+</div>
+
 ## Compatibility
 
 Supported Python interpreters:
@@ -38,6 +46,12 @@ To enable instrumentation of `pytest` tests, add the `--ddtrace` option when run
 
 {{< code-block lang="bash" >}}
 DD_SERVICE=my-python-app DD_ENV=ci pytest --ddtrace
+{{< /code-block >}}
+
+If you also want to enable the rest of the APM integrations to get more information in your flamegraph, add the `--ddtrace-patch-all` option:
+
+{{< code-block lang="bash" >}}
+DD_SERVICE=my-python-app DD_ENV=ci pytest --ddtrace --ddtrace-patch-all
 {{< /code-block >}}
 
 ## Configuration settings

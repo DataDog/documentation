@@ -14,7 +14,7 @@ further_reading:
 ---
 ## Overview
 
-Datadog Database Monitoring allows you to easily understand the health and performance of your databases, and quickly determine the root cause of any problems.
+Datadog Database Monitoring helps you to better understand the health and performance of your databases, and quickly determine the root cause of any problems.
 
 In one place, you can view:
 
@@ -131,6 +131,6 @@ You can clone and modify out-of-the-box dashboards to suit your needs.
 [1]: https://www.datadoghq.com/free-datadog-trial/
 [2]: https://www.gnu.org/software/make/
 [3]: https://www.docker.com/
-[4]: https://app.datadoghq.com/account/settings#api
+[4]: https://app.datadoghq.com/organization-settings/api-keys
 [5]: https://github.com/DataDog/dd-database-monitoring-example
 [6]: https://app.datadoghq.com/databases

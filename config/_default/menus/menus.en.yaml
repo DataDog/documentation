@@ -45,83 +45,95 @@ main_left:
     url: 'https://www.datadoghq.com/product/code-profiling/'
     weight: 7
     parent: product
+  - identifier: ci-visibility
+    name: CI Visibility
+    pre: <i class='icon-ci'></i>
+    url: 'https://www.datadoghq.com/product/ci-cd-monitoring/'
+    weight: 8
+    parent: product
   - identifier: synthetics
     name: Synthetic Monitoring
     pre: <i class="icon-synthetics align-middle"></i>
     url: 'https://www.datadoghq.com/product/synthetic-monitoring/'
-    weight: 8
+    weight: 9
     parent: product
   - identifier: rum
     name: RUM & Session Replay
     pre: <i class="icon-rum align-middle"></i>
     url: 'https://www.datadoghq.com/product/real-user-monitoring/'
-    weight: 9
-    parent: product
-  - identifier: network
-    name: Network Monitoring
-    pre: <i class="icon-network align-middle"></i>
-    url: 'https://www.datadoghq.com/product/network-monitoring'
     weight: 10
+    parent: product
+  - identifier: network-performance
+    name: Network Performance Monitoring
+    pre: <i class="icon-network align-middle"></i>
+    url: 'https://www.datadoghq.com/product/network-monitoring/network-performance-monitoring/'
+    weight: 11
+    parent: product
+  - identifier: network-device
+    name: Network Device Monitoring
+    pre: <i class='icon-ndm'></i>
+    url: 'https://www.datadoghq.com/product/network-monitoring/network-device-monitoring/'
+    weight: 12
     parent: product
   - identifier: security-platform
     name: Security Platform
-    pre: <i class="icon-security align-middle"></i>
+    pre: <i class="icon-security-platform align-middle"></i>
     url: 'https://www.datadoghq.com/product/security-platform/'
-    weight: 11
+    weight: 13
     parent: product
   - identifier: security-monitoring
     name: Security Monitoring
-    pre: <i class="icon-security align-middle"></i>
+    pre: <i class="icon-siem align-middle"></i>
     url: 'https://www.datadoghq.com/product/security-platform/security-monitoring/'
-    weight: 12
+    weight: 14
     parent: product
   - identifier: cloud-security-posture-management
     name: CSPM
     pre: <i class="icon-cspm align-middle"></i>
     url: 'https://www.datadoghq.com/product/security-platform/cloud-security-posture-management/'
-    weight: 13
+    weight: 15
     parent: product
   - identifier: cloud-workload-security
     name: Cloud Workload Security
     pre: <i class="icon-cws align-middle"></i>
     url: 'https://www.datadoghq.com/product/security-platform/cloud-workload-security/'
-    weight: 14
+    weight: 16
     parent: product
   - identifier: error-tracking
     name: Error Tracking
     pre: <i class="icon-error-tracking align-middle"></i>
     url: 'https://www.datadoghq.com/product/security-platform/error-tracking/'
-    weight: 15
+    weight: 17
     parent: product
   - identifier: incident
     name: Incident Management
     pre: <i class="icon-incidents align-middle"></i>
     url: 'https://www.datadoghq.com/product/incident-management'
-    weight: 16
+    weight: 18
     parent: product
   - identifier: database
     name: Database Monitoring
     pre: <i class="icon-dbm align-middle"></i>
     url: 'https://www.datadoghq.com/product/database-monitoring'
-    weight: 17
+    weight: 19
     parent: product
   - identifier: serverless
     name: Serverless
     pre: <i class="icon-serverless align-middle"></i>
     url: 'https://www.datadoghq.com/product/serverless-monitoring/'
-    weight: 18
+    weight: 20
     parent: product
   - identifier: alerts
     name: Alerts
     pre: <i class="icon-monitor align-middle"></i>
     url: 'https://www.datadoghq.com/product/alerts/'
-    weight: 19
+    weight: 21
     parent: product
   - identifier: api
     name: API
     pre: <i class="icon-api align-middle"></i>
     url: 'https://docs.datadoghq.com/api'
-    weight: 20
+    weight: 22
     parent: product
   - identifier: customers
     name: Customers
@@ -1076,6 +1088,10 @@ main:
     url: dashboards/graphing_json/request_json/
     parent: graphing_json
     weight: 1002
+  - name: Guides
+    url: dashboards/guide/
+    parent: dashboards
+    weight: 11
   - name: Mobile Application
     url: mobile/
     identifier: mobile
@@ -1111,7 +1127,16 @@ main:
   - name: Live Containers
     url: infrastructure/livecontainers/
     parent: infrastructure
+    identifier: infrastructure_livecontainers
     weight: 5
+  - name: Configuration
+    url: infrastructure/livecontainers/configuration
+    parent: infrastructure_livecontainers
+    weight: 501
+  - name: Cloud Cost
+    url: infrastructure/cloud_cost_management/
+    parent: infrastructure
+    weight: 6
   - name: Serverless
     url: serverless
     pre: serverless
@@ -1241,11 +1266,16 @@ main:
     parent: serverless
     identifier: serverless_app_services
     weight: 8
+  - name: Glossary
+    url: serverless/glossary
+    parent: serverless
+    identifier: serverless_glossary
+    weight: 9
   - name: Guides
     url: serverless/guide/
     identifier: serverless_guides
     parent: serverless
-    weight: 9
+    weight: 10
   - name: Metrics
     url: metrics/
     identifier: metrics_top_level
@@ -1273,41 +1303,45 @@ main:
     url: metrics/units/
     parent: metrics_top_level
     weight: 4
+  - name: Metrics Without Limits™
+    url: metrics/metrics-without-limits/
+    parent: metrics_top_level
+    weight: 5
   - name: Advanced Filtering
     url: metrics/advanced-filtering/
     parent: metrics_top_level
     identifier: metrics_advanced_filtering
-    weight: 5
+    weight: 6
   - name: Custom Metrics
     url: metrics/custom_metrics/
     parent: metrics_top_level
     identifier: metrics_custom_metrics
-    weight: 6
+    weight: 7
   - name: Metric Type Modifiers
     url: metrics/type_modifiers/
     parent: metrics_custom_metrics
     identifier: metrics_modifiers
-    weight: 601
+    weight: 701
   - name: 'Submission - Agent Check '
     url: metrics/agent_metrics_submission/
     parent: metrics_custom_metrics
     identifier: dev_tools_metrics_agent
-    weight: 602
+    weight: 702
   - name: Submission - DogStatsD
     url: metrics/dogstatsd_metrics_submission/
     parent: metrics_custom_metrics
     identifier: dev_tools_metrics_dogstatsd
-    weight: 603
+    weight: 703
   - name: Submission - Powershell
     url: metrics/powershell_metrics_submission
     parent: metrics_custom_metrics
     identifier: dev_tools_metrics_powershell
-    weight: 604
+    weight: 704
   - name: 'Submission - API '
     url: api/latest/metrics/#submit-metrics
     parent: metrics_custom_metrics
     identifier: dev_tools_metrics_api
-    weight: 605
+    weight: 705
   - name: Notebooks
     url: notebooks/
     identifier: notebooks
@@ -1453,6 +1487,31 @@ main:
     weight: 4
     parent: alerting
     identifier: slos
+  - name: Incident Management
+    url: monitors/incident_management
+    parent: alerting
+    identifier: incidents
+    weight: 8
+  - name: Incident Details
+    url: monitors/incident_management/incident_details
+    parent: incidents
+    identifier: incident_details
+    weight: 801
+  - name: Incident Settings
+    url: monitors/incident_management/incident_settings
+    parent: incidents
+    identifier: incidents_settings
+    weight: 802
+  - name: Incident Analytics
+    url: monitors/incident_management/analytics
+    parent: incidents
+    identifier: analytics
+    weight: 803
+  - name: Datadog Clipboard
+    url: monitors/incident_management/datadog_clipboard
+    parent: incidents
+    identifier: incidents_clipboard
+    weight: 804
   - name: Monitor-based SLOs
     url: monitors/service_level_objectives/monitor/
     parent: slos
@@ -1468,21 +1527,16 @@ main:
     parent: slos
     identifier: error_budget
     weight: 403
+  - name: Burn Rate Alerts
+    url: monitors/service_level_objectives/burn_rate/
+    parent: slos
+    identifier: burn_rate
+    weight: 404
   - name: Incident Management
     url: monitors/incident_management
     parent: alerting
     identifier: incidents
     weight: 5
-  - name: Datadog Clipboard
-    url: monitors/incident_management/datadog_clipboard
-    parent: incidents
-    identifier: incidents_clipboard
-    weight: 501
-  - name: Notification Rules
-    url: monitors/incident_management/notification_rules
-    parent: incidents
-    identifier: notification_rules
-    weight: 502
   - name: Guides
     url: monitors/guide/
     weight: 100
@@ -1820,6 +1874,11 @@ main:
     parent: tracing_runtime_metrics
     identifier: tracing_runtime_metrics_dotnet
     weight: 1205
+  - name: Go
+    url: tracing/runtime_metrics/go/
+    parent: tracing_runtime_metrics
+    identifier: tracing_runtime_metrics_go
+    weight: 1206
   - name: Continuous Profiler
     url: tracing/profiler/
     parent: tracing
@@ -1850,12 +1909,17 @@ main:
     parent: profiler_enabling
     identifier: profiler_enabling_ruby
     weight: 104
+  - name: Enabling the Node.js Profiler
+    url: tracing/profiler/enabling/nodejs/
+    parent: profiler_enabling
+    identifier: profiler_enabling_nodejs
+    weight: 105
   - name: Search Profiles
     url: tracing/profiler/search_profiles/
     parent: profiler
     identifier: profiler_search_profiles
     weight: 1302
-  - name: Investigate Code Hotspots from Traces
+  - name: Investigate Slow Traces or Endpoints
     url: tracing/profiler/connect_traces_and_profiles/
     parent: profiler
     identifier: profiler_traces_profiles
@@ -2005,30 +2069,35 @@ main:
     parent: ci
     identifier: setup_pipelines
     weight: 2
-  - name: GitLab
-    url: continuous_integration/setup_pipelines/gitlab/
-    parent: setup_pipelines
-    identifier: ci_gitlab
-    weight: 201
-  - name: Jenkins
-    url: continuous_integration/setup_pipelines/jenkins/
-    parent: setup_pipelines
-    identifier: ci_jenkins
-    weight: 202
   - name: Buildkite
     url: continuous_integration/setup_pipelines/buildkite/
     parent: setup_pipelines
     identifier: ci_buildkite
-    weight: 203
+    weight: 201
   - name: CircleCI
     url: continuous_integration/setup_pipelines/circleci/
     parent: setup_pipelines
     identifier: ci_circleci
-    weight: 204
-  - name: Custom Spans
-    url: continuous_integration/setup_pipelines/custom_spans/
+    weight: 202
+  - name: GitHub
+    url: continuous_integration/setup_pipelines/github/
     parent: setup_pipelines
-    identifier: ci_custom_spans
+    identifier: ci_github
+    weight: 203
+  - name: GitLab
+    url: continuous_integration/setup_pipelines/gitlab/
+    parent: setup_pipelines
+    identifier: ci_gitlab
+    weight: 204
+  - name: Jenkins
+    url: continuous_integration/setup_pipelines/jenkins/
+    parent: setup_pipelines
+    identifier: ci_jenkins
+    weight: 205
+  - name: Custom Commands
+    url: continuous_integration/setup_pipelines/custom_commands/
+    parent: setup_pipelines
+    identifier: ci_custom_commands
     weight: 210
   - name: Exploring Tests
     url: continuous_integration/explore_tests/
@@ -2257,26 +2326,38 @@ main:
     url: logs/explorer/live_tail/
     parent: log_explorer
     weight: 501
-  - name: Log Side Panel
-    url: logs/explorer/side_panel/
+  - name: Search
+    url: logs/explorer/search/
     parent: log_explorer
     weight: 502
-  - name: Saved Views
-    url: logs/explorer/saved_views/
+  - name: Search Syntax
+    url: logs/explorer/search_syntax/
     parent: log_explorer
     weight: 503
   - name: Facets
     url: logs/explorer/facets/
     parent: log_explorer
     weight: 504
-  - name: Watchdog Insights
-    url: logs/explorer/watchdog_insights/
+  - name: Group
+    url: logs/explorer/group/
     parent: log_explorer
     weight: 505
-  - name: Search Syntax
-    url: logs/explorer/search_syntax/
+  - name: Visualize
+    url: logs/explorer/visualize/
     parent: log_explorer
     weight: 506
+  - name: Log Side Panel
+    url: logs/explorer/side_panel/
+    parent: log_explorer
+    weight: 507
+  - name: Export
+    url: logs/explorer/export/
+    parent: log_explorer
+    weight: 508
+  - name: Saved Views
+    url: logs/explorer/saved_views/
+    parent: log_explorer
+    weight: 509
   - name: Guides
     url: logs/guide/
     parent: log_management
@@ -2289,7 +2370,7 @@ main:
     weight: 7
   - name: Security Platform
     url: security_platform/
-    pre: security
+    pre: security-platform
     identifier: security_platform
     weight: 180000
   - name: Security Monitoring
@@ -2391,6 +2472,10 @@ main:
     parent: security_platform
     identifier: security_rules
     weight: 4
+  - name: Notification Profiles
+    url: security_platform/notification_profiles/
+    parent: security_platform
+    weight: 5
   - name: Signals Explorer
     url: security_platform/explorer
     parent: security_platform
@@ -2419,18 +2504,26 @@ main:
     url: synthetics/api_tests/ssl_tests
     parent: api_tests
     weight: 102
-  - name: TCP
-    url: synthetics/api_tests/tcp_tests
-    parent: api_tests
-    weight: 103
   - name: DNS
     url: synthetics/api_tests/dns_tests
     parent: api_tests
+    weight: 103
+  - name: TCP
+    url: synthetics/api_tests/tcp_tests
+    parent: api_tests
     weight: 104
+  - name: UDP
+    url: synthetics/api_tests/udp_tests
+    parent: api_tests
+    weight: 105
   - name: ICMP
     url: synthetics/api_tests/icmp_tests
     parent: api_tests
-    weight: 105
+    weight: 106
+  - name: WebSocket
+    url: synthetics/api_tests/websocket_tests
+    parent: api_tests
+    weight: 107
   - name: Multistep API Tests
     url: synthetics/multistep
     parent: synthetics
@@ -2463,6 +2556,16 @@ main:
     parent: synthetics_private_location
     identifier: synthetics_private_location_configuration
     weight: 401
+  - name: Dimensioning
+    url: synthetics/private_locations/dimensioning
+    parent: synthetics_private_location
+    identifier: synthetics_private_location_dimensioning
+    weight: 402
+  - name: Monitoring
+    url: synthetics/private_locations/monitoring
+    parent: synthetics_private_location
+    identifier: synthetics_private_location_monitoring
+    weight: 403
   - name: CI/CD Testing
     url: /synthetics/cicd_testing
     parent: synthetics
@@ -2608,11 +2711,21 @@ main:
     parent: rum
     identifier: rum_reactnative
     weight: 4
+  - name: Session Replay
+    url: real_user_monitoring/session_replay/
+    parent: rum
+    identifier: rum_session_replay
+    weight: 5
+  - name: Privacy Options
+    url: real_user_monitoring/session_replay/privacy_options
+    parent: rum_session_replay
+    identifier: rum_session_replay_privacy_options
+    weight: 501
   - name: Dashboards
     url: real_user_monitoring/dashboards/
     parent: rum
     identifier: rum_dashboards
-    weight: 5
+    weight: 6
   - name: Performance Overview
     url: real_user_monitoring/dashboards/performance_overview_dashboard
     parent: rum_dashboards
@@ -2632,7 +2745,7 @@ main:
     url: real_user_monitoring/explorer/
     parent: rum
     identifier: rum_explorer
-    weight: 6
+    weight: 7
   - name: Search
     url: real_user_monitoring/explorer/search/
     parent: rum_explorer
@@ -2652,12 +2765,12 @@ main:
     url: real_user_monitoring/connect_rum_and_traces
     parent: rum
     identifier: rum_connect_rum_and_traces
-    weight: 7
+    weight: 8
   - name: Error Tracking
     url: real_user_monitoring/error_tracking/
     parent: rum
     identifier: rum_error_tracking
-    weight: 8
+    weight: 9
   - name: Explorer
     url: real_user_monitoring/error_tracking/explorer
     parent: rum_error_tracking
@@ -2682,7 +2795,7 @@ main:
     url: real_user_monitoring/guide/
     parent: rum
     identifier: rum_guides
-    weight: 9
+    weight: 10
   - name: Network Monitoring
     url: network_monitoring/
     pre: network
@@ -2817,6 +2930,10 @@ main:
     parent: dev_tools
     identifier: marketplace
     weight: 4
+  - name: Datadog Apps
+    url: developers/datadog_apps
+    parent: dev_tools
+    weight: 5
   - name: Service Checks
     url: developers/service_checks/
     parent: dev_tools
@@ -2879,10 +2996,23 @@ main:
     parent: organization_settings
     identifier: account_management_users
     weight: 201
+  - name: Login Methods
+    url: account_management/login_methods/
+    parent: organization_settings
+    identifier: login_methods
+    weight: 202
   - name: Audit Logs
     url: account_management/audit_logs
     parent: organization_settings
-    weight: 202
+    weight: 203
+  - name: OAuth Apps
+    url: account_management/org_settings/oauth_apps
+    parent: organization_settings
+    weight: 204
+  - name: Sensitive Data Scanner
+    url: account_management/org_settings/sensitive_data_detection
+    parent: organization_settings
+    weight: 205
   - name: RBAC
     url: account_management/rbac/
     parent: account_management
@@ -2926,6 +3056,10 @@ main:
     url: account_management/saml/safenet/
     parent: account_management_saml
     weight: 407
+  - name: Troubleshooting
+    url: account_management/saml/troubleshooting/
+    parent: account_management_saml
+    weight: 408
   - name: API and Application Keys
     url: account_management/api-app-keys/
     parent: account_management
@@ -4230,6 +4364,7 @@ api:
     params:
       versions:
         - v1
+        - v2
       operationids:
         - SubmitLog
       unstable: []
@@ -5052,6 +5187,19 @@ api:
       unstable:
         - v1
       order: 6
+  - name: Get Corrections For an SLO
+    url: '#get-corrections-for-an-slo'
+    identifier: get-corrections-for-an-slo
+    parent: service-level-objectives
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetSLOCorrections
+      unstable:
+        - v1
+      order: 6
   - name: Update an SLO
     url: '#update-an-slo'
     identifier: update-an-slo
@@ -5279,7 +5427,7 @@ api:
       operationids:
         - EditGlobalVariable
       unstable: []
-      order: 17
+      order: 18
   - name: Get a global variable
     url: '#get-a-global-variable'
     identifier: get-a-global-variable
@@ -5291,7 +5439,7 @@ api:
       operationids:
         - GetGlobalVariable
       unstable: []
-      order: 18
+      order: 19
   - name: Delete a global variable
     url: '#delete-a-global-variable'
     identifier: delete-a-global-variable
@@ -5303,7 +5451,7 @@ api:
       operationids:
         - DeleteGlobalVariable
       unstable: []
-      order: 19
+      order: 20
   - name: Create a global variable
     url: '#create-a-global-variable'
     identifier: create-a-global-variable
@@ -5315,7 +5463,7 @@ api:
       operationids:
         - CreateGlobalVariable
       unstable: []
-      order: 16
+      order: 17
   - name: Get all global variables
     url: '#get-all-global-variables'
     identifier: get-all-global-variables
@@ -5327,7 +5475,7 @@ api:
       operationids:
         - ListGlobalVariables
       unstable: []
-      order: 15
+      order: 16
   - name: Pause or start a test
     url: '#pause-or-start-a-test'
     identifier: pause-or-start-a-test
@@ -5351,7 +5499,7 @@ api:
       operationids:
         - GetAPITestResult
       unstable: []
-      order: 10
+      order: 11
   - name: Get an API test's latest results summaries
     url: '#get-an-api-tests-latest-results-summaries'
     identifier: get-an-api-tests-latest-results-summaries
@@ -5363,7 +5511,7 @@ api:
       operationids:
         - GetAPITestLatestResults
       unstable: []
-      order: 12
+      order: 13
   - name: Edit a test
     url: '#edit-a-test'
     identifier: edit-a-test
@@ -5387,7 +5535,7 @@ api:
       operationids:
         - GetTest
       unstable: []
-      order: 25
+      order: 26
   - name: Trigger tests from CI/CD pipelines
     url: '#trigger-tests-from-ci/cd-pipelines'
     identifier: trigger-tests-from-ci/cd-pipelines
@@ -5400,6 +5548,18 @@ api:
         - TriggerCITests
       unstable: []
       order: 6
+  - name: Trigger Synthetics tests
+    url: '#trigger-synthetics-tests'
+    identifier: trigger-synthetics-tests
+    parent: synthetics
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - TriggerTests
+      unstable: []
+      order: 7
   - name: Delete tests
     url: '#delete-tests'
     identifier: delete-tests
@@ -5411,7 +5571,7 @@ api:
       operationids:
         - DeleteTests
       unstable: []
-      order: 14
+      order: 15
   - name: Get a browser test result
     url: '#get-a-browser-test-result'
     identifier: get-a-browser-test-result
@@ -5423,7 +5583,7 @@ api:
       operationids:
         - GetBrowserTestResult
       unstable: []
-      order: 11
+      order: 12
   - name: Get a browser test's latest results summaries
     url: '#get-a-browser-tests-latest-results-summaries'
     identifier: get-a-browser-tests-latest-results-summaries
@@ -5435,7 +5595,7 @@ api:
       operationids:
         - GetBrowserTestLatestResults
       unstable: []
-      order: 13
+      order: 14
   - name: Edit a browser test
     url: '#edit-a-browser-test'
     identifier: edit-a-browser-test
@@ -5459,7 +5619,7 @@ api:
       operationids:
         - GetBrowserTest
       unstable: []
-      order: 8
+      order: 9
   - name: Create a browser test
     url: '#create-a-browser-test'
     identifier: create-a-browser-test
@@ -5495,7 +5655,7 @@ api:
       operationids:
         - GetAPITest
       unstable: []
-      order: 7
+      order: 8
   - name: Create an API test
     url: '#create-an-api-test'
     identifier: create-an-api-test
@@ -5531,7 +5691,7 @@ api:
       operationids:
         - ListTests
       unstable: []
-      order: 9
+      order: 10
   - name: Edit a private location
     url: '#edit-a-private-location'
     identifier: edit-a-private-location
@@ -5543,7 +5703,7 @@ api:
       operationids:
         - UpdatePrivateLocation
       unstable: []
-      order: 22
+      order: 23
   - name: Get a private location
     url: '#get-a-private-location'
     identifier: get-a-private-location
@@ -5555,7 +5715,7 @@ api:
       operationids:
         - GetPrivateLocation
       unstable: []
-      order: 21
+      order: 22
   - name: Delete a private location
     url: '#delete-a-private-location'
     identifier: delete-a-private-location
@@ -5567,7 +5727,7 @@ api:
       operationids:
         - DeletePrivateLocation
       unstable: []
-      order: 24
+      order: 25
   - name: Create a private location
     url: '#create-a-private-location'
     identifier: create-a-private-location
@@ -5579,7 +5739,7 @@ api:
       operationids:
         - CreatePrivateLocation
       unstable: []
-      order: 20
+      order: 21
   - name: Get all locations (public and private)
     url: '#get-all-locations-public-and-private'
     identifier: get-all-locations-public-and-private
@@ -5591,7 +5751,7 @@ api:
       operationids:
         - ListLocations
       unstable: []
-      order: 23
+      order: 24
   - name: Get details of batch
     url: '#get-details-of-batch'
     identifier: get-details-of-batch
@@ -5603,7 +5763,7 @@ api:
       operationids:
         - GetSyntheticsCIBatch
       unstable: []
-      order: 26
+      order: 27
   - name: Tags
     url: /api/latest/tags/
     identifier: tags
@@ -5784,6 +5944,18 @@ api:
         - GetUsageRumSessions
       unstable: []
       order: 13
+  - name: Get hourly usage for RUM Units
+    url: '#get-hourly-usage-for-rum-units'
+    identifier: get-hourly-usage-for-rum-units
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetUsageRumUnits
+      unstable: []
+      order: 35
   - name: Get hourly usage for profiled hosts
     url: '#get-hourly-usage-for-profiled-hosts'
     identifier: get-hourly-usage-for-profiled-hosts

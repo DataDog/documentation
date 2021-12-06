@@ -57,7 +57,7 @@ Test Services ビューには、Branches ビューと同じ情報が表示され
 
 [Analytics][6] タブを使用して、グラフやトップリストをインタラクティブにプロットすることもできます。
 
-{{< img src="ci/ci-test-runs.png" alt="テスト実行分析"  style="width:100%;">}}
+{{< img src="ci/ci-test-runs.png" alt="テスト実行分析" style="width:100%;">}}
 
 ### サードパーティのサービスデータの表示方法
 
@@ -72,8 +72,8 @@ APM でインスツルメントされ、インテグレーションテストに�
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/ci/test-services
-[2]: https://app.datadoghq.com/ci/test-services?viz=branches
-[3]: https://app.datadoghq.com/ci/test-services?viz=test-services
+[2]: https://app.datadoghq.com/ci/test-services?view=branches
+[3]: https://app.datadoghq.com/ci/test-services?view=test-services
 [4]: https://app.datadoghq.com/ci/test-runs
 [5]: https://www.datadoghq.com/auto-instrumentation/
 [6]: https://app.datadoghq.com/ci/test-runs?viz=timeseries

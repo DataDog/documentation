@@ -121,7 +121,7 @@
     contents:
 
     - action: pull-and-push-file
-      branch: master
+      branch: main
       globs:
       - README.md
       options:
@@ -130,7 +130,7 @@
         front_matters:
           title: Ansible
           kind: documentation
-          dependencies: ["https://github.com/DataDog/ansible-datadog/blob/master/README.md"]
+          dependencies: ["https://github.com/DataDog/ansible-datadog/blob/main/README.md"]
 
   - repo_name: chef-datadog
     contents:
@@ -238,12 +238,8 @@
       options:
         dest_path: '/serverless/libraries_integrations/'
         file_name: 'plugin.md'
-        front_matters:
-          dependencies: ["https://github.com/DataDog/serverless-plugin-datadog/blob/master/README.md"]
-          title: Datadog Serverless Plugin
-          kind: documentation
-          aliases:
-            - /serverless/serverless_integrations/plugin/
+        # front_matters:
+        #   dependencies: ["https://github.com/DataDog/serverless-plugin-datadog/blob/master/README.md"]
 
   - repo_name: datadog-cloudformation-macro
     contents:
@@ -591,6 +587,18 @@
         - "runtime/**/*.md"
       options:
         dest_path: '/security_platform/default_rules/'
+
+  - repo_name: apps
+    contents:
+    - action: pull-and-push-file
+      branch: master
+      globs:
+        - "docs/en/getting-started.md"
+      options:
+        dest_path: "/developers/"
+        file_name: "datadog_apps.md"
+        # front_matters:
+          # dependencies: ["https://github.com/DataDog/apps/blob/master/docs/en/gettiing-started.md"]
 
   - repo_name: datadog-agent
     contents:

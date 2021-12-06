@@ -30,7 +30,7 @@ Plusieurs problèmes courants peuvent survenir lors de l'envoi de nouveaux logs 
 
 3. Si le statut de votre Agent de logging ne ressemble pas à celui de l'exemple ci-dessus, consultez les conseils de dépannage sur cette page.
 
-4. Si le statut est semblable à celui de l'exemple ci-dessus mais que vous ne recevez toujours aucun log, consultez la section [Le statut de l'Agent de logging n'indique aucune erreur](#le-statut-de-l-agent-de-logging-n-indique-aucune-erreur)
+4. Si le statut est semblable à celui de l'exemple ci-dessus mais que vous ne recevez toujours aucun log, consultez la section [Statut sans erreur](statut-sans-erreur).
 
 ## Logs Agent
 
@@ -82,7 +82,7 @@ Si vous recueillez les logs de conteneurs Docker depuis un fichier et que l'Agen
 
 Ce statut signifie que l'Agent ne parvient pas à trouver un fichier de logs pour un conteneur donné. Pour résoudre ce problème, vérifiez que le dossier contenant les logs de conteneur Docker est correctement exposé au conteneur de l'Agent Datadog. Sous Linux, cela correspond à l'argument `-v /var/lib/docker/containers:/var/lib/docker/containers:ro` dans la ligne de commande utilisée pour lancer le conteneur de l'Agent ; sous Windows, il s'agit de l'argument `-v c:/programdata/docker/containers:c:/programdata/docker/containers:ro`. Notez que le chemin du répertoire par rapport au host sous-jacent peut différer selon la configuration du daemon Docker, mais ce n'est pas un problème si les volumes ont bien été mappés. Par exemple, utilisez `-v /data/docker/containers:/var/lib/docker/containers:ro` si le répertoire des données Docker a été déplacé vers `/data/docker` sur le host sous-jacent.
 
-Si les logs sont bien recueillis mais que des lignes individuelles sont fractionnées, vérifiez que la daemon Docker utilise le  [pilote de logging JSON][#vos-conteneurs-n-utilisent-pas-le-pilote-de-logging-json].
+Si les logs sont bien recueillis mais que des lignes individuelles sont fractionnées, vérifiez que le daemon Docker utilise le [pilote de logging JSON](#vos-conteneurs-n-utilisent-pas-le-pilote-de-logging-json).
 
 La collecte de logs depuis un fichier est activée lorsque la variable d'environnement `DD_LOGS_CONFIG_DOCKER_CONTAINER_USE_FILE` est définie sur `true`. Toutefois, il arrive que les logs de certains conteneurs soient toujours recueillis depuis le socket Docker même lorsque ce paramètre est défini. Seuls les conteneurs lancés après l'activation de l'option verront leurs logs recueillis depuis un fichier. Ce problème se présente généralement lorsque l'Agent Datadog est mis à jour depuis une version qui ne proposait pas cette fonctionnalité. Si vous le souhaitez, vous pouvez forcer le recueil des logs depuis un fichier pour tous les conteneurs (y compris les plus anciens) en définissant la variable d'environnement `DD_LOGS_CONFIG_DOCKER_CONTAINER_FORCE_USE_FILE` sur `true`. Il est possible que certains logs soit recueillis en double durant la période de transition.
 

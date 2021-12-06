@@ -10,7 +10,7 @@ further_reading:
   - link: /logs/explorer/
     tag: Documentation
     text: "En savoir plus sur la vue Log\_Explorer"
-  - link: '/logs/explorer/#patterns'
+  - link: /logs/explorer/#patterns
     tag: Documentation
     text: Se familiariser avec la vue Log Pattern
   - link: /logs/live_tail/
@@ -393,7 +393,7 @@ Attribuez l'autorisation [logs_write_historical_views][19] aux membres `ACME Adm
 [6]: /fr/account_management/rbac/permissions?tab=ui#logs_write_archives
 [7]: /fr/account_management/rbac/permissions?tab=ui#logs_public_config_api
 [8]: https://app.datadoghq.com/access/users
-[9]: https://app.datadoghq.com/account/settings#api
+[9]: https://app.datadoghq.com/organization-settings/api-keys
 [10]: /fr/account_management/api-app-keys/
 [11]: /fr/api/v2/roles/#list-permissions
 [12]: /fr/account_management/rbac/permissions?tab=ui#logs_read_data

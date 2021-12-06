@@ -19,7 +19,13 @@ components:
       schema:
         type: string
   requestBodies: {}
-  responses: {}
+  responses:
+    TooManyRequestsResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/APIErrorResponse'
+      description: Too many requests
   schemas:
     APIErrorResponse:
       description: Error response object.
@@ -605,6 +611,10 @@ components:
     AzureAccount:
       description: Datadog-Azure integrations configured for your organization.
       properties:
+        automute:
+          description: Silence monitors for expected Azure VM shutdowns.
+          example: true
+          type: boolean
         client_id:
           description: Your Azure web application ID.
           example: testc7f6-1234-5678-9101-3fcbf464test
@@ -732,6 +742,12 @@ components:
           $ref: '#/components/schemas/WidgetCompareTo'
         event_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+        formulas:
+          description: List of formulas that operate on queries. **This feature is
+            currently in beta.**
+          items:
+            $ref: '#/components/schemas/WidgetFormula'
+          type: array
         increase_good:
           description: Whether to show increase as good.
           type: boolean
@@ -750,6 +766,14 @@ components:
         q:
           description: Query definition.
           type: string
+        queries:
+          description: List of queries that can be returned directly or used in formulas.
+            **This feature is currently in beta.**
+          items:
+            $ref: '#/components/schemas/FormulaAndFunctionQueryDefinition'
+          type: array
+        response_format:
+          $ref: '#/components/schemas/FormulaAndFunctionResponseFormat'
         rum_query:
           $ref: '#/components/schemas/LogQueryDefinition'
         security_query:
@@ -907,8 +931,10 @@ components:
           type: string
         is_read_only:
           default: false
+          deprecated: true
           description: Whether this dashboard is read-only. If True, only the author
-            and admins can make changes to it.
+            and admins can make changes to it. Prefer using `restricted_roles` to
+            manage write authorization.
           example: false
           type: boolean
         layout_type:
@@ -930,9 +956,7 @@ components:
           $ref: '#/components/schemas/DashboardReflowType'
         restricted_roles:
           description: A list of role identifiers. Only the author and users associated
-            with at least one of these roles can edit this dashboard. Overrides the
-            `is_read_only` property if both are present. **This feature is currently
-            in beta.**
+            with at least one of these roles can edit this dashboard.
           items:
             description: A role UUID.
             type: string
@@ -964,7 +988,7 @@ components:
           - definition:
               requests:
                 fill:
-                  q: system.cpu.user
+                  q: avg:system.cpu.user{*}
               type: hostmap
           items:
             $ref: '#/components/schemas/Widget'
@@ -1359,6 +1383,8 @@ components:
       properties:
         apm_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+        apm_stats_query:
+          $ref: '#/components/schemas/ApmStatsQueryDefinition'
         event_query:
           $ref: '#/components/schemas/LogQueryDefinition'
         log_query:
@@ -2023,10 +2049,8 @@ components:
           maxLength: 4000
           type: string
         title:
-          description: The event title. Limited to 100 characters. Use `msg_title`
-            with the Datadog Ruby library.
+          description: The event title.
           example: Did you hear the news today?
-          maxLength: 100
           type: string
         url:
           description: URL of the event.
@@ -3028,7 +3052,7 @@ components:
           - definition:
               requests:
                 fill:
-                  q: system.cpu.user
+                  q: avg:system.cpu.user{*}
               type: hostmap
           items:
             $ref: '#/components/schemas/Widget'
@@ -3123,6 +3147,7 @@ components:
       - DELETE
       - HEAD
       - OPTIONS
+      example: GET
       type: string
       x-enum-varnames:
       - GET
@@ -5591,6 +5616,7 @@ components:
           type: boolean
         name:
           description: The monitor name.
+          example: My monitor
           type: string
         options:
           $ref: '#/components/schemas/MonitorOptions'
@@ -5866,10 +5892,10 @@ components:
           description: 'The number of minutes before a monitor notifies after data
             stops reporting.
 
-            Datadog recommends at least 2x the monitor timeframe for metric alerts
+            Datadog recommends at least 2x the monitor timeframe for query alerts
             or 2 minutes for service checks.
 
-            If omitted, 2x the evaluation timeframe is used for metric alerts, and
+            If omitted, 2x the evaluation timeframe is used for query alerts, and
             24 hours is used for service checks.'
           format: int64
           nullable: true
@@ -5932,7 +5958,8 @@ components:
         timeout_h:
           default: none
           description: The number of hours of the monitor not reporting data before
-            it automatically resolves from a triggered state.
+            it automatically resolves from a triggered state. The minimum allowed
+            value is 0 hours. The maximum allowed value is 24 hours.
           format: int64
           nullable: true
           type: integer
@@ -6028,7 +6055,7 @@ components:
           status: No Data
           tags:
           - service:cassandra
-          type: metric alert
+          type: query alert
       properties:
         counts:
           description: The counts of monitors per different criteria.
@@ -6119,6 +6146,10 @@ components:
           format: int64
           readOnly: true
           type: integer
+        query:
+          description: The monitor query.
+          example: avg(last_5m):sum:system.net.bytes_rcvd{host:host0} > 100
+          type: string
         scopes:
           description: 'The scope(s) to which the downtime applies, e.g. `host:app2`.
 
@@ -6322,7 +6353,7 @@ components:
       - slo alert
       - event-v2 alert
       - audit alert
-      example: metric alert
+      example: query alert
       type: string
       x-enum-varnames:
       - COMPOSITE
@@ -6580,6 +6611,24 @@ components:
         `markdown`, `timeseries`, `toplist`, `heatmap`, `distribution`,
 
         `log_stream`. [More information on each graph visualization type.](https://docs.datadoghq.com/dashboards/widgets/)'
+      example:
+        definition:
+          requests:
+          - display_type: line
+            q: avg:system.load.1{*}
+            style:
+              line_type: solid
+              line_width: normal
+              palette: dog_classic
+          show_legend: true
+          type: timeseries
+          yaxis:
+            scale: linear
+        graph_size: m
+        split_by:
+          keys: []
+          tags: []
+        time: null
       oneOf:
       - $ref: '#/components/schemas/NotebookMarkdownCellAttributes'
       - $ref: '#/components/schemas/NotebookTimeseriesCellAttributes'
@@ -7712,11 +7761,21 @@ components:
         description:
           description: Description of the correction being made.
           type: string
+        duration:
+          description: Length of time (in seconds) for a specified `rrule` recurring
+            SLO correction.
+          example: 1600000000
+          format: int64
+          type: integer
         end:
           description: Ending time of the correction in epoch seconds.
           example: 1600000000
           format: int64
           type: integer
+        rrule:
+          description: Recurrence rules as defined in the iCalendar RFC 5545.
+          example: RRULE:FREQ=DAILY;INTERVAL=10;COUNT=5
+          type: string
         slo_id:
           description: ID of the SLO that this correction will be applied to.
           example: sloId
@@ -7734,7 +7793,6 @@ components:
       required:
       - slo_id
       - start
-      - end
       - category
       type: object
     SLOCorrectionListResponse:
@@ -7759,15 +7817,49 @@ components:
       properties:
         category:
           $ref: '#/components/schemas/SLOCorrectionCategory'
+        created_at:
+          description: The epoch timestamp of when the correction was created at
+          format: int64
+          type: integer
         creator:
           $ref: '#/components/schemas/Creator'
         description:
           description: Description of the correction being made.
           type: string
+        duration:
+          description: Length of time (in seconds) for a specified `rrule` recurring
+            SLO correction.
+          example: 3600
+          format: int64
+          nullable: true
+          type: integer
         end:
           description: Ending time of the correction in epoch seconds.
           format: int64
           type: integer
+        modified_at:
+          description: The epoch timestamp of when the correction was modified at
+          format: int64
+          type: integer
+        modifier:
+          description: Modifier of the object.
+          nullable: true
+          properties:
+            email:
+              description: Email of the Modifier.
+              type: string
+            handle:
+              description: Handle of the Modifier.
+              type: string
+            name:
+              description: Name of the Modifier.
+              type: string
+          type: object
+        rrule:
+          description: Recurrence rules as defined in the iCalendar RFC 5545.
+          example: RRULE:FREQ=DAILY;INTERVAL=10;COUNT=5
+          nullable: true
+          type: string
         slo_id:
           description: ID of the SLO that this correction will be applied to.
           type: string
@@ -7811,11 +7903,21 @@ components:
         description:
           description: Description of the correction being made.
           type: string
+        duration:
+          description: Length of time (in seconds) for a specified `rrule` recurring
+            SLO correction.
+          example: 3600
+          format: int64
+          type: integer
         end:
           description: Ending time of the correction in epoch seconds.
           example: 1600000000
           format: int64
           type: integer
+        rrule:
+          description: Recurrence rules as defined in the iCalendar RFC 5545.
+          example: RRULE:FREQ=DAILY;INTERVAL=10;COUNT=5
+          type: string
         start:
           description: Starting time of the correction in epoch seconds.
           example: 1600000000
@@ -9699,25 +9801,31 @@ components:
           $ref: '#/components/schemas/SyntheticsAPITestConfig'
         locations:
           description: Array of locations used to run the test.
+          example:
+          - aws:eu-west-3
           items:
             description: A location from which the test was run.
             type: string
           type: array
         message:
           description: Notification message associated with the test.
+          example: Notification message
           type: string
         monitor_id:
           description: The associated monitor ID.
+          example: 12345678
           format: int64
           readOnly: true
           type: integer
         name:
           description: Name of the test.
+          example: Test name
           type: string
         options:
           $ref: '#/components/schemas/SyntheticsTestOptions'
         public_id:
           description: The public ID for the test.
+          example: 123-abc-456
           readOnly: true
           type: string
         status:
@@ -9726,6 +9834,8 @@ components:
           $ref: '#/components/schemas/SyntheticsTestDetailsSubType'
         tags:
           description: Array of tags attached to the test.
+          example:
+          - env:production
           items:
             description: A tag attached to the test.
             type: string
@@ -9735,11 +9845,23 @@ components:
       type: object
     SyntheticsAPITestConfig:
       description: Configuration object for a Synthetic API test.
+      example:
+        assertions:
+        - operator: lessThan
+          target: 1000
+          type: responseTime
+        request:
+          method: GET
+          url: https://example.com
       properties:
         assertions:
           default: []
-          description: Array of assertions used for the test.
-          example: []
+          description: Array of assertions used for the test. Required for single
+            API tests.
+          example:
+          - operator: lessThan
+            target: 1000
+            type: responseTime
           items:
             $ref: '#/components/schemas/SyntheticsAssertion'
           type: array
@@ -9942,12 +10064,14 @@ components:
           type: string
         target:
           description: Value used by the operator.
+          example: 123456
           nullable: false
         type:
           $ref: '#/components/schemas/SyntheticsAssertionType'
       required:
       - type
       - operator
+      - target
       type: object
     SyntheticsAssertionType:
       description: Type of the assertion.
@@ -9966,6 +10090,7 @@ components:
       - packetLossPercentage
       - packetsReceived
       - networkHop
+      - receivedMessage
       example: statusCode
       type: string
       x-enum-varnames:
@@ -9983,6 +10108,7 @@ components:
       - PACKET_LOSS_PERCENTAGE
       - PACKETS_RECEIVED
       - NETWORK_HOP
+      - RECEIVED_MESSAGE
     SyntheticsBasicAuth:
       description: Object to handle basic authentication when performing the test.
       properties:
@@ -10292,7 +10418,7 @@ components:
           description: Example for the variable.
           type: string
         id:
-          description: ID for the variable.
+          description: ID for the variable. Global variables require an ID.
           type: string
         name:
           description: Name of the variable.
@@ -10335,20 +10461,32 @@ components:
       description: Description of the CI provider.
       properties:
         pipeline:
-          description: Name of the pipeline.
-          type: string
+          $ref: '#/components/schemas/SyntheticsCIBatchMetadataPipeline'
         provider:
-          description: Name of the CI provider.
-          type: string
+          $ref: '#/components/schemas/SyntheticsCIBatchMetadataProvider'
       type: object
     SyntheticsCIBatchMetadataGit:
       description: Git information.
       properties:
         branch:
-          description: The branch name.
+          description: Branch name.
           type: string
-        commit_sha:
+        commitSha:
           description: The commit SHA.
+          type: string
+      type: object
+    SyntheticsCIBatchMetadataPipeline:
+      description: Description of the CI pipeline.
+      properties:
+        url:
+          description: URL of the pipeline.
+          type: string
+      type: object
+    SyntheticsCIBatchMetadataProvider:
+      description: Description of the CI provider.
+      properties:
+        name:
+          description: Name of the CI provider.
           type: string
       type: object
     SyntheticsCITest:
@@ -11062,7 +11200,6 @@ components:
           type: string
         value:
           description: Value for the step.
-          type: object
         vitalsMetrics:
           description: Array of Core Web Vitals metrics for the step.
           items:
@@ -11148,7 +11285,8 @@ components:
       properties:
         assertions:
           default: []
-          description: Array of assertions used for the test.
+          description: Array of assertions used for the test. Required for single
+            API tests.
           example: []
           items:
             $ref: '#/components/schemas/SyntheticsAssertion'
@@ -11217,7 +11355,7 @@ components:
     SyntheticsTestDetailsSubType:
       description: 'The subtype of the Synthetic API test, `http`, `ssl`, `tcp`,
 
-        `dns`, `icmp` or `multi`.'
+        `dns`, `icmp`, `udp`, `websocket` or `multi`.'
       enum:
       - http
       - ssl
@@ -11225,6 +11363,9 @@ components:
       - dns
       - multi
       - icmp
+      - udp
+      - websocket
+      example: http
       type: string
       x-enum-varnames:
       - HTTP
@@ -11233,6 +11374,8 @@ components:
       - DNS
       - MULTI
       - ICMP
+      - UDP
+      - WEBSOCKET
     SyntheticsTestDetailsType:
       description: Type of the Synthetic test, either `api` or `browser`.
       enum:
@@ -11373,6 +11516,7 @@ components:
       enum:
       - live
       - paused
+      example: live
       type: string
       x-enum-varnames:
       - LIVE
@@ -11423,6 +11567,9 @@ components:
         host:
           description: Host name to perform the test with.
           type: string
+        message:
+          description: Message to send for UDP or WebSocket tests.
+          type: string
         method:
           $ref: '#/components/schemas/HTTPMethod'
         noSavingResponseBody:
@@ -11459,6 +11606,7 @@ components:
           type: number
         url:
           description: URL to perform the test with.
+          example: https://example.com
           type: string
       type: object
     SyntheticsTestRequestCertificate:
@@ -11525,6 +11673,17 @@ components:
           format: double
           type: number
       type: object
+    SyntheticsTriggerBody:
+      description: Object describing the synthetics tests to trigger.
+      properties:
+        tests:
+          description: Individual synthetics test.
+          items:
+            $ref: '#/components/schemas/SyntheticsTriggerTest'
+          type: array
+      required:
+      - tests
+      type: object
     SyntheticsTriggerCITestLocation:
       description: Synthetics location.
       properties:
@@ -11557,6 +11716,7 @@ components:
       properties:
         batch_id:
           description: The public ID of the batch triggered.
+          nullable: true
           type: string
         locations:
           description: List of Synthetics locations.
@@ -11574,6 +11734,18 @@ components:
             description: The public ID of the Synthetics test.
             type: string
           type: array
+      type: object
+    SyntheticsTriggerTest:
+      description: Test configuration for Synthetics
+      properties:
+        metadata:
+          $ref: '#/components/schemas/SyntheticsCIBatchMetadata'
+        public_id:
+          description: The public ID of the Synthetics test to trigger.
+          example: aaa-aaa-aaa
+          type: string
+      required:
+      - public_id
       type: object
     SyntheticsUpdateTestPauseStatusPayload:
       description: Object to start or pause an existing Synthetic test.
@@ -12283,10 +12455,12 @@ components:
       - profiled_host_percentage
       - profiled_container_usage
       - profiled_container_percentage
-      - dbm_host_usage
-      - dbm_host_percentage
+      - dbm_hosts_usage
+      - dbm_hosts_percentage
       - dbm_queries_usage
       - dbm_queries_percentage
+      - estimated_indexed_logs_usage
+      - estimated_indexed_logs_percentage
       - '*'
       type: string
       x-enum-varnames:
@@ -12318,10 +12492,12 @@ components:
       - PROFILED_HOST_PERCENTAGE
       - PROFILED_CONTAINER_USAGE
       - PROFILED_CONTAINER_PERCENTAGE
-      - DBM_HOST_USAGE
-      - DBM_HOST_PERCENTAGE
+      - DBM_HOSTS_USAGE
+      - DBM_HOSTS_PERCENTAGE
       - DBM_QUERIES_USAGE
       - DBM_QUERIES_PERCENTAGE
+      - ESTIMATED_INDEXED_LOGS_USAGE
+      - ESTIMATED_INDEXED_LOGS_PERCENTAGE
       - ALL
     UsageAttributionTagNames:
       additionalProperties:
@@ -12411,11 +12587,11 @@ components:
           description: The Cloud Workload Security host usage by tag(s)
           format: double
           type: number
-        dbm_host_percentage:
+        dbm_hosts_percentage:
           description: The percentage of Database Monitoring host usage by tag(s).
           format: double
           type: number
-        dbm_host_usage:
+        dbm_hosts_usage:
           description: The Database Monitoring host usage by tag(s).
           format: double
           type: number
@@ -12426,6 +12602,16 @@ components:
           type: number
         dbm_queries_usage:
           description: The Database Monitoring normalized queries usage by tag(s).
+          format: double
+          type: number
+        estimated_indexed_logs_percentage:
+          description: The percentage of estimated live indexed logs usage by tag(s).
+            Note this field is in private beta.
+          format: double
+          type: number
+        estimated_indexed_logs_usage:
+          description: The estimated live indexed logs usage by tag(s). Note this
+            field is in private beta.
           format: double
           type: number
         infra_host_percentage:
@@ -12575,8 +12761,8 @@ components:
           type: string
         ratio_in_month:
           description: Shows usage aggregation for a billing period.
-          format: int64
-          type: integer
+          format: double
+          type: number
         start_date:
           description: Shows the first date of usage.
           format: date-time
@@ -12811,9 +12997,19 @@ components:
     UsageFargateHour:
       description: Number of Fargate tasks run and hourly usage.
       properties:
+        avg_profiled_fargate_tasks:
+          description: The average profiled task count for Fargate Profiling.
+          format: int64
+          type: integer
         hour:
           description: The hour for the usage.
           format: date-time
+          type: string
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
           type: string
         tasks_count:
           description: The number of Fargate tasks run.
@@ -13183,7 +13379,7 @@ components:
           description: The hour for the usage.
           format: date-time
           type: string
-        indexed_event_count:
+        indexed_events_count:
           description: Contains the number of netflow events indexed.
           format: int64
           type: integer
@@ -13288,6 +13484,52 @@ components:
             $ref: '#/components/schemas/UsageRumSessionsHour'
           type: array
       type: object
+    UsageRumUnitsHour:
+      description: Number of RUM Units used for each hour for a given organization
+        (data available as of November 1, 2021).
+      properties:
+        browser_rum_lite_session_count:
+          description: Number of browser RUM lite sessions.
+          format: int64
+          type: integer
+        browser_rum_replay_session_count:
+          description: Number of browser RUM replay sessions.
+          format: int64
+          type: integer
+        browser_rum_units:
+          description: The number of browser RUM units.
+          format: int64
+          type: integer
+        mobile_rum_lite_session_count:
+          description: Number of mobile RUM lite sessions.
+          format: int64
+          type: integer
+        mobile_rum_units:
+          description: The number of mobile RUM units.
+          format: int64
+          type: integer
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
+          type: string
+        rum_units:
+          description: Total RUM units across mobile and browser RUM.
+          format: int64
+          nullable: true
+          type: integer
+      type: object
+    UsageRumUnitsResponse:
+      description: Response containing the number of RUM Units for each hour for a
+        given organization.
+      properties:
+        usage:
+          description: Get hourly usage for RUM Units.
+          items:
+            $ref: '#/components/schemas/UsageRumUnitsHour'
+          type: array
+      type: object
     UsageSDSHour:
       description: Sensitive Data Scanner usage for a given organization for a given
         hour.
@@ -13302,6 +13544,12 @@ components:
             hour."
           format: int64
           type: integer
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
+          type: string
         total_scanned_bytes:
           description: "The total number of bytes scanned across all usage types by
             the Sensitive Data Scanner from the start of the given hour\u2019s month
@@ -13449,6 +13697,10 @@ components:
             the current date for all organizations.
           format: int64
           type: integer
+        avg_profiled_fargate_tasks:
+          description: The average profiled task count for Fargate Profiling.
+          format: int64
+          type: integer
         aws_host_top99p:
           description: Shows the 99th percentile of all AWS hosts over all hours in
             the current date for all organizations.
@@ -13471,6 +13723,21 @@ components:
           type: integer
         billable_ingested_bytes_sum:
           description: Shows the sum of all log bytes ingested over all hours in the
+            current date for all organizations.
+          format: int64
+          type: integer
+        browser_rum_lite_session_count_sum:
+          description: Shows the sum of all browser lite sessions over all hours in
+            the current date for all organizations.
+          format: int64
+          type: integer
+        browser_rum_replay_session_count_sum:
+          description: Shows the sum of all browser replay sessions over all hours
+            in the current date for all organizations.
+          format: int64
+          type: integer
+        browser_rum_units_sum:
+          description: Shows the sum of all browser RUM units over all hours in the
             current date for all organizations.
           format: int64
           type: integer
@@ -13578,6 +13845,11 @@ components:
             in the current date all organizations.
           format: int64
           type: integer
+        mobile_rum_lite_session_count_sum:
+          description: Shows the sum of all mobile lite sessions over all hours in
+            the current date for all organizations.
+          format: int64
+          type: integer
         mobile_rum_session_count_android_sum:
           description: Shows the sum of all mobile RUM Sessions on Android over all
             hours in the current date for all organizations.
@@ -13591,6 +13863,11 @@ components:
         mobile_rum_session_count_sum:
           description: Shows the sum of all mobile RUM Sessions over all hours in
             the current date for all organizations
+          format: int64
+          type: integer
+        mobile_rum_units_sum:
+          description: Shows the sum of all mobile RUM units over all hours in the
+            current date for all organizations.
           format: int64
           type: integer
         netflow_indexed_events_count_sum:
@@ -13626,6 +13903,11 @@ components:
           type: integer
         rum_total_session_count_sum:
           description: Shows the sum of RUM Sessions (browser and mobile) over all
+            hours in the current date for all organizations.
+          format: int64
+          type: integer
+        rum_units_sum:
+          description: Shows the sum of all browser and mobile RUM units over all
             hours in the current date for all organizations.
           format: int64
           type: integer
@@ -13690,6 +13972,10 @@ components:
             in the current date for the given org.
           format: int64
           type: integer
+        avg_profiled_fargate_tasks:
+          description: The average profiled task count for Fargate Profiling.
+          format: int64
+          type: integer
         aws_host_top99p:
           description: Shows the 99th percentile of all AWS hosts over all hours in
             the current date for the given org.
@@ -13712,6 +13998,21 @@ components:
           type: integer
         billable_ingested_bytes_sum:
           description: Shows the sum of all log bytes ingested over all hours in the
+            current date for the given org.
+          format: int64
+          type: integer
+        browser_rum_lite_session_count_sum:
+          description: Shows the sum of all browser lite sessions over all hours in
+            the current date for the given org.
+          format: int64
+          type: integer
+        browser_rum_replay_session_count_sum:
+          description: Shows the sum of all browser replay sessions over all hours
+            in the current date for the given org.
+          format: int64
+          type: integer
+        browser_rum_units_sum:
+          description: Shows the sum of all browser RUM units over all hours in the
             current date for the given org.
           format: int64
           type: integer
@@ -13757,12 +14058,12 @@ components:
           type: integer
         dbm_host_top99p_sum:
           description: Shows the 99th percentile of all Database Monitoring hosts
-            over all hours in the current month for all organizations.
+            over all hours in the current month for the given org.
           format: int64
           type: integer
         dbm_queries_avg_sum:
           description: Shows the average of all distinct Database Monitoring normalized
-            queries over all hours in the current month for all organizations.
+            queries over all hours in the current month for the given org.
           format: int64
           type: integer
         fargate_tasks_count_avg:
@@ -13817,6 +14118,11 @@ components:
             in the current date for the given org.
           format: int64
           type: integer
+        mobile_rum_lite_session_count_sum:
+          description: Shows the sum of all mobile lite sessions over all hours in
+            the current date for the given org.
+          format: int64
+          type: integer
         mobile_rum_session_count_android_sum:
           description: Shows the sum of all mobile RUM Sessions on Android over all
             hours in the current date for the given org.
@@ -13830,6 +14136,11 @@ components:
         mobile_rum_session_count_sum:
           description: Shows the sum of all mobile RUM Sessions over all hours in
             the current date for the given org.
+          format: int64
+          type: integer
+        mobile_rum_units_sum:
+          description: Shows the sum of all mobile RUM units over all hours in the
+            current date for the given org.
           format: int64
           type: integer
         name:
@@ -13869,15 +14180,20 @@ components:
             hours in the current date for the given org.
           format: int64
           type: integer
+        rum_units_sum:
+          description: Shows the sum of all browser and mobile RUM units over all
+            hours in the current date for the given org.
+          format: int64
+          type: integer
         sds_logs_scanned_bytes_sum:
           description: Shows the sum of all bytes scanned of logs usage by the Sensitive
-            Data Scanner over all hours in the current month for all organizations.
+            Data Scanner over all hours in the current month for the given org.
           format: int64
           type: integer
         sds_total_scanned_bytes_sum:
           description: Shows the sum of all bytes scanned across all usage types by
-            the Sensitive Data Scanner over all hours in the current month for all
-            organizations.
+            the Sensitive Data Scanner over all hours in the current month for the
+            given org.
           format: int64
           type: integer
         synthetics_browser_check_calls_count_sum:
@@ -13930,6 +14246,11 @@ components:
             in the current months for all organizations.
           format: int64
           type: integer
+        avg_profiled_fargate_tasks_sum:
+          description: Shows the average of all profiled Fargate tasks over all hours
+            in the current months for all organizations.
+          format: int64
+          type: integer
         aws_host_top99p_sum:
           description: Shows the 99th percentile of all AWS hosts over all hours in
             the current months for all organizations.
@@ -13957,6 +14278,21 @@ components:
           type: integer
         billable_ingested_bytes_agg_sum:
           description: Shows the sum of all log bytes ingested over all hours in the
+            current months for all organizations.
+          format: int64
+          type: integer
+        browser_rum_lite_session_count_agg_sum:
+          description: Shows the sum of all browser lite sessions over all hours in
+            the current months for all organizations.
+          format: int64
+          type: integer
+        browser_rum_replay_session_count_agg_sum:
+          description: Shows the sum of all browser replay sessions over all hours
+            in the current months for all organizations.
+          format: int64
+          type: integer
+        browser_rum_units_agg_sum:
+          description: Shows the sum of all browser RUM units over all hours in the
             current months for all organizations.
           format: int64
           type: integer
@@ -14085,6 +14421,11 @@ components:
           type: integer
         logs_by_retention:
           $ref: '#/components/schemas/LogsByRetention'
+        mobile_rum_lite_session_count_agg_sum:
+          description: Shows the sum of all mobile lite sessions over all hours in
+            the current months for all organizations.
+          format: int64
+          type: integer
         mobile_rum_session_count_agg_sum:
           description: Shows the sum of all mobile RUM Sessions over all hours in
             the current months for all organizations.
@@ -14098,6 +14439,11 @@ components:
         mobile_rum_session_count_ios_agg_sum:
           description: Shows the sum of all mobile RUM Sessions on iOS over all hours
             in the current months for all organizations.
+          format: int64
+          type: integer
+        mobile_rum_units_agg_sum:
+          description: Shows the sum of all mobile RUM units over all hours in the
+            current months for all organizations.
           format: int64
           type: integer
         netflow_indexed_events_count_agg_sum:
@@ -14145,6 +14491,11 @@ components:
           type: integer
         rum_total_session_count_agg_sum:
           description: Shows the sum of RUM Sessions (browser and mobile) over all
+            hours in the current months for all organizations.
+          format: int64
+          type: integer
+        rum_units_agg_sum:
+          description: Shows the sum of all browser and mobile RUM units over all
             hours in the current months for all organizations.
           format: int64
           type: integer
@@ -15372,6 +15723,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/IPRanges'
           description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security: []
       servers:
       - url: https://{subdomain}.{site}
@@ -15424,6 +15777,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Get all API keys
       tags:
       - Key Management
@@ -15458,6 +15813,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Create an API key
       tags:
       - Key Management
@@ -15505,6 +15862,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Delete an API key
       tags:
       - Key Management
@@ -15540,6 +15899,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Get API key
       tags:
       - Key Management
@@ -15587,6 +15948,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Edit an API key
       tags:
       - Key Management
@@ -15611,6 +15974,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Get all application keys
       tags:
       - Key Management
@@ -15651,6 +16016,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Conflict
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Create an application key
       tags:
       - Key Management
@@ -15692,6 +16059,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Delete an application key
       tags:
       - Key Management
@@ -15727,6 +16096,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Get an application key
       tags:
       - Key Management
@@ -15780,6 +16151,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Conflict
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Edit an application key
       tags:
       - Key Management
@@ -15792,7 +16165,11 @@ paths:
       description: 'Submit a list of Service Checks.
 
 
-        **Note**: A valid API key is required.'
+        **Notes**:
+
+        - A valid API key is required.
+
+        - Service checks can be submitted up to 10 minutes in the past.'
       operationId: SubmitServiceCheck
       requestBody:
         content:
@@ -15832,6 +16209,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Payload too large
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
       summary: Submit a Service Check
@@ -15886,6 +16265,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Get the list of available daily custom reports
       tags:
       - Usage Metering
@@ -15925,6 +16306,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Get specified daily custom reports
       tags:
       - Usage Metering
@@ -15975,6 +16358,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Dashboards Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -16017,6 +16402,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication Error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -16068,6 +16455,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Dashboards Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -16114,6 +16503,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication Error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -16153,6 +16544,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -16193,6 +16586,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -16246,6 +16641,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -16287,6 +16684,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -16341,6 +16740,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -16396,6 +16797,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Dashboard Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -16443,6 +16846,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Shared Dashboard Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -16485,6 +16890,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Shared Dashboard Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -16554,6 +16961,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Item Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -16607,6 +17016,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -16663,6 +17074,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -16725,6 +17138,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -16771,6 +17186,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Dashboards Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -16811,6 +17228,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Item Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -16864,6 +17283,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Item Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -16902,6 +17323,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -16942,6 +17365,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -17004,6 +17429,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Downtimes not found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -17044,6 +17471,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Downtime not found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -17086,6 +17515,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Downtime not found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -17142,6 +17573,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Downtime not found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -17254,6 +17687,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication Error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -17290,6 +17725,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
       summary: Post an event
@@ -17332,6 +17769,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Item Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -17360,6 +17799,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication Error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -17408,6 +17849,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication Error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Create embed
       tags:
       - Embeddable Graphs
@@ -17446,6 +17889,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -17491,6 +17936,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Enable embed
       tags:
       - Embeddable Graphs
@@ -17532,6 +17979,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Revoke embed
       tags:
       - Embeddable Graphs
@@ -17606,6 +18055,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -17653,6 +18104,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Mute a host
       tags:
       - Hosts
@@ -17690,6 +18143,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Unmute a host
       tags:
       - Hosts
@@ -17781,6 +18236,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -17827,6 +18284,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Get the total number of active hosts
       tags:
       - Hosts
@@ -17870,6 +18329,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Conflict Error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Delete an AWS integration
       tags:
       - AWS Integration
@@ -17918,6 +18379,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication Error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: List all AWS integrations
       tags:
       - AWS Integration
@@ -17965,6 +18428,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Conflict Error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Create an AWS integration
       tags:
       - AWS Integration
@@ -18032,6 +18497,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Conflict Error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Update an AWS integration
       tags:
       - AWS Integration
@@ -18064,6 +18531,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication Error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: List namespace rules
       tags:
       - AWS Integration
@@ -18102,6 +18571,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication Error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Delete a tag filtering entry
       tags:
       - AWS Integration
@@ -18138,6 +18609,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication Error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Get all AWS tag filters
       tags:
       - AWS Integration
@@ -18178,6 +18651,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication Error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Set an AWS tag filter
       tags:
       - AWS Integration
@@ -18222,6 +18697,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication Error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Generate a new external ID
       tags:
       - AWS Integration
@@ -18260,6 +18737,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication Error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Delete an AWS Logs integration
       tags:
       - AWS Logs Integration
@@ -18302,6 +18781,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication Error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: List all AWS Logs integrations
       tags:
       - AWS Logs Integration
@@ -18338,6 +18819,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication Error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Add AWS Log Lambda ARN
       tags:
       - AWS Logs Integration
@@ -18393,6 +18876,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication Error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -18438,6 +18923,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication Error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Get list of AWS log ready services
       tags:
       - AWS Logs Integration
@@ -18474,6 +18961,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication Error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Enable an AWS Logs integration
       tags:
       - AWS Logs Integration
@@ -18518,6 +19007,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication Error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Check permissions for log services
       tags:
       - AWS Logs Integration
@@ -18556,6 +19047,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication Error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Delete an Azure integration
       tags:
       - Azure Integration
@@ -18586,6 +19079,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication Error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: List all Azure integrations
       tags:
       - Azure Integration
@@ -18635,6 +19130,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication Error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Create an Azure integration
       tags:
       - Azure Integration
@@ -18681,6 +19178,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication Error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Update an Azure integration
       tags:
       - Azure Integration
@@ -18720,6 +19219,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication Error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Update Azure integration host filters
       tags:
       - Azure Integration
@@ -18758,6 +19259,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Delete a GCP integration
       tags:
       - GCP Integration
@@ -18787,6 +19290,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: List all GCP integrations
       tags:
       - GCP Integration
@@ -18823,6 +19328,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Create a GCP integration
       tags:
       - GCP Integration
@@ -18869,6 +19376,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Update a GCP integration
       tags:
       - GCP Integration
@@ -18906,6 +19415,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Create a new service object
       tags:
       - PagerDuty Integration
@@ -18943,6 +19454,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Item Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Delete a single service object
       tags:
       - PagerDuty Integration
@@ -18978,6 +19491,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Item Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Get a single service object
       tags:
       - PagerDuty Integration
@@ -19022,6 +19537,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Item Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Update a single service object
       tags:
       - PagerDuty Integration
@@ -19043,6 +19560,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Delete a Slack integration
       tags:
       - Slack Integration
@@ -19077,6 +19596,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Item Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Get info about a Slack integration
       tags:
       - Slack Integration
@@ -19116,6 +19637,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Create a Slack integration
       tags:
       - Slack Integration
@@ -19155,6 +19678,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Add channels to Slack integration
       tags:
       - Slack Integration
@@ -19192,6 +19717,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Item Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Get all channels in a Slack integration
       tags:
       - Slack Integration
@@ -19235,6 +19762,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Item Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Create a Slack integration channel
       tags:
       - Slack Integration
@@ -19270,6 +19799,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Item Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Remove a Slack integration channel
       tags:
       - Slack Integration
@@ -19307,6 +19838,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Item Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Get a Slack integration channel
       tags:
       - Slack Integration
@@ -19351,6 +19884,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Item Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Update a Slack integration channel
       tags:
       - Slack Integration
@@ -19388,6 +19923,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Create a custom variable
       tags:
       - Webhooks Integration
@@ -19432,6 +19969,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Item Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Delete a custom variable
       tags:
       - Webhooks Integration
@@ -19478,6 +20017,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Item Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Get a custom variable
       tags:
       - Webhooks Integration
@@ -19526,6 +20067,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Item Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Update a custom variable
       tags:
       - Webhooks Integration
@@ -19563,6 +20106,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Create a webhooks integration
       tags:
       - Webhooks Integration
@@ -19606,6 +20151,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Item Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Delete a webhook
       tags:
       - Webhooks Integration
@@ -19647,6 +20194,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Item Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Get a webhook integration
       tags:
       - Webhooks Integration
@@ -19695,6 +20244,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Item Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Update a webhook
       tags:
       - Webhooks Integration
@@ -19746,6 +20297,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Search logs
       tags:
       - Logs
@@ -19771,6 +20324,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Get indexes order
       tags:
       - Logs Indexes
@@ -19809,6 +20364,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Update indexes order
       tags:
       - Logs Indexes
@@ -19835,6 +20392,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Get all indexes
       tags:
       - Logs Indexes
@@ -19871,6 +20430,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Create an index
       tags:
       - Logs Indexes
@@ -19911,6 +20472,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/LogsAPIErrorResponse'
           description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Get an index
       tags:
       - Logs Indexes
@@ -19988,6 +20551,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Get pipeline order
       tags:
       - Logs Pipelines
@@ -20039,6 +20604,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/LogsAPIErrorResponse'
           description: Unprocessable Entity
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Update pipeline order
       tags:
       - Logs Pipelines
@@ -20065,6 +20632,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Get all pipelines
       tags:
       - Logs Pipelines
@@ -20100,6 +20669,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Create a pipeline
       tags:
       - Logs Pipelines
@@ -20139,6 +20710,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Delete a pipeline
       tags:
       - Logs Pipelines
@@ -20176,6 +20749,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Get a pipeline
       tags:
       - Logs Pipelines
@@ -20221,6 +20796,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Update a pipeline
       tags:
       - Logs Pipelines
@@ -20278,6 +20855,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -20319,6 +20898,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -20373,6 +20954,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Edit metric metadata
       tags:
       - Metrics
@@ -20478,6 +21061,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -20519,7 +21104,7 @@ paths:
 
         - logs: `log alert`
 
-        - metric: `metric alert`
+        - metric: `query alert`
 
         - network: `service check`
 
@@ -20804,7 +21389,7 @@ paths:
                   tags:
                   - app:webserver
                   - frontend
-                  type: metric alert
+                  type: query alert
             schema:
               $ref: '#/components/schemas/Monitor'
         description: Create a monitor request body.
@@ -20828,6 +21413,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -20891,6 +21478,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/CheckCanDeleteMonitorResponse'
           description: Deletion conflict error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -20978,6 +21567,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -21065,6 +21656,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -21107,6 +21700,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -21170,6 +21765,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Item not found error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -21224,6 +21821,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Monitor Not Found error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -21284,6 +21883,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Monitor Not Found error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -21298,7 +21899,7 @@ paths:
         type: idempotent
   /api/v1/monitor/{monitor_id}/downtimes:
     get:
-      description: Get all downtimes for the specified monitor
+      description: Get all active downtimes for the specified monitor.
       operationId: ListMonitorDowntimes
       parameters:
       - description: The id of the monitor
@@ -21329,6 +21930,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Monitor Not Found error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Get all downtimes for a monitor
       tags:
       - Downtimes
@@ -21387,6 +21990,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Monitor Not Found error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -21449,6 +22054,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Monitor Not Found error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -21505,6 +22112,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Get the list of available monthly custom reports
       tags:
       - Usage Metering
@@ -21550,6 +22159,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Get specified monthly custom reports
       tags:
       - Usage Metering
@@ -21676,6 +22287,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication Error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Get all notebooks
       tags:
       - Notebooks
@@ -21747,6 +22360,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication Error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Create a notebook
       tags:
       - Notebooks
@@ -21796,6 +22411,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Delete a notebook
       tags:
       - Notebooks
@@ -21837,6 +22454,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Get a notebook
       tags:
       - Notebooks
@@ -21929,6 +22548,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Conflict
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Update a notebook
       tags:
       - Notebooks
@@ -21952,6 +22573,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: List your managed organizations
       tags:
       - Organizations
@@ -22003,6 +22626,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Create a child organization
       tags:
       - Organizations
@@ -22043,6 +22668,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Get organization information
       tags:
       - Organizations
@@ -22085,6 +22712,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Update your organization
       tags:
       - Organizations
@@ -22144,6 +22773,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Unsupported Media Type
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Upload IdP metadata
       tags:
       - Organizations
@@ -22195,6 +22826,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -22236,6 +22869,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -22315,6 +22950,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Payload too large
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
       summary: Submit metrics
@@ -22383,6 +23020,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication Error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Get all APM service dependencies
       tags:
       - Service Dependencies
@@ -22458,6 +23097,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication Error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Get one APM service's dependencies
       tags:
       - Service Dependencies
@@ -22541,6 +23182,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -22580,6 +23223,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Create an SLO object
       tags:
       - Service Level Objectives
@@ -22640,6 +23285,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Bulk Delete SLO Timeframes
       tags:
       - Service Level Objectives
@@ -22687,6 +23334,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/CheckCanDeleteSLOResponse'
           description: Conflict
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Check if SLOs can be safely deleted
       tags:
       - Service Level Objectives
@@ -22710,6 +23359,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Get all SLO corrections
       tags:
       - Service Level Objective Corrections
@@ -22754,6 +23405,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: SLO Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Create an SLO correction
       tags:
       - Service Level Objective Corrections
@@ -22804,6 +23457,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Delete an SLO correction
       tags:
       - Service Level Objective Corrections
@@ -22842,6 +23497,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Get an SLO correction for an SLO
       tags:
       - Service Level Objective Corrections
@@ -22893,6 +23550,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Update an SLO correction
       tags:
       - Service Level Objective Corrections
@@ -22951,6 +23610,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/SLODeleteResponse'
           description: Conflict
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Delete an SLO
       tags:
       - Service Level Objectives
@@ -22993,6 +23654,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -23045,6 +23708,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Update an SLO
       tags:
       - Service Level Objectives
@@ -23052,6 +23717,57 @@ paths:
       x-menu-order: 3
       x-undo:
         type: idempotent
+  /api/v1/slo/{slo_id}/corrections:
+    get:
+      description: Get corrections applied to an SLO
+      operationId: GetSLOCorrections
+      parameters:
+      - description: The ID of the service level objective object.
+        in: path
+        name: slo_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SLOCorrectionListResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Get Corrections For an SLO
+      tags:
+      - Service Level Objectives
+      x-menu-order: 6
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v1/slo/{slo_id}/history:
     get:
       description: "Get a specific SLO\u2019s history, regardless of its SLO type.\n\nThe
@@ -23093,6 +23809,16 @@ paths:
           maximum: 100
           minimum: 0
           type: number
+      - description: 'Defaults to `true`. If any SLO corrections are applied and this
+          parameter is set to `false`,
+
+          then the corrections will not be applied and the SLI values will not be
+          affected.'
+        in: query
+        name: apply_correction
+        required: false
+        schema:
+          type: boolean
       responses:
         '200':
           content:
@@ -23118,6 +23844,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -23155,10 +23883,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Batch does not exist.
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Get details of batch
       tags:
       - Synthetics
-      x-menu-order: 26
+      x-menu-order: 27
       x-undo:
         type: safe
   /api/v1/synthetics/locations:
@@ -23174,6 +23904,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/SyntheticsLocations'
           description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -23182,7 +23914,7 @@ paths:
       summary: Get all locations (public and private)
       tags:
       - Synthetics
-      x-menu-order: 23
+      x-menu-order: 24
       x-undo:
         type: safe
   /api/v1/synthetics/private-locations:
@@ -23215,11 +23947,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Private locations are not activated for the user
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Create a private location
       tags:
       - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 20
+      x-menu-order: 21
       x-undo:
         operationId: DeletePrivateLocation
         parameters:
@@ -23248,10 +23982,12 @@ paths:
           description: '- Private locations are not activated for the user
 
             - Private location does not exist'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Delete a private location
       tags:
       - Synthetics
-      x-menu-order: 24
+      x-menu-order: 25
       x-undo:
         type: idempotent
     get:
@@ -23279,10 +24015,12 @@ paths:
           description: '- Synthetic private locations are not activated for the user
 
             - Private location does not exist'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Get a private location
       tags:
       - Synthetics
-      x-menu-order: 21
+      x-menu-order: 22
       x-undo:
         type: safe
     put:
@@ -23317,11 +24055,13 @@ paths:
           description: '- Private locations are not activated for the user
 
             - Private location does not exist'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Edit a private location
       tags:
       - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 22
+      x-menu-order: 23
       x-undo:
         type: idempotent
   /api/v1/synthetics/tests:
@@ -23347,6 +24087,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Synthetics is not activated for the user.
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -23355,7 +24097,7 @@ paths:
       summary: Get the list of all tests
       tags:
       - Synthetics
-      x-menu-order: 9
+      x-menu-order: 10
       x-undo:
         type: safe
     post:
@@ -23398,6 +24140,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -23419,6 +24163,125 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              1-simple-api-test:
+                description: Example of an API test.
+                summary: Create an API test.
+                value:
+                  config:
+                    assertions:
+                    - operator: lessThan
+                      target: 1000
+                      type: responseTime
+                    - operator: is
+                      target: 200
+                      type: statusCode
+                    - operator: is
+                      property: content-type
+                      target: text/html; charset=UTF-8
+                      type: header
+                    request:
+                      method: GET
+                      url: https://example.com
+                  locations:
+                  - azure:eastus
+                  - aws:eu-west-3
+                  message: MY_NOTIFICATION_MESSAGE
+                  name: MY_TEST_NAME
+                  options:
+                    min_failure_duration: 0
+                    min_location_failed: 1
+                    monitor_options:
+                      include_tags: true
+                      locked: false
+                      new_host_delay: 300
+                      notify_audit: false
+                      notify_no_data: false
+                      renotify_interval: 0
+                    tick_every: 60
+                  status: live
+                  subtype: http
+                  tags:
+                  - env:production
+                  type: api
+              2-multistep-api-test:
+                description: 'Example of a multistep API test running on a fake furniture
+                  store.
+
+                  It creates a card, select a product and then add the product to
+                  the card.'
+                summary: Create a Multistep API test
+                value:
+                  config:
+                    steps:
+                    - assertions:
+                      - operator: lessThan
+                        target: 30000
+                        type: responseTime
+                      extractedValues:
+                      - field: location
+                        name: CART_ID
+                        parser:
+                          type: regex
+                          value: (?:[^\\/](?!(\\|/)))+$
+                        type: http_header
+                      name: Get a cart
+                      request:
+                        method: POST
+                        timeout: 30
+                        url: https://api.shopist.io/carts
+                      subtype: http
+                    - assertions:
+                      - operator: is
+                        target: 200
+                        type: statusCode
+                      extractedValues:
+                      - name: PRODUCT_ID
+                        parser:
+                          type: json_path
+                          value: $[0].id['$oid']
+                        type: http_body
+                      name: Get a product
+                      request:
+                        method: GET
+                        timeout: 30
+                        url: https://api.shopist.io/products.json
+                      subtype: http
+                    - assertions:
+                      - operator: is
+                        target: 201
+                        type: statusCode
+                      name: Add product to cart
+                      request:
+                        body: "{\n  \"cart_item\": {\n    \"product_id\": \"{{ PRODUCT_ID
+                          }}\",\n    \"amount_paid\": 500,\n    \"quantity\": 1\n
+                          \ },\n  \"cart_id\": \"{{ CART_ID }}\"\n}"
+                        headers:
+                          content-type: application/json
+                        method: POST
+                        timeout: 30
+                        url: https://api.shopist.io/add_item.json
+                      subtype: http
+                  locations:
+                  - aws:us-west-2
+                  message: MY_NOTIFICATION_MESSAGE
+                  name: MY_TEST_NAME
+                  options:
+                    ci:
+                      executionRule: blocking
+                    min_failure_duration: 5400
+                    min_location_failed: 1
+                    monitor_options:
+                      renotify_interval: 0
+                    retry:
+                      count: 3
+                      interval: 300
+                    tick_every: 900
+                  status: live
+                  subtype: multi
+                  tags:
+                  - env:prod
+                  type: api
             schema:
               $ref: '#/components/schemas/SyntheticsAPITest'
         description: Details of the test to create.
@@ -23450,6 +24313,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -23506,6 +24371,8 @@ paths:
           description: '- Synthetic Monitoring is not activated for the user
 
             - Test is not owned by the user'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -23514,7 +24381,7 @@ paths:
       summary: Get an API test
       tags:
       - Synthetics
-      x-menu-order: 7
+      x-menu-order: 8
       x-undo:
         type: safe
     put:
@@ -23565,6 +24432,8 @@ paths:
             - Test is not owned by the user
 
             - Test can''t be found'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -23615,6 +24484,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -23626,8 +24497,10 @@ paths:
       x-codegen-request-body-name: body
       x-menu-order: 2
       x-undo:
-        operationId: TODO
-        parameters: []
+        operationId: DeleteTests
+        parameters:
+        - name: body
+          template: '{"public_ids": ["{{ public_id }}"]}'
         type: unsafe
   /api/v1/synthetics/tests/browser/{public_id}:
     get:
@@ -23663,6 +24536,8 @@ paths:
           description: '- Synthetic is not activated for the user
 
             - Test is not owned by the user'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -23671,7 +24546,7 @@ paths:
       summary: Get a browser test
       tags:
       - Synthetics
-      x-menu-order: 8
+      x-menu-order: 9
       x-undo:
         type: safe
     put:
@@ -23722,6 +24597,8 @@ paths:
             - Test is not owned by the user
 
             - Test can''t be found'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -23791,6 +24668,8 @@ paths:
           description: '- Synthetic is not activated for the user
 
             - Test is not owned by the user'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -23800,7 +24679,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 13
+      x-menu-order: 14
       x-undo:
         type: safe
   /api/v1/synthetics/tests/browser/{public_id}/results/{result_id}:
@@ -23843,6 +24722,8 @@ paths:
           description: '- Synthetic is not activated for the user
 
             - Test or result is not owned by the user'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -23851,7 +24732,7 @@ paths:
       summary: Get a browser test result
       tags:
       - Synthetics
-      x-menu-order: 11
+      x-menu-order: 12
       x-undo:
         type: safe
   /api/v1/synthetics/tests/delete:
@@ -23897,6 +24778,8 @@ paths:
           description: '- Tests to be deleted can''t be found
 
             - Synthetics is not activated for the user'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -23906,9 +24789,42 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 14
+      x-menu-order: 15
       x-undo:
         type: idempotent
+  /api/v1/synthetics/tests/trigger:
+    post:
+      description: Trigger a set of Synthetics tests.
+      operationId: TriggerTests
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SyntheticsTriggerBody'
+        description: The identifiers of the tests to trigger.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyntheticsTriggerCITestsResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Trigger Synthetics tests
+      tags:
+      - Synthetics
+      x-codegen-request-body-name: body
+      x-menu-order: 7
+      x-undo:
+        type: safe
   /api/v1/synthetics/tests/trigger/ci:
     post:
       description: Trigger a set of Synthetics tests for continuous integration.
@@ -23933,6 +24849,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: JSON format is wrong
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Trigger tests from CI/CD pipelines
       tags:
       - Synthetics
@@ -23972,10 +24890,12 @@ paths:
           description: '- Synthetic is not activated for the user
 
             - Test is not owned by the user'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Get a test configuration
       tags:
       - Synthetics
-      x-menu-order: 25
+      x-menu-order: 26
       x-undo:
         type: safe
     put:
@@ -24028,6 +24948,8 @@ paths:
             - Test is not owned by the user
 
             - Test can''t be found'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -24095,6 +25017,8 @@ paths:
           description: '- Synthetic is not activated for the user
 
             - Test is not owned by the user'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -24104,7 +25028,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 12
+      x-menu-order: 13
       x-undo:
         type: safe
   /api/v1/synthetics/tests/{public_id}/results/{result_id}:
@@ -24145,6 +25069,8 @@ paths:
           description: '- Synthetic is not activated for the user
 
             - Test or result is not owned by the user'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -24153,7 +25079,7 @@ paths:
       summary: Get an API test result
       tags:
       - Synthetics
-      x-menu-order: 10
+      x-menu-order: 11
       x-undo:
         type: safe
   /api/v1/synthetics/tests/{public_id}/status:
@@ -24201,6 +25127,8 @@ paths:
           description: '- Synthetic is not activated for the user
 
             - Test is not owned by the user'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -24230,6 +25158,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -24238,7 +25168,7 @@ paths:
       summary: Get all global variables
       tags:
       - Synthetics
-      x-menu-order: 15
+      x-menu-order: 16
       x-undo:
         type: safe
     post:
@@ -24270,11 +25200,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Create a global variable
       tags:
       - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 16
+      x-menu-order: 17
       x-undo:
         operationId: DeleteGlobalVariable
         parameters:
@@ -24313,6 +25245,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -24321,7 +25255,7 @@ paths:
       summary: Delete a global variable
       tags:
       - Synthetics
-      x-menu-order: 19
+      x-menu-order: 20
       x-undo:
         type: idempotent
     get:
@@ -24353,6 +25287,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -24361,7 +25297,7 @@ paths:
       summary: Get a global variable
       tags:
       - Synthetics
-      x-menu-order: 18
+      x-menu-order: 19
       x-undo:
         type: safe
     put:
@@ -24400,11 +25336,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Edit a global variable
       tags:
       - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 17
+      x-menu-order: 18
       x-undo:
         type: idempotent
   /api/v1/tags/hosts:
@@ -24438,6 +25376,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -24485,6 +25425,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Remove host tags
       tags:
       - Tags
@@ -24527,6 +25469,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Get host tags
       tags:
       - Tags
@@ -24581,6 +25525,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Add tags to a host
       tags:
       - Tags
@@ -24641,6 +25587,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Update host tags
       tags:
       - Tags
@@ -24690,6 +25638,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -24763,6 +25713,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -24819,6 +25771,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Get hourly usage for audit logs
       tags:
       - Usage Metering
@@ -24865,6 +25819,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -24908,6 +25864,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -24961,6 +25919,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Get hourly usage for CSPM
       tags:
       - Usage Metering
@@ -25009,6 +25969,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -25062,6 +26024,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Get hourly usage for Database Monitoring
       tags:
       - Usage Metering
@@ -25108,6 +26072,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -25159,6 +26125,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -25212,6 +26180,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -25263,6 +26233,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -25316,6 +26288,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -25369,6 +26343,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -25420,6 +26396,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -25473,6 +26451,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Get hourly logs usage by retention
       tags:
       - Usage Metering
@@ -25526,6 +26506,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -25579,6 +26561,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -25630,6 +26614,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -25683,6 +26669,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -25692,6 +26680,60 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 24
+      x-undo:
+        type: safe
+  /api/v1/usage/rum:
+    get:
+      description: Get hourly usage for [RUM](https://docs.datadoghq.com/real_user_monitoring/)
+        Units.
+      operationId: GetUsageRumUnits
+      parameters:
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh]
+          for usage beginning at this hour.'
+        in: query
+        name: start_hr
+        required: true
+        schema:
+          format: date-time
+          type: string
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh]
+          for usage ending **before** this hour.'
+        in: query
+        name: end_hr
+        required: false
+        schema:
+          format: date-time
+          type: string
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/UsageRumUnitsResponse'
+          description: OK
+        '400':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - usage_read
+      summary: Get hourly usage for RUM Units
+      tags:
+      - Usage Metering
+      x-menu-order: 35
       x-undo:
         type: safe
   /api/v1/usage/rum_sessions:
@@ -25741,6 +26783,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -25794,6 +26838,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Get hourly usage for Sensitive Data Scanner
       tags:
       - Usage Metering
@@ -25842,6 +26888,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -25902,6 +26950,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -25954,6 +27004,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -26005,6 +27057,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -26056,6 +27110,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -26107,6 +27163,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -26187,6 +27245,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -26215,6 +27275,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -26265,6 +27327,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Conflict
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -26324,6 +27388,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Disable a user
       tags:
       - Users
@@ -26361,6 +27427,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Get user details
       tags:
       - Users
@@ -26414,6 +27482,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Update a user
       tags:
       - Users
@@ -26439,6 +27509,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
       - AuthZ: []
@@ -26450,6 +27522,7 @@ paths:
         type: safe
   /v1/input:
     post:
+      deprecated: true
       description: 'Send your logs to your Datadog platform over HTTP. Limits per
         HTTP request are:
 
@@ -26571,6 +27644,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/HTTPLogError'
           description: unexpected error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
       servers:
@@ -26640,6 +27715,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Mute all monitors
       tags:
       - Monitors
@@ -26664,6 +27741,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Unmute all monitors
       tags:
       - Monitors
@@ -26976,7 +28055,12 @@ tags:
 
     **Note**: Usage data is delayed by up to 72 hours from when it was incurred.
 
-    It is retained for the past 15 months.'
+    It is retained for the past 15 months.
+
+
+    You can retrieve up to 24 hours of hourly usage data for multiple organizations,
+
+    and up to two months of hourly usage data for a single organization in one request.'
   externalDocs:
     description: Find out more at
     url: https://docs.datadoghq.com/account_management/billing/usage_details/

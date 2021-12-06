@@ -44,7 +44,7 @@ dogwrap -n <EVENT_TITLE> -k <DATADOG_API_KEY> "<COMMAND>"
 dogwrap -n "Vacuuming mytable" -k $DATADOG_API_KEY --submit_mode errors "psql -c 'vacuum verbose my_table' 2>&1 /var/log/postgres_vacuums.log"
 ```
 
-これは、スクリプトの最後にあるコマンドを呼び出し、コマンドが 0 以外の終了コード (つまりエラー) で終了すると、Datadog イベントを送信します。`--submit_mode all` を使用すると、このコマンドを実行するたびに、イベントが送信されます。
+これは、スクリプトの最後にあるコマンドを呼び出し、コマンドが 0 以外の終了コード (エラーなど) で終了すると、Datadog イベントを送信します。`--submit_mode all` を使用すると、このコマンドを実行するたびに、イベントが送信されます。
 
 [1]: https://github.com/DataDog/datadogpy
-[2]: https://app.datadoghq.com/account/settings#api
+[2]: https://app.datadoghq.com/organization-settings/api-keys

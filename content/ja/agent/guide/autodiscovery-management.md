@@ -21,7 +21,7 @@ Agent をホスト上のバイナリとして実行する場合は、[Agent](?ta
 
 **注**: 除外条件は正規表現をサポートし、カンマ区切り文字列のリストとして定義されます。
 
-**注**: 各コンテナを除外するには、`name:.*`、`image:.*`、`kube_namespace:.*` を使用できます。`name:`、`image:`、または `kube_namespace:` のプレフィックスなしで `.*` を構成しても機能しませんのでご注意ください。
+**注**: 各コンテナを除外するには、`name:.*`、`image:.*`、`kube_namespace:.*` を使用できます。`name:`、`image:`、または `kube_namespace:` のプレフィックスなしで `.*` を構成しても機能しません。
 
 {{< tabs >}}
 {{% tab "Containerized Agent" %}}
@@ -52,7 +52,7 @@ DD_AC_EXCLUDE = "image:<IMAGE_NAME>"
 DD_AC_EXCLUDE = "image:dockercloud/network-daemon image:dockercloud/cleanup image:dockercloud/logrotate image:dockercloud/events image:dockercloud/ntpd"
 ```
 
-`DD_AC_EXCLUDE` は **Agent v7.20 以降では推奨されません**。
+**注**: `DD_AC_EXCLUDE` は **Agent v7.20 以降では推奨されません**。
 
 **Agent v7.20 以降**でオートディスカバリーから**名前** `<NAME>` を持つ任意の Docker コンテナを削除し、**ログとメトリクス**を除外するには、Datadog Agent に以下の環境変数を追加してください。
 
@@ -156,7 +156,7 @@ DD_CONTAINER_INCLUDE = "image:<IMAGE_NAME>"
 DD_AC_INCLUDE = "image:<IMAGE_NAME>"
 ```
 
-`DD_AC_INCLUDE` は **Agent v7.20 以降では推奨されません**。
+**注**: `DD_AC_INCLUDE` は **Agent v7.20 以降では推奨されません**。
 
 **Agent v7.20 以前**でオートディスカバリーから**名前** `<NAME>`を持つ特定のDockerコンテナを含めるには、次の環境変数を Datadog Agent に追加します。
 

@@ -1,5 +1,5 @@
 ---
-title: Instrumenting Go Applications
+title: Instrumenting Go Serverless Applications
 kind: documentation
 further_reading:
 - link: 'serverless/datadog_lambda_library/go'
@@ -113,9 +113,9 @@ Follow these steps to instrument the function:
     }
     ```
 
-### Tag
+### Unified service tagging
 
-Optionally, tag your serverless applications with `env`, `service`, and `version`. For more information, see the [Unified Service Tagging documentation][6].
+Datadog recommends tagging your serverless applications with `DD_ENV`, `DD_SERVICE`, `DD_VERSION`, and `DD_TAGS`. See the [Lambda extension documentation][6] for more details.
 
 ## Explore
 
@@ -176,8 +176,8 @@ If your Lambda function is running in a VPC, follow the [Datadog Lambda Extensio
 [2]: /serverless/guide/datadog_forwarder_go
 [3]: https://aws.amazon.com/blogs/compute/migrating-aws-lambda-functions-to-al2/
 [4]: https://github.com/DataDog/datadog-lambda-go
-[5]: https://app.datadoghq.com/account/settings#api
-[6]: /getting_started/tagging/unified_service_tagging/#aws-lambda-functions
+[5]: https://app.datadoghq.com/organization-settings/api-keys
+[6]: /serverless/libraries_integrations/extension/#tagging
 [7]: https://app.datadoghq.com/functions
 [8]: /serverless/custom_metrics?tab=go
 [9]: /serverless/guide/extension_private_link/

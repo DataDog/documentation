@@ -13,13 +13,14 @@ categories:
 creates_events: true
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/docker_daemon/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/docker_daemon/README.md
 display_name: Docker
 draft: false
 git_integration_title: docker_daemon
 guid: 08ee2733-0441-4438-8af8-e2f6fb926772
 integration_id: docker
 integration_title: Docker Daemon
+integration_version: ''
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com

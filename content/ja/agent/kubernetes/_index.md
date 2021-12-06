@@ -117,7 +117,7 @@ datadog:
 
 [1]: https://v3.helm.sh/docs/intro/install/
 [2]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
-[3]: https://app.datadoghq.com/account/settings#api
+[3]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-state-metrics
 [5]: /ja/agent/kubernetes/apm?tab=helm
 [6]: /ja/agent/kubernetes/log?tab=helm
@@ -157,12 +157,12 @@ Datadog Agent を Kubernetes クラスターにインストールするには:
 
     | メトリクス                   | ログ                      | APM                       | Process                   | NPM                       | セキュリティ                       | Linux                   | Windows                 |
     |---------------------------|---------------------------|---------------------------|---------------------------|---------------------------|-------------------------|-------------------------|-------------------------|
-    | <i class="icon-tick"></i> | <i class="icon-tick"></i> | <i class="icon-tick"></i> | <i class="icon-tick"></i> |                           | <i class="icon-tick"></i> | [マニフェストテンプレート][3]  | [マニフェストテンプレート][4] (セキュリティなし)  |
-    | <i class="icon-tick"></i> | <i class="icon-tick"></i> | <i class="icon-tick"></i> |                           |                           |                           | [マニフェストテンプレート][5]  | [マニフェストテンプレート][6]  |
-    | <i class="icon-tick"></i> | <i class="icon-tick"></i> |                           |                           |                           |                           | [マニフェストテンプレート][7]  | [マニフェストテンプレート][8]  |
-    | <i class="icon-tick"></i> |                           | <i class="icon-tick"></i> |                           |                           |                           | [マニフェストテンプレート][9]  | [マニフェストテンプレート][10] |
-    |                           |                           |                           |                           | <i class="icon-tick"></i> | <i class="icon-tick"></i> | [マニフェストテンプレート][11] | テンプレートなし             |
-    | <i class="icon-tick"></i> |                           |                           |                           |                           |                           | [マニフェストテンプレート][12] | [マニフェストテンプレート][13] |
+    | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |                           | <i class="icon-check-bold"></i> | [マニフェストテンプレート][3]  | [マニフェストテンプレート][4] (セキュリティなし)  |
+    | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |                           |                           |                           | [マニフェストテンプレート][5]  | [マニフェストテンプレート][6]  |
+    | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |                           |                           |                           |                           | [マニフェストテンプレート][7]  | [マニフェストテンプレート][8]  |
+    | <i class="icon-check-bold"></i> |                           | <i class="icon-check-bold"></i> |                           |                           |                           | [マニフェストテンプレート][9]  | [マニフェストテンプレート][10] |
+    |                           |                           |                           |                           | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> | [マニフェストテンプレート][11] | テンプレートなし             |
+    | <i class="icon-check-bold"></i> |                           |                           |                           |                           |                           | [マニフェストテンプレート][12] | [マニフェストテンプレート][13] |
 
    トレース収集を完全に有効にするには、[アプリケーションのポッドコンフィギュレーションで追加の手順が必要となります][14]。それぞれの機能を個別に有効にする方法については、[ログ][15]、[APM][16]、[プロセス][17]、[ネットワークパフォーマンスモニタリング][18]、[セキュリティ][19]に関するドキュメントページを参照してください。
 
@@ -212,7 +212,7 @@ Datadog Agent を Kubernetes クラスターにインストールするには:
 `<USER_ID>` が、Agent を実行する UID で、`<DOCKER_GROUP_ID>` が、Docker または Containerd ソケットを所有するグループ ID の場合。
 
 [1]: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#nodeselector
-[2]: https://app.datadoghq.com/account/settings#api
+[2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: /resources/yaml/datadog-agent-all-features.yaml
 [4]: /resources/yaml/datadog-agent-windows-all-features.yaml
 [5]: /resources/yaml/datadog-agent-logs-apm.yaml
@@ -325,7 +325,7 @@ agent:
 [3]: https://kubernetes.io/docs/tasks/tools/install-kubectl/
 [4]: https://github.com/DataDog/helm-charts/tree/master/charts/datadog-operator
 [5]: https://artifacthub.io/packages/helm/datadog/datadog-operator
-[6]: https://app.datadoghq.com/account/settings#api
+[6]: https://app.datadoghq.com/organization-settings/api-keys
 [7]: /ja/agent/guide/operator-advanced
 [8]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.md
 {{% /tab %}}

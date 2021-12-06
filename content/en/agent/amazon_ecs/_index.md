@@ -27,7 +27,7 @@ This page covers Amazon ECS setup with the [Datadog Container Agent v6][1]. For 
 - [Datadog Container Agent v5 setup for Amazon ECS][2]
 - [Datadog Host Agent setup with Autodiscovery][3]
 
-**Note**: **If you are looking to set up ECS on Fargate, follow [this doc instead][4].**
+**Note**: **If you are looking to set up ECS on Fargate, see [Amazon ECS on AWS Fargate][4].** AWS Batch is not supported.
 
 ## Setup
 
@@ -100,7 +100,7 @@ aws ecs register-task-definition --cli-input-json <path to datadog-agent-ecs.jso
 [1]: /resources/json/datadog-agent-ecs.json
 [2]: /resources/json/datadog-agent-ecs1.json
 [3]: /resources/json/datadog-agent-ecs-win.json
-[4]: https://app.datadoghq.com/account/settings#api
+[4]: https://app.datadoghq.com/organization-settings/api-keys
 [5]: https://www.datadoghq.com/blog/amazon-ecs-anywhere-monitoring/
 [6]: /agent/amazon_ecs/logs/
 [7]: /agent/amazon_ecs/apm/

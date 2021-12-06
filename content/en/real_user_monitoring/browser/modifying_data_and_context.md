@@ -311,7 +311,7 @@ window.DD_RUM &&
 
 ## Identify user sessions
 
-Adding user information to your RUM sessions makes it easy to:
+Adding user information to your RUM sessions can help you:
 * Follow the journey of a given user
 * Know which users are the most impacted by errors
 * Monitor performance for your most important users

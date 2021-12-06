@@ -19,7 +19,7 @@ further_reading:
       text: 'Automatically configure your Log Explorer'
 ---
 
-{{< img src="logs/explorer/facet/facets_in_explorer.gif" alt="Facets in Explorer Facet" style="width:100%;">}}
+{{< img src="logs/explorer/facet/facets_in_explorer.mp4" alt="Facets in Explorer Facet" video=true style="width:100%;">}}
 
 ## Overview
 
@@ -123,7 +123,7 @@ Unit is a property of the measure itself, not of the field. For example, conside
 
 ## Facet panel
 
-The search bar provides the most comprehensive set of interactions to slice and dice your data. However, for most cases, the facet panel is likely to be a more straightforward way to navigate into your data. Open a facet to see a summary of its content for the scope of the current query.
+The search bar provides the most comprehensive set of interactions to filter and group your data. However, for most cases, the facet panel is likely to be a more straightforward way to navigate into your data. Open a facet to see a summary of its content for the scope of the current query.
 
 **Facets (qualitative)** come with a top list of unique values, and a count of logs matching each of them:
 

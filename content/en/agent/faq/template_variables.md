@@ -27,6 +27,9 @@ Use the following template variables when configuring Autodiscovery in order to 
 | `"%%pid%%"`                 | Retrieves the container process ID as returned by `docker inspect --format '{{.State.Pid}}' <CONTAINER_NAME>`.                                                                                              |
 | `"%%hostname%%"`            | Retrieves the `hostname` value from the container configuration. Only use it if the `"%%host%%"` variable cannot fetch a reliable IP (example: [ECS awsvpc mode][1]).                                       |
 | `"%%env_<ENV_VAR>%%"`       | Uses the contents of the `$<ENV_VAR>` environment variable **as seen by the Agent process**.                                                                                                                |
+| `"%%kube_namespace%%"`      | Auto-detects the Kubernetes namespace |
+| `"%%kube_pod_name%%"`       | Auto-detects the Kubernetes pod name  |
+| `"%%kube_pod_uid%%"`        | Auto-detects the Kubernetes pod UID   |
 
 **Fall back**:
 
@@ -35,11 +38,11 @@ Use the following template variables when configuring Autodiscovery in order to 
 
 Depending on your platform, not all template variables are be supported:
 
-| Platform    | Auto-discovery identifiers  | Host | Port | Tag | Pid | Env | Hostname |
-| ----------- | ---                         | ---  | ---  | --- | --- | --- | ---      |
-| Docker      | ✅                          | ✅   | ✅   | ✅  | ✅  | ✅  | ✅      |
-| ECS Fargate | ✅                          | ✅   | ❌   | ✅  | ❌  | ✅  | ❌      |
-| Kubernetes  | ✅                          | ✅   | ✅   | ✅  | ❌  | ✅  | ❌      |
+| Platform    | Auto-discovery identifiers  | Host | Port | Tag | Pid | Env | Hostname | Kube Namespace | Pod Name | Pod UID |
+| ----------- | ---                         | ---  | ---  | --- | --- | --- | ---      | ---            | ---      | ---     |
+| Docker      | ✅                          | ✅   | ✅   | ✅  | ✅  | ✅  | ✅      | ❌      | ❌      | ❌      |
+| ECS Fargate | ✅                          | ✅   | ❌   | ✅  | ❌  | ✅  | ❌      | ❌      | ❌      | ❌      |
+| Kubernetes  | ✅                          | ✅   | ✅   | ✅  | ❌  | ✅  | ❌      | ✅      | ✅      | ✅      |
 
 ## Further Reading
 

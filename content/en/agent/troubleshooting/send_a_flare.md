@@ -39,6 +39,7 @@ If you don't have a case ID, just enter your email address used to login in Data
 | Source     | `sudo datadog-agent flare <CASE_ID>`                    |
 | Windows    | Consult the dedicated [Windows documentation][2]        |
 | Heroku     | Consult the dedicated [Heroku documentation][3]         |
+| PCF     | `sudo /var/vcap/jobs/dd-agent/packages/dd-agent/bin/agent/agent flare <CASE_ID>`             |
 
 ## Dedicated containers
 
