@@ -173,8 +173,6 @@ If these utilities do not exist in your distribution, follow the same procedure 
 {{% /tab %}}
 {{% tab "Agent (Windows)" %}}
 
-### Windows systems
-
 Data collection for Windows relies on a filter driver for collecting network data.
 
 To enable Network Performance Monitoring for Windows hosts:
