@@ -15,7 +15,7 @@ API keys are unique to your organization. An [API key][1] is required by the Dat
 
 [Application keys][2], in conjunction with your organization's API key, give users access to Datadog's programmatic API. Application keys are associated with the user account that created them and by default have the permissions and scopes of the user who created them.
 
-## Scopes 
+### Scopes 
 
 <div class="alert alert-info"> Scopes for application keys is a feature in private beta. Contact <a href="https://www.datadoghq.com/support/">Datadog Support</a> to enable support for scoped application keys for your organization. </div>
 
