@@ -166,13 +166,15 @@ If you need to use Network Performance Monitoring on other systems with SELinux 
 
 If these utilities do not exist in your distribution, follow the same procedure but using the utilities provided by your distribution instead.
 
-### Windows systems
 
 [1]: /infrastructure/process/?tab=linuxwindows#installation
 [2]: /agent/guide/agent-commands/#restart-the-agent
 [3]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/selinux/system_probe_policy.te
 {{% /tab %}}
 {{% tab "Agent (Windows)" %}}
+
+### Windows systems
+
 Data collection for Windows relies on a filter driver for collecting network data.
 
 To enable Network Performance Monitoring for Windows hosts:
