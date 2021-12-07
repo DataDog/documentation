@@ -12,9 +12,10 @@ further_reading:
   text: "Simulation data format reference"
 ---
 
-Datadog Network Device Monitoring uses profiles for collecting metrics from network devices. These are defined narrowly by a MIB, or to collect metrics from a specific device make and model. This tutorial shows the steps for building a basic NDM profile that collects OID metrics from HP iLO4 devices.
+Datadog [Network Device Monitoring][1] (NDM) uses profiles for collecting metrics from network devices. These are defined narrowly by a MIB, or to collect metrics from a specific device make and model. This tutorial shows the steps for building a basic NDM profile that collects OID metrics from HP iLO4 devices.
 
-NDM profiles use SNMP concepts. For basic details on SNMP, refer to the [terminology][1].
+- NDM profiles use SNMP concepts. For basic details on SNMP, refer to the [NDM terminology][2] documentation.
+- To learn more about SNMP profile formatting, see the [NDM Profile Format and Simulation Data Reference][3] documentation.
 
 <div class="alert alert-warning">
 This guide is for advanced users. Most devices can be configured using the <a href="/network_monitoring/devices/profiles#metric-definition-by-profile">Datadog profiles</a>.
@@ -28,15 +29,15 @@ The first step to building an NDM profile is researching the device and determin
 
 Refer to the manufacturer's website or search the web to find the following information:
 
-- Device name, manufacturer, and [system object identifier][1].
+- Device name, manufacturer, and [system object identifier][2].
 
-- Understand the device and its use case. Metrics vary between routers, switches, bridges, etc. For example, according to the [HP iLO Wikipedia page][2], iLO4 devices are used by system administrators for remote management of embedded servers.
+- Understand the device and its use case. Metrics vary between routers, switches, bridges, etc. For example, according to the [HP iLO Wikipedia page][4], iLO4 devices are used by system administrators for remote management of embedded servers.
 
 - Available versions of the device, and the versions to target. For example, HP iLO devices exist in multiple versions. This tutorial is specifically targeting HP iLO4.
 
-- Supported MIBs (ASN1, textual format), OIDs, and associated MIB files. For example, HP provides a MIB package for iLO devices [their website][3]. **Note**: The MIB is not required with the profile to collect metrics.
+- Supported MIBs (ASN1, textual format), OIDs, and associated MIB files. For example, HP provides a MIB package for iLO devices [their website][5]. **Note**: The MIB is not required with the profile to collect metrics.
 
-**Note**: For more details on device use cases, see [Networking hardware][4].
+**Note**: For more details on device use cases, see [Networking hardware][6].
 
 ### Metrics selection
 
@@ -73,7 +74,7 @@ metrics:
 
 ### Generate a profile file from a collection of MIBs
 
-You can use [ddev][5], part of the Datadog integrations developer's toolkit, to create a profile from a list of mibs.
+You can use [ddev][7], part of the Datadog integrations developer's toolkit, to create a profile from a list of mibs.
 
 ```console
 $  ddev meta snmp generate-profile-from-mibs --help
@@ -98,7 +99,7 @@ SNMP-FRAMEWORK-MIB:
 - snmpEngine
 ```
 
-**Note**: Each `MIB:node_name` correspond to exactly one and only one OID. However, some MIBs report legacy nodes that are overwritten. To resolve, edit the MIB by removing legacy values manually before loading them with this profile generator. If a MIB is fully supported, it can be omitted from the filter as MIBs not found in a filter will be fully loaded. If a MIB is **not** fully supported, it can be listed with an empty node list, such as `CISCO-SYSLOG-MIB` in the example.
+**Note**: Each `MIB:node_name` correspond to exactly one and only one OID. However, some MIBs report legacy nodes that are overwritten. To resolve, edit the MIB by removing legacy values manually before loading them with this profile generator. If a MIB is fully supported, it can be omitted from the filter as MIBs not found in a filter are fully loaded. If a MIB is **not** fully supported, it can be listed with an empty node list, such as `CISCO-SYSLOG-MIB` in the example.
 
 `-a, --aliases` is an option to provide the path to a YAML file containing a list of aliases to be used as metric tags for tables, in the following format:
 
@@ -157,7 +158,7 @@ Indexes can be replaced by another MIB symbol that is more human-readable. You m
 
 ### Add unit tests
 
-Add a unit test in `test_profiles.py` to verify that the metric is successfully collected by the integration when the profile is enabled. These unit tests are mostly used to prevent regressions and will help with maintenance.
+Add a unit test in `test_profiles.py` to verify that the metric is successfully collected by the integration when the profile is enabled. These unit tests are mostly used to prevent regressions and help with maintenance.
 
 For example:
 
@@ -171,7 +172,7 @@ def test_hp_ilo4(aggregator):
     aggregator.assert_all_metrics_covered()
 ```
 
-This test will initially fail as there is no simulation data.
+This test initially fails as there is no simulation data.
 
 ```console
 $ ddev test -k test_hp_ilo4 snmp:py38
@@ -190,7 +191,7 @@ E   AssertionError: Needed exactly 1 candidates for 'snmp.cpqHeSysUtilLifeTime',
 
 ### Add simultation data
 
-Add a `.snmprec` file named after the `community_string`, which is the value we gave to `run_profile_check()`:
+Add a `.snmprec` file named after the `community_string`, which is the value given to `run_profile_check()`:
 
 ```
 $ touch snmp/tests/compose/data/hp_ilo4.snmprec
@@ -217,22 +218,19 @@ ________________________________________________________________ summary _______
   congratulations :)
 ```
 
-To learn more about simulation data format, see the [Simulation Data Format Reference][TK] documentation.
+To learn more about simulation data format, see the [Simulation Data Format Reference][3] documentation.
 
-
-### Next steps
-
-The basic workflow of adding metrics, expanding tests, and adding simulation data is complete. You can now add more metrics to your basic SNMP profile. To learn more about SNMP profile formatting, see the [Profile Format Reference][TK] documentation.
-
+The setup of a basic profile is complete. You can continue to add metrics to expand your SNMP profile or research deeper into SNMP profiles to add additional parameters.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /network_monitoring/devices/troubleshooting#terminology
-[2]: https://en.wikipedia.org/wiki/HP_Integrated_Lights-Out
-[3]: https://support.hpe.com/hpsc/swd/public/detail?swItemId=MTX_53293d026fb147958b223069b6
-[4]: https://en.wikipedia.org/wiki/Networking_hardware
-[5]: https://github.com/DataDog/integrations-core/tree/master/datadog_checks_dev
-[6]: https://github.com/DataDog/integrations-core/tree/master/snmp/tests/compose/data
+[1]: /network_monitoring/devices/
+[2]: /network_monitoring/devices/troubleshooting#terminology
+[3]: /network_monitoring/devices/guide/profile-and-simulation-data-reference
+[4]: https://en.wikipedia.org/wiki/HP_Integrated_Lights-Out
+[5]: https://support.hpe.com/hpsc/swd/public/detail?swItemId=MTX_53293d026fb147958b223069b6
+[6]: https://en.wikipedia.org/wiki/Networking_hardware
+[7]: https://github.com/DataDog/integrations-core/tree/master/datadog_checks_dev
