@@ -33,7 +33,7 @@
                         </form>
                 </div>
                 <p class="smaller text-white text-center font-semibold popular-search">
-                    Popular searches: 
+                    Popular searches include
                     {{ $lenList := (len $datafile.popular_searches)}}
                     {{ range $index, $popular_search := (sort $datafile.popular_searches "weight" "asc") }}
                         <a href="{{ $popular_search.link | absLangURL }}">{{ $popular_search.title }}</a>{{ if eq (sub $lenList 2) $index }}, and{{ else if eq (sub $lenList 1) $index }}{{ else }},{{ end}}
