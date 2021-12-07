@@ -52,6 +52,10 @@ nav_sections:
         link: infrastructure/
         icon: host-map
         desc: Track your hosts, containers, processes, and serverless functions
+      - title: Integrations
+        link: integrations/
+        icon: integrations
+        desc: Gather data about your applications, services, and systems
       - title: Log Management
         link: logs/
         icon: log
