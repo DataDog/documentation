@@ -555,7 +555,7 @@ For the list of supported types, see the [`snmpsim` simulation data file format]
 
 ## Symbols
 
-For [symbol metrics][10], add a single line corresponding to the symbol OID. For example:
+For symbol metrics, add a single line corresponding to the symbol OID. For example:
 
 ```console
 1.3.6.1.4.1.232.6.2.8.1.0|2|1051200
@@ -563,9 +563,9 @@ For [symbol metrics][10], add a single line corresponding to the symbol OID. For
 
 ## Tables
 
-Adding simulation data for tables can be particularly tedious. This section documents the manual process, but automatic generation is possible. See [How to generate table simulation data][11].
+Adding simulation data for tables can be particularly tedious. This section documents the manual process, but automatic generation is possible. See [How to generate table simulation data][10].
 
-For [table metrics][12], add one copy of the metric per row, appending the index to the OID.
+For table metrics, add one copy of the metric per row, appending the index to the OID.
 
 For example, to simulate 3 rows in the table `1.3.6.1.4.1.6.13` that has OIDs `1.3.6.1.4.1.6.13.1.6` and `1.3.6.1.4.1.6.13.1.8`, you could write:
 
@@ -578,7 +578,7 @@ For example, to simulate 3 rows in the table `1.3.6.1.4.1.6.13` that has OIDs `1
 1.3.6.1.4.1.6.13.1.8.2|2|0
 ```
 
-**Note**: If the table uses [table metric tags][13], you may need to add additional OID simulation data for those tags.
+**Note**: If the table uses table metric tags, you may need to add additional OID simulation data for those tags.
 
 [1]: /network_monitoring/devices
 [2]: /integrations/snmp/#overview
@@ -589,7 +589,4 @@ For example, to simulate 3 rows in the table `1.3.6.1.4.1.6.13` that has OIDs `1
 [7]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/conf.yaml.example
 [8]: https://github.com/DataDog/integrations-core/tree/master/snmp/tests/compose/data
 [9]: https://github.com/etingof/snmpsim/blob/master/docs/source/documentation/managing-simulation-data.rst#file-format
-[10]: ./profile-format.md#symbol-metrics
-[11]: ./how-to.md#generate-table-simulation-data
-[12]: ./profile-format.md#table-metrics
-[13]: ./profile-format.md#table-metrics-tagging
+[10]: /network_monitoring/devices/guide/build-ndm-profile#add-simulation-data
