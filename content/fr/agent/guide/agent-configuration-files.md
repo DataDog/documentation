@@ -6,7 +6,7 @@ aliases:
 ---
 ## Fichier de configuration principal de l'Agent
 
-Le fichier de configuration de l'Agent v6 utilise le format **YAML** pour mieux prendre en charge les configurations complexes et offrir une expérience de configuration cohérente (les Checks utilisent également des fichiers de configuration YAML). Par conséquent. `datadog.conf` (v5) est désormais obsolète et remplacé par `datadog.yaml` (v6).
+Le fichier de configuration de l'Agent v6 utilise le format **YAML** pour mieux prendre en charge les configurations complexes et offrir une expérience de configuration cohérente (les checks utilisent également des fichiers de configuration YAML). Par conséquent. `datadog.conf` (v5) n'est plus pris en charge et est remplacé par `datadog.yaml` (v6).
 
 {{< tabs >}}
 {{% tab "Agents v6 et v7" %}}

@@ -37,8 +37,8 @@ Les fonctions `clamp_min()` et `clamp_max()` comprennent un paramètre :
 
 Les fonctions `cutoff_min()` et `cutoff_max()` comprennent un paramètre :
 
--   `THRESHOLD` : la valeur du seuil que vous spécifiez.
-    -   `cutoff_min()` supprime du graphique toutes les valeurs de métrique inférieures au seuil, tandis que `cutoff_max()` supprime toutes les valeurs de métrique supérieures au seuil.
+- `THRESHOLD` : la valeur du seuil que vous spécifiez.
+    - `cutoff_min()` supprime du graphique toutes les valeurs de métrique inférieures au seuil, tandis que `cutoff_max()` supprime toutes les valeurs de métrique supérieures au seuil.
 
 Les fonctions Cutoff ne suppriment pas les valeurs égales au seuil.
 
