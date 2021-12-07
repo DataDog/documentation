@@ -73,7 +73,7 @@ Live Search is the default view on the Traces page, and when you're viewing reta
 
 A valid query in the search bar displays traces that match your search criteria across **all spans**. The search syntax is the same in the Live Search views as in the other trace views, but here, your query is matched against all of the ingested traces across any span and any tag, and not just the indexed ones.
 
-**Note**: You can select only the `top-level spans of the service` by changing the selection to the box above the trace table. You can use this feature on high traffic applications to reduce the number of spans displayed and view only the entry point spans of the services. Selecting this box only _visually_ filters the spans shown; they are all still present.
+**Note**: You can select only the [service entry spans][8] by changing the selection to the box above the trace table. You can use this feature on high traffic applications to reduce the number of spans displayed and view only the entry point spans of the services. Selecting this box only _visually_ filters the spans shown; they are all still present.
 
 You can also filter on attributes that are not defined as facets. For example, to filter on the `customer.id` attribute, there are two options:
 
@@ -96,7 +96,7 @@ All spans that are indexed by retention filters are accessible from search. Thes
 
 For example, if you filter by a tag that appears only on spans that are not indexed by any retention filter, your search will return no results, unlike when using Live Search.
 
-You can customize what spans are retained and at what retention rates. By default, [Datadog Intelligent Retention][4] will be applied. To learn more about the default span retention filter and how to create your own additional filters, see the [Retention Filters][3] documentation. Go to the [Retention Filters][8] page within the Datadog app to create or modify your own filters.
+You can customize what spans are retained and at what retention rates. By default, [Datadog Intelligent Retention][4] will be applied. To learn more about the default span retention filter and how to create your own additional filters, see the [Retention Filters][3] documentation. Go to the [Retention Filters][9] page within the Datadog app to create or modify your own filters.
 
 ## Live Analytics for 15 minutes
 
@@ -128,7 +128,7 @@ Retained Analytics is available from the same page as Live Analytics.  To switch
 
 All spans indexed by _custom_ retention filters (not the intelligent retention filter) are available to be searched when using trace analytics. These spans are kept by Datadog for 15 days after being indexed by a retention filter.
 
-You can customize what spans are retained and at what retention rates. By default, [Datadog Intelligent Retention][4] will be applied which automatically retains traces with error and latency diversity as well as low-throughput resources. To learn more about the default span retention filter and how to create your own additional filters, see the [Retention Filters][3] documentation. Go to the [Retention Filters][8] page within the Datadog app to create or modify your own filters.
+You can customize what spans are retained and at what retention rates. By default, [Datadog Intelligent Retention][4] will be applied which automatically retains traces with error and latency diversity as well as low-throughput resources. To learn more about the default span retention filter and how to create your own additional filters, see the [Retention Filters][3] documentation. Go to the [Retention Filters][9] page within the Datadog app to create or modify your own filters.
 
 [1]: https://app.datadoghq.com/apm/traces
 [2]: /tracing/trace_retention_and_ingestion/#ingestion-controls
@@ -137,4 +137,5 @@ You can customize what spans are retained and at what retention rates. By defaul
 [5]: /tracing/visualization/#indexed-span
 [6]: /tracing/trace_retention_and_ingestion/
 [7]: /account_management/billing/apm_distributed_tracing/
-[8]: https://app.datadoghq.com/apm/traces/retention-filters
+[8]: /tracing/visualization/#service-entry-span
+[9]: https://app.datadoghq.com/apm/traces/retention-filters
