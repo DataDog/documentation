@@ -73,6 +73,8 @@ You can use the [global variables defined in the **Settings**][5] in the **Start
 
 {{< img src="synthetics/browser_tests/using_variables_browser.mp4" alt="Using Variables in Browser Tests" video="true"  width="80%" >}}
 
+You can also use global variables in your browser test's recorded steps by selecting `+ Variables` when recording the steps and selecting `Global Variable` from the Add Variable popup's dropdown. 
+
 ### Define alert conditions
 
 You can customize alert conditions to define the circumstances under which you want a test to send a notification alert.
