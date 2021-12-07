@@ -21,7 +21,7 @@ This page describes how to do this with 2 examples: Bunyan levels and web access
 
 ## Web access logs
 
-The status code of the request can be used to determine the log status. Our integrations use the following mapping:
+The status code of the request can be used to determine the log status. Datadog integrations use the following mapping:
 
 * 2xx: OK
 * 3xx: Notice
@@ -51,7 +51,7 @@ Bunyan levels are similar to those of Syslog, but their values are multiplied by
 Assume the bunyan level is stored in the `bunyan_level` attribute.
 Add a Category Processor in your Pipeline that creates a new attribute to reflect the above mapping:
 
-{{< img src="logs/faq/category_processor_bunyan.png" alt="category Processor  bunyan"  >}}
+{{< img src="logs/faq/category_processor_bunyan.png" alt="category Processor bunyan"  >}}
 
 Then add a status remapper that uses the newly created attribute:
 

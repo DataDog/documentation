@@ -19,7 +19,7 @@ further_reading:
 ## Overview
 Datadog displays individual logs following this general side panel layout:
 
-{{< img src="logs/explorer/side_panel/overview.png" alt="Log Explorer side panel"  style="width:60%;">}}
+{{< img src="logs/explorer/side_panel/overview.png" alt="Log Explorer side panel" style="width:60%;">}}
 
 - The upper part of the panel displays general **context** information
 - The lower part of the panel displays the actual **content** of the log
@@ -39,7 +39,7 @@ Some standard fields, for instance `error.stack`, `http.method`, or `duration`, 
 
 The **View in context** button updates the search request in order to show you the log lines dated just before and after a selected log, even if they don't match your filter. This context is different according to the situation, as Datadog uses the `Hostname`, `Service`, `filename`, and `container_id` attributes, along with tags, in order find the appropriate context for your logs.
 
-Click on the **Metrics** tab and access underlying infrastructure metrics in a 30 minutes timeframe around the log.
+Click on the **Metrics** tab and access underlying infrastructure metrics in a 30 minutes time frame around the log.
 
 Interact with **Host** in the upper reserved attributes section, the related [host dashboard][5], or [network page][6]. Interact with **Container** sections to jump to the [container page][7] scoped with the underlying parameters.
 
@@ -66,7 +66,7 @@ Interact with the attributes names and values in the lower JSON section to:
 - Add or remove a column from the logs table
 - Append the search request with specific values (include or exclude)
 
-{{< img src="logs/explorer/side_panel/context.jpg" alt="Side Panel context"  style="width:50%;">}} {{< img src="logs/explorer/side_panel/context2.jpg" alt="Side Panel context"  style="width:50%;">}}
+{{< img src="logs/explorer/side_panel/context.jpg" alt="Side Panel context" style="width:50%;">}} {{< img src="logs/explorer/side_panel/context2.jpg" alt="Side Panel context" style="width:50%;">}}
 
 - Build or edit a facet or measure from an attribute. See [Log Facets][12].
 
