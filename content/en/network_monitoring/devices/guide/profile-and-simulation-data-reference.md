@@ -7,7 +7,7 @@ kind: guide
 
 Datadog [Network Device Monitoring][1] (NDM) uses profiles for collecting metrics from network devices. NDM profiles use [SNMP concepts][2]. Use this guide as reference when formatting a [Network Device Monitoring profile][3] or simulation data.
 
-## Profile Format
+## Profile format
 
 ### Structure
 
@@ -75,11 +75,11 @@ extends:
 
 _(Required)_
 
-Entries in the `metrics` field define which metrics will be collected by the profile. They can reference either a single OID (a.k.a _symbol_), or an SNMP table.
+Entries in the `metrics` field define which metrics are be collected by the profile. They can reference either a single OID (for example, _symbol_), or an SNMP table.
 
 ##### Symbol metrics
 
-An SNMP symbol is an object with a scalar type (i.e. `Counter32`, `Integer32`, `OctetString`, etc).
+An SNMP symbol is an object with a scalar type (for example, `Counter32`, `Integer32`, `OctetString`, etc.).
 
 In a MIB file, a symbol can be recognized as an `OBJECT-TYPE` node with a scalar `SYNTAX`, placed under an `OBJECT IDENTIFIER` node (which is often the root OID of the MIB):
 
@@ -172,7 +172,7 @@ metrics:
     symbols:
       # List of symbols ('columns') to retrieve.
       # Same format as for a single OID.
-      # Each row in the table will emit these metrics.
+      # Each row in the table emits these metrics.
       - OID: 1.3.6.1.4.1.10.1.1
         name: exampleColumn1
       - OID: 1.3.6.1.4.1.10.1.2
@@ -211,7 +211,7 @@ metrics:
     metric_tags:
       # Add an 'interface' tag to each metric of each row,
       # whose value is obtained from the 'ifDescr' column of the row.
-      # This allows querying metrics by interface, e.g. 'interface:eth0'.
+      # This allows querying metrics by interface. For example, 'interface:eth0'.
       - tag: interface
         column:
           OID: 1.3.6.1.2.1.2.2.1.2
@@ -267,9 +267,9 @@ External table indexes must be a subset of the indexes of the current table, or 
 
 In the example above, the index of `cpiPduBranchTable` looks like `1.6.0.36.155.53.3.246`, the first digit is the `cpiPduBranchId` index and the rest is the `cpiPduBranchMac` index. The index of `cpiPduTable` looks like `6.0.36.155.53.3.246` and represents `cpiPduMac` (equivalent to `cpiPduBranchMac`).
 
-By using the `index_transform` with start 1 and end 7, we extract `6.0.36.155.53.3.246` from `1.6.0.36.155.53.3.246` (`cpiPduBranchTable` full index), and then use it to match `6.0.36.155.53.3.246` (`cpiPduTable` full index).
+By using the `index_transform` with start 1 and end 7, it extracts `6.0.36.155.53.3.246` from `1.6.0.36.155.53.3.246` (`cpiPduBranchTable` full index), and then use it to match `6.0.36.155.53.3.246` (`cpiPduTable` full index).
 
-`index_transform` can be more complex, the following definition will extract `2.3.5.6.7` from `1.2.3.4.5.6.7`.
+`index_transform` can be more complex, the following definition extracts `2.3.5.6.7` from `1.2.3.4.5.6.7`.
 
 ```yaml
         index_transform:
@@ -281,7 +281,7 @@ By using the `index_transform` with start 1 and end 7, we extract `6.0.36.155.53
 
 ###### Using an index
 
-"_index_" refers to one digit of the index part of the row OID. For example, if the column OID is `1.2.3.1.2` and the row OID is `1.2.3.1.2.7.8.9`, the full index is `7.8.9`. In this example, when using `index: 1`, we will refer to `7`, `index: 2` will refer to `8`, and so on.
+"_index_" refers to one digit of the index part of the row OID. For example, if the column OID is `1.2.3.1.2` and the row OID is `1.2.3.1.2.7.8.9`, the full index is `7.8.9`. In this example, when using `index: 1`, it refers to `7`, `index: 2` refers to `8`, and so on.
 
 ```yaml
 metrics:
@@ -295,18 +295,18 @@ metrics:
     metric_tags:
       # This tagging method is more complex, so let's walk through an example...
       #
-      # In CISCO-PROCESS-MIB, we can see that entries in the `cpmCPUTotalTable` are indexed by `cpmCPUTotalIndex`,
+      # In CISCO-PROCESS-MIB, entries in the `cpmCPUTotalTable` are indexed by `cpmCPUTotalIndex`,
       # which corresponds to some sort of CPU position for each row in the table:
       #
       #   cpmCPUTotalEntry OBJECT-TYPE
       #      -- ...
       #      INDEX    { cpmCPUTotalIndex }  # <-- See?
       #
-      # We want to tag metrics in this table by this CPU position.
+      # Tag metrics in this table by this CPU position.
       #
-      # To do this, we look up the position of this OID in `INDEX`. Here we see it's in 1st position.
-      # So we can reference it here using `index: 1`.
-      # (If there were two OIDs in `INDEX`, and we wanted to use the one in 2nd position, then we would have used `index: 2`.)
+      # To do this, look up the position of this OID in `INDEX`. Here it's in first position.
+      # Reference it here using `index: 1`.
+      # (If there were two OIDs in `INDEX`, and you wanted to use the one in second position, use `index: 2`.)
       #
       # NOTE: currently only indexes that refer to a column in the same table are supported.
       - tag: cpu
@@ -315,7 +315,7 @@ metrics:
 
 ###### Mapping index to tag string value
 
-You can use the following syntax to map indexes to tag string values. In the example below, the submitted metrics will be `snmp.ipSystemStatsHCInReceives` with tags like `ipversion:ipv6`.
+You can use the following syntax to map indexes to tag string values. In the example below, the submitted metric is `snmp.ipSystemStatsHCInReceives` with tag `ipversion:ipv6`.
 
 ```yaml
 metrics:
@@ -345,13 +345,13 @@ See meaning of index as used here in [Using an index](#using-an-index) section.
 
 General guidelines on [Datadog tagging][4] also apply to table metric tags.
 
-In particular, be mindful of the kind of value contained in the columns used a tag sources. E.g. avoid using a `DisplayString` (an arbitrarily long human-readable text description) or unbounded sources (timestamps, IDs...) as tag values.
+In particular, be mindful of the kind of value contained in the columns used a tag sources. For example, avoid using a `DisplayString` (an arbitrarily long human-readable text description) or unbounded sources (timestamps, IDs, etc.) as tag values.
 
 Good candidates for tag values include short strings, enums, or integer indexes.
 
 ##### Metric type inference
 
-By default, the [Datadog metric type][5] of a symbol will be inferred from the SNMP type (i.e. the MIB `SYNTAX`):
+By default, the [Datadog metric type][5] of a symbol is inferred from the SNMP type (for example, the MIB `SYNTAX`).
 
 | SNMP type             | Inferred metric type |
 | --------------------- | -------------------- |
@@ -413,7 +413,7 @@ metrics:
     table:
       OID: 1.3.6.1.4.1.3375.2.2.5.2.3
       name: ltmPoolStatTable
-    # No `forced_type` specified => metric types will be inferred.
+    # No `forced_type` specified => metric types are inferred.
     symbols:
       - OID: 1.3.6.1.4.1.3375.2.2.5.2.3.1.2
         name: ltmPoolStatServerPktsIn
@@ -426,7 +426,7 @@ metrics:
       OID: 1.3.6.1.4.1.3375.2.2.5.2.3
       name: ltmPoolStatTable
     forced_type: monotonic_count
-    # All these symbols will be submitted as monotonic counts.
+    # All these symbols are submitted as monotonic counts.
     symbols:
       - OID: 1.3.6.1.4.1.3375.2.2.5.2.3.1.7
         name: ltmPoolStatServerTotConns
@@ -464,7 +464,7 @@ metrics:
       metric_suffix: ReplaceBattery
 ```
 
-This example will submit two metrics `snmp.upsBasicStateOutputState.OnLine` and `snmp.upsBasicStateOutputState.ReplaceBattery` with value `0` or `1`.
+This example submits two metrics, `snmp.upsBasicStateOutputState.OnLine` and `snmp.upsBasicStateOutputState.ReplaceBattery`, with value `0` or `1`.
 
 [Example of flag_stream usage in a profile][6].
 
@@ -508,7 +508,7 @@ metrics:
     # ...
 ```
 
-In the examples above, the OID value is a snmp OctetString value `22C` and we want `22` to be submitted as value for `snmp.temperature`.
+In the examples above, the OID value is a SNMP OctetString value `22C` and `22` is submitted as value for `snmp.temperature`.
 
 #### `metric_tags`
 
@@ -563,7 +563,7 @@ For [symbol metrics][10], add a single line corresponding to the symbol OID. For
 
 ## Tables
 
-Adding simulation data for tables can be particularly tedious. This section documents the manual process, but automatic generation is possible — see [How to generate table simulation data][11].
+Adding simulation data for tables can be particularly tedious. This section documents the manual process, but automatic generation is possible. See [How to generate table simulation data][11].
 
 For [table metrics][12], add one copy of the metric per row, appending the index to the OID.
 
