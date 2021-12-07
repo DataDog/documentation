@@ -40,7 +40,7 @@ Here's a two-minute video walkthrough:
     * [Okta][15]
     * [SafeNet][16]
 
-2. If you're a [Datadog Administrator][9], you can access the **Login Methods** page and the **SAML Configuration** page. Hover over your username at the bottom of the left-side navigation menu and click **Organization Settings**.
+2. In the Datadog app, navigate to the [Login Methods][25] page. Under **SAML**, click the Configure button.
 
 3. Upload the IdP Metadata from your SAML Identity provider by clicking the **Choose File** button. After choosing the file, click **Upload File**.
 
@@ -189,3 +189,4 @@ Certain Identity Providers (such as Microsoft's ADFS) can be configured to pull 
 [22]: https://support.okta.com/help/s/article/How-to-View-a-SAML-Response-in-Your-Browser-for-Troubleshooting?language=en_US
 [23]: https://www.samltool.com/validate_response.php
 [24]: /account_management/authn_mapping/
+[25]: https://app.datadoghq.com/organization-settings/login-methods
