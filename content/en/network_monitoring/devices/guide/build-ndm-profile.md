@@ -14,7 +14,7 @@ further_reading:
 
 Datadog [Network Device Monitoring][1] (NDM) uses profiles for collecting metrics from network devices. These are defined narrowly by a MIB, or to collect metrics from a specific device make and model. This tutorial shows the steps for building a basic NDM profile that collects OID metrics from HP iLO4 devices.
 
-- NDM profiles use SNMP concepts. For basic details on SNMP, refer to the [NDM terminology][2] documentation.
+- NDM profiles use SNMP concepts. For basic details on SNMP, see the [NDM terminology][2] documentation.
 - To learn more about SNMP profile formatting, see the [NDM Profile Format and Simulation Data Reference][3] documentation.
 
 <div class="alert alert-warning">
@@ -189,7 +189,7 @@ E   AssertionError: Needed exactly 1 candidates for 'snmp.cpqHeSysUtilLifeTime',
 [...]
 ```
 
-### Add simultation data
+### Add simulation data
 
 Add a `.snmprec` file named after the `community_string`, which is the value given to `run_profile_check()`:
 
