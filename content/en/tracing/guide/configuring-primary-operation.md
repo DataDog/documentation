@@ -102,7 +102,7 @@ try (Scope scope = tracer.activateSpan(span)) {
 
 ```
 
-For more information, see [Setting up Java and Opentracing][1].
+For more information, see [Setting up Java and OpenTracing][1].
 
 
 [1]: /tracing/setup_overview/open_standards/java/#opentracing
@@ -121,7 +121,7 @@ span.finish()
 
 ```
 
-For more information, see [Setting up Python and Opentracing][1].
+For more information, see [Setting up Python and OpenTracing][1].
 
 
 [1]: /tracing/setup_overview/open_standards/python/#opentracing
@@ -135,7 +135,7 @@ OpenTracing.start_active_span('http.request') do |scope|
   # code being traced
 end
 ```
-For more information, see [Setting up Ruby and Opentracing][1].
+For more information, see [Setting up Ruby and OpenTracing][1].
 
 
 [1]: /tracing/setup_overview/open_standards/ruby/#opentracing
@@ -147,7 +147,7 @@ For more information, see [Setting up Ruby and Opentracing][1].
 opentracing.StartSpan("http.request", opentracer.ResourceName("/user/profile"))
 ```
 
-For more information, see [Setting up Go and Opentracing][1].
+For more information, see [Setting up Go and OpenTracing][1].
 
 
 [1]: /tracing/setup_overview/open_standards/go/#opentracing
@@ -163,7 +163,7 @@ span.setTag('span.type', 'web')
 span.finish();
 ```
 
-For more information, see [Setting up NodeJS and Opentracing][1].
+For more information, see [Setting up NodeJS and OpenTracing][1].
 
 
 [1]: /tracing/setup_overview/open_standards/nodejs/#opentracing
@@ -183,7 +183,7 @@ using (var scope = GlobalTracer.Instance.BuildSpan("http.request").StartActive(f
 
 ```
 
-For more information, see [Setting up .NET and Opentracing][1].
+For more information, see [Setting up .NET and OpenTracing][1].
 
 
 [1]: /tracing/setup_overview/open_standards/dotnet/#opentracing
@@ -211,7 +211,7 @@ $span->setTag('span.type', 'web');
 $scope->close();
 ```
 
-For more information, see [Setting up PHP and Opentracing][1].
+For more information, see [Setting up PHP and OpenTracing][1].
 
 
 [1]: /tracing/setup_overview/open_standards/php/#opentracing
