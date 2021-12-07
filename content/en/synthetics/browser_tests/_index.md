@@ -71,9 +71,13 @@ Define the configuration of your browser test.
 
 You can use the [global variables defined in the **Settings**][5] in the **Starting URL** as well as in the **Advanced Options** of your browser tests. To display your list of variables, type `{{` in the desired field.
 
-{{< img src="synthetics/browser_tests/using_variables_browser.mp4" alt="Using Variables in Browser Tests" video="true"  width="80%" >}}
+{{< img src="synthetics/browser_tests/using_variables_browser.mp4" alt="Using Variables in Browser Tests" video="true" width="80%" >}}
 
-To use global variables in your browser test's recorded steps, select **+ Variables** when recording your steps and select **Global Variable** from the dropdown menu. 
+To use global variables in your browser test's recording, navigate to your recorded steps and click **+ Variables** below the **Start Recording** button. Select **Global Variable** from the dropdown menu. 
+
+{{< img src="synthetics/browser_tests/available-global-variables.png" alt="Available Global Variables" style="width:50%;" >}}
+
+Search for available global variables and click **+** to add them to your recording panel. When you are done adding global variables, click **OK**. 
 
 ### Define alert conditions
 
