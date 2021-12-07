@@ -33,53 +33,65 @@
   {{ end }}
 {{ end }}
 
+<!--
+For each scope find the common tags and group them together
+-->
+{{ $tagGroups := slice }}
+{{ $scopeGroups := slice }}
+{{ range $scope, $scope_obj := ($s.Get "scopes") }}
+  {{ $intersect := len (intersect $tagGroups $scope_obj.tags) }}
+  {{ if eq $intersect 0 }}
+    {{ if $tagGroups}}
+      {{ $tagStr := (print (delimit $tagGroups ", ")) }}
+      {{ $s.SetInMap "tags" $tagStr $scopeGroups }}
+    {{ end }}
+    {{ $tagGroups = slice }}
+    {{ $scopeGroups = slice }}
+  {{ end }}
+  {{ $tagGroups = ($tagGroups | append $scope_obj.tags) | uniq }}
+  {{ $scopeGroups = ($scopeGroups | append $scope) | uniq }}
+{{ end }}
 
 <h2>Available Scopes</h2>
 
-<div class="table-request schema-table row has-no-expands">
-  <div class="col-12">
-    <div class="row table-header">
-      <div class="col-3 column">
-          <p class="font-semibold">Name</p>
-      </div>
-      <div class="col-3 column">
-          <p class="font-semibold">Description</p>
-      </div>
-      <div class="col-6 column">
-          <p class="font-semibold">Endpoints that require this scope</p>
-      </div>
-    </div>
-
-    <div>
-
-      {{ range $scope, $scope_obj := ($s.Get "scopes") }}
-      <div class="row table-header">
-        <div class="col-12 column">
-            <p class="font-semibold">{{ delimit $scope_obj.tags " , " }}</p>
+{{ range $tagString, $scopeSlice := ($s.Get "tags") }}
+    <h4>{{ $tagString }}</h4>
+    <div class="table-request schema-table row has-no-expands">
+        <div class="col-12">
+            <!-- Header -->
+            <div class="row table-header">
+                <div class="col-4 pl-2 column">
+                    <p class="font-semibold">Name</p>
+                </div>
+                <div class="col-3 pl-2 column">
+                    <p class="font-semibold">Description</p>
+                </div>
+                <div class="col-5 pl-2 column">
+                    <p class="font-semibold">Endpoints that require this scope</p>
+                </div>
+            </div>
+            <!-- Detail -->
+            {{ range $scope := $scopeSlice }}
+            {{ $scope_obj := index ($s.Get "scopes") $scope }}
+            <div class="row">
+                <div class="col-12 first-column">
+                    <div class="row first-row">
+                        <div class="col-4 p-2 column">
+                            <p>{{ $scope }}</p>
+                        </div>
+                        <div class="col-3 p-2 column">
+                            <p>{{ $scope_obj.desc }}</p>
+                        </div>
+                        <div class="col-5 p-2 column">
+                            {{ range $endpoint := $scope_obj.endpoints }}
+                              <a href="{{ $endpoint.url }}">{{ $endpoint.summary }}</a><br/>
+                            {{ end }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{ end }}
         </div>
-      </div>
-
-      <div class="row">
-        <div class="col-12 first-column">
-          <div class="row first-row">
-            <div class="col-3 column">
-              <p>{{ $scope }}</p>
-            </div>
-            <div class="col-3 column">
-              <p>{{ $scope_obj.desc }}</p>
-            </div>
-            <div class="col-6 column">
-                {{ range $endpoint := $scope_obj.endpoints }}
-                  <a href="{{ $endpoint.url }}">{{ $endpoint.summary }}</a><br/>
-                {{ end }}
-            </div>
-          </div>
-        </div>
-      </div>
-      {{ end }}
-
     </div>
-
-  </div>
-</div>
+{{ end }}
 
