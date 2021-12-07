@@ -39,19 +39,42 @@ const getTitle = (hit) => {
     return title;
 }
 
-const populateAndFormatResults = (query, hits) => {
+const appendSearchResultCountString = (count) => {
+    const tipueSearchResultCountDiv = document.createElement('div');
+    tipueSearchResultCountDiv.setAttribute('id', 'tipue_search_results_count');
+    tipueSearchResultCountDiv.innerText = `${count} results`;
+    const tipueSearchContentElement = document.getElementById('tipue_search_content');
+    tipueSearchContentElement.prepend(tipueSearchResultCountDiv);
+}
+
+const renderHit = (hit) => {
+    formatted_results += '<div class="hit">';
+    formatted_results += `${
+        '<div class="tipue_search_content_title">' +
+        '<a href="'
+    }${hit['url']}">${getTitle(hit)}</a></div>`;
+    formatted_results += `${
+        '<div class="tipue_search_content_url">' +
+        '<a href="'
+    }${hit['url']}">${hit['url'].replace(
+        'https://docs.datadoghq.com',
+        ''
+    )}</a></div>`;
+    const text = hit._snippetResult.content.value;
+    formatted_results += `<div class="tipue_search_content_text">${text}</div>`;
+    formatted_results += '</div>';
+    $('#tipue_search_content .content').html(formatted_results);
+}
+
+const renderResults = (query, hits) => {
     // $('#tipue_search_input').val(query);
     let formatted_results = '';
+    appendSearchResultCountString(hits.length);
 
     if (hits.length) {
-        const tipueSearchResultCountDiv = document.createElement('div');
-        tipueSearchResultCountDiv.setAttribute('id', 'tipue_search_results_count');
-        tipueSearchResultCountDiv.innerText = `${hits.length} results`;
-        const tipueSearchContentElement = document.getElementById('tipue_search_content');
-        tipueSearchContentElement.prepend(tipueSearchResultCountDiv);
-
-        for (hit in hits) {
-            console.log(hit);
+        for (const index in hits) {
+            const hit = hits[index];
+            renderHit(hit)
         }
     }
 }
@@ -67,7 +90,7 @@ const handleSearch = () => {
             filters: `language:${getSiteLang()}`
         })
         .then(({ hits }) => {
-            populateAndFormatResults(query, hits);
+            renderResults(query, hits);
         })
         .catch(error => console.error(error))
     }
