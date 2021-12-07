@@ -24,26 +24,6 @@ nav_sections:
         link: agent/
         icon: agent-fill
         desc: Install and configure the Datadog Agent to collect and send data
-      - title: Integrations
-        link: integrations/
-        icon: integrations
-        desc: Gather data from your systems, applications, and services
-      - title: Dashboards
-        link: dashboards/
-        icon: dashboard
-        desc: Visualize, analyze, and generate insights about your data
-      - title: Infrastructure
-        link: infrastructure/
-        icon: host-map
-        desc: Track your hosts, containers, processes, and serverless functions
-      - title: Events
-        link: events/
-        icon: events
-        desc: Track notable changes and alerts in your applications and infrastructure
-      - title: Metrics
-        link: metrics/
-        icon: metric
-        desc: Explore, search, and create distributions for your metrics
       - title: Alerting
         link: monitors/
         icon: monitor
@@ -52,46 +32,62 @@ nav_sections:
         link: tracing/
         icon: apm
         desc: Explore out-of-the-box performance dashboards and distributed traces
-      - title: Log Management
-        link: logs/
-        icon: log
-        desc: Process, monitor, and archive your ingested logs
-      - title: Security Platform
-        link: security_platform/
-        icon: security-platform
-        desc: Detect threats and misconfigurations in your applications and infrastructure
-      - title: Synthetic Monitoring
-        link: synthetics/
-        icon: synthetics
-        desc: Ensure uptime, flag regional issues, and test application performance
-      - title: RUM & Session Replay
-        link: real_user_monitoring/
-        icon: rum
-        desc: Capture, observe, and analyze the user experience of your applications 
-      - title: Network Monitoring
-        link: network_monitoring/
-        icon: network
-        desc: Use tagged objects to collect and graph data about your network traffic
-      - title: Serverless
-        link: serverless/
-        icon: serverless
-        desc: Detect and resolve performance issues in your serverless applications
-      - title: Mobile Application
-        link: mobile/
-        icon: mobile
-        desc: View Datadog alerts, incidents, and more on your mobile device
-      - title: Watchdog
-        link: watchdog/
-        icon: watchdog
-        desc: Observe trends and patterns in your APM and infrastructure metrics
       - title: CI Visibility
         link: continuous_integration/
         icon: ci
         desc: See test metrics, build results, and pipeline executions for your CI pipeline
+      - title: Dashboards
+        link: dashboards/
+        icon: dashboard
+        desc: Visualize, analyze, and generate insights about your data
       - title: Database Monitoring
         link: database_monitoring/
         icon: dbm
         desc: Explore enriched dashboards, query metrics, and query samples
+      - title: Events
+        link: events/
+        icon: events
+        desc: Track notable changes and alerts in your applications and infrastructure
+      - title: Infrastructure
+        link: infrastructure/
+        icon: host-map
+        desc: Track your hosts, containers, processes, and serverless functions
+      - title: Log Management
+        link: logs/
+        icon: log
+        desc: Process, monitor, and archive your ingested logs
+      - title: Metrics
+        link: metrics/
+        icon: metric
+        desc: Explore, search, and create distributions for your metrics
+      - title: Mobile Application
+        link: mobile/
+        icon: mobile
+        desc: View Datadog alerts, incidents, and more on your mobile device
+      - title: Network Monitoring
+        link: network_monitoring/
+        icon: network
+        desc: Use tagged objects to collect and graph data about your network traffic
+      - title: RUM & Session Replay
+        link: real_user_monitoring/
+        icon: rum
+        desc: Capture, observe, and analyze the user experience of your applications 
+      - title: Security Platform
+        link: security_platform/
+        icon: security-platform
+        desc: Detect threats and misconfigurations in your applications and infrastructure
+      - title: Serverless
+        link: serverless/
+        icon: serverless
+        desc: Detect and resolve performance issues in your serverless applications
+      - title: Synthetic Monitoring
+        link: synthetics/
+        icon: synthetics
+        desc: Ensure uptime, flag regional issues, and test application performance
+      - title: Watchdog
+        link: watchdog/
+        icon: watchdog
+        desc: Observe trends and patterns in your APM and infrastructure metrics
   - nav_section:
     - name: 'Configuration'
     - navtiles:
