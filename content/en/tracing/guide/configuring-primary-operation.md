@@ -102,8 +102,10 @@ try (Scope scope = tracer.activateSpan(span)) {
 
 ```
 
-For more information on how to set up Java and OpenTracing, see this [article][3].
+For more information, see [Setting up Java and Opentracing][1].
 
+
+[1]: /tracing/setup_overview/open_standards/java/#opentracing
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
 
@@ -119,8 +121,10 @@ span.finish()
 
 ```
 
-For more information on how to set up Python and OpenTracing, see this [article][4].
+For more information, see [Setting up Python and Opentracing][1].
 
+
+[1]: /tracing/setup_overview/open_standards/python/#opentracing
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
@@ -131,8 +135,10 @@ OpenTracing.start_active_span('http.request') do |scope|
   # code being traced
 end
 ```
-For more information on how to set up Ruby and OpenTracing, see this [article][5].
+For more information, see [Setting up Ruby and Opentracing][1].
 
+
+[1]: /tracing/setup_overview/open_standards/ruby/#opentracing
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
@@ -141,8 +147,10 @@ For more information on how to set up Ruby and OpenTracing, see this [article][5
 opentracing.StartSpan("http.request", opentracer.ResourceName("/user/profile"))
 ```
 
-For more information on how to set up Go and OpenTracing, see this [article][6].
+For more information, see [Setting up Go and Opentracing][1].
 
+
+[1]: /tracing/setup_overview/open_standards/go/#opentracing
 {{< /programming-lang >}}
 {{< programming-lang lang="nodejs" >}}
 
@@ -155,8 +163,10 @@ span.setTag('span.type', 'web')
 span.finish();
 ```
 
-For more information on how to set up Node.js and OpenTracing, refer to this [article][7].
+For more information, see [Setting up NodeJS and Opentracing][1].
 
+
+[1]: /tracing/setup_overview/open_standards/nodejs/#opentracing
 {{< /programming-lang >}}
 {{< programming-lang lang=".NET" >}}
 
@@ -173,8 +183,10 @@ using (var scope = GlobalTracer.Instance.BuildSpan("http.request").StartActive(f
 
 ```
 
-For more information on how to set up .NET and OpenTracing, see this [article][8].
+For more information, see [Setting up .NET and Opentracing][1].
 
+
+[1]: /tracing/setup_overview/open_standards/dotnet/#opentracing
 {{< /programming-lang >}}
 {{< programming-lang lang="php" >}}
 
@@ -199,7 +211,10 @@ $span->setTag('span.type', 'web');
 $scope->close();
 ```
 
-For more information on how to set up PHP and OpenTracing, see this [article][9].
+For more information, see [Setting up PHP and Opentracing][1].
+
+
+[1]: /tracing/setup_overview/open_standards/php/#opentracing
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
@@ -208,12 +223,6 @@ For more information on how to set up PHP and OpenTracing, see this [article][9]
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+
 [1]: /tracing/guide/metrics_namespace/
 [2]: https://app.datadoghq.com/apm/settings
-[3]: /tracing/setup_overview/open_standards/java/#opentracing
-[4]: /tracing/setup_overview/open_standards/python/#opentracing
-[5]: /tracing/setup_overview/open_standards/ruby/#opentracing
-[6]: /tracing/setup_overview/open_standards/go/#opentracing
-[7]: /tracing/setup_overview/open_standards/nodejs/#opentracing
-[8]: /tracing/setup_overview/open_standards/dotnet/#opentracing
-[9]: /tracing/setup_overview/open_standards/php/#opentracing
