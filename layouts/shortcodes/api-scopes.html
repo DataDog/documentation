@@ -56,6 +56,9 @@ For each scope find the common tags and group them together
 
 {{ range $tagString, $scopeSlice := ($s.Get "tags") }}
     <h4>{{ $tagString }}</h4>
+    {{ range $tag := (split $tagString ", ") }}
+      <a id="{{ $tag | humanize | lower }}"></a>
+    {{ end }}
     <div class="table-request schema-table row has-no-expands">
         <div class="col-12">
             <!-- Header -->

@@ -153,6 +153,9 @@
                     <h3 class="mt-2">{{ i18n "overview" }}</h3>
                     <p>{{ $translate_action.description | default $endpoint.action.description | markdownify }}</p>
 
+                    <!-- required scopes -->
+                    {{ partial "api/scopes.html" (dict "context" $dot "endpoint" $endpoint "securitySchemes" $adat.components.securitySchemes "tag" $tag) }}
+
                     <!-- querystring, path params, header params -->
                     {{ partial "api/arguments.html" (dict "context" $dot "endpoint" $endpoint) }}
 
