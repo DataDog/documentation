@@ -156,8 +156,7 @@ If you haven't already installed the Agent for your SQL Server database host, se
         service: "<SERVICE_NAME>"
     ```
 
-    Change the `path` parameter value to be the file path of your SQL Server log file.
-    Ensure that the user account under which the Datadog agent is running can access this file.
+    Change the `path` parameter value to be the file path of your SQL Server log file. Ensure that the user account running the Datadog Agent can access this file.
 
     The `service` parameter allows you to tie your logs to other telemetry through a common `service` tag. To learn more about how `service` is used throughout Datadog, read the documentation on [unified service tagging][8].
 
