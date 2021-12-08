@@ -29,7 +29,7 @@ Liste des commandes pour démarrer l'Agent Datadog :
 | Linux      | Consultez la [documentation relative à l'Agent][1] pour votre système d'exploitation.                      |
 | Docker     | Utilisez la [commande d'installation][2].                                 |
 | Kubernetes | `kubectl create -f datadog-agent.yaml`                             |
-| macOS      | `launchctl start com.datadoghq.agent` *ou* via la barre des menus |
+| macOS      | `launchctl start com.datadoghq.agent` *ou* via l'application systray |
 | Source     | `sudo service datadog-agent start`                                 |
 | Windows    | Consultez la [documentation dédiée à l'Agent pour Windows][3].                          |
 
@@ -65,7 +65,7 @@ Liste des commandes pour arrêter l'Agent Datadog :
 | Linux      | Consultez la [documentation relative à l'Agent][1] pour votre système d'exploitation.                                    |
 | Docker     | `docker exec -it <NOM_CONTENEUR> agent stop`                                    |
 | Kubernetes | `kubectl delete pod <NOM POD AGENT>`— remarque : le pod est automatiquement replanifié |
-| macOS      | `launchctl stop com.datadoghq.agent` *ou* via la barre des menus                |
+| macOS      | `launchctl stop com.datadoghq.agent` *ou* via l'application systray                |
 | Source     | `sudo service datadog-agent stop`                                                |
 | Windows    | Consultez la [documentation dédiée à l'Agent pour Windows][2].                                        |
 
@@ -99,7 +99,7 @@ Liste des commandes pour redémarrer l'Agent Datadog :
 | Linux      | Consultez la [documentation relative à l'Agent][1] pour votre système d'exploitation.                                    |
 | Docker     | Utilisez la [commande d'installation][2]                                               |
 | Kubernetes | `kubectl delete pod <NOM POD AGENT>`— remarque : le pod est automatiquement replanifié |
-| macOS      | exécuter `stop` puis `start` *ou* via la barre des menus                            |
+| macOS      | exécuter `stop` puis `start` *ou* via l'application systray                            |
 | Source     | *Plate-forme non prise en charge*                                                           |
 | Windows    | Consultez la [documentation dédiée à l'Agent sous Windows][3].                                        |
 
@@ -137,7 +137,7 @@ Liste des commandes pour afficher le statut de l'Agent Datadog :
 | Linux           | Consultez la [documentation relative à l'Agent][1] pour votre système d'exploitation.                                 |
 | Docker (Debian) | `sudo docker exec -it <NOM_CONTENEUR> s6-svstat /var/run/s6/services/agent/` |
 | Kubernetes      | `kubectl exec -it <NOM_POD> s6-svstat /var/run/s6/services/agent/`           |
-| macOS           | `launchctl list com.datadoghq.agent` *ou* via la barre des menus             |
+| macOS           | `launchctl list com.datadoghq.agent` *ou* via l'application systray             |
 | Source          | `sudo service datadog-agent status`                                           |
 
 
