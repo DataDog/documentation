@@ -7,7 +7,7 @@ aliases:
 ---
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">
-La solution Cloud Security Posture Management n'est pas actuellement disponible dans les régions US1-FED et US3.
+La solution Cloud Security Posture Management n'est pas actuellement disponible dans la région US1-FED.
 </div>
 {{< /site-region >}}
 
