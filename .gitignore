@@ -3,6 +3,7 @@ public/
 data/service_checks/
 data/npm
 integrations_data
+.hugo_build.lock
 
 # htmltest tmp files
 bin/htmltest
