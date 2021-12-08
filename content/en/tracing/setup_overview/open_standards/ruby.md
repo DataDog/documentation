@@ -41,7 +41,7 @@ However, additional instrumentation provided by Datadog can be activated alongsi
 OpenTelemetry support is available by using the `opentelemetry-exporters-datadog` gem to export traces from OpenTelemetry to Datadog.
 
 <div class="alert alert-warning">
-This feature is currently in beta. <a href="https://docs.datadoghq.com/help/">Reach out to support</a> if it doesn't work as you expect.
+This feature is deprecated. For OpenTelemetry integration we recommend using <a href="https://github.com/open-telemetry/opentelemetry-collector">OpenTelemetry collector</a> with <a href="https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/exporter/datadogexporter">DataDog exporter</a>.
 </div>
 
 ### Installation
