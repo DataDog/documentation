@@ -19,7 +19,7 @@ API keys are unique to your organization. An [API key][1] is required by the Dat
 
 <div class="alert alert-info"> Scopes for application keys is a feature in private beta. Contact <a href="https://www.datadoghq.com/support/">Datadog Support</a> to enable support for scoped application keys for your organization. </div>
 
-To better protect and secure your applications, you can specify scopes for your application keys to define more granular permissions and minimize the access that applications have to your Datadog data. This gives you fine-grained access control over your applications and minimizes security vulnerabilities by limiting extraneous access. For example, an application that only reads dashboards does not need admin rights to manage users or delete any of your organization’s data.
+To better protect and secure your applications, you can specify [scopes][10] for your application keys to define more granular permissions and minimize the access that applications have to your Datadog data. This gives you fine-grained access control over your applications and minimizes security vulnerabilities by limiting extraneous access. For example, an application that only reads dashboards does not need admin rights to manage users or delete any of your organization’s data.
 
 The recommended best practice for scoping application keys is to grant your keys the minimal privileges and least permissions necessary for an application to function as intended. Scoped application keys are granted only the scopes specified by the user, and no other additional permissions. While you can modify the scopes of your application keys anytime, consider how those changes may impact the existing functionality or access of your application. 
 
@@ -107,3 +107,4 @@ Need help? Contact [Datadog support][6].
 [7]: /api/latest/key-management/
 [8]: /api/latest/key-management/#create-an-application-key-for-current-user
 [9]: /api/latest/service-accounts/
+[10]: /api/latest/scopes/
