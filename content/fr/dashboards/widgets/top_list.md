@@ -24,7 +24,7 @@ La visualisation Top List vous permet d'afficher une liste de valeurs de tags co
 
 ## Configuration
 
-{{< img src="dashboards/widgets/toplist/toplist_setup.png" alt="Top List"  style="width:80%;">}}
+{{< img src="dashboards/widgets/toplist/toplist_setup.png" alt="Top List" style="width:80%;">}}
 
 ### Configuration
 
@@ -51,7 +51,7 @@ Définissez sa taille et son alignement si vous le souhaitez.
 
 ## API
 
-Ce widget peut être utilisé avec l'**API Dashboards**. Consultez la documentation relative à l'[API Dashboards][4] pour en savoir plus.
+Ce widget peut être utilisé avec l'**API Dashboards**. Consultez la [documentation à ce sujet][4] pour en savoir plus.
 
 Le [schéma JSON][5] utilisé pour le widget Top List est le suivant :
 
