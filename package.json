@@ -5,6 +5,7 @@
     "private": true,
     "scripts": {
         "algolia:config": "node ./local/bin/js/algolia-config.js",
+        "algolia:objectMap": "node ./local/bin/js/algolia-create-object-map.js",
         "preinstall": "bash local/bin/sh/preinstall.sh",
         "prestart": "rimraf public",
         "start": "run-p start:**",
@@ -26,8 +27,7 @@
         "build:apiPages": "node -e 'require(\"./src/scripts/build-api-pages.js\").init()'",
         "dereference": "node ./src/scripts/dereference.js",
         "analyze": "webpack --config webpack.prod.js --env.BUNDLE_ANALYZE=true",
-        "test": "./node_modules/.bin/jest",
-        "algolia-object-map": "node ./local/bin/js/algolia-url-object-map.js"
+        "test": "./node_modules/.bin/jest"
     },
     "repository": {
         "type": "git",

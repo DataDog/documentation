@@ -7,7 +7,8 @@ module.exports = {
             index: 'docsearch_docs_prod',
             api_index: 'docsearch_docs_prod_api',
             appId: 'EOIG7V0A2O',
-            apiKey: 'c7ec32b3838892b10610af30d06a4e42'
+            apiKey: 'c7ec32b3838892b10610af30d06a4e42',
+            browseApiKey: 'a8803f7f8f63c5d68ad89ce377a6b19d'
         },
         imgUrl: 'https://datadog-docs.imgix.net/',
         gaTag: 'UA-21102638-5'
@@ -20,7 +21,8 @@ module.exports = {
             index: 'docsearch_docs_preview',
             api_index: 'docsearch_docs_preview_api',
             appId: 'EOIG7V0A2O',
-            apiKey: 'c7ec32b3838892b10610af30d06a4e42'
+            apiKey: 'c7ec32b3838892b10610af30d06a4e42',
+            browseApiKey: 'a8803f7f8f63c5d68ad89ce377a6b19d'
         },
         imgUrl: 'https://datadog-docs-staging.imgix.net/',
         gaTag: 'UA-21102638-9'
@@ -32,7 +34,8 @@ module.exports = {
             index: 'docsearch_docs_preview',
             api_index: 'docsearch_docs_preview_api',
             appId: 'EOIG7V0A2O',
-            apiKey: 'c7ec32b3838892b10610af30d06a4e42'
+            apiKey: 'c7ec32b3838892b10610af30d06a4e42',
+            browseApiKey: 'a8803f7f8f63c5d68ad89ce377a6b19d'
         },
         imgUrl: 'http://localhost:1313/',
         gaTag: 'UA-21102638-9'
