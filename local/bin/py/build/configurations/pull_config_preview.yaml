@@ -288,9 +288,9 @@
           title: Synthetics and CI GitHub Actions
           kind: documentation
           further_reading:
-            - link: "https://github.com/DataDog/synthetics-ci-github-action/blob/main/README.md"
-              tag: "GitHub"
-              text: "Datadog Synthetics CI GitHub Action"
+            - link: "https://docs.datadoghq.com/synthetics/cicd_integrations/configuration"
+              tag: "Documentation"
+              text: "CI/CD Integrations Configuration"
 
   - repo_name: dd-sdk-android
     contents:
