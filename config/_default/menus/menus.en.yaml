@@ -2508,20 +2508,20 @@ main:
     url: synthetics/api_tests/dns_tests
     parent: api_tests
     weight: 103
+  - name: WebSocket
+    url: synthetics/api_tests/websocket_tests
+    parent: api_tests
+    weight: 104
   - name: TCP
     url: synthetics/api_tests/tcp_tests
     parent: api_tests
-    weight: 104
+    weight: 105
   - name: UDP
     url: synthetics/api_tests/udp_tests
     parent: api_tests
-    weight: 105
+    weight: 106
   - name: ICMP
     url: synthetics/api_tests/icmp_tests
-    parent: api_tests
-    weight: 106
-  - name: WebSocket
-    url: synthetics/api_tests/websocket_tests
     parent: api_tests
     weight: 107
   - name: Multistep API Tests

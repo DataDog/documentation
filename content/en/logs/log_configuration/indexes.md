@@ -83,7 +83,7 @@ You might not need your DEBUG logs until you actually need them when your platfo
 
 #### Keep an eye on trends
 
-Let's say now you don't want to keep all logs from your web access server requests. You could choose to index all 3xx, 4xx, and 5xx logs, but exclude 95% of the 2xx logs: `source:nginx AND http.status_code:[200 TO 299]` to keep track of the trends.
+What if you don't want to keep all logs from your web access server requests? You could choose to index all 3xx, 4xx, and 5xx logs, but exclude 95% of the 2xx logs: `source:nginx AND http.status_code:[200 TO 299]` to keep track of the trends.
 **Tip**: Transform web access logs into meaningful KPIs with a [metric generated from your logs][9], counting number of requests and tagged by status code, [browser][13] and [country][14].
 
 {{< img src="logs/indexes/sample_200.png" alt="enable index filters"  style="width:80%;">}}

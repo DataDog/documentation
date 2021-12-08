@@ -6,3 +6,20 @@
         border-left: none !important;
     }
 }
+
+.fm-math, fmath{
+    font-family: "NationalWeb", Helvetica, Arial, sans-serif !important;
+    text-rendering: optimizeLegibility;
+    font-kerning: normal;     
+    font-weight: 200;
+    overflow-x: auto;
+    padding: 8px;
+    mtext{
+        font-size: 16px;
+        @include media-breakpoint-down(xs) {
+            font-size: 14px;
+        }
+    }
+
+}
+

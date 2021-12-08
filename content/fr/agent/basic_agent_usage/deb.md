@@ -23,11 +23,11 @@ Cette page présente les fonctionnalités de base de l'Agent Datadog pour Debian
 
 Les paquets sont disponibles en versions pour architectures x86 64 bits et Arm v8. Pour toute autre architecture, utilisez l'installation depuis les sources.
 
-**Remarque** : la version 7 (wheezy) de Debian et les versions ultérieures (nous prenons en charge SysVinit avec l'Agent 6.6.0 et versions ultérieures) sont prises en charge.
+**Remarque** : la version 7 (wheezy) de Debian et les versions ultérieures sont prises en charge. SysVinit est pris en charge par l'Agent 6.6.0 et les versions ultérieures.
 
 ## Commandes
 
-Dans les Agents v6 et v7, le gestionnaire de service fourni par le système d'exploitation est responsable du cycle de vie de l'Agent, tandis que les autres commandes doivent être exécutées directement via le binaire de l'Agent. Dans l'Agent v5, presque tout se fait par l'intermédiaire du gestionnaire de service.
+Avec les Agents v6 et v7, le gestionnaire de service fourni par le système d'exploitation est responsable du cycle de vie de l'Agent, tandis que les autres commandes doivent être exécutées directement via le binaire de l'Agent. Avec l'Agent v5, la grande majorité des opérations passent par le gestionnaire de service.
 
 {{< tabs >}}
 {{% tab "Agents v6 et v7" %}}
@@ -97,7 +97,7 @@ Fichiers de configuration pour les [intégrations][1] :
 
 ## Dépannage
 
-[Consultez la documentation relative au dépannage de l'Agent][3].
+Consultez la [documentation relative au dépannage de l'Agent][3].
 
 ## Utilisation de l'Agent intégré
 
