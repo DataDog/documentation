@@ -27,7 +27,7 @@ further_reading:
 {{< site-region region="us3" >}}
 
 <div class="alert alert-warning">
-Log collection is currently not supported for the Datadog US3 site. For more information, contact <a href="https://help.datadoghq.com/hc/en-us">Support</a>.
+Log collection is not supported for the Datadog US3 site. For more information, contact <a href="https://help.datadoghq.com/hc/en-us">Support</a>.
 </div>
 
 {{< /site-region >}}
