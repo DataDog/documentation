@@ -5,7 +5,7 @@ aliases:
   - /fr/compliance_monitoring
   - /fr/security_monitoring
 ---
-{{< site-region region="us3,us5,gov" >}}
+{{< site-region region="gov" >}}
 <div class="alert alert-warning">
 La solution Cloud Security Posture Management n'est pas actuellement disponible dans les régions US1-FED et US3.
 </div>
