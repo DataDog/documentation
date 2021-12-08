@@ -96,13 +96,13 @@ If you change any of these conditions to something other than their defaults, th
 
 For more information on Synthetic test alerting conditions, visit the Synthetic Monitoring [documentation][4].
 
-### Impact of manual and automatic resolution, and muting
+### Impact of manual and automatic monitor updates
 
 When a monitor is resolved manually or as a result of the **_After x hours automatically resolve this monitor from a triggered state_** setting, SLO calculations do not change. If these are important tools for your workflow, consider cloning your monitor, removing auto-resolve settings and `@-notification` settings, and using the clone for your SLO. (**Note for Mark Azer:** This paragraph was in the original doc. I copied it, moved it here, and tried to reword it to be clearer, but I may have changed the meaning? Please review and clarify.)
 
 Datadog recommends against using monitors with `Alert Recovery Threshold` and `Warning Recovery Threshold` as they can also affect your SLO calculations and do not allow you to cleanly differentiate between a SLI's good behavior and bad behavior.
 
-Muting a monitor has no affect on the SLO calculation.
+Muting a monitor has no effect on the SLO calculation.
 
 To exclude time periods from an SLO calculation, use the [SLO status corrections][5] feature.
 
