@@ -40,7 +40,7 @@ Here's a two-minute video walkthrough:
     * [Okta][15]
     * [SafeNet][16]
 
-2. In the Datadog app, navigate to the [Login Methods][25] page. Under **SAML**, click the Configure button.
+2. In the Datadog app, navigate to the [Login Methods][25] page. Under **SAML**, click the **Configure** button.
 
 3. Upload the IdP Metadata from your SAML Identity provider by clicking the **Choose File** button. After choosing the file, click **Upload File**.
 
