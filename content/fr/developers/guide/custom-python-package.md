@@ -1,5 +1,5 @@
 ---
-title: Ajouter un paquet Phyton personnalisé à l'Agent
+title: Ajouter un package Python personnalisé à l'Agent
 kind: documentation
 aliases:
   - /fr/agent/custom_python_package
@@ -20,7 +20,7 @@ further_reading:
 
 L'Agent intègre un environnement Python dans `/opt/datadog-agent/embedded/`. Les binaires courants comme `python` et `pip` se trouvent dans `/opt/datadog-agent/embedded/bin/`.
 
-Les paquets Python peuvent être installés grâce au `pip` intégré :
+Les packages Python peuvent être installés avec le `pip` intégré :
 
 ```shell
 sudo -Hu dd-agent /opt/datadog-agent/embedded/bin/pip install <NOM_PAQUET>
@@ -31,7 +31,7 @@ sudo -Hu dd-agent /opt/datadog-agent/embedded/bin/pip install <NOM_PAQUET>
 
 L'Agent intègre un environnement Python dans `/opt/datadog-agent/embedded/`. Les binaires courants comme `python` et `pip` se trouvent dans `/opt/datadog-agent/embedded/bin/`.
 
-Les paquets Python peuvent être installés grâce au `pip` intégré :
+Les packages Python peuvent être installés avec le `pip` intégré :
 
 ```shell
 sudo /opt/datadog-agent/embedded/bin/pip install <NOM_PAQUET>

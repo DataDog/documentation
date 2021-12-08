@@ -26,11 +26,11 @@ Cette visualisation affiche une seule requête de métrique. Les requêtes suppl
 
 ## Configuration
 
-{{< img src="dashboards/widgets/heat_map/heat_map_setup.png" alt="Configuration carte thermique" style="width:80%;">}}
+{{< img src="dashboards/widgets/heat_map/heat_map_setup.png" alt="Configuration d'une carte thermique" style="width:80%;">}}
 
 ### Configuration
 
-Configurez votre requête de métrique comme d'habitude. Notez que ce type de visualisation est uniquement utile lorsque les métriques sont agrégées en fonction de clés de tag, p. ex. pour chaque `host`.
+Configurez votre requête de métrique comme d'habitude. **Remarque** : ce type de visualisation est uniquement utile lorsque les métriques sont agrégées en fonction de clés de tag, par exemple pour chaque `host`.
 
 Utilisez les réglages `avg`/`max`/`min`/`sum by`/etc. pour visualiser vos données en fonction des tags associés.
 
@@ -48,9 +48,11 @@ Intégrez des événements de systèmes associés pour ajouter plus de contexte 
 
 #### Commandes de l'axe des ordonnées
 
-Les commandes de l'axe des ordonnées sont disponibles via l'interface utilisateur et l'éditeur JSON. Grâce à ces commandes, vous pouvez :
+Les commandes de l'axe des ordonnées sont disponibles dans l'interface ainsi que dans l'éditeur JSON.
 
-* Régler l'axe des ordonnées sur un intervalle donné
+Elles vous permettent d'accomplir les actions suivantes :
+
+* Régler l'axe des ordonnées sur un intervalle donné.
 * Changer automatiquement les limites de l'axe des ordonnées en définissant un pourcentage ou une valeur absolue. Une limite peut être appliquée à l'une des deux extrémités du graphique (inférieure ou supérieure) pour supprimer les singularités.
 * Changer l'échelle de l'axe des ordonnées afin de passer d'une échelle linéaire à une échelle logarithmique, racine carrée ou puissance.
 

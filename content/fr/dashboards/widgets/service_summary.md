@@ -19,7 +19,7 @@ Le résumé de service affiche le graphique d'un [service][1] précis dans votre
 
 ## Configuration
 
-{{< img src="dashboards/widgets/service_summary/service_summary_setup.png" alt="configuration du widget résumé de service" style="width:80%;">}}
+{{< img src="dashboards/widgets/service_summary/service_summary_setup.png" alt="Configuration du widget Résumé de service" style="width:80%;">}}
 
 ### Configuration
 
