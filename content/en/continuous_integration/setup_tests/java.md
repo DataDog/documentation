@@ -27,6 +27,8 @@ Supported test frameworks:
 
 ## Installing the Java tracer
 
+Install and enable the Java tracer v0.91.0 or newer
+
 {{< tabs >}}
 {{% tab "Maven" %}}
 
@@ -39,7 +41,7 @@ Add a new Maven profile in your root `pom.xml` configuring the Datadog Java trac
     <activeByDefault>false</activeByDefault>
   </activation>
   <properties>
-    <dd.java.agent.arg>-javaagent:${settings.localRepository}/com/datadoghq/dd-java-agent/$VERSION/dd-java-agent-$VERSION.jar -Ddd.service=my-java-app -Ddd.prioritization.type=ENSURE_TRACE -Ddd.jmxfetch.enabled=false -Ddd.integrations.enabled=false -Ddd.integration.junit.enabled=true -Ddd.integration.testng.enabled=true</dd.java.agent.arg>
+    <dd.java.agent.arg>-javaagent:${settings.localRepository}/com/datadoghq/dd-java-agent/$VERSION/dd-java-agent-$VERSION.jar -Ddd.service=my-java-app -Ddd.civisibility.enabled=true</dd.java.agent.arg>
   </properties>
   <dependencies>
     <dependency>
@@ -131,7 +133,7 @@ Configure the `test` Gradle task by adding to the `jvmArgs` attribute the `-java
 {{< code-block lang="groovy" filename="build.gradle" >}}
 test {
   if(project.hasProperty("dd-civisibility")) {
-    jvmArgs = ["-javaagent:${configurations.ddTracerAgent.asPath}", "-Ddd.service=my-java-app", "-Ddd.prioritization.type=ENSURE_TRACE", "-Ddd.jmxfetch.enabled=false", "-Ddd.integrations.enabled=false", "-Ddd.integration.junit.enabled=true", "-Ddd.integration.testng.enabled=true"]
+    jvmArgs = ["-javaagent:${configurations.ddTracerAgent.asPath}", "-Ddd.service=my-java-app", "-Ddd.civisibility.enabled=true"]
   }
 }
 {{< /code-block >}}
