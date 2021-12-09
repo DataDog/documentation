@@ -62,25 +62,19 @@ Follow these steps to set up your environment:
 
 3. Edit the **Datadog Authentication** environment to add in your Datadog [API key][2] as the initial value and current value for the `api_key` variable, and add your Datadog [application key][2] as the initial value and current value for the `application_key` variable.
 
-{{< site-region region="eu" >}}
-
-#### Switch to the EU API endpoint
+#### Switch the API endpoint
  
-If you are accessing the Datadog site in the EU region, instead of the default endpoint URL, you need to switch the Postman collection to access from the EU endpoint URL `https://api.datadoghq.eu`.
+If you are accessing a Datadog site other than `https://api.datadoghq.com`, you need to switch the Postman collection to access a different endpoint URL.
 
-Follow these steps to update to the EU instance:
+Follow these steps to update the instance to your selected site ({{< region-param key="dd_site_name" >}}):
 
 1. In the Datadog API Collection folder on the left pane, click the three dot menu, and then select **Edit**.
 
-{{< img src="getting_started/postman/view-more-actions.png" alt="View more actions">}}
+    {{< img src="getting_started/postman/view-more-actions.png" alt="View more actions">}}
 
-2. On the **Variables** tab, deselect the `site` variable with the value `datadoghq.com` and select the `site` with the variable `datadoghq.eu`.
-
-{{< img src="getting_started/postman/variables.png" alt="Update the site variable">}}
+2. On the **Variables** tab, deselect the `site` variable with the value `datadoghq.com` and select the `site` with the variable {{< region-param key="dd_site" code="true" >}}.
 
 3. Click **Update**.
-
-{{< /site-region >}}
 
 ## Working with the collection
 

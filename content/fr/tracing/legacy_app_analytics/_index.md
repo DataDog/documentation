@@ -102,7 +102,7 @@ La fonction App Analytics est disponible à partir de la version 0.17.0 du clie
 {{< /programming-lang >}}
 {{< programming-lang lang="cpp" >}}
 
-La fonction App Analytics est disponible à partir de la version 1.0.0 du client de tracing C++. Elle peut être activée de façon globale pour toutes les spans de premier niveau en définissant la variable d'environnement `DD_TRACE_ANALYTICS_ENABLED` sur `true`. Notez que ce paramètre peut également être défini directement dans le code :
+La fonction App Analytics est disponible à partir de la version 1.0.0 du client de tracing C++. Elle peut être activée de façon globale pour toutes les spans d'entrée de service en définissant la variable d'environnement `DD_TRACE_ANALYTICS_ENABLED` sur `true`. **Remarque** : ce paramètre peut également être défini directement dans le code.
 
 ```csharp
 datadog::opentracing::TracerOptions tracer_options;
@@ -277,8 +277,8 @@ Par défaut, le tracing de base de données n'est pas pris en charge par la fonc
 
 Par défaut, le tracing de base de données n'est pas pris en charge par la fonction App Analytics. Vous devez activer la collecte manuellement pour chaque intégration. Par exemple :
 
-* Configuration du traceur : `ddtrace.config.postgres.analytics_enabled = True`
-* Variable d'environnement : `DD_POSTGRES_ANALYTICS_ENABLED=true`
+* Configuration du traceur : `ddtrace.config.psycopg.analytics_enabled = True`
+* Variable d'environnement : `DD_PSYCOPG_ANALYTICS_ENABLED=true`
 
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}

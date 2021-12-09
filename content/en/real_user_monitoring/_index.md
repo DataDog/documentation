@@ -21,6 +21,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-geomaps/"
   tag: "Blog"
   text: "Use geomaps to visualize your app data by location"
+- link: "https://www.datadoghq.com/blog/datadog-rum-react-components/#tune-up-your-react-data-collection"
+  tag: "Blog"
+  text: "Get better RUM data with our custom React components"
 - link: "/real_user_monitoring/browser/data_collected/"
   tag: "Documentation"
   text: "RUM Browser Data Collected"
@@ -63,7 +66,7 @@ Analyze information about your user journeys, performance, network requests, and
 
 View user sessions in segments, such as checking when latency impacts your premium customers with [customizable analytics widgets][2]. Explore, save views, and create monitors on your customized searches.
 
-{{< img src="real_user_monitoring/explorer/analytics/rum_analytics.gif" alt="RUM Analytics" >}}
+{{< img src="real_user_monitoring/explorer/analytics/rum_analytics.mp4" alt="RUM Analytics" video=true >}}
 
 ### Integration with logs, APM, and profiler
 
@@ -75,7 +78,7 @@ View your [backend traces, logs, and infrastructure metrics][3] down to the exac
 
 Get automated alerts on outliers and groups of errors, timeouts, and crashes to significantly reduce your MTTR with [Error Tracking][4].
 
-{{< img src="real_user_monitoring/error_tracking/errors_rum.gif" alt="RUM error tracking" >}}
+{{< img src="real_user_monitoring/error_tracking/errors_rum.mp4" alt="RUM error tracking" video=true >}}
 
 ## Further Reading
 

@@ -684,4 +684,3 @@ Java APM has minimal impact on the overhead of an application:
 [17]: /tracing/compatibility_requirements/java#disabling-integrations
 [18]: /integrations/java/?tab=host#metric-collection
 [19]: https://github.com/openzipkin/b3-propagation
-[20]: /help/

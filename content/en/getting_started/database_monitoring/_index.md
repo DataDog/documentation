@@ -14,7 +14,7 @@ further_reading:
 ---
 ## Overview
 
-Datadog Database Monitoring allows you to easily understand the health and performance of your databases, and quickly determine the root cause of any problems.
+Datadog Database Monitoring helps you to better understand the health and performance of your databases, and quickly determine the root cause of any problems.
 
 In one place, you can view:
 

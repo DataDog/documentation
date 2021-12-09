@@ -68,7 +68,7 @@ If there are specific tags, facets, or groups of traces that you want to investi
 
 ### Create your own retention filter
 
-{{< img src="tracing/trace_indexing_and_ingestion/IndexFilter2.gif" style="width:100%;" alt="Span Indexing" >}}
+{{< img src="tracing/trace_indexing_and_ingestion/IndexFilter2.mp4" style="width:100%;" alt="Span Indexing" video=true >}}
 
 To customize what spans are indexed and retained for 15 days, you can create, modify, and disable additional filters based on tags, and set a percentage of spans matching each filter to be retained. Any span that is retained will have its corresponding trace saved as well, and when it is viewed, the complete trace will be available.  In order to be searched by tag in [Search and Analytics][5], however, the span that directly contains the searched-upon tag must have been indexed by a retention filter.
 
@@ -131,7 +131,7 @@ In addition to the Data Ingestion column for each retention filter, there are al
 
 ### Change the default ingestion rate
 
-{{< img src="tracing/trace_indexing_and_ingestion/ChangeIngestRate3.gif" style="width:100%;" alt="Change the Data Ingestion Rate" >}}
+{{< img src="tracing/trace_indexing_and_ingestion/ChangeIngestRate3.mp4" style="width:100%;" alt="Change the Data Ingestion Rate" video=true >}}
 
 To specify that a specific percentage of a service's traffic should be sent, add a generated code snippet to your tracer configuration for that service.
 

@@ -10,6 +10,10 @@ further_reading:
       text: "Troubleshooting CI"
 ---
 
+{{< site-region region="us5,gov" >}}
+<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
+{{< /site-region >}}
+
 <div class="alert alert-info">Python test instrumentation is in beta. There are no billing implications for instrumenting Python tests during this period.
 </div>
 

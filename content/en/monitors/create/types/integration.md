@@ -94,7 +94,7 @@ Each check tagged with a distinct combination of tags is considered to be a dist
 
 {{< img src="monitors/monitor_types/process_check/cluster_check_thresholds.png" alt="Cluster Check Thresholds" style="width:90%;">}}
 
-For example, a cluster check monitor grouped by environment can alert if more that 70% of the checks on any of the environments submit a `CRITICAL` status, and warn if more that 70% of the checks on any of the environments submit a `WARN` status.
+For example, a cluster check monitor grouped by environment can alert if more that 70% of the checks on any of the environments submit a `CRITICAL` status, and warn if more that 50% of the checks on any of the environments submit a `WARN` status.
 {{% /tab %}}
 {{< /tabs >}}
 

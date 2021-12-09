@@ -5,7 +5,7 @@ further_reading:
   - link: /real_user_monitoring/guide/send-rum-custom-actions/
     tag: Guide
     text: Envoyer des actions RUM personnalisées à partir du code
-  - link: 'https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/'
+  - link: https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/
     tag: Blog
     text: Real User Monitoring
   - link: /real_user_monitoring/explorer/
@@ -38,7 +38,7 @@ Le SDK Browser surveille automatiquement les clics. Une action de clic est cré�
 
 ## Métriques de durée des actions
 
-Pour en savoir plus sur les attributs par défaut de tous les types d'événements RUM, consultez la section relative à la [collecte de données RUM][3]. Pour obtenir des instructions afin de configurer l'échantillonnage ou le contexte global, consultez la section [Configuration avancée du RUM][4].
+Pour en savoir plus sur les attributs par défaut de tous les types d'événements RUM, consultez la section relative à la [collecte de données RUM][2]. Pour obtenir des instructions afin de configurer l'échantillonnage ou le contexte global, consultez la section [Modifier des données RUM et leur contexte][1].
 
 | Métrique    | Type   | Rôle              |
 |--------------|--------|--------------------------|
@@ -73,6 +73,24 @@ La bibliothèque RUM utilise diverses stratégies pour nommer les actions de cli
   Saisissez une adresse e-mail valide
 </div>
 ```
+
+Depuis la [version 2.16.0][3], grâce au paramètre d'initialisation `actionNameAttribute`, vous pouvez indiquer votre propre attribut pour nommer l'action. Exemple :
+
+```html
+<script>
+  DD_RUM.init({
+    ...
+    trackInteractions: true,
+    actionNameAttribute: 'data-custom-name',
+  ...
+  })
+</script>
+
+<a class="btn btn-default" href="#" role="button" data-custom-name="Login button">Essayez !</a>
+```
+
+**Remarque** : lorsqu'un élément comprend les deux attributs, `data-dd-action-name` est prioritaire.
+
 ## Actions personnalisées
 
 Les actions personnalisées correspondent à des actions utilisateur déclarées et envoyées manuellement, via l'API `addAction`. Elles servent à envoyer des informations sur un événement qui s'est produit lors d'un parcours utilisateur. Dans l'exemple suivant, le SDK RUM recueille les données du panier d'un utilisateur lorsqu'il appuie sur le bouton de paiement. Cette action récupère le nombre d'articles dans le panier, la liste des articles et le montant total du panier.
@@ -141,6 +159,6 @@ window.DD_RUM &&
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /fr/real_user_monitoring/browser/advanced_configuration/?tab=npm#scrub-sensitive-data-from-your-rum-data
-[3]: /fr/real_user_monitoring/browser/data_collected/#default-attributes
-[4]: /fr/real_user_monitoring/browser/advanced_configuration/
+[1]: /fr/real_user_monitoring/browser/modifying_data_and_context/
+[2]: /fr/real_user_monitoring/browser/data_collected/#default-attributes
+[3]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v2160

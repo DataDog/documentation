@@ -10,6 +10,10 @@ further_reading:
       text: "Troubleshooting CI"
 ---
 
+{{< site-region region="us5,gov" >}}
+<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
+{{< /site-region >}}
+
 <div class="alert alert-info">Ruby test instrumentation is in beta. There are no billing implications for instrumenting Ruby tests during this period.
 </div>
 
@@ -35,7 +39,7 @@ To install the Ruby tracer:
 
     {{< code-block lang="ruby" filename="Gemfile" >}}
 source 'https://rubygems.org'
-gem 'ddtrace', ">=0.51.0"
+gem 'ddtrace', ">=0.53.0"
 {{< /code-block >}}
 
 2. Install the gem by running `bundle install`

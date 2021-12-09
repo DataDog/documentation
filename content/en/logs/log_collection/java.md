@@ -295,7 +295,7 @@ To stream logs directly to Datadog:
 
 ### Bridge from Java logging libraries to Logback
 
-Most common logging libraries can be bridged to Logback.
+If you are not already using Logback, most common logging libraries can be bridged to Logback.
 
 {{< tabs >}}
 {{% tab "Log4j" %}}
@@ -312,12 +312,12 @@ Use the SLF4J module [log4j-over-slf4j][1] with Logback to send logs to another 
     <dependency>
       <groupId>ch.qos.logback</groupId>
       <artifactId>logback-classic</artifactId>
-      <version>1.1.3</version>
+      <version>1.2.6</version>
     </dependency>
     <dependency>
       <groupId>net.logstash.logback</groupId>
       <artifactId>logstash-logback-encoder</artifactId>
-      <version>4.5.1</version>
+      <version>6.6</version>
     </dependency>
     ```
 2. Configure Logback.
@@ -341,15 +341,16 @@ Log4j 2 allows logging to a remote host, but it does not offer the ability to pr
         <version>2.11.0</version>
     </dependency>
     <dependency>
-        <groupId>net.logstash.logback</groupId>
-        <artifactId>logstash-logback-encoder</artifactId>
-        <version>4.5.1</version>
-    </dependency>
-    <dependency>
         <groupId>ch.qos.logback</groupId>
         <artifactId>logback-classic</artifactId>
-        <version>1.1.3</version>
+        <version>1.2.6</version>
     </dependency>
+    <dependency>
+        <groupId>net.logstash.logback</groupId>
+        <artifactId>logstash-logback-encoder</artifactId>
+        <version>6.6</version>
+    </dependency>
+
     ```
 2. Configure Logback.
 
@@ -366,11 +367,11 @@ Log4j 2 allows logging to a remote host, but it does not offer the ability to pr
 
 ### Configure Logback
 
-Use the [logstash-logback-encoder][4] logging library along with Logback to stream logs directly. 
+Use the [logstash-logback-encoder][4] logging library along with Logback to stream logs directly to Datadog.
 
-1. Configure a TCP appender in your `logback.xml` file, replacing `<API_KEY>` with your Datadog API key value:
+1. Configure a TCP appender in your `logback.xml` file. With this configuration, your api key is retrieved from the `DD_API_KEY` environment variable. Alternatively, you can insert your api key directly into the configuration file:
 
-    {{< site-region region="us" >}}
+    {{< site-region region="us,us3,us5" >}}
 
   ```xml
   <configuration>
@@ -379,16 +380,16 @@ Use the [logstash-logback-encoder][4] logging library along with Logback to stre
       <encoder class="net.logstash.logback.encoder.LogstashEncoder" />
     </appender>
     <appender name="JSON_TCP" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
-      <remoteHost>intake.logs.datadoghq.com</remoteHost>
-      <port>10514</port>
+      <destination>intake.logs.datadoghq.com:10516</destination>
       <keepAliveDuration>20 seconds</keepAliveDuration>
       <encoder class="net.logstash.logback.encoder.LogstashEncoder">
           <prefix class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
               <layout class="ch.qos.logback.classic.PatternLayout">
-                  <pattern><API_KEY> %mdc{keyThatDoesNotExist}</pattern>
+                  <pattern>${DD_API_KEY} %mdc{keyThatDoesNotExist}</pattern>
               </layout>
             </prefix>
       </encoder>
+      <ssl />
     </appender>
 
     <root level="DEBUG">
@@ -409,16 +410,16 @@ Use the [logstash-logback-encoder][4] logging library along with Logback to stre
       <encoder class="net.logstash.logback.encoder.LogstashEncoder" />
     </appender>
     <appender name="JSON_TCP" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
-      <remoteHost>tcp-intake.logs.datadoghq.eu</remoteHost>
-      <port>1883</port>
+      <destination>tcp-intake.logs.datadoghq.eu:443</destination>
       <keepAliveDuration>20 seconds</keepAliveDuration>
       <encoder class="net.logstash.logback.encoder.LogstashEncoder">
           <prefix class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
               <layout class="ch.qos.logback.classic.PatternLayout">
-                  <pattern><API_KEY> %mdc{keyThatDoesNotExist}</pattern>
+                  <pattern>${DD_API_KEY} %mdc{keyThatDoesNotExist}</pattern>
               </layout>
             </prefix>
       </encoder>
+      <ssl />
     </appender>
 
     <root level="DEBUG">
@@ -430,9 +431,6 @@ Use the [logstash-logback-encoder][4] logging library along with Logback to stre
 
     {{< /site-region >}}
 
-    {{< site-region region="us3,us5" >}}
-  Not supported.
-    {{< /site-region >}}
     {{< site-region region="gov" >}}
   Not supported.
     {{< /site-region >}}
@@ -445,12 +443,12 @@ Use the [logstash-logback-encoder][4] logging library along with Logback to stre
     <dependency>
       <groupId>ch.qos.logback</groupId>
       <artifactId>logback-classic</artifactId>
-      <version>1.1.3</version>
+      <version>1.2.6</version>
     </dependency>
     <dependency>
       <groupId>net.logstash.logback</groupId>
       <artifactId>logstash-logback-encoder</artifactId>
-      <version>4.5.1</version>
+      <version>6.6</version>
     </dependency>
     ```
 
@@ -521,5 +519,5 @@ To generate this JSON:
 [2]: /logs/log_configuration/parsing
 [3]: /tracing/connect_logs_and_traces/java/
 [4]: https://github.com/logstash/logstash-logback-encoder
-[5]: https://github.com/logstash/logstash-logback-encoder#prefixsuffix
+[5]: https://github.com/logstash/logstash-logback-encoder#prefixsuffixseparator
 [6]: /logs/log_configuration/parsing/#key-value-or-logfmt

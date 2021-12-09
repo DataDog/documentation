@@ -25,3 +25,14 @@
   font-style: normal;
   font-stretch: normal;
 }
+
+@font-face {
+    font-family: 'Glyphter';
+    src: url('../fonts/Glyphter.woff') format('woff'),
+         url('../fonts/Glyphter.eot'),
+         url('../fonts/Glyphter.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/Glyphter.ttf') format('truetype'),
+         url('../fonts/Glyphter.svg#Glyphter') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}

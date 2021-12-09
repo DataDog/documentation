@@ -39,7 +39,7 @@ Si vous installez l'Agent Datadog dans un environnement de domaine, consultez le
 4. Une fois l'installation terminée, le programme vous propose de lancer Datadog Agent Manager.
 
 [1]: https://s3.amazonaws.com/ddagent-windows-stable/datadog-agent-7-latest.amd64.msi
-[2]: https://app.datadoghq.com/account/settings#api
+[2]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{% tab "Ligne de commande" %}}
 
@@ -69,32 +69,34 @@ Start-Process -Wait msiexec -ArgumentList '/qn /i datadog-agent-7-latest.amd64.m
 
 Chaque élément de configuration est ajouté en tant que propriété dans la ligne de commande. Les options de configuration en ligne de commande suivantes sont disponibles à l'installation de l'Agent sur Windows :
 
-| Variable                   | Type   | Description                                                                                                                                                                                                                         |
-|----------------------------|--------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `APIKEY`                   | Chaîne | Ajoute la clé d'API Datadog au fichier de configuration.                                                                                                                                                                                 |
-| `SITE`                     | Chaîne | Définit le site d'admission Datadog, par exemple `SITE=`{{< region-param key="dd_site" code="true" >}}.                                                                                                                                     |
-| `TAGS`                     | Chaîne | Liste de tags séparés par des virgules à attribuer dans le fichier de configuration. Exemple : `TAGS="key_1:val_1,key_2:val_2"`.                                                                                                                         |
-| `HOSTNAME`                 | Chaîne | Configure le hostname transmis par l'Agent à Datadog (remplace le hostname calculé lors de l'exécution).                                                                                                                            |
-| `LOGS_ENABLED`             | Chaîne | Active (`"true"`) ou désactive (`"false"`) la fonction de collecte de logs dans le fichier de configuration. Les logs sont désactivés par défaut.                                                                                                        |
-| `APM_ENABLED`              | Chaîne | Active (`"true"`) ou désactive (`"false"`) l'Agent APM dans le fichier de configuration. L'APM est désactivé par défaut.                                                                                                                        |
-| `PROCESS_ENABLED`          | Chaîne | Active (`"true"`) ou désactive (`"false"`) l'Agent de processus dans le fichier de configuration. L'Agent de processus est désactivé par défaut.                                                                                                     |
-| `HOSTNAME_FQDN_ENABLED`    | Chaîne | Active (`"true"`) ou désactive (`"false"`) l'utilisation de FQDN pour le hostname de l'Agent. Cela revient à définir `hostname_fqdn` dans le fichier de configuration de l'Agent. L'utilisation de FQDN pour le hostname est désactivée par défaut. _(v6.20.0+)_ |
-| `CMD_PORT`                 | Nombre | Un numéro de port valide compris entre 0 et 65534. L'Agent Datadog expose une API de commande sur le port 5001. Si ce port est déjà utilisé par un autre programme, la valeur par défaut peut être remplacée ici.                                               |
-| `PROXY_HOST`               | Chaîne | En cas d'utilisation d'un proxy, définit le host de votre proxy. [En savoir plus sur l'utilisation d'un proxy avec l'Agent Datadog][3].                                                                                                                                 |
-| `PROXY_PORT`               | Nombre | En cas d'utilisation d'un proxy, définit le port de votre proxy. [En savoir plus sur l'utilisation d'un proxy avec l'Agent Datadog][3].                                                                                                                                 |
-| `PROXY_USER`               | Chaîne | En cas d'utilisation d'un proxy, définit l'utilisateur de votre proxy. [En savoir plus sur l'utilisation d'un proxy avec l'Agent Datadog][3].                                                                                                                                 |
-| `PROXY_PASSWORD`           | Chaîne | En cas d'utilisation d'un proxy, définit le mot de passe de votre proxy. Pour l'Agent de processus ou de conteneur, cette variable est requise pour la transmission d'un mot de passe d'authentification. Elle ne peut pas être renommée. [En savoir plus sur l'utilisation d'un proxy avec l'Agent Datadog][3]. |
-| `DDAGENTUSER_NAME`         | Chaîne | Remplace le nom d'utilisateur `ddagentuser` par défaut lors de l'installation de l'Agent _(version 6.11.0+)_. [En savoir plus sur l'utilisateur de l'Agent Windows Datadog][2].                                                                                      |
-| `DDAGENTUSER_PASSWORD`     | Chaîne | Remplace le mot de passe chiffré généré pour l'utilisateur `ddagentuser` lors de l'installation de l'Agent _(version 6.11.0+)_. Doit être spécifié pour les installations sur les serveurs DNS. [En savoir plus sur l'utilisateur de l'Agent Windows Datadog][2].  |
-| `APPLICATIONDATADIRECTORY` | Chemin   | Remplace le répertoire à utiliser pour l'arborescence du fichier de configuration. Peut uniquement être spécifié à l'installation initiale, pas lors des mises à jour. Valeur par défaut : `C:\ProgramData\Datadog`. _(version 6.11.0+)_                                           |
-| `PROJECTLOCATION`          | Chemin   | Remplace le répertoire à utiliser pour l'arborescence du binaire. Peut uniquement être spécifié à l'installation initiale, pas lors des mises à jour. Valeur par défaut : `%PROGRAMFILES%\Datadog\Datadog Agent`. _(v6.11.0+)_                                    |
+| Variable                                    | Type    | Description                                                                                                                                                                                                                         |
+|----------------------------                 |---------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `APIKEY`                                    | Chaîne  | Ajoute la clé d'API Datadog au fichier de configuration.                                                                                                                                                                                 |
+| `SITE`                                      | Chaîne  | Définit le site d'admission Datadog, par exemple `SITE=`{{< region-param key="dd_site" code="true" >}}.                                                                                                                                     |
+| `TAGS`                                      | Chaîne  | Liste de tags séparés par des virgules à attribuer dans le fichier de configuration. Exemple : `TAGS="key_1:val_1,key_2:val_2"`.                                                                                                                         |
+| `HOSTNAME`                                  | Chaîne  | Configure le hostname transmis par l'Agent à Datadog (remplace le hostname calculé lors de l'exécution).                                                                                                                            |
+| `LOGS_ENABLED`                              | Chaîne  | Active (`"true"`) ou désactive (`"false"`) la fonction de collecte de logs dans le fichier de configuration. Les logs sont désactivés par défaut.                                                                                                        |
+| `APM_ENABLED`                               | Chaîne  | Active (`"true"`) ou désactive (`"false"`) l'Agent APM dans le fichier de configuration. L'APM est désactivé par défaut.                                                                                                                        |
+| `PROCESS_ENABLED`                           | Chaîne  | Active (`"true"`) ou désactive (`"false"`) l'Agent de processus dans le fichier de configuration. L'Agent de processus est désactivé par défaut.                                                                                                     |
+| `HOSTNAME_FQDN_ENABLED`                     | Chaîne  | Active (`"true"`) ou désactive (`"false"`) l'utilisation de FQDN pour le hostname de l'Agent. Cela revient à définir `hostname_fqdn` dans le fichier de configuration de l'Agent. L'utilisation de FQDN pour le hostname est désactivée par défaut. _(v6.20.0+)_ |
+| `CMD_PORT`                                  | Nombre  | Un numéro de port valide compris entre 0 et 65534. L'Agent Datadog expose une API de commande sur le port 5001. Si ce port est déjà utilisé par un autre programme, la valeur par défaut peut être remplacée ici.                                               |
+| `PROXY_HOST`                                | Chaîne  | En cas d'utilisation d'un proxy, définit le host de votre proxy. [En savoir plus sur l'utilisation d'un proxy avec l'Agent Datadog][2].                                                                                                                                 |
+| `PROXY_PORT`                                | Nombre  | En cas d'utilisation d'un proxy, définit le port de votre proxy. [En savoir plus sur l'utilisation d'un proxy avec l'Agent Datadog][2].                                                                                                                                 |
+| `PROXY_USER`                                | Chaîne  | En cas d'utilisation d'un proxy, définit l'utilisateur de votre proxy. [En savoir plus sur l'utilisation d'un proxy avec l'Agent Datadog][2].                                                                                                                                 |
+| `PROXY_PASSWORD`                            | Chaîne  | En cas d'utilisation d'un proxy, définit le mot de passe de votre proxy. Pour l'Agent de processus/conteneur, cette variable est requise pour la transmission d'un mot de passe d'authentification. Elle ne peut pas être renommée. [En savoir plus sur l'utilisation d'un proxy avec l'Agent Datadog][2]. |
+| `DDAGENTUSER_NAME`                          | Chaîne  | Remplace le nom d'utilisateur `ddagentuser` par défaut lors de l'installation de l'Agent _(version 6.11.0+)_. [En savoir plus sur l'utilisateur de l'Agent Windows Datadog][3].                                                                                      |
+| `DDAGENTUSER_PASSWORD`                      | Chaîne  | Remplace le mot de passe chiffré généré pour l'utilisateur `ddagentuser` lors de l'installation de l'Agent _(version 6.11.0+)_. Doit être spécifié pour les installations sur les serveurs DNS. [En savoir plus sur l'utilisateur de l'Agent Windows Datadog][3].  |
+| `APPLICATIONDATADIRECTORY`                  | Chemin    | Remplace le répertoire à utiliser pour l'arborescence du fichier de configuration. Peut uniquement être spécifié à l'installation initiale, pas lors des mises à jour. Valeur par défaut : `C:\ProgramData\Datadog`. _(version 6.11.0+)_                                           |
+| `PROJECTLOCATION`                           | Chemin    | Remplace le répertoire à utiliser pour l'arborescence du binaire. Peut uniquement être spécifié à l'installation initiale, pas lors des mises à jour. Valeur par défaut : `%PROGRAMFILES%\Datadog\Datadog Agent`. _(v6.11.0+)_                                    |
+| `ADDLOCAL`                                  | Chaîne  | Active le composant d'Agent supplémentaire. La valeur `"MainApplication,NPM"` entraîne l'installation du composant de pilote pour la solution [Network Performance Monitoring][4].                                                                          |
+| `EC2_USE_WINDOWS_PREFIX_DETECTION`          | Booléen | Utilise l'ID de l'instance EC2 pour les hosts Windows sur EC2 _(v7.28.0+)_.                                                                                                                                                                      |
 
 **Remarque** : si un fichier `datadog.yaml` valide est trouvé et qu'une clé d'API y est configurée, ce fichier est prioritaire sur toutes les options de ligne de commande spécifiées.
 
 [1]: https://s3.amazonaws.com/ddagent-windows-stable/datadog-agent-7-latest.amd64.msi
-[2]: /fr/agent/faq/windows-agent-ddagent-user/
-[3]: /fr/agent/proxy/
-
+[2]: /fr/agent/proxy/
+[3]: /fr/agent/faq/windows-agent-ddagent-user/
+[4]: /fr/network_monitoring/performance
 {{% /tab %}}
 {{% tab "Mise à niveau" %}}
 
@@ -126,7 +128,7 @@ L'exécution de l'Agent est contrôlée par le gestionnaire de contrôle des ser
     - Versions de l'Agent <= 6.11 : `"C:\Program Files\Datadog\Datadog Agent\embedded\agent.exe"`
     - Versions de l'Agent >= 6.12 : `"C:\Program Files\Datadog\Datadog Agent\bin\agent.exe"`
 * L'interface de configuration est une application basée sur un navigateur (pour Windows 64 bits uniquement).
-* Les commandes peuvent être exécutées depuis une ligne de commande avec **élévation des privilèges (exécutée en tant qu'administrateur)** (Powershell ou Invite de commandes) à l'aide de la syntaxe `<CHEMIN_VERS_AGENT.EXE> <COMMANDE>`. 
+* Les commandes peuvent être exécutées depuis une ligne de commande avec **élévation des privilèges (exécutée en tant qu'administrateur)** (Powershell ou Invite de commandes) à l'aide de la syntaxe `<CHEMIN_VERS_AGENT.EXE> <COMMANDE>`.
 * Vous trouverez ci-dessous la liste des options disponibles depuis la ligne de commande :
 
 | Commande         | Description                                                                      |
@@ -175,7 +177,7 @@ Utilisez Datadog Agent Manager (disponible depuis le menu Démarrer).
 
 Utilisez les commandes `start`, `stop` et `restart` dans Datadog Agent Manager :
 
-{{< img src="agent/basic_agent_usage/windows/manager-snapshot.png" alt="Snapshot de Datadog Agent Manager"  style="width:75%;">}}
+{{< img src="agent/basic_agent_usage/windows/manager-snapshot.png" alt="Snapshot de Datadog Agent Manager" style="width:75%;">}}
 
 Vous pouvez également utiliser le Powershell Windows, si celui-ci est disponible :
 `[start|stop|restart]-service datadogagent`
@@ -199,13 +201,11 @@ Le fichier principal de l'Agent se situe à l'emplacement suivant :
 {{% /tab %}}
 {{< /tabs >}}
 
-Les fichiers de configuration pour les [intégrations][1] se situent à l'emplacement suivant :
+Les fichiers de configuration pour les intégrations se situent à l'emplacement suivant :
 `C:\ProgramData\Datadog\conf.d\` OU
 `C:\Documents and Settings\All Users\Application Data\Datadog\conf.d\`
 
 **Remarque** : `ProgramData` est un dossier caché.
-
-[1]: /fr/integrations/
 
 ## Dépannage
 
@@ -245,7 +245,7 @@ Pour vous assurer que l'Agent est bien lancé, vérifiez si l'état du service i
 
 Pour obtenir plus d'informations sur l'état de l'Agent pour les versions 5.2+, accédez à *Datadog Agent Manager -> Settings -> Agent Status* :
 
-{{< img src="agent/faq/windows_status.png" alt="État Windows"  style="width:50%;" >}}
+{{< img src="agent/faq/windows_status.png" alt="Statut Windows" style="width:50%;" >}}
 
 Pour connaître le statut des versions 3.9.1 à 5.1 de l'Agent, accédez à `http://localhost:17125/status`.
 
@@ -385,13 +385,13 @@ Exemple :
 
 ###  Surveiller un service Windows
 
-Sur votre host cible, lancez Datadog Agent Manager et sélectionnez l'intégration « Windows Service » dans la liste. Un exemple est déjà inclus pour cette intégration ; toutefois, cet exemple utilise DHCP.
+Sur votre host cible, lancez Datadog Agent Manager et sélectionnez l'intégration « Windows Service » dans la liste. Un exemple prêt à l'emploi est inclus ; il repose toutefois sur DHCP.
 
 Pour obtenir le nom du service, ouvrez `services.msc` et repérez votre service cible. En utilisant DHCP comme cible, vous pouvez voir le nom du service en haut de la fenêtre des propriétés du service :
 
 {{< img src="agent/faq/DHCP.png" alt="DHCP" style="width:75%;">}}
 
-Lorsque vous ajoutez vos propres services, assurez-vous de suivre précisément le formatage affiché. L'intégration échouera si le formatage est incorrect.
+Lors de l'ajout de vos propres services, veillez à suivre précisément le format indiqué. En cas d'erreur de format, l'intégration ne fonctionnera pas. **Remarque** : les caractères spéciaux doivent être échappés dans le nom des services. Par exemple, pour indiquer le nom `MSSQL$BILLING`, utilisez `MSSQL\$BILLING`.
 
 {{< img src="agent/faq/windows_DHCP_service.png" alt="Service DHCP Windows" style="width:75%;">}}
 
@@ -421,6 +421,7 @@ Une fois la configuration effectuée, [redémarrez l'Agent][11].
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 
 [1]: https://app.datadoghq.com/account/settings#agent/windows
 [2]: /fr/agent/basic_agent_usage/#supported-os-versions

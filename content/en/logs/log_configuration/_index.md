@@ -17,7 +17,7 @@ further_reading:
 
 Datadog Logging without Limits* decouples log ingestion and indexing. Choose which logs to index and retain, or archive, and manage settings and controls at a top-level from the [log configuration section][1].
 
-{{< img src="logs/log_configuration_overview.gif" alt="The log configuration section in the Datadog app">}}
+{{< img src="logs/log_configuration_overview.mp4" alt="The log configuration section in the Datadog app" video=true >}}
 
 ## Configuration options
 

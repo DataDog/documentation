@@ -20,7 +20,9 @@ further_reading:
 
 {{< img src="logs/processing/processors/processing_overview.png" alt="Processors" >}}
 
-A processor executes within a [Pipeline][1] to complete a data-structuring action, such as [Remapping an attribute](#remapper), [Grok parsing](#grok-parser), etc., on a log.
+A processor executes within a [Pipeline][1] to complete a data-structuring action and generate attributes to enrich your logs.
+
+In [log configuration settings][1], configure processors such as the [Grok parser](#grok-parser) or [date remapper](#remapper), to help extract, create, and remap attributes to enrich your logs and enhance faceted search.
 
 **Notes**:
 
@@ -30,7 +32,7 @@ A processor executes within a [Pipeline][1] to complete a data-structuring actio
 
 ## Grok parser
 
-Create custom grok rules to parse the full message or a specific attribute of your raw event. For more information, see the [parsing section][2]. As a best practice, it is recommended to use at most 10 parsing rules within a grok Processor.
+Create custom grok rules to parse the full message or a specific attribute of your raw event. For more information, see the [parsing section][2]. As a best practice, it is recommended to use at most 10 parsing rules within a grok processor.
 
 {{< tabs >}}
 {{% tab "UI" %}}
@@ -39,9 +41,11 @@ Define the Grok processor in the [Datadog Log configuration page][1]:
 
 {{< img src="logs/processing/processors/parser.png" alt="Parser" style="width:80%;" >}}
 
-Up to five samples can be saved with the processor, and each sample can be up to 5000 characters in length. All samples show a status (`match` or `no match`), which highlights if one of the parsing rules of the grok parser matches the sample. Select a sample by clicking on it to trigger its evaluation against the parsing rule and display the result at the bottom of the screen.
-
 Click **Parse my logs** to kickstart a set of three parsing rules for the logs flowing through the underlying pipeline. Fine tune attribute naming from there, and add new rules for other type of logs if needed. This feature requires that the corresponding logs are being indexed, and actually flowing in—you can temporarily deactivate or sample down exclusion filters to make this work for you.
+
+Select a sample by clicking on it to trigger its evaluation against the parsing rule and display the result at the bottom of the screen.
+
+Up to five samples can be saved with the processor, and each sample can be up to 5000 characters in length. All samples show a status (`match` or `no match`), which highlights if one of the parsing rules of the grok parser matches the sample.
 
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
@@ -86,13 +90,13 @@ As Datadog receives logs, it timestamps them using the value(s) from any of thes
 * `eventTime`
 * `published_date`
 
-If your logs put their dates in an attribute not in this list, use the log date Remapper Processor to define their date attribute as the official log timestamp:
+If your logs have dates in an attribute that are not in this list, use the log date remapper processor to define their date attribute as the official log timestamp:
 
 <div class="alert alert-info">
 The recognized date formats are: <a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO8601</a>, <a href="https://en.wikipedia.org/wiki/Unix_time">UNIX (the milliseconds EPOCH format)</a>, and <a href="https://www.ietf.org/rfc/rfc3164.txt">RFC3164</a>.
 </div>
 
-If your logs don't have a timestamp that conforms to the formats listed above, use the grok processor to extract the epoch time from the timestamp to a new attribute. The date remapper uses the newly defined attribute. 
+If your logs don't have a timestamp that conforms to the formats listed above, use the grok processor to extract the epoch time from the timestamp to a new attribute. The date remapper uses the newly defined attribute.
 
 To see how a custom date and time format can be parsed in Datadog, see [Parsing dates][3].
 
@@ -100,20 +104,22 @@ To see how a custom date and time format can be parsed in Datadog, see [Parsing 
 
 * **Log events can be submitted up to 18h in the past and 2h in the future**.
 * If your logs don't contain any of the default attributes and you haven't defined your own date attribute, Datadog timestamps the logs with the date it received them.
-* If multiple log date remapper processors are applied to a given log, only the first one (according to the pipelines order) is taken into account.
+* If multiple log date remapper processors are applied to a given log, only the first one (according to the pipeline's order) is taken into account.
 
 {{< tabs >}}
 {{% tab "UI" %}}
 
-Define the Log Date remapper processor in the [Datadog Log configuration page][1]:
+Define the log date remapper processor in the [Datadog Log configuration page][1]:
 
-{{< img src="logs/processing/processors/log_date_remapper.png" alt="Log date Remapper"  style="width:80%;" >}}
+{{< img src="logs/processing/processors/log_date_remapper.png" alt="Define a date attribute"  style="width:80%;" >}}
+
+{{< img src="logs/processing/processors/log_date_remapper_example.png" alt="Date and time in the Log Explorer side panel"  style="width:80%;" >}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
 {{% tab "API" %}}
 
-Use the [Datadog Log Pipeline API endpoint][1] with the following Log Date Remapper JSON payload:
+Use the [Datadog Log Pipeline API endpoint][1] with the following log date remapper JSON payload:
 
 ```json
 {
@@ -137,13 +143,9 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Log Date Remap
 
 ## Log status remapper
 
-Use this Processor if you want to assign some attributes as the official status. For example, it can transform this log:
+Use the status remapper processor to assign attributes as an official status to your logs. For example, add a log severity level to your logs with the status remapper.
 
-{{< img src="logs/processing/processors/log_pre_severity.png" alt=" Log pre severity "  style="width:40%;">}}
-
-Into this log:
-
-{{< img src="logs/processing/processors/log_post_severity_bis.png" alt=" Log post severity bis"  style="width:40%;" >}}
+{{< img src="logs/processing/processors/log_post_severity_bis.png" alt="Log severity after remapping" style="width:40%;" >}}
 
 Each incoming status value is mapped as follows:
 
@@ -159,20 +161,20 @@ Each incoming status value is mapped as follows:
 * Strings beginning with **o** or **s**, or matching **OK** or **Success** (case-insensitive) map to **OK**
 * All others map to **info (6)**
 
-**Note**: If multiple log status remapper processors can be applied to a given log, only the first one (according to the pipelines order) is taken into account.
+**Note**: If multiple log status remapper processors are applied to a given log, only the first one (according to the pipeline's order) is taken into account.
 
 {{< tabs >}}
 {{% tab "UI" %}}
 
-Define the Log status remapper processor in the [Datadog Log configuration page][1]:
+Define the log status remapper processor in the [Datadog Log configuration page][1]:
 
-{{< img src="logs/processing/processors/severity_remapper_processor_tile.png" alt="Severity Remapper Processor tile"  style="width:80%;" >}}
+{{< img src="logs/processing/processors/severity_remapper_processor_tile.png" alt="Log severity in the Log Explorer" style="width:80%;" >}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
 {{% tab "API" %}}
 
-Use the [Datadog Log Pipeline API endpoint][1] with the following Log Status Remapper JSON payload:
+Use the [Datadog Log Pipeline API endpoint][1] with the following log status remapper JSON payload:
 
 ```json
 {
@@ -196,14 +198,14 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Log Status Rem
 
 ## Service remapper
 
-Use this processor if you want to assign one or more attributes as the official service.
+The service remapper processor assigns one or more attributes to your logs as the official service.
 
-**Note**: If multiple service remapper processors can be applied to a given log, only the first one (according to the pipeline order) is taken into account.
+**Note**: If multiple service remapper processors are applied to a given log, only the first one (according to the pipeline's order) is taken into account.
 
 {{< tabs >}}
 {{% tab "UI" %}}
 
-Define the Log Service remapper processor in the [Datadog Log configuration page][1]:
+Define the log service remapper processor in the [Datadog Log configuration page][1]:
 
 {{< img src="logs/processing/processors/service_remapper_processor_tile.png" alt="Service Remapper Processor tile"  style="width:80%;" >}}
 
@@ -211,7 +213,7 @@ Define the Log Service remapper processor in the [Datadog Log configuration page
 {{% /tab %}}
 {{% tab "API" %}}
 
-Use the [Datadog Log Pipeline API endpoint][1] with the following Log Service Remapper JSON payload:
+Use the [Datadog Log Pipeline API endpoint][1] with the following log service remapper JSON payload:
 
 ```json
 {
@@ -235,14 +237,14 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Log Service Re
 
 ## Log message remapper
 
-The message is a key attribute in Datadog. It is displayed in the message column of the Log Explorer and you can do full string search on it. Use this Processor to define one or more attributes as the official log message.
+Message is a key attribute in Datadog. It is displayed in the message column of the Log Explorer to give context to a log. You can use the search to find a log by log message. Use the log message remapper processor to define one or more attributes as the official log message.
 
-**Note**: If multiple log message remapper processors can be applied to a given log, only the first one (according to the pipeline order) is taken into account.
+**Note**: If multiple log message remapper processors are applied to a given log, only the first one (according to the pipeline order) is taken into account.
 
 {{< tabs >}}
 {{% tab "UI" %}}
 
-Define the Log Message remapper processor in the [Datadog Log configuration page][1]:
+Define the log message remapper processor in the [Datadog Log configuration page][1]:
 
 {{< img src="logs/processing/processors/message_processor.png" alt="Message Processor"  style="width:80%;">}}
 
@@ -274,22 +276,20 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following log message re
 
 ## Remapper
 
-The remapper processor remaps any source attribute(s) or tag to another target attribute or tag. It transforms this log:
+The remapper processor remaps any source attribute(s) or tags to another target attribute or tag. For example, remap `user` by `firstname` to target your logs in the Log Explorer:
 
-{{< img src="logs/processing/processors/attribute_pre_remapping.png" alt="attribute pre remapping "  style="width:40%;">}}
+{{< img src="logs/processing/processors/attribute_post_remapping.png" alt="Attribute after remapping" style="width:50%;">}}
 
-Into this log:
+Constraints on the tag/attribute name are explained in the [attributes and tags documentation][5]. Some additional constraints, applied as `:` or `,`, are not allowed in the target tag/attribute name.
 
-{{< img src="logs/processing/processors/attribute_post_remapping.png" alt="attribute post remapping "  style="width:40%;">}}
+If the target of the remapper is an attribute, the remapper can also try to cast the value to a new type (`String`, `Integer` or `Double`). If the cast is not possible, the original type is kept.
 
-Constraints on the tag/attribute name are explained in the [attributes and tags documentation][5]. Some additional constraints are applied as `:` or `,` are not allowed in the target tag/attribute name.
-
-If the target of the remapper is an attribute, the remapper can also try to cast the value to a new type (`String`, `Integer` or `Double`). If the cast is not possible, the original type is kept (note: The decimal separator for `Double` need to be `.`)
+**Note**: The decimal separator for `Double` need to be `.`.
 
 {{< tabs >}}
 {{% tab "UI" %}}
 
-Define the remapper processor in the [Datadog Log configuration page][1]. For example, here, it remaps `user` to `user.firstname`
+Define the remapper processor in the [Datadog Log configuration page][1]. For example, remap `user` to `user.firstname`.
 
 {{< img src="logs/processing/processors/attribute_remapper_processor_tile.png" alt="Attribute Remapper Processor tile"  style="width:80%;" >}}
 
@@ -333,7 +333,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Remapper JSON 
 
 ## URL parser
 
-This Processor extracts query parameters and other important parameters from a URL. When setup, the following attributes are produced:
+The URL parser processor extracts query parameters and other important parameters from a URL. When setup, the following attributes are produced:
 
 {{< img src="logs/processing/processors/url_processor.png" alt="Url Processor"  style="width:80%;" >}}
 
@@ -371,16 +371,16 @@ Define the URL parser processor in the [Datadog Log configuration page][1]:
 
 ## User-Agent parser
 
-The User-Agent parser takes a User-Agent attribute and extracts the OS, browser, device, and other user data. It recognizes major bots like the Google Bot, Yahoo Slurp, and Bing. When set up, the following attributes are produced:
+The user-agent parser processor takes a `useragent` attribute and extracts OS, browser, device, and other user data. When set up, the following attributes are produced:
 
 {{< img src="logs/processing/processors/useragent_processor.png" alt="Useragent Processor"  style="width:80%;">}}
 
-**Note**: If your logs contain encoded User-Agents (for example, IIS logs), configure this Processor to **decode the URL** before parsing it.
+**Note**: If your logs contain encoded user-agents (for example, IIS logs), configure this Processor to **decode the URL** before parsing it.
 
 {{< tabs >}}
 {{% tab "UI" %}}
 
-Define the User-Agent processor in the [Datadog Log configuration page][1]:
+Define the user-agent processor in the [Datadog Log configuration page][1]:
 
 {{< img src="logs/processing/processors/useragent_processor_tile.png" alt="Useragent Processor tile"  style="width:80%;" >}}
 
@@ -388,7 +388,7 @@ Define the User-Agent processor in the [Datadog Log configuration page][1]:
 {{% /tab %}}
 {{% tab "API" %}}
 
-Use the [Datadog Log Pipeline API endpoint][1] with the following User-Agent parser JSON payload:
+Use the [Datadog Log Pipeline API endpoint][1] with the following user-agent parser JSON payload:
 
 ```json
 {
@@ -416,32 +416,31 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following User-Agent par
 
 ## Category processor
 
-Use the category processor to add a new attribute (without spaces or special characters in the new attribute name) to a log matching a provided search query.
-Use categories to create groups for an analytical view (for example, URL groups, machine groups, environments, and response time buckets).
+Use the category processor to add a new attribute (without spaces or special characters in the new attribute name) to a log matching a provided search query. Then, use categories to create groups for an analytical view (for example, URL groups, machine groups, environments, and response time buckets).
 
 **Note**:
 
-* The syntax of the query is the one of [Logs Explorer][6] search bar. The query can be done on any log attribute or tag, whether it is a facet or not. Wildcards can also be used inside your query.
-* Once the log has matched one of the Processor queries, it stops. Make sure they are properly ordered in case a log could match several queries.
+* The syntax of the query is the one in the [Logs Explorer][6] search bar. This query can be done on any log attribute or tag, whether it is a facet or not. Wildcards can also be used inside your query.
+* Once the log has matched one of the processor queries, it stops. Make sure they are properly ordered in case a log could match several queries.
 * The names of the categories must be unique.
-* Once defined in the Category Processor, you can map categories to log status using the [Log Status Remapper](#log-status-remapper).
+* Once defined in the category processor, you can map categories to log status using the [log status remapper](#log-status-remapper).
 
 {{< tabs >}}
 {{% tab "UI" %}}
 
-Define the Category Processor in the [Datadog Log configuration page][1]. For example, to categorize your web access logs based on the status code range value ("OK" for a response code between 200 and 299, "Notice" for a response code between 300 and 399, ...) add this Processor:
+Define the category processor in the [Datadog Log configuration page][1]. For example, to categorize your web access logs based on the status code range value (`"OK" for a response code between 200 and 299, "Notice" for a response code between 300 and 399, ...`) add this processor:
 
-{{< img src="logs/processing/processors/category_processor.png" alt="Category Processor"  style="width:80%;" >}}
+{{< img src="logs/processing/processors/category_processor.png" alt="category processor"  style="width:80%;" >}}
 
-It produces the following result:
+This processor produces the following result:
 
-{{< img src="logs/processing/processors/category_processor_result.png" alt="Category Processor result"  style="width:80%;" >}}
+{{< img src="logs/processing/processors/category_processor_result.png" alt="category processor result"  style="width:80%;" >}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
 {{% tab "API" %}}
 
-Use the [Datadog Log Pipeline API endpoint][1] with the following Category processor JSON payload:
+Use the [Datadog Log Pipeline API endpoint][1] with the following category processor JSON payload:
 
 ```json
 {
@@ -470,13 +469,13 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Category proce
 
 ## Arithmetic processor
 
-Use the Arithmetic Processor to add a new attribute (without spaces or special characters in the new attribute name) to a log with the result of the provided formula.
-This enables you to remap different time attributes with different units into a single attribute, or to compute operations on attributes within the same log.
+Use the arithmetic processor to add a new attribute (without spaces or special characters in the new attribute name) to a log with the result of the provided formula. This remaps different time attributes with different units into a single attribute, or compute operations on attributes within the same log.
 
-The formula can use parentheses and the basic arithmetic operators: `-`, `+`, `*`, `/`.
+A arithmetic processor formula can use parentheses and basic arithmetic operators: `-`, `+`, `*`, `/`.
 
-By default, the calculation is skipped if an attribute is missing. Select "Replace missing attribute by 0" to automatically populate missing attribute values with 0 to ensure that the calculation is done.
-An attribute is missing if it is not found in the log attributes, or if it cannot be converted to a number.
+By default, a calculation is skipped if an attribute is missing. Select *Replace missing attribute by 0* to automatically populate missing attribute values with 0 to ensure that the calculation is done.
+
+**Note**: An attribute may be listed as missing if it is not found in the log attributes, or if it cannot be converted to a number.
 
 **Notes**:
 
@@ -488,7 +487,7 @@ An attribute is missing if it is not found in the log attributes, or if it canno
 {{< tabs >}}
 {{% tab "UI" %}}
 
-Define the Arithmetic Processor in the [Datadog Log configuration page][1]:
+Define the arithmetic processor in the [Datadog Log configuration page][1]:
 
 {{< img src="logs/processing/processors/arithmetic_processor.png" alt="Arithmetic Processor"  style="width:80%;">}}
 
@@ -496,7 +495,7 @@ Define the Arithmetic Processor in the [Datadog Log configuration page][1]:
 {{% /tab %}}
 {{% tab "API" %}}
 
-Use the [Datadog Log Pipeline API endpoint][1] with the following Arithmetic processor JSON payload:
+Use the [Datadog Log Pipeline API endpoint][1] with the following arithmetic processor JSON payload:
 
 ```json
 {
@@ -524,28 +523,26 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Arithmetic pro
 
 ## String builder processor
 
-Use the string builder processor to add a new attribute (without spaces or special characters) to a log with the result of the provided template.
-This enables aggregation of different attributes or raw strings into a single attribute.
+Use the string builder processor to add a new attribute (without spaces or special characters) to a log with the result of the provided template. This enables aggregation of different attributes or raw strings into a single attribute.
 
-The template is defined by both raw text and blocks with the syntax: `%{attribute_path}`.
+The template is defined by both raw text and blocks with the syntax `%{attribute_path}`.
 
 **Notes**:
 
-* The processor only accepts attributes with values or an array of values in the blocks (see examples in the [UI section](?tab=ui#string-builder-processor)).
+* This processor only accepts attributes with values or an array of values in the block (see examples in the UI section below.
 * If an attribute cannot be used (object or array of object), it is replaced by an empty string or the entire operation is skipped depending on your selection.
-* If the target attribute already exists, it is overwritten by the result of the template.
-* Results of the template cannot exceed 256 characters.
+* If a target attribute already exists, it is overwritten by the result of the template.
+* Results of a template cannot exceed 256 characters.
 
 {{< tabs >}}
 {{% tab "UI" %}}
 
 Define the string builder processor on the [Datadog log configuration page][1]:
 
-{{< img src="logs/processing/processors/stringbuilder_processor.png" alt="String Builder Processor"  style="width:80%;">}}
+{{< img src="logs/processing/processors/stringbuilder_processor.png" alt="String builder processor" style="width:80%;">}}
 
-**Example**
+With the following log, use the template `Request %{http.method} %{http.url} was answered with response %{http.status_code}` to returns a result. For example:
 
-With the following log:
 
 ```json
 {
@@ -562,30 +559,22 @@ With the following log:
 }
 ```
 
-You can use the template: `Request %{http.method} %{http.url} was answered with response %{http.status_code}`, which returns the result:
-
 ```text
 Request GET https://app.datadoghq.com/users was answered with response 200
 ```
 
-**Objects**:
+**Note**: `http` is an object and cannot be used in a block (`%{http}` fails), whereas `%{http.method}`, `%{http.status_code}`, or `%{http.url}` returns the corresponding value. Blocks can be used on arrays of values or on a specific attribute within an array. For example, adding the block `%{array_ids}` returns:
 
-In the example log `http` is an object and cannot be used in a block (`%{http}` fails), whereas `%{http.method}`, `%{http.status_code}`, or `%{http.url}` returns the corresponding value.
+    ```text
+    123,456,789
+    ```
 
-**Arrays**:
+    Whereas `%{array_users}` does not return anything because it is a list of objects.
+    However, `%{array_users.first_name}` returns a list of `first_name` contained in the array:
 
-Blocks can be used on arrays of values or on a specific attribute within an array. For the example log, adding the block `%{array_ids}` returns:
-
-```text
-123,456,789
-```
-
-Whereas `%{array_users}` does not return anything because it is a list of objects.
-However, `%{array_users.first_name}` returns a list of `first_name` contained in the array:
-
-```text
-John,Jack
-```
+    ```text
+    John,Jack
+    ```
 
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
@@ -619,23 +608,23 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following string builder
 
 ## GeoIP parser
 
-The GeoIP parser takes an IP address attribute and extracts if available the Continent, Country, Subdivision, and City information in the target attribute path.
+The geoIP parser takes an IP address attribute and extracts continent, country, subdivision, or city information (if available) in the target attribute path.
 
 {{< tabs >}}
 {{% tab "UI" %}}
 
 {{< img src="logs/processing/processors/geoip_processor.png" alt="GeoIP Processor"  style="width:80%;">}}
 
-Most elements contains a `name` and `iso_code` (or `code` for continent) attribute. `subdivision` is the first level of subdivision that the country uses such as "States" for the United States or "Departments" for France.
+Most elements contain a `name` and `iso_code` (or `code` for continent) attribute. `subdivision` is the first level of subdivision that the country uses such as "States" for the United States or "Departments" for France.
 
-Find below an example of the GeoIP Parser that extracts gelocation from the `network.client.ip` attribute and stores it into the `network.client.geoip` attribute:
+For example, the geoIP parser extracts location from the `network.client.ip` attribute and stores it into the `network.client.geoip` attribute:
 
 {{< img src="logs/processing/processors/geoip_example.png" alt="GeoIP example"  style="width:60%;">}}
 
 {{% /tab %}}
 {{% tab "API" %}}
 
-Use the [Datadog Log Pipeline API endpoint][1] with the following Geo-IP parser JSON payload:
+Use the [Datadog Log Pipeline API endpoint][1] with the following geoIP parser JSON payload:
 
 ```json
 {
@@ -662,15 +651,17 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Geo-IP parser 
 ## Lookup processor
 
 Use the lookup processor to define a mapping between a log attribute and a human readable value saved in an [Enrichment Table (beta)][7] or the processors mapping table.
+
 For example, you can use the lookup processor to map an internal service ID into a human readable service name.
-Alternatively, you could also use it to check if the MAC address that just attempted to connect to the production environment belongs to your list of stolen machines.
+
+Alternatively, you can use it to check if the MAC address that just attempted to connect to the production environment belongs to your list of stolen machines.
 
 {{< tabs >}}
 {{% tab "UI" %}}
 
 {{< img src="logs/processing/processors/lookup_processor.png" alt="Lookup processor"  style="width:80%;">}}
 
-The processor performs the following actions:
+The lookup processor performs the following actions:
 
 * Looks if the current log contains the source attribute.
 * Checks if the source attribute value exists in the mapping table.
@@ -684,7 +675,7 @@ The size limit for the mapping table is 100Kb. This limit applies across all Loo
 {{% /tab %}}
 {{% tab "API" %}}
 
-Use the [Datadog Log Pipeline API endpoint][1] with the following Lookup Processor JSON payload:
+Use the [Datadog Log Pipeline API endpoint][1] with the following lookup processor JSON payload:
 
 ```json
 {
@@ -716,22 +707,22 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Lookup Process
 
 There are two ways to improve correlation between application traces and logs:
 
-1. Follow the documentation on [how to inject a Trace ID in the application logs][8] and by default log integrations take care of all the rest of the setup.
+1. Follow the documentation on [how to inject a Trace ID in the application logs][8]. Log integrations take care of all the rest of the setup by default.
 
-2. Use the Trace remapper processor to define a log attribute as its associated trace ID.
+2. Use the trace remapper processor to define a log attribute as its associated trace ID.
 
 {{< tabs >}}
 {{% tab "UI" %}}
 
-Define the Trace remapper processor in the [Datadog Log configuration page][1]. Enter the Trace ID attribute path in the Processor tile as follows:
+Define the trace remapper processor in the [Datadog Log configuration page][1]. Enter the Trace ID attribute path in the processor tile as follows:
 
-{{< img src="logs/processing/processors/trace_processor.png" alt="Trace Id Processor"  style="width:80%;">}}
+{{< img src="logs/processing/processors/trace_processor.png" alt="Trace ID processor"  style="width:80%;">}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
 {{% tab "API" %}}
 
-Use the [Datadog Log Pipeline API endpoint][1] with the following Trace remapper JSON payload:
+Use the [Datadog Log Pipeline API endpoint][1] with the following trace remapper JSON payload:
 
 ```json
 {

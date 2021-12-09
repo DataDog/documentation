@@ -91,9 +91,6 @@ Bonsai インテグレーションには、サービスのチェック機能は�
 
 ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 
-## その他の参考資料
-
-インフラストラクチャーの監視の詳細および Datadog の全インテグレーションについては、[ブログ記事][9]を参照してください。
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/bonsai/images/snapshot.png
 [2]: https://app.datadoghq.com/organization-settings/api-keys
@@ -103,4 +100,3 @@ Bonsai インテグレーションには、サービスのチェック機能は�
 [6]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/bonsai/images/datadog_activated.png
 [7]: https://github.com/DataDog/integrations-extras/blob/master/bonsai/metadata.csv
 [8]: https://docs.datadoghq.com/ja/help/
-[9]: https://www.datadoghq.com/blog

@@ -1,5 +1,5 @@
 ---
-title: Instrumenting Ruby Applications
+title: Instrumenting Ruby Serverless Applications
 kind: documentation
 further_reading:
 - link: 'serverless/serverless_tagging/'

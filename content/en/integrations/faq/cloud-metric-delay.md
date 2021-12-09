@@ -20,7 +20,7 @@ When using any Datadog cloud integration (AWS, Azure, GCP, etc.), metrics are pu
 |------------|------------------|
 | Alibaba    | Every 10 minutes |
 | AWS        | Every 10 minutes |
-| Azure      | Every 5 minutes  |
+| Azure      | Every 2 minutes  |
 | Cloudflare | Every 15 minutes |
 | GCP        | Every 5 minutes  |
 
@@ -40,7 +40,7 @@ Further, the CloudWatch API only offers a metric-by-metric crawl to pull data. T
 
 ### Azure
 
-Azure emits metrics with 1-minute granularity. Therefore, expect metric delays of ~7-8 minutes.
+Azure emits metrics with 1-minute granularity. Therefore, expect metric delays of ~4-5 minutes.
 
 ### GCP
 
@@ -54,7 +54,7 @@ When creating monitors in Datadog, a warning message displays if you choose a de
 
 To obtain metrics with virtually zero delay, install the Datadog Agent on your cloud hosts when possible. Refer to the documentation on [installing the Datadog Agent on your cloud instances][1].
 
-On the Datadog side for the AWS, Azure, and GCP integrations, we may be able to speed up the default metric crawler for all metrics. Additionally, for AWS, Datadog has namespace specific crawlers. Contact [Datadog support][2] for more information.
+On the Datadog side for the AWS, Azure, and GCP integrations, Datadog may be able to speed up the default metric crawler for all metrics. Additionally, for AWS, Datadog has namespace specific crawlers. Contact [Datadog support][2] for more information.
 
 ## Further Reading
 

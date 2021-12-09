@@ -1127,7 +1127,12 @@ main:
   - name: Live Containers
     url: infrastructure/livecontainers/
     parent: infrastructure
+    identifier: infrastructure_livecontainers
     weight: 5
+  - name: Configuration
+    url: infrastructure/livecontainers/configuration
+    parent: infrastructure_livecontainers
+    weight: 501
   - name: Cloud Cost
     url: infrastructure/cloud_cost_management/
     parent: infrastructure
@@ -1261,11 +1266,16 @@ main:
     parent: serverless
     identifier: serverless_app_services
     weight: 8
+  - name: Glossary
+    url: serverless/glossary
+    parent: serverless
+    identifier: serverless_glossary
+    weight: 9
   - name: Guides
     url: serverless/guide/
     identifier: serverless_guides
     parent: serverless
-    weight: 9
+    weight: 10
   - name: Metrics
     url: metrics/
     identifier: metrics_top_level
@@ -1864,6 +1874,11 @@ main:
     parent: tracing_runtime_metrics
     identifier: tracing_runtime_metrics_dotnet
     weight: 1205
+  - name: Go
+    url: tracing/runtime_metrics/go/
+    parent: tracing_runtime_metrics
+    identifier: tracing_runtime_metrics_go
+    weight: 1206
   - name: Continuous Profiler
     url: tracing/profiler/
     parent: tracing
@@ -1894,12 +1909,17 @@ main:
     parent: profiler_enabling
     identifier: profiler_enabling_ruby
     weight: 104
+  - name: Enabling the Node.js Profiler
+    url: tracing/profiler/enabling/nodejs/
+    parent: profiler_enabling
+    identifier: profiler_enabling_nodejs
+    weight: 105
   - name: Search Profiles
     url: tracing/profiler/search_profiles/
     parent: profiler
     identifier: profiler_search_profiles
     weight: 1302
-  - name: Investigate Code Hotspots from Traces
+  - name: Investigate Slow Traces or Endpoints
     url: tracing/profiler/connect_traces_and_profiles/
     parent: profiler
     identifier: profiler_traces_profiles
@@ -2049,26 +2069,31 @@ main:
     parent: ci
     identifier: setup_pipelines
     weight: 2
-  - name: GitLab
-    url: continuous_integration/setup_pipelines/gitlab/
-    parent: setup_pipelines
-    identifier: ci_gitlab
-    weight: 201
-  - name: Jenkins
-    url: continuous_integration/setup_pipelines/jenkins/
-    parent: setup_pipelines
-    identifier: ci_jenkins
-    weight: 202
   - name: Buildkite
     url: continuous_integration/setup_pipelines/buildkite/
     parent: setup_pipelines
     identifier: ci_buildkite
-    weight: 203
+    weight: 201
   - name: CircleCI
     url: continuous_integration/setup_pipelines/circleci/
     parent: setup_pipelines
     identifier: ci_circleci
+    weight: 202
+  - name: GitHub
+    url: continuous_integration/setup_pipelines/github/
+    parent: setup_pipelines
+    identifier: ci_github
+    weight: 203
+  - name: GitLab
+    url: continuous_integration/setup_pipelines/gitlab/
+    parent: setup_pipelines
+    identifier: ci_gitlab
     weight: 204
+  - name: Jenkins
+    url: continuous_integration/setup_pipelines/jenkins/
+    parent: setup_pipelines
+    identifier: ci_jenkins
+    weight: 205
   - name: Custom Commands
     url: continuous_integration/setup_pipelines/custom_commands/
     parent: setup_pipelines
@@ -2447,6 +2472,10 @@ main:
     parent: security_platform
     identifier: security_rules
     weight: 4
+  - name: Notification Profiles
+    url: security_platform/notification_profiles/
+    parent: security_platform
+    weight: 5
   - name: Signals Explorer
     url: security_platform/explorer
     parent: security_platform
@@ -2479,20 +2508,20 @@ main:
     url: synthetics/api_tests/dns_tests
     parent: api_tests
     weight: 103
+  - name: WebSocket
+    url: synthetics/api_tests/websocket_tests
+    parent: api_tests
+    weight: 104
   - name: TCP
     url: synthetics/api_tests/tcp_tests
     parent: api_tests
-    weight: 104
+    weight: 105
   - name: UDP
     url: synthetics/api_tests/udp_tests
     parent: api_tests
-    weight: 105
+    weight: 106
   - name: ICMP
     url: synthetics/api_tests/icmp_tests
-    parent: api_tests
-    weight: 106
-  - name: WebSocket
-    url: synthetics/api_tests/websocket_tests
     parent: api_tests
     weight: 107
   - name: Multistep API Tests
@@ -2527,6 +2556,16 @@ main:
     parent: synthetics_private_location
     identifier: synthetics_private_location_configuration
     weight: 401
+  - name: Dimensioning
+    url: synthetics/private_locations/dimensioning
+    parent: synthetics_private_location
+    identifier: synthetics_private_location_dimensioning
+    weight: 402
+  - name: Monitoring
+    url: synthetics/private_locations/monitoring
+    parent: synthetics_private_location
+    identifier: synthetics_private_location_monitoring
+    weight: 403
   - name: CI/CD Testing
     url: /synthetics/cicd_testing
     parent: synthetics
@@ -2966,6 +3005,14 @@ main:
     url: account_management/audit_logs
     parent: organization_settings
     weight: 203
+  - name: OAuth Apps
+    url: account_management/org_settings/oauth_apps
+    parent: organization_settings
+    weight: 204
+  - name: Sensitive Data Scanner
+    url: account_management/org_settings/sensitive_data_detection
+    parent: organization_settings
+    weight: 205
   - name: RBAC
     url: account_management/rbac/
     parent: account_management
@@ -3124,6 +3171,9 @@ footer_product_three:
   - name: Support
     url: 'https://www.datadoghq.com/support/'
     weight: 110
+  - name: 'Learning Center'
+    url: 'https://learn.datadoghq.com/'
+    weight: 115
   - name: Resources
     url: 'https://www.datadoghq.com/resources/'
     weight: 150
@@ -4317,6 +4367,7 @@ api:
     params:
       versions:
         - v1
+        - v2
       operationids:
         - SubmitLog
       unstable: []
@@ -5139,6 +5190,19 @@ api:
       unstable:
         - v1
       order: 6
+  - name: Get Corrections For an SLO
+    url: '#get-corrections-for-an-slo'
+    identifier: get-corrections-for-an-slo
+    parent: service-level-objectives
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetSLOCorrections
+      unstable:
+        - v1
+      order: 6
   - name: Update an SLO
     url: '#update-an-slo'
     identifier: update-an-slo
@@ -5366,7 +5430,7 @@ api:
       operationids:
         - EditGlobalVariable
       unstable: []
-      order: 17
+      order: 18
   - name: Get a global variable
     url: '#get-a-global-variable'
     identifier: get-a-global-variable
@@ -5378,7 +5442,7 @@ api:
       operationids:
         - GetGlobalVariable
       unstable: []
-      order: 18
+      order: 19
   - name: Delete a global variable
     url: '#delete-a-global-variable'
     identifier: delete-a-global-variable
@@ -5390,7 +5454,7 @@ api:
       operationids:
         - DeleteGlobalVariable
       unstable: []
-      order: 19
+      order: 20
   - name: Create a global variable
     url: '#create-a-global-variable'
     identifier: create-a-global-variable
@@ -5402,7 +5466,7 @@ api:
       operationids:
         - CreateGlobalVariable
       unstable: []
-      order: 16
+      order: 17
   - name: Get all global variables
     url: '#get-all-global-variables'
     identifier: get-all-global-variables
@@ -5414,7 +5478,7 @@ api:
       operationids:
         - ListGlobalVariables
       unstable: []
-      order: 15
+      order: 16
   - name: Pause or start a test
     url: '#pause-or-start-a-test'
     identifier: pause-or-start-a-test
@@ -5438,7 +5502,7 @@ api:
       operationids:
         - GetAPITestResult
       unstable: []
-      order: 10
+      order: 11
   - name: Get an API test's latest results summaries
     url: '#get-an-api-tests-latest-results-summaries'
     identifier: get-an-api-tests-latest-results-summaries
@@ -5450,7 +5514,7 @@ api:
       operationids:
         - GetAPITestLatestResults
       unstable: []
-      order: 12
+      order: 13
   - name: Edit a test
     url: '#edit-a-test'
     identifier: edit-a-test
@@ -5474,7 +5538,7 @@ api:
       operationids:
         - GetTest
       unstable: []
-      order: 25
+      order: 26
   - name: Trigger tests from CI/CD pipelines
     url: '#trigger-tests-from-ci/cd-pipelines'
     identifier: trigger-tests-from-ci/cd-pipelines
@@ -5487,6 +5551,18 @@ api:
         - TriggerCITests
       unstable: []
       order: 6
+  - name: Trigger Synthetics tests
+    url: '#trigger-synthetics-tests'
+    identifier: trigger-synthetics-tests
+    parent: synthetics
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - TriggerTests
+      unstable: []
+      order: 7
   - name: Delete tests
     url: '#delete-tests'
     identifier: delete-tests
@@ -5498,7 +5574,7 @@ api:
       operationids:
         - DeleteTests
       unstable: []
-      order: 14
+      order: 15
   - name: Get a browser test result
     url: '#get-a-browser-test-result'
     identifier: get-a-browser-test-result
@@ -5510,7 +5586,7 @@ api:
       operationids:
         - GetBrowserTestResult
       unstable: []
-      order: 11
+      order: 12
   - name: Get a browser test's latest results summaries
     url: '#get-a-browser-tests-latest-results-summaries'
     identifier: get-a-browser-tests-latest-results-summaries
@@ -5522,7 +5598,7 @@ api:
       operationids:
         - GetBrowserTestLatestResults
       unstable: []
-      order: 13
+      order: 14
   - name: Edit a browser test
     url: '#edit-a-browser-test'
     identifier: edit-a-browser-test
@@ -5546,7 +5622,7 @@ api:
       operationids:
         - GetBrowserTest
       unstable: []
-      order: 8
+      order: 9
   - name: Create a browser test
     url: '#create-a-browser-test'
     identifier: create-a-browser-test
@@ -5582,7 +5658,7 @@ api:
       operationids:
         - GetAPITest
       unstable: []
-      order: 7
+      order: 8
   - name: Create an API test
     url: '#create-an-api-test'
     identifier: create-an-api-test
@@ -5618,7 +5694,7 @@ api:
       operationids:
         - ListTests
       unstable: []
-      order: 9
+      order: 10
   - name: Edit a private location
     url: '#edit-a-private-location'
     identifier: edit-a-private-location
@@ -5630,7 +5706,7 @@ api:
       operationids:
         - UpdatePrivateLocation
       unstable: []
-      order: 22
+      order: 23
   - name: Get a private location
     url: '#get-a-private-location'
     identifier: get-a-private-location
@@ -5642,7 +5718,7 @@ api:
       operationids:
         - GetPrivateLocation
       unstable: []
-      order: 21
+      order: 22
   - name: Delete a private location
     url: '#delete-a-private-location'
     identifier: delete-a-private-location
@@ -5654,7 +5730,7 @@ api:
       operationids:
         - DeletePrivateLocation
       unstable: []
-      order: 24
+      order: 25
   - name: Create a private location
     url: '#create-a-private-location'
     identifier: create-a-private-location
@@ -5666,7 +5742,7 @@ api:
       operationids:
         - CreatePrivateLocation
       unstable: []
-      order: 20
+      order: 21
   - name: Get all locations (public and private)
     url: '#get-all-locations-public-and-private'
     identifier: get-all-locations-public-and-private
@@ -5678,7 +5754,7 @@ api:
       operationids:
         - ListLocations
       unstable: []
-      order: 23
+      order: 24
   - name: Get details of batch
     url: '#get-details-of-batch'
     identifier: get-details-of-batch
@@ -5690,7 +5766,7 @@ api:
       operationids:
         - GetSyntheticsCIBatch
       unstable: []
-      order: 26
+      order: 27
   - name: Tags
     url: /api/latest/tags/
     identifier: tags
@@ -5871,6 +5947,18 @@ api:
         - GetUsageRumSessions
       unstable: []
       order: 13
+  - name: Get hourly usage for RUM Units
+    url: '#get-hourly-usage-for-rum-units'
+    identifier: get-hourly-usage-for-rum-units
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetUsageRumUnits
+      unstable: []
+      order: 35
   - name: Get hourly usage for profiled hosts
     url: '#get-hourly-usage-for-profiled-hosts'
     identifier: get-hourly-usage-for-profiled-hosts

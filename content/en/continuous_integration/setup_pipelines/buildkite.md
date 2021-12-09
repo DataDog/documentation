@@ -11,12 +11,9 @@ further_reading:
 ---
 
 {{< site-region region="us5,gov" >}}
-<div class="alert alert-warning">
-The selected Datadog site ({{< region-param key="dd_site_name" >}}) is not supported.
-</div>
+<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
-{{< site-region region="us,eu,us3" >}}
 ## Configure the Datadog integration
 
 The steps to activate the Datadog integration for [Buildkite][1] are:
@@ -36,12 +33,11 @@ The [Pipelines][3] and [Pipeline Executions][4] pages populate with data after t
 
 **Note**: The Pipelines page shows data for only the default branch of each repository.
 
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: https://buildkite.com
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://app.datadoghq.com/ci/pipelines
 [4]: https://app.datadoghq.com/ci/pipeline-executions
-{{< /site-region >}}
-
-## Further reading
-
-{{< partial name="whats-next/whats-next.html" >}}

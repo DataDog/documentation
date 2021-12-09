@@ -10,6 +10,12 @@ further_reading:
       text: "Troubleshooting CI"
 ---
 
+{{< site-region region="us5,gov" >}}
+<div class="alert alert-warning">
+The selected Datadog site ({{< region-param key="dd_site_name" >}}) is not supported.
+</div>
+{{< /site-region >}}
+
 {{< site-region region="us,eu,us3" >}}
 JUnit test report files are XML files that contain test execution information, such as test and suite names, pass/fail status, duration, and sometimes error logs. Although it was introduced by the [JUnit][1] testing framework, many other popular frameworks are able to output results using this format.
 
@@ -35,27 +41,13 @@ datadog-ci junit upload --service <service_name> <path> [<path> ...]
 
 Specify a valid [Datadog API key][3] in the `DATADOG_API_KEY` environment variable, and the environment where tests were run (for example, `local` when uploading results from a developer workstation, or `ci` when uploading them from a CI provider) in the `DD_ENV` environment variable. For example:
 
-{{< site-region region="us" >}}
-{{< code-block lang="bash" >}}
-DD_ENV=ci DATADOG_API_KEY=<api_key> datadog-ci junit upload \
+<pre>
+<code>
+DD_ENV=ci DATADOG_API_KEY=&lt;api_key&gt; DATADOG_SITE={{< region-param key="dd_site" >}} datadog-ci junit upload \
   --service my-api-service \
   unit-tests/junit-reports e2e-tests/single-report.xml
-{{< /code-block >}}
-{{< /site-region >}}
-{{< site-region region="eu" >}}
-{{< code-block lang="bash" >}}
-DD_ENV=ci DATADOG_API_KEY=<api_key> DATADOG_SITE=datadoghq.eu datadog-ci junit upload \
-  --service my-api-service \
-  unit-tests/junit-reports e2e-tests/single-report.xml
-{{< /code-block >}}
-{{< /site-region >}}
-{{< site-region region="us3" >}}
-{{< code-block lang="bash" >}}
-DD_ENV=ci DATADOG_API_KEY=<api_key> DATADOG_SITE=us3.datadoghq.com datadog-ci junit upload \
---service my-api-service \
-unit-tests/junit-reports e2e-tests/single-report.xml
-{{< /code-block >}}
-{{< /site-region >}}
+</code>
+</pre>
 
 ## Configuration settings
 
@@ -95,22 +87,16 @@ The following environment variables are supported:
 : [Datadog API key][3] used to authenticate the requests.<br/>
 **Default**: (none)
 
-
-{{< site-region region="eu,us3" >}}
 Additionally, configure the Datadog site to use the selected one ({{< region-param key="dd_site_name" >}}):
 
 `DATADOG_SITE` (Required)
-: The [Datadog site][1] to upload results to.<br/>
+: The [Datadog site][4] to upload results to.<br/>
 **Default**: `datadoghq.com`<br/>
 **Selected site**: {{< region-param key="dd_site" code="true" >}}
 
-[1]: /getting_started/site/
-{{< /site-region >}}
-
-
 ## Collecting repository and commit metadata
 
-Datadog uses Git information for visualizing your test results and grouping them by repository and commit. Git metadata is collected by the Datadog CI CLI from CI provider environment variables and the local `.git` folder in the project path, if available. To read this directory, the [`git`][4] binary is required.
+Datadog uses Git information for visualizing your test results and grouping them by repository and commit. Git metadata is collected by the Datadog CI CLI from CI provider environment variables and the local `.git` folder in the project path, if available. To read this directory, the [`git`][5] binary is required.
 
 If you are running tests in non-supported CI providers or with no `.git` folder, you can set the Git information manually using environment variables. These environment variables take precedence over any auto-detected information. Set the following environment variables to provide Git information:
 
@@ -208,7 +194,7 @@ For mobile apps (Swift, Android):
 `test.bundle`
 : Used to execute groups of test suites separately.<br/>
 **Examples**: `ApplicationUITests`, `ModelTests` -->
-  
+
 ## Providing metadata through `<property>` elements
 
 In addition to the `--tags` CLI parameter and the `DD_TAGS` environment variable, which apply custom tags globally to all tests included the uploaded XML report, you can provide additional tags to specific tests by including `<property name="dd_tags[key]" value="value">` elements within the `<testsuite>` or `<testcase>` elements. If you add these tags to a `<testcase>` element, they are stored in its test span. If you add the tags to a `<testsuite>` element, they are stored in all of that suite's test spans.
@@ -246,15 +232,13 @@ To be processed, the `name` attribute in the `<property>` element must have the 
 </testsuites>
 {{< /code-block >}}
 
+{{< /site-region >}}
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 [1]: https://junit.org/junit5/
 [2]: https://www.npmjs.com/package/@datadog/datadog-ci
 [3]: https://app.datadoghq.com/organization-settings/api-keys
-[4]: https://git-scm.com/downloads
-{{< /site-region >}}
-{{< site-region region="us5,gov" >}}
-The selected Datadog site ({{< region-param key="dd_site_name" >}}) is not supported at this time.
-{{< /site-region >}}
+[4]: /getting_started/site/
+[5]: https://git-scm.com/downloads

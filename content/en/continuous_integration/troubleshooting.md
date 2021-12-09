@@ -3,6 +3,10 @@ title: Troubleshooting CI Visibility
 kind: documentation
 ---
 
+{{< site-region region="us5,gov" >}}
+<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
+{{< /site-region >}}
+
 ### Your Jenkins instance is instrumented, but Datadog isn't showing any data
 
 1. Make sure that at least one pipeline has finished executing. Pipeline execution information is only sent after the pipeline has finished.
@@ -70,9 +74,29 @@ If you can see test results data in the **Test Runs** tab, but not the **Tests**
 
 4. If no CI provider environment variables are found, tests results are sent with no Git metadata.
 
+### The tests wall time is empty
+
+If you cannot see the tests wall time it is likely that the CI provider metadata is missing. To confirm this is the case, open a test execution in the [Test Runs][3] section, and check if the `ci.pipeline.id`, `ci.pipeline.name`, `ci.pipeline.number`, or `ci.job.url` tags are missing. If these tags are not populated, then nothing shows in the wall time column.
+
+1. Tracers use the environment variables set by the CI provider to collect this information. See [Running tests inside a container][6] for a list of environment variables that the tracer attempts to read for each supported CI provider. Make sure that the environment variables have the expected values set.
+2. Check that you are running your tests in a supported CI provider. For a list of supported CI providers, see [Running tests inside a container][6]. Only these CI providers can extract the information to enrich the test metadata with CI information.
+3. If you still don't see the wall time, contact [Datadog support][1] for help.
+
+### The tests wall time is not what is expected
+
+The wall time is defined as the time difference between the start time of the first test and the end time of the last test for the given pipeline.
+
+This is done using the following algorithm:
+
+1. Compute a hash based on CI information to group the tests.
+  a. If the tests have `ci.job.url`, this information is used to calculate the hash.
+  b. If the tests don’t have `ci.job.url`, the hash is calculated using `ci.pipeline.id` + `ci.pipeline.name` + `ci.pipeline.number`.
+2. Calculate wall time is associated with every given hash. **Note**: There can be multiple wall times for a certain pipeline, for example, if there are multiple jobs that execute tests.
+3. If there are multiple wall times, the maximum wall time calculated for a given pipeline in a certain commit is used.
+
 ### Need further help?
 
-If you have another issue, or the above solutions don't work, [contact Support][1] for troubleshooting help.
+Still need help? Contact [Datadog support][1].
 
 
 [1]: /help/

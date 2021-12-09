@@ -20,12 +20,12 @@ Cela sert généralement à indiquer la fonction générale du dashboard.
 
 ## Configuration
 
-{{< img src="dashboards/widgets/free_text/free_text_setup.png" alt="Saisie du texte libre" style="width:80%;">}}
+{{< img src="dashboards/widgets/free_text/free_text_setup.png" alt="Configuration du widget Texte libre" style="width:80%;">}}
 
-### Configuration
+### Procédure à suivre
 
 1. Entrez le texte à afficher.
-2. Choisissez le formatage de votre texte.
+2. Choisissez des options de mise en forme pour votre texte.
 
 ## API
 

@@ -150,7 +150,7 @@ Cette section affiche une liste des checks JMX initialisés et échoués, même 
 
 ## Forwarder
 
-Le Forwarder utilise un certain nombre de workers pour envoyer des charges utiles à Datadog.
+Le Forwarder utilise plusieurs workers pour envoyer des charges utiles à Datadog.
 
 Si l'avertissement `the forwarder dropped transactions, there is probably an issue with your network` s'affiche, cela signifie que tous les workers sont occupés. Revoyez les performances de votre réseau et réglez les options `forwarder_num_workers` et `forwarder_timeout`.
 

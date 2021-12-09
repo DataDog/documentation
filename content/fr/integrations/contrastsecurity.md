@@ -83,7 +83,7 @@ L'intégration Contrast n'inclut aucun check de service.
 
 
 [1]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/
-[2]: https://docs.contrastsecurity.com/installation-setupconfig.html#log
+[2]: https://docs.contrastsecurity.com/
 [3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#restart-the-agent
 [4]: https://docs.datadoghq.com/fr/logs/log_collection/#getting-started-with-the-agent
 [5]: https://docs.datadoghq.com/fr/api/#create-a-dashboard

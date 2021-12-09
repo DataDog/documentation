@@ -140,7 +140,7 @@ This might mean your private location is unable to reach the endpoint your API t
 
 ### I’m seeing `invalid mount config for type "bind": source path must be a directory` when attempting to run a private location.
 
-This occurs when you attempt to mount a single file in a Windows-based container, which is not supported. For more information, see the [Docker Mount volume documentation][14]. Ensure that the source of the bind mount is a local directory.
+This occurs when you attempt to mount a single file in a Windows-based container, which is not supported. For more information, see the [Docker mount volume documentation][14]. Ensure that the source of the bind mount is a local directory.
 
 ## CI/CD Testing
 
@@ -166,4 +166,4 @@ Check whether you are using API endpoints to trigger your CI/CD test runs. To ha
 [12]: /synthetics/api_tests/?tab=httptest#notify-your-team
 [13]: /synthetics/private_locations#private-location-total-hardware-requirements
 [14]: https://docs.docker.com/engine/reference/commandline/run/#mount-volume--v---read-only
-[15]: /synthetics/cicd_testing/?tab=apitest#cli-usage
+[15]: /synthetics/cicd_testing/?tab=npm#cli-usage

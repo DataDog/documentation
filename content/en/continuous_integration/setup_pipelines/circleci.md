@@ -14,12 +14,9 @@ further_reading:
 ---
 
 {{< site-region region="us5,gov" >}}
-<div class="alert alert-warning">
-The selected Datadog site ({{< region-param key="dd_site_name" >}}) is not supported.
-</div>
+<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
-{{< site-region region="us,eu,us3" >}}
 ## Configure the Datadog integration
 
 The Datadog integration for [CircleCI][1] works by using [webhooks][2] to send data to Datadog.
@@ -38,14 +35,12 @@ The [Pipelines][4] and [Pipeline Executions][5] pages populate with data after t
 
 **Note**: The Pipelines page shows data for only the default branch of each repository.
 
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: https://circleci.com/
 [2]: https://circleci.com/docs/2.0/webhooks
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: https://app.datadoghq.com/ci/pipelines
 [5]: https://app.datadoghq.com/ci/pipeline-executions
-{{< /site-region >}}
-
-## Further reading
-
-{{< partial name="whats-next/whats-next.html" >}}
-

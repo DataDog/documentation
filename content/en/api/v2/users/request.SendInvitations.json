@@ -1,0 +1,15 @@
+{
+  "data": [
+    {
+      "type": "user_invitations",
+      "relationships": {
+        "user": {
+          "data": {
+            "type": "users",
+            "id": "string"
+          }
+        }
+      }
+    }
+  ]
+}

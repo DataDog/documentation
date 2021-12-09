@@ -60,7 +60,7 @@ Select or clear facets to find the list of queries you're interested in.
 
 If you want to filter the contents of the Query Metrics view to just one normalized query, filter on the `query_signature`, not `query`. Tag names are truncated at 200 characters, and because queries can be long, their `query` tags aren't necessarily unique. The `query_signature` is a hash of a normalized query and serves as a unique ID for the normalized query.
 
-An easy way to filter to a specific query (without looking up its query signature value) is to click the query from the list, which opens its [Query Details page](#query-details-page), where you click **Filter to This Query**. This filters the Query Metrics page by the `query_signature` facet.
+One way to filter to a specific query without looking up its query signature value is to click the query from the list. This opens its [Query Details page](#query-details-page), where you click **Filter to This Query**. This filters the Query Metrics page by the `query_signature` facet.
 
 ## Exploring the metrics
 

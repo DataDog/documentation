@@ -3,6 +3,7 @@ title: Burn Rate Alerts
 kind: documentation
 description: "Use Monitors to alert off of the burn rate of an SLO"
 ---
+{{< jqmath-vanilla >}}
 
 <div class="alert alert-warning">
 This feature is in open beta. Email <a href="mailto:slo-help@datadoghq.com">slo-help@datadoghq.com</a> to ask questions or to provide feedback on this feature.
@@ -12,17 +13,17 @@ This feature is in open beta. Email <a href="mailto:slo-help@datadoghq.com">slo-
 
 SLO burn rate alerts notify you when the rate of consumption of your SLO error budget has exceeded your specified threshold and is sustained for a specific period of time. For example, you can set an alert if a burn rate of 14.4 or more is measured for the past hour over the past 5 minutes for your SLO’s 30-day target. And you can set it to optionally warn you for a slightly lower threshold than you would want an alert, for example if a burn rate of 7.2 or more is observed.
 
-**Note:** Burn rate alerts are only available for [metric-based SLOs][2] or for [monitor-based SLOs][3] that are only composed of Metric Monitor types (Metric, Integration, APM Metric, Anomaly, Forecast, or Outlier Monitors).
+**Note:** Burn rate alerts are only available for [metric-based SLOs][1] or for [monitor-based SLOs][2] that are only composed of Metric Monitor types (Metric, Integration, APM Metric, Anomaly, Forecast, or Outlier Monitors).
 
 {{< img src="monitors/service_level_objectives/burn_rate_alert_config.jpeg" alt="Burn rate alert configuration">}}
 
 ## How Burn Rate Alerts work
 
-A burn rate is a unitless value [coined by Google][1] that indicates how fast your error budget is consumed relative to your SLO’s target length. For example, a 30-day target, a burn rate of 1 means your error budget would be fully consumed in exactly 30 days if the rate of 1 was kept constant. A burn rate of 2 means the error budget would be exhausted in 15 days if kept constant, and a burn rate of 3 means 10 days, etc.
+A burn rate is a unitless value [coined by Google][3] that indicates how fast your error budget is consumed relative to your SLO’s target length. For example, a 30-day target, a burn rate of 1 means your error budget would be fully consumed in exactly 30 days if the rate of 1 was kept constant. A burn rate of 2 means the error budget would be exhausted in 15 days if kept constant, and a burn rate of 3 means 10 days, etc.
 
 This relationship is represented by the following formula:
 
-{{< img src="monitors/service_level_objectives/time-to-depletion.jpeg" alt="Time to depletion formula">}}
+$${\text"length of SLO target" \text" (7, 30 or 90 days)"} / \text"burn rate" = \text"time until error budget is fully consumed"\$$
 
 A burn rate alert will use the recent “error rate” in its calculation to measure the observed burn rate. Note that “error rate” means the ratio of bad behavior over total behavior during a *given period*:
 
@@ -35,7 +36,6 @@ When you set a target for your SLO (like 99.9%), your error budget is the amount
 {{< img src="monitors/service_level_objectives/error-budget-definition.jpeg" alt="Error budget definition">}}
 
 In other words, your error budget (in fractional form) is the ideal error rate you should be maintaining. So, a burn rate can alternatively be interpreted as a multiplier of your ideal error rate. For example, for a 99.9% SLO over 30 days, if the SLO is experiencing a burn rate of 10 that means the error budget is on pace to be completely depleted in 3 days and that the observed error rate is 10 times the ideal error rate: 
-
 {{< img src="monitors/service_level_objectives/observed-error-rate-example.jpeg" alt="Observed error rate example">}}
 
 Ideally, you should always try to maintain a burn rate of 1 over the course of your SLO’s target (as you invest in evolving your application with new features). However, in practice, your burn rate will fluctuate as issues or incidents cause your burn rate to increase rapidly until the issue is resolved. Therefore, alerting on burn rates allows you to be proactively notified when an issue is consuming your error budget at an elevated rate that could potentially cause you to miss your SLO target.
@@ -131,13 +131,13 @@ For 90-day targets:
 
 ### API and Terraform
 
-You can create SLO burn rate alerts using the [create-monitor API endpoint][6]. Below is an example query for a burn rate alert, which alerts when a burn rate of 14.4 is measured for the past hour and past 5 minutes. Replace *slo_id* with the alphanumeric ID of the SLO you wish to configure a burn rate alert on and replace *time_window* with one of 7d, 30d or 90d - depending on which target is used to configure your SLO:
+You can create SLO burn rate alerts using the [create-monitor API endpoint][5]. Below is an example query for a burn rate alert, which alerts when a burn rate of 14.4 is measured for the past hour and past 5 minutes. Replace *slo_id* with the alphanumeric ID of the SLO you wish to configure a burn rate alert on and replace *time_window* with one of 7d, 30d or 90d - depending on which target is used to configure your SLO:
 
 ```
 burn_rate("slo_id").over("time_window").long_window("1h").short_window("5m") > 14.4
 ```
 
-In addition, SLO burn rate alerts can also be created using the [datadog_monitor resource in Terraform][7]. Below is an example .tf for configuring a burn rate alert for a metric-based SLO using the same example query as above.
+In addition, SLO burn rate alerts can also be created using the [datadog_monitor resource in Terraform][6]. Below is an example .tf for configuring a burn rate alert for a metric-based SLO using the same example query as above.
 
 **Note:** SLO burn rate alerts are only supported in Terraform provider v2.7.0 or earlier and in provider v2.13.0 or later. Versions between v2.7.0 and v2.13.0 are not supported.
 
@@ -161,13 +161,11 @@ resource "datadog_monitor" "metric-based-slo" {
 ## Beta restrictions
 
 - Alerting is available only for metric-based SLOs or for monitor-based SLOs that are only composed of Metric Monitor types (Metric, Integration, APM Metric, Anomaly, Forecast, or Outlier Monitors).
-- The alert status of an SLO monitor is available in the **Alerts** tab in the SLO’s detail panel or the [Manage Monitors][7] page.
+- The alert status of an SLO monitor is available in the **Alerts** tab in the SLO’s detail panel or the [Manage Monitors][6] page.
 
-[1]: https://sre.google/workbook/alerting-on-slos/
-[2]: /monitors/service_level_objectives/metric/
-[3]: /monitors/service_level_objectives/monitor/
+[1]: /monitors/service_level_objectives/metric/
+[2]: /monitors/service_level_objectives/monitor/
+[3]: https://sre.google/workbook/alerting-on-slos/
 [4]: https://app.datadoghq.com/slo
-[5]: /monitors/notify/
-[6]: /api/v1/monitors/#create-a-monitor
-[7]: https://www.terraform.io/docs/providers/datadog/r/monitor.html
-[8]: https://app.datadoghq.com/monitors/manage
+[5]: /api/v1/monitors/#create-a-monitor
+[6]: https://www.terraform.io/docs/providers/datadog/r/monitor.html
