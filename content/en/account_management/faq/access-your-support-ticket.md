@@ -25,9 +25,9 @@ If you have opened at least one Datadog support ticket, follow this process to a
 {{< site-region region="us,us3,us5,eu" >}}
 1. Go to [https://help.datadoghq.com][1] and click **Sign in** on the top right. 
 
-2. If this is your first time signing into Zendesk, click **New to your Datadog Zendesk account? Sign up** to create a Zendesk account. If you have previously emailed Datadog Support, click **Have you emailed us? Get a password**.
+2. If this is your first time signing into Zendesk, click **New to your Datadog Zendesk account? Sign up** to create a Zendesk account. If you have previously emailed Datadog support, click **Have you emailed us? Get a password**.
   
-    **Note**: The email you use must match the email you used to contact Datadog Support.
+    **Note**: You must enter the email address you used to contact Datadog support.
 
   {{< img src="help/sign_in.png" alt="Sign into Zendesk" style="width:70%" >}}
 
@@ -36,9 +36,9 @@ If you have opened at least one Datadog support ticket, follow this process to a
 {{< site-region region="gov" >}}
 1. Go to [https://help.dd-gov.com][1] and click **Sign in** on the top right. 
 
-2. If this is your first time signing into Zendesk, click **New to Datadog? Sign up** to create a Zendesk account. If you have previously emailed Datadog Support, click **Have you emailed us? Get a password**.
+2. If this is your first time signing into Zendesk, click **New to Datadog? Sign up** to create a Zendesk account. If you have previously emailed Datadog support, click **Have you emailed us? Get a password**.
 
-    **Note**: The email you use must match the email you used to contact Datadog Support.
+    **Note**: You must enter the email address you used to contact Datadog support.
 
   {{< img src="help/sign_in_gov.png" alt="Sign into Zendesk" style="width:50%" >}}
 
@@ -47,7 +47,7 @@ If you have opened at least one Datadog support ticket, follow this process to a
 
 3. After you receive the password in your email, log in and click **Manage your tickets** to see your requests:
   {{< img src="help/my_activities.png" alt="my activities"  >}}
-5. If you don't see the **My Activities** page after logging in, click on your name in the upper right hand corner, and then click **My Activities**.
+5. If you don't see the **My Activities** page after logging in, click on your name in the upper right corner, and then click **My Activities**.
 
 {{< site-region region="us,us3,us5,eu" >}}
 6. If you would like to view your entire organization's tickets, submit a request to [Datadog support][1].
