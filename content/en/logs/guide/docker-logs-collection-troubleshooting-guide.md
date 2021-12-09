@@ -72,6 +72,8 @@ This status means that logs are enabled but you haven't specified which containe
 
 ## Docker log collection from file issues
 
+Docker logs are collected from the log files on disk by default in agent 6.33.0/7.33.0+ so long as the log files on disk are accessible by the agent. `DD_LOGS_CONFIG_DOCKER_CONTAINER_USE_FILE` can be set to `false` to disable this behavior. Some containers may still be tailed from the Docker socket despite the default if the logs file path is not accessible. If the Agent ever collected logs from a given container via the docker socket, it will continue to do so (including after Agent restarts) in order to avoid sending duplicate logs. To force the Agent to collect logs from file for such a container, set `DD_LOGS_CONFIG_DOCKER_CONTAINER_FORCE_USE_FILE` to `true`. This may cause duplicate logs when the transition occurs.
+
 When collecting Docker container logs from file, the Agent falls back on collection from the Docker socket if it cannot read from the directory where Docker container logs are stored (`/var/lib/docker/containers` on Linux). In some circumstances, the Datadog Agent may fail to collect logs from file. To diagnose this, check the Logs Agent status and look for a file type entry showing an error similar to the following:
 
 ```text
@@ -84,8 +86,6 @@ When collecting Docker container logs from file, the Agent falls back on collect
 This status means that the Agent is unable to find a log file for a given container. To resolve this issue, check that the folder containing Docker container logs is correctly exposed to the Datadog Agent container. On Linux, it corresponds to  `-v /var/lib/docker/containers:/var/lib/docker/containers:ro` on the command line starting the Agent container, whereas on Windows it corresponds to `-v c:/programdata/docker/containers:c:/programdata/docker/containers:ro`. Note that the directory relative to the underlying host may be different due to specific configuration of the Docker daemon—this is not an issue pending a correct Docker volume mapping. For example, use `-v /data/docker/containers:/var/lib/docker/containers:ro` if the Docker data directory has been relocated to `/data/docker` on the underlying host.
 
 If logs are collected but single lines appear to be split, check that the Docker daemon is using the [JSON logging driver](#your-containers-are-not-using-the-json-logging-driver).
-
-Docker logs are collected from the log files on disk by default in agent 6.33.0/7.33.0+ so long as the log files on disk are accessible by the agent. `DD_LOGS_CONFIG_DOCKER_CONTAINER_USE_FILE` can be set to `false` to disable this behavior. Some containers may still be tailed from the Docker socket despite the default if the logs file path is not accessible. If the Agent ever collected logs from a given container via the docker socket, it will continue to do so (including after Agent restarts) in order to avoid sending duplicate logs. To force the Agent to collect logs from file for such a container, set `DD_LOGS_CONFIG_DOCKER_CONTAINER_FORCE_USE_FILE` to `true`. This may cause duplicate logs when the transition occurs.
 
 **Note:** When an agent is installed on the host the agent does not have permission to access `/var/lib/docker/containers` and therefore logs will be collected from the docker socket. 
 
