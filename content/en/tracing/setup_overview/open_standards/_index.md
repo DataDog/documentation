@@ -121,7 +121,7 @@ Run an Opentelemetry Collector container to receive traces either from the [inst
 
 2. Choose a published Docker image such as [`otel/opentelemetry-collector-contrib:latest`][13].
 
-3.  Determine which ports to open on your container. OpenTelemetry traces are sent to the OpenTelemetry Collector over TCP or UDP on a number of ports, which must be exposed on the container.  By default, traces are sent over OTLP/gRPC on port `55680`, but common protocols and their ports include:
+3.  Determine which ports to open on your container. OpenTelemetry traces are sent to the OpenTelemetry Collector over TCP or UDP on several ports, which must be exposed on the container. By default, traces are sent over OTLP/gRPC on port `55680`, but common protocols and their ports include:
 
       - Zipkin/HTTP on port `9411`
       - Jaeger/gRPC on port `14250`
