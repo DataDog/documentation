@@ -27,7 +27,7 @@ further_reading:
   text: "Log Collection Troubleshooting Guide"
 ---
 
-To send your C# logs to Datadog, we recommend [logging to a file][1] and then [configuring the Datadog Agent][2] to tail the file. See example logging configurations for [Serilog][3], [NLog][4], and [log4net][5]. Datadog recommends setting up your logging library to output logs in JSON format to avoid the need for [custom parsing rules][6].  
+To send your C# logs to Datadog, [log to a file][1] and then [configuring the Datadog Agent][2] to tail the file. See the example logging configurations for [Serilog][3], [NLog][4], and [log4net][5]. Datadog recommends setting up your logging library to output logs in JSON format to avoid the need for [custom parsing rules][6].  
 
 The Datadog Agent is required for the [example configurations][1]. If needed, there is an [Agentless logging][7] option for Serilog.
 
@@ -260,7 +260,7 @@ If, despite the benefits of logging in JSON, you wish to log in raw string forma
 
 ## Configure your Datadog Agent
 
-To start submitting logs to Datadog, once [log collection is enabled][10], set up [custom log collection][11] to tail the log file by doing the following:
+Once [log collection is enabled][10], set up [custom log collection][11] to tail your log files and send them to Datadog.
 
 1. Create a `csharp.d/` folder in the `conf.d/` [Agent configuration directory][12].
 2. Create a `conf.yaml` file in `csharp.d/` with the following content:
@@ -302,7 +302,7 @@ In cases where logs cannot be logged to a file because the application is runnin
     PM> Install-Package Serilog.Sinks.Datadog.Logs
     ```
 
-2. Add the following code to initialize the logger directly in your application (do not forget to add your [API key][2]):
+2. Add the following code to initialize the logger directly in your application. Your [API key][2] is required for initialization.
 
 {{< site-region region="us" >}}
 
