@@ -11,7 +11,7 @@ Les checks custom, ou checks custom d'Agent, vous permettent de recueillir des m
 
 ### Faut-il que je rédige un check custom d'Agent ou une intégration ?
 
-Utilisez les checks custom pour recueillir des métriques à partir de vos applications personnalisées ou de systèmes uniques. Si vous cherchez à obtenir des métriques depuis une application populaire, un service public ou un projet open source, Datadog vous conseille de [créer une intégration d'Agent complète][2]. Pour obtenir plus d'informations afin de déterminer la méthode à suivre pour envoyer vos données, consultez la section réservée aux [développeurs][3]. Pour découvrir comment rédiger une intégration, consultez la section [Créer une intégration][2].
+Utilisez les checks custom pour recueillir des métriques à partir de vos applications personnalisées ou de systèmes uniques. Si vous cherchez à obtenir des métriques depuis une application disponible librement, un service public ou un projet open source, Datadog vous conseille de [créer une intégration d'Agent complète][2]. Pour obtenir plus d'informations afin de déterminer la méthode à suivre pour envoyer vos données, consultez la section réservée aux [développeurs][3]. Pour découvrir comment rédiger une intégration, consultez la section [Créer une intégration][2].
 
 ## Prise en main
 
