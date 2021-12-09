@@ -16,6 +16,7 @@ export const initializeAlogliaInsights = () => {
   searchInsights('init', { appId, apiKey });
 }
 
+// Don't send data from synthetic runs or specific pages we want to ignore.
 const pageIsEligibleToSendAlgoliaInsightsData = (url) => {
   const urlObject = new URL(url);
   return window._DATADOG_SYNTHETICS_BROWSER === undefined && urlObject.pathname !== '/';

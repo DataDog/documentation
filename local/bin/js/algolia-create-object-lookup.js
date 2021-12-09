@@ -38,7 +38,7 @@ const getAllHits = () => {
   let hits = [];
 
   index.browseObjects({
-    query: '', // Empty query will match all records
+    query: '', // Empty query matches all records.
     attributesToRetrieve: ["objectID", "url"],
     batch: batch => {
       hits = hits.concat(batch);

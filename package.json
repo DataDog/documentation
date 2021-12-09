@@ -5,7 +5,7 @@
     "private": true,
     "scripts": {
         "algolia:config": "node ./local/bin/js/algolia-config.js",
-        "algolia:objectMap": "node ./local/bin/js/algolia-create-object-map.js",
+        "algolia:objectLookup": "node ./local/bin/js/algolia-create-object-lookup.js",
         "preinstall": "bash local/bin/sh/preinstall.sh",
         "prestart": "rimraf public",
         "start": "run-p start:**",
