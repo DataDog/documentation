@@ -85,7 +85,9 @@ This status means that the Agent is unable to find a log file for a given contai
 
 If logs are collected but single lines appear to be split, check that the Docker daemon is using the [JSON logging driver](#your-containers-are-not-using-the-json-logging-driver).
 
-Docker logs are collected from the log files on disk by default. `DD_LOGS_CONFIGy_DOCKER_CONTAINER_USE_FILE` can be set to `false` to disable this behavior. Some containers may still be tailed from the Docker socket despite the default if the logs file path is not accessible.
+Docker logs are collected from the log files on disk by default in agent 6.33.0/7.33.0+ so long as the log files on disk are accessible by the agent. `DD_LOGS_CONFIG_DOCKER_CONTAINER_USE_FILE` can be set to `false` to disable this behavior. Some containers may still be tailed from the Docker socket despite the default if the logs file path is not accessible. If the Agent ever collected logs from a given container via the docker socket, it will continue to do so (including after Agent restarts) in order to avoid sending duplicate logs. To force the Agent to collect logs from file for such a container, set `DD_LOGS_CONFIG_DOCKER_CONTAINER_FORCE_USE_FILE` to `true`. This may cause duplicate logs when the transition occurs.
+
+**Note:** When an agent is installed on the host the agent does not have permission to access `/var/lib/docker/containers` and therefore logs will be collected from the docker socket. 
 
 
 ### Status: pending

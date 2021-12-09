@@ -154,17 +154,6 @@ The commands related to log collection are:
 
 - If using the _journald_ logging driver instead of Docker's default json-file logging driver, see the [journald integration documentation][2] for details regarding the setup for containerized environments. See the [journald filter units documentation][2] for more information on parameters for filtering.
 
-## Docker container log collection from file
-
-In Datadog Agent 7.27.0/6.27.0+ Docker container logs can be collected from a file. Docker container log collection from file is an alternative to collection over the Docker socket. It offers better performance and can be used as soon as the directory storing Docker container logs is exposed to the Agent in the following location: `/var/lib/docker/containers` (`c:\programdata\docker\containers` on Windows). 
-
-**Important notes**:
-
-- When migrating from Docker socket container log collection to file based log collection, only new containers are tailed from file. If required, you can force the Agent to collect all container logs from file using the environment variable `DD_LOGS_CONFIG_DOCKER_CONTAINER_FORCE_USE_FILE` and setting it to `true`. In that case duplicated logs may occur for containers from which some logs were already collected.
-
-- If an Agent is switched back from container file log collection to collection over the Docker socket, duplicated logs are also likely to occur for existing containers.
-
-
 
 ## Log integrations
 
@@ -296,6 +285,17 @@ Use Autodiscovery log labels to apply advanced log collection processing logic, 
 - [Scrub sensitive data from your logs][8].
 - [Proceed to multi-line aggregation][9].
 
+## Docker container log collection from file
+
+In Datadog Agent 7.27.0/6.27.0+ Docker container logs can be collected from a file. In Agent 6.33.0+/7.33.0+ it is enabled by default. Docker container log collection from file is an alternative to collection over the Docker socket. It offers better performance and can be used as long as the directory storing Docker container logs is exposed to the Agent in the following location: `/var/lib/docker/containers` (`c:\programdata\docker\containers` on Windows). See the (Docker logs collection troubleshooting guide)[12] for more information.
+
+**Important notes**:
+
+- When migrating from Docker socket container log collection to file based log collection, only new containers are tailed from file. If required, you can force the Agent to collect all container logs from file using the environment variable `DD_LOGS_CONFIG_DOCKER_CONTAINER_FORCE_USE_FILE` and setting it to `true`. In that case duplicated logs may occur for containers from which some logs were already collected.
+
+- If an Agent is switched back from container file log collection to collection over the Docker socket, duplicated logs are also likely to occur for existing containers.
+
+
 ## Filter containers
 
 It is possible to manage from which containers you want to collect logs. This can be useful to prevent the collection of the Datadog Agent logs for instance. See the [Container Discovery Management][10] to learn more.
@@ -323,3 +323,4 @@ For Kubernetes environments, see the [Kubernetes short lived container documenta
 [9]: /agent/logs/advanced_log_collection/?tab=docker#multi-line-aggregation
 [10]: /agent/guide/autodiscovery-management/
 [11]: /agent/kubernetes/log/?tab=daemonset#short-lived-containers
+[12]: /logs/guide/docker-logs-collection-troubleshooting-guide
