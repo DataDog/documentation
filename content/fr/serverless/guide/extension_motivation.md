@@ -4,7 +4,7 @@ kind: guide
 ---
 ## Est-il pertinent de migrer vers l'extension Lambda Datadog dans votre situation ?
 
-Les extensions AWS Lambda s'exécutent au sein de l'environnement d'exécution Lambda, simultanément au code de votre fonction Lambda. Datadog s'est associé avec AWS afin de créer l'[extension Lambda Datadog][1]. Il s'agit d'une version légère de l'Agent Datadog capable d'envoyer des métriques custom, des métriques optimisées, des traces et des logs.
+Les extensions AWS Lambda s'exécutent au sein de l'environnement d'exécution Lambda, en même temps que le code de votre fonction Lambda. Datadog s'est associé avec AWS afin de créer l'[extension Lambda Datadog][1]. Il s'agit d'une version légère de l'Agent Datadog capable d'envoyer des métriques custom, des métriques optimisées, des traces et des logs.
 
 Si vous avez configuré les [fonctionnalités sans serveur Datadog][2] avant le lancement officiel de l'extension Lambda Datadog, vous utilisez probablement le [Forwarder Datadog][3] pour envoyer des métriques custom, des métriques optimisées, des traces et des logs.
 

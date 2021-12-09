@@ -91,9 +91,6 @@ L'intégration Bonsai n'inclut aucun check de service.
 
 Besoin d'aide ? Contactez [l'assistance Datadog][8].
 
-## Pour aller plus loin
-
-Consultez [notre blog][9] pour en savoir plus sur la surveillance d'infrastructure et sur toutes les autres intégrations Datadog disponibles.
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/bonsai/images/snapshot.png
 [2]: https://app.datadoghq.com/organization-settings/api-keys
@@ -103,4 +100,3 @@ Consultez [notre blog][9] pour en savoir plus sur la surveillance d'infrastructu
 [6]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/bonsai/images/datadog_activated.png
 [7]: https://github.com/DataDog/integrations-extras/blob/master/bonsai/metadata.csv
 [8]: https://docs.datadoghq.com/fr/help/
-[9]: https://www.datadoghq.com/blog

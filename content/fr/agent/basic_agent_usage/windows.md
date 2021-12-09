@@ -100,7 +100,7 @@ Chaque élément de configuration est ajouté en tant que propriété dans la li
 {{% /tab %}}
 {{% tab "Mise à niveau" %}}
 
-L'Agent 7 prend uniquement en charge Python 3. Avant d'effectuer une mise à niveau, vérifiez que vos checks custom sont compatibles avec Python 3. Consultez le guide [Migration de checks custom vers Python 3][1] pour en savoir plus. Si vous n'utilisez pas de checks custom ou avez déjà vérifié leur compatibilité, effectuez la mise à niveau à l'aide des instructions prévues pour l'[interface graphique](?tab=interfacegraphique) ou la [ligne de commande](?tab=lignedecommande).
+L'Agent 7 prend uniquement en charge Python 3. Avant d'effectuer une mise à niveau, vérifiez que vos checks custom sont compatibles avec Python 3. Consultez le guide [Migration de checks custom vers Python 3][1] pour en savoir plus. Si vous n'utilisez pas de checks custom ou avez déjà vérifié leur compatibilité, effectuez la mise à niveau à l'aide des instructions prévues pour l'[interface graphique](?tab=Interface graphique) ou la [ligne de commande](?tab=Ligne de commande).
 
 Si vous utilisez une version < 5.12.0 de l'Agent Datadog, procédez d'abord à la mise à niveau vers une version plus récente de l'Agent 5 (>= 5.12.0, mais < 6.0.0) à l'aide du [fichier d'installation EXE][2], puis effectuez la mise à niveau vers une version >= 6 de l'Agent Datadog.
 
