@@ -22,7 +22,7 @@ Remarque : **ce widget n'affiche que les 100 événements les plus récents**.
 
 ## Configuration
 
-{{< img src="dashboards/widgets/event_stream/event_stream_setup.png" alt="configuration du flux d'événements style="width:80%;">}}
+{{< img src="dashboards/widgets/event_stream/event_stream_setup.png" alt="configuration du flux d'événements" style="width:80%;">}}
 
 ### Configuration
 
@@ -59,7 +59,7 @@ Remarque : **ce widget n'affiche que les 100 événements les plus récents**.
 
 ## Configuration
 
-{{< img src="dashboards/widgets/event_stream/event_stream_setup.png" alt="configuration du flux d'événements style="width:80%;">}}
+{{< img src="dashboards/widgets/event_stream/event_stream_setup.png" alt="configuration du flux d'événements" style="width:80%;">}}
 
 ### Configuration
 
