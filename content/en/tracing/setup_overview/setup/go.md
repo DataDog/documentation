@@ -61,6 +61,39 @@ Datadog has a series of pluggable packages which provide out-of-the-box support 
 The Go tracer supports additional environment variables and functions for configuration.
 See all available options in the [configuration documentation][8].
 
+`DD_VERSION`
+: Set the application’s version, for example: `1.2.3`, `6c44da20`, `2020.02.13`
+
+`DD_SERVICE`
+: The service name to be used for this application. 
+
+`DD_ENV`
+: Set the application’s environment, for example: prod, pre-prod, staging.
+
+`DD_AGENT_HOST`
+: **Default**: `localhost` <br>
+Override the address of the trace Agent host that the default tracer attempts to submit traces to.
+
+`DD_DOGSTATSD_PORT`
+: **Default**: `8125` <br>
+Override the port that the default tracer submits DogStatsD metrics to.
+
+`DD_TAGS`
+: **Default**: [] <br>
+A list of default tags to be added to every span and profile, for example: layer:api,team:intake
+
+`DD_TRACE_STARTUP_LOGS`
+: **Default**: `true` <br>
+Enable startup configuration and diagnostic log
+
+`DD_TRACE_DEBUG`
+: **Default**: `false` <br>
+Enable debug logging in the tracer.
+
+`DD_TRACE_ENABLED`
+: **Default**: `true` <br>
+Enable web framework and library instrumentation. When false, the application code doesn’t generate any traces.
+
 We highly recommend using `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `env`, `service`, and `version` for your services.
 Check out the [Unified Service Tagging][9] documentation for recommendations on how to configure these environment variables. These variables are available for versions 1.24.0+ of the Go tracer.
 
