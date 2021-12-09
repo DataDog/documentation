@@ -85,7 +85,7 @@ This status means that the Agent is unable to find a log file for a given contai
 
 If logs are collected but single lines appear to be split, check that the Docker daemon is using the [JSON logging driver](#your-containers-are-not-using-the-json-logging-driver).
 
-Log collection from file is activated when the environment variable `DD_LOGS_CONFIG_DOCKER_CONTAINER_USE_FILE` is set to `true`. However, some containers may still be tailed from the Docker socket despite this setting. Only containers started after the activation of the option will have their logs collected from file. This situation is typically found when the Datadog Agent is upgraded from a version that was not offering this feature. If desired, it is possible to force all containers (including older ones) to have their logs collected from file by setting the environment variable `DD_LOGS_CONFIG_DOCKER_CONTAINER_FORCE_USE_FILE` to `true`. This may lead to some duplicated logs when the transition occurs.
+Docker logs are collected from the log files on disk by default. `DD_LOGS_CONFIGy_DOCKER_CONTAINER_USE_FILE` can be set to `false` to disable this behavior. Some containers may still be tailed from the Docker socket despite the default if the logs file path is not accessible.
 
 
 ### Status: pending

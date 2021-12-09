@@ -50,7 +50,6 @@ docker run -d --name datadog-agent \
            -e DD_API_KEY=<DATADOG_API_KEY> \
            -e DD_LOGS_ENABLED=true \
            -e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true \
-           -e DD_LOGS_CONFIG_DOCKER_CONTAINER_USE_FILE=true \
            -e DD_CONTAINER_EXCLUDE="name:datadog-agent" \
            -v /var/run/docker.sock:/var/run/docker.sock:ro \
            -v /var/lib/docker/containers:/var/lib/docker/containers:ro \
@@ -67,7 +66,6 @@ docker run -d --name datadog-agent \
            -e DD_API_KEY=<DATADOG_API_KEY> \
            -e DD_LOGS_ENABLED=true \
            -e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true \
-           -e DD_LOGS_CONFIG_DOCKER_CONTAINER_USE_FILE=true \
            -e DD_CONTAINER_EXCLUDE="name:datadog-agent" \
            -v \\.\pipe\docker_engine:\\.\pipe\docker_engine \
            -v c:\programdata\docker\containers:c:\programdata\docker\containers:ro
@@ -83,9 +81,6 @@ The commands related to log collection are:
 
 `-e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true`                
 : Adds a log configuration that enables log collection for all containers.
-
-`-e DD_LOGS_CONFIG_DOCKER_CONTAINER_USE_FILE=true`            
-: Adds a log configuration that enables Docker container log collection from file. Available in the Datadog Agent 7.27.0/6.27.0+. Check the [dedicated section](#docker-container-log-collection-from-file) for additional details.
 
 `-v /opt/datadog-agent/run:/opt/datadog-agent/run:rw`         
 : To prevent loss of container logs during restarts or network issues, the last log line collected for each container in this directory is stored on the host.
