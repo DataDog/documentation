@@ -1,7 +1,7 @@
 /* eslint-disable */
 import algoliasearch from 'algoliasearch';
-import configDocs from '../config/config-docs';
 import { getQueryParameterByName } from '../helpers/browser';
+import configDocs from '../config/config-docs';
 
 const getAlgoliaConfig = () => {
     const siteEnv = document.querySelector('html').dataset.env;
