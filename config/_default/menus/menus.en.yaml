@@ -3171,6 +3171,9 @@ footer_product_three:
   - name: Support
     url: 'https://www.datadoghq.com/support/'
     weight: 110
+  - name: 'Learning Center'
+    url: 'https://learn.datadoghq.com/'
+    weight: 115
   - name: Resources
     url: 'https://www.datadoghq.com/resources/'
     weight: 150
