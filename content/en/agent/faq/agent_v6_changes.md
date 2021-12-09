@@ -456,7 +456,7 @@ For Agent v6, all check-related Python code is imported from the `datadog_checks
 
 **Note**: All official integrations were updated to remove obsolete modules, so these changes only affect custom checks.
 
-A lot of the `utils` directory was removed from Agent v6, but most of the removed content was not directly related to checks. The flare module, for example, was removed and reimplemented in Go, but is unlikely to have been used by anyone in a custom check. For more details, see the [development documentation][9].
+A lot of the `utils` directory was removed from Agent v6, but most of the removed content was not directly related to checks. The flare module, for example, was removed and reimplemented in Go, but is uncommon to have been used by anyone in a custom check. For more details, read the [custom checks developer guide][9].
 
 {{< tabs >}}
 {{% tab "Integrations" %}}
