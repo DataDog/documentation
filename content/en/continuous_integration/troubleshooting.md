@@ -78,21 +78,21 @@ If you can see test results data in the **Test Runs** tab, but not the **Tests**
 
 If you cannot see the tests wall time it is likely that CI provider metadata is missing. To confirm this is the case, open a test execution in the [Test Runs][3] section, and check if `ci.pipeline.id`, `ci.pipeline.name`, `ci.pipeline.number` or `ci.job.url` tags are missing. If these tags are not populated then nothing shows in the wall time column.
 
-1. Tracers use the environment variables set by the CI provider to collect this information. See [Running tests inside a container][6] for a list of environment variables that the tracer attempts to read for each supported CI provider. Make sure that this environment variables have the expected values set.
-2. Check you are running your tests in a supported CI provider, for a list of supported CI providers see [Running tests inside a container][6]. Only these CI providers can extract the information to enrich the test metadata with CI information.
+1. Tracers use the environment variables set by the CI provider to collect this information. See the [Running tests inside a container][6] documentation for a list of environment variables that the tracer attempts to read for each supported CI provider. Make sure that the environment variables have the expected values set.
+2. Check that you are running your tests in a supported CI provider. For a list of supported CI providers, see [Running tests inside a container][6] documentation. Only these CI providers can extract the information to enrich the test metadata with CI information.
 3. If you still don't see the wall time, [contact Support][1] for troubleshooting help.
 
-### The tests wall time is not what I expect
+### The tests wall time is not what is expected
 
-The wall time is defined as the time difference between the start time of the first test and the end time of the last test for a particular pipeline.
+The wall time is defined as the time difference between the start time of the first test and the end time of the last test for the given pipeline.
 
 This is done using the following algorithm:
 
 1. Compute a hash based on CI information to group the tests.
-  a. If the tests have `ci.job.url`, we use that piece of information to calculate the hash.
-  b. If the tests don’t have `ci.job.url`, we calculate the hash using `ci.pipeline.id` + `ci.pipeline.name` + `ci.pipeline.number`.
-2. We calculate the wall time associated with every hash we have. Notice that we can have multiple wall times for a certain pipeline, for example, if we have multiple jobs that execute tests.
-3. If we have multiple wall times, the maximum wall time calculated for a given pipeline in a certain commit is used.
+  a. If the tests have `ci.job.url`, this information is use to calculate the hash.
+  b. If the tests don’t have `ci.job.url`, the hash is calculated using `ci.pipeline.id` + `ci.pipeline.name` + `ci.pipeline.number`.
+2. Calculate wall time is associated with every given hash. **Note**: There can be multiple wall times for a certain pipeline, for example, if there are multiple jobs that execute tests.
+3. If there are multiple wall times, the maximum wall time calculated for a given pipeline in a certain commit is used.
 
 ### Need further help?
 
