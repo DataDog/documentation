@@ -40,10 +40,10 @@ datadog:
     site: {{< region-param key="dd_site" code="true" >}}
 ```
 
-On each OpenTelemetry-instrumented application, set the resource attributes `deployment.environment`, `service.name`, and `service.version` using [the language's SDK][1]. As a fall-back, you can also configure hostname (optionally), environment, service name, and service version at the collector level for unified service tagging by following the [example configuration file][8]. If you don't specify the hostname explicitly, the exporter attempts to get an automatic default by checking the following sources in order, falling back to the next one if the current one is unavailable or invalid:
+On each OpenTelemetry-instrumented application, set the resource attributes `deployment.environment`, `service.name`, and `service.version` using [the language's SDK][1]. As a fall-back, you can also configure environment, service name, and service version at the collector level for unified service tagging by following the [example configuration file][8]. The exporter attempts to get a hostname by checking the following sources in order, falling back to the next one if the current one is unavailable or invalid:
 
-<!--- 1. Hostname set by another OpenTelemetry component -->
-1. Manually set hostname in configuration
+1. Hostname set in the OTLP resource
+1. Manually set hostname in the exporter configuration
 1. EC2 non-default hostname (if in EC2 instance)
 1. EC2 instance id (if in EC2 instance)
 1. Fully qualified domain name
@@ -61,7 +61,7 @@ The exporter assumes you have a pipeline that uses the `datadog` exporter, and i
 The Datadog exporter for the OpenTelemetry Collector is currently in beta. It may consume high CPU and memory resources. Configuring particularly the pipeline and batch processor may take some iteration before it responds with accurate metrics given your production environment. <a href="https://docs.datadoghq.com/help/">Reach out to support</a> if it doesn't work as you expect.
 </div>
 
-Here is an example trace pipeline configured with an `otlp` receiver, `batch` processor, and `datadog` exporter:
+Here is an example trace pipeline configured with an `otlp` receiver, `batch` processor, `resourcedetection` processor and `datadog` exporter:
 
 ```
 receivers:
@@ -73,10 +73,11 @@ receivers:
 processors:
   batch:
     timeout: 10s
+  resourcedetection:
+    detectors: [gce, ecs, ec2, azure, system]
 
 exporters:
   datadog/api:
-    hostname: customhostname
     env: prod
     service: myservice
     version: myversion
@@ -92,7 +93,7 @@ service:
   pipelines:
     traces:
       receivers: [otlp]
-      processors: [batch]
+      processors: [batch, resourcedetection]
       exporters: [datadog/api]
 ```
 
