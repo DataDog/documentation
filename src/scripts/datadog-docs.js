@@ -6,6 +6,7 @@ import configDocs from './config/config-docs';
 import { loadPage } from './components/async-loading';
 import { updateMainContentAnchors, gtag } from './helpers/helpers';
 import { getQueryParameterByName } from './helpers/browser';
+import algoliaObjectData from '../../data/algolia_objects.json';
 
 const { env } = document.documentElement.dataset;
 const { gaTag } = configDocs[env];
@@ -389,3 +390,7 @@ window.addEventListener(
     },
     false
 );
+
+window.addEventListener('DOMContentLoaded', () => {
+    console.log(algoliaObjectData.length);
+})

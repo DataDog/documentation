@@ -66,6 +66,7 @@ const commonConfig = env => {
                     loader: 'file-loader?name=[path][name].[hash].[ext]'
                 },
                 {
+                    type: 'javascript/auto',
                     test: /\.json$/,
                     loader: 'json-loader'
                 },

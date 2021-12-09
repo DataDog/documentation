@@ -21,10 +21,10 @@ const initializeAlgoliaIndex = () => {
   return client.initIndex(index);
 }
 
-const createDataFile = (hitsArray) => {
+const createDataFile = (algoliaRecordsArray) => {
   const filePath = 'data/algolia_objects.json';
 
-  fs.writeFile(filePath, hitsArray, (err) => {
+  fs.writeFile(filePath, algoliaRecordsArray, (err) => {
     if (err) {
       console.error(err)
     }
@@ -33,22 +33,28 @@ const createDataFile = (hitsArray) => {
   })
 }
 
-const getAllHits = () => {
+const getAllRecords = () => {
   const index = initializeAlgoliaIndex();
-  let hits = [];
+  const allRecords = [];
 
   index.browseObjects({
     query: '', // Empty query matches all records.
     attributesToRetrieve: ["objectID", "url"],
     batch: batch => {
-      hits = hits.concat(batch);
+      for (const record of batch) {
+        const { url } = record;
+
+        if (!url.includes('#')) {
+          allRecords.push(record)
+        }
+      }
     }
   })
-  .then(() => createDataFile(JSON.stringify(hits)))
+  .then(() => createDataFile(JSON.stringify(allRecords)))
   .catch(e => console.error(e))
 }
 
-getAllHits();
+getAllRecords();
 
 
 
