@@ -85,7 +85,7 @@ The unit for your metric (byte, second, request, query, etc.). See the [metric u
 
 When submitting custom metrics to Datadog, it is possible to change the [unit of measurement][1] that displays when hovering over the metric in your graph.
 
-**Note**: This does not change how a metric graph is displayed. It only changes the units of measurement that raw values are considered as, when hovering over a metric. Formatting is automatically applied for readability. For example, bytes (`B`) may be displayed as kilobytes (`KiB`).
+**Note**: This does not change how a metric graph is displayed. It only changes the units of measurement that raw values are considered as when you hover over a metric. Formatting is automatically applied for readability. For example, bytes (`B`) may be displayed as kilobytes (`KiB`).
 
 #### Metric type
 
