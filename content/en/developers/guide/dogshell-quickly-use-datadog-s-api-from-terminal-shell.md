@@ -54,6 +54,7 @@ apikey = <DATADOG_API_KEY>
 appkey = <YOUR_APPLICATION_KEY>
 ```
 This is useful if you'd like to push the file to many of your servers programmatically so that you can run `dog` commands from any of your servers.
+
 ## Dogshell commands
 
 For reference, [find the code for Dogshell][4]. But once you have Dogshell installed and initialized, you can append the `-h` option to the following commands to get more information on specific Dogshell usage:
