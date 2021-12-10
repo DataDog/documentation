@@ -195,6 +195,9 @@ Alternatively, use the Powershell command below.
 
 Both methods remove the Agent, but they do not remove the `C:\ProgramData\Datadog` configuration folder on the host.
 
+{{% /tab %}}
+{{< /tabs >}}
+
 ### Ensure machine doesn't restart
 Some Agent versions may cause a forced reboot.
 To prevent this, use either `REBOOT=ReallySuppress` or `/norestart` - both achieve the same effect.
@@ -208,6 +211,3 @@ Example using the `REBOOT=ReallySuppress` flag:
 ```powershell
 start-process msiexec -Wait -ArgumentList ('/log', 'C:\\uninst.log', '/q', '/x', (Get-WmiObject -Class Win32_Product -Filter "Name='Datadog Agent'" -ComputerName .).IdentifyingNumber, 'REBOOT=ReallySuppress')
 ```
-
-{{% /tab %}}
-{{< /tabs >}}
