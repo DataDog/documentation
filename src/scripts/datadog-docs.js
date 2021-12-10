@@ -392,5 +392,8 @@ window.addEventListener(
 );
 
 window.addEventListener('DOMContentLoaded', () => {
-    console.log(algoliaObjectData.length);
+    // const algoliaObjectJson = JSON.parse(algoliaObjectData);
+    console.log(`Algolia Object Data length is ${algoliaObjectData.length} before parse`);
+    console.log(typeof algoliaObjectData)
+    // console.log(`Algolia Object Json length is ${algoliaObjectJson.length} after parse`);
 })
