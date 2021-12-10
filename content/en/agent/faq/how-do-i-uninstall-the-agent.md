@@ -199,15 +199,18 @@ Both methods remove the Agent, but they do not remove the `C:\ProgramData\Datado
 {{< /tabs >}}
 
 ### Ensure machine doesn't restart
-Some Agent versions may cause a forced reboot.
-To prevent this, use either `REBOOT=ReallySuppress` or `/norestart` - both achieve the same effect.
 
-Example using the `/norestart` flag:
+Some Agent versions may cause a forced reboot.
+To prevent this, use either `REBOOT=ReallySuppress` or `/norestart`. Both achieve the same effect.
+
+The following is an example of the `/norestart` flag.
+
 ```powershell
 start-process msiexec -Wait -ArgumentList ('/log', 'C:\\uninst.log', '/norestart', '/q', '/x', (Get-WmiObject -Class Win32_Product -Filter "Name='Datadog Agent'" -ComputerName .).IdentifyingNumber)
 ```
 
-Example using the `REBOOT=ReallySuppress` flag:
+The following is an example of the `REBOOT=ReallySuppress` flag.
+
 ```powershell
 start-process msiexec -Wait -ArgumentList ('/log', 'C:\\uninst.log', '/q', '/x', (Get-WmiObject -Class Win32_Product -Filter "Name='Datadog Agent'" -ComputerName .).IdentifyingNumber, 'REBOOT=ReallySuppress')
 ```
