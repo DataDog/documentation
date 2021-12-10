@@ -603,7 +603,7 @@ The number of contexts aggregated when client side aggregation is enabled. Start
 
 `datadog.dogstatsd.client.aggregated_context_by_type`
 : **Metric type**: count<br>
-The number of contexts aggregated by type when client side aggregation is enabled. Starting with version `v2.13.0`. The metric is enabled by default starting `v3.0.0` but requires `enableDevMode(true)` for `v2.13.0`. The metric is tagged with either `metrics_type:gauge`, `metrics_type:count`, `metrics_type:set`, `metrics_type:histogram` nor `metrics_type:distribution`.
+The number of contexts aggregated by type when client side aggregation is enabled. Starting with version `v2.13.0`. The metric is enabled by default starting `v3.0.0` but requires `enableDevMode(true)` for `v2.13.0`. The metric is tagged with either `metrics_type:gauge`, `metrics_type:count`, `metrics_type:set`, `metrics_type:histogram` or `metrics_type:distribution`.
 
 `datadog.dogstatsd.client.metrics_by_type`
 : **Metric type**: count<br>
