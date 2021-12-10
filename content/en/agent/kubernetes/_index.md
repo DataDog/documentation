@@ -392,7 +392,7 @@ Once the Agent is up and running in your cluster, use [Datadog's Autodiscovery f
 
 ## Environment variables
 
-The following is the list of environment variables available for the Datadog Agent using a DaemonSet. If you are using Helm, see the full list of configuration options for the `datadog-value.yaml` file in the [helm/charts Github repository][9]. If you are using Operator, see [Operator Configuration][17]
+The following is the list of environment variables available for the Datadog Agent using a DaemonSet. If you are using Helm, see the full list of configuration options for the `datadog-value.yaml` file in the [helm/charts Github repository][9]. If you are using Operator, see the [Operator Configuration][17] documentation.
 
 ### Global options
 
