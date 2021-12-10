@@ -498,6 +498,179 @@ HAProxy 1.8 and newer allow DNS service discovery to detect server changes and a
 If you are using older version of HAProxy, you have to reload or restart HAProxy. **It is recommended to have a `cron` job that reloads HAProxy every 10 minutes** (usually doing something like `service haproxy reload`) to force a refresh of HAProxy's DNS cache, in case `app.datadoghq.eu` fails over to another IP.
 
 {{< /site-region >}}
+{{< site-region region="gov" >}}
+
+```conf
+# Basic configuration
+global
+    log 127.0.0.1 local0
+    maxconn 4096
+    stats socket /tmp/haproxy
+
+# Some sane defaults
+defaults
+    log     global
+    option  dontlognull
+    retries 3
+    option  redispatch
+    timeout client 5s
+    timeout server 5s
+    timeout connect 5s
+# This declares a view into HAProxy statistics, on port 3833
+# You do not need credentials to view this page and you can
+# turn it off once you are done with setup.
+listen stats
+    bind *:3833
+    mode http
+    stats enable
+    stats uri /
+
+# This section is to reload DNS Records
+# Replace <DNS_SERVER_IP> and <DNS_SECONDARY_SERVER_IP> with your DNS Server IP addresses.
+# For HAProxy 1.8 and newer
+resolvers my-dns
+    nameserver dns1 <DNS_SERVER_IP>:53
+    nameserver dns2 <DNS_SECONDARY_SERVER_IP>:53
+    resolve_retries 3
+    timeout resolve 2s
+    timeout retry 1s
+    accepted_payload_size 8192
+    hold valid 10s
+    hold obsolete 60s
+
+# This declares the endpoint where your Agents connects for
+# sending metrics (e.g. the value of "dd_url").
+frontend metrics-forwarder
+    bind *:3834
+    mode http
+    option tcplog
+    default_backend datadog-metrics
+
+    use_backend datadog-api if { path_beg -i  /api/v1/validate }
+    use_backend datadog-flare if { path_beg -i  /support/flare/ }
+
+# This declares the endpoint where your Agents connects for
+# sending traces (e.g. the value of "endpoint" in the APM
+# configuration section).
+frontend traces-forwarder
+    bind *:3835
+    mode tcp
+    option tcplog
+    default_backend datadog-traces
+
+# This declares the endpoint where your agents connects for
+# sending processes (e.g. the value of "url" in the process
+# configuration section).
+frontend processes-forwarder
+    bind *:3836
+    mode tcp
+    option tcplog
+    default_backend datadog-processes
+
+# This declares the endpoint where your Agents connects for
+# sending Logs (e.g the value of "logs.config.logs_dd_url")
+# If sending logs with use_http: true
+frontend logs_http_frontend
+    bind *:3837
+    mode http
+    option tcplog
+    default_backend datadog-logs-http
+
+# If sending logs with use_tcp: true
+# frontend logs_frontend
+#    bind *:10514
+#    mode tcp
+#    option tcplog
+#    default_backend datadog-logs
+
+# This declares the endpoint where your Agents connects for
+# sending database monitoring metrics and activity (e.g the value of "database_monitoring.metrics.dd_url" and "database_monitoring.activity.dd_url")
+frontend database_monitoring_metrics_frontend
+    bind *:3838
+    mode http
+    option tcplog
+    default_backend datadog-database-monitoring-metrics
+
+# This declares the endpoint where your Agents connects for
+# sending database monitoring samples (e.g the value of "database_monitoring.samples.dd_url")
+frontend database_monitoring_samples_frontend
+    bind *:3839
+    mode http
+    option tcplog
+    default_backend datadog-database-monitoring-samples
+
+# This is the Datadog server. In effect any TCP request coming
+# to the forwarder frontends defined above are proxied to
+# Datadog's public endpoints.
+backend datadog-metrics
+    balance roundrobin
+    mode http
+    # The following configuration is for HAProxy 1.8 and newer
+    server-template mothership 5 haproxy-app.agent.ddog-gov.com:443 check port 443 ssl verify none check resolvers my-dns init-addr none resolve-prefer ipv4
+    # Uncomment the following configuration for older HAProxy versions
+    # server mothership haproxy-app.agent.ddog-gov.com:443 check port 443 ssl verify none
+
+backend datadog-api
+    mode http
+    # The following configuration is for HAProxy 1.8 and newer
+    server-template mothership 5 api.ddog-gov.com:443 check port 443 ssl verify none check resolvers my-dns init-addr none resolve-prefer ipv4
+    # Uncomment the following configuration for older HAProxy versions
+    # server mothership api.ddog-gov.com:443 check port 443 ssl verify none
+
+backend datadog-flare
+    mode http
+    # The following configuration is for HAProxy 1.8 and newer
+    server-template mothership 5 flare.ddog-gov.com:443 check port 443 ssl verify none check resolvers my-dns init-addr none resolve-prefer ipv4
+    # Uncomment the following configuration for older HAProxy versions
+    # server mothership flare.ddog-gov.com:443 check port 443 ssl verify none
+
+backend datadog-traces
+    balance roundrobin
+    mode tcp
+    # The following configuration is for HAProxy 1.8 and newer
+    server-template mothership 5 trace.agent.ddog-gov.com:443 check port 443 ssl verify none check resolvers my-dns init-addr none resolve-prefer ipv4
+    # Uncomment the following configuration for older HAProxy versions
+    # server mothership trace.agent.ddog-gov.com:443 check port 443 ssl verify none
+
+backend datadog-processes
+    balance roundrobin
+    mode tcp
+    # The following configuration is for HAProxy 1.8 and newer
+    server-template mothership 5 process.ddog-gov.com:443 check port 443 ssl verify none check resolvers my-dns init-addr none resolve-prefer ipv4
+    # Uncomment the following configuration for older HAProxy versions
+    # server mothership process.ddog-gov.com:443 check port 443 ssl verify none
+
+backend datadog-logs-http
+    balance roundrobin
+    mode http
+    # The following configuration is for HAProxy 1.8 and newer
+    server-template mothership 5 agent-http-intake.logs.ddog-gov.com:443  check port 443 ssl verify none check resolvers my-dns init-addr none resolve-prefer ipv4
+    # Uncomment the following configuration for older HAProxy versions
+    # server datadog agent-http-intake.logs.ddog-gov.com:443 check port 443 ssl verify none
+
+backend datadog-database-monitoring-metrics
+    balance roundrobin
+    mode http
+    # The following configuration is for HAProxy 1.8 and newer
+    server-template mothership 5 dbm-metrics-intake.ddog-gov.com:443  check port 443 ssl verify none check resolvers my-dns init-addr none resolve-prefer ipv4
+
+backend datadog-database-monitoring-samples
+    balance roundrobin
+    mode http
+    # The following configuration is for HAProxy 1.8 and newer
+    server-template mothership 5 dbquery-intake.ddog-gov.com:443  check port 443 ssl verify none check resolvers my-dns init-addr none resolve-prefer ipv4
+
+```
+
+**Note**: Download the certificate with the following command:
+        * `sudo apt-get install ca-certificates` (Debian, Ubuntu)
+        * `yum install ca-certificates` (CentOS, Red Hat)
+The file might be located at `/etc/ssl/certs/ca-bundle.crt` for CentOS, Red Hat.
+
+HAProxy 1.8 and newer allow DNS service discovery to detect server changes and automatically apply them to your configuration.
+If you are using older version of HAProxy, you have to reload or restart HAProxy. **It is recommended to have a `cron` job that reloads HAProxy every 10 minutes** (usually doing something like `service haproxy reload`) to force a refresh of HAProxy's DNS cache, in case `app.ddog-gov.com` fails over to another IP.
+
+{{< /site-region >}}
 
 #### Datadog Agent configuration
 
