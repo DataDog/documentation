@@ -52,7 +52,7 @@ For each scope find the common tags and group them together
   {{ $scopeGroups = ($scopeGroups | append $scope) | uniq }}
 {{ end }}
 
-<h2>Available Scopes</h2>
+<h2>Scopes</h2>
 
 {{ range $tagString, $scopeSlice := ($s.Get "tags") }}
     <h4>{{ $tagString }}</h4>
@@ -65,7 +65,7 @@ For each scope find the common tags and group them together
             <!-- Header -->
             <div class="row table-header">
                 <div class="col-4 pl-2 column">
-                    <p class="font-semibold">Name</p>
+                    <p class="font-semibold">Scope name</p>
                 </div>
                 <div class="col-3 pl-2 column">
                     <p class="font-semibold">Description</p>
