@@ -48,7 +48,7 @@ The [latest version of the .NET Tracer][4] can automatically instrument the foll
 
 | Framework or library            | NuGet package                                                                             | Integration Name     |
 | ------------------------------- | ----------------------------------------------------------------------------------------- | -------------------- |
-| ADO.NET                         | built-in                                                                                  | `AdoNet`             |
+| ADO.NET                         | All AdoNet integrations                                                                   | `AdoNet`             |
 | Aerospike                       | `Aerospike.Client` 4.0.0+                                                                 | `Aerospike`          |
 | ASP.NET (including Web Forms)   | built-in                                                                                  | `AspNet`             |
 | ASP.NET MVC                     | `Microsoft.AspNet.Mvc` 4.0+                                                               | `AspNetMvc`          |
