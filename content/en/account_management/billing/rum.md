@@ -31,6 +31,6 @@ Browser logs are automatically tied to the corresponding RUM session, enabling y
 
 Yes. Datadog uses cookies to stitch together the various steps of your users into a session. This process does not use cross-domain cookies, and it does not track the actions of your users outside your applications.
 
-## I am seeing Session Replays showing up in my usage page, but I have not configured Session Replay in my environment.
+## Session Replays shows up in my usage page, but I have not configured Session Replay in my environment.
 
 Session Replay is the name of a SKU. Compared to the Browser SKU, the Session Replay SKU also includes replays, long tasks, and resources. So, if you are collecting any of the three, you will be billed for the Session Replay SKU. 
