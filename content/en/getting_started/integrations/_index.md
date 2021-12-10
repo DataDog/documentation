@@ -187,7 +187,7 @@ tagging
 [9]: /integrations/python/
 [10]: /developers/custom_checks/write_agent_check/
 [11]: https://github.com/DataDog/integrations-core
-[12]: https://github.com/DataDog/integrations-extras
+[12]: /getting_started/tagging/unified_service_tagging/
 [13]: /developers/integrations/new_check_howto/#developer-toolkit
 [14]: /agent/guide/integration-management/
 [15]: https://app.datadoghq.com/account/settings#agent
