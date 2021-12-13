@@ -10,7 +10,7 @@ kind: documentation
 rule_category:
   - Cloud Configuration
 scope: rds
-security: conformité
+security: compliance
 source: rds
 title: L'instance RDS n'est pas accessible au public
 type: security_rules
@@ -23,7 +23,7 @@ Sécurisez votre instance RDS afin qu'elle ne soit pas accessible au public.
 
 L'absence de restrictions d'accès à votre instance RDS permet à tout le monde sur Internet d'établir une connexion avec votre base de données, vous exposant ainsi à un risque d'attaque par brute force, DoS/DDoS ou injection SQL.
 
-## Remédiation
+## Remediation
 
 ### Console
 

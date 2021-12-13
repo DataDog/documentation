@@ -858,7 +858,7 @@
   },
   "TriggerTests": {
     "description": "Trigger a set of Synthetics tests.",
-    "summary": "Trigger some Synthetics tests",
+    "summary": "Trigger Synthetics tests",
     "request_description": "The identifiers of the tests to trigger.",
     "request_schema_description": "Object describing the synthetics tests to trigger."
   },

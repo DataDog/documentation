@@ -27,7 +27,7 @@ further_reading:
 
 {{< img src="network_performance_monitoring/devices/ndm-overview.png" alt="Network Device Explorer" responsive="true" style="width:100%;">}}
 
-Network Device Monitoring is designed to give you visibility into your on-premise and virtual network devices, such as routers, switches, and firewalls. Automatically discover devices on any network, and quickly start collecting metrics like bandwidth utilization, volume of bytes sent, and determine whether devices are up/down.
+Network Device Monitoring gives you visibility into your on-premise and virtual network devices, such as routers, switches, and firewalls. Automatically discover devices on any network, and quickly start collecting metrics like bandwidth utilization, volume of bytes sent, and determine whether devices are up/down.
 
 ## Getting started
 

@@ -43,7 +43,8 @@ To monitor individual devices:
 
     ```yaml
     init_config:
-      loader: core
+      loader: core                     # use core check implementation of SNMP integration. recommended
+      use_device_id_as_hostname: true  # recommended
     instances:
     - ip_address: "1.2.3.4"
       community_string: “sample-string”
@@ -59,7 +60,8 @@ To monitor individual devices:
 
     ```yaml
     init_config:
-      loader: core
+      loader: core                     # use core check implementation of SNMP integration. recommended
+      use_device_id_as_hostname: true  # recommended
     instances:
     - ip_address: "1.2.3.4"
       snmp_version: 3			# optional, if omitted we will autodetect which version of SNMP you are using
@@ -104,25 +106,25 @@ To use Autodiscovery with Network Device Monitoring:
 listeners:
   - name: snmp
 snmp_listener:
-  workers: 100 # number of workers used to discover devices concurrently
-  discovery_interval: 3600 # interval between each autodiscovery in seconds
+  workers: 100                      # number of workers used to discover devices concurrently
+  discovery_interval: 3600          # interval between each autodiscovery in seconds
+  loader: core                      # use core check implementation of SNMP integration. recommended
+  use_device_id_as_hostname: true   # recommended
   configs:
-    - network: 1.2.3.4/24 # CIDR notation, we recommend no larger than /24 blocks
+    - network: 1.2.3.4/24           # CIDR notation, we recommend no larger than /24 blocks
       version: 2
       port: 161
-      community: ***
+      community: '***'
       tags:
       - "key1:val1"
       - "key2:val2"
-      loader: core # use SNMP corecheck implementation
     - network: 2.3.4.5/24
       version: 2
       port: 161
-      community: ***
+      community: '***'
       tags:
       - "key1:val1"
       - "key2:val2"
-      loader: core
 ```
 
 {{% /tab %}}
@@ -133,10 +135,12 @@ snmp_listener:
 listeners:
   - name: snmp
 snmp_listener:
-  workers: 100 # number of workers used to discover devices concurrently
-  discovery_interval: 3600 # interval between each autodiscovery in seconds
+  workers: 100                      # number of workers used to discover devices concurrently
+  discovery_interval: 3600          # interval between each autodiscovery in seconds
+  loader: core                      # use core check implementation of SNMP integration. recommended
+  use_device_id_as_hostname: true   # recommended
   configs:
-    - network: 1.2.3.4/24 # CIDR notation, we recommend no larger than /24 blocks
+    - network: 1.2.3.4/24           # CIDR notation, we recommend no larger than /24 blocks
       version: 3
       user: "user"
       authentication_protocol: "fakeAuth"
@@ -146,7 +150,6 @@ snmp_listener:
       tags:
         - "key1:val1"
         - "key2:val2"
-      loader: core
     - network: 2.3.4.5/24
       version: 3
       snmp_version: 3
@@ -158,7 +161,6 @@ snmp_listener:
       tags:
         - "key1:val1"
         - "key2:val2"
-      loader: core
 ```
 
 {{% /tab %}}

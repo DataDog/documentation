@@ -16,7 +16,54 @@ Après avoir installé l'[intégration AWS][2] et le [Forwarder Datadog][3], sui
 ## Configuration
 
 {{< tabs >}}
-{{% tab "Framework Serverless" %}}
+{{% tab "Interface de ligne de commande Datadog" %}}
+
+L'interface de ligne de commande Datadog modifie les configurations des fonctions Lambda existantes pour activer l'instrumentation sans exiger un nouveau déploiement. Il s'agit du moyen le plus rapide pour commencer avec la surveillance sans serveur de Datadog.
+
+Vous pouvez également ajouter la commande à vos pipelines de CI/CD pour activer l'instrumentation pour toutes vos applications sans serveur. Lancez la commande *après* le déploiement normal de votre application sans serveur, de sorte que les modifications apportées par l'interface de ligne de commande Datadog ne soient pas écrasées.
+
+### Installation
+
+Installez l'interface de ligne de commande Datadog avec NPM ou Yarn :
+
+```sh
+# NPM
+npm install -g @datadog/datadog-ci
+
+# Yarn
+yarn global add @datadog/datadog-ci
+```
+
+### Instrumentation
+
+Pour instrumenter la fonction, exécutez la commande suivante avec vos [identifiants AWS][1] :
+
+```sh
+datadog-ci lambda instrument -f <nomfonction> -f <autre_nomfonction> -r <région_aws> -v <version_couche> --forwarder <arn_forwarder>
+```
+
+Pour remplir les paramètres fictifs, procédez comme suit :
+- Remplacez `<nomfonction>` et `<autre_nomfonction>` par les noms de vos fonctions Lambda.
+- Remplacez `<région_aws>` par le nom de la région AWS.
+- Remplacez `<version_couche>` par la version souhaitée de la bibliothèque Lambda Datadog. La dernière version est `{{< latest-lambda-layer-version layer="node" >}}`.
+- Remplacez `<arn_forwarder>` par l'ARN du Forwarder (voir la [documentation sur le Forwarder][2]).
+
+Par exemple :
+
+```sh
+datadog-ci lambda instrument -f my-function -f another-function -r us-east-1 -v {{< latest-lambda-layer-version layer="node" >}} --forwarder "arn:aws:lambda:us-east-1:000000000000:function:datadog-forwarder"
+```
+
+Si votre fonction Lambda est configurée de façon à utiliser la signature de code, vous devez ajouter l'ARN du profil de signature de Datadog (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) à la [configuration de la signature de code][3] de votre fonction avant de pouvoir l'instrumenter avec l'interface de ligne de commande Datadog.
+
+Pour obtenir plus de détails ainsi que des paramètres supplémentaires, consultez la [documentation relative à l'interface de ligne de commande][4].
+
+[1]: https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/setting-credentials-node.html
+[2]: https://docs.datadoghq.com/fr/serverless/forwarder/
+[3]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
+[4]: https://docs.datadoghq.com/fr/serverless/serverless_integrations/cli
+{{% /tab %}}
+{{% tab "Serverless Framework" %}}
 
 Le [plug-in Serverless Datadog][1] ajoute automatiquement la bibliothèque Lambda Datadog à vos fonctions à l'aide des couches. Il configure également vos fonctions de façon à envoyer des métriques, traces et logs à Datadog par l'intermédiaire du [Forwarder Datadog][2].
 
@@ -77,23 +124,24 @@ Transform:
   - Name: DatadogServerless
     Parameters:
       stackName: !Ref "AWS::StackName"
-      nodeLayerVersion: "<VERSION_COUCHE>"
+      nodeLayerVersion: "{{< latest-lambda-layer-version layer="node" >}}"
       forwarderArn: "<ARN_FORWARDER>"
       service: "<SERVICE>" # Facultatif
       env: "<ENVIRONNEMENT>" # Facultatif
 ```
 
-Remplacez `<SERVICE>` et `<ENVIRONNEMENT>` par les valeurs appropriées, `<VERSION_COUCHE>` par la version de votre choix de la couche Lambda Datadog (voir les [dernières versions][4]) et `<ARN_FORWARDER>` par l'ARN du Forwarder (consultez la [documentation relative au Forwarder][2]).
+Pour remplir les paramètres fictifs, procédez comme suit :
+- Remplacez `<ARN_FORWARDER>` par l'ARN du Forwarder (voir la [documentation sur le Forwarder][2]).
+- Remplacez `<SERVICE>` et `<ENVIRONNEMENT>` par votre service et votre environnement.
 
-Si votre fonction Lambda est configurée de façon à utiliser la signature de code, vous devez ajouter l'ARN du profil de signature de Datadog (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) à la [configuration de la signature de code][5] de votre fonction avant de pouvoir utiliser la macro.
+Si votre fonction Lambda est configurée de façon à utiliser la signature de code, vous devez ajouter l'ARN du profil de signature de Datadog (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) à la [configuration de la signature de code][4] de votre fonction avant de pouvoir utiliser la macro.
 
 Pour obtenir plus de détails ainsi que des paramètres supplémentaires, consultez la [documentation relative à la macro][1].
 
 [1]: https://docs.datadoghq.com/fr/serverless/serverless_integrations/macro
 [2]: https://docs.datadoghq.com/fr/serverless/forwarder/
 [3]: https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html
-[4]: https://github.com/DataDog/datadog-lambda-js/releases
-[5]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
+[4]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
 {{% /tab %}}
 {{% tab "AWS CDK" %}}
 
@@ -127,75 +175,29 @@ class CdkStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
     const datadog = new Datadog(this, "Datadog", {
-      nodeLayerVersion: <VERSION_COUCHE>,
-      pythonLayerVersion: <VERSION_COUCHE>,
-      addLayers: <BOOLÉEN>,
+      nodeLayerVersion: {{< latest-lambda-layer-version layer="node" >}},
       forwarderArn: "<ARN_FORWARDER>",
-      flushMetricsToLogs: <BOOLÉEN>,
-      site: "<SITE>",
-      apiKey: "{Clé_API_Datadog}",
-      apiKMSKey: "{Clé_API_Datadog_Chiffrée}",
-      enableDDTracing: <BOOLÉEN>,
-      injectLogContext: <BOOLÉEN>
+      service: "<SERVICE>",  // Facultatif
+      env: "<ENVIRONNEMENT>",  // Facultatif
     });
     datadog.addLambdaFunctions([<FONCTIONS_LAMBDA>])
   }
 }
 ```
 
-Remplacez `<SERVICE>` et `<ENV>` par les valeurs adéquates, `<LAYER_VERSION>` par la version de la couche Lambda Datadog de votre choix (voir les [dernières versions][2]) et `<FORWARDER_ARN>` par l'ARN du Forwarder (voir la [documentation relative au Forwarder][3]).
+Pour remplir les paramètres fictifs, procédez comme suit :
 
-Si votre fonction Lambda est configurée de façon à utiliser la signature de code, vous devez ajouter l'ARN du profil de signature de Datadog (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) à la [configuration de la signature de code][4] de votre fonction avant de pouvoir utiliser la macro.
+- Remplacez `<ARN_FORWARDER>` par l'ARN du Forwarder (voir la [documentation sur le Forwarder][2]).
+- Remplacez `<SERVICE>` et `<ENVIRONNEMENT>` par votre service et votre environnement.
 
-Pour en savoir plus et obtenir des paramètres supplémentaires, consultez la [page NPM relative au CDK Datadog][1] (en anglais).
+Si votre fonction Lambda est configurée de façon à utiliser la signature de code, vous devez ajouter l'ARN du profil de signature de Datadog (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) à la [configuration de la signature de code][3] de votre fonction avant de pouvoir utiliser la macro.
+
+Pour obtenir plus de détails ainsi que des paramètres supplémentaires, consultez la [page NPM relative au CDK Datadog][1] (en anglais).
 
 
 [1]: https://www.npmjs.com/package/datadog-cdk-constructs
-[2]: https://github.com/DataDog/datadog-lambda-js/releases
-[3]: https://docs.datadoghq.com/fr/serverless/forwarder/
-[4]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
-{{% /tab %}}
-{{% tab "Interface de ligne de commande Datadog" %}}
-
-<div class="alert alert-warning">Ce service est en bêta publique. Si vous souhaitez nous faire part de vos remarques, contactez l'<a href="/help">assistance Datadog</a>.</div>
-
-Utilisez l'interface de ligne de commande Datadog pour configurer l'instrumentation sur vos fonctions Lambda dans vos pipelines CI/CD. La commande de l'interface de ligne de commande ajoute automatiquement la bibliothèque Lambda Datadog à vos fonctions à l'aide des couches. Elle configure également vos fonctions de façon à envoyer des métriques, traces et logs à Datadog.
-
-### Installation
-
-Installez l'interface de ligne de commande Datadog avec NPM ou Yarn :
-
-```sh
-# NPM
-npm install -g @datadog/datadog-ci
-
-# Yarn
-yarn global add @datadog/datadog-ci
-```
-
-### Instrumentation
-
-Pour instrumenter la fonction, exécutez la commande suivante avec vos [identifiants AWS][1]. Remplacez `<nomfonction>` et `<autre_nomfonction>` par le nom de vos fonctions Lambda, `<région_aws>` par le nom de la région AWS, `<version_couche>` par la version de votre choix de la couche Lambda Datadog (voir les [dernières versions][2]) et `<arn_forwarder>` par l'ARN du Forwarder (consultez la [documentation relative au Forwarder][3]).
-
-```sh
-datadog-ci lambda instrument -f <nomfonction> -f <autre_nomfonction> -r <région_aws> -v <version_couche> --forwarder <arn_forwarder>
-```
-
-Par exemple :
-
-```sh
-datadog-ci lambda instrument -f my-function -f another-function -r us-east-1 -v 26 --forwarder arn:aws:lambda:us-east-1:000000000000:function:datadog-forwarder
-```
-
-Si votre fonction Lambda est configurée de façon à utiliser la signature de code, vous devez ajouter l'ARN du profil de signature de Datadog (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) à la [configuration de la signature de code][4] de votre fonction avant de pouvoir l'instrumenter avec l'interface de ligne de commande Datadog.
-
-Pour obtenir plus de détails ainsi que des paramètres supplémentaires, consultez la [documentation relative à l'interface de ligne de commande][5].
-
-[1]: https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/setting-credentials-node.html
-[2]: https://github.com/DataDog/datadog-lambda-js/releases
-[3]: https://docs.datadoghq.com/fr/serverless/forwarder/
-[4]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
-[5]: https://docs.datadoghq.com/fr/serverless/serverless_integrations/cli
+[2]: https://docs.datadoghq.com/fr/serverless/forwarder/
+[3]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
 {{% /tab %}}
 {{% tab "Image de conteneur" %}}
 
@@ -222,7 +224,7 @@ yarn add datadog-lambda-js dd-trace
 Pour configurer la fonction, suivez les étapes ci-dessous :
 
 1. Définissez la valeur `CMD` de votre image sur `node_modules/datadog-lambda-js/dist/handler.handler`. Vous pouvez effectuer cette opération dans AWS ou directement dans votre Dockerfile. **Remarque** : la valeur définie dans AWS remplace la valeur définie dans le Dockerfile, si vous avez défini les deux.
-2. Définissez les variables d'environnement suivantes dans  AWS :
+2. Définissez les variables d'environnement suivantes dans AWS :
   - Définissez `DD_LAMBDA_HANDLER` sur votre gestionnaire d'origine, par exemple `myfunc.handler`.
   - Définissez `DD_TRACE_ENABLED` sur `true`.
   - Définissez `DD_FLUSH_TO_LOG` sur `true`.
@@ -259,13 +261,13 @@ arn:aws:lambda:<RÉGION_AWS>:464622532012:layer:Datadog-<RUNTIME>:<VERSION>
 arn:aws-us-gov:lambda:<RÉGION_AWS>:002406178527:layer:Datadog-<RUNTIME>:<VERSION>
 ```
 
-Les options `RUNTIME` disponibles sont `Node10-x` et `Node12-x`. Pour `VERSION`, consultez la [dernière version][2]. Exemple :
+Les options `RUNTIME` disponibles sont `Node10-x` et `Node12-x`. La dernière `VERSION` est `{{< latest-lambda-layer-version layer="node" >}}`. Exemple :
 
 ```
-arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Node12-x:25
+arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Node12-x:{{< latest-lambda-layer-version layer="node" >}}
 ```
 
-Si votre fonction Lambda est configurée de façon à utiliser la signature de code, vous devez ajouter l'ARN du profil de signature de Datadog (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) à la [configuration de la signature de code][3] de votre fonction avant de pouvoir ajouter la bibliothèque Lambda Datadog en tant que couche.
+Si votre fonction Lambda est configurée de façon à utiliser la signature de code, vous devez ajouter l'ARN du profil de signature de Datadog (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) à la [configuration de la signature de code][2] de votre fonction avant de pouvoir ajouter la bibliothèque Lambda Datadog en tant que couche.
 
 #### Utilisation du package
 
@@ -281,7 +283,7 @@ npm install --save datadog-lambda-js
 yarn add datadog-lambda-js
 ```
 
-Consultez la [dernière version][4].
+Consultez la [dernière version][3].
 
 ### Configuration
 
@@ -293,24 +295,23 @@ Pour configurer la fonction, suivez les étapes ci-dessous :
 4. Définissez la variable d'environnement `DD_FLUSH_TO_LOG` sur `true`.
 5. Vous pouvez également définir des tags `service` et `env` pour votre fonction avec des valeurs correspondantes.
 
-**Remarque** : si votre fonction Lambda utilise à la fois les bibliothèques de tracing de Datadog et le [webpack][5], vous devez suivre ces [étapes de configuration supplémentaires][6].
+**Remarque** : si votre fonction Lambda utilise à la fois les bibliothèques de tracing de Datadog et le [webpack][5], vous devez suivre ces [étapes de configuration supplémentaires][4].
 
 ### Abonnement
 
 Pour pouvoir envoyer des métriques, traces et logs à Datadog, abonnez la fonction Lambda du Forwarder Datadog à chaque groupe de logs de votre fonction.
 
-1. [Si ce n'est pas déjà fait, installez le Forwarder Datadog][7].
-2. [Abonnez le Forwarder Datadog aux groupes de logs de votre fonction][8].
+1. [Si ce n'est pas déjà fait, installez le Forwarder Datadog][6].
+2. [Abonnez le Forwarder Datadog aux groupes de logs de votre fonction][7].
 
 
 [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
-[2]: https://github.com/DataDog/datadog-lambda-layer-js/releases
-[3]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
-[4]: https://www.npmjs.com/package/datadog-lambda-js
-[5]: /fr/serverless/troubleshooting/serverless_tracing_and_webpack/
-[6]: https://webpack.js.org/
-[7]: https://docs.datadoghq.com/fr/serverless/forwarder/
-[8]: https://docs.datadoghq.com/fr/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
+[2]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
+[3]: https://www.npmjs.com/package/datadog-lambda-js
+[4]: /fr/serverless/troubleshooting/serverless_tracing_and_webpack/
+[5]: https://webpack.js.org/
+[6]: https://docs.datadoghq.com/fr/serverless/forwarder/
+[7]: https://docs.datadoghq.com/fr/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -320,7 +321,7 @@ Bien que cette opération soit facultative, Datadog vous recommande fortement d'
 
 ## Utilisation
 
-Une fois votre fonction configurée, suivez les étapes suivantes pour visualiser vos métriques logs et traces sur la [page Serverless principale][5].
+Après avoir configuré votre fonction en suivant la procédure ci-dessus, visualisez vos métriques, logs et traces sur la [page Serverless principale][5].
 
 ## Surveiller une logique opérationnelle personnalisée
 
@@ -373,7 +374,7 @@ exports.handler = async (event) => {
 };
 ```
 
-Pour en savoir plus sur l'envoi de métriques custom, consultez [cette page][6]. Pour obtenir plus d'informations sur l'instrumentation personnalisée, consultez la documentation de l'APM Datadog sur l'[instrumentation personnalisée][7].
+Pour en savoir plus sur l'envoi de métriques custom, consultez [cette page][6]. Pour obtenir plus d'informations sur l'instrumentation personnalisée, consultez la [documentation dédiée][7].
 
 ## Pour aller plus loin
 

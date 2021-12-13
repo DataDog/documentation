@@ -2,13 +2,13 @@
 title: Débuter avec les dashboards
 kind: documentation
 further_reading:
-  - link: 'https://www.datadoghq.com/blog/dashboard-sharing/'
+  - link: https://www.datadoghq.com/blog/dashboard-sharing/
     tag: Blog
     text: Partager des dashboards en tout sécurité avec des utilisateurs en dehors de votre organisation
-  - link: 'https://www.datadoghq.com/blog/template-variable-associated-values/'
+  - link: https://www.datadoghq.com/blog/template-variable-associated-values/
     tag: Blog
     text: Utiliser les template variables associées pour affiner vos dashboards
-  - link: 'https://learn.datadoghq.com/enrol/index.php?id=8'
+  - link: https://learn.datadoghq.com/enrol/index.php?id=8
     tag: Apprentissage
     text: "Apprentissage en ligne à votre rythme\_: Améliorer vos dashboards"
   - link: /dashboards/
@@ -19,7 +19,7 @@ further_reading:
     text: Raconter une histoire à partir de données avec les Notebooks
   - link: /monitors/
     tag: Documentation
-    text: 'Monitors, SLO, notifications, downtimes et incidents'
+    text: Monitors, SLO, notifications, downtimes et incidents
 ---
 ## Présentation
 
@@ -27,7 +27,7 @@ Pour bien débuter avec les dashboards, vous devez connaître les questions que 
 
 Pour créer un dashboard utile, il est nécessaire d'apporter des réponses à ces questions. De plus, il est important de ne pas regrouper toutes vos idées dans le même dashboard. La création de dashboards distincts pour identifier les différents problèmes vous aidera à trouver des solutions plus rapidement.
 
-Ce guide vous aidera à vous lancer dans la création de dashboards. Vous allez découvrir comment créer des dashboards simples afin d'aider votre équipe à échanger sur les informations importantes et identifier rapidement la cause d'un problème.
+Ce guide vous aide à vous lancer dans la création de dashboards. Vous découvrirez comment créer des dashboards simples afin d'aider votre équipe à mieux communiquer et à résoudre plus rapidement des problèmes.
 
 ## Prérequis
 
@@ -35,9 +35,7 @@ Si vous ne l'avez pas déjà fait, créez un [compte Datadog][1]. Installez l'Ag
 
 ## Planification
 
-Choisissez de créer un dashboard de type timeboard (tous les graphiques utilisent le même intervalle de temps) ou de type screenboard (plus large variété de widgets, intervalles différents). En cas de doute, consultez la section sur les [timeboards et les screenboards][2].
-
-Définissez également l'objectif du dashboard que vous créez. Un dashboard peut vous aider, vous et les membres de votre équipe, à vous concentrer sur la bonne tâche. Un _dashboard d'équipe_ vous permet d'identifier les tâches prioritaires, les informations qui nécessitent votre attention immédiate et vos réussites. Créez un ou plusieurs dashboards d'équipe affichant les informations dont votre équipe a fréquemment besoin pour éviter d'avoir à les rechercher. Un dashboard affichant vos SLO et vos SLI constitue par exemple un excellent dashboard d'équipe.
+Définissez l'objectif du dashboard que vous créez. Un dashboard peut vous aider, les membres de votre équipe et vous-même, à vous concentrer sur la bonne tâche. Un _dashboard d'équipe_ vous permet d'identifier les tâches prioritaires, les informations qui nécessitent votre attention et vos réussites. Créez un ou plusieurs dashboards d'équipe affichant les informations dont votre équipe a fréquemment besoin pour éviter d'avoir à les rechercher. Un dashboard affichant vos SLO et vos SLI constitue par exemple un excellent dashboard d'équipe.
 
 Lorsqu'ils sont connectés à des données mises à jour en temps réel, les dashboards constituent un outil puissant qui permet de faciliter les échanges entre les responsables et les cadres. Un _dashboard de direction_ peut être utilisé pour vérifier que vous travaillez sur les tâches les plus importantes, pour mesurer les coûts d'un service ou pour vérifier que vous atteignez vos objectifs, respectez vos SLO et employez une stratégie de scaling efficace. Les dashboards de direction deviennent plus efficaces que jamais lorsqu'ils affichent une réponse générale à chaque question tout en étant interconnectés pour permettre des analyses plus poussées.
 
@@ -55,9 +53,9 @@ Datadog fournit plusieurs dashboards prêts à l'emploi pour diverses fonctionna
 
 Pour créer un dashboard, il est notamment possible de trouver un dashboard similaire déjà utilisé et de l'ajuster selon vos besoins. Si vous trouvez un dashboard qui offre des réponses à une grande partie des réponses qui vous intéressent :
 
-1. Clonez-le en ouvrant le dashboard et en sélectionnant **Clone dashboard** à partir du menu des paramètres (l'icône en forme d'engrenage sur le côté droit). Cette action crée une copie distincte du dashboard ; les modifications que vous apporterez au dashboard copié n'affecteront pas le widget source.
-    {{< img src="getting_started/dashboards/cloning_dashboard.gif" alt="Cloner un dashboard"  >}}
-2. Modifiez le clone en l'ouvrant et en cliquant sur **Edit widgets**. 
+1. Dupliquez-le en ouvrant le dashboard et en sélectionnant **Clone dashboard** à partir du menu des paramètres (l'icône en forme d'engrenage sur le côté droit). Cette action crée une copie distincte du dashboard ; les modifications que vous apporterez au dashboard copié n'affecteront pas le widget source.
+    {{< img src="getting_started/dashboards/cloning_dashboard.mp4" alt="Dupliquer un dashboard" video=true >}}
+2. Modifiez le doublon en l'ouvrant et en cliquant sur **Edit widgets**. 
 3. Supprimez les widgets dont vous n'avez pas besoin en sélectionnant **Delete** à partir du menu des paramètres du widget.
 4. Réorganisez les widgets selon vos besoins. Chaque widget ou groupe de widgets peut être déplacé vers un autre endroit du dashboard à l'aide d'un glisser-déposer.
 5. Copiez les widgets qui vous intéressent à partir d'autres dashboards en survolant le widget et en appuyant sur `Command + C` (`Ctrl + C` sur Windows). Collez-les dans votre dashboard en ouvrant le dashboard et en appuyant sur `Command + V` (`Ctrl + V` sur Windows).
@@ -65,19 +63,19 @@ Pour créer un dashboard, il est notamment possible de trouver un dashboard simi
 
 ## En savoir plus sur les métriques
 
-Par l'intermédiaire des intégrations, Datadog collecte des [métriques][3] à partir de votre infrastructure et de vos applications. Les métriques collectées sont documentées dans les fichiers README de l'intégration. Si vous souhaitez en savoir plus sur une métrique visible dans le [Metrics Explorer][4] ou lors de la création d'un dashboard, recherchez-la dans la documentation de l'intégration.
+Par l'intermédiaire des intégrations, Datadog recueille des [métriques][2] à partir de votre infrastructure et de vos applications. Les métriques recueillies sont documentées dans les fichiers README de l'intégration. Si vous souhaitez en savoir plus sur une métrique visible dans le [Metrics Explorer][3] ou lors de la création d'un dashboard, recherchez-la dans la documentation de l'intégration.
 
-Imaginons par exemple que vous visualisez un graphique temporel de la métrique `aws.s3.first_byte_latency`. Accédez à la section [Données collectées] du fichier README de l'intégration AWS S3 pour consulter sa description : `The average per-request time from the complete request being received by a bucket to when the response starts to be returned. Shown as millisecond.` (Temps moyen écoulé entre la réception de la requête complète par un compartiment et le début du renvoi de la réponse. Affiché en millisecondes.)
+Imaginons par exemple que vous visualisez un graphique temporel de la métrique `aws.s3.first_byte_latency`. Accédez à la section [Données collectées][4] du fichier README de l'intégration AWS S3 pour consulter sa description : `The average per-request time from the complete request being received by a bucket to when the response starts to be returned. Shown as millisecond.` (Temps moyen écoulé entre la réception de la requête complète par un compartiment et le début du renvoi de la réponse. Affiché en millisecondes.)
 
 ## Ajouter des widgets et paramétrer les informations affichées
 
-Après avoir sélectionné quelques métriques à ajouter à votre dashboard, testez les différents [types de widget][6] ainsi que les différentes [requêtes][7], [fonctions][8] et [méthodes d'agrégation][9] pour optimiser l'affichage des données en fonction des réponses que vous recherchez.
+Après avoir sélectionné quelques métriques à ajouter à votre dashboard, testez plusieurs [types de widget][5] ainsi que les différentes [requêtes][6], [fonctions][7] et [méthodes d'agrégation][8] pour optimiser l'affichage des données en fonction des réponses que vous recherchez.
 
-En spécifiant des template variables, vous pouvez faire en sorte qu'un même dashboard réponde à des questions pour une multitude de scénarios. Par exemple, vous pouvez créer un graphique temporel qui affiche les métriques de latence correspondant aux centres de données d'une région spécifique sélectionnée à partir du menu déroulant des variables du dashboard, ou celles correspondant à l'ensemble des centres de données en même temps. Pour en savoir plus, consultez la section [Template variables][10].
+En spécifiant des template variables, vous pouvez faire en sorte qu'un même dashboard réponde à des questions pour une multitude de scénarios. Par exemple, vous pouvez créer un graphique temporel qui affiche les métriques de latence correspondant aux centres de données d'une région spécifique sélectionnée à partir du menu déroulant des variables du dashboard, ou celles correspondant à l'ensemble des centres de données. Pour en savoir plus, consultez la section [Template variables][9].
 
-Vous pouvez créer des graphiques plus faciles à lire en ajustant les intervalles de l'axe des ordonnées, les couleurs ou les légendes, ou en ajoutant des marqueurs et des événements en superposition. Consultez la [documentation sur les dashboards][1] pour découvrir toutes les possibilités de personnalisation des widgets [Série temporelle][12] et des [autres types de widgets][6].
+Vous pouvez améliorer la lisibilité de vos graphiques en ajustant les intervalles de l'axe des ordonnées, les couleurs ou les légendes, ou en ajoutant des marqueurs et des événements en superposition. Consultez la [documentation sur les dashboards][10] pour découvrir toutes les possibilités de personnalisation des widgets [Série temporelle][11] et des [autres types de widgets][5].
 
-Pour obtenir plus de détails et d'exemples d'utilisation de ces techniques, inscrivez-vous au cours en ligne [Améliorer vos dashboards][13].
+Pour obtenir plus de détails et d'exemples d'utilisation de ces techniques, inscrivez-vous au cours en ligne [Améliorer vos dashboards][12] (en anglais).
 
 ## Tester les autres types de widget
 
@@ -93,7 +91,7 @@ La représentation de métriques sous forme de série temporelle est utile, mais
  - **Service Level Objectives (SLO)** : affichez les performances de votre équipe par rapport aux objectifs avec un widget Résumé des SLO, et ajoutez d'autres widgets pour afficher les détails de vos métriques SLI.
  - **Distributions** : affichez, par exemple, un histogramme du nombre de différents types d'événements dans un environnement conteneurisé, le nombre d'erreurs critiques dans chaque service, le flux du site Web (nombre d'utilisateurs accédant à la page 2, à la page 3, à la page 4), ou les centiles de latence des compartiments.
 
-Consultez la [documentation sur les widgets][6] pour en savoir plus et découvrir des exemples de configuration de ces graphiques.
+Consultez la section [Widgets][5] pour en savoir plus et découvrir des exemples de configuration de ces graphiques.
 
 ## Organiser un dashboard, ajouter des liens et analyser les données
 
@@ -103,38 +101,37 @@ Il est possible d'ajouter des liens à un dashboard de deux façons différentes
 
  - En ajoutant un widget Notes et Liens, qui accepte le texte au format Markdown, y compris les liens. L'éditeur du widget affiche des conseils pour vous aider à utiliser le format Markdown.
  - En créant un lien personnalisé à partir du menu des paramètres d'un widget (icône en forme d'engrenage). Les liens personnalisés peuvent interpoler des variables et des template variables de façon à ce que le lien change en fonction des sélections de l'utilisateur : celui-ci accède ainsi directement au bon endroit pour analyser les données ou prendre des mesures correctives.
-     {{< img src="getting_started/dashboards/opening_custom_link.gif" alt="Ouvrir un lien personnalisé"  >}}
+     {{< img src="getting_started/dashboards/opening_custom_link.mp4" alt="Ouvrir un lien personnalisé" video=true >}}
 
 ## Et ensuite ?
 
-### Partager vos dashboards en dehors de l'application Datadog
+### Partager vos dashboards en dehors du site Datadog
 
 Cliquez sur **Generate Public URL** dans le menu des paramètres d'un dashboard (icône en forme d'engrenage) pour créer une URL et ainsi afficher le dashboard sur un grand écran ou le partager avec des personnes qui ne disposent pas d'un compte Datadog.
 
-Intégrez un dashboard dans les communications avec votre équipe en utilisant l'[intégration Slack][14] pour importer des dashboards et d'autres fonctionnalités Datadog, comme les monitors et les incidents, dans un canal Slack.
+Intégrez un dashboard dans les communications avec votre équipe en utilisant l'[intégration Slack][13]. Vous pouvez ainsi importer des dashboards et d'autres fonctionnalités Datadog, comme les monitors et les incidents, dans un canal Slack.
 
 ### Créer plusieurs dashboards rapidement
 
 Chaque dashboard présente une représentation JSON que vous pouvez copier ou exporter à partir du menu des paramètres. Chaque widget d'un dashboard présente également une définition JSON, que vous pouvez voir et modifier en ouvrant l'éditeur du widget (icône en forme de crayon) et en cliquant sur l'onglet JSON sous **Graph your data**.
 
-Étant donné que tous les widgets et les dashboards sont représentés en JSON, vous pouvez automatiser leur création à l'aide de l'[API Dashboards][15]. Cette fonctionnalité est particulièrement utile si vous souhaitez générer un dashboard à chaque fois que votre équipe commence un nouveau projet, rencontre un incident ou formalise un SLO, par exemple.
+Étant donné que tous les widgets et les dashboards sont représentés en JSON, vous pouvez automatiser leur création à l'aide de l'[API Dashboards][14]. Cette fonctionnalité est particulièrement utile si vous souhaitez générer un dashboard à chaque fois que votre équipe commence un nouveau projet, rencontre un problème ou formalise un SLO, par exemple.
 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/
-[2]: /fr/dashboards/#screenboard-vs-timeboard
-[3]: /fr/metrics/introduction/
-[4]: /fr/metrics/explorer/
-[5]: /fr/integrations/amazon_s3/#data-collected
-[6]: /fr/dashboards/widgets/
-[7]: /fr/dashboards/querying/
-[8]: /fr/dashboards/functions/
-[9]: /fr/metrics/distributions/
-[10]: /fr/dashboards/template_variables/
-[11]: /fr/dashboards/
-[12]: /fr/dashboards/widgets/timeseries/
-[13]: https://learn.datadoghq.com/enrol/index.php?id=8
-[14]: /fr/integrations/slack/
-[15]: /fr/api/v1/dashboards/
+[2]: /fr/metrics/introduction/
+[3]: /fr/metrics/explorer/
+[4]: /fr/integrations/amazon_s3/#data-collected
+[5]: /fr/dashboards/widgets/
+[6]: /fr/dashboards/querying/
+[7]: /fr/dashboards/functions/
+[8]: /fr/metrics/distributions/
+[9]: /fr/dashboards/template_variables/
+[10]: /fr/dashboards/
+[11]: /fr/dashboards/widgets/timeseries/
+[12]: https://learn.datadoghq.com/enrol/index.php?id=8
+[13]: /fr/integrations/slack/
+[14]: /fr/api/v1/dashboards/

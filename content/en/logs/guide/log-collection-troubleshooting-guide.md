@@ -58,7 +58,7 @@ The Datadog Agent only collects logs that have been written after it has started
 
 ## Permission issues tailing log files
 
-The `datadog-agent` does not run as root (and we do not recommend that you make it run as root, as a general best-practice). For this reason, when you configure your `datadog-agent` to tail log files (for custom logs or for integrations) you need to take special care to ensure the `datadog-agent` user has read access to tail the log files you want to collect from.
+The `datadog-agent` does not run as root (and running as root is not recommended, as a general best-practice). For this reason, when you configure your `datadog-agent` to tail log files (for custom logs or for integrations) you need to take special care to ensure the `datadog-agent` user has read access to tail the log files you want to collect from.
 
 In that case, you should see an error message when checking the [Agent status][5]:
 

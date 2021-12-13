@@ -1852,7 +1852,7 @@ main:
     identifier: security_monitoring_detection_rules
     weight: 201
   - name: デフォルトの検出ルール
-    url: security_monitoring/default_rules
+    url: security_platform/default_rules
     parent: security_compliance_monitoring
     identifier: security_monitoring_default_detection_rules
     weight: 3

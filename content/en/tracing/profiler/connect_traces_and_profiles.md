@@ -19,7 +19,7 @@ You can move directly from span information to profiling data on the Code Hotspo
 
 ## Identify code hotspots in slow traces
 
-{{< img src="tracing/profiling/code_hotspots_tab.gif" alt="Code Hotspots tab shows profiling information for a APM trace span">}}
+{{< img src="tracing/profiling/code_hotspots_tab.mp4" alt="Code Hotspots tab shows profiling information for a APM trace span" video=true >}}
 
 ### Prerequisites
 
@@ -95,7 +95,7 @@ It is not uncommon to have a small amount of **Other** unexplained time (less th
 
 ### Viewing a profile from a trace
 
-{{< img src="tracing/profiling/flamegraph_view.gif" alt="Opening a view of the profile in a flame graph">}}
+{{< img src="tracing/profiling/flamegraph_view.mp4" alt="Opening a view of the profile in a flame graph" video=true >}}
 
 For each type from the breakdown, click **View profile** to view the same data as what is shown in the flame graph.
 Click the **Span/Trace/Full profile** selector to define the scope of the data:
@@ -120,14 +120,14 @@ With endpoint profiling you can:
 - Isolate the top endpoints responsible for the consumption of valuable resources such as CPU, memory, and I/O. This is particularly helpful when you are generally trying to optimize your service for performance gains.
 - Understand if third party code or runtime libraries are the reason for your endpoints being slow or resource-consumption heavy.
 
-{{< img src="tracing/profiling/endpoint_agg_gif.gif" alt="Troubleshooting a slow endpoint by using endpoint aggregation">}}
+{{< img src="tracing/profiling/endpoint_agg_gif.mp4" alt="Troubleshooting a slow endpoint by using endpoint aggregation" video=true >}}
 
 
 ### Track the endpoints that consume the most resources
 
 It is valuable to track top endpoints that are consuming valuable resources such as CPU, memory, and I/O. The list can help you identify if your endpoints have regressed or if you have newly introduced endpoints that are consuming drastically more resources, slowing down your overall service. 
 
-{{< img src="tracing/profiling/endpoint_metric.gif" alt="Graphing top endpoints in terms of resource consumption">}}
+{{< img src="tracing/profiling/endpoint_metric.mp4" alt="Graphing top endpoints in terms of resource consumption" video=true >}}
 
 ## Further reading
 

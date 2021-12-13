@@ -1,20 +1,20 @@
 ---
 title: Widget Résumé des SLO
 kind: documentation
-description: Faites un suivi de vos SLO.
+description: Suivi de vos SLO
 aliases:
   - /fr/monitors/monitor_uptime_widget/
   - /fr/monitors/slo_widget/
   - /fr/graphing/widgets/slo/
   - /fr/dashboards/faq/how-can-i-graph-host-uptime-percentage/
 further_reading:
-  - link: 'https://www.datadoghq.com/blog/slo-monitoring-tracking/'
+  - link: https://www.datadoghq.com/blog/slo-monitoring-tracking/
     tag: Blog
     text: Faire un suivi du statut de tous vos SLO dans Datadog
 ---
 ## Configuration
 
-Utilisez le widget Résumé des SLO pour surveiller vos [SLO (Service Level Objectives)][1] à partir de screenboards et de timeboards. Vous pouvez utiliser la [page des Service Level Objectives][2] de Datadog pour afficher les SLO existants et en créer d'autres. Vous pouvez ensuite sélectionner un SLO actif et utiliser le widget Résumé des SLO pour l'afficher sur n'importe quel dashboard.
+Utilisez le widget Résumé des SLO pour surveiller vos [SLO (Service Level Objectives)][1] à partir de screenboards et de timeboards. Vous pouvez utiliser la page [Service Level Objectives][2] de Datadog pour afficher les SLO existants et en créer d'autres. Il est également possible de sélectionner un SLO et d'utiliser le widget Résumé des SLO pour l'afficher sur n'importe quel dashboard.
 
 {{< img src="dashboards/widgets/slo/slo_summary_editor.png" alt="widget Résumé des SLO"  >}}
 

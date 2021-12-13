@@ -259,7 +259,7 @@ This view lists:
 
 Create a new restriction query defining its query filter. The new query appears in the list of restrictions with no role attached to it.
 
-{{< img src="account_management/rbac/logs_rq-create.gif" alt="Create a Restriction Query"  style="width:70%;">}}
+{{< img src="account_management/rbac/logs_rq-create.mp4" alt="Create a Restriction Query" video=true style="width:70%;">}}
 
 
 ### Assign a role to a restriction query
@@ -268,7 +268,7 @@ Pick the role wherever it stands, and assign it to the intended restriction quer
 
 *Note*: Keep in mind that a role can be assigned no more than one restriction query. Meaning, when you assign a role to a restriction query, it loses connection to the restriction query it was already attached to.
 
-{{< img src="account_management/rbac/logs_rq-assign_roles.gif" alt="Assign a role to Restriction Query"  style="width:70%;">}}
+{{< img src="account_management/rbac/logs_rq-assign_roles.mp4" alt="Assign a role to Restriction Query" video=true style="width:70%;">}}
 
 Likewise, use the same "Move" interaction to grant `Unrestricted Access` to a Role, or conversely to turn it into a `No Access` role.
 
