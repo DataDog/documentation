@@ -176,7 +176,7 @@ Uninstall the Agent using Add/Remove Programs.
 Alternatively, use the Powershell command below. **Note**: Some Agent versions may cause a forced reboot. To prevent this, add a no restart parameter like `REBOOT=ReallySuppress`.
 
 ```powershell
-(Get-WmiObject -Class Win32_Product -Filter "Name='Datadog Agent'" -ComputerName . ).Uninstall()
+start-process msiexec -Wait -ArgumentList ('/log', 'C:\\uninst.log', '/q', '/x', (Get-WmiObject -Class Win32_Product -Filter "Name='Datadog Agent'" -ComputerName .).IdentifyingNumber, 'REBOOT=ReallySuppress')
 ```
 
 Both methods remove the Agent, but they do not remove the `C:\ProgramData\Datadog` configuration folder on the host.
@@ -190,27 +190,10 @@ Uninstall the Agent using Add/Remove Programs.
 
 Alternatively, use the Powershell command below.
 ```powershell
-(Get-WmiObject -Class Win32_Product -Filter "Name='Datadog Agent'" -ComputerName . ).Uninstall()
+start-process msiexec -Wait -ArgumentList ('/log', 'C:\\uninst.log', '/norestart', '/q', '/x', (Get-WmiObject -Class Win32_Product -Filter "Name='Datadog Agent'" -ComputerName .).IdentifyingNumber)
 ```
 
 Both methods remove the Agent, but they do not remove the `C:\ProgramData\Datadog` configuration folder on the host.
 
 {{% /tab %}}
 {{< /tabs >}}
-
-### Ensure machine doesn't restart
-
-Some Agent versions may cause a forced reboot.
-To prevent this, use either `REBOOT=ReallySuppress` or `/norestart`. Both achieve the same effect.
-
-The following is an example of the `/norestart` flag.
-
-```powershell
-start-process msiexec -Wait -ArgumentList ('/log', 'C:\\uninst.log', '/norestart', '/q', '/x', (Get-WmiObject -Class Win32_Product -Filter "Name='Datadog Agent'" -ComputerName .).IdentifyingNumber)
-```
-
-The following is an example of the `REBOOT=ReallySuppress` flag.
-
-```powershell
-start-process msiexec -Wait -ArgumentList ('/log', 'C:\\uninst.log', '/q', '/x', (Get-WmiObject -Class Win32_Product -Filter "Name='Datadog Agent'" -ComputerName .).IdentifyingNumber, 'REBOOT=ReallySuppress')
-```
