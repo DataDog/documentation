@@ -29,7 +29,7 @@ Prices reflect annual billing. Contact [Sales][5] or your [Customer Success][6] 
 
 ## Indexed span estimator
 
-[Indexed Span Estimator][7] is designed to help you decide which services to configure with App Analytics while keeping usage and cost in your control.
+[Indexed Span Estimator][7] helps you decide which services to configure with App Analytics while keeping usage and cost in your control.
 
 To estimate the total number of Indexed Spans expected to be sent per service per day or per month, follow these steps:
 

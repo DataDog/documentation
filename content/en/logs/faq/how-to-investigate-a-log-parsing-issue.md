@@ -65,7 +65,7 @@ Before troubleshooting your parser, read the Datadog log [processors][1] and [pa
     This means that the issue is in the user Agent attribute.
 
 4. **Fix the issue**:
-    Now that the culprit attribute is identified, look at it more closely.
+    After identifying the culprit attribute, look at it more closely.
 
     The user Agent in the log is:
 
@@ -82,7 +82,7 @@ Before troubleshooting your parser, read the Datadog log [processors][1] and [pa
     In other situation it might be the rule expecting an "integer" whereas the values are double so the matcher should be changed to "number".
 
 5. **Ask for help**:
-    Datadog is always here to help you! If you did not manage to find the cause of the parsing error, [contact us][4].
+    Datadog is always here to help you! If you did not manage to find the cause of the parsing error, [contact the support team][4].
 
 {{< partial name="whats-next/whats-next.html" >}}
 
