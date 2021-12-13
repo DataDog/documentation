@@ -111,7 +111,7 @@ With Live Analytics, you can perform analytics on 100% of your ingested traces f
 
 Analytics is used to graph requests or errors that correspond to specified criteria, such as:
 
-- Errors for the `ShoppingCart##checkout` service and endpoint, with a cart value of at least `$100`, with the ability to drill directly into traces matching these criteria.
+- Errors for the `ShoppingCart##checkout` service and endpoint, with a cart value of at least `$100`, with the ability to view traces matching these criteria individually.
 
 - Monitor a canary deployment of a critical application update in real time.
 

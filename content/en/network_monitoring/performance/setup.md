@@ -65,7 +65,7 @@ Datadog monitors every aspect of your Istio environment, so you can also:
 
 - Assess the health of Envoy and the Istio control plane with [logs][8].
 - Break down the performance of your service mesh with request, bandwidth, and resource consumption [metrics][8].
-- Drill into distributed traces for applications transacting over the mesh with [APM][9].
+- Examine distributed traces for applications transacting over the mesh with [APM][9].
 
 NPM supports Istio v1.6.4+ with [Datadog Agent v7.24.1+][1].
 

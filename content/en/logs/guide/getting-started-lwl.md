@@ -73,7 +73,7 @@ The pattern context panel lists every instance (event) of a log pattern and crea
 
 **Note**: If a log matches several exclusion filters, only the first exclusion filter rule is applied. A log is not sampled or excluded multiple times by different exclusion filters.
 
-In this example, the service status `INFO` pattern `Updating recommendations with customer_id=* & url=shops/*/*` is filtered with an exclusion filter. Removing any high volume logging pattern similar to this one from Log Explorer will help you drill down and identify issues quicker. However, these logs are **only** removed from the Log Explorer view. They are still ingested, and available to view in [Live Tail][5], sent to [log archives][6], or used to [generate metrics][7].
+In this example, the service status `INFO` pattern `Updating recommendations with customer_id=* & url=shops/*/*` is filtered with an exclusion filter. Removing any high volume logging pattern similar to this one from Log Explorer helps you reduce noise and identify issues quicker. However, these logs are **only** removed from the Log Explorer view. They are still ingested, and available to view in [Live Tail][5], sent to [log archives][6], or used to [generate metrics][7].
 
 {{< img src="logs/guide/getting-started-lwl/live_tail.jpg" alt="Live Tail" style="width:100%;">}}
 
