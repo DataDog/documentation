@@ -235,7 +235,7 @@ The `-Ddd.civisibility.enabled=true` configuration property is only available si
 
 If you need to use a previous version of the tracer, you can configure CI Visibility by using the following system properties:
 {{< code-block lang="bash" >}}
-`-Ddd.prioritization.type=ENSURE_TRACE -Ddd.jmxfetch.enabled=false -Ddd.integrations.enabled=false -Ddd.integration.junit.enabled=true -Ddd.integration.testng.enabled=true`
+-Ddd.prioritization.type=ENSURE_TRACE -Ddd.jmxfetch.enabled=false -Ddd.integrations.enabled=false -Ddd.integration.junit.enabled=true -Ddd.integration.testng.enabled=true
 {{< /code-block >}}
 
 ## Further reading
