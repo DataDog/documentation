@@ -64,7 +64,7 @@ If you need finer granularity than the once a minute monitor evaluation, conside
 
 Choose a name and extended description for your SLO. Select any tags you would like to associate with your SLO.
 
-## Example
+## Usage
 
 You might be tracking the uptime of a physical device. You have already configured a metric monitor on `host:foo` using a custom metric. This monitor might also ping your on-call team if it's no longer reachable. To avoid burnout, you want to track how often this host is down. A monitor-based SLO using your custom metric can show you at a glance whether the amount of downtime for the `foo` host falls within your target range.
 
@@ -94,7 +94,7 @@ In certain cases, there is an exception to the status calculation for monitor-ba
 
 If you change any of these conditions to something other than their defaults, the overall status for a monitor-based SLO using one Synthetic test could appear to be better than the aggregated statuses of the Synthetic test's individual groups.
 
-For more information on Synthetic test alerting conditions, visit the Synthetic Monitoring [documentation][4].
+For more information on Synthetic test alerting conditions, see the Synthetic Monitoring [documentation][4].
 
 ### Impact of manual and automatic monitor updates
 
