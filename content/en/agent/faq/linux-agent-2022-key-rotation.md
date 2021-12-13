@@ -60,6 +60,8 @@ Check that the correct key URLs are configured for this repository.
 
 ## Manual update
 
+We encourage users to use one of the install methods above which automatically trust the new GPG key, as they will also automatically fetch future keys as well. If this is not an option, these instructions will download and trust the new key.
+
 {{< tabs >}}
 {{% tab "Debian/Ubuntu" %}}
 
