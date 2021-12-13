@@ -2,12 +2,12 @@
 title: Swift Tests
 kind: documentation
 further_reading:
-- link: "/continuous_integration/explore_tests"
-tag: "Documentation"
-text: "Explore Test Results and Performance"
-- link: "/continuous_integration/troubleshooting/"
-tag: "Documentation"
-text: "Troubleshooting CI"
+    - link: "/continuous_integration/explore_tests"
+      tag: "Documentation"
+      text: "Explore Test Results and Performance"
+    - link: "/continuous_integration/troubleshooting/"
+      tag: "Documentation"
+      text: "Troubleshooting CI"
 ---
 
 {{< site-region region="gov" >}}
@@ -55,12 +55,12 @@ There are two ways of installing the testing framework:
 
 {{< code-block lang="ruby" >}}
 target 'MyApp' do
-# ...
+  # ...
 
-target 'MyAppTests' do
-inherit! :search_paths
-pod 'DatadogSDKTesting'
-end
+  target 'MyAppTests' do
+    inherit! :search_paths
+    pod 'DatadogSDKTesting'
+  end
 end
 {{< /code-block >}}
 
@@ -203,8 +203,8 @@ For UITests, both the test target and the application running from the UITests m
 ## Additional optional configuration
 
 For the following configuration settings:
-- `Boolean` variables can use any of: `1`, `0`, `true`, `false`, `YES`, or `NO`
-- `String` list variables accept a list of elements separated by `,` or `;`
+ - `Boolean` variables can use any of: `1`, `0`, `true`, `false`, `YES`, or `NO`
+ - `String` list variables accept a list of elements separated by `,` or `;`
 
 ### Disabling auto-instrumentation
 
@@ -567,82 +567,81 @@ Create tests in a suite by calling `suite.testStart()` and passing the name of t
 
 {{< code-block lang="swift" >}}
 class DDTestSession {
-// Starts the session.
-// - Parameters:
-//   - bundleName: Name of the module or bundle to test.
-//   - startTime: Optional. The time the session started.
-static func start(bundleName: String, startTime: Date? = nil) -> DDTestSession
-//
-// Ends the session.
-// - Parameters:
-//   - endTime: Optional. The time the session ended.
-func end(endTime: Date? = nil)
-// Adds a tag/attribute to the test session. Any number of tags can be added.
-// - Parameters:
-//   - key: The name of the tag. If a tag with the same name already exists,
-//     its value will be replaced by the new value.
-//   - value: The value of the tag. Can be a number or a string.
-func setTag(key: String, value: Any)
-//
-// Starts a suite in this session.
-// - Parameters:
-//   - name: Name of the suite.
-//   - startTime: Optional. The time the suite started.
-func suiteStart(name: String, startTime: Date: Date? = nil) -> DDTestSuite
+    // Starts the session.
+    // - Parameters:
+    //   - bundleName: Name of the module or bundle to test.
+    //   - startTime: Optional. The time the session started.
+    static func start(bundleName: String, startTime: Date? = nil) -> DDTestSession
+    //
+    // Ends the session.
+    // - Parameters:
+    //   - endTime: Optional. The time the session ended.
+    func end(endTime: Date? = nil)
+    // Adds a tag/attribute to the test session. Any number of tags can be added.
+    // - Parameters:
+    //   - key: The name of the tag. If a tag with the same name already exists,
+    //     its value will be replaced by the new value.
+    //   - value: The value of the tag. Can be a number or a string.
+    func setTag(key: String, value: Any)
+    //
+    // Starts a suite in this session.
+    // - Parameters:
+    //   - name: Name of the suite.
+    //   - startTime: Optional. The time the suite started.
+    func suiteStart(name: String, startTime: Date: Date? = nil) -> DDTestSuite
 }
-//
+    //
 public class DDTestSuite : NSObject {
-// Ends the test suite.
-// - Parameters:
-//   - endTime: Optional. The time the suite ended.
-func end(endTime: Date? = nil)
-// Adds a tag/attribute to the test suite. Any number of tags can be added.
-// - Parameters:
-//   - key: The name of the tag. If a tag with the same name already exists,
-//     its value will be replaced by the new value.
-//   - value: The value of the tag. Can be a number or a string.
-func setTag(key: String, value: Any)
-//
-// Starts a test in this suite.
-// - Parameters:
-//   - name: Name of the test.
-//   - startTime: Optional. The time the test started.
-func testStart(name: String, startTime: Date: Date? = nil) -> DDTest
+    // Ends the test suite.
+    // - Parameters:
+    //   - endTime: Optional. The time the suite ended.
+    func end(endTime: Date? = nil)
+    // Adds a tag/attribute to the test suite. Any number of tags can be added.
+    // - Parameters:
+    //   - key: The name of the tag. If a tag with the same name already exists,
+    //     its value will be replaced by the new value.
+    //   - value: The value of the tag. Can be a number or a string.
+    func setTag(key: String, value: Any)
+    //
+    // Starts a test in this suite.
+    // - Parameters:
+    //   - name: Name of the test.
+    //   - startTime: Optional. The time the test started.
+    func testStart(name: String, startTime: Date: Date? = nil) -> DDTest
 }
-//
+    //
 public class DDTest : NSObject {
-// Adds a tag/attribute to the test. Any number of tags can be added.
-// - Parameters:
-//   - key: The name of the tag. If a tag with the same name already exists,
-//     its value will be replaced by the new value.
-//   - value: The value of the tag. Can be a number or a string.
-func setTag(key: String, value: Any)
-//
-// Adds error information to the test. Only one errorInfo can be reported by a test.
-// - Parameters:
-//   - type: The type of error to be reported.
-//   - message: The message associated with the error.
-//   - callstack: Optional. The callstack associated with the error.
-func setErrorInfo(type: String, message: String, callstack: String? = nil)
-//
-// Ends the test.
-// - Parameters:
-//   - status: The status reported for this test.
-//   - endTime: Optional. The time the test ended.
-func end(status: DDTestStatus, endTime: Date: Date? = nil)
+    // Adds a tag/attribute to the test. Any number of tags can be added.
+    // - Parameters:
+    //   - key: The name of the tag. If a tag with the same name already exists,
+    //     its value will be replaced by the new value.
+    //   - value: The value of the tag. Can be a number or a string.
+    func setTag(key: String, value: Any)
+    //
+    // Adds error information to the test. Only one errorInfo can be reported by a test.
+    // - Parameters:
+    //   - type: The type of error to be reported.
+    //   - message: The message associated with the error.
+    //   - callstack: Optional. The callstack associated with the error.
+    func setErrorInfo(type: String, message: String, callstack: String? = nil)
+    //
+    // Ends the test.
+    // - Parameters:
+    //   - status: The status reported for this test.
+    //   - endTime: Optional. The time the test ended.
+    func end(status: DDTestStatus, endTime: Date: Date? = nil)
 }
-//
+    //
 // Possible statuses reported by a test:
 enum DDTestStatus {
-// The test passed.
-case pass
-//
-//Test test failed.
-case fail
-//
-//The test was skipped.
-case skip
-}
+  // The test passed.
+  case pass
+  //
+  //Test test failed.
+  case fail
+  //
+  //The test was skipped.
+  case skip
 {{< /code-block >}}
 
 ### Code example

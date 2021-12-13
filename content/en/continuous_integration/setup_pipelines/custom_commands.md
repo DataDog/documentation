@@ -2,9 +2,9 @@
 title: Adding Custom Commands to Pipeline Traces
 kind: documentation
 further_reading:
-- link: "/continuous_integration/setup_pipelines/custom_commands/"
-  tag: "Documentation"
-  text: "Troubleshooting CI"
+  - link: "/continuous_integration/setup_pipelines/custom_commands/"
+    tag: "Documentation"
+    text: "Troubleshooting CI"
 ---
 
 {{< site-region region="gov" >}}
