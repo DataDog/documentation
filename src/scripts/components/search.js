@@ -2,35 +2,7 @@
 import algoliasearch from 'algoliasearch';
 import { getQueryParameterByName } from '../helpers/browser';
 import configDocs from '../config/config-docs';
-import { 
-    initializeAlogliaInsights, 
-    sendAlgoliaInsightsClickAfterSearchEvent, 
-    sendAlgoliaInsightsViewEvent 
-} from '../algolia-insights';
-
-const siteEnv = document.querySelector('html').dataset.env;
-let indexName = '';
-
-const handleAlgoliaInsightsViewEvents = () => {
-    const searchResultContainer = document.getElementById('tipue_search_content');
-    const algoliaObjectIDs = [];
-
-    if (searchResultContainer) {
-        const searchResultLinksNodeList = searchResultContainer.querySelectorAll('.hit .tipue_search_content_title a');
-
-        searchResultLinksNodeList.forEach(link => {
-            const objectID = link.dataset.object;
-
-            if (objectID && objectID !== '') {
-                algoliaObjectIDs.push(objectID);
-            }
-        })
-
-        if (algoliaObjectIDs.length > 0) {
-            sendAlgoliaInsightsViewEvent(algoliaObjectIDs);
-        }
-    }
-}
+import { sendAlgoliaInsightsClickAfterSearchEvent } from '../algolia-insights';
 
 const attachEventListenersToPaginatedSearchResults = (algoliaQueryID) => {
     const searchResultContainer = document.getElementById('tipue_search_content');
@@ -47,10 +19,14 @@ const attachEventListenersToPaginatedSearchResults = (algoliaQueryID) => {
 
               if (objectID !== '' && typeof(position) === 'number') {
                   sendAlgoliaInsightsClickAfterSearchEvent(algoliaQueryID, objectID, position);
+                  
+                  if (window.DD_LOGS) {
+                    window.DD_LOGS.logger.info('Algolia Insights clicked objectID after search posted', { objectID, position, url });
+                  }
               }
               
-              window.history.pushState({ 'page': url }, '', url);
-              window.location = url;
+            //   window.history.pushState({ 'page': url }, '', url);
+            //   window.location = url;
           })
       })
   }
@@ -99,7 +75,7 @@ const appendSearchResultCountString = (count) => {
 }
 
 // to do: https://datadoghq.atlassian.net/browse/WEB-1928
-const renderResults = (query, hits) => {
+const renderResults = (query, algoliaQueryID, hits) => {
     $('#tipue_search_input').val(query);
     appendSearchResultCountString(hits.length);
     let formatted_results = '';
@@ -461,11 +437,18 @@ const handleSearch = () => {
         index.search(decodeURIComponent(query), {
             hitsPerPage: 200,
             attributesToRetrieve: ['*'],
-            filters: `language:${getSiteLang()}`
+            filters: `language:${getSiteLang()}`,
+            clickAnalytics: true
         })
-        .then(({ hits }) => {
-            renderResults(query, hits);
+        .then(results => {
+            console.log(results);
+            const { queryID, hits } = results;
+            renderResults(query, queryID, hits);
         })
+        // .then(({ hits }) => {
+        //     console.log(hits);
+        //     renderResults(query, hits);
+        // })
         .catch(() => {
             const content = document.getElementsByClassName(
                 'content'

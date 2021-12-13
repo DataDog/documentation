@@ -102,6 +102,10 @@ export const handleAlgoliaClickedObjectEventOnAutocomplete = (url) => {
             if (urlPathnameWithHash === resultUrlPathnameWithHash) {
               const { objectID } = hit;
               sendAlgoliaClickedObjectIDEvent(objectID);
+
+              if (window.DD_LOGS) {
+                window.DD_LOGS.logger.info('Algolia Insights clicked object ID after autocomplete posted', { url: urlPathnameWithHash });
+              }
             }
           })
         })
@@ -123,6 +127,10 @@ export const handleAlgoliaViewEventOnPageLoad = () => {
                 // Some top-levl URLs in algolia have a #pagetitle anchor, so we should look to match on that as well.
                 if (url === topLevelUrl || url === `${topLevelUrl}#pagetitle`) {
                     sendAlgoliaInsightsViewEvent([objectID]);
+
+                    if (window.DD_LOGS) {
+                      window.DD_LOGS.logger.info('Algolia Insights View Event posted', { url });
+                    }
                 }
             })
         });
