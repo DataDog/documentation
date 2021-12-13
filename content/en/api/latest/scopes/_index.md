@@ -7,7 +7,7 @@ Scope is an authorization mechanism that allows you to limit and define the gran
 
 The best practice for scoping applications is to maintain the minimal privileges and most restrictive scopes necessary for an application to function as intended. This gives users fine-grained access control of applications and transparency into how an application is using their data. For example, a third-party application that only reads dashboard data does not need permissions to delete or manage users in an organization.
 
-Ways to use scopes with Datadog:
+You may use scopes two ways with Datadog:
 - Scope OAuth2 clients for your [Datadog Apps][1]
 - Scope your [application keys][2] 
 
