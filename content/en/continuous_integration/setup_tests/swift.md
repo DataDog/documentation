@@ -642,6 +642,7 @@ enum DDTestStatus {
   //
   //The test was skipped.
   case skip
+}
 {{< /code-block >}}
 
 ### Code example
