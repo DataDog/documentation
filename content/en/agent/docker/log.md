@@ -100,7 +100,7 @@ The commands related to log collection are:
 : To collect containers logs from files. Available in the Datadog Agent 6.27.0/7.27.0+
 
 
-[1]: https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles/agent
+[1]: https://github.com/DataDog/datadog-agent/tree/main/Dockerfiles/agent
 [2]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/agent
 {{% /tab %}}
 {{% tab "Host Agent" %}}
