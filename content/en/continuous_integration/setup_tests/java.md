@@ -27,7 +27,7 @@ Supported test frameworks:
 
 ## Installing the Java tracer
 
-Install and enable the Java tracer v0.91.0 or newer
+Install and enable the Java tracer v0.91.0 or newer.
 
 {{< tabs >}}
 {{% tab "Maven" %}}
@@ -230,7 +230,7 @@ If you are running tests in non-supported CI providers or with no `.git` folder,
 
 ### The tests are not appearing in Datadog after enabling CI Visibility in the tracer
 
-If the tests are not appearing in Datadog, ensure you are using the 0.91.0 or greater version of the Java tracer.
+If the tests are not appearing in Datadog, ensure that you are using version 0.91.0 or greater of the Java tracer.
 The `-Ddd.civisibility.enabled=true` configuration property is only available since that version.
 
 If you need to use a previous version of the tracer, you can configure CI Visibility by using: `-Ddd.prioritization.type=ENSURE_TRACE
