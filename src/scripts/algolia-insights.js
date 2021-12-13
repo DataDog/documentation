@@ -16,12 +16,6 @@ export const initializeAlogliaInsights = () => {
   searchInsights('init', { appId, apiKey });
 }
 
-// Don't send data from synthetic runs or specific pages we want to ignore.
-const pageIsEligibleToSendAlgoliaInsightsData = (url) => {
-  const urlObject = new URL(url);
-  return window._DATADOG_SYNTHETICS_BROWSER === undefined && urlObject.pathname !== '/';
-}
-
 /**
   * Sends click event data from the Search page to Algolia Insights
   * @param {String} queryID - Algolia's identifier correlating to the current search.
@@ -63,7 +57,7 @@ const sendAlgoliaClickedObjectIDEvent = (objectID) => {
   * @param {Array} objectIDs - List of Algolia identifiers correlating to each result for the current search.
   * Info: https://www.algolia.com/doc/api-reference/api-methods/viewed-object-ids/
 */
-export const sendAlgoliaInsightsViewEvent = (objectIDs) => {
+const sendAlgoliaInsightsViewEvent = (objectIDs) => {
   const insightsViewEventParams = {
     userToken: 'documentation',
     index: getAlogliaIndexName(),
@@ -86,28 +80,9 @@ const getAlgoliaSearchDataByUrl = (url) => {
 
   return index.search(urlPathnameWithHash, {
     hitsPerPage: 50,
-    attributesToRetrieve: ['url', 'url_without_anchor'],
-    // restrictSearchableAttributes: ['url']
+    restrictSearchableAttributes: ['url'],
+    attributesToRetrieve: ['url', 'objectID']
   })
-}
-
-export const handleAlgoliaViewEventOnPageLoad = (url) => {
-  if (pageIsEligibleToSendAlgoliaInsightsData(url)) {
-    initializeAlogliaInsights();
-    const urlPathnameWithHash = getUrlWithPathnameAndHash(url);
-
-    getAlgoliaSearchDataByUrl(url)
-      .then(({ hits }) => {
-        hits.forEach(hit => {
-          const resultUrlPathnameWithHash = getUrlWithPathnameAndHash(hit.url);
-
-          if (urlPathnameWithHash === resultUrlPathnameWithHash) {
-            const { objectID } = hit;
-            sendAlgoliaInsightsViewEvent([objectID]);
-          }
-        })
-      })
-  }
 }
 
 /**
@@ -115,19 +90,42 @@ export const handleAlgoliaViewEventOnPageLoad = (url) => {
   * @param {String} url - url of the clicked suggestion link from the autocomplete dropdown.
 */
 export const handleAlgoliaClickedObjectEventOnAutocomplete = (url) => {
-  initializeAlogliaInsights();
-  const urlPathnameWithHash = getUrlWithPathnameAndHash(url);
-
-  getAlgoliaSearchDataByUrl(url)
-      .then(({ hits }) => {
-        hits.forEach(hit => {
-          const resultUrlPathnameWithHash = getUrlWithPathnameAndHash(hit.url);
-
-          if (urlPathnameWithHash === resultUrlPathnameWithHash) {
-            const { objectID } = hit;
-            sendAlgoliaClickedObjectIDEvent(objectID);
-          }
+  if (window._DATADOG_SYNTHETICS_BROWSER === undefined) {
+    initializeAlogliaInsights();
+    const urlPathnameWithHash = getUrlWithPathnameAndHash(url);
+  
+    getAlgoliaSearchDataByUrl(url)
+        .then(({ hits }) => {
+          hits.forEach(hit => {
+            const resultUrlPathnameWithHash = getUrlWithPathnameAndHash(hit.url);
+  
+            if (urlPathnameWithHash === resultUrlPathnameWithHash) {
+              const { objectID } = hit;
+              sendAlgoliaClickedObjectIDEvent(objectID);
+            }
+          })
         })
-      })
+  }
+}
+
+export const handleAlgoliaViewEventOnPageLoad = () => {
+  if (window._DATADOG_SYNTHETICS_BROWSER === undefined) {
+    // Docs preview index uses the production origin - if we're on the preview site this makes sure we're still grabbing the correct data from Algolia.
+    const origin = 'https://docs.datadoghq.com';
+    const { pathname } = window.location;
+    const topLevelUrl = `${origin}${pathname}`;
+
+    getAlgoliaSearchDataByUrl(topLevelUrl)
+        .then(({ hits }) => {
+            hits.forEach(hit => {
+                const { objectID, url } = hit;
+
+                // Some top-levl URLs in algolia have a #pagetitle anchor, so we should look to match on that as well.
+                if (url === topLevelUrl || url === `${topLevelUrl}#pagetitle`) {
+                    sendAlgoliaInsightsViewEvent([objectID]);
+                }
+            })
+        });
+  }
 }
 

@@ -25,7 +25,7 @@ const createDataFile = (algoliaRecordsArray) => {
   const filePath = 'data/algolia_objects.json';
   console.log(`Algolia records array length is ${algoliaRecordsArray.length} when provided to function to write data.`)
 
-  fs.writeFile(filePath, algoliaRecordsArray, (err) => {
+  fs.writeFile(filePath, algoliaRecordsArray, { flag: 'w+' }, (err) => {
     if (err) {
       console.error(err)
     }
