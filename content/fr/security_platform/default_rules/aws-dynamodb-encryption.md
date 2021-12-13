@@ -10,7 +10,7 @@ kind: documentation
 rule_category:
   - Cloud Configuration
 scope: dynamodb
-security: conformité
+security: compliance
 source: dynamodb
 title: La table DynamoDB est chiffrée
 type: security_rules
@@ -23,7 +23,7 @@ Implémentez un chiffrement côté serveur pour vos données AWS DynamoDB.
 
 Le chiffrement côté serveur, ou chiffrement au repos, fournit une couche de protection supplémentaire en sécurisant vos données dans une table chiffrée. Le chiffrement au repos fait appel à AWS Key Management Service (KMS) pour gérer les clés de chiffrement qui sont utilisées pour chiffrer ces tables.
 
-## Remédiation
+## Remediation
 
 ### Console
 

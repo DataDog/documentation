@@ -37,11 +37,11 @@ supported_os:
 ---
 ## 概要
 
-このインテグレーションを利用して、[PerimeterX][https://www.perimeterx.com/] に関連するログとイベントを Datadog に転送することができます。
+このインテグレーションを利用して、[PerimeterX][1] に関連するログとイベントを Datadog に転送することができます。
 
 ## セットアップ
 
-すべてのコンフィギュレーションは PerimeterX 側で行われます。サードパーティインテグレーションについて詳しくは、[PerimeterX のドキュメント][1]を参照してください。 
+すべてのコンフィギュレーションは PerimeterX 側で行われます。サードパーティインテグレーションについて詳しくは、[PerimeterX のドキュメント][2]を参照してください。 
 
 ### インストール
 
@@ -49,8 +49,8 @@ supported_os:
 
 ### コンフィギュレーション
 
-1. [Datadog ポータル][2]で新しいインテグレーションの API キーを生成します。
-2. [PerimeterX サポート][3]でサポートチケットを開き、Datadog のログエクスポートとのインテグレーションをリクエストします。このとき、サポートに以下の情報を提供する必要があります。
+1. [Datadog ポータル][3] で新しいインテグレーションの API キーを生成します。
+2. [PerimeterX サポート][4]でサポートチケットを開き、Datadog のログエクスポートとのインテグレーションをリクエストします。このとき、サポートに以下の情報を提供する必要があります。
    - Datadog インテグレーションの API キー
    - 送信したいデータ対象 (メトリクスおよび/またはログ)
    - Datadog に転送が必要な PerimeterX のアプリケーション ID
@@ -68,7 +68,7 @@ PerimeterX サポートから Datadog とのインテグレーション完了通
 
 ### メトリクス
 
-PerimeterX には、[リクエスト][4]用のメトリクスは含まれません。
+PerimeterX には、[リクエスト][5]用のメトリクスは含まれません。
 
 ### サービスのチェック
 
@@ -80,10 +80,11 @@ PerimeterX にはイベントは含まれません。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
 
-[1]: https://docs.perimeterx.com/pxconsole/docs/data-integration-to-third-party-apps
-[2]: https://app.datadoghq.com/account/settings#api
-[3]: mailto:support@perimeterx.com
-[4]: https://docs.perimeterx.com/pxconsole/docs/data-schema-metrics
-[5]: https://docs.datadoghq.com/ja/help/
+[1]: https://www.perimeterx.com/
+[2]: https://docs.perimeterx.com/pxconsole/docs/data-integration-to-third-party-apps
+[3]: https://app.datadoghq.com/organization-settings/api-keys
+[4]: mailto:support@perimeterx.com
+[5]: https://docs.perimeterx.com/pxconsole/docs/data-schema-metrics
+[6]: https://docs.datadoghq.com/ja/help/

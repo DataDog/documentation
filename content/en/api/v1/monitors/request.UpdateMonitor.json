@@ -1,0 +1,14 @@
+{
+  "name": "My monitor-updated",
+  "options": {
+    "evaluation_delay": null,
+    "new_group_delay": 600,
+    "new_host_delay": null,
+    "renotify_interval": null,
+    "thresholds": {
+      "critical": 2,
+      "warning": null
+    },
+    "timeout_h": null
+  }
+}

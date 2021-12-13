@@ -1,0 +1,9 @@
+{
+  "data": {
+    "type": "api_keys",
+    "id": "string",
+    "attributes": {
+      "name": "Example-Edit_an_API_key_returns_OK_response"
+    }
+  }
+}

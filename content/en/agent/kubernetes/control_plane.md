@@ -599,11 +599,11 @@ The Datadog Cluster Agent schedules the checks as endpoint checks and dispatches
 
 ## Kubernetes on Rancher Kubernetes Engine (v2.5+) {#RKE}
 
-Rancher v2.5 relies on [PushProx][10] to expose control plane metric endpoints, this allows the Datadog Agent to run control plane checks and collect metrics.
+Rancher v2.5 relies on [PushProx][9] to expose control plane metric endpoints, this allows the Datadog Agent to run control plane checks and collect metrics.
 
 ### Prerequisites
 
-1. Install the Datadog Agent with the [rancher-monitoring chart][9].
+1. Install the Datadog Agent with the [rancher-monitoring chart][10].
 2. The `pushprox` daemonsets are deployed with `rancher-monitoring` and running in the `cattle-monitoring-system` namespace.
 
 ### API server
@@ -773,7 +773,7 @@ spec:
 
 ### API Server, Controller Manager, and Scheduler
 
-Install the Datadog Agent with the [rancher-monitoring chart][9].
+Install the Datadog Agent with the [rancher-monitoring chart][10].
 
 The control plane components run on Docker outside of Kubernetes. Within Kubernetes, the `kubernetes` service in the `default` namespace targets the control plane node IP(s). You can confirm this by running `$ kubectl describe endpoints kubernetes`.
 
@@ -798,7 +798,7 @@ metadata:
 
 Etcd is run in Docker outside of Kubernetes, and certificates are required to communicate with the Etcd service. The suggested steps to set up Etcd monitoring require SSH access to a control plane node running Etcd.
 
-1. SSH into the control plane node by following the [Rancher documentation][10]. Confirm that Etcd is running in a Docker container with `$ docker ps`, and then use `$ docker inspect etcd` to find the location of the certificates used in the run command (`"Cmd"`), as well as the host path of the mounts.
+1. SSH into the control plane node by following the [Rancher documentation][9]. Confirm that Etcd is running in a Docker container with `$ docker ps`, and then use `$ docker inspect etcd` to find the location of the certificates used in the run command (`"Cmd"`), as well as the host path of the mounts.
 
 The three flags in the command to look for are:
 
@@ -948,5 +948,5 @@ On other managed services, such as Azure Kubernetes Service (AKS) and Google Kub
 [6]: https://docs.datadoghq.com/agent/cluster_agent/setup
 [7]: https://docs.datadoghq.com/agent/cluster_agent/clusterchecks/
 [8]: https://docs.datadoghq.com/agent/cluster_agent/endpointschecks/
-[9]: https://github.com/DataDog/helm-charts/blob/main/examples/datadog/agent_on_rancher_values.yaml
-[10]: https://rancher.com/docs/rancher/v2.0-v2.4/en/cluster-admin/nodes
+[9]: https://rancher.com/docs/rancher/v2.0-v2.4/en/cluster-admin/nodes
+[10]: https://github.com/DataDog/helm-charts/blob/main/examples/datadog/agent_on_rancher_values.yaml

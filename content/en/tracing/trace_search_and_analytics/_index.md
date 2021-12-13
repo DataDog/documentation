@@ -69,7 +69,7 @@ Live Search is the default view on the Traces page, and when you're viewing reta
 **Note**: Selecting any span pauses the stream and displays more details about the selected span in the trace side panel.
 
 ### Filtering
-{{< img src="tracing/live_search/toplevelspan2.gif" alt="Live Search query" >}}
+{{< img src="tracing/live_search/toplevelspan2.mp4" alt="Live Search query" video=true >}}
 
 A valid query in the search bar displays traces that match your search criteria across **all spans**. The search syntax is the same in the Live Search views as in the other trace views, but here, your query is matched against all of the ingested traces across any span and any tag, and not just the indexed ones.
 
@@ -94,7 +94,7 @@ All spans that are indexed by retention filters or legacy App Analytics filters 
 
 **Note:** As of October 20, 2020 Tracing without Limits replaced App Analytics as a more flexible way to ingest 100% of your traces and retain the ones important to your business.
 
-{{< img src="tracing/live_search/HistoricalSearch2.gif" alt="Historical Search" >}}
+{{< img src="tracing/live_search/HistoricalSearch2.mp4" alt="Historical Search" video=true >}}
 
 
 For example, if you filter by a tag that appears only on spans that are not indexed by any retention filter, your search will return no results, unlike when using Live Search.
@@ -129,7 +129,7 @@ With Live Analytics, every tag on every span ingested over the rolling 15 minute
 
 Retained Analytics is available from the same page as Live Analytics.  To switch from using Live data to retained data to perform analytics, change the time selector to any period of time greater than 15 minutes. After this selection, the data will no longer be based on a live feed but the fixed time range selected.
 
-{{< img src="tracing/live_search/HistoricalAnalytics2.gif" alt="Historical Analytics" >}}
+{{< img src="tracing/live_search/HistoricalAnalytics2.mp4" alt="Historical Analytics" video=true >}}
 
 All spans indexed by _custom_ retention filters (not the intelligent retention filter) are available to be searched when using trace analytics. These spans are kept by Datadog for 15 days after being indexed by a retention filter.
 

@@ -1,5 +1,5 @@
 ---
-title: Libraries & Integrations
+title: Serverless Libraries and Integrations
 kind: documentation
 further_reading:
 - link: "/serverless/serverless_integrations/plugin/"
@@ -54,7 +54,7 @@ Enable [Amazon EFS for Lambda][5] to automatically get additional tags on your L
 
 3. Once done, go to the [Serverless view][2] to use the new `filesystemid` tag on your Lambda functions.
 
-{{< img src="integrations/amazon_lambda/efs_for_lambda.gif" alt="Amazon EFS for Lambda" >}}
+{{< img src="integrations/amazon_lambda/efs_for_lambda.mp4" alt="Amazon EFS for Lambda" video=true >}}
 
 ## Lambda@Edge
 

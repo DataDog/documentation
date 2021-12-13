@@ -22,10 +22,6 @@ further_reading:
 </div>
 {{< /site-region >}}
 
-<div class="alert alert-warning">
-Datadog Ruby Profiler is currently in public beta. Datadog recommends evaluating the profiler in a non-sensitive environment before deploying in production.
-</div>
-
 The profiler is shipped within Datadog tracing libraries. If you are already using [APM to collect traces][1] for your application, you can skip installing the library and go directly to enabling the profiler.
 
 ## Requirements
@@ -47,28 +43,34 @@ To begin profiling applications:
 
 2. Install the gems with `bundle install`.
 
-3. You can auto-enable the profiler with environment variables:
+3. Enable the profiler:
 
-    ```shell
-    export DD_PROFILING_ENABLED=true
-    export DD_ENV=prod
-    export DD_SERVICE=my-web-app
-    export DD_VERSION=1.0.3
-    ```
+   {{< tabs >}}
+{{% tab "Environment variables" %}}
 
-    or in code:
+```shell
+export DD_PROFILING_ENABLED=true
+export DD_ENV=prod
+export DD_SERVICE=my-web-app
+export DD_VERSION=1.0.3
+```
 
-    ```ruby
-    Datadog.configure do |c|
-      c.profiling.enabled = true
-      c.env = 'prod'
-      c.service = 'my-web-app'
-      c.version = '1.0.3'
-    end
-    ```
+{{% /tab %}}
+{{% tab "In code" %}}
 
-    **Note**: For Rails applications you can create a `config/initializers/datadog.rb` file with the code configuration above.
+```ruby
+Datadog.configure do |c|
+  c.profiling.enabled = true
+  c.env = 'prod'
+  c.service = 'my-web-app'
+  c.version = '1.0.3'
+end
+```
 
+**Note**: For Rails applications, create a `config/initializers/datadog.rb` file with the code configuration above.
+
+{{% /tab %}}
+{{< /tabs >}}
 
 4. Add the `ddtracerb exec` command to your Ruby application start command:
 

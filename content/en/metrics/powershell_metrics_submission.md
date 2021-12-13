@@ -44,7 +44,7 @@ $url_signature = "api/v1/series"
 $url = $url_base + $url_signature + "?api_key=$api_key" + "&" + "application_key=$app_key"
 $tags = "[env:test]" #optional parameter
 
-# Select what to send to Datadog. In this example we send the number of handles opened by process "mmc"
+# Select what to send to Datadog. In this example, the number of handles opened by process "mmc" is being sent
 $metric_ns = "ps1." # your desired metric namespace
 $temp = Get-Process mmc
 $metric = @{"name"=$metric_ns + $temp.Name; "amount"=$temp.Handles}

@@ -86,7 +86,7 @@ curl http://169.254.169.254/latest/meta-data/local-ipv4
 The [Amazon's ECS container metadata file][1] allows discovery of the private IP address. To get the private IP address for each host, run the following command:
 
 {{< code-block lang="curl" >}}
-cat $ECS_CONTAINER_METADATA_FILE | jq .HostPrivateIPv4Address
+cat $ECS_CONTAINER_METADATA_FILE | jq -r .HostPrivateIPv4Address
 {{< /code-block >}}
 
     

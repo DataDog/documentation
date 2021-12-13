@@ -23,7 +23,7 @@ The Events Explorer displays all event types by default. You can filter your eve
 
 ### Event side panel
 
-{{< img src="events/explorer/side-panel.gif" alt="Clicking a row in the Events Explorer opens the event side panel" style="width:100%;" >}}
+{{< img src="events/explorer/side-panel.mp4" alt="Clicking a row in the Events Explorer opens the event side panel" style="width:100%;" video=true >}}
 
 Click a row in the Events Explorer to open the event side panel, which shows tags and messages associated with the event.
 

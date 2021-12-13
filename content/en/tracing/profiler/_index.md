@@ -36,7 +36,7 @@ Find CPU, memory, and IO bottlenecks, broken down by method name, class name, an
 
 ### Low impact in production
 
-Continuous profiler is designed to run in production across all services by leveraging technologies such as JDK Flight Recorder to have minimal impact on your host's CPU and memory usage.
+Continuous profiler runs in production across all services by leveraging technologies such as JDK Flight Recorder to have minimal impact on your host's CPU and memory usage.
 
 ## Getting started
 
@@ -52,7 +52,7 @@ Profiling your service to visualize all your stack traces in one place takes jus
 
 {{< partial name="profiling/profiling-languages.html" >}}
 
-To get notified when a private beta is available for the **Node**, **PHP**, or **.NET** Profiler, [sign up here][1].
+To get notified when a private beta is available for the **PHP** or **.NET** Profiler, complete the [Continuous Profiler - Product Access Request form][1].
 
 ## Guide to using the profiler
 
@@ -66,19 +66,19 @@ After you've configured your application to send profiles to Datadog, start gett
 
 [Use tags to search profiles][3] across any dimension—whether it’s a specific host, service, version, or any combination.
 
-{{< img src="tracing/profiling/search_profiles.gif" alt="Search profiles by tags">}}
+{{< img src="tracing/profiling/search_profiles.mp4" alt="Search profiles by tags" video=true >}}
 
 ### Track function performance over deployments
 
 Obtain key profiling metrics from services such as top CPU usage by method, top memory allocations by thread, and CPU usage by version to visualize in your dashboards.
 
-{{< img src="tracing/profiling/profiling-metric-dashboard.gif" alt="Add profiling metrics to your dashboards.">}}
+{{< img src="tracing/profiling/profiling-metric-dashboard.mp4" alt="Add profiling metrics to your dashboards." video=true >}}
 
 ### Connect traces to profiling data
 
 Application processes that have both [APM distributed tracing][4] and continuous profiler enabled are automatically linked, so you can move directly from span information to profiling data on the [Code Hotspots tab][5] to find specific lines of code related to performance issues.
 
-{{< img src="tracing/profiling/code_hotspots_tab.gif" alt="Code Hotspots tab shows profiling information for a APM trace span">}}
+{{< img src="tracing/profiling/code_hotspots_tab.mp4" alt="Code Hotspots tab shows profiling information for a APM trace span" video=true >}}
 
 ### Find changes in performance by comparing profiles
 

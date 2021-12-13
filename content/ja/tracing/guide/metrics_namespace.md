@@ -59,6 +59,14 @@ aliases:
 **メトリクスタイプ:** [COUNT][5]。<br>
 **タグ:** `env`、`service`、`version`、`resource`、`http.status_class`、`http.status_code`、Datadog Host Agent からのすべてのホストタグ、[第 2 プライマリタグ][4]。
 
+### レイテンシ分布
+
+`trace.<SPAN_NAME>`
+: **前提条件:** このメトリクスは、すべての APM サービスに存在します。
+**説明:** 異なる環境や [the second primary tag][4] にまたがるすべてのサービス、リソース、バージョンのレイテンシ分布を表します。<br>
+**メトリクスタイプ:** [DISTRIBUTION][6].<br>
+**タグ:** `env`、 `service`、 `resource`、 `resource_name`、 `version`、 `synthetics`、 [the second primary tag][4].
+
 ### パーセンタイル集計
 
 `trace.<SPAN_NAME>.duration.by.resource_<2ND_PRIM_TAG>_service.<PERCENTILE_AGGREGATION>`

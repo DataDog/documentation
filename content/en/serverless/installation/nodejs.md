@@ -1,5 +1,5 @@
 ---
-title: Instrumenting Node.js Applications
+title: Instrumenting Node.js Serverless Applications
 kind: documentation
 further_reading:
 - link: "/serverless/serverless_integrations/plugin/"
@@ -35,7 +35,7 @@ If you previously set up Datadog Serverless using the Datadog Forwarder, see the
 
 ## Configuration
 
-Datadog offers many different ways to enable instrumentation for your serverless applications. Choose a method below that best suits your needs. Datadog generally recommends using the Datadog CLI, which does not require redeploying your whole application. The CLI can also be easily added to your CI/CD pipelines to enable instrumentation for applications across your entire organization.
+Datadog offers many different ways to enable instrumentation for your serverless applications. Choose a method below that best suits your needs. Datadog generally recommends using the Datadog CLI, which does not require redeploying your whole application. The CLI can also be added to your CI/CD pipelines to enable instrumentation for applications across your entire organization.
 
 
 {{< tabs >}}
@@ -444,7 +444,7 @@ After you have configured your function following the steps above, you can view 
 
 ### Unified service tagging
 
-Although it's optional, Datadog highly recommends tagging you serverless applications with the `env`, `service`, and `version` tags following the [unified service tagging documentation][4].
+Datadog recommends tagging your serverless applications with `DD_ENV`, `DD_SERVICE`, `DD_VERSION`, and `DD_TAGS`. See the [Lambda extension documentation][4] for more details.
 
 ### Collect logs from AWS serverless resources
 
@@ -517,7 +517,7 @@ If your Lambda function is running in a VPC, follow the [Datadog Lambda Extensio
 [1]: /integrations/amazon_web_services/
 [2]: /serverless/guide/datadog_forwarder_node
 [3]: https://app.datadoghq.com/functions
-[4]: /getting_started/tagging/unified_service_tagging/#aws-lambda-functions
+[4]: /serverless/libraries_integrations/extension/#tagging
 [5]: /serverless/libraries_integrations/forwarder
 [6]: /serverless/custom_metrics?tab=nodejs
 [7]: /tracing/custom_instrumentation/nodejs/

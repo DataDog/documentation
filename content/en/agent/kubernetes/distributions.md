@@ -32,6 +32,7 @@ These configuration can then be customized to add any Datadog feature.
 * [Google Kubernetes Engine (GKE)](#GKE)
 * [Red Hat OpenShift](#Openshift)
 * [Rancher](#Rancher)
+* [Oracle Container Engine for Kubernetes (OKE)](#OKE)
 
 ## AWS Elastic Kubernetes Service (EKS) {#EKS}
 
@@ -72,23 +73,6 @@ spec:
     config:
       criSocket:
         criSocketPath: /run/dockershim.sock
-  agent:
-    image:
-      name: "gcr.io/datadoghq/agent:latest"
-    apm:
-      enabled: false
-    process:
-      enabled: true
-      processCollectionEnabled: false
-    log:
-      enabled: false
-    systemProbe:
-      enabled: false
-    security:
-      compliance:
-        enabled: false
-      runtime:
-        enabled: false
   clusterAgent:
     image:
       name: "gcr.io/datadoghq/cluster-agent:latest"
@@ -146,23 +130,6 @@ spec:
             fieldPath: spec.nodeName
         hostCAPath: /etc/kubernetes/certs/kubeletserver.crt
         # tlsVerify: false # If Kubelet integration fails with provided configuration
-  agent:
-    image:
-      name: "gcr.io/datadoghq/agent:latest"
-    apm:
-      enabled: false
-    process:
-      enabled: true
-      processCollectionEnabled: false
-    log:
-      enabled: false
-    systemProbe:
-      enabled: false
-    security:
-      compliance:
-        enabled: false
-      runtime:
-        enabled: false
   clusterAgent:
     image:
       name: "gcr.io/datadoghq/cluster-agent:latest"
@@ -410,6 +377,58 @@ spec:
       - effect: NoExecute
         key: node-role.kubernetes.io/etcd
         operator: Exists
+  clusterAgent:
+    image:
+      name: "gcr.io/datadoghq/cluster-agent:latest"
+    config:
+      externalMetrics:
+        enabled: false
+      admissionController:
+        enabled: false
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+## Oracle Container Engine for Kubernetes (OKE) {#OKE}
+
+No specific configuration is required.
+
+To enable container monitoring, add the following (`containerd` check):
+
+{{< tabs >}}
+{{% tab "Helm" %}}
+
+Custom `values.yaml`:
+
+```
+datadog:
+  apiKey: <DATADOG_API_KEY>
+  appKey: <DATADOG_APP_KEY>
+  criSocketPath: /run/dockershim.sock
+  env:
+  - name: DD_AUTOCONFIG_INCLUDE_FEATURES
+    value: "containerd"
+```
+
+{{% /tab %}}
+{{% tab "Operator" %}}
+
+DatadogAgent Kubernetes Resource:
+
+```
+apiVersion: datadoghq.com/v1alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  credentials:
+    apiKey: <DATADOG_API_KEY>
+    appKey: <DATADOG_APP_KEY>
+  agent:
+    config:
+      criSocket:
+        criSocketPath: /run/dockershim.sock
   clusterAgent:
     image:
       name: "gcr.io/datadoghq/cluster-agent:latest"

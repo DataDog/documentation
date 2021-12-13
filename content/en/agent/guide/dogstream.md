@@ -82,7 +82,7 @@ Custom parsing functions must:
 
 ### Metrics collection
 
-Let's imagine that you're collecting metrics from logs that are not canonically formatted, but which are intelligently delimited by a unique character, logged as the following:
+Imagine that you're collecting metrics from logs that are not canonically formatted, but which are intelligently delimited by a unique character, logged as the following:
 
 ```text
 user.crashes|2016-05-28 20:24:43.463930|24|LotusNotes,Outlook,Explorer
