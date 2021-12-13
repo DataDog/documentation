@@ -22,6 +22,11 @@
             {{ partial "img.html" (dict "root" . "src" "icons/check_library.png" "class" "static" "alt" "Library" "width" "21") }}<span>{{ i18n "library_check" }}</span>
         </div>
     {{ end }}
+    {{ if eq .Params.ddtype "beta" }}
+        <div class="beta col-12">
+            {{ partial "img.html" (dict "root" . "src" "icons/check_beta.png" "class" "static" "alt" "Beta" "width" "21") }}<span>{{ i18n "beta_check" }}</span>
+        </div>
+    {{ end }}
 </div>
 {{ end }}
 
