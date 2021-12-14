@@ -10,13 +10,13 @@ further_reading:
       text: "Troubleshooting CI"
 ---
 
-{{< site-region region="us5,gov" >}}
+{{< site-region region="gov" >}}
 <div class="alert alert-warning">
 The selected Datadog site ({{< region-param key="dd_site_name" >}}) is not supported.
 </div>
 {{< /site-region >}}
 
-{{< site-region region="us,eu,us3" >}}
+{{< site-region region="us,us3,us5,eu" >}}
 JUnit test report files are XML files that contain test execution information, such as test and suite names, pass/fail status, duration, and sometimes error logs. Although it was introduced by the [JUnit][1] testing framework, many other popular frameworks are able to output results using this format.
 
 As an alternative to instrumenting your tests natively using Datadog tracers, which is the recommended option as it provides the most comprehensive test results, you can also upload JUnit XML test reports.
@@ -236,8 +236,7 @@ To be processed, the `name` attribute in the `<property>` element must have the 
 
 ## Further reading
 
-{{< partial name="whats-next/whats-next.html" >}}
-[1]: https://junit.org/junit5/
+{{< partial name="whats-next/whats-next.html" >}}[1]: https://junit.org/junit5/
 [2]: https://www.npmjs.com/package/@datadog/datadog-ci
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: /getting_started/site/

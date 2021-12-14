@@ -180,7 +180,6 @@ Makefile.config
 # data
 data/permissions.json
 data/agent_config.json
-data/algolia_objects.json
 
 agent_config_types_list.txt
 

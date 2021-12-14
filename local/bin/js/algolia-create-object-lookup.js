@@ -23,7 +23,6 @@ const initializeAlgoliaIndex = () => {
 
 const createDataFile = (algoliaRecordsArray) => {
   const filePath = 'data/algolia_objects.json';
-  console.log(`Algolia records array length is ${algoliaRecordsArray.length} when provided to function to write data.`)
 
   fs.writeFile(filePath, algoliaRecordsArray, { flag: 'w+' }, (err) => {
     if (err) {
@@ -31,10 +30,6 @@ const createDataFile = (algoliaRecordsArray) => {
     }
 
     console.info('Algolia objects data file saved.');
-  })
-
-  fs.readFile(filePath, (err, data) => {
-    console.log(`Aloglia records array length is ${data.length} after writing to the file.`);
   })
 }
 

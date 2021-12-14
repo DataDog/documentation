@@ -134,6 +134,7 @@ export const handleAlgoliaViewEventOnPageLoad = () => {
                 const { objectID, url } = hit;
 
                 // Some top-levl URLs in algolia have a #pagetitle anchor, so we should look to match on that as well.
+                // https://datadoghq.atlassian.net/browse/WEB-1985
                 if (url === topLevelUrl || url === `${topLevelUrl}#pagetitle`) {
                     sendAlgoliaInsightsViewEvent([objectID]);
 
