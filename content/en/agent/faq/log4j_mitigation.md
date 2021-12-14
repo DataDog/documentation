@@ -18,10 +18,10 @@ On Linux, the instructions depend on the init system and on the distribution:
 #### RedHat/CentOS 7 and 8; Amazon Linux 2; SUSE 12+; Ubuntu 16.04+/Debian 8+
 
 1. Create an override file with the following contents at `/etc/systemd/system/datadog-agent.service.d/log4j_override.conf`:
-  ```
-  [Service]
-  Environment="LOG4J_FORMAT_MSG_NO_LOOKUPS=true"
-  ```
+    ```
+    [Service]
+    Environment="LOG4J_FORMAT_MSG_NO_LOOKUPS=true"
+    ```
 2. Reload the systemd service definitions: `sudo systemctl daemon-reload`
 3. Restart the datadog-agent service: `sudo systemctl datadog-agent restart`
 
@@ -33,9 +33,9 @@ Instructions are different depending on the Linux distribution:
 #### Ubuntu 14.04
 
 1. Create an override file with the following contents at `/etc/init/datadog-agent.override`:
-  ```
-  env LOG4J_FORMAT_MSG_NO_LOOKUPS=true
-  ```
+    ```
+    env LOG4J_FORMAT_MSG_NO_LOOKUPS=true
+    ```
 2. Stop and start the datadog-agent service: `sudo stop datadog-agent && sudo start datadog-agent`
 
 **Note**: Use `start` and `stop`, because `restart` does not pick up the service configuration change.
@@ -43,9 +43,9 @@ Instructions are different depending on the Linux distribution:
 #### RedHat/Centos 6; Amazon Linux 1:
 
 1. Add the following line at the end of the existing `/etc/init/datadog-agent.conf` file:
-  ```
-  env LOG4J_FORMAT_MSG_NO_LOOKUPS=true
-  ```
+    ```
+    env LOG4J_FORMAT_MSG_NO_LOOKUPS=true
+    ```
 2. Stop and start the datadog-agent service: `sudo stop datadog-agent && sudo start datadog-agent`
 
 **Note**: Use `start` and `stop`, because `restart` does not pick up the service configuration change.
@@ -56,9 +56,9 @@ Instructions are different depending on the Linux distribution:
 
 1. Run an administrator PowerShell on the machine.
 2. Run the following snippet:
-  ```
-  [Environment]::SetEnvironmentVariable("LOG4J_FORMAT_MSG_NO_LOOKUPS", "true", "Machine")
-  ```
+    ```
+    [Environment]::SetEnvironmentVariable("LOG4J_FORMAT_MSG_NO_LOOKUPS", "true", "Machine")
+    ```
 3. Restart the Datadog Agent service to apply the changes.
 
 **Note**: This applies to all JVMs running on the host.
