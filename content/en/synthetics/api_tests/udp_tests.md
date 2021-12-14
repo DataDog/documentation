@@ -16,6 +16,10 @@ further_reading:
 ## Overview
 
 UDP tests allow you to monitor that low-level UDP connections can be established on the ports of given hosts, ensuring availability of any services living on UDP ports. With built-in response time data, you can keep track of the performance of your network applications and be alerted in case of unexpected slowness.
+The usual UDP traffic is achieved by transmitting information in one direction from source to destination without asking for acknowledgement.
+A recommended way to monitor your UDP services is to have a process on the receiving host that listens on the given UDP port and responds back. 
+Once setup, you can monitor your UDP services by creating a synthetic test on that process and asserting on the response you get back.
+
 UDP tests send an UDP message to the given service and expect to receive a response back.
 
 UDP tests can run from both [managed][1] and [private locations][2] depending on your preference for running the test from outside or inside your network. UDP tests can run on a schedule, on-demand, or directly within your [CI/CD pipelines][3].
