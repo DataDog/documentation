@@ -25,11 +25,11 @@ Metrics starting with:
     * `synthetics.dns.*` come from your API [DNS tests][4]
     * `synthetics.websocket.*` come from your API [WebSocket tests][5]
     * `synthetics.tcp.*` come from your API [TCP tests][6]
-    * `synthetics.udp.*` come from your API [UDP tests][4]
-    * `synthetics.icmp.*` come from your API [ICMP tests][7]
-* `synthetics.multi.response.time` come from your [multistep API tests][8]
-* `synthetics.browser.*` come from your [browser tests][9]
-* `synthetics.pl.worker.*`come from your [private locations][10]
+    * `synthetics.udp.*` come from your API [UDP tests][7]
+    * `synthetics.icmp.*` come from your API [ICMP tests][8]
+* `synthetics.multi.response.time` come from your [multistep API tests][9]
+* `synthetics.browser.*` come from your [browser tests][10]
+* `synthetics.pl.worker.*`come from your [private locations][11]
 
 ### General metrics
 
@@ -67,7 +67,7 @@ Metrics starting with:
 
 {{< get-metrics-from-git "synthetics" "synthetics.icmp" >}}
 
-For more information on API test timings, read the guide on [API Test Timings and Variations][11].
+For more information on API test timings, read the guide on [API Test Timings and Variations][12].
 
 ### Multistep API tests
 
@@ -91,8 +91,9 @@ For more information on API test timings, read the guide on [API Test Timings an
 [4]: /synthetics/api_tests/dns_tests
 [5]: /synthetics/api_tests/websocket_tests
 [6]: /synthetics/api_tests/tcp_tests
-[7]: /synthetics/api_tests/icmp_tests
-[8]: /synthetics/multistep/
-[9]: /synthetics/browser_tests/
-[10]: /synthetics/private_locations/
-[11]: /synthetics/guide/api_test_timing_variations/
+[7]: /synthetics/api_tests/udp_tests
+[8]: /synthetics/api_tests/icmp_tests
+[9]: /synthetics/multistep/
+[10]: /synthetics/browser_tests/
+[11]: /synthetics/private_locations/
+[12]: /synthetics/guide/api_test_timing_variations/
