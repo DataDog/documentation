@@ -27,7 +27,7 @@ You can also ensure your credentials are securely stored and obfuscated across t
 
 ## Include the login steps in your recording
 
-The first method is to record the steps that are needed to perform the login at the beginning of your browser tests: input your username, input your password, hit log in. You can then go on and [start recording subsequent steps][1].
+The first method is to record the steps that are needed to perform the login at the beginning of your browser tests: input your username, input your password, and click log in. You can then go on and [start recording subsequent steps][1].
 At test execution, the browser test systematically executes the first login steps before going through the rest of the journey.
 
 {{< img src="synthetics/guide/app_that_requires_login/login_test.mp4" video="true" alt="Demo of recording a login">}}
