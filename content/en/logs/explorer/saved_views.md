@@ -15,7 +15,7 @@ further_reading:
 
 Efficient troubleshooting requires your data to be in the proper **scope** to permit exploration, have access to **visualization options** to surface meaningful information, and have relevant **[facets][1]** listed to enable analysis.
 
-Troubleshooting is highly contextual, and Saved Views make it easier for you and your teammates to switch between different troubleshooting contexts. You can access Saved Views in the upper left corner of the [Log Explorer][2].
+Troubleshooting is contextual, and Saved Views make it easier for you and your teammates to switch between different troubleshooting contexts. You can access Saved Views in the upper left corner of the [Log Explorer][2].
 
 {{< img src="logs/explorer/saved_views/overview.mp4" alt="Saved Views selection" video=true style="width:90%;" >}}
 
