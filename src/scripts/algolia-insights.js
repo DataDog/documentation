@@ -16,6 +16,13 @@ export const initializeAlogliaInsights = () => {
   searchInsights('init', { appId, apiKey });
 }
 
+export const pageIsEligibleToSendAlgoliaInsightsData = () => {
+  const ineligiblePages = ['/', '/search/', '/404.html', '/help/'];
+  const relPermalink = document.documentElement.dataset.relpermalink;
+
+  return window._DATADOG_SYNTHETICS_BROWSER === undefined && !ineligiblePages.includes(relPermalink);
+}
+
 /**
   * Sends click event data from the Search page to Algolia Insights
   * @param {String} queryID - Algolia's identifier correlating to the current search.
@@ -115,8 +122,8 @@ export const handleAlgoliaClickedObjectEventOnAutocomplete = (url) => {
 }
 
 export const handleAlgoliaViewEventOnPageLoad = () => {
-  if (window._DATADOG_SYNTHETICS_BROWSER === undefined) {
-    // Docs preview index uses the production origin - if we're on the preview site this makes sure we're still grabbing the correct data from Algolia.
+  if (pageIsEligibleToSendAlgoliaInsightsData()) {
+    // Docs preview index uses the production origin - if we're on a preview site this makes sure we're still querying the Algolia data correctly.
     const origin = 'https://docs.datadoghq.com';
     const { pathname } = window.location;
     const topLevelUrl = `${origin}${pathname}`;
