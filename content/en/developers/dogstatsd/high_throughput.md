@@ -245,7 +245,7 @@ See [Client-side aggregation][1] for more information.
 
 {{< programming-lang lang="csharp" >}}
 
-Client-side aggregation is available in dogstatsd-csharp-client version 7.0.0 and later, and is enabled by default.
+Client-side aggregation is available in dogstatsd-csharp-client v7.0.0+ and is enabled by default.
 
 ```csharp
 var dogstatsdConfig = new StatsdConfig
@@ -256,10 +256,11 @@ var dogstatsdConfig = new StatsdConfig
 };
 ```
 
-Client-side aggregation is available for gauges, counters and sets.
+Client-side aggregation is available for gauges, counters, and sets.
 
-See [Client-side aggregation][https://github.com/DataDog/dogstatsd-csharp-client#client-side-aggregation] for more information.
+For more information, see the [DogStatsD for C# repository][1].
 
+[1]: https://github.com/DataDog/dogstatsd-csharp-client#client-side-aggregation
 {{< /programming-lang >}}
 
 {{< /programming-lang-wrapper >}}
