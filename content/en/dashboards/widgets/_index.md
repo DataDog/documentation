@@ -26,6 +26,7 @@ aliases:
     {{< nextlink href="/dashboards/widgets/image" >}}Image{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/log_stream" >}}Log Stream{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/monitor_summary" >}}Monitor Summary{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/pie_charts" >}}Pie Charts{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/note" >}}Notes and Links{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/query_value" >}}Query Value{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/scatter_plot" >}}Scatter Plot{{< /nextlink >}}
