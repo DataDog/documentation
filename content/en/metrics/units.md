@@ -60,7 +60,7 @@ The following units may be associated with metrics submitted to Datadog:
 
 ### Unitless formatting
 
-For unitless metrics, Datadog uses the [SI suffixes][2] `K`, `M`, `G`, and `T`. After `T`, numbers are converted to exponential notation, which is also used for very small numbers. By default, Datadog rounds to two decimal places. For exponential notation, the default is zero decimal places.
+For unitless metrics, Datadog uses the [SI suffixes][2] `K`, `M`, `G`, and `T`. After `T`, numbers are converted to exponential notation, which is also used for tiny numbers. By default, Datadog rounds to two decimal places. For exponential notation, the default is zero decimal places.
 
 #### Examples
 
@@ -98,7 +98,7 @@ Time units between a minute and a year are split into multiple units to be more 
 
 - Short times are formatted in decimal form.
 - The smallest time unit is nanoseconds.
-- Very long times are formatted as days in decimal form.
+- Long times are formatted as days in decimal form.
 
 
 #### Examples
