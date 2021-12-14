@@ -48,7 +48,7 @@ An OTLP Sum represents a sum of reported measurements over a time window. For ex
 
 The default mapping is as follows:
 1. For cumulative monotonic sums, the delta between consecutive points is calculated and reported to Datadog as a count. The first point is stored but omitted. To recover the value in the OTLP payload, use the [`cumsum` arithmetic function][1].
-2. cumulative non-monotonic sums are exported as Datadog gauges.
+2. Cumulative non-monotonic sums are exported as Datadog gauges.
 3. Delta sums are exported as Datadog counts.
 
 [1]: https://docs.datadoghq.com/dashboards/functions/arithmetic/#cumulative-sum
@@ -123,12 +123,12 @@ You may add all resource attributes as tags by using the `resource_attributes_as
 
 OpenTelemetry defines certain semantic conventions related to host names. If an OTLP payload has a known hostname attribute, Datadog products honor these conventions and try to use its value as a hostname. The semantic conventions are considered in the following order:
 
-1. `datadog.host.name`, a Datadog-specific hostname convention,
-2. `k8s.node.name`, the Kubernetes node name,
-3. cloud provider-specific conventions, based on the `cloud.provider` semantic convention,
-4. `host.id`, the unique host ID,
-5. `host.name` the system hostname and
-6. `container.id` the container ID.
+1. `datadog.host.name`, a Datadog-specific hostname convention
+2. `k8s.node.name`, the Kubernetes node name
+3. cloud provider-specific conventions, based on the `cloud.provider` semantic convention
+4. `host.id`, the unique host ID
+5. `host.name`, the system hostname
+6. `container.id`, the container ID
 
 If none are present, Datadog products assign a system-level hostname to payloads.
 On the OpenTelemetry Collector, add the ['resource detection' processor][3] to your pipelines for accurate hostname resolution.
