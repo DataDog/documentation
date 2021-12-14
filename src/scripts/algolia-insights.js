@@ -24,6 +24,8 @@ export const initializeAlogliaInsights = () => {
   * Info: https://www.algolia.com/doc/api-reference/api-methods/clicked-object-ids-after-search/
 */
 export const sendAlgoliaInsightsClickAfterSearchEvent = (queryID, objectID, position) => {
+  initializeAlogliaInsights();
+
   const insightsClickEventParams = {
     userToken: 'documentation',
     index: getAlogliaIndexName(),
@@ -104,7 +106,7 @@ export const handleAlgoliaClickedObjectEventOnAutocomplete = (url) => {
               sendAlgoliaClickedObjectIDEvent(objectID);
 
               if (window.DD_LOGS) {
-                window.DD_LOGS.logger.info('Algolia Insights clicked object ID after autocomplete posted', { url: urlPathnameWithHash });
+                window.DD_LOGS.logger.log('Algolia Insights clicked object ID after autocomplete posted', { url: urlPathnameWithHash });
               }
             }
           })
@@ -129,7 +131,7 @@ export const handleAlgoliaViewEventOnPageLoad = () => {
                     sendAlgoliaInsightsViewEvent([objectID]);
 
                     if (window.DD_LOGS) {
-                      window.DD_LOGS.logger.info('Algolia Insights View Event posted', { url });
+                      window.DD_LOGS.logger.log('Algolia Insights View Event posted', { url });
                     }
                 }
             })

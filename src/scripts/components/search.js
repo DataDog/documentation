@@ -4,7 +4,7 @@ import { getQueryParameterByName } from '../helpers/browser';
 import configDocs from '../config/config-docs';
 import { sendAlgoliaInsightsClickAfterSearchEvent } from '../algolia-insights';
 
-const attachEventListenersToPaginatedSearchResults = (algoliaQueryID) => {
+const handleAlgoliaInsightsEventOnSearchResultClick = () => {
     const searchResultContainer = document.getElementById('tipue_search_content');
 
     if (searchResultContainer) {
@@ -12,16 +12,17 @@ const attachEventListenersToPaginatedSearchResults = (algoliaQueryID) => {
       
       searchResultLinksNodeList.forEach(link => {
           link.addEventListener('click', () => {
-              event.preventDefault();
-              const objectID = event.target.dataset.object;
-              const position = parseInt(event.target.dataset.position);
+              event.preventDefault();            
               const url = event.target.href;
+              const objectID = event.target.dataset.object;
+              const algoliaQueryID = document.body.dataset.query;
+              const position = parseInt(event.target.dataset.position);
 
-              if (objectID !== '' && typeof(position) === 'number') {
+              if (algoliaQueryID && objectID && typeof(position) === 'number') {
                   sendAlgoliaInsightsClickAfterSearchEvent(algoliaQueryID, objectID, position);
                   
                   if (window.DD_LOGS) {
-                    window.DD_LOGS.logger.info('Algolia Insights clicked objectID after search posted', { objectID, position, url });
+                    window.DD_LOGS.logger.log('Algolia Insights clicked objectID after search posted', { objectID, position, url });
                   }
               }
               
@@ -77,6 +78,7 @@ const appendSearchResultCountString = (count) => {
 // to do: https://datadoghq.atlassian.net/browse/WEB-1928
 const renderResults = (query, algoliaQueryID, hits) => {
     $('#tipue_search_input').val(query);
+    document.body.setAttribute('data-query', algoliaQueryID);
     appendSearchResultCountString(hits.length);
     let formatted_results = '';
 
@@ -86,8 +88,10 @@ const renderResults = (query, algoliaQueryID, hits) => {
             formatted_results += '<div class="hit">';
             formatted_results += `${
                 '<div class="tipue_search_content_title">' +
-                '<a href="'
-            }${hit['url']}">${getTitle(hit)}</a></div>`;
+                    '<a href="'}${hit['url']}">
+                        ${getTitle(hit)}
+                    </a>
+                </div>`;
             formatted_results += `${
                 '<div class="tipue_search_content_url">' +
                 '<a href="'
@@ -364,10 +368,12 @@ const renderResults = (query, algoliaQueryID, hits) => {
 
                 formatted_results += `${
                     '<div class="tipue_search_content_title">' +
-                    '<a href="'
-                }${hits[i]['url']}">${getTitle(
-                    hits[i]
-                )}</a></div>`;
+                        '<a href="'}${hits[i]['url']}"
+                            data-object=${hits[i].objectID} 
+                            data-position=${hits[i].weight.position}>
+                                ${getTitle(hits[i])}
+                        </a>
+                    </div>`;
                 const text =
                     hits[i]._snippetResult.content.value;
                 formatted_results += `<div class="tipue_search_content_text">${text}</div>`;
@@ -426,6 +432,7 @@ const renderResults = (query, algoliaQueryID, hits) => {
             current_page = parseInt(searchParams.get('p'));
             window.history.replaceState({ page: current_page }, '', '');
         changePage(current_page);
+        handleAlgoliaInsightsEventOnSearchResultClick();
     }
 }
 
@@ -441,14 +448,9 @@ const handleSearch = () => {
             clickAnalytics: true
         })
         .then(results => {
-            console.log(results);
             const { queryID, hits } = results;
             renderResults(query, queryID, hits);
         })
-        // .then(({ hits }) => {
-        //     console.log(hits);
-        //     renderResults(query, hits);
-        // })
         .catch(() => {
             const content = document.getElementsByClassName(
                 'content'
@@ -460,4 +462,4 @@ const handleSearch = () => {
     }
 }
 
-window.addEventListener('DOMContentLoaded', handleSearch)
+window.addEventListener('DOMContentLoaded', handleSearch);
