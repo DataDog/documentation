@@ -27,6 +27,8 @@ In order to start collecting your application traces you must be [running the Da
 
 You can configure the Agent to intake traces by using either `IP:Port`, Unix Domain Socket (UDS), or both. The Agent can receive traces from both setups at the same time if needed.
 
+{{< img src="tracing/visualization/troubleshooting_pipeline_kubernetes.png" alt="The APM troubleshooting pipeline: The tracer sends traces and metrics data from the application pod to the Agent pod, which sends it to the Datadog backend to be shown in the Datadog UI.">}}
+
 ### Configure the Datadog Agent to accept traces
 {{< tabs >}}
 {{% tab "Helm" %}}
