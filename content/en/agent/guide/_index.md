@@ -40,5 +40,5 @@ private: true
     {{< nextlink href="agent/guide/agent-5-autodiscovery" >}}Autodiscovery in Agent v5{{< /nextlink >}}
     {{< nextlink href="agent/guide/agent-5-kubernetes-basic-agent-usage" >}}Kubernetes Basic Agent Usage in Agent v5{{< /nextlink >}}
     {{< nextlink href="agent/guide/dogstream" >}}Dogstream{{< /nextlink >}}
-    {{< nextlink href="agent/guide/upgrade-to-agent-v6" >}}Upgrade to Datadog Agent v6 from v5{{< /nextlink >}}
+    {{< nextlink href="agent/guide/upgrade-to-agent-v6" >}}Upgrade to Datadog Agent v6{{< /nextlink >}}
 {{< /whatsnext >}}
