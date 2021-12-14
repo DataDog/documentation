@@ -1,5 +1,5 @@
 name: Linting
-on: [pull_request]
+on: [push]
 
 jobs:
   prose:
@@ -11,5 +11,8 @@ jobs:
       uses: errata-ai/vale-action@v1.4.0
       with:
         onlyAnnotateModifiedLines: true
+        styles: |
+          https://github.com/DataDog/datadog-vale/releases/latest/download/Docshtml.zip
+          https://github.com/DataDog/datadog-vale/releases/latest/download/Docsmd.zip
       env:
         GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
