@@ -17,11 +17,11 @@ further_reading:
 
 The Datadog Agent and the OpenTelemetry Collector Datadog exporter can ingest metrics in the OpenTelemetry format (OTLP), which can be produced by OpenTelemetry-instrumented applications.
 
-The following OTLP metric types can be ingested by the Datadog Agent and OpenTelemetry Collector Datadog exporter:
-- Sums,
-- Gauges,
-- Histograms and
-- Summaries.
+The following OTLP metric types can be ingested by the Datadog Agent and the OpenTelemetry Collector Datadog exporter:
+- Sums
+- Gauges
+- Histograms
+- Summaries
 
 These different OTLP metric types are mapped to Datadog in-app metric types found within the Datadog web application:
 
@@ -47,8 +47,8 @@ An OTLP Sum represents a sum of reported measurements over a time window. For ex
 - *Monotonicity*. Monotonic sums never decrease and only support adding to the underlying count.
 
 The default mapping is as follows:
-1. For cumulative monotonic sums, the delta between consecutive points is calculated and reported to Datadog as a count. The first point is stored but omitted. To recover the value in the OTLP payload, use the [`cumsum` arithmetic function][1], 
-2. cumulative non-monotonic sums are exported as Datadog gauges and
+1. For cumulative monotonic sums, the delta between consecutive points is calculated and reported to Datadog as a count. The first point is stored but omitted. To recover the value in the OTLP payload, use the [`cumsum` arithmetic function][1].
+2. cumulative non-monotonic sums are exported as Datadog gauges.
 3. Delta sums are exported as Datadog counts.
 
 [1]: https://docs.datadoghq.com/dashboards/functions/arithmetic/#cumulative-sum
