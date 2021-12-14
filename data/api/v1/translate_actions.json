@@ -764,6 +764,10 @@
     "request_description": "The edited service level objective request object.",
     "request_schema_description": "A service level objective object includes a service level indicator, thresholds\nfor one or more timeframes, and metadata (`name`, `description`, `tags`, etc.)."
   },
+  "GetSLOCorrections": {
+    "description": "Get corrections applied to an SLO",
+    "summary": "Get Corrections For an SLO"
+  },
   "GetSLOHistory": {
     "description": "Get a specific SLO’s history, regardless of its SLO type.\n\nThe detailed history data is structured according to the source data type.\nFor example, metric data is included for event SLOs that use\nthe metric source, and monitor SLO types include the monitor transition history.\n\n**Note:** There are different response formats for event based and time based SLOs.\nExamples of both are shown.",
     "summary": "Get an SLO's history"
@@ -851,6 +855,12 @@
     "summary": "Delete tests",
     "request_description": "Public ID list of the Synthetic tests to be deleted.",
     "request_schema_description": "A JSON list of the ID or IDs of the Synthetic tests that you want\nto delete."
+  },
+  "TriggerTests": {
+    "description": "Trigger a set of Synthetics tests.",
+    "summary": "Trigger Synthetics tests",
+    "request_description": "The identifiers of the tests to trigger.",
+    "request_schema_description": "Object describing the synthetics tests to trigger."
   },
   "TriggerCITests": {
     "description": "Trigger a set of Synthetics tests for continuous integration.",

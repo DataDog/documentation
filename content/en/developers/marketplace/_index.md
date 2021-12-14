@@ -237,7 +237,6 @@ Once a Marketplace tile is live, Technology Partners have the option of meeting 
 
 * A Datadog quote for partner press releases
 * A Blog Post in the [Datadog Monitor][30]
-* A Datadog speaker for a partner webinar
 * Amplification of social media posts
 
 ## Contact

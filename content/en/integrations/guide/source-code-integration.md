@@ -24,7 +24,7 @@ With the source code and GitHub Apps integrations, you can also see inline code 
 |-----------------------------|-------------------|-----------------------|----------------------|
 | Source Code                 | {{< X >}}         | X                     | X                    |
 | GitHub Apps                 | X                 | {{< X >}}             | X                    |
-| Source Code and GitHub Apps | X                 | X                     | {{< X >}}            |
+| Source Code and GitHub Apps | {{< X >}}         | {{< X >}}             | {{< X >}}            |
 
 ## Configuration
 
@@ -132,7 +132,7 @@ In [Error Tracking][3], you can directly access links to repositories from your 
 
 ##### Inline source code
 
-If you are a GitHub SaaS user, install Datadog's [GitHub Apps integration][2] to directly inline code snippets from your GitHub repository in your stack traces. 
+If you are a GitHub SaaS user, install Datadog's [GitHub Apps integration][2] to directly inline code snippets from your GitHub repository in your stack traces.
 
 When specifying your permissions in the integration tile, enable Datadog read permissions to **Contents**.
 

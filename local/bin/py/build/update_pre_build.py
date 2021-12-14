@@ -38,12 +38,9 @@ class Build:
 
     # Loads the configurations in the configuration/ folder and attaches it to the Build Class
     def load_config(self, build_configuration_file_path, integration_merge_configuration_file_path):
-        self.build_configuration = yaml.load(
-            open(build_configuration_file_path), Loader=yaml.FullLoader)
+        self.build_configuration = yaml.safe_load(open(build_configuration_file_path))
 
-        self.integration_mutations = OrderedDict(yaml.load(
-            open(integration_merge_configuration_file_path), Loader=yaml.FullLoader)
-        )
+        self.integration_mutations = OrderedDict(yaml.safe_load(open(integration_merge_configuration_file_path)))
 
     # Get the list of content to work with after it gets updated with the local globs or the
     # downloaded globs from Github.

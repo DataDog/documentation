@@ -1,5 +1,5 @@
 ---
-title: Instrumenting .NET Applications
+title: Instrumenting .NET Serverless Applications
 kind: documentation
 further_reading:
 - link: 'serverless/serverless_tagging/'

@@ -2,6 +2,8 @@
 title: CI Results Explorer
 kind: documentation
 description: Drill down into CI jobs executing Synthetic tests.
+aliases: 
+  - /synthetics/cicd_testing/ci_results_explorer
 further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-synthetic-ci-cd-testing/"
   tag: "Blog"

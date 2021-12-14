@@ -17,7 +17,7 @@ further_reading:
 
 ## Overview
 
-While Live Processes data is stored for 36 hours, you can generate global and percentile distribution metrics from your processes to monitor your resource consumption long-term. Process-based metrics are stored for 15 months like any other Datadog metric, making it easy to:
+While Live Processes data is stored for 36 hours, you can generate global and percentile distribution metrics from your processes to monitor your resource consumption long-term. Process-based metrics are stored for 15 months like any other Datadog metric. This can help you:
 
 - Debug past and ongoing infrastructure issues
 - Identify trends in the resource consumption of your critical workloads

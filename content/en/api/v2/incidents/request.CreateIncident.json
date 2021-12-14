@@ -1,0 +1,23 @@
+{
+  "data": {
+    "type": "incidents",
+    "attributes": {
+      "title": "Example-Create_an_incident_returns_CREATED_response",
+      "customer_impacted": false,
+      "fields": {
+        "state": {
+          "type": "dropdown",
+          "value": "resolved"
+        }
+      }
+    },
+    "relationships": {
+      "commander": {
+        "data": {
+          "type": "users",
+          "id": "string"
+        }
+      }
+    }
+  }
+}

@@ -52,7 +52,7 @@ def update_global_aliases(index_path, global_aliases):
         content = f.read()
     split = boundary.split(content, 2)
     _, fm, content = split
-    new_yml = yaml.load(fm, Loader=yaml.FullLoader)
+    new_yml = yaml.safe_load(fm)
     fm_aliases = list(set(new_yml.get("aliases", []) + global_aliases))
     new_yml['aliases'] = fm_aliases
     with open(index_path, mode='w', encoding='utf-8') as out_file:
@@ -86,7 +86,7 @@ def security_rules(content, content_dir):
                     if 'jinja2' in file_text_content:
                         data = load_templated_file(f)
                     else:
-                        data = yaml.load(file_text_content, Loader=yaml.FullLoader)
+                        data = yaml.safe_load(file_text_content)
                 except:
                     logger.warn(f"Error parsing {file_name}")
 

@@ -155,7 +155,7 @@ See the [Autodiscovery Container Identifiers][1] documentation for information o
 {{% /tab %}}
 {{% tab "ConfigMap" %}}
 
-On Kubernetes, you can use [ConfigMaps][1]. Reference the template below and the [Kubernetes Custom Integrations][2] documentation.
+On Kubernetes, you can use [ConfigMaps][1] to externally define configurations and subsequently mount them using the manifest. Reference the template below and the [Kubernetes Custom Integrations][2] documentation.
 
 ```text
 kind: ConfigMap

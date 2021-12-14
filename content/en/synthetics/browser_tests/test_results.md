@@ -79,13 +79,26 @@ The maximum number of errors that can be displayed is 8, for example 2 `network`
 
 A resource corresponds to the combination of requests and assets. 
 
-The **Resources** panel shows:
+{{< img src="synthetics/browser_tests/resources_panel.png" alt="Resources Panel"  >}}
+
+Above the resources tab you can find the following:
+- The total step duration time
+- The CDN providers serving the resources with a summary of the cache status for each of them
+
+The **Resources** tab shows:
 
 Resource
 : The URL of the resource.
 
+CDN
+: The CDN provider that served the resource. Hovering it showcases the raw cache status.  
+Datadog detects Akamai, Cloudflare, Fastly, Amazon Cloudfront, Netlify, Google Cloud CDN, Imperva, and Sucuri.
+
 Type
 : The type of resource (HTML, CSS, Image, Javascript, XHR, or Other).
+
+Status
+: The HTTP response status code.
 
 Duration
 : The time needed to perform the request.
@@ -96,7 +109,7 @@ Duration
 Size
 : The size of the request response.
 
-The maximum number of resources that can be displayed is 50. Resources are ordered by the time when they start and then are displayed in Datadog by the first 50.
+The maximum number of resources that can be displayed is 100. Resources are ordered by the time when they start and then are displayed in Datadog by the first 100.
 
 #### Filter and search
 

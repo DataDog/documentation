@@ -77,7 +77,7 @@ You can put controls in place for both Indexed and Ingested span volumes. For mo
 ## Incident Management
 
 * Datadog tracks the number of monthly active users who participate in incident management and response.
- * An **active user** is only counted if they contribute comments or signals (graphs, links, etc.) to an incident. Anyone who only opens/closes an incident or simply views the incident are not counted. Additionally, these are not named seats, so you do not need to determine which specific users have access.
+ * An **active user** is only counted if they contribute comments or signals (graphs, links, etc.) to an incident. Anyone who only opens or closes an incident or anyone who only views the incident are not counted. Additionally, these are not named seats, so you do not need to determine which specific users have access.
 
 
 ## Troubleshooting

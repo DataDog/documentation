@@ -1,0 +1,17 @@
+{
+  "data": {
+    "attributes": {
+      "exclusion_filters": [
+        {
+          "name": "Exclude staging",
+          "query": "source:staging"
+        }
+      ],
+      "filtered_data_type": "logs",
+      "is_enabled": true,
+      "name": "Example-Create_a_security_filter_returns_OK_response",
+      "query": "service:ExampleCreateasecurityfilterreturnsOKresponse"
+    },
+    "type": "security_filters"
+  }
+}

@@ -124,7 +124,7 @@ A minified stack trace is not helpful as you don't have access to the file path 
 
 On the contrary, an unminified stack trace gives you all the context you need for a fast and seamless troubleshooting:
 
-{{< img src="real_user_monitoring/error_tracking/unminified_stacktrace.gif" alt="Error Tracking Unminified Stack Trace"  >}}
+{{< img src="real_user_monitoring/error_tracking/unminified_stacktrace.mp4" alt="Error Tracking Unminified Stack Trace" video=true >}}
 
 ## Further Reading
 

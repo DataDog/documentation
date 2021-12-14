@@ -5,7 +5,7 @@ kind: faq
 
 ### Should I use anomaly detection for everything?
 
-No. Anomaly detection is designed to assist with visualizing and monitoring metrics that have predictable patterns. For example, `my_site.page_views{*}` is driven by user traffic and varies predictably by time of day and day of week. Therefore, it is well suited for anomaly detection.
+No. Anomaly detection assists with visualizing and monitoring metrics that have predictable patterns. For example, `my_site.page_views{*}` is driven by user traffic and varies predictably by time of day and day of week. Therefore, it is well suited for anomaly detection.
 
 **Note**: Anomaly detection requires historical data to make good predictions. If you have only been collecting a metric for a few hours or days, anomaly detection won't be useful.
 
