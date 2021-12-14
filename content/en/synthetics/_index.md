@@ -30,7 +30,7 @@ You can create Synthetic tests in the [Datadog application][1], with the [API][2
 
 ## Set up API tests and multistep API tests
 
-API tests allow you to launch [single][4] or [chained][5] requests to perform verifications on your key systems at various network levels: [HTTP test][6], [SSL test][7], [DNS test][8], [TCP test][9], [UDP test][10], [ICMP test][11], and [WebSocket test][12]. 
+API tests allow you to launch [single][4] or [chained][5] requests to perform verifications on your key systems at various network levels: [HTTP test][6], [SSL test][7], [DNS test][8], [WebSocket test][9], [TCP test][10], [UDP test][11], and [ICMP test][12]. 
 
 {{< img src="synthetics/api_test.png" alt="API tests" style="width:100%;">}}
 
@@ -75,10 +75,10 @@ See [Getting Started with Synthetic Monitoring][17] for instructions on creating
 [6]: /synthetics/api_tests/http_tests
 [7]: /synthetics/api_tests/ssl_tests
 [8]: /synthetics/api_tests/dns_tests
-[9]: /synthetics/api_tests/tcp_tests
-[10]: /synthetics/api_tests/udp_tests
-[11]: /synthetics/api_tests/icmp_tests
-[12]: /synthetics/api_tests/websocket_tests
+[9]: /synthetics/api_tests/websocket_tests
+[10]: /synthetics/api_tests/tcp_tests
+[11]: /synthetics/api_tests/udp_tests
+[12]: /synthetics/api_tests/icmp_tests
 [13]: /synthetics/browser_tests
 [14]: /synthetics/private_locations
 [15]: /synthetics/cicd_testing
