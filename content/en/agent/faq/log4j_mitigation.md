@@ -56,7 +56,9 @@ Instructions are different depending on the Linux distribution:
 
 1. Run an administrator PowerShell on the machine.
 2. Run the following snippet:
-[Environment]::SetEnvironmentVariable("LOG4J_FORMAT_MSG_NO_LOOKUPS", "true", "Machine")
+  ```
+  [Environment]::SetEnvironmentVariable("LOG4J_FORMAT_MSG_NO_LOOKUPS", "true", "Machine")
+  ```
 3. Restart the Datadog Agent service to apply the changes.
 
 **Note**: This applies to all JVMs running on the host.
