@@ -95,7 +95,7 @@ If you define tags in the `datadog.yaml` file, the tags are applied to all of yo
 
 For example, setting `service` in your config file is the recommended [Agent setup][26] for monitoring separate, independent systems.
 
-To better unify your environment, it is also recommended to configure the `env` tag in the Agent. To learn more, see [Unified Service Tagging][12].
+To better unify your environment, it is also recommended to configure the `env` tag in the Agent. To learn more, see [Unified Service Tagging][44].
 
 ### Validation
 
