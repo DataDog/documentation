@@ -41,14 +41,14 @@ In the search box, start typing the name of a monitor. A list of matching monito
 
 Select a **target** percentage, **time window**, and optional **warning** level.
 
-The target percentage specifies the portion of time the underlying monitor(s) of the SLO should be in an OK state.
+The target percentage specifies the portion of time the underlying monitor(s) of the SLO should not be in the ALERT state.
 
 The time window specifies the rolling time period over which the SLO runs its calculation.
 
 Depending on the value of the SLI, the Datadog UI displays the SLO status in a different color:
 - While the SLI remains above the target, the UI displays the SLO status in green.
 - When the SLI falls below the target, the UI displays the SLO status in red.
-- If you included a warning level, and the SLI falls above the warning but below the target level, the UI displays the SLO status in yellow.
+- If you included a warning level, and the SLI falls below the warning but above the target level, the UI displays the SLO status in yellow.
 
 The time window you choose changes the available precision for your monitor-based SLOs:
 - 7-day and 30-day time windows allow up to two decimal places.
