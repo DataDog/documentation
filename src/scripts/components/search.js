@@ -22,7 +22,7 @@ const handleAlgoliaInsightsEventOnSearchResultClick = () => {
                   sendAlgoliaInsightsClickAfterSearchEvent(algoliaQueryID, objectID, position);
                   
                   if (window.DD_LOGS) {
-                    window.DD_LOGS.logger.log('Algolia Insights clicked objectID after search posted', { objectID, position, url });
+                    window.DD_LOGS.logger.info('Algolia Insights clicked objectID after search posted', { objectID, position, url });
                   }
               }
               
