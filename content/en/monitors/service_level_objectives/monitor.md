@@ -56,7 +56,7 @@ The time window you choose changes the available precision for your monitor-base
 
 In the details UI for the SLO, Datadog displays two decimal places for SLOs configured with 7-day and 30-day time windows, and three decimal places for SLOs configured with 90-day time windows.
 
-A 99.999% target for a 7-day or 30-day time window results in an error budget of 6 seconds or 26 seconds, respectively. Monitors evaluate every minute, so the granularity of a monitor-based SLO is also 1 minute. Therefore, one alert would fully consume and overspend the 6 second or 26 second error budget in the previous example. In practice, teams cannot satisfy such small error budgets.
+The following example demonstrates why Datadog displays a limited number of decimal places for SLO calculations. A 99.999% target for a 7-day or 30-day time window results in an error budget of 6 seconds or 26 seconds, respectively. Monitors evaluate every minute, so the granularity of a monitor-based SLO is also 1 minute. Therefore, one alert would fully consume and overspend the 6 second or 26 second error budget in the previous example. In practice, teams cannot satisfy such small error budgets.
 
 If you need finer granularity than the once a minute monitor evaluation, consider using [metric-based SLOs][3] instead.
 
@@ -64,13 +64,11 @@ If you need finer granularity than the once a minute monitor evaluation, conside
 
 Choose a name and extended description for your SLO. Select any tags you would like to associate with your SLO.
 
-## Usage
-
-You might be tracking the uptime of a physical device. You have already configured a metric monitor on `host:foo` using a custom metric. This monitor might also ping your on-call team if it's no longer reachable. To avoid burnout, you want to track how often this host is down. A monitor-based SLO using your custom metric can show you at a glance whether the amount of downtime for the `foo` host falls within your target range.
+Select **Save & Exit** to save your new SLO.
 
 ## Status calculation
 
-{{< img src="monitors/service_level_objectives/overall_uptime_calculation.png" alt="overall uptime calculation"  >}}
+{{< img src="monitors/service_level_objectives/aggregate_slo.jpg" alt="SLO detail showing 99 percent green with 8 groups aggregated"  >}}
 
 Datadog calculates the overall status as the percentage of the time where **all** monitors or **all** the calculated groups in a single multi-alert monitor are in the `OK` state. Datadog does not calculate the average of the aggregated monitors or the aggregated groups.
 
@@ -98,7 +96,7 @@ For more information on Synthetic test alerting conditions, see the Synthetic Mo
 
 ### Impact of manual and automatic monitor updates
 
-When a monitor is resolved manually or as a result of the **_After x hours automatically resolve this monitor from a triggered state_** setting, SLO calculations do not change. If these are important tools for your workflow, consider cloning your monitor, removing auto-resolve settings and `@-notification` settings, and using the clone for your SLO. (**Note for Mark Azer:** This paragraph was in the original doc. I copied it, moved it here, and tried to reword it to be clearer, but I may have changed the meaning? Please review and clarify.)
+When a monitor is resolved manually or as a result of the **_After x hours automatically resolve this monitor from a triggered state_** setting, SLO calculations do not change. If these are important tools for your workflow, consider cloning your monitor, removing auto-resolve settings and `@-notification` settings, and using the clone for your SLO.
 
 Datadog recommends against using monitors with `Alert Recovery Threshold` and `Warning Recovery Threshold` as they can also affect your SLO calculations and do not allow you to cleanly differentiate between a SLI's good behavior and bad behavior.
 
