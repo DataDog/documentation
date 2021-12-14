@@ -17,6 +17,9 @@ further_reading:
 - link: "/synthetics/guide/browser-tests-totp"
   tag: "Documentation"
   text: "TOTPs For Multi-Factor Authentication (MFA) in Browser Test"
+- link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_global_variable"
+  tag: "Terraform"
+  text: "Create and manage Synthetic Global Variables with Terraform"
 ---
 
 On the [Synthetic Monitoring Settings page][1], you can adjust the following settings:

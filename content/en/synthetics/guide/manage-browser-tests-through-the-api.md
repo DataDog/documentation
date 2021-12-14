@@ -8,6 +8,9 @@ further_reading:
     - link: '/api/latest/synthetics'
       tag: 'API'
       text: 'Synthetics API'
+    - link: 'https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_test'
+      tag: 'Terraform'
+      text: 'Create and manage Synthetic Browser Tests with Terraform'
 ---
 
 ## Overview
