@@ -73,4 +73,4 @@ Datadog Agent release numbering follows <a href="https://semver.org/">SemVer</a>
 
 [1]: https://github.com/DataDog/datadog-agent
 [2]: https://app.datadoghq.com/account/settings#agent/aws
-[3]: https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles/dogstatsd/alpine
+[3]: https://github.com/DataDog/datadog-agent/tree/main/Dockerfiles/dogstatsd/alpine

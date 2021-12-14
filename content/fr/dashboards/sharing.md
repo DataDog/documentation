@@ -1,12 +1,12 @@
 ---
-title: Partage
+title: Partage de dashboards
 kind: documentation
 aliases:
   - /fr/graphing/faq/is-there-a-way-to-share-graphs
   - /fr/graphing/faq/is-there-a-way-to-share-or-revoke-previously-shared-graphs
   - /fr/graphing/dashboards/shared_graph/
 further_reading:
-  - link: 'https://www.datadoghq.com/blog/dashboard-sharing/'
+  - link: https://www.datadoghq.com/blog/dashboard-sharing/
     tag: Blog
     text: Partager des dashboards en toute sécurité avec des utilisateurs en dehors de votre organisation
   - link: /dashboards/
@@ -46,7 +46,7 @@ Pour autoriser une ou plusieurs adresses e-mail spécifiques à consulter la pag
 3. Sélectionnez l'option **Only specified people** afin de préciser les personnes pouvant accéder à ce dashboard.
 4. Ajoutez l'adresse e-mail des personnes avec lesquelles vous souhaitez partager votre dashboard.
 5. Sous **Time & Variable Settings**, vous pouvez configurer des options afin de définir l'intervalle, d'indiquer si les utilisateurs peuvent modifier ou non l'intervalle et de sélectionner les tags visibles pour les templates variables pouvant être sélectionnées.
-6. (Facultatif) Vous pouvez copier l'URL du dashboard à partager. Un e-mail contenant un lien vers le dashboard sera également envoyé aux adresses e-mails que vous avez renseignées.
+6. (Facultatif) Copiez l'URL du dashboard à partager. Un e-mail contenant le lien vers le dashboard est également envoyé aux adresses e-mails que vous avez renseignées.
 7. Cliquez sur **Done**.
 
 **Remarques** :
@@ -76,7 +76,7 @@ Pour partager un graphique depuis un [timeboard][2] ou un [screenboard][3] :
 4. Choisissez un intervalle pour votre graphique.
 5. Choisissez la taille de votre graphique.
 6. Choisissez d'inclure ou non la légende.
-7. Cliquez sur le bouton *Generate embed code* pour obtenir le code de l'embed.
+7. Cliquez sur le bouton **Generate embed code** pour obtenir le code de l'embed.
 
 {{< img src="dashboards/sharing/share_graph.png" alt="Graphique partagé" style="width:75%;">}}
 
@@ -90,7 +90,7 @@ Pour révoquer les clés utilisées pour partager des graphiques (intégrés) in
 
 ### Appliquer des restrictions
 
-Vous pouvez restreindre l'accès à votre dashboard en fonction des adresses IP de votre liste d'autorisation. Envoyez un e-mail à [l'équipe d'assistance Datadog][6] pour activer cette fonctionnalité. Les administrateurs pourront spécifier les adresses IP autorisées à accéder aux dashboards partagés. Une fois cette fonctionnalité activée, consultez la [page de sécurité][6] de votre organisation pour gérer les restrictions.
+Vous pouvez restreindre l'accès à votre dashboard en fonction des adresses IP de votre liste d'autorisation. Envoyez un e-mail à l'[assistance Datadog][5] pour activer cette fonctionnalité. Les administrateurs pourront alors spécifier les adresses IP autorisées à accéder aux dashboards partagés. Une fois cette fonctionnalité activée, consultez la [page de sécurité][6] de votre organisation pour gérer les restrictions.
 
 ### Mode sombre
 

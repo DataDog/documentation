@@ -1,5 +1,5 @@
 ---
-title: Fournisseur d'identité SAML Google
+title: Configurer Google en tant que fournisseur d'identité SAML
 kind: documentation
 aliases:
   - /fr/account_management/faq/how-do-i-configure-google-as-a-saml-idp/

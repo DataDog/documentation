@@ -1,5 +1,5 @@
 ---
-title: Fournisseur d'identité SAML Microsoft Active Directory Federation Services
+title: Configurer Microsoft Active Directory Federation Services en tant que fournisseur d'identité SAML
 kind: documentation
 aliases:
   - /fr/account_management/faq/how-do-i-setup-microsoft-active-directory-federation-services-as-a-saml-idp/
