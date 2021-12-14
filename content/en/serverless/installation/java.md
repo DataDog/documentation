@@ -17,21 +17,17 @@ aliases:
 
 {{< img src="serverless/java-lambda-tracing.png" alt="Monitor Java Lambda Functions with Datadog"  style="width:100%;">}}
 
-## Required setup
+## Prerequisites
 
-If not already configured:
+The [Datadog Forwarder Lambda function][1] is required to ingest AWS Lambda traces, enhanced metrics, custom metrics, and logs.
 
-- Install the [AWS integration][1]. This allows Datadog to ingest Lambda metrics from AWS. 
-- Install the [Datadog Forwarder Lambda function][2], which is required to ingest AWS Lambda traces, enhanced metrics, custom metrics, and logs. 
-
-After you have installed the [AWS integration][1] and the [Datadog Forwarder][2], follow these steps to instrument your application to send [enhanced Lambda metrics][3], logs, and traces to Datadog. 
 To fully instrument your serverless application with distributed tracing, your Java Lambda functions must be using the Java 8 Corretto (`java8.al2`) or Java 11 (`java11`) runtimes.
 
 ## Configuration
 
 ### Install
 
-Install the Datadog Lambda Library locally by adding one of the following code blocks into your `pom.xml` or `build.gradle` as appropriate based on your project’s configuration. Replace `VERSION` below with the latest release (omitting the preceeding `v`): ![Maven Cental][4]
+Install the Datadog Lambda Library locally by adding one of the following code blocks into your `pom.xml` or `build.gradle` as appropriate based on your project’s configuration. Replace `VERSION` below with the latest release (omitting the preceeding `v`): ![Maven Cental][2]
 {{< tabs >}}
 {{% tab "Maven" %}}
 
@@ -97,27 +93,27 @@ Follow these steps to instrument the function:
 
 Subscribe the Datadog Forwarder Lambda function to each of your function’s log groups, in order to send metrics, traces and logs to Datadog.
 
-1. [Install the Datadog Forwarder if you haven't][2].
-2. [Subscribe the Datadog Forwarder to your function's log groups][5].
+1. [Install the Datadog Forwarder if you haven't][1].
+2. [Subscribe the Datadog Forwarder to your function's log groups][3].
 
 ### Monitor Java Lambda function cold starts
 
-Cold starts occur when your serverless applications receive sudden increases in traffic, including when the function was previously inactive or when it was receiving a relatively constant number of requests. Users may perceive cold starts as slow response times or lag. Datadog highly recommends you configure a monitor on Java Lambda function cold starts, and use Datadog Serverless Insights to [keep cold starts to a minimum][6].
+Cold starts occur when your serverless applications receive sudden increases in traffic, including when the function was previously inactive or when it was receiving a relatively constant number of requests. Users may perceive cold starts as slow response times or lag. Datadog highly recommends you configure a monitor on Java Lambda function cold starts, and use Datadog Serverless Insights to [keep cold starts to a minimum][4].
 
 {{< img src="serverless/java-monitor-cold-starts.png" alt="Monitor Java Lambda Function Cold Starts"  style="width:100%;">}}
 
-To create a Datadog monitor on Java Lambda function cold starts, follow the [monitor creation steps][7] with the following criteria:
+To create a Datadog monitor on Java Lambda function cold starts, follow the [monitor creation steps][5] with the following criteria:
 - Metric Name: `aws.lambda.enhanced.invocations`
 - From: `runtime:java*` and `cold_start:true`
 - Alert Grouping: Multi Alert, trigger a separate alert for each `function_arn`
 
 ### Tag
 
-Although it's optional, Datadog highly recommends tagging you serverless applications with the `env`, `service`, and `version` tags following the [unified service tagging documentation][8].
+Although it's optional, Datadog highly recommends tagging you serverless applications with the `env`, `service`, and `version` tags following the [unified service tagging documentation][6].
 
 ## Explore
 
-After configuring your function following the steps above, view your metrics, logs, and traces on the [Serverless homepage][9].
+After configuring your function following the steps above, view your metrics, logs, and traces on the [Serverless homepage][7].
 
 ### Monitor custom business logic
 
@@ -147,11 +143,11 @@ public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, AP
 }
 ```
 
-See the [custom metrics documentation][10] for more information on custom metric submission.
+See the [custom metrics documentation][8] for more information on custom metric submission.
 
 ### Connect logs and traces
 
-To automatically connect Java Lambda function logs and traces, see [Connecting Java Logs and Traces][11] for instructions.
+To automatically connect Java Lambda function logs and traces, see [Connecting Java Logs and Traces][9] for instructions.
 
 <div class="alert alert-info"> Failing to use the correct Java runtime can result in errors like, "Error opening zip file or JAR manifest missing : /opt/java/lib/dd-java-agent.jar" Make sure to use java8.al2 or java11 as runtime as described above. </div>
 
@@ -159,14 +155,12 @@ To automatically connect Java Lambda function logs and traces, see [Connecting J
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /integrations/amazon_web_services/
-[2]: /serverless/forwarder/
-[3]: /serverless/enhanced_lambda_metrics
-[4]: https://img.shields.io/maven-central/v/com.datadoghq/datadog-lambda-java
-[5]: /logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
-[6]: /serverless/insights#cold-starts
-[7]: /monitors/create/types/metric/?tab=threshold#overview
-[8]: /getting_started/tagging/unified_service_tagging/#aws-lambda-functions
-[9]: https://app.datadoghq.com/functions
-[10]: /serverless/custom_metrics?tab=java
-[11]: /tracing/connect_logs_and_traces/java/
+[1]: /serverless/forwarder/
+[2]: https://img.shields.io/maven-central/v/com.datadoghq/datadog-lambda-java
+[3]: /logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
+[4]: /serverless/insights#cold-starts
+[5]: /monitors/create/types/metric/?tab=threshold#overview
+[6]: /getting_started/tagging/unified_service_tagging/#aws-lambda-functions
+[7]: https://app.datadoghq.com/functions
+[8]: /serverless/custom_metrics?tab=java
+[9]: /tracing/connect_logs_and_traces/java/
