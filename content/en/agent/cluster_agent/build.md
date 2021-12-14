@@ -3,7 +3,7 @@ title: Build the Datadog Cluster Agent
 kind: documentation
 ---
 
-The Datadog Cluster Agent should be used in a containerized ecosystem. To build it:
+The Datadog Cluster Agent is designed to be used in a containerized ecosystem. To build it:
 
 1. Clone the [DataDog/datadog-agent Github repository][1]
 2. In the `datadog-agent/` folder downloaded, create the binary by running `inv -e cluster-agent.build`. This adds a binary in `./bin/datadog-cluster-agent/`

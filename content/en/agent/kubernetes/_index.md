@@ -42,7 +42,7 @@ Run the Datadog Agent in your Kubernetes cluster as a DaemonSet in order to star
 ## Installation
 
 **Notes**:
-- Dedicated documentation and examples for [all major Kubernetes distributions][2] (GKE, EKS, AKS, OpenShift, Rancher, OKE, etc.) are available.
+- Dedicated documentation and examples for [all major Kubernetes distributions][2] (GKE, EKS, AKS, OpenShift, Rancher, etc.) are available.
 - Dedicated documentation and examples for [Kubernetes Control Plane monitoring][3] are also available.
 
 {{< tabs >}}
@@ -392,7 +392,7 @@ Once the Agent is up and running in your cluster, use [Datadog's Autodiscovery f
 
 ## Environment variables
 
-The following is the list of environment variables available for the Datadog Agent using a DaemonSet. If you are using Helm, see the full list of configuration options for the `datadog-value.yaml` file in the [helm/charts Github repository][9]. If you are using Operator, see the [Operator Configuration][17] documentation.
+Find below the list of environment variables available for the Datadog Agent. If you want to setup those with Helm, see the full list of configuration options for the `datadog-value.yaml` file in the [helm/charts Github repository][9].
 
 ### Global options
 
@@ -516,4 +516,3 @@ See the [Agent Commands guides][16] to discover all the Docker Agent commands.
 [14]: /security/agent/#secrets-management
 [15]: /agent/guide/autodiscovery-management/
 [16]: /agent/guide/agent-commands/
-[17]: /agent/kubernetes/operator_configuration

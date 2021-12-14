@@ -201,7 +201,7 @@ telnet intake.logs.datadoghq.com 10514
 
 The secure TCP endpoint is `tcp-intake.logs.datadoghq.eu 443` (or port `1883` for insecure connections).
 
-You must prefix the log entry with your [Datadog API Key][1], for example:
+You must prefix the log entry with your [Datadog API Key][1], e.g.:
 
 ```text
 <DATADOG_API_KEY> <PAYLOAD>
@@ -228,9 +228,6 @@ telnet tcp-intake.logs.datadoghq.eu 1883
 ```
 
 {{< img src="logs/custom_log_telnet_json_.png" alt="Custom telnet"  style="width:100%;">}}
-
-[1]: /account_management/api-app-keys/
-[2]: /logs/explorer/live_tail/
 
 {{< /site-region >}}
 

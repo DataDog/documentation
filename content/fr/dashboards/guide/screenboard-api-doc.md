@@ -1,5 +1,5 @@
 ---
-title: API Screenboard
+title: Documentation de l'API Screenboard
 kind: guide
 aliases:
   - /fr/graphing/faq/screenboard-api-doc

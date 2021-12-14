@@ -23,9 +23,9 @@ Une ressource est une action particulière pour un [service][1] donné (généra
 * Le statut de tous les monitors associés à ce service
 * La liste et les métriques pour toutes les ressources associées à ce service
 
-## Graphiques prêts à l'emploi
+## Graphiques par défaut
 
-Datadog fournit des graphiques prêts à l'emploi pour chaque ressource :
+Datadog fournit des graphiques par défaut pour chaque ressource :
 
 * Requêtes - Choisissez si vous voulez afficher :
     *  Le **nombre total de requêtes**
@@ -44,19 +44,21 @@ Datadog fournit des graphiques prêts à l'emploi pour chaque ressource :
 
 {{< img src="tracing/visualization/resource/resource_otb_graphs.png" alt="Graphiques par défaut des ressources" style="width:90%;">}}
 
-### Exporter un graphique dans un timeboard
+### Export to Timeboard
 
 En haut à droite de chaque graphique, cliquez sur la flèche vers le haut pour exporter votre graphique dans un [timeboard][4] existant :
 
 ### Distribution de la latence
 
-La page ressource affiche également un graphique représentant la distribution des latences sur les ressources :
+Outre ces graphiques, vous disposez également d'un graphique de distribution de la latence sur les ressources :
 
-{{< img src="tracing/visualization/resource/resource_latency_distribution.png" alt="Distribution de la latence"  style="width:100%;">}}
+{{< img src="tracing/visualization/resource/resource_latency_distribution.png" alt="Distribution de la latence" style="width:90%;">}}
 
-Utilisez les sélecteurs en haut à droite pour zoomer sur un centile donné, ou passez votre curseur sur la barre latérale pour voir les marqueurs de centile.
+Utilisez le sélecteur en haut à droite de ce graphique pour zoomer sur un centile donné de la distribution de latence :
 
-{{< img src="tracing/visualization/service/latency_distribution_sidebar.png" alt="Sélecteur de distribution de la latence"  style="width:50%;">}}
+{{< img src="tracing/visualization/service/latency_distribution_selector.png" alt="Sélection de distribution de latence" style="width:20%;">}}
+
+Zoomez sur ce graphique pour filtrer les traces correspondantes.
 
 ## Résumé des spans
 
@@ -66,17 +68,12 @@ Vous pouvez consulter une analyse détaillée des [spans][5] d'une ressource don
 
 Voici la signification des métriques affichées pour chaque span :
 
-`Avg Spans/trace`
-: Le nombre moyen d'occurrences de la span pour les traces qui incluent la ressource actuelle et où la span est présente au moins une fois.
-
-`% of Traces`
-: Le pourcentage de traces qui incluent la ressource actuelle et où la span est présente au moins une fois.
-
-`Avg Duration`
-: La durée moyenne de la span pour les traces qui incluent la ressource actuelle et où la span est présente au moins une fois.
-
-`Avg % Exec Time`
-: Le pourcentage de temps d'exécution moyen pendant lequel la span est active pour les traces qui incluent la ressource actuelle et où la span est présente au moins une fois.
+| Métrique            | Description                                                                                                                                        |
+|-------------------|----------------------------------------------------------------------------------------------------------------------------------------------------|
+| `Avg Span/trace`  | Le nombre moyen d'occurrences de la span pour les traces qui incluent la ressource actuelle, où la span est présente au moins une fois.                     |
+| `% of traces`     | Le pourcentage de traces qui incluent la ressource actuelle, où la span est présente au moins une fois.                                                       |
+| `Avg duration`    | La durée moyenne de la span pour les traces qui incluent la ressource actuelle, où la span est présente au moins une fois.                                  |
+| `Avg % Exec Time` | Le pourcentage de temps d'exécution moyen pendant lequel la span est active pour les traces qui incluent la ressource actuelle, où la span est présente au moins une fois. |
 
 **Remarque** : une span est considérée comme active lorsqu'elle n'attend pas la fin d'une span enfant. Les spans actives à un moment donné et pour une trace donnée regroupent toutes les spans terminales (c'est-à-dire les spans sans enfants).
 

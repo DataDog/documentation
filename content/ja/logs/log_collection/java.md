@@ -117,22 +117,22 @@ Log4j 2 には JSON レイアウトが含まれています。
     <dependency>
         <groupId>org.apache.logging.log4j</groupId>
         <artifactId>log4j-core</artifactId>
-        <version>2.15.0</version>
+        <version>2.7</version>
     </dependency>
     <dependency>
         <groupId>com.fasterxml.jackson.core</groupId>
         <artifactId>jackson-core</artifactId>
-        <version>2.13.0</version>
+        <version>2.8.3</version>
     </dependency>
     <dependency>
         <groupId>com.fasterxml.jackson.core</groupId>
         <artifactId>jackson-databind</artifactId>
-        <version>2.13.0</version>
+        <version>2.8.3</version>
     </dependency>
     <dependency>
         <groupId>com.fasterxml.jackson.core</groupId>
         <artifactId>jackson-annotations</artifactId>
-        <version>2.13.0</version>
+        <version>2.8.3</version>
     </dependency>
     ```
 
@@ -337,7 +337,7 @@ Log4j 2 では、リモートホストへのログ記録が可能ですが、ロ
     <dependency>
         <groupId>org.apache.logging.log4j</groupId>
         <artifactId>log4j-to-slf4j</artifactId>
-        <version>2.15.0</version>
+        <version>2.11.0</version>
     </dependency>
     <dependency>
         <groupId>net.logstash.logback</groupId>

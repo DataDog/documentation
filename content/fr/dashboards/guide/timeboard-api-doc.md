@@ -1,5 +1,5 @@
 ---
-title: API Timeboard
+title: Documentation de l'API Timeboard
 kind: guide
 aliases:
   - /fr/graphing/faq/timeboard-api-doc

@@ -49,7 +49,7 @@ Below the overview of the signal are tabs with detailed information related to t
 
 - `Message` displays the text configured in the rule to help the person reviewing the signal understand the purpose of the signal and how to respond.
 
-- `Event Attributes` are helpful when triaging and filtering security signals. For example, you may determine that a user or entity triggered a security rule as part of their benign behavior, or that a compliance control shouldn't apply across all of your environments. Click on any attribute in Event Attributes tab to generate the dropdown menu and select **Never trigger signals for **`<value>`**** to customize what is visible within the Security Signals Explorer. You can also filter by or view logs related to an attribute from this menu.
+- `Event Attributes` are helpful when triaging and filtering security signals. For example, you may determine that a user or entity triggered a security rule as part of their benign behavior, or that a compliance control shouldn't apply across all of your environments. Click on any attribute in Event Attributes tab to generate the dropdown menu and select **Never trigger signals for **`<value>`**** to fine-tune what is visible within the Security Signals Explorer. You can also filter by or view logs related to an attribute from this menu.
 
   {{< img src="security_platform/security_monitoring/explorer/never_trigger_signal_option.png" alt="Option to never trigger a signal for a set value" >}}
 
@@ -57,13 +57,13 @@ Below the overview of the signal are tabs with detailed information related to t
 
 - `Related Issues` includes a list of other signals which contain the same group by values to assist with triaging the signal.
 
-### Threat intelligence
+### Threat Intelligence
 
 Datadog Security Monitoring offers threat intelligence feeds curated by threat intelligence partners. These feeds are constantly updated to include data about known suspicious activity (for example, IOCs), so you can quickly identify which potential threats to address.
 
 {{< img src="security_platform/security_monitoring/explorer/threat_intelligence.png" alt="Threat Intelligence in the Security Signals Explorer"  >}}
 
-Datadog automatically implements threat intelligence by analyzing all ingested logs that have relevant attributes. If a log contains a compromise indication, such as an anonymized IP tied to a VPN, proxy, or Tor exit node, a `threat_intel` attribute is append to the log event to provide additional insights based on available intelligence.
+Datadog automatically operationalizes threat intelligence by analyzing all ingested logs that have relevant attributes. If a log contains a compromise indication, such as an anonymized IP tied to a VPN, proxy, or Tor exit node, a `threat_intel` attribute is append to the log event to provide additional insights based on available intelligence.
 
 The query to see all threat intelligence matches in the Security Signals Explorer is `@threat_intel.indicators_matched:*`. The following are additional attributes to query for threat intelligence:
 

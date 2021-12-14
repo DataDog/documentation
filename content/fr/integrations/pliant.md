@@ -13,14 +13,13 @@ categories:
 creates_events: false
 ddtype: crawler
 dependencies:
-  - https://github.com/DataDog/integrations-extras/blob/master/pliant/README.md
+  - 'https://github.com/DataDog/integrations-extras/blob/master/pliant/README.md'
 display_name: Pliant
 draft: false
 git_integration_title: pliant
 guid: 3beeb950-4020-4e0e-914e-35281dad9719
 integration_id: pliant
 integration_title: Pliant
-integration_version: ''
 is_public: true
 kind: integration
 maintainer: hello@pliant.io
@@ -44,6 +43,8 @@ Pour en savoir plus sur l'intégration, consultez le site de [Pliant][1] (en ang
 
 Voici quelques exemples de workflows disponibles :
 
+
+
 - Redémarrage de service
 - Configuration de répartiteur de charge
 - Approvisionnement système
@@ -51,15 +52,18 @@ Voici quelques exemples de workflows disponibles :
 - Approvisionnement de machines virtuelles ou de nœuds de conteneur selon le niveau de charge
 - Désactivation de ressources en cas de faible charge
 
+
 ## Configuration
+
 ### Installation
 
 Créez un ou plusieurs workflows à déclencher à partir d'une notification Datadog.
 
 ### Configuration
-#### Pliant
 
-1. **Créez une clé d'API Pliant**. Connectez-vous à Pliant et cliquez sur votre nom d'utilisateur en haut à droite de l'écran pour afficher le menu. Cliquez sur API Keys.
+#### Configuration Pliant
+**Créez une clé d'API Pliant.**
+1. Connectez-vous à Pliant et cliquez sur votre nom d'utilisateur en haut à droite de l'écran pour afficher le menu. Cliquez sur « API Keys ».
 
 ![Étape 1 menu API Keys][2]
 
@@ -104,7 +108,7 @@ Votre endpoint est mis entre des guillemets et se présente sous le format suiva
 
 ![endpoint][8]
 
-Copiez l'URL complète entre guillemets (comprenant éventuellement des paramètres de requête supplémentaires) qui commence par ***https***. N'incluez pas les guillemets.
+Copiez l'URL complète qui est mise entre guillemets (comprenant éventuellement des paramètres de requête supplémentaires) et qui commence par ***https***. N'incluez pas les guillemets.
 
 #### Configuration de Datadog
 1. Ouvrez Datadog. Depuis la barre latérale de gauche, cliquez sur **Integrations** > **integrations**.

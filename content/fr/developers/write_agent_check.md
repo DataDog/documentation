@@ -15,7 +15,7 @@ Cette section explique comment rédiger un check custom d'Agent simple et utilis
 
 ### Faut-il que je rédige un check d'Agent ou une intégration ?
 
-Les checks customs sont particulièrement utiles pour recueillir des métriques à partir d'applications personnalisées ou de systèmes uniques. Cependant, si vous souhaitez recueillir des métriques à partir d'une application disponible librement, d'un service public ou encore d'un projet open source, nous vous recommandons de [créer une intégration d'Agent complète][1].
+Les checks customs sont particulièrement utiles pour recueillir des métriques à partir d'applications personnalisées ou de systèmes uniques. Cependant, si vous souhaitez recueillir des métriques à partir d'une application commercialisée, d'un service public ou encore d'un projet open source, nous vous recommandons de [créer une intégration d'Agent complète][1].
 
 La version 6.4 de l'Agent Datadog et les versions ultérieures prennent en charge la publication et les mises à jour d'intégrations indépendamment des mises à jour de l'Agent Datadog. Depuis cette version, vous pouvez facilement partager des intégrations, ce qui permet à l'ensemble de la communauté Datadog de les utiliser.
 

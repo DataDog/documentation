@@ -55,8 +55,8 @@
 <!-- get this translate tag -->
 {{ $translate_tag := (index $translate_tags $tagSlug) | default (dict) }}
 
-<!-- lets show the intro text -->
-{{ partial "api/intro.html" (dict "api" $dot.Site.Data.api "title" $ParamTitleEn "translate_tag" $translate_tag) }}
+<!-- lets show the intro text, shall we use v1 or v2 text. Lets try v1 for now.. -->
+{{ partial "api/intro.html" (dict "tags" $dot.Site.Data.api.v1.full_spec_deref.tags "title" $ParamTitleEn "translate_tag" $translate_tag) }}
 
 <!-- Loop over the menu to determine what to pull in -->
 {{ range (where .Sites.First.Menus.api ".Name" "==" $ParamTitleEn) }}

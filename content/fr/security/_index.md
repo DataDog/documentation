@@ -34,10 +34,6 @@ Les métriques d'infrastructure sont des séries temporelles représentant des n
 
 Les données de l'APM se divisent en quatre niveaux de granularité : les services, les ressources, les traces et les spans. Consultez la section [Débuter avec l'APM][7] pour en savoir plus sur chaque niveau. Les services et les ressources ne doivent pas contenir de données personnelles pour l'utilisation prévue du service. Si besoin, les clients doivent tirer parti de certaines fonctionnalités de l'Agent pour restreindre les données personnelles avant de transmettre les traces et les spans à Datadog. Consultez la page [Sécurité de l'APM][8] pour en savoir plus.
 
-## Surveillance de bases de données
-
-Avec la surveillance de bases de données, l'Agent recueille des métriques et des échantillons permettant de surveiller les performances historiques de requêtes normalisées. La granularité de ces données est définie par leur signature de requête normalisée et l'identifiant unique du host. La surveillance de bases de données ne transmet pas de données personnelles. Tous les paramètres de requête sont obfusqués et supprimés des échantillons recueillis avant leur envoi à Datadog.
-
 ## Logs
 
 Les logs sont des messages recueillis [par l'Agent ou par des intégrations][9] et associés à des métadonnées facultatives. Les fichiers de log sont des enregistrements immuables d'événements informatiques concernant un système d'exploitation, une application ou des activités utilisateur, qui constituent une piste d'audit. Ces enregistrements peuvent être utilisés pour aider à détecter les violations de sécurité, les problèmes de performance et les défauts d'une application. Si besoin, les clients peuvent tirer parti de certaines fonctionnalités de l'Agent pour retirer les données personnelles avant de transmettre les logs à Datadog. Consultez la page [Sécurité des logs][10] pour en savoir plus.

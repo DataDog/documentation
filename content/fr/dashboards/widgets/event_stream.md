@@ -46,6 +46,10 @@ Ce widget peut être utilisé avec l'**API Dashboards**. Consultez la [documenta
 
 Le [schéma JSON][3] utilisé pour le widget Flux d'événements est le suivant :
 
+[1]: /fr/events/
+[2]: /fr/api/v1/dashboards/
+[3]: /fr/dashboards/graphing_json/widget_json/
+[4]: /fr/events/#event-explorer
 
 {{< /site-region >}}
 
@@ -83,6 +87,10 @@ Ce widget peut être utilisé avec l'**API Dashboards**. Consultez la [documenta
 
 Le [schéma JSON][3] utilisé pour le widget Flux d'événements est le suivant :
 
+[1]: /fr/events/
+[2]: /fr/api/v1/dashboards/
+[3]: /fr/dashboards/graphing_json/widget_json/
+[4]: /fr/events/#event-explorer
 
 {{< /site-region >}}
 
@@ -112,6 +120,10 @@ Ce widget peut être utilisé avec l'**API Dashboards**. Consultez la [documenta
 
 Le [schéma JSON][3] utilisé pour le widget Flux d'événements est le suivant :
 
+[1]: /fr/events/
+[2]: /fr/api/v1/dashboards/
+[3]: /fr/dashboards/graphing_json/widget_json/
+[4]: /fr/events/#event-explorer
 
 {{< /site-region >}}
 

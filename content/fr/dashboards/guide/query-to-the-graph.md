@@ -116,7 +116,7 @@ Dans cet exemple, la fonction `abs` veille à ce que vos résultats corresponden
 {{< whatsnext desc="Choisissez votre type de fonctions" >}}
     {{< nextlink href="/dashboards/functions/algorithms" >}}Algorithme : mettez en place un système de détection d'anomalies ou de singularités sur votre métrique.{{< /nextlink >}}
     {{< nextlink href="/dashboards/functions/arithmetic" >}}Opérations arithmétiques : effectuez des opérations arithmétiques sur votre métrique.  {{< /nextlink >}}
-    {{< nextlink href="/dashboards/functions/count" >}}Nombre de valeurs : comptez les valeurs différentes de zéro ou différentes de null pour votre métrique. {{< /nextlink >}}
+    {{< nextlink href="/dashboards/functions/count" >}}Total : comptez les valeurs différentes de zéro ou différentes de null pour votre métrique. {{< /nextlink >}}
     {{< nextlink href="/dashboards/functions/interpolation" >}}Interpolation : saisissez ou définissez des valeurs par défaut pour votre métrique.{{< /nextlink >}}
     {{< nextlink href="/dashboards/functions/rank" >}}Rang : sélectionnez seulement un sous-ensemble de métriques. {{< /nextlink >}}
     {{< nextlink href="/dashboards/functions/rate" >}}Taux : calculez une dérivée personnalisée sur votre métrique.{{< /nextlink >}}

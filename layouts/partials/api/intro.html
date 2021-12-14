@@ -1,8 +1,7 @@
-{{ $tagsV1 := .api.v1.full_spec_deref.tags }}
-{{ $tagsV2 := .api.v2.full_spec_deref.tags }}
+{{ $tags := .tags }}
 {{ $title := .title }}
 {{ $translate_tag := .translate_tag }}
-{{ range $tag := first 1 (where ($tagsV1 | append $tagsV2) ".name" "==" $title) }}
+{{ range $tag := first 1 (where $tags ".name" "==" $title) }}
 <h1>{{ $translate_tag.name | default $tag.name }}</h1>
 <div class="row">
     <div class="col-12 col-lg-9">
