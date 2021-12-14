@@ -52,7 +52,7 @@ Depending on the metric type you applied them to, the behavior differs:
   * Sets the time aggregator to `SUM`.
   * Divides the result post-aggregation by the sampling interval in order to normalize it. For example, the following points submitted every second `[1,1,1,1].as_rate()` with a rollup interval of 20s would produce `[0.05, 0.05, 0.05, 0.05]`.
 
-**Note**: There is no normalization on very small intervals (when no time aggregation occurs), thus the raw metric value counts are returned.
+**Note**: There is no normalization on tiny intervals (when no time aggregation occurs), thus the raw metric value counts are returned.
 
 [1]: /dashboards/faq/interpolation-the-fill-modifier-explained/
 {{% /tab %}}

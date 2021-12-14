@@ -92,13 +92,13 @@ Weekly
 ##### Anomaly detection algorithms
 
 Basic
-: Use when metrics have no repeating seasonal pattern.  Basic uses a simple lagging rolling quantile computation to determine the range of expected values. It uses very little data and adjusts quickly to changing conditions but has no knowledge of seasonal behavior or longer trends.
+: Use when metrics have no repeating seasonal pattern. Basic uses a simple lagging rolling quantile computation to determine the range of expected values. It uses little data and adjusts quickly to changing conditions but has no knowledge of seasonal behavior or longer trends.
 
 Agile
 : Use when metrics are seasonal and expected to shift. The algorithm quickly adjusts to metric level shifts. A robust version of the [SARIMA][6] algorithm, it incorporates the immediate past into its predictions, allowing quick updates for level shifts at the expense of being less robust to recent, long-lasting anomalies.
 
 Robust
-: Use when seasonal metrics expected to be stable, and slow, level shifts are considered anomalies. A [seasonal-trend decomposition][7] algorithm, it is very stable and predictions remain constant even through long-lasting anomalies at the expense of taking longer to respond to intended level shifts (e.g. if the level of a metric shifts due to a code change.)
+: Use when seasonal metrics expected to be stable, and slow, level shifts are considered anomalies. A [seasonal-trend decomposition][7] algorithm, it is stable and predictions remain constant even through long-lasting anomalies at the expense of taking longer to respond to intended level shifts (for example, if the level of a metric shifts due to a code change.)
 
 All of the seasonal algorithms may use up to a couple of months of historical data when calculating a metric's expected normal range of behavior. By using a significant amount of past data, the algorithms can avoid giving too much weight to abnormal behavior that might have occurred in the recent past.
 
