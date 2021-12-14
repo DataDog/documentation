@@ -4130,6 +4130,9 @@ components:
     RoleCreateAttributes:
       description: Attributes of the created role.
       properties:
+        clone_from_uuid:
+          description: UUID of the role to clone from.
+          type: string
         created_at:
           description: Creation time of the role.
           format: date-time
