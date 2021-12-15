@@ -1,5 +1,5 @@
 ---
-title: Create an Integrations Dashboard
+title: Create an Integration Dashboard
 kind: guide
 further_reading:
 - link: "/developers/marketplace/"
