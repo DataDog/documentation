@@ -285,7 +285,7 @@
         file_name: 'github_actions.md'
         front_matters:
           dependencies: ["https://github.com/DataDog/synthetics-ci-github-action/blob/main/README.md"]
-          title: Synthetics and CI GitHub Actions
+          title: Synthetics CI GitHub Actions
           kind: documentation
           
   - repo_name: dd-sdk-android
