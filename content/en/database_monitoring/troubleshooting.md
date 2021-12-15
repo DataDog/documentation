@@ -231,7 +231,7 @@ Longer queries may not show their full SQL text due to database configuration. S
 {{< tabs >}}
 {{% tab "Postgres" %}}
 
-The Postgres setting `track_activity_query_size` indicates the maximum size of the SQL statement Postgres will store and make visible to the Agent. By default, this value is 1024 bytes. Raising this value to 4096 will capture most queries for most workloads. However, a higher value may be appropriate if your queries are complex or use long arrays.
+The Postgres setting `track_activity_query_size` indicates the maximum size of the SQL statement Postgres stores and makes visible to the Agent. By default, this value is 1024 bytes. Raising this value to 4096 captures most queries for most workloads. However, a higher value may be appropriate if your queries are complex or use long arrays.
 
 For example, the database will truncate a query with an array with many items such as:
 
