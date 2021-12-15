@@ -153,7 +153,7 @@ Hidden facets have no impact aside from the log explorer (for instance: live tai
 
 #### Hidden facets and teammates
 
-Hiding facets is specific to your own troubleshooting context and won't impact your teammates' view, unless you update a [Saved View][24]. Hidden facets is part of the context saved in a saved view.
+Hiding facets is specific to your own troubleshooting context and won't impact your teammates' view, unless you update a [Saved View][24]. Hidden facets is part of the context saved in a saved view. This is a test.
 
 ### Group facets
 
