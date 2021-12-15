@@ -176,7 +176,7 @@ Uninstall the Agent using Add/Remove Programs.
 Alternatively, use the Powershell command below. **Note**: Some Agent versions may cause a forced reboot. To prevent this, add a no restart parameter like `REBOOT=ReallySuppress`.
 
 ```powershell
-(Get-WmiObject -Class Win32_Product -Filter "Name='Datadog Agent'" -ComputerName . ).Uninstall()
+start-process msiexec -Wait -ArgumentList ('/log', 'C:\\uninst.log', '/q', '/x', (Get-WmiObject -Class Win32_Product -Filter "Name='Datadog Agent'" -ComputerName .).IdentifyingNumber, 'REBOOT=ReallySuppress')
 ```
 
 Both methods remove the Agent, but they do not remove the `C:\ProgramData\Datadog` configuration folder on the host.
@@ -188,10 +188,9 @@ Both methods remove the Agent, but they do not remove the `C:\ProgramData\Datado
 
 Uninstall the Agent using Add/Remove Programs.
 
-Alternatively, use the Powershell command below. **Note**: Some Agent versions may cause a forced reboot. To prevent this, add a no restart parameter like `REBOOT=ReallySuppress`.
-
+Alternatively, use the Powershell command below.
 ```powershell
-(Get-WmiObject -Class Win32_Product -Filter "Name='Datadog Agent'" -ComputerName . ).Uninstall()
+start-process msiexec -Wait -ArgumentList ('/log', 'C:\\uninst.log', '/norestart', '/q', '/x', (Get-WmiObject -Class Win32_Product -Filter "Name='Datadog Agent'" -ComputerName .).IdentifyingNumber)
 ```
 
 Both methods remove the Agent, but they do not remove the `C:\ProgramData\Datadog` configuration folder on the host.

@@ -21,6 +21,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/monitor-apis-with-datadog"
   tag: "Blog"
   text: "Monitor your workflows with Datadog SSL, TLS, and Multistep API tests"
+- link: 'https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_test'
+  tag: 'Terraform'
+  text: 'Create and manage Synthetic API Tests with Terraform'
 ---
 
 ## Overview

@@ -5,7 +5,10 @@ description: Record Steps for a Synthetic Browser Test
 further_reading:
 - link: "/synthetics/browser_tests/advanced_options/"
   tag: "Documentation"
-  text: "Learn how to configure advanced options for steps"
+  text: "Learn how to configure Advanced Options for your browser test"
+- link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_global_variable"
+  tag: "Terraform"
+  text: "Create and manage Synthetic Global Variables with Terraform"
 ---
 
 ## Overview
@@ -51,7 +54,7 @@ You can record the uploading of files as a step. To record an **Upload** step yo
 
 {{< img src="synthetics/browser_tests/upload_file_step.png" alt="Create an upload file step" style="width:60%;">}}
 
-This is limited to 10 files with a limit of 5MB each.
+This is limited to 10 files with a limit of 5MB each. The Upload step is supported by browser tests running from managed locations.
 
 ## Manually added steps
 

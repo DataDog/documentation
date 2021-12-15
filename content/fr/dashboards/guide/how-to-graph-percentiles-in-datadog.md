@@ -11,7 +11,7 @@ Vous pouvez obtenir des centiles dans Datadog en envoyant des données sous la f
 
 Étant donné que cette agrégation se fait au niveau de la collecte, elle ne peut pas être utilisée comme fonction visuelle dans l'interface graphique.
 
-Les données histogram contiennent le 95e centile, le 50e centile, la moyenne, la valeur maximale et le nombre.
+Les données histogram contiennent le 95e centile, le 50e centile, la moyenne, la valeur maximale et le nombre de valeurs.
 
 * [Présentation rapide de DogStatsD][1]
 
@@ -19,7 +19,7 @@ Les données histogram contiennent le 95e centile, le 50e centile, la moyenne, l
 
 ### Centiles supplémentaires
 
-Modifiez la ligne « histogram_percentiles » du fichier de configuration de l'Agent pour obtenir des centiles supplémentaires. Par exemple :
+La ligne « histogram_percentiles » du fichier de configuration de l'Agent vous permet d'obtenir des centiles supplémentaires, notamment :
 
 * histogram_percentiles: 0.95, 0.75
 
@@ -31,8 +31,8 @@ Les histogrammes sont calculés toutes les 10 secondes sur un host par l'Agent D
 
 ### Avantages
 
-* Les points de données bruts utilisés pour calculer les métriques histogram ne sont pas exposés ni transmis à notre site.
-* StatsD traite les agrégations pertinentes et envoie le paquet de données calculées directement à notre serveur.
+* Les points de données bruts utilisés pour calculer les métriques histogram ne sont pas exposés ni transmis au site Datadog.
+* StatsD traite les agrégations pertinentes et envoie directement le package de données calculées au serveur Datadog.
 
 ### Inconvénients
 

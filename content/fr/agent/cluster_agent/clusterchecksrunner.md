@@ -2,10 +2,10 @@
 title: Exécuteur de checks de cluster
 kind: documentation
 further_reading:
-  - link: 'https://www.datadoghq.com/blog/datadog-cluster-agent/'
+  - link: https://www.datadoghq.com/blog/datadog-cluster-agent/
     tag: Blog
     text: Présentation de l'Agent de cluster Datadog
-  - link: 'https://www.datadoghq.com/blog/autoscale-kubernetes-datadog/'
+  - link: https://www.datadoghq.com/blog/autoscale-kubernetes-datadog/
     tag: Blog
     text: Mettre à l'échelle vos charges de travail Kubernetes en fonction d'une métrique Datadog
   - link: /agent/cluster_agent/clusterchecks/
@@ -17,7 +17,7 @@ further_reading:
   - link: /agent/kubernetes/integrations/
     tag: Documentation
     text: Intégrations personnalisées
-  - link: 'https://github.com/DataDog/datadog-agent/blob/master/docs/cluster-agent/GETTING_STARTED.md#troubleshooting'
+  - link: https://github.com/DataDog/datadog-agent/blob/master/docs/cluster-agent/GETTING_STARTED.md#troubleshooting
     tag: Github
     text: Dépanner l'Agent de cluster Datadog
 ---
@@ -42,7 +42,7 @@ Déployez ces ressources dans votre cluster :
 kubectl apply -f datadog-agent-with-dca-clusterchecksrunner.yaml
 ```
 
-La ligne suivante s'affiche pour confirmer que la configuration a bien été appliquée :
+Si la ligne suivante s'affiche, la configuration a bien été appliquée :
 
 ```
 datadogagent.datadoghq.com/datadog created

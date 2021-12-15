@@ -31,7 +31,7 @@ A custom metric is identified by **a unique combination of a metric's name and t
 
 ## Custom metrics properties
 
-A Datadog custom metric has the properties below. Refer to the [Metrics Introduction documentation][7] to learn how to graph metrics within Datadog.
+A Datadog custom metric has the properties below. Read the [metrics introduction][7] to learn how to graph metrics within Datadog.
 
 | Property         | Description                                                                                                                                                  |
 |------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -39,7 +39,7 @@ A Datadog custom metric has the properties below. Refer to the [Metrics Introduc
 | `<METRIC_VALUE>` | The value of your metric. **Note**: Metric values must be 32-bit. Values should not reflect dates or timestamps.                                                                                                                                |
 | `<TIMESTAMP>`    | The timestamp associated with the metric value. **Note**: Metric timestamps cannot be more than ten minutes in the future or more than one hour in the past. |
 | `<TAGS>`         | The set of tags associated with your metric.                                                                                                                 |
-| `<METRIC_TYPE>`  | The type of your metric. See the [metric type documentation][8].                                                                                             |
+| `<METRIC_TYPE>`  | The type of your metric. Read about [metric types][8].                                                                                             |
 | `<INTERVAL>`     | If the `<TYPE>` of the metric is [RATE][9] or [COUNT][10], it defines the corresponding [interval][11].                                                       |
 
 ### Naming custom metrics

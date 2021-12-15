@@ -15,6 +15,9 @@ further_reading:
 - link: "/synthetics/private_locations"
   tag: "Documentation"
   text: "Run Multistep API tests on internal endpoints"
+- link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_test"
+  tag: "Terraform"
+  text: "Create and manage Synthetic Multistep API Tests with Terraform"
 ---
 
 ## Overview

@@ -39,7 +39,7 @@ Here is an example of `system.load.1` with the `hour_before()` value shown as a 
 |:---------------|:---------------------------------------------------------------------|:-------------------------------|
 | `day_before()` | Graph values from a day before the current timestamp for the metric. | `day_before(<METRIC_NAME>{*})` |
 
-Here is an example of `nginx.net.connections` with the `day_before()` value shown as a lighter, thinner line. In this example, you can see a week's worth of data, which makes the `day_before()` data easy to identify.
+Here is an example of `nginx.net.connections` with the `day_before()` value shown as a lighter, thinner line. In this example, you can see a week's worth of data, which makes the `day_before()` data easier to identify.
 
 {{< img src="dashboards/functions/timeshift/simple_day_before_example.png" alt="simple day before example" style="width:80%;">}}
 
@@ -49,7 +49,7 @@ Here is an example of `nginx.net.connections` with the `day_before()` value show
 |:----------------|:-------------------------------------------------------------------------------|:--------------------------------|
 | `week_before()` | Graph values from a week (7 days) before the current timestamp for the metric. | `week_before(<METRIC_NAME>{*})` |
 
-Here is an example of `cassandra.db.read_count` with the `week_before()` value shown as a dotted line. In this example, you can see about three weeks' worth of data, which makes the `week_before()` data easy to identify.
+Here is an example of `cassandra.db.read_count` with the `week_before()` value shown as a dotted line. In this example, you can see about three weeks' worth of data, which makes the `week_before()` data easier to identify.
 
 {{< img src="dashboards/functions/timeshift/simple_week_before_example.png" alt="simple week before example" style="width:80%;">}}
 

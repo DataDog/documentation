@@ -23,7 +23,7 @@ Le widget Geomap représente dans un graphique n'importe quelle métrique avec u
 
 ## Configuration
 
-{{< img src="dashboards/widgets/geomap/geomap_setup.png" alt="Top List"  style="width:80%;">}}
+{{< img src="dashboards/widgets/geomap/geomap_setup.png" alt="Top List" style="width:80%;">}}
 
 ### Configuration
 

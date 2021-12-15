@@ -64,7 +64,11 @@ If you believe you've discovered a bug in Datadog's security, get in touch at [s
 
 ## Running as an unprivileged user
 
-By default, the Agent runs as the `dd-agent` user on Linux and as the `ddagentuser` account on [Windows][18]. Note the `system-probe` and `security-agent` services are an exception to this, and still need to run as `root` on Linux and `LOCAL_SYSTEM` on Windows.
+By default, the Agent runs as the `dd-agent` user on Linux and as the `ddagentuser` account on [Windows][18]. The exceptions are as follows:
+
+- The `system-probe` runs as `root` on Linux and as `LOCAL_SYSTEM` on Windows.
+- The `process-agent` runs as `LOCAL_SYSTEM` on Windows.
+- The `security-agent` runs as `root` on Linux.
 
 ## Secrets management
 

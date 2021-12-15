@@ -151,7 +151,7 @@ Possible options:
 - The admission controller doesn't inject the environment variables `DD_VERSION, DD_ENV`, and `DD_SERVICE` if they already exist.
 - To disable the admission controller injection feature, use the Cluster Agent configuration: `DD_ADMISSION_CONTROLLER_INJECT_CONFIG_ENABLED=false`
 - By using the Datadog admission controller, users can skip configuring the application pods using downward API ([step 2 in Kubernetes Trace Collection setup][3]).
-- If you are using a private cluster and your configuration is not getting injected into your pods, open a firewall rule for the control plane to talk to the Datadog webhook.
+- If you are using a private cluster and your configuration is not getting injected into your pods, open a firewall rule for the control plane to talk to the Datadog webhook. In this case, ensure that the firewall rules open port 443 as described in [Adding firewall rules in GCP][4].
 
 
 ## Further Reading
@@ -161,3 +161,4 @@ Possible options:
 [1]: https://kubernetes.io/blog/2019/03/21/a-guide-to-kubernetes-admission-controllers/
 [2]: https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/cluster-agent-rbac.yaml
 [3]: https://docs.datadoghq.com/agent/kubernetes/apm/?tab=helm#setup
+[4]: https://cloud.google.com/kubernetes-engine/docs/how-to/private-clusters#add_firewall_rules

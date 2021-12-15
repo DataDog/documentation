@@ -16,9 +16,9 @@ further_reading:
   text: "Uncover kernel-level threats with Cloud Workload Security"
 ---
 
-{{< site-region region="us3,us5,gov" >}}
+{{< site-region region="gov" >}}
 <div class="alert alert-warning">
-Cloud Security Posture Management is not currently available in US1-FED or US3.
+Cloud Security Posture Management is not currently available in US1-FED.
 </div>
 {{< /site-region >}}
 

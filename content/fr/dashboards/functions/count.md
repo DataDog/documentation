@@ -1,34 +1,34 @@
 ---
-title: Total
+title: Nombre de valeurs
 kind: documentation
 aliases:
   - /fr/graphing/functions/count/
 ---
-## Total sans les zéros
+## Nombre de valeurs différentes de zéro
 
 | Fonction          | Description                           | Exemple                           |
 | :----             | :-------                              | :---------                        |
-| `count_nonzero()` | Calcule le total de toutes les valeurs qui diffèrent de zéro. | `count_nonzero(<NOM_MÉTRIQUE>{*})` |
+| `count_nonzero()` | Calcule le nombre de valeurs qui diffèrent de zéro. | `count_nonzero(<NOM_MÉTRIQUE>{*})` |
 
 Pour une requête regroupée selon une ou plusieurs [clés de tag][1], cette fonction permet de calculer le nombre de valeurs de tag en tenant uniquement compte des valeurs de métriques qui diffèrent de zéro pour chaque point.
 
 Exemple : `count_nonzero(system.cpu.user{*} by {host})` renvoie une série temporelle représentant le nombre de hosts avec une charge système différente de zéro pour chaque point.
 
-{{< img src="dashboards/functions/count/count_nonzero.png" alt="total sans les zéros" style="width:80%;">}}
+{{< img src="dashboards/functions/count/count_nonzero.png" alt="nombre de valeurs différentes de zéro" style="width:80%;">}}
 
 Remarque : `count_nonzero_finite()` peut être utilisé en tant qu'alias de `count_nonzero()`.
 
-## Total sans les null
+## Nombre de valeurs différentes de null
 
 | Fonction           | Description                           | Exemple                            |
 | :----              | :-------                              | :---------                         |
-| `count_not_null()` | Calcule le total de toutes les valeurs qui diffèrent de null. | `count_not_null(<NOM_MÉTRIQUE>{*})` |
+| `count_not_null()` | Calcule le nombre de valeurs qui diffèrent de null. | `count_not_null(<NOM_MÉTRIQUE>{*})` |
 
 Pour une requête regroupée selon une ou plusieurs [clés de tag][1], cette fonction permet de calculer le nombre de valeurs de tag en tenant uniquement compte des valeurs de métriques qui diffèrent de null pour chaque point. Une valeur de métrique null correspond à une valeur non finie.
 
 Exemple : `count_not_null(system.cpu.user{*} by {host})` renvoie une série temporelle représentant le nombre de hosts avec une charge système différente de null pour chaque point.
 
-{{< img src="dashboards/functions/count/count_not_null.png" alt="total sans les null" style="width:80%;">}}
+{{< img src="dashboards/functions/count/count_not_null.png" alt="nombre de valeurs différentes de null" style="width:80%;">}}
 
 ## Autres fonctions
 
