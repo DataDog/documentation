@@ -8,6 +8,10 @@ jobs:
     # Checkout this repo
     - name: Checkout
       uses: actions/checkout@master
+    # Make styles folder
+    - name: Create folder
+      run: |
+        mkdir -p .github/styles
     # Lint with Vale
     - name: Vale
       uses: errata-ai/vale-action@v1.4.0
