@@ -438,11 +438,15 @@ of the higher-level `CronJob`.
 
 ### Environment variables
 
-Environment variables for Istio sidecars can be set on a per-deployment basis using the `apm.datadoghq.com/env` annotation.
+Environment variables for Istio sidecars can be set on a per-deployment basis using the `apm.datadoghq.com/env` annotation.  This is unique for deployments employing Istio sidecars and is set in addition to [the labels for unified service tagging](https://docs.datadoghq.com/getting_started/tagging/unified_service_tagging/?tab=kubernetes#configuration-1).
 ```yaml
+apiVersion: apps/v1
+kind: Deployment
+spec:
+  template:
     metadata:
       annotations:
-        apm.datadoghq.com/env: '{ "DD_ENV": "prod", "DD_TRACE_ANALYTICS_ENABLED": "true" }'
+        apm.datadoghq.com/env: '{ "DD_ENV": "prod", "DD_SERVICE": "my-service", "DD_VERSION": "v1.1"}'
 ```
 
 The available [environment variables][9] depend on the version of the C++ tracer embedded in the Istio sidecar's proxy.
