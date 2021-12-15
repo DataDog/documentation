@@ -82,7 +82,7 @@ You can also filter on attributes that are not defined as facets. For example, t
 
 
 - Filter on all spans with a `cart.value` attribute by typing "cart.value" in the search query bar:
-{{< img src="tracing/live_search/filter-by-attribute.png" alt="Live Search filter by attribute" style="width:80%;" >}}
+{{< img src="tracing/live_search/filter-by-attribute.mp4" alt="Live Search filter by attribute" video="true" >}}
 
 ## Trace Search with 15 day retention
 
