@@ -14,9 +14,9 @@ jobs:
         mkdir -p .github/styles
     # Lint with Vale
     - name: Vale
-      uses: errata-ai/vale-action@v1.4.0
+      uses: errata-ai/vale-action@v1.4.3
       with:
-        onlyAnnotateModifiedLines: true
+        files: __onlyModified
         styles: |
           https://github.com/DataDog/datadog-vale/releases/latest/download/Docshtml.zip
           https://github.com/DataDog/datadog-vale/releases/latest/download/Docsmd.zip
