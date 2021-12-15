@@ -23,7 +23,7 @@ On Linux, the instructions depend on the init system and on the distribution:
     Environment="LOG4J_FORMAT_MSG_NO_LOOKUPS=true"
     ```
 2. Reload the systemd service definitions: `sudo systemctl daemon-reload`
-3. Restart the datadog-agent service: `sudo systemctl datadog-agent restart`
+3. Restart the datadog-agent service: `sudo systemctl restart datadog-agent`
 
 
 ### Upstart-based systems 
