@@ -1,5 +1,5 @@
 name: Linting
-on: [push]
+on: [pull_request, pull_request_review]
 
 jobs:
   prose:
