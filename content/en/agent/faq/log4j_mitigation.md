@@ -1,5 +1,5 @@
 ---
-title: Mitigating the Risk of Log4Shell
+title: Mitigating the Risk of Remote Code Execution Due to Log4Shell
 kind: faq
 ---
 
