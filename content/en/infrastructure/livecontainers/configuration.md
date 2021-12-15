@@ -294,7 +294,7 @@ container_include: ["name:frontend.*"]
 
 **Note**: For Agent 5, instead of including the above in the `datadog.conf` main configuration file, explicitly add a `datadog.yaml` file to `/etc/datadog-agent/`, as the Process Agent requires all configuration options here. This configuration only excludes containers from real-time collection, **not** from Autodiscovery.
 
-### Container
+### Scrubbing sensitive information
 
 To prevent the leaking of sensitive data, you can scrub sensitive words in container YAML files. Container scrubbing is enabled by default for Helm charts, and some default sensitive words are provided:
 
@@ -330,7 +330,7 @@ password: <MY_PASSWORD>
 password::::== <MY_PASSWORD>
 ```
 
- However it does not scrub paths that contain sensitive words. For example, it does not overwrite `/etc/vaultd/secret/haproxy-crt.pem` with `/etc/vaultd/secret/******` even though `secret` is a sensitive word.
+However it does not scrub paths that contain sensitive words. For example, it does not overwrite `/etc/vaultd/secret/haproxy-crt.pem` with `/etc/vaultd/secret/******` even though `secret` is a sensitive word.
 
 ## Further reading
 
