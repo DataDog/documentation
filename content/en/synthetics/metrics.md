@@ -27,7 +27,7 @@ Metrics starting with:
     * `synthetics.tcp.*` come from your API [TCP tests][6]
     * `synthetics.udp.*` come from your API [UDP tests][7]
     * `synthetics.icmp.*` come from your API [ICMP tests][8]
-* `synthetics.multi.response.time` come from your [multistep API tests][9]
+* `synthetics.multi.*` come from your [multistep API tests][9]
 * `synthetics.browser.*` come from your [browser tests][10]
 * `synthetics.pl.worker.*`come from your [private locations][11]
 
