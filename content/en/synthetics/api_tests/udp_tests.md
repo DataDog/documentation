@@ -28,7 +28,7 @@ After choosing to create an `UDP` Test, define your test's request.
 
 1. Specify the **Host** and **Port** to run your test on. By default, the port is set to `443`.
 2. Enter the string you want to send in your test. 
-3. Specify the amount of time in seconds before the test times out.
+3. Specify the amount of time in seconds before the test times out (optional).
 4. **Name** your UDP test.
 5. Add `env` **Tags** as well as any other tag to your UDP test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][4].
 

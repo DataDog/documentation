@@ -35,8 +35,9 @@ After choosing to create a `DNS` test, define your test's request.
 1. Specify the **Domain** you want your test to query. For example, `www.example.com`.
 2. Specify the **DNS Server** to use (optional), it can be a domain name or an IP address. If not specified, your DNS test performs resolution using `8.8.8.8`, with a fallback on `1.1.1.1` and an internal AWS DNS server.
 3. Specify your DNS Server **Port** (optional). If not specified, the DNS Server port defaults to 53.
-4. **Name** your DNS test.
-5. Add `env` **Tags** as well as any other tag to your DNS test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][4].
+4. Specify the amount of time in seconds before the test times out (optional).
+5. **Name** your DNS test.
+6. Add `env` **Tags** as well as any other tag to your DNS test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][4].
 
 {{< img src="synthetics/api_tests/dns_test_config_new.png" alt="Define DNS query" style="width:90%;" >}}
 

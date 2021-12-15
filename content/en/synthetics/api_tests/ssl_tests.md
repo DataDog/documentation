@@ -32,6 +32,8 @@ After choosing to create a `SSL` test, define your test's request.
 1. Specify the **Host** and the **Port** to run your test on. By default, the port is set to `443`.
 2. Add **Advanced Options** (optional) to your test:
     * **Accept self-signed certificates**: Bypasses any server error related to a self-signed certificate.
+    * **Fail on revoked certificate in stapled OCSP**: Fail the test if the certificate is labeled as revoked by the OCSP stapling.
+    * **Timeout**: Specify the amount of time in seconds before the test times out.
     * **Server Name**: Specifies on which server you want to initiate the TLS handshake, allowing the server to present one of multiple possible certificates on the same IP address and TCP port number. By default, the parameter is filled by the **Host** value.
     * **Client certificate**: Authenticates through mTLS by uploading your client certificate (`.crt`) and the associated private key (`.key`) in `PEM` format. **Note**: You can use the `openssl` library to convert your certificates. For example, convert a `PKCS12` certificate to `PEM` formatted private keys and certificates.
 
