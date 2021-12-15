@@ -14,6 +14,6 @@ jobs:
         styles: |
           https://github.com/DataDog/datadog-vale/releases/latest/download/Docshtml.zip
           https://github.com/DataDog/datadog-vale/releases/latest/download/Docsmd.zip
-        config: https://raw.githubusercontent.com/DataDog/datadog-vale/main/.vale.ini?token=GITHUB_TOKEN
+        config: https://raw.githubusercontent.com/DataDog/datadog-vale/main/.vale.ini?token=${{secrets.GITHUB_TOKEN}}
       env:
         GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
