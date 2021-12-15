@@ -80,7 +80,7 @@ Override the port that the default tracer submits DogStatsD metrics to.
 
 `DD_TAGS`
 : **Default**: [] <br>
-A list of default tags to be added to every span and profile. Tags cane beseparated by commas or spaces,for example: `layer:api,team:intake` or `layer:api team:intake`
+A list of default tags to be added to every span and profile. Tags can be separated by commas or spaces, for example: `layer:api,team:intake` or `layer:api team:intake`
 
 `DD_TRACE_STARTUP_LOGS`
 : **Default**: `true` <br>
