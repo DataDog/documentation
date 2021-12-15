@@ -11,9 +11,10 @@ jobs:
       uses: errata-ai/vale-action@v1.4.0
       with:
         onlyAnnotateModifiedLines: true
+        token: ${{secrets.GITHUB_TOKEN}}
         styles: |
           https://github.com/DataDog/datadog-vale/releases/latest/download/Docshtml.zip
           https://github.com/DataDog/datadog-vale/releases/latest/download/Docsmd.zip
-        config: https://raw.githubusercontent.com/DataDog/datadog-vale/main/.vale.ini?token=${{secrets.GITHUB_TOKEN}}
+        config: https://raw.githubusercontent.com/DataDog/datadog-vale/main/.vale.ini
       env:
         GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
