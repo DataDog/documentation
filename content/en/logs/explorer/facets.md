@@ -23,6 +23,8 @@ further_reading:
 
 ## Overview
 
+This will be the test.
+
 Facets are user-defined tags and attributes from your indexed logs. They are meant for either qualitative or quantitative data analysis. As such, you can use them in your Log Explorer to:
 
 - [Search upon your logs][1]
@@ -153,7 +155,7 @@ Hidden facets have no impact aside from the log explorer (for instance: live tai
 
 #### Hidden facets and teammates
 
-Hiding facets is specific to your own troubleshooting context and won't impact your teammates' view, unless you update a [Saved View][24]. Hidden facets is part of the context saved in a saved view. This is a test.
+Hiding facets is specific to your own troubleshooting context and won't impact your teammates' view, unless you update a [Saved View][24]. Hidden facets is part of the context saved in a saved view.
 
 ### Group facets
 
