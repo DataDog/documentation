@@ -57,7 +57,7 @@ Once sensitive data in logs is sent to the Datadog platform, it may exist in a n
 
 * [Log Monitors][10] notifications when they include [Log Samples][11]. Check specifically for monitors triggered during the period when sensitive data was being sent.
 
-* [Livetail][12], where logs are viewed in real-time by your organization's users. There is no persistence beyond the 50 logs cached in browsers, and for broader queries, the result can be extremely sampled.
+* [Live Tail][12], where logs are viewed in real-time by your organization's users. There is no persistence beyond the 50 logs cached in browsers, and for broader queries, the result can be extremely sampled.
 
 ## Fix the source of the data upstream
 

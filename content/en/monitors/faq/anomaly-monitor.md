@@ -13,7 +13,7 @@ No. Anomaly detection assists with visualizing and monitoring metrics that have 
 
 Adding many separate timeseries in a single graph can lead to [spaghettification][1], and the problem gets worse when the anomaly detection visualization is added:
 
-{{< img src="monitors/monitor_types/anomaly/spaghetti.png" alt="spaghetti" style="width:80%;">}}
+{{< img src="monitors/monitor_types/anomaly/spaghetti.png" alt="Spaghettification" style="width:80%;">}}
 
 However, it is possible to add multiple series to a single graph one at a time. The gray band only shows up on mouseover:
 
