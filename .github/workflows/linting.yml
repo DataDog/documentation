@@ -8,13 +8,6 @@ jobs:
     # Checkout this repo
     - name: Checkout
       uses: actions/checkout@master
-    # Checkout datadog-vale repo
-    - name: Checkout datadog-vale
-      uses: actions/checkout@main
-      with:
-        repository: DataDog/datadog-vale
-        ref: latest
-        token: ${{secrets.GITHUB_TOKEN}}
     # Lint with Vale
     - name: Vale
       uses: errata-ai/vale-action@v1.4.0
