@@ -69,8 +69,8 @@ Datadog Agent の詳細については、[専用ドキュメントページ][9]�
 
 ご不明な点は、[Datadog のサポートチーム][12]までお問合せください。
 
-[1]: https://github.com/DataDog/datadog-agent/tree/master/docs/trace-agent#run-on-macos
-[2]: https://github.com/DataDog/datadog-agent/tree/master/docs/trace-agent#run-on-windows
+[1]: https://github.com/DataDog/datadog-agent/tree/main/docs/trace-agent#run-on-macos
+[2]: https://github.com/DataDog/datadog-agent/tree/main/docs/trace-agent#run-on-windows
 [3]: /ja/agent/faq/where-is-the-configuration-file-for-the-agent/
 [4]: /ja/tracing/visualization/#trace-metrics
 [5]: https://app.datadoghq.com/account/settings#agent
