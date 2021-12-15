@@ -43,7 +43,7 @@ To monitor individual devices:
 
     ```yaml
     init_config:
-      loader: core                     # use core check implementation of SNMP integration. recommended
+      loader: core  # use core check implementation of SNMP integration. recommended
       use_device_id_as_hostname: true  # recommended
     instances:
     - ip_address: '1.2.3.4'
@@ -60,11 +60,11 @@ To monitor individual devices:
 
     ```yaml
     init_config:
-      loader: core                     # use core check implementation of SNMP integration. recommended
+      loader: core  # use core check implementation of SNMP integration. recommended
       use_device_id_as_hostname: true  # recommended
     instances:
     - ip_address: '1.2.3.4'
-      snmp_version: 3			# optional, if omitted we will autodetect which version of SNMP you are using
+      snmp_version: 3  # optional, if omitted we will autodetect which version of SNMP you are using
       user: 'user'
       authProtocol: 'SHA256'  # choices: MD5, SHA, SHA224, SHA256, SHA384, SHA512
       authKey: 'fakeKey'  # enclose with single quote
