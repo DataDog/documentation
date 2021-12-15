@@ -291,7 +291,7 @@ Federator.ai n'inclut aucun événement.
 
 Besoin d'aide ? Consultez le [guide d'installation et de configuration de Federator.ai][11] (en anglais) ou contactez l'[assistance Datadog][14].
 
-[1]: https://prophetstor.com/federator-ai-2/
+[1]: https://prophetstor.com/federator_ai/
 [2]: https://github.com/DataDog/watermarkpodautoscaler
 [3]: https://youtu.be/IooFJnB8bb8
 [4]: https://youtu.be/qX_HF_zZ4BA
