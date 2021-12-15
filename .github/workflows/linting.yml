@@ -16,7 +16,7 @@ jobs:
     - name: Vale
       uses: errata-ai/vale-action@v1.4.3
       with:
-        files: __onlyModified
+        onlyAnnotateModifiedLines: true
         styles: |
           https://github.com/DataDog/datadog-vale/releases/latest/download/Docshtml.zip
           https://github.com/DataDog/datadog-vale/releases/latest/download/Docsmd.zip
