@@ -13,7 +13,7 @@ further_reading:
 - link: "/logs/faq/log-collection-troubleshooting-guide/"
   tag: "FAQ"
   text: "Log Collection Troubleshooting Guide"
-- link "https://www.datadoghq.com/blog/managing-rails-application-logs/"
+- link: "https://www.datadoghq.com/blog/managing-rails-application-logs/"
   tag: "Blog"
   text: "How to collect, customize, and manage Rails application logs"
 ---
