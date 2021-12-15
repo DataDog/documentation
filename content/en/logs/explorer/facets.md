@@ -23,8 +23,6 @@ further_reading:
 
 ## Overview
 
-This will be the test.
-
 Facets are user-defined tags and attributes from your indexed logs. They are meant for either qualitative or quantitative data analysis. As such, you can use them in your Log Explorer to:
 
 - [Search upon your logs][1]
