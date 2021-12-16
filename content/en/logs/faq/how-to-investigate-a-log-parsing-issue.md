@@ -27,7 +27,7 @@ Before troubleshooting your parser, read the Datadog log [processors][1] and [pa
 
 2. **Spot obvious differences if any**:
     In most of the cases, you should have examples or log samples in your parsers. Compare your log with the sample to find simple differences such as a missing element, a different order or extra elements.
-    Also check the timestamp format as this is very often the culprit.
+    Also check the timestamp format as this is often the culprit.
 
     You can illustrate this with an apache log. In your integration parser you have examples such as:
     ```

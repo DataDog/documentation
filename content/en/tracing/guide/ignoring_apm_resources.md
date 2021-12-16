@@ -192,7 +192,6 @@ Alternatively, you can set `agents.containers.traceAgent.env` in the `helm insta
 {{< code-block lang="bash" >}}
 helm install dd-agent -f values.yaml \
   --set datadog.apiKeyExistingSecret="datadog-secret" \
-  --set datadog.apm.enabled=true \
   --set agents.containers.traceAgent.env[0].name=DD_APM_IGNORE_RESOURCES, \
     agents.containers.traceAgent.env[0].value="Api::HealthchecksController#index$" \
   datadog/datadog

@@ -27,7 +27,7 @@ Dans cet exemple, la fonctionnalité Watchdog Insights identifie que l'instance 
 
 ## Navigation
 
-La bannière Watchdog Insights figure sur la page **RUM Explorer results** et contient des insights à propos de la requête actuelle :
+La bannière Watchdog Insights figure sur la page des **résultats RUM Explorer** et contient des insights à propos de la requête actuelle :
 
 {{< img src="real_user_monitoring/explorer/watchdog_insights/banner_collapsed.png" alt="Bannière Watchdog Insights (réduite)" style="width:100%;" >}}
 
@@ -49,12 +49,12 @@ Les insights de type « error outlier » affichent les champs comme les [tags 
 
 Ce type d'insight peut par exemple s'appliquer aux paires `env:staging`, `version:1234` ou `browser.name:Chrome`.
 
-Les informations suivantes sont accessibles depuis les vues **banner card** et **side panel card** :
+Les informations suivantes sont accessibles depuis la **fiche de la bannière** et la **fiche du volet latéral** :
 
 * Le nom du champ
 * La proportion du nombre total d'erreurs et d'événements RUM globaux associés au champ en question
 
-{{< img src="real_user_monitoring/explorer/watchdog_insights/error_outlier_m_card.png" alt="Vues « banner card » et « side panel card » des insights de type error outlier" style="width:100%;" >}}
+{{< img src="real_user_monitoring/explorer/watchdog_insights/error_outlier_m_card.png" alt="Fiches de la bannière et du volet latéral des insights de type error outlier " style="width:100%;" >}}
 
 Depuis le **volet latéral développé**, vous pouvez consulter une série temporelle des erreurs RUM comportant le champ.
 
@@ -66,16 +66,16 @@ Les insights de type « latency outlier » affichent les champs comme les [tag
 
 Ces insights sont calculés pour les [Core Web Vitals][2] comme First Contentful Paint, First Input Delay et Cumulative Layout Shift, ainsi que pour la [durée de chargement][3].
 
-Les informations suivantes sont accessibles depuis la vue **banner card** :
+Les informations suivantes sont accessibles depuis la **fiche de la bannière** :
 
 * Le nom du champ
 * La valeur de la métrique de performance contenant le champ et la référence pour le reste des données
 
-{{< img src="real_user_monitoring/explorer/watchdog_insights/latency_outlier_s_card.png" alt="Vue « banner card » des insights de type latency outlier" style="width:100%;" >}}
+{{< img src="real_user_monitoring/explorer/watchdog_insights/latency_outlier_s_card.png" alt="Fiche de la bannière des insights de type latency outlier" style="width:100%;" >}}
 
-Depuis la vue **side panel card**, vous pouvez consulter une série temporelle de la métrique de performance pour le champ et la référence pour le reste des données.
+Depuis la **fiche du volet latéral**, vous pouvez consulter une série temporelle de la métrique de performance pour le champ et la référence pour le reste des données.
 
-{{< img src="real_user_monitoring/explorer/watchdog_insights/latency_outlier_l_card.png" alt="Vue du volet latéral des insights de type latency outlier" style="width:100%;" >}}
+{{< img src="real_user_monitoring/explorer/watchdog_insights/latency_outlier_l_card.png" alt="Volet latéral des insights de type latency outlier" style="width:100%;" >}}
 
 Depuis le **volet latéral développé**, vous pouvez parcourir la liste des événements RUM qui contiennent le champ. Consultez le [graphique en cascade des performances][4] pour découvrir la cause à l'origine du problème de performance.
 
