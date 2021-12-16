@@ -12,13 +12,11 @@ Les clés d'API sont uniques à votre organisation. Une [clé d'API][1] est requ
 
 ## Clés d'application
 
-Les [clés d'application][2] sont utilisées conjointement avec la clé d'API de votre organisation afin de donner aux utilisateurs un accès complet à l'API de programmation de Datadog. Les clés d'application sont associées au compte utilisateur qui les a créées et possèdent les autorisations et capacités de l'utilisateur de cet utilisateur.
+Les [clés d'application][2] sont utilisées conjointement avec la clé d'API de votre organisation afin de donner aux utilisateurs un accès complet à l'API de programmation de Datadog. Les clés d'application sont associées au compte utilisateur qui les a créées et possèdent les autorisations et capacités de cet utilisateur.
 
 ## Tokens client
 
-Pour gérer vos tokens client, accédez à la section `Client Tokens` de la [page de configuration des API Datadog][1], comme illustré ici :
-
-{{< img src="account_management/api_app_keys/client_tokens.png" style="width:80%;" alt="Tokens client"  >}}
+Pour gérer vos tokens client, accédez à **Organization Settings**, puis cliquez sur l'onglet **Client Tokens**.
 
 Les tokens client sont uniques à votre organisation. Un token client est requis par le [collecteur de logs du navigateur Web][3] pour envoyer des logs à Datadog, et par la fonctionnalité [Real User Monitoring][4] pour envoyer des événements et des logs à Datadog.
 
@@ -26,34 +24,30 @@ Pour des raisons de sécurité, vous ne pouvez pas utiliser les clés d'API pour
 
 ## Ajouter une clé d'API ou un token client
 
-Pour ajouter une clé d'API ou un token client Datadog, accédez à [Integration -> APIs][1], entrez un nom pour votre clé ou token, puis cliquez sur **Create API key** ou **Create Client Token**.
+Pour ajouter une clé d'API Datadog ou un token client, procédez comme suit :
+1. Accédez aux paramètres d'organisation, puis cliquez sur l'onglet **API keys** ou **Client Tokens**.
+3. Cliquez sur le bouton **New Key** ou **New Client Token**, en fonction de l'élément à créer.
+4. Attribuez un nom à votre clé ou à votre token.
+4. Cliquez sur **Create API key** ou **Create Client Token**.
 
-**Remarque** :
+**Remarques :**
 
 * Votre organisation doit posséder entre une et 50 clés d'API.
 * Les noms de clé doivent être uniques au sein de votre organisation.
 
 ## Supprimer des clés d'API ou des token client
 
-Pour supprimer une clé d'API ou un token client Datadog, accédez à [Integration -> APIs][1] et cliquez sur l'option **Revoke** en regard de la clé ou du token à supprimer :
-
-{{< img src="account_management/api_app_keys/api_keys_revoke.png" alt="Revoquer des clés d'API"  >}}
+Pour supprimer une clé d'API ou un token client Datadog, accédez à la liste des clés ou tokens, puis cliquez sur l'icône en forme de **corbeille** de l'option **Revoke** en regard de la clé ou du token à supprimer.
 
 ## Ajouter des clés d'application
 
-Pour ajouter une clé d'application Datadog, accédez à [Teams -> Application Keys][2]. Cliquez ensuite sur **New Key**. Cette option s'affiche uniquement si vous disposez de l'[autorisation][5] requise pour créer des clés d'application.
+Pour ajouter une clé d'application Datadog, accédez à **Organization Settings** > **Application Keys**. Cliquez ensuite sur **New Key**. Cette option s'affiche uniquement si vous disposez de l'[autorisation][5] requise pour créer des clés d'application.
 
-{{< img src="account_management/api_app_keys/application_keys_new_key.png" alt="Créer des clés d'application"  >}}
-
-**Remarques** :
-
-* Les noms de clé d'application ne peuvent pas être vides.
+**Remarque** : les noms de clé d'application ne peuvent pas être vides.
 
 ## Supprimer des clés d'application
 
-Pour supprimer une clé d'application Datadog, accédez à [Teams -> Application Keys][2]. Vos clés d'application s'affichent alors. Cliquez ensuite sur l'option **Revoke** en regard de la clé à révoquer. Cette option s'affiche uniquement si vous disposez de l'[autorisation][5] requise pour créer et gérer des clés d'application. Si vous êtes autorisé à gérer toutes les clés d'application de votre organisation, vous pouvez rechercher la clé à révoquer, puis cliquer sur l'option **Revoke** correspondante :
-
-{{< img src="account_management/api_app_keys/application_keys_revoke.png" alt="Révoquer des clés d'application"  >}}
+Pour supprimer une clé d'application Datadog, accédez à **Organization Settings** > **Application Keys**. Vos clés d'application s'affichent alors. Cliquez ensuite sur l'option **Revoke** en regard de la clé à révoquer. Cette option s'affiche uniquement si vous disposez de l'[autorisation][5] requise pour créer et gérer des clés d'application. Si vous êtes autorisé à gérer toutes les clés d'application de votre organisation, vous pouvez rechercher la clé à révoquer, puis cliquer sur l'option **Revoke** correspondante.
 
 ## Utilisation de plusieurs clés d'API
 
@@ -65,11 +59,11 @@ Si la limite de 50 clés d'API est insuffisante pour votre organisation, contact
 
 ## Désactiver un compte utilisateur
 
-Si le compte d'un utilisateur est désactivé, les clés d'application créées par l'utilisateur sont supprimées. Les clés d'API créées par le compte désactivé ne sont pas supprimées et restent valides.
+Si le compte d'un utilisateur est désactivé, les clés d'application créées par cet utilisateur sont révoquées. Les clés d'API créées par le compte désactivé ne sont pas supprimées et restent valides.
 
 ## Transferts de clé
 
-Pour des raisons de sécurité, Datadog ne permet pas le transfert d'une clé d'API ou d'application d'un utilisateur à un autre. Nous vous conseillons de garder la trace de vos clés d'API/d'application et de les renouveler lorsqu'un utilisateur quitte la société. De cette façon, un utilisateur qui a quitté la société ne peut plus accéder à votre compte ni à l'API Datadog. Le transfert de clé d'API ou d'application permettrait à un utilisateur qui ne fait plus partie de la société de continuer à envoyer et à recevoir des données via l'API Datadog. Certains clients ont également demandé à changer le handle auquel les clés d'API et d'application sont associées. Toutefois, cette méthode ne permet pas de résoudre le problème de fond : un utilisateur qui ne fait plus partie de la société pourra toujours envoyer et récupérer des données à partir de l'API Datadog.
+Pour des raisons de sécurité, Datadog ne permet pas le transfert d'une clé d'API ou d'application d'un utilisateur à un autre. Nous vous conseillons de garder une trace de vos clés d'API/d'application et de les renouveler lorsqu'un utilisateur quitte la société. De cette façon, un utilisateur qui a quitté la société ne peut plus accéder à votre compte ni à l'API Datadog. Le transfert de clé d'API ou d'application permettrait à un utilisateur qui ne fait plus partie de la société de continuer à envoyer et à recevoir des données via l'API Datadog. Certains clients ont également demandé à ce qu'il soit possible de changer le handle auquel les clés d'API et d'application sont associées. Toutefois, cette méthode ne permet pas de résoudre le problème de fond : un utilisateur qui ne fait plus partie de la société pourra toujours envoyer et récupérer des données à partir de l'API Datadog.
 
 Par ailleurs, plusieurs organisations ont également demandé à créer un « compte de service » afin de gérer leurs clés d'API et d'application. Bien que cette méthode soit appropriée dans de nombreux cas, il ne doit pas s'agir d'un simple compte partagé accessible à tout le monde. Si vous prévoyez d'utiliser un « compte de service », assurez-vous de sécuriser le stockage de ses identifiants (par exemple, en utilisant un gestionnaire de mots de passe et en appliquant le principe du moindre privilège). Pour éviter toute fuite accidentelle des identifiants du compte de service, l'accès à ce compte doit être restreint à un petit nombre de personnes (idéalement, aux personnes en charge de la gestion du compte uniquement).
 
@@ -77,7 +71,7 @@ Par ailleurs, plusieurs organisations ont également demandé à créer un « c
 
 Besoin d'aide ? Contactez [l'assistance Datadog][6].
 
-[1]: https://app.datadoghq.com/account/settings#api
+[1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: https://app.datadoghq.com/access/application-keys
 [3]: /fr/logs/log_collection/javascript/
 [4]: /fr/real_user_monitoring/

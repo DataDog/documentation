@@ -18,7 +18,7 @@ The [Security Home][1] page is an entry point to your security monitoring enviro
 
 ## Analyzed logs
 
-Get an overview of analyzed logs across all sources for a quick audit, or select **Logs Analyzed** to see a list of your analyzed logs in [Logs Explorer][2] for a more granular investigation. In Logs Explorer, filter by [log facets][3] or [aggregate your logs][4] to drill down even further into analyzed logs.
+Get an overview of analyzed logs across all sources for a quick audit, or select **Logs Analyzed** to see a list of your analyzed logs in [Logs Explorer][2] for a more granular investigation. In Logs Explorer, filter by [log facets][3] or [aggregate your logs][4] to examine further into analyzed logs.
 
 ## Signals generated
 
@@ -28,7 +28,7 @@ In the Signals Explorer, click on any rule with a generated signal to inspect th
 
 ## Detect threats
 
-With [real-time threat detection][7], if a rule is matched, Datadog evaluates the severity and whether anyone should be notified. See how many threats have been detected across all entities in your environment from the Security Home page. Select **Threats Detected** to see malicious entities in the Signals Explorer. Select any entity to drill down into its generated signal for remediation and more details.
+With [real-time threat detection][7], if a rule is matched, Datadog evaluates the severity and whether anyone should be notified. See how many threats have been detected across all entities in your environment from the Security Home page. Select **Threats Detected** to see malicious entities in the Signals Explorer. Select any entity to analyze its generated signal for remediation and more details.
 
 ## Analyze sources
 

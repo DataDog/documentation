@@ -3,9 +3,9 @@ title: Run Synthetic Tests from Private Locations
 kind: documentation
 description: Run Synthetic API and browser tests from private locations
 further_reading:
-    - link: "https://www.datadoghq.com/blog/synthetic-private-location-monitoring-datadog/"
-      tag: "Blog"
-      text: "Monitor your Synthetic private locations with Datadog"
+    - link: 'https://www.datadoghq.com/blog/synthetic-private-location-monitoring-datadog/'
+      tag: 'Blog'
+      text: 'Monitor your Synthetic private locations with Datadog'
     - link: /getting_started/synthetics/private_location
       tag: 'Documentation'
       text: 'Getting Started with Private Locations'
@@ -18,6 +18,9 @@ further_reading:
     - link: '/synthetics/api_tests'
       tag: 'Documentation'
       text: 'Configure an API Test'
+    - link: 'https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_private_location'
+      tag: 'Terraform'
+      text: 'Create and manage Synthetic Private Locations with Terraform'
 ---
 
 <div class="alert alert-warning">

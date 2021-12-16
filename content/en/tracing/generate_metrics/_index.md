@@ -28,8 +28,8 @@ For example, you may want to use custom metrics to visualize anomalies, create d
 | Reason                        | Custom Metrics Generated from Spans                   | Retention Filters                           |
 | -------------------------------------- | -------------------------------------- | --------------------------------- |
 | Retention Period                     | 15 months                    | 15 days             |
-| Anomaly Detection                           | Create an [Anomaly Monitor][4] based on generated metrics.                            | Use Analytics to compare behavior over the past 15 days, and drill into complete traces to investigate root cause.                         |
-| Investigation of matching traces with full context                          | N/A - Custom Metrics will not result in any retention of associated traces.                            | Keep exactly the traces relevant to your business context with [retention filters][1].                            |
+| Anomaly Detection                           | Create an [Anomaly Monitor][4] based on generated metrics.                            | Use Analytics to compare behavior over the past 15 days, and view complete traces to investigate root cause.                         |
+| Investigation of matching traces with full context                          | N/A - Custom Metrics do not result in any retention of associated traces.                            | Keep exactly the traces relevant to your business context with [retention filters][1].                            |
 | Granularity of behavior                           | Create custom metrics for important endpoints or other low-cardinality groups.                        | Use [Search and Analytics][5] for specific endpoints, or use the 'Group By' option in [Analytics][6].                    |
 | Forecasting or complex mathematics                          | Create a [Forecast monitor][7] based on generated metrics.                          |   N/A                            |
 

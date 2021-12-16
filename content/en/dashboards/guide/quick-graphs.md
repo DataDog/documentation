@@ -14,7 +14,7 @@ You can use Quick Graphs to graph your data from anywhere in Datadog.
 Open the Quick Graphs editor with any of the following:
 
 * Pressing `G` on any page.
-* The global search (`Cmd+K`) menu.
+* The global search (`Cmd+K` on MacOS, `Ctrl+K` on Windows) menu.
 * The dashboards submenu.
 
 {{< img src="dashboards/guide/quick_graph_editor.png" alt="quick graph editor" style="width:80%;">}}

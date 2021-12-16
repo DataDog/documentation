@@ -24,9 +24,9 @@ further_reading:
   text: "Log Collection Troubleshooting Guide"
 ---
 
-To send your C# logs to Datadog, we recommend logging to a file and then tailing that file with your Datadog Agent. Here are setup examples for the `Serilog`, `NLog`, and `log4net` logging libraries
+To send your C# logs to Datadog, log to a file and then tail that file with your Datadog Agent. This page details setup examples for the `Serilog`, `NLog`, and `log4net` logging libraries.
 
-We strongly encourage setting up your logging library to produce your logs in JSON format to avoid the need for [custom parsing rules][1].
+Datadog strongly encourages setting up your logging library to produce your logs in JSON format to avoid the need for [custom parsing rules][1].
 
 ## Configure your logger
 
@@ -251,7 +251,7 @@ If you have followed the instructions you should see in your file (for example `
 }
 ```
 
-If, despite the benefits of logging in JSON, you wish to log in raw string format, we recommend you update the `log4net conversion pattern` to automatically parse your logs with the C# integration Pipeline as follows:
+If, despite the benefits of logging in JSON, you wish to log in raw string format, try updating the `log4net conversion pattern` to automatically parse your logs with the C# integration Pipeline as follows:
 
 ```text
 <param name="ConversionPattern" value="%date{yyyy-MM-dd HH:mm:ss.SSS} %level [%thread] %logger %method:%line - %message%n" />

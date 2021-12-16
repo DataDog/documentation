@@ -181,7 +181,7 @@ In your existing `Daemonset` [manifest file][2] set the environment variable `DD
 
 After redeploying your `Daemonset` with these configurations in place, the Datadog Agent is able to communicate with the Cluster Agent.
 
-[1]: https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles/manifests/cluster-agent
+[1]: https://github.com/DataDog/datadog-agent/tree/main/Dockerfiles/manifests/cluster-agent
 [2]: /agent/kubernetes/?tab=daemonset
 [3]: /agent/faq/rbac-for-dca-running-on-aks-with-helm/
 [4]: /agent/cluster_agent/setup/?tab=daemonset#configure-the-datadog-agent

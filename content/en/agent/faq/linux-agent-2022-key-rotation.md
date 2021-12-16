@@ -60,6 +60,8 @@ Check that the correct key URLs are configured for this repository.
 
 ## Manual update
 
+Datadog encourages you to use one of the install methods above, which trust the new GPG key as well as all future keys automatically. If this is not an option, use the following instructions to manually download and trust the new key.
+
 {{< tabs >}}
 {{% tab "Debian/Ubuntu" %}}
 

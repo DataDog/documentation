@@ -3,7 +3,7 @@ title: Cloud Security Posture Management
 kind: documentation
 ---
 
-{{< site-region region="us3,us5,gov" >}}
+{{< site-region region="gov" >}}
 <div class="alert alert-warning">
 Cloud Security Posture Management is not currently available in this site.
 </div>
@@ -17,7 +17,7 @@ Datadog Cloud Security Posture Management (CSPM) makes it easier to assess and v
 
 Assess the configuration of your cloud resources, such as security groups, storage buckets, load balancers, and databases against configuration rules. Use the Datadog Agent to review local configuration information from servers, containers, and Kubernetes clusters against [Datadog's OOTB security posture rules][1].
 
-View your cloud security posture at a high level with the [Posture Management][2] page, and drill into the details of findings and analyze historical configurations with [Findings][3].
+View your cloud security posture at a high level with the [Posture Management][2] page. Examine the details of findings and analyze historical configurations with [Findings][3].
 
 ## Glossary
 

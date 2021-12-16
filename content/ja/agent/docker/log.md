@@ -99,7 +99,7 @@ docker run -d --name datadog-agent \
 : ファイルからコンテナログを収集します。Datadog Agent 6.27.0/7.27.0 以降で利用可能です。
 
 
-[1]: https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles/agent
+[1]: https://github.com/DataDog/datadog-agent/tree/main/Dockerfiles/agent
 [2]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/agent
 {{% /tab %}}
 {{% tab "ホスト Agent" %}}

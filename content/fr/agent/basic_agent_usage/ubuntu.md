@@ -5,13 +5,13 @@ platform: Ubuntu
 aliases:
   - /fr/guides/basic_agent_usage/ubuntu/
 further_reading:
-  - link: logs/
+  - link: /logs/
     tag: Documentation
     text: Recueillir vos logs
-  - link: /infrastructure/process
+  - link: /infrastructure/process/
     tag: Documentation
     text: Recueillir vos processus
-  - link: tracing
+  - link: /tracing/
     tag: Documentation
     text: Recueillir vos traces
 ---
@@ -25,7 +25,7 @@ Les paquets sont disponibles en versions pour architectures x86 64 bits et Arm�
 
 ## Commandes
 
-Dans les Agents v6 et v7, le gestionnaire de service fourni par le système d'exploitation est responsable du cycle de vie de l'Agent, tandis que les autres commandes doivent être exécutées directement via le binaire de l'Agent. Dans l'Agent v5, presque tout se fait par l'intermédiaire du gestionnaire de service.
+Avec les Agents v6 et v7, le gestionnaire de service fourni par le système d'exploitation est responsable du cycle de vie de l'Agent, tandis que les autres commandes doivent être exécutées directement via le binaire de l'Agent. Avec l'Agent v5, la grande majorité des opérations passent par le gestionnaire de service.
 
 {{< tabs >}}
 {{% tab "Agents v6 et v7" %}}
@@ -60,7 +60,7 @@ Dans les Agents v6 et v7, le gestionnaire de service fourni par le système d'ex
 
 **Remarque** : si le wrapper de `service` n'est pas disponible sur votre système, utilisez :
 
-* Sur les systèmes basés sur `upstart` : `sudo initctl start/stop/restart/status datadog-agent`
+* Sur les systèmes basés sur `upstart` : `sudo start/stop/restart/status datadog-agent`
 * Sur les systèmes basés sur `systemd` : `sudo systemctl start/stop/restart/status datadog-agent`
 
 [En savoir plus sur les commandes de cycle de vie du service][2]
@@ -77,7 +77,7 @@ Fichiers de configuration pour les [intégrations][1] :
 
 * `/etc/datadog-agent/conf.d/`
 
-[1]: /fr/integrations
+[1]: /fr/integrations/
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
@@ -89,13 +89,13 @@ Fichiers de configuration pour les [intégrations][1] :
 
 * `/etc/dd-agent/conf.d/`
 
-[1]: /fr/integrations
+[1]: /fr/integrations/
 {{% /tab %}}
 {{< /tabs >}}
 
 ## Dépannage
 
-[Consultez la documentation relative au dépannage de l'Agent][3].
+Consultez la [documentation relative au dépannage de l'Agent][3].
 
 ## Utilisation de l'Agent intégré
 
@@ -109,5 +109,5 @@ Pour en savoir plus, consultez les instructions relatives à l'[ajout de paquets
 
 [1]: https://app.datadoghq.com/account/settings#agent/ubuntu
 [2]: /fr/agent/faq/agent-v6-changes/?tab=linux#service-lifecycle-commands
-[3]: /fr/agent/troubleshooting
-[4]: /fr/developers/guide/custom-python-package
+[3]: /fr/agent/troubleshooting/
+[4]: /fr/developers/guide/custom-python-package/
