@@ -17,6 +17,69 @@ aliases:
 
 {{< img src="serverless/java-lambda-tracing.png" alt="Monitor Java Lambda Functions with Datadog"  style="width:100%;">}}
 
+## Upgrading
+
+<div class="alert alert-warning">
+  As you may be aware, it was recently announced by the Apache Foundation that log4j, a popular Java logging library, is [vulnerable to remote code execution][12].
+  Some versions of `datadog-lambda-java` include a transitive dependency on log4j that may be vulnerable. The vulnerable versions are:
+
+  `<=0.3.3`
+  `<=1.4.0`
+
+  See below for instructions for upgrading to the latest versions of `datadog-lambda-java`.
+</div>
+
+<details>
+  <summary>
+    Instructions for upgrading `datadog-lambda-java`
+  </summary>
+
+  The version of the `datadog-lambda-java` dependency in your Lambda function is set in `pom.xml` or `build.gradle` depending on whether you are using Maven or Gradle, respectively.
+
+  {{< tabs >}}
+    {{% tab "Maven" %}}
+      Your `pom.xml` file will contain a section like this.
+
+      ```xml
+      <dependency>
+        <groupId>com.datadoghq</groupId>
+        <artifactId>datadog-lambda-java</artifactId>
+        <version>VERSION</version>
+      </dependency>
+      ```
+
+      Find this section and change the `VERSION` to the latest release (omitting the preceeding `v`) ![Maven Central][4]
+      Then redeploy your lambda function.
+
+      If you do not wish to upgrade to `v1.4.x`, we are also updating `0.3.x` with the latest log4j security patches. You can find the latest `0.3.x` release [here][13]. 
+
+    {{% \tab %}}
+
+    {{% tab "Gradle" %}}
+      Your `build.gradle` file will contain a section like this.
+
+      ```groovy
+      dependencies {
+        implementation 'com.datadoghq:datadog-lambda-java:VERSION'
+      }
+      ```
+
+      Find this section and change the `VERSION` to the latest release (omitting the preceeding `v`) ![Maven Central][4]
+      Then redeploy your lambda function.
+
+      If you do not wish to upgrade to `v1.4.x`, we are also updating `0.3.x` with the latest log4j security patches. You can find the latest `0.3.x` release [here][13]. 
+
+    {{% \tab %}}
+  {{< \tabs>}}
+
+  If you are upgrading from 0.3.x to 1.4.x and you wish to use the `dd-trace-java` tracer, find the reference to the `dd-trace-java` lambda layer and change it to 
+  
+  ```
+  arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-java:4`
+  ````
+
+</details>
+
 ## Required setup
 
 If not already configured:
@@ -170,3 +233,5 @@ To automatically connect Java Lambda function logs and traces, see [Connecting J
 [9]: https://app.datadoghq.com/functions
 [10]: /serverless/custom_metrics?tab=java
 [11]: /tracing/connect_logs_and_traces/java/
+[12]: https://www.datadoghq.com/log4j-vulnerability/
+[13]: https://github.com/DataDog/datadog-lambda-java/releases
