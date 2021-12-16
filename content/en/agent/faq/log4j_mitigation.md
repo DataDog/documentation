@@ -101,6 +101,12 @@ $stream.Close()
 $stream.Dispose()
 ```
 
+Stop the Datadog Agent service.
+
+```powershell
+"$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" stopservice	
+```
+
 Remove the JndiLogger.class from the jmxfetch.jar by running:
 
 ```powershell
@@ -119,7 +125,11 @@ If the operation was successful the expected out is:
 The C:\Program Files\Datadog\Datadog Agent\embedded\agent\dist\jmx\jmxfetch.jar is now safe to run.
 ```
 
-Finally, restart the Datadog Agent service to apply the changes.
+Finally, start the Datadog Agent service to apply the changes.
+
+```powershell
+"$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" start-service
+```
 
 ### AIX
 
