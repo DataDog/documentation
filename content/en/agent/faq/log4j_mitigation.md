@@ -7,42 +7,17 @@ If you are using the Datadog Agent between versions v7.17.0/v6.17.0 and v7.32.2/
 
 **If you are on an impacted version, to mitigate the vulnerability, the best option is to upgrade your Datadog Agent to v7.32.3 (v6.32.3) or later.**
 
-## Seeing if your Agent Version is vulnerable
-
-### With a dashboard
-
-To see if your Datadog Agent (>= 6.17.0 - <= 6.32.2; >= 7.17.0 - <= 7.32.2) is the recommended version (6.32.3 and 7.32.3) and not running on a Log4j vulnerable version, [import][1] this dashboard template to your Datadog account:
-
-[Agent version template][2]
-</br>
-</br>
-{{< img src="agent/faq/dashboard.png" alt="Integrations" >}}
-
-If you want to use this dashboard over multiple Datadog accounts or hosts, use the API to automate the process. Run this command in the directory where the JSON file is saved:
-
-```curl
-curl -X POST "https://api.datadoghq.com/api/v1/dashboard" \
--H "Content-Type: application/json" \
--H "DD-API-KEY: ${DD_API_KEY}" \
--H "DD-APPLICATION-KEY: ${DD_APP_KEY}" \
--d @DatadogAgentVersionCheck.json
-```
-
-**Note**: This dashboard does not show older versions of the Datadog Agent (v5), because those versions are not vulnerable.
-
-### With the CLI
-
-You can also check specific Agent version information with the Agent CLI `version` subcommand. For more information, see the [Agent CLI documentation][3].
+If you are not sure which version of the Agent you are using, see [Seeing if your Agent Version is vulnerable](#seeing-if-your-agent-version-is-vulnerable).
 
 ## Upgrading your Agent
 
-To update the Datadog Agent core between two minor versions on your host or container, run the [install command for your platform][4].
+To update the Datadog Agent core between two minor versions on your host or container, run the [install command for your platform][1].
 
 ## If you can't upgrade your Agent version
 
 If you are not able to upgrade your Agent at this time, use these instructions to implement an environment variable (`LOG4J_FORMAT_MSG_NO_LOOKUPS="true"` on the JMXFetch process or the Agent process) to partially mitigate the vulnerability: 
 
-**Note**: If you are running v7.32.2 or v6.32.2, you do not need to perform these steps. The Agent v7.32.2 (and v6.32.2) [starts jmxfetch with a property][5] that achieves the same result. In all cases, the best option is to upgrade your Datadog Agent to v7.32.3 (v6.32.3) or later.
+**Note**: If you are running v7.32.2 or v6.32.2, you do not need to perform these steps. The Agent v7.32.2 (and v6.32.2) [starts jmxfetch with a property][2] that achieves the same result. In all cases, the best option is to upgrade your Datadog Agent to v7.32.3 (v6.32.3) or later.
 
 **Note**: Setting the LOG4J_FORMAT_MSG_NO_LOOKUPS environment variable to true will reduce the risk of remote code execution but it is not a complete mitigation.
 
@@ -126,8 +101,35 @@ datadog:
       value: "true"
 ```
 
-[1]: /dashboards/#copy-import-or-export-dashboard-json
-[2]: /resources/json/agent-version-dashboard.json
-[3]: /agent/guide/agent-commands/?tab=agentv6v7#other-commands
-[4]: https://app.datadoghq.com/account/settings#agent
-[5]: https://github.com/DataDog/datadog-agent/blob/main/CHANGELOG.rst#7322--6322
+## Seeing if your Agent Version is vulnerable
+
+### With a dashboard
+
+To see if your Datadog Agent (>= 6.17.0 - <= 6.32.2; >= 7.17.0 - <= 7.32.2) is the recommended version (6.32.3 and 7.32.3) and not running on a Log4j vulnerable version, [import][3] this dashboard template to your Datadog account:
+
+[Agent version template][4]
+</br>
+</br>
+{{< img src="agent/faq/dashboard.png" alt="Integrations" >}}
+
+If you need to use this dashboard over multiple Datadog accounts or hosts, use the API to automate the process. Run this command in the directory where the JSON file is saved:
+
+```curl
+curl -X POST "https://api.datadoghq.com/api/v1/dashboard" \
+-H "Content-Type: application/json" \
+-H "DD-API-KEY: ${DD_API_KEY}" \
+-H "DD-APPLICATION-KEY: ${DD_APP_KEY}" \
+-d @DatadogAgentVersionCheck.json
+```
+
+**Note**: This dashboard does not show older versions of the Datadog Agent (v5), because those versions are not vulnerable.
+
+### With the CLI
+
+You can also check specific Agent version information with the Agent CLI `version` subcommand. For more information, see the [Agent CLI documentation][5].
+
+[1]: https://app.datadoghq.com/account/settings#agent
+[2]: https://github.com/DataDog/datadog-agent/blob/main/CHANGELOG.rst#7322--6322
+[3]: /dashboards/#copy-import-or-export-dashboard-json
+[4]: /resources/json/agent-version-dashboard.json
+[5]: /agent/guide/agent-commands/?tab=agentv6v7#other-commands
