@@ -90,7 +90,7 @@ if ($Validate -eq $true) {
     if ($found.Count -eq 0) { 
         Write-Output "The $zipfile is now safe to run." 
     } else { 
-        Write-Output "Dangerous file strill present, something failed during the JNDI cleanup."
+        Write-Output "Dangerous file still present, something failed during the JNDI cleanup."
     }
 } else {
 	($zip.Entries | ? { $files -contains $_.Name }) | % { $_.Delete() }
