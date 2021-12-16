@@ -1,6 +1,6 @@
 {
     "title":"Datadog Agent Version Check",
-    "description":"## Title\n\nDescribe this dashboard. Add links to other dashboards, monitors, wikis,  and docs to help your teammates. Markdown is supported.\n\n- [This might link to a dashboard](#)\n- [This might link to a wiki](#)",
+    "description":"Reports Agents vulnerable to Log4Shell",
     "widgets":[
        {
           "id":5308871420916506,
