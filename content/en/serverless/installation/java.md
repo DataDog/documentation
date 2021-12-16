@@ -41,7 +41,7 @@ Your `pom.xml` file will contain a section like this.
 </dependency>
 ```
 
-Find this section and change the `VERSION` to the latest release (omitting the preceeding `v`) ![Maven Central][4]
+Find this section and change the `VERSION` to the latest release (omitting the preceeding `v`) ![Maven Cental][4]
 Then redeploy your lambda function.
 
 If you do not wish to upgrade to `v1.4.x`, we are also updating `0.3.x` with the latest log4j security patches. You can find the latest `0.3.x` release [here][13]. 
@@ -58,7 +58,7 @@ dependencies {
 }
 ```
 
-Find this section and change the `VERSION` to the latest release (omitting the preceeding `v`) ![Maven Central][4]
+Find this section and change the `VERSION` to the latest release (omitting the preceeding `v`) ![Maven Cental][4]
 Then redeploy your lambda function.
 
 If you do not wish to upgrade to `v1.4.x`, we are also updating `0.3.x` with the latest log4j security patches. You can find the latest `0.3.x` release [here][13]. 
