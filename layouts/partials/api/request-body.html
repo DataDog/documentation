@@ -100,6 +100,18 @@
                                           <button class="btn text-primary js-copy-button">{{ i18n "copy" }}</button>
                                       </div>
                                       {{ with $resourcePage.Resources.Match (printf "request.%s_*.json" $operationid ) }}
+                                        <style>
+                                          #accordion .btn {
+                                            font-weight: bold;
+                                            color: #632ca6;
+                                          }
+                                          #accordion .btn.collapsed {
+                                            color: #666;
+                                          }
+                                          #accordion pre {
+                                            border-bottom: 3px solid rgba(119,0,255,.3);
+                                          }
+                                        </style>
                                         <div id="accordion">
                                         <div class="card">
                                           <div class="card-header p-0">
