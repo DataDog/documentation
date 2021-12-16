@@ -53,7 +53,7 @@ aliases:
 
       If you do not wish to upgrade to `v1.4.x`, we are also updating `0.3.x` with the latest log4j security patches. You can find the latest `0.3.x` release [here][13]. 
 
-    {{% \tab %}}
+    {{% /tab %}}
 
     {{% tab "Gradle" %}}
       Your `build.gradle` file will contain a section like this.
@@ -69,8 +69,8 @@ aliases:
 
       If you do not wish to upgrade to `v1.4.x`, we are also updating `0.3.x` with the latest log4j security patches. You can find the latest `0.3.x` release [here][13]. 
 
-    {{% \tab %}}
-  {{< \tabs>}}
+    {{% /tab %}}
+  {{< /tabs>}}
 
   If you are upgrading from 0.3.x to 1.4.x and you wish to use the `dd-trace-java` tracer, find the reference to the `dd-trace-java` lambda layer and change it to 
   
