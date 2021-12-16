@@ -135,13 +135,7 @@ $stream.Close()
 $stream.Dispose()
 ```
 
-Stop the Datadog Agent service.
-
-```powershell
-"$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" stopservice
-```
-
-Remove the JndiLogger.class from the jmxfetch.jar by running:
+Remove the JndiLogger.class from the jmxfetch.jar. Please note that this step will stop the Datadog Agent service to apply the patch. To remove the vulnerable code please run:
 
 ```powershell
 .\jndi_cleanup.ps1
