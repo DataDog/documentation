@@ -10,15 +10,11 @@ further_reading:
 
 ## Overview
 
-Your dashboards are fundamental in troubleshooting the root cause of an issue or determining an assertion to a critical question. 
+Dashboards are fundamental in troubleshooting and can be referenced in runbooks (which you can then write as a [notebook][1]), attached to a [monitor notification][2], or serve as a [status board][3]. You can start an investigation with a screenboard, document your insights in a notebook, and stay alerted by linking a monitor notification to your dashboard. 
 
-Dashboards can appear in your [notebooks][1], attached to a [monitor notification][2], or serve as a [screenboard][3]. You can start an investigation with a screenboard, document your insights in a notebook, and stay alerted by linking a monitor notification to your dashboard. 
+Use Datadog dashboards to perform an initial assessment of context-relevant data sources with products such as the Log Explorer. Dashboard widgets contain context links to relevant Datadog pages with information about the timerange, underlying queries, the series on a graph, and more. 
 
-Use Datadog dashboards to perform an initial assessment of your context-relevant data sources and explore insights in Datadog or in a third-party application.  
-
-## Dashboard widgets
-
-Dashboard widgets contain default links to relevant Datadog pages with information about the scope including the timerange, underlying queries, and the series on a graph. [Generic widgets][4] contain context links, allowing you to point to third-party applications and override the default links to customize your landing page. 
+[Generic widgets][4] contain context links which allow you to integrate follow-up actions in third-party applications, override the default dashboard links, and add links to additional Datadog products. 
 
 {{< img src="dashboards/guide/context_links/overview.mp4" alt="Context Link Demo" video="true" style="width:80%;">}}
 
@@ -26,19 +22,13 @@ This guide introduces context links and provides examples of how to create exter
 
 ## Context links
 
-When investigating an issue, you may need to access external data or perform follow-up actions in a third-party application. Context links allow you to access and trigger third-party applications through webhooks in your dashboard widgets. 
+Out-of-the-box context links contain URLs to your [Infrastructure][5], [APM][6], [Logs][7], and underlying data sources such as your RUM events from a RUM query. Context links appear in the dropdown menu when you click on or in a dashboard widget. 
 
-Out-of-the-box context links contain URLs to your underlying data and products in Datadog such as [Infrastructure][5], [APM][6], and [Logs][7]. Context links appear in the dropdown menu when you click on or in a widget in your dashboards. 
+If you have a generic widget with RUM data, the **View RUM events** link is present by default. Context links are not customizable for summary and decoration widgets.
 
-If you have a generic widget with RUM data, the **View RUM events** link is present by default. The **View RUM events** link is hidden from your dashboard in summary and decoration widgets. 
+When investigating an issue, you may need to navigate between multiple dashboards, Datadog products, and third-party applications. Context links allow you to access, perform follow-up actions, and trigger third-party applications through webhooks. 
 
-### Edit a context link
-
-Edit the list of context links on your dashboards to improve the navigation of your dashboards and investigation workflows. Click the **Edit** button on the right corner of the widget to access the list of context links under **Edit** > **Graph your data**.
-
-You can hide context links by selecting **Hide in context menu** before clicking **Save** or clicking the **Hide** button on the right corner. To see hidden context links on your dashboard, click the **Show** button on the right corner.
-
-## Create a context link
+### Create a context link
 
 To create a context link, click **+ Add a Context Link**. Optionally, click the **Settings** button on the right corner of your dashboard widget and click **Create custom links**.
 
@@ -51,13 +41,11 @@ To create a context link, click **+ Add a Context Link**. Optionally, click the 
 
 When you click on the dashboard widget, the **See Hello World** link is available in the dropdown menu.
 
-## Customize a context link
+### Customize a context link
 
-### Use template variables
+You can use template variables such as the widget filter, widget time range, dashboard template variables (if any), and the specific series of user actions (if any) in your URL.
 
-Available template variables for context links include the widget filter, widget time range, dashboard template variables (if any), and the specific series of user actions (if any). 
-
-Optionally, you can write the URL with the double brackets `{{ }}` syntax to avoid URL encoding. For example, you can use either `https://www.google.com/?q="hello world"` or `https://www.google.com%2F%3Fq%3D%22hello+world%22`.
+To avoid URL encoding, write the URL with the double brackets `{{ }}` syntax. For example, `https://www.google.com/?q="hello world"` or `https://www.google.com%2F%3Fq%3D%22hello+world%22`.
 
 When the expected URL output contains a complex pattern involving a domain name and deep URL parameters, use template variables as the values in your context link URL parameters. 
 
@@ -68,7 +56,15 @@ When the expected URL output contains a complex pattern involving a domain name 
 
 When you click on the dashboard widget, the **See Hello World** link is available in the dropdown menu.
 
-## Add a context link to a third-party application
+### Override a context link
+
+Edit your default context links to fine tune the navigation of your dashboards and investigation workflows. Click the **Edit** button on the right corner of the widget to access the list of context links under **Edit** > **Graph your data**.
+
+To hide context links, check **Hide in context menu** before clicking **Save** or clicking the **Hide** button on the right corner. To see hidden context links on your dashboard, click the **Show** button on the right corner.
+
+You can override the default context links in the [Logs Explorer][8] to navigate from your dashboard to a saved view. You can also reinterpret the value from another context in the [RUM Explorer][9] by setting the `client.ip` of an HTTP call in RUM as the `source.ip` of a network flow. 
+
+## Link to a third-party application
 
 You can add a context link from your host dashboard to pages in third-party applications such as your AWS EC2 instance summary or your Customer Support Center user profile in Zendesk.
 
@@ -106,13 +102,7 @@ When you click on your dashboard widget, the **Zendesk User page** link sends yo
 
 ## Trigger a webhook
 
-To start a runbook, see the [Azure Automation documentation][8].
-
-## Override a context link
-
-In the [Logs Explorer][9], you can override the default links with a saved view. 
-
-You can also reinterpret the value from another context in the [RUM Explorer][10] by setting the `client.ip` of an HTTP call in RUM as the `source.ip` of a network flow. 
+To start a runbook, see the [Azure Automation documentation][10].
 
 ## Further Reading
 
@@ -120,11 +110,11 @@ You can also reinterpret the value from another context in the [RUM Explorer][10
 
 [1]: /notebooks/
 [2]: /monitors/notify
-[3]: /dashboards/dashboards/
+[3]: /dashboards/screenboards/
 [4]: /dashboards/widgets/
 [5]: /infrastructure/
 [6]: /tracing/
 [7]: /logs/
-[8]: https://docs.microsoft.com/en-us/azure/automation/automation-webhooks
-[9]: https://app.datadoghq.com/logs
-[10]: https://app.datadoghq.com/rum/explorer
+[8]: https://app.datadoghq.com/logs
+[9]: https://app.datadoghq.com/rum/explorer
+[10]: https://docs.microsoft.com/en-us/azure/automation/automation-webhooks
