@@ -70,7 +70,9 @@ Select **Save & Exit** to save your new SLO.
 
 {{< img src="monitors/service_level_objectives/aggregate_slo.jpg" alt="SLO detail showing 99 percent green with 8 groups aggregated"  >}}
 
-Datadog calculates the overall status as the percentage of the time where **all** monitors or **all** the calculated groups in a single multi-alert monitor are in the `OK` state. Datadog does not calculate the average of the aggregated monitors or the aggregated groups.
+Datadog calculates the overall status as the percentage of the time where **all** monitors or **all** the calculated groups in a single multi-alert monitor are NOT in the `ALERT` state. Datadog does not calculate the average of the aggregated monitors or the aggregated groups. 
+
+Monitor-based SLOs treat the `WARN` state as `OK`. The definition of an SLO requires a binary distinction between good and bad behavior. SLO calculations treat `WARN` as good behavior, since `WARN` is not severe enough to indicate bad behavior.
 
 Consider the following example for a monitor-based SLO containing 3 monitors. The calculation for a monitor-based SLO based on a single multi-alert monitor would look similar.
 
@@ -98,11 +100,16 @@ For more information on Synthetic test alerting conditions, see the Synthetic Mo
 
 When a monitor is resolved manually or as a result of the **_After x hours automatically resolve this monitor from a triggered state_** setting, SLO calculations do not change. If these are important tools for your workflow, consider cloning your monitor, removing auto-resolve settings and `@-notification` settings, and using the clone for your SLO.
 
-Datadog recommends against using monitors with `Alert Recovery Threshold` and `Warning Recovery Threshold` as they can also affect your SLO calculations and do not allow you to cleanly differentiate between a SLI's good behavior and bad behavior.
+Datadog recommends against using monitors with `Alert Recovery Threshold` and `Warning Recovery Threshold` to underlie an SLO. These settings make it difficult to cleanly differentiate between an SLI's good behavior and bad behavior.
 
 Muting a monitor has no effect on the SLO calculation.
 
 To exclude time periods from an SLO calculation, use the [SLO status corrections][5] feature.
+
+### Missing data
+When you create a monitor, you choose whether it sends an alert when data is missing. This configuration affects how a monitor-based SLO calculation interprets missing data.
+
+For monitors configured to ignore missing data, time periods missing data are treated as OK by the SLO. For monitors configured to alert on missing data, time periods missing data are treated as ALERT by the SLO.
 
 ## Underlying monitor and SLO histories
 
