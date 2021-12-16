@@ -3246,10 +3246,6 @@ footer_sub:
     url: 'https://www.datadoghq.com/legal/cookies/'
     weight: 130
 api:
-  - name: Scopes
-    url: /api/latest/scopes/
-    identifier: API Scopes
-    weight: -5
   - name: Overview
     url: /api/latest/
     identifier: API overview
@@ -3258,10 +3254,15 @@ api:
     url: /api/latest/using-the-api/
     parent: API overview
     weight: 5
+  - name: Authorization Scopes
+    url: /api/latest/scopes/
+    identifier: API Scopes
+    parent: API overview
+    weight: 6
   - name: Rate Limits
     url: /api/latest/rate-limits/
     parent: API overview
-    weight: 6
+    weight: 7
     identifier: rate-limits
   - name: AWS Integration
     url: /api/latest/aws-integration/

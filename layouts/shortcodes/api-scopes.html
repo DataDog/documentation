@@ -52,8 +52,6 @@ For each scope find the common tags and group them together
   {{ $scopeGroups = ($scopeGroups | append $scope) | uniq }}
 {{ end }}
 
-<h2>Scopes</h2>
-
 {{ range $tagString, $scopeSlice := ($s.Get "tags") }}
     <h4>{{ $tagString }}</h4>
     {{ range $tag := (split $tagString ", ") }}
