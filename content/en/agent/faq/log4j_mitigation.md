@@ -45,35 +45,78 @@ fi
 zip -q -d $TARGET $JNDI_CLASS
 ```
 
-Check to see that the above step was successful by running. The command below should return no output if the class has successfully been removed.
+Check to see that the above step was successful by running the following command. 
 
 ```bash
 jar tvf /opt/datadog-agent/bin/agent/dist/jmx/jmxfetch.jar | grep JndiLookup.class
 ```
 
+The command should return no output if the class has successfully been removed.
 
 Finally, restart the Datadog Agent service with `sudo systemctl restart datadog-agent` (Linux systemd-based systems), `sudo restart datadog-agent` (Linux upstart-based systems) or from the Datadog Agent app in the menu bar (macOS).
 
 ### Windows
 
-Save the following code as a powershell script, then run the script to patch the provided jmxfetch.jar in place. 
-
+Save the following powershell code as `jndi_cleanup.ps1`. 
 
 ```powershell
+Param(
+    [Parameter(Mandatory=$false)]
+    [Switch]$Validate
+
+)
+
 [Reflection.Assembly]::LoadWithPartialName('System.IO.Compression')
 
 $zipfile = "C:\Program Files\Datadog\Datadog Agent\embedded\agent\dist\jmx\jmxfetch.jar"
 $files   = "JndiLookup.class"
 
 $stream = New-Object IO.FileStream($zipfile, [IO.FileMode]::Open)
-$mode   = [IO.Compression.ZipArchiveMode]::Update
+$update_mode   = [IO.Compression.ZipArchiveMode]::Update
+$read_mode   = [IO.Compression.ZipArchiveMode]::Read
+
+if ($Validate -eq $true) {
+	$mode = $read_mode
+} else {
+	$mode = $update_mode
+}
+
 $zip    = New-Object IO.Compression.ZipArchive($stream, $mode)
 
-($zip.Entries | ? { $files -contains $_.Name }) | % { $_.Delete() }
+if ($Validate -eq $true) {
+	$found = New-Object System.Collections.Generic.List[System.Object]
+	($zip.Entries | ? { $files -contains $_.Name }) | % { $found.Add($_.Name) }
+
+    if ($found.Count -eq 0) { 
+        Write-Output "The $zipfile is now safe to run." 
+    } else { 
+        Write-Output "Dangerous file strill present, something failed during the JNDI cleanup."
+    }
+} else {
+	($zip.Entries | ? { $files -contains $_.Name }) | % { $_.Delete() }
+}
 
 $zip.Dispose()
 $stream.Close()
 $stream.Dispose()
+```
+
+Remove the JndiLogger.class from the jmxfetch.jar by running:
+
+```powershell
+.\jndi_cleanup.ps1 
+```
+
+Validate the JndiLogger.class was removed by running:
+
+```powershell
+.\jndi_cleanup.ps1 -Validate
+```
+
+If the operation was successful the expected out is:
+
+```
+The C:\Program Files\Datadog\Datadog Agent\embedded\agent\dist\jmx\jmxfetch.jar is now safe to run.
 ```
 
 Finally, restart the Datadog Agent service to apply the changes.
