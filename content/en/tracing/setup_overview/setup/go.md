@@ -72,11 +72,11 @@ See all available options in the [configuration documentation][8].
 
 `DD_AGENT_HOST`
 : **Default**: `localhost` <br>
-Override the address of the trace Agent host that the default tracer attempts to submit traces to.
+Override the default trace Agent host address for trace submission.
 
 `DD_DOGSTATSD_PORT`
 : **Default**: `8125` <br>
-Override the port that the default tracer submits DogStatsD metrics to.
+Override the default trace Agent port for DogStatsD metric submission.
 
 `DD_TAGS`
 : **Default**: [] <br>
@@ -84,7 +84,7 @@ A list of default tags to be added to every span and profile. Tags can be separa
 
 `DD_TRACE_STARTUP_LOGS`
 : **Default**: `true` <br>
-Enable startup configuration and diagnostic log
+Enable startup configuration and the diagnostic log.
 
 `DD_TRACE_DEBUG`
 : **Default**: `false` <br>
