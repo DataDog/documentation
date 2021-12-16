@@ -90,7 +90,7 @@ Machines virtuelles Nutanix par RapDev
 ## Assistance
 Pour obtenir de l'aide ou demander l'ajout d'une fonctionnalité, contactez RapDev.io aux coordonnées suivantes :
 
-- E-mail : integrations@rapdev.io
+- E-mail : datadog-engineering@rapdev.io
 - Chat : RapDev.io/products
 - Téléphone : 855-857-0222
 
