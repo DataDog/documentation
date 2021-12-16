@@ -20,10 +20,16 @@ aliases:
 ## Upgrading
 
 <div class="alert alert-warning">
-As you may be aware, it was recently announced by the Apache Foundation that log4j, a popular Java logging library, is <a href="https://www.datadoghq.com/log4j-vulnerability/
+  As you may be aware, it was recently announced by the Apache Foundation that log4j, a popular Java logging library, is <a href="https://www.datadoghq.com/log4j-vulnerability/
 "> vulnerable to remote code execution</a>.
+  Some versions of `datadog-lambda-java` include a transitive dependency on log4j that may be vulnerable. The vulnerable versions are:
 
-Some versions of `datadog-lambda-java` include a transitive dependency on log4j that may be vulnerable. The vulnerable versions are `<=0.3.3` and `1.4.0`. See below for instructions for upgrading to the latest versions of `datadog-lambda-java`.
+<ul>
+<li>`<=0.3.3`</li>
+<li>`1.4.0`</li>
+</ul>
+
+See below for instructions for upgrading to the latest versions of `datadog-lambda-java`.
 </div>
 
 <details>
