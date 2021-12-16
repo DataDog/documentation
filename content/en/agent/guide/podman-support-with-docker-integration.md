@@ -15,7 +15,7 @@ Podman is an alternative to Docker as it provides a Docker-compatible CLI interf
 
 ## Agent deployment as a podman container
 
-To deploy the Agent as a Podman container, the command to run is very similar to the one used for [Docker][3].
+To deploy the Agent as a Podman container, the command to run is similar to the one used for [Docker][3].
 
 ```
 $ podman run -d --name dd-agent \

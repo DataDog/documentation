@@ -255,7 +255,7 @@ To see all configuration options available in Openmetrics, see the [conf.yaml.ex
 You can improve your OpenMetrics check by including default values for additional configuration options:
 
 `exclude_metrics`
-: Some metrics are ignored because they are duplicates or introduce a very high cardinality. Metrics included in this list are silently skipped without an `Unable to handle metric` debug line in the logs.
+: Some metrics are ignored because they are duplicates or introduce a high cardinality. Metrics included in this list are silently skipped without an `Unable to handle metric` debug line in the logs.
 In order to exclude all metrics but the ones matching a specific filter, you can use a negative lookahead regex like: ` - ^(?!foo).*$`
 
 `share_labels`

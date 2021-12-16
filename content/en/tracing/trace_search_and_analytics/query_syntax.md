@@ -37,7 +37,7 @@ further_reading:
 
 ## Search bar
 
-All search parameters are contained in the url of the page, so it is very simple to share your view.
+All search parameters are contained in the url of the page, which can be helpful for sharing your view.
 
 ### Search syntax
 

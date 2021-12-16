@@ -21,7 +21,7 @@ Prerequisite: Python and `pip` installed on your localhost. Windows users see [I
 
     c. Optionally, replace `*` with a host to filter the data. A list of your hosts is displayed in the [Datadog Infrastructure List][6].
 
-    d. Optionally, change the time period to collect the data. The current setting is 3600 seconds (one hour). **Note**: If you run this too aggressively, you may hit the [Datadog API limits][7].
+    d. Optionally, change the time period to collect the data. The current setting is 3600 seconds (one hour). **Note**: If you run this too aggressively, you may reach the [Datadog API limits][7].
 
     e. Save your file and confirm its location.
 
