@@ -7,7 +7,71 @@ If you are using the Datadog Agent between versions v7.17.0/v6.17.0 and v7.32.2/
 
 **If you are on an impacted version, to mitigate the vulnerability, the best option is to upgrade your Datadog Agent to v7.32.3 (v6.32.3) or later.** 
 
-If you are not able to upgrade your Agent at this time, use these instructions to implement an environment variable (`LOG4J_FORMAT_MSG_NO_LOOKUPS="true"` on the JMXFetch process or the Agent process) to partially mitigate the vulnerability: 
+If you are not able to upgrade your Agent at this time, you can use these instructions either [delete the JndiLookup.class](#delete-jndilookupclass) or to [implement an environment variable](#set-log4j_format_msg_no_lookups-environment-variable) (`LOG4J_FORMAT_MSG_NO_LOOKUPS="true"` on the JMXFetch process or the Agent process) to partially mitigate the vulnerability. 
+
+# Delete JndiLookup.class
+
+**If you are on an impacted version, to mitigate the vulnerability, the best option is to upgrade your Datadog Agent to v7.32.3 (v6.32.3) or later.** 
+
+**Note**: This mitigation is not needed for 7.32.3/6.32.3 since in these versions, JMXFetch uses log4j v2.12.2, which is not affected by CVE-2021-45046 or CVE-2021-44228.
+
+### Linux and MACOS
+
+Save the following code as a bash script, then run the script to patch the provided jmxfetch.jar in place. 
+
+```bash
+#!/bin/bash
+
+YUM_CMD=$(which yum)
+APT_GET_CMD=$(which apt-get)
+
+TARGET="/opt/datadog-agent/bin/agent/dist/jmx/jmxfetch.jar"
+JNDI_CLASS="org/apache/logging/log4j/core/lookup/JndiLookup.class"
+
+set -e
+
+if ! command -v zip &> /dev/null;
+then
+    if [[ ! -z $YUM_CMD ]]; then
+       yum install zip
+    elif [[ ! -z $APT_GET_CMD ]]; then
+       apt-get update
+       apt-get -y install zip
+    fi
+fi
+
+zip -q -d $TARGET $JNDI_CLASS
+```
+
+### Windows
+
+Save the following code as a powershell script, then run the script to patch the provided jmxfetch.jar in place. 
+
+
+```powershell
+[Reflection.Assembly]::LoadWithPartialName('System.IO.Compression')
+
+$zipfile = "C:\Program Files\Datadog\Datadog Agent\embedded\agent\dist\jmx\jmxfetch.jar"
+$files   = "JndiLookup.class"
+
+$stream = New-Object IO.FileStream($zipfile, [IO.FileMode]::Open)
+$mode   = [IO.Compression.ZipArchiveMode]::Update
+$zip    = New-Object IO.Compression.ZipArchive($stream, $mode)
+
+($zip.Entries | ? { $files -contains $_.Name }) | % { $_.Delete() }
+
+$zip.Dispose()
+$stream.Close()
+$stream.Dispose()
+```
+
+### AIX
+
+`Jmxfetch.jar` is included in the AIX agent install bundle, but there is no code in the AIX agent that runs the `jmxfetch` code. If you are not manually starting the `jmxfetch` process, the `jmxfetch.jar` is not used and can be deleted from `/opt/datadog-agent/bin/agent/dist/jmx/jmxfetch.jar`.
+
+# Set LOG4J_FORMAT_MSG_NO_LOOKUPS Environment Variable
+
+**If you are on an impacted version, to mitigate the vulnerability, the best option is to upgrade your Datadog Agent to v7.32.3 (v6.32.3) or later.** 
 
 **Note**: If you are running v7.32.2 or v6.32.2, you do not need to perform these steps. The Agent v7.32.2 (and v6.32.2) [starts jmxfetch with a property](https://github.com/DataDog/datadog-agent/blob/main/CHANGELOG.rst#7322--6322) that achieves the same result. In all cases, the best option is to upgrade your Datadog Agent to v7.32.3 (v6.32.3) or later.
 
