@@ -24,12 +24,12 @@ further_reading:
 ## Supported .NET Core runtimes
 The .NET Tracer supports automatic instrumentation on the following .NET Core versions. It also supports [.NET Framework][2].
 
-| Version              | Microsoft End of Life |
-| -------------------- | --------------------- |
-| .NET 6               |                       |
-| .NET 5               |                       |
-| .NET Core 3.1        | 12/03/2022            |
-| .NET Core 2.1        | 08/21/2021            |
+| Version              | Microsoft End of Life | APM Supported in 1.x | APM Supported in 2.x |
+| -------------------- | --------------------- | -------------------- | -------------------- |
+| .NET 6               |                       | No                   | Yes                  |
+| .NET 5               |                       | Yes                  | Yes                  |
+| .NET Core 3.1        | 12/03/2022            | Yes                  | Yes                  |
+| .NET Core 2.1        | 08/21/2021            | Yes                  | Yes                  |
 
  Additional information on .NET Core support policy can be found within [Microsoft's .NET Core Lifecycle Policy][3]. 
 
