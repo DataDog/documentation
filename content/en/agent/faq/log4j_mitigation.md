@@ -3,11 +3,15 @@ title: Mitigating the Risk of Remote Code Execution Due to Log4Shell
 kind: faq
 ---
 
-If you are using the Datadog Agent between versions v7.17.0/v6.17.0 and v7.32.1/v6.32.1, you may be impacted by the vulnerability presented by Log4Shell (CVE-2021-44228). If you are using an Agent earlier than v7.17.0/v6.17.0, you should not be impacted by the vulnerability unless you configured log4j to log with the JMS Appender (an option that is not supported by the Agent, but if you did it, disable the appender).
+If you are using the Datadog Agent between versions v7.17.0/v6.17.0 and v7.32.2/v6.32.2, you may be impacted by the vulnerability presented by Log4Shell (CVE-2021-44228). If you are using an Agent earlier than v7.17.0/v6.17.0, you should not be impacted by the vulnerability unless you configured log4j to log with the JMS Appender (an option that is not supported by the Agent, but if you did it, disable the appender).
 
-**If you are on an impacted version, to mitigate the vulnerability, the best option is to upgrade your Datadog Agent to v7.32.2 (v6.32.2) or later.** 
+**If you are on an impacted version, to mitigate the vulnerability, the best option is to upgrade your Datadog Agent to v7.32.3 (v6.32.3) or later.** 
 
-If you are not able to upgrade your Agent at this time, use these instructions to implement an environment variable (`LOG4J_FORMAT_MSG_NO_LOOKUPS="true"` on the JMXFetch process or the Agent process) to mitigate the vulnerability: 
+If you are not able to upgrade your Agent at this time, use these instructions to implement an environment variable (`LOG4J_FORMAT_MSG_NO_LOOKUPS="true"` on the JMXFetch process or the Agent process) to partially mitigate the vulnerability: 
+
+**Note**: If you are running v7.32.2 or v6.32.2, you do not need to perform these steps. The Agent v7.32.2 (and v6.32.2) [starts jmxfetch with a property](https://github.com/DataDog/datadog-agent/blob/main/CHANGELOG.rst#7322--6322) that achieves the same resut. In all cases, the best option is to upgrade your Datadog Agent to v7.32.3 (v6.32.3) or later.
+
+**Note**: Setting the LOG4J_FORMAT_MSG_NO_LOOKUPS environment variable to true will reduce the risk of remote code execution but it is not a complete mitigation.
 
 ## Host installs
 
@@ -50,7 +54,7 @@ Instructions are different depending on the Linux distribution:
 
 **Note**: Use `start` and `stop`, because `restart` does not pick up the service configuration change.
 
-**Note**: The `/etc/init/datadog-agent.conf` file is overwritten when the Agent is re-installed, upgraded, or downgraded, you must run these steps again if you upgrade, downgrade, or reinstall the Agent until you upgrade the Agent to v7.32.2/v6.32.2 or above.
+**Note**: The `/etc/init/datadog-agent.conf` file is overwritten when the Agent is re-installed, upgraded, or downgraded, you must run these steps again if you upgrade, downgrade, or reinstall the Agent until you upgrade the Agent to v7.32.3/v6.32.3 or above.
 
 ### Windows
 
@@ -71,6 +75,8 @@ If you are manually running the `jmxfetch.jar`, pass the following flag to the J
 
 
 ## Containerized Agent
+
+**Note**: Setting the LOG4J_FORMAT_MSG_NO_LOOKUPS environment variable to true will reduce the risk of remote code execution but it is not a complete mitigation.
 
 ### Docker (Linux and Windows)
 
