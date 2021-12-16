@@ -35,7 +35,7 @@ For configuration instructions and details about using the API, see the Datadog 
 
 For a description of the terminology used in APM, see the [Getting started with APM section][3]. For details about contributing, check the official repository [README.md][4].
 
-Consult the [migration document][5] if you need to migrate from an older version of the tracer (e.g. v<0.6.x) to the newest version.
+Use the [migration document][5] if you need to migrate from an older version of the tracer (for example, v<0.6.x) to the newest version.
 
 When you set up tracing, you're also setting up Continuous Profiler, and you need only [enable Profiler][6] to start receiving profiling data from your app.
 
@@ -43,7 +43,7 @@ When you set up tracing, you're also setting up Continuous Profiler, and you nee
 
 #### Follow the in-app documentation (recommended)
 
-Follow the [Quickstart instructions][7] within the Datadog app for the best experience, including:
+Follow the [Quickstart instructions][7] within the Datadog for the best experience, including:
 
 - Step-by-step instructions scoped to your deployment configuration (hosts, Docker, Kubernetes, or Amazon ECS).
 - Dynamically set `service`, `env`, and `version` tags.

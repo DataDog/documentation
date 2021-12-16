@@ -104,7 +104,7 @@ If one of your Synthetic tests is throwing a 401, it most likely means that it i
   * **Token based authentication**: extract your token with a first [HTTP test][7], create a [global variable][9] by parsing the response of that first test, and re-inject that variable in a second [HTTP][7] or [Browser test][10] requiring the authentication token.
   * **Session based authentication**: add the required headers or cookies in the **Advanced options** of your [HTTP][7] or [Browser test][8].
   
-* Is this endpoint using **query parameters for authentication** (e.g. do you need to add a specific API key in your URL parameters?)
+* Is this endpoint using **query parameters for authentication** (for example, do you need to add a specific API key in your URL parameters?)
 
 * Is this endpoint using **IP-based authentication**? If so, you might need to allow part or all of the [IPs from which Synthetic tests originate][11].
 

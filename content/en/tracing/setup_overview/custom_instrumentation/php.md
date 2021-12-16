@@ -487,7 +487,7 @@ use DDTrace\SpanData;
 
 ### Tracing internal functions and methods
 
-An optimization was added starting in **0.46.0** to ignore all internal functions and methods for instrumentation. Internal functions and methods can still be instrumented by setting the `DD_TRACE_TRACED_INTERNAL_FUNCTIONS` environment variable. This takes a CSV of functions or methods that will be instrumented e.g. `DD_TRACE_TRACED_INTERNAL_FUNCTIONS=array_sum,mt_rand,DateTime::add`. Once a function or method has been added to the list, it can be instrumented using `DDTrace\trace_function()` and `DDTrace\trace_method()` respectively.
+An optimization was added starting in **0.46.0** to ignore all internal functions and methods for instrumentation. Internal functions and methods can still be instrumented by setting the `DD_TRACE_TRACED_INTERNAL_FUNCTIONS` environment variable. This takes a CSV of functions or methods that is to be instrumented. For example, `DD_TRACE_TRACED_INTERNAL_FUNCTIONS=array_sum,mt_rand,DateTime::add`. Once a function or method has been added to the list, it can be instrumented using `DDTrace\trace_function()` and `DDTrace\trace_method()` respectively.
 
 ### Running the tracing closure before the instrumented call
 
@@ -552,7 +552,7 @@ resources.ddtrace = true
 
 ### PHP code optimization
 
-Prior to PHP 7, some frameworks provided ways to compile PHP classes—e.g., through the Laravel's `php artisan optimize` command.
+Prior to PHP 7, some frameworks provided ways to compile PHP classes (for example, through the Laravel's `php artisan optimize` command).
 
 While this [has been deprecated][9] if you are using PHP 7.x, you still may use this caching mechanism in your app prior to version 7.x. In this case, Datadog suggests you use the [OpenTracing][10] API instead of adding `datadog/dd-trace` to your Composer file.
 

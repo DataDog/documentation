@@ -120,8 +120,8 @@ For Terraform users, you can provision and manage your triggers using the [aws_c
 ```conf
 resource "aws_cloudwatch_log_subscription_filter" "datadog_log_subscription_filter" {
   name            = "datadog_log_subscription_filter"
-  log_group_name  = <CLOUDWATCH_LOG_GROUP_NAME> # e.g., /aws/lambda/my_lambda_name
-  destination_arn = <DATADOG_FORWARDER_ARN> # e.g., arn:aws:lambda:us-east-1:123:function:datadog-forwarder
+  log_group_name  = <CLOUDWATCH_LOG_GROUP_NAME> # for example, /aws/lambda/my_lambda_name
+  destination_arn = <DATADOG_FORWARDER_ARN> # for example,  arn:aws:lambda:us-east-1:123:function:datadog-forwarder
   filter_pattern  = ""
 }
 ```

@@ -209,7 +209,7 @@ It's useful to add additional context data to your logs and events. Monolog make
   $logger->info('Adding a new user', array('username' => 'Seldaek'));
 ```
 
-Monolog comes with a pre-processor feature. It's a simple callback that enriches your events with metadata you can set (e.g., the session id, the request id, etc.):
+Monolog comes with a pre-processor feature. It's a simple callback that enriches your events with metadata you can set (for example, the session ID, or the request id):
 
 ```php
  <?php

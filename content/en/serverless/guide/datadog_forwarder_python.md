@@ -323,7 +323,7 @@ Subscribe the Datadog Forwarder Lambda function to each of your functions' log g
 
 You can either install the Datadog Lambda library as a layer (recommended) or Python package.
 
-The minor version of the `datadog-lambda` package always matches the layer version. E.g., datadog-lambda v0.5.0 matches the content of layer version 5.
+The minor version of the `datadog-lambda` package always matches the layer version. For example, datadog-lambda v0.5.0 matches the content of layer version 5.
 
 #### Using the layer
 

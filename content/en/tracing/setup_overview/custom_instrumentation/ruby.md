@@ -172,7 +172,7 @@ To trace any Ruby code, you can use the `Datadog.tracer.trace` method:
 Datadog.tracer.trace(name, options) do |span|
   # Wrap this block around the code you want to instrument
   # Additionally, you can modify the span here.
-  # e.g. Change the resource name, set tags, etc...
+  # for example, change the resource name, or set tags
 end
 ```
 

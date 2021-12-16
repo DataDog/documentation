@@ -195,7 +195,7 @@ resolvers my-dns
     hold obsolete 60s
 
 # This declares the endpoint where your Agents connects for
-# sending metrics (e.g. the value of "dd_url").
+# sending metrics (for example, the value of "dd_url").
 frontend metrics-forwarder
     bind *:3834
     mode http
@@ -206,7 +206,7 @@ frontend metrics-forwarder
     use_backend datadog-flare if { path_beg -i  /support/flare/ }
 
 # This declares the endpoint where your Agents connects for
-# sending traces (e.g. the value of "endpoint" in the APM
+# sending traces (for example, the value of "endpoint" in the APM
 # configuration section).
 frontend traces-forwarder
     bind *:3835
@@ -215,7 +215,7 @@ frontend traces-forwarder
     default_backend datadog-traces
 
 # This declares the endpoint where your agents connects for
-# sending processes (e.g. the value of "url" in the process
+# sending processes (for example, the value of "url" in the process
 # configuration section).
 frontend processes-forwarder
     bind *:3836
@@ -373,7 +373,7 @@ resolvers my-dns
     hold obsolete 60s
 
 # This declares the endpoint where your Agents connects for
-# sending metrics (e.g. the value of "dd_url").
+# sending metrics (for example, the value of "dd_url").
 frontend metrics-forwarder
     bind *:3834
     mode http
@@ -384,7 +384,7 @@ frontend metrics-forwarder
     use_backend datadog-flare if { path_beg -i  /support/flare/ }
 
 # This declares the endpoint where your Agents connects for
-# sending traces (e.g. the value of "endpoint" in the APM
+# sending traces (for example, the value of "endpoint" in the APM
 # configuration section).
 frontend traces-forwarder
     bind *:3835
@@ -393,7 +393,7 @@ frontend traces-forwarder
     default_backend datadog-traces
 
 # This declares the endpoint where your agents connects for
-# sending processes (e.g. the value of "url" in the process
+# sending processes (for example, the value of "url" in the process
 # configuration section).
 frontend processes-forwarder
     bind *:3836
