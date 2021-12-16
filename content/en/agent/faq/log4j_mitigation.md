@@ -69,6 +69,8 @@ $stream.Close()
 $stream.Dispose()
 ```
 
+Finally, restart the Datadog Agent service to apply the changes.
+
 ### AIX
 
 `Jmxfetch.jar` is included in the AIX agent install bundle, but there is no code in the AIX agent that runs the `jmxfetch` code. If you are not manually starting the `jmxfetch` process, the `jmxfetch.jar` is not used and can be deleted from `/opt/datadog-agent/bin/agent/dist/jmx/jmxfetch.jar`.
