@@ -49,7 +49,7 @@ Moogsoft supports the ingesting of Datadog Events via Webhooks.  Below you will 
 {{< img src="monitors/faq/header.png" alt="header"  >}}
 
 6. Click Install Integration to validate the Webhook endpoint and enable.
-7. You are ready to add this Webhook to any of your Datadog Monitors via the @notification (i.e. @webhook-Moogsoft):
+7. Add this Webhook to any of your Datadog Monitors with the @notification (as in, @webhook-Moogsoft):
 {{< img src="monitors/faq/notification.png" alt="notification"  >}}
 
 Thank you to the Moogsoft team for writing the original article: https://docs.moogsoft.com/display/060102/Datadog+Solution+Pak

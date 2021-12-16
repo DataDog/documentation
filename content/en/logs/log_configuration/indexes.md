@@ -123,8 +123,8 @@ To add retentions that are not in your current contract contact [Datadog support
 
 ## Set daily quota
 
-You can set a daily quota to hard-limit the number of logs that are stored within an Index per day. This quota is applied for all logs that should have been stored (i.e. after exclusion filters are applied).
-Once the daily quota is reached, logs are no longer indexed but are still available in the [livetail][18], [sent to your archives][10], and used to [generate metrics from logs][9].
+You can set a daily quota to hard-limit the number of logs that are stored within an Index per day. This quota is applied for all logs that should have been stored (such as after exclusion filters are applied).
+After the daily quota is reached, logs are no longer indexed but are still available in the [livetail][18], [sent to your archives][10], and used to [generate metrics from logs][9].
 
 Update or remove this quota at any time when editing the Index:
 
