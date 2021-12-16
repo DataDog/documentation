@@ -69,15 +69,20 @@ exit 0;
 
 ```
 
+Make the script executable:
+```bash
+chmod +x ./jndi_cleanup.sh
+```
+
 Remove the JndiLogger.class from the jmxfetch.jar by running:
 
-```powershell
+```bash
 sudo ./jndi_cleanup.sh
 ```
 
 Validate the JndiLogger.class was removed by running:
 
-```powershell
+```bash
 .\jndi_cleanup.sh -c
 ```
 
