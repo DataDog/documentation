@@ -32,7 +32,7 @@ The canonical hostname is chosen according to the following rules. The first mat
 3. **instance-id**: If the Agent can reach the EC2 metadata endpoint from the host.
 4. **hostname**: Fall back on the DNS hostname even if it is an EC2 default.
 
-If the name is recognized as obviously non-unique (example: `localhost.localdomain`), the current rule fails and passes through to the next.
+If the name is recognized as a common non-unique name (for example, `localhost.localdomain`), the current rule fails and passes through to the next.
 
 ### AWS hosts
 

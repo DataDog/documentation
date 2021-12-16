@@ -325,7 +325,7 @@ Hosts that are running the integration, but where the integration is not enabled
 
 {{< img src="infrastructure/process/integration_views.png" alt="Integration Views" >}}
 
-Once a third-party software has been detected, Live Processes makes it quick and easy to analyze the performance of that software.
+After a third-party software has been detected, Live Processes helps to analyze the performance of that software.
 1. To start, click on *Views* at the top right of the page to open a list of pre-set options, including Nginx, Redis, and Kafka.
 2. Select a view to scope the page to only the processes running that software.
 3. When inspecting a heavy process, shift to the *Integration Metrics* tab to analyze the health of the software on the underlying host. If you have already enabled the relevant Datadog integration, you can view all performance metrics collected from the integration to distinguish between a host-level and software-level issue. For instance, seeing correlated spikes in process CPU and MySQL query latency may indicate that an intensive operation, such as a full table scan, is delaying the execution of other MySQL queries relying on the same underlying resources.
@@ -334,7 +334,7 @@ You can customize integration views (for example, when aggregating a query for N
 
 ## Processes across the platform
 
-{{< img src="infrastructure/process/process_platform.gif" alt="Processes across the Platform" >}}
+{{< img src="infrastructure/process/process_platform.mp4" alt="Processes across the Platform" video=true >}}
 
 ### Live containers
 
@@ -350,7 +350,7 @@ When you inspect a dependency in the [Network Overview][11], you can view proces
 
 ## Real-time monitoring
 
-While actively working with the Live Processes, metrics are collected at 2s resolution. This is important for highly volatile metrics such as CPU. In the background, for historical context, metrics are collected at 10s resolution.
+While actively working with the Live Processes, metrics are collected at 2s resolution. This is important for volatile metrics such as CPU. In the background, for historical context, metrics are collected at 10s resolution.
 
 ## Additional information
 

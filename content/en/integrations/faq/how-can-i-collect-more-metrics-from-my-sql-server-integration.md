@@ -7,7 +7,9 @@ kind: faq
 
 By default, the SQL Server integration only collects [the metrics listed in the documentation page][1]. But you can collect additional metrics from your SQL Server integration by configuring your `sqlserver.d/conf.yaml` following [the syntax in our example file][2] (these goes under "init_config").
 
-Note that, at this time, our sqlserver check only queries data from the [sys.dm_os_performance_counters][3] table (although you can [use WMI to expose metrics][4] from other counter tables). So the trick to collecting specific is to find which counter_name and (if appropriate) instance_name correspond to the kind of metric you're interested in collecting. To get a list of what count_names are available in that table in your SQL Server, once you access your server from [powershell's sqlcmd][5], you can run the following or similar query (just know that it gives you a very long list indeed):
+At this time, the Datadog sqlserver check only queries data from the [sys.dm_os_performance_counters][3] table, although you can [use WMI to expose metrics][4] from other counter tables. To collect specific data, find `counter_name` and, when applicable, `instance_name` to correspond to the metric you're interested in collecting. Once you access your server from [powershell's sqlcmd][5], run the following or similar query to get a list of what `count_names` are available in that table in your SQL Server. 
+
+**Note**: This returns a long list.
 
 ```text
 1> SELECT counter_name, instance_name, cntr_value, cntr_type FROM sys.dm_os_performance_counters;

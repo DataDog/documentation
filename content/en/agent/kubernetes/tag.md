@@ -62,8 +62,6 @@ The Agent can autodiscover and attach tags to all data emitted by the entire pod
 
 </div>
 
-**Note:** To apply these [Out-Of-The-Box tags](?tab=containerizedagent#out-of-the-box-tags) to custom metrics sent over UDS, [Origin Detection](?tab=host#origin-detection) needs to be enabled. To properly detect the origin for DogStatsD metrics and to tag appropriately set  'useHostPID: true' in your deployment file. 
-
 
 ### Host tag
 

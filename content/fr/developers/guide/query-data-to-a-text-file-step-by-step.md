@@ -4,9 +4,9 @@ kind: guide
 aliases:
   - /fr/developers/faq/query-data-to-a-text-file-step-by-step
 ---
-Cet article explique comment configurer un environnement afin de tirer le meilleur parti de l'API Datadog. Après avoir lu ce guide, vous pourrez récupérer des événements, des métriques et des monitors depuis l'[API publique de Datadog][1] ou les enregistrer dans un fichier local.
+Cet article explique comment configurer un environnement afin de tirer le meilleur parti de l'API Datadog. Il détaille également la marche à suivre pour récupérer des événements, des métriques et des monitors depuis l'[API publique de Datadog][1] et les enregistrer dans un fichier local.
 
-Prérequis : Python et `pip` doivent être installés sur votre localhost. Si vous utilisez Windows, consultez la [documentation relative à Python][2].
+Prérequis : Python et `pip` doivent être installés sur votre localhost. Si vous utilisez Windows, consultez la section [Installer Python 2 sous Windows][2] (en anglais).
 
 1. Ouvrez un terminal.
 2. Vérifiez le répertoire suivant : `pwd` sur macOS, ou `dir` sur Windows.
@@ -16,9 +16,9 @@ Prérequis : Python et `pip` doivent être installés sur votre localhost. Si v
 
     a. Remplacez `<YOUR_DD_API_KEY>` et `<YOUR_DD_APP_KEY>` par vos [clés d'API et d'application Datadog][4].
 
-    b. Remplacez `system.cpu.idle` par la métrique que vous souhaitez récupérer. Vous pouvez consulter la liste de vos métriques sur la [page Metric Summary de Datadog][5].
+    b. Remplacez `system.cpu.idle` par la métrique que vous souhaitez récupérer. Vous pouvez consulter la liste de vos métriques dans le [Metric Summary de Datadog][5].
 
-    c. Vous pouvez également remplacer `*` par un host de façon à filtrer les données. Vous pouvez consulter la liste de vos hosts sur la [page Infrastructure list de Datadog][6].
+    c. Vous pouvez également remplacer `*` par un host de façon à filtrer les données. Vous pouvez consulter la liste de vos hosts dans la [liste d'infrastructures de Datadog][6].
 
     d. Vous pouvez également modifier la période afin de recueillir les données correspondantes. La valeur par défaut est 3 600 secondes (une heure). **Remarque** : si vous choisissez une valeur trop extrême, vous risquez d'atteindre les [limites de l'API Datadog][7].
 
@@ -32,14 +32,14 @@ Une fois ces étapes réalisées :
 4. Exécutez `pip install datadog` pour installer le [paquet de l'API Datadog][9]. Cela permet au fichier Python d'interagir avec l'API Datadog.
 5. Dans le terminal, exécutez le script `python api_query_data.py`.
 
-Si tout fonctionne, des données apparaissent dans le terminal et le `out.txt` est créé dans votre dossier.
+Si tout fonctionne, vos données apparaissent dans le terminal et le fichier `out.txt` est créé dans votre dossier.
 
-Pour voir d'autres exemples, consultez notre [documentation relative à l'API][1].
+Pour voir d'autres exemples, consultez la [documentation relative à l'API][1].
 
 [1]: /fr/api/
 [2]: http://docs.python-guide.org/en/latest/starting/install/win
 [3]: /resources/python/api_query_data.py
-[4]: https://app.datadoghq.com/account/settings#api
+[4]: https://app.datadoghq.com/organization-settings/api-keys
 [5]: https://app.datadoghq.com/metric/summary
 [6]: https://app.datadoghq.com/infrastructure
 [7]: /fr/api/#rate-limiting

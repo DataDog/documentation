@@ -10,7 +10,7 @@ further_reading:
       text: "Troubleshooting CI"
 ---
 
-{{< site-region region="us5,gov" >}}
+{{< site-region region="gov" >}}
 <div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
@@ -59,14 +59,11 @@ module.exports = {
 2. In `testEnvironment.js`:
 
 ```javascript
-require('dd-trace').init({
-  // Only activates test instrumentation on CI
-  enabled: process.env.DD_ENV === 'ci',
-  // Name of the service or library under test
-  service: 'my-javascript-app',
-  // To guarantee test span delivery
-  flushInterval: 300000
-})
+
+// Only activates test instrumentation on CI
+if (process.env.DD_ENV === 'ci') {
+  require('dd-trace/ci/jest/env')
+}
 
 // jest-environment-jsdom is an option too
 module.exports = require('jest-environment-node')
@@ -77,7 +74,7 @@ module.exports = require('jest-environment-node')
 Run your tests as you normally do, specifying the environment where test are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable. For example:
 
 ```bash
-DD_ENV=ci npm test
+DD_ENV=ci DD_SERVICE=my-javascript-app npm test
 ```
 
 
@@ -86,57 +83,45 @@ DD_ENV=ci npm test
 
 {{% tab "Mocha" %}}
 
-Create a file in your project (for example, `init-tracer.js`) with the following contents:
-
-```javascript
-require('dd-trace').init({
-  // Only activates test instrumentation on CI
-  enabled: process.env.DD_ENV === 'ci',
-
-  // Name of the service or library under test
-  service: 'my-ui-app'
-})
-```
-
-Add `--require init-tracer` to the run command for your `mocha` tests, for example in your `package.json`:
+Add `--require dd-trace/ci/init` to the run command for your `mocha` tests, for example in your `package.json`:
 
 ```json
 "scripts": {
-  "test": "mocha --require init-tracer"
+  "test": "mocha --require dd-trace/ci/init"
 },
 ```
 
 Run your tests as you normally do, specifying the environment where test are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable. For example:
 
 ```bash
-DD_ENV=ci npm test
+DD_ENV=ci DD_SERVICE=my-javascript-app npm test
 ```
 
 {{% /tab %}}
 {{% tab "Cucumber" %}}
 
-Add `--require-module dd-trace/init` to however you normally run your `cucumber-js` tests, for example in your `package.json`:
+Add `--require-module dd-trace/ci/init` to however you normally run your `cucumber-js` tests, for example in your `package.json`:
 
 {{< code-block lang="json" filename="package.json" >}}
 "scripts": {
-  "test": "DD_SERVICE=my-ui-app cucumber-js --require-module=dd-trace/init"
+  "test": "cucumber-js --require-module=dd-trace/ci/init"
 },
 {{< /code-block >}}
 
 Run your tests as you normally do, specifying the environment where test are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable. For example:
 
 {{< code-block lang="bash" >}}
-DD_ENV=ci npm test
+DD_ENV=ci DD_SERVICE=my-javascript-app npm test
 {{< /code-block >}}
 
 {{% /tab %}}
 
 {{% tab "Cypress" %}}
 
-1. Set [`pluginsFile`][1] to `"dd-trace/cypress/plugin"`, for example through [`cypress.json`][2]:
+1. Set [`pluginsFile`][1] to `"dd-trace/ci/cypress/plugin"`, for example through [`cypress.json`][2]:
 {{< code-block lang="json" filename="cypress.json" >}}
 {
-  "pluginsFile": "dd-trace/cypress/plugin"
+  "pluginsFile": "dd-trace/ci/cypress/plugin"
 }
 {{< /code-block >}}
 
@@ -144,21 +129,21 @@ If you've already defined a `pluginsFile`, you can still initialize the instrume
 {{< code-block lang="javascript" filename="cypress/plugins/index.js" >}}
 module.exports = (on, config) => {
   // your previous code is before this line
-  require('dd-trace/cypress/plugin')(on, config)
+  require('dd-trace/ci/cypress/plugin')(on, config)
 }
 {{< /code-block >}}
 
 2. Add the following line to the [`supportFile`][3]:
 {{< code-block lang="javascript" filename="cypress/support/index.js" >}}
 // your previous code is before this line
-require('dd-trace/cypress/support')
+require('dd-trace/ci/cypress/support')
 {{< /code-block >}}
 
 
 Run your tests as you normally do, specifying the environment where test are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable. For example:
 
 {{< code-block lang="bash" >}}
-DD_ENV=ci npm test
+DD_ENV=ci DD_SERVICE=my-ui-app npm test
 {{< /code-block >}}
 
 

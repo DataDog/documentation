@@ -231,7 +231,7 @@ The Datadog UI uses tags to set span level metadata. Custom tags may be set for 
 
 {{< img src="tracing/guide/add_span_md_and_graph_it/span_md_3.png" alt="Resource Page"  style="width:90%;">}}
 
-The Trace table shows you both the overall latency distribution of all traces in the current scope (service, resource and timeframe) and links to individual traces. You can sort this table by duration or error code to easily identify erroneous operation or opportunities for optimization.
+The Trace table shows you both the overall latency distribution of all traces in the current scope (service, resource, and timeframe) and links to individual traces. You can sort this table by duration or error code to identify erroneous operation or opportunities for optimization.
 
 3) **Click into one of your traces**
 

@@ -1,5 +1,5 @@
 ---
-title: Intervalles de temps personnalisés
+title: Intervalles personnalisés
 kind: guide
 ---
 
@@ -43,15 +43,15 @@ Les intervalles de temps personnalisés fixes et relatifs sont pris en charge :
 
 ### Dates relatives
 
-| Format       | Exemples                                                        | Remarques                                               |
-|--------------|-----------------------------------------------------------------|-----------------------------------------------------|
-| `N{unit}`    | 3m<br>3 min<br>3h<br>3 hours<br>3d<br>3 days<br>3mo<br>3 months | Affiche les N dernières unités (par exemple, les 3 derniers mois) |
-| `today`      |                                                                 | Affiche le jour calendaire actuel jusqu'à maintenant         |
-| `yesterday`  |                                                                 | Affiche l'intégralité du jour calendaire précédent             |
-| `this month` |                                                                 | Affiche le mois calendaire actuel jusqu'à maintenant       |
-| `last month` |                                                                 | Affiche l'intégralité du mois calendaire précédent           |
-| `this year`  |                                                                 | Affiche l'année calendaire actuelle jusqu'à maintenant        |
-| `last year`  |                                                                 | Affiche l'intégralité de l'année calendaire précédente            |
+| Format       | Exemples                                                        | Remarques                                                     |
+|--------------|-----------------------------------------------------------------|-----------------------------------------------------------|
+| `N{unit}`    | 3m<br>3 min<br>3h<br>3 hours<br>3d<br>3 days<br>3mo<br>3 months | Affiche les N dernières unités, par exemple les 3 derniers mois |
+| `today`      |                                                                 | Affiche le jour calendaire en cours           |
+| `yesterday`  |                                                                 | Affiche l'intégralité du jour calendaire précédent                   |
+| `this month` |                                                                 | Affiche le mois calendaire en cours         |
+| `last month` |                                                                 | Affiche l'intégralité du mois calendaire précédent                 |
+| `this year`  |                                                                 | Affiche l'année calendaire en cours          |
+| `last year`  |                                                                 | Affiche l'intégralité de l'année calendaire précédente                  |
 
 * Les chaînes suivantes sont acceptées pour n'importe quelle `{unit}` dans une date relative :
   * Minutes : `m`, `min`, `mins`, `minute`, `minutes`

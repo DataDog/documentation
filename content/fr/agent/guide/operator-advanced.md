@@ -15,7 +15,7 @@ further_reading:
 
 L'utilisation de l'Operator Datadog nécessite les prérequis suivants :
 
-- **Cluster Kubernetes version >= v1.14.X** : les tests ont été réalisés sur les versions >= `1.14.0`. Néanmoins, les versions `>= v1.11.0` devraient également fonctionner. Pour les versions plus anciennes, en raison de la prise en charge limitée du CRD, il se peut que l'Operator ne fonctionne pas comme prévu.
+- **Cluster Kubernetes version >= v1.14.X** : les tests ont été réalisés sur les versions >= `1.14.0`. Néanmoins, les versions `>= v1.11.0` devraient également fonctionner. Pour les versions plus anciennes, en raison de la prise en charge limitée de la CRD, il se peut que l'Operator ne fonctionne pas comme prévu.
 - [`Helm`][2] pour le déploiement de `datadog-operator`.
 - [Interface de ligne de commande `Kubectl`][3] pour l'installation de `datadog-agent`.
 
@@ -141,4 +141,4 @@ datadog-agent-zvdbw                          1/1     Running    0          8m1s
 [7]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/datadog-agent-apm.yaml
 [8]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/datadog-agent-with-clusteragent.yaml
 [9]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/datadog-agent-with-tolerations.yaml
-[10]: https://app.datadoghq.com/account/settings#api
+[10]: https://app.datadoghq.com/organization-settings/api-keys

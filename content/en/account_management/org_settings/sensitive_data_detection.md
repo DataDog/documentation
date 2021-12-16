@@ -41,7 +41,7 @@ Sensitive data scanner can be found under [Organization Settings][1]. The Scanne
 - **Define scope:** Specify whether you want to scan the entire log event or just specific log attributes. You can also choose to skip specific attributes from the scan.
 - **Add tags:** Specify the tags you want to associate with log events where the values match the specified regex pattern. Datadog recommends using the tag `sensitive_data`. These tags can then be used in searches, dashboards, and monitors.
 - **Process matching values:** Optionally, specify whether you want to redact or hash the matching values. If you choose the redaction option, specify the placeholder text that you would like to replace the matching values so that data is redacted or hashed before it gets stored in Datadog or sent to your archive.
-- **Name the rule:** Provide an easy to understand name for the rule.
+- **Name the rule:** Provide a human-readable name for the rule.
 
 {{< img src="logs/sensitive_data_scanner/scanner_custom_rule2.png" alt="A Sensitive Data Scanner custom rule" style="width:90%;">}}
 

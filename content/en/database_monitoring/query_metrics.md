@@ -30,7 +30,7 @@ The Query Metrics view shows historical query performance for normalized queries
 
 Navigate to the Query Metrics view within Database Monitoring by clicking **[APM > Databases][1]** in the UI.
 
-The view shows 200 _top_ queries, that is the 200 queries with the most total time running in the selected time frame. See [which queries are tracked][2] for more details. Metrics aggregation for one-off or very seldom-run fast queries isn't shown in the Query Metrics view, but you can find snapshots of them represented in [Query Samples][3], if they have run in the last 15 days.
+The view shows 200 _top_ queries, that is the 200 queries with the most total time running in the selected time frame. See [which queries are tracked][2] for more details. Metrics aggregation for one-off or seldom-run fast queries isn't shown in the Query Metrics view, but you can find snapshots of them represented in [Query Samples][3], if they have run in the last 15 days.
 
 ## Filtering and grouping
 
@@ -60,7 +60,7 @@ Select or clear facets to find the list of queries you're interested in.
 
 If you want to filter the contents of the Query Metrics view to just one normalized query, filter on the `query_signature`, not `query`. Tag names are truncated at 200 characters, and because queries can be long, their `query` tags aren't necessarily unique. The `query_signature` is a hash of a normalized query and serves as a unique ID for the normalized query.
 
-An easy way to filter to a specific query (without looking up its query signature value) is to click the query from the list, which opens its [Query Details page](#query-details-page), where you click **Filter to This Query**. This filters the Query Metrics page by the `query_signature` facet.
+One way to filter to a specific query without looking up its query signature value is to click the query from the list. This opens its [Query Details page](#query-details-page), where you click **Filter to This Query**. This filters the Query Metrics page by the `query_signature` facet.
 
 ## Exploring the metrics
 
@@ -110,7 +110,7 @@ Not all queries have explain plans, for various reasons, including what type of 
 
 ### Hosts running this query
 
-The **Hosts Running This Query** tab lists the hosts that run this query, with a context menu that lets you jump to related information for the hosts, such as logs or the network data, which can be very useful for troubleshooting where latency problems are coming from.
+The **Hosts Running This Query** tab lists the hosts that run this query, with a context menu that lets you jump to related information for the hosts, such as logs or the network data, which can be useful for troubleshooting where latency problems are coming from.
 
 {{< img src="database_monitoring/dbm_qd_hosts_running_query_menu.png" alt="Host action menu for pivoting to more information" style="width:100%;">}}
 

@@ -7,11 +7,11 @@ aliases:
   - /developers/metrics/powershell_metrics_submission/
 ---
 
-Datadog can collect metrics via the Agent as well as via the API independently of which language you decide to use. This page gives examples of both using PowerShell.
+Datadog can collect metrics from the Agent as well as from the API independently of which language you decide to use. This page gives examples of both using PowerShell.
 
-## Submitting metrics with PowerShell via the API
+## Submitting metrics with PowerShell with the API
 
-This method doesn't require you to have the Agent installed on the system running the PowerShell script. You have to explicitly pass your API key as well as an application key when making the POST request. Start by [fetching your API key from the Datadog application][1].
+This method doesn't require you to have the Agent installed on the system running the PowerShell script. You have to explicitly pass your [API key][1] as well as an application key when making the POST request.
 
 ```powershell
 # Tested on Windows Server 2012 R2 w/ PSVersion 4.0
@@ -44,16 +44,16 @@ $url_signature = "api/v1/series"
 $url = $url_base + $url_signature + "?api_key=$api_key" + "&" + "application_key=$app_key"
 $tags = "[env:test]" #optional parameter
 
-# Select what to send to Datadog. In this example we send the number of handles opened by process "mmc"
+# Select what to send to Datadog. In this example, the number of handles opened by process "mmc" is being sent
 $metric_ns = "ps1." # your desired metric namespace
 $temp = Get-Process mmc
 $metric = @{"name"=$metric_ns + $temp.Name; "amount"=$temp.Handles}
 postMetric($metric)($tags) # pass your metric as a parameter to postMetric()
 ```
 
-## Submitting metrics with PowerShell via DogStatsD
+## Submitting metrics with PowerShell with DogStatsD
 
-Having the Agent enables you to make use of its [DogStatsD][2] listener. The following example shows how you could send the same metric via DogStatsD. Notice that you no longer need to specify the API or application keys because it's already in your local `datadog.yaml`.
+Having the Agent enables you to make use of its [DogStatsD][2] listener. The following example shows how you could send the same metric with DogStatsD. Notice that you no longer need to specify the API or application keys because it's already in your local `datadog.yaml`.
 
 ```powershell
 # Tested on Windows Server 2012 R2 w/ PSVersion 4.0
@@ -74,7 +74,7 @@ dogstatsd($metric)
 
 ## Examples
 
-Here are two examples translated in PowerShell, using `Msxml2.XMLHTTP`, fully documented [on Mozilla's documentation page][3]):
+Here are two examples translated in PowerShell, using `Msxml2.XMLHTTP`, fully documented [on Mozilla's documentation][3]):
 
 ### The code that makes the API call
 

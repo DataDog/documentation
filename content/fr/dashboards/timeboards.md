@@ -1,5 +1,5 @@
 ---
-title: Timeboards
+title: Vue Timeboard
 kind: documentation
 aliases:
   - /fr/graphing/dashboards/timeboard/
@@ -17,38 +17,21 @@ further_reading:
 ---
 Les timeboards sont automatiquement mis en forme et représentent un point unique (fixe ou mis à jour en temps réel) sur l'ensemble du dashboard. Ils sont généralement utilisés pour dépanner, mettre en corrélation et explorer les données.
 
-**Remarque** : tous les graphiques d'un timeboard sont contrôlé par un unique paramètre. Pour modifier l'intervalle d'un graphique précis, utilisez un [screenboard][1].
+Pour passer de la [disposition Dashboard][1] à la disposition Timeboard, ouvrez le menu des réglages, cliquez sur `Pick Layout`, puis sélectionnez `Automatic`.
 
-## Mode TV
+{{< img src="dashboards/auto-layout.png" alt="Disposition automatique pour un dashboard" style="width:70%;">}}
 
-Utilisez le mode TV pour afficher votre timeboard sur de grands écrans ou des téléviseurs en cliquant sur l'icône TV sur le timeboard ou en utilisant le raccourci clavier `F`.
-
-## Paramètres
-
-Les réglages des timeboards sont les mêmes que ceux des screenboards, à l'exception de la création d'URL publiques :
-
-* [Display UTC time][2]
-* [Notifications][3]
-* [Permissions][4]
-* [Clone dashboard][5]
-* [Copy, import, or export dashboard JSON][6]
-* [Delete dashboard][7]
-
-## Ajout de graphiques
-
-Après avoir [créé votre timeboard][8], ajoutez des graphiques à l'aide du bouton **Edit widgets** ou du lien **Add graph**, puis faites glisser le [widget][9] approprié vers le timeboard.
-
-## Rechercher des monitors
+## Recherche
 
 ### Événements
 
-Pour configurer une superposition d'événements, cliquez sur le lien **Search...** dans le coin supérieur gauche, sélectionnez **Événements**, puis saisissez une [requête][10] dans la zone de recherche. Cela remplace les superpositions d'événements ajoutées lors de la conception du timeboard et applique les réglages à l'ensemble des graphiques. La superposition affiche le nombre d'occurrences des événements sur vos graphiques de séries temporelles et présente la liste des événements à droite de la fenêtre.
+Pour configurer une superposition d'événements, cliquez sur le lien **Search...** dans le coin supérieur gauche, sélectionnez **Events**, puis saisissez une [requête][2] dans la zone de recherche. Cela remplace les superpositions d'événements ajoutées lors de la conception du timeboard et applique les réglages à l'ensemble des graphiques. La superposition affiche le nombre d'occurrences des événements sur vos graphiques de série temporelle et présente la liste des événements à droite de la fenêtre.
 
 {{< img src="dashboards/timeboard/events_overlay.png" alt="Superposition d'événements" style="width:75%;">}}
 
 ### Logs
 
-Pour configurer une superposition de logs, cliquez sur le lien **Search...** dans le coin supérieur gauche, sélectionnez **Logs**, puis saisissez une [requête][11] dans la zone de recherche. La superposition affiche le nombre d'occurrences des logs sur vos graphiques de séries temporelles et présente la liste des logs à droite de la fenêtre.
+Pour configurer une superposition de logs, cliquez sur le lien **Search...** dans le coin supérieur gauche, sélectionnez **Logs**, puis saisissez une [requête][3] dans la zone de recherche. La superposition affiche le nombre d'occurrences des logs sur vos graphiques de série temporelle et présente la liste des logs à droite de la fenêtre.
 
 ## Menu des graphiques
 
@@ -58,13 +41,13 @@ Cliquez sur un graphique de série temporelle d'un dashboard pour ouvrir le menu
 |------------------------|---------------------------------------------------------------|
 | Send snapshot          | Créez et envoyez un snapshot de votre graphique.                     |
 | Find correlated metrics| Trouvez des corrélations entre des services APM, des intégrations et des dashboards. |
-| View in full screen    | Affichez le graphique [en plein écran][12].                     |
+| View in full screen    | Afficher le graphique [en plein écran][4].                     |
 | Lock cursor            | Verrouillez l'emplacement du curseur sur la page.                         |
-| View related processes | Accédez à la page [Live Processes][13] en appliquant un filtre basé sur votre graphique.   |
-| View related hosts     | Accédez à la page [Host Map][14] en appliquant un filtre basé sur votre graphique.         |
-| View related logs      | Accédez à la page [Log Explorer][15] en appliquant un filtre basé sur votre graphique.     |
-| View related traces    | Remplissez automatiquement un volet de [traces][16] à partir des données de votre graphique.           |
-| View related profiles  | Accédez à la page [Profiling][17] en appliquant un filtre basé sur votre graphique.        |
+| View related processes | Accédez à la page [Live Processes][5] en appliquant un filtre basé sur votre graphique.   |
+| View related hosts     | Accédez à la page [Host Map][6] en appliquant un filtre basé sur votre graphique.         |
+| View related logs      | Accédez à la page [Log Explorer][7] en appliquant un filtre basé sur votre graphique.     |
+| View related traces    | Remplissez automatiquement un volet de [traces][8] à partir des données de votre graphique.           |
+| View related profiles  | Accédez à la page [Profiling][9] en appliquant un filtre basé sur votre graphique.        |
 ### Requête de recherche de logs
 
 La requête de recherche pour **View related logs** est définie à l'aide des paramètres suivants :;
@@ -73,24 +56,25 @@ La requête de recherche pour **View related logs** est définie à l'aide des p
 * **Préfixe d'intégration** : si la métrique provient d'une intégration, Datadog filtre l'attribut `source` avec le nom de l'intégration.
 * **Tags** : tous les tags utilisés dans le graphique (*template variable*, *split by*, *filter by*) sont automatiquement ajoutés à la requête de recherche.
 
+## Conseils et astuces
+
+- Cliquez sur l'icône d'un widget pour l'ajouter au dashboard sans avoir à le faire glisser (vous pouvez également utiliser les raccourcis clavier `N` et `Maj + N`).
+- Cliquez deux fois sur la poignée de redimensionnement en bas à gauche ou en bas à droite d'un widget pour qu'il occupe instantanément tout l'espace vide adjacent.
+- Cliquez sur un espace vide et faites glisser votre curseur pour utiliser l'outil de lasso.
+- Si plusieurs widgets sont sélectionnés, un menu d'action s'affiche. Il vous permet d'effectuer des actions groupées.
+- Appuyez sur les touches `Cmd + G` ou `Ctrl + G` pour regrouper les widgets sélectionnés.
+- Utilisez le menu des réglages au niveau de l'en-tête du dashboard pour développer ou réduire tous les groupes d'un dashboard.
+
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/dashboards/screenboard/
-[2]: /fr/dashboards/screenboards/#display-utc-time
-[3]: /fr/dashboards/screenboards/#notifications
-[4]: /fr/dashboards/screenboards/#permissions
-[5]: /fr/dashboards/screenboards/#clone-dashboard
-[6]: /fr/dashboards/screenboards/#copy-import-or-export-dashboard-json
-[7]: /fr/dashboards/screenboards/#delete-dashboard
-[8]: /fr/dashboards/#new-dashboard
-[9]: /fr/dashboards/widgets/
-[10]: /fr/events/#event-query-language
-[11]: /fr/logs/search_syntax/
-[12]: /fr/dashboards/widgets/#full-screen
-[13]: https://app.datadoghq.com/process
-[14]: https://app.datadoghq.com/infrastructure/map
-[15]: https://app.datadoghq.com/logs
-[16]: /fr/tracing/
-[17]: /fr/tracing/profiler/
+[1]: /fr/dashboards/dashboard
+[2]: /fr/events/#event-query-language
+[3]: /fr/logs/search_syntax/
+[4]: /fr/dashboards/widgets/#full-screen
+[5]: https://app.datadoghq.com/process
+[6]: https://app.datadoghq.com/infrastructure/map
+[7]: https://app.datadoghq.com/logs
+[8]: /fr/tracing/
+[9]: /fr/tracing/profiler/

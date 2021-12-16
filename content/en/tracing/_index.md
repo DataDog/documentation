@@ -61,13 +61,13 @@ Now that you've configured your application to send traces to Datadog, start get
 
 [Understand service dependencies][7] with an auto-generated service map from your traces alongside service performance metrics and monitor alert statuses.
 
-{{< img src="tracing/index/ServiceMapInspect.gif" alt="Service Map"  style="width:100%;">}}
+{{< img src="tracing/index/ServiceMapInspect.mp4" alt="Service Map" video=true style="width:100%;">}}
 
 ### Service performance dashboards
 
-[Monitor Service metrics][8] for requests, errors and latency percentiles.  Drill down into database queries or endpoints correlated with infrastructure.
+[Monitor Service metrics][8] for requests, errors and latency percentiles. Analyze individual database queries or endpoints correlated with infrastructure.
 
-{{< img src="tracing/index/ServicePage.gif" alt="Service Pages"  style="width:100%;">}}
+{{< img src="tracing/index/ServicePage.mp4" alt="Service Pages" video=true style="width:100%;">}}
 
 ### Continuous Profiler
 
@@ -115,13 +115,13 @@ Now that you've configured your application to send traces to Datadog, start get
 
 [Link between real user sessions][16] and traces to see the exact traces that correspond to user experiences and reported issues.
 
-{{< img src="tracing/index/RumTraces.gif" alt="Connect RUM sessions and traces"  style="width:100%;">}}
+{{< img src="tracing/index/RumTraces.mp4" alt="Connect RUM sessions and traces" video=true style="width:100%;">}}
 
 ### Connect synthetic test data and traces
 
 [Link simulated API tests][17] to traces to find the root cause of failures across frontend, network and backend requests.
 
-{{< img src="tracing/index/Synthetics.gif" alt="Synthetic tests"  style="width:100%;">}}
+{{< img src="tracing/index/Synthetics.mp4" alt="Synthetic tests" video=true style="width:100%;">}}
 
 
 ## Further Reading

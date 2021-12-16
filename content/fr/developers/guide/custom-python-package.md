@@ -1,5 +1,5 @@
 ---
-title: Ajouter un paquet Phyton personnalisé à l'Agent
+title: Ajouter un package Python personnalisé à l'Agent
 kind: documentation
 aliases:
   - /fr/agent/custom_python_package
@@ -20,10 +20,10 @@ further_reading:
 
 L'Agent intègre un environnement Python dans `/opt/datadog-agent/embedded/`. Les binaires courants comme `python` et `pip` se trouvent dans `/opt/datadog-agent/embedded/bin/`.
 
-Les paquets Python peuvent être installés grâce au `pip` intégré :
+Les packages Python peuvent être installés avec le `pip` intégré :
 
 ```shell
-sudo -Hu dd-agent /opt/datadog-agent/embedded/bin/pip install <NOM_PAQUET>
+sudo -Hu dd-agent /opt/datadog-agent/embedded/bin/pip install <NOM_PACKAGE>
 ```
 
 {{% /tab %}}
@@ -31,17 +31,17 @@ sudo -Hu dd-agent /opt/datadog-agent/embedded/bin/pip install <NOM_PAQUET>
 
 L'Agent intègre un environnement Python dans `/opt/datadog-agent/embedded/`. Les binaires courants comme `python` et `pip` se trouvent dans `/opt/datadog-agent/embedded/bin/`.
 
-Les paquets Python peuvent être installés grâce au `pip` intégré :
+Les packages Python peuvent être installés avec le `pip` intégré :
 
 ```shell
-sudo /opt/datadog-agent/embedded/bin/pip install <NOM_PAQUET>
+sudo /opt/datadog-agent/embedded/bin/pip install <NOM_PACKAGE>
 ```
 
 {{% /tab %}}
 
 {{% tab "Windows" %}}
 
-Pour installer un paquet Python personnalisé grâce au Python intégré dans l'Agent, utilisez la commande PowerShell suivante :
+Pour installer un package Python personnalisé grâce au Python intégré dans l'Agent, utilisez la commande PowerShell suivante :
 
 Pour les versions <= 6.11 de l'Agent :
 
@@ -55,7 +55,7 @@ Pour les versions >= 6.12 de l'Agent :
 %PROGRAMFILES%\Datadog\"Datadog Agent"\embedded<VERSION_MAJEURE_PYTHON>\python -m pip install <NOM_PACKAGE>
 ```
 
-Le paquet peut également être ajouté dans le dossier compressé de la bibliothèque, que vous trouverez dans
+Le package peut également être ajouté dans le dossier compressé de la bibliothèque, que vous trouverez dans
 
 ```powershell
 %PROGRAMFILES%\Datadog\Datadog Agent\files
@@ -63,7 +63,7 @@ Le paquet peut également être ajouté dans le dossier compressé de la bibliot
 
 Ensuite, [redémarrez votre Agent][1].
 
-{{< img src="agent/windows_python_package.png" alt="Paquet python pour windows" >}}
+{{< img src="agent/windows_python_package.png" alt="Package python pour windows" >}}
 
 [1]: /fr/agent/basic_agent_usage/windows/
 {{% /tab %}}

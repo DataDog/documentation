@@ -21,7 +21,7 @@ Si vous êtes administrateur, vous pouvez consulter les informations relatives �
 
 Pour être notifié lorsqu'un déploiement de code accroît le nombre de hosts qui envoient des traces, configurez un monitor sur le nombre de hosts d'APM. Vous recevrez alors une notification dès que le nombre de hosts au sein de votre infrastructure augmente de manière imprévue, peu importe le contexte défini (`prod`, `availability-zone`, etc.) :
 
-{{< img src="tracing/faq/apm_host_monitor.mp4" alt="Vue Analytics" video="true"  style="width:90%;">}}
+{{< img src="tracing/faq/apm_host_monitor.mp4" alt="Vue Analytics" video="true" style="width:90%;">}}
 
 1. Accédez à Monitors -> New Monitor.
 2. Configurez un [nouveau monitor de métrique[4] avec `datadog.apm.host_instance`.
@@ -39,12 +39,12 @@ Pour être notifié lorsqu'un déploiement de code entraîne une augmentation so
 5. Définissez le nombre de spans indexées à partir duquel envoyer un avertissement ou une erreur.
 6. Indiquez une notification explicite. Exemple : « Le nombre de spans indexées pour ce service vient de dépasser le seuil spécifié. Définissez un filtre d'exclusion supplémentaire ou augmentez le taux d'échantillonnage pour revenir à des valeurs normales. »
 
-Pour en savoir plus sur les filtres de rétention, cliquez [ici][7].
+En savoir plus sur les [filtres de rétention][7].
 
 [1]: https://www.datadoghq.com/pricing
 [2]: /fr/account_management/billing/apm_distributed_tracing/
 [3]: https://app.datadoghq.com/account/usage
 [4]: https://app.datadoghq.com/monitors#create/metric
-[5]: /fr/monitors/monitor_types/apm/?tab=traceanalytics#monitor-creation
+[5]: /fr/monitors/create/types/apm/?tab=traceanalytics#monitor-creation
 [6]: https://app.datadoghq.com/apm/analytics
 [7]: /fr/tracing/trace_retention_and_ingestion/

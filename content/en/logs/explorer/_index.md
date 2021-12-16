@@ -25,7 +25,7 @@ further_reading:
 
 ## Overview
 
-The [**Log Explorer**][1] is your home base for log troubleshooting and exploration. Whether you start from scratch, from a [Saved View][2], or land here from any other context like monitor notifications or dashboard widgets, the Log Explorer is designed to iteratively:
+The [**Log Explorer**][1] is your home base for log troubleshooting and exploration. Whether you start from scratch, from a [Saved View][2], or land here from any other context like monitor notifications or dashboard widgets, the Log Explorer iteratively search and filter, group, visualize, and export.
 
 
 ### Search and filter

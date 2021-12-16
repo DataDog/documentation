@@ -18,7 +18,7 @@ Once you’ve chosen a [monitor type][1], start configuring the monitor.
 
 To learn how to construct the search query, see the individual [monitor types][1] pages. As you define the search query, the preview graph above the search fields updates.
 
-{{< img src="/monitors/create/preview_graph_monitor.gif" alt="Preview Graph" style="width:90%;">}}
+{{< img src="/monitors/create/preview_graph_monitor.mp4" alt="Preview Graph" video=true style="width:90%;">}}
 
 ### Alert grouping
 

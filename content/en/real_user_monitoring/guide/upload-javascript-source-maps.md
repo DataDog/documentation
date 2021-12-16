@@ -108,9 +108,9 @@ datadog-ci sourcemaps upload /path/to/dist \
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**: The CLI has been optimized to upload as many source maps as you need in a very short amount of time (typically a few seconds) to minimize the overhead on your CI's performance.
+**Note**: The CLI has been optimized to upload as many source maps as you need in a short amount of time (typically a few seconds) to minimize the overhead on your CI's performance.
 
-By running this command against our example `dist` directory (see previous section), Datadog will expect your server or your CDN to deliver the javascript files at `https://hostname.com/static/js/javascript.364758.min.js` and `https://hostname.com/static/js/subdirectory/javascript.464388.min.js`.  When an error occurs in a session of one of your users, the RUM SDK instantaneously collects it. Whenever the given error originated in a file that were downloaded from one of those urls and is also tagged with `version:v35.2395005` and `service:my-service`, the related source map will be used to deobfuscate the stack trace (in this case, the `javascript.464388.js.map` file).
+By running this command against the example `dist` directory (see previous section), Datadog expects your server or your CDN to deliver the javascript files at `https://hostname.com/static/js/javascript.364758.min.js` and `https://hostname.com/static/js/subdirectory/javascript.464388.min.js`. When an error occurs in a session of one of your users, the RUM SDK instantaneously collects it. Whenever the given error originated in a file that were downloaded from one of those urls and is also tagged with `version:v35.2395005` and `service:my-service`, the related source map is used to deobfuscate the stack trace (in this case, the `javascript.464388.js.map` file).
 
 **Note**: Only source maps with the `.js.map` extension work to correctly unminify stack traces in the error tracking UI. Source maps with other extensions, such as `.mjs.map`, are accepted but do not unminify stack traces.
 
@@ -124,7 +124,7 @@ A minified stack trace is not helpful as you don't have access to the file path 
 
 On the contrary, an unminified stack trace gives you all the context you need for a fast and seamless troubleshooting:
 
-{{< img src="real_user_monitoring/error_tracking/unminified_stacktrace.gif" alt="Error Tracking Unminified Stack Trace"  >}}
+{{< img src="real_user_monitoring/error_tracking/unminified_stacktrace.mp4" alt="Error Tracking Unminified Stack Trace" video=true >}}
 
 ## Further Reading
 

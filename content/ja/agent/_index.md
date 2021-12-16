@@ -15,7 +15,7 @@ further_reading:
   - link: /agent/faq/why-should-i-install-the-agent-on-my-cloud-instances/
     tag: Documentation
     text: クラウドインスタンスに Agent をインストールするのはなぜですか？
-  - link: 'https://www.datadoghq.com/blog/dont-fear-the-agent/'
+  - link: https://www.datadoghq.com/blog/dont-fear-the-agent/
     tag: ブログ
     text: Agent は難しくない
 aliases:
@@ -54,12 +54,14 @@ Datadog Agent のリリース番号は、<a href="https://semver.org/">SemVer</a
   {{< nextlink href="/agent/basic_agent_usage">}}<u>基本的なエージェントの利用方法</u>: アーキテクチャの詳細、CLI、オーバーヘッド、構成管理ツールなど、Datadog Agent について詳しく説明します。{{< /nextlink >}}
   {{< nextlink href="/agent/docker">}}<u>Docker</u>: Datadog Agent を Docker にインストールして構成します。{{< /nextlink >}}
   {{< nextlink href="/agent/kubernetes">}}<u>Kubernetes</u>: Datadog Agent を Kubernetes にインストールして構成します。{{< /nextlink >}}
-  {{< nextlink href="/agent/logs">}}<u>ログの収集</u>: Datadog Agent でのログの収集を有効にし、構成します。{{< /nextlink >}}
+  {{< nextlink href="/agent/cluster_agent">}}<u>Cluster Agent</u>: オーケストレーションされたクラスターからモニタリングデータを効率的に収集するよう設計された Datadog Agent のバージョン、Cluster Agent for Kubernetes をインストールして構成します。{{< /nextlink >}} {{< nextlink href="/agent/amazon_ecs">}}<u>Amazon ECS</u>: Amazon ECS に Datadog Agent をインストールし構成します。{{< /nextlink >}} {{< nextlink href="/agent/iot">}}<u>IoT</u>: IoT デバイスの監視に最適化された設計で、アプリケーションに埋め込み型バージョンの Datadog Agent、Datadog IoT Agent をインストールし構成します。{{< /nextlink >}}
+  {{< nextlink href="/agent/logs">}}<u>ログ収集</u>: Datadog Agent でのログ収集を有効にし、構成します。{{< /nextlink >}}
   {{< nextlink href="/agent/proxy">}}<u>プロキシ</u>: ネットワーク構成によってアウトバウンドトラフィックが制限される場合は、Agent トラフィックにプロキシを使用します。{{< /nextlink >}}
-  {{< nextlink href="/agent/versions/upgrade_to_agent_v7">}}<u>Agent v7 へのアップグレード</u>: Agent 7 は Datadog Agent の最新メジャーバージョンです。アップグレードの方法について説明します。{{< /nextlink >}}
+  {{< nextlink href="/agent/versions/">}}<u>バージョン</u>: Agent 7 は Datadog Agent の最新メジャーバージョンです。Agent のメジャーバージョン間の違いやアップグレード方法について説明します。{{< /nextlink >}}
   {{< nextlink href="/agent/troubleshooting">}}<u>トラブルシューティング</u>: Datadog Agent のトラブルシューティング情報をご紹介します。{{< /nextlink >}}
   {{< nextlink href="/agent/guide">}}<u>ガイド</u>: Agent の使用に関するステップバイステップの詳細なチュートリアルです。{{< /nextlink >}}
-  {{< nextlink href="/agent/security">}}<u>セキュリティ:</u> 安全な環境を維持するためにお客様が利用できる主なセキュリティ機能について説明します。{{< /nextlink >}}
+  {{< nextlink href="/agent/security">}}<u>セキュリティ</u>: 安全な環境を維持するためにお客様が利用できる主なセキュリティ機能について説明します。{{< /nextlink >}}
+  {{< nextlink href="/agent/vector_aggregation">}}<u>Agent の集約</u>: オブザーバビリティ パイプラインの構築ツール、Vector にデータを送信するよう Datadog Agent を構成します。{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## その他の参考資料
@@ -68,4 +70,4 @@ Datadog Agent のリリース番号は、<a href="https://semver.org/">SemVer</a
 
 [1]: https://github.com/DataDog/datadog-agent
 [2]: https://app.datadoghq.com/account/settings#agent/aws
-[3]: https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles/dogstatsd/alpine
+[3]: https://github.com/DataDog/datadog-agent/tree/main/Dockerfiles/dogstatsd/alpine

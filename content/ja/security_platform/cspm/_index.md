@@ -2,15 +2,15 @@
 title: クラウドセキュリティポスチャ管理
 kind: documentation
 ---
-{{< site-region region="us,eu" >}}
+{{< site-region region="us,eu,us3,us5" >}}
 <div class="alert alert-warning">
 クラウドセキュリティポスチャ管理 は、<a href="https://app.datadoghq.com/security/configuration">一般提供中</a>です。
 </div>
 {{< /site-region >}}
 
-{{< site-region region="us3,gov" >}}
+{{< site-region region="gov" >}}
 <div class="alert alert-warning">
-クラウドセキュリティポスチャ管理は、現在 US1-FED、US3 では利用できません。
+クラウドセキュリティポスチャ管理は、現在このサイトでは利用できません。
 </div>
 {{< /site-region >}}
 

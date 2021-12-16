@@ -37,7 +37,7 @@ further_reading:
 
 ## Search bar
 
-All search parameters are contained in the url of the page, so it is very simple to share your view.
+All search parameters are contained in the url of the page, which can be helpful for sharing your view.
 
 ### Search syntax
 
@@ -261,7 +261,7 @@ The following top list analytics shows the top **pc99** **duration** of **Servic
 
 ### Table
 
-Visualize the top values from a facet according to a chosen [measure][9] (the first measure you choose in the list), and display the value of additional measures for elements appearing in this top list. Update the search query or drill through logs corresponding to either dimension.
+Visualize the top values from a facet according to a chosen [measure][9] (the first measure you choose in the list), and display the value of additional measures for elements appearing in this top list. Update the search query or investigate logs corresponding to either dimension.
 
 * When there are multiple dimensions, the top values are determined according to the first dimension, then according to the second dimension within the top values of the first dimension, then according to the third dimension within the top values of the second dimension.
 * When there are multiple measures, the top or bottom list is determined according to the first measure.
