@@ -20,8 +20,9 @@ dependencies:
 aliases:
     - /integrations/cloud_foundry/
 doc_link: /integrations/pivotal_platform/
-ddtype: beta
 integration_id: "pivotal-platform"
+is_beta: true
+# ddtype: check
 ---
 
 {{< beta-callout >}}
