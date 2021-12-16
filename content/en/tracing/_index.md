@@ -65,7 +65,7 @@ Now that you've configured your application to send traces to Datadog, start get
 
 ### Service performance dashboards
 
-[Monitor Service metrics][8] for requests, errors and latency percentiles.  Drill down into database queries or endpoints correlated with infrastructure.
+[Monitor Service metrics][8] for requests, errors and latency percentiles. Analyze individual database queries or endpoints correlated with infrastructure.
 
 {{< img src="tracing/index/ServicePage.mp4" alt="Service Pages" video=true style="width:100%;">}}
 

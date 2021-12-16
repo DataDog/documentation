@@ -9,7 +9,7 @@ further_reading:
     - link: 'developers/libraries'
       tag: 'Documentation'
       text: 'Official and Community created API and DogStatsD client libraries'
-    - link: 'https://github.com/DataDog/datadog-agent/tree/master/pkg/dogstatsd'
+    - link: 'https://github.com/DataDog/datadog-agent/tree/main/pkg/dogstatsd'
       tag: 'GitHub'
       text: 'DogStatsD source code'
 ---
@@ -210,13 +210,13 @@ For more information and code examples, see [DogStatsD "Sample Rate" Parameter E
 
 ### Use DogStatsD over UDS (Unix Domain Socket)
 
-UDS is an inter-process communication protocol used to [transport DogStatsD payloads][2]. It has very little overhead when compared to UDP and lowers the general footprint of DogStatsD on your system.
+UDS is an inter-process communication protocol used to [transport DogStatsD payloads][2]. It has little overhead when compared to UDP and lowers the general footprint of DogStatsD on your system.
 
 ### Client-side aggregation
 
-Client libraries can aggregate metrics on the client side, reducing number of messages that have to be submitted to the DataDog Agent, improving IO performance and throughput.
+Client libraries can aggregate metrics on the client side, reducing number of messages that have to be submitted to the Datadog Agent, improving IO performance and throughput.
 
-{{< programming-lang-wrapper langs="go,java" >}}
+{{< programming-lang-wrapper langs="go,java,.NET" >}}
 {{< programming-lang lang="go" >}}
 
 Client-side aggregation is only available in the Go client starting with v5.0.0.
@@ -242,6 +242,26 @@ See [Client-side aggregation][1] for more information.
 
 [1]: https://github.com/DataDog/java-dogstatsd-client#aggregation
 {{< /programming-lang >}}
+
+{{< programming-lang lang=".NET" >}}
+
+Client-side aggregation is available in DogStatsD C# client v7.0.0+ and is enabled by default. Client-side aggregation is available for gauges, counters, and sets.
+
+```csharp
+var dogstatsdConfig = new StatsdConfig
+{
+    StatsdServerName = "127.0.0.1",
+    StatsdPort = 8125,
+    ClientSideAggregation = new ClientSideAggregationConfig()
+};
+```
+
+
+For more information, see the [DogStatsD for C# repository][1].
+
+[1]: https://github.com/DataDog/dogstatsd-csharp-client#client-side-aggregation
+{{< /programming-lang >}}
+
 {{< /programming-lang-wrapper >}}
 
 ## Operating system kernel buffers

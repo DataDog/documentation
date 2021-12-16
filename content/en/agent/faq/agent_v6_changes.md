@@ -569,4 +569,4 @@ Similarly, you may have added a PIP package to meet a requirement for a custom c
 [6]: /agent/guide/agent-commands/
 [7]: /getting_started/agent/autodiscovery/
 [8]: https://github.com/DataDog/integrations-core/tree/master/datadog_checks_base
-[9]: https://github.com/DataDog/datadog-agent/tree/master/docs/dev/checks
+[9]: https://github.com/DataDog/datadog-agent/tree/main/docs/dev/checks

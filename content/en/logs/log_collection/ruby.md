@@ -13,11 +13,16 @@ further_reading:
 - link: "/logs/faq/log-collection-troubleshooting-guide/"
   tag: "FAQ"
   text: "Log Collection Troubleshooting Guide"
+- link: "https://www.datadoghq.com/blog/managing-rails-application-logs/"
+  tag: "Blog"
+  text: "How to collect, customize, and manage Rails application logs"
 ---
 
-To send your logs to Datadog, it's recommend to log to a file with [`lograge`][1] and then tail this file with your Datadog Agent. When setting up logging with Ruby, make sure to keep in mind the [reserved attributes][2].
+## Overview
 
-Instead of having a Rail logging output like this:
+To send your logs to Datadog, log to a file with [`lograge`][1] and tail this file with your Datadog Agent. When setting up logging with Ruby, keep in mind the [reserved attributes][2].
+
+Instead of having a Rails logging output like this:
 
 ```text
 Started GET "/" for 127.0.0.1 at 2012-03-10 14:28:14 +0100
@@ -30,7 +35,7 @@ Processing by HomeController#index as HTML
 Completed 200 OK in 79ms (Views: 78.8ms | ActiveRecord: 0.0ms)
 ```
 
-After lograge formating you get a single log line with all the important information in a JSON format like this:
+You can expect to see a single log line with the important information in a JSON format like this:
 
 ```json
 {
@@ -51,15 +56,15 @@ After lograge formating you get a single log line with all the important informa
 
 ## Setup
 
-This section describe the minimum setup required in order to forward your Rails application logs to Datadog, if you want a more in depth example of this setup refer to the blog article: [How to collect, customize, and manage Rails application logs][3].
+This section describes the minimum setup required to forward your Rails application logs to Datadog. For a more in-depth example of this setup, see [How to collect, customize, and manage Rails application logs][3].
 
-1. **Add the lograge GEM in your project**:
+1. Add the Lograge gem in your project:
 
     ```ruby
     gem 'lograge'
     ```
 
-2. **Configure Lograge**. In your configuration file, set the following:
+2. Configure Lograge. In your configuration file, set the following:
 
     ```ruby
     # Lograge config
@@ -82,9 +87,9 @@ This section describe the minimum setup required in order to forward your Rails 
     end
     ```
 
-    **Note**: You can also ask Lograge to add contextual information to your logs. Refer to the official doc if you are interested: [Lograge documentation][4]
+    **Note**: You can also ask Lograge to add contextual information to your logs. See [the Lograge documentation][4] for more details.
 
-3. **Configure your Datadog Agent**. Create a `ruby.d/conf.yaml` file in your `conf.d/` folder with the following content:
+3. Configure your Datadog Agent. Create a `ruby.d/conf.yaml` file in your `conf.d/` folder with the following content:
 
     ```yaml
       logs:
@@ -103,27 +108,28 @@ This section describe the minimum setup required in order to forward your Rails 
 
     Learn more about the [Agent log collection][5].
 
-4. [Restart the Agent][6]
+4. [Restart the Agent][6].
 
 ## Getting further
 
 ### Connect logs and traces
 
-If APM is enabled for this application, the correlation between application logs and traces can be improved by [following APM Ruby logging instructions][7] to automatically add trace and span IDs in your logs.
+If APM is enabled for this application, you can improve the connection between application logs and traces by [following the APM Ruby logging instructions][7] to automatically add trace and span IDs in your logs.
 
 ### Good logging practices in your application
 
-Now that your logging configuration is sending proper JSON, you should exploit it as much as you can.
+Now that your logging configuration is sending proper JSON, you should use it as much as possible.
 
-A logging practice is to bring as much context (user, session, action, metrics, etc...) to every line of log you send.
-To do so you can actually instead of logging simple string messages you should log hashes as shown in the following example:
+When logging, add as much context (user, session, action, and metrics) as possible.
+
+Instead of logging simple string messages, you can use log hashes as shown in the following example:
 
 ```ruby
 my_hash = {'user' => '1234', 'button_name'=>'save','message' => 'User 1234 clicked on button saved'};
 logger.info(my_hash);
 ```
 
-The hash is going to get converted into JSON and you'll then be able to do analytics over `user` and `button_name`:
+The hash is converted into JSON. Then, you can have Analytics for `user` and `button_name`:
 
 ```json
 {
@@ -140,14 +146,11 @@ The hash is going to get converted into JSON and you'll then be able to do analy
 
 ### RocketPants suggested logging configuration
 
-In the file `config/initializers/lograge_rocketpants.rb` (it can change depending on your project):
+In the `config/initializers/lograge_rocketpants.rb` file (it varies depending on your project), configure Lograge to work with `rocket_pants` controllers:
 
 ```ruby
-# Configure Lograge to work with rocket_pants' controllers
-#
 # Come from here:
 #   https://github.com/Sutto/rocket_pants/issues/111
-#
 app = Rails.application
 if app.config.lograge.enabled
   ActiveSupport::LogSubscriber.log_subscribers.each do |subscriber|
@@ -162,13 +165,13 @@ end
 
 ### Grape's suggested logging configuration
 
-Add the grape_logging gem:
+Add the `grape_logging` gem:
 
 ```ruby
 gem 'grape_logging'
 ```
 
-Pass additional configuration to Grape:
+Pass the additional configuration to Grape:
 
 ```ruby
 use GrapeLogging::Middleware::RequestLogger,

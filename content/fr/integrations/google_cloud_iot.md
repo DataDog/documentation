@@ -6,12 +6,13 @@ categories:
 ddtype: crawler
 dependencies: []
 description: "Surveillez des métriques clés de Google\_Cloud\_IoT "
-doc_link: 'https://docs.datadoghq.com/integrations/google_cloud_iot/'
+doc_link: https://docs.datadoghq.com/integrations/google_cloud_iot/
 draft: false
 git_integration_title: google_cloud_iot
 has_logo: true
 integration_id: google-cloud-iot
 integration_title: "Google\_Cloud\_IoT"
+integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'
@@ -34,11 +35,11 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Google Cl
 
 ### Collecte de logs
 
-Les logs Google Cloud IoT sont recueillis avec Stackdriver et envoyés à un Cloud Pub/Sub via un redirecteur Push HTTP. Si vous ne l'avez pas déjà fait, configurez le [Cloud Pub/Sub à l'aide d'un redirecteur Push HTTP][2].
+Les logs Google Cloud IoT sont recueillis avec Google Cloud Logging et envoyés à un Cloud Pub/Sub via un forwarder Push HTTP. Si vous ne l'avez pas déjà fait, configurez un [Cloud Pub/Sub à l'aide d'un forwarder Push HTTP][2].
 
-Une fois cette opération effectuée, exportez vos logs Google Cloud IoT depuis Stackdriver vers le Pub/Sub :
+Une fois cette opération effectuée, exportez vos logs Google Cloud IoT depuis Google Cloud Logging vers le Pub/Sub :
 
-1. Accédez à la [page Stackdriver][3] et filtrez les logs Google Cloud IoT.
+1. Accédez à la [page Google Cloud Logging][3] et filtrez les logs Google Cloud IoT.
 2. Cliquez sur **Create Export** et nommez le récepteur.
 3. Choisissez Cloud Pub/Sub comme destination et sélectionnez le Pub/Sub créé à cette fin. **Remarque** : le Pub/Sub peut se situer dans un autre projet.
 4. Cliquez sur **Create** et attendez que le message de confirmation s'affiche.

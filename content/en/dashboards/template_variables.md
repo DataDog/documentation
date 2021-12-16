@@ -129,7 +129,7 @@ For example, searching for `tags:region:$region.value` with a value of `us-east1
 
 Use commas to search using multiple template variables, for example: `tags:role:$role.value,env:$env.value`
 
-**Note**: Once you hit *enter* to search, `$region.value` updates to the value in the template variable drop-down.
+**Note**: Once you press *enter* to search, `$region.value` updates to the value in the template variable drop-down.
 
 #### Widgets
 

@@ -7,7 +7,7 @@ further_reading:
       text: "Troubleshooting CI"
 ---
 
-{{< site-region region="us5,gov" >}}
+{{< site-region region="gov" >}}
 <div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
@@ -35,7 +35,7 @@ The pipeline execution list at the bottom shows all the times that pipeline (or 
 
 Click one of the executions to open the pipeline execution view and see the flame graph or span list for the pipeline and its stages. The _Executions (n)_ list on the left side gives you quick access to the data for each retry of the pipeline for the same commit.
 
-Click the CI provider link (`gitlab-ci gitlab.pipeline > documentation` in the following image) to drill down to the Resource, Service, or Analytics page for the pipeline, stage, or job. You can also find complete tags information and links to related log events and network monitoring events.
+Click the CI provider link (`gitlab-ci gitlab.pipeline > documentation` in the following image) to investigate the Resource, Service, or Analytics page for the pipeline, stage, or job specifically. You can also find complete tags information and links to related log events and network monitoring events.
 
 {{< img src="ci/ci-pipeline-execution.png" alt="Trace info for pipeline execution" style="width:100%;">}}
 

@@ -54,7 +54,7 @@ Otherwise, follow the instructions below to add the Datadog Tracing Library to y
 
 ## Automatic instrumentation
 
-Datadog has a series of pluggable packages which provide out-of-the-box support for instrumenting a series of libraries and frameworks. A list of these packages can be found in the [Compatibility Requirements][1] page.  To trace these integrations, import these packages into your application and follow the configuration instructions listed alongside each [Integration][1].
+Datadog has a series of pluggable packages which provide out-of-the-box support for instrumenting a series of libraries and frameworks. A list of these packages can be found in the [Compatibility Requirements][1] page. To trace these integrations, import these packages into your application and follow the configuration instructions listed alongside each [Integration][1].
 
 ## Configuration
 
@@ -94,8 +94,10 @@ Enable debug logging in the tracer.
 : **Default**: `true` <br>
 Enable web framework and library instrumentation. When false, the application code doesn’t generate any traces.
 
-We highly recommend using `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `env`, `service`, and `version` for your services.
-Check out the [Unified Service Tagging][9] documentation for recommendations on how to configure these environment variables. These variables are available for versions 1.24.0+ of the Go tracer.
+
+Datadog recommends using `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `env`, `service`, and `version` for your services.
+
+Read the [Unified Service Tagging][9] documentation for recommendations on how to configure these environment variables. These variables are available for versions 1.24.0+ of the Go tracer.
 
 You may also elect to provide `env`, `service`, and `version` through the tracer's API:
 

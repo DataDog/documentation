@@ -11,7 +11,7 @@ further_reading:
     - link: 'developers/libraries'
       tag: 'Documentation'
       text: 'Official and Community created API and DogStatsD client libraries'
-    - link: 'https://github.com/DataDog/datadog-agent/tree/master/pkg/dogstatsd'
+    - link: 'https://github.com/DataDog/datadog-agent/tree/main/pkg/dogstatsd'
       tag: 'GitHub'
       text: 'DogStatsD source code'
 ---
@@ -213,7 +213,7 @@ When running inside a container, DogStatsD needs to run in the host's PID namesp
 
 ### Client libraries
 
-The following official DogStatsD client libraries natively support UDS traffic. See the library's documentation on how to enable UDS traffic. **Note**: As with UDP, enabling client-side buffering is highly recommended to improve performance on heavy traffic:
+The following official DogStatsD client libraries natively support UDS traffic. See the library's documentation on how to enable UDS traffic. **Note**: As with UDP, enabling client-side buffering is recommended to improve performance on heavy traffic:
 
 | Language | Library                              |
 | -------- | ------------------------------------ |
