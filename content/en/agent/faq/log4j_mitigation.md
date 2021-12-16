@@ -45,6 +45,13 @@ fi
 zip -q -d $TARGET $JNDI_CLASS
 ```
 
+Check to see that the above step was successful by running. The command below should return no output if the class has successfully been removed.
+
+```bash
+jar tvf /opt/datadog-agent/bin/agent/dist/jmx/jmxfetch.jar | grep JndiLookup.class
+```
+
+
 Finally, restart the Datadog Agent service with `sudo systemctl restart datadog-agent` (Linux systemd-based systems), `sudo restart datadog-agent` (Linux upstart-based systems) or from the Datadog Agent app in the menu bar (macOS).
 
 ### Windows
