@@ -36,10 +36,10 @@ VALIDATE=0
 if [ $# -eq 1 ]; then
 	case "$1" in
 		-c)
-            VALIDATE=1 ;;
+			VALIDATE=1 ;;
 		*)
-            echo "$1 is not a supported option"
-            exit 1 ;;
+			echo "$1 is not a supported option"
+			exit 1 ;;
 	esac
 fi
 
