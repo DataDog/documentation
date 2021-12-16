@@ -17,60 +17,9 @@ aliases:
 
 {{< img src="serverless/java-lambda-tracing.png" alt="Monitor Java Lambda Functions with Datadog"  style="width:100%;">}}
 
-## Upgrading
-
-As you may be aware, it was recently announced by the Apache Foundation that log4j, a popular Java logging library, is [vulnerable to remote code execution][12].
-Some versions of `datadog-lambda-java` include a transitive dependency on log4j that may be vulnerable. The vulnerable versions are:
-
--  `<=0.3.3`
--  `1.4.0`
-
-
-The version of the `datadog-lambda-java` dependency in your Lambda function is set in `pom.xml` or `build.gradle` depending on whether you are using Maven or Gradle, respectively.
-
-{{< tabs >}}
-{{% tab "Maven" %}}
-
-Your `pom.xml` file will contain a section like this.
-
-```xml
-<dependency>
-  <groupId>com.datadoghq</groupId>
-  <artifactId>datadog-lambda-java</artifactId>
-  <version>VERSION</version>
-</dependency>
-```
-
-Find this section and change the `VERSION` to the latest release (omitting the preceeding `v`) ![Maven Cental][4]
-Then redeploy your lambda function.
-
-If you do not wish to upgrade to `v1.4.x`, we are also updating `0.3.x` with the latest log4j security patches. You can find the latest `0.3.x` release [here][13]. 
-
-{{% /tab %}}
-
-{{% tab "Gradle" %}}
-
-Your `build.gradle` file will contain a section like this.
-
-```groovy
-dependencies {
-  implementation 'com.datadoghq:datadog-lambda-java:VERSION'
-}
-```
-
-Find this section and change the `VERSION` to the latest release (omitting the preceeding `v`) ![Maven Cental][4]
-Then redeploy your lambda function.
-
-If you do not wish to upgrade to `v1.4.x`, we are also updating `0.3.x` with the latest log4j security patches. You can find the latest `0.3.x` release [here][13]. 
-
-{{% /tab %}}
-{{< /tabs>}}
-
-If you are upgrading from 0.3.x to 1.4.x and you wish to use the `dd-trace-java` tracer, find the reference to the `dd-trace-java` lambda layer and change it to 
-
-```
-arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-java:4`
-````
+<div class="alert alert-danger">
+There are versions of `datadog-lambda-java` that import `log4j <=2.14.0` as a transitive dependency. Upgrade instructions are [here](#upgrading). 
+</div>
 
 ## Required setup
 
@@ -209,6 +158,64 @@ See the [custom metrics documentation][10] for more information on custom metric
 To automatically connect Java Lambda function logs and traces, see [Connecting Java Logs and Traces][11] for instructions.
 
 <div class="alert alert-info"> Failing to use the correct Java runtime can result in errors like, "Error opening zip file or JAR manifest missing : /opt/java/lib/dd-java-agent.jar" Make sure to use java8.al2 or java11 as runtime as described above. </div>
+
+## Upgrading
+
+As you may be aware, it was recently announced by the Apache Foundation that log4j, a popular Java logging library, is [vulnerable to remote code execution][12].
+Some versions of `datadog-lambda-java` include a transitive dependency on log4j that may be vulnerable. The vulnerable versions are:
+
+-  `<=0.3.3`
+-  `1.4.0`
+
+The latest version of datadog-lambda java is ![Maven Cental][4]. Use this version (omitting the preceeding `v`) when following the upgrading instructions below.
+
+If you are currently running `0.3.x` and do not wish to upgrade to `1.4.x`, you may find the latest version of `0.3.x` [here][13]
+
+The version of the `datadog-lambda-java` dependency in your Lambda function is set in `pom.xml` or `build.gradle` depending on whether you are using Maven or Gradle, respectively.
+
+{{< tabs >}}
+{{% tab "Maven" %}}
+
+Your `pom.xml` file will contain a section like this.
+
+```xml
+<dependency>
+  <groupId>com.datadoghq</groupId>
+  <artifactId>datadog-lambda-java</artifactId>
+  <version>VERSION</version>
+</dependency>
+```
+
+Then redeploy your lambda function.
+
+If you do not wish to upgrade to `v1.4.x`, we are also updating `0.3.x` with the latest log4j security patches. 
+
+{{% /tab %}}
+
+{{% tab "Gradle" %}}
+
+Your `build.gradle` file will contain a section like this.
+
+```groovy
+dependencies {
+  implementation 'com.datadoghq:datadog-lambda-java:VERSION'
+}
+```
+
+Then redeploy your lambda function.
+
+If you do not wish to upgrade to `v1.4.x`, we are also updating `0.3.x` with the latest log4j security patches. 
+
+{{% /tab %}}
+{{< /tabs>}}
+
+If you are upgrading from 0.3.x to 1.4.x and you wish to use the `dd-trace-java` tracer, find the reference to the `dd-trace-java` lambda layer and change it to 
+
+```
+arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-java:4`
+````
+
+
 
 ## Further Reading
 
