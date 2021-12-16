@@ -12,7 +12,7 @@ further_reading:
 
 ## Overview
 
-If your front-end Javascript source code is minified, you will need to upload your source maps to Datadog so that we are able to deobfuscate your different stack traces. For a given error, you will then get access to the file path, the line number, as well as a code snippet for each frame of the related stack trace.
+If your front-end Javascript source code is minified, you need to upload your source maps to Datadog so that your different stack traces can be deobfuscated. For a given error, you then get access to the file path, the line number, as well as a code snippet for each frame of the related stack trace.
 
 <div class="alert alert-info"><strong>Note</strong>: Only errors collected by <a href="/real_user_monitoring/">Real User Monitoring (RUM)</a> can be unminified and processed by <a href="/real_user_monitoring/error_tracking/">Error Tracking</a>.</div>
 
