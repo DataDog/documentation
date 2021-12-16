@@ -91,7 +91,7 @@ RapDev Nutanix VM
 ## サポート
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから RapDev.io にお問い合わせください。
 
-- メール: integrations@rapdev.io
+- メール: datadog-engineering@rapdev.io
 - チャット: RapDev.io/products
 - 電話: 855-857-0222
 
