@@ -41,7 +41,7 @@ Datadog APM & Continuous Profiler gives deep visibility into your applications w
 
 {{< img src="tracing/live_search_and_analytics/tracing_without_limits_lifecycle-0.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace Journey" >}}
 
-Traces start in your instrumented applications and flow into Datadog where we ingest 100% of traces up to 50 traces per second (per APM Host). If needed for high-throughput services, you can view and control the experience using [Ingestion Controls][1].  All ingested traces are available for live search and analytics for 15 minutes and you can use custom tag-based [retention filters][2] to keep exactly the traces that matter for your business for 15 days search and analytics.
+Traces start in your instrumented applications and flow into Datadog, where 100% of traces up to 50 traces per second (per APM Host) are ingested. If needed for high-throughput services, you can view and control the experience using [Ingestion Controls][1]. All ingested traces are available for live search and analytics for 15 minutes. You can use custom tag-based [retention filters][2] to keep exactly the traces that matter for your business for 15 days for search and analytics.
 
 ## Send traces to Datadog
 

@@ -47,7 +47,7 @@ snmp_listener:
   workers: 100              # number of workers used to discover devices concurrently
   discovery_interval: 3600  # seconds
   configs:
-    - network: 1.2.3.4/24   # CIDR notation, we recommend no larger than /24 blocks
+    - network: 1.2.3.4/24   # CIDR notation, Datadog recommends no larger than /24 blocks
       version: 2
       port: 161
       community: ***
@@ -74,7 +74,7 @@ snmp_listener:
   workers: 100              # number of workers used to discover devices concurrently
   discovery_interval: 3600  # interval between each autodiscovery in seconds
   configs:
-    - network: 1.2.3.4/24   # CIDR notation, we recommend no larger than /24 blocks
+    - network: 1.2.3.4/24   # CIDR notation, Datadog recommends no larger than /24 blocks
       snmp_version: 3
       user: "user"
       authProtocol: "fakeAuth"
