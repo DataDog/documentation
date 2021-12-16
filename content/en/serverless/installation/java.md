@@ -170,7 +170,7 @@ Some versions of `datadog-lambda-java` include a transitive dependency on log4j 
 The latest version of datadog-lambda java is ![Maven Cental][4]. Use this version (omitting the preceeding `v`) when following the upgrading instructions below.
 
 If you do not wish to upgrade to `1.4.x`, `0.3.x` is updated with the latest log4j security patches as well. 
-You may find the latest version of `0.3.x` in the [datadog-lambda-java repository][13]
+You may find the latest version of `0.3.x` in the [datadog-lambda-java repository][13].
 
 The version of the `datadog-lambda-java` dependency in your Lambda function is set in `pom.xml` or `build.gradle` depending on whether you are using Maven or Gradle, respectively.
 
@@ -211,7 +211,7 @@ Then redeploy your lambda function.
 If you are upgrading from 0.3.x to 1.4.x and you wish to use the `dd-trace-java` tracer, find the reference to the `dd-trace-java` lambda layer and change it to:
 
 ```
-arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-java:4`
+arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-java:4
 ````
 
 
