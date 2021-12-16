@@ -17,7 +17,7 @@ Removing the JndiLookup.class [fully mitigates CVE-2021-44228 and CVE-2021-45046
 
 **Note**: This mitigation is not needed for 7.32.3/6.32.3. In these versions, JMXFetch uses log4j v2.12.2, which is not affected by CVE-2021-45046 or CVE-2021-44228.
 
-### Linux and MACOS
+### Linux and macOS
 
 Save the following code as a bash script, then run the script to patch the provided jmxfetch.jar in place. 
 
