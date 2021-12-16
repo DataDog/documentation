@@ -124,7 +124,7 @@ However, to route traffic to Datadog's PrivateLink offering in `us-east-1` from 
 
     **Note**: **The security group must accept inbound traffic on TCP port `443`**.
 
-7. Hit **Create endpoint** at the bottom of the screen. If successful, the following is displayed:
+7. Click **Create endpoint** at the bottom of the screen. If successful, the following is displayed:
 
 {{< img src="agent/guide/private_link/vpc_endpoint_created.png" alt="VPC endpoint created" style="width:80%;" >}}
 

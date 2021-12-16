@@ -41,7 +41,7 @@ The `kubernetes_state` check, which monitors `kube-state-metrics`, is enabled au
 	```
 
 	**Notes**:
-	* 8080 is the metrics port. The `prometheus_timeout` and `min_collection_interval` are set to 30 because this setup assumes very large payloads, so these metrics are being collected at a lower granularity. Set `send_pod_phase_service_checks` to `true` if you want the pod phase as a service check. Telemetry is only activated in v4.6.1+ of the Datadog `kube-state-metrics` check.
+	* 8080 is the metrics port. The `prometheus_timeout` and `min_collection_interval` are set to 30 because this setup assumes large payloads, so these metrics are being collected at a lower granularity. Set `send_pod_phase_service_checks` to `true` if you want the pod phase as a service check. Telemetry is only activated in v4.6.1+ of the Datadog `kube-state-metrics` check.
 	* Setting `ad.datadoghq.com/service.ignore_autodiscovery_tags` to `'true'` disables adding `kube-state-metrics` service related tags (such as `kube_namespace`, `kube_service`) to the metrics collected by the check. This setting is optional and requires Datadog Cluster Agent v1.8.0+
 
 2. Deploy the Datadog Cluster Agent with the following variables:

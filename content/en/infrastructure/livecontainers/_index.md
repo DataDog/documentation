@@ -122,7 +122,7 @@ The query at the top of the scatter plot analytic allows you to control your sca
 
 #### Real-time monitoring
 
-While actively working with the containers page, metrics are collected at a 2-second resolution. This is important for highly volatile metrics such as CPU. In the background, for historical context, metrics are collected at 10s resolution.
+While actively working with the containers page, metrics are collected at a 2-second resolution. This is important for volatile metrics such as CPU. In the background, for historical context, metrics are collected at 10s resolution.
 
 ### Kubernetes resources view
 

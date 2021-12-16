@@ -20,7 +20,7 @@ further_reading:
 
 ## Overview
 
-Amazon ECS is a highly scalable, high-performance container orchestration service that supports Docker containers. With the Datadog Agent, you can monitor ECS containers and tasks on every EC2 instance in your cluster.
+Amazon ECS is a scalable, high-performance container orchestration service that supports Docker containers. With the Datadog Agent, you can monitor ECS containers and tasks on every EC2 instance in your cluster.
 
 This page covers Amazon ECS setup with the [Datadog Container Agent v6][1]. For other setups, see:
 

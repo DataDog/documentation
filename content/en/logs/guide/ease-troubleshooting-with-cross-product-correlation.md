@@ -29,7 +29,7 @@ When your users are encountering errors or high latency in your application, vie
 
 Correlating your logs with traces also eases [aggressive sampling strategy without losing entity-level consistency][2] with the use of `trace_id`.
 
-[Correlating application logs](#correlate-application-logs) offers extensive visibility across your stack, but some very specific use cases require correlation deeper into your stack. Follow the links to complete setup per use case:
+[Correlating application logs](#correlate-application-logs) offers extensive visibility across your stack, but some specific use cases require correlation deeper into your stack. Follow the links to complete setup per use case:
 
 * [Correlate proxy logs](#correlate-proxy-logs)
 * [Correlate database logs](#correlate-database-logs)

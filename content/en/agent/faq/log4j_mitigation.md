@@ -3,9 +3,9 @@ title: Mitigating the Risk of Remote Code Execution Due to Log4Shell
 kind: faq
 ---
 
-If you are using the Datadog Agent between versions v7.17.0/v6.17.0 and v7.32.2/v6.32.2, you may be impacted by the vulnerability presented by Log4Shell (CVE-2021-44228). If you are using an Agent earlier than v7.17.0/v6.17.0, you should not be impacted by the vulnerability unless you configured log4j to log with the JMS Appender (an option that is not supported by the Agent, but if you did it, disable the appender).
+If you are using the Datadog Agent between versions v7.17.0/v6.17.0 and v7.32.2/v6.32.2, you may be impacted by the vulnerability presented by Log4Shell (CVE-2021-44228 and CVE-2021-45046). If you are using an Agent earlier than v7.17.0/v6.17.0, you should not be impacted by the vulnerability unless you configured log4j to log with the JMS Appender (an option that is not supported by the Agent, but if you did it, disable the appender).
 
-**If you are on an impacted version, to mitigate the vulnerability, the best option is to upgrade your Datadog Agent to v7.32.3 (v6.32.3) or later.**
+**The best way to mitigate the vulnerability is to upgrade your Datadog Agent to v7.32.3 (v6.32.3) or later.**
 
 If you are not sure which version of the Agent you are using, read [Seeing if your Agent Version is vulnerable](#seeing-if-your-agent-version-is-vulnerable).
 
@@ -15,7 +15,170 @@ To update the Datadog Agent core between two minor versions on your host or cont
 
 ## If you can't upgrade your Agent version
 
-If you are not able to upgrade your Agent at this time, use these instructions to implement an environment variable (`LOG4J_FORMAT_MSG_NO_LOOKUPS="true"` on the JMXFetch process or the Agent process) to partially mitigate the vulnerability: 
+If you are not able to upgrade your Agent at this time, you can use these instructions either [delete the JndiLookup.class](#delete-jndilookupclass) or to [implement an environment variable](#set-log4j_format_msg_no_lookups-environment-variable) (`LOG4J_FORMAT_MSG_NO_LOOKUPS="true"` on the JMXFetch process or the Agent process) to partially mitigate the vulnerability.
+
+# Delete JndiLookup.class
+
+**The best way to mitigate the vulnerability is to upgrade your Datadog Agent to v7.32.3 (v6.32.3) or later.**
+
+Removing the JndiLookup.class [fully mitigates CVE-2021-44228 and CVE-2021-45046](https://logging.apache.org/log4j/2.x/security.html).
+
+**Note**: This mitigation is not needed for 7.32.3/6.32.3. In these versions, JMXFetch uses log4j v2.12.2, which is not affected by CVE-2021-45046 or CVE-2021-44228.
+
+### Linux and macOS
+
+Save the following code as a bash script `jndi_cleanup.sh`, then run the script to patch the provided jmxfetch.jar in place.
+
+```bash
+#!/bin/bash
+
+YUM_CMD=$(which yum)
+APT_GET_CMD=$(which apt-get)
+
+TARGET="/opt/datadog-agent/bin/agent/dist/jmx/jmxfetch.jar"
+JNDI_CLASS="org/apache/logging/log4j/core/lookup/JndiLookup.class"
+
+set -e
+
+VALIDATE=0
+if [ $# -eq 1 ]; then
+	case "$1" in
+		-c)
+			VALIDATE=1 ;;
+		*)
+			echo "$1 is not a supported option"
+			exit 1 ;;
+	esac
+fi
+
+if ! command -v zip &> /dev/null
+then
+
+	if [[ ! -z $YUM_CMD ]]; then
+		yum install zip
+	elif [[ ! -z $APT_GET_CMD ]]; then
+		apt-get update
+		apt-get -y install zip
+	fi
+fi
+
+if [ $VALIDATE -eq 0 ]; then
+	zip -q -d $TARGET $JNDI_CLASS
+else
+	if [ -z $(zip -sf /opt/datadog-agent/bin/agent/dist/jmx/jmxfetch.jar  | grep -i jndilookup.class) ]; then
+		echo "The $TARGET JAR is now safe to run.";
+	else
+		echo "The $TARGET JAR is not safe to run as it still contains $JNDI_CLASS!";
+		exit 1;
+	fi
+fi
+
+exit 0;
+
+```
+
+Make the script executable:
+```bash
+chmod +x ./jndi_cleanup.sh
+```
+
+Remove the JndiLogger.class from the jmxfetch.jar by running:
+
+```bash
+sudo ./jndi_cleanup.sh
+```
+
+Validate the JndiLogger.class was removed by running:
+
+```bash
+.\jndi_cleanup.sh -c
+```
+
+If the operation was successful the expected out is:
+
+```
+The C:\Program Files\Datadog\Datadog Agent\embedded\agent\dist\jmx\jmxfetch.jar is now safe to run.
+```
+
+Finally, restart the Datadog Agent service with `sudo systemctl restart datadog-agent` (Linux systemd-based systems), `sudo restart datadog-agent` (Linux upstart-based systems) or from the Datadog Agent app in the menu bar (macOS).
+
+### Windows
+
+Save the following powershell code as `jndi_cleanup.ps1`.
+
+```powershell
+Param(
+    [Parameter(Mandatory=$false)]
+    [Switch]$Validate
+
+)
+
+[Reflection.Assembly]::LoadWithPartialName('System.IO.Compression')
+
+$zipfile = "C:\Program Files\Datadog\Datadog Agent\embedded\agent\dist\jmx\jmxfetch.jar"
+$files   = "JndiLookup.class"
+
+$stream = New-Object IO.FileStream($zipfile, [IO.FileMode]::Open)
+$update_mode   = [IO.Compression.ZipArchiveMode]::Update
+$read_mode   = [IO.Compression.ZipArchiveMode]::Read
+
+if ($Validate -eq $true) {
+	$mode = $read_mode
+} else {
+	$mode = $update_mode
+}
+
+$zip    = New-Object IO.Compression.ZipArchive($stream, $mode)
+
+if ($Validate -eq $true) {
+	$found = New-Object System.Collections.Generic.List[System.Object]
+	($zip.Entries | ? { $files -contains $_.Name }) | % { $found.Add($_.Name) }
+
+    if ($found.Count -eq 0) {
+        Write-Output "The $zipfile is now safe to run."
+    } else {
+        Write-Output "Dangerous file still present, something failed during the JNDI cleanup."
+    }
+} else {
+	($zip.Entries | ? { $files -contains $_.Name }) | % { $_.Delete() }
+}
+
+$zip.Dispose()
+$stream.Close()
+$stream.Dispose()
+```
+
+Remove the JndiLogger.class from the jmxfetch.jar. Please note that this step will stop the Datadog Agent service to apply the patch. To remove the vulnerable code please run:
+
+```powershell
+.\jndi_cleanup.ps1
+```
+
+Validate the JndiLogger.class was removed by running:
+
+```powershell
+.\jndi_cleanup.ps1 -Validate
+```
+
+If the operation was successful the expected out is:
+
+```
+The C:\Program Files\Datadog\Datadog Agent\embedded\agent\dist\jmx\jmxfetch.jar is now safe to run.
+```
+
+Finally, start the Datadog Agent service to apply the changes.
+
+```powershell
+"$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" start-service
+```
+
+### AIX
+
+`Jmxfetch.jar` is included in the AIX agent install bundle, but there is no code in the AIX agent that runs the `jmxfetch` code. If you are not manually starting the `jmxfetch` process, the `jmxfetch.jar` is not used and can be deleted from `/opt/datadog-agent/bin/agent/dist/jmx/jmxfetch.jar`.
+
+# Set LOG4J_FORMAT_MSG_NO_LOOKUPS environment variable
+
+**The best way to mitigate the vulnerability is to upgrade your Datadog Agent to v7.32.3 (v6.32.3) or later.**
 
 **Note**: If you are running v7.32.2 or v6.32.2, you do not strictly need to perform these steps. The Agent v7.32.2 (and v6.32.2) [starts jmxfetch with a property][2] that achieves the same result. However, in all cases, the best option is to upgrade your Datadog Agent to v7.32.3 (v6.32.3) or later.
 
@@ -38,7 +201,7 @@ On Linux, the instructions depend on the init system and on the distribution:
 3. Restart the datadog-agent service: `sudo systemctl restart datadog-agent`
 
 
-### Upstart-based systems 
+### Upstart-based systems
 
 Instructions are different depending on the Linux distribution:
 

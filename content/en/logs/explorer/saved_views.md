@@ -15,7 +15,7 @@ further_reading:
 
 Efficient troubleshooting requires your data to be in the proper **scope** to permit exploration, have access to **visualization options** to surface meaningful information, and have relevant **[facets][1]** listed to enable analysis.
 
-Troubleshooting is highly contextual, and Saved Views make it easier for you and your teammates to switch between different troubleshooting contexts. You can access Saved Views in the upper left corner of the [Log Explorer][2].
+Troubleshooting is contextual, and Saved Views make it easier for you and your teammates to switch between different troubleshooting contexts. You can access Saved Views in the upper left corner of the [Log Explorer][2].
 
 {{< img src="logs/explorer/saved_views/overview.mp4" alt="Saved Views selection" video=true style="width:90%;" >}}
 
@@ -46,7 +46,7 @@ At any moment, from the default view entry in the Views panel:
 All saved views, that are not your default saved view, are shared across your organization:
 
 * **Integration saved views** come out-of-the-box with most Datadog [Log Management Integrations][7]. These are read-only, and identified by the logo of the integration.
-* **Custom saved views** are created by users. They are editable by any user in your organization (excepting [Read Only users][8]), and identified with the avatar of the user who created it. Hit the **save** button to create a new custom saved view from the current content of your explorer.
+* **Custom saved views** are created by users. They are editable by any user in your organization (excepting [Read Only users][8]), and identified with the avatar of the user who created it. Click the **save** button to create a new custom saved view from the current content of your explorer.
 
 {{< img src="logs/explorer/saved_views/save.png" alt="Logs -- Save" style="width:30%;" >}}
 
