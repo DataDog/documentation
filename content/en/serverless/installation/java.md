@@ -25,10 +25,6 @@ Some versions of `datadog-lambda-java` include a transitive dependency on log4j 
 -  `<=0.3.3`
 -  `1.4.0`
 
-<details>
-<summary>
-Instructions for upgrading `datadog-lambda-java`
-</summary>
 
 The version of the `datadog-lambda-java` dependency in your Lambda function is set in `pom.xml` or `build.gradle` depending on whether you are using Maven or Gradle, respectively.
 
@@ -75,8 +71,6 @@ If you are upgrading from 0.3.x to 1.4.x and you wish to use the `dd-trace-java`
 ```
 arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-java:4`
 ````
-
-</details>
 
 ## Required setup
 
