@@ -57,7 +57,7 @@ There is no need to escape inner `[` and `]`. For instance:
 
 In the above example, the secret’s handle is the string `user_array[1234]`.
 
-Secrets are resolved after [Autodiscovery][1] template variables are resolved, i.e. you can use them in a secret handle. For instance:
+Secrets are resolved after [Autodiscovery][1] template variables are resolved, this means you can use them in a secret handle. For instance:
 
 ```yaml
 instances:

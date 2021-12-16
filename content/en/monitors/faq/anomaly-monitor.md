@@ -78,7 +78,7 @@ Create **A**: an anomaly monitor to alert on values above the bounds; and **B**:
 
 ### Why am I prevented from saving a monitor with the message "alert and alert recovery criteria are such that the monitor can be simultaneously in alert and alert recovery states"?
 
-Setting different windows for the alert and alert recovery periods might lead to an ambiguous state. The alert and alert recovery window sizes should be set such that both cannot be satisfied at the same time. For example, setting an alert threshold at 50% for a 2-hour window (as in, 1 hour has to be anomalous to trigger the alert) and the [recovery threshold][4] at 50% for a 10-minute window (i.e., 5 minutes have to be non-anomalous to recover) might result in triggering the alert and the alert recovery states simultaneously. If the last 5 minutes are not anomalous but the 1 hour before _was_ anomalous, both the alert and the alert recovery are triggered.
+Setting different windows for the alert and alert recovery periods might lead to an ambiguous state. The alert and alert recovery window sizes should be set such that both cannot be satisfied at the same time. For example, setting an alert threshold at 50% for a 2-hour window (as in, 1 hour has to be anomalous to trigger the alert) and the [recovery threshold][4] at 50% for a 10-minute window (as in, 5 minutes have to be non-anomalous to recover) might result in triggering the alert and the alert recovery states simultaneously. If the last 5 minutes are not anomalous but the 1 hour before _was_ anomalous, both the alert and the alert recovery are triggered.
 
 ### How does daylight savings affect anomaly detection monitors?
 

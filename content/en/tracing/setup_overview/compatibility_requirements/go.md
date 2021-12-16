@@ -76,7 +76,7 @@ The Go tracer includes support for the following data stores and libraries.
 | [Memcache][68]          | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/bradfitz/gomemcache/memcache][69]      |
 
 
-Packages must be imported, i.e.:
+Packages must be imported with:
 
 ```go
 import "gopkg.in/DataDog/dd-trace-go.v1/contrib/<PACKAGE_DIR>/<PACKAGE_NAME>"

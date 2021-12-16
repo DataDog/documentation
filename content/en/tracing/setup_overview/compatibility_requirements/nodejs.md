@@ -104,8 +104,8 @@ For details about how to how to toggle and configure plugins, check out the [API
 | Module                     | Versions | Support Type    | Notes                                                  |
 | -------------------------- | -------- | --------------- | ------------------------------------------------------ |
 | [@google-cloud/pubsub][41] | `>=1.2`  | Fully supported |                                                        |
-| [amqp10][42]               | `>=3`    | Fully supported | Supports AMQP 1.0 brokers (i.e. ActiveMQ, Apache Qpid) |
-| [amqplib][43]              | `>=0.5`  | Fully supported | Supports AMQP 0.9 brokers (i.e. RabbitMQ, Apache Qpid) |
+| [amqp10][42]               | `>=3`    | Fully supported | Supports AMQP 1.0 brokers (such as ActiveMQ, or Apache Qpid) |
+| [amqplib][43]              | `>=0.5`  | Fully supported | Supports AMQP 0.9 brokers (such as RabbitMQ, or Apache Qpid) |
 | [generic-pool][44]         | `>=2`    | Fully supported |                                                        |
 | [kafkajs][45]         | `>=1.4`    | Fully supported |                                                        |
 | [kafka-node][46]           |          | Coming Soon     |                                                        |
