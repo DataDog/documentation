@@ -170,7 +170,7 @@ Some versions of `datadog-lambda-java` include a transitive dependency on log4j 
 The latest version of datadog-lambda java is ![Maven Cental][4]. Use this version (omitting the preceeding `v`) when following the upgrading instructions below.
 
 If you do not wish to upgrade to `1.4.x`, `0.3.x` is updated with the latest log4j security patches as well. 
-If you are currently running `0.3.x` and do not wish to upgrade to `1.4.x`, you may find the latest version of `0.3.x` in the [datadog-lambda-java repository][13]
+You may find the latest version of `0.3.x` in the [datadog-lambda-java repository][13]
 
 The version of the `datadog-lambda-java` dependency in your Lambda function is set in `pom.xml` or `build.gradle` depending on whether you are using Maven or Gradle, respectively.
 
@@ -190,8 +190,6 @@ Your `pom.xml` file contains a section similar to the following:
 Replace `VERSION` with the latest version of `datadog-lambda-java` (available above). 
 Then redeploy your lambda function.
 
-If you do not wish to upgrade to `v1.4.x`, `0.3.x` is also updated with the latest log4j security patches. 
-
 {{% /tab %}}
 
 {{% tab "Gradle" %}}
@@ -206,8 +204,6 @@ dependencies {
 
 Replace `VERSION` with the latest version of `datadog-lambda-java` (available above). 
 Then redeploy your lambda function.
-
-If you do not wish to upgrade to `v1.4.x`, `0.3.x` is also updated with the latest log4j security patches. 
 
 {{% /tab %}}
 {{< /tabs>}}
