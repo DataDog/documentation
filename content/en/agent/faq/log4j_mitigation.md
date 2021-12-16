@@ -45,6 +45,8 @@ fi
 zip -q -d $TARGET $JNDI_CLASS
 ```
 
+Finally, restart the Datadog Agent service with `sudo systemctl restart datadog-agent` (Linux systemd-based systems), `sudo restart datadog-agent` (Linux upstart-based systems) or from the Datadog Agent app in the menu bar (macOS).
+
 ### Windows
 
 Save the following code as a powershell script, then run the script to patch the provided jmxfetch.jar in place. 
