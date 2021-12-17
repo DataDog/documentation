@@ -194,7 +194,7 @@ Then redeploy your lambda function.
 
 {{% tab "Gradle" %}}
 
-Your `build.gradle` file contains a section like similar to the following:
+Your `build.gradle` file contains a section similar to the following:
 
 ```groovy
 dependencies {
