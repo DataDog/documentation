@@ -44,7 +44,7 @@ Datadog is a SaaS product: customers need to establish an outbound connection fr
 
 ## Agent logs obfuscation
 
-The Datadog Agent generates local logs in order to support [Agent troubleshooting][11] as required. As a safety precaution, these local logs are filtered for some specific keywords and patterns that could indicate a potential credential (for example, API key, password and token keywords, etc.), which are then obfuscated before being written to disk.
+The Datadog Agent generates local logs in order to support [Agent troubleshooting][11] as required. As a safety precaution, these local logs are filtered for some specific keywords and patterns that could indicate a potential credential (for example, API key, password, and token keywords), which are then obfuscated before being written to disk.
 
 ## Local HTTPS server
 

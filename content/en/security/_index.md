@@ -25,7 +25,7 @@ Datadog allows customers to submit data in multiple ways, including from the [Ag
 
 ## Metadata
 
-Metadata consist primarily of [tags][6], which are typically formatted in the `key:value` (for example, `env:prod`) format. Metadata enable customer data such as Infrastructure Metrics, APM and Logs to be filtered and grouped. Metadata should not contain personal data as part of the intended use of the service.
+Metadata consist primarily of [tags][6], which are typically formatted in the `key:value` (for example, `env:prod`) format. Metadata enables customer data such as Infrastructure Metrics, APM, and Logs to be filtered and grouped. Metadata should not contain personal data as part of the intended use of the service.
 
 ## Infrastructure metrics
 
