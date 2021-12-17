@@ -3,7 +3,7 @@ title: Which Integrations use Jmxfetch?
 kind: faq
 ---
 
-## Default Integrations
+## Default integrations
 
 The following integrations use [jmxfetch](https://github.com/DataDog/jmxfetch) and are included by default in the Datadog Agent:
 * [ActiveMQ](https://docs.datadoghq.com/integrations/activemq/)
@@ -22,9 +22,9 @@ The following integrations use [jmxfetch](https://github.com/DataDog/jmxfetch) a
 * [SonarQube](https://docs.datadoghq.com/integrations/sonarqube/)
 * [Tomcat](https://docs.datadoghq.com/integrations/tomcat/)
 
-**Note**: These integrations will **not** run by default. Each integration must be confugured to run on a host.
+**Note**: These integrations do **not** run by default. Each integration must be confugured to run on a host.
 
-## Community Integrations
+## Community integrations
 
 The following [Community Integrations](/agent/guide/use-community-integrations/?tab=agentv721v621) use jmxfetch and are **not** included by default in the Datadog Agent. 
 * [nextcloud](https://github.com/DataDog/integrations-extras/tree/master/nextcloud)
@@ -40,8 +40,8 @@ The following [Community Integrations](/agent/guide/use-community-integrations/?
 * [hbase_master](https://github.com/DataDog/integrations-extras/tree/master/hbase_master)
 * [neutrona](https://github.com/DataDog/integrations-extras/tree/master/neutrona)
 
-**Note**: These integrations will **not** run by default. Each integration must be installed and confugured to run on a host.
+**Note**: These integrations do **not** run by default. Each integration must be installed and confugured to run on a host.
 
-## Custom Checks
+## Custom checks
 
 Datadog users can monitor any Java Application by configuring the [Java/JMX](https://docs.datadoghq.com/integrations/java) check.
