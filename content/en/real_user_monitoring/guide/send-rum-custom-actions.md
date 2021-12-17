@@ -18,16 +18,16 @@ To create a new RUM action, use the `addAction` API. Give your action a name and
 ```javascript
 function onCheckoutButtonClick(cart) {
     DD_RUM.addAction('checkout', {
-        'value': cart.value, // e.g. 42.12
-        'items': cart.items, // e.g. ['tomato', 'strawberries']
+        'value': cart.value, // for example, 42.12
+        'items': cart.items, // efor example, ['tomato', 'strawberries']
     })
 }
 ```
 
-All RUM context is automatically attached (current page view information, geoIP data, browser information, etc.) along with extra attributes provided with the [Global Context API][2].
+All RUM context is automatically attached (such as current page view information, geoIP data, or browser information) along with extra attributes provided with the [Global Context API][2].
 
 ## Create facets and measures on your new attributes
-Once you have deployed the code that creates your custom actions, actions begin to appear in the [RUM Explorer][3], in the **Actions** tab.
+After you have deployed the code that creates your custom actions, actions appear in the [RUM Explorer][3], in the **Actions** tab.
 
 To filter on your new custom Actions, use the `Action Target Name` attribute as follow: `@action.target.name:<ACTION_NAME>`. The example uses the following filter: `@action.target.name:checkout`
 

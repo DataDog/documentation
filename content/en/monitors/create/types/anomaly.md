@@ -153,7 +153,7 @@ avg(<query_window>):anomalies(<metric_query>, '<algorithm>', <deviations>, direc
 : A timeframe like `last_4h` or `last_7d`. The time window displayed in graphs in notifications. Must be at least as large as the `alert_window` and is recommended to be around 5 times the `alert_window`.
 
 `metric_query`
-: A standard Datadog metric query (e.g., `sum:trace.flask.request.hits{service:web-app}.as_count()`).
+: A standard Datadog metric query (for example, `sum:trace.flask.request.hits{service:web-app}.as_count()`).
 
 `algorithm`
 : `basic`, `agile`, or `robust`.
@@ -165,7 +165,7 @@ avg(<query_window>):anomalies(<metric_query>, '<algorithm>', <deviations>, direc
 : The directionality of anomalies that should trigger an alert: `above`, `below`, or `both`.
 
 `alert_window`
-: The timeframe which will be checked for anomalies (e.g., `last_5m`, `last_1h`).
+: The timeframe to be checked for anomalies (for example, `last_5m`, `last_1h`).
 
 `interval`
 : A positive integer representing the number of seconds in the rollup interval. The `interval` should be at least a fifth of the `alert_window` duration.

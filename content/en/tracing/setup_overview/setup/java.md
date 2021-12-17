@@ -59,14 +59,14 @@ Otherwise, to begin tracing your applications:
 | --------- | --------------------------------- | ------------ |
 | `DD_ENV`      | `dd.env`                  | Your application environment (`production`, `staging`, etc.) |
 | `DD_SERVICE`   | `dd.service`     | The name of a set of processes that do the same job. Used for grouping stats for your application. |
-| `DD_VERSION` | `dd.version` |  Your application version (e.g., `2.5`, `202003181415`, `1.3-alpha`, etc.) |
+| `DD_VERSION` | `dd.version` |  Your application version (for example, `2.5`, `202003181415`, `1.3-alpha`, etc.) |
 | `DD_PROFILING_ENABLED`      | `dd.profiling.enabled`          | Enable the [Continous Profiler][6] |
 | `DD_LOGS_INJECTION`   | `dd.logs.injection`     | Enable automatic MDC key injection for Datadog trace and span IDs. See [Advanced Usage][7] for details. |
 | `DD_TRACE_SAMPLE_RATE` | `dd.trace.sample.rate` |   Enable [Tracing without Limits][8]     |
 
 Additional [configuration options](#configuration) are described below.
 
-3. Ensure the Datadog Agent is configured for APM and reachable from your application via the environment specific instructions [below](#configure-the-datadog-agent-for-apm).
+3. Ensure the Datadog Agent is configured for APM and reachable from your application from the environment specific instructions [below](#configure-the-datadog-agent-for-apm).
 
 ### Configure the Datadog Agent for APM
 
@@ -256,17 +256,17 @@ The name of a set of processes that do the same job. Used for grouping stats for
 : **Environment Variable**: `DD_TAGS`<br>
 **Default**: `null`<br>
 **Example**: `layer:api,team:intake`<br>
-A list of default tags to be added to every span, profile, and JMX metric. If DD_ENV or DD_VERSION is used, it will override any env or version tag defined in DD_TAGS. Available for versions 0.50.0+.
+A list of default tags to be added to every span, profile, and JMX metric. If DD_ENV or DD_VERSION is used, it overrides any env or version tag defined in DD_TAGS. Available for versions 0.50.0+.
 
 `dd.env`
 : **Environment Variable**: `DD_ENV`<br>
 **Default**: `none`<br>
-Your application environment (e.g. production, staging, etc.). Available for versions 0.48+.
+Your application environment (for example, production, staging). Available for versions 0.48+.
 
 `dd.version`
 : **Environment Variable**: `DD_VERSION`<br>
 **Default**: `null`<br>
-Your application version (e.g. 2.5, 202003181415, 1.3-alpha, etc.). Available for versions 0.48+.
+Your application version (for example, 2.5, 202003181415, 1.3-alpha). Available for versions 0.48+.
 
 `dd.logs.injection`
 : **Environment Variable**: `DD_LOGS_INJECTION`<br>

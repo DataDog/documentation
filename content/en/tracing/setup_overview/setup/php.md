@@ -132,7 +132,7 @@ Automatic instrumentation captures:
 * Method execution time
 * Relevant trace data, such as URL and status response codes for web requests or SQL queries for database access
 * Unhandled exceptions, including stacktraces if available
-* A total count of traces (e.g., web requests) flowing through the system
+* A total count of traces (for example, web requests) flowing through the system
 
 **Note**: If your application does not use Composer nor an autoloader registered with `spl_autoload_register()`, set the environment variable, `DD_TRACE_NO_AUTOLOADER=true`, to enable automatic instrumentation.
 

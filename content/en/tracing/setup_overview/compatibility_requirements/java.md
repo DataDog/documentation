@@ -82,7 +82,7 @@ Don't see your desired web frameworks? Datadog is continually adding additional 
 **Networking tracing provides:**
 
 - timing request to response
-- tags for the request (e.g. response code)
+- tags for the request (for example, response code)
 - error and stacktrace capturing
 - distributed tracing
 
@@ -121,7 +121,7 @@ Don't see your desired networking framework? Datadog is continually adding addit
 **Datastore tracing provides:**
 
 - timing request to response
-- query info (e.g. a sanitized query string)
+- query info (for example, a sanitized query string)
 - error and stacktrace capturing
 
 | Database                | Versions | Support Type    | Instrumentation Names (used for configuration)                                           |

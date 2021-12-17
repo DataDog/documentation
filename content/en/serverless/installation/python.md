@@ -457,7 +457,7 @@ Replace `<TAG>` with either a specific version number (for example, `{{< latest-
 
 The Datadog Lambda Library can be imported either as a layer (recommended) _OR_ as a Python package.
 
-The minor version of the `datadog-lambda` package always matches the layer version. E.g., datadog-lambda v0.5.0 matches the content of layer version 5.
+The minor version of the `datadog-lambda` package always matches the layer version. For example, datadog-lambda v0.5.0 matches the content of layer version 5.
 
 #### Using the layer
 

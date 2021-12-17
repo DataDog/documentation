@@ -50,7 +50,7 @@ Search through your Synthetic tests by clicking on the facets on the left panel 
 * **Search on a single facet**: Click a facet value to create a search query that includes only that facet value. For example, `type:api`. To add another value of the same facet to your search, click the other value checkbox or add the other value with an `OR` Boolean operator and wrap values with quotes and parentheses. For example, `type:("api" OR "api-ssl")`.
 * **Search on multiple facets and text**: Click on values of different facets to create a search query that includes filtering for multiple facets. For example, `type:api``region:aws:us-east-2`. You can also mix facets and text. For example, `checkout type:browser`. Although invisible, the `AND` Boolean operator is applied when searching on multiple terms.
 * **Search on message**: Use message in your query to search through your tests’ notification messages (found in the **Message** property). For example, `message:testcontent`.
-* **Exclude facets or text**: Click on an existing filled checkbox to deselect a facet value or prepend your term with `-` to exclude it from the search query, e.g. `-state:paused`.
+* **Exclude facets or text**: Click on an existing filled checkbox to deselect a facet value or prepend your term with `-` to exclude it from the search query, for example, `-state:paused`.
 * **Perform custom matches**: Use wildcards (`*`). For example, `valid*`.
 
 If you want to exclusively search for browser tests, click **Browser Test** in the left panel. Click again to reselect all your tests, regardless of their type.
