@@ -180,6 +180,37 @@ Finally, start the Datadog Agent service to apply the changes.
 
 `Jmxfetch.jar` is included in the AIX agent install bundle, but there is no code in the AIX agent that runs the `jmxfetch` code. If you are not manually starting the `jmxfetch` process, the `jmxfetch.jar` is not used and can be deleted from `/opt/datadog-agent/bin/agent/dist/jmx/jmxfetch.jar`.
 
+### Containerized ecosystems
+
+If you are running the Datadog Agent as a container (such as in Kubernetes, Nomad or vanilla Docker), and use the JMX version (image name ends in `-jmx`), to remove the JndiLookup.class you will need to build a custom image of the Datadog Agent.
+
+Use the following Dockerfile to build the custom image:
+
+```
+ARG AGENT_VERSION=7.32.2
+
+FROM gcr.io/datadoghq/agent:$AGENT_VERSION-jmx
+
+RUN apt update && apt install zip -y
+
+RUN zip -q -d /opt/datadog-agent/bin/agent/dist/jmx/jmxfetch.jar org/apache/logging/log4j/core/lookup/JndiLookup.class
+
+RUN apt purge zip -y
+```
+
+From where the Dockerfile is located, proceed to build, tag and push the custom image to your Container Registry.
+For example if you are running `7.21.1`:
+
+```
+docker build -t <Your_Container_Registry>/agent:7.21.1-jmx-patched --build-arg AGENT_VERSION=7.21.1 .
+docker push <Your_Container_Registry>/agent:7.21.1-jmx-patched
+```
+
+Then use this patched image in your clusters.
+
+NB: This only works for Linux and uses the architecture of the machine building the image. If you need to support multiple architectures, use dedicated machines or tools such as `Docker buildx`.
+
+
 # Set LOG4J_FORMAT_MSG_NO_LOOKUPS environment variable
 
 **The best way to mitigate the vulnerability is to upgrade your Datadog Agent to v7.32.3 (v6.32.3) or later.**
