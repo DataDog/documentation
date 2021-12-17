@@ -81,11 +81,11 @@ When you open a [support ticket][1], our support team may ask for some combinati
 
 1. **How are you confirming the issue? Provide links to a trace (preferably) or screenshots, for example, and tell support what you expect to see.**
 
-    This allows support to confirm errors and attempt to reproduce your issues within our testing environments.
+    This allows Support to confirm errors and attempt to reproduce your issues within Datadog's testing environments.
 
 2. **[Tracer startup logs](#confirm-apm-setup-and-agent-status)**
 
-    Startup logs are a great way to spot misconfiguration of the tracer, or the inability for the tracer to communicate with the Datadog Agent. By comparing the configuration that the tracer sees to the one set within the application or container, support can identify areas where a setting is not being properly applied.
+    Startup logs are a great way to spot misconfiguration of the tracer, or the inability for the tracer to communicate with the Datadog Agent. By comparing the configuration that the tracer sees to the one set within the application or container, Support can identify areas where a setting is not being properly applied.
 
 3. **[Tracer debug logs](#tracer-debug-logs)**
 
@@ -105,7 +105,7 @@ kubectl exec -it <agent-pod-name> -c trace-agent -- agent flare <case-id> --loca
 
 5. **A description of your environment**
 
-    Knowing how your application is deployed helps support identify likely issues for tracer-agent communication problems or misconfigurations. For difficult issues, support may ask to a see a Kubernetes manifest or an ECS task definition, for example.
+    Knowing how your application is deployed helps the Support team identify likely issues for tracer-agent communication problems or misconfigurations. For difficult issues, Support may ask to a see a Kubernetes manifest or an ECS task definition, for example.
 
 6. **Custom code written using the tracing libraries, such as tracer configuration, [custom instrumentation][13], and adding span tags**
 
