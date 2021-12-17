@@ -1067,7 +1067,7 @@ components:
       - TEXTBOX
     IncidentFieldAttributesValueType:
       default: multiselect
-      description: Type of the single value field definitions.
+      description: Type of the multiple value field definitions.
       enum:
       - multiselect
       - textarray
