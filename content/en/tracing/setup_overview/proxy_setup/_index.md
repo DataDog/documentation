@@ -441,7 +441,9 @@ of the higher-level `CronJob`.
 Environment variables for Istio sidecars can be set on a per-deployment basis using the `apm.datadoghq.com/env` annotation. This is unique for deployments employing Istio sidecars and is set in addition to the [labels for unified service tagging][11].
 ```yaml
 apiVersion: apps/v1
+...
 kind: Deployment
+...
 spec:
   template:
     metadata:
@@ -510,6 +512,7 @@ If using Kubernetes 1.18+, `appProtocol: tcp` can be added to the port specifica
 [8]: https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/
 [9]: /tracing/setup/cpp/#environment-variables
 [10]: https://istio.io/docs/ops/configuration/traffic-management/protocol-selection/#manual-protocol-selection
+[11]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes#configuration-1
 {{% /tab %}}
 {{< /tabs >}}
 
