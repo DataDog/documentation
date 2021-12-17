@@ -113,7 +113,7 @@ main_left:
     parent: product
   - identifier: database
     name: Database Monitoring
-    pre: <i class="icon-dbm align-middle"></i>
+    pre: <i class="icon-database-2 align-middle"></i>
     url: 'https://www.datadoghq.com/product/database-monitoring'
     weight: 19
     parent: product
@@ -2121,7 +2121,7 @@ main:
     weight: 6
   - name: Database Monitoring
     url: database_monitoring/
-    pre: dbm
+    pre: database-2
     identifier: dbm
     weight: 160000
   - name: Setting Up Postgres
@@ -2979,7 +2979,7 @@ main:
     weight: 220000
   - name: Account Management
     url: account_management/
-    pre: cog
+    pre: cog-2
     identifier: account_management
     weight: 230000
   - name: Switching Between Orgs
