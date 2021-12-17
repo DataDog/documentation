@@ -180,14 +180,16 @@ Finally, start the Datadog Agent service to apply the changes.
 
 `Jmxfetch.jar` is included in the AIX agent install bundle, but there is no code in the AIX agent that runs the `jmxfetch` code. If you are not manually starting the `jmxfetch` process, the `jmxfetch.jar` is not used and can be deleted from `/opt/datadog-agent/bin/agent/dist/jmx/jmxfetch.jar`.
 
-### Containerized Ecosystems
+### Containerized ecosystems
 
-If you are running the Datadog Agent as a container (i.e. in Kubernetes, Nomad or vaniall Docker) and use the JMX version (image name ends in `-jmx`), to remove the JndiLookup.class, you will need to build a custom image of the Datadog Agent.
+If you are running the Datadog Agent as a container (such as in Kubernetes, Nomad or vanilla Docker), and use the JMX version (image name ends in `-jmx`), to remove the JndiLookup.class you will need to build a custom image of the Datadog Agent.
 
-You can use the following Dockerfile to build the image:
+Use the following Dockerfile to build the custom image:
 
 ```
-FROM gcr.io/datadoghq/agent:7.X.Y-jmx
+ARG AGENT_VERSION=7.32.2
+
+FROM gcr.io/datadoghq/agent:$AGENT_VERSION-jmx
 
 RUN apt update && apt install zip -y
 
@@ -196,21 +198,17 @@ RUN zip -q -d /opt/datadog-agent/bin/agent/dist/jmx/jmxfetch.jar org/apache/logg
 RUN apt purge zip -y
 ```
 
-Note that you will need to replace X and Y in the tag name.
-e.g. If your environment is running `7.21.1-jmx` update the Dockerfile to pull:
-```
-FROM gcr.io/datadoghq/agent:7.21.1-jmx
-```
-
-Then you will need to build, tag with a new version, push the custom image to your Container Registry and use that image in your clusters.
-e.g. with the above example:
+From where the Dockerfile is located, proceed to build, tag and push the custom image to your Container Registry.
+For example if you are running `7.21.1`:
 
 ```
-docker build -t <Your_Container_Registry>/agent:7.21.2-jmx .
-docker push <Your_Container_Registry>/agent:7.21.2-jmx
+docker build -t <Your_Container_Registry>/agent:7.21.1-jmx-patched --build-arg AGENT_VERSION=7.21.1 .
+docker push <Your_Container_Registry>/agent:7.21.1-jmx-patched
 ```
 
-NB: This will only work for Linux and will use the architecture of the machine building the image. Should you need to support multiple architectures, you will need dedicated machines or tools such as `Docker buildx`.
+Then use this patched image in your clusters.
+
+NB: This only works for Linux and uses the architecture of the machine building the image. If you need to support multiple architectures, use dedicated machines or tools such as `Docker buildx`.
 
 
 # Set LOG4J_FORMAT_MSG_NO_LOOKUPS environment variable
