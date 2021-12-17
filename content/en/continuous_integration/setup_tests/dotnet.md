@@ -131,7 +131,7 @@ If you are running tests in non-supported CI providers or with no `.git` folder,
 Your setup for custom instrumentation depends on the `dd-trace` version and includes additional steps:
 
 <div class="alert alert-warning">
-  <strong>Note:</strong> If you are using custom instrumentation, you must keep the package versions (dd-trace and Datadog.Trace NuGet packages) in sync.
+  <strong>Note:</strong> If you are using custom instrumentation, you must keep the package versions (`dd-trace` and `Datadog.Trace` NuGet packages) in sync.
 </div>
 
 To use custom instrumentation in your .NET application:
