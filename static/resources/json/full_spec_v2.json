@@ -26909,7 +26909,7 @@
                 "format": "array",
                 "items": {
                   "description": "The tag associated with the security signal.",
-                  "format": "string"
+                  "type": "string"
                 }
               },
               "timestamp": {
@@ -27054,7 +27054,7 @@
                       "format": "array",
                       "items": {
                         "description": "The tag associated with the security signal.",
-                        "format": "string"
+                        "type": "string"
                       }
                     },
                     "timestamp": {
@@ -60746,7 +60746,7 @@
                                 "format": "array",
                                 "items": {
                                   "description": "The tag associated with the security signal.",
-                                  "format": "string"
+                                  "type": "string"
                                 }
                               },
                               "timestamp": {
@@ -61029,7 +61029,7 @@
                                 "format": "array",
                                 "items": {
                                   "description": "The tag associated with the security signal.",
-                                  "format": "string"
+                                  "type": "string"
                                 }
                               },
                               "timestamp": {
