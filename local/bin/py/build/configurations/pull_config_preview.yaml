@@ -331,14 +331,14 @@
               tag: "Homepage"
               text: "Explore Datadog RUM"
     - action: pull-and-push-file
-      branch: master
+      branch: alai97/android-monitoring-mobile-vitals
       globs:
       - 'docs/rum_mobile_vitals.md'
       options:
         dest_path: '/real_user_monitoring/android/'
         file_name: 'mobile_vitals.md'
         front_matters:
-          dependencies: ["https://github.com/DataDog/dd-sdk-android/blob/master/docs/rum_mobile_vitals.md"]
+          dependencies: ["https://github.com/DataDog/dd-sdk-android/blob/alai97/android-monitoring-mobile-vitals/docs/rum_mobile_vitals.md"]
           title: Mobile Vitals
           kind: documentation
           further_reading:
@@ -367,14 +367,14 @@
               tag: "Homepage"
               text: "Explore Datadog RUM"
     - action: pull-and-push-file
-      branch: alai97/android-monitoring-mobile-vitals
+      branch: master
       globs:
       - 'docs/troubleshooting_android.md'
       options:
         dest_path: '/real_user_monitoring/android/'
         file_name: 'troubleshooting.md'
         front_matters:
-          dependencies: ["https://github.com/DataDog/dd-sdk-android/blob/alai97/android-monitoring-mobile-vitals/docs/troubleshooting_android.md"]
+          dependencies: ["https://github.com/DataDog/dd-sdk-android/blob/master/docs/troubleshooting_android.md"]
           title: Troubleshooting
           kind: documentation
           further_reading:
