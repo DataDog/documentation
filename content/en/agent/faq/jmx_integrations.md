@@ -5,7 +5,7 @@ kind: faq
 
 ## Default integrations
 
-The following integrations use [jmxfetch][1] and are included by default in the Datadog Agent:
+The following integrations use [JMXFetch][1] and are included by default in the Datadog Agent:
 
 * [ActiveMQ][2]
 * [Cassandra][3]
