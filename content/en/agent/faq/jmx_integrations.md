@@ -5,43 +5,74 @@ kind: faq
 
 ## Default integrations
 
-The following integrations use [jmxfetch](https://github.com/DataDog/jmxfetch) and are included by default in the Datadog Agent:
-* [ActiveMQ](https://docs.datadoghq.com/integrations/activemq/)
-* [Cassandra](https://docs.datadoghq.com/integrations/cassandra/)
-* [Confluent Platform](https://docs.datadoghq.com/integrations/confluent_platform/)
-* [Hazelcast](https://docs.datadoghq.com/integrations/hazelcast/)
-* [Hive](https://docs.datadoghq.com/integrations/hive/)
-* [HiveMQ](https://docs.datadoghq.com/integrations/hivemq/)
-* [Hudi](https://docs.datadoghq.com/integrations/hudi/)
-* [ignite](https://docs.datadoghq.com/integrations/ignite/)
-* [Java/JMX](https://docs.datadoghq.com/integrations/java)
-* [JBoss/WildFly](https://docs.datadoghq.com/integrations/jboss_wildfly/)
-* [Kafka](https://docs.datadoghq.com/integrations/kafka/)
-* [Presto](https://docs.datadoghq.com/integrations/presto/)
-* [Solr](https://docs.datadoghq.com/integrations/solr/)
-* [SonarQube](https://docs.datadoghq.com/integrations/sonarqube/)
-* [Tomcat](https://docs.datadoghq.com/integrations/tomcat/)
+The following integrations use [jmxfetch][1] and are included by default in the Datadog Agent:
+
+* [ActiveMQ][2]
+* [Cassandra][3]
+* [Confluent Platform][4]
+* [Hazelcast][5]
+* [Hive][6]
+* [HiveMQ][7]
+* [Hudi][8]
+* [ignite][9]
+* [Java/JMX][10]
+* [JBoss/WildFly][11]
+* [Kafka][12]
+* [Presto][13]
+* [Solr][14]
+* [SonarQube][15]
+* [Tomcat][16]
 
 **Note**: These integrations do **not** run by default. Each integration must be confugured to run on a host.
 
 ## Community integrations
 
-The following [Community Integrations](/agent/guide/use-community-integrations/?tab=agentv721v621) use jmxfetch and are **not** included by default in the Datadog Agent. 
-* [nextcloud](https://github.com/DataDog/integrations-extras/tree/master/nextcloud)
-* [flume](https://github.com/DataDog/integrations-extras/tree/master/flume)
-* [stardog](https://github.com/DataDog/integrations-extras/tree/master/stardog)
-* [hbase_regionserver](https://github.com/DataDog/integrations-extras/tree/master/hbase_regionserver)
-* [eventstore](https://github.com/DataDog/integrations-extras/tree/master/eventstore)
-* [riak_repl](https://github.com/DataDog/integrations-extras/tree/master/riak_repl)
-* [aqua](https://github.com/DataDog/integrations-extras/tree/master/aqua)
-* [snmpwalk](https://github.com/DataDog/integrations-extras/tree/master/snmpwalk)
-* [resin](https://github.com/DataDog/integrations-extras/tree/master/resin)
-* [zabbix](https://github.com/DataDog/integrations-extras/tree/master/zabbix)
-* [hbase_master](https://github.com/DataDog/integrations-extras/tree/master/hbase_master)
-* [neutrona](https://github.com/DataDog/integrations-extras/tree/master/neutrona)
+The following [Community Integrations][17] use jmxfetch and are **not** included by default in the Datadog Agent:
+
+* [nextcloud][18]
+* [flume][19]
+* [stardog][20]
+* [hbase_regionserver][21]
+* [eventstore][22]
+* [riak_repl][23]
+* [aqua][24]
+* [snmpwalk][25]
+* [resin][26]
+* [zabbix][27]
+* [hbase_master][28]
+* [neutrona][29]
 
 **Note**: These integrations do **not** run by default. Each integration must be installed and confugured to run on a host.
 
 ## Custom checks
 
-Datadog users can monitor any Java Application by configuring the [Java/JMX](https://docs.datadoghq.com/integrations/java) check.
+Datadog users can monitor any Java Application by configuring the [Java/JMX][10] check.
+[1]: https://github.com/DataDog/jmxfetch
+[2]: https://docs.datadoghq.com/integrations/activemq/
+[3]: https://docs.datadoghq.com/integrations/cassandra/
+[4]: https://docs.datadoghq.com/integrations/confluent_platform/
+[5]: https://docs.datadoghq.com/integrations/hazelcast/
+[6]: https://docs.datadoghq.com/integrations/hive/
+[7]: https://docs.datadoghq.com/integrations/hivemq/
+[8]: https://docs.datadoghq.com/integrations/hudi/
+[9]: https://docs.datadoghq.com/integrations/ignite/
+[10]: https://docs.datadoghq.com/integrations/java
+[11]: https://docs.datadoghq.com/integrations/jboss_wildfly/
+[12]: https://docs.datadoghq.com/integrations/kafka/
+[13]: https://docs.datadoghq.com/integrations/presto/
+[14]: https://docs.datadoghq.com/integrations/solr/
+[15]: https://docs.datadoghq.com/integrations/sonarqube/
+[16]: https://docs.datadoghq.com/integrations/tomcat/
+[17]: /agent/guide/use-community-integrations/?tab=agentv721v621
+[18]: https://github.com/DataDog/integrations-extras/tree/master/nextcloud
+[19]: https://github.com/DataDog/integrations-extras/tree/master/flume
+[20]: https://github.com/DataDog/integrations-extras/tree/master/stardog
+[21]: https://github.com/DataDog/integrations-extras/tree/master/hbase_regionserver
+[22]: https://github.com/DataDog/integrations-extras/tree/master/eventstore
+[23]: https://github.com/DataDog/integrations-extras/tree/master/riak_repl
+[24]: https://github.com/DataDog/integrations-extras/tree/master/aqua
+[25]: https://github.com/DataDog/integrations-extras/tree/master/snmpwalk
+[26]: https://github.com/DataDog/integrations-extras/tree/master/resin
+[27]: https://github.com/DataDog/integrations-extras/tree/master/zabbix
+[28]: https://github.com/DataDog/integrations-extras/tree/master/hbase_master
+[29]: https://github.com/DataDog/integrations-extras/tree/master/neutrona

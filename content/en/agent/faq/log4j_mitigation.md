@@ -1,6 +1,10 @@
 ---
 title: Mitigating the Risk of Remote Code Execution Due to Log4Shell
 kind: faq
+further_reading:
+- link: "/agent/faq/jmx_integrations/"
+  tag: "Documentation"
+  text: "Which Integrations use Jmxfetch?"
 ---
 
 If you are using the Datadog Agent between versions v7.17.0/v6.17.0 and v7.32.2/v6.32.2, you may be impacted by the vulnerability presented by Log4Shell (CVE-2021-44228 and CVE-2021-45046). If you are using an Agent earlier than v7.17.0/v6.17.0, you should not be impacted by the vulnerability unless you configured log4j to log with the JMS Appender (an option that is not supported by the Agent, but if you did it, disable the appender).
@@ -290,6 +294,10 @@ curl -X POST "https://api.datadoghq.com/api/v1/dashboard" \
 ### With the CLI
 
 You can also check specific Agent version information with the Agent CLI `version` subcommand. For more information, see the [Agent CLI documentation][6].
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://logging.apache.org/log4j/2.x/security.html
