@@ -46,7 +46,7 @@ The following [Community Integrations][17] use jmxfetch and are **not** included
 
 ## Custom checks
 
-Datadog users can monitor any Java Application by configuring the [Java/JMX][10] check.
+Datadog users can monitor any Java Application by configuring the [Java/JMX][10] check. The name of these checks is determined by the user who creates the check.
 [1]: https://github.com/DataDog/jmxfetch
 [2]: https://docs.datadoghq.com/integrations/activemq/
 [3]: https://docs.datadoghq.com/integrations/cassandra/
