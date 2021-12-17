@@ -69,7 +69,10 @@ docker run -d --name dd-agent \
   --cap-add SYS_RESOURCE \
   --cap-add SYS_PTRACE \
   --cap-add NET_ADMIN \
+  --cap-add NET_BROADCAST \
+  --cap-add NET_RAW \
   --cap-add IPC_LOCK \
+  --cap-add CHOWN \
   -v /var/run/docker.sock:/var/run/docker.sock:ro \
   -v /proc/:/host/proc/:ro \
   -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
