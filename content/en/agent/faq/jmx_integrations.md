@@ -9,7 +9,7 @@ further_reading:
 
 ## Default integrations
 
-The following integrations use [jmxfetch][1] and are included by default in the Datadog Agent:
+The following integrations use [JMXFetch][1] and are included by default in the Datadog Agent:
 
 * [ActiveMQ][2]
 * [Cassandra][3]
@@ -50,7 +50,7 @@ The following [Community Integrations][17] use jmxfetch and are **not** included
 
 ## Custom checks
 
-Datadog users can monitor any Java Application by configuring the [Java/JMX][10] check.
+Datadog users can monitor any Java Application by configuring the [Java/JMX][10] check. The name of these checks is determined by the user who creates the check.
 
 ## Further Reading
 
