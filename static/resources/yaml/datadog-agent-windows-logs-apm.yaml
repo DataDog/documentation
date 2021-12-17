@@ -1,4 +1,3 @@
----
 # Source: datadog/templates/secret-api-key.yaml
 apiVersion: v1
 kind: Secret
@@ -46,7 +45,7 @@ spec:
     spec:
       containers:
         - name: agent
-          image: "gcr.io/datadoghq/agent:7.31.1"
+          image: "gcr.io/datadoghq/agent:7.32.3"
           imagePullPolicy: IfNotPresent
           command: ["agent", "run"]
           resources: {}
@@ -91,18 +90,22 @@ spec:
               value: "true"
             - name: DD_HEALTH_PORT
               value: "5555"
+            - name: DD_EXPVAR_PORT
+              value: "6000"
           volumeMounts:
             - name: config
               mountPath: C:/ProgramData/Datadog
             - name: runtimesocket
               mountPath: \\.\pipe\docker_engine
+            - name: containerdsocket
+              mountPath: \\.\pipe\containerd-containerd
             - name: pointerdir
               mountPath: C:/var/log
             - name: logpodpath
               mountPath: C:/var/log/pods
               readOnly: true
             - name: logdockercontainerpath
-              mountPath: C:/ProgramData/docker/containers
+              mountPath: C:/ProgramData
               readOnly: true
           livenessProbe:
             failureThreshold: 6
@@ -125,7 +128,7 @@ spec:
             successThreshold: 1
             timeoutSeconds: 5
         - name: trace-agent
-          image: "gcr.io/datadoghq/agent:7.31.1"
+          image: "gcr.io/datadoghq/agent:7.32.3"
           imagePullPolicy: IfNotPresent
           command: ["trace-agent", "-foreground", "-config=C:/ProgramData/Datadog/datadog.yaml"]
           resources: {}
@@ -166,6 +169,8 @@ spec:
               mountPath: C:/ProgramData/Datadog
             - name: runtimesocket
               mountPath: \\.\pipe\docker_engine
+            - name: containerdsocket
+              mountPath: \\.\pipe\containerd-containerd
           livenessProbe:
             initialDelaySeconds: 15
             periodSeconds: 15
@@ -174,7 +179,7 @@ spec:
             timeoutSeconds: 5
       initContainers:
         - name: init-volume
-          image: "gcr.io/datadoghq/agent:7.31.1"
+          image: "gcr.io/datadoghq/agent:7.32.3"
           imagePullPolicy: IfNotPresent
           command: ["pwsh", "-Command"]
           args:
@@ -188,7 +193,7 @@ spec:
               mountPath: C:/Temp/install_info
           resources: {}
         - name: init-config
-          image: "gcr.io/datadoghq/agent:7.31.1"
+          image: "gcr.io/datadoghq/agent:7.32.3"
           imagePullPolicy: IfNotPresent
           command: ["pwsh", "-Command"]
           args:
@@ -198,6 +203,8 @@ spec:
               mountPath: C:/ProgramData/Datadog
             - name: runtimesocket
               mountPath: \\.\pipe\docker_engine
+            - name: containerdsocket
+              mountPath: \\.\pipe\containerd-containerd
           env:
             # Needs to be removed when Agent N-2 is built with Golang 1.17
             - name: GODEBUG
@@ -223,17 +230,23 @@ spec:
         - name: config
           emptyDir: {}
         - hostPath:
-            path: \\.\pipe\docker_engine
-          name: runtimesocket
-        - hostPath:
             path: C:/var/log
           name: pointerdir
         - hostPath:
             path: C:/var/log/pods
           name: logpodpath
         - hostPath:
-            path: C:/ProgramData/docker/containers
+            path: C:/ProgramData
           name: logdockercontainerpath
+        - hostPath:
+            path: \\.\pipe\docker_engine
+          name: runtimesocket
+        # If the CRI is not provided, try to mount the default containerd pipe.
+        # By default, datadog.dockerOrCriSocketPath mounts the Docker pipe.
+        # With this additional hostPath, both are mounted.
+        - hostPath:
+            path: \\.\pipe\containerd-containerd
+          name: containerdsocket
       tolerations:
         - effect: NoSchedule
           key: node.kubernetes.io/os

@@ -23,7 +23,8 @@ If you experience unexpected behavior with Datadog APM, there are a few common i
 ## Troubleshooting pipeline
 
 The following components are involved in sending APM data to Datadog:
-{{< img src="tracing/troubleshooting/troubleshooting_pipeline_info.png" alt="APM Troubleshooting Pipeline">}}
+
+{{< img src="tracing/troubleshooting/troubleshooting_pipeline_info_1.png" alt="APM Troubleshooting Pipeline">}}
 
 Traces (JSON data type) and [Tracing Application Metrics][2] are generated from the application and sent to the Datadog Agent before traveling to the backend. Different troubleshooting information can be collected at each section of the pipeline. Importantly, the Tracer debug logs are written to your application's logs, which is a separate component from the Datadog Agent flare. More information about these items can be seen below in [Troubleshooting data requested by Datadog Support](#troubleshooting-data-requested-by-datadog-support).
 

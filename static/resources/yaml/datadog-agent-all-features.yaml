@@ -1,11 +1,10 @@
----
 # Source: datadog/templates/cluster-agent-rbac.yaml
 apiVersion: v1
 kind: ServiceAccount
 metadata:
   labels:
     app: "datadog-agent"
-    chart: "datadog-2.22.15"
+    chart: "datadog-2.27.8"
     heritage: "Helm"
     release: "datadog-agent"
   name: datadog-agent-cluster-agent
@@ -72,6 +71,8 @@ data:
     network_config:
       enabled: true
       conntrack_init_timeout: 10s
+    service_monitoring_config:
+      enabled: false
     runtime_security_config:
       enabled: true
       debug: false
@@ -484,7 +485,7 @@ spec:
       hostPID: true
       containers:
         - name: agent
-          image: "gcr.io/datadoghq/agent:7.31.1"
+          image: "gcr.io/datadoghq/agent:7.32.3"
           imagePullPolicy: IfNotPresent
           command: ["agent", "run"]
           resources: {}
@@ -536,6 +537,8 @@ spec:
               value: "/var/run/datadog/dsd.socket"
             - name: DD_EXTRA_CONFIG_PROVIDERS
               value: "clusterchecks endpointschecks"
+            - name: DD_EXPVAR_PORT
+              value: "6000"
           volumeMounts:
             - name: installinfo
               subPath: install_info
@@ -604,7 +607,7 @@ spec:
             successThreshold: 1
             timeoutSeconds: 5
         - name: trace-agent
-          image: "gcr.io/datadoghq/agent:7.31.1"
+          image: "gcr.io/datadoghq/agent:7.32.3"
           imagePullPolicy: IfNotPresent
           command: ["trace-agent", "-config=/etc/datadog-agent/datadog.yaml"]
           resources: {}
@@ -670,7 +673,7 @@ spec:
               port: 8126
             timeoutSeconds: 5
         - name: process-agent
-          image: "gcr.io/datadoghq/agent:7.31.1"
+          image: "gcr.io/datadoghq/agent:7.32.3"
           imagePullPolicy: IfNotPresent
           command: ["process-agent", "-config=/etc/datadog-agent/datadog.yaml"]
           resources: {}
@@ -700,6 +703,8 @@ spec:
                   key: token
             - name: DD_PROCESS_AGENT_ENABLED
               value: "true"
+            - name: DD_PROCESS_AGENT_DISCOVERY_ENABLED
+              value: "false"
             - name: DD_LOG_LEVEL
               value: "INFO"
             - name: DD_SYSTEM_PROBE_ENABLED
@@ -713,15 +718,15 @@ spec:
           volumeMounts:
             - name: config
               mountPath: /etc/datadog-agent
-            - name: runtimesocketdir
-              mountPath: /host/var/run
-              mountPropagation: None
-              readOnly: true
             - name: logdatadog
               mountPath: /var/log/datadog
             - name: tmpdir
               mountPath: /tmp
               readOnly: false
+            - name: runtimesocketdir
+              mountPath: /host/var/run
+              mountPropagation: None
+              readOnly: true
             - name: cgroups
               mountPath: /host/sys/fs/cgroup
               mountPropagation: None
@@ -743,7 +748,7 @@ spec:
               mountPath: /etc/datadog-agent/system-probe.yaml
               subPath: system-probe.yaml
         - name: system-probe
-          image: "gcr.io/datadoghq/agent:7.31.1"
+          image: "gcr.io/datadoghq/agent:7.32.3"
           imagePullPolicy: IfNotPresent
           securityContext:
             capabilities:
@@ -800,7 +805,7 @@ spec:
               mountPropagation: None
               readOnly: true
         - name: security-agent
-          image: "gcr.io/datadoghq/agent:7.31.1"
+          image: "gcr.io/datadoghq/agent:7.32.3"
           imagePullPolicy: IfNotPresent
           securityContext:
             capabilities:
@@ -857,11 +862,12 @@ spec:
             - name: tmpdir
               mountPath: /tmp
               readOnly: false
-            - name: runtimesocketdir
-              mountPath: /host/var/run
-              readOnly: true
             - name: dsdsocket
               mountPath: /var/run/datadog
+              readOnly: true
+            - name: runtimesocketdir
+              mountPath: /host/var/run
+              mountPropagation: None
               readOnly: true
             - name: cgroups
               mountPath: /host/sys/fs/cgroup
@@ -875,9 +881,6 @@ spec:
             - name: hostroot
               mountPath: /host/root
               readOnly: true
-            - name: runtimesocketdir
-              mountPath: /host/root/var/run
-              readOnly: true
             - name: procdir
               mountPath: /host/proc
               readOnly: true
@@ -889,7 +892,7 @@ spec:
               subPath: system-probe.yaml
       initContainers:
         - name: init-volume
-          image: "gcr.io/datadoghq/agent:7.31.1"
+          image: "gcr.io/datadoghq/agent:7.32.3"
           imagePullPolicy: IfNotPresent
           command: ["bash", "-c"]
           args:
@@ -899,7 +902,7 @@ spec:
               mountPath: /opt/datadog-agent
           resources: {}
         - name: init-config
-          image: "gcr.io/datadoghq/agent:7.31.1"
+          image: "gcr.io/datadoghq/agent:7.32.3"
           imagePullPolicy: IfNotPresent
           command: ["bash", "-c"]
           args:
@@ -937,7 +940,7 @@ spec:
               value: "yes"
           resources: {}
         - name: seccomp-setup
-          image: "gcr.io/datadoghq/agent:7.31.1"
+          image: "gcr.io/datadoghq/agent:7.32.3"
           command:
             - cp
             - /etc/config/system-probe-seccomp.json
@@ -955,9 +958,6 @@ spec:
             name: datadog-agent-installinfo
         - name: config
           emptyDir: {}
-        - hostPath:
-            path: /var/run
-          name: runtimesocketdir
         - name: logdatadog
           emptyDir: {}
         - name: tmpdir
@@ -996,11 +996,11 @@ spec:
             path: /etc/passwd
           name: passwd
         - hostPath:
-            path: /etc/group
-          name: group
-        - hostPath:
             path: /
           name: hostroot
+        - hostPath:
+            path: /etc/group
+          name: group
         - hostPath:
             path: /etc/os-release
           name: os-release
@@ -1016,6 +1016,9 @@ spec:
         - hostPath:
             path: /var/lib/docker/containers
           name: logdockercontainerpath
+        - hostPath:
+            path: /var/run
+          name: runtimesocketdir
       tolerations:
       affinity: {}
       serviceAccountName: "datadog-agent"
@@ -1053,12 +1056,15 @@ spec:
       serviceAccountName: datadog-agent-cluster-agent
       containers:
         - name: cluster-agent
-          image: "gcr.io/datadoghq/cluster-agent:1.15.1"
+          image: "gcr.io/datadoghq/cluster-agent:1.16.0"
           imagePullPolicy: IfNotPresent
           resources: {}
           ports:
             - containerPort: 5005
               name: agentport
+              protocol: TCP
+            - containerPort: 5000
+              name: agentmetrics
               protocol: TCP
           env:
             - name: DD_HEALTH_PORT
@@ -1079,8 +1085,6 @@ spec:
               value: "INFO"
             - name: DD_LEADER_ELECTION
               value: "true"
-            - name: DD_LEADER_LEASE_DURATION
-              value: "15"
             - name: DD_COLLECT_KUBERNETES_EVENTS
               value: "true"
             - name: DD_CLUSTER_AGENT_KUBERNETES_SERVICE_NAME
