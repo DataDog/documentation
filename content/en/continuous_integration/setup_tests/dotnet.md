@@ -128,19 +128,18 @@ If you are running tests in non-supported CI providers or with no `.git` folder,
 
 ## Custom instrumentation
 
-Your setup for custom instrumentation depends on the `dd-trace` version and includes additional steps:
 
 <div class="alert alert-warning">
-  <strong>Note:</strong> If you are using custom instrumentation, you must keep the package versions (`dd-trace` and `Datadog.Trace` NuGet packages) in sync.
+  <strong>Note:</strong> Your custom instrumentation setup depends on the `dd-trace` version. To use the custom instrumentation, you must keep the package versions for `dd-trace` and `Datadog.Trace` NuGet packages in sync.
 </div>
 
-To use custom instrumentation in your .NET application:
+To use the custom instrumentation in your .NET application:
 
 1. Execute `dd-trace --version` to get the version of the tool.
 1. Add the `Datadog.Trace` [NuGet package][3] with the same version to your application.
 2. In your application code, access the global tracer through the `Datadog.Trace.Tracer.Instance` property to create new spans.
 
-For more information on adding spans and tags for custom instrumentation, see the [.NET Custom Instrumentation documentation][4].
+For more information about how to add spans and tags for custom instrumentation, see the [.NET Custom Instrumentation documentation][4].
 
 ## Further reading
 
