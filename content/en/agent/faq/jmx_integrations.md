@@ -1,6 +1,10 @@
 ---
 title: Which Integrations use Jmxfetch?
 kind: faq
+further_reading:
+- link: "/agent/faq/log4j_mitigation/"
+  tag: "Documentation"
+  text: "Mitigating the Risk of Remote Code Execution Due to Log4Shell"
 ---
 
 ## Default integrations
@@ -47,6 +51,11 @@ The following [Community Integrations][17] use jmxfetch and are **not** included
 ## Custom checks
 
 Datadog users can monitor any Java Application by configuring the [Java/JMX][10] check.
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: https://github.com/DataDog/jmxfetch
 [2]: https://docs.datadoghq.com/integrations/activemq/
 [3]: https://docs.datadoghq.com/integrations/cassandra/
