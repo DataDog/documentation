@@ -58,7 +58,7 @@ To create a login test and use it as a subtest in the rest of your test suite:
 
   {{< img src="synthetics/guide/reusing-browser-test-journeys/dashboard_test_recording.mp4" alt="Recording parent test" video="true"  width="100%">}}
 
- In the above example we are checking that after logging into a test Datadog account, users are able to create a timeboard and that the timeboard is associated with the user who created it.
+ In the example above, the login subtest ensures that after logging into a Datadog test account, users can create a timeboard. That timeboard is then associated with the user.
 
 ## Further Reading
 

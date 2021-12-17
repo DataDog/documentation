@@ -221,7 +221,7 @@ If you have data from some queries, but are expecting to see a particular query 
 
 ### Query bind parameters cannot be viewed
 
-At this time, the raw query bind parameters are obfuscated for Query Samples and Explain Plans, and are replaced with a `?` character. In a future release, we will introduce settings to expose the un-obfuscated query bind parameters.
+At this time, the raw query bind parameters are obfuscated for Query Samples and Explain Plans, and are replaced with a `?` character. In a future release, settings to expose the un-obfuscated query bind parameters are planned.
 
 
 ### Query samples are truncated

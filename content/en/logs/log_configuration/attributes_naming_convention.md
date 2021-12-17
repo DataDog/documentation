@@ -221,7 +221,7 @@ These attributes are related to the data added by a syslog or a log-shipper agen
 | `syslog.timestamp` | `string` | The log timestamp. Generally remapped to the `date` reserved attribute.       |
 | `syslog.env`       | `string` | The environment name where the source of logs come from.                      |
 
-Some integrations that rely on these are: [Rsyslog][21], [NxLog][22], [Syslog-ng][23], [Fluentd][24], [Logstash][25], etc.
+Some integrations that rely on these are: [Rsyslog][21], [NxLog][22], [Syslog-ng][23], [Fluentd][24], and [Logstash][25].
 
 #### DNS
 
@@ -232,7 +232,7 @@ All attributes and measures are prefixed by `dns`.
 | `dns.id`             | `string` | The DNS query identifier.                                                 |
 | `dns.question.name`  | `string` | The queried domain name.                                                  |
 | `dns.question.type`  | `string` | A [two octet code][26] which specifies the DNS question type.             |
-| `dns.question.class` | `string` | The class looked up by the DNS question (i.e IN when using the internet). |
+| `dns.question.class` | `string` | The class looked up by the DNS question (such as IP when using the internet). |
 | `dns.question.size`  | `number` | The DNS question size in bytes.                                           |
 | `dns.answer.name`    | `string` | The IP address that the DNS answers with.                                 |
 | `dns.answer.type`    | `string` | A [two octet code][26] which specifies the DNS answer type.               |

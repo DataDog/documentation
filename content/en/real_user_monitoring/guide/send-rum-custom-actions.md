@@ -10,7 +10,7 @@ aliases:
 ---
 ## Overview
 
-Real User Monitoring [automatically collects actions][1] on your web application. You may also want to collect additional events and timings such as form completions and business transactions. With custom RUM actions, monitor any interesting event with all the relevant context attached. As an example throughout this guide, we collect user checkouts information from an e-commerce website.
+Real User Monitoring [automatically collects actions][1] on your web application. You may also want to collect additional events and timings such as form completions and business transactions. With custom RUM actions, monitor any interesting event with all the relevant context attached. As an example throughout this guide, user checkouts information from an e-commerce website is collected.
 
 ## Instrument your code
 To create a new RUM action, use the `addAction` API. Give your action a name and then attach context attributes in the form of a JavaScript object. In the following example, a `checkout` action is created with details about the user cart when the user clicks on the checkout button.

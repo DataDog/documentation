@@ -1067,7 +1067,7 @@ components:
       - TEXTBOX
     IncidentFieldAttributesValueType:
       default: multiselect
-      description: Type of the single value field definitions.
+      description: Type of the multiple value field definitions.
       enum:
       - multiselect
       - textarray
@@ -5096,7 +5096,7 @@ components:
               format: array
               items:
                 description: The tag associated with the security signal.
-                format: string
+                type: string
             timestamp:
               description: The timestamp of the security signal.
               example: '2019-01-02T09:42:36.320Z'
