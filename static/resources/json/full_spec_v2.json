@@ -13294,7 +13294,7 @@
             "properties": {
               "from": {
                 "default": "now-15m",
-                "description": "The minimum time for the requested logs, supports date math and regular timestamps",
+                "description": "The minimum time for the requested logs, supports date math and regular timestamps (milliseconds).",
                 "example": "now-15m",
                 "type": "string"
               },
@@ -13321,7 +13321,7 @@
               },
               "to": {
                 "default": "now",
-                "description": "The maximum time for the requested logs, supports date math and regular timestamps",
+                "description": "The maximum time for the requested logs, supports date math and regular timestamps (milliseconds).",
                 "example": "now",
                 "type": "string"
               }
@@ -16534,7 +16534,7 @@
             "properties": {
               "from": {
                 "default": "now-15m",
-                "description": "The minimum time for the requested logs, supports date math and regular timestamps",
+                "description": "The minimum time for the requested logs, supports date math and regular timestamps (milliseconds).",
                 "example": "now-15m",
                 "type": "string"
               },
@@ -16561,7 +16561,7 @@
               },
               "to": {
                 "default": "now",
-                "description": "The maximum time for the requested logs, supports date math and regular timestamps",
+                "description": "The maximum time for the requested logs, supports date math and regular timestamps (milliseconds).",
                 "example": "now",
                 "type": "string"
               }
@@ -17721,7 +17721,7 @@
         "properties": {
           "from": {
             "default": "now-15m",
-            "description": "The minimum time for the requested logs, supports date math and regular timestamps",
+            "description": "The minimum time for the requested logs, supports date math and regular timestamps (milliseconds).",
             "example": "now-15m",
             "type": "string"
           },
@@ -17748,7 +17748,7 @@
           },
           "to": {
             "default": "now",
-            "description": "The maximum time for the requested logs, supports date math and regular timestamps",
+            "description": "The maximum time for the requested logs, supports date math and regular timestamps (milliseconds).",
             "example": "now",
             "type": "string"
           }
@@ -42673,7 +42673,7 @@
                     "properties": {
                       "from": {
                         "default": "now-15m",
-                        "description": "The minimum time for the requested logs, supports date math and regular timestamps",
+                        "description": "The minimum time for the requested logs, supports date math and regular timestamps (milliseconds).",
                         "example": "now-15m",
                         "type": "string"
                       },
@@ -42700,7 +42700,7 @@
                       },
                       "to": {
                         "default": "now",
-                        "description": "The maximum time for the requested logs, supports date math and regular timestamps",
+                        "description": "The maximum time for the requested logs, supports date math and regular timestamps (milliseconds).",
                         "example": "now",
                         "type": "string"
                       }
@@ -49497,7 +49497,7 @@
                     "properties": {
                       "from": {
                         "default": "now-15m",
-                        "description": "The minimum time for the requested logs, supports date math and regular timestamps",
+                        "description": "The minimum time for the requested logs, supports date math and regular timestamps (milliseconds).",
                         "example": "now-15m",
                         "type": "string"
                       },
@@ -49524,7 +49524,7 @@
                       },
                       "to": {
                         "default": "now",
-                        "description": "The maximum time for the requested logs, supports date math and regular timestamps",
+                        "description": "The maximum time for the requested logs, supports date math and regular timestamps (milliseconds).",
                         "example": "now",
                         "type": "string"
                       }
