@@ -10593,6 +10593,7 @@ components:
           type: string
         id:
           description: ID of the variable for global variables.
+          example: 123abcd4-5678-44ab-c234-d56e9999ff22
           type: string
         name:
           description: Name of the variable.
@@ -10606,6 +10607,7 @@ components:
       required:
       - type
       - name
+      - id
       type: object
     SyntheticsConfigVariableType:
       description: Type of the configuration variable.
