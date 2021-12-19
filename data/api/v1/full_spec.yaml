@@ -13488,20 +13488,8 @@ components:
       description: Number of RUM Units used for each hour for a given organization
         (data available as of November 1, 2021).
       properties:
-        browser_rum_lite_session_count:
-          description: Number of browser RUM lite sessions.
-          format: int64
-          type: integer
-        browser_rum_replay_session_count:
-          description: Number of browser RUM replay sessions.
-          format: int64
-          type: integer
         browser_rum_units:
           description: The number of browser RUM units.
-          format: int64
-          type: integer
-        mobile_rum_lite_session_count:
-          description: Number of mobile RUM lite sessions.
           format: int64
           type: integer
         mobile_rum_units:
