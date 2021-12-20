@@ -159,8 +159,8 @@ Specify alternate attributes to use as the source of a log's trace ID by setting
     **Note**: The pipeline filtering is applied before any of the pipeline's processors. For this reason, you cannot filter on an attribute that is extracted in the pipeline itself.
 
 4. Name your pipeline.
-5. Optionally grant editing access to processors in the pipeline.
-6. Optionally add tags and a description to the pipeline. The description can be used to state the pipeline's purpose and which team owns it.
+5. (Optional) Grant editing access to processors in the pipeline.
+6. (Optional) Add tags and a description to the pipeline. The description can be used to state the pipeline's purpose and which team owns it.
 7. Press **Save**.
 
 An example of a log transformed by a pipeline:
