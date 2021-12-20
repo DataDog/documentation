@@ -5,11 +5,24 @@ jobs:
   prose:
     runs-on: ubuntu-latest
     steps:
+    # Checkout this repo
     - name: Checkout
-      uses: actions/checkout@master
+      uses: actions/checkout@v2
+      with:
+        ref: ${{ github.event.pull_request.head.sha }}
+        fetch-depth: 1
+    # Make styles folder
+    - name: Create folder
+      run: |
+        mkdir -p .github/styles
+    # Lint with Vale
     - name: Vale
-      uses: errata-ai/vale-action@v1.4.0
+      uses: errata-ai/vale-action@v1.4.3
       with:
         onlyAnnotateModifiedLines: true
+        styles: |
+          https://github.com/DataDog/datadog-vale/releases/latest/download/Docshtml.zip
+          https://github.com/DataDog/datadog-vale/releases/latest/download/Docsmd.zip
+        config: https://raw.githubusercontent.com/DataDog/datadog-vale/main/.vale.ini
       env:
         GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
