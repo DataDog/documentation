@@ -1,6 +1,6 @@
 ---
 title: Datadog Data Collection, Resolution, and Retention
-kind: faq
+kind: guide
 disable_sidebar: true
 ---
 
