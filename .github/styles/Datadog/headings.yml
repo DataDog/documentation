@@ -1,0 +1,240 @@
+extends: capitalization
+message: "'%s' should use sentence-style capitalization."
+link: "https://github.com/DataDog/documentation/blob/master/CONTRIBUTING.md#headers"
+level: warning
+scope: heading
+match: $sentence
+exceptions:
+  - ACLs
+  - ActiveMQ XML Integration
+  - Agent
+  - Agentless
+  - Agents
+  - Airflow
+  - Amazon
+  - Amazon Web Services
+  - APCu
+  - APIs
+  - APM & Continuous Profiler
+  - App Analytics
+  - App Service
+  - AppVeyor
+  - AuthN
+  - Autodiscovery
+  - AWS Step Functions
+  - AWS Systems Manager
+  - Azure
+  - Azure App Service
+  - Azure App Service Plan
+  - Azure Blob Storage
+  - Azure Event Hub
+  - BitBucket
+  - BuildKite
+  - CakePHP
+  - Cassandra Nodetool
+  - Cassandra Nodetool Integration
+  - CentOS
+  - Chef
+  - CircleCI
+  - Clipboard
+  - Cloud Pub Sub
+  - CloudFormation
+  - CloudSQL
+  - CloudTrail
+  - CloudWatch
+  - Cluster Agent
+  - Continuous Profiler
+  - DaemonSet
+  - Data Collected
+  - Datadog
+  - DatadogMetric
+  - Datadog Agent Manager
+  - Datadog for Government
+  - Datadog Forwarder
+  - Datadog Lambda Extension
+  - Datadog Operator
+  - Datadog Plugin
+  - Datadog Watchdog
+  - DatadogHook
+  - Debian
+  - Detection Rules
+  - Docker
+  - Docker Compose
+  - Docker Swarm
+  - Dockerfile
+  - DogStatsD
+  - Envoy
+  - Fargate
+  - FastCGI
+  - Firehose Nozzle
+  - FireLens
+  - Fluent Bit
+  - Fluentd
+  - FreeBSD
+  - FreeSwitch
+  - Further Reading
+  - GeoIP
+  - Git
+  - GitHub
+  - GitHub Actions
+  - GitLab
+  - Gitlab Runner Integration
+  - Google
+  - Google Analytics
+  - Google Cloud
+  - Google Cloud Functions
+  - GraphQL
+  - Gunicorn
+  - HAProxy
+  - HBase RegionServer Integration
+  - HDFS DataNode Integration
+  - HDFS NameNode Integration
+  - Helm
+  - Heroku
+  - HipChat
+  - HostPort
+  - I
+  - IdP
+  - IDs
+  - iLert
+  - Incident Management
+  - Ingress Controller
+  - Internet Information Services
+  - IoT
+  - IPs
+  - Java
+  - JavaScript
+  - JBoss
+  - Jenkins
+  - JFrog
+  - JFrog Artifactory
+  - Jira
+  - JMXFetch
+  - Journald
+  - Kafka
+  - Kafka Consumer Integration
+  - Kubernetes
+  - Kubernetes Engine
+  - Kubernetes Pod
+  - Kubernetes Service
+  - Lambda
+  - Lambda Layer
+  - Lambda@Edge
+  - LaunchDarkly
+  - Linux
+  - Live Analytics
+  - Live Search
+  - Live Tail
+  - Log Explorer
+  - Log Management
+  - Log Rehydration
+  - Logback
+  - macOS
+  - Marketplace
+  - MarkLogic
+  - Meraki
+  - Mesos Slave Integration
+  - Metrics Explorer
+  - Metrics without Limits
+  - MongoDB
+  - MsTest
+  - MySQL
+  - Network Address Translation
+  - Network Device Monitoring
+  - Network Performance Monitoring
+  - New Relic
+  - NGINX Plus
+  - NixOS
+  - Node
+  - Notebook
+  - Notebook List
+  - npm
+  - NXLog
+  - OkHttp
+  - OneLogin
+  - OPcache
+  - OpenLDAP
+  - OpenMetrics
+  - OpenShift
+  - OpenStack
+  - openSUSE
+  - OpenTelemetry
+  - OpenTracing
+  - OpenVPN
+  - OpsGenie
+  - OpsWorks
+  - Oracle Instant Client
+  - Phusion Passenger
+  - Pivotal Platform
+  - Postgres
+  - PostgreSQL
+  - PowerDNS
+  - Prometheus
+  - Prometheus Alertmanager
+  - Puppet
+  - Python
+  - RabbitMQ
+  - Rails
+  - Rancher
+  - Real User Monitoring
+  - Red Hat
+  - Redis
+  - ReplicaSet
+  - RocketPants
+  - Root Cause Analysis
+  - Route53
+  - RSpec
+  - Ruby
+  - RumMonitor
+  - SafeNet
+  - SaltStack
+  - Security Monitoring
+  - Security Signal
+  - Security Signals
+  - SELinux
+  - Serverless Framework
+  - Service Checks
+  - Siri
+  - Slack
+  - SLIs
+  - SLOs
+  - socat
+  - Social Security
+  - SQL Server
+  - SQLDelight
+  - SQLite
+  - Stackdriver
+  - StackPulse
+  - StackStorm
+  - StatsD
+  - Sumo Logic
+  - Swift
+  - Syslog
+  - sysOID
+  - System Core
+  - System Swap
+  - Teamcity
+  - Terraform
+  - TokuMX
+  - Tracing Without Limits
+  - Trello
+  - Twilio
+  - TypeScript
+  - Ubuntu
+  - Unified Service Tagging
+  - Unix
+  - Unix Domain Socket
+  - URLs
+  - User Datagram Protocol
+  - Varnish
+  - Vector
+  - Vertica
+  - VMWare
+  - vSphere
+  - Watchdog
+  - Watchdog Insights
+  - Webhook
+  - WildFly
+  - Windows
+  - Xray
+  - ZooKeeper
