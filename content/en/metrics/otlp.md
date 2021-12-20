@@ -15,7 +15,7 @@ further_reading:
 
 ## Overview
 
-The Datadog Agent and the OpenTelemetry Collector Datadog exporter can ingest metrics in the OpenTelemetry format (OTLP), which can be produced by OpenTelemetry-instrumented applications.
+The Datadog Agent and the OpenTelemetry Collector Datadog exporter can ingest metrics in the OpenTelemetry format (OTLP), which can be produced by OpenTelemetry-instrumented applications. 
 
 The following OTLP metric types can be ingested by the Datadog Agent and the OpenTelemetry Collector Datadog exporter:
 - Sums
@@ -31,7 +31,7 @@ These different OTLP metric types are mapped to Datadog in-app metric types foun
 
 A single OTLP metric may be mapped to several Datadog metrics with a suffix indicating their meaning.
 
-**Note**: OTLP metric types are commonly produced by but different from OpenTelemetry metrics API instruments. The OpenTelemetry SDK allows for customization of the OTLP metrics produced by a given instrument.
+**Note**: OpenTelemetry provides metric API instruments (`Gauge`, `Counter`, `UpDownCounter`, `Histogram`...), whose measurements can be exported as OTLP metrics (Sum, Gauge, Histogram...). Other sources for OTLP metrics are possible. Applications and libraries may provide customization into the OTLP metrics they produce; read the documentation of your OpenTelemetry SDK or OTLP-producing application to understand the OTLP metrics produced and how to customize them.
 
 ## Metric types
 
@@ -62,7 +62,7 @@ OTLP Gauges are mapped to Datadog Gauges, since they do not provide an aggregati
 {{% /tab %}}
 {{% tab "Histogram" %}}
 
-An OTLP Histogram represents the statistical distribution of a set of values on a given time window, by storing certain aggregation metrics such as a the population sum or count together with a series of bucket counts. Histograms have one feature that influences the mapping:
+An OTLP Histogram represents the statistical distribution of a set of values on a given time window, by storing certain aggregation metrics such as the population sum or count together with a series of bucket counts. Histograms have one feature that influences the mapping:
 
 - *Aggregation temporality*, which can be cumulative or delta. Delta metrics have no overlap in their time windows, while cumulative metrics represent a time window from a fixed start point in time.
 
