@@ -73904,7 +73904,7 @@
       "variables": {
         "site": {
           "default": "datadoghq.com",
-          "description": "The regional site for our customers.",
+          "description": "The regional site for Datadog customers.",
           "enum": [
             "datadoghq.com",
             "us3.datadoghq.com",
@@ -73980,7 +73980,7 @@
       "name": "Logs"
     },
     {
-      "description": "Archives forward all the logs ingested to a cloud storage system.\n\nSee the [Archives Page](https://app.datadoghq.com/logs/pipelines/archives)\nfor a list of the archives currently configured in our UI.",
+      "description": "Archives forward all the logs ingested to a cloud storage system.\n\nSee the [Archives Page](https://app.datadoghq.com/logs/pipelines/archives)\nfor a list of the archives currently configured in web UI.",
       "externalDocs": {
         "description": "Find out more at",
         "url": "https://docs.datadoghq.com/logs/archives/"
