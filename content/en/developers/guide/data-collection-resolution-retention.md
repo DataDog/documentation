@@ -2,6 +2,8 @@
 title: Datadog Data Collection, Resolution, and Retention
 kind: guide
 disable_sidebar: true
+aliases:
+  - /developers/faq/data-collection-resolution-retention/
 ---
 
 Find below a summary of Datadog data collection, resolution, and retention:
