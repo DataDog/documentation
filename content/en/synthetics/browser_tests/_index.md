@@ -21,6 +21,9 @@ further_reading:
 - link: "/synthetics/guide/"
   tag: "Documentation"
   text: "Synthetic Monitoring Guides"
+- link: 'https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_test'
+  tag: 'Terraform'
+  text: 'Create and manage Synthetic Browser Tests with Terraform'
 ---
 
 ## Overview

@@ -14,7 +14,7 @@ further_reading:
   text: "Official and Community created API and DogStatsD client libraries"
 ---
 
-A metric type is an indication of what you are trying to represent with your metric and its emission source. If you refer to the [metric types][1] documentation, you can see that the `COUNT` and `RATE` metric types are quite similar to each other, as they represent the same concept: the variation of a metric value over time. However, they use different logic:
+A [metric type][1] is an indication of what you are trying to represent with your metric and its emission source. The `COUNT` and `RATE` metric types are quite similar to each other, as they represent the same concept: the variation of a metric value over time. However, they use different logic:
 
 * `RATE`: Normalized value variation over time (_per second_).
 * `COUNT`: Absolute value variation over a given time interval.
@@ -36,7 +36,7 @@ The two main in-application modifiers are `as_count()` and `as_rate()`.
 
 | Modifiers    | Description                                                                                                                                                                                                                                                                   |
 |--------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `as_count()` | Sets the operations necessary to display the given metric in `COUNT` form, giving you the absolute variation of a metric value over [a rollup interval][2]. Note that since it depends on the rollup interval, [graphing a longer time interval changes your graph shape][3]. |
+| `as_count()` | Sets the operations necessary to display the given metric in `COUNT` form, giving you the absolute variation of a metric value over [a rollup interval][2]. **Note:** Because it depends on the rollup interval, [graphing a longer time interval changes your graph shape][3]. |
 | `as_rate()`  | Sets the operations necessary to display the given metric in `RATE` form, giving you the absolute variation of a metric value per second.                                                                                                                                     |
 
 Depending on the metric type you applied them to, the behavior differs:
@@ -52,7 +52,7 @@ Depending on the metric type you applied them to, the behavior differs:
   * Sets the time aggregator to `SUM`.
   * Divides the result post-aggregation by the sampling interval in order to normalize it. For example, the following points submitted every second `[1,1,1,1].as_rate()` with a rollup interval of 20s would produce `[0.05, 0.05, 0.05, 0.05]`.
 
-**Note**: There is no normalization on very small intervals (when no time aggregation occurs), thus the raw metric value counts are returned.
+**Note**: There is no normalization on tiny intervals (when no time aggregation occurs), thus the raw metric value counts are returned.
 
 [1]: /dashboards/faq/interpolation-the-fill-modifier-explained/
 {{% /tab %}}
@@ -79,19 +79,19 @@ Depending on the metric type you applied them to, the behavior differs:
 
 While it is not normally required, it is possible to change a metric's type in the [metric summary page][4]:
 
-{{< img src="metrics/type_modifiers/metric_type.png" alt="Metric Type"  style="width:70%;">}}
+{{< img src="metrics/type_modifiers/metric_type.png" alt="Metric Type" style="width:70%;">}}
 
 Example use case:
 
-1. You have a metric `app.requests.served` that counts requests served, but accidentally submitted it via StatsD as a `GAUGE`. The metric's Datadog type is, therefore, `GAUGE`.
+1. You have a metric `app.requests.served` that counts requests served, but accidentally submitted it from StatsD as a `GAUGE`. The metric's Datadog type is, therefore, `GAUGE`.
 
 2. You wanted to submit `app.requests.served` as a StatsD `COUNT` metric for time aggregation. This would help answer questions like _"How many total requests were served in the past day?"_ by querying `sum:app.requests.served{*}` (this would not make sense for a `GAUGE` metric type.)
 
 3. You like the name `app.requests.served`, so rather than submitting a new metric name with a more appropriate `COUNT` type, you could change the type of `app.requests.served` by updating:
   * Your submission code, calling `dogstatsd.increment('app.requests.served', N)` after N requests are served, and
-  * The Datadog in-app type via the metric summary page to `RATE`.
+  * The Datadog in-app type from the metric summary page to `RATE`.
 
-This causes data submitted before the type change for `app.requests.served` to behave incorrectly because it was stored in a format to be interpreted as an in-app `GAUGE` (not a `RATE`). Data submitted after step 3 is interpreted properly.
+This causes data submitted before the type change for `app.requests.served` to behave incorrectly. This is because it was stored in a format to be interpreted as an in-app `GAUGE` (not a `RATE`). Data submitted after step 3 is interpreted properly.
 
 If you are not willing to lose the historical data submitted as a `GAUGE`, create a new metric name with the new type, leaving the type of `app.requests.served` unchanged.
 

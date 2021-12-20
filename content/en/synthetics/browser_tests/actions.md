@@ -5,7 +5,10 @@ description: Record Steps for a Synthetic Browser Test
 further_reading:
 - link: "/synthetics/browser_tests/advanced_options/"
   tag: "Documentation"
-  text: "Learn how to configure advanced options for steps"
+  text: "Learn how to configure Advanced Options for your browser test"
+- link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_global_variable"
+  tag: "Terraform"
+  text: "Create and manage Synthetic Global Variables with Terraform"
 ---
 
 ## Overview
@@ -51,7 +54,7 @@ You can record the uploading of files as a step. To record an **Upload** step yo
 
 {{< img src="synthetics/browser_tests/upload_file_step.png" alt="Create an upload file step" style="width:60%;">}}
 
-This is limited to 10 files with a limit of 5MB each.
+This is limited to 10 files with a limit of 5MB each. The Upload step is supported by browser tests running from managed locations.
 
 ## Manually added steps
 
@@ -275,7 +278,7 @@ For more information about TOTP-based MFA in a browser test, see this [TOTP guid
 
 #### Email
 
-Generate a random Synthetic email address that can be used in your test steps to [assert if an email was correctly sent][9] or to [navigate to a link contained within the email][10] (e.g. click a confirmation link). A unique mailbox is generated at each test execution to avoid any conflicts between test runs.
+Generate a random Synthetic email address that can be used in your test steps to [assert if an email was correctly sent][9] or to [navigate to a link contained within the email][10] (for example, click a confirmation link). A unique mailbox is generated at each test execution to avoid any conflicts between test runs.
 
 ### Subtests
 

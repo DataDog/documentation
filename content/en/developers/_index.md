@@ -61,7 +61,7 @@ If you are a partner developing for the Datadog Marketplace or community integra
 
 ### What's the difference between a custom check and a service check?
 
-A [custom check][11], also know as a custom Agent check, lets you send internal service data to Datadog. A [service check][12] is much simpler and lets you monitor the up or down status of the specific service. Even though these are both checks, they have very different functionality and can be used separately and together based on your monitoring needs. For more information about each, see the [custom check][11], and [service check][12] documentation sections.
+A [custom check][11], also know as a custom Agent check, lets you send internal service data to Datadog. A [service check][12] is much simpler and lets you monitor the up or down status of the specific service. Even though these are both checks, they have different functionality and can be used separately and together based on your monitoring needs. For more information about each, see the [custom check][11], and [service check][12] documentation sections.
 
 ### General developer resources
 

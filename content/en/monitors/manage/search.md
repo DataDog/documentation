@@ -21,7 +21,7 @@ Additionally, you can search for a monitor using the ID, for example: `1234567`.
 
 ### Query
 
-Enhance your search query with boolean operators (`AND`, `OR`, `NOT`) and parentheses. The search syntax is very similar to [Elasticsearch][2] with the following exceptions:
+Enhance your search query with boolean operators (`AND`, `OR`, `NOT`) and parentheses. The search syntax is similar to [Elasticsearch][2] with the following exceptions:
 
 * Regular expressions are not supported.
 * Single-character wildcard (`?`) is not supported, but the general wildcard (`*`) is supported.

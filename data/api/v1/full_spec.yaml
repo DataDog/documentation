@@ -7773,8 +7773,11 @@ components:
           format: int64
           type: integer
         rrule:
-          description: Recurrence rules as defined in the iCalendar RFC 5545.
-          example: RRULE:FREQ=DAILY;INTERVAL=10;COUNT=5
+          description: 'The recurrence rules as defined in the iCalendar RFC 5545.
+            The supported rules for SLO corrections
+
+            are `FREQ`, `INTERVAL`, `COUNT` and `UNTIL`.'
+          example: FREQ=DAILY;INTERVAL=10;COUNT=5
           type: string
         slo_id:
           description: ID of the SLO that this correction will be applied to.
@@ -7856,8 +7859,11 @@ components:
               type: string
           type: object
         rrule:
-          description: Recurrence rules as defined in the iCalendar RFC 5545.
-          example: RRULE:FREQ=DAILY;INTERVAL=10;COUNT=5
+          description: 'The recurrence rules as defined in the iCalendar RFC 5545.
+            The supported rules for SLO corrections
+
+            are `FREQ`, `INTERVAL`, `COUNT` and `UNTIL`.'
+          example: FREQ=DAILY;INTERVAL=10;COUNT=5
           nullable: true
           type: string
         slo_id:
@@ -7915,8 +7921,11 @@ components:
           format: int64
           type: integer
         rrule:
-          description: Recurrence rules as defined in the iCalendar RFC 5545.
-          example: RRULE:FREQ=DAILY;INTERVAL=10;COUNT=5
+          description: 'The recurrence rules as defined in the iCalendar RFC 5545.
+            The supported rules for SLO corrections
+
+            are `FREQ`, `INTERVAL`, `COUNT` and `UNTIL`.'
+          example: FREQ=DAILY;INTERVAL=10;COUNT=5
           type: string
         start:
           description: Starting time of the correction in epoch seconds.
@@ -13488,20 +13497,8 @@ components:
       description: Number of RUM Units used for each hour for a given organization
         (data available as of November 1, 2021).
       properties:
-        browser_rum_lite_session_count:
-          description: Number of browser RUM lite sessions.
-          format: int64
-          type: integer
-        browser_rum_replay_session_count:
-          description: Number of browser RUM replay sessions.
-          format: int64
-          type: integer
         browser_rum_units:
           description: The number of browser RUM units.
-          format: int64
-          type: integer
-        mobile_rum_lite_session_count:
-          description: Number of mobile RUM lite sessions.
           format: int64
           type: integer
         mobile_rum_units:
@@ -21012,7 +21009,9 @@ paths:
         required: false
         schema:
           type: boolean
-      - description: Monitor ID offset.
+      - description: Use this parameter for paginating through large sets of monitors.
+          Start with a value of zero, make a request, set the value to the last ID
+          of result set, and then repeat until the response is empty.
         in: query
         name: id_offset
         required: false

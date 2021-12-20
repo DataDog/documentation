@@ -9,7 +9,7 @@ further_reading:
 
 ## Enable debug mode
 
-Use Datadog debug settings to diagnose issues or audit trace data. We don't recommend enabling debug mode in production systems, because it increases the number of events that are sent to your loggers. Use it sparingly, for debugging purposes only.
+Use Datadog debug settings to diagnose issues or audit trace data. Datadog does not recommend that you enable debug mode in production systems because it increases the number of events that are sent to your loggers. Use debug mode for debugging purposes only.
 
 Debug mode is disabled by default. To enable it, follow the corresponding language tracer instructions:
 

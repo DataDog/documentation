@@ -4075,7 +4075,7 @@
                   "properties": {
                     "type": {
                       "default": "multiselect",
-                      "description": "Type of the single value field definitions.",
+                      "description": "Type of the multiple value field definitions.",
                       "enum": [
                         "multiselect",
                         "textarray",
@@ -4251,7 +4251,7 @@
                       "properties": {
                         "type": {
                           "default": "multiselect",
-                          "description": "Type of the single value field definitions.",
+                          "description": "Type of the multiple value field definitions.",
                           "enum": [
                             "multiselect",
                             "textarray",
@@ -4539,7 +4539,7 @@
                           "properties": {
                             "type": {
                               "default": "multiselect",
-                              "description": "Type of the single value field definitions.",
+                              "description": "Type of the multiple value field definitions.",
                               "enum": [
                                 "multiselect",
                                 "textarray",
@@ -4773,7 +4773,7 @@
             "properties": {
               "type": {
                 "default": "multiselect",
-                "description": "Type of the single value field definitions.",
+                "description": "Type of the multiple value field definitions.",
                 "enum": [
                   "multiselect",
                   "textarray",
@@ -4817,7 +4817,7 @@
         "properties": {
           "type": {
             "default": "multiselect",
-            "description": "Type of the single value field definitions.",
+            "description": "Type of the multiple value field definitions.",
             "enum": [
               "multiselect",
               "textarray",
@@ -4892,7 +4892,7 @@
       },
       "IncidentFieldAttributesValueType": {
         "default": "multiselect",
-        "description": "Type of the single value field definitions.",
+        "description": "Type of the multiple value field definitions.",
         "enum": [
           "multiselect",
           "textarray",
@@ -5043,7 +5043,7 @@
                           "properties": {
                             "type": {
                               "default": "multiselect",
-                              "description": "Type of the single value field definitions.",
+                              "description": "Type of the multiple value field definitions.",
                               "enum": [
                                 "multiselect",
                                 "textarray",
@@ -5749,7 +5749,7 @@
                   "properties": {
                     "type": {
                       "default": "multiselect",
-                      "description": "Type of the single value field definitions.",
+                      "description": "Type of the multiple value field definitions.",
                       "enum": [
                         "multiselect",
                         "textarray",
@@ -5958,7 +5958,7 @@
                       "properties": {
                         "type": {
                           "default": "multiselect",
-                          "description": "Type of the single value field definitions.",
+                          "description": "Type of the multiple value field definitions.",
                           "enum": [
                             "multiselect",
                             "textarray",
@@ -10565,7 +10565,7 @@
                   "properties": {
                     "type": {
                       "default": "multiselect",
-                      "description": "Type of the single value field definitions.",
+                      "description": "Type of the multiple value field definitions.",
                       "enum": [
                         "multiselect",
                         "textarray",
@@ -10716,7 +10716,7 @@
                       "properties": {
                         "type": {
                           "default": "multiselect",
-                          "description": "Type of the single value field definitions.",
+                          "description": "Type of the multiple value field definitions.",
                           "enum": [
                             "multiselect",
                             "textarray",
@@ -11346,7 +11346,7 @@
                           "properties": {
                             "type": {
                               "default": "multiselect",
-                              "description": "Type of the single value field definitions.",
+                              "description": "Type of the multiple value field definitions.",
                               "enum": [
                                 "multiselect",
                                 "textarray",
@@ -11897,7 +11897,7 @@
                             "properties": {
                               "type": {
                                 "default": "multiselect",
-                                "description": "Type of the single value field definitions.",
+                                "description": "Type of the multiple value field definitions.",
                                 "enum": [
                                   "multiselect",
                                   "textarray",
@@ -13294,7 +13294,7 @@
             "properties": {
               "from": {
                 "default": "now-15m",
-                "description": "The minimum time for the requested logs, supports date math and regular timestamps",
+                "description": "The minimum time for the requested logs, supports date math and regular timestamps (milliseconds).",
                 "example": "now-15m",
                 "type": "string"
               },
@@ -13321,7 +13321,7 @@
               },
               "to": {
                 "default": "now",
-                "description": "The maximum time for the requested logs, supports date math and regular timestamps",
+                "description": "The maximum time for the requested logs, supports date math and regular timestamps (milliseconds).",
                 "example": "now",
                 "type": "string"
               }
@@ -16534,7 +16534,7 @@
             "properties": {
               "from": {
                 "default": "now-15m",
-                "description": "The minimum time for the requested logs, supports date math and regular timestamps",
+                "description": "The minimum time for the requested logs, supports date math and regular timestamps (milliseconds).",
                 "example": "now-15m",
                 "type": "string"
               },
@@ -16561,7 +16561,7 @@
               },
               "to": {
                 "default": "now",
-                "description": "The maximum time for the requested logs, supports date math and regular timestamps",
+                "description": "The maximum time for the requested logs, supports date math and regular timestamps (milliseconds).",
                 "example": "now",
                 "type": "string"
               }
@@ -17721,7 +17721,7 @@
         "properties": {
           "from": {
             "default": "now-15m",
-            "description": "The minimum time for the requested logs, supports date math and regular timestamps",
+            "description": "The minimum time for the requested logs, supports date math and regular timestamps (milliseconds).",
             "example": "now-15m",
             "type": "string"
           },
@@ -17748,7 +17748,7 @@
           },
           "to": {
             "default": "now",
-            "description": "The maximum time for the requested logs, supports date math and regular timestamps",
+            "description": "The maximum time for the requested logs, supports date math and regular timestamps (milliseconds).",
             "example": "now",
             "type": "string"
           }
@@ -26909,7 +26909,7 @@
                 "format": "array",
                 "items": {
                   "description": "The tag associated with the security signal.",
-                  "format": "string"
+                  "type": "string"
                 }
               },
               "timestamp": {
@@ -27054,7 +27054,7 @@
                       "format": "array",
                       "items": {
                         "description": "The tag associated with the security signal.",
-                        "format": "string"
+                        "type": "string"
                       }
                     },
                     "timestamp": {
@@ -37752,7 +37752,7 @@
                                       "properties": {
                                         "type": {
                                           "default": "multiselect",
-                                          "description": "Type of the single value field definitions.",
+                                          "description": "Type of the multiple value field definitions.",
                                           "enum": [
                                             "multiselect",
                                             "textarray",
@@ -38617,7 +38617,7 @@
                                   "properties": {
                                     "type": {
                                       "default": "multiselect",
-                                      "description": "Type of the single value field definitions.",
+                                      "description": "Type of the multiple value field definitions.",
                                       "enum": [
                                         "multiselect",
                                         "textarray",
@@ -38911,7 +38911,7 @@
                                     "properties": {
                                       "type": {
                                         "default": "multiselect",
-                                        "description": "Type of the single value field definitions.",
+                                        "description": "Type of the multiple value field definitions.",
                                         "enum": [
                                           "multiselect",
                                           "textarray",
@@ -39996,7 +39996,7 @@
                                     "properties": {
                                       "type": {
                                         "default": "multiselect",
-                                        "description": "Type of the single value field definitions.",
+                                        "description": "Type of the multiple value field definitions.",
                                         "enum": [
                                           "multiselect",
                                           "textarray",
@@ -40862,7 +40862,7 @@
                                   "properties": {
                                     "type": {
                                       "default": "multiselect",
-                                      "description": "Type of the single value field definitions.",
+                                      "description": "Type of the multiple value field definitions.",
                                       "enum": [
                                         "multiselect",
                                         "textarray",
@@ -41294,7 +41294,7 @@
                                     "properties": {
                                       "type": {
                                         "default": "multiselect",
-                                        "description": "Type of the single value field definitions.",
+                                        "description": "Type of the multiple value field definitions.",
                                         "enum": [
                                           "multiselect",
                                           "textarray",
@@ -42673,7 +42673,7 @@
                     "properties": {
                       "from": {
                         "default": "now-15m",
-                        "description": "The minimum time for the requested logs, supports date math and regular timestamps",
+                        "description": "The minimum time for the requested logs, supports date math and regular timestamps (milliseconds).",
                         "example": "now-15m",
                         "type": "string"
                       },
@@ -42700,7 +42700,7 @@
                       },
                       "to": {
                         "default": "now",
-                        "description": "The maximum time for the requested logs, supports date math and regular timestamps",
+                        "description": "The maximum time for the requested logs, supports date math and regular timestamps (milliseconds).",
                         "example": "now",
                         "type": "string"
                       }
@@ -49497,7 +49497,7 @@
                     "properties": {
                       "from": {
                         "default": "now-15m",
-                        "description": "The minimum time for the requested logs, supports date math and regular timestamps",
+                        "description": "The minimum time for the requested logs, supports date math and regular timestamps (milliseconds).",
                         "example": "now-15m",
                         "type": "string"
                       },
@@ -49524,7 +49524,7 @@
                       },
                       "to": {
                         "default": "now",
-                        "description": "The maximum time for the requested logs, supports date math and regular timestamps",
+                        "description": "The maximum time for the requested logs, supports date math and regular timestamps (milliseconds).",
                         "example": "now",
                         "type": "string"
                       }
@@ -60746,7 +60746,7 @@
                                 "format": "array",
                                 "items": {
                                   "description": "The tag associated with the security signal.",
-                                  "format": "string"
+                                  "type": "string"
                                 }
                               },
                               "timestamp": {
@@ -61029,7 +61029,7 @@
                                 "format": "array",
                                 "items": {
                                   "description": "The tag associated with the security signal.",
-                                  "format": "string"
+                                  "type": "string"
                                 }
                               },
                               "timestamp": {

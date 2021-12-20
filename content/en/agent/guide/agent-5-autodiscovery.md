@@ -175,14 +175,14 @@ With the key-value store enabled as a template source, the Agent looks for templ
 ```text
 /datadog/
   check_configs/
-    docker_image_1/                 # container identifier, e.g. httpd
-      - check_names: [<CHECK_NAME>] # e.g. apache
+    docker_image_1/                 # container identifier, for example, httpd
+      - check_names: [<CHECK_NAME>] # for example, apache
       - init_configs: [<INIT_CONFIG>]
       - instances: [<INSTANCE_CONFIG>]
     ...
 ```
 
-Each template is a 3-tuple: check name, `init_config`, and `instances`. The `docker_images` option from the previous section, which provided container identifiers to Autodiscovery, is not required here; for key-value stores, container identifiers appear as first-level keys under `check_config`. (Also note, the file-based template in the previous section didn't need a check name like this example does; there, the Agent inferred the check name from the file name.)
+Each template is a 3-tuple: check name, `init_config`, and `instances`. The `docker_images` option from the previous section, which provided container identifiers to Autodiscovery, is not required here. For key-value stores, container identifiers appear as first-level keys under `check_config`. (Also note, the file-based template in the previous section didn't need a check name like this example does; there, the Agent inferred the check name from the file name.)
 
 #### Apache check
 

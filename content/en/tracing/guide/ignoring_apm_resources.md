@@ -25,7 +25,7 @@ Configuring the Trace Agent to ignore certain spans or resources applies to all 
 
 Starting with Datadog Agent 6.27.0/7.27.0, the **filter tags** option drops traces with root spans that match specified span tags. This option applies to all services that send traces to this particular Datadog Agent. Traces that are dropped because of filter tags are not included in trace metrics.
 
-If you can programmatically identify a set of traces that you know you don't want sent Datadog, and no other option in this guide solves your requirement, you can consider adding a [custom span tag][2] so you can drop the traces. [Reach out to Support][1] to discuss your use case further so we can continue to expand this functionality.
+If you can programmatically identify a set of traces that you know you don't want sent Datadog, and no other option in this guide solves your requirement, you can consider adding a [custom span tag][2] so you can drop the traces. [Reach out to Support][1] to discuss your use case further so Datadog can continue to expand this functionality.
 
 The filter tags option requires an exact string match. If your use case requires ignoring by regex, see [Ignoring based on resources](#ignoring-based-on-resources).
 
@@ -192,7 +192,6 @@ Alternatively, you can set `agents.containers.traceAgent.env` in the `helm insta
 {{< code-block lang="bash" >}}
 helm install dd-agent -f values.yaml \
   --set datadog.apiKeyExistingSecret="datadog-secret" \
-  --set datadog.apm.enabled=true \
   --set agents.containers.traceAgent.env[0].name=DD_APM_IGNORE_RESOURCES, \
     agents.containers.traceAgent.env[0].value="Api::HealthchecksController#index$" \
   datadog/datadog

@@ -8,6 +8,9 @@ further_reading:
 - link: "/synthetics/"
   tag: "Documentation"
   text: "Manage your checks"
+- link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_test"
+  tag: "Terraform"
+  text: "Create and manage Synthetic API tests with Terraform"
 ---
 
 ## Overview
@@ -187,6 +190,55 @@ For more information, see [Create an API test][1] in the API documentation.
 }
 {{< /code-block >}}
 
+### WebSocket test
+
+{{< code-block lang="json" disable_copy="false" collapsible="true" >}}
+{
+    "status": "live",
+    "tags": [
+        "env:prod"
+    ],
+    "locations": [
+        "aws:eu-west-3"
+    ],
+    "message": "<NOTIFICATION MESSAGE>",
+    "name": "<TEST NAME>",
+    "type": "api",
+    "subtype": "websocket",
+    "config": {
+        "request": {
+            "url": "ws://example.com:8081",
+            "message": "websocket message"
+        },
+        "assertions": [
+            {
+                "operator": "lessThan",
+                "type": "responseTime",
+                "target": 1000
+            },
+            {
+                "operator": "is",
+                "type": "receivedMessage",
+                "target": "connected!"
+            }
+        ]
+    },
+    "options": {
+        "monitor_options": {
+            "notify_audit": false,
+            "locked": false,
+            "include_tags": true,
+            "new_host_delay": 300,
+            "notify_no_data": false,
+            "renotify_interval": 0
+        },
+        "tick_every": 60,
+        "min_failure_duration": 0,
+        "min_location_failed": 1
+    }
+}
+{{< /code-block >}}
+
 ### TCP test
 
 {{< code-block lang="json" disable_copy="false" collapsible="true" >}}
@@ -319,55 +371,6 @@ For more information, see [Create an API test][1] in the API documentation.
                 "operator": "moreThanOrEqual",
                 "type": "packetsReceived",
                 "target": 1
-            }
-        ]
-    },
-    "options": {
-        "monitor_options": {
-            "notify_audit": false,
-            "locked": false,
-            "include_tags": true,
-            "new_host_delay": 300,
-            "notify_no_data": false,
-            "renotify_interval": 0
-        },
-        "tick_every": 60,
-        "min_failure_duration": 0,
-        "min_location_failed": 1
-    }
-}
-{{< /code-block >}}
-
-### WebSocket test
-
-{{< code-block lang="json" disable_copy="false" collapsible="true" >}}
-{
-    "status": "live",
-    "tags": [
-        "env:prod"
-    ],
-    "locations": [
-        "aws:eu-west-3"
-    ],
-    "message": "<NOTIFICATION MESSAGE>",
-    "name": "<TEST NAME>",
-    "type": "api",
-    "subtype": "websocket",
-    "config": {
-        "request": {
-            "url": "ws://example.com:8081",
-            "message": "websocket message"
-        },
-        "assertions": [
-            {
-                "operator": "lessThan",
-                "type": "responseTime",
-                "target": 1000
-            },
-            {
-                "operator": "is",
-                "type": "receivedMessage",
-                "target": "connected!"
             }
         ]
     },

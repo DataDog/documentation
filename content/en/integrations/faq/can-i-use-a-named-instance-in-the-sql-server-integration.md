@@ -11,7 +11,7 @@ Here are the docs from Microsoft with more about the SQL Server Browser service:
 https://technet.microsoft.com/en-us/library/ms181087(v=sql.105).aspx#Anchor_2
 ```
 
-The SQL Server Browser service is required to use named instances and this service is disabled by default. Datadog highly recommends the approval of a system admin before enabling [this service][2]).
+The [SQL Server Browser service][2] is required to use named instances and is disabled by default. Datadog recommends the approval of a system admin before enabling this service.
 
 Once the SQL Server Browser service has been enabled, you can configure the [sqlserver.yaml][3] file to connect to a named instance by designating the named instance in the host value. For example:
 
