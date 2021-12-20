@@ -29,6 +29,8 @@ further_reading:
 
 This page covers how to configure integrations Autodiscovery with Kubernetes. If you are using Docker or Amazon ECS, see the [Docker Integrations Autodiscovery documentation][1]. The goal of Autodiscovery is to apply a Datadog integration configuration when running an Agent check against a given container. See how to [configure Agent integrations][2] when running the Agent on a host for more context on this logic.
 
+If you have configuration values that you do not wish to store in plaintext, such as passwords, see [Secrets Management][11].
+
 To configure an integration with Autodiscovery, use the following parameters:
 
 | Parameter            | Required | Description                                                                                       |
@@ -559,3 +561,4 @@ etcdctl set /datadog/check_configs/httpd/instances '[[{"apache_status_url": "htt
 [8]: /integrations/gunicorn/
 [9]: /integrations/apache/#setup
 [10]: /integrations/http_check/#setup
+[11]: /agent/guide/secrets-management/
