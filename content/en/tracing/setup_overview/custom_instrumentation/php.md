@@ -61,12 +61,10 @@ For example, the following snippet traces the `CustomDriver::doWork()` method an
         $span->resource = 'CustomDriver.doWork';
         $span->service = 'php';
 
-        $span->meta = [
-            // If an exception was thrown from the instrumented call, return value is null
-            'doWork.size' => $exception ? 0 : count($retval),
-            // Access object members via $this
-            'doWork.thing' => $this->workToDo,
-        ];
+        // If an exception was thrown from the instrumented call, return value is null
+        $span->meta['doWork.size'] = $exception ? 0 : count($retval),
+        // Access object members via $this
+        $span->meta['doWork.thing'] = $this->workToDo;
 
         // The span will automatically close
     }
@@ -194,10 +192,8 @@ Add tags to a span via the `DDTrace\SpanData::$meta` array.
     'myRandFunc',
     function(\DDTrace\SpanData $span, array $args, $retval) {
         // ...
-        $span->meta = [
-            'rand.range' => $args[0] . ' - ' . $args[1],
-            'rand.value' => $retval,
-        ];
+        $span->meta['rand.range'] = $args[0] . ' - ' . $args[1];
+        $span->meta['rand.value'] = $retval;
     }
 );
 ```
@@ -246,12 +242,10 @@ function doRiskyThing() {
     'doRiskyThing',
     function(\DDTrace\SpanData $span, $args, $retval) {
         if ($retval === SOME_ERROR_CODE) {
-            $span->meta = [
-                'error.msg' => 'Foo error',
-                // Optional:
-                'error.type' => 'CustomError',
-                'error.stack' => my_get_backtrace(),
-            ];
+            $span->meta['error.msg'] = 'Foo error';
+            // Optional:
+            $span->meta['error.type'] = 'CustomError';
+            $span->meta['error.stack'] = my_get_backtrace();
         }
     }
 );
@@ -316,10 +310,8 @@ function myRandFunc($min, $max) {
         $span->service = 'php';
         // The following are optional
         $span->type = 'web';
-        $span->meta = [
-            'rand.range' => $args[0] . ' - ' . $args[1],
-            'rand.value' => $retval,
-        ];
+        $span->meta['rand.range'] = $args[0] . ' - ' . $args[1];
+        $span->meta['rand.value'] = $retval;
         $span->metrics = [
             '_sampling_priority_v1' => 0.9,
         ];
@@ -619,12 +611,10 @@ dd_trace('CustomDriver', 'doWork', function (...$args) {
         $span->resource = 'CustomDriver.doWork';
         $span->service = 'php';
 
-        $span->meta = [
-            // If an exception was thrown from the instrumented call, return value is null
-            'doWork.size' => $exception ? 0 : count($retval),
-            // Access object members via $this
-            'doWork.thing' => $this->workToDo,
-        ];
+        // If an exception was thrown from the instrumented call, return value is null
+        $span->meta['doWork.size'] = $exception ? 0 : count($retval);
+        // Access object members via $this
+        $span->meta['doWork.thing'] = $this->workToDo;
 
         // No need to explicitly forward the call with dd_trace_forward_call()
         // No need to explicitly catch/attach exceptions
