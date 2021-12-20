@@ -63,6 +63,7 @@ For example, the following snippet traces the `CustomDriver::doWork()` method an
 
         // If an exception was thrown from the instrumented call, return value is null
         $span->meta['doWork.size'] = $exception ? 0 : count($retval),
+        // Access object members via $this
         $span->meta['doWork.thing'] = $this->workToDo;
 
         // The span will automatically close
@@ -242,6 +243,7 @@ function doRiskyThing() {
     function(\DDTrace\SpanData $span, $args, $retval) {
         if ($retval === SOME_ERROR_CODE) {
             $span->meta['error.msg'] = 'Foo error';
+            // Optional:
             $span->meta['error.type'] = 'CustomError';
             $span->meta['error.stack'] = my_get_backtrace();
         }
