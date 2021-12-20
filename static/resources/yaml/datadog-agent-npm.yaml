@@ -510,6 +510,7 @@ spec:
                 - NET_BROADCAST
                 - NET_RAW
                 - IPC_LOCK
+                - CHOWN
             privileged: false
           command: ["/opt/datadog-agent/embedded/bin/system-probe", "--config=/etc/datadog-agent/system-probe.yaml"]
           env:
