@@ -164,16 +164,26 @@ If a `setenv` file does not exist, create it in the `./bin` directory of the Tom
 {{% /tab %}}
 {{% tab "JBoss" %}}
 
-Add the following line to the end of `standalone.conf`:
+- In standalone mode:
+
+  Add the following line to the end of `standalone.conf`:
 
 ```text
 JAVA_OPTS="$JAVA_OPTS -javaagent:/path/to/dd-java-agent.jar"
 ```
 
-On Windows, add the following line to the end of `standalone.conf.bat`:
+- In standalone mode and on Windows, add the following line to the end of `standalone.conf.bat`:
 
 ```text
 set "JAVA_OPTS=%JAVA_OPTS% -javaagent:X:/path/to/dd-java-agent.jar"
+```
+
+- In domain mode:
+
+  Add the following line in the file `domain.xml`, under the tag server-groups.server-group.jvm.jvm-options:
+ 
+```text
+<option value="-javaagent:/path/to/dd-java-agent.jar"/>
 ```
 
 For more details, see the [JBoss documentation][1].
