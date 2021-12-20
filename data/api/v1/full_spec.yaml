@@ -1886,8 +1886,8 @@ components:
         alert_type:
           $ref: '#/components/schemas/EventAlertType'
         date_happened:
-          description: 'POSIX timestamp of the event. Must be sent as an integer (i.e.
-            no quotes).
+          description: 'POSIX timestamp of the event. Must be sent as an integer (that
+            is no quotes).
 
             Limited to events no older than 7 days.'
           format: int64
@@ -1992,8 +1992,8 @@ components:
         alert_type:
           $ref: '#/components/schemas/EventAlertType'
         date_happened:
-          description: 'POSIX timestamp of the event. Must be sent as an integer (i.e.
-            no quotes).
+          description: 'POSIX timestamp of the event. Must be sent as an integer (that
+            is no quotes).
 
             Limited to events no older than 7 days.'
           format: int64
@@ -2019,8 +2019,8 @@ components:
         priority:
           $ref: '#/components/schemas/EventPriority'
         related_event_id:
-          description: ID of the parent event. Must be sent as an integer (i.e. no
-            quotes).
+          description: ID of the parent event. Must be sent as an integer (that is
+            no quotes).
           format: int64
           type: integer
         source_type_name:
@@ -2066,8 +2066,8 @@ components:
         alert_type:
           $ref: '#/components/schemas/EventAlertType'
         date_happened:
-          description: 'POSIX timestamp of the event. Must be sent as an integer (i.e.
-            no quotes).
+          description: 'POSIX timestamp of the event. Must be sent as an integer (that
+            is no quotes).
 
             Limited to events no older than 7 days.'
           format: int64
@@ -2093,8 +2093,8 @@ components:
         priority:
           $ref: '#/components/schemas/EventPriority'
         related_event_id:
-          description: ID of the parent event. Must be sent as an integer (i.e. no
-            quotes).
+          description: ID of the parent event. Must be sent as an integer (that is
+            no quotes).
           format: int64
           type: integer
         source_type_name:
@@ -4726,9 +4726,10 @@ components:
               format: date-time
               type: string
             timezone:
-              description: 'Timezone can be specified both as an offset (e.g. "UTC+03:00")
+              description: 'Timezone can be specified both as an offset (for example
+                "UTC+03:00")
 
-                or a regional zone (e.g. "Europe/Paris").'
+                or a regional zone (for example "Europe/Paris").'
               type: string
             to:
               description: Maximum timestamp for requested logs.
@@ -6151,13 +6152,13 @@ components:
           example: avg(last_5m):sum:system.net.bytes_rcvd{host:host0} > 100
           type: string
         scopes:
-          description: 'The scope(s) to which the downtime applies, e.g. `host:app2`.
+          description: 'The scope(s) to which the downtime applies, for example `host:app2`.
 
-            Provide multiple scopes as a comma-separated list, e.g. `env:dev,env:prod`.
+            Provide multiple scopes as a comma-separated list, for example `env:dev,env:prod`.
 
             The resulting downtime applies to sources that matches ALL provided scopes
 
-            (i.e. `env:dev AND env:prod`), NOT any of them.'
+            (that is `env:dev AND env:prod`), NOT any of them.'
           example:
           - host:app2
           - env:dev,env:prod
@@ -8610,7 +8611,8 @@ components:
         target_display:
           description: 'A string representation of the target that indicates its precision.
 
-            It uses trailing zeros to show significant decimal places (e.g. `98.00`).
+            It uses trailing zeros to show significant decimal places (for example
+            `98.00`).
 
 
             Always included in service level objective responses. Ignored in
@@ -13046,7 +13048,7 @@ components:
           format: int64
           type: integer
         alibaba_host_count:
-          description: 'Contains the total number of hosts that reported via Alibaba
+          description: 'Contains the total number of hosts that reported through Alibaba
             integration
 
             (and were NOT running the Datadog Agent).'
@@ -13064,14 +13066,14 @@ components:
           format: int64
           type: integer
         aws_host_count:
-          description: 'Contains the total number of hosts that reported via the AWS
-            integration
+          description: 'Contains the total number of hosts that reported through the
+            AWS integration
 
             (and were NOT running the Datadog Agent).'
           format: int64
           type: integer
         azure_host_count:
-          description: 'Contains the total number of hosts that reported via Azure
+          description: 'Contains the total number of hosts that reported through Azure
             integration
 
             (and were NOT running the Datadog Agent).'
@@ -13083,8 +13085,8 @@ components:
           format: int64
           type: integer
         gcp_host_count:
-          description: 'Contains the total number of hosts that reported via the Google
-            Cloud integration
+          description: 'Contains the total number of hosts that reported through the
+            Google Cloud integration
 
             (and were NOT running the Datadog Agent).'
           format: int64
@@ -13106,8 +13108,8 @@ components:
           format: date-time
           type: string
         infra_azure_app_service:
-          description: 'Contains the total number of hosts that reported via the Azure
-            App Services integration
+          description: 'Contains the total number of hosts that reported through the
+            Azure App Services integration
 
             (and were NOT running the Datadog Agent).'
           format: int64
@@ -13118,7 +13120,7 @@ components:
           format: int64
           type: integer
         vsphere_host_count:
-          description: 'Contains the total number of hosts that reported via vSphere
+          description: 'Contains the total number of hosts that reported through vSphere
             integration
 
             (and were NOT running the Datadog Agent).'
@@ -14953,7 +14955,7 @@ components:
         scale:
           default: linear
           description: Specifies the scale type. Possible values are `linear`, `log`,
-            `sqrt`, `pow##` (e.g. `pow2`, `pow0.5` etc.).
+            `sqrt`, `pow##` (for example `pow2`, `pow0.5` etc.).
           type: string
       type: object
     WidgetChangeType:
@@ -15728,7 +15730,7 @@ paths:
         variables:
           site:
             default: datadoghq.com
-            description: The regional site for our customers.
+            description: The regional site for Datadog customers.
             enum:
             - datadoghq.com
             - us3.datadoghq.com
@@ -21179,10 +21181,10 @@ paths:
         Example: `"check".over(tags).last(count).by(group).count_by_status()`
 
 
-        - **`check`** name of the check, e.g. `datadog.agent.up`
+        - **`check`** name of the check, for example `datadog.agent.up`
 
-        - **`tags`** one or more quoted tags (comma-separated), or "*". e.g.: `.over("env:prod",
-        "role:db")`; **`over`** cannot be blank.
+        - **`tags`** one or more quoted tags (comma-separated), or "*". for example:
+        `.over("env:prod", "role:db")`; **`over`** cannot be blank.
 
         - **`count`** must be at greater than or equal to your max threshold (defined
         in the `options`). It is limited to 100.
@@ -21533,8 +21535,8 @@ paths:
           format: int64
           type: integer
       - description: 'String for sort order, composed of field and sort order separate
-          by a comma, e.g. `name,asc`. Supported sort directions: `asc`, `desc`. Supported
-          fields:
+          by a comma, for example `name,asc`. Supported sort directions: `asc`, `desc`.
+          Supported fields:
 
 
           * `name`
@@ -21622,8 +21624,8 @@ paths:
           format: int64
           type: integer
       - description: 'String for sort order, composed of field and sort order separate
-          by a comma, e.g. `name,asc`. Supported sort directions: `asc`, `desc`. Supported
-          fields:
+          by a comma, for example `name,asc`. Supported sort directions: `asc`, `desc`.
+          Supported fields:
 
 
           * `name`
@@ -21726,7 +21728,7 @@ paths:
           format: int64
           type: integer
       - description: Delete the monitor even if it's referenced by other resources
-          (e.g. SLO, composite monitor).
+          (for example SLO, composite monitor).
         in: query
         name: force
         required: false
@@ -23578,7 +23580,7 @@ paths:
         schema:
           type: string
       - description: Delete the monitor even if it's referenced by other resources
-          (e.g. SLO, composite monitor).
+          (for example SLO, composite monitor).
         in: query
         name: force
         required: false
@@ -25401,7 +25403,7 @@ paths:
         required: true
         schema:
           type: string
-      - description: 'The source of the tags (e.g. chef, puppet).
+      - description: 'The source of the tags (for example chef, puppet).
 
           [Complete list of source attribute values](https://docs.datadoghq.com/integrations/faq/list-of-api-source-attribute-value).'
         in: query
@@ -25552,7 +25554,7 @@ paths:
         required: true
         schema:
           type: string
-      - description: 'The source of the tags (e.g. chef, puppet).
+      - description: 'The source of the tags (for example chef, puppet).
 
           [Complete list of source attribute values](https://docs.datadoghq.com/integrations/faq/list-of-api-source-attribute-value)'
         in: query
@@ -27652,7 +27654,7 @@ paths:
         variables:
           site:
             default: datadoghq.com
-            description: The regional site for our customers.
+            description: The regional site for Datadog customers.
             enum:
             - datadoghq.com
             - us3.datadoghq.com
@@ -27875,7 +27877,7 @@ tags:
 - description: "Pipelines and processors operate on incoming logs, parsing\nand transforming
     them into structured attributes for easier querying.\n\n- See the [pipelines configuration
     page](https://app.datadoghq.com/logs/pipelines)\n  for a list of the pipelines
-    and processors currently configured in our UI.\n\n- Additional API-related information
+    and processors currently configured in web UI.\n\n- Additional API-related information
     about processors can be found in the\n  [processors documentation](https://docs.datadoghq.com/logs/log_configuration/processors/?tab=api#lookup-processor).\n\n-
     For more information about Pipelines, see the\n  [pipeline documentation](https://docs.datadoghq.com/logs/log_configuration/pipelines).\n\n**Notes:**\n\nThese
     endpoints are only available for admin users.\nMake sure to use an application
