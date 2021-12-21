@@ -6354,6 +6354,7 @@ components:
       - slo alert
       - event-v2 alert
       - audit alert
+      - ci-pipelines alert
       example: query alert
       type: string
       x-enum-varnames:
@@ -6370,6 +6371,7 @@ components:
       - SLO_ALERT
       - EVENT_V2_ALERT
       - AUDIT_ALERT
+      - CI_PIPELINES_ALERT
     MonitorUpdateRequest:
       description: Object describing a monitor update request.
       properties:
@@ -15787,10 +15789,9 @@ components:
             dashboards_write: The ability to create and change dashboards.
             events_read: The ability to read events data.
             metrics_read: The ability to view custom metrics.
-            monitors_downtime: The ability to set downtimes for your organization.
-              A user with this permission can suppress alerts from any monitor using
-              a downtime, even if they do not have permission to edit those monitors
-              explicitly.
+            monitors_downtime: The ability to set downtimes to suppress alerts from
+              any monitor in an organization. The ability to write monitors is not
+              required to set downtimes.
             monitors_read: The ability to view monitors.
             monitors_write: The ability to change, mute, and delete individual monitors.
             synthetics_global_variable_read: The ability to view, search and use in
@@ -15803,9 +15804,9 @@ components:
             synthetics_write: The ability to create, edit, and delete Synthetic tests.
             timeseries_query: The ability to query timeseries data.
             usage_read: The ability to view your organization's usage and usage attribution.
-            user_access_invite: Allows users to invite other users to your organization.
-            user_access_manage: Grants the permission to disable users, manage user
-              roles and SAML-to-role mappings.
+            user_access_invite: The ability to invite other users to your organization.
+            user_access_manage: The ability to disable users, manage user roles, and
+              manage SAML-to-role mappings.
           tokenUrl: /oauth2/v1/token
       type: oauth2
     apiKeyAuth:
@@ -21506,7 +21507,32 @@ paths:
 
 
         **NOTE** Only available on US1-FED and in closed beta on US1, EU, US3, and
-        US5.'
+        US5.
+
+
+        **CI Pipelines Alert Query**
+
+
+        Example: `ci-pipelines(query).rollup(rollup_method[, measure]).last(time_window)
+        operator #`
+
+
+        - **`query`** The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).
+
+        - **`rollup_method`** The stats roll-up method - supports `count`, `avg`,
+        and `cardinality`.
+
+        - **`measure`** For `avg` and cardinality `rollup_method` - specify the measure
+        or the facet name you want to use.
+
+        - **`time_window`** #m (between 1 and 2880), #h (between 1 and 48).
+
+        - **`operator`** `<`, `<=`, `>`, `>=`, `==`, or `!=`.
+
+        - **`#`** an integer or decimal number used to set the threshold.
+
+
+        **NOTE** Only available in closed beta on US1, EU, US3 and US5.'
       operationId: CreateMonitor
       requestBody:
         content:
