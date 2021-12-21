@@ -184,7 +184,7 @@ Execution time is calculated by adding up the time that a span is active, meanin
 
 {{< img src="tracing/visualization/execution-time1.png" style="width:50%;" alt="Execution time" >}}
 
-When child spans are concurrent, execution time is calculated by dividing the overlapping time by the number of concurrently active spans. In the following image, Spans 2 and 3 are concurrent (both are children of Span 1), overlapping for the latency of Span 3, so the execution time of Span 2 is $\D2 ÷ 2 + \D3$, and the execution time of Span 3 is $\D2 ÷ 2$.
+When child spans are concurrent, execution time is calculated by dividing the overlapping time by the number of concurrently active spans. In the following image, Spans 2 and 3 are concurrent (both are children of Span 1), overlapping for the duration of Span 3, so the execution time of Span 2 is $\D2 ÷ 2 + \D3$, and the execution time of Span 3 is $\D2 ÷ 2$.
 
 {{< img src="tracing/visualization/execution-time2.png" style="width:50%;" alt="Execution time for concurrent work" >}}
 
