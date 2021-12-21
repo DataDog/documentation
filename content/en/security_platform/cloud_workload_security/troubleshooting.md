@@ -4,7 +4,7 @@ kind: documentation
 description: "Troubleshooting for Cloud Workload Security."
 ---
 
-## Self tests
+## Agent Self tests
 
 In order to ensure that the communication between the `security-agent` and the `system-probe` is working as expected and the Cloud Workload Security probe is able to detect system events, you can manually trigger self tests by running the following command:
 
