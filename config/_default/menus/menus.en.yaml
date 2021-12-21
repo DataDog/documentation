@@ -7119,6 +7119,18 @@ api:
         - RemovePermissionFromRole
       unstable: []
       order: 8
+  - name: Create a new role by cloning an existing role
+    url: '#create-a-new-role-by-cloning-an-existing-role'
+    identifier: create-a-new-role-by-cloning-an-existing-role
+    parent: roles
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CloneRole
+      unstable: []
+      order: 12
   - name: Update a role
     url: '#update-a-role'
     identifier: update-a-role

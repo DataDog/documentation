@@ -4127,6 +4127,36 @@ components:
           readOnly: true
           type: integer
       type: object
+    RoleClone:
+      description: Data for the clone role request.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/RoleCloneAttributes'
+        type:
+          $ref: '#/components/schemas/RolesType'
+      required:
+      - type
+      - attributes
+      type: object
+    RoleCloneAttributes:
+      description: Attributes required to create a new role by cloning an existing
+        one.
+      properties:
+        name:
+          description: Name of the new role that is cloned.
+          example: cloned-role
+          type: string
+      required:
+      - name
+      type: object
+    RoleCloneRequest:
+      description: Request to create a role by cloning an existing role.
+      properties:
+        data:
+          $ref: '#/components/schemas/RoleClone'
+      required:
+      - data
+      type: object
     RoleCreateAttributes:
       description: Attributes of the created role.
       properties:
@@ -8638,6 +8668,68 @@ paths:
       x-menu-order: 4
       x-undo:
         type: idempotent
+  /api/v2/roles/{role_id}/clone:
+    post:
+      description: Clone an existing role
+      operationId: CloneRole
+      parameters:
+      - $ref: '#/components/parameters/RoleID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RoleCloneRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoleResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not found
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Conflict
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - user_access_manage
+      summary: Create a new role by cloning an existing role
+      tags:
+      - Roles
+      x-codegen-request-body-name: body
+      x-menu-order: 12
+      x-permission: OR(USER_ACCESS_MANAGE)
+      x-undo:
+        operationId: DeleteRole
+        parameters:
+        - name: role_id
+          source: data.id
+        type: unsafe
   /api/v2/roles/{role_id}/permissions:
     delete:
       description: Removes a permission from a role.
