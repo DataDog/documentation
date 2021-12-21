@@ -5543,9 +5543,9 @@ components:
             security_monitoring_rules_write: The ability to create and edit Detection
               rules.
             security_monitoring_signals_read: The ability to view Security signals.
-            user_access_invite: Allows users to invite other users to your organization.
-            user_access_manage: Grants the permission to disable users, manage user
-              roles and SAML-to-role mappings.
+            user_access_invite: The ability to invite other users to your organization.
+            user_access_manage: The ability to disable users, manage user roles, and
+              manage SAML-to-role mappings.
           tokenUrl: /oauth2/v1/token
       type: oauth2
     apiKeyAuth:
