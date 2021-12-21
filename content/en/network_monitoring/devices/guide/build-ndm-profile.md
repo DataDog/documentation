@@ -54,15 +54,14 @@ Some guidelines to help you in this process:
     - Temperature: temperature sensors, thermal condition
     - Power supply: on/off or total branch
 
-## Implementation
+## Create a profile
 
 ### Add a profile
 
-First, add a profile by creating a `.yaml` file with the `sysobjectid` and metrics, for example:
+Add a profile by creating a `.yaml` file with the `sysobjectid` and metrics, for example:
 
 ```yaml
 sysobjectid: 1.3.6.1.4.1.232.9.4.10
-
 metrics:
   - MIB: CPQHLTH-MIB
     symbol:
@@ -72,22 +71,19 @@ metrics:
 
 **Note**: `sysobjectid` can be a wildcard pattern to match a sub-tree of devices, for example: `1.3.6.1.131.12.4.*`.
 
-### Generate a profile file from a collection of MIBs
+### Generate a profile
 
-You can use [ddev][7], part of the Datadog integrations developer's toolkit, to create a profile from a list of mibs.
+You can use [ddev][7], part of the Datadog integrations developer's toolkit, to create a profile from a list of MIBs. This script requires a list of ASN1 MIB files as input argument, and copies to the clipboard a list of metrics that can be used to create a profile.
 
 ```console
 $  ddev meta snmp generate-profile-from-mibs --help
 ```
 
-This script requires a list of ASN1 MIB files as input argument, and copies to the clipboard a list of metrics that can be used to create a profile.
+#### Add nodes
 
-### Options
+Use `-f, --filters` as an option to provide a collection of MIB names and their node names to be included.
 
-`-f, --filters` is an option to provide the path to a YAML file containing a collection of MIB names and their list of node names to be included.
-
-For example, include `system`, `interfaces` and `ip` nodes from `RFC1213-MIB`, no node from `CISCO-SYSLOG-MIB`, and node `snmpEngine` from `SNMP-FRAMEWORK-MIB`.
-
+For example, using this option will generate a profile that includes the `system`, `interfaces` and `ip` nodes from `RFC1213-MIB`, no node from `CISCO-SYSLOG-MIB`, and the node `snmpEngine` from `SNMP-FRAMEWORK-MIB`.
 
 ```yaml
 RFC1213-MIB:
@@ -101,7 +97,9 @@ SNMP-FRAMEWORK-MIB:
 
 **Note**: Each `MIB:node_name` correspond to exactly one and only one OID. However, some MIBs report legacy nodes that are overwritten. To resolve, edit the MIB by removing legacy values manually before loading them with this profile generator. If a MIB is fully supported, it can be omitted from the filter as MIBs not found in a filter are fully loaded. If a MIB is **not** fully supported, it can be listed with an empty node list, such as `CISCO-SYSLOG-MIB` in the example.
 
-`-a, --aliases` is an option to provide the path to a YAML file containing a list of aliases to be used as metric tags for tables, in the following format:
+#### Add metric tags for tables
+
+Use `-a, --aliases` as an option to provide a list of aliases to be used as metric tags for tables. These are generated in the following format:
 
 ```yaml
 aliases:
@@ -113,8 +111,7 @@ aliases:
     name: entPhysicalName
 ```
 
-MIBs tables most of the time define one or more indexes, as columns within the same table, or columns from a different table and even a different MIB. The index value can be used to tag table's metrics. This is defined in the `INDEX` field in `row` nodes.
-
+The index value can be used to tag a table's metrics. This is defined in the `INDEX` field in `row` nodes.
 As an example, `entPhysicalContainsTable` in `ENTITY-MIB` is as follows:
 
 ```txt
@@ -122,41 +119,14 @@ entPhysicalContainsEntry OBJECT-TYPE
 SYNTAX      EntPhysicalContainsEntry
 MAX-ACCESS  not-accessible
 STATUS      current
-DESCRIPTION
-        "A single container/'containee' relationship."
+DESCRIPTION "A single container/'containee' relationship."
 INDEX       { entPhysicalIndex, entPhysicalChildIndex }  <== this is the index definition
 ::= { entPhysicalContainsTable 1 }
 ```
 
-or, for example, its JSON dump, where `INDEX` is replaced by `indices`:
+Indexes can also be replaced by another MIB symbol that is more human-readable. You might prefer to see the interface name versus its numerical table index. This can be achieved using `metric_tag_aliases`.
 
-```json
-"entPhysicalContainsEntry": {
-    "name": "entPhysicalContainsEntry",
-    "oid": "1.3.6.1.2.1.47.1.3.3.1",
-    "nodetype": "row",
-    "class": "objecttype",
-    "maxaccess": "not-accessible",
-    "indices": [
-      {
-        "module": "ENTITY-MIB",
-        "object": "entPhysicalIndex",
-        "implied": 0
-      },
-      {
-        "module": "ENTITY-MIB",
-        "object": "entPhysicalChildIndex",
-        "implied": 0
-      }
-    ],
-    "status": "current",
-    "description": "A single container/'containee' relationship."
-  },
-```
-
-Indexes can be replaced by another MIB symbol that is more human-readable. You might prefer to see the interface name versus its numerical table index. This can be achieved using `metric_tag_aliases`.
-
-### Add unit tests
+## Add unit tests
 
 Add a unit test in `test_profiles.py` to verify that the metric is successfully collected by the integration when the profile is enabled. These unit tests are mostly used to prevent regressions and help with maintenance.
 
@@ -189,7 +159,7 @@ E   AssertionError: Needed exactly 1 candidates for 'snmp.cpqHeSysUtilLifeTime',
 [...]
 ```
 
-### Add simultation data
+## Add simulation data
 
 Add a `.snmprec` file named after the `community_string`, which is the value given to `run_profile_check()`:
 
