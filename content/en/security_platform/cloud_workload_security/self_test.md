@@ -1,17 +1,14 @@
 ---
 title: Troubleshooting
 kind: documentation
-description: "Troubleshooting guide for Datadog Cloud Workload Security."
+description: "Troubleshooting for Cloud Workload Security."
 ---
 
 ## Self tests
 
-In order to ensure that:
-- the communication between the `security-agent` and the `system-probe` is
-working as expected
-- the Cloud Workload Security probe is able to detect system events
+In order to ensure that the communication between the `security-agent` and the `system-probe` is working as expected and the Cloud Workload Security probe is able to detect system events, you can manually trigger self tests by running the following command:
 
-you can manually trigger self tests by running the following command:
+
 
 | Platform     | Command                                                                             |
 | --------     | -------                                                                             |
@@ -19,16 +16,16 @@ you can manually trigger self tests by running the following command:
 | Kubernetes   | `kubectl exec -it <POD_NAME> -c security-agent -- security-agent runtime self-test` |
 | Host         | `sudo /opt/datadog-agent/embedded/bin/security-agent runtime self-test`             |
 
-The self-test procedure creates some temporary files and rules monitoring
-them, and then triggers those rules ensuring that events are correctly propagated.
+The self-test procedure creates some temporary files and rules to monitor them, and then triggers those rules to ensure that events are correctly propagated.
 
-If everything is working as expected, you should see:
+The following response appears when rules are propagated.
 ```
 Runtime self test: OK
 ```
-and then see events coming from the `runtime-security-agent` in your logs
 
-{{< img src="security_platform/cws/self_test_logs.png" alt="Self Test events in Logs explorer" style="width:90%;">}}
+You can now see events coming from the `runtime-security-agent` in the Log Explorer.
+
+{{< img src="security_platform/cws/self_test_logs.png" alt="Self test events in the Log Explorer" style="width:90%;">}}
 
 In the case of an error, you should see:
 ```
