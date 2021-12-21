@@ -1,9 +1,6 @@
-
 ---
 title: OTLP Metrics Types
 kind: documentation
-aliases:
-    - /developers/metrics/otlp/
 further_reading:
     - link: 'metrics/distributions'
       tag: 'Documentation'
@@ -23,7 +20,7 @@ The following OTLP metric types can be ingested by the Datadog Agent and the Ope
 - Histograms
 - Summaries
 
-These different OTLP metric types are mapped to Datadog in-app metric types found within the Datadog web application:
+These OTLP metric types are mapped to Datadog metric types:
 
 - COUNT
 - GAUGE
@@ -31,7 +28,7 @@ These different OTLP metric types are mapped to Datadog in-app metric types foun
 
 A single OTLP metric may be mapped to several Datadog metrics with a suffix indicating their meaning.
 
-**Note**: OpenTelemetry provides metric API instruments (`Gauge`, `Counter`, `UpDownCounter`, `Histogram`...), whose measurements can be exported as OTLP metrics (Sum, Gauge, Histogram...). Other sources for OTLP metrics are possible. Applications and libraries may provide customization into the OTLP metrics they produce; read the documentation of your OpenTelemetry SDK or OTLP-producing application to understand the OTLP metrics produced and how to customize them.
+**Note**: OpenTelemetry provides metric API instruments (`Gauge`, `Counter`, `UpDownCounter`, `Histogram`, and so on), whose measurements can be exported as OTLP metrics (Sum, Gauge, Histogram). Other sources for OTLP metrics are possible. Applications and libraries may provide customization into the OTLP metrics they produce. Read the documentation of your OpenTelemetry SDK or OTLP-producing application to understand the OTLP metrics produced and how to customize them.
 
 ## Metric types
 
@@ -51,11 +48,11 @@ The default mapping is as follows:
 2. Cumulative non-monotonic sums are exported as Datadog gauges.
 3. Delta sums are exported as Datadog counts.
 
-[1]: https://docs.datadoghq.com/dashboards/functions/arithmetic/#cumulative-sum
+[1]: /dashboards/functions/arithmetic/#cumulative-sum
 {{% /tab %}}
 {{% tab "Gauge" %}}
 
-An OTLP gauge represents a sampled value at a given time. Only the last value on a given time window is included in the OTLP metrics.
+An OTLP Gauge represents a sampled value at a given time. Only the last value on a given time window is included in the OTLP metrics.
 
 OTLP Gauges are mapped to Datadog Gauges, since they do not provide an aggregation semantic. Both integer and floating-point Gauge data points are mapped to floating point numbers in the Datadog format. 
 
@@ -67,45 +64,45 @@ An OTLP Histogram represents the statistical distribution of a set of values on 
 - *Aggregation temporality*, which can be cumulative or delta. Delta metrics have no overlap in their time windows, while cumulative metrics represent a time window from a fixed start point in time.
 
 The default mapping is as follows:
-1. delta histograms are reported as Datadog distributions. [Read more about distributions][2] to understand the available aggregations.
+1. Delta histograms are reported as Datadog distributions. [Read more about distributions][2] to understand the available aggregations.
 2. For cumulative histograms, the delta between consecutive points is calculated and reported to Datadog as a distribution. You may use the [`cumsum` arithmetic function][1] on individual aggregations to recover the value in the OTLP payload.
 
 The Datadog Agent and the OpenTelemetry Collector Datadog exporter allow changing the Histogram export in the `histogram` subsection.
 - If the `mode` is set to `counters`, the following metrics are produced:
 
 `<METRIC_NAME>.bucket`, tagged by `lower_bound` and `upper_bound`
-: Represents the bucket count in the time window for the bucket with said lower and upper bounds.<br>
+: Bucket count in the time window for the bucket with the specified lower and upper bounds.<br>
 **Datadog In-App Type**: COUNT
 
 - If the `send_count_sum_metrics` flag is enabled, the following metrics are produced:
 
 `<METRIC_NAME>.sum`
-: Represents the sum of the values submitted during the time window.<br>
+: Sum of the values submitted during the time window.<br>
 **Datadog In-App Type**: COUNT
 
 `<METRIC_NAME>.count`
-: Represents the number of values submitted during the time window.<br>
+: Number of values submitted during the time window.<br>
 **Datadog In-App Type**: COUNT
 
-**Note**: `send_count_sum_metrics` is only useful when not using the distributions mode.
+**Note**: `send_count_sum_metrics` is useful only when not using the distributions mode.
 
-[1]: https://docs.datadoghq.com/dashboards/functions/arithmetic/#cumulative-sum
-[2]: https://docs.datadoghq.com/metrics/distributions
+[1]: /dashboards/functions/arithmetic/#cumulative-sum
+[2]: /metrics/distributions
 {{% /tab %}}
 {{% tab "Summary" %}}
 
 An OTLP Summary is a legacy type that conveys quantile information about a population over a time window. OTLP Summary types are not produced by OpenTelemetry SDKs but may be produced by other components for backwards compatibility.
 
 `<METRIC_NAME>.sum`
-: Represents the sum of the values since the application started producing the metric.<br>
+: Sum of the values since the application started producing the metric.<br>
 **Datadog In-App Type**: COUNT
 
 `<METRIC_NAME>.count`
-: Represents the number of values in the population . <br>
+: Number of values in the population . <br>
 **Datadog In-App Type**: COUNT
 
 `<METRIC_NAME>.quantile`, tagged by `quantile`
-: Represents the value of a given quantile.<br>
+: Value of a given quantile.<br>
 **Datadog In-App Type**: GAUGE
 
 {{% /tab %}}
@@ -121,16 +118,16 @@ You may add all resource attributes as tags by using the `resource_attributes_as
 
 ### Hostname resolution
 
-OpenTelemetry defines certain semantic conventions related to host names. If an OTLP payload has a known hostname attribute, Datadog products honor these conventions and try to use its value as a hostname. The semantic conventions are considered in the following order:
+OpenTelemetry defines certain semantic conventions related to host names. If an OTLP payload has a known hostname attribute, Datadog honors these conventions and tries to use its value as a hostname. The semantic conventions are considered in the following order:
 
 1. `datadog.host.name`, a Datadog-specific hostname convention
 2. `k8s.node.name`, the Kubernetes node name
-3. cloud provider-specific conventions, based on the `cloud.provider` semantic convention
+3. Cloud provider-specific conventions, based on the `cloud.provider` semantic convention
 4. `host.id`, the unique host ID
 5. `host.name`, the system hostname
 6. `container.id`, the container ID
 
-If none are present, Datadog products assign a system-level hostname to payloads.
+If none are present, Datadog assigns a system-level hostname to payloads.
 On the OpenTelemetry Collector, add the ['resource detection' processor][3] to your pipelines for accurate hostname resolution.
 
 ### Example
@@ -138,7 +135,7 @@ On the OpenTelemetry Collector, add the ['resource detection' processor][3] to y
 {{< tabs >}}
 {{% tab "Sum" %}}
 
-Suppose you are using an OpenTelemetry Counter instrument from a single application, which, by default, exports metrics of a cumulative **monotonic** Sum type. The following table summarizes the behavior of Datadog products:
+Suppose you are using an OpenTelemetry Counter instrument from a single application, which, by default, exports metrics of a cumulative **monotonic** Sum type. The following table summarizes Datadog behavior:
 
 | Collection period | Counter values    | OTLP Sum value | Value reported to Datadog | Datadog In-App Type | Notes                                          |
 |-------------------|-------------------|----------------|---------------------------| ------------------- |------------------------------------------------|
@@ -146,7 +143,7 @@ Suppose you are using an OpenTelemetry Counter instrument from a single applicat
 | #2                | [3,4,1,2]         | 25             | 10                        |  COUNT              | The difference between values is reported.     |
 | #3                | []                | 25             | 0                         |  COUNT              | No new values were reported in this period.    |
 
-Suppose you are using an OpenTelemetry UpDownCounter instrument from a single application, which, by default, exports metrics of a cumulative Sum type. The following table summarizes the behavior of Datadog products:
+Suppose you are using an OpenTelemetry UpDownCounter instrument from a single application, which, by default, exports metrics of a cumulative Sum type. The following table summarizes Datadog behavior:
 
 | Collection period | UpDownCounter values | OTLP Sum value | Value reported to Datadog | Datadog In-App Type |
 |-------------------|----------------------|----------------|---------------------------| ------------------- |
@@ -169,7 +166,7 @@ The following table summarizes the behavior of Datadog products in this case:
 {{% /tab %}}
 {{% tab "Histogram" %}}
 
-Suppose you are using an OpenTelemetry Histogram instrument, `request.response_time.histogram`, from two webservers: `webserver:web_1` and `webserver:web_2`. Suppose in a given collection period, `webserver:web_1` reports the metric with the values `[1,1,1,2,2,2,3,3]`, and `webserver:web_2` reports the same metric with the values `[1,1,2]`. Over this collection period, the following five aggregations represent the global statistical distribution of all values collected from both webservers:
+Suppose you are using an OpenTelemetry Histogram instrument, `request.response_time.histogram`, from two web servers: `webserver:web_1` and `webserver:web_2`. Suppose in a given collection period, `webserver:web_1` reports the metric with the values `[1,1,1,2,2,2,3,3]`, and `webserver:web_2` reports the same metric with the values `[1,1,2]`. Over this collection period, the following five aggregations represent the global statistical distribution of all values collected from both web servers:
 
 | Metric Name                                | Value  | Datadog In-App Type |
 | ------------------------------------------ | ------ | ------------------- |
@@ -181,7 +178,7 @@ Suppose you are using an OpenTelemetry Histogram instrument, `request.response_t
 
 [Read more about distributions][2] to understand how to configure further aggregations.
 
-Alternatively, if using the `counters` mode and enabling the `send_count_sum_metrics` flag, the following metrics would be reported if the histogram bucket boundaries are set to `[-inf, 2, inf]`:
+Alternatively, if you are using the `counters` mode and enabling the `send_count_sum_metrics` flag, the following metrics would be reported if the histogram bucket boundaries are set to `[-inf, 2, inf]`:
 
 | Metric Name                                 | Value  | Tags                                | Datadog In-App Type |
 | ------------------------------------------- | ------ | ------------------------------------| ------------------- |
@@ -190,7 +187,7 @@ Alternatively, if using the `counters` mode and enabling the `send_count_sum_met
 | `request.response_time.distribution.bucket` | `6`    | `lower_bound:-inf`, `upper_bound:2` | GAUGE               |
 | `request.response_time.distribution.bucket` | `2`    | `lower_bound:2`, `upper_bound:inf`  | GAUGE               |
 
-[2]: https://docs.datadoghq.com/metrics/distributions
+[2]: /metrics/distributions
 {{% /tab %}}
 {{% tab "Summary" %}}
 
@@ -213,6 +210,4 @@ Suppose you are submitting a legacy OTLP Summary metric, `request.response_time.
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: https://docs.datadoghq.com/dashboards/functions/arithmetic/#cumulative-sum
-[2]: https://docs.datadoghq.com/metrics/distributions
 [3]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/resourcedetectionprocessor#resource-detection-processor
