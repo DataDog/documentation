@@ -155,7 +155,7 @@ Suppose you are using an OpenTelemetry UpDownCounter instrument from a single ap
 {{% tab "Gauge" %}}
 
 Suppose you are using an OpenTelemetry Gauge instrument, `temperature`, from a single application.
-The following table summarizes the behavior of Datadog products in this case:
+The following table summarizes Datadog behavior:
 
 | Collection period | Gauge instrument | OTLP Gauge value | Value reported to Datadog | Datadog In-App Type |
 |-------------------|------------------|------------------|---------------------------| ------------------- |
