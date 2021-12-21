@@ -22808,6 +22808,101 @@
         },
         "type": "object"
       },
+      "RoleClone": {
+        "description": "Data for the clone role request.",
+        "properties": {
+          "attributes": {
+            "description": "Attributes required to create a new role by cloning an existing one.",
+            "properties": {
+              "name": {
+                "description": "Name of the new role that is cloned.",
+                "example": "cloned-role",
+                "type": "string"
+              }
+            },
+            "required": [
+              "name"
+            ],
+            "type": "object"
+          },
+          "type": {
+            "default": "roles",
+            "description": "Roles type.",
+            "enum": [
+              "roles"
+            ],
+            "example": "roles",
+            "type": "string",
+            "x-enum-varnames": [
+              "ROLES"
+            ]
+          }
+        },
+        "required": [
+          "type",
+          "attributes"
+        ],
+        "type": "object"
+      },
+      "RoleCloneAttributes": {
+        "description": "Attributes required to create a new role by cloning an existing one.",
+        "properties": {
+          "name": {
+            "description": "Name of the new role that is cloned.",
+            "example": "cloned-role",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name"
+        ],
+        "type": "object"
+      },
+      "RoleCloneRequest": {
+        "description": "Request to create a role by cloning an existing role.",
+        "properties": {
+          "data": {
+            "description": "Data for the clone role request.",
+            "properties": {
+              "attributes": {
+                "description": "Attributes required to create a new role by cloning an existing one.",
+                "properties": {
+                  "name": {
+                    "description": "Name of the new role that is cloned.",
+                    "example": "cloned-role",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "name"
+                ],
+                "type": "object"
+              },
+              "type": {
+                "default": "roles",
+                "description": "Roles type.",
+                "enum": [
+                  "roles"
+                ],
+                "example": "roles",
+                "type": "string",
+                "x-enum-varnames": [
+                  "ROLES"
+                ]
+              }
+            },
+            "required": [
+              "type",
+              "attributes"
+            ],
+            "type": "object"
+          }
+        },
+        "required": [
+          "data"
+        ],
+        "type": "object"
+      },
       "RoleCreateAttributes": {
         "description": "Attributes of the created role.",
         "properties": {
@@ -53712,6 +53807,334 @@
         "x-menu-order": 4,
         "x-undo": {
           "type": "idempotent"
+        }
+      }
+    },
+    "/api/v2/roles/{role_id}/clone": {
+      "post": {
+        "description": "Clone an existing role",
+        "operationId": "CloneRole",
+        "parameters": [
+          {
+            "description": "The ID of the role.",
+            "in": "path",
+            "name": "role_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "Request to create a role by cloning an existing role.",
+                "properties": {
+                  "data": {
+                    "description": "Data for the clone role request.",
+                    "properties": {
+                      "attributes": {
+                        "description": "Attributes required to create a new role by cloning an existing one.",
+                        "properties": {
+                          "name": {
+                            "description": "Name of the new role that is cloned.",
+                            "example": "cloned-role",
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "name"
+                        ],
+                        "type": "object"
+                      },
+                      "type": {
+                        "default": "roles",
+                        "description": "Roles type.",
+                        "enum": [
+                          "roles"
+                        ],
+                        "example": "roles",
+                        "type": "string",
+                        "x-enum-varnames": [
+                          "ROLES"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "type",
+                      "attributes"
+                    ],
+                    "type": "object"
+                  }
+                },
+                "required": [
+                  "data"
+                ],
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Response containing information about a single role.",
+                  "properties": {
+                    "data": {
+                      "description": "Role object returned by the API.",
+                      "properties": {
+                        "attributes": {
+                          "description": "Attributes of the role.",
+                          "properties": {
+                            "created_at": {
+                              "description": "Creation time of the role.",
+                              "format": "date-time",
+                              "readOnly": true,
+                              "type": "string"
+                            },
+                            "modified_at": {
+                              "description": "Time of last role modification.",
+                              "format": "date-time",
+                              "readOnly": true,
+                              "type": "string"
+                            },
+                            "name": {
+                              "description": "Name of the role.",
+                              "type": "string"
+                            },
+                            "user_count": {
+                              "description": "Number of users with that role.",
+                              "format": "int64",
+                              "readOnly": true,
+                              "type": "integer"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "id": {
+                          "description": "ID of the role.",
+                          "type": "string"
+                        },
+                        "relationships": {
+                          "description": "Relationships of the role object returned by the API.",
+                          "properties": {
+                            "permissions": {
+                              "description": "Relationship to multiple permissions objects.",
+                              "properties": {
+                                "data": {
+                                  "description": "Relationships to permission objects.",
+                                  "items": {
+                                    "description": "Relationship to permission object.",
+                                    "properties": {
+                                      "id": {
+                                        "description": "ID of the permission.",
+                                        "type": "string"
+                                      },
+                                      "type": {
+                                        "default": "permissions",
+                                        "description": "Permissions resource type.",
+                                        "enum": [
+                                          "permissions"
+                                        ],
+                                        "example": "permissions",
+                                        "type": "string",
+                                        "x-enum-varnames": [
+                                          "PERMISSIONS"
+                                        ]
+                                      }
+                                    },
+                                    "type": "object"
+                                  },
+                                  "type": "array"
+                                }
+                              },
+                              "type": "object"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "type": {
+                          "default": "roles",
+                          "description": "Roles type.",
+                          "enum": [
+                            "roles"
+                          ],
+                          "example": "roles",
+                          "type": "string",
+                          "x-enum-varnames": [
+                            "ROLES"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "type"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Authentication error"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Not found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": [
+              "user_access_manage"
+            ]
+          }
+        ],
+        "summary": "Create a new role by cloning an existing role",
+        "tags": [
+          "Roles"
+        ],
+        "x-codegen-request-body-name": "body",
+        "x-menu-order": 12,
+        "x-permission": "OR(USER_ACCESS_MANAGE)",
+        "x-undo": {
+          "operationId": "DeleteRole",
+          "parameters": [
+            {
+              "name": "role_id",
+              "source": "data.id"
+            }
+          ],
+          "type": "unsafe"
         }
       }
     },

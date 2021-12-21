@@ -319,6 +319,12 @@
     "request_description": "",
     "request_schema_description": "Update a role."
   },
+  "CloneRole": {
+    "description": "Clone an existing role",
+    "summary": "Create a new role by cloning an existing role",
+    "request_description": "",
+    "request_schema_description": "Request to create a role by cloning an existing role."
+  },
   "RemovePermissionFromRole": {
     "description": "Removes a permission from a role.",
     "summary": "Revoke permission",

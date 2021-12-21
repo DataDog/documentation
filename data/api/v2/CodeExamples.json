@@ -223,6 +223,12 @@
       "description": "Add a user to a role returns \"OK\" response"
     }
   ],
+  "CloneRole": [
+    {
+      "suffix": "",
+      "description": "Create a new role by cloning an existing role returns \"OK\" response"
+    }
+  ],
   "CreateRole": [
     {
       "suffix": "",
