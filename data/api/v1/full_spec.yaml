@@ -9765,6 +9765,138 @@ components:
       - account
       - url
       type: object
+    SunburstWidgetDefinition:
+      description: Sunbursts are spot on to highlight how groups contribute to the
+        total of a query.
+      properties:
+        custom_links:
+          description: List of custom links.
+          items:
+            $ref: '#/components/schemas/WidgetCustomLink'
+          type: array
+        hide_total:
+          description: Show the total value in this widget.
+          type: boolean
+        legend:
+          $ref: '#/components/schemas/SunburstWidgetLegend'
+        requests:
+          description: List of sunburst widget requests.
+          example:
+          - q/apm_query/log_query: <METRIC_1>{<SCOPE_1>}
+          items:
+            $ref: '#/components/schemas/SunburstWidgetRequest'
+          minItems: 1
+          type: array
+        time:
+          $ref: '#/components/schemas/WidgetTime'
+        title:
+          description: Title of your widget.
+          type: string
+        title_align:
+          $ref: '#/components/schemas/WidgetTextAlign'
+        title_size:
+          description: Size of the title.
+          type: string
+        type:
+          $ref: '#/components/schemas/SunburstWidgetDefinitionType'
+      required:
+      - type
+      - requests
+      type: object
+    SunburstWidgetDefinitionType:
+      default: sunburst
+      description: Type of the Sunburst widget.
+      enum:
+      - sunburst
+      example: sunburst
+      type: string
+      x-enum-varnames:
+      - SUNBURST
+    SunburstWidgetLegend:
+      description: Configuration of the legend.
+      oneOf:
+      - $ref: '#/components/schemas/SunburstWidgetLegendTable'
+      - $ref: '#/components/schemas/SunburstWidgetLegendInlineAutomatic'
+      type: object
+    SunburstWidgetLegendInlineAutomatic:
+      description: Configuration of inline or automatic legends.
+      properties:
+        hide_percent:
+          description: Whether to hide the percentages of the groups.
+          type: boolean
+        hide_value:
+          description: Whether to hide the values of the groups.
+          type: boolean
+        type:
+          $ref: '#/components/schemas/SunburstWidgetLegendInlineAutomaticType'
+      required:
+      - type
+    SunburstWidgetLegendInlineAutomaticType:
+      description: Whether to show the legend inline or let it be automatically generated.
+      enum:
+      - inline
+      - automatic
+      example: automatic
+      type: string
+      x-enum-varnames:
+      - INLINE
+      - AUTOMATIC
+    SunburstWidgetLegendTable:
+      description: Configuration of table-based legend.
+      properties:
+        type:
+          $ref: '#/components/schemas/SunburstWidgetLegendTableType'
+      required:
+      - type
+    SunburstWidgetLegendTableType:
+      description: Whether or not to show a table legend.
+      enum:
+      - table
+      - none
+      example: table
+      type: string
+      x-enum-varnames:
+      - TABLE
+      - NONE
+    SunburstWidgetRequest:
+      description: Request definition of sunburst widget.
+      properties:
+        apm_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
+        audit_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
+        event_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
+        formulas:
+          description: List of formulas that operate on queries. **This feature is
+            currently in beta.**
+          items:
+            $ref: '#/components/schemas/WidgetFormula'
+          type: array
+        log_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
+        network_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
+        process_query:
+          $ref: '#/components/schemas/ProcessQueryDefinition'
+        profile_metrics_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
+        q:
+          description: Widget query.
+          type: string
+        queries:
+          description: List of queries that can be returned directly or used in formulas.
+            **This feature is currently in beta.**
+          items:
+            $ref: '#/components/schemas/FormulaAndFunctionQueryDefinition'
+          type: array
+        response_format:
+          $ref: '#/components/schemas/FormulaAndFunctionResponseFormat'
+        rum_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
+        security_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
+      type: object
     SyntheticsAPIStep:
       description: The steps used in a Synthetics multistep API test.
       properties:
@@ -15089,6 +15221,7 @@ components:
       - $ref: '#/components/schemas/SLOWidgetDefinition'
       - $ref: '#/components/schemas/ServiceMapWidgetDefinition'
       - $ref: '#/components/schemas/ServiceSummaryWidgetDefinition'
+      - $ref: '#/components/schemas/SunburstWidgetDefinition'
       - $ref: '#/components/schemas/TableWidgetDefinition'
       - $ref: '#/components/schemas/TimeseriesWidgetDefinition'
       - $ref: '#/components/schemas/ToplistWidgetDefinition'
