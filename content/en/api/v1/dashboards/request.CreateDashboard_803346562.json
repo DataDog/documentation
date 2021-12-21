@@ -1,0 +1,31 @@
+{
+  "title": "Example-Create_a_new_dashboard_with_distribution_widget_and_apm_stats_data",
+  "widgets": [
+    {
+      "definition": {
+        "title": "",
+        "title_size": "16",
+        "title_align": "left",
+        "type": "distribution",
+        "requests": [
+          {
+            "apm_stats_query": {
+              "env": "prod",
+              "service": "cassandra",
+              "name": "cassandra.query",
+              "primary_tag": "datacenter:dc1",
+              "row_type": "service"
+            }
+          }
+        ]
+      },
+      "layout": {
+        "x": 0,
+        "y": 0,
+        "width": 4,
+        "height": 4
+      }
+    }
+  ],
+  "layout_type": "ordered"
+}
