@@ -26,9 +26,3 @@ Runtime self test: OK
 You can now see events coming from the `runtime-security-agent` in the Log Explorer.
 
 {{< img src="security_platform/cws/self_test_logs.png" alt="Self test events in the Log Explorer" style="width:90%;">}}
-
-In the case of an error, you should see:
-```
-Runtime self test: <ERROR_MESSAGE>
-```
-where `<ERROR_MESSAGE>` is a description of the error encountered during the test.
