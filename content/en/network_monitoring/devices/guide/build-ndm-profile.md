@@ -12,9 +12,9 @@ further_reading:
   text: "Simulation data format reference"
 ---
 
-Datadog [Network Device Monitoring][1] (NDM) uses profiles for collecting metrics from network devices. These are defined narrowly by a MIB, or to collect metrics from a specific device make and model. This tutorial shows the steps for building a basic NDM profile that collects OID metrics from HP iLO4 devices.
+Datadog [Network Device Monitoring][1] (NDM) uses profiles for collecting metrics from network devices. These are defined narrowly by a management information base (MIB), or to collect metrics from a specific device make and model. This tutorial shows the steps for building a basic NDM profile that collects OID metrics from HP iLO4 devices.
 
-- NDM profiles use SNMP concepts. For basic details on SNMP, refer to the [NDM terminology][2] documentation.
+- NDM profiles use SNMP concepts. For basic details on SNMP, see the [NDM terminology][2] documentation.
 - To learn more about SNMP profile formatting, see the [NDM Profile Format and Simulation Data Reference][3] documentation.
 
 <div class="alert alert-warning">
@@ -95,7 +95,7 @@ SNMP-FRAMEWORK-MIB:
 - snmpEngine
 ```
 
-**Note**: Each `MIB:node_name` correspond to exactly one and only one OID. However, some MIBs report legacy nodes that are overwritten. To resolve, edit the MIB by removing legacy values manually before loading them with this profile generator. If a MIB is fully supported, it can be omitted from the filter as MIBs not found in a filter are fully loaded. If a MIB is **not** fully supported, it can be listed with an empty node list, such as `CISCO-SYSLOG-MIB` in the example.
+**Note**: Each `MIB:node_name` corresponds to exactly one OID. However, some MIBs report legacy nodes that are overwritten. To resolve, edit the MIB by removing legacy values manually before loading them with this profile generator. If a MIB is fully supported, it can be omitted from the filter as MIBs not found in a filter are fully loaded. If a MIB is **not** fully supported, it can be listed with an empty node list, such as `CISCO-SYSLOG-MIB` in the example.
 
 #### Add metric tags for tables
 
@@ -128,7 +128,7 @@ Indexes can also be replaced by another MIB symbol that is more human-readable. 
 
 ## Add unit tests
 
-Add a unit test in `test_profiles.py` to verify that the metric is successfully collected by the integration when the profile is enabled. These unit tests are mostly used to prevent regressions and help with maintenance.
+Add a unit test in `test_profiles.py` to verify that the integration successfully collects the metric when the profile is enabled. These unit tests are mostly used to prevent regressions and help with maintenance.
 
 For example:
 
