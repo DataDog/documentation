@@ -67,7 +67,7 @@ Now that you've configured your application to send traces to Datadog, start get
 
 [Monitor Service metrics][8] for requests, errors and latency percentiles. Analyze individual database queries or endpoints correlated with infrastructure.
 
-{{< img src="tracing/index/ServicePage.mp4" alt="Service Pages" video=true style="width:100%;">}}
+{{< img src="tracing/index/ServicePage.png" alt="Service Page" style="width:100%;">}}
 
 ### Continuous Profiler
 
@@ -79,13 +79,13 @@ Now that you've configured your application to send traces to Datadog, start get
 
 [Search 100% of your traces][10] by any tag, live with no sampling, for 15 minutes.
 
-{{< img src="tracing/live_search/LiveSearch.mp4" alt="Live Search" video="true" >}}
+{{< img src="tracing/live_search/LiveSearch2.png" alt="Live Search" >}}
 
 ### Live analytics
 
 [Analyze performance by any tag on any span][11] live for 15 minutes during an outage to identify impacted users or transactions.
 
-{{< img src="tracing/live_search/LiveAnalytics.mp4" alt="Live Analytics" video="true" >}}
+{{< img src="tracing/live_search/LiveAnalytics.png" alt="Live Analytics" >}}
 
 ### Deployment tracking
 
@@ -115,13 +115,13 @@ Now that you've configured your application to send traces to Datadog, start get
 
 [Link between real user sessions][16] and traces to see the exact traces that correspond to user experiences and reported issues.
 
-{{< img src="tracing/index/RumTraces.mp4" alt="Connect RUM sessions and traces" video=true style="width:100%;">}}
+{{< img src="tracing/index/RumTraces.png" alt="Connect RUM sessions and traces" style="width:100%;">}}
 
 ### Connect synthetic test data and traces
 
 [Link simulated API tests][17] to traces to find the root cause of failures across frontend, network and backend requests.
 
-{{< img src="tracing/index/Synthetics.mp4" alt="Synthetic tests" video=true style="width:100%;">}}
+{{< img src="tracing/index/Synthetics.png" alt="Synthetic tests" style="width:100%;">}}
 
 
 ## Further Reading
