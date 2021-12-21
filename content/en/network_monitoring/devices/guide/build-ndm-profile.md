@@ -12,7 +12,7 @@ further_reading:
   text: "Simulation data format reference"
 ---
 
-Datadog [Network Device Monitoring][1] (NDM) uses profiles for collecting metrics from network devices. These are defined narrowly by a MIB, or to collect metrics from a specific device make and model. This tutorial shows the steps for building a basic NDM profile that collects OID metrics from HP iLO4 devices.
+Datadog [Network Device Monitoring][1] (NDM) uses profiles for collecting metrics from network devices. These are defined narrowly by a management information base (MIB), or to collect metrics from a specific device make and model. This tutorial shows the steps for building a basic NDM profile that collects OID metrics from HP iLO4 devices.
 
 - NDM profiles use SNMP concepts. For basic details on SNMP, see the [NDM terminology][2] documentation.
 - To learn more about SNMP profile formatting, see the [NDM Profile Format and Simulation Data Reference][3] documentation.
@@ -80,7 +80,7 @@ You can use [ddev][7], part of the Datadog integrations developer's toolkit, to 
 $  ddev meta snmp generate-profile-from-mibs --help
 ```
 
-This script requires a list of ASN1 MIB files as input argument, and copies to the clipboard a list of metrics that can be used to create a profile.
+This script requires a list of ASN1 MIB files as input arguments, and copies to the clipboard a list of metrics that can be used to create a profile.
 
 ### Options
 
@@ -99,7 +99,7 @@ SNMP-FRAMEWORK-MIB:
 - snmpEngine
 ```
 
-**Note**: Each `MIB:node_name` correspond to exactly one and only one OID. However, some MIBs report legacy nodes that are overwritten. To resolve, edit the MIB by removing legacy values manually before loading them with this profile generator. If a MIB is fully supported, it can be omitted from the filter as MIBs not found in a filter are fully loaded. If a MIB is **not** fully supported, it can be listed with an empty node list, such as `CISCO-SYSLOG-MIB` in the example.
+**Note**: Each `MIB:node_name` corresponds to exactly one OID. However, some MIBs report legacy nodes that are overwritten. To resolve, edit the MIB by removing legacy values manually before loading them with this profile generator. If a MIB is fully supported, it can be omitted from the filter as MIBs not found in a filter are fully loaded. If a MIB is **not** fully supported, it can be listed with an empty node list, such as `CISCO-SYSLOG-MIB` in the example.
 
 `-a, --aliases` is an option to provide the path to a YAML file containing a list of aliases to be used as metric tags for tables, in the following format:
 
@@ -113,7 +113,7 @@ aliases:
     name: entPhysicalName
 ```
 
-MIBs tables most of the time define one or more indexes, as columns within the same table, or columns from a different table and even a different MIB. The index value can be used to tag table's metrics. This is defined in the `INDEX` field in `row` nodes.
+Most of the time, MIB tables define one or more indexes as columns within the same table or columns from a different table and even a different MIB. The index value can be used to tag table's metrics. This is defined in the `INDEX` field in `row` nodes.
 
 As an example, `entPhysicalContainsTable` in `ENTITY-MIB` is as follows:
 
@@ -158,7 +158,7 @@ Indexes can be replaced by another MIB symbol that is more human-readable. You m
 
 ### Add unit tests
 
-Add a unit test in `test_profiles.py` to verify that the metric is successfully collected by the integration when the profile is enabled. These unit tests are mostly used to prevent regressions and help with maintenance.
+Add a unit test in `test_profiles.py` to verify that the integration successfully collects the metric when the profile is enabled. These unit tests are mostly used to prevent regressions and help with maintenance.
 
 For example:
 
