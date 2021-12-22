@@ -370,8 +370,8 @@ Added in version 1.18.3. Response header support and entries without tag names a
 : **TracerSettings property**: `GlobalTags`<br>
 If specified, adds all of the specified tags to all generated spans. <br>
 **Example**: `layer:api, team:intake` <br>
-Added in version 1.17.0.
-Note that the delimiter is a comma and a whitespace i.e. ', '.
+Added in version 1.17.0. <br>
+Note that the delimiter is a comma and a whitespace i.e. `, `.
 
 `DD_TRACE_LOG_DIRECTORY`
 : Sets the directory for .NET Tracer logs. <br>
