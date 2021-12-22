@@ -291,6 +291,14 @@ spec:
 
 To see more information and additional examples of how you might configure your collector, see [the OpenTelemetry Collector configuration documentation][5].
 
+## Datadog Agent OTLP ingestion support
+
+<div class="alert alert-warning">This functionality is experimental and its behavior and configuration may change.</div>
+
+Since versions 6.32.0 and 7.32.0, the Datadog Agent supports OTLP traces and metrics ingestion through both gRPC and HTTP. 
+
+[Contact Datadog support][23] to get more information on this feature and provide feedback.
+
 ## Connect OpenTelemetry traces and logs
 
 To connect OpenTelemetry traces and logs so that your application logs monitoring and analysis has the additional context provided by the OpenTelemetry traces, see [Connect OpenTelemetry Traces and Logs][18] for language specific instructions and example code.
@@ -329,3 +337,4 @@ Datadog recommends you use the OpenTelemetry Collector Datadog exporter in conju
 [20]: /tracing/setup_overview/open_standards/python#opentelemetry
 [21]: /tracing/setup_overview/open_standards/ruby#opentelemetry
 [22]: /tracing/setup_overview/open_standards/nodejs#opentelemetry
+[23]: https://docs.datadoghq.com/help/
