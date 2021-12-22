@@ -498,8 +498,21 @@ components:
       properties:
         name:
           description: Name of the application key.
-          example: Application Key for submitting metrics
+          example: Application Key for managing dashboards
           type: string
+        scopes:
+          description: Array of scopes to grant the application key. This feature
+            is in private beta, please contact Datadog support to enable scopes for
+            your application keys.
+          example:
+          - dashboards_read
+          - dashboards_write
+          - dashboards_public_share
+          items:
+            description: Name of scope.
+            type: string
+          nullable: true
+          type: array
       required:
       - name
       type: object
@@ -550,10 +563,21 @@ components:
       properties:
         name:
           description: Name of the application key.
-          example: Application Key for submitting metrics
+          example: Application Key for managing dashboards
           type: string
-      required:
-      - name
+        scopes:
+          description: Array of scopes to grant the application key. This feature
+            is in private beta, please contact Datadog support to enable scopes for
+            your application keys.
+          example:
+          - dashboards_read
+          - dashboards_write
+          - dashboards_public_share
+          items:
+            description: Name of scope.
+            type: string
+          nullable: true
+          type: array
       type: object
     ApplicationKeyUpdateData:
       description: Object used to update an application key.
@@ -873,8 +897,21 @@ components:
           type: string
         name:
           description: Name of the application key.
-          example: Application Key for submitting metrics
+          example: Application Key for managing dashboards
           type: string
+        scopes:
+          description: Array of scopes to grant the application key. This feature
+            is in private beta, please contact Datadog support to enable scopes for
+            your application keys.
+          example:
+          - dashboards_read
+          - dashboards_write
+          - dashboards_public_share
+          items:
+            description: Name of scope.
+            type: string
+          nullable: true
+          type: array
       type: object
     HTTPLog:
       description: Structured log message.
@@ -3567,8 +3604,21 @@ components:
           type: string
         name:
           description: Name of the application key.
-          example: Application Key for submitting metrics
+          example: Application Key for managing dashboards
           type: string
+        scopes:
+          description: Array of scopes to grant the application key. This feature
+            is in private beta, please contact Datadog support to enable scopes for
+            your application keys.
+          example:
+          - dashboards_read
+          - dashboards_write
+          - dashboards_public_share
+          items:
+            description: Name of scope.
+            type: string
+          nullable: true
+          type: array
       type: object
     PartialApplicationKeyResponse:
       description: Response for retrieving a partial application key.

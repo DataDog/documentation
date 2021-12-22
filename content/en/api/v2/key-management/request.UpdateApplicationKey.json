@@ -3,7 +3,7 @@
     "id": "string",
     "type": "application_keys",
     "attributes": {
-      "name": "Application Key for submitting metrics-updated"
+      "name": "Application Key for managing dashboards-updated"
     }
   }
 }

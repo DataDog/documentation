@@ -69,6 +69,10 @@
     {
       "suffix": "_1999509896",
       "description": "Create an Application key for current user returns \"Created\" response"
+    },
+    {
+      "suffix": "_3383369233",
+      "description": "Create an Application key with scopes for current user returns \"Created\" response"
     }
   ],
   "DeleteAPIKey": [
@@ -345,6 +349,10 @@
     {
       "suffix": "_1761876297",
       "description": "Create an app key for this service account returns \"Created\" response"
+    },
+    {
+      "suffix": "_3480494373",
+      "description": "Create an application key with scopes for this service account returns \"Created\" response"
     }
   ],
   "DeleteServiceAccountApplicationKey": [
