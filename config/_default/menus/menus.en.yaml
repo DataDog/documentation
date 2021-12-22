@@ -5934,7 +5934,7 @@ api:
       operationids:
         - GetUsageSDS
       unstable: []
-      order: 34
+      order: 35
   - name: Get hourly usage for RUM Sessions
     url: '#get-hourly-usage-for-rum-sessions'
     identifier: get-hourly-usage-for-rum-sessions
@@ -5958,7 +5958,7 @@ api:
       operationids:
         - GetUsageRumUnits
       unstable: []
-      order: 35
+      order: 36
   - name: Get hourly usage for profiled hosts
     url: '#get-hourly-usage-for-profiled-hosts'
     identifier: get-hourly-usage-for-profiled-hosts
@@ -6079,6 +6079,19 @@ api:
         - GetIncidentManagement
       unstable: []
       order: 27
+  - name: Get Hourly Usage Attribution
+    url: '#get-hourly-usage-attribution'
+    identifier: get-hourly-usage-attribution
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetHourlyUsageAttribution
+      unstable:
+        - v1
+      order: 30
   - name: Get hourly usage for hosts and containers
     url: '#get-hourly-usage-for-hosts-and-containers'
     identifier: get-hourly-usage-for-hosts-and-containers
@@ -6114,7 +6127,7 @@ api:
       operationids:
         - GetUsageDBM
       unstable: []
-      order: 33
+      order: 34
   - name: Get hourly usage for Cloud Workload Security
     url: '#get-hourly-usage-for-cloud-workload-security'
     identifier: get-hourly-usage-for-cloud-workload-security
@@ -6126,7 +6139,7 @@ api:
       operationids:
         - GetUsageCWS
       unstable: []
-      order: 32
+      order: 33
   - name: Get hourly usage for CSPM
     url: '#get-hourly-usage-for-cspm'
     identifier: get-hourly-usage-for-cspm
@@ -6138,7 +6151,7 @@ api:
       operationids:
         - GetUsageCloudSecurityPostureManagement
       unstable: []
-      order: 30
+      order: 31
   - name: Get billable usage across your account
     url: '#get-billable-usage-across-your-account'
     identifier: get-billable-usage-across-your-account
@@ -6174,7 +6187,7 @@ api:
       operationids:
         - GetUsageAuditLogs
       unstable: []
-      order: 31
+      order: 32
   - name: Get Usage Attribution
     url: '#get-usage-attribution'
     identifier: get-usage-attribution
