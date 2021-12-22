@@ -1969,8 +1969,22 @@
         "properties": {
           "name": {
             "description": "Name of the application key.",
-            "example": "Application Key for submitting metrics",
+            "example": "Application Key for managing dashboards",
             "type": "string"
+          },
+          "scopes": {
+            "description": "Array of scopes to grant the application key. This feature is in private beta, please contact Datadog support to enable scopes for your application keys.",
+            "example": [
+              "dashboards_read",
+              "dashboards_write",
+              "dashboards_public_share"
+            ],
+            "items": {
+              "description": "Name of scope.",
+              "type": "string"
+            },
+            "nullable": true,
+            "type": "array"
           }
         },
         "required": [
@@ -1986,8 +2000,22 @@
             "properties": {
               "name": {
                 "description": "Name of the application key.",
-                "example": "Application Key for submitting metrics",
+                "example": "Application Key for managing dashboards",
                 "type": "string"
+              },
+              "scopes": {
+                "description": "Array of scopes to grant the application key. This feature is in private beta, please contact Datadog support to enable scopes for your application keys.",
+                "example": [
+                  "dashboards_read",
+                  "dashboards_write",
+                  "dashboards_public_share"
+                ],
+                "items": {
+                  "description": "Name of scope.",
+                  "type": "string"
+                },
+                "nullable": true,
+                "type": "array"
               }
             },
             "required": [
@@ -2025,8 +2053,22 @@
                 "properties": {
                   "name": {
                     "description": "Name of the application key.",
-                    "example": "Application Key for submitting metrics",
+                    "example": "Application Key for managing dashboards",
                     "type": "string"
+                  },
+                  "scopes": {
+                    "description": "Array of scopes to grant the application key. This feature is in private beta, please contact Datadog support to enable scopes for your application keys.",
+                    "example": [
+                      "dashboards_read",
+                      "dashboards_write",
+                      "dashboards_public_share"
+                    ],
+                    "items": {
+                      "description": "Name of scope.",
+                      "type": "string"
+                    },
+                    "nullable": true,
+                    "type": "array"
                   }
                 },
                 "required": [
@@ -2131,8 +2173,22 @@
                   },
                   "name": {
                     "description": "Name of the application key.",
-                    "example": "Application Key for submitting metrics",
+                    "example": "Application Key for managing dashboards",
                     "type": "string"
+                  },
+                  "scopes": {
+                    "description": "Array of scopes to grant the application key. This feature is in private beta, please contact Datadog support to enable scopes for your application keys.",
+                    "example": [
+                      "dashboards_read",
+                      "dashboards_write",
+                      "dashboards_public_share"
+                    ],
+                    "items": {
+                      "description": "Name of scope.",
+                      "type": "string"
+                    },
+                    "nullable": true,
+                    "type": "array"
                   }
                 },
                 "type": "object"
@@ -2870,13 +2926,24 @@
         "properties": {
           "name": {
             "description": "Name of the application key.",
-            "example": "Application Key for submitting metrics",
+            "example": "Application Key for managing dashboards",
             "type": "string"
+          },
+          "scopes": {
+            "description": "Array of scopes to grant the application key. This feature is in private beta, please contact Datadog support to enable scopes for your application keys.",
+            "example": [
+              "dashboards_read",
+              "dashboards_write",
+              "dashboards_public_share"
+            ],
+            "items": {
+              "description": "Name of scope.",
+              "type": "string"
+            },
+            "nullable": true,
+            "type": "array"
           }
         },
-        "required": [
-          "name"
-        ],
         "type": "object"
       },
       "ApplicationKeyUpdateData": {
@@ -2887,13 +2954,24 @@
             "properties": {
               "name": {
                 "description": "Name of the application key.",
-                "example": "Application Key for submitting metrics",
+                "example": "Application Key for managing dashboards",
                 "type": "string"
+              },
+              "scopes": {
+                "description": "Array of scopes to grant the application key. This feature is in private beta, please contact Datadog support to enable scopes for your application keys.",
+                "example": [
+                  "dashboards_read",
+                  "dashboards_write",
+                  "dashboards_public_share"
+                ],
+                "items": {
+                  "description": "Name of scope.",
+                  "type": "string"
+                },
+                "nullable": true,
+                "type": "array"
               }
             },
-            "required": [
-              "name"
-            ],
             "type": "object"
           },
           "id": {
@@ -2932,13 +3010,24 @@
                 "properties": {
                   "name": {
                     "description": "Name of the application key.",
-                    "example": "Application Key for submitting metrics",
+                    "example": "Application Key for managing dashboards",
                     "type": "string"
+                  },
+                  "scopes": {
+                    "description": "Array of scopes to grant the application key. This feature is in private beta, please contact Datadog support to enable scopes for your application keys.",
+                    "example": [
+                      "dashboards_read",
+                      "dashboards_write",
+                      "dashboards_public_share"
+                    ],
+                    "items": {
+                      "description": "Name of scope.",
+                      "type": "string"
+                    },
+                    "nullable": true,
+                    "type": "array"
                   }
                 },
-                "required": [
-                  "name"
-                ],
                 "type": "object"
               },
               "id": {
@@ -3811,8 +3900,22 @@
               },
               "name": {
                 "description": "Name of the application key.",
-                "example": "Application Key for submitting metrics",
+                "example": "Application Key for managing dashboards",
                 "type": "string"
+              },
+              "scopes": {
+                "description": "Array of scopes to grant the application key. This feature is in private beta, please contact Datadog support to enable scopes for your application keys.",
+                "example": [
+                  "dashboards_read",
+                  "dashboards_write",
+                  "dashboards_public_share"
+                ],
+                "items": {
+                  "description": "Name of scope.",
+                  "type": "string"
+                },
+                "nullable": true,
+                "type": "array"
               }
             },
             "type": "object"
@@ -3902,8 +4005,22 @@
           },
           "name": {
             "description": "Name of the application key.",
-            "example": "Application Key for submitting metrics",
+            "example": "Application Key for managing dashboards",
             "type": "string"
+          },
+          "scopes": {
+            "description": "Array of scopes to grant the application key. This feature is in private beta, please contact Datadog support to enable scopes for your application keys.",
+            "example": [
+              "dashboards_read",
+              "dashboards_write",
+              "dashboards_public_share"
+            ],
+            "items": {
+              "description": "Name of scope.",
+              "type": "string"
+            },
+            "nullable": true,
+            "type": "array"
           }
         },
         "type": "object"
@@ -12584,8 +12701,22 @@
                     },
                     "name": {
                       "description": "Name of the application key.",
-                      "example": "Application Key for submitting metrics",
+                      "example": "Application Key for managing dashboards",
                       "type": "string"
+                    },
+                    "scopes": {
+                      "description": "Array of scopes to grant the application key. This feature is in private beta, please contact Datadog support to enable scopes for your application keys.",
+                      "example": [
+                        "dashboards_read",
+                        "dashboards_write",
+                        "dashboards_public_share"
+                      ],
+                      "items": {
+                        "description": "Name of scope.",
+                        "type": "string"
+                      },
+                      "nullable": true,
+                      "type": "array"
                     }
                   },
                   "type": "object"
@@ -20457,8 +20588,22 @@
               },
               "name": {
                 "description": "Name of the application key.",
-                "example": "Application Key for submitting metrics",
+                "example": "Application Key for managing dashboards",
                 "type": "string"
+              },
+              "scopes": {
+                "description": "Array of scopes to grant the application key. This feature is in private beta, please contact Datadog support to enable scopes for your application keys.",
+                "example": [
+                  "dashboards_read",
+                  "dashboards_write",
+                  "dashboards_public_share"
+                ],
+                "items": {
+                  "description": "Name of scope.",
+                  "type": "string"
+                },
+                "nullable": true,
+                "type": "array"
               }
             },
             "type": "object"
@@ -20543,8 +20688,22 @@
           },
           "name": {
             "description": "Name of the application key.",
-            "example": "Application Key for submitting metrics",
+            "example": "Application Key for managing dashboards",
             "type": "string"
+          },
+          "scopes": {
+            "description": "Array of scopes to grant the application key. This feature is in private beta, please contact Datadog support to enable scopes for your application keys.",
+            "example": [
+              "dashboards_read",
+              "dashboards_write",
+              "dashboards_public_share"
+            ],
+            "items": {
+              "description": "Name of scope.",
+              "type": "string"
+            },
+            "nullable": true,
+            "type": "array"
           }
         },
         "type": "object"
@@ -20574,8 +20733,22 @@
                   },
                   "name": {
                     "description": "Name of the application key.",
-                    "example": "Application Key for submitting metrics",
+                    "example": "Application Key for managing dashboards",
                     "type": "string"
+                  },
+                  "scopes": {
+                    "description": "Array of scopes to grant the application key. This feature is in private beta, please contact Datadog support to enable scopes for your application keys.",
+                    "example": [
+                      "dashboards_read",
+                      "dashboards_write",
+                      "dashboards_public_share"
+                    ],
+                    "items": {
+                      "description": "Name of scope.",
+                      "type": "string"
+                    },
+                    "nullable": true,
+                    "type": "array"
                   }
                 },
                 "type": "object"
@@ -32316,8 +32489,22 @@
                               },
                               "name": {
                                 "description": "Name of the application key.",
-                                "example": "Application Key for submitting metrics",
+                                "example": "Application Key for managing dashboards",
                                 "type": "string"
+                              },
+                              "scopes": {
+                                "description": "Array of scopes to grant the application key. This feature is in private beta, please contact Datadog support to enable scopes for your application keys.",
+                                "example": [
+                                  "dashboards_read",
+                                  "dashboards_write",
+                                  "dashboards_public_share"
+                                ],
+                                "items": {
+                                  "description": "Name of scope.",
+                                  "type": "string"
+                                },
+                                "nullable": true,
+                                "type": "array"
                               }
                             },
                             "type": "object"
@@ -32998,8 +33185,22 @@
                             },
                             "name": {
                               "description": "Name of the application key.",
-                              "example": "Application Key for submitting metrics",
+                              "example": "Application Key for managing dashboards",
                               "type": "string"
+                            },
+                            "scopes": {
+                              "description": "Array of scopes to grant the application key. This feature is in private beta, please contact Datadog support to enable scopes for your application keys.",
+                              "example": [
+                                "dashboards_read",
+                                "dashboards_write",
+                                "dashboards_public_share"
+                              ],
+                              "items": {
+                                "description": "Name of scope.",
+                                "type": "string"
+                              },
+                              "nullable": true,
+                              "type": "array"
                             }
                           },
                           "type": "object"
@@ -33543,13 +33744,24 @@
                         "properties": {
                           "name": {
                             "description": "Name of the application key.",
-                            "example": "Application Key for submitting metrics",
+                            "example": "Application Key for managing dashboards",
                             "type": "string"
+                          },
+                          "scopes": {
+                            "description": "Array of scopes to grant the application key. This feature is in private beta, please contact Datadog support to enable scopes for your application keys.",
+                            "example": [
+                              "dashboards_read",
+                              "dashboards_write",
+                              "dashboards_public_share"
+                            ],
+                            "items": {
+                              "description": "Name of scope.",
+                              "type": "string"
+                            },
+                            "nullable": true,
+                            "type": "array"
                           }
                         },
-                        "required": [
-                          "name"
-                        ],
                         "type": "object"
                       },
                       "id": {
@@ -33621,8 +33833,22 @@
                             },
                             "name": {
                               "description": "Name of the application key.",
-                              "example": "Application Key for submitting metrics",
+                              "example": "Application Key for managing dashboards",
                               "type": "string"
+                            },
+                            "scopes": {
+                              "description": "Array of scopes to grant the application key. This feature is in private beta, please contact Datadog support to enable scopes for your application keys.",
+                              "example": [
+                                "dashboards_read",
+                                "dashboards_write",
+                                "dashboards_public_share"
+                              ],
+                              "items": {
+                                "description": "Name of scope.",
+                                "type": "string"
+                              },
+                              "nullable": true,
+                              "type": "array"
                             }
                           },
                           "type": "object"
@@ -34257,8 +34483,22 @@
                               },
                               "name": {
                                 "description": "Name of the application key.",
-                                "example": "Application Key for submitting metrics",
+                                "example": "Application Key for managing dashboards",
                                 "type": "string"
+                              },
+                              "scopes": {
+                                "description": "Array of scopes to grant the application key. This feature is in private beta, please contact Datadog support to enable scopes for your application keys.",
+                                "example": [
+                                  "dashboards_read",
+                                  "dashboards_write",
+                                  "dashboards_public_share"
+                                ],
+                                "items": {
+                                  "description": "Name of scope.",
+                                  "type": "string"
+                                },
+                                "nullable": true,
+                                "type": "array"
                               }
                             },
                             "type": "object"
@@ -34793,8 +35033,22 @@
                         "properties": {
                           "name": {
                             "description": "Name of the application key.",
-                            "example": "Application Key for submitting metrics",
+                            "example": "Application Key for managing dashboards",
                             "type": "string"
+                          },
+                          "scopes": {
+                            "description": "Array of scopes to grant the application key. This feature is in private beta, please contact Datadog support to enable scopes for your application keys.",
+                            "example": [
+                              "dashboards_read",
+                              "dashboards_write",
+                              "dashboards_public_share"
+                            ],
+                            "items": {
+                              "description": "Name of scope.",
+                              "type": "string"
+                            },
+                            "nullable": true,
+                            "type": "array"
                           }
                         },
                         "required": [
@@ -34865,8 +35119,22 @@
                             },
                             "name": {
                               "description": "Name of the application key.",
-                              "example": "Application Key for submitting metrics",
+                              "example": "Application Key for managing dashboards",
                               "type": "string"
+                            },
+                            "scopes": {
+                              "description": "Array of scopes to grant the application key. This feature is in private beta, please contact Datadog support to enable scopes for your application keys.",
+                              "example": [
+                                "dashboards_read",
+                                "dashboards_write",
+                                "dashboards_public_share"
+                              ],
+                              "items": {
+                                "description": "Name of scope.",
+                                "type": "string"
+                              },
+                              "nullable": true,
+                              "type": "array"
                             }
                           },
                           "type": "object"
@@ -35528,8 +35796,22 @@
                             },
                             "name": {
                               "description": "Name of the application key.",
-                              "example": "Application Key for submitting metrics",
+                              "example": "Application Key for managing dashboards",
                               "type": "string"
+                            },
+                            "scopes": {
+                              "description": "Array of scopes to grant the application key. This feature is in private beta, please contact Datadog support to enable scopes for your application keys.",
+                              "example": [
+                                "dashboards_read",
+                                "dashboards_write",
+                                "dashboards_public_share"
+                              ],
+                              "items": {
+                                "description": "Name of scope.",
+                                "type": "string"
+                              },
+                              "nullable": true,
+                              "type": "array"
                             }
                           },
                           "type": "object"
@@ -36048,13 +36330,24 @@
                         "properties": {
                           "name": {
                             "description": "Name of the application key.",
-                            "example": "Application Key for submitting metrics",
+                            "example": "Application Key for managing dashboards",
                             "type": "string"
+                          },
+                          "scopes": {
+                            "description": "Array of scopes to grant the application key. This feature is in private beta, please contact Datadog support to enable scopes for your application keys.",
+                            "example": [
+                              "dashboards_read",
+                              "dashboards_write",
+                              "dashboards_public_share"
+                            ],
+                            "items": {
+                              "description": "Name of scope.",
+                              "type": "string"
+                            },
+                            "nullable": true,
+                            "type": "array"
                           }
                         },
-                        "required": [
-                          "name"
-                        ],
                         "type": "object"
                       },
                       "id": {
@@ -36126,8 +36419,22 @@
                             },
                             "name": {
                               "description": "Name of the application key.",
-                              "example": "Application Key for submitting metrics",
+                              "example": "Application Key for managing dashboards",
                               "type": "string"
+                            },
+                            "scopes": {
+                              "description": "Array of scopes to grant the application key. This feature is in private beta, please contact Datadog support to enable scopes for your application keys.",
+                              "example": [
+                                "dashboards_read",
+                                "dashboards_write",
+                                "dashboards_public_share"
+                              ],
+                              "items": {
+                                "description": "Name of scope.",
+                                "type": "string"
+                              },
+                              "nullable": true,
+                              "type": "array"
                             }
                           },
                           "type": "object"
@@ -62434,8 +62741,22 @@
                               },
                               "name": {
                                 "description": "Name of the application key.",
-                                "example": "Application Key for submitting metrics",
+                                "example": "Application Key for managing dashboards",
                                 "type": "string"
+                              },
+                              "scopes": {
+                                "description": "Array of scopes to grant the application key. This feature is in private beta, please contact Datadog support to enable scopes for your application keys.",
+                                "example": [
+                                  "dashboards_read",
+                                  "dashboards_write",
+                                  "dashboards_public_share"
+                                ],
+                                "items": {
+                                  "description": "Name of scope.",
+                                  "type": "string"
+                                },
+                                "nullable": true,
+                                "type": "array"
                               }
                             },
                             "type": "object"
@@ -62982,8 +63303,22 @@
                         "properties": {
                           "name": {
                             "description": "Name of the application key.",
-                            "example": "Application Key for submitting metrics",
+                            "example": "Application Key for managing dashboards",
                             "type": "string"
+                          },
+                          "scopes": {
+                            "description": "Array of scopes to grant the application key. This feature is in private beta, please contact Datadog support to enable scopes for your application keys.",
+                            "example": [
+                              "dashboards_read",
+                              "dashboards_write",
+                              "dashboards_public_share"
+                            ],
+                            "items": {
+                              "description": "Name of scope.",
+                              "type": "string"
+                            },
+                            "nullable": true,
+                            "type": "array"
                           }
                         },
                         "required": [
@@ -63054,8 +63389,22 @@
                             },
                             "name": {
                               "description": "Name of the application key.",
-                              "example": "Application Key for submitting metrics",
+                              "example": "Application Key for managing dashboards",
                               "type": "string"
+                            },
+                            "scopes": {
+                              "description": "Array of scopes to grant the application key. This feature is in private beta, please contact Datadog support to enable scopes for your application keys.",
+                              "example": [
+                                "dashboards_read",
+                                "dashboards_write",
+                                "dashboards_public_share"
+                              ],
+                              "items": {
+                                "description": "Name of scope.",
+                                "type": "string"
+                              },
+                              "nullable": true,
+                              "type": "array"
                             }
                           },
                           "type": "object"
@@ -63741,8 +64090,22 @@
                             },
                             "name": {
                               "description": "Name of the application key.",
-                              "example": "Application Key for submitting metrics",
+                              "example": "Application Key for managing dashboards",
                               "type": "string"
+                            },
+                            "scopes": {
+                              "description": "Array of scopes to grant the application key. This feature is in private beta, please contact Datadog support to enable scopes for your application keys.",
+                              "example": [
+                                "dashboards_read",
+                                "dashboards_write",
+                                "dashboards_public_share"
+                              ],
+                              "items": {
+                                "description": "Name of scope.",
+                                "type": "string"
+                              },
+                              "nullable": true,
+                              "type": "array"
                             }
                           },
                           "type": "object"
@@ -64272,13 +64635,24 @@
                         "properties": {
                           "name": {
                             "description": "Name of the application key.",
-                            "example": "Application Key for submitting metrics",
+                            "example": "Application Key for managing dashboards",
                             "type": "string"
+                          },
+                          "scopes": {
+                            "description": "Array of scopes to grant the application key. This feature is in private beta, please contact Datadog support to enable scopes for your application keys.",
+                            "example": [
+                              "dashboards_read",
+                              "dashboards_write",
+                              "dashboards_public_share"
+                            ],
+                            "items": {
+                              "description": "Name of scope.",
+                              "type": "string"
+                            },
+                            "nullable": true,
+                            "type": "array"
                           }
                         },
-                        "required": [
-                          "name"
-                        ],
                         "type": "object"
                       },
                       "id": {
@@ -64345,8 +64719,22 @@
                             },
                             "name": {
                               "description": "Name of the application key.",
-                              "example": "Application Key for submitting metrics",
+                              "example": "Application Key for managing dashboards",
                               "type": "string"
+                            },
+                            "scopes": {
+                              "description": "Array of scopes to grant the application key. This feature is in private beta, please contact Datadog support to enable scopes for your application keys.",
+                              "example": [
+                                "dashboards_read",
+                                "dashboards_write",
+                                "dashboards_public_share"
+                              ],
+                              "items": {
+                                "description": "Name of scope.",
+                                "type": "string"
+                              },
+                              "nullable": true,
+                              "type": "array"
                             }
                           },
                           "type": "object"
