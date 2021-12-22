@@ -383,6 +383,12 @@
       "description": "Trigger Synthetics tests returns \"OK\" response"
     }
   ],
+  "GetHourlyUsageAttribution": [
+    {
+      "suffix": "",
+      "description": "Get Hourly Usage Attribution returns \"OK\" response"
+    }
+  ],
   "CreateWebhooksIntegrationCustomVariable": [
     {
       "suffix": "",

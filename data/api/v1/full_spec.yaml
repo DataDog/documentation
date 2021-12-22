@@ -3528,6 +3528,95 @@ components:
           format: int64
           type: integer
       type: object
+    HourlyUsageAttributionBody:
+      description: The usage for one set of tags for one hour.
+      properties:
+        hour:
+          description: The hour for the usage.
+          format: date-time
+          type: string
+        org_name:
+          description: The name of the organization.
+          type: string
+        public_id:
+          description: The organization public ID.
+          type: string
+        tag_config_source:
+          description: The source of the usage attribution tag configuration and the
+            selected tags in the format of `<source_org_name>:::<selected tag 1>///<selected
+            tag 2>///<selected tag 3>`.
+          type: string
+        tags:
+          $ref: '#/components/schemas/UsageAttributionTagNames'
+        total_usage_sum:
+          description: Total product usage for the given tags within the hour.
+          format: double
+          type: number
+        updated_at:
+          description: Shows the most recent hour in the current month for all organizations
+            where usages are calculated.
+          type: string
+        usage_type:
+          $ref: '#/components/schemas/HourlyUsageAttributionUsageType'
+      type: object
+    HourlyUsageAttributionMetadata:
+      description: The object containing document metadata.
+      properties:
+        pagination:
+          $ref: '#/components/schemas/HourlyUsageAttributionPagination'
+      type: object
+    HourlyUsageAttributionPagination:
+      description: The metadata for the current pagination.
+      properties:
+        next_record_id:
+          description: The cursor to get the next results (if any). To make the next
+            request, use the same parameters and add `next_record_id`.
+          type: string
+      type: object
+    HourlyUsageAttributionResponse:
+      description: Response containing the hourly usage attribution by tag(s).
+      properties:
+        metadata:
+          $ref: '#/components/schemas/HourlyUsageAttributionMetadata'
+        usage:
+          description: Get the hourly usage attribution by tag(s).
+          items:
+            $ref: '#/components/schemas/HourlyUsageAttributionBody'
+          type: array
+      type: object
+    HourlyUsageAttributionUsageType:
+      description: Supported products for hourly usage attribution requests.
+      enum:
+      - api_usage
+      - apm_host_usage
+      - browser_usage
+      - container_usage
+      - custom_timeseries_usage
+      - fargate_usage
+      - functions_usage
+      - indexed_logs_usage
+      - infra_host_usage
+      - invocations_usage
+      - npm_host_usage
+      - profiled_container_usage
+      - profiled_host_usage
+      - snmp_usage
+      type: string
+      x-enum-varnames:
+      - API_USAGE
+      - APM_HOST_USAGE
+      - BROWSER_USAGE
+      - CONTAINER_USAGE
+      - CUSTOM_TIMESERIES_USAGE
+      - FARGATE_USAGE
+      - FUNCTIONS_USAGE
+      - INDEXED_LOGS_USAGE
+      - INFRA_HOST_USAGE
+      - INVOCATIONS_USAGE
+      - NPM_HOST_USAGE
+      - PROFILED_CONTAINER_USAGE
+      - PROFILED_HOST_USAGE
+      - SNMP_USAGE
     IFrameWidgetDefinition:
       description: The iframe widget allows you to embed a portion of any other web
         page on your dashboard. Only available on FREE layout dashboards.
@@ -25960,7 +26049,7 @@ paths:
       summary: Get hourly usage for audit logs
       tags:
       - Usage Metering
-      x-menu-order: 31
+      x-menu-order: 32
       x-undo:
         type: safe
   /api/v1/usage/aws_lambda:
@@ -26108,7 +26197,7 @@ paths:
       summary: Get hourly usage for CSPM
       tags:
       - Usage Metering
-      x-menu-order: 30
+      x-menu-order: 31
       x-undo:
         type: safe
   /api/v1/usage/cws:
@@ -26163,7 +26252,7 @@ paths:
       summary: Get hourly usage for Cloud Workload Security
       tags:
       - Usage Metering
-      x-menu-order: 32
+      x-menu-order: 33
       x-undo:
         type: safe
   /api/v1/usage/dbm:
@@ -26213,7 +26302,7 @@ paths:
       summary: Get hourly usage for Database Monitoring
       tags:
       - Usage Metering
-      x-menu-order: 33
+      x-menu-order: 34
       x-undo:
         type: safe
   /api/v1/usage/fargate:
@@ -26322,6 +26411,78 @@ paths:
       x-menu-order: 1
       x-undo:
         type: safe
+  /api/v1/usage/hourly-attribution:
+    get:
+      description: Get Hourly Usage Attribution.
+      operationId: GetHourlyUsageAttribution
+      parameters:
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage beginning at this hour.'
+        in: query
+        name: start_hr
+        required: true
+        schema:
+          format: date-time
+          type: string
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage ending
+
+          **before** this hour.'
+        in: query
+        name: end_hr
+        required: false
+        schema:
+          format: date-time
+          type: string
+      - description: Usage type to retrieve.
+        in: query
+        name: usage_type
+        required: true
+        schema:
+          $ref: '#/components/schemas/HourlyUsageAttributionUsageType'
+      - description: List following results with a next_record_id provided in the
+          previous query.
+        in: query
+        name: next_record_id
+        required: false
+        schema:
+          type: string
+      - description: Comma separated list of tags used to group usage. If no value
+          is provided the usage will not be broken down by tags.
+        in: query
+        name: tag_breakdown_keys
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/HourlyUsageAttributionResponse'
+          description: OK
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - usage_read
+      summary: Get Hourly Usage Attribution
+      tags:
+      - Usage Metering
+      x-menu-order: 30
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v1/usage/incident-management:
     get:
       description: Get hourly usage for incident management.
@@ -26917,7 +27078,7 @@ paths:
       summary: Get hourly usage for RUM Units
       tags:
       - Usage Metering
-      x-menu-order: 35
+      x-menu-order: 36
       x-undo:
         type: safe
   /api/v1/usage/rum_sessions:
@@ -27027,7 +27188,7 @@ paths:
       summary: Get hourly usage for Sensitive Data Scanner
       tags:
       - Usage Metering
-      x-menu-order: 34
+      x-menu-order: 35
       x-undo:
         type: safe
   /api/v1/usage/snmp:

@@ -980,6 +980,10 @@
     "description": "Get hourly usage for hosts and containers.",
     "summary": "Get hourly usage for hosts and containers"
   },
+  "GetHourlyUsageAttribution": {
+    "description": "Get Hourly Usage Attribution.",
+    "summary": "Get Hourly Usage Attribution"
+  },
   "GetIncidentManagement": {
     "description": "Get hourly usage for incident management.",
     "summary": "Get hourly usage for incident management"
