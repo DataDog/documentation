@@ -303,9 +303,9 @@ Since versions 6.32.0 and 7.32.0, the Datadog Agent supports OTLP traces and met
 
 To connect OpenTelemetry traces and logs so that your application logs monitoring and analysis has the additional context provided by the OpenTelemetry traces, see [Connect OpenTelemetry Traces and Logs][18] for language specific instructions and example code.
 
-## Alternatives to the OpenTelemetry Collector Datadog exporter
+## Other alternatives
 
-Datadog recommends you use the OpenTelemetry Collector Datadog exporter in conjunction with OpenTelemetry tracing clients. However, if that doesn't work for you:
+Datadog recommends you use the OpenTelemetry Collector Datadog exporter or the experimental Datadog Agent OTLP ingestion support in conjunction with OpenTelemetry tracing clients. However, if that doesn't work for you:
 
   - Each of the supported languages also has support for [sending OpenTracing data to Datadog][19].
 
