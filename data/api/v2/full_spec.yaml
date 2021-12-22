@@ -498,8 +498,21 @@ components:
       properties:
         name:
           description: Name of the application key.
-          example: Application Key for submitting metrics
+          example: Application Key for managing dashboards
           type: string
+        scopes:
+          description: Array of scopes to grant the application key. This feature
+            is in private beta, please contact Datadog support to enable scopes for
+            your application keys.
+          example:
+          - dashboards_read
+          - dashboards_write
+          - dashboards_public_share
+          items:
+            description: Name of scope.
+            type: string
+          nullable: true
+          type: array
       required:
       - name
       type: object
@@ -550,10 +563,21 @@ components:
       properties:
         name:
           description: Name of the application key.
-          example: Application Key for submitting metrics
+          example: Application Key for managing dashboards
           type: string
-      required:
-      - name
+        scopes:
+          description: Array of scopes to grant the application key. This feature
+            is in private beta, please contact Datadog support to enable scopes for
+            your application keys.
+          example:
+          - dashboards_read
+          - dashboards_write
+          - dashboards_public_share
+          items:
+            description: Name of scope.
+            type: string
+          nullable: true
+          type: array
       type: object
     ApplicationKeyUpdateData:
       description: Object used to update an application key.
@@ -873,8 +897,21 @@ components:
           type: string
         name:
           description: Name of the application key.
-          example: Application Key for submitting metrics
+          example: Application Key for managing dashboards
           type: string
+        scopes:
+          description: Array of scopes to grant the application key. This feature
+            is in private beta, please contact Datadog support to enable scopes for
+            your application keys.
+          example:
+          - dashboards_read
+          - dashboards_write
+          - dashboards_public_share
+          items:
+            description: Name of scope.
+            type: string
+          nullable: true
+          type: array
       type: object
     HTTPLog:
       description: Structured log message.
@@ -3567,8 +3604,21 @@ components:
           type: string
         name:
           description: Name of the application key.
-          example: Application Key for submitting metrics
+          example: Application Key for managing dashboards
           type: string
+        scopes:
+          description: Array of scopes to grant the application key. This feature
+            is in private beta, please contact Datadog support to enable scopes for
+            your application keys.
+          example:
+          - dashboards_read
+          - dashboards_write
+          - dashboards_public_share
+          items:
+            description: Name of scope.
+            type: string
+          nullable: true
+          type: array
       type: object
     PartialApplicationKeyResponse:
       description: Response for retrieving a partial application key.
@@ -4126,6 +4176,36 @@ components:
           format: int64
           readOnly: true
           type: integer
+      type: object
+    RoleClone:
+      description: Data for the clone role request.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/RoleCloneAttributes'
+        type:
+          $ref: '#/components/schemas/RolesType'
+      required:
+      - type
+      - attributes
+      type: object
+    RoleCloneAttributes:
+      description: Attributes required to create a new role by cloning an existing
+        one.
+      properties:
+        name:
+          description: Name of the new role that is cloned.
+          example: cloned-role
+          type: string
+      required:
+      - name
+      type: object
+    RoleCloneRequest:
+      description: Request to create a role by cloning an existing role.
+      properties:
+        data:
+          $ref: '#/components/schemas/RoleClone'
+      required:
+      - data
       type: object
     RoleCreateAttributes:
       description: Attributes of the created role.
@@ -5543,9 +5623,9 @@ components:
             security_monitoring_rules_write: The ability to create and edit Detection
               rules.
             security_monitoring_signals_read: The ability to view Security signals.
-            user_access_invite: Allows users to invite other users to your organization.
-            user_access_manage: Grants the permission to disable users, manage user
-              roles and SAML-to-role mappings.
+            user_access_invite: The ability to invite other users to your organization.
+            user_access_manage: The ability to disable users, manage user roles, and
+              manage SAML-to-role mappings.
           tokenUrl: /oauth2/v1/token
       type: oauth2
     apiKeyAuth:
@@ -8638,6 +8718,68 @@ paths:
       x-menu-order: 4
       x-undo:
         type: idempotent
+  /api/v2/roles/{role_id}/clone:
+    post:
+      description: Clone an existing role
+      operationId: CloneRole
+      parameters:
+      - $ref: '#/components/parameters/RoleID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RoleCloneRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoleResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not found
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Conflict
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - user_access_manage
+      summary: Create a new role by cloning an existing role
+      tags:
+      - Roles
+      x-codegen-request-body-name: body
+      x-menu-order: 12
+      x-permission: OR(USER_ACCESS_MANAGE)
+      x-undo:
+        operationId: DeleteRole
+        parameters:
+        - name: role_id
+          source: data.id
+        type: unsafe
   /api/v2/roles/{role_id}/permissions:
     delete:
       description: Removes a permission from a role.

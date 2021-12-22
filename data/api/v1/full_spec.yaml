@@ -6354,6 +6354,7 @@ components:
       - slo alert
       - event-v2 alert
       - audit alert
+      - ci-pipelines alert
       example: query alert
       type: string
       x-enum-varnames:
@@ -6370,6 +6371,7 @@ components:
       - SLO_ALERT
       - EVENT_V2_ALERT
       - AUDIT_ALERT
+      - CI_PIPELINES_ALERT
     MonitorUpdateRequest:
       description: Object describing a monitor update request.
       properties:
@@ -9765,6 +9767,138 @@ components:
       - account
       - url
       type: object
+    SunburstWidgetDefinition:
+      description: Sunbursts are spot on to highlight how groups contribute to the
+        total of a query.
+      properties:
+        custom_links:
+          description: List of custom links.
+          items:
+            $ref: '#/components/schemas/WidgetCustomLink'
+          type: array
+        hide_total:
+          description: Show the total value in this widget.
+          type: boolean
+        legend:
+          $ref: '#/components/schemas/SunburstWidgetLegend'
+        requests:
+          description: List of sunburst widget requests.
+          example:
+          - q/apm_query/log_query: <METRIC_1>{<SCOPE_1>}
+          items:
+            $ref: '#/components/schemas/SunburstWidgetRequest'
+          minItems: 1
+          type: array
+        time:
+          $ref: '#/components/schemas/WidgetTime'
+        title:
+          description: Title of your widget.
+          type: string
+        title_align:
+          $ref: '#/components/schemas/WidgetTextAlign'
+        title_size:
+          description: Size of the title.
+          type: string
+        type:
+          $ref: '#/components/schemas/SunburstWidgetDefinitionType'
+      required:
+      - type
+      - requests
+      type: object
+    SunburstWidgetDefinitionType:
+      default: sunburst
+      description: Type of the Sunburst widget.
+      enum:
+      - sunburst
+      example: sunburst
+      type: string
+      x-enum-varnames:
+      - SUNBURST
+    SunburstWidgetLegend:
+      description: Configuration of the legend.
+      oneOf:
+      - $ref: '#/components/schemas/SunburstWidgetLegendTable'
+      - $ref: '#/components/schemas/SunburstWidgetLegendInlineAutomatic'
+      type: object
+    SunburstWidgetLegendInlineAutomatic:
+      description: Configuration of inline or automatic legends.
+      properties:
+        hide_percent:
+          description: Whether to hide the percentages of the groups.
+          type: boolean
+        hide_value:
+          description: Whether to hide the values of the groups.
+          type: boolean
+        type:
+          $ref: '#/components/schemas/SunburstWidgetLegendInlineAutomaticType'
+      required:
+      - type
+    SunburstWidgetLegendInlineAutomaticType:
+      description: Whether to show the legend inline or let it be automatically generated.
+      enum:
+      - inline
+      - automatic
+      example: automatic
+      type: string
+      x-enum-varnames:
+      - INLINE
+      - AUTOMATIC
+    SunburstWidgetLegendTable:
+      description: Configuration of table-based legend.
+      properties:
+        type:
+          $ref: '#/components/schemas/SunburstWidgetLegendTableType'
+      required:
+      - type
+    SunburstWidgetLegendTableType:
+      description: Whether or not to show a table legend.
+      enum:
+      - table
+      - none
+      example: table
+      type: string
+      x-enum-varnames:
+      - TABLE
+      - NONE
+    SunburstWidgetRequest:
+      description: Request definition of sunburst widget.
+      properties:
+        apm_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
+        audit_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
+        event_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
+        formulas:
+          description: List of formulas that operate on queries. **This feature is
+            currently in beta.**
+          items:
+            $ref: '#/components/schemas/WidgetFormula'
+          type: array
+        log_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
+        network_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
+        process_query:
+          $ref: '#/components/schemas/ProcessQueryDefinition'
+        profile_metrics_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
+        q:
+          description: Widget query.
+          type: string
+        queries:
+          description: List of queries that can be returned directly or used in formulas.
+            **This feature is currently in beta.**
+          items:
+            $ref: '#/components/schemas/FormulaAndFunctionQueryDefinition'
+          type: array
+        response_format:
+          $ref: '#/components/schemas/FormulaAndFunctionResponseFormat'
+        rum_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
+        security_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
+      type: object
     SyntheticsAPIStep:
       description: The steps used in a Synthetics multistep API test.
       properties:
@@ -12708,6 +12842,12 @@ components:
             hour.
           format: int64
           type: integer
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
+          type: string
       type: object
     UsageAuditLogsResponse:
       description: Response containing the audit logs usage for each hour for a given
@@ -12876,6 +13016,12 @@ components:
           description: The hour for the usage.
           format: date-time
           type: string
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
+          type: string
       type: object
     UsageCWSResponse:
       description: Response containing the Cloud Workload Security usage for each
@@ -12904,6 +13050,12 @@ components:
         hour:
           description: The hour for the usage.
           format: date-time
+          type: string
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
           type: string
       type: object
     UsageCloudSecurityPostureManagementResponse:
@@ -12993,6 +13145,12 @@ components:
         hour:
           description: The hour for the usage.
           format: date-time
+          type: string
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
           type: string
       type: object
     UsageDBMResponse:
@@ -15089,6 +15247,7 @@ components:
       - $ref: '#/components/schemas/SLOWidgetDefinition'
       - $ref: '#/components/schemas/ServiceMapWidgetDefinition'
       - $ref: '#/components/schemas/ServiceSummaryWidgetDefinition'
+      - $ref: '#/components/schemas/SunburstWidgetDefinition'
       - $ref: '#/components/schemas/TableWidgetDefinition'
       - $ref: '#/components/schemas/TimeseriesWidgetDefinition'
       - $ref: '#/components/schemas/ToplistWidgetDefinition'
@@ -15654,10 +15813,9 @@ components:
             dashboards_write: The ability to create and change dashboards.
             events_read: The ability to read events data.
             metrics_read: The ability to view custom metrics.
-            monitors_downtime: The ability to set downtimes for your organization.
-              A user with this permission can suppress alerts from any monitor using
-              a downtime, even if they do not have permission to edit those monitors
-              explicitly.
+            monitors_downtime: The ability to set downtimes to suppress alerts from
+              any monitor in an organization. The ability to write monitors is not
+              required to set downtimes.
             monitors_read: The ability to view monitors.
             monitors_write: The ability to change, mute, and delete individual monitors.
             synthetics_global_variable_read: The ability to view, search and use in
@@ -15670,9 +15828,9 @@ components:
             synthetics_write: The ability to create, edit, and delete Synthetic tests.
             timeseries_query: The ability to query timeseries data.
             usage_read: The ability to view your organization's usage and usage attribution.
-            user_access_invite: Allows users to invite other users to your organization.
-            user_access_manage: Grants the permission to disable users, manage user
-              roles and SAML-to-role mappings.
+            user_access_invite: The ability to invite other users to your organization.
+            user_access_manage: The ability to disable users, manage user roles, and
+              manage SAML-to-role mappings.
           tokenUrl: /oauth2/v1/token
       type: oauth2
     apiKeyAuth:
@@ -21373,7 +21531,32 @@ paths:
 
 
         **NOTE** Only available on US1-FED and in closed beta on US1, EU, US3, and
-        US5.'
+        US5.
+
+
+        **CI Pipelines Alert Query**
+
+
+        Example: `ci-pipelines(query).rollup(rollup_method[, measure]).last(time_window)
+        operator #`
+
+
+        - **`query`** The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).
+
+        - **`rollup_method`** The stats roll-up method - supports `count`, `avg`,
+        and `cardinality`.
+
+        - **`measure`** For `avg` and cardinality `rollup_method` - specify the measure
+        or the facet name you want to use.
+
+        - **`time_window`** #m (between 1 and 2880), #h (between 1 and 48).
+
+        - **`operator`** `<`, `<=`, `>`, `>=`, `==`, or `!=`.
+
+        - **`#`** an integer or decimal number used to set the threshold.
+
+
+        **NOTE** Only available in closed beta on US1, EU, US3 and US5.'
       operationId: CreateMonitor
       requestBody:
         content:
