@@ -369,7 +369,7 @@ database_monitoring:
         logs_no_ssl: true
 ```
 
-Then edit the `datadog.yaml` Agent configuration file and set `skip_ssl_validation` to `true`. This is needed to make the Agent ignore the discrepancy between the hostname on the SSL certificate (`app.datadoghq.com` or `app.datadoghq.eu`) and your HAProxy hostname:
+Then edit the `datadog.yaml` Agent configuration file and set `skip_ssl_validation` to `true`. This is needed to make the Agent ignore the discrepancy between the hostname on the SSL certificate ({{< region-param key="dd_full_site" code="true" >}}) and your HAProxy hostname:
 
 ```yaml
 skip_ssl_validation: true
@@ -440,9 +440,6 @@ To verify that everything is working properly, review the HAProxy statistics at 
 
 This example `nginx.conf` can be used to proxy Agent traffic to Datadog. The last server block in this configuration does TLS wrapping to ensure internal plaintext logs are encrypted between your proxy and Datadog's log intake API endpoint:
 
-{{< site-region region="us" >}}
-
-
 ```conf
 user nginx;
 worker_processes auto;
@@ -459,13 +456,13 @@ http {
         access_log off;
 
         location /api/v1/validate {
-            proxy_pass https://api.datadoghq.com:443/api/v1/validate;
+            proxy_pass https://api.{{< region-param key="dd_site" >}}:443/api/v1/validate;
         }
         location /support/flare/ {
-            proxy_pass https://flare.datadoghq.com:443/support/flare/;
+            proxy_pass https://flare.{{< region-param key="dd_site" >}}:443/support/flare/;
         }
         location / {
-            proxy_pass https://haproxy-app.agent.datadoghq.com:443/;
+            proxy_pass https://haproxy-app.agent.{{< region-param key="dd_site" >}}:443/;
         }
     }
 }
@@ -474,92 +471,30 @@ stream {
     server {
         listen 3835; #listen for traces
         proxy_ssl on;
-        proxy_pass trace.agent.datadoghq.com:443;
+        proxy_pass trace.agent.{{< region-param key="dd_site" >}}:443;
     }
     server {
         listen 3836; #listen for processes
         proxy_ssl on;
-        proxy_pass process.datadoghq.com:443;
+        proxy_pass process.{{< region-param key="dd_site" >}}:443;
     }
     server {
         listen 3837; #listen for logs with use_http: true
         proxy_ssl on;
-        proxy_pass agent-http-intake.logs.datadoghq.com:443;
+        proxy_pass agent-http-intake.logs.{{< region-param key="dd_site" >}}:443;
     }
     server {
         listen 3838; #listen for database monitoring metrics
         proxy_ssl on;
-        proxy_pass dbm-metrics-intake.datadoghq.com:443;
+        proxy_pass dbm-metrics-intake.{{< region-param key="dd_site" >}}:443;
     }
     server {
         listen 3839; #listen for database monitoring samples
         proxy_ssl on;
-        proxy_pass dbquery-intake.datadoghq.com:443;
+        proxy_pass dbquery-intake.{{< region-param key="dd_site" >}}:443;
     }
 }
 ```
-
-{{< /site-region >}}
-{{< site-region region="eu" >}}
-
-
-```conf
-user nginx;
-worker_processes auto;
-error_log /var/log/nginx/error.log;
-pid /run/nginx.pid;
-
-events {
-    worker_connections 1024;
-}
-# HTTP Proxy for Datadog Agent
-http {
-    server {
-        listen 3834; #listen for metrics
-        access_log off;
-
-        location /api/v1/validate {
-            proxy_pass https://api.datadoghq.eu:443/api/v1/validate;
-        }
-        location /support/flare/ {
-            proxy_pass https://flare.datadoghq.eu:443/support/flare/;
-        }
-        location / {
-            proxy_pass https://haproxy-app.agent.datadoghq.eu:443/;
-        }
-    }
-}
-# TCP Proxy for Datadog Agent
-stream {
-    server {
-        listen 3835; #listen for traces
-        proxy_ssl on;
-        proxy_pass trace.agent.datadoghq.eu:443;
-    }
-    server {
-        listen 3836; #listen for processes
-        proxy_ssl on;
-        proxy_pass process.datadoghq.eu:443;
-    }
-    server {
-        listen 3837; #listen for logs with use_http: true
-        proxy_ssl on;
-        proxy_pass agent-http-intake.logs.datadoghq.eu:443;
-    }
-    server {
-        listen 3838; #listen for database monitoring metrics
-        proxy_ssl on;
-        proxy_pass dbm-metrics-intake.datadoghq.eu:443;
-    }
-    server {
-        listen 3839; #listen for database monitoring samples
-        proxy_ssl on;
-        proxy_pass dbquery-intake.datadoghq.eu:443;
-    }
-}
-```
-
-{{< /site-region >}}
 
 #### Datadog Agent configuration
 
@@ -585,9 +520,15 @@ When sending logs over TCP, see <a href="/agent/logs/proxy">TCP Proxy for Logs</
 
 ## Datadog Agent
 
-**This feature is only available for Agent v5**
+{{< tabs >}}
+{{% tab "Agent v6 & v7" %}}
 
-It is recommended to use an actual proxy (a web proxy or HAProxy) to forward your traffic to Datadog, however if those options aren't available to you, it is possible to configure an instance of Agent v5 to serve as a proxy.
+**This feature is only available for Agent v5**.
+
+{{% /tab %}}
+{{% tab "Agent v5" %}}
+
+It is recommended to use an actual proxy (a web proxy or HAProxy) to forward your traffic to Datadog, however if those options aren't available to you, it is possible to configure an instance of **Agent v5** to serve as a proxy.
 
 1. Designate one node **running datadog-agent** as the proxy.
     In this example assume that the proxy name is `proxy-node`. This node **must** be able to reach `https://app.datadoghq.com`.
@@ -611,7 +552,12 @@ It is recommended to use an actual proxy (a web proxy or HAProxy) to forward you
     to
     `dd_url: http://proxy-node:17123`
 
-6. Verify on the [Infrastructure page][4] that all nodes report data to Datadog.
+6. Verify on the [Infrastructure page][1] that all nodes report data to Datadog.
+
+
+[1]: https://app.datadoghq.com/infrastructure#overview
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Further Reading
 
@@ -620,4 +566,3 @@ It is recommended to use an actual proxy (a web proxy or HAProxy) to forward you
 [1]: http://haproxy.1wt.eu
 [2]: http://www.haproxy.org/#perf
 [3]: https://www.nginx.com
-[4]: https://app.datadoghq.com/infrastructure#overview
