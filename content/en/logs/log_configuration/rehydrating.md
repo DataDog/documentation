@@ -87,7 +87,7 @@ One hour later, the historical view is definitively deleted; until that time, th
 
 View deleted historical views for up to 90 days in the past using the `View` dropdown menu:
 
-{{< img src="logs/archives/log_archives_deleted_rehydrations.png" alt="Deleting Historical Views"  width="75%" >}}
+{{< img src="logs/archives/log_archives_deleted_rehydrations.png" alt="Deleting Historical Views" width="75%" >}}
 
 ## Setting up archive rehydrating
 
