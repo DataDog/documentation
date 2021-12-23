@@ -10,6 +10,7 @@ further_reading:
       text: 'AWS Lambda Functions running on AWS Graviton2 processors'
 aliases:
     - /serverless/datadog_lambda_library/extension/
+    - /serverless/guide/extension_private_link/
 ---
 
 ## Overview

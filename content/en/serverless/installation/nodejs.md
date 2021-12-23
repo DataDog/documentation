@@ -508,7 +508,7 @@ exports.handler = async (event) => {
 
 For more information on custom metric submission, see [here][6]. For additional details on custom instrumentation, see the Datadog APM documentation for [custom instrumentation][7].
 
-If your Lambda function is running in a VPC, follow the [Datadog Lambda Extension AWS PrivateLink Setup][8] guide to ensure that the extension can reach Datadog API endpoints.
+If your Lambda function is running in a VPC, follow these [instructions][8] to ensure that the extension can reach Datadog API endpoints.
 
 ## Further Reading
 
@@ -521,4 +521,4 @@ If your Lambda function is running in a VPC, follow the [Datadog Lambda Extensio
 [5]: /serverless/libraries_integrations/forwarder
 [6]: /serverless/custom_metrics?tab=nodejs
 [7]: /tracing/custom_instrumentation/nodejs/
-[8]: /serverless/guide/extension_private_link/
+[8]: /serverless/libraries_integrations/extension/#vpc
