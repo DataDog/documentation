@@ -132,6 +132,9 @@ Add the following two permission statements to your IAM policies. Edit the bucke
       "Sid": "DatadogUploadAndRehydrateLogArchives",
       "Effect": "Allow",
       "Action": ["s3:PutObject", "s3:GetObject"],
+       "Principal": {
+          "AWS": "arn:aws:iam::MY_AWS_ACCOUNTID:role/<MY_ROLE_NAME>"
+       },
       "Resource": [
         "arn:aws:s3:::<MY_BUCKET_NAME_1_/_MY_OPTIONAL_BUCKET_PATH_1>/*",
         "arn:aws:s3:::<MY_BUCKET_NAME_2_/_MY_OPTIONAL_BUCKET_PATH_2>/*"
@@ -141,6 +144,9 @@ Add the following two permission statements to your IAM policies. Edit the bucke
       "Sid": "DatadogRehydrateLogArchivesListBucket",
       "Effect": "Allow",
       "Action": "s3:ListBucket",
+      "Principal": {
+          "AWS": "arn:aws:iam::MY_AWS_ACCOUNTID:role/<MY_ROLE_NAME>"
+       },
       "Resource": [
         "arn:aws:s3:::<MY_BUCKET_NAME_1>",
         "arn:aws:s3:::<MY_BUCKET_NAME_2>"
