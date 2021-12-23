@@ -293,7 +293,7 @@ To see more information and additional examples of how you might configure your 
 
 ## Datadog Agent OTLP ingestion support
 
-<div class="alert alert-warning">This functionality is experimental and its behavior and configuration may change.</div>
+<div class="alert alert-warning">This functionality is beta and its behavior and configuration may change.</div>
 
 Since versions 6.32.0 and 7.32.0, the Datadog Agent supports OTLP traces and metrics ingestion through both gRPC and HTTP.
 
@@ -306,9 +306,9 @@ experimental:
     http_port: 4318
 ```
 
-You can also configure the endpoints by providing the port through the `DD_OTLP_GRPC_PORT` and `DD_OTLP_HTTP_PORT` environment variables. These must be available to both the core Agent and trace Agent.
+You can also configure the endpoints by providing the port through the `DD_OTLP_GRPC_PORT` and `DD_OTLP_HTTP_PORT` environment variables. These must be passed to both the core Agent and trace Agent. 
 
-[Contact Datadog support][23] to get more information on this feature and provide feedback.
+Check [the OpenTelemetry instrumentation documentation][24] to understand how to point your instrumentation to the Agent, and [contact Datadog support][23] to get more information on this feature and provide feedback.
 
 ## Connect OpenTelemetry traces and logs
 
@@ -349,4 +349,4 @@ Datadog recommends you use the OpenTelemetry Collector Datadog exporter or the e
 [21]: /tracing/setup_overview/open_standards/ruby#opentelemetry
 [22]: /tracing/setup_overview/open_standards/nodejs#opentelemetry
 [23]: https://docs.datadoghq.com/help/
-[24]: https://github.com/open-telemetry/opentelemetry-collector/blob/v0.38.0/receiver/otlpreceiver/config.md
+[24]: https://opentelemetry.io/docs/instrumentation/
