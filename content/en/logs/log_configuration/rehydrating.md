@@ -89,7 +89,6 @@ View deleted historical views for up to 90 days in the past using the dropdown m
 
 {{< img src="logs/archives/log_archives_deleted_rehydrations.png" alt="Deleting Historical Views" video="true"  width="75%" >}}
 
-
 ## Setting up archive rehydrating
 
 ### Define a Datadog archive
