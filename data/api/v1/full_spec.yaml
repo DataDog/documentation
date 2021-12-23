@@ -13717,6 +13717,12 @@ components:
           description: The hour for the usage.
           format: date-time
           type: string
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
+          type: string
         session_count:
           description: Contains the number of RUM Sessions.
           format: int64
@@ -14142,6 +14148,11 @@ components:
             in the current date for all organizations.
           format: int64
           type: integer
+        rum_browser_and_mobile_session_count:
+          description: Shows the sum of all mobile sessions and all browser lite and
+            legacy sessions over all hours in the current month for all organizations.
+          format: int64
+          type: integer
         rum_session_count_sum:
           description: Shows the sum of all browser RUM Sessions over all hours in
             the current date for all organizations
@@ -14416,6 +14427,11 @@ components:
         public_id:
           description: The organization public id.
           type: string
+        rum_browser_and_mobile_session_count:
+          description: Shows the sum of all mobile sessions and all browser lite and
+            legacy sessions over all hours in the current date for the given org.
+          format: int64
+          type: integer
         rum_session_count_sum:
           description: Shows the sum of all browser RUM Sessions over all hours in
             the current date for the given org.
@@ -14728,6 +14744,11 @@ components:
           description: Shows the sum of all rehydrated logs bytes ingested over all
             hours in the current months for all organizations (data available as of
             December 1, 2020).
+          format: int64
+          type: integer
+        rum_browser_and_mobile_session_count:
+          description: Shows the sum of all mobile sessions and all browser lite and
+            legacy sessions over all hours in the current month for all organizations.
           format: int64
           type: integer
         rum_session_count_agg_sum:
