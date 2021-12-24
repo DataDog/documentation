@@ -303,7 +303,7 @@ datadog:
 
 ### With a dashboard
 
-To see if your Datadog Agent (>= 6.17.0 - <= 6.32.2; >= 7.17.0 - <= 7.32.2) is the recommended version (6.32.3 and 7.32.3) and not running on a Log4j vulnerable version, [import][4] the following dashboard template to your Datadog account:
+To see if your Datadog Agent (>= 6.17.0 - <= 6.32.2; >= 7.17.0 - <= 7.32.2) is the recommended version (6.32.3/7.32.3 or later) and not running on a Log4j vulnerable version, [import][4] the following dashboard template to your Datadog account:
 
 [**Datadog Agent Version Check dashboard template**][5]
 </br>
