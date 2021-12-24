@@ -8,7 +8,7 @@ aliases:
 ## Metrics
 
 Network Device Monitoring submits specified metrics under the `snmp.*` namespace. The metrics collected are determined by the `[configured profile]`.
-If metrics you want is not on the following list, you can search OID and its name from [Global OID reference database](http://oidref.com/) and add your profiles.
+If the metrics you want are not on the following list, search for the OID and its name from the [Global OID reference database][1] to add to your profiles.
 
 {{< get-metrics-from-git "snmp" >}}
 
@@ -19,3 +19,5 @@ Network Device Monitoring does not include any events.
 ## Service checks
 
 {{< get-service-checks-from-git "snmp" >}}
+
+[1]: http://oidref.com
