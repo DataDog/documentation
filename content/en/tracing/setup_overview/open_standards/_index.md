@@ -291,7 +291,7 @@ spec:
 
 To see more information and additional examples of how you might configure your collector, see [the OpenTelemetry Collector configuration documentation][5].
 
-## Datadog Agent OTLP ingestion support
+## OTLP ingest in Datadog Agent
 
 <div class="alert alert-warning">This functionality is beta and its behavior and configuration may change.</div>
 
@@ -316,7 +316,7 @@ To connect OpenTelemetry traces and logs so that your application logs monitorin
 
 ## Other alternatives
 
-Datadog recommends you use the OpenTelemetry Collector Datadog exporter or the experimental Datadog Agent OTLP ingestion support in conjunction with OpenTelemetry tracing clients. However, if that doesn't work for you:
+Datadog recommends you use the OpenTelemetry Collector Datadog exporter or the OTLP Ingest in the Datadog Agent in conjunction with OpenTelemetry tracing clients. However, if that doesn't work for you:
 
   - Each of the supported languages also has support for [sending OpenTracing data to Datadog][19].
 
