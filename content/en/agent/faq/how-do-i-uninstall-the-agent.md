@@ -171,29 +171,45 @@ This method removes the Agent, as well as all Agent configuration files.
 {{< tabs >}}
 {{% tab "Agent v6 & v7" %}}
 
+There are two different methods to uninstall the Agent on Windows. Both methods remove the Agent, but do not remove the `C:\ProgramData\Datadog` configuration folder on the host.
+
+### Remove programs
+
 Uninstall the Agent using Add/Remove Programs.
 
-Alternatively, use the Powershell command below. **Note**: Some Agent versions may cause a forced reboot. To prevent this, add a no restart parameter like `REBOOT=ReallySuppress`.
+### Powershell
+
+Alternatively, use one of the following Powershell commands. **Note**: Some Agent versions may cause a forced reboot. To prevent this, add a no restart parameter.
+
+Using `REBOOT=ReallySuppress`:
 
 ```powershell
 start-process msiexec -Wait -ArgumentList ('/log', 'C:\\uninst.log', '/q', '/x', (Get-WmiObject -Class Win32_Product -Filter "Name='Datadog Agent'" -ComputerName .).IdentifyingNumber, 'REBOOT=ReallySuppress')
 ```
 
-Both methods remove the Agent, but they do not remove the `C:\ProgramData\Datadog` configuration folder on the host.
+Using `/norestart`:
+
+```powershell
+start-process msiexec -Wait -ArgumentList ('/log', 'C:\\uninst.log', '/norestart', '/q', '/x', (Get-WmiObject -Class Win32_Product -Filter "Name='Datadog Agent'" -ComputerName .).IdentifyingNumber)
+```
 
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
-**Note**: For versions of the agent less than 5.12.0 on Windows, It's important to uninstall the Agent with the **original account** used to install the Agent, otherwise it may not be cleanly removed.
+There are two different methods to uninstall the Agent on Windows. Both methods remove the Agent, but do not remove the `C:\ProgramData\Datadog` configuration folder on the host.
+
+**Note**: For Agent < v5.12.0, it's important to uninstall the Agent with the **original account** used to install the Agent, otherwise it may not be cleanly removed.
+
+### Remove programs
 
 Uninstall the Agent using Add/Remove Programs.
+
+### Powershell
 
 Alternatively, use the Powershell command below.
 ```powershell
 start-process msiexec -Wait -ArgumentList ('/log', 'C:\\uninst.log', '/norestart', '/q', '/x', (Get-WmiObject -Class Win32_Product -Filter "Name='Datadog Agent'" -ComputerName .).IdentifyingNumber)
 ```
-
-Both methods remove the Agent, but they do not remove the `C:\ProgramData\Datadog` configuration folder on the host.
 
 {{% /tab %}}
 {{< /tabs >}}
