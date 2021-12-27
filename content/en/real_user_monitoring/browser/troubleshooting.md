@@ -56,11 +56,11 @@ The Browser RUM SDK relies on cookies to store session information and follow a 
 
 ## Technical limitations
 
-Each event sent by the Browser RUM SDK is built with:
+Each event sent by the Browser RUM SDK is built with the following:
 
-- the RUM global context
-- the event context (if any)
-- the attributes specific to the event
+- RUM global context
+- Event context (if any)
+- Attributes specific to the event
 
 Example:
 
@@ -69,7 +69,7 @@ window.DD_RUM && window.DD_RUM.addRumGlobalContext('global', {'foo': 'bar'})
 window.DD_RUM && window.DD_RUM.addAction('hello', {'action': 'qux'})
 ```
 
-It creates an action event:
+The example code creates the following action event:
 
 ```json
 {
@@ -91,7 +91,7 @@ It creates an action event:
 }
 ```
 
-If an event or a request go beyond any of the following limitations, it will be rejected by our intake.
+If an event or a request goes beyond any of the following limitations, it is rejected by the Datadog intake.
 
 | Property                                 | Limitation   |
 | ---------------------------------------- | ------------ |
