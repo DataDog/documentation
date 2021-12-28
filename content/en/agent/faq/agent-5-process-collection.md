@@ -8,7 +8,7 @@ private: true
 
 **Live Processes is available in Datadog Agent version 5.16.0 and above.**
 See the instructions for standard [Agent installation][1] for platform-specific details. **Note**: the Live Processes is
-not available for the source install method of the Agent.
+Not available for the source install method of the Agent.
 
 Once the Datadog Agent is installed, enable Live Processes collection by editing the [configuration file][2] at:
 
