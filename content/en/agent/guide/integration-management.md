@@ -37,7 +37,7 @@ An integration is compatible and installable if both conditions are met:
 1. The version is newer than the one [shipped with the Agent][2].
 2. It is compatible with the version of the [datadog_checks_base][3] in the installed Agent.
 
-**Note**: The `datadog_checks_base` cannot be manually installed. The base check can only be upgraded by upgrading the Agent.
+**Note**: `datadog_checks_base` cannot be manually installed. The base check can only be upgraded by upgrading the Agent.
 
 The syntax for this command is `datadog-agent integration install <INTEGRATION_PACKAGE_NAME>==<VERSION>` where `<INTEGRATION_PACKAGE_NAME>` is the name of the integration prefixed with `datadog-`.
 
