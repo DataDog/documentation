@@ -130,7 +130,7 @@ An [event][16] is created anytime a monitor is created, modified, silenced, or d
 
 ### Edit restrictions
 
-If changes are restricted, only the monitor's creator or an administrator can change the monitor. Changes include any updates to the monitor definition and muting for any amount of time.
+If changes are restricted, only the monitor's creator or a user with the User Access Manage permission can change the monitor. Changes include any updates to the monitor definition and muting for any amount of time.
 
 **Note**: The limitations are applied both in the UI and API.
 
