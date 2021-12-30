@@ -28,7 +28,7 @@ The Trace Explorer shows an **Search - Only Indexed Data** indicator whenever yo
 
 {{< img src="tracing/trace_explorer/historical_search.png" alt="Only Indexed Data indicator" style="width:75%;" >}}
 
-Pivot from Live Search to Indexed Data Search by using the time selector on the top right end corner.
+Live Search is the default view on the Traces page. Pivot from Live Search to Indexed Data Search by using the time selector on the top right end corner.
 
 ### Tracing Without Limits (recommended)
 
@@ -52,11 +52,14 @@ After you have instrumented your services and ingested traces, set tag-based [Re
 
 {{< img src="tracing/live_search_and_analytics/tracing_without_limits_lifecycle-2.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace Journey" >}}
 
-When you use Live Search, Datadog displays spans as soon as they are sent by the Datadog Agent and before they have been indexed by your retention filters. All ingested spans are available for the last 15 minutes (rolling window). All spans ingested by Datadog are displayed without any sampling, and this is Tracing without Limits™.
+When you use Live Search, Datadog displays spans as soon as they are sent by the Datadog Agent and before they have been indexed by your retention filters. All ingested spans are available for the last 15 minutes (rolling window), displayed without any sampling.
 
-{{< img src="tracing/live_search/live-search.mp4" alt="Live Search" video="true" >}}
+{{< tabs >}}
+{{% tab "List view" %}}
 
-With the APM Live Search you can:
+{{< img src="tracing/live_search/live-search.mp4" alt="Live Search List view" video="true" >}}
+
+With the Live Search **List view** you can:
 
 - Monitor that a new deployment went smoothly by filtering on `version_id` of all tags.
 - View outage-related information in real time by searching 100% of ingested traces for a particular `org_id` or `customer_id` that is associated with a problematic child span.
@@ -67,22 +70,40 @@ With the APM Live Search you can:
 
 The number of received spans per second is displayed at the top of the traces table. Since a stream of thousands of spans per second is not human readable, high throughput span streams show spans for visual clarity but all spans are still searchable. Use the Live Search query bar filtering features to filter the spans stream and the **Pause/Play** button at the top right of the screen to pause or resume the stream.
 
-{{< img src="tracing/live_search/play-pause-button.png" alt="Pause or Play the Live Stream" style="width:80%;" >}}
-
-Live Search is the default view on the Traces page, and when you're viewing retained traces, you can choose the **LIVE** option in the time range selector to switch to using Live Search for the past 15 minutes of traces.
+{{< img src="tracing/live_search/play-pause-button.png" alt="Pause or Play the Live Stream" style="width:75%;" >}}
 
 **Note**: Selecting any span pauses the stream and displays more details about the selected span in the trace side panel.
+
+{{% /tab %}}
+{{% tab "Timeseries View" %}}
+
+{{< img src="tracing/live_search/live-analytics.mp4" alt="Live Search Timeseries view" video="true" >}}
+
+Vizualise your spans as timeseries instead of a list using the **Timeseries view** : the Live Search Timeseries view is useful to graph requests or errors that correspond to specified criteria, such as:
+
+- Errors for the `ShoppingCart##checkout` service and endpoint, with a cart value of at least `$100`, with the ability to view traces matching these criteria individually.
+
+- Monitor a canary deployment of a critical application update in real time.
+
+- Compare latency across geographic regions scoped to the latest version of your iOS application.
+
+In addition to showing timeseries for requests that match your queries, you can also visualize your spans a top list of the most impacted customers, availability zones, or any other tag during an outage or investigation.
+
+**Note:** Exporting to dashboards and monitors is only possible using retained spans.
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Filtering
 {{< img src="tracing/live_search/all-spans-search.mp4" alt="Searching all spans"  video="true" >}}
 
-A valid query in the search bar displays traces that match your search criteria across **all spans**. The search syntax is the same in the Live Search views as in the other trace views, but here, your query is matched against all of the ingested traces across any span and any tag, and not just the indexed ones.
+A valid query in the search bar displays traces that match your search criteria across **all spans**. The search syntax is the same in the Live Search views as in the other trace views, but here, your query is matched against all of the ingested traces across **any span** and **any tag**, and not just the indexed ones.
 
 **Note**: You can select only the [service entry spans][8] by changing the selection to the box above the trace table. You can use this feature on high traffic applications to reduce the number of spans displayed and view only the entry point spans of the services. Selecting this box only _visually_ filters the spans shown; they are all still present.
 
-You can also filter on attributes that are not defined as facets. For example, to filter on the `customer.id` attribute, there are two options:
+You can also filter on attributes that are not defined as facets. For example, to filter on the `cart.value` attribute, there are two options:
 
-- Click on the attribute in the trace panel and add it to the search query:
+- Click on the `cart.value` attribute in the trace details panel and add it to the search query:
 {{< img src="tracing/live_search/add-attribute-to-query.mp4" alt="Adding an attribute to the query" video="true" >}}
 
 
@@ -102,28 +123,6 @@ All spans that are indexed by retention filters are accessible from search. Thes
 For example, if you filter by a tag that appears only on spans that are not indexed by any retention filter, your search will return no results, unlike when using Live Search.
 
 You can customize what spans are retained and at what retention rates. By default, [Datadog Intelligent Retention][4] will be applied. To learn more about the default span retention filter and how to create your own additional filters, see the [Retention Filters][3] documentation. Go to the [Retention Filters][9] page within the Datadog app to create or modify your own filters.
-
-## Live Analytics for 15 minutes
-
-{{< img src="tracing/live_search_and_analytics/tracing_without_limits_lifecycle-2.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace Journey" >}}
-
-With Live Analytics, you can perform analytics on 100% of your ingested traces for the last 15 minutes, filtering and grouping by any tag on any span. Datadog displays spans as soon as they are sent by the Datadog Agent and before they have been indexed by your retention filters. All ingested spans are available for the last 15 minutes (rolling window). All spans ingested by Datadog are displayed without any sampling, and this is Tracing without Limits™.
-
-{{< img src="tracing/live_search/live-analytics.mp4" alt="Live Analytics" video="true" >}}
-
-Analytics is used to graph requests or errors that correspond to specified criteria, such as:
-
-- Errors for the `ShoppingCart##checkout` service and endpoint, with a cart value of at least `$100`, with the ability to view traces matching these criteria individually.
-
-- Monitor a canary deployment of a critical application update in real time.
-
-- Compare latency across geographic regions scoped to the latest version of your iOS application.
-
-In addition to showing analytics for requests that match your queries, Live Analytics can also show a top list of the most impacted customers, availability zones, or any other tag during an outage or investigation.
-
-With Live Analytics, every tag on every span ingested over the rolling 15 minute window is available for querying.
-
-**Note:** Exporting to dashboards and monitors is only possible using retained spans.
 
 ## Trace Analytics with 15 day retention
 
