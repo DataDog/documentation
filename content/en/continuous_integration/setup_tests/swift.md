@@ -184,7 +184,7 @@ If you are running tests in non-supported CI providers or with no `.git` folder,
 
 ### Running tests
 
-After installation, run your tests as you normally do, for example using the `xcodebuild test` command. Tests, network requests, and application logs are instrumented automatically. Pass your environment variables when running your tests in the CI, for example:
+After installation, run your tests as you normally do, for example using the `xcodebuild test` command. Tests, network requests, and application crashes are instrumented automatically. Pass your environment variables when running your tests in the CI, for example:
 
 <pre>
 <code>
@@ -205,6 +205,14 @@ For UITests, both the test target and the application running from the UITests m
 For the following configuration settings:
  - `Boolean` variables can use any of: `1`, `0`, `true`, `false`, `YES`, or `NO`
  - `String` list variables accept a list of elements separated by `,` or `;`
+ 
+### Enabling auto-instrumentation
+
+`DD_ENABLE_STDOUT_INSTRUMENTATION`
+: Captures messages written to `stdout` (e.g `print()` ) and reports them as Logs. (Implies charges for Logs product) (Boolean)
+
+`DD_ENABLE_STDERR_INSTRUMENTATION`
+: Captures messages written to `stderr` (e.g `NSLog()`, UITest steps ) and reports them as Logs. (Implies charges for Logs product) (Boolean)
 
 ### Disabling auto-instrumentation
 
@@ -212,12 +220,6 @@ The framework enables auto-instrumentation of all supported libraries, but in so
 
 `DD_DISABLE_NETWORK_INSTRUMENTATION`
 : Disables all network instrumentation (Boolean)
-
-`DD_DISABLE_STDOUT_INSTRUMENTATION`
-: Disables all `stdout` instrumentation (Boolean)
-
-`DD_DISABLE_STDERR_INSTRUMENTATION`
-: Disables all `stderr` instrumentation (Boolean)
 
 `DD_DISABLE_SDKIOS_INTEGRATION`
 : Disables integration with `dd-sdk-ios` logs and traces (Boolean)
