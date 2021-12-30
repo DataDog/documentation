@@ -1,43 +1,48 @@
 ---
-title: Trace Search and Analytics
+title: Trace Explorer
 kind: documentation
 aliases:
     - /tracing/tracing_without_limits/
     - /tracing/livesearch/
-description: "Trace Search and Analytics"
+    - /tracing/trace_search_and_analytics/
+description: "Trace Explorer"
 ---
 
 {{< img src="tracing/live_search_and_analytics/tracing_without_limits_lifecycle-0.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace Journey" >}}
 
 ## Overview
 
-[Trace Search and Analytics][1] gives you the ability to search all ingested or Indexed Spans using any tag on any span.  The spans searched by your query will change depending on whether you are searching Live (all spans ingested in the last 15 minutes, rolling) or Indexed Spans (spans retained for 15 days by your custom filters).
+The [Trace Explorer][1] gives you the ability to search all ingested or indexed Spans using any tag on any span.  The spans searched by your query will change depending on whether you are searching Live (all spans ingested in the last 15 minutes, rolling) or Indexed Spans (spans retained for 15 days by your custom filters).
 
 - Instrumented applications send 100% of their traces to Datadog for [Ingestion][2], making the traces available as Live traces for a rolling window of 15 minutes.
 
-The Datadog app shows a **Live** indicator next to the time selector whenever you are in Live mode:
+The Trace Explorer shows a **Live Search - All ingested data** indicator whenever you are in Live mode:
 
-{{< img src="tracing/live_search/live-search.png" alt="Live Search Indicator" style="width:80%;" >}}
+{{< img src="tracing/trace_explorer/live_search.png" alt="Live Search Indicator" style="width:75%;" >}}
 
-All ingested traces are passed through [custom retention filters][3] that you can create to determine which spans to index, along with the default [intelligent retention filter][4] that retains a diverse set of traces.
+All ingested traces are then passed through :
+- [custom retention filters][3] that you can create to determine which spans to index. Once indexed through a custom retention filter, traces are retained for **15 days**.
+- the default [intelligent retention filter][4] that retains a diverse set of traces. When indexed through the intelligent retention filter, traces are retained for **30 days**.
 
-Once indexed through a custom retention filter, traces are available for use in Search and Analytics, and they are retained for 15 days.
+The Trace Explorer shows an **Search - Only Indexed Data** indicator whenever you search [indexed spans][5]:
 
-When indexed through the intelligent retention filter, traces are available for use in Search (not Analytics), and they are retained for 30 days.
+{{< img src="tracing/trace_explorer/historical_search.png" alt="Only Indexed Data indicator" style="width:75%;" >}}
 
-The Datadog app shows an **Only Indexed Data** indicator beside the time selector whenever you search [indexed spans][5]:
-
-{{< img src="tracing/live_search/only-indexed-data.png" alt="Only Indexed Data indicator" >}}
-
-You can customize settings for both [Retention and Ingestion][6] to send and keep exactly what data is most relevant to you.
+Pivot from Live Search to Indexed Data Search by using the time selector on the top right end corner.
 
 ### Tracing Without Limits (recommended)
 
-Fine-grained ingestion controls can be set per service instrumented with Datadog APM. See the [Ingestion Controls][2] documentation for details. Services that send up to 50 traces per second will send all traces by default. To configure all services to send all of their traffic, set the following environment variable in the tracer configuration:
+You can customize settings for both [Ingestion and Retention][6] to send and keep exactly what data is most relevant to you.
+
+#### Ingestion
+
+Fine-grained [Ingestion Controls][2] can be set per service instrumented with Datadog APM. Services that send up to 50 traces per second will send all traces by default. To configure all services to send all of their traffic, set the following environment variable in the tracer configuration:
 
 ```
 DD_TRACE_SAMPLE_RATE=1.0
 ```
+
+#### Indexing
 
 After you have instrumented your services and ingested traces, set tag-based [Retention filters][3] within the Datadog app so that Datadog retains spans that are relevant to you.
 
