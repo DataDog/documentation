@@ -220,10 +220,6 @@ IPC-based configurable circuit breaker retry time (in milliseconds)
 
 `DD_TRACE_AGENT_CONNECT_TIMEOUT`
 : **Default**: `100`<br>
-Maximum time the allowed for Agent connection setup (in milliseconds)
-
-`DD_TRACE_AGENT_CONNECT_TIMEOUT`
-: **Default**: `100`<br>
 The Agent connection timeout (in milliseconds)
 
 `DD_TRACE_AGENT_MAX_CONSECUTIVE_FAILURES`
