@@ -107,7 +107,7 @@ Use the pop up to restrict access to you, everyone in your organization with you
 
 Creators are always able to edit the dashboard, but other users who are allowed to edit the dashboard can add or remove any role from the access control list (ACL) so long as the final ACL includes one of their roles. For more information about roles, see the [RBAC documentation][10].
 
-If you used the deprecated "read only" check box, the access control list is pre-populated with a list of Admin roles with the "Privileged Access" permission.
+If the dashboard was created with the deprecated "read only" setting, the access control list pre-populates with a list of roles that have the Access Management (`user_access_manage`) permission.
 
 If you manage your Dashboards with Terraform, you can use the latest version of the Datadog Terraform provider to control which roles can edit your Dashboards. For more information, see the [Terraform Dashboard role restriction guide][11].
 
