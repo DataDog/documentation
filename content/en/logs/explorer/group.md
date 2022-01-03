@@ -93,9 +93,11 @@ You can apply a function to a formula by clicking on the `Σ` icon. Here is an e
 
 ## Patterns
 
-With pattern aggregation, logs that have a `message` with similar structures, belong to the same `service` and have the same `status` are grouped altogether. The patterns view is helpful for detecting and filtering noisy error patterns that could cause you to miss other issues:
+With pattern aggregation, logs that have a `message` with similar structures are grouped altogether. Optionally select one to three faceted fields to pre-aggregate your logs into groups before patterns are detected within these groupings.
 
-{{< img src="logs/explorer/aggregations_patterns.jpg" alt="Log Livetail" style="width:80%;" >}}
+The patterns view is helpful for detecting and filtering noisy error patterns that could cause you to miss other issues:
+
+{{< img src="logs/explorer/aggregations_patterns.png" alt="Log Livetail" style="width:80%;" >}}
 
 **Note**: The pattern detection is based on 10,000 log samples. Refine the search to see patterns limited to a specific subset of logs.
 
