@@ -16,9 +16,9 @@ further_reading:
   text: "Uncover kernel-level threats with Cloud Workload Security"
 ---
 
-{{< site-region region="us3,us5,gov" >}}
+{{< site-region region="gov" >}}
 <div class="alert alert-warning">
-Cloud Security Posture Management is not currently available in US1-FED or US3.
+Cloud Security Posture Management is not currently available in US1-FED.
 </div>
 {{< /site-region >}}
 
@@ -49,7 +49,7 @@ The Datadog Security Platform includes [Security Monitoring](#security-monitorin
 
 {{< img src="security_platform/cws_overview.png" alt="Cloud Workload Security coverage views in Datadog" width="100%">}}
 
-To get started with the Datadog Security Platform, navigate to the [Setup & Configuration][7] section in the Datadog app, which has detailed information for single or multi-configuration, or follow the getting started sections below to learn more about each area of the platform.
+To get started with the Datadog Security Platform, navigate to the [Setup & Configuration][6] section in the Datadog app, which has detailed information for single or multi-configuration, or follow the getting started sections below to learn more about each area of the platform.
 
 ## Further Reading
 
@@ -60,3 +60,4 @@ To get started with the Datadog Security Platform, navigate to the [Setup & Conf
 [3]: https://www.datadoghq.com/blog/automated-vulnerability-remediation-datadog/
 [4]: /security_platform/cspm/
 [5]: /security_platform/cloud_workload_security/
+[6]: https://app.datadoghq.com/security/configuration

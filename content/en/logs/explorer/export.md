@@ -19,12 +19,13 @@ further_reading:
 
 At any moment, and depending on your current aggregation, **export** your log exploration as a:
 
-- [**Saved View**][1] to use as an investigation starting point for future-yourself or your teammates
-- [**Dashboard widget**][2] for reporting or consolidation purpose
-- [**Monitor**][3] to trigger alerts on predefined thresholds
-- [**Metric**][4] to aggregate your logs into long term KPIs, as they are ingested in Datadog
+- [**Saved View**][1] to use as an investigation starting point for future-yourself or your teammates.
+- [**Dashboard widget**][2] for reporting or consolidation purpose.
+- [**Monitor**][3] to trigger alerts on predefined thresholds.
+- [**Metric**][4] to aggregate your logs into long term KPIs, as they are ingested in Datadog.
+- **cURL command** to test your queries in the Log Explorer and then build custom reports using [Datadog APIs][5].
 - **CSV** (for individual logs and transactions). You can export up to 5,000 logs at once for individual logs, 500 for Transactions.
-- **Share** View: Share a link to the current view with your teammates through email, Slack, and more. See all of the [Datadog notification integrations][5] available for this feature.
+- **Share** View: Share a link to the current view with your teammates through email, Slack, and more. See all of the [Datadog notification integrations][6] available for this feature.
 
 {{< img src="logs/explorer/export2.png" alt="Search Filter" style="width:100%;" >}}
 
@@ -36,4 +37,5 @@ You can also export your Log Explorer view to reuse later or in different contex
 [2]: /dashboards/
 [3]: /monitors/create/types/log/
 [4]: /logs/logs_to_metrics
-[5]: /integrations/#cat-notification
+[5]: /api/latest/logs/
+[6]: /integrations/#cat-notification

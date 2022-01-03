@@ -43,13 +43,14 @@ To monitor individual devices:
 
     ```yaml
     init_config:
-      loader: core
+      loader: core  # use core check implementation of SNMP integration. recommended
+      use_device_id_as_hostname: true  # recommended
     instances:
-    - ip_address: "1.2.3.4"
-      community_string: “sample-string”
+    - ip_address: '1.2.3.4'
+      community_string: 'sample-string'  # enclose with single quote
       tags:
-        - "key1:val1"
-        - "key2:val2"
+        - 'key1:val1'
+        - 'key2:val2'
     ```
 
 {{% /tab %}}
@@ -59,18 +60,19 @@ To monitor individual devices:
 
     ```yaml
     init_config:
-      loader: core
+      loader: core  # use core check implementation of SNMP integration. recommended
+      use_device_id_as_hostname: true  # recommended
     instances:
-    - ip_address: "1.2.3.4"
-      snmp_version: 3			# optional, if omitted we will autodetect which version of SNMP you are using
-      user: "user"
-      authProtocol: "fakeAuth"
-      authKey: "fakeKey"
-      privProtocol: "fakeProtocol"
-      privKey: "fakePrivKey"
+    - ip_address: '1.2.3.4'
+      snmp_version: 3  # optional, if omitted which version of SNMP you are using is auto-detected
+      user: 'user'
+      authProtocol: 'SHA256'  # choices: MD5, SHA, SHA224, SHA256, SHA384, SHA512
+      authKey: 'fakeKey'  # enclose with single quote
+      privProtocol: 'AES256'  # choices: DES, AES (128 bits), AES192, AES192C, AES256, AES256C
+      privKey: 'fakePrivKey'  # enclose with single quote
       tags:
-        - "key1:val1"
-        - "key2:val2"
+        - 'key1:val1'
+        - 'key2:val2'
     ```
 
 {{% /tab %}}
@@ -104,25 +106,25 @@ To use Autodiscovery with Network Device Monitoring:
 listeners:
   - name: snmp
 snmp_listener:
-  workers: 100 # number of workers used to discover devices concurrently
-  discovery_interval: 3600 # interval between each autodiscovery in seconds
+  workers: 100  # number of workers used to discover devices concurrently
+  discovery_interval: 3600  # interval between each autodiscovery in seconds
+  loader: core  # use core check implementation of SNMP integration. recommended
+  use_device_id_as_hostname: true  # recommended
   configs:
-    - network: 1.2.3.4/24 # CIDR notation, we recommend no larger than /24 blocks
-      version: 2
+    - network_address: 10.10.0.0/24  # CIDR subnet
+      snmp_version: 2
       port: 161
-      community: ***
+      community_string: '***'  # enclose with single quote
       tags:
       - "key1:val1"
       - "key2:val2"
-      loader: core # use SNMP corecheck implementation
-    - network: 2.3.4.5/24
-      version: 2
+    - network_address: 10.20.0.0/24
+      snmp_version: 2
       port: 161
-      community: ***
+      community_string: '***'
       tags:
       - "key1:val1"
       - "key2:val2"
-      loader: core
 ```
 
 {{% /tab %}}
@@ -133,32 +135,31 @@ snmp_listener:
 listeners:
   - name: snmp
 snmp_listener:
-  workers: 100 # number of workers used to discover devices concurrently
-  discovery_interval: 3600 # interval between each autodiscovery in seconds
+  workers: 100  # number of workers used to discover devices concurrently
+  discovery_interval: 3600  # interval between each autodiscovery in seconds
+  loader: core  # use core check implementation of SNMP integration. recommended
+  use_device_id_as_hostname: true  # recommended
   configs:
-    - network: 1.2.3.4/24 # CIDR notation, we recommend no larger than /24 blocks
-      version: 3
-      user: "user"
-      authentication_protocol: "fakeAuth"
-      authentication_key: "fakeKey"
-      privacy_protocol: "fakeProtocol"
-      privacy_key: "fakePrivKey"
-      tags:
-        - "key1:val1"
-        - "key2:val2"
-      loader: core
-    - network: 2.3.4.5/24
-      version: 3
+    - network_address: 10.10.0.0/24  # CIDR subnet
       snmp_version: 3
-      user: "user"
-      authentication_protocol: "fakeAuth"
-      authentication_key: "fakeKey"
-      privacy_protocol: "fakeProtocol"
-      privacy_key: "fakePrivKey"
+      user: 'user'
+      authProtocol: 'SHA256'  # choices: MD5, SHA, SHA224, SHA256, SHA384, SHA512
+      authKey: 'fakeKey'  # enclose with single quote
+      privProtocol: 'AES256'  # choices: DES, AES (128 bits), AES192, AES192C, AES256, AES256C
+      privKey: 'fakePrivKey'  # enclose with single quote
       tags:
-        - "key1:val1"
-        - "key2:val2"
-      loader: core
+        - 'key1:val1'
+        - 'key2:val2'
+    - network_address: 10.20.0.0/24
+      snmp_version: 3
+      user: 'user'
+      authProtocol: 'SHA256'
+      authKey: 'fakeKey'
+      privProtocol: 'AES256'
+      privKey: 'fakePrivKey'
+      tags:
+        - 'key1:val1'
+        - 'key2:val2'
 ```
 
 {{% /tab %}}

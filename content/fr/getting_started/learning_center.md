@@ -32,8 +32,9 @@ aliases:
   - /fr/videos/unshare_screenboards/
   - /fr/videos/weekly_monitor_report/
 ---
-Datadog est une plateforme détaillée et simple d'utilisation vous permettant de comprendre votre infrastructure. [Le centre d'apprentissage Datadog][1] vous aide à tirer pleinement parti de la plateforme.
+Datadog est une plateforme exhaustive vous permettant de maîtriser votre infrastructure. [Le centre d'apprentissage Datadog][1] vous aide à tirer pleinement parti de la plateforme.
 
-Pour découvrir la liste des cours disponibles, consultez la [page Catalogue][1].
+Pour découvrir la liste des cours disponibles, consultez la section [Cours][2] (en anglais).
 
 [1]: https://learn.datadoghq.com
+[2]: https://learn.datadoghq.com/course/index.php

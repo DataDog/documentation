@@ -280,6 +280,10 @@ Définit l'URL d'endpoint où les traces sont envoyées. Utilisé à la place de
 : **Propriété TracerSettings** : `LogsInjectionEnabled` <br>
 Active ou désactive l'injection automatique d'identificateurs de corrélation dans les logs de l'application.
 
+`DD_TRACE_SAMPLE_RATE`
+: **Propriété TracerSettings** : `GlobalSamplingRate` <br>
+Active ou désactive [Tracing without limits][4].
+
 `DD_TRACE_DEBUG`
 : **Propriété TracerSettings** : `DebugEnabled` <br>
 Active ou désactive les logs de debugging. Valeurs acceptées : `true` ou `false`.<br>

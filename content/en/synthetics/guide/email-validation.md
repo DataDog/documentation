@@ -35,7 +35,7 @@ In the above example, an email variable called `EMAIL` is created. The newly cre
 
 ## Record steps
 
-In the upper left corner of the UI, hit the **Start Recording** button and record the steps leading to the email being triggered using your freshly created email variable. Use the hand icon to input variables in the text inputs of the form.
+In the upper left corner of the UI, click the **Start Recording** button and record the steps leading to the email being triggered using your freshly created email variable. Use the hand icon to input variables in the text inputs of the form.
 
 {{< img src="synthetics/guide/email-validation/record-steps.mp4" alt="Record your steps" video="true"  width="100%">}}
 
@@ -59,7 +59,7 @@ To do this, create a **Navigation** step, choose `Go to email and click link`, p
 
 {{< img src="synthetics/guide/email-validation/navigation-step.mp4" alt="Add a navigation step" video="true"  width="100%">}}
 
-In the above example, the browser test looks into the “Welcome to Shopist” email to hit a verification link in order to confirm the user registration mechanism is working as expected. The “Welcome to Shopist” email is selected and the “Verify your email by clicking here” link is chosen. As soon as the step is saved, the iframe is redirected to the associated page.
+In the above example, the browser test looks into the “Welcome to Shopist” email to click a verification link in order to confirm the user registration mechanism is working as expected. The “Welcome to Shopist” email is selected and the “Verify your email by clicking here” link is chosen. As soon as the step is saved, the iframe is redirected to the associated page.
 
 You can now go ahead and create a final assertion to test the `div` content to make sure this triggered a proper account verification (page contains `Your account is now verified.`).
 

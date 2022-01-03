@@ -43,7 +43,7 @@ logs:
   service: webapp
 ```
 
-Cet identificateur renvoie à **l'ensemble** des images de conteneur `httpd` sur votre host. Imaginons que vous avez un conteneur qui exécute `library/httpd:latest` et un autre qui exécute `<EXEMPLE>/httpd:v2`. L'Agent applique le modèle ci-dessus aux deux conteneurs, car vous devez spécifier les noms raccourcis des images de conteneur, p. ex. `httpd` et non `library/httpd:latest` :
+Cet identificateur renvoie **l'ensemble** des images de conteneur `httpd` sur votre host. Imaginons que vous avez un conteneur qui exécute `library/httpd:latest` et un autre qui exécute `<EXEMPLE>/httpd:v2`. L'Agent applique le modèle ci-dessus aux deux conteneurs, car vous devez spécifier les noms raccourcis des images de conteneur, comme `httpd`, et non `library/httpd:latest` :
 
 Lorsque vous utilisez un nom d'image raccourci comme identificateur de conteneur Autodiscovery, **l'Agent n'est pas en mesure de faire la distinction entre des images ayant le même nom mais provenant de sources différentes ou ayant des tags différents**.
 

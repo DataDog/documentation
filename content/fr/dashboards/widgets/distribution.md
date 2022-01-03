@@ -22,11 +22,11 @@ Cette visualisation affiche une seule requête. Les requêtes supplémentaires s
 
 ## Configuration
 
-{{< img src="dashboards/widgets/distribution/distribution_setup.png" alt="Vue éditeur du graphique de distribution"  style="width:100%;">}}
+{{< img src="dashboards/widgets/distribution/distribution_setup.png" alt="Vue éditeur du graphique de distribution" style="width:100%;">}}
 
 ### Configuration
 
-Configurez votre requête de métrique comme d'habitude. Les visualisations de distribution prennent en charge les métriques, les live processes, la latence des requêtes APM, les événements de log et les événements RUM. Notez que ce type de visualisation sert uniquement lorsque les données sont agrégées en fonction de clés de tag, p. ex. pour chaque `host`.
+Configurez votre requête comme d'habitude. Les visualisations de distribution prennent en charge les métriques, les live processes, la latence des requêtes APM, les événements de log et les événements RUM. **Remarque** : ce type de visualisation sert uniquement lorsque les données sont agrégées en fonction de clés de tag, par exemple pour chaque `host`.
 Utilisez les commandes `avg`/`max`/`min`/`sum by`/etc. pour visualiser vos données en fonction des tags associés.
 
 ### Options
@@ -43,17 +43,19 @@ Choisissez si votre widget doit afficher un intervalle personnalisé ou l'interv
 
 Avec les distributions de requêtes de l'APM, vous pouvez ajouter des marqueurs de centile sur l'axe des abscisses.
 
-{{< img src="dashboards/widgets/options/distribution_marker_controls.jpg" alt="Préférences des commandes des marqueurs"  style="width:80%;">}}
+{{< img src="dashboards/widgets/options/distribution_marker_controls.jpg" alt="Préférences des commandes des marqueurs" style="width:80%;">}}
 
 #### Commandes des axes des abscisses et des ordonnées
 
-Les commandes des axes sont disponibles dans l'interface ainsi que dans l'éditeur JSON. Elles vous permettent d'accomplir les actions suivantes :
+Les commandes des axes sont disponibles dans l'interface ainsi que dans l'éditeur JSON.
+
+Elles vous permettent d'accomplir les actions suivantes :
 
 * Définir l'axe des abscisses et l'axe des ordonnées sur des intervalles spécifiques
 * Modifier automatiquement les limites de l'axe des abscisses en fonction d'un seuil basé sur un pourcentage ou sur une valeur absolue ; pour supprimer les singularités, ce seuil peut être appliqué aux deux extrémités du graphique (limite inférieure et limite supérieure), ou à une seule d'entre elles
 * Passer d'une échelle linéaire à une échelle logarithmique pour l'axe des ordonnées, et inversement
 
-{{< img src="dashboards/widgets/options/distribution_axis_controls.jpg" alt="Préférences des commandes des axes de distribution"  style="width:80%;">}}
+{{< img src="dashboards/widgets/options/distribution_axis_controls.jpg" alt="Préférences des commandes des axes de distribution" style="width:80%;">}}
 
 #### Titre
 
@@ -67,7 +69,7 @@ Définissez sa taille et son alignement si vous le souhaitez.
 
 Outre les [options standard d'affichage en plein écran][2], vous pouvez utiliser les commandes de l'axe des abscisses pour zoomer sur les données d'un certain centile.
 
-{{< img src="dashboards/widgets/distribution/distribution_fullscreen.png" alt="Graphique de distribution en plein écran"  style="width:80%;">}}
+{{< img src="dashboards/widgets/distribution/distribution_fullscreen.png" alt="Graphique de distribution en plein écran" style="width:80%;">}}
 
 
 ## API

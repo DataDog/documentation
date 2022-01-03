@@ -1,6 +1,8 @@
 ---
 title: Continuous Integration Visibility
 kind: documentation
+aliases:
+  - /ci
 further_reading:
     - link: "/continuous_integration/explore_pipelines/"
       tag: "Documentation"
@@ -13,7 +15,7 @@ further_reading:
       text: "Monitor your CircleCI environment with Datadog"
 ---
 
-{{< site-region region="us5,gov" >}}
+{{< site-region region="gov" >}}
 <div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 

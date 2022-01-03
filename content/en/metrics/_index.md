@@ -25,9 +25,9 @@ Metrics are numerical values that can track anything about your environment over
 
 ### Why are metrics useful?
 
-Metrics provide an overall picture of your system. You can use them to assess the health of your environment at a glance—how quickly users are loading your website or the average memory consumption of your servers, for instance. Once you identify a problem, you can use [logs][1] and [tracing][2] to further troubleshoot.
+Metrics provide an overall picture of your system. You can use them to assess the health of your environment at a glance. Visualize how quickly users are loading your website, or the average memory consumption of your servers, for instance. Once you identify a problem, you can use [logs][1] and [tracing][2] to further troubleshoot.
 
-Metrics that track system health come automatically through Datadog's integrations with more than {{< translate key="integration_count" >}} services. However, you can also track metrics that are specific to your business—also known as custom metrics—from the number of user logins to user cart sizes to the frequency of your team’s code commits.
+Metrics that track system health come automatically through Datadog's integrations with more than {{< translate key="integration_count" >}} services. You can also track metrics that are specific to your business—also known as custom metrics. You can track things such as the number of user logins or user cart sizes to the frequency of your team’s code commits.
 
 In addition, metrics can help you adjust the scale of your environment to meet the demand from your customers. Knowing exactly how much you need to consume in resources can help you save money or improve performance.
 
@@ -55,7 +55,7 @@ Metrics can be sent to Datadog from several places.
 
 - Additionally, the [Datadog Agent][14] automatically sends several standard metrics (such as CPU and disk usage).
 
-For a summary of all metric submission sources and methods, refer to the [Metrics Types documentation][15].
+For a summary of all metric submission sources and methods, read the [Metrics Types documentation][15].
 
 ## Querying metrics
 
@@ -65,7 +65,7 @@ The graphing experience is consistent whether you are using dashboards, notebook
 
 A metric query in Datadog looks like this:
 
-{{< img src="metrics/introduction/newanatomy.jpg" alt="Example query with color-coded sections"  style="width:70%;">}}
+{{< img src="metrics/introduction/newanatomy.jpg" alt="Example query with color-coded sections" style="width:70%;">}}
 
 You can break this query into a few steps:
 
@@ -75,11 +75,11 @@ First, choose the specific metric that you’d like to graph by searching or sel
 
 #### Filter your metric
 
-After selecting a metric, you can filter your query based on tag(s). For instance, you can use `account:prod` to _scope_ your query to include only the metrics from your production hosts. For more information, refer to the [tagging documentation][16].
+After selecting a metric, you can filter your query based on tag(s). For instance, you can use `account:prod` to _scope_ your query to include only the metrics from your production hosts. For more information, read the [tagging documentation][16].
 
 #### Configure time aggregation
 
-Next, choose the granularity of your data using time rollup. In this example, you've defined that there will be one data point for every six minutes (360 seconds). You can also choose how you want to aggregate the data in each time bucket. By default, _avg_ is applied, but other available options are _sum_, _min_, _max_, and _count_. If you wanted to apply max, you would use `.rollup(max, 60)`.
+Next, choose the granularity of your data using time rollup. In this example, you've defined that there is one data point for every six minutes (360 seconds). You can also choose how you want to aggregate the data in each time bucket. By default, _avg_ is applied, but other available options are _sum_, _min_, _max_, and _count_. If you wanted to apply max, you would use `.rollup(max, 60)`.
 
 #### Configure space aggregation
 
@@ -87,11 +87,11 @@ In Datadog, “space” refers to the way metrics are distributed over different
 
 _Aggregator_ defines how the metrics in each group are combined. There are four aggregations available: sum, min, max, and avg.
 
-_Grouping_ defines what constitutes a line on the graph. For example, if you have hundreds of hosts spread across four regions, grouping by region allows you to graph one line for every region, reducing the number of timeseries to four.
+_Grouping_ defines what constitutes a line on the graph. For example, if you have hundreds of hosts spread across four regions, grouping by region allows you to graph one line for every region. This would reduce the number of timeseries to four.
 
 #### Apply functions (optional)
 
-You can modify your graph values with mathematical [functions][17]. This can mean performing arithmetic between an integer and a metric (for example, multiplying a metric by 2), or between two metrics (for example, creating a new timeseries for the memory utilization rate like this: `jvm.heap_memory / jvm.heap_memory_max`).
+You can modify your graph values with mathematical [functions][17]. This can mean performing arithmetic between an integer and a metric (for example, multiplying a metric by 2). Or performing arithemetic between two metrics (for example, creating a new timeseries for the memory utilization rate like this: `jvm.heap_memory / jvm.heap_memory_max`).
 
 ### Time and space aggregation
 
@@ -99,7 +99,7 @@ _Time aggregation_ and _space aggregation_ are two important components of any q
 
 #### Time aggregation
 
-Datadog stores a large volume of points, and in most cases it’s not possible to display them all on a graph—there would be more datapoints than pixels. Datadog uses time aggregation to solve this problem by combining data points into time buckets. This is called a _rollup_. As the time interval you’ve defined for your query increases, the granularity of your data becomes coarser.
+Datadog stores a large volume of points, and in most cases it’s not possible to display all of them on a graph. There would be more datapoints than pixels. Datadog uses time aggregation to solve this problem by combining data points into time buckets. This is called a _rollup_. As the time interval you’ve defined for your query increases, the granularity of your data becomes coarser.
 
 There are five aggregations you can apply to combine your data in each time bucket: sum, min, max, avg, and count.
 
@@ -107,7 +107,7 @@ It’s important to remember that time aggregation is _always_ applied in every 
 
 #### Space aggregation
 
-Space aggregation splits a single metric into multiple time series by tags such as host, container, and region. For instance, if you were interested in viewing the latency of your EC2 instances by region, you would need to use space aggregation's grouping by functionality to combine each region’s hosts.
+Space aggregation splits a single metric into multiple timeseries by tags such as host, container, and region. For instance, if you wanted to view the latency of your EC2 instances by region, you would need to use space aggregation's grouping by functionality to combine each region’s hosts.
 
 There are four aggregators that can be applied when using space aggregation: _sum_, _min_, _max_, and _avg_. Using the above example, say that your hosts are spread across four regions: us-east-1, us-east-2, us-west-1, and us-west-2. The hosts in each region need to be combined using an aggregator function. Using the _max_ aggregator would result in the maximum latency experienced across hosts in each region, while the _avg_ aggregator would yield the average latency per region.
 
@@ -119,11 +119,11 @@ Datadog supports several different metric types that serve distinct use cases: c
 
 The Datadog Agent doesn’t make a separate request to Datadog's servers for every single data point you send. Instead, it reports values collected over a _flush time interval_. The metric’s type determines how the values collected from your host over this interval are aggregated for submission.
 
-A **_count_** type adds up all the submitted values in a time interval; this would be suitable for a metric tracking the number of website hits, for instance.
+A **_count_** type adds up all the submitted values in a time interval. This would be suitable for a metric tracking the number of website hits, for instance.
 
-If you’re more interested in the number of hits per second, the **_rate_** type takes the count and divides it by the length of the time interval.
+The **_rate_** type takes the count and divides it by the length of the time interval. This is useful if you're interested in the number of hits per second.
 
-A **_gauge_** type takes the last value reported during the interval. This type would make sense for tracking RAM or CPU usage, where taking the last value provides a representative picture of the host’s behavior during the time interval. In this case, using a different type such as _count_ would probably lead to inaccurate and extreme values, which highlights the importance of choosing the correct metric type.
+A **_gauge_** type takes the last value reported during the interval. This type would make sense for tracking RAM or CPU usage, where taking the last value provides a representative picture of the host’s behavior during the time interval. In this case, using a different type such as _count_ would probably lead to inaccurate and extreme values. Choosing the correct metric type ensures accurate data.
 
 A **_histogram_** reports five different values summarizing the submitted values: the average, count, median, 95th percentile, and max. This produces five different timeseries. This metric type is suitable for things like latency, for which it’s not enough to know the average value. Histograms allow you to understand how your data was spread out without recording every single data point.
 

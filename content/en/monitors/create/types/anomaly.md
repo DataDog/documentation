@@ -92,13 +92,13 @@ Weekly
 ##### Anomaly detection algorithms
 
 Basic
-: Use when metrics have no repeating seasonal pattern.  Basic uses a simple lagging rolling quantile computation to determine the range of expected values. It uses very little data and adjusts quickly to changing conditions but has no knowledge of seasonal behavior or longer trends.
+: Use when metrics have no repeating seasonal pattern. Basic uses a simple lagging rolling quantile computation to determine the range of expected values. It uses little data and adjusts quickly to changing conditions but has no knowledge of seasonal behavior or longer trends.
 
 Agile
 : Use when metrics are seasonal and expected to shift. The algorithm quickly adjusts to metric level shifts. A robust version of the [SARIMA][6] algorithm, it incorporates the immediate past into its predictions, allowing quick updates for level shifts at the expense of being less robust to recent, long-lasting anomalies.
 
 Robust
-: Use when seasonal metrics expected to be stable, and slow, level shifts are considered anomalies. A [seasonal-trend decomposition][7] algorithm, it is very stable and predictions remain constant even through long-lasting anomalies at the expense of taking longer to respond to intended level shifts (e.g. if the level of a metric shifts due to a code change.)
+: Use when seasonal metrics expected to be stable, and slow, level shifts are considered anomalies. A [seasonal-trend decomposition][7] algorithm, it is stable and predictions remain constant even through long-lasting anomalies at the expense of taking longer to respond to intended level shifts (for example, if the level of a metric shifts due to a code change.)
 
 All of the seasonal algorithms may use up to a couple of months of historical data when calculating a metric's expected normal range of behavior. By using a significant amount of past data, the algorithms can avoid giving too much weight to abnormal behavior that might have occurred in the recent past.
 
@@ -117,7 +117,7 @@ This example shows how the algorithms react to an hour-long anomaly. `Robust` do
 
 {{< img src="monitors/monitor_types/anomaly/alg_comparison_3.png" alt="algorithm comparison 3"  style="width:90%;">}}
 
-The algorithms deal with scale differently. `Basic` and `robust` are scale-insensitive, while `agile` is not. The graphs on the left below show `agile` and `robust` mark the level-shift as being anomalous. On the right, we add 1000 to the same metric, and `agile` no longer calls out the level-shift as being anomalous whereas `robust` continues do so.
+The algorithms deal with scale differently. `Basic` and `robust` are scale-insensitive, while `agile` is not. The graphs on the left below show `agile` and `robust` mark the level-shift as being anomalous. On the right, 1000 is added to the same metric, and `agile` no longer calls out the level-shift as being anomalous whereas `robust` continues do so.
 
 {{< img src="monitors/monitor_types/anomaly/alg_comparison_scale.png" alt="algorithm comparison scale"  style="width:90%;">}}
 
@@ -153,7 +153,7 @@ avg(<query_window>):anomalies(<metric_query>, '<algorithm>', <deviations>, direc
 : A timeframe like `last_4h` or `last_7d`. The time window displayed in graphs in notifications. Must be at least as large as the `alert_window` and is recommended to be around 5 times the `alert_window`.
 
 `metric_query`
-: A standard Datadog metric query (e.g., `sum:trace.flask.request.hits{service:web-app}.as_count()`).
+: A standard Datadog metric query (for example, `sum:trace.flask.request.hits{service:web-app}.as_count()`).
 
 `algorithm`
 : `basic`, `agile`, or `robust`.
@@ -165,10 +165,10 @@ avg(<query_window>):anomalies(<metric_query>, '<algorithm>', <deviations>, direc
 : The directionality of anomalies that should trigger an alert: `above`, `below`, or `both`.
 
 `alert_window`
-: The timeframe which will be checked for anomalies (e.g., `last_5m`, `last_1h`).
+: The timeframe to be checked for anomalies (for example, `last_5m`, `last_1h`).
 
 `interval`
-: A positive integer representing the number of seconds in the rollup interval. We recommend that the `interval` be at least a fifth of the `alert_window` duration.
+: A positive integer representing the number of seconds in the rollup interval. The `interval` should be at least a fifth of the `alert_window` duration.
 
 `count_default_zero`
 : Use `true` for most monitors. Set to `false` only if submitting a count metric in which the lack of a value should _not_ be interpreted as a zero.

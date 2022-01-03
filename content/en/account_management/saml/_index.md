@@ -40,23 +40,23 @@ Here's a two-minute video walkthrough:
     * [Okta][15]
     * [SafeNet][16]
 
-2. If you're a [Datadog Administrator][9], you can access the **Login Methods** page and the **SAML Configuration** page. Hover over your username at the bottom of the left-side navigation menu and click **Organization Settings**.
+2. In the Datadog app, hover over your username in the bottom left corner and select Organization Settings. Select [Login Methods][17] and click on **Configure** under SAML.
 
 3. Upload the IdP Metadata from your SAML Identity provider by clicking the **Choose File** button. After choosing the file, click **Upload File**.
 
-4. Download Datadog's [Service Provider metadata][17] to configure your IdP to recognize Datadog as a Service Provider.
+4. Download Datadog's [Service Provider metadata][18] to configure your IdP to recognize Datadog as a Service Provider.
 
 5. After you upload the IdP Meta-data and configure your IdP, enable SAML in Datadog by clicking the **Enable** button.
     {{< img src="account_management/saml/saml_enable.png" alt="saml enable"  >}}
 
 6. Once SAML is configured in Datadog and your IdP is set up to accept requests from Datadog, users can log in:
 
-   - **If using SP-initiated login** (Service Provider, or login initiated from Datadog): By using the **Single Sign-on URL** shown in the Status box at the top of the [SAML Configuration page][18]. The **Single Sign-on URL** is also displayed on the [Team page][19]. Loading this URL initiates a SAML authentication against your IdP. **Note**: This URL isn't displayed unless SAML is enabled for your account and you are using SP-initiated login.
+   - **If using SP-initiated login** (Service Provider, or login initiated from Datadog): By using the **Single Sign-on URL** shown in the Status box at the top of the [SAML Configuration page][19]. The **Single Sign-on URL** is also displayed on the [Team page][20]. Loading this URL initiates a SAML authentication against your IdP. **Note**: This URL isn't displayed unless SAML is enabled for your account and you are using SP-initiated login.
     {{< img src="account_management/saml/saml_enabled.png" alt="Saml Enabled"  >}}
 
    - **If using IdP-initiated login** (Identity Provider, or login initiated from your app portal): By clicking on the app icon in your app portal, for example in the Google App drawer or the Okta App Portal. In some scenarios users logging in with the SP-initiated login URL will also work with the IdP-initiated login experiences, but this depends on your Identity Provider's configuration and support.
 
-**Note**: If you want to configure SAML for a multi-org, see [Managing Multiple-Organization Accounts][20].
+**Note**: If you want to configure SAML for a multi-org, see [Managing Multiple-Organization Accounts][21].
 
 ## Assertions and attributes
 
@@ -69,7 +69,7 @@ Some important notes on assertions:
 * Datadog specifies `urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress` for the format of the **NameIDPolicy** in assertion requests.
 * Assertions must be signed.
 * Assertions can be encrypted, but unencrypted assertions are accepted.
-* Reference [Datadog's SP Metadata][17] for more information.
+* Reference [Datadog's SP Metadata][18] for more information.
 
 Attributes may be included in a SAML Assertion. Datadog looks for three attributes in an `AttributeStatement`:
 
@@ -99,9 +99,9 @@ If **sn** and **givenName** are provided, they are used to update the user's nam
 
 With Datadog, you can map attributes in your IdP's response to Datadog roles. Users with the Access Management permission can assign or remove Datadog roles based on a user's SAML-assigned attributes.
 
-It’s important to understand what is sent in an assertion before turning on mappings as mappings require correct attributes. Every IdP has specific mappings. For example, Azure works with object IDs, and Okta requires you to set attributes in [Okta settings][21]. Datadog recommends cross-referencing with [built-in browser tooling][22] such as Chrome Dev Tools or browser extensions and [validating your SAML assertions][23] **before** creating mappings.
+It’s important to understand what is sent in an assertion before turning on mappings as mappings require correct attributes. Every IdP has specific mappings. For example, Azure works with object IDs, and Okta requires you to set attributes in [Okta settings][22]. Datadog recommends cross-referencing with [built-in browser tooling][23] such as Chrome Dev Tools or browser extensions and [validating your SAML assertions][24] **before** creating mappings.
 
-1. [Cross-reference][22] and [validate][23] your SAML assertion to understand your IdP's attributes.
+1. [Cross-reference][23] and [validate][24] your SAML assertion to understand your IdP's attributes.
 
 2. Go to Teams and click the **Mappings** tab.
 
@@ -125,11 +125,11 @@ When a user logs in who has the specified identity provider attribute, they are 
 
 You can make changes to a mapping by clicking the **pencil** icon or removing it by clicking the **garbage** icon. These actions affect only the mapping, not the identity provider attributes or the Datadog roles.
 
-Alternatively, you can create and change mappings of SAML attributes to Datadog roles with the `authn_mappings` endpoint. For more information, see [Federated Authentication to Role Mapping API][24].
+Alternatively, you can create and change mappings of SAML attributes to Datadog roles with the `authn_mappings` endpoint. For more information, see [Federated Authentication to Role Mapping API][25].
 
 ## Additional features
 
-The following features can be enabled through the [SAML Configuration dialog][18]:
+The following features can be enabled through the [SAML Configuration dialog][19]:
 
 **Note:** You must have Admin permissions to see the SAML Configuration dialog.
 
@@ -157,7 +157,7 @@ You can make your organization SAML Strict by disabling other login method types
 
 ### Self-updating Datadog SP Metadata
 
-Certain Identity Providers (such as Microsoft's ADFS) can be configured to pull the latest SAML service provider metadata from Datadog. After you configure SAML in Datadog, you can get the metadata URL for your organization from the SAML Configuration page and use that with your Identity Provider to get the latest service provider metadata whenever we publish changes.
+Certain Identity Providers (such as Microsoft's ADFS) can be configured to pull the latest SAML service provider metadata from Datadog. After you configure SAML in Datadog, you can get the metadata URL for your organization from the SAML Configuration page and use that with your Identity Provider to get the latest service provider metadata whenever changes are published.
 
 {{< img src="account_management/saml/saml_metadata_url.png" alt="SAML Metadata URL" style="width:50%;" >}}
 
@@ -181,11 +181,12 @@ Certain Identity Providers (such as Microsoft's ADFS) can be configured to pull 
 [14]: /account_management/saml/nopassword/
 [15]: /account_management/saml/okta/
 [16]: /account_management/saml/safenet/
-[17]: https://app.datadoghq.com/account/saml/metadata.xml
-[18]: https://app.datadoghq.com/saml/saml_setup
-[19]: https://app.datadoghq.com/account/team
-[20]: /account_management/multi_organization/#setting-up-saml
-[21]: https://help.okta.com/en/prod/Content/Topics/users-groups-profiles/usgp-add-custom-user-attributes.htm
-[22]: https://support.okta.com/help/s/article/How-to-View-a-SAML-Response-in-Your-Browser-for-Troubleshooting?language=en_US
-[23]: https://www.samltool.com/validate_response.php
-[24]: /account_management/authn_mapping/
+[17]: https://app.datadoghq.com/organization-settings/login-methods
+[18]: https://app.datadoghq.com/account/saml/metadata.xml
+[19]: https://app.datadoghq.com/saml/saml_setup
+[20]: https://app.datadoghq.com/account/team
+[21]: /account_management/multi_organization/#setting-up-saml
+[22]: https://help.okta.com/en/prod/Content/Topics/users-groups-profiles/usgp-add-custom-user-attributes.htm
+[23]: https://support.okta.com/help/s/article/How-to-View-a-SAML-Response-in-Your-Browser-for-Troubleshooting?language=en_US
+[24]: https://www.samltool.com/validate_response.php
+[25]: /account_management/authn_mapping/

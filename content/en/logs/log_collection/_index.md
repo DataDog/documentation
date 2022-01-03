@@ -24,6 +24,14 @@ further_reading:
   text: "Logging Without Limits*"
 ---
 
+{{< site-region region="us3" >}}
+
+<div class="alert alert-warning">
+Log collection is not supported for the Datadog US3 site. For more information, contact <a href="https://help.datadoghq.com/hc/en-us">Support</a>.
+</div>
+
+{{< /site-region >}}
+
 ## Overview
 
 Choose a configuration option below to begin ingesting your logs. If you are already using a log-shipper daemon, refer to the dedicated documentation for [Rsyslog][1], [Syslog-ng][2], [NXlog][3], [FluentD][4], or [Logstash][5].
@@ -201,7 +209,7 @@ telnet intake.logs.datadoghq.com 10514
 
 The secure TCP endpoint is `tcp-intake.logs.datadoghq.eu 443` (or port `1883` for insecure connections).
 
-You must prefix the log entry with your [Datadog API Key][1], e.g.:
+You must prefix the log entry with your [Datadog API Key][1], for example:
 
 ```text
 <DATADOG_API_KEY> <PAYLOAD>
@@ -228,6 +236,9 @@ telnet tcp-intake.logs.datadoghq.eu 1883
 ```
 
 {{< img src="logs/custom_log_telnet_json_.png" alt="Custom telnet"  style="width:100%;">}}
+
+[1]: /account_management/api-app-keys/
+[2]: /logs/explorer/live_tail/
 
 {{< /site-region >}}
 
@@ -268,7 +279,7 @@ To enable these functionalities use the following attribute names:
 | `logger.thread_name` | Name of the current thread                                       |
 | `error.stack`        | Actual stack trace                                               |
 | `error.message`      | Error message contained in the stack trace                       |
-| `error.kind`         | The type or "kind" of an error (i.e "Exception", "OSError", ...) |
+| `error.kind`         | The type or "kind" of an error (for example, "Exception", or "OSError") |
 
 **Note**: By default, integration Pipelines attempt to remap default logging library parameters to those specific attributes and parse stack traces or traceback to automatically extract the `error.message` and `error.kind`.
 

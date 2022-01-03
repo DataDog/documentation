@@ -75,7 +75,7 @@ Joining together logs that span a timeframe can increase the confidence or sever
 
 {{< img src="security_platform/security_monitoring/detection_rules/joining_queries_define.png" alt="Define search queries"  >}}
 
-The Detection Rules join the logs together using a group by value. The group by values are typically entities (e.g. IP address, user, etc), but can be any attribute.
+The Detection Rules join the logs together using a group by value. The group by values are typically entities (for example, IP address or user), but can be any attribute.
 
 {{< img src="security_platform/security_monitoring/detection_rules/group_by.png" alt="Group by"  >}}
 

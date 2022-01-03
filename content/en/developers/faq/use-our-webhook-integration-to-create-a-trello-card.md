@@ -3,7 +3,7 @@ title: Use the webhooks integration to create a Trello card
 kind: faq
 ---
 
-You can easily use the [webhooks integration][1] to instantly create a Trello card using the [@-notification feature][2].
+You can use the [webhooks integration][1] to instantly create a Trello card using the [@-notification feature][2].
 
 This flow uses the Trello REST POST card API endpoint to post an @notification to a relevant Trello list.
 

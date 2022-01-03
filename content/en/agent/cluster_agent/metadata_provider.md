@@ -26,7 +26,7 @@ To enable the cluster metadata provider feature:
 3. [Ensure an auth_token is properly shared between the Agents][1].
 4. [Confirm the RBAC rules are properly set][1].
 5. In the Node Agent, set the environment variable `DD_CLUSTER_AGENT_ENABLED` to `true`.
-6. *Optional* - The environment variable `DD_KUBERNETES_METADATA_TAG_UPDATE_FREQ` can be set to specify how often the Node Agents hit the Datadog Cluster Agent.
+6. *Optional* - The environment variable `DD_KUBERNETES_METADATA_TAG_UPDATE_FREQ` can be set to specify how often the Node Agents ping the Datadog Cluster Agent.
 7. *Optional* - Disable the Kubernetes metadata tag collection with `DD_KUBERNETES_COLLECT_METADATA_TAGS=false`.
 
 ## Further Reading

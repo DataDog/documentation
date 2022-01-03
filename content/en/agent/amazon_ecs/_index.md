@@ -20,7 +20,7 @@ further_reading:
 
 ## Overview
 
-Amazon ECS is a highly scalable, high-performance container orchestration service that supports Docker containers. With the Datadog Agent, you can monitor ECS containers and tasks on every EC2 instance in your cluster.
+Amazon ECS is a scalable, high-performance container orchestration service that supports Docker containers. With the Datadog Agent, you can monitor ECS containers and tasks on every EC2 instance in your cluster.
 
 This page covers Amazon ECS setup with the [Datadog Container Agent v6][1]. For other setups, see:
 
@@ -275,7 +275,11 @@ To collect processes information for all your containers and send it to Datadog:
             "SYS_ADMIN",
             "SYS_RESOURCE",
             "SYS_PTRACE",
-            "NET_ADMIN"
+            "NET_ADMIN",
+            "NET_BROADCAST",
+            "NET_RAW",
+            "IPC_LOCK",
+            "CHOWN"
           ]
         }
       },
@@ -313,7 +317,7 @@ Need help? Contact [Datadog support][20].
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles/agent
+[1]: https://github.com/DataDog/datadog-agent/tree/main/Dockerfiles/agent
 [2]: https://docs.datadoghq.com/integrations/faq/agent-5-amazon-ecs/
 [3]: https://docs.datadoghq.com/agent/docker/integrations/?tab=docker
 [4]: https://docs.datadoghq.com/integrations/ecs_fargate/

@@ -61,17 +61,17 @@ Pour Log4j, générez les logs au format JSON en utilisant le module SLF4J [log4
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>log4j-over-slf4j</artifactId>
-      <version>1.7.13</version>
+      <version>1.7.32</version>
     </dependency>
     <dependency>
       <groupId>ch.qos.logback</groupId>
       <artifactId>logback-classic</artifactId>
-      <version>1.1.3</version>
+      <version>1.2.9</version>
     </dependency>
     <dependency>
       <groupId>net.logstash.logback</groupId>
       <artifactId>logstash-logback-encoder</artifactId>
-      <version>4.5.1</version>
+      <version>6.6</version>
     </dependency>
     ```
 2. Configurez un file appender en utilisant la structure JSON dans `logback.xml` :
@@ -117,22 +117,22 @@ Log4j 2 intègre une structure JSON.
     <dependency>
         <groupId>org.apache.logging.log4j</groupId>
         <artifactId>log4j-core</artifactId>
-        <version>2.7</version>
+        <version>2.17.0</version>
     </dependency>
     <dependency>
         <groupId>com.fasterxml.jackson.core</groupId>
         <artifactId>jackson-core</artifactId>
-        <version>2.8.3</version>
+        <version>2.13.0</version>
     </dependency>
     <dependency>
         <groupId>com.fasterxml.jackson.core</groupId>
         <artifactId>jackson-databind</artifactId>
-        <version>2.8.3</version>
+        <version>2.13.0</version>
     </dependency>
     <dependency>
         <groupId>com.fasterxml.jackson.core</groupId>
         <artifactId>jackson-annotations</artifactId>
-        <version>2.8.3</version>
+        <version>2.13.0</version>
     </dependency>
     ```
 
@@ -162,12 +162,12 @@ Utilisez la bibliothèque [logstash-logback-encoder][1] pour les logs au format 
     <dependency>
       <groupId>ch.qos.logback</groupId>
       <artifactId>logback-classic</artifactId>
-      <version>1.1.3</version>
+      <version>1.2.9</version>
     </dependency>
     <dependency>
       <groupId>net.logstash.logback</groupId>
       <artifactId>logstash-logback-encoder</artifactId>
-      <version>4.5.1</version>
+      <version>6.6</version>
     </dependency>
     ```
 
@@ -306,17 +306,17 @@ Utilisez le module SLF4J [log4j-over-slf4j][1] avec Logback pour envoyer les log
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>log4j-over-slf4j</artifactId>
-      <version>1.7.13</version>
+      <version>1.7.32</version>
     </dependency>
     <dependency>
       <groupId>ch.qos.logback</groupId>
       <artifactId>logback-classic</artifactId>
-      <version>1.1.3</version>
+      <version>1.2.9</version>
     </dependency>
     <dependency>
       <groupId>net.logstash.logback</groupId>
       <artifactId>logstash-logback-encoder</artifactId>
-      <version>4.5.1</version>
+      <version>6.6</version>
     </dependency>
     ```
 2. Configurez Logback.
@@ -337,17 +337,17 @@ Log4j 2 permet la journalisation sur un host à distance, mais n'offre pas la p
     <dependency>
         <groupId>org.apache.logging.log4j</groupId>
         <artifactId>log4j-to-slf4j</artifactId>
-        <version>2.11.0</version>
+        <version>2.17.0</version>
     </dependency>
     <dependency>
         <groupId>net.logstash.logback</groupId>
         <artifactId>logstash-logback-encoder</artifactId>
-        <version>4.5.1</version>
+        <version>6.6</version>
     </dependency>
     <dependency>
         <groupId>ch.qos.logback</groupId>
         <artifactId>logback-classic</artifactId>
-        <version>1.1.3</version>
+        <version>1.2.9</version>
     </dependency>
     ```
 2. Configurez Logback.
@@ -444,12 +444,12 @@ Utilisez la bibliothèque de journalisation [logstash-logback-encoder][4] avec L
     <dependency>
       <groupId>ch.qos.logback</groupId>
       <artifactId>logback-classic</artifactId>
-      <version>1.1.3</version>
+      <version>1.2.9</version>
     </dependency>
     <dependency>
       <groupId>net.logstash.logback</groupId>
       <artifactId>logstash-logback-encoder</artifactId>
-      <version>4.5.1</version>
+      <version>6.6</version>
     </dependency>
     ```
 

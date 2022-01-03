@@ -66,7 +66,7 @@ A _processor_ runs data-structuring actions on events attributes when they are i
 - Normalize disparate sources of events by remapping attributes. For example, use the same reserved [service tags][19] everywhere.
 - Enrich events with external data saved in an [enrichment table][20] (beta). For example, map a service name with your service directory to enrich events with team ownership information, links to dashboards, or links to documentation.
 
-We are working to support more processors types. For more details, [contact Support][21].
+Support for more processors types is under development. For more details, [contact Support][21].
 
 [Learn more about processing pipelines][22].
 

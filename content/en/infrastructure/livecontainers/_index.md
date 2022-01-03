@@ -122,7 +122,7 @@ The query at the top of the scatter plot analytic allows you to control your sca
 
 #### Real-time monitoring
 
-While actively working with the containers page, metrics are collected at a 2-second resolution. This is important for highly volatile metrics such as CPU. In the background, for historical context, metrics are collected at 10s resolution.
+While actively working with the containers page, metrics are collected at a 2-second resolution. This is important for volatile metrics such as CPU. In the background, for historical context, metrics are collected at 10s resolution.
 
 ### Kubernetes resources view
 
@@ -146,7 +146,7 @@ You can also leverage facets on the left hand side of the page to quickly group 
 
 A Kubernetes Cluster Map gives you a bigger picture of your pods and Kubernetes clusters. You can see all of your resources together on one screen with customized groups and filters, and choose which metrics to fill the color of the pods by.
 
-Drill down into resources from Cluster Maps by click on any circle or group to populate a detailed panel.
+Examine resources from Cluster Maps by clicking on any circle or group to populate a detailed panel.
 
 You can see all of your resources together on one screen with customized groups and filters, and choose which metrics to fill the color of the pods by.
 
@@ -197,7 +197,7 @@ View streaming logs for any container like `docker logs -f` or `kubectl logs -f`
 
 #### Live tail
 
-With live tail, all container logs are streamed. Pausing the stream allows you to easily read logs that are quickly being written; unpause to continue streaming.
+With live tail, all container logs are streamed. Pausing the stream helps you read logs that are quickly being written; unpause to continue streaming.
 
 Streaming logs can be searched with simple string matching. See [Live Tail][13] for more details.
 

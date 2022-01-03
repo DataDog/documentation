@@ -113,7 +113,7 @@ main_left:
     parent: product
   - identifier: database
     name: Database Monitoring
-    pre: <i class="icon-dbm align-middle"></i>
+    pre: <i class="icon-database-2 align-middle"></i>
     url: 'https://www.datadoghq.com/product/database-monitoring'
     weight: 19
     parent: product
@@ -736,101 +736,106 @@ main:
     parent: agent_amazon_ecs
     identifier: agent_amazon_ecs_data_collected
     weight: 504
+  - name: AWS Fargate
+    url: integrations/ecs_fargate/
+    parent: agent
+    identifier: ecs_fargate
+    weight: 6
   - name: IoT
     url: agent/iot/
     parent: agent
     identifier: agent_iot
-    weight: 6
+    weight: 7
   - name: Log Collection
     url: agent/logs/
     identifier: agent_logs
     parent: agent
-    weight: 7
+    weight: 8
   - name: Advanced Log Collection
     url: agent/logs/advanced_log_collection
     parent: agent_logs
-    weight: 701
+    weight: 801
   - name: Proxy
     url: agent/logs/proxy
     parent: agent_logs
-    weight: 702
+    weight: 802
   - name: Transport
     url: agent/logs/log_transport
     parent: agent_logs
-    weight: 703
+    weight: 803
   - name: Proxy
     url: agent/proxy/
     parent: agent
     identifier: agent_proxy
-    weight: 8
+    weight: 9
   - name: Versions
     url: agent/versions
     parent: agent
     identifier: agent_versions
-    weight: 9
+    weight: 10
   - name: Upgrade to Agent v7
     url: agent/versions/upgrade_to_agent_v7/
     parent: agent_versions
-    weight: 901
+    weight: 1001
   - name: Upgrade to Agent v6
     url: agent/versions/upgrade_to_agent_v6/
     parent: agent_versions
-    weight: 902
+    weight: 1002
   - name: Troubleshooting
     url: agent/troubleshooting/
     parent: agent
-    weight: 10
+    weight: 11
     identifier: agent_troubleshooting
   - name: Debug Mode
     url: agent/troubleshooting/debug_mode/
     parent: agent_troubleshooting
-    weight: 1001
+    weight: 1101
   - name: Agent Flare
     url: agent/troubleshooting/send_a_flare/
     parent: agent_troubleshooting
-    weight: 1002
+    weight: 1102
   - name: Agent Check Status
     url: agent/troubleshooting/agent_check_status/
     parent: agent_troubleshooting
-    weight: 1003
+    weight: 1103
   - name: NTP Issues
     url: agent/troubleshooting/ntp/
     parent: agent_troubleshooting
-    weight: 1004
+    weight: 1104
   - name: Permission Issues
     url: agent/troubleshooting/permissions/
     parent: agent_troubleshooting
-    weight: 1005
+    weight: 1105
   - name: Integrations Issues
     url: agent/troubleshooting/integrations/
     parent: agent_troubleshooting
-    weight: 1006
+    weight: 1106
   - name: Site Issues
     url: agent/troubleshooting/site/
     parent: agent_troubleshooting
-    weight: 1007
+    weight: 1107
   - name: Autodiscovery Issues
     url: agent/troubleshooting/autodiscovery/
     parent: agent_troubleshooting
-    weight: 1008
+    weight: 1108
   - name: Windows Container Issues
     url: agent/troubleshooting/windows_containers
-    weight: 1009
+    weight: 1109
     parent: agent_troubleshooting
   - name: Agent Runtime Configuration
     url: agent/troubleshooting/config
-    weight: 1010
+    weight: 1110
     parent: agent_troubleshooting
   - name: Guides
     url: agent/guide/
     identifier: agent_guides
     parent: agent
-    weight: 11
+    weight: 12
   - name: Security
     identifier: agent_security
     url: security/agent/
     parent: agent
-    weight: 12
+    weight: 13
   - name: Integrations
     url: integrations/
     identifier: integrations_top_level
@@ -2121,7 +2126,7 @@ main:
     weight: 6
   - name: Database Monitoring
     url: database_monitoring/
-    pre: dbm
+    pre: database-2
     identifier: dbm
     weight: 160000
   - name: Setting Up Postgres
@@ -2508,20 +2513,20 @@ main:
     url: synthetics/api_tests/dns_tests
     parent: api_tests
     weight: 103
+  - name: WebSocket
+    url: synthetics/api_tests/websocket_tests
+    parent: api_tests
+    weight: 104
   - name: TCP
     url: synthetics/api_tests/tcp_tests
     parent: api_tests
-    weight: 104
+    weight: 105
   - name: UDP
     url: synthetics/api_tests/udp_tests
     parent: api_tests
-    weight: 105
+    weight: 106
   - name: ICMP
     url: synthetics/api_tests/icmp_tests
-    parent: api_tests
-    weight: 106
-  - name: WebSocket
-    url: synthetics/api_tests/websocket_tests
     parent: api_tests
     weight: 107
   - name: Multistep API Tests
@@ -2979,7 +2984,7 @@ main:
     weight: 220000
   - name: Account Management
     url: account_management/
-    pre: cog
+    pre: cog-2
     identifier: account_management
     weight: 230000
   - name: Switching Between Orgs
@@ -3171,6 +3176,9 @@ footer_product_three:
   - name: Support
     url: 'https://www.datadoghq.com/support/'
     weight: 110
+  - name: Learning Center
+    url: 'https://learn.datadoghq.com/'
+    weight: 115
   - name: Resources
     url: 'https://www.datadoghq.com/resources/'
     weight: 150
@@ -5931,7 +5939,7 @@ api:
       operationids:
         - GetUsageSDS
       unstable: []
-      order: 34
+      order: 35
   - name: Get hourly usage for RUM Sessions
     url: '#get-hourly-usage-for-rum-sessions'
     identifier: get-hourly-usage-for-rum-sessions
@@ -5955,7 +5963,7 @@ api:
       operationids:
         - GetUsageRumUnits
       unstable: []
-      order: 35
+      order: 36
   - name: Get hourly usage for profiled hosts
     url: '#get-hourly-usage-for-profiled-hosts'
     identifier: get-hourly-usage-for-profiled-hosts
@@ -6076,6 +6084,19 @@ api:
         - GetIncidentManagement
       unstable: []
       order: 27
+  - name: Get Hourly Usage Attribution
+    url: '#get-hourly-usage-attribution'
+    identifier: get-hourly-usage-attribution
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetHourlyUsageAttribution
+      unstable:
+        - v1
+      order: 30
   - name: Get hourly usage for hosts and containers
     url: '#get-hourly-usage-for-hosts-and-containers'
     identifier: get-hourly-usage-for-hosts-and-containers
@@ -6111,7 +6132,7 @@ api:
       operationids:
         - GetUsageDBM
       unstable: []
-      order: 33
+      order: 34
   - name: Get hourly usage for Cloud Workload Security
     url: '#get-hourly-usage-for-cloud-workload-security'
     identifier: get-hourly-usage-for-cloud-workload-security
@@ -6123,7 +6144,7 @@ api:
       operationids:
         - GetUsageCWS
       unstable: []
-      order: 32
+      order: 33
   - name: Get hourly usage for CSPM
     url: '#get-hourly-usage-for-cspm'
     identifier: get-hourly-usage-for-cspm
@@ -6135,7 +6156,7 @@ api:
       operationids:
         - GetUsageCloudSecurityPostureManagement
       unstable: []
-      order: 30
+      order: 31
   - name: Get billable usage across your account
     url: '#get-billable-usage-across-your-account'
     identifier: get-billable-usage-across-your-account
@@ -6171,7 +6192,7 @@ api:
       operationids:
         - GetUsageAuditLogs
       unstable: []
-      order: 31
+      order: 32
   - name: Get Usage Attribution
     url: '#get-usage-attribution'
     identifier: get-usage-attribution
@@ -7116,6 +7137,18 @@ api:
         - RemovePermissionFromRole
       unstable: []
       order: 8
+  - name: Create a new role by cloning an existing role
+    url: '#create-a-new-role-by-cloning-an-existing-role'
+    identifier: create-a-new-role-by-cloning-an-existing-role
+    parent: roles
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CloneRole
+      unstable: []
+      order: 12
   - name: Update a role
     url: '#update-a-role'
     identifier: update-a-role

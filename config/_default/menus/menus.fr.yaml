@@ -113,7 +113,7 @@ main_left:
     parent: 'product'
   - identifier: database
     name: 'Database Monitoring'
-    pre: '<i class="icon-dbm align-middle"></i>'
+    pre: '<i class="icon-database-2 align-middle"></i>'
     url: 'https://www.datadoghq.com/product/database-monitoring/'
     weight: 19
     parent: 'product'
@@ -2267,7 +2267,7 @@ main:
     weight: 210000
   - name: Gestion de compte
     url: account_management/
-    pre: cog
+    pre: cog-2
     identifier: account_management
     weight: 220000
   - name: Gestion des utilisateurs
