@@ -567,9 +567,14 @@ The example above will match `/var/log/myapp/log/myfile.log` but `/var/log/myapp
 
 **Note**: The Agent requires read and execute permissions on a directory to list all the available files in it.
 
-## Encode UTF-16 format logs
+## Logfile Encodings
 
-If applications logs are written in UTF-16 format, starting with Datadog Agent **v6.23/v7.23**, users can encode these logs so that they are parsed as expected in the [Logs Explorer][4]. Use the `encoding` parameter in the logs configuration section. Set it to `utf-16-le` for UTF16 little-endian and `utf-16-be` for UTF16 big-endian. Any other value will be ignored and the Agent will read the file as UTF8.
+By default, the Datadog Agent assumes that logs use UTF-8 encoding. If your application logs use a different encoding, specify the `encoding` parameter in the logs configuration setting.
+
+The list below gives the supported encoding values. If you provide an unsupported value, the Agent ignores the value and reads the file as UTF-8.
+ * `utf-16-le` - UTF-16 little-endian (Datadog Agent **v6.23/v7.23**)
+ * `utf-16-be` - UTF-16 big-endian (Datadog Agent **v6.23/v7.23**)
+ * `shift-jis` - Shift-JIS (Datadog Agent **v6.34/v7.34**)
 
 Configuration example:
 
