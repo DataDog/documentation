@@ -915,6 +915,12 @@ components:
           example: test@datadoghq.com
           readOnly: true
           type: string
+        author_name:
+          description: Name of the dashboard author.
+          example: John Doe
+          nullable: true
+          readOnly: true
+          type: string
         created_at:
           description: Creation date of the dashboard.
           format: date-time

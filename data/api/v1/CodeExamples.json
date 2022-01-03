@@ -91,6 +91,12 @@
       "description": "Delete dashboards returns \"No Content\" response"
     }
   ],
+  "GetDashboard": [
+    {
+      "suffix": "_4262333854",
+      "description": "Get a dashboard returns 'author_name'"
+    }
+  ],
   "ListDashboards": [
     {
       "suffix": "",
