@@ -23,7 +23,7 @@ kind: guide
 - **`renotify_occurrences`** the number of times a monitor re-notifies. It can only be set if `renotify_interval` is set. Default: **None**, it renotifies without a limit.
 - **`escalation_message`** a message to include with a re-notification. Supports the '@username' notification that is allowed elsewhere. Not applicable if `renotify_interval` is `None`. Default: **None**.
 - **`notify_audit`** a Boolean indicating whether tagged users is notified on changes to this monitor. Default: **False**
-- **`locked`** a Boolean indicating whether changes to to this monitor should be restricted to the creator or users with the `user_access_manage` permission. Default: **False**
+- **`locked`** a Boolean indicating whether changes to to this monitor should be restricted to the creator or admins. Default: **False**
 - **`include_tags`** a Boolean indicating whether notifications from this monitor automatically inserts its triggering tags into the title. Default: **True**. Examples:
 
   - `True`: `[Triggered on {host:h1}] Monitor Title`
