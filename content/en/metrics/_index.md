@@ -38,7 +38,7 @@ A sequence of data points is stored as a time series:
 [  7.06,  22:12:00 ]
 ```
 
-Datadog stores metric points at a 1 second resolution. However, it is recommended that you only submit points every 15 seconds. Any metrics with fractions of a second timestamps are rounded to the nearest second. If any points have the same timestamp, the latest point overwrites the previous ones.
+Any metrics with fractions of a second timestamps are rounded to the nearest second. If any points have the same timestamp, the latest point overwrites the previous ones.
 
 ### Why are metrics useful?
 
@@ -127,34 +127,6 @@ It’s important to remember that time aggregation is _always_ applied in every 
 Space aggregation splits a single metric into multiple timeseries by tags such as host, container, and region. For instance, if you wanted to view the latency of your EC2 instances by region, you would need to use space aggregation's grouping by functionality to combine each region’s hosts.
 
 There are four aggregators that can be applied when using space aggregation: _sum_, _min_, _max_, and _avg_. Using the above example, say that your hosts are spread across four regions: us-east-1, us-east-2, us-west-1, and us-west-2. The hosts in each region need to be combined using an aggregator function. Using the _max_ aggregator would result in the maximum latency experienced across hosts in each region, while the _avg_ aggregator would yield the average latency per region.
-
-### Combining time series
-
-Time series are often combined together to produce a single representative time series. For example, you might want to see the average data received by the web servers in your infrastructure.
-
-Take two hosts submitting the same metric to Datadog:
-
-{{< img src="metrics/introduction/adding-by-host.png" alt="Two hosts send metrics to Datadog"  style="width:35%;">}}
-
-When you look at the data separated by host, `net.bytes_rcvd` is submitted at slightly different times:
-
-{{< img src="metrics/introduction/mismatched-time-series.png" alt="Mismatched Time Series" >}}
-
-### Breaking down the metric query
-
-In Datadog, the metric query looks like this:
-
-{{< img src="metrics/introduction/ui-query.png" alt="UI Query"  style="width:70%;">}}
-
-Looking at the JSON, the query can be broken out by space aggregation, metric name, scope, and grouping:
-
-{{< img src="metrics/introduction/color-query.png" alt="Query explained"  style="width:70%;">}}
-
-* **Scope** is the set of tags used to choose time series for the query.
-* **Grouping** is the set of tags over which to apply space aggregation.
-* **Time aggregation** is done implicitly, but can be set manually with the rollup function:
-
-{{< img src="metrics/introduction/color-query2.png" alt="Query explained"  style="width:70%;">}}
 
 ## Metric types and real-time metrics visibility
 
