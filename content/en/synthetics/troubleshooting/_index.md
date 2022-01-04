@@ -26,11 +26,11 @@ If you see a sudden spike or overall increase in your API test [timing metrics][
 
 ### Recording
 
-#### My website is not loading in the iframe
+#### The website is not loading in the iframe
 
 After downloading the [Datadog extension][4], you are unable to see your website in the iframe on the right side of your Browser test's recorder and the iframe displays `Your website does not support being loaded through an iframe.`. This could mean that your application has some settings preventing it from being opened in an iframe. If that is the case, try opening your website in a popup by clicking **Open in Popup** to record your journey.
 
-#### Some of my applications load in the iframe but some do not
+#### Some applications load in the iframe but some do not
 
 This means your applications and environments have different restrictions, which causes some of them to be visualized in an iframe while the others are not viewable.
 
@@ -146,7 +146,7 @@ This occurs when you attempt to mount a single file in a Windows-based container
 
 ### CI Results Explorer
 
-#### I'm not seeing any CI metadata in my CI Results Explorer
+### CI metadata does not appear in the CI Results Explorer
 
 Check whether you are using API endpoints to trigger your CI/CD test runs. To have your CI Results Explorer populate with CI metadata, you must use the [NPM package][15].
 

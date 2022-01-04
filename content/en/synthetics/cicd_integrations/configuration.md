@@ -18,7 +18,7 @@ further_reading:
 
 Use the `@datadog-ci` NPM package to run Synthetic tests directly within your CI/CD pipeline. You can automatically halt a build, block a deployment, and roll back a deployment when a Synthetics test detects a regression. 
 
-You can configure on which URL your test starts by providing a `startUrl` to your test object and build your own starting URL using any part of your test's original starting URL and the following environment variables:
+To configure which URL your test starts on, provide a `startUrl` to your test object. Build your own starting URL with any part of your test's original starting URL and the following environment variables:
 
 ### Install a package
 
