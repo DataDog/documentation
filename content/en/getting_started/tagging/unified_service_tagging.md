@@ -26,9 +26,7 @@ With these three tags you can:
 
 {{< img src="tagging/unified_service_tagging/overview.mp4" alt="Unified Service Tagging" video=true >}}
 
-### Note:
-The official service of a log can default to the container short-image if no AD logs configuration is present. To override the official service of a log add AD [docker labels/pod annotations][6]: 
-``` "com.datadoghq.ad.logs"='[{"service": "service-name"}]' ```
+**Note**: The official service of a log defaults to the container short-image if no Autodiscovery logs configuration is present. To override the official service of a log, add Autodiscovery [Docker labels/pod annotations][6]. For example: `"com.datadoghq.ad.logs"='[{"service": "service-name"}]'`
 
 ### Requirements
 
