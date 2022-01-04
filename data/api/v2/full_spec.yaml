@@ -498,8 +498,21 @@ components:
       properties:
         name:
           description: Name of the application key.
-          example: Application Key for submitting metrics
+          example: Application Key for managing dashboards
           type: string
+        scopes:
+          description: Array of scopes to grant the application key. This feature
+            is in private beta, please contact Datadog support to enable scopes for
+            your application keys.
+          example:
+          - dashboards_read
+          - dashboards_write
+          - dashboards_public_share
+          items:
+            description: Name of scope.
+            type: string
+          nullable: true
+          type: array
       required:
       - name
       type: object
@@ -550,10 +563,21 @@ components:
       properties:
         name:
           description: Name of the application key.
-          example: Application Key for submitting metrics
+          example: Application Key for managing dashboards
           type: string
-      required:
-      - name
+        scopes:
+          description: Array of scopes to grant the application key. This feature
+            is in private beta, please contact Datadog support to enable scopes for
+            your application keys.
+          example:
+          - dashboards_read
+          - dashboards_write
+          - dashboards_public_share
+          items:
+            description: Name of scope.
+            type: string
+          nullable: true
+          type: array
       type: object
     ApplicationKeyUpdateData:
       description: Object used to update an application key.
@@ -873,8 +897,21 @@ components:
           type: string
         name:
           description: Name of the application key.
-          example: Application Key for submitting metrics
+          example: Application Key for managing dashboards
           type: string
+        scopes:
+          description: Array of scopes to grant the application key. This feature
+            is in private beta, please contact Datadog support to enable scopes for
+            your application keys.
+          example:
+          - dashboards_read
+          - dashboards_write
+          - dashboards_public_share
+          items:
+            description: Name of scope.
+            type: string
+          nullable: true
+          type: array
       type: object
     HTTPLog:
       description: Structured log message.
@@ -1067,7 +1104,7 @@ components:
       - TEXTBOX
     IncidentFieldAttributesValueType:
       default: multiselect
-      description: Type of the single value field definitions.
+      description: Type of the multiple value field definitions.
       enum:
       - multiselect
       - textarray
@@ -2875,7 +2912,7 @@ components:
         from:
           default: now-15m
           description: The minimum time for the requested logs, supports date math
-            and regular timestamps
+            and regular timestamps (milliseconds).
           example: now-15m
           type: string
         indexes:
@@ -2898,7 +2935,7 @@ components:
         to:
           default: now
           description: The maximum time for the requested logs, supports date math
-            and regular timestamps
+            and regular timestamps (milliseconds).
           example: now
           type: string
       type: object
@@ -3567,8 +3604,21 @@ components:
           type: string
         name:
           description: Name of the application key.
-          example: Application Key for submitting metrics
+          example: Application Key for managing dashboards
           type: string
+        scopes:
+          description: Array of scopes to grant the application key. This feature
+            is in private beta, please contact Datadog support to enable scopes for
+            your application keys.
+          example:
+          - dashboards_read
+          - dashboards_write
+          - dashboards_public_share
+          items:
+            description: Name of scope.
+            type: string
+          nullable: true
+          type: array
       type: object
     PartialApplicationKeyResponse:
       description: Response for retrieving a partial application key.
@@ -4126,6 +4176,36 @@ components:
           format: int64
           readOnly: true
           type: integer
+      type: object
+    RoleClone:
+      description: Data for the clone role request.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/RoleCloneAttributes'
+        type:
+          $ref: '#/components/schemas/RolesType'
+      required:
+      - type
+      - attributes
+      type: object
+    RoleCloneAttributes:
+      description: Attributes required to create a new role by cloning an existing
+        one.
+      properties:
+        name:
+          description: Name of the new role that is cloned.
+          example: cloned-role
+          type: string
+      required:
+      - name
+      type: object
+    RoleCloneRequest:
+      description: Request to create a role by cloning an existing role.
+      properties:
+        data:
+          $ref: '#/components/schemas/RoleClone'
+      required:
+      - data
       type: object
     RoleCreateAttributes:
       description: Attributes of the created role.
@@ -4815,8 +4895,6 @@ components:
     SecurityMonitoringRuleQuery:
       description: Query for matching rule.
       properties:
-        agentRule:
-          $ref: '#/components/schemas/SecurityMonitoringRuntimeAgentRule'
         aggregation:
           $ref: '#/components/schemas/SecurityMonitoringRuleQueryAggregation'
         distinctFields:
@@ -4861,8 +4939,6 @@ components:
     SecurityMonitoringRuleQueryCreate:
       description: Query for matching rule.
       properties:
-        agentRule:
-          $ref: '#/components/schemas/SecurityMonitoringRuntimeAgentRule'
         aggregation:
           $ref: '#/components/schemas/SecurityMonitoringRuleQueryAggregation'
         distinctFields:
@@ -5045,24 +5121,6 @@ components:
           maximum: 2147483647
           type: integer
       type: object
-    SecurityMonitoringRuntimeAgentRule:
-      description: The Agent rule.
-      properties:
-        agentRuleId:
-          description: The Agent rule ID. Must be unique within the rule.
-          example: etc_shadow
-          type: string
-        expression:
-          description: 'A Runtime Security expression determines what activity should
-            be collected by the Datadog Agent.
-
-            These logical expressions can use predefined operators and attributes.
-            Tags cannot be used in Runtime
-
-            Security expressions. Instead, allow or deny based on tags under the advanced
-            option.'
-          type: string
-      type: object
     SecurityMonitoringSignal:
       description: Object description of a security signal.
       properties:
@@ -5096,7 +5154,7 @@ components:
               format: array
               items:
                 description: The tag associated with the security signal.
-                format: string
+                type: string
             timestamp:
               description: The timestamp of the security signal.
               example: '2019-01-02T09:42:36.320Z'
@@ -5543,9 +5601,9 @@ components:
             security_monitoring_rules_write: The ability to create and edit Detection
               rules.
             security_monitoring_signals_read: The ability to view Security signals.
-            user_access_invite: Allows users to invite other users to your organization.
-            user_access_manage: Grants the permission to disable users, manage user
-              roles and SAML-to-role mappings.
+            user_access_invite: The ability to invite other users to your organization.
+            user_access_manage: The ability to disable users, manage user roles, and
+              manage SAML-to-role mappings.
           tokenUrl: /oauth2/v1/token
       type: oauth2
     apiKeyAuth:
@@ -8638,6 +8696,68 @@ paths:
       x-menu-order: 4
       x-undo:
         type: idempotent
+  /api/v2/roles/{role_id}/clone:
+    post:
+      description: Clone an existing role
+      operationId: CloneRole
+      parameters:
+      - $ref: '#/components/parameters/RoleID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RoleCloneRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoleResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not found
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Conflict
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - user_access_manage
+      summary: Create a new role by cloning an existing role
+      tags:
+      - Roles
+      x-codegen-request-body-name: body
+      x-menu-order: 12
+      x-permission: OR(USER_ACCESS_MANAGE)
+      x-undo:
+        operationId: DeleteRole
+        parameters:
+        - name: role_id
+          source: data.id
+        type: unsafe
   /api/v2/roles/{role_id}/permissions:
     delete:
       description: Removes a permission from a role.
@@ -10594,7 +10714,7 @@ servers:
   variables:
     site:
       default: datadoghq.com
-      description: The regional site for our customers.
+      description: The regional site for Datadog customers.
       enum:
       - datadoghq.com
       - us3.datadoghq.com
@@ -10656,7 +10776,7 @@ tags:
 
     See the [Archives Page](https://app.datadoghq.com/logs/pipelines/archives)
 
-    for a list of the archives currently configured in our UI.'
+    for a list of the archives currently configured in web UI.'
   externalDocs:
     description: Find out more at
     url: https://docs.datadoghq.com/logs/archives/

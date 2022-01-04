@@ -50,7 +50,7 @@ instances:
               optional: tag
 ```
 
-Each capture group is stored in a Java Map. The first capture group starts at position `0`. Once you determined which capture group you want to export as a tag, you just have to reference them in the `tags` section of your `include` or `exclude` filter, plus to the number of the group (e.g. the position inside the Map).
+Each capture group is stored in a Java Map. The first capture group starts at position `0`. After you have determined which capture group you want to export as a tag, you need to reference them in the `tags` section of your `include` or `exclude` filter, as well as to the number of the group (for example, the position inside the Map).
 
 For the provided example in `bean_regex`, the capture groups are:
 
@@ -60,7 +60,7 @@ For the provided example in `bean_regex`, the capture groups are:
 * `$3`: `GET`
 * `$4`: `200`
 
-Using the [Metrics Explorer][3], you will be able to query your metrics and filter them by the tags you have just created.
+Using the [Metrics Explorer][3], you are able to query your metrics and filter them by the tags you have just created.
 
 ## Further Reading
 

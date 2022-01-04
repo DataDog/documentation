@@ -2,102 +2,136 @@
 title: Débuter avec les tests Browser
 kind: documentation
 further_reading:
-  - link: 'https://learn.datadoghq.com/course/view.php?id=39'
+  - link: https://learn.datadoghq.com/course/view.php?id=39
     tag: Centre d'apprentissage
     text: Présentation des tests Synthetic
   - link: /synthetics/browser_tests
     tag: Documentation
     text: En savoir plus sur les tests Browser
-  - link: '/synthetics/browser_tests/#subtests'
+  - link: /getting_started/synthetics/private_location
     tag: Documentation
-    text: Créer un sous-test Browser
-  - link: /synthetics/settings/
+    text: En savoir plus sur les emplacements privés
+  - link: /synthetics/cicd_testing
     tag: Documentation
-    text: Configurer les paramètres de surveillance Synthetic avancés
+    text: Découvrir comment déclencher des tests Synthetic depuis un pipeline CI/CD
+  - link: /synthetics/identify_synthetics_bots
+    tag: Documentation
+    text: Apprendre à identifier les bots Synthetic pour les tests API
 ---
+## Présentation
+
+Les [tests Browser][1] sont des scénarios que Datadog exécute sur vos applications Web. Vous pouvez faire en sorte que vos tests soient exécutés à des intervalles périodiques depuis plusieurs emplacements, appareils et navigateurs, mais aussi les exécuter depuis vos pipelines de CI/CD. Ces tests permettent de vérifier que vos utilisateurs peuvent effectuer les **transactions commerciales essentielles** sur vos applications et qu'ils ne subissent pas d'impacts négatifs suite à un déploiement de code.
+
 ## Créer un test Browser
 
-[Les tests Browser][1] correspondent à des scénarios exécutés par Datadog sur vos applications Web. Ils s'exécutent à des intervalles réguliers personnalisables, à partir de différents emplacements dans le monde entier et depuis plusieurs appareils. Ces tests **vérifient que vos applications fonctionnent et répondent aux requêtes**, et que les utilisateurs peuvent effectuer les principales transactions commerciales sans accrocs.
+L'exemple ci-dessous montre comment créer un test Browser qui reflète les étapes d'un parcours utilisateur allant de l'ajout d'un article au panier jusqu'à la validation du paiement. 
 
-Dans cet exemple, un test Browser est créé pour simuler le parcours utilisateur entre l'ajout d'un article au panier et la validation du paiement. Chaque exécution du test est enregistrée dans Datadog en tant que **Test Result**.
+{{< img src="getting_started/synthetics/browser-test.png" alt="Test Browser" style="width:100%;" >}}
 
-{{< img src="getting_started/synthetics/browser-test.png" alt="Test Browser" style="width:90%;" >}}
+### Configurer les détails de votre test
 
-## Configurer votre test
+1. Sur le site Datadog, passez le curseur sur **UX Monitoring** dans le menu de gauche, puis sélectionnez **[Synthetic Tests][2]**.
+2. En haut à droite, cliquez sur **New Test** > **[Browser Test][3]**.
+3. Définissez votre test Browser :
 
-1. Dans l'application Datadog, passez votre curseur sur l'option **[UX Monitoring][2]** du menu de gauche et sélectionnez **Synthetic Test**.
-2. Cliquez sur le bouton **New Test** en haut à droite.
-3. Sélectionnez **Browser Test**.
-4. Définissez la configuration de votre test Browser :
+    - Ajoutez l'URL du site Web que vous souhaitez surveiller. Si vous ne savez pas quelle URL utiliser, faites un test avec l'application Web e-commerce `https://www.shopist.io`.
+    - Sélectionnez **Advanced Options** pour personnaliser les en-têtes, les identifiants d'authentification ou les cookies de la requête. 
+      Pour cet exemple, aucune option avancée n'est requise.
+    - Donnez un nom à votre test et ajoutez-y des tags, comme `env:prod` et `app:shopist`. Les tags vous permettent d'organiser vos tests et d'accéder rapidement à ceux qui vous intéressent sur la page d'accueil.
+    - Choisissez les navigateurs et appareils sur lesquels vous souhaitez exécuter votre test. 
 
-    - **Starting URL** : ajoutez l'URL du site que vous souhaitez surveiller. Si vous n'avez pas encore de site à surveiller, faites un test avec l'application Web `https://www.shopist.io`.
-    - **Name** : attribuez un nom à votre test.
-    - **Tags** : ajoutez, si vous le souhaitez, des tags à votre test, comme `env:prod` et `app:shopist`. Les tags vous permettent d'organiser vos tests et de repérer rapidement sur la page d'accueil ceux dont vous avez besoin.
-    - **Browsers & Devices** : choisissez les appareils et les navigateurs à tester. Pour cet exemple, les tests se limitent au navigateur **Chrome** et aux appareils **Large Laptops**.
-    - **Locations** : choisissez l'un des **emplacements gérés** à partir duquel exécuter votre test. Pour cet exemple, le test est exécuté depuis l'emplacement **Americas and Europe**.
-    - **Specify test frequency** : sélectionnez la fréquence à laquelle vous souhaitez exécuter le test.
-    - **Alert Conditions** : définissez des conditions d'alertes afin de spécifier les circonstances dans lesquelles vous souhaitez qu'un test envoie une notification.
+#### Sélectionner des emplacements
 
-        - Pour éviter de recevoir une alerte en cas de panne réseau de courte durée affectant uniquement des localisations spécifiques, on utilise la configuration suivante :
+Sélectionnez un ou plusieurs **emplacements gérés** ou **emplacements privés** à partir desquels vous souhaitez exécuter votre test.
 
-        ```text
-        An alert is triggered if your test fails for 0 minutes from any 3 of 13 locations
-        ```
+Les emplacements gérés vous permettent de tester des sites Web et endpoints publics. Pour tester des applications internes ou simuler des comportements utilisateur dans des régions géographiques précises, utilisez plutôt des [emplacements privés][4].
 
-        - Pour faire en sorte que votre test ne soit considéré comme un échec qu'après deux exécutions non réussies, spécifiez le nombre d'échecs d'exécution minimum :
+L'appliction Shopist est accessible à tous depuis l'URL `https://www.shopist.io/`. Vous pouvez donc choisir n'importe quel emplacement géré pour exécuter votre test.
 
-        ```text
-        Retry 1 time before location is marked as failed
-        ```
+#### Indiquer la fréquence du test
 
-         **Remarque** : le temps d'attente entre chaque nouvelle tentative est de 300 ms par défaut. Cet intervalle peut être configuré via l'[API][3].
+Sélectionnez la fréquence à laquelle vous souhaitez exécuter votre test. Vous pouvez conserver la fréquence par défaut d'une heure.
 
-    - **Notify** : saisissez un message d'alerte et indiquez les adresses e-mail auxquelles cette alerte doit être envoyée en cas de déclenchement. Aucune autre configuration n'est requise pour commencer à recevoir des e-mails de la part de Datadog. Vous pouvez recevoir les notifications sur d'autres services en configurant des [intégrations][4] telles que Slack, PagerDuty, Webhooks, etc.
-    - Cliquez sur **Save & Edit Recording**.
+**Remarque** : vous pouvez non seulement planifier l'exécution de votre test Synthetic, mais également le déclencher manuellement, ou directement depuis vos [pipelines CI/CD][5].
 
-{{< img src="getting_started/synthetics/configured-browser-test.gif" alt="Test Browser configuré" style="width:90%;">}}
 
-## Enregistrer les étapes de votre test
+#### Définir des conditions d'alerte
 
-Une fois la configuration de votre test enregistrée, vous serez invité à télécharger l'extension [Datadog test recorder][5]. Les tests Browser peuvent uniquement être enregistrés à partir de **[Google Chrome][6]**. Téléchargez et installez l'extension.
+Vous pouvez définir des conditions d'alerte afin de faire en sorte que votre test n'échoue pas en cas de panne réseau de courte durée. Ainsi, vous recevrez uniquement des alertes lorsque votre application rencontre un réel problème.
 
-Une fois l'extension installée, commencez à enregistrer les étapes de votre test en cliquant sur le bouton **Start Recording**. Parcourez la page affichée dans l'iframe visible à droite des options d'enregistrement. Lorsque vous sélectionnez une div, une image ou toute autre zone, les étapes sont enregistrées et utilisées pour créer les étapes de votre test Browser. Pour en savoir plus sur chaque étape, consultez la [documentation sur les étapes de test Browser][7].
+Vous pouvez spécifier le nombre d'échecs consécutifs avant qu'un emplacement ne soit considéré comme défaillant :
 
-Par exemple, pour enregistrer en tant qu'étapes les actions effectuées entre l'ajout d'un article au panier et la validation de la commande :
+```text
+Retry test 2 times after 300 ms in case of failure
+```
 
-1. Accédez à l'une des sections du site, telles que **Chairs**, puis sélectionnez **Add to cart**.
+Vous pouvez également configurer votre test de façon à ce qu'il envoie uniquement une notification lorsque l'application n'est plus disponible pendant une certaine durée, et pour un certain nombre d'emplacements. La règle d'alerte ci-dessous stipule qu'une notification est envoyée lorsque le test échoue pendant trois minutes, sur deux emplacements différents :
+
+```text
+An alert is triggered if your test fails for 3 minutes from any 2 of 13 locations
+```
+
+#### Informer votre équipe
+
+Indiquez un message dans votre alerte et ajoutez les adresses e-mail auxquelles vous souhaitez envoyer des alertes.
+
+{{< img src="getting_started/synthetics/configured-browser-test.mp4" alt="Exemple de configuration de test Browser" video="true"  >}}
+
+Vous pouvez également utiliser des [intégrations de notification][6], comme Slack, PagerDuty, Microsoft Teams ou encore des webhooks. Pour déclencher une alerte Synthetic avec ces outils, vous devez auparavant configurer l'[intégration correspondante][7].
+
+Lorsque vous êtes prêt à enregistrer votre test, cliquez sur **Save Details & Record Test**.
+
+### Créer un enregistrement
+
+Une fois la configuration de votre test enregistrée, Datadog vous invite à télécharger et à installer l'extension Chrome [Datadog test recorder][8]. 
+
+Une fois que vous avez installé l'extension, cliquez sur **Start Recording** pour commencer à enregistrer les étapes de votre test.
+
+Parcourez la page affichée dans l'iframe visible à droite de la page de l'outil d'enregistrement. Lorsque vous sélectionnez une div, une image ou toute autre zone de la page, Datadog enregistre et crée l'étape associée dans le test Browser. 
+
+Pour terminer l'enregistrement des étapes de votre test, cliquez sur **Stop Recording**.
+
+L'exemple ci-dessous montre comment enregistrer les étapes d'un parcours utilisateur entre l'ajout d'un article au panier jusqu'à la validation du paiement dans `https://www.shopist.io` :
+
+1. Accédez à l'une des sections du site donné en exemple, telles que **Chairs**, puis sélectionnez **Add to cart**.
 2. Cliquez sur **Cart**, puis sur **Checkout**.
-3. Ajoutez manuellement l'**assertion** « Test text is present on the active page » pour vérifier que le message « Thank you » est présent sur la page.
+3. Sous **Add New**, sélectionnez **Assertion**, puis cliquez sur **Test that some text is present on the active page**.
+4. Pour vérifier que le message « Thank you! » s'affiche après le paiement, saisissez `Thank you!` dans le champ **Value**. 
+5. Appuyez sur **Save & Quit**.
 
-   **Remarque** : la dernière étape de votre test Browser doit être une **assertion**. Cela permet de s'assurer que votre test est arrivé à la page souhaitée et qu'il a trouvé le bon élément.
+Il est important de terminer votre test Browser par une **assertion** pour confirmer la bonne exécution du parcours utilisateur défini dans votre application.
 
-4. Enregistrez le test.
+{{< img src="getting_started/synthetics/record-test.mp4" alt="Enregistrer les étapes du test" video="true"  >}}
 
-{{< img src="getting_started/synthetics/record-test.gif" alt="Enregistrer les étapes du test" style="width:90%;">}}
+**Remarque** : le site donné en exemple renvoie régulièrement une erreur afin de faire échouer le test. Si vous ajoutez votre adresse e-mail dans le champ **Notify your team**, vous recevez une notification par e-mail lors de l'échec et du rétablissement du test.
 
-**Remarque** : le site utilisé dans cet exemple renvoie régulièrement une erreur afin de faire échouer le test. Ainsi, si vous ajoutez votre adresse e-mail dans la zone du message, vous devriez recevoir un e-mail de notification lorsque le test échoue.
+## Visualiser les résultats du test
 
-## Résultats du test
+La page de détails d'un **test Browser** affiche un aperçu de la configuration de votre test, l'uptime global et par emplacement, des graphiques illustrant le délai avant interactivité et la durée du test, des exemples de résultats d'échec ou de réussite, et la liste de tous les résultats de test. En fonction de la durée de votre test, vous devrez peut-être attendre quelques minutes pour que les premiers résultats de test soient disponibles.
 
-La page de détails d'un test Browser comprend des informations sur la configuration de votre test, l'uptime du test, l'historique des temps de réponse et d'interaction avec la première page sous forme de graphiques, les résultats d'échantillonnage réussis et échoués, ainsi que la liste des résultats de test correspondant à l'intervalle sélectionné. Chaque résultat de test individuel comprend des captures d'écran, des signaux Web essentiels, des erreurs potentielles, des ressources et des traces pour chaque étape.
+Pour identifier la cause de l'[échec d'un test][9], sélectionnez un résultat d'échec et examinez les captures d'écran jusqu'à l'étape ayant provoqué l'échec. Vous pouvez également examiner les **[erreurs et avertissements][10]** potentiels, les **[ressources][11]** et les **[signaux Web essentiels][12]** pour diagnostiquer le problème. 
 
-Attendez que votre test génère plusieurs résultats ou cliquez sur `Run test now` pour aller plus vite. Procédez ainsi jusqu'à ce que le test renvoie un échec dans la section **Test Results** ou dans votre boîte de messagerie. Pour commencer la résolution de l'échec, étudiez les captures d'écran afin d'essayer de comprendre les problèmes survenus durant le test. N'oubliez pas de regarder également les captures d'écran des étapes précédant l'étape qui a échoué, car c'est souvent dans celles-ci que se trouve la cause à l'origine de l'échec.
+Dans l'exemple ci-dessous, le test a échoué car le serveur a mis trop de temps à répondre.
 
-L'onglet **Errors & Warnings** affiche la liste des erreurs réseau et Javascript, l'onglet **Resources** identifie la ressource à l'origine du statut, et l'onglet **Traces** affiche les traces générées pour l'intégralité de la requête. Ici, le test a échoué en raison d'un timeout du serveur. La ressource à l'origine du statut est `https://api.shopist.io/checkout.json`, et la source du problème est un contrôleur lié au processus de validation de la commande. Vous savez désormais ce qui a entraîné l'erreur.
+{{< img src="getting_started/synthetics/browser-test-failure.mp4" alt="Échec du test Browser" video="true"  >}}
 
-{{< img src="getting_started/synthetics/browser-test-failure.png" alt="Échec du test Browser" style="width:100%;">}}
-
-L'onglet **Traces** est accessible une fois l'[intégration de l'APM avec la surveillance Synthetic][8] configurée. Il vous permet ensuite d'identifier la cause de l'échec d'un test en visualisant les traces générées durant son exécution. Pour lier les résultats des tests Browser à l'APM, spécifiez les URL auxquelles vous souhaitez que les en-têtes d'intégration de l'APM soient ajoutés. Vous pouvez utiliser le wildcard `*` : `https://*.datadoghq.com/*`.
+Utilisez l'[intégration de l'APM Datadog à la surveillance Synthetic][13] pour afficher les traces générées à partir de votre backend par les exécutions de test dans l'onglet **Traces**.
 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+
 [1]: /fr/synthetics/browser_tests/
 [2]: https://app.datadoghq.com/synthetics/list
-[3]: /fr/api/v1/synthetics/#create-or-clone-a-test
-[4]: /fr/integrations/
-[5]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa
-[6]: https://www.google.com/chrome/
-[7]: /fr/synthetics/browser_tests/#actions
-[8]: /fr/synthetics/apm/
+[3]: https://app.datadoghq.com/synthetics/browser/create
+[4]: /fr/getting_started/synthetics/private_location
+[5]: /fr/synthetics/cicd_testing
+[6]: /fr/integrations/#cat-notification
+[7]: https://app.datadoghq.com/account/settings
+[8]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa
+[9]: /fr/synthetics/browser_tests/test_results#test-failure
+[10]: /fr/synthetics/browser_tests/test_results#errors
+[11]: /fr/synthetics/browser_tests/test_results#resources
+[12]: /fr/synthetics/browser_tests/test_results#page-performance
+[13]: /fr/synthetics/apm/

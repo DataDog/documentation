@@ -278,7 +278,7 @@ For more information about TOTP-based MFA in a browser test, see this [TOTP guid
 
 #### Email
 
-Generate a random Synthetic email address that can be used in your test steps to [assert if an email was correctly sent][9] or to [navigate to a link contained within the email][10] (e.g. click a confirmation link). A unique mailbox is generated at each test execution to avoid any conflicts between test runs.
+Generate a random Synthetic email address that can be used in your test steps to [assert if an email was correctly sent][9] or to [navigate to a link contained within the email][10] (for example, click a confirmation link). A unique mailbox is generated at each test execution to avoid any conflicts between test runs.
 
 ### Subtests
 

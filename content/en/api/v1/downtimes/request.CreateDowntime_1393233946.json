@@ -1,0 +1,21 @@
+{
+  "message": "Example-Schedule_a_downtime_with_until_occurrences",
+  "recurrence": {
+    "period": 1,
+    "type": "weeks",
+    "until_occurrences": 3,
+    "week_days": [
+      "Mon",
+      "Tue",
+      "Wed",
+      "Thu",
+      "Fri"
+    ]
+  },
+  "scope": [
+    "*"
+  ],
+  "start": 1636629071,
+  "end": 1636632671,
+  "timezone": "Etc/UTC"
+}

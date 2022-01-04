@@ -248,7 +248,7 @@ Subscribe the Datadog Forwarder Lambda function to each of your functions' log g
 
 The Datadog Lambda Library can be imported as a layer or JavaScript package.
 
-The minor version of the `datadog-lambda-js` package always matches the layer version. E.g., datadog-lambda-js v0.5.0 matches the content of layer version 5.
+The minor version of the `datadog-lambda-js` package always matches the layer version. For example, datadog-lambda-js v0.5.0 matches the content of layer version 5.
 
 #### Using the layer
 
@@ -318,7 +318,7 @@ Subscribe the Datadog Forwarder Lambda function to each of your function’s log
 
 ### Tag
 
-Although it's optional, Datadog highly recommends tagging you serverless applications with the `env`, `service`, and `version` tags following the [unified service tagging documentation][4].
+Although it's optional, Datadog recommends tagging you serverless applications with the `env`, `service`, and `version` tags following the [unified service tagging documentation][4].
 
 ## Explore
 

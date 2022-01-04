@@ -20,7 +20,7 @@ As one example of a `dog` command that would trigger the initialization setup (a
 dog metric post test_metric 1
 ```
 
-If your `.dogrc` file has not yet been created (i.e, the dogshell has not yet been initialized), it returns something like the following:
+If your `.dogrc` file has not yet been created (as in, the dogshell has not yet been initialized), it returns something like the following:
 
 ```text
 ~/.dogrc does not exist. Would you like to create it? [Y/n]

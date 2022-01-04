@@ -10,7 +10,7 @@ Network Performance Monitoring (NPM) allows you to track all of the traffic patt
 
 ## Datadog’s story
 
-When Datadog migrated to Kubernetes, migrating stateless services was (expectedly) much faster and easier than migrating stateful services (e.g. Kafka), stateless services were first. The outcome was a terabytes of new cross-AZ traffic between the stateful services (all in one AZ) and stateless services (spread across the other AZs), which led the cloud bill to increase drastically and unexpectedly. Datadog used its own NPM product to identify the root cause: a suboptimal migration strategy and consequently, inefficient and costly network communication. Sharding stateful services ultimately led to significant reductions in our cloud provider traffic costs.
+When Datadog migrated to Kubernetes, migrating stateless services was (expectedly) much faster and easier than migrating stateful services (for example, Kafka), stateless services were first. The outcome was a terabytes of new cross-AZ traffic between the stateful services (all in one AZ) and stateless services (spread across the other AZs), which led the cloud bill to increase drastically and unexpectedly. Datadog used its own NPM product to identify the root cause: a suboptimal migration strategy and consequently, inefficient and costly network communication. Sharding stateful services ultimately led to significant reductions in cloud provider traffic costs.
 
 ## Steps for managing traffic costs 
 

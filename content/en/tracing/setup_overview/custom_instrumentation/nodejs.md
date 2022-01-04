@@ -161,10 +161,16 @@ API details for `tracer.trace()` can be found [here][1].
 Promises can be traced with `tracer.trace()` which will automatically finish the span when the returned promise resolves and capture any rejection error automatically.
 
 ```javascript
+const getIngredients = () => {
+    return new Promise((resolve, reject) => {
+        resolve('Salami');
+    });
+};
+
 app.get('/make-sandwich', (req, res) => {
   return tracer.trace('sandwich.make', () => {
     return tracer.trace('get_ingredients', () => getIngredients())
-      .then(() => {
+      .then((ingredients) => {
         return tracer.trace('assemble_sandwich', () => {
           return assembleSandwich(ingredients)
         })

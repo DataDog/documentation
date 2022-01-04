@@ -70,7 +70,7 @@ The freshly opened incognito pop up ignores all your previous browser history: c
 
 #### My mobile small or tablet browser test results keep failing
 
-If your website is using **responsive** techniques, its DOM might differ a lot depending on the device your test is running on. It might use a specific DOM when running from a `Laptop Large`, and have a very different architecture when running from a `Tablet` or a `Mobile Small`.  
+If your website is using **responsive** techniques, its DOM might differ a lot depending on the device your test is running on. It might use a specific DOM when running from a `Laptop Large`, and have a different architecture when running from a `Tablet` or a `Mobile Small`.  
 This means that the steps you recorded from a `Laptop Large` viewport might not be applicable to the same website accessed from a `Mobile Small`, causing your `Mobile Small` test results to fail:
 
 {{< img src="synthetics/device_failures.png" alt="Mobile Tablet Device Failing" style="width:100%;" >}}
@@ -104,7 +104,7 @@ If one of your Synthetic tests is throwing a 401, it most likely means that it i
   * **Token based authentication**: extract your token with a first [HTTP test][7], create a [global variable][9] by parsing the response of that first test, and re-inject that variable in a second [HTTP][7] or [Browser test][10] requiring the authentication token.
   * **Session based authentication**: add the required headers or cookies in the **Advanced options** of your [HTTP][7] or [Browser test][8].
   
-* Is this endpoint using **query parameters for authentication** (e.g. do you need to add a specific API key in your URL parameters?)
+* Is this endpoint using **query parameters for authentication** (for example, do you need to add a specific API key in your URL parameters?)
 
 * Is this endpoint using **IP-based authentication**? If so, you might need to allow part or all of the [IPs from which Synthetic tests originate][11].
 
@@ -116,7 +116,7 @@ Additionally, you might also have to ensure [Datadog Synthetic Monitoring IP ran
 
 ### Missing notifications
 
-Synthetic tests by default do not [renotify][12]. This means that if you add your notification handle (email address, Slack handle, etc.) after a transition got generated (e.g., test going into alert or recovering from a previous alert), no notification is sent for that very transition. A notification will be sent for the next transition.
+Synthetic tests by default do not [renotify][12]. This means that if you add your notification handle (email address, Slack handle, etc.) after a transition got generated (for example, a test going into alert or recovering from a previous alert), no notification is sent for that transition. A notification is sent for the next transition.
 
 ## Private locations
 

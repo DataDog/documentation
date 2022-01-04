@@ -301,7 +301,10 @@ If you already have the [Agent running with a manifest][4]:
                                   - SYS_RESOURCE
                                   - SYS_PTRACE
                                   - NET_ADMIN
+                                  - NET_BROADCAST
+                                  - NET_RAW
                                   - IPC_LOCK
+                                  - CHOWN
                       command:
                           - /opt/datadog-agent/embedded/bin/system-probe
                       env:
@@ -383,7 +386,10 @@ $ docker run -e DD_API_KEY="<DATADOG_API_KEY>" \
 --cap-add=SYS_RESOURCE \
 --cap-add=SYS_PTRACE \
 --cap-add=NET_ADMIN \
+--cap-add=NET_BROADCAST \
+--cap-add=NET_RAW \
 --cap-add=IPC_LOCK \
+--cap-add=CHOWN \
 gcr.io/datadoghq/agent:latest
 ```
 
@@ -411,7 +417,10 @@ services:
     - SYS_RESOURCE
     - SYS_PTRACE
     - NET_ADMIN
+    - NET_BROADCAST
+    - NET_RAW
     - IPC_LOCK
+    - CHOWN
     security_opt:
     - apparmor:unconfined
 ```

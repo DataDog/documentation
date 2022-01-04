@@ -40,7 +40,7 @@ Here's a two-minute video walkthrough:
     * [Okta][15]
     * [SafeNet][16]
 
-2. In the Datadog app, navigate to the [Login Methods][17] page. Under **SAML**, click the **Configure** button.
+2. In the Datadog app, hover over your username in the bottom left corner and select Organization Settings. Select [Login Methods][17] and click on **Configure** under SAML.
 
 3. Upload the IdP Metadata from your SAML Identity provider by clicking the **Choose File** button. After choosing the file, click **Upload File**.
 
@@ -125,7 +125,7 @@ When a user logs in who has the specified identity provider attribute, they are 
 
 You can make changes to a mapping by clicking the **pencil** icon or removing it by clicking the **garbage** icon. These actions affect only the mapping, not the identity provider attributes or the Datadog roles.
 
-Alternatively, you can create and change mappings of SAML attributes to Datadog roles with the `authn_mappings` endpoint. For more information, see [Federated Authentication to Role Mapping API][25].
+Alternatively, you can create and change mappings of SAML attributes to Datadog roles with the `authn_mappings` endpoint. For more information, see [Federated Authentication to Role Mapping API][17].
 
 ## Additional features
 
@@ -181,7 +181,7 @@ Certain Identity Providers (such as Microsoft's ADFS) can be configured to pull 
 [14]: /account_management/saml/nopassword/
 [15]: /account_management/saml/okta/
 [16]: /account_management/saml/safenet/
-[17]: https://app.datadoghq.com/organization-settings/login-methods
+[17]: /account_management/authn_mapping/
 [18]: https://app.datadoghq.com/account/saml/metadata.xml
 [19]: https://app.datadoghq.com/saml/saml_setup
 [20]: https://app.datadoghq.com/account/team
@@ -189,4 +189,3 @@ Certain Identity Providers (such as Microsoft's ADFS) can be configured to pull 
 [22]: https://help.okta.com/en/prod/Content/Topics/users-groups-profiles/usgp-add-custom-user-attributes.htm
 [23]: https://support.okta.com/help/s/article/How-to-View-a-SAML-Response-in-Your-Browser-for-Troubleshooting?language=en_US
 [24]: https://www.samltool.com/validate_response.php
-[25]: /account_management/authn_mapping/

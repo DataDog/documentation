@@ -88,8 +88,8 @@ Once a log pattern is excluded from Log Explorer, you can still track KPIs over 
 **To generate a new log-based metric based on your log pattern**:
 
 1. In your Datadog account, hover over **Logs** in the main menu, select **Generate Metrics**, and then click the **New Metric+** button in the top right corner.
-2. Under **Define Query**, input the search query you copied and pasted into the pattern exclusion filter. (e.g., as per the example above: `service:web-store status:info "updating recommendations with customer_id" "url shops"`)
-3. Select the field you would like to track: Select `*` to generate a count of all logs matching your query or enter a measure (e.g., `@duration`) to aggregate a numeric value and create its corresponding count, min, max, sum, and avg aggregated metrics.
+2. Under **Define Query**, input the search query you copied and pasted into the pattern exclusion filter. (for example, as per the example above: `service:web-store status:info "updating recommendations with customer_id" "url shops"`)
+3. Select the field you would like to track: Select `*` to generate a count of all logs matching your query or enter a measure (for example, `@duration`) to aggregate a numeric value and create its corresponding count, min, max, sum, and avg aggregated metrics.
 4. Add dimensions to group: Select log attributes or tag keys to apply to the generated log-based metric to transform them into tags following the `<KEY>:<VALUE>` format. Log-based metrics are considered custom metrics. Avoid grouping by unbounded or extremely high cardinality attributes like timestamps, user IDs, request IDs, or session IDs to avert impacting your billing.
 5. Name your metric: Log-based metric names must follow the naming metric convention.
 

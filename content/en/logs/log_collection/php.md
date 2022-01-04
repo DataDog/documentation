@@ -209,7 +209,7 @@ It's useful to add additional context data to your logs and events. Monolog make
   $logger->info('Adding a new user', array('username' => 'Seldaek'));
 ```
 
-Monolog comes with a pre-processor feature. It's a simple callback that enriches your events with metadata you can set (e.g., the session id, the request id, etc.):
+Monolog comes with a pre-processor feature. It's a simple callback that enriches your events with metadata you can set (for example, the session ID, or the request id):
 
 ```php
  <?php
@@ -236,7 +236,7 @@ Monolog comes with a pre-processor feature. It's a simple callback that enriches
 {{% /tab %}}
 {{% tab "PHP Zend-Log" %}}
 
-Much of the useful information comes from additional context data that you can add to your logs and your events. Zend-Log makes this very convenient by providing methods to set thread local context data that is then submitted automatically with all events. At any moment, log an event with contextual data:
+Useful logging information comes from additional context data that you can add to your logs and events. Zend-Log makes this convenient by providing methods to set thread local context data that is then submitted automatically with all events. At any moment, log an event with contextual data:
 
 ```php
 <?php

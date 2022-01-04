@@ -40,15 +40,15 @@ The Datadog Agent submits data to Datadog over a TLS-encrypted TCP connection by
 
 ## Networking and proxying
 
-Datadog is a SaaS product: customers need to establish an outbound connection from their network to the public internet in order to submit monitoring data. Traffic is always initiated by the Agent to Datadog via TLS-encrypted TCP connection by default. No sessions are ever initiated from Datadog back to the Agent. See the Agent's [Network][9] page for more information on configuring firewalls to whitelist the required Datadog domains and ports. Additionally, customers monitoring hosts with no direct connectivity to the public internet, or with restricted outbound traffic, should consider submitting monitoring data via a [Proxy][10].
+Datadog is a SaaS product: customers need to establish an outbound connection from their network to the public internet in order to submit monitoring data. Traffic is always initiated by the Agent to Datadog from TLS-encrypted TCP connection by default. No sessions are ever initiated from Datadog back to the Agent. See the Agent's [Network][9] page for more information on configuring firewalls to allow list the required Datadog domains and ports. Additionally, customers monitoring hosts with no direct connectivity to the public internet, or with restricted outbound traffic, should consider submitting monitoring data from a [Proxy][10].
 
 ## Agent logs obfuscation
 
-The Datadog Agent generates local logs in order to support [Agent troubleshooting][11] as required. As a safety precaution, these local logs are filtered for some specific keywords and patterns that could indicate a potential credential (e.g. API key, password and token keywords, etc.), which are then obfuscated before being written to disk.
+The Datadog Agent generates local logs in order to support [Agent troubleshooting][11] as required. As a safety precaution, these local logs are filtered for some specific keywords and patterns that could indicate a potential credential (for example, API key, password, and token keywords), which are then obfuscated before being written to disk.
 
 ## Local HTTPS server
 
-Agent v6 exposes a local HTTPS API to ease communication between a running Agent and Agent tools (e.g. the `datadog-agent` commands). The API server can only be accessed from the local network interface (`localhost/127.0.0.1`), and authentication is enforced through a token that's only readable by the user that the Agent runs as. Communication to the local HTTPS API is encrypted in transport to protect from eavesdropping on `localhost`.
+Agent v6 exposes a local HTTPS API to ease communication between a running Agent and Agent tools (for example, the `datadog-agent` commands). The API server can only be accessed from the local network interface (`localhost/127.0.0.1`), and authentication is enforced through a token that's only readable by the user that the Agent runs as. Communication to the local HTTPS API is encrypted in transport to protect from eavesdropping on `localhost`.
 
 ## Agent GUI
 

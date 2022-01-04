@@ -5,12 +5,13 @@ categories:
 ddtype: crawler
 dependencies: []
 description: "MongoDB\_Atlas peut transmettre des métriques calculées à Datadog pour vous permettre de visualiser ses performances."
-doc_link: 'https://docs.datadoghq.com/integrations/mongodb_atlas/'
+doc_link: https://docs.datadoghq.com/integrations/mongodb_atlas/
 draft: false
 git_integration_title: mongodb_atlas
 has_logo: true
 integration_id: ''
 integration_title: "MongoDB\_Atlas"
+integration_version: ''
 is_public: true
 kind: intégration
 manifest_version: '1.0'
@@ -20,6 +21,10 @@ short_description: "MongoDB\_Atlas peut transmettre des métriques calculées à
 version: '1.0'
 ---
 ## Présentation
+
+{{< site-region region="us3" >}}
+**Cette intégration n'est pas prise en charge pour ce site.**
+{{< /site-region >}}
 
 MongoDB Atlas peut transmettre des métriques calculées à Datadog pour vous permettre de :
 
@@ -57,7 +62,7 @@ L'intégration MongoDB Atlas n'inclut aucun check de service.
 
 Besoin d'aide ? [Contactez l'assistance Datadog][5].
 
-[1]: https://app.datadoghq.com/account/settings#api
+[1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: https://docs.atlas.mongodb.com/tutorial/monitoring-integrations/#procedure
 [3]: https://github.com/DataDog/dogweb/blob/prod/integration/mongodb_atlas/mongodb_atlas_metadata.csv
 [4]: https://www.mongodb.com/blog/post/push-your-mongodb-atlas-alerts-to-datadog

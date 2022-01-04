@@ -1,0 +1,13 @@
+{
+  "message": "Example-Schedule_a_downtime_once_a_year",
+  "recurrence": {
+    "period": 1,
+    "type": "years"
+  },
+  "scope": [
+    "*"
+  ],
+  "start": 1636629071,
+  "end": 1636632671,
+  "timezone": "Etc/UTC"
+}

@@ -15,7 +15,7 @@ further_reading:
 
 ---
 
-{{< site-region region="us3,us5,gov" >}}
+{{< site-region region="us5,gov" >}}
 <div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
 {{< /site-region >}}
 
@@ -50,7 +50,7 @@ You can filter queries that have explain plans by database index, so you can see
 
 ### Row count
 
-Filter or sort to find queries that return or affect a very large number of rows, over the time frame selected.
+Filter or sort to find queries that return or affect a large number of rows, over the time frame selected.
 
 ### Duration
 

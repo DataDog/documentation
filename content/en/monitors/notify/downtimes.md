@@ -75,7 +75,7 @@ The examples below show how `Group scope` may be applied to multi-alert monitors
 
 {{< img src="monitors/downtimes/downtime_examplebyname2_monitor.jpg" alt="group status shows dev environment and related services muted during downtime" style="width:80%;">}}
 
-4. To schedule a downtime on more than one “group by” (e.g. `env:dev` AND `service:web-store`), add the additional scope to the downtime.
+4. To schedule a downtime on more than one “group by” (for example, `env:dev` AND `service:web-store`), add the additional scope to the downtime.
 {{% /tab %}}
 {{% tab "By Monitor Tags" %}}
 
