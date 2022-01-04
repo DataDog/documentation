@@ -1,0 +1,36 @@
+{
+  "title": "Example-Create_a_new_dashboard_with_hostmap_widget",
+  "description": null,
+  "widgets": [
+    {
+      "layout": {
+        "x": 0,
+        "y": 0,
+        "width": 47,
+        "height": 22
+      },
+      "definition": {
+        "title": "",
+        "title_size": "16",
+        "title_align": "left",
+        "type": "hostmap",
+        "requests": {
+          "fill": {
+            "q": "avg:system.cpu.user{*} by {host}"
+          }
+        },
+        "node_type": "host",
+        "no_metric_hosts": true,
+        "no_group_hosts": true,
+        "style": {
+          "palette": "green_to_orange",
+          "palette_flip": false
+        }
+      }
+    }
+  ],
+  "template_variables": [],
+  "layout_type": "free",
+  "is_read_only": false,
+  "notify_list": []
+}

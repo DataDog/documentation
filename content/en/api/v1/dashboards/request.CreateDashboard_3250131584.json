@@ -1,0 +1,26 @@
+{
+  "title": "Example-Create_a_new_dashboard_with_event_timeline_widget",
+  "description": null,
+  "widgets": [
+    {
+      "layout": {
+        "x": 0,
+        "y": 0,
+        "width": 47,
+        "height": 9
+      },
+      "definition": {
+        "title": "",
+        "title_size": "16",
+        "title_align": "left",
+        "type": "event_timeline",
+        "query": "status:error priority:all",
+        "tags_execution": "and"
+      }
+    }
+  ],
+  "template_variables": [],
+  "layout_type": "free",
+  "is_read_only": false,
+  "notify_list": []
+}

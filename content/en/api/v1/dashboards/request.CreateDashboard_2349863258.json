@@ -1,0 +1,40 @@
+{
+  "title": "Example-Create_a_new_dashboard_with_query_value_widget",
+  "description": "",
+  "widgets": [
+    {
+      "layout": {
+        "x": 0,
+        "y": 0,
+        "width": 47,
+        "height": 15
+      },
+      "definition": {
+        "title": "",
+        "title_size": "16",
+        "title_align": "left",
+        "time": {},
+        "type": "query_value",
+        "requests": [
+          {
+            "response_format": "scalar",
+            "queries": [
+              {
+                "name": "query1",
+                "data_source": "metrics",
+                "query": "avg:system.cpu.user{*}",
+                "aggregator": "avg"
+              }
+            ]
+          }
+        ],
+        "autoscale": true,
+        "precision": 2
+      }
+    }
+  ],
+  "template_variables": [],
+  "layout_type": "free",
+  "is_read_only": false,
+  "notify_list": []
+}
