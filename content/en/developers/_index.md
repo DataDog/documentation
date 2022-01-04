@@ -42,7 +42,7 @@ Still not seeing the type of data that you need? Developers have several choices
 
 ### Custom check versus integration
 
-The primary difference between custom checks and integrations is that integrations are reusable components that can become part of the Datadog's ecosystem. They generally take more effort (time to develop) and are best suited for general use-cases such as application frameworks, open source projects, or commonly used software. For more niche scenarios, such as monitoring services that are not widely used outside your team or organization, writing a custom check may be the most efficient option. 
+The primary difference between custom checks and integrations is that integrations are reusable components that can become part of the Datadog's ecosystem. They generally take more effort (time to develop) and are best suited for general use-cases such as application frameworks, open source projects, or commonly used software. For more unique scenarios, such as monitoring services that are not widely used outside your team or organization, writing a custom check may be the most efficient option. 
 
 However, you may choose to write an integration instead of a custom check if your particular use-case requires you to publish and deploy your solution as a Python wheel (`.whl`). Metrics emitted through custom checks are considered custom metrics, which have a cost associated based on your subscription plan. However, once an integration gets accepted into the Datadog ecosystem, metrics that it emits are no longer considered custom metrics, and do not count against your custom metric count. For more information about how this might impact cost, see [Datadog Pricing][8].
 
@@ -57,7 +57,7 @@ When deciding how to send unsupported data to Datadog, the main considerations a
 | Private integration | Medium | Yes            | Python   |
 | Public integration  | High   | No             | Python   |
 
-If you are a partner developing for the Datadog Marketplace or community integrations, jump straight to the [Marketplace][10] and [building an integration][6] docs.
+If you are a partner developing for the Datadog Marketplace or community integrations, navigate directly to the [Marketplace][10] and [building an integration][6] docs.
 
 ### What's the difference between a custom check and a service check?
 
