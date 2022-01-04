@@ -144,7 +144,7 @@ This occurs when you attempt to mount a single file in a Windows-based container
 
 ## Synthetics and CI/CD
 
-### CI Results Explorer
+## CI Results Explorer
 
 ### CI metadata does not appear in the CI Results Explorer
 
