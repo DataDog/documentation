@@ -67,9 +67,9 @@ Check any number of boxes to find your monitors. The following rules apply:
 
 ## Saved view
 
-Leverage saved views to quickly jump to pre-set views in order to find monitors relevant to a given context like the monitors for your team or muted for more than 60 days:
+Leverage saved views to quickly navigate to pre-set views in order to find monitors relevant to a given context like the monitors for your team or muted for more than 60 days:
 
-{{< img src="monitors/manage_monitor/overview.jpg" alt="Saved Views selection"  style="width:90%;" >}}
+{{< img src="monitors/manage_monitor/overview.jpg" alt="Saved Views selection" style="width:90%;" >}}
 
 Saved views are visible by everyone in your organization.
 Technically, a saved view keeps track of:
@@ -78,7 +78,7 @@ Technically, a saved view keeps track of:
 
 ### Default view
 
-{{< img src="monitors/manage_monitor/default.jpg" alt="Default view"  style="width:50%;" >}}
+{{< img src="monitors/manage_monitor/default.jpg" alt="Default view" style="width:50%;" >}}
 
 Your existing Manage Monitor view is your default saved view. This configuration is only accessible and viewable to you and updating this configuration does not have any impact on your organization.
 
