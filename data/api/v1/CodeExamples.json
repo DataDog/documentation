@@ -375,6 +375,10 @@
     {
       "suffix": "_2472747642",
       "description": "Create an API test with WEBSOCKET subtype returns \"OK - Returns the created test details.\" response"
+    },
+    {
+      "suffix": "_1279271422",
+      "description": "Create an API test with multi subtype returns \"OK - Returns the created test details.\" response"
     }
   ],
   "UpdateAPITest": [
