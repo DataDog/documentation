@@ -33,7 +33,7 @@ A profiler shows how much "work" each function is doing by collecting data about
 | `renderGraph` | 19%       |
 | Other         | 13%       |
 
-When working on performance problems, this information is important because many programs spend a lot of time in a few places, which may not not be obvious. Guessing at which parts of a program to optimize causes engineers to spend a lot of time with little results. By using a profiler, you can find exactly which parts of the code to optimize.
+When working on performance problems, this information is important because many programs spend a lot of time in a few places, which may not be obvious. Guessing at which parts of a program to optimize causes engineers to spend a lot of time with little results. By using a profiler, you can find exactly which parts of the code to optimize.
 
 If you've used an APM tool, you might think of profiling like a "deeper" tracer that provides a fine grained view of your code without needing any instrumentation.
 
