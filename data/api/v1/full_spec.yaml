@@ -10023,6 +10023,8 @@ components:
           type: string
         request:
           $ref: '#/components/schemas/SyntheticsTestRequest'
+        retry:
+          $ref: '#/components/schemas/SyntheticsTestOptionsRetry'
         subtype:
           $ref: '#/components/schemas/SyntheticsAPIStepSubtype'
       type: object
