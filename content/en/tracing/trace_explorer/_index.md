@@ -95,7 +95,7 @@ In addition to showing timeseries for requests that match your queries, you can 
 {{< /tabs >}}
 
 ### Filtering
-{{< img src="tracing/live_search/all-spans-search.mp4" alt="Searching all spans"  video="true" >}}
+{{< img src="tracing/live_search/all-spans-search.mp4" alt="Searching all spans" video="true" >}}
 
 A valid query in the search bar displays traces that match your search criteria across **all spans**. The search syntax is the same in the Live Search views as in the other trace views, but here, your query is matched against all of the ingested traces across **any span** and **any tag**, and not just the indexed ones.
 
@@ -122,7 +122,7 @@ You can search retained traces in the same way as you do a Live Search. To switc
 {{% tab "List view" %}}
 
 All spans indexed by custom retention filters **and** the intelligent retention filter are available to be searched in the List view.
-However, if you filter by a tag that appears only on spans that are not indexed by any retention filter, your search will return no results, unlike when using [Live Search](#live-search-for-15-minutes).
+However, if you filter by a tag that appears only on spans that are not indexed by any retention filter, your search won't return any results, unlike when using [Live Search](#live-search-for-15-minutes).
 
 {{% /tab %}}
 {{% tab "Timeseries View" %}}
