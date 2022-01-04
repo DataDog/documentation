@@ -330,14 +330,14 @@
               tag: "Homepage"
               text: "Explore Datadog RUM"
     - action: pull-and-push-file
-      branch: alai97/android-monitoring-mobile-vitals
+      branch: master
       globs:
       - 'docs/rum_mobile_vitals.md'
       options:
         dest_path: '/real_user_monitoring/android/'
         file_name: 'mobile_vitals.md'
         front_matters:
-          dependencies: ["https://github.com/DataDog/dd-sdk-android/blob/alai97/android-monitoring-mobile-vitals/docs/rum_mobile_vitals.md"]
+          dependencies: ["https://github.com/DataDog/dd-sdk-android/blob/master/docs/rum_mobile_vitals.md"]
           title: Mobile Vitals
           kind: documentation
           further_reading:

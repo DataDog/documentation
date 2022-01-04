@@ -2674,7 +2674,7 @@ main:
   - name: Mobile Vitals
     url: real_user_monitoring/android/mobile_vitals/
     parent: rum_android
-    identifier: rum_troubleshooting_android_mobile_vitals
+    identifier: rum_android_mobile_vitals
     weight: 203
   - name: Integrated Libraries
     url: real_user_monitoring/android/integrated_libraries/
