@@ -26,6 +26,10 @@ With these three tags you can:
 
 {{< img src="tagging/unified_service_tagging/overview.mp4" alt="Unified Service Tagging" video=true >}}
 
+### Note:
+The official service of a log can default to the container short-image if no AD logs configuration is present. To override the official service of a log add AD [docker labels/pod annotations][6]: 
+``` "com.datadoghq.ad.logs"='[{"service": "service-name"}]' ```
+
 ### Requirements
 
 - Unified service tagging requires setup of a [Datadog Agent][2] that is 6.19.x/7.19.x or higher.
@@ -182,6 +186,7 @@ containers:
 [3]: https://github.com/DataDog/integrations-core/blob/master/kubernetes_state/datadog_checks/kubernetes_state/data/conf.yaml.example#L70
 [4]: /tracing/send_traces/
 [5]: /integrations/statsd/
+[6]: /agent/docker/log/?tab=containerinstallation#examples
 {{% /tab %}}
 
 {{% tab "Docker" %}}
