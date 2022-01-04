@@ -26,7 +26,7 @@ Apply log processing rules to a specific log collection configurations to:
 * [Scrub sensitive data from your logs](#scrub-sensitive-data-from-your-logs)
 * [Proceed to multi-line aggregation](#multi-line-aggregation)
 * [Tail directories by using wildcards](#tail-directories-by-using-wildcards)
-* [Encode UTF-16 format logs](#encode-utf-16-format-logs)
+* [Logfile Encodings](#logfile-encodings)
 
 **Note**: If you set up multiple processing rules, they are applied sequentially and each rule is applied on the result of the previous one.
 
