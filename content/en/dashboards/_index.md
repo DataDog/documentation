@@ -204,6 +204,17 @@ An organization's most popular dashboard displays five popularity bars. All othe
 
 **Note**: Traffic to public dashboard URLs is ignored for popularity.
 
+## Viewing dashboards on mobile devices
+
+The [Datadog Mobile App][1], available on the [Apple App Store][2] and [Google Play Store][3], enables you to view your dashboards in a mobile-friendly format.
+
+On the Dashboards page, you can view and search all of your dashboards, and filter them using the same template variables you have set up in the Datadog web app. Quickly filter your dashboards using template variable saved views. For more information about template variable saved views, see [Dashboard Saved Views][14]. Click on an individual dashboard to view it.
+
+**Note**: To set up or edit a dashboard, you need to log in to the Datadog web app. For more information, see [Dashboards][4].
+
+{{< img src="dashboards/dashboards-list-ios.png" alt="the Dashboards page on iOS" style="width:100%;">}}
+{{< img src="dashboards/dashboards-list-android.png" alt="the Dashboards page on Android" style="width:100%;">}}
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -221,3 +232,4 @@ An organization's most popular dashboard displays five popularity bars. All othe
 [11]: /dashboards/guide/how-to-use-terraform-to-restrict-dashboard-edit/
 [12]: https://app.datadoghq.com/dashboard/lists
 [13]: /help/
+[14]: /dashboards/template_variables/#saved-views
