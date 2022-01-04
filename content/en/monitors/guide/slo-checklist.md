@@ -74,10 +74,10 @@ _Example: 99% of requests should complete in less than 250 ms over a 30-day wind
 
 ## Implementing your SLIs
 
-1. [Custom metrics][3] (e.g., counters)
-2. [Integration metrics][4] (e.g., load balancer, http requests)
-3. [Datadog APM][5] (e.g., errors, latency on services and resources)
-4. [Datadog Logs][6] (e.g., metrics generated from logs for a count of particular occurence)
+1. [Custom metrics][3] (for example, counters)
+2. [Integration metrics][4] (for example, load balancer, http requests)
+3. [Datadog APM][5] (for example, errors, latency on services and resources)
+4. [Datadog Logs][6] (for example, metrics generated from logs for a count of particular occurrence)
 
 ## Set your target objective and time window
 

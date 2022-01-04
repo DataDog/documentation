@@ -21,7 +21,7 @@ kind: guide
 - **`renotify_interval`** the number of minutes after the last notification before a monitor re-notifies on the current status. It only re-notifies if it's not resolved. Default: **None**.
 - **`renotify_statuses`** the states from which a monitor re-notifies. It can only be set if `renotify_interval` is set. Default: **None**. Without `renotify_states` set, it renotifies from `Alert` and `No Data` states.
 - **`renotify_occurrences`** the number of times a monitor re-notifies. It can only be set if `renotify_interval` is set. Default: **None**, it renotifies without a limit.
-- **`escalation_message`** a message to include with a re-notification. Supports the '@username' notification we allow elsewhere. Not applicable if `renotify_interval` is `None`. Default: **None**.
+- **`escalation_message`** a message to include with a re-notification. Supports the '@username' notification that is allowed elsewhere. Not applicable if `renotify_interval` is `None`. Default: **None**.
 - **`notify_audit`** a Boolean indicating whether tagged users is notified on changes to this monitor. Default: **False**
 - **`locked`** a Boolean indicating whether changes to to this monitor should be restricted to the creator or admins. Default: **False**
 - **`include_tags`** a Boolean indicating whether notifications from this monitor automatically inserts its triggering tags into the title. Default: **True**. Examples:
@@ -54,7 +54,7 @@ Example: `{'critical': 90, 'warning': 80,  'critical_recovery': 70, 'warning_rec
 
 _These options only apply to service checks and are ignored for other monitor types._
 
-- **`thresholds`** a dictionary of thresholds by status. Because service checks can have multiple thresholds, we don't define them directly in the query.
+- **`thresholds`** a dictionary of thresholds by status. Because service checks can have multiple thresholds, they aren't defined directly in the query.
 
 Example: `{'ok': 1, 'critical': 1, 'warning': 1}`
 
@@ -68,7 +68,7 @@ Example: `{'ok': 1, 'critical': 1, 'warning': 1}`
 
 - **`aggregation`** A dictionary of `type`, `metric`, and `groupBy`.
   - `type`: Three types are supported: `count`, `cardinality`, and `avg`.
-  - `metric`:  For `cardinality`, use the name of the facet. For `avg`, use the name of the metric. For `count`, put `count` as metric.
+  - `metric`: For `cardinality`, use the name of the facet. For `avg`, use the name of the metric. For `count`, put `count` as metric.
   - `groupBy`: Name of the facet on which you want to group by.
 
 Example: `{"metric": "count","type": "count","groupBy": "core_service"}`

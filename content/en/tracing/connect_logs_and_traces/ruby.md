@@ -35,7 +35,7 @@ end
 #### Manual injection
 ##### Lograge
 
-After [setting up Lograge in a Rails application][1], manually modify the `custom_options` block in your environment configuration file (e.g. `config/environments/production.rb`) to add the trace IDs.
+After [setting up Lograge in a Rails application][1], manually modify the `custom_options` block in your environment configuration file (for example, `config/environments/production.rb`) to add the trace IDs.
 
 ```ruby
 config.lograge.custom_options = lambda do |event|

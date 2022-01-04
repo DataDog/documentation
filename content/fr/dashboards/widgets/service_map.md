@@ -1,7 +1,7 @@
 ---
 title: Widget Service Map
 kind: documentation
-description: 'Affiche une carte de service avec tous les services qui l''appellent, et tous les services appelés.'
+description: Affiche une carte de service avec tous les services qui l'appellent, et tous les services appelés.
 widget_type: servicemap
 aliases:
   - /fr/graphing/widgets/service_map/
@@ -14,11 +14,11 @@ Ce widget affiche une carte de service avec tous les services qui l'appellent, e
 
 Il n'est pas possible de configurer un intervalle pour le widget Service Map. Ce dernier affiche toujours les services à l'origine d'un appel lors des deux dernières semaines. Les métriques sont calculées en temps réel pour chaque service en temps réel à partir des données de l'heure précédente.
 
-{{< img src="dashboards/widgets/service_map/test_service_map.png" alt="configuration de Service Map" style="width:80%;">}}
+{{< img src="dashboards/widgets/service_map/test_service_map.png" alt="Configuration du widget Service Map" style="width:80%;">}}
 
 ## Configuration
 
-{{< img src="dashboards/widgets/service_map/service_map.png" alt="configuration de Service Map"  style="width:80%;">}}
+{{< img src="dashboards/widgets/service_map/service_map.png" alt="Configuration du widget Service Map" style="width:80%;">}}
 
 ### Configuration
 
@@ -33,7 +33,7 @@ Les services connectés au service mappé sont triés vers l'extérieur à parti
 
 ## API
 
-Ce widget peut être utilisé avec l'**API Dashboards**. Consultez la documentation relative à l'[API Dashboards][4] pour en savoir plus.
+Ce widget peut être utilisé avec l'**API Dashboards**. Consultez la [documentation à ce sujet][4] pour en savoir plus.
 
 Le [schéma JSON][5] utilisé pour le widget Service Map est le suivant :
 

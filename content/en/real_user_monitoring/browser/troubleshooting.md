@@ -20,7 +20,7 @@ If you can't see any RUM data or if data is missing for some users:
 | ----------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Ad blockers prevent the Browser RUM SDK from being downloaded or sending data to Datadog.     | Some ad blockers extend their restrictions to performance and marketing tracking tools. See the [Install the Browser RUM SDK with npm][3] and [forward the collected data through a proxy][4] docs. |
 | Network rules or VPNs prevent the Browser RUM SDK from being downloaded or sending data to Datadog. | Grant access to the endpoints required to download the SDK or to send data. The list of endpoints is available in the [Content Security Policy documentation][5].                                        |
-| Scripts, packages, and clients initialized before the Browser RUM SDK can lead to missed logs, resources, and user actions. For example, initializing ApolloClient before the Browser RUM SDK may result in `graphql` requests not being logged as XHR resources in the RUM Explorer. | Check where the Browser RUM SDK is initialized and consider moving this step earlier in the execution of your application code.                                             |   
+| Scripts, packages, and clients initialized before the Browser RUM SDK can lead to missed logs, resources, and user actions. For example, initializing ApolloClient before the Browser RUM SDK may result in `graphql` requests not being logged as XHR resources in the RUM Explorer. | Check where the Browser RUM SDK is initialized and consider moving this step earlier in the execution of your application code.                                             |
 
 Read the [Content Security Policy guidelines][6] and ensure your website grants access to the Browser RUM SDK CDN and the intake endpoint.
 
@@ -53,6 +53,52 @@ The Browser RUM SDK relies on cookies to store session information and follow a 
 | `dd_cookie_test_*` | Temporary cookie used to test for cookie support. Expires instantly.                                                                                                                                                                                                                                     |
 
 **Note**: The following cookies have been used in the past: `_dd_l`, `_dd_r` and `_dd`. They have since been replaced by `_dd_s` in recent versions of the SDK and had the same purpose.
+
+## Technical limitations
+
+Each event sent by the Browser RUM SDK is built with the following:
+
+- RUM global context
+- Event context (if any)
+- Attributes specific to the event
+
+Example:
+
+```javascript
+window.DD_RUM && window.DD_RUM.addRumGlobalContext('global', {'foo': 'bar'})
+window.DD_RUM && window.DD_RUM.addAction('hello', {'action': 'qux'})
+```
+
+The example code creates the following action event:
+
+```json
+{
+  "type": "action",
+  "context": {
+    "global": {
+      "foo": "bar"
+    },
+    "action": "qux"
+  },
+  "action": {
+    "id": "xxx",
+    "target": {
+      "name": "hello"
+    },
+    "type": "custom"
+  },
+  ...
+}
+```
+
+If an event or a request goes beyond any of the following limitations, it is rejected by the Datadog intake.
+
+| Property                                 | Limitation   |
+| ---------------------------------------- | ------------ |
+| Maximum number of attributes per event   | 256          |
+| Maximum attribute depth per event        | 20           |
+| Maximum event size                       | 256 KB       |
+| Maximum intake payload size              | 5 MB         |
 
 ## Further Reading
 

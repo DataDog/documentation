@@ -1,7 +1,7 @@
 ---
 title: CI Results Explorer
 kind: documentation
-description: Drill down into CI jobs executing Synthetic tests.
+description: Examine CI jobs executing Synthetic tests.
 aliases: 
   - /synthetics/cicd_testing/ci_results_explorer
 further_reading:
@@ -25,7 +25,7 @@ The CI Results Explorer provides visibility into the CI jobs executing your Synt
 
 You can:
 
-* Drill down into each CI job execution to identify and troubleshoot failing test results.
+* Investigate each CI job execution to identify and troubleshoot failing test results.
 * Compare test results executed against various devices and browsers to pinpoint cross browser and device issues.
 * Keep track of the progress of your tests in CI pipelines.
 * Identify flaky tests to fix.

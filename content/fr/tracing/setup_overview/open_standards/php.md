@@ -18,12 +18,19 @@ Lorsque l'[instrumentation automatique][2] est activée, un traceur compatible a
 
 ```php
 <?php
+// Définir le traceur global une seule fois, juste après l'importation de autoload.php par composer.
 $otTracer = new \DDTrace\OpenTracer\Tracer(\DDTrace\GlobalTracer::get());
 \OpenTracing\GlobalTracer::set($otTracer);
-$span = $otTracer->startActiveSpan('web.request')->getSpan();
+
+// À n'importe quel endroit où une span est requise
+$scope = $otTracer->startActiveSpan('web.request');
+$span = $scope->getSpan();
+$span->setTag('service.name', 'service_name');
+$span->setTag('resource.name', 'resource_name');
 $span->setTag('span.type', 'web');
 $span->setTag('http.method', $_SERVER['REQUEST_METHOD']);
 // ...Utiliser OpenTracing comme prévu
+$scope->close();
 ?>
 ```
 

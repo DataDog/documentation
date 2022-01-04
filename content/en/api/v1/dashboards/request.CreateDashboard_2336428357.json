@@ -1,0 +1,50 @@
+{
+  "title": "Example-Create_a_new_dashboard_with_query_table_widget",
+  "description": "",
+  "widgets": [
+    {
+      "layout": {
+        "x": 0,
+        "y": 0,
+        "width": 54,
+        "height": 32
+      },
+      "definition": {
+        "title": "",
+        "title_size": "16",
+        "title_align": "left",
+        "time": {},
+        "type": "query_table",
+        "requests": [
+          {
+            "queries": [
+              {
+                "data_source": "metrics",
+                "name": "query1",
+                "query": "avg:system.cpu.user{*} by {host}",
+                "aggregator": "avg"
+              }
+            ],
+            "formulas": [
+              {
+                "formula": "query1",
+                "limit": {
+                  "count": 500,
+                  "order": "desc"
+                },
+                "conditional_formats": [],
+                "cell_display_mode": "bar"
+              }
+            ],
+            "response_format": "scalar"
+          }
+        ],
+        "has_search_bar": "auto"
+      }
+    }
+  ],
+  "template_variables": [],
+  "layout_type": "free",
+  "is_read_only": false,
+  "notify_list": []
+}

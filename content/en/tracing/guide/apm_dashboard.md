@@ -119,7 +119,7 @@ This guides walks you through adding trace metrics to a dashboard, correlating t
 
     {{< img src="tracing/guide/apm_dashboard/dashboard_10.mp4" alt="dashboard 10" video="true"  style="width:90%;">}}
 
-    Be sure to explore all the metrics available to you and take full advantage of the Datadog 3 pillars of observability. You can easily turn this basic dashboard into a powerful tool that is a one-stop-shop for monitoring and observability in your organization:
+    Be sure to explore all the metrics available to you and take full advantage of the Datadog 3 pillars of observability. You can turn this basic dashboard into a powerful tool that is a one-stop-shop for monitoring and observability in your organization:
 
     {{< img src="tracing/guide/apm_dashboard/dashboard_7.mp4" alt="dashboard 7" video="true"  style="width:90%;">}}
 

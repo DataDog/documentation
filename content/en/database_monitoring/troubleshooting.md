@@ -4,7 +4,7 @@ kind: documentation
 description: Troubleshoot Database Monitoring setup
 
 ---
-{{< site-region region="us3,us5,gov" >}}
+{{< site-region region="us5,gov" >}}
 <div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
 {{< /site-region >}}
 
@@ -221,7 +221,7 @@ If you have data from some queries, but are expecting to see a particular query 
 
 ### Query bind parameters cannot be viewed
 
-At this time, the raw query bind parameters are obfuscated for Query Samples and Explain Plans, and are replaced with a `?` character. In a future release, we will introduce settings to expose the un-obfuscated query bind parameters.
+At this time, the raw query bind parameters are obfuscated for Query Samples and Explain Plans, and are replaced with a `?` character. In a future release, settings to expose the un-obfuscated query bind parameters are planned.
 
 
 ### Query samples are truncated
@@ -231,7 +231,7 @@ Longer queries may not show their full SQL text due to database configuration. S
 {{< tabs >}}
 {{% tab "Postgres" %}}
 
-The Postgres setting `track_activity_query_size` indicates the maximum size of the SQL statement Postgres will store and make visible to the Agent. By default, this value is 1024 bytes. Raising this value to 4096 will capture most queries for most workloads. However, a higher value may be appropriate if your queries are highly complex or use very long arrays.
+The Postgres setting `track_activity_query_size` indicates the maximum size of the SQL statement Postgres stores and makes visible to the Agent. By default, this value is 1024 bytes. Raising this value to 4096 captures most queries for most workloads. However, a higher value may be appropriate if your queries are complex or use long arrays.
 
 For example, the database will truncate a query with an array with many items such as:
 
@@ -278,13 +278,13 @@ Some or all queries may not have plans available. This can be due to unsupported
 
 | Possible cause                         | Solution                                  |
 |----------------------------------------|-------------------------------------------|
-| The Agent is running an unsupported version. | Ensure that the Agent is running version 7.30.0 or greater. We recommend regular updates of the Agent to take advantage of new features, performance improvements, and security updates. |
+| The Agent is running an unsupported version. | Ensure that the Agent is running version 7.32.0 or greater. Datadog recommends regular updates of the Agent to take advantage of new features, performance improvements, and security updates. |
 | The Agent is not able to execute a required function in the `datadog` schema of the database. | The Agent requires the function `datadog.explain_statement(...)` to exist in **all databases** the Agent can collect queries from. Ensure this function was created by the root user according to the [setup instructions][1] and that the `datadog` user has permission to execute it. |
 | Queries are truncated. | See the section on [truncated query samples](#query-samples-are-truncated) for instructions on how to increase the size of sample query text. |
 | The application client used to execute the query is using the Postgres extended query protocol or prepared statements. | Some client applications using the Postgres [extended query protocol][2] do not support the collection of explain plans due to the separation of the parsed query and raw bind parameters. For instance, the Python client [asyncpg][3] and the Go client [pgx][4] use the extended query protocol by default. To work around this limitation, you can configure your database client to use the simple query protocol. For example: set `preferQueryMode = simple` for the [Postgres JDBC Client][5] or set `PreferSimpleProtocol` on the [pgx][4] connection config. |
 | The query is in a database ignored by the Agent instance config `ignore_databases`. | Default databases such as the `postgres` database are ignored in the `ignore_databases` setting. Queries in these databases will not have samples or explain plans. Check the the value of this setting in your instance config and the default values in the [example config file][6]. |
 | The query cannot be explained. | Some queries such as BEGIN, COMMIT, SHOW, USE, and ALTER queries cannot yield a valid explain plan from the database. Only SELECT, UPDATE, INSERT, DELETE, and REPLACE queries have support for explain plans. |
-| The query is relatively infrequent or executes very quickly. | The query may not have been sampled for selection because it does not represent a significant proportion of the database's total execution time. Try [raising the sampling rates][7] to capture the query. |
+| The query is relatively infrequent or executes quickly. | The query may not have been sampled for selection because it does not represent a significant proportion of the database's total execution time. Try [raising the sampling rates][7] to capture the query. |
 
 
 [1]: /database_monitoring/setup_postgres/
@@ -299,11 +299,11 @@ Some or all queries may not have plans available. This can be due to unsupported
 
 | Possible cause                         | Solution                                  |
 |----------------------------------------|-------------------------------------------|
-| The Agent is running an unsupported version. | Ensure that the Agent is running version 7.30.0 or greater. We recommend regular updates of the Agent to take advantage of new features, performance improvements, and security updates. |
+| The Agent is running an unsupported version. | Ensure that the Agent is running version 7.32.0 or greater. Datadog recommends regular updates of the Agent to take advantage of new features, performance improvements, and security updates. |
 | The Agent is not able to execute a required function in this schema of the database. | The Agent requires the function `explain_statement(...)` to exist in **all schemas** the Agent can collect samples from. Ensure this function was created by the root user according to the [setup instructions][1] and that the `datadog` user has permission to execute it. |
 | Queries are truncated. | See the section on [truncated query samples](#query-samples-are-truncated) for instructions on how to increase the size of sample query text. |
 | The query cannot be explained. | Some queries such as BEGIN, COMMIT, SHOW, USE, and ALTER queries cannot yield a valid explain plan from the database. Only SELECT, UPDATE, INSERT, DELETE, and REPLACE queries have support for explain plans. |
-| The query is relatively infrequent or executes very quickly. | The query may not have been sampled for selection because it does not represent a significant proportion of the database's total execution time. Try [raising the sampling rates][2] to capture the query. |
+| The query is relatively infrequent or executes quickly. | The query may not have been sampled for selection because it does not represent a significant proportion of the database's total execution time. Try [raising the sampling rates][2] to capture the query. |
 
 [1]: /database_monitoring/setup_mysql/
 [2]: /database_monitoring/setup_mysql/advanced_configuration/
@@ -337,17 +337,17 @@ See the appropriate version of the [Postgres `contrib` documentation][1] for mor
 
 ### Schema or Database missing on MySQL Query Metrics & Samples
 
-The `schema` tag (also known as "database") is present on MySQL Query Metrics and Samples only when a Default Database is set on the connection that made the query. The Default Database is configured by the application by specifying the "schema" in the database connection parameters, or by executing the [USE Statement][5] on an already existing connection.
+The `schema` tag (also known as "database") is present on MySQL Query Metrics and Samples only when a Default Database is set on the connection that made the query. The Default Database is configured by the application by specifying the "schema" in the database connection parameters, or by executing the [USE Statement][4] on an already existing connection.
 
 If there is no default database configured for a connection, then none of the queries made by that connection have the `schema` tag on them.
 
 ## Need more help?
 
-If you are still experiencing problems, contact [Datadog Support][4] for help.
+If you are still experiencing problems, contact [Datadog Support][5] for help.
 
 
 [1]: /database_monitoring/#getting-started
 [2]: /agent/troubleshooting/
 [3]: /agent/guide/agent-log-files
-[4]: /help/
-[5]: https://dev.mysql.com/doc/refman/8.0/en/use.html
+[4]: https://dev.mysql.com/doc/refman/8.0/en/use.html
+[5]: /help/

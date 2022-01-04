@@ -10,13 +10,13 @@ further_reading:
       text: "Troubleshooting CI"
 ---
 
-{{< site-region region="us5,gov" >}}
+{{< site-region region="gov" >}}
 <div class="alert alert-warning">
 The selected Datadog site ({{< region-param key="dd_site_name" >}}) is not supported.
 </div>
 {{< /site-region >}}
 
-{{< site-region region="us,eu,us3" >}}
+{{< site-region region="us,us3,us5,eu" >}}
 ## Compatibility
 
 Supported languages:
@@ -537,7 +537,7 @@ Additional Git configuration for physical device testing:
 
 ## Manual testing API
 
-If you use XCTests with your Swift projects, the `DatadogSDKTesting` framework automatically instruments them and sends the results to the Datadog backend. If you don't use XCTest, you can instead use the Swift/Objective-C manual testing API, which also reports test results to the backend. 
+If you use XCTests with your Swift projects, the `DatadogSDKTesting` framework automatically instruments them and sends the results to the Datadog backend. If you don't use XCTest, you can instead use the Swift/Objective-C manual testing API, which also reports test results to the backend.
 
 The API is based around three concepts: *test sessions*, *test suites*, and *tests*.
 
@@ -579,7 +579,7 @@ class DDTestSession {
     func end(endTime: Date? = nil)
     // Adds a tag/attribute to the test session. Any number of tags can be added.
     // - Parameters:
-    //   - key: The name of the tag. If a tag with the same name already exists, 
+    //   - key: The name of the tag. If a tag with the same name already exists,
     //     its value will be replaced by the new value.
     //   - value: The value of the tag. Can be a number or a string.
     func setTag(key: String, value: Any)
@@ -598,7 +598,7 @@ public class DDTestSuite : NSObject {
     func end(endTime: Date? = nil)
     // Adds a tag/attribute to the test suite. Any number of tags can be added.
     // - Parameters:
-    //   - key: The name of the tag. If a tag with the same name already exists, 
+    //   - key: The name of the tag. If a tag with the same name already exists,
     //     its value will be replaced by the new value.
     //   - value: The value of the tag. Can be a number or a string.
     func setTag(key: String, value: Any)
@@ -613,7 +613,7 @@ public class DDTestSuite : NSObject {
 public class DDTest : NSObject {
     // Adds a tag/attribute to the test. Any number of tags can be added.
     // - Parameters:
-    //   - key: The name of the tag. If a tag with the same name already exists, 
+    //   - key: The name of the tag. If a tag with the same name already exists,
     //     its value will be replaced by the new value.
     //   - value: The value of the tag. Can be a number or a string.
     func setTag(key: String, value: Any)
@@ -635,7 +635,7 @@ public class DDTest : NSObject {
 // Possible statuses reported by a test:
 enum DDTestStatus {
   // The test passed.
-  case pass 
+  case pass
   //
   //Test test failed.
   case fail
@@ -660,19 +660,19 @@ let test2 = suite1.testStart(name: "Test 2")
 test2.SetErrorInfo(type: "Error Type", message: "Error message", callstack: "Optional callstack")
 test2.end(test: test2, status: .fail)
 suite1.end()
-let suite2 = session.suiteStart(name: "ManualSuite 2") 
+let suite2 = session.suiteStart(name: "ManualSuite 2")
 ..
 ..
-session.end() 
+session.end()
 {{< /code-block >}}
 
 Always call `session.end()` at the end so that all the test info is flushed to Datadog.
 
-[1]: https://app.datadoghq.com/organization-settings/client-tokens
-[2]: /getting_started/site/
 
 {{< /site-region >}}
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+[1]: https://app.datadoghq.com/organization-settings/client-tokens
+[2]: /getting_started/site/

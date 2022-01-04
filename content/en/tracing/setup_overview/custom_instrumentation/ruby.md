@@ -96,8 +96,7 @@ You can also use the `DD_TAGS` environment variable to set tags on all spans for
 
 There are two ways to set an error on a span
 
-- The first is to simply call `span.set_error` and pass in the Exception Object.
-- This will automatically extract the error type, message, and backtrace.
+- The first is to call `span.set_error` and pass in the Exception Object. This automatically extracts the error type, message, and backtrace.
 
 ```ruby
 require 'ddtrace'
@@ -119,7 +118,7 @@ end
 example_method()
 ```
 
-- The second is to use `tracer.trace` which will by default set the error type, message, and backtrace.
+- The second is to use `tracer.trace` which by default sets the error type, message, and backtrace.
 - To configure this behavior you can use the `on_error` option, which is the Handler invoked when a block is provided to `trace`, and the block raises an error.
 - The Proc is provided `span` and `error` as arguments.
 - By default, `on_error` Sets error on the span.
@@ -165,7 +164,7 @@ end
 
 ## Adding spans
 
-If you aren't using supported library instrumentation (see [library compatibility][4]), you may want to to manually instrument your code. Adding tracing to your code is easy using the `Datadog.tracer.trace` method, which you can wrap around any Ruby code:
+If you aren't using supported library instrumentation (see [library compatibility][4]), you can manually instrument your code. Add tracing to your code by using the `Datadog.tracer.trace` method, which you can wrap around any Ruby code:
 
 To trace any Ruby code, you can use the `Datadog.tracer.trace` method:
 
@@ -173,7 +172,7 @@ To trace any Ruby code, you can use the `Datadog.tracer.trace` method:
 Datadog.tracer.trace(name, options) do |span|
   # Wrap this block around the code you want to instrument
   # Additionally, you can modify the span here.
-  # e.g. Change the resource name, set tags, etc...
+  # for example, change the resource name, or set tags
 end
 ```
 
@@ -217,7 +216,7 @@ Extra tags which should be added to the span. <br>
 Handler invoked when a block is provided to trace, and it raises an error. Provided `span` and `error` as arguments. Sets error on the span by default. <br>
 **Default**: `proc { |span, error| span.set_error(error) unless span.nil? }`
 
-It's highly recommended you set both `service` and `resource` at a minimum. Spans without a `service` or `resource` as `nil` will be discarded by the Datadog agent.
+It's recommended you set both `service` and `resource` at a minimum. Spans without a `service` or `resource` as `nil` are discarded by the Datadog agent.
 
 ### Manually creating a new span
 

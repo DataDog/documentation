@@ -1,7 +1,9 @@
 ---
 title: Datadog Data Collection, Resolution, and Retention
-kind: faq
+kind: guide
 disable_sidebar: true
+aliases:
+  - /developers/faq/data-collection-resolution-retention/
 ---
 
 Find below a summary of Datadog data collection, resolution, and retention:
@@ -9,6 +11,7 @@ Find below a summary of Datadog data collection, resolution, and retention:
 | Product category | Source                                         | Collection Methods                                                                             | Collection interval      | Minimum Resolution    | Default Retention                                                                                  |
 |--------------------|----------------------------------------------|----------------------------------------------------------------------------------------------|---------------------|---------------------|--------------------------------------------------------------------------------------------|
 |Alerting            |Service Level Objectives                      |Datadog monitors, Datadog Synthetic monitoring, or metrics (infrastructure, APM trace, custom)|Data source-dependent|Data source-dependent|7, 30, or 90 days (chosen by user in SLO configuration)                                     |
+|APM                 |Error Tracking                                |APM spans (unsampled)                                                                         |2 minutes           |60 seconds           |15 days |
 |APM                 |Indexed spans (unsampled)                     |Datadog Agent + tracing library                                                               |10 seconds           |1 millisecond        |Plan                                                                                        |
 |APM                 |Profiles                                      |Datadog Agent + tracing library                                                               |60 seconds           |60 seconds           |7 days                                                                                      |
 |APM                 |Profile metrics                               |Datadog Agent + tracing library                                                               |60 seconds           |60 seconds           |1 month                                                                                     |
@@ -33,6 +36,7 @@ Find below a summary of Datadog data collection, resolution, and retention:
 |Infrastructure      |Network Performance Monitoring                |System Probe                                                                                  |5 minutes ([default][2])  |1 min                |7 days                                                                                      |
 |Infrastructure      |System metrics                                |Datadog Agent                                                                                 |15 seconds           |1 second             |15 months                                                                                   |
 |Logs                |Logs                                          |Datadog Agent + Logs, 3rd party log collectors, or API                                        |Real time            |1 millisecond        |Plan                                                                                        |
+|Real User Monitoring|Error Tracking                                |RUM SDK                                                                                       |2 minutes         |60 seconds           |15 days |
 |Real User Monitoring|Real User Monitoring                          |RUM SDK                                                                                       |Real time            |1 millisecond        |30 days for session, view, action and error events <br/>15 days for resource and long task events|
 |Real User Monitoring|Session Replays                               |RUM SDK                                                                                       |Real time            |1 millisecond        |30 days |
 |Security Monitoring |Security Signals                              |Datadog Security Monitoring                                                                   |Real time            |1 millisecond        |15 months                                                                                   |

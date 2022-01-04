@@ -10,7 +10,7 @@ Network Performance Monitoring (NPM) allows you to track all of the traffic patt
 
 ## Datadog’s story
 
-When Datadog migrated to Kubernetes, migrating stateless services was (expectedly) much faster and easier than migrating stateful services (e.g. Kafka), stateless services were first. The outcome was a terabytes of new cross-AZ traffic between the stateful services (all in one AZ) and stateless services (spread across the other AZs), which led the cloud bill to increase drastically and unexpectedly. Datadog used its own NPM product to identify the root cause: a suboptimal migration strategy and consequently, inefficient and costly network communication. Sharding stateful services ultimately led to significant reductions in our cloud provider traffic costs.
+When Datadog migrated to Kubernetes, migrating stateless services was (expectedly) much faster and easier than migrating stateful services (for example, Kafka), stateless services were first. The outcome was a terabytes of new cross-AZ traffic between the stateful services (all in one AZ) and stateless services (spread across the other AZs), which led the cloud bill to increase drastically and unexpectedly. Datadog used its own NPM product to identify the root cause: a suboptimal migration strategy and consequently, inefficient and costly network communication. Sharding stateful services ultimately led to significant reductions in cloud provider traffic costs.
 
 ## Steps for managing traffic costs 
 
@@ -55,10 +55,10 @@ You can edit your preferences using the **Filter traffic** button. In larger env
 
 ## Graphing traffic costs 
 
-Datadog recommends tracking traffic volume metrics over time in dashboards and notebooks. You can graph traffic between any two endpoints using the same queries you would make on the Network page. Create a **Timeseries Widget** and select the **Network Traffic** source from the dropdown menu.  
+Datadog recommends tracking traffic volume metrics over time in dashboards and notebooks. You can graph traffic between any two endpoints using the same queries you would make on the Network page. To do this, create a **Timeseries Widget** and select the **Network Traffic** source from the dropdown menu.  
 
 {{< img src="network_performance_monitoring/guide/manage_traffic_costs_with_npm/timeseries.png" alt="Create a Timeseries">}}
 
-Dashboards and Notebooks make it easy for you to share any issues with your teammates.
+Then share these results and any issues with your teammates using Dashboards and Notebooks. 
 
 {{< img src="network_performance_monitoring/guide/manage_traffic_costs_with_npm/network-traffic.png" alt="View your network traffic">}}

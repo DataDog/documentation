@@ -35,7 +35,7 @@ The following code samples outline how to pass trace context in outgoing events 
 {{< tabs >}}
 {{% tab "Python" %}}
 
-In Python, you can use the `get_dd_trace_context` helper function to easily pass tracing context to outgoing events in a Lambda functions:
+In Python, you can use the `get_dd_trace_context` helper function to pass tracing context to outgoing events in a Lambda functions:
 
 ```py
 import json
@@ -81,7 +81,7 @@ def handler(event, context):
 {{% /tab %}}
 {{% tab "Node.js" %}}
 
-In Node, you can use the `getTraceHeaders` helper function to easily pass tracing context to outgoing events in a Lambda function:
+In Node, you can use the `getTraceHeaders` helper function to pass tracing context to outgoing events in a Lambda function:
 
 ```js
 const AWS = require('aws-sdk');
@@ -145,7 +145,7 @@ exports.handler = async event => {
 
 ## Extracting trace context
 
-To extract the above trace context from the consumer Lambda function, you need to define an extractor function that runs captures trace context before the execution of your Lambda function handler. To do this, configure the `DD_TRACE_EXTRACTOR` environment variable to point to the location of your extractor function (format is `<FILE NAME>.<FUNCTION NAME>`, for example, `extractors.sns` if the `sns` extract method is in the `extractors.js` file). We recommend you place your extractor methods all in one file, as extractors can be re-used across multiple Lambda functions. These extractors are completely customizable to fit any use case, and we included some sample extractors for common use cases in the next section.
+To extract the above trace context from the consumer Lambda function, you need to define an extractor function that runs captures trace context before the execution of your Lambda function handler. To do this, configure the `DD_TRACE_EXTRACTOR` environment variable to point to the location of your extractor function (format is `<FILE NAME>.<FUNCTION NAME>`, for example, `extractors.sns` if the `sns` extract method is in the `extractors.js` file). Datadog recommends you place your extractor methods all in one file, as extractors can be re-used across multiple Lambda functions. These extractors are completely customizable to fit any use case, and some sample extractors for common use cases are included in the next section.
 
 ### Sample extractors
 
