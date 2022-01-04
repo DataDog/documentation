@@ -71,9 +71,9 @@ The Datadog extension for Azure App Service provides additional monitoring capab
 
 ### Installation
 
-1. Configure the Azure integration to monitor your web app or function. Verify it is configured correctly by ensuring that you see the corresponding `azure.app_service.count` or `azure.functions.count` metric in Datadog. **Note**: This step is critical for metric/trace correlation, functional trace panel views, and avoiding various broken user experiences on the Datadog site.
+1. Configure the [Azure integration][1] to monitor your web app or function. Verify it is configured correctly by ensuring that you see the corresponding `azure.app_service.count` or `azure.functions.count` metric in Datadog. **Note**: This step is critical for metric/trace correlation, functional trace panel views, and avoiding various broken user experiences on the Datadog site.
 
-2. Open the [Azure Portal][3] and navigate to the dashboard for the Azure App Service instance you wish to instrument with Datadog.
+2. Open the [Azure Portal][3] and navigate to the dashboard for the Azure Web App or Function App you wish to instrument with Datadog.
 
 3. Go to the Application settings tab of the Configuration page.
     {{< img src="infrastructure/serverless/azure_app_services/config.png" alt="configuration page" >}}
@@ -137,16 +137,16 @@ DogStatsd.Increment("sample.startup");
 Learn more about [custom metrics][10].
 
 
-[1]: https://docs.microsoft.com/en-us/azure/cloud-shell/overview
-[2]: https://docs.microsoft.com/en-us/azure/app-service/deploy-configure-credentials
+[1]: /integrations/azure
+[2]: /tracing/setup/dotnet/
 [3]: https://portal.azure.com/
-[4]: https://docs.microsoft.com/en-us/azure/media-services/latest/setup-azure-subscription-how-to
-[5]: https://app.datadoghq.com/organization-settings/api-keys
-[6]: /getting_started/site/
-[7]: https://docs.microsoft.com/en-us/cli/azure/install-azure-cli
-[8]: https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/overview
-[9]: https://github.com/DataDog/datadog-aas-extension/tree/master/ARM
-[10]: /integrations/azure
+[4]: https://app.datadoghq.com/organization-settings/api-keys
+[5]: /tracing/setup_overview/setup/dotnet-framework/#additional-optional-configuration
+[6]: /logs/log_collection/csharp/?tab=serilog#agentless-logging
+[7]: /developers/dogstatsd
+[8]: https://www.nuget.org/packages/DogStatsD-CSharp-Client
+[9]: /developers/dogstatsd/?tab=net#code
+[10]: /metrics/
 {{% /tab %}}
 {{% tab "Java" %}}
 ### Requirements
@@ -162,9 +162,9 @@ Learn more about [custom metrics][10].
 
 ### Installation
 
-1. Configure the Azure integration to monitor your web app or function. Verify it is configured correctly by ensuring that you see the corresponding `azure.app_service.count` or `azure.functions.count` metric in Datadog. **Note**: This step is critical for metric/trace correlation, functional trace panel views, and avoiding various broken user experiences on the Datadog site.
+1. Configure the [Azure integration][1] to monitor your web app or function. Verify it is configured correctly by ensuring that you see the corresponding `azure.app_service.count` or `azure.functions.count` metric in Datadog. **Note**: This step is critical for metric/trace correlation, functional trace panel views, and avoiding various broken user experiences on the Datadog site.
 
-2. Open the [Azure Portal][3] and navigate to the dashboard for the Azure App Service instance you wish to instrument with Datadog.
+2. Open the [Azure Portal][3] and navigate to the dashboard for the Azure Web App you wish to instrument with Datadog.
 
 3. Go to the Application settings tab of the Configuration page.
     {{< img src="infrastructure/serverless/azure_app_services/config.png" alt="configuration page" >}}
@@ -219,16 +219,16 @@ client.Increment("sample.startup");
 
 Learn more about [custom metrics][10].
 
-[1]: https://docs.microsoft.com/en-us/azure/cloud-shell/overview
-[2]: https://docs.microsoft.com/en-us/azure/app-service/deploy-configure-credentials
+[1]: /integrations/azure
+[2]: /tracing/setup/dotnet/
 [3]: https://portal.azure.com/
-[4]: https://docs.microsoft.com/en-us/azure/media-services/latest/setup-azure-subscription-how-to
-[5]: https://app.datadoghq.com/organization-settings/api-keys
-[6]: /logs/log_collection/java/?tab=log4j#agentless-logging
-[7]: https://docs.microsoft.com/en-us/cli/azure/install-azure-cli
+[4]: https://app.datadoghq.com/organization-settings/api-keys
+[5]: /tracing/setup_overview/setup/dotnet-framework/#additional-optional-configuration
+[6]: /logs/log_collection/csharp/?tab=serilog#agentless-logging
+[7]: /developers/dogstatsd
 [8]: https://search.maven.org/artifact/com.datadoghq/java-dogstatsd-client
-[9]: https://github.com/DataDog/datadog-aas-extension/tree/master/ARM
-[10]: /integrations/azure
+[9]: /developers/dogstatsd/?tab=java#code
+[10]: /metrics/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -239,14 +239,14 @@ Datadog provides scripts to update or install the Azure App Service Extension us
 ### Prerequisites
 
 - The [Azure CLI][8] or [Azure Cloud Shell][9].
-- Azure App Service [user-scope credentials][10]. If you do not already have credentials, go to your [Azure portal][11] and access the App Service instance (Web App or Function App). Navigate to **Deployment** > **Deployment Center** to create or retrieve your user-scope credentials.
+- Azure App Service [user-scope credentials][10]. If you do not already have credentials, go to your [Azure portal][11] and access your Web App or Function App. Navigate to **Deployment** > **Deployment Center** to create or retrieve your user-scope credentials.
 
 ### Installing the extension for the first time {#powershell-first-time}
 
 {{< tabs >}}
 {{% tab ".NET" %}}
 
-The install script adds the latest version of the extension to an Azure Web App or Azure Function App. This occurs on a per-instance basis, rather than at a resource group level.
+The install script adds the latest version of the extension to an Azure Web App or Azure Function App. This occurs on a per-app basis, rather than at a resource group level.
 
 1. Open the Azure CLI or Azure Cloud Shell.
 2. Download the installation script using the following command:
@@ -279,7 +279,7 @@ Also, set `DATADOG_SITE` to your [Datadog site][3]. `DATADOG_SITE` defaults to `
 {{% /tab %}}
 {{% tab "Java" %}}
 
-The install script adds the latest version of the extension to an Azure Web App. This occurs on a per-instance basis, rather than at a resource group level.
+The install script adds the latest version of the extension to an Azure Web App. This occurs on a per-app basis, rather than at a resource group level.
 
 1. Open the Azure CLI or Azure Cloud Shell.
 2. Download the installation script using the following command:
@@ -317,7 +317,7 @@ Also, set `DATADOG_SITE` to your [Datadog site][3]. `DATADOG_SITE` defaults to `
 {{< tabs >}}
 {{% tab ".NET" %}}
 
-The update script applies to an entire resource group. This script updates every instance (Web App or Function App) that has the extension installed. App Service instances that do not have the Datadog extension installed are not affected.
+The update script applies to an entire resource group. This script updates every Web App or Function App that has the extension installed. App Service apps that do not have the Datadog extension installed are not affected.
 
 1. Open the Azure CLI or Azure Cloud Shell.
 2. Download the installation script using the following command:
@@ -335,7 +335,7 @@ The update script applies to an entire resource group. This script updates every
 {{% /tab %}}
 {{% tab "Java" %}}
 
-The update script applies to an entire resource group. This script updates every instance (for example, Web App) that has the extension installed. App Service instances that do not have the Datadog extension installed are not affected.
+The update script applies to an entire resource group. This script updates every Web App that has the extension installed. App Service apps that do not have the Datadog extension installed are not affected.
 
 1. Open the Azure CLI or Azure Cloud Shell.
 2. Download the installation script using the following command:
