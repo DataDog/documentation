@@ -2676,16 +2676,21 @@ main:
     parent: rum_android
     identifier: rum_android_advanced
     weight: 202
-  - name: Troubleshooting
-    url: real_user_monitoring/android/troubleshooting/
+  - name: Mobile Vitals
+    url: real_user_monitoring/android/mobile_vitals/
     parent: rum_android
-    identifier: rum_troubleshooting_android
+    identifier: rum_android_mobile_vitals
     weight: 203
   - name: Integrated Libraries
     url: real_user_monitoring/android/integrated_libraries/
     parent: rum_android
     identifier: rum_android_libraries
     weight: 204
+  - name: Troubleshooting
+    url: real_user_monitoring/android/troubleshooting/
+    parent: rum_android
+    identifier: rum_troubleshooting_android
+    weight: 205
   - name: iOS Monitoring
     url: real_user_monitoring/ios/
     parent: rum
