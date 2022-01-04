@@ -212,8 +212,7 @@ On the Dashboards page, you can view and search all of your dashboards, and filt
 
 **Note**: To set up or edit a dashboard, you need to log in to the Datadog web app. For more information, see [Dashboards][4].
 
-{{< img src="dashboards/dashboards-list-ios.png" alt="the Dashboards page on iOS" style="width:100%;">}}
-{{< img src="dashboards/dashboards-list-android.png" alt="the Dashboards page on Android" style="width:100%;">}}
+{{< img src="dashboards/dashboards-list-mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Dashboards on iOS and Android">}}
 
 ## Further Reading
 
