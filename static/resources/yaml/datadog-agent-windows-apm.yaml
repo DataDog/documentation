@@ -244,7 +244,7 @@ spec:
         - hostPath:
             path: \\.\pipe\docker_engine
           name: runtimesocket
-        # if the CRI is not provided, try to mount the default containerd pipe.
+        # If the CRI is not provided, try to mount the default containerd pipe.
         # By default, "datadog.dockerOrCriSocketPath" mounts the Docker pipe.
         # So with this additional hostPath, by default, both are mounted.
         - hostPath:
