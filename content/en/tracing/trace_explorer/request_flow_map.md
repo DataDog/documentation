@@ -2,6 +2,8 @@
 title: Request Flow Map
 kind: documentation
 description: "Trace Search and Analytics"
+aliases:
+ - /tracing/trace_search_and_analytics/request_flow_map
 further_reading:
     - link: 'https://www.datadoghq.com/blog/apm-request-flow-map-datadog'
       tag: 'Blog'
