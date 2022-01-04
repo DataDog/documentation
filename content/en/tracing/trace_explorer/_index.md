@@ -110,29 +110,36 @@ You can also filter on attributes that are not defined as facets. For example, t
 - Filter on all spans with a `cart.value` attribute by typing "cart.value" in the search query bar:
 {{< img src="tracing/live_search/filter-by-attribute2.mp4" alt="Live Search filter by attribute" video="true" >}}
 
-## Trace Search with 15 day retention
+## Indexed spans Search with 15 day retention
 
 {{< img src="tracing/live_search_and_analytics/tracing_without_limits_lifecycle-4.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace Journey" >}}
 
-You can search retained traces in the same way as you do a Live Search. To switch from searching live to retained data, change the time selector to any period of time greater than 15 minutes.
-
-All spans that are indexed by retention filters are accessible from search. These spans are kept by Datadog for 15 days after being indexed by a retention filter.
+You can search retained traces in the same way as you do a Live Search. To switch from searching live to retained data, change the time selector to any period of time greater than 15 minutes. All spans that are indexed by retention filters are accessible from search. These spans are kept by Datadog for 15 days after being indexed by a retention filter.
 
 {{< img src="tracing/live_search/searching-retained-traces.mp4" alt="Searching retained traces" video="true" >}}
 
-For example, if you filter by a tag that appears only on spans that are not indexed by any retention filter, your search will return no results, unlike when using Live Search.
+{{< tabs >}}
+{{% tab "List view" %}}
 
-You can customize what spans are retained and at what retention rates. By default, [Datadog Intelligent Retention][4] will be applied. To learn more about the default span retention filter and how to create your own additional filters, see the [Retention Filters][3] documentation. Go to the [Retention Filters][9] page within the Datadog app to create or modify your own filters.
+All spans indexed by custom retention filters **and** the intelligent retention filter are available to be searched in the List view.
+However, if you filter by a tag that appears only on spans that are not indexed by any retention filter, your search will return no results, unlike when using [Live Search](#live-search-for-15-minutes).
 
-## Trace Analytics with 15 day retention
+{{% /tab %}}
+{{% tab "Timeseries View" %}}
 
-{{< img src="tracing/live_search_and_analytics/tracing_without_limits_lifecycle-4.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace Journey" >}}
+All spans indexed by custom retention filters (**not** the intelligent retention filter) are available to be searched when using trace analytics.
 
-Retained Analytics is available from the same page as Live Analytics.  To switch from using Live data to retained data to perform analytics, change the time selector to any period of time greater than 15 minutes. After this selection, the data will no longer be based on a live feed but the fixed time range selected.
+From the timeseries view, export your query to a [dashboard][1], a [monitor][2] or a [notebook][3] to investigate further or to alert automatically when an aggregate number of spans crosses a specific threshold.
 
-All spans indexed by _custom_ retention filters (not the intelligent retention filter) are available to be searched when using trace analytics. These spans are kept by Datadog for 15 days after being indexed by a retention filter.
+[1]: /dashboards/widgets/timeseries/
+[2]: /monitors/create/types/apm/?tab=analytics
+[3]: /notebooks
+{{% /tab %}}
+{{< /tabs >}}
 
-You can customize what spans are retained and at what retention rates. By default, [Datadog Intelligent Retention][4] will be applied which automatically retains traces with error and latency diversity as well as low-throughput resources. To learn more about the default span retention filter and how to create your own additional filters, see the [Retention Filters][3] documentation. Go to the [Retention Filters][9] page within the Datadog app to create or modify your own filters.
+### Retention configuration
+
+You can customize what spans are retained and at what retention rates. By default, [Datadog Intelligent Retention Filter][4] will be applied which automatically retains traces with error and latency diversity as well as low-throughput resources. To learn more about the default intelligent retention filter and how to create your own additional filters, see the [Retention Filters][3] documentation. Navigate to the [Retention Filters][9] page within the Datadog app to create or modify your own filters.
 
 [1]: https://app.datadoghq.com/apm/traces
 [2]: /tracing/trace_retention_and_ingestion/#ingestion-controls
