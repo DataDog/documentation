@@ -73,7 +73,7 @@ The Datadog extension for Azure App Service provides additional monitoring capab
 
 1. Configure the [Azure integration][1] to monitor your web app or function. Verify it is configured correctly by ensuring that you see the corresponding `azure.app_service.count` or `azure.functions.count` metric in Datadog. **Note**: This step is critical for metric/trace correlation, functional trace panel views, and avoiding various broken user experiences on the Datadog site.
 
-2. Open the [Azure Portal][3] and navigate to the dashboard for the Azure Web App or Function App you wish to instrument with Datadog.
+2. Open the [Azure Portal][3] and navigate to the dashboard for the Azure app you wish to instrument with Datadog.
 
 3. Go to the Application settings tab of the Configuration page.
     {{< img src="infrastructure/serverless/azure_app_services/config.png" alt="configuration page" >}}
