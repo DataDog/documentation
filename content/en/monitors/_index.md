@@ -17,9 +17,13 @@ further_reading:
       text: "Datadog Monitors API"
 ---
 
+## Overview
+
 Monitoring all of your infrastructure in one place wouldn't be complete without the ability to know when critical changes are occurring. Datadog gives you the ability to create monitors that actively check metrics, integration availability, network endpoints, and more.
 
 Configure monitors, notify your teams, and manage alerts at a glance on the Alerting platform.
+
+**Note**: View and search for Monitors on your mobile device with the [Datadog Mobile App][5], available on the [Apple App Store][6] and [Google Play Store][7].
 
 ## Create monitors
 
@@ -39,6 +43,12 @@ Configure monitors, notify your teams, and manage alerts at a glance on the Aler
 
 [Manage Monitors][4]: Edit, clone, delete, mute, and resolve monitors all in the same place. Focus on high priority alerts by using advanced faceted search. Explore monitor details and alerts over time in the Monitor Status page.
 
+## View and search for monitors on mobile devices
+
+[Mobile-Friendly Monitors on iOS and Android][8]: View, mute, and unmute monitors on any iOS or Android device with the [Datadog Mobile App][5], available on the [Apple App Store][6] and [Google Play Store][7]. Write queries in the search bar to filter monitors in real-time. Use [Monitor Saved Views][9] to access a collection of monitors in a few taps on mobile.
+
+{{< img src="monitors/monitors_mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Monitors on Mobile App">}}
+
 ## Other sections
 
 {{< whatsnext desc=" ">}}
@@ -55,3 +65,8 @@ Configure monitors, notify your teams, and manage alerts at a glance on the Aler
 [2]: /monitors/notify
 [3]: /monitors/notify/downtimes
 [4]: /monitors/manage
+[5]: /mobile
+[6]: https://apps.apple.com/app/datadog/id1391380318
+[7]: https://play.google.com/store/apps/details?id=com.datadog.app
+[8]: /mobile/?tab=ios#monitors
+[9]: /monitors/manage/search/#saved-view
