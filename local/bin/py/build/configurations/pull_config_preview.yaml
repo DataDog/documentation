@@ -347,13 +347,31 @@
     - action: pull-and-push-file
       branch: master
       globs:
-      - 'docs/troubleshooting_android.md'
+      - 'docs/rum_mobile_vitals.md'
       options:
         dest_path: '/real_user_monitoring/android/'
-        file_name: 'troubleshooting.md'
+        file_name: 'mobile_vitals.md'
         front_matters:
-          dependencies: ["https://github.com/DataDog/dd-sdk-android/blob/master/docs/troubleshooting_android.md"]
-          title: Troubleshooting
+          dependencies: ["https://github.com/DataDog/dd-sdk-android/blob/master/docs/rum_mobile_vitals.md"]
+          title: Mobile Vitals
+          kind: documentation
+          further_reading:
+            - link: "https://github.com/DataDog/dd-sdk-android"
+              tag: "Github"
+              text: "dd-sdk-android Source code"
+            - link: "https://www.datadoghq.com/blog/monitor-mobile-vitals-datadog/"
+              tag: "Blog"
+              text: "Monitor Mobile Vitals in Datadog"
+    - action: pull-and-push-file
+      branch: master
+      globs:
+      - 'docs/integrated_libraries_android.md'
+      options:
+        dest_path: '/real_user_monitoring/android/'
+        file_name: 'integrated_libraries.md'
+        front_matters:
+          dependencies: ["https://github.com/DataDog/dd-sdk-android/blob/master/docs/integrated_libraries_android.md"]
+          title: Android Integrated Libraries
           kind: documentation
           further_reading:
             - link: "https://github.com/DataDog/dd-sdk-android"
@@ -365,13 +383,13 @@
     - action: pull-and-push-file
       branch: master
       globs:
-      - 'docs/integrated_libraries_android.md'
+      - 'docs/troubleshooting_android.md'
       options:
         dest_path: '/real_user_monitoring/android/'
-        file_name: 'integrated_libraries.md'
+        file_name: 'troubleshooting.md'
         front_matters:
-          dependencies: ["https://github.com/DataDog/dd-sdk-android/blob/master/docs/integrated_libraries_android.md"]
-          title: Android Integrated Libraries
+          dependencies: ["https://github.com/DataDog/dd-sdk-android/blob/master/docs/troubleshooting_android.md"]
+          title: Troubleshooting
           kind: documentation
           further_reading:
             - link: "https://github.com/DataDog/dd-sdk-android"
