@@ -1,12 +1,12 @@
 ---
 title: Synthetic Testing Tunnel
 kind: documentation
-description: Local and CI/CD testing with Datadog Synthetic testing tunnel.
+description: Local and remote CI/CD testing with Datadog's Synthetic testing tunnel.
 further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-synthetic-ci-cd-testing/"
   tag: "Blog"
   text: "Incorporate Datadog Synthetic tests into your CI/CD pipeline"
-- link: "https://learn.datadoghq.com/course/view.php?id=37"
+- link: "https://learn.datadoghq.com/enrol/index.php?id=37"
   tag: "Learning Center"
   text: "Learn how to run Synthetic tests in CI/CD pipelines"
 - link: "https://www.datadoghq.com/blog/internal-application-testing-with-datadog/"
