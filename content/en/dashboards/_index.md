@@ -216,7 +216,7 @@ On the Dashboards page, you can view and search all of your dashboards, and filt
 
 ## Creating mobile home screen dashboards
 
-The [Datadog Mobile App][1], available on the [Apple App Store][2] and [Google Play Store][3], also comes equipped with mobile home screen widgets for monitoring service health and infrastructure without opening the mobile app.
+The [Datadog Mobile App][1], available on the [Apple App Store][2] and [Google Play Store][3], also comes equipped with mobile home screen widgets. These widgets enable you to monitor service health and infrastructure without having to open the mobile app.
 
 You can add SLOs, Monitors, and Open Incidents widgets to your mobile home screen alongside other development and collaboration tools to optimize your triage and incident management workflows.
 
