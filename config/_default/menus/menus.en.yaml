@@ -1757,22 +1757,22 @@ main:
     parent: tracing_setup_overview
     identifier: tracing_configure_data_security
     weight: 107
-  - name: Trace Search and Analytics
-    url: tracing/trace_search_and_analytics/
+  - name: Trace Explorer
+    url: tracing/trace_explorer/
     parent: tracing
-    identifier: trace_search_and_analytics
+    identifier: trace_explorer
     weight: 4
   - name: Query Syntax
-    url: tracing/trace_search_and_analytics/query_syntax/
-    parent: trace_search_and_analytics
+    url: tracing/trace_explorer/query_syntax/
+    parent: trace_explorer
     weight: 403
-  - name: Monitoring Analytics
-    url: monitors/monitor_types/apm/?tab=appanalytics
-    parent: trace_search_and_analytics
-    weight: 404
   - name: Request Flow Map
-    url: tracing/trace_search_and_analytics/request_flow_map/
-    parent: trace_search_and_analytics
+    url: tracing/trace_explorer/request_flow_map/
+    parent: trace_explorer
+    weight: 404
+  - name: Monitoring Analytics
+    url: monitors/create/types/apm/
+    parent: trace_explorer
     weight: 405
   - name: Trace Retention and Ingestion
     url: tracing/trace_retention_and_ingestion/
