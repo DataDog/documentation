@@ -82,7 +82,7 @@ Run the `namei` command to obtain more information about the file permissions:
  drwxr-xr-x /
  drwxr-xr-x var
  drwxrwxr-x log
- drw-r--r-- application
+ drwxr--r-- application
  -rw-r----- error.log
 ```
 
