@@ -1785,6 +1785,7 @@ components:
             description: A day of the week, formatted as `Mon`, `Tue`, `Wed`, `Thu`,
               `Fri`, `Sat` or `Sun`.
             type: string
+          nullable: true
           type: array
       type: object
     EmbeddableGraph:
