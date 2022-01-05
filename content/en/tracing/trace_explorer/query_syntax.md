@@ -268,7 +268,7 @@ Visualize the top values from a facet according to a chosen [measure][9] (the fi
 * When there are multiple measures, the top or bottom list is determined according to the first measure.
 * The subtotal may differ from the actual sum of values in a group, since only a subset (top or bottom) is displayed. Events with a null or empty value for this dimension are not displayed as a sub-group.
 
-**Note**: A table visualisation used for one single measure and one single dimension is the same as a toplist, just with a different display.
+**Note**: A table visualization used for one single measure and one single dimension is the same as a toplist, just with a different display.
 
 The following Table Log Analytics shows the evolution of the **top Status Codes** according to their **Throughput**, along with the number of unique **Client IPs**, and over the last 15 minutes:
 

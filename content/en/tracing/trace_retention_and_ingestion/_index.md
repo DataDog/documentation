@@ -70,7 +70,7 @@ If there are specific tags, facets, or groups of traces that you want to investi
 
 {{< img src="tracing/trace_indexing_and_ingestion/IndexFilter2.mp4" style="width:100%;" alt="Span Indexing" video=true >}}
 
-To customize what spans are indexed and retained for 15 days, you can create, modify, and disable additional filters based on tags, and set a percentage of spans matching each filter to be retained. Any span that is retained has its corresponding trace saved as well, and when it is viewed, the complete trace is available. In order to be searched by tag in [Search and Analytics][5], however, the span that directly contains the searched-upon tag must have been indexed by a retention filter.
+To customize what spans are indexed and retained for 15 days, you can create, modify, and disable additional filters based on tags, and set a percentage of spans matching each filter to be retained. Any span that is retained has its corresponding trace saved as well, and when it is viewed, the complete trace is available. In order to be searched by tag in [Explorer][5], however, the span that directly contains the searched-upon tag must have been indexed by a retention filter.
 
 1. Name your filter.
 2. Set the tags you would like to index spans that match **all** of.
@@ -187,7 +187,7 @@ If you are seeing ingestion rates below 100% within Datadog and would like to se
 
 ## App Analytics to Tracing Without Limits
 
-Before October 20, 2020, Datadog offered App Analytics to index spans for performing analytics. While this is no longer the recommended setup configuration and is not needed to use [Trace Search and Analytics][10], the legacy instructions are available within the [App Analytics][11] setup page.
+Before October 20, 2020, Datadog offered App Analytics to index spans for performing analytics. While this is no longer the recommended setup configuration and is not needed to use [Trace Explorer][10], the legacy instructions are available within the [App Analytics][11] setup page.
 
 All existing App Analytics filters have been automatically transitioned to Retention Filters. You can continue to use the unchanged filters or modify them as needed. Transitioned filters are marked with an *i* representing Legacy App Analytics Filters.
 
@@ -199,11 +199,11 @@ All existing App Analytics filters have been automatically transitioned to Reten
 [2]: https://app.datadoghq.com/apm/traces/retention-filters
 [3]: https://app.datadoghq.com/dash/integration/30337/app-analytics-usage
 [4]: /tracing/visualization/#service-entry-span
-[5]: /tracing/trace_search_and_analytics/#historical-search-mode
+[5]: /tracing/trace_explorer/#historical-search-mode
 [6]: https://app.datadoghq.com/apm/traces/ingestion-control
 [7]: /account_management/billing/apm_distributed_tracing/
 [8]: /help/
 [9]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml#L736-L741
-[10]: /tracing/trace_search_and_analytics
+[10]: /tracing/trace_explorer
 [11]: /tracing/legacy_app_analytics/
 [12]: https://app.datadoghq.com/apm/settings
