@@ -32,7 +32,7 @@ You can:
 
 ## Explore test batches
 
-The CI Results Explorer displays batches of tests run by the [Synthetics and CI/CD integration][1]. Each batch corresponds to a call to the Datadog API (through the NPM package or directly through the API endpoint) and triggers one or several test executions. 
+The CI Results Explorer displays batches of tests run by [Synthetics and your CI/CD provider][1]. Every batch corresponds with a call to the Datadog API (through one of your [CI/CD Integrations][1], the [datadog-ci][2] NPM package, or directly through the API endpoint) and triggers one or several test executions. 
 
 1. Click on a batch to open a side panel containing batch CI metadata and batch test results. 
 2. Explore the test executions performed as part of the batch and pinpoint test failures. 
@@ -86,11 +86,12 @@ The panel on the left side of the page lists several facets you can use to searc
 
 ### Create your query
 
-To query the CI Results Explorer data, use the [same query syntax][2] as you do on the **Tests** page.
+To query the CI Results Explorer data, use the [same query syntax][3] as you do on the **Tests** page.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /synthetics/cicd_integrations
-[2]: /synthetics/search/
+[2]: https://www.npmjs.com/package/@datadog/datadog-ci
+[3]: /synthetics/search/

@@ -40,15 +40,25 @@ To get started, see [Integrations](#integrations) and [use the API](#use-the-api
 ## Integrations
 
 {{< whatsnext desc="With Synthetics and CI/CD, you can run Synthetic tests in the CI platform provider of your choice:" >}}
-    {{< nextlink href="synthetics/cicd_integrations/jenkins" >}}Jenkins{{< /nextlink >}}
     {{< nextlink href="synthetics/cicd_integrations/github_actions" >}}GitHub Actions{{< /nextlink >}}
+    {{< nextlink href="synthetics/cicd_integrations/jenkins" >}}Jenkins{{< /nextlink >}}
 {{< /whatsnext >}}
+
+## Use the CLI
+
+The [`@datadog/datadog-ci` package][1] allows you to run Synthetics tests directly within your CI/CD pipeline.
+
+To use the [`@datadog/datadog-ci` NPM package][2], see [Configuration][3].
+
+You can also trigger tests by searching with tags. For example: `"ci": "datadog-ci synthetics run-tests --config fileconfig.json -s 'tag:staging'"`.
+
+**Note:** This command works as an argument. Do not use this in your configuration files.
 
 ## Use the API
 
 The Synthetics API endpoints allow you to launch tests at any stage in your staging and deployment lifecycle. For example, after a canary deployment with an automated rollback.
 
-Use the API endpoints to quickly verify that a new deployment does not introduce any regression. See the [Trigger tests from CI/CD pipelines][1] and [Get details of batch][2] endpoints to use them within your CI through cURL or a supported client.
+Use the API endpoints to quickly verify that a new deployment does not introduce any regression. See the [Trigger tests from CI/CD pipelines][4] and [Get details of batch][5] endpoints to use them within your CI through cURL or a supported client.
 
 ### Trigger tests from CI/CD pipelines
 
@@ -66,11 +76,11 @@ The test triggering endpoint supports up to 50 tests in one request.
 }
 ```
 
-The `TEST_TO_TRIGGER` objects compose of the required `public_id` for the test you want to trigger and the optional configuration overrides. For descriptions of each field, see [Configure tests][3].
+The `TEST_TO_TRIGGER` objects compose of the required `public_id` for the test you want to trigger and the optional configuration overrides. For descriptions of each field, see [Configure tests][6].
 
 A test's public identifier is either the identifier of the test found in the URL of a test's details page (for example: the identifier for `https://app.datadoghq.com/synthetics/details/abc-def-ghi` is `abc-def-ghi`) or the full URL of a test's details page (for example: `https://app.datadoghq.com/synthetics/details/abc-def-ghi`).
 
-For more information, see the [Synthetics API endpoint documentation][1].
+For more information, see the [Synthetics API endpoint documentation][4].
 
 ### Get details of batch
 
@@ -80,25 +90,15 @@ The get batch details endpoint retrieves results for the group of tests triggere
 * **Method**: `GET`
 * **Parameters**: The `batch_id` for the batch of test results you want to inspect.
 
-For more information, see the [Synthetics API endpoint documentation][2].
-
-## Use the CLI
-
-The [`@datadog/datadog-ci` package][4] allows you to run Synthetics tests directly within your CI/CD pipeline.
-
-To use the [`@datadog/datadog-ci` NPM package][5], see [Configuration][6].
-
-You can also trigger tests by searching with tags. For example: `"ci": "datadog-ci synthetics run-tests --config fileconfig.json -s 'tag:staging'"`.
-
-**Note:** This command works as an argument. Do not use this in your configuration files.
+For more information, see the [Synthetics API endpoint documentation][5].
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /api/latest/synthetics/#trigger-tests-from-cicd-pipelines
-[2]: /api/latest/synthetics/#get-details-of-batch
-[3]: /synthetics/cicd_integrations/configuration#configure-tests
-[4]: https://github.com/DataDog/datadog-ci
-[5]: https://www.npmjs.com/package/@datadog/datadog-ci
-[6]: /synthetics/cicd_integrations/configuration
+[1]: https://github.com/DataDog/datadog-ci
+[2]: https://www.npmjs.com/package/@datadog/datadog-ci
+[3]: /synthetics/cicd_integrations/configuration
+[4]: /api/latest/synthetics/#trigger-tests-from-cicd-pipelines
+[5]: /api/latest/synthetics/#get-details-of-batch
+[6]: /synthetics/cicd_integrations/configuration#configure-tests
