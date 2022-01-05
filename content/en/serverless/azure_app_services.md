@@ -29,7 +29,7 @@ Microsoft [Azure App Services][1] is a group of serverless resources that enable
 Datadog provides monitoring capabilities for all Azure App Service resource types:
 
 - Azure Monitor metrics for [Apps][2] and [Functions][3] using the [Azure Integration][2].
-- Use the [Azure App Service View][4] (beta) to quickly spot issues, map relationships between your Azure App Service resources, and gain insights into cost and performance.
+- Use the [Azure App Service View][4] to quickly spot issues, map relationships between your Azure App Service resources, and gain insights into cost and performance.
 - Custom metrics can be submitted using the API.
 - [Resource logs][5] can be submitted using [Event Hub][6].
 
@@ -52,11 +52,11 @@ The Datadog extension for Azure App Service provides additional monitoring capab
 
 2. The extension supports the following resource types:
     - Azure App Service Web Apps
-    - Function Apps hosted on Premium or Standard App Service plans. 
+    - Function Apps hosted on Basic, Standard, Premium, or Isolated App Service plans. 
 
-    <div class="alert alert-warning">Support for .NET Function Apps is in beta for extension v1.3.4+. Function Apps on consumption plans are not supported. There are no billing implications for tracing functions during this period.<br/><br/>Interested in support for other App Service resource types or runtimes? <a href="https://forms.gle/n4nQcxEyLqDBMCDA7">Sign up</a> to be notified when a beta becomes available.</div>
+    <div class="alert alert-warning">Support for .NET Function Apps is in beta for extension v2.1+. Function Apps on consumption plans are not supported. There are no billing implications for tracing functions during this period.<br/><br/>Interested in support for other App Service resource types or runtimes? <a href="https://forms.gle/n4nQcxEyLqDBMCDA7">Sign up</a> to be notified when a beta becomes available.</div>
 
-3. The Datadog .NET APM extension supports the following .NET runtimes in both x64 and x86 architectures when running on Windows instances (AAS does not yet support extensions on Linux). For more details about automatically instrumented libraries, see the [Tracer documentation][2].
+3. The Datadog .NET APM extension supports the following .NET runtimes in both x64 and x86 architectures when running on Windows OS (AAS does not yet support extensions on Linux). For more details about automatically instrumented libraries, see the [Tracer documentation][2].
 
     - .NET Framework 4.5 and later
     - .NET Core 2.1
@@ -97,7 +97,7 @@ The Datadog extension for Azure App Service provides additional monitoring capab
 
 Sending logs from your application in Azure App Service to Datadog requires the use of Serilog. Submitting logs with this method allows for trace ID injection, which makes it possible to connect logs and traces in Datadog. To enable trace ID injection with the extension, add the application setting `DD_LOGS_INJECTION:true`.
 
-**Note**: Since this occurs inside your application, any Azure Platform logs you submit with diagnostic settings does not include the trace ID.
+**Note**: Since this occurs inside your application, any Azure Platform logs you submit with diagnostic settings do not include the trace ID.
 
 See documentation on [setting up agentless logging with Serilog][6] for detailed instructions.
 
@@ -156,7 +156,7 @@ Learn more about [custom metrics][10].
 2. The extension supports Azure App Service Web Apps. Function Apps are not supported.
     <div class="alert alert-warning">Interested in support for additional resource types or runtimes? <a href="https://forms.gle/n4nQcxEyLqDBMCDA7">Sign up</a> to be notified when a beta becomes available.</div>
 
-3.  The Datadog Java APM extension supports all Java runtimes on Windows instances. Azure App Service does not support extensions on Linux. For more details about automatically instrumented libraries, see the [Tracer documentation][2].
+3.  The Datadog Java APM extension supports all Java runtimes on Windows OS. Azure App Service does not support extensions on Linux. For more details about automatically instrumented libraries, see the [Tracer documentation][2].
 
 4. Datadog recommends doing regular updates to the latest version of the extension to ensure optimal performance, stability, and availability of features. Note that both the initial install and subsequent updates require your web app to be fully stopped in order to install/update successfully.
 
