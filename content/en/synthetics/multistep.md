@@ -243,6 +243,9 @@ To display your list of variables, type `{{` in your desired field.
 
 A test is considered `FAILED` if a step does not satisfy one or several assertions or if a step's request prematurely failed. In some cases, the test can indeed fail without being able to test the assertions against the endpoint, these reasons include:
 
+`CONNREFUSED`
+: No connection could be made because the target machine actively refused it.
+
 `CONNRESET`
 : The connection was abruptly closed by the remote server. Possible causes include the webserver encountering an error or crashing while responding, or loss of connectivity of the webserver.
 
