@@ -32,7 +32,7 @@ Incident Management requires no installation. To view your incidents, go to the 
 
 **Note**: View your Incidents list from your mobile device home screen and manage/create incidents by downloading the [Datadog Mobile App][3], available on the [Apple App Store][4] and [Google Play Store][5].”
 
-
+{{< img src="monitors/incidents/incidents-list-mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Incidents on Mobile App">}}
 
 ### Creating an incident
 
