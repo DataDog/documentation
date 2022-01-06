@@ -1,5 +1,5 @@
 ---
-title: Enabling the .NET Profiler
+title: Profiling .NET Applications
 kind: Documentation
 code_lang: dotnet
 type: multi-code-lang
@@ -24,15 +24,17 @@ further_reading:
 
 The profiler is shipped within Datadog tracing libraries. If you are already using a version of [APM to collect traces][1] that includes the .NET Profiler for your application, you can skip installing the library and go directly to enabling the profiler.
 
+<br/>
 ## Compatibility requirements
 
-### Supported .NET Core runtimes
+### Supported .NET runtimes
 
 The .NET Profiler supports .NET Framework 4.6.1+, .NET Core 2.1, 3.1, .NET 5, and .NET 6. 
 
 For a full list of supported libraries and processor architectures, see [Compatibility Requirements][1].
 TODO: create a page like https://docs-staging.datadoghq.com/kari/docs-2799-dotnet-profiler/tracing/setup_overview/compatibility_requirements/dotnet-core/ and point to it
 
+<br/>
 
 ## Installation and getting started
 
@@ -47,9 +49,11 @@ TODO: create a page like https://docs-staging.datadoghq.com/kari/docs-2799-dotne
 3. [Configure the Datadog Agent for APM.](#configure-the-datadog-agent-for-apm)
 4. [View your live data.](#view-your-live-data)
 
+<br/>
+
 ### Install the profiler
 
-The Datadog .NET Profiler is installed machine-wide so that all applications on the machine can be profiled. To see installation instructions, click the Windows tab. 
+The Datadog .NET Profiler is installed machine-wide so that all applications on the machine can be profiled.
 
 {{< tabs >}}
 {{% tab "Windows" %}}
@@ -59,20 +63,16 @@ To install the .NET Profiler:
 1. Download the [.NET Monitoring MSI installer][1]. Select the MSI installer for the architecture that matches the operating system (x64 or x86).
 
 2. Run the .NET Monitoring MSI installer with administrator privileges.
-
-
-[1]: https://github.com/DataDog/dd-trace-dotnet/releases
 {{% /tab %}}
 {{< /tabs >}}
 
+<br/>
 
 ### Enable the profiler for your application
-
 {{< tabs >}}
 {{% tab "Windows" %}}
 
 #### Internet Information Services (IIS)
-
 1. The .NET Monitoring MSI installer adds all required environment variables. There are no environment variables you need to configure.
 
 2. To profile applications hosted in IIS, completely stop and start IIS by running the following commands as an administrator:
@@ -86,6 +86,7 @@ To install the .NET Profiler:
      <strong>Note:</strong> Use <code>stop</code> and <code>start</code> commands. A reset or restart does not always work.
    </div>
 
+<br/>
 
 #### Windows Services
 
@@ -123,6 +124,8 @@ For .NET Framework:
 Set-ItemProperty HKLM:SYSTEM\CurrentControlSet\Services\<SERVICE NAME> -Name Environment -Value $v
 ```
 
+<br/>
+
 #### Standalone Applications
 
 To automatically profile a non service application (console, ASP.NET (Core), Windows Forms, or WPF), set the environment variables before starting it. 
@@ -147,16 +150,20 @@ For .NET Framework:
 
 2. Manually restart the application.
 
+<br/>
 
 ### Configure the Datadog Agent for APM
 
 [Install and configure the Datadog Agent][2] to send profiles from your profiled application. By default the Datadog Agent is enabled in your `datadog.yaml` file under `apm_config` with `enabled: true` and listens for trace traffic at `localhost:8126`.
 
+<br/>
 
 ### View your live data
 
 A minute or two after starting your .NET application, your profiles will show up on the [Datadog APM > Profiler page][4].
 
+<br/>
+<br/>
 
 ## Configuration
 
@@ -175,6 +182,7 @@ To associate [Unified Service Tagging][6] to the generated profiles, configure t
 `DD_VERSION`
 : If specified, sets the `version` of the service with the specified value. 
 
+<br/>
 
 #### Optional configuration
 
@@ -204,14 +212,15 @@ The following configuration variables are available for customizing .NET Profile
 : If set to false, disable the .NET Profiler. <br>
 **Default**: `true`
 
-
+<br/>
+<br/>
 
 ## Further Reading
 The [Getting Started with Profiler][5] guide takes a sample service with a performance problem and shows you how to use Continuous Profiler to understand and fix the problem.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/setup_overview/
+[1]: https://github.com/DataDog/dd-trace-dotnet/releases
 [2]: https://app.datadoghq.com/account/settings#agent/overview
 [3]: https://app.datadoghq.com/account/settings?agent_version=6#agent
 [4]: https://app.datadoghq.com/profiling
