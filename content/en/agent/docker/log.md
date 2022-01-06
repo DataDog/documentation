@@ -78,7 +78,7 @@ docker run -d --name datadog-agent \
 
 ### macOS
 
-Note: Add the path `/opt/datadog-agent/run` under Docker Desktop -> Settings -> Resources -> File sharing.
+Add the path `/opt/datadog-agent/run` under Docker Desktop -> Settings -> Resources -> File sharing.
 
 ```shell
 docker run -d --name datadog-agent \
