@@ -118,6 +118,14 @@ Every dashboard has a JSON representation that you can copy or export from the S
 
 Because all widgets and dashboards are represented as JSON, you can programmatically generate them by using the [Dashboards API][14], which is useful if you want to generate a Dashboard every time your team starts a new project or encounters an incident, or formalizes an SLO, for example.
 
+### View Dashboards from the Datadog Mobile App
+
+View your dashboards on your mobile device with the [Datadog Mobile App][15], available on the [Apple App Store][16] and [Google Play Store][17]. 
+
+The mobile app enables you to view and search all of the dashboards that you have access to in your Datadog organization, and filter them using the same template variables used in the Datadog web app.
+
+{{< img src="dashboards/dashboards-list-mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Dashboards on iOS and Android">}}
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -136,3 +144,6 @@ Because all widgets and dashboards are represented as JSON, you can programmatic
 [12]: https://learn.datadoghq.com/enrol/index.php?id=8
 [13]: /integrations/slack/
 [14]: /api/v1/dashboards/
+[15]: /mobile/
+[16]: https://apps.apple.com/app/datadog/id1391380318
+[17]: https://play.google.com/store/apps/details?id=com.datadog.app
