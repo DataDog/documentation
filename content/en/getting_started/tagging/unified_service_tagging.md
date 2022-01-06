@@ -72,7 +72,7 @@ To setup unified service tagging in a containerized environment:
 {{< tabs >}}
 {{% tab "Kubernetes" %}}
 
-**Note**: If you deployed Datadog Cluster Agent with [Admission Controller][14] enabled, the Admission Controller will mutate the Pod manifests and inject all required environment variables (based on configured mutation conditions). In that case, manuall configuration of `DD_` environment variables in Pod manifests is unnecesary. See [Admission Controller][14] documentation for more details.
+**Note**: If you deployed the Datadog Cluster Agent with [Admission Controller][14] enabled, the Admission Controller mutates the pod manifests and injects all required environment variables (based on configured mutation conditions). In that case, manual configuration of `DD_` environment variables in pod manifests is unnecessary. See the [Admission Controller][14] documentation for more details.
 
 ##### Full configuration
 
