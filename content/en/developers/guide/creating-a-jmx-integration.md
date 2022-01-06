@@ -5,7 +5,8 @@ kind: guide
 
 This guide describes the creation of a JMX integration using the [Developer Toolkit][1].
 
-### Step 1: Create a JMX integration scaffolding
+## Setup
+### Create a JMX integration scaffolding
 
 ```bash
 ddev create --type jmx MyJMXIntegration
@@ -15,8 +16,8 @@ The JMX integration contains specific init and instance configs:
 
 ```yaml
 init_config:
-    is_jmx: true                   # tells the Agent that the integration is a JMX type of integration
-    collect_default_metrics: true  # if true, metrics declared in `metrics.yaml` are collected
+    is_jmx: true                   # Identifies the integration type as JMX.
+    collect_default_metrics: true  # Collect metrics declared in `metrics.yaml`.
 
 instances:
   - host: <HOST>                   # JMX hostname
@@ -24,16 +25,16 @@ instances:
     ...
 ```
 
-See the [JMX integration documentation][2] for more init and instance configs.
+See the [JMX integration documentation][2] for more `init` and `instance` configs.
 
-### Step 2: Define metrics you want to collect
+### Define the metrics to collect
 
-Select what metrics you want to collect from JMX. See the documentation for the service you want to monitor to find availaable metrics.
+Select the metrics you want to collect from JMX. See the documentation for the service you want to monitor to find available metrics.
 
 You can also use tools like [VisualVM][3], [JConsole][4], or [jmxterm](#jmxterm) to explore the available JMX beans and their descriptions.
 
 
-### Step 3: Define metrics filters
+### Define metrics filters
 
 Edit the `metrics.yaml` to define the filters for collecting metrics.
 
@@ -77,7 +78,7 @@ def dd_environment():
         yield CHECK_CONFIG, {'use_jmx': True}
 ```
 
-And a `e2e` test like:
+`e2e` test example:
 
 ```python
 
@@ -98,7 +99,7 @@ Real examples of:
 - [JMX dd_environment][8]
 - [JMX e2e test][9]
 
-## JMX Tools {#jmxterm}
+## JMX tools {#jmxterm}
 
 ### List JMX beans using JMXTerm
 
