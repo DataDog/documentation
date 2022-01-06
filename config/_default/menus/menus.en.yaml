@@ -102,7 +102,7 @@ main_left:
   - identifier: 'sensitive-data-scanner'
     name: 'Sensitive Data Scanner'
     pre: "<i class='icon-sds'></i>"
-    url: 'product/sensitive-data-scanner/'
+    url: 'https://www.datadoghq.com/product/sensitive-data-scanner/'
     weight: 17
     parent: 'product'
   - identifier: error-tracking
