@@ -22,16 +22,17 @@ further_reading:
 </div>
 {{< /site-region >}}
 
-The profiler is shipped within Datadog tracing libraries. If you are already using a version of [APM to collect traces][1] that includes the .NET Profiler for your application, you can skip installing the library and go directly to enabling the profiler.
+The profiler is shipped within Datadog tracing libraries. If you are already using a version of [APM to collect traces](https://github.com/DataDog/dd-trace-dotnet/releases) that includes the .NET Profiler for your application, you can skip installing the library and go directly to enabling the profiler.
 
 <br/>
+
 ## Compatibility requirements
 
 ### Supported .NET runtimes
 
 The .NET Profiler supports .NET Framework 4.6.1+, .NET Core 2.1, 3.1, .NET 5, and .NET 6. 
 
-For a full list of supported libraries and processor architectures, see [Compatibility Requirements][1].
+For a full list of supported libraries and processor architectures, see [Compatibility Requirements](https://github.com/DataDog/dd-trace-dotnet/releases).
 TODO: create a page like https://docs-staging.datadoghq.com/kari/docs-2799-dotnet-profiler/tracing/setup_overview/compatibility_requirements/dotnet-core/ and point to it
 
 <br/>
