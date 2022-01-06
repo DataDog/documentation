@@ -60,7 +60,7 @@
     contents:
 
     - action: integrations
-      branch: prod
+      branch: kaylyn/azure-us5
       globs:
       - integration/*/*_metadata.csv
       - integration/*/manifest.json
