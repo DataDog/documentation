@@ -64,8 +64,8 @@ An OTLP Histogram represents the statistical distribution of a set of values on 
 - *Aggregation temporality*, which can be cumulative or delta. Delta metrics have no overlap in their time windows, while cumulative metrics represent a time window from a fixed start point in time.
 
 The default mapping is as follows:
-1. Delta histograms are reported as Datadog distributions. [Read more about distributions][2] to understand the available aggregations.
-2. For cumulative histograms, the delta between consecutive points is calculated and reported to Datadog as a distribution. You may use the [`cumsum` arithmetic function][1] on individual aggregations to recover the value in the OTLP payload.
+1. Delta histograms are reported as Datadog distributions. [Read more about distributions][1] to understand the available aggregations.
+2. For cumulative histograms, the delta between consecutive points is calculated and reported to Datadog as a distribution. You may use the [`cumsum` arithmetic function][2] on individual aggregations to recover the value in the OTLP payload.
 
 The Datadog Agent and the OpenTelemetry Collector Datadog exporter allow changing the Histogram export in the `histogram` subsection.
 - If the `mode` is set to `counters`, the following metrics are produced:
@@ -86,8 +86,8 @@ The Datadog Agent and the OpenTelemetry Collector Datadog exporter allow changin
 
 **Note**: `send_count_sum_metrics` is useful only when not using the distributions mode.
 
-[1]: /dashboards/functions/arithmetic/#cumulative-sum
-[2]: /metrics/distributions
+[1]: /metrics/distributions
+[2]: /dashboards/functions/arithmetic/#cumulative-sum
 {{% /tab %}}
 {{% tab "Summary" %}}
 
@@ -128,7 +128,7 @@ OpenTelemetry defines certain semantic conventions related to host names. If an 
 6. `container.id`, the container ID
 
 If none are present, Datadog assigns a system-level hostname to payloads.
-On the OpenTelemetry Collector, add the ['resource detection' processor][3] to your pipelines for accurate hostname resolution.
+On the OpenTelemetry Collector, add the ['resource detection' processor][1] to your pipelines for accurate hostname resolution.
 
 ### Example
 
@@ -176,7 +176,7 @@ Suppose you are using an OpenTelemetry Histogram instrument, `request.response_t
 | `min:request.response_time.distribution`   | `1`    | GAUGE               |
 | `sum:request.response_time.distribution`   | `19`   | COUNT               |
 
-[Read more about distributions][2] to understand how to configure further aggregations.
+[Read more about distributions][1] to understand how to configure further aggregations.
 
 Alternatively, if you are using the `counters` mode and enabling the `send_count_sum_metrics` flag, the following metrics would be reported if the histogram bucket boundaries are set to `[-inf, 2, inf]`:
 
@@ -187,7 +187,7 @@ Alternatively, if you are using the `counters` mode and enabling the `send_count
 | `request.response_time.distribution.bucket` | `6`    | `lower_bound:-inf`, `upper_bound:2` | GAUGE               |
 | `request.response_time.distribution.bucket` | `2`    | `lower_bound:2`, `upper_bound:inf`  | GAUGE               |
 
-[2]: /metrics/distributions
+[1]: /metrics/distributions
 {{% /tab %}}
 {{% tab "Summary" %}}
 
@@ -210,4 +210,4 @@ Suppose you are submitting a legacy OTLP Summary metric, `request.response_time.
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[3]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/resourcedetectionprocessor#resource-detection-processor
+[1]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/resourcedetectionprocessor#resource-detection-processor

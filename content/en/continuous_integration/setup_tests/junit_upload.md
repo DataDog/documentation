@@ -232,13 +232,13 @@ To be processed, the `name` attribute in the `<property>` element must have the 
 </testsuites>
 {{< /code-block >}}
 
-[1]: https://junit.org/junit5/
-[2]: https://www.npmjs.com/package/@datadog/datadog-ci
-[3]: https://app.datadoghq.com/organization-settings/api-keys
-[4]: /getting_started/site/
-[5]: https://git-scm.com/downloads
 {{< /site-region >}}
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+[1]: https://junit.org/junit5/
+[2]: https://www.npmjs.com/package/@datadog/datadog-ci
+[3]: https://app.datadoghq.com/organization-settings/api-keys
+[4]: /getting_started/site/
+[5]: https://git-scm.com/downloads

@@ -140,9 +140,9 @@ Trace metrics are useful for monitoring. APM monitors can be set up on the [New 
 
 {{< img src="tracing/visualization/trace_metric_monitor.mp4" video="true" alt="trace metrics monitor" >}}
 
-## Trace search and analytics
+## Trace Explorer
 
-[Search and perform analytics][14] on 100% of ingested traces for 15 minutes and all [indexed spans](#indexed-span) for 15 days.
+[Explore and perform analytics][14] on 100% of ingested traces for 15 minutes and all [indexed spans](#indexed-span) for 15 days.
 
 ## Indexed span
 
@@ -205,10 +205,10 @@ When child spans are concurrent, execution time is calculated by dividing the ov
 [11]: /tracing/connect_logs_and_traces/
 [12]: /tracing/guide/adding_metadata_to_spans/
 [13]: /tracing/runtime_metrics/
-[14]: /tracing/trace_search_and_analytics/
+[14]: /tracing/trace_explorer/
 [15]: /tracing/guide/metrics_namespace/
 [16]: https://app.datadoghq.com/metric/summary
 [17]: https://app.datadoghq.com/monitors#/create
-[18]: /tracing/trace_search_and_analytics/query_syntax/#facets
+[18]: /tracing/trace_explorer/query_syntax/#facets
 [19]: /tracing/trace_retention_and_ingestion/#retention-filters
 [20]: /tracing/trace_retention_and_ingestion/#ingestion-controls

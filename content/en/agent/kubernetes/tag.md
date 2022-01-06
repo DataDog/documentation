@@ -59,6 +59,7 @@ The Agent can autodiscover and attach tags to all data emitted by the entire pod
   | `image_name`                  | Low          | Pod spec                                                                | N/A                                                 |
   | `short_image`                 | Low          | Pod spec                                                                | N/A                                                 |
   | `image_tag`                   | Low          | Pod spec                                                                | N/A                                                 |
+  | `eks_fargate_node`            | Low          | Pod spec                                                                | EKS Fargate environment                                       |
 
 </div>
 

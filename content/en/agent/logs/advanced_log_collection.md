@@ -20,13 +20,14 @@ further_reading:
   text: "Logging without Limits*"
 ---
 
-Apply log processing rules to a specific log collection configurations to:
-
+Customize your log collection configuration:
 * [Filter logs](#filter-logs)
 * [Scrub sensitive data from your logs](#scrub-sensitive-data-from-your-logs)
-* [Proceed to multi-line aggregation](#multi-line-aggregation)
-* [Tail directories by using wildcards](#tail-directories-by-using-wildcards)
-* [Logfile Encodings](#logfile-encodings)
+* [Aggregate multi-line logs](#multi-line-aggregation)
+* [Copy commonly used examples](#commonly-used-log-processing-rules)
+* [Use wildcards to monitor directories](#tail-directories-by-using-wildcards)
+* [Specify log file encodings](#logfile-encodings)
+* [Define global processing rules](#global-processing-rules)
 
 **Note**: If you set up multiple processing rules, they are applied sequentially and each rule is applied on the result of the previous one.
 
@@ -443,7 +444,7 @@ More examples:
 | 2020-10-27 05:10:49.657  | `\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2}\.\d{3}` |
 | {"date": "2018-01-02"    | `\{"date": "\d{4}-\d{2}-\d{2}`                |
 
-### Automatic Multi-line aggregation
+### Automatic multi-line aggregation
 With Agent 7.32+ `auto_multi_line_detection` can be enabled which allows the Agent to detect [common multi-line patterns][2] automatically. 
 
 <div class="alert alert-warning">
@@ -519,7 +520,7 @@ spec:
 {{% /tab %}}
 {{< /tabs >}}
 
-Automatic mutli-line detection uses a list of common regular expressions to attempt to match logs. If the built-in list is not sufficient, you can also add custom patterns in the `datadog.yaml` file:
+Automatic multi-line detection uses a list of common regular expressions to attempt to match logs. If the built-in list is not sufficient, you can also add custom patterns in the `datadog.yaml` file:
 
 ```yaml
 logs_config:
@@ -563,11 +564,11 @@ logs:
     source: go
 ```
 
-The example above will match `/var/log/myapp/log/myfile.log` but `/var/log/myapp/log/debug.log` and `/var/log/myapp/log/trace.log` will never be tailed.
+The example above matches `/var/log/myapp/log/myfile.log` and excludes `/var/log/myapp/log/debug.log` and `/var/log/myapp/log/trace.log`.
 
 **Note**: The Agent requires read and execute permissions on a directory to list all the available files in it.
 
-## Logfile Encodings
+## Log file encodings
 
 By default, the Datadog Agent assumes that logs use UTF-8 encoding. If your application logs use a different encoding, specify the `encoding` parameter in the logs configuration setting.
 
@@ -592,7 +593,7 @@ logs:
 
 ## Global processing rules
 
-For Datadog Agent v6.10+, the `exclude_at_match`, `include_at_match`, and `mask_sequences` processing rules can be defined globally in the Agent's [main configuration file][5] or through an environment variable:
+For Datadog Agent v6.10+, the `exclude_at_match`, `include_at_match`, and `mask_sequences` processing rules can be defined globally in the Agent's [main configuration file][4] or through an environment variable:
 
 {{< tabs >}}
 {{% tab "Configuration files" %}}
@@ -635,7 +636,7 @@ env:
 {{< /tabs >}}
 All the logs collected by the Datadog Agent are impacted by the global processing rules.
 
-**Note**: The Datadog Agent does not start the log collector if there is a format issue in the global processing rules. Run the Agent's [status subcommand][6] to troubleshoot any issues.
+**Note**: The Datadog Agent does not start the log collector if there is a format issue in the global processing rules. Run the Agent's [status subcommand][5] to troubleshoot any issues.
 
 ## Further Reading
 
@@ -647,6 +648,5 @@ All the logs collected by the Datadog Agent are impacted by the global processin
 [1]: https://golang.org/pkg/regexp/syntax/
 [2]: https://github.com/DataDog/datadog-agent/blob/main/pkg/logs/decoder/auto_multiline_handler.go#L195
 [3]: /agent/faq/commonly-used-log-processing-rules
-[4]: https://docs.datadoghq.com/logs/explorer/#overview
-[5]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-[6]: /agent/guide/agent-commands/#agent-information
+[4]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[5]: /agent/guide/agent-commands/#agent-information
