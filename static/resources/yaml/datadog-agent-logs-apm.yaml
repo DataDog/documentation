@@ -34,7 +34,7 @@ metadata:
   namespace: default
   labels:
     app: "datadog-agent"
-    chart: "datadog-2.28.11"
+    chart: "datadog-2.28.13"
     release: "datadog-agent"
     heritage: "Helm"
 spec:
@@ -368,18 +368,6 @@ spec:
         - hostPath:
             path: /sys/fs/cgroup
           name: cgroups
-        - hostPath:
-            path: /etc/os-release
-          name: etc-os-release
-        - hostPath:
-            path: /etc/redhat-release
-          name: etc-redhat-release
-        - hostPath:
-            path: /etc/fedora-release
-          name: etc-fedora-release
-        - hostPath:
-            path: /etc/lsb-release
-          name: etc-lsb-release
         - hostPath:
             path: /var/run/datadog/
             type: DirectoryOrCreate
