@@ -7,7 +7,7 @@ further_reading:
       text: 'APM Troubleshooting'
 ---
 
-{{< programming-lang-wrapper langs="java,python,go,ruby" >}}
+{{< programming-lang-wrapper langs="java,python,go,ruby,dotnet" >}}
 {{< programming-lang lang="java" >}}
 
 ## Missing profiles in the profile search page
@@ -212,7 +212,13 @@ Without this flag, profiles for short-lived Resque jobs will be unavailable.
 [2]: /help/
 
 {{< /programming-lang >}}
+{{< programming-lang lang="dotnet" >}}
+
+TKTK
+
+<!--links for this tab go here -->
 {{< /programming-lang >}}
+{{< programming-lang-wrapper >}}
 
 ## Further Reading
 
