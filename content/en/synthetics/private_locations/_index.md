@@ -100,7 +100,7 @@ Only **Admin** users can create private locations. For more information, see [Pe
 
 Navigate to [**Synthetic Monitoring** > **Settings** > **Private Locations**][22] and click **Add Private Location**.
 
-{{< img src="synthetics/private_locations/synthetics_pl_add.png" alt="create a private location"  style="width:100%;">}}
+{{< img src="synthetics/private_locations/synthetics_pl_add.png" alt="Create a private location" style="width:100%;">}}
 
 Fill out your private location details: 
 
