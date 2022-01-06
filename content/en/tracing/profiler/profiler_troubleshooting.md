@@ -17,8 +17,6 @@ If you've configured the profiler and don't see profiles in the profile search p
 - Operating system type and version (for example, Linux Ubuntu 20.04)
 - Runtime type, version, and vendor (for example, Java OpenJDK 11 AdoptOpenJDK)
 
-[1]: /tracing/troubleshooting/#tracer-debug-logs
-[2]: /help/
 
 ## Reduce overhead from default setup
 
@@ -150,6 +148,8 @@ Override templates let you specify profiling properties to override. However, th
     java -javaagent:/path/to/dd-java-agent.jar -Ddd.profiling.enabled=true -Ddd.logs.injection=true -Ddd.trace.sample.rate=1 -Ddd.profiling.jfr-template-override-file=</path/to/override.jfp> -jar path/to/your/app.jar
     ```
 
+[1]: /tracing/troubleshooting/#tracer-debug-logs
+[2]: /help/
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
 
@@ -160,9 +160,9 @@ If you've configured the profiler and don't see profiles in the profile search p
 - Operating system type and version (for example, Linux Ubuntu 20.04)
 - Runtime type, version, and vendor (for example, Python 3.9.5)
 
+
 [1]: /tracing/troubleshooting/#tracer-debug-logs
 [2]: /help/
-
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
@@ -173,9 +173,9 @@ If you've configured the profiler and don't see profiles in the profile search p
 - Operating system type and version (for example, Linux Ubuntu 20.04)
 - Runtime type, version, and vendor (for example, Go 1.16.5)
 
+
 [1]: /tracing/troubleshooting/#tracer-debug-logs
 [2]: /help/
-
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
@@ -202,15 +202,17 @@ If you're still experiencing `SystemStackError` errors after following the above
 
 ## Missing profiles for Resque jobs
 
-When profiling [Resque](https://github.com/resque/resque) jobs, you should set the `RUN_AT_EXIT_HOOKS` environment
+When profiling [Resque][3] jobs, you should set the `RUN_AT_EXIT_HOOKS` environment
 variable to `1`, as described in the
-[Resque documentation](https://github.com/resque/resque/blob/v2.0.0/docs/HOOKS.md#worker-hooks).
+[Resque documentation][4].
 
 Without this flag, profiles for short-lived Resque jobs will be unavailable.
 
+
 [1]: /tracing/troubleshooting/#tracer-debug-logs
 [2]: /help/
-
+[3]: https://github.com/resque/resque
+[4]: https://github.com/resque/resque/blob/v2.0.0/docs/HOOKS.md#worker-hooks
 {{< /programming-lang >}}
 {{< programming-lang lang="dotnet" >}}
 
@@ -218,7 +220,7 @@ TKTK
 
 <!--links for this tab go here -->
 {{< /programming-lang >}}
-{{< programming-lang-wrapper >}}
+{{< /programming-lang-wrapper >}}
 
 ## Further Reading
 
