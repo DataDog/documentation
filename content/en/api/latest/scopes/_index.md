@@ -2,7 +2,7 @@
 title: Authorization Scopes
 disable_sidebar: true
 ---
-## Authorization Scopes
+## Authorization scopes
 
 Scope is an authorization mechanism that allows you to limit and define the granular access that applications have to an organization’s Datadog data. When authorized access on behalf of a user or service account, applications can access only the information explicitly requested and nothing more.
 
