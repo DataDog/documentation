@@ -92,7 +92,7 @@ Use this section to restrict access to you, everyone in your org with your role,
 
 You can view Monitor Saved Views from your mobile home screen or view and mute monitors by downloading the [Datadog Mobile App][10], available on the [Apple App Store][11] and [Google Play Store][12]. This helps with triaging when you are away from your laptop or desktop.
 
-{{< img src="monitors/monitors_mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Monitors on Mobile App">}}
+{{< img src="monitors/monitors_mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Incidents on Mobile App">}}
 
 ## Further Reading
 
