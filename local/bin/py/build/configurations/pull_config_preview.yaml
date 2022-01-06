@@ -600,23 +600,16 @@
   - repo_name: security-monitoring
     contents:
     - action: security-rules
-      branch: main
+      branch: andrea.piccione/add-new-cws-signal-rules
       globs:
+        - "workload-security/signal-rules/*.yaml"
+        - "workload-security/signal-rules/*.md"
         - "security-monitoring/*.json"
         - "security-monitoring/*.md"
-      options:
-        dest_path: '/security_platform/default_rules/'
-    - action: compliance-rules
-      branch: main
-      globs:
-        - "configuration/*.json"
-        - "configuration/*.yaml"
-        - "configuration/*.yml"
-        - "configuration/*.md"
-        - "runtime/**/*.json"
-        - "runtime/**/*.yaml"
-        - "runtime/**/*.yml"
-        - "runtime/**/*.md"
+        - "posture-management/**/*.json"
+        - "posture-management/**/*.yaml"
+        - "posture-management/**/*.yml"
+        - "posture-management/**/*.md"
       options:
         dest_path: '/security_platform/default_rules/'
 
