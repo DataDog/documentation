@@ -116,6 +116,8 @@ Otherwise, the command returns a non-0 exit code and the following output:
 package gpg-pubkey-fd4bf915 is not installed
 ```
 
+Alternatively, check if your `datadog.repo` file contains `https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public` as one of the `gpgkey` entries. This key file will be updated with the new key as soon as it is in use.
+
 {{% /tab %}}
 {{< /tabs >}}
 
