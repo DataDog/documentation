@@ -177,7 +177,12 @@ Wall Time
 {{< /programming-lang >}}
 {{< programming-lang lang="dotnet" >}}
 
-TKTK
+{{< img src="tracing/profiling/profile_dotnet.png" alt="A .NET profile">}}
+
+Once enabled, the following profile type is collected:
+
+Wall Time
+: Shows the elapsed time spent in managed methods. Elapsed time includes time when code is running on CPU, waiting for I/O, and anything else that happens while the method is running. 
 
 <!--links for this tab go here -->
 {{< /programming-lang >}}
