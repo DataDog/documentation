@@ -219,27 +219,35 @@ Without this flag, profiles for short-lived Resque jobs will be unavailable.
 ## Missing profiles in the profile search page
 
 If you've configured the profiler and don't see profiles in the profile search page, here are a few settings to check:
-1. check that the Agent is installed and running (visible in the Windows Services panel)
-2. check the result of profiles export
-```
-- enable debug logs by setting the `DD_TRACE_DEBUG` environment variable for the application
-- restart the application
-- open the DD-Dotnet-Profiler.(application name) log file from %ProgramData%\Datadog-APM\logs\ folder
-- look for 'Profile data was NOT successfully exported via HTTP POST' entries
-- check the following fields for errors
-  ["response.StatusCode"]=...,
-  ["response.Error"]="...",
-- check the following field to ensure that the right url is used
-  ["_profilesIngestionEndpoint_url"]="https://intake.profile.datadoghq.com/v1/input",
-```
-<br/>
 
- Otherwise, turn on [debug mode][1] and [open a support ticket][2] with debug files and the following information:
-- Operating system type and version (for example, Windows Server 2019)
-- Runtime type and version (for example, .NET Core 6.0)
-- Application type (for example, Web application running in IIS)
+1. Check that the Agent is installed and running and is visible in the Windows Services panel.
 
-<!--links for this tab go here -->
+2. Check the result of profiles export:
+
+   1. Enable debug logs by setting the `DD_TRACE_DEBUG` environment variable for the application.
+
+   2. Restart the application.
+
+   3. Open the `DD-Dotnet-Profiler.<Application Name>` log file in the `%ProgramData%\Datadog-APM\logs\` folder.
+
+   4. Look for `Profile data was NOT successfully exported via HTTP POST` entries.
+
+   5. Check the following fields for errors:
+      ```
+      ["response.StatusCode"]=...,
+      ["response.Error"]="...",
+      ```
+
+   6. Check the following field to ensure that the right url is used:
+      ```
+      ["_profilesIngestionEndpoint_url"]="https://intake.profile.datadoghq.com/v1/input",
+      ```
+
+Otherwise, turn on [debug mode][1] and [open a support ticket][2] with the debug files and the following information:
+- Operating system type and version (for example, Windows Server 2019).
+- Runtime type and version (for example, .NET Core 6.0).
+- Application type (for example, Web application running in IIS).
+
 [1]: /tracing/troubleshooting/#tracer-debug-logs
 [2]: /help/
 {{< /programming-lang >}}

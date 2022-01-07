@@ -184,7 +184,6 @@ Once enabled, the following profile type is collected:
 Wall Time
 : Shows the elapsed time spent in managed methods. Elapsed time includes time when code is running on CPU, waiting for I/O, and anything else that happens while the method is running. 
 
-<!--links for this tab go here -->
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
