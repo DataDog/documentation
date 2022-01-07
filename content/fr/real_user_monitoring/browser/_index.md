@@ -67,7 +67,7 @@ Ajoutez l'extrait de code généré dans le tag head de toutes les pages HTML qu
    h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
    d=o.createElement(u);d.async=1;d.src=n
    n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
-})(window,document,'script','https://www.datadoghq-browser-agent.com/datadog-rum.js','DD_RUM')
+})(window,document,'script','https://www.datadoghq-browser-agent.com/datadog-rum-v4.js','DD_RUM')
   DD_RUM.onReady(function() {
     DD_RUM.init({
       clientToken: '<TOKEN_CLIENT>',
@@ -93,7 +93,7 @@ Ajoutez l'extrait de code généré dans le tag head de toutes les pages HTML qu
 Ajoutez l'extrait de code généré dans le tag head (avant tous les autres tags du script) de toutes les pages HTML que vous souhaitez surveiller dans votre application. Lorsque le tag script est placé tout en haut du code et synchronisé, la solution RUM de Datadog peut recueillir toutes les données de performance et toutes les erreurs.
 
 ```html
-<script src="https://www.datadoghq-browser-agent.com/datadog-rum.js" type="text/javascript"></script>
+<script src="https://www.datadoghq-browser-agent.com/datadog-rum-v4.js" type="text/javascript"></script>
 <script>
   window.DD_RUM &&
     window.DD_RUM.init({

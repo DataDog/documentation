@@ -12,7 +12,7 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/test-maintenance-best-practices/"
   tag: "Blog"
   text: "Best practices for maintaining end-to-end tests"
-- link: "/synthetics/cicd_testing/ci_results_explorer"
+- link: "/synthetics/ci_results_explorer"
   tag: "Documentation"
   text: CI Results Explorer
 ---
@@ -86,5 +86,5 @@ Find all Synthetic Monitoring related changes by searching the event stream for 
 
 [1]: https://app.datadoghq.com/synthetics/list
 [2]: https://app.datadoghq.com/synthetics/explorer/ci
-[3]: /synthetics/cicd_testing/ci_results_explorer
+[3]: /synthetics/ci_results_explorer
 [4]: /events/

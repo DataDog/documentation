@@ -1785,6 +1785,7 @@ components:
             description: A day of the week, formatted as `Mon`, `Tue`, `Wed`, `Thu`,
               `Fri`, `Sat` or `Sun`.
             type: string
+          nullable: true
           type: array
       type: object
     EmbeddableGraph:
@@ -12595,12 +12596,18 @@ components:
           description: Maximum amount of records to be returned.
           format: int64
           type: integer
-        next_record_id:
-          description: The cursor to use to get the next results, if any. To make
-            the next request, use the same parameters with the addition of this next_record_id.
+        offset:
+          description: Records to be skipped before beginning to return.
+          format: int64
+          type: integer
+        sort_direction:
+          description: Direction to sort by.
+          type: string
+        sort_name:
+          description: Field to sort by.
           type: string
         total_number_of_records:
-          description: Total number of records. (deprecated after May 1st, 2021)
+          description: Total number of records.
           format: int64
           type: integer
       type: object

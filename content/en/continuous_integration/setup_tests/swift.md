@@ -668,11 +668,11 @@ session.end()
 
 Always call `session.end()` at the end so that all the test info is flushed to Datadog.
 
-[1]: https://app.datadoghq.com/organization-settings/client-tokens
-[2]: /getting_started/site/
 
 {{< /site-region >}}
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+[1]: https://app.datadoghq.com/organization-settings/client-tokens
+[2]: /getting_started/site/
