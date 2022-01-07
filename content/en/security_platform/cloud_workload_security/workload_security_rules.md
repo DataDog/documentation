@@ -87,14 +87,14 @@ First, create a new default policy file to load to the Agent by following the in
 
 4. Define the Agent expression. Enter the rule in the Expression field using Datadog Security Language (SECL).
 
-  [Image here]
+    {{< img src="security_platform/cws/workload_security_rules/define_agent_expression.png" alt="Adding a rule to the Expression field" >}}
 
-  For example, to monitor for suspicious container clients:
+    For example, to monitor for suspicious container clients:
 
-  ```text
-  exec.file.path in ["/usr/bin/docker", "/usr/local/bin/docker",
-  "/usr/bin/kubectl", "/usr/local/bin/kubectl"] && container.id != ""
-  ```
+    ```text
+    exec.file.path in ["/usr/bin/docker", "/usr/local/bin/docker",
+    "/usr/bin/kubectl", "/usr/local/bin/kubectl"] && container.id != ""
+    ```
 
 5. Save the rule. This automatically navigates you back to the Rules page.
 
@@ -127,7 +127,7 @@ Complete the next steps based on your environment:
 
 Copy the `default.policy` file over to the target host in the `{$DD_AGENT}/runtime-security.d` folder. Ensure the file minimally has `read` and `write` access for the `dd-agent` user on the host.
 
-    **Note:** This may require use of a utility such as SCP or FTP.
+  **Note:** This may require use of a utility such as SCP or FTP.
 
 {{% /tab %}}
 
@@ -162,10 +162,6 @@ Copy the `default.policy` file over to the target host in the `{$DD_AGENT}/runti
 
 {{% /tab %}}
 {{< /tabs >}}
-
-Once you've configured your environment, copy the `default.policy` file you downloaded over to the target host in the `{$DD_AGENT}/runtime-security.d` folder. Ensure the file minimally has read and write access for the dd-agent user on the host.
-
-**Note**: This may require use of a utility such as SCP or FTP.
 
 To finalize setup, restart the [Datadog Agent][5].
 
