@@ -15,13 +15,14 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/riakcs/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/riakcs/README.md
 display_name: RiakCS
 draft: false
 git_integration_title: riakcs
 guid: 55ba6b94-8eeb-486b-aa94-6366a044fdf0
 integration_id: riak-cs
 integration_title: Riak CS
+integration_version: 2.7.0
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com
@@ -32,7 +33,7 @@ name: riakcs
 process_signatures:
   - riak-cs start
 public_title: "Intégration Datadog/Riak\_CS"
-short_description: 'Suivez la fréquence et la latence moyenne des opérations GET, PUT et DELETE, ainsi que d''autres opérations.'
+short_description: Suivez la fréquence et la latence moyenne des opérations GET, PUT et DELETE, ainsi que d'autres opérations.
 support: core
 supported_os:
   - linux
@@ -102,17 +103,16 @@ fichier de configuration `riakcs.d/conf.yaml` avec la clé `metrics` dans `insta
 Le check RiakCS n'inclut aucun événement.
 
 ### Checks de service
+{{< get-service-checks-from-git "riakcs" >}}
 
-**riakcs.can_connect** :
-Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter à l'endpoint RiakCS pour recueillir des métriques. Si ce n'est pas le cas, renvoie `OK`.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][9].
+Besoin d'aide ? Contactez [l'assistance Datadog][10].
 
 ## Pour aller plus loin
 
-Pour mieux comprendre comment (ou pourquoi) surveiller la disponibilité et les performances de Riak CS avec Datadog, lisez notre [série d'articles de blog][10] à ce sujet.
+Pour mieux comprendre comment (ou pourquoi) surveiller la disponibilité et les performances de Riak CS avec Datadog, lisez notre [série d'articles de blog][11] à ce sujet.
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/riakcs/images/riakcs_dashboard.png
 [2]: https://app.datadoghq.com/account/settings#agent
@@ -122,5 +122,6 @@ Pour mieux comprendre comment (ou pourquoi) surveiller la disponibilité et les 
 [6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
 [7]: https://github.com/DataDog/integrations-core/blob/master/riakcs/metadata.csv
 [8]: https://github.com/basho/riak_cs/wiki/Riak-cs-and-stanchion-metrics
-[9]: https://docs.datadoghq.com/fr/help/
-[10]: https://www.datadoghq.com/blog/monitor-riak-cs-performance-and-availability
+[9]: https://github.com/DataDog/integrations-core/blob/master/riakcs/assets/service_checks.json
+[10]: https://docs.datadoghq.com/fr/help/
+[11]: https://www.datadoghq.com/blog/monitor-riak-cs-performance-and-availability
