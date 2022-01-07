@@ -146,6 +146,7 @@ For .NET Framework:
 
 2. Manually restart the application.
 {{% /tab %}}
+{{< /tabs >}}
 
 <br/>
 
