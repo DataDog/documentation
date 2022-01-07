@@ -1,6 +1,6 @@
 {{ $dot := . }}
 <div class="logs-containers network-layers">
-    <div class="container cards-dd col-num-7">
+    <div class="container cards-dd col-num-8">
         <div class="card-deck">
             <a class="card" href="/synthetics/api_tests/http_tests">
                 <div class="card-body text-center py-2 px-1">
@@ -34,6 +34,11 @@
             </a>
             <a class="card" href="/synthetics/api_tests/icmp_tests">
                 <div class="card-body text-center py-2 px-1">
+                    {{ partial "img.html" (dict "root" . "src" "synthetics/api_tests/icmp-test2.png" "class" "img-fluid" "alt" "ICMP" "width" "400") }}
+                </div>
+            </a>
+            <a class="card" href="/synthetics/api_tests/grpc_tests">
+                <div class="card-body text-center py-2 px-1"> <!-- TODO update the image -->
                     {{ partial "img.html" (dict "root" . "src" "synthetics/api_tests/icmp-test2.png" "class" "img-fluid" "alt" "ICMP" "width" "400") }}
                 </div>
             </a>
