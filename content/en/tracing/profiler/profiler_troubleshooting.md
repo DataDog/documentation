@@ -224,16 +224,12 @@ If you've configured the profiler and don't see profiles in the profile search p
 ```
 - enable debug logs by setting the `DD_TRACE_DEBUG` environment variable for the application
 - restart the application
-- open the DD-Dotnet-Profiler.(application name) log file from `%ProgramData%\Datadog-APM\logs\` folder
+- open the DD-Dotnet-Profiler.(application name) log file from %ProgramData%\Datadog-APM\logs\ folder
 - look for 'Profile data was NOT successfully exported via HTTP POST' entries
 - check the following fields for errors
-<br/>
   ["response.StatusCode"]=...,
-<br/>
   ["response.Error"]="...",
-<br/>
 - check the following field to ensure that the right url is used
-<br/>
   ["_profilesIngestionEndpoint_url"]="https://intake.profile.datadoghq.com/v1/input",
 ```
 <br/>
