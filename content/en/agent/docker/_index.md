@@ -58,6 +58,8 @@ docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v
 
 **Note**: If you're using a different registry besides GCR or ECR-public, make sure to update the image.
 
+**Note**: For some features provided by system-probe (network monitoring, security agent, oom_kill check, etc.) you will also need mount the `/etc/os-release` file with `-v /etc/os-release:/host/etc/os-release:ro`. If your Linux distribution does not include an `/etc/os-release` file, mount the equivalent one provided (`/etc/redhat-release`, `/etc/fedora-release`, etc.) instead.
+
 {{% /tab %}}
 {{% tab "Amazon Linux" %}}
 
