@@ -28,6 +28,10 @@ The profiler is shipped within Datadog tracing libraries. If you are already usi
 
 ## Compatibility requirements
 
+<div class="alert alert-warning">
+  <strong>Note:</strong> Only Windows platforms are currently supported (Windows 10 and Windows Server starting from 2012 version).
+</div>
+
 ### Supported .NET runtimes
 
 The .NET Profiler supports .NET Framework 4.6.1+, .NET Core 2.1, 3.1, .NET 5, and .NET 6. 
@@ -56,24 +60,19 @@ TODO: create a page like https://docs-staging.datadoghq.com/kari/docs-2799-dotne
 
 The Datadog .NET Profiler is installed machine-wide so that all applications on the machine can be profiled.
 
-{{< tabs >}}
-{{% tab "Windows" %}}
-
 To install the .NET Profiler:
 
 1. Download the [.NET Monitoring MSI installer][1]. Select the MSI installer for the architecture that matches the operating system (x64 or x86).
 
 2. Run the .NET Monitoring MSI installer with administrator privileges.
-{{% /tab %}}
-{{< /tabs >}}
 
 <br/>
 
 ### Enable the profiler for your application
-{{< tabs >}}
-{{% tab "Windows" %}}
 
-#### Internet Information Services (IIS)
+{{< tabs >}}
+
+{{% tab "Internet Information Services (IIS)" %}}
 1. The .NET Monitoring MSI installer adds all required environment variables. There are no environment variables you need to configure.
 
 2. To profile applications hosted in IIS, completely stop and start IIS by running the following commands as an administrator:
@@ -86,11 +85,9 @@ To install the .NET Profiler:
    <div class="alert alert-warning">
      <strong>Note:</strong> Use <code>stop</code> and <code>start</code> commands. A reset or restart does not always work.
    </div>
+{{% /tab %}}
 
-<br/>
-
-#### Windows Services
-
+{{% tab "Windows Services" %}}
 **With Registry Editor:**
 
 In the Registry Editor, create a multi-string value called `Environment` in the `HKLM\System\CurrentControlSet\Services\<SERVICE NAME>` key and set the value data to:
@@ -124,11 +121,9 @@ For .NET Framework:
 [string[]] $v = @("COR_ENABLE_PROFILING=1", "CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}")
 Set-ItemProperty HKLM:SYSTEM\CurrentControlSet\Services\<SERVICE NAME> -Name Environment -Value $v
 ```
+{{% /tab %}}
 
-<br/>
-
-#### Standalone Applications
-
+{{% tab "Standalone Applications" %}}
 To automatically profile a non service application (console, ASP.NET (Core), Windows Forms, or WPF), set the environment variables before starting it. 
 
 <div class="alert alert-warning">
@@ -150,6 +145,7 @@ For .NET Framework:
    ```
 
 2. Manually restart the application.
+{{% /tab %}}
 
 <br/>
 
