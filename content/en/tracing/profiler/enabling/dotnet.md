@@ -168,25 +168,24 @@ You can configure the profiler using the following environment variables. Restar
 
 | Environment variable                             | Type          | Description                                                                                      |
 | ------------------------------------------------ | ------------- | ------------------------------------------------------------------------------------------------ |
-| `DD_ENV`                   | String        | The Datadog [environment][4] name, for example, `production`. |
-| `DD_SERVICE`               | String        | The Datadog [service][5] name. If this is not specified, the .NET Profiler tries to determine the service name automatically from the application name (process entry assembly or process name).    |
-| `DD_VERSION`               | String        | The version of your application.                             |
+| `DD_ENV`                   | String        | The [environment][4] name, for example, `production`. |
+| `DD_SERVICE`               | String        | The [service][4] name, for example, `web-backend`. If this is not specified, the .NET Profiler tries to determine the service name automatically from the application name (process entry assembly or process name).    |
+| `DD_VERSION`               | String        | The [version][4] of your service.  |
 | `DD_TAGS`                  | String        | Tags to apply to an uploaded profile. Must be a list of `<key>:<value>` separated by commas such as: `layer:api,team:intake`.   |
 | `DD_AGENT_HOST`            | String        | Sets the host where profiles are sent (the host running the Agent). Can be a hostname or an IP address. Ignored if `DD_TRACE_AGENT_URL` is set. Defaults to `localhost`.  |
 | `DD_TRACE_AGENT_PORT`      | String        | Sets the port where profiles are sent (the port where the Agent is listening for connections). Ignored if `DD_TRACE_AGENT_URL` is set. Defaults to`8126`..  |
 | `DD_TRACE_AGENT_URL`       | String        | Sets the URL endpoint where profiles are sent. Overrides `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT` if set. Defaults to `http://<DD_AGENT_HOST>:<DD_TRACE_AGENT_PORT>`.  |
-| `DD_TRACE_DEBUG`           | String        | Enables or disables debug logging (Could help in case of troubleshooting investigation). Valid values are: `true` or `false`. Defaults to `false`.  |
+| `DD_TRACE_DEBUG`           | Boolean        | Enables or disables debug logging (Could help in case of troubleshooting investigation). Valid values are: `true` or `false`. Defaults to `false`.  |
 | `DD_PROFILING_LOG_DIR`     | String        | Sets the directory for .NET Profiler logs. Defaults to `%ProgramData%\Datadog-APM\logs\`.  |
-| `DD_PROFILING_ENABLED`     | String        | If set to `false`, disables the .NET Profiler. Defaults to `true`.  |
+| `DD_PROFILING_ENABLED`     | Boolean        | If set to `false`, disables the .NET Profiler. Defaults to `true`.  |
 
 ## Further Reading
-The [Getting Started with Profiler][6] guide takes a sample service with a performance problem and shows you how to use Continuous Profiler to understand and fix the problem.
+The [Getting Started with Profiler][5] guide takes a sample service with a performance problem and shows you how to use Continuous Profiler to understand and fix the problem.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/dd-trace-dotnet/releases
 [2]: https://app.datadoghq.com/account/settings#agent/overview
 [3]: https://app.datadoghq.com/account/settings?agent_version=6#agent
-[4]: /tracing/guide/setting_primary_tags_to_scope/#environment
-[5]: /tracing/visualization/#services
-[6]: /getting_started/profiler/
+[4]: /getting_started/tagging/unified_service_tagging
+[5]: /getting_started/profiler/
