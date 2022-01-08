@@ -86,7 +86,6 @@ Datadog .NET Profiler is currently in public beta. Datadog recommends evaluating
    CORECLR_ENABLE_PROFILING=1
    CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
    DD_ENV=prod
-   DD_SERVICE=my-web-app
    DD_VERSION=1.2.3
    ```
    {{< img src="tracing/setup/dotnet/RegistryEditorCore.png" alt="Using the Registry Editor to create environment variables for a Windows service" style="width:90%" >}}
@@ -96,7 +95,6 @@ Datadog .NET Profiler is currently in public beta. Datadog recommends evaluating
    COR_ENABLE_PROFILING=1
    COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
    DD_ENV=prod
-   DD_SERVICE=my-web-app
    DD_VERSION=1.2.3
    ```
    {{< img src="tracing/setup/dotnet/RegistryEditorFramework.png" alt="Using the Registry Editor to create environment variables for a Windows service" style="width:90%" >}}
@@ -109,7 +107,6 @@ Datadog .NET Profiler is currently in public beta. Datadog recommends evaluating
        "CORECLR_ENABLE_PROFILING=1",
        "CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}",
        "DD_ENV=prod",
-       "DD_SERVICE=my-web-app",
        "DD_VERSION=1.2.3"
    )
    Set-ItemProperty HKLM:SYSTEM\CurrentControlSet\Services\<SERVICE NAME> -Name Environment -Value $v
@@ -121,7 +118,6 @@ Datadog .NET Profiler is currently in public beta. Datadog recommends evaluating
        "COR_ENABLE_PROFILING=1",
        "COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}",
        "DD_ENV=prod",
-       "DD_SERVICE=my-web-app",
        "DD_VERSION=1.2.3"
    )
    Set-ItemProperty HKLM:SYSTEM\CurrentControlSet\Services\<SERVICE NAME> -Name Environment -Value $v
@@ -142,7 +138,6 @@ Datadog .NET Profiler is currently in public beta. Datadog recommends evaluating
    CORECLR_ENABLE_PROFILING=1
    CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
    DD_ENV=prod
-   DD_SERVICE=my-web-app
    DD_VERSION=1.2.3
    ```
 
@@ -153,7 +148,6 @@ Datadog .NET Profiler is currently in public beta. Datadog recommends evaluating
    COR_ENABLE_PROFILING=1
    COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
    DD_ENV=prod
-   DD_SERVICE=my-web-app
    DD_VERSION=1.2.3
    ```
 
