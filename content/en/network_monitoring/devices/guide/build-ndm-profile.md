@@ -73,7 +73,7 @@ metrics:
 
 ### Generate a profile
 
-You can use [ddev][7], part of the Datadog integrations developer's toolkit, to create a profile from a list of MIBs. This script requires a list of ASN1 MIB files as input argument, and copies to the clipboard a list of metrics that can be used to create a profile.
+You can use [ddev][7], part of the Datadog integrations developer's toolkit, to create a profile from a list of MIBs. This script requires a list of ASN1 MIB files as input arguments, and copies to the clipboard a list of metrics used to create a profile.
 
 ```console
 $  ddev meta snmp generate-profile-from-mibs --help
@@ -83,7 +83,7 @@ $  ddev meta snmp generate-profile-from-mibs --help
 
 Use `-f, --filters` as an option to provide a collection of MIB names and their node names to be included.
 
-For example, using this option will generate a profile that includes the `system`, `interfaces` and `ip` nodes from `RFC1213-MIB`, no node from `CISCO-SYSLOG-MIB`, and the node `snmpEngine` from `SNMP-FRAMEWORK-MIB`.
+For example, using this option generates a profile that includes the `system`, `interfaces` and `ip` nodes from `RFC1213-MIB`, no node from `CISCO-SYSLOG-MIB`, and the node `snmpEngine` from `SNMP-FRAMEWORK-MIB`.
 
 ```yaml
 RFC1213-MIB:
