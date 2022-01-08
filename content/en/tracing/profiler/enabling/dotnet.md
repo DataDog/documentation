@@ -26,8 +26,6 @@ further_reading:
 Datadog .NET Profiler is currently in public beta. Datadog recommends evaluating the profiler in a non-sensitive environment before deploying in production.
 </div>
 
-The profiler is shipped within Datadog tracing libraries. If you are already using a version of [APM that includes the .NET Profiler][1] to collect traces from your application, you can skip installing the library and go directly to enabling the profiler.
-
 ## Requirements
 
 **Supported operating systems:**
@@ -50,11 +48,11 @@ The profiler is shipped within Datadog tracing libraries. If you are already usi
   <strong>Note:</strong> Datadog's.NET Tracer and Profiler rely on the .NET CLR Profiling API. This API allows only one subscriber (for example, APM). To ensure maximum visibility, run only one APM solution in your application environment.
 </div>
 
-1. If you are already using Datadog, upgrade your agent to version [7.20.2][2]+ or [6.20.2][3]+.
+1. If you are already using Datadog, upgrade your agent to version [7.20.2][1]+ or [6.20.2][2]+.
 
-2. Download the [.NET Monitoring MSI installer][1] version TODO+. Continuous Profiler only supports 64-bit, with 32-bit support coming soon.
+2. The profiler and tracer are shipped together. Install or upgrade to version TODO+ if needed, using the [.NET Monitoring MSI installer][3]. Continuous Profiler only supports 64-bit Windows, with 32-bit support coming soon, so you'll want the file like `datadog-dotnet-apm-2.1.0-x64.msi`.
 
-3. Run the .NET Monitoring MSI installer with administrator privileges.
+   Run the .NET Monitoring MSI installer with administrator privileges.
 
 {{< tabs >}}
 
@@ -184,8 +182,8 @@ The [Getting Started with Profiler][5] guide takes a sample service with a perfo
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://github.com/DataDog/dd-trace-dotnet/releases
-[2]: https://app.datadoghq.com/account/settings#agent/overview
-[3]: https://app.datadoghq.com/account/settings?agent_version=6#agent
+[1]: https://app.datadoghq.com/account/settings#agent/overview
+[2]: https://app.datadoghq.com/account/settings?agent_version=6#agent
+[3]: https://github.com/DataDog/dd-trace-dotnet/releases
 [4]: /getting_started/tagging/unified_service_tagging
 [5]: /getting_started/profiler/
