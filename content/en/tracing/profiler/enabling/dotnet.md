@@ -81,79 +81,81 @@ Datadog .NET Profiler is currently in public beta. Datadog recommends evaluating
 
    In the Registry Editor, create a multi-string value called `Environment` in the `HKLM\System\CurrentControlSet\Services\<SERVICE NAME>` key and set the value data to:
 
-   - For .NET Core and .NET 5+:
-     ```text
-     CORECLR_ENABLE_PROFILING=1
-     CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
-     DD_ENV=prod
-     DD_SERVICE=my-web-app
-     DD_VERSION=1.2.3
-     ```
-     {{< img src="tracing/setup/dotnet/RegistryEditorCore.png" alt="Using the Registry Editor to create environment variables for a Windows service" style="width:90%" >}}
-   - For .NET Framework:
-     ```text
-     COR_ENABLE_PROFILING=1
-     COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
-     DD_ENV=prod
-     DD_SERVICE=my-web-app
-     DD_VERSION=1.2.3
-     ```
-     {{< img src="tracing/setup/dotnet/RegistryEditorFramework.png" alt="Using the Registry Editor to create environment variables for a Windows service" style="width:90%" >}}
+   For .NET Core and .NET 5+:
+   ```text
+   CORECLR_ENABLE_PROFILING=1
+   CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
+   DD_ENV=prod
+   DD_SERVICE=my-web-app
+   DD_VERSION=1.2.3
+   ```
+   {{< img src="tracing/setup/dotnet/RegistryEditorCore.png" alt="Using the Registry Editor to create environment variables for a Windows service" style="width:90%" >}}
+
+   For .NET Framework:
+   ```text
+   COR_ENABLE_PROFILING=1
+   COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
+   DD_ENV=prod
+   DD_SERVICE=my-web-app
+   DD_VERSION=1.2.3
+   ```
+   {{< img src="tracing/setup/dotnet/RegistryEditorFramework.png" alt="Using the Registry Editor to create environment variables for a Windows service" style="width:90%" >}}
 
    **With a PowerShell script:**
 
-   - For .NET Core and .NET 5+:
-     ```powershell
-     [string[]] $v = @(
-         "CORECLR_ENABLE_PROFILING=1",
-         "CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}",
-         "DD_ENV=prod",
-         "DD_SERVICE=my-web-app",
-         "DD_VERSION=1.2.3"
-     )
-     Set-ItemProperty HKLM:SYSTEM\CurrentControlSet\Services\<SERVICE NAME> -Name Environment -Value $v
-     ```
-   - For .NET Framework:
-     ```powershell
-     [string[]] $v = @(
-         "COR_ENABLE_PROFILING=1",
-         "COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}",
-         "DD_ENV=prod",
-         "DD_SERVICE=my-web-app",
-         "DD_VERSION=1.2.3"
-     )
-     Set-ItemProperty HKLM:SYSTEM\CurrentControlSet\Services\<SERVICE NAME> -Name Environment -Value $v
-     ```
+   For .NET Core and .NET 5+:
+   ```powershell
+   [string[]] $v = @(
+       "CORECLR_ENABLE_PROFILING=1",
+       "CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}",
+       "DD_ENV=prod",
+       "DD_SERVICE=my-web-app",
+       "DD_VERSION=1.2.3"
+   )
+   Set-ItemProperty HKLM:SYSTEM\CurrentControlSet\Services\<SERVICE NAME> -Name Environment -Value $v
+   ```
+
+   For .NET Framework:
+   ```powershell
+   [string[]] $v = @(
+       "COR_ENABLE_PROFILING=1",
+       "COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}",
+       "DD_ENV=prod",
+       "DD_SERVICE=my-web-app",
+       "DD_VERSION=1.2.3"
+   )
+   Set-ItemProperty HKLM:SYSTEM\CurrentControlSet\Services\<SERVICE NAME> -Name Environment -Value $v
+   ```
 
 2. A minute or two after starting your application, your profiles will show up on the [Datadog APM > Profiler page][5].
 {{% /tab %}}
 
 {{% tab "Standalone applications" %}}
-To automatically profile a non-service application, such as console, ASP.NET (Core), Windows Forms, or WPF, you'll need to set some environment variables before starting it.
+1. To automatically profile a non-service application, such as console, ASP.NET (Core), Windows Forms, or WPF, you'll need to set some environment variables before starting it.
 
-If the environment variables are set for the current user, _all_ .NET applications will be profiled. Instead, we recomment setting them in a batch file that also starts the application and running that. For example:
+   If the environment variables are set for the current user, _all_ .NET applications will be profiled. Instead, we recommend setting them in a batch file that also starts the application and running that.
 
- - For .NET Core and .NET 5+:
- ```
- TODO show example batch file
+   For .NET Core and .NET 5+:
+   ```
+   TODO show example batch file
 
- CORECLR_ENABLE_PROFILING=1
- CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
- DD_ENV=prod
- DD_SERVICE=my-web-app
- DD_VERSION=1.2.3
- ```
+   CORECLR_ENABLE_PROFILING=1
+   CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
+   DD_ENV=prod
+   DD_SERVICE=my-web-app
+   DD_VERSION=1.2.3
+   ```
 
- - For .NET Framework:
- ```
- TODO show example batch file
+   For .NET Framework:
+   ```
+   TODO show example batch file
 
- COR_ENABLE_PROFILING=1
- COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
- DD_ENV=prod
- DD_SERVICE=my-web-app
- DD_VERSION=1.2.3
- ```
+   COR_ENABLE_PROFILING=1
+   COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
+   DD_ENV=prod
+   DD_SERVICE=my-web-app
+   DD_VERSION=1.2.3
+   ```
 
 2. A minute or two after starting your application, your profiles will show up on the [Datadog APM > Profiler page][5].
 {{% /tab %}}
