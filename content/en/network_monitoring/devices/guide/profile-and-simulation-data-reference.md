@@ -5,13 +5,13 @@ kind: guide
 
 ## Overview
 
-Datadog [Network Device Monitoring][1] (NDM) uses profiles for collecting metrics from network devices. NDM profiles use [SNMP concepts][2]. Use this guide as reference when formatting a [Network Device Monitoring profile][3] or simulation data.
+Datadog [Network Device Monitoring][1] (NDM) uses profiles for collecting metrics from network devices. NDM profiles use [SNMP concepts][2]. Use this guide as a reference when formatting a [Network Device Monitoring profile][3] or simulation data.
 
 ## Profile format
 
 ### Structure
 
-An SNMP profile is materialized as a YAML file with the following structure:
+Create an SNMP profile as a YAML file with the following structure:
 
 ```yaml
 sysobjectid: <x.y.z...>
@@ -60,8 +60,7 @@ _(Optional)_
 
 This field can be used to include metrics and metric tags from other so-called _base profiles_. Base profiles can derive from other base profiles to build a hierarchy of reusable profile mixins.
 
-!!! important
-    All device profiles should extend from the `_base.yaml` profile, which defines items that should be collected for all devices.
+**Note:** All device profiles should extend from the `_base.yaml` profile, which defines items that should be collected for all devices.
 
 Example:
 
@@ -75,7 +74,7 @@ extends:
 
 _(Required)_
 
-Entries in the `metrics` field define which metrics are be collected by the profile. They can reference either a single OID (for example, _symbol_), or an SNMP table.
+Entries in the `metrics` field define which metrics are collected by the profile. They can reference either a single OID (for example, `symbol`) or an SNMP table.
 
 ##### Symbol metrics
 
@@ -120,17 +119,6 @@ metrics:
 
 **Note**: Symbol metrics from the same `MIB` must still be listed as separate `metrics` entries, as shown above.
 
-For example, this is _not_ valid syntax:
-
-```yaml
-metrics:
-  - MIB: ISILON-MIB
-    symbol:
-      - OID: 1.3.6.1.4.1.12124.1.2.1.1
-        name: clusterIfsInBytes
-      - OID: 1.3.6.1.4.1.12124.1.2.1.3
-        name: clusterIfsOutBytes
-```
 
 ##### Table metrics
 
@@ -159,7 +147,7 @@ exampleColumn2 OBJECT-TYPE
 -- ...
 ```
 
-In profiles, tables can be specified as entries containing the `MIB`, `table` and `symbols` fields:
+In profiles, tables can be specified as entries containing the `MIB`, `table`, and `symbols` fields:
 
 ```yaml
 metrics:
@@ -263,13 +251,13 @@ metrics:
 
 If the external table has different indexes, use `index_transform` to select a subset of the full index. `index_transform` is a list of `start`/`end` ranges to extract from the current table index to match the external table index. `start` and `end` are inclusive.
 
-External table indexes must be a subset of the indexes of the current table, or same indexes in a different order.
+External table indexes must be a subset of the indexes of the current table, or the same indexes in a different order.
 
 In the example above, the index of `cpiPduBranchTable` looks like `1.6.0.36.155.53.3.246`, the first digit is the `cpiPduBranchId` index and the rest is the `cpiPduBranchMac` index. The index of `cpiPduTable` looks like `6.0.36.155.53.3.246` and represents `cpiPduMac` (equivalent to `cpiPduBranchMac`).
 
 By using the `index_transform` with start 1 and end 7, it extracts `6.0.36.155.53.3.246` from `1.6.0.36.155.53.3.246` (`cpiPduBranchTable` full index), and then use it to match `6.0.36.155.53.3.246` (`cpiPduTable` full index).
 
-`index_transform` can be more complex, the following definition extracts `2.3.5.6.7` from `1.2.3.4.5.6.7`.
+An `index_transform` can be more complex; the following definition extracts `2.3.5.6.7` from `1.2.3.4.5.6.7`:
 
 ```yaml
         index_transform:
@@ -304,9 +292,9 @@ metrics:
       #
       # Tag metrics in this table by this CPU position.
       #
-      # To do this, look up the position of this OID in `INDEX`. Here it's in first position.
+      # To do this, look up the position of this OID in `INDEX`. Here it's in the first position.
       # Reference it here using `index: 1`.
-      # (If there were two OIDs in `INDEX`, and you wanted to use the one in second position, use `index: 2`.)
+      # (If there were two OIDs in `INDEX`, and you wanted to use the one in the second position, use `index: 2`.)
       #
       # NOTE: currently only indexes that refer to a column in the same table are supported.
       - tag: cpu
@@ -339,7 +327,7 @@ metrics:
       16: dns
 ```
 
-See meaning of index as used here in [Using an index](#using-an-index) section.
+See the meaning of `index` as used here in [Using an index](#using-an-index) section.
 
 ###### Tagging tips
 
@@ -377,8 +365,8 @@ For such cases, you can define a `forced_type`. Possible values and their effect
 | `rate`                     | Submit as a rate.                                            |
 | `percent`                  | Multiply by 100 and submit as a rate.                        |
 | `monotonic_count`          | Submit as a monotonic count.                                 |
-| `monotonic_count_and_rate` | Submit 2 copies of the metric: one as a monotonic count, and one as a rate (suffixed with `.rate`). |
-| `flag_stream`              | Submit each flag of a flag stream as individual metric with value `0` or `1`. See [Flag Stream section](#flag-stream). |
+| `monotonic_count_and_rate` | Submit two copies of the metric: one as a monotonic count, and one as a rate (suffixed with `.rate`). |
+| `flag_stream`              | Submit each flag of a flag stream as an individual metric with value `0` or `1`. See [Flag Stream section](#flag-stream). |
 
 This works on both symbol and table metrics:
 
@@ -437,9 +425,9 @@ metrics:
 
 ###### Flag stream
 
-When the value is a flag stream like `010101`, you can use `forced_type: flag_stream` to submit each flag as individual metric with value `0` or `1`. Two options are required when using `flag_stream`:
+When the value is a flag stream like `010101`, you can use `forced_type: flag_stream` to submit each flag as an individual metric with value `0` or `1`. Two options are required when using `flag_stream`:
 
-- `options.placement`: position of the flag in the flag stream (1-based indexing, first element is placement 1).
+- `options.placement`: position of the flag in the flag stream (1-based indexing, the first element is placement 1).
 - `options.metric_suffix`: suffix appended to the metric name for a specific flag, usually matching the name of the flag.
 
 For example:
@@ -470,7 +458,7 @@ This example submits two metrics, `snmp.upsBasicStateOutputState.OnLine` and `sn
 
 ##### Extract value
 
-If the metric value to be submitted is from a OID with string value and needs to be extracted from it, you can use extract value feature.
+If the metric value to be submitted is from an OID with astring value and needs to be extracted, you can use the extract value feature.
 
 `extract_value` is a regex pattern with one capture group like `(\d+)C`, where the capture group is `(\d+)`.
 
@@ -508,13 +496,13 @@ metrics:
     # ...
 ```
 
-In the examples above, the OID value is a SNMP OctetString value `22C` and `22` is submitted as value for `snmp.temperature`.
+In the examples above, the OID value is an SNMP OctetString value `22C`, and `22` is submitted as value for `snmp.temperature`.
 
 #### `metric_tags`
 
 _(Optional)_
 
-This field is used to apply tags to all metrics collected by the profile. It has the same meaning than the instance-level config option (see [`conf.yaml.example`][7]).
+This field applies tags to all metrics collected by the profile. It has the same meaning as the instance-level config option (see [`conf.yaml.example`][7]).
 
 Several collection methods are supported, as illustrated below:
 
