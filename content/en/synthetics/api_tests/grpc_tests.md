@@ -16,12 +16,12 @@ further_reading:
 ## Overview
 
 gRPC healthchecks allow you to probe whether your gRPC servers and services are able to handle RPCs (remote procedure call).
-The health checking mechanism comes as a gRPC service to be implemented on the gRPC server. The open-source proto file can be found in the open-source [gRPC repository][1]
+You can implement the health checking mechanism as a gRPC service on a gRPC server. To access a proto file, see the [open-source gRPC repository][1].
 
 gRPC healthchecks can run from both [managed][2] and [private locations][3] depending on your preference for running the test from outside or inside your network. gRPC tests can run on a schedule, on-demand, or directly within your [CI/CD pipelines][4].
 
 <div class="alert alert-warning">
-This feature is our first step towards gRPC tests into Synthetic Monitoring. We would love to hear your gRPC use cases to build synthetic gRPC tests that answer your needs. Share us your gRPC usages by contacting the <a href="https://docs.datadoghq.com/help/">Datadog support</a> team.
+The Synthetic Monitoring team welcomes you to share your gRPC use cases for Synthetic tests with the <a href="https://docs.datadoghq.com/help/">Support</a> team.
 </div>
 
 ## Configuration
@@ -31,7 +31,7 @@ After choosing to create an `gRPC` test, define your test's request.
 ### Define request
 
 1. Specify the **Host** and **Port** to run your test on. By default, the port is set to `443`.
-2. Enter the service you want to send an health check. You can leave this field blank if you want to do an health check on the gRPC server.
+2. Enter the service you want to send a health check. Leave this field blank if you want to send a health check on the gRPC server.
 
 <!--TODO. will probably have an "advanced options" section. maybe need to c/p the http advanced option section-->
 
