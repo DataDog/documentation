@@ -2,13 +2,14 @@
 title: Log Detection Rules
 type: documentation
 aliases:
+ - security_platform/detection_rules/cloud_siem
  - security_platform/detection_rules/security_monitoring
  - security_platform/detection_rules/create_a_new_rule
 further_reading:
-- link: "/security_monitoring/default_rules/"
+- link: "/cloud_siem/default_rules/"
   tag: "Documentation"
-  text: "Configure default Security Monitoring rules"
-- link: "/security_monitoring/explorer/"
+  text: "Configure default Cloud SIEM rules"
+- link: "/cloud_siem/explorer/"
   tag: "Documentation"
   text: "Learn about the Security Signals Explorer"
 - link: "https://www.datadoghq.com/blog/detect-unauthorized-third-parties-aws/"
@@ -18,8 +19,8 @@ further_reading:
   tag: "Blog"
   text: "Detect security threats with anomaly detection rules"
 aliases:
-    - /security_monitoring/detection_rules/security_monitoring/
-    - /security_platform/detection_rules/security_monitoring/
+    - /cloud_siem/detection_rules/security_monitoring/
+    - /security_platform/detection_rules/cloud_siem/
 ---
 
 ## Overview
@@ -28,7 +29,7 @@ To create a new log detection rule in Datadog, hover over **Security**, select *
 
 ## Rule Type
 
-For Security Monitoring, select **Log Detection** to analyze ingested logs in real-time.
+For Cloud SIEM, select **Log Detection** to analyze ingested logs in real-time.
 
 ## Choose a detection method
 

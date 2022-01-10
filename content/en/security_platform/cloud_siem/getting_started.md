@@ -6,6 +6,7 @@ aliases:
   - /cloud-siem/getting_started/
   - /security_monitoring/getting_started/
   - /security_platform/security_monitoring/
+  - /security_platform/security_monitoring/getting_started
   - /security_platform/getting_started/
 further_reading:
 - link: "/security_platform/default_rules"

@@ -1,21 +1,21 @@
 ---
-title: Filtres de sécurité avec l'API Security Monitoring
+title: Filtres de sécurité avec l'API Cloud SIEM
 kind: guide
 aliases:
   - /fr/security_monitoring/guide/how-to-setup-security-filters-using-security-monitoring-api/
 ---
 ## Présentation
 
-La solution Security Monitoring vous permet d'analyser vos logs ingérés afin de détecter en temps réel les menaces. Ainsi, vous pouvez associer vos logs aux renseignements sur les menaces, ou appliquer des [règles de sécurité][1] pour détecter toute attaque ou anomalie.
+La solution Cloud SIEM vous permet d'analyser vos logs ingérés afin de détecter en temps réel les menaces. Ainsi, vous pouvez associer vos logs aux renseignements sur les menaces, ou appliquer des [règles de sécurité][1] pour détecter toute attaque ou anomalie.
 
-Les logs analysés sont facturés en fonction du nombre total de gigaoctets ingérés et analysés par le service Security Monitoring Datadog. Par défaut, cette solution analyse tous vos logs ingérés, afin de maximiser les capacités de détection. Toutefois, avec l'[API Security Monitoring][2], vous pouvez configurer par programmation des filtres de sécurité, afin de définir le sous-ensemble de logs ingérés à analyser.
+Les logs analysés sont facturés en fonction du nombre total de gigaoctets ingérés et analysés par le service Cloud SIEM Datadog. Par défaut, cette solution analyse tous vos logs ingérés, afin de maximiser les capacités de détection. Toutefois, avec l'[API Cloud SIEM][2], vous pouvez configurer par programmation des filtres de sécurité, afin de définir le sous-ensemble de logs ingérés à analyser.
 
 Les scénarios suivants sont abordés dans ce guide :
 
 * [Configurer le filtre de sécurité par défaut pour exclure certains logs](ajouter-une-exclusion-au-filtre-de-securite-par-defaut)
 * [Créer des filtres de sécurité personnalisés pour spécifier les sources de logs à analyser](#creer-un-filtre-de-securite-personnalise)
 
-**Remarque** : les filtres de sécurité sont uniquement requis pour contrôler les logs analysés par la solution Security Monitoring. Vous n'avez pas besoin d'écrire des filtres de sécurité pour exclure les logs générés par l'Agent Datadog avec les solutions Cloud Workload Security (`source:runtime-security-agent`) et Cloud Security Posture Management (`source:compliance-agent`). En effet, ces logs ne sont pas facturés comme des logs analysés.
+**Remarque** : les filtres de sécurité sont uniquement requis pour contrôler les logs analysés par la solution Cloud SIEM. Vous n'avez pas besoin d'écrire des filtres de sécurité pour exclure les logs générés par l'Agent Datadog avec les solutions Cloud Workload Security (`source:runtime-security-agent`) et Cloud Security Posture Management (`source:compliance-agent`). En effet, ces logs ne sont pas facturés comme des logs analysés.
 
 ## Prérequis
 
