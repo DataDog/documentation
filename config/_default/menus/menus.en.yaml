@@ -99,12 +99,12 @@ main_left:
     url: 'https://www.datadoghq.com/product/security-platform/cloud-workload-security/'
     weight: 16
     parent: product
-  - identifier: 'sensitive-data-scanner'
-    name: 'Sensitive Data Scanner'
-    pre: "<i class='icon-sds'></i>"
+  - identifier: sensitive-data-scanner
+    name: Sensitive Data Scanner
+    pre: <i class='icon-sds'></i>
     url: 'https://www.datadoghq.com/product/sensitive-data-scanner/'
     weight: 17
-    parent: 'product'
+    parent: product
   - identifier: error-tracking
     name: Error Tracking
     pre: <i class="icon-error-tracking align-middle"></i>

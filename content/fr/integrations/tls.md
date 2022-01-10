@@ -15,13 +15,14 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/tls/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/tls/README.md
 display_name: TLS
 draft: false
 git_integration_title: tls
 guid: 4e27a211-a034-42dd-9939-9ef967b1da50
 integration_id: tls
 integration_title: TLS
+integration_version: 2.6.0
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com
@@ -30,7 +31,7 @@ metric_prefix: tls.
 metric_to_check: tls.seconds_left
 name: tls
 public_title: Intégration Datadog/TLS
-short_description: 'Surveillez les versions du protocole TLS, l''expiration et la validité des certificats, etc.'
+short_description: Surveillez les versions du protocole TLS, l'expiration et la validité des certificats, etc.
 support: core
 supported_os:
   - linux
@@ -81,6 +82,8 @@ Consultez la [documentation relative aux modèles d'intégration Autodiscovery][
 | `<CONFIG_INIT>`      | vide ou `{}`                          |
 | `<CONFIG_INSTANCE>`  | `{"server": "%%host%%", "port":"443"}` |
 
+**Remarque** : si vous utilisez des certificats internes qui n'ont pas été émis par une autorité de certification renommée, certaines métriques risquent de ne pas être transmises à Datadog. Utilisez `tls_verify: false` dans votre modèle d'intégration pour transmettre toutes les métriques dans cette instance.
+
 [1]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
 {{% /tab %}}
 {{< /tabs >}}
@@ -100,28 +103,16 @@ Consultez la [documentation relative aux modèles d'intégration Autodiscovery][
 TLS n'inclut aucun événement.
 
 ### Checks de service
+{{< get-service-checks-from-git "tls" >}}
 
-Consultez le fichier [service_checks.json][4] pour afficher la liste des checks de service fournis par cette intégration :
-
-**tls.can_connect** :<br>
-Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter à l'endpoint qu'il surveille. Si ce n'est pas le cas, renvoie `OK`.
-
-**tls.version** :<br>
-Renvoie `CRITICAL` si une connexion à une version non autorisée du protocole est établie. Si ce n'est pas le cas, renvoie `OK`.
-
-**tls.cert_validation** :<br>
-Renvoie `CRITICAL` si le certificat est incorrect ou ne correspond pas au hostname du serveur. Si ce n'est pas le cas, renvoie `OK`.
-
-**tls.cert_expiration** :<br>
-Renvoie `CRITICAL` si le certificat a expiré ou expire dans moins de `days_critical`/`seconds_critical`, renvoie `WARNING` s'il expire dans moins de `days_warning`/`seconds_warning`, ou renvoie `OK` pour les autres cas.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][5].
+Besoin d'aide ? Contactez [l'assistance Datadog][4].
+
 
 
 [1]: https://en.wikipedia.org/wiki/Transport_Layer_Security
 [2]: https://app.datadoghq.com/account/settings#agent
 [3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
-[4]: https://github.com/DataDog/integrations-core/blob/master/tls/assets/service_checks.json
-[5]: https://docs.datadoghq.com/fr/help/
+[4]: https://docs.datadoghq.com/fr/help/
