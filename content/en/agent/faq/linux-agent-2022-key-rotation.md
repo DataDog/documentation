@@ -101,7 +101,7 @@ If the file `/usr/share/keyrings/datadog-archive-keyring.gpg` exists, the new ke
 Run the following command on the host:
 
 ```bash
-$ rpm -q gpg-pubkey-fd4bf915
+$ rpm -qa | grep gpg-pubkey-fd4bf915
 ```
 
 If the key is trusted, the command has a 0 exit code and outputs:
@@ -110,11 +110,7 @@ If the key is trusted, the command has a 0 exit code and outputs:
 gpg-pubkey-fd4bf915-5f573efe
 ```
 
-Otherwise, the command returns a non-0 exit code and the following output:
-
-```
-package gpg-pubkey-fd4bf915 is not installed
-```
+Otherwise, the command returns a non-0 exit code with no output.
 
 Alternatively, check if your `datadog.repo` file contains `https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public` as one of the `gpgkey` entries. This key file will be updated with the new key as soon as it is in use.
 
