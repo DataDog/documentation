@@ -81,10 +81,10 @@ main_left:
     url: 'https://www.datadoghq.com/product/security-platform/'
     weight: 13
     parent: product
-  - identifier: security-monitoring
-    name: Security Monitoring
+  - identifier: cloud-siem
+    name: Cloud SIEM
     pre: <i class="icon-siem align-middle"></i>
-    url: 'https://www.datadoghq.com/product/security-platform/security-monitoring/'
+    url: 'https://www.datadoghq.com/product/security-platform/cloud-siem/'
     weight: 14
     parent: product
   - identifier: cloud-security-posture-management
@@ -2384,35 +2384,35 @@ main:
     pre: security-platform
     identifier: security_platform
     weight: 180000
-  - name: Security Monitoring
-    url: security_platform/security_monitoring/
+  - name: Cloud SIEM
+    url: security_platform/cloud_siem/
     parent: security_platform
-    identifier: security_monitoring
+    identifier: cloud_siem
     weight: 1
   - name: Getting Started
-    url: security_platform/security_monitoring/getting_started
-    parent: security_monitoring
-    identifier: security_monitoring_getting_started
+    url: security_platform/cloud_siem/getting_started
+    parent: cloud_siem
+    identifier: cloud_siem_getting_started
     weight: 101
   - name: Security Home
-    url: security_platform/security_monitoring/security_home
-    parent: security_monitoring
-    identifier: security_monitoring_security_home
+    url: security_platform/cloud_siem/security_home
+    parent: cloud_siem
+    identifier: cloud_siem_security_home
     weight: 102
   - name: Log Detection Rules
-    url: security_platform/security_monitoring/log_detection_rules
-    parent: security_monitoring
-    identifier: security_monitoring_log_detection_rules
+    url: security_platform/cloud_siem/log_detection_rules
+    parent: cloud_siem
+    identifier: cloud_siem_log_detection_rules
     weight: 103
   - name: OOTB Rules
     url: /security_platform/default_rules#cat-log-detection
-    parent: security_monitoring
-    identifier: security_monitoring_default_rules
+    parent: cloud_siem
+    identifier: cloud_siem_default_rules
     weight: 104
   - name: Signals Explorer
     url: /security_platform/explorer
-    parent: security_monitoring
-    identifier: security_monitoring_signals_explorer
+    parent: cloud_siem
+    identifier: cloud_siem_signals_explorer
     weight: 105
   - name: Cloud Security Posture Management
     url: security_platform/cspm/
@@ -3172,8 +3172,8 @@ footer_product_two:
   - name: Security Platform
     url: 'https://www.datadoghq.com/product/security-platform/'
     weight: 140
-  - name: Security Monitoring
-    url: 'https://www.datadoghq.com/product/security-platform/security-monitoring'
+  - name: Cloud SIEM
+    url: 'https://www.datadoghq.com/product/security-platform/cloud-siem'
     weight: 145
   - name: CSPM
     url: 'https://www.datadoghq.com/product/security-platform/cloud-security-posture-management/'
@@ -7253,14 +7253,14 @@ api:
         - ListPermissions
       unstable: []
       order: 1
-  - name: Security Monitoring
-    url: /api/latest/security-monitoring/
-    identifier: security-monitoring
+  - name: Cloud SIEM
+    url: /api/latest/cloud-siem/
+    identifier: cloud-siem
     generated: true
   - name: Get a list of security signals
     url: '#get-a-list-of-security-signals'
     identifier: get-a-list-of-security-signals
-    parent: security-monitoring
+    parent: cloud-siem
     generated: true
     params:
       versions:
@@ -7273,7 +7273,7 @@ api:
   - name: Get a quick list of security signals
     url: '#get-a-quick-list-of-security-signals'
     identifier: get-a-quick-list-of-security-signals
-    parent: security-monitoring
+    parent: cloud-siem
     generated: true
     params:
       versions:
@@ -7286,7 +7286,7 @@ api:
   - name: Update an existing rule
     url: '#update-an-existing-rule'
     identifier: update-an-existing-rule
-    parent: security-monitoring
+    parent: cloud-siem
     generated: true
     params:
       versions:
@@ -7298,7 +7298,7 @@ api:
   - name: Get a rule's details
     url: '#get-a-rules-details'
     identifier: get-a-rules-details
-    parent: security-monitoring
+    parent: cloud-siem
     generated: true
     params:
       versions:
@@ -7310,7 +7310,7 @@ api:
   - name: Delete an existing rule
     url: '#delete-an-existing-rule'
     identifier: delete-an-existing-rule
-    parent: security-monitoring
+    parent: cloud-siem
     generated: true
     params:
       versions:
@@ -7322,7 +7322,7 @@ api:
   - name: Create a detection rule
     url: '#create-a-detection-rule'
     identifier: create-a-detection-rule
-    parent: security-monitoring
+    parent: cloud-siem
     generated: true
     params:
       versions:
@@ -7334,7 +7334,7 @@ api:
   - name: List rules
     url: '#list-rules'
     identifier: list-rules
-    parent: security-monitoring
+    parent: cloud-siem
     generated: true
     params:
       versions:
@@ -7346,7 +7346,7 @@ api:
   - name: Update a security filter
     url: '#update-a-security-filter'
     identifier: update-a-security-filter
-    parent: security-monitoring
+    parent: cloud-siem
     generated: true
     params:
       versions:
@@ -7358,7 +7358,7 @@ api:
   - name: Get a security filter
     url: '#get-a-security-filter'
     identifier: get-a-security-filter
-    parent: security-monitoring
+    parent: cloud-siem
     generated: true
     params:
       versions:
@@ -7370,7 +7370,7 @@ api:
   - name: Delete a security filter
     url: '#delete-a-security-filter'
     identifier: delete-a-security-filter
-    parent: security-monitoring
+    parent: cloud-siem
     generated: true
     params:
       versions:
@@ -7382,7 +7382,7 @@ api:
   - name: Create a security filter
     url: '#create-a-security-filter'
     identifier: create-a-security-filter
-    parent: security-monitoring
+    parent: cloud-siem
     generated: true
     params:
       versions:
@@ -7394,7 +7394,7 @@ api:
   - name: Get all security filters
     url: '#get-all-security-filters'
     identifier: get-all-security-filters
-    parent: security-monitoring
+    parent: cloud-siem
     generated: true
     params:
       versions:
