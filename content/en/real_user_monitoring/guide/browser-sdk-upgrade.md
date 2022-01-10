@@ -10,7 +10,7 @@ further_reading:
   text: "Use Datadog Session Replay to view real-time user journeys"
 ---
 
-This guide list all the migration steps between the different major versions of the Browser SDK.
+Follow this guide to migrate between major versions of the RUM Browser SDK.
 
 ## From v3 to v4
 
@@ -20,23 +20,23 @@ Several breaking changes were made to RUM and logs Browser SDK with the v4 versi
 
 ### Intake URLs
 
-We changed URLs of where the Browser SDK data is sent. Please make sure that your [Content Security Policy is up to date][6].
+The URLs for where the Browser SDK data is sent has changed. Ensure that your [Content Security Policy is up to date][6].
 
 ### Minimal Typescript version support
 
-The Browser SDK is now incompatible with TypeScript below v3.8.2. If you are using TypeScript, please make sure that the version you are using is greater or equal to v3.8.2.
+Browser SDK v4 is not compatible with TypeScript earlier than v3.8.2. If you use TypeScript, ensure that the version is at least v3.8.2.
 
 ### Tags syntax
 
-version, env and service initialization parameters are sent as tags to Datadog. The Browser SDK is now slightly sanitizes them (to ensure that they don't unexpectedly generate multiple tags) and prints a warning if those values don't meet the tag requirements syntax.
+The `version`, `env`, and `service` initialization parameters are sent as tags to Datadog. The Browser SDK slightly sanitizes them, to ensure that they don't generate multiple tags, and prints a warning if those values don't meet the tag requirements syntax.
 
-### Stricter initialization parameters typings
+### Stricter initialization parameters typing
 
-TypeScript types representing initialization parameters are now stricter and may reject previously accepted unsupported parameters. If you get typechecking issues, please make sure you are only providing supported initialization parameters.
+TypeScript types representing initialization parameters are stricter and may reject previously accepted unsupported parameters. If you get type-checking errors, ensure you are providing supported initialization parameters.
 
 ### Privacy options precedence
 
-When multiple privacy options are specified on the same element, we now apply the most restrictive one to avoid unexpectedly leaking privacy (ex: if both `dd-privacy-allow` and `dd-privacy-hidden` classes are specified on the same element, we now consider it hidden instead of allow).
+When multiple privacy options are specified on the same element, Datadog applies the most restrictive option to avoid unexpectedly leaking sensitive data. For example, if both `dd-privacy-allow` and `dd-privacy-hidden` classes are specified on the same element, it is hidden instead of allowed.
 
 ### Action names computation
 
@@ -51,11 +51,11 @@ The Browser SDK previously used a `_datadog_xhr` property on `XMLHttpRequest` ob
 
 ### `proxyHost` initialization parameter
 
-The `proxyHost` initialization parameter have been removed. Make sure to use the simpler `proxyUrl` initialization parameter instead.
+The `proxyHost` initialization parameter has been removed. Use the `proxyUrl` initialization parameter instead.
 
 ### Privacy options support
 
-`input-ignored` and `input-masked` are no longer valid privacy options and should be replaced with the `mask-user-input` privacy option. Specifically, you should replace:
+The options `input-ignored` and `input-masked` are no longer valid privacy options. Instead, use the `mask-user-input` privacy option. Specifically, replace:
 
 * `dd-privacy-input-ignored` and `dd-privacy-input-masked` class names with `dd-privacy-mask-user-input`
 * `dd-privacy="input-masked"` and `dd-privacy="input-ignored"` attribute values with `dd-privacy="mask-user-input"`
