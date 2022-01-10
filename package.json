@@ -222,6 +222,7 @@
     "deploy:previewAssets": "./node_modules/.bin/hugo deploy --target previewAssets -e preview --maxDeletes 0 --log --verbose",
     "dereference": "node ./src/scripts/dereference.js",
     "prebuild": "rimraf public",
+    "prebuild:modules": "npx hugo mod clean && npx hugo mod npm pack && yarn install --link-duplicates --ignore-engines",
     "preinstall": "bash local/bin/sh/preinstall.sh",
     "prestart": "rimraf public && npx hugo mod clean && npx hugo mod npm pack && yarn install",
     "start": "run-p start:**",
