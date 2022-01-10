@@ -7,7 +7,7 @@ further_reading:
     text: Explorer les règles de détection de logs par défaut
   - link: /security_platform/security_monitoring/log_detection_rules
     tag: Documentation
-    text: Suivez le guide de création de nouvelles règles Security Monitoring
+    text: Suivez le guide de création de nouvelles règles Cloud SIEM
 ---
 ## Présentation
 

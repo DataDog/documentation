@@ -7,7 +7,7 @@ aliases:
 further_reading:
 - link: "/security_monitoring/default_rules/"
   tag: "Documentation"
-  text: "Configure default Security Monitoring rules"
+  text: "Configure default Cloud SIEM rules"
 - link: "/security_monitoring/explorer/"
   tag: "Documentation"
   text: "Learn about the Security Signals Explorer"
@@ -28,7 +28,7 @@ To create a new log detection rule in Datadog, hover over **Security**, select *
 
 ## Rule Type
 
-For Security Monitoring, select **Log Detection** to analyze ingested logs in real-time.
+For Cloud SIEM, select **Log Detection** to analyze ingested logs in real-time.
 
 ## Choose a detection method
 

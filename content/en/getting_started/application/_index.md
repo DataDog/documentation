@@ -123,11 +123,11 @@ Datadog [Real User Monitoring][18] (RUM) allows you to visualize and analyze rea
 
 [Serverless][20] lets you write event-driven code and upload it to a cloud provider, which manages all of the underlying compute resources. Datadog Serverless brings together metrics, traces, and logs from your AWS Lambda functions running serverless applications into one view, so that you can optimize performance by filtering to functions that are generating errors, high latency, or cold starts.
 
-## Security Monitoring
+## Cloud SIEM
 
 {{< img src="getting_started/security.png" alt="security" >}}
 
-Datadog [Security Monitoring][21] automatically detects threats to your application or infrastructure. For example, a targeted attack, an IP communicating with your systems matching a threat intel list, or an insecure configuration. These threats are surfaced in Datadog as Security Signals and can be correlated and triaged in the Security Explorer.
+Datadog [Cloud SIEM][21] automatically detects threats to your application or infrastructure. For example, a targeted attack, an IP communicating with your systems matching a threat intel list, or an insecure configuration. These threats are surfaced in Datadog as Security Signals and can be correlated and triaged in the Security Explorer.
 
 ## Synthetic Monitoring
 

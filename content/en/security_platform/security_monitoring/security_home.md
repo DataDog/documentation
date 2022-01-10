@@ -7,12 +7,12 @@ further_reading:
   text: "Explore default log detection rules"
 - link: "/security_platform/security_monitoring/log_detection_rules"
   tag: "Documentation"
-  text: "Follow the creating new Security Monitoring rules guide"
+  text: "Follow the creating new Cloud SIEM rules guide"
 ---
 
 ## Overview
 
-The [Security Home][1] page is an entry point to your security monitoring environment. Readily access logs that are analyzed to detect threats, signals generated from [default][2] or [custom][3] log detection rules, and threats that require attention and remediation. See the status of logging sources and configure new sources in one location.
+The [Security Home][1] page is an entry point to your Cloud SIEM environment. Readily access logs that are analyzed to detect threats, signals generated from [default][2] or [custom][3] log detection rules, and threats that require attention and remediation. See the status of logging sources and configure new sources in one location.
 
 {{< img src="security_platform/security_monitoring/security_home/overview.png" alt="Security Home" width="75%">}}
 
