@@ -360,6 +360,18 @@ components:
       - ADMIN
       - READ_ONLY
       - ERROR
+    AgentCheck:
+      description: Array of strings.
+      example:
+      - ntp
+      - ntp
+      - ntp:d884b5186b651429
+      - OK
+      - ''
+      - ''
+      items:
+        description: Agent check running on the host.
+      type: array
     AlertGraphWidgetDefinition:
       description: Alert graphs are timeseries graphs showing the current status of
         any monitor defined on your system.
@@ -3287,11 +3299,92 @@ components:
         meta:
           description: Metadata associated with your host.
           properties:
+            agent_checks:
+              description: A list of Agent checks running on the host.
+              items:
+                $ref: '#/components/schemas/AgentCheck'
+              type: array
+            agent_version:
+              description: The Datadog Agent version.
+              example: 7.32.3
+              type: string
+            cpuCores:
+              description: The number of cores.
+              example: 1
+              format: int64
+              type: integer
+            fbsdV:
+              description: An array of Mac versions.
+              items:
+                description: The version name.
+                example: FreeBSD
+                type: string
+              type: array
+            gohai:
+              description: JSON string containing system information.
+              example: '{"cpu":{"cache_size":"8192 KB","cpu_cores":"1","cpu_logical_processors":"1","family":"6","mhz":"2712.000","model":"142","model_name":"Intel(R)
+                Core(TM) i7-8559U CPU @ 2.70GHz","stepping":"10","vendor_id":"GenuineIntel"},"filesystem":[{"kb_size":"3966896","mounted_on":"/dev","name":"udev"},{"kb_size":"797396","mounted_on":"/run","name":"tmpfs"},{"kb_size":"64800356","mounted_on":"/","name":"/dev/mapper/vagrant--vg-root"},{"kb_size":"3986972","mounted_on":"/dev/shm","name":"tmpfs"},{"kb_size":"5120","mounted_on":"/run/lock","name":"tmpfs"},{"kb_size":"3986972","mounted_on":"/sys/fs/cgroup","name":"tmpfs"},{"kb_size":"488245288","mounted_on":"/vagrant","name":"vagrant"},{"kb_size":"797392","mounted_on":"/run/user/1000","name":"tmpfs"}],"memory":{"swap_total":"1003516kB","total":"7973944kB"},"network":{"interfaces":[{"ipv4":"10.0.2.15","ipv4-network":"10.0.2.0/24","ipv6":"fe80::a00:27ff:fec2:be11","ipv6-network":"fe80::/64","macaddress":"08:00:27:c2:be:11","name":"eth0"},{"ipv4":"192.168.122.1","ipv4-network":"192.168.122.0/24","macaddress":"52:54:00:6f:1c:bf","name":"virbr0"}],"ipaddress":"10.0.2.15","ipaddressv6":"fe80::a00:27ff:fec2:be11","macaddress":"08:00:27:c2:be:11"},"platform":{"GOOARCH":"amd64","GOOS":"linux","goV":"1.16.7","hardware_platform":"x86_64","hostname":"vagrant","kernel_name":"Linux","kernel_release":"4.15.0-29-generic","kernel_version":"#31-Ubuntu
+                SMP Tue Jul 17 15:39:52 UTC 2018","machine":"x86_64","os":"GNU/Linux","processor":"x86_64","pythonV":"2.7.15rc1"}}'
+              type: string
+            install_method:
+              description: Agent install method.
+              properties:
+                installer_version:
+                  description: The installer version.
+                  example: install_script-1.7.1
+                  type: string
+                tool:
+                  description: Tool used to install the agent.
+                  example: install_script
+                  type: string
+                tool_version:
+                  description: The tool version.
+                  example: install_script
+                  type: string
+              type: object
+            macV:
+              description: An array of Mac versions.
+              items:
+                description: Version name.
+                example: Mac
+                type: string
+              type: array
+            machine:
+              description: The machine architecture.
+              example: amd64
+              type: string
             nixV:
               description: Array of Unix versions.
               items:
                 description: Version name.
                 example: Ubuntu
+                type: string
+              type: array
+            platform:
+              description: The OS platform.
+              example: linux
+              type: string
+            processor:
+              description: The processor.
+              example: Intel(R) Core(TM) i7-8559U CPU @ 2.70GHz
+              type: string
+            pythonV:
+              description: The Python version.
+              example: 3.8.11
+              type: string
+            socket-fqdn:
+              description: The socket fqdn.
+              example: vagrant.vm.
+              type: string
+            socket-hostname:
+              description: The socket hostname.
+              example: vagrant
+              type: string
+            winV:
+              description: An array of Windows versions.
+              items:
+                description: Version name.
+                example: Windows
                 type: string
               type: array
           type: object
