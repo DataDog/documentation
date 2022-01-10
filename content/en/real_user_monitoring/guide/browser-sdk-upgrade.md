@@ -1,5 +1,5 @@
 ---
-title: Upgrade the Browser SDK to V3
+title: Upgrade the Browser SDK
 kind: guide
 further_reading:
 - link: '/real_user_monitoring/explorer'
@@ -10,7 +10,57 @@ further_reading:
   text: "Use Datadog Session Replay to view real-time user journeys"
 ---
 
-## Overview
+This guide list all the migration steps between the different major versions of the Browser SDK.
+
+## From v3 to v4
+
+Several breaking changes were made to RUM and logs Browser SDK with the v4 version.
+
+## Changes
+
+### Intake URLs
+
+We changed URLs of where the Browser SDK data is sent. Please make sure that your [Content Security Policy is up to date][6].
+
+### Minimal Typescript version support
+
+The Browser SDK is now incompatible with TypeScript below v3.8.2. If you are using TypeScript, please make sure that the version you are using is greater or equal to v3.8.2.
+
+### Tags syntax
+
+version, env and service initialization parameters are sent as tags to Datadog. The Browser SDK is now slightly sanitizes them (to ensure that they don't unexpectedly generate multiple tags) and prints a warning if those values don't meet the tag requirements syntax.
+
+### Stricter initialization parameters typings
+
+TypeScript types representing initialization parameters are now stricter and may reject previously accepted unsupported parameters. If you get typechecking issues, please make sure you are only providing supported initialization parameters.
+
+### Privacy options precedence
+
+When multiple privacy options are specified on the same element, we now apply the most restrictive one to avoid unexpectedly leaking privacy (ex: if both `dd-privacy-allow` and `dd-privacy-hidden` classes are specified on the same element, we now consider it hidden instead of allow).
+
+### Action names computation
+
+When computing automatic actions target name on elements without `data-dd-action-name` attribute, we are using the "inner text" of this element. If it contains some elements that specify `data-dd-action-name`, their text is now removed inside the ancestor inner text.
+This might slightly change automatic action names shown in the Datadog App.
+
+## Removals
+
+### XHR `_datadog_xhr` field
+
+The Browser SDK previously used a `_datadog_xhr` property on `XMLHttpRequest` objects representing its internal state. This property has been removed without replacement as it wasn't intended to be used externally.
+
+### `proxyHost` initialization parameter
+
+The `proxyHost` initialization parameter have been removed. Make sure to use the simpler `proxyUrl` initialization parameter instead.
+
+### Privacy options support
+
+`input-ignored` and `input-masked` are no longer valid privacy options and should be replaced with the `mask-user-input` privacy option. Specifically, you should replace:
+
+* `dd-privacy-input-ignored` and `dd-privacy-input-masked` class names with `dd-privacy-mask-user-input`
+* `dd-privacy="input-masked"` and `dd-privacy="input-ignored"` attribute values with `dd-privacy="mask-user-input"`
+
+## From v2 to v3
 
 Browser SDK v3 introduces [Session Replay][1]. With this major version update, several breaking changes were made to RUM and logs Browser SDKs.
 
@@ -66,3 +116,4 @@ The RUM Browser SDK no longer lets you specify the source of an error collected 
 [3]: /real_user_monitoring/browser/monitoring_resource_performance/
 [4]: /real_user_monitoring/browser/modifying_data_and_context/?tab=npm#enrich-and-control-rum-data
 [5]: /real_user_monitoring/browser/collecting_browser_errors/?tab=npm#collect-errors-manually
+[6]: /real_user_monitoring/faq/content_security_policy
