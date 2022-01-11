@@ -830,7 +830,8 @@
                   "key": {
                     "description": "The API key.",
                     "readOnly": true,
-                    "type": "string"
+                    "type": "string",
+                    "x-secret": true
                   },
                   "last4": {
                     "description": "The last four characters of the API key.",
@@ -838,7 +839,8 @@
                     "maxLength": 4,
                     "minLength": 4,
                     "readOnly": true,
-                    "type": "string"
+                    "type": "string",
+                    "x-secret": true
                   },
                   "modified_at": {
                     "description": "Date the API key was last modified.",
@@ -1566,7 +1568,8 @@
                       "maxLength": 4,
                       "minLength": 4,
                       "readOnly": true,
-                      "type": "string"
+                      "type": "string",
+                      "x-secret": true
                     },
                     "modified_at": {
                       "description": "Date the API key was last modified.",
@@ -2161,7 +2164,8 @@
                   "key": {
                     "description": "The application key.",
                     "readOnly": true,
-                    "type": "string"
+                    "type": "string",
+                    "x-secret": true
                   },
                   "last4": {
                     "description": "The last four characters of the application key.",
@@ -2169,7 +2173,8 @@
                     "maxLength": 4,
                     "minLength": 4,
                     "readOnly": true,
-                    "type": "string"
+                    "type": "string",
+                    "x-secret": true
                   },
                   "name": {
                     "description": "Name of the application key.",
@@ -3716,7 +3721,8 @@
               "key": {
                 "description": "The API key.",
                 "readOnly": true,
-                "type": "string"
+                "type": "string",
+                "x-secret": true
               },
               "last4": {
                 "description": "The last four characters of the API key.",
@@ -3724,7 +3730,8 @@
                 "maxLength": 4,
                 "minLength": 4,
                 "readOnly": true,
-                "type": "string"
+                "type": "string",
+                "x-secret": true
               },
               "modified_at": {
                 "description": "Date the API key was last modified.",
@@ -3849,7 +3856,8 @@
           "key": {
             "description": "The API key.",
             "readOnly": true,
-            "type": "string"
+            "type": "string",
+            "x-secret": true
           },
           "last4": {
             "description": "The last four characters of the API key.",
@@ -3857,7 +3865,8 @@
             "maxLength": 4,
             "minLength": 4,
             "readOnly": true,
-            "type": "string"
+            "type": "string",
+            "x-secret": true
           },
           "modified_at": {
             "description": "Date the API key was last modified.",
@@ -3888,7 +3897,8 @@
               "key": {
                 "description": "The application key.",
                 "readOnly": true,
-                "type": "string"
+                "type": "string",
+                "x-secret": true
               },
               "last4": {
                 "description": "The last four characters of the application key.",
@@ -3896,7 +3906,8 @@
                 "maxLength": 4,
                 "minLength": 4,
                 "readOnly": true,
-                "type": "string"
+                "type": "string",
+                "x-secret": true
               },
               "name": {
                 "description": "Name of the application key.",
@@ -3993,7 +4004,8 @@
           "key": {
             "description": "The application key.",
             "readOnly": true,
-            "type": "string"
+            "type": "string",
+            "x-secret": true
           },
           "last4": {
             "description": "The last four characters of the application key.",
@@ -4001,7 +4013,8 @@
             "maxLength": 4,
             "minLength": 4,
             "readOnly": true,
-            "type": "string"
+            "type": "string",
+            "x-secret": true
           },
           "name": {
             "description": "Name of the application key.",
@@ -12697,7 +12710,8 @@
                       "maxLength": 4,
                       "minLength": 4,
                       "readOnly": true,
-                      "type": "string"
+                      "type": "string",
+                      "x-secret": true
                     },
                     "name": {
                       "description": "Name of the application key.",
@@ -20422,7 +20436,8 @@
                 "maxLength": 4,
                 "minLength": 4,
                 "readOnly": true,
-                "type": "string"
+                "type": "string",
+                "x-secret": true
               },
               "modified_at": {
                 "description": "Date the API key was last modified.",
@@ -20550,7 +20565,8 @@
             "maxLength": 4,
             "minLength": 4,
             "readOnly": true,
-            "type": "string"
+            "type": "string",
+            "x-secret": true
           },
           "modified_at": {
             "description": "Date the API key was last modified.",
@@ -20584,7 +20600,8 @@
                 "maxLength": 4,
                 "minLength": 4,
                 "readOnly": true,
-                "type": "string"
+                "type": "string",
+                "x-secret": true
               },
               "name": {
                 "description": "Name of the application key.",
@@ -20684,7 +20701,8 @@
             "maxLength": 4,
             "minLength": 4,
             "readOnly": true,
-            "type": "string"
+            "type": "string",
+            "x-secret": true
           },
           "name": {
             "description": "Name of the application key.",
@@ -20729,7 +20747,8 @@
                     "maxLength": 4,
                     "minLength": 4,
                     "readOnly": true,
-                    "type": "string"
+                    "type": "string",
+                    "x-secret": true
                   },
                   "name": {
                     "description": "Name of the application key.",
@@ -30086,7 +30105,8 @@
                                 "maxLength": 4,
                                 "minLength": 4,
                                 "readOnly": true,
-                                "type": "string"
+                                "type": "string",
+                                "x-secret": true
                               },
                               "modified_at": {
                                 "description": "Date the API key was last modified.",
@@ -30612,7 +30632,8 @@
                             "key": {
                               "description": "The API key.",
                               "readOnly": true,
-                              "type": "string"
+                              "type": "string",
+                              "x-secret": true
                             },
                             "last4": {
                               "description": "The last four characters of the API key.",
@@ -30620,7 +30641,8 @@
                               "maxLength": 4,
                               "minLength": 4,
                               "readOnly": true,
-                              "type": "string"
+                              "type": "string",
+                              "x-secret": true
                             },
                             "modified_at": {
                               "description": "Date the API key was last modified.",
@@ -31236,7 +31258,8 @@
                             "key": {
                               "description": "The API key.",
                               "readOnly": true,
-                              "type": "string"
+                              "type": "string",
+                              "x-secret": true
                             },
                             "last4": {
                               "description": "The last four characters of the API key.",
@@ -31244,7 +31267,8 @@
                               "maxLength": 4,
                               "minLength": 4,
                               "readOnly": true,
-                              "type": "string"
+                              "type": "string",
+                              "x-secret": true
                             },
                             "modified_at": {
                               "description": "Date the API key was last modified.",
@@ -31785,7 +31809,8 @@
                             "key": {
                               "description": "The API key.",
                               "readOnly": true,
-                              "type": "string"
+                              "type": "string",
+                              "x-secret": true
                             },
                             "last4": {
                               "description": "The last four characters of the API key.",
@@ -31793,7 +31818,8 @@
                               "maxLength": 4,
                               "minLength": 4,
                               "readOnly": true,
-                              "type": "string"
+                              "type": "string",
+                              "x-secret": true
                             },
                             "modified_at": {
                               "description": "Date the API key was last modified.",
@@ -32380,7 +32406,8 @@
                                 "maxLength": 4,
                                 "minLength": 4,
                                 "readOnly": true,
-                                "type": "string"
+                                "type": "string",
+                                "x-secret": true
                               },
                               "name": {
                                 "description": "Name of the application key.",
@@ -33068,7 +33095,8 @@
                             "key": {
                               "description": "The application key.",
                               "readOnly": true,
-                              "type": "string"
+                              "type": "string",
+                              "x-secret": true
                             },
                             "last4": {
                               "description": "The last four characters of the application key.",
@@ -33076,7 +33104,8 @@
                               "maxLength": 4,
                               "minLength": 4,
                               "readOnly": true,
-                              "type": "string"
+                              "type": "string",
+                              "x-secret": true
                             },
                             "name": {
                               "description": "Name of the application key.",
@@ -33716,7 +33745,8 @@
                             "key": {
                               "description": "The application key.",
                               "readOnly": true,
-                              "type": "string"
+                              "type": "string",
+                              "x-secret": true
                             },
                             "last4": {
                               "description": "The last four characters of the application key.",
@@ -33724,7 +33754,8 @@
                               "maxLength": 4,
                               "minLength": 4,
                               "readOnly": true,
-                              "type": "string"
+                              "type": "string",
+                              "x-secret": true
                             },
                             "name": {
                               "description": "Name of the application key.",
@@ -34374,7 +34405,8 @@
                                 "maxLength": 4,
                                 "minLength": 4,
                                 "readOnly": true,
-                                "type": "string"
+                                "type": "string",
+                                "x-secret": true
                               },
                               "name": {
                                 "description": "Name of the application key.",
@@ -35002,7 +35034,8 @@
                             "key": {
                               "description": "The application key.",
                               "readOnly": true,
-                              "type": "string"
+                              "type": "string",
+                              "x-secret": true
                             },
                             "last4": {
                               "description": "The last four characters of the application key.",
@@ -35010,7 +35043,8 @@
                               "maxLength": 4,
                               "minLength": 4,
                               "readOnly": true,
-                              "type": "string"
+                              "type": "string",
+                              "x-secret": true
                             },
                             "name": {
                               "description": "Name of the application key.",
@@ -35679,7 +35713,8 @@
                             "key": {
                               "description": "The application key.",
                               "readOnly": true,
-                              "type": "string"
+                              "type": "string",
+                              "x-secret": true
                             },
                             "last4": {
                               "description": "The last four characters of the application key.",
@@ -35687,7 +35722,8 @@
                               "maxLength": 4,
                               "minLength": 4,
                               "readOnly": true,
-                              "type": "string"
+                              "type": "string",
+                              "x-secret": true
                             },
                             "name": {
                               "description": "Name of the application key.",
@@ -36302,7 +36338,8 @@
                             "key": {
                               "description": "The application key.",
                               "readOnly": true,
-                              "type": "string"
+                              "type": "string",
+                              "x-secret": true
                             },
                             "last4": {
                               "description": "The last four characters of the application key.",
@@ -36310,7 +36347,8 @@
                               "maxLength": 4,
                               "minLength": 4,
                               "readOnly": true,
-                              "type": "string"
+                              "type": "string",
+                              "x-secret": true
                             },
                             "name": {
                               "description": "Name of the application key.",
@@ -62542,7 +62580,8 @@
                                 "maxLength": 4,
                                 "minLength": 4,
                                 "readOnly": true,
-                                "type": "string"
+                                "type": "string",
+                                "x-secret": true
                               },
                               "name": {
                                 "description": "Name of the application key.",
@@ -63182,7 +63221,8 @@
                             "key": {
                               "description": "The application key.",
                               "readOnly": true,
-                              "type": "string"
+                              "type": "string",
+                              "x-secret": true
                             },
                             "last4": {
                               "description": "The last four characters of the application key.",
@@ -63190,7 +63230,8 @@
                               "maxLength": 4,
                               "minLength": 4,
                               "readOnly": true,
-                              "type": "string"
+                              "type": "string",
+                              "x-secret": true
                             },
                             "name": {
                               "description": "Name of the application key.",
@@ -63891,7 +63932,8 @@
                               "maxLength": 4,
                               "minLength": 4,
                               "readOnly": true,
-                              "type": "string"
+                              "type": "string",
+                              "x-secret": true
                             },
                             "name": {
                               "description": "Name of the application key.",
@@ -64520,7 +64562,8 @@
                               "maxLength": 4,
                               "minLength": 4,
                               "readOnly": true,
-                              "type": "string"
+                              "type": "string",
+                              "x-secret": true
                             },
                             "name": {
                               "description": "Name of the application key.",
