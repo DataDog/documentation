@@ -16,7 +16,7 @@ further_reading:
 ## Overview
 
 gRPC health checks allow you to determine whether or not your gRPC servers and services can handle remote procedure calls (RPCs).
-You can implement the health checking mechanism as a gRPC service on a gRPC server. To access a proto file, see the [open-source gRPC repository][1].
+You can implement the health checking mechanism as a gRPC service on a gRPC server. To access the health checks proto file example shared by the gRPC community, see the [open-source gRPC repository][1].
 
 gRPC health check tests can run from both [managed][2] and [private locations][3] depending on your preference for running the test from outside or inside your network. gRPC tests can run on a schedule, on-demand, or directly within your [CI/CD pipelines][4].
 
@@ -30,7 +30,7 @@ After choosing to create an `gRPC` health check test, define your test's request
 
 ### Define request
 
-1. Specify the **Host** and **Port** to run your health check test on. By default, the port is set to `443`.
+1. Specify the **Host** and **Port** to run your health check test on. By default, the port is set to `50051`.
 2. Enter the service you want to send a health check. Leave this field blank if you want to send a health check on the gRPC server.
 
 <!--TODO. will probably have an "advanced options" section. maybe need to c/p the http advanced option section-->
