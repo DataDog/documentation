@@ -191,7 +191,7 @@
     "webpack-merge": "^4.2.1"
   },
   "engines": {
-    "node": ">= 14.15.0"
+    "node": ">= 14.16.0"
   },
   "homepage": "https://github.com/DataDog/Documentation#readme",
   "hugo-bin": {
