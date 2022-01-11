@@ -41,8 +41,6 @@ Datadog .NET Profiler is currently in public beta. Datadog recommends evaluating
 - .NET 5
 - .NET 6
 
-<br>
-
 ## Installation
 
 <div class="alert alert-warning">
@@ -71,7 +69,9 @@ Datadog .NET Profiler is currently in public beta. Datadog recommends evaluating
      <strong>Note:</strong> Use <code>stop</code> and <code>start</code> commands. A reset or restart does not always work.
    </div>
 
-3. A minute or two after starting your application, your profiles will show up on the [Datadog APM > Profiler page][5].
+3. A minute or two after starting your application, your profiles will show up on the [Datadog APM > Profiler page][1].
+
+[1]: https://app.datadoghq.com/profiling
 {{% /tab %}}
 
 {{% tab "Windows services" %}}
@@ -123,7 +123,9 @@ Datadog .NET Profiler is currently in public beta. Datadog recommends evaluating
    Set-ItemProperty HKLM:SYSTEM\CurrentControlSet\Services\<SERVICE NAME> -Name Environment -Value $v
    ```
 
-2. A minute or two after starting your application, your profiles will show up on the [Datadog APM > Profiler page][5].
+2. A minute or two after starting your application, your profiles will show up on the [Datadog APM > Profiler page][1].
+
+[1]: https://app.datadoghq.com/profiling
 {{% /tab %}}
 
 {{% tab "Standalone applications" %}}
@@ -151,11 +153,11 @@ Datadog .NET Profiler is currently in public beta. Datadog recommends evaluating
    REM start the application here
    ```
 
-2. A minute or two after starting your application, your profiles will show up on the [Datadog APM > Profiler page][5].
+2. A minute or two after starting your application, your profiles will show up on the [Datadog APM > Profiler page][1].
+
+[1]: https://app.datadoghq.com/profiling
 {{% /tab %}}
 {{< /tabs >}}
-
-<br>
 
 ## Configuration
 
@@ -174,10 +176,10 @@ You can configure the profiler using the following environment variables. Restar
 | `DD_PROFILING_LOG_DIR`     | String        | Sets the directory for .NET Profiler logs. Defaults to `%ProgramData%\Datadog-APM\logs\`.  |
 | `DD_PROFILING_ENABLED`     | Boolean        | If set to `false`, disables the .NET Profiler. Defaults to `true`.  |
 
-<br>
 
 ## Further Reading
-The [Getting Started with Profiler][6] guide takes a sample service with a performance problem and shows you how to use Continuous Profiler to understand and fix the problem.
+
+The [Getting Started with Profiler][5] guide takes a sample service with a performance problem and shows you how to use Continuous Profiler to understand and fix the problem.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -185,5 +187,4 @@ The [Getting Started with Profiler][6] guide takes a sample service with a perfo
 [2]: https://app.datadoghq.com/account/settings?agent_version=6#agent
 [3]: https://github.com/DataDog/dd-trace-dotnet/releases
 [4]: /getting_started/tagging/unified_service_tagging
-[5]: https://app.datadoghq.com/profiling
-[6]: /getting_started/profiler/
+[5]: /getting_started/profiler/
