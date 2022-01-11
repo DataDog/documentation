@@ -41,6 +41,7 @@ Datadog .NET Profiler is currently in public beta. Datadog recommends evaluating
 - .NET 5
 - .NET 6
 
+<br>
 
 ## Installation
 
@@ -57,8 +58,7 @@ Datadog .NET Profiler is currently in public beta. Datadog recommends evaluating
 {{< tabs >}}
 
 {{% tab "Internet Information Services (IIS)" %}}
-1. Set environment variables:
-   TODO
+1. The .NET Monitoring MSI installer adds all required environment variables. There are no environment variables you need to manually configure.
 
 2. Completely stop and start IIS by running the following commands as an administrator:
 
@@ -127,34 +127,35 @@ Datadog .NET Profiler is currently in public beta. Datadog recommends evaluating
 {{% /tab %}}
 
 {{% tab "Standalone applications" %}}
-1. To automatically profile a non-service application, such as console, ASP.NET (Core), Windows Forms, or WPF, you'll need to set some environment variables before starting it.
+1. To automatically profile a non-service application, such as console, ASP.NET (Core), Windows Forms, or WPF, some environment variables must be set before starting it.
 
    If the environment variables are set for the current user, _all_ .NET applications will be profiled. Instead, we recommend setting them in a batch file that also starts the application and running that.
 
    For .NET Core and .NET 5+:
-   ```
-   TODO show example batch file
+   ```cmd
+   SET CORECLR_ENABLE_PROFILING=1
+   SET CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
+   SET DD_ENV=prod
+   SET DD_VERSION=1.2.3
 
-   CORECLR_ENABLE_PROFILING=1
-   CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
-   DD_ENV=prod
-   DD_VERSION=1.2.3
+   REM start the application here
    ```
 
    For .NET Framework:
-   ```
-   TODO show example batch file
+   ```cmd
+   SET COR_ENABLE_PROFILING=1
+   SET COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
+   SET DD_ENV=prod
+   SET DD_VERSION=1.2.3
 
-   COR_ENABLE_PROFILING=1
-   COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
-   DD_ENV=prod
-   DD_VERSION=1.2.3
+   REM start the application here
    ```
 
 2. A minute or two after starting your application, your profiles will show up on the [Datadog APM > Profiler page][5].
 {{% /tab %}}
 {{< /tabs >}}
 
+<br>
 
 ## Configuration
 
@@ -173,8 +174,10 @@ You can configure the profiler using the following environment variables. Restar
 | `DD_PROFILING_LOG_DIR`     | String        | Sets the directory for .NET Profiler logs. Defaults to `%ProgramData%\Datadog-APM\logs\`.  |
 | `DD_PROFILING_ENABLED`     | Boolean        | If set to `false`, disables the .NET Profiler. Defaults to `true`.  |
 
+<br>
+
 ## Further Reading
-The [Getting Started with Profiler][5] guide takes a sample service with a performance problem and shows you how to use Continuous Profiler to understand and fix the problem.
+The [Getting Started with Profiler][6] guide takes a sample service with a performance problem and shows you how to use Continuous Profiler to understand and fix the problem.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -182,4 +185,5 @@ The [Getting Started with Profiler][5] guide takes a sample service with a perfo
 [2]: https://app.datadoghq.com/account/settings?agent_version=6#agent
 [3]: https://github.com/DataDog/dd-trace-dotnet/releases
 [4]: /getting_started/tagging/unified_service_tagging
-[5]: /getting_started/profiler/
+[5]: https://app.datadoghq.com/profiling
+[6]: /getting_started/profiler/
