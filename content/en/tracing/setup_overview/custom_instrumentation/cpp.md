@@ -69,7 +69,6 @@ To manually instrument your code, install the tracer as in the [setup examples][
 
 ```cpp
 {
-  // The tracer is already configured to use the service "recipesvc".
   // Create a root span for the request we're current processing.
   auto root_span = tracer->StartSpan("get_ingredients");
   // Set a resource name for the root span.
