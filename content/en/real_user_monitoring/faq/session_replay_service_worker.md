@@ -17,6 +17,6 @@ If you have blocked third-party cookies in your browser settings, or if your bro
 
 Datadog's recommended solution is to make an exception to your third-party cookie blocking, to allow Session Replay's service worker to work and enjoy the most performant replaying experience:
 
-{{< img src="real_user_monitoring/session_replay/allow-3p-serviceworker-1" alt="Allow Session Replay Third-Party Service Worker" >}}
+{{< img src="real_user_monitoring/session_replay/allow-3p-serviceworker-1.png" alt="Allow Session Replay Third-Party Service Worker" >}}
 
-{{< img src="real_user_monitoring/session_replay/allow-3p-serviceworker-2" alt="Allow Session Replay Third-Party Service Worker" >}}
+{{< img src="real_user_monitoring/session_replay/allow-3p-serviceworker-2.png" alt="Allow Session Replay Third-Party Service Worker" >}}
