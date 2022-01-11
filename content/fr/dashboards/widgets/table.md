@@ -65,7 +65,7 @@ Dans l'exemple suivant, la colonne `Average` calcule le taux `Total Enterprise C
 
 [1]: /fr/dashboards/querying/#configuring-a-graph
 [2]: /fr/logs/search_syntax/
-[3]: /fr/tracing/trace_search_and_analytics/query_syntax/
+[3]: /fr/tracing/trace_explorer/query_syntax/
 [4]: /fr/real_user_monitoring/explorer/search/#search-syntax
 [5]: /fr/tracing/profiler/search_profiles
 [6]: /fr/security_monitoring/explorer/

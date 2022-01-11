@@ -99,12 +99,12 @@ main_left:
     url: 'https://www.datadoghq.com/product/security-platform/cloud-workload-security/'
     weight: 16
     parent: product
-  - identifier: 'sensitive-data-scanner'
-    name: 'Sensitive Data Scanner'
-    pre: "<i class='icon-sds'></i>"
+  - identifier: sensitive-data-scanner
+    name: Sensitive Data Scanner
+    pre: <i class='icon-sds'></i>
     url: 'https://www.datadoghq.com/product/sensitive-data-scanner/'
     weight: 17
-    parent: 'product'
+    parent: product
   - identifier: error-tracking
     name: Error Tracking
     pre: <i class="icon-error-tracking align-middle"></i>
@@ -5971,7 +5971,7 @@ api:
       operationids:
         - GetUsageSDS
       unstable: []
-      order: 35
+      order: 36
   - name: Get hourly usage for RUM Sessions
     url: '#get-hourly-usage-for-rum-sessions'
     identifier: get-hourly-usage-for-rum-sessions
@@ -5995,7 +5995,7 @@ api:
       operationids:
         - GetUsageRumUnits
       unstable: []
-      order: 36
+      order: 37
   - name: Get hourly usage for profiled hosts
     url: '#get-hourly-usage-for-profiled-hosts'
     identifier: get-hourly-usage-for-profiled-hosts
@@ -6032,6 +6032,19 @@ api:
         - GetUsageNetworkFlows
       unstable: []
       order: 15
+  - name: Get Monthly Usage Attribution
+    url: '#get-monthly-usage-attribution'
+    identifier: get-monthly-usage-attribution
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetMonthlyUsageAttribution
+      unstable:
+        - v1
+      order: 31
   - name: Get hourly usage for Logs by Index
     url: '#get-hourly-usage-for-logs-by-index'
     identifier: get-hourly-usage-for-logs-by-index
@@ -6164,7 +6177,7 @@ api:
       operationids:
         - GetUsageDBM
       unstable: []
-      order: 34
+      order: 35
   - name: Get hourly usage for Cloud Workload Security
     url: '#get-hourly-usage-for-cloud-workload-security'
     identifier: get-hourly-usage-for-cloud-workload-security
@@ -6176,7 +6189,7 @@ api:
       operationids:
         - GetUsageCWS
       unstable: []
-      order: 33
+      order: 34
   - name: Get hourly usage for CSPM
     url: '#get-hourly-usage-for-cspm'
     identifier: get-hourly-usage-for-cspm
@@ -6188,7 +6201,7 @@ api:
       operationids:
         - GetUsageCloudSecurityPostureManagement
       unstable: []
-      order: 31
+      order: 32
   - name: Get billable usage across your account
     url: '#get-billable-usage-across-your-account'
     identifier: get-billable-usage-across-your-account
@@ -6224,7 +6237,7 @@ api:
       operationids:
         - GetUsageAuditLogs
       unstable: []
-      order: 32
+      order: 33
   - name: Get Usage Attribution
     url: '#get-usage-attribution'
     identifier: get-usage-attribution

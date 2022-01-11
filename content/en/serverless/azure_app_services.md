@@ -172,7 +172,7 @@ Also, set `DATADOG_SITE` to your [Datadog site][23]. `DATADOG_SITE` defaults to 
 The update script applies to an entire resource group. This script updates every instance (Web App or Function App) that has the extension installed. App Service instances that do not have the Datadog extension installed are not affected.
 
 1. Open the Azure CLI or Azure Cloud Shell.
-2. Download the installation script using the following command:
+2. Download the update script using the following command:
 
     ```
     $baseUri="https://raw.githubusercontent.com/DataDog/datadog-aas-extension/master/management-scripts/extension"; Invoke-WebRequest -Uri "$baseUri/update-all-site-extensions.ps1" -OutFile "update-all-site-extensions.ps1"; Invoke-WebRequest -Uri "$baseUri/install-latest-extension.ps1" -OutFile "install-latest-extension.ps1"

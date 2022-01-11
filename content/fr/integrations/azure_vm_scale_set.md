@@ -40,7 +40,7 @@ Les métriques d'intégration sont incluses avec l'[intégration Microsoft Azur
 
 ### Collecte de logs
 
-Pour recueillir des logs à partir de certains événements Windows, ajoutez des canaux au fichier `conf.d/win32_event_log.d/conf.yaml` manuellement ou avec Datadog Agent Manager. Par exemple :
+Pour recueillir des logs à partir de certains événements Windows, ajoutez manuellement des canaux au fichier `conf.d/win32_event_log.d/conf.yaml` ou utilisez Datadog Agent Manager. Par exemple :
 
 ```yaml
 logs:

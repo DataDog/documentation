@@ -846,6 +846,7 @@ components:
           description: The API key.
           readOnly: true
           type: string
+          x-secret: true
         last4:
           description: The last four characters of the API key.
           example: abcd
@@ -853,6 +854,7 @@ components:
           minLength: 4
           readOnly: true
           type: string
+          x-secret: true
         modified_at:
           description: Date the API key was last modified.
           example: '2020-11-23T10:00:00.000Z'
@@ -888,6 +890,7 @@ components:
           description: The application key.
           readOnly: true
           type: string
+          x-secret: true
         last4:
           description: The last four characters of the application key.
           example: abcd
@@ -895,6 +898,7 @@ components:
           minLength: 4
           readOnly: true
           type: string
+          x-secret: true
         name:
           description: Name of the application key.
           example: Application Key for managing dashboards
@@ -3564,6 +3568,7 @@ components:
           minLength: 4
           readOnly: true
           type: string
+          x-secret: true
         modified_at:
           description: Date the API key was last modified.
           example: '2020-11-23T10:00:00.000Z'
@@ -3602,6 +3607,7 @@ components:
           minLength: 4
           readOnly: true
           type: string
+          x-secret: true
         name:
           description: Name of the application key.
           example: Application Key for managing dashboards
