@@ -16,44 +16,44 @@ Follow this guide to migrate between major versions of the RUM and logs Browser 
 
 Several breaking changes were made to RUM and logs Browser SDK with the v4 version.
 
-## Changes
+### Changes
 
-### Intake URLs
+#### Intake URLs
 
 The URLs for where the Browser SDK data is sent has changed. Ensure that your [Content Security Policy is up to date][6].
 
-### Minimal Typescript version support
+#### Minimal Typescript version support
 
 Browser SDK v4 is not compatible with TypeScript earlier than v3.8.2. If you use TypeScript, ensure that the version is at least v3.8.2.
 
-### Tags syntax
+#### Tags syntax
 
 The `version`, `env`, and `service` initialization parameters are sent as tags to Datadog. The Browser SDK slightly sanitizes them, to ensure that they don't generate multiple tags, and prints a warning if those values don't meet the tag requirements syntax.
 
-### Stricter initialization parameters typing
+#### Stricter initialization parameters typing
 
 TypeScript types representing initialization parameters are stricter and may reject previously accepted unsupported parameters. If you get type-checking errors, ensure you are providing supported initialization parameters.
 
-### Privacy options precedence
+#### Privacy options precedence
 
 When multiple privacy options are specified on the same element, Datadog applies the most restrictive option to avoid unexpectedly leaking sensitive data. For example, if both `dd-privacy-allow` and `dd-privacy-hidden` classes are specified on the same element, it is hidden instead of allowed.
 
-### Action names computation
+#### Action names computation
 
 When computing automatic actions target name on elements without `data-dd-action-name` attribute, we are using the "inner text" of this element. If it contains some elements that specify `data-dd-action-name`, their text is now removed inside the ancestor inner text.
 This might slightly change automatic action names shown in the Datadog App.
 
-## Removals
+### Removals
 
-### XHR `_datadog_xhr` field
+#### XHR `_datadog_xhr` field
 
 The Browser SDK previously used a `_datadog_xhr` property on `XMLHttpRequest` objects representing its internal state. This property has been removed without replacement as it wasn't intended to be used externally.
 
-### `proxyHost` initialization parameter
+#### `proxyHost` initialization parameter
 
 The `proxyHost` initialization parameter has been removed. Use the `proxyUrl` initialization parameter instead.
 
-### Privacy options support
+#### Privacy options support
 
 The options `input-ignored` and `input-masked` are no longer valid privacy options. Instead, use the `mask-user-input` privacy option. Specifically, replace:
 
@@ -64,8 +64,8 @@ The options `input-ignored` and `input-masked` are no longer valid privacy optio
 
 Browser SDK v3 introduces [Session Replay][1]. With this major version update, several breaking changes were made to RUM and logs Browser SDKs.
 
-## Changes
-### RUM errors
+### Changes
+#### RUM errors
 
 The RUM Browser SDK no longer issues [RUM errors][2] for failed XHR and Fetch calls. These failed network requests are still collected as [RUM resources][3], which contain the status code attribute.
 
@@ -80,18 +80,18 @@ beforeSend: (event) => {
 }
 ```
 
-### RUM error source attribute
+#### RUM error source attribute
 
 The RUM Browser SDK no longer lets you specify the source of an error collected with the [addError API][5]. All errors collected with this API have their source attribute set to `custom`. The [addError API][5] accepts a context object as its second parameter, which should be used to pass extra context about the error.
 
-## Removals
-### RUM API
+### Removals
+#### RUM API
 
 | Old API       | New API   |
 | ------------- | --------- |
 | addUserAction | addAction |
 
-### Initialization options
+#### Initialization options
 
 | Old options        | New options |
 | ------------------ | ----------- |
@@ -99,7 +99,7 @@ The RUM Browser SDK no longer lets you specify the source of an error collected 
 | datacenter         | site        |
 | resourceSampleRate | NONE        |
 
-### TypeScript types
+#### TypeScript types
 
 | Old types                    | New types                    |
 | ---------------------------- | ---------------------------- |
