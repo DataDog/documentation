@@ -10,7 +10,7 @@ further_reading:
   text: "Use Datadog Session Replay to view real-time user journeys"
 ---
 
-Follow this guide to migrate between major versions of the RUM Browser SDK.
+Follow this guide to migrate between major versions of the RUM and logs Browser SDK.
 
 ## From v3 to v4
 
