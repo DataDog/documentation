@@ -2535,7 +2535,7 @@ main:
     url: synthetics/api_tests/icmp_tests
     parent: api_tests
     weight: 107
-  - name: gRPC Healthchecks
+  - name: GRPC Health Checks
     url: synthetics/api_tests/grpc_tests
     parent: api_tests
     weight: 108

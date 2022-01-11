@@ -1,5 +1,5 @@
 ---
-title: gRPC Healthchecks
+title: GRPC Health Checks
 kind: documentation
 description: Simulate gRPC requests to monitor public and internal API endpoints
 further_reading:
@@ -15,29 +15,29 @@ further_reading:
 ---
 ## Overview
 
-gRPC healthchecks allow you to probe whether your gRPC servers and services are able to handle RPCs (remote procedure call).
+gRPC health checks allow you to determine whether or not your gRPC servers and services can handle remote procedure calls (RPCs).
 You can implement the health checking mechanism as a gRPC service on a gRPC server. To access a proto file, see the [open-source gRPC repository][1].
 
-gRPC healthchecks can run from both [managed][2] and [private locations][3] depending on your preference for running the test from outside or inside your network. gRPC tests can run on a schedule, on-demand, or directly within your [CI/CD pipelines][4].
+gRPC health check tests can run from both [managed][2] and [private locations][3] depending on your preference for running the test from outside or inside your network. gRPC tests can run on a schedule, on-demand, or directly within your [CI/CD pipelines][4].
 
 <div class="alert alert-warning">
-The Synthetic Monitoring team welcomes you to share your gRPC use cases for Synthetic tests with the <a href="https://docs.datadoghq.com/help/">Support</a> team.
+Share feedback about your gRPC use cases for Synthetic tests with the <a href="https://docs.datadoghq.com/help/">Support</a> team.
 </div>
 
 ## Configuration
 
-After choosing to create an `gRPC` test, define your test's request.
+After choosing to create an `gRPC` health check test, define your test's request.
 
 ### Define request
 
-1. Specify the **Host** and **Port** to run your test on. By default, the port is set to `443`.
+1. Specify the **Host** and **Port** to run your health check test on. By default, the port is set to `443`.
 2. Enter the service you want to send a health check. Leave this field blank if you want to send a health check on the gRPC server.
 
 <!--TODO. will probably have an "advanced options" section. maybe need to c/p the http advanced option section-->
 
-3. **Name** your gRPC test.
+3. **Name** your gRPC health check test.
 
-4. Add `env` **Tags** as well as any other tag to your gRPC test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][5].
+4. Add `env` **Tags** as well as any other tag to your gRPC health check test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][5].
 
 {{< img src="synthetics/api_tests/http_test_config.png" alt="Define HTTP request" style="width:90%;" >}} 
 <!-- TODO replace with gRPC img -->
@@ -60,11 +60,11 @@ You can create up to 20 assertions per API test by clicking on **New Assertion**
 <!-- TODO update screenshot -->
 ### Select locations
 
-Select the **Locations** to run your gRPC test from. gRPC tests can run from both [managed][2] and [private locations][3] depending on your preference for running the test from outside or inside your network.
+Select the **Locations** to run your gRPC health check test from. gRPC tests can run from both [managed][2] and [private locations][3] depending on your preference for running the health check test from outside or inside your network.
 
 ### Specify test frequency
 
-gRPC tests can run:
+gRPC health check tests can run:
 
 * **On a schedule** to ensure your most important endpoints are always accessible to your users. Select the frequency at which you want Datadog to run your gRPC test.
 * [**Within your CI/CD pipelines**][4] to start shipping without fearing faulty code might impact your customers experience.
@@ -72,7 +72,7 @@ gRPC tests can run:
 
 ### Define alert conditions
 
-Set alert conditions to determine the circumstances under which you want a test to fail and trigger an alert.
+Set alert conditions to determine the circumstances under which you want a health check test to fail and trigger an alert.
 
 #### Alerting rule
 
@@ -83,7 +83,7 @@ When you set the alert conditions to: `An alert is triggered if any assertion fa
 
 #### Fast retry
 
-Your test can trigger retries `X` times after `Y` ms in case of a failed test result. Customize the retry interval to suit your alerting sensibility.
+Your health check test can trigger retries `X` times after `Y` ms in case of a failed test result. Customize the retry interval to suit your alerting sensibility.
 
 Location uptime is computed on a per-evaluation basis (whether the last test result before evaluation was up or down). The total uptime is computed based on the configured alert conditions. Notifications sent are based on the total uptime.
 
@@ -93,7 +93,7 @@ A notification is sent by your test based on the [alerting conditions](#define-a
 
 1. [Similar to how you configure monitors][6], select **users and/or services** that should receive notifications either by adding a `@notification`to the message or by searching for team members and connected integrations with the drop-down box.
 
-2. Enter the notification **message** for your test. This field allows standard [Markdown formatting][7] and supports the following [conditional variables][8]:
+2. Enter the notification **message** for your health check test. This field allows standard [Markdown formatting][7] and supports the following [conditional variables][8]:
 
     | Conditional Variable       | Description                                                         |
     |----------------------------|---------------------------------------------------------------------|
@@ -102,15 +102,15 @@ A notification is sent by your test based on the [alerting conditions](#define-a
     | `{{#is_recovery}}`         | Show when the test recovers from alert.                             |
     | `{{^is_recovery}}`         | Show unless the test recovers from alert.                           |
 
-3. Specify how often you want your test to **re-send the notification message** in case of test failure. To prevent renotification on failing tests, leave the option as `Never renotify if the monitor has not been resolved`.
+3. Specify how often you want your health check test to **re-send the notification message** in case of test failure. To prevent renotification on failing health check tests, leave the option as `Never renotify if the monitor has not been resolved`.
 
-Click **Save** to save and start your test.
+Click **Save** to save and start your health check test.
 
 ## Variables
 
 ### Create local variables
 
-You can create local variables by clicking on **Create Local Variable** at the top right hand corner of your test configuration form. You can define their values from one of the below available builtins:
+You can create local variables by clicking on **Create Local Variable** at the top right hand corner of your health check test configuration form. You can define their values from one of the below available builtins:
 
 `{{ numeric(n) }}`
 : Generates a numeric string with `n` digits.
@@ -139,7 +139,7 @@ To display your list of variables, type `{{` in your desired field:
 ## Test failure
 <!-- TODO add gRPC error docs https://grpc.github.io/grpc/core/md_doc_statuscodes.html once more info from the eng team -->
 
-A test is considered `FAILED` if it does not satisfy one or more assertions or if the request prematurely failed. In some cases, the test can fail without testing the assertions against the endpoint. 
+A health check test is considered `FAILED` if it does not satisfy one or more assertions or if the request prematurely failed. In some cases, the health check test can fail without testing the assertions against the endpoint. 
 
 These reasons include the following:
 
