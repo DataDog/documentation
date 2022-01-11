@@ -54,7 +54,7 @@ def make_sandwich_request(request):
       return
 
   # You can provide more information to customize the span
-  @tracer.wrap("assemble_sandwich", service="my-sandwich-making-svc")
+  @tracer.wrap("assemble_sandwich", service="my-sandwich-making-svc", resource="resource_name")
   def assemble_sandwich(ingredients):
       return
 ```
@@ -79,14 +79,12 @@ def make_sandwich_request(request):
 
 def make_sandwich_request(request):
     # Capture both operations in a span
-    with tracer.trace("sandwich.create") as outer_span:
-        outer_span.resource = "resource_name"
-        outer_span.service = "sandwich_service"
+    with tracer.trace("sandwich.create", resource="resource_name") as outer_span:
 
-        with tracer.trace("get_ingredients") as span:
+        with tracer.trace("get_ingredients", resource="resource_name") as span:
             ingredients = get_ingredients()
 
-        with tracer.trace("assemble_sandwich") as span:
+        with tracer.trace("assemble_sandwich", resource="resource_name") as span:
             sandwich = assemble_sandwich(ingredients)
 ```
 
@@ -102,9 +100,7 @@ If the decorator and context manager methods are still not enough to satisfy you
 ```python
 
 def make_sandwich_request(request):
-    span = tracer.trace("sandwich.create")
-    span.resource = "resource_name"
-	  span.service = "sandwich_service"
+    span = tracer.trace("sandwich.create", resource="resource_name")
     ingredients = get_ingredients()
     sandwich = assemble_sandwich(ingredients)
     span.finish()  # remember to finish the span
