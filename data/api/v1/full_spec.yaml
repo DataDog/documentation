@@ -6628,6 +6628,239 @@ components:
         type:
           $ref: '#/components/schemas/MonitorType'
       type: object
+    MonthlyUsageAttributionBody:
+      description: Usage Summary by tag for a given organization.
+      properties:
+        month:
+          description: 'Datetime in ISO-8601 format, UTC, precise to month: [YYYY-MM].'
+          format: date-time
+          type: string
+        org_name:
+          description: The name of the organization.
+          type: string
+        public_id:
+          description: The organization public ID.
+          type: string
+        tag_config_source:
+          description: The source of the usage attribution tag configuration and the
+            selected tags in the format `<source_org_name>:<selected tag 1>///<selected
+            tag 2>///<selected tag 3>`.
+          type: string
+        tags:
+          $ref: '#/components/schemas/UsageAttributionTagNames'
+        updated_at:
+          description: Datetime of the most recent update to the usage values.
+          format: date-time
+          type: string
+        values:
+          $ref: '#/components/schemas/MonthlyUsageAttributionValues'
+      type: object
+    MonthlyUsageAttributionMetadata:
+      description: The object containing document metadata.
+      properties:
+        aggregates:
+          $ref: '#/components/schemas/UsageAttributionAggregates'
+        pagination:
+          $ref: '#/components/schemas/MonthlyUsageAttributionPagination'
+      type: object
+    MonthlyUsageAttributionPagination:
+      description: The metadata for the current pagination.
+      properties:
+        next_record_id:
+          description: The cursor to use to get the next results, if any. To make
+            the next request, use the same parameters with the addition of the `next_record_id`.
+          type: string
+      type: object
+    MonthlyUsageAttributionResponse:
+      description: Response containing the monthly Usage Summary by tag(s).
+      properties:
+        metadata:
+          $ref: '#/components/schemas/MonthlyUsageAttributionMetadata'
+        usage:
+          description: Get Usage Summary by tag(s).
+          items:
+            $ref: '#/components/schemas/MonthlyUsageAttributionBody'
+          type: array
+      type: object
+    MonthlyUsageAttributionSupportedMetrics:
+      description: Supported metrics for monthly usage attribution requests.
+      enum:
+      - api_usage
+      - api_percentage
+      - apm_host_usage
+      - apm_host_percentage
+      - browser_usage
+      - browser_percentage
+      - container_usage
+      - container_percentage
+      - custom_timeseries_usage
+      - custom_timeseries_percentage
+      - fargate_usage
+      - fargate_percentage
+      - functions_usage
+      - functions_percentage
+      - indexed_logs_usage
+      - indexed_logs_percentage
+      - infra_host_usage
+      - infra_host_percentage
+      - invocations_usage
+      - invocations_percentage
+      - npm_host_usage
+      - npm_host_percentage
+      - profiled_container_usage
+      - profiled_container_percentage
+      - profiled_host_usage
+      - profiled_host_percentage
+      - snmp_usage
+      - snmp_percentage
+      - '*'
+      type: string
+      x-enum-varnames:
+      - API_USAGE
+      - API_PERCENTAGE
+      - APM_HOST_USAGE
+      - APM_HOST_PERCENTAGE
+      - BROWSER_USAGE
+      - BROWSER_PERCENTAGE
+      - CONTAINER_USAGE
+      - CONTAINER_PERCENTAGE
+      - CUSTOM_TIMESERIES_USAGE
+      - CUSTOM_TIMESERIES_PERCENTAGE
+      - FARGATE_USAGE
+      - FARGATE_PERCENTAGE
+      - FUNCTIONS_USAGE
+      - FUNCTIONS_PERCENTAGE
+      - INDEXED_LOGS_USAGE
+      - INDEXED_LOGS_PERCENTAGE
+      - INFRA_HOST_USAGE
+      - INFRA_HOST_PERCENTAGE
+      - INVOCATIONS_USAGE
+      - INVOCATIONS_PERCENTAGE
+      - NPM_HOST_USAGE
+      - NPM_HOST_PERCENTAGE
+      - PROFILED_CONTAINER_USAGE
+      - PROFILED_CONTAINER_PERCENTAGE
+      - PROFILED_HOST_USAGE
+      - PROFILED_HOST_PERCENTAGE
+      - SNMP_USAGE
+      - SNMP_PERCENTAGE
+      - ALL
+    MonthlyUsageAttributionValues:
+      description: Fields in Usage Summary by tag(s).
+      properties:
+        api_percentage:
+          description: The percentage of synthetic API test usage by tag(s).
+          format: double
+          type: number
+        api_usage:
+          description: The synthetic API test usage by tag(s).
+          format: double
+          type: number
+        apm_host_percentage:
+          description: The percentage of APM host usage by tag(s).
+          format: double
+          type: number
+        apm_host_usage:
+          description: The APM host usage by tag(s).
+          format: double
+          type: number
+        browser_percentage:
+          description: The percentage of synthetic browser test usage by tag(s).
+          format: double
+          type: number
+        browser_usage:
+          description: The synthetic browser test usage by tag(s).
+          format: double
+          type: number
+        container_percentage:
+          description: The percentage of container usage by tag(s).
+          format: double
+          type: number
+        container_usage:
+          description: The container usage by tag(s).
+          format: double
+          type: number
+        custom_timeseries_percentage:
+          description: The percentage of custom metrics usage by tag(s).
+          format: double
+          type: number
+        custom_timeseries_usage:
+          description: The custom metrics usage by tag(s).
+          format: double
+          type: number
+        fargate_percentage:
+          description: The percentage of Fargate usage by tags.
+          format: double
+          type: number
+        fargate_usage:
+          description: The Fargate usage by tags.
+          format: double
+          type: number
+        functions_percentage:
+          description: The percentage of Lambda function usage by tag(s).
+          format: double
+          type: number
+        functions_usage:
+          description: The Lambda function usage by tag(s).
+          format: double
+          type: number
+        indexed_logs_percentage:
+          description: The percentage of indexed logs usage by tags.
+          format: double
+          type: number
+        indexed_logs_usage:
+          description: The indexed logs usage by tags.
+          format: double
+          type: number
+        infra_host_percentage:
+          description: The percentage of infrastructure host usage by tag(s).
+          format: double
+          type: number
+        infra_host_usage:
+          description: The infrastructure host usage by tag(s).
+          format: double
+          type: number
+        invocations_percentage:
+          description: The percentage of Lambda invocation usage by tag(s).
+          format: double
+          type: number
+        invocations_usage:
+          description: The Lambda invocation usage by tag(s).
+          format: double
+          type: number
+        npm_host_percentage:
+          description: The percentage of network host usage by tag(s).
+          format: double
+          type: number
+        npm_host_usage:
+          description: The network host usage by tag(s).
+          format: double
+          type: number
+        profiled_container_percentage:
+          description: The percentage of profiled container usage by tag(s).
+          format: double
+          type: number
+        profiled_container_usage:
+          description: The profiled container usage by tag(s).
+          format: double
+          type: number
+        profiled_host_percentage:
+          description: The percentage of profiled hosts usage by tag(s).
+          format: double
+          type: number
+        profiled_host_usage:
+          description: The profiled hosts usage by tag(s).
+          format: double
+          type: number
+        snmp_percentage:
+          description: The percentage of network device usage by tag(s).
+          format: double
+          type: number
+        snmp_usage:
+          description: The network device usage by tag(s).
+          format: double
+          type: number
+      type: object
     NoteWidgetDefinition:
       description: The notes and links widget is similar to free text widget, but
         allows for more formatting options.
@@ -16646,7 +16879,11 @@ paths:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
         '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
       summary: Get the list of available daily custom reports
       tags:
       - Usage Metering
@@ -16687,7 +16924,11 @@ paths:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not Found
         '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
       summary: Get specified daily custom reports
       tags:
       - Usage Metering
@@ -22520,7 +22761,11 @@ paths:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
         '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
       summary: Get the list of available monthly custom reports
       tags:
       - Usage Metering
@@ -22567,7 +22812,11 @@ paths:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not Found
         '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
       summary: Get specified monthly custom reports
       tags:
       - Usage Metering
@@ -26046,7 +26295,11 @@ paths:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
         '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -26121,7 +26374,11 @@ paths:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
         '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -26179,11 +26436,15 @@ paths:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
         '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
       summary: Get hourly usage for audit logs
       tags:
       - Usage Metering
-      x-menu-order: 32
+      x-menu-order: 33
       x-undo:
         type: safe
   /api/v1/usage/aws_lambda:
@@ -26227,7 +26488,11 @@ paths:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
         '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -26272,7 +26537,11 @@ paths:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
         '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -26327,11 +26596,15 @@ paths:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
         '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
       summary: Get hourly usage for CSPM
       tags:
       - Usage Metering
-      x-menu-order: 31
+      x-menu-order: 32
       x-undo:
         type: safe
   /api/v1/usage/cws:
@@ -26377,7 +26650,11 @@ paths:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
         '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -26386,7 +26663,7 @@ paths:
       summary: Get hourly usage for Cloud Workload Security
       tags:
       - Usage Metering
-      x-menu-order: 33
+      x-menu-order: 34
       x-undo:
         type: safe
   /api/v1/usage/dbm:
@@ -26432,11 +26709,15 @@ paths:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
         '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
       summary: Get hourly usage for Database Monitoring
       tags:
       - Usage Metering
-      x-menu-order: 34
+      x-menu-order: 35
       x-undo:
         type: safe
   /api/v1/usage/fargate:
@@ -26480,7 +26761,11 @@ paths:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
         '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -26533,7 +26818,11 @@ paths:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
         '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -26602,7 +26891,11 @@ paths:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
         '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -26660,7 +26953,11 @@ paths:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
         '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -26713,7 +27010,11 @@ paths:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
         '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -26768,7 +27069,11 @@ paths:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
         '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -26823,7 +27128,11 @@ paths:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
         '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -26876,7 +27185,11 @@ paths:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
         '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -26931,7 +27244,11 @@ paths:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
         '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
       summary: Get hourly logs usage by retention
       tags:
       - Usage Metering
@@ -26986,7 +27303,11 @@ paths:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
         '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -26998,6 +27319,95 @@ paths:
       x-menu-order: 3
       x-undo:
         type: safe
+  /api/v1/usage/monthly-attribution:
+    get:
+      description: Get Monthly Usage Attribution.
+      operationId: GetMonthlyUsageAttribution
+      parameters:
+      - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
+          for usage beginning in this month.
+
+          Maximum of 15 months ago.'
+        in: query
+        name: start_month
+        required: true
+        schema:
+          format: date-time
+          type: string
+      - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
+          for usage ending this month.'
+        in: query
+        name: end_month
+        required: false
+        schema:
+          format: date-time
+          type: string
+      - description: Comma-separated list of usage types to return, or `*` for all
+          usage types.
+        in: query
+        name: fields
+        required: true
+        schema:
+          $ref: '#/components/schemas/MonthlyUsageAttributionSupportedMetrics'
+      - description: 'The direction to sort by: `[desc, asc]`.'
+        in: query
+        name: sort_direction
+        required: false
+        schema:
+          $ref: '#/components/schemas/UsageSortDirection'
+      - description: The field to sort by.
+        in: query
+        name: sort_name
+        required: false
+        schema:
+          $ref: '#/components/schemas/MonthlyUsageAttributionSupportedMetrics'
+      - description: Comma separated list of tags used to group usage. If no value
+          is provided the usage will not be broken down by tags.
+        in: query
+        name: tag_breakdown_keys
+        required: false
+        schema:
+          type: string
+      - description: List following results with a next_record_id provided in the
+          previous query.
+        in: query
+        name: next_record_id
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/MonthlyUsageAttributionResponse'
+          description: OK
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+        '429':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - usage_read
+      summary: Get Monthly Usage Attribution
+      tags:
+      - Usage Metering
+      x-menu-order: 31
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v1/usage/network_flows:
     get:
       description: Get hourly usage for network flows.
@@ -27041,7 +27451,11 @@ paths:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
         '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -27094,7 +27508,11 @@ paths:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
         '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -27149,7 +27567,11 @@ paths:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
         '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -27203,7 +27625,11 @@ paths:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
         '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -27212,7 +27638,7 @@ paths:
       summary: Get hourly usage for RUM Units
       tags:
       - Usage Metering
-      x-menu-order: 36
+      x-menu-order: 37
       x-undo:
         type: safe
   /api/v1/usage/rum_sessions:
@@ -27263,7 +27689,11 @@ paths:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
         '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -27318,11 +27748,15 @@ paths:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
         '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
       summary: Get hourly usage for Sensitive Data Scanner
       tags:
       - Usage Metering
-      x-menu-order: 35
+      x-menu-order: 36
       x-undo:
         type: safe
   /api/v1/usage/snmp:
@@ -27368,7 +27802,11 @@ paths:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
         '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -27430,7 +27868,11 @@ paths:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
         '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -27484,7 +27926,11 @@ paths:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
         '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -27537,7 +27983,11 @@ paths:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
         '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -27590,7 +28040,11 @@ paths:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
         '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -27643,7 +28097,11 @@ paths:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
         '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -27725,7 +28183,11 @@ paths:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
         '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
       security:
       - apiKeyAuth: []
         appKeyAuth: []
