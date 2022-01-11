@@ -102,7 +102,7 @@ To request support for additional CLI libraries, contact our awesome [support te
 | MongoDB - via [mongo][3] extension                                      | 1.4.x                      | Fully Supported |
 | MySQLi                                                                  | *(Any Supported PHP)*      | Fully Supported |
 | PDO (MySQL, PostgreSQL, MariaDB)                                        | *(Any Supported PHP)*      | Fully Supported |
-| PhpRedis                                                                | 3, 4, 5                    | PHP 7           |
+| PhpRedis                                                                | 3, 4, 5                    | PHP 7, 8        |
 | Predis                                                                  | 1.1                        | Fully Supported |
 
 To request support for additional datastores, contact our awesome [support team][2].
