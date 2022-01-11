@@ -3,6 +3,7 @@ title: Autodiscovery Template Variables
 kind: faq
 aliases:
  - /agent/autodiscovery/template_variables
+ - /agent/faq/template_variables
 further_reading:
 - link: "/agent/kubernetes/integrations/"
   tag: "Documentation"
