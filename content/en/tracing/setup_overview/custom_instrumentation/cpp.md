@@ -69,19 +69,21 @@ To manually instrument your code, install the tracer as in the [setup examples][
 
 ```cpp
 {
-  // Create a root span.
-  auto root_span = tracer->StartSpan("operation_name");
-  // Set a resource name for the root span
-  root_span->SetTag(datadog::tags::resource_name, "resource_name");
-  // Create a child span.
+  // The tracer is already configured to use the service "recipesvc".
+  // Create a root span for the request we're current processing.
+  auto root_span = tracer->StartSpan("get_ingredients");
+  // Set a resource name for the root span.
+  root_span->SetTag(datadog::tags::resource_name, "bologna_sandwich");
+  // Create a child span, with the root span as its parent.
   auto child_span = tracer->StartSpan(
-      "operation_name",
+      "cache_lookup",
       {opentracing::ChildOf(&root_span->context())});
-  // Set a resource name for the child span
-  child_span->SetTag(datadog::tags::resource_name, "resource_name");
-  // Spans can be finished at a specific time ...
+  // Set a resource name for the child span.
+  child_span->SetTag(datadog::tags::resource_name, "ingredients.bologna_sandwich");
+  // Spans can be finished at an explicit time ...
   child_span->Finish();
-} // ... or when they are destructed (root_span finishes here).
+} // ... or otherwise implicitly when their destructor is invoked.
+  // For example, root_span finishes here implicitly.
 ```
 
 ### Inject and extract context for distributed tracing
