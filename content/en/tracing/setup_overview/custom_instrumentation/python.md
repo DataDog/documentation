@@ -46,7 +46,7 @@ def make_sandwich_request(request):
 ```python
   from ddtrace import tracer
 
-  @tracer.wrap()
+  @tracer.wrap(service="my-sandwich-making-svc", resource="resource_name")
   def get_ingredients():
       # go to the pantry
       # go to the fridge
@@ -80,6 +80,9 @@ def make_sandwich_request(request):
 def make_sandwich_request(request):
     # Capture both operations in a span
     with tracer.trace("sandwich.create") as outer_span:
+        outer_span.resource = "resource_name"
+        outer_span.service = "sandwich_service"
+
         with tracer.trace("get_ingredients") as span:
             ingredients = get_ingredients()
 
@@ -100,6 +103,8 @@ If the decorator and context manager methods are still not enough to satisfy you
 
 def make_sandwich_request(request):
     span = tracer.trace("sandwich.create")
+    span.resource = "resource_name"
+	  span.service = "sandwich_service"
     ingredients = get_ingredients()
     sandwich = assemble_sandwich(ingredients)
     span.finish()  # remember to finish the span
