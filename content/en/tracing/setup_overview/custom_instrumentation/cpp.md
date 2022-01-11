@@ -69,7 +69,7 @@ To manually instrument your code, install the tracer as in the [setup examples][
 
 ```cpp
 {
-  // Create a root span for the processing request.
+  // Create a root span for the current request.
   auto root_span = tracer->StartSpan("get_ingredients");
   // Set a resource name for the root span.
   root_span->SetTag(datadog::tags::resource_name, "bologna_sandwich");
