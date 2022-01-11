@@ -7,15 +7,15 @@ further_reading:
       text: 'Session Replay'
 ---
 
-## Third-Party Cookie Blocking and Session Replay
+## Third-Party Cookie Blocking And Session Replay
 
 Session Replay uses a *Service Worker* in a different domain (*session-replay-datadoghq.com*) to provide the best experience possible whilst protecting your privacy and guaranteeing the safety of your data.
 
-If you have blocked third-party cookies in your browser settings, or if your browser blocks them by default, this can prevent our service worker from registering correctly.
+If you have blocked third-party cookies in your browser settings, or if your browser blocks them by default, this can prevent the service worker from registering correctly.
 
 ### Allow an exception
 
-Our recommended solution is to make an exception to your third-party cookie blocking, to allow Session Replay's service worker to work and enjoy the most performant replaying experience:
+Datadog's recommended solution is to make an exception to your third-party cookie blocking, to allow Session Replay's service worker to work and enjoy the most performant replaying experience:
 
 {{< img src="real_user_monitoring/session_replay/allow-3p-serviceworker-1" alt="Allow Session Replay Third-Party Service Worker" >}}
 
