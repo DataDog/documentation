@@ -35,7 +35,7 @@ Enregistrez vos commits GitHub dans Datadog pour :
 
 #### GitHub
 
-1. Accédez à la page _Settings_ de votre projet Github.
+1. Accédez à la page _Settings_ de votre projet GitHub.
 2. Sélectionnez l'option _Webhooks_ dans le menu de navigation sur la gauche.
 3. Cliquez sur le bouton _Add Webhook_.
 

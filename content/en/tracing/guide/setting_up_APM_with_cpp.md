@@ -45,7 +45,7 @@ get_latest_release() {
 DD_OPENTRACING_CPP_VERSION="$(get_latest_release DataDog/dd-opentracing-cpp)"
 ```
 
-If you get a rate limited message from Github, wait a few minutes and run the command again. When the update is complete, confirm that this is successful by checking your C++ version with:
+If you get a rate limited message from GitHub, wait a few minutes and run the command again. When the update is complete, confirm that this is successful by checking your C++ version with:
 
 ```shell
 echo $DD_OPENTRACING_CPP_VERSION

@@ -187,8 +187,8 @@ Search for events in the event stream using `sources:<SEARCH_TERM>`.
 | Flowdock                      | flowdock                      | flowdock                   |
 | Fluentd                       | fluentd                       | fluentd                    |
 | Git                           | git                           | git                        |
-| Github                        | github                        | github                     |
-| Github Apps                   | github apps                   | githubapps                 |
+| GitHub                        | github                        | github                     |
+| GitHub Apps                   | github apps                   | githubapps                 |
 | GitLab                        | gitlab                        | gitlab                     |
 | G Suite                       | g suite                       | gsuite                     |
 | Go Expvar                     | go expvar                     | goexpvar                   |
