@@ -40,8 +40,19 @@ When multiple privacy options are specified on the same element, Datadog applies
 
 #### Action names computation
 
-When computing automatic actions target name on elements without `data-dd-action-name` attribute, we are using the "inner text" of this element. If it contains some elements that specify `data-dd-action-name`, their text is now removed inside the ancestor inner text.
-This might slightly change automatic action names shown in the Datadog App.
+Remove text of children with `data-dd-action-name` attribute when computing action name from inner text.
+
+Ex:
+```html
+<div id="container">
+  Container
+  <div data-dd-action-name="sensitive">sensitive data</div>
+</div>
+```
+When computing the action name for the `container` element:
+- previous name: `Container sensitive data`
+- new name: `Container`
+
 
 ### Removals
 
