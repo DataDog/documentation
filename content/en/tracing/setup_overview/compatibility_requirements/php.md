@@ -14,7 +14,7 @@ further_reading:
 ---
 ## Compatibility
 
-The PHP Datadog Trace library is open source - view the [Github repository][1] for more information.
+The PHP Datadog Trace library is open source - view the [GitHub repository][1] for more information.
 
 PHP APM supports the following PHP versions:
 
