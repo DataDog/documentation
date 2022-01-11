@@ -81,8 +81,8 @@ To manually instrument your code, install the tracer as in the [setup examples][
   child_span->SetTag(datadog::tags::resource_name, "ingredients.bologna_sandwich");
   // Spans can be finished at an explicit time ...
   child_span->Finish();
-} // ... or otherwise implicitly when their destructor is invoked.
-  // For example, root_span finishes here implicitly.
+} // ... or implicitly when the destructor is invoked.
+  // For example, root_span finishes here.
 ```
 
 ### Inject and extract context for distributed tracing
