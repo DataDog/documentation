@@ -497,6 +497,12 @@
       "description": "Get Monthly Usage Attribution returns \"OK\" response"
     }
   ],
+  "GetUsageAttribution": [
+    {
+      "suffix": "",
+      "description": "Get Usage Attribution returns \"OK\" response"
+    }
+  ],
   "CreateWebhooksIntegrationCustomVariable": [
     {
       "suffix": "",

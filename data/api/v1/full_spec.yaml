@@ -12907,6 +12907,11 @@ components:
         values:
           $ref: '#/components/schemas/UsageAttributionValues'
       type: object
+    UsageAttributionLimit:
+      default: 5000
+      description: Maximum number of records to be returned.
+      format: int64
+      type: integer
     UsageAttributionMetadata:
       description: The object containing document metadata.
       properties:
@@ -12915,6 +12920,11 @@ components:
         pagination:
           $ref: '#/components/schemas/UsageAttributionPagination'
       type: object
+    UsageAttributionOffset:
+      default: 0
+      description: Number of records to skip before beginning to return.
+      format: int64
+      type: integer
     UsageAttributionPagination:
       description: The metadata for the current pagination.
       properties:
@@ -26360,6 +26370,18 @@ paths:
         schema:
           default: false
           type: boolean
+      - description: Number of records to skip before beginning to return.
+        in: query
+        name: offset
+        required: false
+        schema:
+          $ref: '#/components/schemas/UsageAttributionOffset'
+      - description: Maximum number of records to be returned.
+        in: query
+        name: limit
+        required: false
+        schema:
+          $ref: '#/components/schemas/UsageAttributionLimit'
       responses:
         '200':
           content:
