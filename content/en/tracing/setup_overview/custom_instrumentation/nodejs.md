@@ -136,12 +136,12 @@ Synchronous code can be traced with `tracer.trace()` which will automatically fi
 
 ```javascript
 app.get('/make-sandwich', (req, res) => {
-  const sandwich = tracer.trace('sandwich.make', { service: 'sandwich_service', resource: 'resource_name' }, () => {
-    const ingredients = tracer.trace('get_ingredients', { service: 'sandwich_service', resource: 'resource_name' }, () => {
+  const sandwich = tracer.trace('sandwich.make', { resource: 'resource_name' }, () => {
+    const ingredients = tracer.trace('get_ingredients', { resource: 'resource_name' }, () => {
       return getIngredients()
     })
 
-    return tracer.trace('assemble_sandwich', { service: 'sandwich_service', resource: 'resource_name' }, () => {
+    return tracer.trace('assemble_sandwich', { resource: 'resource_name' }, () => {
       assembleSandwich(ingredients)
     })
   })
@@ -168,10 +168,10 @@ const getIngredients = () => {
 };
 
 app.get('/make-sandwich', (req, res) => {
-  return tracer.trace('sandwich.make', { service: 'sandwich_service', resource: 'resource_name' }, () => {
-    return tracer.trace('get_ingredients', { service: 'sandwich_service', resource: 'resource_name' }, () => getIngredients())
+  return tracer.trace('sandwich.make', { resource: 'resource_name' }, () => {
+    return tracer.trace('get_ingredients', { resource: 'resource_name' }, () => getIngredients())
       .then((ingredients) => {
-        return tracer.trace('assemble_sandwich', { service: 'sandwich_service', resource: 'resource_name' }, () => {
+        return tracer.trace('assemble_sandwich', { resource: 'resource_name' }, () => {
           return assembleSandwich(ingredients)
         })
       })
@@ -191,12 +191,12 @@ Async/await can be traced with `tracer.trace()` which will automatically finish 
 
 ```javascript
 app.get('/make-sandwich', async (req, res) => {
-  const sandwich = await tracer.trace('sandwich.make', { service: 'sandwich_service', resource: 'resource_name' }, async () => {
-    const ingredients = await tracer.trace('get_ingredients', { service: 'sandwich_service', resource: 'resource_name' }, () => {
+  const sandwich = await tracer.trace('sandwich.make', { resource: 'resource_name' }, async () => {
+    const ingredients = await tracer.trace('get_ingredients', { resource: 'resource_name' }, () => {
       return getIngredients()
     })
 
-    return tracer.trace('assemble_sandwich', { service: 'sandwich_service', resource: 'resource_name' }, () => {
+    return tracer.trace('assemble_sandwich', { resource: 'resource_name' }, () => {
       return assembleSandwich(ingredients)
     })
   })
@@ -218,13 +218,13 @@ It's also possible to wrap an existing function without changing its code. This 
 ```javascript
 
 // After the functions are defined
-getIngredients = tracer.wrap('get_ingredients', { service: 'sandwich_service', resource: 'resource_name' }, getIngredients)
-assembleSandwich = tracer.wrap('assemble_sandwich', { service: 'sandwich_service', resource: 'resource_name' }, assembleSandwich)
+getIngredients = tracer.wrap('get_ingredients', { resource: 'resource_name' }, getIngredients)
+assembleSandwich = tracer.wrap('assemble_sandwich', { resource: 'resource_name' }, assembleSandwich)
 
 // Where routes are defined
 app.get('/make-sandwich', (req, res) => {
 
-  const sandwich = tracer.trace('sandwich.make', { service: 'sandwich_service', resource: 'resource_name' }, () => {
+  const sandwich = tracer.trace('sandwich.make', { resource: 'resource_name' }, () => {
     const ingredients = getIngredients()
 
     return assembleSandwich(ingredients)
