@@ -73,7 +73,7 @@ To manually instrument your code, install the tracer as in the [setup examples][
   auto root_span = tracer->StartSpan("get_ingredients");
   // Set a resource name for the root span.
   root_span->SetTag(datadog::tags::resource_name, "bologna_sandwich");
-  // Create a child span, with the root span as its parent.
+  // Create a child span with the root span as its parent.
   auto child_span = tracer->StartSpan(
       "cache_lookup",
       {opentracing::ChildOf(&root_span->context())});
