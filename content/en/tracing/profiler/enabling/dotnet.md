@@ -44,7 +44,7 @@ Datadog .NET Profiler is currently in public beta. Datadog recommends evaluating
 ## Installation
 
 <div class="alert alert-warning">
-  <strong>Note:</strong> Datadog's.NET Tracer and Profiler rely on the .NET CLR Profiling API. This API allows only one subscriber (for example, APM). To ensure maximum visibility, run only one APM solution in your application environment.
+  <strong>Note:</strong> Datadog's .NET Tracer and Profiler rely on the .NET CLR Profiling API. This API allows only one subscriber (for example, APM). To ensure maximum visibility, run only one APM solution in your application environment.
 </div>
 
 1. If you are already using Datadog, upgrade your agent to version [7.20.2][1]+ or [6.20.2][2]+.
@@ -123,7 +123,7 @@ Datadog .NET Profiler is currently in public beta. Datadog recommends evaluating
    Set-ItemProperty HKLM:SYSTEM\CurrentControlSet\Services\<SERVICE NAME> -Name Environment -Value $v
    ```
 
-2. A minute or two after starting your application, your profiles will show up on the [Datadog APM > Profiler page][1].
+2. A minute or two after you start your application, your profiles appear on the [Datadog APM > Profiler page][1].
 
 [1]: https://app.datadoghq.com/profiling
 {{% /tab %}}
@@ -131,7 +131,7 @@ Datadog .NET Profiler is currently in public beta. Datadog recommends evaluating
 {{% tab "Standalone applications" %}}
 1. To automatically profile a non-service application, such as console, ASP.NET (Core), Windows Forms, or WPF, some environment variables must be set before starting it.
 
-   If the environment variables are set for the current user, _all_ .NET applications will be profiled. Instead, we recommend setting them in a batch file that also starts the application and running that.
+   If the environment variables are set for the current user, _all_ .NET applications are profiled. Instead, set them in a batch file that also starts the application, and run the batch file.
 
    For .NET Core and .NET 5+:
    ```cmd
@@ -153,7 +153,7 @@ Datadog .NET Profiler is currently in public beta. Datadog recommends evaluating
    REM start the application here
    ```
 
-2. A minute or two after starting your application, your profiles will show up on the [Datadog APM > Profiler page][1].
+2. A minute or two after you start your application, your profiles appear on the [Datadog APM > Profiler page][1].
 
 [1]: https://app.datadoghq.com/profiling
 {{% /tab %}}
@@ -170,7 +170,7 @@ You can configure the profiler using the following environment variables. Restar
 | `DD_VERSION`               | String        | The [version][4] of your service.  |
 | `DD_TAGS`                  | String        | Tags to apply to an uploaded profile. Must be a list of `<key>:<value>` separated by commas such as: `layer:api,team:intake`.   |
 | `DD_AGENT_HOST`            | String        | Sets the host where profiles are sent (the host running the Agent). Can be a hostname or an IP address. Ignored if `DD_TRACE_AGENT_URL` is set. Defaults to `localhost`.  |
-| `DD_TRACE_AGENT_PORT`      | String        | Sets the port where profiles are sent (the port where the Agent is listening for connections). Ignored if `DD_TRACE_AGENT_URL` is set. Defaults to`8126`..  |
+| `DD_TRACE_AGENT_PORT`      | String        | Sets the port where profiles are sent (the port where the Agent is listening for connections). Ignored if `DD_TRACE_AGENT_URL` is set. Defaults to`8126`.  |
 | `DD_TRACE_AGENT_URL`       | String        | Sets the URL endpoint where profiles are sent. Overrides `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT` if set. Defaults to `http://<DD_AGENT_HOST>:<DD_TRACE_AGENT_PORT>`.  |
 | `DD_TRACE_DEBUG`           | Boolean        | Enables or disables debug logging (Could help in case of troubleshooting investigation). Valid values are: `true` or `false`. Defaults to `false`.  |
 | `DD_PROFILING_LOG_DIR`     | String        | Sets the directory for .NET Profiler logs. Defaults to `%ProgramData%\Datadog-APM\logs\`.  |
