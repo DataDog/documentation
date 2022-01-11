@@ -66,7 +66,7 @@ The `proxyHost` initialization parameter has been removed. Use the `proxyUrl` in
 
 #### Privacy options support
 
-The options `input-ignored` and `input-masked` are no longer valid privacy options. Instead, use the `mask-user-input` privacy option. Specifically, replace:
+The privacy options `input-ignored` and `input-masked` are no longer valid. Instead, use the `mask-user-input` privacy option. Specifically, replace:
 
 * `dd-privacy-input-ignored` and `dd-privacy-input-masked` class names with `dd-privacy-mask-user-input`
 * `dd-privacy="input-masked"` and `dd-privacy="input-ignored"` attribute values with `dd-privacy="mask-user-input"`
