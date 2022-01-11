@@ -138,7 +138,7 @@ Par exemple, la première version de l'image Docker qui est fournie avec l'Agent
 
 #### Conteneurs personnalisés et informations supplémentaires
 
-Pour en savoir plus sur l'élaboration de conteneurs Docker personnalisés avec l'Agent Datadog, l'image Alpine Linux, le contrôle de version et plus encore, consultez [le projet docker-dd-agent sur Github][2].
+Pour en savoir plus sur l'élaboration de conteneurs Docker personnalisés avec l'Agent Datadog, l'image Alpine Linux, le contrôle de version et plus encore, consultez [le projet docker-dd-agent sur GitHub][2].
 
 ### Validation
 
