@@ -45,6 +45,10 @@
       "description": "Create a new dashboard with a formulas and functions change widget"
     },
     {
+      "suffix": "_1024858348",
+      "description": "Create a new dashboard with a formulas and functions treemap widget"
+    },
+    {
       "suffix": "_2644712913",
       "description": "Create a new dashboard with a query value widget using the percentile aggregator"
     },
