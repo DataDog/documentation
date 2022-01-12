@@ -189,7 +189,7 @@
         }
       },
       "IncidentIDPathParameter": {
-        "description": "The UUID the incident.",
+        "description": "The UUID of the incident.",
         "in": "path",
         "name": "incident_id",
         "required": true,
@@ -40049,7 +40049,7 @@
         "operationId": "DeleteIncident",
         "parameters": [
           {
-            "description": "The UUID the incident.",
+            "description": "The UUID of the incident.",
             "in": "path",
             "name": "incident_id",
             "required": true,
@@ -40213,7 +40213,7 @@
         "operationId": "GetIncident",
         "parameters": [
           {
-            "description": "The UUID the incident.",
+            "description": "The UUID of the incident.",
             "in": "path",
             "name": "incident_id",
             "required": true,
@@ -41113,7 +41113,7 @@
         "operationId": "UpdateIncident",
         "parameters": [
           {
-            "description": "The UUID the incident.",
+            "description": "The UUID of the incident.",
             "in": "path",
             "name": "incident_id",
             "required": true,
