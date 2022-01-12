@@ -59294,7 +59294,7 @@
         ],
         "summary": "Get all security filters",
         "tags": [
-          "Security Monitoring"
+          "Cloud SIEM"
         ],
         "x-undo": {
           "type": "safe"
@@ -59641,7 +59641,7 @@
         ],
         "summary": "Create a security filter",
         "tags": [
-          "Security Monitoring"
+          "Cloud SIEM"
         ],
         "x-codegen-request-body-name": "body",
         "x-given": {
@@ -59775,7 +59775,7 @@
         ],
         "summary": "Delete a security filter",
         "tags": [
-          "Security Monitoring"
+          "Cloud SIEM"
         ],
         "x-undo": {
           "type": "idempotent"
@@ -59996,7 +59996,7 @@
         ],
         "summary": "Get a security filter",
         "tags": [
-          "Security Monitoring"
+          "Cloud SIEM"
         ],
         "x-undo": {
           "type": "safe"
@@ -60374,7 +60374,7 @@
         ],
         "summary": "Update a security filter",
         "tags": [
-          "Security Monitoring"
+          "Cloud SIEM"
         ],
         "x-codegen-request-body-name": "body",
         "x-undo": {
@@ -60869,7 +60869,7 @@
         ],
         "summary": "List rules",
         "tags": [
-          "Security Monitoring"
+          "Cloud SIEM"
         ],
         "x-menu-order": 1,
         "x-undo": {
@@ -61679,7 +61679,7 @@
         ],
         "summary": "Create a detection rule",
         "tags": [
-          "Security Monitoring"
+          "Cloud SIEM"
         ],
         "x-codegen-request-body-name": "body",
         "x-given": {
@@ -61814,7 +61814,7 @@
         ],
         "summary": "Delete an existing rule",
         "tags": [
-          "Security Monitoring"
+          "Cloud SIEM"
         ],
         "x-menu-order": 5,
         "x-undo": {
@@ -62260,7 +62260,7 @@
         ],
         "summary": "Get a rule's details",
         "tags": [
-          "Security Monitoring"
+          "Cloud SIEM"
         ],
         "x-menu-order": 3,
         "x-undo": {
@@ -63102,7 +63102,7 @@
         ],
         "summary": "Update an existing rule",
         "tags": [
-          "Security Monitoring"
+          "Cloud SIEM"
         ],
         "x-codegen-request-body-name": "body",
         "x-menu-order": 4,
@@ -63393,7 +63393,7 @@
         ],
         "summary": "Get a quick list of security signals",
         "tags": [
-          "Security Monitoring"
+          "Cloud SIEM"
         ],
         "x-menu-order": 7,
         "x-undo": {
@@ -63676,7 +63676,7 @@
         ],
         "summary": "Get a list of security signals",
         "tags": [
-          "Security Monitoring"
+          "Cloud SIEM"
         ],
         "x-codegen-request-body-name": "body",
         "x-menu-order": 6,
@@ -76588,7 +76588,7 @@
     },
     {
       "description": "Detection rules for generating signals and listing of generated\nsignals.",
-      "name": "Security Monitoring"
+      "name": "Cloud SIEM"
     },
     {
       "description": "Create, edit, and disable service accounts.",
