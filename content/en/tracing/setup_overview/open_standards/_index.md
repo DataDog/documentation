@@ -307,7 +307,18 @@ If running the OpenTelemetry Collector on a host with an existing Datadog Agent,
    ```
    When running in a containerized environment, ensure the `endpoint` setting is configured to use the appropriate hostname for the Datadog Agent.
 
-3. On the OpenTelemetry collector config, replace uses of the Datadog exporter in your metrics and traces pipelines by the OTLP exporter.
+3. On the OpenTelemetry collector config, replace uses of the Datadog exporter in your metrics and traces pipelines by the OTLP exporter. For example, if you have one metrics and one traces pipeline with the Datadog exporter:
+   ```yaml
+   pipelines:
+     metrics:
+      receivers: [...]
+      processors: [...]
+      exporters: [nop/1, nop/2, otlp] # replaced 'datadog' by 'otlp'
+    traces:
+      receivers: [...]
+      processors: [...]
+      exporters: [nop/3, nop/4, otlp] # replaced 'datadog' by 'otlp'
+   ```
 
 This configuration ensures consistent host metadata and centralizes the configuration for host tags and host aliases.
 
