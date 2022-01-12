@@ -138,7 +138,7 @@ Docker イメージバージョンは、**X.Y.Z** というパターンです。
 
 #### カスタムコンテナと追加情報
 
-Datadog Agent を使用したカスタム Docker コンテナの構築、Alpine Linux ベースのイメージ、バージョン管理などについては、[Github の docker-dd-agent プロジェクト][2]を参照してください。
+Datadog Agent を使用したカスタム Docker コンテナの構築、Alpine Linux ベースのイメージ、バージョン管理などについては、[GitHub の docker-dd-agent プロジェクト][2]を参照してください。
 
 ### 検証
 

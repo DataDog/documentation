@@ -130,8 +130,16 @@ components:
       required: true
       schema:
         type: string
+    CloudWorkloadSecurityAgentRuleID:
+      description: The ID of the Agent rule.
+      example: 3b5-v82-ns6
+      in: path
+      name: agent_rule_id
+      required: true
+      schema:
+        type: string
     IncidentIDPathParameter:
-      description: The UUID the incident.
+      description: The UUID of the incident.
       in: path
       name: incident_id
       required: true
@@ -630,6 +638,190 @@ components:
       type: string
       x-enum-varnames:
       - APPLICATION_KEYS
+    CloudWorkloadSecurityAgentRuleAttributes:
+      description: A Cloud Workload Security Agent rule returned by the API.
+      properties:
+        category:
+          description: The category of the Agent rule.
+          example: Process Activity
+          type: string
+        creationDate:
+          description: When the Agent rule was created, timestamp in milliseconds.
+          example: 1624366480320
+          format: int64
+          type: integer
+        creator:
+          $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleCreatorAttributes'
+        defaultRule:
+          description: Whether the rule is included by default.
+          example: false
+          type: boolean
+        description:
+          description: The description of the Agent rule.
+          example: My Agent rule
+          type: string
+        enabled:
+          description: Whether the Agent rule is enabled.
+          example: true
+          type: boolean
+        expression:
+          description: The SECL expression of the Agent rule.
+          example: exec.file.name == \"sh\"
+          type: string
+        name:
+          description: The name of the Agent rule.
+          example: my_agent_rule
+          type: string
+        updatedAt:
+          description: When the Agent rule was last updated, timestamp in milliseconds.
+          example: 1624366480320
+          format: int64
+          type: integer
+        updater:
+          $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleUpdaterAttributes'
+        version:
+          description: The version of the Agent rule.
+          example: 23
+          format: int64
+          type: integer
+    CloudWorkloadSecurityAgentRuleCreateAttributes:
+      description: Create a new Cloud Workload Security Agent rule.
+      properties:
+        description:
+          description: The description of the Agent rule.
+          example: My Agent rule
+          type: string
+        enabled:
+          description: Whether the Agent rule is enabled.
+          example: true
+          type: boolean
+        expression:
+          description: The SECL expression of the Agent rule.
+          example: exec.file.name == \"sh\"
+          type: string
+        name:
+          description: The name of the Agent rule.
+          example: my_agent_rule
+          type: string
+      required:
+      - name
+      - expression
+      type: object
+    CloudWorkloadSecurityAgentRuleCreateData:
+      description: Object for a single Agent rule.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleCreateAttributes'
+        type:
+          $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleType'
+      required:
+      - attributes
+      - type
+      type: object
+    CloudWorkloadSecurityAgentRuleCreateRequest:
+      description: Request object that includes the Agent rule to create.
+      properties:
+        data:
+          $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleCreateData'
+      required:
+      - data
+      type: object
+    CloudWorkloadSecurityAgentRuleCreatorAttributes:
+      description: The attributes of the user who created the Agent rule.
+      properties:
+        handle:
+          description: The handle of the user.
+          example: datadog.user@example.com
+          type: string
+        name:
+          description: The name of the user.
+          example: Datadog User
+          type: string
+      type: object
+    CloudWorkloadSecurityAgentRuleData:
+      description: Object for a single Agent rule.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleAttributes'
+        id:
+          description: The ID of the Agent rule.
+          example: 3dd-0uc-h1s
+          type: string
+        type:
+          $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleType'
+      type: object
+    CloudWorkloadSecurityAgentRuleResponse:
+      description: Response object that includes an Agent rule.
+      properties:
+        data:
+          $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleData'
+      type: object
+    CloudWorkloadSecurityAgentRuleType:
+      default: agent_rule
+      description: The type of the resource. The value should always be `agent_rule`.
+      enum:
+      - agent_rule
+      example: agent_rule
+      type: string
+      x-enum-varnames:
+      - AGENT_RULE
+    CloudWorkloadSecurityAgentRuleUpdateAttributes:
+      description: Update an existing Cloud Workload Security Agent rule.
+      properties:
+        description:
+          description: The description of the Agent rule.
+          example: My Agent rule
+          type: string
+        enabled:
+          description: Whether the Agent rule is enabled.
+          example: true
+          type: boolean
+        expression:
+          description: The SECL expression of the Agent rule.
+          example: exec.file.name == \"sh\"
+          type: string
+      type: object
+    CloudWorkloadSecurityAgentRuleUpdateData:
+      description: Object for a single Agent rule.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleUpdateAttributes'
+        type:
+          $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleType'
+      required:
+      - attributes
+      - type
+      type: object
+    CloudWorkloadSecurityAgentRuleUpdateRequest:
+      description: Request object that includes the Agent rule with the attributes
+        to update.
+      properties:
+        data:
+          $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleUpdateData'
+      required:
+      - data
+      type: object
+    CloudWorkloadSecurityAgentRuleUpdaterAttributes:
+      description: The attributes of the user who last updated the Agent rule.
+      properties:
+        handle:
+          description: The handle of the user.
+          example: datadog.user@example.com
+          type: string
+        name:
+          description: The name of the user.
+          example: Datadog User
+          type: string
+      type: object
+    CloudWorkloadSecurityAgentRulesListResponse:
+      description: Response object that includes a list of Agent rule.
+      properties:
+        data:
+          description: A list of Agent rules objects.
+          items:
+            $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleAttributes'
+          type: array
+      type: object
     ContentEncoding:
       description: HTTP header used to compress the media-type.
       enum:
@@ -846,6 +1038,7 @@ components:
           description: The API key.
           readOnly: true
           type: string
+          x-secret: true
         last4:
           description: The last four characters of the API key.
           example: abcd
@@ -853,6 +1046,7 @@ components:
           minLength: 4
           readOnly: true
           type: string
+          x-secret: true
         modified_at:
           description: Date the API key was last modified.
           example: '2020-11-23T10:00:00.000Z'
@@ -888,6 +1082,7 @@ components:
           description: The application key.
           readOnly: true
           type: string
+          x-secret: true
         last4:
           description: The last four characters of the application key.
           example: abcd
@@ -895,6 +1090,7 @@ components:
           minLength: 4
           readOnly: true
           type: string
+          x-secret: true
         name:
           description: Name of the application key.
           example: Application Key for managing dashboards
@@ -3564,6 +3760,7 @@ components:
           minLength: 4
           readOnly: true
           type: string
+          x-secret: true
         modified_at:
           description: Date the API key was last modified.
           example: '2020-11-23T10:00:00.000Z'
@@ -3602,6 +3799,7 @@ components:
           minLength: 4
           readOnly: true
           type: string
+          x-secret: true
         name:
           description: Name of the application key.
           example: Application Key for managing dashboards
@@ -9103,9 +9301,175 @@ paths:
       - Cloud Workload Security
       x-undo:
         type: safe
-      x-unstable: '**Note**: This endpoint is in public beta.
+  /api/v2/security_monitoring/cloud_workload_security/agent_rules:
+    get:
+      description: Get the list of Agent rules.
+      operationId: ListCloudWorkloadSecurityAgentRules
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudWorkloadSecurityAgentRulesListResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_cws_agent_rules_read
+      summary: Get all Cloud Workload Security Agent rules
+      tags:
+      - Cloud Workload Security
+      x-undo:
+        type: safe
+    post:
+      description: Create a new Agent rule with the given parameters.
+      operationId: CreateCloudWorkloadSecurityAgentRule
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleCreateRequest'
+        description: The definition of the new Agent rule.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '409':
+          $ref: '#/components/responses/ConflictResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_cws_agent_rules_write
+      summary: Create a Cloud Workload Security Agent rule
+      tags:
+      - Cloud Workload Security
+      x-codegen-request-body-name: body
+      x-given:
+        agent_rule:
+          parameters:
+          - name: body
+            value: "{\n  \"data\": {\n    \"type\": \"agent_rule\",\n    \"attributes\":
+              {\n      \"name\": \"{{ unique_lower_alnum }}\",\n      \"description\":
+              \"My Agent rule\",\n      \"expression\": \"exec.file.name == \\\"sh\\\"\",\n
+              \     \"enabled\": true\n     }\n  }\n}"
+          step: there is a valid "agent_rule" in the system
+      x-undo:
+        operationId: DeleteCloudWorkloadSecurityAgentRule
+        parameters:
+        - name: agent_rule_id
+          source: data.id
+        type: unsafe
+  /api/v2/security_monitoring/cloud_workload_security/agent_rules/{agent_rule_id}:
+    delete:
+      description: Delete a specific Agent rule.
+      operationId: DeleteCloudWorkloadSecurityAgentRule
+      parameters:
+      - $ref: '#/components/parameters/CloudWorkloadSecurityAgentRuleID'
+      responses:
+        '204':
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_cws_agent_rules_write
+      summary: Delete a Cloud Workload Security Agent rule
+      tags:
+      - Cloud Workload Security
+      x-undo:
+        type: idempotent
+    get:
+      description: Get the details of a specific Agent rule.
+      operationId: GetCloudWorkloadSecurityAgentRule
+      parameters:
+      - $ref: '#/components/parameters/CloudWorkloadSecurityAgentRuleID'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_cws_agent_rules_read
+      summary: Get a Cloud Workload Security Agent rule
+      tags:
+      - Cloud Workload Security
+      x-undo:
+        type: safe
+    patch:
+      description: 'Update a specific Agent rule.
 
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+        Returns the Agent rule object when the request is successful.'
+      operationId: UpdateCloudWorkloadSecurityAgentRule
+      parameters:
+      - $ref: '#/components/parameters/CloudWorkloadSecurityAgentRuleID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleUpdateRequest'
+        description: New definition of the Agent rule.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '409':
+          $ref: '#/components/responses/ConcurrentModificationResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_cws_agent_rules_write
+      summary: Update a Cloud Workload Security Agent rule
+      tags:
+      - Cloud Workload Security
+      x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
   /api/v2/security_monitoring/configuration/security_filters:
     get:
       description: Get the list of configured security filters with their definitions.
@@ -10741,7 +11105,8 @@ servers:
       default: api
       description: The subdomain where the API is deployed.
 tags:
-- description: Security signals generated based file and process activity in workloads.
+- description: Workload activity security rules for generating events using the Datadog
+    security Agent.
   name: Cloud Workload Security
 - description: 'Interact with your dashboard lists through the API to
 

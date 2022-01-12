@@ -19,7 +19,7 @@ git_integration_title: pdh_check
 guid: D09B3410-00A0-4789-ABD7-7740C3FE211F
 integration_id: pdh
 integration_title: Check PDH
-integration_version: 1.14.0
+integration_version: 1.14.1
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com

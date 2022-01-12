@@ -64,6 +64,7 @@ The **ignore resources** option allows resources to be excluded if the global ro
 You can specify resources to ignore either in the Agent configuration file, `datadog.yaml`, or with the `DD_APM_IGNORE_RESOURCES` environment variable. See examples below.
 
 {{< code-block lang="yaml" filename="datadog.yaml" >}}
+apm_config:
 ## @param ignore_resources - list of strings - optional
 ## A list of regular expressions can be provided to exclude certain traces based on their resource name.
 ## All entries must be surrounded by double quotes and separated by commas.
