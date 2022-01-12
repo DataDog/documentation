@@ -157,7 +157,7 @@ For standalone software and services--or if your integration is using the Datado
 In the `marketplace` or `integrations-extras` directory you specified above, run: 
 
 ```
-ddev create -t tile "<Offering Name>"
+ddev create -t tile -v2 "<Offering Name>"
 ```
 
 #### Full integration
@@ -165,7 +165,7 @@ ddev create -t tile "<Offering Name>"
 To generate a complete integration scaffolding, from the `marketplace` or `integrations-extras` directory specified above, run: 
 
 ```
-ddev create "<Offering Name>"
+ddev create -v2 "<Offering Name>"
 ```
 
 ### Populate the tile scaffolding
