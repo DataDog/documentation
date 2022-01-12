@@ -100,6 +100,13 @@ If an event or a request goes beyond any of the following limitations, it is rej
 | Maximum event size                       | 256 KB       |
 | Maximum intake payload size              | 5 MB         |
 
+## Cross origin read blocking warning
+
+When starting session replay recording with `startSessionReplayRecording()` on Chromium based browser, a CORB warning is printed in the console:
+{{< img src="real_user_monitoring/browser/troubleshooting/corb_warning.png" alt="CORB warning">}}
+
+This behavior is a reported [Chromium issue](https://bugs.chromium.org/p/chromium/issues/detail?id=1255707). It does not impact the session replay recording and can safely be ignored.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
