@@ -116,7 +116,7 @@ Go to your [GCP account][1] and [create a GCS bucket][2] to send your archives t
 {{< tabs >}}
 {{% tab "AWS S3" %}}
 
-Add the following two permission statements to your IAM policies. Edit the bucket names and, if desired, specify the paths that contain your log archives.
+Add the following two permission statements to your IAM policies attached to the role for the AWS Integration. Edit the bucket names and, if desired, specify the paths that contain your log archives. 
 
 **Notes**:
 
