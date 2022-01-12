@@ -131,7 +131,7 @@ components:
       schema:
         type: string
     IncidentIDPathParameter:
-      description: The UUID the incident.
+      description: The UUID of the incident.
       in: path
       name: incident_id
       required: true
