@@ -181,6 +181,11 @@ Override the port that the default tracer submits DogStatsD metrics to.
 : **Default**: `false`<br>
 Enable [connecting logs and trace injection][8].
 
+
+`DD_TRACE_SAMPLE_RATE`
+: **Default**: `1.0`<br>
+A float, f, 0.0 <= f <= 1.0. where f*100% of traces will be sampled and the remaining traces will be discarded by the trace agent [9].
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -193,3 +198,4 @@ Enable [connecting logs and trace injection][8].
 [6]: /tracing/guide/setting_primary_tags_to_scope/
 [7]: https://ddtrace.readthedocs.io/en/stable/integrations.html#django
 [8]: /tracing/connect_logs_and_traces/python/
+[9]: /tracing/faq/trace_sampling_and_storage/
