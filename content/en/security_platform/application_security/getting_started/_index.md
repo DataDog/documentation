@@ -1,5 +1,5 @@
 ---
-title: Add the Datadog Library
+title: Getting Started Monitoring Application Security
 kind: documentation
 type: multi-code-lang
 further_reading:

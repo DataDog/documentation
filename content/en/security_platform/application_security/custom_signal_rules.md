@@ -1,5 +1,5 @@
 ---
-title: Setup and Configure Application Security Monitoring
+title: Writing Custom Security Signal Rules
 kind: documentation
 further_reading:
     - link: 'tktk'
