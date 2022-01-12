@@ -19,7 +19,7 @@ Once you've created [RBAC roles for logs][1], assign or remove [permissions][2] 
 
 Assign or remove permission to a role directly by [updating the role in the Datadog application][1].
 
-{{< img src="account_management/rbac/logs_permissions.png" alt="Logs Permissions"  style="width:75%;" >}}
+{{< img src="account_management/rbac/logs_permissions.png" alt="Logs Permissions" style="width:75%;" >}}
 
 [1]: https://app.datadoghq.com/access/roles
 {{% /tab %}}
@@ -74,7 +74,7 @@ This permission can be assigned either globally or restricted to a subset of ind
 1. Remove the global permission on the role.
 2. Grant this permission to the role in [the Index page of the Datadog app][1] by editing an index and adding a role to the "Grant editing Exclusion Filters of this index to" field (screenshot below).
 
-{{< img src="account_management/rbac/logs_write_exclusion_filters.png" alt="Logs Write Exclusion Filters"  style="width:75%;" >}}
+{{< img src="account_management/rbac/logs_write_exclusion_filters.png" alt="Logs Write Exclusion Filters" style="width:75%;" >}}
 
 
 [1]: /logs/log_configuration/indexes/
