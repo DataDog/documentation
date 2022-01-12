@@ -15,11 +15,15 @@ further_reading:
 
 ## Overview
 
-With Cloud Workload Security (CWS) enabled, the Datadog Agent actively monitors system activity and evaluates it against a set of rules to detect suspicious behavior. Datadog provides [bundled CWS Agent rules][1] that you receive when you upgrade the Datadog Agent. However, you can write your own custom Agent rules. This guide covers the concept of Agent rules and provides instruction on how to create them.
+With Cloud Workload Security (CWS) enabled, the Datadog Agent actively monitors system activity and evaluates it against a set of rules to detect suspicious behavior. 
+
+When you upgrade the Datadog Agent, you receive [bundled CWS Agent rules][1]. You can also write your own custom Agent rules. This guide covers Agent rules and how to create them.
 
 ### Agent rules
 
-An Agent Rule contains the [Agent Expression][2], which determines which activity to collect from the Agent. These collected events are then evaluated based on patterns of events described in a [rule][3]. A full set of rules for the Agent is called a policy. Datadog provides several [out-of-the-box CWS Agent rules][1] for your convenience in the default policy.
+An Agent Rule contains [Agent Expressions][2] that determine which activities the Agent collects. These captured events are then evaluated based on patterns of events described in a [rule][3]. 
+
+A full set of rules for the Agent is called a policy. Datadog provides you with several [out-of-the-box CWS Agent rules][1] in the default policy.
 
 ### Agent expressions
 
@@ -57,7 +61,7 @@ To ensure that your policy is evaluated in-kernel for maximum efficiency, always
 - `[event_type].file.name`
 - `[event_type].file.path`
 
-**Note**: `[event_type]` can be open or exec, for example.
+**Note**: `[event_type]` can be open or `exec`, for example.
 
 Use wildcards (`*`) carefully. For example, never use `open.file.path =~ "*/myfile"`. If you must use wildcards prefixing directories, at least two levels are required: `open.file.path =~ "*/mydir/myfile")`.
 
@@ -75,17 +79,17 @@ Approvers are generally more powerful and preferred. Using approvers, the Agent 
 
 ## Setup and configuration
 
-### Create a new default policy file
+### Create a default policy file
 
-First, create a new default policy file to load to the Agent by following the instructions below.
+First, create a default policy file to load to the Agent by following the instructions below.
 
-1. In Datadog, navigate to the [Agent Configuration page][4] under Setup and Configuration.
+1. In Datadog, navigate to the [Agent Configuration page][4] under **Setup & Configuration**.
 
 2. Click **Add an Agent Rule** in the top right.
 
 3. Add a name and description for the rule.
 
-4. Define the Agent expression. Enter the rule in the Expression field using Datadog Security Language (SECL).
+4. Define the Agent expression by entering the rule in the **Expression** field with Datadog Security Language (SECL).
 
     {{< img src="security_platform/cws/workload_security_rules/define_agent_expression.png" alt="Adding a rule to the Expression field" >}}
 
@@ -96,16 +100,16 @@ First, create a new default policy file to load to the Agent by following the in
     "/usr/bin/kubectl", "/usr/local/bin/kubectl"] && container.id != ""
     ```
 
-5. Save the rule. This automatically navigates you back to the Rules page.
+5. Save the rule. This automatically navigates you back to the **Rules** page.
 
-6. Click Download Workload Security Policy in the top right corner to download a default policy file to your local machine.
+6. Click **Download Workload Security Policy** in the top right corner to download a default policy file to your local machine.
 
 ### Configure the rule
 
 Once your new default policy file is downloaded, navigate to the [**Rules** page][3].
 
 1. Click the **New Rule** button in the top right.
-2. Select **Workload Security** under **Rule types**. Select a detection method, such as **Threshold** or **New Term**.
+2. Select **Workload Security** under **Rule types**. Select a detection method such as **Threshold** or **New Term**.
 3. Configure a new Cloud Workload Security rule. A rule can have multiple rule cases combined with boolean logic, for example `(||, &&)`. You can also set the counter, group by, and roll-up window.
 
     {{< img src="security_platform/cws/workload_security_rules/define_runtime_expression.png" alt="Adding a rule to the expression field" >}}
@@ -133,9 +137,9 @@ Copy the `default.policy` file over to the target host in the `{$DD_AGENT}/runti
 
 {{% tab "Helm" %}}
 
-1. Create a configmap containing `default.policy`. For example, `kubectl create configmap jdefaultpol --from-file=default.policy`.
+1. Create a ConfigMap containing `default.policy`. For example, `kubectl create configmap jdefaultpol --from-file=default.policy`.
 
-2. Add the configMap (`jdefaultpol`) into `values.yaml` with `datadog.securityAgent.runtime.policies.configMap`:
+2. Add the ConfigMap (`jdefaultpol`) into `values.yaml` with `datadog.securityAgent.runtime.policies.configMap`:
 
     ```yaml
     securityAgent:
@@ -155,7 +159,7 @@ Copy the `default.policy` file over to the target host in the `{$DD_AGENT}/runti
         enabled: false
     ```
 
-3. Upgrade the helm chart with `helm upgrade <RELEASENAME> -f values.yaml --set datadog.apiKey=<APIKEY> datadog/datadog`.
+3. Upgrade the Helm chart with `helm upgrade <RELEASENAME> -f values.yaml --set datadog.apiKey=<APIKEY> datadog/datadog`.
 
     **Note:** If you need to make further changes to `default.policy`, you can either use `kubectl edit cm jdefaultpol` or replace the configMap with  `kubectl create configmap jdefaultpol --from-file default.policy -o yaml --dry-run=client | kubectl replace -f -`.
 
@@ -163,7 +167,7 @@ Copy the `default.policy` file over to the target host in the `{$DD_AGENT}/runti
 {{% /tab %}}
 {{< /tabs >}}
 
-To finalize setup, restart the [Datadog Agent][5].
+To finalize your setup, restart the [Datadog Agent][5].
 
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}
