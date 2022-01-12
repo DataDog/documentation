@@ -50,7 +50,7 @@ There are two types of monitoring that the Datadog Agent uses for Cloud Workload
     ```
 
 3. Restart the Agent.
-4. **Optional, if Security Monitoring is checked** Follow [these instructions][2] to collect audit logs for Kubernetes.
+4. **Optional, if Cloud SIEM is checked** Follow [these instructions][2] to collect audit logs for Kubernetes.
 
 
 [1]: https://app.datadoghq.com/account/settings#agent/kubernetes

@@ -1,7 +1,7 @@
 ---
-title: Débuter avec le Security Monitoring
+title: Débuter avec le Cloud SIEM
 kind: documentation
-description: Découvrez les grands concepts de la solution Security Monitoring de Datadog, activez la détection des menaces et explorez les règles de détection des menaces par défaut.
+description: Découvrez les grands concepts de la solution Cloud SIEM de Datadog, activez la détection des menaces et explorez les règles de détection des menaces par défaut.
 aliases:
   - /fr/security_monitoring/getting_started/
   - /fr/security_platform/getting_started/
@@ -13,7 +13,7 @@ further_reading:
     tag: Documentation
     text: En savoir plus sur le Security Signals Explorer
 ---
-Pour commencer à utiliser la solution Security Monitoring de Datadog, suivez ces étapes :
+Pour commencer à utiliser la solution Cloud SIEM de Datadog, suivez ces étapes :
 
 * [Ingérer des logs](#ingerer-des-logs)
 * [Examiner les règles de détection](#examiner-les-regles-de-detection)

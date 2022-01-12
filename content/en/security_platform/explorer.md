@@ -7,7 +7,7 @@ aliases:
 further_reading:
   - link: "https://www.datadoghq.com/blog/announcing-security-monitoring/"
     tag: "Blog"
-    text: "Learn more about Security Monitoring"
+    text: "Learn more about Cloud SIEM"
   - link: "/security_monitoring/detection_rules/"
     tag: "Documentation"
     text: "Learn about the conditional logic of Security Rules"
@@ -15,7 +15,7 @@ further_reading:
 
 ## Overview
 
-From the [Security Signals Explorer][1], correlate and triage security signals. You can also access Security Monitoring dashboards from this page.
+From the [Security Signals Explorer][1], correlate and triage security signals. You can also access Cloud SIEM dashboards from this page.
 
 In this view, you can:
 
@@ -59,7 +59,7 @@ Below the overview of the signal are tabs with detailed information related to t
 
 ### Threat intelligence
 
-Datadog Security Monitoring offers threat intelligence feeds curated by threat intelligence partners. These feeds are constantly updated to include data about known suspicious activity (for example, IOCs), so you can quickly identify which potential threats to address.
+Datadog Cloud SIEM offers threat intelligence feeds curated by threat intelligence partners. These feeds are constantly updated to include data about known suspicious activity (for example, IOCs), so you can quickly identify which potential threats to address.
 
 {{< img src="security_platform/security_monitoring/explorer/threat_intelligence.png" alt="Threat Intelligence in the Security Signals Explorer"  >}}
 

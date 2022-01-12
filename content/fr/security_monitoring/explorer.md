@@ -5,7 +5,7 @@ description: Faire des recherches sur l'ensemble de vos signaux de sécurité et
 further_reading:
   - link: 'https://www.datadoghq.com/blog/announcing-security-monitoring/'
     tag: Blog
-    text: Security Monitoring
+    text: Cloud SIEM
   - link: /security_monitoring/detection_rules/
     tag: Documentation
     text: Règles de détection
