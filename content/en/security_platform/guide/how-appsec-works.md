@@ -1,6 +1,6 @@
 ---
-title: Troubleshooting Application Security Monitoring
-kind: documentation
+title: How Datadog Application Security Monitoring in Works
+kind: guide
 further_reading:
 - link: "/security_platform/getting_started/"
   tag: "Documentation"
@@ -13,7 +13,7 @@ further_reading:
   text: "Application Language and Framework Compatibility"
 ---
 
-TKTK
+tktk migrate content 
 
 ## Further Reading
 

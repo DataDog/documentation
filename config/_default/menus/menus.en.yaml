@@ -2519,50 +2519,25 @@ main:
     identifier: appsec_nodejs
     weight: 106
   - name: OOTB Rules
-    url: security_platform/default_rules#cat-application-security
+    url: security_platform/default_rules/#cat-application-security
     parent: application_security
     identifier: appsec_default_rules
     weight: 402
-  - name: Setup and Configuration
-    url: security_platform/application_security/configure/
+  - name: Setup and Configure
+    url: security_platform/application_security/setup_and_configure/
     parent: application_security
     identifier: appsec_configuration
     weight: 403
-  - name: Compatibility
-    url: security_platform/application_security/configure/compatibility/
-    parent: appsec_configuration
-    identifier: appsec_compatibility
-    weight: 101
-  - name: Enabling Application Security
-    url: security_platform/application_security/configure/enabling/
-    parent: appsec_configuration
-    identifier: appsec_enabling
-    weight: 102
-  - name: Exclusion Filters
-    url: security_platform/application_security/configure/exclusion_filters/
-    parent: appsec_configuration
-    identifier: appsec_exclusion_filters
-    weight: 103
-  - name: Sensitive Data Scanner
-    url: security_platform/application_security/configure/sensitive_data/
-    parent: appsec_configuration
-    identifier: appsec_sensitive_data
-    weight: 104
   - name: Custom Signal Rules
-    url: security_platform/application_security/configure/custom_signal_rules/
-    parent: appsec_configuration
+    url: security_platform/application_security/custom_signal_rules/
+    parent: application_security
     identifier: appsec_custom_signal_rules
     weight: 105
-  - name: Guides
-    url: security_platform/application_security/guides/
-    parent: application_security
-    identifier: appsec_guides
-    weight: 404
   - name: Troubleshooting
     url: security_platform/application_security/troubleshooting/
     parent: application_security
     identifier: appsec_troubleshooting
-    weight: 405
+    weight: 404
   - name: Security Rules
     url: security_platform/detection_rules/
     parent: security_platform
