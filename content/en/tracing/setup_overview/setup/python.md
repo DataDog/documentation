@@ -184,7 +184,7 @@ Enable [connecting logs and trace injection][8].
 
 `DD_TRACE_SAMPLE_RATE`
 : **Default**: `1.0`<br>
-A float, f, 0.0 <= f <= 1.0. This value represents the proportion of traces which will be retained by the agent [9].
+A float, f, 0.0 <= f <= 1.0. This value represents the proportion of traces which are retained by the agent [9].
 
 ## Further Reading
 
