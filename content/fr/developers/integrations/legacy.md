@@ -14,7 +14,7 @@ Vous devez également disposer de [Wget][4]. Wget est déjà installé sur la pl
 
 [Un gem][7] et un ensemble de scripts sont mis à votre disposition pour faciliter l'implémentation, le développement et le contrôle de votre check. Pour commencer :
 
-1. Dupliquez le [référentiel integrations-extras][8] sur Github et clonez le référentiel dans votre environnement de développement.
+1. Dupliquez le [référentiel integrations-extras][8] sur GitHub et clonez le référentiel dans votre environnement de développement.
 2. Exécutez `gem install bundler`
 3. Exécutez `bundle install`
 

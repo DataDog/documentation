@@ -247,6 +247,14 @@
     {
       "suffix": "",
       "description": "Get all hosts for your organization returns \"OK\" response"
+    },
+    {
+      "suffix": "_347346033",
+      "description": "Get all hosts with metadata deserializes successfully"
+    },
+    {
+      "suffix": "_2975406675",
+      "description": "Get all hosts with metadata for your organization returns \"OK\" response"
     }
   ],
   "GetIPRanges": [
@@ -481,6 +489,18 @@
     {
       "suffix": "",
       "description": "Get Hourly Usage Attribution returns \"OK\" response"
+    }
+  ],
+  "GetMonthlyUsageAttribution": [
+    {
+      "suffix": "",
+      "description": "Get Monthly Usage Attribution returns \"OK\" response"
+    }
+  ],
+  "GetUsageAttribution": [
+    {
+      "suffix": "",
+      "description": "Get Usage Attribution returns \"OK\" response"
     }
   ],
   "CreateWebhooksIntegrationCustomVariable": [
