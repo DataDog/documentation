@@ -5787,18 +5787,18 @@ components:
             dashboards_public_share: The ability to share dashboards externally.
             dashboards_read: The ability to view dashboards.
             dashboards_write: The ability to create and change dashboards.
-            events_read: The ability to read events data.
+            events_read: The ability to read Events data.
             incident_read: The ability to view incidents in Datadog.
-            incident_settings_write: The ability to configure incident settings.
+            incident_settings_write: The ability to configure Incidents settings.
             incident_write: The ability to create, view, and manage incidents in Datadog.
             metrics_read: The ability to view custom metrics.
             security_monitoring_filters_read: The ability to read Security Filters.
             security_monitoring_filters_write: The ability to create, edit and delete
               Security Filters.
-            security_monitoring_rules_read: The ability to read Detection rules.
+            security_monitoring_rules_read: The ability to read Detection Rules.
             security_monitoring_rules_write: The ability to create and edit Detection
-              rules.
-            security_monitoring_signals_read: The ability to view Security signals.
+              Rules.
+            security_monitoring_signals_read: The ability to view Security Signals.
             user_access_invite: The ability to invite other users to your organization.
             user_access_manage: The ability to disable users, manage user roles, and
               manage SAML-to-role mappings.
