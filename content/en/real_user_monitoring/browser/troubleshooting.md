@@ -106,7 +106,7 @@ On Chromium based browsers, when the Browser RUM SDK sends data to the Datadog i
 
 `Cross-Origin Read Blocking (CORB) blocked cross-origin response`
 
-The warning is shown because the intake returns a non-empty JSON object. This behavior is a reported [Chromium issue](https://bugs.chromium.org/p/chromium/issues/detail?id=1255707). It does not impact the SDK and can safely be ignored.
+The warning is shown because the intake returns a non-empty JSON object. This behavior is a reported [Chromium issue][7]. It does not impact the SDK and can safely be ignored.
 
 ## Further Reading
 
@@ -118,3 +118,4 @@ The warning is shown because the intake returns a non-empty JSON object. This be
 [4]: /real_user_monitoring/faq/proxy_rum_data/?tab=npm
 [5]: /real_user_monitoring/faq/content_security_policy/
 [6]: /real_user_monitoring/browser/data_collected/?tab=session
+[7]: https://bugs.chromium.org/p/chromium/issues/detail?id=1255707
