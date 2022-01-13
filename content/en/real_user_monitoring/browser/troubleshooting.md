@@ -102,10 +102,11 @@ If an event or a request goes beyond any of the following limitations, it is rej
 
 ## Cross origin read blocking warning
 
-When starting session replay recording with `startSessionReplayRecording()` on Chromium based browser, a CORB warning is printed in the console:
-{{< img src="real_user_monitoring/browser/troubleshooting/corb_warning.png" alt="CORB warning">}}
+On Chromium based browsers, when the Browser RUM SDK sends data to the Datadog intake, a CORB warning is printed in the console:
 
-This behavior is a reported [Chromium issue](https://bugs.chromium.org/p/chromium/issues/detail?id=1255707). It does not impact the session replay recording and can safely be ignored.
+`Cross-Origin Read Blocking (CORB) blocked cross-origin response`
+
+The warning is shown because the intake returns a non-empty JSON object. This behavior is a reported [Chromium issue](https://bugs.chromium.org/p/chromium/issues/detail?id=1255707). It does not impact the SDK and can safely be ignored.
 
 ## Further Reading
 
