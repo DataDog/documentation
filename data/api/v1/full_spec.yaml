@@ -12818,9 +12818,6 @@ components:
       required:
       - type
       - requests
-      - size_by
-      - color_by
-      - group_by
       type: object
     TreeMapWidgetDefinitionType:
       default: treemap
@@ -12834,9 +12831,23 @@ components:
     TreeMapWidgetRequest:
       description: An updated treemap widget.
       properties:
+        formulas:
+          description: List of formulas that operate on queries. **This feature is
+            currently in beta.**
+          items:
+            $ref: '#/components/schemas/WidgetFormula'
+          type: array
         q:
           description: The widget metrics query.
           type: string
+        queries:
+          description: List of queries that can be returned directly or used in formulas.
+            **This feature is currently in beta.**
+          items:
+            $ref: '#/components/schemas/FormulaAndFunctionQueryDefinition'
+          type: array
+        response_format:
+          $ref: '#/components/schemas/FormulaAndFunctionResponseFormat'
       type: object
     UsageAnalyzedLogsHour:
       description: The number of analyzed logs for each hour for a given organization.
