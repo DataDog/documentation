@@ -163,7 +163,7 @@ These reasons include the following:
 
 ## Permissions
 
-By default, only users with the [Datadog Admin and Datadog Standard roles][11] can create, edit, and delete Synthetic gRPC tests. To get create, edit, and delete access to Synthetic gRPC tests, upgrade your user to one of those two [default roles][11].
+By default, only users with the [Datadog Admin and Datadog Standard roles][11] can create, edit, and delete Synthetic gRPC health check tests. To get create, edit, and delete access to Synthetic gRPC health check tests, upgrade your user to one of those two [default roles][11].
 
 If you have access to the [custom role feature][12], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions.
 
