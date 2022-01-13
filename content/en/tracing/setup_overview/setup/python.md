@@ -198,4 +198,4 @@ A float, f, 0.0 <= f <= 1.0. This value represents the proportion of traces whic
 [6]: /tracing/guide/setting_primary_tags_to_scope/
 [7]: https://ddtrace.readthedocs.io/en/stable/integrations.html#django
 [8]: /tracing/connect_logs_and_traces/python/
-[9]: /tracing/faq/trace_sampling_and_storage/
+[9]: /tracing/faq/trace_retention_and_ingestion/
