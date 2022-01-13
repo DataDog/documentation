@@ -17,6 +17,14 @@ If you have blocked third-party cookies in your browser settings, or if your bro
 
 Datadog recommends that you make an exception to your third-party cookie blocking to allow Session Replay's service worker to function properly.
 
-{{< img src="real_user_monitoring/session_replay/allow-3p-serviceworker-1.png" alt="Allow Session Replay Third-Party Service Worker" >}}
+1. In your web browser, click the **Lock** icon to the left of the page URL.
+2. Click **Cookies**. A popup modal appears.
 
-{{< img src="real_user_monitoring/session_replay/allow-3p-serviceworker-2.png" alt="Allow Session Replay Third-Party Service Worker" >}}
+   {{< img src="real_user_monitoring/session_replay/allow-3p-serviceworker-1.png" alt="Allow Session Replay Third-Party Service Worker" >}}
+
+3. Navigate to the **Blocked** tab and select `session-replay-datadoghq.com` from the list of pages.
+4. Click **Allow** and **Done**.
+
+   {{< img src="real_user_monitoring/session_replay/allow-3p-serviceworker-2.png" alt="Allow Session Replay Third-Party Service Worker" >}}
+
+Once you have updated your cookie settings, reload the page.
