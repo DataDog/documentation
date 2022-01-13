@@ -109,7 +109,7 @@ To exclude time periods from an SLO calculation, use the [SLO status corrections
 ### Missing data
 When you create a monitor, you choose whether it sends an alert when data is missing. This configuration affects how a monitor-based SLO calculation interprets missing data.
 
-For monitors configured to ignore missing data, time periods missing data are treated as OK by the SLO. For monitors configured to alert on missing data, time periods missing data are treated as ALERT by the SLO.
+For monitors configured to ignore missing data, time periods with missing data are treated as OK by the SLO. For monitors configured to alert on missing data, time periods with missing data are treated as ALERT by the SLO.
 
 ## Underlying monitor and SLO histories
 
