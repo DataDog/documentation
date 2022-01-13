@@ -38,7 +38,7 @@ Utilisez les réglages `avg`/`max`/`min`/`sum by`/etc. pour visualiser vos donn�
 
 #### Superposition d'événements
 
-Intégrez des événements de systèmes associés pour ajouter plus de contexte à votre graphique. Par exemple, vous pouvez ajouter des commits GitHub, des déploiements Jenkins ou des événements de création Docker. Développez la section **Event Overlays** et saisissez une requête pour afficher ces événements. Utilisez le même format de requête que pour [le flux d'événements][1], par exemple :
+Intégrez des événements de systèmes associés pour ajouter plus de contexte à votre graphique. Par exemple, vous pouvez ajouter des commits Github, des déploiements Jenkins ou des événements de création Docker. Développez la section **Event Overlays** et saisissez une requête pour afficher ces événements. Utilisez le même format de requête que pour [le flux d'événements][1], par exemple :
 
 | Requête                       | Description                                                |
 |-----------------------------|------------------------------------------------------------|
