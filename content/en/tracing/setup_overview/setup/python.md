@@ -183,7 +183,7 @@ Enable [connecting logs and trace injection][8].
 
 
 `DD_TRACE_SAMPLE_RATE`
-Enable [Tracing without Limits][9].
+: Enable [Tracing without Limits][9].
 
 ## Further Reading
 
