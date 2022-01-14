@@ -3725,89 +3725,112 @@
           "data": {
             "description": "A list of Agent rules objects.",
             "items": {
-              "description": "A Cloud Workload Security Agent rule returned by the API.",
+              "description": "Object for a single Agent rule.",
               "properties": {
-                "category": {
-                  "description": "The category of the Agent rule.",
-                  "example": "Process Activity",
-                  "type": "string"
-                },
-                "creationDate": {
-                  "description": "When the Agent rule was created, timestamp in milliseconds.",
-                  "example": 1624366480320,
-                  "format": "int64",
-                  "type": "integer"
-                },
-                "creator": {
-                  "description": "The attributes of the user who created the Agent rule.",
+                "attributes": {
+                  "description": "A Cloud Workload Security Agent rule returned by the API.",
                   "properties": {
-                    "handle": {
-                      "description": "The handle of the user.",
-                      "example": "datadog.user@example.com",
+                    "category": {
+                      "description": "The category of the Agent rule.",
+                      "example": "Process Activity",
+                      "type": "string"
+                    },
+                    "creationDate": {
+                      "description": "When the Agent rule was created, timestamp in milliseconds.",
+                      "example": 1624366480320,
+                      "format": "int64",
+                      "type": "integer"
+                    },
+                    "creator": {
+                      "description": "The attributes of the user who created the Agent rule.",
+                      "properties": {
+                        "handle": {
+                          "description": "The handle of the user.",
+                          "example": "datadog.user@example.com",
+                          "type": "string"
+                        },
+                        "name": {
+                          "description": "The name of the user.",
+                          "example": "Datadog User",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "defaultRule": {
+                      "description": "Whether the rule is included by default.",
+                      "example": false,
+                      "type": "boolean"
+                    },
+                    "description": {
+                      "description": "The description of the Agent rule.",
+                      "example": "My Agent rule",
+                      "type": "string"
+                    },
+                    "enabled": {
+                      "description": "Whether the Agent rule is enabled.",
+                      "example": true,
+                      "type": "boolean"
+                    },
+                    "expression": {
+                      "description": "The SECL expression of the Agent rule.",
+                      "example": "exec.file.name == \\\"sh\\\"",
                       "type": "string"
                     },
                     "name": {
-                      "description": "The name of the user.",
-                      "example": "Datadog User",
-                      "type": "string"
-                    }
-                  },
-                  "type": "object"
-                },
-                "defaultRule": {
-                  "description": "Whether the rule is included by default.",
-                  "example": false,
-                  "type": "boolean"
-                },
-                "description": {
-                  "description": "The description of the Agent rule.",
-                  "example": "My Agent rule",
-                  "type": "string"
-                },
-                "enabled": {
-                  "description": "Whether the Agent rule is enabled.",
-                  "example": true,
-                  "type": "boolean"
-                },
-                "expression": {
-                  "description": "The SECL expression of the Agent rule.",
-                  "example": "exec.file.name == \\\"sh\\\"",
-                  "type": "string"
-                },
-                "name": {
-                  "description": "The name of the Agent rule.",
-                  "example": "my_agent_rule",
-                  "type": "string"
-                },
-                "updatedAt": {
-                  "description": "When the Agent rule was last updated, timestamp in milliseconds.",
-                  "example": 1624366480320,
-                  "format": "int64",
-                  "type": "integer"
-                },
-                "updater": {
-                  "description": "The attributes of the user who last updated the Agent rule.",
-                  "properties": {
-                    "handle": {
-                      "description": "The handle of the user.",
-                      "example": "datadog.user@example.com",
+                      "description": "The name of the Agent rule.",
+                      "example": "my_agent_rule",
                       "type": "string"
                     },
-                    "name": {
-                      "description": "The name of the user.",
-                      "example": "Datadog User",
-                      "type": "string"
+                    "updatedAt": {
+                      "description": "When the Agent rule was last updated, timestamp in milliseconds.",
+                      "example": 1624366480320,
+                      "format": "int64",
+                      "type": "integer"
+                    },
+                    "updater": {
+                      "description": "The attributes of the user who last updated the Agent rule.",
+                      "properties": {
+                        "handle": {
+                          "description": "The handle of the user.",
+                          "example": "datadog.user@example.com",
+                          "type": "string"
+                        },
+                        "name": {
+                          "description": "The name of the user.",
+                          "example": "Datadog User",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "version": {
+                      "description": "The version of the Agent rule.",
+                      "example": 23,
+                      "format": "int64",
+                      "type": "integer"
                     }
-                  },
-                  "type": "object"
+                  }
                 },
-                "version": {
-                  "description": "The version of the Agent rule.",
-                  "example": 23,
-                  "format": "int64",
-                  "type": "integer"
+                "id": {
+                  "description": "The ID of the Agent rule.",
+                  "example": "3dd-0uc-h1s",
+                  "type": "string"
+                },
+                "type": {
+                  "default": "agent_rule",
+                  "description": "The type of the resource. The value should always be `agent_rule`.",
+                  "enum": [
+                    "agent_rule"
+                  ],
+                  "example": "agent_rule",
+                  "type": "string",
+                  "x-enum-varnames": [
+                    "AGENT_RULE"
+                  ]
                 }
-              }
+              },
+              "type": "object"
             },
             "type": "array"
           }
@@ -57903,6 +57926,7 @@
         "tags": [
           "Cloud Workload Security"
         ],
+        "x-menu-order": 1,
         "x-undo": {
           "type": "safe"
         }
@@ -57922,89 +57946,112 @@
                     "data": {
                       "description": "A list of Agent rules objects.",
                       "items": {
-                        "description": "A Cloud Workload Security Agent rule returned by the API.",
+                        "description": "Object for a single Agent rule.",
                         "properties": {
-                          "category": {
-                            "description": "The category of the Agent rule.",
-                            "example": "Process Activity",
-                            "type": "string"
-                          },
-                          "creationDate": {
-                            "description": "When the Agent rule was created, timestamp in milliseconds.",
-                            "example": 1624366480320,
-                            "format": "int64",
-                            "type": "integer"
-                          },
-                          "creator": {
-                            "description": "The attributes of the user who created the Agent rule.",
+                          "attributes": {
+                            "description": "A Cloud Workload Security Agent rule returned by the API.",
                             "properties": {
-                              "handle": {
-                                "description": "The handle of the user.",
-                                "example": "datadog.user@example.com",
+                              "category": {
+                                "description": "The category of the Agent rule.",
+                                "example": "Process Activity",
+                                "type": "string"
+                              },
+                              "creationDate": {
+                                "description": "When the Agent rule was created, timestamp in milliseconds.",
+                                "example": 1624366480320,
+                                "format": "int64",
+                                "type": "integer"
+                              },
+                              "creator": {
+                                "description": "The attributes of the user who created the Agent rule.",
+                                "properties": {
+                                  "handle": {
+                                    "description": "The handle of the user.",
+                                    "example": "datadog.user@example.com",
+                                    "type": "string"
+                                  },
+                                  "name": {
+                                    "description": "The name of the user.",
+                                    "example": "Datadog User",
+                                    "type": "string"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "defaultRule": {
+                                "description": "Whether the rule is included by default.",
+                                "example": false,
+                                "type": "boolean"
+                              },
+                              "description": {
+                                "description": "The description of the Agent rule.",
+                                "example": "My Agent rule",
+                                "type": "string"
+                              },
+                              "enabled": {
+                                "description": "Whether the Agent rule is enabled.",
+                                "example": true,
+                                "type": "boolean"
+                              },
+                              "expression": {
+                                "description": "The SECL expression of the Agent rule.",
+                                "example": "exec.file.name == \\\"sh\\\"",
                                 "type": "string"
                               },
                               "name": {
-                                "description": "The name of the user.",
-                                "example": "Datadog User",
-                                "type": "string"
-                              }
-                            },
-                            "type": "object"
-                          },
-                          "defaultRule": {
-                            "description": "Whether the rule is included by default.",
-                            "example": false,
-                            "type": "boolean"
-                          },
-                          "description": {
-                            "description": "The description of the Agent rule.",
-                            "example": "My Agent rule",
-                            "type": "string"
-                          },
-                          "enabled": {
-                            "description": "Whether the Agent rule is enabled.",
-                            "example": true,
-                            "type": "boolean"
-                          },
-                          "expression": {
-                            "description": "The SECL expression of the Agent rule.",
-                            "example": "exec.file.name == \\\"sh\\\"",
-                            "type": "string"
-                          },
-                          "name": {
-                            "description": "The name of the Agent rule.",
-                            "example": "my_agent_rule",
-                            "type": "string"
-                          },
-                          "updatedAt": {
-                            "description": "When the Agent rule was last updated, timestamp in milliseconds.",
-                            "example": 1624366480320,
-                            "format": "int64",
-                            "type": "integer"
-                          },
-                          "updater": {
-                            "description": "The attributes of the user who last updated the Agent rule.",
-                            "properties": {
-                              "handle": {
-                                "description": "The handle of the user.",
-                                "example": "datadog.user@example.com",
+                                "description": "The name of the Agent rule.",
+                                "example": "my_agent_rule",
                                 "type": "string"
                               },
-                              "name": {
-                                "description": "The name of the user.",
-                                "example": "Datadog User",
-                                "type": "string"
+                              "updatedAt": {
+                                "description": "When the Agent rule was last updated, timestamp in milliseconds.",
+                                "example": 1624366480320,
+                                "format": "int64",
+                                "type": "integer"
+                              },
+                              "updater": {
+                                "description": "The attributes of the user who last updated the Agent rule.",
+                                "properties": {
+                                  "handle": {
+                                    "description": "The handle of the user.",
+                                    "example": "datadog.user@example.com",
+                                    "type": "string"
+                                  },
+                                  "name": {
+                                    "description": "The name of the user.",
+                                    "example": "Datadog User",
+                                    "type": "string"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "version": {
+                                "description": "The version of the Agent rule.",
+                                "example": 23,
+                                "format": "int64",
+                                "type": "integer"
                               }
-                            },
-                            "type": "object"
+                            }
                           },
-                          "version": {
-                            "description": "The version of the Agent rule.",
-                            "example": 23,
-                            "format": "int64",
-                            "type": "integer"
+                          "id": {
+                            "description": "The ID of the Agent rule.",
+                            "example": "3dd-0uc-h1s",
+                            "type": "string"
+                          },
+                          "type": {
+                            "default": "agent_rule",
+                            "description": "The type of the resource. The value should always be `agent_rule`.",
+                            "enum": [
+                              "agent_rule"
+                            ],
+                            "example": "agent_rule",
+                            "type": "string",
+                            "x-enum-varnames": [
+                              "AGENT_RULE"
+                            ]
                           }
-                        }
+                        },
+                        "type": "object"
                       },
                       "type": "array"
                     }
@@ -58081,6 +58128,7 @@
         "tags": [
           "Cloud Workload Security"
         ],
+        "x-menu-order": 3,
         "x-undo": {
           "type": "safe"
         }
@@ -58407,6 +58455,7 @@
             "step": "there is a valid \"agent_rule\" in the system"
           }
         },
+        "x-menu-order": 4,
         "x-undo": {
           "operationId": "DeleteCloudWorkloadSecurityAgentRule",
           "parameters": [
@@ -58530,6 +58579,7 @@
         "tags": [
           "Cloud Workload Security"
         ],
+        "x-menu-order": 6,
         "x-undo": {
           "type": "idempotent"
         }
@@ -58762,6 +58812,7 @@
         "tags": [
           "Cloud Workload Security"
         ],
+        "x-menu-order": 2,
         "x-undo": {
           "type": "safe"
         }
@@ -59105,6 +59156,7 @@
           "Cloud Workload Security"
         ],
         "x-codegen-request-body-name": "body",
+        "x-menu-order": 5,
         "x-undo": {
           "type": "idempotent"
         }
