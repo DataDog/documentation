@@ -209,10 +209,10 @@ For the following configuration settings:
 ### Enabling auto-instrumentation
 
 `DD_ENABLE_STDOUT_INSTRUMENTATION`
-: Captures messages written to `stdout` (for example, `print()` ) and reports them as logs. This may impact your bill. (Boolean)
+: Captures messages written to `stdout` (for example, `print()`) and reports them as logs. This may impact your bill. (Boolean)
 
 `DD_ENABLE_STDERR_INSTRUMENTATION`
-: Captures messages written to `stderr` (for example, `NSLog()`, UITest steps ) and reports them as logs. This may impact your bill. (Boolean)
+: Captures messages written to `stderr` (for example, `NSLog()`, UITest steps) and reports them as logs. This may impact your bill. (Boolean)
 
 ### Disabling auto-instrumentation
 
