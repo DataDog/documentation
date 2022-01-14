@@ -1,9 +1,8 @@
 ---
-title: Cloud SIEM Guides
+title: Security Platform Guides
 kind: guide
 aliases:
   - /security_monitoring/guide/
-  - /cloud_siem/guide/
 private: true
 ---
 
