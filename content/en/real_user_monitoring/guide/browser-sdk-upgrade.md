@@ -20,7 +20,7 @@ Several breaking changes were made to RUM and logs Browser SDK with the v4 versi
 
 #### Intake URLs
 
-The URLs for where the Browser SDK data is sent has changed. Ensure that your [Content Security Policy is up to date][6].
+The URLs for where the Browser SDK data is sent has changed. Ensure that your [Content Security Policy is up to date][1].
 
 #### Minimal Typescript version support
 
@@ -70,15 +70,15 @@ The privacy options `input-ignored` and `input-masked` are no longer valid. Inst
 
 ## From v2 to v3
 
-Browser SDK v3 introduces [Session Replay][1]. With this major version update, several breaking changes were made to RUM and logs Browser SDKs.
+Browser SDK v3 introduces [Session Replay][2]. With this major version update, several breaking changes were made to RUM and logs Browser SDKs.
 
 ### Changes
 #### RUM errors
 
-The RUM Browser SDK no longer issues [RUM errors][2] for failed XHR and Fetch calls. These failed network requests are still collected as [RUM resources][3], which contain the status code attribute.
+The RUM Browser SDK no longer issues [RUM errors][3] for failed XHR and Fetch calls. These failed network requests are still collected as [RUM resources][4], which contain the status code attribute.
 
 
-To continue seeing the failed network requests as RUM errors, Datadog recommends intercepting the resource with the [beforeSend API][4], checking the `status_code` property, and manually sending an error with the [addError API][5].
+To continue seeing the failed network requests as RUM errors, Datadog recommends intercepting the resource with the [beforeSend API][5], checking the `status_code` property, and manually sending an error with the [addError API][6].
 
 ```javascript
 beforeSend: (event) => {
@@ -90,7 +90,7 @@ beforeSend: (event) => {
 
 #### RUM error source attribute
 
-The RUM Browser SDK no longer lets you specify the source of an error collected with the [addError API][5]. All errors collected with this API have their source attribute set to `custom`. The [addError API][5] accepts a context object as its second parameter, which should be used to pass extra context about the error.
+The RUM Browser SDK no longer lets you specify the source of an error collected with the [addError API][6]. All errors collected with this API have their source attribute set to `custom`. The [addError API][6] accepts a context object as its second parameter, which should be used to pass extra context about the error.
 
 ### Removals
 #### RUM API
@@ -119,9 +119,9 @@ The RUM Browser SDK no longer lets you specify the source of an error collected 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/session_replay
-[2]: /real_user_monitoring/browser/collecting_browser_errors/
-[3]: /real_user_monitoring/browser/monitoring_resource_performance/
-[4]: /real_user_monitoring/browser/modifying_data_and_context/?tab=npm#enrich-and-control-rum-data
-[5]: /real_user_monitoring/browser/collecting_browser_errors/?tab=npm#collect-errors-manually
-[6]: /real_user_monitoring/faq/content_security_policy
+[1]: /real_user_monitoring/faq/content_security_policy
+[2]: /real_user_monitoring/session_replay
+[3]: /real_user_monitoring/browser/collecting_browser_errors/
+[4]: /real_user_monitoring/browser/monitoring_resource_performance/
+[5]: /real_user_monitoring/browser/modifying_data_and_context/?tab=npm#enrich-and-control-rum-data
+[6]: /real_user_monitoring/browser/collecting_browser_errors/?tab=npm#collect-errors-manually

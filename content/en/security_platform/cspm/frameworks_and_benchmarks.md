@@ -70,7 +70,7 @@ In the “Notify” section, configure zero or more [notification targets][7] f
 [5]: https://www.aicpa.org/interestareas/frc/assuranceadvisoryservices/aicpasoc2report.html
 [6]: https://www.hhs.gov/hipaa/index.html
 [7]: https://gdpr.eu/
-[8]: /security_platform/security_monitoring/
+[8]: /security_platform/cloud_siem/
 [9]: /integrations/amazon_cloudtrail/
 [10]: https://app.datadoghq.com/security/configuration/rules/
 [11]: /integrations/slack/

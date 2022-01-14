@@ -2,10 +2,10 @@
 title: Security Home
 kind: documentation
 further_reading:
-- link: "security_monitoring/default_rules"
+- link: "cloud_siem/default_rules"
   tag: "Documentation"
   text: "Explore default log detection rules"
-- link: "/security_platform/security_monitoring/log_detection_rules"
+- link: "/security_platform/cloud_siem/log_detection_rules"
   tag: "Documentation"
   text: "Follow the creating new Cloud SIEM rules guide"
 ---
@@ -44,7 +44,7 @@ You can also configure new sources in this table. Click on the **Configure Sourc
 
 [1]: https://app.datadoghq.com/security/homepage
 [2]: /security_platform/default_rules/
-[3]: /security_platform/security_monitoring/log_detection_rules
+[3]: /security_platform/cloud_siem/log_detection_rules
 [3]: /logs/explorer/
 [3]: /logs/explorer/facets/#overview
 [4]: /logs/explorer/#aggregate-and-measure

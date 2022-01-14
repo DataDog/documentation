@@ -4,11 +4,12 @@ kind: documentation
 description: "Search through all of your security signals and perform Security Analytics"
 aliases:
   - /security_monitoring/explorer/
+  - /cloud_siem/explorer/
 further_reading:
   - link: "https://www.datadoghq.com/blog/announcing-security-monitoring/"
     tag: "Blog"
     text: "Learn more about Cloud SIEM"
-  - link: "/security_monitoring/detection_rules/"
+  - link: "/cloud_siem/detection_rules/"
     tag: "Documentation"
     text: "Learn about the conditional logic of Security Rules"
 ---
@@ -19,9 +20,13 @@ From the [Security Signals Explorer][1], correlate and triage security signals. 
 
 In this view, you can:
 
-* [Explore your Security Signals](#explore-your-security-signals)
-* [Inspect a Security Signal](#inspect-a-security-signal)
-* [Visualize your Security Signals Analytics](#visualize-your-security-signals-analytics)
+- [Overview](#overview)
+- [Explore your Security Signals](#explore-your-security-signals)
+- [Inspect a Security Signal](#inspect-a-security-signal)
+  - [Threat intelligence](#threat-intelligence)
+  - [Anomaly detection](#anomaly-detection)
+- [Visualize your security signals analytics](#visualize-your-security-signals-analytics)
+- [Further Reading](#further-reading)
 
 ## Explore your Security Signals
 

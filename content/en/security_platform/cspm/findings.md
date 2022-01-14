@@ -65,5 +65,5 @@ The side panel lists rules that were evaluated against the resource, some of whi
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/security/compliance?time=now
-[2]: /security_platform/security_monitoring/
+[2]: /security_platform/cloud_siem/
 [3]: /security_platform/cloud_workload_security/

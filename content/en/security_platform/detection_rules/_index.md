@@ -3,8 +3,9 @@ title: Security Rules
 kind: documentation
 aliases:
   - /security_monitoring/detection_rules/
+  - /cloud_siem/detection_rules/
 further_reading:
-- link: "security_monitoring/default_rules"
+- link: "cloud_siem/default_rules"
   tag: "Documentation"
   text: "Explore default security rules"
 - link: "https://www.datadoghq.com/blog/detect-abuse-of-functionality-with-datadog/"
@@ -79,8 +80,8 @@ Delete a rule by hovering over the rule and clicking the **Delete** button.
 
 
 [1]: /security_platform/default_rules/
-[2]: /security_platform/security_monitoring/
-[3]: /security_platform/security_monitoring/log_detection_rules/
+[2]: /security_platform/cloud_siem/
+[3]: /security_platform/cloud_siem/log_detection_rules/
 [4]: /security_platform/cspm/
 [5]: /security_platform/cloud_workload_security/
 [6]: https://app.datadoghq.com/security/configuration/rules

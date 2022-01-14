@@ -3,7 +3,10 @@ title: Getting Started with Cloud SIEM
 kind: documentation
 description: "Learn the main concepts of Datadog Cloud SIEM, how to enable threat detection, and discover out-of-the-box threat detection rules."
 aliases:
+  - /cloud-siem/getting_started/
   - /security_monitoring/getting_started/
+  - /security_platform/security_monitoring/
+  - /security_platform/security_monitoring/getting_started
   - /security_platform/getting_started/
 further_reading:
 - link: "/security_platform/default_rules"
@@ -16,9 +19,10 @@ further_reading:
 
 To get started with Datadog Cloud SIEM, follow these steps:
 
-* [Ingest logs](#ingest-logs)
-* [Review Detection Rules](#review-detection-rules)
-* [Explore Security Signals](#explore-security-signals)
+- [Ingest logs](#ingest-logs)
+- [Review Detection Rules](#review-detection-rules)
+- [Explore Security Signals](#explore-security-signals)
+- [Further reading](#further-reading)
 
 ## Ingest logs
 

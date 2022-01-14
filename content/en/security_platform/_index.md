@@ -3,9 +3,9 @@ title: Security Platform
 kind: documentation
 aliases:
   - compliance_monitoring
-  - security_monitoring
+  - cloud_siem
 further_reading:
-- link: "/security_platform/security_monitoring/getting_started"
+- link: "/security_platform/cloud_siem/getting_started"
   tag: "Documentation"
   text: "Begin detecting threats with Cloud SIEM"
 - link: "/security_platform/cspm/getting_started"
@@ -55,7 +55,7 @@ To get started with the Datadog Security Platform, navigate to the [Setup & Conf
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security_platform/security_monitoring
+[1]: /security_platform/cloud_siem
 [2]: /logs/
 [3]: https://www.datadoghq.com/blog/automated-vulnerability-remediation-datadog/
 [4]: /security_platform/cspm/
