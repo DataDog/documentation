@@ -26,6 +26,8 @@ further_reading:
 Datadog .NET Profiler is currently in public beta. Datadog recommends evaluating the profiler in a non-sensitive environment before deploying in production.
 </div>
 
+<br>
+
 ## Requirements
 
 **Supported operating systems:**
@@ -52,6 +54,8 @@ Datadog .NET Profiler is currently in public beta. Datadog recommends evaluating
 2. The profiler ships together with the tracer. Install or upgrade to the last beta version if needed, using the [.NET Monitoring MSI installer][3]. Continuous Profiler only supports 64-bit Windows, with 32-bit support coming soon, so you need the file like `datadog-dotnet-apm-2.1.0-x64-profiler-beta.msi`.
 
    Run the .NET Monitoring MSI installer with administrator privileges.
+
+**Note**: Profiling requires the .msi version 2.1.TODO+.
 
 {{< tabs >}}
 
@@ -159,6 +163,8 @@ Datadog .NET Profiler is currently in public beta. Datadog recommends evaluating
 {{% /tab %}}
 {{< /tabs >}}
 
+<br>
+
 ## Configuration
 
 You can configure the profiler using the following environment variables. Restart the application after any of these settings is changed.
@@ -176,6 +182,12 @@ You can configure the profiler using the following environment variables. Restar
 | `DD_PROFILING_LOG_DIR`     | String        | Sets the directory for .NET Profiler logs. Defaults to `%ProgramData%\Datadog-APM\logs\`.  |
 | `DD_PROFILING_ENABLED`     | Boolean        | If set to `false`, disables the .NET Profiler. Defaults to `true`.  |
 
+<div class="alert alert-warning">
+For IIS applications, you need to set the "environment variable" in the Registry (under HKLM\System\CurrentControlSet\Services\WAS and HKLM\System\CurrentControlSet\Services\W3SVC nodes) like has been shown in the "Windows Service" tab of the previous Installation section. It will be applied for ALL IIS applications.
+Starting with IIS 10, it is possible to set environment variable per IIS application in the [C:\Windows\System32\inetsrv\config\applicationhost.config][6] file. Read the [Microsoft documentation][7] for more details.
+</div>
+
+<br>
 
 ## Further Reading
 
@@ -188,3 +200,5 @@ The [Getting Started with Profiler][5] guide takes a sample service with a perfo
 [3]: https://github.com/DataDog/dd-trace-dotnet/releases
 [4]: /getting_started/tagging/unified_service_tagging
 [5]: /getting_started/profiler/
+[6]: https://docs.microsoft.com/en-us/iis/get-started/planning-your-iis-architecture/introduction-to-applicationhostconfig
+[7]: https://docs.microsoft.com/en-us/iis/configuration/system.applicationhost/applicationpools/add/environmentvariables/
