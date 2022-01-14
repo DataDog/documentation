@@ -819,7 +819,7 @@ components:
         data:
           description: A list of Agent rules objects.
           items:
-            $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleAttributes'
+            $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleData'
           type: array
       type: object
     ContentEncoding:
@@ -9299,6 +9299,7 @@ paths:
       summary: Get the latest Cloud Workload Security policy
       tags:
       - Cloud Workload Security
+      x-menu-order: 1
       x-undo:
         type: safe
   /api/v2/security_monitoring/cloud_workload_security/agent_rules:
@@ -9324,6 +9325,7 @@ paths:
       summary: Get all Cloud Workload Security Agent rules
       tags:
       - Cloud Workload Security
+      x-menu-order: 3
       x-undo:
         type: safe
     post:
@@ -9369,6 +9371,7 @@ paths:
               \"My Agent rule\",\n      \"expression\": \"exec.file.name == \\\"sh\\\"\",\n
               \     \"enabled\": true\n     }\n  }\n}"
           step: there is a valid "agent_rule" in the system
+      x-menu-order: 4
       x-undo:
         operationId: DeleteCloudWorkloadSecurityAgentRule
         parameters:
@@ -9398,6 +9401,7 @@ paths:
       summary: Delete a Cloud Workload Security Agent rule
       tags:
       - Cloud Workload Security
+      x-menu-order: 6
       x-undo:
         type: idempotent
     get:
@@ -9426,6 +9430,7 @@ paths:
       summary: Get a Cloud Workload Security Agent rule
       tags:
       - Cloud Workload Security
+      x-menu-order: 2
       x-undo:
         type: safe
     patch:
@@ -9468,6 +9473,7 @@ paths:
       tags:
       - Cloud Workload Security
       x-codegen-request-body-name: body
+      x-menu-order: 5
       x-undo:
         type: idempotent
   /api/v2/security_monitoring/configuration/security_filters:
