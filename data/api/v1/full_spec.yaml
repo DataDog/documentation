@@ -10666,11 +10666,103 @@ components:
       - RECEIVED_MESSAGE
     SyntheticsBasicAuth:
       description: Object to handle basic authentication when performing the test.
+      oneOf:
+      - $ref: '#/components/schemas/SyntheticsBasicAuthWeb'
+      - $ref: '#/components/schemas/SyntheticsBasicAuthSigv4'
+      - $ref: '#/components/schemas/SyntheticsBasicAuthNTLM'
+      type: object
+    SyntheticsBasicAuthNTLM:
+      description: Object to handle `NTLM` authentication when performing the test.
+      properties:
+        domain:
+          description: Domain for the authentication to use when performing the test.
+          example: DOMAINNAME
+          type: string
+        password:
+          description: Password for the authentication to use when performing the
+            test.
+          example: examplepassword
+          type: string
+        type:
+          $ref: '#/components/schemas/SyntheticsBasicAuthNTLMType'
+        username:
+          description: Username for the authentication to use when performing the
+            test.
+          example: joedoe
+          type: string
+        workstation:
+          description: Workstation for the authentication to use when performing the
+            test.
+          example: ''
+          type: string
+      required:
+      - type
+      type: object
+    SyntheticsBasicAuthNTLMType:
+      default: ntlm
+      description: The type of authentication to use when performing the test.
+      enum:
+      - ntlm
+      example: ntlm
+      type: string
+      x-enum-varnames:
+      - NTLM
+    SyntheticsBasicAuthSigv4:
+      description: Object to handle `SIGV4` authentication when performing the test.
+      properties:
+        accessKey:
+          description: Access key for the `SIGV4` authentication.
+          example: AKIAIOSFODNN7EXAMPLE
+          type: string
+        region:
+          description: Region for the `SIGV4` authentication.
+          example: us-east-1
+          type: string
+        secretKey:
+          description: Secret key for the `SIGV4` authentication.
+          example: wJalrXUtnFEMI/K7MDENG/bPxRfiCYzEXAMPLEKEY
+          type: string
+        serviceName:
+          description: Service name for the `SIGV4` authentication.
+          example: execute-api
+          type: string
+        sessionToken:
+          description: Session token for the `SIGV4` authentication.
+          example: 'AQoEXAMPLEH4aoAH0gNCAPyJxz4BlCFFxWNE1OPTgk5TthT+FvwqnKwRcOIfrRh3c/L
+
+            To6UDdyJwOOvEVPvLXCrrrUtdnniCEXAMPLE/IvU1dYUg2RVAJBanLiHb4IgRmpRV3z
+
+            rkuWJOgQs8IZZaIv2BXIa2R4OlgkBN9bkUDNCJiBeb/AXlzBBko7b15fjrBs2+cTQtp
+
+            Z3CYWFXG8C5zqx37wnOE49mRl/+OtkIKGO7fAE
+
+            '
+          type: string
+        type:
+          $ref: '#/components/schemas/SyntheticsBasicAuthSigv4Type'
+      required:
+      - accessKey
+      - secretKey
+      - type
+      type: object
+    SyntheticsBasicAuthSigv4Type:
+      default: sigv4
+      description: The type of authentication to use when performing the test.
+      enum:
+      - sigv4
+      example: sigv4
+      type: string
+      x-enum-varnames:
+      - SIGV4
+    SyntheticsBasicAuthWeb:
+      description: Object to handle basic authentication when performing the test.
       properties:
         password:
           description: Password to use for the basic authentication.
           example: ''
           type: string
+        type:
+          $ref: '#/components/schemas/SyntheticsBasicAuthWebType'
         username:
           description: Username to use for the basic authentication.
           example: ''
@@ -10678,7 +10770,17 @@ components:
       required:
       - password
       - username
+      - type
       type: object
+    SyntheticsBasicAuthWebType:
+      default: web
+      description: The type of basic authentication to use when performing the test.
+      enum:
+      - web
+      example: web
+      type: string
+      x-enum-varnames:
+      - WEB
     SyntheticsBatchDetails:
       description: Details about a batch response.
       properties:
@@ -12141,6 +12243,8 @@ components:
           description: Port to use when performing the test.
           format: int64
           type: integer
+        proxy:
+          $ref: '#/components/schemas/SyntheticsTestRequestProxy'
         query:
           description: Query to use for the test.
           type: object
@@ -12185,6 +12289,18 @@ components:
         updatedAt:
           description: Date of update of the certificate or key, ISO format.
           type: string
+      type: object
+    SyntheticsTestRequestProxy:
+      description: The proxy to perform the test.
+      properties:
+        headers:
+          $ref: '#/components/schemas/SyntheticsTestHeaders'
+        url:
+          description: URL of the proxy to perform the test.
+          example: https://example.com
+          type: string
+      required:
+      - url
       type: object
     SyntheticsTiming:
       description: 'Object containing all metrics and their values collected for a
