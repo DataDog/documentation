@@ -1814,7 +1814,7 @@ main:
     identifier: cloud_siem_detection_rules
     weight: 103
   - name: Guides
-    url: cloud_siem/guide
+    url: cloud_siem/guide/monitor-authentication-logs-for-security-threats
     parent: cloud_siem
     identifier: cloud_siem_guides
     weight: 104
