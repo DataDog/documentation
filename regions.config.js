@@ -42,7 +42,6 @@ export default {
     },
     tcp_endpoint_port_ssl: {
         us: '10516',
-        us3: '10514',
         us5: 'The US5 TCP endpoint port is not supported.',
         eu: '443',
         gov: 'The GOV TCP endpoint port is not supported.'
