@@ -76512,7 +76512,7 @@
       "variables": {
         "site": {
           "default": "datadoghq.com",
-          "description": "Any Datadog deployment."
+          "description": "Any Datadog deployment site."
         },
         "subdomain": {
           "default": "api",
