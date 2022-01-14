@@ -30,14 +30,12 @@ export default {
     },
     tcp_endpoint: {
         us: 'agent-intake.logs.datadoghq.com',
-        us3: 'agent-intake.logs.us3.datadoghq.com',
         us5: 'The US5 TCP endpoint is not supported.',
         eu: 'agent-intake.logs.datadoghq.eu',
         gov: 'The GOV TCP endpoint is not supported.'
     },
     tcp_endpoint_port: {
         us: '10514',
-        us3: '10514',
         us5: 'The US5 TCP endpoint port is not supported.',
         eu: '1883',
         gov: 'The GOV TCP endpoint port is not supported.'
