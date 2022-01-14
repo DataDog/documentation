@@ -94,7 +94,7 @@ In certain cases, there is an exception to the status calculation for monitor-ba
 
 If you change any of these conditions to something other than their defaults, the overall status for a monitor-based SLO using one Synthetic test could appear to be better than the aggregated statuses of the Synthetic test's individual groups.
 
-For more information on Synthetic test alerting conditions, see the Synthetic Monitoring [documentation][4].
+For more information on Synthetic test alerting conditions, see [Synthetic Monitoring][4].
 
 ### Impact of manual and automatic monitor updates
 
@@ -121,7 +121,7 @@ SLO Replay also triggers when you change the underlying metric monitor's query t
 
 ## Other considerations
 
-Confirm you are using the preferred SLI type for your use case. Datadog supports monitor-based SLIs and metric-based SLIs as described in the [SLO metric documentation][3].
+Confirm you are using the preferred SLI type for your use case. Datadog supports monitor-based SLIs and [metric-based][3] SLIs.
 
 ## Further Reading
 
