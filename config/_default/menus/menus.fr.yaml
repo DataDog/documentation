@@ -3991,7 +3991,7 @@ footer_product_two:
   - name: Security Platform
     url: "https://www.datadoghq.com/product/security-platform/"
     weight: 130
-  - name: Security Monitoring
+  - name: Cloud SIEM
     url: "https://www.datadoghq.com/product/security-monitoring/"
     weight: 135
   - name: CSPM
