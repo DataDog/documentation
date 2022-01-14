@@ -1,6 +1,8 @@
 ---
 title: Surveillance des logs d'authentification pour identifier les menaces de sécurité
 kind: guide
+aliases:
+  - security_monitoring/guide/monitor-authentication-logs-for-security-threats
 further_reading:
   - link: 'https://www.datadoghq.com/blog/how-to-monitor-authentication-logs/'
     tag: Blog

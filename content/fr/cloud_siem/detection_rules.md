@@ -1,6 +1,8 @@
 ---
 title: Règles de détection des menaces
 kind: documentation
+aliases:
+  - security_monitoring/detection_rules
 further_reading:
   - link: /security_monitoring/explorer/
     tag: Documentation
