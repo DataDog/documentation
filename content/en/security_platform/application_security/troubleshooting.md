@@ -8,9 +8,9 @@ further_reading:
 - link: "/security_platform/application_security/"
   tag: "Documentation"
   text: "Monitoring Threats with Datadog Application Security"
-- link: "/security_platform/setup_and_configuration/#compatibility"
+- link: "/security_platform/application_security/setup_and_configure/#compatibility"
   tag: "Documentation"
-  text: "Application Language and Framework Compatibility"
+  text: "Programming Language and Framework Compatibility"
 ---
 
 TKTK

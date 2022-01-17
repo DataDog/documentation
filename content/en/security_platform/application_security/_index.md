@@ -5,9 +5,9 @@ further_reading:
 - link: "/security_platform/guide/how-appsec-works/"
   tag: "Guide"
   text: "How Datadog Application Security Monitoring Works"
-- link: "/security_platform/setup_and_configuration/#compatibility"
+- link: "/security_platform/application_security/setup_and_configure/#compatibility"
   tag: "Documentation"
-  text: "Application Language and Framework Compatibility"
+  text: "Programming Language and Framework Compatibility"
 ---
 
 
