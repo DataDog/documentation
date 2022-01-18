@@ -43,7 +43,7 @@ Requires:
 - If on OpenJDK 8: 8u282 or greater and tracing library version 0.77.0 or greater.
 
 
-[1]: /tracing/profiler/enabling/?code-lang=java
+[1]: /tracing/profiler/enabling/java
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
 
@@ -52,7 +52,7 @@ Code Hotspots identification is enabled by default when you [turn on profiling f
 Requires tracing library version 0.44.0 or greater.
 
 
-[1]: /tracing/profiler/enabling/?code-lang=python
+[1]: /tracing/profiler/enabling/python
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
@@ -61,7 +61,7 @@ Code Hotspots identification is enabled by default when you [turn on profiling f
 Requires tracing library version 0.49.0 or greater.
 
 
-[1]: /tracing/profiler/enabling/?code-lang=ruby
+[1]: /tracing/profiler/enabling/ruby
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
@@ -74,7 +74,7 @@ Code Hotspots identification for Go is disabled by default. To enable it, [turn 
 
 **Warning:** Go 1.17 and below has several bugs (see [GH-35057][8], [GH-48577][9], [CL-369741][10], [CL-369983][11]) that can reduce the accuracy of this feature, especially when using a lot of CGO. They are scheduled to be fixed in the 1.18 release.
 
-[1]: /tracing/profiler/enabling/?code-lang=go
+[1]: /tracing/profiler/enabling/go
 [2]: https://github.com/DataDog/dd-trace-go/releases
 [3]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#WithProfilerCodeHotspots
 [4]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#Start
