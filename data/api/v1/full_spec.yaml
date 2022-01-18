@@ -13452,7 +13452,7 @@ components:
           type: string
         end_date:
           description: Shows the last date of usage.
-          format: date-time
+          format: date
           type: string
         num_orgs:
           description: The number of organizations.
@@ -13470,7 +13470,7 @@ components:
           type: number
         start_date:
           description: Shows the first date of usage.
-          format: date-time
+          format: date
           type: string
         usage:
           $ref: '#/components/schemas/UsageBillableSummaryKeys'
