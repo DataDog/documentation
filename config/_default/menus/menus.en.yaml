@@ -1796,6 +1796,11 @@ main:
     parent: trace_ingestion
     identifier: ingestion_mechanisms
     weight: 401
+  - name: Ingestion Control Page
+    url: tracing/trace_ingestion/control_page
+    parent: trace_ingestion
+    identifier: ingestion_control_page
+    weight: 402
   - name: Trace Retention and Ingestion
     url: tracing/trace_retention_and_ingestion/
     parent: tracing
