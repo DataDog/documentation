@@ -10317,6 +10317,10 @@ components:
         assertions:
           default: []
           description: Array of assertions used for the test.
+          example:
+          - operator: lessThan
+            target: 1000
+            type: responseTime
           items:
             $ref: '#/components/schemas/SyntheticsAssertion'
           type: array
@@ -10333,6 +10337,7 @@ components:
           type: boolean
         name:
           description: The name of the step.
+          example: Example step name
           type: string
         request:
           $ref: '#/components/schemas/SyntheticsTestRequest'
@@ -10340,12 +10345,18 @@ components:
           $ref: '#/components/schemas/SyntheticsTestOptionsRetry'
         subtype:
           $ref: '#/components/schemas/SyntheticsAPIStepSubtype'
+      required:
+      - assertions
+      - request
+      - name
+      - subtype
       type: object
     SyntheticsAPIStepSubtype:
       description: The subtype of the Synthetic multistep API test step, currently
         only supporting `http`.
       enum:
       - http
+      example: http
       type: string
       x-enum-varnames:
       - HTTP
@@ -10374,7 +10385,7 @@ components:
           type: integer
         name:
           description: Name of the test.
-          example: Test name
+          example: Example test name
           type: string
         options:
           $ref: '#/components/schemas/SyntheticsTestOptions'
@@ -10397,6 +10408,12 @@ components:
           type: array
         type:
           $ref: '#/components/schemas/SyntheticsAPITestType'
+      required:
+      - name
+      - config
+      - locations
+      - options
+      - type
       type: object
     SyntheticsAPITestConfig:
       description: Configuration object for a Synthetic API test.
@@ -10872,6 +10889,8 @@ components:
           $ref: '#/components/schemas/SyntheticsBrowserTestConfig'
         locations:
           description: Array of locations used to run the test.
+          example:
+          - example-location
           items:
             description: A location from which the test was run.
             type: string
@@ -10888,6 +10907,7 @@ components:
           type: integer
         name:
           description: Name of the test.
+          example: Example test name
           type: string
         options:
           $ref: '#/components/schemas/SyntheticsTestOptions'
@@ -10911,7 +10931,11 @@ components:
         type:
           $ref: '#/components/schemas/SyntheticsBrowserTestType'
       required:
-      - message
+      - config
+      - locations
+      - name
+      - options
+      - type
       type: object
     SyntheticsBrowserTestConfig:
       description: Configuration object for a Synthetic browser test.
@@ -17134,6 +17158,14 @@ paths:
         required: false
         schema:
           type: boolean
+      - description: 'When `true`, this query returns only deleted custom-created
+
+          or cloned dashboards. This parameter is incompatible with `filter[shared]`.'
+        in: query
+        name: filter[deleted]
+        required: false
+        schema:
+          type: boolean
       responses:
         '200':
           content:
@@ -17941,6 +17973,12 @@ paths:
       summary: Delete a dashboard
       tags:
       - Dashboards
+      x-given:
+        deleted_dashboard:
+          parameters:
+          - name: dashboard_id
+            source: dashboard.id
+          step: the "dashboard" was deleted
       x-menu-order: 3
       x-undo:
         type: idempotent
