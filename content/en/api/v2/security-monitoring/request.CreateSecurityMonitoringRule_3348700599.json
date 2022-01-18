@@ -1,0 +1,32 @@
+{
+  "name": "Example-Create_a_detection_rule_with_detection_method_third_party_returns_OK_response",
+  "queries": [
+    {
+      "query": "@test:true",
+      "aggregation": "none",
+      "groupByFields": [],
+      "distinctFields": []
+    }
+  ],
+  "filters": [],
+  "cases": [
+    {
+      "name": "",
+      "status": "info",
+      "notifications": []
+    }
+  ],
+  "options": {
+    "detectionMethod": "third_party",
+    "evaluationWindow": 0,
+    "keepAlive": 3600,
+    "maxSignalDuration": 86400,
+    "thirdPartyRuleOptions": {
+      "rootQuery": "@pop",
+      "defaultStatus": "low"
+    }
+  },
+  "message": "Example-Create_a_detection_rule_with_detection_method_third_party_returns_OK_response message",
+  "tags": [],
+  "isEnabled": true
+}

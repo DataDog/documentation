@@ -341,6 +341,10 @@
       "description": "Create a detection rule returns \"OK\" response"
     },
     {
+      "suffix": "_3348700599",
+      "description": "Create a detection rule with detection method \"third_party\" returns \"OK\" response"
+    },
+    {
       "suffix": "_498211763",
       "description": "Create a detection rule with type 'workload_security' returns \"OK\" response"
     }
