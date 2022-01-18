@@ -23,7 +23,7 @@ You can move directly from span information to profiling data on the Code Hotspo
 
 ### Prerequisites
 
-{{< programming-lang-wrapper langs="java,python,ruby" >}}
+{{< programming-lang-wrapper langs="java,python,go,ruby" >}}
 {{< programming-lang lang="java" >}}
 Code Hotspots identification is enabled by default when you [turn on profiling for your service][1]. For manually instrumented code, continuous profiler requires scope activation of spans:
 
@@ -62,6 +62,22 @@ Requires tracing library version 0.49.0 or greater.
 
 
 [1]: /tracing/profiler/enabling/?code-lang=ruby
+{{< /programming-lang >}}
+{{< programming-lang lang="go" >}}
+
+Code Hotspots identification is disabled default, but will likely be enabled by default in the next release. For now you need to [turn on profiling for your service][1] and ensure that:
+
+- You are using [dd-trace-go][2] version 1.35.0 or later.
+- [`DD_PROFILING_CODE_HOTSPOTS_COLLECTION_ENABLED=true`][3] is set in your env, or the [`tracer.WithProfilerCodeHotspots(true)`][3] option is passed to [`tracer.Start()`][4].
+- [`profiler.CPUDuration(60*time.Second)`][5] and [`profiler.WithPeriod(60*time.Second)`][6] is passed to [`profiler.Start()`][7] to capture hotspot information for 100% of all spans.
+
+[1]: /tracing/profiler/enabling/?code-lang=go
+[2]: https://github.com/DataDog/dd-trace-go/releases
+[3]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#WithProfilerCodeHotspots
+[4]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#Start
+[5]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/profiler#CPUDuration
+[6]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/profiler#WithPeriod
+[7]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/profiler#Start
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
@@ -108,7 +124,31 @@ Click the **Span/Trace/Full profile** selector to define the scope of the data:
 
 ### Prerequisites
 
-Endpoint profiling is enabled by default when you turn on profiling for your [Python][3] or [Ruby][4] service. It requires tracing library (`dd-trace-py` or `dd-trace-rb`) version 0.54.0 or greater.
+{{< programming-lang-wrapper langs="python,go,ruby" >}}
+{{< programming-lang lang="python" >}}
+
+Endpoint profiling is enabled by default when you turn on profiling for your [Python][1] service. It requires `dd-trace-py` version 0.54.0 or greater.
+
+[1]: /tracing/profiler/enabling/?code-lang=python
+{{< /programming-lang >}}
+{{< programming-lang lang="ruby" >}}
+
+Endpoint profiling is enabled by default when you turn on profiling for your [Ruby][1] service. It requires `dd-trace-rb` version 0.54.0 or greater.
+
+[1]: /tracing/profiler/enabling/?code-lang=ruby
+{{< /programming-lang >}}
+{{< programming-lang lang="go" >}}
+Endpoint profiling is disabled by default when you turn on profiling for your [Go][1] service. To enable it, you need to ensure that:
+
+- You are using [dd-trace-go][2] version 1.35.0 or later.
+- [`DD_PROFILING_ENDPOINT_COLLECTION_ENABLED=true`][3] is set in your env, or the [`tracer.WithProfilerEndpoints(true)`][3] option is passed to [`tracer.Start()`][4].
+
+[1]: /tracing/profiler/enabling/?code-lang=go
+[2]: https://github.com/DataDog/dd-trace-go/releases
+[3]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#WithProfilerEndpoints
+[4]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#Start
+{{< /programming-lang >}}
+{{< /programming-lang-wrapper >}}
 
 ### Scope flame graphs by endpoints
 
@@ -135,5 +175,3 @@ It is valuable to track top endpoints that are consuming valuable resources such
 
 [1]: /tracing/profiler/profiler_troubleshooting#reduce-overhead-from-default-setup
 [2]: /tracing/setup_overview/custom_instrumentation/java#manually-creating-a-new-span
-[3]: /tracing/profiler/enabling/?code-lang=python
-[4]: /tracing/profiler/enabling/?code-lang=ruby
