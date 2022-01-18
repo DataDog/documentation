@@ -153,7 +153,7 @@ Si vous n'utilisez pas les nouvelles métadonnées de prestataire de services, D
 
 ### SAML strict
 
-Vous pouvez appliquer un SAML strict à votre organisation en désactivant les autres types de méthode de connexion dans l'interface **Login Methods**. Lorsque cette option est configurée, tous les utilisateurs doivent, par défaut, se connecter via l'authentification SAML. Les noms et mots de passe existants ou les identifiants Google OAuth ne fonctionnent pas. Avec cette fonctionnalité, vous êtes certain que tous les utilisateurs ayant accès à Datadog utilisent des identifiants valides du fournisseur d'identité ou service d'annuaire de votre entreprise pour se connecter à votre compte Datadog. Les administrateurs d'organisation peuvent définir des configurations pour certains utilisateurs afin qu'ils ne soient pas soumis au SAML strict.
+Vous pouvez appliquer un SAML strict à votre organisation en désactivant les autres types de méthodes de connexion dans l'interface **Login Methods**. Lorsque cette option est configurée, tous les utilisateurs doivent, par défaut, se connecter via l'authentification SAML. Les noms et mots de passe existants ou les identifiants Google OAuth ne fonctionnent pas. Avec cette fonctionnalité, vous êtes certain que tous les utilisateurs ayant accès à Datadog utilisent des identifiants valides du fournisseur d'identité ou service d'annuaire de votre entreprise pour se connecter à votre compte Datadog. Les administrateurs d'organisation peuvent définir des configurations pour certains utilisateurs afin qu'ils ne soient pas soumis au SAML strict.
 
 ### Mise à jour automatiquement des métadonnées de prestataire de services Datadog
 
