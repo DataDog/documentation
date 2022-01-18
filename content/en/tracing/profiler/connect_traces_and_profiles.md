@@ -71,6 +71,9 @@ Code Hotspots identification is disabled default, but will likely be enabled by 
 - [`DD_PROFILING_CODE_HOTSPOTS_COLLECTION_ENABLED=true`][3] is set in your env, or the [`tracer.WithProfilerCodeHotspots(true)`][3] option is passed to [`tracer.Start()`][4].
 - [`profiler.CPUDuration(60*time.Second)`][5] and [`profiler.WithPeriod(60*time.Second)`][6] is passed to [`profiler.Start()`][7] to capture hotspot information for 100% of all spans.
 
+
+**Warning:** Go 1.17 and below has several bugs (see [GH-35057][8], [GH-48577][9], [CL-369741][10], [CL-369983][11]) that can reduce the accuracy of this feature, especially when using a lot of CGO. They will be fixed in the upcoming 1.18 release.
+
 [1]: /tracing/profiler/enabling/?code-lang=go
 [2]: https://github.com/DataDog/dd-trace-go/releases
 [3]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#WithProfilerCodeHotspots
@@ -78,6 +81,10 @@ Code Hotspots identification is disabled default, but will likely be enabled by 
 [5]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/profiler#CPUDuration
 [6]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/profiler#WithPeriod
 [7]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/profiler#Start
+[8]: https://github.com/golang/go/issues/35057
+[9]: https://github.com/golang/go/issues/48577
+[10]: https://go-review.googlesource.com/c/go/+/369741/
+[11]: https://go-review.googlesource.com/c/go/+/369983/
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
@@ -143,10 +150,16 @@ Endpoint profiling is disabled by default when you turn on profiling for your [G
 - You are using [dd-trace-go][2] version 1.35.0 or later.
 - [`DD_PROFILING_ENDPOINT_COLLECTION_ENABLED=true`][3] is set in your env, or the [`tracer.WithProfilerEndpoints(true)`][3] option is passed to [`tracer.Start()`][4].
 
+**Warning:** Go 1.17 and below has several bugs (see [GH-35057][5], [GH-48577][6], [CL-369741][7], [CL-369983][8]) that can reduce the accuracy of this feature, especially when using a lot of CGO. They will be fixed in the upcoming 1.18 release.
+
 [1]: /tracing/profiler/enabling/?code-lang=go
 [2]: https://github.com/DataDog/dd-trace-go/releases
 [3]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#WithProfilerEndpoints
 [4]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#Start
+[5]: https://github.com/golang/go/issues/35057
+[6]: https://github.com/golang/go/issues/48577
+[7]: https://go-review.googlesource.com/c/go/+/369741/
+[8]: https://go-review.googlesource.com/c/go/+/369983/
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
