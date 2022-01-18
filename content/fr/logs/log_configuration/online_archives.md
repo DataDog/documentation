@@ -74,7 +74,7 @@ Vous trouverez ci-dessous quelques exemples de stratégies de rétention de logs
 2. Activez Online Archives pour cet index.
 3. Ajoutez un filtre d'exclusion sur l'index `status:Debug`, avec une valeur d'exclusion de 90 %. Ce filtre d'exclusion s'applique uniquement à l'index.
 
-{{< img src="logs/log_configuration/online_archives/retain.png" alt="Comment exclure des logs de votre archive en ligne" style="width:100%;">}}
+{{< img src="logs/log_configuration/online_archives/retain.png" alt="Comment exclure des logs de l'index" style="width:100%;">}}
 
 ### L'équipe de sécurité souhaite conserver tous ses logs dans Online Archives, mais aucun dans des index
 
