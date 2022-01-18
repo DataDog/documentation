@@ -220,18 +220,16 @@ For more information, see [Setting up PHP and OpenTracing][1].
 
 
 ```cpp
-{
-  // Create a root span for the current request.
-  auto root_span = tracer->StartSpan("web.request");
-  // Set a resource name for the root span.
-  root_span->SetTag(datadog::tags::resource_name, "/user/profile");
-}
+// Create a root span for the current request.
+auto root_span = tracer->StartSpan("web.request");
+// Set a resource name for the root span.
+root_span->SetTag(datadog::tags::resource_name, "/user/profile");
 ```
 
 For more information, see [Setting up CPP and Custom Instrumentation][1].
 
 
-[1]: /tracing/setup_overview/open_standards/cpp/#manually-instrument-a-method
+[1]: /tracing/setup_overview/custom_instrumentation/cpp/#manually-instrument-a-method
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
