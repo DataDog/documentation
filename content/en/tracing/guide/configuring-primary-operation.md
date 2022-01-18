@@ -59,26 +59,11 @@ To ensure that all traces are being sent to Datadog correctly outside of any ins
 
 {{< img src="tracing/guide/primary_operation/dropdown.mp4" alt="APM save" video=true >}}
 
-## Manual instrumentation
+## Custom Instrumentation
 
-When manually instrumenting your code, statically set the span name to ensure that your resources are grouped with the same primary operation (for example, `web.request`). If the span is being named dynamically, set it as the resource.
+When writing custom spans, statically set the span name to ensure that your resources are grouped with the same primary operation (for example, `web.request`). If the span is being named dynamically, set it as the resource (for example, `/user/profile`).
 
-Modify the primary operation for Python:
-
-```text
-  @tracer.wrap('tornado.notify',
-                service='tornado-notification',
-                resource='MainHandler.do_something')
-    @tornado.gen.coroutine
-    def do_something(self):
-        # do something
-```
-
-This function explicitly sets both the service name and primary operation, being `tornado-notification` and `tornado.notify`, respectively.
-
-Also note that the resource name is set manually, `MainHandler.do_something`.
-
-By default, the resource name would be set to this as it’s the name of the function and the class for which it lives under in Tornado.
+See [Custom Instrumentation][3] for your programming language for detailed information.
 
 ## OpenTracing
 
@@ -157,7 +142,7 @@ For more information, see [Setting up Go and OpenTracing][1].
 
 ```javascript
 const span = tracer.startSpan('http.request');
-span.setTag('resource.name',  ‘/user/profile’)
+span.setTag('resource.name',  '/user/profile')
 span.setTag('span.type', 'web')
 // code being traced
 span.finish();
@@ -241,3 +226,4 @@ For more information, see [Setting up CPP and Custom Instrumentation][1].
 
 [1]: /tracing/guide/metrics_namespace/
 [2]: https://app.datadoghq.com/apm/settings
+[3]: /tracing/setup_overview/custom_instrumentation/
