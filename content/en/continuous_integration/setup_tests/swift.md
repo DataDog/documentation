@@ -28,7 +28,7 @@ Supported platforms:
 * macOS >= 10.13
 * tvOS >= 11.0
 
-**Note**: If you are using Swift Concurrency, Xcode >= 13.2 is needed for precise span representation of asynchronous tasks </div>
+**Note**: If you are using Swift Concurrency, you need Xcode >= 13.2 for precise span representation of asynchronous tasks.
 
 ## Installing the Swift testing SDK
 
@@ -104,7 +104,7 @@ Set all these variables in your test target:
 **Example**: `true`
 
 `DATADOG_CLIENT_TOKEN`
-: The [Datadog Client Token][1] to use to report test results. Alternatively you can also use an API key here<br/>
+: Use the [Datadog Client Token][1] to report test results. Alternatively, use an API key.<br/>
 **Default**: `(empty)`<br/>
 **Example**: `pub0zxxxyyyxxxyyxxxzzxxyyxxxyyy`
 
@@ -250,10 +250,10 @@ For Network auto-instrumentation, you can configure these additional settings:
 : Sets the maximum size reported from the payload. Default `1024` (Integer)
 
 `DD_DISABLE_NETWORK_CALL_STACK`
-: Disables the callstack information in the network spans (Boolean)
+: Disables the call stack information in the network spans (Boolean)
 
 `DD_ENABLE_NETWORK_CALL_STACK_SYMBOLICATED`
-: Shows the callstack information with precise file and line information, not only the method name. It can impact the performance of the tests. (Boolean)
+: Shows the call stack information with not only the method name, but also the precise file and line information. May impact your tests' performance (Boolean)
 
 
 You can also disable or enable specific auto-instrumentation in some of the tests from Swift or Objective-C by importing the module `DatadogSDKTesting` and using the class: `DDInstrumentationControl`.
