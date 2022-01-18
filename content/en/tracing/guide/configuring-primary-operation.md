@@ -84,7 +84,7 @@ By default, the resource name would be set to this as it’s the name of the fun
 
 When using Datadog, the OpenTracing operation name is a resource and the OpenTracing "component" tag is Datadog's span name. For example, to define (in OpenTracing terms) a span that has the resource "/user/profile", and the span name "http.request":
 
-{{< programming-lang-wrapper langs="java,python,ruby,go,nodejs,.NET,php" >}}
+{{< programming-lang-wrapper langs="java,python,ruby,go,nodejs,.NET,php,cpp" >}}
 {{< programming-lang lang="java" >}}
 
 
@@ -205,7 +205,7 @@ $otTracer = \OpenTracing\GlobalTracer::get();
 $scope = $otTracer->startActiveSpan('http.request');
 $span = $scope->getSpan();
 $span->setTag('service.name', 'service_name');
-$span->setTag('resource.name', ‘/user/profile’);
+$span->setTag('resource.name', '/user/profile');
 $span->setTag('span.type', 'web');
 // ...Use OpenTracing as expected
 $scope->close();
@@ -215,6 +215,21 @@ For more information, see [Setting up PHP and OpenTracing][1].
 
 
 [1]: /tracing/setup_overview/open_standards/php/#opentracing
+{{< /programming-lang >}}
+{{< programming-lang lang="cpp" >}}
+
+
+```cpp
+// Create a root span for the current request.
+auto root_span = tracer->StartSpan("web.request");
+// Set a resource name for the root span.
+root_span->SetTag(datadog::tags::resource_name, "/user/profile");
+```
+
+For more information, see [Setting up CPP and Custom Instrumentation][1].
+
+
+[1]: /tracing/setup_overview/custom_instrumentation/cpp/#manually-instrument-a-method
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
