@@ -119,7 +119,7 @@ API details of the decorator can be found in the `ddtrace.Tracer.trace` [documen
 
 ## Accessing active spans
 
-The built-in instrumentation and your own custom instrumentation will create spans around meaningful operations. You can access the active span in order to include meaningful data.
+The built-in instrumentation and your own custom instrumentation create spans around meaningful operations. You can access the active span in order to include meaningful data.
 
 ```python
 from ddtrace import tracer
