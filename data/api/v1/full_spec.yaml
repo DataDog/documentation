@@ -17134,6 +17134,14 @@ paths:
         required: false
         schema:
           type: boolean
+      - description: 'When `true`, this query returns only deleted custom-created
+
+          or cloned dashboards. This parameter is incompatible with `filter[shared]`.'
+        in: query
+        name: filter[deleted]
+        required: false
+        schema:
+          type: boolean
       responses:
         '200':
           content:
@@ -17941,6 +17949,12 @@ paths:
       summary: Delete a dashboard
       tags:
       - Dashboards
+      x-given:
+        deleted_dashboard:
+          parameters:
+          - name: dashboard_id
+            source: dashboard.id
+          step: the "dashboard" was deleted
       x-menu-order: 3
       x-undo:
         type: idempotent
