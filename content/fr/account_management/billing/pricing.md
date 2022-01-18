@@ -43,9 +43,9 @@ Vous pouvez mettre en place des contrôles afin de limiter les volumes de spans 
 * Un **log** est un enregistrement au format texte de l'activité générée par un système d'exploitation, une application ou d'autres sources. Datadog facture les logs ingérés en fonction du nombre total de gigaoctets envoyés au service Logs de Datadog.
 * Un **événement de log** est un log indexé par le service Logs de Datadog. Le prix facturé par Datadog est calculé par tranche de million d'événements de log envoyés pour indexation en appliquant le tarif désigné dans la stratégie de rétention pour laquelle vous avez optée.
 
-## Cloud SIEM
+## Security Monitoring
 
-* Un **log analysé** est un enregistrement au format texte de l'activité générée par un système d'exploitation, une application ou d'autres sources qui a été analysé pour détecter les menaces de sécurité potentielles. Datadog facture les logs analysés en fonction du nombre total de gigaoctets ingérés et analysés par le service Cloud SIEM de Datadog.
+* Un **log analysé** est un enregistrement au format texte de l'activité générée par un système d'exploitation, une application ou d'autres sources qui a été analysé pour détecter les menaces de sécurité potentielles. Datadog facture les logs analysés en fonction du nombre total de gigaoctets ingérés et analysés par le service Security Monitoring de Datadog.
 
 ## Surveillance Synthetic
 

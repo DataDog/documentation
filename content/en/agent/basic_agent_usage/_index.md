@@ -147,7 +147,7 @@ When the Agent is running, use the `datadog-agent launch-gui` command to open th
 | [OpenSUSE][7] with systemd               | OpenSUSE 15+ in Agent 6.33.0+/7.33.0+                     |
 | [Fedora][8]                              | Fedora 26+                                                |
 | [macOS][9]                               | macOS 10.12+                                              |
-| [Windows Server][10]                     | Windows Server 2008 R2+ and Server Core (not Nano Server) |
+| [Windows Server][10]                     | Windows Server 2008 R2+ (including Server Core)           |
 | [Windows][10]                            | Windows 7+                                                |
 | [Windows Azure Stack HCI OS][10]         | All Versions                                              |
 

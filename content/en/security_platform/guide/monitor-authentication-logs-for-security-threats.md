@@ -107,7 +107,7 @@ Datadog ingests and analyzes [all of your logs][18], ensuring that you can detec
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security_monitoring/
+[1]: /cloud_siem/
 [2]: /logs/log_collection/?tab=http#application-log-collection
 [3]: /logs/log_configuration/processors/#grok-parser
 [4]: https://www.datadoghq.com/blog/logs-standard-attributes/
@@ -118,8 +118,8 @@ Datadog ingests and analyzes [all of your logs][18], ensuring that you can detec
 [9]: https://developers.google.com/recaptcha/docs/v3
 [10]: https://app.datadoghq.com/security/configuration/rules?query=brute%20force%20attack&sort=rule
 [11]: https://app.datadoghq.com/security/configuration/rules?query=credential%20stuffing%20attack&sort=rule
-[12]: /security_monitoring/default_rules/
-[13]: /security_monitoring/explorer
+[12]: /cloud_siem/default_rules/
+[13]: /cloud_siem/explorer
 [14]: https://app.datadoghq.com/notebook/credentialstuffingrunbook
 [15]: /notebooks/#commenting
 [16]: https://app.datadoghq.com/screen/integration/security-monitoring-ip-investigation
