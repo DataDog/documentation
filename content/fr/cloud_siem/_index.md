@@ -2,7 +2,7 @@
 title: Cloud SIEM
 kind: documentation
 aliases:
-  - security_monitoring
+  - /fr/security_monitoring
 ---
 
 ## Présentation
