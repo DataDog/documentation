@@ -63,6 +63,6 @@ At the top of the side panel, you can configure the rule or send a notification 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://docs.datadoghq.com/security_platform/cspm/findings/
-[2]: https://docs.datadoghq.com/security_platform/security_monitoring/
+[2]: https://docs.datadoghq.com/security_platform/cloud_siem/
 [3]: https://docs.datadoghq.com/security_platform/cloud_workload_security/
 [4]: https://docs.datadoghq.com/security_platform/explorer

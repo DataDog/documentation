@@ -89,10 +89,10 @@ Datadog generates the Security Signal, which details the offense as well as the 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security_platform/security_monitoring/
+[1]: /security_platform/cloud_siem/
 [2]: https://app.datadoghq.com/account/settings#integrations/webhooks
 [3]: /security_platform/detection_rules/
 [4]: https://www.datadoghq.com/blog/new-term-detection-method-datadog/
-[5]: /security_platform/security_monitoring/log_detection_rules/?tab=threshold#new-term
+[5]: /security_platform/cloud_siem/log_detection_rules/?tab=threshold#new-term
 [6]: https://www.datadoghq.com/blog/detect-abuse-of-functionality-with-datadog/
-[7]: /security_platform/security_monitoring/log_detection_rules/?tab=threshold#define-a-search-query
+[7]: /security_platform/cloud_siem/log_detection_rules/?tab=threshold#define-a-search-query

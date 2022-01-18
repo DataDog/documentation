@@ -81,10 +81,10 @@ main_left:
     url: 'https://www.datadoghq.com/product/security-platform/'
     weight: 13
     parent: product
-  - identifier: security-monitoring
-    name: Security Monitoring
+  - identifier: cloud-siem
+    name: Cloud SIEM
     pre: <i class="icon-siem align-middle"></i>
-    url: 'https://www.datadoghq.com/product/security-platform/security-monitoring/'
+    url: 'https://www.datadoghq.com/product/security-platform/cloud-siem/'
     weight: 14
     parent: product
   - identifier: cloud-security-posture-management
@@ -2400,35 +2400,35 @@ main:
     pre: security-platform
     identifier: security_platform
     weight: 180000
-  - name: Security Monitoring
-    url: security_platform/security_monitoring/
+  - name: Cloud SIEM
+    url: security_platform/cloud_siem/
     parent: security_platform
-    identifier: security_monitoring
+    identifier: cloud_siem
     weight: 1
   - name: Getting Started
-    url: security_platform/security_monitoring/getting_started
-    parent: security_monitoring
-    identifier: security_monitoring_getting_started
+    url: security_platform/cloud_siem/getting_started
+    parent: cloud_siem
+    identifier: cloud_siem_getting_started
     weight: 101
   - name: Security Home
-    url: security_platform/security_monitoring/security_home
-    parent: security_monitoring
-    identifier: security_monitoring_security_home
+    url: security_platform/cloud_siem/security_home
+    parent: cloud_siem
+    identifier: cloud_siem_security_home
     weight: 102
   - name: Log Detection Rules
-    url: security_platform/security_monitoring/log_detection_rules
-    parent: security_monitoring
-    identifier: security_monitoring_log_detection_rules
+    url: security_platform/cloud_siem/log_detection_rules
+    parent: cloud_siem
+    identifier: cloud_siem_log_detection_rules
     weight: 103
   - name: OOTB Rules
     url: /security_platform/default_rules#cat-log-detection
-    parent: security_monitoring
-    identifier: security_monitoring_default_rules
+    parent: cloud_siem
+    identifier: cloud_siem_default_rules
     weight: 104
   - name: Signals Explorer
     url: /security_platform/explorer
-    parent: security_monitoring
-    identifier: security_monitoring_signals_explorer
+    parent: cloud_siem
+    identifier: cloud_siem_signals_explorer
     weight: 105
   - name: Cloud Security Posture Management
     url: security_platform/cspm/
@@ -3188,8 +3188,8 @@ footer_product_two:
   - name: Security Platform
     url: 'https://www.datadoghq.com/product/security-platform/'
     weight: 140
-  - name: Security Monitoring
-    url: 'https://www.datadoghq.com/product/security-platform/security-monitoring'
+  - name: Cloud SIEM
+    url: 'https://www.datadoghq.com/product/security-platform/cloud-siem'
     weight: 145
   - name: CSPM
     url: 'https://www.datadoghq.com/product/security-platform/cloud-security-posture-management/'
