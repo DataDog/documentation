@@ -95,6 +95,36 @@
       "description": "Update an existing incident team returns \"OK\" response"
     }
   ],
+  "CreateIncident": [
+    {
+      "suffix": "",
+      "description": "Create an incident returns \"CREATED\" response"
+    }
+  ],
+  "DeleteIncident": [
+    {
+      "suffix": "",
+      "description": "Delete an existing incident returns \"OK\" response"
+    }
+  ],
+  "ListIncidents": [
+    {
+      "suffix": "",
+      "description": "Get a list of incidents returns \"OK\" response"
+    }
+  ],
+  "GetIncident": [
+    {
+      "suffix": "",
+      "description": "Get the details of an incident returns \"OK\" response"
+    }
+  ],
+  "UpdateIncident": [
+    {
+      "suffix": "",
+      "description": "Update an existing incident returns \"OK\" response"
+    }
+  ],
   "CreateAPIKey": [
     {
       "suffix": "",
