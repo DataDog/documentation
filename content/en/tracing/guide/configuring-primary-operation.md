@@ -59,7 +59,7 @@ To ensure that all traces are being sent to Datadog correctly outside of any ins
 
 {{< img src="tracing/guide/primary_operation/dropdown.mp4" alt="APM save" video=true >}}
 
-## Custom Instrumentation
+## Manual instrumentation
 
 When writing custom spans, statically set the span name to ensure that your resources are grouped with the same primary operation (for example, `web.request`). If the span is being named dynamically, set it as the resource (for example, `/user/profile`).
 
