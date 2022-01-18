@@ -1773,19 +1773,29 @@ main:
     url: tracing/trace_explorer/
     parent: tracing
     identifier: trace_explorer
-    weight: 4
+    weight: 2
   - name: Query Syntax
     url: tracing/trace_explorer/query_syntax/
     parent: trace_explorer
-    weight: 403
+    weight: 203
   - name: Request Flow Map
     url: tracing/trace_explorer/request_flow_map/
     parent: trace_explorer
-    weight: 404
+    weight: 204
   - name: Monitoring Analytics
     url: monitors/create/types/apm/
     parent: trace_explorer
-    weight: 405
+    weight: 205
+  - name: Trace Ingestion
+    url: tracing/trace_ingestion/
+    parent: tracing
+    identifier: trace_ingestion
+    weight: 4
+  - name: Ingestion Mechanisms
+    url: tracing/trace_ingestion/mechanisms
+    parent: trace_ingestion
+    identifier: ingestion_mechanisms
+    weight: 401
   - name: Trace Retention and Ingestion
     url: tracing/trace_retention_and_ingestion/
     parent: tracing
