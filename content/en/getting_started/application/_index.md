@@ -159,5 +159,5 @@ Datadog [Synthetic Monitoring][22] allow you to create and run API and browser t
 [18]: /real_user_monitoring/
 [19]: /real_user_monitoring/session_replay/
 [20]: /monitors/
-[21]: /network_monitoring/performance
+[21]: /security_platform/cloud_siem/
 [22]: /synthetics/
