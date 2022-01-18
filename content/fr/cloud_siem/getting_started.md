@@ -2,7 +2,7 @@
 title: Débuter
 kind: documentation
 aliases:
-  - security_monitoring/getting_started
+  - /fr/security_monitoring/getting_started
 description: 'Découvrez les grands concepts de la solution Cloud SIEM de Datadog, activez la détection de menaces et explorez les règles de détection des menaces par défaut.'
 ---
 Pour commencer à utiliser la solution Cloud SIEM de Datadog, suivez ces trois étapes :

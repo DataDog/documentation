@@ -2,7 +2,7 @@
 title: Security Signals Explorer
 kind: documentation
 aliases:
-  - security_monitoring/explorer
+  - /fr/security_monitoring/explorer
 description: Faire des recherches sur l'ensemble de vos signaux de sécurité et effectuer une analyse de la sécurité
 further_reading:
   - link: 'https://www.datadoghq.com/blog/announcing-security-monitoring/'

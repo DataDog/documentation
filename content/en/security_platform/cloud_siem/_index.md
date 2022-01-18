@@ -1,8 +1,8 @@
 ---
 title: Cloud SIEM
 kind: documentation
-aliases: 
- - security_monitoring
+aliases:
+ - /security_monitoring/
 ---
 
 ## Overview
