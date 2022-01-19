@@ -39,16 +39,16 @@ To begin profiling applications:
 {{% tab "Environment variables" %}}
 
 ```shell
+export DD_ENV="<APPLICATION_ENVIRONMENT>"
 export DD_SERVICE="<SERVICE_NAME>"
 export DD_VERSION="<APPLICATION_VERSION>"
-export DD_ENV="<APPLICATION_ENVIRONMENT>"
 ddprof myapp --arg1 --arg2
 ```
 
 The following parameters are recommended, as they help identify the source of your profiles in the Profiling UI:
-- `DD_ENV` represents the application environment, such as `prod` or `staging`.
-- `DD_VERSION` should be a meaningful version string, such as `v0.9rc1` or `ae9ffe00`.
-- `DD_SERVICE` is the name used to identify, filter, and combine profiles in the Profiling UI.
+- `DD_ENV`, the [environment][4] name, for example, `production`.
+- `DD_SERVICE`, the [service][4] name, for example, `web-backend`.  If this is not specified, the profiler will use the default value `myservice`.
+- `DD_VERSION`, the [version][4] of your application.
 
 **Note**: if you usually launch your application using shell builtins, for example:
 
@@ -73,9 +73,9 @@ ddprof --service "<SERVICE_NAME>" --vername "<APPLICATION_VERSION"> myapp --arg1
 ```
 
 The following settings help you identify the source of your profiles:
-- `--environment` represents the application environment, such as `prod` or `staging`.
-- `--service` should be a meaningful version string, such as `v0.9rc1` or `ae9ffe00`.
-- `--vername` is the name used to identify, filter, and combine profiles in the Profiling UI.
+- `--environment`, the [environment][4] name, for example, `production`.
+- `--service`, the [service][4] name, for example, `web-backend`.  If this is not specified, the profiler will use the default value `myservice`.
+- `--vername`, the [version][4] of your application.
 
 **Note**: if you usually launch your application using shell builtins, for example:
 
@@ -101,8 +101,9 @@ Configuration for the profiler can be set by commandline parameters, environment
 
 | Environment variable         | Longname    | Shortname | Default   | Description                                                                                                                     |
 |------------------------------|-------------|-----------|-----------|---------------------------------------------------------------------------------------------------------------------------------|
-| DD_ENV                       | environment | E         |           | The Datadog [environment][4] name, for example `prod` or `staging`.                                                             |
-| DD_SERVICE                   | service     | S         | myservice | The Datadog [service][5] name.                                                                                                  |
+| DD_ENV                       | environment | E         |           | The [environment][5] name, for example, `production`.
+| DD_SERVICE                   | service     | S         | myservice | The [service][5] name, for example, `web-backend`.
+| DD_VERSION                   | vername     | V         |           | The [version][5] of your service.
 | DD_AGENT_HOST                | host        | H         | localhost | The hostname for the Datadog agent.                                                                                             |
 | DD_TRACE_AGENT_PORT          | port        | P         | 8126      | The Datadog agent listening port.                                                                                               |
 | DD_TRACE_AGENT_URL           | url         | U         |           | `https://<hostname>:<port>` overrides other agent host/port settings.                                                           |
@@ -157,5 +158,4 @@ The [Getting Started with Profiler][6] guide takes a sample service with a perfo
 [2]: https://app.datadoghq.com/account/settings?agent_version=6#agent
 [3]: https://github.com/DataDog/ddprof/releases
 [4]: https://app.datadoghq.com/profiling
-[5]: /tracing/guide/setting_primary_tags_to_scope/#environment
-[6]: /tracing/visualization/#services
+[5]: /getting_started/tagging/unified_service_tagging
