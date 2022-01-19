@@ -80,6 +80,7 @@ code_language_ids:
     dotnet-framework: ".NET Framework"
     curl: Curl
     nginx: Nginx
+    native: Native
     other: Other
 
 branch: ""

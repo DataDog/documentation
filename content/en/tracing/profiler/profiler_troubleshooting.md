@@ -7,7 +7,7 @@ further_reading:
       text: 'APM Troubleshooting'
 ---
 
-{{< programming-lang-wrapper langs="java,python,go,ruby" >}}
+{{< programming-lang-wrapper langs="java,python,go,ruby,native" >}}
 {{< programming-lang lang="java" >}}
 
 ## Missing profiles in the profile search page
@@ -210,6 +210,51 @@ Without this flag, profiles for short-lived Resque jobs will be unavailable.
 
 [1]: /tracing/troubleshooting/#tracer-debug-logs
 [2]: /help/
+
+{{< /programming-lang >}}
+{{< programming-lang lang="native" >}}
+
+## Missing profiles in the profile search page
+
+If you've configured the profiler and don't see profiles in the profile search page, turn on [verbose logging][1] and [open a support ticket][2] with logfiles and the following information:
+
+- Linux kernel version (`uname -r`)
+- libc version (`ldd --version`)
+- Value of `/proc/sys/kernel/perf_event_paranoid`
+- Complete command line, including both profiler and application arguments
+
+If you would prefer, you may also attempt to troubleshoot the problem by enabling verbose logs and reviewing the sections below.
+
+### "\<ERROR\> Error calling perfopen on watcher"
+
+This error typically occurs when the user does not have sufficient permission to engage the profiler. The most common reason for this is because required operating system features have been disabled, which will cause profiling to fail. This is typically a host-level configuration, which can not be set at the level of an individual pod or container.
+
+There are two capabilities which may be used to override the value of `perf_event_paranoid`
+- `CAP_SYS_ADMIN` (running your services with this capability may be discouraged by your organization)
+- `CAP_PERFMON` (available on Linux v5.4 or later)
+
+There are a few less common permissions issues:
+- The profiler is not always able to instrument processes which change their UID on startup. This is common for many webservers and databases.
+- The profiler relies upon the `perf_event_open()` syscall, which is disallowed by some container runtimes. Refer to the appropriate documentation to see whether this might be the case.
+- Some seccomp profiles may forbid `perf_event_open()`. If your system runs such a configuration, you may not be able to run the profiler.
+
+### "\<WARNING\> Could not finalize watcher"
+
+Users encounter this warning when the system is unable to allocate sufficient locked memory for the profiler. This is most commonly caused when too many instances of the profiler are active on a given host, which may happen when many containerized services are instrumented individually on the same host. This can be resolved by increasing the `mlock()` memory limit or decreasing the number of instrumented applications.
+
+Other native profiling tools may contribute to the same limit.
+
+### "\<WARNING\> Failure to establish connection"
+
+This error usually means that the profiler is unable to connect to the Datadog agent. You can use [configuration logging][3] to identify the precise combination of hostname/port used by the profiler for uploads, as well as the content of the error message, to review the active configuration. See the [getting started][4] page for details on profiler input parameters and default values.
+
+## Profiles are empty or sparse
+
+If the profiles associated to your service in the profile search page are empty ("no CPU time reported") or contain very few frames, this may be the expected behavior of the profiler. The profiler only activates when the instrumented application is scheduled on the CPU. On the other hand, applications may be predominately off-CPU for many reasons, such as low user load or high application wait time.
+
+On the other hand, if the root span (usually your service's binary name in parentheses) indicates a significant amount of CPU time, but there are very few additional frames, your service may be prone to poor profiling results. Some of the following may help, but are generally not useful unless you're trying to improve this specific issue:
+- Stripped binaries will not have symbols available. Try using a non-stripped binary or a non-minified container image.
+- Certain applications and libraries benefit from their debug packages being installed. This is only true for services installed through your repo's package manager or similar.
 
 {{< /programming-lang >}}
 {{< /programming-lang >}}
