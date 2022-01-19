@@ -5,8 +5,8 @@ outputs:
   - json
 ---
 
-"python" : {{< latest-lambda-layer-version layer="python" >}},  
-"node" : {{< latest-lambda-layer-version layer="node" >}},  
-"ruby" : {{< latest-lambda-layer-version layer="ruby" >}},  
-"extension" : {{< latest-lambda-layer-version layer="extension" >}},  
-"dd-trace-java" : {{< latest-lambda-layer-version layer="dd-trace-java" >}}
+"python" : {{< latest-lambda-layer-version layer="python" >}},  
+"node" : {{< latest-lambda-layer-version layer="node" >}},  
+"ruby" : {{< latest-lambda-layer-version layer="ruby" >}},  
+"extension" : {{< latest-lambda-layer-version layer="extension" >}},  
+"dd-trace-java" : {{< latest-lambda-layer-version layer="dd-trace-java" >}}
