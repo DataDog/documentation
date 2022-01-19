@@ -34,7 +34,7 @@ To begin profiling applications:
 
 2. Download the appropriate [ddprof binary][3] for your Linux distribution.
 
-3. Modify your servic einvocation to include the profiler.  Typically, you will launch your application as the last set of arguments to the `ddprof` executable.
+3. Modify your service invocation to include the profiler. Your usual command is expected as the last arguments to the `ddprof` executable.
    {{< tabs >}}
 {{% tab "Environment variables" %}}
 
@@ -45,12 +45,12 @@ export DD_ENV="<APPLICATION_ENVIRONMENT>"
 ddprof myapp --arg1 --arg2
 ```
 
-For an optimal experience, we recommend setting:
+The following settings help you identify the source of your profiles:
 - `DD_ENV` to the given environment
 - `DD_VERSION` to a meaningful application-level version string
 - `DD_SERVICE` to the service name
 
-Note that if you usually launch your application using shell builtins, for example:
+**Note**: if you usually launch your application using shell builtins, for example:
 
 ```shell
 exec myapp --arg1 --arg2
@@ -72,12 +72,12 @@ exec ddprof myapp --arg1 --arg2
 ddprof --service "<SERVICE_NAME>" --vername "<APPLICATION_VERSION"> myapp --arg1 --arg2
 ```
 
-For an optimal experience, we recommend setting:
+The following settings help you identify the source of your profiles:
 - `--environment` to the given environment
 - `--service` to the service name
 - `--vername` to a meaningful application-level version string
 
-Note that if you usually launch your application using shell builtins, for example:
+**Note**: if you usually launch your application using shell builtins, for example:
 
 ```shell
 exec myapp --arg1
@@ -113,7 +113,6 @@ The [Getting Started with Profiler][4] guide takes a sample service with a perfo
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[3]
 [1]: https://app.datadoghq.com/account/settings#agent/overview
 [2]: https://app.datadoghq.com/account/settings?agent_version=6#agent
 [3]: https://app.datadoghq.com/profiling
