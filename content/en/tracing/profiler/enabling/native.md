@@ -1,5 +1,5 @@
 ---
-title: Enabling the Datadog Native Profiler for Linux
+title: Enabling the Native Profiler for Linux
 kind: Documentation
 code_lang: native
 type: multi-code-lang
@@ -24,7 +24,7 @@ further_reading:
 
 ## Requirements
 
-The Datadog Profiler requires Linux kernel v4.17+. It is currently not supported on macOS or Windows. `/proc/sys/kernel/perf_event_open` must be set to *at most* 2 or `CAP_SYS_ADMIN` must be granted to the profiling process or service container.
+The Datadog Profiler requires Linux kernel v4.17+. It is currently not supported on macOS or Windows. `/proc/sys/kernel/perf_event_open` must be set to *at most* 2 or `CAP_SYS_ADMIN` (or `CAP_PERFMON` on Linux v5.8 or later) must be granted to the profiling process or service container.
 
 ## Installation
 
@@ -129,7 +129,7 @@ The user may configure logging to one of several endpoints
 
 When a target PID is given, instrument that PID.  When this mode is engaged, any parameter after typical profiler argument processing is ignored.  If the owning UID of the target PID and the profiler varies, then you may have to do one of the following
 - Run the profiler as the root process instead
-- Grant `CAP_PERFMON` to the profiler (Linux v5.4 or later)
+- Grant `CAP_PERFMON` to the profiler (Linux v5.8 or later)
 - Grant `CAP_SYS_ADMIN` to the profiler
 - Decrease `perf_event_paranoid` to `-1` (consult your distro documentation or system administrator for details)
 

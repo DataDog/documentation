@@ -231,7 +231,7 @@ This error typically occurs when the user does not have sufficient permission to
 
 There are two capabilities which may be used to override the value of `perf_event_paranoid`
 - `CAP_SYS_ADMIN` (running your services with this capability may be discouraged by your organization)
-- `CAP_PERFMON` (available on Linux v5.4 or later)
+- `CAP_PERFMON` (available on Linux v5.8 or later)
 
 There are a few less common permissions issues:
 - The profiler is not always able to instrument processes which change their UID on startup. This is common for many webservers and databases.
