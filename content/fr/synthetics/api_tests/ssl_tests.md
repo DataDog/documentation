@@ -67,7 +67,7 @@ Vous pouvez créer jusqu'à 20 assertions par test API en cliquant sur **New As
 
 ### Sélectionner des emplacements
 
-Sélectionnez les **emplacements** à partir desquels vous souhaitez exécuter votre test SSL. Les tests SSL peuvent être exécutés depuis des [emplacements gérés][1] et des [emplacements privés][2], selon que vous souhaitez exécuter le test à l'extérieur ou à l'intérieur de votre réseau.
+Sélectionnez les **emplacements** à partir desquels vous souhaitez exécuter votre test SSL. Les tests SSL peuvent être exécutés depuis des [emplacements gérés][1] et des [emplacements privés][2], selon que vous souhaitez exécuter le test à l'extérieur ou au sein de votre réseau.
 
 ### Indiquer la fréquence du test
 
