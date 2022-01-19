@@ -252,7 +252,7 @@ This error usually means that the profiler is unable to connect to the Datadog a
 
 If the profiles associated to your service in the profile search page are empty ("no CPU time reported") or contain very few frames, this may be the expected behavior of the profiler. The profiler only activates when the instrumented application is scheduled on the CPU. On the other hand, applications may be predominately off-CPU for many reasons, such as low user load or high application wait time.
 
-On the other hand, if the root span (usually your service's binary name in parentheses) indicates a significant amount of CPU time, but there are very few additional frames, your service may be prone to poor profiling results. Some of the following may help, but are generally not useful unless you're trying to improve this specific issue:
+If the root of your profile (the binary name) shows a significant amount of CPU time, but few frames, your application may be prone to poor profiling results. There are many reasons why this may happen.  Consider the following:
 - Stripped binaries will not have symbols available. Try using a non-stripped binary or a non-minified container image.
 - Certain applications and libraries benefit from their debug packages being installed. This is only true for services installed through your repo's package manager or similar.
 
