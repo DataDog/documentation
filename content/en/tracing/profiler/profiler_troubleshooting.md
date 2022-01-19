@@ -235,7 +235,7 @@ There are two capabilities which may be used to override the value of `perf_even
 
 There are a few less common permissions issues:
 - The profiler is not always able to instrument processes which change their UID on startup. This is common for many webservers and databases.
-- The profiler relies upon the `perf_event_open()` syscall, which is disallowed by some container runtimes. Refer to the appropriate documentation to see whether this might be the case.
+- The profiler relies upon the `perf_event_open()` syscall, which is disallowed by some container runtimes. Check the appropriate documentation to see whether this might be the case.
 - Some seccomp profiles may forbid `perf_event_open()`. If your system runs such a configuration, you may not be able to run the profiler.
 
 ### "\<WARNING\> Could not finalize watcher"
