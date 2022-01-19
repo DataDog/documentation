@@ -24,7 +24,7 @@ further_reading:
 
 ## Requirements
 
-The Datadog Profiler requires Linux kernel v4.17+. It is currently not supported on macOS or Windows. `/proc/sys/kernel/perf_event_open` must be set to *at most* 2 or `CAP_SYS_ADMIN` (or `CAP_PERFMON` on Linux v5.8 or later) must be granted to the profiling process or service container.
+The Datadog Profiler requires Linux kernel v4.17+ on an `amd64` compatible processor. It does not currently support macOS, BSD, Windows, or other operating systems besides Linux v4.17 or later. `/proc/sys/kernel/perf_event_open` must be set to *at most* 2 or `CAP_SYS_ADMIN` (or `CAP_PERFMON` on Linux v5.8 or later) must be granted to the profiling process or service container.
 
 ## Installation
 
@@ -45,10 +45,10 @@ export DD_ENV="<APPLICATION_ENVIRONMENT>"
 ddprof myapp --arg1 --arg2
 ```
 
-The following settings help you identify the source of your profiles:
-- `DD_ENV` to the given environment
-- `DD_VERSION` to a meaningful application-level version string
-- `DD_SERVICE` to the service name
+The following parameters are recommended, as they help identify the source of your profiles in the Profiling UI:
+- `DD_ENV` represents the application environment, such as `prod` or `staging`.
+- `DD_VERSION` should be a meaningful version string, such as `v0.9rc1` or `ae9ffe00`.
+- `DD_SERVICE` is the name used to identify, filter, and combine profiles in the Profiling UI.
 
 **Note**: if you usually launch your application using shell builtins, for example:
 
@@ -73,9 +73,9 @@ ddprof --service "<SERVICE_NAME>" --vername "<APPLICATION_VERSION"> myapp --arg1
 ```
 
 The following settings help you identify the source of your profiles:
-- `--environment` to the given environment
-- `--service` to the service name
-- `--vername` to a meaningful application-level version string
+- `--environment` represents the application environment, such as `prod` or `staging`.
+- `--service` should be a meaningful version string, such as `v0.9rc1` or `ae9ffe00`.
+- `--vername` is the name used to identify, filter, and combine profiles in the Profiling UI.
 
 **Note**: if you usually launch your application using shell builtins, for example:
 
@@ -97,7 +97,7 @@ exec ddprof --service "<SERVICE_NAME>" --vername "<APPLICATION_VERSION"> myapp -
 
 ## Configuration
 
-You can set profiler parameters either as commandline parameters to the profiler, or using environment variables. If both are provided, the parameter is preferred.
+Configuration for the profiler can be set by commandline parameters, environment variables, or a combination of both.  Whenever both are provided for a given setting, the commandline parameter is preferred.
 
 | Environment variable         | Longname    | Shortname | Default   | Description                                                                                                                     |
 |------------------------------|-------------|-----------|-----------|---------------------------------------------------------------------------------------------------------------------------------|
@@ -116,16 +116,16 @@ You can set profiler parameters either as commandline parameters to the profiler
 
 When passing commandline arguments, the profiler adheres to the convention by which longnames are preceeded by two dashes and shortnames by a single dash. For example, `--service myservice` versus `-S myservice`.
 
-**Note**: parameters must be set with a value. For example, to log profiler configuration, the user must either set `DD_PROFILING_NATIVEPRINTARGS=yes` or pass `--printargs yes`, rather than `--printargs` alone. For such arguments, `yes`, `true`, and `enable` may be used interchangeably to enable the setting and `no`, `false`, and `disable` may be used to disable it.
+**Note**: parameters must be set with a value. For example, to log profiler configuration, you must either set `DD_PROFILING_NATIVEPRINTARGS=yes` or pass `--printargs yes`, rather than `--printargs` alone. For such arguments, `yes`, `true`, and `enable` may be used interchangeably to enable the setting and `no`, `false`, and `disable` may be used to disable it.
 
 ### Logging
 
-The user may configure logging to one of several endpoints
-- `stdout` will print the logs to standard output stream
-- `stderr` will print the logs to the standard error stream
-- `syslog` will publish the logs to syslog, attempting to adhere to the specification in RFC 3164
-- `disable` will disable the logs entirely
-- Any other value will be treated as a file path, with a leading `/` designating an absolute path
+You may configure logging to one of several endpoints:
+- `stdout` will print the logs to standard output stream (the default).
+- `stderr` will print the logs to the standard error stream.
+- `syslog` will publish the logs to syslog, attempting to adhere to the specification in RFC 3164.
+- `disable` will disable the logs entirely.
+- Any other value will be treated as a file path, with a leading `/` designating an absolute path.
 
 ### Pidmode
 
