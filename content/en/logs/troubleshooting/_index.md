@@ -1,0 +1,39 @@
+---
+title: Logs Troubleshooting
+kind: documentation
+---
+
+If you experience unexpected behavior with Datadog Logs, there are a few common issues you can investigate and this guide may help resolve issues quickly. If you continue to have trouble, reach out to [Datadog support][1] for further assistance.
+
+## Why are my logs missing today?
+
+You have not made any changes to your log configuration but [Logs Explorer][2] shows that logs are missing today. This may be happening because you have reached your daily quota.
+
+{{< img src="logs/troubleshooting/daily_quota_reached.png" alt="Daily quota reached" style="width:90%" >}}
+
+See [Set daily quota][3] for more information and on how to update or remove the quota.
+
+## Unable to parse timestamp key from JSON logs
+
+If you are unable to convert the timestamp of JSON logs to a [recognized date format][4] before they are ingested into the UI, follow these steps to convert and map the timestamps using our [arithmetic processor][5] and [log date remapper][6]:
+
+1. Go to **Logs > Configuration**.
+
+2. In **Pipelines**, hover over **Preprocessing for JSON logs** and click the pencil icon.
+
+3. Remove `timestamp` from the reserved attribute mapping list because the attribute is not being parsed as the official timestamp of the log during preprocessing. 
+
+{{< img src="logs/troubleshooting/preprocessing_json_timestamp.png" alt="Preprocessing for JSON logs with timestamp attribute" style="width:90%" >}}
+
+2. Set up the [arithmetic processor][5] so that the formula multiples your timestamp by 1000 to convert it to milliseconds. The formula's result is a new attribute. 
+
+3. Set up the [log date remapper][6] to use the new attribute as the official timestamp.
+
+Go to [Logs Explorer][2] to see new JSON logs with their mapped timestamp.
+
+[1]: /help/
+[2]: https://app.datadoghq.com/logs
+[3]: /logs/log_configuration/indexes/#set-daily-quota
+[4]: /logs/log_configuration/pipelines/?tab=date#date-attribute
+[5]: /logs/log_configuration/processors/?tab=ui#arithmetic-processor
+[6]: /logs/log_configuration/processors/?tab=ui#log-date-remapper
