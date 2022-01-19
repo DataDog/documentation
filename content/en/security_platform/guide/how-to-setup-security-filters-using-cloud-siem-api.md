@@ -3,6 +3,8 @@ title: Security Filters with the Cloud SIEM API
 kind: guide
 aliases:
   - /security_monitoring/guide/how-to-setup-security-filters-using-security-monitoring-api/
+  - /security_platform/guide/how-to-setup-security-filters-using-security-monitoring-api/
+  - /security_monitoring/guide/how-to-setup-security-filters-using-cloud-siem-api/
   - /cloud_siem/guide/how-to-setup-security-filters-using-security-monitoring-api/
 ---
 
