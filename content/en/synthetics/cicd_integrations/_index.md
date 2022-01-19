@@ -62,7 +62,7 @@ Use the API endpoints to quickly verify that a new deployment does not introduce
 
 ### Trigger tests from CI/CD pipelines
 
-The test triggering endpoint supports up to 50 tests in one request.
+The test triggering endpoint supports up to 100 tests in one request.
 
 * **Endpoint**: `https://api.{{< region-param key="dd_site" >}}/api/v1/synthetics/tests/trigger/ci`
 * **Method**: `POST`
