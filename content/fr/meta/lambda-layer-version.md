@@ -1,5 +1,5 @@
 ---
-title: Derniere version de la couche Lambda
+title: Derniére version de la couche Lambda
 url: /meta/latest-lambda-layer-version.json
 outputs:
   - json
