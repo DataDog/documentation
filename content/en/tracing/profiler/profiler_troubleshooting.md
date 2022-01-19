@@ -246,13 +246,13 @@ Other native profiling tools may contribute to the same limit.
 
 ### "\<WARNING\> Failure to establish connection"
 
-This error usually means that the profiler is unable to connect to the Datadog agent. You can use [configuration logging][3] to identify the precise combination of hostname/port used by the profiler for uploads, as well as the content of the error message, to review the active configuration. See the [getting started][4] page for details on profiler input parameters and default values.
+This error usually means that the profiler is unable to connect to the Datadog agent. You can enable [configuration logging][3] to identify the precise combination of hostname/port used by the profiler for uploads. Additionally, the content of the error message may relay the exact hostname and port used. Compare these values to your agent configuration. See the [getting started][4] page for details on profiler input parameters and default values.
 
 ## Profiles are empty or sparse
 
-If the profiles associated to your service in the profile search page are empty ("no CPU time reported") or contain very few frames, this may be the expected behavior of the profiler. The profiler only activates when the instrumented application is scheduled on the CPU. On the other hand, applications may be predominately off-CPU for many reasons, such as low user load or high application wait time.
+Your profiles may be empty ("No CPU time reported") or contain few frames. Sometimes this is caused when applications have poor symbolization information. This may also be expected--the profiler only activates when the instrumented application is scheduled on the CPU. On the other hand, applications may be predominately off-CPU for many reasons, such as low user load or high application wait time.
 
-If the root of your profile (the binary name) shows a significant amount of CPU time, but few frames, your application may be prone to poor profiling results. There are many reasons why this may happen.  Consider the following:
+The root of your profile is the frame annotated with the application name in parentheses. If this frame shows a significant amount of CPU time, but no frames, your application may be prone to poor profiling fidelity. There are many reasons why this may happen. Consider the following:
 - Stripped binaries will not have symbols available. Try using a non-stripped binary or a non-minified container image.
 - Certain applications and libraries benefit from their debug packages being installed. This is only true for services installed through your repo's package manager or similar.
 
