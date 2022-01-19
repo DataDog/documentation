@@ -101,18 +101,18 @@ You can set profiler parameters either as commandline parameters to the profiler
 
 | Environment variable         | Longname    | Shortname | Default   | Description                                                                                                                     |
 |------------------------------|-------------|-----------|-----------|---------------------------------------------------------------------------------------------------------------------------------|
-| DD_ENV                       | environment | E         |           | The Datadog [environment][4] name, for example `prod` or `staging`.                                                            |
-| DD_SERVICE                   | service     | S         | myservice | The Datadog [service][5] name.                                                                                                 |
-| DD_AGENT_HOST                | host        | H         | localhost | The hostname for the Datadog agent.                                                                                            |
-| DD_TRACE_AGENT_PORT          | port        | P         | 8126      | The Datadog agent listening port.                                                                                              |
-| DD_TRACE_AGENT_URL           | url         | U         |           | `https://<hostname>:<port>` overrides other agent host/port settings.                                                          |
-| DD_TAGS                      | tags        | T         |           | Tags to apply to an uploaded profile. Must be a list of `<key>:<value>` separated by commas, such as: `layer:api,team:intake`. |
-| DD_PROFILING_NATIVENICE      | nice        | i         |           | Sets the nice level of the profiler without affecting the instrumented processes.                                              |
-| DD_PROFILING_NATIVEPRINTARGS | printargs   | a         | no        | Whether or not to log profiler configuration parameters.                                                                       |
-| DD_PROFILING_NATIVELOGMODE   | logmode     | o         | stdout    | How to emit profiler logs. See the section on logging for details.                                                            |
-| DD_PROFILING_NATIVELOGLEVEL  | loglevel    | l         | warn      | Determines log verbosity.                                                                                                      |
-| DD_PROFILINE_NATIVETARGET    | pid         | p         |           | Engages pidmode. See the section on pidmode for details.                                                                      |
-| DD_PROFILING_NATIVEGLOBAL    | global      | g         | no        | Engages globalmode. See the section on globalmode for details. Overrides --pid.                                              |
+| DD_ENV                       | environment | E         |           | The Datadog [environment][4] name, for example `prod` or `staging`.                                                             |
+| DD_SERVICE                   | service     | S         | myservice | The Datadog [service][5] name.                                                                                                  |
+| DD_AGENT_HOST                | host        | H         | localhost | The hostname for the Datadog agent.                                                                                             |
+| DD_TRACE_AGENT_PORT          | port        | P         | 8126      | The Datadog agent listening port.                                                                                               |
+| DD_TRACE_AGENT_URL           | url         | U         |           | `https://<hostname>:<port>` overrides other agent host/port settings.                                                           |
+| DD_TAGS                      | tags        | T         |           | Tags to apply to an uploaded profile. Must be a list of `<key>:<value>` separated by commas, such as: `layer:api,team:intake`.  |
+| DD_PROFILING_NATIVENICE      | nice        | i         |           | Sets the nice level of the profiler without affecting the instrumented processes.                                               |
+| DD_PROFILING_NATIVEPRINTARGS | printargs   | a         | no        | Whether or not to log profiler configuration parameters.                                                                        |
+| DD_PROFILING_NATIVELOGMODE   | logmode     | o         | stdout    | How to emit profiler logs. See the section on logging for details.                                                              |
+| DD_PROFILING_NATIVELOGLEVEL  | loglevel    | l         | warn      | Determines log verbosity.                                                                                                       |
+| DD_PROFILINE_NATIVETARGET    | pid         | p         |           | Engages pidmode. See the section on pidmode for details.                                                                        |
+| DD_PROFILING_NATIVEGLOBAL    | global      | g         | no        | Engages globalmode. See the section on globalmode for details. Overrides --pid.                                                 |
 
 When passing commandline arguments, the profiler adheres to the convention by which longnames are preceeded by two dashes and shortnames by a single dash. For example, `--service myservice` versus `-S myservice`.
 
