@@ -95,6 +95,16 @@ exec ddprof --service "<SERVICE_NAME>" --vername "<APPLICATION_VERSION"> myapp -
 
 4. A minute or two after starting your application, your profiles will show up on the [Datadog APM > Profiler page][3].
 
+## Configuration
+
+You can set profiler parameters either as commandline parameters to the profiler, or using environment variables.  If both are provided, the parameter is preferred.
+
+| Environment variable | Longname      | Shortname | Default   | Description                                                        |
+|----------------------|---------------|-----------|-----------|--------------------------------------------------------------------|
+| DD_ENV               | --environment | -E        |           | The Datadog [environment][8] name, for example `prod` or `staging` |
+| DD_SERVICE           | --service     | -S        | myservice |                                                                    |
+| DD_AGENT_HOST        | --host        | -H        | localhost | The hostname for the Datadog agent                                 |
+
 ## Not sure what to do next?
 
 The [Getting Started with Profiler][4] guide takes a sample service with a performance problem and shows you how to use Continuous Profiler to understand and fix the problem.
