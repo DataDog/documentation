@@ -17,7 +17,7 @@ further_reading:
 
 ## Compatibility
 
-The Ruby Datadog Trace library is open source - view the [Github repository][1] for more information.
+The Ruby Datadog Trace library is open source - view the [GitHub repository][1] for more information.
 
 **Supported Ruby interpreters**:
 

@@ -8,7 +8,7 @@ further_reading:
     tag: Documentation
     text: Consulter les principales catégories de données envoyées à Datadog
 ---
-<div class="alert alert-info">Cette page est consacrée à la sécurité de Datadog ; si vous recherchez le produit Security Monitoring product, consultez la section <a href="/security_monitoring" target="_blank"></a>.</div>
+<div class="alert alert-info">Cette page est consacrée à la sécurité de Datadog ; si vous recherchez le produit Cloud SIEM product, consultez la section <a href="/security_platform/cloud_siem" target="_blank"></a>.</div>
 
 Cet article fait partie d'une [série d'articles sur la sécurité des données][1].
 

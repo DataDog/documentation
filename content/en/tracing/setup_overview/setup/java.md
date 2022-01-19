@@ -280,7 +280,7 @@ Your application version (for example, 2.5, 202003181415, 1.3-alpha). Available 
 
 `dd.logs.injection`
 : **Environment Variable**: `DD_LOGS_INJECTION`<br>
-**Default**: `false`<br>
+**Default**: `true`<br>
 Enabled automatic MDC key injection for Datadog trace and span IDs. See [Advanced Usage][7] for details.
 
 `dd.trace.config`

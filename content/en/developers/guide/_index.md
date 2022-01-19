@@ -6,6 +6,7 @@ private: true
 
 {{< whatsnext desc="General:" >}}
     {{< nextlink href="developers/guide/data-collection-resolution-retention" tag="General" >}}Datadog Data Collection, Resolution, and Retention{{< /nextlink >}}
+    {{< nextlink href="developers/guide/creating-a-jmx-integration" tag="Java">}}Creating a JMX integration{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Useful Guides to interact with Datadog APIs:" >}}

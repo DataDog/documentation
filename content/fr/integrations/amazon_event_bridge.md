@@ -69,7 +69,7 @@ Configurez de nouveaux canaux de notification sortante pour les monitors et les 
 * exécuter des scripts SSH à distance ;
 * appliquer des mises à jour Windows ou installer des applications.
 
-La liste complète des ressources que vous pouvez cibler est disponible sur le [site Web AWS][8].
+La liste complète des ressources pouvant être ciblées est disponible sur le [site d'AWS][8].
 
 L'exemple ci-dessous montre comment envoyer un snapshot pour déclencher ce processus. Une fois déclenché, vous pouvez spécifier une règle de réception des actions dans AWS.
 

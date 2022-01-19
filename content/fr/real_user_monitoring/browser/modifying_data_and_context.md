@@ -104,7 +104,7 @@ Le SDK RUM enregistre les événements RUM et renseigne les attributs principaux
 - Modifier vos événements RUM pour en modifier le contenu ou pour effacer les séquences sensibles (consultez la [liste des propriétés modifiables](#modifier-le-contenu-d-un-evenement-rum))
 - Ignorer des événements RUM sélectionnés
 
-À partir de la [version 2.13.0][4], `beforeSend` prend deux arguments : `event`, qui fait référence à l'événement généré par le SDK RUM, et `context`, qui fait référence au contexte qui a déclenché la création de l'événement RUM. 
+À partir de la [version 2.13.0][4], `beforeSend` prend deux arguments : `event`, qui fait référence à l'événement généré par le SDK RUM, et `context`, qui fait référence au contexte qui a déclenché la création de l'événement RUM.
 
 ```javascript
 function beforeSend(event, context)
@@ -423,7 +423,7 @@ datadogRum.init({
    h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
    d=o.createElement(u);d.async=1;d.src=n
    n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
-})(window,document,'script','https://www.datadoghq-browser-agent.com/datadog-rum.js','DD_RUM')
+})(window,document,'script','https://www.datadoghq-browser-agent.com/datadog-rum-v4.js','DD_RUM')
   DD_RUM.onReady(function() {
     DD_RUM.init({
         clientToken: '<TOKEN_CLIENT>',

@@ -58,7 +58,7 @@ The Datadog extension for Azure App Service provides additional monitoring capab
 
 3. The Datadog .NET APM extension supports the following .NET runtimes in both x64 and x86 architectures when running on Windows OS (AAS does not yet support extensions on Linux). For more details about automatically instrumented libraries, see the [Tracer documentation][2].
 
-    - .NET Framework 4.5 and later
+    - .NET Framework 4.6.1 and later
     - .NET Core 2.1
     - .NET Core 2.2 (Microsoft support ended 2019-12-23)
     - .NET Core 3.0 (Microsoft support ended 2020-03-03)
@@ -206,7 +206,7 @@ Also, set `DATADOG_SITE` to your [Datadog site][3]. `DATADOG_SITE` defaults to `
 The update script applies to an entire resource group. This script updates every Web App or Function App that has the extension installed. App Service apps that do not have the Datadog extension installed are not affected.
 
 1. Open the Azure CLI or Azure Cloud Shell.
-2. Download the installation script using the following command:
+2. Download the update script using the following command:
 
     ```
     $baseUri="https://raw.githubusercontent.com/DataDog/datadog-aas-extension/master/management-scripts/extension"; Invoke-WebRequest -Uri "$baseUri/update-all-site-extensions.ps1" -OutFile "update-all-site-extensions.ps1"; Invoke-WebRequest -Uri "$baseUri/install-latest-extension.ps1" -OutFile "install-latest-extension.ps1"

@@ -1,50 +1,92 @@
 ---
+"app_id": "nerdvision"
+"app_uuid": "dace6217-8e5b-4b96-ae65-b0b58d44cc3e"
 "assets":
   "dashboards":
     "NerdVision Overview": assets/dashboards/overview.json
-  "metrics_metadata": metadata.csv
-  "monitors": {}
-  "saved_views": {}
-  "service_checks": assets/service_checks.json
+  "integration":
+    "configuration": {}
+    "events":
+      "creates_events": true
+    "metrics":
+      "check": nerdvision.clients
+      "metadata_path": metadata.csv
+      "prefix": nerdvision.
+    "service_checks":
+      "metadata_path": assets/service_checks.json
+    "source_type_name": NerdVision
 "author":
   "homepage": "https://nerd.vision"
   "name": NerdVision
+  "sales_email": support@nerd.vision
+  "support_email": support@nerd.vision
+  "vendor_id": nerdvision
 "categories":
 - marketplace
+- containers
 - log collection
 - monitoring
-"creates_events": true
-"ddtype": "crawler"
+"classifier_tags":
+- "Supported OS::Linux"
+- "Supported OS::Mac OS"
+- "Supported OS::Windows"
+- "Category::Marketplace"
+- "Category::Containers"
+- "Category::Log Collection"
+- "Category::Monitoring"
+- "Offering::Software License"
+- "Offering::Integration"
 "dependencies": []
-"display_name": "NerdVision"
+"display_on_public_website": true
 "draft": false
 "git_integration_title": "nerdvision"
-"guid": "5f778314-2ff5-4601-ac36-aa2955c0b4d4"
 "integration_id": "nerdvision"
 "integration_title": "NerdVision"
+"integration_version": ""
 "is_public": true
 "kind": "integration"
-"maintainer": "support@nerd.vision"
-"manifest_version": "1.0.0"
-"metric_prefix": "nerdvision."
-"metric_to_check": "nerdvision.clients"
+"legal_terms":
+  "eula": assets/eula.pdf
+"manifest_version": "2.0.0"
 "name": "nerdvision"
+"oauth": {}
 "pricing":
 - "billing_type": tag_count
+  "includes_assets": true
   "metric": datadog.marketplace.nerdvision.clients
+  "product_id": clients
+  "short_description": Outil de debugging et de collecte de données.
   "tag": hostname
-  "unit_label": Clients
+  "unit_label": client
   "unit_price": !!int "2"
 "public_title": "NerdVision"
-"short_description": "Plateforme de debugging en temps réel pour .NET, Java, Python et Node."
-"support": "partner"
+"short_description": "Outil de debugging en temps réel pour .NET, Java, Python et Node"
 "supported_os":
 - linux
-- mac_os
+- mac os
 - windows
-"terms":
-  "eula": assets/eula.pdf
-  "legal_email": support@nerd.vision
+"tile":
+  "configuration": "README.md#Setup"
+  "description": Outil de debugging en temps réel pour .NET, Java, Python et Node
+  "media":
+  - "caption": Outil de debugging interactif dans NerdVision.
+    "image_url": images/debugger.png
+    "media_type": image
+  - "caption": Liste des erreurs capturées dans NerdVision.
+    "image_url": images/error_list.png
+    "media_type": image
+  - "caption": Dashboard NerdVision dans Datadog.
+    "image_url": images/screenshot_datadog.png
+    "media_type": image
+  - "caption": Détails d'un snapshot dans NerdVision.
+    "image_url": images/snapshot_details.png
+    "media_type": image
+  - "caption": Liste des snapshots dans NerdVision.
+    "image_url": images/snapshot_list.png
+    "media_type": image
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": NerdVision
 ---
 
 
@@ -52,8 +94,6 @@
 ## Présentation
 
 ### Qu'est-ce que NerdVision ?
-
-{{< img src="marketplace/nerdvision/images/screenshot.png" alt="nerdvision" >}}
 
 NerdVision est une plateforme de debugging en temps réel qui vous permet d'analyser en profondeur votre application à tout moment. NerdVision vous offre la possibilité d'installer des tracepoints dans votre application afin de recueillir des données sur son état, sans redémarrage ni modification du code.
 
@@ -67,19 +107,13 @@ Utilisez des conditions pour faire en sorte que votre tracepoint se déclenche u
 
 Le dashboard Datadog vous permet de déterminer à quels endroits dans votre code les tracepoints se déclenchent de manière à identifier les principales sources d'activité de debugging.
 
-{{< img src="marketplace/nerdvision/images/screenshot_datadog.png" alt="datadog" >}}
-
 ### Événements
 
 Chaque tracepoint déclenché est envoyé à Datadog en tant qu'événement, avec les tags appropriés et un lien pour visualiser les données dans NerdVision. Les tracepoints vous permettent de récupérer la stack complète ainsi que les variables actives au moment où le tracepoint s'est déclenché.
 
-{{< img src="marketplace/nerdvision/images/datadog_event.png" alt="datadog" >}}
-
 ### Logs
 
 Grâce au logging dynamique, vous pouvez injecter de nouveaux messages de log à n'importe quel endroit dans votre code pour ajouter les données qui ont été manquées. Lorsqu'un message de log se déclenche, il est synchronisé avec Datadog dès son traitement par NerdVision.
-
-{{< img src="marketplace/nerdvision/images/datadog_log.png" alt="datadog" >}}
 
 ### Métriques
 

@@ -86,7 +86,7 @@ Run the `namei` command to obtain more information about the file permissions:
  -rw-r----- error.log
 ```
 
-In this example, the `application` directory is not executable, therefore the Agent cannot list its files. Furthermore, the Agent does not have read permissions on the `error.log` file.
+In this example, the `application` directory is not executable by the Agent, therefore the Agent cannot list its files. Furthermore, the Agent does not have read permissions on the `error.log` file.
 Add the missing permissions via the [chmod command][6].
 
 {{< img src="logs/agent-log-permission-ok.png" alt="Permission OK"  style="width:70%;">}}

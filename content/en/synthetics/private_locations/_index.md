@@ -155,15 +155,17 @@ docker run --rm datadog/synthetics-private-location-worker --help
 
 ### View your configuration file
 
-After adding the appropriate options to your private location configuration file, you can copy paste the file to your working directory.
+After adding the appropriate options to your private location configuration file, you can copy and paste this file into your working directory. The configuration file contains secrets for private location authentication, test configuration decryption, and test result encryption. 
 
 {{< img src="synthetics/private_locations/pl_view_file.png" alt="Configure reserved IPs"  style="width:100%;">}}
 
-**Note**: The configuration file contains secrets for private location authentication, test configuration decryption, and test result encryption. Datadog does not store the secrets, so store them locally before leaving the Private Locations screen. **You need to be able to reference these secrets again if you decide to add more workers, or to install workers on another host.**
+Datadog does not store your secrets, so store them locally before clicking **View Installation Instructions**. 
+
+**Note:** You need to be able to reference these secrets again if you decide to add more workers or install workers on another host.
 
 ### Install your private location
 
-**Note:** If you wish to use environment variables in your task definition, you can use the following environment variables: `DATADOG_API_KEY`, `DATADOG_ACCESS_KEY`, `DATADOG_SECRET_ACCESS_KEY`, and`DATADOG_PRIVATE_KEY`.
+You can use `DATADOG_API_KEY`, `DATADOG_ACCESS_KEY`, `DATADOG_SECRET_ACCESS_KEY`, and `DATADOG_PRIVATE_KEY` environment variables in your task definition.
 
 Launch your private location on:
 
@@ -177,7 +179,7 @@ Run this command to boot your private location worker by mounting your configura
 docker run --rm -v $PWD/<MY_WORKER_CONFIG_FILE_NAME>.json:/etc/datadog/synthetics-check-runner.json datadog/synthetics-private-location-worker:latest
 ```
 
-**Note:** If you blocked reserved IPs, make sure to add the `NET_ADMIN` [Linux capabilities][1] to your private location container.
+**Note:** If you have blocked reserved IPs, add the `NET_ADMIN` [Linux capabilities][1] to your private location container.
 
 This command starts a Docker container and makes your private location ready to run tests. **Datadog recommends running the container in detached mode with proper restart policy.**
 
@@ -197,13 +199,13 @@ This command starts a Docker container and makes your private location ready to 
             volumes:
                 - PATH_TO_PRIVATE_LOCATION_CONFIG_FILE:/etc/datadog/synthetics-check-runner.json
     ```
-    **Note:** If you blocked reserved IPs, make sure to add the `NET_ADMIN` [Linux capabilities][1] to your private location container.
+    **Note:** If you have blocked reserved IPs, add the `NET_ADMIN` [Linux capabilities][1] to your private location container.
 
 2. Start your container with:
 
-```shell
-docker-compose -f docker-compose.yml up
-```
+    ```shell
+    docker-compose -f docker-compose.yml up
+    ```
 
 [1]: https://docs.docker.com/engine/reference/run/#runtime-privilege-and-linux-capabilities
 
@@ -211,13 +213,15 @@ docker-compose -f docker-compose.yml up
 
 {{% tab "Kubernetes Deployment" %}}
 
-1. Create a Kubernetes ConfigMap with the previously created JSON file by executing the following:
+To deploy the private locations worker in a secure manner, set up and mount a Kubernetes Secret resource in the container under `/etc/datadog/synthetics-check-runner.json`.
+
+1. Create a Kubernetes Secret with the previously created JSON file by executing the following:
 
     ```shell
-    kubectl create configmap private-location-worker-config --from-file=<MY_WORKER_CONFIG_FILE_NAME>.json
+    kubectl create secret generic private-location-worker-config --from-file=<MY_WORKER_CONFIG_FILE_NAME>.json
     ```
 
-2. Take advantage of deployments to describe the desired state associated with your private locations. Create the following `private-location-worker-deployment.yaml` file:
+2. Use deployments to describe the desired state associated with your private locations. Create the following `private-location-worker-deployment.yaml` file:
 
     ```yaml
     apiVersion: apps/v1
@@ -244,11 +248,11 @@ docker-compose -f docker-compose.yml up
               subPath: <MY_WORKER_CONFIG_FILE_NAME>
           volumes:
           - name: worker-config
-            configMap:
-              name: private-location-worker-config
+            secret:
+              secretName: private-location-worker-config
     ```
 
-    **Note:** If you blocked reserved IPs, make sure to add the `NET_ADMIN` [Linux capabilities][1] to your private location container.
+    **Note:** If you have blocked reserved IPs, add the `NET_ADMIN` [Linux capabilities][1] to your private location container.
 
 3. Apply the configuration:
 
@@ -262,6 +266,10 @@ docker-compose -f docker-compose.yml up
 
 {{% tab "Helm Chart" %}}
 
+You can set environment variables in your configuration parameters that point to secrets you have already configured. To create environment variables with secrets, see the [Kubernetes documentation][3]. 
+
+Alternatively:
+
 1. Add the [Datadog Synthetics Private Location][1] to your Helm repositories:
 
     ```shell
@@ -269,22 +277,23 @@ docker-compose -f docker-compose.yml up
     helm repo update
     ```
 
-2. Install the chart with the release name `<RELEASE_NAME>`, using the previously created JSON file by executing the following:
+2. Install the chart with the release name `<RELEASE_NAME>` by using the previously created JSON file:
 
     ```shell
     helm install <RELEASE_NAME> datadog/synthetics-private-location --set-file configFile=<MY_WORKER_CONFIG_FILE_NAME>.json
     ```
 
-    **Note:** If you blocked reserved IPs, make sure to add the `NET_ADMIN` [Linux capabilities][2] to your private location container.
+**Note:** If you have blocked reserved IPs, add the `NET_ADMIN` [Linux capabilities][2] to your private location container.
 
 [1]: https://github.com/DataDog/helm-charts/tree/master/charts/synthetics-private-location
 [2]: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/
+[3]: https://kubernetes.io/docs/tasks/inject-data-application/distribute-credentials-secure/#define-container-environment-variables-using-secret-data
 
 {{% /tab %}}
 
 {{% tab "ECS" %}}
 
-Create a new EC2 task definition matching the below. Make sure to replace each parameter by the corresponding value found in your previously generated private location configuration file:
+Create a new EC2 task definition that matches the following. Replace each parameter with the corresponding value found in your previously generated private location configuration file:
 
 ```yaml
 {
@@ -314,7 +323,7 @@ Create a new EC2 task definition matching the below. Make sure to replace each p
 }
 ```
 
-**Note:** If you blocked reserved IPs, make sure to configure a [linuxParameters][1] to grant `NET_ADMIN` capabilities to your private location containers.
+**Note:** If you have blocked reserved IPs, configure a [linuxParameters][1] to grant `NET_ADMIN` capabilities to your private location containers.
 
 [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_LinuxParameters.html
 
@@ -322,7 +331,7 @@ Create a new EC2 task definition matching the below. Make sure to replace each p
 
 {{% tab "Fargate" %}}
 
-Create a new Fargate task definition matching the below. Make sure to replace each parameter by the corresponding value found in your previously generated private location configuration file:
+Create a new Fargate task definition that matches the following. Replace each parameter with the corresponding value found in your previously generated private location configuration file:
 
 ```yaml
 {
@@ -353,11 +362,7 @@ Create a new Fargate task definition matching the below. Make sure to replace ea
 }
 ```
 
-**Notes:** 
-
-If you wish to use environment variables in your task definition, note that Fargate Private Location deployment uses different environment variables than other parts of Datadog. For Fargate, use the following environment variables: `DATADOG_API_KEY`, `DATADOG_ACCESS_KEY`, `DATADOG_SECRET_ACCESS_KEY`, `DATADOG_PRIVATE_KEY`.
-
-The private location firewall option is not supported on AWS Fargate—the `enableDefaultBlockedIpRanges` parameter can consequently not be set to `true`.
+**Note:** Because the private location firewall option is not supported on AWS Fargate, the `enableDefaultBlockedIpRanges` parameter cannot be set to `true`.
 
 {{% /tab %}}
 
@@ -365,13 +370,13 @@ The private location firewall option is not supported on AWS Fargate—the `enab
 
 Because Datadog already integrates with Kubernetes and AWS, it is ready-made to monitor EKS.
 
-1. Create a Kubernetes ConfigMap with the previously created JSON file by executing the following:
+1. Create a Kubernetes Secret with the previously created JSON file by executing the following:
 
     ```shell
-    kubectl create configmap private-location-worker-config --from-file=<MY_WORKER_CONFIG_FILE_NAME>.json
+    kubectl create secret generic private-location-worker-config --from-file=<MY_WORKER_CONFIG_FILE_NAME>.json
     ```
 
-2. Take advantage of deployments to describe the desired state associated with your private locations. Create the following `private-location-worker-deployment.yaml` file:
+2. Use deployments to describe the desired state associated with your private locations. Create the following `private-location-worker-deployment.yaml` file:
 
     ```yaml
     apiVersion: apps/v1
@@ -402,7 +407,7 @@ Because Datadog already integrates with Kubernetes and AWS, it is ready-made to 
               name: private-location-worker-config
     ```
 
-    **Note:** If you blocked reserved IPs, make sure to configure a security context to grant `NET_ADMIN` [Linux capabilities][1] to your private location containers.
+    **Note:** If you have blocked reserved IPs, configure a security context to grant `NET_ADMIN` [Linux capabilities][1] to your private location containers.
 
 3. Apply the configuration:
 
@@ -528,15 +533,15 @@ livenessProbe:
 
 ### Test your internal endpoint
 
-Once at least one private location container starts reporting to Datadog the private location status is set to green:
+Once at least one private location container starts reporting to Datadog, the private location status is set to green:
 
 {{< img src="synthetics/private_locations/pl_reporting.png" alt="Private location reporting"  style="width:100%;">}}
 
-You can then start testing your first internal endpoint by launching a fast test on one of your internal endpoints and see if you get the expected response:
+You can then start testing your first internal endpoint by launching a fast test on one of your internal endpoints to see if you get the expected response:
 
 {{< img src="synthetics/private_locations/pl_fast_test.mp4" alt="Fast test on private location" video="true" width="100%">}}
 
-**Note::** Datadog only sends outbound traffic from your private location, no inbound traffic is transmitted.
+**Note:** Datadog only sends outbound traffic from your private location, no inbound traffic is transmitted.
 
 ## Launch Synthetic tests from your private location
 
@@ -564,13 +569,11 @@ While you initially add resources that are consistent with the number and type o
 
 For more information, see [Private Location Monitoring][19].
 
-
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /synthetics/cicd_testing
+[1]: /synthetics/cicd_integrations
 [2]: /synthetics/
 [3]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/synthetics-private-location-worker?pli=1
 [4]: https://docs.docker.com/engine/install/

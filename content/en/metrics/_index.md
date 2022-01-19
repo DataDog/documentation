@@ -23,6 +23,23 @@ aliases:
 
 Metrics are numerical values that can track anything about your environment over time, from latency to error rates to user signups.
 
+In Datadog, metric data is ingested and stored as data points with a value and timestamp:
+
+```text
+[ 17.82,  22:11:01 ]
+```
+
+A sequence of data points is stored as a time series:
+
+```text
+[ 17.82,  22:11:01 ]
+[  6.38,  22:11:12 ]
+[  2.87,  22:11:38 ]
+[  7.06,  22:12:00 ]
+```
+
+Any metrics with fractions of a second timestamps are rounded to the nearest second. If any points have the same timestamp, the latest point overwrites the previous ones.
+
 ### Why are metrics useful?
 
 Metrics provide an overall picture of your system. You can use them to assess the health of your environment at a glance. Visualize how quickly users are loading your website, or the average memory consumption of your servers, for instance. Once you identify a problem, you can use [logs][1] and [tracing][2] to further troubleshoot.
@@ -99,7 +116,7 @@ _Time aggregation_ and _space aggregation_ are two important components of any q
 
 #### Time aggregation
 
-Datadog stores a large volume of points, and in most cases it’s not possible to display all of them on a graph. There would be more datapoints than pixels. Datadog uses time aggregation to solve this problem by combining data points into time buckets. This is called a _rollup_. As the time interval you’ve defined for your query increases, the granularity of your data becomes coarser.
+Datadog stores a large volume of points, and in most cases it’s not possible to display all of them on a graph. There would be more datapoints than pixels. Datadog uses time aggregation to solve this problem by combining data points into time buckets.  For example, when examining four hours, data points are combined into two-minute buckets. This is called a _rollup_. As the time interval you’ve defined for your query increases, the granularity of your data becomes coarser.
 
 There are five aggregations you can apply to combine your data in each time bucket: sum, min, max, avg, and count.
 
