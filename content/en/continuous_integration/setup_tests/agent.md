@@ -180,7 +180,8 @@ To run the Agent in GitHub Actions, use the [Datadog Agent GitHub Action][1] `da
 jobs:
   test:
     steps:
-      - uses: datadog/agent-github-action@v1
+      - name: Start the Datadog Agent locally
+        uses: datadog/agent-github-action@v1
         with:
           api_key: ${{ secrets.DD_API_KEY }}
       - run: make test
