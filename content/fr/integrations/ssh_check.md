@@ -15,13 +15,14 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/ssh_check/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/ssh_check/README.md
 display_name: SSH
 draft: false
 git_integration_title: ssh_check
 guid: 4eb195ef-554f-4cc2-80af-8f286c631fa8
 integration_id: ssh
-integration_title: Check SSH
+integration_title: SSH
+integration_version: 2.1.1
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com
@@ -34,7 +35,7 @@ process_signatures:
   - sftp
   - sshd
   - 'sshd:'
-public_title: Intégration Datadog/Check SSH
+public_title: "Intégration\_SSH"
 short_description: Surveillez la connectivité SSH et la latence SFTP.
 support: core
 supported_os:
@@ -114,16 +115,13 @@ Consultez la [documentation relative aux modèles d'intégration Autodiscovery][
 Le check SSH ne comprend aucun événement.
 
 ### Checks de service
+{{< get-service-checks-from-git "ssh_check" >}}
 
-**ssh.can_connect** :<br>
-Renvoie `CRITICAL` si l'Agent ne parvient pas à ouvrir de session SSH. Si ce n'est pas le cas, renvoie `OK`.
-
-**sftp.can_connect** :<br>
-Renvoie `CRITICAL` si l'Agent ne parvient pas à ouvrir de session SFTP. Si ce n'est pas le cas, renvoie `OK`.
 
 ## Dépannage
 
 Besoin d'aide ? Contactez [l'assistance Datadog][3].
+
 
 
 [1]: https://app.datadoghq.com/account/settings#agent
