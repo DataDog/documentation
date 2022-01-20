@@ -5,23 +5,23 @@ kind: documentation
 
 If you experience unexpected behavior with Datadog Logs, there are a few common issues you can investigate and this guide may help resolve issues quickly. If you continue to have trouble, reach out to [Datadog support][1] for further assistance.
 
-## Why are my logs missing today?
+## Missing logs - logs daily quota reached
 
-You have not made any changes to your log configuration but [Logs Explorer][2] shows that logs are missing today. This may be happening because you have reached your daily quota.
+You have not made any changes to your log configuration, but the [Logs Explorer][2] shows that logs are missing for today. This may be happening because you have reached your daily quota.
 
 {{< img src="logs/troubleshooting/daily_quota_reached.png" alt="Daily quota reached" style="width:90%" >}}
 
-See [Set daily quota][3] for more information and on how to update or remove the quota.
+See [Set daily quota][3] for more information on setting up, updating or removing the quota.
 
 ## Unable to parse timestamp key from JSON logs
 
-If you are unable to convert the timestamp of JSON logs to a [recognized date format][4] before they are ingested into the UI, follow these steps to convert and map the timestamps using our [arithmetic processor][5] and [log date remapper][6]:
+If you are unable to convert the timestamp of JSON logs to a [recognized date format][4] before they are ingested into Datadog, follow these steps to convert and map the timestamps using Datadogs [arithmetic processor][5] and [log date remapper][6]:
 
 1. Go to **Logs > Configuration**.
 
-2. In **Pipelines**, hover over **Preprocessing for JSON logs** and click the pencil icon.
+2. In **Pipelines**, hover over **Preprocessing for JSON logs**, and click the pencil icon.
 
-3. Remove `timestamp` from the reserved attribute mapping list because the attribute is not being parsed as the official timestamp of the log during preprocessing. 
+3. Remove `timestamp` from the reserved attribute mapping list. The attribute is not being parsed as the official timestamp of the log during preprocessing. 
 
 {{< img src="logs/troubleshooting/preprocessing_json_timestamp.png" alt="Preprocessing for JSON logs with timestamp attribute" style="width:90%" >}}
 
