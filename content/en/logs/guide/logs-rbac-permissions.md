@@ -235,7 +235,7 @@ Roles are additive: if a user belongs to multiple roles, the data they have acce
 * If a user belongs to a role with log read data and also belongs to a role without log read data, then they have the permission to read data.
 * If a user is restricted to `service:sandbox` through one role, and is restricted to `env:prod` through another role, then the user can access all `env:prod` and `service:sandbox` logs.
 
-{{< img src="account_management/rbac/logs_rq_roles_combination.png" alt="Read Data Access"  style="width:70%;">}}
+{{< img src="account_management/rbac/logs_rq_roles_combination.png" alt="Read Data Access" style="width:70%;">}}
 
 
 {{< tabs >}}
