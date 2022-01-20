@@ -20,7 +20,7 @@ If running the Agent as a binary on a host, configure your Autodiscovery perimet
 
 Exclude containers from the Agent Autodiscovery perimeter with an exclude rule based on their `name`, `image`, or `kube_namespace` to collect **NO DATA** from these containers. If a container matches an exclude rule, it is not included unless it first matches an include rule.
 
-**Note**: Exclude rules support regexes, which are defined as a list of comma-separated strings.
+**Note**: Exclude rules support regexes, which are defined as a list of space-separated strings.
 
 **Note**: To exclude every container, you can use `name:.*`, `image:.*`, or `kube_namespace:.*`. Configuring `.*` without a `name:`, `image:`, or `kube_namespace:` prefix does not work.
 
@@ -140,7 +140,7 @@ container_exclude: [kube_namespace:<NAMESPACE>]
 
 Include containers from the Agent Autodiscovery perimeter with an include rule based on their `name` or `image` to collect data **ONLY** from those containers. If a container matches an include rule, it's always included in the Autodiscovery perimeter.
 
-**Note**: Include rules support regexes, and are defined as a list of comma-separated strings.
+**Note**: Include rules support regexes, and are defined as a list of space-separated strings.
 
 {{< tabs >}}
 {{% tab "Containerized Agent" %}}

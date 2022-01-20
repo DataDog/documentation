@@ -37,7 +37,7 @@ Choose the type of variable you want to create:
 {{< tabs >}}
 {{% tab "Specify Value" %}}
 
-1. Enter a **Variable Name**. Your variable name can only use uppercase letters, numbers, and underscores.
+1. Enter a **Variable Name**. Your variable name can only use uppercase letters, numbers, and underscores. This name should be unique across your global variables.
 2. Enter a **Description** for your variable (optional).
 3. Select **Tags** to associate with your variable (optional).
 4. Enter the **Value** you want to assign to your variable.

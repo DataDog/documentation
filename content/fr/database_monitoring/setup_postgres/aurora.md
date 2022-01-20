@@ -7,7 +7,7 @@ further_reading:
     tag: Documentation
     text: Intégation Postgres basique
 ---
-{{< site-region region="us3,us5,gov" >}}
+{{< site-region region="us5,gov" >}}
 <div class="alert alert-warning">La surveillance de bases de données n'est pas prise en charge pour ce site.</div>
 {{< /site-region >}}
 

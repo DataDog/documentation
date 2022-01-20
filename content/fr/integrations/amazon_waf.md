@@ -9,11 +9,13 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Surveillez le nombre de requêtes autorisées ou bloquées.
-doc_link: 'https://docs.datadoghq.com/integrations/amazon_waf/'
+doc_link: https://docs.datadoghq.com/integrations/amazon_waf/
 draft: false
 git_integration_title: amazon_waf
 has_logo: true
+integration_id: amazon-waf
 integration_title: Amazon Web Application Firewall
+integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'
@@ -42,15 +44,15 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon We
 
 ### Collecte de logs
 
-#### Activer les logs d'audit Web Application Firewall
+#### Logs d'audit
 
-Activez la journalisation pour obtenir des informations détaillées sur le trafic lié à vos contrôles d'accès Web (ACL Web) :
+Activez les logs d'audit Web Application Firewall pour obtenir des informations détaillées sur le trafic lié à vos contrôles d'accès Web (ACL Web) :
 
 1. Créez un `Amazon Kinesis Data Firehose` dont le nom commence par `aws-waf-logs-`.
 2. Dans la destination du `Amazon Kinesis Data Firehose`, choisissez `Amazon S3` et ajoutez le préfixe `waf`.
 3. Sélectionnez l'ACL Web souhaité et envoyez ses logs vers le Firehose que vous venez de créer ([étapes détaillées][5]).
 
-Les logs WAF sont alors recueillis et envoyés vers un compartiment S3.
+Les logs WAF sont recueillis et envoyés vers un compartiment S3.
 
 #### Envoyer des logs à Datadog
 
@@ -59,6 +61,8 @@ Les logs WAF sont alors recueillis et envoyés vers un compartiment S3.
    {{< img src="integrations/amazon_s3/s3_trigger_configuration.png" alt="Configuration déclencheur S3" popup="true" style="width:70%;">}}
    Configurez votre déclencheur en choisissant le compartiment S3 qui contient vos logs WAF et remplacez le type d'événement par `Object Created (All)`. Cliquez ensuite sur le bouton Add.
    {{< img src="integrations/amazon_s3/s3_lambda_trigger_configuration.png" alt="Configuration déclencheur Lambda S3" popup="true" style="width:70%;">}}
+
+**Remarque** : le Forwarder Lambda de Datadog convertit automatiquement les tableaux d'objets imbriqués dans les logs WAF au format `key:value` pour une plus grande facilité d'utilisation.
 
 ## Données collectées
 

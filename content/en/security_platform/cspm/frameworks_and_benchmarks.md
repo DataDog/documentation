@@ -28,7 +28,7 @@ Each [OOTB rule][1] maps to one or more controls within a compliance standard or
 - [HIPAA][6]
 - [GDPR][7]
 
-*To pass the Monitoring Section of the [CIS AWS Foundations benchmark][2], you **must** enable [Security Monitoring][8] and forward [Cloudtrail logs to Datadog][9].
+*To pass the Monitoring Section of the [CIS AWS Foundations benchmark][2], you **must** enable [Cloud SIEM][8] and forward [Cloudtrail logs to Datadog][9].
 
 **Some [CIS Kubernetes Benchmark][3] rules only apply to self-hosted Kubernetes clusters.
 
@@ -70,7 +70,7 @@ In the “Notify” section, configure zero or more [notification targets][7] f
 [5]: https://www.aicpa.org/interestareas/frc/assuranceadvisoryservices/aicpasoc2report.html
 [6]: https://www.hhs.gov/hipaa/index.html
 [7]: https://gdpr.eu/
-[8]: /security_platform/security_monitoring/
+[8]: /security_platform/cloud_siem/
 [9]: /integrations/amazon_cloudtrail/
 [10]: https://app.datadoghq.com/security/configuration/rules/
 [11]: /integrations/slack/

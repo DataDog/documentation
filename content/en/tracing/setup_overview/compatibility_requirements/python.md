@@ -13,7 +13,7 @@ further_reading:
       text: 'Instrument Your Application'
 ---
 
-The Python Datadog Trace library is open source. View the [Github repository][1] for more information.
+The Python Datadog Trace library is open source. View the [GitHub repository][1] for more information.
 
 Python versions `2.7+` and `3.5+` are supported in the latest version of the tracer. Python `3.4` is supported in versions `0.35.x` and below of the Python tracer.
 

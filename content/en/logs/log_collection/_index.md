@@ -24,14 +24,6 @@ further_reading:
   text: "Logging Without Limits*"
 ---
 
-{{< site-region region="us3" >}}
-
-<div class="alert alert-warning">
-Log collection is not supported for the Datadog US3 site. For more information, contact <a href="https://help.datadoghq.com/hc/en-us">Support</a>.
-</div>
-
-{{< /site-region >}}
-
 ## Overview
 
 Choose a configuration option below to begin ingesting your logs. If you are already using a log-shipper daemon, refer to the dedicated documentation for [Rsyslog][1], [Syslog-ng][2], [NXlog][3], [FluentD][4], or [Logstash][5].
@@ -119,42 +111,58 @@ Consult the [list of available supported integrations][6].
 
 Datadog provides logging endpoints for both SSL-encrypted connections and unencrypted connections. Use the encrypted endpoint when possible. The Datadog Agent uses the encrypted endpoint to send logs to Datadog. More information is available in the [Datadog security documentation][6].
 
-Endpoints that can be used to send logs to Datadog, for SSL-encrypted connections:
+#### TCP endpoints
 
+{{< site-region region="us,eu,us5,gov" >}}
 
-`{{< region-param key="tcp_endpoint" code="true" >}}`
-: **Port**: `{{< region-param key="tcp_endpoint_port_ssl" code="true" >}}` <br>
+{{< region-param key="tcp_endpoint" code="true" >}}
+**Port**: {{< region-param key="tcp_endpoint_port_ssl" code="true" >}} <br>
 Used by the Agent to send logs in protobuf format over an SSL-encrypted TCP connection.
 
-`{{< region-param key="agent_http_endpoint" code="true" >}}`
-: **Port**: `{{< region-param key="agent_http_port" code="true" >}}`<br>
-Used by the Agent to send logs in JSON format over HTTPS. See the [Host Agent Log collection documentation][7].
+{{< /site-region >}}
 
-`{{< region-param key="http_endpoint" code="true" >}}`
-: **Port**: `{{< region-param key="http_port" code="true" >}}`<br>
-Used by custom forwarder to send logs in JSON or plain text format over HTTPS. See the [Logs HTTP API documentation][8].
-
-`{{< region-param key="web_integrations_endpoint" code="true" >}}`
-: **Port**: `{{< region-param key="web_integrations_port" code="true" >}}`<br>
+{{< region-param key="web_integrations_endpoint" code="true" >}}
+**Port**: {{< region-param key="web_integrations_port" code="true" >}}<br>
 Used by custom forwarders to send logs in raw, Syslog, or JSON format over an SSL-encrypted TCP connection.
 
-`{{< region-param key="lambda_endpoint" code="true" >}}`
-: **Port**: `{{< region-param key="lambda_port" code="true" >}}`<br>
+{{< site-region region="us,eu,us5,gov" >}}
+
+{{< region-param key="lambda_endpoint" code="true" >}}
+**Port**: {{< region-param key="lambda_port" code="true" >}}<br>
 Used by Lambda functions to send logs in raw, Syslog, or JSON format over an SSL-encrypted TCP connection.
 
-`{{< region-param key="lambda_http_endpoint" code="true" >}}`
-: **Port**: `{{< region-param key="lambda_http_port" code="true" >}}`<br>
-Used by Lambda functions to send logs in raw, Syslog, or JSON format over HTTPS.
+{{< /site-region >}}
 
-`{{< region-param key="functions_endpoint" code="true" >}}`
-: **Port**: `{{< region-param key="functions_port" code="true" >}}`<br>
+{{< site-region region="us,eu,us5,gov" >}}
+
+{{< region-param key="functions_endpoint" code="true" >}}
+**Port**: {{< region-param key="functions_port" code="true" >}}<br>
 Used by Azure functions to send logs in raw, Syslog, or JSON format over an SSL-encrypted TCP connection. **Note**: This endpoint may be useful with other cloud providers.
 
-Endpoints that can be used to send logs to Datadog, for unencrypted connections:
+{{< /site-region >}}
 
-`{{< region-param key="web_integrations_endpoint" code="true" >}}`
-: **Port**: `{{< region-param key="web_integrations_unencrypted_port" code="true" >}}`<br>
-Used by custom forwarders to send logs in raw, Syslog, or JSON format over an unencrypted TCP connection.
+{{< region-param key="web_integrations_endpoint" code="true" >}}
+**Port**: {{< region-param key="web_integrations_unencrypted_port" code="true" >}}<br>
+Used by custom forwarders to send logs in raw, Syslog, or JSON format over an **unencrypted TCP connection**.
+
+#### HTTPS endpoints
+
+{{< region-param key="agent_http_endpoint" code="true" >}}
+**Port**: {{< region-param key="agent_http_port" code="true" >}}<br>
+Used by the Agent to send logs in JSON format over HTTPS. See the [Host Agent Log collection documentation][7].
+
+{{< site-region region="us,eu,us5,gov" >}}
+
+{{< region-param key="http_endpoint" code="true" >}}
+**Port**: {{< region-param key="http_port" code="true" >}}<br>
+Used by custom forwarder to send logs in JSON or plain text format over HTTPS. See the [Logs HTTP API documentation][1].
+
+[1]: /api/v1/logs/#send-logs
+{{< /site-region >}}
+
+{{< region-param key="lambda_http_endpoint" code="true" >}}
+**Port**: {{< region-param key="lambda_http_port" code="true" >}}<br>
+Used by Lambda functions to send logs in raw, Syslog, or JSON format over HTTPS.
 
 ### Custom log forwarding
 
@@ -170,9 +178,16 @@ You can send logs to Datadog platform over HTTP. Refer to the [Datadog Log HTTP 
 {{% /tab %}}
 {{% tab "TCP" %}}
 
-{{< site-region region="us" >}}
+{{< site-region region="us,eu,us5,gov" >}}
 
-The secure TCP endpoint is `intake.logs.datadoghq.com 10516` (or port `10514` for insecure connections).
+Test it manually with telnet. A `<PAYLOAD>` in raw format could look like the following example.
+
+**Note**: Update the example with your [site][2]: {{< region-param key="agent_http_endpoint" code="true" >}} {{< region-param key="agent_http_port" code="true" >}}.
+
+```text
+telnet intake.logs.datadoghq.com 10514
+<DATADOG_API_KEY> Log sent directly via TCP
+```
 
 You must prefix the log entry with your [Datadog API Key][1], for example:
 
@@ -182,17 +197,6 @@ You must prefix the log entry with your [Datadog API Key][1], for example:
 
 **Note**: `<PAYLOAD>` can be in raw, Syslog, or JSON format.
 
-Test it manually with telnet. Example of `<PAYLOAD>` in raw format:
-
-```text
-telnet intake.logs.datadoghq.com 10514
-<DATADOG_API_KEY> Log sent directly via TCP
-```
-
-This produces the following result in your [live tail page][2]:
-
-{{< img src="logs/custom_log_telnet.png" alt="Custom telnet"  style="width:70%;">}}
-
 In case of a `<PAYLOAD>` in JSON format, Datadog automatically parses its attributes:
 
 ```text
@@ -200,50 +204,15 @@ telnet intake.logs.datadoghq.com 10514
 <DATADOG_API_KEY> {"message":"json formatted log", "ddtags":"env:my-env,user:my-user", "ddsource":"my-integration", "hostname":"my-hostname", "service":"my-service"}
 ```
 
-{{< img src="logs/custom_log_telnet_json_.png" alt="Custom telnet"  style="width:100%;">}}
-
-
-{{< /site-region >}}
-
-{{< site-region region="eu" >}}
-
-The secure TCP endpoint is `tcp-intake.logs.datadoghq.eu 443` (or port `1883` for insecure connections).
-
-You must prefix the log entry with your [Datadog API Key][1], for example:
-
-```text
-<DATADOG_API_KEY> <PAYLOAD>
-```
-
-**Note**: `<PAYLOAD>` can be in raw, Syslog, or JSON format.
-
-Test it manually with telnet. Example of `<PAYLOAD>` in raw format:
-
-```text
-telnet tcp-intake.logs.datadoghq.eu 443
-<DATADOG_API_KEY> Log sent directly via TCP
-```
-
-This produces the following result in your [live tail page][2]:
-
-{{< img src="logs/custom_log_telnet.png" alt="Custom telnet"  style="width:70%;">}}
-
-In case of a `<PAYLOAD>` in JSON format, Datadog automatically parses its attributes:
-
-```text
-telnet tcp-intake.logs.datadoghq.eu 1883
-<DATADOG_API_KEY> {"message":"json formatted log", "ddtags":"env:my-env,user:my-user", "ddsource":"my-integration", "hostname":"my-hostname", "service":"my-service"}
-```
-
-{{< img src="logs/custom_log_telnet_json_.png" alt="Custom telnet"  style="width:100%;">}}
-
-[1]: /account_management/api-app-keys/
-[2]: /logs/explorer/live_tail/
+[1]: /account_management/api-app-keys/#api-keys
+[2]: /getting_started/site/
 
 {{< /site-region >}}
 
-{{< site-region region="us3,us5,gov" >}}
-A TCP endpoint is not supported for this region.
+{{< site-region region="us3" >}}
+Contact [support][1] for more information.
+
+[1]: /help
 {{< /site-region >}}
 
 
