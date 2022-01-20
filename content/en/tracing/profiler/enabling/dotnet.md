@@ -73,7 +73,7 @@ Datadog .NET Profiler is currently in public beta. Datadog recommends evaluating
      <strong>Note:</strong> Use <code>stop</code> and <code>start</code> commands. A reset or restart does not always work.
    </div>
 
-3. A minute or two after starting your application, your profiles will show up on the [Datadog APM > Profiler page][1].
+3. A minute or two after starting your application, your profiles appear on the [Datadog APM > Profiler page][1].
 
 [1]: https://app.datadoghq.com/profiling
 {{% /tab %}}
@@ -183,8 +183,8 @@ You can configure the profiler using the following environment variables. Restar
 | `DD_PROFILING_ENABLED`     | Boolean        | If set to `false`, disables the .NET Profiler. Defaults to `true`.  |
 
 <div class="alert alert-warning">
-For IIS applications, you need to set the "environment variable" in the Registry (under HKLM\System\CurrentControlSet\Services\WAS and HKLM\System\CurrentControlSet\Services\W3SVC nodes) like has been shown in the "Windows Service" tab of the previous Installation section. It will be applied for ALL IIS applications.
-Starting with IIS 10, it is possible to set environment variable per IIS application in the [C:\Windows\System32\inetsrv\config\applicationhost.config][6] file. Read the [Microsoft documentation][7] for more details.
+<strong>Note</strong>: For IIS applications, you must set environment variables in the Registry (under <code>HKLM\System\CurrentControlSet\Services\WAS</code> and <code>HKLM\System\CurrentControlSet\Services\W3SVC</code> nodes) as shown in the <a href="?tab=windowsservices#installation">Windows Service tab, above</a>. The environment variables are applied for <em>all</em> IIS applications.
+Starting with IIS 10, you can set environment variables for each IIS application in the <a href="https://docs.microsoft.com/en-us/iis/get-started/planning-your-iis-architecture/introduction-to-applicationhostconfig"><code>C:\Windows\System32\inetsrv\config\applicationhost.config</code> file</a>. Read the <a href="https://docs.microsoft.com/en-us/iis/configuration/system.applicationhost/applicationpools/add/environmentvariables/">Microsoft documentation</a> for more details.
 </div>
 
 <br>
@@ -200,5 +200,3 @@ The [Getting Started with Profiler][5] guide takes a sample service with a perfo
 [3]: https://github.com/DataDog/dd-trace-dotnet/releases
 [4]: /getting_started/tagging/unified_service_tagging
 [5]: /getting_started/profiler/
-[6]: https://docs.microsoft.com/en-us/iis/get-started/planning-your-iis-architecture/introduction-to-applicationhostconfig
-[7]: https://docs.microsoft.com/en-us/iis/configuration/system.applicationhost/applicationpools/add/environmentvariables/
