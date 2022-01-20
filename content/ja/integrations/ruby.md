@@ -5,7 +5,7 @@ categories:
 ddtype: ライブラリ
 dependencies: []
 description: Datadog クライアントライブラリを使用して Ruby アプリケーションからカスタムメトリクスを送信。
-doc_link: https://docs.datadoghq.com/integrations/ruby/
+doc_link: https://docs.datadoghq.com/integrations/go/
 draft: false
 further_reading:
   - link: https://www.datadoghq.com/blog/monitoring-rails-with-datadog/
@@ -17,16 +17,16 @@ further_reading:
   - link: https://www.datadoghq.com/blog/managing-rails-application-logs/
     tag: ブログ
     text: Rails アプリケーションログを収集、カスタマイズ、管理する方法
-git_integration_title: ruby
+git_integration_title: go
 has_logo: true
-integration_id: ruby
-integration_title: Ruby
+integration_id: go
+integration_title: Go
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
-name: ruby
+name: go
 public_title: Datadog-Ruby インテグレーション
-short_description: Datadog クライアントライブラリを使用して Ruby アプリケーションからカスタムメトリクスを送信。
+short_description: Datadog クライアントライブラリを使用して Go アプリケーションからカスタムメトリクスを送信。
 version: '1.0'
 ---
 ## 概要
@@ -37,17 +37,17 @@ Ruby インテグレーションを利用して、Ruby アプリケーション�
 
 ### メトリクスの収集
 
-[DogStatsD を使用した Ruby カスタムメトリクスの収集][1]に関するドキュメントを参照してください。
+[DogStatsD を使用した Go カスタムメトリクスの収集][1]に関するドキュメントを参照してください。
 
 ### トレースの収集
 
-トレースを Datadog に送信するには、[Ruby アプリケーションのインスツルメンテーション][2]に関するドキュメントを参照してください。
+トレースを Datadog に送信するには、[Go アプリケーションのインスツルメンテーション][2]に関するドキュメントを参照してください。
 
 ### ログの収集
 
 **Agent v6.0 以上で使用可能**
 
-ログを Datadog に転送するには、[Ruby ログ収集のセットアップ][3]方法に関するドキュメントを参照してください。
+ログを Datadog に転送するには、[Go ログ収集のセットアップ][3]方法に関するドキュメントを参照してください。
 
 ## トラブルシューティング
 
@@ -57,7 +57,7 @@ Ruby インテグレーションを利用して、Ruby アプリケーション�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/ja/developers/dogstatsd/?tab=ruby
-[2]: https://docs.datadoghq.com/ja/tracing/setup/ruby/
-[3]: https://docs.datadoghq.com/ja/logs/log_collection/ruby/
+[1]: https://docs.datadoghq.com/ja/developers/dogstatsd/?tab=go
+[2]: https://docs.datadoghq.com/ja/tracing/setup/go/
+[3]: https://docs.datadoghq.com/ja/logs/log_collection/go/
 [4]: https://docs.datadoghq.com/ja/help/
