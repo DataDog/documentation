@@ -41,7 +41,7 @@
           "type": "notebook_cells"
         }
       ],
-      "name": "Example-Create_a_notebook_returns_OK_response",
+      "name": "Test-Example-Create_a_notebook_returns_OK_response",
       "status": "published",
       "time": {
         "live_span": "1h"

@@ -9,8 +9,8 @@
       ],
       "filtered_data_type": "logs",
       "is_enabled": true,
-      "name": "Example-Create_a_security_filter_returns_OK_response",
-      "query": "service:ExampleCreateasecurityfilterreturnsOKresponse"
+      "name": "Test-Example-Create_a_security_filter_returns_OK_response",
+      "query": "service:TestExampleCreateasecurityfilterreturnsOKresponse"
     },
     "type": "security_filters"
   }
