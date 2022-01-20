@@ -173,7 +173,7 @@ Add your [Datadog API key][2] to your [project environment variables][3] with th
 {{% /tab %}}
 {{% tab "GitHub Actions" %}}
 
-To run the Agent in GitHub Actions, use the [datadog/agent-github-action][1].
+To run the Agent in GitHub Actions, use the [Datadog Agent GitHub Action][1] `datadog/agent-github-action`.
 
 {{< site-region region="us" >}}
 {{< code-block lang="yaml" >}}
