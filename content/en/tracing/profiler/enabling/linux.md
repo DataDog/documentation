@@ -23,7 +23,8 @@ The Datadog Profiler for Linux lets you collect profile data for applications th
 
 ## Requirements
 
-The Datadog Profiler requires Linux kernel v4.17+ on an `amd64` compatible processor. It does not currently support macOS, BSD, Windows, or other operating systems besides Linux v4.17 or later. `/proc/sys/kernel/perf_event_open` must be set to *at most* 2 or `CAP_SYS_ADMIN` (or `CAP_PERFMON` on Linux v5.8 or later) must be granted to the profiling process or service container.
+- The Datadog Profiler requires Linux kernel v4.17+ on an `amd64` compatible processor. It does not support macOS, BSD, Windows, or other operating systems besides Linux v4.17 or later. 
+- The `/proc/sys/kernel/perf_event_open` setting must *at most* 2, or `CAP_SYS_ADMIN` (or `CAP_PERFMON` on Linux v5.8 or later) must be granted to the profiling process or service container.
 
 ## Installation
 
@@ -49,13 +50,13 @@ The following parameters are recommended, as they help identify the source of yo
 - `DD_SERVICE`, the [service][4] name, for example, `web-backend`. If this is not specified, the profiler will use the default value `myservice`.
 - `DD_VERSION`, the [version][4] of your application.
 
-**Note**: if you usually launch your application using shell builtins, for example:
+**Note**: If you usually launch your application using shell builtins, for example:
 
 ```shell
 exec myapp --arg1 --arg2
 ```
 
-then you must invoke `ddprof` with those builtins instead:
+Then you must invoke `ddprof` with those builtins instead:
 
 ```shell
 export DD_SERVICE="<SERVICE_NAME>"
@@ -76,13 +77,13 @@ The following settings help you identify the source of your profiles:
 - `--service`, the [service][4] name, for example, `web-backend`. If this is not specified, the profiler will use the default value `myservice`.
 - `--service_version`, the [version][4] of your application.
 
-**Note**: if you usually launch your application using shell builtins, for example:
+**Note**: If you usually launch your application using shell builtins, for example:
 
 ```shell
 exec myapp --arg1
 ```
 
-then you must invoke `ddprof` with those builtins instead:
+Then you must invoke `ddprof` with those builtins instead:
 
 ```shell
 exec ddprof --service "<SERVICE_NAME>" --service_version "<APPLICATION_VERSION"> myapp --arg1
@@ -96,9 +97,9 @@ exec ddprof --service "<SERVICE_NAME>" --service_version "<APPLICATION_VERSION">
 
 ## Configuration
 
-Configuration for the profiler can be set by commandline parameters, environment variables, or a combination of both. Whenever both are provided for a given setting, the commandline parameter is preferred.
+Configuration for the profiler can be set by command line parameters, environment variables, or a combination of both. Whenever both are provided for a given setting, the command line parameter is used.
 
-| Environment variable            | Longname        | Shortname | Default   | Description                                                                                                                    |
+| Environment variable            | Long name        | Short name | Default   | Description                                                                                                                    |
 |---------------------------------|-----------------|-----------|-----------|--------------------------------------------------------------------------------------------------------------------------------|
 | DD_ENV                          | environment     | E         |           | The [environment][5] name, for example, `production`.                                                                          |
 | DD_SERVICE                      | service         | S         | myservice | The [service][5] name, for example, `web-backend`.                                                                             |
@@ -106,34 +107,34 @@ Configuration for the profiler can be set by commandline parameters, environment
 | DD_AGENT_HOST                   | host            | H         | localhost | The hostname for the Datadog agent.                                                                                            |
 | DD_TRACE_AGENT_PORT             | port            | P         | 8126      | The Datadog agent listening port.                                                                                              |
 | DD_TRACE_AGENT_URL              | url             | U         |           | `https://<hostname>:<port>` overrides other agent host/port settings.                                                          |
-| DD_TAGS                         | tags            | T         |           | Tags to apply to an uploaded profile. Must be a list of `<key>:<value>` separated by commas, such as: `layer:api,team:intake`. |
+| DD_TAGS                         | tags            | T         |           | Tags to apply to an uploaded profile. Must be a list of `<key>:<value>` pairs separated by commas, such as: `layer:api,team:intake`. |
 | DD_PROFILING_NATIVE_NICE        | nice            | i         |           | Sets the nice level of the profiler without affecting the instrumented processes.                                              |
-| DD_PROFILING_NATIVE_SHOW_CONFIG | show_config     | a         | no        | Whether or not to log profiler configuration parameters.                                                                       |
+| DD_PROFILING_NATIVE_SHOW_CONFIG | show_config     | a         | no        | Whether to log profiler configuration parameters.                                                                       |
 | DD_PROFILING_NATIVE_LOG_MODE    | log_mode        | o         | stdout    | How to emit profiler logs. See the section on logging for details.                                                             |
 | DD_PROFILING_NATIVE_LOG_LEVEL   | log_level       | l         | warn      | Determines log verbosity.                                                                                                      |
 | DD_PROFILING_NATIVE_TARGET_PID  | pid             | p         |           | Engages pidmode. See the section on pidmode for details.                                                                       |
 | DD_PROFILING_NATIVE_GLOBAL      | global          | g         | no        | Engages globalmode. See the section on globalmode for details. Overrides --pid.                                                |
 
-When passing commandline arguments, the profiler adheres to the convention by which longnames are preceeded by two dashes and shortnames by a single dash. For example, `--service myservice` versus `-S myservice`.
+When passing command line arguments, precede long names with two dashes and short names with a single dash. For example, `--service myservice` and `-S myservice`.
 
-**Note**: parameters must be set with a value. For example, to log profiler configuration, you must either set `DD_PROFILING_NATIVE_SHOW_CONFIG=yes` or pass `--show_config yes`, rather than `--show_config` alone. For such arguments, `yes`, `true`, and `enable` may be used interchangeably to enable the setting and `no`, `false`, and `disable` may be used to disable it.
+**Note**: Parameters must be set with a value. For example, to log profiler configuration, you must either set `DD_PROFILING_NATIVE_SHOW_CONFIG=yes` or pass `--show_config yes`, rather than `--show_config` alone. For such arguments, `yes`, `true`, and `enable` may be used interchangeably to enable the setting and `no`, `false`, and `disable` may be used to disable it.
 
 ### Logging
 
-You may configure logging to one of several endpoints:
-- `stdout` will print the logs to standard output stream (the default).
-- `stderr` will print the logs to the standard error stream.
-- `syslog` will publish the logs to syslog, attempting to adhere to the specification in RFC 3164.
-- `disable` will disable the logs entirely.
-- Any other value will be treated as a file path, with a leading `/` designating an absolute path.
+You can configure logging to one of several endpoints:
+- `stdout` prints the logs to standard output stream (the default).
+- `stderr` prints the logs to the standard error stream.
+- `syslog` publishes the logs to syslog, attempting to adhere to the specification in RFC 3164.
+- `disable` disables the logs entirely.
+- Any other value is treated as a file path, with a leading `/` designating an absolute path.
 
 ### Pidmode
 
-When a target PID is given, instrument that PID. When this mode is engaged, any parameter after typical profiler argument processing is ignored. If the owning UID of the target PID and the profiler varies, then you may have to do one of the following
-- Run the profiler as the root process instead
-- Grant `CAP_PERFMON` to the profiler (Linux v5.8 or later)
-- Grant `CAP_SYS_ADMIN` to the profiler
-- Decrease `perf_event_paranoid` to `-1` (consult your distro documentation or system administrator for details)
+When a target PID is given, instrument that PID. When this mode is engaged, any parameter after typical profiler argument processing is ignored. If the owning UID of the target PID and the profiler differ, do one of the following:
+- Run the profiler as the root process instead.
+- Grant `CAP_PERFMON` to the profiler (Linux v5.8 or later).
+- Grant `CAP_SYS_ADMIN` to the profiler.
+- Decrease `perf_event_paranoid` to `-1` (consult your distro documentation or system administrator for details).
 
 When a PID is specified in this way, only child processes (both forks and threads) spawned after instrumentation will be followed.
 
@@ -158,3 +159,4 @@ The [Getting Started with Profiler][6] guide takes a sample service with a perfo
 [3]: https://github.com/DataDog/ddprof/releases
 [4]: https://app.datadoghq.com/profiling
 [5]: /getting_started/tagging/unified_service_tagging
+[6]: /getting_started/profiler/
