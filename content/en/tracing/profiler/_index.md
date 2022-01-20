@@ -54,6 +54,10 @@ Profiling your service to visualize all your stack traces in one place takes jus
 
 To get notified when a private beta is available for the **PHP** or **.NET** Profiler, complete the [Continuous Profiler - Product Access Request form][1].
 
+For applications that are compiled to native operating system code, such as **C**, **C++**, or **Rust**:
+
+{{< partial name="profiling/profiling-unmanaged-code.html" >}}
+
 ## Guide to using the profiler
 
 The [Getting Started with Profiler][2] guide takes a sample service with a performance problem and shows you how to use Continuous Profiler to understand and fix the problem.
