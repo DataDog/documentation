@@ -9,14 +9,9 @@ aliases:
 disable_sidebar: true
 ---
 
-Datadog provides out-of-the-box (OOTB) rules to flag attacker techniques and potential misconfigurations so that you can immediately take steps to remediate. Datadog continuously develops new default rules, which are automatically imported into your account.
+Datadog provides out-of-the-box (OOTB) detection rules to flag attacker techniques and potential misconfigurations so you can immediately take steps to remediate. Datadog continuously develops new default rules, which are automatically imported into your account or with the Agent. For more information, see the Detection Rules documentation.
 
-To filter rules by a specific Security Platform product, click on the following buttons:
-
-- **Log Detection** to see OOTB [Cloud SIEM][1] rules.
-- **Workload Security** to see OOTB [Cloud Workload Security][2] rules.
-- **Cloud Configuration** or **Infrastructure Configuration** to see the [Cloud Security Posture Management][3] rules.
-- **Application Security** to see OOTB [Application Security][4] rules.
+Click on the buttons below to filter by different parts of the Datadog Security Platform. OOTB rules are available for [Cloud SIEM][1], [Posture Management][2], which are divided by into cloud and infrastructure configuration, [Workload Security][3], and [Application Security][4].
 
 [1]: /security_platform/cloud_siem/
 [2]: /security_platform/cspm/

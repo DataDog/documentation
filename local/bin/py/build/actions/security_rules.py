@@ -129,14 +129,14 @@ def security_rules(content, content_dir):
                     extract_dir, relative_path = str(p.parent).split(f"/{content['repo_name']}/")
                     # lets build up this categorization for filtering purposes
                     if 'configuration' in relative_path:
-                        page_data['rule_category'].append('Cloud Configuration')
+                        page_data['rule_category'].append('Posture Management (Cloud)')
                     if 'security-monitoring' in relative_path:
-                        page_data['rule_category'].append('Log Detection')
+                        page_data['rule_category'].append('Cloud SIEM')
                     if 'application-security' in relative_path:
                         page_data['rule_category'].append('Application Security')
                     if 'runtime' in relative_path:
                         if 'compliance' in relative_path:
-                            page_data['rule_category'].append('Infrastructure Configuration')
+                            page_data['rule_category'].append('Posture Management (Infra)')
                         else:
                             page_data['rule_category'].append('Workload Security')
 
