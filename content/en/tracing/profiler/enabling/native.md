@@ -109,7 +109,7 @@ Configuration for the profiler can be set by commandline parameters, environment
 | DD_PROFILING_NATIVE_SHOW_CONFIG | show_config     | a         | no        | Whether or not to log profiler configuration parameters.                                                                       |
 | DD_PROFILING_NATIVE_LOG_MODE    | log_mode        | o         | stdout    | How to emit profiler logs. See the section on logging for details.                                                             |
 | DD_PROFILING_NATIVE_LOG_LEVEL   | log_level       | l         | warn      | Determines log verbosity.                                                                                                      |
-| DD_PROFILINE_NATIVE_TARGET_PID  | pid             | p         |           | Engages pidmode. See the section on pidmode for details.                                                                       |
+| DD_PROFILING_NATIVE_TARGET_PID  | pid             | p         |           | Engages pidmode. See the section on pidmode for details.                                                                       |
 | DD_PROFILING_NATIVE_GLOBAL      | global          | g         | no        | Engages globalmode. See the section on globalmode for details. Overrides --pid.                                                |
 
 When passing commandline arguments, the profiler adheres to the convention by which longnames are preceeded by two dashes and shortnames by a single dash. For example, `--service myservice` versus `-S myservice`.
