@@ -195,7 +195,8 @@ Replace `<datadog_site>` with the selected site: {{< region-param key="dd_site" 
 jobs:
   test:
     steps:
-      - uses: datadog/agent-github-action@v1
+      - name: Start the Datadog Agent locally
+        uses: datadog/agent-github-action@v1
         with:
           api_key: ${{ secrets.DD_API_KEY }}
           datadog_site: <datadog_site>
