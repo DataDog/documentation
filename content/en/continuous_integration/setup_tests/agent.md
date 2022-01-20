@@ -180,7 +180,7 @@ To run the Agent in GitHub Actions, use the [datadog/agent-github-action][1].
 jobs:
   test:
     steps:
-      - uses: datadog/agent-github-action@v0.1.0
+      - uses: datadog/agent-github-action@v1
         with:
           api_key: ${{ secrets.DD_API_KEY }}
       - run: make test
@@ -194,7 +194,7 @@ Replace `<datadog_site>` with the selected site: {{< region-param key="dd_site" 
 jobs:
   test:
     steps:
-      - uses: datadog/agent-github-action@v0.1.0
+      - uses: datadog/agent-github-action@v1
         with:
           api_key: ${{ secrets.DD_API_KEY }}
           datadog_site: <datadog_site>
