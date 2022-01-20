@@ -152,7 +152,7 @@ This permission is global and enables creating new archives, and editing and del
 
 ### `logs_read_archives`
 
-Grants the ability to access the details of the archive configuration. In conjunction with [Logs Write Historical Views](#logs_write_historical_view), this permission also grants the ability to trigger a [Rehydration][13] from Archives.
+Grants the ability to access the details of the archive configuration. In conjunction with [Logs Write Historical Views](#logs_write_historical_views), this permission also grants the ability to trigger a [Rehydration][13] from Archives.
 
 This permission can be scoped to a subset of archives. An archive with no restrictions is accessible to anyone who belongs to a role with the `logs_read_archives` permission. An archive with restrictions is only accessible to the users who belong to one of the registered roles, provided theses roles have the `logs_read_archives` permission.
 
@@ -307,7 +307,7 @@ These permissions are globally enabled by default for all users.
 [Logs Read Data](#logs_read_data) permission comes on top of these legacy permissions. For instance, say a user is restricted to the query `service:api`.
 
 * If this user has scoped [Read Index Data](#logs_read_index_data) permission on `audit` and `errors` indexes, this user only sees `service:api` logs within these indexes.
-* If this user has [livetail](#logs_livetail) permission, this users sees only sees `service:api` logs in the livetail.
+* If this user has [livetail](#logs_live_tail) permission, this users sees only sees `service:api` logs in the livetail.
 
 
 ### `logs_read_index_data`
