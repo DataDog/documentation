@@ -1,9 +1,9 @@
 ---
 title: Enabling the Native Profiler for Linux
 kind: Documentation
-code_lang: native
+code_lang: linux
 type: multi-code-lang
-code_lang_weight: 40
+code_lang_weight: 100
 further_reading:
     - link: 'getting_started/profiler'
       tag: 'Documentation'
@@ -18,6 +18,8 @@ further_reading:
   The Continuous Profiler is not available for the Datadog {{< region-param key="dd_site_name" >}} site.
 </div>
 {{< /site-region >}}
+
+The Datadog Profiler for Linux lets you collect profile data for applications that run in memory-unmanaged runtimes ("native"), for example C, C++, or Rust applications. It also can profile services such as nginx or Postgres.
 
 ## Requirements
 
