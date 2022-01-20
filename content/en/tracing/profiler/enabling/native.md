@@ -66,13 +66,13 @@ exec ddprof myapp --arg1 --arg2
 {{% tab "In code" %}}
 
 ```shell
-ddprof --service "<SERVICE_NAME>" --vername "<APPLICATION_VERSION"> myapp --arg1 --arg2
+ddprof --service "<SERVICE_NAME>" --service_version "<APPLICATION_VERSION"> myapp --arg1 --arg2
 ```
 
 The following settings help you identify the source of your profiles:
 - `--environment`, the [environment][4] name, for example, `production`.
 - `--service`, the [service][4] name, for example, `web-backend`. If this is not specified, the profiler will use the default value `myservice`.
-- `--vername`, the [version][4] of your application.
+- `--service_version`, the [version][4] of your application.
 
 **Note**: if you usually launch your application using shell builtins, for example:
 
@@ -83,7 +83,7 @@ exec myapp --arg1
 then you must invoke `ddprof` with those builtins instead:
 
 ```shell
-exec ddprof --service "<SERVICE_NAME>" --vername "<APPLICATION_VERSION"> myapp --arg1
+exec ddprof --service "<SERVICE_NAME>" --service_version "<APPLICATION_VERSION"> myapp --arg1
 ```
 
 {{% /tab %}}
@@ -96,25 +96,25 @@ exec ddprof --service "<SERVICE_NAME>" --vername "<APPLICATION_VERSION"> myapp -
 
 Configuration for the profiler can be set by commandline parameters, environment variables, or a combination of both. Whenever both are provided for a given setting, the commandline parameter is preferred.
 
-| Environment variable         | Longname    | Shortname | Default   | Description                                                                                                                    |
-|------------------------------|-------------|-----------|-----------|--------------------------------------------------------------------------------------------------------------------------------|
-| DD_ENV                       | environment | E         |           | The [environment][5] name, for example, `production`.                                                                          |
-| DD_SERVICE                   | service     | S         | myservice | The [service][5] name, for example, `web-backend`.                                                                             |
-| DD_VERSION                   | vername     | V         |           | The [version][5] of your service.                                                                                              |
-| DD_AGENT_HOST                | host        | H         | localhost | The hostname for the Datadog agent.                                                                                            |
-| DD_TRACE_AGENT_PORT          | port        | P         | 8126      | The Datadog agent listening port.                                                                                              |
-| DD_TRACE_AGENT_URL           | url         | U         |           | `https://<hostname>:<port>` overrides other agent host/port settings.                                                          |
-| DD_TAGS                      | tags        | T         |           | Tags to apply to an uploaded profile. Must be a list of `<key>:<value>` separated by commas, such as: `layer:api,team:intake`. |
-| DD_PROFILING_NATIVENICE      | nice        | i         |           | Sets the nice level of the profiler without affecting the instrumented processes.                                              |
-| DD_PROFILING_NATIVEPRINTARGS | printargs   | a         | no        | Whether or not to log profiler configuration parameters.                                                                       |
-| DD_PROFILING_NATIVELOGMODE   | logmode     | o         | stdout    | How to emit profiler logs. See the section on logging for details.                                                             |
-| DD_PROFILING_NATIVELOGLEVEL  | loglevel    | l         | warn      | Determines log verbosity.                                                                                                      |
-| DD_PROFILINE_NATIVETARGET    | pid         | p         |           | Engages pidmode. See the section on pidmode for details.                                                                       |
-| DD_PROFILING_NATIVEGLOBAL    | global      | g         | no        | Engages globalmode. See the section on globalmode for details. Overrides --pid.                                                |
+| Environment variable            | Longname        | Shortname | Default   | Description                                                                                                                    |
+|---------------------------------|-----------------|-----------|-----------|--------------------------------------------------------------------------------------------------------------------------------|
+| DD_ENV                          | environment     | E         |           | The [environment][5] name, for example, `production`.                                                                          |
+| DD_SERVICE                      | service         | S         | myservice | The [service][5] name, for example, `web-backend`.                                                                             |
+| DD_VERSION                      | service_version | V         |           | The [version][5] of your service.                                                                                              |
+| DD_AGENT_HOST                   | host            | H         | localhost | The hostname for the Datadog agent.                                                                                            |
+| DD_TRACE_AGENT_PORT             | port            | P         | 8126      | The Datadog agent listening port.                                                                                              |
+| DD_TRACE_AGENT_URL              | url             | U         |           | `https://<hostname>:<port>` overrides other agent host/port settings.                                                          |
+| DD_TAGS                         | tags            | T         |           | Tags to apply to an uploaded profile. Must be a list of `<key>:<value>` separated by commas, such as: `layer:api,team:intake`. |
+| DD_PROFILING_NATIVE_NICE        | nice            | i         |           | Sets the nice level of the profiler without affecting the instrumented processes.                                              |
+| DD_PROFILING_NATIVE_SHOW_CONFIG | show_config     | a         | no        | Whether or not to log profiler configuration parameters.                                                                       |
+| DD_PROFILING_NATIVE_LOG_MODE    | log_mode        | o         | stdout    | How to emit profiler logs. See the section on logging for details.                                                             |
+| DD_PROFILING_NATIVE_LOG_LEVEL   | log_level       | l         | warn      | Determines log verbosity.                                                                                                      |
+| DD_PROFILINE_NATIVE_TARGET_PID  | pid             | p         |           | Engages pidmode. See the section on pidmode for details.                                                                       |
+| DD_PROFILING_NATIVE_GLOBAL      | global          | g         | no        | Engages globalmode. See the section on globalmode for details. Overrides --pid.                                                |
 
 When passing commandline arguments, the profiler adheres to the convention by which longnames are preceeded by two dashes and shortnames by a single dash. For example, `--service myservice` versus `-S myservice`.
 
-**Note**: parameters must be set with a value. For example, to log profiler configuration, you must either set `DD_PROFILING_NATIVEPRINTARGS=yes` or pass `--printargs yes`, rather than `--printargs` alone. For such arguments, `yes`, `true`, and `enable` may be used interchangeably to enable the setting and `no`, `false`, and `disable` may be used to disable it.
+**Note**: parameters must be set with a value. For example, to log profiler configuration, you must either set `DD_PROFILING_NATIVE_SHOW_CONFIG=yes` or pass `--show_config yes`, rather than `--show_config` alone. For such arguments, `yes`, `true`, and `enable` may be used interchangeably to enable the setting and `no`, `false`, and `disable` may be used to disable it.
 
 ### Logging
 
