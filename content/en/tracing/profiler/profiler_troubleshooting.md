@@ -258,7 +258,7 @@ The root of your profile is the frame annotated with the application name in par
 
 [1]: /tracing/troubleshooting/#tracer-debug-logs
 [2]: /help/
-[3]: /help/
+[3]: /tracing/profiler/enabling/linux/?tab=environmentvariables#configuration
 [4]: /tracing/profiler/enabling/linux/
 
 {{< /programming-lang >}}
