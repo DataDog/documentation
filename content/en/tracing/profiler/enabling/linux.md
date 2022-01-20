@@ -19,6 +19,10 @@ further_reading:
 </div>
 {{< /site-region >}}
 
+<div class="alert alert-warning">
+The Datadog Profiler for Linux is in public beta. Datadog recommends evaluating the profiler in a non-sensitive environment before deploying in production.
+</div>
+
 The Datadog Profiler for Linux lets you collect profile data for applications that run in memory-unmanaged runtimes ("native"), for example C, C++, or Rust applications. It also can profile services such as nginx or Postgres. 
 
 ## Requirements
