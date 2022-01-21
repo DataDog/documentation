@@ -51,11 +51,11 @@ Datadog .NET Profiler is currently in public beta. Datadog recommends evaluating
 
 1. If you are already using Datadog, upgrade your agent to version [7.20.2][1]+ or [6.20.2][2]+.
 
-2. The profiler ships together with the tracer. Install or upgrade to the last beta version if needed, using the [.NET Monitoring MSI installer][3]. Continuous Profiler only supports 64-bit Windows, with 32-bit support coming soon, so you need the file like `datadog-dotnet-apm-2.1.0-x64-profiler-beta.msi`.
+2. The profiler ships together with the tracer. Install or upgrade to the last beta version if needed, using the [.NET Monitoring MSI installer][3]. Continuous Profiler only supports 64-bit Windows, so you need the file like `datadog-dotnet-apm-2.1.0-x64-profiler-beta.msi`.
 
    Run the .NET Monitoring MSI installer with administrator privileges.
 
-**Note**: Profiling requires the .msi version 2.1
+**Note**: Profiling requires the `.msi` version 2.1.
 
 {{< tabs >}}
 
