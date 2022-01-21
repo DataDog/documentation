@@ -4,7 +4,7 @@ kind: documentation
 description: "Learn how to monitor your Tracing without Limits usage."
 ---
 
-If, when you monitor your APM and indexed span usage, the numbers are not in line with your expectations, or you want to change your ingestion or retention rates, see the [retention filters][1] or [ingestion control][2] documentation.
+If, when you monitor your APM ingested and indexed span usage, the numbers are not in line with your expectations, or you want to change your ingestion or retention rates, see the [retention filters][1] or [ingestion control][2] documentation.
 
 This document details the available metrics and default dashboard for monitoring ingested and indexed span consumption. Datadog APM plans come with included indexed and ingested spans. For more information, read the [pricing documentation][3], or view some [example pricing scenarios][4].
 
@@ -18,9 +18,10 @@ Each metric on this dashboard is powered by one of the below three Datadog stand
 
  - `datadog.estimated_usage.apm.ingested_bytes`
  - `datadog.estimated_usage.apm.ingested_spans`
+ - `datadog.estimated_usage.apm.ingested_traces`
  - `datadog.estimated_usage.apm.indexed_spans`
 
-The metrics `datadog.estimated_usage.apm.ingested_spans` and `datadog.estimated_usage.apm.indexed_spans` are tagged by `env` and `service` to help you determine if you should optimize ingestion or indexing controls for particular environments and services. Use these metrics within the default dashboard or create your own dashboards and monitors to detect retention filter misconfiguration or set thresholds for monitors.
+These four metrics are tagged by `env` and `service` to help you determine if you should optimize ingestion or indexing controls for particular environments and services. Use these metrics within the default dashboard or create your own dashboards and monitors to detect retention filter misconfiguration or set thresholds for monitors.
 
 The default [Trace Analytics Dashboard][5] has several groups of widgets to see at a glance where the most ingested and indexed spans are coming from. This dashboard includes top lists for `env`, `service` and unique `env` and `service` combinations as mentioned above.
 
