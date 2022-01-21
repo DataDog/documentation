@@ -18,7 +18,7 @@ further_reading:
 
 Votre infrastructure peut parfois générer un volume d'événements de log trop important, ou avec des fluctuations importantes. Dans ce cas, vous devrez peut-être déterminer les types de logs à envoyer à une solution de gestion de logs, et les types de logs à archiver. En revanche, en filtrant vos logs, il se peut que vous effectuiez un traitement non exhaustif ou ignoriez certaines données importantes.
 
-La solution Log Management de Datadog met fin à ces problèmes en séparant le processus d'ingestion des logs du processus d'indexation. Vous pouvez ainsi recueillir, traiter, archiver, explorer et surveiller tous vos logs de façon rentable, sans la moindre limite. Cette fonctionnalité s'intitule Logging without Limits*. C'est sur celle-ci que repose la fonction [Security Monitoring][1] de Datadog. En effet, elle vous permet de détecter les menaces de sécurité de votre environnement sans avoir à indexer vos logs.
+La solution Log Management de Datadog met fin à ces problèmes en séparant le processus d'ingestion des logs du processus d'indexation. Vous pouvez ainsi recueillir, traiter, archiver, explorer et surveiller tous vos logs de façon rentable, sans la moindre limite. Cette fonctionnalité s'intitule Logging without Limits*. C'est sur celle-ci que repose la fonction [Cloud SIEM][1] de Datadog. En effet, elle vous permet de détecter les menaces de sécurité de votre environnement sans avoir à indexer vos logs.
 
 {{< whatsnext desc="Grâce à Logging without Limits*, vous bénéficiez des fonctionnalités suivantes :">}}
   {{< nextlink href="/logs/log_collection">}}Collecte de logs et intégrations : ingérez tous vos logs depuis vos hosts, conteneurs et fournisseurs de cloud.{{< /nextlink >}}

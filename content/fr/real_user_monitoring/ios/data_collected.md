@@ -9,7 +9,7 @@ further_reading:
     tag: Documentation
     text: Service Real User Monitoring (RUM) de Datadog
 kind: documentation
-title: Données RUM collectées (iOS)
+title: Données RUM recueillies (iOS)
 ---
 Le SDK RUM génère des événements auxquels des métriques et attributs sont associés. Les métriques sont des valeurs quantifiables servant à effectuer des mesures associées à un événement. Les attributs sont des valeurs non quantifiables servant à filtrer les données de métriques dans les analyses.
 

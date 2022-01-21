@@ -45,6 +45,10 @@
       "description": "Create a new dashboard with a formulas and functions change widget"
     },
     {
+      "suffix": "_1024858348",
+      "description": "Create a new dashboard with a formulas and functions treemap widget"
+    },
+    {
       "suffix": "_2644712913",
       "description": "Create a new dashboard with a query value widget using the percentile aggregator"
     },
@@ -185,6 +189,10 @@
     {
       "suffix": "",
       "description": "Get all dashboards returns \"OK\" response"
+    },
+    {
+      "suffix": "_1773932563",
+      "description": "Get deleted dashboards returns \"OK\" response"
     }
   ],
   "CancelDowntime": [
@@ -247,6 +255,14 @@
     {
       "suffix": "",
       "description": "Get all hosts for your organization returns \"OK\" response"
+    },
+    {
+      "suffix": "_347346033",
+      "description": "Get all hosts with metadata deserializes successfully"
+    },
+    {
+      "suffix": "_2975406675",
+      "description": "Get all hosts with metadata for your organization returns \"OK\" response"
     }
   ],
   "GetIPRanges": [
@@ -481,6 +497,18 @@
     {
       "suffix": "",
       "description": "Get Hourly Usage Attribution returns \"OK\" response"
+    }
+  ],
+  "GetMonthlyUsageAttribution": [
+    {
+      "suffix": "",
+      "description": "Get Monthly Usage Attribution returns \"OK\" response"
+    }
+  ],
+  "GetUsageAttribution": [
+    {
+      "suffix": "",
+      "description": "Get Usage Attribution returns \"OK\" response"
     }
   ],
   "CreateWebhooksIntegrationCustomVariable": [
