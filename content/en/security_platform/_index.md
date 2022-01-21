@@ -33,7 +33,7 @@ The Datadog Security Platform includes [Cloud SIEM](#security-monitoring), [Clou
 
 ## Cloud SIEM
 
-[Cloud SIEM][1] detects real-time threats to your application and infrastructure, like a targeted attack, an IP communicating with your systems which matches a threat intel list, or an insecure configuration. Cloud SIEM is powered by [Datadog Log Management][2]. With these areas combined, you can [automate remediation of threats detected by Datadog Cloud SIEM][3] to speed up your threat-response workflow.
+[Cloud SIEM][1] (Security Information and Event Management), detects real-time threats to your application and infrastructure, like a targeted attack, an IP communicating with your systems which matches a threat intel list, or an insecure configuration. Cloud SIEM is powered by [Datadog Log Management][2]. With these areas combined, you can [automate remediation of threats detected by Datadog Cloud SIEM][3] to speed up your threat-response workflow.
 
 {{< img src="security_platform/security_monitoring_overview.png" alt="Cloud SIEM sources analyzed view in Datadog" width="100%">}}
 
