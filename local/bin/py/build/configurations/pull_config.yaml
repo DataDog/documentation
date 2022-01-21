@@ -120,7 +120,7 @@
     contents:
 
     - action: pull-and-push-file
-      branch: main
+      branch: master
       globs:
       - README.md
       options:
@@ -272,7 +272,7 @@
           aliases:
             - /serverless/datadog_lambda_library/
             - /serverless/serverless_integrations/cli/
-  
+
   - repo_name: synthetics-ci-github-action
     contents:
     - action: pull-and-push-file
