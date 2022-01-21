@@ -53,6 +53,6 @@ Rollups don't display similar results. For a rollup call of `rollup(sum, 60)`, t
 
 [1]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
 [2]: /integrations/amazon_billing/
-[3]: /integrations/faq/cloud-metric-delay/
+[3]: cloud-metric-delay.md
 [4]: /help/
 [5]: /metrics/introduction/#space-aggregation
