@@ -19,7 +19,7 @@ Session Replay's Developer Tools are built-in debugging tools that can help you 
 
 To access Dev Tools, either click the **Jump to Replay** button to the left of a session in the **Sessions** tab or click on a session and click **Replay Session** on the top right corner in the [RUM Explorer][1]. 
 
-{{< img src="real_user_monitoring/session_replay/dev-tools-beta.png" alt="Dev Tools button" style="width:80%;">}}
+{{< img src="real_user_monitoring/session_replay/dev_tools/dev-tools-beta.png" alt="Dev Tools button" style="width:80%;">}}
 
 The **</> Dev Tools** button appears to the right of the **Share** button. You can view performance data, console logs, errors, and attributes about your replays. 
 
