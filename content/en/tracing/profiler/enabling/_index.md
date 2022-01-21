@@ -31,7 +31,7 @@ To get notified when a private beta is available for the **PHP**, or **.NET** Pr
 
 ## Unmanaged runtimes
 
-The following profiling library can be used for applications that are compiled to native operating system code, such as **C**, **C++**, or **Rust**. You can also use this to profile services such as nginx and Postgres: 
+The following profiling library can be used for applications that are written in compiled languages such as **C**, **C++**, or **Rust**. You can also use this to profile services such as nginx and Postgres: 
 
 {{< partial name="profiling/profiling-unmanaged-code.html" >}}
 
