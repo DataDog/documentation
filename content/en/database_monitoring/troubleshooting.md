@@ -341,10 +341,11 @@ The `schema` tag (also known as "database") is present on MySQL Query Metrics an
 
 If there is no default database configured for a connection, then none of the queries made by that connection have the `schema` tag on them.
 
-### DBM Host Limit
+### DBM host limit
 
 Depending on how complex the databases being monitored are, too many DBM hosts on one Agent could overload the Agent and cause data collection to be delayed. If the Agent is overloaded, you may see warnings like `Job loop stopping due to check inactivity in the Agent logs`.
-As a rule of thumb, we recommend having a single Datadog Agent monitor at most 10 DBM hosts. If you have more than 10 DBM hosts then we recommend spreading them over multiple Datadog Agents.
+
+As a rule of thumb, it is recommended to have a single Datadog Agent monitor at most 10 DBM hosts. If you have more than 10 DBM hosts then you should consider spreading them over multiple Datadog Agents.
 
 ## Need more help?
 
