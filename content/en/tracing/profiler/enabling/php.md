@@ -43,10 +43,12 @@ An Operating System with glibc 2.17 or newer is needed. The following OS version
   - Ubuntu 14.04, which is EOL.
 
 Datadog recommends running an OS version which is not EOL.
+
 {{% /tab %}}
 {{% tab "Alpine Linux" %}}
 
 Version 3.13 of Alpine Linux or newer is required as the profiler is built against musl v1.2.
+
 {{% /tab %}}
 {{< /tabs >}}
 
