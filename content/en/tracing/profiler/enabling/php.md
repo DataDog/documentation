@@ -58,7 +58,7 @@ To begin profiling applications:
 
  2. Download the `datadog-setup.php` script from the [GitHub release page](https://github.com/DataDog/dd-trace-php/releases). Version 0.69.0 was the first release to include this installer.
 
- 3. Run the installer to install both the tracer and profiler, for example `php datadog-setup.php  --enable-profiling`. This script is interactive and asks which of the detected PHP locations it should install to. At the end of the script, it outputs the non-interactive version of the command arguments for future use.
+ 3. Run the installer to install both the tracer and profiler, for example `php datadog-setup.php --enable-profiling`. This script is interactive and asks which of the detected PHP locations it should install to. At the end of the script, it outputs the non-interactive version of the command arguments for future use.
 
  4. Configure the profiler with environment variables. The tracer supports using INI values, but the profiler does not support INI settings yet.
 
