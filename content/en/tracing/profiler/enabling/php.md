@@ -73,7 +73,7 @@ To begin profiling applications:
 
  1. If you are already using Datadog, upgrade your Agent to version [7.20.2][2]+ or [6.20.2][3]+.
 
- 2. Download the `datadog-setup.php` script from the [GitHub release page](https://github.com/DataDog/dd-trace-php/releases). Version 0.69.0 was the first release to include this installer. Verify its sha256sum with the values provided on the release page.
+ 2. Download the `datadog-setup.php` script from the [GitHub release page](https://github.com/DataDog/dd-trace-php/releases). Version 0.69.0 was the first release to include this installer.
 
  3. Run the installer to install both the tracer and profiler, for example `php datadog-setup.php  --enable-profiling`. This script is interactive and asks which of the detected PHP locations it should install to. At the end of the script, it outputs the non-interactive version of the command arguments for future use.
 
