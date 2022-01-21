@@ -26,6 +26,8 @@ further_reading:
 The Datadog PHP Profiler is currently in public beta. Datadog recommends evaluating the profiler in a non-sensitive environment before deploying in production.
 </div>
 
+Starting in tracer version 0.69.0, both the tracer and profiler can be installed simultaneously using the script `datadog-setup.php`.
+
 ## Requirements
 
 The Datadog Profiler requires at least PHP 7.1. PHP 8.1 is not yet supported. ZTS builds of PHP are not supported, nor are debug builds.
