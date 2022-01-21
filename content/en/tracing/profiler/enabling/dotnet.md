@@ -60,7 +60,28 @@ Datadog .NET Profiler is currently in public beta. Datadog recommends evaluating
 {{< tabs >}}
 
 {{% tab "Internet Information Services (IIS)" %}}
-1. The .NET Monitoring MSI installer adds all required environment variables. There are no environment variables you need to manually configure.
+1. To enable the Profiler for IIS applications, it is required to set the `DD_PROFILING_ENABLED` environment variable to `1`. This could be done machine wide or for IIS only in the Registry under <code>HKLM\System\CurrentControlSet\Services\WAS</code> and <code>HKLM\System\CurrentControlSet\Services\W3SVC</code> nodes. Add `DD_PROFILING_ENABLED=1` to the multi-string `Environment` value. The result should look like the following:
+
+For .NET Core and .NET 5+:
+   ```text
+   CORECLR_ENABLE_PROFILING=1
+   CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
+   DD_PROFILING_ENABLED=1
+   DD_ENV=production
+   DD_VERSION=1.2.3
+   ```
+{{< img src="tracing/setup/dotnet/RegistryEditorCoreIIS.png" alt="Using the Registry Editor to create environment variables for an .NET Core application in IIS" style="width:90%" >}}
+
+For .NET Framework:
+   ```text
+   COR_ENABLE_PROFILING=1
+   COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
+   DD_PROFILING_ENABLED=1
+   DD_ENV=production
+   DD_VERSION=1.2.3
+   ```
+{{< img src="tracing/setup/dotnet/RegistryEditorFrameworkIIS.png" alt="Using the Registry Editor to create environment variables for an .NET Framework application in IIS" style="width:90%" >}}
+
 
 2. Completely stop and start IIS by running the following commands as an administrator:
 
@@ -89,7 +110,8 @@ Datadog .NET Profiler is currently in public beta. Datadog recommends evaluating
    ```text
    CORECLR_ENABLE_PROFILING=1
    CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
-   DD_ENV=prod
+   DD_PROFILING_ENABLED=1
+   DD_ENV=production
    DD_VERSION=1.2.3
    ```
    {{< img src="tracing/setup/dotnet/RegistryEditorCore.png" alt="Using the Registry Editor to create environment variables for a Windows service" style="width:90%" >}}
@@ -98,7 +120,8 @@ Datadog .NET Profiler is currently in public beta. Datadog recommends evaluating
    ```text
    COR_ENABLE_PROFILING=1
    COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
-   DD_ENV=prod
+   DD_PROFILING_ENABLED=1
+   DD_ENV=production
    DD_VERSION=1.2.3
    ```
    {{< img src="tracing/setup/dotnet/RegistryEditorFramework.png" alt="Using the Registry Editor to create environment variables for a Windows service" style="width:90%" >}}
@@ -110,7 +133,8 @@ Datadog .NET Profiler is currently in public beta. Datadog recommends evaluating
    [string[]] $v = @(
        "CORECLR_ENABLE_PROFILING=1",
        "CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}",
-       "DD_ENV=prod",
+       "DD_PROFILING_ENABLED=1",
+       "DD_ENV=production",
        "DD_VERSION=1.2.3"
    )
    Set-ItemProperty HKLM:SYSTEM\CurrentControlSet\Services\<SERVICE NAME> -Name Environment -Value $v
@@ -121,7 +145,8 @@ Datadog .NET Profiler is currently in public beta. Datadog recommends evaluating
    [string[]] $v = @(
        "COR_ENABLE_PROFILING=1",
        "COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}",
-       "DD_ENV=prod",
+       "DD_PROFILING_ENABLED=1",
+       "DD_ENV=production",
        "DD_VERSION=1.2.3"
    )
    Set-ItemProperty HKLM:SYSTEM\CurrentControlSet\Services\<SERVICE NAME> -Name Environment -Value $v
@@ -141,7 +166,8 @@ Datadog .NET Profiler is currently in public beta. Datadog recommends evaluating
    ```cmd
    SET CORECLR_ENABLE_PROFILING=1
    SET CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
-   SET DD_ENV=prod
+   SET DD_PROFILING_ENABLED=1
+   SET DD_ENV=production
    SET DD_VERSION=1.2.3
 
    REM start the application here
@@ -151,7 +177,8 @@ Datadog .NET Profiler is currently in public beta. Datadog recommends evaluating
    ```cmd
    SET COR_ENABLE_PROFILING=1
    SET COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
-   SET DD_ENV=prod
+   SET DD_PROFILING_ENABLED=1
+   SET DD_ENV=production
    SET DD_VERSION=1.2.3
 
    REM start the application here
@@ -167,20 +194,20 @@ Datadog .NET Profiler is currently in public beta. Datadog recommends evaluating
 
 ## Configuration
 
-You can configure the profiler using the following environment variables. Restart the application after any of these settings is changed.
+You can configure the profiler using the following environment variables. Note that most of these settings also apply to the Tracer configuration. Restart the application after any of these settings is changed.
 
 | Environment variable                             | Type          | Description                                                                                      |
 | ------------------------------------------------ | ------------- | ------------------------------------------------------------------------------------------------ |
-| `DD_ENV`                   | String        | The [environment][4] name, for example, `production`. |
+| `DD_ENV`                   | String        | The [environment][4] name, for example, `production`. If not set, will be `unspecified-environment` |
 | `DD_SERVICE`               | String        | The [service][4] name, for example, `web-backend`. If this is not specified, the .NET Profiler tries to determine the service name automatically from the application name (process entry assembly or process name).    |
-| `DD_VERSION`               | String        | The [version][4] of your service.  |
+| `DD_VERSION`               | String        | The [version][4] of your service. If not set, will be `unspecified-version` |
 | `DD_TAGS`                  | String        | Tags to apply to an uploaded profile. Must be a list of `<key>:<value>` separated by commas such as: `layer:api,team:intake`.   |
 | `DD_AGENT_HOST`            | String        | Sets the host where profiles are sent (the host running the Agent). Can be a hostname or an IP address. Ignored if `DD_TRACE_AGENT_URL` is set. Defaults to `localhost`.  |
 | `DD_TRACE_AGENT_PORT`      | String        | Sets the port where profiles are sent (the port where the Agent is listening for connections). Ignored if `DD_TRACE_AGENT_URL` is set. Defaults to`8126`.  |
 | `DD_TRACE_AGENT_URL`       | String        | Sets the URL endpoint where profiles are sent. Overrides `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT` if set. Defaults to `http://<DD_AGENT_HOST>:<DD_TRACE_AGENT_PORT>`.  |
 | `DD_TRACE_DEBUG`           | Boolean        | Enables or disables debug logging (Could help in case of troubleshooting investigation). Valid values are: `true` or `false`. Defaults to `false`.  |
 | `DD_PROFILING_LOG_DIR`     | String        | Sets the directory for .NET Profiler logs. Defaults to `%ProgramData%\Datadog-APM\logs\`.  |
-| `DD_PROFILING_ENABLED`     | Boolean        | If set to `false`, disables the .NET Profiler. Defaults to `true`.  |
+| `DD_PROFILING_ENABLED`     | Boolean        | If set to `true`, enables the .NET Profiler. Defaults to `false`.  |
 
 <div class="alert alert-warning">
 <strong>Note</strong>: For IIS applications, you must set environment variables in the Registry (under <code>HKLM\System\CurrentControlSet\Services\WAS</code> and <code>HKLM\System\CurrentControlSet\Services\W3SVC</code> nodes) as shown in the <a href="?tab=windowsservices#installation">Windows Service tab, above</a>. The environment variables are applied for <em>all</em> IIS applications.
