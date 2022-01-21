@@ -95,7 +95,7 @@ This is done using the following algorithm:
 2. The calculated wall time is associated to a given hash. **Note**: If there are multiple jobs that execute tests, the wall time is the time difference between the start of the first test in the earliest job and the end of the last test in the latest job.
 
 #### Possible issues with wall time calculation
-If you're using a library for testing time-dependent code, like [timecop][7] for Ruby or [FreezeGun][8] for Python, it is possible that test timestamps and calculated wall times are wrong. If this is the case, make sure that modifications to time are rolled back before finishing your tests.
+If you're using a library for testing time-dependent code, like [timecop][7] for Ruby or [FreezeGun][8] for Python, it is possible that test timestamps are wrong, and therefore calculated wall times. If this is the case, make sure that modifications to time are rolled back before finishing your tests.
 
 ### Need further help?
 
