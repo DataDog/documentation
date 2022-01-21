@@ -6,7 +6,7 @@ disable_sidebar: true
 ---
 
 {{< site-region region="us5,gov" >}}
-<div class="alert alert-warning">La surveillance de base de données n'est pas prise en charge pour ce site.</div>
+<div class="alert alert-warning">La solution Database Monitoring n'est pas prise en charge pour ce site.</div>
 {{< /site-region >}}
 
 ### Versions de MySQL prises en charge
