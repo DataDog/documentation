@@ -38,7 +38,7 @@ A 64-bit, Linux Operating System (OS) is required.
 {{% tab "GNU C Linux" %}}
 
 An Operating System with glibc 2.17 or newer is needed. The following OS versions or newer meet this requirement:
-  - CentOS 7
+  - CentOS 7.
   - Debian 8, which has reached End Of Life (EOL).
   - Ubuntu 14.04, which is EOL.
 
@@ -64,9 +64,9 @@ To begin profiling applications:
 
 | Environment Variable | Acceptable Values       | Comment |
 |----------------------|-------------------------|---------|
-| `DD_PROFILING_ENABLED` | Boolean values\*          | Defaults to `off` |
-| `DD_PROFILING_LOG_LEVEL` | `off`, `error`, `warn`, `info`, `debug` | Defaults to `off` |
-| `DD_PROFILING_EXPERIMENTAL_CPU_TIME_ENABLED` | Boolean values\* | Defaults to `off` |
+| `DD_PROFILING_ENABLED` | Boolean values\*          | Defaults to `false`. |
+| `DD_PROFILING_LOG_LEVEL` | `off`, `error`, `warn`, `info`, `debug` | Defaults to `off`. |
+| `DD_PROFILING_EXPERIMENTAL_CPU_TIME_ENABLED` | Boolean values\* | Defaults to `false`. |
 
 \* Acceptable truthy boolean values are `1`, `on`, `yes`, and `true`. Acceptable falsey boolean values are `0`, `no`, `off`, and `false`.
 
