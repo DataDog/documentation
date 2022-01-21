@@ -544,3 +544,4 @@ This should just return a simple yes/no if the permissions are valid for the Age
 [4]: https://docs.docker.com/engine/swarm/secrets/
 [5]: https://github.com/DataDog/datadog-agent/blob/6.4.x/Dockerfiles/agent/OPENSHIFT.md#restricted-scc-operations
 [6]: /agent/guide/agent-commands/#restart-the-agent
+[7]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/secrets_scripts/secrets_tester.ps1
