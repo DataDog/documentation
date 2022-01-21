@@ -41,7 +41,7 @@ When the Node.js project drops support for an LTS major release line (when it go
 The last major supporting release line of `dd-trace` library supports that EOL version of Node.js for at least another year on a maintenance mode basis.
 
 Some issues cannot be solved in `dd-trace` and instead must be solved in Node.js. When this happens and the Node.js release in question is EOL, it’s not possible to solve the issue without moving to another non-EOL release.
-We do not make new releases of `dd-trace` to provide specific support for non-LTS Node.js major release lines (odd numbered versions).
+Datadog does not make new releases of `dd-trace` to provide specific support for non-LTS Node.js major release lines (odd numbered versions).
 
 For the best level of support, always run the latest LTS release of Node.js, and the latest major version of `dd-trace`. Whatever release line of Node.js you use, also use the latest version of Node.js on that release line, to ensure you have the latest security fixes.
 
@@ -104,8 +104,8 @@ For details about how to how to toggle and configure plugins, check out the [API
 | Module                     | Versions | Support Type    | Notes                                                  |
 | -------------------------- | -------- | --------------- | ------------------------------------------------------ |
 | [@google-cloud/pubsub][41] | `>=1.2`  | Fully supported |                                                        |
-| [amqp10][42]               | `>=3`    | Fully supported | Supports AMQP 1.0 brokers (i.e. ActiveMQ, Apache Qpid) |
-| [amqplib][43]              | `>=0.5`  | Fully supported | Supports AMQP 0.9 brokers (i.e. RabbitMQ, Apache Qpid) |
+| [amqp10][42]               | `>=3`    | Fully supported | Supports AMQP 1.0 brokers (such as ActiveMQ, or Apache Qpid) |
+| [amqplib][43]              | `>=0.5`  | Fully supported | Supports AMQP 0.9 brokers (such as RabbitMQ, or Apache Qpid) |
 | [generic-pool][44]         | `>=2`    | Fully supported |                                                        |
 | [kafkajs][45]         | `>=1.4`    | Fully supported |                                                        |
 | [kafka-node][46]           |          | Coming Soon     |                                                        |

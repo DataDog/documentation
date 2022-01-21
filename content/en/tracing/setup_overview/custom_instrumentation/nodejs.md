@@ -136,12 +136,12 @@ Synchronous code can be traced with `tracer.trace()` which will automatically fi
 
 ```javascript
 app.get('/make-sandwich', (req, res) => {
-  const sandwich = tracer.trace('sandwich.make', () => {
-    const ingredients = tracer.trace('get_ingredients', () => {
+  const sandwich = tracer.trace('sandwich.make', { resource: 'resource_name' }, () => {
+    const ingredients = tracer.trace('get_ingredients', { resource: 'resource_name' }, () => {
       return getIngredients()
     })
 
-    return tracer.trace('assemble_sandwich', () => {
+    return tracer.trace('assemble_sandwich', { resource: 'resource_name' }, () => {
       assembleSandwich(ingredients)
     })
   })
@@ -161,11 +161,17 @@ API details for `tracer.trace()` can be found [here][1].
 Promises can be traced with `tracer.trace()` which will automatically finish the span when the returned promise resolves and capture any rejection error automatically.
 
 ```javascript
+const getIngredients = () => {
+    return new Promise((resolve, reject) => {
+        resolve('Salami');
+    });
+};
+
 app.get('/make-sandwich', (req, res) => {
-  return tracer.trace('sandwich.make', () => {
-    return tracer.trace('get_ingredients', () => getIngredients())
-      .then(() => {
-        return tracer.trace('assemble_sandwich', () => {
+  return tracer.trace('sandwich.make', { resource: 'resource_name' }, () => {
+    return tracer.trace('get_ingredients', { resource: 'resource_name' }, () => getIngredients())
+      .then((ingredients) => {
+        return tracer.trace('assemble_sandwich', { resource: 'resource_name' }, () => {
           return assembleSandwich(ingredients)
         })
       })
@@ -185,12 +191,12 @@ Async/await can be traced with `tracer.trace()` which will automatically finish 
 
 ```javascript
 app.get('/make-sandwich', async (req, res) => {
-  const sandwich = await tracer.trace('sandwich.make', async () => {
-    const ingredients = await tracer.trace('get_ingredients', () => {
+  const sandwich = await tracer.trace('sandwich.make', { resource: 'resource_name' }, async () => {
+    const ingredients = await tracer.trace('get_ingredients', { resource: 'resource_name' }, () => {
       return getIngredients()
     })
 
-    return tracer.trace('assemble_sandwich', () => {
+    return tracer.trace('assemble_sandwich', { resource: 'resource_name' }, () => {
       return assembleSandwich(ingredients)
     })
   })
@@ -210,14 +216,18 @@ API details for `tracer.trace()` can be found [here][1].
 It's also possible to wrap an existing function without changing its code. This is useful to trace functions for which you don't control the code. This can be done with `tracer.wrap()` which takes the same arguments as `tracer.trace()` except its last argument which is the function to wrap instead of a callback.
 
 ```javascript
-app.get('/make-sandwich', (req, res) => {
-  getIngredients = tracer.wrap('get_ingredients', getIngredients)
-  assembleSandwich = tracer.wrap('assemble_sandwich', assembleSandwich)
 
-  const sandwich = tracer.trace('sandwich.make', () => {
+// After the functions are defined
+getIngredients = tracer.wrap('get_ingredients', { resource: 'resource_name' }, getIngredients)
+assembleSandwich = tracer.wrap('assemble_sandwich', { resource: 'resource_name' }, assembleSandwich)
+
+// Where routes are defined
+app.get('/make-sandwich', (req, res) => {
+
+  const sandwich = tracer.trace('sandwich.make', { resource: 'resource_name' }, () => {
     const ingredients = getIngredients()
 
-    return assembleSandwich(ingredients))
+    return assembleSandwich(ingredients)
   })
 
   res.end(sandwich)

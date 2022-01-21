@@ -57,7 +57,7 @@ There is no need to escape inner `[` and `]`. For instance:
 
 In the above example, the secret’s handle is the string `user_array[1234]`.
 
-Secrets are resolved after [Autodiscovery][1] template variables are resolved, i.e. you can use them in a secret handle. For instance:
+Secrets are resolved after [Autodiscovery][1] template variables are resolved, this means you can use them in a secret handle. For instance:
 
 ```yaml
 instances:
@@ -70,16 +70,16 @@ instances:
 
 To retrieve secrets, you must provide an executable that is able to authenticate to and fetch secrets from your secrets management backend.
 
-The Agent caches secrets internally in memory to reduce the number of calls (useful in a containerized environment for example). The Agent calls the executable every time it accesses a check configuration file that contains at least one secret handle for which the secret is not already loaded in memory. In particular, secrets that have already been loaded in memory do not trigger additional calls to the executable. In practice, this means that the Agent calls the user-provided executable once per file that contains a secret handle at startup, and might make additional calls to the executable later if the Agent or instance is restarted, or if the Agent dynamically loads a new check containing a secret handle (e.g. via Autodiscovery).
+The Agent caches secrets internally in memory to reduce the number of calls (useful in a containerized environment for example). The Agent calls the executable every time it accesses a check configuration file that contains at least one secret handle for which the secret is not already loaded in memory. In particular, secrets that have already been loaded in memory do not trigger additional calls to the executable. In practice, this means that the Agent calls the user-provided executable once per file that contains a secret handle at startup, and might make additional calls to the executable later if the Agent or instance is restarted, or if the Agent dynamically loads a new check containing a secret handle (for example, from Autodiscovery).
 
-Since APM and Process Monitoring run in their own process/service, and since processes don't share memory, each needs to be able to load/decrypt secrets. Thus, if `datadog.yaml` contains secrets, each process might call the executable once. For example, storing the `api_key` as a secret in the `datadog.yaml` file with APM and Process Monitoring enabled might result in 3 calls to the secret backend.
+APM and Process Monitoring run in their own process/service, and because processes don't share memory, each needs to be able to load/decrypt secrets. Thus, if `datadog.yaml` contains secrets, each process might call the executable once. For example, storing the `api_key` as a secret in the `datadog.yaml` file with APM and Process Monitoring enabled might result in 3 calls to the secret backend.
 
-By design, the user-provided executable needs to implement any error handling mechanism that a user might require. Conversely, the Agent needs to be restarted if a secret has to be refreshed in memory (e.g. revoked password).
+By design, the user-provided executable needs to implement any error handling mechanism that a user might require. Conversely, the Agent needs to be restarted if a secret has to be refreshed in memory (for example, revoked password).
 
 Relying on a user-provided executable has multiple benefits:
 
 * Guaranteeing that the Agent does not attempt to load in memory parameters for which there isn't a secret handle.
-* Ability for the user to limit the visibility of the Agent to secrets that it needs (e.g., by restraining the accessible list of secrets in the key management backend)
+* Ability for the user to limit the visibility of the Agent to secrets that it needs (for example, by restraining the accessible list of secrets in the key management backend)
 * Freedom and flexibility in allowing users to use any secrets management backend without having to rebuild the Agent.
 * Enabling each user to solve the initial trust problem from the Agent to their secrets management backend. This occurs in a way that leverages each user's preferred authentication method and fits into their continuous integration workflow.
 

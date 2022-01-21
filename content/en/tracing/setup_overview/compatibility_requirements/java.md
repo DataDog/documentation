@@ -16,7 +16,7 @@ further_reading:
 
 ## Compatibility
 
-The Java Datadog Trace library is open source - view the [Github repository][1] for more information.
+The Java Datadog Trace library is open source - view the [GitHub repository][1] for more information.
 
 Datadog officially supports the Java JRE 1.7 and higher of both Oracle JDK and OpenJDK. Datadog does not officially support any early-access versions of Java.
 
@@ -82,7 +82,7 @@ Don't see your desired web frameworks? Datadog is continually adding additional 
 **Networking tracing provides:**
 
 - timing request to response
-- tags for the request (e.g. response code)
+- tags for the request (for example, response code)
 - error and stacktrace capturing
 - distributed tracing
 
@@ -121,7 +121,7 @@ Don't see your desired networking framework? Datadog is continually adding addit
 **Datastore tracing provides:**
 
 - timing request to response
-- query info (e.g. a sanitized query string)
+- query info (for example, a sanitized query string)
 - error and stacktrace capturing
 
 | Database                | Versions | Support Type    | Instrumentation Names (used for configuration)                                           |

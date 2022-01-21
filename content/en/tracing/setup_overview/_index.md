@@ -19,7 +19,9 @@ In most environments, configuring your application to send [traces][1] to Datado
 
 2. Adding the Datadog Tracing Library to your code.
 
-Traces are sent from your application instrumented with a Datadog Tracing Library to the Datadog Agent, and from the Datadog Agent to Datadog.
+Traces are sent from your application instrumented with a Datadog Tracing Library to the Datadog Agent, and from the Datadog Agent to the Datadog backend to be shown in the UI.
+
+{{< img src="tracing/visualization/troubleshooting_pipeline.png" alt="The APM pipeline">}}
 
 In containerized, serverless, or certain other environments, there may be APM-specific configurations required on both the Tracer and Agent to ensure that traces can be properly received, so ensure you have followed instructions for both components.
 

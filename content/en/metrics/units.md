@@ -14,9 +14,9 @@ further_reading:
 
 Metric units are displayed in places such as on timeseries graphs, query value widgets, and top lists.
 
-{{< img src="metrics/units/redis_dash_metrics_units.png" alt="Redis dash metric units"  style="width:100%;">}}
+{{< img src="metrics/units/redis_dash_metrics_units.png" alt="Redis dash metric units" style="width:100%;">}}
 
-On timeseries graphs, you can hover your cursor over any graph to see the relevant units. YUnits must be specified manually, but if no unit is set, order-of-magnitude notation (for example: K, M, and G for thousands, millions, and billions, respectively) is used. If a unit is set, the raw data is automatically converted to readable display units using their relevant orders of magnitude.
+On timeseries graphs, you can hover your cursor over any graph to see the relevant units. Units must be specified manually, but if no unit is set, order-of-magnitude notation (for example: K, M, and G for thousands, millions, and billions, respectively) is used. If a unit is set, the raw data is automatically converted to readable display units using their relevant orders of magnitude.
 
 For example, if you have a data point that is 3,000,000,000:
 
@@ -25,7 +25,7 @@ For example, if you have a data point that is 3,000,000,000:
 
 Units are also displayed at the bottom of timeboard graphs, and metric descriptions are available by selecting **Metrics Info** from the gear dropdown:
 
-{{< img src="metrics/units/annotated_ops.png" alt="Annotated ops"  style="width:100%;">}}
+{{< img src="metrics/units/annotated_ops.png" alt="Annotated ops" style="width:100%;">}}
 
 To change a metric unit, navigate to the [metric summary][1] page and select a metric. Click **Edit** under **Metadata** and select a unit, such as `bit` or `byte` from the dropdown menu.
 
@@ -60,7 +60,7 @@ The following units may be associated with metrics submitted to Datadog:
 
 ### Unitless formatting
 
-For unitless metrics, Datadog uses the [SI suffixes][2] `K`, `M`, `G`, and `T`. After `T`, numbers are converted to exponential notation, which is also used for very small numbers. By default, Datadog rounds to two decimal places. For exponential notation, the default is zero decimal places.
+For unitless metrics, Datadog uses the [SI prefixes][2] `K`, `M`, `G`, and `T`. After `T`, numbers are converted to exponential notation, which is also used for tiny numbers. By default, Datadog rounds to two decimal places. For exponential notation, the default is zero decimal places.
 
 #### Examples
 
@@ -98,7 +98,7 @@ Time units between a minute and a year are split into multiple units to be more 
 
 - Short times are formatted in decimal form.
 - The smallest time unit is nanoseconds.
-- Very long times are formatted as days in decimal form.
+- Long times are formatted as days in decimal form.
 
 
 #### Examples
@@ -120,4 +120,4 @@ Time units between a minute and a year are split into multiple units to be more 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/metric/summary
-[2]: https://en.wikipedia.org/wiki/International_System_of_Units
+[2]: https://en.wikipedia.org/wiki/Metric_prefix#List_of_SI_prefixes

@@ -221,7 +221,7 @@ To read more about Prometheus and OpenMetrics base integrations, see the integra
 You can improve your OpenMetrics check by including default values for additional configuration options:
 
 `ignore_metrics`
-: Some metrics are ignored because they are duplicates or introduce a very high cardinality. Metrics included in this list are silently skipped without an `Unable to handle metric` debug line in the logs.
+: Some metrics are ignored because they are duplicates or introduce a high cardinality. Metrics included in this list are silently skipped without an `Unable to handle metric` debug line in the logs.
 
 `labels_mapper`
 : If the `labels_mapper` dictionary is provided, the metrics labels in `labels_mapper` use the corresponding value as tag name when sending the gauges.

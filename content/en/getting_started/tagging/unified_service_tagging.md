@@ -26,6 +26,8 @@ With these three tags you can:
 
 {{< img src="tagging/unified_service_tagging/overview.mp4" alt="Unified Service Tagging" video=true >}}
 
+**Note**: The official service of a log defaults to the container short-image if no Autodiscovery logs configuration is present. To override the official service of a log, add Autodiscovery [Docker labels/pod annotations][6]. For example: `"com.datadoghq.ad.logs"='[{"service": "service-name"}]'`
+
 ### Requirements
 
 - Unified service tagging requires setup of a [Datadog Agent][2] that is 6.19.x/7.19.x or higher.
@@ -182,6 +184,7 @@ containers:
 [3]: https://github.com/DataDog/integrations-core/blob/master/kubernetes_state/datadog_checks/kubernetes_state/data/conf.yaml.example#L70
 [4]: /tracing/send_traces/
 [5]: /integrations/statsd/
+[6]: /agent/docker/log/?tab=containerinstallation#examples
 {{% /tab %}}
 
 {{% tab "Docker" %}}
@@ -295,7 +298,7 @@ When configuring your traces for unified service tagging:
 
 2. Configure spans with `DD_VERSION` to add version to all spans that fall under the service that belongs to the tracer (generally `DD_SERVICE`). This means that if your service creates spans with the name of an external service, those spans do not receive `version` as a tag.
 
-    As long as version is present in spans, it is added to trace metrics generated from those spans. The version can be added manually in-code or automatically by the APM Tracer. When configured, at the very least these are used by the APM and [DogStatsD clients][2] to tag trace data and StatsD metrics with `env`, `service`, and `version`. If enabled, the APM tracer also injects the values of these variables into your logs.
+    As long as version is present in spans, it is added to trace metrics generated from those spans. The version can be added manually in-code or automatically by the APM Tracer. When configured, these are used by the APM and [DogStatsD clients][2] to tag trace data and StatsD metrics with `env`, `service`, and `version`. If enabled, the APM tracer also injects the values of these variables into your logs.
 
     **Note**: There can only be **one service per span**. Trace metrics generally have a single service as well. However, if you have a different service defined in your hosts' tags, that configured service tag shows up on all trace metrics emitted from that host.
 

@@ -8,26 +8,27 @@ categories:
   - log collection
 ddtype: crawler
 dependencies: []
-description: 'Surveillez les statuts des conteneurs, mesurez l''utilisation des ressources, et plus encore.'
-doc_link: 'https://docs.datadoghq.com/integrations/amazon_ecs/'
+description: Surveillez les statuts des conteneurs, mesurez l'utilisation des ressources, et plus encore.
+doc_link: https://docs.datadoghq.com/integrations/amazon_ecs/
 draft: false
 further_reading:
-  - link: 'https://www.datadoghq.com/blog/amazon-ecs-metrics'
+  - link: https://www.datadoghq.com/blog/amazon-ecs-metrics
     tag: Blog
     text: Key ECS metrics to monitor
-  - link: 'https://docs.datadoghq.com/integrations/ecs_fargate'
+  - link: https://docs.datadoghq.com/integrations/ecs_fargate
     tag: Documentation
     text: "Intégration Datadog/ECS\_Fargate"
 git_integration_title: amazon_ecs
 has_logo: true
 integration_id: amazon-ecs
 integration_title: Amazon ECS sur EC2
+integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'
 name: amazon_ecs
 public_title: "Intégration Datadog/Amazon\_ECS sur EC2"
-short_description: 'Surveillez les statuts des conteneurs, mesurez l''utilisation des ressources, et plus encore.'
+short_description: Surveillez les statuts des conteneurs, mesurez l'utilisation des ressources, et plus encore.
 version: '1.0'
 ---
 <div class="alert alert-warning">
@@ -53,7 +54,7 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon We
 
     {{< img src="integrations/amazon_ecs/aws_tile.png" alt="Configuration AWS ECS" >}}
 
-Lorsque la collecte de métriques est activée, un [dashboard prêt à l'emploi][3] fournissant des informations détaillées au sujet de vos métriques ECS est disponible pour cette intégration. En savoir plus sur [ce dashboard][4].
+Lorsque la collecte de métriques est activée, un [dashboard prêt à l'emploi][3] fournissant des informations détaillées au sujet de vos métriques ECS est disponible pour cette intégration. Consultez [Surveiller ECS avec Datadog][4] pour en savoir plus.
 
 ## Données collectées
 
@@ -71,7 +72,7 @@ Pour réduire les données parasites, l'intégration Amazon ECS est automatique
 
 {{< img src="integrations/amazon_ecs/aws_ecs_events.png" alt="Événements AWS ECS" >}}
 
-Pour supprimer ce filtre et recevoir tous les événements de votre intégration Datadog/Amazon ECS, contactez [l'assistance Datadog][6].
+Pour supprimer la liste d'inclusion et recevoir tous les événements générés par votre intégration Datadog/Amazon ECS, contactez l'[assistance Datadog][6].
 
 ### Checks de service
 {{< get-service-checks-from-git "amazon_ecs" >}}

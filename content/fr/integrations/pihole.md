@@ -3,26 +3,30 @@ assets:
   configuration:
     spec: assets/configuration/spec.yaml
   dashboards: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   saved_views: {}
   service_checks: assets/service_checks.json
 categories:
   - network
+  - log collection
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-extras/blob/master/pihole/README.md'
+  - https://github.com/DataDog/integrations-extras/blob/master/pihole/README.md
 display_name: pihole
+draft: false
 git_integration_title: pihole
 guid: f0a69a1e-3961-43e2-9848-469342734e34
 integration_id: pihole
 integration_title: Pi-hole
-is_public: false
+integration_version: 3.14.1
+is_public: true
 kind: integration
 maintainer: monganai@tcd.ie
 manifest_version: 1.0.0
 metric_prefix: pihole.
-metric_to_check: ''
+metric_to_check: pihole.clients_ever_seen
 name: pihole
 public_title: Intégration Datadog/Pi-hole
 short_description: Intégration pour recueillir les métriques Pi-hole par défaut
@@ -38,16 +42,19 @@ Ce check permet de surveiller [Pi-hole][1] avec l'Agent Datadog.
 
 ## Configuration
 
-Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la [documentation relative aux modèles d'intégration Autodiscovery][2] pour découvrir comment appliquer ces instructions à un environnement conteneurisé.
+Le check Pi-hole n'est pas inclus avec le package de l'[Agent Datadog][2] : vous devez donc l'installer.
 
 ### Installation
 
-Pour installer le check Pi-hole sur votre host :
+Pour l'Agent v7.21+/6.21+, suivez les instructions ci-dessous afin d'installer le check Pi-hole sur votre host. Consultez la section [Utiliser les intégrations de la communauté][3] pour effectuer une installation avec l'Agent Docker ou avec des versions antérieures de l'Agent.
 
-1. Installez le [kit de développement][3] sur n'importe quelle machine.
-2. Exécutez `ddev release build pihole` pour générer le package.
-3. [Téléchargez l'Agent Datadog][4].
-4. Importez l'artefact du build sur tous les hosts avec un Agent et exécutez `datadog-agent integration install -w path/to/pihole/dist/<NOM_ARTEFACT>.whl`.
+1. Exécutez la commande suivante pour installer l'intégration de l'Agent :
+
+   ```shell
+   sudo -u dd-agent -- datadog-agent integration install -t datadog-pihole==<INTEGRATION_VERSION>
+   ```
+
+2. Configurez votre intégration comme une [intégration][4] de base.
 
 ### Configuration
 
@@ -59,30 +66,49 @@ Pour installer le check Pi-hole sur votre host :
 
 [Lancez la sous-commande status de l'Agent][7] et cherchez `pihole` dans la section Checks.
 
+### Collecte de logs
+
+Sur les plateformes Linux, l'activation de la collecte de logs pour l'Agent Datadog se fait dans `/etc/datadog-agent/datadog.yaml`. Sur les autres plateformes, consultez la [section Fichiers de configuration de l'Agent][8] pour connaître l'emplacement de votre fichier de configuration :
+
+```yaml
+logs_enabled: true
+```
+
+- Activez ce bloc de configuration dans votre fichier `pihole.d/conf.yaml` pour commencer à recueillir vos logs :
+    ```yaml
+    logs:
+      - type: file
+        path: /var/log/pihole.log
+        source: pihole
+    ```
+
+## Données collectées
 
 ### Métriques
 {{< get-metrics-from-git "pihole" >}}
 
 
-### Checks de service
-
-**`pihole.running`** :
-
-Renvoie `CRITICAL` si l'Agent ne parvient pas à communiquer avec le host cible ou renvoie `OK` si la connexion à Pi-hole est établie.
-
 ### Événements
 
 Pi-hole n'inclut aucun événement.
 
+### Checks de service
+{{< get-service-checks-from-git "pihole" >}}
 
 
+## Dépannage
+
+Besoin d'aide ? Contactez [l'assistance Datadog][11].
 
 
 [1]: https://pi-hole.net/
-[2]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
-[3]: https://docs.datadoghq.com/fr/developers/integrations/new_check_howto/#developer-toolkit
-[4]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings#agent
+[3]: https://docs.datadoghq.com/fr/agent/guide/use-community-integrations/
+[4]: https://docs.datadoghq.com/fr/getting_started/integrations/
 [5]: https://github.com/DataDog/integrations-extras/blob/master/pihole/datadog_checks/pihole/data/conf.yaml.example
 [6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [7]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
-[8]: https://github.com/DataDog/integrations-extras/blob/master/pihole/metadata.csv
+[8]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/
+[9]: https://github.com/DataDog/integrations-extras/blob/master/pihole/metadata.csv
+[10]: https://github.com/DataDog/integrations-extras/blob/master/pihole/assets/service_checks.json
+[11]: https://docs.datadoghq.com/fr/help/

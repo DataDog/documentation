@@ -6,12 +6,13 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Surveillez des métriques clés de Google Cloud Machine Learning.
-doc_link: 'https://docs.datadoghq.com/integrations/google_cloud_ml/'
+doc_link: https://docs.datadoghq.com/integrations/google_cloud_ml/
 draft: false
 git_integration_title: google_cloud_ml
 has_logo: true
 integration_id: google-cloud-ml
 integration_title: "Google\_Machine\_Learning"
+integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'
@@ -22,7 +23,7 @@ version: '1.0'
 ---
 ## Présentation
 
-Google Cloud Machine Learning est un service géré qui vous permet de créer facilement des modèles d'apprentissage automatique, qui fonctionnent sur n'importe quel type de données, quelle que soit leur taille.
+Google Cloud Machine Learning est un service géré qui vous permet de créer facilement des modèles d'apprentissage automatique applicables à n'importe quel type de données, quel que soit leur volume.
 
 Recueillez des métriques de Google Machine Learning pour :
 
@@ -37,11 +38,11 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Google Clo
 
 ### Collecte de logs
 
-Les logs Google Cloud Machine Learning sont recueillis avec Stackdriver et envoyés à un Cloud Pub/Sub via un redirecteur Push HTTP. Si vous ne l'avez pas déjà fait, configurez le [Cloud Pub/Sub à l'aide d'un redirecteur Push HTTP][2].
+Les logs Google Cloud Machine Learning sont recueillis avec Google Cloud Logging et envoyés à un Cloud Pub/Sub via un forwarder Push HTTP. Si vous ne l'avez pas déjà fait, configurez un [Cloud Pub/Sub à l'aide d'un forwarder Push HTTP][2].
 
-Une fois cette opération effectuée, exportez vos logs Google Cloud Machine Learning depuis Stackdriver vers le Pub/Sub :
+Une fois cette opération effectuée, exportez vos logs Google Cloud Machine Learning depuis Google Cloud Logging vers le Pub/Sub :
 
-1. Accédez à la [page Stackdriver][3] et filtrez les logs Google Cloud Machine Learning.
+1. Accédez à la [page Google Cloud Logging][3] et filtrez les logs Google Cloud Machine Learning.
 2. Cliquez sur **Create Export** et nommez le récepteur.
 3. Choisissez Cloud Pub/Sub comme destination et sélectionnez le Pub/Sub créé à cette fin. **Remarque** : le Pub/Sub peut se situer dans un autre projet.
 4. Cliquez sur **Create** et attendez que le message de confirmation s'affiche.

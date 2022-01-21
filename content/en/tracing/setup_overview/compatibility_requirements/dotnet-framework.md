@@ -22,15 +22,19 @@ further_reading:
 - The .NET Tracer library for Datadog is open source. For more information, see the [.NET Tracer repository][1].
 
 ## Supported .NET Framework runtimes
-The .NET Tracer supports automatic instrumentation on .NET Framework 4.6.1 and above. It also supports [.NET Core][2].
+The .NET Tracer supports automatic instrumentation on the following .NET Framework versions. It also supports [.NET Core][2].
 
-| Version  | Microsoft End of Life |
-| -------- | --------------------- |
-| 4.8      |                       |
-| 4.7.2    |                       |
-| 4.7      |                       |
-| 4.6.2    |                       |
-| 4.6.1    | 04/26/2022            |
+| .NET Framework Version  | Microsoft End of Life | APM Supported in 1.x | APM Supported in 2.x |
+| ----------------------- | --------------------- | -------------------- | -------------------- |
+| 4.8                     |                       | Yes                  | Yes                  |
+| 4.7.2                   |                       | Yes                  | Yes                  |
+| 4.7                     |                       | Yes                  | Yes                  |
+| 4.6.2                   |                       | Yes                  | Yes                  |
+| 4.6.1                   | 04/26/2022            | Yes                  | Yes                  |
+| 4.6                     | 04/26/2022            | Yes                  | No                   |
+| 4.5.2                   | 04/26/2022            | Yes                  | No                   |
+| 4.5.1                   | 01/12/2016            | Yes                  | No                   |
+| 4.5                     | 01/12/2016            | Yes                  | No                   |
 
  Additional information on .NET Framework support policy can be found within [Microsoft's .NET Framework Lifecycle Policy][3]. 
 

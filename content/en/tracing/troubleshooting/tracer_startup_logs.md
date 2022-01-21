@@ -72,7 +72,6 @@ DATADOG TRACER DIAGNOSTICS - Profiler disabled: {process_name} found in DD_PROFI
 DATADOG TRACER DIAGNOSTICS - Failed to attach profiler: interface ICorProfilerInfo3 not found
 DATADOG TRACER DIAGNOSTICS - Profiler disabled: {application_pool} is recognized as an Azure App Services infrastructure process
 DATADOG TRACER DIAGNOSTICS - Profiler disabled: {application_pool} is recognized as Kudu, an Azure App Services reserved process
-DATADOG TRACER DIAGNOSTICS - Profiler disabled: DD_INTEGRATIONS environment variable not set
 DATADOG TRACER DIAGNOSTICS - Profiler disabled: no enabled integrations found
 DATADOG TRACER DIAGNOSTICS - Failed to attach profiler: unable to set event mask
 DATADOG TRACER DIAGNOSTICS - Error fetching configuration {exception}

@@ -172,7 +172,7 @@ To trace any Ruby code, you can use the `Datadog.tracer.trace` method:
 Datadog.tracer.trace(name, options) do |span|
   # Wrap this block around the code you want to instrument
   # Additionally, you can modify the span here.
-  # e.g. Change the resource name, set tags, etc...
+  # for example, change the resource name, or set tags
 end
 ```
 
@@ -216,7 +216,7 @@ Extra tags which should be added to the span. <br>
 Handler invoked when a block is provided to trace, and it raises an error. Provided `span` and `error` as arguments. Sets error on the span by default. <br>
 **Default**: `proc { |span, error| span.set_error(error) unless span.nil? }`
 
-It's highly recommended you set both `service` and `resource` at a minimum. Spans without a `service` or `resource` as `nil` will be discarded by the Datadog agent.
+It's recommended you set both `service` and `resource` at a minimum. Spans without a `service` or `resource` as `nil` are discarded by the Datadog agent.
 
 ### Manually creating a new span
 

@@ -193,7 +193,7 @@ When using the `DD_DOCKER_LABELS_AS_TAGS` variable within a Docker Swarm `docker
 DD_DOCKER_LABELS_AS_TAGS={"com.docker.compose.service":"service_name"}
 ```
 
-When adding labels to Docker containers, the placement of the `labels:` keyword inside the `docker-compose.yaml` file is very important. To avoid issues, follow the [Docker unified service tagging][2] documentation.
+When adding labels to Docker containers, the placement of the `labels:` keyword inside the `docker-compose.yaml` file is important. To avoid issues, follow the [Docker unified service tagging][2] documentation.
 
  If the container needs to be labeled outside of this configuration, place the `labels:` keyword **inside** the `services:` section **not** inside the `deploy:` section. Place the `labels:` keyword inside the `deploy:` section only when the service needs to be labeled. The Datadog Agent does not have any labels to extract from the containers without this placement.
 

@@ -28,6 +28,8 @@ Supported platforms:
 * macOS >= 10.13
 * tvOS >= 11.0
 
+**Note**: If you are using Swift Concurrency, you need Xcode >= 13.2 for precise span representation of asynchronous tasks.
+
 ## Installing the Swift testing SDK
 
 There are two ways of installing the testing framework:
@@ -102,7 +104,7 @@ Set all these variables in your test target:
 **Example**: `true`
 
 `DATADOG_CLIENT_TOKEN`
-: The [Datadog Client Token][1] to use to report test results.<br/>
+: Use the [Datadog Client Token][1] to report test results. Alternatively, use an API key.<br/>
 **Default**: `(empty)`<br/>
 **Example**: `pub0zxxxyyyxxxyyxxxzzxxyyxxxyyy`
 
@@ -184,7 +186,7 @@ If you are running tests in non-supported CI providers or with no `.git` folder,
 
 ### Running tests
 
-After installation, run your tests as you normally do, for example using the `xcodebuild test` command. Tests, network requests, and application logs are instrumented automatically. Pass your environment variables when running your tests in the CI, for example:
+After installation, run your tests as you normally do, for example using the `xcodebuild test` command. Tests, network requests, and application crashes are instrumented automatically. Pass your environment variables when running your tests in the CI, for example:
 
 <pre>
 <code>
@@ -205,6 +207,14 @@ For UITests, both the test target and the application running from the UITests m
 For the following configuration settings:
  - `Boolean` variables can use any of: `1`, `0`, `true`, `false`, `YES`, or `NO`
  - `String` list variables accept a list of elements separated by `,` or `;`
+ 
+### Enabling auto-instrumentation
+
+`DD_ENABLE_STDOUT_INSTRUMENTATION`
+: Captures messages written to `stdout` (for example, `print()`) and reports them as logs. This may impact your bill. (Boolean)
+
+`DD_ENABLE_STDERR_INSTRUMENTATION`
+: Captures messages written to `stderr` (for example, `NSLog()`, UITest steps) and reports them as logs. This may impact your bill. (Boolean)
 
 ### Disabling auto-instrumentation
 
@@ -212,12 +222,6 @@ The framework enables auto-instrumentation of all supported libraries, but in so
 
 `DD_DISABLE_NETWORK_INSTRUMENTATION`
 : Disables all network instrumentation (Boolean)
-
-`DD_DISABLE_STDOUT_INSTRUMENTATION`
-: Disables all `stdout` instrumentation (Boolean)
-
-`DD_DISABLE_STDERR_INSTRUMENTATION`
-: Disables all `stderr` instrumentation (Boolean)
 
 `DD_DISABLE_SDKIOS_INTEGRATION`
 : Disables integration with `dd-sdk-ios` logs and traces (Boolean)
@@ -244,6 +248,13 @@ For Network auto-instrumentation, you can configure these additional settings:
 
 `DD_MAX_PAYLOAD_SIZE`
 : Sets the maximum size reported from the payload. Default `1024` (Integer)
+
+`DD_DISABLE_NETWORK_CALL_STACK`
+: Disables the call stack information in the network spans (Boolean)
+
+`DD_ENABLE_NETWORK_CALL_STACK_SYMBOLICATED`
+: Shows the call stack information with not only the method name, but also the precise file and line information. May impact your tests' performance (Boolean)
+
 
 You can also disable or enable specific auto-instrumentation in some of the tests from Swift or Objective-C by importing the module `DatadogSDKTesting` and using the class: `DDInstrumentationControl`.
 
@@ -668,11 +679,11 @@ session.end()
 
 Always call `session.end()` at the end so that all the test info is flushed to Datadog.
 
-[1]: https://app.datadoghq.com/organization-settings/client-tokens
-[2]: /getting_started/site/
 
 {{< /site-region >}}
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+[1]: https://app.datadoghq.com/organization-settings/client-tokens
+[2]: /getting_started/site/

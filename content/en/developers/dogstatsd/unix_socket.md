@@ -127,7 +127,7 @@ Origin detection allows DogStatsD to detect where the container metrics come fro
     ## @param dogstatsd_origin_detection - boolean - optional - default: false
     ## When using Unix Socket, DogStatsD can tag metrics
     ## with container metadata. If running DogStatsD in a container,
-    ## host PID mode (e.g. with --pid=host) is required.
+    ## host PID mode (for example, with --pid=host) is required.
     #
     dogstatsd_origin_detection: true
     ```
@@ -213,7 +213,7 @@ When running inside a container, DogStatsD needs to run in the host's PID namesp
 
 ### Client libraries
 
-The following official DogStatsD client libraries natively support UDS traffic. See the library's documentation on how to enable UDS traffic. **Note**: As with UDP, enabling client-side buffering is highly recommended to improve performance on heavy traffic:
+The following official DogStatsD client libraries natively support UDS traffic. See the library's documentation on how to enable UDS traffic. **Note**: As with UDP, enabling client-side buffering is recommended to improve performance on heavy traffic:
 
 | Language | Library                              |
 | -------- | ------------------------------------ |

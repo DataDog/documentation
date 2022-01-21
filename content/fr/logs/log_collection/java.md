@@ -4,16 +4,16 @@ kind: documentation
 aliases:
   - /fr/logs/languages/java
 further_reading:
-  - link: /logs/processing/
+  - link: /logs/log_configuration/processors
     tag: Documentation
     text: Apprendre à traiter vos logs
-  - link: /logs/processing/parsing/
+  - link: /logs/log_configuration/parsing
     tag: Documentation
     text: En savoir plus sur le parsing
   - link: /logs/explorer/
     tag: Documentation
     text: Apprendre à explorer vos logs
-  - link: '/logs/explorer/#visualiser-les-donnees'
+  - link: /logs/explorer/#visualiser-les-donnees
     tag: Documentation
     text: Effectuer des analyses de logs
   - link: /tracing/connect_logs_and_traces/java/
@@ -22,9 +22,9 @@ further_reading:
   - link: /logs/faq/log-collection-troubleshooting-guide/
     tag: FAQ
     text: Dépannage pour la collecte de logs
-  - link: 'https://www.datadoghq.com/blog/java-logging-guide/'
+  - link: https://www.datadoghq.com/blog/java-logging-guide/
     tag: Blog
-    text: 'Comment recueillir, personnaliser et standardiser des logs Java'
+    text: Comment recueillir, personnaliser et standardiser des logs Java
 ---
 Les stack traces liées aux logs Java types sont divisées en plusieurs lignes, ce qui les rend difficiles à associer à l'événement de log d'origine :
 
@@ -61,17 +61,17 @@ Pour Log4j, générez les logs au format JSON en utilisant le module SLF4J [log4
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>log4j-over-slf4j</artifactId>
-      <version>1.7.13</version>
+      <version>1.7.32</version>
     </dependency>
     <dependency>
       <groupId>ch.qos.logback</groupId>
       <artifactId>logback-classic</artifactId>
-      <version>1.1.3</version>
+      <version>1.2.9</version>
     </dependency>
     <dependency>
       <groupId>net.logstash.logback</groupId>
       <artifactId>logstash-logback-encoder</artifactId>
-      <version>4.5.1</version>
+      <version>6.6</version>
     </dependency>
     ```
 2. Configurez un file appender en utilisant la structure JSON dans `logback.xml` :
@@ -117,7 +117,7 @@ Log4j 2 intègre une structure JSON.
     <dependency>
         <groupId>org.apache.logging.log4j</groupId>
         <artifactId>log4j-core</artifactId>
-        <version>2.15.0</version>
+        <version>2.17.0</version>
     </dependency>
     <dependency>
         <groupId>com.fasterxml.jackson.core</groupId>
@@ -162,12 +162,12 @@ Utilisez la bibliothèque [logstash-logback-encoder][1] pour les logs au format 
     <dependency>
       <groupId>ch.qos.logback</groupId>
       <artifactId>logback-classic</artifactId>
-      <version>1.1.3</version>
+      <version>1.2.9</version>
     </dependency>
     <dependency>
       <groupId>net.logstash.logback</groupId>
       <artifactId>logstash-logback-encoder</artifactId>
-      <version>4.5.1</version>
+      <version>6.6</version>
     </dependency>
     ```
 
@@ -294,7 +294,7 @@ Pour transmettre vos logs directement à Datadog :
 
 ### Créer un pont entre les bibliothèques de journalisation Java et Logback
 
-Un pont peut être créé entre les bibliothèques de journalisation les plus courantes et Logback.
+Si vous n'utilisez pas déjà Logback, la plupart des bibliothèques de journalisation courantes peuvent être reliées à Logback.
 
 {{< tabs >}}
 {{% tab "Log4j" %}}
@@ -306,17 +306,17 @@ Utilisez le module SLF4J [log4j-over-slf4j][1] avec Logback pour envoyer les log
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>log4j-over-slf4j</artifactId>
-      <version>1.7.13</version>
+      <version>1.7.32</version>
     </dependency>
     <dependency>
       <groupId>ch.qos.logback</groupId>
       <artifactId>logback-classic</artifactId>
-      <version>1.1.3</version>
+      <version>1.2.9</version>
     </dependency>
     <dependency>
       <groupId>net.logstash.logback</groupId>
       <artifactId>logstash-logback-encoder</artifactId>
-      <version>4.5.1</version>
+      <version>6.6</version>
     </dependency>
     ```
 2. Configurez Logback.
@@ -337,18 +337,19 @@ Log4j 2 permet la journalisation sur un host à distance, mais n'offre pas la p
     <dependency>
         <groupId>org.apache.logging.log4j</groupId>
         <artifactId>log4j-to-slf4j</artifactId>
-        <version>2.15.0</version>
-    </dependency>
-    <dependency>
-        <groupId>net.logstash.logback</groupId>
-        <artifactId>logstash-logback-encoder</artifactId>
-        <version>4.5.1</version>
+        <version>2.17.0</version>
     </dependency>
     <dependency>
         <groupId>ch.qos.logback</groupId>
         <artifactId>logback-classic</artifactId>
-        <version>1.1.3</version>
+        <version>1.2.9</version>
     </dependency>
+    <dependency>
+        <groupId>net.logstash.logback</groupId>
+        <artifactId>logstash-logback-encoder</artifactId>
+        <version>6.6</version>
+    </dependency>
+
     ```
 2. Configurez Logback.
 
@@ -365,11 +366,11 @@ Log4j 2 permet la journalisation sur un host à distance, mais n'offre pas la p
 
 ### Configurer Logback
 
-Utilisez la bibliothèque de journalisation [logstash-logback-encoder][4] avec Logback pour diffuser directement vos logs. 
+Utilisez la bibliothèque de journalisation [logstash-logback-encoder][4] avec Logback pour envoyer directement vos logs à Datadog.
 
-1. Configurez un TCP appender dans votre fichier `logback.xml`, en remplaçant `<CLÉ_API>` par la valeur de votre clé d'API Datadog :
+1. Configurez un TCP appender dans votre fichier `logback.xml`. Votre clé d'API sera ainsi récupérée depuis la variable d'environnement `DD_API_KEY`. Vous pouvez également ajouter votre clé d'API directement dans le fichier de configuration :
 
-    {{< site-region region="us" >}}
+    {{< site-region region="us,us3,us5" >}}
 
   ```xml
   <configuration>
@@ -378,16 +379,16 @@ Utilisez la bibliothèque de journalisation [logstash-logback-encoder][4] avec L
       <encoder class="net.logstash.logback.encoder.LogstashEncoder" />
     </appender>
     <appender name="JSON_TCP" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
-      <remoteHost>intake.logs.datadoghq.com</remoteHost>
-      <port>10514</port>
+      <destination>intake.logs.datadoghq.com:10516</destination>
       <keepAliveDuration>20 seconds</keepAliveDuration>
       <encoder class="net.logstash.logback.encoder.LogstashEncoder">
           <prefix class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
               <layout class="ch.qos.logback.classic.PatternLayout">
-                  <pattern><API_KEY> %mdc{keyThatDoesNotExist}</pattern>
+                  <pattern>${DD_API_KEY} %mdc{keyThatDoesNotExist}</pattern>
               </layout>
             </prefix>
       </encoder>
+      <ssl />
     </appender>
 
     <root level="DEBUG">
@@ -408,16 +409,16 @@ Utilisez la bibliothèque de journalisation [logstash-logback-encoder][4] avec L
       <encoder class="net.logstash.logback.encoder.LogstashEncoder" />
     </appender>
     <appender name="JSON_TCP" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
-      <remoteHost>tcp-intake.logs.datadoghq.eu</remoteHost>
-      <port>1883</port>
+      <destination>tcp-intake.logs.datadoghq.eu:443</destination>
       <keepAliveDuration>20 seconds</keepAliveDuration>
       <encoder class="net.logstash.logback.encoder.LogstashEncoder">
           <prefix class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
               <layout class="ch.qos.logback.classic.PatternLayout">
-                  <pattern><API_KEY> %mdc{keyThatDoesNotExist}</pattern>
+                  <pattern>${DD_API_KEY} %mdc{keyThatDoesNotExist}</pattern>
               </layout>
             </prefix>
       </encoder>
+      <ssl />
     </appender>
 
     <root level="DEBUG">
@@ -429,14 +430,11 @@ Utilisez la bibliothèque de journalisation [logstash-logback-encoder][4] avec L
 
     {{< /site-region >}}
 
-    {{< site-region region="us3" >}}
-  Non pris en charge.
-    {{< /site-region >}}
     {{< site-region region="gov" >}}
   Non pris en charge.
     {{< /site-region >}}
 
-    **Remarque** : `%mdc{cléNonExistante}` est ajouté, car la configuration XML supprime les espaces. Pour en savoir plus sur le paramètre de préfixe, consultez la [documentation Logback][5].
+    **Remarque** : `%mdc{keyThatDoesNotExist}` est utilisé car la configuration XML supprime les espaces. Pour en savoir plus sur le paramètre de préfixe, consultez la [documentation Logback][5].
 
 2. Ajoutez la dépendance d'encodeur Logstash dans votre fichier `pom.xml` :
 
@@ -444,12 +442,12 @@ Utilisez la bibliothèque de journalisation [logstash-logback-encoder][4] avec L
     <dependency>
       <groupId>ch.qos.logback</groupId>
       <artifactId>logback-classic</artifactId>
-      <version>1.1.3</version>
+      <version>1.2.9</version>
     </dependency>
     <dependency>
       <groupId>net.logstash.logback</groupId>
       <artifactId>logstash-logback-encoder</artifactId>
-      <version>4.5.1</version>
+      <version>6.6</version>
     </dependency>
     ```
 
@@ -517,8 +515,8 @@ Pour générer ce JSON :
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: http://logback.qos.ch/manual/mdc.html
-[2]: /fr/logs/processing/parsing/
+[2]: /fr/logs/log_configuration/parsing
 [3]: /fr/tracing/connect_logs_and_traces/java/
 [4]: https://github.com/logstash/logstash-logback-encoder
-[5]: https://github.com/logstash/logstash-logback-encoder#prefixsuffix
-[6]: /fr/logs/processing/parsing/#key-value-or-logfmt
+[5]: https://github.com/logstash/logstash-logback-encoder#prefixsuffixseparator
+[6]: /fr/logs/log_configuration/parsing/#key-value-or-logfmt

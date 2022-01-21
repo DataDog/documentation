@@ -64,6 +64,7 @@ Control who can access log events containing sensitive data. Use tags added by S
 - Any rules that you add or update only affect data coming into Datadog after the rule was defined.
 - Sensitive Data Scanner does not affect any rules you define on the Datadog Agent directly.
 - Scrubbing and hashing of attributes in log events are irreversible changes. Verify your rules on test data before enabling on production data.
+- To turn off Sensitive Data Scanner entirely, disable each Scanning Group and Scanning Rule by setting the toggle to the **off** state.
 
 ## Further Reading
 

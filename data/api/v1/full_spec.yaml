@@ -360,6 +360,18 @@ components:
       - ADMIN
       - READ_ONLY
       - ERROR
+    AgentCheck:
+      description: Array of strings.
+      example:
+      - ntp
+      - ntp
+      - ntp:d884b5186b651429
+      - OK
+      - ''
+      - ''
+      items:
+        description: Agent check running on the host.
+      type: array
     AlertGraphWidgetDefinition:
       description: Alert graphs are timeseries graphs showing the current status of
         any monitor defined on your system.
@@ -913,6 +925,12 @@ components:
         author_handle:
           description: Identifier of the dashboard author.
           example: test@datadoghq.com
+          readOnly: true
+          type: string
+        author_name:
+          description: Name of the dashboard author.
+          example: John Doe
+          nullable: true
           readOnly: true
           type: string
         created_at:
@@ -1779,6 +1797,7 @@ components:
             description: A day of the week, formatted as `Mon`, `Tue`, `Wed`, `Thu`,
               `Fri`, `Sat` or `Sun`.
             type: string
+          nullable: true
           type: array
       type: object
     EmbeddableGraph:
@@ -1886,8 +1905,8 @@ components:
         alert_type:
           $ref: '#/components/schemas/EventAlertType'
         date_happened:
-          description: 'POSIX timestamp of the event. Must be sent as an integer (i.e.
-            no quotes).
+          description: 'POSIX timestamp of the event. Must be sent as an integer (that
+            is no quotes).
 
             Limited to events no older than 7 days.'
           format: int64
@@ -1992,8 +2011,8 @@ components:
         alert_type:
           $ref: '#/components/schemas/EventAlertType'
         date_happened:
-          description: 'POSIX timestamp of the event. Must be sent as an integer (i.e.
-            no quotes).
+          description: 'POSIX timestamp of the event. Must be sent as an integer (that
+            is no quotes).
 
             Limited to events no older than 7 days.'
           format: int64
@@ -2006,21 +2025,11 @@ components:
 
             Any tags associated with the host are also applied to this event.'
           type: string
-        id:
-          description: Integer ID of the event.
-          format: int64
-          readOnly: true
-          type: integer
-        payload:
-          description: Payload of the event.
-          example: '{}'
-          readOnly: true
-          type: string
         priority:
           $ref: '#/components/schemas/EventPriority'
         related_event_id:
-          description: ID of the parent event. Must be sent as an integer (i.e. no
-            quotes).
+          description: ID of the parent event. Must be sent as an integer (that is
+            no quotes).
           format: int64
           type: integer
         source_type_name:
@@ -2052,10 +2061,6 @@ components:
           description: The event title.
           example: Did you hear the news today?
           type: string
-        url:
-          description: URL of the event.
-          readOnly: true
-          type: string
       required:
       - title
       - text
@@ -2066,8 +2071,8 @@ components:
         alert_type:
           $ref: '#/components/schemas/EventAlertType'
         date_happened:
-          description: 'POSIX timestamp of the event. Must be sent as an integer (i.e.
-            no quotes).
+          description: 'POSIX timestamp of the event. Must be sent as an integer (that
+            is no quotes).
 
             Limited to events no older than 7 days.'
           format: int64
@@ -2093,8 +2098,8 @@ components:
         priority:
           $ref: '#/components/schemas/EventPriority'
         related_event_id:
-          description: ID of the parent event. Must be sent as an integer (i.e. no
-            quotes).
+          description: ID of the parent event. Must be sent as an integer (that is
+            no quotes).
           format: int64
           type: integer
         source_type_name:
@@ -3280,11 +3285,92 @@ components:
         meta:
           description: Metadata associated with your host.
           properties:
+            agent_checks:
+              description: A list of Agent checks running on the host.
+              items:
+                $ref: '#/components/schemas/AgentCheck'
+              type: array
+            agent_version:
+              description: The Datadog Agent version.
+              example: 7.32.3
+              type: string
+            cpuCores:
+              description: The number of cores.
+              example: 1
+              format: int64
+              type: integer
+            fbsdV:
+              description: An array of Mac versions.
+              items:
+                description: The version name.
+                example: FreeBSD
+                type: string
+              type: array
+            gohai:
+              description: JSON string containing system information.
+              example: '{"cpu":{"cache_size":"8192 KB","cpu_cores":"1","cpu_logical_processors":"1","family":"6","mhz":"2712.000","model":"142","model_name":"Intel(R)
+                Core(TM) i7-8559U CPU @ 2.70GHz","stepping":"10","vendor_id":"GenuineIntel"},"filesystem":[{"kb_size":"3966896","mounted_on":"/dev","name":"udev"},{"kb_size":"797396","mounted_on":"/run","name":"tmpfs"},{"kb_size":"64800356","mounted_on":"/","name":"/dev/mapper/vagrant--vg-root"},{"kb_size":"3986972","mounted_on":"/dev/shm","name":"tmpfs"},{"kb_size":"5120","mounted_on":"/run/lock","name":"tmpfs"},{"kb_size":"3986972","mounted_on":"/sys/fs/cgroup","name":"tmpfs"},{"kb_size":"488245288","mounted_on":"/vagrant","name":"vagrant"},{"kb_size":"797392","mounted_on":"/run/user/1000","name":"tmpfs"}],"memory":{"swap_total":"1003516kB","total":"7973944kB"},"network":{"interfaces":[{"ipv4":"10.0.2.15","ipv4-network":"10.0.2.0/24","ipv6":"fe80::a00:27ff:fec2:be11","ipv6-network":"fe80::/64","macaddress":"08:00:27:c2:be:11","name":"eth0"},{"ipv4":"192.168.122.1","ipv4-network":"192.168.122.0/24","macaddress":"52:54:00:6f:1c:bf","name":"virbr0"}],"ipaddress":"10.0.2.15","ipaddressv6":"fe80::a00:27ff:fec2:be11","macaddress":"08:00:27:c2:be:11"},"platform":{"GOOARCH":"amd64","GOOS":"linux","goV":"1.16.7","hardware_platform":"x86_64","hostname":"vagrant","kernel_name":"Linux","kernel_release":"4.15.0-29-generic","kernel_version":"#31-Ubuntu
+                SMP Tue Jul 17 15:39:52 UTC 2018","machine":"x86_64","os":"GNU/Linux","processor":"x86_64","pythonV":"2.7.15rc1"}}'
+              type: string
+            install_method:
+              description: Agent install method.
+              properties:
+                installer_version:
+                  description: The installer version.
+                  example: install_script-1.7.1
+                  type: string
+                tool:
+                  description: Tool used to install the agent.
+                  example: install_script
+                  type: string
+                tool_version:
+                  description: The tool version.
+                  example: install_script
+                  type: string
+              type: object
+            macV:
+              description: An array of Mac versions.
+              items:
+                description: Version name.
+                example: Mac
+                type: string
+              type: array
+            machine:
+              description: The machine architecture.
+              example: amd64
+              type: string
             nixV:
               description: Array of Unix versions.
               items:
                 description: Version name.
                 example: Ubuntu
+                type: string
+              type: array
+            platform:
+              description: The OS platform.
+              example: linux
+              type: string
+            processor:
+              description: The processor.
+              example: Intel(R) Core(TM) i7-8559U CPU @ 2.70GHz
+              type: string
+            pythonV:
+              description: The Python version.
+              example: 3.8.11
+              type: string
+            socket-fqdn:
+              description: The socket fqdn.
+              example: vagrant.vm.
+              type: string
+            socket-hostname:
+              description: The socket hostname.
+              example: vagrant
+              type: string
+            winV:
+              description: An array of Windows versions.
+              items:
+                description: Version name.
+                example: Windows
                 type: string
               type: array
           type: object
@@ -3528,6 +3614,95 @@ components:
           format: int64
           type: integer
       type: object
+    HourlyUsageAttributionBody:
+      description: The usage for one set of tags for one hour.
+      properties:
+        hour:
+          description: The hour for the usage.
+          format: date-time
+          type: string
+        org_name:
+          description: The name of the organization.
+          type: string
+        public_id:
+          description: The organization public ID.
+          type: string
+        tag_config_source:
+          description: The source of the usage attribution tag configuration and the
+            selected tags in the format of `<source_org_name>:::<selected tag 1>///<selected
+            tag 2>///<selected tag 3>`.
+          type: string
+        tags:
+          $ref: '#/components/schemas/UsageAttributionTagNames'
+        total_usage_sum:
+          description: Total product usage for the given tags within the hour.
+          format: double
+          type: number
+        updated_at:
+          description: Shows the most recent hour in the current month for all organizations
+            where usages are calculated.
+          type: string
+        usage_type:
+          $ref: '#/components/schemas/HourlyUsageAttributionUsageType'
+      type: object
+    HourlyUsageAttributionMetadata:
+      description: The object containing document metadata.
+      properties:
+        pagination:
+          $ref: '#/components/schemas/HourlyUsageAttributionPagination'
+      type: object
+    HourlyUsageAttributionPagination:
+      description: The metadata for the current pagination.
+      properties:
+        next_record_id:
+          description: The cursor to get the next results (if any). To make the next
+            request, use the same parameters and add `next_record_id`.
+          type: string
+      type: object
+    HourlyUsageAttributionResponse:
+      description: Response containing the hourly usage attribution by tag(s).
+      properties:
+        metadata:
+          $ref: '#/components/schemas/HourlyUsageAttributionMetadata'
+        usage:
+          description: Get the hourly usage attribution by tag(s).
+          items:
+            $ref: '#/components/schemas/HourlyUsageAttributionBody'
+          type: array
+      type: object
+    HourlyUsageAttributionUsageType:
+      description: Supported products for hourly usage attribution requests.
+      enum:
+      - api_usage
+      - apm_host_usage
+      - browser_usage
+      - container_usage
+      - custom_timeseries_usage
+      - fargate_usage
+      - functions_usage
+      - indexed_logs_usage
+      - infra_host_usage
+      - invocations_usage
+      - npm_host_usage
+      - profiled_container_usage
+      - profiled_host_usage
+      - snmp_usage
+      type: string
+      x-enum-varnames:
+      - API_USAGE
+      - APM_HOST_USAGE
+      - BROWSER_USAGE
+      - CONTAINER_USAGE
+      - CUSTOM_TIMESERIES_USAGE
+      - FARGATE_USAGE
+      - FUNCTIONS_USAGE
+      - INDEXED_LOGS_USAGE
+      - INFRA_HOST_USAGE
+      - INVOCATIONS_USAGE
+      - NPM_HOST_USAGE
+      - PROFILED_CONTAINER_USAGE
+      - PROFILED_HOST_USAGE
+      - SNMP_USAGE
     IFrameWidgetDefinition:
       description: The iframe widget allows you to embed a portion of any other web
         page on your dashboard. Only available on FREE layout dashboards.
@@ -4726,9 +4901,10 @@ components:
               format: date-time
               type: string
             timezone:
-              description: 'Timezone can be specified both as an offset (e.g. "UTC+03:00")
+              description: 'Timezone can be specified both as an offset (for example
+                "UTC+03:00")
 
-                or a regional zone (e.g. "Europe/Paris").'
+                or a regional zone (for example "Europe/Paris").'
               type: string
             to:
               description: Maximum timestamp for requested logs.
@@ -6151,13 +6327,13 @@ components:
           example: avg(last_5m):sum:system.net.bytes_rcvd{host:host0} > 100
           type: string
         scopes:
-          description: 'The scope(s) to which the downtime applies, e.g. `host:app2`.
+          description: 'The scope(s) to which the downtime applies, for example `host:app2`.
 
-            Provide multiple scopes as a comma-separated list, e.g. `env:dev,env:prod`.
+            Provide multiple scopes as a comma-separated list, for example `env:dev,env:prod`.
 
             The resulting downtime applies to sources that matches ALL provided scopes
 
-            (i.e. `env:dev AND env:prod`), NOT any of them.'
+            (that is `env:dev AND env:prod`), NOT any of them.'
           example:
           - host:app2
           - env:dev,env:prod
@@ -6353,6 +6529,7 @@ components:
       - slo alert
       - event-v2 alert
       - audit alert
+      - ci-pipelines alert
       example: query alert
       type: string
       x-enum-varnames:
@@ -6369,6 +6546,7 @@ components:
       - SLO_ALERT
       - EVENT_V2_ALERT
       - AUDIT_ALERT
+      - CI_PIPELINES_ALERT
     MonitorUpdateRequest:
       description: Object describing a monitor update request.
       properties:
@@ -6435,6 +6613,239 @@ components:
           type: array
         type:
           $ref: '#/components/schemas/MonitorType'
+      type: object
+    MonthlyUsageAttributionBody:
+      description: Usage Summary by tag for a given organization.
+      properties:
+        month:
+          description: 'Datetime in ISO-8601 format, UTC, precise to month: [YYYY-MM].'
+          format: date-time
+          type: string
+        org_name:
+          description: The name of the organization.
+          type: string
+        public_id:
+          description: The organization public ID.
+          type: string
+        tag_config_source:
+          description: The source of the usage attribution tag configuration and the
+            selected tags in the format `<source_org_name>:<selected tag 1>///<selected
+            tag 2>///<selected tag 3>`.
+          type: string
+        tags:
+          $ref: '#/components/schemas/UsageAttributionTagNames'
+        updated_at:
+          description: Datetime of the most recent update to the usage values.
+          format: date-time
+          type: string
+        values:
+          $ref: '#/components/schemas/MonthlyUsageAttributionValues'
+      type: object
+    MonthlyUsageAttributionMetadata:
+      description: The object containing document metadata.
+      properties:
+        aggregates:
+          $ref: '#/components/schemas/UsageAttributionAggregates'
+        pagination:
+          $ref: '#/components/schemas/MonthlyUsageAttributionPagination'
+      type: object
+    MonthlyUsageAttributionPagination:
+      description: The metadata for the current pagination.
+      properties:
+        next_record_id:
+          description: The cursor to use to get the next results, if any. To make
+            the next request, use the same parameters with the addition of the `next_record_id`.
+          type: string
+      type: object
+    MonthlyUsageAttributionResponse:
+      description: Response containing the monthly Usage Summary by tag(s).
+      properties:
+        metadata:
+          $ref: '#/components/schemas/MonthlyUsageAttributionMetadata'
+        usage:
+          description: Get Usage Summary by tag(s).
+          items:
+            $ref: '#/components/schemas/MonthlyUsageAttributionBody'
+          type: array
+      type: object
+    MonthlyUsageAttributionSupportedMetrics:
+      description: Supported metrics for monthly usage attribution requests.
+      enum:
+      - api_usage
+      - api_percentage
+      - apm_host_usage
+      - apm_host_percentage
+      - browser_usage
+      - browser_percentage
+      - container_usage
+      - container_percentage
+      - custom_timeseries_usage
+      - custom_timeseries_percentage
+      - fargate_usage
+      - fargate_percentage
+      - functions_usage
+      - functions_percentage
+      - indexed_logs_usage
+      - indexed_logs_percentage
+      - infra_host_usage
+      - infra_host_percentage
+      - invocations_usage
+      - invocations_percentage
+      - npm_host_usage
+      - npm_host_percentage
+      - profiled_container_usage
+      - profiled_container_percentage
+      - profiled_host_usage
+      - profiled_host_percentage
+      - snmp_usage
+      - snmp_percentage
+      - '*'
+      type: string
+      x-enum-varnames:
+      - API_USAGE
+      - API_PERCENTAGE
+      - APM_HOST_USAGE
+      - APM_HOST_PERCENTAGE
+      - BROWSER_USAGE
+      - BROWSER_PERCENTAGE
+      - CONTAINER_USAGE
+      - CONTAINER_PERCENTAGE
+      - CUSTOM_TIMESERIES_USAGE
+      - CUSTOM_TIMESERIES_PERCENTAGE
+      - FARGATE_USAGE
+      - FARGATE_PERCENTAGE
+      - FUNCTIONS_USAGE
+      - FUNCTIONS_PERCENTAGE
+      - INDEXED_LOGS_USAGE
+      - INDEXED_LOGS_PERCENTAGE
+      - INFRA_HOST_USAGE
+      - INFRA_HOST_PERCENTAGE
+      - INVOCATIONS_USAGE
+      - INVOCATIONS_PERCENTAGE
+      - NPM_HOST_USAGE
+      - NPM_HOST_PERCENTAGE
+      - PROFILED_CONTAINER_USAGE
+      - PROFILED_CONTAINER_PERCENTAGE
+      - PROFILED_HOST_USAGE
+      - PROFILED_HOST_PERCENTAGE
+      - SNMP_USAGE
+      - SNMP_PERCENTAGE
+      - ALL
+    MonthlyUsageAttributionValues:
+      description: Fields in Usage Summary by tag(s).
+      properties:
+        api_percentage:
+          description: The percentage of synthetic API test usage by tag(s).
+          format: double
+          type: number
+        api_usage:
+          description: The synthetic API test usage by tag(s).
+          format: double
+          type: number
+        apm_host_percentage:
+          description: The percentage of APM host usage by tag(s).
+          format: double
+          type: number
+        apm_host_usage:
+          description: The APM host usage by tag(s).
+          format: double
+          type: number
+        browser_percentage:
+          description: The percentage of synthetic browser test usage by tag(s).
+          format: double
+          type: number
+        browser_usage:
+          description: The synthetic browser test usage by tag(s).
+          format: double
+          type: number
+        container_percentage:
+          description: The percentage of container usage by tag(s).
+          format: double
+          type: number
+        container_usage:
+          description: The container usage by tag(s).
+          format: double
+          type: number
+        custom_timeseries_percentage:
+          description: The percentage of custom metrics usage by tag(s).
+          format: double
+          type: number
+        custom_timeseries_usage:
+          description: The custom metrics usage by tag(s).
+          format: double
+          type: number
+        fargate_percentage:
+          description: The percentage of Fargate usage by tags.
+          format: double
+          type: number
+        fargate_usage:
+          description: The Fargate usage by tags.
+          format: double
+          type: number
+        functions_percentage:
+          description: The percentage of Lambda function usage by tag(s).
+          format: double
+          type: number
+        functions_usage:
+          description: The Lambda function usage by tag(s).
+          format: double
+          type: number
+        indexed_logs_percentage:
+          description: The percentage of indexed logs usage by tags.
+          format: double
+          type: number
+        indexed_logs_usage:
+          description: The indexed logs usage by tags.
+          format: double
+          type: number
+        infra_host_percentage:
+          description: The percentage of infrastructure host usage by tag(s).
+          format: double
+          type: number
+        infra_host_usage:
+          description: The infrastructure host usage by tag(s).
+          format: double
+          type: number
+        invocations_percentage:
+          description: The percentage of Lambda invocation usage by tag(s).
+          format: double
+          type: number
+        invocations_usage:
+          description: The Lambda invocation usage by tag(s).
+          format: double
+          type: number
+        npm_host_percentage:
+          description: The percentage of network host usage by tag(s).
+          format: double
+          type: number
+        npm_host_usage:
+          description: The network host usage by tag(s).
+          format: double
+          type: number
+        profiled_container_percentage:
+          description: The percentage of profiled container usage by tag(s).
+          format: double
+          type: number
+        profiled_container_usage:
+          description: The profiled container usage by tag(s).
+          format: double
+          type: number
+        profiled_host_percentage:
+          description: The percentage of profiled hosts usage by tag(s).
+          format: double
+          type: number
+        profiled_host_usage:
+          description: The profiled hosts usage by tag(s).
+          format: double
+          type: number
+        snmp_percentage:
+          description: The percentage of network device usage by tag(s).
+          format: double
+          type: number
+        snmp_usage:
+          description: The network device usage by tag(s).
+          format: double
+          type: number
       type: object
     NoteWidgetDefinition:
       description: The notes and links widget is similar to free text widget, but
@@ -7773,8 +8184,11 @@ components:
           format: int64
           type: integer
         rrule:
-          description: Recurrence rules as defined in the iCalendar RFC 5545.
-          example: RRULE:FREQ=DAILY;INTERVAL=10;COUNT=5
+          description: 'The recurrence rules as defined in the iCalendar RFC 5545.
+            The supported rules for SLO corrections
+
+            are `FREQ`, `INTERVAL`, `COUNT` and `UNTIL`.'
+          example: FREQ=DAILY;INTERVAL=10;COUNT=5
           type: string
         slo_id:
           description: ID of the SLO that this correction will be applied to.
@@ -7856,8 +8270,11 @@ components:
               type: string
           type: object
         rrule:
-          description: Recurrence rules as defined in the iCalendar RFC 5545.
-          example: RRULE:FREQ=DAILY;INTERVAL=10;COUNT=5
+          description: 'The recurrence rules as defined in the iCalendar RFC 5545.
+            The supported rules for SLO corrections
+
+            are `FREQ`, `INTERVAL`, `COUNT` and `UNTIL`.'
+          example: FREQ=DAILY;INTERVAL=10;COUNT=5
           nullable: true
           type: string
         slo_id:
@@ -7915,8 +8332,11 @@ components:
           format: int64
           type: integer
         rrule:
-          description: Recurrence rules as defined in the iCalendar RFC 5545.
-          example: RRULE:FREQ=DAILY;INTERVAL=10;COUNT=5
+          description: 'The recurrence rules as defined in the iCalendar RFC 5545.
+            The supported rules for SLO corrections
+
+            are `FREQ`, `INTERVAL`, `COUNT` and `UNTIL`.'
+          example: FREQ=DAILY;INTERVAL=10;COUNT=5
           type: string
         start:
           description: Starting time of the correction in epoch seconds.
@@ -8601,7 +9021,8 @@ components:
         target_display:
           description: 'A string representation of the target that indicates its precision.
 
-            It uses trailing zeros to show significant decimal places (e.g. `98.00`).
+            It uses trailing zeros to show significant decimal places (for example
+            `98.00`).
 
 
             Always included in service level objective responses. Ignored in
@@ -9754,6 +10175,138 @@ components:
       - account
       - url
       type: object
+    SunburstWidgetDefinition:
+      description: Sunbursts are spot on to highlight how groups contribute to the
+        total of a query.
+      properties:
+        custom_links:
+          description: List of custom links.
+          items:
+            $ref: '#/components/schemas/WidgetCustomLink'
+          type: array
+        hide_total:
+          description: Show the total value in this widget.
+          type: boolean
+        legend:
+          $ref: '#/components/schemas/SunburstWidgetLegend'
+        requests:
+          description: List of sunburst widget requests.
+          example:
+          - q/apm_query/log_query: <METRIC_1>{<SCOPE_1>}
+          items:
+            $ref: '#/components/schemas/SunburstWidgetRequest'
+          minItems: 1
+          type: array
+        time:
+          $ref: '#/components/schemas/WidgetTime'
+        title:
+          description: Title of your widget.
+          type: string
+        title_align:
+          $ref: '#/components/schemas/WidgetTextAlign'
+        title_size:
+          description: Size of the title.
+          type: string
+        type:
+          $ref: '#/components/schemas/SunburstWidgetDefinitionType'
+      required:
+      - type
+      - requests
+      type: object
+    SunburstWidgetDefinitionType:
+      default: sunburst
+      description: Type of the Sunburst widget.
+      enum:
+      - sunburst
+      example: sunburst
+      type: string
+      x-enum-varnames:
+      - SUNBURST
+    SunburstWidgetLegend:
+      description: Configuration of the legend.
+      oneOf:
+      - $ref: '#/components/schemas/SunburstWidgetLegendTable'
+      - $ref: '#/components/schemas/SunburstWidgetLegendInlineAutomatic'
+      type: object
+    SunburstWidgetLegendInlineAutomatic:
+      description: Configuration of inline or automatic legends.
+      properties:
+        hide_percent:
+          description: Whether to hide the percentages of the groups.
+          type: boolean
+        hide_value:
+          description: Whether to hide the values of the groups.
+          type: boolean
+        type:
+          $ref: '#/components/schemas/SunburstWidgetLegendInlineAutomaticType'
+      required:
+      - type
+    SunburstWidgetLegendInlineAutomaticType:
+      description: Whether to show the legend inline or let it be automatically generated.
+      enum:
+      - inline
+      - automatic
+      example: automatic
+      type: string
+      x-enum-varnames:
+      - INLINE
+      - AUTOMATIC
+    SunburstWidgetLegendTable:
+      description: Configuration of table-based legend.
+      properties:
+        type:
+          $ref: '#/components/schemas/SunburstWidgetLegendTableType'
+      required:
+      - type
+    SunburstWidgetLegendTableType:
+      description: Whether or not to show a table legend.
+      enum:
+      - table
+      - none
+      example: table
+      type: string
+      x-enum-varnames:
+      - TABLE
+      - NONE
+    SunburstWidgetRequest:
+      description: Request definition of sunburst widget.
+      properties:
+        apm_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
+        audit_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
+        event_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
+        formulas:
+          description: List of formulas that operate on queries. **This feature is
+            currently in beta.**
+          items:
+            $ref: '#/components/schemas/WidgetFormula'
+          type: array
+        log_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
+        network_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
+        process_query:
+          $ref: '#/components/schemas/ProcessQueryDefinition'
+        profile_metrics_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
+        q:
+          description: Widget query.
+          type: string
+        queries:
+          description: List of queries that can be returned directly or used in formulas.
+            **This feature is currently in beta.**
+          items:
+            $ref: '#/components/schemas/FormulaAndFunctionQueryDefinition'
+          type: array
+        response_format:
+          $ref: '#/components/schemas/FormulaAndFunctionResponseFormat'
+        rum_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
+        security_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
+      type: object
     SyntheticsAPIStep:
       description: The steps used in a Synthetics multistep API test.
       properties:
@@ -9764,6 +10317,10 @@ components:
         assertions:
           default: []
           description: Array of assertions used for the test.
+          example:
+          - operator: lessThan
+            target: 1000
+            type: responseTime
           items:
             $ref: '#/components/schemas/SyntheticsAssertion'
           type: array
@@ -9780,17 +10337,26 @@ components:
           type: boolean
         name:
           description: The name of the step.
+          example: Example step name
           type: string
         request:
           $ref: '#/components/schemas/SyntheticsTestRequest'
+        retry:
+          $ref: '#/components/schemas/SyntheticsTestOptionsRetry'
         subtype:
           $ref: '#/components/schemas/SyntheticsAPIStepSubtype'
+      required:
+      - assertions
+      - request
+      - name
+      - subtype
       type: object
     SyntheticsAPIStepSubtype:
       description: The subtype of the Synthetic multistep API test step, currently
         only supporting `http`.
       enum:
       - http
+      example: http
       type: string
       x-enum-varnames:
       - HTTP
@@ -9819,7 +10385,7 @@ components:
           type: integer
         name:
           description: Name of the test.
-          example: Test name
+          example: Example test name
           type: string
         options:
           $ref: '#/components/schemas/SyntheticsTestOptions'
@@ -9842,6 +10408,12 @@ components:
           type: array
         type:
           $ref: '#/components/schemas/SyntheticsAPITestType'
+      required:
+      - name
+      - config
+      - locations
+      - options
+      - type
       type: object
     SyntheticsAPITestConfig:
       description: Configuration object for a Synthetic API test.
@@ -10111,11 +10683,103 @@ components:
       - RECEIVED_MESSAGE
     SyntheticsBasicAuth:
       description: Object to handle basic authentication when performing the test.
+      oneOf:
+      - $ref: '#/components/schemas/SyntheticsBasicAuthWeb'
+      - $ref: '#/components/schemas/SyntheticsBasicAuthSigv4'
+      - $ref: '#/components/schemas/SyntheticsBasicAuthNTLM'
+      type: object
+    SyntheticsBasicAuthNTLM:
+      description: Object to handle `NTLM` authentication when performing the test.
+      properties:
+        domain:
+          description: Domain for the authentication to use when performing the test.
+          example: DOMAINNAME
+          type: string
+        password:
+          description: Password for the authentication to use when performing the
+            test.
+          example: examplepassword
+          type: string
+        type:
+          $ref: '#/components/schemas/SyntheticsBasicAuthNTLMType'
+        username:
+          description: Username for the authentication to use when performing the
+            test.
+          example: joedoe
+          type: string
+        workstation:
+          description: Workstation for the authentication to use when performing the
+            test.
+          example: ''
+          type: string
+      required:
+      - type
+      type: object
+    SyntheticsBasicAuthNTLMType:
+      default: ntlm
+      description: The type of authentication to use when performing the test.
+      enum:
+      - ntlm
+      example: ntlm
+      type: string
+      x-enum-varnames:
+      - NTLM
+    SyntheticsBasicAuthSigv4:
+      description: Object to handle `SIGV4` authentication when performing the test.
+      properties:
+        accessKey:
+          description: Access key for the `SIGV4` authentication.
+          example: AKIAIOSFODNN7EXAMPLE
+          type: string
+        region:
+          description: Region for the `SIGV4` authentication.
+          example: us-east-1
+          type: string
+        secretKey:
+          description: Secret key for the `SIGV4` authentication.
+          example: wJalrXUtnFEMI/K7MDENG/bPxRfiCYzEXAMPLEKEY
+          type: string
+        serviceName:
+          description: Service name for the `SIGV4` authentication.
+          example: execute-api
+          type: string
+        sessionToken:
+          description: Session token for the `SIGV4` authentication.
+          example: 'AQoEXAMPLEH4aoAH0gNCAPyJxz4BlCFFxWNE1OPTgk5TthT+FvwqnKwRcOIfrRh3c/L
+
+            To6UDdyJwOOvEVPvLXCrrrUtdnniCEXAMPLE/IvU1dYUg2RVAJBanLiHb4IgRmpRV3z
+
+            rkuWJOgQs8IZZaIv2BXIa2R4OlgkBN9bkUDNCJiBeb/AXlzBBko7b15fjrBs2+cTQtp
+
+            Z3CYWFXG8C5zqx37wnOE49mRl/+OtkIKGO7fAE
+
+            '
+          type: string
+        type:
+          $ref: '#/components/schemas/SyntheticsBasicAuthSigv4Type'
+      required:
+      - accessKey
+      - secretKey
+      - type
+      type: object
+    SyntheticsBasicAuthSigv4Type:
+      default: sigv4
+      description: The type of authentication to use when performing the test.
+      enum:
+      - sigv4
+      example: sigv4
+      type: string
+      x-enum-varnames:
+      - SIGV4
+    SyntheticsBasicAuthWeb:
+      description: Object to handle basic authentication when performing the test.
       properties:
         password:
           description: Password to use for the basic authentication.
           example: ''
           type: string
+        type:
+          $ref: '#/components/schemas/SyntheticsBasicAuthWebType'
         username:
           description: Username to use for the basic authentication.
           example: ''
@@ -10123,7 +10787,17 @@ components:
       required:
       - password
       - username
+      - type
       type: object
+    SyntheticsBasicAuthWebType:
+      default: web
+      description: The type of basic authentication to use when performing the test.
+      enum:
+      - web
+      example: web
+      type: string
+      x-enum-varnames:
+      - WEB
     SyntheticsBatchDetails:
       description: Details about a batch response.
       properties:
@@ -10215,6 +10889,8 @@ components:
           $ref: '#/components/schemas/SyntheticsBrowserTestConfig'
         locations:
           description: Array of locations used to run the test.
+          example:
+          - example-location
           items:
             description: A location from which the test was run.
             type: string
@@ -10231,6 +10907,7 @@ components:
           type: integer
         name:
           description: Name of the test.
+          example: Example test name
           type: string
         options:
           $ref: '#/components/schemas/SyntheticsTestOptions'
@@ -10254,7 +10931,11 @@ components:
         type:
           $ref: '#/components/schemas/SyntheticsBrowserTestType'
       required:
-      - message
+      - config
+      - locations
+      - name
+      - options
+      - type
       type: object
     SyntheticsBrowserTestConfig:
       description: Configuration object for a Synthetic browser test.
@@ -10796,7 +11477,8 @@ components:
           readOnly: true
           type: string
         name:
-          description: Name of the global variable.
+          description: Name of the global variable. Unique across Synthetics global
+            variables.
           example: MY_VARIABLE
           type: string
         parse_test_options:
@@ -11585,6 +12267,8 @@ components:
           description: Port to use when performing the test.
           format: int64
           type: integer
+        proxy:
+          $ref: '#/components/schemas/SyntheticsTestRequestProxy'
         query:
           description: Query to use for the test.
           type: object
@@ -11629,6 +12313,18 @@ components:
         updatedAt:
           description: Date of update of the certificate or key, ISO format.
           type: string
+      type: object
+    SyntheticsTestRequestProxy:
+      description: The proxy to perform the test.
+      properties:
+        headers:
+          $ref: '#/components/schemas/SyntheticsTestHeaders'
+        url:
+          description: URL of the proxy to perform the test.
+          example: https://example.com
+          type: string
+      required:
+      - url
       type: object
     SyntheticsTiming:
       description: 'Object containing all metrics and their values collected for a
@@ -12248,9 +12944,6 @@ components:
       required:
       - type
       - requests
-      - size_by
-      - color_by
-      - group_by
       type: object
     TreeMapWidgetDefinitionType:
       default: treemap
@@ -12264,9 +12957,23 @@ components:
     TreeMapWidgetRequest:
       description: An updated treemap widget.
       properties:
+        formulas:
+          description: List of formulas that operate on queries. **This feature is
+            currently in beta.**
+          items:
+            $ref: '#/components/schemas/WidgetFormula'
+          type: array
         q:
           description: The widget metrics query.
           type: string
+        queries:
+          description: List of queries that can be returned directly or used in formulas.
+            **This feature is currently in beta.**
+          items:
+            $ref: '#/components/schemas/FormulaAndFunctionQueryDefinition'
+          type: array
+        response_format:
+          $ref: '#/components/schemas/FormulaAndFunctionResponseFormat'
       type: object
     UsageAnalyzedLogsHour:
       description: The number of analyzed logs for each hour for a given organization.
@@ -12338,6 +13045,11 @@ components:
         values:
           $ref: '#/components/schemas/UsageAttributionValues'
       type: object
+    UsageAttributionLimit:
+      default: 5000
+      description: Maximum number of records to be returned.
+      format: int64
+      type: integer
     UsageAttributionMetadata:
       description: The object containing document metadata.
       properties:
@@ -12346,6 +13058,11 @@ components:
         pagination:
           $ref: '#/components/schemas/UsageAttributionPagination'
       type: object
+    UsageAttributionOffset:
+      default: 0
+      description: Number of records to skip before beginning to return.
+      format: int64
+      type: integer
     UsageAttributionPagination:
       description: The metadata for the current pagination.
       properties:
@@ -12353,12 +13070,18 @@ components:
           description: Maximum amount of records to be returned.
           format: int64
           type: integer
-        next_record_id:
-          description: The cursor to use to get the next results, if any. To make
-            the next request, use the same parameters with the addition of this next_record_id.
+        offset:
+          description: Records to be skipped before beginning to return.
+          format: int64
+          type: integer
+        sort_direction:
+          description: Direction to sort by.
+          type: string
+        sort_name:
+          description: Field to sort by.
           type: string
         total_number_of_records:
-          description: Total number of records. (deprecated after May 1st, 2021)
+          description: Total number of records.
           format: int64
           type: integer
       type: object
@@ -12697,6 +13420,12 @@ components:
             hour.
           format: int64
           type: integer
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
+          type: string
       type: object
     UsageAuditLogsResponse:
       description: Response containing the audit logs usage for each hour for a given
@@ -12865,6 +13594,12 @@ components:
           description: The hour for the usage.
           format: date-time
           type: string
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
+          type: string
       type: object
     UsageCWSResponse:
       description: Response containing the Cloud Workload Security usage for each
@@ -12893,6 +13628,12 @@ components:
         hour:
           description: The hour for the usage.
           format: date-time
+          type: string
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
           type: string
       type: object
     UsageCloudSecurityPostureManagementResponse:
@@ -12983,6 +13724,12 @@ components:
           description: The hour for the usage.
           format: date-time
           type: string
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
+          type: string
       type: object
     UsageDBMResponse:
       description: Response containing the Database Monitoring usage for each hour
@@ -13037,7 +13784,7 @@ components:
           format: int64
           type: integer
         alibaba_host_count:
-          description: 'Contains the total number of hosts that reported via Alibaba
+          description: 'Contains the total number of hosts that reported through Alibaba
             integration
 
             (and were NOT running the Datadog Agent).'
@@ -13055,14 +13802,14 @@ components:
           format: int64
           type: integer
         aws_host_count:
-          description: 'Contains the total number of hosts that reported via the AWS
-            integration
+          description: 'Contains the total number of hosts that reported through the
+            AWS integration
 
             (and were NOT running the Datadog Agent).'
           format: int64
           type: integer
         azure_host_count:
-          description: 'Contains the total number of hosts that reported via Azure
+          description: 'Contains the total number of hosts that reported through Azure
             integration
 
             (and were NOT running the Datadog Agent).'
@@ -13074,8 +13821,8 @@ components:
           format: int64
           type: integer
         gcp_host_count:
-          description: 'Contains the total number of hosts that reported via the Google
-            Cloud integration
+          description: 'Contains the total number of hosts that reported through the
+            Google Cloud integration
 
             (and were NOT running the Datadog Agent).'
           format: int64
@@ -13097,8 +13844,8 @@ components:
           format: date-time
           type: string
         infra_azure_app_service:
-          description: 'Contains the total number of hosts that reported via the Azure
-            App Services integration
+          description: 'Contains the total number of hosts that reported through the
+            Azure App Services integration
 
             (and were NOT running the Datadog Agent).'
           format: int64
@@ -13109,7 +13856,7 @@ components:
           format: int64
           type: integer
         vsphere_host_count:
-          description: 'Contains the total number of hosts that reported via vSphere
+          description: 'Contains the total number of hosts that reported through vSphere
             integration
 
             (and were NOT running the Datadog Agent).'
@@ -13459,8 +14206,19 @@ components:
           description: The hour for the usage.
           format: date-time
           type: string
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
+          type: string
+        replay_session_count:
+          description: Contains the number of RUM Replay Sessions (data available
+            beginning November 1, 2021).
+          format: int64
+          type: integer
         session_count:
-          description: Contains the number of RUM Sessions.
+          description: Contains the number of browser RUM Lite Sessions.
           format: int64
           type: integer
         session_count_android:
@@ -13488,20 +14246,8 @@ components:
       description: Number of RUM Units used for each hour for a given organization
         (data available as of November 1, 2021).
       properties:
-        browser_rum_lite_session_count:
-          description: Number of browser RUM lite sessions.
-          format: int64
-          type: integer
-        browser_rum_replay_session_count:
-          description: Number of browser RUM replay sessions.
-          format: int64
-          type: integer
         browser_rum_units:
           description: The number of browser RUM units.
-          format: int64
-          type: integer
-        mobile_rum_lite_session_count:
-          description: Number of mobile RUM lite sessions.
           format: int64
           type: integer
         mobile_rum_units:
@@ -13896,9 +14642,14 @@ components:
             in the current date for all organizations.
           format: int64
           type: integer
+        rum_browser_and_mobile_session_count:
+          description: Shows the sum of all mobile sessions and all browser lite and
+            legacy sessions over all hours in the current month for all organizations.
+          format: int64
+          type: integer
         rum_session_count_sum:
-          description: Shows the sum of all browser RUM Sessions over all hours in
-            the current date for all organizations
+          description: Shows the sum of all browser RUM Lite Sessions over all hours
+            in the current date for all organizations
           format: int64
           type: integer
         rum_total_session_count_sum:
@@ -14170,9 +14921,14 @@ components:
         public_id:
           description: The organization public id.
           type: string
+        rum_browser_and_mobile_session_count:
+          description: Shows the sum of all mobile sessions and all browser lite and
+            legacy sessions over all hours in the current date for the given org.
+          format: int64
+          type: integer
         rum_session_count_sum:
-          description: Shows the sum of all browser RUM Sessions over all hours in
-            the current date for the given org.
+          description: Shows the sum of all browser RUM Lite Sessions over all hours
+            in the current date for the given org.
           format: int64
           type: integer
         rum_total_session_count_sum:
@@ -14484,9 +15240,14 @@ components:
             December 1, 2020).
           format: int64
           type: integer
+        rum_browser_and_mobile_session_count:
+          description: Shows the sum of all mobile sessions and all browser lite and
+            legacy sessions over all hours in the current month for all organizations.
+          format: int64
+          type: integer
         rum_session_count_agg_sum:
-          description: Shows the sum of all browser RUM Sessions over all hours in
-            the current months for all organizations.
+          description: Shows the sum of all browser RUM Lite Sessions over all hours
+            in the current months for all organizations.
           format: int64
           type: integer
         rum_total_session_count_agg_sum:
@@ -14956,7 +15717,7 @@ components:
         scale:
           default: linear
           description: Specifies the scale type. Possible values are `linear`, `log`,
-            `sqrt`, `pow##` (e.g. `pow2`, `pow0.5` etc.).
+            `sqrt`, `pow##` (for example `pow2`, `pow0.5` etc.).
           type: string
       type: object
     WidgetChangeType:
@@ -15090,6 +15851,7 @@ components:
       - $ref: '#/components/schemas/SLOWidgetDefinition'
       - $ref: '#/components/schemas/ServiceMapWidgetDefinition'
       - $ref: '#/components/schemas/ServiceSummaryWidgetDefinition'
+      - $ref: '#/components/schemas/SunburstWidgetDefinition'
       - $ref: '#/components/schemas/TableWidgetDefinition'
       - $ref: '#/components/schemas/TimeseriesWidgetDefinition'
       - $ref: '#/components/schemas/ToplistWidgetDefinition'
@@ -15653,12 +16415,11 @@ components:
             dashboards_public_share: The ability to share dashboards externally.
             dashboards_read: The ability to view dashboards.
             dashboards_write: The ability to create and change dashboards.
-            events_read: The ability to read events data.
+            events_read: The ability to read Events data.
             metrics_read: The ability to view custom metrics.
-            monitors_downtime: The ability to set downtimes for your organization.
-              A user with this permission can suppress alerts from any monitor using
-              a downtime, even if they do not have permission to edit those monitors
-              explicitly.
+            monitors_downtime: The ability to set downtimes to suppress alerts from
+              any monitor in an organization. The ability to write monitors is not
+              required to set downtimes.
             monitors_read: The ability to view monitors.
             monitors_write: The ability to change, mute, and delete individual monitors.
             synthetics_global_variable_read: The ability to view, search and use in
@@ -15669,11 +16430,11 @@ components:
               in tests the list of private locations available.
             synthetics_read: The ability to list and view configured Synthetic tests.
             synthetics_write: The ability to create, edit, and delete Synthetic tests.
-            timeseries_query: The ability to query timeseries data.
+            timeseries_query: The ability to query Timeseries data.
             usage_read: The ability to view your organization's usage and usage attribution.
-            user_access_invite: Allows users to invite other users to your organization.
-            user_access_manage: Grants the permission to disable users, manage user
-              roles and SAML-to-role mappings.
+            user_access_invite: The ability to invite other users to your organization.
+            user_access_manage: The ability to disable users, manage user roles, and
+              manage SAML-to-role mappings.
           tokenUrl: /oauth2/v1/token
       type: oauth2
     apiKeyAuth:
@@ -15731,7 +16492,7 @@ paths:
         variables:
           site:
             default: datadoghq.com
-            description: The regional site for our customers.
+            description: The regional site for Datadog customers.
             enum:
             - datadoghq.com
             - us3.datadoghq.com
@@ -16266,7 +17027,11 @@ paths:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
         '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
       summary: Get the list of available daily custom reports
       tags:
       - Usage Metering
@@ -16307,7 +17072,11 @@ paths:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not Found
         '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
       summary: Get specified daily custom reports
       tags:
       - Usage Metering
@@ -16386,6 +17155,14 @@ paths:
           or cloned dashboards.'
         in: query
         name: filter[shared]
+        required: false
+        schema:
+          type: boolean
+      - description: 'When `true`, this query returns only deleted custom-created
+
+          or cloned dashboards. This parameter is incompatible with `filter[shared]`.'
+        in: query
+        name: filter[deleted]
         required: false
         schema:
           type: boolean
@@ -17196,6 +17973,12 @@ paths:
       summary: Delete a dashboard
       tags:
       - Dashboards
+      x-given:
+        deleted_dashboard:
+          parameters:
+          - name: dashboard_id
+            source: dashboard.id
+          step: the "dashboard" was deleted
       x-menu-order: 3
       x-undo:
         type: idempotent
@@ -21012,7 +21795,9 @@ paths:
         required: false
         schema:
           type: boolean
-      - description: Monitor ID offset.
+      - description: Use this parameter for paginating through large sets of monitors.
+          Start with a value of zero, make a request, set the value to the last ID
+          of result set, and then repeat until the response is empty.
         in: query
         name: id_offset
         required: false
@@ -21180,10 +21965,10 @@ paths:
         Example: `"check".over(tags).last(count).by(group).count_by_status()`
 
 
-        - **`check`** name of the check, e.g. `datadog.agent.up`
+        - **`check`** name of the check, for example `datadog.agent.up`
 
-        - **`tags`** one or more quoted tags (comma-separated), or "*". e.g.: `.over("env:prod",
-        "role:db")`; **`over`** cannot be blank.
+        - **`tags`** one or more quoted tags (comma-separated), or "*". for example:
+        `.over("env:prod", "role:db")`; **`over`** cannot be blank.
 
         - **`count`** must be at greater than or equal to your max threshold (defined
         in the `options`). It is limited to 100.
@@ -21372,7 +22157,32 @@ paths:
 
 
         **NOTE** Only available on US1-FED and in closed beta on US1, EU, US3, and
-        US5.'
+        US5.
+
+
+        **CI Pipelines Alert Query**
+
+
+        Example: `ci-pipelines(query).rollup(rollup_method[, measure]).last(time_window)
+        operator #`
+
+
+        - **`query`** The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).
+
+        - **`rollup_method`** The stats roll-up method - supports `count`, `avg`,
+        and `cardinality`.
+
+        - **`measure`** For `avg` and cardinality `rollup_method` - specify the measure
+        or the facet name you want to use.
+
+        - **`time_window`** #m (between 1 and 2880), #h (between 1 and 48).
+
+        - **`operator`** `<`, `<=`, `>`, `>=`, `==`, or `!=`.
+
+        - **`#`** an integer or decimal number used to set the threshold.
+
+
+        **NOTE** Only available in closed beta on US1, EU, US3 and US5.'
       operationId: CreateMonitor
       requestBody:
         content:
@@ -21534,8 +22344,8 @@ paths:
           format: int64
           type: integer
       - description: 'String for sort order, composed of field and sort order separate
-          by a comma, e.g. `name,asc`. Supported sort directions: `asc`, `desc`. Supported
-          fields:
+          by a comma, for example `name,asc`. Supported sort directions: `asc`, `desc`.
+          Supported fields:
 
 
           * `name`
@@ -21623,8 +22433,8 @@ paths:
           format: int64
           type: integer
       - description: 'String for sort order, composed of field and sort order separate
-          by a comma, e.g. `name,asc`. Supported sort directions: `asc`, `desc`. Supported
-          fields:
+          by a comma, for example `name,asc`. Supported sort directions: `asc`, `desc`.
+          Supported fields:
 
 
           * `name`
@@ -21727,7 +22537,7 @@ paths:
           format: int64
           type: integer
       - description: Delete the monitor even if it's referenced by other resources
-          (e.g. SLO, composite monitor).
+          (for example SLO, composite monitor).
         in: query
         name: force
         required: false
@@ -22113,7 +22923,11 @@ paths:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
         '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
       summary: Get the list of available monthly custom reports
       tags:
       - Usage Metering
@@ -22160,7 +22974,11 @@ paths:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not Found
         '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
       summary: Get specified monthly custom reports
       tags:
       - Usage Metering
@@ -23579,7 +24397,7 @@ paths:
         schema:
           type: string
       - description: Delete the monitor even if it's referenced by other resources
-          (e.g. SLO, composite monitor).
+          (for example SLO, composite monitor).
         in: query
         name: force
         required: false
@@ -25402,7 +26220,7 @@ paths:
         required: true
         schema:
           type: string
-      - description: 'The source of the tags (e.g. chef, puppet).
+      - description: 'The source of the tags (for example chef, puppet).
 
           [Complete list of source attribute values](https://docs.datadoghq.com/integrations/faq/list-of-api-source-attribute-value).'
         in: query
@@ -25553,7 +26371,7 @@ paths:
         required: true
         schema:
           type: string
-      - description: 'The source of the tags (e.g. chef, puppet).
+      - description: 'The source of the tags (for example chef, puppet).
 
           [Complete list of source attribute values](https://docs.datadoghq.com/integrations/faq/list-of-api-source-attribute-value)'
         in: query
@@ -25639,7 +26457,11 @@ paths:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
         '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -25700,6 +26522,18 @@ paths:
         schema:
           default: false
           type: boolean
+      - description: Number of records to skip before beginning to return.
+        in: query
+        name: offset
+        required: false
+        schema:
+          $ref: '#/components/schemas/UsageAttributionOffset'
+      - description: Maximum number of records to be returned.
+        in: query
+        name: limit
+        required: false
+        schema:
+          $ref: '#/components/schemas/UsageAttributionLimit'
       responses:
         '200':
           content:
@@ -25714,7 +26548,11 @@ paths:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
         '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -25772,11 +26610,15 @@ paths:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
         '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
       summary: Get hourly usage for audit logs
       tags:
       - Usage Metering
-      x-menu-order: 31
+      x-menu-order: 33
       x-undo:
         type: safe
   /api/v1/usage/aws_lambda:
@@ -25820,7 +26662,11 @@ paths:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
         '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -25865,7 +26711,11 @@ paths:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
         '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -25920,11 +26770,15 @@ paths:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
         '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
       summary: Get hourly usage for CSPM
       tags:
       - Usage Metering
-      x-menu-order: 30
+      x-menu-order: 32
       x-undo:
         type: safe
   /api/v1/usage/cws:
@@ -25970,7 +26824,11 @@ paths:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
         '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -25979,7 +26837,7 @@ paths:
       summary: Get hourly usage for Cloud Workload Security
       tags:
       - Usage Metering
-      x-menu-order: 32
+      x-menu-order: 34
       x-undo:
         type: safe
   /api/v1/usage/dbm:
@@ -26025,11 +26883,15 @@ paths:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
         '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
       summary: Get hourly usage for Database Monitoring
       tags:
       - Usage Metering
-      x-menu-order: 33
+      x-menu-order: 35
       x-undo:
         type: safe
   /api/v1/usage/fargate:
@@ -26073,7 +26935,11 @@ paths:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
         '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -26126,7 +26992,11 @@ paths:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
         '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -26138,6 +27008,82 @@ paths:
       x-menu-order: 1
       x-undo:
         type: safe
+  /api/v1/usage/hourly-attribution:
+    get:
+      description: Get Hourly Usage Attribution.
+      operationId: GetHourlyUsageAttribution
+      parameters:
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage beginning at this hour.'
+        in: query
+        name: start_hr
+        required: true
+        schema:
+          format: date-time
+          type: string
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage ending
+
+          **before** this hour.'
+        in: query
+        name: end_hr
+        required: false
+        schema:
+          format: date-time
+          type: string
+      - description: Usage type to retrieve.
+        in: query
+        name: usage_type
+        required: true
+        schema:
+          $ref: '#/components/schemas/HourlyUsageAttributionUsageType'
+      - description: List following results with a next_record_id provided in the
+          previous query.
+        in: query
+        name: next_record_id
+        required: false
+        schema:
+          type: string
+      - description: Comma separated list of tags used to group usage. If no value
+          is provided the usage will not be broken down by tags.
+        in: query
+        name: tag_breakdown_keys
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/HourlyUsageAttributionResponse'
+          description: OK
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+        '429':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - usage_read
+      summary: Get Hourly Usage Attribution
+      tags:
+      - Usage Metering
+      x-menu-order: 30
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v1/usage/incident-management:
     get:
       description: Get hourly usage for incident management.
@@ -26181,7 +27127,11 @@ paths:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
         '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -26234,7 +27184,11 @@ paths:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
         '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -26289,7 +27243,11 @@ paths:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
         '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -26344,7 +27302,11 @@ paths:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
         '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -26397,7 +27359,11 @@ paths:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
         '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -26452,7 +27418,11 @@ paths:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
         '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
       summary: Get hourly logs usage by retention
       tags:
       - Usage Metering
@@ -26507,7 +27477,11 @@ paths:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
         '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -26519,6 +27493,95 @@ paths:
       x-menu-order: 3
       x-undo:
         type: safe
+  /api/v1/usage/monthly-attribution:
+    get:
+      description: Get Monthly Usage Attribution.
+      operationId: GetMonthlyUsageAttribution
+      parameters:
+      - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
+          for usage beginning in this month.
+
+          Maximum of 15 months ago.'
+        in: query
+        name: start_month
+        required: true
+        schema:
+          format: date-time
+          type: string
+      - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
+          for usage ending this month.'
+        in: query
+        name: end_month
+        required: false
+        schema:
+          format: date-time
+          type: string
+      - description: Comma-separated list of usage types to return, or `*` for all
+          usage types.
+        in: query
+        name: fields
+        required: true
+        schema:
+          $ref: '#/components/schemas/MonthlyUsageAttributionSupportedMetrics'
+      - description: 'The direction to sort by: `[desc, asc]`.'
+        in: query
+        name: sort_direction
+        required: false
+        schema:
+          $ref: '#/components/schemas/UsageSortDirection'
+      - description: The field to sort by.
+        in: query
+        name: sort_name
+        required: false
+        schema:
+          $ref: '#/components/schemas/MonthlyUsageAttributionSupportedMetrics'
+      - description: Comma separated list of tags used to group usage. If no value
+          is provided the usage will not be broken down by tags.
+        in: query
+        name: tag_breakdown_keys
+        required: false
+        schema:
+          type: string
+      - description: List following results with a next_record_id provided in the
+          previous query.
+        in: query
+        name: next_record_id
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/MonthlyUsageAttributionResponse'
+          description: OK
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+        '429':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - usage_read
+      summary: Get Monthly Usage Attribution
+      tags:
+      - Usage Metering
+      x-menu-order: 31
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v1/usage/network_flows:
     get:
       description: Get hourly usage for network flows.
@@ -26562,7 +27625,11 @@ paths:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
         '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -26615,7 +27682,11 @@ paths:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
         '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -26670,7 +27741,11 @@ paths:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
         '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -26724,7 +27799,11 @@ paths:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
         '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -26733,7 +27812,7 @@ paths:
       summary: Get hourly usage for RUM Units
       tags:
       - Usage Metering
-      x-menu-order: 35
+      x-menu-order: 37
       x-undo:
         type: safe
   /api/v1/usage/rum_sessions:
@@ -26784,7 +27863,11 @@ paths:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
         '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -26839,11 +27922,15 @@ paths:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
         '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
       summary: Get hourly usage for Sensitive Data Scanner
       tags:
       - Usage Metering
-      x-menu-order: 34
+      x-menu-order: 36
       x-undo:
         type: safe
   /api/v1/usage/snmp:
@@ -26889,7 +27976,11 @@ paths:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
         '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -26951,7 +28042,11 @@ paths:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
         '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -27005,7 +28100,11 @@ paths:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
         '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -27058,7 +28157,11 @@ paths:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
         '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -27111,7 +28214,11 @@ paths:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
         '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -27164,7 +28271,11 @@ paths:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
         '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -27246,7 +28357,11 @@ paths:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
         '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -27653,7 +28768,7 @@ paths:
         variables:
           site:
             default: datadoghq.com
-            description: The regional site for our customers.
+            description: The regional site for Datadog customers.
             enum:
             - datadoghq.com
             - us3.datadoghq.com
@@ -27876,7 +28991,7 @@ tags:
 - description: "Pipelines and processors operate on incoming logs, parsing\nand transforming
     them into structured attributes for easier querying.\n\n- See the [pipelines configuration
     page](https://app.datadoghq.com/logs/pipelines)\n  for a list of the pipelines
-    and processors currently configured in our UI.\n\n- Additional API-related information
+    and processors currently configured in web UI.\n\n- Additional API-related information
     about processors can be found in the\n  [processors documentation](https://docs.datadoghq.com/logs/log_configuration/processors/?tab=api#lookup-processor).\n\n-
     For more information about Pipelines, see the\n  [pipeline documentation](https://docs.datadoghq.com/logs/log_configuration/pipelines).\n\n**Notes:**\n\nThese
     endpoints are only available for admin users.\nMake sure to use an application

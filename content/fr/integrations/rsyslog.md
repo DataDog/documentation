@@ -2,8 +2,8 @@
 title: Rsyslog
 name: rsyslog
 kind: integration
-description: 'Configurez Rsyslog pour rassembler les logs de votre host, de vos conteneurs et de vos services.'
-short_description: 'Configurez Rsyslog pour rassembler les logs de votre host, de vos conteneurs et de vos services.'
+description: Configurez Rsyslog pour rassembler les logs de votre host, de vos conteneurs et de vos services.
+short_description: Configurez Rsyslog pour rassembler les logs de votre host, de vos conteneurs et de vos services.
 categories:
   - log collection
 doc_link: /integrations/rsyslog/
@@ -13,7 +13,7 @@ has_logo: true
 integration_title: rsyslog
 is_public: true
 dependencies:
-  - 'https://github.com/DataDog/documentation/blob/master/content/en/integrations/rsyslog.md'
+  - https://github.com/DataDog/documentation/blob/master/content/en/integrations/rsyslog.md
 public_title: Intégration Datadog/Rsyslog
 supported_os:
   - linux
@@ -81,7 +81,7 @@ Configurez Rsyslog pour rassembler les logs de votre host, de vos conteneurs et 
 
 6. Associez ces logs aux tags et aux métriques du host.
     Pour vous assurer que ces logs sont associés aux métriques et aux tags de ce host dans votre compte Datadog, définissez le `HOSTNAME` dans votre fichier `rsyslog.conf` de façon à ce qu'il corresponde au hostname de vos métriques Datadog.
-    Si vous n'avez défini aucun hostname dans votre fichier de configuration pour les métriques, via `datadog.conf` ou `datadog.yaml`, vous n'avez rien à modifier.
+   Si vous n'avez défini aucun hostname dans votre fichier de configuration pour les métriques, à l'aide de `datadog.conf` ou de `datadog.yaml`, vous n'avez rien à modifier.
     Si vous avez spécifié un hostname personnalisé pour votre métrique, remplacez la valeur **%HOSTNAME%** dans le format afin que celle-ci corresponde au nom personnalisé.
 
 7. Utilisez des intégrations Datadog.
@@ -165,7 +165,7 @@ Configurez Rsyslog pour rassembler les logs de votre host, de vos conteneurs et 
 
 6. Associez ces logs aux tags et aux métriques du host.
     Pour vous assurer que ces logs sont associés aux métriques et aux tags de ce host dans votre compte Datadog, définissez le même `HOSTNAME` dans votre fichier `rsyslog.conf` de façon à ce que sa valeur corresponde au hostname de vos métriques Datadog.
-    **Remarque** : si vous n'avez défini aucun hostname dans votre fichier de configuration pour les métriques via `datadog.conf` ou `datadog.yaml`, vous n'avez rien à modifier. Si vous avez spécifié un hostname personnalisé pour votre métrique, veillez à remplacer la valeur **%HOSTNAME%** dans le format afin que celle-ci corresponde au nom personnalisé.
+   **Remarque** : si vous n'avez défini aucun hostname dans votre fichier de configuration pour les métriques, à l'aide de `datadog.conf` ou de `datadog.yaml`, vous n'avez rien à modifier. Si vous avez spécifié un hostname personnalisé pour votre métrique, veillez à remplacer la valeur **%HOSTNAME%** dans le format afin que celle-ci corresponde au nom personnalisé.
 
 7. Utilisez des intégrations Datadog.
     Pour tirer le meilleur parti de vos logs dans Datadog, définissez la source de vos logs. La source peut être définie directement dans l'Agent si vous transférez vos logs à l'Agent Datadog.
@@ -262,7 +262,7 @@ Configurez Rsyslog pour rassembler les logs de votre host, de vos conteneurs et 
 
 6. Associez ces logs aux tags et aux métriques du host.
     Pour vous assurer que ces logs sont associés aux métriques et aux tags de ce host dans votre compte Datadog, définissez le même `HOSTNAME` dans votre fichier `rsyslog.conf` de façon à ce que sa valeur corresponde au hostname de vos métriques Datadog.
-    **Remarque** : si vous n'avez défini aucun hostname dans votre fichier de configuration pour les métriques via `datadog.conf` ou `datadog.yaml`, vous n'avez rien à modifier. Si vous avez spécifié un hostname personnalisé pour votre métrique, veillez à remplacer la valeur **%HOSTNAME%** dans le format afin que celle-ci corresponde au nom personnalisé.
+   **Remarque** : si vous n'avez défini aucun hostname dans votre fichier de configuration pour les métriques, à l'aide de `datadog.conf` ou de `datadog.yaml`, vous n'avez rien à modifier. Si vous avez spécifié un hostname personnalisé pour votre métrique, veillez à remplacer la valeur **%HOSTNAME%** dans le format afin que celle-ci corresponde au nom personnalisé.
 
 7. Utilisez des intégrations Datadog.
     Pour tirer le meilleur parti de vos logs dans Datadog, définissez la source de vos logs. La source peut être définie directement dans l'Agent si vous transférez vos logs à l'Agent Datadog.
@@ -355,7 +355,7 @@ Configurez Rsyslog pour rassembler les logs de votre host, de vos conteneurs et 
 
 6. Associez ces logs aux tags et aux métriques du host.
     Pour vous assurer que ces logs sont associés aux métriques et aux tags de ce host dans votre compte Datadog, définissez le même `HOSTNAME` dans votre fichier `rsyslog.conf` de façon à ce que sa valeur corresponde au hostname de vos métriques Datadog.
-    **Remarque** : si vous n'avez défini aucun hostname dans votre fichier de configuration pour les métriques via `datadog.conf` ou `datadog.yaml`, vous n'avez rien à modifier. Si vous avez spécifié un hostname personnalisé pour votre métrique, veillez à remplacer la valeur **%HOSTNAME%** dans le format afin que celle-ci corresponde au nom personnalisé.
+   **Remarque** : si vous n'avez défini aucun hostname dans votre fichier de configuration pour les métriques, à l'aide de `datadog.conf` ou de `datadog.yaml`, vous n'avez rien à modifier. Si vous avez spécifié un hostname personnalisé pour votre métrique, veillez à remplacer la valeur **%HOSTNAME%** dans le format afin que celle-ci corresponde au nom personnalisé.
 
 7. Utilisez des intégrations Datadog.
     Pour tirer le meilleur parti de vos logs dans Datadog, définissez la source de vos logs. La source peut être définie directement dans l'Agent si vous transférez vos logs à l'Agent Datadog.
