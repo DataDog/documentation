@@ -64,21 +64,48 @@ To begin profiling applications:
 
  4. Configure the profiler with environment variables. The tracer supports using INI values, but the profiler does not support INI settings yet.
 
-| Environment Variable | Acceptable Values       | Comment |
-|----------------------|-------------------------|---------|
-| `DD_PROFILING_ENABLED` | Boolean values\*          | Defaults to `false`. |
-| `DD_PROFILING_LOG_LEVEL` | `off`, `error`, `warn`, `info`, `debug` | Defaults to `off`. |
-| `DD_PROFILING_EXPERIMENTAL_CPU_TIME_ENABLED` | Boolean values\* | Defaults to `false`. |
+{{< tabs >}}
+{{% tab "CLI" %}}
 
-\* Acceptable truthy boolean values are `1`, `on`, `yes`, and `true`. Acceptable falsey boolean values are `0`, `no`, `off`, and `false`.
+Set the environment variables before calling PHP, for example:
 
-The profiler supports these environment variables which are documented on the [setup page for PHP][4]:
-  - `DD_SERVICE`. It is strongly recommended to set this variable.
-  - `DD_ENV`
-  - `DD_VERSION`
-  - `DD_AGENT_HOST`
-  - `DD_TRACE_AGENT_PORT`
-  - `DD_TRACE_AGENT_URL`
+```
+export DD_PROFILING_ENABLED=true
+export DD_SERVICE=app-name
+export DD_ENV=prod
+export DD_VERSION=1.3.2
+
+php hello.php
+```
+
+{{% /tab %}}
+{{% tab "PHP-FPM" %}}
+
+Use the `env` directive in the php-fpm’s `www.conf` file, for example:
+
+```
+env[DD_PROFILING_ENABLED] = true
+env[DD_SERVICE] = app-name
+env[DD_ENV] = prod
+env[DD_VERSION] = 1.3.2
+```
+
+{{% /tab %}}
+{{% tab "Apache" %}}
+
+Use `SetEnv` from the server config, virtual host, directory, or `.htaccess` file:
+
+```
+SetEnv DD_PROFILING_ENABLED true
+SetEnv DD_SERVICE app-name
+SetEnv DD_ENV prod
+SetEnv DD_VERSION 1.3.2
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+See the [configuration docs][4] for more environment variables.
 
  5. A minute or two after receiving a request, profiles will show up on the [APM > Profiler page][5].
 
