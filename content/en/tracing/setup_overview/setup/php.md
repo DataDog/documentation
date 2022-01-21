@@ -202,6 +202,18 @@ Whether to enable distributed tracing
 : **Default**: `null`<br>
 Set an application’s environment, for example: `prod`, `pre-prod`, `stage`. Added in version `0.47.0`.
 
+`DD_PROFILING_ENABLED`
+: **Default**: `false`<br>
+Enable the Datadog profiler. Added in version `0.69.0`. See [Enabling the PHP Profiler](/tracing/profiler/enabling/php/).
+
+`DD_PROFILING_EXPERIMENTAL_CPU_TIME_ENABLED`
+: **Default**: `false`<br>
+Enable the experimental CPU profile type. Added in version `0.69.0`.
+
+`DD_PROFILING_LOG_LEVEL`
+: **Default**: `off`<br>
+Set the profiler's log level. Acceptable values are `off`, `error`, `warn`, `info`, and `debug`. The profiler's logs are written to the standard error stream of the process. Added in version `0.69.0`.
+
 `DD_PRIORITY_SAMPLING`
 : **Default**: `true`<br>
 Whether to enable priority sampling
