@@ -20,21 +20,23 @@ Pour envoyer tous ces logs à Datadog :
 * Configurez le drain HTTPS avec la commande suivante :
 
 ```text
-heroku drains:add 'https://http-intake.logs.{{< region-param key="dd_site" >}}/v1/input/<CLÉ_API_DD>?ddsource=heroku&service=<SERVICE>&host=<HOST>' -a <NOM_APPLICATION>
+heroku drains:add 'https://http-intake.logs.{{< region-param key="dd_site" >}}/api/v2/logs/?dd-api-key=<CLÉ_API_DD>&ddsource=heroku&env=<ENVIRONNEMENT>&service=<SERVICE>&host=<HOST>' -a <NOM_APPLICATION>
 ```
 
 * Remplacez `<CLÉ_API_DD>` par votre [clé d'API Datadog][2].
+* Remplacez `<ENVIRONNEMENT>` par l'[environnement][3] de votre application.
 * Remplacez `<NOM_APPLICATION>` et `<SERVICE>`par le nom de votre application.
-* Remplacez `<HOST>` par le hostname souhaité. **Remarque** : comme indiqué dans la [section Hostname][3], les métriques et les traces appliquent le nom du dyno comme hostname par défaut. Il n'est pas encore possible de définir dynamiquement le nom du dyno en tant que hostname des logs. Utilisez les tags `dyno` et `dynotype` pour le moment afin de corréler des métriques, des traces et des logs.
+* Remplacez `<HOST>` par le hostname souhaité. **Remarque** : comme indiqué dans la [section Hostname][4], les métriques et les traces appliquent le nom du dyno comme hostname par défaut. Il n'est pas encore possible de définir dynamiquement le nom du dyno en tant que hostname des logs. Utilisez les tags `dyno` et `dynotype` pour le moment afin de corréler des métriques, des traces et des logs.
 
 ### Attributs personnalisés
 
 Ajoutez des attributs personnalisés aux logs depuis votre application en remplaçant l'URL dans le drain comme suit :
 
 ```text
-https://http-intake.logs.{{< region-param key="dd_site" >}}/v1/input/<CLÉ_API_DD>?ddsource=heroku&service=<SERVICE>&host=<HOST>&attribute_name=<VALEUR>
+https://http-intake.logs.{{< region-param key="dd_site" >}}/api/v2/logs/?dd-api-key=<CLÉ_API_DD>&ddsource=heroku&service=<SERVICE>&host=<HOST>&attribute_name=<VALEUR>
 ```
 
 [1]: https://devcenter.heroku.com/articles/log-drains#https-drains
-[2]: https://app.datadoghq.com/account/settings#api
-[3]: /fr/agent/basic_agent_usage/heroku/#hostname
+[2]: https://app.datadoghq.com/organization-settings/api-keys
+[3]: /fr/getting_started/tagging/#introduction
+[4]: /fr/agent/basic_agent_usage/heroku/#hostname

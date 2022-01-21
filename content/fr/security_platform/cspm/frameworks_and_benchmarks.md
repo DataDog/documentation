@@ -32,7 +32,7 @@ Chaque [règle par défaut][1] correspond à un ou plusieurs contrôles au sein 
 
 **Remarques** :
 
-- Pour vous conformer aux [benchmarks CIS AWS Foundations][2], vous **devez** activer le [Security Monitoring][5] et transmettre vos [logs Cloudtrail à Datadog][6].
+- Pour vous conformer aux [benchmarks CIS AWS Foundations][2], vous **devez** activer le [Cloud SIEM][5] et transmettre vos [logs Cloudtrail à Datadog][6].
 
 - La solution CSPM de Datadog vous permet de savoir facilement si la configuration de vos ressources est conforme à certaines règles. Vous avez la possibilité de créer vos propres règles ou d'utiliser les règles par défaut de Datadog, conçues en fonction de divers frameworks, benchmarks et standards (également désignés « Security Posture Frameworks »). Notez que le CSPM n'évalue pas votre conformité à un framework de sécurité entier, et que les règles sont susceptibles de ne pas couvrir tous les paramètres de configuration concernés. En d'autres termes, ce n'est pas parce que les règles par défaut de Datadog n'ont rien détecté sur vos ressources que ces dernières sont forcément conformes à l'ensemble des exigences d'un framework. Les informations fournies par Datadog ne constituent pas un avis ou conseil juridique, et nous vous recommandons de mettre en œuvre le CSPM en consultation avec votre conseiller juridique ou vos experts en conformité.
 
