@@ -55,7 +55,7 @@ Datadog .NET Profiler is currently in public beta. Datadog recommends evaluating
 
    Run the .NET Monitoring MSI installer with administrator privileges.
 
-**Note**: Profiling requires the .msi version 2.1.TODO+.
+**Note**: Profiling requires the .msi version 2.1
 
 {{< tabs >}}
 
