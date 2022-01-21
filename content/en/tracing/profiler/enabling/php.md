@@ -42,28 +42,11 @@ An Operating System with glibc 2.17 or newer is needed. The following OS version
   - Debian 8, which has reached End Of Life (EOL).
   - Ubuntu 14.04, which is EOL.
 
-Datadog recommends running a supported OS version.
-
-The following libraries must be installed:
-  - `libc.so.6`
-  - `libpthread.so.0`
-  - `libdl.so.2`
-  - `libm.so.6`
-
-The tracer also requires these libraries:
-  - `libcurl.so.4`
-  - `librt.so.1`
-
+Datadog recommends running an OS version which is not EOL.
 {{% /tab %}}
 {{% tab "Alpine Linux" %}}
 
-Version 3.13 of Alpine Linux or newer is required. The following libraries must be installed:
-  - `libc.musl-x86_64.so.1`
-
-The tracer also requires these libraries:
-  - `libcurl.so.4`
-  - `libexecinfo.so.1`
-
+Version 3.13 of Alpine Linux or newer is required as the profiler is built against musl v1.2.
 {{% /tab %}}
 {{< /tabs >}}
 
