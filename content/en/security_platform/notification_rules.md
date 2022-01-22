@@ -2,6 +2,8 @@
 title: Notification Rules
 kind: documentation
 description: "Create notification rules to automatically notify your team and integrations when security detection rules trigger."
+aliases:
+  - /security_platform/notification_profiles/
 further_reading:
 - link: "/security_platform/detection_rules/"
   tag: "Documentation"
