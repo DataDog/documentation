@@ -22,7 +22,7 @@ Distributions provide enhanced query functionality and configuration options tha
      _“What has the p95 load time for my application been over the past week?”_
 
   * **Percentile thresholds on metric monitors**:
-_“Alert me when the p99 of my application’s request latency is greater than 200 ms for the last 5 min.”_
+    _“Alert me when the p99 of my application’s request latency is greater than 200 ms for the last 5 min.”_
 
   * **Threshold Queries for SLOs**:
     _“I’d like to define a 30-day SLO where the p95 of request latency is < 5 seconds”_
