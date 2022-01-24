@@ -34,7 +34,7 @@ See the [Developer Tools section][1] for more implementation details.
 
 **Note:** Because distributions are a new metric type, they should be instrumented under new metric names during submission to Datadog.
 
-## Enabling Percentile Aggregations
+## Enabling percentile aggregations
 
 Like other metric types, such as `gauges` or `histograms`, distributions have the following aggregations available: `count`, `min`, `max`, `sum`, and `avg`. Distributions are initially tagged the same way as other metrics, with custom tags set in code. They are then resolved to host tags based on the host that reported the metric. 
 
