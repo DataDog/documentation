@@ -65,8 +65,9 @@ Enabling DDSketch-calculated globally-accurate percentiles on your distribution 
 With threshold queries for distributions with percentiles, users no longer need to predefine a threshold value prior to metric submission and have full flexibility to adjust the threshold value in-app.
 
 To use threshold queries: 
+
 1. Enable percentiles on your distribution metric on the Metrics Summary page.
-2. Then you can now graph any distribution metric with the new “count values...” aggregator and specify a threshold value and comparison operator as shown here:
+2. Graph any distribution metric with the “count values...” aggregator and specify a threshold value and comparison operator as shown here:
 
 {{< img src="metrics/distributions/threshold_queries.mp4" alt="Threshold Queries" style="width:80%;">}}
 
