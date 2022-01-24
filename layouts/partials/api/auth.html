@@ -3,6 +3,9 @@
 {{ $securitySchemes := .securitySchemes }}
 {{ $tag := .tag }}
 
+<!-- Get RBAC scopes (represented by x-permission field) -->
+{{ $rbacPermission := index $endpoint.action "x-permission" }}
+
 <!-- Get OAuth Scopes -->
 {{ $authZ := slice }}
 {{ range $endpoint.action.security }}
@@ -13,29 +16,33 @@
   {{ end }}
 {{ end }}
 
-<!-- Get RBAC scopes (represented by x-permission field) -->
-{{ with $endpoint.action }}
-    {{ $test := .Get "summary" }}
-    <h4>{{ $test }}</h4>
-{{ end }}
-
-<!-- if either authz or rbac permissions are here -->
-{{ with $authZ }}
+{{ if or ($rbacPermission) ($authZ) }}
     {{ $slug := (replaceRE " " "-" ($tag.name | humanize | lower)) }}
     <h3 class="mb-2">Authorization</h3>
+
     <div class="schema-table row">
         <div class="col-12">
             <div class="row table-header">
-                <div class="column">
+                <div class="col-4 column">
+                    <p class="font-semibold">Type</p>
+                </div>
+                <div class="col-8 column">
                     <p class="font-semibold">Required Scopes</p>
                 </div>
             </div>
             <div class="row">
-                <div class="col-12 first-column">
-                    <div class="row first-row ">
-                        <p>
-                            OAuth scopes: <code>{{ delimit . ", "}}</code> <a href="{{ "api/latest/scopes/" | absLangURL }}#{{ $slug }}">scope</a>
-                        </p>
+                <div class="col-12 column">
+                    <div class="row first-row">
+                        <div class="col-4 column">
+                            {{ with $authZ }}
+                                <p>OAuth2</p>
+                            {{ end }}
+                        </div>
+                        <div class="col-8 column">
+                            <p>
+                                OAuth scopes: <code>{{ delimit . ", "}}</code> <a href="{{ "api/latest/scopes/" | absLangURL }}#{{ $slug }}">scope</a>
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
