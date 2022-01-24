@@ -511,6 +511,12 @@
       "description": "Get Usage Attribution returns \"OK\" response"
     }
   ],
+  "GetUsageCloudSecurityPostureManagement": [
+    {
+      "suffix": "",
+      "description": "Get hourly usage for CSPM returns \"OK\" response"
+    }
+  ],
   "CreateWebhooksIntegrationCustomVariable": [
     {
       "suffix": "",

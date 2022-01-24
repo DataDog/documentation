@@ -16,7 +16,6 @@ The selected Datadog site ({{< region-param key="dd_site_name" >}}) is not suppo
 </div>
 {{< /site-region >}}
 
-{{< site-region region="us,us3,us5,eu" >}}
 ## Compatibility
 
 Supported languages:
@@ -27,6 +26,8 @@ Supported platforms:
 * iOS >= 11.0
 * macOS >= 10.13
 * tvOS >= 11.0
+
+**Note**: If you are using Swift Concurrency, you need Xcode >= 13.2 for precise span representation of asynchronous tasks.
 
 ## Installing the Swift testing SDK
 
@@ -102,7 +103,7 @@ Set all these variables in your test target:
 **Example**: `true`
 
 `DATADOG_CLIENT_TOKEN`
-: The [Datadog Client Token][1] to use to report test results.<br/>
+: Use the [Datadog Client Token][1] to report test results. Alternatively, use an API key.<br/>
 **Default**: `(empty)`<br/>
 **Example**: `pub0zxxxyyyxxxyyxxxzzxxyyxxxyyy`
 
@@ -205,7 +206,7 @@ For UITests, both the test target and the application running from the UITests m
 For the following configuration settings:
  - `Boolean` variables can use any of: `1`, `0`, `true`, `false`, `YES`, or `NO`
  - `String` list variables accept a list of elements separated by `,` or `;`
- 
+
 ### Enabling auto-instrumentation
 
 `DD_ENABLE_STDOUT_INSTRUMENTATION`
@@ -247,6 +248,13 @@ For Network auto-instrumentation, you can configure these additional settings:
 `DD_MAX_PAYLOAD_SIZE`
 : Sets the maximum size reported from the payload. Default `1024` (Integer)
 
+`DD_DISABLE_NETWORK_CALL_STACK`
+: Disables the call stack information in the network spans (Boolean)
+
+`DD_ENABLE_NETWORK_CALL_STACK_SYMBOLICATED`
+: Shows the call stack information with not only the method name, but also the precise file and line information. May impact your tests' performance (Boolean)
+
+
 You can also disable or enable specific auto-instrumentation in some of the tests from Swift or Objective-C by importing the module `DatadogSDKTesting` and using the class: `DDInstrumentationControl`.
 
 ## Custom tags
@@ -273,7 +281,7 @@ DD_TAGS=key1:$FOO-v1 // expected: key1:BAR-v1
 
 **Note**: Using OpenTelemetry is only supported for Swift.
 
-Datadog Swift testing framework uses [OpenTelemetry][2] as the tracing technology under the hood. You can access the OpenTelemetry tracer using `DDInstrumentationControl.openTelemetryTracer` and use any OpenTelemetry API. For example, to add a tag or attribute:
+Datadog Swift testing framework uses [OpenTelemetry][3] as the tracing technology under the hood. You can access the OpenTelemetry tracer using `DDInstrumentationControl.openTelemetryTracer` and use any OpenTelemetry API. For example, to add a tag or attribute:
 
 {{< code-block lang="swift" >}}
 import DatadogSDKTesting
@@ -670,11 +678,10 @@ session.end()
 
 Always call `session.end()` at the end so that all the test info is flushed to Datadog.
 
-
-{{< /site-region >}}
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 [1]: https://app.datadoghq.com/organization-settings/client-tokens
 [2]: /getting_started/site/
+[3]: https://opentelemetry.io/
