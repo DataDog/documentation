@@ -10,61 +10,103 @@ further_reading:
 
 ## Overview
 
-Dashboards are fundamental in troubleshooting and can be referenced in runbooks (which you can then write as a [notebook][1]), attached to a [monitor notification][2], or serve as a [status board][3]. You can start an investigation with a screenboard, document your insights in a notebook, and stay alerted by linking a monitor notification to your dashboard. 
+Dashboards are **pivots** in troubleshooting sessions, they gather data from multiple sources and have people across multiple teams to use it, an as such:
 
-Use Datadog dashboards to perform an initial assessment of context-relevant data sources with products such as the Log Explorer. Dashboard widgets contain context links to relevant Datadog pages with information about the timerange, underlying queries, the series on a graph, and more. 
+* they are typically attached to a [monitor notification][2] as a preferred entry point, used as [screen board][3] to overwatch key technical or business indicators, or referenced in [runbooks][1] to provide extra context.
 
-[Generic widgets][4] contain context links which allow you to integrate follow-up actions in third-party applications, override the default dashboard links, and add links to additional Datadog products. 
+* they give insightful information as **snapshots** on the current state of your platform. But they also have **interactions** to get a first sense of what's going off-tracks, before enventually diving deeper with more specialised product pages.
 
 {{< img src="dashboards/guide/context_links/overview.mp4" alt="Context Link Demo" video="true" style="width:80%;">}}
 
-This guide introduces context links and provides examples of how to create external links and override default links.
+In this users guide, we focus on **contextual links in widget menus** (see video above). Contextual links are bridges between Dashboards widgets and other pages, whether in Datadog or in third-part applications you need to integrate in your workflows. 
 
-## Context links
+You'll see:
 
-Out-of-the-box context links contain URLs to your [Infrastructure][5], [APM][6], [Logs][7], and underlying data sources such as your RUM events from a RUM query. Context links appear in the dropdown menu when you click on or in a dashboard widget. 
+1. How one-size-fit-alls default links work, and how to adapt them your exact needs (#context-links-how-to).
+2. Example use-cases on how to take advantage of context links configuration (#example-use-cases).
 
-If you have a generic widget with RUM data, the **View RUM events** link is present by default. Context links are not customizable for summary and decoration widgets.
 
-When investigating an issue, you may need to navigate between multiple dashboards, Datadog products, and third-party applications. Context links allow you to access, perform follow-up actions, and trigger third-party applications through webhooks. 
+## Contextual links how-to
 
-### Create a context link
+### Default contextual links
 
-To create a context link, click **+ Add a Context Link**. Optionally, click the **Settings** button on the right corner of your dashboard widget and click **Create custom links**.
+By default, widget contextual menu consist of the following links: 
 
-{{< img src="dashboards/guide/context_links/example-context-link.png" alt="Example context link" style="width:80%;" >}}
+| Link           | Description                                                                          |
+|----------------|--------------------------------------------------------------------------------------|
+| Hosts          | Links to the [**Host Map**][101] if series consists of 1+ host. 
+                        Links to the [**Host Dashboard**][102]if series consist of 1 host.              |
+| Containers     | Links to the [**Live Container**][103] page.                                         |
+| Processeses    | Links to the [**Live Process**][104] page.                                           |
+| APM Traces     | Opens a side panel in dashboard showing underlying traces, 
+                        which links to the APM [**Trace Explorer**][10].                                |
+| RUM Sessions   | Links to the RUM [**Sessions Explorer**]106]                                         |
+| Profiles       | Links to the APM [**Profile Explorer**]107]                                          |
+| Logs           | Opens a side panel in dashboard showing underlying logs, 
+                        which links to the [**Log Explorer**][108]                                      |
 
-1. Add a description in the **Label** field such as `See Hello World`. 
-2. Enter the URL to your external application in the **URL** field such as `www.google.com/?q="hello world"`.
-3. Key-value pairs appear below as URL parameters. Click **+ Add URL Parameter** to add additional parameters.
-4. Click **Save** and finish editing your dashboard widget configuration.
 
-When you click on the dashboard widget, the **See Hello World** link is available in the dropdown menu.
+[101]: /infrastructure/hostmap/#overview
+[102]: /getting_started/dashboards/#explore-out-of-the-box-dashboards
+[103]: /infrastructure/livecontainers/
+[104]: /infrastructure/process/?tab=linuxwindows
+[105]: /tracing/trace_explorer/?tab=listview
+[106]: /real_user_monitoring/explorer/?tab=facets
+[107]: /tracing/profiler/search_profiles/
+[108]: /logs/explorer/
 
-### Customize a context link
 
-You can use template variables such as the widget filter, widget time range, dashboard template variables (if any), and the specific series of user actions (if any) in your URL.
+By default the widget menu promotes only **Host**, **Traces** and **Logs** links, alongside links corresponding to the widget data source(s) (for instance **RUM Events** links if the widget uses RUM data). Others links appear under a secondary "More Actions" menu. Users with permissions to edit the Dashboards can configure which links are promoted.
 
-To avoid URL encoding, write the URL with the double brackets `{{ }}` syntax. For example, `https://www.google.com/?q="hello world"` or `https://www.google.com%2F%3Fq%3D%22hello+world%22`.
+{{< img src="dashboards/guide/context_links/default-links.png" alt="Default links" video="true" style="width:80%;">}}
 
-When the expected URL output contains a complex pattern involving a domain name and deep URL parameters, use template variables as the values in your context link URL parameters. 
 
-1. Add a link description in the **Label** field such as `See Hello World`.
-2. Enter a valid destination link with an arbitrary value in the **URL** field such as `www.google.com/?q="hello world"`.
-3. Replace the arbitrary value with a relevant template variable such as `www.google.com/?q="{{source.value}}"`.
-4. Click **Save** and finish editing your dashboard widget configuration.
+By default and when applicable, contextual links embed:
 
-When you click on the dashboard widget, the **See Hello World** link is available in the dropdown menu.
+* A **filter**, which combines the filter of the widget (including template variables, if any) and, for grouped-by queries, the series clicked-on.
+* A **timerange**. For timeseries and heatmap widgets, the timerange corresponds to the time bucket for the data point. For other widgets, the timerange is the current timerange of the Dashbaord.
 
-### Override a context link
 
-Edit your default context links to fine tune the navigation of your dashboards and investigation workflows. Click the **Edit** button on the right corner of the widget to access the list of context links under **Edit** > **Graph your data**.
+### Customize contextual links
 
-To hide context links, check **Hide in context menu** before clicking **Save** or clicking the **Hide** button on the right corner. To see hidden context links on your dashboard, click the **Show** button on the right corner.
+{{< img src="dashboards/guide/context_links/edit-links.png" alt="Edit links" video="true" style="width:80%;">}}
 
-You can override the default context links in the [Logs Explorer][8] to navigate from your dashboard to a saved view. You can also reinterpret the value from another context in the [RUM Explorer][9] by setting the `client.ip` of an HTTP call in RUM as the `source.ip` of a network flow. 
+Create your own contextual links or override the default links through the widget edit mode. *Note*: this feature is available for [Generic widgets][4].
 
-## Link to a third-party application
+{{< img src="dashboards/guide/context_links/custom-link.png" alt="Customize link" video="true" style="width:80%;">}}
+
+To define customs or overriden links, specify:
+
+* The **label** to appear in the context menu,
+* The **URL** for the custom link. Note that you can use the URL params key-value helper for that purpose.
+
+There are different types of variables you can use in for contextual links:
+* `{{timestamp_start}}` and `{{timestamp_end}}`. They correspond to the timerange of the widget, or the timerange of the clicked time bucket for timeseries and heatmaps.
+* Query variables, `{{@MerchantTier}}` and `{{@MerchantTier.value}}` in the example above. These variables are for widgets with grouped queries, and identify the specific group a user clicks on.
+* Dashboard template variables, `{{$env}}` and `{{$env.value}}` in the example above. These variables identify the current value in use for the template variable  when user cliks.
+* `{{tags}}`, which is the default combination of all the variables above.
+
+
+When you have the choice between `{{something}}` and `{{something.value}}` :
+* `{{something}}` returns the value prefixed by its key. For instance, `env:prod`.
+* `{{something.value}}` returns the raw value. For instance, `prod`.
+
+{{< img src="dashboards/guide/context_links/view-in-acme.png" alt="Customize link" video="true" style="width:80%;">}}
+
+Following on that custom context link example, clicking on `View in Acme` would open the `https://prod.example.com/search?what=basic&when=1643021787564`:
+* {{env.value}} has been replaced by `prod`
+* {{@MerchantTier.value}} has been replaced by `basic`
+* {{timestamp_end}} has been replaced by `1643021787564`
+
+
+{{< img src="dashboards/guide/context_links/override-link.mp4" alt="Copy-paste links to bootstrap configuration" video="true" style="width:80%;">}}
+
+For links encoding a wide variety of parameters, consider copy-paste the whole URL to bootstrap the configuration. Note that you don't have to worry about URL encoding. In the example below, the query parameter `status:error source:nginx {{@shopist.webstore.merchant.tier}}` - with {{@shopist.webstore.merchant.tier}} to be interpreted as `@shopist.webstore.merchant.tier:basic` - is naturally translated into `&query=status%3Aerror%20source%3Anginx%20%40shopist.webstore.merchant.tier%3Abasic`
+
+{{< img src="dashboards/guide/context_links/url-encoding.png" alt="Customize link" video="true" style="width:60%;">}}
+
+
+## Example Use-Cases
 
 You can add a context link from your host dashboard to pages in third-party applications such as your AWS EC2 instance summary or your Customer Support Center user profile in Zendesk.
 
@@ -118,3 +160,5 @@ To start a runbook, see the [Azure Automation documentation][10].
 [8]: https://app.datadoghq.com/logs
 [9]: https://app.datadoghq.com/rum/explorer
 [10]: https://docs.microsoft.com/en-us/azure/automation/automation-webhooks
+
+
