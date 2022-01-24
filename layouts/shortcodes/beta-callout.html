@@ -2,7 +2,7 @@
     <div class="card-body d-flex flex-column">
         <h5 class="card-title text-black mt-0 mb-1">Join the Beta!</h5>
         <p class="card-text">{{.Inner}}</p>
-        <a href="#" class="btn btn-outline-primary pb-1 align-self-end d-flex flex-column justify-content-center">
+        <a href="{{.Get `url`}}" target="_blank" class="{{.Get `custom_class`}} btn btn-outline-primary pb-1 align-self-end d-flex flex-column justify-content-center" data-toggle="{{.Get `d_toggle`}}" data-target="{{.Get `d_target`}}">
             Request Access
         </a>
     </div>
