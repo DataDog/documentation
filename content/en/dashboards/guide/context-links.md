@@ -93,7 +93,7 @@ When you have the choice between `{{something}}` and `{{something.value}}` :
 
 {{< img src="dashboards/guide/context_links/view-in-acme.png" alt="Customize link" video="true" style="width:80%;">}}
 
-Following on that custom context link example, clicking on `View in Acme` would open the `https://prod.example.com/search?what=basic&when=1643021787564`:
+Following on that custom context link example, clicking on `View in Acme` would open the `https://prod.acme.io/search?what=basic&when=1643021787564`:
 * {{env.value}} has been replaced by `prod`
 * {{@MerchantTier.value}} has been replaced by `basic`
 * {{timestamp_end}} has been replaced by `1643021787564`
@@ -108,43 +108,59 @@ For links encoding a wide variety of parameters, consider copy-paste the whole U
 
 ## Example Use-Cases
 
-You can add a context link from your host dashboard to pages in third-party applications such as your AWS EC2 instance summary or your Customer Support Center user profile in Zendesk.
+This section covers a handful of inspirational examples where you can take advantage contextual links to fine-tune how your Dashboards integrate in your workflows:
+
 
 ### Link to the AWS Console
 
-{{< img src="dashboards/guide/context_links/ec2_result.png" alt="AWS EC2 Query Result" style="width:90%;">}}
+Link a widget showing CPU for your hosts, to the AWS console where you'll run basic maintenance operations. Say, to upgrade from `t2.micro` to `t2.large`.
 
-For example, you can create context links in a dashboard widget with Metrics query data for an AWS EC2 instance. 
+{{< img src="dashboards/guide/context_links/ec2_result.png" alt="AWS EC2 Query Result" style="width:70%;">}}
+
+A typical AWS EC2 instance summary link is `https://eu-west-3.console.aws.amazon.com/ec2/v2/home?region=eu-west-3#InstanceDetails:instanceId=i-04b737b9f8bf94a94` in which you read:
+* `eu-west-3`as the datacenter region, once as a subdomain and once as a URL param
+* `i-04b737b9f8bf94a94` the host ID, as a hash parameter
+
+The query below would capture both datacenter and host region. 
 
 {{< img src="dashboards/guide/context_links/ec2_query.png" alt="AWS EC2 Query" style="width:70%;">}}
 
-For an AWS EC2 instance summary link such as `https://eu-west-3.console.aws.amazon.com/ec2/v2/home?region=eu-west-3#InstanceDetails:instanceId=i-04b737b9f8bf94a94`, you can use `AWS EC2 Instance Summary` as the label and [template variables](#template-variables) to set the URL parameters. The example URL is `https://{{region.value}}.console.aws.amazon.com/ec2/v2/home?region={{region.value}}#InstanceDetails:instanceId={{host.value}}`.
+The corresponding templated link would be `https://{{region.value}}.console.aws.amazon.com/ec2/v2/home?region={{region.value}}#InstanceDetails:instanceId={{host.value}}`.
 
-Click **Save** and finish editing your dashboard widget configuration.
+If your platform runs only on one region, the query above would work. However, alternatively, don't use the "group by region" in your query and hardcode the region in the templated link  `https://eu-west-3.console.aws.amazon.com/ec2/v2/home?region=eu-west-3#InstanceDetails:instanceId={{host.value}}`.
 
 {{< img src="dashboards/guide/context_links/ec2_interaction.png" alt="AWS EC2 Query Interaction" style="width:90%;">}}
 
-When you click on the dashboard widget, the **AWS EC2 Instance Summary** link sends you to `https://eu-west-3.console.aws.amazon.com/ec2/v2/home?region=eu-west-3#InstanceDetails:instanceId=i-04b737b9f8bf94a94`.
 
 ### Link to Zendesk
 
-{{< img src="dashboards/guide/context_links/zendesk_result.png" alt="Zendesk Query Result" style="width:90%;">}}
+Link a widget showing the customers most engaged on your platform, to Zendesk page platform. Say, to check what's the history of interactions for that customer.
 
-For example, you can add context links to your Customer Support Center's user page in a dashboard widget with RUM data. 
+{{< img src="dashboards/guide/context_links/zendesk_result.png" alt="Zendesk Query Result" style="width:70%;">}}
+
+
+A typical Zendesk link to search for users is `https://acme.zendesk.com/agent/search/1?type=user&q=email%3Ashane%40doe.com`, where the user is a search parameter.
+
+The query below would capture the user email. 
 
 {{< img src="dashboards/guide/context_links/zendesk_query.png" alt="Zendesk Query" style="width:80%;">}}
 
-For a Zendesk link such as `https://acme.zendesk.com/agent/search/1?type=user&q=shane%40doe.com`, you can use `Zendesk User Page` as the label and [template variables](#template-variables) to set the URL parameters. The example URL is `https://acme.zendesk.com/agent/search/1?type=user&q={{@usr.email.value}}`.
 
-Click **Save** and finish editing your dashboard widget configuration.
+And the corresponding templated link would be is `https://acme.zendesk.com/agent/search/1?type=user&q=email:{{@usr.email.value}}`.
 
 {{< img src="dashboards/guide/context_links/zendesk_interaction.png" alt="Zendesk User Page Context Link" style="width:80%;">}}
 
-When you click on your dashboard widget, the **Zendesk User page** link sends you to `https://acme.zendesk.com/agent/search/1?type=user&q=shane%40doe.com`. 
 
-## Trigger a webhook
+### Trigger a webhook
 
 To start a runbook, see the [Azure Automation documentation][10].
+TODO
+
+
+### Fine tune the landing page of the Datadog Log Explorer
+
+TODO
+
 
 ## Further Reading
 
