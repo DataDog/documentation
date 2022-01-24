@@ -17,6 +17,7 @@
 {{ end }}
 
 {{ if or ($rbacPermission) ($authZ) }}
+    {{ $permissions_object := }}
     {{ $slug := (replaceRE " " "-" ($tag.name | humanize | lower)) }}
     <h3 class="mb-2">Authorization</h3>
 
