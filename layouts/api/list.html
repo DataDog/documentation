@@ -1,9 +1,11 @@
 {{ define "api-main" }}
 
+    {{ $dot := . }}
+
     {{ with .Content}}
-        <div class="col-12 col-lg-9 pl-0">
-            {{ . }}
-        </div>
+       <div class="col-12 {{if ne $dot.RelPermalink "/api/latest/scopes/"}}col-lg-9{{ end }} pl-0">
+        {{ . }}
+       </div>
     {{ end }}
 
     {{ $dot := . }}
@@ -151,8 +153,12 @@
                     </p>
 
                     <h3 class="mt-2">{{ i18n "overview" }}</h3>
-                    <p>{{ $translate_action.description | default $endpoint.action.description | markdownify }}</p>
-
+                    <p>
+                      {{ $translate_action.description | default $endpoint.action.description | markdownify }}
+                      <!-- required scopes -->
+                      {{ partial "api/scopes.html" (dict "context" $dot "endpoint" $endpoint "securitySchemes" $adat.components.securitySchemes "tag" $tag) }}
+                    </p>
+                    
                     <!-- querystring, path params, header params -->
                     {{ partial "api/arguments.html" (dict "context" $dot "endpoint" $endpoint) }}
 

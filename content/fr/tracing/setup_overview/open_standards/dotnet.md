@@ -37,7 +37,7 @@ Utilisez OpenTracing pour créer une span.
 ```csharp
 using (IScope scope = GlobalTracer.Instance.BuildSpan("manual.sortorders").StartActive(finishSpanOnDispose: true))
 {
-    scope.Span.SetTag("resource.name", "<RESOURCE NAME>");
+    scope.Span.SetTag("resource.name", "<NOM_RESSOURCE>");
     SortOrders();
 }
 ```
@@ -51,7 +51,7 @@ Pour tracer du code exécuté dans une tâche asynchrone, créez un nouveau cont
      {
          using (IScope scope = GlobalTracer.Instance.BuildSpan("manual.sortorders").StartActive(finishSpanOnDispose: true))
          {
-             scope.Span.SetTag("resource.name", "<RESOURCE NAME>");
+             scope.Span.SetTag("resource.name", "<NOM_RESSOURCE>");
              SortOrders();
          }
      });

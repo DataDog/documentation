@@ -188,8 +188,18 @@
           "type": "string"
         }
       },
+      "CloudWorkloadSecurityAgentRuleID": {
+        "description": "The ID of the Agent rule.",
+        "example": "3b5-v82-ns6",
+        "in": "path",
+        "name": "agent_rule_id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
       "IncidentIDPathParameter": {
-        "description": "The UUID the incident.",
+        "description": "The UUID of the incident.",
         "in": "path",
         "name": "incident_id",
         "required": true,
@@ -830,7 +840,8 @@
                   "key": {
                     "description": "The API key.",
                     "readOnly": true,
-                    "type": "string"
+                    "type": "string",
+                    "x-secret": true
                   },
                   "last4": {
                     "description": "The last four characters of the API key.",
@@ -838,7 +849,8 @@
                     "maxLength": 4,
                     "minLength": 4,
                     "readOnly": true,
-                    "type": "string"
+                    "type": "string",
+                    "x-secret": true
                   },
                   "modified_at": {
                     "description": "Date the API key was last modified.",
@@ -1566,7 +1578,8 @@
                       "maxLength": 4,
                       "minLength": 4,
                       "readOnly": true,
-                      "type": "string"
+                      "type": "string",
+                      "x-secret": true
                     },
                     "modified_at": {
                       "description": "Date the API key was last modified.",
@@ -1969,8 +1982,22 @@
         "properties": {
           "name": {
             "description": "Name of the application key.",
-            "example": "Application Key for submitting metrics",
+            "example": "Application Key for managing dashboards",
             "type": "string"
+          },
+          "scopes": {
+            "description": "Array of scopes to grant the application key. This feature is in private beta, please contact Datadog support to enable scopes for your application keys.",
+            "example": [
+              "dashboards_read",
+              "dashboards_write",
+              "dashboards_public_share"
+            ],
+            "items": {
+              "description": "Name of scope.",
+              "type": "string"
+            },
+            "nullable": true,
+            "type": "array"
           }
         },
         "required": [
@@ -1986,8 +2013,22 @@
             "properties": {
               "name": {
                 "description": "Name of the application key.",
-                "example": "Application Key for submitting metrics",
+                "example": "Application Key for managing dashboards",
                 "type": "string"
+              },
+              "scopes": {
+                "description": "Array of scopes to grant the application key. This feature is in private beta, please contact Datadog support to enable scopes for your application keys.",
+                "example": [
+                  "dashboards_read",
+                  "dashboards_write",
+                  "dashboards_public_share"
+                ],
+                "items": {
+                  "description": "Name of scope.",
+                  "type": "string"
+                },
+                "nullable": true,
+                "type": "array"
               }
             },
             "required": [
@@ -2025,8 +2066,22 @@
                 "properties": {
                   "name": {
                     "description": "Name of the application key.",
-                    "example": "Application Key for submitting metrics",
+                    "example": "Application Key for managing dashboards",
                     "type": "string"
+                  },
+                  "scopes": {
+                    "description": "Array of scopes to grant the application key. This feature is in private beta, please contact Datadog support to enable scopes for your application keys.",
+                    "example": [
+                      "dashboards_read",
+                      "dashboards_write",
+                      "dashboards_public_share"
+                    ],
+                    "items": {
+                      "description": "Name of scope.",
+                      "type": "string"
+                    },
+                    "nullable": true,
+                    "type": "array"
                   }
                 },
                 "required": [
@@ -2119,7 +2174,8 @@
                   "key": {
                     "description": "The application key.",
                     "readOnly": true,
-                    "type": "string"
+                    "type": "string",
+                    "x-secret": true
                   },
                   "last4": {
                     "description": "The last four characters of the application key.",
@@ -2127,12 +2183,27 @@
                     "maxLength": 4,
                     "minLength": 4,
                     "readOnly": true,
-                    "type": "string"
+                    "type": "string",
+                    "x-secret": true
                   },
                   "name": {
                     "description": "Name of the application key.",
-                    "example": "Application Key for submitting metrics",
+                    "example": "Application Key for managing dashboards",
                     "type": "string"
+                  },
+                  "scopes": {
+                    "description": "Array of scopes to grant the application key. This feature is in private beta, please contact Datadog support to enable scopes for your application keys.",
+                    "example": [
+                      "dashboards_read",
+                      "dashboards_write",
+                      "dashboards_public_share"
+                    ],
+                    "items": {
+                      "description": "Name of scope.",
+                      "type": "string"
+                    },
+                    "nullable": true,
+                    "type": "array"
                   }
                 },
                 "type": "object"
@@ -2870,13 +2941,24 @@
         "properties": {
           "name": {
             "description": "Name of the application key.",
-            "example": "Application Key for submitting metrics",
+            "example": "Application Key for managing dashboards",
             "type": "string"
+          },
+          "scopes": {
+            "description": "Array of scopes to grant the application key. This feature is in private beta, please contact Datadog support to enable scopes for your application keys.",
+            "example": [
+              "dashboards_read",
+              "dashboards_write",
+              "dashboards_public_share"
+            ],
+            "items": {
+              "description": "Name of scope.",
+              "type": "string"
+            },
+            "nullable": true,
+            "type": "array"
           }
         },
-        "required": [
-          "name"
-        ],
         "type": "object"
       },
       "ApplicationKeyUpdateData": {
@@ -2887,13 +2969,24 @@
             "properties": {
               "name": {
                 "description": "Name of the application key.",
-                "example": "Application Key for submitting metrics",
+                "example": "Application Key for managing dashboards",
                 "type": "string"
+              },
+              "scopes": {
+                "description": "Array of scopes to grant the application key. This feature is in private beta, please contact Datadog support to enable scopes for your application keys.",
+                "example": [
+                  "dashboards_read",
+                  "dashboards_write",
+                  "dashboards_public_share"
+                ],
+                "items": {
+                  "description": "Name of scope.",
+                  "type": "string"
+                },
+                "nullable": true,
+                "type": "array"
               }
             },
-            "required": [
-              "name"
-            ],
             "type": "object"
           },
           "id": {
@@ -2932,13 +3025,24 @@
                 "properties": {
                   "name": {
                     "description": "Name of the application key.",
-                    "example": "Application Key for submitting metrics",
+                    "example": "Application Key for managing dashboards",
                     "type": "string"
+                  },
+                  "scopes": {
+                    "description": "Array of scopes to grant the application key. This feature is in private beta, please contact Datadog support to enable scopes for your application keys.",
+                    "example": [
+                      "dashboards_read",
+                      "dashboards_write",
+                      "dashboards_public_share"
+                    ],
+                    "items": {
+                      "description": "Name of scope.",
+                      "type": "string"
+                    },
+                    "nullable": true,
+                    "type": "array"
                   }
                 },
-                "required": [
-                  "name"
-                ],
                 "type": "object"
               },
               "id": {
@@ -3004,6 +3108,734 @@
         "x-enum-varnames": [
           "APPLICATION_KEYS"
         ]
+      },
+      "CloudWorkloadSecurityAgentRuleAttributes": {
+        "description": "A Cloud Workload Security Agent rule returned by the API.",
+        "properties": {
+          "category": {
+            "description": "The category of the Agent rule.",
+            "example": "Process Activity",
+            "type": "string"
+          },
+          "creationDate": {
+            "description": "When the Agent rule was created, timestamp in milliseconds.",
+            "example": 1624366480320,
+            "format": "int64",
+            "type": "integer"
+          },
+          "creator": {
+            "description": "The attributes of the user who created the Agent rule.",
+            "properties": {
+              "handle": {
+                "description": "The handle of the user.",
+                "example": "datadog.user@example.com",
+                "type": "string"
+              },
+              "name": {
+                "description": "The name of the user.",
+                "example": "Datadog User",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "defaultRule": {
+            "description": "Whether the rule is included by default.",
+            "example": false,
+            "type": "boolean"
+          },
+          "description": {
+            "description": "The description of the Agent rule.",
+            "example": "My Agent rule",
+            "type": "string"
+          },
+          "enabled": {
+            "description": "Whether the Agent rule is enabled.",
+            "example": true,
+            "type": "boolean"
+          },
+          "expression": {
+            "description": "The SECL expression of the Agent rule.",
+            "example": "exec.file.name == \\\"sh\\\"",
+            "type": "string"
+          },
+          "name": {
+            "description": "The name of the Agent rule.",
+            "example": "my_agent_rule",
+            "type": "string"
+          },
+          "updatedAt": {
+            "description": "When the Agent rule was last updated, timestamp in milliseconds.",
+            "example": 1624366480320,
+            "format": "int64",
+            "type": "integer"
+          },
+          "updater": {
+            "description": "The attributes of the user who last updated the Agent rule.",
+            "properties": {
+              "handle": {
+                "description": "The handle of the user.",
+                "example": "datadog.user@example.com",
+                "type": "string"
+              },
+              "name": {
+                "description": "The name of the user.",
+                "example": "Datadog User",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "version": {
+            "description": "The version of the Agent rule.",
+            "example": 23,
+            "format": "int64",
+            "type": "integer"
+          }
+        }
+      },
+      "CloudWorkloadSecurityAgentRuleCreateAttributes": {
+        "description": "Create a new Cloud Workload Security Agent rule.",
+        "properties": {
+          "description": {
+            "description": "The description of the Agent rule.",
+            "example": "My Agent rule",
+            "type": "string"
+          },
+          "enabled": {
+            "description": "Whether the Agent rule is enabled.",
+            "example": true,
+            "type": "boolean"
+          },
+          "expression": {
+            "description": "The SECL expression of the Agent rule.",
+            "example": "exec.file.name == \\\"sh\\\"",
+            "type": "string"
+          },
+          "name": {
+            "description": "The name of the Agent rule.",
+            "example": "my_agent_rule",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "expression"
+        ],
+        "type": "object"
+      },
+      "CloudWorkloadSecurityAgentRuleCreateData": {
+        "description": "Object for a single Agent rule.",
+        "properties": {
+          "attributes": {
+            "description": "Create a new Cloud Workload Security Agent rule.",
+            "properties": {
+              "description": {
+                "description": "The description of the Agent rule.",
+                "example": "My Agent rule",
+                "type": "string"
+              },
+              "enabled": {
+                "description": "Whether the Agent rule is enabled.",
+                "example": true,
+                "type": "boolean"
+              },
+              "expression": {
+                "description": "The SECL expression of the Agent rule.",
+                "example": "exec.file.name == \\\"sh\\\"",
+                "type": "string"
+              },
+              "name": {
+                "description": "The name of the Agent rule.",
+                "example": "my_agent_rule",
+                "type": "string"
+              }
+            },
+            "required": [
+              "name",
+              "expression"
+            ],
+            "type": "object"
+          },
+          "type": {
+            "default": "agent_rule",
+            "description": "The type of the resource. The value should always be `agent_rule`.",
+            "enum": [
+              "agent_rule"
+            ],
+            "example": "agent_rule",
+            "type": "string",
+            "x-enum-varnames": [
+              "AGENT_RULE"
+            ]
+          }
+        },
+        "required": [
+          "attributes",
+          "type"
+        ],
+        "type": "object"
+      },
+      "CloudWorkloadSecurityAgentRuleCreateRequest": {
+        "description": "Request object that includes the Agent rule to create.",
+        "properties": {
+          "data": {
+            "description": "Object for a single Agent rule.",
+            "properties": {
+              "attributes": {
+                "description": "Create a new Cloud Workload Security Agent rule.",
+                "properties": {
+                  "description": {
+                    "description": "The description of the Agent rule.",
+                    "example": "My Agent rule",
+                    "type": "string"
+                  },
+                  "enabled": {
+                    "description": "Whether the Agent rule is enabled.",
+                    "example": true,
+                    "type": "boolean"
+                  },
+                  "expression": {
+                    "description": "The SECL expression of the Agent rule.",
+                    "example": "exec.file.name == \\\"sh\\\"",
+                    "type": "string"
+                  },
+                  "name": {
+                    "description": "The name of the Agent rule.",
+                    "example": "my_agent_rule",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "name",
+                  "expression"
+                ],
+                "type": "object"
+              },
+              "type": {
+                "default": "agent_rule",
+                "description": "The type of the resource. The value should always be `agent_rule`.",
+                "enum": [
+                  "agent_rule"
+                ],
+                "example": "agent_rule",
+                "type": "string",
+                "x-enum-varnames": [
+                  "AGENT_RULE"
+                ]
+              }
+            },
+            "required": [
+              "attributes",
+              "type"
+            ],
+            "type": "object"
+          }
+        },
+        "required": [
+          "data"
+        ],
+        "type": "object"
+      },
+      "CloudWorkloadSecurityAgentRuleCreatorAttributes": {
+        "description": "The attributes of the user who created the Agent rule.",
+        "properties": {
+          "handle": {
+            "description": "The handle of the user.",
+            "example": "datadog.user@example.com",
+            "type": "string"
+          },
+          "name": {
+            "description": "The name of the user.",
+            "example": "Datadog User",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "CloudWorkloadSecurityAgentRuleData": {
+        "description": "Object for a single Agent rule.",
+        "properties": {
+          "attributes": {
+            "description": "A Cloud Workload Security Agent rule returned by the API.",
+            "properties": {
+              "category": {
+                "description": "The category of the Agent rule.",
+                "example": "Process Activity",
+                "type": "string"
+              },
+              "creationDate": {
+                "description": "When the Agent rule was created, timestamp in milliseconds.",
+                "example": 1624366480320,
+                "format": "int64",
+                "type": "integer"
+              },
+              "creator": {
+                "description": "The attributes of the user who created the Agent rule.",
+                "properties": {
+                  "handle": {
+                    "description": "The handle of the user.",
+                    "example": "datadog.user@example.com",
+                    "type": "string"
+                  },
+                  "name": {
+                    "description": "The name of the user.",
+                    "example": "Datadog User",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "defaultRule": {
+                "description": "Whether the rule is included by default.",
+                "example": false,
+                "type": "boolean"
+              },
+              "description": {
+                "description": "The description of the Agent rule.",
+                "example": "My Agent rule",
+                "type": "string"
+              },
+              "enabled": {
+                "description": "Whether the Agent rule is enabled.",
+                "example": true,
+                "type": "boolean"
+              },
+              "expression": {
+                "description": "The SECL expression of the Agent rule.",
+                "example": "exec.file.name == \\\"sh\\\"",
+                "type": "string"
+              },
+              "name": {
+                "description": "The name of the Agent rule.",
+                "example": "my_agent_rule",
+                "type": "string"
+              },
+              "updatedAt": {
+                "description": "When the Agent rule was last updated, timestamp in milliseconds.",
+                "example": 1624366480320,
+                "format": "int64",
+                "type": "integer"
+              },
+              "updater": {
+                "description": "The attributes of the user who last updated the Agent rule.",
+                "properties": {
+                  "handle": {
+                    "description": "The handle of the user.",
+                    "example": "datadog.user@example.com",
+                    "type": "string"
+                  },
+                  "name": {
+                    "description": "The name of the user.",
+                    "example": "Datadog User",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "version": {
+                "description": "The version of the Agent rule.",
+                "example": 23,
+                "format": "int64",
+                "type": "integer"
+              }
+            }
+          },
+          "id": {
+            "description": "The ID of the Agent rule.",
+            "example": "3dd-0uc-h1s",
+            "type": "string"
+          },
+          "type": {
+            "default": "agent_rule",
+            "description": "The type of the resource. The value should always be `agent_rule`.",
+            "enum": [
+              "agent_rule"
+            ],
+            "example": "agent_rule",
+            "type": "string",
+            "x-enum-varnames": [
+              "AGENT_RULE"
+            ]
+          }
+        },
+        "type": "object"
+      },
+      "CloudWorkloadSecurityAgentRuleResponse": {
+        "description": "Response object that includes an Agent rule.",
+        "properties": {
+          "data": {
+            "description": "Object for a single Agent rule.",
+            "properties": {
+              "attributes": {
+                "description": "A Cloud Workload Security Agent rule returned by the API.",
+                "properties": {
+                  "category": {
+                    "description": "The category of the Agent rule.",
+                    "example": "Process Activity",
+                    "type": "string"
+                  },
+                  "creationDate": {
+                    "description": "When the Agent rule was created, timestamp in milliseconds.",
+                    "example": 1624366480320,
+                    "format": "int64",
+                    "type": "integer"
+                  },
+                  "creator": {
+                    "description": "The attributes of the user who created the Agent rule.",
+                    "properties": {
+                      "handle": {
+                        "description": "The handle of the user.",
+                        "example": "datadog.user@example.com",
+                        "type": "string"
+                      },
+                      "name": {
+                        "description": "The name of the user.",
+                        "example": "Datadog User",
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "defaultRule": {
+                    "description": "Whether the rule is included by default.",
+                    "example": false,
+                    "type": "boolean"
+                  },
+                  "description": {
+                    "description": "The description of the Agent rule.",
+                    "example": "My Agent rule",
+                    "type": "string"
+                  },
+                  "enabled": {
+                    "description": "Whether the Agent rule is enabled.",
+                    "example": true,
+                    "type": "boolean"
+                  },
+                  "expression": {
+                    "description": "The SECL expression of the Agent rule.",
+                    "example": "exec.file.name == \\\"sh\\\"",
+                    "type": "string"
+                  },
+                  "name": {
+                    "description": "The name of the Agent rule.",
+                    "example": "my_agent_rule",
+                    "type": "string"
+                  },
+                  "updatedAt": {
+                    "description": "When the Agent rule was last updated, timestamp in milliseconds.",
+                    "example": 1624366480320,
+                    "format": "int64",
+                    "type": "integer"
+                  },
+                  "updater": {
+                    "description": "The attributes of the user who last updated the Agent rule.",
+                    "properties": {
+                      "handle": {
+                        "description": "The handle of the user.",
+                        "example": "datadog.user@example.com",
+                        "type": "string"
+                      },
+                      "name": {
+                        "description": "The name of the user.",
+                        "example": "Datadog User",
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "version": {
+                    "description": "The version of the Agent rule.",
+                    "example": 23,
+                    "format": "int64",
+                    "type": "integer"
+                  }
+                }
+              },
+              "id": {
+                "description": "The ID of the Agent rule.",
+                "example": "3dd-0uc-h1s",
+                "type": "string"
+              },
+              "type": {
+                "default": "agent_rule",
+                "description": "The type of the resource. The value should always be `agent_rule`.",
+                "enum": [
+                  "agent_rule"
+                ],
+                "example": "agent_rule",
+                "type": "string",
+                "x-enum-varnames": [
+                  "AGENT_RULE"
+                ]
+              }
+            },
+            "type": "object"
+          }
+        },
+        "type": "object"
+      },
+      "CloudWorkloadSecurityAgentRuleType": {
+        "default": "agent_rule",
+        "description": "The type of the resource. The value should always be `agent_rule`.",
+        "enum": [
+          "agent_rule"
+        ],
+        "example": "agent_rule",
+        "type": "string",
+        "x-enum-varnames": [
+          "AGENT_RULE"
+        ]
+      },
+      "CloudWorkloadSecurityAgentRuleUpdateAttributes": {
+        "description": "Update an existing Cloud Workload Security Agent rule.",
+        "properties": {
+          "description": {
+            "description": "The description of the Agent rule.",
+            "example": "My Agent rule",
+            "type": "string"
+          },
+          "enabled": {
+            "description": "Whether the Agent rule is enabled.",
+            "example": true,
+            "type": "boolean"
+          },
+          "expression": {
+            "description": "The SECL expression of the Agent rule.",
+            "example": "exec.file.name == \\\"sh\\\"",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "CloudWorkloadSecurityAgentRuleUpdateData": {
+        "description": "Object for a single Agent rule.",
+        "properties": {
+          "attributes": {
+            "description": "Update an existing Cloud Workload Security Agent rule.",
+            "properties": {
+              "description": {
+                "description": "The description of the Agent rule.",
+                "example": "My Agent rule",
+                "type": "string"
+              },
+              "enabled": {
+                "description": "Whether the Agent rule is enabled.",
+                "example": true,
+                "type": "boolean"
+              },
+              "expression": {
+                "description": "The SECL expression of the Agent rule.",
+                "example": "exec.file.name == \\\"sh\\\"",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": {
+            "default": "agent_rule",
+            "description": "The type of the resource. The value should always be `agent_rule`.",
+            "enum": [
+              "agent_rule"
+            ],
+            "example": "agent_rule",
+            "type": "string",
+            "x-enum-varnames": [
+              "AGENT_RULE"
+            ]
+          }
+        },
+        "required": [
+          "attributes",
+          "type"
+        ],
+        "type": "object"
+      },
+      "CloudWorkloadSecurityAgentRuleUpdateRequest": {
+        "description": "Request object that includes the Agent rule with the attributes to update.",
+        "properties": {
+          "data": {
+            "description": "Object for a single Agent rule.",
+            "properties": {
+              "attributes": {
+                "description": "Update an existing Cloud Workload Security Agent rule.",
+                "properties": {
+                  "description": {
+                    "description": "The description of the Agent rule.",
+                    "example": "My Agent rule",
+                    "type": "string"
+                  },
+                  "enabled": {
+                    "description": "Whether the Agent rule is enabled.",
+                    "example": true,
+                    "type": "boolean"
+                  },
+                  "expression": {
+                    "description": "The SECL expression of the Agent rule.",
+                    "example": "exec.file.name == \\\"sh\\\"",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "type": {
+                "default": "agent_rule",
+                "description": "The type of the resource. The value should always be `agent_rule`.",
+                "enum": [
+                  "agent_rule"
+                ],
+                "example": "agent_rule",
+                "type": "string",
+                "x-enum-varnames": [
+                  "AGENT_RULE"
+                ]
+              }
+            },
+            "required": [
+              "attributes",
+              "type"
+            ],
+            "type": "object"
+          }
+        },
+        "required": [
+          "data"
+        ],
+        "type": "object"
+      },
+      "CloudWorkloadSecurityAgentRuleUpdaterAttributes": {
+        "description": "The attributes of the user who last updated the Agent rule.",
+        "properties": {
+          "handle": {
+            "description": "The handle of the user.",
+            "example": "datadog.user@example.com",
+            "type": "string"
+          },
+          "name": {
+            "description": "The name of the user.",
+            "example": "Datadog User",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "CloudWorkloadSecurityAgentRulesListResponse": {
+        "description": "Response object that includes a list of Agent rule.",
+        "properties": {
+          "data": {
+            "description": "A list of Agent rules objects.",
+            "items": {
+              "description": "Object for a single Agent rule.",
+              "properties": {
+                "attributes": {
+                  "description": "A Cloud Workload Security Agent rule returned by the API.",
+                  "properties": {
+                    "category": {
+                      "description": "The category of the Agent rule.",
+                      "example": "Process Activity",
+                      "type": "string"
+                    },
+                    "creationDate": {
+                      "description": "When the Agent rule was created, timestamp in milliseconds.",
+                      "example": 1624366480320,
+                      "format": "int64",
+                      "type": "integer"
+                    },
+                    "creator": {
+                      "description": "The attributes of the user who created the Agent rule.",
+                      "properties": {
+                        "handle": {
+                          "description": "The handle of the user.",
+                          "example": "datadog.user@example.com",
+                          "type": "string"
+                        },
+                        "name": {
+                          "description": "The name of the user.",
+                          "example": "Datadog User",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "defaultRule": {
+                      "description": "Whether the rule is included by default.",
+                      "example": false,
+                      "type": "boolean"
+                    },
+                    "description": {
+                      "description": "The description of the Agent rule.",
+                      "example": "My Agent rule",
+                      "type": "string"
+                    },
+                    "enabled": {
+                      "description": "Whether the Agent rule is enabled.",
+                      "example": true,
+                      "type": "boolean"
+                    },
+                    "expression": {
+                      "description": "The SECL expression of the Agent rule.",
+                      "example": "exec.file.name == \\\"sh\\\"",
+                      "type": "string"
+                    },
+                    "name": {
+                      "description": "The name of the Agent rule.",
+                      "example": "my_agent_rule",
+                      "type": "string"
+                    },
+                    "updatedAt": {
+                      "description": "When the Agent rule was last updated, timestamp in milliseconds.",
+                      "example": 1624366480320,
+                      "format": "int64",
+                      "type": "integer"
+                    },
+                    "updater": {
+                      "description": "The attributes of the user who last updated the Agent rule.",
+                      "properties": {
+                        "handle": {
+                          "description": "The handle of the user.",
+                          "example": "datadog.user@example.com",
+                          "type": "string"
+                        },
+                        "name": {
+                          "description": "The name of the user.",
+                          "example": "Datadog User",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "version": {
+                      "description": "The version of the Agent rule.",
+                      "example": 23,
+                      "format": "int64",
+                      "type": "integer"
+                    }
+                  }
+                },
+                "id": {
+                  "description": "The ID of the Agent rule.",
+                  "example": "3dd-0uc-h1s",
+                  "type": "string"
+                },
+                "type": {
+                  "default": "agent_rule",
+                  "description": "The type of the resource. The value should always be `agent_rule`.",
+                  "enum": [
+                    "agent_rule"
+                  ],
+                  "example": "agent_rule",
+                  "type": "string",
+                  "x-enum-varnames": [
+                    "AGENT_RULE"
+                  ]
+                }
+              },
+              "type": "object"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
       },
       "ContentEncoding": {
         "description": "HTTP header used to compress the media-type.",
@@ -3627,7 +4459,8 @@
               "key": {
                 "description": "The API key.",
                 "readOnly": true,
-                "type": "string"
+                "type": "string",
+                "x-secret": true
               },
               "last4": {
                 "description": "The last four characters of the API key.",
@@ -3635,7 +4468,8 @@
                 "maxLength": 4,
                 "minLength": 4,
                 "readOnly": true,
-                "type": "string"
+                "type": "string",
+                "x-secret": true
               },
               "modified_at": {
                 "description": "Date the API key was last modified.",
@@ -3760,7 +4594,8 @@
           "key": {
             "description": "The API key.",
             "readOnly": true,
-            "type": "string"
+            "type": "string",
+            "x-secret": true
           },
           "last4": {
             "description": "The last four characters of the API key.",
@@ -3768,7 +4603,8 @@
             "maxLength": 4,
             "minLength": 4,
             "readOnly": true,
-            "type": "string"
+            "type": "string",
+            "x-secret": true
           },
           "modified_at": {
             "description": "Date the API key was last modified.",
@@ -3799,7 +4635,8 @@
               "key": {
                 "description": "The application key.",
                 "readOnly": true,
-                "type": "string"
+                "type": "string",
+                "x-secret": true
               },
               "last4": {
                 "description": "The last four characters of the application key.",
@@ -3807,12 +4644,27 @@
                 "maxLength": 4,
                 "minLength": 4,
                 "readOnly": true,
-                "type": "string"
+                "type": "string",
+                "x-secret": true
               },
               "name": {
                 "description": "Name of the application key.",
-                "example": "Application Key for submitting metrics",
+                "example": "Application Key for managing dashboards",
                 "type": "string"
+              },
+              "scopes": {
+                "description": "Array of scopes to grant the application key. This feature is in private beta, please contact Datadog support to enable scopes for your application keys.",
+                "example": [
+                  "dashboards_read",
+                  "dashboards_write",
+                  "dashboards_public_share"
+                ],
+                "items": {
+                  "description": "Name of scope.",
+                  "type": "string"
+                },
+                "nullable": true,
+                "type": "array"
               }
             },
             "type": "object"
@@ -3890,7 +4742,8 @@
           "key": {
             "description": "The application key.",
             "readOnly": true,
-            "type": "string"
+            "type": "string",
+            "x-secret": true
           },
           "last4": {
             "description": "The last four characters of the application key.",
@@ -3898,12 +4751,27 @@
             "maxLength": 4,
             "minLength": 4,
             "readOnly": true,
-            "type": "string"
+            "type": "string",
+            "x-secret": true
           },
           "name": {
             "description": "Name of the application key.",
-            "example": "Application Key for submitting metrics",
+            "example": "Application Key for managing dashboards",
             "type": "string"
+          },
+          "scopes": {
+            "description": "Array of scopes to grant the application key. This feature is in private beta, please contact Datadog support to enable scopes for your application keys.",
+            "example": [
+              "dashboards_read",
+              "dashboards_write",
+              "dashboards_public_share"
+            ],
+            "items": {
+              "description": "Name of scope.",
+              "type": "string"
+            },
+            "nullable": true,
+            "type": "array"
           }
         },
         "type": "object"
@@ -4075,7 +4943,7 @@
                   "properties": {
                     "type": {
                       "default": "multiselect",
-                      "description": "Type of the single value field definitions.",
+                      "description": "Type of the multiple value field definitions.",
                       "enum": [
                         "multiselect",
                         "textarray",
@@ -4251,7 +5119,7 @@
                       "properties": {
                         "type": {
                           "default": "multiselect",
-                          "description": "Type of the single value field definitions.",
+                          "description": "Type of the multiple value field definitions.",
                           "enum": [
                             "multiselect",
                             "textarray",
@@ -4539,7 +5407,7 @@
                           "properties": {
                             "type": {
                               "default": "multiselect",
-                              "description": "Type of the single value field definitions.",
+                              "description": "Type of the multiple value field definitions.",
                               "enum": [
                                 "multiselect",
                                 "textarray",
@@ -4773,7 +5641,7 @@
             "properties": {
               "type": {
                 "default": "multiselect",
-                "description": "Type of the single value field definitions.",
+                "description": "Type of the multiple value field definitions.",
                 "enum": [
                   "multiselect",
                   "textarray",
@@ -4817,7 +5685,7 @@
         "properties": {
           "type": {
             "default": "multiselect",
-            "description": "Type of the single value field definitions.",
+            "description": "Type of the multiple value field definitions.",
             "enum": [
               "multiselect",
               "textarray",
@@ -4892,7 +5760,7 @@
       },
       "IncidentFieldAttributesValueType": {
         "default": "multiselect",
-        "description": "Type of the single value field definitions.",
+        "description": "Type of the multiple value field definitions.",
         "enum": [
           "multiselect",
           "textarray",
@@ -5043,7 +5911,7 @@
                           "properties": {
                             "type": {
                               "default": "multiselect",
-                              "description": "Type of the single value field definitions.",
+                              "description": "Type of the multiple value field definitions.",
                               "enum": [
                                 "multiselect",
                                 "textarray",
@@ -5749,7 +6617,7 @@
                   "properties": {
                     "type": {
                       "default": "multiselect",
-                      "description": "Type of the single value field definitions.",
+                      "description": "Type of the multiple value field definitions.",
                       "enum": [
                         "multiselect",
                         "textarray",
@@ -5958,7 +6826,7 @@
                       "properties": {
                         "type": {
                           "default": "multiselect",
-                          "description": "Type of the single value field definitions.",
+                          "description": "Type of the multiple value field definitions.",
                           "enum": [
                             "multiselect",
                             "textarray",
@@ -10565,7 +11433,7 @@
                   "properties": {
                     "type": {
                       "default": "multiselect",
-                      "description": "Type of the single value field definitions.",
+                      "description": "Type of the multiple value field definitions.",
                       "enum": [
                         "multiselect",
                         "textarray",
@@ -10716,7 +11584,7 @@
                       "properties": {
                         "type": {
                           "default": "multiselect",
-                          "description": "Type of the single value field definitions.",
+                          "description": "Type of the multiple value field definitions.",
                           "enum": [
                             "multiselect",
                             "textarray",
@@ -11346,7 +12214,7 @@
                           "properties": {
                             "type": {
                               "default": "multiselect",
-                              "description": "Type of the single value field definitions.",
+                              "description": "Type of the multiple value field definitions.",
                               "enum": [
                                 "multiselect",
                                 "textarray",
@@ -11897,7 +12765,7 @@
                             "properties": {
                               "type": {
                                 "default": "multiselect",
-                                "description": "Type of the single value field definitions.",
+                                "description": "Type of the multiple value field definitions.",
                                 "enum": [
                                   "multiselect",
                                   "textarray",
@@ -12580,12 +13448,27 @@
                       "maxLength": 4,
                       "minLength": 4,
                       "readOnly": true,
-                      "type": "string"
+                      "type": "string",
+                      "x-secret": true
                     },
                     "name": {
                       "description": "Name of the application key.",
-                      "example": "Application Key for submitting metrics",
+                      "example": "Application Key for managing dashboards",
                       "type": "string"
+                    },
+                    "scopes": {
+                      "description": "Array of scopes to grant the application key. This feature is in private beta, please contact Datadog support to enable scopes for your application keys.",
+                      "example": [
+                        "dashboards_read",
+                        "dashboards_write",
+                        "dashboards_public_share"
+                      ],
+                      "items": {
+                        "description": "Name of scope.",
+                        "type": "string"
+                      },
+                      "nullable": true,
+                      "type": "array"
                     }
                   },
                   "type": "object"
@@ -13294,7 +14177,7 @@
             "properties": {
               "from": {
                 "default": "now-15m",
-                "description": "The minimum time for the requested logs, supports date math and regular timestamps",
+                "description": "The minimum time for the requested logs, supports date math and regular timestamps (milliseconds).",
                 "example": "now-15m",
                 "type": "string"
               },
@@ -13321,7 +14204,7 @@
               },
               "to": {
                 "default": "now",
-                "description": "The maximum time for the requested logs, supports date math and regular timestamps",
+                "description": "The maximum time for the requested logs, supports date math and regular timestamps (milliseconds).",
                 "example": "now",
                 "type": "string"
               }
@@ -16534,7 +17417,7 @@
             "properties": {
               "from": {
                 "default": "now-15m",
-                "description": "The minimum time for the requested logs, supports date math and regular timestamps",
+                "description": "The minimum time for the requested logs, supports date math and regular timestamps (milliseconds).",
                 "example": "now-15m",
                 "type": "string"
               },
@@ -16561,7 +17444,7 @@
               },
               "to": {
                 "default": "now",
-                "description": "The maximum time for the requested logs, supports date math and regular timestamps",
+                "description": "The maximum time for the requested logs, supports date math and regular timestamps (milliseconds).",
                 "example": "now",
                 "type": "string"
               }
@@ -17721,7 +18604,7 @@
         "properties": {
           "from": {
             "default": "now-15m",
-            "description": "The minimum time for the requested logs, supports date math and regular timestamps",
+            "description": "The minimum time for the requested logs, supports date math and regular timestamps (milliseconds).",
             "example": "now-15m",
             "type": "string"
           },
@@ -17748,7 +18631,7 @@
           },
           "to": {
             "default": "now",
-            "description": "The maximum time for the requested logs, supports date math and regular timestamps",
+            "description": "The maximum time for the requested logs, supports date math and regular timestamps (milliseconds).",
             "example": "now",
             "type": "string"
           }
@@ -20291,7 +21174,8 @@
                 "maxLength": 4,
                 "minLength": 4,
                 "readOnly": true,
-                "type": "string"
+                "type": "string",
+                "x-secret": true
               },
               "modified_at": {
                 "description": "Date the API key was last modified.",
@@ -20419,7 +21303,8 @@
             "maxLength": 4,
             "minLength": 4,
             "readOnly": true,
-            "type": "string"
+            "type": "string",
+            "x-secret": true
           },
           "modified_at": {
             "description": "Date the API key was last modified.",
@@ -20453,12 +21338,27 @@
                 "maxLength": 4,
                 "minLength": 4,
                 "readOnly": true,
-                "type": "string"
+                "type": "string",
+                "x-secret": true
               },
               "name": {
                 "description": "Name of the application key.",
-                "example": "Application Key for submitting metrics",
+                "example": "Application Key for managing dashboards",
                 "type": "string"
+              },
+              "scopes": {
+                "description": "Array of scopes to grant the application key. This feature is in private beta, please contact Datadog support to enable scopes for your application keys.",
+                "example": [
+                  "dashboards_read",
+                  "dashboards_write",
+                  "dashboards_public_share"
+                ],
+                "items": {
+                  "description": "Name of scope.",
+                  "type": "string"
+                },
+                "nullable": true,
+                "type": "array"
               }
             },
             "type": "object"
@@ -20539,12 +21439,27 @@
             "maxLength": 4,
             "minLength": 4,
             "readOnly": true,
-            "type": "string"
+            "type": "string",
+            "x-secret": true
           },
           "name": {
             "description": "Name of the application key.",
-            "example": "Application Key for submitting metrics",
+            "example": "Application Key for managing dashboards",
             "type": "string"
+          },
+          "scopes": {
+            "description": "Array of scopes to grant the application key. This feature is in private beta, please contact Datadog support to enable scopes for your application keys.",
+            "example": [
+              "dashboards_read",
+              "dashboards_write",
+              "dashboards_public_share"
+            ],
+            "items": {
+              "description": "Name of scope.",
+              "type": "string"
+            },
+            "nullable": true,
+            "type": "array"
           }
         },
         "type": "object"
@@ -20570,12 +21485,27 @@
                     "maxLength": 4,
                     "minLength": 4,
                     "readOnly": true,
-                    "type": "string"
+                    "type": "string",
+                    "x-secret": true
                   },
                   "name": {
                     "description": "Name of the application key.",
-                    "example": "Application Key for submitting metrics",
+                    "example": "Application Key for managing dashboards",
                     "type": "string"
+                  },
+                  "scopes": {
+                    "description": "Array of scopes to grant the application key. This feature is in private beta, please contact Datadog support to enable scopes for your application keys.",
+                    "example": [
+                      "dashboards_read",
+                      "dashboards_write",
+                      "dashboards_public_share"
+                    ],
+                    "items": {
+                      "description": "Name of scope.",
+                      "type": "string"
+                    },
+                    "nullable": true,
+                    "type": "array"
                   }
                 },
                 "type": "object"
@@ -22806,6 +23736,101 @@
             "type": "integer"
           }
         },
+        "type": "object"
+      },
+      "RoleClone": {
+        "description": "Data for the clone role request.",
+        "properties": {
+          "attributes": {
+            "description": "Attributes required to create a new role by cloning an existing one.",
+            "properties": {
+              "name": {
+                "description": "Name of the new role that is cloned.",
+                "example": "cloned-role",
+                "type": "string"
+              }
+            },
+            "required": [
+              "name"
+            ],
+            "type": "object"
+          },
+          "type": {
+            "default": "roles",
+            "description": "Roles type.",
+            "enum": [
+              "roles"
+            ],
+            "example": "roles",
+            "type": "string",
+            "x-enum-varnames": [
+              "ROLES"
+            ]
+          }
+        },
+        "required": [
+          "type",
+          "attributes"
+        ],
+        "type": "object"
+      },
+      "RoleCloneAttributes": {
+        "description": "Attributes required to create a new role by cloning an existing one.",
+        "properties": {
+          "name": {
+            "description": "Name of the new role that is cloned.",
+            "example": "cloned-role",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name"
+        ],
+        "type": "object"
+      },
+      "RoleCloneRequest": {
+        "description": "Request to create a role by cloning an existing role.",
+        "properties": {
+          "data": {
+            "description": "Data for the clone role request.",
+            "properties": {
+              "attributes": {
+                "description": "Attributes required to create a new role by cloning an existing one.",
+                "properties": {
+                  "name": {
+                    "description": "Name of the new role that is cloned.",
+                    "example": "cloned-role",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "name"
+                ],
+                "type": "object"
+              },
+              "type": {
+                "default": "roles",
+                "description": "Roles type.",
+                "enum": [
+                  "roles"
+                ],
+                "example": "roles",
+                "type": "string",
+                "x-enum-varnames": [
+                  "ROLES"
+                ]
+              }
+            },
+            "required": [
+              "type",
+              "attributes"
+            ],
+            "type": "object"
+          }
+        },
+        "required": [
+          "data"
+        ],
         "type": "object"
       },
       "RoleCreateAttributes": {
@@ -25058,21 +26083,6 @@
                   "items": {
                     "description": "Query for matching rule.",
                     "properties": {
-                      "agentRule": {
-                        "description": "The Agent rule.",
-                        "properties": {
-                          "agentRuleId": {
-                            "description": "The Agent rule ID. Must be unique within the rule.",
-                            "example": "etc_shadow",
-                            "type": "string"
-                          },
-                          "expression": {
-                            "description": "A Runtime Security expression determines what activity should be collected by the Datadog Agent.\nThese logical expressions can use predefined operators and attributes. Tags cannot be used in Runtime\nSecurity expressions. Instead, allow or deny based on tags under the advanced option.",
-                            "type": "string"
-                          }
-                        },
-                        "type": "object"
-                      },
                       "aggregation": {
                         "description": "The aggregation type.",
                         "enum": [
@@ -25525,21 +26535,6 @@
             "items": {
               "description": "Query for matching rule.",
               "properties": {
-                "agentRule": {
-                  "description": "The Agent rule.",
-                  "properties": {
-                    "agentRuleId": {
-                      "description": "The Agent rule ID. Must be unique within the rule.",
-                      "example": "etc_shadow",
-                      "type": "string"
-                    },
-                    "expression": {
-                      "description": "A Runtime Security expression determines what activity should be collected by the Datadog Agent.\nThese logical expressions can use predefined operators and attributes. Tags cannot be used in Runtime\nSecurity expressions. Instead, allow or deny based on tags under the advanced option.",
-                      "type": "string"
-                    }
-                  },
-                  "type": "object"
-                },
                 "aggregation": {
                   "description": "The aggregation type.",
                   "enum": [
@@ -25961,21 +26956,6 @@
       "SecurityMonitoringRuleQuery": {
         "description": "Query for matching rule.",
         "properties": {
-          "agentRule": {
-            "description": "The Agent rule.",
-            "properties": {
-              "agentRuleId": {
-                "description": "The Agent rule ID. Must be unique within the rule.",
-                "example": "etc_shadow",
-                "type": "string"
-              },
-              "expression": {
-                "description": "A Runtime Security expression determines what activity should be collected by the Datadog Agent.\nThese logical expressions can use predefined operators and attributes. Tags cannot be used in Runtime\nSecurity expressions. Instead, allow or deny based on tags under the advanced option.",
-                "type": "string"
-              }
-            },
-            "type": "object"
-          },
           "aggregation": {
             "description": "The aggregation type.",
             "enum": [
@@ -26046,21 +27026,6 @@
       "SecurityMonitoringRuleQueryCreate": {
         "description": "Query for matching rule.",
         "properties": {
-          "agentRule": {
-            "description": "The Agent rule.",
-            "properties": {
-              "agentRuleId": {
-                "description": "The Agent rule ID. Must be unique within the rule.",
-                "example": "etc_shadow",
-                "type": "string"
-              },
-              "expression": {
-                "description": "A Runtime Security expression determines what activity should be collected by the Datadog Agent.\nThese logical expressions can use predefined operators and attributes. Tags cannot be used in Runtime\nSecurity expressions. Instead, allow or deny based on tags under the advanced option.",
-                "type": "string"
-              }
-            },
-            "type": "object"
-          },
           "aggregation": {
             "description": "The aggregation type.",
             "enum": [
@@ -26380,21 +27345,6 @@
             "items": {
               "description": "Query for matching rule.",
               "properties": {
-                "agentRule": {
-                  "description": "The Agent rule.",
-                  "properties": {
-                    "agentRuleId": {
-                      "description": "The Agent rule ID. Must be unique within the rule.",
-                      "example": "etc_shadow",
-                      "type": "string"
-                    },
-                    "expression": {
-                      "description": "A Runtime Security expression determines what activity should be collected by the Datadog Agent.\nThese logical expressions can use predefined operators and attributes. Tags cannot be used in Runtime\nSecurity expressions. Instead, allow or deny based on tags under the advanced option.",
-                      "type": "string"
-                    }
-                  },
-                  "type": "object"
-                },
                 "aggregation": {
                   "description": "The aggregation type.",
                   "enum": [
@@ -26774,21 +27724,6 @@
             "items": {
               "description": "Query for matching rule.",
               "properties": {
-                "agentRule": {
-                  "description": "The Agent rule.",
-                  "properties": {
-                    "agentRuleId": {
-                      "description": "The Agent rule ID. Must be unique within the rule.",
-                      "example": "etc_shadow",
-                      "type": "string"
-                    },
-                    "expression": {
-                      "description": "A Runtime Security expression determines what activity should be collected by the Datadog Agent.\nThese logical expressions can use predefined operators and attributes. Tags cannot be used in Runtime\nSecurity expressions. Instead, allow or deny based on tags under the advanced option.",
-                      "type": "string"
-                    }
-                  },
-                  "type": "object"
-                },
                 "aggregation": {
                   "description": "The aggregation type.",
                   "enum": [
@@ -26858,21 +27793,6 @@
         },
         "type": "object"
       },
-      "SecurityMonitoringRuntimeAgentRule": {
-        "description": "The Agent rule.",
-        "properties": {
-          "agentRuleId": {
-            "description": "The Agent rule ID. Must be unique within the rule.",
-            "example": "etc_shadow",
-            "type": "string"
-          },
-          "expression": {
-            "description": "A Runtime Security expression determines what activity should be collected by the Datadog Agent.\nThese logical expressions can use predefined operators and attributes. Tags cannot be used in Runtime\nSecurity expressions. Instead, allow or deny based on tags under the advanced option.",
-            "type": "string"
-          }
-        },
-        "type": "object"
-      },
       "SecurityMonitoringSignal": {
         "description": "Object description of a security signal.",
         "properties": {
@@ -26909,7 +27829,7 @@
                 "format": "array",
                 "items": {
                   "description": "The tag associated with the security signal.",
-                  "format": "string"
+                  "type": "string"
                 }
               },
               "timestamp": {
@@ -27054,7 +27974,7 @@
                       "format": "array",
                       "items": {
                         "description": "The tag associated with the security signal.",
-                        "format": "string"
+                        "type": "string"
                       }
                     },
                     "timestamp": {
@@ -29730,18 +30650,18 @@
               "dashboards_public_share": "The ability to share dashboards externally.",
               "dashboards_read": "The ability to view dashboards.",
               "dashboards_write": "The ability to create and change dashboards.",
-              "events_read": "The ability to read events data.",
+              "events_read": "The ability to read Events data.",
               "incident_read": "The ability to view incidents in Datadog.",
-              "incident_settings_write": "The ability to configure incident settings.",
+              "incident_settings_write": "The ability to configure Incidents settings.",
               "incident_write": "The ability to create, view, and manage incidents in Datadog.",
               "metrics_read": "The ability to view custom metrics.",
               "security_monitoring_filters_read": "The ability to read Security Filters.",
               "security_monitoring_filters_write": "The ability to create, edit and delete Security Filters.",
-              "security_monitoring_rules_read": "The ability to read Detection rules.",
-              "security_monitoring_rules_write": "The ability to create and edit Detection rules.",
-              "security_monitoring_signals_read": "The ability to view Security signals.",
-              "user_access_invite": "Allows users to invite other users to your organization.",
-              "user_access_manage": "Grants the permission to disable users, manage user roles and SAML-to-role mappings."
+              "security_monitoring_rules_read": "The ability to read Detection Rules.",
+              "security_monitoring_rules_write": "The ability to create and edit Detection Rules.",
+              "security_monitoring_signals_read": "The ability to view Security Signals.",
+              "user_access_invite": "The ability to invite other users to your organization.",
+              "user_access_manage": "The ability to disable users, manage user roles, and manage SAML-to-role mappings."
             },
             "tokenUrl": "/oauth2/v1/token"
           }
@@ -29923,7 +30843,8 @@
                                 "maxLength": 4,
                                 "minLength": 4,
                                 "readOnly": true,
-                                "type": "string"
+                                "type": "string",
+                                "x-secret": true
                               },
                               "modified_at": {
                                 "description": "Date the API key was last modified.",
@@ -30449,7 +31370,8 @@
                             "key": {
                               "description": "The API key.",
                               "readOnly": true,
-                              "type": "string"
+                              "type": "string",
+                              "x-secret": true
                             },
                             "last4": {
                               "description": "The last four characters of the API key.",
@@ -30457,7 +31379,8 @@
                               "maxLength": 4,
                               "minLength": 4,
                               "readOnly": true,
-                              "type": "string"
+                              "type": "string",
+                              "x-secret": true
                             },
                             "modified_at": {
                               "description": "Date the API key was last modified.",
@@ -31073,7 +31996,8 @@
                             "key": {
                               "description": "The API key.",
                               "readOnly": true,
-                              "type": "string"
+                              "type": "string",
+                              "x-secret": true
                             },
                             "last4": {
                               "description": "The last four characters of the API key.",
@@ -31081,7 +32005,8 @@
                               "maxLength": 4,
                               "minLength": 4,
                               "readOnly": true,
-                              "type": "string"
+                              "type": "string",
+                              "x-secret": true
                             },
                             "modified_at": {
                               "description": "Date the API key was last modified.",
@@ -31622,7 +32547,8 @@
                             "key": {
                               "description": "The API key.",
                               "readOnly": true,
-                              "type": "string"
+                              "type": "string",
+                              "x-secret": true
                             },
                             "last4": {
                               "description": "The last four characters of the API key.",
@@ -31630,7 +32556,8 @@
                               "maxLength": 4,
                               "minLength": 4,
                               "readOnly": true,
-                              "type": "string"
+                              "type": "string",
+                              "x-secret": true
                             },
                             "modified_at": {
                               "description": "Date the API key was last modified.",
@@ -32217,12 +33144,27 @@
                                 "maxLength": 4,
                                 "minLength": 4,
                                 "readOnly": true,
-                                "type": "string"
+                                "type": "string",
+                                "x-secret": true
                               },
                               "name": {
                                 "description": "Name of the application key.",
-                                "example": "Application Key for submitting metrics",
+                                "example": "Application Key for managing dashboards",
                                 "type": "string"
+                              },
+                              "scopes": {
+                                "description": "Array of scopes to grant the application key. This feature is in private beta, please contact Datadog support to enable scopes for your application keys.",
+                                "example": [
+                                  "dashboards_read",
+                                  "dashboards_write",
+                                  "dashboards_public_share"
+                                ],
+                                "items": {
+                                  "description": "Name of scope.",
+                                  "type": "string"
+                                },
+                                "nullable": true,
+                                "type": "array"
                               }
                             },
                             "type": "object"
@@ -32891,7 +33833,8 @@
                             "key": {
                               "description": "The application key.",
                               "readOnly": true,
-                              "type": "string"
+                              "type": "string",
+                              "x-secret": true
                             },
                             "last4": {
                               "description": "The last four characters of the application key.",
@@ -32899,12 +33842,27 @@
                               "maxLength": 4,
                               "minLength": 4,
                               "readOnly": true,
-                              "type": "string"
+                              "type": "string",
+                              "x-secret": true
                             },
                             "name": {
                               "description": "Name of the application key.",
-                              "example": "Application Key for submitting metrics",
+                              "example": "Application Key for managing dashboards",
                               "type": "string"
+                            },
+                            "scopes": {
+                              "description": "Array of scopes to grant the application key. This feature is in private beta, please contact Datadog support to enable scopes for your application keys.",
+                              "example": [
+                                "dashboards_read",
+                                "dashboards_write",
+                                "dashboards_public_share"
+                              ],
+                              "items": {
+                                "description": "Name of scope.",
+                                "type": "string"
+                              },
+                              "nullable": true,
+                              "type": "array"
                             }
                           },
                           "type": "object"
@@ -33448,13 +34406,24 @@
                         "properties": {
                           "name": {
                             "description": "Name of the application key.",
-                            "example": "Application Key for submitting metrics",
+                            "example": "Application Key for managing dashboards",
                             "type": "string"
+                          },
+                          "scopes": {
+                            "description": "Array of scopes to grant the application key. This feature is in private beta, please contact Datadog support to enable scopes for your application keys.",
+                            "example": [
+                              "dashboards_read",
+                              "dashboards_write",
+                              "dashboards_public_share"
+                            ],
+                            "items": {
+                              "description": "Name of scope.",
+                              "type": "string"
+                            },
+                            "nullable": true,
+                            "type": "array"
                           }
                         },
-                        "required": [
-                          "name"
-                        ],
                         "type": "object"
                       },
                       "id": {
@@ -33514,7 +34483,8 @@
                             "key": {
                               "description": "The application key.",
                               "readOnly": true,
-                              "type": "string"
+                              "type": "string",
+                              "x-secret": true
                             },
                             "last4": {
                               "description": "The last four characters of the application key.",
@@ -33522,12 +34492,27 @@
                               "maxLength": 4,
                               "minLength": 4,
                               "readOnly": true,
-                              "type": "string"
+                              "type": "string",
+                              "x-secret": true
                             },
                             "name": {
                               "description": "Name of the application key.",
-                              "example": "Application Key for submitting metrics",
+                              "example": "Application Key for managing dashboards",
                               "type": "string"
+                            },
+                            "scopes": {
+                              "description": "Array of scopes to grant the application key. This feature is in private beta, please contact Datadog support to enable scopes for your application keys.",
+                              "example": [
+                                "dashboards_read",
+                                "dashboards_write",
+                                "dashboards_public_share"
+                              ],
+                              "items": {
+                                "description": "Name of scope.",
+                                "type": "string"
+                              },
+                              "nullable": true,
+                              "type": "array"
                             }
                           },
                           "type": "object"
@@ -34158,12 +35143,27 @@
                                 "maxLength": 4,
                                 "minLength": 4,
                                 "readOnly": true,
-                                "type": "string"
+                                "type": "string",
+                                "x-secret": true
                               },
                               "name": {
                                 "description": "Name of the application key.",
-                                "example": "Application Key for submitting metrics",
+                                "example": "Application Key for managing dashboards",
                                 "type": "string"
+                              },
+                              "scopes": {
+                                "description": "Array of scopes to grant the application key. This feature is in private beta, please contact Datadog support to enable scopes for your application keys.",
+                                "example": [
+                                  "dashboards_read",
+                                  "dashboards_write",
+                                  "dashboards_public_share"
+                                ],
+                                "items": {
+                                  "description": "Name of scope.",
+                                  "type": "string"
+                                },
+                                "nullable": true,
+                                "type": "array"
                               }
                             },
                             "type": "object"
@@ -34698,8 +35698,22 @@
                         "properties": {
                           "name": {
                             "description": "Name of the application key.",
-                            "example": "Application Key for submitting metrics",
+                            "example": "Application Key for managing dashboards",
                             "type": "string"
+                          },
+                          "scopes": {
+                            "description": "Array of scopes to grant the application key. This feature is in private beta, please contact Datadog support to enable scopes for your application keys.",
+                            "example": [
+                              "dashboards_read",
+                              "dashboards_write",
+                              "dashboards_public_share"
+                            ],
+                            "items": {
+                              "description": "Name of scope.",
+                              "type": "string"
+                            },
+                            "nullable": true,
+                            "type": "array"
                           }
                         },
                         "required": [
@@ -34758,7 +35772,8 @@
                             "key": {
                               "description": "The application key.",
                               "readOnly": true,
-                              "type": "string"
+                              "type": "string",
+                              "x-secret": true
                             },
                             "last4": {
                               "description": "The last four characters of the application key.",
@@ -34766,12 +35781,27 @@
                               "maxLength": 4,
                               "minLength": 4,
                               "readOnly": true,
-                              "type": "string"
+                              "type": "string",
+                              "x-secret": true
                             },
                             "name": {
                               "description": "Name of the application key.",
-                              "example": "Application Key for submitting metrics",
+                              "example": "Application Key for managing dashboards",
                               "type": "string"
+                            },
+                            "scopes": {
+                              "description": "Array of scopes to grant the application key. This feature is in private beta, please contact Datadog support to enable scopes for your application keys.",
+                              "example": [
+                                "dashboards_read",
+                                "dashboards_write",
+                                "dashboards_public_share"
+                              ],
+                              "items": {
+                                "description": "Name of scope.",
+                                "type": "string"
+                              },
+                              "nullable": true,
+                              "type": "array"
                             }
                           },
                           "type": "object"
@@ -35421,7 +36451,8 @@
                             "key": {
                               "description": "The application key.",
                               "readOnly": true,
-                              "type": "string"
+                              "type": "string",
+                              "x-secret": true
                             },
                             "last4": {
                               "description": "The last four characters of the application key.",
@@ -35429,12 +36460,27 @@
                               "maxLength": 4,
                               "minLength": 4,
                               "readOnly": true,
-                              "type": "string"
+                              "type": "string",
+                              "x-secret": true
                             },
                             "name": {
                               "description": "Name of the application key.",
-                              "example": "Application Key for submitting metrics",
+                              "example": "Application Key for managing dashboards",
                               "type": "string"
+                            },
+                            "scopes": {
+                              "description": "Array of scopes to grant the application key. This feature is in private beta, please contact Datadog support to enable scopes for your application keys.",
+                              "example": [
+                                "dashboards_read",
+                                "dashboards_write",
+                                "dashboards_public_share"
+                              ],
+                              "items": {
+                                "description": "Name of scope.",
+                                "type": "string"
+                              },
+                              "nullable": true,
+                              "type": "array"
                             }
                           },
                           "type": "object"
@@ -35953,13 +36999,24 @@
                         "properties": {
                           "name": {
                             "description": "Name of the application key.",
-                            "example": "Application Key for submitting metrics",
+                            "example": "Application Key for managing dashboards",
                             "type": "string"
+                          },
+                          "scopes": {
+                            "description": "Array of scopes to grant the application key. This feature is in private beta, please contact Datadog support to enable scopes for your application keys.",
+                            "example": [
+                              "dashboards_read",
+                              "dashboards_write",
+                              "dashboards_public_share"
+                            ],
+                            "items": {
+                              "description": "Name of scope.",
+                              "type": "string"
+                            },
+                            "nullable": true,
+                            "type": "array"
                           }
                         },
-                        "required": [
-                          "name"
-                        ],
                         "type": "object"
                       },
                       "id": {
@@ -36019,7 +37076,8 @@
                             "key": {
                               "description": "The application key.",
                               "readOnly": true,
-                              "type": "string"
+                              "type": "string",
+                              "x-secret": true
                             },
                             "last4": {
                               "description": "The last four characters of the application key.",
@@ -36027,12 +37085,27 @@
                               "maxLength": 4,
                               "minLength": 4,
                               "readOnly": true,
-                              "type": "string"
+                              "type": "string",
+                              "x-secret": true
                             },
                             "name": {
                               "description": "Name of the application key.",
-                              "example": "Application Key for submitting metrics",
+                              "example": "Application Key for managing dashboards",
                               "type": "string"
+                            },
+                            "scopes": {
+                              "description": "Array of scopes to grant the application key. This feature is in private beta, please contact Datadog support to enable scopes for your application keys.",
+                              "example": [
+                                "dashboards_read",
+                                "dashboards_write",
+                                "dashboards_public_share"
+                              ],
+                              "items": {
+                                "description": "Name of scope.",
+                                "type": "string"
+                              },
+                              "nullable": true,
+                              "type": "array"
                             }
                           },
                           "type": "object"
@@ -37752,7 +38825,7 @@
                                       "properties": {
                                         "type": {
                                           "default": "multiselect",
-                                          "description": "Type of the single value field definitions.",
+                                          "description": "Type of the multiple value field definitions.",
                                           "enum": [
                                             "multiselect",
                                             "textarray",
@@ -38617,7 +39690,7 @@
                                   "properties": {
                                     "type": {
                                       "default": "multiselect",
-                                      "description": "Type of the single value field definitions.",
+                                      "description": "Type of the multiple value field definitions.",
                                       "enum": [
                                         "multiselect",
                                         "textarray",
@@ -38911,7 +39984,7 @@
                                     "properties": {
                                       "type": {
                                         "default": "multiselect",
-                                        "description": "Type of the single value field definitions.",
+                                        "description": "Type of the multiple value field definitions.",
                                         "enum": [
                                           "multiselect",
                                           "textarray",
@@ -39714,7 +40787,7 @@
         "operationId": "DeleteIncident",
         "parameters": [
           {
-            "description": "The UUID the incident.",
+            "description": "The UUID of the incident.",
             "in": "path",
             "name": "incident_id",
             "required": true,
@@ -39878,7 +40951,7 @@
         "operationId": "GetIncident",
         "parameters": [
           {
-            "description": "The UUID the incident.",
+            "description": "The UUID of the incident.",
             "in": "path",
             "name": "incident_id",
             "required": true,
@@ -39996,7 +41069,7 @@
                                     "properties": {
                                       "type": {
                                         "default": "multiselect",
-                                        "description": "Type of the single value field definitions.",
+                                        "description": "Type of the multiple value field definitions.",
                                         "enum": [
                                           "multiselect",
                                           "textarray",
@@ -40778,7 +41851,7 @@
         "operationId": "UpdateIncident",
         "parameters": [
           {
-            "description": "The UUID the incident.",
+            "description": "The UUID of the incident.",
             "in": "path",
             "name": "incident_id",
             "required": true,
@@ -40862,7 +41935,7 @@
                                   "properties": {
                                     "type": {
                                       "default": "multiselect",
-                                      "description": "Type of the single value field definitions.",
+                                      "description": "Type of the multiple value field definitions.",
                                       "enum": [
                                         "multiselect",
                                         "textarray",
@@ -41294,7 +42367,7 @@
                                     "properties": {
                                       "type": {
                                         "default": "multiselect",
-                                        "description": "Type of the single value field definitions.",
+                                        "description": "Type of the multiple value field definitions.",
                                         "enum": [
                                           "multiselect",
                                           "textarray",
@@ -42673,7 +43746,7 @@
                     "properties": {
                       "from": {
                         "default": "now-15m",
-                        "description": "The minimum time for the requested logs, supports date math and regular timestamps",
+                        "description": "The minimum time for the requested logs, supports date math and regular timestamps (milliseconds).",
                         "example": "now-15m",
                         "type": "string"
                       },
@@ -42700,7 +43773,7 @@
                       },
                       "to": {
                         "default": "now",
-                        "description": "The maximum time for the requested logs, supports date math and regular timestamps",
+                        "description": "The maximum time for the requested logs, supports date math and regular timestamps (milliseconds).",
                         "example": "now",
                         "type": "string"
                       }
@@ -49497,7 +50570,7 @@
                     "properties": {
                       "from": {
                         "default": "now-15m",
-                        "description": "The minimum time for the requested logs, supports date math and regular timestamps",
+                        "description": "The minimum time for the requested logs, supports date math and regular timestamps (milliseconds).",
                         "example": "now-15m",
                         "type": "string"
                       },
@@ -49524,7 +50597,7 @@
                       },
                       "to": {
                         "default": "now",
-                        "description": "The maximum time for the requested logs, supports date math and regular timestamps",
+                        "description": "The maximum time for the requested logs, supports date math and regular timestamps (milliseconds).",
                         "example": "now",
                         "type": "string"
                       }
@@ -53715,6 +54788,334 @@
         }
       }
     },
+    "/api/v2/roles/{role_id}/clone": {
+      "post": {
+        "description": "Clone an existing role",
+        "operationId": "CloneRole",
+        "parameters": [
+          {
+            "description": "The ID of the role.",
+            "in": "path",
+            "name": "role_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "Request to create a role by cloning an existing role.",
+                "properties": {
+                  "data": {
+                    "description": "Data for the clone role request.",
+                    "properties": {
+                      "attributes": {
+                        "description": "Attributes required to create a new role by cloning an existing one.",
+                        "properties": {
+                          "name": {
+                            "description": "Name of the new role that is cloned.",
+                            "example": "cloned-role",
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "name"
+                        ],
+                        "type": "object"
+                      },
+                      "type": {
+                        "default": "roles",
+                        "description": "Roles type.",
+                        "enum": [
+                          "roles"
+                        ],
+                        "example": "roles",
+                        "type": "string",
+                        "x-enum-varnames": [
+                          "ROLES"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "type",
+                      "attributes"
+                    ],
+                    "type": "object"
+                  }
+                },
+                "required": [
+                  "data"
+                ],
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Response containing information about a single role.",
+                  "properties": {
+                    "data": {
+                      "description": "Role object returned by the API.",
+                      "properties": {
+                        "attributes": {
+                          "description": "Attributes of the role.",
+                          "properties": {
+                            "created_at": {
+                              "description": "Creation time of the role.",
+                              "format": "date-time",
+                              "readOnly": true,
+                              "type": "string"
+                            },
+                            "modified_at": {
+                              "description": "Time of last role modification.",
+                              "format": "date-time",
+                              "readOnly": true,
+                              "type": "string"
+                            },
+                            "name": {
+                              "description": "Name of the role.",
+                              "type": "string"
+                            },
+                            "user_count": {
+                              "description": "Number of users with that role.",
+                              "format": "int64",
+                              "readOnly": true,
+                              "type": "integer"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "id": {
+                          "description": "ID of the role.",
+                          "type": "string"
+                        },
+                        "relationships": {
+                          "description": "Relationships of the role object returned by the API.",
+                          "properties": {
+                            "permissions": {
+                              "description": "Relationship to multiple permissions objects.",
+                              "properties": {
+                                "data": {
+                                  "description": "Relationships to permission objects.",
+                                  "items": {
+                                    "description": "Relationship to permission object.",
+                                    "properties": {
+                                      "id": {
+                                        "description": "ID of the permission.",
+                                        "type": "string"
+                                      },
+                                      "type": {
+                                        "default": "permissions",
+                                        "description": "Permissions resource type.",
+                                        "enum": [
+                                          "permissions"
+                                        ],
+                                        "example": "permissions",
+                                        "type": "string",
+                                        "x-enum-varnames": [
+                                          "PERMISSIONS"
+                                        ]
+                                      }
+                                    },
+                                    "type": "object"
+                                  },
+                                  "type": "array"
+                                }
+                              },
+                              "type": "object"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "type": {
+                          "default": "roles",
+                          "description": "Roles type.",
+                          "enum": [
+                            "roles"
+                          ],
+                          "example": "roles",
+                          "type": "string",
+                          "x-enum-varnames": [
+                            "ROLES"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "type"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Authentication error"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Not found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": [
+              "user_access_manage"
+            ]
+          }
+        ],
+        "summary": "Create a new role by cloning an existing role",
+        "tags": [
+          "Roles"
+        ],
+        "x-codegen-request-body-name": "body",
+        "x-menu-order": 12,
+        "x-permission": "OR(USER_ACCESS_MANAGE)",
+        "x-undo": {
+          "operationId": "DeleteRole",
+          "parameters": [
+            {
+              "name": "role_id",
+              "source": "data.id"
+            }
+          ],
+          "type": "unsafe"
+        }
+      }
+    },
     "/api/v2/roles/{role_id}/permissions": {
       "delete": {
         "description": "Removes a permission from a role.",
@@ -56525,10 +57926,1240 @@
         "tags": [
           "Cloud Workload Security"
         ],
+        "x-menu-order": 1,
         "x-undo": {
           "type": "safe"
+        }
+      }
+    },
+    "/api/v2/security_monitoring/cloud_workload_security/agent_rules": {
+      "get": {
+        "description": "Get the list of Agent rules.",
+        "operationId": "ListCloudWorkloadSecurityAgentRules",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Response object that includes a list of Agent rule.",
+                  "properties": {
+                    "data": {
+                      "description": "A list of Agent rules objects.",
+                      "items": {
+                        "description": "Object for a single Agent rule.",
+                        "properties": {
+                          "attributes": {
+                            "description": "A Cloud Workload Security Agent rule returned by the API.",
+                            "properties": {
+                              "category": {
+                                "description": "The category of the Agent rule.",
+                                "example": "Process Activity",
+                                "type": "string"
+                              },
+                              "creationDate": {
+                                "description": "When the Agent rule was created, timestamp in milliseconds.",
+                                "example": 1624366480320,
+                                "format": "int64",
+                                "type": "integer"
+                              },
+                              "creator": {
+                                "description": "The attributes of the user who created the Agent rule.",
+                                "properties": {
+                                  "handle": {
+                                    "description": "The handle of the user.",
+                                    "example": "datadog.user@example.com",
+                                    "type": "string"
+                                  },
+                                  "name": {
+                                    "description": "The name of the user.",
+                                    "example": "Datadog User",
+                                    "type": "string"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "defaultRule": {
+                                "description": "Whether the rule is included by default.",
+                                "example": false,
+                                "type": "boolean"
+                              },
+                              "description": {
+                                "description": "The description of the Agent rule.",
+                                "example": "My Agent rule",
+                                "type": "string"
+                              },
+                              "enabled": {
+                                "description": "Whether the Agent rule is enabled.",
+                                "example": true,
+                                "type": "boolean"
+                              },
+                              "expression": {
+                                "description": "The SECL expression of the Agent rule.",
+                                "example": "exec.file.name == \\\"sh\\\"",
+                                "type": "string"
+                              },
+                              "name": {
+                                "description": "The name of the Agent rule.",
+                                "example": "my_agent_rule",
+                                "type": "string"
+                              },
+                              "updatedAt": {
+                                "description": "When the Agent rule was last updated, timestamp in milliseconds.",
+                                "example": 1624366480320,
+                                "format": "int64",
+                                "type": "integer"
+                              },
+                              "updater": {
+                                "description": "The attributes of the user who last updated the Agent rule.",
+                                "properties": {
+                                  "handle": {
+                                    "description": "The handle of the user.",
+                                    "example": "datadog.user@example.com",
+                                    "type": "string"
+                                  },
+                                  "name": {
+                                    "description": "The name of the user.",
+                                    "example": "Datadog User",
+                                    "type": "string"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "version": {
+                                "description": "The version of the Agent rule.",
+                                "example": 23,
+                                "format": "int64",
+                                "type": "integer"
+                              }
+                            }
+                          },
+                          "id": {
+                            "description": "The ID of the Agent rule.",
+                            "example": "3dd-0uc-h1s",
+                            "type": "string"
+                          },
+                          "type": {
+                            "default": "agent_rule",
+                            "description": "The type of the resource. The value should always be `agent_rule`.",
+                            "enum": [
+                              "agent_rule"
+                            ],
+                            "example": "agent_rule",
+                            "type": "string",
+                            "x-enum-varnames": [
+                              "AGENT_RULE"
+                            ]
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Not Authorized"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
+          }
         },
-        "x-unstable": "**Note**: This endpoint is in public beta.\nIf you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/)."
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": [
+              "security_monitoring_cws_agent_rules_read"
+            ]
+          }
+        ],
+        "summary": "Get all Cloud Workload Security Agent rules",
+        "tags": [
+          "Cloud Workload Security"
+        ],
+        "x-menu-order": 3,
+        "x-undo": {
+          "type": "safe"
+        }
+      },
+      "post": {
+        "description": "Create a new Agent rule with the given parameters.",
+        "operationId": "CreateCloudWorkloadSecurityAgentRule",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "Request object that includes the Agent rule to create.",
+                "properties": {
+                  "data": {
+                    "description": "Object for a single Agent rule.",
+                    "properties": {
+                      "attributes": {
+                        "description": "Create a new Cloud Workload Security Agent rule.",
+                        "properties": {
+                          "description": {
+                            "description": "The description of the Agent rule.",
+                            "example": "My Agent rule",
+                            "type": "string"
+                          },
+                          "enabled": {
+                            "description": "Whether the Agent rule is enabled.",
+                            "example": true,
+                            "type": "boolean"
+                          },
+                          "expression": {
+                            "description": "The SECL expression of the Agent rule.",
+                            "example": "exec.file.name == \\\"sh\\\"",
+                            "type": "string"
+                          },
+                          "name": {
+                            "description": "The name of the Agent rule.",
+                            "example": "my_agent_rule",
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "name",
+                          "expression"
+                        ],
+                        "type": "object"
+                      },
+                      "type": {
+                        "default": "agent_rule",
+                        "description": "The type of the resource. The value should always be `agent_rule`.",
+                        "enum": [
+                          "agent_rule"
+                        ],
+                        "example": "agent_rule",
+                        "type": "string",
+                        "x-enum-varnames": [
+                          "AGENT_RULE"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "attributes",
+                      "type"
+                    ],
+                    "type": "object"
+                  }
+                },
+                "required": [
+                  "data"
+                ],
+                "type": "object"
+              }
+            }
+          },
+          "description": "The definition of the new Agent rule.",
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Response object that includes an Agent rule.",
+                  "properties": {
+                    "data": {
+                      "description": "Object for a single Agent rule.",
+                      "properties": {
+                        "attributes": {
+                          "description": "A Cloud Workload Security Agent rule returned by the API.",
+                          "properties": {
+                            "category": {
+                              "description": "The category of the Agent rule.",
+                              "example": "Process Activity",
+                              "type": "string"
+                            },
+                            "creationDate": {
+                              "description": "When the Agent rule was created, timestamp in milliseconds.",
+                              "example": 1624366480320,
+                              "format": "int64",
+                              "type": "integer"
+                            },
+                            "creator": {
+                              "description": "The attributes of the user who created the Agent rule.",
+                              "properties": {
+                                "handle": {
+                                  "description": "The handle of the user.",
+                                  "example": "datadog.user@example.com",
+                                  "type": "string"
+                                },
+                                "name": {
+                                  "description": "The name of the user.",
+                                  "example": "Datadog User",
+                                  "type": "string"
+                                }
+                              },
+                              "type": "object"
+                            },
+                            "defaultRule": {
+                              "description": "Whether the rule is included by default.",
+                              "example": false,
+                              "type": "boolean"
+                            },
+                            "description": {
+                              "description": "The description of the Agent rule.",
+                              "example": "My Agent rule",
+                              "type": "string"
+                            },
+                            "enabled": {
+                              "description": "Whether the Agent rule is enabled.",
+                              "example": true,
+                              "type": "boolean"
+                            },
+                            "expression": {
+                              "description": "The SECL expression of the Agent rule.",
+                              "example": "exec.file.name == \\\"sh\\\"",
+                              "type": "string"
+                            },
+                            "name": {
+                              "description": "The name of the Agent rule.",
+                              "example": "my_agent_rule",
+                              "type": "string"
+                            },
+                            "updatedAt": {
+                              "description": "When the Agent rule was last updated, timestamp in milliseconds.",
+                              "example": 1624366480320,
+                              "format": "int64",
+                              "type": "integer"
+                            },
+                            "updater": {
+                              "description": "The attributes of the user who last updated the Agent rule.",
+                              "properties": {
+                                "handle": {
+                                  "description": "The handle of the user.",
+                                  "example": "datadog.user@example.com",
+                                  "type": "string"
+                                },
+                                "name": {
+                                  "description": "The name of the user.",
+                                  "example": "Datadog User",
+                                  "type": "string"
+                                }
+                              },
+                              "type": "object"
+                            },
+                            "version": {
+                              "description": "The version of the Agent rule.",
+                              "example": 23,
+                              "format": "int64",
+                              "type": "integer"
+                            }
+                          }
+                        },
+                        "id": {
+                          "description": "The ID of the Agent rule.",
+                          "example": "3dd-0uc-h1s",
+                          "type": "string"
+                        },
+                        "type": {
+                          "default": "agent_rule",
+                          "description": "The type of the resource. The value should always be `agent_rule`.",
+                          "enum": [
+                            "agent_rule"
+                          ],
+                          "example": "agent_rule",
+                          "type": "string",
+                          "x-enum-varnames": [
+                            "AGENT_RULE"
+                          ]
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Not Authorized"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": [
+              "security_monitoring_cws_agent_rules_write"
+            ]
+          }
+        ],
+        "summary": "Create a Cloud Workload Security Agent rule",
+        "tags": [
+          "Cloud Workload Security"
+        ],
+        "x-codegen-request-body-name": "body",
+        "x-given": {
+          "agent_rule": {
+            "parameters": [
+              {
+                "name": "body",
+                "value": "{\n  \"data\": {\n    \"type\": \"agent_rule\",\n    \"attributes\": {\n      \"name\": \"{{ unique_lower_alnum }}\",\n      \"description\": \"My Agent rule\",\n      \"expression\": \"exec.file.name == \\\"sh\\\"\",\n      \"enabled\": true\n     }\n  }\n}"
+              }
+            ],
+            "step": "there is a valid \"agent_rule\" in the system"
+          }
+        },
+        "x-menu-order": 4,
+        "x-undo": {
+          "operationId": "DeleteCloudWorkloadSecurityAgentRule",
+          "parameters": [
+            {
+              "name": "agent_rule_id",
+              "source": "data.id"
+            }
+          ],
+          "type": "unsafe"
+        }
+      }
+    },
+    "/api/v2/security_monitoring/cloud_workload_security/agent_rules/{agent_rule_id}": {
+      "delete": {
+        "description": "Delete a specific Agent rule.",
+        "operationId": "DeleteCloudWorkloadSecurityAgentRule",
+        "parameters": [
+          {
+            "description": "The ID of the Agent rule.",
+            "example": "3b5-v82-ns6",
+            "in": "path",
+            "name": "agent_rule_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "OK"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Not Authorized"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": [
+              "security_monitoring_cws_agent_rules_write"
+            ]
+          }
+        ],
+        "summary": "Delete a Cloud Workload Security Agent rule",
+        "tags": [
+          "Cloud Workload Security"
+        ],
+        "x-menu-order": 6,
+        "x-undo": {
+          "type": "idempotent"
+        }
+      },
+      "get": {
+        "description": "Get the details of a specific Agent rule.",
+        "operationId": "GetCloudWorkloadSecurityAgentRule",
+        "parameters": [
+          {
+            "description": "The ID of the Agent rule.",
+            "example": "3b5-v82-ns6",
+            "in": "path",
+            "name": "agent_rule_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Response object that includes an Agent rule.",
+                  "properties": {
+                    "data": {
+                      "description": "Object for a single Agent rule.",
+                      "properties": {
+                        "attributes": {
+                          "description": "A Cloud Workload Security Agent rule returned by the API.",
+                          "properties": {
+                            "category": {
+                              "description": "The category of the Agent rule.",
+                              "example": "Process Activity",
+                              "type": "string"
+                            },
+                            "creationDate": {
+                              "description": "When the Agent rule was created, timestamp in milliseconds.",
+                              "example": 1624366480320,
+                              "format": "int64",
+                              "type": "integer"
+                            },
+                            "creator": {
+                              "description": "The attributes of the user who created the Agent rule.",
+                              "properties": {
+                                "handle": {
+                                  "description": "The handle of the user.",
+                                  "example": "datadog.user@example.com",
+                                  "type": "string"
+                                },
+                                "name": {
+                                  "description": "The name of the user.",
+                                  "example": "Datadog User",
+                                  "type": "string"
+                                }
+                              },
+                              "type": "object"
+                            },
+                            "defaultRule": {
+                              "description": "Whether the rule is included by default.",
+                              "example": false,
+                              "type": "boolean"
+                            },
+                            "description": {
+                              "description": "The description of the Agent rule.",
+                              "example": "My Agent rule",
+                              "type": "string"
+                            },
+                            "enabled": {
+                              "description": "Whether the Agent rule is enabled.",
+                              "example": true,
+                              "type": "boolean"
+                            },
+                            "expression": {
+                              "description": "The SECL expression of the Agent rule.",
+                              "example": "exec.file.name == \\\"sh\\\"",
+                              "type": "string"
+                            },
+                            "name": {
+                              "description": "The name of the Agent rule.",
+                              "example": "my_agent_rule",
+                              "type": "string"
+                            },
+                            "updatedAt": {
+                              "description": "When the Agent rule was last updated, timestamp in milliseconds.",
+                              "example": 1624366480320,
+                              "format": "int64",
+                              "type": "integer"
+                            },
+                            "updater": {
+                              "description": "The attributes of the user who last updated the Agent rule.",
+                              "properties": {
+                                "handle": {
+                                  "description": "The handle of the user.",
+                                  "example": "datadog.user@example.com",
+                                  "type": "string"
+                                },
+                                "name": {
+                                  "description": "The name of the user.",
+                                  "example": "Datadog User",
+                                  "type": "string"
+                                }
+                              },
+                              "type": "object"
+                            },
+                            "version": {
+                              "description": "The version of the Agent rule.",
+                              "example": 23,
+                              "format": "int64",
+                              "type": "integer"
+                            }
+                          }
+                        },
+                        "id": {
+                          "description": "The ID of the Agent rule.",
+                          "example": "3dd-0uc-h1s",
+                          "type": "string"
+                        },
+                        "type": {
+                          "default": "agent_rule",
+                          "description": "The type of the resource. The value should always be `agent_rule`.",
+                          "enum": [
+                            "agent_rule"
+                          ],
+                          "example": "agent_rule",
+                          "type": "string",
+                          "x-enum-varnames": [
+                            "AGENT_RULE"
+                          ]
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Not Authorized"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": [
+              "security_monitoring_cws_agent_rules_read"
+            ]
+          }
+        ],
+        "summary": "Get a Cloud Workload Security Agent rule",
+        "tags": [
+          "Cloud Workload Security"
+        ],
+        "x-menu-order": 2,
+        "x-undo": {
+          "type": "safe"
+        }
+      },
+      "patch": {
+        "description": "Update a specific Agent rule.\nReturns the Agent rule object when the request is successful.",
+        "operationId": "UpdateCloudWorkloadSecurityAgentRule",
+        "parameters": [
+          {
+            "description": "The ID of the Agent rule.",
+            "example": "3b5-v82-ns6",
+            "in": "path",
+            "name": "agent_rule_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "Request object that includes the Agent rule with the attributes to update.",
+                "properties": {
+                  "data": {
+                    "description": "Object for a single Agent rule.",
+                    "properties": {
+                      "attributes": {
+                        "description": "Update an existing Cloud Workload Security Agent rule.",
+                        "properties": {
+                          "description": {
+                            "description": "The description of the Agent rule.",
+                            "example": "My Agent rule",
+                            "type": "string"
+                          },
+                          "enabled": {
+                            "description": "Whether the Agent rule is enabled.",
+                            "example": true,
+                            "type": "boolean"
+                          },
+                          "expression": {
+                            "description": "The SECL expression of the Agent rule.",
+                            "example": "exec.file.name == \\\"sh\\\"",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": {
+                        "default": "agent_rule",
+                        "description": "The type of the resource. The value should always be `agent_rule`.",
+                        "enum": [
+                          "agent_rule"
+                        ],
+                        "example": "agent_rule",
+                        "type": "string",
+                        "x-enum-varnames": [
+                          "AGENT_RULE"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "attributes",
+                      "type"
+                    ],
+                    "type": "object"
+                  }
+                },
+                "required": [
+                  "data"
+                ],
+                "type": "object"
+              }
+            }
+          },
+          "description": "New definition of the Agent rule.",
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Response object that includes an Agent rule.",
+                  "properties": {
+                    "data": {
+                      "description": "Object for a single Agent rule.",
+                      "properties": {
+                        "attributes": {
+                          "description": "A Cloud Workload Security Agent rule returned by the API.",
+                          "properties": {
+                            "category": {
+                              "description": "The category of the Agent rule.",
+                              "example": "Process Activity",
+                              "type": "string"
+                            },
+                            "creationDate": {
+                              "description": "When the Agent rule was created, timestamp in milliseconds.",
+                              "example": 1624366480320,
+                              "format": "int64",
+                              "type": "integer"
+                            },
+                            "creator": {
+                              "description": "The attributes of the user who created the Agent rule.",
+                              "properties": {
+                                "handle": {
+                                  "description": "The handle of the user.",
+                                  "example": "datadog.user@example.com",
+                                  "type": "string"
+                                },
+                                "name": {
+                                  "description": "The name of the user.",
+                                  "example": "Datadog User",
+                                  "type": "string"
+                                }
+                              },
+                              "type": "object"
+                            },
+                            "defaultRule": {
+                              "description": "Whether the rule is included by default.",
+                              "example": false,
+                              "type": "boolean"
+                            },
+                            "description": {
+                              "description": "The description of the Agent rule.",
+                              "example": "My Agent rule",
+                              "type": "string"
+                            },
+                            "enabled": {
+                              "description": "Whether the Agent rule is enabled.",
+                              "example": true,
+                              "type": "boolean"
+                            },
+                            "expression": {
+                              "description": "The SECL expression of the Agent rule.",
+                              "example": "exec.file.name == \\\"sh\\\"",
+                              "type": "string"
+                            },
+                            "name": {
+                              "description": "The name of the Agent rule.",
+                              "example": "my_agent_rule",
+                              "type": "string"
+                            },
+                            "updatedAt": {
+                              "description": "When the Agent rule was last updated, timestamp in milliseconds.",
+                              "example": 1624366480320,
+                              "format": "int64",
+                              "type": "integer"
+                            },
+                            "updater": {
+                              "description": "The attributes of the user who last updated the Agent rule.",
+                              "properties": {
+                                "handle": {
+                                  "description": "The handle of the user.",
+                                  "example": "datadog.user@example.com",
+                                  "type": "string"
+                                },
+                                "name": {
+                                  "description": "The name of the user.",
+                                  "example": "Datadog User",
+                                  "type": "string"
+                                }
+                              },
+                              "type": "object"
+                            },
+                            "version": {
+                              "description": "The version of the Agent rule.",
+                              "example": 23,
+                              "format": "int64",
+                              "type": "integer"
+                            }
+                          }
+                        },
+                        "id": {
+                          "description": "The ID of the Agent rule.",
+                          "example": "3dd-0uc-h1s",
+                          "type": "string"
+                        },
+                        "type": {
+                          "default": "agent_rule",
+                          "description": "The type of the resource. The value should always be `agent_rule`.",
+                          "enum": [
+                            "agent_rule"
+                          ],
+                          "example": "agent_rule",
+                          "type": "string",
+                          "x-enum-varnames": [
+                            "AGENT_RULE"
+                          ]
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Not Authorized"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Concurrent Modification"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": [
+              "security_monitoring_cws_agent_rules_write"
+            ]
+          }
+        ],
+        "summary": "Update a Cloud Workload Security Agent rule",
+        "tags": [
+          "Cloud Workload Security"
+        ],
+        "x-codegen-request-body-name": "body",
+        "x-menu-order": 5,
+        "x-undo": {
+          "type": "idempotent"
+        }
       }
     },
     "/api/v2/security_monitoring/configuration/security_filters": {
@@ -58108,21 +60739,6 @@
                             "items": {
                               "description": "Query for matching rule.",
                               "properties": {
-                                "agentRule": {
-                                  "description": "The Agent rule.",
-                                  "properties": {
-                                    "agentRuleId": {
-                                      "description": "The Agent rule ID. Must be unique within the rule.",
-                                      "example": "etc_shadow",
-                                      "type": "string"
-                                    },
-                                    "expression": {
-                                      "description": "A Runtime Security expression determines what activity should be collected by the Datadog Agent.\nThese logical expressions can use predefined operators and attributes. Tags cannot be used in Runtime\nSecurity expressions. Instead, allow or deny based on tags under the advanced option.",
-                                      "type": "string"
-                                    }
-                                  },
-                                  "type": "object"
-                                },
                                 "aggregation": {
                                   "description": "The aggregation type.",
                                   "enum": [
@@ -58571,21 +61187,6 @@
                     "items": {
                       "description": "Query for matching rule.",
                       "properties": {
-                        "agentRule": {
-                          "description": "The Agent rule.",
-                          "properties": {
-                            "agentRuleId": {
-                              "description": "The Agent rule ID. Must be unique within the rule.",
-                              "example": "etc_shadow",
-                              "type": "string"
-                            },
-                            "expression": {
-                              "description": "A Runtime Security expression determines what activity should be collected by the Datadog Agent.\nThese logical expressions can use predefined operators and attributes. Tags cannot be used in Runtime\nSecurity expressions. Instead, allow or deny based on tags under the advanced option.",
-                              "type": "string"
-                            }
-                          },
-                          "type": "object"
-                        },
                         "aggregation": {
                           "description": "The aggregation type.",
                           "enum": [
@@ -58950,21 +61551,6 @@
                       "items": {
                         "description": "Query for matching rule.",
                         "properties": {
-                          "agentRule": {
-                            "description": "The Agent rule.",
-                            "properties": {
-                              "agentRuleId": {
-                                "description": "The Agent rule ID. Must be unique within the rule.",
-                                "example": "etc_shadow",
-                                "type": "string"
-                              },
-                              "expression": {
-                                "description": "A Runtime Security expression determines what activity should be collected by the Datadog Agent.\nThese logical expressions can use predefined operators and attributes. Tags cannot be used in Runtime\nSecurity expressions. Instead, allow or deny based on tags under the advanced option.",
-                                "type": "string"
-                              }
-                            },
-                            "type": "object"
-                          },
                           "aggregation": {
                             "description": "The aggregation type.",
                             "enum": [
@@ -59571,21 +62157,6 @@
                       "items": {
                         "description": "Query for matching rule.",
                         "properties": {
-                          "agentRule": {
-                            "description": "The Agent rule.",
-                            "properties": {
-                              "agentRuleId": {
-                                "description": "The Agent rule ID. Must be unique within the rule.",
-                                "example": "etc_shadow",
-                                "type": "string"
-                              },
-                              "expression": {
-                                "description": "A Runtime Security expression determines what activity should be collected by the Datadog Agent.\nThese logical expressions can use predefined operators and attributes. Tags cannot be used in Runtime\nSecurity expressions. Instead, allow or deny based on tags under the advanced option.",
-                                "type": "string"
-                              }
-                            },
-                            "type": "object"
-                          },
                           "aggregation": {
                             "description": "The aggregation type.",
                             "enum": [
@@ -60010,21 +62581,6 @@
                     "items": {
                       "description": "Query for matching rule.",
                       "properties": {
-                        "agentRule": {
-                          "description": "The Agent rule.",
-                          "properties": {
-                            "agentRuleId": {
-                              "description": "The Agent rule ID. Must be unique within the rule.",
-                              "example": "etc_shadow",
-                              "type": "string"
-                            },
-                            "expression": {
-                              "description": "A Runtime Security expression determines what activity should be collected by the Datadog Agent.\nThese logical expressions can use predefined operators and attributes. Tags cannot be used in Runtime\nSecurity expressions. Instead, allow or deny based on tags under the advanced option.",
-                              "type": "string"
-                            }
-                          },
-                          "type": "object"
-                        },
                         "aggregation": {
                           "description": "The aggregation type.",
                           "enum": [
@@ -60368,21 +62924,6 @@
                       "items": {
                         "description": "Query for matching rule.",
                         "properties": {
-                          "agentRule": {
-                            "description": "The Agent rule.",
-                            "properties": {
-                              "agentRuleId": {
-                                "description": "The Agent rule ID. Must be unique within the rule.",
-                                "example": "etc_shadow",
-                                "type": "string"
-                              },
-                              "expression": {
-                                "description": "A Runtime Security expression determines what activity should be collected by the Datadog Agent.\nThese logical expressions can use predefined operators and attributes. Tags cannot be used in Runtime\nSecurity expressions. Instead, allow or deny based on tags under the advanced option.",
-                                "type": "string"
-                              }
-                            },
-                            "type": "object"
-                          },
                           "aggregation": {
                             "description": "The aggregation type.",
                             "enum": [
@@ -60746,7 +63287,7 @@
                                 "format": "array",
                                 "items": {
                                   "description": "The tag associated with the security signal.",
-                                  "format": "string"
+                                  "type": "string"
                                 }
                               },
                               "timestamp": {
@@ -61029,7 +63570,7 @@
                                 "format": "array",
                                 "items": {
                                   "description": "The tag associated with the security signal.",
-                                  "format": "string"
+                                  "type": "string"
                                 }
                               },
                               "timestamp": {
@@ -62007,12 +64548,27 @@
                                 "maxLength": 4,
                                 "minLength": 4,
                                 "readOnly": true,
-                                "type": "string"
+                                "type": "string",
+                                "x-secret": true
                               },
                               "name": {
                                 "description": "Name of the application key.",
-                                "example": "Application Key for submitting metrics",
+                                "example": "Application Key for managing dashboards",
                                 "type": "string"
+                              },
+                              "scopes": {
+                                "description": "Array of scopes to grant the application key. This feature is in private beta, please contact Datadog support to enable scopes for your application keys.",
+                                "example": [
+                                  "dashboards_read",
+                                  "dashboards_write",
+                                  "dashboards_public_share"
+                                ],
+                                "items": {
+                                  "description": "Name of scope.",
+                                  "type": "string"
+                                },
+                                "nullable": true,
+                                "type": "array"
                               }
                             },
                             "type": "object"
@@ -62559,8 +65115,22 @@
                         "properties": {
                           "name": {
                             "description": "Name of the application key.",
-                            "example": "Application Key for submitting metrics",
+                            "example": "Application Key for managing dashboards",
                             "type": "string"
+                          },
+                          "scopes": {
+                            "description": "Array of scopes to grant the application key. This feature is in private beta, please contact Datadog support to enable scopes for your application keys.",
+                            "example": [
+                              "dashboards_read",
+                              "dashboards_write",
+                              "dashboards_public_share"
+                            ],
+                            "items": {
+                              "description": "Name of scope.",
+                              "type": "string"
+                            },
+                            "nullable": true,
+                            "type": "array"
                           }
                         },
                         "required": [
@@ -62619,7 +65189,8 @@
                             "key": {
                               "description": "The application key.",
                               "readOnly": true,
-                              "type": "string"
+                              "type": "string",
+                              "x-secret": true
                             },
                             "last4": {
                               "description": "The last four characters of the application key.",
@@ -62627,12 +65198,27 @@
                               "maxLength": 4,
                               "minLength": 4,
                               "readOnly": true,
-                              "type": "string"
+                              "type": "string",
+                              "x-secret": true
                             },
                             "name": {
                               "description": "Name of the application key.",
-                              "example": "Application Key for submitting metrics",
+                              "example": "Application Key for managing dashboards",
                               "type": "string"
+                            },
+                            "scopes": {
+                              "description": "Array of scopes to grant the application key. This feature is in private beta, please contact Datadog support to enable scopes for your application keys.",
+                              "example": [
+                                "dashboards_read",
+                                "dashboards_write",
+                                "dashboards_public_share"
+                              ],
+                              "items": {
+                                "description": "Name of scope.",
+                                "type": "string"
+                              },
+                              "nullable": true,
+                              "type": "array"
                             }
                           },
                           "type": "object"
@@ -63314,12 +65900,27 @@
                               "maxLength": 4,
                               "minLength": 4,
                               "readOnly": true,
-                              "type": "string"
+                              "type": "string",
+                              "x-secret": true
                             },
                             "name": {
                               "description": "Name of the application key.",
-                              "example": "Application Key for submitting metrics",
+                              "example": "Application Key for managing dashboards",
                               "type": "string"
+                            },
+                            "scopes": {
+                              "description": "Array of scopes to grant the application key. This feature is in private beta, please contact Datadog support to enable scopes for your application keys.",
+                              "example": [
+                                "dashboards_read",
+                                "dashboards_write",
+                                "dashboards_public_share"
+                              ],
+                              "items": {
+                                "description": "Name of scope.",
+                                "type": "string"
+                              },
+                              "nullable": true,
+                              "type": "array"
                             }
                           },
                           "type": "object"
@@ -63849,13 +66450,24 @@
                         "properties": {
                           "name": {
                             "description": "Name of the application key.",
-                            "example": "Application Key for submitting metrics",
+                            "example": "Application Key for managing dashboards",
                             "type": "string"
+                          },
+                          "scopes": {
+                            "description": "Array of scopes to grant the application key. This feature is in private beta, please contact Datadog support to enable scopes for your application keys.",
+                            "example": [
+                              "dashboards_read",
+                              "dashboards_write",
+                              "dashboards_public_share"
+                            ],
+                            "items": {
+                              "description": "Name of scope.",
+                              "type": "string"
+                            },
+                            "nullable": true,
+                            "type": "array"
                           }
                         },
-                        "required": [
-                          "name"
-                        ],
                         "type": "object"
                       },
                       "id": {
@@ -63918,12 +66530,27 @@
                               "maxLength": 4,
                               "minLength": 4,
                               "readOnly": true,
-                              "type": "string"
+                              "type": "string",
+                              "x-secret": true
                             },
                             "name": {
                               "description": "Name of the application key.",
-                              "example": "Application Key for submitting metrics",
+                              "example": "Application Key for managing dashboards",
                               "type": "string"
+                            },
+                            "scopes": {
+                              "description": "Array of scopes to grant the application key. This feature is in private beta, please contact Datadog support to enable scopes for your application keys.",
+                              "example": [
+                                "dashboards_read",
+                                "dashboards_write",
+                                "dashboards_public_share"
+                              ],
+                              "items": {
+                                "description": "Name of scope.",
+                                "type": "string"
+                              },
+                              "nullable": true,
+                              "type": "array"
                             }
                           },
                           "type": "object"
@@ -73904,7 +76531,7 @@
       "variables": {
         "site": {
           "default": "datadoghq.com",
-          "description": "The regional site for our customers.",
+          "description": "The regional site for Datadog customers.",
           "enum": [
             "datadoghq.com",
             "us3.datadoghq.com",
@@ -73948,7 +76575,7 @@
   ],
   "tags": [
     {
-      "description": "Security signals generated based file and process activity in workloads.",
+      "description": "Workload activity security rules for generating events using the Datadog security Agent.",
       "name": "Cloud Workload Security"
     },
     {
@@ -73980,7 +76607,7 @@
       "name": "Logs"
     },
     {
-      "description": "Archives forward all the logs ingested to a cloud storage system.\n\nSee the [Archives Page](https://app.datadoghq.com/logs/pipelines/archives)\nfor a list of the archives currently configured in our UI.",
+      "description": "Archives forward all the logs ingested to a cloud storage system.\n\nSee the [Archives Page](https://app.datadoghq.com/logs/pipelines/archives)\nfor a list of the archives currently configured in web UI.",
       "externalDocs": {
         "description": "Find out more at",
         "url": "https://docs.datadoghq.com/logs/archives/"

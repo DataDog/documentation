@@ -10,7 +10,7 @@ further_reading:
   - link: /getting_started/tagging/assigning_tags/
     tag: Documentation
     text: Apprendre à assigner des tags
-  - link: 'https://www.datadoghq.com/blog/tagging-best-practices/'
+  - link: https://www.datadoghq.com/blog/tagging-best-practices/
     tag: Blog
     text: Bonnes pratiques en matière de tagging pour votre infrastructure et vos applications
 ---
@@ -30,9 +30,9 @@ Le [flux d'événements][2] affiche tous les événements de votre environnement
 {{< tabs >}}
 {{% tab "Assignation" %}}
 
-Utilisez des tags pour filtrer les métriques à afficher dans un [graphique de dashboard][1] ou pour créer des groupes agrégés de métriques à afficher. Pour filtrer les métriques, saisissez le tag dans la zone de texte **from**. Cela affiche les données de la métrique choisie fournies par toutes les sources qui possèdent ce tag (à savoir, `service:coffee-house` dans l'exemple ci-dessous).
+Utilisez des tags pour filtrer les métriques à afficher dans un [graphique de dashboard][1] ou pour créer des groupes agrégés de métriques à afficher. Pour filtrer les métriques à afficher, saisissez les tags dans la zone de texte **from**. Les données de la métrique choisie s'afficheront alors pour toutes les sources qui possèdent ce tag (à savoir, `service:coffee-house` dans l'exemple ci-dessous).
 
-{{< img src="tagging/using_tags/dashboardtags_1.png" alt="Tags dans des dashboards avec la zone de texte from"  style="width:80%;">}}
+{{< img src="tagging/using_tags/dashboardtags_1.png" alt="Tags dans des dashboards avec la zone de texte from" style="width:80%;">}}
 
 Le filtrage avancé des valeurs de tag peut également inclure des filtres booléens. La syntaxe booléenne suivante est prise en charge :
 
@@ -44,11 +44,11 @@ Le filtrage avancé des valeurs de tag peut également inclure des filtres bool�
 
 Utilisez `AND` ou `OR` pour examiner une métrique en fonction de tags spécifiques :
 
-{{< img src="tagging/using_tags/dashboard_boolean_1.png" alt="Filtre booléen avec AND/OR"  style="width:80%;">}}
+{{< img src="tagging/using_tags/dashboard_boolean_1.png" alt="Filtre booléen avec AND/OR" style="width:80%;">}}
 
 Utilisez `IN` ou `NOT IN` pour filtrer rapidement une métrique en fonction de tags spécifiques :
 
-{{< img src="tagging/using_tags/dashboards_boolean_2.png" alt="Filtre booléen avec IN/NOT IN"  style="width:80%;">}}
+{{< img src="tagging/using_tags/dashboards_boolean_2.png" alt="Filtre booléen avec IN/NOT IN" style="width:80%;">}}
 
 Pour créer un groupe agrégé à l'aide de tags, saisissez la clé du tag dans la zone de texte **avg by**. Par exemple, si vous disposez d'un graphique de séries temporelles présentant une métrique taguée avec la clé `service`, comme `service:coffee-house`, saisissez `service` dans la zone de texte **avg by** pour afficher une ligne pour chaque valeur de tag `service`. Chaque ligne représente la valeur moyenne de la métrique pour l'ensemble des sources qui partagent la valeur de tag `service`. 
 
@@ -71,11 +71,11 @@ Utilisez des [template variables][3] pour activer facilement le tag **from** sur
 
 Vous trouverez ci-dessous un exemple de tags avec l'éditeur de graphiques pour séries temporelles. Aucun tag n'a été appliqué dans la première capture d'écran. L'utilisation moyenne de processeur est donc affichée pour l'ensemble des hosts :
 
-{{< img src="tagging/using_tags/Tags_1.png" alt="Tags_1"  style="width:75%;">}}
+{{< img src="tagging/using_tags/Tags_1.png" alt="Tags_1" style="width:75%;">}}
 
 Les informations de l'éditeur sont ensuite mises à jour afin d'inclure un tag (`region:eastus`) dans la zone de texte **from**. Cela permet à Datadog d'afficher l'utilisation de processeur sur l'ensemble de la région Est des États-Unis. Le tag `region` est utilisé à titre d'exemple : vous pouvez utiliser n'importe quel tag arbitraire transmis à votre plateforme Datadog, comme `application`, `service`, `environment`, etc.
 
-{{< img src="tagging/using_tags/Tags_2.png" alt="Tags_2"  style="width:75%;">}}
+{{< img src="tagging/using_tags/Tags_2.png" alt="Tags_2" style="width:75%;">}}
 
 Enfin, le deuxième champ vide (la zone de texte **avg by**) est utilisé pour afficher une ligne de série temporelle pour chaque `host`. Le processeur du serveur est affiché pour chaque host exécuté dans la région Est des États-Unis.
 
@@ -88,7 +88,7 @@ Vous pouvez ajouter d'autres tags pour réduire davantage la portée, afin d'ét
 
 ## Infrastructure
 
-Pour filtrer la [hostmap][4], [la liste d'infrastructures][5], les [conteneurs][6] et les [processus][7], saisissez un tag dans la zone de texte **Filter by** en haut de la page. Les hosts et conteneurs peuvent être regroupés par clé de tag à l'aide de la zone de texte **Group by**. Si vous saisissez `service` dans cette zone de texte, chaque service s'affiche sous la forme d'un en-tête de groupe.
+Pour filtrer la [hostmap][4], [la liste des infrastructures][5], les [conteneurs][6] et les [processus][7], saisissez un tag dans la zone de texte **Filter by** en haut de la page. Les hosts et conteneurs peuvent être regroupés par clé de tag à l'aide de la zone de texte **Group by**. Si vous saisissez `service` dans cette zone de texte, chaque service s'affiche sous la forme d'un en-tête de groupe.
 
 {{< tabs >}}
 {{% tab "Hostmap" %}}
@@ -131,7 +131,7 @@ La page des live processes propose les champs de filtrage et de regroupement sui
 
 Pour filtrer des monitors en fonction des [tags qui leur sont assignés][1], utilisez la barre de recherche ou les cases des facettes. Vous devez utiliser le format suivant dans la barre de recherche : `tag:<KEY>:<VALUE>`. Indiquez par exemple `tag:service:coffee-house`. Pour exclure les monitors associés à un tag spécifique de votre recherche, utilisez `-` (par exemple : `tag:-service:coffee-house`). **Remarque** : les tags de monitor ne fonctionnent pas de la même façon que les tags de métrique.
 
-{{< img src="tagging/using_tags/managemonitorstags.png" alt="Gérer les tags de monitor"  style="width:80%;">}}
+{{< img src="tagging/using_tags/managemonitorstags.png" alt="Gérer les tags de monitor" style="width:80%;">}}
 
 [1]: /fr/getting_started/tagging/assigning_tags/
 {{% /tab %}}
@@ -148,7 +148,7 @@ Lorsque vous créez un [monitor][1], utilisez les tags de métrique dans :
 
 {{< img src="tagging/using_tags/newmonitortags.png" alt="Tags nouveau monitor" style="width:80%;">}}
 
-[1]: /fr/monitors/monitor_types/
+[1]: /fr/monitors/create/types/
 {{% /tab %}}
 {{% tab "Gérer les downtimes" %}}
 
@@ -156,7 +156,7 @@ Pour filtrer les [downtimes][1] en fonction d'un tag de monitor, saisissez le no
 
 {{< img src="tagging/using_tags/managedowntimetags.png" alt="Gérer les tags de monitor" style="width:80%;">}}
 
-[1]: /fr/monitors/downtimes/
+[1]: /fr/monitors/notify/downtimes/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -221,7 +221,7 @@ Ajoutez `!` devant un tag pour exclure les hosts correspondant à un libellé sp
 datadog:monitored,env:production,!env:staging,instance-type:c1.*
 ```
 
-Pour en savoir plus sur les libellés GCP, consultez la [documentation sur GCP][2].
+Consultez la documentation Google Cloud pour en savoir plus sur la [création et la gestion d'étiquettes][2].
 
 [1]: https://app.datadoghq.com/account/settings#integrations/google-cloud-platform
 [2]: https://cloud.google.com/compute/docs/labeling-resources
@@ -248,7 +248,7 @@ Après avoir [assigné des tags][1], utilisez la Service Map pour accéder facil
 
 [1]: /fr/getting_started/tagging/assigning_tags/
 [2]: /fr/tracing/app_analytics/search/
-[3]: /fr/monitors/manage_monitor/
+[3]: /fr/monitors/manage/
 [4]: /fr/logs/explorer/search/
 [5]: /fr/infrastructure/hostmap/
 {{% /tab %}}
@@ -304,7 +304,7 @@ Les tags permettent également de filtrer un [pipeline][14] de logs. Dans l'exem
 
 Pour filtrer des SLO en fonction des [tags qui leur sont assignés][1], utilisez la barre de recherche ou les cases des facettes. Vous devez utiliser le format suivant dans la barre de recherche : `<KEY>:<VALUE>` (par exemple : `journey:add_item`). Pour exclure les SLO associés à un tag spécifique de votre recherche, utilisez `-` (par exemple : `-journey:add_item`). **Remarque** : les tags de SLO sont différents et distincts des tags de métrique ou de monitor utilisés dans les métriques ou les monitors qui composent un SLO.
 
-{{< img src="tagging/using_tags/manage_slo_tags.png" alt="Tags de SLO"  style="width:80%;">}}
+{{< img src="tagging/using_tags/manage_slo_tags.png" alt="Tags de SLO" style="width:80%;">}}
 
 [1]: /fr/getting_started/tagging/assigning_tags/?tab=servicelevelobjectives#ui
 {{% /tab %}}
@@ -316,7 +316,7 @@ Lorsque vous créez un [SLO basé sur des métriques][1], utilisez les tags de m
 * La zone de texte **from** permet de limiter le contexte de la métrique à ces tags uniquement.
 * La zone de texte **sum by** permet de créer un SLO groupé basé sur des métriques qui affiche un pourcentage de statut ainsi que le budget d'indisponibilité restant pour le SLO global et pour chaque valeur de tag.
 
-{{< img src="tagging/using_tags/metric_based_slo_tags.png" alt="Tags de SLO basé sur des métriques"  style="width:80%;">}}
+{{< img src="tagging/using_tags/metric_based_slo_tags.png" alt="Tags de SLO basé sur des métriques" style="width:80%;">}}
 
 [1]: /fr/monitors/service_level_objectives/metric/
 {{% /tab %}}
@@ -324,7 +324,7 @@ Lorsque vous créez un [SLO basé sur des métriques][1], utilisez les tags de m
 
 Lorsque vous créez un SLO [basé sur des monitors][1] à partir d'un seul [monitor groupé][2], utilisez l'option **Calculate on selected groups** pour sélectionner jusqu'à 20 valeurs de tag associées au monitor sous-jacent et afficher le pourcentage de statut et le budget d'indisponibilité restant pour le SLO global et pour chaque valeur de tag :
 
-{{< img src="tagging/using_tags/monitor_based_slo_tags.png" alt="Tags de SLO basé sur des monitors"  style="width:80%;">}}
+{{< img src="tagging/using_tags/monitor_based_slo_tags.png" alt="Tags de SLO basé sur des monitors" style="width:80%;">}}
 
 [1]: /fr/monitors/service_level_objectives/monitor/
 [2]: /fr/getting_started/tagging/using_tags/?tab=newmonitor#monitors

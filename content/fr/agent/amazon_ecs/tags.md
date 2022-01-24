@@ -18,7 +18,7 @@ L'Agent Datadog peut créer et appliquer des tags à l'ensemble des métriques, 
 
 ## Tagging de service unifié
 
-Datadog vous conseille d'utiliser le tagging de service unifié lorsque vous assignez des tags dans des environnements conteneurisés. Le tagging de service unifié permet de lier les données de télémétrie Datadog entre elles via trois tags standards : `env`, `service` et `version`. Pour découvrir comment configurer le tagging unifié pour votre environnement, consultez la [documentation dédiée au tagging de service unifié pour Amazon ECS][1].
+Datadog vous conseille d'utiliser le tagging de service unifié lorsque vous assignez des tags dans des environnements conteneurisés. Le tagging de service unifié permet de lier les données de télémétrie Datadog entre elles à l'aide de trois tags standards : `env`, `service` et `version`. Pour découvrir comment configurer le tagging unifié pour votre environnement, consultez la [documentation dédiée pour Amazon ECS][1].
 
 ## Collecte de tags de ressource
 
@@ -37,7 +37,7 @@ Si vous n'avez pas activé le tagging de service unifié, effectuez les étapes 
 
 ### Remarques
 
-- Vérifiez que le rôle IAM est associé à vos [instances de conteneur Amazon ECS][2] et non pas à l'instance EC2 sous-jacente.
+- Vérifiez que le rôle IAM est associé à vos [instances de conteneur Amazon ECS][2] et non pas au rôle de tâche du conteneur de l'Agent Datadog.
 - Les tags de ressource ECS peuvent être recueillis à partir d'instances EC2, mais pas à partir d'AWS Fargate.
 - Cette fonctionnalité nécessite la version 6.17+ ou 7.17+ de l'Agent Datadog.
 - L'Agent prend en charge la collecte de tags ECS à partir des ressources ECS `tasks`, `services` et `container instances`.

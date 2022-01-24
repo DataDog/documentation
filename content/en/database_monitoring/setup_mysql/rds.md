@@ -9,7 +9,7 @@ further_reading:
 
 ---
 
-{{< site-region region="us3,us5,gov" >}}
+{{< site-region region="us5,gov" >}}
 <div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
 {{< /site-region >}}
 
@@ -174,7 +174,7 @@ init_config:
 instances:
   - dbm: true
     host: '<AWS_INSTANCE_ENDPOINT>'
-    port: 3306 # e.g. 3306
+    port: 3306
     username: datadog
     password: '<YOUR_CHOSEN_PASSWORD>' # from the CREATE USER step earlier
 ```

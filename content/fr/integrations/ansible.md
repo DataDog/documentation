@@ -7,12 +7,13 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Surveillez les tâches ayant échoué et consultez les exécutions de playbook dans votre flux d'événements.
-doc_link: 'https://docs.datadoghq.com/integrations/ansible/'
+doc_link: https://docs.datadoghq.com/integrations/ansible/
 draft: false
 git_integration_title: ansible
 has_logo: true
 integration_id: ansible
 integration_title: Ansible
+integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'
@@ -21,7 +22,7 @@ public_title: Intégration Datadog/Ansible
 short_description: Surveillez les tâches ayant échoué et consultez les exécutions de playbook dans votre flux d'événements.
 version: '1.0'
 ---
-{{< img src="integrations/ansible/ansibledashboard.png" alt="dashboard ansible" popup="true">}}
+{{< img src="integrations/ansible/ansibledashboard.png" alt="Dashboard Ansible" popup="true">}}
 
 ## Présentation
 
@@ -53,11 +54,11 @@ Pour obtenir davantage d'informations sur l'utilisation des intégrations Datado
 
 5. Les événements et les métriques Ansible apparaissent dans Datadog après l'exécution de votre playbook.
 
-Pour installer l'Agent Datadog en utilisant Ansible, consultez la [documentation d'installation][3].
+Pour installer l'Agent Datadog en utilisant Ansible, consultez les [instructions d'installation de l'Agent][3].
 
 ### Collecte de logs
 
-[Consultez l'exemple de playbook][4] pour découvrir comment installer l'Agent Datadog en activant la collecte de logs via Ansible.
+Consultez l'[exemple de playbook][4] pour découvrir comment installer l'Agent Datadog en activant la collecte de logs via Ansible.
 
 ## Données collectées
 

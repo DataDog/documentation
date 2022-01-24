@@ -103,9 +103,9 @@ For detailed instructions on the advanced alert options (no data, evaluation del
 
 For detailed instructions on the advanced alert options (evaluation delay, etc.), see the [Monitor configuration][5] page.
 
-[1]: /tracing/trace_search_and_analytics/query_syntax/#search-bar
-[2]: /tracing/trace_search_and_analytics/query_syntax/#facet-search
-[3]: /tracing/trace_search_and_analytics/query_syntax/#numerical-values
+[1]: /tracing/trace_explorer/query_syntax/#search-bar
+[2]: /tracing/trace_explorer/query_syntax/#facet-search
+[3]: /tracing/trace_explorer/query_syntax/#numerical-values
 [4]: /tracing/visualization/#indexed-span
 [5]: /monitors/create/configuration/#advanced-alert-conditions
 {{% /tab %}}

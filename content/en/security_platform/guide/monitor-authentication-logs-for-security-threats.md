@@ -93,7 +93,7 @@ For signals triggered from the `Credential Stuffing Attack` Detection Rule, ther
 
 Datadog provides out-of-the-box dashboards, such as the [IP investigation dashboard][16] and [user investigation dashboard][17]. These correlate key data from your authentication logs with relevant data from the rest of your environment to assist in your investigations.
 
-For example, if a specific IP address or user is triggering multiple security signals, click on the IP address or user in a dashboard list or graph and select **View related Security Signals**. This populates all triggered security signals for that IP address or user in the Security Signals Explorer. If the data permits, this view is helpful when trying to correlate an IP address to a specific user, or vice versa. From here, you can drill down into each rule to remediate attacks. Click on any rule and review the triage and response information in the **Message** tab to properly assess and remediate the issue.
+For example, if a specific IP address or user is triggering multiple security signals, click on the IP address or user in a dashboard list or graph and select **View related Security Signals**. This populates all triggered security signals for that IP address or user in the Security Signals Explorer. If the data permits, this view is helpful when trying to correlate an IP address to a specific user, or vice versa. From here, you can examine and verify each rule to remediate attacks. Click on any rule and review the triage and response information in the **Message** tab to properly assess and remediate the issue.
 
 {{< img src="security_platform/security_monitoring/guide/monitor-authentication-logs-for-security-threats/investigation-dashboard-example.mp4" alt="Analyze triggered security signals in the IP investigation dashboard" video=true >}}
 
@@ -107,7 +107,7 @@ Datadog ingests and analyzes [all of your logs][18], ensuring that you can detec
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security_monitoring/
+[1]: /cloud_siem/
 [2]: /logs/log_collection/?tab=http#application-log-collection
 [3]: /logs/log_configuration/processors/#grok-parser
 [4]: https://www.datadoghq.com/blog/logs-standard-attributes/
@@ -118,8 +118,8 @@ Datadog ingests and analyzes [all of your logs][18], ensuring that you can detec
 [9]: https://developers.google.com/recaptcha/docs/v3
 [10]: https://app.datadoghq.com/security/configuration/rules?query=brute%20force%20attack&sort=rule
 [11]: https://app.datadoghq.com/security/configuration/rules?query=credential%20stuffing%20attack&sort=rule
-[12]: /security_monitoring/default_rules/
-[13]: /security_monitoring/explorer
+[12]: /cloud_siem/default_rules/
+[13]: /cloud_siem/explorer
 [14]: https://app.datadoghq.com/notebook/credentialstuffingrunbook
 [15]: /notebooks/#commenting
 [16]: https://app.datadoghq.com/screen/integration/security-monitoring-ip-investigation

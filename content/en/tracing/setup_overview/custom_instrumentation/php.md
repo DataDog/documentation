@@ -61,12 +61,10 @@ For example, the following snippet traces the `CustomDriver::doWork()` method an
         $span->resource = 'CustomDriver.doWork';
         $span->service = 'php';
 
-        $span->meta = [
-            // If an exception was thrown from the instrumented call, return value is null
-            'doWork.size' => $exception ? 0 : count($retval),
-            // Access object members via $this
-            'doWork.thing' => $this->workToDo,
-        ];
+        // If an exception was thrown from the instrumented call, return value is null
+        $span->meta['doWork.size'] = $exception ? 0 : count($retval),
+        // Access object members via $this
+        $span->meta['doWork.thing'] = $this->workToDo;
 
         // The span will automatically close
     }
@@ -194,10 +192,8 @@ Add tags to a span via the `DDTrace\SpanData::$meta` array.
     'myRandFunc',
     function(\DDTrace\SpanData $span, array $args, $retval) {
         // ...
-        $span->meta = [
-            'rand.range' => $args[0] . ' - ' . $args[1],
-            'rand.value' => $retval,
-        ];
+        $span->meta['rand.range'] = $args[0] . ' - ' . $args[1];
+        $span->meta['rand.value'] = $retval;
     }
 );
 ```
@@ -246,12 +242,10 @@ function doRiskyThing() {
     'doRiskyThing',
     function(\DDTrace\SpanData $span, $args, $retval) {
         if ($retval === SOME_ERROR_CODE) {
-            $span->meta = [
-                'error.msg' => 'Foo error',
-                // Optional:
-                'error.type' => 'CustomError',
-                'error.stack' => my_get_backtrace(),
-            ];
+            $span->meta['error.msg'] = 'Foo error';
+            // Optional:
+            $span->meta['error.type'] = 'CustomError';
+            $span->meta['error.stack'] = my_get_backtrace();
         }
     }
 );
@@ -316,10 +310,8 @@ function myRandFunc($min, $max) {
         $span->service = 'php';
         // The following are optional
         $span->type = 'web';
-        $span->meta = [
-            'rand.range' => $args[0] . ' - ' . $args[1],
-            'rand.value' => $retval,
-        ];
+        $span->meta['rand.range'] = $args[0] . ' - ' . $args[1];
+        $span->meta['rand.value'] = $retval;
         $span->metrics = [
             '_sampling_priority_v1' => 0.9,
         ];
@@ -487,7 +479,7 @@ use DDTrace\SpanData;
 
 ### Tracing internal functions and methods
 
-An optimization was added starting in **0.46.0** to ignore all internal functions and methods for instrumentation. Internal functions and methods can still be instrumented by setting the `DD_TRACE_TRACED_INTERNAL_FUNCTIONS` environment variable. This takes a CSV of functions or methods that will be instrumented e.g. `DD_TRACE_TRACED_INTERNAL_FUNCTIONS=array_sum,mt_rand,DateTime::add`. Once a function or method has been added to the list, it can be instrumented using `DDTrace\trace_function()` and `DDTrace\trace_method()` respectively.
+An optimization was added starting in **0.46.0** to ignore all internal functions and methods for instrumentation. Internal functions and methods can still be instrumented by setting the `DD_TRACE_TRACED_INTERNAL_FUNCTIONS` environment variable. This takes a CSV of functions or methods that is to be instrumented. For example, `DD_TRACE_TRACED_INTERNAL_FUNCTIONS=array_sum,mt_rand,DateTime::add`. Once a function or method has been added to the list, it can be instrumented using `DDTrace\trace_function()` and `DDTrace\trace_method()` respectively.
 
 ### Running the tracing closure before the instrumented call
 
@@ -552,7 +544,7 @@ resources.ddtrace = true
 
 ### PHP code optimization
 
-Prior to PHP 7, some frameworks provided ways to compile PHP classes—e.g., through the Laravel's `php artisan optimize` command.
+Prior to PHP 7, some frameworks provided ways to compile PHP classes (for example, through the Laravel's `php artisan optimize` command).
 
 While this [has been deprecated][9] if you are using PHP 7.x, you still may use this caching mechanism in your app prior to version 7.x. In this case, Datadog suggests you use the [OpenTracing][10] API instead of adding `datadog/dd-trace` to your Composer file.
 
@@ -619,12 +611,10 @@ dd_trace('CustomDriver', 'doWork', function (...$args) {
         $span->resource = 'CustomDriver.doWork';
         $span->service = 'php';
 
-        $span->meta = [
-            // If an exception was thrown from the instrumented call, return value is null
-            'doWork.size' => $exception ? 0 : count($retval),
-            // Access object members via $this
-            'doWork.thing' => $this->workToDo,
-        ];
+        // If an exception was thrown from the instrumented call, return value is null
+        $span->meta['doWork.size'] = $exception ? 0 : count($retval);
+        // Access object members via $this
+        $span->meta['doWork.thing'] = $this->workToDo;
 
         // No need to explicitly forward the call with dd_trace_forward_call()
         // No need to explicitly catch/attach exceptions

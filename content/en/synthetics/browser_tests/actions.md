@@ -5,7 +5,10 @@ description: Record Steps for a Synthetic Browser Test
 further_reading:
 - link: "/synthetics/browser_tests/advanced_options/"
   tag: "Documentation"
-  text: "Learn how to configure advanced options for steps"
+  text: "Learn how to configure Advanced Options for your browser test"
+- link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_global_variable"
+  tag: "Terraform"
+  text: "Create and manage Synthetic Global Variables with Terraform"
 ---
 
 ## Overview
@@ -275,7 +278,7 @@ For more information about TOTP-based MFA in a browser test, see this [TOTP guid
 
 #### Email
 
-Generate a random Synthetic email address that can be used in your test steps to [assert if an email was correctly sent][9] or to [navigate to a link contained within the email][10] (e.g. click a confirmation link). A unique mailbox is generated at each test execution to avoid any conflicts between test runs.
+Generate a random Synthetic email address that can be used in your test steps to [assert if an email was correctly sent][9] or to [navigate to a link contained within the email][10] (for example, click a confirmation link). A unique mailbox is generated at each test execution to avoid any conflicts between test runs.
 
 ### Subtests
 

@@ -1,5 +1,5 @@
 ---
-title: Migration vers l'extension Lambda Datadog
+title: Choisir s'il est pertinent de migrer vers l'extension Lambda Datadog
 kind: guide
 ---
 ## Est-il pertinent de migrer vers l'extension Lambda Datadog dans votre situation ?

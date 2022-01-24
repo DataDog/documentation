@@ -17,6 +17,9 @@ further_reading:
 - link: "/synthetics/guide/browser-tests-totp"
   tag: "Documentation"
   text: "TOTPs For Multi-Factor Authentication (MFA) in Browser Test"
+- link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_global_variable"
+  tag: "Terraform"
+  text: "Create and manage Synthetic Global Variables with Terraform"
 ---
 
 On the [Synthetic Monitoring Settings page][1], you can adjust the following settings:
@@ -34,7 +37,7 @@ Choose the type of variable you want to create:
 {{< tabs >}}
 {{% tab "Specify Value" %}}
 
-1. Enter a **Variable Name**. Your variable name can only use uppercase letters, numbers, and underscores.
+1. Enter a **Variable Name**. Your variable name can only use uppercase letters, numbers, and underscores. This name should be unique across your global variables.
 2. Enter a **Description** for your variable (optional).
 3. Select **Tags** to associate with your variable (optional).
 4. Enter the **Value** you want to assign to your variable.

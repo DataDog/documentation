@@ -23,7 +23,7 @@ Logs may contain sensitive data, and should be handled carefully. If you are ing
 - If you have intentionally set up your logs to have sensitive data for legitimate troubleshooting and auditing purposes, use the **Roles Based Access Control** to ensure that you have set up appropriate restrictions so only authorized users who have access to your Datadog account can access this data. For more information, see the [Logs Roles Based Access Control (RBAC) User's Guide][1] to learn how to configure it for your organization.
 - Address any unintentional logging of sensitive data to preemptively address any concerns down the road. Continue with this guide to learn more.
 
-Controlling all of your data can be challenging, especially on a large and highly collaborative platform. This guide walks you through the different options to discover and manage sensitive data that is ingested into Datadog.
+Controlling all of your data can be challenging, especially on a large and collaborative platform. This guide walks you through the different options to discover and manage sensitive data that is ingested into Datadog.
 
 ## Sensitive Data Scanner
 
@@ -57,7 +57,7 @@ Once sensitive data in logs is sent to the Datadog platform, it may exist in a n
 
 * [Log Monitors][10] notifications when they include [Log Samples][11]. Check specifically for monitors triggered during the period when sensitive data was being sent.
 
-* [Livetail][12], where logs are viewed in real-time by your organization's users. There is no persistence beyond the 50 logs cached in browsers, and for broader queries, the result can be highly sampled.
+* [Live Tail][12], where logs are viewed in real-time by your organization's users. There is no persistence beyond the 50 logs cached in browsers, and for broader queries, the result can be extremely sampled.
 
 ## Fix the source of the data upstream
 

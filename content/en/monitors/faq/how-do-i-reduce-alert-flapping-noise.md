@@ -7,9 +7,9 @@ further_reading:
   text: "Schedule a downtime to mute a monitor"
 ---
 
-We often discuss alerting with our clients and a frequent issue or pain point is alert fatigue, or when alerts 'flap' (rapidly switching from an 'ok' to an 'alert' status).  
+A frequent issue or pain point can be alert fatigue, or when alerts 'flap' (rapidly switching from an 'ok' to an 'alert' status).  
 
-Your individual Datadog alerts with groups will [have notification][1] rollups on by default, but there is functionality within Datadog that often leads to less noisy, more meaningful alerts.
+Your individual Datadog alerts with groups [have notification][1] rollups on by default, but there is functionality within Datadog that often leads to less noisy, more meaningful alerts.
 
 * Re-Evaluate the Alert Threshold Value
     * The easiest way to reduce flapping when the alert <-> ok or state changes are frequent could be to increase/decrease the threshold condition.
