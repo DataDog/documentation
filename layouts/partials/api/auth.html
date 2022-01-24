@@ -1,0 +1,44 @@
+{{ $context := .context }}
+{{ $endpoint := .endpoint }}
+{{ $securitySchemes := .securitySchemes }}
+{{ $tag := .tag }}
+
+<!-- Get OAuth Scopes -->
+{{ $authZ := slice }}
+{{ range $endpoint.action.security }}
+  {{ range $sec_key, $sec_val := . }}
+    {{ if eq $sec_key "AuthZ" }}
+      {{ $authZ = . }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+<!-- Get RBAC scopes (represented by x-permission field) -->
+{{ with $endpoint.action }}
+    {{ $test := .Get "summary" }}
+    <h4>{{ $test }}</h4>
+{{ end }}
+
+<!-- if either authz or rbac permissions are here -->
+{{ with $authZ }}
+    {{ $slug := (replaceRE " " "-" ($tag.name | humanize | lower)) }}
+    <h3 class="mb-2">Authorization</h3>
+    <div class="schema-table row">
+        <div class="col-12">
+            <div class="row table-header">
+                <div class="column">
+                    <p class="font-semibold">Required Scopes</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 first-column">
+                    <div class="row first-row ">
+                        <p>
+                            OAuth scopes: <code>{{ delimit . ", "}}</code> <a href="{{ "api/latest/scopes/" | absLangURL }}#{{ $slug }}">scope</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{{ end }}
