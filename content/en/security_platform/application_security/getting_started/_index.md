@@ -11,11 +11,14 @@ further_reading:
   text: "Programming Language and Framework Compatibility"
 ---
 
-Set up your application to [detect threats][1] targeting your production systems, using one of the following Datadog libraries:
+Set up your application to [detect threats][1] targeting your production systems, using the Datadog library for your application language. 
 
-<!-- each language page covers: 
-- the main steps to enable AppSec on eligible APM services
-- how to enable the product through the library’s env variable -->
+In general, setting up Application Security monitoring involves:
+
+1. Installing the Datadog Library (the most recent APM tracing library) and enabling it within your services.
+2. Enabling the Agent to collect the application security data from the services and send it to Datadog.
+
+Select your application language for details on how to do these steps for your language and infrastructure types.
 
 {{< partial name="security-platform/appsec-languages.html" >}}
 
