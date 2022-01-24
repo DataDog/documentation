@@ -68,7 +68,7 @@ To use threshold queries:
 1. Enable percentiles on your distribution metric on the Metrics Summary page.
 2. Then you can now graph any distribution metric with the new “count values...” aggregator and specify a threshold value and comparison operator as shown here:
 
-{{< img src="metrics/distributions/threshold_queries.gif" alt="Threshold Queries" style="width:80%;">}}
+{{< img src="metrics/distributions/threshold_queries.mp4" alt="Threshold Queries" style="width:80%;">}}
 
 Example metric-based SLO set up:
 
