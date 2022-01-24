@@ -6,7 +6,7 @@ kind: guide
 
 ## Overview
 
-Transport Layer Security (TLS) is a critical security protocol used to protect web traffic. It provides confidentiality and integrity of data in transit between clients and servers exchanging information. Datadog is disabling support for older versions of TLS, below 1.2 (SSLv3, TLS v1.0, TLS v1.2) across public facing Datadog applications, beginning March 31st. If you are using unsupported clients to connect to Datadog after older protocols are disabled, you will begin receiving connection error messages.
+Transport Layer Security (TLS) is a critical security protocol used to protect web traffic. It provides confidentiality and integrity of data in transit between clients and servers exchanging information. Datadog is disabling support for older versions of TLS, below 1.2 (SSLv3, TLS v1.0, TLS v1.2) across public facing Datadog applications, beginning March 31, 2022. If you are using unsupported clients to connect to Datadog after older protocols are disabled, you will begin receiving connection error messages.
 
 ### Reason for deprecation
 
@@ -39,7 +39,7 @@ TLSClientConfig: &tls.Config{
 If your application runs on Java 1.7 or Java 1.6 (update 111 or later), you can set the `https.protocols` system property when starting the JVM to enable additional protocols for connections made using the `HttpsURLConnection` class. For example, by setting
 `Dhttps.protocols=TLSv1.2`.
 
-If your application runs on Java 1.6 prior to update 111, or earlier, TLS 1.1 and 1.2 are not supported. Therefore, you need to update the version of Java your application runs on. If you use another library for connections such as Apache HttpClient, see the Apache-HttpClient section below.
+If your application runs on Java 1.6 prior to update 111, or earlier, TLS 1.1 and 1.2 are not supported. Therefore, you need to update the version of Java your application runs on.
 
 ### .NET
 
