@@ -5252,34 +5252,48 @@
           "relationships": {
             "description": "The relationships the incident will have with other resources once created.",
             "properties": {
-              "commander": {
+              "commander_user": {
                 "description": "Relationship to user.",
                 "properties": {
                   "data": {
-                    "description": "Relationship to user object.",
-                    "properties": {
-                      "id": {
-                        "description": "A unique identifier that represents the user.",
-                        "example": "00000000-0000-0000-0000-000000000000",
-                        "type": "string"
-                      },
-                      "type": {
-                        "default": "users",
-                        "description": "Users resource type.",
-                        "enum": [
-                          "users"
+                    "allOf": [
+                      {
+                        "description": "Relationship to user object.",
+                        "properties": {
+                          "id": {
+                            "description": "A unique identifier that represents the user.",
+                            "example": "00000000-0000-0000-0000-000000000000",
+                            "type": "string"
+                          },
+                          "type": {
+                            "default": "users",
+                            "description": "Users resource type.",
+                            "enum": [
+                              "users"
+                            ],
+                            "example": "users",
+                            "type": "string",
+                            "x-enum-varnames": [
+                              "USERS"
+                            ]
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "type"
                         ],
-                        "example": "users",
-                        "type": "string",
-                        "x-enum-varnames": [
-                          "USERS"
-                        ]
+                        "type": "object"
+                      },
+                      {
+                        "nullable": true,
+                        "type": "object"
                       }
-                    },
-                    "required": [
-                      "id",
-                      "type"
                     ],
+                    "description": "Optional relationship to user.",
+                    "example": {
+                      "id": "00000000-0000-0000-0000-000000000000",
+                      "type": "users"
+                    },
                     "type": "object"
                   }
                 },
@@ -5290,7 +5304,7 @@
               }
             },
             "required": [
-              "commander"
+              "commander_user"
             ],
             "type": "object"
           },
@@ -5316,34 +5330,48 @@
       "IncidentCreateRelationships": {
         "description": "The relationships the incident will have with other resources once created.",
         "properties": {
-          "commander": {
+          "commander_user": {
             "description": "Relationship to user.",
             "properties": {
               "data": {
-                "description": "Relationship to user object.",
-                "properties": {
-                  "id": {
-                    "description": "A unique identifier that represents the user.",
-                    "example": "00000000-0000-0000-0000-000000000000",
-                    "type": "string"
-                  },
-                  "type": {
-                    "default": "users",
-                    "description": "Users resource type.",
-                    "enum": [
-                      "users"
+                "allOf": [
+                  {
+                    "description": "Relationship to user object.",
+                    "properties": {
+                      "id": {
+                        "description": "A unique identifier that represents the user.",
+                        "example": "00000000-0000-0000-0000-000000000000",
+                        "type": "string"
+                      },
+                      "type": {
+                        "default": "users",
+                        "description": "Users resource type.",
+                        "enum": [
+                          "users"
+                        ],
+                        "example": "users",
+                        "type": "string",
+                        "x-enum-varnames": [
+                          "USERS"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "type"
                     ],
-                    "example": "users",
-                    "type": "string",
-                    "x-enum-varnames": [
-                      "USERS"
-                    ]
+                    "type": "object"
+                  },
+                  {
+                    "nullable": true,
+                    "type": "object"
                   }
-                },
-                "required": [
-                  "id",
-                  "type"
                 ],
+                "description": "Optional relationship to user.",
+                "example": {
+                  "id": "00000000-0000-0000-0000-000000000000",
+                  "type": "users"
+                },
                 "type": "object"
               }
             },
@@ -5354,7 +5382,7 @@
           }
         },
         "required": [
-          "commander"
+          "commander_user"
         ],
         "type": "object"
       },
@@ -5540,34 +5568,48 @@
               "relationships": {
                 "description": "The relationships the incident will have with other resources once created.",
                 "properties": {
-                  "commander": {
+                  "commander_user": {
                     "description": "Relationship to user.",
                     "properties": {
                       "data": {
-                        "description": "Relationship to user object.",
-                        "properties": {
-                          "id": {
-                            "description": "A unique identifier that represents the user.",
-                            "example": "00000000-0000-0000-0000-000000000000",
-                            "type": "string"
-                          },
-                          "type": {
-                            "default": "users",
-                            "description": "Users resource type.",
-                            "enum": [
-                              "users"
+                        "allOf": [
+                          {
+                            "description": "Relationship to user object.",
+                            "properties": {
+                              "id": {
+                                "description": "A unique identifier that represents the user.",
+                                "example": "00000000-0000-0000-0000-000000000000",
+                                "type": "string"
+                              },
+                              "type": {
+                                "default": "users",
+                                "description": "Users resource type.",
+                                "enum": [
+                                  "users"
+                                ],
+                                "example": "users",
+                                "type": "string",
+                                "x-enum-varnames": [
+                                  "USERS"
+                                ]
+                              }
+                            },
+                            "required": [
+                              "id",
+                              "type"
                             ],
-                            "example": "users",
-                            "type": "string",
-                            "x-enum-varnames": [
-                              "USERS"
-                            ]
+                            "type": "object"
+                          },
+                          {
+                            "nullable": true,
+                            "type": "object"
                           }
-                        },
-                        "required": [
-                          "id",
-                          "type"
                         ],
+                        "description": "Optional relationship to user.",
+                        "example": {
+                          "id": "00000000-0000-0000-0000-000000000000",
+                          "type": "users"
+                        },
                         "type": "object"
                       }
                     },
@@ -5578,7 +5620,7 @@
                   }
                 },
                 "required": [
-                  "commander"
+                  "commander_user"
                 ],
                 "type": "object"
               },
@@ -6050,30 +6092,44 @@
                     "description": "Relationship to user.",
                     "properties": {
                       "data": {
-                        "description": "Relationship to user object.",
-                        "properties": {
-                          "id": {
-                            "description": "A unique identifier that represents the user.",
-                            "example": "00000000-0000-0000-0000-000000000000",
-                            "type": "string"
-                          },
-                          "type": {
-                            "default": "users",
-                            "description": "Users resource type.",
-                            "enum": [
-                              "users"
+                        "allOf": [
+                          {
+                            "description": "Relationship to user object.",
+                            "properties": {
+                              "id": {
+                                "description": "A unique identifier that represents the user.",
+                                "example": "00000000-0000-0000-0000-000000000000",
+                                "type": "string"
+                              },
+                              "type": {
+                                "default": "users",
+                                "description": "Users resource type.",
+                                "enum": [
+                                  "users"
+                                ],
+                                "example": "users",
+                                "type": "string",
+                                "x-enum-varnames": [
+                                  "USERS"
+                                ]
+                              }
+                            },
+                            "required": [
+                              "id",
+                              "type"
                             ],
-                            "example": "users",
-                            "type": "string",
-                            "x-enum-varnames": [
-                              "USERS"
-                            ]
+                            "type": "object"
+                          },
+                          {
+                            "nullable": true,
+                            "type": "object"
                           }
-                        },
-                        "required": [
-                          "id",
-                          "type"
                         ],
+                        "description": "Optional relationship to user.",
+                        "example": {
+                          "id": "00000000-0000-0000-0000-000000000000",
+                          "type": "users"
+                        },
                         "type": "object"
                       }
                     },
@@ -6965,30 +7021,44 @@
                 "description": "Relationship to user.",
                 "properties": {
                   "data": {
-                    "description": "Relationship to user object.",
-                    "properties": {
-                      "id": {
-                        "description": "A unique identifier that represents the user.",
-                        "example": "00000000-0000-0000-0000-000000000000",
-                        "type": "string"
-                      },
-                      "type": {
-                        "default": "users",
-                        "description": "Users resource type.",
-                        "enum": [
-                          "users"
+                    "allOf": [
+                      {
+                        "description": "Relationship to user object.",
+                        "properties": {
+                          "id": {
+                            "description": "A unique identifier that represents the user.",
+                            "example": "00000000-0000-0000-0000-000000000000",
+                            "type": "string"
+                          },
+                          "type": {
+                            "default": "users",
+                            "description": "Users resource type.",
+                            "enum": [
+                              "users"
+                            ],
+                            "example": "users",
+                            "type": "string",
+                            "x-enum-varnames": [
+                              "USERS"
+                            ]
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "type"
                         ],
-                        "example": "users",
-                        "type": "string",
-                        "x-enum-varnames": [
-                          "USERS"
-                        ]
+                        "type": "object"
+                      },
+                      {
+                        "nullable": true,
+                        "type": "object"
                       }
-                    },
-                    "required": [
-                      "id",
-                      "type"
                     ],
+                    "description": "Optional relationship to user.",
+                    "example": {
+                      "id": "00000000-0000-0000-0000-000000000000",
+                      "type": "users"
+                    },
                     "type": "object"
                   }
                 },
@@ -7449,30 +7519,44 @@
             "description": "Relationship to user.",
             "properties": {
               "data": {
-                "description": "Relationship to user object.",
-                "properties": {
-                  "id": {
-                    "description": "A unique identifier that represents the user.",
-                    "example": "00000000-0000-0000-0000-000000000000",
-                    "type": "string"
-                  },
-                  "type": {
-                    "default": "users",
-                    "description": "Users resource type.",
-                    "enum": [
-                      "users"
+                "allOf": [
+                  {
+                    "description": "Relationship to user object.",
+                    "properties": {
+                      "id": {
+                        "description": "A unique identifier that represents the user.",
+                        "example": "00000000-0000-0000-0000-000000000000",
+                        "type": "string"
+                      },
+                      "type": {
+                        "default": "users",
+                        "description": "Users resource type.",
+                        "enum": [
+                          "users"
+                        ],
+                        "example": "users",
+                        "type": "string",
+                        "x-enum-varnames": [
+                          "USERS"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "type"
                     ],
-                    "example": "users",
-                    "type": "string",
-                    "x-enum-varnames": [
-                      "USERS"
-                    ]
+                    "type": "object"
+                  },
+                  {
+                    "nullable": true,
+                    "type": "object"
                   }
-                },
-                "required": [
-                  "id",
-                  "type"
                 ],
+                "description": "Optional relationship to user.",
+                "example": {
+                  "id": "00000000-0000-0000-0000-000000000000",
+                  "type": "users"
+                },
                 "type": "object"
               }
             },
@@ -11678,30 +11762,44 @@
                 "description": "Relationship to user.",
                 "properties": {
                   "data": {
-                    "description": "Relationship to user object.",
-                    "properties": {
-                      "id": {
-                        "description": "A unique identifier that represents the user.",
-                        "example": "00000000-0000-0000-0000-000000000000",
-                        "type": "string"
-                      },
-                      "type": {
-                        "default": "users",
-                        "description": "Users resource type.",
-                        "enum": [
-                          "users"
+                    "allOf": [
+                      {
+                        "description": "Relationship to user object.",
+                        "properties": {
+                          "id": {
+                            "description": "A unique identifier that represents the user.",
+                            "example": "00000000-0000-0000-0000-000000000000",
+                            "type": "string"
+                          },
+                          "type": {
+                            "default": "users",
+                            "description": "Users resource type.",
+                            "enum": [
+                              "users"
+                            ],
+                            "example": "users",
+                            "type": "string",
+                            "x-enum-varnames": [
+                              "USERS"
+                            ]
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "type"
                         ],
-                        "example": "users",
-                        "type": "string",
-                        "x-enum-varnames": [
-                          "USERS"
-                        ]
+                        "type": "object"
+                      },
+                      {
+                        "nullable": true,
+                        "type": "object"
                       }
-                    },
-                    "required": [
-                      "id",
-                      "type"
                     ],
+                    "description": "Optional relationship to user.",
+                    "example": {
+                      "id": "00000000-0000-0000-0000-000000000000",
+                      "type": "users"
+                    },
                     "type": "object"
                   }
                 },
@@ -11923,30 +12021,44 @@
             "description": "Relationship to user.",
             "properties": {
               "data": {
-                "description": "Relationship to user object.",
-                "properties": {
-                  "id": {
-                    "description": "A unique identifier that represents the user.",
-                    "example": "00000000-0000-0000-0000-000000000000",
-                    "type": "string"
-                  },
-                  "type": {
-                    "default": "users",
-                    "description": "Users resource type.",
-                    "enum": [
-                      "users"
+                "allOf": [
+                  {
+                    "description": "Relationship to user object.",
+                    "properties": {
+                      "id": {
+                        "description": "A unique identifier that represents the user.",
+                        "example": "00000000-0000-0000-0000-000000000000",
+                        "type": "string"
+                      },
+                      "type": {
+                        "default": "users",
+                        "description": "Users resource type.",
+                        "enum": [
+                          "users"
+                        ],
+                        "example": "users",
+                        "type": "string",
+                        "x-enum-varnames": [
+                          "USERS"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "type"
                     ],
-                    "example": "users",
-                    "type": "string",
-                    "x-enum-varnames": [
-                      "USERS"
-                    ]
+                    "type": "object"
+                  },
+                  {
+                    "nullable": true,
+                    "type": "object"
                   }
-                },
-                "required": [
-                  "id",
-                  "type"
                 ],
+                "description": "Optional relationship to user.",
+                "example": {
+                  "id": "00000000-0000-0000-0000-000000000000",
+                  "type": "users"
+                },
                 "type": "object"
               }
             },
@@ -12308,30 +12420,44 @@
                     "description": "Relationship to user.",
                     "properties": {
                       "data": {
-                        "description": "Relationship to user object.",
-                        "properties": {
-                          "id": {
-                            "description": "A unique identifier that represents the user.",
-                            "example": "00000000-0000-0000-0000-000000000000",
-                            "type": "string"
-                          },
-                          "type": {
-                            "default": "users",
-                            "description": "Users resource type.",
-                            "enum": [
-                              "users"
+                        "allOf": [
+                          {
+                            "description": "Relationship to user object.",
+                            "properties": {
+                              "id": {
+                                "description": "A unique identifier that represents the user.",
+                                "example": "00000000-0000-0000-0000-000000000000",
+                                "type": "string"
+                              },
+                              "type": {
+                                "default": "users",
+                                "description": "Users resource type.",
+                                "enum": [
+                                  "users"
+                                ],
+                                "example": "users",
+                                "type": "string",
+                                "x-enum-varnames": [
+                                  "USERS"
+                                ]
+                              }
+                            },
+                            "required": [
+                              "id",
+                              "type"
                             ],
-                            "example": "users",
-                            "type": "string",
-                            "x-enum-varnames": [
-                              "USERS"
-                            ]
+                            "type": "object"
+                          },
+                          {
+                            "nullable": true,
+                            "type": "object"
                           }
-                        },
-                        "required": [
-                          "id",
-                          "type"
                         ],
+                        "description": "Optional relationship to user.",
+                        "example": {
+                          "id": "00000000-0000-0000-0000-000000000000",
+                          "type": "users"
+                        },
                         "type": "object"
                       }
                     },
@@ -12904,30 +13030,44 @@
                       "description": "Relationship to user.",
                       "properties": {
                         "data": {
-                          "description": "Relationship to user object.",
-                          "properties": {
-                            "id": {
-                              "description": "A unique identifier that represents the user.",
-                              "example": "00000000-0000-0000-0000-000000000000",
-                              "type": "string"
-                            },
-                            "type": {
-                              "default": "users",
-                              "description": "Users resource type.",
-                              "enum": [
-                                "users"
+                          "allOf": [
+                            {
+                              "description": "Relationship to user object.",
+                              "properties": {
+                                "id": {
+                                  "description": "A unique identifier that represents the user.",
+                                  "example": "00000000-0000-0000-0000-000000000000",
+                                  "type": "string"
+                                },
+                                "type": {
+                                  "default": "users",
+                                  "description": "Users resource type.",
+                                  "enum": [
+                                    "users"
+                                  ],
+                                  "example": "users",
+                                  "type": "string",
+                                  "x-enum-varnames": [
+                                    "USERS"
+                                  ]
+                                }
+                              },
+                              "required": [
+                                "id",
+                                "type"
                               ],
-                              "example": "users",
-                              "type": "string",
-                              "x-enum-varnames": [
-                                "USERS"
-                              ]
+                              "type": "object"
+                            },
+                            {
+                              "nullable": true,
+                              "type": "object"
                             }
-                          },
-                          "required": [
-                            "id",
-                            "type"
                           ],
+                          "description": "Optional relationship to user.",
+                          "example": {
+                            "id": "00000000-0000-0000-0000-000000000000",
+                            "type": "users"
+                          },
                           "type": "object"
                         }
                       },
@@ -21021,6 +21161,56 @@
           }
         },
         "readOnly": true,
+        "type": "object"
+      },
+      "NullableRelationshipToUser": {
+        "description": "Relationship to user.",
+        "properties": {
+          "data": {
+            "allOf": [
+              {
+                "description": "Relationship to user object.",
+                "properties": {
+                  "id": {
+                    "description": "A unique identifier that represents the user.",
+                    "example": "00000000-0000-0000-0000-000000000000",
+                    "type": "string"
+                  },
+                  "type": {
+                    "default": "users",
+                    "description": "Users resource type.",
+                    "enum": [
+                      "users"
+                    ],
+                    "example": "users",
+                    "type": "string",
+                    "x-enum-varnames": [
+                      "USERS"
+                    ]
+                  }
+                },
+                "required": [
+                  "id",
+                  "type"
+                ],
+                "type": "object"
+              },
+              {
+                "nullable": true,
+                "type": "object"
+              }
+            ],
+            "description": "Optional relationship to user.",
+            "example": {
+              "id": "00000000-0000-0000-0000-000000000000",
+              "type": "users"
+            },
+            "type": "object"
+          }
+        },
+        "required": [
+          "data"
+        ],
         "type": "object"
       },
       "Organization": {
@@ -38964,30 +39154,44 @@
                                 "description": "Relationship to user.",
                                 "properties": {
                                   "data": {
-                                    "description": "Relationship to user object.",
-                                    "properties": {
-                                      "id": {
-                                        "description": "A unique identifier that represents the user.",
-                                        "example": "00000000-0000-0000-0000-000000000000",
-                                        "type": "string"
-                                      },
-                                      "type": {
-                                        "default": "users",
-                                        "description": "Users resource type.",
-                                        "enum": [
-                                          "users"
+                                    "allOf": [
+                                      {
+                                        "description": "Relationship to user object.",
+                                        "properties": {
+                                          "id": {
+                                            "description": "A unique identifier that represents the user.",
+                                            "example": "00000000-0000-0000-0000-000000000000",
+                                            "type": "string"
+                                          },
+                                          "type": {
+                                            "default": "users",
+                                            "description": "Users resource type.",
+                                            "enum": [
+                                              "users"
+                                            ],
+                                            "example": "users",
+                                            "type": "string",
+                                            "x-enum-varnames": [
+                                              "USERS"
+                                            ]
+                                          }
+                                        },
+                                        "required": [
+                                          "id",
+                                          "type"
                                         ],
-                                        "example": "users",
-                                        "type": "string",
-                                        "x-enum-varnames": [
-                                          "USERS"
-                                        ]
+                                        "type": "object"
+                                      },
+                                      {
+                                        "nullable": true,
+                                        "type": "object"
                                       }
-                                    },
-                                    "required": [
-                                      "id",
-                                      "type"
                                     ],
+                                    "description": "Optional relationship to user.",
+                                    "example": {
+                                      "id": "00000000-0000-0000-0000-000000000000",
+                                      "type": "users"
+                                    },
                                     "type": "object"
                                   }
                                 },
@@ -39823,34 +40027,48 @@
                       "relationships": {
                         "description": "The relationships the incident will have with other resources once created.",
                         "properties": {
-                          "commander": {
+                          "commander_user": {
                             "description": "Relationship to user.",
                             "properties": {
                               "data": {
-                                "description": "Relationship to user object.",
-                                "properties": {
-                                  "id": {
-                                    "description": "A unique identifier that represents the user.",
-                                    "example": "00000000-0000-0000-0000-000000000000",
-                                    "type": "string"
-                                  },
-                                  "type": {
-                                    "default": "users",
-                                    "description": "Users resource type.",
-                                    "enum": [
-                                      "users"
+                                "allOf": [
+                                  {
+                                    "description": "Relationship to user object.",
+                                    "properties": {
+                                      "id": {
+                                        "description": "A unique identifier that represents the user.",
+                                        "example": "00000000-0000-0000-0000-000000000000",
+                                        "type": "string"
+                                      },
+                                      "type": {
+                                        "default": "users",
+                                        "description": "Users resource type.",
+                                        "enum": [
+                                          "users"
+                                        ],
+                                        "example": "users",
+                                        "type": "string",
+                                        "x-enum-varnames": [
+                                          "USERS"
+                                        ]
+                                      }
+                                    },
+                                    "required": [
+                                      "id",
+                                      "type"
                                     ],
-                                    "example": "users",
-                                    "type": "string",
-                                    "x-enum-varnames": [
-                                      "USERS"
-                                    ]
+                                    "type": "object"
+                                  },
+                                  {
+                                    "nullable": true,
+                                    "type": "object"
                                   }
-                                },
-                                "required": [
-                                  "id",
-                                  "type"
                                 ],
+                                "description": "Optional relationship to user.",
+                                "example": {
+                                  "id": "00000000-0000-0000-0000-000000000000",
+                                  "type": "users"
+                                },
                                 "type": "object"
                               }
                             },
@@ -39861,7 +40079,7 @@
                           }
                         },
                         "required": [
-                          "commander"
+                          "commander_user"
                         ],
                         "type": "object"
                       },
@@ -40123,30 +40341,44 @@
                               "description": "Relationship to user.",
                               "properties": {
                                 "data": {
-                                  "description": "Relationship to user object.",
-                                  "properties": {
-                                    "id": {
-                                      "description": "A unique identifier that represents the user.",
-                                      "example": "00000000-0000-0000-0000-000000000000",
-                                      "type": "string"
-                                    },
-                                    "type": {
-                                      "default": "users",
-                                      "description": "Users resource type.",
-                                      "enum": [
-                                        "users"
+                                  "allOf": [
+                                    {
+                                      "description": "Relationship to user object.",
+                                      "properties": {
+                                        "id": {
+                                          "description": "A unique identifier that represents the user.",
+                                          "example": "00000000-0000-0000-0000-000000000000",
+                                          "type": "string"
+                                        },
+                                        "type": {
+                                          "default": "users",
+                                          "description": "Users resource type.",
+                                          "enum": [
+                                            "users"
+                                          ],
+                                          "example": "users",
+                                          "type": "string",
+                                          "x-enum-varnames": [
+                                            "USERS"
+                                          ]
+                                        }
+                                      },
+                                      "required": [
+                                        "id",
+                                        "type"
                                       ],
-                                      "example": "users",
-                                      "type": "string",
-                                      "x-enum-varnames": [
-                                        "USERS"
-                                      ]
+                                      "type": "object"
+                                    },
+                                    {
+                                      "nullable": true,
+                                      "type": "object"
                                     }
-                                  },
-                                  "required": [
-                                    "id",
-                                    "type"
                                   ],
+                                  "description": "Optional relationship to user.",
+                                  "example": {
+                                    "id": "00000000-0000-0000-0000-000000000000",
+                                    "type": "users"
+                                  },
                                   "type": "object"
                                 }
                               },
@@ -41208,30 +41440,44 @@
                               "description": "Relationship to user.",
                               "properties": {
                                 "data": {
-                                  "description": "Relationship to user object.",
-                                  "properties": {
-                                    "id": {
-                                      "description": "A unique identifier that represents the user.",
-                                      "example": "00000000-0000-0000-0000-000000000000",
-                                      "type": "string"
-                                    },
-                                    "type": {
-                                      "default": "users",
-                                      "description": "Users resource type.",
-                                      "enum": [
-                                        "users"
+                                  "allOf": [
+                                    {
+                                      "description": "Relationship to user object.",
+                                      "properties": {
+                                        "id": {
+                                          "description": "A unique identifier that represents the user.",
+                                          "example": "00000000-0000-0000-0000-000000000000",
+                                          "type": "string"
+                                        },
+                                        "type": {
+                                          "default": "users",
+                                          "description": "Users resource type.",
+                                          "enum": [
+                                            "users"
+                                          ],
+                                          "example": "users",
+                                          "type": "string",
+                                          "x-enum-varnames": [
+                                            "USERS"
+                                          ]
+                                        }
+                                      },
+                                      "required": [
+                                        "id",
+                                        "type"
                                       ],
-                                      "example": "users",
-                                      "type": "string",
-                                      "x-enum-varnames": [
-                                        "USERS"
-                                      ]
+                                      "type": "object"
+                                    },
+                                    {
+                                      "nullable": true,
+                                      "type": "object"
                                     }
-                                  },
-                                  "required": [
-                                    "id",
-                                    "type"
                                   ],
+                                  "description": "Optional relationship to user.",
+                                  "example": {
+                                    "id": "00000000-0000-0000-0000-000000000000",
+                                    "type": "users"
+                                  },
                                   "type": "object"
                                 }
                               },
@@ -42029,30 +42275,44 @@
                             "description": "Relationship to user.",
                             "properties": {
                               "data": {
-                                "description": "Relationship to user object.",
-                                "properties": {
-                                  "id": {
-                                    "description": "A unique identifier that represents the user.",
-                                    "example": "00000000-0000-0000-0000-000000000000",
-                                    "type": "string"
-                                  },
-                                  "type": {
-                                    "default": "users",
-                                    "description": "Users resource type.",
-                                    "enum": [
-                                      "users"
+                                "allOf": [
+                                  {
+                                    "description": "Relationship to user object.",
+                                    "properties": {
+                                      "id": {
+                                        "description": "A unique identifier that represents the user.",
+                                        "example": "00000000-0000-0000-0000-000000000000",
+                                        "type": "string"
+                                      },
+                                      "type": {
+                                        "default": "users",
+                                        "description": "Users resource type.",
+                                        "enum": [
+                                          "users"
+                                        ],
+                                        "example": "users",
+                                        "type": "string",
+                                        "x-enum-varnames": [
+                                          "USERS"
+                                        ]
+                                      }
+                                    },
+                                    "required": [
+                                      "id",
+                                      "type"
                                     ],
-                                    "example": "users",
-                                    "type": "string",
-                                    "x-enum-varnames": [
-                                      "USERS"
-                                    ]
+                                    "type": "object"
+                                  },
+                                  {
+                                    "nullable": true,
+                                    "type": "object"
                                   }
-                                },
-                                "required": [
-                                  "id",
-                                  "type"
                                 ],
+                                "description": "Optional relationship to user.",
+                                "example": {
+                                  "id": "00000000-0000-0000-0000-000000000000",
+                                  "type": "users"
+                                },
                                 "type": "object"
                               }
                             },
@@ -42506,30 +42766,44 @@
                               "description": "Relationship to user.",
                               "properties": {
                                 "data": {
-                                  "description": "Relationship to user object.",
-                                  "properties": {
-                                    "id": {
-                                      "description": "A unique identifier that represents the user.",
-                                      "example": "00000000-0000-0000-0000-000000000000",
-                                      "type": "string"
-                                    },
-                                    "type": {
-                                      "default": "users",
-                                      "description": "Users resource type.",
-                                      "enum": [
-                                        "users"
+                                  "allOf": [
+                                    {
+                                      "description": "Relationship to user object.",
+                                      "properties": {
+                                        "id": {
+                                          "description": "A unique identifier that represents the user.",
+                                          "example": "00000000-0000-0000-0000-000000000000",
+                                          "type": "string"
+                                        },
+                                        "type": {
+                                          "default": "users",
+                                          "description": "Users resource type.",
+                                          "enum": [
+                                            "users"
+                                          ],
+                                          "example": "users",
+                                          "type": "string",
+                                          "x-enum-varnames": [
+                                            "USERS"
+                                          ]
+                                        }
+                                      },
+                                      "required": [
+                                        "id",
+                                        "type"
                                       ],
-                                      "example": "users",
-                                      "type": "string",
-                                      "x-enum-varnames": [
-                                        "USERS"
-                                      ]
+                                      "type": "object"
+                                    },
+                                    {
+                                      "nullable": true,
+                                      "type": "object"
                                     }
-                                  },
-                                  "required": [
-                                    "id",
-                                    "type"
                                   ],
+                                  "description": "Optional relationship to user.",
+                                  "example": {
+                                    "id": "00000000-0000-0000-0000-000000000000",
+                                    "type": "users"
+                                  },
                                   "type": "object"
                                 }
                               },

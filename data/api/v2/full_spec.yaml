@@ -1237,10 +1237,10 @@ components:
       description: The relationships the incident will have with other resources once
         created.
       properties:
-        commander:
-          $ref: '#/components/schemas/RelationshipToUser'
+        commander_user:
+          $ref: '#/components/schemas/NullableRelationshipToUser'
       required:
-      - commander
+      - commander_user
       type: object
     IncidentCreateRequest:
       description: Create request for an incident.
@@ -1497,7 +1497,7 @@ components:
       description: The incident's relationships from a response.
       properties:
         commander_user:
-          $ref: '#/components/schemas/RelationshipToUser'
+          $ref: '#/components/schemas/NullableRelationshipToUser'
         created_by_user:
           $ref: '#/components/schemas/RelationshipToUser'
         integrations:
@@ -1990,7 +1990,7 @@ components:
       description: The incident's relationships for an update request.
       properties:
         commander_user:
-          $ref: '#/components/schemas/RelationshipToUser'
+          $ref: '#/components/schemas/NullableRelationshipToUser'
         created_by_user:
           $ref: '#/components/schemas/RelationshipToUser'
         integrations:
@@ -3667,6 +3667,22 @@ components:
             $ref: '#/components/schemas/MetricsAndMetricTagConfigurations'
           type: array
       readOnly: true
+      type: object
+    NullableRelationshipToUser:
+      description: Relationship to user.
+      properties:
+        data:
+          allOf:
+          - $ref: '#/components/schemas/RelationshipToUserData'
+          - nullable: true
+            type: object
+          description: Optional relationship to user.
+          example:
+            id: 00000000-0000-0000-0000-000000000000
+            type: users
+          type: object
+      required:
+      - data
       type: object
     Organization:
       description: Organization object.
