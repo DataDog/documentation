@@ -2,7 +2,7 @@
 title: Exploring Tests
 kind: documentation
 further_reading:
-    - link: "/continuous_integration/guides/find_flaky_tests/"
+    - link: "/continuous_integration/guides/flaky_test_management/"
       tag: "Guide"
       text: "Finding Flaky Tests"
     - link: "/continuous_integration/troubleshooting/"
