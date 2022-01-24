@@ -59,7 +59,7 @@ _ “Alert me when the p99 of my application’s request latency is greater than
 
 ### Threshold Queries for SLOs (beta) 
 <div class="alert alert-warning">
-Threshold queries is in beta. Contact your CSM to request access. 
+Threshold queries are in beta. 
 </div>
 
 Enabling DDSketch-calculated globally-accurate percentiles on your distribution metrics unlocks threshold queries for SLOs where you can count the number of raw distribution metric values if they exceed or fall below a numerical threshold. So for example, you can define SLOs for the past 30 days where the p95 request latency is < 10 seconds. 
