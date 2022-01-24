@@ -25,7 +25,7 @@ Distributions provide enhanced query functionality and configuration options tha
 _“Alert me when the p99 of my application’s request latency is greater than 200 ms for the last 5 min.”_
 
   * **Threshold Queries for SLOs**:
-_“I’d like to define a 30-day SLO where the p95 of request latency is < 5 seconds”_
+    _“I’d like to define a 30-day SLO where the p95 of request latency is < 5 seconds”_
 
 
 * **Customization of tagging**: This functionality allows you to control the tagging scheme for custom metrics for which host-level granularity is not necessary (for example, transactions per second for a checkout service).
