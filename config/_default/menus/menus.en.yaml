@@ -1935,7 +1935,7 @@ main:
     url: tracing/profiler/enabling/php/
     parent: profiler_enabling
     identifier: profiler_enabling_php
-    weight: 105
+    weight: 106
   - name: Search Profiles
     url: tracing/profiler/search_profiles/
     parent: profiler
