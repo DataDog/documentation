@@ -28,7 +28,7 @@ The `ddtrace` library includes support for a number of web frameworks, including
 | Framework                 | Supported Version | Library Documentation                                              |
 | ------------------------- | ----------------- | ------------------------------------------------------------------ |
 | [asgi][3]                 | >= 2.0            | https://ddtrace.readthedocs.io/en/stable/integrations.html#asgi    |
-| [aiohttp*][4]              | >= 1.2            | https://ddtrace.readthedocs.io/en/stable/integrations.html#aiohttp |
+| [aiohttp][4]              | >= 1.2            | https://ddtrace.readthedocs.io/en/stable/integrations.html#aiohttp <br>The iaohttp integration requires additional configuration for automatic instrumentation to be applied. See the library documentation for instructions.|
 | [Bottle][5]               | >= 0.11           | https://ddtrace.readthedocs.io/en/stable/integrations.html#bottle  |
 | [CherryPy][6]            | >= 11.2.0         | https://ddtrace.readthedocs.io/en/stable/integrations.html#cherrypy|
 | [Django][7]               | >= 1.8            | https://ddtrace.readthedocs.io/en/stable/integrations.html#django  |
@@ -44,7 +44,7 @@ The `ddtrace` library includes support for a number of web frameworks, including
 | [Starlette][16]           | >= 0.13.0         | https://ddtrace.readthedocs.io/en/stable/integrations.html#starlette |
 | [Tornado][17]             | >= 4.0            | https://ddtrace.readthedocs.io/en/stable/integrations.html#tornado |
 
-* Note: This integration requires additional configuration for automatic instrumentation to be applied. Please view the library documentation for instructions.
+
 
 ### Datastore compatibility
 
