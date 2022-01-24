@@ -2,7 +2,7 @@
 title: テストの確認
 kind: documentation
 further_reading:
-  - link: /continuous_integration/guides/find_flaky_tests/
+  - link: /continuous_integration/guides/flaky_test_management/
     tag: ガイド
     text: 不安定なテストを見つける
   - link: /continuous_integration/troubleshooting/
