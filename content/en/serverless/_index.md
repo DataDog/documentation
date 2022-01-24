@@ -24,6 +24,12 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/manage-serverless-logs-datadog/"
   tag: "Blog"
   text: "Best practices for collecting and managing serverless logs"
+- link: "https://www.datadoghq.com/blog/aws-serverless-application-design/"
+  tag: "Blog"
+  text: "Designing production-ready AWS serverless applications"
+- link: "https://www.datadoghq.com/blog/well-architected-serverless-applications-best-practices/"
+  tag: "Blog"
+  text: "Best practices for building serverless applications that follow AWS's Well-Architected Framework"
 ---
 
 {{< vimeo 543362476 >}}
