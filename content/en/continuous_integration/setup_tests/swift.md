@@ -16,7 +16,6 @@ The selected Datadog site ({{< region-param key="dd_site_name" >}}) is not suppo
 </div>
 {{< /site-region >}}
 
-{{< site-region region="us,us3,us5,eu" >}}
 ## Compatibility
 
 Supported languages:
@@ -207,7 +206,7 @@ For UITests, both the test target and the application running from the UITests m
 For the following configuration settings:
  - `Boolean` variables can use any of: `1`, `0`, `true`, `false`, `YES`, or `NO`
  - `String` list variables accept a list of elements separated by `,` or `;`
- 
+
 ### Enabling auto-instrumentation
 
 `DD_ENABLE_STDOUT_INSTRUMENTATION`
@@ -282,7 +281,7 @@ DD_TAGS=key1:$FOO-v1 // expected: key1:BAR-v1
 
 **Note**: Using OpenTelemetry is only supported for Swift.
 
-Datadog Swift testing framework uses [OpenTelemetry][2] as the tracing technology under the hood. You can access the OpenTelemetry tracer using `DDInstrumentationControl.openTelemetryTracer` and use any OpenTelemetry API. For example, to add a tag or attribute:
+Datadog Swift testing framework uses [OpenTelemetry][3] as the tracing technology under the hood. You can access the OpenTelemetry tracer using `DDInstrumentationControl.openTelemetryTracer` and use any OpenTelemetry API. For example, to add a tag or attribute:
 
 {{< code-block lang="swift" >}}
 import DatadogSDKTesting
@@ -679,11 +678,10 @@ session.end()
 
 Always call `session.end()` at the end so that all the test info is flushed to Datadog.
 
-
-{{< /site-region >}}
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 [1]: https://app.datadoghq.com/organization-settings/client-tokens
 [2]: /getting_started/site/
+[3]: https://opentelemetry.io/
