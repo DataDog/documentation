@@ -10,7 +10,7 @@ further_reading:
 
 ## Overview
 
-[Security Monitoring][1] allows you to set Detection Rules that trigger auto-remediation workflows. With Datadog’s [webhook integration][2], set up webhooks to deliver payloads to the services you want to automate whenever a [Detection Rule][3] is triggered. Every webhook payload contains information about the triggering event and a custom message that can be used to initiate services downstream. Automate commands for any service that has a webhook URL. Security orchestration and automation response tools accept incoming HTTP requests and these webhooks initiate any workflow you have defined.
+[Cloud SIEM][1] allows you to set Detection Rules that trigger auto-remediation workflows. With Datadog’s [webhook integration][2], set up webhooks to deliver payloads to the services you want to automate whenever a [Detection Rule][3] is triggered. Every webhook payload contains information about the triggering event and a custom message that can be used to initiate services downstream. Automate commands for any service that has a webhook URL. Security orchestration and automation response tools accept incoming HTTP requests and these webhooks initiate any workflow you have defined.
 
 Choose a security scenario below to begin automating remediation.
 
@@ -56,7 +56,7 @@ The following example illustrates what the relevant webhook payload could look l
 
 ## Application abuse and fraud
 
-With Datadog Security Monitoring, you can uncover patterns of [abuse or fraud][6] across your application. For example, set up a [Detection Rule][7] that is triggered when a user repeatedly attempts to purchase something in your application with invalid credit card details. Then, set up a webhook that sends a payload with remediation instructions to a service that will disable the user's credentials.
+With Datadog Cloud SIEM, you can uncover patterns of [abuse or fraud][6] across your application. For example, set up a [Detection Rule][7] that is triggered when a user repeatedly attempts to purchase something in your application with invalid credit card details. Then, set up a webhook that sends a payload with remediation instructions to a service that will disable the user's credentials.
 
 The following example illustrates what the relevant webhook payload could look like when a security signal is produced by Datadog:
 
@@ -89,10 +89,10 @@ Datadog generates the Security Signal, which details the offense as well as the 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security_platform/security_monitoring/
+[1]: /security_platform/cloud_siem/
 [2]: https://app.datadoghq.com/account/settings#integrations/webhooks
 [3]: /security_platform/detection_rules/
 [4]: https://www.datadoghq.com/blog/new-term-detection-method-datadog/
-[5]: /security_platform/security_monitoring/log_detection_rules/?tab=threshold#new-term
+[5]: /security_platform/cloud_siem/log_detection_rules/?tab=threshold#new-term
 [6]: https://www.datadoghq.com/blog/detect-abuse-of-functionality-with-datadog/
-[7]: /security_platform/security_monitoring/log_detection_rules/?tab=threshold#define-a-search-query
+[7]: /security_platform/cloud_siem/log_detection_rules/?tab=threshold#define-a-search-query

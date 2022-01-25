@@ -1,7 +1,7 @@
 {
   "cloud-workload-security": {
     "name": "Cloud Workload Security",
-    "description": "Security signals generated based file and process activity in workloads."
+    "description": "Workload activity security rules for generating events using the Datadog security Agent."
   },
   "dashboard-lists": {
     "name": "Dashboard Lists",

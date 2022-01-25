@@ -21,14 +21,10 @@ aliases:
 There are versions of datadog-lambda-java that import log4j <=2.14.0 as a transitive dependency. <a href="#upgrading">Upgrade instructions</a> are below. 
 </div>
 
-## Required setup
+## Prerequisites
 
-If not already configured:
+The [Datadog Forwarder Lambda function][2] is required to ingest AWS Lambda traces, enhanced metrics, custom metrics, and logs.
 
-- Install the [AWS integration][1]. This allows Datadog to ingest Lambda metrics from AWS. 
-- Install the [Datadog Forwarder Lambda function][2], which is required to ingest AWS Lambda traces, enhanced metrics, custom metrics, and logs. 
-
-After you have installed the [AWS integration][1] and the [Datadog Forwarder][2], follow these steps to instrument your application to send [enhanced Lambda metrics][3], logs, and traces to Datadog. 
 To fully instrument your serverless application with distributed tracing, your Java Lambda functions must be using the Java 8 Corretto (`java8.al2`) or Java 11 (`java11`) runtimes.
 
 ## Configuration
@@ -220,7 +216,6 @@ arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-java:4
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /integrations/amazon_web_services/
 [2]: /serverless/forwarder/
 [3]: /serverless/enhanced_lambda_metrics
 [4]: https://img.shields.io/maven-central/v/com.datadoghq/datadog-lambda-java

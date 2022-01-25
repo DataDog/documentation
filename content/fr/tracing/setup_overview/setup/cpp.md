@@ -41,7 +41,7 @@ Le tracing Datadog peut être activé de deux manières :
 ### Compilation avec dd-opentracing-cpp
 
 ```bash
-# Récupérer le numéro de la dernière version depuis Github.
+# Récupérer le numéro de la dernière version depuis GitHub.
 get_latest_release() {
   wget -qO- "https://api.github.com/repos/$1/releases/latest" |
     grep '"tag_name":' |

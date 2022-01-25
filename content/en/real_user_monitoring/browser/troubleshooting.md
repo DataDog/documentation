@@ -100,6 +100,14 @@ If an event or a request goes beyond any of the following limitations, it is rej
 | Maximum event size                       | 256 KB       |
 | Maximum intake payload size              | 5 MB         |
 
+## Cross origin read blocking warning
+
+On Chromium based browsers, when the Browser RUM SDK sends data to the Datadog intake, a CORB warning is printed in the console:
+
+`Cross-Origin Read Blocking (CORB) blocked cross-origin response`
+
+The warning is shown because the intake returns a non-empty JSON object. This behavior is a reported [Chromium issue][7]. It does not impact the SDK and can safely be ignored.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -110,3 +118,4 @@ If an event or a request goes beyond any of the following limitations, it is rej
 [4]: /real_user_monitoring/faq/proxy_rum_data/?tab=npm
 [5]: /real_user_monitoring/faq/content_security_policy/
 [6]: /real_user_monitoring/browser/data_collected/?tab=session
+[7]: https://bugs.chromium.org/p/chromium/issues/detail?id=1255707

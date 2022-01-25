@@ -22,9 +22,10 @@ further_reading:
 
 ## Runtime metrics compatibility
 
-- .NET Framework 4.5+ 
+- .NET Framework 4.6.1+ 
 - .NET Core 3.1
 - .NET 5
+- .NET 6
  
 ## Automatic configuration
 
