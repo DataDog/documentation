@@ -6,7 +6,7 @@ kind: guide
 {{< img src="serverless/java-lambda-tracing.png" alt="Monitor Java Lambda Functions with Datadog" style="width:100%;">}}
 
 <div class="alert alert-danger">
-There are versions of datadog-lambda-java that import log4j <=2.14.0 as a transitive dependency. <a href="#upgrading">Upgrade instructions</a> are below. 
+Some older versions of <code>datadog-lambda-java</code> import <code>log4j <=2.14.0</code> as a transitive dependency. <a href="#upgrading">Upgrade instructions</a> are below. 
 </div>
 
 ## Prerequisites
@@ -48,7 +48,6 @@ dependencies {
 
 ### Instrument
 
-Follow these steps to instrument the function:
 
 1. Install the Datadog Lambda Layer on your function. The latest `VERSION` is `{{< latest-lambda-layer-version layer="dd-trace-java" >}}`.
 
@@ -83,7 +82,7 @@ Follow these steps to instrument the function:
 
 ### Subscribe
 
-Subscribe the Datadog Forwarder Lambda function to each of your function’s log groups, in order to send metrics, traces, and logs to Datadog.
+Subscribe the Datadog Forwarder Lambda function to each of your function’s log groups. This enables you to send metrics, traces, and logs to Datadog.
 
 1. [Install the Datadog Forwarder if you haven't][2].
 2. [Subscribe the Datadog Forwarder to your function's log groups][5].
@@ -101,7 +100,7 @@ To create a Datadog monitor on Java Lambda function cold starts, follow the [mon
 
 ### Tag
 
-Although it's optional, Datadog recommends tagging you serverless applications with the `env`, `service`, and `version` tags following the [unified service tagging documentation][8].
+Although it is optional, Datadog recommends tagging your serverless applications with the reserved tags `env`, `service`, and `version`. For more information about reserved tags, see the [Unified Service Tagging documentation][8].
 
 ## Explore
 
@@ -109,7 +108,7 @@ After configuring your function following the steps above, view your metrics, lo
 
 ### Monitor custom business logic
 
-If you would like to submit a custom metric, see the sample code below:
+To submit a custom metric, see the sample code below:
 
 ```java
 public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, APIGatewayV2ProxyResponseEvent> {
@@ -141,22 +140,22 @@ See the [custom metrics documentation][10] for more information on custom metric
 
 To automatically connect Java Lambda function logs and traces, see [Connecting Java Logs and Traces][11] for instructions.
 
-<div class="alert alert-info"> Failing to use the correct Java runtime can result in errors like, "Error opening zip file or JAR manifest missing : /opt/java/lib/dd-java-agent.jar" Make sure to use java8.al2 or java11 as runtime as described above. </div>
+<div class="alert alert-info"> Failing to use the correct Java runtime can result in errors, for example: <code>Error opening zip file or JAR manifest missing : /opt/java/lib/dd-java-agent.jar</code>. Make sure to use <code>java8.al2</code> or <code>java11</code> as your runtime, as described above. </div>
 
 ## Upgrading
 
-Apache Foundation has announced that log4j, a popular Java logging library, is [vulnerable to remote code execution][12].
+The Apache Foundation has announced that log4j, a popular Java logging library, is [vulnerable to remote code execution][12].
 Some versions of `datadog-lambda-java` include a transitive dependency on log4j that may be vulnerable. The vulnerable versions are:
 
 -  `<=0.3.3`
 -  `1.4.0`
 
-The latest version of datadog-lambda java is ![Maven Cental][4]. Use this version (omitting the preceeding `v`) when following the upgrading instructions below.
+The latest version of `datadog-lambda-java` is ![Maven Cental][4]. Use this version (omitting the preceeding `v`) when following the upgrading instructions below.
 
 If you do not wish to upgrade to `1.4.x`, `0.3.x` is updated with the latest log4j security patches as well. 
-You may find the latest version of `0.3.x` in the [datadog-lambda-java repository][13].
+You may find the latest version of `0.3.x` in the [`datadog-lambda-java` repository][13].
 
-The version of the `datadog-lambda-java` dependency in your Lambda function is set in `pom.xml` or `build.gradle` depending on whether you are using Maven or Gradle, respectively.
+The version of the `datadog-lambda-java` dependency in your Lambda function is set in `pom.xml` (Maven) or `build.gradle` (Gradle).
 
 {{< tabs >}}
 {{% tab "Maven" %}}
@@ -172,7 +171,7 @@ Your `pom.xml` file contains a section similar to the following:
 ```
 
 Replace `VERSION` with the latest version of `datadog-lambda-java` (available above). 
-Then redeploy your lambda function.
+Then redeploy your Lambda function.
 
 {{% /tab %}}
 
@@ -187,12 +186,12 @@ dependencies {
 ```
 
 Replace `VERSION` with the latest version of `datadog-lambda-java` (available above). 
-Then redeploy your lambda function.
+Then redeploy your Lambda function.
 
 {{% /tab %}}
 {{< /tabs>}}
 
-If you are upgrading from 0.3.x to 1.4.x and you wish to use the `dd-trace-java` tracer, find the reference to the `dd-trace-java` lambda layer and change it to:
+If you are upgrading from 0.3.x to 1.4.x and you wish to use the `dd-trace-java` tracer, find the reference to the `dd-trace-java` Lambda layer and change it to:
 
 ```
 arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-java:4
