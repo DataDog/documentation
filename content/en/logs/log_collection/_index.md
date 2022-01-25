@@ -132,7 +132,7 @@ Use the [site][13] selector dropdown on the right side of the page to see suppor
 | US   | TCP and TLS | `functions-intake.logs.datadoghq.com`   | 443          | Used by Azure functions to send logs in raw, Syslog, or JSON format over an SSL-encrypted TCP connection. **Note**: This endpoint may be useful with other cloud providers. |
 | US   | TCP and TLS | `lambda-intake.logs.datadoghq.com`      | 443          | Used by Lambda functions to send logs in raw, Syslog, or JSON format over an SSL-encrypted TCP connection.                                                                  |
 
-[1]: /api/v1/logs/#send-logs
+[1]: /api/latest/logs/#send-logs
 [2]: /agent/logs/#send-logs-over-https
 {{< /site-region >}}
 
@@ -147,7 +147,7 @@ Use the [site][13] selector dropdown on the right side of the page to see suppor
 | EU   | TCP and TLS | `functions-intake.logs.datadoghq.eu`   | 443  | Used by Azure functions to send logs in raw, Syslog, or JSON format over an SSL-encrypted TCP connection. **Note**: This endpoint may be useful with other cloud providers. |
 | EU   | TCP and TLS | `lambda-intake.logs.datadoghq.eu`      | 443  | Used by Lambda functions to send logs in raw, Syslog, or JSON format over an SSL-encrypted TCP connection.                                                                  |
 
-[1]: /api/v1/logs/#send-logs
+[1]: /api/latest/logs/#send-logs
 [2]: /agent/logs/#send-logs-over-https
 {{< /site-region >}}
 
@@ -159,7 +159,7 @@ Use the [site][13] selector dropdown on the right side of the page to see suppor
 | US3  | HTTPS | `lambda-http-intake.logs.us3.datadoghq.com` | 443  | Used by Lambda functions to send logs in raw, Syslog, or JSON format over HTTPS.                                         |
 | US3  | HTTPS | `agent-http-intake.logs.us3.datadoghq.com`  | 443  | Used by the Agent to send logs in JSON format over HTTPS. See the [Host Agent Log collection documentation][2].          |
 
-[1]: /api/v1/logs/#send-logs
+[1]: /api/latest/logs/#send-logs
 [2]: /agent/logs/#send-logs-over-https
 
 {{< /site-region >}}
@@ -172,7 +172,7 @@ Use the [site][13] selector dropdown on the right side of the page to see suppor
 | US5  | HTTPS | `lambda-http-intake.logs.us5.datadoghq.com` | 443  | Used by Lambda functions to send logs in raw, Syslog, or JSON format over HTTPS.                                         |
 | US5  | HTTPS | `agent-http-intake.logs.us5.datadoghq.com`  | 443  | Used by the Agent to send logs in JSON format over HTTPS. See the [Host Agent Log collection documentation][2].          |
 
-[1]: /api/v1/logs/#send-logs
+[1]: /api/latest/logs/#send-logs
 [2]: /agent/logs/#send-logs-over-https
 
 {{< /site-region >}}
@@ -185,7 +185,7 @@ Use the [site][13] selector dropdown on the right side of the page to see suppor
 | US1-FED | HTTPS | `lambda-http-intake.logs.ddog-gov.datadoghq.com` | 443  | Used by Lambda functions to send logs in raw, Syslog, or JSON format over HTTPS.                                         |
 | US1-FED | HTTPS | `agent-http-intake.logs.ddog-gov.datadoghq.com`  | 443  | Used by the Agent to send logs in JSON format over HTTPS. See the [Host Agent Log collection documentation][2].          |
 
-[1]: /api/v1/logs/#send-logs
+[1]: /api/latest/logs/#send-logs
 [2]: /agent/logs/#send-logs-over-https
 
 {{< /site-region >}}
@@ -199,7 +199,7 @@ Any custom process or logging library able to forward logs through **TCP** or **
 
 You can send logs to Datadog platform over HTTP. Refer to the [Datadog Log HTTP API documentation][1] to get started.
 
-[1]: /api/v1/logs/#send-logs
+[1]: /api/latest/logs/#send-logs
 {{% /tab %}}
 {{% tab "TCP" %}}
 
