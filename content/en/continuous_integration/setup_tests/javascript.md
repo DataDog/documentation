@@ -148,7 +148,9 @@ DD_ENV=ci DD_SERVICE=my-ui-app npm test
 
 ### Add extra tags
 
-If you want to add extra information to your tests, like responsible team or others, you may do so by using `cy.task('dd:addTags', { yourTags: 'here' })` within your test or hooks. For example:
+To add additional information to your tests such as the responsible team, use `cy.task('dd:addTags', { yourTags: 'here' })` in your test or hooks. 
+
+For example:
 
 {{< code-block lang="javascript">}}
 beforeEach(() => {
@@ -248,7 +250,9 @@ If you are running tests in non-supported CI providers or with no `.git` folder,
 [Mocha >=9.0.0][8] uses an ESM-first approach to load test files. That means that if ES modules are used (for example, by defining test files with the `.mjs` extension), _the instrumentation is limited_. Tests are detected, but there isn't visibility into your test. For more information about ES modules, see the [NodeJS documentation][9].
 
 ### Browser tests
-The JavaScript tracer does not support browsers, so if you run browser tests with `mocha` or `jest`, there isn't visibility on the browser. For `cypress`, `dd-trace` provides visibility on the node process running the test, but not on the browser itself. If you want visibility on the browser, consider using [Real User Monitoring][10].
+The JavaScript tracer does not support browsers, so browser tests with `mocha` or `jest` do not provide visibility on the browser. For tests with `cypress`, `dd-trace` provides visibility on the node process running the test, but not on the browser. 
+
+If you want visibility on the browser, consider [Real User Monitoring][10].
 
 ## Best practices
 
