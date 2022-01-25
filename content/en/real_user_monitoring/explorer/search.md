@@ -87,6 +87,6 @@ For example, if your facet name is **url** and you want to filter on the **url**
 [4]: /real_user_monitoring/reactnative/
 [5]: /real_user_monitoring/explorer/search_syntax/
 [6]: /dashboards/guide/custom_time_frames
-[7]: /real_user_monitoring/events/
-[8]: /real_user_monitoring/rum_analytics/
+[7]: /real_user_monitoring/explorer/events/
+[8]: /real_user_monitoring/explorer/analytics/
 [9]: /real_user_monitoring/explorer/

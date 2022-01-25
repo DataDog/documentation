@@ -107,7 +107,7 @@ For the remaining visualization options, click on the graph and click **View eve
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /real_user_monitoring/explorer/
-[2]: /real_user_monitoring/events/
+[2]: /real_user_monitoring/explorer/events/
 [3]: /logs/explorer/facets/
-[4]: /real_user_monitoring/saved_views/
+[4]: /real_user_monitoring/explorer/saved_views/
 [5]: /real_user_monitoring/explorer/search#setup-facets-and-measures
