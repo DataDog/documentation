@@ -25,9 +25,9 @@ Above your graphs, you can specify the timeframe and graph size.
 
 {{< img src="metrics/explorer/graphs.png" alt="Metrics Explorer" style="width:80%;" >}}
 
-**Note**: 
-* The **Calculate as count where applicable** check box appears for metrics with the `RATE` type.
-* Metrics that have not reported within the last 24 hours will not appear int eh drop down, but are still graphable by manually entering the metric name or full query. 
+**Note**: The **Calculate as count where applicable** check box appears for metrics with the `RATE` type.
+
+Metrics that are not reported in the last 24 hours do not appear in the drop down menu. You can add these metrics to your graphs manually by entering the metric name or full query. 
 
 ### Scope
 
