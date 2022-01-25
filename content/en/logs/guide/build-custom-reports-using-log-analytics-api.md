@@ -32,8 +32,6 @@ The following examples are covered in this guide:
 
 - This guide also assumes that you have a terminal with `curl`.
 
-**Note:** If you are in the Datadog EU site, use https://api.datadoghq.eu/api/  as the endpoint.
-
 ## Examples
 
 ### Getting counts

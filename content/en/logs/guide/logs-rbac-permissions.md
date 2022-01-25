@@ -19,7 +19,6 @@ Once you've created [RBAC roles for logs][1], assign or remove [permissions][2] 
 
 Assign or remove permission to a role directly by [updating the role on the Datadog site][1].
 
-{{< img src="account_management/rbac/logs_permissions.png" alt="Logs Permissions" style="width:75%;" >}}
 
 [1]: https://app.datadoghq.com/access/roles
 {{% /tab %}}
@@ -201,6 +200,17 @@ For `service:ci-cd` logs that are rehydrated from the `Prod Archive`, note the f
 
 * If you **do not** use the [Log Read Index Data](#logs_read_index_data) legacy permission, these logs are accessible for `CI-CD` role members.
 * If you **do** use the [Log Read Index Data](#logs_read_index_data) legacy permission, these logs are not accessible for `CI-CD` role members, as the resulting historical view is restricted to `PROD` and `ADMIN` role members.
+
+### `logs_public_config_api`
+
+Datadog has deprecated the `logs_public_config_api` permission. 
+
+Five separate permissions control the ability to view, create, or modify log configuration through the Datadog API:
+* `logs_generate_metrics`
+* `logs_modify_indexes`
+* `logs_write_archives`
+* `logs_write_pipelines`
+* `user_access_manage`
 
 ## Log data access
 

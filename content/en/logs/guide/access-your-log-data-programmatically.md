@@ -32,8 +32,6 @@ The following examples are covered in this guide:
 
 - This guide features `curl` examples. Install [curl][4] if you do not have it installed, or reference additional language examples for this API endpoint in the [Logs API][1].
 
-**Note:** If you are in the Datadog EU site, use https://api.datadoghq.eu/api/  as the endpoint.
-
 ## Examples
 
 ### Basic search
