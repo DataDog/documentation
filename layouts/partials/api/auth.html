@@ -5,7 +5,6 @@
 
 <!-- Get RBAC scopes (represented by x-permission field in full-spec api data) -->
 {{ $rbac_scope := index $endpoint.action "x-permission" }}
-
 {{ if $rbac_scope }}
     {{ $base_url := "account_management/rbac/permissions/" | absLangURL }}
     {{ $slug := (replace $rbac_scope "OR(" "") }}
@@ -19,7 +18,7 @@
 {{ $authZ := slice }}
 {{ range $endpoint.action.security }}
   {{ range $sec_key, $sec_val := . }}
-    {{ if eq $sec_key "AuthZ" }}
+    {{ if and (eq $sec_key "AuthZ") (gt (len .) 0) }}
       {{ $authZ = . }}
       {{ $oauth_scope_name := delimit . ", " }}
       {{ $slug := (replaceRE " " "-" ($tag.name | humanize | lower)) }}
@@ -49,12 +48,14 @@
                     <div class="col-12">
                         <div class="row">
                             <div class="col-4 column">
-                                {{ .scope_type }}
+                                <p>{{ .scope_type }}</p>
                             </div>
                             <div class="col-8 column">
-                                <a href="{{ .href }}">
-                                    <code>{{ .scope_name }}</code>
-                                </a>
+                                <p>
+                                    <a href="{{ .href }}">
+                                        <code>{{ .scope_name }}</code>
+                                    </a>
+                                </p>
                             </div>
                         </div>
                     </div>
