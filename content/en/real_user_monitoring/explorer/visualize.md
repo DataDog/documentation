@@ -24,7 +24,7 @@ The information you search for is displayed in columns. You can manage the follo
 
 By default, RUM events in the list visualization are organized by timestamp, with the most recent events listed first. You can sort events in any way you want, such as with facets. Surface RUM events with the lowest or highest value for a measure first, then sort your events lexicographically for the unique value of a facet. This orders a column according to the facet.
 
-While you can add attributes and tags in columns, Datadog recommends sorting the table if you have [declared a facet][3] first. You can add non-faceted attributes in the columns but it may not sort correctly.
+While you can add attributes and tags in columns, Datadog recommends sorting the table if you have [declared a facet][3] first. To see the value of a custom attribute for a line item on the table, you can add non-faceted attributes in the columns, but they may not sort correctly.
 
 The RUM events table configuration is stored with additional elements of your troubleshooting context in [Saved Views][4].
 
