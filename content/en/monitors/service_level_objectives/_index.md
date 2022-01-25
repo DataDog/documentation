@@ -193,10 +193,12 @@ Status corrections are configurable through the UI, the [SLO status corrections 
 To access SLO status corrections in the UI:
 
 1. Create a new SLO or click on an existing one.
-2. Navigate to an SLO’s detailed side panel view.
+2. Navigate to an SLO’s details side panel view.
 3. Under the gear icon, select **Correct Status** to access the **Status Corrections** creation modal.
-4. Select the **Time Correction Window**, **Correction Type**, and add **Notes**.
-5. Click **Apply Correction**.
+4. Choose between `One-Time` and `Recurring` in the **Select the Time Correction Window**, and specify the time period you which to correct.
+5. Select a **Correction Type**.
+6. Optionally add **Notes**.
+7. Click **Apply Correction**.
 
 To view, edit, and delete existing status corrections, click on the **Corrections** tab at the top of an SLO’s detailed side panel view. 
 
