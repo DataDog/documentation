@@ -2,26 +2,67 @@
 {{ $endpoint := .endpoint }}
 {{ $securitySchemes := .securitySchemes }}
 {{ $tag := .tag }}
+{{ $slug := (replaceRE " " "-" ($tag.name | humanize | lower)) }}
+{{ $endpoint_auth_array := slice }}
 
-<!-- Get RBAC scopes (represented by x-permission field) -->
-{{ $rbacPermission := index $endpoint.action "x-permission" }}
+<!-- Get RBAC scopes (represented by x-permission field in full-spec api data) -->
+{{ $rbac_scope := index $endpoint.action "x-permission" }}
 
-<!-- Get OAuth Scopes -->
+{{ if $rbac_scope }}
+    {{ $base_url := "account_management/rbac/permissions/" | absLangURL }}
+    {{ $href := (print $base_url "#" $slug) }}
+    {{ $rbac_dict := (dict "scope_type" "RBAC" "scope_name" $rbac_scope "href" $href) }}
+    {{ $endpoint_auth_array = $endpoint_auth_array | append $rbac_dict }}
+{{ end }}
+
+<!-- Get OAuth Scopes (represented by AuthZ field in full-spec api data) -->
 {{ $authZ := slice }}
 {{ range $endpoint.action.security }}
   {{ range $sec_key, $sec_val := . }}
     {{ if eq $sec_key "AuthZ" }}
       {{ $authZ = . }}
+      {{ $oauth_scope_name := delimit . ", " }}
+      {{ $base_url := "api/latest/scopes/" | absLangURL }}
+      {{ $href := (print $base_url "#" $slug) }}
+      {{ $oauth_dict := (dict "scope_type" "OAuth2" "scope_name" $oauth_scope_name "href" $href) }}
+      {{ $endpoint_auth_array = $endpoint_auth_array | append $oauth_dict }}
     {{ end }}
   {{ end }}
 {{ end }}
 
-{{ if or ($rbacPermission) ($authZ) }}
-    {{ $permissions_object := }}
-    {{ $slug := (replaceRE " " "-" ($tag.name | humanize | lower)) }}
+{{ if gt (len $endpoint_auth_array) 0 }}
     <h3 class="mb-2">Authorization</h3>
 
     <div class="schema-table row">
+        <div class="col-12">
+            <div class="row table-header">
+                <div class="col-4 column">
+                  <p class="font-semibold">{{ i18n "type" }}</p>
+                </div>
+                <div class="col-8 column">
+                  <p class="font-semibold">Required Scopes</p>
+                </div>
+            </div>
+            {{ range $endpoint_auth_array }}
+                <div class="row first-row">
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-4 column">
+                                {{ .scope_type }}
+                            </div>
+                            <div class="col-8 column">
+                                <a href="{{ .href }}">
+                                    <code>{{ .scope_name }}</code>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {{ end }}
+        </div>
+    </div>
+
+    {{/*<div class="schema-table row">
         <div class="col-12">
             <div class="row table-header">
                 <div class="col-4 column">
@@ -33,20 +74,17 @@
             </div>
             <div class="row">
                 <div class="col-12 column">
-                    <div class="row first-row">
-                        <div class="col-4 column">
-                            {{ with $authZ }}
-                                <p>OAuth2</p>
-                            {{ end }}
+                    {{ range $endpoint_auth_array }}
+                        <div class="row">
+                            <div class="col-4 column">
+                                <p>{{ .scope_type }}</p>
+                            </div>
+                            <div class="col-8 column">
+                                Test
+                            </div>
                         </div>
-                        <div class="col-8 column">
-                            <p>
-                                OAuth scopes: <code>{{ delimit . ", "}}</code> <a href="{{ "api/latest/scopes/" | absLangURL }}#{{ $slug }}">scope</a>
-                            </p>
-                        </div>
-                    </div>
+                    {{ end }}
                 </div>
             </div>
-        </div>
-    </div>
+    </div>*/}}
 {{ end }}
