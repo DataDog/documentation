@@ -128,6 +128,17 @@ def security_rules(content, content_dir):
                     # we need to get the path relative to the repo root for comparisons
                     extract_dir, relative_path = str(p.parent).split(f"/{content['repo_name']}/")
                     # lets build up this categorization for filtering purposes
+
+                    # previous categorization
+                    if relative_path.startswith('configuration'):
+                        page_data['rule_category'].append('Cloud Configuration')
+                    elif relative_path.startswith('runtime'):
+                        if 'compliance' in relative_path:
+                            page_data['rule_category'].append('Infrastructure Configuration')
+                        else:
+                            page_data['rule_category'].append('Workload Security')
+
+                    # new categorization
                     if 'security-monitoring' in relative_path:
                         page_data['rule_category'].append('Log Detection')
 

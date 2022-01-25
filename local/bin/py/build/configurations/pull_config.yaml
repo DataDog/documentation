@@ -601,6 +601,16 @@
     - action: security-rules
       branch: main
       globs:
+        # old
+        - "configuration/*.json"
+        - "configuration/*.yaml"
+        - "configuration/*.yml"
+        - "configuration/*.md"
+        - "runtime/**/*.json"
+        - "runtime/**/*.yaml"
+        - "runtime/**/*.yml"
+        - "runtime/**/*.md"
+        # new
         - "workload-security/signal-rules/*.yaml"
         - "workload-security/signal-rules/*.md"
         - "security-monitoring/*.json"
