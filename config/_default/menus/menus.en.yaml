@@ -2400,6 +2400,11 @@ main:
     parent: log_management
     identifier: log_security
     weight: 7
+  - name: Troubleshooting
+    url: logs/troubleshooting
+    parent: log_management
+    identifier: log_troubleshooting
+    weight: 8  
   - name: Security Platform
     url: security_platform/
     pre: security-platform
