@@ -21,13 +21,8 @@ aliases:
     - /integrations/cloud_foundry/
 doc_link: /integrations/pivotal_platform/
 integration_id: "pivotal-platform"
-is_beta: true
-# ddtype: check
+ddtype: check
 ---
-
-{{< beta-callout url="https://google.com">}}
-  Datadog Apps is currently in beta, but you can easily request access! Use this form to submit your request today. Once approved, you can start getting creative and develop your App for you, your organization, or for publishing to the entire Datadog community alongside our other great Datadog Apps!
-{{< /beta-callout >}}
 
 ## Overview
 
