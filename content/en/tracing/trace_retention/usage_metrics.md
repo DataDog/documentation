@@ -1,6 +1,8 @@
 ---
 title: Usage Metrics
 kind: documentation
+aliases:
+    - /tracing/trace_retention_and_ingestion/usage_metrics/
 description: "Learn how to monitor your Tracing without Limits usage."
 ---
 

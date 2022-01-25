@@ -1801,14 +1801,14 @@ main:
     parent: trace_ingestion
     identifier: ingestion_control_page
     weight: 402
-  - name: Trace Retention and Ingestion
-    url: tracing/trace_retention_and_ingestion/
+  - name: Trace Retention
+    url: tracing/trace_retention/
     parent: tracing
-    identifier: trace_retention_and_ingestion
+    identifier: trace_retention
     weight: 5
   - name: Usage Metrics
-    url: tracing/trace_retention_and_ingestion/usage_metrics/
-    parent: trace_retention_and_ingestion
+    url: tracing/trace_retention/usage_metrics/
+    parent: trace_retention
     identifier: trace_retention_and_ingestion_usage_metrics
     weight: 501
   - name: Generate Metrics from Spans
@@ -2404,7 +2404,7 @@ main:
     url: logs/troubleshooting
     parent: log_management
     identifier: log_troubleshooting
-    weight: 8  
+    weight: 8
   - name: Security Platform
     url: security_platform/
     pre: security-platform
