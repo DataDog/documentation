@@ -9,7 +9,7 @@ further_reading:
 
 ## Overview
 
-Visualizations define the outcomes of the filters and aggregates displayed in the [RUM Explorer][1]. Select the relevant visualization type for you to surface the information you need under the search query.
+Visualizations define the outcomes of the filters and aggregates displayed in the [RUM Explorer][1]. Select the relevant visualization type to surface the information you need under the search query.
 
 ## Lists
 
@@ -17,12 +17,12 @@ Lists are paginated results of events and are ideal when individual results matt
 
 {{< img src="real_user_monitoring/explorer/visualize/rum_explorer_lists.mp4" alt="Lists in the RUM Explorer" video="true" style="width:70%;" >}}
 
-The information you search for is displayed in columns. You can manage these table columns with:
+The information you search for is displayed in columns. You can manage the following:
 
-- The table with available interactions in the first row. You can sort, rearrange, and remove columns.
+- The table with available interactions on the first row. You can sort, rearrange, and remove columns.
 - The facet panel on the left or the RUM [event side panel][2] on the right. You can add a column for a field. 
 
-By default, RUM events in the list visualization are organized by timestamp with the most recent events listed first. You can sort events in any way you want, such as with facets. Surface RUM events with the lowest or highest value for a measure first, then sort your events lexicographically for the unique value of a facet. This orders a column according to the facet.
+By default, RUM events in the list visualization are organized by timestamp, with the most recent events listed first. You can sort events in any way you want, such as with facets. Surface RUM events with the lowest or highest value for a measure first, then sort your events lexicographically for the unique value of a facet. This orders a column according to the facet.
 
 While you can add attributes and tags in columns, Datadog recommends sorting the table if you have [declared a facet][3] first. You can add non-faceted attributes in the columns but it may not sort correctly.
 
@@ -51,10 +51,10 @@ The top list includes the top ten browsers used to visit the Shopist website ove
 
 ## Nested tables
 
-Visualize the top values from up to three [facet][5] according to your chosen [measure][5] (the first measure you choose in the list) and display the value of additional measures for elements that appear in the table. Update the search query or investigate the RUM events that correspond to either dimension.
+Visualize the top values from up to three [facet][5] according to your chosen [measure][5] (the first measure you choose in the list) and display the value of additional measures for elements that appear in the table. Update the search query or investigate the RUM events corresponding to either dimension.
 
 * When there are multiple measures, the top or bottom list is determined according to the first measure.
-* The subtotal may differ from the actual sum of values in a group, since only a subset (top or bottom) is displayed. Events with a null or empty value for this dimension are not displayed as a sub-group.
+* The subtotal may differ from the actual sum of values in a group since only a subset (top or bottom) is displayed. Events with a null or empty value for this dimension are not displayed as a sub-group.
 
  **Note**: A table visualization used for one single measure and one single dimension is the same as a [top list](#top-list), just with a different display.
 

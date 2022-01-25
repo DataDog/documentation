@@ -34,7 +34,7 @@ With RUM Analytics visualizations, you can:
 
 In [RUM Analytics][1], customize your display by adding facets and measures to your search query. 
 
-1. Choose a measure or facet to graph. A measure lets you choose the aggregation function whereas a facet displays the unique count.
+1. Choose a measure or facet to graph. A measure lets you choose the aggregation function, whereas a facet displays the unique count.
 
     {{< img src="real_user_monitoring/explorer/analytics/measure_selection.png" alt="measure selection" style="width:50%;">}}
 2. Select the aggregation function for the measure you want to graph:

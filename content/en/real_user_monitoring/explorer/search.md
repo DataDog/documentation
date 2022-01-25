@@ -12,7 +12,7 @@ further_reading:
 
 ## Overview
 
-After applying a time range on the top right, you can find events with `key:value` pairs and full-text search in the RUM Explorer.
+After applying a time range on the top right, you can find events with `key:value` pairs and a full-text search in the RUM Explorer.
 
 ## Event types
 
@@ -21,7 +21,7 @@ While RUM automatically captures events, you can also capture your own events. A
 | Event Type | Retention | Description                                                                                                                                                                                                                                                               |
 |------------|-----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Session    | 30 days   | A user session begins when a user starts browsing the web application. It contains high-level information about the user (such as browser, device, and geolocation). It aggregates all RUM events collected during the user journey with a unique `session.id` attribute. |
-| View       | 30 days   | A view event is generated each time a user visits a page of the web application. While the user remains on the same page, resource, long-task, error and action events are linked to the related RUM view with the `view.id` attribute.                                   |
+| View       | 30 days   | A view event is generated each time a user visits a page of the web application. While the user remains on the same page, resource, long-task, error, and action events are linked to the related RUM view with the `view.id` attribute.                                   |
 | Action     | 30 days   | RUM action events track user interactions during a user journey and can be manually sent to monitor custom user actions.                                                                                                                                                  |
 | Error      | 30 days   | RUM collects every frontend error emitted by the browser.                                                                                                                                                                                                                 |
 | Resource   | 15 days   | A resource event is generated for images, XHR, Fetch, CSS, or JS libraries loaded on a webpage. It includes detailed loading timing information.                                                                                                                          |
@@ -41,9 +41,9 @@ For more information about searching for RUM events and using time frames, see [
 
 ## Setup facets and measures
 
-All RUM events contain attributes, which are automatically collected by the RUM SDKs and your custom attributes which are displayed on the [event side panel][7]. 
+All RUM events contain attributes, which are automatically collected by the RUM SDKs, and your custom attributes, which are displayed on the [event side panel][7]. 
 
-While most of the automatically collected attributes are indexed and faceted, your custom event attributes are not indexed and faceted by default. Index these attributes by creating a facet or measure to easily access them in your search and [Analytics][8].
+While most automatically collected attributes are indexed and faceted, your custom event attributes are not indexed and faceted by default. Index these attributes by creating a facet or measure to easily access them in your search and [Analytics][8].
 
 ### Facets
 

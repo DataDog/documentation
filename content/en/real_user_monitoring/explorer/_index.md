@@ -31,7 +31,7 @@ You can:
 
 ## Search and filter
 
-Search and filter your RUM events by typing in the search bar and selecting a visualization type underneath in the [RUM Explorer][1]. You can narrow down, broaden, and shift your focus on subsets of events you are interested in.
+Search and filter your RUM events by typing in the search bar and selecting a visualization type in the [RUM Explorer][1]. You can narrow down, broaden, and shift your focus on subsets of events you are interested in.
 
 ## Group
 

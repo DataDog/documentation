@@ -47,7 +47,7 @@ To perform a multi-character wildcard search, use the `*` symbol. For example, `
 
 Use `<`,`>`, `<=`, or `>=` to perform a search on numerical attributes. For example, retrieve all sessions with more than five errors: `@session.error.count:>5`.
 
-You can search for numerical attribute within a specific range. For example, retrieve all sessions with an error count between three and ten: `@session.error.count:[3 TO 10]`.
+You can search for a numerical attribute within a specific range. For example, retrieve all sessions with an error count between three and ten: `@session.error.count:[3 TO 10]`.
 
 ## Search examples
 
