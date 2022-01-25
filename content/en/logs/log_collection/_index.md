@@ -37,25 +37,27 @@ Consult the [list of available Datadog log collection endpoints](#logging-endpoi
 {{< tabs >}}
 {{% tab "Host" %}}
 
-The Datadog Agent is required to begin collecting logs in your host environment. See the [Datadog Agent installation instructions][1] to start collecting and forwarding logs alongside your metrics and traces.
+1. Install the [Datadog Agent][1].
+2. To enable log collection, change `logs_enabled:false` to `logs_enabled:true` in your Agent’s main configuration file (`datadog.yaml`). See the [Host Agent Log collection documentation][5] for more information and examples.
+3. **Optional** Once enabled, the Datadog Agent can be configured to [tail log files or listen for logs sent over UDP/TCP][2], [filter out logs or scrub sensitive data][3], and aggregate [multi line logs][4].
 
-Once installed, the Agent can be configured to [tail log files][2] or [listen for logs sent over UDP/TCP][2], [filter out logs][3], [scrub sensitive data][3], or aggregate [multi line logs][4].
-
-[1]: /agent/logs/
+[1]: https://app.datadoghq.com/account/settings#agent
 [2]: /agent/logs/#custom-log-collection
 [3]: /agent/logs/advanced_log_collection/#filter-logs
 [4]: /agent/logs/advanced_log_collection/#multi-line-aggregation
+[5]: /agent/logs/
 {{% /tab %}}
 
 {{% tab "Application" %}}
 
-First, complete the [Datadog Agent installation instructions][1]. The Datadog Agent is required to begin collecting logs in from your application.
-
-Once the Datadog Agent is installed and log collection is enabled, follow your application language installation instructions to configure a logger and generate logs:
+1. Install the [Datadog Agent][1].
+2. To enable log collection, change `logs_enabled:false` to `logs_enabled:true` in your Agent’s main configuration file (`datadog.yaml`). See the [Host Agent Log collection documentation][2] for more information and examples.
+3. Follow your application language installation instructions to configure a logger and start generating logs:
 
 {{< partial name="logs/logs-languages.html" >}}
 
-[1]: /agent/logs/
+[1]: https://app.datadoghq.com/account/settings#agent
+[2]: /agent/logs/
 {{% /tab %}}
 
 {{% tab "Container" %}}
