@@ -146,6 +146,22 @@ Run your tests as you normally do, specifying the environment where test are bei
 DD_ENV=ci DD_SERVICE=my-ui-app npm test
 {{< /code-block >}}
 
+### Add extra tags
+
+To add additional information to your tests such as the responsible team, use `cy.task('dd:addTags', { yourTags: 'here' })` in your test or hooks. 
+
+For example:
+
+{{< code-block lang="javascript">}}
+beforeEach(() => {
+  cy.task('dd:addTags', { 'before.each': 'certain.information' })
+})
+it('renders a hello world', () => {
+  cy.task('dd:addTags', { 'team.owner': 'ui' })
+  cy.get('.hello-world')
+    .should('have.text', 'Hello World')
+})
+{{< /code-block >}}
 
 
 [1]: https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests#Plugins-file
@@ -234,7 +250,9 @@ If you are running tests in non-supported CI providers or with no `.git` folder,
 [Mocha >=9.0.0][8] uses an ESM-first approach to load test files. That means that if ES modules are used (for example, by defining test files with the `.mjs` extension), _the instrumentation is limited_. Tests are detected, but there isn't visibility into your test. For more information about ES modules, see the [NodeJS documentation][9].
 
 ### Browser tests
-The JavaScript tracer does not support browsers, so if you run browser tests with `mocha` or `jest`, there isn't visibility within the test itself.
+The JavaScript tracer does not support browsers, so browser tests with `mocha` or `jest` do not provide visibility on the browser. For tests with `cypress`, `dd-trace` provides visibility on the node process running the test, but not on the browser. 
+
+If you want visibility on the browser, consider [Real User Monitoring][10].
 
 ## Best practices
 
@@ -253,14 +271,14 @@ Avoid this:
 })
 {{< /code-block >}}
 
-And use [`test.each`][10] instead:
+And use [`test.each`][11] instead:
 {{< code-block lang="javascript" >}}
 test.each([[1,2,3], [3,4,7]])('sums correctly %i and %i', (a,b,expected) => {
   expect(a+b).toEqual(expected)
 })
 {{< /code-block >}}
 
-For `mocha`, use [`mocha-each`][11]:
+For `mocha`, use [`mocha-each`][12]:
 {{< code-block lang="javascript" >}}
 const forEach = require('mocha-each');
 forEach([
@@ -288,5 +306,6 @@ When you use this approach, both the testing framework and CI Visibility can tel
 [7]: /tracing/setup_overview/setup/nodejs/?tab=containers#configuration
 [8]: https://github.com/mochajs/mocha/releases/tag/v9.0.0
 [9]: https://nodejs.org/api/packages.html#packages_determining_module_system
-[10]: https://jestjs.io/docs/api#testeachtablename-fn-timeout
-[11]: https://github.com/ryym/mocha-each
+[10]: /real_user_monitoring/browser/
+[11]: https://jestjs.io/docs/api#testeachtablename-fn-timeout
+[12]: https://github.com/ryym/mocha-each
