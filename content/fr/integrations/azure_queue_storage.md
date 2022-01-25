@@ -5,12 +5,13 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Surveillez des métriques clés de Stockage File d'attente Azure.
-doc_link: 'https://docs.datadoghq.com/integrations/azure_queue_storage/'
+doc_link: https://docs.datadoghq.com/integrations/azure_queue_storage/
 draft: false
 git_integration_title: azure_queue_storage
 has_logo: true
 integration_id: azure-queue-storage
 integration_title: Stockage File d'attente Microsoft Azure
+integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'
@@ -21,7 +22,7 @@ version: '1.0'
 ---
 ## Présentation
 
-Stockage File d'attente Azure est un service qui vous permet de stocker un grand nombre de messages afin de pouvoir y accéder où que vous soyez via des appels authentifiés, à l'aide du protocole HTTP ou HTTPS.
+Stockage File d'attente Azure est un service qui vous permet de stocker un grand nombre de messages afin de pouvoir y accéder où que vous soyez par l'intermédiaire d'appels authentifiés, à l'aide du protocole HTTP ou HTTPS.
 
 Recueillez des métriques de Stockage File d'attente Azure pour :
 

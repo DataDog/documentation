@@ -1,14 +1,4 @@
 docker_daemon:
-- description: Limit on CPU available to the container, expressed as percentage of
-    a core
-  integration: docker
-  interval: ''
-  metric_name: docker.cpu.limit
-  metric_type: gauge
-  orientation: '0'
-  per_unit_name: ''
-  short_name: docker.cpu.limit
-  unit_name: percent
 - description: The percent of time the CPU is executing system calls on behalf of
     processes of this container, unnormalized
   integration: docker

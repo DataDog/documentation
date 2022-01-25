@@ -200,6 +200,9 @@ A test is considered `FAILED` if it does not satisfy one or more assertions or i
 
 These reasons include the following:
 
+`CONNREFUSED`
+: No connection could be made because the target machine actively refused it.
+
 `CONNRESET`
 : The connection was abruptly closed by the remote server. Possible causes include the web server encountering an error or crashing while responding, or loss of connectivity of the web server.
 

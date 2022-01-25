@@ -291,6 +291,37 @@ spec:
 
 To see more information and additional examples of how you might configure your collector, see [the OpenTelemetry Collector configuration documentation][5].
 
+#### Running alongside the Datadog Agent
+
+If running the OpenTelemetry Collector on a host with an existing Datadog Agent, replace the Datadog exporter with an OTLP exporter pointing to the Datadog Agent:
+
+1. Enable the Datadog Agent OTLP ingest through gRPC by following the instructions in the [dedicated section](#otlp-ingest-in-datadog-agent).
+
+2. On the OpenTelemetry collector config, define an OTLP exporter pointing to the Datadog Agent endpoint. For example, if your Datadog Agent is listening on port 4317 and you are running on the same host, you may define the exporter as:
+   ```yaml
+   exporters:
+     otlp:
+       endpoint: "0.0.0.0:4317"
+       tls:
+        insecure: true
+   ```
+   When running in a containerized environment, ensure the `endpoint` setting is configured to use the appropriate hostname for the Datadog Agent.
+
+3. On the OpenTelemetry collector config, replace uses of the Datadog exporter in your metrics and traces pipelines with the OTLP exporter. For example, if you have one metrics and one traces pipeline with the Datadog exporter, use the following configuration:
+   ```yaml
+   pipelines:
+     metrics:
+      receivers: [...]
+      processors: [...]
+      exporters: [nop/1, nop/2, otlp] # replaced 'datadog' by 'otlp'
+    traces:
+      receivers: [...]
+      processors: [...]
+      exporters: [nop/3, nop/4, otlp] # replaced 'datadog' by 'otlp'
+   ```
+
+This configuration ensures consistent host metadata and centralizes the configuration for host tags and host aliases.
+
 ## OTLP ingest in Datadog Agent
 
 <div class="alert alert-warning">This functionality is beta and its behavior and configuration may change.</div>
