@@ -95,13 +95,10 @@ Select your Cloud provider below to see how to automatically collect your logs a
 
 {{< partial name="logs/logs-cloud.html" >}}
 
-Datadog integrations and log collection are tied together. Use an integration default configuration file to enable dedicated [processors][1], [parsing][2], and [facets][3] in Datadog.
+Datadog integrations and log collection are tied together. You can use an integration's default configuration file to enable dedicated [processors][1], [parsing][2], and [facets][3] in Datadog. To begin log collection with an integration:
 
-## Enabling log collection from integrations
-
-To collect logs for a given integration, uncomment the logs section in that integration's `conf.yaml` file and configure it for your environment. If you are running the Agent in a Kubernetes or Docker environment, see the dedicated [Kubernetes Log Collection][4] or [Docker Log Collection][5] documentation.
-
-Consult the [list of available supported integrations][6].
+1. Select an integration from the [Integrations page][6] and follow the setup instructions.
+2. Follow the integration's log collection instructions. This section covers how to uncomment the logs section in that integration's `conf.yaml` file and configure it for your environment.
 
 [1]: /logs/log_configuration/processors
 [2]: /logs/log_configuration/parsing
