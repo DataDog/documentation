@@ -13,11 +13,11 @@ further_reading:
 The Datadog Marketplace is a digital marketplace where Datadog Technology Partners can list their integrations, software, and services to Datadog users. 
 
 ## Join the Datadog partner network
-Before joining the Datadog Marketplace, you first need to join the [Datadog Partner Network][1] Technology Track. As a Datadog Technology Partner, you can develop an integration or create a tile only listing that includes your SaaS or services offering. 
+Before joining the Datadog Marketplace, you first need to join the [Datadog Partner Network][1] Technology Track. As a Datadog Technology Partner, you can develop an integration, a Datadog App, or create a tile only listing that includes your SaaS or services offering. 
 
-Datadog customers can then access your tile through the Datadog site either through the [Integrations page][2] or through the [Datadog Marketplace][3]. While the Integrations page includes integrations built by Datadog and Technology Partners at no cost, the Marketplace is a commercial platform for Datadog customers and Technology Partners to buy and sell a variety of offerings, including integrations, software, and services. 
+Datadog customers can then access your tile through the Datadog site either through the [Integrations page][2] or through the [Datadog Marketplace][3]. While the Integrations page includes integrations and Datadog Apps built by Datadog and Technology Partners at no cost, the Marketplace is a commercial platform for Datadog customers and Technology Partners to buy and sell a variety of offerings, including integrations, Datadog Apps, software, and services. 
 
-Follow these steps to develop and publish your Integrations page or Marketplace offering: 
+Follow these steps to develop and publish your offering on the Integrations page or Datadog Marketplace: 
 
 ## Apply for a sandbox account
 
@@ -33,7 +33,7 @@ Creating a developer sandbox may take up to one or two business days. Contact [D
 
 Once your sandbox is created, you can [invite new members][7] from your organization to collaborate with.
 
-## Develop your integration or create a Marketplace tile only listing
+## Develop your integration, app, or Marketplace tile only listing
 
 ### Resources
 
@@ -42,6 +42,7 @@ In addition to this documentation, you can learn more about developing Datadog i
 * Attend the on-demand ["Introduction to Datadog Integrations"][8] course on the [Datadog Learning Center][9].
 * Review the example pull-request in the [Marketplace repository][10] with annotations and best practices (this link is only available to Technology Partners that have completed the Marketplace Listing Agreement in the Datadog Partner Portal).
 * Explore existing integrations built by other Technology Partners in the [Integrations Extras repository][11].
+* Review the documentation on [Datadog Apps][31] if you are interested in building a custom widget that integrates external data and actions onto Datadog dashboards. 
 * Join the Marketplace Engineering Office Hours through the [Datadog public Slack][12].
 
 ### Development process
@@ -86,6 +87,11 @@ An API integration fits well for enriching and submitting data from your backend
 
 For Marketplace offerings that include a standalone SaaS or services offering, with no exchange of data, only a tile is needed. The Development Toolkit offers a command option to create tile-only scaffolding: `ddev create -t tile "<Offering Name>"`
 
+#### Datadog App
+
+Datadog Apps are custom dashboard widgets that are developed in the Datadog Developer Platform. Once your Datadog App is ready to publish, you will need to create a tile only listing on either the Marketplace or Integrations page, using the tile-only scaffolding command option from the Development Toolkit:
+`ddev create -t tile "<Offering Name>"`
+
 ### Build a bi-directional integration
 
 While pulling information from Datadog may also be useful, integrations must be bi-directional. That is, it must also push data into Datadog. 
@@ -106,7 +112,7 @@ Integrations can send the following data to Datadog:
 
 Datadog integrations can be developed for either the private [Marketplace repository][10] or open-source [integrations-extras repository][11].
 
-The process for building an integration is the same for each repository, with Marketplace offerings requiring a few more files and fields (like pricing). Remember to point to the intended repository when you clone and submit your pull request.
+The process for building an integration is the same for each repository, with Marketplace offerings requiring a few more files and fields (like pricing). Remember to point to the intended repository when you submit your pull request.
 
 Technology Partners can request access to the private Marketplace repository by emailing marketplace@datadog.com.
 
@@ -150,9 +156,9 @@ ddev config set extras /path/to/integrations-extras_directory
 ddev config set repo extras
 ```
 
-#### Tile only listing
+#### Tile only listing 
 
-For standalone software and services--or if your integration is using the Datadog API and does not contain any Python code--the Development Toolkit supports a tile-only command. 
+For standalone software, Datadog Apps, and services--or if your integration is using the Datadog API and does not contain any Python code--the Development Toolkit supports a tile-only command. 
 
 In the `marketplace` or `integrations-extras` directory you specified above, run: 
 
@@ -183,6 +189,7 @@ The ddev commands in the previous section generate a skeleton of folders and fil
 
 * Store all images used in your `README.md` file in the `images` folder. 
 * **Note:** Don't include spaces in the name of image files.
+* If you are listing on the Marketplace, do not place images in the "Overview" section of your `README.md` file.
 
 #### Manifest
 
@@ -198,7 +205,7 @@ The ddev commands in the previous section generate a skeleton of folders and fil
 
 #### Dashboards and monitors
 
-* Contain the out-of-the-box dashboards and monitors (alerts) for your integration. 
+* Contains the out-of-the-box dashboards and monitors (alerts) for your integration. 
 * You can create dashboards and monitors directly in your sandbox account and export them as JSON files. 
 * See [Dashboarding Best Practices][28] for details.
 
@@ -278,3 +285,4 @@ Email techpartners@datadoghq.com if you have any questions.
 [28]: https://datadoghq.dev/integrations-core/guidelines/dashboards/
 [29]: https://help.github.com/articles/about-codeowners/
 [30]: https://www.datadoghq.com/blog/
+[31]: /developers/datadog_apps
