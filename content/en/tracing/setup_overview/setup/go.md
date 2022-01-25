@@ -78,6 +78,9 @@ Override the default trace Agent host address for trace submission.
 : **Default**: `8125` <br>
 Override the default trace Agent port for DogStatsD metric submission.
 
+`DD_TRACE_SAMPLE_RATE`
+: Enable [Tracing without Limits][13].
+
 `DD_TAGS`
 : **Default**: [] <br>
 A list of default tags to be added to every span and profile. Tags can be separated by commas or spaces, for example: `layer:api,team:intake` or `layer:api team:intake`
@@ -231,3 +234,4 @@ extracted value is used.
 [10]: /tracing/advanced/setting_primary_tags_to_scope/#environment
 [11]: /getting_started/tracing/#environment-name
 [12]: https://github.com/openzipkin/b3-propagation
+[13]: /tracing/trace_retention_and_ingestion/
