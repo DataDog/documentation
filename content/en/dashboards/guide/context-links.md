@@ -12,7 +12,7 @@ further_reading:
 
 Dashboards are **pivots** in troubleshooting sessions, they gather data from multiple sources and have people across multiple teams to use it, an as such:
 
-* they are typically attached to a [monitor notification][2] as a preferred entry point, used as [screen board][3] to overwatch key technical or business indicators, or referenced in [runbooks][1] to provide extra context.
+* they are typically attached to a [monitor notification][2] as a preferred entry point, used as [screenboard][3] to overwatch key technical or business indicators, or referenced in [runbooks][1] to provide extra context.
 
 * they give insightful information as **snapshots** on the current state of your platform. But they also have **interactions** to get a first sense of what's going off-tracks, before enventually diving deeper with more specialised product pages.
 
@@ -153,7 +153,6 @@ And the corresponding templated link would be is `https://acme.zendesk.com/agent
 
 ### Trigger a webhook
 
-To start a runbook, see the [Azure Automation documentation][10].
 TODO
 
 
@@ -175,6 +174,6 @@ TODO
 [7]: /logs/
 [8]: https://app.datadoghq.com/logs
 [9]: https://app.datadoghq.com/rum/explorer
-[10]: https://docs.microsoft.com/en-us/azure/automation/automation-webhooks
+
 
 
