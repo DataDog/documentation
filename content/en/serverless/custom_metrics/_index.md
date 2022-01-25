@@ -191,7 +191,7 @@ For example:
 
 **Note**: If you are migrating to one of the recommended solutions, you'll need to start instrumenting your custom metrics under **new metric names** when submitting them to Datadog. The same metric name cannot simultaneously exist as both distribution and non-distribution metric types.
 
-This requires the following AWS permissions in your [Datadog IAM policy][0].
+This requires the following AWS permissions in your [Datadog IAM policy][11].
 
 | AWS Permission            | Description                                                 |
 | ------------------------- | ----------------------------------------------------------- |
@@ -226,3 +226,4 @@ Where:
 [8]: /agent/proxy/
 [9]: /serverless/forwarder/
 [10]: /metrics/
+[11]: /integrations/amazon_web_services/?tab=roledelegation#datadog-aws-iam-policy
