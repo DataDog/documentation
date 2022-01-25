@@ -140,24 +140,7 @@ If you encounter any issues, be sure to check out the [Troubleshooting][47] sect
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
-Notes:
-
-Is a pre requisite to other integrations (ELBs, etc)
-
-Section for other products -- touch points for other parts of the platform
-
-Link to getting started for Cloud SIEM
-
-Serverless
-Log Management
-UI tile page is more confusing than helpful
-
-What other products 
-
-What's next should be 'How you want to start'
-
-How are you using AWS? Why do you need it?[1]: /serverless/libraries_integrations/forwarder/
+[1]: /serverless/libraries_integrations/forwarder/
 [2]: /integrations/guide/amazon_cloudformation/
 [3]: /api/latest/aws-integration/#create-an-aws-integration
 [4]: https://awscli.amazonaws.com/v2/documentation/api/latest/reference/cloudformation/index.html
