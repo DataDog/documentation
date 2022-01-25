@@ -173,50 +173,40 @@ Add your [Datadog API key][2] to your [project environment variables][3] with th
 {{% /tab %}}
 {{% tab "GitHub Actions" %}}
 
-To run the Agent in GitHub Actions, define the Agent container under [services][1].
+To run the Agent in GitHub Actions, use the [Datadog Agent GitHub Action][1] `datadog/agent-github-action`.
 
 {{< site-region region="us" >}}
 {{< code-block lang="yaml" >}}
 jobs:
   test:
-    services:
-      datadog-agent:
-        image: gcr.io/datadoghq/agent:latest
-        ports:
-          - 8126:8126
-        env:
-          DD_API_KEY: ${{ secrets.DD_API_KEY }}
-          DD_INSIDE_CI: "true"
-          DD_HOSTNAME: "none"
     steps:
+      - name: Start the Datadog Agent locally
+        uses: datadog/agent-github-action@v1
+        with:
+          api_key: ${{ secrets.DD_API_KEY }}
       - run: make test
 {{< /code-block >}}
 {{< /site-region >}}
 {{< site-region region="us3,us5,eu" >}}
 
-Replace `<DD_SITE>` with the selected site: {{< region-param key="dd_site" code="true" >}}.
+Replace `<datadog_site>` with the selected site: {{< region-param key="dd_site" code="true" >}}.
 
 {{< code-block lang="yaml" >}}
 jobs:
   test:
-    services:
-      datadog-agent:
-        image: gcr.io/datadoghq/agent:latest
-        ports:
-          - 8126:8126
-        env:
-          DD_API_KEY: ${{ secrets.DD_API_KEY }}
-          DD_INSIDE_CI: "true"
-          DD_HOSTNAME: "none"
-          DD_SITE: "<DD_SITE>"
     steps:
+      - name: Start the Datadog Agent locally
+        uses: datadog/agent-github-action@v1
+        with:
+          api_key: ${{ secrets.DD_API_KEY }}
+          datadog_site: <datadog_site>
       - run: make test
 {{< /code-block >}}
 {{< /site-region >}}
 
 Add your [Datadog API key][2] to your [project secrets][3] with the key `DD_API_KEY`.
 
-[1]: https://docs.github.com/en/actions/guides/about-service-containers
+[1]: https://github.com/marketplace/actions/datadog-agent
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://docs.github.com/en/actions/reference/encrypted-secrets
 {{% /tab %}}
