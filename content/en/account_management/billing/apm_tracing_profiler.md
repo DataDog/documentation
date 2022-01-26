@@ -164,7 +164,7 @@ Yes. Let Datadog know if you are interested in buying the Continuous Profiler wi
 
 
 [1]: /tracing/
-[2]: /tracing/trace_search_and_analytics/
+[2]: /tracing/trace_explorer/
 [3]: /tracing/trace_retention_and_ingestion/#retention-filters
 [4]: /account_management/billing/pricing/#infrastructure-monitoring
 [5]: /account_management/billing/pricing/#apm

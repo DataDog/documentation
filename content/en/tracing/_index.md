@@ -41,7 +41,7 @@ Datadog APM & Continuous Profiler gives deep visibility into your applications w
 
 {{< img src="tracing/live_search_and_analytics/tracing_without_limits_lifecycle-0.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace Journey" >}}
 
-Traces start in your instrumented applications and flow into Datadog where we ingest 100% of traces up to 50 traces per second (per APM Host). If needed for high-throughput services, you can view and control the experience using [Ingestion Controls][1].  All ingested traces are available for live search and analytics for 15 minutes and you can use custom tag-based [retention filters][2] to keep exactly the traces that matter for your business for 15 days search and analytics.
+Traces start in your instrumented applications and flow into Datadog, where 100% of traces up to 50 traces per second (per APM Host) are ingested. If needed for high-throughput services, you can view and control the experience using [Ingestion Controls][1]. All ingested traces are available for live search and analytics for 15 minutes. You can use custom tag-based [retention filters][2] to keep exactly the traces that matter for your business for 15 days for search and analytics.
 
 ## Send traces to Datadog
 
@@ -67,7 +67,7 @@ Now that you've configured your application to send traces to Datadog, start get
 
 [Monitor Service metrics][8] for requests, errors and latency percentiles. Analyze individual database queries or endpoints correlated with infrastructure.
 
-{{< img src="tracing/index/ServicePage.mp4" alt="Service Pages" video=true style="width:100%;">}}
+{{< img src="tracing/index/ServicePage.png" alt="Service Page" style="width:100%;">}}
 
 ### Continuous Profiler
 
@@ -79,13 +79,13 @@ Now that you've configured your application to send traces to Datadog, start get
 
 [Search 100% of your traces][10] by any tag, live with no sampling, for 15 minutes.
 
-{{< img src="tracing/live_search/LiveSearch.mp4" alt="Live Search" video="true" >}}
+{{< img src="tracing/live_search/LiveSearch2.png" alt="Live Search" >}}
 
 ### Live analytics
 
 [Analyze performance by any tag on any span][11] live for 15 minutes during an outage to identify impacted users or transactions.
 
-{{< img src="tracing/live_search/LiveAnalytics.mp4" alt="Live Analytics" video="true" >}}
+{{< img src="tracing/live_search/LiveAnalytics.png" alt="Live Analytics" >}}
 
 ### Deployment tracking
 
@@ -115,13 +115,13 @@ Now that you've configured your application to send traces to Datadog, start get
 
 [Link between real user sessions][16] and traces to see the exact traces that correspond to user experiences and reported issues.
 
-{{< img src="tracing/index/RumTraces.mp4" alt="Connect RUM sessions and traces" video=true style="width:100%;">}}
+{{< img src="tracing/index/RumTraces.png" alt="Connect RUM sessions and traces" style="width:100%;">}}
 
 ### Connect synthetic test data and traces
 
 [Link simulated API tests][17] to traces to find the root cause of failures across frontend, network and backend requests.
 
-{{< img src="tracing/index/Synthetics.mp4" alt="Synthetic tests" video=true style="width:100%;">}}
+{{< img src="tracing/index/Synthetics.png" alt="Synthetic tests" style="width:100%;">}}
 
 
 ## Further Reading
@@ -137,8 +137,8 @@ Now that you've configured your application to send traces to Datadog, start get
 [7]: /tracing/visualization/services_map/
 [8]: /tracing/visualization/service/
 [9]: /tracing/profiler/
-[10]: /tracing/trace_search_and_analytics/#live-search-for-15-minutes
-[11]: /tracing/trace_search_and_analytics/#live-analytics-for-15-minutes
+[10]: /tracing/trace_explorer/#live-search-for-15-minutes
+[11]: /tracing/trace_explorer/#live-analytics-for-15-minutes
 [12]: /tracing/deployment_tracking/
 [13]: /tracing/trace_retention_and_ingestion/
 [14]: /tracing/generate_metrics/

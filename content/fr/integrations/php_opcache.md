@@ -14,13 +14,14 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-extras/blob/master/php_opcache/README.md'
+  - https://github.com/DataDog/integrations-extras/blob/master/php_opcache/README.md
 display_name: "PHP\_OPcache"
 draft: false
 git_integration_title: php_opcache
 guid: 323518fd-be8d-4b5e-b35d-829107a1c416
 integration_id: php-opcache
 integration_title: "PHP\_OPcache"
+integration_version: 0.0.1
 is_public: true
 kind: integration
 maintainer: noname@withgod.jp
@@ -42,7 +43,7 @@ Ce check permet de surveiller [PHP OPcache][1] avec l'Agent Datadog.
 
 ## Configuration
 
-Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la [documentation relative aux modèles d'intégration Autodiscovery][2] pour découvrir comment appliquer ces instructions à un environnement conteneurisé.
+Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la [documentation relative aux modèles d'intégration Autodiscovery][2] pour découvrir comment appliquer ces instructions à des environnements conteneurisés.
 
 ### Installation
 
@@ -60,8 +61,7 @@ Pour installer le check `php_opcache` sur votre host :
  exécutez `datadog-agent integration install -w
  chemin/vers/php_opcache/dist/<NOM_ARTEFACT>.whl`.
 
-#### Configuration d'OPcache
-
+#### OPcache
 
 Puisqu'OPcache n'expose pas les métriques par défaut, cette intégration inclut un outil d'exportation de métriques, qui se trouve à l'emplacement suivant :
 
@@ -99,17 +99,18 @@ Alias /opcache-status /opt/datadog-agent/embedded/lib/python3.8/site-packages/da
 {{< get-metrics-from-git "php_opcache" >}}
 
 
-### Checks de service
-
-`php_opcache` n'inclut aucun check de service.
-
 ### Événements
 
-`php_opcache` n'inclut aucun événement.
+L'intégration PHP OPcache n'inclut aucun événement.
+
+### Checks de service
+{{< get-service-checks-from-git "php_opcache" >}}
+
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][10].
+Besoin d'aide ? Contactez [l'assistance Datadog][11].
+
 
 [1]: https://www.php.net/manual/en/book.opcache.php
 [2]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
@@ -120,4 +121,5 @@ Besoin d'aide ? Contactez [l'assistance Datadog][10].
 [7]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [8]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
 [9]: https://github.com/DataDog/integrations-extras/blob/master/php_opcache/metadata.csv
-[10]: https://docs.datadoghq.com/fr/help/
+[10]: https://github.com/DataDog/integrations-extras/blob/master/php_opcache/assets/service_checks.json
+[11]: https://docs.datadoghq.com/fr/help/

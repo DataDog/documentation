@@ -50,7 +50,7 @@ datadogRum.startSessionReplayRecording();
 ```
 
 #### CDN
-ブラウザ SDK URL `https://www.datadoghq-browser-agent.com/datadog-rum.js` を `https://www.datadoghq-browser-agent.com/datadog-rum-v3.js` に置き換えます。`DD_RUM.init()` が呼び出されると、`DD_RUM.startSessionReplayRecording()` も呼び出されるまで、セッションリプレイの記録は開始されません。
+ブラウザ SDK URL `https://www.datadoghq-browser-agent.com/datadog-rum.js` を `https://www.datadoghq-browser-agent.com/datadog-rum-v4.js` に置き換えます。`DD_RUM.init()` が呼び出されると、`DD_RUM.startSessionReplayRecording()` も呼び出されるまで、セッションリプレイの記録は開始されません。
 
 *サポートされているブラウザ*: セッションリプレイレコーダーは、IE11 を除き、RUM ブラウザ SDK でサポートされているすべてのブラウザをサポートしています。[ブラウザサポートテーブル][3]を参照してください。
 

@@ -15,7 +15,7 @@ further_reading:
 
 ## Compatibility
 
-The Go Datadog Trace library is open source - view the [Github repository][1] for more information.
+The Go Datadog Trace library is open source - view the [GitHub repository][1] for more information.
 
 To begin tracing your Go applications, your environment must first meet the following requirements:
 
@@ -76,7 +76,7 @@ The Go tracer includes support for the following data stores and libraries.
 | [Memcache][68]          | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/bradfitz/gomemcache/memcache][69]      |
 
 
-Packages must be imported, i.e.:
+Packages must be imported with:
 
 ```go
 import "gopkg.in/DataDog/dd-trace-go.v1/contrib/<PACKAGE_DIR>/<PACKAGE_NAME>"

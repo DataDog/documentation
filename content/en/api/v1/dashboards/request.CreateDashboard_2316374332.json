@@ -1,0 +1,28 @@
+{
+  "title": "Example-Create_a_new_dashboard_with_alert_value_widget",
+  "description": "",
+  "widgets": [
+    {
+      "layout": {
+        "x": 0,
+        "y": 0,
+        "width": 15,
+        "height": 8
+      },
+      "definition": {
+        "title": "",
+        "title_size": "16",
+        "title_align": "left",
+        "type": "alert_value",
+        "alert_id": "1",
+        "unit": "auto",
+        "text_align": "left",
+        "precision": 2
+      }
+    }
+  ],
+  "template_variables": [],
+  "layout_type": "free",
+  "is_read_only": false,
+  "notify_list": []
+}

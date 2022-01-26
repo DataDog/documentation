@@ -17,7 +17,7 @@ further_reading:
 
 {{< img src="database_monitoring/dbm-main.png" alt="Database Monitoring" style="width:100%;">}}
 
-{{< site-region region="us3,us5,gov" >}}
+{{< site-region region="us5,gov" >}}
 <div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
 {{< /site-region >}}
 

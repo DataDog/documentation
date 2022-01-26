@@ -23,7 +23,8 @@ If you experience unexpected behavior with Datadog APM, there are a few common i
 ## Troubleshooting pipeline
 
 The following components are involved in sending APM data to Datadog:
-{{< img src="tracing/troubleshooting/troubleshooting_pipeline_info.png" alt="APM Troubleshooting Pipeline">}}
+
+{{< img src="tracing/troubleshooting/troubleshooting_pipeline_info_1.png" alt="APM Troubleshooting Pipeline">}}
 
 Traces (JSON data type) and [Tracing Application Metrics][2] are generated from the application and sent to the Datadog Agent before traveling to the backend. Different troubleshooting information can be collected at each section of the pipeline. Importantly, the Tracer debug logs are written to your application's logs, which is a separate component from the Datadog Agent flare. More information about these items can be seen below in [Troubleshooting data requested by Datadog Support](#troubleshooting-data-requested-by-datadog-support).
 
@@ -78,23 +79,23 @@ There are a number of configuration options available to scrub sensitive data or
 
 When you open a [support ticket][1], our support team may ask for some combination of the following types of information:
 
-1. **How are you confirming the issue? Provide links to a trace (preferably) or screenshots, for example, and tell us what you expect to see.**
+1. **How are you confirming the issue? Provide links to a trace (preferably) or screenshots, for example, and tell support what you expect to see.**
 
-    This allows us to confirm errors and attempt to reproduce your issues within our testing environments.
+    This allows Support to confirm errors and attempt to reproduce your issues within Datadog's testing environments.
 
 2. **[Tracer startup logs](#confirm-apm-setup-and-agent-status)**
 
-    Startup logs are a great way to spot misconfiguration of the tracer, or the inability for the tracer to communicate with the Datadog Agent. By comparing the configuration that the tracer sees to the one set within the application or container, we can identify areas where a setting is not being properly applied.
+    Startup logs are a great way to spot misconfiguration of the tracer, or the inability for the tracer to communicate with the Datadog Agent. By comparing the configuration that the tracer sees to the one set within the application or container, Support can identify areas where a setting is not being properly applied.
 
 3. **[Tracer debug logs](#tracer-debug-logs)**
 
-    Tracer debug logs go one step deeper than startup logs, and will help us to identify if integrations are instrumenting properly in a manner that we aren't able to necessarily check until traffic flows through the application.  Debug logs can be extremely useful for viewing the contents of spans created by the tracer and can surface an error if there is a connection issue when attempting to send spans to the agent. Tracer debug logs are typically the most informative and reliable tool for confirming nuanced behavior of the tracer.
+    Tracer debug logs go one step deeper than startup logs, and help to identify if integrations are instrumenting properly in a manner that can't necessarily be checked until traffic flows through the application. Debug logs can be extremely useful for viewing the contents of spans created by the tracer and can surface an error if there is a connection issue when attempting to send spans to the agent. Tracer debug logs are typically the most informative and reliable tool for confirming nuanced behavior of the tracer.
 
-4. **A [Datadog Agent flare][11] (snapshot of logs and configs) that captures a representative log sample of a time period when traces are sent to your Datadog Agent while in [debug or trace mode][12] depending on what information we are looking for in these logs.**
+4. **A [Datadog Agent flare][11] (snapshot of logs and configs) that captures a representative log sample of a time period when traces are sent to your Datadog Agent while in [debug or trace mode][12] depending on what information you are looking for in these logs.**
 
-    Datadog Agent flares allow us to see what is happening within the Datadog Agent, for example, if traces are being rejected or malformed.  This will not help if traces are not reaching the Datadog Agent, but does help us identify the source of an issue, or any metric discrepancies.
+    Datadog Agent flares enables you to see what is happening within the Datadog Agent, for example, if traces are being rejected or malformed. This does not help if traces are not reaching the Datadog Agent, but does help identify the source of an issue, or any metric discrepancies.
 
-    When adjusting the log level to `debug` or `trace` mode, take into consideration that these will significantly increase log volume and therefore consumption of system resources (namely storage space over the long term). We recommend these only be used temporarily for troubleshooting purposes and the level be restored to `info` afterward.
+    When adjusting the log level to `debug` or `trace` mode, take into consideration that these significantly increase log volume and therefore consumption of system resources (namely storage space over the long term). Datadog recommends these only be used temporarily for troubleshooting purposes and the level be restored to `info` afterward.
 
     **Note**: If you are using the Datadog Agent v7.19+ and the Datadog Helm Chart with the [latest version][9], or a DaemonSet where the Datadog Agent and trace-agent are in separate containers, you will need to run the following command with `log_level: DEBUG` or `log_level: TRACE` set in your `datadog.yaml` to get a flare from the trace-agent:
 
@@ -104,11 +105,13 @@ kubectl exec -it <agent-pod-name> -c trace-agent -- agent flare <case-id> --loca
 
 5. **A description of your environment**
 
-    Knowing how your application is deployed helps us identify likely issues for tracer-agent communication problems or misconfigurations. For difficult issues, we may ask to a see a Kubernetes manifest or an ECS task definition, for example.
+    Knowing how your application is deployed helps the Support team identify likely issues for tracer-agent communication problems or misconfigurations. For difficult issues, Support may ask to a see a Kubernetes manifest or an ECS task definition, for example.
 
 6. **Custom code written using the tracing libraries, such as tracer configuration, [custom instrumentation][13], and adding span tags**
 
-    Custom instrumentation can be a very powerful tool, but also can have unintentional side effects on your trace visualizations within Datadog, so we ask about this to rule it out as a suspect.  Additionally, asking for your automatic instrumentation and configuration allows us to confirm if this matches what we are seeing in both tracer startup and debug logs.
+    Custom instrumentation can be a powerful tool, but also can have unintentional side effects on your trace visualizations within Datadog, so support may ask about this to rule it out as a suspect.  
+    
+    Additionally, asking for your automatic instrumentation and configuration allows Datadog to confirm if this matches what it is seeing in both tracer startup and debug logs.
 
 7. **Versions of the:**
    * **programming language, frameworks, and dependencies used to build the instrumented application**

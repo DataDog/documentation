@@ -9,7 +9,7 @@ further_reading:
 ---
 ## 互換性
 
-Java Datadog Trace ライブラリはオープンソースです。詳細については、[Github リポジトリ][1]をご覧ください。
+Java Datadog Trace ライブラリはオープンソースです。詳細については、[GitHub リポジトリ][1]をご覧ください。
 
 Datadog は、Oracle JDK と OpenJDK の両方の Java JRE 1.7 以上を公式にサポートしています。Datadog は Java のアーリーアクセスバージョンを公式にサポートしていません。
 

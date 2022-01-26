@@ -170,7 +170,7 @@ For metrics not configured with Metrics without Limits™, you pay for for index
 
 |                                      | Indexed Custom Metrics<br>(based on monthly average number of Custom Metrics per hour)                                        |
 |--------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|
-| Account allotment                    | - Pro: 100 indexed Custom Metrics per host <br>- Enterprise: 200 indexed Custom Metrics  per host                             |
+| Account allotment                    | - Pro: 100 indexed Custom Metrics per host <br>- Enterprise: 200 indexed Custom Metrics per host                             |
 | Usage greater than account allotment | For each 100 indexed custom metrics over the account allotment, you pay an amount that is specified in your current contract. |
 
 For metrics configured with Metrics without Limits™ (tags/aggregations are configured), you pay for ingested custom metrics and indexed custom metrics.
@@ -252,7 +252,7 @@ For metrics not configured with Metrics without Limits™, you pay for for index
 
 |                                      | Indexed Custom Metrics<br>(based on monthly average number of Custom Metrics per hour)                                        |
 |--------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|
-| Account allotment                    | - Pro: 100 indexed Custom Metrics per host <br>- Enterprise: 200 indexed Custom Metrics  per host                             |
+| Account allotment                    | - Pro: 100 indexed Custom Metrics per host <br>- Enterprise: 200 indexed Custom Metrics per host                             |
 | Usage greater than account allotment | For each 100 indexed custom metrics over the account allotment, you pay an amount that is specified in your current contract. |
 
 For metrics configured with Metrics without Limits™ (tags/aggregations are configured), you pay for ingested custom metrics and indexed custom metrics.
@@ -279,7 +279,7 @@ Learn more about [Metrics without Limits™][2].
 
 ## Tracking custom metrics
 
-Administrative users (those with [Datadog Admin roles][5]) can see the monthly average number of **ingested** and **indexed** custom metrics per hour. The top custom metrics table also lists the average number of **indexed** custom metrics  on the [usage details page][6]. See the [Usage Details][7] documentation for more information.
+Administrative users (those with [Datadog Admin roles][5]) can see the monthly average number of **ingested** and **indexed** custom metrics per hour. The top custom metrics table also lists the average number of **indexed** custom metrics on the [usage details page][6]. See the [Usage Details][7] documentation for more information.
 
 For more real-time tracking of the count of custom metrics for a particular metric name, click into the metric name on the [Metrics Summary page][8]. You can view the number of **ingested** custom metrics and **indexed** custom metrics on the metric's details sidepanel. 
 {{< img src="account_management/billing/custom_metrics/mwl_sidepanel_ingested.jpg" alt="Metrics Summary sidepanel" style="width:80%;">}}
@@ -321,7 +321,7 @@ For billing questions, contact your [Customer Success][10] Manager.
 [3]: /metrics/metrics-without-limits
 [4]: /metrics/types/#metric-types
 [5]: /account_management/users/default_roles/
-[6]: https://app.datadoghq.com/account/usage/hourly
+[6]: https://app.datadoghq.com/billing/usage
 [7]: /account_management/billing/usage_details/
 [8]: https://app.datadoghq.com/metric/summary
 [9]: mailto:sales@datadoghq.com

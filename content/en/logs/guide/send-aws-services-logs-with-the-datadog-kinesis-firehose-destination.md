@@ -29,7 +29,7 @@ Datadog recommends using a Kinesis stream as input when using the Datadog Kinesi
 1. (Optional) Create a new Kinesis stream (see the [Kinesis documentation][1]). Name the stream something descriptive, like `DatadogLogStream`, and give it a shard count of 1 (increase the shard count for each MB/s throughput that you need).
 2. Create a [new delivery stream][2] and name it `DatadogLogsforwarder`.
 3. Set the source as "Kinesis stream" (or leave the source as `Direct PUT or other sources` if you don’t want to use a Kinesis stream) and select `DatadogLogStream` (or the existing Kinesis stream that already contains your logs).
-4. Disable the data transformation and record transformation and hit `next`.
+4. Disable the data transformation and record transformation and click `next`.
 5. Select the `Datadog` destination and select the `Datadog US` or `Datadog EU` region, depending on the Datadog Region of your account.
   {{< img src="logs/guide/choose-destination.png" alt="Choose your destination" style="width:100%;">}}
 6. Paste your `APIKEY` into the `AccessKey` box. (You can get your API key from [your Datadog API settings page][3]).

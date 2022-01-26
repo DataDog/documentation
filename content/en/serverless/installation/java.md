@@ -17,14 +17,14 @@ aliases:
 
 {{< img src="serverless/java-lambda-tracing.png" alt="Monitor Java Lambda Functions with Datadog"  style="width:100%;">}}
 
-## Required setup
+<div class="alert alert-danger">
+There are versions of datadog-lambda-java that import log4j <=2.14.0 as a transitive dependency. <a href="#upgrading">Upgrade instructions</a> are below. 
+</div>
 
-If not already configured:
+## Prerequisites
 
-- Install the [AWS integration][1]. This allows Datadog to ingest Lambda metrics from AWS. 
-- Install the [Datadog Forwarder Lambda function][2], which is required to ingest AWS Lambda traces, enhanced metrics, custom metrics, and logs. 
+The [Datadog Forwarder Lambda function][2] is required to ingest AWS Lambda traces, enhanced metrics, custom metrics, and logs.
 
-After you have installed the [AWS integration][1] and the [Datadog Forwarder][2], follow these steps to instrument your application to send [enhanced Lambda metrics][3], logs, and traces to Datadog. 
 To fully instrument your serverless application with distributed tracing, your Java Lambda functions must be using the Java 8 Corretto (`java8.al2`) or Java 11 (`java11`) runtimes.
 
 ## Configuration
@@ -102,9 +102,9 @@ Subscribe the Datadog Forwarder Lambda function to each of your function’s log
 
 ### Monitor Java Lambda function cold starts
 
-Cold starts occur when your serverless applications receive sudden increases in traffic, including when the function was previously inactive or when it was receiving a relatively constant number of requests. Users may perceive cold starts as slow response times or lag. Datadog highly recommends you configure a monitor on Java Lambda function cold starts, and use Datadog Serverless Insights to [keep cold starts to a minimum][6].
+Cold starts occur when your serverless applications receive sudden increases in traffic, including when the function was previously inactive or when it was receiving a relatively constant number of requests. Users may perceive cold starts as slow response times or lag. Datadog recommends you configure a monitor on Java Lambda function cold starts, and use Datadog Serverless Insights to [keep cold starts to a minimum][6].
 
-{{< img src="serverless/java-monitor-cold-starts.png" alt="Monitor Java Lambda Function Cold Starts"  style="width:100%;">}}
+{{< img src="serverless/java-monitor-cold-starts.png" alt="Monitor Java Lambda Function Cold Starts" style="width:100%;">}}
 
 To create a Datadog monitor on Java Lambda function cold starts, follow the [monitor creation steps][7] with the following criteria:
 - Metric Name: `aws.lambda.enhanced.invocations`
@@ -113,7 +113,7 @@ To create a Datadog monitor on Java Lambda function cold starts, follow the [mon
 
 ### Tag
 
-Although it's optional, Datadog highly recommends tagging you serverless applications with the `env`, `service`, and `version` tags following the [unified service tagging documentation][8].
+Although it's optional, Datadog recommends tagging you serverless applications with the `env`, `service`, and `version` tags following the [unified service tagging documentation][8].
 
 ## Explore
 
@@ -155,11 +155,67 @@ To automatically connect Java Lambda function logs and traces, see [Connecting J
 
 <div class="alert alert-info"> Failing to use the correct Java runtime can result in errors like, "Error opening zip file or JAR manifest missing : /opt/java/lib/dd-java-agent.jar" Make sure to use java8.al2 or java11 as runtime as described above. </div>
 
+## Upgrading
+
+Apache Foundation has announced that log4j, a popular Java logging library, is [vulnerable to remote code execution][12].
+Some versions of `datadog-lambda-java` include a transitive dependency on log4j that may be vulnerable. The vulnerable versions are:
+
+-  `<=0.3.3`
+-  `1.4.0`
+
+The latest version of datadog-lambda java is ![Maven Cental][4]. Use this version (omitting the preceeding `v`) when following the upgrading instructions below.
+
+If you do not wish to upgrade to `1.4.x`, `0.3.x` is updated with the latest log4j security patches as well. 
+You may find the latest version of `0.3.x` in the [datadog-lambda-java repository][13].
+
+The version of the `datadog-lambda-java` dependency in your Lambda function is set in `pom.xml` or `build.gradle` depending on whether you are using Maven or Gradle, respectively.
+
+{{< tabs >}}
+{{% tab "Maven" %}}
+
+Your `pom.xml` file contains a section similar to the following:
+
+```xml
+<dependency>
+  <groupId>com.datadoghq</groupId>
+  <artifactId>datadog-lambda-java</artifactId>
+  <version>VERSION</version>
+</dependency>
+```
+
+Replace `VERSION` with the latest version of `datadog-lambda-java` (available above). 
+Then redeploy your lambda function.
+
+{{% /tab %}}
+
+{{% tab "Gradle" %}}
+
+Your `build.gradle` file contains a section similar to the following:
+
+```groovy
+dependencies {
+  implementation 'com.datadoghq:datadog-lambda-java:VERSION'
+}
+```
+
+Replace `VERSION` with the latest version of `datadog-lambda-java` (available above). 
+Then redeploy your lambda function.
+
+{{% /tab %}}
+{{< /tabs>}}
+
+If you are upgrading from 0.3.x to 1.4.x and you wish to use the `dd-trace-java` tracer, find the reference to the `dd-trace-java` lambda layer and change it to:
+
+```
+arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-java:4
+````
+
+
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /integrations/amazon_web_services/
 [2]: /serverless/forwarder/
 [3]: /serverless/enhanced_lambda_metrics
 [4]: https://img.shields.io/maven-central/v/com.datadoghq/datadog-lambda-java
@@ -170,3 +226,5 @@ To automatically connect Java Lambda function logs and traces, see [Connecting J
 [9]: https://app.datadoghq.com/functions
 [10]: /serverless/custom_metrics?tab=java
 [11]: /tracing/connect_logs_and_traces/java/
+[12]: https://www.datadoghq.com/log4j-vulnerability/
+[13]: https://github.com/DataDog/datadog-lambda-java/releases

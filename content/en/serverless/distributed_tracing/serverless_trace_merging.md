@@ -11,13 +11,13 @@ further_reading:
 
 ## Use cases
 
-Serverless trace merging is required to see a single, connected trace when you configure both Datadog's tracing libraries (`dd-trace`) and AWS X-Ray tracing libraries in your application. If you aren't sure which tracing library to use, [read this page on choosing your tracing library][1].
+Serverless trace merging is required to see a single, connected trace when you configure both Datadog's tracing libraries (`dd-trace`) and AWS X-Ray tracing libraries in your application. If you aren't sure which tracing library to use, read about [choosing your tracing library][1].
 
 There are two primary reasons for instrumenting both `dd-trace` and AWS X-Ray tracing libraries:
 - In an AWS serverless environment, you are already tracing your Lambda functions with `dd-trace`, you require AWS X-Ray active tracing for AWS managed services such as API Gateway or Step Functions, and you want to visualize the `dd-trace` and AWS X-Ray spans in one single trace.
 - In a hybrid environment with both Lambda functions and hosts, `dd-trace` instruments your hosts, AWS X-Ray instruments your Lambda functions, and you want to visualize connected traces for transactions across Lambda functions and hosts.
 
-Note that this may result in higher usage bills. X-Ray spans will continue to be available in your merged traces after 2-5 minutes. In many cases, we recommend only using a single tracing library. Learn more about choosing your tracing library [here][1].
+**Note:** This may result in higher usage bills. X-Ray spans continue to be available in your merged traces after 2-5 minutes. In many cases, Datadog recommends only using a single tracing library. Learn more about [choosing your tracing library][1].
 
 You can find setup instructions for each of the above use cases below:
 

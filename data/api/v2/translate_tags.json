@@ -1,7 +1,7 @@
 {
   "cloud-workload-security": {
     "name": "Cloud Workload Security",
-    "description": "Security signals generated based file and process activity in workloads."
+    "description": "Workload activity security rules for generating events using the Datadog security Agent."
   },
   "dashboard-lists": {
     "name": "Dashboard Lists",
@@ -29,7 +29,7 @@
   },
   "logs-archives": {
     "name": "Logs Archives",
-    "description": "Archives forward all the logs ingested to a cloud storage system.\n\nSee the [Archives Page](https://app.datadoghq.com/logs/pipelines/archives)\nfor a list of the archives currently configured in our UI."
+    "description": "Archives forward all the logs ingested to a cloud storage system.\n\nSee the [Archives Page](https://app.datadoghq.com/logs/pipelines/archives)\nfor a list of the archives currently configured in web UI."
   },
   "logs-metrics": {
     "name": "Logs Metrics",
