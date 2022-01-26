@@ -92,7 +92,7 @@ Define the configuration of your browser test.
 4. **Select tags**: The `env` and related tags attached to your browser test. Use the `<KEY>:<VALUE>` format to filter on a `<VALUE>` for a given `<KEY>`.
 5. **Browsers & Devices**: The browsers (`Chrome`, `Firefox`, and `Edge`) and devices (`Laptop Large`, `Tablet`, and `Mobile Small`) to run your test on. 
 6. **Select locations**: The Datadog managed locations to run your test from. Many AWS locations from around the world are available for each site. You can also set up [private locations][1] to run your browser test from custom locations or from inside private networks. See a full list of locations in the [Datadog app][2] or use the [API][3]. {{< site-region region="gov" >}}**Note**: The West US (AWS GovCloud) location is supported on the Datadog for Government site.{{< /site-region >}}
-7. **Select test frequency**: The intervals vary from every five minutes to once per week. [Contact Support][4] for one-minute  frequency.
+7. **Select test frequency**: The intervals vary from every five minutes to once per week. [Contact Support][4] for one-minute frequency.
 
 ### Use global variables
 
