@@ -12,7 +12,7 @@ Le module Puppet Datadog est pris en charge sur Linux et Windows et est compatib
 
 ### Installation
 
-Installez le module Puppet [agent_datadog][1] dans le chemin du module de votre master Puppet :
+Installez le module Puppet [agent_datadog][1] dans le chemin du module de votre primary Puppet :
 
 ```shell
 puppet module install datadog-datadog_agent
@@ -30,7 +30,7 @@ puppet module install datadog-datadog_agent
 
 ### Configuration
 
-Une fois le module `datadog_agent` installé sur votre `puppetserver` ou `puppetmaster` (ou sur un host sans master), suivez les étapes de configuration ci-dessous :
+Une fois le module `datadog_agent` installé sur votre `puppetserver` ou `puppetmaster` (ou sur un host sans primary), suivez les étapes de configuration ci-dessous :
 
 1. Obtenez votre [clé d'API Datadog][2].
 2. Ajoutez la classe Datadog à vos manifestes de nœud (ex. : `/etc/puppetlabs/code/environments/production/manifests/site.pp`).
