@@ -2389,7 +2389,7 @@ main:
     url: logs/troubleshooting
     parent: log_management
     identifier: log_troubleshooting
-    weight: 8  
+    weight: 8
   - name: Security Platform
     url: security_platform/
     pre: security-platform
