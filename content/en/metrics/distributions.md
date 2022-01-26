@@ -96,7 +96,7 @@ To customize tagging:
 
 **Note**: The exclusion of tags is not supported in the allowlist-based customization of tags. Adding tags starting with `!` is not accepted.
 
-{{< img src="metrics/distributions/dist_manage.jpg" alt="Configuring tags on a distribution" style="width:80%;">}}
+{{< img src="metrics/distributions/dist_manage.jpg" alt="Configuring tags on a distribution with the Manage Tags button" style="width:80%;">}}
 
 ## Audit events
 Any tag configuration or percentile aggregation changes create an event in the [event stream][4]. This event explains the change and displays the user that made the change.
