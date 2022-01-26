@@ -239,8 +239,8 @@ echo 1 | sudo tee /proc/sys/kernel/perf_event_paranoid
 **Note**: This must be executed from a mount namespace in which the `/proc/sys/kernel/perf_event_paranoid` object exists and is writable.  Typically, this would be the root mount namespace--in other words, the host rather than any normal container. 
 
 There are two capabilities you can use to override the value of `perf_event_paranoid`:
-- `CAP_SYS_ADMIN` - Running your services with this capability may be discouraged by your organization.
-- `CAP_PERFMON` - Available on Linux v5.8 or later.
+- `CAP_SYS_ADMIN` (adds many permissions and thus may be discouraged by some organizations)
+- `CAP_PERFMON` (available on Linux v5.8 or later)
 
 There are a few less common permissions issues:
 - The profiler is not always able to instrument processes that change their UID on startup. This is common for many webservers and databases.

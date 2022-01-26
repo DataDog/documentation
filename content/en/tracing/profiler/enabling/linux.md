@@ -33,19 +33,19 @@ The Datadog Profiler requires Linux kernel v4.17+ on an `amd64` compatible proce
 
 To begin profiling applications:
 
-1. Ensure you are running the Datadog agent version [7.20.2][1]+ or [6.20.2][2]+ and that you satisfy the profiler requirements. The `/proc/sys/kernel/perf_event_paranoid` setting must *at most* 2, or `CAP_SYS_ADMIN` (or `CAP_PERFMON` on Linux v5.8 or later) must be granted to the profiling process or service container.  You can run `cat /proc/sys/kernel/perf_event_paranoid` to check the value of this parameter.  Modifying the parameter depends on your specific Linux distribution, but `echo 2 | sudo tee /proc/sys/kernel/perf_event_paranoid` will work for many popular distros.
+1. Ensure you are running the Datadog agent version [7.20.2][1]+ or [6.20.2][2]+ and that `perf_event_paranoid` kernel setting is *at most* 2.  You can run `cat /proc/sys/kernel/perf_event_paranoid` to check this value.  Modifying the parameter depends on your specific Linux distribution, but `echo 2 | sudo tee /proc/sys/kernel/perf_event_paranoid` will work for many popular distros.
 
 2. Download the appropriate [ddprof binary][3] for your Linux distribution.  For example, here is one way to pull the latest release:
 
 ```shell
-curl -L -O ddprof.tar.gz https://github.com/DataDog/ddprof/releases/download/v0.7.0/ddprof-x86_64_unknown-linux-gnu-2.23.tar.gz
-tar xzf ddprof.tar.gz
-mv ddprof/bin/ddprof INSTALLATION_TARGET
+curl -L -O https://github.com/DataDog/ddprof/releases/download/v0.7.0/ddprof-x86_64_unknown-linux-gnu-2.23.tar.gz
+tar xvf ddprof-x86_64_unknown-linux-gnu-2.23.tar.gz
+mv ddprof-x86_64_unknown-linux-gnu-2.23/bin/ddprof INSTALLATION_TARGET
 ```
 
 Where `INSTALLATION_TARGET` specifies the location you'd like to store the `ddprof` binary.  This document will assume `INSTALLATION_TARGET=./ddprof`
 
-4. Modify your service invocation to include the profiler. Your usual command is passed as the last arguments to the `ddprof` executable.
+3. Modify your service invocation to include the profiler. Your usual command is passed as the last arguments to the `ddprof` executable.
    {{< tabs >}}
 {{% tab "Environment variables" %}}
 
@@ -74,26 +74,26 @@ exec ./ddprof myapp --arg1 --arg2
 {{% tab "In code" %}}
 
 ```shell
-./ddprof --service my-web-app --service_version 1.0.3 --environment prod myapp --arg1 --arg2
+./ddprof --environment prod --service my-web-app --service_version 1.0.3 myapp --arg1 --arg2
 ```
 
-**Note**: If you usually launch your application using shell builtins, for example:
+**Note**: If you usually launch your application using a shell builtin, for example:
 
 ```shell
 exec myapp --arg1
 ```
 
-Then you must invoke `ddprof` with those builtins instead:
+Then you must invoke `ddprof` with that builtin instead:
 
 ```shell
-exec ./ddprof --service my-web-app --service_version 1.0.3 --environment prod myapp --arg1 --arg2
+exec ./ddprof --environment prod --service my-web-app --service_version 1.0.3 myapp --arg1 --arg2
 ```
 
 {{% /tab %}}
 {{< /tabs >}}
 
 
-5. A minute or two after starting your application, your profiles will show up on the [Datadog APM > Profiler page][4].
+4. A minute or two after starting your application, your profiles will show up on the [Datadog APM > Profiler page][4].
 
 ## Configuration
 
