@@ -18,13 +18,17 @@ Global distributions instrument logical objects, like services, independently fr
 
 Distributions provide enhanced query functionality and configuration options that aren’t offered with other metric types (count, rate, gauge, histogram):
 * **Calculation of percentile aggregations**: Distributions are stored as DDSketch data structures that represent raw, unaggregated data such that globally accurate percentile aggregations (p50, p75, p90, p95, p99) can be calculated across the raw data from all your hosts. Enabling percentile aggregations can unlock advanced query functionalities such as: 
+
   * **Single percentile value over any timeframe**:
+  
      _“What has the p95 load time for my application been over the past week?”_
 
   * **Percentile thresholds on metric monitors**:
+  
     _“Alert me when the p99 of my application’s request latency is greater than 200 ms for the last 5 min.”_
 
   * **Threshold Queries for SLOs**:
+  
     _“I’d like to define a 30-day SLO where the p95 of request latency is < 5 seconds”_
 
 
