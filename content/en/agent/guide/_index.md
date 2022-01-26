@@ -17,7 +17,6 @@ private: true
     {{< nextlink href="agent/guide/datadog-agent-manager-windows" >}}Datadog Agent Manager for Windows{{< /nextlink >}}
     {{< nextlink href="/agent/guide/heroku-ruby" >}}Instrumenting a Ruby on Rails application on Heroku with Datadog{{< /nextlink >}}
     {{< nextlink href="agent/guide/private-link" >}}Forward your telemetry securely to Datadog over AWS PrivateLink{{< /nextlink >}}
-    {{< nextlink href="agent/guide/tls_deprecation_1_2" >}}TLS < 1.2 deprecation notice{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Agent versioning guides:" >}}
