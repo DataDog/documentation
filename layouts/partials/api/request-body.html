@@ -4,6 +4,8 @@
 {{ $operationid := .operationid }}
 {{ $resourcePage := .resourcePage }}
 {{ $translate_action := .translate_action }}
+{{ $version := .version }}
+{{ $codeExampleLookup := (index (index $context.Site.Data.api $version) "CodeExamples") }}
 {{ $s := newScratch }}
 
 {{ if $body }}
@@ -99,54 +101,48 @@
                                       <div class="code-button-wrapper position-absolute">
                                           <button class="btn text-primary js-copy-button">{{ i18n "copy" }}</button>
                                       </div>
-                                      {{ with $resourcePage.Resources.Match (printf "request.%s_*.json" $operationid ) }}
-                                        <style>
-                                          #accordion .btn {
-                                            font-weight: bold;
-                                            color: #632ca6;
-                                          }
-                                          #accordion .btn.collapsed {
-                                            color: #666;
-                                          }
-                                          #accordion pre {
-                                            border-bottom: 3px solid rgba(119,0,255,.3);
-                                          }
-                                        </style>
-                                        <div id="accordion">
-                                        <div class="card">
-                                          <div class="card-header p-0">
-                                            <h5 class="m-0">
-                                              <button class="btn btn-link" data-toggle="collapse" data-target="#{{ $operationid }}-request-example-0" aria-expanded="false" aria-controls="collapseTwo">
-                                                Default
-                                              </button>
-                                            </h5>
-                                          </div>
-                                          <div id="{{ $operationid }}-request-example-0" class="collapse show" data-parent="#accordion">
-                                            <div class="card-body p-0">
-                                              {{ print $json | safeHTML }}
-                                            </div>
-                                          </div>
-                                        </div>
-                                          {{ range $i, $item := . }}
-                                          <div class="card">
-                                            <div class="card-header p-0">
-                                              <h5 class="m-0">
-                                                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#{{ $operationid }}-request-example-{{ (add $i 1) }}" aria-expanded="true" aria-controls="collapseOne">
-                                                  {{ .Name }}
-                                                </button>
-                                              </h5>
-                                            </div>
-                                            <div id="{{ $operationid }}-request-example-{{ (add $i 1) }}" class="collapse" data-parent="#accordion">
-                                              <div class="card-body p-0">
-                                                {{ (highlight (.Content) "json" "") }}
+
+                                    <style>
+                                            #accordion .btn {
+                                              font-weight: bold;
+                                              color: #632ca6;
+                                            }
+                                            #accordion .btn.collapsed {
+                                              color: #666;
+                                            }
+                                            #accordion pre {
+                                              border-bottom: 3px solid rgba(119,0,255,.3);
+                                            }
+                                          </style>
+
+                                      {{ with (index $codeExampleLookup $operationid) }}
+                                          <div id="accordion">
+
+                                        {{ range $i, $item := . }}
+
+                                            {{ with $resourcePage.Resources.Match (printf "request.%s%s.json" $operationid $item.suffix ) }}
+                                            <div class="card">
+                                              <div class="card-header p-0">
+                                                <h5 class="m-0">
+                                                  <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#{{ $operationid }}-request-example-{{ (add $i 1) }}" aria-expanded="true" aria-controls="collapseOne">
+                                                    {{ $item.description }}
+                                                  </button>
+                                                </h5>
+                                              </div>
+                                              <div id="{{ $operationid }}-request-example-{{ (add $i 1) }}" class="collapse" data-parent="#accordion">
+                                                <div class="card-body p-0">
+                                                    {{ range . }}
+                                                      {{ (highlight (.Content) "json" "") }}
+                                                    {{ end }}
+                                                </div>
                                               </div>
                                             </div>
-                                          </div>
-                                          {{ end }}
-                                      </div>
+                                            {{ end }}
+                                        {{ end }}
                                       {{ else }}
                                         {{ print $json | safeHTML }}
                                       {{ end }}
+
                                   </div>
                               </div>
                           </div>
