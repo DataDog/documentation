@@ -25,7 +25,7 @@ The Datadog library supports Java JRE 1.8 and higher of both Oracle JDK and Open
 - Linux (GNU) x86, x86-64
 - Alpine Linux (musl) x86, x86-64
 - macOS (Darwin) x86, x86-64
-- Windows (mcvc) x86, x86-64
+- Windows (msvc) x86, x86-64
 
 Datadog does not officially support any early-access versions of Java. 
 
@@ -57,7 +57,7 @@ These are supported on the following architectures:
 - Linux (GNU) x86, x86-64
 - Alpine Linux (musl) x86, x86-64
 - macOS (Darwin) x86, x86-64
-- Windows (mcvc) x86, x86-64
+- Windows (msvc) x86, x86-64
 
 ### Supported frameworks
 
@@ -139,13 +139,36 @@ These are supported on the following architectures:
 
 {{< programming-lang lang="php" >}}
 
-php
+The Datadog PHP library supports PHP version 7.0 on the following architectures:
+
+- Linux (GNU) x86-64
+- Alpine Linux (musl) x86-64
+
+It supports the use of all PHP frameworks, and also the use no framework.
 
 {{< /programming-lang >}}
 
 {{< programming-lang lang="nodejs" >}}
 
-nodejs
+### Supported NodeJS versions
+
+The Datadog NodeJS library supports the following NodeJS versions:
+
+- NodeJS 13.10.0 and higher
+- NodeJS 12.17.0 and higher
+
+These are supported on the following architectures:
+
+- Linux (GNU) x86-64
+- Alpine Linux (musl) x86-64
+- macOS (Darwin) x86-64
+- Windows (msvc) x86, x86-64
+
+### Supported frameworks
+
+| Framework Web Server    | Minimum Framework Version   | 
+| ----------------------- | --------------------------- |
+| Express                 | 4.0                         |
 
 {{< /programming-lang >}}
 
