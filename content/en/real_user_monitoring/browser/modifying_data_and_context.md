@@ -14,9 +14,9 @@ further_reading:
 - link: "/real_user_monitoring/explorer/"
   tag: "Documentation"
   text: "Explore your views within Datadog"
-- link: "/real_user_monitoring/explorer/analytics/"
+- link: "/real_user_monitoring/explorer/visualize/"
   tag: "Documentation"
-  text: "Build analytics upon your events"
+  text: "Apply visualizations on your events"
 - link: "/logs/log_configuration/attributes_naming_convention"
   tag: "Documentation"
   text: "Datadog Standard Attributes"
@@ -588,12 +588,9 @@ var context = window.DD_RUM && DD_RUM.getRumGlobalContext();
 {{% /tab %}}
 {{< /tabs >}}
 
-
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: /real_user_monitoring/browser/data_collected/
 [2]: /real_user_monitoring/browser/monitoring_page_performance/

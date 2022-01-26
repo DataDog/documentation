@@ -62,9 +62,9 @@ Analyze information about your user journeys, performance, network requests, and
 
 {{< img src="real_user_monitoring/RUM-session-dashboard.jpeg" alt="RUM dashboard" >}}
 
-### RUM explorer and analytics
+### RUM Explorer and visualizations
 
-View user sessions in segments, such as checking when latency impacts your premium customers with [customizable analytics widgets][2]. Explore, save views, and create monitors on your customized searches.
+View user sessions in segments, such as checking when latency impacts your premium customers, with [visualizations][2]. Explore data, save views, and create monitors on your customized searches.
 
 {{< img src="real_user_monitoring/explorer/analytics/rum_analytics.mp4" alt="RUM Analytics" video=true >}}
 
@@ -85,6 +85,6 @@ Get automated alerts on outliers and groups of errors, timeouts, and crashes to 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /real_user_monitoring/dashboards/
-[2]: /real_user_monitoring/explorer/analytics/
+[2]: /real_user_monitoring/explorer/visualize/
 [3]: /real_user_monitoring/connect_rum_and_traces/
 [4]: /real_user_monitoring/error_tracking/

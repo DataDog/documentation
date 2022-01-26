@@ -56,7 +56,7 @@ Optionally define its size and alignment.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/explorer/analytics/?tab=timeseries#build-an-analytics-query
+[1]: /real_user_monitoring/explorer/visualize#timeseries
 [2]: /logs/search_syntax/
 [3]: /logs/log_configuration/processors/#geoip-parser
 [4]: /getting_started/tagging/#defining-tags

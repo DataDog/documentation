@@ -5,7 +5,7 @@ further_reading:
 - link: "/real_user_monitoring/explorer/group/"
   tag: "Documentation"
   text: "Group queried RUM events"
-- link: "/real_user_monitoring/explorer/analytics/"
+- link: "/real_user_monitoring/explorer/visualize/"
   tag: "Documentation"
   text: "Apply visualizations on your events"
 ---
@@ -43,7 +43,7 @@ For more information about searching for RUM events and using time frames, see [
 
 All RUM events contain attributes, which are automatically collected by the RUM SDKs, and your custom attributes, which are displayed on the [event side panel][7]. 
 
-While most automatically collected attributes are indexed and faceted, your custom event attributes are not indexed and faceted by default. Index these attributes by creating a facet or measure to easily access them in your search and [Analytics][8].
+While most automatically collected attributes are indexed and faceted, your custom event attributes are not indexed and faceted by default. Index these attributes by creating a facet or measure to easily access them in your search and [visualizations][8].
 
 ### Facets
 
@@ -55,7 +55,7 @@ To create a facet, find and click on an attribute in the [event side panel][7].
 
 {{< img src="real_user_monitoring/explorer/create_facet.png" alt="Create a facet" style="width:40%;">}}
 
-The value for the attribute is stored across all new views. You can access these attributes in the search bar, the **Facets** panel, and the [RUM Analytics query][8].
+The value for the attribute is stored across all new views. You can access these attributes in the search bar, the **Facets** panel, and your [visualizations][8].
 
 ### Measures
 
@@ -65,11 +65,11 @@ To create a measure, find and click on a numerical attribute in the [event side 
 
 {{< img src="real_user_monitoring/explorer/create_measure.png" alt="Create a measure" style="width:40%;">}}
 
-The value of this attribute is stored across all new RUM events. You can access these attributes in the search bar, the **Facets** panel, and the [RUM Analytics query][8].
+The value of this attribute is stored across all new RUM events. You can access these attributes in the search bar, the **Facets** panel, and your [visualizations][8].
 
 {{< img src="real_user_monitoring/explorer/edit_measure.png" alt="Edit a measure" style="width:40%;">}}
 
-Every measure has a unit that is displayed in a column of the [RUM Explorer][9] and in [RUM Analytics][8]. 
+Every measure has a unit that is displayed in a column of the [RUM Explorer][9] and in [your visualizations][8]. 
 
 ## Search for facets
 
@@ -88,5 +88,5 @@ For example, if your facet name is **url** and you want to filter on the **url**
 [5]: /real_user_monitoring/explorer/search_syntax/
 [6]: /dashboards/guide/custom_time_frames
 [7]: /real_user_monitoring/explorer/events/
-[8]: /real_user_monitoring/explorer/analytics/
+[8]: /real_user_monitoring/explorer/visualize#timeseries
 [9]: /real_user_monitoring/explorer/
