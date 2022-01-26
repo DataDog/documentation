@@ -91,11 +91,11 @@ Pour obtenir de l'aide ou demander l'ajout d'une fonctionnalité, contactez RapD
 
 - Assistance : datadog-engineering@rapdev.io
 - Service commercial : sales@rapdev.io
-- Chat : RapDev.io/products
+- Chat : [rapdev.io](https://www.rapdev.io/#Get-in-touch)
 - Téléphone : 855-857-0222
 
 ---
-Développé avec passion à Boston
+Développé avec ❤️ à Boston
 
 *Ce n'est pas l'intégration que vous recherchez ? Une fonctionnalité importante pour votre organisation est manquante ? [Écrivez à RapDev](mailto:datadog-engineering@rapdev.io) et nous l'ajouterons !*
 
