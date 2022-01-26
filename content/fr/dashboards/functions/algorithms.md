@@ -12,8 +12,8 @@ aliases:
 
 La fonction `anomalies()` comprend deux paramètres :
 
-* `ALGORITHME` :  méthodologie utilisée pour détecter les anomalies.
-* `LIMITES` :  largeur de la bande grise. `LIMITES` peut être interprété comme la représentation de l'écart type de votre algorithme. Une valeur de 2 ou 3 doit suffire pour inclure la plupart des points « normaux ».
+* `ALGORITHME` : méthodologie utilisée pour détecter les anomalies.
+* `LIMITES` : largeur de la bande grise. `LIMITES` peut être interprété comme la représentation de l'écart type de votre algorithme. Une valeur de 2 ou 3 doit suffire pour inclure la plupart des points « normaux ».
 
 **Remarque** : si vous utilisez des algorithmes de détection d'anomalies agiles ou robustes avec un caractère saisonnier hebdomadaire ou quotidien, vous pouvez mettre à jour votre monitor de détection d'anomalies afin de prendre en compte un fuseau horaire local à l'aide de l'API et de l'IU.
 
