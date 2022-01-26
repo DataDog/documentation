@@ -14,15 +14,17 @@ further_reading:
 
 ## Get started
 
-1. **Install or update the Datadog Agent** to at least version 7.31.0: 
+1. **Install or update the Datadog Agent** to at least version 7.31.0. For example, for Mac OS X: 
+   ```
+   DD_AGENT_MAJOR_VERSION=7 DD_API_KEY=<DD_API_KEY> DD_SITE="datadoghq.com" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_mac_os.sh)"
+   ```
 
+   For the various ways of installing the Agent, on other operating systems or in container environments, see the [Agent in-app documentation][1].
+
+2. **Download the [Datadog tracing library][2]**, at least version 0.92.0:
    ```
    wget -O dd-java-agent.jar 'https://github.com/DataDog/dd-trace-java/releases/latest/download/dd-java-agent.jar'
    ```
-
-   For other ways of installing the Agent, for example in container environments, see the [Agent in-app documentation][1].
-
-2. **Install the [Datadog tracing library][2]**, at least version 0.92.0.
 
    For information about which language and framework versions are supported by the library, see [Compatibility][3].
 
