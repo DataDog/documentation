@@ -23,7 +23,7 @@ further_reading:
 The Datadog Profiler for Linux is in public beta. Datadog recommends evaluating the profiler in a non-sensitive environment before deploying in production.
 </div>
 
-The Datadog Profiler for Linux lets you collect profile data for applications running on Linux.  It is ideally suited for applications written in compiled languages, such as C, C++, or Rust.  It can also profile services such as nginx, Redis, or Postgres, as it does not require access to source code.
+The Datadog Profiler for Linux lets you collect profile data for applications running on Linux. It is ideally suited for applications written in compiled languages, such as C, C++, or Rust. It can also profile services such as nginx, Redis, or Postgres, as it does not require access to source code.
 
 ## Requirements
 
@@ -33,9 +33,9 @@ The Datadog Profiler requires Linux kernel v4.17+ on an `amd64` compatible proce
 
 To begin profiling applications:
 
-1. Ensure you are running the Datadog agent version [7.20.2][1]+ or [6.20.2][2]+ and that `perf_event_paranoid` kernel setting is *at most* 2.  You can run `cat /proc/sys/kernel/perf_event_paranoid` to check this value.  Modifying the parameter depends on your specific Linux distribution, but `echo 2 | sudo tee /proc/sys/kernel/perf_event_paranoid` will work for many popular distros.
+1. Ensure you are running the Datadog agent version [7.20.2][1]+ or [6.20.2][2]+ and that `perf_event_paranoid` kernel setting is *at most* 2. You can run `cat /proc/sys/kernel/perf_event_paranoid` to check this value. Modifying the parameter depends on your specific Linux distribution, but `echo 2 | sudo tee /proc/sys/kernel/perf_event_paranoid` will work for many popular distros.
 
-2. Download the appropriate [ddprof binary][3] for your Linux distribution.  For example, here is one way to pull the latest release:
+2. Download the appropriate [ddprof binary][3] for your Linux distribution. For example, here is one way to pull the latest release:
 
 ```shell
 curl -L -O https://github.com/DataDog/ddprof/releases/download/v0.7.0/ddprof-x86_64_unknown-linux-gnu-2.23.tar.gz
@@ -43,7 +43,7 @@ tar xvf ddprof-x86_64_unknown-linux-gnu-2.23.tar.gz
 mv ddprof-x86_64_unknown-linux-gnu-2.23/bin/ddprof INSTALLATION_TARGET
 ```
 
-Where `INSTALLATION_TARGET` specifies the location you'd like to store the `ddprof` binary.  This document will assume `INSTALLATION_TARGET=./ddprof`
+Where `INSTALLATION_TARGET` specifies the location you'd like to store the `ddprof` binary. This document will assume `INSTALLATION_TARGET=./ddprof`
 
 3. Modify your service invocation to include the profiler. Your usual command is passed as the last arguments to the `ddprof` executable.
    {{< tabs >}}

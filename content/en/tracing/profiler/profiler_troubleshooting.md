@@ -229,14 +229,14 @@ If you prefer, you can also troubleshoot the problem by enabling verbose logs an
 
 This error typically occurs when you do not have sufficient permission to engage the profiler. The most common reason for this is that required operating system features have been disabled, which causes profiling to fail. This is typically a host-level configuration, which cannot be set at the level of an individual pod or container.
 
-Setting `perf_event_paranoid` so that it persists across restarts depends on your distribution.  As a diagnostic step, you could try the following:
+Setting `perf_event_paranoid` so that it persists across restarts depends on your distribution. As a diagnostic step, you could try the following:
 
 ```shell
 echo 1 | sudo tee /proc/sys/kernel/perf_event_paranoid
 
 ```
 
-**Note**: This must be executed from a mount namespace in which the `/proc/sys/kernel/perf_event_paranoid` object exists and is writable.  Typically, this would be the root mount namespace--in other words, the host rather than any normal container. 
+**Note**: This must be executed from a mount namespace in which the `/proc/sys/kernel/perf_event_paranoid` object exists and is writable. Typically, this would be the root mount namespace--in other words, the host rather than any normal container. 
 
 There are two capabilities you can use to override the value of `perf_event_paranoid`:
 - `CAP_SYS_ADMIN` (adds many permissions and thus may be discouraged by some organizations)
