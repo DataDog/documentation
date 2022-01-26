@@ -27,45 +27,46 @@ The Datadog Profiler for Linux lets you collect profile data for applications ru
 
 ## Requirements
 
-- The Datadog Profiler requires Linux kernel v4.17+ on an `amd64` compatible processor. It does not support macOS, BSD, Windows, or other operating systems besides Linux v4.17 or later. 
-- The `/proc/sys/kernel/perf_event_paranoid` setting must *at most* 2, or `CAP_SYS_ADMIN` (or `CAP_PERFMON` on Linux v5.8 or later) must be granted to the profiling process or service container.
+The Datadog Profiler requires Linux kernel v4.17+ on an `amd64` compatible processor. It does not support macOS, BSD, Windows, or other operating systems besides Linux v4.17 or later. 
 
 ## Installation
 
 To begin profiling applications:
 
-1. Ensure you are running the Datadog agent version [7.20.2][1]+ or [6.20.2][2]+ and that you satisfy the profiler requirements.
+1. Ensure you are running the Datadog agent version [7.20.2][1]+ or [6.20.2][2]+ and that you satisfy the profiler requirements. The `/proc/sys/kernel/perf_event_paranoid` setting must *at most* 2, or `CAP_SYS_ADMIN` (or `CAP_PERFMON` on Linux v5.8 or later) must be granted to the profiling process or service container.  You can run `cat /proc/sys/kernel/perf_event_paranoid` to check the value of this parameter.  Modifying the parameter depends on your specific Linux distribution, but `echo 2 | sudo tee /proc/sys/kernel/perf_event_paranoid` will work for many popular distros.
 
 2. Download the appropriate [ddprof binary][3] for your Linux distribution.  For example, here is one way to pull the latest release:
 
 ```shell
-curl -L -o- https://github.com/DataDog/ddprof/releases/download/v0.7.0/ddprof-x86_64_unknown-linux-gnu-2.23.tar.gz | tar xz --strip-components 2 ddprof-x86_64_unknown-linux-gnu-2.23/bin/ddprof
+curl -L -O ddprof.tar.gz https://github.com/DataDog/ddprof/releases/download/v0.7.0/ddprof-x86_64_unknown-linux-gnu-2.23.tar.gz
+tar xzf ddprof.tar.gz
+mv ddprof/bin/ddprof INSTALLATION_TARGET
 ```
 
-This guide will assume you've extracted the _ddprof_ binary to the local directory.
+Where `INSTALLATION_TARGET` specifies the location you'd like to store the `ddprof` binary.  This document will assume `INSTALLATION_TARGET=./ddprof`
 
 4. Modify your service invocation to include the profiler. Your usual command is passed as the last arguments to the `ddprof` executable.
    {{< tabs >}}
 {{% tab "Environment variables" %}}
 
 ```shell
-export DD_ENV="<APPLICATION_ENVIRONMENT>"
-export DD_SERVICE="<SERVICE_NAME>"
-export DD_VERSION="<APPLICATION_VERSION>"
+export DD_ENV=prod
+export DD_SERVICE=my-web-app
+export DD_VERSION=1.0.3
 ./ddprof myapp --arg1 --arg2
 ```
-**Note**: If you usually launch your application using shell builtins, for example:
+**Note**: If you usually launch your application using a shell builtin, for example:
 
 ```shell
 exec myapp --arg1 --arg2
 ```
 
-Then you must invoke `ddprof` with those builtins instead:
+Then you must invoke `ddprof` with that builtin instead:
 
 ```shell
-export DD_SERVICE="<SERVICE_NAME>"
-export DD_VERSION="<APPLICATION_VERSION>"
-export DD_ENV="<APPLICATION_ENVIRONMENT>"
+export DD_ENV=prod
+export DD_SERVICE=my-web-app
+export DD_VERSION=1.0.3
 exec ./ddprof myapp --arg1 --arg2
 ```
 
@@ -73,7 +74,7 @@ exec ./ddprof myapp --arg1 --arg2
 {{% tab "In code" %}}
 
 ```shell
-./ddprof --service "<SERVICE_NAME>" --service_version "<APPLICATION_VERSION"> myapp --arg1 --arg2
+./ddprof --service my-web-app --service_version 1.0.3 --environment prod myapp --arg1 --arg2
 ```
 
 **Note**: If you usually launch your application using shell builtins, for example:
@@ -85,14 +86,14 @@ exec myapp --arg1
 Then you must invoke `ddprof` with those builtins instead:
 
 ```shell
-exec ./ddprof --service "<SERVICE_NAME>" --service_version "<APPLICATION_VERSION"> myapp --arg1
+exec ./ddprof --service my-web-app --service_version 1.0.3 --environment prod myapp --arg1 --arg2
 ```
 
 {{% /tab %}}
 {{< /tabs >}}
 
 
-4. A minute or two after starting your application, your profiles will show up on the [Datadog APM > Profiler page][4].
+5. A minute or two after starting your application, your profiles will show up on the [Datadog APM > Profiler page][4].
 
 ## Configuration
 
