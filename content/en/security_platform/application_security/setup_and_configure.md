@@ -108,7 +108,32 @@ Integrate the Go tracer with the following list of web frameworks using one of t
 
 {{< programming-lang lang="ruby" >}}
 
-ruby
+### Supported Ruby versions
+
+The Datadog Ruby library supports the latest gem for the following Ruby interpreters:
+
+| Type  | Documentation              | Version |
+| ----- | -------------------------- | -----   |
+| MRI   | https://www.ruby-lang.org/ | 2.7     |
+|       |                            | 2.6     | 
+|       |                            | 2.5     | 
+|       |                            | 2.4     | 
+|       |                            | 2.3     | 
+|       |                            | 2.2     | 
+|       |                            | 2.1     | 
+
+These are supported on the following architectures:
+- Linux (GNU) x86-64, aarch64
+- Alpine Linux (musl) x86-64, aarch64
+- macOS (Darwin) x86-64, arm64
+
+### Supported frameworks
+
+| Framework Web Server    | Minimum Framework Version   | 
+| ----------------------- | --------------------------- |
+| Rack                    | 1.1                         |
+| Rails                   | 3.2 (also depends on Ruby version) |
+| Sinatra                 | 1.4                         |
 
 {{< /programming-lang >}}
 
