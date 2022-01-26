@@ -22,7 +22,7 @@ further_reading:
 
 2. Install the [Datadog tracing library][1], at least version 0.92.0.
 
-   Application Security supports the same Java frameworks as APM. See [APM Compatibility][2] for information about frameworks supported by the library.
+   For information about which language and framework versions are supported by the library, see [Compatibility][2].
 
 3. Run your Java application with Application Security enabled. From the command line:
    ```
@@ -105,4 +105,4 @@ java -javaagent:dd-java-agent.jar \
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/dd-trace-java/releases
-[2]: /tracing/setup_overview/compatibility_requirements/java
+[2]: /security_platform/application_security/setup_and_configure/#compatibility
