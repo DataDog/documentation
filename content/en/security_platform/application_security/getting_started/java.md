@@ -14,17 +14,17 @@ further_reading:
 
 ## Get started
 
-1. Install or update the Datadog Agent to at least version 7.31.0: 
+1. **Install or update the Datadog Agent** to at least version 7.31.0: 
 
    ```
    wget -O dd-java-agent.jar 'https://github.com/DataDog/dd-trace-java/releases/latest/download/dd-java-agent.jar'
    ```
 
-2. Install the [Datadog tracing library][1], at least version 0.92.0.
+2. **Install the [Datadog tracing library][1]**, at least version 0.92.0.
 
    For information about which language and framework versions are supported by the library, see [Compatibility][2].
 
-3. Run your Java application with Application Security enabled. From the command line:
+3. **Run your Java application with Application Security enabled.** From the command line:
    ```
    java -javaagent:/path/to/dd-java-agent.jar -Ddd.appsec.enabled=true -Ddd.service=<MY SERVICE> -Ddd.env=<MY_ENV> -jar path/to/app.jar
    ```
