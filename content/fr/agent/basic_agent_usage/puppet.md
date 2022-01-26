@@ -137,7 +137,7 @@ package { 'dogapi':
     }
     ```
 
-3. Ajoutez ces options de configuration à la configuration du master Puppet (ex. : `/etc/puppetlabs/puppet/puppet.conf`) :
+3. Ajoutez ces options de configuration à la configuration du primary Puppet (ex. : `/etc/puppetlabs/puppet/puppet.conf`) :
 
     ```ini
     [main]
@@ -236,9 +236,9 @@ Si vous constatez l'erreur suivante, assurez-vous que `reports=datadog_reports` 
 
 Si vous ne recevez aucun rapport, consultez les logs de votre serveur Puppet.
 
-### Puppet sans master
+### Puppet sans primary
 
-1. Le module Datadog et ses dépendances doivent être installés sur tous les nœuds exécutés sans master.
+1. Le module Datadog et ses dépendances doivent être installés sur tous les nœuds exécutés sans primary.
 2. Ajoutez ce qui suit au fichier `site.pp` de chaque nœud :
     ```conf
     class { "datadog_agent":
@@ -247,7 +247,7 @@ Si vous ne recevez aucun rapport, consultez les logs de votre serveur Puppet.
     }
    ```
 
-3. Exécutez Puppet avec une configuration sans master :
+3. Exécutez Puppet avec une configuration sans primary :
     ```shell
     puppet apply --modulepath <path_to_modules> <path_to_site.pp>
     ```
