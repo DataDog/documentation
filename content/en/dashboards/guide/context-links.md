@@ -63,7 +63,7 @@ By default the widget menu promotes only **Host**, **Traces** and **Logs** links
 
 By default and when applicable, contextual links embed:
 
-* A **filter**, which combines the filter of the widget (including template variables, if any) and, for grouped-by queries, the series clicked-on.
+* A **filter**, which combines the filter(s) of the widget (including template variables, if any) and, for grouped-by queries, the series clicked-on. 
 * A **timerange**. For timeseries and heatmap widgets, the timerange corresponds to the time bucket for the data point. For other widgets, the timerange is the current timerange of the Dashbaord.
 
 
@@ -110,55 +110,116 @@ For links encoding a wide variety of parameters, consider copy-paste the whole U
 
 This section covers a handful of inspirational examples where you can take advantage contextual links to fine-tune how your Dashboards integrate in your workflows:
 
+### Connect Dashboards with your Customer Support solution 
 
-### Link to the AWS Console
+#### Context
 
-Link a widget showing CPU for your hosts, to the AWS console where you'll run basic maintenance operations. Say, to upgrade from `t2.micro` to `t2.large`.
+You use Datadog to monitor your merchant website. Your Customer Support team uses a Dashboard that your [RUM][12] and [Security][14] team prepared to proactively identify your most engaged customers, or customers with a troublesome experience, and potentially reach out to them.
 
-{{< img src="dashboards/guide/context_links/ec2_result.png" alt="AWS EC2 Query Result" style="width:70%;">}}
+To accelerate their troubleshooting workflows, Customer Support team would like a direct connection between Dashboards and their support solution - Zendesk in this example.
 
-A typical AWS EC2 instance summary link is `https://eu-west-3.console.aws.amazon.com/ec2/v2/home?region=eu-west-3#InstanceDetails:instanceId=i-04b737b9f8bf94a94` in which you read:
-* `eu-west-3`as the datacenter region, once as a subdomain and once as a URL param
-* `i-04b737b9f8bf94a94` the host ID, as a hash parameter
+#### Approach
 
-The query below would capture both datacenter and host region. 
-
-{{< img src="dashboards/guide/context_links/ec2_query.png" alt="AWS EC2 Query" style="width:70%;">}}
-
-The corresponding templated link would be `https://{{region.value}}.console.aws.amazon.com/ec2/v2/home?region={{region.value}}#InstanceDetails:instanceId={{host.value}}`.
-
-If your platform runs only on one region, the query above would work. However, alternatively, don't use the "group by region" in your query and hardcode the region in the templated link  `https://eu-west-3.console.aws.amazon.com/ec2/v2/home?region=eu-west-3#InstanceDetails:instanceId={{host.value}}`.
-
-{{< img src="dashboards/guide/context_links/ec2_interaction.png" alt="AWS EC2 Query Interaction" style="width:90%;">}}
-
-
-### Link to Zendesk
-
-Link a widget showing the customers most engaged on your platform, to Zendesk page platform. Say, to check what's the history of interactions for that customer.
-
-{{< img src="dashboards/guide/context_links/zendesk_result.png" alt="Zendesk Query Result" style="width:70%;">}}
-
-
-A typical Zendesk link to search for users is `https://acme.zendesk.com/agent/search/1?type=user&q=email%3Ashane%40doe.com`, where the user is a search parameter.
-
-The query below would capture the user email. 
+Your primary ID to track logged users all across your platform in Datadog is the user email, which is the facet you use in some of your Dashboards widgets.
 
 {{< img src="dashboards/guide/context_links/zendesk_query.png" alt="Zendesk Query" style="width:80%;">}}
 
+A typical Zendesk link to search for users is `https://acme.zendesk.com/agent/search/1?type=user&q=email%3Ashane%40doe.com`, where (user) email is a search parameter.
 
-And the corresponding templated link would be is `https://acme.zendesk.com/agent/search/1?type=user&q=email:{{@usr.email.value}}`.
+The templated link would be `https://acme.zendesk.com/agent/search/1?type=user&q=email:{{@usr.email.value}}`.
+
+{{< img src="dashboards/guide/context_links/zendesk_link.png" alt="Zendesk User Page Context Link" style="width:80%;">}}
+
+
+#### Wrap up
+
+As a result, your Customer Support benefit from a link embedded in the widget, that takes them in Zendesk directly in the right context.
 
 {{< img src="dashboards/guide/context_links/zendesk_interaction.png" alt="Zendesk User Page Context Link" style="width:80%;">}}
 
-
-### Trigger a webhook
-
-TODO
+{{< img src="dashboards/guide/context_links/zendesk_result.png" alt="Zendesk Result" style="width:70%;">}}
 
 
-### Fine tune the landing page of the Datadog Log Explorer
 
-TODO
+### Link to the AWS Console
+
+#### Context
+
+Your startup is in its early days. Your platform is hosted on [AWS EC2][16] instances and procedures to upscale or downscale your platform are still mostly manual.
+
+Still, you have a Datadog Dashboard in which you consolidate your key health metrics for your infrastructure. To accelerate your operations workflow, you'd like a direct connection between this Dashboard and your [AWS Console][15], for instance to upgrade from `t2.micro` to `t2.large`.
+
+#### Approach
+
+A typical AWS EC2 instance summary link is `https://eu-west-3.console.aws.amazon.com/ec2/v2/home?region=eu-west-3#InstanceDetails:instanceId=i-04b737b9f8bf94a94` in which you read:
+
+* `eu-west-3`as the datacenter region, once as a subdomain and once as a URL param
+* `i-04b737b9f8bf94a94` the host ID, as a hash parameter
+
+If your platform runs only on one region, the templated simply consists in the injection of the host ID: `https://eu-west-3.console.aws.amazon.com/ec2/v2/home?region=eu-west-3#InstanceDetails:instanceId={{host.value}}`.
+
+
+If your platforms runs on multiple regions, then depending on your widget configuration:
+
+* If region is part the query aggregation (like on the screenshot below), then the templated link would be `https://{{region.value}}.console.aws.amazon.com/ec2/v2/home?region={{region.value}}#InstanceDetails:instanceId={{host.value}}`, where {{region.value}} is a **query variable**.
+
+{{< img src="dashboards/guide/context_links/ec2_query.png" alt="AWS EC2 Query" style="width:60%;">}}
+
+* If region is part the query aggregation (like on the screenshot below), then the templated link would be `https://{{$region.value}}.console.aws.amazon.com/ec2/v2/home?region={{$region.value}}#InstanceDetails:instanceId={{host.value}}`, where {{region.value}} is a **template variable**. 
+
+
+#### Wrap up
+
+As a result, you benefit from a link embedded in the widget that takes you in AWS console directly on the right host.
+
+{{< img src="dashboards/guide/context_links/ec2_interaction.png" alt="AWS EC2 Query Interaction" style="width:90%;">}}
+
+{{< img src="dashboards/guide/context_links/ec2_result.png" alt="AWS EC2 Query Result" style="width:70%;">}}
+
+
+### Connect Dashboards and Saved Views, with attribute remapping
+
+#### Context
+
+You monitor your corporate website with Datadog. Among other things, you use [RUM][12] to understand your readership and leads, and Logs to [overwatch your API Gateways][13] for a more technical perspective.
+
+The team in charge of API Gateways maintains a Log Explorer [Saved View][10]. This Saved View is fine-tuned for the front-end team to have at hand the information relevant for them.
+ 
+Your front-end engineers typically use Dashboard with high level RUM insights, and to accelerate their troubleshooting they'd like to access the Saved View with Dashboard current context.
+
+{{< img src="dashboards/guide/context_links/logs-saved-view_result.png" alt="Logs Saved View result" style="width:70%;">}}
+
+
+#### Approach Saved Views
+
+Saved Views define what are the default query, visualisation and configuration options to use in Explorers. A typical saved view link is `https://app.datadoghq.com/logs?saved_view=305130`, which encodes under-the-hood for the whole Log Explorer URL. 
+
+You can override any parameter in the resulting Log Explorer URL, appending the Saved View short link. 
+
+For instance, `https://app.datadoghq.com/logs?saved_view=305130`**`&query=@source:nginx @network.client.ip:123.123.12.1`** leads to the Log Explorer as if you open the Saved View at first place, except the default query filter is replaced by: `@source:nginx @network.client.ip:123.123.12.1`.
+
+
+#### Approach attributes remapping
+
+Say, navigation on your website is anonymous, so you use IP as a proxy to identify your users.
+
+You want to identify the `@session.ip` attribute from your RUM events, with the `@network.client.ip` attribute from your logs. The two attributes have two different names since they have slightly different meaning in the general case. But in the specific context of authentication logs, you identify one with another.
+
+With contextual links, you can inject the `@session.ip` in a filter based on `@network.client.ip`, as follows: `@network.client.ip:{{@session.ip.value}}`.
+
+
+#### Wrap-up
+
+{{< img src="dashboards/guide/context_links/logs-saved-view_query.png" alt="Logs Saved View result" style="width:70%;">}}
+
+With a RUM Widget in your Dashboard showing insights per Session IP and for specific countries, you can use the following link configuration.
+
+{{< img src="dashboards/guide/context_links/logs-saved-view_link.png" alt="Logs Saved View result" style="width:70%;">}}
+
+As a result: 
+
+* The link is always up-to-date, as your API Gateway team updates the Saved View to take into account latest updates on the incoming logs.
+* Users have a direct connection between the RUM Events and corresponding Logs, through the IP field remapping.
 
 
 ## Further Reading
@@ -174,6 +235,10 @@ TODO
 [7]: /logs/
 [8]: https://app.datadoghq.com/logs
 [9]: https://app.datadoghq.com/rum/explorer
-
-
-
+[10]: /logs/explorer/saved_views/#overview
+[11]: /logs/explorer/
+[12]: /real_user_monitoring/
+[13]: /integrations/#cat-web
+[14]: /security_platform/cloud_siem/
+[15]: https://aws.amazon.com/console/
+[16]: /integrations/amazon_ec2/
