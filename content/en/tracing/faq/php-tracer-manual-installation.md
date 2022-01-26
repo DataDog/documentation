@@ -113,7 +113,7 @@ ddtrace.request_init_hook=<PATH_TO_EXTRACTED_TAR_GZ>/dd-trace-sources/bridge/dd_
 ddtrace.request_init_hook=<PATH_TO_SOURCES>/bridge/dd_wrap_autoloader.php
 ```
 
-After restarting the web server/PHP SAPI (e.g., `$ sudo apachectl restart`, `$ sudo service php-fpm restart`, etc.) the extension is enabled. To confirm that the extension is loaded, run:
+After restarting the web server/PHP SAPI (for example, `$ sudo apachectl restart`, `$ sudo service php-fpm restart`, etc.) the extension is enabled. To confirm that the extension is loaded, run:
 
 ```bash
 $ php --ri=ddtrace

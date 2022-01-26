@@ -17,6 +17,10 @@ further_reading:
 
 UDP tests allow you to monitor that low-level UDP connections can be established on the ports of given hosts, ensuring availability of any services living on UDP ports. With built-in response time data, you can keep track of the performance of your network applications and be alerted in case of unexpected slowness.
 
+In normal UDP traffic, you transmit information from a source to a destination without asking for acknowledgement. 
+
+In order to monitor your UDP services, Datadog recommends having a process on the receiving host that listens on the UDP port and responds back. After setting up this process, you can create a Synthetics test and set an assertion on the expected response.
+
 UDP tests can run from both [managed][1] and [private locations][2] depending on your preference for running the test from outside or inside your network. UDP tests can run on a schedule, on-demand, or directly within your [CI/CD pipelines][3].
 
 ## Configuration
@@ -27,7 +31,7 @@ After choosing to create an `UDP` Test, define your test's request.
 
 1. Specify the **Host** and **Port** to run your test on. By default, the port is set to `443`.
 2. Enter the string you want to send in your test. 
-3. Specify the amount of time in seconds before the test times out.
+3. Specify the amount of time in seconds before the test times out (optional).
 4. **Name** your UDP test.
 5. Add `env` **Tags** as well as any other tag to your UDP test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][4].
 
@@ -144,8 +148,9 @@ These reasons include the following:
 
 `TIMEOUT`
 : The request couldn't be completed in a reasonable time. Two types of `TIMEOUT` can happen:
-  - `TIMEOUT: The request couldn’t be completed in a reasonable time.` indicates that the timeout happened at the TCP socket connection level.
-  - `TIMEOUT: Retrieving the response couldn’t be completed in a reasonable time.` indicates that the timeout happened on the overall run (which includes TCP socket connection, data transfer, and assertions).
+  - `TIMEOUT: The request couldn’t be completed in a reasonable time.` indicates that the request duration hit the test defined timeout (default is set to 60s). 
+  For each request only the completed stages for the request are displayed in the network waterfall. For example, in the case of `Total response time` only being displayed, the timeout occurred during the DNS resolution.
+  - `TIMEOUT: Overall test execution couldn't be completed in a reasonable time.` indicates that the test duration (request + assertions) hits the maximum duration (60.5s).
 
 ## Permissions
 
@@ -159,7 +164,7 @@ If you have access to the [custom role feature][10], add your user to any custom
 
 [1]: /api/latest/synthetics/#get-all-locations-public-and-private
 [2]: /synthetics/private_locations/
-[3]: /synthetics/cicd_testing
+[3]: /synthetics/cicd_integrations
 [4]: /synthetics/search/#search
 [5]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
 [6]: /monitors/notify/#notify-your-team

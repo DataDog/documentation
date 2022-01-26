@@ -59,6 +59,7 @@ The Agent can autodiscover and attach tags to all data emitted by the entire pod
   | `image_name`                  | Low          | Pod spec                                                                | N/A                                                 |
   | `short_image`                 | Low          | Pod spec                                                                | N/A                                                 |
   | `image_tag`                   | Low          | Pod spec                                                                | N/A                                                 |
+  | `eks_fargate_node`            | Low          | Pod spec                                                                | EKS Fargate environment                                       |
 
 </div>
 
@@ -354,6 +355,6 @@ container_env_as_tags:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/docker/tag/#extract-environment-variables-as-tags
+[1]: /getting_started/tagging/assigning_tags/?tab=containerizedenvironments#environment-variables
 [2]: /getting_started/tagging/unified_service_tagging
 [3]: /agent/kubernetes/tag/?tab=agent#extract-labels-as-tags

@@ -23,7 +23,7 @@ Prenez rapidement des décisions éclairées en fonction des données actuelles 
 
 ## Configuration
 
-Pour connecter votre application Datadog à votre compte CloudCheckr :
+Pour associer votre compte Datadog à votre compte CloudCheckr :
 
 - Cliquez sur vos extensions CloudCheckr.
 - [Ajoutez vos clés d'API et d'application Datadog][1].
@@ -32,5 +32,5 @@ Pour connecter votre application Datadog à votre compte CloudCheckr :
 
 Lisez l'article [Dimensionner parfaitement vos ressources cloud avec l'intégration Datadog/CloudCheckr][2] (en anglais) du blog de Datadog.
 
-[1]: https://app.datadoghq.com/account/settings#api
+[1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: https://www.datadoghq.com/blog/rightsizing-cloudcheckr

@@ -461,7 +461,7 @@ etcdctl set /datadog/check_configs/redis/logs '[{"source": "redis", "service": "
 
 Notice that each of the three values is a list. Autodiscovery assembles list items into the integration configurations based on shared list indexes. In this case, it composes the first (and only) check configuration from `check_names[0]`, `init_configs[0]` and `instances[0]`.
 
-Unlike auto-conf files, **key-value stores may use the short OR long image name as container identifiers**, e.g. `redis` OR `redis:latest`.
+Unlike auto-conf files, **key-value stores may use the short OR long image name as container identifiers**, for example, `redis` OR `redis:latest`.
 
 {{% /tab %}}
 {{% tab "Helm" %}}

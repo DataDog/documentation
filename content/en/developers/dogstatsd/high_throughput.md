@@ -9,7 +9,7 @@ further_reading:
     - link: 'developers/libraries'
       tag: 'Documentation'
       text: 'Official and Community created API and DogStatsD client libraries'
-    - link: 'https://github.com/DataDog/datadog-agent/tree/master/pkg/dogstatsd'
+    - link: 'https://github.com/DataDog/datadog-agent/tree/main/pkg/dogstatsd'
       tag: 'GitHub'
       text: 'DogStatsD source code'
 ---
@@ -210,13 +210,13 @@ For more information and code examples, see [DogStatsD "Sample Rate" Parameter E
 
 ### Use DogStatsD over UDS (Unix Domain Socket)
 
-UDS is an inter-process communication protocol used to [transport DogStatsD payloads][2]. It has very little overhead when compared to UDP and lowers the general footprint of DogStatsD on your system.
+UDS is an inter-process communication protocol used to [transport DogStatsD payloads][2]. It has little overhead when compared to UDP and lowers the general footprint of DogStatsD on your system.
 
 ### Client-side aggregation
 
-Client libraries can aggregate metrics on the client side, reducing number of messages that have to be submitted to the DataDog Agent, improving IO performance and throughput.
+Client libraries can aggregate metrics on the client side, reducing number of messages that have to be submitted to the Datadog Agent, improving IO performance and throughput.
 
-{{< programming-lang-wrapper langs="go,java" >}}
+{{< programming-lang-wrapper langs="go,java,.NET" >}}
 {{< programming-lang lang="go" >}}
 
 Client-side aggregation is only available in the Go client starting with v5.0.0.
@@ -242,6 +242,26 @@ See [Client-side aggregation][1] for more information.
 
 [1]: https://github.com/DataDog/java-dogstatsd-client#aggregation
 {{< /programming-lang >}}
+
+{{< programming-lang lang=".NET" >}}
+
+Client-side aggregation is available in DogStatsD C# client v7.0.0+ and is enabled by default. Client-side aggregation is available for gauges, counters, and sets.
+
+```csharp
+var dogstatsdConfig = new StatsdConfig
+{
+    StatsdServerName = "127.0.0.1",
+    StatsdPort = 8125,
+    ClientSideAggregation = new ClientSideAggregationConfig()
+};
+```
+
+
+For more information, see the [DogStatsD for C# repository][1].
+
+[1]: https://github.com/DataDog/dogstatsd-csharp-client#client-side-aggregation
+{{< /programming-lang >}}
+
 {{< /programming-lang-wrapper >}}
 
 ## Operating system kernel buffers
@@ -550,7 +570,6 @@ The total number of contexts flushed by the client, when client-side aggregation
 (`gauge`, `set`, `count`, `timing`, `histogram`, or `distribution`). Starting v5.0.0 of the Go client. This metric is
 reported only when the aggregation is enabled (which is the default).
 
-
 To disable telemetry, use the `WithoutTelemetry` setting:
 
 ```go
@@ -597,6 +616,18 @@ The number of datagrams dropped by the DogStatsD client.
 `datadog.dogstatsd.client.packets_dropped_queue` 
 : **Metric type**: count<br>
 The number of datagrams dropped because the DogStatsD client queue was full.
+
+`datadog.dogstatsd.client.aggregated_context`
+: **Metric type**: count<br>
+The number of contexts aggregated when client side aggregation is enabled. Starting with version `v2.11.0`.
+
+`datadog.dogstatsd.client.aggregated_context_by_type`
+: **Metric type**: count<br>
+The number of contexts aggregated by type when client side aggregation is enabled. Starting with version `v2.13.0`. The metric is enabled by default starting `v3.0.0` but requires `enableDevMode(true)` for `v2.13.0`. The metric is tagged by `metrics_type`.
+
+`datadog.dogstatsd.client.metrics_by_type`
+: **Metric type**: count<br>
+The number of metrics sent to the DogStatsD client by your application tagged by type (before sampling). Starting with version `v2.13.0` when `enableDevMode(true)` is used and by default starting `v3.0.0`. The metric is tagged by `metrics_type`.
 
 To disable telemetry, use the `enableTelemetry(false)` builder option:
 
@@ -716,6 +747,10 @@ Number of datagrams dropped by the DogStatsD client.
 `datadog.dogstatsd.client.packets_dropped_queue`
 : **Metric type**: count<br>
 Number of datagrams dropped because the DogStatsD client queue was full.
+
+`datadog.dogstatsd.client.aggregated_context_by_type`
+: **Metric type**: count<br>
+Number of contexts aggregated by type when client side aggregation is enabled. Starting with version `7.0.0`.
 
 To disable telemetry, set `TelemetryFlushInterval` at `null`:
 

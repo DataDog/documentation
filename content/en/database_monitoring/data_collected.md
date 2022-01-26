@@ -5,7 +5,7 @@ description: Information about the data that Database Monitoring collects.
 further_reading:
 
 ---
-{{< site-region region="us3,us5,gov" >}}
+{{< site-region region="us5,gov" >}}
 <div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
 {{< /site-region >}}
 
@@ -30,7 +30,7 @@ However, there are some common sources of data risks:
 
 ### Database schema
 
-If table names, column names, indexes, database names, or any other schema contain sensitive information, these data are not obfuscated. It is very uncommon that database schema are considered sensitive, but be advised that obfuscation is not applied to these data types.
+If table names, column names, indexes, database names, or any other schema contain sensitive information, these data are not obfuscated. It is uncommon that database schema are considered sensitive, but be advised that obfuscation is not applied to these data types.
 
 ### Database logs
 

@@ -10,7 +10,7 @@ further_reading:
       text: "Troubleshooting CI"
 ---
 
-{{< site-region region="us5,gov" >}}
+{{< site-region region="gov" >}}
 <div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
@@ -59,14 +59,11 @@ module.exports = {
 2. In `testEnvironment.js`:
 
 ```javascript
-require('dd-trace').init({
-  // Only activates test instrumentation on CI
-  enabled: process.env.DD_ENV === 'ci',
-  // Name of the service or library under test
-  service: 'my-javascript-app',
-  // To guarantee test span delivery
-  flushInterval: 300000
-})
+
+// Only activates test instrumentation on CI
+if (process.env.DD_ENV === 'ci') {
+  require('dd-trace/ci/jest/env')
+}
 
 // jest-environment-jsdom is an option too
 module.exports = require('jest-environment-node')
@@ -77,7 +74,7 @@ module.exports = require('jest-environment-node')
 Run your tests as you normally do, specifying the environment where test are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable. For example:
 
 ```bash
-DD_ENV=ci npm test
+DD_ENV=ci DD_SERVICE=my-javascript-app npm test
 ```
 
 
@@ -86,57 +83,45 @@ DD_ENV=ci npm test
 
 {{% tab "Mocha" %}}
 
-Create a file in your project (for example, `init-tracer.js`) with the following contents:
-
-```javascript
-require('dd-trace').init({
-  // Only activates test instrumentation on CI
-  enabled: process.env.DD_ENV === 'ci',
-
-  // Name of the service or library under test
-  service: 'my-ui-app'
-})
-```
-
-Add `--require init-tracer` to the run command for your `mocha` tests, for example in your `package.json`:
+Add `--require dd-trace/ci/init` to the run command for your `mocha` tests, for example in your `package.json`:
 
 ```json
 "scripts": {
-  "test": "mocha --require init-tracer"
+  "test": "mocha --require dd-trace/ci/init"
 },
 ```
 
 Run your tests as you normally do, specifying the environment where test are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable. For example:
 
 ```bash
-DD_ENV=ci npm test
+DD_ENV=ci DD_SERVICE=my-javascript-app npm test
 ```
 
 {{% /tab %}}
 {{% tab "Cucumber" %}}
 
-Add `--require-module dd-trace/init` to however you normally run your `cucumber-js` tests, for example in your `package.json`:
+Add `--require-module dd-trace/ci/init` to however you normally run your `cucumber-js` tests, for example in your `package.json`:
 
 {{< code-block lang="json" filename="package.json" >}}
 "scripts": {
-  "test": "DD_SERVICE=my-ui-app cucumber-js --require-module=dd-trace/init"
+  "test": "cucumber-js --require-module=dd-trace/ci/init"
 },
 {{< /code-block >}}
 
 Run your tests as you normally do, specifying the environment where test are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable. For example:
 
 {{< code-block lang="bash" >}}
-DD_ENV=ci npm test
+DD_ENV=ci DD_SERVICE=my-javascript-app npm test
 {{< /code-block >}}
 
 {{% /tab %}}
 
 {{% tab "Cypress" %}}
 
-1. Set [`pluginsFile`][1] to `"dd-trace/cypress/plugin"`, for example through [`cypress.json`][2]:
+1. Set [`pluginsFile`][1] to `"dd-trace/ci/cypress/plugin"`, for example through [`cypress.json`][2]:
 {{< code-block lang="json" filename="cypress.json" >}}
 {
-  "pluginsFile": "dd-trace/cypress/plugin"
+  "pluginsFile": "dd-trace/ci/cypress/plugin"
 }
 {{< /code-block >}}
 
@@ -144,23 +129,39 @@ If you've already defined a `pluginsFile`, you can still initialize the instrume
 {{< code-block lang="javascript" filename="cypress/plugins/index.js" >}}
 module.exports = (on, config) => {
   // your previous code is before this line
-  require('dd-trace/cypress/plugin')(on, config)
+  require('dd-trace/ci/cypress/plugin')(on, config)
 }
 {{< /code-block >}}
 
 2. Add the following line to the [`supportFile`][3]:
 {{< code-block lang="javascript" filename="cypress/support/index.js" >}}
 // your previous code is before this line
-require('dd-trace/cypress/support')
+require('dd-trace/ci/cypress/support')
 {{< /code-block >}}
 
 
 Run your tests as you normally do, specifying the environment where test are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable. For example:
 
 {{< code-block lang="bash" >}}
-DD_ENV=ci npm test
+DD_ENV=ci DD_SERVICE=my-ui-app npm test
 {{< /code-block >}}
 
+### Add extra tags
+
+To add additional information to your tests such as the responsible team, use `cy.task('dd:addTags', { yourTags: 'here' })` in your test or hooks. 
+
+For example:
+
+{{< code-block lang="javascript">}}
+beforeEach(() => {
+  cy.task('dd:addTags', { 'before.each': 'certain.information' })
+})
+it('renders a hello world', () => {
+  cy.task('dd:addTags', { 'team.owner': 'ui' })
+  cy.get('.hello-world')
+    .should('have.text', 'Hello World')
+})
+{{< /code-block >}}
 
 
 [1]: https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests#Plugins-file
@@ -249,7 +250,9 @@ If you are running tests in non-supported CI providers or with no `.git` folder,
 [Mocha >=9.0.0][8] uses an ESM-first approach to load test files. That means that if ES modules are used (for example, by defining test files with the `.mjs` extension), _the instrumentation is limited_. Tests are detected, but there isn't visibility into your test. For more information about ES modules, see the [NodeJS documentation][9].
 
 ### Browser tests
-The JavaScript tracer does not support browsers, so if you run browser tests with `mocha` or `jest`, there isn't visibility within the test itself.
+The JavaScript tracer does not support browsers, so browser tests with `mocha` or `jest` do not provide visibility on the browser. For tests with `cypress`, `dd-trace` provides visibility on the node process running the test, but not on the browser. 
+
+If you want visibility on the browser, consider [Real User Monitoring][10].
 
 ## Best practices
 
@@ -268,14 +271,14 @@ Avoid this:
 })
 {{< /code-block >}}
 
-And use [`test.each`][10] instead:
+And use [`test.each`][11] instead:
 {{< code-block lang="javascript" >}}
 test.each([[1,2,3], [3,4,7]])('sums correctly %i and %i', (a,b,expected) => {
   expect(a+b).toEqual(expected)
 })
 {{< /code-block >}}
 
-For `mocha`, use [`mocha-each`][11]:
+For `mocha`, use [`mocha-each`][12]:
 {{< code-block lang="javascript" >}}
 const forEach = require('mocha-each');
 forEach([
@@ -303,5 +306,6 @@ When you use this approach, both the testing framework and CI Visibility can tel
 [7]: /tracing/setup_overview/setup/nodejs/?tab=containers#configuration
 [8]: https://github.com/mochajs/mocha/releases/tag/v9.0.0
 [9]: https://nodejs.org/api/packages.html#packages_determining_module_system
-[10]: https://jestjs.io/docs/api#testeachtablename-fn-timeout
-[11]: https://github.com/ryym/mocha-each
+[10]: /real_user_monitoring/browser/
+[11]: https://jestjs.io/docs/api#testeachtablename-fn-timeout
+[12]: https://github.com/ryym/mocha-each

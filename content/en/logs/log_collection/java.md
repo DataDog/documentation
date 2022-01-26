@@ -39,7 +39,7 @@ Exception in thread "main" java.lang.NullPointerException
 
 To alleviate this complexity, configure your logging library to produce your logs in JSON format. By logging to JSON, you:
 
-* Ensure that the stack trace is properly wrapped into the its log event.
+* Ensure that the stack trace is properly wrapped into the log event.
 * Ensure that all log event attributes (such as severity, logger name, and thread name) are properly extracted.
 * Gain access to [Mapped Diagnostic Context (MDC)][1] attributes, which you can attach to any log events.
 * Avoid the need for [custom parsing rules][2].
@@ -62,17 +62,17 @@ For Log4j, log in JSON format by using the SLF4J module [log4j-over-slf4j][1] co
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>log4j-over-slf4j</artifactId>
-      <version>1.7.13</version>
+      <version>1.7.32</version>
     </dependency>
     <dependency>
       <groupId>ch.qos.logback</groupId>
       <artifactId>logback-classic</artifactId>
-      <version>1.1.3</version>
+      <version>1.2.9</version>
     </dependency>
     <dependency>
       <groupId>net.logstash.logback</groupId>
       <artifactId>logstash-logback-encoder</artifactId>
-      <version>4.5.1</version>
+      <version>6.6</version>
     </dependency>
     ```
 2. Configure a file appender using the JSON layout in `logback.xml`:
@@ -118,22 +118,22 @@ Log4j 2 includes a JSON layout.
     <dependency>
         <groupId>org.apache.logging.log4j</groupId>
         <artifactId>log4j-core</artifactId>
-        <version>2.7</version>
+        <version>2.17.0</version>
     </dependency>
     <dependency>
         <groupId>com.fasterxml.jackson.core</groupId>
         <artifactId>jackson-core</artifactId>
-        <version>2.8.3</version>
+        <version>2.13.0</version>
     </dependency>
     <dependency>
         <groupId>com.fasterxml.jackson.core</groupId>
         <artifactId>jackson-databind</artifactId>
-        <version>2.8.3</version>
+        <version>2.13.0</version>
     </dependency>
     <dependency>
         <groupId>com.fasterxml.jackson.core</groupId>
         <artifactId>jackson-annotations</artifactId>
-        <version>2.8.3</version>
+        <version>2.13.0</version>
     </dependency>
     ```
 
@@ -163,12 +163,12 @@ Use the [logstash-logback-encoder][1] for JSON formatted logs in Logback.
     <dependency>
       <groupId>ch.qos.logback</groupId>
       <artifactId>logback-classic</artifactId>
-      <version>1.1.3</version>
+      <version>1.2.9</version>
     </dependency>
     <dependency>
       <groupId>net.logstash.logback</groupId>
       <artifactId>logstash-logback-encoder</artifactId>
-      <version>4.5.1</version>
+      <version>6.6</version>
     </dependency>
     ```
 
@@ -307,12 +307,12 @@ Use the SLF4J module [log4j-over-slf4j][1] with Logback to send logs to another 
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>log4j-over-slf4j</artifactId>
-      <version>1.7.13</version>
+      <version>1.7.32</version>
     </dependency>
     <dependency>
       <groupId>ch.qos.logback</groupId>
       <artifactId>logback-classic</artifactId>
-      <version>1.2.6</version>
+      <version>1.2.9</version>
     </dependency>
     <dependency>
       <groupId>net.logstash.logback</groupId>
@@ -338,12 +338,12 @@ Log4j 2 allows logging to a remote host, but it does not offer the ability to pr
     <dependency>
         <groupId>org.apache.logging.log4j</groupId>
         <artifactId>log4j-to-slf4j</artifactId>
-        <version>2.11.0</version>
+        <version>2.17.0</version>
     </dependency>
     <dependency>
         <groupId>ch.qos.logback</groupId>
         <artifactId>logback-classic</artifactId>
-        <version>1.2.6</version>
+        <version>1.2.9</version>
     </dependency>
     <dependency>
         <groupId>net.logstash.logback</groupId>
@@ -443,7 +443,7 @@ Use the [logstash-logback-encoder][4] logging library along with Logback to stre
     <dependency>
       <groupId>ch.qos.logback</groupId>
       <artifactId>logback-classic</artifactId>
-      <version>1.2.6</version>
+      <version>1.2.9</version>
     </dependency>
     <dependency>
       <groupId>net.logstash.logback</groupId>

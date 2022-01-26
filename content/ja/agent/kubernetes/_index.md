@@ -374,7 +374,7 @@ agent:
 
 ## 環境変数
 
-Datadog Agent で使用可能な環境変数のリストを以下に示します。これらを Helm でセットアップする場合は、[helm/charts Github リポジトリ][9]の `datadog-value.yaml` ファイルのコンフィギュレーションオプションの完全なリストを参照してください。
+Datadog Agent で使用可能な環境変数のリストを以下に示します。これらを Helm でセットアップする場合は、[helm/charts GitHub リポジトリ][9]の `datadog-value.yaml` ファイルのコンフィギュレーションオプションの完全なリストを参照してください。
 
 ### グローバルオプション
 

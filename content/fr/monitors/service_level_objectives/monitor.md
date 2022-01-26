@@ -43,7 +43,7 @@ Exemple : 99 % du temps, les requêtes doivent présenter une latence inférie
 
 Tant que le SLO reste au-dessus du pourcentage cible, le statut du SLO s'affiche en vert. En cas de violation du pourcentage cible, le statut du SLO s'affiche en rouge. Vous pouvez également spécifier une valeur d'avertissement supérieure à la valeur cible afin de savoir lorsque le SLO est sur le point de ne plus être satisfait. En cas de violation du pourcentage d'avertissement (mais pas du pourcentage cible), le statut du SLO s'affiche en jaune.
 
-**Remarque :** le nombre de décimales pouvant être spécifiées pour vos SLO basés sur des monitors dépend de l'intervalle de temps choisi. Jusqu'à deux décimales sont autorisées pour les objectifs à 7 et 30 jours, et jusqu'à trois décimales sont autorisées pour les objectifs à 90 jours. La précision affichée dans la vue détaillée d'un SLO correspond à `num_target_decimal_places`, c'est-à-dire deux décimales pour les objectifs à 7 et 30 jours et trois décimales pour les objectifs à 90 jours. Ces limites sont en place parce que le budget d'indisponibilité des SLO basés sur des monitors est exprimé en temps. Un objectif de 99,999 % pour des objectifs à 7 et 30 jours donne lieu à des budgets d'indisponibilité de 6 secondes et 26 secondes, respectivement. Les monitors étant évalués toutes les minutes, la granularité d'un SLO basé sur un monitor est elle aussi de 1 minute. Par conséquent, les budgets d'indisponibilité de 6 et 26 secondes décrits plus haut seraient entièrement consommés et dépassés par une seule alerte (si vous avez besoin d'une plus grande granularité, nous vous conseillons plutôt d'utiliser des [SLO basés sur des métriques][7]). En outre, il est peu probable qu'un budget d'indisponibilité aussi faible puisse être respecté dans la pratique.
+**Remarque :** le nombre de décimales pouvant être spécifiées pour vos SLO basés sur des monitors dépend de l'intervalle de temps choisi. Jusqu'à deux décimales sont autorisées pour les objectifs à 7 et 30 jours, et jusqu'à trois décimales sont autorisées pour les objectifs à 90 jours. La précision affichée dans la vue détaillée d'un SLO correspond à `num_target_decimal_places`, c'est-à-dire deux décimales pour les objectifs à 7 et 30 jours et trois décimales pour les objectifs à 90 jours. Ces limites ont été mises en place car la marge d'erreur des SLO basés sur des monitors est exprimée en temps. Un objectif de 99,999 % pour des objectifs à 7 et 30 jours donne lieu à des marges d'erreur de 6 secondes et 26 secondes, respectivement. Les monitors étant évalués toutes les minutes, la granularité d'un SLO basé sur un monitor est elle aussi de 1 minute. Par conséquent, les marges d'erreur de 6 et 26 secondes décrites plus haut seraient entièrement utilisées et dépassées par une seule alerte (si vous avez besoin d'une plus grande granularité, nous vous conseillons plutôt d'utiliser des [SLO basés sur des métriques][6]). En outre, il est peu probable qu'une marge d'erreur aussi faible puisse être respectée dans la pratique.
 
 ### Identifier cet indicateur
 
@@ -75,7 +75,7 @@ Dans certains cas, le statut des SLO basés sur des monitors utilisant un seul t
 
 Si vous modifiez la valeur par défaut de l'une de ces conditions, il se peut que le statut global d'un SLO basé sur des monitors utilisant uniquement ce test Synthetic soit meilleur que l'ensemble des statuts agrégés de chaque groupe du test Synthetic.
 
-Pour en savoir plus sur les conditions d'alerte des tests Synthetic, consultez la [documentation][6] sur la surveillance Synthetic.
+Pour en savoir plus sur les conditions d'alertes de test Synthetics, consultez la [documentation][7] sur la surveillance Synthetics.
 
 ## Monitor sous-jacent et historiques de SLO
 
@@ -87,7 +87,7 @@ Nous vous recommandons de ne pas utiliser les monitors caractérisés par un `Al
 
 Les calculs SLO ne tiennent pas compte des résolutions manuelles d'un monitor ni des résolutions découlant du paramètre **_After x hours automatically resolve this monitor from a triggered state_**. Si ces processus occupent une place importante dans votre workflow, vous pouvez dupliquer votre monitor, supprimer les paramètres de résolution automatique et les notifications « @  », puis utiliser le monitor dupliqué pour votre SLO.
 
-Vérifiez que vous utilisez bien le type de SLI conseillé pour votre scénario. Datadog prend en charge des SLI basés sur des monitors ainsi que des SLI basés sur des métriques. Pour en savoir plus, consultez la [documentation relative aux SLO basés sur des métriques][7].
+Vérifiez que vous utilisez bien le type de SLI conseillé pour votre scénario. Datadog prend en charge des SLI basés sur des monitors ainsi que des SLI basés sur des métriques. Pour en savoir plus, consultez la [documentation relative aux SLO basés sur des métriques][6].
 
 ## Pour aller plus loin
 
@@ -97,6 +97,6 @@ Vérifiez que vous utilisez bien le type de SLI conseillé pour votre scénario.
 [2]: https://app.datadoghq.com/slo
 [3]: https://app.datadoghq.com/slo/new/monitor
 [4]: https://app.datadoghq.com/monitors#create
-[5]: /fr/monitors/monitor_types/metric/?tab=threshold#alert-grouping
-[6]: /fr/synthetics/api_tests/?tab=httptest#alert-conditions
-[7]: /fr/monitors/service_level_objectives/metric/
+[5]: /fr/monitors/create/types/metric/?tab=threshold#alert-grouping
+[6]: /fr/monitors/service_level_objectives/metric/
+[7]: /fr/synthetics/api_tests/?tab=httptest#alert-conditions

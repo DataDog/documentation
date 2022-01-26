@@ -3,11 +3,11 @@ title: How to send TCP/UDP host metrics via the Datadog API ?
 kind: faq
 ---
 
-If you want to get insights about your TCP/UDP connections you can gather statistic through a little Crontab Entry and forward them to your Datadog platform.
+To get insights about your TCP/UDP connections, you can gather statistics through a Crontab Entry and forward them to your Datadog platform.
 
-We are going to use Linux sockstats located in: /proc/net/sockstat.
+To do this, use Linux sockstats located in: /proc/net/sockstat.
 
-You may find here a little code snippet to inspire from
+Here is an example code snippet to get you started:
 
 https://gist.github.com/sage-oli-wood/70e0931f037ea0aac132
 

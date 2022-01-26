@@ -15,6 +15,9 @@ further_reading:
 - link: "/synthetics/private_locations"
   tag: "Documentation"
   text: "Run Multistep API tests on internal endpoints"
+- link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_test"
+  tag: "Terraform"
+  text: "Create and manage Synthetic Multistep API Tests with Terraform"
 ---
 
 ## Overview
@@ -240,6 +243,9 @@ To display your list of variables, type `{{` in your desired field.
 
 A test is considered `FAILED` if a step does not satisfy one or several assertions or if a step's request prematurely failed. In some cases, the test can indeed fail without being able to test the assertions against the endpoint, these reasons include:
 
+`CONNREFUSED`
+: No connection could be made because the target machine actively refused it.
+
 `CONNRESET`
 : The connection was abruptly closed by the remote server. Possible causes include the webserver encountering an error or crashing while responding, or loss of connectivity of the webserver.
 
@@ -254,8 +260,9 @@ A test is considered `FAILED` if a step does not satisfy one or several assertio
 
 `TIMEOUT`
 : The request couldn't be completed in a reasonable time. Two types of `TIMEOUT` can happen:
-  - `TIMEOUT: The request couldn’t be completed in a reasonable time.` indicates that the timeout happened at the TCP socket connection level.
-  - `TIMEOUT: Retrieving the response couldn’t be completed in a reasonable time.` indicates that the timeout happened on the overall run (which includes TCP socket connection, data transfer, and assertions).
+  - `TIMEOUT: The request couldn’t be completed in a reasonable time.` indicates that the request duration hit the test defined timeout (default is set to 60s). 
+  For each request only the completed stages for the request are displayed in the network waterfall. For example, in the case of `Total response time` only being displayed, the timeout occurred during the DNS resolution.
+  - `TIMEOUT: Overall test execution couldn't be completed in a reasonable time.` indicates that the request and assertions duration hit the maximum duration (60.5s).
 
 `MALFORMED_RESPONSE` 
 : The remote server responded with a payload that does not comply with HTTP specifications.
@@ -272,7 +279,7 @@ If you have access to the [custom role feature][17], add your user to any custom
 
 [1]: /synthetics/api_tests/http_tests
 [2]: /synthetics/api_tests/http_tests?tab=requestoptions#notify-your-team
-[3]: /synthetics/cicd_testing
+[3]: /synthetics/cicd_integrations
 [4]: /api/v1/synthetics/#get-all-locations-public-and-private
 [5]: /synthetics/private_locations
 [6]: /synthetics/api_tests/

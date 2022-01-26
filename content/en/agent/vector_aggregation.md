@@ -60,7 +60,6 @@ If you are using Docker, add the following to your Agent configuration file.
 -e DD_LOGS_CONFIG_LOGS_DD_URL=<VECTOR_HOST>:<VECTOR_PORT>
 -e DD_LOGS_CONFIG_LOGS_NO_SSL=true
 -e DD_LOGS_CONFIG_USE_HTTP=true
--e DD_LOGS_CONFIG_USE_V2_API=false
 ```
 
 ### Vector configuration

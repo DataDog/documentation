@@ -1,0 +1,23 @@
+{
+  "title": "Example-Create_a_new_dashboard_with_image_widget",
+  "description": "",
+  "widgets": [
+    {
+      "layout": {
+        "x": 0,
+        "y": 0,
+        "width": 12,
+        "height": 12
+      },
+      "definition": {
+        "type": "image",
+        "url": "https://example.com/image.png",
+        "sizing": "cover"
+      }
+    }
+  ],
+  "template_variables": [],
+  "layout_type": "free",
+  "is_read_only": false,
+  "notify_list": []
+}

@@ -27,7 +27,7 @@ Private locations allow you to **monitor internal-facing applications** or priva
 You can also use private locations to:
 
 - **Create custom locations** in mission-critical areas of your business.
-- **Verify the application performance in your internal testing environment** before you release new features to production with [Synthetics and CI/CD][1].
+- **Verify the application performance in your internal testing environment** before you release new features to production with [Synthetic tests in your CI/CD pipelines][1].
 - **Compare the application performance** from inside and outside your internal network.
 
 Private locations are Docker containers that you can install anywhere inside your private network. You can access the [private location worker image][2] on Google Container Registry.
@@ -80,7 +80,7 @@ You can use your new private location just like a managed location to run Synthe
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /synthetics/cicd_testing
+[1]: /synthetics/cicd_integrations
 [2]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/synthetics-private-location-worker?pli=1
 [3]: /getting_started/synthetics/
 [4]: https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-docker-ce

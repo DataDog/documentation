@@ -6,9 +6,6 @@ further_reading:
 - link: "/synthetics/private_locations/monitoring"
   tag: "Documentation"
   text: "Monitor your Private Locations"
-- link: "synthetics/private_locations/dimensioning"
-  tag: "Documentation"
-  text: "Dimension your Private Locations"
 ---
 
 ## Overview 
@@ -46,10 +43,10 @@ For example, Datadog recommends ~ 1.5 core CPU `(150mCores + (150mCores*10 test 
 
 ### Assign resources to your private location
 
-Once you have determined the [total requirements for your private location](#private-location-total-hardware-requirements), decide how you want these resources to be distributed: by assigning all resources to a single worker or by distributing all resources across multiple workers.
+Once you have determined the [total requirements for your private location](#define-your-total-hardware-requirements), decide how you want these resources to be distributed: by assigning all resources to a single worker or by distributing all resources across multiple workers.
 To assign all resources to a single worker, run one container for a private location with a configuration file.
 1. Set the [`concurrency` parameter][5] to `maximum number of test runs that can be executed in parallel on your private location`.
-2. Assign your [total private location resource requirements](#private-location-total-hardware-requirements) to your unique container.
+2. Assign your [total private location resource requirements](#define-your-total-hardware-requirements) to your unique container.
   
 To distribute resources across multiple workers, run multiple containers for a private location with a configuration file.
  
@@ -69,9 +66,8 @@ For example, ten tests are scheduled to run simultaneously on a private location
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
 [1]: /synthetics/api_tests/
 [2]: /synthetics/multistep?tab=requestoptions
 [3]: /synthetics/browser_tests/?tab=requestoptions
-[4]: /synthetics/cicd_testing
+[4]: /synthetics/cicd_integrations
 [5]: /synthetics/private_locations/configuration#advanced-configuration

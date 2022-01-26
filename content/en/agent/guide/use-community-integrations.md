@@ -14,7 +14,7 @@ further_reading:
 
 ## Overview
 
-Community developed integrations for the Datadog Agent are stored in the Datadog [integrations-extra][1] Github repository. They are not packaged with the Agent, but can be installed as add-ons.
+Community developed integrations for the Datadog Agent are stored in the Datadog [integrations-extra][1] GitHub repository. They are not packaged with the Agent, but can be installed as add-ons.
 
 ## Setup
 

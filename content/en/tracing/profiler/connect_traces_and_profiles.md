@@ -23,7 +23,7 @@ You can move directly from span information to profiling data on the Code Hotspo
 
 ### Prerequisites
 
-{{< programming-lang-wrapper langs="java,python,ruby" >}}
+{{< programming-lang-wrapper langs="java,python,go,ruby" >}}
 {{< programming-lang lang="java" >}}
 Code Hotspots identification is enabled by default when you [turn on profiling for your service][1]. For manually instrumented code, continuous profiler requires scope activation of spans:
 
@@ -43,7 +43,7 @@ Requires:
 - If on OpenJDK 8: 8u282 or greater and tracing library version 0.77.0 or greater.
 
 
-[1]: /tracing/profiler/enabling/?code-lang=java
+[1]: /tracing/profiler/enabling/java
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
 
@@ -52,7 +52,7 @@ Code Hotspots identification is enabled by default when you [turn on profiling f
 Requires tracing library version 0.44.0 or greater.
 
 
-[1]: /tracing/profiler/enabling/?code-lang=python
+[1]: /tracing/profiler/enabling/python
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
@@ -61,7 +61,30 @@ Code Hotspots identification is enabled by default when you [turn on profiling f
 Requires tracing library version 0.49.0 or greater.
 
 
-[1]: /tracing/profiler/enabling/?code-lang=ruby
+[1]: /tracing/profiler/enabling/ruby
+{{< /programming-lang >}}
+{{< programming-lang lang="go" >}}
+
+Code Hotspots identification for Go is disabled by default. To enable it, [turn on profiling for your service][1] and ensure that:
+
+- You are using [dd-trace-go][2] version 1.35.0 or later.
+- [`DD_PROFILING_CODE_HOTSPOTS_COLLECTION_ENABLED=true`][3] is set in your environment, or the [`tracer.WithProfilerCodeHotspots(true)`][3] option is passed to [`tracer.Start()`][4].
+- [`profiler.CPUDuration(60*time.Second)`][5] and [`profiler.WithPeriod(60*time.Second)`][6] are passed to [`profiler.Start()`][7] to capture hotspot information for 100% of all spans.
+
+
+**Warning:** Go 1.17 and below has several bugs (see [GH-35057][8], [GH-48577][9], [CL-369741][10], [CL-369983][11]) that can reduce the accuracy of this feature, especially when using a lot of CGO. They are scheduled to be fixed in the 1.18 release.
+
+[1]: /tracing/profiler/enabling/go
+[2]: https://github.com/DataDog/dd-trace-go/releases
+[3]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#WithProfilerCodeHotspots
+[4]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#Start
+[5]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/profiler#CPUDuration
+[6]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/profiler#WithPeriod
+[7]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/profiler#Start
+[8]: https://github.com/golang/go/issues/35057
+[9]: https://github.com/golang/go/issues/48577
+[10]: https://go-review.googlesource.com/c/go/+/369741/
+[11]: https://go-review.googlesource.com/c/go/+/369983/
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
@@ -91,7 +114,7 @@ It is not uncommon to have a small amount of **Other** unexplained time (less th
   - Your application process cannot access CPU resources to execute and is paused. There is no way for the profiler to know about competing resources from other processes or containers.
   - The application is locked in synchronization or in I/O events that are individually lower than 10ms: the Java profiler receives data for paused thread events (locks, I/O, parks) that are larger than 10ms. If you want to reduce that threshold, see [the documentation for changing setup defaults][1].
   - The span you selected is short. Profiling is a sampling mechanism that regularly looks at how your code behaves. There might not be enough representative data for spans shorter than 50ms
-  - Missing instrumentation: Profiling breakdown requires that spans are associated with executing threads by activating these spans in the ScopeManager. Some custom instrumentations don't activate these spans properly, so we can't map them to executing threads. If this span comes from a custom integration, see the [Custom Instrumentation docs][2] for information on how to improve this.
+  - Missing instrumentation: Profiling breakdown requires that spans are associated with executing threads by activating these spans in the ScopeManager. Some custom instrumentations don't activate these spans properly, so you can't map them to executing threads. If this span comes from a custom integration, see the [Custom Instrumentation docs][2] for information on how to improve this.
 
 ### Viewing a profile from a trace
 
@@ -108,7 +131,39 @@ Click the **Span/Trace/Full profile** selector to define the scope of the data:
 
 ### Prerequisites
 
-Endpoint profiling is enabled by default when you turn on profiling for your [Python][3] or [Ruby][4] service. It requires tracing library (`dd-trace-py` or `dd-trace-rb`) version 0.54.0 or greater.
+{{< programming-lang-wrapper langs="python,go,ruby" >}}
+{{< programming-lang lang="python" >}}
+
+Endpoint profiling is enabled by default when you turn on profiling for your [Python][1] service. It requires `dd-trace-py` version 0.54.0 or greater.
+<p></p>
+
+[1]: /tracing/profiler/enabling/python
+{{< /programming-lang >}}
+{{< programming-lang lang="go" >}}
+Endpoint profiling is disabled by default when you turn on profiling for your [Go][1] service. To enable it, you need to ensure that:
+
+- You are using [dd-trace-go][2] version 1.35.0 or later.
+- [`DD_PROFILING_ENDPOINT_COLLECTION_ENABLED=true`][3] is set in your environment, or the [`tracer.WithProfilerEndpoints(true)`][3] option is passed to [`tracer.Start()`][4].
+
+**Warning:** Go 1.17 and below has several bugs (see [GH-35057][5], [GH-48577][6], [CL-369741][7], [CL-369983][8]) that can reduce the accuracy of this feature, especially when using a lot of CGO. They are scheduled to be fixed in the 1.18 release.
+
+[1]: /tracing/profiler/enabling/go
+[2]: https://github.com/DataDog/dd-trace-go/releases
+[3]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#WithProfilerEndpoints
+[4]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#Start
+[5]: https://github.com/golang/go/issues/35057
+[6]: https://github.com/golang/go/issues/48577
+[7]: https://go-review.googlesource.com/c/go/+/369741/
+[8]: https://go-review.googlesource.com/c/go/+/369983/
+{{< /programming-lang >}}
+{{< programming-lang lang="ruby" >}}
+
+Endpoint profiling is enabled by default when you turn on profiling for your [Ruby][1] service. It requires `dd-trace-rb` version 0.54.0 or greater.
+<p></p>
+
+[1]: /tracing/profiler/enabling/ruby
+{{< /programming-lang >}}
+{{< /programming-lang-wrapper >}}
 
 ### Scope flame graphs by endpoints
 
@@ -135,5 +190,3 @@ It is valuable to track top endpoints that are consuming valuable resources such
 
 [1]: /tracing/profiler/profiler_troubleshooting#reduce-overhead-from-default-setup
 [2]: /tracing/setup_overview/custom_instrumentation/java#manually-creating-a-new-span
-[3]: /tracing/profiler/enabling/?code-lang=python
-[4]: /tracing/profiler/enabling/?code-lang=ruby

@@ -9,17 +9,18 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-extras/blob/master/redis_sentinel/README.md'
+  - https://github.com/DataDog/integrations-extras/blob/master/redis_sentinel/README.md
 display_name: Redis Sentinel
 draft: false
 git_integration_title: redis_sentinel
 guid: 8efe0a8c-88c6-4a2f-aa04-60d92051c458
 integration_id: redis-sentinel
 integration_title: Redis Sentinel
+integration_version: 1.1.0
 is_public: true
 kind: integration
 maintainer: '@krasnoukhov'
-manifest_version: 1.1.0
+manifest_version: 1.0.0
 metric_prefix: redis.
 metric_to_check: redis.sentinel.known_sentinels
 name: redis_sentinel
@@ -40,31 +41,30 @@ Recueillez des métriques du service Sentinel de Redis en temps réel pour :
 
 ## Configuration
 
-Le check Sentinel de Redis n'est **PAS** inclus avec le package de l'[Agent Datadog][1].
+Le check Redis Sentinel n'est pas inclus avec le package de l'[Agent Datadog][1] : vous devez donc l'installer.
 
 ### Installation
 
-Si vous utilisez la version 6.8 ou une version ultérieure de l'Agent, suivez les instructions ci-dessous pour installer le check Redis Sentinel sur votre host. Consultez le guide relatif à l'[installation d'intégrations développées par la communauté][2] pour installer des checks avec [une version < 6.8 de l'Agent][3] ou avec l'[Agent Docker][4] :
+Pour l'Agent v7.21+/6.21+, suivez les instructions ci-dessous afin d'installer le check Redis Sentinel sur votre host. Consultez la section [Utiliser les intégrations de la communauté][2] pour effectuer une installation avec l'Agent Docker ou avec des versions antérieures de l'Agent.
 
-1. [Téléchargez et lancez l'Agent Datadog][1].
-2. Exécutez la commande suivante pour installer le wheel de l'intégration à l'aide de l'Agent :
+1. Exécutez la commande suivante pour installer l'intégration de l'Agent :
 
    ```shell
    datadog-agent integration install -t datadog-redis_sentinel==<INTEGRATION_VERSION>
    ```
 
-3. Configurez votre intégration comme [n'importe quelle autre intégration fournie avec l'Agent][5].
+2. Configurez votre intégration comme une [intégration][3] de base.
 
 ### Configuration
 
-1. Modifiez le fichier `redis_sentinel.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][6] pour commencer à recueillir vos [métriques](#metriques) Redis Sentinel.
-   Consultez le [fichier d'exemple upsc.d/conf.yaml][7] pour découvrir toutes les options de configuration disponibles.
+1. Modifiez le fichier `redis_sentinel.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][4] pour commencer à recueillir vos [métriques](#metriques) Redis Sentinel.
+   Consultez le [fichier d'exemple upsc.d/conf.yaml][5] pour découvrir toutes les options de configuration disponibles.
 
-2. [Redémarrez l'Agent][8].
+2. [Redémarrez l'Agent][6].
 
 ## Validation
 
-[Lancez la sous-commande `status` de l'Agent][9] et cherchez `redis_sentinel` dans la section Checks.
+[Lancez la sous-commande `status` de l'Agent][7] et cherchez `redis_sentinel` dans la section Checks.
 
 ## Données collectées
 
@@ -77,46 +77,21 @@ Si vous utilisez la version 6.8 ou une version ultérieure de l'Agent, suivez l
 Le check Redis Sentinel n'inclut aucun événement.
 
 ### Checks de service
+{{< get-service-checks-from-git "redis_sentinel" >}}
 
-**`redis.sentinel.master_is_down`**
-
-Le check renvoie :
-
-- `OK` si le serveur maître est disponible.
-- `CRITICAL` si le serveur maître est indisponible.
-
-**`redis.sentinel.master_is_disconnected`**
-
-Le check renvoie :
-
-- `OK` si le serveur maître n'est pas déconnecté.
-- `CRITICAL` si le serveur maître est déconnecté.
-
-**`redis.sentinel.slave_master_link_down`**
-
-Le check renvoie :
-
-- `OK` si la connexion au serveur maître est fonctionnelle.
-- `CRITICAL` si la connexion au serveur maître n'est pas fonctionnelle.
-
-**`redis.sentinel.slave_is_disconnected`**
-
-Le check renvoie :
-
-- `OK` si l'instance esclave n'est pas déconnectée.
-- `CRITICAL` si l'instance esclave est déconnectée.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][13].
+Besoin d'aide ? Contactez [l'assistance Datadog][10].
+
 
 [1]: https://app.datadoghq.com/account/settings#agent
-[2]: https://docs.datadoghq.com/fr/agent/guide/community-integrations-installation-with-docker-agent/
-[3]: https://docs.datadoghq.com/fr/agent/guide/community-integrations-installation-with-docker-agent/?tab=agentpriorto68
-[4]: https://docs.datadoghq.com/fr/agent/guide/community-integrations-installation-with-docker-agent/?tab=docker
-[5]: https://docs.datadoghq.com/fr/getting_started/integrations/
-[6]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
-[7]: https://github.com/DataDog/integrations-extras/blob/master/redis_sentinel/datadog_checks/redis_sentinel/data/conf.yaml.example
-[8]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[9]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#service-status
-[10]: https://github.com/DataDog/integrations-extras/blob/master/redis_sentinel/metadata.csv
+[2]: https://docs.datadoghq.com/fr/agent/guide/use-community-integrations/
+[3]: https://docs.datadoghq.com/fr/getting_started/integrations/
+[4]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
+[5]: https://github.com/DataDog/integrations-extras/blob/master/redis_sentinel/datadog_checks/redis_sentinel/data/conf.yaml.example
+[6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[7]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#service-status
+[8]: https://github.com/DataDog/integrations-extras/blob/master/redis_sentinel/metadata.csv
+[9]: https://github.com/DataDog/integrations-extras/blob/master/redis_sentinel/assets/service_checks.json
+[10]: http://docs.datadoghq.com/help
