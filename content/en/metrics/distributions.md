@@ -53,7 +53,7 @@ After electing to apply percentile aggregations on a distribution metric, these 
 You can use percentile aggregations in a variety of other widgets and for alerting: 
 * **Single percentile value over any timeframe**
 
-_“What has the p95 request duration for my application been over the past week?”_ 
+   _“What has the p95 request duration for my application been over the past week?”_ 
 
 {{< img src="metrics/distributions/percentile_QVW.jpg" alt="A query value widget displaying a single value (7.33s) for the p95 aggregation of a single metric" style="width:80%;">}}
 
