@@ -487,15 +487,6 @@ exports.handler = async (event) => {
     "order:online", // another tag
   );
 
-  // submit a custom metric with timestamp
-  sendDistributionMetricWithDate(
-    "coffee_house.order_value", // metric name
-    12.45, // metric value
-    new Date(Date.now()), // date, must be within last 20 mins
-    "product:latte", // tag
-    "order:online", // another tag
-  );
-
   const response = {
     statusCode: 200,
     body: JSON.stringify("Hello from serverless!"),
