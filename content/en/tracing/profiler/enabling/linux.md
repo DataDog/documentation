@@ -23,22 +23,28 @@ further_reading:
 The Datadog Profiler for Linux is in public beta. Datadog recommends evaluating the profiler in a non-sensitive environment before deploying in production.
 </div>
 
-The Datadog Profiler for Linux lets you collect profile data for applications that run in memory-unmanaged runtimes, for example C, C++, or Rust applications. It also can profile services such as nginx or Postgres. 
+The Datadog Profiler for Linux lets you collect profile data for applications running on Linux.  It is ideally suited for applications written in compiled languages, such as C, C++, or Rust.  It can also profile services such as nginx, Redis, or Postgres, as it does not require access to source code.
 
 ## Requirements
 
 - The Datadog Profiler requires Linux kernel v4.17+ on an `amd64` compatible processor. It does not support macOS, BSD, Windows, or other operating systems besides Linux v4.17 or later. 
-- The `/proc/sys/kernel/perf_event_open` setting must *at most* 2, or `CAP_SYS_ADMIN` (or `CAP_PERFMON` on Linux v5.8 or later) must be granted to the profiling process or service container.
+- The `/proc/sys/kernel/perf_event_paranoid` setting must *at most* 2, or `CAP_SYS_ADMIN` (or `CAP_PERFMON` on Linux v5.8 or later) must be granted to the profiling process or service container.
 
 ## Installation
 
 To begin profiling applications:
 
-1. Ensure you are running the Datadog agent version [7.20.2][1]+ or [6.20.2][2]+.
+1. Ensure you are running the Datadog agent version [7.20.2][1]+ or [6.20.2][2]+ and that you satisfy the profiler requirements.
 
-2. Download the appropriate [ddprof binary][3] for your Linux distribution.
+2. Download the appropriate [ddprof binary][3] for your Linux distribution.  For example, here is one way to pull the latest release:
 
-3. Modify your service invocation to include the profiler. Your usual command is passed as the last arguments to the `ddprof` executable.
+```shell
+curl -L -o- https://github.com/DataDog/ddprof/releases/download/v0.7.0/ddprof-x86_64_unknown-linux-gnu-2.23.tar.gz | tar xz --strip-components 2 ddprof-x86_64_unknown-linux-gnu-2.23/bin/ddprof
+```
+
+This guide will assume you've extracted the _ddprof_ binary to the local directory.
+
+4. Modify your service invocation to include the profiler. Your usual command is passed as the last arguments to the `ddprof` executable.
    {{< tabs >}}
 {{% tab "Environment variables" %}}
 
@@ -46,14 +52,8 @@ To begin profiling applications:
 export DD_ENV="<APPLICATION_ENVIRONMENT>"
 export DD_SERVICE="<SERVICE_NAME>"
 export DD_VERSION="<APPLICATION_VERSION>"
-ddprof myapp --arg1 --arg2
+./ddprof myapp --arg1 --arg2
 ```
-
-The following parameters are recommended, as they help identify the source of your profiles in the Profiling UI:
-- `DD_ENV`, the [environment][4] name, for example, `production`.
-- `DD_SERVICE`, the [service][4] name, for example, `web-backend`. If this is not specified, the profiler will use the default value `myservice`.
-- `DD_VERSION`, the [version][4] of your application.
-
 **Note**: If you usually launch your application using shell builtins, for example:
 
 ```shell
@@ -66,20 +66,15 @@ Then you must invoke `ddprof` with those builtins instead:
 export DD_SERVICE="<SERVICE_NAME>"
 export DD_VERSION="<APPLICATION_VERSION>"
 export DD_ENV="<APPLICATION_ENVIRONMENT>"
-exec ddprof myapp --arg1 --arg2
+exec ./ddprof myapp --arg1 --arg2
 ```
 
 {{% /tab %}}
 {{% tab "In code" %}}
 
 ```shell
-ddprof --service "<SERVICE_NAME>" --service_version "<APPLICATION_VERSION"> myapp --arg1 --arg2
+./ddprof --service "<SERVICE_NAME>" --service_version "<APPLICATION_VERSION"> myapp --arg1 --arg2
 ```
-
-The following settings help you identify the source of your profiles:
-- `--environment`, the [environment][4] name, for example, `production`.
-- `--service`, the [service][4] name, for example, `web-backend`. If this is not specified, the profiler will use the default value `myservice`.
-- `--service_version`, the [version][4] of your application.
 
 **Note**: If you usually launch your application using shell builtins, for example:
 
@@ -90,7 +85,7 @@ exec myapp --arg1
 Then you must invoke `ddprof` with those builtins instead:
 
 ```shell
-exec ddprof --service "<SERVICE_NAME>" --service_version "<APPLICATION_VERSION"> myapp --arg1
+exec ./ddprof --service "<SERVICE_NAME>" --service_version "<APPLICATION_VERSION"> myapp --arg1
 ```
 
 {{% /tab %}}
@@ -103,23 +98,25 @@ exec ddprof --service "<SERVICE_NAME>" --service_version "<APPLICATION_VERSION">
 
 Configuration for the profiler can be set by command line parameters, environment variables, or a combination of both. Whenever both are provided for a given setting, the command line parameter is used.
 
-| Environment variable            | Long name        | Short name | Default   | Description                                                                                                                    |
-|---------------------------------|-----------------|-----------|-----------|--------------------------------------------------------------------------------------------------------------------------------|
-| DD_ENV                          | environment     | E         |           | The [environment][5] name, for example, `production`.                                                                          |
-| DD_SERVICE                      | service         | S         | myservice | The [service][5] name, for example, `web-backend`.                                                                             |
-| DD_VERSION                      | service_version | V         |           | The [version][5] of your service.                                                                                              |
-| DD_AGENT_HOST                   | host            | H         | localhost | The hostname for the Datadog agent.                                                                                            |
-| DD_TRACE_AGENT_PORT             | port            | P         | 8126      | The Datadog agent listening port.                                                                                              |
-| DD_TRACE_AGENT_URL              | url             | U         |           | `https://<hostname>:<port>` overrides other agent host/port settings.                                                          |
-| DD_TAGS                         | tags            | T         |           | Tags to apply to an uploaded profile. Must be a list of `<key>:<value>` pairs separated by commas, such as: `layer:api,team:intake`. |
-| DD_PROFILING_NATIVE_NICE        | nice            | i         |           | Sets the nice level of the profiler without affecting the instrumented processes.                                              |
-| DD_PROFILING_NATIVE_SHOW_CONFIG | show_config     | a         | no        | Whether to log profiler configuration parameters.                                                                       |
-| DD_PROFILING_NATIVE_LOG_MODE    | log_mode        | o         | stdout    | How to emit profiler logs. See the section on logging for details.                                                             |
-| DD_PROFILING_NATIVE_LOG_LEVEL   | log_level       | l         | warn      | Determines log verbosity.                                                                                                      |
-| DD_PROFILING_NATIVE_TARGET_PID  | pid             | p         |           | Engages pidmode. See the section on pidmode for details.                                                                       |
-| DD_PROFILING_NATIVE_GLOBAL      | global          | g         | no        | Engages globalmode. See the section on globalmode for details. Overrides --pid.                                                |
+| Environment variable            | Long name       | Short name | Default   | Description                                                                                                                          |
+|---------------------------------|-----------------|------------|-----------|--------------------------------------------------------------------------------------------------------------------------------------|
+| DD_ENV                          | environment     | E          |           | The [environment][5] name, for example, `production`.                                                                                |
+| DD_SERVICE                      | service         | S          | myservice | The [service][5] name, for example, `web-backend`.                                                                                   |
+| DD_VERSION                      | service_version | V          |           | The [version][5] of your service.                                                                                                    |
+| DD_AGENT_HOST                   | host            | H          | localhost | The hostname for the Datadog agent.                                                                                                  |
+| DD_TRACE_AGENT_PORT             | port            | P          | 8126      | The Datadog agent listening port.                                                                                                    |
+| DD_TRACE_AGENT_URL              | url             | U          |           | `https://<hostname>:<port>` overrides other agent host/port settings.                                                                |
+| DD_TAGS                         | tags            | T          |           | Tags to apply to an uploaded profile. Must be a list of `<key>:<value>` pairs separated by commas, such as: `layer:api,team:intake`. |
+| DD_PROFILING_NATIVE_NICE        | nice            | i          |           | Sets the nice level of the profiler without affecting the instrumented processes.                                                    |
+| DD_PROFILING_NATIVE_SHOW_CONFIG | show_config     | a          | no        | Whether to log profiler configuration parameters.                                                                                    |
+| DD_PROFILING_NATIVE_LOG_MODE    | log_mode        | o          | stdout    | How to emit profiler logs. See the section on logging for details.                                                                   |
+| DD_PROFILING_NATIVE_LOG_LEVEL   | log_level       | l          | warn      | Determines log verbosity.                                                                                                            |
+| DD_PROFILING_NATIVE_TARGET_PID  | pid             | p          |           | Engages pidmode. See the section on pidmode for details.                                                                             |
+| DD_PROFILING_NATIVE_GLOBAL      | global          | g          | no        | Engages globalmode. See the section on globalmode for details. Overrides --pid.                                                      |
 
 When passing command line arguments, precede long names with two dashes and short names with a single dash. For example, `--service myservice` and `-S myservice`.
+
+The `environment`, `service`, and `service_version` settings are recommended, as they are used by the Profiling UI.
 
 **Note**: Parameters must be set with a value. For example, to log profiler configuration, you must either set `DD_PROFILING_NATIVE_SHOW_CONFIG=yes` or pass `--show_config yes`, rather than `--show_config` alone. For such arguments, `yes`, `true`, and `enable` may be used interchangeably to enable the setting and `no`, `false`, and `disable` may be used to disable it.
 
