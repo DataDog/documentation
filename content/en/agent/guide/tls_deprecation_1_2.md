@@ -6,7 +6,7 @@ kind: guide
 
 ## Overview
 
-Transport Layer Security (TLS) is a critical security protocol used to protect web traffic. It provides confidentiality and integrity of data in transit between clients and servers exchanging information. Datadog is disabling support for older versions of TLS, below 1.2 (SSLv3, TLS v1.0, TLS v1.2) across public facing Datadog applications, beginning March 31, 2022. If you are using unsupported clients to connect to Datadog after older protocols are disabled, you will begin receiving connection error messages.
+Transport Layer Security (TLS) is a critical security protocol used to protect web traffic. It provides confidentiality and integrity of data in transit between clients and servers exchanging information. Datadog is disabling support for older versions of TLS, below 1.2 (SSLv3, TLS v1.0, TLS v1.2) across public facing Datadog applications, beginning March 31, 2022. If you use unsupported clients to connect to Datadog after the older protocols are disabled, you will receive connection error messages.
 
 ### Reason for deprecation
 
@@ -14,13 +14,13 @@ These protocols are being deprecated to ensure that customers connect to Datadog
 
 ## Browser support
 
-Modern browsers have had support for TLS 1.2 for a while, view the "Can I use..." [compatibility matrix][2] to determine if your specific browser and version are affected.
+Modern browsers have had support for TLS 1.2 for a while. See the "Can I use..." [compatibility matrix][2] to determine if your specific browser and version are affected.
 
 ## Language support
 
 ### Python
 
-Starting in Python 3.10, the SSL module defaults to TLS 1.2 and the use of modern cipher suites, see [][3].
+Starting in Python 3.10, the SSL module defaults to TLS 1.2 and the use of modern cipher suites, see [https://bugs.python.org/issue43998][3].
 
 ### Golang
 
