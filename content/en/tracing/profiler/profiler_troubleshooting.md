@@ -251,7 +251,7 @@ There are a few less common permissions issues:
 
 You can encounter this warning when the system is unable to allocate sufficient locked memory for the profiler. This most commonly happens when too many instances of the profiler are active on a given host, as when many containerized services are instrumented individually on the same host. You can resolve this by increasing the `mlock()` memory limit or decreasing the number of instrumented applications.
 
-Other profiling tools may contribute to encountering the same limit.
+Other profiling tools may contribute to the same limit.
 
 ### "\<WARNING\> Failure to establish connection"
 
