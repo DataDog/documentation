@@ -75,7 +75,8 @@ With threshold queries for distributions with percentiles, you do not need to pr
 To use threshold queries: 
 
 1. Enable percentiles on your distribution metric on the Metrics Summary page.
-2. Graph any distribution metric with the “count values...” aggregator and specify a threshold value and comparison operator as shown here:
+2. Graph your chosen distribution metric using the “count values...” aggregator.
+3. Specify a threshold value and comparison operator.
 
 {{< img src="metrics/distributions/threshold_queries.mp4" alt="Threshold Queries" style="width:80%;">}}
 
