@@ -3,7 +3,9 @@
 {{ $operationid := .operationid }}
 {{ $resourcePage := .resourcePage }}
 {{ $endpoint := .endpoint }}
+{{ $version := .version }}
 {{ $securitySchemes := .securitySchemes }}
+{{- $codeExampleLookup := (index (index $context.Site.Data.api $version) "CodeExamples") -}}
 
 <h3 class="mb-2">{{ i18n "code_example" }}</h3>
 <div class="programming-lang-wrapper js-code-snippet-wrapper" >
@@ -30,6 +32,31 @@
           <button class="btn text-primary js-copy-button">{{ i18n "copy" }}</button>
       </div>
       <div class="highlight">
+
+{{ with (index $codeExampleLookup $operationid) }}
+<div id="accordion">
+  {{ range $i, $item := . }}
+    {{ with $resourcePage.Resources.Match (printf "request.%s%s.json" $operationid $item.suffix ) }}
+      <div class="card">
+        <div class="card-header p-0">
+          <h5 class="m-0">
+            <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#{{ $operationid }}-request-example-{{ (add $i 1) }}" aria-expanded="true" aria-controls="collapseOne">
+              {{ $item.description }}
+            </button>
+          </h5>
+        </div>
+        <div id="{{ $operationid }}-request-example-{{ (add $i 1) }}" class="collapse" data-parent="#accordion">
+          <div class="card-body p-0">
+              {{ range . }}
+                {{ (highlight (.Content) "json" "") }}
+              {{ end }}
+          </div>
+        </div>
+      </div>
+    {{ end }}
+  {{ end }}
+</div>
+{{ end }}
           <pre class="chroma">
 {{/* Do not change indent of html below as it will change the indentation of the curl code block */}}
 <code class="language-fallback" data-lang="fallback">
