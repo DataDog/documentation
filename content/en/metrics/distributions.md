@@ -78,7 +78,7 @@ To use threshold queries:
 2. Graph your chosen distribution metric using the “count values...” aggregator.
 3. Specify a threshold value and comparison operator.
 
-{{< img src="metrics/distributions/threshold_queries.mp4" alt="Threshold Queries" style="width:80%;">}}
+{{< img src="metrics/distributions/threshold_queries.mp4" alt="A timeseries graph being visualized using the count values aggregator, with a threshold of greater than 8 seconds" style="width:80%;">}}
 
 Example metric-based SLO set up:
 
