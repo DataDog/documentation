@@ -1,10 +1,6 @@
 ---
 title: Writing Custom Security Signal Rules
 kind: documentation
-further_reading:
-    - link: 'tktk'
-      tag: 'Documentation'
-      text: 'tktk'
 ---
 
 
