@@ -21,7 +21,7 @@ further_reading:
 
    For the various ways of installing the Agent, on other operating systems or in container environments, see the [Agent in-app documentation][1].
 
-2. **Download the [Datadog tracing library][2]**, at least version 0.92.0:
+2. **Download the [Datadog Java library][2]**, at least version 0.94.0:
    ```
    wget -O dd-java-agent.jar 'https://github.com/DataDog/dd-trace-java/releases/latest/download/dd-java-agent.jar'
    ```
@@ -33,7 +33,7 @@ further_reading:
    java -javaagent:/path/to/dd-java-agent.jar -Ddd.appsec.enabled=true -Ddd.service=<MY SERVICE> -Ddd.env=<MY_ENV> -jar path/to/app.jar
    ```
 
-   or one of the following methods, depending on where your application runs.
+   Or one of the following methods, depending on where your application runs:
 
    {{< tabs >}}
 {{% tab "Docker CLI" %}}
