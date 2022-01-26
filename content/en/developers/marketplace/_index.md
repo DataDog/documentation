@@ -189,7 +189,7 @@ The ddev commands in the previous section generate a skeleton of folders and fil
 
 * Store all images used in your `README.md` file in the `images` folder. 
 * **Note:** Don't include spaces in the name of image files.
-* If you are listing on the Marketplace, do not place images in the "Overview" section of your `README.md` file.
+* **Note:** If you are listing on the Marketplace, do not place images in the "Overview" section of your `README.md` file.
 
 #### Manifest
 
