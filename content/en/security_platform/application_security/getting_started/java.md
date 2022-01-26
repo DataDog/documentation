@@ -10,6 +10,10 @@ further_reading:
       text: 'Java Datadog Library source code'
 ---
 
+{{% appsec-getstarted %}}
+
+## Get started
+
 1. Install or update the Datadog Agent to at least version 7.31.0: 
 
    ```
@@ -93,9 +97,8 @@ java -javaagent:dd-java-agent.jar \
 
 {{< /tabs >}}
 
-The library collects security data from your application and sends them to the Agent, which sends them to Datadog to be used in alerts, reports, queries, and dashboards to help you monitor security happenings in your application. 
 
-A few minutes after you enabling your application and exercise it, data will appear in the Application Security Explorer page in Datadog.
+{{% appsec-getstarted-2 %}}
 
 ## Further Reading
 
