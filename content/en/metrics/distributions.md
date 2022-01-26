@@ -63,6 +63,7 @@ _ “Alert me when the p99 of my application’s request latency is greater than
 {{< img src="metrics/distributions/percentile_monitor.jpg" alt="Percentile threshold being set with a drop down for alert conditions in a monitor " style="width:80%;">}}
 
 ### Threshold Queries for SLOs (beta) 
+
 <div class="alert alert-warning">
 Threshold queries are in beta. 
 </div>
