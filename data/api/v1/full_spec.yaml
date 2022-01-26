@@ -2025,16 +2025,6 @@ components:
 
             Any tags associated with the host are also applied to this event.'
           type: string
-        id:
-          description: Integer ID of the event.
-          format: int64
-          readOnly: true
-          type: integer
-        payload:
-          description: Payload of the event.
-          example: '{}'
-          readOnly: true
-          type: string
         priority:
           $ref: '#/components/schemas/EventPriority'
         related_event_id:
@@ -2070,10 +2060,6 @@ components:
         title:
           description: The event title.
           example: Did you hear the news today?
-          type: string
-        url:
-          description: URL of the event.
-          readOnly: true
           type: string
       required:
       - title
@@ -10331,6 +10317,10 @@ components:
         assertions:
           default: []
           description: Array of assertions used for the test.
+          example:
+          - operator: lessThan
+            target: 1000
+            type: responseTime
           items:
             $ref: '#/components/schemas/SyntheticsAssertion'
           type: array
@@ -10347,6 +10337,7 @@ components:
           type: boolean
         name:
           description: The name of the step.
+          example: Example step name
           type: string
         request:
           $ref: '#/components/schemas/SyntheticsTestRequest'
@@ -10354,12 +10345,18 @@ components:
           $ref: '#/components/schemas/SyntheticsTestOptionsRetry'
         subtype:
           $ref: '#/components/schemas/SyntheticsAPIStepSubtype'
+      required:
+      - assertions
+      - request
+      - name
+      - subtype
       type: object
     SyntheticsAPIStepSubtype:
       description: The subtype of the Synthetic multistep API test step, currently
         only supporting `http`.
       enum:
       - http
+      example: http
       type: string
       x-enum-varnames:
       - HTTP
@@ -10388,7 +10385,7 @@ components:
           type: integer
         name:
           description: Name of the test.
-          example: Test name
+          example: Example test name
           type: string
         options:
           $ref: '#/components/schemas/SyntheticsTestOptions'
@@ -10411,6 +10408,12 @@ components:
           type: array
         type:
           $ref: '#/components/schemas/SyntheticsAPITestType'
+      required:
+      - name
+      - config
+      - locations
+      - options
+      - type
       type: object
     SyntheticsAPITestConfig:
       description: Configuration object for a Synthetic API test.
@@ -10680,11 +10683,103 @@ components:
       - RECEIVED_MESSAGE
     SyntheticsBasicAuth:
       description: Object to handle basic authentication when performing the test.
+      oneOf:
+      - $ref: '#/components/schemas/SyntheticsBasicAuthWeb'
+      - $ref: '#/components/schemas/SyntheticsBasicAuthSigv4'
+      - $ref: '#/components/schemas/SyntheticsBasicAuthNTLM'
+      type: object
+    SyntheticsBasicAuthNTLM:
+      description: Object to handle `NTLM` authentication when performing the test.
+      properties:
+        domain:
+          description: Domain for the authentication to use when performing the test.
+          example: DOMAINNAME
+          type: string
+        password:
+          description: Password for the authentication to use when performing the
+            test.
+          example: examplepassword
+          type: string
+        type:
+          $ref: '#/components/schemas/SyntheticsBasicAuthNTLMType'
+        username:
+          description: Username for the authentication to use when performing the
+            test.
+          example: joedoe
+          type: string
+        workstation:
+          description: Workstation for the authentication to use when performing the
+            test.
+          example: ''
+          type: string
+      required:
+      - type
+      type: object
+    SyntheticsBasicAuthNTLMType:
+      default: ntlm
+      description: The type of authentication to use when performing the test.
+      enum:
+      - ntlm
+      example: ntlm
+      type: string
+      x-enum-varnames:
+      - NTLM
+    SyntheticsBasicAuthSigv4:
+      description: Object to handle `SIGV4` authentication when performing the test.
+      properties:
+        accessKey:
+          description: Access key for the `SIGV4` authentication.
+          example: AKIAIOSFODNN7EXAMPLE
+          type: string
+        region:
+          description: Region for the `SIGV4` authentication.
+          example: us-east-1
+          type: string
+        secretKey:
+          description: Secret key for the `SIGV4` authentication.
+          example: wJalrXUtnFEMI/K7MDENG/bPxRfiCYzEXAMPLEKEY
+          type: string
+        serviceName:
+          description: Service name for the `SIGV4` authentication.
+          example: execute-api
+          type: string
+        sessionToken:
+          description: Session token for the `SIGV4` authentication.
+          example: 'AQoEXAMPLEH4aoAH0gNCAPyJxz4BlCFFxWNE1OPTgk5TthT+FvwqnKwRcOIfrRh3c/L
+
+            To6UDdyJwOOvEVPvLXCrrrUtdnniCEXAMPLE/IvU1dYUg2RVAJBanLiHb4IgRmpRV3z
+
+            rkuWJOgQs8IZZaIv2BXIa2R4OlgkBN9bkUDNCJiBeb/AXlzBBko7b15fjrBs2+cTQtp
+
+            Z3CYWFXG8C5zqx37wnOE49mRl/+OtkIKGO7fAE
+
+            '
+          type: string
+        type:
+          $ref: '#/components/schemas/SyntheticsBasicAuthSigv4Type'
+      required:
+      - accessKey
+      - secretKey
+      - type
+      type: object
+    SyntheticsBasicAuthSigv4Type:
+      default: sigv4
+      description: The type of authentication to use when performing the test.
+      enum:
+      - sigv4
+      example: sigv4
+      type: string
+      x-enum-varnames:
+      - SIGV4
+    SyntheticsBasicAuthWeb:
+      description: Object to handle basic authentication when performing the test.
       properties:
         password:
           description: Password to use for the basic authentication.
           example: ''
           type: string
+        type:
+          $ref: '#/components/schemas/SyntheticsBasicAuthWebType'
         username:
           description: Username to use for the basic authentication.
           example: ''
@@ -10692,7 +10787,17 @@ components:
       required:
       - password
       - username
+      - type
       type: object
+    SyntheticsBasicAuthWebType:
+      default: web
+      description: The type of basic authentication to use when performing the test.
+      enum:
+      - web
+      example: web
+      type: string
+      x-enum-varnames:
+      - WEB
     SyntheticsBatchDetails:
       description: Details about a batch response.
       properties:
@@ -10784,6 +10889,8 @@ components:
           $ref: '#/components/schemas/SyntheticsBrowserTestConfig'
         locations:
           description: Array of locations used to run the test.
+          example:
+          - example-location
           items:
             description: A location from which the test was run.
             type: string
@@ -10800,6 +10907,7 @@ components:
           type: integer
         name:
           description: Name of the test.
+          example: Example test name
           type: string
         options:
           $ref: '#/components/schemas/SyntheticsTestOptions'
@@ -10823,7 +10931,11 @@ components:
         type:
           $ref: '#/components/schemas/SyntheticsBrowserTestType'
       required:
-      - message
+      - config
+      - locations
+      - name
+      - options
+      - type
       type: object
     SyntheticsBrowserTestConfig:
       description: Configuration object for a Synthetic browser test.
@@ -11365,7 +11477,8 @@ components:
           readOnly: true
           type: string
         name:
-          description: Name of the global variable.
+          description: Name of the global variable. Unique across Synthetics global
+            variables.
           example: MY_VARIABLE
           type: string
         parse_test_options:
@@ -12154,6 +12267,8 @@ components:
           description: Port to use when performing the test.
           format: int64
           type: integer
+        proxy:
+          $ref: '#/components/schemas/SyntheticsTestRequestProxy'
         query:
           description: Query to use for the test.
           type: object
@@ -12198,6 +12313,18 @@ components:
         updatedAt:
           description: Date of update of the certificate or key, ISO format.
           type: string
+      type: object
+    SyntheticsTestRequestProxy:
+      description: The proxy to perform the test.
+      properties:
+        headers:
+          $ref: '#/components/schemas/SyntheticsTestHeaders'
+        url:
+          description: URL of the proxy to perform the test.
+          example: https://example.com
+          type: string
+      required:
+      - url
       type: object
     SyntheticsTiming:
       description: 'Object containing all metrics and their values collected for a
@@ -12817,9 +12944,6 @@ components:
       required:
       - type
       - requests
-      - size_by
-      - color_by
-      - group_by
       type: object
     TreeMapWidgetDefinitionType:
       default: treemap
@@ -12833,9 +12957,23 @@ components:
     TreeMapWidgetRequest:
       description: An updated treemap widget.
       properties:
+        formulas:
+          description: List of formulas that operate on queries. **This feature is
+            currently in beta.**
+          items:
+            $ref: '#/components/schemas/WidgetFormula'
+          type: array
         q:
           description: The widget metrics query.
           type: string
+        queries:
+          description: List of queries that can be returned directly or used in formulas.
+            **This feature is currently in beta.**
+          items:
+            $ref: '#/components/schemas/FormulaAndFunctionQueryDefinition'
+          type: array
+        response_format:
+          $ref: '#/components/schemas/FormulaAndFunctionResponseFormat'
       type: object
     UsageAnalyzedLogsHour:
       description: The number of analyzed logs for each hour for a given organization.
@@ -13477,16 +13615,36 @@ components:
       description: Cloud Security Posture Management usage for a given organization
         for a given hour.
       properties:
+        aas_host_count:
+          description: The number of Cloud Security Posture Management Azure app services
+            hosts during a given hour.
+          format: double
+          nullable: true
+          type: number
+        azure_host_count:
+          description: The number of Cloud Security Posture Management Azure hosts
+            during a given hour.
+          format: double
+          nullable: true
+          type: number
+        compliance_host_count:
+          description: The number of Cloud Security Posture Management hosts during
+            a given hour.
+          format: double
+          nullable: true
+          type: number
         container_count:
           description: The total number of Cloud Security Posture Management containers
             during a given hour.
-          format: int64
-          type: integer
+          format: double
+          nullable: true
+          type: number
         host_count:
           description: The total number of Cloud Security Posture Management hosts
             during a given hour.
-          format: int64
-          type: integer
+          format: double
+          nullable: true
+          type: number
         hour:
           description: The hour for the usage.
           format: date-time
@@ -14359,6 +14517,16 @@ components:
             hours in the current date for all organizations.
           format: int64
           type: integer
+        cspm_aas_host_top99p:
+          description: Shows the 99th percentile of all Cloud Security Posture Management
+            Azure app services hosts over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        cspm_azure_host_top99p:
+          description: Shows the 99th percentile of all Cloud Security Posture Management
+            Azure hosts over all hours in the current date for all organizations.
+          format: int64
+          type: integer
         cspm_container_avg:
           description: Shows the average number of Cloud Security Posture Management
             containers over all hours in the current date for all organizations.
@@ -14637,6 +14805,17 @@ components:
         container_hwm:
           description: Shows the high-water mark of all distinct containers over all
             hours in the current date for the given org.
+          format: int64
+          type: integer
+        cspm_aas_host_top99p:
+          description: Shows the 99th percentile of all Cloud Security Posture Management
+            Azure app services hosts over all hours in the current date for the given
+            org.
+          format: int64
+          type: integer
+        cspm_azure_host_top99p:
+          description: Shows the 99th percentile of all Cloud Security Posture Management
+            Azure hosts over all hours in the current date for the given org.
           format: int64
           type: integer
         cspm_container_avg:
@@ -14922,6 +15101,17 @@ components:
         container_hwm_sum:
           description: Shows the sum of the high-water marks of all distinct containers
             over all hours in the current months for all organizations.
+          format: int64
+          type: integer
+        cspm_aas_host_top99p_sum:
+          description: Shows the 99th percentile of all Cloud Security Posture Management
+            Azure app services hosts over all hours in the current months for all
+            organizations.
+          format: int64
+          type: integer
+        cspm_azure_host_top99p_sum:
+          description: Shows the 99th percentile of all Cloud Security Posture Management
+            Azure hosts over all hours in the current months for all organizations.
           format: int64
           type: integer
         cspm_container_avg_sum:
@@ -16277,7 +16467,7 @@ components:
             dashboards_public_share: The ability to share dashboards externally.
             dashboards_read: The ability to view dashboards.
             dashboards_write: The ability to create and change dashboards.
-            events_read: The ability to read events data.
+            events_read: The ability to read Events data.
             metrics_read: The ability to view custom metrics.
             monitors_downtime: The ability to set downtimes to suppress alerts from
               any monitor in an organization. The ability to write monitors is not
@@ -16292,7 +16482,7 @@ components:
               in tests the list of private locations available.
             synthetics_read: The ability to list and view configured Synthetic tests.
             synthetics_write: The ability to create, edit, and delete Synthetic tests.
-            timeseries_query: The ability to query timeseries data.
+            timeseries_query: The ability to query Timeseries data.
             usage_read: The ability to view your organization's usage and usage attribution.
             user_access_invite: The ability to invite other users to your organization.
             user_access_manage: The ability to disable users, manage user roles, and
@@ -17017,6 +17207,14 @@ paths:
           or cloned dashboards.'
         in: query
         name: filter[shared]
+        required: false
+        schema:
+          type: boolean
+      - description: 'When `true`, this query returns only deleted custom-created
+
+          or cloned dashboards. This parameter is incompatible with `filter[shared]`.'
+        in: query
+        name: filter[deleted]
         required: false
         schema:
           type: boolean
@@ -17827,6 +18025,12 @@ paths:
       summary: Delete a dashboard
       tags:
       - Dashboards
+      x-given:
+        deleted_dashboard:
+          parameters:
+          - name: dashboard_id
+            source: dashboard.id
+          step: the "dashboard" was deleted
       x-menu-order: 3
       x-undo:
         type: idempotent
@@ -20957,6 +21161,10 @@ paths:
           description: Forbidden
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
       summary: Get indexes order
       tags:
       - Logs Indexes
@@ -21025,6 +21233,10 @@ paths:
           description: Forbidden
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
       summary: Get all indexes
       tags:
       - Logs Indexes
@@ -21184,6 +21396,10 @@ paths:
           description: Forbidden
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
       summary: Get pipeline order
       tags:
       - Logs Pipelines
@@ -21265,6 +21481,10 @@ paths:
           description: Forbidden
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
       summary: Get all pipelines
       tags:
       - Logs Pipelines
@@ -21382,6 +21602,10 @@ paths:
           description: Forbidden
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
       summary: Get a pipeline
       tags:
       - Logs Pipelines

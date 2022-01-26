@@ -22,6 +22,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/npm-best-practices/"
   tag: "Blog"
   text: "Best practices for getting started with Datadog NPM"
+- link: "https://www.datadoghq.com/blog/monitor-consul-with-datadog-npm/"
+  tag: "Blog"
+  text: "Datadog NPM now supports Consul networking"
 ---
 
 ## Overview

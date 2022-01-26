@@ -1,4 +1,40 @@
 {
+  "CreateCloudWorkloadSecurityAgentRule": [
+    {
+      "suffix": "",
+      "description": "Create a Cloud Workload Security Agent rule returns \"OK\" response"
+    }
+  ],
+  "DeleteCloudWorkloadSecurityAgentRule": [
+    {
+      "suffix": "",
+      "description": "Delete a Cloud Workload Security Agent rule returns \"OK\" response"
+    }
+  ],
+  "GetCloudWorkloadSecurityAgentRule": [
+    {
+      "suffix": "",
+      "description": "Get a Cloud Workload Security Agent rule returns \"OK\" response"
+    }
+  ],
+  "ListCloudWorkloadSecurityAgentRules": [
+    {
+      "suffix": "",
+      "description": "Get all Cloud Workload Security Agent rules returns \"OK\" response"
+    }
+  ],
+  "DownloadCloudWorkloadPolicyFile": [
+    {
+      "suffix": "",
+      "description": "Get the latest Cloud Workload Security policy returns \"OK\" response"
+    }
+  ],
+  "UpdateCloudWorkloadSecurityAgentRule": [
+    {
+      "suffix": "",
+      "description": "Update a Cloud Workload Security Agent rule returns \"OK\" response"
+    }
+  ],
   "CreateIncidentService": [
     {
       "suffix": "",

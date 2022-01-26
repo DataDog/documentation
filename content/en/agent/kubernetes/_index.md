@@ -176,7 +176,7 @@ To install the Datadog Agent on your Kubernetes cluster:
 
 4. **Set your Datadog site** to {{< region-param key="dd_site" code="true" >}} using the `DD_SITE` environment variable in the `datadog-agent.yaml` manifest.
 
-    **Note**: If the `DD_SITE` environment variable is not explicitly set, it defaults to the `US` site `datadog.com`. If you are using one of the other sites (`EU`, `US3`, or `US1-FED`) this will result in an invalid API key message. Use the [documentation site selector][20] to see documentation appropriate for the site you're using.
+    **Note**: If the `DD_SITE` environment variable is not explicitly set, it defaults to the `US` site `datadoghq.com`. If you are using one of the other sites (`EU`, `US3`, or `US1-FED`) this will result in an invalid API key message. Use the [documentation site selector][20] to see documentation appropriate for the site you're using.
 
 5. **Deploy the DaemonSet** with the command:
 
@@ -392,7 +392,7 @@ Once the Agent is up and running in your cluster, use [Datadog's Autodiscovery f
 
 ## Environment variables
 
-The following is the list of environment variables available for the Datadog Agent using a DaemonSet. If you are using Helm, see the full list of configuration options for the `datadog-value.yaml` file in the [helm/charts Github repository][9]. If you are using Operator, see the [Operator Configuration][10] documentation.
+The following is the list of environment variables available for the Datadog Agent using a DaemonSet. If you are using Helm, see the full list of configuration options for the `datadog-value.yaml` file in the [helm/charts GitHub repository][9]. If you are using Operator, see the [Operator Configuration][10] documentation.
 
 ### Global options
 

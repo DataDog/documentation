@@ -81,10 +81,10 @@ main_left:
     url: 'https://www.datadoghq.com/product/security-platform/'
     weight: 13
     parent: product
-  - identifier: security-monitoring
-    name: Security Monitoring
+  - identifier: cloud-siem
+    name: Cloud SIEM
     pre: <i class="icon-siem align-middle"></i>
-    url: 'https://www.datadoghq.com/product/security-platform/security-monitoring/'
+    url: 'https://www.datadoghq.com/product/security-platform/cloud-siem/'
     weight: 14
     parent: product
   - identifier: cloud-security-posture-management
@@ -177,132 +177,138 @@ main_left:
     title: industry
     url: 'https://www.datadoghq.com/solutions/retail-ecommerce/'
     weight: -457
-  - identifier: industry-public
-    name: Public Sector
+  - identifier: industry-government
+    name: Government
     parent: solutions
     title: industry
-    url: 'https://www.datadoghq.com/solutions/public-sector/'
+    url: 'https://www.datadoghq.com/solutions/government/'
     weight: -456
+  - identifier: industry-education
+    name: Education
+    parent: solutions
+    title: industry
+    url: 'https://www.datadoghq.com/solutions/education/'
+    weight: -455
   - identifier: industry-media
     name: Media & Entertainment
     parent: solutions
     title: industry
     url: 'https://www.datadoghq.com/solutions/media-entertainment/'
-    weight: -455
+    weight: -454
   - identifier: industry-technology
     name: Technology
     parent: solutions
     title: industry
     url: 'https://www.datadoghq.com/solutions/technology/'
-    weight: -454
+    weight: -453
   - identifier: industry-gaming
     name: Gaming
     parent: solutions
     title: industry
     url: 'https://www.datadoghq.com/solutions/gaming/'
-    weight: -453
+    weight: -452
   - identifier: technology-aws
     name: Amazon Web Services
     parent: solutions
     title: technology
     url: 'https://www.datadoghq.com/solutions/aws/'
-    weight: -452
+    weight: -451
   - identifier: technology-azure
     name: Azure
     parent: solutions
     title: technology
     url: 'https://www.datadoghq.com/solutions/azure/'
-    weight: -451
+    weight: -450
   - identifier: technology-gcp
     name: Google Cloud Platform
     parent: solutions
     title: technology
     url: 'https://www.datadoghq.com/solutions/gcp/'
-    weight: -450
+    weight: -449
   - identifier: technology-kubernetes
     name: Kubernetes
     parent: solutions
     title: technology
     url: 'https://www.datadoghq.com/solutions/kubernetes/'
-    weight: -449
+    weight: -448
   - identifier: technology-openshift
     name: Red Hat OpenShift
     parent: solutions
     title: technology
     url: 'https://www.datadoghq.com/solutions/openshift/'
-    weight: -448
+    weight: -447
   - identifier: usecase-migration
     name: Cloud Migration
     parent: solutions
     title: usecase
     url: 'https://www.datadoghq.com/solutions/cloud-migration/'
-    weight: -447
+    weight: -446
   - identifier: usecase-consolidate
     name: Monitoring Consolidation
     parent: solutions
     title: usecase
     url: 'https://www.datadoghq.com/solutions/monitoring-consolidation/'
-    weight: -446
+    weight: -445
   - identifier: usecase-devops
     name: DevOps
     parent: solutions
     title: usecase
     url: 'https://www.datadoghq.com/solutions/devops/'
-    weight: -445
+    weight: -444
   - identifier: usecase-testing
     name: Shift-Left Testing
     parent: solutions
     title: usecase
     url: 'https://www.datadoghq.com/solutions/shift-left-testing/'
-    weight: -444
+    weight: -443
   - identifier: usecase-security
     name: Security Analytics
     parent: solutions
     title: usecase
     url: 'https://www.datadoghq.com/solutions/security-analytics/'
-    weight: -443
+    weight: -442
   - identifier: usecase-compliance
     name: Compliance for CIS Benchmarks
     parent: solutions
     title: usecase
     url: 'https://www.datadoghq.com/solutions/security/cis-benchmarks/'
-    weight: -442
+    weight: -441
   - identifier: usecase-hybrid
     name: Hybrid Cloud Monitoring
     parent: solutions
     title: usecase
     url: 'https://www.datadoghq.com/solutions/hybrid-cloud-monitoring/'
-    weight: -441
+    weight: -440
   - identifier: usecase-iot
     name: IoT Monitoring
     parent: solutions
     title: usecase
     url: 'https://www.datadoghq.com/solutions/iot-monitoring/'
-    weight: -440
+    weight: -439
   - identifier: usecase-machine
     name: Machine Learning
     parent: solutions
     title: usecase
     url: 'https://www.datadoghq.com/solutions/machine-learning/'
-    weight: -439
+    weight: -438
   - identifier: usecase-analytics
     name: Real-Time BI
     parent: solutions
     title: usecase
     url: 'https://www.datadoghq.com/solutions/business-analytics/'
-    weight: -438
+    weight: -437
   - identifier: usecase-onprem
     name: On-Premises Monitoring
     parent: solutions
     title: usecase
     url: 'https://www.datadoghq.com/solutions/on-premises-monitoring/'
-    weight: -437
+    weight: -436
   - identifier: usecase-log
     name: Log Analysis & Correlation
     parent: solutions
     title: usecase
     url: 'https://www.datadoghq.com/solutions/log-analysis-and-correlation/'
-    weight: -436
+    weight: -435
 main_right:
   - identifier: about
     name: About
@@ -2090,7 +2096,7 @@ main:
     parent: setup_pipelines
     identifier: ci_circleci
     weight: 202
-  - name: GitHub
+  - name: GitHub Actions
     url: continuous_integration/setup_pipelines/github/
     parent: setup_pipelines
     identifier: ci_github
@@ -2379,40 +2385,45 @@ main:
     parent: log_management
     identifier: log_security
     weight: 7
+  - name: Troubleshooting
+    url: logs/troubleshooting
+    parent: log_management
+    identifier: log_troubleshooting
+    weight: 8
   - name: Security Platform
     url: security_platform/
     pre: security-platform
     identifier: security_platform
     weight: 180000
-  - name: Security Monitoring
-    url: security_platform/security_monitoring/
+  - name: Cloud SIEM
+    url: security_platform/cloud_siem/
     parent: security_platform
-    identifier: security_monitoring
+    identifier: cloud_siem
     weight: 1
   - name: Getting Started
-    url: security_platform/security_monitoring/getting_started
-    parent: security_monitoring
-    identifier: security_monitoring_getting_started
+    url: security_platform/cloud_siem/getting_started
+    parent: cloud_siem
+    identifier: cloud_siem_getting_started
     weight: 101
   - name: Security Home
-    url: security_platform/security_monitoring/security_home
-    parent: security_monitoring
-    identifier: security_monitoring_security_home
+    url: security_platform/cloud_siem/security_home
+    parent: cloud_siem
+    identifier: cloud_siem_security_home
     weight: 102
   - name: Log Detection Rules
-    url: security_platform/security_monitoring/log_detection_rules
-    parent: security_monitoring
-    identifier: security_monitoring_log_detection_rules
+    url: security_platform/cloud_siem/log_detection_rules
+    parent: cloud_siem
+    identifier: cloud_siem_log_detection_rules
     weight: 103
   - name: OOTB Rules
     url: /security_platform/default_rules#cat-log-detection
-    parent: security_monitoring
-    identifier: security_monitoring_default_rules
+    parent: cloud_siem
+    identifier: cloud_siem_default_rules
     weight: 104
   - name: Signals Explorer
     url: /security_platform/explorer
-    parent: security_monitoring
-    identifier: security_monitoring_signals_explorer
+    parent: cloud_siem
+    identifier: cloud_siem_signals_explorer
     weight: 105
   - name: Cloud Security Posture Management
     url: security_platform/cspm/
@@ -3232,8 +3243,8 @@ footer_product_two:
   - name: Security Platform
     url: 'https://www.datadoghq.com/product/security-platform/'
     weight: 140
-  - name: Security Monitoring
-    url: 'https://www.datadoghq.com/product/security-platform/security-monitoring'
+  - name: Cloud SIEM
+    url: 'https://www.datadoghq.com/product/security-platform/cloud-siem'
     weight: 145
   - name: CSPM
     url: 'https://www.datadoghq.com/product/security-platform/cloud-security-posture-management/'
@@ -6608,6 +6619,66 @@ api:
     url: /api/latest/cloud-workload-security/
     identifier: cloud-workload-security
     generated: true
+  - name: Update a Cloud Workload Security Agent rule
+    url: '#update-a-cloud-workload-security-agent-rule'
+    identifier: update-a-cloud-workload-security-agent-rule
+    parent: cloud-workload-security
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateCloudWorkloadSecurityAgentRule
+      unstable: []
+      order: 5
+  - name: Get a Cloud Workload Security Agent rule
+    url: '#get-a-cloud-workload-security-agent-rule'
+    identifier: get-a-cloud-workload-security-agent-rule
+    parent: cloud-workload-security
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetCloudWorkloadSecurityAgentRule
+      unstable: []
+      order: 2
+  - name: Delete a Cloud Workload Security Agent rule
+    url: '#delete-a-cloud-workload-security-agent-rule'
+    identifier: delete-a-cloud-workload-security-agent-rule
+    parent: cloud-workload-security
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteCloudWorkloadSecurityAgentRule
+      unstable: []
+      order: 6
+  - name: Create a Cloud Workload Security Agent rule
+    url: '#create-a-cloud-workload-security-agent-rule'
+    identifier: create-a-cloud-workload-security-agent-rule
+    parent: cloud-workload-security
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateCloudWorkloadSecurityAgentRule
+      unstable: []
+      order: 4
+  - name: Get all Cloud Workload Security Agent rules
+    url: '#get-all-cloud-workload-security-agent-rules'
+    identifier: get-all-cloud-workload-security-agent-rules
+    parent: cloud-workload-security
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListCloudWorkloadSecurityAgentRules
+      unstable: []
+      order: 3
   - name: Get the latest Cloud Workload Security policy
     url: '#get-the-latest-cloud-workload-security-policy'
     identifier: get-the-latest-cloud-workload-security-policy
@@ -6618,9 +6689,8 @@ api:
         - v2
       operationids:
         - DownloadCloudWorkloadPolicyFile
-      unstable:
-        - v2
-      order: 0
+      unstable: []
+      order: 1
   - name: Incident Services
     url: /api/latest/incident-services/
     identifier: incident-services

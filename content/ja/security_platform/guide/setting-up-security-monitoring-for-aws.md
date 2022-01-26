@@ -10,7 +10,7 @@ Datadog セキュリティモニタリングを使用すると、検出ルール
 ## セットアップ
 
 1. Datadog アプリの [Security Configuration Setup ページ][1] へ移動します。
-2. **Security Monitoring** を選択します。
+2. **Cloud SIEM** を選択します。
 3. **Secure your cloud environment** で、AWS を選択します。
 4. **Detect threats with cloud logs** のセットアップを完了します。
 5. (オプション) **Secure your hosts and containers** セットアップを完了します。

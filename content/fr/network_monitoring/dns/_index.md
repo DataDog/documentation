@@ -6,16 +6,16 @@ aliases:
   - /fr/network_performance_monitoring/network_table
   - /fr/network_performance_monitoring/dns_monitoring
 further_reading:
-  - link: 'https://www.datadoghq.com/blog/monitor-dns-with-datadog/'
+  - link: https://www.datadoghq.com/blog/monitor-dns-with-datadog/
     tag: Blog
     text: Surveiller le DNS avec Datadog
-  - link: 'https://www.datadoghq.com/blog/monitor-coredns-with-datadog/'
+  - link: https://www.datadoghq.com/blog/monitor-coredns-with-datadog/
     tag: Blog
     text: Surveiller CoreDNS avec Datadog
   - link: /network_monitoring/performance/network_page
     tag: Documentation
     text: Explorez les données de votre réseau qui transitent entre chaque source et destination.
-  - link: 'https://www.datadoghq.com/blog/dns-resolution-datadog/'
+  - link: https://www.datadoghq.com/blog/dns-resolution-datadog/
     tag: Blog
     text: Utilisez la résolution DNS pour surveiller les endpoints externes et les endpoints cloud
 ---
@@ -30,11 +30,11 @@ La surveillance DNS offre une vue d'ensemble des performances de vos serveurs DN
 
 ## Configuration
 
-Si vous utilisez la dernière version de l'Agent, même si celle-ci est exécutée sur un host, les métriques de surveillance DNS sont automatiquement recueillies par le system-probe avec les versions 7.23+ de l'Agent. Après installation, l'onglet « DNS » apparaît directement dans la section Network Performance Monitoring. Aucune configuration supplémentaire n'est requise.
+Pour utiliser la surveillance DNS, vous devez d'abord [configurer la solution Network Performance Monitoring][1]. Assurez-vous également que vous utilisez la dernière version de l'Agent, ou a minima l'Agent v7.23+ pour Linux et l'Agent v7.28+ pour Windows Server. Une fois l'installation effectuée, un onglet DNS apparaît dans la section Network Performance Monitoring.
 
-Si vous utilisez [Kubernetes sur Helm][3], pour activer la surveillance DNS, vous devez définir `collectDNSStats:` sur `true` dans le fichier [values.yaml][4].
+Si vous utilisez [Kubernetes sur Helm][2], pour activer la surveillance DNS, vous devez définir `collectDNSStats:` sur `true` dans le fichier [values.yaml][3].
 
-Vous cherchez plutôt à utiliser la solution Network Performance Monitoring ? Consultez les [instructions de configuration de NPM][2].
+Vous cherchez plutôt à utiliser la solution Network Device Monitoring ? Consultez les [instructions de configuration de NPM][4].
 
 ## Requêtes
 
@@ -81,7 +81,7 @@ Le tableau Network affiche les métriques ci-dessous pour chaque dépendance _so
 
 Pour configurer les colonnes de votre tableau, utilisez le bouton **Customize** en haut à droite.
 
-Pour affiner le trafic affiché dans votre vue, utilisez les [options][1] **Filter Traffic**.
+Pour affiner le trafic affiché dans votre vue, utilisez les [options][5] **Filter Traffic**.
 
 ## Volet latéral
 
@@ -98,7 +98,8 @@ Le volet latéral fournit des données de télémétrie contextuelle pour vous a
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /fr/network_monitoring/performance/network_page#table
-[2]: /fr/network_monitoring/devices/setup?tab=snmpv2
-[3]: /fr/agent/kubernetes/?tab=helm
-[4]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml#L299-L300
+[1]: /fr/network_monitoring/performance/
+[2]: /fr/agent/kubernetes/?tab=helm
+[3]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml#L299-L300
+[4]: /fr/network_monitoring/devices/setup?tab=snmpv2
+[5]: /fr/network_monitoring/performance/network_page#table

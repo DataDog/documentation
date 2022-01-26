@@ -12,7 +12,7 @@ further_reading:
     tag: よくあるご質問
     text: Agent のコマンド
 ---
-Datadog Agent のコミュニティ開発のインテグレーションは、[Integrations-extra][1] Github リポジトリに格納されています。これらはパッケージ化されておらず、Datadog Agent に組み込まれていませんが、以下の手順に従ってアドオンとしてインストールできます。
+Datadog Agent のコミュニティ開発のインテグレーションは、[Integrations-extra][1] GitHub リポジトリに格納されています。これらはパッケージ化されておらず、Datadog Agent に組み込まれていませんが、以下の手順に従ってアドオンとしてインストールできます。
 
 {{< tabs >}}
 {{% tab "Agent above v6.8" %}}

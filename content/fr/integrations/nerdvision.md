@@ -33,7 +33,7 @@
 - "Category::Marketplace"
 - "Category::Containers"
 - "Category::Log Collection"
-- "Catégorie::Surveillance"
+- "Category::Monitoring"
 - "Offering::Software License"
 - "Offering::Integration"
 "dependencies": []
