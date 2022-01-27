@@ -10,7 +10,12 @@ further_reading:
       text: 'Go Datadog Library source code'
 ---
 
-TKTK
+{{% appsec-getstarted %}}
+
+
+
+{{% appsec-getstarted-2 %}}
+
 
 ## Further Reading
 
