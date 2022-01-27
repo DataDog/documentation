@@ -206,11 +206,11 @@ For `service:ci-cd` logs that are rehydrated from the `Prod Archive`, note the f
 Datadog has removed the `logs_public_config_api` permission. 
 
 Five separate permissions control the ability to view, create, or modify log configuration through the Datadog API:
-* `logs_generate_metrics`
-* `logs_modify_indexes`
-* `logs_write_archives`
-* `logs_write_pipelines`
-* `user_access_manage`
+* [`logs_generate_metrics`](#logs_generate_metrics)
+* [`logs_modify_indexes`](#logs_modify_indexes)
+* [`logs_write_archives`](#logs_write_archives)
+* [`logs_write_pipelines`](#logs_write_pipelines)
+* [`user_access_manage`][14]
 
 ## Log data access
 
@@ -221,7 +221,7 @@ Grant the following permissions to manage read access on subsets of log data:
 
 ### `logs_read_data`
 
-Read access to log data. If granted, other restrictions then apply such as `logs_read_index_data` or with [restriction query][14].
+Read access to log data. If granted, other restrictions then apply such as `logs_read_index_data` or with [restriction query][15].
 
 Roles are additive. If a user belongs to multiple roles, the data they have access to is the union of all the permissions from each of the roles.
 
@@ -347,7 +347,7 @@ curl -X POST \
 
 ### `logs_live_tail`
 
-Grants a role the ability to use the [Live Tail][15] feature.
+Grants a role the ability to use the [Live Tail][16] feature.
 
 This permission is global, and grants access to the livetail regardless of [Log Read Index Data](#logs_read_index_data) permission.
 
@@ -371,5 +371,6 @@ This permission is global, and grants access to the livetail regardless of [Log 
 [11]: /logs/explorer/facets/#alias-facets
 [12]: /logs/archives
 [13]: /logs/archives/rehydrating
-[14]: /api/v2/logs-restriction-queries/
-[15]: /logs/explorer/live_tail/
+[14]: /account_management/rbac/permissions/#access-management
+[15]: /api/v2/logs-restriction-queries/
+[16]: /logs/explorer/live_tail/
