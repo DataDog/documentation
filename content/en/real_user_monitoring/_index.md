@@ -84,7 +84,7 @@ Get automated alerts on outliers and groups of errors, timeouts, and crashes to 
 
 ### Session replays
 
-Watch browser recordings of real users interacting with your website and use the [Developer Tools][5] to help troubleshoot user experience issues.
+Watch [browser recordings][5] of real users interacting with your website.
 
 ## Further Reading
 
@@ -94,4 +94,4 @@ Watch browser recordings of real users interacting with your website and use the
 [2]: /real_user_monitoring/explorer/visualize/
 [3]: /real_user_monitoring/connect_rum_and_traces/
 [4]: /real_user_monitoring/error_tracking/
-[5]: /real_user_monitoring/session_replay/developer_tools/
+[5]: /real_user_monitoring/session_replay/
