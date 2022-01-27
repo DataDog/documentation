@@ -88,8 +88,6 @@ Before getting started, ensure you have the following prerequisites:
 4. Ensure that the the correct [Datadog site][13] is used for the `DdSite` parameter to match the region of your Datadog account. Check the required boxes from AWS and click `Create stack`:
 {{< img src="getting_started/integrations/cloudformation-options-2.png" alt="An image from the AWS CloudFormation create-stack page that shows the Advanced options of creating the Datadog stack. DdAWSAccountId parameter is filled in with 464622532012, DdForwarderName parameter is filled in with DatadogForwarder, and InstallDatadogPolicyMacro is set as true. Below these parameters is a Capabilities section with two checkboxes, both of which are checked. The first checkbox states 'I acknowledge that AWS CloudFormation might create IAM resources with custom names.' The second checkbox states 'I acknowledge that AWS CloudFormation might require the following capability: CAPABILITY_AUTO_EXPAND'.">}}
 
-The customer should be informed this could take a few minutes. They should make sure the stack successfully creates before proceeding (reduces risk of getting the sts error)
-
 This begins the creation process for the Datadog stack along with three nested stacks. This could take several minutes; ensure that the stack successfully creates before proceeding:
 {{< img src="getting_started/integrations/cloudformation-stacks-complete.png" alt="An image from the AWS CloudFormation Stacks page showing the four completed stacks under the 'Stacks' column along the left hand side of the page. The stacks are datadog-DatadogIntegrationRoleStack, datadog-DatadogPolicyMacroStack, datadog-ForwarderStack, and datadog. Each stack shows the timestamp of creation and a green checkmark with CREATE_COMPLETE. The 'datadog' stack and is highlighted and displaying the 'Events' tab. There are 9 events listed with their Timestamp, Logical ID, Status, and Status reason. These events reference the different stages of creation for each of the stacks.">}}
 
@@ -251,8 +249,6 @@ Use the [EKS Anywhere documentation][35] for on-premises Kubernetes clusters.
 In addition to using the Datadog UI or [API][36], you can create many [Datadog resources][37] with the [CloudFormation Registry][38]. For visibility and troubleshooting, use [dashboards][39] to display key data, apply [Functions][40], and find [Metric Correlations][41]. 
 
 In order to get notified of any unwanted or unexpected behavior in your account, create [monitors][42]. Monitors consistently evaluate the data reported to your account, and send [Notifications][43] to ensure that the right information gets to the right team members. Review the [List of Notification Integrations][44] for all the ways to notify your team.
-
-looking at the out of the box dashboards we have for other AWS servuces
 
 ## Explore Related Products
 
