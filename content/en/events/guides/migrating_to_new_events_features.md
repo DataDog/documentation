@@ -28,10 +28,12 @@ If you manage your Datadog configuration with external, API-based scripts or too
 ### Datadog migrates data stored in the cloud
 Datadog is responsible for migrating data stored on its servers. You do not need to take any action for configuration stored directly in Datadog. Datadog automatically migrates Event data contained in monitors and dashboard widgets, including the event stream, timeline, and overlays.
 
-## Details of the changes
+### Post migration
+Datadog automatically routes queries to the correct backend. Old queries continue to go to the old backend, and migrated queries go to the new backend, so you can migrate safely. 
 
-### Interim
-Datadog automatically routes queries to the correct backend. Old queries continue to go to the old backend, and migrated queries go to the new backend, so you can migrate safely. When the switch is enabled, you can no longer create monitors or dashboard widgets with the legacy query syntax, so calls to the legacy API fail with an error, but your existing monitors and dashboards remain reporting. They stop reporting after the sunset date of April 15, 2022.
+After Datadog enables Events Explorer for your organization, you can no longer create monitors or dashboard widgets with the legacy query syntax. Calls to the legacy API fail with an error, but your existing monitors and dashboards continue reporting. Legacy event queries within monitors and dashboards stop reporting after the sunset date of May 1, 2022.
+
+## Details of the changes
 
 ### Event API
 The [API endpoint to query events][5] does not use any query syntax. It instead uses parameters to include or exclude tags or sources. So, you don't have to change anything in your scripts that use it, unless they refer to status values, which have changed. See [Status remapping](#status-remapping).
