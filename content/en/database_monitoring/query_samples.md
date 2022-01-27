@@ -15,7 +15,7 @@ further_reading:
 
 ---
 
-{{< site-region region="us3,us5,gov" >}}
+{{< site-region region="us5,gov" >}}
 <div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
 {{< /site-region >}}
 
@@ -42,7 +42,7 @@ Click **Options** to add columns to the table. Click on column headers to sort b
 
 Explain plan cost is a unitless measure that the database uses to compare two plans with each other. It roughly corresponds to number of _things_ on the database---blocks or pages---but it is primarily useful for relative comparisons of two plans, not in absolute terms for a single plan. Explain plan cost calculation helps the database choose which plan it's going to use.
 
-The Query Samples page lets you filter, sort, and compare the explain plan costs of multiple queries. In this context, explain plan cost is not to be taken absolutely. A query with an explain plan cost of 8.5 is not necessarily performing better than one with a cost of 8.7. But if two queries have vastly different costs when you'd expect them to be similar, it can be fruitful to investigate why. Also, you can sort your queries by cost to see what your expensive queries are, separate from external factors like network latency.
+The Query Samples page lets you filter, sort, and compare the explain plan costs of multiple queries. In this context, explain plan cost is not to be taken absolutely. A query with an explain plan cost of 8.5 is not necessarily performing better than one with a cost of 8.7. But if two queries have vastly different costs when you'd expect them to be similar, it can be beneficial to investigate why. Also, you can sort your queries by cost to see what your expensive queries are, separate from external factors like network latency.
 
 ### Indexes
 
@@ -58,7 +58,7 @@ Filter or sort to find queries that take the longest to run over the time frame 
 
 ### Sample details
 
-Click on a query in the table to open its Sample Details page. Use the Source, Host, and Client IP tiles at the top to filter the Sample Queries page by the values for this sample, or to jump to other Datadog information such as the host's dashboard or Network traffic metrics for the client IP.
+Click on a query in the table to open its Sample Details page. Use the Source, Host, and Client IP tiles at the top to filter the Sample Queries page by the values for this sample, or to navigate to other Datadog information such as the host's dashboard or Network traffic metrics for the client IP.
 
 {{< img src="database_monitoring/dbm_sd_actions.png" alt="Sample details action tiles" style="width:100%;">}}
 

@@ -11,7 +11,7 @@ further_reading:
     - link: '/getting_started/synthetics/private_location'
       tag: 'Documentation'
       text: 'Learn about private locations'
-    - link: '/synthetics/cicd_testing'
+    - link: '/synthetics/cicd_integrations'
       tag: 'Documentation'
       text: 'Learn how to trigger Synthetic tests from your CI/CD pipeline'
     - link: '/synthetics/identify_synthetics_bots'
@@ -128,7 +128,7 @@ Use Datadog's [APM integration with Synthetic Monitoring][13] to view traces gen
 [2]: https://app.datadoghq.com/synthetics/list
 [3]: https://app.datadoghq.com/synthetics/browser/create
 [4]: /getting_started/synthetics/private_location
-[5]: /synthetics/cicd_testing
+[5]: /synthetics/cicd_integrations
 [6]: /integrations/#cat-notification
 [7]: https://app.datadoghq.com/account/settings
 [8]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa

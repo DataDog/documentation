@@ -39,6 +39,7 @@ After choosing to create an `HTTP` test, define your test's request.
    {{% tab "Request Options" %}}
 
    * **Follow redirects**: Select to have your HTTP test follow up to ten redirects when performing the request.
+   * **Timeout**: Specify the amount of time in seconds before the test times out.
    * **Request headers**: Define headers to add to your HTTP request. You can also override the default headers (for example, the `user-agent` header).
    * **Cookies**: Define cookies to add to your HTTP request. Set multiple cookies using the format `<COOKIE_NAME1>=<COOKIE_VALUE1>; <COOKIE_NAME2>=<COOKIE_VALUE2>`.
 
@@ -199,6 +200,9 @@ A test is considered `FAILED` if it does not satisfy one or more assertions or i
 
 These reasons include the following:
 
+`CONNREFUSED`
+: No connection could be made because the target machine actively refused it.
+
 `CONNRESET`
 : The connection was abruptly closed by the remote server. Possible causes include the web server encountering an error or crashing while responding, or loss of connectivity of the web server.
 
@@ -213,8 +217,9 @@ These reasons include the following:
 
 `TIMEOUT`
 : The request couldn't be completed in a reasonable time. Two types of `TIMEOUT` can happen:
-  - `TIMEOUT: The request couldn’t be completed in a reasonable time.` indicates that the timeout happened at the TCP socket connection level. 
-  - `TIMEOUT: Retrieving the response couldn’t be completed in a reasonable time.` indicates that the timeout happened on the overall run (which includes TCP socket connection, data transfer, and assertions).
+  - `TIMEOUT: The request couldn’t be completed in a reasonable time.` indicates that the request duration hit the test defined timeout (default is set to 60s). 
+  For each request only the completed stages for the request are displayed in the network waterfall. For example, in the case of `Total response time` only being displayed, the timeout occurred during the DNS resolution.
+  - `TIMEOUT: Overall test execution couldn't be completed in a reasonable time.` indicates that the test duration (request + assertions) hits the maximum duration (60.5s).
 
 `MALFORMED_RESPONSE` 
 : The remote server responded with a payload that does not comply with HTTP specifications.
@@ -231,7 +236,7 @@ If you have access to the [custom role feature][14], add your user to any custom
 
 [1]: /api/v1/synthetics/#get-all-locations-public-and-private
 [2]: /synthetics/private_locations
-[3]: /synthetics/cicd_testing
+[3]: /synthetics/cicd_integrations
 [4]: /synthetics/search/#search
 [5]: https://restfulapi.net/json-jsonpath/
 [6]: https://www.w3schools.com/xml/xpath_syntax.asp

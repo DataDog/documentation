@@ -386,6 +386,7 @@ Le tableau suivant énumère les variables de configuration disponibles aussi bi
 | `DD_AGENT_HOST`                                     | Définit le host vers lequel les traces sont envoyées (le host qui exécute l'Agent). Il peut s'agir d'un hostname ou d'une adresse IP. Ce paramètre est ignoré si `DD_TRACE_AGENT_URL` est défini. Valeur par défaut : `localhost`.                                       |
 | `DD_TRACE_AGENT_PORT`                               | Définit le port sur lequel les traces sont envoyées (le port où l'Agent écoute les connexions). Ce paramètre est ignoré si `DD_TRACE_AGENT_URL` est défini. Valeur par défaut : `8126`.                                                     |
 | `DD_LOGS_INJECTION`<br/><br/>`LogsInjectionEnabled` | Active ou désactive l'injection automatique des identifiants de corrélation dans les logs de l'application.                                                                                                                         |
+| `DD_TRACE_SAMPLE_RATE`<br/><br/>`GlobalSamplingRate` | Active ou désactive [Tracing without limits][7].                                                                                                                         |
 | `DD_TRACE_GLOBAL_TAGS`<br/><br/>`GlobalTags`        | Lorsqu'il est défini, ce paramètre ajoute tous les tags spécifiés à l'ensemble des spans générées.                                                                                                                                              |
 | `DD_TRACE_DEBUG`                                    | Active ou désactive les logs de debugging. Valeurs acceptées : `true` ou `false` (par défaut).                                                                                                                                 |
 | `DD_TRACE_HEADER_TAGS`                              | Accepte une liste des correspondances entre les clés d'en-tête (insensibles à la casse) et les noms de tag et applique automatiquement les valeurs d'en-tête correspondantes en tant que tags sur les spans racine. (Ex. : `en-tête-insensible-CASSE:nom-du-tag,User-ID:userId`). Disponible pour les versions 1.18.3+  |
@@ -418,3 +419,4 @@ Le tableau suivant énumère les variables de configuration qui sont uniquement 
 [4]: https://www.nuget.org/packages/Datadog.Trace
 [5]: /fr/tracing/custom_instrumentation/dotnet/
 [6]: /fr/getting_started/tagging/unified_service_tagging/
+[7]: /fr/tracing/trace_retention_and_ingestion/

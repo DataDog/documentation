@@ -415,7 +415,7 @@ Les tags qui sont définis directement sur des spans spécifiques remplacement l
 
 ### Liens OpenTelemetry
 
-- Consultez [npm][6] ou [Github][7] pour en savoir plus sur l'utilisation de l'exportateur Datadog pour OpenTelemetry dans une application NodeJS.
+- Consultez [npm][6] ou [GitHub][7] pour en savoir plus sur l'utilisation de l'exportateur Datadog pour OpenTelemetry dans une application NodeJS.
 
 ## Pour aller plus loin
 

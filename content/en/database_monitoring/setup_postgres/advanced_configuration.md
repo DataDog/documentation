@@ -4,7 +4,7 @@ kind: documentation
 description: Advanced Configuration for Postgres Database Monitoring
 
 ---
-{{< site-region region="us3,us5,gov" >}}
+{{< site-region region="us5,gov" >}}
 <div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
 {{< /site-region >}}
 
@@ -52,6 +52,6 @@ Set the `collection_interval` in your database instance configuration of the Dat
 instances:
   - dbm: true
     ...
-    query_samples:        
+    query_samples:
         collection_interval: 0.1
 ```

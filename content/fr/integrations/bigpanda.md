@@ -1,15 +1,18 @@
 ---
+aliases:
+  - /fr/account/settings#integrations/bigpanda
 categories:
   - notification
 ddtype: crawler
 dependencies: []
 description: Corrélez les alertes Datadog et créez des incidents actionnables avec BigPanda.
-doc_link: 'https://docs.datadoghq.com/integrations/bigpanda/'
+doc_link: https://docs.datadoghq.com/integrations/bigpanda/
 draft: false
 git_integration_title: bigpanda
 has_logo: true
 integration_id: ''
 integration_title: BigPanda
+integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'
@@ -29,7 +32,7 @@ Associez BigPanda à Datadog pour permettre à votre équipe :
 
 ### Installation
 
-Pour installer l'intégration BigPanda, accédez à son [carré d'intégration][1] dans l'application Datadog.
+Pour installer l'intégration BigPanda, accédez à son [carré d'intégration][1] sur le site de Datadog.
 
 ### Configuration
 
@@ -39,7 +42,8 @@ Pour installer l'intégration BigPanda, accédez à son [carré d'intégration][
 4. Accédez au carré BigPanda dans Datadog et cliquez sur _Add Account_
 5. Ajoutez le nom de compte BigPanda de votre choix via l'option **BigPanda Account Name**.
 6. Collez le **token d'accès** et la **clé d'application** dans les champs correspondants.
-7. Cliquez sur _Save_.
+7. Activez l'option **Route All Monitor Events** pour que tous les événements de monitor soient automatiquement envoyés à BigPanda. Par défaut, seuls les événements de monitor contenant **@bigpanda** sont envoyés.
+8. Cliquez sur _Save_.
 
 ### Utilisation
 

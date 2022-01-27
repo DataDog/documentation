@@ -6,7 +6,7 @@ type: api
 
 Tous les endpoints d'API ont une limite de débit. Lorsque vous dépassez un certain nombre de requêtes dans un intervalle donné, Datadog renvoie une erreur.
 
-Si vous dépassez la limite de débit, vous recevez un code de réponse 429. Nous vous recommandons de patienter pendant la durée correspondant à `X-RateLimit-Limit` avant d'effectuer à nouveau des appels. Vous pouvez également effectuer des appels à une fréquence légèrement plus faible que le résultat du calcul `X-RateLimit-Limit` / `X-RateLimit-Period`.
+Si vous dépassez la limite de débit, vous recevez un code de réponse 429. Datadog vous recommande de patienter pendant la durée correspondant à `X-RateLimit-Period` avant d'effectuer à nouveau des appels. Vous pouvez également effectuer des appels à une fréquence légèrement plus faible que le résultat du calcul `X-RateLimit-Limit` / `X-RateLimit-Period`.
 
 Pour revoir à la hausse les limites de débit par défaut, [contactez l'assistance Datadog][1].
 

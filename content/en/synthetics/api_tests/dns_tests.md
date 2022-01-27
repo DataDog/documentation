@@ -35,8 +35,9 @@ After choosing to create a `DNS` test, define your test's request.
 1. Specify the **Domain** you want your test to query. For example, `www.example.com`.
 2. Specify the **DNS Server** to use (optional), it can be a domain name or an IP address. If not specified, your DNS test performs resolution using `8.8.8.8`, with a fallback on `1.1.1.1` and an internal AWS DNS server.
 3. Specify your DNS Server **Port** (optional). If not specified, the DNS Server port defaults to 53.
-4. **Name** your DNS test.
-5. Add `env` **Tags** as well as any other tag to your DNS test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][4].
+4. Specify the amount of time in seconds before the test times out (optional).
+5. **Name** your DNS test.
+6. Add `env` **Tags** as well as any other tag to your DNS test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][4].
 
 {{< img src="synthetics/api_tests/dns_test_config_new.png" alt="Define DNS query" style="width:90%;" >}}
 
@@ -149,9 +150,10 @@ These reasons include the following:
 : The configuration of the test is invalid (for example, a typo in the URL).
 
 `TIMEOUT`
-: The request couldn't be completed in a reasonable time. Two types of `TIMEOUT` can happen.
-  - `TIMEOUT: The request couldn’t be completed in a reasonable time.` indicates that the timeout happened at the TCP socket connection level.
-  - `TIMEOUT: Retrieving the response couldn’t be completed in a reasonable time.` indicates that the timeout happened on the overall run (which includes TCP socket connection, data transfer, and assertions).
+: The request couldn't be completed in a reasonable time. Two types of `TIMEOUT` can happen:
+  - `TIMEOUT: The request couldn’t be completed in a reasonable time.` indicates that the request duration hit the test defined timeout (default is set to 60s). 
+  For each request only the completed stages for the request are displayed in the network waterfall. For example, in the case of `Total response time` only being displayed, the timeout occurred during the DNS resolution.
+  - `TIMEOUT: Overall test execution couldn't be completed in a reasonable time.` indicates that the test duration (request + assertions) hits the maximum duration (60.5s).
 
 ## Permissions
 
@@ -165,7 +167,7 @@ If you have access to the [custom role feature][11], add your user to any custom
 
 [1]: /api/v1/synthetics/#get-all-locations-public-and-private
 [2]: /synthetics/private_locations
-[3]: /synthetics/cicd_testing
+[3]: /synthetics/cicd_integrations
 [4]: /synthetics/search/#search
 [5]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
 [6]: /monitors/notify/#notify-your-team

@@ -8,7 +8,7 @@ further_reading:
     tag: Documentation
     text: Consulter les principales catégories de données envoyées à Datadog
 ---
-<div class="alert alert-info">Cette page est consacrée à la sécurité de Datadog ; si vous recherchez le produit Security Monitoring, consultez la section <a href="/security_monitoring" target="_blank">Security Monitoring</a>.</div>
+<div class="alert alert-info">Cette page est consacrée à la sécurité de Datadog ; si vous recherchez le produit Security Monitoring, consultez la section <a href="/security_platform/cloud_siem" target="_blank">Security Monitoring</a>.</div>
 
 Cet article fait partie d'une [série d'articles sur la sécurité des données][1].
 
@@ -32,7 +32,7 @@ La [solution de surveillance Synthetic][2] vous permet d'effectuer un suivi proa
 
 Les artefacts désignent les captures d'écran, snapshots, erreurs et ressources des tests Browser.
 
-{{< site-region region="us,us3,gov" >}}
+{{< site-region region="us,us3,us5,gov" >}}
 
 * **Stockage **: chiffrement pour les [compartiments AWS S3][1].
 * **Transport **: chiffrement pendant le transfert à l'aide du processus [AWS Signature version 4 pour S3][2].
@@ -74,7 +74,7 @@ Les artefacts désignent les captures d'écran, snapshots, erreurs et ressources
 
 Les artefacts désignent les captures d'écran, snapshots, erreurs et ressources des tests Browser.
 
-{{< site-region region="us,us3,gov" >}}
+{{< site-region region="us,us3,us5,gov" >}}
 
 * **Stockage** : chiffrement pour [AWS][1].
 * **Transport** : transport HTTPS entre l'emplacement privé et Datadog (authentification par clé d'API). Avant d'être stockées, les données transférées par Datadog sont chiffrées à l'aide du [processus AWS Signature Version 4 pour S3][2].

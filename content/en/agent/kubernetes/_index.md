@@ -163,7 +163,7 @@ To install the Datadog Agent on your Kubernetes cluster:
 
     | Metrics                   | Logs                      | APM                       | Process                   | NPM                       | Security                       | Linux                   | Windows                 |
     |---------------------------|---------------------------|---------------------------|---------------------------|---------------------------|-------------------------|-------------------------|-------------------------|
-    | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |                           | <i class="icon-check-bold"></i> | [Manifest template][3]  | [Manifest template][4] (no security)  |
+    | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |  <i class="icon-check-bold"></i>                         | <i class="icon-check-bold"></i> | [Manifest template][3]  | [Manifest template][4] (no security)  |
     | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |                           |                           |                           | [Manifest template][5]  | [Manifest template][6]  |
     | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |                           |                           |                           |                           | [Manifest template][7]  | [Manifest template][8]  |
     | <i class="icon-check-bold"></i> |                           | <i class="icon-check-bold"></i> |                           |                           |                           | [Manifest template][9]  | [Manifest template][10] |
@@ -176,7 +176,7 @@ To install the Datadog Agent on your Kubernetes cluster:
 
 4. **Set your Datadog site** to {{< region-param key="dd_site" code="true" >}} using the `DD_SITE` environment variable in the `datadog-agent.yaml` manifest.
 
-    **Note**: If the `DD_SITE` environment variable is not explicitly set, it defaults to the `US` site `datadog.com`. If you are using one of the other sites (`EU`, `US3`, or `US1-FED`) this will result in an invalid API key message. Use the [documentation site selector][20] to see documentation appropriate for the site you're using.
+    **Note**: If the `DD_SITE` environment variable is not explicitly set, it defaults to the `US` site `datadoghq.com`. If you are using one of the other sites (`EU`, `US3`, or `US1-FED`) this will result in an invalid API key message. Use the [documentation site selector][20] to see documentation appropriate for the site you're using.
 
 5. **Deploy the DaemonSet** with the command:
 
@@ -392,7 +392,7 @@ Once the Agent is up and running in your cluster, use [Datadog's Autodiscovery f
 
 ## Environment variables
 
-The following is the list of environment variables available for the Datadog Agent using a DaemonSet. If you are using Helm, see the full list of configuration options for the `datadog-value.yaml` file in the [helm/charts Github repository][9]. If you are using Operator, see the [Operator Configuration][17] documentation.
+The following is the list of environment variables available for the Datadog Agent using a DaemonSet. If you are using Helm, see the full list of configuration options for the `datadog-value.yaml` file in the [helm/charts GitHub repository][9]. If you are using Operator, see the [Operator Configuration][10] documentation.
 
 ### Global options
 
@@ -418,7 +418,7 @@ Starting with Agent v6.4.0 (and v6.5.0 for the Trace Agent), you can override th
 | `DD_PROXY_NO_PROXY`      | A space-separated list of URLs for which no proxy should be used.      |
 | `DD_SKIP_SSL_VALIDATION` | An option to test if the Agent is having issues connecting to Datadog. |
 
-For more information about proxy settings, see the [Agent v6 Proxy documentation][10].
+For more information about proxy settings, see the [Agent v6 Proxy documentation][11].
 
 ### Optional collection Agents
 
@@ -428,14 +428,14 @@ Optional collection Agents are disabled by default for security or performance r
 |---------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `DD_APM_ENABLED`                | Enable [trace collection][7] with the Trace Agent.                                                                                                                                                                                                           |
 | `DD_LOGS_ENABLED`               | Enable [log collection][8] with the Logs Agent.                                                                                                                                                                                                              |
-| `DD_PROCESS_AGENT_ENABLED`      | Enable [live process collection][9] with the Process Agent. The [live container view][10] is already enabled by default if the Docker socket is available. If set to `false`, the [live process collection][9] and the [live container view][10] are disabled. |
+| `DD_PROCESS_AGENT_ENABLED`      | Enable [live process collection][9] with the Process Agent. The [live container view][11] is already enabled by default if the Docker socket is available. If set to `false`, the [live process collection][9] and the [live container view][11] are disabled. |
 | `DD_COLLECT_KUBERNETES_EVENTS ` | Enable event collection with the Agent. If you are running multiple Agent in your cluster, set `DD_LEADER_ELECTION` to `true` as well.                                                                                                                       |
 
 To enable the Live Container view, make sure you are running the process agent in addition to setting DD_PROCESS_AGENT_ENABLED to `true`.
 
 ### DogStatsD (custom metrics)
 
-Send custom metrics with [the StatsD protocol][11]:
+Send custom metrics with [the StatsD protocol][12]:
 
 | Env Variable                     | Description                                                                                                                                                |
 |----------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -446,7 +446,7 @@ Send custom metrics with [the StatsD protocol][11]:
 | `DD_DOGSTATSD_ORIGIN_DETECTION`  | Enable container detection and tagging for unix socket metrics.                                                                                            |
 | `DD_DOGSTATSD_TAGS`              | Additional tags to append to all metrics, events, and service checks received by this DogStatsD server, for example: `"env:golden group:retrievers"`. |
 
-Learn more about [DogStatsD over Unix Domain Sockets][12].
+Learn more about [DogStatsD over Unix Domain Sockets][13].
 
 ### Tagging
 
@@ -457,11 +457,11 @@ Datadog automatically collects common tags from Kubernetes. To extract even more
 | `DD_KUBERNETES_POD_LABELS_AS_TAGS`      | Extract pod labels      |
 | `DD_KUBERNETES_POD_ANNOTATIONS_AS_TAGS` | Extract pod annotations |
 
-See the [Kubernetes Tag Extraction][13] documentation to learn more.
+See the [Kubernetes Tag Extraction][14] documentation to learn more.
 
 ### Using secret files
 
-Integration credentials can be stored in Docker or Kubernetes secrets and used in Autodiscovery templates. For more information, see the [Secrets Management documentation][14].
+Integration credentials can be stored in Docker or Kubernetes secrets and used in Autodiscovery templates. For more information, see the [Secrets Management documentation][15].
 
 ### Ignore containers
 
@@ -478,7 +478,7 @@ Exclude containers from logs collection, metrics collection, and Autodiscovery. 
 | `DD_AC_INCLUDE`                | **Deprecated**. Allowlist of containers to include (separated by spaces). Use `.*` to include all. For example: `"image:image_name_1 image:image_name_2"`, `image:.*`                                                              |
 | `DD_AC_EXCLUDE`                | **Deprecated**. Blocklist of containers to exclude (separated by spaces). Use `.*` to exclude all. For example: `"image:image_name_3 image:image_name_4"` (**Note**: This variable is only honored for Autodiscovery.), `image:.*` |
 
-Additional examples are available on the [Container Discover Management][15] page.
+Additional examples are available on the [Container Discover Management][16] page.
 
 **Note**: The `kubernetes.containers.running`, `kubernetes.pods.running`, `docker.containers.running`, `.stopped`, `.running.total` and `.stopped.total` metrics are not affected by these settings. All containers are counted.
 
@@ -494,7 +494,7 @@ You can add extra listeners and config providers using the `DD_EXTRA_LISTENERS` 
 
 ## Commands
 
-See the [Agent Commands guides][16] to discover all the Docker Agent commands.
+See the [Agent Commands guides][17] to discover all the Docker Agent commands.
 
 ## Further Reading
 
@@ -509,11 +509,11 @@ See the [Agent Commands guides][16] to discover all the Docker Agent commands.
 [7]: /infrastructure/livecontainers/?tab=helm#configuration
 [8]: /agent/kubernetes/integrations/
 [9]: https://github.com/DataDog/helm-charts/tree/master/charts/datadog#all-configuration-options
-[10]: /agent/proxy/#agent-v6
-[11]: /developers/dogstatsd/
-[12]: /developers/dogstatsd/unix_socket/
-[13]: /agent/kubernetes/tag/
-[14]: /security/agent/#secrets-management
-[15]: /agent/guide/autodiscovery-management/
-[16]: /agent/guide/agent-commands/
-[17]: /agent/kubernetes/operator_configuration
+[10]: /agent/kubernetes/operator_configuration
+[11]: /agent/proxy/#agent-v6
+[12]: /developers/dogstatsd/
+[13]: /developers/dogstatsd/unix_socket/
+[14]: /agent/kubernetes/tag/
+[15]: /security/agent/#secrets-management
+[16]: /agent/guide/autodiscovery-management/
+[17]: /agent/guide/agent-commands/

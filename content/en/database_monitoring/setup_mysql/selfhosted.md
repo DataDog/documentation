@@ -9,7 +9,7 @@ further_reading:
 
 ---
 
-{{< site-region region="us3,us5,gov" >}}
+{{< site-region region="us5,gov" >}}
 <div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
 {{< /site-region >}}
 
@@ -69,7 +69,7 @@ To collect query metrics, samples, and explain plans, enable the [MySQL Performa
 {{< /tabs >}}
 
 
-**Note**: A recommended practice is to allow the agent to enable the `performance-schema-consumer-*` settings dynamically at runtime, as part of granting the Agent access, next. See [Runtime setup consumers](#runtime-setup-consumers).
+**Note**: A recommended practice is to allow the agent to enable the `performance-schema-consumer-*` settings dynamically at runtime, as part of granting the Agent access. See [Runtime setup consumers](#runtime-setup-consumers).
 
 ## Grant the Agent access
 
