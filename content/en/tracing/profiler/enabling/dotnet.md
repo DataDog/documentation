@@ -166,7 +166,7 @@ Datadog .NET Profiler is currently in public beta. Datadog recommends evaluating
 {{% /tab %}}
 
 {{% tab "Standalone applications" %}}
-1. Set needed environment variables to configure and enable Profiler for a non-service application, such as console, ASP.NET (Core), Windows Forms, or WPF. To enable the Profiler for Standalone applications, it is required to set the `DD_PROFILING_ENABLED`, `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` environment variables. The recommended to do this is in a batch file that also starts the application, and running your application using the batch file.
+1. Set needed environment variables to configure and enable Profiler for a non-service application, such as console, ASP.NET (Core), Windows Forms, or WPF. To enable the Profiler for Standalone applications, it is required to set the `DD_PROFILING_ENABLED`, `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` environment variables. We recommend doing this using a batch file that also starts the application, and running your application using the batch file.
 
    For .NET Core and .NET 5+:
    ```cmd
