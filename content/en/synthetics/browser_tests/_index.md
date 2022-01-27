@@ -134,10 +134,6 @@ A notification is sent according to the set of alerting conditions. To configure
 3. Specify a renotification frequency. To prevent renotification on failing tests, leave the option as `Never renotify if the monitor has not been resolved`.
 4. Click **Save Details and Record Test**.
 
-### Set permissions
-
-Restrict access to your browser test for yourself and custom roles by clicking the roles in the **Everyone in my org** dropdown menu. For more information, see [Permissions](#permissions).
-
 ## Record your steps
 
 Tests can be only recorded from [Google Chrome][10]. To record your test, download the [Datadog Record Test extension for Google Chrome][11].
@@ -158,6 +154,10 @@ Tests can be only recorded from [Google Chrome][10]. To record your test, downlo
 By default, only users with the [Datadog Admin and Datadog Standard roles][14] can create, edit, and delete Synthetic browser tests. To get create, edit, and delete access to Synthetic browser tests, upgrade your user to one of those two [default roles][14].
 
 If you have access to the [custom role feature][15], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions.
+
+### Select roles
+
+Restrict access to your browser test for yourself and custom roles by clicking the roles in the **Everyone in my org** dropdown menu.
 
 ## Further Reading
 
