@@ -591,7 +591,6 @@ def lambda_handler(event, context):
     lambda_metric(
         metric_name='coffee_house.order_value',
         value=12.45,
-        timestamp=int(time.time()), # optional, must be within last 20 mins
         tags=['product:latte', 'order:online']
     )
 

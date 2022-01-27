@@ -2,7 +2,7 @@
 title: OOTB Rules
 kind: documentation
 type: security_rules
-description: "Datadog Security Platform Rules"
+description: "Datadog Security Platform detection rules"
 aliases:
   - /security_monitoring/default_rules/
   - /cloud_siem/default_rules/
