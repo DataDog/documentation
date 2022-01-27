@@ -144,14 +144,6 @@ func myHandler(ctx context.Context, event MyEvent) (string, error) {
     "product:latte", "order:online" // Associated tags
   )
 
-  // Submit a custom metric with timestamp
-  ddlambda.MetricWithTimestamp(
-    "coffee_house.order_value", // Metric name
-    12.45, // Metric value
-    time.Now(), // Timestamp, must be within last 20 mins
-    "product:latte", "order:online" // Associated tags
-  )
-
   req, err := http.NewRequest("GET", "http://example.com/status")
 
   // Add the datadog distributed tracing headers
