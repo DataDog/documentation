@@ -7,7 +7,7 @@ further_reading:
       text: 'APM Troubleshooting'
 ---
 
-{{< programming-lang-wrapper langs="java,python,go,ruby,linux" >}}
+{{< programming-lang-wrapper langs="java,python,go,ruby,php,linux" >}}
 {{< programming-lang lang="java" >}}
 
 ## Missing profiles in the profile search page
@@ -17,8 +17,6 @@ If you've configured the profiler and don't see profiles in the profile search p
 - Operating system type and version (for example, Linux Ubuntu 20.04)
 - Runtime type, version, and vendor (for example, Java OpenJDK 11 AdoptOpenJDK)
 
-[1]: /tracing/troubleshooting/#tracer-debug-logs
-[2]: /help/
 
 ## Reduce overhead from default setup
 
@@ -150,6 +148,8 @@ Override templates let you specify profiling properties to override. However, th
     java -javaagent:/path/to/dd-java-agent.jar -Ddd.profiling.enabled=true -Ddd.logs.injection=true -Ddd.trace.sample.rate=1 -Ddd.profiling.jfr-template-override-file=</path/to/override.jfp> -jar path/to/your/app.jar
     ```
 
+[1]: /tracing/troubleshooting/#tracer-debug-logs
+[2]: /help/
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
 
@@ -160,9 +160,9 @@ If you've configured the profiler and don't see profiles in the profile search p
 - Operating system type and version (for example, Linux Ubuntu 20.04)
 - Runtime type, version, and vendor (for example, Python 3.9.5)
 
+
 [1]: /tracing/troubleshooting/#tracer-debug-logs
 [2]: /help/
-
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
@@ -173,9 +173,9 @@ If you've configured the profiler and don't see profiles in the profile search p
 - Operating system type and version (for example, Linux Ubuntu 20.04)
 - Runtime type, version, and vendor (for example, Go 1.16.5)
 
+
 [1]: /tracing/troubleshooting/#tracer-debug-logs
 [2]: /help/
-
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
@@ -202,15 +202,31 @@ If you're still experiencing `SystemStackError` errors after following the above
 
 ## Missing profiles for Resque jobs
 
-When profiling [Resque](https://github.com/resque/resque) jobs, you should set the `RUN_AT_EXIT_HOOKS` environment
+When profiling [Resque][3] jobs, you should set the `RUN_AT_EXIT_HOOKS` environment
 variable to `1`, as described in the
-[Resque documentation](https://github.com/resque/resque/blob/v2.0.0/docs/HOOKS.md#worker-hooks).
+[Resque documentation][4].
 
 Without this flag, profiles for short-lived Resque jobs will be unavailable.
 
+
 [1]: /tracing/troubleshooting/#tracer-debug-logs
 [2]: /help/
+[3]: https://github.com/resque/resque
+[4]: https://github.com/resque/resque/blob/v2.0.0/docs/HOOKS.md#worker-hooks
+{{< /programming-lang >}}
+{{< programming-lang lang="php" >}}
 
+## Missing profiles in the profile search page
+
+If you've configured the profiler and don't see profiles in the profile search page, run the `phpinfo()` function. The profiler hooks into `phpinfo()` to run diagnostics. If the webserver is having problems, run `phpinfo()` from the webserver and not from the command line as each Server API (SAPI) can be configured indepenently.
+
+[Open a support ticket][1] with the following information:
+
+- Operating system type and version (for example, Linux Ubuntu 20.04)
+- The output from `phpinfo()`, which includes PHP version, SAPI type, Datadog library versions, and the profiler diagnostics.
+
+
+[1]: /help/
 {{< /programming-lang >}}
 {{< programming-lang lang="linux" >}}
 
@@ -265,13 +281,13 @@ The root of your profile is the frame annotated with the application name in par
 - Stripped binaries do not have symbols available. Try using a non-stripped binary or a non-minified container image.
 - Certain applications and libraries benefit from their debug packages being installed. This is true for services installed through your repo's package manager or similar.
 
+
 [1]: /tracing/troubleshooting/#tracer-debug-logs
 [2]: /help/
 [3]: /tracing/profiler/enabling/linux/?tab=environmentvariables#configuration
 [4]: /tracing/profiler/enabling/linux/
-
 {{< /programming-lang >}}
-{{< /programming-lang >}}
+{{< /programming-lang-wrapper >}}
 
 ## Further Reading
 
