@@ -51,14 +51,14 @@ Datadog .NET Profiler is currently in public beta. Datadog recommends evaluating
 
 1. If you are already using Datadog, upgrade your agent to version [7.20.2][1]+ or [6.20.2][2]+.
 
-2. The profiler ships together with the tracer. Install or upgrade to the last beta version if needed, using the [.NET Monitoring MSI installer][3]. Continuous Profiler only supports 64-bit Windows, with 32-bit support coming soon, so you need the file like `datadog-dotnet-apm-2.1.1-x64-profiler-beta.msi`.
+2. The profiler ships together with the tracer. Install or upgrade to the last beta version if needed, using the [.NET Monitoring MSI installer][3]. Continuous Profiler supports 64-bit Windows, so you need the file like `datadog-dotnet-apm-2.1.1-x64-profiler-beta.msi`.
 
    Run the installer with administrator privileges.
 
 {{< tabs >}}
 
 {{% tab "Internet Information Services (IIS)" %}}
-1. Set needed environment variables to configure and enable Profiler. You can do this machine-wide, user-wide, or just for IIS. For the IIS-only setup, set the environment variables via the registry:
+1. Set needed environment variables to configure and enable Profiler. You can do this machine-wide, user-wide, or just for IIS. For the IIS-only setup, set the environment variables by using the registry:
 
    **With the Registry Editor:**
 
@@ -129,7 +129,7 @@ Datadog .NET Profiler is currently in public beta. Datadog recommends evaluating
 {{% /tab %}}
 
 {{% tab "Windows services" %}}
-1. Set needed environment variables to configure and enable Profiler. You can do this machine-wide, user-wide, or just for your service. For the service-specific setup, set the environment variables via the registry:
+1. Set needed environment variables to configure and enable Profiler. You can do this machine-wide, user-wide, or just for your service. For the service-specific setup, set the environment variables by using the registry:
 
    **With the Registry Editor:**
 
@@ -187,7 +187,7 @@ Datadog .NET Profiler is currently in public beta. Datadog recommends evaluating
 {{% /tab %}}
 
 {{% tab "Standalone applications" %}}
-1. Set needed environment variables to configure and enable Profiler for a non-service application, such as console, ASP.NET (Core), Windows Forms, or WPF. You can do this machine-wide, user-wide, or just for your service. We recommend doing this in a batch file that also starts the application, and running your application using the batch file.
+1. Set needed environment variables to configure and enable Profiler for a non-service application, such as console, ASP.NET (Core), Windows Forms, or WPF. You can do this machine-wide, user-wide, or just for your service. The recommended way to do this is in a batch file that also starts the application, and to run your application using the batch file.
 
    For .NET Core and .NET 5+:
    ```cmd
