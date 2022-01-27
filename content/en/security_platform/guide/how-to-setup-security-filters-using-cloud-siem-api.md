@@ -10,7 +10,7 @@ aliases:
 
 ## Overview
 
-The Cloud SIEM product analyzes your ingested logs to detect threats in real time, such as by matching logs with threat intelligence, or by applying [Security Rules][1] to detect attacks or anomalies.
+The Cloud SIEM product analyzes your ingested logs to detect threats in real time, such as by matching logs with threat intelligence, or by applying [detection rules][1] to detect attacks or anomalies.
 
 Datadog charges for analyzed logs based on the total number of gigabytes ingested and analyzed by the Datadog Cloud SIEM service. By default, Cloud SIEM analyzes all your ingested logs to maximize detection coverage. However, by using the [Cloud SIEM API][2], you can programmatically setup Security Filters to configure which subset of ingested logs to analyze.
 

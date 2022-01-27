@@ -39,7 +39,7 @@ Exception in thread "main" java.lang.NullPointerException
 
 To alleviate this complexity, configure your logging library to produce your logs in JSON format. By logging to JSON, you:
 
-* Ensure that the stack trace is properly wrapped into the its log event.
+* Ensure that the stack trace is properly wrapped into the log event.
 * Ensure that all log event attributes (such as severity, logger name, and thread name) are properly extracted.
 * Gain access to [Mapped Diagnostic Context (MDC)][1] attributes, which you can attach to any log events.
 * Avoid the need for [custom parsing rules][2].
