@@ -6,9 +6,11 @@ aliases:
 ---
 
 <div class="alert alert-warning">
-  Use this guide to migrate from the legacy Events Stream to the Events Explorer. The Events Explorer is being automatically rolled out to all customers in Q1 and Q2 2022. If you see the <b>Explorer</b> option under <b>Events</b> in the left navigation bar, you have the new features. For legacy events information, see the <a href="/events/stream/">Event Stream</a>.</div>
+  Use this guide to migrate from the legacy Events Stream to the Events Explorer. The Events Explorer is being automatically rolled out to all customers in Q1 and Q2 2022. If you see the <strong>Explorer</strong> option under <strong>Events</strong> in the left navigation bar, you have the new features. For legacy events information, see the <a href="/events/stream/">Event Stream</a>.</div>
 
-The Event Stream is one of Datadog’s oldest features. The introduction of the Events Explorer and its associated changes means that Event query syntax, explorer and analytics views, processing pipelines, and other features work the same way they do for other Datadog products such as Logs. See [Events Explorer][1] for more details. 
+The Events Explorer replaces the Event Stream, one of Datadog's oldest features. The new Event query syntax requires migration of Event monitors, dashboard widgets, and any other features that query Events. 
+
+The introduction of the Events Explorer and its associated changes means that Event query syntax, explorer and analytics views, processing pipelines, and other features work the same way they do for other Datadog products such as Logs. See [Events Explorer][1] for more details. 
 
 ## What this means for your organization
 
