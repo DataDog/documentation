@@ -35,7 +35,6 @@ The following are **not** supported:
 - ZTS builds of PHP
 - PHP debug builds
 
-
 {{< tabs >}}
 {{% tab "GNU C Linux" %}}
 
@@ -49,7 +48,7 @@ Datadog recommends running an OS version that is not EOL.
 {{% /tab %}}
 {{% tab "Alpine Linux" %}}
 
-Version 3.13 of Alpine Linux or newer is required because the profiler is built against musl v1.2.
+Version 3.13 or newer of Alpine Linux is required because the profiler is built against musl v1.2.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -58,15 +57,15 @@ Version 3.13 of Alpine Linux or newer is required because the profiler is built 
 
 To begin profiling applications:
 
- 1. If you are already using Datadog, upgrade your Agent to version [7.20.2][1]+ or [6.20.2][2]+.
+1. If you are already using Datadog, upgrade your Agent to version [7.20.2][1]+ or [6.20.2][2]+.
 
- 2. Download the `datadog-setup.php` script from the [GitHub release page][3]. Version 0.69.0 is the first tracer release to include this installer.
+2. Download the `datadog-setup.php` script from the [GitHub release page][3]. Version 0.69.0 is the first tracer release to include this installer.
 
- 3. Run the installer to install both the tracer and profiler, for example `php datadog-setup.php --enable-profiling`. This script is interactive and asks which of the detected PHP locations it should install to. At the end of the script, it outputs the non-interactive version of the command arguments for future use.
+3. Run the installer to install both the tracer and profiler, for example `php datadog-setup.php --enable-profiling`. This script is interactive and asks which of the detected PHP locations it should install to. At the end of the script, it outputs the non-interactive version of the command arguments for future use.
 
- 4. Configure the profiler with environment variables. Unlike the tracer the profiler does not support INI settings.
+4. Configure the profiler with environment variables. Unlike the tracer the profiler does not support INI settings.
 
-    {{< tabs >}}
+   {{< tabs >}}
 {{% tab "CLI" %}}
 
 Set the environment variables before calling PHP, for example:
@@ -107,9 +106,9 @@ SetEnv DD_VERSION 1.3.2
 {{% /tab %}}
 {{< /tabs >}}
 
-See the [configuration docs][4] for more environment variables.
+   See the [configuration docs][4] for more environment variables.
 
- 5. A minute or two after receiving a request, profiles appear on the [APM > Profiler page][5].
+5. A minute or two after receiving a request, profiles appear on the [APM > Profiler page][5].
 
 ## Not sure what to do next?
 
