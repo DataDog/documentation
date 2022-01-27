@@ -39,7 +39,8 @@ Add the `quantize_sql_tables` option to your database instance configuration in 
 instances:
   - dbm: true
     ...
-    quantize_sql_tables: true
+    obfuscator_options:
+      quantize_sql_tables: true
 ```
 
 ## Raising the sampling rate
