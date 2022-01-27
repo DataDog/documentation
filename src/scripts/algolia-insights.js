@@ -32,7 +32,7 @@ export const pageIsEligibleToSendAlgoliaInsightsData = () => {
 */
 export const sendAlgoliaInsightsClickAfterSearchEvent = (queryID, objectID, position) => {
   initializeAlogliaInsights();
-
+  
   const insightsClickEventParams = {
     userToken: 'documentation',
     index: getAlogliaIndexName(),
@@ -41,6 +41,10 @@ export const sendAlgoliaInsightsClickAfterSearchEvent = (queryID, objectID, posi
     objectIDs: [objectID],
     positions: [position]
   };
+
+  if (window.DD_LOGS) {
+    window.DD_LOGS.logger.info('Algolia Insights click after search event posted', { objectID });
+  }
 
   searchInsights('clickedObjectIDsAfterSearch', insightsClickEventParams);
 }
@@ -123,7 +127,6 @@ export const handleAlgoliaClickedObjectEventOnAutocomplete = (url) => {
 
 export const handleAlgoliaViewEventOnPageLoad = () => {
   if (pageIsEligibleToSendAlgoliaInsightsData()) {
-    // Docs preview index uses the production origin - if we're on a preview site this makes sure we're still querying the Algolia data correctly.
     const origin = 'https://docs.datadoghq.com';
     const { pathname } = window.location;
     const topLevelUrl = `${origin}${pathname}`;
@@ -136,10 +139,11 @@ export const handleAlgoliaViewEventOnPageLoad = () => {
                 // Some top-levl URLs in algolia have a #pagetitle anchor, so we should look to match on that as well.
                 // https://datadoghq.atlassian.net/browse/WEB-1985
                 if (url === topLevelUrl || url === `${topLevelUrl}#pagetitle`) {
+                    initializeAlogliaInsights();
                     sendAlgoliaInsightsViewEvent([objectID]);
 
                     if (window.DD_LOGS) {
-                      window.DD_LOGS.logger.info('Algolia Insights View Event posted', { url });
+                      window.DD_LOGS.logger.info('Algolia Insights View Event posted', { url, objectID });
                     }
                 }
             })

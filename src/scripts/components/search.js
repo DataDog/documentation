@@ -20,14 +20,10 @@ const handleAlgoliaInsightsEventOnSearchResultClick = () => {
 
               if (algoliaQueryID && objectID && typeof(position) === 'number') {
                   sendAlgoliaInsightsClickAfterSearchEvent(algoliaQueryID, objectID, position);
-                  
-                  if (window.DD_LOGS) {
-                    window.DD_LOGS.logger.info('Algolia Insights clicked objectID after search posted', { objectID, position, url });
-                  }
               }
               
-            //   window.history.pushState({ 'page': url }, '', url);
-            //   window.location = url;
+              window.history.pushState({ 'page': url }, '', url);
+              window.location = url;
           })
       })
   }
