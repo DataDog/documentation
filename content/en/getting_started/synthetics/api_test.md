@@ -28,7 +28,7 @@ further_reading:
 
 ## Overview
 
-API tests **proactively monitor** that your **most important services** are available at anytime and from anywhere. [Single API tests][1] come in five different subtypes that allow you to launch requests on the different network layers of your systems (`HTTP`, `SSL`, `DNS`, `TCP`, `UDP`, `ICMP`, and `WebSocket`). [Multistep API tests][2] enable you to run HTTP tests in sequence to monitor the uptime of key journeys at the API level.
+API tests **proactively monitor** that your most important services are available at anytime, and from anywhere. [Single API tests][1] come in seven different subtypes that allow you to launch requests on the different network layers of your systems (`HTTP`, `SSL`, `DNS`, `TCP`, `UDP`, `ICMP`, and `WebSocket`). [Multistep API tests][2] enable you to run HTTP tests in sequence to monitor the uptime of key journeys at the API level.
 
 ## Create a single API test
 
@@ -42,7 +42,7 @@ The example below demonstrates the creation of an [HTTP test][3], a subtype of [
 4. Define your request:
 
     - Add the URL of the endpoint you want to monitor. If you don’t know what to start with, you can use `https://www.shopist.io/`, a test e-commerce web application. Defining the endpoint to test automatically populates the name of your test to `Test on www.shopist.io`. 
-    - You can select **Advanced Options** to use custom request headers, authentication credentials, body content, or cookies.  
+    - You can select **Advanced Options** to set custom request options, certificates, authentication credentials, and more.  
     
       **Note:** You can create secure [global variables][6] to store credentials and create [local variables][7] to generate dynamic timestamps to use in your request payload. After creating these variables, type `{{` in any relevant field and select the variable to inject its value in your test options.  
     

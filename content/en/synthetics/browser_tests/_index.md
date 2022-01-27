@@ -123,7 +123,7 @@ Tests can be only recorded from [Google Chrome][10]. To record your test, downlo
     {{< img src="synthetics/browser_tests/manual_steps.png" alt="Browser Test steps"  style="width:80%;">}}
 
     **Note**: You should always make sure to **end your browser test with an [assertion][13]** to confirm the journey executed by the browser test resulted in the expected state.
-5. Once you have finished your scenario, click on **Save and Launch Test**.
+5. Once you have finished your scenario, click **Save and Launch Test**.
 
 ## Permissions
 
