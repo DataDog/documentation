@@ -102,20 +102,26 @@
                                           <button class="btn text-primary js-copy-button">{{ i18n "copy" }}</button>
                                       </div>
 
-                                    <style>
-                                            #accordion .btn {
-                                              font-weight: bold;
-                                              color: #632ca6;
-                                            }
-                                            #accordion .btn.collapsed {
-                                              color: #666;
-                                            }
-                                            #accordion pre {
-                                              border-bottom: 3px solid rgba(119,0,255,.3);
-                                            }
-                                          </style>
+                                      <style>
+                                        #accordion .btn,
+                                        #curl-accordion .btn {
+                                          font-weight: bold;
+                                          color: #632ca6;
+                                        }
+                                        #accordion .btn.collapsed,
+                                        #curl-accordion .btn.collapsed {
+                                          color: #666;
+                                        }
+                                        #accordion pre,
+                                        #curl-accordion pre {
+                                          border-bottom: 3px solid rgba(119,0,255,.3);
+                                        }
+                                      </style>
 
+                                      {{ $fileNonExistCount := 0 }}
+                                      {{ $fileCount := 0 }}
                                       {{ with (index $codeExampleLookup $operationid) }}
+                                          {{ $fileCount = len . }}
                                           <div id="accordion">
 
                                         {{ range $i, $item := . }}
@@ -124,12 +130,12 @@
                                             <div class="card">
                                               <div class="card-header p-0">
                                                 <h5 class="m-0">
-                                                  <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#{{ $operationid }}-request-example-{{ (add $i 1) }}" aria-expanded="true" aria-controls="collapseOne">
+                                                  <button class="btn btn-link {{if gt $i 0}}collapsed{{ end}}" data-toggle="collapse" data-target="#{{ $operationid }}-request-example-{{ $i }}" aria-expanded="true" aria-controls="collapseOne">
                                                     {{ $item.description }}
                                                   </button>
                                                 </h5>
                                               </div>
-                                              <div id="{{ $operationid }}-request-example-{{ (add $i 1) }}" class="collapse" data-parent="#accordion">
+                                              <div id="{{ $operationid }}-request-example-{{ $i }}" class="collapse {{if eq $i 0}}show{{ end }}" data-parent="#accordion">
                                                 <div class="card-body p-0">
                                                     {{ range . }}
                                                       {{ (highlight (.Content) "json" "") }}
@@ -137,10 +143,14 @@
                                                 </div>
                                               </div>
                                             </div>
+                                            {{ else }}
+                                              {{ $fileNonExistCount = add $fileNonExistCount 1 }}
                                             {{ end }}
                                         {{ end }}
-                                      {{ else }}
-                                        {{ print $json | safeHTML }}
+                                      {{ end }}
+
+                                      {{ if or (eq $fileNonExistCount $fileCount) (not (index $codeExampleLookup $operationid)) }}
+                                          {{ print $json | safeHTML }}
                                       {{ end }}
 
                                   </div>

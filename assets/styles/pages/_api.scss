@@ -72,15 +72,15 @@ $ddpurple: #632ca6;
         min-height: 500px;
 
         @include media-breakpoint-up(md) {
-            height: 550px;
+            min-height: 550px;
         }
 
         @include media-breakpoint-up(lg) {
-            height: 600px;
+            min-height: 600px;
         }
 
         @include media-breakpoint-up(xl) {
-            height: 300px;
+            min-height: 300px;
         }
     }
 

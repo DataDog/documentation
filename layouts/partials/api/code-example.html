@@ -32,32 +32,69 @@
           <button class="btn text-primary js-copy-button">{{ i18n "copy" }}</button>
       </div>
       <div class="highlight">
+        {{ $fileNonExistCount := 0 }}
+        {{ $fileCount := 0 }}
+          {{ with (index $codeExampleLookup $operationid) }}
+            {{ $fileCount = len . }}
+            <div id="curl-accordion">
+              {{ range $i, $item := . }}
+                {{ with $resourcePage.Resources.Match (printf "request.%s%s.json" $operationid $item.suffix ) }}
+                  {{ $body := "" }}
+                  {{ range . }}
+                    {{ $body = .Content }}
+                  {{ end }}
+                  <div class="card">
+                    <div class="card-header p-0">
+                      <h5 class="m-0">
+                        <button class="btn btn-link {{if gt $i 0}}collapsed{{ end}}" data-toggle="collapse" data-target="#{{ $operationid }}-request-example-{{ $i }}" aria-expanded="true" aria-controls="collapseOne">
+                          {{ $item.description }}
+                        </button>
+                      </h5>
+                    </div>
+                    <div id="{{ $operationid }}-request-example-{{ $i }}" class="collapse {{if eq $i 0}}show{{ end }}" data-parent="#curl-accordion">
+                      <div class="card-body p-0">
+                        <pre class="chroma">
+  {{/* Do not change indent of html below as it will change the indentation of the curl code block */}}
+  <code class="language-fallback" data-lang="fallback">
+  {{- with $endpoint.action.requestBody -}}
+      {{- with .content -}}
+          {{- range $contentType, $requestBody := . -}}
+              {{- with $requestBody.examples -}}
+                  {{- range $exampleId, $exampleDefinition := . -}}
+                      {{- $exampleValue := $exampleDefinition.value -}}
+                      {{- if (or (hasPrefix $contentType "application/json") (hasPrefix $contentType "text/json")) -}}
+                          {{- $exampleValue = $exampleValue | jsonify (dict "indent" "  ") -}}
+                      {{- end -}}
+## {{ default $exampleId $exampleDefinition.summary }}
+  {{- range split $exampleDefinition.description "\n" }}
+# {{ . }}
+  {{- end }}
+{{ partial "api/curl.html" (dict "contentType" $contentType "exampleValue" $exampleValue "exampleDefinition" $exampleDefinition "context" $context "securitySchemes" $securitySchemes "dollarScratch" $context.Scratch "endpoint" $endpoint "body" $body) }}
+                  {{- end -}}
+              {{- else -}}
+{{ partial "api/curl.html" (dict "contentType" $contentType "context" $context "securitySchemes" $securitySchemes "dollarScratch" $context.Scratch "endpoint" $endpoint "body" $body) }}
+              {{- end -}}
+          {{- end -}}
+      {{- end -}}
+  {{- else -}}
+{{ partial "api/curl.html" (dict "context" $context "securitySchemes" $securitySchemes "dollarScratch" $context.Scratch "endpoint" $endpoint "body" $body) }}
+  {{- end -}}
+  </code>
+  {{/* Do not change indent of html above as it will change the indentation of the curl code block */}}
+                        </pre>
 
-{{ with (index $codeExampleLookup $operationid) }}
-<div id="accordion">
-  {{ range $i, $item := . }}
-    {{ with $resourcePage.Resources.Match (printf "request.%s%s.json" $operationid $item.suffix ) }}
-      <div class="card">
-        <div class="card-header p-0">
-          <h5 class="m-0">
-            <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#{{ $operationid }}-request-example-{{ (add $i 1) }}" aria-expanded="true" aria-controls="collapseOne">
-              {{ $item.description }}
-            </button>
-          </h5>
-        </div>
-        <div id="{{ $operationid }}-request-example-{{ (add $i 1) }}" class="collapse" data-parent="#accordion">
-          <div class="card-body p-0">
-              {{ range . }}
-                {{ (highlight (.Content) "json" "") }}
+                      </div>
+                    </div>
+                  </div>
+                {{ else }}
+                  {{ $fileNonExistCount = add $fileNonExistCount 1 }}
+                {{ end }}
               {{ end }}
-          </div>
-        </div>
-      </div>
-    {{ end }}
-  {{ end }}
-</div>
-{{ end }}
-          <pre class="chroma">
+            </div>
+          {{ end }}
+
+          {{ if or (eq $fileNonExistCount $fileCount) (not (index $codeExampleLookup $operationid)) }}
+            <pre class="chroma">
 {{/* Do not change indent of html below as it will change the indentation of the curl code block */}}
 <code class="language-fallback" data-lang="fallback">
 {{- with $endpoint.action.requestBody -}}
@@ -93,10 +130,12 @@
 </code>
 {{/* Do not change indent of html above as it will change the indentation of the curl code block */}}
            </pre>
+          {{ end }}
       </div>
     </div>
 </div>
 
+<!-- Go, Python, Ruby, Typescript, Java etc. -->
 {{ with $resourcePage.Resources.Match (printf "%s%s" $operationid ".*" ) }}
     {{ $count := 1 }}
     {{ range . }}
