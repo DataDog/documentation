@@ -175,7 +175,7 @@ When you create a correction window for an SLO, the time period you specify is r
 
 You have the option to create one-time corrections for ad-hoc adjustments, or recurring corrections for predictable adjustments that occur on a regular cadence. One-time corrections require a start and end time, while recurring corrections require a start time, duration, and interval. Recurring corrections are based on [iCalender RFC 5545's RRULE specification][14]. Specifying an end time for recurring corrections is optional in case you need the correction to repeat indefinitely. 
 
-For either type of correction, you must select a correction category that states why the correction is being made. The available categories are `Scheduled Maintenance`, `Outside Business Hours`, `Deployment`, `Other`. You can optionally include a description to provide additional context if necessary.
+For either type of correction, you must select a correction category that states why the correction is being made. The available categories are `Scheduled Maintenance`, `Outside Business Hours`, `Deployment`, and `Other`. You can optionally include a description to provide additional context if necessary.
 
 Each SLO has a maximum limit of corrections that can be configured to ensure query performance. The limits per SLO are as follows:
 
