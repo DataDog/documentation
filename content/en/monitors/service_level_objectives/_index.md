@@ -186,7 +186,7 @@ Each SLO has a maximum limit of corrections that can be configured to ensure que
 | Weekly recurring  | 3             |
 | Monthly recurring | 5             |
 
-Status corrections are configurable through the UI, the [SLO status corrections API][12], or a [Terraform resource][13].
+You may configure status corrections through the UI, the [SLO status corrections API][12], or a [Terraform resource][13].
 
 #### Access in the UI 
 
