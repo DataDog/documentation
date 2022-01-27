@@ -33,9 +33,9 @@ The Datadog Profiler requires Linux kernel v4.17+ on an `amd64` compatible proce
 
 To begin profiling applications:
 
-1. Configure the `perf_event_paranoid` kernel setting to be at most 2. On many distributions, you can check this parameter by running `cat /proc/sys/kernel/perf_event_paranoid` or `sysctl kernel.perf_event_paranoid`. Likewise, you can set this value until the next reboot by running `echo 2 | sudo tee /proc/sys/kernel/perf_event_paranoid` and and can be set on every system startup with `sudo sysctl -w kernel.perf_event_paranoid=2`. These commands can't usually be run from a container, as the `perf_event_paranoid` setting is an operating system parameter. These commands may not work for all configurations. For alternatives, see the [troubleshooting guide][1].
+1. Configure the `perf_event_paranoid` kernel setting to be at most 2. On many distributions, you can check this parameter by running `cat /proc/sys/kernel/perf_event_paranoid` or `sysctl kernel.perf_event_paranoid`. You can set this value until the next reboot by running `echo 2 | sudo tee /proc/sys/kernel/perf_event_paranoid` and set it on every system startup with `sudo sysctl -w kernel.perf_event_paranoid=2`. These commands can't usually be run from a container, as the `perf_event_paranoid` setting is an operating system parameter. These commands may not work for all configurations. For alternatives, see [Troubleshooting][1].
 
-2. Ensure you are running the Datadog agent version [7.20.2][2]+ or [6.20.2][3]+.
+2. Ensure you are running the Datadog Agent version [7.20.2][2]+ or [6.20.2][3]+.
 
 3. Download the appropriate [ddprof binary][4] for your Linux distribution. For example, here is one way to pull the latest release:
 
@@ -45,7 +45,7 @@ tar xvf ddprof-x86_64-linux-gnu.tar.gz
 mv ddprof-x86_64-linux-gnu/bin/ddprof INSTALLATION_TARGET
 ```
 
-Where `INSTALLATION_TARGET` specifies the location you'd like to store the `ddprof` binary. This document will assume `INSTALLATION_TARGET=./ddprof`
+   Where `INSTALLATION_TARGET` specifies the location you'd like to store the `ddprof` binary. The examples that follow assume `INSTALLATION_TARGET` is set to `./ddprof`.
 
 4. Modify your service invocation to include the profiler. Your usual command is passed as the last arguments to the `ddprof` executable.
    {{< tabs >}}
@@ -95,7 +95,7 @@ exec ./ddprof --environment prod --service my-web-app --service_version 1.0.3 my
 {{< /tabs >}}
 
 
-5. A minute or two after starting your application, your profiles will show up on the [Datadog APM > Profiler page][5].
+5. A minute or two after starting your application, your profiles appear on the [Datadog APM > Profiler page][5].
 
 ## Configuration
 

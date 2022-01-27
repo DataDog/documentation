@@ -229,7 +229,7 @@ If you prefer, you can also troubleshoot the problem by enabling verbose logs an
 
 This error typically occurs when you do not have sufficient permission to engage the profiler. The most common reason for this is that required operating system features have been disabled, which causes profiling to fail. This is typically a host-level configuration, which cannot be set at the level of an individual pod or container.
 
-Setting `perf_event_paranoid` so that it persists across restarts depends on your distribution. As a diagnostic step, you could try the following:
+Setting `perf_event_paranoid` so that it persists across restarts depends on your distribution. As a diagnostic step, try the following:
 
 ```shell
 echo 1 | sudo tee /proc/sys/kernel/perf_event_paranoid
@@ -255,7 +255,7 @@ Other profiling tools may contribute to the same limit.
 
 ### "\<WARNING\> Failure to establish connection"
 
-This error usually means that the profiler is unable to connect to the Datadog agent. Enable [configuration logging][3] to identify the hostname and port number used by the profiler for uploads. Additionally, the content of the error message may relay the hostname and port used. Compare these values to your Agent configuration. See [Enabling the profiler][4] for details on profiler input parameters and default values.
+This error usually means that the profiler is unable to connect to the Datadog Agent. Enable [configuration logging][3] to identify the hostname and port number used by the profiler for uploads. Additionally, the content of the error message may relay the hostname and port used. Compare these values to your Agent configuration. See [Enabling the profiler][4] for details on profiler input parameters and default values.
 
 ## Profiles are empty or sparse
 
