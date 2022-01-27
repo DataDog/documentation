@@ -4,241 +4,229 @@ kind: guide
 further_reading:
 - link: '/dashboards/widgets'
   tag: 'Documentation'
-  text: 'List of Dashboard Widgets'
-
+  text: 'Dashboard widget list'
 ---
 
 ## Overview
 
-Dashboards are **pivots** in troubleshooting sessions, they gather data from multiple sources and have people across multiple teams to use it, an as such:
+Dashboards serve as pivot points in your troubleshooting sessions by collecting data from multiple sources and displaying visualizations for you and people across teams. You can find them attached to a [monitor notification][1] as the preferred entry point, used as [screenboards][2] to observe key technical or business indicators, or referenced in [runbooks][3] to provide additional context.
 
-* they are typically attached to a [monitor notification][2] as a preferred entry point, used as [screenboard][3] to overwatch key technical or business indicators, or referenced in [runbooks][1] to provide extra context.
+Dashboards presents insightful information as **snapshots** on the current state of your platform and **interactions** so you can pre-emptively see what's going off track. Click on a visualization to explore the default links and dive deeper into specialized product pages.
 
-* they give insightful information as **snapshots** on the current state of your platform. But they also have **interactions** to get a first sense of what's going off-tracks, before enventually diving deeper with more specialised product pages.
+{{< img src="dashboards/guide/context_links/overview.mp4" alt="Context Link Demo" video="true" style="width:80%;" >}}
 
-{{< img src="dashboards/guide/context_links/overview.mp4" alt="Context Link Demo" video="true" style="width:80%;">}}
+This guide introduces **contextual links** (also known as context links) in your dashboards, explains how out-of-the-box links work, and provides use cases for configuring contextual links.   
 
-In this users guide, we focus on **contextual links in widget menus** (see video above). Contextual links are bridges between Dashboards widgets and other pages, whether in Datadog or in third-part applications you need to integrate in your workflows. 
+## Contextual links
 
-You'll see:
+Contextual links bridge dashboard widgets with other pages in Datadog and third-party applications you need to integrate into your workflows.
 
-1. How one-size-fit-alls default links work, and how to adapt them your exact needs (#context-links-how-to).
-2. Example use-cases on how to take advantage of context links configuration (#example-use-cases).
+Users with edit permissions to dashboards can configure which links are accessible in the link list.
 
+### Default context links
+ 
+ {{< img src="dashboards/guide/context_links/default-links.png" alt="Default links" style="width:90%;" >}}
 
-## Contextual links how-to
+By default, the widget menu recommends links to your host, [traces][4], and [logs][5], along with links that correspond to the widget's data sources. For example, a link to the [**RUM Explorer**][6] if your widget uses [RUM data][7]. Click  **More Related Data Actions** to see additional links in the dropdown menu. 
 
-### Default contextual links
-
-By default, widget contextual menu consist of the following links: 
+The widget contains links to the following pages:  
 
 | Link           | Description                                                                          |
 |----------------|--------------------------------------------------------------------------------------|
-| Hosts          | Links to the [**Host Map**][101] if series consists of 1+ host. 
-                        Links to the [**Host Dashboard**][102]if series consist of 1 host.              |
-| Containers     | Links to the [**Live Container**][103] page.                                         |
-| Processeses    | Links to the [**Live Process**][104] page.                                           |
-| APM Traces     | Opens a side panel in dashboard showing underlying traces, 
-                        which links to the APM [**Trace Explorer**][10].                                |
-| RUM Sessions   | Links to the RUM [**Sessions Explorer**]106]                                         |
-| Profiles       | Links to the APM [**Profile Explorer**]107]                                          |
-| Logs           | Opens a side panel in dashboard showing underlying logs, 
-                        which links to the [**Log Explorer**][108]                                      |
+| Hosts          | Links to the [Host Map][8] if series consists of 1+ host. 
+| Containers     | Links to the [Live Container][9] page.                                         |
+| Processeses    | Links to the [Live Process][10] page.                                           |
+| APM Traces     | Opens a side panel displaying underlying traces that link to the [Trace Explorer][11].                                                                                                 |
+| RUM Events   | Links to the [RUM Explorer][12].                                                  |
+| Profiles       | Links to the APM [Profile Explorer][13].                                        |
+| Logs           | Opens a side panel displaying underlying logs that link to the [Log Explorer][14].                                                                                                 |
 
+When applicable, contextual links embed:
 
-[101]: /infrastructure/hostmap/#overview
-[102]: /getting_started/dashboards/#explore-out-of-the-box-dashboards
-[103]: /infrastructure/livecontainers/
-[104]: /infrastructure/process/?tab=linuxwindows
-[105]: /tracing/trace_explorer/?tab=listview
-[106]: /real_user_monitoring/explorer/?tab=facets
-[107]: /tracing/profiler/search_profiles/
-[108]: /logs/explorer/
+* A **filter** that combines the widget filters with template variables (if any). For grouped-by queries, the filter is the series that you clicked on. 
+* A **time range**. For timeseries and heatmap widgets, the time range corresponds to the time bucket for the data point. For other widgets, the time range is the current time range of the dashboard.
 
+### Customize context links
 
-By default the widget menu promotes only **Host**, **Traces** and **Logs** links, alongside links corresponding to the widget data source(s) (for instance **RUM Events** links if the widget uses RUM data). Others links appear under a secondary "More Actions" menu. Users with permissions to edit the Dashboards can configure which links are promoted.
+Create your own contextual links or override the default links through the **Edit context link** side panel. This feature is available for [generic widgets][15].
 
-{{< img src="dashboards/guide/context_links/default-links.png" alt="Default links" video="true" style="width:80%;">}}
+To add a context link to the link menu, click **Add a Context Link** in the **Context Links** section of your dashboard widget's configuration. You can hide and delete context links in the link menu.
 
+{{< img src="dashboards/guide/context_links/edit-links.png" alt="Edit links" style="width:80%;" >}}
 
-By default and when applicable, contextual links embed:
+To define custom links or override the default links, specify the link name in the **Label** field that appears in the context menu and the link path in the **URL** field for a custom link. You can use the URL parameter key-value helper.
 
-* A **filter**, which combines the filter(s) of the widget (including template variables, if any) and, for grouped-by queries, the series clicked-on. 
-* A **timerange**. For timeseries and heatmap widgets, the timerange corresponds to the time bucket for the data point. For other widgets, the timerange is the current timerange of the Dashbaord.
+{{< img src="dashboards/guide/context_links/custom-link.png" alt="Customize link" style="width:80%;" >}}
 
+Available variable types for contextual links include:
 
-### Customize contextual links
+* `{{timestamp_start}}` and `{{timestamp_end}}` which correspond to the widget's time range or the selected time bucket's time range on [timeseries][16] and heatmaps.
+* `{{@MerchantTier}}` and `{{@MerchantTier.value}}` query variables. Use these variables in widgets with grouped queries to identify the specific group a user clicks on.
+* `{{$env}}` and `{{$env.value}}` dashboard template variables. Use these variables to identify the current value used for the template variable when a user clicks.
+* `{{tags}}` which is the default combination of all variables above.
 
-{{< img src="dashboards/guide/context_links/edit-links.png" alt="Edit links" video="true" style="width:80%;">}}
+When you have to choose between `{{something}}` and `{{something.value}}`:
 
-Create your own contextual links or override the default links through the widget edit mode. *Note*: this feature is available for [Generic widgets][4].
+* `{{something}}` returns the value prefixed by its key. For example, `env:prod`.
+* `{{something.value}}` returns the raw value. For example, `prod`.
 
-{{< img src="dashboards/guide/context_links/custom-link.png" alt="Customize link" video="true" style="width:80%;">}}
+Once you have added variables to your context link, click **Save**. Then, save your widget configuration.
 
-To define customs or overriden links, specify:
+In this example, when you click **View in Acme**, the link directs you to `https://prod.acme.io/search?what=basic&when=1643021787564`.
 
-* The **label** to appear in the context menu,
-* The **URL** for the custom link. Note that you can use the URL params key-value helper for that purpose.
+{{< img src="dashboards/guide/context_links/view-in-acme.png" alt="Customize link" style="width:90%;" >}}
 
-There are different types of variables you can use in for contextual links:
-* `{{timestamp_start}}` and `{{timestamp_end}}`. They correspond to the timerange of the widget, or the timerange of the clicked time bucket for timeseries and heatmaps.
-* Query variables, `{{@MerchantTier}}` and `{{@MerchantTier.value}}` in the example above. These variables are for widgets with grouped queries, and identify the specific group a user clicks on.
-* Dashboard template variables, `{{$env}}` and `{{$env.value}}` in the example above. These variables identify the current value in use for the template variable  when user cliks.
-* `{{tags}}`, which is the default combination of all the variables above.
+The context link:
 
+* Replaces `{{env.value}}` with `prod`
+* Replaces `{{@MerchantTier.value}}` with `basic`
+* And replaces `{{timestamp_end}}` with `1643021787564`.
 
-When you have the choice between `{{something}}` and `{{something.value}}` :
-* `{{something}}` returns the value prefixed by its key. For instance, `env:prod`.
-* `{{something.value}}` returns the raw value. For instance, `prod`.
+### Auto-generate URL parameters
 
-{{< img src="dashboards/guide/context_links/view-in-acme.png" alt="Customize link" video="true" style="width:80%;">}}
+For a context link to encode a wide variety of parameters, copy and paste the entire URL in the **URL** field to bootstrap the configuration. You do not need to worry about URL encoding. 
 
-Following on that custom context link example, clicking on `View in Acme` would open the `https://prod.acme.io/search?what=basic&when=1643021787564`:
-* {{env.value}} has been replaced by `prod`
-* {{@MerchantTier.value}} has been replaced by `basic`
-* {{timestamp_end}} has been replaced by `1643021787564`
+{{< img src="dashboards/guide/context_links/override-link.mp4" alt="Copy-paste links to bootstrap configuration" video="true" style="width:80%;" >}}
 
+In the example below, the `status:error source:nginx {{@shopist.webstore.merchant.tier}}` query parameter with `{{@shopist.webstore.merchant.tier}}` interpreted as `@shopist.webstore.merchant.tier:basic` is translated into `&query=status%3Aerror%20source%3Anginx%20%40shopist.webstore.merchant.tier%3Abasic`.
 
-{{< img src="dashboards/guide/context_links/override-link.mp4" alt="Copy-paste links to bootstrap configuration" video="true" style="width:80%;">}}
+{{< img src="dashboards/guide/context_links/url-encoding.png" alt="Customize link" style="width:80%;" >}}
 
-For links encoding a wide variety of parameters, consider copy-paste the whole URL to bootstrap the configuration. Note that you don't have to worry about URL encoding. In the example below, the query parameter `status:error source:nginx {{@shopist.webstore.merchant.tier}}` - with {{@shopist.webstore.merchant.tier}} to be interpreted as `@shopist.webstore.merchant.tier:basic` - is naturally translated into `&query=status%3Aerror%20source%3Anginx%20%40shopist.webstore.merchant.tier%3Abasic`
+## Example use cases
 
-{{< img src="dashboards/guide/context_links/url-encoding.png" alt="Customize link" video="true" style="width:60%;">}}
+This section describes examples where you can use contextual links to fine-tune the way your dashboards integrate in your workflows.
 
-
-## Example Use-Cases
-
-This section covers a handful of inspirational examples where you can take advantage contextual links to fine-tune how your Dashboards integrate in your workflows:
-
-### Connect Dashboards with your Customer Support solution 
+### Dashboards links to a Customer Support solution 
 
 #### Context
 
-You use Datadog to monitor your merchant website. Your Customer Support team uses a Dashboard that your [RUM][12] and [Security][14] team prepared to proactively identify your most engaged customers, or customers with a troublesome experience, and potentially reach out to them.
+You use Datadog to monitor your merchant website. Your Customer Support team uses a dashboard that your [RUM][17] and [Security][18] teams set up to proactively identify your most engaged customers or customers with a troublesome experience, and potentially reach out to them.
 
-To accelerate their troubleshooting workflows, Customer Support team would like a direct connection between Dashboards and their support solution - Zendesk in this example.
+To accelerate this troubleshooting workflow, the Customer Support team would like a direct connection between dashboards and a support solution, for example: Zendesk.
 
 #### Approach
 
-Your primary ID to track logged users all across your platform in Datadog is the user email, which is the facet you use in some of your Dashboards widgets.
+The primary ID that tracks logged users across your platform in Datadog is the user email, which is a facet that appears in some dashboard widgets.
 
-{{< img src="dashboards/guide/context_links/zendesk_query.png" alt="Zendesk Query" style="width:80%;">}}
+{{< img src="dashboards/guide/context_links/zendesk_query.png" alt="Zendesk Query" style="width:90%;">}}
 
-A typical Zendesk link to search for users is `https://acme.zendesk.com/agent/search/1?type=user&q=email%3Ashane%40doe.com`, where (user) email is a search parameter.
+A typical Zendesk link to search for users is `https://acme.zendesk.com/agent/search/1?type=user&q=email%3Ashane%40doe.com`, where the user's email is a search parameter.
 
-The templated link would be `https://acme.zendesk.com/agent/search/1?type=user&q=email:{{@usr.email.value}}`.
+Add a variable in the URL and the templated link becomes `https://acme.zendesk.com/agent/search/1?type=user&q=email:{{@usr.email.value}}`.
 
 {{< img src="dashboards/guide/context_links/zendesk_link.png" alt="Zendesk User Page Context Link" style="width:80%;">}}
 
+#### Result
 
-#### Wrap up
-
-As a result, your Customer Support benefit from a link embedded in the widget, that takes them in Zendesk directly in the right context.
+Your Customer Support team's dashboard widget contains a contextual link that takes you into the Customer Support platform with the appropriate context.
 
 {{< img src="dashboards/guide/context_links/zendesk_interaction.png" alt="Zendesk User Page Context Link" style="width:80%;">}}
 
-{{< img src="dashboards/guide/context_links/zendesk_result.png" alt="Zendesk Result" style="width:70%;">}}
+Clicking the **Zendesk User Page** link directs you to this user's page in Zendesk.
 
+{{< img src="dashboards/guide/context_links/zendesk_result.png" alt="Zendesk Result" style="width:80%;">}}
 
-
-### Link to the AWS Console
+### Dashboard links to the AWS Console
 
 #### Context
 
-Your startup is in its early days. Your platform is hosted on [AWS EC2][16] instances and procedures to upscale or downscale your platform are still mostly manual.
+Your startup is in its early days. Your platform is hosted on [AWS EC2][19] instances and the procedures to upscale and downscale your platform are mostly manual.
 
-Still, you have a Datadog Dashboard in which you consolidate your key health metrics for your infrastructure. To accelerate your operations workflow, you'd like a direct connection between this Dashboard and your [AWS Console][15], for instance to upgrade from `t2.micro` to `t2.large`.
+You have a dashboard where you've consolidated key health metrics for your infrastructure in Datadog. 
+
+To accelerate this operations workflow, you would like a direct connection between this dashboard and your [AWS Console][20]. For example, to upgrade from `t2.micro` to `t2.large`.
 
 #### Approach
 
-A typical AWS EC2 instance summary link is `https://eu-west-3.console.aws.amazon.com/ec2/v2/home?region=eu-west-3#InstanceDetails:instanceId=i-04b737b9f8bf94a94` in which you read:
+A typical AWS EC2 instance summary link is `https://eu-west-3.console.aws.amazon.com/ec2/v2/home?region=eu-west-3#InstanceDetails:instanceId=i-04b737b9f8bf94a94`, where you can read:
 
-* `eu-west-3`as the datacenter region, once as a subdomain and once as a URL param
-* `i-04b737b9f8bf94a94` the host ID, as a hash parameter
+* `eu-west-3`: The data center region displayed as a subdomain and a URL parameter.
+* `i-04b737b9f8bf94a94`: The host ID displayed as a hash parameter.
 
-If your platform runs only on one region, the templated simply consists in the injection of the host ID: `https://eu-west-3.console.aws.amazon.com/ec2/v2/home?region=eu-west-3#InstanceDetails:instanceId={{host.value}}`.
+If your platform only runs on one region, inject the host ID into the context link template so that `https://eu-west-3.console.aws.amazon.com/ec2/v2/home?region=eu-west-3#InstanceDetails:instanceId={{host.value}}`.
 
+If your platforms runs on multiple regions, your widget configuration depends on the following:
 
-If your platforms runs on multiple regions, then depending on your widget configuration:
+* If the region is part of the query aggregation (for example, in the screenshot below), the templated link is `https://{{region.value}}.console.aws.amazon.com/ec2/v2/home?region={{region.value}}#InstanceDetails:instanceId={{host.value}}`, where `{{region.value}}` is a **query** variable.
 
-* If region is part the query aggregation (like on the screenshot below), then the templated link would be `https://{{region.value}}.console.aws.amazon.com/ec2/v2/home?region={{region.value}}#InstanceDetails:instanceId={{host.value}}`, where {{region.value}} is a **query variable**.
+{{< img src="dashboards/guide/context_links/ec2_query.png" alt="AWS EC2 Query" style="width:90%;" >}}
 
-{{< img src="dashboards/guide/context_links/ec2_query.png" alt="AWS EC2 Query" style="width:60%;">}}
+* If the region is part of the query aggregation (for example, in the screenshot below), the templated link is `https://{{$region.value}}.console.aws.amazon.com/ec2/v2/home?region={{$region.value}}#InstanceDetails:instanceId={{host.value}}`, where `{{region.value}}` is a **template** variable. 
 
-* If region is part the query aggregation (like on the screenshot below), then the templated link would be `https://{{$region.value}}.console.aws.amazon.com/ec2/v2/home?region={{$region.value}}#InstanceDetails:instanceId={{host.value}}`, where {{region.value}} is a **template variable**. 
+{{< img src="dashboards/guide/context_links/ec2_query2.png" alt="AWS EC2 Query" style="width:90%;" >}}
 
+#### Result
 
-#### Wrap up
+Your dashboard widget contains a link that takes you to the appropriate host in the AWS Console.
 
-As a result, you benefit from a link embedded in the widget that takes you in AWS console directly on the right host.
+{{< img src="dashboards/guide/context_links/ec2_interaction.png" alt="AWS EC2 Query Interaction" style="width:90%;" >}}
 
-{{< img src="dashboards/guide/context_links/ec2_interaction.png" alt="AWS EC2 Query Interaction" style="width:90%;">}}
+Clicking the **AWS EC2 Instance Summary** link directs you to the AWS EC2 instance page in the AWS Console.
 
-{{< img src="dashboards/guide/context_links/ec2_result.png" alt="AWS EC2 Query Result" style="width:70%;">}}
+{{< img src="dashboards/guide/context_links/ec2_result.png" alt="AWS EC2 Query Result" style="width:70%;" >}}
 
-
-### Connect Dashboards and Saved Views, with attribute remapping
+### Dashboard links to saved views and remapped attributes in Datadog
 
 #### Context
 
-You monitor your corporate website with Datadog. Among other things, you use [RUM][12] to understand your readership and leads, and Logs to [overwatch your API Gateways][13] for a more technical perspective.
+You monitor your corporate website with Datadog. You may use [RUM][17] to understand your users and [Logs][21] to [overwatch your API Gateways][22] with a more technical perspective.
 
-The team in charge of API Gateways maintains a Log Explorer [Saved View][10]. This Saved View is fine-tuned for the front-end team to have at hand the information relevant for them.
- 
-Your front-end engineers typically use Dashboard with high level RUM insights, and to accelerate their troubleshooting they'd like to access the Saved View with Dashboard current context.
+Your front-end engineers typically use dashboards with high-level RUM insights. The API Gateways team maintains a [Saved View][23] in the Log Explorer, which is a fine-tuned perspective that the front-end monitoring team relies on to monitor information that is relevant to them. 
 
-{{< img src="dashboards/guide/context_links/logs-saved-view_result.png" alt="Logs Saved View result" style="width:70%;">}}
+{{< img src="dashboards/guide/context_links/logs-saved-view_result.jpg" alt="Logs Saved View result" style="width:90%;" >}}
 
+To accelerate this troubleshooting workflow, the front-end monitoring teams would like to access the saved view with the current context of the dashboard.
 
-#### Approach Saved Views
+#### Approach to Saved Views
 
-Saved Views define what are the default query, visualisation and configuration options to use in Explorers. A typical saved view link is `https://app.datadoghq.com/logs?saved_view=305130`, which encodes under-the-hood for the whole Log Explorer URL. 
+[Saved Views][23] define the default query, visualization, and configuration options in the Log and [RUM Explorers][12]. A typical saved view link is `https://app.datadoghq.com/logs?saved_view=305130`, which encodes the Log Explorer URL under-the-hood. 
 
-You can override any parameter in the resulting Log Explorer URL, appending the Saved View short link. 
+You can override any parameter in the resulting Log Explorer URL to append the saved view's short link. 
 
-For instance, `https://app.datadoghq.com/logs?saved_view=305130`**`&query=@source:nginx @network.client.ip:123.123.12.1`** leads to the Log Explorer as if you open the Saved View at first place, except the default query filter is replaced by: `@source:nginx @network.client.ip:123.123.12.1`.
+For example, `https://app.datadoghq.com/logs?saved_view=305130&query=@source:nginx @network.client.ip:123.123.12.1` takes you to the [Log Explorer][14] as if you opened the saved view first, but the default query filter is replaced with `@source:nginx @network.client.ip:123.123.12.1`.
 
+#### Approach to remapping attributes
 
-#### Approach attributes remapping
+If navigation on your website is anonymous, you may use an IP address as a proxy to identify your users.
 
-Say, navigation on your website is anonymous, so you use IP as a proxy to identify your users.
+You would like to identify the `@session.ip` attribute from your RUM events with the `@network.client.ip` attribute from your logs. The two attributes have different names because they generally have different meanings, but in this context of authentication logs, you can use one or the other.
 
-You want to identify the `@session.ip` attribute from your RUM events, with the `@network.client.ip` attribute from your logs. The two attributes have two different names since they have slightly different meaning in the general case. But in the specific context of authentication logs, you identify one with another.
-
-With contextual links, you can inject the `@session.ip` in a filter based on `@network.client.ip`, as follows: `@network.client.ip:{{@session.ip.value}}`.
-
-
-#### Wrap-up
+Inject the `@session.ip` in a filter based on `@network.client.ip` so that the `@network.client.ip:{{@session.ip.value}}`.
 
 {{< img src="dashboards/guide/context_links/logs-saved-view_query.png" alt="Logs Saved View result" style="width:70%;">}}
 
-With a RUM Widget in your Dashboard showing insights per Session IP and for specific countries, you can use the following link configuration.
+For a RUM dashboard widget displaying insights per session IP and for specific countries, follow this link configuration.
 
 {{< img src="dashboards/guide/context_links/logs-saved-view_link.png" alt="Logs Saved View result" style="width:70%;">}}
 
-As a result: 
+#### Result
 
-* The link is always up-to-date, as your API Gateway team updates the Saved View to take into account latest updates on the incoming logs.
-* Users have a direct connection between the RUM Events and corresponding Logs, through the IP field remapping.
-
+As the API Gateways team updates the saved view to account for the latest updates on incoming logs, the contextual link remains up-to-date. Remapping the IP address creates a context link that connects your RUM events with corresponding logs.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /notebooks/
-[2]: /monitors/notify
-[3]: /dashboards/screenboards/
-[4]: /dashboards/widgets/
-[5]: /infrastructure/
-[6]: /tracing/
-[7]: /logs/
-[8]: https://app.datadoghq.com/logs
-[9]: https://app.datadoghq.com/rum/explorer
-[10]: /logs/explorer/saved_views/#overview
-[11]: /logs/explorer/
-[12]: /real_user_monitoring/
-[13]: /integrations/#cat-web
-[14]: /security_platform/cloud_siem/
-[15]: https://aws.amazon.com/console/
-[16]: /integrations/amazon_ec2/
+[1]: /monitors/notify/
+[2]: /dashboards/screenboards/
+[3]: /notebooks/
+[4]: https://app.datadoghq.com/apm/traces/
+[5]: https://app.datadoghq.com/logs
+[6]: https://app.datadoghq.com/rum/explorer/
+[7]: /real_user_monitoring/data_collected/
+[8]: /infrastructure/hostmap/#overview
+[9]: /infrastructure/livecontainers/
+[10]: /infrastructure/process/?tab=linuxwindows
+[11]: /tracing/trace_explorer/?tab=listview
+[12]: /real_user_monitoring/explorer/
+[13]: /tracing/profiler/search_profiles/
+[14]: /logs/explorer/
+[15]: /dashboards/widgets/
+[16]: /dashboards/widgets/timeseries/
+[17]: /real_user_monitoring/
+[18]: /security_platform/cloud_siem/
+[19]: /integrations/amazon_ec2/
+[20]: https://aws.amazon.com/console/
+[21]: /logs/
+[22]: /integrations/#cat-log-collection
+[23]: /logs/explorer/saved_views/
