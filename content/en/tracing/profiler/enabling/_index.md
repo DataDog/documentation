@@ -27,8 +27,6 @@ Select your language below to learn how to enable a profiler for your applicatio
 
 {{< partial name="profiling/profiling-languages.html" >}}
 
-To get notified when a private beta is available for the **.NET** Profiler, [sign up by completing this form][2].
-
 ## Unmanaged runtimes
 
 The following profiling library can be used for applications that are written in compiled languages such as **C**, **C++**, or **Rust**. You can also use this to profile services such as nginx and Postgres: 
@@ -43,4 +41,3 @@ The following profiling library can be used for applications that are written in
 
 
 [1]: /tracing/setup_overview/
-[2]: https://docs.google.com/forms/d/e/1FAIpQLScb9GKmKfSoY6YNV2Wa5P8IzUn02tA7afCahk7S0XHfakjYQw/viewform

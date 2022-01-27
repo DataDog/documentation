@@ -324,4 +324,3 @@ For Kubernetes environments, see the [Kubernetes short lived container documenta
 [9]: /agent/logs/advanced_log_collection/?tab=docker#multi-line-aggregation
 [10]: /agent/guide/autodiscovery-management/
 [11]: /agent/kubernetes/log/?tab=daemonset#short-lived-containers
-[12]: /logs/guide/docker-logs-collection-troubleshooting-guide/#docker-log-collection-from-file-issues
