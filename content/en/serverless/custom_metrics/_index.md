@@ -160,7 +160,7 @@ func myHandler(ctx context.Context, event MyEvent) (string, error) {
     "product:latte", "order:online" // Associated tags
   )
 
-  // Submit a metric with a timestamp of the past (< 20 mins old),
+  // Submit a metric with a timestamp that is within the last 20 minutes,
   // only supported when using the Forwarder Lambda
   ddlambda.MetricWithTimestamp(
     "coffee_house.order_value",     // Metric name
@@ -186,7 +186,7 @@ def handler(event:, context:)
           "product":"latte", "order":"online" # Associated tags
         )
 
-        # Submit a metric with a timestamp of the past (< 20 mins old),
+        # Submit a metric with a timestamp that is within the last 20 minutes,
         # only supported when using the Forwarder Lambda
         Datadog::Lambda.metric(
           'coffee_house.order_value',         # Metric name
