@@ -7,7 +7,7 @@ further_reading:
       text: 'APM Troubleshooting'
 ---
 
-{{< programming-lang-wrapper langs="java,python,go,ruby,dotnet,linux" >}}
+{{< programming-lang-wrapper langs="java,python,go,ruby,dotnet,php,linux" >}}
 {{< programming-lang lang="java" >}}
 
 ## Missing profiles in the profile search page
@@ -251,6 +251,20 @@ Otherwise, turn on [debug mode][1] and [open a support ticket][2] with the debug
 
 [1]: /tracing/troubleshooting/#tracer-debug-logs
 [2]: /help/
+{{< /programming-lang >}}
+{{< programming-lang lang="php" >}}
+
+## Missing profiles in the profile search page
+
+If you've configured the profiler and don't see profiles in the profile search page, run the `phpinfo()` function. The profiler hooks into `phpinfo()` to run diagnostics. If the webserver is having problems, run `phpinfo()` from the webserver and not from the command line as each Server API (SAPI) can be configured indepenently.
+
+[Open a support ticket][1] with the following information:
+
+- Operating system type and version (for example, Linux Ubuntu 20.04)
+- The output from `phpinfo()`, which includes PHP version, SAPI type, Datadog library versions, and the profiler diagnostics.
+
+
+[1]: /help/
 {{< /programming-lang >}}
 
 {{< programming-lang lang="linux" >}}

@@ -1936,11 +1936,16 @@ main:
     parent: profiler_enabling
     identifier: profiler_enabling_dotnet
     weight: 106
+  - name: Enabling the PHP Profiler
+    url: tracing/profiler/enabling/php/
+    parent: profiler_enabling
+    identifier: profiler_enabling_php
+    weight: 107
   - name: Enabling the Linux Profiler
     url: tracing/profiler/enabling/linux/
     parent: profiler_enabling
     identifier: profiler_enabling_linux
-    weight: 107
+    weight: 108
   - name: Search Profiles
     url: tracing/profiler/search_profiles/
     parent: profiler
