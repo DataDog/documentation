@@ -39,11 +39,11 @@ To begin profiling applications:
 
 3. Download the appropriate [ddprof binary][4] for your Linux distribution. For example, here is one way to pull the latest release:
 
-```shell
-curl -L -O https://github.com/DataDog/ddprof/releases/download/v0.7.0/ddprof-x86_64-linux-gnu.tar.gz
-tar xvf ddprof-x86_64-linux-gnu.tar.gz
-mv ddprof-x86_64-linux-gnu/bin/ddprof INSTALLATION_TARGET
-```
+   ```shell
+   curl -L -O https://github.com/DataDog/ddprof/releases/download/v0.7.0/ddprof-x86_64-linux-gnu.tar.gz
+   tar xvf ddprof-x86_64-linux-gnu.tar.gz
+   mv ddprof-x86_64-linux-gnu/bin/ddprof INSTALLATION_TARGET
+   ```
 
    Where `INSTALLATION_TARGET` specifies the location you'd like to store the `ddprof` binary. The examples that follow assume `INSTALLATION_TARGET` is set to `./ddprof`.
 
