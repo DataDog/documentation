@@ -43,18 +43,18 @@ Select a **target** percentage, **time window**, and optional **warning** level.
 
 The target percentage specifies the portion of time the underlying monitor(s) of the SLO should not be in the ALERT state.
 
-The time window specifies the rolling time period over which the SLO runs its calculation.
+The time window specifies the rolling period the SLO runs its calculation.
 
 Depending on the value of the SLI, the Datadog UI displays the SLO status in a different color:
 - While the SLI remains above the target, the UI displays the SLO status in green.
 - When the SLI falls below the target, the UI displays the SLO status in red.
-- If you included a warning level, and the SLI falls below the warning but above the target level, the UI displays the SLO status in yellow.
+- If you included a warning level, and the SLI falls below the warning, but above the target level, the UI displays the SLO status in yellow.
 
 The time window you choose changes the available precision for your monitor-based SLOs:
 - 7-day and 30-day time windows allow up to two decimal places.
 - 90-day time windows allow up to three decimal places.
 
-In the details UI for the SLO, Datadog displays two decimal places for SLOs configured with 7-day and 30-day time windows, and three decimal places for SLOs configured with 90-day time windows.
+In the details UI for the SLO, Datadog displays two decimal places for SLOs configured with 7-day and 30-day time windows and three decimal places for SLOs configured with 90-day time windows.
 
 The following example demonstrates why Datadog displays a limited number of decimal places for SLO calculations. A 99.999% target for a 7-day or 30-day time window results in an error budget of 6 seconds or 26 seconds, respectively. Monitors evaluate every minute, so the granularity of a monitor-based SLO is also 1 minute. Therefore, one alert would fully consume and overspend the 6 second or 26 second error budget in the previous example. In practice, teams cannot satisfy such small error budgets.
 
@@ -72,7 +72,7 @@ Select **Save & Exit** to save your new SLO.
 
 Datadog calculates the overall status as the percentage of the time where **all** monitors or **all** the calculated groups in a single multi-alert monitor are NOT in the `ALERT` state. Datadog does not calculate the average of the aggregated monitors or the aggregated groups. 
 
-Monitor-based SLOs treat the `WARN` state as `OK`. The definition of an SLO requires a binary distinction between good and bad behavior. SLO calculations treat `WARN` as good behavior, since `WARN` is not severe enough to indicate bad behavior.
+Monitor-based SLOs treat the `WARN` state as `OK`. The definition of an SLO requires a binary distinction between good and bad behavior. SLO calculations treat `WARN` as good behavior since `WARN` is not severe enough to indicate bad behavior.
 
 Consider the following example for a monitor-based SLO containing 3 monitors. The calculation for a monitor-based SLO based on a single multi-alert monitor would look similar.
 
@@ -92,7 +92,7 @@ In certain cases, there is an exception to the status calculation for monitor-ba
 - Wait until a specified number of the groups are failing (default: 1)
 - Retry a specified number of times before a location's test is considered a failure (default: 0)
 
-If you change any of these conditions to something other than their defaults, the overall status for a monitor-based SLO using one Synthetic test could appear to be better than the aggregated statuses of the Synthetic test's individual groups.
+If you change any of these conditions to something other than their defaults, the overall status for a monitor-based SLO using one Synthetic test could appear better than the aggregated statuses of the Synthetic test's individual groups.
 
 For more information on Synthetic test alerting conditions, see [Synthetic Monitoring][4].
 
@@ -102,7 +102,7 @@ When a monitor is resolved manually or as a result of the **_After x hours autom
 
 Datadog recommends against using monitors with `Alert Recovery Threshold` and `Warning Recovery Threshold` to underlie an SLO. These settings make it difficult to cleanly differentiate between an SLI's good behavior and bad behavior.
 
-Muting a monitor has no effect on the SLO calculation.
+Muting a monitor does not affect the SLO calculation.
 
 To exclude time periods from an SLO calculation, use the [SLO status corrections][5] feature.
 
