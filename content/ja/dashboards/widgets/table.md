@@ -65,7 +65,7 @@ further_reading:
 
 [1]: /ja/dashboards/querying/#configuring-a-graph
 [2]: /ja/logs/search_syntax/
-[3]: /ja/tracing/trace_search_and_analytics/query_syntax/
+[3]: /ja/tracing/trace_explorer/query_syntax/
 [4]: /ja/real_user_monitoring/explorer/search/#search-syntax
 [5]: /ja/tracing/profiler/search_profiles
 [6]: /ja/security_monitoring/explorer/

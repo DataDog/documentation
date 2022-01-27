@@ -4,7 +4,7 @@ kind: documentation
 further_reading:
 - link: "security_platform/default_rules"
   tag: "Documentation"
-  text: "Explore default cloud configuration rules"
+  text: "Explore default Posture Management cloud configuration detection rules"
 - link: "security_platform/cspm/findings"
   tag: "Documentation"
   text: "Search and explore CSPM findings"
@@ -28,11 +28,11 @@ Each [OOTB rule][1] maps to one or more controls within a compliance standard or
 - [HIPAA][6]
 - [GDPR][7]
 
-*To pass the Monitoring Section of the [CIS AWS Foundations benchmark][2], you **must** enable [Security Monitoring][8] and forward [Cloudtrail logs to Datadog][9].
+*To pass the Monitoring Section of the [CIS AWS Foundations benchmark][2], you **must** enable [Cloud SIEM][8] and forward [Cloudtrail logs to Datadog][9].
 
-**Some [CIS Kubernetes Benchmark][3] rules only apply to self-hosted Kubernetes clusters.
+**Some [CIS Kubernetes Benchmark][3] detection rules only apply to self-hosted Kubernetes clusters.
 
-**Note**: Datadog CSPM is designed to provide you with visibility into whether your resources are configured in accordance with certain rules. Datadog's OOTB rules address various regulatory frameworks, benchmarks, and standards (“Security Posture Frameworks”). Datadog CSPM does not provide an assessment of your actual compliance with any Security Posture Framework, and the OOTB Rules may not address all configuration settings that are relevant to the Security Posture Frameworks. To be clear, just because your resources pass the OOTB Rules does not mean that you are meeting all the requirements under any particular Security Posture Framework. Datadog is not providing legal or compliance advice or guidance, and it is recommended that you use Datadog CSPM in consultation with your legal counsel or compliance experts.
+**Note**: Datadog CSPM provides you with visibility into whether your resources are configured in accordance with certain detection rules. Datadog's OOTB detection rules address various regulatory frameworks, benchmarks, and standards (“Security Posture Frameworks”). Datadog CSPM does not provide an assessment of your actual compliance with any Security Posture Framework, and the OOTB rules may not address all configuration settings that are relevant to the Security Posture Frameworks. To be clear, just because your resources pass the OOTB Rules does not mean that you are meeting all the requirements under any particular Security Posture Framework. Datadog is not providing legal or compliance advice or guidance, and it is recommended that you use Datadog CSPM in consultation with your legal counsel or compliance experts.
 
 ## Customize how your environment is scanned by each rule
 
@@ -42,7 +42,7 @@ For example, you can remove all resources tagged with `env:staging` using the **
 
 {{< img src="security_platform/cspm/frameworks_and_benchmarks/never-trigger-a-signal.png" alt="In the Datadog app, select Advanced to populate Never trigger a signal when, and add a query." >}}
 
-## Set notification targets for rules
+## Set notification targets for detection rules
 
 From the [Rules][10] page, you can add notification targets. The complete list of notification options are:
 
@@ -54,8 +54,8 @@ From the [Rules][10] page, you can add notification targets. The complete list o
 - [Webhooks][16]
 - Email
 
-Set the severity of security posture signals. The dropdown allows you to select an appropriate severity level (INFO, LOW, MEDIUM, HIGH, CRITICAL).
-In the “Notify” section, configure zero or more [notification targets][7] for each rule case.
+Set the severity of security posture signals. The dropdown allows you to select an appropriate severity level (INFO, LOW, MEDIUM, HIGH, CRITICAL).
+In the “Notify” section, configure zero or more [notification targets][7] for each rule case.
 
 {{< img src="security_platform/cspm/frameworks_and_benchmarks/notification.png" alt="Select a severity and notification target" >}}
 
@@ -70,7 +70,7 @@ In the “Notify” section, configure zero or more [notification targets][7] f
 [5]: https://www.aicpa.org/interestareas/frc/assuranceadvisoryservices/aicpasoc2report.html
 [6]: https://www.hhs.gov/hipaa/index.html
 [7]: https://gdpr.eu/
-[8]: /security_platform/security_monitoring/
+[8]: /security_platform/cloud_siem/
 [9]: /integrations/amazon_cloudtrail/
 [10]: https://app.datadoghq.com/security/configuration/rules/
 [11]: /integrations/slack/

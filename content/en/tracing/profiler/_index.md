@@ -36,7 +36,7 @@ Find CPU, memory, and IO bottlenecks, broken down by method name, class name, an
 
 ### Low impact in production
 
-Continuous profiler is designed to run in production across all services by leveraging technologies such as JDK Flight Recorder to have minimal impact on your host's CPU and memory usage.
+Continuous profiler runs in production across all services by leveraging technologies such as JDK Flight Recorder to have minimal impact on your host's CPU and memory usage.
 
 ## Getting started
 
@@ -53,6 +53,10 @@ Profiling your service to visualize all your stack traces in one place takes jus
 {{< partial name="profiling/profiling-languages.html" >}}
 
 To get notified when a private beta is available for the **PHP** or **.NET** Profiler, complete the [Continuous Profiler - Product Access Request form][1].
+
+For applications that are written in compiled languages such as **C**, **C++**, or **Rust**:
+
+{{< partial name="profiling/profiling-unmanaged-code.html" >}}
 
 ## Guide to using the profiler
 

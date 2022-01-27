@@ -53,11 +53,11 @@ Grants a role the ability to create and modify [log indexes][5]. This includes:
 
 - Setting [indexes filters][6] for which logs should be routed into an index.
 - Setting [log retention][7] for an index.
-- Granting another role the [Logs Read Index Data](#logs-read-index-data) and [Logs Write Exclusion Filters](#logs-write-exclusion-filters) permissions, scoped for a specific index.
+- Granting another role the [Logs Read Index Data](#logs_read_index_data) and [Logs Write Exclusion Filters](#logs_write_exclusion_filters) permissions, scoped for a specific index.
 
 This permission is global and enables both the creation of new indexes, and the edition of existing ones.
 
-**Note**: This permission also grants [Logs Read Index Data](#logs-read-index-data) and [Logs Write Exclusion Filters](#logs-write-exclusion-filters) permissions behind the scenes.
+**Note**: This permission also grants [Logs Read Index Data](#logs_read_index_data) and [Logs Write Exclusion Filters](#logs_write_exclusion_filters) permissions behind the scenes.
 
 
 ### `logs_write_exclusion_filters`
@@ -93,10 +93,10 @@ Grants a role the ability to create and modify [log processing pipelines][9]. Th
 - Setting the name of the pipeline
 - Setting pipelines filters for what logs should enter the processing pipeline
 - Reorder pipelines
-- Granting another role the [Logs Write Processors](#logs-write-processors) permission, scoped for that pipeline
+- Granting another role the [Logs Write Processors](#logs_write_processors) permission, scoped for that pipeline
 - Managing [standard attributes][10] or [aliasing facets][11]
 
-**Note**: This permission also grants [Logs Write Processors](#logs-write-processors) (for all processors on all pipelines) permissions behind the scenes.
+**Note**: This permission also grants [Logs Write Processors](#logs_write_processors) (for all processors on all pipelines) permissions behind the scenes.
 
 
 ### `logs_write_processors`
@@ -146,13 +146,13 @@ Grants the ability to create, edit or delete [Log Archives][12]. This includes:
 - Setting archives filters for what logs should be routed to the archive
 - Setting the name of the archive
 - Reordering archives
-- Restricting the [Logs Read Archives](#logs-read-archives) permission to a subset of roles.
+- Restricting the [Logs Read Archives](#logs_read_archives) permission to a subset of roles.
 
 This permission is global and enables creating new archives, and editing and deleting existing ones.
 
 ### `logs_read_archives`
 
-Grants the ability to access the details of the archive configuration. In conjunction with [Logs Write Historical Views](#logs-write-historical-view), this permission also grants the ability to trigger a [Rehydration][13] from Archives.
+Grants the ability to access the details of the archive configuration. In conjunction with [Logs Write Historical Views](#logs_write_historical_views), this permission also grants the ability to trigger a [Rehydration][13] from Archives.
 
 This permission can be scoped to a subset of archives. An archive with no restrictions is accessible to anyone who belongs to a role with the `logs_read_archives` permission. An archive with restrictions is only accessible to the users who belong to one of the registered roles, provided theses roles have the `logs_read_archives` permission.
 
@@ -201,8 +201,8 @@ When assigning `team:audit` tags on all logs rehydrated from the `Audit Archive`
 
 For `service:ci-cd` logs that are rehydrated from the `Prod Archive`, note the following:
 
-* If you **do not** use the [Log Read Index Data](#logs-read-index-data) legacy permission, these logs are accessible for `CI-CD` role members.
-* If you **do** use the [Log Read Index Data](#logs-read-index-data) legacy permission, these logs are not accessible for `CI-CD` role members, as the resulting historical view is restricted to `PROD` and `ADMIN` role members.
+* If you **do not** use the [Log Read Index Data](#logs_read_index_data) legacy permission, these logs are accessible for `CI-CD` role members.
+* If you **do** use the [Log Read Index Data](#logs_read_index_data) legacy permission, these logs are not accessible for `CI-CD` role members, as the resulting historical view is restricted to `PROD` and `ADMIN` role members.
 
 
 ### `logs_public_config_api`
@@ -215,14 +215,14 @@ Grants the ability to view, create, or modify log configuration through the Data
 * View and configure [restriction queries][17] through the API
 * View and configure [metrics generated from logs][18] through the API
 
-The Log Public Configuration API permission only grants the permission to operate actions through API. For instance, a user without [Log Write Exclusion Filter Permission](#logs-write-exclusion-filters) cannot update sampling rate through API, even if granted The Log Public Configuration API permission.
+The Log Public Configuration API permission only grants the permission to operate actions through API. For instance, a user without [Log Write Exclusion Filter Permission](#logs_write_exclusion_filters) cannot update sampling rate through API, even if granted The Log Public Configuration API permission.
 
 ## Log data access
 
 Grant the following permissions to manage read access on subsets of log data:
 
-* [Logs Read Data](#logs-read-data) (Recommended) offers finer grained access control by restricting a role's access to logs matching a log restriction queries.
-* [Logs Read Index Data](#logs-read-index-data) is the legacy approach to restrict data access to indexed log data on a per-index basis (it is still required to have this permission enabled to access indexed data).
+* [Logs Read Data](#logs_read_data) (Recommended) offers finer grained access control by restricting a role's access to logs matching a log restriction queries.
+* [Logs Read Index Data](#logs_read_index_data) is the legacy approach to restrict data access to indexed log data on a per-index basis (it is still required to have this permission enabled to access indexed data).
 
 ### `logs_read_data`
 
@@ -235,7 +235,7 @@ Roles are additive: if a user belongs to multiple roles, the data they have acce
 * If a user belongs to a role with log read data and also belongs to a role without log read data, then they have the permission to read data.
 * If a user is restricted to `service:sandbox` through one role, and is restricted to `env:prod` through another role, then the user can access all `env:prod` and `service:sandbox` logs.
 
-{{< img src="account_management/rbac/logs_rq_roles_combination.png" alt="Read Data Access"  style="width:70%;">}}
+{{< img src="account_management/rbac/logs_rq_roles_combination.png" alt="Read Data Access" style="width:70%;">}}
 
 
 {{< tabs >}}
@@ -304,10 +304,10 @@ Use [Restriction Queries][2] to scope the permission to a subset of Log Data.
 
 These permissions are globally enabled by default for all users.
 
-[Logs Read Data](#logs-read-data) permission comes on top of these legacy permissions. For instance, say a user is restricted to the query `service:api`.
+[Logs Read Data](#logs_read_data) permission comes on top of these legacy permissions. For instance, say a user is restricted to the query `service:api`.
 
-* If this user has scoped [Read Index Data](#logs-read-index-data) permission on `audit` and `errors` indexes, this user only sees `service:api` logs within these indexes.
-* If this user has [livetail](#logs-livetail) permission, this users sees only sees `service:api` logs in the livetail.
+* If this user has scoped [Read Index Data](#logs_read_index_data) permission on `audit` and `errors` indexes, this user only sees `service:api` logs within these indexes.
+* If this user has [livetail](#logs_live_tail) permission, this users sees only sees `service:api` logs in the livetail.
 
 
 ### `logs_read_index_data`
@@ -357,7 +357,7 @@ curl -X POST \
 
 Grants a role the ability to use the [Live Tail][19] feature.
 
-This permission is global, and grants access to the livetail regardless of [Log Read Index Data](#logs-read-index-data) permission.
+This permission is global, and grants access to the livetail regardless of [Log Read Index Data](#logs_read_index_data) permission.
 
 ## Further reading
 

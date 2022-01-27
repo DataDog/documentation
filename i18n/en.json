@@ -1,6 +1,6 @@
 {
   "integration_count": {
-    "other": "450"
+    "other": "500"
   },
 
   "beta_sentence": {
@@ -313,6 +313,9 @@
   },
   "integration_version": {
     "other": "Integration"
+  },
+  "beta_check":{
+    "other": "Beta"
   }
 
 }

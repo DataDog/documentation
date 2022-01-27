@@ -5,12 +5,13 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Envoyez des alertes et des graphiques Datadog au groupe DingTalk de votre équipe.
-doc_link: 'https://docs.datadoghq.com/integrations/dingtalk/'
+doc_link: https://docs.datadoghq.com/integrations/dingtalk/
 draft: false
 git_integration_title: dingtalk
 has_logo: true
 integration_id: dingtalk
 integration_title: DingTalk
+integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'
@@ -28,7 +29,7 @@ Intégrez DingTalk à Datadog pour :
 
 ## Installation
 
-Pour installer l'intégration DingTalk, accédez à son [carré d'intégration][1] dans l'application Datadog.
+L'intégration DingTalk s'installe à l'aide du [carré d'intégration Datadog/DingTalk][1].
 
 ## Configuration
 

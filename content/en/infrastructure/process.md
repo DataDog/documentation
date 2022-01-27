@@ -350,7 +350,7 @@ When you inspect a dependency in the [Network Overview][11], you can view proces
 
 ## Real-time monitoring
 
-While actively working with the Live Processes, metrics are collected at 2s resolution. This is important for highly volatile metrics such as CPU. In the background, for historical context, metrics are collected at 10s resolution.
+While actively working with the Live Processes, metrics are collected at 2s resolution. This is important for volatile metrics such as CPU. In the background, for historical context, metrics are collected at 10s resolution.
 
 ## Additional information
 

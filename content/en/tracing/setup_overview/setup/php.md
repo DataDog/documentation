@@ -132,7 +132,7 @@ Automatic instrumentation captures:
 * Method execution time
 * Relevant trace data, such as URL and status response codes for web requests or SQL queries for database access
 * Unhandled exceptions, including stacktraces if available
-* A total count of traces (e.g., web requests) flowing through the system
+* A total count of traces (for example, web requests) flowing through the system
 
 **Note**: If your application does not use Composer nor an autoloader registered with `spl_autoload_register()`, set the environment variable, `DD_TRACE_NO_AUTOLOADER=true`, to enable automatic instrumentation.
 
@@ -217,10 +217,6 @@ Change the default name of an APM integration. Rename one or more integrations a
 `DD_TRACE_AGENT_ATTEMPT_RETRY_TIME_MSEC`
 : **Default**: `5000`<br>
 IPC-based configurable circuit breaker retry time (in milliseconds)
-
-`DD_TRACE_AGENT_CONNECT_TIMEOUT`
-: **Default**: `100`<br>
-Maximum time the allowed for Agent connection setup (in milliseconds)
 
 `DD_TRACE_AGENT_CONNECT_TIMEOUT`
 : **Default**: `100`<br>

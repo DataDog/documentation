@@ -25,7 +25,6 @@ aliases:
     {{< nextlink href="/dashboards/widgets/image" >}}Image{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/log_stream" >}}Flux de logs{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/monitor_summary" >}}Résumé des monitors{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/network" >}}Réseau{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/note" >}}Notes et liens{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/query_value" >}}Valeur de requête{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/scatter_plot" >}}Nuage de points{{< /nextlink >}}
@@ -82,7 +81,7 @@ Vous pouvez également coller un widget dans votre logiciel de discussion préf�
 
 ### Groupe de widgets
 
-Vous pouvez copier les widgets d'un groupe de timeboards. Pour ce faire, passez le curseur sur la zone du groupe de widgets et appuyez sur les touches `Ctrl + C` (`Cmd + C` sur Mac), ou sélectionnez l'icône de partage et choisissez l'option Copy.
+Vous pouvez copier les groupes de widgets d'un timeboard. Pour ce faire, passez le curseur sur la zone du groupe de widgets et appuyez sur les touches `Ctrl + C` (`Cmd + C` sur Mac), ou sélectionnez l'icône de partage et choisissez l'option Copy.
 
 **Remarque** : lorsque vous collez des graphiques dans des screenboards ou des notebooks, chaque widget du groupe est collé.
 

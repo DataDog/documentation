@@ -206,7 +206,7 @@ Les commandes ddev de la section précédente génèrent un squelette des dossie
 
 #### Codeowners
 
-* Se trouve dans le répertoire `.github` et définit les individus ou les équipes responsables du code dans le répertoire. Pour en savoir plus sur la syntaxe, consultez la [documentation Github][28].
+* Se trouve dans le répertoire `.github` et définit les individus ou les équipes responsables du code dans le répertoire. Pour en savoir plus sur la syntaxe, consultez la [documentation GitHub][28].
 
 #### Fichiers supplémentaires pour le marketplace
 

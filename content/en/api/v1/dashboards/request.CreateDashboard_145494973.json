@@ -1,0 +1,40 @@
+{
+  "title": "Example-Create_a_new_dashboard_with_apm_resource_stats_widget",
+  "widgets": [
+    {
+      "definition": {
+        "title": "",
+        "title_size": "16",
+        "title_align": "left",
+        "type": "query_table",
+        "requests": [
+          {
+            "response_format": "scalar",
+            "queries": [
+              {
+                "primary_tag_value": "edge-eu1.prod.dog",
+                "stat": "hits",
+                "name": "query1",
+                "service": "cassandra",
+                "data_source": "apm_resource_stats",
+                "env": "ci",
+                "primary_tag_name": "datacenter",
+                "operation_name": "cassandra.query",
+                "group_by": [
+                  "resource_name"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "layout": {
+        "x": 0,
+        "y": 0,
+        "width": 4,
+        "height": 4
+      }
+    }
+  ],
+  "layout_type": "ordered"
+}

@@ -17,7 +17,7 @@ Datadog では HTTP REST API を採用しており、リソース指向 URL を�
 
 [API キー][1]で API を認証します。これはエンドポイントと[アプリケーションキー][2]によって異なります。
 
-API [![Run in Postman][3]](https://app.getpostman.com/run-collection/b82586cb783eb6f7cf6d?action=collection%2Fimport#?env%5BDatadog%20Authentication%5D=W3sia2V5IjoiYXBwbGljYXRpb25fa2V5IiwidmFsdWUiOiIiLCJlbmFibGVkIjp0cnVlLCJ0eXBlIjoidGV4dCJ9LHsia2V5IjoiYXBpX2tleSIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZSwidHlwZSI6InRleHQifV0=) を試すには
+API を実行するには、[![Postman で実行][3]](https://app.getpostman.com/run-collection/7274195-66ef21d8-e159-4d7d-8ded-c511e1abe189?action=collection%2Ffork&collection-url=entityId%3D7274195-66ef21d8-e159-4d7d-8ded-c511e1abe189%26entityType%3Dcollection%26workspaceId%3Dbf049f54-c695-4e91-b879-0cad1854bafa#?env%5BDatadog%20Authentication%5D=W3sia2V5IjoiYXBpX2tleSIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZX0seyJrZXkiOiJhcHBsaWNhdGlvbl9rZXkiLCJ2YWx1ZSI6IiIsImVuYWJsZWQiOnRydWV9XQ==)
 
 [API の使用][4]でエンドポイントについて説明しています。
 

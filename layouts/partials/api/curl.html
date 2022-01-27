@@ -35,10 +35,8 @@
 
 <span class="c1"># Curl command</span>
 <span class="n">curl</span> <span class="o">-X</span> <span class="s1">{{ $endpoint.actionType | upper }}</span> {{ range $region, $url := $endpoint.regions }}{{ if ne $region "local" }}<span class="kn d-none" data-region="{{ $region }}">"{{ $url }}</span>{{ else }}<span class="kn">"{{ $url }}</span>{{ end }}{{ end }}<span class="kn">{{ replace $endpoint.pathKey "{" "${" }}</span>
-{{- range $qi, $q := $parameters.queryStrings -}}
-    {{- if eq .required true -}}
-        <span class="kn">{{ cond (gt $qi 0) "&" "?" }}</span><span class="kn">{{ $q.name }}</span><span class="kn">=</span><span class="kn">${ {{- $q.name -}} }</span>
-    {{- end -}}
+{{- range $qi, $q := where $parameters.queryStrings ".required" true -}}
+      <span class="kn">{{ cond (gt $qi 0) "&" "?" }}</span><span class="kn">{{ $q.name }}</span><span class="kn">=</span><span class="kn">${ {{- $q.name -}} }</span>
 {{- end -}}
 
 {{- /* Render authentication query parameters "?api_key=XXX" */ -}}

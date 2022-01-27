@@ -2,17 +2,17 @@ heading: Welcome to Datadog Docs!
 
 guides:
     # There can be only 3 guides in this section
-  - title: Install the agent
-    desc: Start collecting events and metrics from hosts and send them to Datadog.
-    link_text: View Guides
+  - title: Install the Agent
+    desc: Collect events and metrics from your hosts that send data to Datadog.
+    link_text: Getting Started with the Agent
     link: getting_started/agent/
   - title: Set Up Integrations
-    desc: Learn how to collect metrics, traces and logs with more than 450 integrations.
-    link_text: View Guides
+    desc: Gather metrics, traces, and logs with over 500 built-in integrations to send to Datadog.
+    link_text: Getting Started with Integrations
     link: getting_started/integrations/
   - title: Get Started in App
-    desc: Discover how to use Datadog to create dashboards, graphs, monitors and more.
-    link_text: View Guides
+    desc: Visualize the data collected in Datadog and create dashboards, alerts, monitors, and more.
+    link_text: Getting Started in Datadog
     link: getting_started/application/
 
 nav_sections:
@@ -23,15 +23,15 @@ nav_sections:
       - title: Agent
         link: agent/
         icon: agent-fill
-        desc: Install & configure the Datadog Agent to collect and send data
+        desc: Install and configure the Datadog Agent to collect and send data
       - title: Integrations
         link: integrations/
         icon: integrations
-        desc: Gather data from your systems, apps, & services
+        desc: Gather data about your applications, services, and systems
       - title: Dashboards
         link: dashboards/
         icon: dashboard
-        desc: Visualize your data to gain insight
+        desc: Visualize, analyze, and generate insights about your data
       - title: Infrastructure
         link: infrastructure/
         icon: host-map
@@ -39,70 +39,70 @@ nav_sections:
       - title: Events
         link: events/
         icon: events
-        desc: Track notable changes and alerts across applications and infrastructure
+        desc: Track notable changes and alerts in your applications and infrastructure
       - title: Metrics
         link: metrics/
         icon: metric
-        desc: Explore your metrics and create distributions
+        desc: Explore, search, and create distributions for your metrics
       - title: Alerting
         link: monitors/
         icon: monitor
-        desc: Create & manage monitors & notifications
+        desc: Create, edit, and manage your monitors and notifications
       - title: APM & Continuous Profiler
         link: tracing/
         icon: apm
-        desc: Gain insight on your application's performance
+        desc: Explore out-of-the-box performance dashboards and distributed traces
       - title: Log Management
         link: logs/
         icon: log
-        desc: Collect, process, explore, monitor, & archive your logs
+        desc: Process, monitor, and archive your ingested logs 
       - title: Security Platform
         link: security_platform/
         icon: security-platform
-        desc: Detect threats and misconfigurations across applications and infrastructure
+        desc: Detect threats and misconfigurations in your applications and infrastructure
       - title: Synthetic Monitoring
         link: synthetics/
         icon: synthetics
-        desc: Ensure application uptime, identify regional issues, & track performance
+        desc: Ensure uptime, flag regional issues, and test application performance
       - title: RUM & Session Replay
         link: real_user_monitoring/
         icon: rum
-        desc: Visualize and analyze the performance of your front end applications
+        desc: Capture, observe, and analyze the user experience of your applications
       - title: Network Monitoring
         link: network_monitoring/
         icon: network
-        desc: Gain visibility into your network traffic using tagged objects
+        desc: Use tagged objects to collect and graph data about your network traffic
       - title: Serverless
         link: serverless/
         icon: serverless
-        desc: End-to-end visibility into your serverless development lifecycle
-      - title: Mobile application
+        desc: Detect and resolve performance issues in your serverless applications
+      - title: Mobile Application
         link: mobile/
         icon: mobile
-        desc: View Datadog alerts and dashboards on your mobile device
-      - title: Datadog Watchdog
+        desc: View Datadog alerts, incidents, and more on your mobile device
+      - title: Watchdog
         link: watchdog/
         icon: watchdog
-        desc: Automatically see trends in your applications & infrastructure metrics
+        desc: Observe trends and patterns in your APM and infrastructure metrics
       - title: CI Visibility
         link: continuous_integration/
         icon: ci
-        desc: Track the performance and reliability of your tests and pipelines
+        desc: See test metrics, build results, and pipeline executions for your CI pipeline
       - title: Database Monitoring
         link: database_monitoring/
-        icon: dbm
-        desc: Gain deep visibility into database and query performance
+        icon: database-2
+        desc: Explore enriched dashboards, query metrics, and query samples
   - nav_section:
     - name: 'Configuration'
     - navtiles:
       - title: API
-        link: api/
+        link: api/latest/
         icon: api
-        desc: Use the Datadog API
+        desc: Try the Datadog API
       - title: Account Management
         link: account_management/
-        icon: cog
-        desc: Control your account settings and manage billing
+        icon: cog-2
+        desc: Access org-based settings and billing
       - title: Security
         link: security/
         icon: security-lock
@@ -110,7 +110,7 @@ nav_sections:
       - title: Developers
         link: developers/
         icon: dev-code
-        desc: Develop for the Datadog platform
+        desc: Develop on the Datadog platform
 
 popular_searches:
   - title: API documentation
