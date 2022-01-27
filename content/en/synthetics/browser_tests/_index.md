@@ -59,7 +59,7 @@ Define the configuration of your browser test.
 
   Select **Ignore server certificate error** to instruct the test to skip errors in the server certificate. 
   
-  * **Client Certificate**: If you have a private key or client certificate for the test recording, upload these files in your test by clicking **Upload File**. By default, only PEM certificates are accepted.
+  * **Client Certificate**: Perform tests on systems that require client certificates by clicking **Upload File** and uploading your certificate file and private key. Only PEM certificates are accepted.
   * **Client Certificate Domains**: Once the certificate files are uploaded, the client certificate applies to the starting URL's domain. To apply the client certificate on another domain, specify the domain in the **Value** field.  
 
   You can include wildcards in the URL.
