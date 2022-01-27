@@ -51,18 +51,19 @@ Datadog .NET Profiler is currently in public beta. Datadog recommends evaluating
 
 1. If you are already using Datadog, upgrade your agent to version [7.20.2][1]+ or [6.20.2][2]+.
 
-2. The profiler ships together with the tracer. Install or upgrade to the last beta version if needed, using the [.NET Monitoring MSI installer][3]. Continuous Profiler only supports 64-bit Windows, with 32-bit support coming soon, so you need the file like `datadog-dotnet-apm-2.1.1-x64-profiler-beta.msi`.
+2. The profiler ships together with the tracer. Install or upgrade to the last beta version if needed, using the [.NET Monitoring MSI installer][3]; looking for `datadog-dotnet-apm-2.1.1-x64-profiler-beta.msi` for example. Continuous Profiler only supports 64-bit Windows.
 
    Run the installer with administrator privileges.
 
 {{< tabs >}}
 
 {{% tab "Internet Information Services (IIS)" %}}
-1. Set needed environment variables to configure and enable Profiler. You can do this machine-wide, user-wide, or just for IIS. For the IIS-only setup, set the environment variables via the registry:
+1. Set needed environment variables to configure and enable Profiler. To enable the Profiler for IIS applications, it is required to set the `DD_PROFILING_ENABLED`, `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` environment variables in the Registry under <code>HKLM\System\CurrentControlSet\Services\WAS</code> and <code>HKLM\System\CurrentControlSet\Services\W3SVC</code> nodes.
 
-   **With the Registry Editor:**
+  **With the Registry Editor:**
 
-   In the Registry Editor, create a multi-string value called `Environment` in `HKLM\System\CurrentControlSet\Services\WAS` and `HKLM\System\CurrentControlSet\Services\W3SVC` and set the values to:
+  In the Registry Editor, modify the multi-string value called `Environment` in the `HKLM\System\CurrentControlSet\Services\WAS` and `HKLM\System\CurrentControlSet\Services\W3SVC`
+  nodes and set the value data to:
 
    For .NET Core and .NET 5+:
    ```text
@@ -72,7 +73,7 @@ Datadog .NET Profiler is currently in public beta. Datadog recommends evaluating
    DD_ENV=production
    DD_VERSION=1.2.3
    ```
-   {{< img src="tracing/setup/dotnet/RegistryEditorCore.png" alt="Using the Registry Editor to create environment variables for a Windows service" style="width:90%" >}}
+   {{< img src="tracing/setup/dotnet/RegistryEditorCoreIIS.png" alt="Using the Registry Editor to create environment variables for a .NET Core application in IIS" style="width:90%" >}}
 
    For .NET Framework:
    ```text
@@ -82,35 +83,9 @@ Datadog .NET Profiler is currently in public beta. Datadog recommends evaluating
    DD_ENV=production
    DD_VERSION=1.2.3
    ```
-   {{< img src="tracing/setup/dotnet/RegistryEditorFramework.png" alt="Using the Registry Editor to create environment variables for a Windows service" style="width:90%" >}}
+   {{< img src="tracing/setup/dotnet/RegistryEditorFrameworkIIS.png" alt="Using the Registry Editor to create environment variables for a .NET Framework application in IIS" style="width:90%" >}}
 
-   **With a PowerShell script:**
-
-   For .NET Core and .NET 5+:
-   ```powershell
-   [string[]] $v = @(
-       "CORECLR_ENABLE_PROFILING=1",
-       "CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}",
-       "DD_PROFILING_ENABLED=1",
-       "DD_ENV=production",
-       "DD_VERSION=1.2.3"
-   )
-   Set-ItemProperty HKLM:SYSTEM\CurrentControlSet\Services\WAS -Name Environment -Value $v
-   Set-ItemProperty HKLM:SYSTEM\CurrentControlSet\Services\W3SVC -Name Environment -Value $v
-   ```
-
-   For .NET Framework:
-   ```powershell
-   [string[]] $v = @(
-       "COR_ENABLE_PROFILING=1",
-       "COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}",
-       "DD_PROFILING_ENABLED=1",
-       "DD_ENV=production",
-       "DD_VERSION=1.2.3"
-   )
-   Set-ItemProperty HKLM:SYSTEM\CurrentControlSet\Services\WAS -Name Environment -Value $v
-   Set-ItemProperty HKLM:SYSTEM\CurrentControlSet\Services\W3SVC -Name Environment -Value $v
-   ```
+   <strong>Note</strong>: the environment variables are applied for <em>all</em> IIS applications. Starting with IIS 10, you can set environment variables for each IIS application in the <a href="https://docs.microsoft.com/en-us/iis/get-started/planning-your-iis-architecture/introduction-to-applicationhostconfig"><code>C:\Windows\System32\inetsrv\config\applicationhost.config</code> file</a>. Read the <a href="https://docs.microsoft.com/en-us/iis/configuration/system.applicationhost/applicationpools/add/environmentvariables/">Microsoft documentation</a> for more details.
 
 2. Completely stop and start IIS by running the following commands as an administrator:
 
@@ -129,17 +104,18 @@ Datadog .NET Profiler is currently in public beta. Datadog recommends evaluating
 {{% /tab %}}
 
 {{% tab "Windows services" %}}
-1. Set needed environment variables to configure and enable Profiler. You can do this machine-wide, user-wide, or just for your service. For the service-specific setup, set the environment variables via the registry:
+1. Set needed environment variables to configure and enable Profiler. To enable the Profiler for your service, it is required to set the `DD_PROFILING_ENABLED`, `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` environment variables in the Registry key associated to the service.
 
    **With the Registry Editor:**
 
-   In the Registry Editor, create a multi-string value called `Environment` in `HKLM\System\CurrentControlSet\Services\<SERVICE NAME>` and set the value to:
+   In the Registry Editor, create a multi-string value called `Environment` in the  `HKLM\System\CurrentControlSet\Services\MyService` key and set the value data to:
 
    For .NET Core and .NET 5+:
    ```text
    CORECLR_ENABLE_PROFILING=1
    CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
    DD_PROFILING_ENABLED=1
+   DD_SERVICE=MyService
    DD_ENV=production
    DD_VERSION=1.2.3
    ```
@@ -150,6 +126,7 @@ Datadog .NET Profiler is currently in public beta. Datadog recommends evaluating
    COR_ENABLE_PROFILING=1
    COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
    DD_PROFILING_ENABLED=1
+   DD_SERVICE=MyService
    DD_ENV=production
    DD_VERSION=1.2.3
    ```
@@ -163,10 +140,11 @@ Datadog .NET Profiler is currently in public beta. Datadog recommends evaluating
        "CORECLR_ENABLE_PROFILING=1",
        "CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}",
        "DD_PROFILING_ENABLED=1",
+       "DD_SERVICE=MyService",
        "DD_ENV=production",
        "DD_VERSION=1.2.3"
    )
-   Set-ItemProperty HKLM:SYSTEM\CurrentControlSet\Services\<SERVICE NAME> -Name Environment -Value $v
+   Set-ItemProperty HKLM:SYSTEM\CurrentControlSet\Services\MyService -Name Environment -Value $v
    ```
 
    For .NET Framework:
@@ -175,10 +153,11 @@ Datadog .NET Profiler is currently in public beta. Datadog recommends evaluating
        "COR_ENABLE_PROFILING=1",
        "COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}",
        "DD_PROFILING_ENABLED=1",
+       "DD_SERVICE=MyService",
        "DD_ENV=production",
        "DD_VERSION=1.2.3"
    )
-   Set-ItemProperty HKLM:SYSTEM\CurrentControlSet\Services\<SERVICE NAME> -Name Environment -Value $v
+   Set-ItemProperty HKLM:SYSTEM\CurrentControlSet\Services\MyService -Name Environment -Value $v
    ```
 
 2. A minute or two after you start your application, your profiles appear on the [Datadog APM > Profiler page][1].
@@ -187,13 +166,14 @@ Datadog .NET Profiler is currently in public beta. Datadog recommends evaluating
 {{% /tab %}}
 
 {{% tab "Standalone applications" %}}
-1. Set needed environment variables to configure and enable Profiler for a non-service application, such as console, ASP.NET (Core), Windows Forms, or WPF. You can do this machine-wide, user-wide, or just for your service. We recommend doing this in a batch file that also starts the application, and running your application using the batch file.
+1. Set needed environment variables to configure and enable Profiler for a non-service application, such as console, ASP.NET (Core), Windows Forms, or WPF. To enable the Profiler for Standalone applications, it is required to set the `DD_PROFILING_ENABLED`, `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` environment variables. We recommend doing this in a batch file that also starts the application, and running your application using the batch file.
 
    For .NET Core and .NET 5+:
    ```cmd
    SET CORECLR_ENABLE_PROFILING=1
    SET CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
    SET DD_PROFILING_ENABLED=1
+   SET DD_SERVICE=MyService
    SET DD_ENV=production
    SET DD_VERSION=1.2.3
 
@@ -205,6 +185,7 @@ Datadog .NET Profiler is currently in public beta. Datadog recommends evaluating
    SET COR_ENABLE_PROFILING=1
    SET COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
    SET DD_PROFILING_ENABLED=1
+   SET DD_SERVICE=MyService
    SET DD_ENV=production
    SET DD_VERSION=1.2.3
 
