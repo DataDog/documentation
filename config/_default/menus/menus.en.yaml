@@ -1931,6 +1931,11 @@ main:
     parent: profiler_enabling
     identifier: profiler_enabling_nodejs
     weight: 105
+  - name: Enabling the Linux Profiler
+    url: tracing/profiler/enabling/linux/
+    parent: profiler_enabling
+    identifier: profiler_enabling_linux
+    weight: 107
   - name: Search Profiles
     url: tracing/profiler/search_profiles/
     parent: profiler
