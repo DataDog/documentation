@@ -80,6 +80,12 @@ Get automated alerts on outliers and groups of errors, timeouts, and crashes to 
 
 {{< img src="real_user_monitoring/error_tracking/errors_rum.mp4" alt="RUM error tracking" video=true >}}
 
+## Explore Datadog Session Replay
+
+### Session replays
+
+Watch browser recordings of real users interacting with your website and use the [Developer Tools][5] to help troubleshoot user experience issues.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -88,3 +94,4 @@ Get automated alerts on outliers and groups of errors, timeouts, and crashes to 
 [2]: /real_user_monitoring/explorer/visualize/
 [3]: /real_user_monitoring/connect_rum_and_traces/
 [4]: /real_user_monitoring/error_tracking/
+[5]: /real_user_monitoring/session_replay/developer_tools/
