@@ -89,7 +89,7 @@ This status means that the Agent is unable to find a log file for a given contai
 
 If logs are collected but single lines appear to be split, check that the Docker daemon is using the [JSON logging driver](#your-containers-are-not-using-the-json-logging-driver).
 
-**Note:** When you install the Agent on the host, the Agent does not have permission to access `/var/lib/docker/containers`. Therefore, the Agent collects logs from the docker socket when it is installed on the host. 
+**Note:** When you install the Agent on the host, the Agent does not have permission to access `/var/lib/docker/containers`. Therefore, the Agent collects logs from the Docker socket when it is installed on the host. 
 
 
 ### Status: pending
