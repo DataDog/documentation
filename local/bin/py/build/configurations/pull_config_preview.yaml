@@ -497,7 +497,7 @@
           kind: documentation
           beta: true
           description: "Collect traces from your Android applications."
-          dependencies: ["https://github.com/DataDog/dd-sdk-android/blob/master/docs/trace_collection.md"]
+          dependencies: ["https://github.com/DataDog/dd-sdk-android/blob/maxep/RUMM-1769/documentation-snippets/docs/trace_collection.md"]
           further_reading:
             - link: "https://github.com/DataDog/dd-sdk-android"
               tag: "Github"
@@ -520,7 +520,7 @@
           title: iOS Log Collection
           kind: documentation
           description: "Collect logs from your iOS applications."
-          dependencies: ["https://github.com/DataDog/dd-sdk-ios/blob/master/docs/log_collection.md"]
+          dependencies: ["https://github.com/DataDog/dd-sdk-ios/blob/maxep/RUMM-1769/documentation-snippets/docs/log_collection.md"]
           further_reading:
             - link: "https://github.com/DataDog/dd-sdk-ios"
               tag: "Github"
@@ -558,7 +558,7 @@
         dest_dir: '/real_user_monitoring/ios/'
         path_to_remove: 'docs/rum_collection/'
         front_matters:
-          dependencies: [ "https://github.com/DataDog/dd-sdk-ios/blob/master/docs/rum_collection/" ]
+          dependencies: [ "https://github.com/DataDog/dd-sdk-ios/blob/maxep/RUMM-1769/documentation-snippets/docs/rum_collection/" ]
 
     - action: pull-and-push-folder
       branch: master
