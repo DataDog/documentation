@@ -30,8 +30,9 @@ To create a [metric monitor][1] in Datadog, use the main navigation: *Monitors -
 
 A threshold alert compares metric values to a static threshold.
 
-On each alert evaluation, Datadog calculates the average/minimum/maximum/sum over the selected period and checks if it is above or below the threshold. This is the standard alert case where you know the expected values. The [Distribution metric type][8] offers the additional threshold option of calculating percentiles over the selected period.
+On each alert evaluation, Datadog calculates the average/minimum/maximum/sum over the selected period and checks if it is above or below the threshold. This is the standard alert case where you know the expected values. The [Distribution metric type][1] offers the additional threshold option of calculating percentiles over the selected period.
 
+[1]: /metric/distribution_metrics
 {{% /tab %}}
 {{% tab "Change" %}}
 
@@ -226,4 +227,3 @@ For detailed instructions on the **Say what's happening** and **Notify your team
 [5]: /monitors/faq/what-are-recovery-thresholds/
 [6]: /monitors/create/configuration/#advanced-alert-conditions
 [7]: /monitors/notify/
-[8]: /metric/distribution_metrics
