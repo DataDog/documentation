@@ -353,7 +353,7 @@ container_env_as_tags:
 
 ## Container labels as tags
 
-Starting with Agent v7.33+, the Agent can collect container labels and use them as tags to attach to all the metrics corresponding to the container.
+Starting with Agent v7.33+, the Agent can collect container labels and use them as tags.  The agent attaches the tags to all metrics associated with the container.
 Both `docker` and `containerd` containers are supported. In the case of `containerd` the minimum supported version is v1.5.6 because previous releases didn't propagate labels correctly.
 
 {{< tabs >}}
