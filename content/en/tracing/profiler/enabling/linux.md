@@ -33,19 +33,21 @@ The Datadog Profiler requires Linux kernel v4.17+ on an `amd64` compatible proce
 
 To begin profiling applications:
 
-1. Ensure you are running the Datadog agent version [7.20.2][1]+ or [6.20.2][2]+ and that `perf_event_paranoid` kernel setting is *at most* 2. You can run `cat /proc/sys/kernel/perf_event_paranoid` to check this value. Modifying the parameter depends on your specific Linux distribution, but `echo 2 | sudo tee /proc/sys/kernel/perf_event_paranoid` will work for many popular distros.
+1. Configure the `perf_event_paranoid` kernel setting to be at most 2. On many distributions, you can check this parameter by running `cat /proc/sys/kernel/perf_event_paranoid` or `sysctl kernel.perf_event_paranoid`. Likewise, you can set this value until the next reboot by running `echo 2 | sudo tee /proc/sys/kernel/perf_event_paranoid` and and can be set on every system startup with `sudo sysctl -w kernel.perf_event_paranoid=2`. These commands can't usually be run from a container, as the `perf_event_paranoid` setting is an operating system parameter. These commands may not work for all configurations. For alternatives, see the [troubleshooting guide][1].
 
-2. Download the appropriate [ddprof binary][3] for your Linux distribution. For example, here is one way to pull the latest release:
+2. Ensure you are running the Datadog agent version [7.20.2][2]+ or [6.20.2][3]+.
+
+3. Download the appropriate [ddprof binary][4] for your Linux distribution. For example, here is one way to pull the latest release:
 
 ```shell
-curl -L -O https://github.com/DataDog/ddprof/releases/download/v0.7.0/ddprof-x86_64_unknown-linux-gnu-2.23.tar.gz
-tar xvf ddprof-x86_64_unknown-linux-gnu-2.23.tar.gz
-mv ddprof-x86_64_unknown-linux-gnu-2.23/bin/ddprof INSTALLATION_TARGET
+curl -L -O https://github.com/DataDog/ddprof/releases/download/v0.7.0/ddprof-x86_64-linux-gnu.tar.gz
+tar xvf ddprof-x86_64-linux-gnu.tar.gz
+mv ddprof-x86_64-linux-gnu/bin/ddprof INSTALLATION_TARGET
 ```
 
 Where `INSTALLATION_TARGET` specifies the location you'd like to store the `ddprof` binary. This document will assume `INSTALLATION_TARGET=./ddprof`
 
-3. Modify your service invocation to include the profiler. Your usual command is passed as the last arguments to the `ddprof` executable.
+4. Modify your service invocation to include the profiler. Your usual command is passed as the last arguments to the `ddprof` executable.
    {{< tabs >}}
 {{% tab "Environment variables" %}}
 
@@ -93,7 +95,7 @@ exec ./ddprof --environment prod --service my-web-app --service_version 1.0.3 my
 {{< /tabs >}}
 
 
-4. A minute or two after starting your application, your profiles will show up on the [Datadog APM > Profiler page][4].
+5. A minute or two after starting your application, your profiles will show up on the [Datadog APM > Profiler page][5].
 
 ## Configuration
 
@@ -101,9 +103,9 @@ Configuration for the profiler can be set by command line parameters, environmen
 
 | Environment variable            | Long name       | Short name | Default   | Description                                                                                                                          |
 |---------------------------------|-----------------|------------|-----------|--------------------------------------------------------------------------------------------------------------------------------------|
-| DD_ENV                          | environment     | E          |           | The [environment][5] name, for example, `production`.                                                                                |
-| DD_SERVICE                      | service         | S          | myservice | The [service][5] name, for example, `web-backend`.                                                                                   |
-| DD_VERSION                      | service_version | V          |           | The [version][5] of your service.                                                                                                    |
+| DD_ENV                          | environment     | E          |           | The [environment][6] name, for example, `production`.                                                                                |
+| DD_SERVICE                      | service         | S          | myservice | The [service][6] name, for example, `web-backend`.                                                                                   |
+| DD_VERSION                      | service_version | V          |           | The [version][6] of your service.                                                                                                    |
 | DD_AGENT_HOST                   | host            | H          | localhost | The hostname for the Datadog agent.                                                                                                  |
 | DD_TRACE_AGENT_PORT             | port            | P          | 8126      | The Datadog agent listening port.                                                                                                    |
 | DD_TRACE_AGENT_URL              | url             | U          |           | `https://<hostname>:<port>` overrides other agent host/port settings.                                                                |
@@ -150,15 +152,16 @@ When the profiler has root UID, all visible processes are instrumented. For most
 
 ## Not sure what to do next?
 
-The [Getting Started with Profiler][6] guide takes a sample service with a performance problem and shows you how to use Continuous Profiler to understand and fix the problem.
+The [Getting Started with Profiler][7] guide takes a sample service with a performance problem and shows you how to use Continuous Profiler to understand and fix the problem.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/account/settings#agent/overview
-[2]: https://app.datadoghq.com/account/settings?agent_version=6#agent
-[3]: https://github.com/DataDog/ddprof/releases
-[4]: https://app.datadoghq.com/profiling
-[5]: /getting_started/tagging/unified_service_tagging
-[6]: /getting_started/profiler/
+[1]: /tracing/profiler/profiler_troubleshooting
+[2]: https://app.datadoghq.com/account/settings#agent/overview
+[3]: https://app.datadoghq.com/account/settings?agent_version=6#agent
+[4]: https://github.com/DataDog/ddprof/releases
+[5]: https://app.datadoghq.com/profiling
+[6]: /getting_started/tagging/unified_service_tagging
+[7]: /getting_started/profiler/
