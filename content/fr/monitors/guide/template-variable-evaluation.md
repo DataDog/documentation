@@ -52,10 +52,10 @@ Les fonctions suivantes modifient le format d'une template variable numérique 
 | humanize_bytes(var) | Convertit le nombre d'octets de la var en un format plus lisible|
 | humanize_bits(var)  | Convertit le nombre de bits de la var en un format plus lisible|
 | abs(var)            | Renvoie la valeur absolue de la var|
-| int(var)            | Renvoie la var sous forme de nombre entier|
+| int(var)            | Renvoie la var sous forme de nombre entier tronqué (sans les décimales). Par exemple, si var = 12.345, `int(var)` renvoie alors 12.|
 | float(var)          | Renvoie la var sous forme de valeur flottante|
 | trunc(var)          | Renvoie la var sous forme de nombre entier ; alias de la fonction int|
-| dec(var)            | Renvoie les chiffres à droite du séparateur décimal, par exemple : si var = 12.345, dec(var) renvoie alors 0.345.|
+| dec(var)            | Renvoie les chiffres à droite du séparateur décimal, par exemple, si var = 12.345, `dec(var)` renvoie alors 0.345.|
 
 Les fonctions suivantes utilisent la valeur d'une template variable numérique en tant qu'entrée d'une fonction mathématique :
 

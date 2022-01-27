@@ -44321,6 +44321,15 @@
             "description": "Too many requests"
           }
         },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": []
+          }
+        ],
         "summary": "Get archive order",
         "tags": [
           "Logs Archives"
@@ -44889,6 +44898,15 @@
             "description": "Too many requests"
           }
         },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": []
+          }
+        ],
         "summary": "Get all archives",
         "tags": [
           "Logs Archives"
@@ -46021,6 +46039,15 @@
             "description": "Too many requests"
           }
         },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": []
+          }
+        ],
         "summary": "Get an archive",
         "tags": [
           "Logs Archives"
@@ -47081,6 +47108,15 @@
             "description": "Too many requests"
           }
         },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": []
+          }
+        ],
         "summary": "List read roles for an archive",
         "tags": [
           "Logs Archives"
@@ -47414,6 +47450,15 @@
             "description": "Too many requests"
           }
         },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": []
+          }
+        ],
         "summary": "Get all log-based metrics",
         "tags": [
           "Logs Metrics"
@@ -48062,6 +48107,15 @@
             "description": "Too many requests"
           }
         },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": []
+          }
+        ],
         "summary": "Get a log-based metric",
         "tags": [
           "Logs Metrics"
@@ -48517,6 +48571,15 @@
             "description": "Too many requests"
           }
         },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": []
+          }
+        ],
         "summary": "List restriction queries",
         "tags": [
           "Logs Restriction Queries"
@@ -48705,6 +48768,17 @@
             "description": "Too many requests"
           }
         },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": [
+              "user_access_manage"
+            ]
+          }
+        ],
         "summary": "Create a restriction query",
         "tags": [
           "Logs Restriction Queries"
@@ -48876,6 +48950,15 @@
             "description": "Too many requests"
           }
         },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": []
+          }
+        ],
         "summary": "Get restriction query for a given role",
         "tags": [
           "Logs Restriction Queries"
@@ -49039,6 +49122,15 @@
             "description": "Too many requests"
           }
         },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": []
+          }
+        ],
         "summary": "Get all restriction queries for a given user",
         "tags": [
           "Logs Restriction Queries"
@@ -49170,6 +49262,17 @@
             "description": "Too many requests"
           }
         },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": [
+              "user_access_manage"
+            ]
+          }
+        ],
         "summary": "Delete a restriction query",
         "tags": [
           "Logs Restriction Queries"
@@ -49442,6 +49545,15 @@
             "description": "Too many requests"
           }
         },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": []
+          }
+        ],
         "summary": "Get a restriction query",
         "tags": [
           "Logs Restriction Queries"
@@ -49667,6 +49779,17 @@
             "description": "Too many requests"
           }
         },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": [
+              "user_access_manage"
+            ]
+          }
+        ],
         "summary": "Update a restriction query",
         "tags": [
           "Logs Restriction Queries"
@@ -49835,6 +49958,17 @@
             "description": "Too many requests"
           }
         },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": [
+              "user_access_manage"
+            ]
+          }
+        ],
         "summary": "Revoke role from a restriction query",
         "tags": [
           "Logs Restriction Queries"
@@ -50032,6 +50166,15 @@
             "description": "Too many requests"
           }
         },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": []
+          }
+        ],
         "summary": "List roles for a restriction query",
         "tags": [
           "Logs Restriction Queries"
@@ -50198,6 +50341,17 @@
             "description": "Too many requests"
           }
         },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": [
+              "user_access_manage"
+            ]
+          }
+        ],
         "summary": "Grant role to a restriction query",
         "tags": [
           "Logs Restriction Queries"

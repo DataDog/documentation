@@ -1,7 +1,7 @@
 ---
 title: Datadog Agent をログまたはトレースの収集のみに使用
 aliases:
-  - /logs/faq/how-to-set-up-only-logs
+  - /ja/logs/faq/how-to-set-up-only-logs
 kind: documentation
 ---
 <div class="alert alert-danger">
@@ -117,7 +117,7 @@ spec:
           ## DD_SITE を Datadog サイトに設定します
           - {name: DD_SITE, value: "<YOUR_DD_SITE>"}
 
-          ## Docker ソケットへのパス - {name: DD_CRI_SOCKET_PATH, value: /host/var/run/docker.sock} - {name: DOCKER_HOST, value: unix:///host/var/run/docker.sock} 
+          ## Docker ソケットへのパス - {name: DD_CRI_SOCKET_PATH, value: /host/var/run/docker.sock} - {name: DOCKER_HOST, value: unix:///host/var/run/docker.sock}
 
           ## StatsD の収集を許可するには、DD_DOGSTATSD_NON_LOCAL_TRAFFIC を true に設定します。
           - {name: DD_DOGSTATSD_NON_LOCAL_TRAFFIC, value: "false" }

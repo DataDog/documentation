@@ -68,7 +68,7 @@ With the Live Search **List view** you can:
 - Run one-click search queries on any span or tag directly from the trace panel view.
 - Add, remove, and sort columns from span tags for a customized view.
 
-The number of received spans per second is displayed at the top of the traces table. Since a stream of thousands of spans per second is not human readable, high throughput span streams show spans for visual clarity but all spans are still searchable. Use the Live Search query bar filtering features to filter the spans stream and the **Pause/Play** button at the top right of the screen to pause or resume the stream.
+The number of received spans per second is displayed at the top of the traces table. Since a stream of thousands of spans per second is not human readable, high throughput span streams show some spans for visual clarity. You can search for all available spans in the search query. Use the Live Search query bar filtering features to filter the spans stream and the **Pause/Play** button at the top right of the screen to pause or resume the stream.
 
 {{< img src="tracing/live_search/play-pause-button.png" alt="Pause or Play the Live Stream" style="width:75%;" >}}
 

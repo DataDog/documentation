@@ -22,7 +22,7 @@ Get an overview of analyzed logs across all sources for a quick audit, or select
 
 ## Signals generated
 
-Analyze the number of signals generated and the amount of rules that are triggering signals, or select **Signals Generated** to filter by log detection rules in the [Signals Explorer][5].
+Analyze the number of signals generated and the number of detection rules that are triggering signals, or select **Signals Generated** to filter by log detection rules in the [Signals Explorer][5].
 
 In the Signals Explorer, click on any rule with a generated signal to inspect the signal further. Select the **Message** tab to learn how to [triage and respond to a generated signal][6], or click on any of the event attributes listed at the top of the panel or in the **Event Attributes** tab to [filter signals by attributes][6].
 
