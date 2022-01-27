@@ -13,13 +13,13 @@ Some older versions of <code>datadog-lambda-java</code> import <code>log4j <=2.1
 
 The [Datadog Forwarder Lambda function][2] is required to ingest AWS Lambda traces, enhanced metrics, custom metrics, and logs.
 
-To fully instrument your serverless application with distributed tracing, your Java Lambda functions must be using the Java 8 Corretto (`java8.al2`) or Java 11 (`java11`) runtimes.
+To fully instrument your serverless application with distributed tracing, your Java Lambda functions must be using the Java 8 Corretto (`java8.al2`) or Java 11 (`java11`) runtime.
 
 ## Configuration
 
 ### Install
 
-Install the Datadog Lambda Library locally by adding one of the following code blocks into your `pom.xml` or `build.gradle` as appropriate based on your project’s configuration. Replace `VERSION` below with the latest release (omitting the preceeding `v`): ![Maven Cental][4]
+Install the Datadog Lambda Library locally by adding one of the following code blocks into `pom.xml` (Maven) or `build.gradle` (Gradle). Replace `VERSION` below with the latest release (omitting the preceding `v`): ![Maven Cental][4]
 {{< tabs >}}
 {{% tab "Maven" %}}
 
