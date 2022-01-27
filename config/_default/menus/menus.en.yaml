@@ -2764,6 +2764,11 @@ main:
     parent: rum_session_replay
     identifier: rum_session_replay_privacy_options
     weight: 501
+  - name: Developer Tools
+    url: real_user_monitoring/session_replay/developer_tools
+    parent: rum_session_replay
+    identifier: rum_session_replay_developer_tools
+    weight: 502
   - name: Dashboards
     url: real_user_monitoring/dashboards/
     parent: rum
