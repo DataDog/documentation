@@ -53,16 +53,18 @@ Datadog .NET Profiler is currently in public beta. Datadog recommends evaluating
 
 2. The profiler ships together with the tracer. Install or upgrade to the last beta version if needed, using the [.NET Monitoring MSI installer][3]. Continuous Profiler only supports 64-bit Windows, with 32-bit support coming soon, so you need the file like `datadog-dotnet-apm-2.1.1-x64-profiler-beta.msi`.
 
-   Run the .NET Monitoring MSI installer with administrator privileges.
-
-**Note**: Profiling requires the .msi version 2.1
+   Run the installer with administrator privileges.
 
 {{< tabs >}}
 
 {{% tab "Internet Information Services (IIS)" %}}
-1. To enable the Profiler for IIS applications, it is required to set the `DD_PROFILING_ENABLED` environment variable to `1`. This could be done machine wide or for IIS only in the Registry under <code>HKLM\System\CurrentControlSet\Services\WAS</code> and <code>HKLM\System\CurrentControlSet\Services\W3SVC</code> nodes. Add `DD_PROFILING_ENABLED=1` to the multi-string `Environment` value. The result should look like the following:
+1. Set needed environment variables to configure and enable Profiler. You can do this machine-wide, user-wide, or just for IIS. For the IIS-only setup, set the environment variables via the registry:
 
-For .NET Core and .NET 5+:
+   **With the Registry Editor:**
+
+   In the Registry Editor, create a multi-string value called `Environment` in `HKLM\System\CurrentControlSet\Services\WAS` and `HKLM\System\CurrentControlSet\Services\W3SVC` and set the values to:
+
+   For .NET Core and .NET 5+:
    ```text
    CORECLR_ENABLE_PROFILING=1
    CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
@@ -70,9 +72,9 @@ For .NET Core and .NET 5+:
    DD_ENV=production
    DD_VERSION=1.2.3
    ```
-{{< img src="tracing/setup/dotnet/RegistryEditorCoreIIS.png" alt="Using the Registry Editor to create environment variables for an .NET Core application in IIS" style="width:90%" >}}
+   {{< img src="tracing/setup/dotnet/RegistryEditorCore.png" alt="Using the Registry Editor to create environment variables for a Windows service" style="width:90%" >}}
 
-For .NET Framework:
+   For .NET Framework:
    ```text
    COR_ENABLE_PROFILING=1
    COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
@@ -80,8 +82,35 @@ For .NET Framework:
    DD_ENV=production
    DD_VERSION=1.2.3
    ```
-{{< img src="tracing/setup/dotnet/RegistryEditorFrameworkIIS.png" alt="Using the Registry Editor to create environment variables for an .NET Framework application in IIS" style="width:90%" >}}
+   {{< img src="tracing/setup/dotnet/RegistryEditorFramework.png" alt="Using the Registry Editor to create environment variables for a Windows service" style="width:90%" >}}
 
+   **With a PowerShell script:**
+
+   For .NET Core and .NET 5+:
+   ```powershell
+   [string[]] $v = @(
+       "CORECLR_ENABLE_PROFILING=1",
+       "CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}",
+       "DD_PROFILING_ENABLED=1",
+       "DD_ENV=production",
+       "DD_VERSION=1.2.3"
+   )
+   Set-ItemProperty HKLM:SYSTEM\CurrentControlSet\Services\WAS -Name Environment -Value $v
+   Set-ItemProperty HKLM:SYSTEM\CurrentControlSet\Services\W3SVC -Name Environment -Value $v
+   ```
+
+   For .NET Framework:
+   ```powershell
+   [string[]] $v = @(
+       "COR_ENABLE_PROFILING=1",
+       "COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}",
+       "DD_PROFILING_ENABLED=1",
+       "DD_ENV=production",
+       "DD_VERSION=1.2.3"
+   )
+   Set-ItemProperty HKLM:SYSTEM\CurrentControlSet\Services\WAS -Name Environment -Value $v
+   Set-ItemProperty HKLM:SYSTEM\CurrentControlSet\Services\W3SVC -Name Environment -Value $v
+   ```
 
 2. Completely stop and start IIS by running the following commands as an administrator:
 
@@ -100,11 +129,11 @@ For .NET Framework:
 {{% /tab %}}
 
 {{% tab "Windows services" %}}
-1. Set environment variables:
+1. Set needed environment variables to configure and enable Profiler. You can do this machine-wide, user-wide, or just for your service. For the service-specific setup, set the environment variables via the registry:
 
    **With the Registry Editor:**
 
-   In the Registry Editor, create a multi-string value called `Environment` in the `HKLM\System\CurrentControlSet\Services\<SERVICE NAME>` key and set the value data to:
+   In the Registry Editor, create a multi-string value called `Environment` in `HKLM\System\CurrentControlSet\Services\<SERVICE NAME>` and set the value to:
 
    For .NET Core and .NET 5+:
    ```text
@@ -158,9 +187,7 @@ For .NET Framework:
 {{% /tab %}}
 
 {{% tab "Standalone applications" %}}
-1. To automatically profile a non-service application, such as console, ASP.NET (Core), Windows Forms, or WPF, some environment variables must be set before starting it.
-
-   If the environment variables are set for the current user, _all_ .NET applications are profiled. Instead, set them in a batch file that also starts the application, and run the batch file.
+1. Set needed environment variables to configure and enable Profiler for a non-service application, such as console, ASP.NET (Core), Windows Forms, or WPF. You can do this machine-wide, user-wide, or just for your service. We recommend doing this in a batch file that also starts the application, and running your application using the batch file.
 
    For .NET Core and .NET 5+:
    ```cmd
