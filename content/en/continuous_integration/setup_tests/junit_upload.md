@@ -231,18 +231,10 @@ To be processed, the `name` attribute in the `<property>` element must have the 
 </testsuites>
 {{< /code-block >}}
 
-<<<<<<< HEAD
-{{< /site-region >}}
-
-## Further reading
-
-{{< partial name="whats-next/whats-next.html" >}}[1]: https://junit.org/junit5/
-=======
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
->>>>>>> master
 [1]: https://junit.org/junit5/
 [2]: https://www.npmjs.com/package/@datadog/datadog-ci
 [3]: https://app.datadoghq.com/organization-settings/api-keys
