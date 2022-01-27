@@ -24,13 +24,13 @@ Utilisez le widget Résumé des SLO pour surveiller vos [SLO (Service Level Obje
 2. Sélectionnez un SLO dans le menu déroulant.
 3. Sélectionnez jusqu'à trois intervalles de temps différents.
 
-**Remarque :** l'intervalle `Global Time` vous permet d'afficher le statut et le budget d'indisponibilité pour des périodes arbitraires au cours des 90 derniers jours. De plus, vous pouvez également spécifier une cible SLO unique (facultative) pour la période arbitraire. Pour afficher un budget d'indisponibilité et appliquer un code couleur à la valeur du statut du SLO (rouge ou vert), il est nécessaire d'appliquer une cible SLO. Si vous ne spécifiez aucune cible, seul le statut s'affiche, et le texte demeure gris.
+**Remarque :** l'intervalle `Global Time` vous permet d'afficher le statut et la marge d'erreur pour des périodes arbitraires au cours des 90 derniers jours. De plus, vous pouvez également spécifier une cible SLO unique (facultative) pour la période arbitraire. Pour afficher une marge d'erreur et appliquer un code couleur à la valeur du statut du SLO (rouge ou vert), il est nécessaire d'appliquer une cible SLO. Si vous ne spécifiez aucune cible, seul le statut s'affiche, et le texte demeure gris.
 
 ### Options
 
 #### Préférences d'affichage
 
-Choisissez d'afficher ou de masquer le budget d'indisponibilité restant en cliquant sur l'option `Show error budget`. Si vous visualisez un SLO basé sur un monitor avec plusieurs groupes ou monitors, sélectionnez votre mode de visualisation via l'option `View mode` :
+Choisissez d'afficher ou de masquer la marge d'erreur restante en cliquant sur l'option `Show error budget`. Si vous visualisez un SLO basé sur un monitor avec plusieurs groupes ou monitors, sélectionnez votre mode de visualisation via l'option `View mode` :
 
 - Pour les SLO basés sur des monitors configurés avec un seul monitor divisé en plusieurs groupes, les trois modes de visualisation suivants sont proposés :
   - `Status` : affiche les pourcentages de statuts et les cibles du SLO global

@@ -90,7 +90,7 @@ java \
 
 ## Enabling the allocation profiler
 
-In dd-java-agent v0.84.0+ and Java 15 and lower, the allocation profiler is opt-in because it can use excessive CPU in allocation-heavy applications. This isn't common, so you may want to try it in a staging environment to see if it affects your application. To enable it, see [Enabling the allocation profiler][8].
+In dd-java-agent v0.84.0+ and Java 15 and lower, the allocation profiler is turned off by default because it can use excessive CPU in allocation-heavy applications. This isn't common, so you may want to try it in a staging environment to see if it affects your application. To enable it, see [Enabling the allocation profiler][8].
 
 ## Configuration
 

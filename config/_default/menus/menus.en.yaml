@@ -1936,6 +1936,11 @@ main:
     parent: profiler_enabling
     identifier: profiler_enabling_dotnet
     weight: 106
+  - name: Enabling the Linux Profiler
+    url: tracing/profiler/enabling/linux/
+    parent: profiler_enabling
+    identifier: profiler_enabling_linux
+    weight: 107
   - name: Search Profiles
     url: tracing/profiler/search_profiles/
     parent: profiler
@@ -2390,6 +2395,11 @@ main:
     parent: log_management
     identifier: log_security
     weight: 7
+  - name: Troubleshooting
+    url: logs/troubleshooting
+    parent: log_management
+    identifier: log_troubleshooting
+    weight: 8
   - name: Security Platform
     url: security_platform/
     pre: security-platform
@@ -2764,6 +2774,11 @@ main:
     parent: rum_session_replay
     identifier: rum_session_replay_privacy_options
     weight: 501
+  - name: Developer Tools
+    url: real_user_monitoring/session_replay/developer_tools
+    parent: rum_session_replay
+    identifier: rum_session_replay_developer_tools
+    weight: 502
   - name: Dashboards
     url: real_user_monitoring/dashboards/
     parent: rum
