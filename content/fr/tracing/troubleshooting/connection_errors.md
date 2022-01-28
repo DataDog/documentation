@@ -205,7 +205,7 @@ Consultez le tableau ci-dessous pour obtenir des exemples de configuration. Cert
 
 | Configuration   | `DD_AGENT_HOST`  |
 |---------|------------------|
-| [AWS ECS sur EC2][7] | Évaluer l'endpoint de métadonnées d'Amazon EC2 |
+| [AWS ECS sur EC2][7] | Évaluation avec l'endpoint de métadonnées d'Amazon EC2 |
 | [AWS ECS sur Fargate][8] | Ne pas définir `DD_AGENT_HOST` |
 | [AWS EKS sur Fargate][9] | Ne pas définir `DD_AGENT_HOST` |
 | [AWS Elastic Beanstalk avec un seul conteneur][10] | IP de passerelle (généralement `172.17.0.1`) |

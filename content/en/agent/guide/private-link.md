@@ -48,6 +48,7 @@ However, to route traffic to Datadog's PrivateLink offering in `us-east-1` from 
 | Metrics                   | `com.amazonaws.vpce.us-east-1.vpce-svc-09a8006e245d1e7b8` | `metrics.agent.datadoghq.com`                     |
 | Containers                | `com.amazonaws.vpce.us-east-1.vpce-svc-0ad5fb9e71f85fe99` | `orchestrator.datadoghq.com`                      |
 | Process                   | `com.amazonaws.vpce.us-east-1.vpce-svc-0ed1f789ac6b0bde1` | `process.datadoghq.com`                           |
+| Profiling                 | `com.amazonaws.vpce.us-east-1.vpce-svc-022ae36a7b2472029` | `intake.profile.datadoghq.com`                    |
 | Traces                    | `com.amazonaws.vpce.us-east-1.vpce-svc-0355bb1880dfa09c2` | `trace.agent.datadoghq.com`                       |
 
 4. Click **Verify**. If this does not return _Service name found_, reach out to [Datadog support][1].
@@ -113,6 +114,7 @@ However, to route traffic to Datadog's PrivateLink offering in `us-east-1` from 
 | Logs (User HTTP intake)   | `com.amazonaws.vpce.us-east-1.vpce-svc-0e36256cb6172439d` |
 | API                       | `com.amazonaws.vpce.us-east-1.vpce-svc-064ea718f8d0ead77` |
 | Process                   | `com.amazonaws.vpce.us-east-1.vpce-svc-0ed1f789ac6b0bde1` |
+| Profiling                 | `com.amazonaws.vpce.us-east-1.vpce-svc-022ae36a7b2472029` |
 | Traces                    | `com.amazonaws.vpce.us-east-1.vpce-svc-0355bb1880dfa09c2` |
 | Containers                | `com.amazonaws.vpce.us-east-1.vpce-svc-0ad5fb9e71f85fe99` |
 
@@ -148,6 +150,7 @@ Use the list below to map service and DNS name to different parts of Datadog:
   | Logs (User HTTP intake)   | `com.amazonaws.vpce.us-east-1.vpce-svc-0e36256cb6172439d` | `http-intake.logs.datadoghq.com`                  |
   | API                       | `com.amazonaws.vpce.us-east-1.vpce-svc-064ea718f8d0ead77` | `api.datadoghq.com`                               |
   | Process                   | `com.amazonaws.vpce.us-east-1.vpce-svc-0ed1f789ac6b0bde1` | `process.datadoghq.com`                           |
+  | Profiling                 | `com.amazonaws.vpce.us-east-1.vpce-svc-022ae36a7b2472029` | `intake.profile.datadoghq.com`                    |
   | Traces                    | `com.amazonaws.vpce.us-east-1.vpce-svc-0355bb1880dfa09c2` | `trace.agent.datadoghq.com`                       |
   | Containers                | `com.amazonaws.vpce.us-east-1.vpce-svc-0ad5fb9e71f85fe99` | `orchestrator.datadoghq.com`                      |
 
