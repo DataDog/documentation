@@ -1,6 +1,7 @@
 ---
 title: Application Security
 kind: documentation
+is_beta: true
 disable_sidebar: true
 further_reading:
 - link: "/security_platform/guide/how-appsec-works/"
@@ -10,6 +11,10 @@ further_reading:
   tag: "Documentation"
   text: "Learn more about language and framework compatibility"
 ---
+
+<div class="alert alert-warning">
+Application Security is currently in public beta. See the <a href="https://app.datadoghq.com/security/appsec">in-app instructions</a> to get started.
+</div>
 
 {{< img src="/security_platform/application_security/app-sec-landing-page.png" alt="The Application Security landing page in Datadog, which displays your services, suspicious requests, and detected signals" width="75%">}}
 
