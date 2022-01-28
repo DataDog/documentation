@@ -5,9 +5,9 @@ further_reading:
 - link: "/security_platform/application_security/"
   tag: "Documentation"
   text: "Monitoring Threats with Datadog Application Security"
-- link: "/security_platform/guide/how-appsec-works/"
-  tag: "Guide"
-  text: "How Datadog Application Security Monitoring Works"
+- link: "/security_platform/application_security/getting_started/"
+  tag: "Documentation"
+  text: "Getting Started Enabling Application Security Monitoring for Your Services"
 - link: "/security_platform/default_rules/#cat-application-security"
   tag: "Documentation"
   text: "Out-of-the-Box Application Security Rules"
@@ -175,10 +175,6 @@ These are supported on the following architectures:
 {{< /programming-lang >}}
 
 {{< /programming-lang-wrapper >}}
-
-## Enabling and disabling Application Security Monitoring
-
-After you instrument with the DD library, how to turn on in your Agent and start collecting
 
 ## Data security considerations
 
