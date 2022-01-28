@@ -327,14 +327,14 @@
               tag: "Homepage"
               text: "Explore Datadog RUM"
     - action: pull-and-push-file
-      branch: maxep/RUMM-1769/documentation-snippets
+      branch: master
       globs:
       - 'docs/configure_rum_android_sdk.md'
       options:
         dest_path: '/real_user_monitoring/android/'
         file_name: 'advanced_configuration.md'
         front_matters:
-          dependencies: ["https://github.com/DataDog/dd-sdk-android/blob/maxep/RUMM-1769/documentation-snippets/docs/configure_rum_android_sdk.md"]
+          dependencies: ["https://github.com/DataDog/dd-sdk-android/blob/master/docs/configure_rum_android_sdk.md"]
           title: RUM Android Advanced Configuration
           kind: documentation
           further_reading:
@@ -486,7 +486,7 @@
               text: "Learn how to explore your logs"
 
     - action: pull-and-push-file
-      branch: maxep/RUMM-1769/documentation-snippets
+      branch: master
       globs:
       - 'docs/trace_collection.md'
       options:
@@ -497,14 +497,14 @@
           kind: documentation
           beta: true
           description: "Collect traces from your Android applications."
-          dependencies: ["https://github.com/DataDog/dd-sdk-android/blob/maxep/RUMM-1769/documentation-snippets/docs/trace_collection.md"]
+          dependencies: ["https://github.com/DataDog/dd-sdk-android/blob/master/docs/trace_collection.md"]
           further_reading:
             - link: "https://github.com/DataDog/dd-sdk-android"
               tag: "Github"
               text: "dd-sdk-android Source code"
             - link: "tracing/visualization/"
               tag: "Documentation"
-              text: "Explore your services, resources and traces"
+              text: "Explore your services, resources, and traces"
 
   - repo_name: dd-sdk-ios
     contents:
@@ -530,7 +530,7 @@
               text: "Learn how to explore your logs"
 
     - action: pull-and-push-file
-      branch: master
+      branch: maxep/RUMM-1769/documentation-snippets
       globs:
       - 'docs/trace_collection.md'
       options:
@@ -541,7 +541,7 @@
           kind: documentation
           beta: true
           description: "Collect traces from your iOS applications."
-          dependencies: ["https://github.com/DataDog/dd-sdk-ios/blob/master/docs/trace_collection.md"]
+          dependencies: ["https://github.com/DataDog/dd-sdk-ios/blob/maxep/RUMM-1769/documentation-snippets/docs/trace_collection.md"]
           further_reading:
             - link: "https://github.com/DataDog/dd-sdk-ios"
               tag: "Github"
