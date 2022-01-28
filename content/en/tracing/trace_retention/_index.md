@@ -16,7 +16,7 @@ To track or monitor your usage of Tracing without Limits™, see the [Usage Metr
 
 ## Retention filters
 
-After spans have been ingested by Datadog, some will be kept for 15 days according to the retention filters that have been set on your account.  By default, the only retention filter enabled will be the [Intelligent Retention Filter](#datadog-intelligent-retention-filter), which retains error traces and traces from different latency distributions.
+After spans have been ingested by Datadog, some will be kept for 15 days according to the retention filters that have been set on your account. By default, the only retention filter enabled will be the [Intelligent Retention Filter](#datadog-intelligent-retention-filter), which retains error traces and traces from different latency distributions.
 
 You can also create any number of additional [tag-based retention filters](#create-your-own-retention-filter) for your services.
 
