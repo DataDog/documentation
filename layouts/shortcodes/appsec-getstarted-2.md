@@ -1,11 +1,12 @@
    The library collects security data from your application and sends it to the Agent, which sends it to Datadog, where [out-of-the-box detection rules][202] flag attacker techniques and potential misconfigurations so you can take steps to remediate. 
    
-1.  **To see this in action, send known attack patterns to your application**, so that you can see how a real threat would appear within Datadog. The following curl scripts trigger the Security Scanner Detected rule, which features three cases:
+1.  **To see Application Security threat detection in action, send known attack patterns to your application**. The *Security Scanner Detected* rule features three cases:
 
       - INFO / Random scan
       - LOW / Real routes targeted
       - MEDIUM / HTTP 5xx server error triggered
 
+      Trigger this rule by running the following curl script:
       ```
       for ((i=1;i<=200;i++)); 
       do
