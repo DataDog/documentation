@@ -2509,8 +2509,8 @@ main:
     parent: security_platform
     identifier: security_rules
     weight: 4
-  - name: Notification Profiles
-    url: security_platform/notification_profiles/
+  - name: Notification Rules
+    url: security_platform/notification_rules/
     parent: security_platform
     weight: 5
   - name: Signals Explorer
