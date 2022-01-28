@@ -26,27 +26,6 @@ data:
       tool_version: kubernetes sample manifests
       installer_version: kubernetes sample manifests
 ---
-# Source: datadog/templates/agent-services.yaml
-apiVersion: v1
-kind: Service
-metadata:
-  name: datadog-agent
-  namespace: default
-  labels:
-    app: "datadog-agent"
-    chart: "datadog-2.28.13"
-    release: "datadog-agent"
-    heritage: "Helm"
-spec:
-  selector:
-    app: datadog-agent
-  ports:
-    - protocol: UDP
-      port: 8125
-      targetPort: 8125
-      name: dogstatsd
-  internalTrafficPolicy: Local
----
 # Source: datadog/templates/daemonset.yaml
 apiVersion: apps/v1
 kind: DaemonSet
@@ -67,7 +46,7 @@ spec:
     spec:
       containers:
         - name: agent
-          image: "gcr.io/datadoghq/agent:7.32.4"
+          image: "gcr.io/datadoghq/agent:7.33.0"
           imagePullPolicy: IfNotPresent
           command: ["agent", "run"]
           resources: {}
@@ -90,8 +69,6 @@ spec:
                   fieldPath: status.hostIP
             - name: KUBERNETES
               value: "yes"
-            - name: DD_AC_EXCLUDE
-              value: "name:datadog-agent"
             - name: DD_LOG_LEVEL
               value: "INFO"
             - name: DD_DOGSTATSD_PORT
@@ -151,7 +128,7 @@ spec:
             timeoutSeconds: 5
       initContainers:
         - name: init-volume
-          image: "gcr.io/datadoghq/agent:7.32.4"
+          image: "gcr.io/datadoghq/agent:7.33.0"
           imagePullPolicy: IfNotPresent
           command: ["pwsh", "-Command"]
           args:
@@ -165,7 +142,7 @@ spec:
               mountPath: C:/Temp/install_info
           resources: {}
         - name: init-config
-          image: "gcr.io/datadoghq/agent:7.32.4"
+          image: "gcr.io/datadoghq/agent:7.33.0"
           imagePullPolicy: IfNotPresent
           command: ["pwsh", "-Command"]
           args:
@@ -192,8 +169,6 @@ spec:
                   fieldPath: status.hostIP
             - name: KUBERNETES
               value: "yes"
-            - name: DD_AC_EXCLUDE
-              value: "name:datadog-agent"
           resources: {}
       volumes:
         - name: installinfo
