@@ -61,6 +61,8 @@ These are supported on the following architectures:
 
 ### Supported frameworks
 
+The .NET Tracer supports all .NET-based languages (for example, C#, F#, Visual Basic).
+
 | Framework Web Server    | Minimum Framework Version   | 
 | ----------------------- | --------------------------- |
 | ASP.NET                 | 4.6                         |
@@ -178,14 +180,15 @@ These are supported on the following architectures:
 
 After you instrument with the DD library, how to turn on in your Agent and start collecting
 
-## Scanning for sensitive data
+## Data security considerations
 
-Description and link to /account_management/org_settings/sensitive_data_detection/
+The data that you’re collecting with Datadog can contain sensitive information that you want to filter out, obfuscate, scrub, filter, modify, or just not collect. Additionally, it may contain synthetic traffic that might cause your threat detection be inaccurate, or cause Datadog to not accurately indicate the security of your services.
 
-## Creating exclusion filters
+The Datadog Agent and some tracing libraries have options available to address these situations and modify or discard spans. See [APM Data Security][1] for details that also apply to Application Security.
 
-If very lengthy, could be its own page
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /tracing/setup_overview/configure_data_security/

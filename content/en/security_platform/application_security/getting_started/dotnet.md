@@ -14,18 +14,11 @@ further_reading:
 
 ## Get started
 
-1. **Install or update the Datadog Agent** to at least version 7.31.0. For example, if you have the Windows MSI Installer downloaded, the unattended mode PowerShell install command is: 
-   ```
-   Start-Process -Wait msiexec -ArgumentList '/qn /i datadog-agent-7-latest.amd64.msi APIKEY="<DD_API_KEY>" SITE="datadoghq.com"'
-   ```
+1. **Download the [Datadog .NET library][1]**, at least version 2.2.0, for your target operating system architecture.
 
-   For the various ways of installing the Agent, on other operating systems or in container environments, see the [Agent in-app documentation][1].
+   For information about which language and framework versions are supported by the library, see [Compatibility][2].
 
-2. **Download the [Datadog .NET library][2]**, at least version 2.2.0, for your target operating system architecture.
-
-   For information about which language and framework versions are supported by the library, see [Compatibility][3].
-
-3. **Enable Application Security Monitoring** by setting the `DD_APPSEC_ENABLED` environment variable to `true`. For example, on Windows self-hosted, run the following PowerShell snippet as part of your application start up script
+2. **Enable Application Security Monitoring** by setting the `DD_APPSEC_ENABLED` environment variable to `true`. For example, on Windows self-hosted, run the following PowerShell snippet as part of your application start up script
    ```
    $target=[System.EnvironmentVariableTarget]::Process
    [System.Environment]::SetEnvironmentVariable("DD_APPSEC_ENABLED","true",$target)
@@ -167,7 +160,7 @@ ENV DD_APPSEC_ENABLED=true
 
 {{< /tabs >}}
 
-4. **Restart the application** using a full stop and start.
+3. **Restart the application** using a full stop and start.
 
 {{% appsec-getstarted-2 %}}
 
@@ -175,6 +168,5 @@ ENV DD_APPSEC_ENABLED=true
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/account/settings#agent
-[2]: https://github.com/DataDog/dd-trace-dotnet/releases/latest
-[3]: /security_platform/application_security/setup_and_configure/#compatibility
+[1]: https://github.com/DataDog/dd-trace-dotnet/releases/latest
+[2]: /security_platform/application_security/setup_and_configure/#compatibility

@@ -10,7 +10,13 @@ further_reading:
       text: 'NodeJS Datadog Library source code'
 ---
 
-TKTK
+{{% appsec-getstarted %}}
+
+## Get started
+
+...
+
+{{% appsec-getstarted-2 %}}
 
 ## Further Reading
 
