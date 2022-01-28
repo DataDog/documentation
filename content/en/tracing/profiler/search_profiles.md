@@ -157,6 +157,8 @@ Block
 Goroutine
 : Shows a snapshot of the number of goroutines currently executing the same functions (On CPU as well as waiting Off-CPU). An increasing number of goroutines between snapshots can indicate that the program is leaking goroutines. In most healthy applications this profile is dominated by worker pools and shows the number of goroutines they utilize. Applications that are extremely latency sensitive and utilize a large number of goroutines (> 10.000) should be aware that enabling this profile requires O(N) stop-the-world pauses. The pauses occur only once every profiling period (default 60s) and normally last for `~1µsec` per goroutine. Typical applications with a p99 latency SLO of `~100ms` can generally ignore this warning. See our [Goroutine Profiling in Go][2] research for more in-depth information.
 
+Goroutine Wait
+: Shows where and how long goroutines are blocked.
 
 #### Delta profiles
 <div class="alert alert-info"><strong>Note</strong>: In Go profiler versions before <code>1.33.0</code>, Allocations, Allocated Memory, Mutex, and Block metrics are shown as measures <em>since the process was started</em>, as opposed to <em>during the profiling period</em>. The change to delta profiles in version <code>1.33.0</code> lets you see how these measures are changing instead of accumulating. The accumulated measures are collected and you can download them from the <strong>Download Profile Data</strong> icon by selecting the <code>block.pprof</code>, <code>heap.pprof</code>, and <code>mutex.pprof</code> options. <br/><br/>Storing the accumulated measures is an option Datadog might stop providing in future releases. <a href="/help/">Contact Support</a> to discuss your use case if you rely on it.</div>
@@ -175,6 +177,17 @@ Wall Time
 : Shows the elapsed time used by each function. Elapsed time includes time when code is running on CPU, waiting for I/O, and anything else that happens while the function is running.
 
 {{< /programming-lang >}}
+{{< programming-lang lang="nodejs" >}}
+
+Once enabled, the following profile types are collected:
+
+Wall Time
+: Shows the elapsed time used by each function. Elapsed time includes time when code is running on CPU, waiting for I/O, and anything else that happens while the function is running.
+
+Allocated Memory
+: Shows the amount of heap memory allocated by each function during the profiling period (default: 60s), including allocations which were subsequently freed. Stack allocations are not tracked. This is useful for investigating garbage collection load and total memory usage.
+
+{{< /programming-lang >}}
 {{< programming-lang lang="dotnet" >}}
 
 {{< img src="tracing/profiling/profile_dotnet.png" alt="A .NET profile">}}
@@ -183,6 +196,22 @@ Once enabled, the following profile type is collected:
 
 Wall Time
 : Shows the elapsed time spent in managed methods. Elapsed time includes time when code is running on CPU, waiting for I/O, and anything else that happens while the method is running. 
+
+{{< /programming-lang >}}
+{{< programming-lang lang="php" >}}
+
+Once enabled, the following profile types are collected:
+
+Wall Time
+: Shows the elapsed time used by each function. Elapsed time includes time when code is running on CPU, waiting for I/O, and anything else that happens while the function is running.
+
+{{< /programming-lang >}}
+{{< programming-lang lang="linux" >}}
+
+Once enabled, the following profile types are collected:
+
+CPU
+: Shows the time each function spent running on the CPU, including Ruby and native code.
 
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
