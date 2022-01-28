@@ -65,7 +65,7 @@ There are a few different types of offerings that you can list on the Datadog In
 
 Depending on the use case, choose the approach that makes the most sense for your offering. 
 
-If you're developing an offering that does not use the Datadog Agent, such as a Datadog App, SaaS license, professional service, or an API-based integration, you will need to develop a [tile-only listing](#tile-only-listing).
+If you're developing an offering that does not use the Datadog Agent, such as a Datadog App, SaaS license, professional service, or an API-based integration, you will need to create a [tile-only listing](#tile-only-listing).
 
 #### [Datadog Agent-based integration][13]
 
@@ -202,7 +202,7 @@ The ddev commands in the previous section generate a skeleton of folders and fil
 * Store all images used in your `README.md` file in the `images` folder. 
 * For Marketplace listings, you may add one video to your listing. Listings on the Integrations page do not currently support videos. See [Marketplace specific requirements](#marketplace-specific-requirements) for details.  
 * **Note:** Don't include spaces in the name of image files.
-* **Note:** If you are listing on the Marketplace, do not place images in the "Overview" section of your `README.md` file.
+* **Note:** If you are listing on the Marketplace, do not place images in the "Overview" section of your `README.md` file. Instead, these images should be placed in the media carousel by adding them to the `media` object in your `manifest.json` file. 
 
 #### Manifest
 
@@ -235,11 +235,14 @@ The ddev commands in the previous section generate a skeleton of folders and fil
 
 * Lives in the shared `.github` directory and defines the individuals or teams that are responsible for code in the repository. See GitHub's documentation [About code owners][29] for help with syntax.
 
-#### Marketplace specific requirements
-
+#### Additional Marketplace files
 * The Technology Partner's own End User License Agreement (EULA) is required for all Marketplace offerings.
-* You may add one video to your Marketplace tile.
-  - To add a video to your Marketplace listing, it must meet the following requirements:
+
+#### Media carousel requirements
+If you've followed the commands on this page to create your listing using the `-v2` flag, you will have access to a media carousel on your tile. The media carousel has specific requirements for images and videos:
+
+* You may add one video to your tile.
+  - To add a video to your listing, it must meet the following requirements:
     - File type: MP4 H.264
     - File size: Max 1 video; 1 GB maximum size
     - File dimensions: The aspect ratio must be exactly 16:9, and the resolution must be 1920x1080 or higher
@@ -247,7 +250,7 @@ The ddev commands in the previous section generate a skeleton of folders and fil
     - Run time: Recommendation of 60 seconds or less
     - Description: 300 characters maximum
   - Do not upload your video to your pull request. Instead, send a copy of your video (or a download link) to marketplace@datadog.com. Our team will respond with a `vimeo_link` that you can add to your manifest.json file to include the video in your listing. 
-* You can display up to 8 images (7 if you're including a video) on your Marketplace tile in the media carousel. 
+* You can display up to 8 images (7 if you're including a video) on your tile in the media carousel. 
   - Images must meet the following requirements to display in the media carousel: 
     - File type: .jpg or .png
     - File size: ~500 KB per image, with a max of 1 MB per image
