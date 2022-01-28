@@ -91,7 +91,7 @@ For the example below, the span `rack.request` is the entry-point span of the tr
 
 ### Service entry span
 
-A span is a service entry span when it is the entrypoint method for a request to a service. You can visualize this within Datadog APM when the color of the immediate parent on a flame graph is a different color.  Services are also listed on the right when viewing a flame graph.
+A span is a service entry span when it is the entrypoint method for a request to a service. You can visualize this within Datadog APM when the color of the immediate parent on a flame graph is a different color. Services are also listed on the right when viewing a flame graph.
 
 ### Trace Root span
 
