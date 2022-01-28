@@ -14,24 +14,19 @@ further_reading:
 
 ## Get started
 
-1. **Install or update the Datadog Agent** to at least version 7.31.0: 
-
+1. **Download the [Datadog Java library][1]**, at least version 0.94.0:
    ```
    wget -O dd-java-agent.jar 'https://github.com/DataDog/dd-trace-java/releases/latest/download/dd-java-agent.jar'
    ```
 
-   For other ways of installing the Agent, for example in container environments, see the [Agent in-app documentation][1].
+   For information about which language and framework versions are supported by the library, see [Compatibility][2].
 
-2. **Install the [Datadog tracing library][2]**, at least version 0.92.0.
-
-   For information about which language and framework versions are supported by the library, see [Compatibility][3].
-
-3. **Run your Java application with Application Security enabled.** From the command line:
+2. **Run your Java application with Application Security enabled.** From the command line:
    ```
    java -javaagent:/path/to/dd-java-agent.jar -Ddd.appsec.enabled=true -Ddd.service=<MY SERVICE> -Ddd.env=<MY_ENV> -jar path/to/app.jar
    ```
 
-   or one of the following methods, depending on where your application runs.
+   Or one of the following methods, depending on where your application runs:
 
    {{< tabs >}}
 {{% tab "Docker CLI" %}}
@@ -106,6 +101,5 @@ java -javaagent:dd-java-agent.jar \
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/account/settings#agent
-[2]: https://github.com/DataDog/dd-trace-java/releases
-[3]: /security_platform/application_security/setup_and_configure/#compatibility
+[1]: https://github.com/DataDog/dd-trace-java/releases
+[2]: /security_platform/application_security/setup_and_configure/#compatibility
