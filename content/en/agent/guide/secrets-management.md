@@ -220,7 +220,7 @@ instances:
 
 Many Datadog integrations require credentials to retrieve metrics. To avoid hardcoding these credentials in an [Autodiscovery template][1], you can use secrets management to separate them from the template itself.
 
-Starting with version 7.32.0, the [helper script][2] is available in the Agent's container image as `/readsecret_multiple_providers.sh`, and you can use it to fetch secrets from files and Kubernetes secrets. The two scripts provided in previous versions (`readsecret.sh` and `readsecret.py`) are still supported, but can only read from files.
+Starting with version 7.32.0, the [helper script][2] is available in the Agent's container image as `/readsecret_multiple_providers.sh`, and you can use it to fetch secrets from files in addition to Kubernetes Secrets. The two scripts provided in previous versions (`readsecret.sh` and `readsecret.py`) are supported, but can only read from files.
 
 ### Script for reading from multiple secret providers
 
@@ -232,7 +232,7 @@ The script `readsecret_multiple_providers.sh` can be used to read from both file
 | Read from files        | `ENC[file@/path/to/file]`                        |
 | Kubernetes Secrets     | `ENC[k8s_secret@some_namespace/some_name/a_key]` |
 
-To utilize this executable set the environment variable:
+To use this executable, set the environment variable `DD_SECRET_BACKEND_COMMAND` as follows:
 ```
 DD_SECRET_BACKEND_COMMAND=/readsecret_multiple_providers.sh
 ```
@@ -240,10 +240,10 @@ DD_SECRET_BACKEND_COMMAND=/readsecret_multiple_providers.sh
 #### Read from file example
 The Agent can read a specified file relative to the path provided. This file can be brought in from [Kubernetes Secrets](#kubernetes-secrets), [Docker Swarm Secrets](#docker-swarm-secrets), or any other custom method.
 
-If the Agent container has the file `/etc/secret-volume/password` whose contents were the plaintext password, this would be referenced with a notation like `ENC[file@/etc/secret-volume/password]`.
+If the Agent container has the file `/etc/secret-volume/password` whose contents are the plaintext password, you can reference this with a notation like `ENC[file@/etc/secret-volume/password]`.
 
-##### Kubernetes secrets
-Kubernetes supports [exposing secrets as files][3] inside a pod. For example: if the `Secret: test-secret` has the data `db_prod_password: example`, by mounting the Secret into the Agent container like so:
+##### Kubernetes Secrets
+Kubernetes supports [exposing Secrets as files][3] inside a pod. Consider an example. A Secret, `Secret: test-secret`, has the data `db_prod_password: example`. This Secret is mounted to the Agent container according to the following configuration:
 ```yaml
   containers:
     - name: agent
@@ -257,21 +257,21 @@ Kubernetes supports [exposing secrets as files][3] inside a pod. For example: if
       secret:
         secretName: test-secret
 ```
-The Agent container will contain the file `/etc/secret-volume/db_prod_password` with the contents of `example`. This would be referenced in the configuration by `ENC[file@/etc/secret-volume/db_prod_password]`.
+In this example, the Agent container contains the file `/etc/secret-volume/db_prod_password` with the contents of `example`. This is referenced in the configuration by using `ENC[file@/etc/secret-volume/db_prod_password]`.
 
 **Notes:**
 - The Secret must exist in the same namespace as the pod it is being mounted in.
-- Datadog recommends using a dedicated folder instead of `/var/run/secrets`, as the script will be able to access all subfolders, including the sensitive `/var/run/secrets/kubernetes.io/serviceaccount/token` file.
+- The script is able to access all subfolders, including the sensitive `/var/run/secrets/kubernetes.io/serviceaccount/token`. As such, Datadog recommends using a dedicated folder instead of `/var/run/secrets`.
 
 ##### Docker Swarm secrets
-[Docker swarm secrets][4] are mounted in the `/run/secrets` folder. So the Docker secret `db_prod_passsword` would be located in `/run/secrets/db_prod_password` of the Agent container. This would be referenced in the configuration by `ENC[file@/run/secrets/db_prod_password]`.
+[Docker swarm secrets][4] are mounted in the `/run/secrets` folder. For example, the Docker secret `db_prod_passsword` is located in `/run/secrets/db_prod_password` in the Agent container. This would be referenced in the configuration with `ENC[file@/run/secrets/db_prod_password]`.
 
 #### Read from Kubernetes Secret example
-This setup allows the Agent to directly read Kubernetes Secrets within its own and *other* namespaces. However, to do so the Agent's `ServiceAccount` must be granted permissions with the appropriate `Roles` and `RoleBindings` to do so.
+The following setup allows the Agent to directly read Kubernetes Secrets within both its own and *other* namespaces. Note that to do this, the Agent's `ServiceAccount` must be granted permissions with the appropriate `Roles` and `RoleBindings`.
 
-If the `Secret: database-secret` existed in the `Namespace: database`, and contained the data `password: example` this would be referenced in the configuration by `ENC[k8s_secret@database/database-secret/password]`. This will have the Agent pull this Secret directly from Kubernetes, which can be helpful when referencing a Secret that exists in a different namespace than the Agent is in.
+If `Secret: database-secret` exists in `Namespace: database` and contains the data `password: example`, this is referenced in the configuration with `ENC[k8s_secret@database/database-secret/password]`. With this setup, the Agent pulls this Secret directly from Kubernetes, which can be helpful when referencing a Secret that exists in a different namespace than the Agent is in.
 
-This does require additional permissions that are manually granted to the Agent's Service Account. For example the RBAC policy of:
+This requires additional permissions that are manually granted to the Agent's Service Account. For example, consider the following the RBAC policy:
 ```yaml
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
@@ -299,35 +299,35 @@ roleRef:
   name: datadog-secret-reader
   apiGroup: ""
 ```
-This `Role` would give access to the `Secret: database-secret` in the `Namespace: database`. The `RoleBinding` links up this permission to the `ServiceAccount: datadog-agent` in the `Namespace: default`. This will need to be manually added to your cluster with respect to your resources deployed.
+This `Role` gives access to the `Secret: database-secret` in the `Namespace: database`. The `RoleBinding` links up this permission to the `ServiceAccount: datadog-agent` in the `Namespace: default`. This needs to be manually added to your cluster with respect to your resources deployed.
 
 ### (Legacy) Scripts for reading from files
-In version 7.32 of the Agent the script `readsecret_multiple_providers.sh` was added. This is the recommended script to use, rather than the legacy ones introduced in 6.12,  `/readsecret.py` and `/readsecret.sh`. However, `/readsecret.py` and `/readsecret.sh` are still included and supported in the Agent to read files.
+Datadog Agent v7.32 introduces the `readsecret_multiple_providers.sh` script. Datadog recommends that you use this script instead of `/readsecret.py` and `/readsecret.sh` from Agent v6.12. Note that `/readsecret.py` and `/readsecret.sh` are still included and supported in the Agent to read files.
 
 #### Usage
-These scripts require a folder passed as an argument. Secret handles are interpreted as file names, relative to this folder. The script refuses to access any file out of the root folder specified (including symbolic link targets) to avoid leaking sensitive information.
+These scripts require a folder passed as an argument. Secret handles are interpreted as file names,\ relative to this folder. To avoid leaking sensitive information, these scripts refuse to access any file out of the root folder specified (including symbolic link targets).
 
-This script is incompatible with [OpenShift restricted SCC operations][5] and requires that the Agent runs as the `root` user.
+These scripts are incompatible with [OpenShift restricted SCC operations][5] and require that the Agent runs as the `root` user.
 
 ##### Docker
-[Docker swarm secrets][4] are mounted in the `/run/secrets` folder. These can be read by passing the following environment variables to your Agent container:
+[Docker Swarm secrets][4] are mounted in the `/run/secrets` folder. These can be read by passing the following environment variables to your Agent container:
 
 ```
 DD_SECRET_BACKEND_COMMAND=/readsecret.py
 DD_SECRET_BACKEND_ARGUMENTS=/run/secrets
 ```
 
-This will have the Datadog Agent read any secret files located in the `/run/secrets` directory. For example the configuration `ENC[password]` would have the Agent search for the `/run/secrets/password` file.
+With this setup, the Datadog Agent reads any secret files located in the `/run/secrets` directory. For example, the configuration `ENC[password]` would have the Agent search for the `/run/secrets/password` file.
 
 ##### Kubernetes
-Kubernetes supports [exposing secrets as files][3] inside a pod. If your secrets are mounted in `/etc/secret-volume`, use the following environment variables:
+Kubernetes supports [exposing Secrets as files][3] inside a pod. For example, if your Secrets are mounted in `/etc/secret-volume`, use the following environment variables:
 
 ```
 DD_SECRET_BACKEND_COMMAND=/readsecret.py
 DD_SECRET_BACKEND_ARGUMENTS=/etc/secret-volume
 ```
 
-This will have the Datadog Agent read any secret files located in the `/etc/secret-volume` directory. For example the configuration `ENC[password]` would have the Agent search for the `/etc/secret-volume/password` file.
+With this setup, the Datadog Agent reads any secret files located in the `/etc/secret-volume` directory. For example, the configuration `ENC[password]` would have the Agent search for the `/etc/secret-volume/password` file.
 
 ## Troubleshooting
 
@@ -523,16 +523,15 @@ When reading Secrets directly from Kubernetes you can double check your permissi
 kubectl auth can-i get secret/<SECRET_NAME> -n <SECRET_NAMESPACE> --as system:serviceaccount:<AGENT_NAMESPACE>:<AGENT_SERVICE_ACCOUNT>
 ```
 
-In the previous [Kubernetes Secrets example](#read-from-kubernetes-secret-example) with:
-- `Secret: database-secret` in the `Namespace: database`
-- `ServiceAccount: datadog-agent` in the `Namespace: default`
+Consider the previous [Kubernetes Secrets example](#read-from-kubernetes-secret-example), where the Secret `Secret:database-secret` exists in the `Namespace: database`, and the Service Account `ServiceAccount:datadog-agent` exists in the `Namespace: default`. 
 
-The command would look like:
+In this case, use the following command:
+
 ```
 kubectl auth can-i get secret/database-secret -n database --as system:serviceaccount:default:datadog-agent
 ```
 
-This should just return a simple yes/no if the permissions are valid for the Agent to view this Secret.
+This command returns whether the permissions are valid for the Agent to view this Secret.
 
 ## Further Reading
 
