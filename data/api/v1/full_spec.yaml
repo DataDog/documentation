@@ -16313,6 +16313,9 @@ components:
       - WHITE_ON_RED
       - WHITE_ON_YELLOW
       - YELLOW_ON_WHITE
+      - BLACK_ON_LIGHT_YELLOW
+      - BLACK_ON_LIGHT_GREEN
+      - BLACK_ON_LIGHT_RED
     WidgetRequestStyle:
       description: Define request widget style.
       properties:
