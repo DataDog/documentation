@@ -19,9 +19,9 @@ Application Security is currently in public beta. See the <a href="https://app.d
 
 {{< img src="/security_platform/application_security/app-sec-landing-page.png" alt="The Application Security landing page in Datadog, which displays your services, suspicious requests, and detected signals" width="75%">}}
 
-Datadog Application Security monitors application-level threats to identify attacks that target code-level vulnerabilities, such as Server-Side-Request-Forgery (SSRF), SQL injection, Log4Shell, and Reflected Cross-Site-Scripting (XSS).
+Datadog Application Security monitors application-level attacks aiming to exploit code-level vulnerabilities, such as Server-Side-Request-Forgery (SSRF), SQL injection, Log4Shell, and Reflected Cross-Site-Scripting (XSS).
 
-Application Security leverages Datadog [tracing libraries][1], the [Datadog Agent][2], and in-app detection rules to detect threats in your application environment and trigger signals whenever a vulnerability or attack occurs.
+Application Security leverages Datadog [tracing libraries][1], the [Datadog Agent][2], and in-app detection rules to detect threats in your application environment and trigger signals whenever an attack targets your production system, or a vulnerability is triggered from the code.
 
 For example, if a `HIGH` or `CRITICAL` threat is detected, a security signal is generated in Datadog. Notifications for these signals can be sent to Slack or email, or Pagerduty, for instance. Your team can access these signals in Datadog and begin investigation by leveraging the deep observability data provided by Application Security and APM distributed tracing in one panel.
 
