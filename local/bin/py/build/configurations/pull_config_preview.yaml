@@ -327,14 +327,14 @@
               tag: "Homepage"
               text: "Explore Datadog RUM"
     - action: pull-and-push-file
-      branch: master
+      branch: maxep/RUMM-1769/documentation-snippets
       globs:
       - 'docs/configure_rum_android_sdk.md'
       options:
         dest_path: '/real_user_monitoring/android/'
         file_name: 'advanced_configuration.md'
         front_matters:
-          dependencies: ["https://github.com/DataDog/dd-sdk-android/blob/master/docs/configure_rum_android_sdk.md"]
+          dependencies: ["https://github.com/DataDog/dd-sdk-android/blob/maxep/RUMM-1769/documentation-snippets/docs/configure_rum_android_sdk.md"]
           title: RUM Android Advanced Configuration
           kind: documentation
           further_reading:
@@ -486,7 +486,7 @@
               text: "Learn how to explore your logs"
 
     - action: pull-and-push-file
-      branch: master
+      branch: maxep/RUMM-1769/documentation-snippets
       globs:
       - 'docs/trace_collection.md'
       options:
@@ -510,7 +510,7 @@
     contents:
 
     - action: pull-and-push-file
-      branch: master
+      branch: maxep/RUMM-1769/documentation-snippets
       globs:
       - 'docs/log_collection.md'
       options:
@@ -551,7 +551,7 @@
               text: "Explore your services, resources, and traces"
 
     - action: pull-and-push-folder
-      branch: master
+      branch: maxep/RUMM-1769/documentation-snippets
       globs:
         - docs/rum_collection/*
       options:
