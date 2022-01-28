@@ -6,6 +6,9 @@ further_reading:
 - link: "/continuous_integration/setup_pipelines/jenkins/"
   tag: "Documentation"
   text: "Set up Tracing on a Jenkins Pipeline"
+- link: "https://www.datadoghq.com/blog/jenkins-testing/"
+  tag: "Blog"
+  text: "Run Datadog Synthetic tests in your Jenkins pipelines"
 ---
  
 ## Overview

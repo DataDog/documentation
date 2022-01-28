@@ -36,6 +36,27 @@ $ddpurple:    #632CA6;
       }
     }
   }
+  .beta{
+    span{
+      color: #2C80DE;
+      font-size:18px;
+      line-height: 18px;
+      font-weight:600;
+      padding-left:7px;
+    }
+  }
+  .beta-callout-card{
+    background: rgba(51, 153, 204, 0.1);
+    border-radius: 16px;
+    .btn{
+      width: 138px;
+      height: 34px;
+      &:hover {
+        background: linear-gradient(134.72deg, #3023AE 0%, #C024B6 101.5%);
+        color: #fff;
+      }
+    }
+  }
 }
 
 .filters {
