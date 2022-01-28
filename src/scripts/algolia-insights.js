@@ -104,6 +104,7 @@ const getAlgoliaSearchDataByUrl = (url) => {
 */
 export const handleAlgoliaClickedObjectEventOnAutocomplete = (url) => {
   if (window._DATADOG_SYNTHETICS_BROWSER === undefined) {
+    console.log('in handle alg autocomplete event send')
     initializeAlogliaInsights();
     const urlPathnameWithHash = getUrlWithPathnameAndHash(url);
   
