@@ -1,6 +1,6 @@
    The library collects security data from your application and sends it to the Agent, which sends it to Datadog, where [out-of-the-box detection rules][202] flag attacker techniques and potential misconfigurations so you can take steps to remediate. 
    
-1.  **To see Application Security threat detection in action, send known attack patterns to your application**. The *Security Scanner Detected* rule features three cases:
+1.  **To see Application Security threat detection in action, send known attack patterns to your application**. The [Security Scanner Detected][203] rule features three cases:
 
       - INFO / Random scan
       - LOW / Real routes targeted
@@ -24,3 +24,4 @@
 
 [201]: https://app.datadoghq.com/security/appsec
 [202]: /security_platform/default_rules/#cat-application-security
+[203]: /security_platform/default_rules/security-scan-detected/
