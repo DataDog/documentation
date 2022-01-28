@@ -333,10 +333,13 @@ The OTLP ingestion is configured through the `datadog.yaml` file. The following 
 ```yaml
 experimental:
   otlp:
-    grpc_port: 4317
-    http_port: 4318
+    receiver:
+      protocols:
+        grpc:
+        http:
 ```
 
+The `receiver` section follows the [OpenTelemetry Collector OTLP receiver configuration schema][25].
 You can also configure the endpoints by providing the port through the `DD_OTLP_GRPC_PORT` and `DD_OTLP_HTTP_PORT` environment variables. These must be passed to both the core Agent and trace Agent. 
 
 Check [the OpenTelemetry instrumentation documentation][18] to understand how to point your instrumentation to the Agent, and [contact Datadog support][19] to get more information on this feature and provide feedback.
@@ -381,3 +384,4 @@ Datadog recommends you use the OpenTelemetry Collector Datadog exporter or the O
 [22]: /tracing/setup_overview/open_standards/python#opentelemetry
 [23]: /tracing/setup_overview/open_standards/ruby#opentelemetry
 [24]: /tracing/setup_overview/open_standards/nodejs#opentelemetry
+[25]: https://github.com/open-telemetry/opentelemetry-collector/blob/main/receiver/otlpreceiver/config.md
