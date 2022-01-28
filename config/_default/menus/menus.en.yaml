@@ -2484,7 +2484,7 @@ main:
     parent: cloud_workload_security
     identifier: cws_agent_expressions
     weight: 302
-  - name: Workload Security Rules
+  - name: Workload Security Detection Rules
     url: security_platform/cloud_workload_security/workload_security_rules
     parent: cloud_workload_security
     identifier: cws_workload_security_rules
@@ -2504,13 +2504,13 @@ main:
     parent: cloud_workload_security
     identifier: cws_workload_signals_explorer
     weight: 306
-  - name: Security Rules
+  - name: Detection Rules
     url: security_platform/detection_rules/
     parent: security_platform
     identifier: security_rules
     weight: 4
-  - name: Notification Profiles
-    url: security_platform/notification_profiles/
+  - name: Notification Rules
+    url: security_platform/notification_rules/
     parent: security_platform
     weight: 5
   - name: Signals Explorer
