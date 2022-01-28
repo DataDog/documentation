@@ -401,14 +401,14 @@
   - repo_name: browser-sdk
     contents:
     - action: pull-and-push-file
-      branch: alai97/rum-documentation-link-cleanup
+      branch: main
       globs:
       - 'packages/rum/README.md'
       options:
         dest_path: '/real_user_monitoring/browser/'
         file_name: '_index.md'
         front_matters:
-          dependencies: ["https://github.com/DataDog/browser-sdk/blob/alai97/rum-documentation-link-cleanup/packages/rum/README.md"]
+          dependencies: ["https://github.com/DataDog/browser-sdk/blob/main/packages/rum/README.md"]
           title: RUM Browser Monitoring
           kind: documentation
           aliases:
