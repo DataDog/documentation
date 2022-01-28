@@ -211,7 +211,7 @@ Wall Time
 Once enabled, the following profile types are collected:
 
 CPU
-: Shows the time each function spent running on the CPU, including Ruby and native code.
+: Shows the time each function spent running on the CPU.
 
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
