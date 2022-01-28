@@ -2539,16 +2539,6 @@ main:
     parent: application_security
     identifier: appsec_configuration
     weight: 403
-  - name: Custom Signal Rules
-    url: security_platform/application_security/custom_signal_rules/
-    parent: application_security
-    identifier: appsec_custom_signal_rules
-    weight: 404
-  - name: Troubleshooting
-    url: security_platform/application_security/troubleshooting/
-    parent: application_security
-    identifier: appsec_troubleshooting
-    weight: 405
   - name: Security Rules
     url: security_platform/detection_rules/
     parent: security_platform
