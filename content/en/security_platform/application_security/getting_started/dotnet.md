@@ -18,7 +18,7 @@ further_reading:
 
    For information about which language and framework versions are supported by the library, see [Compatibility][2].
 
-2. **Enable Application Security Monitoring** by setting the `DD_APPSEC_ENABLED` environment variable to `true`. For example, on Windows self-hosted, run the following PowerShell snippet as part of your application start up script
+2. **Enable Application Security Monitoring** by setting the `DD_APPSEC_ENABLED` environment variable to `true`. For example, on Windows self-hosted, run the following PowerShell snippet as part of your application start up script:
    ```
    $target=[System.EnvironmentVariableTarget]::Process
    [System.Environment]::SetEnvironmentVariable("DD_APPSEC_ENABLED","true",$target)
@@ -52,7 +52,7 @@ net stop was /y
 net start w3svc
 ```
 
-**Or**, For IIS services exclusively, on WAS and W3SVC with Powershell as an administrator, run:
+**Or**, for IIS services exclusively, on WAS and W3SVC with Powershell as an administrator, run:
 
 ```
 $appsecPart = "DD_APPSEC_ENABLED=true"
