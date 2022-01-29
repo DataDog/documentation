@@ -113,7 +113,7 @@ You can customize alert conditions to define the circumstances under which you w
 * An alert is triggered if any assertion fails for `X` minutes from any `n` of `N` locations. This alerting rule allows you to specify for how much time and on how many locations a test needs to fail before triggering the notification.
 * Retry `X` times before location is marked as failed. This allows you to define how many consecutive test failures need to happen for a location to be considered as failed. By default, there is a 300ms wait before retrying a test that failed. This interval can be configured with the [API][6].
 
-{{< img src="synthetics/browser_tests/alerting_rules.png" alt="Browser test alerting rule"  >}}
+{{< img src="synthetics/browser_tests/alerting_rules.png" alt="Browser test alerting rule" >}}
 
 ### Notify your team
 
@@ -138,13 +138,13 @@ A notification is sent according to the set of alerting conditions. To configure
 
 Tests can be only recorded from [Google Chrome][10]. To record your test, download the [Datadog Record Test extension for Google Chrome][11].
 
-{{< img src="synthetics/browser_tests/browser_check_record_test2.png" alt="Browser test record test"  >}}
+{{< img src="synthetics/browser_tests/browser_check_record_test2.png" alt="Browser test record test" >}}
 
 1. Optionally, select **Open in a pop-up** at the upper right of the page to open your test recording in a separate pop-up window. This is useful if your application does not support being opened in an iframe or if you want to avoid sizing issues at recording. You can also open the pop-up in **Incognito mode** to start recording your test from a fresh browser free of already logged-in sessions, cookies from your existing browser, and more.
 2. Click **Start Recording** to begin recording your browser test.
 3. As you click on your application going through the user journey you want to monitor, your actions are automatically recorded and used to create [steps][12] within your browser test scenario on the left.
 4. In addition to the automatically recorded steps, you can also use the [steps][12] available in the upper left corner to enrich your scenario:
-    {{< img src="synthetics/browser_tests/manual_steps.png" alt="Browser Test steps"  style="width:80%;">}}
+    {{< img src="synthetics/browser_tests/manual_steps.png" alt="Browser Test steps" style="width:80%;" >}}
 
     **Note**: You should always make sure to end your browser test with an [assertion][13] to confirm the journey executed by the browser test resulted in the expected state.
 5. Once you have finished your scenario, click on **Save and Launch Test**.
@@ -155,9 +155,14 @@ By default, only users with the [Datadog Admin and Datadog Standard roles][14] c
 
 If you have access to the [custom role feature][15], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions.
 
-### Select roles
+### Restrict access
 
-Restrict access to your browser test for yourself and custom roles by clicking the roles in the **Everyone in my org** dropdown menu.
+<div class="alert alert-warning">
+Access restriction is available for customers with <a href="https://docs.datadoghq.com/account_management/rbac/?tab=datadogapplication#create-a-custom-role">custom roles</a> enabled on their accounts.</div>
+
+You can restrict access to a browser test based on the roles in your organization. When creating a browser test, choose which roles (in addition to your user) can read and write your test. 
+
+{{< img src="synthetics/browser_tests/restrict_access.png" alt="Set permissions for your test" style="width:70%;" >}}
 
 ## Further Reading
 
