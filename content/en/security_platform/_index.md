@@ -14,6 +14,10 @@ further_reading:
 - link: "/security_platform/cloud_workload_security/getting_started"
   tag: "Documentation"
   text: "Uncover kernel-level threats with Cloud Workload Security"
+- link: "https://www.datadoghq.com/blog/cyber-attack-simulation-with-stratus-red-team/"
+  tag: "Blog"
+  text: "Elevate AWS threat detection with Stratus Red Team"
+  
 ---
 
 {{< site-region region="gov" >}}
