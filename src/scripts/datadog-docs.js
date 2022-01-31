@@ -181,7 +181,7 @@ function getPathElement(event = null) {
 
     // if security rules section that has links to hashes, #cat-workload-security etc. try and highlight correct sidenav
     if (path.includes('security_platform/default_rules')) {
-        const ref = (event) ? event.target.href : window.location.hash;
+        const ref = ((event) ? event.target.href : window.location.hash) || window.location.hash;
         if(ref) {
           sideNavPathElement = document.querySelector(
             `.side [href*="${ref}"]`
