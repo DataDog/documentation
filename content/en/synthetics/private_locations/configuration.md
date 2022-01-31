@@ -97,10 +97,19 @@ Discard SSL errors when private location is using a proxy to send requests to Da
 **Default**: `10`<br>
 Maximum number of tests executed in parallel.
 
+`enableStatusProbes`
+: **Type**: <br>
+Enables the readiness and liveness of private location probes. 
+
 `maxTimeout`
 : **Type**: Number <br>
 **Default**: `60000`<br>
 Maximum test execution duration for API tests (in milliseconds).
+
+`statusProbesPort`
+: **Type**: Number <br>
+**Default**: `8080`<br>
+Overrides the readiness and liveness of private location probe ports. 
 
 ## Private root certificates
 

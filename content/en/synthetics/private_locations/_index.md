@@ -525,6 +525,10 @@ livenessProbe:
 
 {{< /tabs >}}
 
+#### Additional configurations
+
+If you require a healthcheck endpoint, enable the readiness and liveness probes on Port `8080` in your private location deployment. For more information, see [Advanced configurations][15].
+
 ### Test your internal endpoint
 
 Once at least one private location container starts reporting to Datadog, the private location status is set to green:
