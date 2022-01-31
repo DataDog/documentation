@@ -13,3 +13,7 @@ kind: guide
     {{< nextlink href="/serverless/guide/forwarder_extension_migration" >}}Migrating from the Datadog Forwarder to the Datadog Lambda Extension{{< /nextlink >}}
     {{< nextlink href="/serverless/guide/extension_private_link" >}}Datadog Lambda Extension AWS PrivateLink Setup{{< /nextlink >}}
 {{< /whatsnext >}}
+
+{{< whatsnext desc="Troubleshooting:" >}}
+    {{< nextlink href="/serverless/troubleshooting/serverless_tracing_and_webpack" >}}Node.js Lambda Tracing and Webpack Compatibility{{< /nextlink >}}
+{{< /whatsnext >}}

@@ -5,6 +5,8 @@ further_reading:
 - link: '/serverless/installation/nodejs'
   tag: 'Documentation'
   text: 'Instrumenting Node.js Applications'
+aliases:
+    - /serverless/troubleshooting/serverless_tracing_and_webpack
 ---
 
 # Compatibility
