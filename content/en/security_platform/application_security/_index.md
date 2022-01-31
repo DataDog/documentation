@@ -14,7 +14,7 @@ further_reading:
 ---
 
 <div class="alert alert-warning">
-Application Security is currently in public beta. See the <a href="https://app.datadoghq.com/security/appsec">in-app instructions</a> to get started.
+Application Security is in public beta. See the <a href="https://app.datadoghq.com/security/appsec">in-app instructions</a> to get started.
 </div>
 
 {{< img src="/security_platform/application_security/app-sec-landing-page.png" alt="A security signal panel in Datadog, which displays attack flows and flame graphs" width="75%">}}
@@ -23,9 +23,9 @@ Datadog Application Security monitors application-level attacks aiming to exploi
 
 Application Security leverages Datadog [tracing libraries][1], the [Datadog Agent][2], and in-app detection rules to detect threats in your application environment and trigger signals whenever an attack targets your production system, or a vulnerability is triggered from the code.
 
-For example, when a `HIGH` or `CRITICAL` threat is detected, a security signal is generated in Datadog. Notifications for these signals can be sent to Slack, email, or Pagerduty to notify your team and gain context of threats in real-time.
+For example, when a `HIGH` or `CRITICAL` threat is detected, a security signal is generated in Datadog. Notifications for these signals can be sent to Slack, email, or PagerDuty to notify your team and provide real-time context around threats.
 
-From onset of a threat, quickly pivot to investigate a security signal in Datadog. Leverage the deep observability data provided by Application Security and APM distributed tracing, in one view, to resolve application issues. Analyze attack flows, view flame graphs, and review correlated trace and log data to pinpoint application vulnerabilities. Eliminate context switching by flowing through application data into remediation steps, all within the same panel.
+From the onset of a threat, quickly pivot to investigate a security signal in Datadog. Leverage the deep observability data provided by Application Security and APM distributed tracing, in one view, to resolve application issues. Analyze attack flows, view flame graphs, and review correlated trace and log data to pinpoint application vulnerabilities. Eliminate context switching by flowing through application data into remediation steps, all within the same panel.
 
 With Application Security, you can cut through the noise of continuous trace data to focus on securing and protecting your environment.
 
@@ -33,7 +33,7 @@ With Application Security, you can cut through the noise of continuous trace dat
 
 Powered by provided [out-of-the-box rules][3], Application Security detects threats without manual configuration. If you're already using Datadog [APM][1], setup only requires setting one environment variable to get started.
 
-To start configuring your environment to detect threats with Application Security, follow the [Getting Started documentation][5]. Once configured, you can begin investigating and remediating security signals in the [Security Signals Explorer][7].
+To start configuring your environment to detect threats with Application Security, follow the [Getting Started documentation][5]. Once Application Security is configured, you can begin investigating and remediating security signals in the [Security Signals Explorer][7].
 
 ## Investigate and remediate security signals
 
