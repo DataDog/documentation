@@ -49,7 +49,7 @@ ENV DD_APPSEC_ENABLED=true
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-Update your configuration yaml file container for APM and add the AppSec env variable:
+Update your deployment configuration file for APM and add the Application Security environment variable:
 
 ```
 spec:
@@ -66,7 +66,7 @@ spec:
 {{% /tab %}}
 {{% tab "AWS ECS" %}}
 
-Update your ECS task definition JSON file, by adding this in the  environment section:
+Update your ECS task definition JSON file, by adding this in the environment section:
 
 ```
 "environment": [
@@ -81,7 +81,7 @@ Update your ECS task definition JSON file, by adding this in the  environment se
 {{% /tab %}}
 {{% tab "AWS Fargate" %}}
 
-Set the `-Ddd.appsec.enabled` flag or the `DD_APPSEC_ENABLED` environment variable to true in your service invocation:
+Set the `-Ddd.appsec.enabled` flag or the `DD_APPSEC_ENABLED` environment variable to `true` in your service invocation:
 
 ```
 java -javaagent:dd-java-agent.jar \

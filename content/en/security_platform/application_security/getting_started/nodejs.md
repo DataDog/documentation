@@ -14,7 +14,7 @@ further_reading:
 
 ## Get started
 
-1. **Update or install the latest Datadog NodeJS library package**, at least version 2.2.0, by running:
+1. **Update or install the latest Datadog NodeJS library package**, at least version 2.0.0, by running:
    ```
    npm install dd-trace
    ```

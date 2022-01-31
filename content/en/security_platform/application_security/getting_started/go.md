@@ -11,33 +11,41 @@ further_reading:
 ---
 
 {{% appsec-getstarted %}}
-- [CGO][1] and a C toolchain are enabled in your build environment.
+- [CGO][1] is enabled in your build environment, along with the C library headers and the C toolchain for your compilation target.
 
 ## Get started
 
-1. **Add or update your program's dependencies** with the latest version of the Datadog Go library, at least version 1.36.0:
-   ```
-   go get -v -u gopkg.in/DataDog/dd-trace-go.v1@v1.36.0
-   ```
-
-2. **Recompile your program by adding the `appsec` build tag** using the Go compiler option `-tags appsec`:
-   ```
-   go build -tags appsec my-program
+1. **Update your program's dependencies** with the latest version of the Datadog Go library (>= v1.36.0):
+   ```console
+   $ go get -v -u gopkg.in/DataDog/dd-trace-go.v1@v1.36.0
    ```
 
-3. **Redeploy your Go service and enable Application Security** by setting the `DD_APPSEC_ENABLED` environment variable to `true`:
+2. Make sure to be using one of the following APM tracing integrations:
+- [gRPC](https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/grpc#example-package-Server)
+- [net/http](https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http#example-package)
+- [Gorilla Mux](https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/gorilla/mux#example-package)
+- [Echo](https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/labstack/echo#example-package)
+- [Chi](https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi#example-package)
+- [HttpRouter](https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/julienschmidt/httprouter#example-package)
+
+3. **Recompile your program** while enabling AppSec and CGO:
+   ```console
+   $ env CGO_ENABLED=1 go build -v -tags appsec my-program
    ```
-   env DD_APPSEC_ENABLED=true ./my-program
+
+4. **Redeploy your Go service and enable Application Security** by setting the `DD_APPSEC_ENABLED` environment variable to `true`:
+   ```console
+   $ env DD_APPSEC_ENABLED=true ./my-program
    ```
    Or one of the following methods, depending on where your application runs:
 
    {{< tabs >}}
 {{% tab "Docker CLI" %}}
 
-Update your configuration container for APM by adding the following argument in your `docker run` command: 
+Add the environment variable value to your docker command line:
 
-```
-docker run [...] -e DD_APPSEC_ENABLED=true [...] 
+```console
+$ docker run -e DD_APPSEC_ENABLED=true [...]
 ```
 
 {{% /tab %}}
@@ -52,7 +60,7 @@ ENV DD_APPSEC_ENABLED=true
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-Update your configuration yaml file container for APM and add the AppSec env variable:
+Update your deployment configuration file for APM and add the Application Security environment variable:
 
 ```
 spec:
@@ -69,7 +77,7 @@ spec:
 {{% /tab %}}
 {{% tab "AWS ECS" %}}
 
-Update your ECS task definition JSON file, by adding this in the  environment section:
+Update your ECS task definition JSON file, by adding this in the environment section:
 
 ```
 "environment": [
@@ -93,4 +101,4 @@ Update your ECS task definition JSON file, by adding this in the  environment se
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://pkg.go.dev/cmd/cgo
+[1]: https://github.com/golang/go/wiki/cgo

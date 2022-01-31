@@ -5,9 +5,12 @@ code_lang: php
 type: multi-code-lang
 code_lang_weight: 40
 further_reading:
+    - link: 'https://github.com/DataDog/dd-appsec-php'
+      tag: 'GitHub' 
+      text: 'PHP Datadog AppSec Library source code'
     - link: 'https://github.com/DataDog/dd-trace-php'
       tag: 'GitHub'
-      text: 'PHP Datadog Library source code'
+      text: 'PHP Datadog Tracer Library source code'
 ---
 
 {{% appsec-getstarted %}}
@@ -59,7 +62,7 @@ spec:
 {{% /tab %}}
 {{% tab "AWS ECS" %}}
 
-Update your ECS task definition JSON file, by adding this in the  environment section:
+Update your ECS task definition JSON file, by adding this in the environment section:
 
 ```
 "environment": [
