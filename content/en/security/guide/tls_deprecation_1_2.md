@@ -6,21 +6,51 @@ kind: guide
 
 ## Overview
 
-Transport Layer Security (TLS) is a critical security protocol used to protect web traffic. It provides confidentiality and integrity of data in transit between clients and servers exchanging information. Datadog is disabling support for older versions of TLS, below 1.2 (SSLv3, TLS v1.0, TLS v1.2) across public facing Datadog applications, beginning March 31, 2022. If you use unsupported clients to connect to Datadog after the older protocols are disabled, you will receive connection error messages.
+Transport Layer Security (TLS) is a critical security protocol used to protect web traffic. It provides confidentiality and integrity of data in transit between clients and servers exchanging information. Datadog is disabling support for older versions of TLS, below 1.2 (SSLv3, TLS v1.0, TLS v1.1) across public facing Datadog applications, beginning March 31, 2022. If you use unsupported clients to connect to Datadog after the older protocols are disabled, you will receive connection error messages.
 
 ### Reason for deprecation
 
 These protocols are being deprecated to ensure that customers connect to Datadog using secure connection channels. This is in accordance with a decision from the Internet Engineering Task Force (IETF) to deprecate these protocols as of March 25, 2021. ([https://datatracker.ietf.org/doc/rfc8996/][1])
+## How to check if my client is compatible?
 
+Using your client of choice visit https://www.howsmyssl.com/s/api.html and look at the `tls_version` key to determine the most recent supported version, see instructions [here](https://www.howsmyssl.com/s/api.html).
 ## Browser support
 
 Modern browsers have had support for TLS 1.2 for a while. See the "Can I use..." [compatibility matrix][2] to determine if your specific browser and version are affected.
+## Agent support
 
-## Language support
+### Agent v6 and v7
 
+All versions of Agent v6 and v7 support TLS 1.2.
+
+### Agent v5
+
+#### Packaged/containerized Agent v5
+
+All versions of the Agent v5 installed with:
+
+* the DEB/RPM packages
+* the Windows MSI installer
+* the official container image
+
+support TLS 1.2.
+
+#### Agent v5 source install
+
+When installed with the [source install script](https://github.com/DataDog/dd-agent/blob/5.32.8/packaging/datadog-agent/source/setup_agent.sh), the Agent v5 relies on the system's Python and OpenSSL. Therefore, support for TLS 1.2 depends on the versions of Python and OpenSSL installed on the system.
+
+To determine if your system's Python supports TLS 1.2 (and therefore if the source-installed Agent supports TLS 1.2), run: `python -c "import json, urllib2; print json.load(urllib2.urlopen('https://www.howsmyssl.com/a/check'))['tls_version']"` from a system shell, which outputs `TLS 1.2` if TLS 1.2 is supported, and an older TLS version or an error otherwise. If TLS 1.2 is not supported, upgrade your system's Python and OpenSSL or upgrade the Agent to v7.
+## Languages and tools support
+### Openssl
+
+OpenSSL is a library for general-purpose cryptography and secure communication used by many other tools like Python, Ruby, PHP, Curl... TLS v 1.2 has been supported since OpenSSL 1.0.1, see https://www.openssl.org/news/changelog.html#openssl-101.
 ### Python
 
-Starting in Python 3.10, the SSL module defaults to TLS 1.2 and the use of modern cipher suites, see [https://bugs.python.org/issue43998][3].
+Support for TLS v1.2 depends on the versions of Python and OpenSSL installed on the system:
+* Python 3.4+ for 3.x with OpenSSL 1.0.1+
+* Python 2.7.9+ for 2.x with OpenSSL 1.0.1+
+
+You can run: `python -c "import json, urllib2; print json.load(urllib2.urlopen('https://www.howsmyssl.com/a/check'))['tls_version']"` from a Python shell. If TLS v1.2 is not supported, upgrade your system's Python and OpenSSL.
 
 ### Golang
 
