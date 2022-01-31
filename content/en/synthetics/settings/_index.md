@@ -105,7 +105,7 @@ Access restriction is available for customers with <a href="https://docs.datadog
 
 You can restrict access to a global variable based on the roles in your organization. When creating a global variable, choose which roles (in addition to your user) can read and write your global variable in **Permissions settings**. 
 
-{{< img src="synthetics/settings/restrict-access2.png" alt="Restrict access to a global variable" style="width:100%;" >}}
+{{< img src="synthetics/settings/restrict_access.png" alt="Restrict access to a global variable" style="width:100%;" >}}
 
 ## Default settings
 
