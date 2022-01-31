@@ -23,7 +23,7 @@ further_reading:
    php dd-library-php-setup.php --php-bin all --tracer-version latest --appsec-version latest
    ```
 
-2. **Enable the library in your code** by restarting PHP-FPM or Apache. In a containerized environment, use the following configuation to enable Application Security:
+2. **Enable the library in your code** by restarting PHP-FPM or Apache. In a containerized environment, if you previously installed the library without enabling Application Security, you can optionally enable it after by setting the following environment variable:
    {{< tabs >}}
 {{% tab "Docker CLI" %}}
 
