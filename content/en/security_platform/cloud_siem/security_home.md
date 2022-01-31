@@ -12,7 +12,7 @@ further_reading:
 
 ## Overview
 
-The [Security Home][1] page is an entry point to your Cloud SIEM environment. Readily access logs that are analyzed to detect threats, signals generated from [default][2] or [custom][3] log detection rules, and threats that require attention and remediation. See the status of logging sources and configure new sources in one location.
+The [Security Home][1] page is an entry point to your Cloud SIEM (Security Information and Event Management) environment. Readily access logs that are analyzed to detect threats, signals generated from [default][2] or [custom][3] log detection rules, and threats that require attention and remediation. See the status of logging sources and configure new sources in one location.
 
 {{< img src="security_platform/security_monitoring/security_home/overview.png" alt="Security Home" width="75%">}}
 
