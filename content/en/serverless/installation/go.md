@@ -20,19 +20,15 @@ aliases:
 
 {{< img src="serverless/go-lambda-tracing.png" alt="Monitor Go Lambda Functions with Datadog"  style="width:100%;">}}
 
-## Required setup
+## Prerequisites
 
-If not already configured, install the [AWS integration][1]. This allows Datadog to ingest Lambda metrics from AWS. After you have installed the [AWS integration][1], follow these steps to instrument your application to send metrics, logs, and traces to Datadog.
-
-If you previously set up Datadog Serverless using the Datadog Forwarder, see the [installation instructions][2].
-
-If your Go Lambda functions are still using runtime `go1.x`, consider either [migrating][3] to `provided.al2` or using the [Datadog Forwarder][2] instead of the Datadog Lambda Extension.
+If your Go Lambda functions are still using runtime `go1.x`, you must either [migrate][1] to `provided.al2` or use the [Datadog Forwarder][2] instead of the Datadog Lambda Extension.
 
 ## Configuration
 
 ### Install the Datadog Lambda library
 
-Install the [Datadog Lambda library][4] locally by running the following command:
+Install the [Datadog Lambda library][3] locally by running the following command:
 
 ```
 go get github.com/DataDog/datadog-lambda-go
@@ -65,7 +61,7 @@ The latest `EXTENSION_VERSION` is {{< latest-lambda-layer-version layer="extensi
 
 Follow these steps to instrument the function:
 
-1. Set the environment variable `DD_API_KEY` to your Datadog API key from [API Management][5].
+1. Set the environment variable `DD_API_KEY` to your Datadog API key from [API Management][4].
 1. Set the environment variable `DD_TRACE_ENABLED` to `true`.
 1. Import the required packages in the file declaring your Lambda function handler.
 
@@ -115,11 +111,11 @@ Follow these steps to instrument the function:
 
 ### Unified service tagging
 
-Datadog recommends tagging your serverless applications with `DD_ENV`, `DD_SERVICE`, `DD_VERSION`, and `DD_TAGS`. See the [Lambda extension documentation][6] for more details.
+Datadog recommends tagging your serverless applications with `DD_ENV`, `DD_SERVICE`, `DD_VERSION`, and `DD_TAGS`. See the [Lambda extension documentation][5] for more details.
 
 ## Explore
 
-After configuring your function following the steps above, view your metrics, logs, and traces on the [Serverless homepage][7].
+After configuring your function following the steps above, view your metrics, logs, and traces on the [Serverless homepage][6].
 
 ## Monitor custom business logic
 
@@ -146,14 +142,6 @@ func myHandler(ctx context.Context, event MyEvent) (string, error) {
     "product:latte", "order:online" // Associated tags
   )
 
-  // Submit a custom metric with timestamp
-  ddlambda.MetricWithTimestamp(
-    "coffee_house.order_value", // Metric name
-    12.45, // Metric value
-    time.Now(), // Timestamp, must be within last 20 mins
-    "product:latte", "order:online" // Associated tags
-  )
-
   req, err := http.NewRequest("GET", "http://example.com/status")
 
   // Add the datadog distributed tracing headers
@@ -164,20 +152,19 @@ func myHandler(ctx context.Context, event MyEvent) (string, error) {
 }
 ```
 
-For more information, see the [Custom Metrics documentation][8].
+For more information, see the [Custom Metrics documentation][7].
 
-If your Lambda function is running in a VPC, follow the [Datadog Lambda Extension AWS PrivateLink Setup][9] guide to ensure that the extension can reach Datadog API endpoints.
+If your Lambda function is running in a VPC, follow the [Datadog Lambda Extension AWS PrivateLink Setup][8] guide to ensure that the extension can reach Datadog API endpoints.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /integrations/amazon_web_services/
+[1]: https://aws.amazon.com/blogs/compute/migrating-aws-lambda-functions-to-al2/
 [2]: /serverless/guide/datadog_forwarder_go
-[3]: https://aws.amazon.com/blogs/compute/migrating-aws-lambda-functions-to-al2/
-[4]: https://github.com/DataDog/datadog-lambda-go
-[5]: https://app.datadoghq.com/organization-settings/api-keys
-[6]: /serverless/libraries_integrations/extension/#tagging
-[7]: https://app.datadoghq.com/functions
-[8]: /serverless/custom_metrics?tab=go
-[9]: /serverless/guide/extension_private_link/
+[3]: https://github.com/DataDog/datadog-lambda-go
+[4]: https://app.datadoghq.com/organization-settings/api-keys
+[5]: /serverless/libraries_integrations/extension/#tagging
+[6]: https://app.datadoghq.com/functions
+[7]: /serverless/custom_metrics?tab=go
+[8]: /serverless/guide/extension_private_link/

@@ -45,6 +45,10 @@
       "description": "Create a new dashboard with a formulas and functions change widget"
     },
     {
+      "suffix": "_1024858348",
+      "description": "Create a new dashboard with a formulas and functions treemap widget"
+    },
+    {
       "suffix": "_2644712913",
       "description": "Create a new dashboard with a query value widget using the percentile aggregator"
     },
@@ -185,6 +189,10 @@
     {
       "suffix": "",
       "description": "Get all dashboards returns \"OK\" response"
+    },
+    {
+      "suffix": "_1773932563",
+      "description": "Get deleted dashboards returns \"OK\" response"
     }
   ],
   "CancelDowntime": [
@@ -501,6 +509,54 @@
     {
       "suffix": "",
       "description": "Get Usage Attribution returns \"OK\" response"
+    }
+  ],
+  "GetUsageCloudSecurityPostureManagement": [
+    {
+      "suffix": "",
+      "description": "Get hourly usage for CSPM returns \"OK\" response"
+    }
+  ],
+  "GetUsageInternetOfThings": [
+    {
+      "suffix": "",
+      "description": "Get hourly usage for IoT returns \"OK\" response"
+    }
+  ],
+  "GetUsageSNMP": [
+    {
+      "suffix": "",
+      "description": "Get hourly usage for SNMP devices returns \"OK\" response"
+    }
+  ],
+  "GetUsageAnalyzedLogs": [
+    {
+      "suffix": "",
+      "description": "Get hourly usage for analyzed logs returns \"OK\" response"
+    }
+  ],
+  "GetIncidentManagement": [
+    {
+      "suffix": "",
+      "description": "Get hourly usage for incident management returns \"OK\" response"
+    }
+  ],
+  "GetUsageIndexedSpans": [
+    {
+      "suffix": "",
+      "description": "Get hourly usage for indexed spans returns \"OK\" response"
+    }
+  ],
+  "GetIngestedSpans": [
+    {
+      "suffix": "",
+      "description": "Get hourly usage for ingested spans returns \"OK\" response"
+    }
+  ],
+  "GetUsageProfiling": [
+    {
+      "suffix": "",
+      "description": "Get hourly usage for profiled hosts returns \"OK\" response"
     }
   ],
   "CreateWebhooksIntegrationCustomVariable": [

@@ -75,7 +75,7 @@ Here are examples of different log retention strategies and how to implement the
 2. Enable Online Archives for this index.
 3. Add an exclusion filter on the index `status:Debug` with an exclusion percentage set at 90%. This exclusion filter only applies to the index.
 
-{{< img src="logs/log_configuration/online_archives/retain.png" alt="How to exclude things from your online archive" style="width:100%;">}}
+{{< img src="logs/log_configuration/online_archives/retain.png" alt="How to exclude things from the index" style="width:100%;">}}
 
 ### Security team wants to retain all their logs in Online Archives but none in Indexes
 
@@ -83,7 +83,7 @@ Here are examples of different log retention strategies and how to implement the
 2. Enable Online Archives for this index.
 3. Add a `*` exclusion filter on the index to filter out all logs from the Index but not from the Online Archives.
 
-{{< img src="logs/log_configuration/online_archives/exclusion.png" alt="How to exclude things from your online archive" style="width:100%;">}}
+{{< img src="logs/log_configuration/online_archives/exclusion.png" alt="How to exclude things from the index" style="width:100%;">}}
 
 **Note:** Index order matters since `team:security` logs go into the first index that matches the index filter in case there are multiple indexes.
 

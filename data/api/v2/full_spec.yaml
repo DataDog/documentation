@@ -819,7 +819,7 @@ components:
         data:
           description: A list of Agent rules objects.
           items:
-            $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleAttributes'
+            $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleData'
           type: array
       type: object
     ContentEncoding:
@@ -5787,18 +5787,18 @@ components:
             dashboards_public_share: The ability to share dashboards externally.
             dashboards_read: The ability to view dashboards.
             dashboards_write: The ability to create and change dashboards.
-            events_read: The ability to read events data.
+            events_read: The ability to read Events data.
             incident_read: The ability to view incidents in Datadog.
-            incident_settings_write: The ability to configure incident settings.
+            incident_settings_write: The ability to configure Incidents settings.
             incident_write: The ability to create, view, and manage incidents in Datadog.
             metrics_read: The ability to view custom metrics.
             security_monitoring_filters_read: The ability to read Security Filters.
             security_monitoring_filters_write: The ability to create, edit and delete
               Security Filters.
-            security_monitoring_rules_read: The ability to read Detection rules.
+            security_monitoring_rules_read: The ability to read Detection Rules.
             security_monitoring_rules_write: The ability to create and edit Detection
-              rules.
-            security_monitoring_signals_read: The ability to view Security signals.
+              Rules.
+            security_monitoring_signals_read: The ability to view Security Signals.
             user_access_invite: The ability to invite other users to your organization.
             user_access_manage: The ability to disable users, manage user roles, and
               manage SAML-to-role mappings.
@@ -7035,6 +7035,10 @@ paths:
           description: Forbidden
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
       summary: Get archive order
       tags:
       - Logs Archives
@@ -7113,6 +7117,10 @@ paths:
           description: Forbidden
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
       summary: Get all archives
       tags:
       - Logs Archives
@@ -7228,6 +7236,10 @@ paths:
           description: Not found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
       summary: Get an archive
       tags:
       - Logs Archives
@@ -7359,6 +7371,10 @@ paths:
           description: Not found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
       summary: List read roles for an archive
       tags:
       - Logs Archives
@@ -7422,6 +7438,10 @@ paths:
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
       summary: Get all log-based metrics
       tags:
       - Logs Metrics
@@ -7515,6 +7535,10 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
       summary: Get a log-based metric
       tags:
       - Logs Metrics
@@ -7580,6 +7604,10 @@ paths:
           description: Authentication error
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
       summary: List restriction queries
       tags:
       - Logs Restriction Queries
@@ -7619,6 +7647,11 @@ paths:
           description: Authentication error
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - user_access_manage
       summary: Create a restriction query
       tags:
       - Logs Restriction Queries
@@ -7660,6 +7693,10 @@ paths:
           description: Authentication error
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
       summary: Get restriction query for a given role
       tags:
       - Logs Restriction Queries
@@ -7696,6 +7733,10 @@ paths:
           description: Authentication error
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
       summary: Get all restriction queries for a given user
       tags:
       - Logs Restriction Queries
@@ -7734,6 +7775,11 @@ paths:
           description: Not found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - user_access_manage
       summary: Delete a restriction query
       tags:
       - Logs Restriction Queries
@@ -7777,6 +7823,10 @@ paths:
           description: Not found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
       summary: Get a restriction query
       tags:
       - Logs Restriction Queries
@@ -7825,6 +7875,11 @@ paths:
           description: Not found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - user_access_manage
       summary: Update a restriction query
       tags:
       - Logs Restriction Queries
@@ -7870,6 +7925,11 @@ paths:
           description: Not found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - user_access_manage
       summary: Revoke role from a restriction query
       tags:
       - Logs Restriction Queries
@@ -7914,6 +7974,10 @@ paths:
           description: Not found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
       summary: List roles for a restriction query
       tags:
       - Logs Restriction Queries
@@ -7958,6 +8022,11 @@ paths:
           description: Not found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - user_access_manage
       summary: Grant role to a restriction query
       tags:
       - Logs Restriction Queries
@@ -9299,6 +9368,7 @@ paths:
       summary: Get the latest Cloud Workload Security policy
       tags:
       - Cloud Workload Security
+      x-menu-order: 1
       x-undo:
         type: safe
   /api/v2/security_monitoring/cloud_workload_security/agent_rules:
@@ -9324,6 +9394,7 @@ paths:
       summary: Get all Cloud Workload Security Agent rules
       tags:
       - Cloud Workload Security
+      x-menu-order: 3
       x-undo:
         type: safe
     post:
@@ -9369,6 +9440,7 @@ paths:
               \"My Agent rule\",\n      \"expression\": \"exec.file.name == \\\"sh\\\"\",\n
               \     \"enabled\": true\n     }\n  }\n}"
           step: there is a valid "agent_rule" in the system
+      x-menu-order: 4
       x-undo:
         operationId: DeleteCloudWorkloadSecurityAgentRule
         parameters:
@@ -9398,6 +9470,7 @@ paths:
       summary: Delete a Cloud Workload Security Agent rule
       tags:
       - Cloud Workload Security
+      x-menu-order: 6
       x-undo:
         type: idempotent
     get:
@@ -9426,6 +9499,7 @@ paths:
       summary: Get a Cloud Workload Security Agent rule
       tags:
       - Cloud Workload Security
+      x-menu-order: 2
       x-undo:
         type: safe
     patch:
@@ -9468,6 +9542,7 @@ paths:
       tags:
       - Cloud Workload Security
       x-codegen-request-body-name: body
+      x-menu-order: 5
       x-undo:
         type: idempotent
   /api/v2/security_monitoring/configuration/security_filters:

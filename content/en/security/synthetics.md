@@ -9,7 +9,7 @@ further_reading:
   text: "Review the main categories of data submitted to Datadog"
 ---
 
-<div class="alert alert-info">This page is about the security of Datadog; if you're looking for the Cloud SIEM product, see the <a href="/security_monitoring" target="_blank">Cloud SIEM section</a>.</div>
+<div class="alert alert-info">This page is about the security of Datadog; if you're looking for the Cloud SIEM product, see the <a href="/security_platform/cloud_siem" target="_blank">Cloud SIEM section</a>.</div>
 
 This article is part of a [series on data security][1].
 

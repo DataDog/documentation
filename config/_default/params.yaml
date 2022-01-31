@@ -80,7 +80,9 @@ code_language_ids:
     dotnet-framework: ".NET Framework"
     curl: Curl
     nginx: Nginx
+    native: Native
     other: Other
+    linux: Linux
 
 branch: ""
 
@@ -91,11 +93,9 @@ header_scripts:
   - google-tag-manager: false
   - google-site-tag: false
   - marketo: false
-  - quora-pixel: false
 
 footer_scripts:
   - snowplow: false
-  - adroll: false
 
 # Docs allowed regions for redirecting
 allowedRegions:

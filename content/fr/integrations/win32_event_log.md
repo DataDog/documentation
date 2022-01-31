@@ -25,7 +25,7 @@ git_integration_title: win32_event_log
 guid: b04d6f04-947c-4068-b73d-f861adc39959
 integration_id: win32-event-log
 integration_title: Win 32 event log
-integration_version: 2.11.0
+integration_version: 2.11.1
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com

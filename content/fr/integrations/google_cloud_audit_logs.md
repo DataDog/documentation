@@ -31,14 +31,15 @@ Il existe trois types de logs d'audit.
 * **Journaux d'audit pour l'accès aux données** : ces logs sont [activés séparément][1] pour chaque ressource. Ils contiennent les appels d'API qui lisent la configuration ou les métadonnées des ressources, ainsi que les appels d'API pilotés par l'utilisateur qui créent, modifient ou lisent des données de ressources fournies par l'utilisateur. Ils n'enregistrent pas d'opération d'accès aux données pour les ressources publiques.
 * **Journaux d'audit des refus de règles** : ces logs sont générés par défaut. Des entrées sont enregistrées dans ces logs lorsqu'un service Google Cloud refuse l'accès à un utilisateur ou à un [compte de service][2] en raison d'une violation des règles de sécurité.
 
-Ces logs peuvent être envoyés via le processus standard de transmission des logs GCP, à l'aide d'un Pub/Sub et des étapes décrites ici.
+Ces logs peuvent être envoyés via le processus standard de transmission des logs GCP, à l'aide d'un Pub/Sub et des étapes décrites [sur cette page][3].
 
-Pour en savoir plus, consultez la section [Comprendre les journaux d'audit][3] de la documentation Google et l'article [Meilleures pratiques de surveillance des logs d'audit GCO][4] (en anglais).
+Pour en savoir plus, consultez la section [Comprendre les journaux d'audit][4] de la documentation Google et l'article [Meilleures pratiques de surveillance des logs d'audit GCP][5] (en anglais).
 
-Besoin d'aide ? Contactez [l'assistance Datadog][5].
+Besoin d'aide ? Contactez [l'assistance Datadog][6].
 
 [1]: https://cloud.google.com/logging/docs/audit/configure-data-access
 [2]: https://cloud.google.com/iam/docs/service-accounts
-[3]: https://cloud.google.com/logging/docs/audit/understanding-audit-logs
-[4]: https://www.datadoghq.com/blog/monitoring-gcp-audit-logs/
-[5]: https://docs.datadoghq.com/fr/help/
+[3]: https://docs.datadoghq.com/fr/integrations/google_cloud_platform/#log-collection
+[4]: https://cloud.google.com/logging/docs/audit/understanding-audit-logs
+[5]: https://www.datadoghq.com/blog/monitoring-gcp-audit-logs/
+[6]: https://docs.datadoghq.com/fr/help/

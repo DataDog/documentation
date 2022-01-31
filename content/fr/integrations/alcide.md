@@ -3,9 +3,9 @@ categories:
   - log collection
   - Sécurité
 description: Ingérer et traiter vos logs Alcide
-doc_link: 'https://docs.datadoghq.com/integrations/alcide/'
+doc_link: https://docs.datadoghq.com/integrations/alcide/
 dependencies:
-  - 'https://github.com/DataDog/documentation/blob/master/content/en/integrations/alcide.md'
+  - https://github.com/DataDog/documentation/blob/master/content/en/integrations/alcide.md
 has_logo: true
 integration_title: Alcide
 is_public: true
@@ -32,7 +32,7 @@ Dans Alcide, sélectionnez l'onglet _Integrations_ et accédez à la section _De
 
 1. Sélectionnez la cible **HTTP API**.
 
-2. Dans le champ URL, saisissez `https://http-intake.logs.<SITE_DATADOG>/v1/input/<CLÉ_API_DATADOG>?ddsource=alcide`. Remplacez le paramètre fictif `<SITE_DATADOG>` par `datadoghq.com` pour le site américain ou par `datadoghq.eu` pour le site européen. Remplacez le paramètre fictif `<CLÉ_API_DATADOG>` par votre [clé d'API Datadog][1].
+2. Dans le champ URL, saisissez `https://http-intake.logs.<SITE_DATADOG>/api/v2/logs?dd-api-key=<CLÉ_API_DATADOG>&ddsource=alcide`. Remplacez le paramètre fictif `<SITE_DATADOG>` par `datadoghq.com` pour le site américain ou par `datadoghq.eu` pour le site européen. Remplacez le paramètre fictif `<CLÉ_API_DATADOG>` par votre [clé d'API Datadog][1].
 
 3. Pour _Entities Types_, sélectionnez les types pour lesquels vous souhaitez transmettre des informations sur des menaces. Nous vous recommandons de sélectionner tous les types.
 
@@ -46,11 +46,11 @@ Accédez ensuite à la section _Selected Audit Entries Integration Configuration
 
 1. Sélectionnez la cible **HTTP API**.
 
-2. Dans le champ URL, saisissez `https://http-intake.logs.<SITE_DATADOG>/v1/input/<CLÉ_API_DATADOG>?ddsource=alcide`. Remplacez le paramètre fictif `<SITE_DATADOG>` par `datadoghq.com` pour le site américain ou par `datadoghq.eu` pour le site européen. Remplacez le paramètre fictif `<CLÉ_API_DATADOG>` par votre [clé d'API Datadog][1].
+2. Dans le champ URL, saisissez `https://http-intake.logs.<SITE_DATADOG>/api/v2/logs?dd-api-key=<CLÉ_API_DATADOG>&ddsource=alcide`. Remplacez le paramètre fictif `<SITE_DATADOG>` par `datadoghq.com` pour le site américain ou par `datadoghq.eu` pour le site européen. Remplacez le paramètre fictif `<CLÉ_API_DATADOG>` par votre [clé d'API Datadog][1].
 
 ## Dépannage
 
 Besoin d'aide ? Contactez [l'assistance Datadog][2].
 
-[1]: https://app.datadoghq.com/account/settings#api
+[1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: /fr/help/

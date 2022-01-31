@@ -1,7 +1,7 @@
 ---
 title: Utiliser l'Agent Datadog pour la collecte de logs ou de traces uniquement
 aliases:
-  - /logs/faq/how-to-set-up-only-logs
+  - /fr/logs/faq/how-to-set-up-only-logs
 kind: documentation
 ---
 <div class="alert alert-danger">
@@ -115,7 +115,7 @@ spec:
           ## {name: DD_API_KEY, valueFrom:{ secretKeyRef:{ name: datadog-secret, key: api-key }}
           - {name: DD_API_KEY, value: "<CLÉ_API_DATADOG>"}
 
-          ## Définir DD_SITE sur votre site Datadog 
+          ## Définir DD_SITE sur votre site Datadog
           - {name: DD_SITE, value: "<VOTRE_SITE_DD>"}
 
           ## Chemin vers le socket Docker
