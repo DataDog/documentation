@@ -12986,6 +12986,12 @@ components:
           description: The hour for the usage.
           format: date-time
           type: string
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
+          type: string
       type: object
     UsageAnalyzedLogsResponse:
       description: A response containing the number of analyzed logs for each hour
@@ -13905,6 +13911,12 @@ components:
             of the given hour's month until the given hour.
           format: int64
           type: integer
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
+          type: string
       type: object
     UsageIncidentManagementResponse:
       description: Response containing the incident management usage for each hour
@@ -13927,6 +13939,12 @@ components:
           description: Contains the number of spans indexed.
           format: int64
           type: integer
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
+          type: string
       type: object
     UsageIndexedSpansResponse:
       description: A response containing indexed spans usage.
@@ -13950,6 +13968,12 @@ components:
             hour.
           format: int64
           type: integer
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
+          type: string
       type: object
     UsageIngestedSpansResponse:
       description: Response containing the ingested spans usage for each hour for
@@ -13972,6 +13996,12 @@ components:
           description: The total number of IoT devices during a given hour.
           format: int64
           type: integer
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
+          type: string
       type: object
     UsageIoTResponse:
       description: Response containing the IoT usage for each hour for a given organization.
@@ -14199,6 +14229,12 @@ components:
           description: The hour for the usage.
           format: date-time
           type: string
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
+          type: string
       type: object
     UsageProfilingResponse:
       description: Response containing the number of profiled hosts for each hour
@@ -14339,6 +14375,12 @@ components:
         hour:
           description: The hour for the usage.
           format: date-time
+          type: string
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
           type: string
         snmp_devices:
           description: Contains the number of SNMP devices.
@@ -16313,6 +16355,9 @@ components:
       - WHITE_ON_RED
       - WHITE_ON_YELLOW
       - YELLOW_ON_WHITE
+      - BLACK_ON_LIGHT_YELLOW
+      - BLACK_ON_LIGHT_GREEN
+      - BLACK_ON_LIGHT_RED
     WidgetRequestStyle:
       description: Define request widget style.
       properties:

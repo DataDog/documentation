@@ -120,7 +120,7 @@
     contents:
 
     - action: pull-and-push-file
-      branch: master
+      branch: main
       globs:
       - README.md
       options:

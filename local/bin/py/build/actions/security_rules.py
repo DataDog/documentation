@@ -153,12 +153,12 @@ def security_rules(content, content_dir):
 
                     tags = data.get('tags', [])
                     if tags:
-                        if data.get('source', ''):
-                            page_data["source"] = data.get('source', '')
                         for tag in tags:
                             if ':' in tag:
                                 key, value = tag.split(':')
                                 page_data[key] = value
+                        if data.get('source', ''):
+                            page_data["source"] = data.get('source', '')
                     else:
                         # try build up manually
                         source = data.get('source', None)
