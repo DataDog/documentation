@@ -40,7 +40,7 @@ Datadog's tracing libraries (`dd-trace`) are known to be not compatible with [we
             - datadog-lambda-js
     ```
 
-    **Note:** This exclusion may not be enough if you have at least one dependency that itself depends on `datadog-lambda-js` or `dd-trace` (transitive dependencies). In this case, **forceExclude** won't avoid the inclusion of one of these libraries. If this is your case, you can try to remove them manually using something like this:
+    **Note:** This exclusion may not be sufficient if you have any transitive dependencies on `datadog-lambda-js` or `dd-trace`. In these cases, **forceExclude** does not avoid the inclusion of one of these libraries. If this is your case, you can try to remove them manually using something like the following:
 
     ```
     custom:
