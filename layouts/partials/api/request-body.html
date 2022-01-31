@@ -98,25 +98,6 @@
                           <div role="tabpanel" class="tab-pane js-tab-example" id="{{ $operationid }}-request-example">
                               <div class="code-snippet-wrapper">
                                   <div class="code-snippet">
-                                      <div class="code-button-wrapper position-absolute">
-                                          <button class="btn text-primary js-copy-button">{{ i18n "copy" }}</button>
-                                      </div>
-
-                                      <style>
-                                        #accordion .btn,
-                                        #curl-accordion .btn {
-                                          font-weight: bold;
-                                          color: #632ca6;
-                                        }
-                                        #accordion .btn.collapsed,
-                                        #curl-accordion .btn.collapsed {
-                                          color: #666;
-                                        }
-                                        #accordion pre,
-                                        #curl-accordion pre {
-                                          border-bottom: 3px solid rgba(119,0,255,.3);
-                                        }
-                                      </style>
 
                                       {{ $fileNonExistCount := 0 }}
                                       {{ $fileCount := 0 }}
@@ -136,7 +117,10 @@
                                                 </h5>
                                               </div>
                                               <div id="{{ $operationid }}-request-example-{{ $i }}" class="collapse {{if eq $i 0}}show{{ end }}" data-parent="#accordion">
-                                                <div class="card-body p-0">
+                                                <div class="card-body p-0 code-snippet">
+                                                    <div class="code-button-wrapper position-absolute">
+                                                        <button class="btn text-primary js-copy-button">{{ i18n "copy" }}</button>
+                                                    </div>
                                                     {{ range . }}
                                                       {{ (highlight (.Content) "json" "") }}
                                                     {{ end }}

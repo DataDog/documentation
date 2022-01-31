@@ -28,9 +28,6 @@
 {{ $lang := index $context.Site.Params.code_languages "sh" }}
 <div class="code-snippet-wrapper js-code-block" data-code-lang-block="{{ $lang.name }}" >
     <div class="code-snippet">
-      <div class="code-button-wrapper position-absolute">
-          <button class="btn text-primary js-copy-button">{{ i18n "copy" }}</button>
-      </div>
       <div class="highlight">
         {{ $fileNonExistCount := 0 }}
         {{ $fileCount := 0 }}
@@ -52,7 +49,10 @@
                       </h5>
                     </div>
                     <div id="{{ $operationid }}-request-example-{{ $i }}" class="collapse {{if eq $i 0}}show{{ end }}" data-parent="#curl-accordion">
-                      <div class="card-body p-0">
+                      <div class="card-body p-0 code-snippet">
+                        <div class="code-button-wrapper position-absolute">
+                            <button class="btn text-primary js-copy-button">{{ i18n "copy" }}</button>
+                        </div>
                         <pre class="chroma">
   {{/* Do not change indent of html below as it will change the indentation of the curl code block */}}
   <code class="language-fallback" data-lang="fallback">

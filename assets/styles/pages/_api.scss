@@ -227,4 +227,19 @@ $ddpurple: #632ca6;
             padding-bottom: 24px;
         }
     }
+
+    #accordion .btn,
+    #curl-accordion .btn {
+      font-weight: bold;
+      color: #632ca6;
+    }
+    #accordion .btn.collapsed,
+    #curl-accordion .btn.collapsed {
+      color: #666;
+    }
+    #accordion pre,
+    #curl-accordion pre {
+      border-bottom: 3px solid rgba(119,0,255,.3);
+    }
+
 }
