@@ -5,9 +5,6 @@ description: Monitor threats targeting production system, leveraging the executi
 is_beta: true
 disable_sidebar: true
 further_reading:
-- link: "/security_platform/guide/how-appsec-works/"
-  tag: "Guide"
-  text: "Learn how Application Security works"
 - link: "/security_platform/application_security/setup_and_configure/#compatibility"
   tag: "Documentation"
   text: "Learn more about language and framework compatibility"
@@ -33,11 +30,11 @@ With Application Security, you can cut through the noise of continuous trace dat
 
 Powered by provided [out-of-the-box rules][3], Application Security detects threats without manual configuration. If you're already using Datadog [APM][1], setup only requires setting one environment variable to get started.
 
-To start configuring your environment to detect threats with Application Security, follow the [Getting Started documentation][5]. Once Application Security is configured, you can begin investigating and remediating security signals in the [Security Signals Explorer][7].
+To start configuring your environment to detect threats with Application Security, follow the [Getting Started documentation][4]. Once Application Security is configured, you can begin investigating and remediating security signals in the [Security Signals Explorer][5].
 
 ## Investigate and remediate security signals
 
-In the [Security Signals Explorer][7], click on any security signal to see what happened and the suggested steps to remediate the issue. In the same panel, view traces with their correlated attack flow and request information to gain further context.
+In the [Security Signals Explorer][5], click on any security signal to see what happened and the suggested steps to remediate the issue. In the same panel, view traces with their correlated attack flow and request information to gain further context.
 
 ## Next steps
 
@@ -46,7 +43,5 @@ In the [Security Signals Explorer][7], click on any security signal to see what 
 [1]: /tracing/
 [2]: /agent/
 [3]: /security_platform/default_rules/#cat-application-security
-[4]: /security/appsec
-[5]: /security_platform/application_security/getting_started/
-[6]: /security_platform/application_security/custom_signal_rules/
-[7]: /security/appsec/signals
+[4]: /security_platform/application_security/getting_started/
+[5]: /security/appsec/signals
