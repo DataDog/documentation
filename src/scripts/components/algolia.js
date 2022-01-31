@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import docsearch from 'docsearch.js';
 import configDocs from '../config/config-docs';
 import { handleAlgoliaViewEventOnPageLoad, handleAlgoliaClickedObjectEventOnAutocomplete } from '../algolia-insights';
@@ -195,7 +194,6 @@ searchDesktop.autocomplete.on('autocomplete:shown', function() {
     links.forEach(link => {
         link.addEventListener('click', (event) => {
             event.preventDefault();
-            console.log(event)
             let suggestionAnchorElement = event.target;
 
             // Sometimes the captured click event target is on a child div element of the anchor tag.
@@ -203,14 +201,11 @@ searchDesktop.autocomplete.on('autocomplete:shown', function() {
                 suggestionAnchorElement = event.target.closest('a.algolia-docsearch-suggestion');
             }
 
-            console.log(`in click ev, sugg anchor el`)
-            console.log(suggestionAnchorElement)
-
             const clickedSuggestionUrl = suggestionAnchorElement.href;
             handleAlgoliaClickedObjectEventOnAutocomplete(clickedSuggestionUrl);
 
-            // window.history.replaceState(null, '');
-            // window.location = clickedSuggestionUrl;
+            window.history.replaceState(null, '');
+            window.location = clickedSuggestionUrl;
         })
     })
 })

@@ -104,7 +104,6 @@ const getAlgoliaSearchDataByUrl = (url) => {
 */
 export const handleAlgoliaClickedObjectEventOnAutocomplete = (url) => {
   if (window._DATADOG_SYNTHETICS_BROWSER === undefined) {
-    console.log('in handle alg autocomplete event send')
     initializeAlogliaInsights();
     const urlPathnameWithHash = getUrlWithPathnameAndHash(url);
   
@@ -130,7 +129,7 @@ export const handleAlgoliaViewEventOnPageLoad = () => {
   if (pageIsEligibleToSendAlgoliaInsightsData()) {
     const origin = 'https://docs.datadoghq.com';
     const { pathname } = window.location;
-    const topLevelUrl = `${origin}${pathname}`;
+    const topLevelUrl = `${origin}${pathname}`;  // Get page URL without hash
 
     getAlgoliaSearchDataByUrl(topLevelUrl)
         .then(({ hits }) => {
@@ -139,7 +138,7 @@ export const handleAlgoliaViewEventOnPageLoad = () => {
 
                 // Some top-levl URLs in algolia have a #pagetitle anchor, so we should look to match on that as well.
                 // https://datadoghq.atlassian.net/browse/WEB-1985
-                if (url === topLevelUrl || url === `${topLevelUrl}#pagetitle`) {
+                if (url === topLevelUrl || url === `${topLevelUrl}#pagetitle` || url === `${topLevelUrl}#overview`) {
                     initializeAlogliaInsights();
                     sendAlgoliaInsightsViewEvent([objectID]);
 
