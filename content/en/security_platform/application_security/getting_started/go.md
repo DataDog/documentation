@@ -11,7 +11,8 @@ further_reading:
 ---
 
 {{% appsec-getstarted %}}
-- [CGO][1] is enabled in your build environment, along with the C library headers and the C toolchain for your compilation target.
+- One of the [supported APM tracing integrations][1].
+- [CGO][2] is enabled in your build environment, along with the C library headers and the C toolchain for your compilation target. For detailed instructions, see [Enabling CGO][3]
 
 ## Get started
 
@@ -21,20 +22,12 @@ further_reading:
    $ go get -v -u gopkg.in/DataDog/dd-trace-go.v1@v1.36.0
    ```
 
-2. Make sure you use one of the following APM tracing integrations:
-- [gRPC][2]
-- [net/http][3]
-- [Gorilla Mux][4]
-- [Echo][5]
-- [Chi][6]
-- [HttpRouter][7]
-
-3. **Recompile your program** and enable Application Security and CGO:
+2. **Recompile your program** and enable Application Security and CGO:
    ```console
    $ env CGO_ENABLED=1 go build -v -tags appsec my-program
    ```
 
-4. **Redeploy your Go service and enable Application Security** by setting the `DD_APPSEC_ENABLED` environment variable to `true`:
+3. **Redeploy your Go service and enable Application Security** by setting the `DD_APPSEC_ENABLED` environment variable to `true`:
    ```console
    $ env DD_APPSEC_ENABLED=true ./my-program
    ```
@@ -102,10 +95,6 @@ Update your ECS task definition JSON file, by adding this in the environment sec
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://github.com/golang/go/wiki/cgo
-[2]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/grpc#example-package-Server
-[3]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http#example-package
-[4]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/gorilla/mux#example-package
-[5]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/labstack/echo#example-package
-[6]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi#example-package
-[7]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/julienschmidt/httprouter#example-package
+[1]: /security_platform/application_security/setup_and_configure/?code-lang=go#supported-frameworks
+[2]: https://github.com/golang/go/wiki/cgo
+[3]: /security_platform/application_security/setup_and_configure/?code-lang=go#enabling-cgo

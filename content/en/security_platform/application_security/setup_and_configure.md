@@ -86,30 +86,42 @@ The Datadog Go tracing library supports Go version 1.14 and greater, on the foll
 
 ### Supported frameworks
 
-Integrate the Go tracer with the following list of web frameworks using one of the following helper packages.
+Integrate the Go tracer with the following list of web frameworks using one of the corresponding APM tracer integration. Click to see the [integrations documentation][1], which provides a detailed overview of the supported packages and their APIs, along with usage examples.
 
-**Note**: The [integrations documentation][1] provides a detailed overview of the supported packages and their APIs, along with usage examples.
+- [gRPC][2]
+- [net/http][3]
+- [Gorilla Mux][4]
+- [Echo][5] earlier than v5
+- [Chi][6] v2 or later
+- [HttpRouter][7]
 
-| Framework         | GoDoc Datadog Documentation           
-|-------------------|------------------------------------|
-| [Gorilla Mux][2] | [gopkg.in/DataDog/dd-trace-go.v1/contrib/gorilla/mux][3]                |
-| [gRPC][4]        | [gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/grpc][5]     |
-| net/http   | [gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http][6] |
-| [chi less than v 5][7]         | [gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi][8] |
-| [echo v2 or greater][9]     | [gopkg.in/DataDog/dd-trace-go.v1/contrib/labstack/echo][10]           |
+### Enabling CGO
 
+Compiling your code with Application Security enabled involves [CGO][8] and therefore requires:
+	
+- The `gcc` compiler for the target `GOOS` and `GOARCH`.
+- The C library headers.
+- The CGO bindings enabled. This is controlled by the `CGO_ENABLED` environment variable which is enabled by default when compiling natively. If CGO is disabled, features such as RASP and WAF will also be disabled.
+	
+To install the `gcc` compiler:
 
+| Operating system     | Console command |
+|----------------------|-----------------|
+| Debian, Ubuntu       | `$ apt install gcc libc6-dev`   |
+| Alpine               | `$ apk add gcc musl-dev`        |
+| RHEL, CentOS, Fedora | `$ yum install gcc glibc-devel` |
+| macOS                | `$ xcode-select --install`      |
+	
+**Note**: The Go toolchain disables CGO when cross-compiling.
 
 [1]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib
-[2]: http://www.gorillatoolkit.org/pkg/mux
-[3]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/gorilla/mux
-[4]: https://github.com/grpc/grpc-go
-[5]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/grpc
-[6]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http
-[7]: https://github.com/go-chi/chi
-[8]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi
-[9]: https://github.com/labstack/echo
-[10]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/labstack/echo
+[2]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/grpc#example-package-Server
+[3]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http#example-package
+[4]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/gorilla/mux#example-package
+[5]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/labstack/echo#example-package
+[6]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi#example-package
+[7]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/julienschmidt/httprouter#example-package
+[8]: https://github.com/golang/go/wiki/cgo
 {{< /programming-lang >}}
 
 {{< programming-lang lang="ruby" >}}
