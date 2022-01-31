@@ -211,7 +211,7 @@ If you have data from some queries, but are expecting to see a particular query 
 |----------------------------------------|-------------------------------------------|
 | The query is not a "top query," meaning the sum of its total execution time is not in the top 200 normalized queries at any point in the selected time frame. | It may be grouped into the "Other Queries" row. For more information on which queries are tracked, see [Data Collected][1]. The number of top queries tracked can be raised by contacting Datadog Support. |
 | The `events_statements_summary_by_digest` may be full. | The MySQL table `events_statements_summary_by_digest` in `performance_schema` has a maximum limit on the number of digests (normalized queries) it will store. Regular truncation of this table as a maintenance task will ensure all queries are tracked over time. See [Advanced configuration][2] for more information. |
-| The query has been executed a single time since the agent last restarted. | Query metrics are only emitted after having been executed at least once over two separate 10 second intervals since the agent was restarted. |
+| The query has been executed a single time since the agent last restarted. | Query metrics are only emitted after having been executed at least once over two separate ten second intervals since the Agent was restarted. |
 
 
 
