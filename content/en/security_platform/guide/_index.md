@@ -11,7 +11,3 @@ private: true
     {{< nextlink href="security_platform/guide/monitor-authentication-logs-for-security-threats" >}}Monitor Authentication Logs for Security Threats{{< /nextlink >}}
     {{< nextlink href="/security_platform/guide/how-to-setup-security-filters-using-cloud-siem-api" >}}Security Filters with the Cloud SIEM API{{< /nextlink >}}
 {{< /whatsnext >}}
-
-{{< whatsnext desc="Application Security:" >}}
-    {{< nextlink href="/security_platform/guide/how-appsec-works" >}}How Application Security Monitoring Works{{< /nextlink >}}
-{{< /whatsnext >}}
