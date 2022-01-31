@@ -137,9 +137,9 @@ You can create up to 20 assertions per step by clicking on **New Assertion** or 
 
 Click **Continue with test if this step fails** to allow your test to move on with subsequent steps after step failure. 
 
-This ensures ensure your tests are able to clean up after themselves. For example, a test may create a resource, perform a number of actions on that resource, and end with the deletion of that resource. In case one of the intermediary steps fail, you want to have this setting enabled on every intermediary step to ensure that the resource is deleted at the end of the test and that no false positives are created.
+This ensures your tests are able to clean up after themselves. For example, a test may create a resource, perform a number of actions on that resource, and end with the deletion of that resource. In case one of the intermediary steps fail, you want to have this setting enabled on every intermediary step to ensure that the resource is deleted at the end of the test and that no false positives are created.
 
-For example, if your multistep API test runs on multiple endpoints, specify the number of times you want the test to run after a set number of milliseconds in case the test fails. This ensures your test performs all the requests even if there is an issue with one or more API endpoints.
+For example, if your multistep API test runs on multiple endpoints, specify the number of times you want the step to run after a set number of milliseconds in case the step fails. This ensures your test performs all the requests even if there is an issue with one or more steps.
 
 #### Extract variables from the response
 
