@@ -27,7 +27,7 @@ For example, when a `HIGH` or `CRITICAL` threat is detected, a security signal i
 
 Instantly transition to investigating a security signal in Datadog to begin investigation. Leverage the deep observability data provided by Application Security and APM distributed tracing to resolve application issues in one view. Analyze attack flows, view flame graphs, and review correlated trace and log data to pinpoint application vulnerabilities. Eliminate context switching by flowing through application data into remediation steps, all within the same panel.
 
-With Application Security, you can create queries to cut through the noise of continuous trace data to focus solely on securing and protecting your environment as threats arise.
+With Application Security, you can create queries to cut through the noise of continuous trace data, and begin focusing on securing and protecting your environment.
 
 ## Configure your environment
 
