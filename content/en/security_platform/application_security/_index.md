@@ -23,7 +23,7 @@ Datadog Application Security monitors application-level attacks aiming to exploi
 
 Application Security leverages Datadog [tracing libraries][1], the [Datadog Agent][2], and in-app detection rules to detect threats in your application environment and trigger signals whenever an attack targets your production system, or a vulnerability is triggered from the code.
 
-If a `HIGH` or `CRITICAL` threat is detected with Application Security, a security signal is generated in Datadog. Notifications for these signals can be sent to Slack, email, or Pagerduty to notify your team and gain context of threats in real-time.
+For example, when a `HIGH` or `CRITICAL` threat is detected, a security signal is generated in Datadog. Notifications for these signals can be sent to Slack, email, or Pagerduty to notify your team and gain context of threats in real-time.
 
 View a security signal in Datadog to leverage the deep observability data provided by Application Security and APM distributed tracing. Speed up the investigation process by analyzing attack flows, viewing flame graphs, and reviewing correlated trace and log data all within one panel. Determine the cause of a threat and view remediation steps in the same view to eliminate context switching.
 
