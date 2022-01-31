@@ -13,6 +13,10 @@ further_reading:
   text: "Out-of-the-Box Application Security Rules"
 ---
 
+<div class="alert alert-warning">
+Application Security is currently in public beta. See the <a href="https://app.datadoghq.com/security/appsec">in-app instructions</a> to get started.
+</div>
+
 ## Compatibility
 
 {{< programming-lang-wrapper langs="java,dotnet,go,ruby,php,nodejs" >}}
@@ -33,9 +37,9 @@ Datadog does not officially support any early-access versions of Java.
 
 | Framework Web Server    | Minimum Framework Version   | 
 | ----------------------- | --------------------------- |
-| Servlet                 | 2                           |
+| Servlet Compatible      | 2.3+, 3.0+                  |
 | Spring                  | 3.1                         |
-
+**Note**: Many application servers are Servlet compatible and are supported by Application Security, such as WebSphere, WebLogic, and JBoss. Also, frameworks like Spring Boot are supported by virtue of using a supported embedded application server (such as Tomcat, Jetty, or Netty).
 
 
 {{< /programming-lang >}}
