@@ -34,14 +34,23 @@ _ingestion\_reason : rule_
 
 At the library level, more specific sampling configuration is available:
 - Set a specific sampling rate to apply to all root services, overriding the agent's [default mechanism](#default-mechanism).
-- Set a limit on the number of ingested traces-per-second.
 - Set a sampling rate for a specific root service.
+- Set a limit on the number of ingested traces-per-second.
 
 **Note :** These rules also follow a head-based sampling mechanism. If the traffic for a service is higher than the configured maximum traces-per-second, then traces are dropped at the root. It does not create incomplete traces.
 
 The configuration can be set directly in the code, or as environment variables :
 
 {{< tabs >}}
+{{% tab "Environment variables" %}}
+
+```
+@env  DD_TRACE_SAMPLE_RATE - integer - optional null (defaults to agent default feedback loop)
+@env DD_TRACE_SAMPLING_RULES - integer - optional null
+@env  DD_TRACE_RATE_LIMIT - integer - optional 100 (if using the agent default mechanism, the rate limiter is ignored)
+```
+
+{{% /tab %}}
 {{% tab "Code API" %}}
 
 ```
@@ -59,16 +68,9 @@ tracer.configure(sampler=DatadogSampler(
 ```
 
 {{% /tab %}}
-{{% tab "Environment variables" %}}
-
-```
-@env  DD_TRACE_RATE_LIMIT - integer - optional 100 (if using the agent feedback loop the rate limiter is ignored)
-@env  DD_TRACE_SAMPLE_RATE - integer - optional null (defaults to agent feedback loop)
-@env DD_TRACE_SAMPLING_RULES - integer - optional null
-```
-
-{{% /tab %}}
 {{< /tabs >}}
+
+Read more about configuring the ingestion in the [tracing librairies][1] documentation
 
 **Note :** Services configured with user-defined rules are marked as `Configured` in the [Ingestion Control Page][3] Configuration column. Services configured to use the default mechanism are labeled as `Automatic`.
 
@@ -101,6 +103,12 @@ If you need to sample a specific span, but don't need the full trace to be avail
 To use the analytics mechanism, it must be enabled, either in the code, or via an environment variable. Furthermore, define a sampling rate to be applied to all `analytics_enabled` span:
 
 {{< tabs >}}
+{{% tab "Environment variables" %}}
+
+```
+@env  DD_TRACE_ANALYTICS_ENABLED - boolean - optional false
+```
+{{% /tab %}}
 {{% tab "Code API" %}}
 
 ```
@@ -112,16 +120,11 @@ tracerconfig.SetAnalyticsRate(0.4)
 ```
 
 {{% /tab %}}
-{{% tab "Environment variables" %}}
-
-```
-@env  DD_TRACE_ANALYTICS_ENABLED - boolean - optional false
-```
-{{% /tab %}}
 {{< /tabs >}}
 
 Tag any single span with `analytics_enabled:true`. In addition, specify a sampling rate to be associated with the span:
 ```
+// in dd-trace-go
 // make a span analytics_enabled
 span.SetTag(ext.AnalyticsEvent, true)
 // make a span analytics_enabled with a rate of 0.5
