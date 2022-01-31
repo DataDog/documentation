@@ -17,7 +17,7 @@ further_reading:
 Application Security is currently in public beta. See the <a href="https://app.datadoghq.com/security/appsec">in-app instructions</a> to get started.
 </div>
 
-{{< img src="/security_platform/application_security/app-sec-landing-page.png" alt="The Application Security landing page in Datadog, which displays your services, suspicious requests, and detected signals" width="75%">}}
+{{< img src="/security_platform/application_security/app-sec-landing-page.png" alt="A security signal panel in Datadog, which displays attack flows and flame graphs" width="75%">}}
 
 Datadog Application Security monitors application-level attacks aiming to exploit code-level vulnerabilities, such as Server-Side-Request-Forgery (SSRF), SQL injection, Log4Shell, and Reflected Cross-Site-Scripting (XSS).
 
