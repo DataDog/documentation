@@ -19,7 +19,7 @@ further_reading:
 1. **Update your program's dependencies** with the latest version of the Datadog Go library (version 1.36.0 or later):
 
    ```console
-   $ go get -v -u gopkg.in/DataDog/dd-trace-go.v1@v1.36.0
+   $ go get -v -u gopkg.in/DataDog/dd-trace-go.v1
    ```
 
 2. **Recompile your program** and enable Application Security and CGO:

@@ -157,7 +157,7 @@ These are supported on the following architectures:
 
 {{< programming-lang lang="php" >}}
 
-The Datadog PHP library supports PHP version 7.0 on the following architectures:
+The Datadog PHP library supports PHP version 7.0 and above on the following architectures:
 
 - Linux (GNU) x86-64
 - Alpine Linux (musl) x86-64
