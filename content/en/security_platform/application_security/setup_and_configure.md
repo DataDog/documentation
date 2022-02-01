@@ -14,7 +14,7 @@ further_reading:
 ---
 
 <div class="alert alert-warning">
-Application Security is in public beta. See the <a href="https://app.datadoghq.com/security/appsec">in-app instructions</a> to get started.
+Application Security is in public beta. See the <a href="https://app.datadoghq.com/security/appsec?instructions=all">in-app instructions</a> to get started.
 </div>
 
 ## Compatibility
@@ -130,15 +130,7 @@ To install the `gcc` compiler:
 
 The Datadog Ruby library supports the latest gem for the following Ruby interpreters:
 
-| Type  | Documentation              | Version |
-| ----- | -------------------------- | -----   |
-| MRI   | https://www.ruby-lang.org/ | 2.7     |
-|       |                            | 2.6     | 
-|       |                            | 2.5     | 
-|       |                            | 2.4     | 
-|       |                            | 2.3     | 
-|       |                            | 2.2     | 
-|       |                            | 2.1     | 
+- MRI (https://www.ruby-lang.org/) versions 2.7, 2.6, 2.5, 2.4, 2.3, 2.2, 2.1
 
 These are supported on the following architectures:
 - Linux (GNU) x86-64, aarch64

@@ -23,7 +23,7 @@ further_reading:
    npm install dd-trace@2
    ```
 
-2. **Import and initialize the library** either in code or via command line arguments. The NodeJS library must be imported and initialized before **any other module**.
+2. **Import and initialize the NodeJS library**. The library must be imported and initialized before **any other module**. You can enable Application Security either in your code or with environment variables. If you already have APM configured, add `{appsec: true}` to your init statement:
       {{< tabs >}}
 {{% tab "In JavaScript code" %}}
 
@@ -64,7 +64,7 @@ node --require dd-trace/init app.js
 {{% /tab %}}
 {{< /tabs >}}
 
-3. **Enable Application Security in your environment** by setting the following environment variable: 
+ **Or** enable the library by setting the environment variable: 
    ```
    DD_APPSEC_ENABLED=true node app.js
    ```
