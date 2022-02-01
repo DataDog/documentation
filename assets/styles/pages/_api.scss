@@ -229,16 +229,16 @@ $ddpurple: #632ca6;
     }
 
     #accordion .btn,
-    #curl-accordion .btn {
+    .example-accordion .btn {
       font-weight: bold;
       color: #632ca6;
     }
     #accordion .btn.collapsed,
-    #curl-accordion .btn.collapsed {
+    .example-accordion .btn.collapsed {
       color: #666;
     }
     #accordion pre,
-    #curl-accordion pre {
+    .example-accordion pre {
       border-bottom: 3px solid rgba(119,0,255,.3);
     }
 
