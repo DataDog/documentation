@@ -6,6 +6,7 @@ In general, setting up Application Security monitoring involves:
 
 ## Prerequisites
 
-- The Datadog Agent is installed and configured for your application's operating system or container, cloud, or virtual environment. If you haven't done this yet, see the [Agent in-app documentation][101].
+- The Datadog Agent is installed and configured for your application's operating system or container, cloud, or virtual environment. 
+- Datadog APM is configured for your application or service, and traces are being received by Datadog. 
 
 [101]: https://app.datadoghq.com/account/settings#agent

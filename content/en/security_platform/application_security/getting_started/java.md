@@ -14,7 +14,7 @@ further_reading:
 
 ## Get started
 
-1. **Download the [Datadog Java library][1]**, at least version 0.94.0:
+1. **Update your [Datadog Java library][1]** to at least version 0.94.0:
    ```
    wget -O dd-java-agent.jar 'https://github.com/DataDog/dd-trace-java/releases/latest/download/dd-java-agent.jar'
    ```

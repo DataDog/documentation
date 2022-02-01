@@ -14,7 +14,7 @@ further_reading:
 
 ## Get started
 
-1. **Update or install the latest Datadog NodeJS library package**, at least version 2.0.0, by running:
+1. **Update your Datadog NodeJS library package** to at least version 2.0.0, by running:
    ```
    npm install dd-trace
    ```
@@ -23,7 +23,7 @@ further_reading:
    npm install dd-trace@2
    ```
 
-2. **Import and initialize the NodeJS library**. The library must be imported and initialized before **any other module**. You can enable Application Security either in your code or with environment variables. If you already have APM configured, add `{appsec: true}` to your init statement:
+2. **Where you import and initialize the NodeJS library for APM, also enable Application Security.** This might be either in your code or with environment variables. If you initialized APM in code, add `{appsec: true}` to your init statement:
       {{< tabs >}}
 {{% tab "In JavaScript code" %}}
 
@@ -54,17 +54,14 @@ If the default config is sufficient, or all configuration is done through enviro
 import `dd-trace/init`;
 ```
 {{% /tab %}}
-{{% tab "On the command line" %}}
 
-To load initialize the library in one step on the command line, use the `--require` option to Node.js
-```sh
-node --require dd-trace/init app.js
-```
-**Note:** This approach requires using environment variables for all configuration of the library.
-{{% /tab %}}
 {{< /tabs >}}
 
-   **Or** enable the library by setting the environment variable: 
+   **Or** if you initialize the APM library on the command line using the `--require` option to Node.js:
+   ```sh
+   node --require dd-trace/init app.js
+   ```
+   Then use environment variables to enable Application Security:
    ```
    DD_APPSEC_ENABLED=true node app.js
    ```

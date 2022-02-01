@@ -14,7 +14,7 @@ further_reading:
 
 ## Get started
 
-1. **Download the [Datadog .NET library][1]**, at least version 2.2.0, for your target operating system architecture.
+1. **Update your [Datadog .NET library][1]** to at least version 2.2.0, for your target operating system architecture.
 
    For information about which language and framework versions are supported by the library, see [Compatibility][2].
 
