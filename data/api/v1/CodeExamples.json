@@ -511,6 +511,54 @@
       "description": "Get Usage Attribution returns \"OK\" response"
     }
   ],
+  "GetUsageCloudSecurityPostureManagement": [
+    {
+      "suffix": "",
+      "description": "Get hourly usage for CSPM returns \"OK\" response"
+    }
+  ],
+  "GetUsageInternetOfThings": [
+    {
+      "suffix": "",
+      "description": "Get hourly usage for IoT returns \"OK\" response"
+    }
+  ],
+  "GetUsageSNMP": [
+    {
+      "suffix": "",
+      "description": "Get hourly usage for SNMP devices returns \"OK\" response"
+    }
+  ],
+  "GetUsageAnalyzedLogs": [
+    {
+      "suffix": "",
+      "description": "Get hourly usage for analyzed logs returns \"OK\" response"
+    }
+  ],
+  "GetIncidentManagement": [
+    {
+      "suffix": "",
+      "description": "Get hourly usage for incident management returns \"OK\" response"
+    }
+  ],
+  "GetUsageIndexedSpans": [
+    {
+      "suffix": "",
+      "description": "Get hourly usage for indexed spans returns \"OK\" response"
+    }
+  ],
+  "GetIngestedSpans": [
+    {
+      "suffix": "",
+      "description": "Get hourly usage for ingested spans returns \"OK\" response"
+    }
+  ],
+  "GetUsageProfiling": [
+    {
+      "suffix": "",
+      "description": "Get hourly usage for profiled hosts returns \"OK\" response"
+    }
+  ],
   "CreateWebhooksIntegrationCustomVariable": [
     {
       "suffix": "",

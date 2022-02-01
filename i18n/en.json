@@ -313,6 +313,9 @@
   },
   "integration_version": {
     "other": "Integration"
+  },
+  "beta_check":{
+    "other": "Beta"
   }
 
 }

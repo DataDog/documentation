@@ -12986,6 +12986,12 @@ components:
           description: The hour for the usage.
           format: date-time
           type: string
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
+          type: string
       type: object
     UsageAnalyzedLogsResponse:
       description: A response containing the number of analyzed logs for each hour
@@ -13615,16 +13621,36 @@ components:
       description: Cloud Security Posture Management usage for a given organization
         for a given hour.
       properties:
+        aas_host_count:
+          description: The number of Cloud Security Posture Management Azure app services
+            hosts during a given hour.
+          format: double
+          nullable: true
+          type: number
+        azure_host_count:
+          description: The number of Cloud Security Posture Management Azure hosts
+            during a given hour.
+          format: double
+          nullable: true
+          type: number
+        compliance_host_count:
+          description: The number of Cloud Security Posture Management hosts during
+            a given hour.
+          format: double
+          nullable: true
+          type: number
         container_count:
           description: The total number of Cloud Security Posture Management containers
             during a given hour.
-          format: int64
-          type: integer
+          format: double
+          nullable: true
+          type: number
         host_count:
           description: The total number of Cloud Security Posture Management hosts
             during a given hour.
-          format: int64
-          type: integer
+          format: double
+          nullable: true
+          type: number
         hour:
           description: The hour for the usage.
           format: date-time
@@ -13885,6 +13911,12 @@ components:
             of the given hour's month until the given hour.
           format: int64
           type: integer
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
+          type: string
       type: object
     UsageIncidentManagementResponse:
       description: Response containing the incident management usage for each hour
@@ -13907,6 +13939,12 @@ components:
           description: Contains the number of spans indexed.
           format: int64
           type: integer
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
+          type: string
       type: object
     UsageIndexedSpansResponse:
       description: A response containing indexed spans usage.
@@ -13930,6 +13968,12 @@ components:
             hour.
           format: int64
           type: integer
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
+          type: string
       type: object
     UsageIngestedSpansResponse:
       description: Response containing the ingested spans usage for each hour for
@@ -13952,6 +13996,12 @@ components:
           description: The total number of IoT devices during a given hour.
           format: int64
           type: integer
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
+          type: string
       type: object
     UsageIoTResponse:
       description: Response containing the IoT usage for each hour for a given organization.
@@ -14179,6 +14229,12 @@ components:
           description: The hour for the usage.
           format: date-time
           type: string
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
+          type: string
       type: object
     UsageProfilingResponse:
       description: Response containing the number of profiled hosts for each hour
@@ -14319,6 +14375,12 @@ components:
         hour:
           description: The hour for the usage.
           format: date-time
+          type: string
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
           type: string
         snmp_devices:
           description: Contains the number of SNMP devices.
@@ -14495,6 +14557,16 @@ components:
         container_hwm:
           description: Shows the high-water mark of all distinct containers over all
             hours in the current date for all organizations.
+          format: int64
+          type: integer
+        cspm_aas_host_top99p:
+          description: Shows the 99th percentile of all Cloud Security Posture Management
+            Azure app services hosts over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        cspm_azure_host_top99p:
+          description: Shows the 99th percentile of all Cloud Security Posture Management
+            Azure hosts over all hours in the current date for all organizations.
           format: int64
           type: integer
         cspm_container_avg:
@@ -14775,6 +14847,17 @@ components:
         container_hwm:
           description: Shows the high-water mark of all distinct containers over all
             hours in the current date for the given org.
+          format: int64
+          type: integer
+        cspm_aas_host_top99p:
+          description: Shows the 99th percentile of all Cloud Security Posture Management
+            Azure app services hosts over all hours in the current date for the given
+            org.
+          format: int64
+          type: integer
+        cspm_azure_host_top99p:
+          description: Shows the 99th percentile of all Cloud Security Posture Management
+            Azure hosts over all hours in the current date for the given org.
           format: int64
           type: integer
         cspm_container_avg:
@@ -15060,6 +15143,17 @@ components:
         container_hwm_sum:
           description: Shows the sum of the high-water marks of all distinct containers
             over all hours in the current months for all organizations.
+          format: int64
+          type: integer
+        cspm_aas_host_top99p_sum:
+          description: Shows the 99th percentile of all Cloud Security Posture Management
+            Azure app services hosts over all hours in the current months for all
+            organizations.
+          format: int64
+          type: integer
+        cspm_azure_host_top99p_sum:
+          description: Shows the 99th percentile of all Cloud Security Posture Management
+            Azure hosts over all hours in the current months for all organizations.
           format: int64
           type: integer
         cspm_container_avg_sum:
@@ -16261,6 +16355,9 @@ components:
       - WHITE_ON_RED
       - WHITE_ON_YELLOW
       - YELLOW_ON_WHITE
+      - BLACK_ON_LIGHT_YELLOW
+      - BLACK_ON_LIGHT_GREEN
+      - BLACK_ON_LIGHT_RED
     WidgetRequestStyle:
       description: Define request widget style.
       properties:
@@ -21109,6 +21206,10 @@ paths:
           description: Forbidden
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
       summary: Get indexes order
       tags:
       - Logs Indexes
@@ -21177,6 +21278,10 @@ paths:
           description: Forbidden
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
       summary: Get all indexes
       tags:
       - Logs Indexes
@@ -21336,6 +21441,10 @@ paths:
           description: Forbidden
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
       summary: Get pipeline order
       tags:
       - Logs Pipelines
@@ -21417,6 +21526,10 @@ paths:
           description: Forbidden
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
       summary: Get all pipelines
       tags:
       - Logs Pipelines
@@ -21534,6 +21647,10 @@ paths:
           description: Forbidden
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
       summary: Get a pipeline
       tags:
       - Logs Pipelines

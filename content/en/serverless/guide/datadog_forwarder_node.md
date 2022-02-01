@@ -5,14 +5,9 @@ kind: guide
 
 If you are a new user of Datadog Serverless, Datadog recommends using the [out-of-the-box Lambda functionality][1]. However, if you got set up on Datadog Serverless using the Datadog Forwarder before Lambda offered out-of-the-box functionality, use this guide to maintain your instance.
 
-## Required setup
+## Prerequisites
 
-If not already configured:
-
-- Install the [AWS integration][2]. This allows Datadog to ingest Lambda metrics from AWS.
-- Install the [Datadog Forwarder Lambda function][3], which is required to ingest AWS Lambda traces, enhanced metrics, custom metrics, and logs.
-
-After you have installed the [AWS integration][2] and the [Datadog Forwarder][3], follow these steps to instrument your application to send metrics, logs, and traces to Datadog.
+The [Datadog Forwarder Lambda function][2] is required to ingest AWS Lambda traces, enhanced metrics, custom metrics, and logs.
 
 ## Configuration
 
@@ -95,7 +90,7 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
 [1]: https://docs.datadoghq.com/serverless/serverless_integrations/plugin
 [2]: https://docs.datadoghq.com/serverless/forwarder/
 [3]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
-[4]: /serverless/troubleshooting/serverless_tracing_and_webpack/
+[4]: /serverless/guide/serverless_tracing_and_webpack/
 [5]: https://webpack.js.org/
 {{% /tab %}}
 {{% tab "AWS SAM" %}}
@@ -309,7 +304,7 @@ Subscribe the Datadog Forwarder Lambda function to each of your function’s log
 [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
 [2]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
 [3]: https://www.npmjs.com/package/datadog-lambda-js
-[4]: /serverless/troubleshooting/serverless_tracing_and_webpack/
+[4]: /serverless/guide/serverless_tracing_and_webpack/
 [5]: https://webpack.js.org/
 [6]: https://docs.datadoghq.com/serverless/forwarder/
 [7]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
@@ -318,11 +313,11 @@ Subscribe the Datadog Forwarder Lambda function to each of your function’s log
 
 ### Tag
 
-Although it's optional, Datadog recommends tagging you serverless applications with the `env`, `service`, and `version` tags following the [unified service tagging documentation][4].
+Although it's optional, Datadog recommends tagging you serverless applications with the `env`, `service`, and `version` tags following the [unified service tagging documentation][3].
 
 ## Explore
 
-After configuring your function following the steps above, view your metrics, logs, and traces on the [Serverless homepage][5].
+After configuring your function following the steps above, view your metrics, logs, and traces on the [Serverless homepage][4].
 
 ## Monitor custom business logic
 
@@ -375,7 +370,7 @@ exports.handler = async (event) => {
 };
 ```
 
-For more information on custom metric submission, see [here][6]. For additional details on custom instrumentation, see the Datadog APM documentation for [custom instrumentation][7].
+For more information on custom metric submission, see [Serverless Custom Metrics][5]. For additional details on custom instrumentation, see the Datadog APM documentation for [custom instrumentation][6].
 
 ## Further Reading
 
@@ -383,9 +378,8 @@ For more information on custom metric submission, see [here][6]. For additional 
 
 
 [1]: /serverless/installation
-[2]: /integrations/amazon_web_services/
-[3]: /serverless/forwarder
-[4]: /getting_started/tagging/unified_service_tagging/#aws-lambda-functions
-[5]: https://app.datadoghq.com/functions
-[6]: /serverless/custom_metrics?tab=nodejs
-[7]: /tracing/custom_instrumentation/nodejs/
+[2]: /serverless/forwarder
+[3]: /getting_started/tagging/unified_service_tagging/#aws-lambda-functions
+[4]: https://app.datadoghq.com/functions
+[5]: /serverless/custom_metrics?tab=nodejs
+[6]: /tracing/custom_instrumentation/nodejs/
