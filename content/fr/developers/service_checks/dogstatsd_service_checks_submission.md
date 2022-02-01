@@ -1,7 +1,7 @@
 ---
 title: "Envoi de checks de service\_: DogStatsD"
 kind: documentation
-description: 'Présentation des fonctionnalités de DogStatsD, y compris des types de données et du tagging.'
+description: Présentation des fonctionnalités de DogStatsD, y compris des types de données et du tagging.
 further_reading:
   - link: /developers/dogstatsd/
     tag: Documentation
@@ -9,7 +9,7 @@ further_reading:
   - link: /developers/community/libraries/
     tag: Documentation
     text: Bibliothèques client de Datadog et sa communauté pour DogStatsD et les API
-  - link: 'https://github.com/DataDog/datadog-agent/tree/master/pkg/dogstatsd'
+  - link: https://github.com/DataDog/datadog-agent/tree/master/pkg/dogstatsd
     tag: GitHub
     text: Code source de DogStatsD
 ---
@@ -29,13 +29,13 @@ Paramètres de la fonction check de service :
 |------------------------|-----------------|----------|---------------|------------------------------------------------------------------------------------------------------------|
 | `<NOM_CHECK_SERVICE>` | Chaîne          | Oui      | -             | Le nom du check de service.                                                                             |
 | `<STATUT>`             | Nombre entier             | Oui      | -             | Une constante décrivant le statut du service : `0` pour OK, `1` pour WARN, `2` pour CRITICAL et `3` pour UNKNOWN. |
-| `<TAGS>`               | Liste de chaînes | Non       | -             | La liste des tags à associer au check de service.                                                        |
+| `<TAGS>`               | Liste de paires key:value | Non       | -             | La liste des tags à associer au check de service.                                                        |
 | `<HOSTNAME>`           | Chaîne          | Non       | Host actuel  | Hostname à associer à ce check de service.                                                          |
 | `<MESSAGE>`            | Chaîne          | Non       | -             | Informations supplémentaires ou une description de la raison pour laquelle ce statut est généré.                                        |
 
 ### Exemples de code
 
-Choisissez votre langage pour obtenir un exemple de code de check de service :
+Exécutez le code suivant pour envoyer un check de service à Datadog via DogStatsD. N'oubliez pas de `flush` ou `close` le client une fois sa mission accomplie.
 
 {{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php" >}}
 
@@ -170,4 +170,4 @@ Après la transmission d'un check de service, utilisez-le pour déclencher un [m
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/developers/dogstatsd/
-[2]: /fr/monitors/monitor_types/custom_check/
+[2]: /fr/monitors/create/types/custom_check/

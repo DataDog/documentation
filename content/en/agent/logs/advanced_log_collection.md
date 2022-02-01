@@ -20,13 +20,14 @@ further_reading:
   text: "Logging without Limits*"
 ---
 
-Apply log processing rules to a specific log collection configurations to:
-
+Customize your log collection configuration:
 * [Filter logs](#filter-logs)
 * [Scrub sensitive data from your logs](#scrub-sensitive-data-from-your-logs)
-* [Proceed to multi-line aggregation](#multi-line-aggregation)
-* [Tail directories by using wildcards](#tail-directories-by-using-wildcards)
-* [Encode UTF-16 format logs](#encode-utf-16-format-logs)
+* [Aggregate multi-line logs](#multi-line-aggregation)
+* [Copy commonly used examples](#commonly-used-log-processing-rules)
+* [Use wildcards to monitor directories](#tail-directories-by-using-wildcards)
+* [Specify log file encodings](#logfile-encodings)
+* [Define global processing rules](#global-processing-rules)
 
 **Note**: If you set up multiple processing rules, they are applied sequentially and each rule is applied on the result of the previous one.
 
@@ -443,9 +444,101 @@ More examples:
 | 2020-10-27 05:10:49.657  | `\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2}\.\d{3}` |
 | {"date": "2018-01-02"    | `\{"date": "\d{4}-\d{2}-\d{2}`                |
 
+### Automatic multi-line aggregation
+With Agent 7.32+ `auto_multi_line_detection` can be enabled which allows the Agent to detect [common multi-line patterns][2] automatically. 
+
+<div class="alert alert-warning">
+Automatic Multi-line aggregation is in public beta.
+</div>
+
+Enable `auto_multi_line_detection` globally in the `datadog.yaml` file:
+
+```yaml
+logs_config:
+  auto_multi_line_detection: true
+```
+
+It can also be enabled or disabled (overriding the global config) per log configuration:
+
+{{< tabs >}}
+{{% tab "Configuration file" %}}
+
+```yaml
+logs:
+  - type: file
+    path: /my/test/file.log
+    service: testApp
+    source: java
+    auto_multi_line_detection: true
+```
+
+{{% /tab %}}
+{{% tab "Docker" %}}
+
+In a Docker environment, use the label `com.datadoghq.ad.logs` on your container to specify the `log_processing_rules`, for example:
+
+```yaml
+ labels:
+    com.datadoghq.ad.logs: >-
+      [{
+        "source": "java",
+        "service": "testApp",
+        "auto_multi_line_detection": true
+      }]
+```
+
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
+
+```yaml
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: testApp
+spec:
+  selector:
+    matchLabels:
+      app: testApp
+  template:
+    metadata:
+      annotations:
+        ad.datadoghq.com/testApp.logs: >-
+          [{
+            "source": "java",
+            "service": "testApp",
+            "auto_multi_line_detection": true
+          }]
+      labels:
+        app: testApp
+      name: testApp
+    spec:
+      containers:
+        - name: testApp
+          image: testApp:latest
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+Automatic multi-line detection uses a list of common regular expressions to attempt to match logs. If the built-in list is not sufficient, you can also add custom patterns in the `datadog.yaml` file:
+
+```yaml
+logs_config:
+  auto_multi_line_detection: true
+  auto_multi_line_extra_patterns:
+   - \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
+   - [A-Za-z_]+ \d+, \d+ \d+:\d+:\d+ (AM|PM)
+```
+
+With this feature enabled, when a new log file is opened the Agent tries to detect a pattern. During this process the logs are sent as single lines. After the detection threshold is met, all future logs for that source are aggregated with the detected pattern, or as single lines if no pattern is found. Detection takes at most 30 seconds or the first 500 logs (whichever comes first).
+
+**Note**: If you can control the naming pattern of the rotated log, ensure that the rotated file replaces the previously active file with the same name. The Agent reuses a previously detected pattern on the newly rotated file to avoid re-running detection.
+
+Automatic multi-line detection detects logs that begin and comply with the following date/time formats: RFC3339, ANSIC, Unix Date Format, Ruby Date Format, RFC822, RFC822Z, RFC850, RFC1123, RFC1123Z, RFC3339Nano, and default Java logging SimpleFormatter date format.
+
 ## Commonly used log processing rules
 
-See the dedicated [Commonly Used Log Processing Rules FAQ][2] to see a list of examples.
+See the dedicated [Commonly Used Log Processing Rules FAQ][3] to see a list of examples.
 
 ## Tail directories by using wildcards
 
@@ -473,13 +566,18 @@ logs:
     source: go
 ```
 
-The example above will match `/var/log/myapp/log/myfile.log` but `/var/log/myapp/log/debug.log` and `/var/log/myapp/log/trace.log` will never be tailed.
+The example above matches `/var/log/myapp/log/myfile.log` and excludes `/var/log/myapp/log/debug.log` and `/var/log/myapp/log/trace.log`.
 
 **Note**: The Agent requires read and execute permissions on a directory to list all the available files in it.
 
-## Encode UTF-16 format logs
+## Log file encodings
 
-If applications logs are written in UTF-16 format, starting with Datadog Agent **v6.23/v7.23**, users can encode these logs so that they are parsed as expected in the [Logs Explorer][3]. Use the `encoding` parameter in the logs configuration section. Set it to `utf-16-le` for UTF16 little-endian and `utf-16-be` for UTF16 big-endian. Any other value will be ignored and the Agent will read the file as UTF8.
+By default, the Datadog Agent assumes that logs use UTF-8 encoding. If your application logs use a different encoding, specify the `encoding` parameter in the logs configuration setting.
+
+The list below gives the supported encoding values. If you provide an unsupported value, the Agent ignores the value and reads the file as UTF-8.
+ * `utf-16-le` - UTF-16 little-endian (Datadog Agent **v6.23/v7.23**)
+ * `utf-16-be` - UTF-16 big-endian (Datadog Agent **v6.23/v7.23**)
+ * `shift-jis` - Shift-JIS (Datadog Agent **v6.34/v7.34**)
 
 Configuration example:
 
@@ -550,7 +648,7 @@ All the logs collected by the Datadog Agent are impacted by the global processin
 *Logging without Limits is a trademark of Datadog, Inc.
 
 [1]: https://golang.org/pkg/regexp/syntax/
-[2]: /agent/faq/commonly-used-log-processing-rules
-[3]: https://docs.datadoghq.com/logs/explorer/#overview
+[2]: https://github.com/DataDog/datadog-agent/blob/main/pkg/logs/decoder/auto_multiline_handler.go#L195
+[3]: /agent/faq/commonly-used-log-processing-rules
 [4]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 [5]: /agent/guide/agent-commands/#agent-information

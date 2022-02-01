@@ -14,7 +14,7 @@ further_reading:
   - link: /tracing/visualization/trace/
     tag: Documentation
     text: Comprendre comment lire une trace Datadog
-  - link: 'https://www.datadoghq.com/blog/datadog-clipboard/'
+  - link: https://www.datadoghq.com/blog/datadog-clipboard/
     tag: Blog
     text: Ajouter une URL vers la page d'un service APM à votre presse-papiers
 ---
@@ -26,11 +26,11 @@ Lorsque vous sélectionnez un service sur la page Services, vous accédez aux d�
 
 Cette page vous permet de consulter :
 
-* [Les états du Service Monitor](#service-monitor)
-* [Les graphiques par défaut](#out-of-the-box-graphs)
-* [Les ressources associées à ce service][2]
+* Les [états des service monitors](#service-monitor)
+* Les [graphiques prêts à l'emploi](#Graphiques-prets-a-l-emploi)
+* Les [ressources associées au service en question][2]
 
-## Service Monitor
+## Service monitor
 
 Datadog offre une liste de monitors en fonction de votre type de service :
 
@@ -40,7 +40,7 @@ Activez-les directement ou créez vos propres [monitors d'APM][3].
 
 **Remarque**: ajoutez un tag à un monitor avec `service:<NOM_SERVICE>` pour le lier à un service APM.
 
-## Les graphiques par défaut
+## Graphiques prêts à l'emploi
 
 Datadog fournit des graphiques par défaut pour chaque service :
 
@@ -62,11 +62,11 @@ Datadog fournit des graphiques par défaut pour chaque service :
 
 {{< img src="tracing/visualization/service/out_of_the_box_service_graph.png" alt="Graphiques par défaut pour les services" style="width:90%;">}}
 
-### Export to Timeboard
+### Exporter un graphique dans un dashboard
 
-En haut à droite de chaque graphique, cliquez sur la flèche pour exporter votre graphique dans un [timeboard][5] existant :
+En haut à droite de chaque graphique, cliquez sur la flèche pour exporter votre graphique dans un [dashboard][5] existant :
 
-{{< img src="tracing/visualization/service/save_to_timeboard.png" alt="Enregistrer en tant que timeboard"  style="width:40%;">}}
+{{< img src="tracing/visualization/service/save_to_dashboard.png" alt="Enregistrer le graphique dans un dashboard" style="width:80%;">}}
 
 ### Distribution de la latence
 
@@ -110,7 +110,7 @@ Choisissez ce que vous souhaitez afficher dans votre liste de ressources :
 
 [1]: /fr/tracing/visualization/
 [2]: /fr/tracing/visualization/resource/
-[3]: /fr/monitors/monitor_types/apm/
+[3]: /fr/monitors/create/types/apm/
 [4]: /fr/tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm/
-[5]: /fr/dashboards/timeboard/
+[5]: /fr/dashboards/
 [6]: /fr/tracing/visualization/#resources

@@ -58,7 +58,7 @@ The Datadog Agent only collects logs that have been written after it has started
 
 ## Permission issues tailing log files
 
-The `datadog-agent` does not run as root (and we do not recommend that you make it run as root, as a general best-practice). For this reason, when you configure your `datadog-agent` to tail log files (for custom logs or for integrations) you need to take special care to ensure the `datadog-agent` user has read access to tail the log files you want to collect from.
+The `datadog-agent` does not run as root (and running as root is not recommended, as a general best-practice). For this reason, when you configure your `datadog-agent` to tail log files (for custom logs or for integrations) you need to take special care to ensure the `datadog-agent` user has read access to tail the log files you want to collect from.
 
 In that case, you should see an error message when checking the [Agent status][5]:
 
@@ -86,7 +86,7 @@ Run the `namei` command to obtain more information about the file permissions:
  -rw-r----- error.log
 ```
 
-In this example, the `application` directory is not executable, therefore the Agent cannot list its files. Furthermore, the Agent does not have read permissions on the `error.log` file.
+In this example, the `application` directory is not executable by the Agent, therefore the Agent cannot list its files. Furthermore, the Agent does not have read permissions on the `error.log` file.
 Add the missing permissions via the [chmod command][6].
 
 {{< img src="logs/agent-log-permission-ok.png" alt="Permission OK"  style="width:70%;">}}

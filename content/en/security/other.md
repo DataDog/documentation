@@ -7,7 +7,7 @@ further_reading:
   text: "Review the main categories of data submitted to Datadog"
 ---
 
-<div class="alert alert-info">This page is about the security of Datadog; if you're looking for the Security Monitoring product, see the <a href="/security_monitoring" target="_blank">Security Monitoring section</a>.</div>
+<div class="alert alert-info">This page is about the security of Datadog; if you're looking for the Cloud SIEM product, see the <a href="/cloud_siem" target="_blank">Cloud SIEM section</a>.</div>
 
 This article is part of a [series on data security][1].
 
@@ -25,7 +25,7 @@ Additionally, the following keywords are obfuscated as a baseline:
 
 ## Cloud integrations security
 
-Datadog enables customers to integrate with 3rd-party services. Some of Datadog's [{{< translate key="integration_count" >}}+ built-in integrations][4] are configured directly in the Datadog application, and might require customers to provide credentials that allow Datadog to connect to the 3rd-party service on their behalf. Credentials provided by customers are encrypted and stored by Datadog in a secure credential datastore, with strict security guarantees enforced. All data is encrypted at-rest and in-transit. Access to the secure credential datastore is tightly controlled and highly audited, and specific services or actions within those services are limited to only what is necessary.
+Datadog enables customers to integrate with 3rd-party services. Some of Datadog's [{{< translate key="integration_count" >}}+ built-in integrations][4] are configured directly in the Datadog, and might require customers to provide credentials that allow Datadog to connect to the 3rd-party service on their behalf. Credentials provided by customers are encrypted and stored by Datadog in a secure credential datastore, with strict security guarantees enforced. All data is encrypted at-rest and in-transit. Access to the secure credential datastore is controlled and audited, and specific services or actions within those services are limited to only what is necessary.
 Anomalous behavior detection continuously monitors for unauthorized access. Employee access for maintenance purposes is limited to a select subset of engineers.
 
 Due to their sensitive nature, additional security guarantees are implemented where possible when integrating with cloud providers, including relying on Datadog-dedicated credentials with limited permissions. For example:

@@ -1,13 +1,13 @@
 ---
-title: Configurer un monitor de métrique pour envoyer des alertes en cas d'absence de changement d'une valeur
+title: Alerte en cas d'absence de changement d'une valeur
 kind: guide
 aliases:
   - /fr/monitors/faq/how-can-i-configure-a-metric-monitor-to-alert-on-no-change-in-value
 further_reading:
-  - link: /monitors/monitor_types/
+  - link: /monitors/create/types/
     tag: Documentation
     text: Apprendre à créer un monitor
-  - link: /monitors/notifications/
+  - link: /monitors/notify/
     tag: Documentation
     text: Configurer les notifications de vos monitors
 ---
@@ -40,4 +40,4 @@ D'autres [conditions et options d'alerte][2] peuvent être définies selon vos p
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/api/
-[2]: /fr/monitors/monitor_types/#define-the-conditions
+[2]: /fr/monitors/create/types/#define-the-conditions

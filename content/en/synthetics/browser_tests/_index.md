@@ -21,6 +21,9 @@ further_reading:
 - link: "/synthetics/guide/"
   tag: "Documentation"
   text: "Synthetic Monitoring Guides"
+- link: 'https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_test'
+  tag: 'Terraform'
+  text: 'Create and manage Synthetic Browser Tests with Terraform'
 ---
 
 ## Overview
@@ -64,14 +67,20 @@ Define the configuration of your browser test.
 3. **Name**: The name of your browser test.
 4. **Select your tags**: The tags attached to your browser test. Use the `<KEY>:<VALUE>` format to filter on a `<VALUE>` for a given `<KEY>` on the Synthetic tests page.
 5. **Browsers & Devices**: The browsers (`Chrome`, `Firefox`, `Edge`) and devices (`Laptop Large`, `Tablet`, `Mobile Small`) to run your test on. 
-6. **Locations**: The Datadog managed locations to run your test from. Many AWS locations from around the world are available for each site. For the Datadog for Government site, the West US (AWS GovCloud) location is supported. You can also set up [private locations][1] to run your browser test from custom locations or from inside private networks. See a full list of locations in the [Datadog app][2] or use the [API][3].
+6. **Locations**: The Datadog managed locations to run your test from. Many AWS locations from around the world are available for each site. You can also set up [private locations][1] to run your browser test from custom locations or from inside private networks. See a full list of locations in the [Datadog app][2] or use the [API][3]. {{< site-region region="gov" >}}**Note**: The West US (AWS GovCloud) location is supported on the Datadog for Government site.{{< /site-region >}}
 7. **How often should Datadog run the test?** Intervals are available between every five minutes to once per week. The one minute frequency is available [upon request][4].
 
 ### Use global variables
 
 You can use the [global variables defined in the **Settings**][5] in the **Starting URL** as well as in the **Advanced Options** of your browser tests. To display your list of variables, type `{{` in the desired field.
 
-{{< img src="synthetics/browser_tests/using_variables_browser.mp4" alt="Using Variables in Browser Tests" video="true"  width="80%" >}}
+{{< img src="synthetics/browser_tests/using_variables_browser.mp4" alt="Using Variables in Browser Tests" video="true" width="80%" >}}
+
+To use global variables in your browser test's recording, navigate to your recorded steps and click **+ Variables** below the **Start Recording** button. Select **Global Variable** from the dropdown menu. 
+
+{{< img src="synthetics/browser_tests/available-global-variables.png" alt="Available Global Variables" style="width:50%;" >}}
+
+Search for available global variables and click **+** to add them to your recording panel. When you are done adding global variables, click **OK**. 
 
 ### Define alert conditions
 

@@ -28,6 +28,8 @@ sources:
 
 ignores:
   - "content/en/**/faq/!(agent_v6_changes|certificate_verify_failed-error).md"
+  - "content/en/security_platform/default_rules/*.md"
+  - "content/en/security_monitoring/default_rules/*.md"
   - "**/*.fr.md"
   - "**/*.fr.yaml"
   - "**/*.fr.json"

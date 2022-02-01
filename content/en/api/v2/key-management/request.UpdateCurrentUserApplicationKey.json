@@ -1,0 +1,9 @@
+{
+  "data": {
+    "id": "string",
+    "type": "application_keys",
+    "attributes": {
+      "name": "Application Key for managing dashboards-updated"
+    }
+  }
+}

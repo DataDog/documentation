@@ -1,0 +1,35 @@
+name: Send PR Approval Status
+
+on:
+  pull_request:
+    branches:
+      - master
+    types: ["review_requested", "synchronize", "opened", "reopened"]
+  pull_request_review:
+    types:
+      - submitted
+      - dismissed
+
+jobs:
+  send_status:
+    runs-on: ubuntu-latest
+    if: >
+      github.event.pull_request.draft == false &&
+      !contains(github.event.pull_request.labels.*.name, 'ci/skip') &&
+      !contains(github.event.pull_request.head.ref, 'datadog-api-spec/test/') &&
+      contains(github.event.pull_request.head.ref, 'datadog-api-spec/generated/')
+    steps:
+      - name: Get GitHub App token
+        id: get_token
+        uses: tibdex/github-app-token@v1.3.0
+        with:
+          app_id: ${{ secrets.PIPELINE_GITHUB_APP_ID }}
+          private_key: ${{ secrets.PIPELINE_GITHUB_APP_PRIVATE_KEY }}
+          repository: DataDog/datadog-api-spec
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Post PR review status check
+        uses: DataDog/github-actions/post-review-status@v1.0.0
+        with:
+          github-token: ${{ steps.get_token.outputs.token }}
+          repo: datadog-api-spec

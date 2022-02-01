@@ -20,9 +20,14 @@ Les administrateurs peuvent accéder à l'onglet Usage Attribution à partir de 
 
 **Remarque** : les types de ressources suivants ne sont pas pris en charge par cet outil.
 
+- Analyzed Logs (Security)
+- Gestion des incidents
 - Événements de log indexés
-- Logs ingérés
-- Spans indexées
+- Ingested Logs
+- Indexed Spans
+- Spans ingérées
+- Network Flows
+- Real User Monitoring
 
 **Remarque : les spans indexées étaient auparavant désignées par le terme de « spans analysées ». Le changement de dénomination a eu lieu à l'occasion du lancement de Tracing Without Limits le 20 octobre 2020.**
 
@@ -41,7 +46,7 @@ La section **Applied Tags** vous permet d'effectuer plusieurs opérations :
 
 - Une fois les tags configurés, vous devez attendre 24 heures pour que le premier rapport soit généré.
 - Les rapports sont régulièrement générés.
-- Si vous modifiez des tags, les nouveaux rapports tiendront compte de vos changements. Cependant, les rapports précédents conserveront les anciens tags.
+- Si vous modifiez des tags, le nouveau rapport tient compte de vos changements. Cependant, les rapports précédents conservent les anciens tags.
 - Les rapports mensuels englobent l'ensemble de tags le plus récent. Si vous modifiez les tags au milieu du mois, les pourcentages d'utilisation risquent de ne pas correspondre. 
 
 ### Attribution de l'utilisation mensuelle

@@ -48,7 +48,7 @@ On the inspection page, each node can be inspected allowing you to pivot around 
 
 ## The "service" tag
 
-Clicking on a service reveals further drill-down options:
+Clicking on a service reveals further filtering options:
 
 {{< img src="tracing/visualization/services_map/servicetag-2.png" alt="Service Map tag" style="width:40%;">}}
 
@@ -58,7 +58,7 @@ The following screenshot shows a dashboard query for `service:fse-auto-process`.
 
 {{< img src="tracing/visualization/services_map/servicedash.png" alt="Service Map dashboard" style="width:90%;">}}
 
-Using this tag on your Host Map or logs with the same key allows Datadog to join applications to logs, infrastructure, or custom business metrics. On the drill-down menu shown above, each option pivots to the appropriate view of the collected data scoped to your `service`.
+Using this tag on your Host Map or logs with the same key allows Datadog to join applications to logs, infrastructure, or custom business metrics. On the visualization menu shown above, each option pivots to the appropriate view of the collected data scoped to your `service`.
 
 {{< img src="tracing/visualization/services_map/servicemaptags.png" alt="Service Map tags" style="width:80%;">}}
 

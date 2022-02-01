@@ -44,7 +44,7 @@ Cette opération nécessite beaucoup de ressources. Il est donc conseillé de g�
 dogwrap -n "Nettoyage matable" -k $DATADOG_API_KEY --submit_mode errors "psql -c 'vacuum verbose ma_table' 2>&1 /var/log/postgres_vacuums.log"
 ```
 
-Cela appelle la commande à la fin du script. Si celle-ci génère un code de sortie différent de zéro (à savoir, une erreur), des événements Datadog sont alors envoyés. `--submit_mode all` envoie des événements à chaque exécution de cette commande.
+Cela appelle la commande à la fin du script. Si celle-ci génère un code de sortie différent de zéro (comme une erreur), des événements Datadog sont alors envoyés. `--submit_mode all` envoie des événements à chaque exécution de cette commande.
 
 [1]: https://github.com/DataDog/datadogpy
-[2]: https://app.datadoghq.com/account/settings#api
+[2]: https://app.datadoghq.com/organization-settings/api-keys

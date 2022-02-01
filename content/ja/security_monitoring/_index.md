@@ -1,5 +1,5 @@
 ---
-title: Security Monitoring と Compliance Monitoring
+title: Cloud SIEM と Compliance Monitoring
 kind: ドキュメント
 aliases:
   - /ja/compliance_monitoring
@@ -10,7 +10,7 @@ Compliance Monitoring は、現在非公開ベータ版でご利用いただけ�
 
 ## 概要
 
-{{< img src="security_platform/security_monitoring/overview_top.png" alt="Datadog Security Monitoring" >}}
+{{< img src="security_platform/security_monitoring/overview_top.png" alt="Datadog Cloud SIEM" >}}
 
 Datadog セキュリティモニタリングおよびコンプライアンスモニタリングは、開発、運用、セキュリティチームを 1 つのプラットフォームでつなげます。1 つのダッシュボードに DevOps コンテンツ、営業用メトリクス、そしてセキュリティコンテンツを表示。アプリケーションおよびインフラストラクチャーへの標的型攻撃、脅威のインテルリストに一致するシステムと通信する IP、安全でない構成などの脅威をリアルタイムに検出し、セキュリティに関する問題をメール、Slack、Jira、PagerDuty、または Webhook を使用してチームに通知します。
 
@@ -25,7 +25,7 @@ Datadog セキュリティモニタリングおよびコンプライアンスモ
 {{< img src="compliance_monitoring/compliance-dashboard.png" alt="Datadog コンプライアンスモニタリング" >}}
 
 {{< whatsnext desc="このセクションには、次のトピックが含まれています。">}}
-  {{< nextlink href="/security_monitoring/getting_started">}}<u>はじめに</u>: Datadog Security Monitoring の主要な概念、脅威検出を有効にする方法、すぐに使用可能な脅威検出ルールについて学習します。{{< /nextlink >}}
+  {{< nextlink href="/security_monitoring/getting_started">}}<u>はじめに</u>: Datadog Cloud SIEM の主要な概念、脅威検出を有効にする方法、すぐに使用可能な脅威検出ルールについて学習します。{{< /nextlink >}}
   {{< nextlink href="/security_monitoring/detection_rules">}}<u>脅威検出ルール</u>: 検出ルールを確立して、取り込まれたすべてのログ内でセキュリティの脅威と疑わしい動作を検出するための条件付きロジックを定義します。{{< /nextlink >}}
   {{< nextlink href="/security_monitoring/default_rules">}}<u>デフォルトのルール</u>: 革新的な脅威検出ルールで、攻撃者のテクニックと潜在的な構成ミスを報告し、セキュリティ体制を即座に改善します。{{< /nextlink >}}
   {{< nextlink href="/security_monitoring/explorer">}}<u>シグナルエクスプローラー</u>: セキュリティシグナルを検索、視覚化、トリアージします。{{< /nextlink >}}

@@ -16,7 +16,7 @@ Capture groups from the provided regex can be used to supply additional tag valu
 
 This article provides one example of how to use the `bean_regex` from the [Java integration][2], and how to reference such capture groups to set additional tags.
 
-Suppose you have the following Mbean name: `domain.example.com:name=my.metric.name.env.dev.region.eu-central-1.method.GET.status.200`. There is some information we could use as tags once the Agent has collected the metric. For instance, we could export such metric with the following tags:
+Suppose you have the following Mbean name: `domain.example.com:name=my.metric.name.env.dev.region.eu-central-1.method.GET.status.200`. There is some information you could use as tags once the Agent has collected the metric. For instance, you could export a metric with the following tags:
 
 * `env`: `dev`
 * `region`: `eu-central-1`
@@ -50,7 +50,7 @@ instances:
               optional: tag
 ```
 
-Each capture group is stored in a Java Map. The first capture group starts at position `0`. Once you determined which capture group you want to export as a tag, you just have to reference them in the `tags` section of your `include` or `exclude` filter, plus to the number of the group (e.g. the position inside the Map).
+Each capture group is stored in a Java Map. The first capture group starts at position `0`. After you have determined which capture group you want to export as a tag, you need to reference them in the `tags` section of your `include` or `exclude` filter, as well as to the number of the group (for example, the position inside the Map).
 
 For the provided example in `bean_regex`, the capture groups are:
 
@@ -60,7 +60,7 @@ For the provided example in `bean_regex`, the capture groups are:
 * `$3`: `GET`
 * `$4`: `200`
 
-Using the [Metrics Explorer][3], you will be able to query your metrics and filter them by the tags you have just created.
+Using the [Metrics Explorer][3], you are able to query your metrics and filter them by the tags you have just created.
 
 ## Further Reading
 

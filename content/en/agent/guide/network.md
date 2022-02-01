@@ -40,7 +40,7 @@ All Agent traffic is sent over SSL. The destination is dependent on the Datadog 
 
 [Logs][5] & [HIPAA logs][6]
 : TCP: `{{< region-param key="tcp_endpoint" code="true" >}}`<br>
-HTTP: `{{< region-param key="http_endpoint" code="true" >}}`<br>
+HTTP: `{{< region-param key="agent_http_endpoint" code="true" >}}`<br>
 Other: See [logs endpoints][7]
 
 [HIPAA logs legacy][6]
@@ -124,43 +124,45 @@ Open the following ports to benefit from all the **Agent** functionalities:
 : Port for most Agent data (Metrics, APM, Live Processes/Containers)
 
 123/udp
-: Port for NTP ([more details on the importance of NTP][1]).
+: Port for NTP ([more details on the importance of NTP][1]).<br>
+See [default NTP targets][2].
 
 {{< region-param key="tcp_endpoint_port_ssl" >}}/tcp
 : Port for log collection over TCP.<br>
-See [logs endpoints][2] for other connection types.
+See [logs endpoints][3] for other connection types.
 
 10255/tcp
-: Port for the [Kubernetes HTTP Kubelet][3]
+: Port for the [Kubernetes HTTP Kubelet][4]
 
 10250/tcp
-: Port for the [Kubernetes HTTPS Kubelet][3]
+: Port for the [Kubernetes HTTPS Kubelet][4]
 
 #### Inbound
 
 Used for Agent services communicating with each other locally within the host only.
 
 5000/tcp
-: Port for the [go_expvar server][4]
+: Port for the [go_expvar server][5]
 
 5001/tcp
 : Port the IPC API listens to
 
 5002/tcp
-: Port for the [Agent browser GUI][5]
+: Port for the [Agent browser GUI][6]
 
 8125/udp
 : Port for DogStatsD unless `dogstatsd_non_local_traffic` is set to true. This port is available on localhost: `127.0.0.1`, `::1`, `fe80::1`.
 
 8126/tcp
-: Port for the [APM receiver][6]
+: Port for the [APM receiver][7]
 
 [1]: /agent/faq/network-time-protocol-ntp-offset-issues/
-[2]: /logs/log_collection/#datadog-logs-endpoints
-[3]: /agent/basic_agent_usage/kubernetes/
-[4]: /integrations/go_expvar/
-[5]: /agent/basic_agent_usage/#gui
-[6]: /tracing/
+[2]: /integrations/ntp/#overview
+[3]: /logs/log_collection/#datadog-logs-endpoints
+[4]: /agent/basic_agent_usage/kubernetes/
+[5]: /integrations/go_expvar/
+[6]: /agent/basic_agent_usage/#gui
+[7]: /tracing/
 {{% /tab %}}
 {{% tab "Agent v5 & v4" %}}
 
@@ -170,15 +172,15 @@ Used for Agent services communicating with each other locally within the host on
 : Port for most Agent data (Metrics, APM, Live Processes/Containers)
 
 123/udp
-: Port for NTP ([more details on the importance of NTP][1]).
-
+: Port for NTP ([more details on the importance of NTP][1]).<br>
+See [default NTP targets][2].
 #### Inbound
 
 8125/udp
 : Port for DogStatsD unless `dogstatsd_non_local_traffic` is set to true. This port is available on localhost: `127.0.0.1`, `::1`, `fe80::1`.
 
 8126/tcp
-: Port for the [APM Receiver][2]
+: Port for the [APM Receiver][3]
 
 17123/tcp
 : Agent forwarder, used to buffer traffic in case of network splits between the Agent and Datadog
@@ -187,7 +189,8 @@ Used for Agent services communicating with each other locally within the host on
 : Optional graphite adapter
 
 [1]: /agent/faq/network-time-protocol-ntp-offset-issues/
-[2]: /tracing/
+[2]: /integrations/ntp/#overview
+[3]: /tracing/
 {{% /tab %}}
 {{< /tabs >}}
 

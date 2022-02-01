@@ -21,7 +21,10 @@ further_reading:
   tag: "Documentation"
   text: "Understand how to read a Datadog Trace"
 ---
-The APM UI provides many tools to troubleshoot application performance and correlate it throughout the product, which helps you find and resolve issues in highly distributed systems.
+
+{{< jqmath-vanilla >}}
+
+The APM UI provides many tools to troubleshoot application performance and correlate it throughout the product, which helps you find and resolve issues in distributed systems.
 
 | Concept                         | Description                                                                                                                                                                                                          |
 |---------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -86,6 +89,27 @@ For the example below, the span `rack.request` is the entry-point span of the tr
 
 {{< img src="tracing/visualization/span_with_metadata.png" alt="span" >}}
 
+## Span summary
+
+The span summary table shows metrics for spans aggregated across all traces, including how often the span shows up among all traces, what percent of traces contain the span, the average duration for the span, and its typical share of total execution time of the requests. This helps you detect N+1 problems in your code so you can improve your application performance. 
+
+The span summary table contains the following columns:
+
+Average spans per trace
+: Average number of occurrences of the span for traces, including the current resource, where the span is present at least once.
+
+Percentage of traces
+: Percentage of traces, including the current resource, where the span is present at least once.
+
+Average duration
+: Average duration of the span for traces, including the current resource, where the span is present at least once.
+
+Average percentage of execution time
+: Average ratio of execution time for which the span was active for traces, including the current resource, where the span is present at least once.
+
+{{< img src="tracing/visualization/span-summary.png" alt="Span summary table" >}}
+
+
 ## Service entry span
 
 A span is a service entry span when it is the entrypoint method for a request to a service. You can visualize this within Datadog APM when the color of the immediate parent on a flame graph is a different color.  Services are also listed on the right when viewing a flame graph.
@@ -116,9 +140,9 @@ Trace metrics are useful for monitoring. APM monitors can be set up on the [New 
 
 {{< img src="tracing/visualization/trace_metric_monitor.mp4" video="true" alt="trace metrics monitor" >}}
 
-## Trace search and analytics
+## Trace Explorer
 
-[Search and perform analytics][14] on 100% of ingested traces for 15 minutes and all [indexed spans](#indexed-span) for 15 days.
+[Explore and perform analytics][14] on 100% of ingested traces for 15 minutes and all [indexed spans](#indexed-span) for 15 days.
 
 ## Indexed span
 
@@ -156,17 +180,20 @@ Some [Tracing Application Metrics][15] are tagged with `sublayer_service` and `s
 
 ## Execution time
 
-The active spans for a given time, for a given trace, are all of the leaf spans (spans without children).
+Execution time is calculated by adding up the time that a span is active, meaning it has no child spans. For non-concurrent work, this is straightforward. In the following image, the execution time for Span 1 is $\D1 + \D2 + \D3$. The execution time for Spans 2 and 3 are their respective widths.
 
-{{< img src="tracing/visualization/execution_duration.png" style="width:50%;" alt="Execution Time"  style="width:50%;">}}
+{{< img src="tracing/visualization/execution-time1.png" style="width:50%;" alt="Execution time" >}}
 
+When child spans are concurrent, execution time is calculated by dividing the overlapping time by the number of concurrently active spans. In the following image, Spans 2 and 3 are concurrent (both are children of Span 1), overlapping for the duration of Span 3, so the execution time of Span 2 is $\D2 ÷ 2 + \D3$, and the execution time of Span 3 is $\D2 ÷ 2$.
+
+{{< img src="tracing/visualization/execution-time2.png" style="width:50%;" alt="Execution time for concurrent work" >}}
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /monitors/create/types/apm/
-[2]: /developers/faq/data-collection-resolution-retention/
+[2]: /developers/guide/data-collection-resolution-retention/
 [3]: /tracing/setup/
 [4]: /tracing/visualization/services_list/
 [5]: /tracing/visualization/services_map/
@@ -178,10 +205,10 @@ The active spans for a given time, for a given trace, are all of the leaf spans 
 [11]: /tracing/connect_logs_and_traces/
 [12]: /tracing/guide/adding_metadata_to_spans/
 [13]: /tracing/runtime_metrics/
-[14]: /tracing/trace_search_and_analytics/
+[14]: /tracing/trace_explorer/
 [15]: /tracing/guide/metrics_namespace/
 [16]: https://app.datadoghq.com/metric/summary
 [17]: https://app.datadoghq.com/monitors#/create
-[18]: /tracing/trace_search_and_analytics/query_syntax/#facets
+[18]: /tracing/trace_explorer/query_syntax/#facets
 [19]: /tracing/trace_retention_and_ingestion/#retention-filters
 [20]: /tracing/trace_retention_and_ingestion/#ingestion-controls

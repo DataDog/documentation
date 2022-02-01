@@ -21,6 +21,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/monitor-apis-with-datadog"
   tag: "Blog"
   text: "Monitor your workflows with Datadog SSL, TLS, and Multistep API tests"
+- link: 'https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_test'
+  tag: 'Terraform'
+  text: 'Create and manage Synthetic API Tests with Terraform'
 ---
 
 ## Overview
@@ -42,7 +45,7 @@ API tests run from Datadog [managed locations][3] or [private locations][4], all
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /synthetics/api_tests/http_tests?tab=requestoptions#notify-your-team
-[2]: /synthetics/cicd_testing
+[2]: /synthetics/cicd_integrations
 [3]: /api/v1/synthetics/#get-all-locations-public-and-private
 [4]: /synthetics/private_locations
 [5]: /synthetics/multistep/

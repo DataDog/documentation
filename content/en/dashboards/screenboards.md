@@ -25,14 +25,14 @@ Screenboards are dashboards with free-form layouts which can include a variety o
 
 Click on any screenboard graph to open an options menu:
 
-| Option                 | Description                                                   |
-|------------------------|---------------------------------------------------------------|
-| View in full screen    | View the graph in [full screen mode][1].                     |
-| View related processes | Jump to the [Live Processes][2] page scoped to your graph.   |
-| View related hosts     | Jump to the [Host Map][3] page scoped to your graph.         |
-| View related logs      | Populate a [Logs][4] panel scoped to your graph.             |
-| View related traces    | Populate a [Traces][5] panel scoped to your graph.          |
-| View related profiles  | Jump to the [Profiling][6] page scoped to your graph.       |
+| Option                 | Description                                                      |
+|------------------------|------------------------------------------------------------------|
+| View in full screen    | View the graph in [full screen mode][1].                         |
+| View related processes | Navigate to the [Live Processes][2] page scoped to your graph.   |
+| View related hosts     | Navigate to the [Host Map][3] page scoped to your graph.         |
+| View related logs      | Populate a [Logs][4] panel scoped to your graph.                 |
+| View related traces    | Populate a [Traces][5] panel scoped to your graph.               |
+| View related profiles  | Navigate to the [Profiling][6] page scoped to your graph.        |
 
 ## Further Reading
 

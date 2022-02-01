@@ -3,9 +3,9 @@ title: デフォルトのコンフィギュレーションルール
 kind: documentation
 disable_toc: true
 ---
-{{< site-region region="us3,gov,eu" >}}
+{{< site-region region="us3,us5,gov,eu" >}}
 <div class="alert alert-warning">
-クラウドセキュリティポスチャ管理は、現在 US1-FED、US3、EU では利用できません。
+クラウドセキュリティポスチャ管理は、現在このサイトでは利用できません。
 </div>
 {{< /site-region >}}
 

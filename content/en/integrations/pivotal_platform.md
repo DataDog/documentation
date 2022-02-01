@@ -20,8 +20,8 @@ dependencies:
 aliases:
     - /integrations/cloud_foundry/
 doc_link: /integrations/pivotal_platform/
-ddtype: check
 integration_id: "pivotal-platform"
+ddtype: check
 ---
 
 ## Overview
@@ -380,7 +380,7 @@ jobs:
       flush_duration_seconds: 15
     loggregator:
       # do NOT append '/firehose' or even a trailing slash to the URL; 'ws://<host>:<port>' works
-      # e.g. ws://traffic-controller.your-cf-domain.com:8081
+      # for example, ws://traffic-controller.your-cf-domain.com:8081
       traffic_controller_url: "<LOGGREGATOR_URL>"
     nozzle:
       # tags each firehose metric with 'deployment:<DEPLOYMENT_NAME>'
@@ -394,7 +394,7 @@ jobs:
     uaa:
       client: datadog-firehose-nozzle # client name you just configured
       client_secret: "<SECRET_YOU_JUST_CONFIGURED>"
-      url: <UAA_URL> # e.g. https://uaa.your-cf-domain.com:8443
+      url: <UAA_URL> # for example, https://uaa.your-cf-domain.com:8443
 ```
 
 To see all available configuration options, check the [Datadog Firehose Nozzle repository][22].

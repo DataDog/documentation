@@ -1,0 +1,52 @@
+{
+  "data": {
+    "attributes": {
+      "cells": [
+        {
+          "attributes": {
+            "definition": {
+              "text": "## Some test markdown\n\n```js\nvar x, y;\nx = 5;\ny = 6;\n```",
+              "type": "markdown"
+            }
+          },
+          "type": "notebook_cells"
+        },
+        {
+          "attributes": {
+            "definition": {
+              "requests": [
+                {
+                  "display_type": "line",
+                  "q": "avg:system.load.1{*}",
+                  "style": {
+                    "line_type": "solid",
+                    "line_width": "normal",
+                    "palette": "dog_classic"
+                  }
+                }
+              ],
+              "show_legend": true,
+              "type": "timeseries",
+              "yaxis": {
+                "scale": "linear"
+              }
+            },
+            "graph_size": "m",
+            "split_by": {
+              "keys": [],
+              "tags": []
+            },
+            "time": null
+          },
+          "type": "notebook_cells"
+        }
+      ],
+      "name": "Example-Create_a_notebook_returns_OK_response",
+      "status": "published",
+      "time": {
+        "live_span": "1h"
+      }
+    },
+    "type": "notebooks"
+  }
+}

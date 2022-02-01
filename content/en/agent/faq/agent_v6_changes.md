@@ -456,7 +456,7 @@ For Agent v6, all check-related Python code is imported from the `datadog_checks
 
 **Note**: All official integrations were updated to remove obsolete modules, so these changes only affect custom checks.
 
-A lot of the `utils` directory was removed from Agent v6, but most of the removed content was not directly related to checks. The flare module, for example, was removed and reimplemented in Go, but is unlikely to have been used by anyone in a custom check. For more details, see the [development documentation][9].
+A lot of the `utils` directory was removed from Agent v6, but most of the removed content was not directly related to checks. The flare module, for example, was removed and reimplemented in Go, but is uncommon to have been used by anyone in a custom check. For more details, read the [custom checks developer guide][9].
 
 {{< tabs >}}
 {{% tab "Integrations" %}}
@@ -569,4 +569,4 @@ Similarly, you may have added a PIP package to meet a requirement for a custom c
 [6]: /agent/guide/agent-commands/
 [7]: /getting_started/agent/autodiscovery/
 [8]: https://github.com/DataDog/integrations-core/tree/master/datadog_checks_base
-[9]: https://github.com/DataDog/datadog-agent/tree/master/docs/dev/checks
+[9]: https://github.com/DataDog/datadog-agent/tree/main/docs/dev/checks

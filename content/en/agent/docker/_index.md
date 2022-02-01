@@ -58,6 +58,8 @@ docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v
 
 **Note**: If you're using a different registry besides GCR or ECR-public, make sure to update the image.
 
+**Note**: For some features provided by system-probe, including network monitoring, security agent, and oom_kill check, you must also mount the `/etc/os-release` file with `-v /etc/os-release:/host/etc/os-release:ro`. If your Linux distribution does not include an `/etc/os-release` file, mount the equivalent one provided, for example `/etc/redhat-release` or `/etc/fedora-release`.
+
 {{% /tab %}}
 {{% tab "Amazon Linux" %}}
 
@@ -133,6 +135,7 @@ The Agent's [main configuration file][13] is `datadog.yaml`. For the Docker Agen
 | `DD_API_KEY`       | Your Datadog API key (**required**)                                                                                                                                                                                                                                                                                                              |
 | `DD_ENV`           | Sets the global `env` tag for all data emitted.                                                                                                                                                                                                                                                                                                  |
 | `DD_HOSTNAME`      | Hostname to use for metrics (if autodetection fails)                                                                                                                                                                                                                                                                                             |
+| `DD_HOSTNAME_FILE`      | In some environments, auto-detection of the hostname is not adequate, and you cannot set the value with environment variables. In these cases, you can use a file on the host to provide an appropriate value. If `DD_HOSTNAME` is set to a non-empty value, this option is ignored.                                              |
 | `DD_TAGS`          | Host tags separated by spaces. For example: `simple-tag-0 tag-key-1:tag-value-1`                                                                                                                                                                                                                                                                 |
 | `DD_SITE`          | Destination site for your metrics, traces, and logs. Set your Datadog site to: `{{< region-param key="dd_site" >}}`. Defaults to `datadoghq.com`.                                                                                                                                                                                                |
 | `DD_DD_URL`        | Optional setting to override the URL for metric submission.                                                                                                                                                                                                                                                                                      |
@@ -156,13 +159,14 @@ Optional collection Agents are disabled by default for security or performance r
 
 | Env Variable               | Description                                                                                                                                                                                                                                                      |
 |----------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `DD_APM_ENABLED`           | Enable [trace collection][15] with the Trace Agent.                                                                                                                                                                                                              |
-| `DD_LOGS_ENABLED`          | Enable [log collection][16] with the Logs Agent.                                                                                                                                                                                                                 |
-| `DD_PROCESS_AGENT_ENABLED` | Enable [live process collection][17] with the Process Agent. The [live container view][18] is already enabled by default if the Docker socket is available. If set to `false`, the [live process collection][17] and the [live container view][18] are disabled. |
+| `DD_APM_ENABLED`           | Enable trace collection. Read about additional trace collection environment variables in [Tracing Docker Applications][15].   |
+| `DD_APM_NON_LOCAL_TRAFFIC` | Allow non-local traffic when [tracing from other containers][16].       |
+| `DD_LOGS_ENABLED`          | Enable [log collection][17] with the Logs Agent.                                                                                                                                                                                                                 |
+| `DD_PROCESS_AGENT_ENABLED` | Enable [live process collection][18] with the Process Agent. The [live container view][19] is already enabled by default if the Docker socket is available. If set to `false`, the [live process collection][18] and the [live container view][19] are disabled. |
 
 ### DogStatsD (custom metrics)
 
-Send custom metrics with [the StatsD protocol][19]:
+Send custom metrics with [the StatsD protocol][20]:
 
 | Env Variable                     | Description                                                                                                                                                |
 |----------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -173,13 +177,13 @@ Send custom metrics with [the StatsD protocol][19]:
 | `DD_DOGSTATSD_ORIGIN_DETECTION`  | Enable container detection and tagging for unix socket metrics.                                                                                            |
 | `DD_DOGSTATSD_TAGS`              | Additional tags to append to all metrics, events, and service checks received by this DogStatsD server, for example: `"env:golden group:retrievers"`. |
 | `DD_DOGSTATSD_DISABLE`           | Disables sending custom metrics from the dogstatsd library.                                                                                                |
-Learn more about [DogStatsD over Unix Domain Sockets][20].
+Learn more about [DogStatsD over Unix Domain Sockets][21].
 
 ### Tagging
 
-As a best practice, Datadog recommends using [unified service tagging][21] when assigning tags.
+As a best practice, Datadog recommends using [unified service tagging][22] when assigning tags.
 
-Datadog automatically collects common tags from [Docker][22], [Kubernetes][23], [ECS][24], [Swarm, Mesos, Nomad, and Rancher][22]. To extract even more tags, use the following options:
+Datadog automatically collects common tags from [Docker][23], [Kubernetes][24], [ECS][25], [Swarm, Mesos, Nomad, and Rancher][23]. To extract even more tags, use the following options:
 
 | Env Variable               | Description                                               |
 |----------------------------|-----------------------------------------------------------|
@@ -187,11 +191,11 @@ Datadog automatically collects common tags from [Docker][22], [Kubernetes][23], 
 | `DD_DOCKER_ENV_AS_TAGS`    | Extract Docker container environment variables            |
 | `DD_COLLECT_EC2_TAGS`      | Extract custom EC2 tags without using the AWS integration |
 
-See the [Docker Tag Extraction][25] documentation to learn more.
+See the [Docker Tag Extraction][26] documentation to learn more.
 
 ### Using secret files
 
-Integration credentials can be stored in Docker or Kubernetes secrets and used in Autodiscovery templates. For more information, see the [Secrets Management documentation][26].
+Integration credentials can be stored in Docker or Kubernetes secrets and used in Autodiscovery templates. For more information, see the [Secrets Management documentation][27].
 
 ### Ignore containers
 
@@ -208,7 +212,7 @@ Exclude containers from logs collection, metrics collection, and Autodiscovery. 
 | `DD_AC_INCLUDE`                | **Deprecated**. Allowlist of containers to include (separated by spaces). Use `.*` to include all. For example: `"image:image_name_1 image:image_name_2"`, `image:.*`                                                                                                                                                     |
 | `DD_AC_EXCLUDE`                | **Deprecated**. Blocklist of containers to exclude (separated by spaces). Use `.*` to exclude all. For example: `"image:image_name_3 image:image_name_4"` (**Note**: This variable is only honored for Autodiscovery.), `image:.*`                                                                                        |
 
-Additional examples are available on the [Container Discover Management][27] page.
+Additional examples are available on the [Container Discover Management][28] page.
 
 **Note**: The `kubernetes.containers.running`, `kubernetes.pods.running`, `docker.containers.running`, `.stopped`, `.running.total` and `.stopped.total` metrics are not affected by these settings. All containers are counted. This does not affect your per-container billing.
 
@@ -223,7 +227,7 @@ You can add extra listeners and config providers using the `DD_EXTRA_LISTENERS` 
 
 ## Commands
 
-See the [Agent Commands guides][28] to discover all the Docker Agent commands.
+See the [Agent Commands guides][29] to discover all the Docker Agent commands.
 
 ## Data collected
 
@@ -233,16 +237,16 @@ By default, the Docker Agent collects metrics with the following core checks. To
 
 | Check       | Metrics       |
 |-------------|---------------|
-| CPU         | [System][29]  |
-| Disk        | [Disk][30]    |
-| Docker      | [Docker][31]  |
-| File Handle | [System][29]  |
-| IO          | [System][29]  |
-| Load        | [System][29]  |
-| Memory      | [System][29]  |
-| Network     | [Network][32] |
-| NTP         | [NTP][33]     |
-| Uptime      | [System][29]  |
+| CPU         | [System][30]  |
+| Disk        | [Disk][31]    |
+| Docker      | [Docker][32]  |
+| File Handle | [System][30]  |
+| IO          | [System][30]  |
+| Load        | [System][30]  |
+| Memory      | [System][30]  |
+| Network     | [Network][33] |
+| NTP         | [NTP][34]     |
+| Uptime      | [System][30]  |
 
 ### Events
 
@@ -275,21 +279,22 @@ Returns `CRITICAL` if an Agent check is unable to send metrics to Datadog, other
 [13]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 [14]: /agent/proxy/#agent-v6
 [15]: /agent/docker/apm/
-[16]: /agent/docker/log/
-[17]: /infrastructure/process/
-[18]: /infrastructure/livecontainers/
-[19]: /developers/dogstatsd/
-[20]: /developers/dogstatsd/unix_socket/
-[21]: /getting_started/tagging/unified_service_tagging/
-[22]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/docker_extract.go
-[23]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/kubelet_extract.go
-[24]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/ecs_extract.go
-[25]: /agent/docker/tag/
-[26]: /agent/guide/secrets-management/?tab=linux
-[27]: /agent/guide/autodiscovery-management/
-[28]: /agent/guide/agent-commands/
-[29]: /integrations/system/#metrics
-[30]: /integrations/disk/#metrics
-[31]: /agent/docker/data_collected/#metrics
-[32]: /integrations/network/#metrics
-[33]: /integrations/ntp/#metrics
+[16]: /agent/docker/apm/#tracing-from-other-containers
+[17]: /agent/docker/log/
+[18]: /infrastructure/process/
+[19]: /infrastructure/livecontainers/
+[20]: /developers/dogstatsd/
+[21]: /developers/dogstatsd/unix_socket/
+[22]: /getting_started/tagging/unified_service_tagging/
+[23]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/docker_extract.go
+[24]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/kubelet_extract.go
+[25]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/ecs_extract.go
+[26]: /agent/docker/tag/
+[27]: /agent/guide/secrets-management/?tab=linux
+[28]: /agent/guide/autodiscovery-management/
+[29]: /agent/guide/agent-commands/
+[30]: /integrations/system/#metrics
+[31]: /integrations/disk/#metrics
+[32]: /agent/docker/data_collected/#metrics
+[33]: /integrations/network/#metrics
+[34]: /integrations/ntp/#metrics

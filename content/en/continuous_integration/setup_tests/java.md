@@ -10,7 +10,7 @@ further_reading:
       text: "Troubleshooting CI"
 ---
 
-{{< site-region region="us5,gov" >}}
+{{< site-region region="gov" >}}
 <div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
@@ -27,6 +27,8 @@ Supported test frameworks:
 
 ## Installing the Java tracer
 
+Install and enable the Java tracer v0.91.0 or newer.
+
 {{< tabs >}}
 {{% tab "Maven" %}}
 
@@ -39,7 +41,7 @@ Add a new Maven profile in your root `pom.xml` configuring the Datadog Java trac
     <activeByDefault>false</activeByDefault>
   </activation>
   <properties>
-    <dd.java.agent.arg>-javaagent:${settings.localRepository}/com/datadoghq/dd-java-agent/$VERSION/dd-java-agent-$VERSION.jar -Ddd.service=my-java-app -Ddd.prioritization.type=ENSURE_TRACE -Ddd.jmxfetch.enabled=false -Ddd.integrations.enabled=false -Ddd.integration.junit.enabled=true -Ddd.integration.testng.enabled=true</dd.java.agent.arg>
+    <dd.java.agent.arg>-javaagent:${settings.localRepository}/com/datadoghq/dd-java-agent/$VERSION/dd-java-agent-$VERSION.jar -Ddd.service=my-java-app -Ddd.civisibility.enabled=true</dd.java.agent.arg>
   </properties>
   <dependencies>
     <dependency>
@@ -131,7 +133,7 @@ Configure the `test` Gradle task by adding to the `jvmArgs` attribute the `-java
 {{< code-block lang="groovy" filename="build.gradle" >}}
 test {
   if(project.hasProperty("dd-civisibility")) {
-    jvmArgs = ["-javaagent:${configurations.ddTracerAgent.asPath}", "-Ddd.service=my-java-app", "-Ddd.prioritization.type=ENSURE_TRACE", "-Ddd.jmxfetch.enabled=false", "-Ddd.integrations.enabled=false", "-Ddd.integration.junit.enabled=true", "-Ddd.integration.testng.enabled=true"]
+    jvmArgs = ["-javaagent:${configurations.ddTracerAgent.asPath}", "-Ddd.service=my-java-app", "-Ddd.civisibility.enabled=true"]
   }
 }
 {{< /code-block >}}
@@ -224,6 +226,17 @@ If you are running tests in non-supported CI providers or with no `.git` folder,
 : Commit committer date in ISO 8601 format.<br/>
 **Example**: `2021-03-12T16:00:28Z`
 
+## Troubleshooting
+
+### The tests are not appearing in Datadog after enabling CI Visibility in the tracer
+
+If the tests are not appearing in Datadog, ensure that you are using version 0.91.0 or greater of the Java tracer.
+The `-Ddd.civisibility.enabled=true` configuration property is only available since that version.
+
+If you need to use a previous version of the tracer, you can configure CI Visibility by using the following system properties:
+{{< code-block lang="bash" >}}
+-Ddd.prioritization.type=ENSURE_TRACE -Ddd.jmxfetch.enabled=false -Ddd.integrations.enabled=false -Ddd.integration.junit.enabled=true -Ddd.integration.testng.enabled=true
+{{< /code-block >}}
 
 ## Further reading
 

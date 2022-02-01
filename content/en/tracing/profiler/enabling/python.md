@@ -66,7 +66,7 @@ To automatically profile your code, set the `DD_PROFILING_ENABLED` environment v
     DD_VERSION=1.0.3 \
     ddtrace-run python app.py
 
-It is strongly recommended that you add tags like `service` or `version`, as they provide the ability to slice and dice your profiles across these dimensions. See [Configuration](#configuration) below.
+It is strongly recommended that you add tags like `service` or `version`, as they provide the ability to filter and group your profiles across these dimensions. See [Configuration](#configuration) below.
 
 After a couple of minutes, visualize your profiles on the [Datadog APM > Profiler page][4].
 
@@ -106,20 +106,11 @@ prof.start()
 
 ## Configuration
 
-You can configure the profiler using the following environment variables:
-
-| Environment Variable    | Keyword Argument to `Profiler` | Type                       | Description                                                         |
-| ------------------------|------------------------------- | -------------------------- | --------------------------------------------------------------------|
-| `DD_PROFILING_ENABLED`  |                                | Boolean                    | Set to `true` to enable profiler.                                   |
-| `DD_PROFILING_HEAP_ENABLED` |                            | Boolean                    | Set to `true` to enable memory heap profiling. (ddtrace 0.50+)      |
-| `DD_SERVICE`            | `service`                      | String                     | The Datadog [service][5] name.                                      |
-| `DD_ENV`                | `env`                          | String                     | The Datadog [environment][6] name, for example, `production`.       |
-| `DD_VERSION`            | `version`                      | String                     | The version of your application.                                    |
-| `DD_TAGS`               | `tags`                         | String / Dictionary        | Tags to apply to an uploaded profile. If set with an environment variable, it must be a list of `<key>:<value>` separated by commas such as: `layer:api,team:intake`. If set with keyword argument, it must be a dictionary where keys are tag names and values are tag values such as:`{"layer": "api", "team": "intake"}`.  |
+You can configure the profiler using the [environment variables][5].
 
 ## Not sure what to do next?
 
-The [Getting Started with Profiler][7] guide takes a sample service with a performance problem and shows you how to use Continuous Profiler to understand and fix the problem.
+The [Getting Started with Profiler][6] guide takes a sample service with a performance problem and shows you how to use Continuous Profiler to understand and fix the problem.
 
 ## Further Reading
 
@@ -129,6 +120,5 @@ The [Getting Started with Profiler][7] guide takes a sample service with a perfo
 [2]: https://app.datadoghq.com/account/settings#agent/overview
 [3]: https://app.datadoghq.com/account/settings?agent_version=6#agent
 [4]: https://app.datadoghq.com/profiling
-[5]: /tracing/visualization/#services
-[6]: /tracing/guide/setting_primary_tags_to_scope/#environment
-[7]: /getting_started/profiler/
+[5]: https://ddtrace.readthedocs.io/en/stable/configuration.html#configuration
+[6]: /getting_started/profiler/

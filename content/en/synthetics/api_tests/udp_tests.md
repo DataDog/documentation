@@ -6,13 +6,20 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/introducing-synthetic-monitoring/"
   tag: "Blog"
   text: "Introducing Datadog Synthetic Monitoring"
+- link: "https://www.datadoghq.com/blog/udp-websocket-api-tests/"
+  tag: "Blog"
+  text: "Run UDP and WebSocket tests to monitor latency-critical applications"
 - link: "/getting_started/synthetics/api_test/"
   tag: "Documentation"
   text: "Get started with API tests"
 ---
 ## Overview
 
-UDP tests allow you to easily monitor that low-level UDP connections can be established on the ports of given hosts, ensuring availability of any services living on UDP ports. With built-in response time data, you can keep track of the performance of your network applications and be alerted in case of unexpected slowness.
+UDP tests allow you to monitor that low-level UDP connections can be established on the ports of given hosts, ensuring availability of any services living on UDP ports. With built-in response time data, you can keep track of the performance of your network applications and be alerted in case of unexpected slowness.
+
+In normal UDP traffic, you transmit information from a source to a destination without asking for acknowledgement. 
+
+In order to monitor your UDP services, Datadog recommends having a process on the receiving host that listens on the UDP port and responds back. After setting up this process, you can create a Synthetics test and set an assertion on the expected response.
 
 UDP tests can run from both [managed][1] and [private locations][2] depending on your preference for running the test from outside or inside your network. UDP tests can run on a schedule, on-demand, or directly within your [CI/CD pipelines][3].
 
@@ -24,7 +31,7 @@ After choosing to create an `UDP` Test, define your test's request.
 
 1. Specify the **Host** and **Port** to run your test on. By default, the port is set to `443`.
 2. Enter the string you want to send in your test. 
-3. Specify the amount of time in seconds before the test times out.
+3. Specify the amount of time in seconds before the test times out (optional).
 4. **Name** your UDP test.
 5. Add `env` **Tags** as well as any other tag to your UDP test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][4].
 
@@ -54,7 +61,7 @@ Select the **Locations** to run your UDP test from. UDP tests can run from both 
 UDP tests can run:
 
 - **On a schedule** to ensure your most important services are always accessible to your users. Select the frequency at which you want Datadog to run your UDP test.
-- [**Within your CI/CD pipelines**][6].
+- [**Within your CI/CD pipelines**][3].
 - **On-demand** to run your tests whenever makes the most sense for your team.
 
 ### Define alert conditions
@@ -78,9 +85,9 @@ When you set the alert conditions to `An alert is triggered if your test fails f
 
 A notification is sent by your test based on the [alerting conditions](#define-alert-conditions) previously defined. Use this section to define how and what to message to send to your teams.
 
-1. [Similar to how you configure monitors][7], select **users and/or services** that should receive notifications either by adding an `@notification`to the message or by searching for team members and connected integrations with the drop-down box.
+1. [Similar to how you configure monitors][6], select **users and/or services** that should receive notifications either by adding an `@notification`to the message or by searching for team members and connected integrations with the drop-down box.
 
-2. Enter the notification **message** for your test. This field allows standard [Markdown formatting][8] and supports the following [conditional variables][9]:
+2. Enter the notification **message** for your test. This field allows standard [Markdown formatting][7] and supports the following [conditional variables][8]:
 
     | Conditional Variable       | Description                                                         |
     |----------------------------|---------------------------------------------------------------------|
@@ -118,7 +125,7 @@ When you have entered a name and a value, click **Add Variable**. (standardize t
 
 ### Use variables
 
-You can use the [global variables defined in `Settings`][10] and [locally defined variables](#create-local-variables) in the URL and assertions of your UDP tests.
+You can use the [global variables defined in `Settings`][8] and [locally defined variables](#create-local-variables) in the URL and assertions of your UDP tests.
 
 To display your list of variables, type `{{` in your desired field:
 
@@ -141,14 +148,15 @@ These reasons include the following:
 
 `TIMEOUT`
 : The request couldn't be completed in a reasonable time. Two types of `TIMEOUT` can happen:
-  - `TIMEOUT: The request couldn’t be completed in a reasonable time.` indicates that the timeout happened at the TCP socket connection level.
-  - `TIMEOUT: Retrieving the response couldn’t be completed in a reasonable time.` indicates that the timeout happened on the overall run (which includes TCP socket connection, data transfer, and assertions).
+  - `TIMEOUT: The request couldn’t be completed in a reasonable time.` indicates that the request duration hit the test defined timeout (default is set to 60s). 
+  For each request only the completed stages for the request are displayed in the network waterfall. For example, in the case of `Total response time` only being displayed, the timeout occurred during the DNS resolution.
+  - `TIMEOUT: Overall test execution couldn't be completed in a reasonable time.` indicates that the test duration (request + assertions) hits the maximum duration (60.5s).
 
 ## Permissions
 
-By default, only users with the Datadog Admin and Datadog Standard roles can create, edit, and delete Synthetic UDP tests. To get create, edit, and delete access to Synthetic UDP tests, upgrade your user to one of those two [default roles][11].
+By default, only users with the Datadog Admin and Datadog Standard roles can create, edit, and delete Synthetic UDP tests. To get create, edit, and delete access to Synthetic UDP tests, upgrade your user to one of those two [default roles][9].
 
-If you have access to the [custom role feature][12], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions.
+If you have access to the [custom role feature][10], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions.
 
 ## Further Reading
 
@@ -156,13 +164,11 @@ If you have access to the [custom role feature][12], add your user to any custom
 
 [1]: /api/latest/synthetics/#get-all-locations-public-and-private
 [2]: /synthetics/private_locations/
-[3]: /synthetics/cicd_testing
+[3]: /synthetics/cicd_integrations
 [4]: /synthetics/search/#search
 [5]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
-[6]: /synthetics/cicd_testing/
-[7]: /monitors/notify/#notify-your-team
-[8]: https://www.markdownguide.org/basic-syntax/
-[9]: /monitors/notify/variables/?tab=is_alert#conditional-variables
-[10]: /synthetics/settings/#global-variables
-[11]: /account_management/rbac/
-[12]: /account_management/rbac#custom-roles
+[6]: /monitors/notify/#notify-your-team
+[7]: https://www.markdownguide.org/basic-syntax/
+[8]: /synthetics/settings/#global-variables
+[9]: /account_management/rbac/
+[10]: /account_management/rbac#custom-roles

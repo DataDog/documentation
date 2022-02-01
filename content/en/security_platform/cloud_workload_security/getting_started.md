@@ -50,7 +50,7 @@ There are two types of monitoring that the Datadog Agent uses for Cloud Workload
     ```
 
 3. Restart the Agent.
-4. **Optional, if Security Monitoring is checked** Follow [these instructions][2] to collect audit logs for Kubernetes.
+4. **Optional, if Cloud SIEM is checked** Follow [these instructions][2] to collect audit logs for Kubernetes.
 
 
 [1]: https://app.datadoghq.com/account/settings#agent/kubernetes
@@ -69,7 +69,10 @@ docker run -d --name dd-agent \
   --cap-add SYS_RESOURCE \
   --cap-add SYS_PTRACE \
   --cap-add NET_ADMIN \
+  --cap-add NET_BROADCAST \
+  --cap-add NET_RAW \
   --cap-add IPC_LOCK \
+  --cap-add CHOWN \
   -v /var/run/docker.sock:/var/run/docker.sock:ro \
   -v /proc/:/host/proc/:ro \
   -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \

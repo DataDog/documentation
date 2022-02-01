@@ -14,7 +14,7 @@ You can use Quick Graphs to graph your data from anywhere in Datadog.
 Open the Quick Graphs editor with any of the following:
 
 * Pressing `G` on any page.
-* The global search (`Cmd+K`) menu.
+* The global search (`Cmd+K` on MacOS, `Ctrl+K` on Windows) menu.
 * The dashboards submenu.
 
 {{< img src="dashboards/guide/quick_graph_editor.png" alt="quick graph editor" style="width:80%;">}}
@@ -71,7 +71,7 @@ Click **Export** to save your work to a Dashboard or Notebook. You can always co
 [3]: /dashboards/querying/#aggregate-and-rollup
 [4]: /dashboards/querying/#advanced-graphing
 [5]: /logs/explorer/
-[6]: /tracing/trace_search_and_analytics/
+[6]: /tracing/trace_explorer/
 [7]: /real_user_monitoring/explorer/search/
 [8]: /security_platform/explorer/
 [9]: /events/

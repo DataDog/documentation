@@ -19,11 +19,11 @@ further_reading:
 
 ## Overview
 
-Log Explorer search consists of a timerange and a search query, mixing `key:value` and full-text search.
+Log Explorer search consists of a time range and a search query, mixing `key:value` and full-text search.
 
 ### Search query
 
-For example, to filter on logs produced by a specific service, with a specific status, over the past five minutes, you can create a custom query such as `service:payment status:error rejected` and set the timerange to the `Past 5 minutes`:
+For example, to filter on logs produced by a specific service, with a specific status, over the past five minutes, you can create a custom query such as `service:payment status:error rejected` and set the time range to the `Past 5 minutes`:
 
 {{< img src="logs/explorer/search_filter.jpg" alt="Search Filter" style="width:100%;" >}}
 
@@ -43,7 +43,7 @@ For example, to filter on logs produced by a specific service, with a specific s
 
 ### Search syntax
 
-To begin searching for logs in Log Explorer, see the [Log Search Syntax documentation][1] and read the [timerange documentation][2] for more details on advanced timerange use cases.
+To begin searching for logs in Log Explorer, see the [Log Search Syntax documentation][1] and read the [time frame documentation][2] for more details on custom time frames.
 
 ## Further Reading
 

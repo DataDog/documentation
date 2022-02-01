@@ -26,7 +26,7 @@ Error Tracking processes errors collected from the browser by the RUM SDK: whene
 
 In addition to sending source maps, the new version of the [Datadog CLI][6] reports Git information such as the commit hash, the repository URL, and the list of tracked file paths in the code repository. Using this information, Error Tracking and RUM can correlate an error with the source code, and you can pivot from any stack trace frame to the related line of code in [GitHub][7], [GitLab][8] and [Bitbucket][9]. 
 
-{{< img src="real_user_monitoring/error_tracking/link_to_git_js_example.gif" alt="Link from a stack frame to the source code"  >}}
+{{< img src="real_user_monitoring/error_tracking/link_to_git_js_example.mp4" alt="Link from a stack frame to the source code" video=true >}}
 
 <div class="alert alert-info">Linking from stack frames to source code is supported in the <a href="https://github.com/DataDog/datadog-ci/tree/master/src/commands/sourcemaps#sourcemaps-command">Datadog CLI</a> version <code>0.12.0</code> version and later.</div>
 

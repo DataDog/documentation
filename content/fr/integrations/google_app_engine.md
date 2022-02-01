@@ -5,12 +5,13 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Recueillez des métriques pour votre projet et comparez-les entre ses différentes versions.
-doc_link: 'https://docs.datadoghq.com/integrations/google_app_engine/'
+doc_link: https://docs.datadoghq.com/integrations/google_app_engine/
 draft: false
 git_integration_title: google_app_engine
 has_logo: true
 integration_id: google-app-engine
 integration_title: Google App Engine
+integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'
@@ -37,11 +38,11 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Google Cl
 
 ### Collecte de logs
 
-Les logs Google App Engine sont recueillis avec Stackdriver et envoyés à un Cloud Pub/Sub via un redirecteur Push HTTP. Si vous ne l'avez pas déjà fait, configurez le [Cloud Pub/Sub à l'aide d'un redirecteur Push HTTP][2].
+Les logs Google App Engine sont recueillis avec Google Cloud Logging et envoyés à un Cloud Pub/Sub via un forwarder Push HTTP. Si vous ne l'avez pas déjà fait, configurez un [Cloud Pub/Sub à l'aide d'un forwarder Push HTTP][2].
 
-Une fois cette opération effectuée, exportez vos logs Google App Engine depuis Stackdriver vers le Pub/Sub :
+Une fois cette opération effectuée, exportez vos logs Google App Engine depuis Google Cloud Logging vers le Pub/Sub :
 
-1. Accédez à la [page Stackdriver][3] et filtrez les logs de Google App Engine.
+1. Accédez à la [page Google Cloud Logging][3] et filtrez les logs Google App Engine.
 2. Cliquez sur **Create Export** et nommez le récepteur.
 3. Choisissez Cloud Pub/Sub comme destination et sélectionnez le Pub/Sub créé à cette fin. **Remarque** : le Pub/Sub peut se situer dans un autre projet.
 4. Cliquez sur **Create** et attendez que le message de confirmation s'affiche.

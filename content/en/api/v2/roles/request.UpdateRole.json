@@ -1,0 +1,9 @@
+{
+  "data": {
+    "id": "string",
+    "type": "roles",
+    "attributes": {
+      "name": "developers-updated"
+    }
+  }
+}

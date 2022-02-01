@@ -41,7 +41,7 @@ You may also manually set `env` as a global tag for the tracer in code. See [ass
 #### Agent environment
 
 The `env` tag can be set in your Agent configuration.
-**Do not set different `env` tags on the Tracer and Agent. This may cause duplicate tagging on [trace metrics][6].**
+**Do not set different `env` tags on the Tracer and Agent. This may cause duplicate tagging on [trace metrics][5].**
 
 Options:
 
@@ -70,7 +70,7 @@ Environments appear at the top of APM pages. Use the `env` dropdown to scope the
 
 ## Add a second primary tag in Datadog
 
-If you added a host tag other than `env:<ENVIRONMENT>` to your traces, it can be set as a primary tag along with the environment tag. Go to the [APM Settings][5] page to define, change, or remove your primary tags.
+If you added a host tag other than `env:<ENVIRONMENT>` to your traces, it can be set as a primary tag along with the environment tag. Go to the [APM Settings][6] page to define, change, or remove your primary tags.
 
 Note:
 
@@ -96,5 +96,5 @@ Primary tags appear at the top of APM pages. Use these selectors to slice the da
 [2]: /getting_started/tagging/
 [3]: /getting_started/tagging/unified_service_tagging
 [4]: /getting_started/tagging/assigning_tags/#traces
-[5]: https://app.datadoghq.com/apm/settings
-[6]: /tracing/guide/metrics_namespace/
+[5]: /tracing/guide/metrics_namespace/
+[6]: https://app.datadoghq.com/apm/settings

@@ -82,7 +82,7 @@ main_left:
     weight: 13
     parent: product
   - identifier: security-monitoring
-    name: Security Monitoring
+    name: Cloud SIEM
     pre: '<i class="icon-siem align-middle"></i>'
     url: 'https://www.datadoghq.com/product/security-platform/security-monitoring/'
     weight: 14
@@ -113,7 +113,7 @@ main_left:
     parent: 'product'
   - identifier: database
     name: 'Database Monitoring'
-    pre: '<i class="icon-dbm align-middle"></i>'
+    pre: '<i class="icon-database-2 align-middle"></i>'
     url: 'https://www.datadoghq.com/product/database-monitoring/'
     weight: 19
     parent: 'product'
@@ -1793,30 +1793,30 @@ main:
     pre: security
     identifier: security_compliance_monitoring
     weight: 160000
-  - name: Security Monitoring
-    url: security_monitoring/
+  - name: Cloud SIEM
+    url: cloud_siem/
     parent: security_compliance_monitoring
-    identifier: security_monitoring
+    identifier: cloud_siem
     weight: 1
   - name: Prise en main
-    url: security_monitoring/getting_started
-    parent: security_monitoring
-    identifier: security_monitoring_getting_started
+    url: cloud_siem/getting_started
+    parent: cloud_siem
+    identifier: cloud_siem_getting_started
     weight: 101
   - name: Signals Explorer
-    url: security_monitoring/explorer
-    parent: security_monitoring
-    identifier: security_monitoring_explorer
+    url: cloud_siem/explorer
+    parent: cloud_siem
+    identifier: cloud_siem_explorer
     weight: 102
   - name: Règles de détection des menaces
-    url: security_monitoring/detection_rules
-    parent: security_monitoring
-    identifier: security_monitoring_detection_rules
+    url: cloud_siem/detection_rules
+    parent: cloud_siem
+    identifier: cloud_siem_detection_rules
     weight: 103
   - name: Guides
-    url: security_monitoring/guide
-    parent: security_monitoring
-    identifier: security_monitoring_guides
+    url: cloud_siem/guide/monitor-authentication-logs-for-security-threats
+    parent: cloud_siem
+    identifier: cloud_siem_guides
     weight: 104
   - name: Surveillance de la conformité
     url: compliance_monitoring/
@@ -1824,7 +1824,7 @@ main:
     identifier: compliance_monitoring
     weight: 2
   - name: Règles par défaut
-    url: security_monitoring/default_rules
+    url: security_platform/default_rules/
     parent: security_compliance_monitoring
     identifier: security_monitoring_default_detection_rules
     weight: 3
@@ -2267,7 +2267,7 @@ main:
     weight: 210000
   - name: Gestion de compte
     url: account_management/
-    pre: cog
+    pre: cog-2
     identifier: account_management
     weight: 220000
   - name: Gestion des utilisateurs
@@ -3991,7 +3991,7 @@ footer_product_two:
   - name: Security Platform
     url: "https://www.datadoghq.com/product/security-platform/"
     weight: 130
-  - name: Security Monitoring
+  - name: Cloud SIEM
     url: "https://www.datadoghq.com/product/security-monitoring/"
     weight: 135
   - name: CSPM

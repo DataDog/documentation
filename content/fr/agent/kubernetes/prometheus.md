@@ -87,7 +87,7 @@ Pour obtenir la liste complète des paramètres disponibles pour les instances, 
 
 1. [Lancez l'Agent Datadog][10].
 
-2. Utilisez [ce DaemonSet Prometheus `prometheus.yaml`][11] pour lancer un pod Prometheus qui comporte une configuration Autodiscovery existante :
+2. Utilisez le [DaemonSet Prometheus `prometheus.yaml`][11] pour lancer un pod Prometheus qui comporte la configuration Autodiscovery :
 
     Configuration Autodiscovery :
 

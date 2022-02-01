@@ -103,7 +103,7 @@ The evolution of the **top 10 URL Paths** according to the number of **unique Se
 {{% /tab %}}
 {{% tab "Table" %}}
 
-Visualize the top values from a [facet][1] according to a chosen [measure][2] (the first measure you choose in the list), and display the value of additional measures for elements appearing in this top value. Update search query or drill through events corresponding to either dimension.
+Visualize the top values from a [facet][1] according to a chosen [measure][2] (the first measure you choose in the list), and display the value of additional measures for elements appearing in this top value. Update search query or investigate events corresponding to either dimension.
 
 * When there are multiple dimensions, the top values are determined according to the first dimension, then according to the second dimension within the top values of the first dimension, then according to the third dimension within the top values of the second dimension.
 * When there are multiple measures, the top or bottom list is determined according to the first measure.

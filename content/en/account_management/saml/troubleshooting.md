@@ -31,9 +31,8 @@ Your assertion may be missing the required `eduPersonPrincipalName` attribute. C
 
 ### No active account for a user
 
-Enabling Just-In-Time (JIT) provisioning may result in the `There is no active account for` error if a user has not received an email invitation or if their account is disabled in [User settings][3]. To resolve, follow the steps below based on your scenario:
-
-  - If a new Datadog user tries to log in to a Datadog organization without an email invitation and the `There is no active account for error` occurs, send the user an email invitation and check if JIT provisioning is enabled for your organization. The user **must** accept the invitation to enable JIT provisioning. Once the invitation is sent, the user exists in the system and cannot use JIT provisioning until the invite is accepted. If a user needs to verify their email or the invitation is expired, have the admin send a new invitation.
+This error can occur as a result of the following scenarios:
+  - If you've enabled Just-In-Time (JIT) provisioning, and a user still sees this error when trying to log in, check to see if you have already sent an email invitation to this user prior to enabling JIT. JIT does not apply to users who have already been invited. To resolve this, have the user accept the email invitation. Or, if the invitation has expired, have the admin send a new invitation.
   - If a user is no longer enabled in a Datadog organization that has JIT provisioning enabled and they try to log in again through SAML and the `There is no active account for error` occurs, re-enable the user in [User settings][3].
 
 ## IdP metadata file errors

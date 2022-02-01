@@ -243,7 +243,7 @@ For [Trace Search][1], filter traces with tags using the search bar or facet che
 {{% /tab %}}
 {{% tab "Service Map" %}}
 
-After [assigning tags][1], use the Service Map to jump to different areas of the application by clicking on a particular service. In the example below, view [Analytics][2], [Monitors][3], [Logs][4], and the [Host Map][5] filtered by the tag `service:coffee-house`.
+After [assigning tags][1], use the Service Map to navigate to different areas of the application by clicking on a particular service. In the example below, view [Analytics][2], [Monitors][3], [Logs][4], and the [Host Map][5] filtered by the tag `service:coffee-house`.
 
 {{< img src="tagging/using_tags/servicemaptags.png" alt="Service Map Tags" style="width:80%;">}}
 

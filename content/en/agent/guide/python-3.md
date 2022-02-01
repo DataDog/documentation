@@ -58,7 +58,7 @@ After addressing the incompatibilities, the same command returns nothing:
 
 ```bash
 $ python2 -m pylint -sn --py3k ~/dev/my-check.py
-$
+$ 
 ```
 
 While `pylint` catches any issue that could prevent the Python 3 interpreter from running code at all, it cannot check for logical validity. After code changes are made, make sure to run the check and validate the output.

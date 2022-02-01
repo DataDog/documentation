@@ -1,6 +1,6 @@
 {
   "integration_count": {
-    "other": "450"
+    "other": "500"
   },
 
   "beta_sentence": {
@@ -310,6 +310,9 @@
   },
   "footer_blurb_desc": {
     "other": "知識豊富なエンジニアがサポートします。"
+  },
+  "beta_check":{
+    "other": "Beta"
   }
   
 }

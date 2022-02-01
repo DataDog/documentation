@@ -10,13 +10,14 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/tcp_queue_length/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/tcp_queue_length/README.md
 display_name: Longueur de file d'attente TCP
 draft: false
 git_integration_title: tcp_queue_length
 guid: 0468b098-43bd-4157-8a01-14065cfdcb7b
 integration_id: tcp-queue-length
 integration_title: Longueur de file d'attente TCP
+integration_version: ''
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com
@@ -53,7 +54,7 @@ yum install -y kernel-headers-$(uname -r)
 yum install -y kernel-devel-$(uname -r)
 ```
 
-**Remarque** : seules les versions 8 et ultérieur de CentOS/RHEL sont prises en charge.
+**Remarque** : seules les versions 8 et ultérieures de Windows, Container-Optimized OS et CentOS/RHEL sont prises en charge.
 
 ### Configuration
 

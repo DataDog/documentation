@@ -166,7 +166,7 @@ RRULE - or recurrence rule - is a property name from [iCalendar RFC][4], which i
 
 Attributes specifying the duration in `RRULE` are not supported (for example, `DTSTART`, `DTEND`, `DURATION`), see the [RFC][4] for the possible attributes. You can use [this tool][5] to generate RRULEs and paste them into your API call.
 
-**Example**: The ERP app is updated every 2nd Tuesday of the month to apply patches and fixes between 8AM and 10AM. Monitors for this are scoped with `app:erp`, so we use this in the downtime scope.
+**Example**: The ERP app is updated every 2nd Tuesday of the month to apply patches and fixes between 8AM and 10AM. Monitors for this are scoped with `app:erp`, so this is used in the downtime scope.
 
 {{< tabs >}}
 {{% tab "API " %}}

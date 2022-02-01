@@ -125,7 +125,7 @@
         }
     ],
     "stop_urls": [
-        "/faq/$",
+        "/.*/faq/.*$",
         "/guide/$",
         "\\.json$",
         "\\?",
@@ -255,7 +255,8 @@
         "#further-reading",
         ".alert-info",
         ".announcement_banner",
-        ".language-region-select-container"
+        ".language-region-select-container",
+        ".site-region-container"
     ],
     "conversation_id": ["620036890"],
     "custom_settings": {

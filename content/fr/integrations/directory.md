@@ -12,13 +12,14 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/directory/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/directory/README.md
 display_name: Directory
 draft: false
 git_integration_title: directory
 guid: 0c38c4ef-5266-4667-9fb1-de8f2b73708a
 integration_id: system
 integration_title: Directory
+integration_version: 1.11.1
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com
@@ -85,14 +86,13 @@ Le check Directory est inclus avec le package de l'[Agent Datadog][1] : vous n'
 Le check Directory n'inclut aucun événement.
 
 ### Checks de service
-
-**system.disk.directory.exists** :<br>
-Renvoie `WARNING` si l'Agent ne parvient pas à trouver ou à accéder au répertoire à surveiller. Si ce n'est pas le cas, renvoie `OK`.
+{{< get-service-checks-from-git "directory" >}}
 
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][7].
+Besoin d'aide ? Contactez [l'assistance Datadog][8].
+
 
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
@@ -100,4 +100,5 @@ Besoin d'aide ? Contactez [l'assistance Datadog][7].
 [4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
 [6]: https://github.com/DataDog/integrations-core/blob/master/directory/metadata.csv
-[7]: https://docs.datadoghq.com/fr/help/
+[7]: https://github.com/DataDog/integrations-core/blob/master/directory/assets/service_checks.json
+[8]: https://docs.datadoghq.com/fr/help/

@@ -3,18 +3,18 @@ title: "Fluent\_Bit"
 name: fluentbit
 kind: integration
 description: "Configurez Fluent\_Bit pour recueillir, analyser et transmettre des données de log provenant de plusieurs sources."
-short_description: 'Recueillez, analysez et transmettez des données de log provenant de plusieurs sources.'
+short_description: Recueillez, analysez et transmettez des données de log provenant de plusieurs sources.
 categories:
   - log collection
 doc_link: /integrations/fluentbit/
 dependencies:
-  - 'https://github.com/DataDog/documentation/blob/master/content/en/integrations/fluentbit.md'
+  - https://github.com/DataDog/documentation/blob/master/content/en/integrations/fluentbit.md
 has_logo: true
 integration_title: "Fluent\_Bit"
 is_public: true
 public_title: "Intégration Datadog/Fluent\_Bit"
 further_reading:
-  - link: 'https://www.datadoghq.com/blog/fluentbit-integration-announcement/'
+  - link: https://www.datadoghq.com/blog/fluentbit-integration-announcement/
     tag: Blog
     text: "Centraliser vos logs avec Datadog et Fluent\_Bit"
 integration_id: fluentbit
@@ -25,7 +25,7 @@ Configurez Fluent Bit pour recueillir, analyser et transmettre des données de 
 
 ## Configuration
 
-Les instructions ci-dessous concernent la configuration de Fluent Bit sur un host. Pour le configurer sur AWS ECS, consultez la [documentation dédiée à Fluent Bit et FireLense sur ECS][2].
+Les instructions ci-dessous concernent la configuration de Fluent Bit sur un host. Pour AWS ECS, consultez la [documentation relative à Fluent Bit et FireLens sur ECS][2].
 
 ### Collecte de logs
 

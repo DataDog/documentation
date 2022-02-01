@@ -5,7 +5,7 @@ kind: documentation
 
 {{< img src="serverless/serverless-view.png" alt="Serverless View" >}}
 
-By default, the Serverless View groups your serverless resources by service to help you easily visualize how each part of your application is performing. For each service, you see the functions that belong to it, along with the resources (Amazon API Gateway, SNS, SQS, DynamoDB, S3, EventBridge, Kinesis) that invoked them. 
+By default, the Serverless View groups your serverless resources by service to help you visualize how each part of your application is performing. For each service, you see the functions that belong to it, along with the resources (Amazon API Gateway, SNS, SQS, DynamoDB, S3, EventBridge, Kinesis) that invoked them. 
 
 While grouping by service is the default, you can also group your resources by AWS CloudFormation stack name, as well as any other tags you've configured (such as team, project, or environment).
 

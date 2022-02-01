@@ -10,7 +10,7 @@ further_reading:
       text: "Troubleshooting CI"
 ---
 
-{{< site-region region="us5,gov" >}}
+{{< site-region region="gov" >}}
 <div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
@@ -126,6 +126,21 @@ If you are running tests in non-supported CI providers or with no `.git` folder,
 : Commit committer date in ISO 8601 format.<br/>
 **Example**: `2021-03-12T16:00:28Z`
 
+## Custom instrumentation
+
+
+<div class="alert alert-warning">
+  <strong>Note:</strong> Your custom instrumentation setup depends on the `dd-trace` version. To use the custom instrumentation, you must keep the package versions for `dd-trace` and `Datadog.Trace` NuGet packages in sync.
+</div>
+
+To use the custom instrumentation in your .NET application:
+
+1. Execute `dd-trace --version` to get the version of the tool.
+1. Add the `Datadog.Trace` [NuGet package][3] with the same version to your application.
+2. In your application code, access the global tracer through the `Datadog.Trace.Tracer.Instance` property to create new spans.
+
+For more information about how to add spans and tags for custom instrumentation, see the [.NET Custom Instrumentation documentation][4].
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -133,3 +148,5 @@ If you are running tests in non-supported CI providers or with no `.git` folder,
 
 [1]: /continuous_integration/setup_tests/agent/
 [2]: /tracing/setup_overview/setup/dotnet-core/?tab=windows#configuration
+[3]: https://www.nuget.org/packages/Datadog.Trace
+[4]: /tracing/setup_overview/custom_instrumentation/dotnet/

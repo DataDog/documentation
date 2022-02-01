@@ -84,7 +84,7 @@ Voici les commandes associées à la collecte de logs :
 : Ajoute une configuration de log qui active la collecte de logs pour tous les conteneurs.
 
 `-e DD_LOGS_CONFIG_DOCKER_CONTAINER_USE_FILE=true`            
-: Ajoute une configuration de log qui active la collecte des logs de conteneur Docker depuis un fichier. Disponible pour les versions 7.27.0/6.27.0+ de l'Agent Datadog. Consultez la [section dédiée](#collecte-de-logs-de-conteneur-docker-depuis-un-fichier) pour en savoir plus.
+: Ajoute une configuration de log qui active la collecte des logs de conteneur Docker depuis un fichier. Disponible pour les versions 7.27.0/6.27.0+ de l'Agent Datadog. Consultez la [section dédiée](#collecte-de-logs-de-conteneur-docker-depuis-un-fichier) pour en savoir plus.
 
 `-v /opt/datadog-agent/run:/opt/datadog-agent/run:rw`         
 : Pour éviter de perdre des logs de conteneur lors des redémarrages ou des problèmes de réseau, la dernière ligne de log recueillie pour chaque conteneur dans ce répertoire est stockée sur le host.
@@ -99,7 +99,7 @@ Voici les commandes associées à la collecte de logs :
 : Active la collecte des logs de conteneurs depuis des fichiers. Disponible avec l'Agent Datadog 6.27.0/7.27.0+.
 
 
-[1]: https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles/agent
+[1]: https://github.com/DataDog/datadog-agent/tree/main/Dockerfiles/agent
 [2]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/agent
 {{% /tab %}}
 {{% tab "Agent de host" %}}
@@ -156,7 +156,7 @@ Voici les commandes associées à la collecte de logs :
 
 - Les logs qui proviennent du `Stderr` du conteneur possèdent par défaut le statut `Error`.
 
-- Si vous utilisez le pilote de journalisation _journald_ à la place du pilote json-file par défaut de Docker, consultez la documentation relative à l'[intégration de journald][2] pour obtenir des instructions de configuration spécifiques aux environnements conteneurisés. Consultez la documentation sur les [unités de filtrage journald][2] pour en savoir plus sur les paramètres de filtrage.
+- Si vous utilisez le pilote de journalisation _journald_ à la place du pilote json-file par défaut de Docker, consultez la [documentation relative à l'intégration de journald][2] pour obtenir des instructions de configuration spécifiques aux environnements conteneurisés. Consultez la [documentation sur les unités de filtrage journald][2] pour en savoir plus sur les paramètres de filtrage.
 
 ## Collecte de logs de conteneur Docker depuis un fichier
 

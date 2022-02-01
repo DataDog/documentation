@@ -36,18 +36,22 @@ For a list of individual logs, choose which information of interest to display a
 
 With the **Options** button, control the **number of lines** displayed in the table per log.
 
-{{< img src="logs/explorer/table_controls.gif" alt="Configuring the display table" style="width:80%;">}}
+{{< img src="logs/explorer/table_controls.mp4" alt="Configuring the display table" video=true style="width:80%;">}}
 
 {{< site-region region="gov,us3,us5" >}}
 The default **sort** for logs in the list visualization is by timestamp, with the most recent logs on top. This is the fastest and therefore recommended sorting method for general purposes. Surface logs with lowest or highest value for a measure first, or sort your logs lexicographically for the unique value of facet, ordering a column according to that facet.
 
 **Note**: Sorting your table according to a specific field requires that you [declare a facet][1] beforehand.
+
+
 {{< /site-region >}}
 
 {{< site-region region="us,eu" >}}
 The default **sort** for logs in the list visualization is by timestamp, with the most recent logs on top. This is the fastest and therefore recommended sorting method for general purposes. Surface logs with lowest or highest value for a measure first, or sort your logs lexicographically for the unique value of facet, ordering a column according to that facet.
 
-**Note**: Although any attributes or tags can be added as a column, sorting your table according to a specific field requires that you [declare a facet][1] beforehand.
+**Note**: Although any attributes or tags can be added as a column, sorting your table is most reliable if you [declare a facet][1] beforehand. Non-faceted attributes can be added as columns, but it does not produce reliable sorting.
+
+
 {{< /site-region >}}
 
 The configuration of the log table is stored alongside other elements of your troubleshooting context in [Saved Views][2].
@@ -81,7 +85,7 @@ For example, the following top list shows the **top 15 Customers** on a merchant
 
 ## Nested tables
 
-Visualize the top values from up to three [facets][3] according to a chosen [measure][3] (the first measure you choose in the list), and display the value of additional measures for elements appearing in this table. Update a search query or drill through logs corresponding to either dimension.
+Visualize the top values from up to three [facets][3] according to a chosen [measure][3] (the first measure you choose in the list), and display the value of additional measures for elements appearing in this table. Update a search query or examine the logs corresponding to either dimension.
 
 - When there are multiple measures, the top or bottom list is determined according to the first measure.
 - The subtotal may differ from the actual sum of values in a group, since only a subset (top or bottom) is displayed. Events with a null or empty value for this dimension are not displayed as a sub-group.

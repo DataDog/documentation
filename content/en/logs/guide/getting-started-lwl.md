@@ -28,7 +28,7 @@ This guide identifies key components of Logging Without Limits™ such as [Patte
 
 Your most logged service contains several logs, some of which may be irrelevant for troubleshooting. For example, you may want to investigate every 4xx and 5xx response code log, but excluded every 200 response code log from Log Explorer to expedite troubleshooting during a major outage or event. By identifying the corresponding service first, you can quickly track down which service status produces the most logs and is best to exclude from the [Log Explorer view][3].
 
-{{< img src="logs/guide/getting-started-lwl/identify_logging_service.gif" alt="Identify a most logging service status" style="width:100%;">}}
+{{< img src="logs/guide/getting-started-lwl/identify_logging_service.mp4" alt="Identify a most logging service status" video=true style="width:100%;">}}
 
 **To identify your most logged service status**:
 
@@ -63,17 +63,17 @@ The pattern context panel lists every instance (event) of a log pattern and crea
 2. Click the **View All** button in the top right corner to automatically generate the search query associated with this pattern.
 3. Select the `</>` option to the right of the search query and copy the search query.
 
-{{< img src="logs/guide/getting-started-lwl/pattern_view.gif" alt="Pattern View" style="width:100%;">}}
+{{< img src="logs/guide/getting-started-lwl/pattern_view.mp4" alt="Pattern View" video=true style="width:100%;">}}
 
 4. Navigate to the **Configuration** page under Logs in the main menu. Select **indexes** and click on your associated index. This will populate the option to add an exclusion filter.
 5. Select **Add an Exclusion Filter**.
 6. Input the filter name, define the exclusion query by pasting the search query you copied, and set an exclusion percentage.
 
-{{< img src="logs/guide/getting-started-lwl/exclusion_filter.gif" alt="Exclusion Filter" style="width:100%;">}}
+{{< img src="logs/guide/getting-started-lwl/exclusion_filter.mp4" alt="Exclusion Filter" video=true style="width:100%;">}}
 
 **Note**: If a log matches several exclusion filters, only the first exclusion filter rule is applied. A log is not sampled or excluded multiple times by different exclusion filters.
 
-In this example, the service status `INFO` pattern `Updating recommendations with customer_id=* & url=shops/*/*` is filtered with an exclusion filter. Removing any high volume logging pattern similar to this one from Log Explorer will help you drill down and identify issues quicker. However, these logs are **only** removed from the Log Explorer view. They are still ingested, and available to view in [Live Tail][5], sent to [log archives][6], or used to [generate metrics][7].
+In this example, the service status `INFO` pattern `Updating recommendations with customer_id=* & url=shops/*/*` is filtered with an exclusion filter. Removing any high volume logging pattern similar to this one from Log Explorer helps you reduce noise and identify issues quicker. However, these logs are **only** removed from the Log Explorer view. They are still ingested, and available to view in [Live Tail][5], sent to [log archives][6], or used to [generate metrics][7].
 
 {{< img src="logs/guide/getting-started-lwl/live_tail.jpg" alt="Live Tail" style="width:100%;">}}
 
@@ -88,12 +88,12 @@ Once a log pattern is excluded from Log Explorer, you can still track KPIs over 
 **To generate a new log-based metric based on your log pattern**:
 
 1. In your Datadog account, hover over **Logs** in the main menu, select **Generate Metrics**, and then click the **New Metric+** button in the top right corner.
-2. Under **Define Query**, input the search query you copied and pasted into the pattern exclusion filter. (e.g., as per the example above: `service:web-store status:info "updating recommendations with customer_id" "url shops"`)
-3. Select the field you would like to track: Select `*` to generate a count of all logs matching your query or enter a measure (e.g., `@duration`) to aggregate a numeric value and create its corresponding count, min, max, sum, and avg aggregated metrics.
+2. Under **Define Query**, input the search query you copied and pasted into the pattern exclusion filter. (for example, as per the example above: `service:web-store status:info "updating recommendations with customer_id" "url shops"`)
+3. Select the field you would like to track: Select `*` to generate a count of all logs matching your query or enter a measure (for example, `@duration`) to aggregate a numeric value and create its corresponding count, min, max, sum, and avg aggregated metrics.
 4. Add dimensions to group: Select log attributes or tag keys to apply to the generated log-based metric to transform them into tags following the `<KEY>:<VALUE>` format. Log-based metrics are considered custom metrics. Avoid grouping by unbounded or extremely high cardinality attributes like timestamps, user IDs, request IDs, or session IDs to avert impacting your billing.
 5. Name your metric: Log-based metric names must follow the naming metric convention.
 
-{{< img src="logs/guide/getting-started-lwl/custom_metric.gif" alt="Generate a custom Metric" style="width:100%;">}}
+{{< img src="logs/guide/getting-started-lwl/custom_metric.mp4" alt="Generate a custom Metric" video=true style="width:100%;">}}
 
 ### Create an anomaly detection monitor
 
@@ -106,7 +106,7 @@ Once a log pattern is excluded from Log Explorer, you can still track KPIs over 
 3. Set the alert conditions and add any additional information needed to alert yourself and/or your team of what’s happening.
 4. Save the monitor.
 
-{{< img src="logs/guide/getting-started-lwl/anomaly_monitor.gif" alt="Anomaly Monitor" style="width:100%;">}}
+{{< img src="logs/guide/getting-started-lwl/anomaly_monitor.mp4" alt="Anomaly Monitor" video=true style="width:100%;">}}
 
 When an anomaly is detected, an alert will be sent to all who are tagged. This alert can also be found in [Monitors -> Triggered Monitors][10].
 

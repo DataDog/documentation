@@ -24,13 +24,15 @@ With these three tags you can:
 - Navigate seamlessly across traces, metrics, and logs with consistent tags
 - View service data based on environment or version in a unified fashion within the Datadog site
 
-{{< img src="tagging/unified_service_tagging/overview.gif" alt="Unified Service Tagging"  >}}
+{{< img src="tagging/unified_service_tagging/overview.mp4" alt="Unified Service Tagging" video=true >}}
+
+**Note**: The official service of a log defaults to the container short-image if no Autodiscovery logs configuration is present. To override the official service of a log, add Autodiscovery [Docker labels/pod annotations][2]. For example: `"com.datadoghq.ad.logs"='[{"service": "service-name"}]'`
 
 ### Requirements
 
-- Unified service tagging requires setup of a [Datadog Agent][2] that is 6.19.x/7.19.x or higher.
+- Unified service tagging requires setup of a [Datadog Agent][3] that is 6.19.x/7.19.x or higher.
 
-- Unified service tagging requires a tracer version that supports new configurations of the [reserved tags][1]. More information can be found per language in the [setup instructions][3].
+- Unified service tagging requires a tracer version that supports new configurations of the [reserved tags][1]. More information can be found per language in the [setup instructions][4].
 
 
 | Language         | Minimum Tracer Version |
@@ -44,7 +46,7 @@ With these three tags you can:
 | Python  |  0.38.0+      |
 | Ruby  |  0.34.0+      |
 
-- Unified service tagging requires knowledge of configuring tags. If you are unsure of how to configure tags, read the [Getting Started with Tagging][1] and [Assigning Tags][4] documentation before proceeding to configuration.
+- Unified service tagging requires knowledge of configuring tags. If you are unsure of how to configure tags, read the [Getting Started with Tagging][1] and [Assigning Tags][5] documentation before proceeding to configuration.
 
 ## Configuration
 
@@ -59,9 +61,9 @@ In containerized environments, `env`, `service`, and `version` are set through t
 
 To setup unified service tagging in a containerized environment:
 
-1. Enable [Autodiscovery][5]. This allows the Datadog Agent to automatically identify services running on a specific container and gathers data from those services to map environment variables to the `env`, `service,` and `version` tags.
+1. Enable [Autodiscovery][6]. This allows the Datadog Agent to automatically identify services running on a specific container and gathers data from those services to map environment variables to the `env`, `service,` and `version` tags.
 
-2. If you are using [Docker][6], make sure the Agent can access your container's [Docker socket][7]. This allows the Agent detect the environment variables and map them to the standard tags.
+2. If you are using [Docker][2], make sure the Agent can access your container's [Docker socket][7]. This allows the Agent detect the environment variables and map them to the standard tags.
 
 4. Configure your environment based on either full configuration or partial configuration detailed below.
 
@@ -295,7 +297,7 @@ When configuring your traces for unified service tagging:
 
 2. Configure spans with `DD_VERSION` to add version to all spans that fall under the service that belongs to the tracer (generally `DD_SERVICE`). This means that if your service creates spans with the name of an external service, those spans do not receive `version` as a tag.
 
-    As long as version is present in spans, it is added to trace metrics generated from those spans. The version can be added manually in-code or automatically by the APM Tracer. When configured, at the very least these are used by the APM and [DogStatsD clients][2] to tag trace data and StatsD metrics with `env`, `service`, and `version`. If enabled, the APM tracer also injects the values of these variables into your logs.
+    As long as version is present in spans, it is added to trace metrics generated from those spans. The version can be added manually in-code or automatically by the APM Tracer. When configured, these are used by the APM and [DogStatsD clients][2] to tag trace data and StatsD metrics with `env`, `service`, and `version`. If enabled, the APM tracer also injects the values of these variables into your logs.
 
     **Note**: There can only be **one service per span**. Trace metrics generally have a single service as well. However, if you have a different service defined in your hosts' tags, that configured service tag shows up on all trace metrics emitted from that host.
 
@@ -497,11 +499,11 @@ Ensure the `DdFetchLambdaTags` option is set to `true` on the CloudFormation sta
 
 
 [1]: /getting_started/tagging/
-[2]: /getting_started/agent
-[3]: /tracing/setup
-[4]: /getting_started/tagging/assigning_tags?tab=noncontainerizedenvironments
-[5]: /getting_started/agent/autodiscovery
-[6]: /agent/docker/integrations/?tab=docker
+[2]: /agent/docker/integrations/?tab=docker
+[3]: /getting_started/agent
+[4]: /tracing/setup
+[5]: /getting_started/tagging/assigning_tags?tab=noncontainerizedenvironments
+[6]: /getting_started/agent/autodiscovery
 [7]: /agent/docker/?tab=standard#optional-collection-agents
 [8]: /getting_started/tracing/
 [9]: /getting_started/logs/

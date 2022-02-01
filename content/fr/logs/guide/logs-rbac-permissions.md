@@ -90,10 +90,10 @@ Cette configuration est uniquement prise en charge via l'interface utilisateur.
 Permet à un rôle de créer et de modifier des [pipelines de traitement de logs][9], notamment à l'aide des actions suivantes :
 
 - Définir le nom du pipeline
-- Définir [les filtres des pipelines][10] afin de déterminer les logs devant passer par le pipeline de traitement
+- Définir des filtres de pipeline pour déterminer les logs qui doivent passer par le pipeline de traitement
 - Réorganiser les pipelines
 - Accorder l'autorisation [logs_write_processors](#logs-write-processors) pour un pipeline spécifique à un autre rôle
-- Gérer les [attributs standard][11] ou les [facettes utilisées pour les alias][12].
+- Gérer les [attributs standard][10] ou les [facettes utilisées pour les alias][11]
 
 **Remarque** : cette autorisation accorde également les autorisations [Logs_Write_Processors](#logs-write-processors) (pour tous les processeurs sur tous les pipelines) en arrière-plan.
 
@@ -140,9 +140,9 @@ curl -X POST \
 
 ### `logs_write_archives`
 
-Permet à un rôle de créer, de modifier ou de supprimer des [archives de logs][13], notamment à l'aide des actions suivantes :
+Permet à un rôle de créer, de modifier ou de supprimer des [archives de logs][12], notamment à l'aide des actions suivantes :
 
-- Configurer des [filtres d'archives][10] pour définir les logs qui doivent intégrer l'archive
+- Configurer des filtres d'archive pour définir les logs qui doivent intégrer l'archive
 - Définir le nom de l'archive
 - Réorganiser les archives
 - Limiter l'autorisation [logs_read_archives](#logs-read-archives) à un sous-ensemble de rôles
@@ -151,7 +151,7 @@ Cette autorisation est globale et permet à la fois de créer de nouvelles archi
 
 ### `logs_read_archives`
 
-Permet d'accéder aux informations de configuration des archives. Utilisée conjointement avec [Logs_Write_Historical_Views](#logs-write-historical-views), cette autorisation permet également de déclencher une [réintégration][14] à partir des archives.
+Permet à un rôle d'accéder aux informations de configuration des archives. Utilisée conjointement avec [Logs_Write_Historical_Views](#logs-write-historical-views), cette autorisation permet également de déclencher une [réintégration][13] à partir des archives.
 
 Cette autorisation peut être limitée à un sous-ensemble d'archives. Une archive sans restriction est accessible par toute personne disposant d'un rôle et de l'autorisation `logs_read_archives`. Une archive présentant des restrictions est uniquement accessible aux utilisateurs possédant un des rôles enregistrés, à condition que ces rôles disposent de l'autorisation `logs_read_archives`.
 
@@ -183,7 +183,7 @@ Utilisez l'API Logs Archives pour [attribuer][1] ou [révoquer][2] un rôle pour
 
 ### `logs_write_historical_views`
 
-Permet à un rôle d'écrire des vues historiques, c'est-à-dire d'utiliser la fonctionnalité [Log Rehydration*][14].
+Permet à un rôle d'écrire des vues historiques, c'est-à-dire d'utiliser la fonctionnalité [Log Rehydration*][13].
 
 Cette autorisation est globale et permet aux utilisateurs de lancer une réintégration à partir d'archives pour lesquelles ils disposent de l'autorisation [Logs_Read_Archives](#logs-read-archives).
 
@@ -196,7 +196,7 @@ Dans l'exemple ci-dessus :
 * Les membres ayant le rôle `PROD` ne **peuvent pas** lancer de réintégration à partir de l'archive `Audit`, car ils ne disposent pas de l'autorisation logs_read_archives.
 
 
-Lors de l'attribution de tags `team:audit` à tous les logs réintégrés à partir de l'archive `Audit`, assurez-vous que les membres avec le rôle `Audit` qui sont limités à la lecture des logs `team:audit` ne peuvent accéder qu'au contenu réintégré. Pour en savoir plus sur l'ajout de tags et la réintégration, consultez la [section relative à la configuration des archives de logs][13].
+Lors de l'attribution de tags `team:audit` à tous les logs réintégrés à partir de l'archive `Audit`, assurez-vous que les membres avec le rôle `Audit` qui sont limités à la lecture des logs `team:audit` ne peuvent accéder qu'au contenu réintégré. Pour en savoir plus sur l'ajout de tags et la réintégration, consultez la [section relative à la configuration des archives de logs][12].
 
 Pour les logs `service:ci-cd` réintégrés à partir de l'archive `Prod`, notez ce qui suit :
 
@@ -208,11 +208,11 @@ Pour les logs `service:ci-cd` réintégrés à partir de l'archive `Prod`, notez
 
 Permet de consulter, de créer ou de modifier une configuration de log via l'API Datadog :
 
-* Consulter et configurer des [archives][15] via l'API
-* Consulter et configurer des [Index][16] via l'API
-* Consulter et configurer des [pipelines][17] via l'API
-* Consulter et configurer des [requêtes de restriction][18] via l'API
-* Consulter et configurer des [métriques générées à partir de logs][16] via l'API
+* Consulter et configurer des [archives][14] via l'API
+* Consulter et configurer des [Index][15] via l'API
+* Consulter et configurer des [pipelines][16] via l'API
+* Consulter et configurer des [requêtes de restriction][17] via l'API
+* Consulter et configurer des [métriques générées à partir de logs][18] via l'API
 
 L'autorisation logs_public_config_api accorde uniquement l'autorisation d'effectuer des actions par le biais de l'API. Par exemple, si un utilisateur ne dispose pas de l'autorisation [logs_write_exclusion_filter](#logs-write-exclusion-filters), il ne pourra pas mettre à jour le taux d'échantillonnage via l'API, et ce même s'il dispose de l'autorisation logs_public_config_api.
 
@@ -225,7 +225,7 @@ Accordez les autorisations suivantes pour gérer l'accès en lecture à des sous
 
 ### `logs_read_data`
 
-Accès en lecture aux données de log. Si cette autorisation est accordée, d'autres restrictions peuvent être appliquées, par exemple avec `logs_read_index_data` ou via une [requête de restriction][18].
+Accès en lecture aux données de log. Si cette autorisation est accordée, d'autres restrictions peuvent être appliquées, par exemple avec `logs_read_index_data` ou via une [requête de restriction][17].
 
 Les rôles sont cumulatifs : si un utilisateur dispose de plusieurs rôles, toutes les autorisations de chacun des rôles déterminent les données auxquelles il a accès.
 
@@ -354,7 +354,7 @@ curl -X POST \
 
 ### `logs_live_tail`
 
-Permet à un rôle d'utiliser la fonctionnalité [Live Tail][20].
+Permet à un rôle d'utiliser la fonctionnalité [Live Tail][19].
 
 Cette autorisation est globale et accorde l'accès à la fonction Livetail indépendamment de l'autorisation [logs_read_index_data](#logs-read-index-data).
 
@@ -373,15 +373,14 @@ Cette autorisation est globale et accorde l'accès à la fonction Livetail indé
 [6]: /fr/logs/indexes#indexes-filters
 [7]: /fr/logs/indexes#update-log-retention
 [8]: /fr/logs/indexes#exclusion-filters
-[9]: /fr/logs/processing/pipelines/
-[10]: /fr/logs/processing/pipelines/#pipeline-filters
-[11]: /fr/logs/processing/attributes_naming_convention/#standard-attributes-in-log-configuration
-[12]: /fr/logs/explorer/facets/#alias-facets
-[13]: /fr/logs/archives
-[14]: /fr/logs/archives/rehydrating
-[15]: /fr/api/v2/logs-archives/
-[16]: /fr/api/v1/logs-indexes/
-[17]: /fr/api/v1/logs-pipelines/
-[18]: /fr/api/v2/logs-restriction-queries/
-[19]: /fr/api/v2/logs-metrics/
-[20]: /fr/logs/explorer/live_tail/
+[9]: /fr/logs/log_configuration/pipelines
+[10]: /fr/logs/log_configuration/attributes_naming_convention/#standard-attributes
+[11]: /fr/logs/explorer/facets/#alias-facets
+[12]: /fr/logs/archives
+[13]: /fr/logs/archives/rehydrating
+[14]: /fr/api/v2/logs-archives/
+[15]: /fr/api/v1/logs-indexes/
+[16]: /fr/api/v1/logs-pipelines/
+[17]: /fr/api/v2/logs-restriction-queries/
+[18]: /fr/api/v2/logs-metrics/
+[19]: /fr/logs/explorer/live_tail/

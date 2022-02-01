@@ -7,12 +7,13 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Surveillez des métriques clés d'Azure DevOps.
-doc_link: 'https://docs.datadoghq.com/integrations/azure_devops'
+doc_link: https://docs.datadoghq.com/integrations/azure_devops
 draft: false
 git_integration_title: azure_devops
 has_logo: true
 integration_id: azuredevops
 integration_title: Microsoft Azure DevOps
+integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'
@@ -57,13 +58,19 @@ Documentation de référence Azure supplémentaire : [créer un hook de service
 
 #### Programmation
 
-Pour créer des abonnements de hook de service par programmation, utilisez la [documentation Azure][4] et l'endpoint de Datadog :
+Suivez la documentation Azure pour [Créer un abonnement de hook de service par programmation][4] et utiliser l'endpoint de Datadog :
 
 ```text
 https://{{< region-param key="dd_full_site" >}}/intake/webhook/azuredevops?api_key=<CLÉ_API_DATADOG>
 ```
 
 ### Utiliser les monitors Datadog en tant que portes dans Azure Pipelines
+
+{{< site-region region="eu" >}}
+<div class="alert alert-warning">
+    L'extension permettant d'utiliser les monitors Datadog en tant que portes de déploiement n'est pas disponible pour le site {{< region-param key="dd_site_name" >}}.
+</div>
+{{< /site-region >}}
 
 Vous pouvez également utiliser les monitors Datadog en tant que portes pour [contrôler le déploiement des versions][5] dans Azure Pipelines. Cette option vous permet d'arrêter automatiquement les déploiements problématiques si un état anormal est détecté dans Datadog.
 
@@ -74,7 +81,7 @@ Vous pouvez également utiliser les monitors Datadog en tant que portes pour [co
 2. Dans Azure DevOps, accédez à **Service Connections** dans les paramètres de votre projet, et sélectionnez **New Service Connection**.
 3. Dans la liste, sélectionnez Datadog et cliquez sur **Next**.
 4. Dans les champs proposés, ajoutez votre clé d'API Datadog et la clé d'application du compte que vous souhaitez utiliser, puis saisissez un nom et une description pour identifier ce compte Datadog dans Azure DevOps. Cliquez sur **Enregistrer**. Vous pouvez ajouter d'autres connexions de service si vous souhaitez interroger les monitors de plusieurs comptes Datadog différents.
-5. Accédez à **Azure Pipelines** pour commencer à configurer votre déploiement. Vous aurez alors la possibilité d'ajouter des conditions de pré-déploiement ou de post-déploiement entre les différentes phases. Sélectionnez où vous souhaitez ajouter un monitor Datadog, puis activez le bouton **Portes**.
+5. Accédez à **Azure Pipelines** pour configurer votre déploiement. Vous aurez alors la possibilité d'ajouter des conditions de pré-déploiement ou de post-déploiement entre les différentes phases. Sélectionnez où vous souhaitez ajouter un monitor Datadog, puis activez le bouton **Portes**.
 6. Cliquez sur **Ajouter** et sélectionnez l'option **Query Datadog monitors**.
 7. Sélectionnez la connexion de service Datadog, puis saisissez l'ID de votre monitor et le seuil de gravité de votre choix. Le seuil de gravité correspond au statut du monitor (`Alert` ou `Warning`) auquel la tâche échoue.
 
@@ -130,11 +137,11 @@ La durée d'un élément de travail est calculée à partir des événements _wo
 
 **Remarque** : en cas de réouverture d'un élément de travail `Done`, un autre point de données est généré lors de son prochain passage au statut `Done`. Le point de données initial n'est pas modifié, et le nouveau point de données est comparé à la création initiale de l'élément de travail.
 
-#### Mon test d'abonnement du hook de service renvoie un message de réussite, pourquoi les événements n'arrivent-ils pas sur Datadog ?
-Le test d'abonnement du hook de service surveille uniquement la capacité d'Azure DevOps à envoyer des événements vers Datadog. Cela ne valide pas votre clé d'API ou le site Datadog (américain ou européen) de votre organisation. Assurez-vous que la clé d'API et le site sont valides.
+#### Mon test d'abonnement de hook de service renvoie un message de réussite. Pourquoi les événements n'arrivent-ils pas sur Datadog ?
+Le test d'abonnement du hook de service surveille uniquement la capacité d'Azure DevOps à envoyer des événements à Datadog. Il ne permet pas de valider votre clé d'API ou le site Datadog (américain ou européen) de votre organisation. Assurez-vous que la clé d'API et le site sont valides.
 
 [1]: https://app.datadoghq.com/account/settings#integrations/azuredevops
-[2]: https://app.datadoghq.com/account/settings#api
+[2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://docs.microsoft.com/en-us/azure/devops/service-hooks/services/datadog?view=azure-devops
 [4]: https://docs.microsoft.com/en-us/azure/devops/service-hooks/create-subscription?view=azure-devops
 [5]: https://docs.microsoft.com/en-us/azure/devops/pipelines/release/approvals/gates?view=azure-devops

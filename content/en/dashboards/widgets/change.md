@@ -21,55 +21,39 @@ further_reading:
   tag: "Documentation"
   text: "Request JSON schema"
 ---
-The Change graph shows you the change in a value over the time period chosen:
+The Change graph shows you the change in a metric over a period of time:
 
 {{< img src="dashboards/widgets/change/change.png" alt="Change graph" >}}
 
 ## Setup
-
-{{< img src="dashboards/widgets/change/change_setup.png" alt="Change graph Setup" style="width:80%;">}}
 
 ### Configuration
 
 1. Choose a metric to graph.
 2. Choose an aggregation function.
 3. Optional: choose a specific context for your widget.
-4. Break down your aggregation on a tag key i.e `host`, `service`...
-5. Choose the "Compared" period from:
+4. Break down your aggregation by a tag key such as `host` or `service`.
+5. Choose a value for the "Compare to" period:
     * an hour before
     * a day before
     * a week before
     * a month before
-6. Select to show the `relative` or `absolute` change between the two periods.
-7. Select your ranking by sorting your result by:
+6. Choose between `relative` or `absolute` change.
+7. Select the field by which the metrics are ordered:
     * `change`
     * `name`
     * `present value`
     * `past value`
-8. Indicate whether `increases` or `decreases` changes is better. The better one is highlighted in green; the other one in red.
-9. Optional: display current value.
+8. Choose `ascending` or `descending` ordering.
+9. Choose whether to display the current value in the graph.
 
-### Options
+### Display preference
 
-#### Display preference
+Choose whether your widget uses a custom time frame or the dashboard's global time frame.
 
-{{< img src="dashboards/widgets/options/display_preferences.png" alt="Display preferences" style="width:80%;">}}
+### Title
 
-##### Global time
-
-On screenboards only, choose whether your widget has a custom timeframe or the screenboard's global timeframe.
-
-###### Legend
-
-Use *Show legend on graph* to toggle the legend display on your widget. Optionally, select the number of entries to display.
-
-#### Title
-
-Display a custom title for your widget by activating the `Show a Title` check box:
-
-{{< img src="dashboards/widgets/options/title.png" alt="Widget title" style="width:80%;">}}
-
-Optionally define its size and alignment.
+Choose a custom title for your widget, or leave the form blank to use a generated title.
 
 ## API
 

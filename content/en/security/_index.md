@@ -19,13 +19,13 @@ further_reading:
   text: "Additional Security Considerations"
 ---
 
-<div class="alert alert-info">This page is about the security of Datadog; if you're looking for the Security Monitoring product, see the <a href="/security_monitoring" target="_blank">Security Monitoring section</a>.</div>
+<div class="alert alert-info">This page is about the security of Datadog; if you're looking for the Cloud SIEM product, see the <a href="/security_platform/cloud_siem" target="_blank">Cloud SIEM section</a>.</div>
 
-Datadog allows customers to submit data in multiple ways, including via the [Agent][1], the [public API][2], and [integrations][3]. This article describes the main categories of data which might be submitted by customers to Datadog as part of the intended use of its product, and highlights scenarios where submitted data may contain personal data. Consult our [security page][4] and [privacy policy][5] for more information.
+Datadog allows customers to submit data in multiple ways, including from the [Agent][1], the [public API][2], and [integrations][3]. This article describes the main categories of data which might be submitted by customers to Datadog as part of the intended use of its product, and highlights scenarios where submitted data may contain personal data. Read the [security page][4] and [privacy policy][5] for more information.
 
 ## Metadata
 
-Metadata consist primarily of [tags][6], which are typically formatted in the `key:value` (e.g. `env:prod`) format. Metadata enable customer data such as Infrastructure Metrics, APM and Logs to be filtered and grouped. Metadata should not contain personal data as part of the intended use of the service.
+Metadata consist primarily of [tags][6], which are typically formatted in the `key:value` (for example, `env:prod`) format. Metadata enables customer data such as Infrastructure Metrics, APM, and Logs to be filtered and grouped. Metadata should not contain personal data as part of the intended use of the service.
 
 ## Infrastructure metrics
 

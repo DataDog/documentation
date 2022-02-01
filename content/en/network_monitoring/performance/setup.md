@@ -14,6 +14,9 @@ further_reading:
     - link: '/network_monitoring/devices'
       tag: 'Documentation'
       text: 'Network Device Monitoring'
+    - link: "https://www.datadoghq.com/blog/monitor-consul-with-datadog-npm/"
+      tag: "Blog"
+      text: "Datadog NPM now supports Consul networking"
 ---
 
 Datadog Network Performance Monitoring (NPM) gives you visibility into your network traffic between services, containers, availability zones, and any other tag in Datadog so you can:
@@ -65,7 +68,7 @@ Datadog monitors every aspect of your Istio environment, so you can also:
 
 - Assess the health of Envoy and the Istio control plane with [logs][8].
 - Break down the performance of your service mesh with request, bandwidth, and resource consumption [metrics][8].
-- Drill into distributed traces for applications transacting over the mesh with [APM][9].
+- Examine distributed traces for applications transacting over the mesh with [APM][9].
 
 NPM supports Istio v1.6.4+ with [Datadog Agent v7.24.1+][1].
 
@@ -166,13 +169,13 @@ If you need to use Network Performance Monitoring on other systems with SELinux 
 
 If these utilities do not exist in your distribution, follow the same procedure but using the utilities provided by your distribution instead.
 
-### Windows systems
 
 [1]: /infrastructure/process/?tab=linuxwindows#installation
 [2]: /agent/guide/agent-commands/#restart-the-agent
 [3]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/selinux/system_probe_policy.te
 {{% /tab %}}
 {{% tab "Agent (Windows)" %}}
+
 Data collection for Windows relies on a filter driver for collecting network data.
 
 To enable Network Performance Monitoring for Windows hosts:
@@ -301,7 +304,10 @@ If you already have the [Agent running with a manifest][4]:
                                   - SYS_RESOURCE
                                   - SYS_PTRACE
                                   - NET_ADMIN
+                                  - NET_BROADCAST
+                                  - NET_RAW
                                   - IPC_LOCK
+                                  - CHOWN
                       command:
                           - /opt/datadog-agent/embedded/bin/system-probe
                       env:
@@ -344,6 +350,28 @@ If you already have the [Agent running with a manifest][4]:
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: /agent/kubernetes/
 {{% /tab %}}
+{{% tab "Operator" %}}
+<div class="alert alert-warning">The Datadog Operator is in public beta. If you have any feedback or questions, contact <a href="/help">Datadog support</a>.</div>
+
+[The Datadog Operator][1] is a way to deploy the Datadog Agent on Kubernetes and OpenShift. It reports deployment status, health, and errors in its Custom Resource status, and it limits the risk of misconfiguration thanks to higher-level configuration options.
+
+To enable Network Performance Monitoring in Operator, use the following configuration:
+
+```yaml
+apiVersion: datadoghq.com/v1alpha1
+kind: DatadogAgent
+metadata:
+  name: placeholder
+  namespace: placeholder
+spec:
+  # (...)
+  features:
+    networkMonitoring:
+      enabled: true
+```
+
+[1]: https://github.com/DataDog/datadog-operator
+{{% /tab %}}
 {{% tab "Docker" %}}
 
 To enable Network Performance Monitoring in Docker, use the following configuration when starting the container Agent:
@@ -361,7 +389,10 @@ $ docker run -e DD_API_KEY="<DATADOG_API_KEY>" \
 --cap-add=SYS_RESOURCE \
 --cap-add=SYS_PTRACE \
 --cap-add=NET_ADMIN \
+--cap-add=NET_BROADCAST \
+--cap-add=NET_RAW \
 --cap-add=IPC_LOCK \
+--cap-add=CHOWN \
 gcr.io/datadoghq/agent:latest
 ```
 
@@ -389,7 +420,10 @@ services:
     - SYS_RESOURCE
     - SYS_PTRACE
     - NET_ADMIN
+    - NET_BROADCAST
+    - NET_RAW
     - IPC_LOCK
+    - CHOWN
     security_opt:
     - apparmor:unconfined
 ```

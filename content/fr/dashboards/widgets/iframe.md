@@ -16,7 +16,7 @@ Le widget iframe vous permet d'intégrer une partie de n'importe quelle autre pa
 
 ## Configuration
 
-{{< img src="dashboards/widgets/iframe/iframe_setup.png" alt="Configuration de l'iframe" style="width:80%;">}}
+{{< img src="dashboards/widgets/iframe/iframe_setup.png" alt="Configuration du widget iframe" style="width:80%;">}}
 
 Saisissez l'URL de la page que vous souhaitez afficher à l'intérieur de l'iframe. Si vous n'utilisez pas une URL HTTPS, vous devrez peut-être configurer votre navigateur afin d'autoriser le contenu non sécurisé.
 

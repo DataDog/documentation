@@ -22,7 +22,7 @@ This page outlines the basic features of the Datadog Agent for SUSE. If you have
 
 Packages are available for 64-bit x86 architectures. For other architectures, use the source install.
 
-**Note**: SUSE 11 SP4 and above are supported.
+**Note**: SUSE 11 SP4 and above are supported in Agent < 6.33.0/7.33.0. SLES 12 and above and OpenSUSE 15 and above are supported in Agent >= 6.33.0/7.33.0.
 
 ## Commands
 

@@ -2,6 +2,10 @@
 @import 'bootstrap-custom';
 @import 'webfonts';
 
+// jqmath 
+@import 'jqmath-vanilla/jqmath-0.4.3';
+@import 'jqmath-vanilla/jqmath-vanilla-overrides';
+
 // base
 @import 'base/variables';
 @import 'base/mixins';
@@ -31,7 +35,7 @@
 @import "pages/security_monitoring";
 
 // Components
-@import 'components/iconfont'; // imported from websites-modules
+@import 'base/iconfont'; // imported from websites-modules
 @import 'components/announcement-banner'; // imported from websites-modules
 @import 'components/badge';
 @import 'components/cards';

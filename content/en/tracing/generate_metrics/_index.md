@@ -12,9 +12,6 @@ further_reading:
       tag: "Documentation"
       text: 'Use Analytics queries and monitors based on retained traces.'
 ---
-<div class="alert alert-warning">
-This feature is currently in public beta.  While this feature is in beta it is not recommended to use metrics generated from spans for monitors or production operations use cases.
-</div>
 
 ## Generate span-based metrics
 
@@ -31,9 +28,9 @@ For example, you may want to use custom metrics to visualize anomalies, create d
 | Reason                        | Custom Metrics Generated from Spans                   | Retention Filters                           |
 | -------------------------------------- | -------------------------------------- | --------------------------------- |
 | Retention Period                     | 15 months                    | 15 days             |
-| Anomaly Detection                           | Create an [Anomaly Monitor][4] based on generated metrics.                            | Use Analytics to compare behavior over the past 15 days, and drill into complete traces to investigate root cause.                         |
-| Investigation of matching traces with full context                          | N/A - Custom Metrics will not result in any retention of associated traces.                            | Keep exactly the traces relevant to your business context with [retention filters][1].                            |
-| Granularity of behavior                           | Create custom metrics for important endpoints or other low-cardinality groups.                        | Use [Search and Analytics][5] for specific endpoints, or use the 'Group By' option in [Analytics][6].                    |
+| Anomaly Detection                           | Create an [Anomaly Monitor][4] based on generated metrics.                            | Use Analytics to compare behavior over the past 15 days, and view complete traces to investigate root cause.                         |
+| Investigation of matching traces with full context                          | N/A - Custom Metrics do not result in any retention of associated traces.                            | Keep exactly the traces relevant to your business context with [retention filters][1].                            |
+| Granularity of behavior                           | Create custom metrics for important endpoints or other low-cardinality groups.                        | Use [Trace Explorer][5] for specific endpoints, or use the 'Group By' option in [Analytics][6].                    |
 | Forecasting or complex mathematics                          | Create a [Forecast monitor][7] based on generated metrics.                          |   N/A                            |
 
 To generate metrics from spans, on the [APM Setup and Configuration][8] page select the [Generate Metrics][9] tab, and click the **New Metric** button.
@@ -81,10 +78,10 @@ After a metric is created, only two fields can be updated:
 [2]: /account_management/billing/custom_metrics/
 [3]: https://docs.datadoghq.com/metrics/#overview
 [4]: /monitors/create/types/anomaly/#overview
-[5]: /tracing/trace_search_and_analytics/
-[6]: /tracing/trace_search_and_analytics/query_syntax/#analytics-query
+[5]: /tracing/trace_explorer/
+[6]: /tracing/trace_explorer/query_syntax/#analytics-query
 [7]: /monitors/create/types/forecasts/
 [8]: https://app.datadoghq.com/apm/getting-started
 [9]: https://app.datadoghq.com/apm/traces/generate-metrics
-[10]: /tracing/trace_search_and_analytics/query_syntax/
+[10]: /tracing/trace_explorer/query_syntax/
 [11]: /metrics/#naming-metrics

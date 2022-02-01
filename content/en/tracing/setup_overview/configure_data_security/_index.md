@@ -38,36 +38,7 @@ Datadog enforces several filtering mechanisms on spans as a baseline, to provide
 
 ## Agent trace obfuscation
 
-Agent [trace][2] obfuscation is disabled by default. Enable it in your `datadog.yaml` configuration file to obfuscate information attached to your traces.
-
-List of all environment variables available for Agent trace obfuscation:
-
-`DD_APM_CONFIG_OBFUSCATION_ELASTICSEARCH_ENABLED`
-: Whether or not to enable obfuscation in Elasticsearch.
-
-`DD_APM_CONFIG_OBFUSCATION_ELASTICSEARCH_KEEP_VALUES`
-: Whether or not to store obfuscated values from Elasticsearch.
-
-`DD_APM_CONFIG_OBFUSCATION_HTTP_REMOVE_PATHS_WITH_DIGITS`
-: A string containing values to remove from HTTP paths for obfuscation.
-
-`DD_APM_CONFIG_OBFUSCATION_HTTP_REMOVE_QUERY_STRING`
-: A string containing one or more query strings to remove for obfuscation.
-
-`DD_APM_CONFIG_OBFUSCATION_MEMCACHED_ENABLED`
-: Whether or not to enable obfuscation of `memcached`.
-
-`DD_APM_CONFIG_OBFUSCATION_MONGODB_ENABLED`
-: Whether or not to enable obfuscation of `mongodb`. 
-
-`DD_APM_CONFIG_OBFUSCATION_MONGODB_KEEP_VALUES`
-: Whether or not to store obfuscated values from `mongodb`.
-
-`DD_APM_CONFIG_OBFUSCATION_REDIS_ENABLED`
-: Whether or not to enable obfuscation for `redis`.
-
-`DD_APM_CONFIG_OBFUSCATION_REMOVE_STACK_TRACES`
-: Whether or not to remove stack traces for obfuscation.
+Agent [trace][2] obfuscation is disabled by default. Enable it in your `datadog.yaml` configuration file to obfuscate all information attached to your traces.
 
 This option works with the following services:
 

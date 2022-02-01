@@ -53,10 +53,10 @@ The following functions change how the value of a numerical template variable is
 | humanize_bytes(var) | Returns a human readable formatting of var bytes|
 | humanize_bits(var)  | Returns a human readable formatting of var bits|
 | abs(var)            | Returns the absolute value of var|
-| int(var)            | Returns var as an integer|
+| int(var)            | Returns var as a floored integer; that is, the numbers to the left of the decimal point. For example: if var = 12.345, then `int(var)` returns 12.|
 | float(var)          | Returns var as a float|
 | trunc(var)          | Returns var as an integer, an alias of the int function|
-| dec(var)            | Returns the numbers to the right of the decimal point, for example if var = 12.345 then dec(var) returns 0.345.|
+| dec(var)            | Returns the numbers to the right of the decimal point. For example: if var = 12.345, then `dec(var)` returns 0.345.|
 
 The following functions use the value of a numerical template variable as the input to a mathematical function:
 

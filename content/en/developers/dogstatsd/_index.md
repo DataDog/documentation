@@ -15,7 +15,7 @@ further_reading:
     - link: 'developers/libraries'
       tag: 'Documentation'
       text: 'Official and Community created API and DogStatsD client libraries'
-    - link: 'https://github.com/DataDog/datadog-agent/tree/master/pkg/dogstatsd'
+    - link: 'https://github.com/DataDog/datadog-agent/tree/main/pkg/dogstatsd'
       tag: 'GitHub'
       text: 'DogStatsD source code'
 ---
@@ -76,7 +76,7 @@ By default, DogStatsD listens on UDP port **8125**. If you need to change this, 
 2. [Restart your Agent][3].
 
 
-[1]: https://github.com/DataDog/dd-agent/blob/master/datadog.conf.example
+[1]: /agent/guide/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
 [2]: /developers/dogstatsd/unix_socket/
 [3]: /agent/guide/agent-commands/
 {{% /tab %}}
@@ -151,9 +151,12 @@ With this, any pod running your application is able to send DogStatsD metrics wi
 
 #### Origin detection over UDP
 
-Origin detection is supported in Agent 6.10.0+ and allows DogStatsD to detect where the container metrics come from, and tag metrics automatically. When this mode is enabled, all metrics received through UDP are tagged by the same container tags as Autodiscovery metrics.
+Origin detection is supported in Agent 6.10.0+ and allows DogStatsD to detect where the container metrics come from, and tag metrics automatically. When this mode is enabled, all metrics received through UDP are tagged by the same pod tags as Autodiscovery metrics.
 
-**Note**: An alternative to UDP is [Unix Domain Sockets][4].
+**Notes**: 
+
+* Origin detection with UDP uses the pod ID as the entity ID, so container-level tags are not emitted.
+* An alternative to UDP is [Unix Domain Sockets][4].
 
 To enable origin detection over UDP, add the following lines to your application manifest:
 

@@ -2,16 +2,16 @@
 title: Variables d'environnement de l'Agent
 kind: guide
 further_reading:
-  - link: '/agent/docker/#variables-d-environnement'
+  - link: /agent/docker/#variables-d-environnement
     tag: Documentation
     text: Variables d'environnement de l'Agent Docker
-  - link: '/agent/docker/apm/#variables-d-environnement-de-l-agent-apm-docker'
+  - link: /agent/docker/apm/#variables-d-environnement-de-l-agent-apm-docker
     tag: Documentation
     text: Variables d'environnement de l'Agent APM
-  - link: '/logs/log_collection/#collecte-de-logs-de-conteneur'
+  - link: /logs/log_collection/#collecte-de-logs-de-conteneur
     tag: Documentation
     text: Collecte de logs de conteneur
-  - link: '/agent/proxy/#variables-d-environnement'
+  - link: /agent/proxy/#variables-d-environnement
     tag: Documentation
     text: Variables d'environnement de proxy
 ---
@@ -25,7 +25,7 @@ Si vous utilisez l'Agent v6, la plupart des options du [fichier de configuratio
 
 ## Recommandations
 
-Datadog vous conseille d'utiliser le tagging de service unifié lorsque vous assignez des tags. Le tagging de service unifié permet de lier les données de télémétrie Datadog entre elles via trois tags standards : `env`, `service` et `version`. Pour découvrir comment configurer le tagging unifié pour votre environnement, consultez la documentation dédiée au [tagging de service unifié][2].
+Datadog vous conseille d'utiliser le tagging de service unifié lorsque vous assignez des tags. Cette fonctionnalité permet de lier les données de télémétrie Datadog entre elles via trois tags standards : `env`, `service` et `version`. Pour découvrir comment configurer le tagging unifié pour votre environnement, consultez la [documentation dédiée][2].
 
 ## Cas d'utilisation généraux
 
@@ -59,7 +59,7 @@ Dans la plupart des cas, les règles suivantes doivent être respectées :
 
 ### Exceptions
 
-- Toutes les options du fichier `datadog.yaml` ne peuvent pas être définies via des variables d'environnement. Référez-vous au fichier [config.go][4] dans le référentiel GitHub de l'Agent Datadog. Les options disponibles via les variables d'environnement commencent par `config.BindEnv*`.
+- Les options du fichier `datadog.yaml` ne peuvent pas toutes être définies via des variables d'environnement. Référez-vous au fichier [config.go][4] dans le référentiel GitHub de l'Agent Datadog pour en savoir plus. Les options disponibles via les variables d'environnement commencent par `config.BindEnv*`.
 
 - Les variables d'environnement spécifiques à un composant qui ne sont pas répertoriées dans le fichier [config.go][4] peuvent également être prises en charge.
 

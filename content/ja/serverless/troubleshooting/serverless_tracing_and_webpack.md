@@ -19,7 +19,7 @@ Datadog のトレーシングライブラリ (`dd-trace`) は、条件付きイ�
     var nodeExternals = require("webpack-node-externals");
 
     module.exports = {
-      // we use webpack-node-externals to excludes all node deps.
+      // use webpack-node-externals to exclude all node dependencies.
       // You can manually set the externals too.
       externals: [nodeExternals(), "dd-trace", "datadog-lambda-js"],
     };

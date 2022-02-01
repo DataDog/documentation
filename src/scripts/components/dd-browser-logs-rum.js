@@ -21,8 +21,12 @@ if (window.DD_RUM) {
             service: 'docs',
             version: CI_COMMIT_SHORT_SHA,
             trackInteractions: true,
+            replaySampleRate: 100,
             allowedTracingOrigins: [window.location.origin]
         });
+        if (env !== 'live') {
+            window.DD_RUM.startSessionReplayRecording();
+        }
         if (branch) {
             window.DD_RUM.addRumGlobalContext('branch', branch);
         }

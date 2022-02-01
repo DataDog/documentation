@@ -24,7 +24,7 @@ def format_agent_config_string(string):
     if re.match(regex_string, string):
         return string.replace('#', '').replace('\n', '').strip()
     elif '#' in string and '##' not in string:
-        return string.replace('#', '') + '\n'
+        return string.replace('# ', '') + '\n'
     else:
         return string + '\n'
 

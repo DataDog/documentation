@@ -13,13 +13,14 @@ categories:
 creates_events: true
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/docker_daemon/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/docker_daemon/README.md
 display_name: Docker
 draft: false
 git_integration_title: docker_daemon
 guid: 08ee2733-0441-4438-8af8-e2f6fb926772
 integration_id: docker
 integration_title: "Docker\_Daemon"
+integration_version: ''
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com
@@ -137,7 +138,7 @@ Par exemple, la première version de l'image Docker qui est fournie avec l'Agent
 
 #### Conteneurs personnalisés et informations supplémentaires
 
-Pour en savoir plus sur l'élaboration de conteneurs Docker personnalisés avec l'Agent Datadog, l'image Alpine Linux, le contrôle de version et plus encore, consultez [le projet docker-dd-agent sur Github][2].
+Pour en savoir plus sur l'élaboration de conteneurs Docker personnalisés avec l'Agent Datadog, l'image Alpine Linux, le contrôle de version et plus encore, consultez [le projet docker-dd-agent sur GitHub][2].
 
 ### Validation
 
@@ -185,31 +186,26 @@ L'intégration Docker génère les événements suivants :
 * Update
 
 ### Checks de service
+{{< get-service-checks-from-git "docker_daemon" >}}
 
-**docker.service_up** :
-Renvoie `CRITICAL` si l'Agent ne parvient pas à recueillir la liste des conteneurs du daemon Docker. Si ce n'est pas le cas, renvoie `OK`.
 
-**docker.container_health** :
-Ce check de service est seulement disponible pour l'Agent v5. Renvoie `CRITICAL` si un conteneur n'est pas sain, renvoie `UNKNOWN` si l'état de santé est inconnu ou renvoie `OK` pour les autres cas.
-
-**docker.exit** :
-Renvoie `CRITICAL` si un conteneur est fermé avec un code de sortie différent de zéro. Si ce n'est pas le cas, renvoie `OK`.
-
-**Remarque** : pour utiliser `docker.exit`, ajoutez `collect_exit_code: true` dans votre [fichier YAML Docker][20] et redémarrez l'Agent.
+**Remarque** : pour utiliser `docker.exit`, ajoutez `collect_exit_code: true` dans votre [fichier YAML Docker][21] et redémarrez l'Agent.
 
 ## Dépannage
-Besoin d'aide ? Contactez [l'assistance Datadog][21].
+
+Besoin d'aide ? Contactez [l'assistance Datadog][22].
 
 ## Pour aller plus loin
-* [Compose et l'Agent Datadog][22]
-* [DogStatsD et Docker][23]
-* [Le problème de la surveillance Docker][24] (série)
-* [Comment surveiller les métriques de ressource Docker][25]
-* [Comment recueillir des métriques Docker][26]
-* [8 faits surprenants sur l'adoption concrète de Docker][27]
-* [Surveiller Docker sur AWS ECS][28]
-* [Optimiser Datadog pour Docker][29]
-* [Surveiller Docker avec Datadog][30]
+
+* [Compose et l'Agent Datadog][23]
+* [DogStatsD et Docker][24]
+* [Le problème de la surveillance Docker][25] (série d'articles)
+* [Comment surveiller les métriques de ressource Docker][26]
+* [Comment recueillir des métriques Docker][27]
+* [8 faits surprenants sur l'adoption concrète de Docker][28]
+* [Surveiller Docker sur AWS ECS][29]
+* [Optimiser Datadog pour Docker][30]
+* [Surveiller Docker avec Datadog][31]
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/docker_daemon/images/docker.png
@@ -231,14 +227,15 @@ Besoin d'aide ? Contactez [l'assistance Datadog][21].
 [17]: https://hub.docker.com/r/datadog/agent
 [18]: https://docs.datadoghq.com/fr/agent/#cli
 [19]: https://github.com/DataDog/integrations-core/blob/master/docker_daemon/metadata.csv
-[20]: https://github.com/DataDog/integrations-core/blob/master/docker_daemon/datadog_checks/docker_daemon/data/conf.yaml.example#L124
-[21]: https://docs.datadoghq.com/fr/help
-[22]: https://docs.datadoghq.com/fr/integrations/faq/compose-and-the-datadog-agent
-[23]: https://docs.datadoghq.com/fr/integrations/faq/dogstatsd-and-docker
-[24]: https://www.datadoghq.com/blog/the-docker-monitoring-problem
-[25]: https://www.datadoghq.com/blog/how-to-monitor-docker-resource-metrics
-[26]: https://www.datadoghq.com/blog/how-to-collect-docker-metrics
-[27]: https://www.datadoghq.com/docker-adoption
-[28]: https://www.datadoghq.com/blog/monitor-docker-on-aws-ecs
-[29]: https://www.datadoghq.com/blog/docker-performance-datadog
-[30]: https://www.datadoghq.com/blog/monitor-docker-datadog
+[20]: https://github.com/DataDog/integrations-core/blob/master/docker_daemon/assets/service_checks.json
+[21]: https://github.com/DataDog/integrations-core/blob/master/docker_daemon/datadog_checks/docker_daemon/data/conf.yaml.example#L124
+[22]: https://docs.datadoghq.com/fr/help
+[23]: https://docs.datadoghq.com/fr/integrations/faq/compose-and-the-datadog-agent
+[24]: https://docs.datadoghq.com/fr/integrations/faq/dogstatsd-and-docker
+[25]: https://www.datadoghq.com/blog/the-docker-monitoring-problem
+[26]: https://www.datadoghq.com/blog/how-to-monitor-docker-resource-metrics
+[27]: https://www.datadoghq.com/blog/how-to-collect-docker-metrics
+[28]: https://www.datadoghq.com/docker-adoption
+[29]: https://www.datadoghq.com/blog/monitor-docker-on-aws-ecs
+[30]: https://www.datadoghq.com/blog/docker-performance-datadog
+[31]: https://www.datadoghq.com/blog/monitor-docker-datadog

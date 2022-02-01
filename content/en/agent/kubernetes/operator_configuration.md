@@ -573,8 +573,83 @@ spec:
 `site`
 : Set the site of the Datadog intake for Agent data:  {{< region-param key="dd_site" code="true" >}}. Defaults to `datadoghq.com`.
 
+`features.kubeStateMetricsCore.clusterCheck`
+: Configures the Kubernetes State Metrics Core check as a cluster check.
 
+`features.kubeStateMetricsCore.enabled`
+: Enable this to start the Kubernetes State Metrics Core check. See the [Kubernetes State Metrics Core documentation][16].
 
+`features.kubeStateMetricsCore.conf.configData`
+: Corresponds to the configuration file content.
+
+`features.kubeStateMetricsCore.conf.configMap.fileKey`
+: Corresponds to the key used in the ConfigMap.Data to store the configuration file content.
+
+`features.kubeStateMetricsCore.conf.configMap.name`
+: Name the ConfigMap.
+
+`features.logCollection.containerCollectUsingFiles`
+: Collect logs from files in `/var/log/pods instead` of using the container runtime API. Collecting logs from files is usually the most efficient way of collecting logs. Default is `true`. See the [Kubernetes Log collection][17]
+
+`features.logCollection.containerLogsPath`
+: Allows log collection from the container log path. Set to a different path if you are not using the Docker runtime. Defaults to `/var/lib/docker/containers`.
+
+`features.logCollection.containerSymlinksPath`
+: Allows the log collection to use symbolic links in this directory to validate container ID -> pod. Defaults to `/var/log/containers`.
+
+`features.logCollection.enabled`
+: Enable this option to activate Datadog Agent log collection.
+
+`features.logCollection.logsConfigContainerCollectAll`
+: Enable this option to allow log collection for all containers.
+
+`features.logCollection.openFilesLimit`
+: Sets the maximum number of log files that the Datadog Agent tails. Increasing this limit can increase resource consumption of the Agent. Default is 100.
+
+`features.logCollection.podLogsPath`
+: Allows log collection from pod log path. Defaults to `/var/log/pods`.
+
+`features.logCollection.tempStoragePath`
+: This path (always mounted from the host) is used by Datadog Agent to store information about processed log files. If the Datadog Agent is restarted, it starts tailing the log files immediately. Default to `/var/lib/datadog-agent/logs`.
+
+`features.networkMonitoring.enabled`
+: Enable networking monitoring.
+
+`features.orchestratorExplorer.additionalEndpoints`
+: Additional endpoints for shipping the collected data as json in the form of `{"https://process.agent.datadoghq.com": ["apikey1", ...], ...}'`.
+
+`features.orchestratorExplorer.clusterCheck`
+: Configures the Orchestrator Explorer check as a cluster check.
+
+`features.orchestratorExplorer.conf.configData`
+: Corresponds to the configuration file content.
+
+`features.orchestratorExplorer.conf.configMap.fileKey`
+: Corresponds to the key used in the ConfigMap.Data to store the configuration file content.
+
+`features.orchestratorExplorer.conf.configMap.name`
+: Name the ConfigMap.
+
+`features.orchestratorExplorer.ddUrl`
+: Set this for the Datadog endpoint for the orchestrator explorer.
+
+`features.orchestratorExplorer.enabled`
+: Enable this to activate live Kubernetes monitoring. See [Live Containers][18].
+
+`features.orchestratorExplorer.extraTags`
+: Additional tags for the collected data in the form of `a b c`. In contrast to `DD_TAGS`, this is a Cluster Agent option that is used to define custom cluster tags.
+
+`features.orchestratorExplorer.scrubbing.containers`
+: Deactivate this to stop the scrubbing of sensitive container data (passwords, tokens, etc.).
+
+`features.prometheusScrape.additionalConfigs`
+: AdditionalConfigs allows adding advanced Prometheus check configurations with custom discovery rules.
+
+`features.prometheusScrape.enabled`
+: Enable Autodiscovering pods and services exposing Prometheus metrics.
+
+`features.prometheusScrape.serviceEndpoints`
+: Enable generating dedicated checks for service endpoints.
 
 [1]: https://github.com/DataDog/docker-dd-agent#tracing-from-the-host
 [2]: https://docs.datadoghq.com/agent/docker/?tab=standard#environment-variables
@@ -591,3 +666,6 @@ spec:
 [13]: http://conntrack-tools.netfilter.org/
 [14]: https://docs.datadoghq.com/agent/cluster_agent/clusterchecks/
 [15]: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/
+[16]: https://docs.datadoghq.com/integrations/kubernetes_state_core
+[17]: https://docs.datadoghq.com/agent/kubernetes/log/?tab=daemonset
+[18]: https://docs.datadoghq.com/infrastructure/livecontainers/#kubernetes-resources

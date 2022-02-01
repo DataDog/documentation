@@ -19,7 +19,11 @@ This page describes known and open issues for Containerized Windows Applications
 
 Containerized Windows Applications Monitoring requires Datadog Agent 7.19+.
 
-The supported OS versions are Windows Server 2019 (LTSC) and version 1909 (SAC).
+The supported OS versions are:
+- Windows Server 2019 (LTSC / 1809)
+- Windows Server 2019 1909
+- Windows Server 2019 2004 / 20H1
+- Windows Server 2019 20H2 (Agent 7.33+)
 
 Hyper-V isolation mode is not supported.
 

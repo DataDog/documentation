@@ -1,0 +1,55 @@
+{
+  "title": "Example-Create_a_new_dashboard_with_a_formulas_and_functions_change_widget",
+  "widgets": [
+    {
+      "definition": {
+        "title": "",
+        "title_size": "16",
+        "title_align": "left",
+        "time": {},
+        "type": "change",
+        "requests": [
+          {
+            "formulas": [
+              {
+                "formula": "hour_before(query1)"
+              },
+              {
+                "formula": "query1"
+              }
+            ],
+            "queries": [
+              {
+                "data_source": "logs",
+                "name": "query1",
+                "search": {
+                  "query": ""
+                },
+                "indexes": [
+                  "*"
+                ],
+                "compute": {
+                  "aggregation": "count"
+                },
+                "group_by": []
+              }
+            ],
+            "response_format": "scalar",
+            "compare_to": "hour_before",
+            "increase_good": true,
+            "order_by": "change",
+            "change_type": "absolute",
+            "order_dir": "desc"
+          }
+        ]
+      },
+      "layout": {
+        "x": 0,
+        "y": 0,
+        "width": 4,
+        "height": 4
+      }
+    }
+  ],
+  "layout_type": "ordered"
+}

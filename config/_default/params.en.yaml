@@ -4,8 +4,8 @@ meta_title: Getting Started with Datadog
 meta_description: Datadog, the leading service for cloud-scale monitoring.
 disclaimer: "This page is not yet available in English, we are working on its translation. <br> May you have any questions or feedback about our current translation project, <a href=\"https://docs.datadoghq.com/fr/help/\">feel free to reach out to us!</a>"
 announcement_banner:
-  desktop_message: "Join us at the Dash virtual conference! October 26-27"
-  mobile_message: "Register for Dash! Oct 26-27"
-  external_link: "https://www.dashcon.io/?utm_source=Advertisement&utm_medium=Advertisement&utm_campaign=Organic-TopBannerDash"
+  desktop_message: "Announcing Sensitive Data Scanner for data protection at scale!"
+  mobile_message: "Announcing Datadog Sensitive Data Scanner!"
+  external_link: 'https://www.datadoghq.com/product/sensitive-data-scanner/'
 exclude: []
 translate_status_banner: "This translation isn't up to date, for the latest english version click here"

@@ -1,0 +1,17 @@
+{
+  "series": [
+    {
+      "metric": "system.load.1",
+      "type": "gauge",
+      "points": [
+        [
+          1636629071,
+          1.1
+        ]
+      ],
+      "tags": [
+        "test:ExampleSubmitmetricsreturnsPayloadacceptedresponse"
+      ]
+    }
+  ]
+}

@@ -38,7 +38,7 @@
   class="{{ .Site.Language.Lang }} {{ if .Kind }}kind-{{.Kind}}{{ end }} {{ if .IsPage }} {{ replace $.Type "/" "-" }} {{ else }} {{ .Section }} {{ end }} {{ $bodyClass }} {{ if .Site.Params.announcement_banner }}announcement{{ end }}">
 
   <div class="greyside">
-    <div class="container h-100">
+    <div class="container container__content h-100">
       <div class="row h-100">
         <div class="d-none d-lg-flex col-12 col-sm-3 h-100 grey" style="background:#f8f8f8; z-index: -1;">
         </div>
@@ -47,7 +47,7 @@
   </div>
   {{ partial "header/header.html" . }}
 
-  <div class="container h-100">
+  <div class="container container__content h-100">
     <div class="row h-100">
       <div class="d-none d-lg-flex col-12 col-sm-3 side">
         {{ partial "sidenav/main-sidenav.html" . }}

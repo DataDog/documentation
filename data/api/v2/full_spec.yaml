@@ -130,8 +130,16 @@ components:
       required: true
       schema:
         type: string
+    CloudWorkloadSecurityAgentRuleID:
+      description: The ID of the Agent rule.
+      example: 3b5-v82-ns6
+      in: path
+      name: agent_rule_id
+      required: true
+      schema:
+        type: string
     IncidentIDPathParameter:
-      description: The UUID the incident.
+      description: The UUID of the incident.
       in: path
       name: incident_id
       required: true
@@ -498,8 +506,21 @@ components:
       properties:
         name:
           description: Name of the application key.
-          example: Application Key for submitting metrics
+          example: Application Key for managing dashboards
           type: string
+        scopes:
+          description: Array of scopes to grant the application key. This feature
+            is in private beta, please contact Datadog support to enable scopes for
+            your application keys.
+          example:
+          - dashboards_read
+          - dashboards_write
+          - dashboards_public_share
+          items:
+            description: Name of scope.
+            type: string
+          nullable: true
+          type: array
       required:
       - name
       type: object
@@ -550,10 +571,21 @@ components:
       properties:
         name:
           description: Name of the application key.
-          example: Application Key for submitting metrics
+          example: Application Key for managing dashboards
           type: string
-      required:
-      - name
+        scopes:
+          description: Array of scopes to grant the application key. This feature
+            is in private beta, please contact Datadog support to enable scopes for
+            your application keys.
+          example:
+          - dashboards_read
+          - dashboards_write
+          - dashboards_public_share
+          items:
+            description: Name of scope.
+            type: string
+          nullable: true
+          type: array
       type: object
     ApplicationKeyUpdateData:
       description: Object used to update an application key.
@@ -606,6 +638,190 @@ components:
       type: string
       x-enum-varnames:
       - APPLICATION_KEYS
+    CloudWorkloadSecurityAgentRuleAttributes:
+      description: A Cloud Workload Security Agent rule returned by the API.
+      properties:
+        category:
+          description: The category of the Agent rule.
+          example: Process Activity
+          type: string
+        creationDate:
+          description: When the Agent rule was created, timestamp in milliseconds.
+          example: 1624366480320
+          format: int64
+          type: integer
+        creator:
+          $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleCreatorAttributes'
+        defaultRule:
+          description: Whether the rule is included by default.
+          example: false
+          type: boolean
+        description:
+          description: The description of the Agent rule.
+          example: My Agent rule
+          type: string
+        enabled:
+          description: Whether the Agent rule is enabled.
+          example: true
+          type: boolean
+        expression:
+          description: The SECL expression of the Agent rule.
+          example: exec.file.name == \"sh\"
+          type: string
+        name:
+          description: The name of the Agent rule.
+          example: my_agent_rule
+          type: string
+        updatedAt:
+          description: When the Agent rule was last updated, timestamp in milliseconds.
+          example: 1624366480320
+          format: int64
+          type: integer
+        updater:
+          $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleUpdaterAttributes'
+        version:
+          description: The version of the Agent rule.
+          example: 23
+          format: int64
+          type: integer
+    CloudWorkloadSecurityAgentRuleCreateAttributes:
+      description: Create a new Cloud Workload Security Agent rule.
+      properties:
+        description:
+          description: The description of the Agent rule.
+          example: My Agent rule
+          type: string
+        enabled:
+          description: Whether the Agent rule is enabled.
+          example: true
+          type: boolean
+        expression:
+          description: The SECL expression of the Agent rule.
+          example: exec.file.name == \"sh\"
+          type: string
+        name:
+          description: The name of the Agent rule.
+          example: my_agent_rule
+          type: string
+      required:
+      - name
+      - expression
+      type: object
+    CloudWorkloadSecurityAgentRuleCreateData:
+      description: Object for a single Agent rule.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleCreateAttributes'
+        type:
+          $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleType'
+      required:
+      - attributes
+      - type
+      type: object
+    CloudWorkloadSecurityAgentRuleCreateRequest:
+      description: Request object that includes the Agent rule to create.
+      properties:
+        data:
+          $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleCreateData'
+      required:
+      - data
+      type: object
+    CloudWorkloadSecurityAgentRuleCreatorAttributes:
+      description: The attributes of the user who created the Agent rule.
+      properties:
+        handle:
+          description: The handle of the user.
+          example: datadog.user@example.com
+          type: string
+        name:
+          description: The name of the user.
+          example: Datadog User
+          type: string
+      type: object
+    CloudWorkloadSecurityAgentRuleData:
+      description: Object for a single Agent rule.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleAttributes'
+        id:
+          description: The ID of the Agent rule.
+          example: 3dd-0uc-h1s
+          type: string
+        type:
+          $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleType'
+      type: object
+    CloudWorkloadSecurityAgentRuleResponse:
+      description: Response object that includes an Agent rule.
+      properties:
+        data:
+          $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleData'
+      type: object
+    CloudWorkloadSecurityAgentRuleType:
+      default: agent_rule
+      description: The type of the resource. The value should always be `agent_rule`.
+      enum:
+      - agent_rule
+      example: agent_rule
+      type: string
+      x-enum-varnames:
+      - AGENT_RULE
+    CloudWorkloadSecurityAgentRuleUpdateAttributes:
+      description: Update an existing Cloud Workload Security Agent rule.
+      properties:
+        description:
+          description: The description of the Agent rule.
+          example: My Agent rule
+          type: string
+        enabled:
+          description: Whether the Agent rule is enabled.
+          example: true
+          type: boolean
+        expression:
+          description: The SECL expression of the Agent rule.
+          example: exec.file.name == \"sh\"
+          type: string
+      type: object
+    CloudWorkloadSecurityAgentRuleUpdateData:
+      description: Object for a single Agent rule.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleUpdateAttributes'
+        type:
+          $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleType'
+      required:
+      - attributes
+      - type
+      type: object
+    CloudWorkloadSecurityAgentRuleUpdateRequest:
+      description: Request object that includes the Agent rule with the attributes
+        to update.
+      properties:
+        data:
+          $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleUpdateData'
+      required:
+      - data
+      type: object
+    CloudWorkloadSecurityAgentRuleUpdaterAttributes:
+      description: The attributes of the user who last updated the Agent rule.
+      properties:
+        handle:
+          description: The handle of the user.
+          example: datadog.user@example.com
+          type: string
+        name:
+          description: The name of the user.
+          example: Datadog User
+          type: string
+      type: object
+    CloudWorkloadSecurityAgentRulesListResponse:
+      description: Response object that includes a list of Agent rule.
+      properties:
+        data:
+          description: A list of Agent rules objects.
+          items:
+            $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleData'
+          type: array
+      type: object
     ContentEncoding:
       description: HTTP header used to compress the media-type.
       enum:
@@ -822,6 +1038,7 @@ components:
           description: The API key.
           readOnly: true
           type: string
+          x-secret: true
         last4:
           description: The last four characters of the API key.
           example: abcd
@@ -829,6 +1046,7 @@ components:
           minLength: 4
           readOnly: true
           type: string
+          x-secret: true
         modified_at:
           description: Date the API key was last modified.
           example: '2020-11-23T10:00:00.000Z'
@@ -864,6 +1082,7 @@ components:
           description: The application key.
           readOnly: true
           type: string
+          x-secret: true
         last4:
           description: The last four characters of the application key.
           example: abcd
@@ -871,10 +1090,24 @@ components:
           minLength: 4
           readOnly: true
           type: string
+          x-secret: true
         name:
           description: Name of the application key.
-          example: Application Key for submitting metrics
+          example: Application Key for managing dashboards
           type: string
+        scopes:
+          description: Array of scopes to grant the application key. This feature
+            is in private beta, please contact Datadog support to enable scopes for
+            your application keys.
+          example:
+          - dashboards_read
+          - dashboards_write
+          - dashboards_public_share
+          items:
+            description: Name of scope.
+            type: string
+          nullable: true
+          type: array
       type: object
     HTTPLog:
       description: Structured log message.
@@ -1067,7 +1300,7 @@ components:
       - TEXTBOX
     IncidentFieldAttributesValueType:
       default: multiselect
-      description: Type of the single value field definitions.
+      description: Type of the multiple value field definitions.
       enum:
       - multiselect
       - textarray
@@ -2875,7 +3108,7 @@ components:
         from:
           default: now-15m
           description: The minimum time for the requested logs, supports date math
-            and regular timestamps
+            and regular timestamps (milliseconds).
           example: now-15m
           type: string
         indexes:
@@ -2898,7 +3131,7 @@ components:
         to:
           default: now
           description: The maximum time for the requested logs, supports date math
-            and regular timestamps
+            and regular timestamps (milliseconds).
           example: now
           type: string
       type: object
@@ -3527,6 +3760,7 @@ components:
           minLength: 4
           readOnly: true
           type: string
+          x-secret: true
         modified_at:
           description: Date the API key was last modified.
           example: '2020-11-23T10:00:00.000Z'
@@ -3565,10 +3799,24 @@ components:
           minLength: 4
           readOnly: true
           type: string
+          x-secret: true
         name:
           description: Name of the application key.
-          example: Application Key for submitting metrics
+          example: Application Key for managing dashboards
           type: string
+        scopes:
+          description: Array of scopes to grant the application key. This feature
+            is in private beta, please contact Datadog support to enable scopes for
+            your application keys.
+          example:
+          - dashboards_read
+          - dashboards_write
+          - dashboards_public_share
+          items:
+            description: Name of scope.
+            type: string
+          nullable: true
+          type: array
       type: object
     PartialApplicationKeyResponse:
       description: Response for retrieving a partial application key.
@@ -4126,6 +4374,36 @@ components:
           format: int64
           readOnly: true
           type: integer
+      type: object
+    RoleClone:
+      description: Data for the clone role request.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/RoleCloneAttributes'
+        type:
+          $ref: '#/components/schemas/RolesType'
+      required:
+      - type
+      - attributes
+      type: object
+    RoleCloneAttributes:
+      description: Attributes required to create a new role by cloning an existing
+        one.
+      properties:
+        name:
+          description: Name of the new role that is cloned.
+          example: cloned-role
+          type: string
+      required:
+      - name
+      type: object
+    RoleCloneRequest:
+      description: Request to create a role by cloning an existing role.
+      properties:
+        data:
+          $ref: '#/components/schemas/RoleClone'
+      required:
+      - data
       type: object
     RoleCreateAttributes:
       description: Attributes of the created role.
@@ -4815,8 +5093,6 @@ components:
     SecurityMonitoringRuleQuery:
       description: Query for matching rule.
       properties:
-        agentRule:
-          $ref: '#/components/schemas/SecurityMonitoringRuntimeAgentRule'
         aggregation:
           $ref: '#/components/schemas/SecurityMonitoringRuleQueryAggregation'
         distinctFields:
@@ -4861,8 +5137,6 @@ components:
     SecurityMonitoringRuleQueryCreate:
       description: Query for matching rule.
       properties:
-        agentRule:
-          $ref: '#/components/schemas/SecurityMonitoringRuntimeAgentRule'
         aggregation:
           $ref: '#/components/schemas/SecurityMonitoringRuleQueryAggregation'
         distinctFields:
@@ -5045,24 +5319,6 @@ components:
           maximum: 2147483647
           type: integer
       type: object
-    SecurityMonitoringRuntimeAgentRule:
-      description: The Agent rule.
-      properties:
-        agentRuleId:
-          description: The Agent rule ID. Must be unique within the rule.
-          example: etc_shadow
-          type: string
-        expression:
-          description: 'A Runtime Security expression determines what activity should
-            be collected by the Datadog Agent.
-
-            These logical expressions can use predefined operators and attributes.
-            Tags cannot be used in Runtime
-
-            Security expressions. Instead, allow or deny based on tags under the advanced
-            option.'
-          type: string
-      type: object
     SecurityMonitoringSignal:
       description: Object description of a security signal.
       properties:
@@ -5096,7 +5352,7 @@ components:
               format: array
               items:
                 description: The tag associated with the security signal.
-                format: string
+                type: string
             timestamp:
               description: The timestamp of the security signal.
               example: '2019-01-02T09:42:36.320Z'
@@ -5531,21 +5787,21 @@ components:
             dashboards_public_share: The ability to share dashboards externally.
             dashboards_read: The ability to view dashboards.
             dashboards_write: The ability to create and change dashboards.
-            events_read: The ability to read events data.
+            events_read: The ability to read Events data.
             incident_read: The ability to view incidents in Datadog.
-            incident_settings_write: The ability to configure incident settings.
+            incident_settings_write: The ability to configure Incidents settings.
             incident_write: The ability to create, view, and manage incidents in Datadog.
             metrics_read: The ability to view custom metrics.
             security_monitoring_filters_read: The ability to read Security Filters.
             security_monitoring_filters_write: The ability to create, edit and delete
               Security Filters.
-            security_monitoring_rules_read: The ability to read Detection rules.
+            security_monitoring_rules_read: The ability to read Detection Rules.
             security_monitoring_rules_write: The ability to create and edit Detection
-              rules.
-            security_monitoring_signals_read: The ability to view Security signals.
-            user_access_invite: Allows users to invite other users to your organization.
-            user_access_manage: Grants the permission to disable users, manage user
-              roles and SAML-to-role mappings.
+              Rules.
+            security_monitoring_signals_read: The ability to view Security Signals.
+            user_access_invite: The ability to invite other users to your organization.
+            user_access_manage: The ability to disable users, manage user roles, and
+              manage SAML-to-role mappings.
           tokenUrl: /oauth2/v1/token
       type: oauth2
     apiKeyAuth:
@@ -5603,6 +5859,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Get all API keys
       tags:
       - Key Management
@@ -5636,6 +5894,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Create an API key
       tags:
       - Key Management
@@ -5674,6 +5934,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Delete an API key
       tags:
       - Key Management
@@ -5704,6 +5966,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Get API key
       tags:
       - Key Management
@@ -5745,6 +6009,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Edit an API key
       tags:
       - Key Management
@@ -5787,6 +6053,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Get all application keys
       tags:
       - Key Management
@@ -5813,6 +6081,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Delete an application key
       tags:
       - Key Management
@@ -5850,6 +6120,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Get an application key
       tags:
       - Key Management
@@ -5891,6 +6163,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Edit an application key
       tags:
       - Key Management
@@ -5933,6 +6207,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Get all application keys owned by current user
       tags:
       - Key Management
@@ -5966,6 +6242,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Create an application key for current user
       tags:
       - Key Management
@@ -6004,6 +6282,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Delete an application key owned by current user
       tags:
       - Key Management
@@ -6033,6 +6313,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Get one application key owned by current user
       tags:
       - Key Management
@@ -6074,6 +6356,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Edit an application key owned by current user
       tags:
       - Key Management
@@ -6124,6 +6408,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Delete items from a dashboard list
       tags:
       - Dashboard Lists
@@ -6161,6 +6447,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -6215,6 +6503,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Add Items to a Dashboard List
       tags:
       - Dashboard Lists
@@ -6265,6 +6555,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Update items of a dashboard list
       tags:
       - Dashboard Lists
@@ -6295,6 +6587,8 @@ paths:
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
           $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -6333,6 +6627,8 @@ paths:
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
           $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -6376,6 +6672,8 @@ paths:
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
           $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -6410,6 +6708,8 @@ paths:
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
           $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -6451,6 +6751,8 @@ paths:
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
           $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -6703,6 +7005,8 @@ paths:
           $ref: '#/components/responses/BadRequestResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Aggregate events
       tags:
       - Logs
@@ -6729,6 +7033,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
       summary: Get archive order
       tags:
       - Logs Archives
@@ -6779,6 +7089,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Unprocessable Entity
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Update archive order
       tags:
       - Logs Archives
@@ -6803,6 +7115,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
       summary: Get all archives
       tags:
       - Logs Archives
@@ -6838,6 +7156,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Create an archive
       tags:
       - Logs Archives
@@ -6876,6 +7196,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Delete an archive
       tags:
       - Logs Archives
@@ -6912,6 +7234,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
       summary: Get an archive
       tags:
       - Logs Archives
@@ -6960,6 +7288,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Update an archive
       tags:
       - Logs Archives
@@ -7000,6 +7330,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Revoke role from an archive
       tags:
       - Logs Archives
@@ -7037,6 +7369,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
       summary: List read roles for an archive
       tags:
       - Logs Archives
@@ -7076,6 +7414,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Grant role to an archive
       tags:
       - Logs Archives
@@ -7098,6 +7438,10 @@ paths:
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
       summary: Get all log-based metrics
       tags:
       - Logs Metrics
@@ -7191,6 +7535,10 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
       summary: Get a log-based metric
       tags:
       - Logs Metrics
@@ -7254,6 +7602,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
       summary: List restriction queries
       tags:
       - Logs Restriction Queries
@@ -7291,6 +7645,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - user_access_manage
       summary: Create a restriction query
       tags:
       - Logs Restriction Queries
@@ -7330,6 +7691,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
       summary: Get restriction query for a given role
       tags:
       - Logs Restriction Queries
@@ -7364,6 +7731,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
       summary: Get all restriction queries for a given user
       tags:
       - Logs Restriction Queries
@@ -7400,6 +7773,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - user_access_manage
       summary: Delete a restriction query
       tags:
       - Logs Restriction Queries
@@ -7441,6 +7821,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
       summary: Get a restriction query
       tags:
       - Logs Restriction Queries
@@ -7487,6 +7873,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - user_access_manage
       summary: Update a restriction query
       tags:
       - Logs Restriction Queries
@@ -7530,6 +7923,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - user_access_manage
       summary: Revoke role from a restriction query
       tags:
       - Logs Restriction Queries
@@ -7572,6 +7972,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
       summary: List roles for a restriction query
       tags:
       - Logs Restriction Queries
@@ -7614,6 +8020,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - user_access_manage
       summary: Grant role to a restriction query
       tags:
       - Logs Restriction Queries
@@ -7713,6 +8126,8 @@ paths:
           $ref: '#/components/responses/BadRequestResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Get a list of logs
       tags:
       - Logs
@@ -7757,6 +8172,8 @@ paths:
           $ref: '#/components/responses/BadRequestResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Search logs
       tags:
       - Logs
@@ -8205,6 +8622,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -8300,6 +8719,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication Error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -8348,6 +8769,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -8386,6 +8809,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -8430,6 +8855,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -8466,6 +8893,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -8520,6 +8949,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Unprocessable Entity
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -8532,6 +8963,68 @@ paths:
       x-menu-order: 4
       x-undo:
         type: idempotent
+  /api/v2/roles/{role_id}/clone:
+    post:
+      description: Clone an existing role
+      operationId: CloneRole
+      parameters:
+      - $ref: '#/components/parameters/RoleID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RoleCloneRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoleResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not found
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Conflict
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - user_access_manage
+      summary: Create a new role by cloning an existing role
+      tags:
+      - Roles
+      x-codegen-request-body-name: body
+      x-menu-order: 12
+      x-permission: OR(USER_ACCESS_MANAGE)
+      x-undo:
+        operationId: DeleteRole
+        parameters:
+        - name: role_id
+          source: data.id
+        type: unsafe
   /api/v2/roles/{role_id}/permissions:
     delete:
       description: Removes a permission from a role.
@@ -8569,6 +9062,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -8605,6 +9100,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -8652,6 +9149,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -8710,6 +9209,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -8766,6 +9267,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -8812,6 +9315,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -8853,6 +9358,8 @@ paths:
           description: OK
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -8861,11 +9368,183 @@ paths:
       summary: Get the latest Cloud Workload Security policy
       tags:
       - Cloud Workload Security
+      x-menu-order: 1
       x-undo:
         type: safe
-      x-unstable: '**Note**: This endpoint is in public beta.
+  /api/v2/security_monitoring/cloud_workload_security/agent_rules:
+    get:
+      description: Get the list of Agent rules.
+      operationId: ListCloudWorkloadSecurityAgentRules
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudWorkloadSecurityAgentRulesListResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_cws_agent_rules_read
+      summary: Get all Cloud Workload Security Agent rules
+      tags:
+      - Cloud Workload Security
+      x-menu-order: 3
+      x-undo:
+        type: safe
+    post:
+      description: Create a new Agent rule with the given parameters.
+      operationId: CreateCloudWorkloadSecurityAgentRule
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleCreateRequest'
+        description: The definition of the new Agent rule.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '409':
+          $ref: '#/components/responses/ConflictResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_cws_agent_rules_write
+      summary: Create a Cloud Workload Security Agent rule
+      tags:
+      - Cloud Workload Security
+      x-codegen-request-body-name: body
+      x-given:
+        agent_rule:
+          parameters:
+          - name: body
+            value: "{\n  \"data\": {\n    \"type\": \"agent_rule\",\n    \"attributes\":
+              {\n      \"name\": \"{{ unique_lower_alnum }}\",\n      \"description\":
+              \"My Agent rule\",\n      \"expression\": \"exec.file.name == \\\"sh\\\"\",\n
+              \     \"enabled\": true\n     }\n  }\n}"
+          step: there is a valid "agent_rule" in the system
+      x-menu-order: 4
+      x-undo:
+        operationId: DeleteCloudWorkloadSecurityAgentRule
+        parameters:
+        - name: agent_rule_id
+          source: data.id
+        type: unsafe
+  /api/v2/security_monitoring/cloud_workload_security/agent_rules/{agent_rule_id}:
+    delete:
+      description: Delete a specific Agent rule.
+      operationId: DeleteCloudWorkloadSecurityAgentRule
+      parameters:
+      - $ref: '#/components/parameters/CloudWorkloadSecurityAgentRuleID'
+      responses:
+        '204':
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_cws_agent_rules_write
+      summary: Delete a Cloud Workload Security Agent rule
+      tags:
+      - Cloud Workload Security
+      x-menu-order: 6
+      x-undo:
+        type: idempotent
+    get:
+      description: Get the details of a specific Agent rule.
+      operationId: GetCloudWorkloadSecurityAgentRule
+      parameters:
+      - $ref: '#/components/parameters/CloudWorkloadSecurityAgentRuleID'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_cws_agent_rules_read
+      summary: Get a Cloud Workload Security Agent rule
+      tags:
+      - Cloud Workload Security
+      x-menu-order: 2
+      x-undo:
+        type: safe
+    patch:
+      description: 'Update a specific Agent rule.
 
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+        Returns the Agent rule object when the request is successful.'
+      operationId: UpdateCloudWorkloadSecurityAgentRule
+      parameters:
+      - $ref: '#/components/parameters/CloudWorkloadSecurityAgentRuleID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleUpdateRequest'
+        description: New definition of the Agent rule.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '409':
+          $ref: '#/components/responses/ConcurrentModificationResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_cws_agent_rules_write
+      summary: Update a Cloud Workload Security Agent rule
+      tags:
+      - Cloud Workload Security
+      x-codegen-request-body-name: body
+      x-menu-order: 5
+      x-undo:
+        type: idempotent
   /api/v2/security_monitoring/configuration/security_filters:
     get:
       description: Get the list of configured security filters with their definitions.
@@ -9063,6 +9742,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -9094,6 +9775,8 @@ paths:
           $ref: '#/components/responses/BadRequestResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -9136,6 +9819,8 @@ paths:
           $ref: '#/components/responses/NotAuthorizedResponse'
         '404':
           $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -9161,6 +9846,8 @@ paths:
           description: OK
         '404':
           $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -9204,6 +9891,8 @@ paths:
           $ref: '#/components/responses/NotAuthorizedResponse'
         '404':
           $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -9284,6 +9973,8 @@ paths:
           $ref: '#/components/responses/BadRequestResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -9323,6 +10014,8 @@ paths:
           $ref: '#/components/responses/BadRequestResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -9367,6 +10060,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Create a service account
       tags:
       - Users
@@ -9423,6 +10118,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: List application keys for this service account
       tags:
       - Service Accounts
@@ -9458,6 +10155,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Create an application key for this service account
       tags:
       - Service Accounts
@@ -9501,6 +10200,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Delete an application key for this service account
       tags:
       - Service Accounts
@@ -9532,6 +10233,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Get one application key for this service account
       tags:
       - Service Accounts
@@ -9575,6 +10278,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Edit an application key for this service account
       tags:
       - Service Accounts
@@ -9608,6 +10313,8 @@ paths:
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
           $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -9646,6 +10353,8 @@ paths:
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
           $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -9688,6 +10397,8 @@ paths:
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
           $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -9725,6 +10436,8 @@ paths:
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
           $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -9766,6 +10479,8 @@ paths:
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
           $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -9806,6 +10521,8 @@ paths:
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
           $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -9844,6 +10561,8 @@ paths:
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
           $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -9886,6 +10605,8 @@ paths:
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
           $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -9923,6 +10644,8 @@ paths:
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
           $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -9964,6 +10687,8 @@ paths:
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
           $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -10007,6 +10732,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -10059,6 +10786,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -10137,6 +10866,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -10176,6 +10907,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -10223,6 +10956,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -10259,6 +10994,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -10314,6 +11051,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Unprocessable Entity
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -10354,6 +11093,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -10391,6 +11132,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -10410,7 +11153,7 @@ servers:
   variables:
     site:
       default: datadoghq.com
-      description: The regional site for our customers.
+      description: The regional site for Datadog customers.
       enum:
       - datadoghq.com
       - us3.datadoghq.com
@@ -10437,7 +11180,8 @@ servers:
       default: api
       description: The subdomain where the API is deployed.
 tags:
-- description: Security signals generated based file and process activity in workloads.
+- description: Workload activity security rules for generating events using the Datadog
+    security Agent.
   name: Cloud Workload Security
 - description: 'Interact with your dashboard lists through the API to
 
@@ -10472,7 +11216,7 @@ tags:
 
     See the [Archives Page](https://app.datadoghq.com/logs/pipelines/archives)
 
-    for a list of the archives currently configured in our UI.'
+    for a list of the archives currently configured in web UI.'
   externalDocs:
     description: Find out more at
     url: https://docs.datadoghq.com/logs/archives/

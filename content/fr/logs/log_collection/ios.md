@@ -1,9 +1,9 @@
 ---
 dependencies:
-  - 'https://github.com/DataDog/dd-sdk-ios/blob/master/docs/log_collection.md'
+  - https://github.com/DataDog/dd-sdk-ios/blob/master/docs/log_collection.md
 description: Recueillez des logs à partir de vos applications iOS.
 further_reading:
-  - link: 'https://github.com/DataDog/dd-sdk-ios'
+  - link: https://github.com/DataDog/dd-sdk-ios
     tag: Github
     text: Code source dd-sdk-ios
   - link: logs/explorer
@@ -64,8 +64,9 @@ github "DataDog/dd-sdk-ios"
 ```swift
 Datadog.initialize(
     appContext: .init(),
+    trackingConsent: trackingConsent,
     configuration: Datadog.Configuration
-        .builderUsing(clientToken: "<token_client>", environment: "<nom_environnement>")
+        .builderUsing(clientToken: "<jeton_client>", environment: "<nom_environnement>")
         .set(serviceName: "app-name")
         .build()
 )
@@ -77,16 +78,30 @@ Datadog.initialize(
 ```swift
 Datadog.initialize(
     appContext: .init(),
+    trackingConsent: trackingConsent,
     configuration: Datadog.Configuration
-        .builderUsing(clientToken: "<token_client>", environment: "<nom_environnement>")
+        .builderUsing(clientToken: "<jeton_client>", environment: "<nom_environnement>")
         .set(serviceName: "app-name")
-        .set(logsEndpoint: .eu)
+        .set(endpoint: .eu)
         .build()
 )
 ```
 
     {{% /tab %}}
     {{< /tabs >}}
+
+    Pour répondre aux exigences du RGPD, le SDK nécessite la valeur `trackingConsent` à son initialisation.
+    `trackingConsent` peut prendre l'une des valeurs suivantes :
+
+    - `.pending` : le SDK commence à recueillir et à regrouper les données, mais ne les envoie pas à Datadog. Le SDK attend d'obtenir la nouvelle valeur de consentement de suivi pour déterminer ce qu'il doit faire de ces données regroupées par lots.
+    - `.granted` : le SDK commence à recueillir les données et les envoie à Datadog.
+    - `.notGranted` :  le SDK ne recueille aucune donnée. Les logs, traces et événements RUM ne sont pas envoyés à Datadog.
+
+    Pour modifier la valeur du consentement de suivi une fois le SDK lancé, utilisez l'appel d'API `Datadog.set(trackingConsent:)`l.
+    Le SDK modifie son comportement en tenant compte de la nouvelle valeur. Par exemple, si le consentement de suivi actuel a pour valeur `.pending` :
+
+    - si la nouvelle valeur est `.granted`, le SDK enverra toutes les données actuelles et futures à Datadog ;
+    - si la nouvelle valeur est `.notGranted`, le SDK effacera toutes les données actuelles et ne recueillera pas les futures données.
 
      Lors de la création de votre application, vous pouvez activer les logs de développement. Tous les messages internes dans le SDK dont la priorité est égale ou supérieure au niveau spécifié sont alors enregistrés dans les logs de la console.
 

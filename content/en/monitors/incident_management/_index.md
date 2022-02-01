@@ -200,7 +200,7 @@ Work through an example workflow in the [Getting Started with Incident Managemen
 [9]: /getting_started/tagging/assigning_tags?tab=noncontainerizedenvironments#overview
 [10]: /tracing/#2-instrument-your-application
 [11]: https://app.datadoghq.com/incidents/settings#Property-Fields
-[12]: /dashboards/querying/#incident-management-analytics
+[12]: /monitors/incident_management/analytics/#overview
 [13]: /integrations/pagerduty/
 [14]: /integrations/jira/
 [15]: /integrations/webhooks/

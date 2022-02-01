@@ -48,12 +48,12 @@ La configuration du tag `env` à proximité de la source des données (par exemp
 
 Les utilisateurs de Kubernetes peuvent continuer à utiliser ces tags généraux. Toutefois, l'utilisation des étiquettes spécifiques présente quelques avantages :
 
-- Vous pouvez directement y faire référence pour l'injection de variables d'environnement via l'API Downward de Kubernetes.
+- Vous pouvez directement y faire référence pour l'injection de variables d'environnement avec l'API Downward de Kubernetes.
 - L'étiquette de service standard peut simplifier la définition du service pour les logs.
 
 ### Utilisation d'étiquettes standard pour des conteneurs spécifiques
 
-Comme les variables d'environnement `DD` sont injectées au niveau du conteneur, elles peuvent différer d'un conteneur à l'autre. Toutefois, si vous souhaitez également utiliser les étiquettes standard pour des conteneurs spécifiques, vous devrez utiliser leurs variantes spécifiques au conteneur :
+Comme les variables d'environnement `DD` sont injectées au niveau des conteneurs, elles peuvent différer d'un conteneur à l'autre. Si vous souhaitez également utiliser les étiquettes standard pour des conteneurs spécifiques, vous devez utiliser des variantes propres à chaque conteneur :
 
 ```yaml
 tags.datadoghq.com/<conteneur>.env

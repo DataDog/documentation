@@ -41,7 +41,7 @@ Define the Grok processor in the [Datadog Log configuration page][1]:
 
 {{< img src="logs/processing/processors/parser.png" alt="Parser" style="width:80%;" >}}
 
-Click **Parse my logs** to kickstart a set of three parsing rules for the logs flowing through the underlying pipeline. Fine tune attribute naming from there, and add new rules for other type of logs if needed. This feature requires that the corresponding logs are being indexed, and actually flowing in—you can temporarily deactivate or sample down exclusion filters to make this work for you.
+Click **Parse my logs** to kickstart a set of three parsing rules for the logs flowing through the underlying pipeline. Refine attribute naming from there, and add new rules for other type of logs if needed. This feature requires that the corresponding logs are being indexed, and actually flowing in—you can temporarily deactivate or sample down exclusion filters to make this work for you.
 
 Select a sample by clicking on it to trigger its evaluation against the parsing rule and display the result at the bottom of the screen.
 
@@ -276,7 +276,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following log message re
 
 ## Remapper
 
-The remapper processor remaps any source attribute(s) or tags to another target attribute or tag. For example, remap `user` by `firstname` to target your in the Log Explorer:
+The remapper processor remaps any source attribute(s) or tags to another target attribute or tag. For example, remap `user` by `firstname` to target your logs in the Log Explorer:
 
 {{< img src="logs/processing/processors/attribute_post_remapping.png" alt="Attribute after remapping" style="width:50%;">}}
 

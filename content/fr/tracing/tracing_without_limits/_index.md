@@ -86,7 +86,7 @@ En plus d'analyser les requêtes qui correspondent à des queries arbitraires, L
 
 Avec Live Analytics, chaque tag de chaque span ingérée sur la période mobile de 15 minutes peut être utilisé dans une requête.
 
-{{< img src="tracing/live_search/LiveAnalytics2.gif" alt="Live Analytics" >}}
+{{< img src="tracing/live_search/LiveAnalytics2.mp4" alt="Live Analytics" video=true >}}
 
 **Remarque :** l'exportation vers un dashboard ou un monitor est uniquement possible en mode Historical.
 

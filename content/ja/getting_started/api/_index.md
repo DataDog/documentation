@@ -25,13 +25,14 @@ Datadog API を使用すると、Datadog との間でデータをやり取りで
 
 ### Postman に Datadog コレクションをインポート
 
-[Postman へのログイン][7]から始めます。Datadog は [Postman アプリケーションをダウンロードすること][8]をお勧めします。
+[Postman へのログイン][4]から始めます。Datadog は [Postman アプリケーションをダウンロードすること][5]をお勧めします。
 
 </br>
 <div class="postman-run-button"
-data-postman-action="collection/import"
-data-postman-var-1="b82586cb783eb6f7cf6d"
-data-postman-param="env%5BDatadog%20Authentication%5D=W3sia2V5IjoiYXBwbGljYXRpb25fa2V5IiwidmFsdWUiOiIiLCJlbmFibGVkIjp0cnVlLCJ0eXBlIjoidGV4dCJ9LHsia2V5IjoiYXBpX2tleSIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZSwidHlwZSI6InRleHQifV0="></div>
+data-postman-action="collection/fork"
+data-postman-var-1="7274195-66ef21d8-e159-4d7d-8ded-c511e1abe189"
+data-postman-collection-url="entityId=7274195-66ef21d8-e159-4d7d-8ded-c511e1abe189&entityType=collection&workspaceId=bf049f54-c695-4e91-b879-0cad1854bafa"
+data-postman-param="env%5BDatadog%20Authentication%5D=W3sia2V5IjoiYXBpX2tleSIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZX0seyJrZXkiOiJhcHBsaWNhdGlvbl9rZXkiLCJ2YWx1ZSI6IiIsImVuYWJsZWQiOnRydWV9XQ=="></div>
 <script type="text/javascript">
   (function (p,o,s,t,m,a,n) {
     !p[s] && (p[s] = function () { (p[t] || (p[t] = [])).push(arguments); });
@@ -50,7 +51,7 @@ Postman コレクションをインポートすると、Postman の左ペイン�
 
 #### Authentication
 
-コレクションには、[Postman 環境][4]である `Datadog Authentication` が含まれます。ここに Datadog API キーと認証用のアプリケーションキーを追加します。
+コレクションには、[Postman 環境][6]である `Datadog Authentication` が含まれます。ここに Datadog API キーと認証用のアプリケーションキーを追加します。
 
 以下の手順に従って環境をセットアップします。
 
@@ -64,7 +65,7 @@ Postman コレクションをインポートすると、Postman の左ペイン�
 
 #### EU API エンドポイントに切り替える
 
-デフォルトエンドポイントの URL ではなく、EU リージョンの Datadog アプリケーションにアクセスしている場合は、EU エンドポイント URL `https://api.datadoghq.eu` からアクセスするように Postman コレクションを切り替える必要があります。
+デフォルトエンドポイントの URL ではなく、EU リージョンの Datadog サイトにアクセスしている場合は、EU エンドポイント URL `https://api.datadoghq.eu` からアクセスするように Postman コレクションを切り替える必要があります。
 
 以下の手順に従って、EU インスタンスを更新します。
 
@@ -82,13 +83,13 @@ Postman コレクションをインポートすると、Postman の左ペイン�
 
 ## コレクションの使用
 
-セットアップが完了したら、いつでも API 呼び出しを行うことができます。Postman -> Datadog フォルダーには、[Datadog API リファレンス][5]に一覧表示されている各 API カテゴリタイプのサブフォルダーがあります。このサブフォルダーを展開すると、HTTP メソッドと API 呼び出し名を確認できます。
+セットアップが完了したら、いつでも API 呼び出しを行うことができます。Postman -> Datadog フォルダーには、[Datadog API リファレンス][7]に一覧表示されている各 API カテゴリタイプのサブフォルダーがあります。このサブフォルダーを展開すると、HTTP メソッドと API 呼び出し名を確認できます。
 
 ### ビルダー
 
 コレクション内の API 呼び出しをクリックすると、右側の `Builder` ペインにロードされます。このペインで API 呼び出しを送信し、返されたステータス、応答時間、および API 応答コードを確認できます。
 
-{{< img src="getting_started/postman/apiGetCalls.png" alt="Postman API の応答"  style="width:70%;">}}
+{{< img src="getting_started/postman/apiGetCalls.png" alt="Postman API の応答" style="width:70%;">}}
 
 ### 説明
 
@@ -98,9 +99,9 @@ Postman コレクションをインポートすると、Postman の左ペイン�
 
 ### Params
 
-**Params** タブには、現在 API 呼び出しに存在するすべてのパラメーターと値が表示されます。ここでは、パラメーターと値を追加できます。使用可能な引数は、[Datadog API ドキュメント][6] の対応するセクションで確認してください。
+**Params** タブには、API 呼び出しに存在するすべてのパラメーターと値が表示されます。ここでは、パラメーターと値を追加できます。使用可能な引数は、[Datadog API ドキュメント][8]の対応するセクションで確認してください。
 
-{{< img src="getting_started/postman/parameters.png" alt="Postman のパラメーター"  style="width:70%;">}}
+{{< img src="getting_started/postman/parameters.png" alt="Postman のパラメーター" style="width:70%;">}}
 
 このタブは、API 呼び出しの `param1:value1&param2:value2` 構造を表示する代わりに使用できます。
 
@@ -110,10 +111,10 @@ Postman コレクションをインポートすると、Postman の左ペイン�
 - すべてのプレースホルダーは `<PLACEHOLDER>` の形式に従います。プレースホルダーはクエリを実行する前に置き換える必要があります。
 
 [1]: https://www.postman.com/
-[2]: https://app.datadoghq.com/account/settings#api
+[2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://identity.getpostman.com/signup
-[4]: https://learning.postman.com/docs/postman/variables-and-environments/variables/#environments-in-postman
-[5]: /ja/api/v1/organizations/
-[6]: /ja/api/
-[7]: https://identity.getpostman.com/login
-[8]: https://www.postman.com/downloads/
+[4]: https://identity.getpostman.com/login
+[5]: https://www.postman.com/downloads/
+[6]: https://learning.postman.com/docs/postman/variables-and-environments/variables/#environments-in-postman
+[7]: /ja/api/v1/organizations/
+[8]: /ja/api/

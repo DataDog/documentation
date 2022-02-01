@@ -18,7 +18,7 @@ further_reading:
 ---
 ## Présentation
 
-{{< img src="network_performance_monitoring/devices/datacenter_dashboard.jpg" alt="Dashboard de synthèse d'un datacenter" responsive="true" style="width:100%;">}}
+{{< img src="network_performance_monitoring/devices/ndm-overview.png" alt="Dashboard de synthèse d'un datacenter" responsive="true" style="width:100%;">}}
 
 La fonctionnalité Network Device Monitoring est conçue pour vous offrir une visibilité optimale sur vos périphériques réseau virtuels et physiques, tels que les routeurs, les switchs, et les pare-feu. Identifiez automatiquement les périphériques connectés à n'importe quel réseau, recueillez instantanément diverses métriques comme la bande passante utilisée ou le nombre d'octets envoyés, et déterminez la disponibilité des périphériques.
 

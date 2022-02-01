@@ -42,7 +42,7 @@ further_reading:
 
 ### Supported .NET Core runtimes
 
-The .NET Tracer supports instrumentation on .NET Core 2.1, 3.1, and .NET 5. 
+The .NET Tracer supports instrumentation on .NET Core 2.1, 3.1, .NET 5, and .NET 6. 
 
 For a full list of supported libraries and processor architectures, see [Compatibility Requirements][1].
 
@@ -92,10 +92,10 @@ To install the .NET Tracer machine-wide:
    : `sudo rpm -Uvh datadog-dotnet-apm<TRACER_VERSION>-1.x86_64.rpm && /opt/datadog/createLogPath.sh`
 
    Alpine or other musl-based distributions
-   : `sudo tar -xzf -C /opt/datadog datadog-dotnet-apm<TRACER_VERSION>-musl.tar.gz && sh /opt/datadog/createLogPath.sh`
+   : `sudo tar -C /opt/datadog -xzf datadog-dotnet-apm<TRACER_VERSION>-musl.tar.gz && sh /opt/datadog/createLogPath.sh`
 
    Other distributions
-   : `sudo tar -xzf -C /opt/datadog datadog-dotnet-apm<TRACER_VERSION>-tar.gz && /opt/datadog/createLogPath.sh`
+   : `sudo tar -C /opt/datadog -xzf datadog-dotnet-apm<TRACER_VERSION>-tar.gz && /opt/datadog/createLogPath.sh`
 
 
 [1]: https://github.com/DataDog/dd-trace-dotnet/releases
@@ -162,7 +162,6 @@ For information about the different methods for setting environment variables, s
    CORECLR_ENABLE_PROFILING=1
    CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
    CORECLR_PROFILER_PATH=/opt/datadog/Datadog.Trace.ClrProfiler.Native.so
-   DD_INTEGRATIONS=/opt/datadog/integrations.json
    DD_DOTNET_TRACER_HOME=/opt/datadog
    ```
 
@@ -178,7 +177,6 @@ For information about the different methods for setting environment variables, s
    CORECLR_ENABLE_PROFILING=1
    CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
    CORECLR_PROFILER_PATH=<System-dependent path>
-   DD_INTEGRATIONS=<APP_DIRECTORY>/datadog/integrations.json
    DD_DOTNET_TRACER_HOME=<APP_DIRECTORY>/datadog
    ```
 
@@ -294,7 +292,7 @@ To configure the tracer using environment variables, set the variables before la
 
 {{% tab "Code" %}}
 
-To configure the Tracer in application code, create a `TracerSettings` instance from the default configuration sources. Set properties on this `TracerSettings` instance before passing it to a `Tracer` constructor. For example:
+To configure the Tracer in application code, create a `TracerSettings` instance from the default configuration sources. Set properties on this `TracerSettings` instance before calling `Tracer.Configure()`. For example:
 
 <div class="alert alert-warning">
   <strong>Note:</strong> Settings must be set on <code>TracerSettings</code> <em>before</em> creating the <code>Tracer</code>. Changes made to <code>TracerSettings</code> properties after the <code>Tracer</code> is created are ignored.
@@ -313,11 +311,8 @@ settings.ServiceName = "MyService";
 settings.ServiceVersion = "abc123";
 settings.AgentUri = new Uri("http://localhost:8126/");
 
-// create a new Tracer using these settings
-var tracer = new Tracer(settings);
-
-// set the global tracer
-Tracer.Instance = tracer;
+// configure the global Tracer settings
+Tracer.Configure(settings);
 ```
 
 {{% /tab %}}
@@ -384,6 +379,10 @@ Sets the URL endpoint where traces are sent. Overrides `DD_AGENT_HOST` and `DD_T
 : **TracerSettings property**: `LogsInjectionEnabled` <br>
 Enables or disables automatic injection of correlation identifiers into application logs.
 
+`DD_TRACE_SAMPLE_RATE`
+: **TracerSettings property**: `GlobalSamplingRate` <br>
+Enables [Tracing without Limits][5].
+
 `DD_MAX_TRACES_PER_SECOND`
 : **TracerSettings property**: `MaxTracesSubmittedPerSecond` <br>
 The number of traces allowed to be submitted per second.
@@ -406,15 +405,13 @@ Added in version 1.18.3. Response header support and entries without tag names a
 `DD_TAGS`
 : **TracerSettings property**: `GlobalTags`<br>
 If specified, adds all of the specified tags to all generated spans. <br>
-**Example**: `layer:api,team:intake` <br>
-Added in version 1.17.0.
+**Example**: `layer:api, team:intake` <br>
+Added in version 1.17.0. <br>
+Note that the delimiter is a comma and a whitespace: `, `.
 
 `DD_TRACE_LOG_DIRECTORY`
 : Sets the directory for .NET Tracer logs. <br>
-**Default**: `%ProgramData%\Datadog .NET Tracer\logs\`
-
-`DD_TRACE_LOG_PATH`
-: Sets the path for the automatic instrumentation log file and determines the directory of all other .NET Tracer log files. Ignored if `DD_TRACE_LOG_DIRECTORY` is set.
+**Default**: `%ProgramData%\Datadog .NET Tracer\logs\` on Windows, `/var/log/datadog/dotnet` on Linux
 
 `DD_TRACE_LOGGING_RATE`
 : Sets rate limiting for log messages. If set, unique log lines are written once per `x` seconds. For example, to log a given message once per 60 seconds, set to `60`. Setting to `0` disables log rate limiting. Added in version 1.24.0. Disabled by default.
@@ -446,34 +443,35 @@ Enables or disables all automatic instrumentation. Setting the environment varia
 **Default**: `false`<br>
 Added in version 1.23.0.
 
-`DD_TRACE_ADONET_EXCLUDED_TYPES`
-: **TracerSettings property**: `AdoNetExcludedTypes` <br>
-Sets a list of `AdoNet` types (for example, `System.Data.SqlClient.SqlCommand`) that will be excluded from automatic instrumentation.
-
 #### Automatic instrumentation integration configuration
 
 The following table lists configuration variables that are available **only** when using automatic instrumentation and can be set for each integration.
 
 `DD_DISABLED_INTEGRATIONS`
 : **TracerSettings property**: `DisabledIntegrationNames` <br>
-Sets a list of integrations to disable. All other integrations remain enabled. If not set, all integrations are enabled. Supports multiple values separated with semicolons. Valid values are the integration names listed in the [Integrations][5] section.
+Sets a list of integrations to disable. All other integrations remain enabled. If not set, all integrations are enabled. Supports multiple values separated with semicolons. Valid values are the integration names listed in the [Integrations][6] section.
 
 `DD_TRACE_<INTEGRATION_NAME>_ENABLED`
 : **TracerSettings property**: `Integrations[<INTEGRATION_NAME>].Enabled` <br>
-Enables or disables a specific integration. Valid values are: `true` or `false`. Integration names are listed in the [Integrations][5] section.<br>
+Enables or disables a specific integration. Valid values are: `true` or `false`. Integration names are listed in the [Integrations][6] section.<br>
 **Default**: `true`
 
 #### Experimental features
 
 The following configuration variables are for features that are available for use but may change in future releases.
 
-`DD_TRACE_ROUTE_TEMPLATE_RESOURCE_NAMES_ENABLED`
-: Enables improved resource names for web spans when set to `true`. Uses route template information where available, adds an additional span for ASP.NET Core integrations, and enables additional tags. Added in version 1.26.0.<br>
-**Default**: `false`
-
 `DD_TRACE_PARTIAL_FLUSH_ENABLED`
 : Enables incrementally flushing large traces to the Datadog Agent, reducing the chance of rejection by the Agent. Use only when you have long-lived traces or traces with many spans. Valid values are `true` or `false`. Added in version 1.26.0, only compatible with the Datadog Agent 7.26.0+.<br>
 **Default**: `false`
+
+#### Deprecated settings
+
+`DD_TRACE_LOG_PATH`
+: Sets the path for the automatic instrumentation log file and determines the directory of all other .NET Tracer log files. Ignored if `DD_TRACE_LOG_DIRECTORY` is set. 
+
+`DD_TRACE_ROUTE_TEMPLATE_RESOURCE_NAMES_ENABLED`
+: Enables improved resource names for web spans when set to `true`. Uses route template information where available, adds an additional span for ASP.NET Core integrations, and enables additional tags. Added in version 1.26.0. Enabled by default in 2.0.0<br>
+**Default**: `true`
 
 ## Custom instrumentation
 
@@ -520,7 +518,7 @@ To use custom instrumentation in your .NET application:
 
 {{< /tabs >}}
 
-For more information on adding spans and tags for custom instrumentation, see the [.NET Custom Instrumentation documentation][6].
+For more information on adding spans and tags for custom instrumentation, see the [.NET Custom Instrumentation documentation][7].
 
 ## Configuring process environment variables
 
@@ -579,7 +577,6 @@ To set the required environment variables from a bash file before starting your 
 export CORECLR_ENABLE_PROFILING=1
 export CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
 export CORECLR_PROFILER_PATH=/opt/datadog/Datadog.Trace.ClrProfiler.Native.so
-export DD_INTEGRATIONS=/opt/datadog/integrations.json
 export DD_DOTNET_TRACER_HOME=/opt/datadog
 
 # Start your application
@@ -595,7 +592,6 @@ To set the required environment variables on a Linux Docker container:
   ENV CORECLR_ENABLE_PROFILING=1
   ENV CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
   ENV CORECLR_PROFILER_PATH=/opt/datadog/Datadog.Trace.ClrProfiler.Native.so
-  ENV DD_INTEGRATIONS=/opt/datadog/integrations.json
   ENV DD_DOTNET_TRACER_HOME=/opt/datadog
 
   # Start your application
@@ -612,7 +608,6 @@ When using `systemctl` to run .NET applications as a service, you can add the re
     CORECLR_ENABLE_PROFILING=1
     CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
     CORECLR_PROFILER_PATH=/opt/datadog/Datadog.Trace.ClrProfiler.Native.so
-    DD_INTEGRATIONS=/opt/datadog/integrations.json
     DD_DOTNET_TRACER_HOME=/opt/datadog
     # any other environment variable used by the application
     ```
@@ -633,13 +628,12 @@ When using `systemctl` to run .NET applications as a service, you can add the re
 
 When using `systemctl` to run .NET applications as a service, you can also set environment variables to be loaded for all services run by `systemctl`.
 
-1. Set the required environment variables by running [`systemctl set-environment`][7]:
+1. Set the required environment variables by running [`systemctl set-environment`][8]:
 
     ```bash
     systemctl set-environment CORECLR_ENABLE_PROFILING=1
     systemctl set-environment CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
     systemctl set-environment CORECLR_PROFILER_PATH=/opt/datadog/Datadog.Trace.ClrProfiler.Native.so
-    systemctl set-environment DD_INTEGRATIONS=/opt/datadog/integrations.json
     systemctl set-environment DD_DOTNET_TRACER_HOME=/opt/datadog
     ```
 2. Verify that the environment variables were set by running `systemctl show-environment`.
@@ -655,6 +649,7 @@ When using `systemctl` to run .NET applications as a service, you can also set e
 [2]: /agent/
 [3]: https://app.datadoghq.com/apm/traces
 [4]: /getting_started/tagging/unified_service_tagging/
-[5]: /tracing/setup_overview/compatibility_requirements/dotnet-core#integrations
-[6]: /tracing/setup_overview/custom_instrumentation/dotnet/
-[7]: https://www.freedesktop.org/software/systemd/man/systemctl.html#set-environment%20VARIABLE=VALUE%E2%80%A6
+[5]: /tracing/trace_retention_and_ingestion/
+[6]: /tracing/setup_overview/compatibility_requirements/dotnet-core#integrations
+[7]: /tracing/setup_overview/custom_instrumentation/dotnet/
+[8]: https://www.freedesktop.org/software/systemd/man/systemctl.html#set-environment%20VARIABLE=VALUE%E2%80%A6

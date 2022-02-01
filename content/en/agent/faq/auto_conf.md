@@ -56,7 +56,7 @@ To disable the Agent from using the `auto_conf.yaml` configuration you can add t
 ```
 DD_IGNORE_AUTOCONF="redisdb istio"
 ```
-Would would have the Agent ignore the [`redisdb.d/auto_conf.yaml`][38] and [`istio.d/auto_conf.yaml`][22] file and avoid automatically setting up these integrations.
+would have the Agent ignore the [`redisdb.d/auto_conf.yaml`][38] and [`istio.d/auto_conf.yaml`][22] file and avoid automatically setting up these integrations.
 
 ## Further Reading
 

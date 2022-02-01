@@ -110,7 +110,7 @@ self.rate(name, value, tags=None, hostname=None, device_name=None)
 
 ### `histogram()`
 
-This function submits the sample of a histogram metric that occurred during the check interval. It can be called multiple times during a check's execution, each sample being added to the statistical distribution of the set of values for this metric.
+This function submits the sample of a histogram metric that occurred during the check interval. It can be called multiple times during a check's execution. Each sample is added to the statistical distribution of the set of values for this metric.
 
 **Note**: All metric aggregation produced are stored as a `GAUGE` metric type in Datadog, except the `<METRIC_NAME>.count` that is stored as a `RATE` metric type in Datadog.
 

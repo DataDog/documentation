@@ -17,7 +17,7 @@ further_reading:
 
 ## Compatibility
 
-The Ruby Datadog Trace library is open source - view the [Github repository][1] for more information.
+The Ruby Datadog Trace library is open source - view the [GitHub repository][1] for more information.
 
 **Supported Ruby interpreters**:
 
@@ -59,7 +59,7 @@ The Ruby Datadog Trace library is open source - view the [Github repository][1] 
 
 ## Integration instrumentation
 
-Many popular libraries and frameworks are supported out-of-the-box, which can be auto-instrumented. Although they are not activated automatically, they can be easily activated and configured by using the `Datadog.configure` API:
+Many popular libraries and frameworks are supported out-of-the-box, which can be auto-instrumented. Although they are not activated automatically, they can be activated and configured by using the `Datadog.configure` API:
 
 ```ruby
 Datadog.configure do |c|

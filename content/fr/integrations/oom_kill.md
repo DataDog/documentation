@@ -11,13 +11,14 @@ categories:
 creates_events: true
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/oom_kill/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/oom_kill/README.md
 display_name: "OOM\_Kill"
 draft: false
 git_integration_title: oom_kill
 guid: 4b8e9c18-1a13-43b0-a03c-186eb3221147
 integration_id: oom-kill
 integration_title: "OOM\_Kill"
+integration_version: ''
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com
@@ -54,7 +55,7 @@ yum install -y kernel-headers-$(uname -r)
 yum install -y kernel-devel-$(uname -r)
 ```
 
-**Remarque** : seules les versions 8 et ultérieures de CentOS/RHEL sont prises en charge.
+**Remarque** : pour que le check OOM Kill fonctionne, vous devez utiliser la version 4.11+ du kernel. De plus, seules les versions 8 et ultérieures de Windows, Container-Optimized OS et CenOS/RHEL sont prises en charge.
 
 ### Configuration
 
@@ -95,7 +96,7 @@ Le check OOM Kill envoie un événement pour chaque OOM Kill. Celui-ci inclut l
 
 Besoin d'aide ? Contactez [l'assistance Datadog][7].
 
-[1]: https://docs.datadoghq.com/fr/agent/guide/
+[1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/dist/conf.d/oom_kill.d/conf.yaml.example
 [3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [4]: https://github.com/helm/charts/tree/master/stable/datadog

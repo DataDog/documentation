@@ -93,7 +93,7 @@ Text in a notebook is formatted with [Markdown][9], which enables the use of hea
 
 ### Manipulating cells
 
-To open a cell for editing, mouse over it and use `CMD + Click`, or click **Edit**. To close a cell, click outside it, press `ESC`, or press `CMD + Enter`. Use **Cancel** to discard your changes to the cell. Only one cell may be open at a time.
+To open a cell for editing, mouse over it and use `Cmd + Click` / `Ctrl + Click`, or click **Edit**. To close a cell, click outside it, press `ESC`, or press `Cmd + Enter` / `Ctrl + Enter`. Use **Cancel** to discard your changes to the cell. Only one cell may be open at a time.
 
 To insert cells, use the **+** button that appears to the left of the cell. To share, clone, or delete cells, use the action tray that appears above the cell on hover. Graph cells can be exported to a dashboard, or downloaded as a PNG or a CSV of graph data.
 

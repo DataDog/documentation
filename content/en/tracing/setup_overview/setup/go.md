@@ -35,7 +35,7 @@ For configuration instructions and details about using the API, see the Datadog 
 
 For a description of the terminology used in APM, see the [Getting started with APM section][3]. For details about contributing, check the official repository [README.md][4].
 
-Consult the [migration document][5] if you need to migrate from an older version of the tracer (e.g. v<0.6.x) to the newest version.
+Use the [migration document][5] if you need to migrate from an older version of the tracer (for example, v<0.6.x) to the newest version.
 
 When you set up tracing, you're also setting up Continuous Profiler, and you need only [enable Profiler][6] to start receiving profiling data from your app.
 
@@ -43,7 +43,7 @@ When you set up tracing, you're also setting up Continuous Profiler, and you nee
 
 #### Follow the in-app documentation (recommended)
 
-Follow the [Quickstart instructions][7] within the Datadog app for the best experience, including:
+Follow the [Quickstart instructions][7] within the Datadog for the best experience, including:
 
 - Step-by-step instructions scoped to your deployment configuration (hosts, Docker, Kubernetes, or Amazon ECS).
 - Dynamically set `service`, `env`, and `version` tags.
@@ -54,15 +54,57 @@ Otherwise, follow the instructions below to add the Datadog Tracing Library to y
 
 ## Automatic instrumentation
 
-Datadog has a series of pluggable packages which provide out-of-the-box support for instrumenting a series of libraries and frameworks. A list of these packages can be found in the [Compatibility Requirements][1] page.  To trace these integrations, import these packages into your application and follow the configuration instructions listed alongside each [Integration][1].
+Datadog has a series of pluggable packages which provide out-of-the-box support for instrumenting a series of libraries and frameworks. A list of these packages can be found in the [Compatibility Requirements][1] page. To trace these integrations, import these packages into your application and follow the configuration instructions listed alongside each [Integration][1].
 
 ## Configuration
 
 The Go tracer supports additional environment variables and functions for configuration.
 See all available options in the [configuration documentation][8].
 
-We highly recommend using `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `env`, `service`, and `version` for your services.
-Check out the [Unified Service Tagging][9] documentation for recommendations on how to configure these environment variables. These variables are available for versions 1.24.0+ of the Go tracer.
+`DD_VERSION`
+: Set the application’s version, for example: `1.2.3`, `6c44da20`, `2020.02.13`
+
+`DD_SERVICE`
+: The service name to be used for this application. 
+
+`DD_ENV`
+: Set the application’s environment, for example: prod, pre-prod, staging.
+
+`DD_AGENT_HOST`
+: **Default**: `localhost` <br>
+Override the default trace Agent host address for trace submission.
+
+`DD_DOGSTATSD_PORT`
+: **Default**: `8125` <br>
+Override the default trace Agent port for DogStatsD metric submission.
+
+`DD_TRACE_SAMPLE_RATE`
+: Enable [Tracing without Limits][9].
+
+`DD_TAGS`
+: **Default**: [] <br>
+A list of default tags to be added to every span and profile. Tags can be separated by commas or spaces, for example: `layer:api,team:intake` or `layer:api team:intake`
+
+`DD_TRACE_STARTUP_LOGS`
+: **Default**: `true` <br>
+Enable startup configuration and the diagnostic log.
+
+`DD_TRACE_DEBUG`
+: **Default**: `false` <br>
+Enable debug logging in the tracer.
+
+`DD_TRACE_ENABLED`
+: **Default**: `true` <br>
+Enable web framework and library instrumentation. When false, the application code doesn’t generate any traces.
+
+`DD_SERVICE_MAPPING`
+: **Default**: `null` <br>
+Dynamically rename services through configuration. Services can be separated by commas or spaces, for example: `mysql:mysql-service-name,postgres:postgres-service-name`, `mysql:mysql-service-name postgres:postgres-service-name`.
+
+
+Datadog recommends using `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `env`, `service`, and `version` for your services.
+
+Read the [Unified Service Tagging][10] documentation for recommendations on how to configure these environment variables. These variables are available for versions 1.24.0+ of the Go tracer.
 
 You may also elect to provide `env`, `service`, and `version` through the tracer's API:
 
@@ -156,11 +198,11 @@ For other environments, please refer to the [Integrations][5] documentation for 
 
 ## Configure APM environment name
 
-The [APM environment name][10] may be configured [in the agent][11] or using the [WithEnv][8] start option of the tracer.
+The [APM environment name][11] may be configured [in the agent][12] or using the [WithEnv][8] start option of the tracer.
 
 ### B3 headers extraction and injection
 
-The Datadog APM tracer supports [B3 headers extraction][12] and injection for distributed tracing.
+The Datadog APM tracer supports [B3 headers extraction][13] and injection for distributed tracing.
 
 Distributed headers injection and extraction is controlled by
 configuring injection/extraction styles. Two styles are
@@ -192,7 +234,8 @@ extracted value is used.
 [6]: /tracing/profiler/enabling/?code-lang=go
 [7]: https://app.datadoghq.com/apm/docs
 [8]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#StartOption
-[9]: /getting_started/tagging/unified_service_tagging
-[10]: /tracing/advanced/setting_primary_tags_to_scope/#environment
-[11]: /getting_started/tracing/#environment-name
-[12]: https://github.com/openzipkin/b3-propagation
+[9]: /tracing/trace_retention_and_ingestion/
+[10]: /getting_started/tagging/unified_service_tagging
+[11]: /tracing/advanced/setting_primary_tags_to_scope/#environment
+[12]: /getting_started/tracing/#environment-name
+[13]: https://github.com/openzipkin/b3-propagation

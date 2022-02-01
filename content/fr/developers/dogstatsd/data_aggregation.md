@@ -11,11 +11,11 @@ further_reading:
   - link: developers/libraries
     tag: Documentation
     text: Bibliothèques client de Datadog et sa communauté pour DogStatsD et les API
-  - link: 'https://github.com/DataDog/datadog-agent/tree/master/pkg/dogstatsd'
+  - link: https://github.com/DataDog/datadog-agent/tree/master/pkg/dogstatsd
     tag: GitHub
     text: Code source de DogStatsD
 ---
-Le service DogStatsD de Datadog implémente le protocole StatsD, [avec quelques différences][1]. DogStatsD vous permet d'envoyer des métriques et de surveiller le code de votre application sans la bloquer. Les données sont transmises depuis votre application via UDP au [serveur DogStatsD][2] local (intégré à l'Agent Datadog), qui les agrège et les envoie ensuite à l'endpoint d'API Datadog. [En savoir plus sur la configuration de DogStatsD][2].
+Le service DogStatsD de Datadog implémente le protocole StatsD, [avec quelques différences][1]. DogStatsD vous permet d'envoyer des métriques et de surveiller le code de votre application sans la bloquer. Les données sont transmises depuis votre application via UDP au [serveur DogStatsD][2] local (intégré à l'Agent Datadog), qui les agrège et les envoie ensuite à l'endpoint d'API Datadog. En savoir plus sur la [configuration de DogStatsD][2].
 
 Cet article explique pourquoi et comment vos données sont agrégées.
 
@@ -27,7 +27,7 @@ Prenons pour exemple une [métrique COUNT][3] qui est incrémentée 1 000 fois
 
 ## Comment l'agrégation est-elle effectuée avec le serveur DogStatsD ?
 
-[DogStatsD][2] utilise un _intervalle de transmission_ de 10 secondes. Toutes les 10 secondes, [DogStatsD][2] vérifie toutes les données reçues depuis la dernière transmission (c'est-à-dire, au cours des 10 dernières secondes). Toutes les valeurs qui correspondent au même nom de métrique et aux mêmes tags sont agrégées afin d'obtenir une valeur unique.
+[DogStatsD][2] utilise un _intervalle de transmission_ de 10 secondes. Toutes les 10 secondes, [DogStatsD][2] vérifie toutes les données reçues depuis la dernière transmission. Toutes les valeurs qui correspondent au même nom de métrique et aux mêmes tags sont agrégées afin d'obtenir une valeur unique.
 
 **Remarque** : avec le protocole StatsD, le client StatsD n'envoie pas les métriques avec leurs timestamps. Le timestamp est ajouté au moment de la transmission. Ainsi, si une transmission se produit à 10:00:10, toutes les données reçues par le serveur [DogStatsD][2] (intégré à l'Agent Datadog) entre 10:00:00 et 10:00:10 sont cumulées sous la forme d'un point de données unique qui reçoit le timestamp 10:00:00.
 
@@ -35,13 +35,13 @@ Prenons pour exemple une [métrique COUNT][3] qui est incrémentée 1 000 fois
 
 Parmi toutes les valeurs reçues pendant un même intervalle de transmission, la valeur agrégée envoyée dépend du [type de métrique][4] :
 
-| Type de métrique       | Agrégation effectuée sur un intervalle de transmission                                                                                                                    |
-| ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [GAUGE][5]        | Le dernier point de données est envoyé.                                                                                                                           |
-| [COUNT][3]        | La somme de tous les points de données est envoyée.                                                                                                                      |
-| [HISTOGRAM][6]    | Les valeurs min, max, sum, avg, 95 percentile, count et median de tous les points de données sont envoyées. Consultez la [page relative aux métriques HISTOGRAM][6] pour en savoir plus. |
-| SET               | Le nombre points de données distincts est envoyé.                                                                                                                      |
-| [DISTRIBUTION][7] | Agrégation en tant que distributions globales.                                                                                                                              |
+| Type de métrique       | Agrégation effectuée sur un intervalle de transmission                                                 |
+|-------------------|-----------------------------------------------------------------------------------------------|
+| [GAUGE][5]        | Le dernier point de données est envoyé.                                                        |
+| [COUNT][3]        | La somme de tous les points de données est envoyée.                                                   |
+| [HISTOGRAM][6]    | La valeur minimale, la valeur maximale, la moyenne, le 95e centile, le nombre de valeurs et la médiane de tous les points de données sont envoyés. |
+| SET               | Le nombre points de données distincts est envoyé.                                                   |
+| [DISTRIBUTION][7] | Agrégation en tant que distributions globales.                                                           |
 
 ## Pour aller plus loin
 

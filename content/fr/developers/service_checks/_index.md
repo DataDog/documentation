@@ -83,10 +83,10 @@ Les monitors de checks de service associés aux intégrations Datadog par défau
 
 {{< img src="developers/service_checks/haproxy_service_check.mp4" alt="Check de service Haproxy" video="true" >}}
 
-Pour apprendre à écrire une intégration, consultez la [documentation dédiée au développement d'intégrations][5].
+Consultez la section [Présentation des intégrations basées sur l'Agent][5] pour découvrir comment rédiger une intégration.
 
 [1]: https://app.datadoghq.com/check/summary
 [2]: https://app.datadoghq.com/dashboard
 [3]: https://app.datadoghq.com/monitors#create/custom
-[4]: /fr/monitors/notifications/
+[4]: /fr/monitors/notify/
 [5]: /fr/developers/integrations/

@@ -1,0 +1,10 @@
+[
+  {
+    "check": "app.ok",
+    "host_name": "host",
+    "status": 0,
+    "tags": [
+      "test:ExampleSubmitaServiceCheckreturnsPayloadacceptedresponse"
+    ]
+  }
+]

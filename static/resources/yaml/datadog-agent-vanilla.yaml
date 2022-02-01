@@ -26,6 +26,27 @@ data:
       tool_version: kubernetes sample manifests
       installer_version: kubernetes sample manifests
 ---
+# Source: datadog/templates/agent-services.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: datadog-agent
+  namespace: default
+  labels:
+    app: "datadog-agent"
+    chart: "datadog-2.28.13"
+    release: "datadog-agent"
+    heritage: "Helm"
+spec:
+  selector:
+    app: datadog-agent
+  ports:
+    - protocol: UDP
+      port: 8125
+      targetPort: 8125
+      name: dogstatsd
+  internalTrafficPolicy: Local
+---
 # Source: datadog/templates/daemonset.yaml
 apiVersion: apps/v1
 kind: DaemonSet
@@ -46,7 +67,7 @@ spec:
     spec:
       containers:
         - name: agent
-          image: "gcr.io/datadoghq/agent:7.31.1"
+          image: "gcr.io/datadoghq/agent:7.32.4"
           imagePullPolicy: IfNotPresent
           command: ["agent", "run"]
           resources: {}
@@ -91,6 +112,8 @@ spec:
               value: "5555"
             - name: DD_DOGSTATSD_SOCKET
               value: "/var/run/datadog/dsd.socket"
+            - name: DD_EXPVAR_PORT
+              value: "6000"
           volumeMounts:
             - name: installinfo
               subPath: install_info
@@ -138,13 +161,12 @@ spec:
             successThreshold: 1
             timeoutSeconds: 5
         - name: trace-agent
-          image: "gcr.io/datadoghq/agent:7.31.1"
+          image: "gcr.io/datadoghq/agent:7.32.4"
           imagePullPolicy: IfNotPresent
           command: ["trace-agent", "-config=/etc/datadog-agent/datadog.yaml"]
           resources: {}
           ports:
             - containerPort: 8126
-              hostPort: 8126
               name: traceport
               protocol: TCP
           env:
@@ -197,7 +219,7 @@ spec:
               port: 8126
             timeoutSeconds: 5
         - name: process-agent
-          image: "gcr.io/datadoghq/agent:7.31.1"
+          image: "gcr.io/datadoghq/agent:7.32.4"
           imagePullPolicy: IfNotPresent
           command: ["process-agent", "-config=/etc/datadog-agent/datadog.yaml"]
           resources: {}
@@ -218,6 +240,8 @@ spec:
               value: "yes"
             - name: DD_CLUSTER_AGENT_ENABLED
               value: "false"
+            - name: DD_PROCESS_AGENT_DISCOVERY_ENABLED
+              value: "false"
             - name: DD_LOG_LEVEL
               value: "INFO"
             - name: DD_SYSTEM_PROBE_ENABLED
@@ -229,15 +253,15 @@ spec:
           volumeMounts:
             - name: config
               mountPath: /etc/datadog-agent
-            - name: runtimesocketdir
-              mountPath: /host/var/run
-              mountPropagation: None
-              readOnly: true
             - name: logdatadog
               mountPath: /var/log/datadog
             - name: tmpdir
               mountPath: /tmp
               readOnly: false
+            - name: runtimesocketdir
+              mountPath: /host/var/run
+              mountPropagation: None
+              readOnly: true
             - name: cgroups
               mountPath: /host/sys/fs/cgroup
               mountPropagation: None
@@ -254,7 +278,7 @@ spec:
               readOnly: true
       initContainers:
         - name: init-volume
-          image: "gcr.io/datadoghq/agent:7.31.1"
+          image: "gcr.io/datadoghq/agent:7.32.4"
           imagePullPolicy: IfNotPresent
           command: ["bash", "-c"]
           args:
@@ -264,7 +288,7 @@ spec:
               mountPath: /opt/datadog-agent
           resources: {}
         - name: init-config
-          image: "gcr.io/datadoghq/agent:7.31.1"
+          image: "gcr.io/datadoghq/agent:7.32.4"
           imagePullPolicy: IfNotPresent
           command: ["bash", "-c"]
           args:
@@ -306,9 +330,6 @@ spec:
             name: datadog-agent-installinfo
         - name: config
           emptyDir: {}
-        - hostPath:
-            path: /var/run
-          name: runtimesocketdir
         - name: logdatadog
           emptyDir: {}
         - name: tmpdir
@@ -332,6 +353,9 @@ spec:
         - hostPath:
             path: /etc/passwd
           name: passwd
+        - hostPath:
+            path: /var/run
+          name: runtimesocketdir
       tolerations:
       affinity: {}
       serviceAccountName: "datadog-agent"

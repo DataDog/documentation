@@ -23,7 +23,7 @@ Par défaut, votre Agent est installé dans sa propre sandbox à l'emplacement `
 
 ## Commandes
 
-L'Agent Datadog possède quelques commandes. Seules les commandes de _cycle de vie_ (à savoir, `start`, `stop`, `restart` et `status` sur l'Agent) doivent être exécutées avec `sudo`.
+Vous pouvez utiliser quelques commandes avec l'Agent Datadog. Seules les _commandes de cycle de vie_, à savoir `start`, `stop`, `restart` et `status`, doivent être exécutées avec `sudo`.
 
 {{< tabs >}}
 {{% tab "Agents v6 et v7" %}}
@@ -80,7 +80,7 @@ Fichiers de configuration pour les [intégrations][1] :
 
 ## Dépannage
 
-[Consultez la documentation relative au dépannage de l'Agent][2].
+Consultez la [documentation relative au dépannage de l'Agent][2].
 
 ## Pour aller plus loin
 

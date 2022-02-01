@@ -164,13 +164,13 @@ After installing the containerized Datadog Agent, you can set your host tags usi
 
 Datadog automatically collects common tags from [Docker, Kubernetes, ECS, Swarm, Mesos, Nomad, and Rancher][6]. To extract even more tags, use the following options:
 
-| Environment Variable               | Description                                    |
-|------------------------------------|------------------------------------------------|
-| `DD_DOCKER_LABELS_AS_TAGS`         | Extract docker container labels                |
-| `DD_DOCKER_ENV_AS_TAGS`            | Extract docker container environment variables |
-| `DD_KUBERNETES_POD_LABELS_AS_TAGS` | Extract pod labels                             |
-| `DD_CHECKS_TAG_CARDINALITY`        | Add tags to check metrics                      |
-| `DD_DOGSTATSD_TAG_CARDINALITY`     | Add tags to custom metrics                     |
+| Environment Variable               | Description                                          |
+|------------------------------------|------------------------------------------------------|
+| `DD_DOCKER_LABELS_AS_TAGS`         | Extract docker container labels                      |
+| `DD_DOCKER_ENV_AS_TAGS`            | Extract docker container environment variables       |
+| `DD_KUBERNETES_POD_LABELS_AS_TAGS` | Extract pod labels                                   |
+| `DD_CHECKS_TAG_CARDINALITY`        | Add tags to check metrics (low, orchestrator, high)  |
+| `DD_DOGSTATSD_TAG_CARDINALITY`     | Add tags to custom metrics (low, orchestrator, high) |
 
 **Examples:**
 
@@ -193,7 +193,7 @@ When using the `DD_DOCKER_LABELS_AS_TAGS` variable within a Docker Swarm `docker
 DD_DOCKER_LABELS_AS_TAGS={"com.docker.compose.service":"service_name"}
 ```
 
-When adding labels to Docker containers, the placement of the `labels:` keyword inside the `docker-compose.yaml` file is very important. To avoid issues, follow the [Docker unified service tagging][2] documentation.
+When adding labels to Docker containers, the placement of the `labels:` keyword inside the `docker-compose.yaml` file is important. To avoid issues, follow the [Docker unified service tagging][2] documentation.
 
  If the container needs to be labeled outside of this configuration, place the `labels:` keyword **inside** the `services:` section **not** inside the `deploy:` section. Place the `labels:` keyword inside the `deploy:` section only when the service needs to be labeled. The Datadog Agent does not have any labels to extract from the containers without this placement.
 
@@ -238,15 +238,15 @@ services:
 
 Either define the variables in your custom `datadog.yaml`, or set them as JSON maps in these environment variables. The map key is the source (`label/envvar`) name, and the map value is the Datadog tag name.
 
-There are two environment variables that set tag cardinality: `DD_CHECKS_TAG_CARDINALITY` and `DD_DOGSTATSD_TAG_CARDINALITY`—as DogStatsD is priced differently, its tag cardinality setting is separated in order to provide the opportunity for finer configuration. Otherwise, these variables function the same way: they can have values `low`, `orchestrator`, or `high`. They both default to `low`, which pulls in host-level tags.
+##### Tags cardinality
 
-Setting the variable to `orchestrator` adds the following tags: `pod_name` (Kubernetes), `oshift_deployment` (OpenShift), `task_arn` (ECS and Fargate), `mesos_task` (Mesos).
+There are two environment variables that set tag cardinality: `DD_CHECKS_TAG_CARDINALITY` and `DD_DOGSTATSD_TAG_CARDINALITY`. Because DogStatsD is priced differently, the DogStatsD tag cardinality setting is separated to provide the opportunity for finer configuration. Otherwise, these variables function the same way: they can have values `low`, `orchestrator`, or `high`. They both default to `low`, which pulls in host-level tags.
 
-Setting the variable to `high` additionally adds the following tags: `container_name` (Docker), `container_id` (Docker), `display_container_name` (Kubelet).
+Depending on the cardinality, there is a different set of out-of-the box tags for [Kubernetes and OpenShift][7], and for [Docker, Rancher, and Mesos][8]. For ECS and Fargate, setting the variable to `orchestrator` adds the `task_arn` tag.
 
 #### Traces
 
-The Datadog tracer can be configured with environment variables, system properties, or through configuration in code. The [Datadog tracing setup][7] documentation has information on tagging options and configuration for each tracer. You can also follow the [unified service tagging][2] documentation to configure your tracer for unified service tagging.
+The Datadog tracer can be configured with environment variables, system properties, or through configuration in code. The [Datadog tracing setup][9] documentation has information on tagging options and configuration for each tracer. You can also follow the [unified service tagging][2] documentation to configure your tracer for unified service tagging.
 
 Regardless of the tracer used, span metadata must respect a typed tree structure. Each node of the tree is split by a `.` and is of a single type.
 
@@ -379,7 +379,7 @@ sum:page.views{domain:example.com} by {host}
 
 ### DogStatsD
 
-Add tags to any metric, event, or service check you send to [DogStatsD][8]. For example, compare the performance of two algorithms by tagging a timer metric with the algorithm version:
+Add tags to any metric, event, or service check you send to [DogStatsD][9]. For example, compare the performance of two algorithms by tagging a timer metric with the algorithm version:
 
 ```python
 
@@ -392,9 +392,9 @@ def algorithm_two():
     # Do fancy things (maybe faster?) here ...
 ```
 
-**Note**: Tagging is a [Datadog-specific extension][9] to StatsD.
+**Note**: Tagging is a [Datadog-specific extension][10] to StatsD.
 
-Special consideration is necessary when assigning the `host` tag to DogStatsD metrics. For more information on the host tag key, see the [DogStatsD section][10].
+Special consideration is necessary when assigning the `host` tag to DogStatsD metrics. For more information on the host tag key, see the [DogStatsD section][11].
 
 ## Further Reading
 
@@ -406,7 +406,8 @@ Special consideration is necessary when assigning the `host` tag to DogStatsD me
 [4]: /getting_started/agent/#setup
 [5]: /integrations/#cat-web
 [6]: /agent/docker/?tab=standard#tagging
-[7]: /tracing/setup/
-[8]: /developers/dogstatsd/
-[9]: /developers/community/libraries/
-[10]: /metrics/dogstatsd_metrics_submission/#host-tag-key
+[7]: /agent/kubernetes/tag/?tab=containerizedagent#out-of-the-box-tags
+[8]: /agent/docker/tag/?tab=containerizedagent#out-of-the-box-tagging
+[9]: /tracing/setup/
+[10]: /developers/dogstatsd/
+[11]: /developers/community/libraries/

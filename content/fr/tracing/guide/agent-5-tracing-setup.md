@@ -1,5 +1,5 @@
 ---
-title: "APM et tracing distribué avec l'Agent\_v5"
+title: APM et profileur en continu avec la version 5 de l'Agent
 kind: guide
 private: true
 aliases:
@@ -69,14 +69,14 @@ La recherche de traces est disponible pour l'Agent 5.25.0+. Pour en savoir plus
 
 Besoin d'aide ? Contactez [l'assistance Datadog][12].
 
-[1]: https://github.com/DataDog/datadog-agent/tree/master/docs/trace-agent#run-on-macos
-[2]: https://github.com/DataDog/datadog-agent/tree/master/docs/trace-agent#run-on-windows
+[1]: https://github.com/DataDog/datadog-agent/tree/main/docs/trace-agent#run-on-macos
+[2]: https://github.com/DataDog/datadog-agent/tree/main/docs/trace-agent#run-on-windows
 [3]: /fr/agent/faq/where-is-the-configuration-file-for-the-agent/
 [4]: /fr/tracing/visualization/#trace-metrics
 [5]: https://app.datadoghq.com/account/settings#agent
 [6]: https://gcr.io/datadoghq/docker-dd-agent
 [7]: /fr/tracing/docker/
-[8]: /fr/api/v1/tracing/
+[8]: /fr/tracing/guide/send_traces_to_agent_by_api/
 [9]: /fr/agent/
 [10]: https://github.com/DataDog/dd-agent/blob/master/datadog.conf.example
 [11]: /fr/tracing/setup/?tab=agent5250#trace-search

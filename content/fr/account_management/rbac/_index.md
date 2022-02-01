@@ -11,7 +11,7 @@ further_reading:
   - link: /api/v2/roles/
     tag: Documentation
     text: Gérer les rôles et les autorisations avec l’API Roles
-  - link: '/api/v2/roles/#enumerer-les-autorisations'
+  - link: /api/v2/roles/#enumerer-les-autorisations
     tag: Documentation
     text: Gérer vos autorisations avec l'API Permission
   - link: /account_management/rbac/permissions
@@ -61,7 +61,7 @@ Pour créer un rôle personnalisé :
 3. Attribuez un nom à votre rôle.
 4. Facultatif : attribuez un ensemble d'autorisations à votre rôle. Consultez la section [Autorisations des rôles Datadog][2] pour en savoir plus sur les autorisations disponibles.
 
-{{< img src="account_management/rbac/create_role.png" alt="Créer un rôle personnalisé"  style="width:90%;">}}
+{{< img src="account_management/rbac/create_role.png" alt="Créer un rôle personnalisé" style="width:90%;">}}
 
 Une fois votre rôle créé, vous pouvez l'[ajouter à des utilisateurs existants][3].
 
@@ -91,9 +91,9 @@ Pour modifier un rôle personnalisé :
 3. Modifiez l'ensemble d'autorisations de votre rôle. Consultez la section [Autorisations des rôles Datadog][2] pour en savoir plus sur les autorisations disponibles.
 4. Enregistrez vos modifications.
 
-{{< img src="account_management/rbac/edit_role.png" alt="Modifier un rôle"  style="width:90%;">}}
+{{< img src="account_management/rbac/edit_role.png" alt="Modifier un rôle" style="width:90%;">}}
 
-Une fois votre rôle modifié, les autorisations sont mises à jour pour tous les utilisateurs qui disposent de ce rôle.
+Une fois votre rôle modifié, les autorisations sont mises à jour pour l'ensemble des utilisateurs qui disposent de ce rôle.
 
 
 [1]: https://app.datadoghq.com/access/roles
@@ -119,9 +119,9 @@ Pour supprimer un rôle personnalisé :
 2. Sélectionnez le bouton de suppression pour le rôle de votre choix.
 3. Confirmez l'action.
 
-{{< img src="account_management/rbac/delete_role.png" alt="Supprimer un rôle"  style="width:90%;">}}
+{{< img src="account_management/rbac/delete_role.png" alt="Supprimer un rôle" style="width:90%;">}}
 
-{{< img src="account_management/users/delete_role_confirmation.png" alt="Supprimer un rôle"  style="width:90%;">}}
+{{< img src="account_management/users/delete_role_confirmation.png" alt="Supprimer un rôle" style="width:90%;">}}
 
 Une fois votre rôle supprimé, les autorisations sont mises à jour pour tous les utilisateurs qui disposent de ce rôle. Les utilisateurs sans autre rôle ne peuvent pas exploiter toutes les fonctionnalités de Datadog, mais conservent un accès limité. Vous devez toujours vous assurer que les utilisateurs possèdent un rôle, ou qu'ils sont désactivés s'ils n'ont pas besoin d'accéder à votre organisation.
 
@@ -153,4 +153,4 @@ Une fois vos rôles RBAC configurés, vous pouvez restreindre l'accès aux dashb
 [6]: /fr/api/v2/roles/
 [7]: /fr/account_management/rbac/permissions/
 [8]: /fr/dashboards/#restrict-access
-[9]: /fr/getting_started/application/monitors/#restrict-access
+[9]: /fr/getting_started/monitors/#restrict-access

@@ -79,7 +79,7 @@ The displayed metrics represent, per span:
 `Avg % Exec Time`
 : Average ratio of execution time for which the span was active, for traces including the current resource, where the span is present at least once.
 
-**Note**: A span is considered active when it's not waiting for a child span to complete. The active spans at a given time, for a given trace, are all the leaf spans (i.e.: spans without children).
+**Note**: A span is considered active when it's not waiting for a child span to complete. The active spans at a given time, for a given trace, are all the leaf spans (in other words, spans without children).
 
 ## Traces
 

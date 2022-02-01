@@ -174,7 +174,7 @@ Tracer settings can be configured as the following parameters to the `init()` me
 `env`
 : **Environment variable**: `DD_ENV`<br>
 **Default**: `null`<br>
-Set an application's environment e.g. `prod`, `pre-prod`, `stage`, etc. Available for versions 0.20+
+Set an application's environment for example, `prod`, `pre-prod`, `stage`, etc. Available for versions 0.20+
 
 `service`
 : **Environment variable**: `DD_SERVICE`<br>
@@ -257,12 +257,12 @@ Experimental features can be enabled all at once using Boolean true or individua
 Whether or not to enable automatic instrumentation of external libraries using the built-in plugins.
 
 `DD_TRACE_DISABLED_PLUGINS`
-: A comma-separated string of integration names automatically disabled when tracer is initialized. Environment variable only e.g. `DD_TRACE_DISABLED_PLUGINS=express,dns`.
+: A comma-separated string of integration names automatically disabled when tracer is initialized. Environment variable only, for example, `DD_TRACE_DISABLED_PLUGINS=express,dns`.
 
 `logLevel`
 : **Environment variable**: `DD_TRACE_LOG_LEVEL`<br>
 **Default**: `debug`<br>
-A string for the minimum log level for the tracer to use when debug logging is enabled, e.g. `error`, `debug`.
+A string for the minimum log level for the tracer to use when debug logging is enabled, for example, `error`, `debug`.
 
 ## Further Reading
 

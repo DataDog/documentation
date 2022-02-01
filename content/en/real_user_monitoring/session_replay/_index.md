@@ -54,7 +54,7 @@ datadogRum.startSessionReplayRecording();
 
 #### CDN
 
-Replace the Browser SDK URL `https://www.datadoghq-browser-agent.com/datadog-rum.js` with `https://www.datadoghq-browser-agent.com/datadog-rum-v3.js`. When `DD_RUM.init()` is called, the Session Replay recording does not start until `DD_RUM.startSessionReplayRecording()` is also called.
+Replace the Browser SDK URL `https://www.datadoghq-browser-agent.com/datadog-rum.js` with `https://www.datadoghq-browser-agent.com/datadog-rum-v4.js`. When `DD_RUM.init()` is called, the Session Replay recording does not start until `DD_RUM.startSessionReplayRecording()` is also called.
 
 The Session Replay recorder supports all browsers supported by the RUM Browser SDK with the exception of IE11. For more information, see the [browser support table][3].
 
@@ -114,7 +114,7 @@ Additionally, authorize the `example.com` domain in the `assets.example.com`. Th
 
 The Session Replay Recorder, part of the RUM Browser SDK, takes a snapshot of the DOM + CSS. It then tails & records events happening on the web page (DOM modification, mouse move, clicks, input events, …) along with their timestamp.
 
-On the Datadog replay view, we rebuild the page and re-apply the recorded events at the right time.
+On the Datadog replay view, the page is rebuilt and the recorded events are re-applied at the right time.
 
 The browser SDK is [open source][9], and leverages the open source project [rrweb][10].
 

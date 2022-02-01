@@ -21,9 +21,14 @@ Le widget Notes et liens fonctionne comme le [widget Texte libre][1], mais offre
 
 {{< img src="dashboards/widgets/note/using_link_note_widget.mp4" alt="Configuration du widget Notes et liens" video="true" style="width:80%;" >}}
 
-1. Saisissez le texte que vous souhaitez afficher. Notez que le format Markdown est pris en charge.
+1. Saisissez le texte que vous souhaitez afficher. **Remarque** : le format Markdown est pris en charge.
 2. Choisissez la taille du texte et la couleur d'arrière-plan de la note.
 3. Sélectionnez la position du pointeur.
+
+Ce widget prend en charge les template variables. Utilisez la syntaxe `$<NOM_VARIABLE>.value` pour modifier de façon dynamique le contenu du widget. Par exemple, `$env.value` modifie la valeur d'un lien vers l'environnement sélectionné.
+
+{{< img src="dashboards/widgets/note/template_var.jpeg" alt="Template variables du widget Notes et liens" style="width:100%;" >}}
+
 
 ## API
 

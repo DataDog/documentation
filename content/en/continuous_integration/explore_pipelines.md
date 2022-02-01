@@ -7,7 +7,7 @@ further_reading:
       text: "Troubleshooting CI"
 ---
 
-{{< site-region region="us5,gov" >}}
+{{< site-region region="gov" >}}
 <div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
@@ -35,7 +35,7 @@ The pipeline execution list at the bottom shows all the times that pipeline (or 
 
 Click one of the executions to open the pipeline execution view and see the flame graph or span list for the pipeline and its stages. The _Executions (n)_ list on the left side gives you quick access to the data for each retry of the pipeline for the same commit.
 
-Click the CI provider link (`gitlab-ci gitlab.pipeline > documentation` in the following image) to drill down to the Resource, Service, or Analytics page for the pipeline, stage, or job. You can also find complete tags information and links to related log events and network monitoring events.
+Click the CI provider link (`gitlab-ci gitlab.pipeline > documentation` in the following image) to investigate the Resource, Service, or Analytics page for the pipeline, stage, or job specifically. You can also find complete tags information and links to related log events and network monitoring events.
 
 {{< img src="ci/ci-pipeline-execution.png" alt="Trace info for pipeline execution" style="width:100%;">}}
 
@@ -45,7 +45,7 @@ On the [Pipeline Executions][2] page, you can see aggregated data about pipeline
 
 Each pipeline execution is reported as a trace, which includes stage and job information. Access individual pipeline, stage, and job execution traces by clicking on an execution in the list (similar to clicking into a pipeline execution from the Pipeline Details page).
 
-Alternatively, click the [Analytics][3] button to interactively slice and dice pipelines execution data into visualizations you can use to answer questions and to share on dashboards.
+Alternatively, click the [Analytics][3] button to interactively filter and group pipelines execution data into visualizations you can use to answer questions and to share on dashboards.
 
 {{< img src="ci/ci-pipelines-execution.png" alt="Analytics for a pipeline execution" style="width:100%;">}}
 

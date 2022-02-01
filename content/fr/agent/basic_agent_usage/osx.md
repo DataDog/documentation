@@ -26,7 +26,7 @@ Par défaut, l'Agent est installé dans une sandbox à l'emplacement `/opt/datad
 
 ## Commandes
 
-Dans les Agents v6 et v7, le gestionnaire de service `launchctl` fourni par le système d'exploitation est responsable du cycle de vie de l'Agent, tandis que les autres commandes doivent être exécutées directement par le biais du binaire de l'Agent. Les commandes de cycle de vie peuvent également être gérées via la barre des menus, et les autres commandes peuvent être exécutées via l'interface web.
+Avec les Agents v6 et v7, le gestionnaire de service `launchctl` fourni par le système d'exploitation est responsable du cycle de vie de l'Agent, tandis que les autres commandes doivent être exécutées directement par le biais du binaire de l'Agent. Les commandes de cycle de vie peuvent également être gérées via la barre des menus, et les autres commandes peuvent être exécutées via l'interface Web.
 
 {{< tabs >}}
 {{% tab "Agents v6 et v7" %}}
@@ -89,7 +89,7 @@ Fichiers de configuration pour les [intégrations][1] :
 
 ## Dépannage
 
-[Consultez la documentation relative au dépannage de l'Agent][2].
+Consultez la [documentation relative au dépannage de l'Agent][2].
 
 ## Utilisation de l'Agent intégré
 

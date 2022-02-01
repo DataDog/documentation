@@ -1,12 +1,12 @@
 ---
 title: Synthetic Testing Tunnel
 kind: documentation
-description: Local and CI/CD testing with Datadog Synthetic testing tunnel.
+description: Local and remote CI/CD testing with Datadog's Synthetic testing tunnel.
 further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-synthetic-ci-cd-testing/"
   tag: "Blog"
   text: "Incorporate Datadog Synthetic tests into your CI/CD pipeline"
-- link: "https://learn.datadoghq.com/course/view.php?id=37"
+- link: "https://learn.datadoghq.com/enrol/index.php?id=37"
   tag: "Learning Center"
   text: "Learn how to run Synthetic tests in CI/CD pipelines"
 - link: "https://www.datadoghq.com/blog/internal-application-testing-with-datadog/"
@@ -43,7 +43,7 @@ Because DNS resolution is performed through the tunnel, you can test application
 
 ## How to use the testing tunnel
 
-As mentioned above, the testing tunnel comes with the [@datadog/datadog-ci][2] NPM package and is available from version [v0.11.0][3] of the package. To learn how to get started using the Datadog CI/CD testing integration, see the [Synthetics CI documentation][4].
+As mentioned above, the testing tunnel comes with the [@datadog/datadog-ci][2] NPM package and is available from version [v0.11.0][3] of the package. To get started, see [Synthetics and CI/CD][4].
 
 Once you've set up your client on your local machine or your CI server, you can decide to have your tests launched with the tunnel by appending the command used to launch tests with `--tunnel`. For instance, if you are using a global configuration file, you can use:
 
@@ -101,4 +101,4 @@ datadog-ci synthetics run-tests --config <GLOBAL_CONFIG_FILE>.json --tunnel
 [1]: /synthetics/private_locations
 [2]: https://www.npmjs.com/package/@datadog/datadog-ci
 [3]: https://github.com/DataDog/datadog-ci/releases/tag/v0.11.0
-[4]: /synthetics/cicd_testing/#cli-usage
+[4]: /synthetics/cicd_integrations#use-the-cli

@@ -48,6 +48,13 @@
                               {{ end }}
                         {{ end }}
                       {{ end }}
+
+                      {{ with $resourcePage.Resources.Match (printf "request.%s.json" $operationid ) }}
+                        {{ range . }}
+                          {{ $s.Set "json" (highlight (.Content) "json" "") }}
+                        {{ end }}
+                      {{ end }}
+
                       {{ $json := ($s.Get "json") }}
                       {{ $html := ($s.Get "html") }}
 

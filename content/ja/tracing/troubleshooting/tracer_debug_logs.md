@@ -48,14 +48,18 @@ Datadog クライアントのログメッセージは、他のメッセージと
 
 トレーサーの `log` 属性を使用し、デフォルトロガーを上書きしてカスタムロガーに置き換えることができます。
 
-<mrk mid="45" mtype="seg">```ruby
+<mrk mid="45" mtype="seg">
+
+```ruby
 f = File.new(&quot;&lt;FILENAME&gt;.log&quot;, &quot;w+&quot;)           # ログメッセージが書き込まれる場所
 Datadog.configure do |c|
   c.tracer log:</mrk> <mrk mid="46" mtype="seg">Logger.new(f)                 # デフォルトのトレーサーの上書き
 end
 
 Datadog::Tracer.log.info { &quot;this is typically called by tracing code&quot; }
-```</mrk>
+```
+
+</mrk>
 
 詳細については、[API に関するドキュメント][1]を参照してください。
 
@@ -98,7 +102,9 @@ const tracer = require('dd-trace').init({
 
 例:
 
-<mrk mid="59" mtype="seg">```javascript
+<mrk mid="59" mtype="seg">
+
+```javascript
 const bunyan = require('bunyan')
 const logger = bunyan.createLogger({
   name:</mrk> <mrk mid="60" mtype="seg">'dd-trace',
@@ -112,7 +118,9 @@ const tracer = require('dd-trace').init({
   },
   debug: true
 })
-```</mrk>
+```
+
+</mrk>
 
 次に、Agent ログをチェックして、問題に関する詳細情報があるか確認します。
 

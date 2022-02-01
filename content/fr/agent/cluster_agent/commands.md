@@ -2,10 +2,10 @@
 title: Commandes et options de l'Agent de cluster
 kind: documentation
 further_reading:
-  - link: 'https://www.datadoghq.com/blog/datadog-cluster-agent/'
+  - link: https://www.datadoghq.com/blog/datadog-cluster-agent/
     tag: Blog
     text: Présentation de l'Agent de cluster Datadog
-  - link: 'https://www.datadoghq.com/blog/autoscale-kubernetes-datadog/'
+  - link: https://www.datadoghq.com/blog/autoscale-kubernetes-datadog/
     tag: Blog
     text: Mettre à l'échelle vos charges de travail Kubernetes en fonction d'une métrique Datadog
   - link: /agent/cluster_agent/clusterchecks/
@@ -26,7 +26,7 @@ Voici les commandes disponibles pour les Agents de cluster de Datadog :
 : Visualiser les composants de l'Agent et leur santé.
 
 `datadog-cluster-agent metamap <NOM_NŒUD>` 
-: Interroge le cache local du mappage entre les pods qui se trouvent sur `NOM_NŒUD` et les métadonnées de cluster auxquelles il est associé (endpoints, etc.). Le mappeur s'exécute sur tous les nœuds du cluster si `NOM_NŒUD` n'est pas spécifié.
+: Interroge le cache local du mappage entre les pods qui se trouvent sur `NOM_NŒUD` et les métadonnées de cluster auxquelles ils sont associés, comme les endpoints. Le mappeur s'exécute sur tous les nœuds du cluster si `NOM_NŒUD` n'est pas spécifié.
 
 `datadog-cluster-agent flare <CASE_ID>`     
 : Tout comme l'Agent de nœud, l'Agent de cluster peut agréger les logs et les configurations utilisés et transmettre une archive à l'équipe d'assistance. Ils peuvent également être condensés et utilisés localement. **Remarque :** cette commande est exécutée depuis le pod de l'Agent de cluster.
@@ -121,6 +121,6 @@ Nom du tag d'instance défini avec l'option `DD_CLUSTER_NAME`. Valeur par défau
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/account/settings#api
+[1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: /fr/agent/cluster_agent/event_collection/
 [3]: https://golang.org/pkg/expvar

@@ -14,7 +14,7 @@ further_reading:
 
 For Kubernetes environments, the [Datadog Cluster Agent][1] (DCA) can be configured to use the Network Device Monitoring (NDM) auto-discovery logic as a source of [cluster checks][2].
 
-Agent auto-discovery combined with the DCA is very scalable. It can monitor a large number of devices.
+Agent auto-discovery combined with the DCA is scalable. It can monitor a large number of devices.
 
 ## Setup
 

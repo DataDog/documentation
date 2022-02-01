@@ -18,7 +18,7 @@ Recueillez des métriques de Kubernetes en temps réel pour :
 * Visualiser et surveiller les états de Kubernetes
 * Être informé des failovers et des événements de Kubernetes
 
-Pour Kubernetes, il est recommandé d'exécuter l'[Agent dans un DaemonSet][1]. Nous avons créé une [image Docker][2] comprenant les intégrations Docker et Kubernetes activées.
+Pour Kubernetes, il est recommandé d'exécuter l'[Agent dans un DaemonSet][1]. Vous pouvez utiliser une [image Docker][2] comprenant les intégrations Docker et Kubernetes activées.
 
 Vous pouvez également vous contenter d'[exécuter l'Agent Datadog sur votre host][3] et de le configurer de façon à rassembler vos métriques Kubernetes.
 
@@ -32,7 +32,7 @@ Grâce à Kubernetes, vous pouvez tirer profit des DaemonSets pour déployer aut
 
 *Si vous ne pouvez pas utiliser de DaemonSets pour votre cluster Kubernetes, [installez l'Agent Datadog][4] en tant que déploiement sur chaque nœud Kubernetes.*
 
-Si le contrôle d'accès en fonction du rôle (RBAC) est activé sur votre Kubernetes, consultez la [documentation sur la configuration des autorisations RBAC avec votre intégration Datadog/Kubernetes][5].
+Si le RBAC est activé dans votre environnement Kubernetes, découvrez comment configurer des autorisations RBAC avec votre [intégration Datadog/Kubernetes][5].
 
 * Créez le manifeste `dd-agent.yaml` suivant :
 
@@ -94,7 +94,7 @@ Remplacez `CLÉ_API_DATADOG` par [votre clé d'API][6] ou utilisez les [secrets 
 
 #### Installation sur un host
 
-Installez le paquet `dd-check-kubernetes` manuellement ou avec votre gestionnaire de configuration préféré.
+Installez le package`dd-check-kubernetes` manuellement ou avec votre gestionnaire de configuration préféré.
 
 ### Configuration
 
@@ -200,15 +200,15 @@ Déployez-le ensuite en exécutant :
 kubectl create -f kube-state-metrics.yaml
 ```
 
-Le manifeste ci-dessus utilise le conteneur public `kube-state-metrics` de Google, qui est également disponible sur [Quay][13]. Si vous souhaitez le créer manuellement, consultez [la documentation officielle du projet][12].
+Le manifeste ci-dessus utilise le conteneur public `kube-state-metrics` de Google, qui est également disponible sur [Quay][13]. Si vous souhaitez le créer manuellement, consultez la [documentation officielle du projet][12] (en anglais).
 
 Si vous configurez votre service Métriques Kubernetes State pour une utilisation sur une autre URL ou un autre port, vous pouvez configurer l'Agent Datadog en définissant le paramètre `kube_state_url` dans `conf.d/kubernetes_state.yaml`, puis en redémarrant l'Agent.
 Pour en savoir plus, consultez le [fichier kubernetes_state.yaml.example][14]. Si vous avez activé [Autodiscovery][9], l'URL kube-state est configurée et gérée automatiquement.
 
 #### Installation sur un host
 
-Le paquet `dd-check-kubernetes_state` peut être installé manuellement ou via votre gestionnaire de configuration préféré (pour CentOS/AWS, vous trouverez [votre paquet rpm ici][15] et les instructions d'installation sur [cette page][16].
-Ensuite, modifiez le fichier `kubernetes_state.yaml` de façon à spécifier votre serveur et votre port, et définissez les masters à surveiller. Consultez le [fichier exemple kubernetes_state.yaml][14] pour découvrir toutes les options de configuration.
+Le package `dd-check-kubernetes_state` peut être installé manuellement ou via votre gestionnaire de configuration préféré (pour CentOS/AWS, téléchargez [ici][15] le package rpm et consultez les instructions d'installation sur [cette page][16].
+Modifiez ensuite le fichier `kubernetes_state.yaml` de façon à pointer vers votre serveur et votre port, et définissez les masters à surveiller. Consultez le [fichier exemple kubernetes_state.yaml][14] pour découvrir toutes les options de configuration.
 
 ### Validation
 
@@ -244,7 +244,7 @@ Checks
 
 ### Installation
 
-Installez le paquet `dd-check-kube_dns` manuellement ou avec votre gestionnaire de configuration préféré.
+Installez le package`dd-check-kube_dns` manuellement ou avec votre gestionnaire de configuration préféré.
 
 ### Configuration
 
@@ -288,7 +288,7 @@ Checks
 [3]: /fr/#host-setup
 [4]: /fr/integrations/docker_daemon/
 [5]: /fr/agent/kubernetes/
-[6]: https://app.datadoghq.com/account/settings#api
+[6]: https://app.datadoghq.com/organization-settings/api-keys
 [7]: https://kubernetes.io/docs/concepts/configuration/secret
 [8]: https://kubernetes.io/docs/concepts/configuration/secret/#using-secrets-as-environment-variables
 [9]: /fr/getting_started/agent/autodiscovery/

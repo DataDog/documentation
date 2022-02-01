@@ -37,3 +37,17 @@ Configuration requires:
 **Optional**: Enter a username and a password to access the RSS feed
 
 {{< img src="integrations/rss/rss_setup.png" alt="RSS setup"  >}}
+
+### Validation
+
+Check the [Events Stream][1] and [Events Explorer][2] to view RSS feed activity in Datadog.
+
+## Further Reading
+
+### Documentation
+
+- [Exploring Datadog Events][3]
+
+[1]: https://app.datadoghq.com/event/stream
+[2]: https://app.datadoghq.com/event/explorer
+[3]: https://docs.datadoghq.com/events/#exploring-datadog-events

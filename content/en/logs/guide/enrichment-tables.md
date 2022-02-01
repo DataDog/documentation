@@ -67,7 +67,7 @@ Click **New Enrichment Table +**, then add a name, select AWS S3, fill out all f
 
 {{< img src="logs/guide/enrichment-tables/configure-s3-enrichment-table.png" alt="Create an Enrichment Table" style="width:100%;">}}
 
-**Note**: The upload from an S3 bucket method supports files up to 3GB.
+**Note**: The upload from an S3 bucket method supports files up to 200MB.
 
 [1]: https://app.datadoghq.com/account/settings#integrations/amazon-web-services
 [2]: https://docs.datadoghq.com/integrations/amazon_web_services/?tab=automaticcloudformation#installation

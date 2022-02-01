@@ -13,7 +13,7 @@ aliases:
 
 ## Overview
 
-Any tag applied to your AWS Lambda function automatically becomes a new dimension on which you can slice and dice your metrics, traces and logs.
+Any tag applied to your AWS Lambda function automatically becomes a new dimension on which you can filter and group your metrics, traces and logs.
 
 Tags are especially powerful when consistent across the Datadog platform. First-class support is offered for the following tags: `env`, `service` and `version`.
 

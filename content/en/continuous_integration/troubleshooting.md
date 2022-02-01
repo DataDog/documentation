@@ -3,7 +3,7 @@ title: Troubleshooting CI Visibility
 kind: documentation
 ---
 
-{{< site-region region="us5,gov" >}}
+{{< site-region region="gov" >}}
 <div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
@@ -74,9 +74,32 @@ If you can see test results data in the **Test Runs** tab, but not the **Tests**
 
 4. If no CI provider environment variables are found, tests results are sent with no Git metadata.
 
+### The tests wall time is empty
+
+If you cannot see the tests wall time it is likely that the CI provider metadata is missing. To confirm this is the case, open a test execution in the [Test Runs][3] section, and check if the `ci.pipeline.id`, `ci.pipeline.name`, `ci.pipeline.number`, or `ci.job.url` tags are missing. If these tags are not populated, then nothing shows in the wall time column.
+
+1. Tracers use the environment variables set by the CI provider to collect this information. See [Running tests inside a container][6] for a list of environment variables that the tracer attempts to read for each supported CI provider. Make sure that the environment variables have the expected values set.
+2. Check that you are running your tests in a supported CI provider. For a list of supported CI providers, see [Running tests inside a container][6]. Only these CI providers can extract the information to enrich the test metadata with CI information.
+3. If you still don't see the wall time, contact [Datadog support][1] for help.
+
+### The tests wall time is not what is expected
+
+#### How wall time is calculated
+The wall time is defined as the time difference between the start time of the first test and the end time of the last test for the given pipeline.
+
+This is done using the following algorithm:
+
+1. Compute a hash based on CI information to group the tests.
+  a. If the tests include `ci.job.url`, use this tag to calculate the hash.
+  b. If the tests don’t include `ci.job.url`, use `ci.pipeline.id` + `ci.pipeline.name` + `ci.pipeline.number` to calculate the hash.
+2. The calculated wall time is associated to a given hash. **Note**: If there are multiple jobs that execute tests, the wall time is the time difference between the start of the first test in the earliest job and the end of the last test in the latest job.
+
+#### Possible issues with wall time calculation
+If you're using a library for testing time-dependent code, like [timecop][7] for Ruby or [FreezeGun][8] for Python, it is possible that test timestamps are wrong, and therefore calculated wall times. If this is the case, make sure that modifications to time are rolled back before finishing your tests.
+
 ### Need further help?
 
-If you have another issue, or the above solutions don't work, [contact Support][1] for troubleshooting help.
+Still need help? Contact [Datadog support][1].
 
 
 [1]: /help/
@@ -85,3 +108,5 @@ If you have another issue, or the above solutions don't work, [contact Support][
 [4]: https://app.datadoghq.com/ci/test-services
 [5]: /tracing/troubleshooting/tracer_debug_logs
 [6]: /continuous_integration/setup_tests/containers/
+[7]: https://github.com/travisjeffery/timecop
+[8]: https://github.com/spulec/freezegun

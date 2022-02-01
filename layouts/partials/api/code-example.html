@@ -89,9 +89,23 @@
                 {{- else -}}
                   <span class="d-none" data-region="{{ .value }}">{{ .domain }}</span>
                 {{- end -}}
-            {{- end -}}"</span> <span class="n">DD_API_KEY</span><span class="o">=</span><span class="s1">"&lt;API-KEY&gt;"</span> <span class="n">DD_APP_KEY</span><span class="o">=</span><span class="s1">"&lt;APP-KEY&gt;"</span>
-<span class="n">{{ $lang.command }}</span> <span class="s1">"{{ $lang.example_file }}"</span></div></code></pre>
-
+            {{- end -}}"</span>
+{{- /* Render authentication in headers "DD-API-KEY: XXX" */ -}}
+{{- if isset $endpoint.action "security" -}}
+  {{- /* Find authentication per operationId */ -}}
+  {{- range $endpoint.action.security -}}
+      {{- range $key, $val := . -}}
+          {{ $authSchema := (index $securitySchemes $key) }}
+          {{- if eq $authSchema.in "header" -}}
+            &nbsp;<span class="n">{{- index $authSchema "x-env-name" -}}</span><span class="o">=</span><span class="s1">"&lt;{{- index $authSchema "x-env-name" -}}&gt;"</span>
+          {{- end -}}
+      {{- end -}}
+  {{- end -}}
+{{- else -}}
+  {{- /* Use global authentication */ -}}
+  &nbsp;<span class="n">DD_API_KEY</span><span class="o">=</span><span class="s1">"&lt;API-KEY&gt;"</span>&nbsp;<span class="n">DD_APP_KEY</span><span class="o">=</span><span class="s1">"&lt;APP-KEY&gt;"</span>
+{{- end -}}
+            &nbsp;<span class="n">{{ $lang.command }}</span> <span class="s1">"{{ $lang.example_file }}"</span></div></code></pre>
           </div>
           {{ $count = add $count 1 }}
         {{ end }}

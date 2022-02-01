@@ -13,7 +13,7 @@ further_reading:
       text: "Troubleshooting CI"
 ---
 
-{{< site-region region="us5,gov" >}}
+{{< site-region region="gov" >}}
 <div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
@@ -464,6 +464,17 @@ Send pipeline traces.
 Send pipeline traces.
 ...
 {{< /code-block >}}
+
+### The Datadog Plugin cannot write payloads to the server
+
+If the following error message appears in the **Jenkins Log**, make sure that the plugin configuration is correct.
+
+{{< code-block lang="text" >}}
+Error writing to server
+{{< /code-block >}}
+
+1. If you are using `localhost` as the hostname, try to change it to the server hostname instead.
+2. If your Jenkins instance is behind an HTTP proxy, go to **Manage Jenkins** > **Manage Plugins** > **Advanced tab** and make sure the proxy configuration is correct.
 
 ### The Datadog Plugin section does not appear in the Jenkins configuration
 

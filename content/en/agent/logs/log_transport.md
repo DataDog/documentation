@@ -1,5 +1,5 @@
 ---
-title: Agent Transport for logs
+title: Agent Transport for Logs
 kind: documentation
 description: Use the Datadog Agent to collect your logs and send them to Datadog
 further_reading:
@@ -59,7 +59,54 @@ To send logs with environment variables, configure the following:
 
 By default, the Datadog Agent uses the port `443` to send its logs to Datadog over HTTPS.
 
+## HTTPS transport
+
+**HTTPS log forwarding is the recommended configuration** for the best log collection reliability as the`200` status code is returned by the Datadog storage system:
+
+{{< img src="agent/HTTPS_intake_reliability_schema.png" alt="HTTPS Intake Schema"  style="width:80%;">}}
+
+Using HTTP, the Agent sends log batches with the following limits:
+
+* Maximum batch size: 1MB
+* Maximum size for a single log: 256kB
+* Maximum number of logs in a batch: 200
+
+### Log compression
+
+The `compression_level` parameter (or `DD_LOGS_CONFIG_COMPRESSION_LEVEL`) accepts values from `0` (no compression) to `9` (maximum compression but higher resource usage). The default value is `6`.
+
+See the [Datadog Agent overhead section][2] for more information about Agent resource usage when compression is enabled.
+
+For Agent versions prior to 6.19 / 7.19, you need to enforce compression by updating the Agent's [main configuration file][1] (`datadog.yaml`) with:
+
+```yaml
+logs_enabled: true
+logs_config:
+  use_http: true
+  use_compression: true
+  compression_level: 6
+```
+
+### Configure the batch wait time
+
+The Agent waits up to 5 seconds to fill each batch (either in content size or number of logs). Therefore, in the worst case scenario (when few logs are generated) switching to HTTPS might add a 5-second latency compared to the TCP transport which sends all logs in real time.
+
+To change the maximum time the Datadog Agent waits to fill each batch, add the following configuration in the Agent's [main configuration file][1] (`datadog.yaml`):
+
+```yaml
+logs_config:
+  batch_wait: 2
+```
+
+Or use the `DD_LOGS_CONFIG_BATCH_WAIT=2` environment variable. The unit is in seconds and must be an integer between `1` and `10`.
+
+### HTTPS proxy configuration
+
+When logs are sent through HTTPS, use the same [set of proxy settings][3] as the other data types to send logs through a web proxy.
+
 [1]: /agent/guide/agent-configuration-files/
+[2]: /agent/basic_agent_usage/#agent-overhead
+[3]: /agent/proxy/
 {{% /tab %}}
 {{% tab "TCP" %}}
 
@@ -77,61 +124,12 @@ To send logs with environment variables, configure the following:
 
 By default, the Datadog Agent sends its logs to Datadog over TLS-encrypted TCP. This requires outbound communication (on port `10516` for Datadog US site and port `443`for Datadog EU site).
 
-
-
 [1]: /agent/guide/agent-configuration-files/
 {{% /tab %}}
 {{< /tabs >}}
 
 **Note**: Setting up a [SOCKS5 proxy][2] server enforces TCP transport because socks5 proxies are not yet supported in HTTPS with compression.
 
-## HTTPS transport
 
-**HTTPS log forwarding is the recommended configuration** for the best log collection reliability as the`200` status code is returned by the Datadog storage system:
-
-{{< img src="agent/HTTPS_intake_reliability_schema.png" alt="HTTPS Intake Schema"  style="width:80%;">}}
-
-Using HTTP, the Agent sends log batches with the following limits:
-
-* Maximum batch size: 1MB
-* Maximum size for a single log: 256kB
-* Maximum number of logs in a batch: 200
-
-### Log compression
-
-The `compression_level` parameter (or `DD_LOGS_CONFIG_COMPRESSION_LEVEL`) accepts values from `0` (no compression) to `9` (maximum compression but higher resource usage). The default value is `6`.
-
-See the [Datadog Agent overhead section][3] for more information about Agent resource usage when compression is enabled.
-
-For Agent versions prior to 6.19 / 7.19, you need to enforce compression by updating the Agent's [main configuration file][1] (`datadog.yaml`) with:
-
-```yaml
-logs_enabled: true
-logs_config:
-  use_http: true
-  use_compression: true
-  compression_level: 6
-```
-
-### Configure the batch wait time
-
-The Agent waits up to 5 seconds to fill each batch (either in content size or number of logs). Therefore, in the worst case scenario (when very few logs are generated) switching to HTTPS might add a 5-second latency compared to the TCP transport which sends all logs in real time.
-
-To change the maximum time the Datadog Agent waits to fill each batch, add the following configuration in the Agent's [main configuration file][1] (`datadog.yaml`):
-
-```yaml
-logs_config:
-  batch_wait: 2
-```
-
-Or use the `DD_LOGS_CONFIG_BATCH_WAIT=2` environment variable. The unit is in seconds and must be an integer between `1` and `10`.
-
-### HTTPS proxy configuration
-
-When logs are sent through HTTPS, use the same [set of proxy settings][4] as the other data types to send logs through a web proxy.
-
-
-[1]: /agent/guide/agent-configuration-files/
+[1]: /agent/guide/agent-commands/?tab=agentv6v7#service-status
 [2]: /agent/logs/proxy/?tab=socks5
-[3]: /agent/basic_agent_usage/#agent-overhead
-[4]: /agent/proxy/

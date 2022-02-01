@@ -22,12 +22,12 @@ Open the Windows Registry. (search for regedit.exe, the default name of the regi
 \HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\EventLog\
 ```
 
-Create a new key with the name of the event log you're wanting to monitor. Using the syntax of path-to-folder/LogFileName (i.e. the Full Name found in the Event Viewer)
+Create a new key with the name of the event log you're wanting to monitor. Using the syntax of path-to-folder/LogFileName (as in the Full Name found in the Event Viewer).
 {{< img src="integrations/faq/image2.png" alt="image2"  >}}
 
 {{< img src="integrations/faq/image3.png" alt="image3"  >}}
 
-Next, you'll need to add three values to this key. First, add the path to the log file as a String Value (REG_SZ) named "File":
+After creating the key, add three values to this key. First, add the path to the log file as a String Value (REG_SZ) named "File":
 {{< img src="integrations/faq/image4.png" alt="image4"  >}}
 
 Next, add the Full Name of the Log file as a String Value (REG_SZ) named "Primary Module":

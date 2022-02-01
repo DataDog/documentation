@@ -10,8 +10,10 @@ further_reading:
       text: "Troubleshooting CI"
 ---
 
-{{< site-region region="us5,gov" >}}
-<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">
+The selected Datadog site ({{< region-param key="dd_site_name" >}}) is not supported.
+</div>
 {{< /site-region >}}
 
 JUnit test report files are XML files that contain test execution information, such as test and suite names, pass/fail status, duration, and sometimes error logs. Although it was introduced by the [JUnit][1] testing framework, many other popular frameworks are able to output results using this format.
@@ -38,27 +40,13 @@ datadog-ci junit upload --service <service_name> <path> [<path> ...]
 
 Specify a valid [Datadog API key][3] in the `DATADOG_API_KEY` environment variable, and the environment where tests were run (for example, `local` when uploading results from a developer workstation, or `ci` when uploading them from a CI provider) in the `DD_ENV` environment variable. For example:
 
-{{< site-region region="us" >}}
-<pre class="chroma">
-<code class="language-bash" data-lang="bash">
-DD_ENV=ci DATADOG_API_KEY=&lt;key&gt; datadog-ci junit upload \
+<pre>
+<code>
+DD_ENV=ci DATADOG_API_KEY=&lt;api_key&gt; DATADOG_SITE={{< region-param key="dd_site" >}} datadog-ci junit upload \
   --service my-api-service \
   unit-tests/junit-reports e2e-tests/single-report.xml
 </code>
 </pre>
-{{< /site-region >}}
-{{< site-region region="eu,us3" >}}
-<pre class="chroma">
-<code class="language-bash" data-lang="bash">
-DD_ENV=ci DATADOG_API_KEY=&lt;key&gt; DATADOG_SITE={{< region-param key="dd_site" >}} datadog-ci junit upload \
-  --service my-api-service \
-  unit-tests/junit-reports e2e-tests/single-report.xml
-</code>
-</pre>
-{{< /site-region >}}
-{{< site-region region="us5,gov" >}}
-<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
 
 ## Configuration settings
 
@@ -98,20 +86,16 @@ The following environment variables are supported:
 : [Datadog API key][3] used to authenticate the requests.<br/>
 **Default**: (none)
 
-
-{{< site-region region="eu,us3" >}}
 Additionally, configure the Datadog site to use the selected one ({{< region-param key="dd_site_name" >}}):
 
 `DATADOG_SITE` (Required)
-: The Datadog site to upload results to.<br/>
+: The [Datadog site][4] to upload results to.<br/>
 **Default**: `datadoghq.com`<br/>
 **Selected site**: {{< region-param key="dd_site" code="true" >}}
-{{< /site-region >}}
-
 
 ## Collecting repository and commit metadata
 
-Datadog uses Git information for visualizing your test results and grouping them by repository and commit. Git metadata is collected by the Datadog CI CLI from CI provider environment variables and the local `.git` folder in the project path, if available. To read this directory, the [`git`][4] binary is required.
+Datadog uses Git information for visualizing your test results and grouping them by repository and commit. Git metadata is collected by the Datadog CI CLI from CI provider environment variables and the local `.git` folder in the project path, if available. To read this directory, the [`git`][5] binary is required.
 
 If you are running tests in non-supported CI providers or with no `.git` folder, you can set the Git information manually using environment variables. These environment variables take precedence over any auto-detected information. Set the following environment variables to provide Git information:
 
@@ -254,4 +238,5 @@ To be processed, the `name` attribute in the `<property>` element must have the 
 [1]: https://junit.org/junit5/
 [2]: https://www.npmjs.com/package/@datadog/datadog-ci
 [3]: https://app.datadoghq.com/organization-settings/api-keys
-[4]: https://git-scm.com/downloads
+[4]: /getting_started/site/
+[5]: https://git-scm.com/downloads

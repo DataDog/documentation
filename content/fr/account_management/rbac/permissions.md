@@ -7,12 +7,12 @@ disable_toc: true
 further_reading:
   - link: /account_management/rbac/
     tag: Documentation
-    text: 'Découvrir comment créer, mettre à jour et supprimer un rôle'
-  - link: '/api/v2/roles/#enumerer-les-autorisations'
+    text: Découvrir comment créer, mettre à jour et supprimer un rôle
+  - link: /api/v2/roles/#enumerer-les-autorisations
     tag: Documentation
     text: Gérer vos autorisations avec l'API Permission
 ---
-Une fois votre rôle créé, vous pouvez attribuer ou supprimer des autorisations pour ce rôle directement en [le mettant à jour depuis l'application Datadog][1] ou via [l'API Permission de Datadog][2]. Vous trouverez ci-dessous la liste des autorisations disponibles.
+Une fois votre rôle créé, attribuez ou retirez des autorisations pour ce rôle directement en [le mettant à jour dans Datadog][1] ou via [l'API Permission de Datadog][2]. Vous trouverez ci-dessous la liste des autorisations disponibles.
 
 ## Présentation
 

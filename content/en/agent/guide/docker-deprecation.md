@@ -9,9 +9,11 @@ Kubernetes is deprecating Docker as a runtime starting after version 1.20, and s
 
 - GKE 1.19 [deprecated Docker and uses containerd by default, on new nodes][2].
 
-- EKS 1.22 [deprecates Docker and uses containerd by default][3].
+- EKS 1.22 [deprecated Docker and uses containerd by default][3].
 
-If you are running a version of Kubernetes where Docker has been deprecated, the Docker socket is no longer present, or has no information about the containers running by Kubernetes, and the Docker check does not work. You can find details about Docker runtime on [kubernetes.io][4]. This means that you must enable either the [containerd][5] or the [CRI-O][6] check depending on the container runtime you are using. The container metrics collected from the new container runtime replace the Docker metrics.
+- OKE 1.20 [deprecated Docker and uses CRI-O by default][4].
+
+If you are running a version of Kubernetes where Docker has been deprecated, the Docker socket is no longer present, or has no information about the containers running by Kubernetes, and the Docker check does not work. You can find details about Docker runtime on [kubernetes.io][5]. This means that you must enable either the [containerd][6] or the [CRI-O][7] check depending on the container runtime you are using. The container metrics collected from the new container runtime replace the Docker metrics.
 
 With version 7.27+ of the Datadog Agent, the Agent automatically detects the environment you are running, and you do not need to make any configuration changes.
 
@@ -67,6 +69,7 @@ volumes:
 [1]: https://github.com/Azure/AKS/releases/tag/2020-11-16
 [2]: https://cloud.google.com/kubernetes-engine/docs/release-notes#December_08_2020
 [3]: https://aws.amazon.com/blogs/containers/amazon-eks-1-21-released/
-[4]: https://kubernetes.io/docs/tasks/administer-cluster/migrating-from-dockershim/check-if-dockershim-deprecation-affects-you/#role-of-dockershim
-[5]: /integrations/containerd/
-[6]: /integrations/crio/
+[4]: https://docs.oracle.com/en-us/iaas/releasenotes/changes/52d34150-0cb8-4a0f-95f3-924dec5a3c83/
+[5]: https://kubernetes.io/docs/tasks/administer-cluster/migrating-from-dockershim/check-if-dockershim-deprecation-affects-you/#role-of-dockershim
+[6]: /integrations/containerd/
+[7]: /integrations/crio/

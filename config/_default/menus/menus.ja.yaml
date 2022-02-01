@@ -113,7 +113,7 @@ main_left:
     parent: 'product'
   - identifier: database
     name: データベース モニタリング
-    pre: '<i class="icon-dbm align-middle"></i>'
+    pre: '<i class="icon-database-2 align-middle"></i>'
     url: 'https://www.datadoghq.com/ja/product/database-monitoring'
     weight: 19
     parent: 'product'
@@ -1852,7 +1852,7 @@ main:
     identifier: security_monitoring_detection_rules
     weight: 201
   - name: デフォルトの検出ルール
-    url: security_monitoring/default_rules
+    url: security_platform/default_rules
     parent: security_compliance_monitoring
     identifier: security_monitoring_default_detection_rules
     weight: 3
@@ -2328,7 +2328,7 @@ main:
     weight: 210000
   - name: アカウントの管理
     url: account_management/
-    pre: cog
+    pre: cog-2
     identifier: account_management
     weight: 220000
   - name: ユーザー管理

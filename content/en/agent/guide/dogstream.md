@@ -82,7 +82,7 @@ Custom parsing functions must:
 
 ### Metrics collection
 
-Let's imagine that you're collecting metrics from logs that are not canonically formatted, but which are intelligently delimited by a unique character, logged as the following:
+Imagine that you're collecting metrics from logs that are not canonically formatted, but which are intelligently delimited by a unique character, logged as the following:
 
 ```text
 user.crashes|2016-05-28 20:24:43.463930|24|LotusNotes,Outlook,Explorer
@@ -238,7 +238,7 @@ dogstreams: /Users/Documents/Parser/test.log:/Users/Documents/Parser/myparser.py
 
 ## Troubleshooting
 
-Bugs happen, so being able to see the traceback from your log-parsers is very important. You can do this if you are running the Agent with its [Agent logs][6] set at the "DEBUG" level. The Agent's log-level can be set in the `datadog.conf` by uncommenting and editing this [line][7], and then [restarting the Agent][8]. Once that's configured properly, traceback resulting from errors in your custom log-parser can be found in the `collector.log` file, and it generally includes the string checks.collector(datadog.py:278) | Error while parsing line in them (see the [Agent code][9] where the error is likely to be thrown).
+Bugs happen, so being able to see the traceback from your log-parsers is important. You can do this if you are running the Agent with its [Agent logs][6] set at the "DEBUG" level. The Agent's log-level can be set in the `datadog.conf` by uncommenting and editing this [line][7], and then [restarting the Agent][8]. Once that's configured properly, traceback resulting from errors in your custom log-parser can be found in the `collector.log` file, and it generally includes the string checks.collector(datadog.py:278) | Error while parsing line in them (see the [Agent code][9] where the error is likely to be thrown).
 
 **Note**: Whenever you make a change to your custom log-parser, [restart the Agent][8] to put that change into effect.
 

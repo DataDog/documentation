@@ -1,7 +1,8 @@
 ---
 title: Account Management FAQ
 kind: faq
-private: true
+cascade: 
+  - private: true
 ---
 
 ## Account management

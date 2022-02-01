@@ -115,16 +115,20 @@ clean-auto-doc: ##Remove all doc automatically created
 	rm -f content/en/serverless/libraries_integrations/macro.md ;fi
 	@if [ content/en/serverless/libraries_integrations/cli.md ]; then \
 	rm -f content/en/serverless/libraries_integrations/cli.md ;fi
+	@if [ content/en/synthetics/cicd_integrations/github_actions.md ]; then \
+	rm -f content/en/synthetics/cicd_integrations/github_actions.md ;fi
 	@if [ content/en/real_user_monitoring/android/_index.md ]; then \
 	rm -f content/en/real_user_monitoring/android/_index.md ;fi
 	@if [ content/en/real_user_monitoring/android/data_collected.md ]; then \
 	rm -f content/en/real_user_monitoring/android/data_collected.md ;fi
 	@if [ content/en/real_user_monitoring/android/advanced_configuration.md ]; then \
 	rm -f content/en/real_user_monitoring/android/advanced_configuration.md ;fi
-	@if [ content/en/real_user_monitoring/android/troubleshooting.md ]; then \
-	rm -f content/en/real_user_monitoring/android/troubleshooting.md ;fi
 	@if [ content/en/real_user_monitoring/android/integrated_libraries.md ]; then \
 	rm -f content/en/real_user_monitoring/android/integrated_libraries.md ;fi
+	@if [ content/en/real_user_monitoring/android/mobile_vitals.md ]; then \
+	rm -f content/en/real_user_monitoring/android/mobile_vitals.md ;fi
+	@if [ content/en/real_user_monitoring/android/troubleshooting.md ]; then \
+	rm -f content/en/real_user_monitoring/android/troubleshooting.md ;fi
 	@if [ content/en/real_user_monitoring/error_tracking/android.md ]; then \
 	rm -f content/en/real_user_monitoring/error_tracking/android.md ;fi
 	@if [ content/en/real_user_monitoring/error_tracking/ios.md ]; then \
@@ -260,11 +264,13 @@ examples/java: examples/datadog-api-client-java clean-java-examples
 
 examples/python: examples/datadog-api-client-python clean-python-examples
 	@cd examples/datadog-api-client-python; ./extract-code-blocks.sh $(EXAMPLES_DIR) || (echo "Error copying Python code examples, aborting build."; exit 1); if [ -d examples ]; then cp -R examples/* $(EXAMPLES_DIR)/; fi
+	@find examples/content -iname \*.py -exec mv {} {}beta \;
 
 	-cp -Rn examples/content ./
 
 examples/ruby: examples/datadog-api-client-ruby clean-ruby-examples
 	@cd examples/datadog-api-client-ruby; ./extract-code-blocks.sh $(EXAMPLES_DIR) || (echo "Error copying Ruby code examples, aborting build."; exit 1); if [ -d examples ]; then cp -R examples/* $(EXAMPLES_DIR)/; fi
+	@find examples/content -iname \*.rb -exec mv {} {}beta \;
 
 	-cp -Rn examples/content ./
 

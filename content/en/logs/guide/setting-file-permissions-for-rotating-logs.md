@@ -106,7 +106,7 @@ The easiest path here is to give everyone read access to the file in the logrota
 }
 ```
 
-Each common off-the-shelf application will follow a similar nomenclature. The advantage is that we avoid providing privileged access to an individual account and use a standardized practice. This will keep your audit rules in check.
+Each common off-the-shelf application will follow a similar nomenclature. The advantage is that you avoid providing privileged access to an individual account and use a standardized practice. This keeps your audit rules in check.
 
 ## Further Reading
 

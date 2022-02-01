@@ -1,0 +1,23 @@
+{
+  "layout_type": "ordered",
+  "title": "Example-Create_a_new_dashboard_with_timeseries_widget_containing_style_attributes with timeseries widget",
+  "widgets": [
+    {
+      "definition": {
+        "type": "timeseries",
+        "requests": [
+          {
+            "q": "sum:trace.test.errors{env:prod,service:datadog-api-spec} by {resource_name}.as_count()",
+            "on_right_yaxis": false,
+            "style": {
+              "palette": "warm",
+              "line_type": "solid",
+              "line_width": "normal"
+            },
+            "display_type": "bars"
+          }
+        ]
+      }
+    }
+  ]
+}

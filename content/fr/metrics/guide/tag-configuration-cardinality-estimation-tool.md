@@ -39,7 +39,7 @@ https://api.datadoghq.com/metric/estimate?metric_name=dist.dd.dogweb.latency&gro
 
 | Champ                     | Type             | Description                                                                                                                                                                      |
 |---------------------------|------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `estimated_output_series` | nombre entier          | Total des sorties uniques de série temporelle lors de l'intervalle indiqué dans la requête des groupes spécifiés. Début de l'intervalle : Heure actuelle - `hours_ago`. Fin de l'intervalle : `hours_ago` - (Heure actuelle - `timespan_h`). |
+| `estimated_output_series` | nombre entier          | Nombre de valeurs des sorties uniques de série temporelle lors de l'intervalle indiqué dans la requête des groupes spécifiés. Début de l'intervalle : Heure actuelle - `hours_ago`. Fin de l'intervalle : `hours_ago` - (Heure actuelle - `timespan_h`). |
 | `estimate_type`           | chaîne           | Type de la métrique estimée. Valeur possibles : [distribution][2], [percentile][3], [count][4] ou [gauge][5].                                                                                         |
 | `as_of`                   | chaîne de timestamp | Le timestamp au format UTC des dernières données utilisées ( `hours_ago` à compter de l'heure actuelle). Exemple : `2020-04-16 09:25:40.214469`.                                                              |
 

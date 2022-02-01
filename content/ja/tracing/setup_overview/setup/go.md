@@ -11,10 +11,10 @@ code_lang: go
 type: multi-code-lang
 code_lang_weight: 20
 further_reading:
-  - link: 'https://github.com/DataDog/dd-trace-go/tree/v1'
+  - link: https://github.com/DataDog/dd-trace-go/tree/v1
     tag: GitHub
     text: ソースコード
-  - link: 'https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace'
+  - link: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace
     tag: GoDoc
     text: パッケージページ
   - link: /tracing/visualization/
@@ -30,17 +30,19 @@ Go トレーサーには、Go `1.12+` および Datadog Agent `>= 5.21.1` が必
 
 ## インストールと利用開始
 
-API の使用に関する構成手順と詳細については、Datadog [API ドキュメント][2]を参照してください。手動インスツルメンテーションについては、自動インスツルメンテーションをサポートする Go ライブラリおよびフレームワークについて、以下の[インテグレーションセクション](#integrations)を使用してください。
+コンフィギュレーションおよび API の使用の詳細については、Datadog の [API ドキュメント][2]を参照してください。
 
 APM で使用される用語の説明については、[「APM を開始する」セクション][3]を参照してください。寄稿の詳細については、公式リポジトリ [README.md][4] を確認してください。
 
 古いバージョンのトレーサー（例: v<0.6.x）から最新バージョンに移行する必要がある場合は、[移行ドキュメント][5]を参照してください。
 
+トレースを設定すると、Continuous Profiler も設定され、アプリからプロファイリングデータの受信を開始するために必要なのは[プロファイラーを有効にする][6]ことだけです。
+
 ### インストール
 
 #### アプリ内のドキュメントに従ってください (推奨)
 
-Datadog アプリ内の[クイックスタート手順][6]に従って、最高のエクスペリエンスを実現します。例:
+Datadog アプリ内の[クイックスタート手順][7]に従って、最高のエクスペリエンスを実現します。例:
 
 - デプロイコンフィギュレーション (ホスト、Docker、Kubernetes、または Amazon ECS) を範囲とする段階的な手順。
 - `service`、`env`、`version` タグを動的に設定します。
@@ -56,10 +58,10 @@ Datadog には、一連のライブラリとフレームワークをインスツ
 ## コンフィギュレーション
 
 Go トレーサーは、コンフィギュレーション用の追加の環境変数と関数をサポートしています。
-[コンフィギュレーションドキュメント][7]で利用可能なすべてのオプションを参照してください。
+[コンフィギュレーションドキュメント][8]で利用可能なすべてのオプションを参照してください。
 
 サービスに `env`、`service`、`version` を設定するには、`DD_ENV`、`DD_SERVICE`、`DD_VERSION` を使用することを強くおすすめします。
-このような環境変数の推奨構成方法については、[統合サービスタグ付け][8]のドキュメントをご参照ください。変数は、Go トレーサーのバージョン 1.24.0 以降で利用可能です。
+このような環境変数の推奨構成方法については、[統合サービスタグ付け][9]のドキュメントをご参照ください。変数は、Go トレーサーのバージョン 1.24.0 以降で利用可能です。
 
 トレーサーの API を通じて、`env`、`service`、`version` を指定することもできます。
 
@@ -121,7 +123,7 @@ func main() {
         defer tracer.Stop()
     }
     ```
-{{< site-region region="us3,eu,gov" >}} 
+{{< site-region region="us3,us5,eu,gov" >}} 
 
 4. Datadog Agent の `DD_SITE` を {{< region-param key="dd_site" code="true" >}} に設定して、Agent が正しい Datadog の場所にデータを送信するようにします。
 
@@ -138,7 +140,7 @@ AWS Lambda で Datadog APM を設定するには、[サーバーレス関数の�
 {{% /tab %}}
 {{% tab "その他の環境" %}}
 
-トレースは、[Heroku][1]、[Cloud Foundry][2]、[AWS Elastic Beanstalk][3]、[Azure App Services Extension][4] など、他の多くの環境で利用できます。
+トレースは、[Heroku][1]、[Cloud Foundry][2]、[AWS Elastic Beanstalk][3]、[Azure App Service][4] など、他の多くの環境で利用できます。
 
 その他の環境については、その環境の[インテグレーション][5]のドキュメントを参照し、セットアップの問題が発生した場合は[サポートにお問い合わせ][6]ください。
 
@@ -153,11 +155,11 @@ AWS Lambda で Datadog APM を設定するには、[サーバーレス関数の�
 
 ## APM 環境名の構成
 
-[APM 環境名][9]は、[Agent 内][10] またはトレーサーの [WithEnv][7] スタートオプションを使用して構成できます。
+[APM 環境名][10]は、[Agent 内][11] またはトレーサーの [WithEnv][8] スタートオプションを使用して構成できます。
 
 ### B3 ヘッダーの抽出と挿入
 
-Datadog APM トレーサーは、分散型トレーシングの [B3 ヘッダーの抽出][11]と挿入に対応しています。
+Datadog APM トレーサーは、分散型トレーシングの [B3 ヘッダーの抽出][12]と挿入に対応しています。
 
 分散したヘッダーの挿入と抽出は、挿入/抽出スタイルを構成することで制御されます。`Datadog` と `B3` の 2 つのスタイルがサポートされています。
 
@@ -180,9 +182,10 @@ Datadog APM トレーサーは、分散型トレーシングの [B3 ヘッダー
 [3]: /ja/tracing/visualization/
 [4]: https://github.com/DataDog/dd-trace-go/tree/v1#contributing
 [5]: https://github.com/DataDog/dd-trace-go/tree/v1/MIGRATING.md
-[6]: https://app.datadoghq.com/apm/docs
-[7]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#StartOption
-[8]: /ja/getting_started/tagging/unified_service_tagging
-[9]: /ja/tracing/advanced/setting_primary_tags_to_scope/#environment
-[10]: /ja/getting_started/tracing/#environment-name
-[11]: https://github.com/openzipkin/b3-propagation
+[6]: /ja/tracing/profiler/enabling/?code-lang=go
+[7]: https://app.datadoghq.com/apm/docs
+[8]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#StartOption
+[9]: /ja/getting_started/tagging/unified_service_tagging
+[10]: /ja/tracing/advanced/setting_primary_tags_to_scope/#environment
+[11]: /ja/getting_started/tracing/#environment-name
+[12]: https://github.com/openzipkin/b3-propagation

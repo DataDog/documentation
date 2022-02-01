@@ -38,9 +38,9 @@ If you haven't already, create a [Datadog account][1]. Install the Agent on a ho
 
 Determine the purpose of the dashboard you're creating. A dashboard can help you and your teammates focus on the right work. A _team dashboard_ reminds you what's high priority, what needs attention, and what you're succeeding at. Make a team dashboard (or multiple) with the information that people most frequently need they have to dig for. SLO and SLI details make for an excellent team dashboard.
 
-A dashboard connected to real-time data is a powerful tool for guiding conversations with managers and executives. A good _executive dashboard_ can show that you are working on the most important things, how much a service is costing you, or whether you're progressing toward goals, meeting your SLOs, and scaling effectively. Executive dashboards are most effective when they answer these questions at the highest level and are interconnected to drill down into the answer.
+A dashboard connected to real-time data is a powerful tool for guiding conversations with managers and executives. A good _executive dashboard_ can show that you are working on the most important things, how much a service is costing you, or whether you're progressing toward goals, meeting your SLOs, and scaling effectively. Executive dashboards are most effective when they answer these questions at the highest level and are interconnected to compare and analyze the answer.
 
-Dashboards can also help you track down persistent problems and fix them. _Troubleshooting dashboards_ often start as a scratch pad of things you know, and gradually build as you discover more. For example, start with a graph or widget from another dashboard or view that shows a problem. You can then drill down from there to find your solution.
+Dashboards can also help you track down persistent problems and fix them. _Troubleshooting dashboards_ often start as a scratch pad of things you know, and gradually build as you discover more. For example, start with a graph or widget from another dashboard or view that shows a problem. You can further analyze from there to find your solution.
 
 ## Explore out-of-the-box dashboards
 
@@ -55,7 +55,7 @@ Datadog provides many out-of-the-box dashboards for features and integrations. F
 A common way to start a dashboard is by encountering a similar dashboard already in use, and adjusting it to suit your needs. If you find a dashboard that answers many of the questions you want your dashboard to answer: 
 
 1. Clone it by opening the dashboard and selecting **Clone dashboard** from the Settings menu (the gear icon on the right-hand side). This creates an unlinked copy of the dashboard; changes you make in the new copy don't affect the source widget.
-    {{< img src="getting_started/dashboards/cloning_dashboard.gif" alt="Cloning a dashboard"  >}}
+    {{< img src="getting_started/dashboards/cloning_dashboard.mp4" alt="Cloning a dashboard" video=true >}}
 2. Edit the clone by opening it and clicking **Edit widgets**. 
 3. Delete widgets you don't need by selecting **Delete** from the widget's Settings menu.
 4. Move things around to suit your needs. Groups and individual widgets can be dragged and dropped into new locations in the dashboard.
@@ -94,15 +94,15 @@ Timeseries graphs of metrics are useful, but dashboards can contain many types o
 
 See [Widgets][5] for more information and examples of setting up these graphs.
 
-## Organize, link, and drill down
+## Organize, link, and analyze
 
 Move graphs around so they create a flow for the work you do or conversations you have around the dashboard. Drag and drop widgets to place them. On screenboards, use Free Text widgets to organize sections under headings. On timeboards, add a Group widget that can contain multiple widgets, and can collapse out of the way when you're viewing the dashboard.
 
 There are two ways to create links from a dashboard to any target URL:
 
  - Add a Notes and Links widget, which can contain Markdown formatted text, including links. The widget editor includes Markdown formatting tips.
- - Create a Custom link from a widget's Settings (gear) menu. Custom links can interpolate variables and template variables, so that the link changes according to what the user has selected when they click, taking them to exactly the right place for drilling down into data or taking corrective action. 
-     {{< img src="getting_started/dashboards/opening_custom_link.gif" alt="Opening a custom link"  >}}
+ - Create a Custom link from a widget's Settings (gear) menu. Custom links can interpolate variables and template variables, so that the link changes according to what the user has selected when they click, taking them to exactly the right place for analyzing data or taking corrective action. 
+     {{< img src="getting_started/dashboards/opening_custom_link.mp4" alt="Opening a custom link" video=true >}}
 
 ## What's next 
 

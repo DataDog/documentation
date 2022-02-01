@@ -4,7 +4,7 @@ kind: documentation
 description: Advanced Configuration for MySQL Database Monitoring
 
 ---
-{{< site-region region="us3,us5,gov" >}}
+{{< site-region region="us5,gov" >}}
 <div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
 {{< /site-region >}}
 
@@ -54,7 +54,7 @@ instances:
 
 ## Raising the sampling rate
 
-If you have queries that are relatively infrequent or execute very quickly, raise the sampling rate by lowering the `collection_interval` value to collect samples more frequently. 
+If you have queries that are relatively infrequent or execute quickly, raise the sampling rate by lowering the `collection_interval` value to collect samples more frequently.
 
 Set the `collection_interval` in your database instance configuration of the Datadog Agent. The default value is 1. Lower the value to a smaller interval:
 
@@ -62,7 +62,7 @@ Set the `collection_interval` in your database instance configuration of the Dat
 instances:
   - dbm: true
     ...
-    query_samples:        
+    query_samples:
         collection_interval: 0.1
 ```
 

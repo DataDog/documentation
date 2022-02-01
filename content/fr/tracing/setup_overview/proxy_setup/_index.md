@@ -4,29 +4,29 @@ kind: documentation
 further_reading:
   - link: /tracing/visualization/
     tag: Utiliser l'UI de l'APM
-    text: 'Explorer vos services, ressources et traces'
-  - link: 'https://www.envoyproxy.io/'
+    text: Explorer vos services, ressources et traces
+  - link: https://www.envoyproxy.io/
     tag: Documentation
     text: Site Web d'Envoy
-  - link: 'https://www.envoyproxy.io/docs/envoy/latest/'
+  - link: https://www.envoyproxy.io/docs/envoy/latest/
     tag: Documentation
     text: Documentation Envoy
-  - link: 'https://www.nginx.com/'
+  - link: https://www.nginx.com/
     tag: Documentation
     text: Site Web de NGINX
-  - link: 'https://kubernetes.github.io/ingress-nginx/user-guide/third-party-addons/opentracing/'
+  - link: https://kubernetes.github.io/ingress-nginx/user-guide/third-party-addons/opentracing/
     tag: Documentation
     text: NGINX Ingress Controller OpenTracing
-  - link: 'https://github.com/opentracing-contrib/nginx-opentracing'
+  - link: https://github.com/opentracing-contrib/nginx-opentracing
     tag: Code source
     text: Plug-in NGINX pour OpenTracing
-  - link: 'https://istio.io/'
+  - link: https://istio.io/
     tag: Documentation
     text: Site Web d'Istio
-  - link: 'https://istio.io/docs/'
+  - link: https://istio.io/docs/
     tag: Documentation
     text: Documentation Istio
-  - link: 'https://github.com/DataDog/dd-opentracing-cpp'
+  - link: https://github.com/DataDog/dd-opentracing-cpp
     tag: Code source
     text: Client Datadog OpenTracing C++
 aliases:
@@ -109,7 +109,7 @@ Enfin, les sections `http_connection_manager` doivent inclure un bloc de configu
 
 Une fois cette configuration terminée, les requêtes HTTP vers Envoy démarrent et propagent les traces Datadog, qui apparaissent alors dans l'interface de l'APM.
 
-## Exemple de configuration Envoy (pour Envoy v1.14)
+## Exemple de configuration Envoy pour la version 1.14
 
 Un exemple de configuration est fourni ici pour montrer le placement des éléments requis pour activer le tracing avec l'APM Datadog.
 
@@ -221,15 +221,16 @@ Les [variables d'environnement][2] dépendent de la version du traceur C++ inté
 
 | Version d'Envoy | Version du traceur C++ |
 |---------------|--------------------|
+| v1.18 | v1.2.1 |
+| v1.17 | v1.1.5 |
+| v1.16 | v1.1.5 |
+| v1.15 | v1.1.5 |
 | v1.14 | v1.1.3 |
 | v1.13 | v1.1.1 |
 | v1.12 | v1.1.1 |
 | v1.11 | v0.4.2 |
 | v1.10 | v0.4.2 |
 | v1.9 | v0.3.6 |
-
-
-
 
 [1]: https://github.com/DataDog/dd-opentracing-cpp/tree/master/examples/envoy-tracing
 [2]: /fr/tracing/setup/cpp/#environment-variables
@@ -248,13 +249,13 @@ Une solution consiste à exécuter NGINX à partir d'un conteneur Docker. Un exe
 
 Les plug-ins suivants doivent être installés :
 
-- Plug-in NGINX pour OpenTracing - [linux-amd64-nginx-${VERSION_NGINX}-ngx_http_module.so.tgz][3] : installé dans `/usr/lib/nginx/modules`
+- Plug-in NGINX pour OpenTracing - [linux-amd64-nginx-${NGINX_VERSION}-ot16-ngx_http_module.so.tgz][3] : installé dans `/usr/lib/nginx/modules`
 - Plug-in Datadog OpenTracing C++ - [linux-amd64-libdd_opentracing_plugin.so.gz][4] : installé à un emplacement accessible pour NGINX, p. ex. `/usr/local/lib`
 
 Commandes pour télécharger et installer ces modules :
 
 ```bash
-# Récupérer le dernier numéro de version depuis Github.
+# Récupérer le dernier numéro de version depuis GitHub.
 get_latest_release() {
   wget -qO- "https://api.github.com/repos/$1/releases/latest" |
     grep '"tag_name":' |
@@ -264,7 +265,7 @@ NGINX_VERSION=1.17.3
 OPENTRACING_NGINX_VERSION="$(get_latest_release opentracing-contrib/nginx-opentracing)"
 DD_OPENTRACING_CPP_VERSION="$(get_latest_release DataDog/dd-opentracing-cpp)"
 # Installer le plug-in NGINX pour OpenTracing
-wget https://github.com/opentracing-contrib/nginx-opentracing/releases/download/${OPENTRACING_NGINX_VERSION}/linux-amd64-nginx-${NGINX_VERSION}-ngx_http_module.so.tgz
+https://github.com/opentracing-contrib/nginx-opentracing/releases/download/${OPENTRACING_NGINX_VERSION}/linux-amd64-nginx-${NGINX_VERSION}-ot16-ngx_http_module.so.tgz
 tar zxf linux-amd64-nginx-${NGINX_VERSION}-ngx_http_module.so.tgz -C /usr/lib/nginx/modules
 # Installer le plug-in C++ Datadog pour Opentracing
 wget https://github.com/DataDog/dd-opentracing-cpp/releases/download/${DD_OPENTRACING_CPP_VERSION}/linux-amd64-libdd_opentracing_plugin.so.gz
@@ -290,6 +291,8 @@ Le bloc `http` active le module OpenTracing et charge le traceur Datadog :
     # Charger l'implémentation de tracing Datadog et le fichier de configuration donné.
     opentracing_load_tracer /usr/local/lib/libdd_opentracing_plugin.so /etc/dd-config.json;
 ```
+
+Le bloc `log_format with_trace_id` assure la corrélation entre les logs et les traces. Consultez le [fichier d'exemple de configuration NGINX][5] pour découvrir le format complet à utiliser. La valeur `$opentracing_context_x_datadog_trace_id` enregistre l'ID de la trace, tandis que la valeur `$opentracing_context_x_datadog_parent_id` enregistre l'ID de la span.
 
 Ajoutez les lignes suivantes au bloc `location` dans le serveur où vous souhaitez effectuer le tracing :
 
@@ -370,7 +373,6 @@ Pour définir un nom de service différent selon le contrôleur Ingress à l'aid
 Ce qui précède remplace le nom de service par défaut `nginx-ingress-controller.ingress-nginx`.
 
 
-
 [1]: http://nginx.org/en/linux_packages.html#stable
 [2]: https://github.com/DataDog/dd-opentracing-cpp/blob/master/examples/nginx-tracing/Dockerfile
 [3]: https://github.com/opentracing-contrib/nginx-opentracing/releases/latest
@@ -387,7 +389,7 @@ Datadog surveille chaque aspect de votre environnement Istio, afin que vous puis
 - Consulter en détail les performances de votre maillage de services avec des [métriques][1] sur les requêtes, la bande passante et la consommation de ressources
 - Mapper les communications réseau entre les conteneurs, pods et services sur le maillage avec la solution [Network Performance Monitoring][2]
 
-Pour en savoir plus sur la surveillance de votre environnement Istio avec Datadog, [consultez l'article du blog à ce sujet][10] (en anglais).
+Pour en savoir plus sur la surveillance de votre environnement Istio avec Datadog, [consultez l'article du blog à ce sujet][3] (en anglais).
 
 ## Configuration
 
@@ -395,14 +397,14 @@ L'APM Datadog est disponible pour Istio 1.1.3 et ultérieur sur les clusters Ku
 
 ### Installation de l'Agent Datadog
 
-1. [Installez l'Agent][3].
-2. [Veillez à ce que l'APM soit activé pour votre Agent][4].
+1. [Installez l'Agent Datadog][4].
+2. [Vérifiez que l'APM est activé pour votre Agent][5].
 3. Supprimez la mise en commentaire du paramètre `hostPort` pour que les sidecars Istio puissent se connecter à l'Agent et envoyer des traces.
 
 
 ### Installation et configuration d'Istio
 
-Pour activer l'APM Datadog, une [installation Istio personnalisée][5] est requise afin de configurer deux options supplémentaires.
+Pour activer l'APM Datadog, une [installation Istio personnalisée][6] est requise afin de configurer deux options supplémentaires.
 
 - `--set values.global.proxy.tracer=datadog`
 - `--set values.pilot.traceSampling=100.0`
@@ -418,7 +420,7 @@ l'étiquette `istio-injection=enabled`.
 kubectl label namespace example-ns istio-injection=enabled
 ```
 
-Les traces sont générées lorsque Istio est en mesure de déterminer si le trafic utilise un protocole basé sur HTTP. Par défaut, Istio effectue automatiquement cette vérification. Vous pouvez la configurer manuellement en nommant les ports dans le service et le déploiement de votre application. Reportez-vous à la section relative à la [sélection de protocole][6] de la documentation Istio (en anglais) pour en savoir plus.
+Les traces sont générées lorsqu'Istio parvient à déterminer si le trafic utilise un protocole basé sur HTTP. Par défaut, Istio effectue automatiquement cette vérification. Vous pouvez la configurer manuellement en nommant les ports dans le service et le déploiement de votre application. Reportez-vous à la section relative à la [sélection de protocole][7] de la documentation Istio (en anglais) pour en savoir plus.
 
 Par défaut, le nom de service utilisé lors de la création des traces est généré à partir de l'espace de nommage et du nom du déploiement. Vous pouvez le définir manuellement en ajoutant une étiquette `app` au modèle de pod du déploiement :
 
@@ -429,7 +431,7 @@ template:
       app: <NOM_SERVICE>
 ```
 
-Pour les [CronJobs][7], l'étiquette `app` doit être ajoutée au modèle du job, car le nom généré provient du `Job`, et non du `CronJob` de niveau supérieur.
+Pour les [CronJobs][8], l'étiquette `app` doit être ajoutée au modèle du job, car le nom généré provient du `Job`, et non du `CronJob` de niveau supérieur.
 
 ### Variables d'environnement
 
@@ -440,7 +442,7 @@ Les variables d'environnement des sidecars Istio peuvent être configurées pour
         apm.datadoghq.com/env: '{ "DD_ENV": "prod", "DD_TRACE_ANALYTICS_ENABLED": "true" }'
 ```
 
-Les [variables d'environnement][8] disponibles dépendent de la version du traceur C++ intégré au proxy du sidecar Istio.
+Les [variables d'environnement][9] disponibles dépendent de la version du traceur C++ intégré au proxy du sidecar Istio.
 
 | Version d'Istio | Version du traceur C++ |
 |---------------|--------------------|
@@ -453,10 +455,9 @@ Les [variables d'environnement][8] disponibles dépendent de la version du trace
 | v1.1.3 | v0.4.2 |
 
 
-### Exécuter l'Agent en tant que service et déploiement
+### Déploiement et service
 
-Si les Agents de votre cluster s'exécutent en tant que déploiement et service au lieu du DaemonSet par défaut, une option supplémentaire est alors nécessaire pour spécifier l'adresse DNS et le port de l'Agent.
-Pour un service `datadog-agent` dans l'espace de nommage `default`, l'adresse a pour valeur `datadog-agent.default.svc.cluster.local:8126`.
+Si les Agents de votre cluster s'exécutent en tant que déploiement et service au lieu du DaemonSet par défaut, une option supplémentaire est alors nécessaire pour spécifier l'adresse DNS et le port de l'Agent. Pour un service `datadog-agent` dans l'espace de nommage `default`, l'adresse a pour valeur `datadog-agent.default.svc.cluster.local:8126`.
 
 - `--set values.global.tracer.datadog.address=datadog-agent.default:8126`
 
@@ -484,21 +485,21 @@ spec:
       mode: DISABLE
 ```
 
-Le processus de sélection automatique du protocole peut déterminer que le trafic entre le sidecar et l'Agent s'effectue via HTTP, et ainsi activer le tracing. Cette fonction peut être désactivée en utilisant la [sélection manuelle du protocole][9] du service spécifique. Le nom du port dans le service `datadog-agent` peut être remplacé par `tcp-traceport`. Si vous utilisez Kubernetes 1.18+, vous pouvez ajouter `appProtocol: tcp` à la spécification du port.
+Le processus de sélection automatique du protocole peut déterminer que le trafic entre le sidecar et l'Agent s'effectue via HTTP, et ainsi activer le tracing. Cette fonction peut être désactivée en utilisant la [sélection manuelle du protocole][10] du service spécifique. Le nom du port dans le service `datadog-agent` peut être remplacé par `tcp-traceport`. Si vous utilisez Kubernetes 1.18+, vous pouvez ajouter `appProtocol: tcp` à la spécification du port.
 
 
 
 
 [1]: /fr/integrations/istio/
 [2]: /fr/network_monitoring/performance/setup/#istio
-[3]: /fr/agent/kubernetes/
-[4]: /fr/agent/kubernetes/apm/
-[5]: https://istio.io/docs/setup/install/istioctl/
-[6]: https://istio.io/docs/ops/configuration/traffic-management/protocol-selection/
-[7]: https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/
-[8]: /fr/tracing/setup/cpp/#environment-variables
-[9]: https://istio.io/docs/ops/configuration/traffic-management/protocol-selection/#manual-protocol-selection
-[10]: https://www.datadoghq.com/blog/istio-datadog/
+[3]: https://www.datadoghq.com/blog/istio-datadog/
+[4]: /fr/agent/kubernetes/
+[5]: /fr/agent/kubernetes/apm/
+[6]: https://istio.io/docs/setup/install/istioctl/
+[7]: https://istio.io/docs/ops/configuration/traffic-management/protocol-selection/
+[8]: https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/
+[9]: /fr/tracing/setup/cpp/#environment-variables
+[10]: https://istio.io/docs/ops/configuration/traffic-management/protocol-selection/#manual-protocol-selection
 {{% /tab %}}
 {{< /tabs >}}
 

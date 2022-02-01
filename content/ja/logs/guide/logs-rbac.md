@@ -281,7 +281,7 @@ Datadog アプリで [Data Access ページ][1]を使用して、以下を実行
 
 詳細については、[`logs_read_data` アクセス許可セクション][1]を参照してください。
 
-[1]: /ja/account_management/rbac/permissions?tab=ui#logs_read_data
+[1]: https://app.datadoghq.com/logs/pipelines/data-access
 {{% /tab %}}
 {{% tab "API" %}}
 

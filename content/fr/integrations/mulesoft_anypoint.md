@@ -1,4 +1,6 @@
 ---
+app_id: ioconnect-mulesoft-anypoint
+app_uuid: fdb057e7-9be6-459f-ab3e-e745766e9158
 assets:
   dashboards:
     'IO Connect Development: Optimizations': assets/dashboards/development_optimizations.json
@@ -6,7 +8,17 @@ assets:
     'IO Connect Operations: APIs': assets/dashboards/operations_apis.json
     'IO Connect Operations: Infrastructure': assets/dashboards/operations_infrastructure.json
     'IO Connect Operations: Resources allocation': assets/dashboards/operations_resources_allocation_and_usage.json
-  metrics_metadata: metadata.csv
+  integration:
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: ioconnect.mulesoft.anypoint.access_management.organization.entitlements.vcores_production.assigned
+      metadata_path: metadata.csv
+      prefix: ioconnect.mulesoft.anypoint.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: IO Connect MuleSoft Anypoint
   monitors:
     Servers status: assets/monitors/server_disconnected_monitor.json
     '[CloudHub] Apps status': assets/monitors/cloudhub_app_stopped_monitor.json
@@ -17,51 +29,86 @@ assets:
     '[On-Prem] Apps status': assets/monitors/onpremise_app_stopped_monitor.json
     '[On-Prem] CPU load': assets/monitors/onpremise_cpu_load_monitor.json
     '[On-Prem] Memory usage': assets/monitors/onpremise_memory_usage_monitor.json
-  saved_views: {}
-  service_checks: assets/service_checks.json
 author:
-  homepage: 'https://www.ioconnectservices.com/'
+  homepage: https://www.ioconnectservices.com/
   name: IO Connect Services
+  sales_email: dmi@ioconnectservices.com
+  support_email: support_ddp@ioconnectservices.com
+  vendor_id: ioconnect
 categories:
   - marketplace
   - cloud
   - collaboration
-creates_events: false
-ddtype: check
+classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::Mac OS
+  - Supported OS::Windows
+  - Category::Marketplace
+  - Category::Cloud
+  - Category::Collaboration
+  - Offering::Integration
 dependencies: []
-display_name: IO Connect MuleSoft Anypoint
+display_on_public_website: true
 draft: false
 git_integration_title: mulesoft_anypoint
-guid: dd29d25b-8c20-4b11-b24f-91a2adbc8f73
 integration_id: ioconnect-mulesoft-anypoint
 integration_title: Mule®
+integration_version: ''
 is_public: true
 kind: integration
-maintainer: support_ddp@ioconnectservices.com
-manifest_version: 1.0.0
-metric_prefix: ioconnect.mulesoft.anypoint.
-metric_to_check: ioconnect.mulesoft.anypoint.access_management.organization.entitlements.vcores_production.assigned
+legal_terms:
+  eula: assets/EULA - IO Connect Services.pdf
+manifest_version: 2.0.0
 name: mulesoft_anypoint
+oauth: {}
 pricing:
   - billing_type: tag_count
+    includes_assets: true
     metric: datadog.marketplace.ioconnect.mulesoft_anypoint
+    product_id: mulesoft-anypoint
+    short_description: Prix unitaire par Production vCore
     tag: vcoreid
     unit_label: production vCore
-    unit_price: 350
+    unit_price: 200
 public_title: Intégration Mule®
-short_description: Recueillez des métriques à partir de vos produits MuleSoft et transférez-les à Datadog.
-support: partner
+short_description: Recueillez des métriques à partir de vos produits MuleSoft et envoyez-les à Datadog
 supported_os:
   - linux
-  - mac_os
+  - mac os
   - windows
-terms:
-  eula: assets/EULA - IO Connect Services.pdf
-  legal_email: dmi@ioconnectservices.com
+tile:
+  changelog: CHANGELOG.md
+  configuration: README.md#Setup
+  description: Recueillez des métriques à partir de vos produits MuleSoft et envoyez-les à Datadog
+  media:
+    - caption: 'Dashboard Operations: APIs'
+      image_url: images/dmi_ops_apis.png
+      media_type: image
+    - caption: 'Dashboard Operations: Infrastructure'
+      image_url: images/dmi_ops_infra.png
+      media_type: image
+    - caption: 'Dashboard Operations: Resources allocation and usage'
+      image_url: images/dmi_ops_allocation.png
+      media_type: image
+    - caption: 'Dashboard Development: Optimizations'
+      image_url: images/dmi_dev_optimization.png
+      media_type: image
+    - caption: 'Dashboard Executives: Cost optimization'
+      image_url: images/dmi_exec_cost_optimization.png
+      media_type: image
+    - caption: "Connecteur Datadog pour Mule\_4"
+      image_url: images/dmi_mule_connector.png
+      media_type: image
+    - caption: APM Datadog
+      image_url: images/dmi_apm_traces.png
+      media_type: image
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Intégration Mule®
 ---
 ## Présentation
 
-L'intégration Datadog/Mule® utilise l'Agent pour recueillir des métriques à partir de vos produits MuleSoft et les transférer à Datadog.
+L'intégration Datadog/Mule® utilise l'Agent pour recueillir des métriques à partir de vos produits MuleSoft et les envoyer à Datadog.
 
 {{< img src="marketplace/mulesoft_anypoint/images/dmi_bundle.png" alt="Intégration Datadog/Mule®" >}}
 
@@ -75,11 +122,11 @@ Vous pouvez utiliser ces métriques pour tirer parti des dashboards et monitors 
 - Recevez et visualisez des alertes sur votre infrastructure Mule
 - Analysez l'allocation des ressources Anypoint Platform de votre organisation
 
-{{< img src="marketplace/mulesoft_anypoint/images/dmi_ops_infra.png" alt="Opérations : dashboard d'infrastructure" >}}
+{{< img src="marketplace/mulesoft_anypoint/images/dmi_ops_infra.png" alt="Dashboard Operations: Infrastructure" >}}
 
-{{< img src="marketplace/mulesoft_anypoint/images/dmi_ops_apis.png" alt="Opérations : dashboard d'infrastructure" >}}
+{{< img src="marketplace/mulesoft_anypoint/images/dmi_ops_apis.png" alt="Dashboard Operations: APIs" >}}
 
-{{< img src="marketplace/mulesoft_anypoint/images/dmi_ops_allocation.png" alt="Opérations : dashboard d'allocation et d'utilisation des ressources" >}}
+{{< img src="marketplace/mulesoft_anypoint/images/dmi_ops_allocation.png" alt="Dashboard Operations: Resources allocation and usage" >}}
 
 #### Développement (_Dashboard d'optimisation_) 
 
@@ -87,14 +134,14 @@ Vous pouvez utiliser ces métriques pour tirer parti des dashboards et monitors 
 - Identifiez les goulots d'étranglement dans vos applications Mule pour optimiser ses performances
 - Instrumentez vos applications Mule avec le connecteur Datadog pour Mule 4 à des fins de dépannage
 
-{{< img src="marketplace/mulesoft_anypoint/images/dmi_dev_optimization.png" alt="Développement : dashboard d'optimisation" >}}
+{{< img src="marketplace/mulesoft_anypoint/images/dmi_dev_optimization.png" alt="Dashboard Development: Optimizations" >}}
 
 #### Direction (_Dashboard d'optimisation des coûts et d'analyse des downtimes_) 
 
 - Analysez et anticipez votre retour sur investissement en fonction des ressources utilisées et non utilisées
 - Visualisez des données sur l'uptime système de votre investissement Mule
 
-{{< img src="marketplace/mulesoft_anypoint/images/dmi_exec_cost_optimization.png" alt="Direction: dashboard d'optimisation des coûts" >}}
+{{< img src="marketplace/mulesoft_anypoint/images/dmi_exec_cost_optimization.png" alt="Dashboard Executives: Cost optimization" >}}
 
 #### Les métriques sont recueillies à partir des produits MuleSoft suivants :
 
@@ -114,15 +161,11 @@ Utilisez le connecteur Datadog pour Mule 4 avec les données de tracing de l'AP
 
 Mesurez les performances de vos opérations au niveau de granularité de votre choix grâce aux spans.
 
-{{< img src="marketplace/mulesoft_anypoint/images/dmi_apm_trace.png" alt="APM Datadog" >}}
-
 Enfin, mettez en corrélation les logs générés durant une transaction dans une trace unique pour affiner le contexte lors d'une optimisation des performances ou d'un dépannage.
-
-{{< img src="marketplace/mulesoft_anypoint/images/dmi_apm_logs.png" alt="APM Datadog" >}}
 
 ### **Dépannage**
 
-Besoin d'aide ? Contactez-nous : [support_ddp@ioconnectservices.com][9].
+Besoin d'aide ? Contactez [support_ddp@ioconnectservices.com][9].
 
 ## Données collectées
 
@@ -143,20 +186,17 @@ L'intégration Datadog/Mule® n'inclut aucun événement.
 
 ## Assistance
 
-Pour toute demande d'assistance contactez-nous à l'adresse [support_ddp@ioconnectservices.com][9].
+Pour toute demande d'assistance, contactez l'assistance IO Connect Services à l'adresse [support_ddp@ioconnectservices.com][9].
 
 ---
-Cette application est disponible sur le Marketplace et développée par un partenaire de Datadog. [Cliquez ici][13] pour l'acheter.
 
-## Contrat de licence destiné à l'utilisateur final
-
-Le contrat de licence à destination de l'utilisateur final est disponible dans le fichier [EULA - IO Connect Services.pdf][10]
+Cette application est disponible sur le Marketplace et développée par un partenaire de Datadog. [Cliquez ici][11] pour l'acheter.
 
 ## À propos de IO Connect Services
 
 IO Connect Services est une société spécialisée dans les services de conseil en technologies de l'information. Nos domaines d'expertise comprennent les technologies cloud, l'intégration système, le big data, la cybersécurité et le génie logiciel. Nous assurons nos services dans toute l'Amérique du Nord, l'Europe et l'Amérique latine. Notre siège social est situé à New York, et nous avons également des bureaux à Guadalajara, au Mexique, et à Madrid, en Espagne.
 
-Rendez-vous sur [https://www.ioconnectservices.com][11]
+Rendez-vous sur [https://www.ioconnectservices.com][10]
 
 [1]: https://www.ioconnectservices.com
 [2]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations
@@ -167,7 +207,5 @@ Rendez-vous sur [https://www.ioconnectservices.com][11]
 [7]: https://docs.datadoghq.com/fr/developers/integrations/new_check_howto/?tab=configurationfile#installing
 [8]: https://docs.datadoghq.com/fr/developers/guide/custom-python-package/?tab=linux
 [9]: mailto:support_ddp@ioconnectservices.com
-[10]: assets/EULA%20-%20IO%20Connect%20Services.pdf
-[11]: https://www.ioconnectservices.com
-[12]: mailto:dmi@ioconnectservices.com
-[13]: https://app.datadoghq.com/marketplace/app/ioconnect-mulesoft-anypoint/pricing
+[10]: https://www.ioconnectservices.com
+[11]: https://app.datadoghq.com/marketplace/app/ioconnect-mulesoft-anypoint/pricing

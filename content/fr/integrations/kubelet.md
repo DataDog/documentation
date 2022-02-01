@@ -10,17 +10,18 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/kubelet/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/kubelet/README.md
 display_name: Kubelet
 draft: false
 git_integration_title: kubelet
 guid: 55039e21-7e89-41fb-968c-ab8bf8f25da0
 integration_id: kubelet
 integration_title: Kubelet
+integration_version: 7.1.0
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com
-manifest_version: 1.2.0
+manifest_version: 1.0.0
 metric_prefix: kubernetes.
 metric_to_check: kubernetes.cpu.usage.total
 name: kubelet
@@ -78,7 +79,7 @@ Si vous ne pouvez pas ouvrir le port, vous pouvez désactiver les deux sources d
 Ce check pourra toujours recueillir :
 
 - Les checks de service de santé Kubelet
-- Les métriques en cours d'exécution ou interrompues de pod
+- Les métriques liées aux pods en cours d'exécution ou interrompus
 - Les requêtes et limites de pod
 - Les métriques de capacité de nœud
 
@@ -86,6 +87,13 @@ Ce check pourra toujours recueillir :
 
 ### Checks de service
 {{< get-service-checks-from-git "kubelet" >}}
+
+
+### Exclure des conteneurs
+
+Vous pouvez empêcher la collecte de données pour un sous-ensemble de conteneurs déployés en définissant la [variable d'environnement `DD_CONTAINER_EXCLUDE`](https://docs.datadoghq.com/agent/guide/autodiscovery-management/?tab=containerizedagent). Les métriques issues des conteneurs spécifiés dans cette variable d'environnement ne seront pas transmises par cette intégration.
+
+Pour les métriques réseau transmises au niveau du pod, il n'est pas possible d'exclure des conteneurs en utilisant leur nom ou le nom de leur image étant donné que d'autres conteneurs peuvent faire partie du même pod. Ainsi, si `DD_CONTAINER_EXCLUDE` s'applique à un espace de nommage, les métriques au niveau du pod ne seront pas transmises si le pod fait partie de cet espace de nommage. Toutefois, si `DD_CONTAINER_EXCLUDE` fait référence à un nom de conteneur ou à un nom d'image, les métriques au niveau du pod seront transmises même si les règles d'exclusion définies s'appliquent à certains conteneurs du pod.
 
 
 ## Dépannage

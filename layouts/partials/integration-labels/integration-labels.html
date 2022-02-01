@@ -25,6 +25,14 @@
 </div>
 {{ end }}
 
+{{ if .Params.is_beta }}
+    <div class="row">
+        <div class="beta col-12">
+            {{ partial "img.html" (dict "root" . "src" "icons/check_beta.png" "class" "static" "alt" "Beta" "width" "21") }}<span>{{ i18n "beta_check" }}</span>
+        </div>
+    </div>
+{{ end }}
+
 {{ if .Params.supported_os }}
     <div class="row integration-os">
         <div class="agent col-12">
@@ -44,6 +52,26 @@
                     {{ if eq . "windows" }}
                         <span>
                             {{ partial "img.html" (dict "root" $dot "src" "os-windows-bw.png" "class" "static" "alt" "Windows" "width" "24") }}
+                        </span>
+                    {{ end }}
+                    {{ if eq . "solaris" }}
+                        <span>
+                            {{ partial "img.html" (dict "root" $dot "src" "os-solaris.png" "class" "static" "alt" "Solaris" "width" "64") }}
+                        </span>
+                    {{ end }}
+                    {{ if eq . "hp-ux" }}
+                        <span>
+                            {{ partial "img.html" (dict "root" $dot "src" "os-hp-ux.png" "class" "static" "alt" "HP UX" "width" "48") }}
+                        </span>
+                    {{ end }}
+                    {{ if eq . "ibm i/os" }}
+                        <span>
+                            {{ partial "img.html" (dict "root" $dot "src" "os-ibm-ios.png" "class" "static" "alt" "IBM I/OS" "width" "48") }}
+                        </span>
+                    {{ end }}
+                    {{ if eq . "ibm z/os" }}
+                        <span>
+                            {{ partial "img.html" (dict "root" $dot "src" "os-ibm-zos.png" "class" "static" "alt" "IBM Z/OS" "width" "80") }}
                         </span>
                     {{ end }}
                 {{ end }}

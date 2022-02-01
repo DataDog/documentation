@@ -1,0 +1,52 @@
+{
+  "title": "Example-Create_a_new_dashboard_with_formulas_and_functions_scatterplot_widget",
+  "widgets": [
+    {
+      "id": 5346764334358972,
+      "definition": {
+        "title": "",
+        "title_size": "16",
+        "title_align": "left",
+        "type": "scatterplot",
+        "requests": {
+          "table": {
+            "formulas": [
+              {
+                "formula": "query1",
+                "dimension": "x",
+                "alias": "my-query1"
+              },
+              {
+                "formula": "query2",
+                "dimension": "y",
+                "alias": "my-query2"
+              }
+            ],
+            "queries": [
+              {
+                "data_source": "metrics",
+                "name": "query1",
+                "query": "avg:system.cpu.user{*} by {service}",
+                "aggregator": "avg"
+              },
+              {
+                "data_source": "metrics",
+                "name": "query2",
+                "query": "avg:system.mem.used{*} by {service}",
+                "aggregator": "avg"
+              }
+            ],
+            "response_format": "scalar"
+          }
+        }
+      },
+      "layout": {
+        "x": 0,
+        "y": 0,
+        "width": 4,
+        "height": 2
+      }
+    }
+  ],
+  "layout_type": "ordered"
+}

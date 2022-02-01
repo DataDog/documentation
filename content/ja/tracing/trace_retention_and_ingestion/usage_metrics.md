@@ -41,5 +41,5 @@ Datadog は、APM の使用量、および Indexed Span と Ingested Span のボ
 [2]: /ja/tracing/trace_retention_and_ingestion/#ingestion-controls
 [3]: https://www.datadoghq.com/pricing/?product=apm#apm
 [4]: /ja/account_management/billing/apm_distributed_tracing/
-[5]: https://app.datadoghq.com/dash/integration/30337/trace-analytics---usage
+[5]: https://app.datadoghq.com/dashboard/lists?q=APM+Traces+-+Estimated+Usage
 [6]: /ja/tracing/trace_retention_and_ingestion/#datadog-intelligent-retention-filter

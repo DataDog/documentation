@@ -92,7 +92,7 @@ Identify the following behaviors:
 
 
 
-For every timing metric we measure, you can describe variations with the following factors:
+For every timing metric measured, you can describe variations with the following factors:
 
 ### Redirection time
 The redirection time is the sum of all redirects in a request. Variations at any stage of the HTTP request, from the DNS resolution to the download, can noticeably increase the redirection timing. 

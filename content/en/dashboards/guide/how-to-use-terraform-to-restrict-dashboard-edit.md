@@ -9,7 +9,7 @@ aliases:
 
 ## Introduction
 
-Previously when you wanted to restrict editing of dashboards created and managed by [Terraform][1], you would use the `is_read_only` attribute to define that the dashboard is edit restricted to the creator or users with the Privileged Access (Admin) permission in your organization. With the introduction of `restricted_roles`, you can list specific roles that can edit this dashboard within your organization.
+Previously when you wanted to restrict editing of dashboards created and managed by [Terraform][1], you would use the `is_read_only` attribute to define that editing the dashboard is restricted to the creator or users with the Access Management (`user_access_manage`) permission in your organization. With the introduction of `restricted_roles`, you can list specific roles that can edit this dashboard within your organization.
 
 ## Restricting a dashboard
 
@@ -29,13 +29,13 @@ If you're already using `is_read_only` in your definition, this continues to wor
 
 ### `is_read_only` is still enabled for my dashboard
 
-This configuration still works. Every Terraform run will detect any changes to roles or read only and notify you `if read_only` is being changed.
+This configuration still works. Every Terraform run detects any changes to roles or read only and notify you if `is_read_only` is being changed.
 
 ### Terraform is warning that `is_read_only` has been removed
 
 This is because your browser converts the old permission flag to the newer and more advanced permissions scheme. If you update terraform to 3.1.0 or above, the new restricted roles fields is available.
 
-This change is simply an aesthetic change and doesn’t change any functionality or security settings of the dashboard. When you reapply your Terraform configuration, it replaces the change with the original `is_read_only` attribute.
+This change is an aesthetic change only, and doesn’t change any functionality or security settings of the dashboard. When you re-apply your Terraform configuration, it replaces the change with the original `is_read_only` attribute.
 
 [1]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/dashboard
 [2]: /api/latest/roles/#list-roles

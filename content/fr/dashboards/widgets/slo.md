@@ -1,20 +1,20 @@
 ---
 title: Widget Résumé des SLO
 kind: documentation
-description: Faites un suivi de vos SLO.
+description: Suivi de vos SLO
 aliases:
   - /fr/monitors/monitor_uptime_widget/
   - /fr/monitors/slo_widget/
   - /fr/graphing/widgets/slo/
   - /fr/dashboards/faq/how-can-i-graph-host-uptime-percentage/
 further_reading:
-  - link: 'https://www.datadoghq.com/blog/slo-monitoring-tracking/'
+  - link: https://www.datadoghq.com/blog/slo-monitoring-tracking/
     tag: Blog
     text: Faire un suivi du statut de tous vos SLO dans Datadog
 ---
 ## Configuration
 
-Utilisez le widget Résumé des SLO pour surveiller vos [SLO (Service Level Objectives)][1] à partir de screenboards et de timeboards. Vous pouvez utiliser la [page des Service Level Objectives][2] de Datadog pour afficher les SLO existants et en créer d'autres. Vous pouvez ensuite sélectionner un SLO actif et utiliser le widget Résumé des SLO pour l'afficher sur n'importe quel dashboard.
+Utilisez le widget Résumé des SLO pour surveiller vos [SLO (Service Level Objectives)][1] à partir de screenboards et de timeboards. Vous pouvez utiliser la page [Service Level Objectives][2] de Datadog pour afficher les SLO existants et en créer d'autres. Il est également possible de sélectionner un SLO et d'utiliser le widget Résumé des SLO pour l'afficher sur n'importe quel dashboard.
 
 {{< img src="dashboards/widgets/slo/slo_summary_editor.png" alt="widget Résumé des SLO"  >}}
 
@@ -24,13 +24,13 @@ Utilisez le widget Résumé des SLO pour surveiller vos [SLO (Service Level Obje
 2. Sélectionnez un SLO dans le menu déroulant.
 3. Sélectionnez jusqu'à trois intervalles de temps différents.
 
-**Remarque :** l'intervalle `Global Time` vous permet d'afficher le statut et le budget d'indisponibilité pour des périodes arbitraires au cours des 90 derniers jours. De plus, vous pouvez également spécifier une cible SLO unique (facultative) pour la période arbitraire. Pour afficher un budget d'indisponibilité et appliquer un code couleur à la valeur du statut du SLO (rouge ou vert), il est nécessaire d'appliquer une cible SLO. Si vous ne spécifiez aucune cible, seul le statut s'affiche, et le texte demeure gris.
+**Remarque :** l'intervalle `Global Time` vous permet d'afficher le statut et la marge d'erreur pour des périodes arbitraires au cours des 90 derniers jours. De plus, vous pouvez également spécifier une cible SLO unique (facultative) pour la période arbitraire. Pour afficher une marge d'erreur et appliquer un code couleur à la valeur du statut du SLO (rouge ou vert), il est nécessaire d'appliquer une cible SLO. Si vous ne spécifiez aucune cible, seul le statut s'affiche, et le texte demeure gris.
 
 ### Options
 
 #### Préférences d'affichage
 
-Choisissez d'afficher ou de masquer le budget d'indisponibilité restant en cliquant sur l'option `Show error budget`. Si vous visualisez un SLO basé sur un monitor avec plusieurs groupes ou monitors, sélectionnez votre mode de visualisation via l'option `View mode` :
+Choisissez d'afficher ou de masquer la marge d'erreur restante en cliquant sur l'option `Show error budget`. Si vous visualisez un SLO basé sur un monitor avec plusieurs groupes ou monitors, sélectionnez votre mode de visualisation via l'option `View mode` :
 
 - Pour les SLO basés sur des monitors configurés avec un seul monitor divisé en plusieurs groupes, les trois modes de visualisation suivants sont proposés :
   - `Status` : affiche les pourcentages de statuts et les cibles du SLO global

@@ -64,7 +64,7 @@ Pour utiliser le contrôleur d'admission avec l'Operator Datadog, définissez le
 
 ### Configuration manuelle
 
-Pour activer le contrôleur d'admission sans utiliser Helm ou l'Operator Datadog, vous devrez ajouter quelques éléments à votre configuration :
+Pour activer le contrôleur d'admission sans utiliser Helm ou l'Operator Datadog, ajoutez ce qui suit à votre configuration :
 
 Tout d'abord, téléchargez le manifeste des [autorisations RBAC de l'Agent de cluster][2] et ajoutez ce qui suit sous `rules` :
 
@@ -150,6 +150,7 @@ Options possibles :
 - Le contrôleur d'admission n'injecte pas les variables d'environnement `DD_VERSION, DD_ENV`, et `DD_SERVICE` si elles existent déjà.
 - Pour désactiver la fonctionnalité d'injection du contrôleur d'admission, configurez l'Agent de cluster comme suit : `DD_ADMISSION_CONTROLLER_INJECT_CONFIG_ENABLED=false`
 - Si vous utilisez le contrôleur d'admission Datadog, vous n'avez plus besoin de configurer les pods d'application via l'API Downward ([étape 2 de la configuration de la collecte de traces Kubernetes][3]).
+- Si vous utilisez un cluster privé et que votre configuration n'est pas injectée dans vos pods, ouvrez une règle de pare-feu afin que le plan de contrôle puisse communiquer avec le webhook Datadog. Vérifiez que les règles de pare-feu ouvrent le port 443, tel que décrit dans la rubrique [Ajouter des règles de pare-feu dans GCP][4].
 
 
 ## Pour aller plus loin
@@ -159,3 +160,4 @@ Options possibles :
 [1]: https://kubernetes.io/blog/2019/03/21/a-guide-to-kubernetes-admission-controllers/
 [2]: https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/cluster-agent-rbac.yaml
 [3]: https://docs.datadoghq.com/fr/agent/kubernetes/apm/?tab=helm#setup
+[4]: https://cloud.google.com/kubernetes-engine/docs/how-to/private-clusters#add_firewall_rules

@@ -15,7 +15,7 @@ Cette section explique comment rédiger un check custom d'Agent simple et utilis
 
 ### Faut-il que je rédige un check d'Agent ou une intégration ?
 
-Les checks customs sont particulièrement utiles pour recueillir des métriques à partir d'applications personnalisées ou de systèmes uniques. Cependant, si vous souhaitez recueillir des métriques à partir d'une application commercialisée, d'un service public ou encore d'un projet open source, nous vous recommandons de [créer une intégration d'Agent complète][1].
+Les checks customs sont particulièrement utiles pour recueillir des métriques à partir d'applications personnalisées ou de systèmes uniques. Cependant, si vous souhaitez recueillir des métriques à partir d'une application disponible librement, d'un service public ou encore d'un projet open source, nous vous recommandons de [créer une intégration d'Agent complète][1].
 
 La version 6.4 de l'Agent Datadog et les versions ultérieures prennent en charge la publication et les mises à jour d'intégrations indépendamment des mises à jour de l'Agent Datadog. Depuis cette version, vous pouvez facilement partager des intégrations, ce qui permet à l'ensemble de la communauté Datadog de les utiliser.
 
@@ -58,7 +58,7 @@ class HelloCheck(AgentCheck):
         self.gauge('hello.world', 1, tags=['TAG_KEY:TAG_VALUE'] + self.instance.get('tags', []))
 {{< /code-block >}}
 
-Pour en savoir plus sur l'interface fournie par la classe de base, consultez la [documentation relative à l'API][5].
+Consultez la section [datadog_checks.base.checks.base.AgentCheck][5] pour en savoir plus sur la classe de base.
 
 **Remarque** : lors de la sélection d'un nom pour votre check custom, ajoutez `custom_` en préfixe afin d'éviter tout conflit avec un nom d'intégration de l'Agent Datadog existante. Par exemple, si vous rédigez un check custom Postfix, nommez votre fichiers de check `custom_postfix.py` et `custom_postfix.yaml`, et non `postfix.py` et `postfix.yaml`.
 
@@ -93,7 +93,7 @@ instances: [{}]
 {{% /tab %}}
 {{< /tabs >}}
 
-**Remarque** : si le paramètre `min_collection_interval` est défini sur `30`, cela ne signifie pas que la métrique est recueillie toutes les 30 secondes, mais plutôt qu'il s'agit de la fréquence de collecte optimale. Le collecteur essaiera d'exécuter le check toutes les 30 secondes, mais il est possible que celui-ci soit mis en attente, en fonction du nombre d'intégrations activées sur le même Agent. De plus, si la méthode `check` dure plus de 30 secondes, l'Agent identifie que le check est toujours en cours d'exécution et annule son exécution jusqu'au prochain intervalle.
+**Remarque** : si le paramètre `min_collection_interval` est défini sur `30`, cela ne signifie pas que la métrique est recueillie toutes les 30 secondes, mais plutôt qu'il s'agit de la fréquence de collecte optimale. Le collecteur essaie d'exécuter le check toutes les 30 secondes, mais il est possible que celui-ci soit mis en attente, en fonction du nombre d'intégrations activées sur le même Agent. De plus, si la méthode `check` dure plus de 30 secondes, l'Agent annule son exécution jusqu'au prochain intervalle.
 
 ## Vérifier votre check
 

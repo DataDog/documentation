@@ -2,7 +2,7 @@
 title: Getting Started in Datadog
 kind: documentation
 further_reading:
-    - link: 'https://learn.datadoghq.com/course/view.php?id=2'
+    - link: 'https://learn.datadoghq.com/enrol/index.php?id=18'
       tag: 'Learning Center'
       text: 'Introduction to Datadog'
     - link: 'https://www.datadoghq.com/blog/datadog-quick-nav-menu/'
@@ -11,13 +11,17 @@ further_reading:
 
 ---
 
-This page gives a high level overview of the capabilities for the [Datadog site][1].
+This page provides a high-level overview of capabilities available on the [Datadog site][1].
 
-**Note**: The navigation of the Datadog site switches based on browser width. It's possible to get three different types of navigation. To change navigation types, adjust the width of your browser.
+## Overview
+
+The Datadog site navigation varies based on the width of your browser. You can have up to three types of navigation. 
+
+To change the navigation type, adjust your browser width.
 
 ## Integrations
 
-{{< img src="getting_started/integrations.png" alt="integrations"  >}}
+{{< img src="getting_started/integrations.png" alt="Integrations" >}}
 
 - Datadog has over {{< translate key="integration_count" >}} integrations [officially listed][2].
 - Custom integrations are available through the [Datadog API][3].
@@ -26,19 +30,19 @@ This page gives a high level overview of the capabilities for the [Datadog site]
 
 ## Log Management
 
-{{< img src="getting_started/logs.png" alt="logs"  >}}
+{{< img src="getting_started/logs.png" alt="Logs" >}}
 
 [Datadog Log Management][5] lets you send and process every log produced by your applications and infrastructure. You can observe your logs in real-time using the Live Tail, without indexing them. You can ingest all of the logs from your applications and infrastructure, decide what to index dynamically with filters, and then store them in an archive.
 
 ## APM & Continuous Profiler
 
-{{< img src="getting_started/apm.png" alt="apm dashboard"  >}}
+{{< img src="getting_started/apm.png" alt="APM Dashboard" >}}
 
 [Datadog Application Performance Monitoring][6] (APM or tracing) provides you with deep insight into your application’s performance—from automatically generated dashboards for monitoring key metrics, like request volume and latency, to detailed traces of individual requests—side by side with your logs and infrastructure monitoring. When a request is made to an application, Datadog can see the traces across a distributed system, and show you systematic data about precisely what is happening to this request.
 
 ## Infrastructure
 
-{{< img src="getting_started/infrastructure.png" alt="infrastructure"  >}}
+{{< img src="getting_started/infrastructure.png" alt="Infrastructure" >}}
 
 - All machines show up in the [infrastructure list][7].
 - You can see the tags applied to each machine. Tagging allows you to indicate which machines have a particular purpose.
@@ -46,7 +50,7 @@ This page gives a high level overview of the capabilities for the [Datadog site]
 
 ## Host map
 
-{{< img src="getting_started/hostmap-overview.png" alt="Host Map overview"  >}}
+{{< img src="getting_started/hostmap-overview.png" alt="Host Map Overview" >}}
 
 The [host map][9] can be found under the Infrastructure menu. It offers the ability to:
 
@@ -59,13 +63,15 @@ See [Host Map][9] for more details.
 
 ## Events
 
-{{< img src="getting_started/event_stream.png" alt="Event stream"  >}}
+{{< img src="dashboards/widgets/event_stream/event_stream_setup.png" alt="Event Stream" style="width:80%;" >}}
 
 [The Event Stream][10] is based on the same conventions as a blog:
 
 - Any event in the stream can be commented on.
 - Can be used for distributed [teams][11] and maintaining the focus of an investigation.
 - You can [filter][12] by `user`, `source`, `tag`, `host`, `status`, `priority`, and `incident`.
+
+{{< img src="getting_started/event_stream_event.png" alt="event stream event" style="width:80%;" >}}
 
 For each incident, users can:
 
@@ -75,11 +81,9 @@ For each incident, users can:
 - [@ notify team members][13], who receive an email
 - `@support-datadog` to ask for [assistance][14]
 
-{{< img src="getting_started/event_stream_event.png" alt="event stream event" style="width:70%;">}}
-
 ## Dashboards
 
-{{< img src="getting_started/dashboard.png" alt="dashboard"  >}}
+{{< img src="getting_started/dashboard.png" alt="Dashboards" >}}
 
 [Dashboards][12] contain graphs with real-time performance metrics.
 
@@ -97,43 +101,47 @@ For each incident, users can:
 [Monitors][16] provide alerts and notifications based on metric thresholds, integration availability, network endpoints, and more.
 
 - Use any metric reporting to Datadog
-- Set up multi-alerts (by device, host, etc.)
+- Set up multi-alerts by device, host, and more
 - Use `@` in alert messages to direct notifications to the right people
-- Schedule downtimes to suppress notifications for system shutdowns, off-line maintenance, etc.
+- Schedule downtimes to suppress notifications for system shutdowns, off-line maintenance, and more
 
-{{< img src="getting_started/application/metric_monitor.png" alt="alert setup" >}}
+{{< img src="getting_started/application/metric_monitor.png" alt="Alert setup" >}}
 
 ## Network Performance Monitoring
 
-{{< img src="getting_started/npm.png" alt="npm"  >}}
+{{< img src="getting_started/npm.png" alt="NPM" >}}
 
 Datadog [Network Performance Monitoring][17] (NPM) gives you visibility into your network traffic across any tagged object in Datadog: from containers to hosts, services, and availability zones. Group by anything—from datacenters to teams to individual containers. Use tags to filter traffic by source and destination. The filters then aggregate into flows, each showing traffic between one source and one destination, through a customizable network page and network map. Each flow contains network metrics such as throughput, bandwidth, retransmit count, and source/destination information down to the IP, port, and PID levels. It then reports key metrics such as traffic volume and TCP retransmits.
 
-## Real User Monitoring
+## RUM & Session Replay
 
-{{< img src="getting_started/rum.png" alt="rum"  >}}
+{{< img src="getting_started/rum.png" alt="RUM" >}}
 
-Datadog [Real User Monitoring][18] (RUM) enables you to visualize and analyze the real-time activities and experiences of individual users to prioritize engineering work on the features with the highest business impact.
-You can visualize load times, frontend errors, and page dependencies, and then correlate business and application metrics so that you can troubleshoot quickly with application, infrastructure, and business metrics in a single dashboard.
+Datadog [Real User Monitoring][18] (RUM) allows you to visualize and analyze real-time user activities and experiences. With [Session Replay][19], you can capture and view the web browsing sessions of your users to better understand their behavior. In the RUM Explorer, you can not only visualize load times, frontend errors, and page dependencies, but also you can correlate business and application metrics to troubleshoot issues with application, infrastructure, and business metrics in one dashboard. 
 
 ## Serverless
 
-[Serverless][19] lets you write event-driven code and upload it to a cloud provider, which manages all of the underlying compute resources. Datadog Serverless brings together metrics, traces, and logs from your AWS Lambda functions running serverless applications into one view, so that you can optimize performance by filtering to functions that are generating errors, high latency, or cold starts.
+[Serverless][20] lets you write event-driven code and upload it to a cloud provider, which manages all of the underlying compute resources. Datadog Serverless brings together metrics, traces, and logs from your AWS Lambda functions running serverless applications into one view, so that you can optimize performance by filtering to functions that are generating errors, high latency, or cold starts.
 
-## Security Monitoring
+## Cloud SIEM
 
 {{< img src="getting_started/security.png" alt="security" >}}
 
-Datadog [Security Monitoring][20] automatically detects threats to your application or infrastructure. For example, a targeted attack, an IP communicating with your systems matching a threat intel list, or an insecure configuration. These threats are surfaced in Datadog as Security Signals and can be correlated and triaged in the Security Explorer.
+Datadog [Cloud SIEM][21] (Security Information and Event Management) automatically detects threats to your application or infrastructure. For example, a targeted attack, an IP communicating with your systems matching a threat intel list, or an insecure configuration. These threats are surfaced in Datadog as Security Signals and can be correlated and triaged in the Security Explorer.
+
+## Synthetic Monitoring
+
+{{< img src="getting_started/synthetics.png" alt="Synthetics" >}}
+
+Datadog [Synthetic Monitoring][22] allow you to create and run API and browser tests that proactively simulate user transactions on your applications and monitor all internal and external network endpoints across your system's layers. You can detect errors, identify regressions, and automate rollbacks to prevent issues from surfacing in production. 
 
 ## Further Reading
-
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com
 [2]: http://www.datadoghq.com/integrations
 [3]: /api/
-[4]: https://github.com/DataDog/dd-agent
+[4]: https://github.com/DataDog/datadog-agent
 [5]: /logs/
 [6]: /tracing/
 [7]: /infrastructure/
@@ -147,6 +155,8 @@ Datadog [Security Monitoring][20] automatically detects threats to your applicat
 [15]: /dashboards/
 [16]: /dashboards/screenboard/
 [17]: /dashboards/functions/
-[18]: https://www.datadoghq.com/blog/rank-filter-performance-monitoring-metrics-top-function
-[19]: /monitors/
-[20]: /network_monitoring/performance
+[18]: /real_user_monitoring/
+[19]: /real_user_monitoring/session_replay/
+[20]: /monitors/
+[21]: /security_platform/cloud_siem/
+[22]: /synthetics/

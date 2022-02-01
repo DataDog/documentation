@@ -5,7 +5,7 @@ description: Configurer des options avancées pour les étapes des tests Browser
 further_reading:
   - link: /synthetics/browser_tests/actions/
     tag: Documentation
-    text: En savoir plus les étapes des tests Browser
+    text: En savoir plus sur les étapes des tests Browser
 ---
 ## Localisateur spécifié par l'utilisateur
 

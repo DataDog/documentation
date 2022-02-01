@@ -25,15 +25,16 @@ further_reading:
 
 ## Overview
 
-{{< img src="network_performance_monitoring/devices/datacenter_dashboard.jpg" alt="Datacenter Overview Dashboard" responsive="true" style="width:100%;">}}
+{{< img src="network_performance_monitoring/devices/ndm-overview.png" alt="Network Device Explorer" responsive="true" style="width:100%;">}}
 
-Network Device Monitoring is designed to give you visibility into your on-premise and virtual network devices, such as routers, switches, and firewalls. Automatically discover devices on any network, and quickly start collecting metrics like bandwidth utilization, volume of bytes sent, and determine whether devices are up/down.
+Network Device Monitoring gives you visibility into your on-premise and virtual network devices, such as routers, switches, and firewalls. Automatically discover devices on any network, and quickly start collecting metrics like bandwidth utilization, volume of bytes sent, and determine whether devices are up/down.
 
 ## Getting started
 
-1. Install the Datadog Agent.
+1. Install the Datadog Agent (usually on a server that is not the monitored device).
 2. Configure the SNMP integration by either [monitoring individual devices][1], or using [device autodiscovery][2].
-3. View metrics collected on Datadog's out-of-the-box dashboards:
+3. Start monitoring your entire network infrastructure on the Network Devices explore page.
+4. View metrics collected on Datadog's out-of-the-box dashboards:
     - [Overview of all devices monitored][3]
     - [Across the performance on all interfaces][4]
 4. Catch issues before they arise with proactive monitoring on any [SNMP metric][5].

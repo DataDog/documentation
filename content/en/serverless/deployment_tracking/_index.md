@@ -1,5 +1,5 @@
 ---
-title: Deployment Tracking
+title: Deployment Tracking for Serverless Applications
 kind: documentation
 further_reading:
     - link: '/serverless/distributed_tracing'
@@ -38,4 +38,3 @@ If you have already added the permission, but you still don't see events for any
 
 [1]: https://app.datadoghq.com/functions
 [2]: /integrations/amazon_web_services/#setup
-[3]: /help/

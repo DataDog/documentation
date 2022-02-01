@@ -121,6 +121,7 @@ build_preview:
 #     - post_dd_event "documentation deploy ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info"
 #     - version_static_assets
 #     - touch Makefile.config
+#     - make clean-examples
 #     - make examples
 #     - sync_integration_descriptions
 #     #- sync_integration_descriptions_cached
@@ -264,6 +265,7 @@ build_live:
     - post_dd_event "documentation deploy ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info"
     - notify_slack "<https://github.com/DataDog/documentation/commit/${CI_COMMIT_SHA}|${CI_COMMIT_SHA:0:8}> sent to gitlab for production deployment. <${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}|details>" "#FFD700"
     - touch Makefile.config
+    - make clean-examples
     - make examples
     - sync_integration_descriptions
     - sync_integration_metrics
@@ -384,6 +386,7 @@ evaluate_missing_metrics:
   environment: "live"
   script:
     - chmod +x ./local/bin/py/missing_metrics.py && ./local/bin/py/missing_metrics.py -k $(get_secret 'dd-demo-api-key') -p $(get_secret 'dd-demo-app-key') -a $(get_secret 'dd_api_key') -b $(get_secret 'dd-app-key')
+  when: manual
   only:
     - master
 
@@ -399,7 +402,7 @@ manage_translations:on-schedule:
   script:
     - |-
       if [[ $(date +%u) -lt 6 ]]; then
-        nodenv shell 14.15.0
+        nodenv shell 14.16.0
         [ -d ./node_modules ] && rm -rf ./node_modules
         yarn add https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/translate-v1.0.42.tgz
         DATADOG_API_KEY="$(get_secret 'dd_synthetic_api_key_prod')" manage_translations "${APIKEY}";

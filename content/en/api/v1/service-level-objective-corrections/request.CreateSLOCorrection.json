@@ -1,0 +1,13 @@
+{
+  "data": {
+    "attributes": {
+      "category": "Scheduled Maintenance",
+      "description": "Example-Create_an_SLO_correction_returns_OK_response",
+      "end": 1636632671,
+      "slo_id": "string",
+      "start": 1636629071,
+      "timezone": "UTC"
+    },
+    "type": "correction"
+  }
+}

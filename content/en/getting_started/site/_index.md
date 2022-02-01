@@ -25,8 +25,6 @@ Since the Datadog sites may support different Datadog functionalities depending 
 
 ## The Datadog for Government site
 
-<div class="alert alert-warning">The Datadog for Government Site is in early access. To request early access, contact fedramp@datadoghq.com</div>
-
 The Datadog for Government site (US1-FED) is meant to allow US government agencies and partners to monitor their applications and infrastructure. For information about the Datadog for Government site's security and compliance controls and frameworks, as well as how it supports FedRAMP, see the [security page][1].
 
 [1]: https://www.datadoghq.com/security/

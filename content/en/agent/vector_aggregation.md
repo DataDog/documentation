@@ -45,15 +45,25 @@ Only the logs data type is supported. Update the following values in the `datado
 logs_config:
   logs_dd_url: "<VECTOR_HOST>:<VECTOR_PORT>"
   logs_no_ssl: true # If TLS/SSL is not enabled on the Vector side
-  use_http: true # Vector `datadog_logs` source only supports events over HTTP(S) and not raw TCP
+  use_http: true # Vector `datadog_agent` source only supports events over HTTP(S) and not raw TCP
   # use_v2_api: false # Uncomment this line if you use a version of Vector before v0.17.0
 ```
 
 Where `VECTOR_HOST` is the hostname of the system running Vector and `VECTOR_PORT` is the TCP port on which
-the Vector `datadog_logs` source is listening.
+the Vector `datadog_agent` source is listening.
+
+### Docker configuration
+
+If you are using Docker, add the following to your Agent configuration file.
+
+```
+-e DD_LOGS_CONFIG_LOGS_DD_URL=<VECTOR_HOST>:<VECTOR_PORT>
+-e DD_LOGS_CONFIG_LOGS_NO_SSL=true
+-e DD_LOGS_CONFIG_USE_HTTP=true
+```
 
 ### Vector configuration
-To receive logs from Datadog Agent, configure Vector with a [datadog_logs source][10].
+To receive logs from Datadog Agent, configure Vector with a [datadog_agent source][10].
 To send logs to Datadog, Vector must be configured with at least one [datadog_logs sink][11].
 
 See the official [Vector documentation][12] for all available configuration parameters and
