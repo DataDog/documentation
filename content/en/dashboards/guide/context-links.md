@@ -11,9 +11,9 @@ further_reading:
 
 Dashboards serve as pivot points in your troubleshooting sessions by collecting data from multiple sources and displaying visualizations for you and people across teams. 
 
-Dashboards can be attached to a [monitor notification][1] as the preferred entry point, used as [screenboards][2] to observe key technical or business indicators, or referenced in [runbooks][3] to provide additional context. They present insightful information as snapshots on the current state of your platform, but also interactions so you can pre-emptively see what's going off track and dive deeper in more specialised pages.
+You can attach dashboards to [monitor notifications][1], use them as [screenboards][2] to observe key technical or business indicators, or reference them in [runbooks][3] to provide additional context. Dashboards present insightful information, enabling you to see not only snapshots of the current state of your platform, but also interactions—so you can preemptively see issues and analyze them more deeply in specialized pages.
 
-The video below shows how a user, from an overview Dashboard for some web application, identifies a spike on a techincal metric, zooms in for details, and access the underlying host Dashboard to check for possible root causes.
+The video below demonstrates a user looking at an overview dashboard for a web application. The user identifies a spike on a technical metric, zooms in for details, and accesses the underlying host dashboard to check for possible root causes.
 
 {{< img src="dashboards/guide/context_links/overview.mp4" alt="Context Link Demo" video="true" style="width:80%;" >}}
 
@@ -22,9 +22,9 @@ This guide introduces **context links** in your dashboards.
 2. Example use-cases on how to take advantage of context links configuration (#example-use-cases).
 
 
-## Context links How-To
+## Introduction to context links
 
-Context links bridge dashboard widgets with other pages in Datadog and third-party applications you need to integrate into your workflows.
+Context links bridge dashboard widgets with other pages in Datadog, as well as the third-party applications you have integrated into your workflows.
 
 Users with [edit permissions][24] to dashboards can configure which links are accessible in the link list.
 
@@ -32,13 +32,13 @@ Users with [edit permissions][24] to dashboards can configure which links are ac
  
  {{< img src="dashboards/guide/context_links/default-links.png" alt="Default links" style="width:75%;" >}}
 
-By default, the widget menu promotes links to your host, [traces][4], and [logs][5], along with links that correspond to the widget's data sources. For example, a link to the [**RUM Explorer**][6] if your widget uses [RUM data][7]. Click  **More Related Data Actions** to see additional links in the dropdown menu. 
+By default, the widget menu displays links to your host, [traces][4], and [logs][5]—along with links that correspond to the widget's data sources. For example, the menu displays a link to the [**RUM Explorer**][6] if your widget uses [RUM data][7]. Click **More Related Data Actions** to see additional links in the dropdown menu. 
 
 The widget contains links to the following pages:  
 
 | Link           | Description                                                                           |
 |----------------|---------------------------------------------------------------------------------------|
-| Hosts          | Links to the [Host Map][8] if series consists of 1+ host. Links to the [Host Dashboard][25]if series consist of 1 host.|
+| Hosts          | Links to the [Host Map][8] if series consists of more than one host. Links to the [Host Dashboard][25] if series consists of one host.|
 | Containers     | Links to the [Live Container][9] page.                                                |
 | Processeses    | Links to the [Live Process][10] page.                                                 |
 | APM Traces     | Opens a side panel displaying underlying traces that link to the [Trace Explorer][11].|
@@ -49,16 +49,16 @@ The widget contains links to the following pages:
 When applicable, context links embed:
 
 * A **filter** that combines the widget filter(s) with template variables (if any) and, for grouped-by queries, the one series users click on. 
-* A **time range**. For timeseries and heatmap widgets, the time range corresponds to the time bucket for the data point. For other widgets, the time range is the the whole widget timerange.
+* A **time range**. For timeseries and heatmap widgets, the time range corresponds to the time bucket for the data point. For other widgets, the time range is the full widget time range.
 
 
 ### Customize context links
 
-Create your own context links, override the default links, or promote or hide links through the widget edit mode. This feature is available for [generic widgets][15], and accessible in the Context Link section.
+For any [generic widget][15], enter its edit mode to access its **Context Links** section. Here, you can create your own context links, override default links, and promote or hide links.
 
 {{< img src="dashboards/guide/context_links/edit-links.png" alt="Edit links" style="width:75%;" >}}
 
-To define custom links or override the default links, specify the link name in the **Label** field that appears in the context menu and the link path in the **URL** field for a custom link. You can use the URL parameter key-value helper.
+To define custom links or override the default links, specify the link name in the **Label** field and the link path in the **URL** field. You can use the URL parameter key-value helper.
 
 
 #### Context Links variables
@@ -67,10 +67,10 @@ To define custom links or override the default links, specify the link name in t
 
 Available variable types for context links include:
 
-* **Timerange variables** `{{timestamp_start}}` and `{{timestamp_end}}`. They correspond to the timerange of the widget, or the timerange of the clicked time bucket for timeseries and heatmaps.
+* **Time range variables** `{{timestamp_start}}` and `{{timestamp_end}}`. These variables correspond to the time range of the widget. For timeseries and heat map widgets, these variables correspond to the time range of the clicked time bucket.
 * **Query variables** (`{{@MerchantTier}}` and `{{@MerchantTier.value}}` in the example above). These variables are for widgets with grouped queries, and identify the specific group a user clicks on.
-* **Dashboard template variables** (`{{$env}}` and `{{$env.value}}` in the example above). These variables identify the current value in use for the template variable  when user cliks.
-* **`{{tags}}`**, which is the default combination of all the variables above.
+* **Dashboard template variables** (`{{$env}}` and `{{$env.value}}` in the example above). These variables identify the current value in use for the template variable when user clicks.
+* **`{{tags}}`**, the default combination of all the variables above.
 
 When you have to choose between `{{something}}` and `{{something.value}}`:
 
@@ -93,29 +93,31 @@ The context link:
 
 {{< img src="dashboards/guide/context_links/override-link.mp4" alt="Copy-paste links to bootstrap configuration" video="true" style="width:75%;" >}}
 
-For a most complex context links encoding a wide variety of parameters, it can be more convenient to copy-and-paste the entire URL in the **URL** field to bootstrap the configuration. And rework the variables from there.
+For a complex context link that encodes a wide variety of parameters, it can be more convenient to copy-and-paste the entire URL in the **URL** field to bootstrap the configuration and rework the variables from there.
 
 
 #### URL encoding
 
 {{< img src="dashboards/guide/context_links/url-encoding.png" alt="Customize link" style="width:75%;" >}}
 
-You do not need to worry about URL encoding. 
+Datadog handles URL encoding in context links.
 
-In the example above, the `status:error source:nginx {{@shopist.webstore.merchant.tier}}` query parameter with `{{@shopist.webstore.merchant.tier}}` interpreted as `@shopist.webstore.merchant.tier:basic` is translated into `&query=status%3Aerror%20source%3Anginx%20%40shopist.webstore.merchant.tier%3Abasic`.
+The example above displays a link with a query parameter, `status:error source:nginx {{@shopist.webstore.merchant.tier}}`. Here, `{{@shopist.webstore.merchant.tier}}` is interpreted as `@shopist.webstore.merchant.tier:basic`. The full query parameter is then translated into `&query=status%3Aerror%20source%3Anginx%20%40shopist.webstore.merchant.tier%3Abasic`.
 
 
 ## Example use cases
 
-This section describes examples where you can take advantage of context links to integrate your dashboards in your workflows.
+This section contains examples that demonstrate how you can take advantage of context links to integrate your dashboards into your workflows.
 
-### Dashboards links to a Customer Support solution 
+### Dashboards links to a customer support solution 
+
+The following example explains how to create a link from a user in a dashboard to their corresponding Zendesk user page.
 
 #### Context
 
-You use Datadog to monitor your merchant website. Your Customer Support team uses a dashboard that your [RUM][17] and [Security][18] teams set up to proactively identify your most engaged customers or customers with a troublesome experience, and potentially reach out to them.
+You use Datadog to monitor your merchant website. Your customer support team uses a dashboard that your [RUM][17] and [Security][18] teams set up to proactively identify your most engaged customers—or customers with a troublesome experience, and potentially reach out to them.
 
-To accelerate this troubleshooting workflow, the Customer Support team would like a direct connection between dashboards and a support solution, for example: Zendesk.
+To accelerate this troubleshooting workflow, the customer support team would like a direct connection between dashboards and a support solution, for example: Zendesk.
 
 #### Approach
 
@@ -125,13 +127,13 @@ The primary ID that tracks logged users across your platform in Datadog is the u
 
 A typical Zendesk link to search for users is `https://acme.zendesk.com/agent/search/1?type=user&q=email%3Ashane%40doe.com`, where the user's email is a search parameter.
 
-Add a variable in the URL and the templated link becomes `https://acme.zendesk.com/agent/search/1?type=user&q=email:{{@usr.email.value}}`.
+Add a variable in the URL, and the templated link becomes `https://acme.zendesk.com/agent/search/1?type=user&q=email:{{@usr.email.value}}`.
 
 {{< img src="dashboards/guide/context_links/zendesk_link.png" alt="Zendesk User Page Context Link" style="width:80%;">}}
 
 #### Result
 
-Your Customer Support team's dashboard widget contains a context link that takes you into the Customer Support platform with the appropriate context.
+Your customer support team's dashboard widget contains a context link that takes you into the customer support platform with the appropriate context.
 
 {{< img src="dashboards/guide/context_links/zendesk_interaction.png" alt="Zendesk User Page Context Link" style="width:80%;">}}
 
@@ -141,13 +143,15 @@ Clicking the **Zendesk User Page** link directs you to this user's page in Zende
 
 ### Dashboard links to the AWS Console
 
+The following example explains how to create a link from a host in a dashboard widget to its corresponding AWS EC2 instance page in the AWS Console.
+
 #### Context
 
-Your startup is in its early days. Your platform is hosted on [AWS EC2][19] instances and the procedures to upscale and downscale your platform are mostly manual.
+Your platform is hosted on [AWS EC2][19] instances, and the procedures to upscale and downscale your platform are mostly manual.
 
 You have a dashboard where you've consolidated key health metrics for your infrastructure in Datadog. 
 
-To accelerate this operations workflow, you would like a direct connection between this dashboard and your [AWS Console][20]. For example, to upgrade from `t2.micro` to `t2.large`.
+To accelerate this operations workflow, you would like a direct connection between this dashboard and your [AWS Console][20]—for example, to upgrade from `t2.micro` to `t2.large`.
 
 #### Approach
 
@@ -180,19 +184,21 @@ Clicking the **AWS EC2 Instance Summary** link directs you to the AWS EC2 instan
 
 ### Dashboard links to saved views and remapped attributes in Datadog
 
+The following example explains how to create a link from a RUM event in a dashboard widget to its corresponding logs.
+
 #### Context
 
-You monitor your corporate website with Datadog. You may use [RUM][17] to understand your users and [Logs][21] to [overwatch your API Gateways][22] with a more technical perspective.
+You monitor your corporate website with Datadog. You may use [RUM][17] to understand your users and [Logs][21] to [oversee your API Gateways][22] from a more technical perspective.
 
-Your front-end engineers typically use dashboards with high-level RUM insights. The API Gateways team maintains a [Saved View][23] in the Log Explorer, which is a fine-tuned perspective that the front-end monitoring team relies on to monitor information that is relevant to them. 
+Your frontend engineers typically use dashboards with high-level RUM insights. You API Gateways team maintains a [Saved View][23] in the Log Explorer, which is a fine-tuned perspective that the frontend monitoring team relies on to monitor information that is relevant to them. 
 
 {{< img src="dashboards/guide/context_links/logs-saved-view_result.jpg" alt="Logs Saved View result" style="width:90%;" >}}
 
-To accelerate this troubleshooting workflow, the front-end monitoring teams would like to access the saved view with the current context of the dashboard.
+To accelerate this troubleshooting workflow, the frontend monitoring teams would like to access the saved view with the current context of the dashboard.
 
 #### Approach to Saved Views
 
-[Saved Views][23] define the default query, visualization, and configuration options in the Explorers. A typical saved view link is `https://app.datadoghq.com/logs?saved_view=305130`, which encodes the Log Explorer URL under-the-hood. 
+[Saved Views][23] define the default query, visualization, and configuration options in the Log Explorer. A typical saved view link is `https://app.datadoghq.com/logs?saved_view=305130`, which encodes the Log Explorer URL under the hood. 
 
 You can append the saved view's short link to override any parameter in the resulting Log Explorer URL.
 
