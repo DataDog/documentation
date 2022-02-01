@@ -9,7 +9,7 @@ further_reading:
 
 ## Overview
 
-Dashboards serve as pivot points in your troubleshooting sessions by collecting data from multiple sources and displaying visualizations for you and people across teams. 
+Dashboards collect data from multiple sources and display this data as visualizations. 
 
 You can attach dashboards to [monitor notifications][1], use them as [screenboards][2] to observe key technical or business indicators, or reference them in [runbooks][3] to provide additional context. Dashboards present insightful information, enabling you to see not only snapshots of the current state of your platform, but also interactions—so you can preemptively see issues and analyze them more deeply in specialized pages.
 
