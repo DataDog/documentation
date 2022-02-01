@@ -15,6 +15,9 @@ further_reading:
 - link: "/synthetics/guide/"
   tag: "Documentation"
   text: "Synthetic Monitoring Guides"
+- link: "https://www.datadoghq.com/blog/monitor-cdn-performance-with-synthetic-testing/"
+  tag: "Blog"
+  text: "Monitor CDN performance within your Synthetic tests"
 
 ---
 
