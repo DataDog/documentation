@@ -90,12 +90,12 @@ body {
         }
     }
 
-    h4 {
+    .h4 {
         padding: 0 0 10px 10px;
         color: $ddpurple;
-        font-size: 24px;
+        font-size: 22px;
         font-weight: 200;
-        text-transform: capitalize !important;
+        margin-top: 14px;
 
         &:lang(ja) {
             font-size: 20px;
