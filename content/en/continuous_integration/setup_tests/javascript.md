@@ -148,7 +148,7 @@ DD_ENV=ci DD_SERVICE=my-ui-app npm test
 
 ### Add extra tags
 
-To add additional information to your tests such as the responsible team, use `cy.task('dd:addTags', { yourTags: 'here' })` in your test or hooks. 
+To add additional information to your tests such as the responsible team, use `cy.task('dd:addTags', { yourTags: 'here' })` in your test or hooks.
 
 For example:
 
@@ -164,9 +164,15 @@ it('renders a hello world', () => {
 {{< /code-block >}}
 
 
+### CI Visibility - RUM
+
+If your page under test is instrumented using [RUM][4], a link between your `cypress` tests and the RUM sessions generated within those tests will be created automatically.
+
+
 [1]: https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests#Plugins-file
 [2]: https://docs.cypress.io/guides/references/configuration#cypress-json
 [3]: https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests#Support-file
+[4]: /real_user_monitoring/browser/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -250,7 +256,7 @@ If you are running tests in non-supported CI providers or with no `.git` folder,
 [Mocha >=9.0.0][8] uses an ESM-first approach to load test files. That means that if ES modules are used (for example, by defining test files with the `.mjs` extension), _the instrumentation is limited_. Tests are detected, but there isn't visibility into your test. For more information about ES modules, see the [NodeJS documentation][9].
 
 ### Browser tests
-The JavaScript tracer does not support browsers, so browser tests with `mocha` or `jest` do not provide visibility on the browser. For tests with `cypress`, `dd-trace` provides visibility on the node process running the test, but not on the browser. 
+The JavaScript tracer does not support browsers, so browser tests with `mocha` or `jest` do not provide visibility on the browser. For tests with `cypress`, `dd-trace` provides visibility on the node process running the test, but not on the browser.
 
 If you want visibility on the browser, consider [Real User Monitoring][10].
 
