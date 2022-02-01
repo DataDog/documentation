@@ -1,11 +1,14 @@
 targetSystem: windows
 datadog:
   kubeStateMetricsEnabled: false
-  apm:
-    enabled: true
-  processAgent:
-    enabled: false
   orchestratorExplorer:
+    enabled: false
+  logs:
+    enabled: false
+  apm:
+    socketEnabled: false
+    portEnabled: true
+  processAgent:
     enabled: false
 agents:
   rbac:

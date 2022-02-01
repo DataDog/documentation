@@ -2427,7 +2427,7 @@ main:
     identifier: cloud_siem_log_detection_rules
     weight: 103
   - name: OOTB Rules
-    url: /security_platform/default_rules#cat-log-detection
+    url: /security_platform/default_rules#cat-cloud-siem
     parent: cloud_siem
     identifier: cloud_siem_default_rules
     weight: 104
