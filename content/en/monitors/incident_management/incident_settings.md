@@ -72,7 +72,7 @@ The `incident` prefix can be changed to any string composed of *lowercase* lette
 
 **Notes:**
 
-1. Changing your channel name template will not rename any existing incident channels, the new name template will only apply going forward.
+- Changing your channel name template does not rename any existing incident channels. The new name template only applies going forward.
 2. If you choose to uncheck `{public_id}` there is a chance two incidents will have duplicate channel names, in which case the Datadog Slack App will automatically append a random lowercase letter or number to the end of your channel name to prevent the channel creation process from failing. 
 3. If you choose to check `{title}`, the Datadog Slack App wll automatically rename the channel if an incident's title changes.
 
