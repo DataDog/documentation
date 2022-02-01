@@ -64,7 +64,7 @@ node --require dd-trace/init app.js
 {{% /tab %}}
 {{< /tabs >}}
 
- **Or** enable the library by setting the environment variable: 
+   **Or** enable the library by setting the environment variable: 
    ```
    DD_APPSEC_ENABLED=true node app.js
    ```
