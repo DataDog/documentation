@@ -18,6 +18,10 @@ further_reading:
    ```
    npm install dd-trace
    ```
+   or to update from a previously installed 1.x version:
+   ```
+   npm install dd-trace@2
+   ```
 
 2. **Import and initialize the library** either in code or via command line arguments. The NodeJS library must be imported and initialized before **any other module**.
       {{< tabs >}}
