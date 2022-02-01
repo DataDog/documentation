@@ -437,6 +437,12 @@ COPY --from=public.ecr.aws/datadog/lambda-extension:<TAG> /opt/extensions/ /opt/
 
 Replace `<TAG>` with either a specific version number (for example, `{{< latest-lambda-layer-version layer="extension" >}}`) or with `latest`. You can see a complete list of possible tags in the [Amazon ECR repository][1].
 
+Beginning with lambda-extension TAG=11, both the linux/amd64 & linux/arm platforms are included in the image's manifest. Make sure to set the proper platform when building your Dockerfile.
+
+```
+docker build --platform "linux/amd64" .
+```
+
 ### Configure the function
 
 1. Set your image's `CMD` value to `datadog_lambda.handler.handler`. You can set this in AWS or directly in your Dockerfile. Note that the value set in AWS overrides the value in the Dockerfile if you set both.
