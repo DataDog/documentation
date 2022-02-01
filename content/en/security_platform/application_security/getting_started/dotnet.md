@@ -80,13 +80,15 @@ net start w3svc
 ```
 
 **Or**, to avoid editing registry keys, edit the application settings in the `web.config` file of your application: 
-
+```
 <configuration>
   <appSettings>
         <add key="DD_APPSEC_ENABLED" value="true"/>
   </appSettings>
 </configuration>
-This can also be done at IIS application pool's level in the `applicationHost.config` file, usually in `C:\Windows\System32\inetsrv\config\`: 
+```
+
+This can also be done at the IIS application pools level in the `applicationHost.config` file, usually in `C:\Windows\System32\inetsrv\config\`: 
 ```
 <system.applicationHost>
 
