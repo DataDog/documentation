@@ -19,7 +19,48 @@ further_reading:
    npm install dd-trace
    ```
 
-2. **Enable Application Security in your environment** by setting the following environment variable: 
+2. **Import and initialize the library** either in code or via command line arguments. The NodeJS library must be imported and initialized before **any other module**.
+      {{< tabs >}}
+{{% tab "In JavaScript code" %}}
+
+```js
+// This line must come before importing any instrumented module.
+const tracer = require('dd-trace').init({
+  appsec: true
+})
+```
+
+{{% /tab %}}
+{{% tab "In TypeScript code" %}}
+
+For TypeScript and bundlers that support EcmaScript Module syntax, initialize the tracer in a separate file in order to maintain correct load order.
+```typescript
+// server.ts
+import './tracer'; // must come before importing any instrumented module.
+
+// tracer.ts
+import tracer from 'dd-trace';
+tracer.init({
+  appsec: true
+}); // initialized in a different file to avoid hoisting.
+export default tracer;
+```
+If the default config is sufficient, or all configuration is done through environment variables, you can also use `dd-trace/init`, which loads and initializes in one step.
+```typescript
+import `dd-trace/init`;
+```
+{{% /tab %}}
+{{% tab "On the command line" %}}
+
+To load initialize the library in one step on the command line, use the `--require` option to Node.js
+```sh
+node --require dd-trace/init app.js
+```
+**Note:** This approach requires using environment variables for all configuration of the library.
+{{% /tab %}}
+{{< /tabs >}}
+
+3. **Enable Application Security in your environment** by setting the following environment variable: 
    ```
    DD_APPSEC_ENABLED=true node app.js
    ```
@@ -82,15 +123,6 @@ Initialize Application Security in your code or set `DD_APPSEC_ENABLED` environm
 DD_APPSEC_ENABLED=true node app.js
 ```
 
-{{% /tab %}}
-{{% tab "In code" %}}
-
-The following line must come before you import any instrumented module:
-```
-const tracer = require('dd-trace').init({
-    appsec: true
-});
-```
 {{% /tab %}}
 {{< /tabs >}}
 

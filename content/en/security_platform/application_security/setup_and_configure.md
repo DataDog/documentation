@@ -14,7 +14,7 @@ further_reading:
 ---
 
 <div class="alert alert-warning">
-Application Security is currently in public beta. See the <a href="https://app.datadoghq.com/security/appsec">in-app instructions</a> to get started.
+Application Security is in public beta. See the <a href="https://app.datadoghq.com/security/appsec">in-app instructions</a> to get started.
 </div>
 
 ## Compatibility
