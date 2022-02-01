@@ -17,9 +17,8 @@ Once you've created [RBAC roles for logs][1], assign or remove [permissions][2] 
 {{< tabs >}}
 {{% tab "UI" %}}
 
-Assign or remove permission to a role directly by [updating the role in the Datadog application][1].
+Assign or remove permission to a role directly by [updating the role on the Datadog site][1].
 
-{{< img src="account_management/rbac/logs_permissions.png" alt="Logs Permissions"  style="width:75%;" >}}
 
 [1]: https://app.datadoghq.com/access/roles
 {{% /tab %}}
@@ -59,7 +58,6 @@ This permission is global and enables both the creation of new indexes, and the 
 
 **Note**: This permission also grants [Logs Read Index Data](#logs_read_index_data) and [Logs Write Exclusion Filters](#logs_write_exclusion_filters) permissions behind the scenes.
 
-
 ### `logs_write_exclusion_filters`
 
 Grants a role the ability to create or modify [exclusion filters][8] within an index.
@@ -72,9 +70,9 @@ This permission can be assigned either globally or restricted to a subset of ind
 {{% tab "UI" %}}
 
 1. Remove the global permission on the role.
-2. Grant this permission to the role in [the Index page of the Datadog app][1] by editing an index and adding a role to the "Grant editing Exclusion Filters of this index to" field (screenshot below).
+2. Grant this permission to the role in [the Index page on the Datadog site][1] by editing an index and adding a role to the "Grant editing Exclusion Filters of this index to" field (screenshot below).
 
-{{< img src="account_management/rbac/logs_write_exclusion_filters.png" alt="Logs Write Exclusion Filters"  style="width:75%;" >}}
+{{< img src="account_management/rbac/logs_write_exclusion_filters.png" alt="Logs Write Exclusion Filters" style="width:75%;" >}}
 
 
 [1]: /logs/log_configuration/indexes/
@@ -98,10 +96,9 @@ Grants a role the ability to create and modify [log processing pipelines][9]. Th
 
 **Note**: This permission also grants [Logs Write Processors](#logs_write_processors) (for all processors on all pipelines) permissions behind the scenes.
 
-
 ### `logs_write_processors`
 
-Grants a role the ability to create, edit or delete processors and nested pipelines.
+Grants a role the ability to create, edit, or delete processors and nested pipelines.
 
 This permission can be assigned either globally or restricted to a subset of pipelines.
 
@@ -110,7 +107,7 @@ This permission can be assigned either globally or restricted to a subset of pip
 
 Assign the role(s) in the modal of a specific pipeline.
 
-{{< img src="account_management/rbac/logs_write_processors.png" alt="Logs Write Processors"  style="width:75%;" >}}
+{{< img src="account_management/rbac/logs_write_processors.png" alt="Logs Write Processors" style="width:75%;" >}}
 
 {{% /tab %}}
 {{% tab "API" %}}
@@ -141,7 +138,7 @@ curl -X POST \
 
 ### `logs_write_archives`
 
-Grants the ability to create, edit or delete [Log Archives][12]. This includes:
+Grants the ability to create, edit, or delete [Log Archives][12]. This includes:
 
 - Setting archives filters for what logs should be routed to the archive
 - Setting the name of the archive
@@ -162,14 +159,14 @@ In the following example, assuming all roles but `Guest` have the `logs_read_arc
 * Prod is accessible to all users belonging to `Customer Support`.
 * Security-Audit is not accessible to users who belong to `Customer Support`, unless they also belong to `Audit & Security`.
 
-{{< img src="account_management/rbac/logs_archives_list.png" alt="Create a custom Role"  style="width:90%;">}}
+{{< img src="account_management/rbac/logs_archives_list.png" alt="Create a custom Role" style="width:90%;">}}
 
 {{< tabs >}}
 {{% tab "UI" %}}
 
 Proceed to archive creation, or update at any moment while editing the archive.
 
-{{< img src="account_management/rbac/logs_archive_restriction.png" alt="Create a custom Role"  style="width:90%;">}}
+{{< img src="account_management/rbac/logs_archive_restriction.png" alt="Create a custom Role" style="width:90%;">}}
 
 {{% /tab %}}
 {{% tab "API" %}}
@@ -188,7 +185,7 @@ Grants the ability to write historical views, meaning to trigger a [Log Rehydrat
 
 This permission is global. It enables users to trigger a rehydration for archives on which they have [Logs Read Archive](#logs_read_archives) permission.
 
-{{< img src="account_management/rbac/logs_hv_roles_combination.png" alt="Write Historical View"  style="width:70%;">}}
+{{< img src="account_management/rbac/logs_hv_roles_combination.png" alt="Write Historical View" style="width:70%;">}}
 
 In the example above:
 
@@ -197,25 +194,23 @@ In the example above:
 * `PROD` Role members **cannot** rehydrate from the `Audit Archive`, as they do not have the Read Archive permission.
 
 
-When assigning `team:audit` tags on all logs rehydrated from the `Audit Archive`, make sure that `Audit` role members who are restricted to read `team:audit`logs  can only access rehydrated content. For more details on how to add tags and rehydration, see the [Log Archive Setup section][12].
+When assigning `team:audit` tags on all logs rehydrated from the `Audit Archive`, make sure that `Audit` role members who are restricted to read `team:audit`logs can only access rehydrated content. For more details on how to add tags and rehydration, see the [Log Archive Setup section][12].
 
 For `service:ci-cd` logs that are rehydrated from the `Prod Archive`, note the following:
 
 * If you **do not** use the [Log Read Index Data](#logs_read_index_data) legacy permission, these logs are accessible for `CI-CD` role members.
 * If you **do** use the [Log Read Index Data](#logs_read_index_data) legacy permission, these logs are not accessible for `CI-CD` role members, as the resulting historical view is restricted to `PROD` and `ADMIN` role members.
 
+### Removed: `logs_public_config_api`
 
-### `logs_public_config_api`
+Datadog has removed the `logs_public_config_api` permission. 
 
-Grants the ability to view, create, or modify log configuration through the Datadog API:
-
-* View and configure [archives][14] through the API
-* View and configure [indexes][15] through the API
-* View and configure [pipelines][16] through the API
-* View and configure [restriction queries][17] through the API
-* View and configure [metrics generated from logs][18] through the API
-
-The Log Public Configuration API permission only grants the permission to operate actions through API. For instance, a user without [Log Write Exclusion Filter Permission](#logs_write_exclusion_filters) cannot update sampling rate through API, even if granted The Log Public Configuration API permission.
+Five separate permissions control the ability to view, create, or modify log configuration through the Datadog API:
+* [`logs_generate_metrics`](#logs_generate_metrics)
+* [`logs_modify_indexes`](#logs_modify_indexes)
+* [`logs_write_archives`](#logs_write_archives)
+* [`logs_write_pipelines`](#logs_write_pipelines)
+* [`user_access_manage`][14]
 
 ## Log data access
 
@@ -226,9 +221,9 @@ Grant the following permissions to manage read access on subsets of log data:
 
 ### `logs_read_data`
 
-Read access to log data. If granted, other restrictions then apply such as `logs_read_index_data` or with [restriction query][17].
+Read access to log data. If granted, other restrictions then apply such as `logs_read_index_data` or with [restriction query][15].
 
-Roles are additive: if a user belongs to multiple roles, the data they have access to is the union of all the permissions from each of the roles.
+Roles are additive. If a user belongs to multiple roles, the data they have access to is the union of all the permissions from each of the roles.
 
 **Example**:
 
@@ -241,12 +236,11 @@ Roles are additive: if a user belongs to multiple roles, the data they have acce
 {{< tabs >}}
 {{% tab "UI" %}}
 
-To restrict users so they see no more than logs matching a restriction query, use the [Data Access page][1] in the Datadog App to:
+To restrict users so they see no more than logs matching a restriction query, use the [Data Access page][1]:
 
 1. [Create](#create-a-restriction-query) a restriction query.
 2. [Assign](#assign-a-role-to-a-restriction-query) one or multiple roles to that restriction query.
 3. [Check](#check-restriction-queries) what roles and users are assigned to which restriction queries.
-
 
 This view lists:
 
@@ -254,13 +248,11 @@ This view lists:
 * **`Unrestricted Access` section**: all roles that have `log_read_data` permission with no further restrictions,
 * **`No Access` section**: all roles that does not have the `log_read_data` permission.
 
-
 ## Create a restriction query
 
 Create a new restriction query defining its query filter. The new query appears in the list of restrictions with no role attached to it.
 
 {{< img src="account_management/rbac/logs_rq-create.mp4" alt="Create a Restriction Query" video=true style="width:70%;">}}
-
 
 ### Assign a role to a restriction query
 
@@ -274,25 +266,25 @@ Likewise, use the same "Move" interaction to grant `Unrestricted Access` to a Ro
 
 ### Check restriction queries
 
-This page won't display more than 50 restriction queries at once, and more than 50 roles per section. In case you have hundreds if not thousands of roles and restriction queries, use the filters to scope this view down:
+The Data Access page displays a maximum of 50 restriction queries, and 50 roles per section. If you have more roles and restriction queries than the page can display, use the filters to scope this view down:
 
 * with the restriction query filter:
 
-{{< img src="account_management/rbac/logs_rq-filter.png" alt="Filter Restriction Queries"  style="width:70%;">}}
+{{< img src="account_management/rbac/logs_rq-filter.png" alt="Filter Restriction Queries" style="width:70%;">}}
 
 * with the role filter:
 
-{{< img src="account_management/rbac/logs_rq-view_as_role.png" alt="View as Roles"  style="width:70%;">}}
+{{< img src="account_management/rbac/logs_rq-view_as_role.png" alt="View as Roles" style="width:70%;">}}
 
 * with the user filter, which is a convenient way to see what a specific user belonging to multiple roles actually has access to:
 
-{{< img src="account_management/rbac/logs_rq-view_as_user.png" alt="View as Roles"  style="width:70%;">}}
+{{< img src="account_management/rbac/logs_rq-view_as_user.png" alt="View as Roles" style="width:70%;">}}
 
 [1]: https://app.datadoghq.com/logs/pipelines/data-access
 {{% /tab %}}
 {{% tab "API" %}}
 
-Revoke or grant this permission from a role via [the Roles API][1].
+Revoke or grant this permission from a role with [the Roles API][1].
 Use [Restriction Queries][2] to scope the permission to a subset of Log Data.
 
 [1]: /api/#roles
@@ -321,7 +313,7 @@ To scope this permission to a subset of indexes, first remove the `logs_read_ind
 
 Grant this role access to the index in [Configuration page][1].
 
-{{< img src="account_management/rbac/logs_read_index_data.png" alt="Grant read access for indexes to specific roles"  style="width:75%;" >}}
+{{< img src="account_management/rbac/logs_read_index_data.png" alt="Grant read access for indexes to specific roles" style="width:75%;" >}}
 
 
 [1]: https://app.datadoghq.com/logs/indexes
@@ -355,7 +347,7 @@ curl -X POST \
 
 ### `logs_live_tail`
 
-Grants a role the ability to use the [Live Tail][19] feature.
+Grants a role the ability to use the [Live Tail][16] feature.
 
 This permission is global, and grants access to the livetail regardless of [Log Read Index Data](#logs_read_index_data) permission.
 
@@ -379,9 +371,6 @@ This permission is global, and grants access to the livetail regardless of [Log 
 [11]: /logs/explorer/facets/#alias-facets
 [12]: /logs/archives
 [13]: /logs/archives/rehydrating
-[14]: /api/v2/logs-archives/
-[15]: /api/v1/logs-indexes/
-[16]: /api/v1/logs-pipelines/
-[17]: /api/v2/logs-restriction-queries/
-[18]: /api/v2/logs-metrics/
-[19]: /logs/explorer/live_tail/
+[14]: /account_management/rbac/permissions/#access-management
+[15]: /api/v2/logs-restriction-queries/
+[16]: /logs/explorer/live_tail/

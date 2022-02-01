@@ -92,14 +92,14 @@ Alternatively you can set profiler configuration using environment variables:
 
 | Environment variable                             | Type          | Description                                                                                      |
 | ------------------------------------------------ | ------------- | ------------------------------------------------------------------------------------------------ |
-| `DD_SERVICE`                                     | String        | The Datadog [service][8] name.     |
-| `DD_ENV`                                         | String        | The Datadog [environment][9] name, for example, `production`. |
-| `DD_VERSION`                                     | String        | The version of your application.                             |
+| `DD_ENV`                                         | String        | The [environment][8] name, for example: `production`. |
+| `DD_SERVICE`                                     | String        | The [service][8] name, for example, `web-backend`. |
+| `DD_VERSION`                                     | String        | The [version][8] of your service. |
 | `DD_TAGS`                                        | String        | Tags to apply to an uploaded profile. Must be a list of `<key>:<value>` separated by commas such as: `layer:api,team:intake`.   |
 
 ## Not sure what to do next?
 
-The [Getting Started with Profiler][10] guide takes a sample service with a performance problem and shows you how to use Continuous Profiler to understand and fix the problem.
+The [Getting Started with Profiler][9] guide takes a sample service with a performance problem and shows you how to use Continuous Profiler to understand and fix the problem.
 
 ## Further Reading
 
@@ -112,6 +112,5 @@ The [Getting Started with Profiler][10] guide takes a sample service with a perf
 [5]: https://app.datadoghq.com/profiling
 [6]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/profiler#WithProfileTypes
 [7]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/profiler#ProfileType
-[8]: /tracing/visualization/#services
-[9]: /tracing/guide/setting_primary_tags_to_scope/#environment
-[10]: /getting_started/profiler/
+[8]: /getting_started/tagging/unified_service_tagging
+[9]: /getting_started/profiler/

@@ -22,15 +22,13 @@ aliases:
 
 ## Prerequisites
 
-The [Datadog Forwarder Lambda function][1] is required to ingest AWS Lambda traces, enhanced metrics, custom metrics, and logs.
-
-If your Go Lambda functions are still using runtime `go1.x`, consider either [migrating][2] to `provided.al2` or using the [Datadog Forwarder][3] instead of the Datadog Lambda Extension.
+If your Go Lambda functions are still using runtime `go1.x`, you must either [migrate][1] to `provided.al2` or use the [Datadog Forwarder][2] instead of the Datadog Lambda Extension.
 
 ## Configuration
 
 ### Install the Datadog Lambda library
 
-Install the [Datadog Lambda library][2] locally by running the following command:
+Install the [Datadog Lambda library][3] locally by running the following command:
 
 ```
 go get github.com/DataDog/datadog-lambda-go
@@ -144,14 +142,6 @@ func myHandler(ctx context.Context, event MyEvent) (string, error) {
     "product:latte", "order:online" // Associated tags
   )
 
-  // Submit a custom metric with timestamp
-  ddlambda.MetricWithTimestamp(
-    "coffee_house.order_value", // Metric name
-    12.45, // Metric value
-    time.Now(), // Timestamp, must be within last 20 mins
-    "product:latte", "order:online" // Associated tags
-  )
-
   req, err := http.NewRequest("GET", "http://example.com/status")
 
   // Add the datadog distributed tracing headers
@@ -170,9 +160,9 @@ If your Lambda function is running in a VPC, follow the [Datadog Lambda Extensio
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /serverless/guide/datadog_forwarder_go
-[2]: https://github.com/DataDog/datadog-lambda-go
-[3]: https://aws.amazon.com/blogs/compute/migrating-aws-lambda-functions-to-al2/
+[1]: https://aws.amazon.com/blogs/compute/migrating-aws-lambda-functions-to-al2/
+[2]: /serverless/guide/datadog_forwarder_go
+[3]: https://github.com/DataDog/datadog-lambda-go
 [4]: https://app.datadoghq.com/organization-settings/api-keys
 [5]: /serverless/libraries_integrations/extension/#tagging
 [6]: https://app.datadoghq.com/functions
