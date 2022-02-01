@@ -1,7 +1,8 @@
 ---
 title: Configure Monitors
 kind: documentation
-description: Describe the monitor creation page. How to configure properly a monitor ?
+description: Describes the monitor creation page.
+
 ---
 
 ## Overview

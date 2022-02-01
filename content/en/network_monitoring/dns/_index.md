@@ -22,20 +22,23 @@ further_reading:
 
 {{< img src="network_performance_monitoring/dns_default.png" alt="DNS Monitoring" >}}
 
+<div class="alert alert-info">
+Upgrade to agent version 7.33 to enable DNS monitoring.
+</div>
+
 DNS Monitoring provides an overview of DNS server performance to help you identify server-side and client-side DNS issues. By collecting and displaying flow-level DNS metrics, this page can be used to identify:
 
 * The pods or services making DNS requests and the servers receiving those requests.
 * The endpoints making the most requests or making requests at the highest rate.
 * If a DNS server’s response time to requests has gradually or suddenly increased.
-* The DNS servers with a high error rate and the type of errors being emitted. 
+* The DNS servers with a high error rate and the type of errors being emitted.
+* Which domains are being resolved.
 
 ## Setup
 
 Before you can begin to use DNS Monitoring, [set up Network Performance Monitoring][1]. Also ensure you are using the latest version of the Agent, or at least Agent v7.23+ for Linux OS, and v7.28+ for Windows Server. Once installed, a ‘DNS’ tab is accessible in the Network Performance Monitoring product.
 
-If you are using [Kubernetes on Helm][2], to enable DNS monitoring, you need to set `collectDNSStats:` to `true` in the [values.yaml][3].
-
-Are you looking for Network Device Monitoring instead? See the [NPM setup instructions][4].
+Are you looking for Network Device Monitoring instead? See the [NDM setup instructions][2].
 
 ## Queries
 
@@ -51,6 +54,7 @@ To refine your search to a particular DNS server, filter the destination search 
 * `host`: The host name of the DNS server.
 * `service`: The service running on the DNS server.
 * `IP`: The IP of the DNS server.
+* `dns_query`: **requires agent version 7.33 or higher** The domain that was queried.
 
 This example shows all flows from pods in the production environment’s availability zone to hosts receiving DNS requests:
 
@@ -82,7 +86,7 @@ The network table breaks down the above metrics by each _source_ and _destinatio
 
 Configure the columns in your table using the **Customize** button at the top right of the table.
 
-Narrow down the traffic in your view with the **Filter Traffic** [options][5].
+Narrow down the traffic in your view with the **Filter Traffic** [options][3].
 
 ## Sidepanel
 
@@ -100,7 +104,5 @@ The sidepanel provides contextual telemetry to help you quickly debug DNS server
 
 
 [1]: /network_monitoring/performance/
-[2]: /agent/kubernetes/?tab=helm
-[3]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml#L299-L300
-[4]: /network_monitoring/devices/setup?tab=snmpv2
-[5]: /network_monitoring/performance/network_page#table
+[2]: /network_monitoring/devices/setup?tab=snmpv2
+[3]: /network_monitoring/performance/network_page#table
