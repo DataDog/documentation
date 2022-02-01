@@ -44,4 +44,4 @@ In the [Security Signals Explorer][5], click on any security signal to see what 
 [2]: /agent/
 [3]: /security_platform/default_rules/#cat-application-security
 [4]: /security_platform/application_security/getting_started/
-[5]: /security/appsec/signals
+[5]: /security_platform/explorer/
