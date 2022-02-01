@@ -91,8 +91,8 @@ Integrate the Go tracer with the following list of web frameworks using one of t
 - [gRPC][2]
 - [net/http][3]
 - [Gorilla Mux][4]
-- [Echo][5] earlier than v5
-- [Chi][6] v2 or later
+- [Echo][5]
+- [Chi][6]
 - [HttpRouter][7]
 
 ### Enabling CGO
@@ -101,9 +101,9 @@ Compiling your code with Application Security enabled involves [CGO][8] and ther
 	
 - The `gcc` compiler for the target `GOOS` and `GOARCH`.
 - The C library headers.
-- The CGO bindings enabled. This is controlled by the `CGO_ENABLED` environment variable which is enabled by default when compiling natively. If CGO is disabled, features such as RASP and WAF will also be disabled.
+- The CGO bindings enabled. This is controlled by the `CGO_ENABLED` environment variable which is enabled by default when compiling natively.
 	
-To install the `gcc` compiler:
+To install the above requirements:
 
 | Operating system     | Console command |
 |----------------------|-----------------|
@@ -112,14 +112,14 @@ To install the `gcc` compiler:
 | RHEL, CentOS, Fedora | `$ yum install gcc glibc-devel` |
 | macOS                | `$ xcode-select --install`      |
 	
-**Note**: The Go toolchain disables CGO when cross-compiling.
+**Note**: The Go toolchain disables CGO when cross-compiling and needs to be explicitly enabled.
 
 [1]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib
 [2]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/grpc#example-package-Server
 [3]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http#example-package
 [4]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/gorilla/mux#example-package
-[5]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/labstack/echo#example-package
-[6]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi#example-package
+[5]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/labstack/echo.v4#example-package
+[6]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi.v5#example-package
 [7]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/julienschmidt/httprouter#example-package
 [8]: https://github.com/golang/go/wiki/cgo
 {{< /programming-lang >}}
