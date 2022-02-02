@@ -11,13 +11,13 @@ aliases:
 further_reading:
 - link: "/security_platform/default_rules"
   tag: "Documentation"
-  text: "Explore default security rules"
+  text: "Explore default detection rules"
 - link: "/security_platform/explorer"
   tag: "Documentation"
   text: "Learn about the Security Signals Explorer"
 ---
 
-To get started with Datadog Cloud SIEM, follow these steps:
+To get started with Datadog Cloud SIEM (Security Information and Event Management), follow these steps:
 
 - [Ingest logs](#ingest-logs)
 - [Review Detection Rules](#review-detection-rules)
@@ -34,7 +34,7 @@ Datadog’s [Log Collection documentation][2] provides detailed information on c
 
 ## Review Detection Rules
 
-Datadog provides out-of-the-box [Detection Rules][4], which begin detecting threats in your environment immediately. The default enabled Detection Rules detect threats according to known best practices. More mature security organizations may wish to enable more rules to begin detecting more advanced threats. Additionally, more advanced templates are included to provide guidance on how to detect threats in your custom applications. Refer to the [Detection Rules documentation][5] for further details.
+Datadog provides out-of-the-box [Detection Rules][4], which begin detecting threats in your environment immediately. The default enabled Detection Rules detect threats according to known best practices. More mature security organizations may wish to enable more detection rules to begin detecting more advanced threats. Additionally, more advanced templates are included to provide guidance on how to detect threats in your custom applications. Refer to the [Detection Rules documentation][5] for further details.
 
 ## Explore Security Signals
 

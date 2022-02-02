@@ -7035,6 +7035,10 @@ paths:
           description: Forbidden
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
       summary: Get archive order
       tags:
       - Logs Archives
@@ -7113,6 +7117,10 @@ paths:
           description: Forbidden
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
       summary: Get all archives
       tags:
       - Logs Archives
@@ -7228,6 +7236,10 @@ paths:
           description: Not found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
       summary: Get an archive
       tags:
       - Logs Archives
@@ -7359,6 +7371,10 @@ paths:
           description: Not found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
       summary: List read roles for an archive
       tags:
       - Logs Archives
@@ -7422,6 +7438,10 @@ paths:
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
       summary: Get all log-based metrics
       tags:
       - Logs Metrics
@@ -7515,6 +7535,10 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
       summary: Get a log-based metric
       tags:
       - Logs Metrics
@@ -7580,6 +7604,10 @@ paths:
           description: Authentication error
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
       summary: List restriction queries
       tags:
       - Logs Restriction Queries
@@ -7619,6 +7647,11 @@ paths:
           description: Authentication error
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - user_access_manage
       summary: Create a restriction query
       tags:
       - Logs Restriction Queries
@@ -7660,6 +7693,10 @@ paths:
           description: Authentication error
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
       summary: Get restriction query for a given role
       tags:
       - Logs Restriction Queries
@@ -7696,6 +7733,10 @@ paths:
           description: Authentication error
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
       summary: Get all restriction queries for a given user
       tags:
       - Logs Restriction Queries
@@ -7734,6 +7775,11 @@ paths:
           description: Not found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - user_access_manage
       summary: Delete a restriction query
       tags:
       - Logs Restriction Queries
@@ -7777,6 +7823,10 @@ paths:
           description: Not found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
       summary: Get a restriction query
       tags:
       - Logs Restriction Queries
@@ -7825,6 +7875,11 @@ paths:
           description: Not found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - user_access_manage
       summary: Update a restriction query
       tags:
       - Logs Restriction Queries
@@ -7870,6 +7925,11 @@ paths:
           description: Not found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - user_access_manage
       summary: Revoke role from a restriction query
       tags:
       - Logs Restriction Queries
@@ -7914,6 +7974,10 @@ paths:
           description: Not found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
       summary: List roles for a restriction query
       tags:
       - Logs Restriction Queries
@@ -7958,6 +8022,11 @@ paths:
           description: Not found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - user_access_manage
       summary: Grant role to a restriction query
       tags:
       - Logs Restriction Queries

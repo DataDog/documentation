@@ -90,7 +90,7 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
 [1]: https://docs.datadoghq.com/serverless/serverless_integrations/plugin
 [2]: https://docs.datadoghq.com/serverless/forwarder/
 [3]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
-[4]: /serverless/troubleshooting/serverless_tracing_and_webpack/
+[4]: /serverless/guide/serverless_tracing_and_webpack/
 [5]: https://webpack.js.org/
 {{% /tab %}}
 {{% tab "AWS SAM" %}}
@@ -304,7 +304,7 @@ Subscribe the Datadog Forwarder Lambda function to each of your function’s log
 [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
 [2]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
 [3]: https://www.npmjs.com/package/datadog-lambda-js
-[4]: /serverless/troubleshooting/serverless_tracing_and_webpack/
+[4]: /serverless/guide/serverless_tracing_and_webpack/
 [5]: https://webpack.js.org/
 [6]: https://docs.datadoghq.com/serverless/forwarder/
 [7]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
