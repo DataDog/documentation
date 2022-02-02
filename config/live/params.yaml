@@ -8,11 +8,9 @@ header_scripts:
   - google-site-tag: true
   - google-tag-manager: true
   - marketo: true
-  - quora-pixel: true
 
 footer_scripts:
   - snowplow: true
-  - adroll: true
 
 hotjar:
   id: 1021060

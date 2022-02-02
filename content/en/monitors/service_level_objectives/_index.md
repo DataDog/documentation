@@ -173,17 +173,32 @@ When you create a correction window for an SLO, the time period you specify is r
 - For monitor-based SLOs, time in the correction window is not counted.
 - For metric-based SLOs, all good and bad events in the correction window are not counted.
 
-Status corrections are in public beta through the [SLO status corrections API][12], [Terraform][13], and the UI.
+You have the option to create one-time corrections for ad-hoc adjustments, or recurring corrections for predictable adjustments that occur on a regular cadence. One-time corrections require a start and end time, while recurring corrections require a start time, duration, and interval. Recurring corrections are based on [iCalender RFC 5545's RRULE specification][14]. Specifying an end time for recurring corrections is optional in case you need the correction to repeat indefinitely. 
+
+For either type of correction, you must select a correction category that states why the correction is being made. The available categories are `Scheduled Maintenance`, `Outside Business Hours`, `Deployment`, and `Other`. You can optionally include a description to provide additional context if necessary.
+
+Each SLO has a maximum limit of corrections that can be configured to ensure query performance. The limits per SLO are as follows:
+
+| Correction Type   | Limit per SLO |
+| ----------------- | ------------- |
+| One-time          | 30            |
+| Daily recurring   | 2             |
+| Weekly recurring  | 3             |
+| Monthly recurring | 5             |
+
+You may configure status corrections through the UI, the [SLO status corrections API][12], or a [Terraform resource][13].
 
 #### Access in the UI 
 
 To access SLO status corrections in the UI:
 
 1. Create a new SLO or click on an existing one.
-2. Navigate to an SLO’s detailed side panel view.
+2. Navigate to an SLO’s details side panel view.
 3. Under the gear icon, select **Correct Status** to access the **Status Corrections** creation modal.
-4. Select the **Time Correction Window**, **Correction Type**, and add **Notes**.
-5. Click **Apply Correction**.
+4. Choose between `One-Time` and `Recurring` in the **Select the Time Correction Window**, and specify the time period you wish to correct.
+5. Select a **Correction Type**.
+6. Optionally add **Notes**.
+7. Click **Apply Correction**.
 
 To view, edit, and delete existing status corrections, click on the **Corrections** tab at the top of an SLO’s detailed side panel view. 
 
@@ -204,3 +219,4 @@ To view, edit, and delete existing status corrections, click on the **Correction
 [11]: /monitors/create/types/event/
 [12]: /api/latest/service-level-objective-corrections/
 [13]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/slo_correction
+[14]: https://icalendar.org/iCalendar-RFC-5545/3-8-5-3-recurrence-rule.html
