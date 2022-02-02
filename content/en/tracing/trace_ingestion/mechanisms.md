@@ -19,7 +19,7 @@ Because the decision is made at the beginning of the trace and then conveyed to 
 
 The Datadog agent continuously sends sampling rates to tracing libraries to apply at the root of traces. The Agent adjusts rates to achieve a target of overall ten traces per second, distributed to services depending on the traffic.
 
-For instance, if service `A` has more traffic than service `B`, the agent might vary the sampling rate for `A` such that  `A` keeps no more than `7` traces per second, and similarly adjust the sampling rate for `B` such that `B` keeps no more than `3` traces per second, for a total of `10` traces per second.
+For instance, if service `A` has more traffic than service `B`, the Agent might vary the sampling rate for `A` such that  `A` keeps no more than seven traces per second, and similarly adjust the sampling rate for `B` such that `B` keeps no more than three traces per second, for a total of 10 traces per second.
 
 The agent's target traces-per-second can be set in its main configuration file (`datadog.yaml`) or as an environment variable :
 ```
