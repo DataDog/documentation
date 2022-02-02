@@ -106,26 +106,32 @@ Once enabled, the following profile types are collected:
 CPU
 : Shows the time each function spent running on the CPU, including Python and native code.
 
-Allocation
-: Shows the amount of heap memory allocated by each function, including allocations which were subsequently freed - only supported with Python 3.
-
-Allocation Count
-: Shows the number of heap allocations made by each function, including allocations which were subsequently freed.
-
 Wall Time
 : Shows the elapsed time used by each function. Elapsed time includes time when code is running on CPU, waiting for I/O, and anything else that happens while the function is running.
 
-Exceptions
+Heap Live Size
+: Shows the amount of heap memory allocated by each function that has not been garbage collected (yet). This is useful for investigating the overall memory usage of your service and identifying potential memory leaks.
+
+Allocated Memory
+: Shows the amount of heap memory allocated by each function, including allocations which were subsequently freed - only supported with Python 3.
+
+Allocations
+: Shows the number of heap allocations made by each function, including allocations which were subsequently freed.
+
+Thrown Exceptions
 : Shows the number of caught or uncaught exceptions raised by each function.
 
-Lock
-: Shows the time each function spent in locking (waiting for or holding a lock) or the number of times a function was observed locking/unlocking a lock.
+Lock Wait Time
+: Shows the time each function spent waiting for a lock.
 
-Uncaught Exception
-: Shows the exceptions that were not caught by any try/except block.
+Locked Time
+: Shows the time each function spent holding a lock.
 
-Exception
-: Shows the exceptions that were raised during program execution.
+Lock Acquires
+: Shows the number of times each function acquired a lock.
+
+Lock Releases
+: Shows the number of times each function released a lock.
 
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
