@@ -23,6 +23,64 @@
 
 {{ partial "code-lang-tabs" (dict "context" $context "codeLangs" $codeLangs ) }}
 
+{{ define "partials/code-example-instructions" }}
+  {{ $context := .context }}
+  {{ $lang := .lang }}
+  {{ $endpoint := .endpoint }}
+  {{ $securitySchemes := .securitySchemes }}
+  <h4>Instructions</h4>
+  <p>First <a href="{{ "api/latest/" | absLangURL }}?code-lang={{ $lang.name }}">install the library and its dependencies</a> and then save the example to <code>{{ $lang.example_file }}</code> and run following commands:</p>
+  <pre class="chroma">
+    <code class="language-fallback" data-lang="sh"><div class="code-snippet"><span class="n">DD_SITE</span><span class="o">=</span><span class="s1">"{{- range $context.Site.Params.allowedRegions -}}
+          {{- if not (index ($endpoint.regions) .value) -}}
+            <span class="d-none" data-region="{{ .value }}">Not supported in the {{ .name }} region</span>
+          {{- else -}}
+            <span class="d-none" data-region="{{ .value }}">{{ .domain }}</span>
+          {{- end -}}
+      {{- end -}}"</span>
+{{- /* Render authentication in headers "DD-API-KEY: XXX" */ -}}
+{{- if isset $endpoint.action "security" -}}
+  {{- /* Find authentication per operationId */ -}}
+  {{- range $endpoint.action.security -}}
+      {{- range $key, $val := . -}}
+          {{ $authSchema := (index $securitySchemes $key) }}
+          {{- if eq $authSchema.in "header" -}}
+            &nbsp;<span class="n">{{- index $authSchema "x-env-name" -}}</span><span class="o">=</span><span class="s1">"&lt;{{- index $authSchema "x-env-name" -}}&gt;"</span>
+          {{- end -}}
+      {{- end -}}
+  {{- end -}}
+{{- else -}}
+{{- /* Use global authentication */ -}}
+  &nbsp;<span class="n">DD_API_KEY</span><span class="o">=</span><span class="s1">"&lt;API-KEY&gt;"</span>&nbsp;<span class="n">DD_APP_KEY</span><span class="o">=</span><span class="s1">"&lt;APP-KEY&gt;"</span>
+{{- end -}}
+&nbsp;<span class="n">{{ $lang.command }}</span> <span class="s1">"{{ $lang.example_file }}"</span></div></code></pre>
+{{ end }}
+
+{{ define "partials/accordion-card" }}
+  {{ $i := .count }}
+  {{ $item := .item }}
+  {{ $operationid := .operationid }}
+  {{ $body := .body }}
+  {{ $lang := .lang }}
+  <div class="card">
+    <div class="card-header p-0">
+      <h5 class="m-0">
+        <button class="btn btn-link {{if gt $i 0}}collapsed{{ end}}" data-toggle="collapse" data-target="#{{ $operationid }}-request-example-{{ $i }}" aria-expanded="true" aria-controls="collapseOne">
+          {{ $item.description }}
+        </button>
+      </h5>
+    </div>
+    <div id="{{ $operationid }}-request-example-{{ $i }}" class="collapse {{if eq $i 0}}show{{ end }}" data-parent="#accordion">
+      <div class="card-body p-0 code-snippet">
+        <div class="code-button-wrapper position-absolute">
+            <button class="btn text-primary js-copy-button">{{ i18n "copy" }}</button>
+        </div>
+        {{ highlight $body $lang.syntax "" }}
+      </div>
+    </div>
+  </div>
+{{ end }}
+
 {{ $count := 0 }}
 {{ $file_extension := "sh" }}
 {{ $lang := index $context.Site.Params.code_languages "sh" }}
@@ -61,9 +119,16 @@
           {{- range $contentType, $requestBody := . -}}
               {{- with $requestBody.examples -}}
                   {{- range $exampleId, $exampleDefinition := . -}}
-                      {{- $exampleValue := $exampleDefinition.value -}}
-                      {{- if (or (hasPrefix $contentType "application/json") (hasPrefix $contentType "text/json")) -}}
-                          {{- $exampleValue = $exampleValue | jsonify (dict "indent" "  ") -}}
+                      {{- $exampleValue := "" }}
+                      {{- with $exampleDefinition.externalValue -}}
+                        {{- with $resourcePage.Resources.GetMatch (path.Base .) -}}
+                          {{- $exampleValue = .Content }}
+                        {{- end -}}
+                      {{- else -}}
+                        {{- $exampleValue = $exampleDefinition.value -}}
+                        {{- if (or (hasPrefix $contentType "application/json") (hasPrefix $contentType "text/json")) -}}
+                            {{- $exampleValue = $exampleValue | jsonify (dict "indent" "  ") -}}
+                        {{- end -}}
                       {{- end -}}
 ## {{ default $exampleId $exampleDefinition.summary }}
   {{- range split $exampleDefinition.description "\n" }}
@@ -146,66 +211,22 @@
               {{ $fileStr := (printf "%s%s.%s" $operationid $item.suffix $file_extension) }}
               {{ with $resourcePage.Resources.Match $fileStr }}
                 {{ range . }}
-                  {{ $body := .Content }}
-                  <div class="card">
-                    <div class="card-header p-0">
-                      <h5 class="m-0">
-                        <button class="btn btn-link {{if gt $i 0}}collapsed{{ end}}" data-toggle="collapse" data-target="#{{ $operationid }}-request-example-{{ $i }}" aria-expanded="true" aria-controls="collapseOne">
-                          {{ $item.description }}
-                        </button>
-                      </h5>
-                    </div>
-                    <div id="{{ $operationid }}-request-example-{{ $i }}" class="collapse {{if eq $i 0}}show{{ end }}" data-parent="#accordion">
-                      <div class="card-body p-0 code-snippet">
-                        <div class="code-button-wrapper position-absolute">
-                            <button class="btn text-primary js-copy-button">{{ i18n "copy" }}</button>
-                        </div>
-                        {{ highlight $body $lang.syntax "" }}
-                      </div>
-                    </div>
-                  </div>
+                  {{ partial "accordion-card" (dict "count" $i "item" $item "body" .Content "lang" $lang ) }}
                 {{ end }}
               {{ end }}
           {{ end }}
         </div>
-        <h4>Instructions</h4>
-        <p>First <a href="{{ "api/latest/" | absLangURL }}?code-lang={{ $lang.name }}">install the library and its dependencies</a> and then save the example to <code>{{ $lang.example_file }}</code> and run following commands:</p>
-        <pre class="chroma">
-          <code class="language-fallback" data-lang="sh"><div class="code-snippet"><span class="kn">export</span> <span class="n">DD_SITE</span><span class="o">=</span><span class="s1">"{{- range $context.Site.Params.allowedRegions -}}
-                {{- if not (index ($endpoint.regions) .value) -}}
-                  <span class="d-none" data-region="{{ .value }}">Not supported in the {{ .name }} region</span>
-                {{- else -}}
-                  <span class="d-none" data-region="{{ .value }}">{{ .domain }}</span>
-                {{- end -}}
-            {{- end -}}"</span>
-{{- /* Render authentication in headers "DD-API-KEY: XXX" */ -}}
-{{- if isset $endpoint.action "security" -}}
-  {{- /* Find authentication per operationId */ -}}
-  {{- range $endpoint.action.security -}}
-      {{- range $key, $val := . -}}
-          {{ $authSchema := (index $securitySchemes $key) }}
-          {{- if eq $authSchema.in "header" -}}
-            &nbsp;<span class="n">{{- index $authSchema "x-env-name" -}}</span><span class="o">=</span><span class="s1">"&lt;{{- index $authSchema "x-env-name" -}}&gt;"</span>
-          {{- end -}}
-      {{- end -}}
-  {{- end -}}
-{{- else -}}
-{{- /* Use global authentication */ -}}
-  &nbsp;<span class="n">DD_API_KEY</span><span class="o">=</span><span class="s1">"&lt;API-KEY&gt;"</span>&nbsp;<span class="n">DD_APP_KEY</span><span class="o">=</span><span class="s1">"&lt;APP-KEY&gt;"</span>
-{{- end -}}
-            &nbsp;<span class="n">{{ $lang.command }}</span> <span class="s1">"{{ $lang.example_file }}"</span></div></code></pre>
+        {{ partial "code-example-instructions" (dict "context" $context "lang" $lang "endpoint" $endpoint "securitySchemes" $securitySchemes) }}
       </div>
     {{ end }}
 {{ else }}
 
-  <!-- if not multiple examples -->
+  <!-- if its not multiple examples then just output -->
   {{ with $resourcePage.Resources.Match (printf "%s%s" $operationid ".*" ) }}
-    {{ $count := 1 }}
     {{ range . }}
         {{ $file_content := .Content }}
         {{ $file_extension := index (split (path.Ext .) ".") 1 }}
         {{ $lang := index $context.Site.Params.code_languages $file_extension }}
-
         {{ if ne $file_extension "sh"}}
           <div class="code-snippet-wrapper js-code-block" data-code-lang-block="{{ $lang.name }}">
             <div class="code-snippet">
@@ -214,36 +235,8 @@
               </div>
               {{ highlight $file_content $lang.syntax "" }}
             </div>
-
-            <h4>Instructions</h4>
-            <p>First <a href="{{ "api/latest/" | absLangURL }}?code-lang={{ $lang.name }}">install the library and its dependencies</a> and then save the example to <code>{{ $lang.example_file }}</code> and run following commands:</p>
-
-            <pre class="chroma">
-              <code class="language-fallback" data-lang="sh"><div class="code-snippet"><span class="n">DD_SITE</span><span class="o">=</span><span class="s1">"{{- range $context.Site.Params.allowedRegions -}}
-                {{- if not (index ($endpoint.regions) .value) -}}
-                  <span class="d-none" data-region="{{ .value }}">Not supported in the {{ .name }} region</span>
-                {{- else -}}
-                  <span class="d-none" data-region="{{ .value }}">{{ .domain }}</span>
-                {{- end -}}
-            {{- end -}}"</span>
-{{- /* Render authentication in headers "DD-API-KEY: XXX" */ -}}
-{{- if isset $endpoint.action "security" -}}
-  {{- /* Find authentication per operationId */ -}}
-  {{- range $endpoint.action.security -}}
-      {{- range $key, $val := . -}}
-          {{ $authSchema := (index $securitySchemes $key) }}
-          {{- if eq $authSchema.in "header" -}}
-            &nbsp;<span class="n">{{- index $authSchema "x-env-name" -}}</span><span class="o">=</span><span class="s1">"&lt;{{- index $authSchema "x-env-name" -}}&gt;"</span>
-          {{- end -}}
-      {{- end -}}
-  {{- end -}}
-{{- else -}}
-  {{- /* Use global authentication */ -}}
-  &nbsp;<span class="n">DD_API_KEY</span><span class="o">=</span><span class="s1">"&lt;API-KEY&gt;"</span>&nbsp;<span class="n">DD_APP_KEY</span><span class="o">=</span><span class="s1">"&lt;APP-KEY&gt;"</span>
-{{- end -}}
-            &nbsp;<span class="n">{{ $lang.command }}</span> <span class="s1">"{{ $lang.example_file }}"</span></div></code></pre>
+            {{ partial "code-example-instructions" (dict "context" $context "lang" $lang "endpoint" $endpoint "securitySchemes" $securitySchemes) }}
           </div>
-          {{ $count = add $count 1 }}
         {{ end }}
     {{ end }}
   {{ end }}
