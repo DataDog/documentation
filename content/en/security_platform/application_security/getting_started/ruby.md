@@ -30,7 +30,7 @@ further_reading:
    require 'datadog/appsec'
 
    Datadog::AppSec.configure do |c|
-   c.enabled true
+     c.enabled = true
    end
    ```
    Or one of the following methods, depending on where your application runs:
