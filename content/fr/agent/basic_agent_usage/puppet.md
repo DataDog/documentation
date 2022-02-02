@@ -12,7 +12,7 @@ Le module Puppet Datadog est pris en charge sur Linux et Windows et est compatib
 
 ### Installation
 
-Installez le module Puppet [agent_datadog][1] dans le chemin du module de votre primary Puppet :
+Installez le module Puppet [agent_datadog][1] dans le chemin du module de votre master Puppet :
 
 ```shell
 puppet module install datadog-datadog_agent
@@ -30,7 +30,7 @@ puppet module install datadog-datadog_agent
 
 ### Configuration
 
-Une fois le module `datadog_agent` installé sur votre `puppetserver` ou `puppetmaster` (ou sur un host sans primary), suivez les étapes de configuration ci-dessous :
+Une fois le module `datadog_agent` installé sur votre `puppetserver` ou `puppetmaster` (ou sur un host sans master), suivez les étapes de configuration ci-dessous :
 
 1. Obtenez votre [clé d'API Datadog][2].
 2. Ajoutez la classe Datadog à vos manifestes de nœud (ex. : `/etc/puppetlabs/code/environments/production/manifests/site.pp`).
@@ -137,7 +137,7 @@ package { 'dogapi':
     }
     ```
 
-3. Ajoutez ces options de configuration à la configuration du primary Puppet (ex. : `/etc/puppetlabs/puppet/puppet.conf`) :
+3. Ajoutez ces options de configuration à la configuration du master Puppet (ex. : `/etc/puppetlabs/puppet/puppet.conf`) :
 
     ```ini
     [main]
@@ -236,9 +236,9 @@ Si vous constatez l'erreur suivante, assurez-vous que `reports=datadog_reports` 
 
 Si vous ne recevez aucun rapport, consultez les logs de votre serveur Puppet.
 
-### Puppet sans primary
+### Puppet sans master
 
-1. Le module Datadog et ses dépendances doivent être installés sur tous les nœuds exécutés sans primary.
+1. Le module Datadog et ses dépendances doivent être installés sur tous les nœuds exécutés sans master.
 2. Ajoutez ce qui suit au fichier `site.pp` de chaque nœud :
     ```conf
     class { "datadog_agent":
@@ -247,7 +247,7 @@ Si vous ne recevez aucun rapport, consultez les logs de votre serveur Puppet.
     }
    ```
 
-3. Exécutez Puppet avec une configuration sans primary :
+3. Exécutez Puppet avec une configuration sans master :
     ```shell
     puppet apply --modulepath <path_to_modules> <path_to_site.pp>
     ```
