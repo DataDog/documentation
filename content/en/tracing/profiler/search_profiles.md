@@ -187,8 +187,8 @@ Once enabled, the following profile types are collected:
 Wall Time
 : Shows the elapsed time used by each function. Elapsed time includes time when code is running on CPU, waiting for I/O, and anything else that happens while the function is running.
 
-Allocated Memory
-: Shows the amount of heap memory allocated by each function during the profiling period (default: 60s), including allocations which were subsequently freed. Stack allocations are not tracked. This is useful for investigating garbage collection load.
+Heap Live Size
+: Shows the amount of heap memory allocated by each function that has not been garbage collected (yet). This is useful for investigating the overall memory usage of your service and identifying potential memory leaks.
 
 {{< /programming-lang >}}
 {{< programming-lang lang="dotnet" >}}
