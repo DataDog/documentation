@@ -10455,13 +10455,10 @@ components:
       properties:
         cert:
           $ref: '#/components/schemas/SyntheticsSSLCertificate'
-        errorCode:
-          $ref: '#/components/schemas/SyntheticsErrorCode'
-        errorMessage:
-          description: The API test error message.
-          type: string
         eventType:
           $ref: '#/components/schemas/SyntheticsTestProcessStatus'
+        failure:
+          $ref: '#/components/schemas/SyntheticsApiTestResultFailure'
         httpStatusCode:
           description: The API test HTTP status code.
           format: int64
@@ -10552,6 +10549,73 @@ components:
       type: string
       x-enum-varnames:
       - API
+    SyntheticsApiTestFailureCode:
+      description: Error code that can be returned by a Synthetic test.
+      enum:
+      - BODY_TOO_LARGE
+      - DENIED
+      - TOO_MANY_REDIRECTS
+      - AUTHENTICATION_ERROR
+      - DECRYPTION
+      - INVALID_CHAR_IN_HEADER
+      - HEADER_TOO_LARGE
+      - HEADERS_INCOMPATIBLE_CONTENT_LENGTH
+      - INVALID_REQUEST
+      - REQUIRES_UPDATE
+      - UNESCAPED_CHARACTERS_IN_REQUEST_PATH
+      - MALFORMED_RESPONSE
+      - INCORRECT_ASSERTION
+      - CONNREFUSED
+      - CONNRESET
+      - DNS
+      - HOSTUNREACH
+      - NETUNREACH
+      - TIMEOUT
+      - SSL
+      - OCSP
+      - INVALID_TEST
+      - TUNNEL
+      - WEBSOCKET
+      - UNKNOWN
+      - INTERNAL_ERROR
+      type: string
+      x-enum-varnames:
+      - BODY_TOO_LARGE
+      - DENIED
+      - TOO_MANY_REDIRECTS
+      - AUTHENTICATION_ERROR
+      - DECRYPTION
+      - INVALID_CHAR_IN_HEADER
+      - HEADER_TOO_LARGE
+      - HEADERS_INCOMPATIBLE_CONTENT_LENGTH
+      - INVALID_REQUEST
+      - REQUIRES_UPDATE
+      - UNESCAPED_CHARACTERS_IN_REQUEST_PATH
+      - MALFORMED_RESPONSE
+      - INCORRECT_ASSERTION
+      - CONNREFUSED
+      - CONNRESET
+      - DNS
+      - HOSTUNREACH
+      - NETUNREACH
+      - TIMEOUT
+      - SSL
+      - OCSP
+      - INVALID_TEST
+      - TUNNEL
+      - WEBSOCKET
+      - UNKNOWN
+      - INTERNAL_ERROR
+    SyntheticsApiTestResultFailure:
+      description: The API test failure details.
+      properties:
+        code:
+          $ref: '#/components/schemas/SyntheticsApiTestFailureCode'
+        message:
+          description: The API test error message.
+          example: Error during DNS resolution (ENOTFOUND).
+          type: string
+      type: object
     SyntheticsAssertion:
       description: 'Object describing the assertions type, their associated operator,
 
@@ -10967,6 +11031,77 @@ components:
       - request
       - assertions
       type: object
+    SyntheticsBrowserTestFailureCode:
+      description: Error code that can be returned by a Synthetic test.
+      enum:
+      - API_REQUEST_FAILURE
+      - ASSERTION_FAILURE
+      - DOWNLOAD_FILE_TOO_LARGE
+      - ELEMENT_NOT_INTERACTABLE
+      - EMAIL_VARIABLE_NOT_DEFINED
+      - EVALUATE_JAVASCRIPT
+      - EVALUATE_JAVASCRIPT_CONTEXT
+      - EXTRACT_VARIABLE
+      - FORBIDDEN_URL
+      - FRAME_DETACHED
+      - INCONSISTENCIES
+      - INTERNAL_ERROR
+      - INVALID_TYPE_TEXT_DELAY
+      - INVALID_URL
+      - INVALID_VARIABLE_PATTERN
+      - INVISIBLE_ELEMENT
+      - LOCATE_ELEMENT
+      - NAVIGATE_TO_LINK
+      - OPEN_URL
+      - PRESS_KEY
+      - SERVER_CERTIFICATE
+      - SELECT_OPTION
+      - STEP_TIMEOUT
+      - SUB_TEST_NOT_PASSED
+      - TEST_TIMEOUT
+      - TOO_MANY_HTTP_REQUESTS
+      - UNAVAILABLE_BROWSER
+      - UNKNOWN
+      - UNSUPPORTED_AUTH_SCHEMA
+      - UPLOAD_FILES_ELEMENT_TYPE
+      - UPLOAD_FILES_DIALOG
+      - UPLOAD_FILES_DYNAMIC_ELEMENT
+      - UPLOAD_FILES_NAME
+      type: string
+      x-enum-varnames:
+      - API_REQUEST_FAILURE
+      - ASSERTION_FAILURE
+      - DOWNLOAD_FILE_TOO_LARGE
+      - ELEMENT_NOT_INTERACTABLE
+      - EMAIL_VARIABLE_NOT_DEFINED
+      - EVALUATE_JAVASCRIPT
+      - EVALUATE_JAVASCRIPT_CONTEXT
+      - EXTRACT_VARIABLE
+      - FORBIDDEN_URL
+      - FRAME_DETACHED
+      - INCONSISTENCIES
+      - INTERNAL_ERROR
+      - INVALID_TYPE_TEXT_DELAY
+      - INVALID_URL
+      - INVALID_VARIABLE_PATTERN
+      - INVISIBLE_ELEMENT
+      - LOCATE_ELEMENT
+      - NAVIGATE_TO_LINK
+      - OPEN_URL
+      - PRESS_KEY
+      - SERVER_CERTIFICATE
+      - SELECT_OPTION
+      - STEP_TIMEOUT
+      - SUB_TEST_NOT_PASSED
+      - TEST_TIMEOUT
+      - TOO_MANY_HTTP_REQUESTS
+      - UNAVAILABLE_BROWSER
+      - UNKNOWN
+      - UNSUPPORTED_AUTH_SCHEMA
+      - UPLOAD_FILES_ELEMENT_TYPE
+      - UPLOAD_FILES_DIALOG
+      - UPLOAD_FILES_DYNAMIC_ELEMENT
+      - UPLOAD_FILES_NAME
     SyntheticsBrowserTestResultData:
       description: Object containing results for your Synthetic browser test.
       properties:
@@ -10985,6 +11120,8 @@ components:
         error:
           description: Error returned for the browser test.
           type: string
+        failure:
+          $ref: '#/components/schemas/SyntheticsBrowserTestResultFailure'
         passed:
           description: Whether or not the browser test was conducted.
           type: boolean
@@ -11009,6 +11146,16 @@ components:
             reaching the start URL.'
           format: double
           type: number
+      type: object
+    SyntheticsBrowserTestResultFailure:
+      description: The browser test failure details.
+      properties:
+        code:
+          $ref: '#/components/schemas/SyntheticsBrowserTestFailureCode'
+        message:
+          description: The browser test error message.
+          example: Error during DNS resolution (ENOTFOUND).
+          type: string
       type: object
     SyntheticsBrowserTestResultFull:
       description: Object returned describing a browser test result.
@@ -11409,25 +11556,6 @@ components:
       - EDGE_LAPTOP_LARGE
       - EDGE_TABLET
       - EDGE_MOBILE_SMALL
-    SyntheticsErrorCode:
-      description: Error code that can be returned by a Synthetic test.
-      enum:
-      - NO_ERROR
-      - UNKNOWN
-      - DNS
-      - SSL
-      - TIMEOUT
-      - DENIED
-      - INCORRECT_ASSERTION
-      type: string
-      x-enum-varnames:
-      - NO_ERROR
-      - UNKNOWN
-      - DNS
-      - SSL
-      - TIMEOUT
-      - DENIED
-      - INCORRECT_ASSERTION
     SyntheticsGetAPITestLatestResultsResponse:
       description: Object with the latest Synthetic API test run.
       properties:
@@ -16525,6 +16653,8 @@ components:
               global variables for Synthetics.
             synthetics_private_location_read: The ability to view, search and use
               in tests the list of private locations available.
+            synthetics_private_location_write: The ability to create and delete private
+              locations as well as seeing the associated installation guidelines.
             synthetics_read: The ability to list and view configured Synthetic tests.
             synthetics_write: The ability to create, edit, and delete Synthetic tests.
             timeseries_query: The ability to query Timeseries data.
@@ -17129,6 +17259,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Too many requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - usage_read
       summary: Get the list of available daily custom reports
       tags:
       - Usage Metering
@@ -17174,6 +17309,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Too many requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - usage_read
       summary: Get specified daily custom reports
       tags:
       - Usage Metering
@@ -19166,6 +19306,10 @@ paths:
           description: Forbidden
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
       summary: Get the total number of active hosts
       tags:
       - Hosts
@@ -22859,6 +23003,11 @@ paths:
           description: Monitor Not Found error
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - monitors_read
       summary: Get all downtimes for a monitor
       tags:
       - Downtimes
@@ -23045,6 +23194,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Too many requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - usage_read
       summary: Get the list of available monthly custom reports
       tags:
       - Usage Metering
@@ -23096,6 +23250,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Too many requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - usage_read
       summary: Get specified monthly custom reports
       tags:
       - Usage Metering
@@ -23224,6 +23383,10 @@ paths:
           description: Authentication Error
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
       summary: Get all notebooks
       tags:
       - Notebooks
@@ -23391,6 +23554,10 @@ paths:
           description: Not Found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
       summary: Get a notebook
       tags:
       - Notebooks
@@ -24820,6 +24987,11 @@ paths:
           description: Batch does not exist.
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - synthetics_read
       summary: Get details of batch
       tags:
       - Synthetics
@@ -24884,6 +25056,11 @@ paths:
           description: Private locations are not activated for the user
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - synthetics_private_location_write
       summary: Create a private location
       tags:
       - Synthetics
@@ -24919,6 +25096,11 @@ paths:
             - Private location does not exist'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - synthetics_private_location_write
       summary: Delete a private location
       tags:
       - Synthetics
@@ -24952,6 +25134,11 @@ paths:
             - Private location does not exist'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - synthetics_private_location_read
       summary: Get a private location
       tags:
       - Synthetics
@@ -24992,6 +25179,11 @@ paths:
             - Private location does not exist'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - synthetics_private_location_write
       summary: Edit a private location
       tags:
       - Synthetics
@@ -25265,6 +25457,11 @@ paths:
           - file: synthetics_api_test_payload.json
             name: body
           step: there is a valid "synthetics_api_test" in the system
+        synthetics_api_test_with_wrong_dns:
+          parameters:
+          - file: synthetics_api_test_with_wrong_dns.json
+            name: body
+          step: there is a "synthetics_api_test_with_wrong_dns" in the system
       x-menu-order: 1
       x-undo:
         operationId: DeleteTests
@@ -25753,10 +25950,22 @@ paths:
           description: Bad Request
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - synthetics_write
       summary: Trigger Synthetics tests
       tags:
       - Synthetics
       x-codegen-request-body-name: body
+      x-given:
+        synthetics_api_test_with_wrong_dns_result:
+          parameters:
+          - name: body
+            value: '{"tests": [{"public_id": "{{ synthetics_api_test_with_wrong_dns.public_id
+              }}"}]}'
+          step: the "synthetics_api_test_with_wrong_dns" is triggered
       x-menu-order: 7
       x-undo:
         type: safe
@@ -25786,6 +25995,11 @@ paths:
           description: JSON format is wrong
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - synthetics_write
       summary: Trigger tests from CI/CD pipelines
       tags:
       - Synthetics
@@ -25827,6 +26041,11 @@ paths:
             - Test is not owned by the user'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - synthetics_read
       summary: Get a test configuration
       tags:
       - Synthetics
@@ -26137,6 +26356,11 @@ paths:
           description: Forbidden
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - synthetics_global_variable_write
       summary: Create a global variable
       tags:
       - Synthetics
@@ -26273,6 +26497,11 @@ paths:
           description: Forbidden
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - synthetics_global_variable_write
       summary: Edit a global variable
       tags:
       - Synthetics
@@ -26732,6 +26961,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Too many requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - usage_read
       summary: Get hourly usage for audit logs
       tags:
       - Usage Metering
@@ -26892,6 +27126,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Too many requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - usage_read
       summary: Get hourly usage for CSPM
       tags:
       - Usage Metering
@@ -27005,6 +27244,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Too many requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - usage_read
       summary: Get hourly usage for Database Monitoring
       tags:
       - Usage Metering
@@ -27540,6 +27784,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Too many requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - usage_read
       summary: Get hourly logs usage by retention
       tags:
       - Usage Metering
@@ -28044,6 +28293,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Too many requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - usage_read
       summary: Get hourly usage for Sensitive Data Scanner
       tags:
       - Usage Metering

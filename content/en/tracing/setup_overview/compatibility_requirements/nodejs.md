@@ -65,6 +65,7 @@ For details about how to how to toggle and configure plugins, check out the [API
 | [hapi][12]              | `>=2`    | Fully supported | Supports [@hapi/hapi] versions `>=17.9`    |
 | [koa][13]               | `>=2`    | Fully supported |                                            |
 | [microgateway-core][14] | `>=2.1`  | Fully supported | Core library for Apigee Edge. Support for the [edgemicro][15] CLI requires static patching using [@datadog/cli][16]. |
+| [moleculer][62]         | `>=0.14` | Fully supported |                                            |
 | [next][17]              | `>=9.5`  | Fully supported | CLI usage requires `NODE_OPTIONS='-r dd-trace/init'`. |
 | [paperplane][18]        | `>=2.3`  | Fully supported | Not supported in [serverless-mode][19]     |
 | [restify][20]           | `>=3`    | Fully supported |                                            |
@@ -209,3 +210,4 @@ For additional information or to discuss [leave a comment on this github issue][
 [59]: https://nodejs.org/api/async_hooks.html
 [60]: https://www.meteor.com/
 [61]: https://github.com/DataDog/dd-trace-js/issues/1229
+[62]: https://moleculer.services/
