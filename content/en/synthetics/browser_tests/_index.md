@@ -46,7 +46,7 @@ Define the configuration of your browser test.
   Select **Disable CORS** to prevent the cross-origin resource sharing (CORS) policy from blocking your test.
 
   * **Request Headers**: Define headers in the **Name** and **Value** fields to add to or override the default browser headers. For example, you can set the User Agent in the header to [identify Datadog scripts][1].
-  * **Cookies**: Define cookies to add to the default browser cookies. Set multiple cookies as `<COOKIE_NAME1>=<COOKIE_VALUE1>; <COOKIE_NAME2>=<COOKIE_VALUE2>` and enter one cookie per line.
+  * **Cookies**: Define cookies to add to the default browser cookies. Enter one cookie per line, using the syntax of [Set-Cookie][2].
   * **HTTP Authentication**: Authenticate through HTTP Basic, Digest, or NTLM with a username and a password. Your credentials are used in every step of your browser test.
 
   Request options are set at every test execution and apply to every step of your browser test at execution time, not recording time. 
