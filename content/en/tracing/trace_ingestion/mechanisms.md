@@ -43,9 +43,9 @@ The configuration can be set by environment variables or directly in the code:
 {{% tab "Environment variables" %}}
 
 ```
-@env  DD_TRACE_SAMPLE_RATE - integer - optional null (defaults to agent default feedback loop)
+@env  DD_TRACE_SAMPLE_RATE - integer - optional null (defaults to Agent default feedback loop)
 @env DD_TRACE_SAMPLING_RULES - integer - optional null
-@env  DD_TRACE_RATE_LIMIT - integer - optional 100 (if using the agent default mechanism, the rate limiter is ignored)
+@env  DD_TRACE_RATE_LIMIT - integer - optional 100 (if using the Agent default mechanism, the rate limiter is ignored)
 ```
 
 {{% /tab %}}
