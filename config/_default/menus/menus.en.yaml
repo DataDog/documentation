@@ -1275,10 +1275,6 @@ main:
     url: serverless/troubleshooting/connect_invoking_resources
     parent: serverless_troubleshooting
     weight: 703
-  - name: Webpack Compatibility
-    url: serverless/troubleshooting/serverless_tracing_and_webpack
-    parent: serverless_troubleshooting
-    weight: 704
   - name: Azure App Service Extension
     url: serverless/azure_app_services
     parent: serverless
@@ -1932,6 +1928,21 @@ main:
     parent: profiler_enabling
     identifier: profiler_enabling_nodejs
     weight: 105
+  - name: Enabling the .NET Profiler
+    url: tracing/profiler/enabling/dotnet/
+    parent: profiler_enabling
+    identifier: profiler_enabling_dotnet
+    weight: 106
+  - name: Enabling the PHP Profiler
+    url: tracing/profiler/enabling/php/
+    parent: profiler_enabling
+    identifier: profiler_enabling_php
+    weight: 107
+  - name: Enabling the Linux Profiler
+    url: tracing/profiler/enabling/linux/
+    parent: profiler_enabling
+    identifier: profiler_enabling_linux
+    weight: 108
   - name: Search Profiles
     url: tracing/profiler/search_profiles/
     parent: profiler
@@ -2417,7 +2428,7 @@ main:
     identifier: cloud_siem_log_detection_rules
     weight: 103
   - name: OOTB Rules
-    url: /security_platform/default_rules#cat-log-detection
+    url: /security_platform/default_rules#cat-cloud-siem
     parent: cloud_siem
     identifier: cloud_siem_default_rules
     weight: 104
@@ -2470,7 +2481,7 @@ main:
     parent: cloud_workload_security
     identifier: cws_agent_expressions
     weight: 302
-  - name: Workload Security Rules
+  - name: Workload Security Detection Rules
     url: security_platform/cloud_workload_security/workload_security_rules
     parent: cloud_workload_security
     identifier: cws_workload_security_rules
@@ -2490,13 +2501,13 @@ main:
     parent: cloud_workload_security
     identifier: cws_workload_signals_explorer
     weight: 306
-  - name: Security Rules
+  - name: Detection Rules
     url: security_platform/detection_rules/
     parent: security_platform
     identifier: security_rules
     weight: 4
-  - name: Notification Profiles
-    url: security_platform/notification_profiles/
+  - name: Notification Rules
+    url: security_platform/notification_rules/
     parent: security_platform
     weight: 5
   - name: Signals Explorer
@@ -2765,6 +2776,11 @@ main:
     parent: rum_session_replay
     identifier: rum_session_replay_privacy_options
     weight: 501
+  - name: Developer Tools
+    url: real_user_monitoring/session_replay/developer_tools
+    parent: rum_session_replay
+    identifier: rum_session_replay_developer_tools
+    weight: 502
   - name: Dashboards
     url: real_user_monitoring/dashboards/
     parent: rum
@@ -2953,22 +2969,26 @@ main:
     parent: dev_tools
     identifier: dev_tools_integrations
     weight: 3
-  - name: Create a new Integration
+  - name: Create a New Integration
     url: developers/integrations/new_check_howto/
     parent: dev_tools_integrations
     weight: 301
-  - name: Integration assets reference
+  - name: Integration Assets Reference
     url: developers/integrations/check_references/
     parent: dev_tools_integrations
     weight: 302
+  - name: Create an Integration Dashboard
+    url: developers/integrations/create-an-integration-dashboard
+    parent: dev_tools_integrations
+    weight: 303
   - name: Python
     url: developers/integrations/python/
     parent: dev_tools_integrations
-    weight: 303
+    weight: 304
   - name: Legacy
     url: developers/integrations/legacy/
     parent: dev_tools_integrations
-    weight: 304
+    weight: 305
   - name: Marketplace
     url: developers/marketplace/
     parent: dev_tools

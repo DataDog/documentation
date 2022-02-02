@@ -2,9 +2,9 @@
 categories:
   - configuration & deployment
 dependencies:
-  - 'https://github.com/jenkinsci/datadog-plugin/blob/master/README.md'
-description: 'Transmettez automatiquement vos métriques, événements et checks de service Jenkins à Datadog. to Datadog.'
-doc_link: 'https://docs.datadoghq.com/integrations/jenkins/'
+  - https://github.com/jenkinsci/datadog-plugin/blob/master/README.md
+description: Transmettez automatiquement vos métriques, événements et checks de service Jenkins à Datadog. to Datadog.
+doc_link: https://docs.datadoghq.com/integrations/jenkins/
 git_integration_title: jenkins
 has_logo: true
 integration_title: Jenkins
@@ -12,7 +12,7 @@ is_public: true
 kind: integration
 name: jenkins
 public_title: Intégration Datadog/Jenkins
-short_description: 'Transmettez automatiquement vos métriques, événements et checks de service Jenkins à Datadog. checks to Datadog.'
+short_description: Transmettez automatiquement vos métriques, événements et checks de service Jenkins à Datadog. checks to Datadog.
 ---
 Ce plug-in Jenkins transmet automatiquement des métriques, des événements et des checks de service à un compte Datadog.
 
@@ -42,11 +42,12 @@ Installez le plug-in depuis l'[Update Center][3] (disponible en accédant à `Ma
 
 Vous pouvez configurer votre plug-in de deux façons différentes pour transmettre des données à Datadog :
 
-* **CONFIGURATION RECOMMANDÉE** : en utilisant un serveur DogStatsD ou un Agent Datadog en tant que redirecteur entre Jenking et Datadog.
-  - La collecte de logs sur les builds fonctionne uniquement lorsqu'un Agent Datadog complet est installé.
-  - Pour les métriques envoyées depuis un host externe, l'Agent Datadog exige la configuration suivante pour DogStatsD : `dogstatsd_non_local_traffic: true`. Ce paramètre peut être configuré à l'aide du [fichier de configuration][17] `datadog.yaml`.
+* **CONFIGURATION RECOMMANDÉE** : en utilisant un Agent Datadog en tant que redirecteur entre Jenkins et Datadog.
+  - Si vous utilisez un serveur DogStatsD à la place d'un Agent Datadog complet, seuls les événements et les métriques sont pris en charge.
+  - Pour les données envoyées depuis un host externe, l'Agent Datadog exige la configuration suivante : `dogstatsd_non_local_traffic: true` et `apm_non_local_traffic: true`. Ces paramètres peuvent être configurés à l'aide du [fichier de configuration][17] `datadog.yaml`.
 * En envoyant directement les données à Datadog, via HTTP.
   - L'implémentation du client HTTP utilisée dispose d'un délai d'expiration d'une minute. En cas de problème de connexion avec Datadog, cela peut ralentir votre instance Jenkins.
+  - Avec cette méthode, il n'est actuellement pas possible de recueillir des traces afin de les analyser avec la solution CI Visibility.
 
 Cette configuration peut être effectuée depuis [l'interface utilisateur du plug-in](#interface-utilisateur-du-plug-in) avec un [script Groovy](#script-groovy) ou à l'aide de [variables d'environnement](#variables-d-environnement).
 
@@ -54,28 +55,29 @@ Cette configuration peut être effectuée depuis [l'interface utilisateur du plu
 
 Pour configurer votre plug-in Datadog, accédez à `Manage Jenkins -> Configure System` depuis votre installation Jenkins. Faites ensuite défiler l'écran jusqu'à atteindre la section `Datadog Plugin` :
 
-##### Transmission via HTTP {plug-in-transmission-http}
+##### Transmission HTTP
 
 1. Cliquez sur le bouton radio en regard de l'option **Use Datadog API URL and Key to report to Datadog** (sélectionnée par défaut).
-2. Collez votre [clé d'API Datadog][4] dans la zone de texte `API Key` sur l'écran de configuration de Jenkins.
+2. Collez votre [clé d'API Datadog][4] dans le champ `API Key` de l'écran de configuration de Jenkins. Si vous souhaitez stocker votre clé d'API dans le [gestionnaire d'identifiants][18], créez un identifiant pour la clé d'API et sélectionnez-le dans la liste déroulante `Datadog API Key (Select from Credentials)`.
 3. Testez votre clé d'API Datadog à l'aide du bouton `Test Key` situé en dessous, sur ce même écran.
 4. (Facultatif) Saisissez le hostname du serveur Jenkins dans l'onglet Advanced afin de l'inclure dans les événements.
 5. (Facultatif) Saisissez votre [URL d'admission des logs Datadog][15] et sélectionnez Enable Log Collection dans l'onglet Advanced.
 6. Enregistrez votre configuration.
 
-##### Transmission avec DogStatsD {#plug-in-transmission-dogstatsd}
+##### Transmission de données par l'Agent Datadog
 
 1. Cliquez sur le bouton radio correspondant à l'option **Use the Datadog Agent to report to Datadog**.
-2. Indiquez le `hostname` et le `port` de votre serveur DogStatsD.
+2. Indiquez le `hostname` et le `port` de votre Agent Datadog.
 3. (Facultatif) Saisissez le hostname du serveur Jenkins dans l'onglet Advanced afin de l'inclure dans les événements.
-4. (Facultatif) Spécifiez votre port de collecte des logs et configurez la [collecte de logs](#collecte-de-logs-avec-l-Agent), puis sélectionnez Enable Log Collection dans l'onglet Advanced.
+4. (Facultatif) Spécifiez votre port de collecte des logs, configurez la [collecte de logs](#collecte-de-logs-avec-l-Agent) pour l'Agent Datadog, puis sélectionnez Enable Log Collection.
+5. (Facultatif) Saisissez votre port de collecte de traces et sélectionnez Enable Ci Visibility. Vous avez également la possibilité de définir le nom de votre instance CI.
 5. Enregistrez votre configuration.
 
 #### Script Groovy
 
 Configurez votre plug-in Datadog à l'aide des scripts Groovy ci-dessous pour transmettre des données via HTTP ou à l'aide de DogStatsD. Ce type de configuration s'avère particulièrement utile si vous exécutez votre Master Jenkins dans un conteneur Docker à l'aide de l'[image Docker Jenkins officielle][5] ou de toute autre solution alternative prenant en charge `plugins.txt` et les scripts init Groovy.
 
-##### Transmission via HTTP {#script-groovy-transmission-http}
+##### Transmission HTTP avec Groovy
 
 ```groovy
 import jenkins.model.*
@@ -99,7 +101,7 @@ d.setLogIntakeUrl('https://http-intake.logs.datadoghq.com/v1/input/')
 d.save()
 ```
 
-##### Transmission avec DogStatsD {#script-groovy-transmission-dogstatsd}
+##### Transmission de données par l'Agent Datadog avec Groovy
 
 ```groovy
 import jenkins.model.*
@@ -112,8 +114,14 @@ d.setReportWith('DSD')
 d.setTargetHost('localhost')
 d.setTargetPort(8125)
 
-// Si vous souhaitez recueillir les logs
-d.setTargetLogCollectionPort(8125)
+// Pour recueillir des logs
+d.setTargetLogCollectionPort(10518)
+d.setCollectBuildLogs(true)
+
+// Pour activer CI Visibility
+d.setTargetTraceCollectionPort(8126)
+d.setEnableCiVisibility(true)
+d.setCiInstanceName("jenkins")
 
 // Personnalisation, voir la section dédiée ci-dessous
 d.setExcluded('job1,job2')
@@ -122,23 +130,38 @@ d.setExcluded('job1,job2')
 d.save()
 ```
 
-#### Avec des variables d'environnement
+#### Variables d'environnement
 
 Configurez votre plug-in Datadog avec des variables d'environnement à l'aide de la variable `DATADOG_JENKINS_PLUGIN_REPORT_WITH`, qui indique le processus de transmission à utiliser.
 
-##### Transmission via HTTP {variable-environnement-transmission-http}
+##### Transmission HTTP avec des variables d'environnement
 
 1. Définissez la variable `DATADOG_JENKINS_PLUGIN_REPORT_WITH` sur `HTTP`.
 2. Définissez la variable `DATADOG_JENKINS_PLUGIN_TARGET_API_URL`, qui indique l'endpoint de l'API Datadog (valeur par défaut : `https://api.datadoghq.com/api/`).
 3. Définissez la variable `DATADOG_JENKINS_PLUGIN_TARGET_API_KEY`, qui indique votre [clé d'API Datadog][4].
 4. Vous pouvez choisir de définir la variable `DATADOG_JENKINS_PLUGIN_TARGET_LOG_INTAKE_URL`, qui indique l'URL d'admission des logs Datadog (valeur par défaut : `https://http-intake.logs.datadoghq.com/v1/input/`).
 
-##### Transmission avec DogStatsD {variable-environnement-transmission-dogstatsd}
+##### Transmission de données par l'Agent Datadog avec des variables d'environnement
 
 1. Définissez la variable `DATADOG_JENKINS_PLUGIN_REPORT_WITH` sur `DSD`.
 2. Définissez la variable `DATADOG_JENKINS_PLUGIN_TARGET_HOST`, qui indique le host du serveur DogStatsD (valeur par défaut : `localhost`).
 3. Définissez la variable `DATADOG_JENKINS_PLUGIN_TARGET_PORT`, qui indique le port du serveur DogStatsD (valeur par défaut : `8125`).
-4. Vous pouvez choisir de définir la variable `DATADOG_JENKINS_PLUGIN_TARGET_LOG_COLLECTION_PORT`, qui indique le port de collecte de logs de l'Agent Datadog.
+4. (Facultatif) Collecte de logs :
+   -  Activez la [collecte de log](#collecte-de-logs-avec-l-agent) pour l'Agent Datadog.
+   - Définissez la variable `DATADOG_JENKINS_PLUGIN_TARGET_LOG_COLLECTION_PORT`, qui indique le port de collecte de logs de l'Agent Datadog.
+   - Définissez la variable `DATADOG_JENKINS_PLUGIN_COLLECT_BUILD_LOGS` sur `true` pour activer la collecte de logs (désactivée par défaut).
+5. (Facultatif) CI Visibility (collecte de traces) :
+   - Définissez la variable `DATADOG_JENKINS_PLUGIN_TARGET_TRACE_COLLECTION_PORT`, qui indique le port de collecte de traces de l'Agent Datadog (`8126` par défaut).
+   - Définissez la variable `DATADOG_JENKINS_PLUGIN_ENABLE_CI_VISIBILITY` sur `true` pour activer CI Visibility (désactivé par défaut).
+   - Définissez la variable `DATADOG_JENKINS_PLUGIN_CI_VISIBILITY_CI_INSTANCE_NAME`, qui spécifie le nom de l'instance Jenkins pour CI Visibility (`jenkins` par défaut).
+
+Vous avez également la possibilité d'utiliser les variables d'environnement Datadog standard :
+   - Définissez la variable `DD_AGENT_HOST`, qui indique le host de l'Agent Datadog.
+   - Définissez la variable `DD_AGENT_PORT`, qui indique le port du serveur DogStatsD.
+   - Définissez la variable `DD_TRACE_AGENT_PORT`, qui indique le port de collecte de traces de l'Agent Datadog.
+   - Définissez la variable `DD_TRACE_AGENT_URL`, qui indique l'URL de l'Agent Datadog vers laquelle les traces doivent être envoyées. Lorsque cette variable est définie, elle a la priorité sur `DD_AGENT_HOST` et `DD_TRACE_AGENT_PORT`.
+
+Les variables d'environnement avec l'espace de nommage `DATADOG_JENKINS_PLUGIN` ont la priorité sur les variables d'environnement Datadog standard.
 
 #### Journalisation
 
@@ -179,20 +202,22 @@ datadog(collectLogs: true, tags: ["foo:bar", "bar:baz"]){
 }
 ```
 
+**Remarque** : les personnalisations de pipeline entrent uniquement en compte après le début d'une tâche. Les tags indiqués dans la personnalisation ne seront pas associés à `jenkins.job.started`.
+
 ### Personnalisation globale
 
 Pour personnaliser votre configuration globale, dans Jenkins, accédez à `Manage Jenkins -> Configure System`, puis cliquez sur le bouton **Advanced**. Voici la liste des options disponibles :
 
 | Personnalisation              | Description                                                                                                                                                                                                                                 | Variable d'environnement                          |
 |----------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------|
-| Tâches exclues           | Une liste d'expressions régulières séparées par des virgules servant à exclure certains noms de tâches de la surveillance. Exemple : `susans-job,johns-.*,prod_folder/prod_release`.                                                                                                      | `DATADOG_JENKINS_PLUGIN_EXCLUDED`            |
-| Tâches incluses           | Une liste d'expressions régulières séparées par des virgules servant à inclure certains noms de tâches dans la surveillance. Exemple : `susans-job,johns-.*,prod_folder/prod_release`.                                                                                                          | `DATADOG_JENKINS_PLUGIN_INCLUDED`            |
+| Hostname                   | Un hostname à utiliser dans chaque événement envoyé à Datadog.                                                                                                                                                                                           | `DATADOG_JENKINS_PLUGIN_HOSTNAME`             |
+| Tâches exclues              | Une liste d'expressions régulières séparées par des virgules servant à exclure certains noms de tâches de la surveillance. Exemple : `susans-job,johns-.*,prod_folder/prod_release`.                                                                                                      | `DATADOG_JENKINS_PLUGIN_EXCLUDED`            |
+| Tâches incluses              | Une liste d'expressions régulières séparées par des virgules servant à inclure certains noms de tâches dans la surveillance. Exemple : `susans-job,johns-.*,prod_folder/prod_release`.                                                                                                          | `DATADOG_JENKINS_PLUGIN_INCLUDED`            |
 | Global tag file            | Chemin vers un fichier d'espace de travail contenant une liste de tags séparés par des virgules (fonctionnalité non compatible avec les tâches de pipeline).                                                                                                                                   | `DATADOG_JENKINS_PLUGIN_GLOBAL_TAG_FILE`      |
 | Global tags                | Liste de tags séparés par des virgules à appliquer à l'ensemble des métriques, événements et checks de service. Les tags peuvent inclure des variables d'environnement définies dans l'instance jenkins master.                                                                                                                                                          | `DATADOG_JENKINS_PLUGIN_GLOBAL_TAGS`          |
 | Global job tags            | Liste d'expressions régulières séparées par des virgules permettant d'identifier une tâche, et liste de tags à appliquer à cette tâche. Les tags peuvent inclure des variables d'environnement définies dans l'instance jenkins master. **Remarque** : les tags peuvent faire référence à des groupes de correspondance dans l'expression régulière, à l'aide du caractère `$`. Exemple : `(.*?)_job_(*?)_release, owner:$1, release_env:$2, optional:Tag3`. | `DATADOG_JENKINS_PLUGIN_GLOBAL_JOB_TAGS`      |
 | Send security audit events | Envoie le `Security Events Type` (type des événements de sécurité) des événements et métriques (fonctionnalité activée par défaut).                                                                                                                                                                | `DATADOG_JENKINS_PLUGIN_EMIT_SECURITY_EVENTS` |
 | Send system events         | Envoie le `System Events Type` (type des événements système) des événements et métriques (fonctionnalité activée par défaut).                                                                                                                                                                  | `DATADOG_JENKINS_PLUGIN_EMIT_SYSTEM_EVENTS`   |
-| Enable Log Collection      | Recueille et envoie des logs sur les builds (fonctionnalité désactivée par défaut).                                                                                                                                                                  | `DATADOG_JENKINS_PLUGIN_COLLECT_BUILD_LOGS`   |
 
 ### Personnalisation des tâches
 
@@ -309,7 +334,7 @@ REMARQUE : `event_type` est toujours défini sur `security` pour les métriques
 
 #### Collecte de logs avec l'Agent
 
-**Remarque** : cette configuration est uniquement valable si vous utilisez la [Configuration de l'Agent Datadog](#plug-in-transmission-dogstatsd).
+**Remarque** : cette configuration est uniquement valable si vous utilisez l'[Agent Datadog](#interface-utilisateur-du-plug-in).
 
 1. La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans `datadog.yaml` :
 
@@ -327,7 +352,7 @@ REMARQUE : `event_type` est toujours défini sur `security` pour les métriques
         source: jenkins
     ```
 
-3. Dans Jenkins, définissez le port spécifié ci-dessus en tant que `Log Collection Port`. Pour ce faire, utilisez les [variables d'environnement](#variable-environnement-transmission-dogstatsd), un [script groovy](#script-groovy-transmission-dogstatsd) ou [l'interface Jenkins](#plug-in-transmission-dogstatsd).
+3. Dans Jenkins, transmettez le port défini lors des étapes précédentes en tant que `Log Collection Port`. Vous pouvez définir ce port à l'aide de [variables d'environnement](#variables-d-environnement), d'un [script Groovy](script-groovy) ou de l'[interface Jenkins](#interface-utilisateur-du-plug-in).
 
 4. [Redémarrez l'Agent][14].
 
@@ -368,3 +393,4 @@ Lisez les [règles de contribution][11] (en anglais) avant d'envoyer un problèm
 [15]: https://docs.datadoghq.com/fr/logs/log_collection/?tab=http
 [16]: https://raw.githubusercontent.com/jenkinsci/datadog-plugin/master/images/dashboard.png
 [17]: https://docs.datadoghq.com/fr/developers/dogstatsd/?tab=containeragent#
+[18]: https://www.jenkins.io/doc/book/using/using-credentials/

@@ -38,6 +38,8 @@ Client tokens are unique to your organization. A client token is required by the
 
 For security reasons, API keys cannot be used to send data from a browser, as they would be exposed client-side in the JavaScript code. To collect logs from web browsers, a client token must be used.
 
+**Note:** A client token will not be revoked if the user who created it was deactivated. They will still be available for use in your RUM applications and to collect logs.
+
 ## Add an API key or client token
 
 To add a Datadog API key or client token:
