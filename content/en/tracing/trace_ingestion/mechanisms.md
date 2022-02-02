@@ -74,7 +74,7 @@ Read more about configuring the ingestion in the [tracing libraries][1] document
 ## Force keep and drop
 `ingestion_reason: manual`
 
-Head-based sampling mechanism can be overriden at the tracing library level. For instance, if you need to monitor a critical transaction, force the associated trace to be kept. On the other hand, for unnecessary or repetitive information like health checks, force the trace to be dropped.
+The head-based sampling mechanism can be overridden at the tracing library level. For example, if you need to monitor a critical transaction, you can force the associated trace to be kept. On the other hand, for unnecessary or repetitive information like health checks, you can force the trace to be dropped.
 
 - Set `ManualKeep` on a span to indicate that it and all child spans should be ingested. The resulting trace might appear incomplete in the UI if the span in question is not the root span of the trace.
 ```
