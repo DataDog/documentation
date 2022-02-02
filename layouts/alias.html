@@ -6,10 +6,8 @@
         <meta name="robots" content="noindex">
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
         <script>
-            if( window.location.hash ) {
-                const redirect_url = '{{ .Permalink | absURL }}'
-                window.location = `${ redirect_url }${ window.location.hash }`
-            }
+            const redirect_url = '{{ .Permalink | absURL }}'
+            window.location = `${ redirect_url }${ window.location.search }${ window.location.hash }`
         </script>
         <meta http-equiv="refresh" content="10; url={{ .Permalink | absURL }}" />
     </head>
