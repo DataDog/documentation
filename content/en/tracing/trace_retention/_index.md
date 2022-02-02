@@ -5,18 +5,18 @@ aliases:
     - /account_management/billing/usage_control_apm/
     - /tracing/app_analytics/
     - /tracing/trace_retention_and_ingestion/
-description: "Learn how to control Ingestion and Indexing rates with Tracing without Limits."
+description: "Learn how to control trace retention with retention filters."
 ---
 
 {{< img src="tracing/live_search_and_analytics/tracing_without_limits_lifecycle-3.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace Journey: Indexing" >}}
 
-With Tracing without Limits™, both the ingestion of traces to Datadog as well as the retention of those traces for 15 days are fully customizable.
+With Tracing without Limits™, both the [ingestion of traces to Datadog][7] as well as the retention of those traces for 15 days are fully customizable.
 
 To track or monitor your usage of Tracing without Limits™, see the [Usage Metrics][1] documentation.
 
 ## Retention filters
 
-After spans have been ingested by Datadog, some will be kept for 15 days according to the retention filters that have been set on your account. By default, the only retention filter enabled will be the [Intelligent Retention Filter](#datadog-intelligent-retention-filter), which retains error traces and traces from different latency distributions.
+After spans have been ingested by Datadog, some are kept for 15 days according to the retention filters that have been set on your account. By default, the only retention filter enabled is the [Intelligent Retention Filter](#datadog-intelligent-retention-filter), which retains error traces and traces from different latency distributions.
 
 You can also create any number of additional [tag-based retention filters](#create-your-own-retention-filter) for your services.
 
@@ -44,11 +44,11 @@ Last Updated
 Enabled toggle
 : Allows filters to be turned on and off.
 
-In addition to the 'Spans Indexed' column per retention filter, there is also the metric `datadog.estimated_usage.apm.indexed_spans` that you can use to track spans indexed by retention filters.
+In addition to the `Spans Indexed` column for each retention filter, there is also the `datadog.estimated_usage.apm.indexed_spans` metric, which you can use to track spans that are indexed by retention filters.
 
 For more information, read the [Usage Metrics][1] documentation, or see the [dashboard][3] available in your account.
 
-<div class="alert alert-info"><strong>Note</strong>: Retention filters do not affect what traces are collected by the Agent and sent to Datadog ("ingested"). The only way to change how much tracing data is ingested is through <a href="https://docs.datadoghq.com/tracing/trace_ingestion/mechanisms">ingestion controls</a>.</div>
+<div class="alert alert-info"><strong>Note</strong>: Retention filters do not affect what traces are collected by the Agent and sent to Datadog ("ingested"). The only way to change how much tracing data is ingested is through <a href="/tracing/trace_ingestion/mechanisms">ingestion controls</a>.</div>
 
 ### Datadog intelligent retention filter
 
@@ -57,7 +57,7 @@ Intelligent retention is always active for your services, and it keeps a proport
 For 30 days, intelligent retention retains:
 
  - A representative selection of errors, ensuring error diversity (for example, response code 400s, 500s).
- - High Latency in the different quartiles `p75`, `p90`, `p95`.
+ - High latency in the `p75`, `p90`, and `p95` quartiles.
  - All resources with any traffic that have associated traces in the past for any time window selection.
  - True maximum duration trace for each time window.
 
