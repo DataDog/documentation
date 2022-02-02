@@ -21,7 +21,7 @@ The Datadog agent continuously sends sampling rates to tracing libraries to appl
 
 For instance, if service `A` has more traffic than service `B`, the Agent might vary the sampling rate for `A` such that  `A` keeps no more than seven traces per second, and similarly adjust the sampling rate for `B` such that `B` keeps no more than three traces per second, for a total of 10 traces per second.
 
-The agent's target traces-per-second can be set in its main configuration file (`datadog.yaml`) or as an environment variable :
+Set Agent's target traces-per-second in its main configuration file (`datadog.yaml`) or as an environment variable :
 ```
 @param max_traces_per_second - integer - optional - default: 10
 @env DD_APM_CONFIG_MAX_TRACES_PER_SECOND - integer - optional - default: 10
