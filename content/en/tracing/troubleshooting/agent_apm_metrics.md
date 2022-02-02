@@ -52,7 +52,7 @@ Increment by one on every code panic.
 
 `datadog.trace_agent.profile`
 : **Type**: Count<br>
-Increment by one every a reverse proxy of profile endpoints is created.
+Increment by one every time a reverse proxy of profile endpoints is created.
 
 `datadog.trace_agent.ratelimit`
 : **Type**: Gauge<br>
