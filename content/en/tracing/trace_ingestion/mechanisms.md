@@ -28,7 +28,7 @@ Set Agent's target traces-per-second in its main configuration file (`datadog.ya
 ```
 
 ### In Tracing librairies : User-defined Rules
-_ingestion\_reason : rule_
+`ingestion_reason: rule`
 
 At the library level, more specific sampling configuration is available:
 - Set a specific sampling rate to apply to all root services, overriding the agent's [default mechanism](#default-mechanism).
@@ -51,10 +51,9 @@ The configuration can be set by environment variables or directly in the code:
 {{% /tab %}}
 {{% tab "Code API" %}}
 
+The following Python example shows sampling 10 percent of all traces, with a rate limit of 100 traces per second, and an overriding sampling rate for a specific service:
 ```
 # in dd-trace-py
-# Sample 10% of all traces with rate limit of 100 traces per second sampled
-# and an override sample rate for a specific service
 tracer.configure(sampler=DatadogSampler(
     default_sample_rate=0.10, # keep 10% of traces
     rate_limit=100, # but at most 100 traces per second
@@ -68,12 +67,12 @@ tracer.configure(sampler=DatadogSampler(
 {{% /tab %}}
 {{< /tabs >}}
 
-Read more about configuring the ingestion in the [tracing librairies][1] documentation
+Read more about configuring the ingestion in the [tracing libraries][1] documentation.
 
-**Note :** Services configured with user-defined rules are marked as `Configured` in the [Ingestion Control Page][3] Configuration column. Services configured to use the default mechanism are labeled as `Automatic`.
+**Note**: Services configured with user-defined rules are marked as `Configured` in the [Ingestion Control Page][3] Configuration column. Services configured to use the default mechanism are labeled as `Automatic`.
 
-## Force Keep and Drop
-_ingestion\_reason : manual_
+## Force keep and drop
+`ingestion_reason: manual`
 
 Head-based sampling mechanism can be overriden at the tracing library level. For instance, if you need to monitor a critical transaction, force the associated trace to be kept. On the other hand, for unnecessary or repetitive information like health checks, force the trace to be dropped.
 
@@ -88,17 +87,17 @@ span.SetTag(ext.ManualDrop, true)
 ```
 
 ## Single spans (App Analytics)
-_ingestion\_reason : analytic_
+`ingestion_reason: analytic`
 
-<div class="alert alert-danger">
-On October 20, 2020, App Analytics was replaced by Tracing without Limits.  This is a deprecated mechanism with configuration information relevant to legacy App Analytics. Now, instead, use Tracing without Limits™ head-based sampling to have full control over your <a href="https://docs.datadoghq.com/tracing/trace_ingestion/mechanisms#head-based-default-mechanism">data ingestion</a>.
+<div class="alert alert-warning">
+On October 20, 2020, App Analytics was replaced by Tracing without Limits.  This is a deprecated mechanism with configuration information relevant to legacy App Analytics. Now, instead, use Tracing without Limits™ <a href="#head-based-default-mechanism">head-based sampling</a> to have full control over your data ingestion.
 </div>
 
 If you need to sample a specific span, but don't need the full trace to be available, tracers allow a sampling rate to be configured for a single span. This span will be ingested at no less than the configured rate, even when the enclosing trace is dropped.
 
-### In the tracing librairies
+### In the tracing libraries
 
-To use the analytics mechanism, it must be enabled, either in the code, or via an environment variable. Furthermore, define a sampling rate to be applied to all `analytics_enabled` span:
+To use the analytics mechanism, enable it either by an environment variable or in the code. Also, define a sampling rate to be applied to all `analytics_enabled` spans:
 
 {{< tabs >}}
 {{% tab "Environment variables" %}}
@@ -129,11 +128,11 @@ span.SetTag(ext.AnalyticsEvent, true)
 s := tracer.StartSpan("redis.cmd", AnalyticsRate(0.5))
 ```
 
-### In the agent
+### In the Agent
 
-In the agent, an additional rate limiter is set to 200 spans per second. If the limit is reached, some spans are be dropped and not forwarded to Datadog.
+In the Agent, an additional rate limiter is set to 200 spans per second. If the limit is reached, some spans are dropped and not forwarded to Datadog.
 
-The rate can be set in the agent main configuration file (datadog.yaml) or as an environment variable :
+Set the rate in the Agent main configuration file (`datadog.yaml`) or as an environment variable:
 ```
 @param max_events_per_second - integer - optional 200
 @env DD_APM_CONFIG_MAX_EVENTS_PER_SECOND - integer - optional 200
@@ -141,32 +140,31 @@ The rate can be set in the agent main configuration file (datadog.yaml) or as an
 
 ## Error and rare traces
 
-For traces not caught by the head-based sampling, agent mechanisms make sure that critical and diverse traces are kept and ingested. These 2 samplers keep a diverse set of traces (by catching all combinations of a predetermined set of tags):
+For traces not caught by the head-based sampling, Agent mechanisms make sure that critical and diverse traces are kept and ingested. These two samplers keep a diverse set of traces by catching all combinations of a predetermined set of tags:
 
-- **Error traces :** sampling errors is important to provide visibility on potential system failures
-- **Rare traces :** sampling rare traces allows you to keep visibility on your system as a whole, by making sure that low-traffic services and resource are still monitored.
+- **Error traces**: Sampling errors is important for providing visibility on potential system failures.
+- **Rare traces**: Sampling rare traces allows you to keep visibility on your system as a whole, by making sure that low-traffic services and resources are still monitored.
 
 
 ### Error traces
-_ingestion\_reason : error_
+`ingestion_reason: error`
 
-The error sampler catches pieces of traces containing error spans that are not caught by head-based sampling. It distributes a `10 traces-per-second` rate to catch all combinations of `service`, `name`, `resource`, `http.status` and `error.type`.
+The error sampler catches pieces of traces that contain error spans that are not caught by head-based sampling. It distributes a ten-traces-per-second rate to catch all combinations of `service`, `name`, `resource`, `http.status` and `error.type`.
 
-From agent version 7.33, the error sampler can be configured in the agent main configuration file (datadog.yaml) or with environment variables :
+With Agent version 7.33 and forward, you can configure the error sampler in the Agent main configuration file (`datadog.yaml`) or with environment variables:
 ```
 @param errors_per_second - integer - optional - default: 10
 @env DD_APM_ERROR_TPS - integer - optional - default: 10
 ```
 
-**Note:** Set the parameter to `0` to disable the error sampler
+**Note**: Set the parameter to `0` to disable the error sampler.
 
 ### Rare traces
-_ingestion\_reason : rare_
+`ingestion_reason: rare`
 
-The rare sampler sends a set of rare spans to Datadog.
-Rare sampler are also distributes a rate to catch combinations of `env`, `service`, `name`, `resource`, `error.type` and `http.status`. The default sampling rate for rare traces is `5 traces-per-second`.
+The rare sampler sends a set of rare spans to Datadog. Rare sampling is also a distributed rate, to catch combinations of `env`, `service`, `name`, `resource`, `error.type`, and `http.status`. The default sampling rate for rare traces is five traces per second.
 
-From agent version 7.33, the rare sampler can be disabled in the agent main configuration file (datadog.yaml) or with an environment variable :
+In Agent version 7.33 and forward, you can disable the rare sampler in the Agent main configuration file (`datadog.yaml`) or with an environment variable:
 
 ```
 @params apm_config.disable_rare_sample - boolean - optional - default: false
@@ -177,14 +175,14 @@ From agent version 7.33, the rare sampler can be disabled in the agent main conf
 
 ## Product ingested spans
 
-Some additional ingestion reasons are attributed to spans generated by a specific Datadog product.
+Some additional ingestion reasons are attributed to spans that are generated by specific Datadog products:
 
-| Product    | ingestion_reason                    |
+| Product    | `ingestion_reason`                    |
 |------------|-------------------------------------|
-| Synthetics | `synthetics` & `synthetics-browser` |
-| RUM        | `RUM`                               |
-| Serverless | `lambda` & `xray`                   |
-| Appsec     | `appsec`                            |
+| Synthetic Monitoring | `synthetics` and `synthetics-browser` |
+| Real User Monitoring        | `RUM`                               |
+| Serverless | `lambda` and `xray`                   |
+| Application Security     | `appsec`                            |
 
 [1]: /tracing/setup_overview/setup/
 [2]: /tracing/visualization/#trace-root-span
