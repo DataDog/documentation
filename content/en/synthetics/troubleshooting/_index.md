@@ -14,13 +14,13 @@ further_reading:
   text: "Configure an API Test"
 ---
 
-If you experience issues setting up or configuring Datadog Synthetic Monitoring, use this information to begin troubleshooting. If you continue to have trouble, [contact Datadog's support team][1].
+If you experience issues setting up or configuring Datadog Synthetic Monitoring, use this page to start troubleshooting. If you continue to have trouble, [contact Datadog Support][1].
 
 ## API tests
 
-### I'm seeing variations in network timings
+### Network timings are varied
 
-If you see a sudden spike or overall increase in your API test [timing metrics][2], this usually indicates a bottleneck or delay in the request. See this guide on [API Test Timings and Variations][3] to learn more.
+If you see a sudden spike or overall increase in your API test [timing metrics][2], this usually indicates a bottleneck or delay in the request. For more information, see this guide on [API Test Timings and Variations][3].
 
 ## Browser tests
 
@@ -34,7 +34,7 @@ After downloading the [Datadog extension][4], you are unable to see your website
 
 This means your applications and environments have different restrictions, which causes some of them to be visualized in an iframe while the others are not viewable.
 
-#### I'm seeing a "We've detected HTTP requests that are not supported inside the iframe, you may need to record in a popup" banner at the top of the iframe
+#### The "We've detected HTTP requests that are not supported inside the iframe, you may need to record in a popup" banner appears at the top of the iframe
 
 This most likely means you are trying to record steps on an `http` page. Only `https` is supported in the recorder iframe. You should open your page as a popup or change your URL to an `https` one to start recording on the page. 
 
@@ -52,9 +52,11 @@ If that happens, ensure the [Datadog extension][5] has the permissions to read a
 
 #### I'm unable to record steps on my application
 
-Your Chrome browser might have some policies preventing the extension from performing the recording as expected. To find out, go to `chrome://policy` and look for any extension-related settings such as [`ExtensionSettings`][6].
+Your Chrome browser might have some policies preventing the extension from performing the recording as expected. 
 
-#### I don't see the login page in the recorder. What is happening?
+To find out, go to `chrome://policy` and look for any extension-related settings such as [`ExtensionSettings`][6].
+
+#### I don't see the login page in the recorder
 
 By default, the iframe/popup of the recorder uses your own browser. This means that if you’re already logged into your application, the iframe/popup might directly display a post login page, therefore preventing you from recording your login steps without logging out first.
 
@@ -71,24 +73,27 @@ This incognito popup window ignores your previous browser history including cook
 #### My mobile small or tablet browser test results keep failing
 
 If your website is using **responsive** techniques, its DOM might differ a lot depending on the device your test is running on. It might use a specific DOM when running from a `Laptop Large`, and have a different architecture when running from a `Tablet` or a `Mobile Small`.  
+
 This means that the steps you recorded from a `Laptop Large` viewport might not be applicable to the same website accessed from a `Mobile Small`, causing your `Mobile Small` test results to fail:
 
 {{< img src="synthetics/device_failures.png" alt="Mobile Tablet Device Failing" style="width:100%;" >}}
 
 For these types of cases, Datadog recommends creating **separate `Mobile Small` or `Tablet` specific tests** where the recorded steps match the viewport your test is set to at runtime.  
+
 To record steps with a `Mobile Small` or `Tablet` viewport, selecting `Mobile Small` or `Tablet` in the recorder dropdown before hitting the **Start Recording** button.
 
 {{< img src="synthetics/record_device.png" alt="Recording steps on mobile tablet" style="width:100%;" >}}
 
 Additionally, Datadog's test browsers run in **headless**, meaning Browser tests do not support some features. For example, Browser tests do not support `touch` and cannot use `touch` to detect whether the website should appear with its mobile design.
 
-#### My Browser test has a `None or multiple elements detected` step warning
+#### My browser test has a `None or multiple elements detected` step warning
 
-One of your Browser test steps is showing a `None or multiple elements detected` step warning:
+One of your browser test steps is showing a `None or multiple elements detected` step warning:
 
 {{< img src="synthetics/step_warning.png" alt="User locator step warning" style="width:100%;" >}}
 
 This means that the user locator defined for that step is either targeting several elements, or none of them, consequently preventing the Browser test from knowing which element needs to be interacted with.   
+
 To fix it, go edit your recording, open the advanced options of the step that is having the issue, go to the page the step is testing, and click on `Test`. This highlights the located element or prints an error message. You can then go ahead and fix your user locator to have it match a single element of the page:
 
 {{< img src="synthetics/fix_user_locator.mp4" alt="Fixing User Locator error" video="true" width="100%" >}}
@@ -110,7 +115,7 @@ If one of your Synthetic tests is throwing a 401, it most likely means that it i
 
 ### Forbidden errors
 
-If you observe `403 Forbidden` errors returned by Synthetic tests, it may be the result of your web server blocking or filtering requests that include the `Sec-Datadog` header.  This header is added to each Synthetic request Datadog initiates to identify the source of the traffic and assist Datadog support in identifying the specific test execution.  
+If you observe `403 Forbidden` errors returned by Synthetic tests, it may be the result of your web server blocking or filtering requests that include the `Sec-Datadog` header. This header is added to each Synthetic request Datadog initiates to identify the source of the traffic and assist Datadog support in identifying the specific test execution.  
 
 Additionally, you might also have to ensure [Datadog Synthetic Monitoring IP ranges][11] are allowed as traffic sources by your firewalls.
 
@@ -132,13 +137,13 @@ This could uncover a resource exhaustion issue on your private location workers.
 
 This could uncover a resource exhaustion issue on your private locations workers. Make sure your private location containers are provisioned with [sufficient CPU resources][13].
 
-### I'm seeing `TIMEOUT` errors on API tests executed from my private location
+### `TIMEOUT` errors appear in API tests executed from my private location
 
 This might mean your private location is unable to reach the endpoint your API test is set to run on. Confirm that the private location is installed in the same network as the endpoint you are willing to test. You can also try to run your test on different endpoints to see if you get the same `TIMEOUT` error or not.
 
 {{< img src="synthetics/timeout.png" alt="API test on private location timing out" style="width:70%;" >}}
 
-### I’m seeing `invalid mount config for type "bind": source path must be a directory` when attempting to run a private location
+### The `invalid mount config for type "bind": source path must be a directory` error appears when attempting to run a private location
 
 This occurs when you attempt to mount a single file in a Windows-based container, which is not supported. For more information, see the [Docker mount volume documentation][14]. Ensure that the source of the bind mount is a local directory.
 
