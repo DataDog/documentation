@@ -98,10 +98,10 @@ A span is a service entry span when it is the entrypoint method for a request to
 A span is a root span when it is the first span of a trace. The root span is the entrypoint method of the traced request, its start marks the beginning of the trace.
 
 For the example below, the **service entry spans** are:
-- rack.request (which is also the **root span**)
-- aspnet_coremvc.request
-- The topmost green span below aspnet_coremvc.request
-- Every orange mongodb span
+- `rack.request` (which is also the _root span_)
+- `aspnet_coremvc.request`
+- The topmost green span below `aspnet_coremvc.request`
+- Every orange `mongodb` span
 
 {{< img src="tracing/visualization/toplevelspans.png" alt="span" >}}
 
