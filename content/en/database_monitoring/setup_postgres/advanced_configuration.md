@@ -27,19 +27,20 @@ SELECT * FROM daily_aggregates_002
 SELECT * FROM daily_aggregates_003
 ```
 
-In these cases, track these queries as a single normalized query using the `quantize_sql_tables` option, so all metrics for those queries are rolled up into a single query:
+In these cases, track these queries as a single normalized query using the `replace_digits` option, so all metrics for those queries are rolled up into a single query:
 
 ```sql
 SELECT * FROM daily_aggregates_?
 ```
 
-Add the `quantize_sql_tables` option to your database instance configuration in the Datadog Agent:
+Add the `replace_digits` option to your database instance configuration in the Datadog Agent:
 
 ```yaml
 instances:
   - dbm: true
     ...
-    quantize_sql_tables: true
+    obfuscator_options:
+      replace_digits: true
 ```
 
 ## Raising the sampling rate

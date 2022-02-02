@@ -29,7 +29,7 @@ To create a new log detection rule in Datadog, hover over **Security**, select *
 
 ## Rule Type
 
-For Cloud SIEM, select **Log Detection** to analyze ingested logs in real-time.
+For Cloud SIEM (Security Information and Event Management), select **Log Detection** to analyze ingested logs in real-time.
 
 ## Choose a detection method
 

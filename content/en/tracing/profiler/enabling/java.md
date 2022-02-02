@@ -100,9 +100,9 @@ You can configure the profiler using the following environment variables:
 | ------------------------------------------------ | ------------- | ------------------------------------------------------------------------------------------------ |
 | `DD_PROFILING_ENABLED`                           | Boolean       | Alternate for `-Ddd.profiling.enabled` argument. Set to `true` to enable profiler.               |
 | `DD_PROFILING_ALLOCATION_ENABLED`                | Boolean       | Alternate for `-Ddd.profiling.allocation.enabled` argument. Set to `true` to enable the allocation profiler. It requires the profiler to be enabled already. |
-| `DD_SERVICE`                                     | String        | Your [service][4] name, for example, `web-backend`.     |
-| `DD_ENV`                                         | String        | Your [environment][9] name, for example: `production`.|
-| `DD_VERSION`                                     | String        | The version of your service.                             |
+| `DD_ENV`                                         | String        | The [environment][9] name, for example: `production`. |
+| `DD_SERVICE`                                     | String        | The [service][9] name, for example, `web-backend`. |
+| `DD_VERSION`                                     | String        | The [version][9] of your service. |
 | `DD_TAGS`                                        | String        | Tags to apply to an uploaded profile. Must be a list of `<key>:<value>` separated by commas such as: `layer:api, team:intake`.  |
 
 ## Not sure what to do next?
@@ -121,5 +121,5 @@ The [Getting Started with Profiler][10] guide takes a sample service with a perf
 [6]: https://docs.oracle.com/javase/7/docs/technotes/tools/solaris/java.html
 [7]: https://app.datadoghq.com/profiling
 [8]: /tracing/profiler/profiler_troubleshooting/#enabling-the-allocation-profiler
-[9]: /tracing/guide/setting_primary_tags_to_scope/#environment
+[9]: /getting_started/tagging/unified_service_tagging
 [10]: /getting_started/profiler/
