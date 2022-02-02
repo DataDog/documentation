@@ -1,19 +1,27 @@
 ---
-title: Ingestion Control Page
+title: Ingestion Controls
 kind: documentation
 aliases:
     - /tracing/trace_ingestion/control_page
     - /tracing/trace_ingestion/ingestion_control_page
     - /account_management/billing/usage_control_apm/
     - /tracing/app_analytics/
-    - /account_management/billing/usage_control_apm/
-    - /tracing/app_analytics/
-description: "Learn how to control Span Ingestion"
+description: "Learn how to control span ingestion"
+further_reading:
+- link: "/tracing/trace_ingestion/mechanisms/"
+  tag: "Documentation"
+  text: "Ingestion Mechanisms"
+- link: "/tracing/trace_retention/"
+  tag: "Documentation"
+  text: "Trace Retention"
+- link: "/tracing/trace_retention/usage_metrics/"
+  tag: "Documentation"
+  text: "Usage Metrics"
 ---
 
 {{< img src="tracing/live_search_and_analytics/tracing_without_limits_lifecycle-1.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace Journey" >}}
 
-Ingestion Controls affect what traces are sent by your applications to Datadog. Stats and metrics are always calculated based on all traces, and are not impacted by ingestion controls.
+Ingestion controls affect what traces are sent by your applications to Datadog. Stats and metrics are always calculated based on all traces, and are not impacted by ingestion controls.
 
 Many instrumented services send 100% of their traces to Datadog by default. The Datadog Agent does not drop or sample any spans by default at volumes of up to 50 traces per second. It is common for high-volume services or services that experience intermittent traffic to not send 100% of spans by default. This 50-traces-per-second default ingestion is based on Intelligent Retention and keeps diverse traces by default.
 
@@ -23,7 +31,7 @@ Navigate to the [Ingestion Control][1] page to get an overview of the ingestion 
 
 **Note:** If you are seeing numbers below 100% for Ingestion Rate, ensure you are using Agent 6.19+ or 7.19+ as these versions increased the default rate.
 
-In Datadog, on the ['Ingestion Controls' tab][1], you can see the following information:
+In Datadog, on the [Ingestion Control page][1], you can see the following information:
 
 Root Service
 : The name of each service instrumented and sending traces to Datadog.
@@ -84,14 +92,14 @@ The Ingestion Breakdown column breaks down the destination of all traces origina
 The breakdown is composed of the following parts:
 
 - **Complete traces ingested** (green): The percentage of traces that have been ingested by Datadog.
-- **Complete traces not retained** (gray): The percentage of traces that have intentionally not been forwarded to Datadog by the agent or the tracer. This can happen for one of two reasons depending on your configuration:
+- **Complete traces not retained** (gray): The percentage of traces that have intentionally not been forwarded to Datadog by the Agent or the tracer. This can happen for one of two reasons depending on your configuration:
 
-    1. By default, the agent and the tracers intelligently set the service ingestion rate. See [Change the Default Ingestion Rate](#change-the-default-ingestion-rate) to configure this behavior.
+    1. By default, the Agent and the tracers intelligently set the service ingestion rate. See [Change the Default Ingestion Rate](#change-the-default-ingestion-rate) to configure this behavior.
     2. When you change the default ingestion rate to less than 100%.
 
 - **Complete traces dropped by the tracer rate limiter** (orange): When you choose to [configure the ingestion rate of a service](#change-the-default-ingestion-rate), you explicitly define the ingestion rate that your service should have. However, as a protection mechanism, a rate limiter set to 100 traces per second by default is automatically enabled. To configure this rate limiter, [open a support ticket][5] to have someone help guide you through the process.
 
-- **Traces dropped due to the agent CPU limit** (red): The agent has a configuration option allowing users to limit the usage of the CPU. After this limit is reached the agent stops accepting traces from the tracers. Change the [agent configuration][6] to configure how much CPU to allocate to the agent.
+- **Traces dropped due to the Agent CPU limit** (red): The Agent has a configuration option allowing users to limit the usage of the CPU. After this limit is reached the Agent stops accepting traces from the tracers. Change the [Agent configuration][6] to configure how much CPU to allocate to the Agent.
 
 ### Traces dropped before ingestion
 
@@ -117,9 +125,13 @@ All existing App Analytics filters have been automatically transitioned to Reten
 
 {{< img src="tracing/trace_indexing_and_ingestion/MigratedRetentionFilter.png" style="width:100%;" alt="Visual indicator of App Analytics filter migrated to a retention filter" >}}
 
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: https://app.datadoghq.com/apm/traces/ingestion-control
 [2]: https://app.datadoghq.com/dash/integration/30337/app-analytics-usage
-[3]: /tracing/trace_retention_and_ingestion/usage_metrics
+[3]: /tracing/trace_retention/usage_metrics
 [4]: /account_management/billing/apm_distributed_tracing/
 [5]: /help/
 [6]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml#L736-L741

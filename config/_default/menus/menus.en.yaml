@@ -1793,7 +1793,7 @@ main:
     parent: trace_ingestion
     identifier: ingestion_mechanisms
     weight: 401
-  - name: Ingestion Control Page
+  - name: Ingestion Controls
     url: tracing/trace_ingestion/ingestion_controls
     parent: trace_ingestion
     identifier: ingestion_control_page

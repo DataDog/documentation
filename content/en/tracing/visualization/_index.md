@@ -38,7 +38,7 @@ The APM UI provides many tools to troubleshoot application performance and corre
 | [Indexed Span](#indexed-span) | Indexed Spans represent all spans indexed by retention filters or legacy App Analytics analyzed spans and can be used to search, query, and monitor in *Analytics*.                                                                                                |
 | [Span tags](#span-tags)         | Tag spans in the form of key-value pairs to correlate a request in the *Trace View* or filter in *Analytics*.                                                                                                    |
 | [Retention Filters](#retention-filters) | Retention filters are tag-based controls set within the Datadog UI that determine what spans to index in Datadog for 15 days.                                                                                              |
-| [Ingestion Controls](#ingestion-controls) | Ingestion Controls are used to send up to 100% of traces to Datadog for live search and analytics for 15 minutes.
+| [Ingestion Controls](#ingestion-controls) | Ingestion controls are used to send up to 100% of traces to Datadog for live search and analytics for 15 minutes.
 | [Sublayer Metric](#sublayer-metric) | A sublayer metric is the execution duration of a given type / service within a trace.
 | [Execution Time](#execution-time) | Total time that a span is considered 'active' (not waiting for a child span to complete).
 
@@ -213,5 +213,5 @@ When child spans are concurrent, execution time is calculated by dividing the ov
 [16]: https://app.datadoghq.com/metric/summary
 [17]: https://app.datadoghq.com/monitors#/create
 [18]: /tracing/trace_explorer/query_syntax/#facets
-[19]: /tracing/trace_retention_and_ingestion/#retention-filters
-[20]: /tracing/trace_retention_and_ingestion/#ingestion-controls
+[19]: /tracing/trace_retention/#retention-filters
+[20]: /tracing/trace_ingestion/ingestion_controls/

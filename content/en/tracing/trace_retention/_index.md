@@ -1,11 +1,17 @@
 ---
 title: Trace Retention
 kind: documentation
-aliases:
-    - /account_management/billing/usage_control_apm/
-    - /tracing/app_analytics/
-    - /tracing/trace_retention_and_ingestion/
 description: "Learn how to control trace retention with retention filters."
+further_reading:
+- link: "/tracing/trace_ingestion/mechanisms"
+  tag: "Documentation"
+  text: "Ingestion Mechanisms"
+- link: "/tracing/trace_ingestion/ingestion_controls/"
+  tag: "Documentation"
+  text: "Ingestion Controls"
+- link: "/tracing/trace_retention/usage_metrics/"
+  tag: "Documentation"
+  text: "Usage Metrics"
 ---
 
 {{< img src="tracing/live_search_and_analytics/tracing_without_limits_lifecycle-3.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace Journey: Indexing" >}}
@@ -85,7 +91,11 @@ For example, you can create filters to keep all traces for:
 - High-priority customers using a mission-critical feature of your SaaS solution.
 - Specific versions of an online delivery service application.
 
-[1]: /tracing/trace_retention_and_ingestion/usage_metrics
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /tracing/trace_retention/usage_metrics
 [2]: https://app.datadoghq.com/apm/traces/retention-filters
 [3]: https://app.datadoghq.com/dash/integration/30337/app-analytics-usage
 [4]: /tracing/visualization/#service-entry-span
