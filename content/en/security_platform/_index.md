@@ -76,3 +76,5 @@ To get started with the Datadog Security Platform, navigate to the [Setup & Conf
 [5]: /security_platform/cloud_workload_security/
 [6]: https://app.datadoghq.com/security/configuration
 [7]: /security_platform/application_security/
+[8]: /tracing/
+[9]: /agent/
