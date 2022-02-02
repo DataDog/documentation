@@ -41,7 +41,7 @@ Use facets in the left panel to scope a search query by value. For example, if y
 
 {{< img src="security_platform/security_monitoring/detection_rules/rule_type_filter.png" alt="Filtering by rule type, such as a log detection or cloud configuration, in Datadog" >}}
 
-You can also filter by facets such as `source` and `severity` to help when investigating and triaging incoming issues. To include all facets within a category in search again, hover a value in the panel and click **all**.
+You can also filter by facets such as `source` and `severity` to help when investigating and triaging incoming issues. To include all facets within a category in search again, hover your mouse over a value in the panel and click **all**.
 
 **Note**: By default, all facets are selected.
 
@@ -60,8 +60,8 @@ Enable or disable a rule using the toggle switch to the right of the rule.
 Click on the three dot menu, next to the rule toggle, and select any of the provided options: Edit, Clone, Delete, or View generated signals.
 
 - Click edit to update queries, adjust triggers, manage notifications or adjust rule configuration.
-  -  **Note**: You can only edit an out-of-the-box (OOTB) rule by first cloning the rule, and then modifying the rule. To edit a default rule, click on **Edit** and scroll to the bottom of the rule configuration page. Click **Clone**, and then modify the rule.
-- Clone a rule is helpful if you wish to duplicate an existing rule and lightly modify settings to cover other areas of detection. For example, duplicate a log detection rule and modify from **Threshold** to **Anomaly** to add new dimension to threat detection using the same queries and triggers.
+  -  **Note**: You can only edit an out-of-the-box (OOTB) rule by first cloning the rule, and then modifying the rule. To edit a default rule, click **Edit** and scroll to the bottom of the rule configuration page. Click **Clone**, and then modify the rule.
+- Cloning a rule is helpful if you wish to duplicate an existing rule and lightly modify settings to cover other areas of detection. For example, you could duplicate a log detection rule and modify it from **Threshold** to **Anomaly** to add new dimension to threat detection using the same queries and triggers.
 - The delete option is **only** available for custom rules. You cannot delete an out-of-the-box (OOTB) rule as they are native to the platform. To permanently delete a custom rule, click **Delete**. To disable an OOTB rule, click the disable toggle.
 - Click **View generated signals** to pivot to the [Signals Explorer][7] and query by a rule's ID. This is useful when correlating signals across multiple sources by rule, or when completeing an audit of rules. 
 
