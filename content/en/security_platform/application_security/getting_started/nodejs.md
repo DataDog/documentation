@@ -22,6 +22,7 @@ further_reading:
    ```
    npm install dd-trace@2
    ```
+   For information about which language and framework versions are supported by the library, see [Compatibility][1].
 
 2. **Where you import and initialize the NodeJS library for APM, also enable Application Security.** This might be either in your code or with environment variables. If you initialized APM in code, add `{appsec: true}` to your init statement:
       {{< tabs >}}
@@ -134,3 +135,5 @@ DD_APPSEC_ENABLED=true node app.js
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /security_platform/application_security/setup_and_configure/?code-lang=nodejs#compatibility

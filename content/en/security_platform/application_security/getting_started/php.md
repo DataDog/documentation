@@ -22,6 +22,7 @@ further_reading:
    wget https://raw.githubusercontent.com/DataDog/dd-appsec-php/installer/dd-library-php-setup.php
    php dd-library-php-setup.php --php-bin all --tracer-version latest --appsec-version latest
    ```
+   For information about which language and framework versions are supported by the library, see [Compatibility][1].
 
 2. **Enable the library in your code** by restarting PHP-FPM or Apache. In a containerized environment, if you previously installed the library without enabling Application Security, you can optionally enable it after by setting the following environment variable:
    {{< tabs >}}
@@ -85,3 +86,5 @@ Update your ECS task definition JSON file, by adding this in the environment sec
 ## Further Reading 
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /security_platform/application_security/setup_and_configure/?code-lang=php#compatibility

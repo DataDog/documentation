@@ -21,6 +21,7 @@ further_reading:
    ```console
    $ go get -v -u gopkg.in/DataDog/dd-trace-go.v1
    ```
+   For information about which language and framework versions are supported by the library, see [Compatibility][4].
 
 2. **Recompile your program** and enable Application Security and CGO:
    ```console
@@ -98,3 +99,4 @@ Update your ECS task definition JSON file, by adding this in the environment sec
 [1]: /security_platform/application_security/setup_and_configure/?code-lang=go#supported-frameworks
 [2]: https://github.com/golang/go/wiki/cgo
 [3]: /security_platform/application_security/setup_and_configure/?code-lang=go#enabling-cgo
+[4]: /security_platform/application_security/setup_and_configure/?code-lang=go#compatibility

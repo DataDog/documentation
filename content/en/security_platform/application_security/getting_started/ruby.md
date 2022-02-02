@@ -18,6 +18,7 @@ further_reading:
    ```
    gem install ddtrace
    ```
+   For information about which language and framework versions are supported by the library, see [Compatibility][1].
 
 2. **Enable Application Security**, either in your code:
    ```
@@ -100,3 +101,5 @@ env DD_APPSEC_ENABLED=true rails server
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /security_platform/application_security/setup_and_configure/?code-lang=ruby#compatibility

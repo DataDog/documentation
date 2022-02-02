@@ -103,4 +103,4 @@ java -javaagent:dd-java-agent.jar \
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/dd-trace-java/releases
-[2]: /security_platform/application_security/setup_and_configure/#compatibility
+[2]: /security_platform/application_security/setup_and_configure/?code-lang=java#compatibility
