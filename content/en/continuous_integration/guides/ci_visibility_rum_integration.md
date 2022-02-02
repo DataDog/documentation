@@ -20,6 +20,7 @@ This RUM session has all the data that [RUM normally collects][2], so it lets yo
 
 ### Compatibility
 * `dd-trace-js>=1.7.0`
+* `browser-sdk>=3.11.0`
 
 
 [1]: /real_user_monitoring/browser/
