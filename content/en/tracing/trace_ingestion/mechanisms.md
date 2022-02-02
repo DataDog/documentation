@@ -1,8 +1,6 @@
 ---
 title: Ingestion Mechanisms
 kind: documentation
-aliases:
-    - /tracing/ingestion/ingestion_mechanisms
 description: "What are the mechanisms in the tracer and the agent controlling the trace ingestion"
 ---
 
