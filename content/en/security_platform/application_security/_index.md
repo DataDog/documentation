@@ -22,7 +22,7 @@ Application Security leverages Datadog [tracing libraries][1], the [Datadog Agen
 
 When a threat is detected, a security signal is generated in Datadog. For `HIGH` or `CRITICAL` severity security signals, notifications can be sent to Slack, email, or PagerDuty to notify your team and provide real-time context around threats.
 
-From the onset of a threat, quickly pivot to investigate a security signal in Datadog. Leverage the deep observability data provided by Application Security and APM distributed tracing, in one view, to resolve application issues. Analyze attack flows, view flame graphs, and review correlated trace and log data to pinpoint application vulnerabilities. Eliminate context switching by flowing through application data into remediation steps, all within the same panel.
+Once a signal is triggered, quickly pivot to investigate in Datadog. Leverage the deep observability data provided by Application Security and APM distributed tracing, in one view, to resolve application issues. Analyze attack flows, view flame graphs, and review correlated trace and log data to pinpoint application vulnerabilities. Eliminate context switching by flowing through application data into remediation steps, all within the same panel.
 
 With Application Security, you can cut through the noise of continuous trace data to focus on securing and protecting your environment.
 
