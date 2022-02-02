@@ -525,9 +525,9 @@ livenessProbe:
 
 {{< /tabs >}}
 
-#### Additional configurations
+#### Additional health check configurations
 
-If you require a healthcheck endpoint, enable the readiness and liveness probes on Port `8080` in your private location deployment. For more information, see [Advanced configurations][15].
+If your container orchestrator of choice requires a health check endpoint, enable private location status probes on port `8080` in your private location deployment. For more information, see [Advanced configurations][15].
 
 ### Test your internal endpoint
 
