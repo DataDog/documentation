@@ -51,7 +51,7 @@ Cucumber インテグレーションでは、`cucumber` フレームワークを
 require 'cucumber'
 require 'datadog/ci'
 
-Datadog.configure do |c|
+Datadog::CI.configure do |c|
   # CI でのみテストインスツルメンテーションをアクティブ化します
   c.tracer.enabled = (ENV["DD_ENV"] == "ci")
 
@@ -83,7 +83,7 @@ RSpec インテグレーションでは、`rspec` テストフレームワーク
 require 'rspec'
 require 'datadog/ci'
 
-Datadog.configure do |c|
+Datadog::CI.configure do |c|
   # CI でのみテストインスツルメンテーションをアクティブ化します
   c.tracer.enabled = (ENV["DD_ENV"] == "ci")
 
@@ -109,7 +109,7 @@ DD_ENV=ci bundle exec rake spec
 
 ## コンフィギュレーション設定
 
-以下は、`Datadog.configure` ブロックを使用するか、環境変数を使用するコードで、トレーサーで使用できる最も重要なコンフィギュレーション設定のリストです。
+以下は、`Datadog::CI.configure` ブロックを使用するか、環境変数を使用するコードで、トレーサーで使用できる最も重要なコンフィギュレーション設定のリストです。
 
 `service`
 : テスト中のサービスまたはライブラリの名前。<br/>
