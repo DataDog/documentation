@@ -9,6 +9,9 @@ further_reading:
 - link: "/security_platform/application_security/setup_and_configure/#compatibility"
   tag: "Documentation"
   text: "Programming Language and Framework Compatibility"
+- link: "/security_platform/default_rules/#cat-application-security"
+  tag: "Documentation"
+  text: "OOTB Application Security Rules"
 ---
 
 <div class="alert alert-warning">
@@ -25,5 +28,8 @@ Select your application language for details on how to do these steps for your l
 
 <br>
 
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /security_platform/application_security/

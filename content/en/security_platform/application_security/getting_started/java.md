@@ -5,9 +5,12 @@ code_lang: java
 type: multi-code-lang
 code_lang_weight: 0
 further_reading:
-    - link: 'https://github.com/DataDog/dd-trace-java'
-      tag: 'GitHub'
-      text: 'Java Datadog Library source code'
+- link: 'https://github.com/DataDog/dd-trace-java'
+  tag: 'GitHub'
+  text: 'Java Datadog Library source code'
+- link: "/security_platform/default_rules/#cat-application-security"
+  tag: "Documentation"
+  text: "OOTB Application Security Rules"
 ---
 
 {{% appsec-getstarted %}}

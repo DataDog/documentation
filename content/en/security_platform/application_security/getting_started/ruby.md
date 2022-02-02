@@ -8,6 +8,9 @@ further_reading:
     - link: 'https://github.com/DataDog/dd-trace-rb'
       tag: 'GitHub'
       text: 'Ruby Datadog Library source code'
+    - link: "/security_platform/default_rules/#cat-application-security"
+      tag: "Documentation"
+      text: "OOTB Application Security Rules"
 ---
 
 {{% appsec-getstarted %}}
