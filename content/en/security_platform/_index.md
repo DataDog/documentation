@@ -30,7 +30,7 @@ Cloud Security Posture Management is not currently available in US1-FED.
 
 Bring speed and scale to your production security operations. Datadog’s Security Platform delivers real-time threat detection, and continuous configuration audits across applications, hosts, containers, and cloud infrastructure. Coupled with the greater Datadog observability platform, the Datadog security platform brings unprecedented integration between security and operations aligned to your organizations shared goals.
 
-The Datadog Security Platform includes [Cloud SIEM](#security-monitoring), [Cloud Security Posture Management (CSPM)](#cloud-security-posture-management), and [Cloud Workload Security (CWS)](#cloud-workload-security).
+The Datadog Security Platform includes [Application Security](#application-security), [Cloud SIEM](#security-monitoring), [Cloud Security Posture Management (CSPM)](#cloud-security-posture-management), and [Cloud Workload Security (CWS)](#cloud-workload-security).
 
 {{< vimeo 408512902 >}}
 </br>
