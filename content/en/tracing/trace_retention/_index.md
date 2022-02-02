@@ -58,7 +58,7 @@ For 30 days, intelligent retention retains:
 
  - A representative selection of errors, ensuring error diversity (for example, response code 400s, 500s).
  - High Latency in the different quartiles `p75`, `p90`, `p95`.
- - All Resources with any traffic have associated Traces in the past for any time window selection.
+ - All resources with any traffic that have associated traces in the past for any time window selection.
  - True maximum duration trace for each time window.
 
 **Note**: Because intelligent retention chooses spans intentionally and not randomly, spans that are retained only by the intelligent filter are **not** included in the [Trace explorer timeseries view][5]. Aggregated views (timeseries, toplist, table) are available only for spans retained by [custom retention filters](#create-your-own-retention-filter).
