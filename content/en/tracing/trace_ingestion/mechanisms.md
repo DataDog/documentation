@@ -15,7 +15,7 @@ The default sampling mechanism is called _head-based sampling_. The decision of 
 
 Because the decision is made at the beginning of the trace and then conveyed to all parts of the trace, the trace is guaranteed to be kept or dropped as a whole.
 
-### In the agent
+### In the Agent
 
 The datadog agent continuously sends sampling rates to tracing libraries to apply at the root of traces. Datadog agent adjusts rates targetting an overall  `10 traces-per-second`, distributed to services depending on the traffic.
 
