@@ -95,7 +95,7 @@ A span is a service entry span when it is the entrypoint method for a request to
 
 ### Trace root span
 
-A span is a root span when it is the first span of a trace. The root span is the entrypoint method of the traced request, its start marks the beginning of the trace.
+A span is a trace root span when it is the first span of a trace. The root span is the entry-point method of the traced request. Its start marks the beginning of the trace.
 
 For the example below, the **service entry spans** are:
 - `rack.request` (which is also the _root span_)
