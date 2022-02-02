@@ -73,10 +73,10 @@ In the **Profiles** tab, you can see all profile types available for a given lan
 Once enabled, the following profile types are collected:
 
 
-CPU in Java Code
+CPU
 : Shows the time each method spent running on the CPU. It includes your code that runs in the JVM (Java, Kotlin, etc), but not JVM operations or native code called from within the JVM.
 
-Allocation
+Allocations
 : Shows the amount of heap memory allocated by each method, including allocations which were subsequently freed.
 
 Wall Time in Native Code
@@ -85,7 +85,7 @@ Wall Time in Native Code
 Class Load
 : Shows the number of classes loaded by each method.
 
-Exception
+Thrown Exceptions
 : Shows the number of errors and exceptions thrown by each method.
 
 File I/O
