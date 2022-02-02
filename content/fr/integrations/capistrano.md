@@ -34,7 +34,7 @@ Lorsque vous activez cette intégration pour un `Capfile` donné, chaque tâche 
 
 ### Installation
 
-Installez la gemme Ruby `dogapi` :
+Installez le gem Ruby `dogapi` :
 
 ```shell
 sudo gem install dogapi --version ">=1.10.0"

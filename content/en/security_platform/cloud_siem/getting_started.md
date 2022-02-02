@@ -17,7 +17,7 @@ further_reading:
   text: "Learn about the Security Signals Explorer"
 ---
 
-To get started with Datadog Cloud SIEM, follow these steps:
+To get started with Datadog Cloud SIEM (Security Information and Event Management), follow these steps:
 
 - [Ingest logs](#ingest-logs)
 - [Review Detection Rules](#review-detection-rules)

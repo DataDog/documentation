@@ -465,6 +465,17 @@ Send pipeline traces.
 ...
 {{< /code-block >}}
 
+### The Datadog Plugin cannot write payloads to the server
+
+If the following error message appears in the **Jenkins Log**, make sure that the plugin configuration is correct.
+
+{{< code-block lang="text" >}}
+Error writing to server
+{{< /code-block >}}
+
+1. If you are using `localhost` as the hostname, try to change it to the server hostname instead.
+2. If your Jenkins instance is behind an HTTP proxy, go to **Manage Jenkins** > **Manage Plugins** > **Advanced tab** and make sure the proxy configuration is correct.
+
 ### The Datadog Plugin section does not appear in the Jenkins configuration
 
 If the Datadog Plugin section does not appear in Jenkins configuration section, make sure that the plugin is enabled. To do so:
