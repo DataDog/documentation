@@ -28,13 +28,12 @@ All versions of Agent v6 and v7 support TLS v1.2.
 
 #### Packaged or containerized Agent v5
 
-All versions of the Agent v5 installed with:
+All versions of the Agent v5 installed with the following support TLS v1.2:
 
 * the DEB/RPM packages
 * the Windows MSI installer
 * the official container image
 
-support TLS v1.2.
 
 #### Agent v5 source install
 
