@@ -146,6 +146,15 @@ By default, only users with the [Datadog Admin and Datadog Standard roles][9] ca
 
 If you have access to the [custom role feature][10], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions.
 
+### Restrict access
+
+<div class="alert alert-warning">
+Access restriction is available for customers with <a href="https://docs.datadoghq.com/account_management/rbac/?tab=datadogapplication#create-a-custom-role">custom roles</a> enabled on their accounts.</div>
+
+You can restrict access to an ICMP test based on the roles in your organization. When creating an ICMP test, choose which roles (in addition to your user) can read and write your test. 
+
+{{< img src="synthetics/settings/restrict_access.png" alt="Set permissions for your test" style="width:70%;" >}}
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
