@@ -41,7 +41,7 @@ The Datadog Security Platform includes [Application Security](#application-secur
 Application Security is in public beta. See the <a href="https://app.datadoghq.com/security/appsec?instructions=all">in-app instructions</a> to get started.
 </div>
 
-[Application Security][7] monitors application-level attacks aiming to exploit code-level vulnerabilities, such as Server-Side-Request-Forgery (SSRF), SQL injection, Log4Shell, and Reflected Cross-Site-Scripting (XSS). Application Security leverages Datadog [APM][1], the [Datadog Agent][2], and in-app detection rules to detect threats in your application environment.
+[Application Security][7] monitors application-level attacks aiming to exploit code-level vulnerabilities, such as Server-Side-Request-Forgery (SSRF), SQL injection, Log4Shell, and Reflected Cross-Site-Scripting (XSS). Application Security leverages Datadog [APM][8], the [Datadog Agent][9], and in-app detection rules to detect threats in your application environment.
 
 {{< img src="/security_platform/application_security/app-sec-landing-page.png" alt="A security signal panel in Datadog, which displays attack flows and flame graphs" width="75%">}}
 
