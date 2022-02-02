@@ -1,5 +1,5 @@
 ---
-title: Getting Started Monitoring Application Security
+title: Getting Started
 kind: documentation
 type: multi-code-lang
 further_reading:

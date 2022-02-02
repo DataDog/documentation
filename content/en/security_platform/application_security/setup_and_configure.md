@@ -1,5 +1,5 @@
 ---
-title: Setup and Configure Application Security Monitoring
+title: Setup and Configure
 kind: documentation
 further_reading:
 - link: "/security_platform/application_security/"
