@@ -29,6 +29,8 @@ The Datadog integration for [CircleCI][1] works by using [webhooks][2] to send d
 
 2. Click **Add Webhook** to save the new webhook.
 
+To set custom tags, add to the **Webhook URL** a query parameter `tags`, with *key:value* pairs separated by commas. If the tag contains commas, quotes are needed. Example: `key1:value1,"key2: value with , comma",key3:value3`. (**This parameter needs URL encoding**, for the example: `?tags=key1%3Avalue1%2C%22key2%3A+value+with+%2C+comma%22%2Ckey3%3Avalue3`)
+
 ## Visualize pipeline data in Datadog
 
 The [Pipelines][4] and [Pipeline Executions][5] pages populate with data after the workflows finish.
