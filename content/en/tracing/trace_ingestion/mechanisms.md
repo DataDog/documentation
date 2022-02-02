@@ -11,7 +11,7 @@ To each span ingested, there is attached a unique **ingestion reason** referring
 ## Head-based default mechanism
 _ingestion\_reason : auto_
 
-The default sampling mechanism is called "head-based sampling." The decision of whether to keep or drop a trace is made at the very beginning of the trace, at the start of the [root span][2]. This decision is then propagated to other services as part of their request context, for example as an HTTP request header.
+The default sampling mechanism is called _head-based sampling_. The decision of whether to keep or drop a trace is made at the very beginning of the trace, at the start of the [root span][2]. This decision is then propagated to other services as part of their request context, for example as an HTTP request header.
 
 Because the decision is made at the beginning of the trace and then conveyed to all parts of the trace, the trace is guaranteed to be kept or dropped as a whole.
 
