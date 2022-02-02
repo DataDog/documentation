@@ -32,7 +32,7 @@ Bring speed and scale to your production security operations. Datadog’s Securi
 
 The Datadog Security Platform includes [Cloud SIEM](#security-monitoring), [Cloud Security Posture Management (CSPM)](#cloud-security-posture-management), and [Cloud Workload Security (CWS)](#cloud-workload-security).
 
-{{< vimeo 408512902 >}}
+{{< vimeo 669874306 >}}
 </br>
 
 ## Cloud SIEM
