@@ -35,7 +35,7 @@ At the library level, more specific sampling configuration is available:
 - Set a sampling rate for a specific root service.
 - Set a limit on the number of ingested traces per second.
 
-**Note :** These rules also follow a head-based sampling mechanism. If the traffic for a service is higher than the configured maximum traces-per-second, then traces are dropped at the root. It does not create incomplete traces.
+**Note**: These rules also follow a head-based sampling mechanism. If the traffic for a service is higher than the configured maximum traces per second, then traces are dropped at the root. It does not create incomplete traces.
 
 The configuration can be set directly in the code, or as environment variables :
 
