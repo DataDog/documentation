@@ -37,7 +37,7 @@ At the library level, more specific sampling configuration is available:
 
 **Note**: These rules also follow a head-based sampling mechanism. If the traffic for a service is higher than the configured maximum traces per second, then traces are dropped at the root. It does not create incomplete traces.
 
-The configuration can be set directly in the code, or as environment variables :
+The configuration can be set by environment variables or directly in the code:
 
 {{< tabs >}}
 {{% tab "Environment variables" %}}
