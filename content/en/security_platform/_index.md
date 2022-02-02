@@ -35,6 +35,16 @@ The Datadog Security Platform includes [Cloud SIEM](#security-monitoring), [Clou
 {{< vimeo 408512902 >}}
 </br>
 
+## Application Security
+
+<div class="alert alert-warning">
+Application Security is in public beta. See the <a href="https://app.datadoghq.com/security/appsec?instructions=all">in-app instructions</a> to get started.
+</div>
+
+[Application Security][7] monitors application-level attacks aiming to exploit code-level vulnerabilities, such as Server-Side-Request-Forgery (SSRF), SQL injection, Log4Shell, and Reflected Cross-Site-Scripting (XSS). Application Security leverages Datadog [APM][1], the [Datadog Agent][2], and in-app detection rules to detect threats in your application environment.
+
+{{< img src="/security_platform/application_security/app-sec-landing-page.png" alt="A security signal panel in Datadog, which displays attack flows and flame graphs" width="75%">}}
+
 ## Cloud SIEM
 
 [Cloud SIEM][1] (Security Information and Event Management) detects real-time threats to your application and infrastructure, like a targeted attack, an IP communicating with your systems which matches a threat intel list, or an insecure configuration. Cloud SIEM is powered by [Datadog Log Management][2]. With these areas combined, you can [automate remediation of threats detected by Datadog Cloud SIEM][3] to speed up your threat-response workflow.
@@ -65,3 +75,4 @@ To get started with the Datadog Security Platform, navigate to the [Setup & Conf
 [4]: /security_platform/cspm/
 [5]: /security_platform/cloud_workload_security/
 [6]: https://app.datadoghq.com/security/configuration
+[7]: /security_platform/application_security/
