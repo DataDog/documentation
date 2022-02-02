@@ -25,7 +25,7 @@ For each of monitoring option, there are [default detection rules][1] that work 
 
 - With [Cloud Workload Security][5], the Datadog Agent actively monitors system activity and evaluates it against a set of detection rules.
 
-- [Application Security][7] is enabled with the Datadog Agent and libraries to monitor application-level attacks aiming to exploit code-level vulnerabilities.
+- [Application Security][7] leverages Datadog [APM][8], the [Datadog Agent][9], and detection rules to detect threats in your application environment.
 
 ## Creating and managing detection rules
 
@@ -76,3 +76,5 @@ Click on the three dot menu, next to the rule toggle, and select any of the prov
 [5]: /security_platform/cloud_workload_security/
 [6]: https://app.datadoghq.com/security/configuration/rules
 [7]: /security_platform/explorer/
+[8]: /tracing/
+[9]: /agent/
