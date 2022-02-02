@@ -17,7 +17,7 @@ Because the decision is made at the beginning of the trace and then conveyed to 
 
 ### In the Agent
 
-The datadog agent continuously sends sampling rates to tracing libraries to apply at the root of traces. Datadog agent adjusts rates targetting an overall  `10 traces-per-second`, distributed to services depending on the traffic.
+The Datadog agent continuously sends sampling rates to tracing libraries to apply at the root of traces. The Agent adjusts rates to achieve a target of overall ten traces per second, distributed to services depending on the traffic.
 
 For instance, if service `A` has more traffic than service `B`, the agent might vary the sampling rate for `A` such that  `A` keeps no more than `7` traces per second, and similarly adjust the sampling rate for `B` such that `B` keeps no more than `3` traces per second, for a total of `10` traces per second.
 
