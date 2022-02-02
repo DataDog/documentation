@@ -33,7 +33,7 @@ _ingestion\_reason : rule_
 At the library level, more specific sampling configuration is available:
 - Set a specific sampling rate to apply to all root services, overriding the agent's [default mechanism](#default-mechanism).
 - Set a sampling rate for a specific root service.
-- Set a limit on the number of ingested traces-per-second.
+- Set a limit on the number of ingested traces per second.
 
 **Note :** These rules also follow a head-based sampling mechanism. If the traffic for a service is higher than the configured maximum traces-per-second, then traces are dropped at the root. It does not create incomplete traces.
 
