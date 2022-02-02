@@ -15,7 +15,7 @@ Ingestion Controls affect what traces are sent by your applications to Datadog. 
 
 Many instrumented services send 100% of their traces to Datadog by default. The Datadog Agent does not drop or sample any spans by default at volumes of up to 50 traces per second. It is common for high-volume services or services that experience intermittent traffic to not send 100% of spans by default. This 50-traces-per-second default ingestion is based on Intelligent Retention and keeps diverse traces by default.
 
-Navigate to the [Ingestion Control][1] page to get an overview of the ingestion configuration accross all your services
+Navigate to the [Ingestion Control][1] page to get an overview of the ingestion configuration across all your services
 
 {{< img src="tracing/trace_indexing_and_ingestion/IngestionControls.png" style="width:100%;" alt="Retention Filters" >}}
 
