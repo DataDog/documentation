@@ -4,6 +4,8 @@ kind: documentation
 aliases:
     - /tracing/trace_ingestion/control_page
     - /tracing/trace_ingestion/ingestion_control_page
+    - /account_management/billing/usage_control_apm/
+    - /tracing/app_analytics/
 description: "Learn how to control Span Ingestion"
 ---
 
