@@ -171,7 +171,7 @@ In Agent version 7.33 and forward, you can disable the rare sampler in the Agent
 @env DD_APM_DISABLE_RARE_SAMPLER - boolean - optional - default: false
 ```
 
-**Note:** Sampled traces may be incomplete, as this mechanism occurs downstream of the head-based sampling. There is no way to guarantee that the agent will receive a complete trace from the tracing libraries.
+**Note**: Sampled rare traces may be incomplete, because this mechanism occurs downstream of the head-based sampling. There is no way to guarantee that the agent will receive a complete trace from the tracing libraries.
 
 ## Product ingested spans
 
