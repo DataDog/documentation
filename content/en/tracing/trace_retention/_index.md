@@ -77,7 +77,7 @@ To customize what spans are indexed and retained for 15 days, you can create, mo
 4. Set a percentage of spans matching these tags to be indexed.
 5. Save your new filter.
 
-**Note:** Selecting "Top-Level Spans for Services Only" means the retention filter retains only the selected proportion of [service entry spans][4] of service and index them. Use this if you want to only index service entry spans with matching tags. If "All Spans" is selected, the retention filter retains the selected proportion of all spans of the distributed trace, irrespective of their hierarchy, and index them. This may have an impact on your bill, and the visual indicator within the app while setting a retention filter informs you how many matching spans have been detected over the time period.
+**Note**: Selecting "Top-Level Spans for Services Only" means the retention filter retains only the selected proportion of [service entry spans][4] of the service and indexes them. Use this if you want to only index service entry spans with matching tags. If "All Spans" is selected, the retention filter retains the selected proportion of all spans of the distributed trace, irrespective of their hierarchy, and indexes them. This may have an impact on your bill, and the visual indicator within the app while setting a retention filter informs you how many matching spans have been detected over the time period.
 
 For example, you can create filters to keep all traces for:
 
