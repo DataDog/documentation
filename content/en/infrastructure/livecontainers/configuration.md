@@ -139,7 +139,6 @@ The following table presents the list of collected resources and the minimal Age
 | PersistentVolume | 7.27.0 | 1.18.0 | 2.20.1 |
 | PersistentVolumeClaims | 7.27.0 | 1.18.0 | 2.30.4 |
 
-
 ### Instructions for previous Agent and Cluster Agent versions.
 
 The Kubernetes resources view for Live Containers used to require [Agent version >= 7.21.1][2] and [Cluster Agent version >= 1.9.0][3] before minimal versions were updated. For those older versions, the DaemonSet configuration was slightly different and full instructions are retained here for reference.
