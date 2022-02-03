@@ -5855,6 +5855,141 @@ components:
       - FIREFOX_LAPTOP_LARGE
       - FIREFOX_TABLET
       - FIREFOX_MOBILE_SMALL
+    MonitorFormulaAndFunctionEventAggregation:
+      description: Aggregation methods for event platform queries.
+      enum:
+      - count
+      - cardinality
+      - median
+      - pc75
+      - pc90
+      - pc95
+      - pc98
+      - pc99
+      - sum
+      - min
+      - max
+      - avg
+      example: avg
+      type: string
+      x-enum-varnames:
+      - COUNT
+      - CARDINALITY
+      - MEDIAN
+      - PC75
+      - PC90
+      - PC95
+      - PC98
+      - PC99
+      - SUM
+      - MIN
+      - MAX
+      - AVG
+    MonitorFormulaAndFunctionEventQueryDefinition:
+      description: A formula and functions events query.
+      properties:
+        compute:
+          $ref: '#/components/schemas/MonitorFormulaAndFunctionEventQueryDefinitionCompute'
+        data_source:
+          $ref: '#/components/schemas/MonitorFormulaAndFunctionEventsDataSource'
+        group_by:
+          description: Group by options.
+          items:
+            $ref: '#/components/schemas/MonitorFormulaAndFunctionEventQueryGroupBy'
+          type: array
+        indexes:
+          description: An array of index names to query in the stream. Omit or use
+            `[]` to query all indexes at once.
+          example:
+          - days-3
+          - days-7
+          items:
+            description: A log index set up for your organization. For additional
+              indexes, see the [multiple indexes](https://docs.datadoghq.com/logs/indexes/#multiple-indexes)
+              documentation.
+            type: string
+          type: array
+        name:
+          description: Name of the query for use in formulas.
+          example: query_errors
+          type: string
+        search:
+          $ref: '#/components/schemas/MonitorFormulaAndFunctionEventQueryDefinitionSearch'
+      required:
+      - data_source
+      - compute
+      - name
+      type: object
+    MonitorFormulaAndFunctionEventQueryDefinitionCompute:
+      description: Compute options.
+      properties:
+        aggregation:
+          $ref: '#/components/schemas/MonitorFormulaAndFunctionEventAggregation'
+        interval:
+          description: A time interval in milliseconds.
+          example: 60000
+          format: int64
+          type: integer
+        metric:
+          description: Measurable attribute to compute.
+          example: '@duration'
+          type: string
+      required:
+      - aggregation
+      type: object
+    MonitorFormulaAndFunctionEventQueryDefinitionSearch:
+      description: Search options.
+      properties:
+        query:
+          description: Events search string.
+          example: service:query
+          type: string
+      required:
+      - query
+      type: object
+    MonitorFormulaAndFunctionEventQueryGroupBy:
+      description: List of objects used to group by.
+      properties:
+        facet:
+          description: Event facet.
+          example: status
+          type: string
+        limit:
+          description: Number of groups to return.
+          example: 10
+          format: int64
+          type: integer
+        sort:
+          $ref: '#/components/schemas/MonitorFormulaAndFunctionEventQueryGroupBySort'
+      required:
+      - facet
+      type: object
+    MonitorFormulaAndFunctionEventQueryGroupBySort:
+      description: Options for sorting group by results.
+      properties:
+        aggregation:
+          $ref: '#/components/schemas/MonitorFormulaAndFunctionEventAggregation'
+        metric:
+          description: Metric used for sorting group by results.
+          type: string
+        order:
+          $ref: '#/components/schemas/QuerySortOrder'
+      required:
+      - aggregation
+      type: object
+    MonitorFormulaAndFunctionEventsDataSource:
+      description: Data source for event platform-based queries.
+      enum:
+      - rum
+      example: rum
+      type: string
+      x-enum-varnames:
+      - RUM
+    MonitorFormulaAndFunctionQueryDefinition:
+      description: A formula and function query.
+      oneOf:
+      - $ref: '#/components/schemas/MonitorFormulaAndFunctionEventQueryDefinition'
+      type: object
     MonitorGroupSearchResponse:
       description: The response of a monitor group search.
       example:
@@ -6139,6 +6274,12 @@ components:
           format: int64
           nullable: true
           type: integer
+        variables:
+          description: List of requests that can be used in the monitor query. **This
+            feature is currently in beta.**
+          items:
+            $ref: '#/components/schemas/MonitorFormulaAndFunctionQueryDefinition'
+          type: array
       type: object
     MonitorOverallStates:
       description: The different states your monitor can be in.

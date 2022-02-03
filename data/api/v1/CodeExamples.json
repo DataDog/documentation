@@ -309,6 +309,10 @@
   ],
   "CreateMonitor": [
     {
+      "suffix": "_3883669300",
+      "description": "Create a RUM formula and functions monitor returns \"OK\" response"
+    },
+    {
       "suffix": "_3790803616",
       "description": "Create a ci-pipelines monitor returns \"OK\" response"
     },
