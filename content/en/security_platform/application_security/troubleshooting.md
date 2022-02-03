@@ -27,7 +27,7 @@ Alternatively, you can use the metric `datadog.apm.appsec_host` to check if Appl
 
 ## Application Security rate limits
 
-Application Security traces are rate-limited to 100 traces per second. Traces sent after the limit are not reported. Please contact [Datadog support][1] if you need to change the limit.
+Application Security traces are rate-limited to 100 traces per second. Traces sent after the limit are not reported. Contact [Datadog support][1] if you need to change the limit.
 
 ## Application Security events are missing in the dashboard
 
@@ -126,7 +126,7 @@ For Ruby, the required integrations are the following:
 
 - Rack
 
-**Note:** Rack can be manually added or automatically added via Rails or Sinatra integration. If manually added, the tracer middleware must appear before the security middleware in the Rack stack.
+**Note:** Rack can be manually added or automatically added with the Rails or Sinatra integration. If manually added, the tracer middleware must appear before the security middleware in the Rack stack.
 
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
@@ -164,7 +164,7 @@ The Java library uses [SLF4J][1] for logging. Add the following runtime flags so
  -Ddatadog.slf4j.simpleLogger.logFile=dd.log
 ```
 
-After the service starts, the tracer will log to the specified file. Datadog recommends using `INFO` for the log level because `DEBUG` logs are verbose.
+After the service starts, the tracer logs to the specified file. Datadog recommends using `INFO` for the log level because `DEBUG` logs are verbose.
 
 [1]: https://www.slf4j.org/
 {{< /programming-lang >}}
@@ -195,7 +195,7 @@ ddappsec.helper_extra_args=‘--log_level=debug’
 ddappsec.helper_log_file=‘/tmp/helper.log’
 ```
 
-The extension will output logs to the default `php_error` log file. If there are no logs in the file, add the following to the `.ini` file:
+The extension outputs logs to the default `php_error` log file. If there are no logs in the file, add the following to the `.ini` file:
 
 ```php
 ddappsec.log_file=’tmp/extension.log’
@@ -270,9 +270,9 @@ Follow the below instructions based on your situation:
 
   - You might also have to install the [C toolchain](#installing-the-c-toolchain). 
 
-- **You are currently explicitly disabling CGO to statically link your Go program.**
+- **You are explicitly disabling CGO to statically link your Go program.**
   
-  Static linking isn’t currently supported. If you can’t enable CGO for this reason, please contact [Datadog support][1] for additional help to get Application Security added to your application. 
+  Static linking isn’t supported. If you can’t enable CGO for this reason, contact [Datadog support][1] for additional help to get Application Security added to your application. 
 
 [1]: /help/
 {{< /programming-lang >}}
@@ -313,7 +313,7 @@ For NodeJS, if you don’t see Application Security events in the Application Se
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
-For Ruby, if you don’t see Application Security events in your Application Security dashboard after a few minutes, enable tracer diagnostics for [debug logs][1] in the file `config/initializers/datadog-tracer.rb`, by following this example:
+For Ruby, if you don’t see Application Security events in your Application Security dashboard after a few minutes, enable tracer diagnostics for [debug logs][1] in the file `config/initializers/datadog-tracer.rb`. For example:
 
 ```ruby
 Datadog.configure do |c|
@@ -376,7 +376,7 @@ D, [2021-12-14T22:39:53.268820 #106051] DEBUG -- ddtrace: [ddtrace] (ddtrace/lib
 If you don’t see those logs, check that another upstream security system is not filtering out the requests or altering them based on the test header value. 
 
 #### Check #3a: Is the tracer sending traces with security data?
-Application Security events are sent via APM traces. To confirm that Application Security correctly detects and inserts security data into traces, trigger a [test attack](#1-send-a-test-attack-to-your-application), and look for these tracer logs:
+Application Security events are sent with APM traces. To confirm that Application Security correctly detects and inserts security data into traces, trigger a [test attack](#1-send-a-test-attack-to-your-application), and look for these tracer logs:
 
 ```
 Tags: [
@@ -405,7 +405,7 @@ Metrics: [
    _sampling_priority_v1 => 2.0]]
 ```
 
-Please wait a minute for the agent to forward the traces. Then check that the traces show up in the APM dashboard. The security information in the traces may take additional time to be processed by the backend before showing up as events in the Application Security dashboard.
+Please wait a minute for the agent to forward the traces, then check that the traces show up in the APM dashboard. The security information in the traces may take additional time to be processed by the backend before showing up as events in the Application Security dashboard.
 
 #### Check #3b: Is Application Security forwarding security events to the agent?
 
@@ -415,7 +415,7 @@ To confirm that Application Security is detecting and forwarding security events
 D, [2021-12-14T11:03:37.347815 #73127] DEBUG -- ddtrace: [ddtrace] (ddtrace/lib/datadog/security/worker.rb:54:in `block in perform') processed events: [{:event_id=>"eb1eca52-74e1-435b-9a6c-44046d3765ee", :event_type=>"appsec.threat.attack", :event_version=>"0.1.0", :detected_at=>"2021-12-14T10:03:37Z", :type=>"security_scanner", :blocked=>false, :rule=>{:id=>"ua0-600-10x", :name=>"Nessus", :set=>"security_scanner"}, :rule_match=>{:operator=>"match_regex", :operator_value=>"(?i)^Nessus(/|([ :]+SOAP))", :parameters=>[{:name=>"server.request.headers.no_cookies", :key_path=>["user-agent"], :value=>"Nessus SOAP", :highlight=>["Nessus SOAP"]}]}, :context=>{:actor=>{:context_version=>"0.1.0", :ip=>{:address=>"127.0.0.1"}, :identifiers=>nil, :_id=>nil}, :host=>{:os_type=>"Linux", :hostname=>"procyon-vm", :context_version=>"0.1.0"}, :http=>{:context_version=>"0.1.0", :request=>{:scheme=>"http", :method=>"GET", :url=>"http://127.0.0.1:9292/admin.php", :host=>"127.0.0.1", :port=>9292, :path=>"/admin.php", :remote_ip=>"127.0.0.1", :headers=>{"host"=>"127.0.0.1:9292", "accept"=>"*/*", "user-agent"=>"Nessus SOAP"}, :useragent=>"Nessus SOAP"}, :response=>{:status=>404, :blocked=>false, :headers=>{"Content-Type"=>"text/plain"}}}, :service=>{:context_version=>"0.1.0", :name=>"rack", :environment=>nil}, :span=>{:context_version=>"0.1.0", :id=>4439751766880249768}, :tags=>{:context_version=>"0.1.0", :values=>["_dd.appsec.enabled:1", "_dd.runtime_family:ruby", "service:rack"]}, :trace=>{:context_version=>"0.1.0", :id=>2632764434813487337}, :tracer=>{:context_version=>"0.1.0", :runtime_type=>"ruby", :runtime_version=>"3.0.2", :lib_version=>"0.54.1"}}}]
 ```
 
-Please wait about a minute for the agent to forward the events to the backend. Then check that the traces show up in the APM dashboard.
+Please wait about a minute for the agent to forward the events to the backend, then check that the traces show up in the APM dashboard.
 
 [1]: /tracing/troubleshooting/#tracer-debug-logs
 {{< /programming-lang >}}
