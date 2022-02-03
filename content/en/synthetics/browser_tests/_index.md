@@ -30,33 +30,59 @@ further_reading:
 
 Browser tests are scenarios executed by Datadog on your web applications. They run at configurable periodic intervals from multiple locations around the world, from multiple browsers, and devices. These tests verify both that your applications are up and responding to requests, and that any conditions defined in your scenarios are met.
 
-<div class="alert alert-info">Are you interested in testing applications that sit behind MFA? Read <a href="/synthetics/guide/app-that-requires-login/#multi-factor-authentication" target="_blank">our dedicated guide </a> and <a href="https://docs.google.com/forms/d/e/1FAIpQLSdjx8PDZ8kJ3MD2ehouTri9z_Fh7PoK90J8arRQgt7QFgFxog/viewform?usp=sf_link">send us feedback</a> to help us work on the systems that matter the most to your teams.</div>
+<div class="alert alert-info">If you are interested in testing applications that sit behind MFA, read <a href="/synthetics/guide/app-that-requires-login/#multi-factor-authentication" target="_blank">the dedicated guide </a> and <a href="https://docs.google.com/forms/d/e/1FAIpQLSdjx8PDZ8kJ3MD2ehouTri9z_Fh7PoK90J8arRQgt7QFgFxog/viewform?usp=sf_link">send feedback</a> to the Synthetic Monitoring team to help improve the systems that matter most to your teams.</div>
 
 ## Test configuration
 
 Define the configuration of your browser test.
 
 1. **Starting URL**: The URL from which your browser test starts the scenario.
-2. **Advanced Options** (optional): Set specific options to your browser test:
+2. **Advanced Options** (optional): Set specific options for your browser test.
 
   {{< tabs >}}
 
   {{% tab "Request Options" %}}
 
-  * **Headers**: Define headers to add to or override the default browser headers. For example, set the User Agent in the header to [identify Datadog scripts][1].
-  * **Authentication**: Authenticate through HTTP Basic, Digest or NTLM with a username and a password. Credentials added to the HTTP Auth fields are used on every step of your browser test.
-  * **Cookies**: Define cookies to add to the default browser cookies. Set multiple cookies using the format `<COOKIE_NAME1>=<COOKIE_VALUE1>; <COOKIE_NAME2>=<COOKIE_VALUE2>`.
-  * **Proxy URL**: URL of the proxy the requests should go through (`http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT>`).
-  
-**Note:** These request options are set at every test execution and apply to every step of your browser test at execution time, not recording time. If you need these options to be active to record following steps, you can manually apply these options on the page you are recording from and then create subsequent steps for your test.
+  Select **Disable CORS** to prevent the cross-origin resource sharing (CORS) policy from blocking your test.
+
+  * **Request Headers**: Define headers in the **Name** and **Value** fields to add to or override the default browser headers. For example, you can set the User Agent in the header to [identify Datadog scripts][1].
+  * **Cookies**: Define cookies to add to the default browser cookies. Enter one cookie per line, using the syntax of [`Set-Cookie`][2].
+  * **HTTP Authentication**: Authenticate through HTTP Basic, Digest, or NTLM with a username and a password. Your credentials are used in every step of your browser test.
+
+  Request options are set at every test execution and apply to every step of your browser test at execution time, not recording time. 
+  If you need these options to remain active to record the following steps, manually apply the options on the page you are recording from and create subsequent steps in your test.
+
 
 [1]: /synthetics/guide/identify_synthetics_bots/?tab=apitests
+[2]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie
+  {{% /tab %}}
+
+  {{% tab "Certificate" %}}
+
+  Select **Ignore server certificate error** to instruct the test to skip errors in the server certificate. 
+  
+  * **Client Certificate**: Perform tests on systems that require client certificates by clicking **Upload File** and uploading your certificate file and private key. Only PEM certificates are accepted.
+  * **Client Certificate Domains**: Once the certificate files are uploaded, the client certificate applies to the starting URL's domain. To apply the client certificate on another domain, specify the domain in the **Value** field.  
+
+  You can include wildcards in the URL.
+
+  {{% /tab %}}
+
+  {{% tab "Proxy" %}}
+
+  Enter a URL for a proxy you want to send requests through in the **Proxy URL** field as `http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT>`.
+
+  You can include [global variables](#use-global-variables) in the URL.
+
   {{% /tab %}}
 
   {{% tab "Privacy" %}}
 
-  * **Do not capture any screenshots for this test**: Select this option to prevent any screenshot from being taken for all your test steps. This option is also available as an [advanced option][1] at the individual step level. This is helpful to ensure no sensitive data gets featured in your test results. Use mindfully as it can make failure troubleshooting more difficult. Read more about security recommendations [here][2].
-
+  Select **Do not capture any screenshots for this test** to prevent screenshots from being taken in your test steps. 
+  
+  This privacy option is available as an [advanced option][1] at the individual test step level and ensures that no sensitive data appears in your test results. 
+  
+  Preventing the test from taking screenshots makes troubleshooting failures more difficult. For more information, see [Security][2].
 
 [1]: /synthetics/browser_tests/advanced_options#prevent-screenshot-capture
 [2]: /security/synthetics
@@ -65,10 +91,10 @@ Define the configuration of your browser test.
   {{< /tabs >}}
 
 3. **Name**: The name of your browser test.
-4. **Select your tags**: The tags attached to your browser test. Use the `<KEY>:<VALUE>` format to filter on a `<VALUE>` for a given `<KEY>` on the Synthetic tests page.
-5. **Browsers & Devices**: The browsers (`Chrome`, `Firefox`, `Edge`) and devices (`Laptop Large`, `Tablet`, `Mobile Small`) to run your test on. 
-6. **Locations**: The Datadog managed locations to run your test from. Many AWS locations from around the world are available for each site. You can also set up [private locations][1] to run your browser test from custom locations or from inside private networks. See a full list of locations in the [Datadog app][2] or use the [API][3]. {{< site-region region="gov" >}}**Note**: The West US (AWS GovCloud) location is supported on the Datadog for Government site.{{< /site-region >}}
-7. **How often should Datadog run the test?** Intervals are available between every five minutes to once per week. The one minute frequency is available [upon request][4].
+4. **Select tags**: The `env` and related tags attached to your browser test. Use the `<KEY>:<VALUE>` format to filter on a `<VALUE>` for a given `<KEY>`.
+5. **Browsers & Devices**: The browsers (`Chrome`, `Firefox`, and `Edge`) and devices (`Laptop Large`, `Tablet`, and `Mobile Small`) to run your test on. 
+6. **Select locations**: The Datadog managed locations to run your test from. Many AWS locations from around the world are available for each site. You can also set up [private locations][1] to run your browser test from custom locations or from inside private networks. See a full list of locations in the [Datadog app][2] or use the [API][3]. {{< site-region region="gov" >}}**Note**: The West US (AWS GovCloud) location is supported on the Datadog for Government site.{{< /site-region >}}
+7. **Select test frequency**: The intervals vary from every five minutes to once per week. [Contact Support][4] for one-minute frequency.
 
 ### Use global variables
 
@@ -89,7 +115,7 @@ You can customize alert conditions to define the circumstances under which you w
 * An alert is triggered if any assertion fails for `X` minutes from any `n` of `N` locations. This alerting rule allows you to specify for how much time and on how many locations a test needs to fail before triggering the notification.
 * Retry `X` times before location is marked as failed. This allows you to define how many consecutive test failures need to happen for a location to be considered as failed. By default, there is a 300ms wait before retrying a test that failed. This interval can be configured with the [API][6].
 
-{{< img src="synthetics/browser_tests/alerting_rules.png" alt="Browser test alerting rule"  >}}
+{{< img src="synthetics/browser_tests/alerting_rules.png" alt="Browser test alerting rule" >}}
 
 ### Notify your team
 
@@ -117,7 +143,7 @@ Tests can be only recorded from [Google Chrome][10]. To record your test, downlo
 {{< img src="synthetics/browser_tests/browser_check_record_test2.png" alt="Browser test record test" width="80%" >}}
 
 1. Optionally, select **Open in a pop-up** at the upper right of the page to open your test recording in a separate pop-up window. This is useful if your application does not support being opened in an iframe or if you want to avoid sizing issues at recording. You can also open the pop in **Incognito mode** to start recording your test from a fresh browser free from already logged-in sessions, cookies from your existing browser, and more.
-2. Optionally, enable Datadog to automatically collect RUM data and step recordings from your browser test. For more information, see [Explore RUM & Session Replay](#explore-rum--session-replay). 
+2. Optionally, enable Datadog to automatically collect RUM data and step recordings from your browser test. For more information, see [Explore RUM & Session Replay][]. 
 3. Click on **Start recording** to begin recording your browser test.
 4. As you click on your application going through the user journey you want to monitor, your actions are automatically recorded and used to create [steps][12] within your browser test scenario on the left.
 5. In addition to the automatically recorded steps, you can also use the [steps][12] available in the upper left corner to enrich your scenario:
@@ -126,33 +152,20 @@ Tests can be only recorded from [Google Chrome][10]. To record your test, downlo
     **Note**: You should always make sure to **end your browser test with an [assertion][13]** to confirm the journey executed by the browser test resulted in the expected state.
 6. Once you have finished your scenario, click **Save and Launch Test**.
 
-### Explore RUM & Session Replay
-
-<div class="alert alert-info">If you don’t have Real User Monitoring, you can access RUM, Session Replay, Error Tracking, and additional performance data from your Synthetic browser test runs.</div>
-
-In your browser test recording, click **Collect Real User Monitoring Data on** above the **Start Recording** button and select an application to collect data on. After saving your recording and test configuration, RUM gathers test data and generates session recordings.
-
-Navigate to your [list of browser tests][14] and click on a sample test run. 
-
-#### Synthetics to RUM Explorer
-
-The step details side panel appears with `This Synthetic test generated data in Real User Monitoring` and includes the session ID and the **Go to the View in RUM** button. 
-
-To see this test step's errors, resources, and performance data in the [RUM Explorer][15], click **Go to the View in RUM**. Alternatively, click the **Replay Session** button or **View all sessions in RUM** to explore available session replays captured in your browser test.
-
-#### RUM Explorer to Synthetics
-
-The session panel appears with `This event was generated by a Synthetic test run` and includes the test ID and the **View Synthetic Test Result** button. 
-
-To navigate back to Synthetics and your test's results, click **View Synthetic Test Result**.
-
-For more information, see [RUM & Synthetics][15].
-
 ## Permissions
 
 By default, only users with the [Datadog Admin and Datadog Standard roles][16] can create, edit, and delete Synthetic browser tests. To get create, edit, and delete access to Synthetic browser tests, upgrade your user to one of those two [default roles][16].
 
 If you have access to the [custom role feature][17], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions.
+
+### Restrict access
+
+<div class="alert alert-warning">
+Access restriction is available for customers with <a href="https://docs.datadoghq.com/account_management/rbac/?tab=datadogapplication#create-a-custom-role">custom roles</a> enabled on their accounts.</div>
+
+You can restrict access to a browser test based on the roles in your organization. When creating a browser test, choose which roles (in addition to your user) can read and write your test. 
+
+{{< img src="synthetics/settings/restrict_access.png" alt="Set permissions for your test" style="width:70%;" >}}
 
 ## Further Reading
 
