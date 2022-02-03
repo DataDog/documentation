@@ -307,7 +307,7 @@ Export [Analytics][4] from the trace search or build them directly in your [Dash
 [4]: /tracing/trace_search_and_analytics/
 [5]: /tracing/visualization/#apm-event
 [6]: /tracing/visualization/#services
-[7]: /tracing/trace_retention_and_ingestion/#retention-filters
+[7]: /tracing/trace_retention/#retention-filters
 [8]: /tracing/trace_search_and_analytics/query_syntax/#facets
 [9]: /tracing/trace_search_and_analytics/query_syntax/#measures
 [10]: /tracing/visualization/#trace

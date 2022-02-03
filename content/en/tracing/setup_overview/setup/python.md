@@ -196,5 +196,5 @@ Enable [connecting logs and trace injection][9].
 [5]: /getting_started/tagging/unified_service_tagging
 [6]: /tracing/guide/setting_primary_tags_to_scope/
 [7]: https://ddtrace.readthedocs.io/en/stable/integrations.html#django
-[8]: /tracing/trace_retention_and_ingestion/
+[8]: /tracing/trace_ingestion/
 [9]: /tracing/connect_logs_and_traces/python/

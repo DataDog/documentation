@@ -529,6 +529,6 @@ dotnet.exe example.dll
 [2]: /agent/
 [3]: https://app.datadoghq.com/apm/traces
 [4]: /getting_started/tagging/unified_service_tagging/
-[5]: /tracing/trace_retention_and_ingestion/
+[5]: /tracing/trace_ingestion/
 [6]: /tracing/setup_overview/compatibility_requirements/dotnet-framework/#integrations
 [7]: /tracing/setup_overview/custom_instrumentation/dotnet/
