@@ -44,16 +44,40 @@ For the Declare Incident Helper Text settings, you can customize the helper text
 
 {{< img src="monitors/incidents/property_field_settings.jpeg" alt="Property Field Settings" style="width:80%;">}}
 
-Property fields are key pieces of metadata you can tag your incidents with. This makes it easier to search for specific subsets of incidents on the [Homepage][4] and make more robust queries in [Incident Management Analytics][2]. There are four default property fields:
+Property fields are key pieces of metadata you can tag your incidents with. This makes it easier to search for specific subsets of incidents on the [Homepage][4] and make more robust queries in [Incident Management Analytics][2]. There are five default property fields:
 
 1. `Root Cause`
 2. `Services`
 3. `Teams`
 4. `Detection Method`
+5. `Summary`
 
 If you have [Datadog APM][5] configured, the `Services` property field automatically leverages your APM Service names. To edit the values of `Services` or `Teams`, upload a CSV of the values you wish to associate with each field. Your CSV file must start with your field's name in the top row, with the desired values listed immediately below it.
 
 You can add more property fields to your settings by selecting one of your existing `key:value` pair [metric tags][6]. When you do this, the key of your property field is the start case of your metric tag's key (each word is capitalized and separated by spaces), and the values for the property field are equal to the values reported by the metric tag.
+
+Property fields are organized into three tables that correspond to where the fields will appear in the [Overview section of the Incident Details page][12]:
+
+1. `What Happened`
+2. `Why It Happened`
+3. `Attributes`
+
+You can move any property field into a different table or reorder them in the same table by dragging and drop the field using the button to the left of its name. You can preview what your property fields will look like by clicking the `Preview` button in the top right of the property field settings.
+
+#### Custom property fields and required fields
+
+<div class="alert alert-warning">
+This feature is in open beta.
+</div>
+
+In addition to the five default fields and fields based on metric tags, you can also create custom property fields and mark them as required at the creation of an incident. There are four kinds of custom fields you can create:
+
+1. *Single-Select*: A dropdown field that can only have one value assigned at a time per incident.
+2. *Multi-Select*: A dropdown field that can have multiple values assigned per incident.
+3. *Text Area*: A free-form text area box for you to type written context.
+4. *Number*: A text area that only accepts digits and a single period as input.
+
+*Single-Select*, *Multi-Select*, and *Number* custom fields will become searchable facets in the [Incident Homepage][4] and [Incident Management Analytics][2] for easier filtration of incidents. *Number* fields will also become measures in Incident Management Analytics that can be graphed and visualized in [Dashboards][13] and [Notebooks][11].
 
 ### Integrations
 
@@ -152,3 +176,5 @@ To create a postmortem template:
 [9]: /monitors/incident_management/incident_details/#notifications-section
 [10]: /monitors/notifications/?tab=is_alert#notify-your-team
 [11]: /notebooks/
+[12]: /monitors/incident_management/incident_details/#overview-section
+[13]: /dashboards/

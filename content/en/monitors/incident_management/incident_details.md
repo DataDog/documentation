@@ -32,15 +32,30 @@ By default, all incidents have the following properties:
 * Services
 * Teams
 * Detection Method
+* Summary
 
-You can configure additional property fields in your [Incident Settings][5] by using the `<KEY>:<VALUE>` pairs reporting in your Datadog metric tags. Assigning values to an incident's properties makes it easier to search for subsets of incidents on the [Incident Homepage][6] and to form queries when using [Incident Management Analytics][7].
+Properties are divided into three headings:
 
-If your incident is customer-facing, specify the details of the impact below the Properties section under the Impact heading:
+* What happened
+* Why it happened
+* Attributes
 
-1. Select *Yes* for `Customer Impact`.
+In your [Incident Settings][5] you can configure additional property fields  by using the `<KEY>:<VALUE>` pairs reporting in your Datadog metric tags or creating fully custom ones. Assigning values to an incident's properties makes it easier to search for subsets of incidents on the [Incident Homepage][6] and to form queries when using [Incident Management Analytics][7]. You can also reorder your property fields and move them to different headings so the most important properties are in the most prominent locations.
+
+If your incident is customer-facing, specify the details of the impact below the *What happened* heading in the *Impact* heading:
+
+1. Click *Add +*.
 2. Specify a start date and time for the impact.
-3. Specify an end date and time for the impact or `Active` if the impact is still ongoing.
+3. Specify an end date and time for the impact or leave this blank if the impact is still ongoing.
 4. Describe the nature of the impact on customers in `Scope of impact`.
+5. Click *Save*.
+
+In addition to housing your property fields, the Overview section also provides at-a-glance summary modules on the left and at the bottom of the page:
+
+1. *Condensed Timeline*: Displays the times when the incident changes state as well as when impact started and ended for a high-level view of the incident's lifecycle.
+2. *Latest Notifications*: Displays the most recent notification sent for the incident in question, with quick access to the full notifications list in the [Notification section][14].
+3. *Pending Tasks*: Displays the most recent incomplete task, with quick access to the full tasks list in the [Remediation section][15].
+4. *Recent timeline entries*: Displays the five most recent entries in the incident timeline, with quick access to see the entire [Timeline section][16].
 
 ## Timeline section
 
@@ -148,3 +163,6 @@ Work through an example workflow in the [Getting Started with Incident Managemen
 [11]: /monitors/incident_management/incident_settings#rules
 [12]: /monitors/incident_management/incident_settings#message-templates
 [13]: /getting_started/incident_management
+[14]: /#notifications-section
+[15]: /#remediation-section
+[16]: /#timeline-section
