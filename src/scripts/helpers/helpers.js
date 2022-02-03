@@ -37,7 +37,7 @@ function reloadWistiaVidScripts(vidId) {
 
 function gtag(...args) {
     const dataLayer = window.dataLayer || [];
-    dataLayer.push(args);
+    dataLayer.push(arguments);
 }
 
 const getCookieByName = (name) => {
