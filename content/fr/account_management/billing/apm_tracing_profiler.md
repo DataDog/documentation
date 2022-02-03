@@ -8,19 +8,28 @@ aliases:
 ---
 [L'APM et le profileur en continu][1] vous permettent d'identifier les goulots d'étranglement dans vos services, et d'analyser les traces distribuées et les performances du code au sein de votre architecture de microservices.
 
-Deux options de tarification sont disponibles, selon que vous utilisiez ou non l'APM et le profiling. En outre, la fonctionnalité [Tracing Without Limits][2] peut être combinée avec l'APM pour filtrer les données de votre application et les spans indexées grâce à des [filtres de rétention personnalisés basés sur des tags][3].
+Deux options de tarification sont disponibles, selon que vous utilisiez ou non l'APM et le profiling. En outre, la fonctionnalité [Tracing Without Limits][2] peut être combinée avec l'APM pour filtrer et regrouper les données de votre application et les spans indexées grâce à des [filtres de rétention personnalisés basés sur des tags][3].
 
 | Paramètre de facturation  | Prix                                      | Spans ingérées et spans indexées                                                                 | Facturation                                                                                                                                                                                                                                                                                                                          |
 |--------------------|--------------------------------------------|-------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | [Host d'APM][4]      | 31 $ par [host d'APM][4] sous-jacent par mois | 1 million de spans indexées et 150 Go de spans ingérées inclus par mois avec chaque host d'APM.   | Le nombre de [hosts d'APM][5] que vous surveillez en même temps dans le service APM de Datadog est mesuré toutes les heures. Avec une formule basée sur la limite supérieure, ces mesures horaires sont ordonnées de la plus élevée à la plus faible à la fin du mois, et le prix facturé par Datadog est calculé en fonction de la huitième mesure la plus élevée. [En savoir plus.][5] |
 | [APM et profileur en continu][4] | 40 $ par [host d'APM][4] sous-jacent ; comprend le [profileur en continu][6] avec 4 conteneurs profilés par mois. | Comme les hosts d'APM | Le nombre de hosts uniques que vous surveillez en même temps via le service Profileur en continu de Datadog est mesuré toutes les heures. Les mesures horaires et la facturation sont effectuées de la même façon que pour les hosts d'APM.  |
 | [Fargate][4]       | 2 $ par tâche et par mois           | 65 000 spans indexées et 10 Go de spans ingérées inclus dans le prix                                        | Le nombre d'instances de tâches que vous surveillez dans le service APM de Datadog est mesuré toutes les cinq minutes. Datadog agrège ces mesures à la fin du mois et calcule le prix facturé en fonction du nombre total d'heures pendant lesquelles vos applications s'exécutaient et étaient surveillées. [En savoir plus.][4]              |
-| [Span indexée][5] | 1,70 $ par million de spans indexées par mois | Prix facturé lorsque le nombre de spans indexées dépasse le quota autorisé pour chaque host d'APM | Une span indexée est une requête individuelle effectuée auprès d'un service de votre pile. Le prix facturé par Datadog est calculé en fonction du nombre total de spans indexées via des filtres de rétention ou d'anciennes spans analysées envoyées au service APM de Datadog à la fin du mois. [En savoir plus.][5]                                                                                          |
-| [Span ingérée][5] | 0,10 $ par Go de spans ingérées par mois | Prix facturé lorsque le volume de spans ingérées dépasse le quota autorisé pour chaque host d'APM | Une span ingérée est une requête individuelle effectuée auprès d'un service de votre pile. Le prix facturé par Datadog est calculé en fonction du nombre total de gigaoctets de spans ingérées par Datadog à la fin du mois. [En savoir plus.][5]                                                                                          |
+| [Span indexée][5] | 1,70 $ par million de spans indexées par mois | Prix facturé lorsque le nombre de spans indexées dépasse le quota autorisé pour chaque host d'APM | Une span indexée est une requête individuelle effectuée auprès d'un service de votre stack. Le prix facturé par Datadog est calculé en fonction du nombre total de spans indexées via des filtres de rétention ou d'anciennes spans analysées envoyées au service APM de Datadog à la fin du mois. [En savoir plus.][5]                                                                                          |
+| [Span ingérée][5] | 0,10 $ par Go de spans ingérées par mois | Prix facturé lorsque le volume de spans ingérées dépasse le quota autorisé pour chaque host d'APM | Une span ingérée est une requête individuelle effectuée auprès d'un service de votre stack. Le prix facturé par Datadog est calculé en fonction du nombre total de gigaoctets de spans ingérées par Datadog à la fin du mois. [En savoir plus.][5]                                                                                          |
 
 **Remarque** : si vous utilisez un environnement basé sur des conteneurs, la facturation se base sur le host sous_jacent qui déploie l'Agent Datadog.
 
-**Remarque :** un conteneur profilé est un conteneur qui exécute le service Profileur en continu. Les conteneurs non profilés ne sont pas inclus. Par exemple, si un conteneur de service DNS qui n'est pas profilé s'exécute en même temps qu'un conteneur d'application profilé, le premier conteneur ne sera pas comptabilisé dans le quota des quatre conteneurs profilés.
+**Remarque :** un conteneur profilé est un conteneur qui exécute le service Profileur en continu. Les conteneurs non profilés ne sont pas inclus. Par exemple, si un conteneur de service DNS qui n'est pas profilé s'exécute en même temps qu'un conteneur d'application profilé, le premier conteneur n'est pas comptabilisé dans le quota des quatre conteneurs profilés.
+
+Pour en savoir plus, consultez la [page des tarifs][7].
+
+## Database Monitoring
+
+| Paramètre de facturation  | Requêtes normalisées                | Facturation                                          |
+|--------------------|-----------------------------------|--------------------------------------------------|
+| Host de base de données      | 200 requêtes normalisées sont incluses par mois pour chaque host de base de données. | Le nombre de hosts de base de données que vous surveillez en même temps avec le service Database Monitoring de Datadog est mesuré toutes les heures. Avec une formule basée sur la limite supérieure, ces mesures horaires sont ordonnées de la plus élevée à la plus faible à la fin du mois, et le prix facturé par Datadog est calculé en fonction de la huitième mesure la plus élevée. |
+| Requêtes normalisées | Ces requêtes sont facturées lorsque le seuil configuré dépasse le quota de requêtes normalisées inclus pour chaque host de base de données. | Une _requête normalisée_ représente un agrégat de requêtes possédant une structure similaire et dont les seules différences résident dans les paramètres de requête. Le prix facturé par Datadog est calculé en fonction du nombre total de requêtes normalisées configurées qui sont surveillées à un moment donné. |
 
 Pour en savoir plus, consultez la [page des tarifs][7].
 
@@ -81,7 +90,7 @@ Application 1 est exécutée sur 20 à 40 conteneurs déployés sur 4 à 8 in
 | Fargate Tasks | 28       | 2 $ par tâche  | 28 * 2 $    | 56 $                |
 | Total         |          |              | 217 $ + 56 $ | **273 $ par mois** |
 
-Remarque : le nombre de conteneurs n'est pas pris en compte si l'Agent est déployé sur les instances EC2.
+**Remarque** : le nombre de conteneurs n'est pas pris en compte si l'Agent est déployé sur les instances EC2.
 
 ### APM et profileur en continu avec des nœuds Kubernetes et des spans indexées
 
@@ -90,7 +99,7 @@ APM et profileur en continu pour les applications qui exécutent l'Agent Datadog
 | Unité de facturation     | Quantité   | Prix                                                                       | Formule   | Sous-total           |
 |-------------------|------------|-----------------------------------------------------------------------------|-----------|--------------------|
 | APM et profileur en continu (nœuds) | 20         | 40 $ par host                                                                | 20 * 40 $ | 800 $               |
-| Conteneurs profilés  | 100 après agrégation | 2 $ par conteneur supplémentaire. Ici, 20 hosts permettent d'utiliser jusqu'à 80 conteneurs, mais 20 conteneurs sont répartis sur deux hosts : 100-80 = 20 conteneurs supplémentaires.        | 2 $ * 20 hosts        | 40 $                    |
+| Conteneurs profilés  | 100 après agrégation | 2 $ par conteneur supplémentaire. Ici, 20 hosts permettent d'utiliser jusqu'à 80 conteneurs, mais 20 conteneurs sont répartis sur deux hosts : 100-80 = 20 conteneurs supplémentaires.        | 2 $ * 20 hosts        | 40 $                    |
 | Indexed Spans    | 20 millions | 20 millions incluses avec 20 hosts d'APM (nœuds). Aucune span indexée supplémentaire | 0 * 1,70 $ | 0                  |
 | Total             |            |                                                                             | 800 $ + 40 $ | **840 $ par mois** |
 
@@ -112,7 +121,7 @@ Application sans serveur basée sur AWS Lambda qui est appelée 10 millions de
 
 Un [host][4] est une instance de système d'exploitation physique ou virtuelle. Le nombre de hosts que vous surveillez actuellement dans le service Infrastructure de Datadog est mesuré toutes les heures. Le nombre de hosts sur lesquels l'[APM est installé][11] et qui envoient des traces est calculé toutes les heures. À la fin du mois, vous êtes facturé en fonction du 99e  centile d'utilisation des [hosts d'APM][5].
 
-**2. Comment le tarif facturé est-il calculé en cas de déploiement d'un Agent par conteneur ?**
+**2. Comment le montant de la facture est-il calculé en cas de déploiement d'un Agent par conteneur ?**
 
 Nous vous conseillons d'[exécuter][12] un Agent par host sous-jacent en cas de déploiement sur des conteneurs. Si vous souhaitez malgré tout exécuter un Agent par conteneur, chaque conteneur est considéré comme un host distinct. Le tarif est déterminé à l'aide du calcul suivant : (prix par host d'APM) * (nombre de conteneurs).
 
@@ -120,23 +129,23 @@ Nous vous conseillons d'[exécuter][12] un Agent par host sous-jacent en cas de 
 
 Une tâche Fargate est un ensemble de conteneurs programmés pour s'exécuter sur AWS Fargate en tant que moteur de calcul sans serveur. Le nombre de tâches que vous surveillez simultanément dans Datadog est mesuré toutes les cinq minutes. La facturation de l'APM est basée sur le nombre moyen de tâches Fargate qui envoient des traces à Datadog par heure pour un mois donné pour votre compte.
 
-**4. Comment la facture est-elle calculée en cas redimensionnement soudain de mon environnement ?**
+**4. Comment votre facture est-elle calculée en cas de redimensionnement de votre environnement ?**
 
-Le tarif facturé pour l'APM est calculé en fonction du 99e centile du nombre d'Agents actifs qui envoient des traces toutes les heures de chaque mois. À la fin du mois, le centile le plus élevé n'est pas pris en compte pour éviter d'être facturé en cas de pic inattendu.
+Le tarif facturé pour l'APM est calculé en fonction du 99e centile du nombre d'Agents actifs qui envoient des traces toutes les heures de chaque mois. À la fin du mois, le centile le plus élevé n'est pas pris en compte par Datadog pour vous éviter d'être facturé en cas de pic inattendu.
 
 **5. Les conteneurs pause Kubernetes sont-ils facturés ?**
 
 Kubernetes crée des conteneurs pause pour obtenir l'adresse IP du pod respectif et configurer l'espace de nommage du réseau pour tous les autres conteneurs qui rejoignent ce pod. Datadog exclut les conteneurs pause de votre quota et ne les facture pas (nécessite l'Agent 5.8+). Lorsque vous utilisez Kubernetes, l'APM est facturé par nœud et non par pod.
 
-**6. Le nombre de hosts facturés tient-il compte de mes services ?**
+**6. Le nombre de hosts facturés tient-il compte de vos services ?**
 
 L'APM est facturé en fonction du nombre de [hosts][4] déployés avec un Agent qui envoie des traces, et non en fonction du nombre de services. La fonctionnalité Tracing Without Limits est facturée en fonction du nombre de [spans indexées et ingérées][13]. Pour estimer le nombre de spans indexées et ingérées que chaque service envoie, consultez la documentation sur les [métriques d'utilisation][14].
 
-**7. Qu'en est-il de mes filtres App Analytics existants ?**
+**7. Qu'en est-il de vos filtres App Analytics existants ?**
 
 À compter du 20 octobre 2020, tous les filtres App Analytics existants sont automatiquement convertis en filtres de rétention. Vous pouvez continuer d'utiliser les filtres tel quel ou les modifier selon vos besoins. Les filtres qui sont concernés par cette transition sont marqués d'un *i* pour indiquer qu'ils sont issus d'App Analytics sur la page des [filtres de rétention][3].
 
-**8. Comment estimer mon volume de spans ingérées ou indexées ?**
+**8. Comment estimer votre volume de spans ingérées ou indexées ?**
 
 Datadog fournit les métriques `datadog.estimated_usage.apm.ingested_bytes` et `datadog.estimated_usage.apm.ingested_spans` pour surveiller le volume de spans ingérées et indexées. Consultez la documentation relative aux [métriques d'utilisation][14] pour en savoir plus.
 
@@ -154,7 +163,7 @@ Oui. Si vous souhaitez acheter le profileur en continu sans l'APM, faites-le-nou
 
 
 [1]: /fr/tracing/
-[2]: /fr/tracing/trace_search_and_analytics/
+[2]: /fr/tracing/trace_explorer/
 [3]: /fr/tracing/trace_retention_and_ingestion/#retention-filters
 [4]: /fr/account_management/billing/pricing/#infrastructure-monitoring
 [5]: /fr/account_management/billing/pricing/#apm

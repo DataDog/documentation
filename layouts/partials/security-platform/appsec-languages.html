@@ -1,0 +1,37 @@
+{{ $dot := . }}
+<div class="appsec-languages">
+  <div class="container cards-dd col-num-3">
+    <div class="card-deck">
+      <a class="card" href="java">
+        <div class="card-body text-center py-2 px-1">
+          {{ partial "img.html" (dict "root" . "src" "integrations_logos/java.png" "class" "img-fluid" "alt" "Java" "width" "400") }}
+        </div>
+      </a>
+      <a class="card" href="dotnet">
+        <div class="card-body text-center py-2 px-1">
+          {{ partial "img.html" (dict "root" . "src" "integrations_logos/dotnet_text.png" "class" "img-fluid" "alt" ".Net" "width" "400") }}
+        </div>
+      </a>
+      <a class="card" href="go">
+        <div class="card-body text-center py-2 px-1">
+          {{ partial "img.html" (dict "root" . "src" "integrations_logos/golang.png" "class" "img-fluid" "alt" "Go" "width" "400") }}
+        </div>
+      </a>
+      <a class="card" href="ruby">
+        <div class="card-body text-center py-2 px-1">
+          {{ partial "img.html" (dict "root" . "src" "integrations_logos/ruby.png" "class" "img-fluid" "alt" "Ruby" "width" "400") }}
+        </div>
+      </a>
+      <a class="card" href="php">
+        <div class="card-body text-center py-2 px-1">
+          {{ partial "img.html" (dict "root" . "src" "integrations_logos/php.png" "class" "img-fluid" "alt" "PHP" "width" "400") }}
+        </div>
+      </a>
+      <a class="card" href="nodejs">
+        <div class="card-body text-center py-2 px-1">
+          {{ partial "img.html" (dict "root" . "src" "integrations_logos/nodejs.png" "class" "img-fluid" "alt" "Node.js" "width" "400") }}
+        </div>
+      </a>
+    </div>
+  </div>
+</div>

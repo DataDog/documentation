@@ -38,7 +38,7 @@ The APM UI provides many tools to troubleshoot application performance and corre
 | [Indexed Span](#indexed-span) | Indexed Spans represent all spans indexed by retention filters or legacy App Analytics analyzed spans and can be used to search, query, and monitor in *Analytics*.                                                                                                |
 | [Span tags](#span-tags)         | Tag spans in the form of key-value pairs to correlate a request in the *Trace View* or filter in *Analytics*.                                                                                                    |
 | [Retention Filters](#retention-filters) | Retention filters are tag-based controls set within the Datadog UI that determine what spans to index in Datadog for 15 days.                                                                                              |
-| [Ingestion Controls](#ingestion-controls) | Ingestion Controls are used to send up to 100% of traces to Datadog for live search and analytics for 15 minutes.
+| [Ingestion Controls](#ingestion-controls) | Ingestion controls are used to send up to 100% of traces to Datadog for live search and analytics for 15 minutes.
 | [Sublayer Metric](#sublayer-metric) | A sublayer metric is the execution duration of a given type / service within a trace.
 | [Execution Time](#execution-time) | Total time that a span is considered 'active' (not waiting for a child span to complete).
 
@@ -89,9 +89,25 @@ For the example below, the span `rack.request` is the entry-point span of the tr
 
 {{< img src="tracing/visualization/span_with_metadata.png" alt="span" >}}
 
+### Service entry span
+
+A span is a service entry span when it is the entrypoint method for a request to a service. You can visualize this within Datadog APM when the color of the immediate parent on a flame graph is a different color. Services are also listed on the right when viewing a flame graph.
+
+### Trace root span
+
+A span is a trace root span when it is the first span of a trace. The root span is the entry-point method of the traced request. Its start marks the beginning of the trace.
+
+For the example below, the **service entry spans** are:
+- `rack.request` (which is also the _root span_)
+- `aspnet_coremvc.request`
+- The topmost green span below `aspnet_coremvc.request`
+- Every orange `mongodb` span
+
+{{< img src="tracing/visualization/toplevelspans.png" alt="span" >}}
+
 ## Span summary
 
-The span summary table shows metrics for spans aggregated across all traces, including how often the span shows up among all traces, what percent of traces contain the span, the average duration for the span, and its typical share of total execution time of the requests. This helps you detect N+1 problems in your code so you can improve your application performance. 
+The span summary table shows metrics for spans aggregated across all traces, including how often the span shows up among all traces, what percent of traces contain the span, the average duration for the span, and its typical share of total execution time of the requests. This helps you detect N+1 problems in your code so you can improve your application performance.
 
 The span summary table contains the following columns:
 
@@ -108,19 +124,6 @@ Average percentage of execution time
 : Average ratio of execution time for which the span was active for traces, including the current resource, where the span is present at least once.
 
 {{< img src="tracing/visualization/span-summary.png" alt="Span summary table" >}}
-
-
-## Service entry span
-
-A span is a service entry span when it is the entrypoint method for a request to a service. You can visualize this within Datadog APM when the color of the immediate parent on a flame graph is a different color.  Services are also listed on the right when viewing a flame graph.
-
-For the example below, the service entry spans are:
-- rack.request
-- aspnet_coremvc.request
-- The topmost green span below aspnet_coremvc.request
-- Every orange mongodb span
-
-{{< img src="tracing/visualization/toplevelspans.png" alt="span" >}}
 
 ## Trace metrics
 
@@ -210,5 +213,5 @@ When child spans are concurrent, execution time is calculated by dividing the ov
 [16]: https://app.datadoghq.com/metric/summary
 [17]: https://app.datadoghq.com/monitors#/create
 [18]: /tracing/trace_explorer/query_syntax/#facets
-[19]: /tracing/trace_retention_and_ingestion/#retention-filters
-[20]: /tracing/trace_retention_and_ingestion/#ingestion-controls
+[19]: /tracing/trace_retention/#retention-filters
+[20]: /tracing/trace_ingestion/ingestion_controls/
