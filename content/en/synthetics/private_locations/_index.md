@@ -525,6 +525,10 @@ livenessProbe:
 
 {{< /tabs >}}
 
+#### Additional health check configurations
+
+If your container orchestrator of choice requires a health check endpoint, enable private location status probes on port `8080` in your private location deployment. For more information, see [Advanced configurations][15].
+
 ### Test your internal endpoint
 
 Once at least one private location container starts reporting to Datadog, the private location status is set to green:

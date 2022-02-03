@@ -14,6 +14,9 @@ further_reading:
     - link: 'tracing/profiler/profiler_troubleshooting'
       tag: 'Documentation'
       text: 'Fix problems you encounter while using the profiler'
+    - link: 'https://www.datadoghq.com/blog/ruby-profiling-datadog-continuous-profiler/'
+      tag: 'Blog'
+      text: 'Analyze Ruby code performance with Datadog Continuous Profiler'
 ---
 
 {{< site-region region="us5" >}}

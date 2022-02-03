@@ -144,7 +144,7 @@ Tests can be only recorded from [Google Chrome][10]. To record your test, downlo
 
 1. Optionally, select **Open in a pop-up** at the upper right of the page to open your test recording in a separate pop-up window. This is useful if your application does not support being opened in an iframe or if you want to avoid sizing issues at recording. You can also open the pop in **Incognito mode** to start recording your test from a fresh browser free from already logged-in sessions, cookies from your existing browser, and more.
 2. Optionally, enable Datadog to automatically collect RUM data and step recordings from your browser test. For more information, see [Explore RUM & Session Replay][]. 
-3. Click on **Start recording** to begin recording your browser test.
+3. Click **Start Recording** to begin recording your browser test.
 4. As you click on your application going through the user journey you want to monitor, your actions are automatically recorded and used to create [steps][12] within your browser test scenario on the left.
 5. In addition to the automatically recorded steps, you can also use the [steps][12] available in the upper left corner to enrich your scenario:
     {{< img src="synthetics/browser_tests/manual_steps.png" alt="Browser Test steps" style="width:80%;">}}
