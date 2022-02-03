@@ -128,8 +128,8 @@ Now that you've configured your application to send traces to Datadog, start get
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/trace_retention_and_ingestion/#ingestion-controls
-[2]: /tracing/trace_retention_and_ingestion/#retention-filters
+[1]: /tracing/trace_ingestion/ingestion_controls/
+[2]: /tracing/trace_retention/#retention-filters
 [3]: /tracing/setup_overview/setup/java
 [4]: /tracing/setup_overview/proxy_setup/
 [5]: /tracing/setup_overview/serverless_functions/
@@ -140,7 +140,7 @@ Now that you've configured your application to send traces to Datadog, start get
 [10]: /tracing/trace_explorer/#live-search-for-15-minutes
 [11]: /tracing/trace_explorer/#live-analytics-for-15-minutes
 [12]: /tracing/deployment_tracking/
-[13]: /tracing/trace_retention_and_ingestion/
+[13]: /tracing/trace_retention/
 [14]: /tracing/generate_metrics/
 [15]: /tracing/connect_logs_and_traces/
 [16]: /real_user_monitoring/connect_rum_and_traces
