@@ -22,7 +22,7 @@ further_reading:
 
 ## Overview
 
-Multistep API tests allow you to chain [HTTP tests][1] to proactively monitor that sophisticated journeys on your key services are available at anytime and from anywhere.
+Multistep API tests allow you to chain several [HTTP requests][1] at once to proactively monitor and ensure that the sophisticated journeys on your key services are available at anytime, and from anywhere. If you want to perform single requests to your services, leverage [API tests][2].
 
 You can:
 
@@ -32,11 +32,9 @@ You can:
 
 {{< img src="synthetics/api_tests/ms_overview.png" alt="Multistep API test overview" style="width:90%;" >}}
 
-If one of your services starts answering more slowly, or in an unexpected way (for example, unexpected response body, status code, etc.), your test can [**alert your team**][2], [**block your CI pipeline**][3], or even [**roll back the faulty deployment**][3].
+If one of your services starts answering more slowly, or in an unexpected way (for example, unexpected response body, status code, etc.), your test can [**alert your team**][3], [**block your CI pipeline**][4], or even [**roll back the faulty deployment**][4].
 
-Multistep API tests can run from Datadog [managed locations][4] and [private locations][5], allowing **full coverage of your systems**, both external and internal.
-
-**Note**: Multistep API tests allow you to link several HTTP requests in a single test. If you want to perform single requests to your services, you can leverage [API tests][6].
+Multistep API tests can run from Datadog [managed locations][5] and [private locations][6], allowing **full coverage of your systems**, both external and internal.
 
 ## Configuration
 
@@ -47,7 +45,7 @@ Multistep API tests can run from Datadog [managed locations][4] and [private loc
 
 ### Select locations
 
-Select the **Locations** for your Multistep API test. Multistep API tests can run from both [managed][4] and [private locations][5] depending on your preference for running the test from outside or inside your network.
+Select the **Locations** for your Multistep API test. Multistep API tests can run from both [managed][5] and [private locations][6] depending on your preference for running the test from outside or inside your network.
 
 ### Define steps
 
@@ -76,16 +74,22 @@ To create an HTTP request step, click **Create Your First Step**.
    {{% tab "Authentication" %}}
 
    * **HTTP Basic Auth**: Add HTTP basic authentication credentials.
-   * **AWS Signature V4**: Enter your Access Key ID and Secret Access Key. Datadog generates the signature for your request.
-   This option uses the basic implementation of SigV4. Specific signatures such as AWS S3 are not implemented.
+   * **Digest Auth**: Add Digest authentication credentials. 
    * **NTLM v1**: Add NTLM authentication credentials.
+   * **AWS Signature v4**: Enter your Access Key ID and Secret Access Key. Datadog generates the signature for your request. This option uses the basic implementation of SigV4. Specific signatures such as AWS S3 are not implemented.
+
+   {{% /tab %}}
+
+   {{% tab "Query Parameters" %}}
+
+   * **Encode parameters**: Add the name and value of query parameters that require encoding. 
 
    {{% /tab %}}
 
    {{% tab "Request Body" %}}
 
    * **Body type**: Select the type of the request body (`text/plain`, `application/json`, `text/xml`, `text/html`, `application/x-www-form-urlencoded`, or `None`) you want to add to your HTTP request.
-   * **Request body**: Add the content of your HTTP request body. **Note**: The request body is limited to a maximum size of 50 kilobytes.
+   * **Request body**: Add the content of your HTTP request body. The request body is limited to a maximum size of 50 kilobytes.
 
    {{% /tab %}}
 
@@ -112,13 +116,13 @@ To create an HTTP request step, click **Create Your First Step**.
 
    {{< /tabs >}}
 
-Click on **Test URL** to try out the request configuration. A response preview appears.
+Click **Test URL** to try out the request configuration. A response preview appears.
 
 {{< img src="synthetics/api_tests/ms_define_request2.png" alt="Define request for your Multistep API test" style="width:90%;" >}}
 
 #### Add assertions
 
-Assertions define what an expected test result is. When hitting `Test URL` basic assertions on `response time`, `status code`, and `header` `content-type` are added based on the response that was obtained. In Multistep API tests, assertions are optional.
+Assertions define what an expected test result is. After you click **Test URL**, basic assertions on `response time`, `status code`, and `header` `content-type` are added based on the response that was obtained. In Multistep API tests, assertions are optional.
 
 | Type          | Operator                                                                                               | Value type                                                      |
 |---------------|--------------------------------------------------------------------------------------------------------|----------------------------------------------------------------|
@@ -129,7 +133,7 @@ Assertions define what an expected test result is. When hitting `Test URL` basic
 
 **Note**: HTTP tests can decompress bodies with the following `content-encoding` headers: `br`, `deflate`, `gzip`, and `identity`.
 
-You can create up to 20 assertions per step by clicking on **New Assertion** or by clicking directly on the response preview.
+You can create up to 20 assertions per step by clicking **New Assertion** or by clicking directly on the response preview.
 
 {{< img src="synthetics/api_tests/assertions2.png" alt="Define assertions for your Multistep API test" style="width:90%;" >}}
 
@@ -165,7 +169,7 @@ Multistep API tests can run:
 
 {{< img src="synthetics/api_tests/schedule.png" alt="Run API tests on schedule" style="width:90%;" >}}
 
-* [**Within your CI/CD pipelines**][3] to start shipping without fearing faulty code might impact your customers experience.
+* [**Within your CI/CD pipelines**][4] to start shipping without fearing faulty code might impact your customers experience.
 * **On-demand** to run your tests whenever makes the most sense for your teams.
 
 ### Define alert conditions
@@ -214,7 +218,7 @@ You can [extract variables from any step of your Multistep API test](#extract-va
 
 #### Variables from pattern
 
-You can create local variables by clicking on **Create Local Variable** at the top right hand corner of your test configuration form. You can define their values from one of the below available builtins:
+You can create local variables by clicking **Create Local Variable** at the top right hand corner of your test configuration form. You can define their values from one of the below available builtins:
 
 `{{ numeric(n) }}`
 : Generates a numeric string with `n` digits.
@@ -287,11 +291,11 @@ You can restrict access to a multistep API test based on the roles in your organ
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /synthetics/api_tests/http_tests
-[2]: /synthetics/api_tests/http_tests?tab=requestoptions#notify-your-team
-[3]: /synthetics/cicd_integrations
-[4]: /api/v1/synthetics/#get-all-locations-public-and-private
-[5]: /synthetics/private_locations
-[6]: /synthetics/api_tests/
+[2]: /synthetics/api_tests/
+[3]: /synthetics/api_tests/http_tests?tab=requestoptions#notify-your-team
+[4]: /synthetics/cicd_integrations
+[5]: /api/v1/synthetics/#get-all-locations-public-and-private
+[6]: /synthetics/private_locations
 [7]: /synthetics/search/#search
 [8]: https://restfulapi.net/json-jsonpath/
 [9]: https://www.w3schools.com/xml/xpath_syntax.asp
