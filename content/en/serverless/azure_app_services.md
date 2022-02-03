@@ -70,6 +70,15 @@ The Datadog extension for Azure App Service provides additional monitoring capab
 
 **Note**: Datadog automatic instrumentation relies on the .NET CLR Profiling API. This API allows only one subscriber (for example, APM). To ensure maximum visibility, run only one APM solution within your application environment.
 
+**Note**: Starting with version 2.3.0, the .Net extension doesn't rely on usual semantic versioning. Indeed, the extension will use the following scheme: `x.y.zAA` where `x.y.z` is the .Net Tracer version and `AA` is dedicated to the extension only. Also note that any leading 0 in `zAA` is trimmed by nuget packing so the version becomes `x.y.A`. Here are a few examples:
+
+- Extension `2.3.0` uses the tracer `2.3.0`
+- Extension `2.3.1` uses the tracer `2.3.0`
+- Extension `2.3.2` uses the tracer `2.3.0`
+- Extension `2.3.100` uses the tracer `2.3.1`
+- Extension `2.3.101` uses the tracer `2.3.1`
+- Extension `2.3.200` uses the tracer `2.3.2`
+
 ### Installation
 
 1. Configure the [Azure integration][1] to monitor your web app or function. Verify it is configured correctly by ensuring that you see the corresponding `azure.app_service.count` or `azure.functions.count` metric in Datadog. **Note**: This step is critical for metric/trace correlation, functional trace panel views, and improves the overall experience of using Datadog with Azure App Services.
