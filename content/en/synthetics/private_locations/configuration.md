@@ -98,7 +98,7 @@ Discard SSL errors when private location is using a proxy to send requests to Da
 Maximum number of tests executed in parallel.
 
 `enableStatusProbes`
-: **Type**: <br>
+: **Type**: Boolean <br>
 Enables the readiness and liveness of private location probes. This enables two endpoints: http://127.0.0.1:8080/liveness and http://127.0.0.1:8080/readiness.
 
 `maxTimeout`
