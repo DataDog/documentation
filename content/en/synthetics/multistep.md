@@ -139,11 +139,11 @@ You can create up to 20 assertions per step by clicking **New Assertion** or by 
 
 #### Add execution parameters
 
-The `Continue with test if this step fails` setting allows Multistep API tests to move on with subsequent steps even in case of step failure. This is particularly useful to ensure your tests are able to clean up after themselves. For instance, a test might first create a resource, perform a number of actions on that resource, and end with the deletion of that resource. In case one of the intermediary steps fails, you still want the resource to be deleted at the end of the test to avoid generating false positives. This can be done using the `Continue with test if this step fails` on every intermediary step.
+Click **Continue with test if this step fails** to allow your test to move on with subsequent steps after step failure. 
 
-You should also activate the `Consider entire test as failed if this step fails` setting on your intermediary steps to ensure your overall test still generates an alert in case one of the endpoints does not answer as expected.
+This ensures your tests are able to clean up after themselves. For example, a test may create a resource, perform a number of actions on that resource, and end with the deletion of that resource. In case one of the intermediary steps fail, you want to have this setting enabled on every intermediary step to ensure that the resource is deleted at the end of the test and that no false positives are created.
 
-Similarly, if your Multistep API test runs on a variety of endpoints, the two failure behavior settings can help ensure your test performs all requests even in case of issue with one or several of the API endpoints.
+For example, if your multistep API test runs on multiple endpoints, specify the number of times you want the step to run after a set number of milliseconds in case the step fails. This ensures your test performs all the requests even if there is an issue with one or more steps.
 
 #### Extract variables from the response
 
