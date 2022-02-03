@@ -47,7 +47,7 @@ Each retention filter set on your services results in an _increase_ to the numbe
 
 Because Indexed Spans can impact your bill, the 'Spans Indexed' column appears alongside each filter you set, showing the number of spans indexed based on the timeframe selected for that filter.
 
-**Note:** The [Datadog Intelligent Retention Filter][6] does not cause any billing implications.
+**Note:** The [Datadog Intelligent Retention Filter][6] does not have any billing implications.
 
 **Note**: Admin rights are required to create, modify, or disable retention filters.
 
