@@ -43,7 +43,7 @@ The default [Trace Analytics Dashboard][5] has several groups of widgets to see 
 
 {{< img src="tracing/trace_indexing_and_ingestion/RetentionFilters.png" style="width:100%;" alt="Span Indexing" >}}
 
-Each retention filter set on your services, results in an _increase_ to the number of Indexed Spans for your Datadog account.
+Each retention filter set on your services results in an _increase_ to the number of Indexed Spans for your Datadog account.
 
 Because Indexed Spans can impact your bill, the 'Spans Indexed' column appears alongside each filter you set, showing the number of spans indexed based on the timeframe selected for that filter.
 
