@@ -65,7 +65,7 @@ Four tabs are below the profile header:
 
 In the **Profiles** tab, you can see all profile types available for a given language. Depending on the language, the information collected about your profile differs.
 
-{{< programming-lang-wrapper langs="java,python,go,ruby,dotnet" >}}
+{{< programming-lang-wrapper langs="java,python,go,ruby,nodejs,dotnet,php,linux" >}}
 {{< programming-lang lang="java" >}}
 
 {{< img src="tracing/profiling/profile.png" alt="A specific profile">}}
@@ -165,6 +165,7 @@ Goroutines
 
 #### Delta profiles
 <div class="alert alert-info"><strong>Note</strong>: In Go profiler versions before <code>1.33.0</code>, Allocations, Allocated Memory, Mutex, and Block metrics are shown as measures <em>since the process was started</em>, as opposed to <em>during the profiling period</em>. The change to delta profiles in version <code>1.33.0</code> lets you see how these measures are changing instead of accumulating. The accumulated measures are collected and you can download them from the <strong>Download Profile Data</strong> icon by selecting the <code>block.pprof</code>, <code>heap.pprof</code>, and <code>mutex.pprof</code> options. <br/><br/>Storing the accumulated measures is an option Datadog might stop providing in future releases. <a href="/help/">Contact Support</a> to discuss your use case if you rely on it.</div>
+
 
 [1]: https://github.com/DataDog/go-profiler-notes/blob/main/block.md
 [2]: https://github.com/DataDog/go-profiler-notes/blob/main/goroutine.md
