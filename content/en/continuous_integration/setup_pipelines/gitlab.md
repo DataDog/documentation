@@ -123,7 +123,7 @@ Go to **Settings > Webhooks** in your repository (or GitLab instance settings), 
 
 To set custom `env` or `service` parameters, add more query parameters in the webhooks URL: `&env=<YOUR_ENV>&service=<YOUR_SERVICE_NAME>`
 
-To set custom tags, provide the query parameter `tags`, with *key:value* pairs separated by commas. If the tag  contains commas, quotes are needed. Example: `key1:value1,"key2: value with , comma",key3:value3`. (**This parameter needs URL encoding**, for the example: `&tags=key1%3Avalue1%2C%22key2%3A+value+with+%2C+comma%22%2Ckey3%3Avalue3`)
+To set custom tags, provide the query parameter `tags`, with *key:value* pairs separated by commas. If the tag contains commas, quotes are needed. Example: `key1:value1,"key2: value with , comma",key3:value3`. (**This parameter needs URL encoding**, for the example: `&tags=key1%3Avalue1%2C%22key2%3A+value+with+%2C+comma%22%2Ckey3%3Avalue3`)
 
 ## Visualize pipeline data in Datadog
 
