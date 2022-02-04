@@ -50,7 +50,7 @@ Use the request flow map to investigate your application's behavior:
 
 [1]: /tracing/visualization/services_map/
 [2]: /tracing/trace_explorer/
-[3]: /tracing/trace_retention_and_ingestion/#ingestion-controls
+[3]: /tracing/trace_ingestion/ingestion_controls
 [4]: /real_user_monitoring/connect_rum_and_traces?tab=browserrum
 [5]: https://app.datadoghq.com/apm/flow-map
 [6]: /tracing/visualization/#resources

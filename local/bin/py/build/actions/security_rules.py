@@ -131,34 +131,37 @@ def security_rules(content, content_dir):
 
                     # previous categorization
                     if relative_path.startswith('configuration'):
-                        page_data['rule_category'].append('Cloud Configuration')
+                        page_data['rule_category'].append('Posture Management (Cloud)')
                     elif relative_path.startswith('runtime'):
                         if 'compliance' in relative_path:
-                            page_data['rule_category'].append('Infrastructure Configuration')
+                            page_data['rule_category'].append('Posture Management (Infra)')
                         else:
                             page_data['rule_category'].append('Workload Security')
 
                     # new categorization
                     if 'security-monitoring' in relative_path:
-                        page_data['rule_category'].append('Log Detection')
+                        page_data['rule_category'].append('Cloud SIEM')
 
                     if 'posture-management' in relative_path:
                         if 'cloud-configuration' in relative_path:
-                            page_data['rule_category'].append('Cloud Configuration')
+                            page_data['rule_category'].append('Posture Management (Cloud)')
                         if 'infrastructure-configuration' in relative_path:
-                            page_data['rule_category'].append('Infrastructure Configuration')
+                            page_data['rule_category'].append('Posture Management (Infra)')
 
                     if 'workload-security' in relative_path:
                         page_data['rule_category'].append('Workload Security')
 
+                    if 'application-security' in relative_path:
+                        page_data['rule_category'].append('Application Security')
+
                     tags = data.get('tags', [])
                     if tags:
-                        if data.get('source', ''):
-                            page_data["source"] = data.get('source', '')
                         for tag in tags:
                             if ':' in tag:
                                 key, value = tag.split(':')
                                 page_data[key] = value
+                        if data.get('source', ''):
+                            page_data["source"] = data.get('source', '')
                     else:
                         # try build up manually
                         source = data.get('source', None)

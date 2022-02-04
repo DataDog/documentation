@@ -309,6 +309,10 @@
   ],
   "CreateMonitor": [
     {
+      "suffix": "_3883669300",
+      "description": "Create a RUM formula and functions monitor returns \"OK\" response"
+    },
+    {
       "suffix": "_3790803616",
       "description": "Create a ci-pipelines monitor returns \"OK\" response"
     },
@@ -487,6 +491,12 @@
       "description": "Edit an API test returns \"OK\" response"
     }
   ],
+  "GetAPITestResult": [
+    {
+      "suffix": "_1321866518",
+      "description": "Get an API test result returns result with failure object"
+    }
+  ],
   "TriggerTests": [
     {
       "suffix": "",
@@ -515,6 +525,48 @@
     {
       "suffix": "",
       "description": "Get hourly usage for CSPM returns \"OK\" response"
+    }
+  ],
+  "GetUsageInternetOfThings": [
+    {
+      "suffix": "",
+      "description": "Get hourly usage for IoT returns \"OK\" response"
+    }
+  ],
+  "GetUsageSNMP": [
+    {
+      "suffix": "",
+      "description": "Get hourly usage for SNMP devices returns \"OK\" response"
+    }
+  ],
+  "GetUsageAnalyzedLogs": [
+    {
+      "suffix": "",
+      "description": "Get hourly usage for analyzed logs returns \"OK\" response"
+    }
+  ],
+  "GetIncidentManagement": [
+    {
+      "suffix": "",
+      "description": "Get hourly usage for incident management returns \"OK\" response"
+    }
+  ],
+  "GetUsageIndexedSpans": [
+    {
+      "suffix": "",
+      "description": "Get hourly usage for indexed spans returns \"OK\" response"
+    }
+  ],
+  "GetIngestedSpans": [
+    {
+      "suffix": "",
+      "description": "Get hourly usage for ingested spans returns \"OK\" response"
+    }
+  ],
+  "GetUsageProfiling": [
+    {
+      "suffix": "",
+      "description": "Get hourly usage for profiled hosts returns \"OK\" response"
     }
   ],
   "CreateWebhooksIntegrationCustomVariable": [

@@ -9,6 +9,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/linux-security-threat-detection-datadog/"
   tag: "Blog"
   text: "How to detect security threats in your systems' Linux processes"
+- link: "https://www.datadoghq.com/blog/pwnkit-vulnerability-overview-and-remediation/"
+  tag: "Blog"
+  text: "The PwnKit vulnerability: Overview, detection, and remediation"
 ---
 
 ## Overview

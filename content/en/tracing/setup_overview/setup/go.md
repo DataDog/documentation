@@ -97,6 +97,10 @@ Enable debug logging in the tracer.
 : **Default**: `true` <br>
 Enable web framework and library instrumentation. When false, the application code doesn’t generate any traces.
 
+`DD_SERVICE_MAPPING`
+: **Default**: `null` <br>
+Dynamically rename services through configuration. Services can be separated by commas or spaces, for example: `mysql:mysql-service-name,postgres:postgres-service-name`, `mysql:mysql-service-name postgres:postgres-service-name`.
+
 
 Datadog recommends using `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `env`, `service`, and `version` for your services.
 
@@ -230,7 +234,7 @@ extracted value is used.
 [6]: /tracing/profiler/enabling/?code-lang=go
 [7]: https://app.datadoghq.com/apm/docs
 [8]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#StartOption
-[9]: /tracing/trace_retention_and_ingestion/
+[9]: /tracing/trace_ingestion/
 [10]: /getting_started/tagging/unified_service_tagging
 [11]: /tracing/advanced/setting_primary_tags_to_scope/#environment
 [12]: /getting_started/tracing/#environment-name

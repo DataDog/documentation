@@ -14,6 +14,10 @@ further_reading:
 - link: "/security_platform/cloud_workload_security/getting_started"
   tag: "Documentation"
   text: "Uncover kernel-level threats with Cloud Workload Security"
+- link: "https://www.datadoghq.com/blog/cyber-attack-simulation-with-stratus-red-team/"
+  tag: "Blog"
+  text: "Elevate AWS threat detection with Stratus Red Team"
+  
 ---
 
 {{< site-region region="gov" >}}
@@ -26,14 +30,24 @@ Cloud Security Posture Management is not currently available in US1-FED.
 
 Bring speed and scale to your production security operations. Datadog’s Security Platform delivers real-time threat detection, and continuous configuration audits across applications, hosts, containers, and cloud infrastructure. Coupled with the greater Datadog observability platform, the Datadog security platform brings unprecedented integration between security and operations aligned to your organizations shared goals.
 
-The Datadog Security Platform includes [Cloud SIEM](#security-monitoring), [Cloud Security Posture Management (CSPM)](#cloud-security-posture-management), and [Cloud Workload Security (CWS)](#cloud-workload-security).
+The Datadog Security Platform includes [Application Security](#application-security), [Cloud SIEM](#security-monitoring), [Cloud Security Posture Management (CSPM)](#cloud-security-posture-management), and [Cloud Workload Security (CWS)](#cloud-workload-security).
 
-{{< vimeo 408512902 >}}
+{{< vimeo 669874306 >}}
 </br>
+
+## Application Security
+
+<div class="alert alert-warning">
+Application Security is in public beta. See the <a href="https://app.datadoghq.com/security/appsec?instructions=all">in-app instructions</a> to get started.
+</div>
+
+[Application Security][7] monitors application-level attacks aiming to exploit code-level vulnerabilities, such as Server-Side-Request-Forgery (SSRF), SQL injection, Log4Shell, and Reflected Cross-Site-Scripting (XSS). Application Security leverages Datadog [APM][8], the [Datadog Agent][9], and in-app detection rules to detect threats in your application environment.
+
+{{< img src="/security_platform/application_security/app-sec-landing-page.png" alt="A security signal panel in Datadog, which displays attack flows and flame graphs" width="75%">}}
 
 ## Cloud SIEM
 
-[Cloud SIEM][1] detects real-time threats to your application and infrastructure, like a targeted attack, an IP communicating with your systems which matches a threat intel list, or an insecure configuration. Cloud SIEM is powered by [Datadog Log Management][2]. With these areas combined, you can [automate remediation of threats detected by Datadog Cloud SIEM][3] to speed up your threat-response workflow.
+[Cloud SIEM][1] (Security Information and Event Management) detects real-time threats to your application and infrastructure, like a targeted attack, an IP communicating with your systems which matches a threat intel list, or an insecure configuration. Cloud SIEM is powered by [Datadog Log Management][2]. With these areas combined, you can [automate remediation of threats detected by Datadog Cloud SIEM][3] to speed up your threat-response workflow.
 
 {{< img src="security_platform/security_monitoring_overview.png" alt="Cloud SIEM sources analyzed view in Datadog" width="100%">}}
 
@@ -61,3 +75,6 @@ To get started with the Datadog Security Platform, navigate to the [Setup & Conf
 [4]: /security_platform/cspm/
 [5]: /security_platform/cloud_workload_security/
 [6]: https://app.datadoghq.com/security/configuration
+[7]: /security_platform/application_security/
+[8]: /tracing/
+[9]: /agent/

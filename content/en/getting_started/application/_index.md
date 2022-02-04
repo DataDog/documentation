@@ -127,7 +127,7 @@ Datadog [Real User Monitoring][18] (RUM) allows you to visualize and analyze rea
 
 {{< img src="getting_started/security.png" alt="security" >}}
 
-Datadog [Cloud SIEM][21] automatically detects threats to your application or infrastructure. For example, a targeted attack, an IP communicating with your systems matching a threat intel list, or an insecure configuration. These threats are surfaced in Datadog as Security Signals and can be correlated and triaged in the Security Explorer.
+Datadog [Cloud SIEM][21] (Security Information and Event Management) automatically detects threats to your application or infrastructure. For example, a targeted attack, an IP communicating with your systems matching a threat intel list, or an insecure configuration. These threats are surfaced in Datadog as Security Signals and can be correlated and triaged in the Security Explorer.
 
 ## Synthetic Monitoring
 
