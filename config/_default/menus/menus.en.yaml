@@ -2645,11 +2645,6 @@ main:
     url: synthetics/browser_tests/advanced_options
     parent: synthetics_browser_tests
     weight: 303
-  - name: RUM & Synthetics
-    url: real_user_monitoring/explorer
-    parent: synthetics_browser_tests
-    identifier: synthetics_browser_tests_rum_and_synthetics
-    weight: 304
   - name: Private Locations
     url: synthetics/private_locations
     parent: synthetics
