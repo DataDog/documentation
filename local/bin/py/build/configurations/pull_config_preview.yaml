@@ -291,14 +291,14 @@
   - repo_name: dd-sdk-android
     contents:
     - action: pull-and-push-file
-      branch: alai97/rum-documentation-link-cleanup
+      branch: master
       globs:
       - 'docs/rum_getting_started.md'
       options:
         dest_path: '/real_user_monitoring/android/'
         file_name: '_index.md'
         front_matters:
-          dependencies: ["https://github.com/DataDog/dd-sdk-android/blob/alai97/rum-documentation-link-cleanup/docs/rum_getting_started.md"]
+          dependencies: ["https://github.com/DataDog/dd-sdk-android/blob/master/docs/rum_getting_started.md"]
           title: RUM Android Monitoring
           kind: documentation
           further_reading:
@@ -309,14 +309,14 @@
               tag: "Homepage"
               text: "Explore Datadog RUM"
     - action: pull-and-push-file
-      branch: alai97/rum-documentation-link-cleanup
+      branch: master
       globs:
       - 'docs/mobile_data_collected.md'
       options:
         dest_path: '/real_user_monitoring/android/'
         file_name: 'data_collected.md'
         front_matters:
-          dependencies: ["https://github.com/DataDog/dd-sdk-android/blob/alai97/rum-documentation-link-cleanup/docs/mobile_data_collected.md"]
+          dependencies: ["https://github.com/DataDog/dd-sdk-android/blob/master/docs/mobile_data_collected.md"]
           title: RUM Android Data Collected
           kind: documentation
           further_reading:
@@ -327,14 +327,14 @@
               tag: "Homepage"
               text: "Explore Datadog RUM"
     - action: pull-and-push-file
-      branch: alai97/rum-documentation-link-cleanup
+      branch: master
       globs:
       - 'docs/configure_rum_android_sdk.md'
       options:
         dest_path: '/real_user_monitoring/android/'
         file_name: 'advanced_configuration.md'
         front_matters:
-          dependencies: ["https://github.com/DataDog/dd-sdk-android/blob/alai97/rum-documentation-link-cleanup/docs/configure_rum_android_sdk.md"]
+          dependencies: ["https://github.com/DataDog/dd-sdk-android/blob/master/docs/configure_rum_android_sdk.md"]
           title: RUM Android Advanced Configuration
           kind: documentation
           further_reading:
@@ -345,14 +345,14 @@
               tag: "Homepage"
               text: "Explore Datadog RUM"
     - action: pull-and-push-file
-      branch: alai97/rum-documentation-link-cleanup
+      branch: master
       globs:
       - 'docs/rum_mobile_vitals.md'
       options:
         dest_path: '/real_user_monitoring/android/'
         file_name: 'mobile_vitals.md'
         front_matters:
-          dependencies: ["https://github.com/DataDog/dd-sdk-android/blob/alai97/rum-documentation-link-cleanup/docs/rum_mobile_vitals.md"]
+          dependencies: ["https://github.com/DataDog/dd-sdk-android/blob/master/docs/rum_mobile_vitals.md"]
           title: Mobile Vitals
           kind: documentation
           further_reading:
@@ -363,14 +363,14 @@
               tag: "Blog"
               text: "Monitor Mobile Vitals in Datadog"
     - action: pull-and-push-file
-      branch: alai97/rum-documentation-link-cleanup
+      branch: master
       globs:
       - 'docs/integrated_libraries_android.md'
       options:
         dest_path: '/real_user_monitoring/android/'
         file_name: 'integrated_libraries.md'
         front_matters:
-          dependencies: ["https://github.com/DataDog/dd-sdk-android/blob/alai97/rum-documentation-link-cleanup/docs/integrated_libraries_android.md"]
+          dependencies: ["https://github.com/DataDog/dd-sdk-android/blob/master/docs/integrated_libraries_android.md"]
           title: Android Integrated Libraries
           kind: documentation
           further_reading:
@@ -381,14 +381,14 @@
               tag: "Homepage"
               text: "Explore Datadog RUM"
     - action: pull-and-push-file
-      branch: alai97/rum-documentation-link-cleanup
+      branch: master
       globs:
       - 'docs/troubleshooting_android.md'
       options:
         dest_path: '/real_user_monitoring/android/'
         file_name: 'troubleshooting.md'
         front_matters:
-          dependencies: ["https://github.com/DataDog/dd-sdk-android/blob/alai97/rum-documentation-link-cleanup/docs/troubleshooting_android.md"]
+          dependencies: ["https://github.com/DataDog/dd-sdk-android/blob/master/docs/troubleshooting_android.md"]
           title: Troubleshooting
           kind: documentation
           further_reading:
@@ -551,14 +551,14 @@
               text: "Explore your services, resources, and traces"
 
     - action: pull-and-push-folder
-      branch: alai97/rum-documentation-link-cleanup
+      branch: master
       globs:
         - docs/rum_collection/*
       options:
         dest_dir: '/real_user_monitoring/ios/'
         path_to_remove: 'docs/rum_collection/'
         front_matters:
-          dependencies: [ "https://github.com/DataDog/dd-sdk-ios/blob/alai97/rum-documentation-link-cleanup/docs/rum_collection/" ]
+          dependencies: [ "https://github.com/DataDog/dd-sdk-ios/blob/master/docs/rum_collection/" ]
 
     - action: pull-and-push-folder
       branch: master
@@ -574,7 +574,7 @@
     contents:
 
     - action: pull-and-push-file
-      branch: alai97/rum-documentation-link-cleanup
+      branch: master
       globs:
       - 'README.md'
       options:
@@ -585,7 +585,7 @@
           kind: documentation
           beta: true
           description: "Collect RUM data from your React Native projects."
-          dependencies: ["https://github.com/DataDog/dd-sdk-reactnative/blob/alai97/rum-documentation-link-cleanup/README.md"]
+          dependencies: ["https://github.com/DataDog/dd-sdk-reactnative/blob/master/README.md"]
           further_reading:
             - link: "https://github.com/DataDog/dd-sdk-reactnative"
               tag: "Github"
