@@ -19,6 +19,8 @@ further_reading:
 
 Once [log management is enabled][1] for your organization, you can create a logs monitor to alert you when a specified type of log exceeds a user-defined threshold over a given period of time.
 
+<div class="alert alert-info"><strong>Note</strong>: Log monitors are subject to an inherent latency of a few minutes between log ingestion and the log monitor triggering. To reduce the trigger latency, you may consider [generating metrics from logs][7] together with a [metric monitor][8].</div>
+
 ## Monitor creation
 
 To create a [logs monitor][2] in Datadog, use the main navigation: *Monitors --> New Monitor --> Logs*.
@@ -106,3 +108,5 @@ Include a sample of 10 logs in the alert notification:
 [4]: /logs/explorer/facets/
 [5]: /monitors/create/configuration/#advanced-alert-conditions
 [6]: /monitors/notify/
+[7]: /logs/log_configuration/logs_to_metrics/
+[8]: /monitors/create/types/metric/
