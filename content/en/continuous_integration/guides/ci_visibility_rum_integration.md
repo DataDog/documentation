@@ -1,5 +1,5 @@
 ---
-title: CI Visibility - RUM integration
+title: Instrumenting your browser tests with RUM
 kind: guide
 aliases: /continuous_integration/guides/ci_visibility_rum_integration/
 ---
@@ -10,7 +10,7 @@ aliases: /continuous_integration/guides/ci_visibility_rum_integration/
 
 ### Browser tests and RUM
 
-If your page under test is instrumented using [RUM][1], your `cypress` test results and their generated RUM browser sessions and session replays will be automatically linked. A new **Browser Sessions** tab appears in the browser test's test detail:
+If you use Cypress for your browser tests and your application under test is instrumented using [RUM][1], your test results and their generated RUM browser sessions and session replays will be automatically linked. A new **Browser Sessions** tab appears in the test detail side panel:
 
 {{< img src="ci/ci-browser-session-tab.png" alt="Browser Session Tab in Test Detail" style="width:100%;">}}
 
