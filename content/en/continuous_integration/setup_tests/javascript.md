@@ -148,7 +148,7 @@ DD_ENV=ci DD_SERVICE=my-ui-app npm test
 
 ### Add extra tags
 
-To add additional information to your tests such as the responsible team, use `cy.task('dd:addTags', { yourTags: 'here' })` in your test or hooks.
+To add additional information to your tests, such as the responsible team, use `cy.task('dd:addTags', { yourTags: 'here' })` in your test or hooks.
 
 For example:
 

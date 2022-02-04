@@ -20,7 +20,7 @@ This RUM session has all the data that [RUM normally collects][2], so it lets yo
 
 ### Compatibility
 
-The CI Visibility - RUM integration is only available from these version of `dd-trace-js` and `browser-sdk`:
+The CI Visibility - RUM integration is only available for these versions of `dd-trace-js` and `browser-sdk`:
 
 * `dd-trace-js>=1.7.0`
 * `browser-sdk>=3.11.0`
