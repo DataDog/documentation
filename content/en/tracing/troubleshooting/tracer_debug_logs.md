@@ -88,6 +88,7 @@ const tracer = require('dd-trace').init({
   debug: true
 })
 ```
+**Note:** For version 2.X debug mode can only be configured by the environment variable `DD_TRACE_DEBUG`
 
 **Application Logs**
 
