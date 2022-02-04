@@ -257,7 +257,7 @@ If you are running tests in non-supported CI providers or with no `.git` folder,
 [Mocha >=9.0.0][8] uses an ESM-first approach to load test files. That means that if ES modules are used (for example, by defining test files with the `.mjs` extension), _the instrumentation is limited_. Tests are detected, but there isn't visibility into your test. For more information about ES modules, see the [NodeJS documentation][9].
 
 ### Browser tests
-Browser tests run with `mocha`, `jest`, `cucumber` and `cypress` are instrumented by `dd-trace`, but no visibility into the browser itself is provided (no network calls, user actions, page loads, etc.). If you want visibility into the browser process, consider [Real User Monitoring][10].
+Browser tests executed with `mocha`, `jest`, `cucumber` and `cypress` are instrumented by `dd-trace`, but no visibility into the browser itself is provided (no network calls, user actions, page loads, etc.). If you want visibility into the browser process, consider [Real User Monitoring][10].
 
 ## Best practices
 
