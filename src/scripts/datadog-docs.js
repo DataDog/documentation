@@ -11,8 +11,6 @@ const { env } = document.documentElement.dataset;
 const { gaTag } = configDocs[env];
 
 // gTag
-window.dataLayer = window.dataLayer || [];
-
 gtag('js', new Date());
 gtag('config', gaTag);
 
