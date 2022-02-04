@@ -10,7 +10,7 @@ aliases: /continuous_integration/guides/ci_visibility_rum_integration/
 
 ### Browser tests and RUM
 
-If you're running `cypress` tests and the page under test uses [RUM][1], a link is created between the browser test and the RUM session. A new **Browser Sessions** tab appears in the browser test's test detail:
+If your page under test is instrumented using [RUM][1], your `cypress` test results and their generated RUM browser sessions and session replays will be automatically linked. A new **Browser Sessions** tab appears in the browser test's test detail:
 
 {{< img src="ci/ci-browser-session-tab.png" alt="Browser Session Tab in Test Detail" style="width:100%;">}}
 
@@ -19,6 +19,9 @@ This RUM session has all the data that [RUM normally collects][2], so it lets yo
 {{< img src="ci/ci-browser-session-tab-errors.png" alt="Browser Session Tab Errors in Test Detail" style="width:100%;">}}
 
 ### Compatibility
+
+The CI Visibility - RUM integration is only available from these version of `dd-trace-js` and `browser-sdk`:
+
 * `dd-trace-js>=1.7.0`
 * `browser-sdk>=3.11.0`
 

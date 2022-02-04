@@ -166,13 +166,14 @@ it('renders a hello world', () => {
 
 ### CI Visibility - RUM
 
-If your page under test is instrumented using [RUM][4], a link between your `cypress` tests and the RUM sessions generated within those tests will be created automatically.
+If your page under test is instrumented using [RUM][4], your Cypress test results and their generated RUM browser sessions and session replays will be automatically linked. See more in [CI Visibility - RUM integration][5].
 
 
 [1]: https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests#Plugins-file
 [2]: https://docs.cypress.io/guides/references/configuration#cypress-json
 [3]: https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests#Support-file
-[4]: /real_user_monitoring/browser/
+[4]: /real_user_monitoring/browser/#setup
+[5]: /continuous_integration/guides/ci_visibility_rum_integration/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -256,9 +257,7 @@ If you are running tests in non-supported CI providers or with no `.git` folder,
 [Mocha >=9.0.0][8] uses an ESM-first approach to load test files. That means that if ES modules are used (for example, by defining test files with the `.mjs` extension), _the instrumentation is limited_. Tests are detected, but there isn't visibility into your test. For more information about ES modules, see the [NodeJS documentation][9].
 
 ### Browser tests
-The JavaScript tracer does not support browsers, so browser tests with `mocha` or `jest` do not provide visibility on the browser. For tests with `cypress`, `dd-trace` provides visibility on the node process running the test, but not on the browser.
-
-If you want visibility on the browser, consider [Real User Monitoring][10].
+Browser tests run with `mocha`, `jest`, `cucumber` and `cypress` are instrumented by `dd-trace`, but no visibility into the browser itself is provided (no network calls, user actions, page loads, etc.). If you want visibility into the browser process, consider [Real User Monitoring][10].
 
 ## Best practices
 
