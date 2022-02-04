@@ -115,7 +115,7 @@ The following example explains how to create a link from a user in a dashboard t
 
 #### Context
 
-You use Datadog to monitor your merchant website. Your customer support team uses a dashboard that your [RUM][17] and [Security][18] teams set up to proactively identify your most engaged customers—or customers with a troublesome experience, and potentially reach out to them.
+You use Datadog to monitor your merchant website. Your customer support team uses a dashboard that your [Frontend][17] and [Security][18] teams set up to proactively identify your most engaged customers—or customers with a troublesome experience, and potentially reach out to them.
 
 To accelerate this troubleshooting workflow, the customer support team would like a direct connection between dashboards and a support solution, for example: Zendesk.
 
