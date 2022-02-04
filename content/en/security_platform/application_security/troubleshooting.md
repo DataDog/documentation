@@ -13,11 +13,11 @@ further_reading:
   text: "Programming Language and Framework Compatibility"
 ---
 
-If you experience unexpected behavior with Datadog Application Security, there are a few common issues you can investigate and this guide may help resolve issues quickly. If you continue to have trouble, reach out to [Datadog support][1] for further assistance. 
+If you experience unexpected behavior with Datadog Application Security, there are common issues you can investigate, as mentioned below. If you continue to have trouble, reach out to [Datadog support][1] for further assistance. 
 
-## Confirm Application Security is running
+## Application Security data is not appearing in Datadog
 
-If `appsec_enabled` is `true` in the [tracer startup logs][2], then Application Security is running. 
+Check your [tracer startup logs][2]. If `appsec_enabled` is `true`, then Application Security is enabled and running.
 
 Alternatively, you can use the metric `datadog.apm.appsec_host` to check if Application Security is running.
 
@@ -65,7 +65,7 @@ To ensure that the Arachni test isn’t blocked:
 
 ### 2. Check if required tracer integrations are deactivated
 
-Application Security relies on certain tracer integrations, if they are deactivated then Application Security won't work. To see if there are deactivated integrations, look for `disabled_integrations` in the [startup logs][2].
+Application Security relies on certain tracer integrations. If they are deactivated, Application Security won't work. To see if there are deactivated integrations, look for `disabled_integrations` in your [startup logs][2].
 
 The required integrations vary by language.
 
@@ -88,11 +88,11 @@ For Java, the required integrations are the following:
 {{< /programming-lang >}}
 {{< programming-lang lang=".NET" >}}
 
-For .Net, the required integrations are the following:
+For ..NET, the required integrations are the following:
 
-- AspNet
+- ASP.NET
 
-**Note:** If AspNetCore is disabled, Application Security should still work with this framework.
+**Note:** If ASP.NET Core is disabled, Application Security should still work with this framework.
 
 {{< /programming-lang >}}
 {{< programming-lang lang="PHP" >}}
@@ -115,43 +115,42 @@ For Go, the required integrations are the following:
 {{< /programming-lang >}}
 {{< programming-lang lang="NodeJS" >}}
 
-For NodeJS, the required integrations are the following:
+For Node.js, the HTTP integration is required.
 
-- HTTP
 
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
-For Ruby, the required integrations are the following:
+For Ruby, the Rack integration is required.
 
-- Rack
 
 **Note:** Rack can be manually added or automatically added with the Rails or Sinatra integration. If manually added, the tracer middleware must appear before the security middleware in the Rack stack.
 
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
-### 3. Application to Datadog Agent
+### 3. Check Datadog Agent configuration
 
  To troubleshoot this step of the process, do the following: 
 
 - Check the details of the running Agent at this address `http://<agent-machine-name>:<agent-port>/info`, usually `http://localhost:8126/info`. 
-- Ensure there are no transmission errors related to spans in the [tracer logs][4]. 
-- If the agent is installed on a separate machine, check that `DD_AGENT_HOST` and optionally `DD_TRACE_AGENT_PORT` are set, or that `DD_TRACE_AGENT_URL` is set for the application / tracing library.
+- Ensure there are no Agent transmission errors related to spans in your [tracer logs][4]. 
+- If the Agent is installed on a separate machine, check that `DD_AGENT_HOST` and, optionally, `DD_TRACE_AGENT_PORT` are set, or that `DD_TRACE_AGENT_URL` is set for the application tracing library.
 
-### 4. Datadog Agent to backend
+### 4. Check Datadog Agent to backend configuration
 
-Application Security events are sent over [spans][5]. To confirm that spans are successfully transmitted to the backend, check that the tracer logs contain logs like this:
+Application Security events are sent over [spans][5]. To confirm that spans are successfully transmitted to Datadog, check that your tracer logs contain logs that look similar to this:
 
 ```
 2021-11-29 21:19:58 CET | TRACE | INFO | (pkg/trace/info/stats.go:111 in LogStats) | [lang:.NET lang_version:5.0.10 interpreter:.NET tracer_version:1.30.1.0 endpoint_version:v0.4] -> traces received: 2, traces filtered: 0, traces amount: 1230 bytes, events extracted: 0, events sampled: 0
 ```
 
-If spans are not being transmitted, then the tracer logs will contain logs like this:
+If spans are not being transmitted, then the tracer logs will contain logs similar to this:
 
 ```
 2021-11-29 21:18:48 CET | TRACE | INFO | (pkg/trace/info/stats.go:104 in LogStats) | No data received
 ```
+## Troubleshooting by language
 
 Below are additional troubleshooting steps for specific languages.
 
