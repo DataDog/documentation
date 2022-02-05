@@ -1,7 +1,7 @@
 ---
 title: Instrumenting your browser tests with RUM
 kind: guide
-aliases: /continuous_integration/guides/ci_visibility_rum_integration/
+aliases: /continuous_integration/guides/rum_integration/
 ---
 
 {{< site-region region="gov" >}}
@@ -10,10 +10,10 @@ aliases: /continuous_integration/guides/ci_visibility_rum_integration/
 
 ### Compatibility
 
-The CI Visibility - RUM integration is only available for these versions of `cypress`, `dd-trace` and `browser-sdk`:
+The CI Visibility - RUM integration is only available for these versions of `cypress`, `dd-trace-js` and `browser-sdk`:
 
 * `cypress` >= 6.7.0
-* `dd-trace` >= 1.7.0
+* `dd-trace-js` >= 1.7.0
 * `browser-sdk` >= 3.11.0
 
 **Note**: Only `cypress` is supported for this integration at the moment.
