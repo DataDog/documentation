@@ -5,7 +5,7 @@ further_reading:
     - link: "/continuous_integration/guides/find_flaky_tests/"
       tag: "Guide"
       text: "Finding Flaky Tests"
-    - link: "/continuous_integration/guides/ci_visibility_rum_integration/"
+    - link: "/continuous_integration/guides/rum_integration/"
       tag: "Guide"
       text: "Linking CI Visibility and RUM"
     - link: "/continuous_integration/troubleshooting/"
