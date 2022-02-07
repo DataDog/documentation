@@ -35,9 +35,11 @@ function reloadWistiaVidScripts(vidId) {
     }
 }
 
-function gtag(...args) {
+function gtag() {
     const dataLayer = window.dataLayer || [];
-    dataLayer.push(args);
+    
+    // eslint-disable-next-line prefer-rest-params
+    dataLayer.push(arguments);
 }
 
 const getCookieByName = (name) => {
