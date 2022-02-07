@@ -54,4 +54,4 @@ Chaque exemple d'erreur contient les informations dont vous avez besoin pour mie
 - Des données sur la santé du host ou du conteneur sous-jacent au moment de l'apparition de l'erreur sont également indiquées.
 
 [1]: /fr/tracing/trace_explorer/#live-search-for-15-minutes
-[2]: /fr/tracing/trace_retention_and_ingestion/#retention-filters
+[2]: /fr/tracing/trace_retention/#retention-filters
