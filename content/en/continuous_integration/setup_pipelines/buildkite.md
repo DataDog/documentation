@@ -36,7 +36,7 @@ The [Pipelines][3] and [Pipeline Executions][4] pages populate with data after t
 ## Setting custom tags
 
 Custom tags can be added to buildkite traces by using the `buildkite-agent meta-data set` command.
-Any meta-data tags with a key starting by `dd.` are added to the job and pipeline spans.
+Any meta-data tags with a key starting by `dd_tags.` are added to the job and pipeline spans.
 
 The YAML below illustrates a simple pipeline where the following custom tags are added to the
 resulting trace in Datadog:
@@ -49,8 +49,8 @@ which the tag was created.
 
 ```yaml
 steps:
-  - command: buildkite-agent meta-data set "dd.team" "backend"
-  - command: go version | buildkite-agent meta-data set "dd.go.version"
+  - command: buildkite-agent meta-data set "dd_tags.team" "backend"
+  - command: go version | buildkite-agent meta-data set "dd_tags.go.version"
     label: Go version
   - commands: go test ./...
     label: Run tests
