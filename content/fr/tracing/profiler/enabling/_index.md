@@ -12,11 +12,6 @@ further_reading:
     tag: Documentation
     text: Résoudre les problèmes rencontrés en utilisant le profileur
 ---
-{{< site-region region="us5" >}}
-<div class="alert alert-warning">
-  Le profileur en continu n'est pas disponible pour le site Datadog {{< region-param key="dd_site_name" >}}.
-</div>
-{{< /site-region >}}
 
 Le profileur est fourni dans les bibliothèques de tracing Datadog. Si vous utilisez déjà [l'APM pour recueillir des traces][1] pour votre application, vous pouvez ignorer l'installation de la bibliothèque et passer directement à l'activation du profileur.
 

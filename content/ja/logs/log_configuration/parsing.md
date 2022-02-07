@@ -123,7 +123,7 @@ MyParsingRule %{word:user} connected on %{date("MM/dd/yyyy"):connect_date}
 `mac`
 : MAC アドレスに一致します。
 
-`mac`
+`ipv4`
 : IPV4 に一致します。
 
 `ipv6`

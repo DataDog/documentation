@@ -85,11 +85,11 @@ Il vous suffit de fournir la clé et la région d'API Datadog à Studio pour con
 
    ![Activation des intégrations][6]
 
-6. Accédez à la page Metrics Explorer sur Datadog pour commencer à consulter les métriques transmises. Les métriques apparaissent dans un délai de cinq minutes.
+6. Accédez à la page Metrics Explorer sur Datadog pour commencer à visualiser vos métriques. Elles apparaissent dans un délai de cinq minutes.
 
 ### Utilisation
 
-Consultez la [documentation sur les intégrations Apollo][7] pour en savoir plus sur son utilisation.
+Consultez la [documentation sur les intégrations Apollo][7] (en anglais) pour en savoir plus sur leur utilisation.
 
 ## Données collectées
 
@@ -109,9 +109,6 @@ L'intégration Apollo n'inclut aucun check de service pour le moment.
 
 Besoin d'aide ? Contactez [l'assistance Datadog][9].
 
-## Pour aller plus loin
-
-Pour en savoir plus sur la surveillance d'infrastructure et pour découvrir toutes nos intégrations, rendez-vous sur [notre blog][10].
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/apollo/images/metrics.png
 [2]: https://app.datadoghq.com/account/settings#integrations
@@ -122,4 +119,3 @@ Pour en savoir plus sur la surveillance d'infrastructure et pour découvrir tout
 [7]: https://www.apollographql.com/docs/studio/datadog-integration/
 [8]: https://github.com/DataDog/integrations-extras/blob/master/apollo/metadata.csv
 [9]: https://docs.datadoghq.com/fr/help/
-[10]: https://www.datadoghq.com/blog

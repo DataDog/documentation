@@ -148,7 +148,7 @@ DD_ENV=ci DD_SERVICE=my-ui-app npm test
 
 ### Add extra tags
 
-To add additional information to your tests such as the responsible team, use `cy.task('dd:addTags', { yourTags: 'here' })` in your test or hooks. 
+To add additional information to your tests, such as the team owner, use `cy.task('dd:addTags', { yourTags: 'here' })` in your test or hooks.
 
 For example:
 
@@ -164,9 +164,16 @@ it('renders a hello world', () => {
 {{< /code-block >}}
 
 
+### RUM integration
+
+If the browser application being tested is instrumented using [RUM][4], your Cypress test results and their generated RUM browser sessions and session replays are automatically linked. Learn more in the [RUM integration][5] guide.
+
+
 [1]: https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests#Plugins-file
 [2]: https://docs.cypress.io/guides/references/configuration#cypress-json
 [3]: https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests#Support-file
+[4]: /real_user_monitoring/browser/#setup
+[5]: /continuous_integration/guides/rum_integration/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -250,9 +257,9 @@ If you are running tests in non-supported CI providers or with no `.git` folder,
 [Mocha >=9.0.0][8] uses an ESM-first approach to load test files. That means that if ES modules are used (for example, by defining test files with the `.mjs` extension), _the instrumentation is limited_. Tests are detected, but there isn't visibility into your test. For more information about ES modules, see the [NodeJS documentation][9].
 
 ### Browser tests
-The JavaScript tracer does not support browsers, so browser tests with `mocha` or `jest` do not provide visibility on the browser. For tests with `cypress`, `dd-trace` provides visibility on the node process running the test, but not on the browser. 
+Browser tests executed with `mocha`, `jest`, `cucumber` and `cypress` are instrumented by `dd-trace-js`, but visibility into the browser session itself is not provided by default (for example, network calls, user actions, page loads, and so on).
 
-If you want visibility on the browser, consider [Real User Monitoring][10].
+If you want visibility into the browser process, consider using [Real User Monitoring][10]. When using Cypress, test results and their generated RUM browser sessions and session replays are automatically linked. Learn more in the [RUM integration][11] guide.
 
 ## Best practices
 
@@ -271,14 +278,14 @@ Avoid this:
 })
 {{< /code-block >}}
 
-And use [`test.each`][11] instead:
+And use [`test.each`][12] instead:
 {{< code-block lang="javascript" >}}
 test.each([[1,2,3], [3,4,7]])('sums correctly %i and %i', (a,b,expected) => {
   expect(a+b).toEqual(expected)
 })
 {{< /code-block >}}
 
-For `mocha`, use [`mocha-each`][12]:
+For `mocha`, use [`mocha-each`][13]:
 {{< code-block lang="javascript" >}}
 const forEach = require('mocha-each');
 forEach([
@@ -307,5 +314,6 @@ When you use this approach, both the testing framework and CI Visibility can tel
 [8]: https://github.com/mochajs/mocha/releases/tag/v9.0.0
 [9]: https://nodejs.org/api/packages.html#packages_determining_module_system
 [10]: /real_user_monitoring/browser/
-[11]: https://jestjs.io/docs/api#testeachtablename-fn-timeout
-[12]: https://github.com/ryym/mocha-each
+[11]: /continuous_integration/guides/rum_integration/
+[12]: https://jestjs.io/docs/api#testeachtablename-fn-timeout
+[13]: https://github.com/ryym/mocha-each
