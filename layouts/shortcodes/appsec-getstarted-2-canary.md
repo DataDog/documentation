@@ -4,9 +4,9 @@
     <div>
     <pre><code>for ((i=1;i<=200;i++)); <br>do<br># Target existing service’s routes<br>curl https://your-application-url/existing-route -A dd-test-scanner-log;<br># Target non existing service’s routes<br>curl https://your-application-url/non-existing-route -A dd-test-scanner-log;<br>done</code></pre></div>
 
-    A few minutes after you enable your application and exercise it, **threat information appears in the [Application Trace and Signals Explorer][201] in Datadog**.
+    **Note**: The `dd-test-scanner-log` value is supported in the most recent releases and in the application security event configuration file version >= 1.2.5.
 
-    Note: The "dd-test-scanner-log" value is supported in the most recent releases and in the application security event configuration file version >= 1.2.5.
+    A few minutes after you enable your application and exercise it, **threat information appears in the [Application Trace and Signals Explorer][201] in Datadog**.
 
 [201]: https://app.datadoghq.com/security/appsec
 [202]: /security_platform/default_rules/#cat-application-security
