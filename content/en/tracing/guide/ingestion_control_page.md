@@ -8,9 +8,9 @@ description: "Learn how to control Ingestion and Indexing rates with Tracing wit
 ---
 
 <div class="alert alert-warning">
-  Ingestion Control page v2 is in private beta. Contact <a href="/help/">Datadog support</a> to request access for your organization. The support team sends you a notification when the new ingestion control page is enabled for your organization. The Ingestion Control page v2 replaces the former <a href="/tracing/trace_retention_and_ingestion/#ingestion-controls">Ingestion Controls</a></div>
+  Ingestion Control page v2 is in private beta. Contact <a href="/help/">Datadog support</a> to request access for your organization. The support team will send you a notification when the new ingestion control page is enabled for your organization. The Ingestion Control page v2 replaces the former <a href="/tracing/trace_retention_and_ingestion/#ingestion-controls">Ingestion Controls</a></div>
 
-The Ingestion Control page gives agent and tracing librairies level visibility on the ingestion configuration of your applications and services. From the [ingestion control configuration page][1] , you can :
+The Ingestion Control page gives agent and tracing libraries level visibility on the ingestion configuration of your applications and services. From the [ingestion control configuration page][1] , you can :
 - Investigate and act on potential ingestion configuration issues (Agent limited CPU or RAM resources)
 - Check service level ingestion configuration and adjust traces-per-second sampling rates for high throughput services.
 - Understand which ingestion mechanisms are responsible for sampling most of your traces.
