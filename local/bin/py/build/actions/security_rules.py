@@ -71,9 +71,8 @@ def security_rules(content, content_dir):
     logger.info("Starting security rules action...")
     global_aliases = []
     for file_name in chain.from_iterable(glob.glob(pattern, recursive=True) for pattern in content["globs"]):
-        print(file_name)
-
         data = None
+        
         if file_name.endswith(".json"):
             with open(file_name, mode="r+") as f:
                 try:
