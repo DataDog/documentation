@@ -135,6 +135,9 @@ Console.WriteLine(ex);
 DogStatsd.Increment("sample.startup");
 ```
 
+**Note**: To send only custom metrics (while disabling tracing) set the following variables in your application's config:
+  - Set `DD_TRACE_ENABLED` to `false`.
+  - Set `DD_AAS_ENABLE_CUSTOM_METRICS` to `true`.
 Learn more about [custom metrics][10].
 
 
