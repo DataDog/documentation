@@ -299,7 +299,7 @@ backend datadog-profiles
     balance roundrobin
     mode tcp
     # The following configuration is for HAProxy 1.8 and newer
-    server-template mothership 5 profile.agent.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify none check resolvers my-dns init-addr none resolve-prefer ipv4
+    server-template mothership 5 intake.profile.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify none check resolvers my-dns init-addr none resolve-prefer ipv4
     # Uncomment the following configuration for older HAProxy versions
     # server mothership profile.agent.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify none
 
