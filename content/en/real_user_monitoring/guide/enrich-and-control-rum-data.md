@@ -35,15 +35,15 @@ The `event.type` property lets you identify the type of the event:
 
 ### Context
 The context is made of the Browser APIs that trigger the event creation. The context values depend on the `event.type`:
-| RUM event type | Context |
-|------------------|---------------------------|
-| view | [Location][3] |
-| action | [Event][4] |
-| resource (XHR) | [XMLHttpRequest][5] and [PerformanceResourceTiming][6] |
-| resource (Fetch) | [Request][7], [Response][8], and [PerformanceResourceTiming][6] |
-| resource (Other) | [PerformanceResourceTiming][6] |
-| error | [Error][9] or any other value raised as an error |
-| long_task | [PerformanceLongTaskTiming][10] |
+| RUM event type       | Context                                                         |
+|----------------------|-----------------------------------------------------------------|
+| View                 | [Location][3]                                                   |
+| Action               | [Event][4]                                                      |
+| Resource (XHR)       | [XMLHttpRequest][5] and [PerformanceResourceTiming][6]          |
+| Resource (Fetch)     | [Request][7], [Response][8], and [PerformanceResourceTiming][6] |
+| Resource (Other)     | [PerformanceResourceTiming][6]                                  |
+| Error                | [Error][9] or any other value raised as an error                |
+| Long Task            | [PerformanceLongTaskTiming][10]                                 |
 
 More details about the structure of context objects is available in the [Browser SDK repository][11].
 
