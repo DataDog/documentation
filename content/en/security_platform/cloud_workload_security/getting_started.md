@@ -82,6 +82,8 @@ There are two types of monitoring that the Datadog Agent uses for Cloud Workload
                 value: "true"
               - name: HOST_ROOT
                 value: "/host/root"
+              - name: HOST_ETC
+                value: "/host/root/etc"
           volumeMounts:
               - name: passwd
                 mountPath: /etc/passwd
