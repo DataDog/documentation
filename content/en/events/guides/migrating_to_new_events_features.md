@@ -10,7 +10,7 @@ aliases:
 
 The Events Explorer replaces the Event Stream, one of Datadog's oldest features. The new Event query syntax requires migration of Event monitors, dashboard widgets, and any other features that query Events. 
 
-The introduction of the Events Explorer and its associated changes means that Event query syntax, explorer and analytics views, processing pipelines, and other features work the same way they do for other Datadog products such as Logs. See [Events Explorer][1] for more details. 
+The introduction of the Events Explorer and its associated changes means that Event features work similarly to other Datadog products. Event query syntax, explorer and analytics views, processing pipelines and other features look like their counterparts in Logs or APM Traces. See [Events Explorer][1] for more details.
 
 ## What this means for your organization
 
@@ -25,17 +25,22 @@ This guide describes how to migrate your organization’s event monitors and das
 ### Migrate data configured externally (Terraform, API)
 If you manage your Datadog configuration with external, API-based scripts or tools such as Terraform, update your dashboard and monitor definitions in your configuration file. Otherwise the old query syntax is applied again at the next deployment and overwrites updated queries. Review the syntax changes described below and use the [migration script][3] to see what converted queries look like. [Contact Support][4] for assistance at this stage.
 
-### Datadog migrates data stored in the cloud
-Datadog is responsible for migrating data stored on its servers. You do not need to take any action for configuration stored directly in Datadog. Datadog automatically migrates Event data contained in monitors and dashboard widgets, including the event stream, timeline, and overlays.
+### Datadog migrates data stored in Datadog servers
+Datadog is responsible for migrating data stored in its servers. You do not need to take any action for configuration stored directly in Datadog. Datadog automatically migrates Event data contained in monitors and dashboard widgets, including the event stream, timeline, and overlays.
 
-### Post migration
+## Post migration
+
+### Access
+
 You can access the new Explorer and other features through the Events menu in the main navigation, alongside the existing Stream.
 
 {{< img src="events/guides/navigation.png" alt="Events navigation" style="width:100%;" >}}
 
-Datadog automatically routes queries to the correct backend. Old queries continue to go to the old backend, and migrated queries go to the new backend, so you can migrate safely. 
+### User impact
 
-After Datadog enables Events Explorer for your organization, you can no longer create monitors or dashboard widgets with the legacy query syntax. Calls to the legacy API fail with an error, but your existing monitors and dashboards continue reporting. Legacy event queries within monitors and dashboards stop reporting after the sunset date of May 1, 2022.
+* Datadog automatically routes Event queries to the correct backend. Old queries continue to go to the old backend, and migrated queries go to the new backend, so you can migrate safely.
+* Users may continue to create legacy monitors through the UI and API during the transition period. After the sunset date, which is still pending, users must create event monitors with the new query syntax.
+* Event dashboard widgets must use the new query syntax.
 
 ## Details of the changes
 
