@@ -86,7 +86,7 @@ To record steps with a `Mobile Small` or `Tablet` viewport, selecting `Mobile Sm
 
 Additionally, Datadog's test browsers run in **headless**, meaning Browser tests do not support some features. For example, Browser tests do not support `touch` and cannot use `touch` to detect whether the website should appear with its mobile design.
 
-#### My browser test has a `None or multiple elements detected` step warning
+#### `None or multiple elements detected` step warning appears in browser tests
 
 One of your browser test steps is showing a `None or multiple elements detected` step warning:
 
