@@ -54,4 +54,4 @@ beta: false
 - この特定のエラーが発生したときの、基盤となるホストまたはコンテナの状態に関するインサイト。
 
 [1]: /ja/tracing/trace_explorer/#live-search-for-15-minutes
-[2]: /ja/tracing/trace_retention_and_ingestion/#retention-filters
+[2]: /ja/tracing/trace_retention/#retention-filters
