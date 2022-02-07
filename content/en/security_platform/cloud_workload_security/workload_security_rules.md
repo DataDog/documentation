@@ -3,8 +3,8 @@ title: Cloud Workload Security Rules
 kind: documentation
 further_reading:
 - link: "/security_platform/cloud_workload_security/getting_started"
-  tag: "Blog"
-  text: "Get Started with Cloud Runtime Security"
+  tag: "Documentation"
+  text: "Get Started with Cloud Workload Security"
 - link: "/security_platform/cloud_workload_security/agent_expressions"
   tag: "Documentation"
   text: "Agent Expressions"

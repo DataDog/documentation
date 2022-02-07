@@ -41,7 +41,7 @@ Click **Test URL** to try out the request configuration. A response preview is d
 
 ### Define assertions
 
-Assertions define what an expected test result is. When hitting `Test URL`, basic assertions on `latency`, `packet loss`, and `packet received` are added. You must define at least one assertion for your test to monitor.
+Assertions define what an expected test result is. After you click **Test URL**, basic assertions on `latency`, `packet loss`, and `packet received` are added. You must define at least one assertion for your test to monitor.
 
 | Type          | Aggregation    |Operator                                                                               | Value Type       |
 |-----------------|----------------|------------------------------------------------------------------------|------------------|
@@ -72,7 +72,7 @@ You can set alert conditions to determine the circumstances under which a test s
 
 #### Alerting rule
 
-When you set the alert conditions to: `An alert is triggered if any assertion fails for X minutes from any n of N locations`, an alert is triggered only if these two conditions are true:
+When you set the alert conditions to: `An alert is triggered if your test fails for X minutes from any n of N locations`, an alert is triggered only if these two conditions are true:
 
 * At least one location was in failure (at least one assertion failed) during the last *X* minutes.
 * At one moment during the last *X* minutes, at least *n* locations were in failure.
@@ -106,7 +106,7 @@ Click **Save** to save your test and have Datadog start executing it.
 
 ### Create local variables
 
-You can create local variables by clicking on **Create Local Variable** at the top right hand corner of your test configuration form. You can define their values from one of the below available builtins:
+You can create local variables by clicking **Create Local Variable** at the top right hand corner of your test configuration form. You can define their values from one of the below available builtins:
 
 `{{ numeric(n) }}`
 : Generates a numeric string with `n` digits.

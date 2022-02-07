@@ -37,7 +37,7 @@ The example below demonstrates the creation of a browser test that maps a user's
 3. Define your browser test:
 
     - Add the URL of the website you want to monitor. If you don’t know what to start with, you can use `https://www.shopist.io`, a test e-commerce web application.
-    - Select **Advanced Options** to use custom request headers, authentication credentials, or cookies. 
+    - Select **Advanced Options** to set custom request options, certificates, authentication credentials, and more. 
       In this example, no specific advanced option is needed.
     - Name your test and set tags to it such as `env:prod` and `app:shopist`. Tags allow you to keep your test suite organized and quickly find tests you're interested in on the homepage.
     - Choose the browsers and devices you want to test with. 

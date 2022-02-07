@@ -136,6 +136,8 @@ The following table presents the list of collected resources and the minimal Age
 | CronJobs | 7.27.0 | 1.13.1 | 2.15.5 |
 | DaemonSets | 7.27.0 | 1.14.0 | 2.16.3 |
 | Statefulsets | 7.27.0 | 1.15.0 | 2.20.1 |
+| PersistentVolumes | 7.27.0 | 1.18.0 | 2.30.4 |
+| PersistentVolumeClaims | 7.27.0 | 1.18.0 | 2.30.4 |
 
 ### Instructions for previous Agent and Cluster Agent versions.
 
