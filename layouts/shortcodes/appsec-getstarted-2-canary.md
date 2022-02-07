@@ -6,7 +6,7 @@
 
     A few minutes after you enable your application and exercise it, **threat information appears in the [Application Trace and Signals Explorer][201] in Datadog**.
 
-    Note: The "dd-test-scanner-log" value is supported in the most recent releases and in the application security event configuration file version >= 1.2.5.
+    Note: The `dd-test-scanner-log` value is supported in the most recent releases and in the application security event configuration file version >= 1.2.5.
 
 [201]: https://app.datadoghq.com/security/appsec
 [202]: /security_platform/default_rules/#cat-application-security
