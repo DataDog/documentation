@@ -65,7 +65,7 @@ Four tabs are below the profile header:
 
 In the **Profiles** tab, you can see all profile types available for a given language. Depending on the language, the information collected about your profile differs.
 
-{{< programming-lang-wrapper langs="java,python,go,ruby,dotnet" >}}
+{{< programming-lang-wrapper langs="java,python,go,ruby,nodejs,dotnet,php,linux" >}}
 {{< programming-lang lang="java" >}}
 
 {{< img src="tracing/profiling/profile.png" alt="A specific profile">}}
@@ -73,19 +73,19 @@ In the **Profiles** tab, you can see all profile types available for a given lan
 Once enabled, the following profile types are collected:
 
 
-CPU in Java Code
+CPU
 : Shows the time each method spent running on the CPU. It includes your code that runs in the JVM (Java, Kotlin, etc), but not JVM operations or native code called from within the JVM.
 
-Allocation
+Allocations
 : Shows the amount of heap memory allocated by each method, including allocations which were subsequently freed.
 
 Wall Time in Native Code
 : Shows the elapsed time spent in native code. Elapsed time includes time when code is running on CPU, waiting for I/O, and anything else that happens while the method is running. This profile does not include time spent running JVM bytecode, which is typically most of your application code.
 
-Class load
+Class Load
 : Shows the number of classes loaded by each method.
 
-Exception Profile
+Thrown Exceptions
 : Shows the number of errors and exceptions thrown by each method.
 
 File I/O
@@ -106,26 +106,32 @@ Once enabled, the following profile types are collected:
 CPU
 : Shows the time each function spent running on the CPU, including Python and native code.
 
-Allocation
-: Shows the amount of heap memory allocated by each function, including allocations which were subsequently freed - only supported with Python 3.
-
-Allocation Count
-: Shows the number of heap allocations made by each function, including allocations which were subsequently freed.
-
 Wall Time
 : Shows the elapsed time used by each function. Elapsed time includes time when code is running on CPU, waiting for I/O, and anything else that happens while the function is running.
 
-Exceptions
+Heap Live Size
+: Shows the amount of heap memory allocated by each function that has not been garbage collected (yet). This is useful for investigating the overall memory usage of your service and identifying potential memory leaks.
+
+Allocated Memory
+: Shows the amount of heap memory allocated by each function, including allocations which were subsequently freed - only supported with Python 3.
+
+Allocations
+: Shows the number of heap allocations made by each function, including allocations which were subsequently freed.
+
+Thrown Exceptions
 : Shows the number of caught or uncaught exceptions raised by each function.
 
-Lock
-: Shows the time each function spent in locking (waiting for or holding a lock) or the number of times a function was observed locking/unlocking a lock.
+Lock Wait Time
+: Shows the time each function spent waiting for a lock.
 
-Uncaught Exceptions
-: Shows the exceptions that were not caught by any try/except block.
+Locked Time
+: Shows the time each function spent holding a lock.
 
-Exceptions
-: Shows the exceptions that were raised during program execution.
+Lock Acquires
+: Shows the number of times each function acquired a lock.
+
+Lock Releases
+: Shows the number of times each function released a lock.
 
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
@@ -157,9 +163,9 @@ Block
 Goroutines
 : Shows a snapshot of the number of goroutines currently executing the same functions (On CPU as well as waiting Off-CPU). An increasing number of goroutines between snapshots can indicate that the program is leaking goroutines. In most healthy applications this profile is dominated by worker pools and shows the number of goroutines they utilize. Applications that are extremely latency sensitive and utilize a large number of goroutines (> 10.000) should be aware that enabling this profile requires O(N) stop-the-world pauses. The pauses occur only once every profiling period (default 60s) and normally last for `~1µsec` per goroutine. Typical applications with a p99 latency SLO of `~100ms` can generally ignore this warning. See our [Goroutine Profiling in Go][2] research for more in-depth information.
 
-
 #### Delta profiles
-<div class="alert alert-info"><strong>Note</strong>: In Go profiler versions before <code>1.33.0</code>, Allocations, Allocated memory, Mutex, and Block metrics are shown as measures <em>since the process was started</em>, as opposed to <em>during the profiling period</em>. The change to delta profiles in version <code>1.33.0</code> lets you see how these measures are changing instead of accumulating. The accumulated measures are collected and you can download them from the <strong>Download Profile Data</strong> icon by selecting the <code>block.pprof</code>, <code>heap.pprof</code>, and <code>mutex.pprof</code> options. <br/><br/>Storing the accumulated measures is an option Datadog might stop providing in future releases. <a href="/help/">Contact Support</a> to discuss your use case if you rely on it.</div>
+<div class="alert alert-info"><strong>Note</strong>: In Go profiler versions before <code>1.33.0</code>, Allocations, Allocated Memory, Mutex, and Block metrics are shown as measures <em>since the process was started</em>, as opposed to <em>during the profiling period</em>. The change to delta profiles in version <code>1.33.0</code> lets you see how these measures are changing instead of accumulating. The accumulated measures are collected and you can download them from the <strong>Download Profile Data</strong> icon by selecting the <code>block.pprof</code>, <code>heap.pprof</code>, and <code>mutex.pprof</code> options. <br/><br/>Storing the accumulated measures is an option Datadog might stop providing in future releases. <a href="/help/">Contact Support</a> to discuss your use case if you rely on it.</div>
+
 
 [1]: https://github.com/DataDog/go-profiler-notes/blob/main/block.md
 [2]: https://github.com/DataDog/go-profiler-notes/blob/main/goroutine.md
@@ -175,6 +181,17 @@ Wall Time
 : Shows the elapsed time used by each function. Elapsed time includes time when code is running on CPU, waiting for I/O, and anything else that happens while the function is running.
 
 {{< /programming-lang >}}
+{{< programming-lang lang="nodejs" >}}
+
+Once enabled, the following profile types are collected:
+
+Wall Time
+: Shows the elapsed time used by each function. Elapsed time includes time when code is running on CPU, waiting for I/O, and anything else that happens while the function is running.
+
+Heap Live Size
+: Shows the amount of heap memory allocated by each function that has not been garbage collected (yet). This is useful for investigating the overall memory usage of your service and identifying potential memory leaks.
+
+{{< /programming-lang >}}
 {{< programming-lang lang="dotnet" >}}
 
 {{< img src="tracing/profiling/profile_dotnet.png" alt="A .NET profile">}}
@@ -183,6 +200,22 @@ Once enabled, the following profile type is collected:
 
 Wall Time
 : Shows the elapsed time spent in managed methods. Elapsed time includes time when code is running on CPU, waiting for I/O, and anything else that happens while the method is running. 
+
+{{< /programming-lang >}}
+{{< programming-lang lang="php" >}}
+
+Once enabled, the following profile types are collected:
+
+Wall Time
+: Shows the elapsed time used by each function. Elapsed time includes time when code is running on CPU, waiting for I/O, and anything else that happens while the function is running.
+
+{{< /programming-lang >}}
+{{< programming-lang lang="linux" >}}
+
+Once enabled, the following profile types are collected:
+
+CPU
+: Shows the time each function spent running on the CPU.
 
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}

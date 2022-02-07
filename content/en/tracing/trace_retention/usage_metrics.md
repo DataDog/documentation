@@ -1,7 +1,19 @@
 ---
 title: Usage Metrics
 kind: documentation
+aliases:
+    - /tracing/trace_retention_and_ingestion/usage_metrics/
 description: "Learn how to monitor your Tracing without Limits usage."
+further_reading:
+- link: "/tracing/trace_ingestion/mechanisms"
+  tag: "Documentation"
+  text: "Ingestion Mechanisms"
+- link: "/tracing/trace_ingestion/ingestion_controls/"
+  tag: "Documentation"
+  text: "Ingestion Controls"
+- link: "/tracing/trace_retention/"
+  tag: "Documentation"
+  text: "Trace Retention"
 ---
 
 If, when you monitor your APM ingested and indexed span usage, the numbers are not in line with your expectations, or you want to change your ingestion or retention rates, see the [retention filters][1] or [ingestion control][2] documentation.
@@ -31,17 +43,21 @@ The default [Trace Analytics Dashboard][5] has several groups of widgets to see 
 
 {{< img src="tracing/trace_indexing_and_ingestion/RetentionFilters.png" style="width:100%;" alt="Span Indexing" >}}
 
-Each retention filter set on your services, including the default [Datadog Intelligent Retention Filter][6], results in an _increase_ to the number of Indexed Spans for your Datadog account.
+Each retention filter set on your services results in an _increase_ to the number of Indexed Spans for your Datadog account.
 
 Because Indexed Spans can impact your bill, the 'Spans Indexed' column appears alongside each filter you set, showing the number of spans indexed based on the timeframe selected for that filter.
 
-**Note:** The Datadog Intelligent Retention Filter on its own does not cause any billing implications outside of the included Indexed Spans with your APM Host pricing.
+**Note:** The [Datadog Intelligent Retention Filter][6] does not have any billing implications.
 
 **Note**: Admin rights are required to create, modify, or disable retention filters.
 
-[1]: /tracing/trace_retention_and_ingestion/#retention-filters
-[2]: /tracing/trace_retention_and_ingestion/#ingestion-controls
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /tracing/trace_retention/#retention-filters
+[2]: /tracing/trace_ingestion/ingestion_controls
 [3]: https://www.datadoghq.com/pricing/?product=apm#apm
 [4]: /account_management/billing/apm_distributed_tracing/
 [5]: https://app.datadoghq.com/dashboard/lists?q=APM+Traces+-+Estimated+Usage
-[6]: /tracing/trace_retention_and_ingestion/#datadog-intelligent-retention-filter
+[6]: /tracing/trace_retention/#datadog-intelligent-retention-filter

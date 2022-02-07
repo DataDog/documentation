@@ -61,10 +61,20 @@ You can add more property fields to your settings by selecting one of your exist
 
 The integrations settings provide you with additional configurations for setting up the Incident Management features of the Datadog [Slack App][7]. There are two settings to configure:
 
-1. Enabling automatic Slack channel creation for every new incident
+1. Enabling automatic Slack channel creation for every new incident and the name template for those channels
 2. Enabling the incident updates channel
 
 You can configure either of these settings to use any Slack workspace you have configured in your organization's [Slack integration tile][8].
+
+By default, dedicated incident channels use `incident-{public_id}` as their name template. 
+
+The `incident` prefix can be changed to any string composed of *lowercase* letters, numbers, and dashes. Datadog recommends you keep your prefix short as Slack enforces an 80 character limit in channel names. Aside from `{public_id}`, you can also add `{date_created}` and `{title}` as variables in the channel name template. 
+
+**Notes:**
+
+- Changing your channel name template does not rename any existing incident channels. The new name template only applies going forward.
+- If you choose to uncheck `{public_id}`, there is a chance two incidents will have duplicate channel names. In this case, the Datadog Slack App automatically appends a random lowercase letter or number to the end of your channel name to prevent the channel creation process from failing. 
+- If you choose to check `{title}`, the Datadog Slack App automatically renames the channel if an incident's title changes.
 
 The incident updates channel sends a message whenever an incident is declared or changes status, severity, or incident commander.
 

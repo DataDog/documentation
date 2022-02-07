@@ -130,7 +130,7 @@ function hasParentLi(el) {
     }
 }
 
-function getPathElement() {
+function getPathElement(event = null) {
     const domain = window.location.origin;
     let path = window.location.pathname;
     const activeMenus = document.querySelectorAll('.side .sidenav-nav-main .active, header .sidenav-nav-main .active');
@@ -178,7 +178,20 @@ function getPathElement() {
             'header .nav-top-level > [data-path*="integrations"]'
         );
     }
-    
+
+    // if security rules section that has links to hashes, #cat-workload-security etc. try and highlight correct sidenav
+    if (path.includes('security_platform/default_rules')) {
+        const ref = ((event) ? event.target.href : window.location.hash) || window.location.hash;
+        if(ref) {
+          sideNavPathElement = document.querySelector(
+            `.side [href*="${ref}"]`
+          );
+          mobileNavPathElement = document.querySelector(
+            `header [href*="${ref}"]`
+          );
+        }
+    }
+
     if (sideNavPathElement) {
         sideNavPathElement.classList.add('active');
         hasParentLi(sideNavPathElement);
@@ -206,7 +219,7 @@ function closeNav(){
 
 function updateSidebar(event) {
     closeNav();
-    getPathElement();
+    getPathElement(event);
 
     const isLi = event.target.nodeName === 'LI';
 
@@ -344,6 +357,16 @@ function rulesListClickHandler(event, pathString) {
             loadPage(targetURL);
             window.history.pushState({}, '' /* title */, targetURL);
             updateSidebar(event);
+        }
+    }
+    // if security rules section that has links to hashes, #cat-workload-security etc. try and highlight correct sidenav
+    // by passing the relevant sidenav target to updateSidebar()
+    if (event.target.matches('.controls a')) {
+        const split = event.target.href.split('#')
+        const targetURL = (split.length > 1) ? `#${split[1]}` : event.target.href;
+        const target = document.querySelector(`.side [href*="${targetURL}"]`);
+        if (target) {
+          updateSidebar({target: target});
         }
     }
 }

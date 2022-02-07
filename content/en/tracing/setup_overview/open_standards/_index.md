@@ -339,22 +339,22 @@ experimental:
         http:
 ```
 
-The `receiver` section follows the [OpenTelemetry Collector OTLP receiver configuration schema][25].
+The `receiver` section follows the [OpenTelemetry Collector OTLP receiver configuration schema][18].
 You can also configure the endpoints by providing the port through the `DD_OTLP_GRPC_PORT` and `DD_OTLP_HTTP_PORT` environment variables. These must be passed to both the core Agent and trace Agent. 
 
-Check [the OpenTelemetry instrumentation documentation][18] to understand how to point your instrumentation to the Agent, and [contact Datadog support][19] to get more information on this feature and provide feedback.
+Check [the OpenTelemetry instrumentation documentation][19] to understand how to point your instrumentation to the Agent, and [contact Datadog support][20] to get more information on this feature and provide feedback.
 
 ## Connect OpenTelemetry traces and logs
 
-To connect OpenTelemetry traces and logs so that your application logs monitoring and analysis has the additional context provided by the OpenTelemetry traces, see [Connect OpenTelemetry Traces and Logs][20] for language specific instructions and example code.
+To connect OpenTelemetry traces and logs so that your application logs monitoring and analysis has the additional context provided by the OpenTelemetry traces, see [Connect OpenTelemetry Traces and Logs][21] for language specific instructions and example code.
 
 ## Other alternatives
 
 Datadog recommends you use the OpenTelemetry Collector Datadog exporter or the OTLP Ingest in the Datadog Agent in conjunction with OpenTelemetry tracing clients. However, if that doesn't work for you:
 
-  - Each of the supported languages also has support for [sending OpenTracing data to Datadog][21].
+  - Each of the supported languages also has support for [sending OpenTracing data to Datadog][22].
 
-  - [Python][22], [Ruby][23], and [NodeJS][24] also have language-specific OpenTelemetry Datadog span exporters, which export traces directly from OpenTelemetry tracing clients to a Datadog Agent.
+  - [Python][23], [Ruby][24], and [NodeJS][25] also have language-specific OpenTelemetry Datadog span exporters, which export traces directly from OpenTelemetry tracing clients to a Datadog Agent.
 
 ## Further Reading
 
@@ -377,11 +377,11 @@ Datadog recommends you use the OpenTelemetry Collector Datadog exporter or the O
 [15]: https://github.com/open-telemetry/opentelemetry-collector/blob/main/docs/design.md#running-as-an-agent
 [16]: https://github.com/open-telemetry/opentelemetry-collector/blob/main/docs/design.md#running-as-a-standalone-collector
 [17]: https://github.com/open-telemetry/opentelemetry-collector/blob/main/docs/images/opentelemetry-service-deployment-models.png
-[18]: https://opentelemetry.io/docs/instrumentation/
-[19]: https://docs.datadoghq.com/help/
-[20]: /tracing/connect_logs_and_traces/opentelemetry
-[21]: /tracing/setup_overview/open_standards/java
-[22]: /tracing/setup_overview/open_standards/python#opentelemetry
-[23]: /tracing/setup_overview/open_standards/ruby#opentelemetry
-[24]: /tracing/setup_overview/open_standards/nodejs#opentelemetry
-[25]: https://github.com/open-telemetry/opentelemetry-collector/blob/main/receiver/otlpreceiver/config.md
+[18]: https://github.com/open-telemetry/opentelemetry-collector/blob/main/receiver/otlpreceiver/config.md
+[19]: https://opentelemetry.io/docs/instrumentation/
+[20]: https://docs.datadoghq.com/help/
+[21]: /tracing/connect_logs_and_traces/opentelemetry
+[22]: /tracing/setup_overview/open_standards/java
+[23]: /tracing/setup_overview/open_standards/python#opentelemetry
+[24]: /tracing/setup_overview/open_standards/ruby#opentelemetry
+[25]: /tracing/setup_overview/open_standards/nodejs#opentelemetry
