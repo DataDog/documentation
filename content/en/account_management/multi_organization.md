@@ -64,7 +64,7 @@ To configure SAML for multi-organizations:
 
 ## Multi-org usage
 
-The parent-organization can view the total and billable usage of all their organizations (child and parent organizations) by hovering over their username at the bottom left and then navigating to: `Plan & Usage`--> `Usage`.
+The parent-organization can view the total and billable usage of all their organizations (child and parent organizations) by hovering over their username on the bottom left corner and navigating to **Plan & Usage** > **Usage**.
 
 The Usage page shows the aggregate usage of the parent-organization and all its child-organizations. There are two tabs on the Usage page:
 
@@ -99,7 +99,7 @@ This data can be downloaded as a CSV file.
 
 ### Individual organization usage
 
-On the Individual Organizations usage tab, you are able to view the usage of your child organizations in either absolute units or as a percent of total usage.
+On the **Individual Organizations** usage tab, you can view the usage of your child organizations in absolute units or as a percentage of total usage.
 
 {{< img src="account_management/multi-org-percent-billable-v2.png" alt="Individual Percent Usage" >}}
 
