@@ -173,7 +173,7 @@ When you create a correction window for an SLO, the time period you specify is r
 - For monitor-based SLOs, time in the correction window is not counted.
 - For metric-based SLOs, all good and bad events in the correction window are not counted.
 
-You have the option to create one-time corrections for ad-hoc adjustments, or recurring corrections for predictable adjustments that occur on a regular cadence. One-time corrections require a start and end time, while recurring corrections require a start time, duration, and interval. Recurring corrections are based on [iCalender RFC 5545's RRULE specification][14]. Specifying an end time for recurring corrections is optional in case you need the correction to repeat indefinitely. 
+You have the option to create one-time corrections for ad-hoc adjustments, or recurring corrections for predictable adjustments that occur on a regular cadence. One-time corrections require a start and end time, while recurring corrections require a start time, duration, and interval. Recurring corrections are based on [iCalender RFC 5545's RRULE specification][12]. Specifying an end time for recurring corrections is optional in case you need the correction to repeat indefinitely. 
 
 For either type of correction, you must select a correction category that states why the correction is being made. The available categories are `Scheduled Maintenance`, `Outside Business Hours`, `Deployment`, and `Other`. You can optionally include a description to provide additional context if necessary.
 
@@ -186,7 +186,7 @@ Each SLO has a maximum limit of corrections that can be configured to ensure que
 | Weekly recurring  | 3             |
 | Monthly recurring | 5             |
 
-You may configure status corrections through the UI, the [SLO status corrections API][12], or a [Terraform resource][13].
+You may configure status corrections through the UI, the [SLO status corrections API][13], or a [Terraform resource][14].
 
 #### Access in the UI 
 
@@ -217,6 +217,6 @@ To view, edit, and delete existing status corrections, click on the **Correction
 [9]: /monitors/service_level_objectives/#saved-views
 [10]: /api/v1/events/#query-the-event-stream
 [11]: /monitors/create/types/event/
-[12]: /api/latest/service-level-objective-corrections/
-[13]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/slo_correction
-[14]: https://icalendar.org/iCalendar-RFC-5545/3-8-5-3-recurrence-rule.html
+[12]: https://icalendar.org/iCalendar-RFC-5545/3-8-5-3-recurrence-rule.html
+[13]: /api/latest/service-level-objective-corrections/
+[14]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/slo_correction

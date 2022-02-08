@@ -452,8 +452,8 @@ The monitors link is customizable with additional parameters. The most common ar
 | `type`    | `type:log`     | Log monitors (see other [monitor types][1])                                     |
 
 
-[1]: /monitors/create/types/
 
+[1]: /monitors/create/types/
 {{% /tab %}}
 {{% tab "Logs" %}}
 
