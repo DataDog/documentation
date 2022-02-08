@@ -510,7 +510,7 @@
     contents:
 
     - action: pull-and-push-file
-      branch: master
+      branch: maxep/RUMM-1956/doc-all-regions
       globs:
       - 'docs/log_collection.md'
       options:
@@ -520,7 +520,7 @@
           title: iOS Log Collection
           kind: documentation
           description: "Collect logs from your iOS applications."
-          dependencies: ["https://github.com/DataDog/dd-sdk-ios/blob/master/docs/log_collection.md"]
+          dependencies: ["https://github.com/DataDog/dd-sdk-ios/blob/maxep/RUMM-1956/doc-all-regions/docs/log_collection.md"]
           further_reading:
             - link: "https://github.com/DataDog/dd-sdk-ios"
               tag: "Github"
@@ -530,7 +530,7 @@
               text: "Learn how to explore your logs"
 
     - action: pull-and-push-file
-      branch: master
+      branch: maxep/RUMM-1956/doc-all-regions
       globs:
       - 'docs/trace_collection.md'
       options:
@@ -541,7 +541,7 @@
           kind: documentation
           beta: true
           description: "Collect traces from your iOS applications."
-          dependencies: ["https://github.com/DataDog/dd-sdk-ios/blob/master/docs/trace_collection.md"]
+          dependencies: ["https://github.com/DataDog/dd-sdk-ios/blob/maxep/RUMM-1956/doc-all-regions/docs/trace_collection.md"]
           further_reading:
             - link: "https://github.com/DataDog/dd-sdk-ios"
               tag: "Github"
@@ -551,14 +551,14 @@
               text: "Explore your services, resources, and traces"
 
     - action: pull-and-push-folder
-      branch: master
+      branch: maxep/RUMM-1956/doc-all-regions
       globs:
         - docs/rum_collection/*
       options:
         dest_dir: '/real_user_monitoring/ios/'
         path_to_remove: 'docs/rum_collection/'
         front_matters:
-          dependencies: [ "https://github.com/DataDog/dd-sdk-ios/blob/master/docs/rum_collection/" ]
+          dependencies: [ "https://github.com/DataDog/dd-sdk-ios/blob/maxep/RUMM-1956/doc-all-regions/docs/rum_collection/" ]
 
     - action: pull-and-push-folder
       branch: master
