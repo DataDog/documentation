@@ -210,7 +210,7 @@ The [Datadog Mobile App][1], available on the [Apple App Store][2] and [Google P
 
 On the Dashboards page, you can view and search all of your dashboards, and filter them using the same template variables you have set up in the Datadog web app. Quickly filter your dashboards using template variable saved views. For more information about template variable saved views, see [Dashboard Saved Views][14]. Click on an individual dashboard to view it.
 
-**Note**: To set up or edit a dashboard, you need to log in to the Datadog web app. For more information, see [Dashboards][4].
+**Note**: To set up or edit a dashboard, you must log in to the Datadog browser UI. For more information, see [Dashboards][4].
 
 {{< img src="dashboards/dashboards-list-mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Dashboards on iOS and Android">}}
 
