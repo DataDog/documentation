@@ -18,7 +18,7 @@ further_reading:
     tag: Documentation
     text: セキュリティに関するその他の考慮事項
 ---
-<div class="alert alert-info">このページは Datadog のセキュリティに関するものです。セキュリティ監視製品をお探しの場合は、<a href="/security_monitoring" target="_blank">セキュリティ監視セクション</a>をご覧ください。</div>
+<div class="alert alert-info">このページは Datadog のセキュリティに関するものです。セキュリティ監視製品をお探しの場合は、<a href="/security_platform/cloud_siem" target="_blank">セキュリティ監視セクション</a>をご覧ください。</div>
 
 Datadog では、カスタマーは複数の方法でデータを送信できます。たとえば、[Agent][1]、[パブリック API][2]、[インテグレーション][3]を使用する方法です。このページでは、一般的な利用方法のなかでカスタマーから Datadog に送信される可能性がある主なデータカテゴリについて説明します。また、送信されるデータに個人データが含まれる可能性についても触れています。詳細については、[セキュリティに関するページ][4]および[プライバシーポリシーに関するページ][5]をご参照ください。
 

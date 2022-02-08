@@ -6,11 +6,11 @@ kind: documentation
 
 Le cycle de facturation commence le premier jour du mois, quelle que soit votre date d'inscription. Votre premier mois est calculé au prorata en fonction de votre date d'inscription.
 
-Datadog mesure le nombre de total de hosts et de métriques custom toutes les heures. La quantité de hosts facturable est calculée à la fin du mois en prenant la limite inférieure du 99e centile d'utilisation durant ces heures. Le dernier centile est exclu afin de réduire l'impact des pics d'utilisation sur votre facture. La quantité de métriques custom facturable est basée sur le nombre moyen de métriques custom par heure pour le mois. Consultez votre page [Usage][1] dans Datadog. Les pages de facturation sont uniquement accessibles aux utilisateurs avec le rôle Admin Datadog.
+Datadog mesure le nombre total de hosts et de métriques custom toutes les heures. La quantité de hosts facturable est calculée à la fin du mois en prenant la limite inférieure du 99e centile d'utilisation durant ces heures. Le dernier centile est exclu afin de réduire l'impact des pics d'utilisation sur votre facture. La quantité de métriques custom facturable est basée sur le nombre moyen de métriques custom par heure pour le mois. Consultez votre page [Usage][1] dans Datadog pour en savoir plus. Seuls les utilisateurs disposant d'un rôle admin dans Datadog peuvent accéder aux pages de facturation.
 
 ### Hosts
 
-Un host est une instance de système d'exploitation physique ou virtuelle que vous surveillez avec Datadog. Il peut s'agir d'un serveur, d'une machine virtuelle, d'un nœud (pour Kubernetes) ou encore d'un plan App Service (pour Azure App Services). Les hosts peuvent désigner les instances sur lesquelles l'Agent Datadog est installé, ainsi que toute machine virtuelle AWS EC2, GCP, Azure ou vSphere surveillée par nos intégrations. Les instances EC2 ou les machines virtuelles sur lesquelles l'Agent est installé comptent comme une seule instance (pas de double facturation).
+Un host est une instance de système d'exploitation physique ou virtuelle que vous surveillez avec Datadog. Il peut s'agir d'un serveur, d'une machine virtuelle, d'un nœud (pour Kubernetes) ou encore d'un plan App Service (pour Azure App Service). Les hosts peuvent désigner les instances sur lesquelles l'Agent Datadog est installé, ainsi que toute machine virtuelle AWS EC2, GCP, Azure ou vSphere surveillée par les intégrations Datadog. Les instances EC2 ou les machines virtuelles sur lesquelles l'Agent est installé comptent comme une seule instance (pas de double facturation).
 
 Les hosts qui n'envoient pas de données (statut `???` dans votre [liste d'infrastructures][2]) ne sont pas pris en compte dans la facturation. Jusqu'à 2 heures peuvent être nécessaires pour que ces hosts disparaissent de la [liste d'infrastructures][2]. Datadog conserve les données historiques pour ces hosts (comptes abonnés à une offre). Les métriques peuvent être représentées graphiquement sur un dashboard en spécifiant le hostname spécifique ou les tags.
 
@@ -34,17 +34,38 @@ Pour en savoir plus sur la facturation des appareils IoT, consultez la page des 
 
 ## Factures
 
-Si vous payez par carte bancaire, les reçus des mois précédents sont disponibles pour les [administrateurs][8] dans [l'historique de facturation][9].
+Vous pouvez choisir parmi deux modes de paiement différents :
+- Paiement par carte bancaire
+- Paiement via des factures (ACH, virement ou chèque)
 
-Si vous payez par chèque ou virement, les factures sont envoyées par e-mail aux adresses e-mail de facturation lorsqu'elles sont dues. Pour obtenir un double d'une facture, envoyez un e-mail au [service facturation de Datadog][10].
+### Paiement par carte bancaire
+
+Si vous payez par carte bancaire, les [administrateurs][8] peuvent consulter les reçus des mois précédents dans [l'historique de facturation][9]. Pour obtenir des copies de votre paiement, envoyez un e-mail au [service Facturation de Datadog][10].
+
+Consultez la section [Paiements par carte bancaire][11] pour en savoir plus.
+
+### Factures
+
+Si vous payez par chèque, transfert ACH ou virement, les factures sont envoyées aux adresses e-mail de facturation renseignées aux alentours du 10e jour ouvrable de chaque mois. Pour obtenir un double d'une facture, envoyez un e-mail au [service Facturation de Datadog][10]. Les coordonnées de paiement à utiliser sont disponibles sur les factures.
+
+Pour modifier votre mode de paiement, contactez votre [chargé de compte][12].
 
 ### E-mails de facturation
 
-Pour définir les adresses e-mails auxquelles vous souhaitez recevoir les factures, accédez à la section **Manager Billing Emails** de la page [Plan][11] :
+Pour définir les adresses e-mail auxquelles vous souhaitez recevoir les factures, accédez à la section **Manage Billing Emails** de la page [Billing History][13] :
 
 {{< img src="account_management/billing/billing01.png" alt="Gérer les e-mails de facturation" >}}
 
 **Remarque** : l'adresse e-mail ne doit pas nécessairement correspondre à un membre de l'équipe dans Datadog. Par exemple, vous pouvez utiliser `factures@votresociete.com`.
+
+## Contact
+
+| Questions ou demandes                                                                                                                                                                               | Contact                      |
+|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------|
+| Litige et demande de crédit<br>Utilisation<br>Changement de mode de paiement<br>Demandes concernant un paiement<br>Demandes générales concernant votre compte<br>Mise à jour des contacts<br>Relevé de compte<br>Mise à jour des informations de facturation et d'expédition | success@datadoghq.com        |
+| Copies de factures<br>Demandes de règlement urgentes <br>Détails des factures<br>Invitation au portail                                                                                                        | billing@datadoghq.com        |
+| Versement des paiements                                                                                                                                                                                | remittances@datadoghq.com    |
+| Copies des bons de commande                                                                                                                                                                             | purchaseorders@datadoghq.com |
 
 ## Pour aller plus loin
 
@@ -75,7 +96,9 @@ Pour définir les adresses e-mails auxquelles vous souhaitez recevoir les factur
 [5]: https://docs.datadoghq.com/fr/account_management/billing/serverless
 [6]: https://www.datadoghq.com/pricing/?product=serverless#serverless
 [7]: https://www.datadoghq.com/pricing/
-[8]: /fr/account_management/users/default_roles/
+[8]: /fr/account_management/rbac/#datadog-default-roles
 [9]: https://app.datadoghq.com/account/billing_history
 [10]: mailto:billing@datadoghq.com
-[11]: https://app.datadoghq.com/account/billing
+[11]: /fr/account_management/billing/credit_card/
+[12]: mailto:success@datadoghq.com
+[13]: https://app.datadoghq.com/billing/history

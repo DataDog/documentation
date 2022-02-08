@@ -40,7 +40,7 @@ All Agent traffic is sent over SSL. The destination is dependent on the Datadog 
 
 [Logs][5] & [HIPAA logs][6]
 : TCP: `{{< region-param key="tcp_endpoint" code="true" >}}`<br>
-HTTP: `{{< region-param key="http_endpoint" code="true" >}}`<br>
+HTTP: `{{< region-param key="agent_http_endpoint" code="true" >}}`<br>
 Other: See [logs endpoints][7]
 
 [HIPAA logs legacy][6]

@@ -26,6 +26,6 @@ aliases:
     {{< nextlink href="agent/faq/agent-v6-changes" >}}Datadog Agent v6 Changes{{< /nextlink >}}
     {{< nextlink href="agent/faq/ec2-use-win-prefix-detection" >}}Windows EC2 hostnames starting with EC2AMAZ-{{< /nextlink >}}
     {{< nextlink href="agent/faq/auto_conf" >}}Auto-configuration for Autodiscovery.{{< /nextlink >}}
-    {{< nextlink href="agent/faq/template_variables" >}}Template variables used for Autodiscovery{{< /nextlink >}}
+    {{< nextlink href="agent/guide/template_variables" >}}Template variables used for Autodiscovery{{< /nextlink >}}
     {{< nextlink href="agent/faq/commonly-used-log-processing-rules" >}}Commonly Used Log Processing Rules{{< /nextlink >}}
 {{< /whatsnext >}}

@@ -54,10 +54,6 @@ To collect all logs written by running applications in your ECS containers and s
               "name": "DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL",
               "value": "true"
             },
-            {
-              "name": "DD_LOGS_CONFIG_DOCKER_CONTAINER_USE_FILE",
-              "value": "true"
-            },
             (...)
           ]
         }
@@ -122,10 +118,6 @@ To collect all logs written by running applications in your ECS containers and s
               "name": "DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL",
               "value": "true"
             },
-            {
-              "name": "DD_LOGS_CONFIG_DOCKER_CONTAINER_USE_FILE",
-              "value": "true"
-            },
             (...)
           ]
         }
@@ -159,8 +151,6 @@ To collect all logs written by running applications in your ECS containers and s
 [3]: https://www.datadoghq.com/blog/monitoring-ecs-with-datadog/
 {{% /tab %}}
 {{< /tabs >}}
-
-**Note:** `DD_LOGS_CONFIG_DOCKER_CONTAINER_USE_FILE` requires the Datadog Agent v6.27.0/7.27.0. This option is silently ignored in older versions.
 
 ### Custom log collection
 

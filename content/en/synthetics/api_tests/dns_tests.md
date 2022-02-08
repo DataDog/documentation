@@ -35,8 +35,9 @@ After choosing to create a `DNS` test, define your test's request.
 1. Specify the **Domain** you want your test to query. For example, `www.example.com`.
 2. Specify the **DNS Server** to use (optional), it can be a domain name or an IP address. If not specified, your DNS test performs resolution using `8.8.8.8`, with a fallback on `1.1.1.1` and an internal AWS DNS server.
 3. Specify your DNS Server **Port** (optional). If not specified, the DNS Server port defaults to 53.
-4. **Name** your DNS test.
-5. Add `env` **Tags** as well as any other tag to your DNS test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][4].
+4. Specify the amount of time in seconds before the test times out (optional).
+5. **Name** your DNS test.
+6. Add `env` **Tags** as well as any other tag to your DNS test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][4].
 
 {{< img src="synthetics/api_tests/dns_test_config_new.png" alt="Define DNS query" style="width:90%;" >}}
 
@@ -44,7 +45,7 @@ Click **Test URL** to try out the request configuration. A response preview is d
 
 ### Define assertions
 
-Assertions define what an expected test result is. When hitting `Test URL` basic assertions on `response time` and available records are added. You must define at least one assertion for your test to monitor.
+Assertions define what an expected test result is. After you click **Test URL**, basic assertions on `response time` and available records are added. You must define at least one assertion for your test to monitor.
 
 | Type                | Record type                                                     | Operator                                           | Value type                 |
 |---------------------|-----------------------------------------------------------------|----------------------------------------------------|----------------------------|
@@ -52,7 +53,7 @@ Assertions define what an expected test result is. When hitting `Test URL` basic
 | every record        | of type A, of type AAAA, of type MX, of type TXT, of type CNAME | `is`, `contains`, <br> `matches`, `does not match` | _String_ <br> _[Regex][5]_ |
 | at least one record | of type A, of type AAAA, of type MX, of type TXT, of type CNAME | `is`, `contains`, <br> `matches`, `does not match` | _String_ <br> _[Regex][5]_ |
 
-You can create up to 20 assertions per API test by clicking on **New Assertion** or by clicking directly on the response preview:
+You can create up to 20 assertions per API test by clicking **New Assertion** or by clicking directly on the response preview:
 
 {{< img src="synthetics/api_tests/assertions.png" alt="Define assertions for your DNS test" style="width:90%;" >}}
 
@@ -74,7 +75,7 @@ Set alert conditions to determine the circumstances under which you want a test 
 
 #### Alerting rule
 
-When you set the alert conditions to: `An alert is triggered if any assertion fails for X minutes from any n of N locations`, an alert is triggered only if these two conditions are true:
+When you set the alert conditions to: `An alert is triggered if your test fails for X minutes from any n of N locations`, an alert is triggered only if these two conditions are true:
 
 * At least one location was in failure (at least one assertion failed) during the last *X* minutes;
 * At one moment during the last *X* minutes, at least *n* locations were in failure.
@@ -108,7 +109,7 @@ Click on **Save** to save your test and have Datadog start executing it.
 
 ### Create local variables
 
-You can create local variables by clicking on **Create Local Variable** at the top right hand corner of your test configuration form. You can define their values from one of the below available builtins:
+You can create local variables by clicking **Create Local Variable** at the top right hand corner of your test configuration form. You can define their values from one of the below available builtins:
 
 `{{ numeric(n) }}`
 : Generates a numeric string with `n` digits.
@@ -149,9 +150,10 @@ These reasons include the following:
 : The configuration of the test is invalid (for example, a typo in the URL).
 
 `TIMEOUT`
-: The request couldn't be completed in a reasonable time. Two types of `TIMEOUT` can happen.
-  - `TIMEOUT: The request couldn’t be completed in a reasonable time.` indicates that the timeout happened at the TCP socket connection level.
-  - `TIMEOUT: Retrieving the response couldn’t be completed in a reasonable time.` indicates that the timeout happened on the overall run (which includes TCP socket connection, data transfer, and assertions).
+: The request couldn't be completed in a reasonable time. Two types of `TIMEOUT` can happen:
+  - `TIMEOUT: The request couldn’t be completed in a reasonable time.` indicates that the request duration hit the test defined timeout (default is set to 60s). 
+  For each request only the completed stages for the request are displayed in the network waterfall. For example, in the case of `Total response time` only being displayed, the timeout occurred during the DNS resolution.
+  - `TIMEOUT: Overall test execution couldn't be completed in a reasonable time.` indicates that the test duration (request + assertions) hits the maximum duration (60.5s).
 
 ## Permissions
 
@@ -159,13 +161,22 @@ By default, only users with the [Datadog Admin and Datadog Standard roles][10] c
 
 If you have access to the [custom role feature][11], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions.
 
+### Restrict access
+
+<div class="alert alert-warning">
+Access restriction is available for customers with <a href="https://docs.datadoghq.com/account_management/rbac/?tab=datadogapplication#create-a-custom-role">custom roles</a> enabled on their accounts.</div>
+
+You can restrict access to a DNS test based on the roles in your organization. When creating a DNS test, choose which roles (in addition to your user) can read and write your test. 
+
+{{< img src="synthetics/settings/restrict_access.png" alt="Set permissions for your test" style="width:70%;" >}}
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /api/v1/synthetics/#get-all-locations-public-and-private
 [2]: /synthetics/private_locations
-[3]: /synthetics/cicd_testing
+[3]: /synthetics/cicd_integrations
 [4]: /synthetics/search/#search
 [5]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
 [6]: /monitors/notify/#notify-your-team

@@ -16,13 +16,14 @@ categories:
 creates_events: true
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/tokumx/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/tokumx/README.md
 display_name: TokuMX
 draft: false
 git_integration_title: tokumx
 guid: 7785939b-bfb6-4d3e-acc2-94c1f5fb33e7
 integration_id: tokumx
 integration_title: TokuMX
+integration_version: 2.3.3
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com
@@ -32,7 +33,7 @@ metric_to_check: tokumx.uptime
 name: tokumx
 process_signatures: []
 public_title: Intégration Datadog/TokuMX
-short_description: 'Surveillez des métriques sur le nombre d''opérations effectuées, le délai de réplication, la taille d''une table de cache, et plus encore.'
+short_description: Surveillez des métriques sur le nombre d'opérations effectuées, le délai de réplication, la taille d'une table de cache, et plus encore.
 support: core
 supported_os:
   - linux
@@ -148,9 +149,8 @@ Consultez la [documentation relative aux modèles d'intégration Autodiscovery][
 Ce check émet un événement à chaque fois que l'état de réplication d'un nœud TokuMX change.
 
 ### Checks de service
+{{< get-service-checks-from-git "tokumx" >}}
 
-**tokumx.can_connect** :<br>
-Renvoie `CRITICAL` si l'Agent n'est pas capable de se connecter à TokuMX pour recueillir des métriques. Si ce n'est pas le cas, renvoie `OK`.
 
 ## Dépannage
 

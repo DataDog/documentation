@@ -16,10 +16,8 @@ Depending on the `site` option used to initialize [Real User Monitoring][2] or [
 {{< site-region region="us" >}}
 
 ```txt
-connect-src https://*.logs.datadoghq.com https://*.browser-intake-datadoghq.com
+connect-src https://*.browser-intake-datadoghq.com
 ```
-
-Both entries are required even if you are not using [browser logs collection][3].
 
 {{< /site-region >}}
 
@@ -27,11 +25,8 @@ Both entries are required even if you are not using [browser logs collection][3]
 {{< site-region region="eu" >}}
 
 ```txt
-connect-src https://*.logs.datadoghq.eu https://*.browser-intake-datadoghq.eu
+connect-src https://*.browser-intake-datadoghq.eu
 ```
-
-Both entries are required even if you are not using [browser logs collection][3].
-
 
 {{< /site-region >}}
 

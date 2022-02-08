@@ -140,7 +140,7 @@ Kubernetes creates pause containers to acquire the respective pod’s IP address
 
 **6. How is the host billing related to your services?**
 
-APM is billed on the basis of [hosts][4] deployed with agents sending traces and not services. Tracing without Limits is billed on the basis of [Indexed and Ingested span][13] count. To estimate how many ingested and indexed spans each of your services is sending, see the [Usage Metrics][14] documentation.
+APM is billed on the basis of [hosts][4] deployed with agents sending traces and not services. Tracing without Limits is billed on the basis of Indexed and Ingested span count. To estimate how many ingested and indexed spans each of your services is sending, see the [Usage Metrics][13] documentation.
 
 **7. What happens to your existing App Analytics filters?**
 
@@ -148,7 +148,7 @@ As of October 20, 2020, all existing App Analytics filters are automatically tra
 
 **8. How do you estimate your ingested or indexed span volume?**
 
-Datadog provides the metrics `datadog.estimated_usage.apm.ingested_bytes` and `datadog.estimated_usage.apm.ingested_spans` for monitoring ingested and indexed span volume. More information is available in the [Usage Metrics][14] documentation.
+Datadog provides the metrics `datadog.estimated_usage.apm.ingested_bytes` and `datadog.estimated_usage.apm.ingested_spans` for monitoring ingested and indexed span volume. More information is available in the [Usage Metrics][13] documentation.
 
 **9. Is the Continuous Profiler available as a standalone product?**
 
@@ -164,8 +164,8 @@ Yes. Let Datadog know if you are interested in buying the Continuous Profiler wi
 
 
 [1]: /tracing/
-[2]: /tracing/trace_search_and_analytics/
-[3]: /tracing/trace_retention_and_ingestion/#retention-filters
+[2]: /tracing/trace_explorer/
+[3]: /tracing/trace_retention/#retention-filters
 [4]: /account_management/billing/pricing/#infrastructure-monitoring
 [5]: /account_management/billing/pricing/#apm
 [6]: /tracing/profiling/
@@ -175,5 +175,4 @@ Yes. Let Datadog know if you are interested in buying the Continuous Profiler wi
 [10]: https://docs.datadoghq.com/account_management/billing/serverless/#serverless-functions
 [11]: /account_management/billing/
 [12]: /tracing/setup_overview/setup/java/?tab=containers#configure-the-datadog-agent-for-apm
-[13]: /tracing/trace_retention_and_ingestion/
-[14]: /tracing/trace_retention_and_ingestion/usage_metrics
+[13]: /tracing/trace_retention/usage_metrics

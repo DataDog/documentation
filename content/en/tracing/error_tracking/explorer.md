@@ -54,5 +54,5 @@ Each error sample gives the information you need to understand why it happened a
 - All the error span tags, such as the resource or operation name, with direct access to the related trace or to logs that are linked to it.
 - Insights about the health of the underlying host or container when this particular error occurred.
 
-[1]: /tracing/trace_search_and_analytics/#live-search-for-15-minutes
-[2]: /tracing/trace_retention_and_ingestion/#retention-filters
+[1]: /tracing/trace_explorer/#live-search-for-15-minutes
+[2]: /tracing/trace_retention/#retention-filters

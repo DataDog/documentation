@@ -1,10 +1,11 @@
+---
 # Source: datadog/templates/cluster-agent-rbac.yaml
 apiVersion: v1
 kind: ServiceAccount
 metadata:
   labels:
     app: "datadog-agent"
-    chart: "datadog-2.27.8"
+    chart: "datadog-2.30.1"
     heritage: "Helm"
     release: "datadog-agent"
   name: datadog-agent-cluster-agent
@@ -68,6 +69,12 @@ data:
       collect_dns_stats: true
       max_tracked_connections: 131072
       conntrack_max_state_size: 131072
+      enable_runtime_compiler: false
+      runtime_compiler_output_dir: /var/tmp/datadog-agent/system-probe/build
+      kernel_header_download_dir: /var/tmp/datadog-agent/system-probe/kernel-headers
+      apt_config_dir: /host/etc/apt
+      yum_repos_dir: /host/etc/yum.repos.d
+      zypper_repos_dir: /host/etc/zypp/repos.d
     network_config:
       enabled: true
       conntrack_init_timeout: 10s
@@ -75,7 +82,6 @@ data:
       enabled: false
     runtime_security_config:
       enabled: true
-      debug: false
       socket: /var/run/sysprobe/runtime-security.sock
       policies:
         dir: /etc/datadog-agent/runtime-security.d
@@ -135,6 +141,7 @@ data:
             "fchownat",
             "fcntl",
             "fcntl64",
+            "flock",
             "fstat",
             "fstat64",
             "fstatfs",
@@ -199,6 +206,7 @@ data:
             "recvmmsg",
             "recvmsg",
             "rename",
+            "renameat",
             "restart_syscall",
             "rmdir",
             "rt_sigaction",
@@ -239,6 +247,7 @@ data:
             "stat64",
             "statfs",
             "sysinfo",
+            "symlinkat",
             "tgkill",
             "umask",
             "uname",
@@ -485,7 +494,7 @@ spec:
       hostPID: true
       containers:
         - name: agent
-          image: "gcr.io/datadoghq/agent:7.32.3"
+          image: "gcr.io/datadoghq/agent:7.33.0"
           imagePullPolicy: IfNotPresent
           command: ["agent", "run"]
           resources: {}
@@ -607,7 +616,7 @@ spec:
             successThreshold: 1
             timeoutSeconds: 5
         - name: trace-agent
-          image: "gcr.io/datadoghq/agent:7.32.3"
+          image: "gcr.io/datadoghq/agent:7.33.0"
           imagePullPolicy: IfNotPresent
           command: ["trace-agent", "-config=/etc/datadog-agent/datadog.yaml"]
           resources: {}
@@ -673,7 +682,7 @@ spec:
               port: 8126
             timeoutSeconds: 5
         - name: process-agent
-          image: "gcr.io/datadoghq/agent:7.32.3"
+          image: "gcr.io/datadoghq/agent:7.33.0"
           imagePullPolicy: IfNotPresent
           command: ["process-agent", "-config=/etc/datadog-agent/datadog.yaml"]
           resources: {}
@@ -748,7 +757,7 @@ spec:
               mountPath: /etc/datadog-agent/system-probe.yaml
               subPath: system-probe.yaml
         - name: system-probe
-          image: "gcr.io/datadoghq/agent:7.32.3"
+          image: "gcr.io/datadoghq/agent:7.33.0"
           imagePullPolicy: IfNotPresent
           securityContext:
             capabilities:
@@ -801,12 +810,24 @@ spec:
               mountPath: /host/proc
               mountPropagation: None
               readOnly: true
-            - name: os-release
+            - name: etc-os-release
               mountPath: /host/etc/os-release
               mountPropagation: None
               readOnly: true
+            - name: etc-redhat-release
+              mountPath: /host/etc/redhat-release
+              mountPropagation: None
+              readOnly: true
+            - name: etc-fedora-release
+              mountPath: /host/etc/fedora-release
+              mountPropagation: None
+              readOnly: true
+            - name: etc-lsb-release
+              mountPath: /host/etc/lsb-release
+              mountPropagation: None
+              readOnly: true
         - name: security-agent
-          image: "gcr.io/datadoghq/agent:7.32.3"
+          image: "gcr.io/datadoghq/agent:7.33.0"
           imagePullPolicy: IfNotPresent
           securityContext:
             capabilities:
@@ -893,7 +914,7 @@ spec:
               subPath: system-probe.yaml
       initContainers:
         - name: init-volume
-          image: "gcr.io/datadoghq/agent:7.32.3"
+          image: "gcr.io/datadoghq/agent:7.33.0"
           imagePullPolicy: IfNotPresent
           command: ["bash", "-c"]
           args:
@@ -903,7 +924,7 @@ spec:
               mountPath: /opt/datadog-agent
           resources: {}
         - name: init-config
-          image: "gcr.io/datadoghq/agent:7.32.3"
+          image: "gcr.io/datadoghq/agent:7.33.0"
           imagePullPolicy: IfNotPresent
           command: ["bash", "-c"]
           args:
@@ -941,7 +962,7 @@ spec:
               value: "yes"
           resources: {}
         - name: seccomp-setup
-          image: "gcr.io/datadoghq/agent:7.32.3"
+          image: "gcr.io/datadoghq/agent:7.33.0"
           command:
             - cp
             - /etc/config/system-probe-seccomp.json
@@ -969,6 +990,18 @@ spec:
         - hostPath:
             path: /sys/fs/cgroup
           name: cgroups
+        - hostPath:
+            path: /etc/os-release
+          name: etc-os-release
+        - hostPath:
+            path: /etc/redhat-release
+          name: etc-redhat-release
+        - hostPath:
+            path: /etc/fedora-release
+          name: etc-fedora-release
+        - hostPath:
+            path: /etc/lsb-release
+          name: etc-lsb-release
         - hostPath:
             path: /var/run/datadog/
             type: DirectoryOrCreate
@@ -1002,9 +1035,6 @@ spec:
         - hostPath:
             path: /etc/group
           name: group
-        - hostPath:
-            path: /etc/os-release
-          name: os-release
         - hostPath:
             path: /var/lib/datadog-agent/logs
           name: pointerdir
@@ -1057,7 +1087,7 @@ spec:
       serviceAccountName: datadog-agent-cluster-agent
       containers:
         - name: cluster-agent
-          image: "gcr.io/datadoghq/cluster-agent:1.16.0"
+          image: "gcr.io/datadoghq/cluster-agent:1.17.0"
           imagePullPolicy: IfNotPresent
           resources: {}
           ports:
@@ -1135,13 +1165,15 @@ spec:
           configMap:
             name: datadog-agent-installinfo
       affinity:
-        # Force scheduling the cluster agents on different nodes
+        # Prefer scheduling the cluster agents on different nodes
         # to guarantee that the standby instance can immediately take the lead from a leader running of a faulty node.
         podAntiAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            - labelSelector:
-                matchLabels:
-                  app: datadog-agent-cluster-agent
-              topologyKey: kubernetes.io/hostname
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 50
+              podAffinityTerm:
+                labelSelector:
+                  matchLabels:
+                    app: datadog-agent-cluster-agent
+                topologyKey: kubernetes.io/hostname
       nodeSelector:
         kubernetes.io/os: linux

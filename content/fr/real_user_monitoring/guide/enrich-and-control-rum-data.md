@@ -1,5 +1,5 @@
 ---
-title: Enrichir et contrôler les données Browser RUM avec beforeSend
+title: Enrichir et contrôler les données RUM Browser avec beforeSend
 kind: guide
 further_reading:
   - link: /real_user_monitoring/explorer
@@ -8,7 +8,7 @@ further_reading:
 ---
 ## Présentation
 
-Le SDK Browser RUM enregistre les événements RUM et renseigne les attributs principaux correspondants. La fonction de rappel `beforeSend` vous permet d'accéder à chaque événement recueilli par le SDK RUM avant qu'il ne soit envoyé à Datadog. L'interception d'événements RUM vous permet d'effectuer les opérations suivantes :
+Le SDK RUM Browser enregistre les événements RUM et renseigne les attributs principaux correspondants. La fonction de rappel `beforeSend` vous permet d'accéder à chaque événement recueilli par le SDK RUM avant qu'il ne soit envoyé à Datadog. L'interception d'événements RUM vous permet d'effectuer les opérations suivantes :
 * Enrichir vos événements RUM avec des attributs de contexte supplémentaires
 * Modifier vos événements RUM de façon à changer leur contenu ou à censurer les séquences sensibles (consultez la [liste des propriétés modifiables][1])
 * Ignorer les événements RUM sélectionnés
@@ -21,7 +21,7 @@ function beforeSend(event, context)
 ```
 
 ### Événement
-L'événement est généré par le SDK RUM. Pour en savoir plus sur les différents types d'événements et sur les attributs recueillis, consultez la section [Données Browser RUM recueillies][2].
+L'événement est généré par le SDK RUM. Pour en savoir plus sur les différents types d'événements et sur les attributs recueillis, consultez la section [Données RUM Browser recueillies][2].
 
 La propriété `event.type` vous permet d'identifier le type de l'événement :
 ```json

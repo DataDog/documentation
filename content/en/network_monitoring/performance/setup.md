@@ -14,6 +14,9 @@ further_reading:
     - link: '/network_monitoring/devices'
       tag: 'Documentation'
       text: 'Network Device Monitoring'
+    - link: "https://www.datadoghq.com/blog/monitor-consul-with-datadog-npm/"
+      tag: "Blog"
+      text: "Datadog NPM now supports Consul networking"
 ---
 
 Datadog Network Performance Monitoring (NPM) gives you visibility into your network traffic between services, containers, availability zones, and any other tag in Datadog so you can:

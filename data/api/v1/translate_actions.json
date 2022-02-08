@@ -1012,6 +1012,10 @@
     "description": "Get hourly usage for logs by index.",
     "summary": "Get hourly usage for Logs by Index"
   },
+  "GetMonthlyUsageAttribution": {
+    "description": "Get Monthly Usage Attribution.",
+    "summary": "Get Monthly Usage Attribution"
+  },
   "GetUsageNetworkFlows": {
     "description": "Get hourly usage for network flows.",
     "summary": "Get hourly usage for Network Flows"

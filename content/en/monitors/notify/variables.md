@@ -345,15 +345,18 @@ Variable content is escaped by default. To prevent content such as JSON or code 
 
 Use template variables to customize your monitor notifications. The built-in variables are:
 
-| Variable                      | Description                                                                  |
-|-------------------------------|------------------------------------------------------------------------------|
-| `{{value}}`                   | The value that breached the alert for metric based query monitors.           |
-| `{{threshold}}`               | The value of the alert threshold set in the monitor's alert conditions.      |
-| `{{warn_threshold}}`          | The value of the warning threshold set in the monitor's alert conditions.    |
-| `{{ok_threshold}}`            | The value that recovered the monitor.                                        |
-| `{{comparator}}`              | The relational value set in the monitor's alert conditions.                  |
-| `{{last_triggered_at}}`       | The UTC date and time when the monitor last triggered.                       |
-| `{{last_triggered_at_epoch}}` | The UTC date and time when the monitor last triggered in epoch milliseconds. |
+| Variable                       | Description                                                                   |
+|--------------------------------|-------------------------------------------------------------------------------|
+| `{{value}}`                    | The value that breached the alert for metric based query monitors.            |
+| `{{threshold}}`                | The value of the alert threshold set in the monitor's alert conditions.       |
+| `{{warn_threshold}}`           | The value of the warning threshold set in the monitor's alert conditions.     |
+| `{{ok_threshold}}`             | The value that recovered the monitor.                                         |
+| `{{comparator}}`               | The relational value set in the monitor's alert conditions.                   |
+| `{{first_triggered_at}}`       | The UTC date and time when the monitor first triggered.                       |
+| `{{first_triggered_at_epoch}}` | The UTC date and time when the monitor first triggered in epoch milliseconds. |
+| `{{last_triggered_at}}`        | The UTC date and time when the monitor last triggered.                        |
+| `{{last_triggered_at_epoch}}`  | The UTC date and time when the monitor last triggered in epoch milliseconds.  |
+| `{{triggered_duration_sec}}`   | The number of seconds the monitor has been in a triggered state.              |
 
 ### Evaluation
 
@@ -408,6 +411,12 @@ Use the `{{host.name}}` [tag variable](#attribute-and-tag-variables) and an `<IN
 https://app.datadoghq.com/dash/integration/<INTEGRATION_NAME>?tpl_var_scope=host:{{host.name}}
 ```
 
+Use the `{{last_triggered_at_epoch}}` [template variable](#template-variables) as well as a `<DASHBOARD_ID>` and `<DASHBOARD_NAME>` to link to dashboards with relative time ranges from the moment of the alert:
+
+```text
+https://app.datadoghq.com/dashboard/<DASHBOARD_ID>/<DASHBOARD_NAME>?from_ts={{eval "last_triggered_at_epoch-10*60*1000}}&to_ts={{eval "last_triggered_at_epoch+10*60*1000}}&live=false
+```
+
 {{% /tab %}}
 {{% tab "Host map" %}}
 
@@ -443,7 +452,26 @@ The monitors link is customizable with additional parameters. The most common ar
 | `type`    | `type:log`     | Log monitors (see other [monitor types][1])                                     |
 
 
+
 [1]: /monitors/create/types/
+{{% /tab %}}
+{{% tab "Logs" %}}
+
+Use the `{{last_triggered_at_epoch}}` [template variable](#template-variables) to provide a link to all logs happening in the moment of the alert.
+
+```text
+https://app.datadoghq.com/logs>?from_ts={{eval "last_triggered_at_epoch-10*60*1000}}&to_ts={{eval "last_triggered_at_epoch+10*60*1000}}&live=false
+```
+
+The logs link is customizable with additional parameters. The most common are:
+
+| Parameter | Defined with               | Determines                             |
+|-----------|----------------------------|----------------------------------------|
+| `service` | `service=<SERVICE_NAME>`   | Filter on logs of a specific service.  |
+| `host`    | `host=<HOST_NAME>`         | Filter on logs of a specific host      |
+| `status`  | `status=<STATUS>`          | Status of logs: Error, Warn, Info etc. |
+
+
 {{% /tab %}}
 {{< /tabs >}}
 

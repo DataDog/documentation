@@ -11,11 +11,13 @@ categories:
 ddtype: crawler
 dependencies: []
 description: "Surveillez le statut et le nombre d'instances dans vos groupes Auto\_Scaling."
-doc_link: 'https://docs.datadoghq.com/integrations/amazon_auto_scaling/'
+doc_link: https://docs.datadoghq.com/integrations/amazon_auto_scaling/
 draft: false
 git_integration_title: amazon_auto_scaling
 has_logo: true
+integration_id: amazon-auto-scaling
 integration_title: AWS Auto Scaling
+integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'
@@ -42,8 +44,8 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon We
 ### Collecte de métriques
 
 1. Dans le [carré d'intégration AWS][2], assurez-vous que l'option `AutoScaling` est cochée dans la section concernant la collecte des métriques.
-2. Dans AWS, les données d'Auto Scaling doivent être envoyées à CloudWatch. Référez-vous à la section [Activez les métriques des groupes Auto Scaling][3] de la documentation AWS.
-3. Ajoutez les autorisations suivantes à votre [stratégie IAM Datadog][4] afin de recueillir des métriques AWS Auto Scaling. Pour en savoir plus sur les stratégies Auto Scaling, consultez [la documentation du site Web d'AWS][5].
+2. Dans AWS, les données d'Auto Scaling doivent être envoyées à CloudWatch. Consultez [Activer les métriques du groupe Auto Scaling][3].
+3. Ajoutez les autorisations suivantes à votre [stratégie IAM Datadog][4] afin de recueillir des métriques Amazon Auto Scaling. Pour en savoir plus, consultez la section relative aux [stratégies Auto Scaling][5] de la documentation AWS.
 
     | Autorisation AWS                          | Description                                                                                                                                                                                                                                              |
     | --------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -59,17 +61,17 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon We
 
 #### Activer le logging
 
-Configurez AWS Auto Scaling de façon à ce que les logs soient envoyés vers un compartiment S3 ou vers Cloudwatch.
+Configurez AWS Auto Scaling de façon à ce que les logs soient envoyés vers un compartiment S3 ou vers CloudWatch.
 
 **Remarque** : si vous envoyez vos logs vers un compartiment S3, assurez-vous que `amazon_auto_scaling` est défini en tant que _Target prefix_.
 
 #### Envoyer des logs à Datadog
 
 1. Si vous ne l'avez pas déjà fait, configurez la [fonction Lambda de collecte de logs AWS avec Datadog][7].
-2. Une fois la fonction lambda installée, ajoutez manuellement un déclencheur sur le compartiment S3 ou sur le groupe de logs Cloudwatch qui contient vos logs AWS Auto Scaling dans la console AWS :
+2. Une fois la fonction lambda installée, ajoutez manuellement un déclencheur sur le compartiment S3 ou sur le groupe de logs CloudWatch qui contient vos logs AWS Auto Scaling dans la console AWS :
 
     - [Ajouter un déclencheur manuel sur le compartiment S3][8]
-    - [Ajouter un déclencheur manuel sur le groupe de logs Cloudwatch][9]
+    - [Ajouter un déclencheur manuel sur le groupe de logs CloudWatch][9]
 
 ## Données collectées
 
@@ -91,7 +93,7 @@ L'intégration AWS Auto Scaling n'inclut aucun check de service.
 
 ## Dépannage
 
-Pour que les métriques de groupes Auto Scaling commencent à apparaître dans Datadog, activez-les d'abord dans votre console AWS. Pour ce faire, [consultez les instructions relatives à l'activation des métriques de groupes Auto Scaling sur le site d'AWS][11]. Notez qu'après leur activation, l'affichage de ces métriques peut prendre un certain temps.
+Pour que les métriques de groupes Auto Scaling s'affichent dans Datadog, activez-les d'abord dans votre console AWS. Pour ce faire, [consultez les instructions dédiées sur le site d'AWS][11]. **Remarque :** ces métriques peut prendre un certain temps à apparaître après leur activation.
 
 Besoin d'aide ? Contactez [l'assistance Datadog][12].
 
@@ -99,7 +101,7 @@ Besoin d'aide ? Contactez [l'assistance Datadog][12].
 [2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
 [3]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-instance-monitoring.html#as-enable-group-metrics
 [4]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#installation
-[5]: https://docs.aws.amazon.com/IAM/latest/UserGuide/list_application-autoscaling.html
+[5]: https://docs.aws.amazon.com/autoscaling/plans/userguide/auth-and-access-control.html
 [6]: https://app.datadoghq.com/account/settings#integrations/amazon_auto_scaling
 [7]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/?tab=allpermissions#set-up-the-datadog-lambda-function
 [8]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets

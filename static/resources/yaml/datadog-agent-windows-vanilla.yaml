@@ -1,3 +1,4 @@
+---
 # Source: datadog/templates/secret-api-key.yaml
 apiVersion: v1
 kind: Secret
@@ -45,7 +46,7 @@ spec:
     spec:
       containers:
         - name: agent
-          image: "gcr.io/datadoghq/agent:7.32.3"
+          image: "gcr.io/datadoghq/agent:7.33.0"
           imagePullPolicy: IfNotPresent
           command: ["agent", "run"]
           resources: {}
@@ -119,7 +120,7 @@ spec:
             timeoutSeconds: 5
       initContainers:
         - name: init-volume
-          image: "gcr.io/datadoghq/agent:7.32.3"
+          image: "gcr.io/datadoghq/agent:7.33.0"
           imagePullPolicy: IfNotPresent
           command: ["pwsh", "-Command"]
           args:
@@ -133,7 +134,7 @@ spec:
               mountPath: C:/Temp/install_info
           resources: {}
         - name: init-config
-          image: "gcr.io/datadoghq/agent:7.32.3"
+          image: "gcr.io/datadoghq/agent:7.33.0"
           imagePullPolicy: IfNotPresent
           command: ["pwsh", "-Command"]
           args:
@@ -171,8 +172,8 @@ spec:
             path: \\.\pipe\docker_engine
           name: runtimesocket
         # If the CRI is not provided, try to mount the default containerd pipe.
-        # By default, datadog.dockerOrCriSocketPath mounts the Docker pipe.
-        # With this additional hostPath, both are mounted.
+        # By default, "datadog.dockerOrCriSocketPath" mounts the Docker pipe.
+        # So with this additional hostPath, by default, both are mounted.
         - hostPath:
             path: \\.\pipe\containerd-containerd
           name: containerdsocket

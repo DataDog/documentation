@@ -45,8 +45,20 @@
       "description": "Create a new dashboard with a formulas and functions change widget"
     },
     {
+      "suffix": "_1024858348",
+      "description": "Create a new dashboard with a formulas and functions treemap widget"
+    },
+    {
       "suffix": "_2644712913",
       "description": "Create a new dashboard with a query value widget using the percentile aggregator"
+    },
+    {
+      "suffix": "_2308247857",
+      "description": "Create a new dashboard with alert_graph widget"
+    },
+    {
+      "suffix": "_2316374332",
+      "description": "Create a new dashboard with alert_value widget"
     },
     {
       "suffix": "_2490110261",
@@ -61,40 +73,12 @@
       "description": "Create a new dashboard with apm resource stats widget"
     },
     {
-      "suffix": "_803346562",
-      "description": "Create a new dashboard with distribution widget and apm stats data"
-    },
-    {
-      "suffix": "_2104498738",
-      "description": "Create a new dashboard with formulas and functions scatterplot widget"
-    },
-    {
-      "suffix": "_927141680",
-      "description": "Create a new dashboard with funnel widget"
-    },
-    {
-      "suffix": "_2338918735",
-      "description": "Create a new dashboard with list_stream widget"
-    },
-    {
-      "suffix": "_2705593938",
-      "description": "Create a new dashboard with sunburst widget and metrics data"
-    },
-    {
-      "suffix": "_3982498788",
-      "description": "Create a new dashboard with timeseries widget containing style attributes"
-    },
-    {
-      "suffix": "_2308247857",
-      "description": "Create a new dashboard with alert_graph widget"
-    },
-    {
-      "suffix": "_2316374332",
-      "description": "Create a new dashboard with alert_value widget"
-    },
-    {
       "suffix": "_2607944105",
       "description": "Create a new dashboard with check_status widget"
+    },
+    {
+      "suffix": "_803346562",
+      "description": "Create a new dashboard with distribution widget and apm stats data"
     },
     {
       "suffix": "_2634813877",
@@ -105,8 +89,16 @@
       "description": "Create a new dashboard with event_timeline widget"
     },
     {
+      "suffix": "_2104498738",
+      "description": "Create a new dashboard with formulas and functions scatterplot widget"
+    },
+    {
       "suffix": "_1738608750",
       "description": "Create a new dashboard with free_text widget"
+    },
+    {
+      "suffix": "_927141680",
+      "description": "Create a new dashboard with funnel widget"
     },
     {
       "suffix": "_915214113",
@@ -129,6 +121,10 @@
       "description": "Create a new dashboard with image widget"
     },
     {
+      "suffix": "_2338918735",
+      "description": "Create a new dashboard with list_stream widget"
+    },
+    {
       "suffix": "_2029850837",
       "description": "Create a new dashboard with log_stream widget"
     },
@@ -141,6 +137,10 @@
       "description": "Create a new dashboard with note widget"
     },
     {
+      "suffix": "_2336428357",
+      "description": "Create a new dashboard with query_table widget"
+    },
+    {
       "suffix": "_2349863258",
       "description": "Create a new dashboard with query_value widget"
     },
@@ -149,24 +149,28 @@
       "description": "Create a new dashboard with scatterplot widget"
     },
     {
-      "suffix": "_173805046",
-      "description": "Create a new dashboard with slo widget"
-    },
-    {
       "suffix": "_2034634967",
       "description": "Create a new dashboard with servicemap widget"
     },
     {
-      "suffix": "_2921337351",
-      "description": "Create a new dashboard with trace_service widget"
+      "suffix": "_173805046",
+      "description": "Create a new dashboard with slo widget"
     },
     {
-      "suffix": "_2336428357",
-      "description": "Create a new dashboard with query_table widget"
+      "suffix": "_2705593938",
+      "description": "Create a new dashboard with sunburst widget and metrics data"
+    },
+    {
+      "suffix": "_3982498788",
+      "description": "Create a new dashboard with timeseries widget containing style attributes"
     },
     {
       "suffix": "_1213075383",
       "description": "Create a new dashboard with toplist widget"
+    },
+    {
+      "suffix": "_2921337351",
+      "description": "Create a new dashboard with trace_service widget"
     }
   ],
   "DeleteDashboards": [
@@ -185,6 +189,10 @@
     {
       "suffix": "",
       "description": "Get all dashboards returns \"OK\" response"
+    },
+    {
+      "suffix": "_1773932563",
+      "description": "Get deleted dashboards returns \"OK\" response"
     }
   ],
   "CancelDowntime": [
@@ -247,6 +255,14 @@
     {
       "suffix": "",
       "description": "Get all hosts for your organization returns \"OK\" response"
+    },
+    {
+      "suffix": "_347346033",
+      "description": "Get all hosts with metadata deserializes successfully"
+    },
+    {
+      "suffix": "_2975406675",
+      "description": "Get all hosts with metadata for your organization returns \"OK\" response"
     }
   ],
   "GetIPRanges": [
@@ -292,6 +308,10 @@
     }
   ],
   "CreateMonitor": [
+    {
+      "suffix": "_3883669300",
+      "description": "Create a RUM formula and functions monitor returns \"OK\" response"
+    },
     {
       "suffix": "_3790803616",
       "description": "Create a ci-pipelines monitor returns \"OK\" response"
@@ -471,6 +491,12 @@
       "description": "Edit an API test returns \"OK\" response"
     }
   ],
+  "GetAPITestResult": [
+    {
+      "suffix": "_1321866518",
+      "description": "Get an API test result returns result with failure object"
+    }
+  ],
   "TriggerTests": [
     {
       "suffix": "",
@@ -481,6 +507,66 @@
     {
       "suffix": "",
       "description": "Get Hourly Usage Attribution returns \"OK\" response"
+    }
+  ],
+  "GetMonthlyUsageAttribution": [
+    {
+      "suffix": "",
+      "description": "Get Monthly Usage Attribution returns \"OK\" response"
+    }
+  ],
+  "GetUsageAttribution": [
+    {
+      "suffix": "",
+      "description": "Get Usage Attribution returns \"OK\" response"
+    }
+  ],
+  "GetUsageCloudSecurityPostureManagement": [
+    {
+      "suffix": "",
+      "description": "Get hourly usage for CSPM returns \"OK\" response"
+    }
+  ],
+  "GetUsageInternetOfThings": [
+    {
+      "suffix": "",
+      "description": "Get hourly usage for IoT returns \"OK\" response"
+    }
+  ],
+  "GetUsageSNMP": [
+    {
+      "suffix": "",
+      "description": "Get hourly usage for SNMP devices returns \"OK\" response"
+    }
+  ],
+  "GetUsageAnalyzedLogs": [
+    {
+      "suffix": "",
+      "description": "Get hourly usage for analyzed logs returns \"OK\" response"
+    }
+  ],
+  "GetIncidentManagement": [
+    {
+      "suffix": "",
+      "description": "Get hourly usage for incident management returns \"OK\" response"
+    }
+  ],
+  "GetUsageIndexedSpans": [
+    {
+      "suffix": "",
+      "description": "Get hourly usage for indexed spans returns \"OK\" response"
+    }
+  ],
+  "GetIngestedSpans": [
+    {
+      "suffix": "",
+      "description": "Get hourly usage for ingested spans returns \"OK\" response"
+    }
+  ],
+  "GetUsageProfiling": [
+    {
+      "suffix": "",
+      "description": "Get hourly usage for profiled hosts returns \"OK\" response"
     }
   ],
   "CreateWebhooksIntegrationCustomVariable": [

@@ -32,6 +32,8 @@ After choosing to create a `SSL` test, define your test's request.
 1. Specify the **Host** and the **Port** to run your test on. By default, the port is set to `443`.
 2. Add **Advanced Options** (optional) to your test:
     * **Accept self-signed certificates**: Bypasses any server error related to a self-signed certificate.
+    * **Fail on revoked certificate in stapled OCSP**: Fail the test if the certificate is labeled as revoked by the OCSP stapling.
+    * **Timeout**: Specify the amount of time in seconds before the test times out.
     * **Server Name**: Specifies on which server you want to initiate the TLS handshake, allowing the server to present one of multiple possible certificates on the same IP address and TCP port number. By default, the parameter is filled by the **Host** value.
     * **Client certificate**: Authenticates through mTLS by uploading your client certificate (`.crt`) and the associated private key (`.key`) in `PEM` format. **Note**: You can use the `openssl` library to convert your certificates. For example, convert a `PKCS12` certificate to `PEM` formatted private keys and certificates.
 
@@ -50,7 +52,7 @@ Click **Test URL** to try out the request configuration. A response preview is d
 
 ### Define assertions
 
-Assertions define what an expected test result is. When hitting `Test URL` basic assertions on certificate validity, expiration data, TLS version, and `response time` are added based on the response that was obtained. You must define at least one assertion for your test to monitor.
+Assertions define what an expected test result is. After you click **Test URL**, basic assertions on certificate validity, expiration data, TLS version, and `response time` are added based on the response that was obtained. You must define at least one assertion for your test to monitor.
 
 | Type                  | Operator                                                                               | Value type                 |
 |-----------------------|----------------------------------------------------------------------------------------|----------------------------|
@@ -60,7 +62,7 @@ Assertions define what an expected test result is. When hitting `Test URL` basic
 | maximum TLS version   | `is less than`, `is less than or equal`, `is`, `is more than`, `is more than or equal` | _Decimal_                  |
 | minimum TLS version   | `is more than`, `is more than or equal`                                                | _Decimal_                  |
 
-You can create up to 20 assertions per API test by clicking on **New Assertion** or by clicking directly on the response preview:
+You can create up to 20 assertions per API test by clicking **New Assertion** or by clicking directly on the response preview:
 
 {{< img src="synthetics/api_tests/assertions.png" alt="Define assertions for your SSL test" style="width:90%;" >}}
 
@@ -82,7 +84,7 @@ Set alert conditions to determine the circumstances under which you want a test 
 
 #### Alerting rule
 
-When you set the alert conditions to: `An alert is triggered if any assertion fails for X minutes from any n of N locations`, an alert is triggered only if these two conditions are true:
+When you set the alert conditions to: `An alert is triggered if your test fails for X minutes from any n of N locations`, an alert is triggered only if these two conditions are true:
 
 * At least one location was in failure (at least one assertion failed) during the last *X* minutes.
 * At one moment during the last *X* minutes, at least *n* locations were in failure.
@@ -110,13 +112,13 @@ A notification is sent by your test based on the [alerting conditions](#define-a
 
 3. Specify how often you want your test to **re-send the notification message** in case of test failure. To prevent renotification on failing tests, leave the option as `Never renotify if the monitor has not been resolved`.
 
-Click on **Save** to save your test and have Datadog start executing it.
+Click **Save** to save your test and have Datadog start executing it.
 
 ## Variables
 
 ### Create local variables
 
-You can create local variables by clicking on **Create Local Variable** at the top right hand corner of your test configuration form. You can define their values from one of the below available builtins:
+You can create local variables by clicking **Create Local Variable** at the top right hand corner of your test configuration form. You can define their values from one of the below available builtins:
 
 `{{ numeric(n) }}`
 : Generates a numeric string with `n` digits.
@@ -161,8 +163,9 @@ These reasons include the following:
 
 `TIMEOUT`
 : The request couldn't be completed in a reasonable time. Two types of `TIMEOUT` can happen:
-  - `TIMEOUT: The request couldn’t be completed in a reasonable time.` indicates that the timeout happened at the TCP socket connection level.
-  - `TIMEOUT: Retrieving the response couldn’t be completed in a reasonable time.` indicates that the timeout happened on the overall run (which includes TCP socket connection, data transfer, and assertions).
+  - `TIMEOUT: The request couldn’t be completed in a reasonable time.` indicates that the request duration hit the test defined timeout (default is set to 60s). 
+  For each request only the completed stages for the request are displayed in the network waterfall. For example, in the case of `Total response time` only being displayed, the timeout occurred during the DNS resolution.
+  - `TIMEOUT: Overall test execution couldn't be completed in a reasonable time.` indicates that the test duration (request + assertions) hits the maximum duration (60.5s).
 
 ## Permissions
 
@@ -170,13 +173,22 @@ By default, only users with the [Datadog Admin and Datadog Standard roles][11] c
 
 If you have access to the [custom role feature][12], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions.
 
+### Restrict access
+
+<div class="alert alert-warning">
+Access restriction is available for customers with <a href="https://docs.datadoghq.com/account_management/rbac/?tab=datadogapplication#create-a-custom-role">custom roles</a> enabled on their account.</div>
+
+You can restrict access to an SSL test based on the roles in your organization. When creating an SSL test, choose which roles (in addition to your user) can read and write your test. 
+
+{{< img src="synthetics/settings/restrict_access.png" alt="Set permissions for your test" style="width:70%;" >}}
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /api/v1/synthetics/#get-all-locations-public-and-private
 [2]: /synthetics/private_locations
-[3]: /synthetics/cicd_testing
+[3]: /synthetics/cicd_integrations
 [4]: /synthetics/search/#search
 [5]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
 [6]: /monitors/notify/#notify-your-team

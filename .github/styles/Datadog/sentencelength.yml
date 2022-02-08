@@ -1,5 +1,5 @@
 extends: occurrence
-message: "Try to keep your sentence length to 25 words or less."
+message: "Try to keep your sentence length to 25 words or fewer."
 level: warning
 # Here, we're counting the number of words
 # in a sentence.

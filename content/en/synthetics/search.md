@@ -12,7 +12,7 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/test-maintenance-best-practices/"
   tag: "Blog"
   text: "Best practices for maintaining end-to-end tests"
-- link: "/synthetics/cicd_testing/ci_results_explorer"
+- link: "/synthetics/ci_results_explorer"
   tag: "Documentation"
   text: CI Results Explorer
 ---
@@ -74,9 +74,9 @@ Hover over a test in the table to populate options such as `Pause`, `Run Test No
 
 ### Audit events
 
-The creation, addition, and deletion of Synthetic tests, global variables, and private locations create events in the [event stream][4]. Generated events explain the change and display the user who performed the change.
+The creation, addition, and deletion of Synthetic tests, global variables, and private locations create events in the [event explorer][4]. Generated events explain the change and display the user who performed the change.
 
-Find all Synthetic Monitoring related changes by searching the event stream for `#audit synthetics`. Retrieve changes that were done on a specific test by searching on the id of your test. For example, `tags:public_id:4m7-bqy-mxq`.
+Find all Synthetic Monitoring related changes by searching the event explorer for `tags:(audit AND synthetics)`. Retrieve changes that were done on a specific test by searching on the id of your test. For example, `tags:"public_id:7sp-azg-r5m"`.
 
 {{< img src="synthetics/search/audit_events.png" alt="Synthetic Monitoring audit events" >}}
 
@@ -86,5 +86,5 @@ Find all Synthetic Monitoring related changes by searching the event stream for 
 
 [1]: https://app.datadoghq.com/synthetics/list
 [2]: https://app.datadoghq.com/synthetics/explorer/ci
-[3]: /synthetics/cicd_testing/ci_results_explorer
+[3]: /synthetics/ci_results_explorer
 [4]: /events/

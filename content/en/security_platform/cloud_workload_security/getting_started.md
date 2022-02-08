@@ -9,6 +9,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/linux-security-threat-detection-datadog/"
   tag: "Blog"
   text: "How to detect security threats in your systems' Linux processes"
+- link: "https://www.datadoghq.com/blog/pwnkit-vulnerability-overview-and-remediation/"
+  tag: "Blog"
+  text: "The PwnKit vulnerability: Overview, detection, and remediation"
 ---
 
 ## Overview
@@ -22,8 +25,8 @@ There are two types of monitoring that the Datadog Agent uses for Cloud Workload
 
 * Datadog Agent >= 7.27.0
 * Data collection is done using eBPF, so Datadog minimally requires platforms that have underlying Linux kernel versions of 4.15.0+ or have eBPF features backported. CWS supports the following Linux distributions:
-  * Ubuntu 16.04+
-  * Debian 9+
+  * Ubuntu 18.04+
+  * Debian 10+
   * Amazon Linux 2
   * Fedora 26+
   * SUSE 15+
@@ -50,7 +53,7 @@ There are two types of monitoring that the Datadog Agent uses for Cloud Workload
     ```
 
 3. Restart the Agent.
-4. **Optional, if Security Monitoring is checked** Follow [these instructions][2] to collect audit logs for Kubernetes.
+4. **Optional, if Cloud SIEM is checked** Follow [these instructions][2] to collect audit logs for Kubernetes.
 
 
 [1]: https://app.datadoghq.com/account/settings#agent/kubernetes

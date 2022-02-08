@@ -361,6 +361,30 @@
     "description": "The download endpoint generates a Cloud Workload Security policy file from your currently active\nCloud Workload Security rules, and downloads them as a .policy file. This file can then be deployed to\nyour agents to update the policy running in your environment.",
     "summary": "Get the latest Cloud Workload Security policy"
   },
+  "ListCloudWorkloadSecurityAgentRules": {
+    "description": "Get the list of Agent rules.",
+    "summary": "Get all Cloud Workload Security Agent rules"
+  },
+  "CreateCloudWorkloadSecurityAgentRule": {
+    "description": "Create a new Agent rule with the given parameters.",
+    "summary": "Create a Cloud Workload Security Agent rule",
+    "request_description": "The definition of the new Agent rule.",
+    "request_schema_description": "Request object that includes the Agent rule to create."
+  },
+  "DeleteCloudWorkloadSecurityAgentRule": {
+    "description": "Delete a specific Agent rule.",
+    "summary": "Delete a Cloud Workload Security Agent rule"
+  },
+  "GetCloudWorkloadSecurityAgentRule": {
+    "description": "Get the details of a specific Agent rule.",
+    "summary": "Get a Cloud Workload Security Agent rule"
+  },
+  "UpdateCloudWorkloadSecurityAgentRule": {
+    "description": "Update a specific Agent rule.\nReturns the Agent rule object when the request is successful.",
+    "summary": "Update a Cloud Workload Security Agent rule",
+    "request_description": "New definition of the Agent rule.",
+    "request_schema_description": "Request object that includes the Agent rule with the attributes to update."
+  },
   "ListSecurityFilters": {
     "description": "Get the list of configured security filters with their definitions.",
     "summary": "Get all security filters"
