@@ -36,15 +36,16 @@ By default, the widget menu displays links to your host, [traces][5], and [logs]
 
 The widget contains links to the following pages:  
 
-| Link           | Description                                                                           |
-|----------------|---------------------------------------------------------------------------------------|
-| Hosts          | Links to the [Host Map][9] if series consists of more than one host. Links to the [Host Dashboard][10] if series consists of one host.|
-| Containers     | Links to the [Live Container][11] page.                                                |
-| Processeses    | Links to the [Live Process][12] page.                                                 |
-| APM Traces     | Opens a side panel displaying underlying traces that link to the [Trace Explorer][13].|
-| RUM Events     | Links to the [RUM Explorer][14].                                                      |
-| Profiles       | Links to the APM [Profile Explorer][15].                                              |
-| Logs           | Opens a side panel displaying underlying logs that link to the [Log Explorer][16].    |
+| Link          | Description                                                                                                                            |
+|---------------|----------------------------------------------------------------------------------------------------------------------------------------|
+| Hosts         | Links to the [Host Map][9] if series consists of more than one host. Links to the [Host Dashboard][10] if series consists of one host. |
+| Containers    | Links to the [Live Container][11] page.                                                                                                |
+| Processeses   | Links to the [Live Process][12] page.                                                                                                  |
+| APM Traces    | Opens a side panel displaying underlying traces that link to the [Trace Explorer][13].                                                 |
+| RUM Events    | Links to the [RUM Explorer][14].                                                                                                       |
+| Profiles      | Links to the APM [Profile Explorer][15].                                                                                               |
+| Logs          | Opens a side panel displaying underlying logs that link to the [Log Explorer][16].                                                     |
+| Events        | Links to the [Event Explorer][25]                                                                                                      |
 
 When applicable, context links embed:
 
@@ -254,3 +255,4 @@ Remapping the IP address creates a context link that connects your RUM events wi
 [22]: /logs/
 [23]: /integrations/#cat-log-collection
 [24]: /logs/explorer/saved_views/
+[25]: /events/explorer/
