@@ -81,14 +81,9 @@ func main() {
 
 {{< programming-lang lang="nodejs" >}}
 
-To enable debug mode for the Datadog Node.js Tracer, enable it during its `init`:
+To enable debug mode for the Datadog Node.js Tracer, use the environment variable `DD_TRACE_DEBUG=true`. 
 
-```javascript
-const tracer = require('dd-trace').init({
-  debug: true
-})
-```
-**Note:** For version 2.X debug mode can only be configured by the environment variable `DD_TRACE_DEBUG=true`.
+**Note:** For versions below 2.X, debug mode could be enabled programmatically inside the tracer initialization but this is no longer supported.
 
 **Application Logs**
 
