@@ -34,4 +34,4 @@ Si tout fonctionne comme prévu, vous devriez obtenir une sortie similaire à ce
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]:/fr/real_user_monitoring/ios/advanced_configuration/#initialization-parameters
+[1]: https://docs.datadoghq.com/fr/real_user_monitoring/ios/advanced_configuration/#initialization-parameters
