@@ -50,10 +50,10 @@ steps:
     label: Run tests
 ```
 
-The following tags will show in the root span as well as the relevant job span in Datadog.
+The following tags are shown in the root span as well as the relevant job span in Datadog.
 
 - `team: backend`
-- `go.version: go version go1.17 darwin/amd64` (output will depend on the runner)
+- `go.version: go version go1.17 darwin/amd64` (output depends on the runner)
 
 The resulting pipeline looks as follows:
 
