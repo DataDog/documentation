@@ -37,8 +37,8 @@ function reloadWistiaVidScripts(vidId) {
 }
 
 function gtag() {
-    const dataLayer = window.dataLayer || [];
-    dataLayer.push(arguments);
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push(arguments);
 }
 
 const getCookieByName = (name) => {
