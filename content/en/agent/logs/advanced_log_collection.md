@@ -458,6 +458,8 @@ logs_config:
   auto_multi_line_detection: true
 ```
 
+For containerized deployments this can be enabled with the environment variable `DD_LOGS_CONFIG_AUTO_MULTI_LINE_DETECTION=true`.
+
 It can also be enabled or disabled (overriding the global config) per log configuration:
 
 {{< tabs >}}
