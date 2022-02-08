@@ -207,7 +207,7 @@ If the installation script is unable to find the correct PHP version, you can se
 $ php dd-library-php-setup.php --php-bin /usr/bin/php7.4 --tracer-version=latest --appsec-version=latest
 ```
 ### Connection to helper failed
-If the Application Security extension is unable to communicate with the helper process, you will see the following log warning:
+If the Application Security extension is unable to communicate with the helper process, the following warning occurs:
 
 ```
 PHP Warning:  Unknown: [ddappsec] Connection to helper failed and we are not going to attempt to launch it: dd_error
@@ -295,9 +295,9 @@ For NodeJS, if you don’t see Application Security events in the Application Se
 
     a. If `@datadog/native-appsec` is not found then the installation is incorrect. See [installation instructions][2].
     
-    b. If it works, you probably build and run your app on different OS, add the command to your runtime start script.
+    b. If @datadog/native-appsec is found when starting your application, add the command to your runtime start script.
 
-    c. If it doesn’t work, you might be running an unsupported runtime.
+    c. If the tracer still does not work, you might be running an unsupported runtime.
 
 4. To enable logs, add the following environment variables: 
 
@@ -322,7 +322,7 @@ end
 
 Debug logs are verbose but useful. If you open up a ticket with [Datadog support][1], forward the logs with your request.
 
-#### Check #1: Is AppSec correctly enabled?
+#### Is AppSec correctly enabled?
 
 Application Security has been correctly enabled if you see logs such as:
 
@@ -333,11 +333,11 @@ D, [2021-12-14T11:03:32.200491 #73127] DEBUG -- ddtrace: [ddtrace] (libddwaf/lib
 
 If you do not see those logs, check the following:
 
-- The correct Application Security environment variables are set up for your application process. 
+- If the correct Application Security environment variables are set for your application process. 
 - The latest gem version is installed.
 - The tracer is configured correctly and sending APM traces to your APM dashboard.
 
-#### Check #2a: Is Application Security called on HTTP requests?
+#### Is Application Security called for each HTTP request?
 
 To confirm that Application Security is called for each HTTP request, trigger a [test attack](#1-send-a-test-attack-to-your-application) and look for these logs:
 
@@ -365,7 +365,7 @@ Datadog.configure do |c|
 
 If `c.use :rack` is present, remove it to see if the check passes.
 
-#### Check #2b: Is Application Security detecting HTTP request security events?
+#### Is Application Security detecting HTTP request security events?
 
 To confirm that Application Security is detecting security events, trigger a [test attack](#1-send-a-test-attack-to-your-application), and look for these logs:
 
@@ -374,7 +374,7 @@ D, [2021-12-14T22:39:53.268820 #106051] DEBUG -- ddtrace: [ddtrace] (ddtrace/lib
 ```
 If you don’t see those logs, check that another upstream security system is not filtering out the requests or altering them based on the test header value. 
 
-#### Check #3a: Is the tracer sending traces with security data?
+#### Is the tracer sending traces with security data?
 Application Security events are sent with APM traces. To confirm that Application Security correctly detects and inserts security data into traces, trigger a [test attack](#1-send-a-test-attack-to-your-application), and look for these tracer logs:
 
 ```
@@ -404,9 +404,9 @@ Metrics: [
    _sampling_priority_v1 => 2.0]]
 ```
 
-Please wait a minute for the agent to forward the traces, then check that the traces show up in the APM dashboard. The security information in the traces may take additional time to be processed by the backend before showing up as events in the Application Security dashboard.
+Wait a minute for the agent to forward the traces, then check that the traces show up in the APM dashboard. The security information in the traces may take additional time to be processed by Datadog before showing up as events in the Application Security dashboard.
 
-#### Check #3b: Is Application Security forwarding security events to the agent?
+#### Is Application Security forwarding security events to the Agent?
 
 To confirm that Application Security is detecting and forwarding security events to the agent, trigger a [test attack](#1-send-a-test-attack-to-your-application), and look for these logs:
 
@@ -414,7 +414,7 @@ To confirm that Application Security is detecting and forwarding security events
 D, [2021-12-14T11:03:37.347815 #73127] DEBUG -- ddtrace: [ddtrace] (ddtrace/lib/datadog/security/worker.rb:54:in `block in perform') processed events: [{:event_id=>"eb1eca52-74e1-435b-9a6c-44046d3765ee", :event_type=>"appsec.threat.attack", :event_version=>"0.1.0", :detected_at=>"2021-12-14T10:03:37Z", :type=>"security_scanner", :blocked=>false, :rule=>{:id=>"ua0-600-10x", :name=>"Nessus", :set=>"security_scanner"}, :rule_match=>{:operator=>"match_regex", :operator_value=>"(?i)^Nessus(/|([ :]+SOAP))", :parameters=>[{:name=>"server.request.headers.no_cookies", :key_path=>["user-agent"], :value=>"Nessus SOAP", :highlight=>["Nessus SOAP"]}]}, :context=>{:actor=>{:context_version=>"0.1.0", :ip=>{:address=>"127.0.0.1"}, :identifiers=>nil, :_id=>nil}, :host=>{:os_type=>"Linux", :hostname=>"procyon-vm", :context_version=>"0.1.0"}, :http=>{:context_version=>"0.1.0", :request=>{:scheme=>"http", :method=>"GET", :url=>"http://127.0.0.1:9292/admin.php", :host=>"127.0.0.1", :port=>9292, :path=>"/admin.php", :remote_ip=>"127.0.0.1", :headers=>{"host"=>"127.0.0.1:9292", "accept"=>"*/*", "user-agent"=>"Nessus SOAP"}, :useragent=>"Nessus SOAP"}, :response=>{:status=>404, :blocked=>false, :headers=>{"Content-Type"=>"text/plain"}}}, :service=>{:context_version=>"0.1.0", :name=>"rack", :environment=>nil}, :span=>{:context_version=>"0.1.0", :id=>4439751766880249768}, :tags=>{:context_version=>"0.1.0", :values=>["_dd.appsec.enabled:1", "_dd.runtime_family:ruby", "service:rack"]}, :trace=>{:context_version=>"0.1.0", :id=>2632764434813487337}, :tracer=>{:context_version=>"0.1.0", :runtime_type=>"ruby", :runtime_version=>"3.0.2", :lib_version=>"0.54.1"}}}]
 ```
 
-Please wait about a minute for the agent to forward the events to the backend, then check that the traces show up in the APM dashboard.
+Wait a minute for the Agent to forward the events to Datadog, then check that the traces show up in the APM dashboard.
 
 [1]: /tracing/troubleshooting/#tracer-debug-logs
 {{< /programming-lang >}}
