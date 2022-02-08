@@ -104,8 +104,7 @@ const tracer = require('dd-trace').init({
   logger: {
     debug: message => logger.trace(message),
     error: err => logger.error(err)
-  },
-  debug: true
+  }
 })
 ```
 
