@@ -8,8 +8,8 @@ description: "Learn how to control Ingestion and Indexing rates with Tracing wit
   Ingestion Control page v2 is in private beta. Contact <a href="/help/">Datadog support</a> to request access for your organization. The support team will send you a notification when the new Ingestion Control page is enabled for your organization. The Ingestion Control page v2 replaces the former <a href="/tracing/trace_ingestion/ingestion_controls">Ingestion Controls</a>.</div>
 
 The Ingestion Control page provides visibility at the Agent and tracing libraries level into the ingestion configuration of your applications and services. From the [ingestion control configuration page][1] , you can:
-- Investigate and act on potential ingestion configuration issues (Agent limited CPU or RAM resources).
-- Check service level ingestion configuration and adjust traces-per-second sampling rates for high throughput services.
+- Investigate and act on potential ingestion configuration issues (limited CPU or RAM resources for the Agent).
+- Check service-level ingestion configuration and adjust traces-per-second sampling rates for high throughput services.
 - Understand which ingestion mechanisms are responsible for sampling most of your traces.
 
 {{< img src="tracing/trace_indexing_and_ingestion/ingestion_control_page.png" style="width:100%;" alt="Ingestion Control Page Overview" >}}
@@ -18,20 +18,20 @@ All metrics used in the page are based on live traffic data of the **past 1 hour
 
 ## Summary across all environments
 
-Get an overview of the total ingested data over the past hour, the active APM intrastructure (hosts, Fargate tasks and serverless functions), and an estimate of your monthly ingestion quota. If the quota is less than `100%`, the projected ingested data fits in your [monthly allotment][2] of 150GB per host.
+Get an overview of the total ingested data over the past hour, the active APM intrastructure (hosts, Fargate tasks and serverless functions), and an estimate of your monthly ingestion quota. If the quota is less than `100%`, the projected ingested data fits in your [monthly per-host allotment][2].
 
 ## Service table view
 
 The service table contains information by service about the ingestion configuration:
 
 Services
-: The name of each service sending traces to Datadog. The table contains root and non-root services that ingested data in the over the past one hour.
+: The name of each service sending traces to Datadog. The table contains root and non-root services that ingested data in the past one hour.
 
 Ingested Traces/s
-: Average number of traces per second ingested into Datadog for the service over the past one hour.
+: Average number of traces per second ingested into Datadog for the service in the past one hour.
 
 Ingested Bytes/s
-: Average number of bytes per second ingested into Datadog for the service over the past one hour.
+: Average number of bytes per second ingested into Datadog for the service in the past one hour.
 
 Downstream Bytes/s
 : Average number of bytes per second ingested into Datadog for which the service is responsible of the ingestion. This includes the bytes of all descending child spans, as well as spans caught by the [Error sampler][3], the [Rare sampler][4] and the [App Analytics][5] mechanism.
