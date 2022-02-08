@@ -6,6 +6,8 @@ kind: guide
 {{< whatsnext desc="Using the Datadog Forwarder:" >}}
     {{< nextlink href="/serverless/guide/datadog_forwarder_node" >}}Installing Serverless with the Datadog Forwarder - Node.js{{< /nextlink >}}
     {{< nextlink href="/serverless/guide/datadog_forwarder_python" >}}Installing Serverless with the Datadog Forwarder - Python{{< /nextlink >}}
+    {{< nextlink href="/serverless/guide/datadog_forwarder_java" >}}Installing Serverless with the Datadog Forwarder - Java{{< /nextlink >}}
+    {{< nextlink href="/serverless/guide/datadog_forwarder_go" >}}Installing Serverless with the Datadog Forwarder - Go{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Using the Datadog Lambda Extension:" >}}
