@@ -20,6 +20,8 @@ You can:
 
 This guide documents the migration process for organizations that follow Azure's Cloud Adoption Framework.
 
+If you don't have a Datadog account yet, you can [start a two-week trial][2].
+
 ## Planning
 
 When planning your migration, prepare your Datadog account to monitor your new workloads as soon as they are migrated into your Azure account by doing the following:
@@ -33,7 +35,7 @@ When planning your migration, prepare your Datadog account to monitor your new w
 
 Datadog and Azure have partnered together to offer Datadog's services within your Azure account. For each one of your landing zones, you can create a Datadog resource to link your Datadog account with your Azure account and access your observability data in Azure. 
 
-If you don't have a Datadog account yet, [start a two-week trial][2]. For more information about this process, see the [Datadog-Azure Integration][1].
+For more information about this process to help you determine what Azure data you want to collect in Datadog, see the [Microsoft Azure documentation][1].
 
 The Datadog resource streamlines the setup of a large list of Datadog-Azure integrations and significantly increases your teams' visibility on the health and performance of new Azure workloads. Datadog recommends enabling the [Azure DevOps integration][3] so  your teams can correlate workload performance data with build and release events. 
 
