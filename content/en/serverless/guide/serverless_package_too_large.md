@@ -1,5 +1,5 @@
 ---
-title: Serverless Package Too Large
+title: Troubleshooting Serverless Package Too Large Errors
 kind: documentation
 further_reading:
 - link: '/serverless/installation/nodejs'
@@ -7,15 +7,18 @@ further_reading:
   text: 'Instrumenting Node.js Applications'
 ---
 
-This guide helps you troubleshoot the error "Code uncompressed size is greater than max allowed size of 272629760" when instrumenting your Node.js serverless application using the Datadog serverless plugin. Although there have been very few reports of the error when instrumenting applications written in other languages or deployed using other tools, the ideas described below may still apply.
+This guide helps you troubleshoot the error "Code uncompressed size is greater than max allowed size of 272629760". This error is most commonly seen when instrumenting Node.js serverless applications using the Datadog serverless plugin. The troubleshooting strategy may also apply to the same error if you see it for other languages or deployment methods.
 
-Essentially this error indicates that your function's _uncompressed_ code size exceeds the 250 MB limit. Both your [function package][1] (the .zip artifact containing your function code and dependencies) and the [Lambda layers][2] configured on your function count towards this limit. Therefore you want to examine both of them to narrow down the root cause. 
+The error indicates that your function's _uncompressed_ code size exceeds the 250 MB limit. Both your [function package][1] (the `.zip` artifact containing your function code and dependencies) and the [Lambda layers][2] configured on your function count towards this limit. Examine both to find the root cause. 
 
 ## Layers
 
-Typically Datadog adds two Lambda layers for instrumentation -- a language-specific library that instruments the function code and the Extension that aggregates, buffers and forwards the observability data to the Datadog backend.
+Typically Datadog adds two Lambda layers for instrumentation:
 
-You can inspect the content and size of the Datadog Lambda layers using AWS CLI command [aws lambda get-layer-version][3]. For example, running the following commands gives you links to download the Lambda layers for _Datadog-Node14-x version 67_ and _Datadog-Extension version 19_ and inspect the uncompressed size (~30 MB combined). The uncompressed size varies by layers and versions, and you should replace the layer name and version number with the ones used by your applications.
+- A language-specific library that instruments the function code, and
+- The extension, which aggregates, buffers, and forwards observability data to the Datadog backend.
+
+Inspect the content and size of the Datadog Lambda layers using AWS CLI command [`aws lambda get-layer-version`][3]. For example, running the following commands gives you links to download the Lambda layers for _Datadog-Node14-x version 67_ and _Datadog-Extension version 19_ and inspect the uncompressed size (about 30 MB combined). The uncompressed size varies by layers and versions. Replace the layer name and version number in the following example with those used by your applications:
 
 ```
 aws lambda get-layer-version \
@@ -27,31 +30,31 @@ aws lambda get-layer-version \
   --version-number 19
 ```
 
-Besides Datadog Lambda layers, you should also inspect other Lambda layers added (or to be added) to your functions. If you are using the [Serverless Framework][4], you can find the the CloudFormation template from the hidden `.serverless` folder after running the `deploy` or `package` command, and the list of Lambda layers from the `Layers` section.
+In addition to the Datadog Lambda layers, also inspect other Lambda layers added (or to be added) to your functions. If you use the [Serverless Framework][4], you can find the the CloudFormation template from the hidden `.serverless` folder after running the `deploy` or `package` command, and the list of Lambda layers from the `Layers` section.
 
 ## Package
 
-The function deployment package may often contain large files or code that you don't actually need. If you are using the Serverless Framework, you can find the generated deployment package (.zip file) from the hidden `.serverless` folder after running the `deploy` or `package` command.
+The function deployment package can contain large files or code that you don't need. If you use the Serverless Framework, you can find the generated deployment package (`.zip` file) in the hidden `.serverless` folder after running the `deploy` or `package` command.
 
-If the size of the deployment package and layers don't add up to the limit, you should contact AWS Support for investigation. If the total size does exceed the limit, you should inspect the deployment package and exclude large files that you don't actually need in runtime using the [package][5] option.
+If the sum of the size of the deployment package and layers don't exceed the limit, contact AWS Support for investigation. If the total size does exceed the limit, inspect the deployment package and exclude large files that you don't need in runtime using the [package][5] option.
 
 ## Dependencies
 
-The Datadog Lambda layer packages the instrumentation libraries and makes them available to use in the Lambda execution environment, therefore you do _NOT_ need to define `datadog-lambda-js` and `dd-trace` as `dependencies` in your `package.json`. If you do need the Datadog libraries for local build or tests, define them as `devDependencies` so that they get excluded from the deployment package. Similarly, `serverless-plugin-datadog` is only needed for dev, and should be defined under `devDependencies`.
+The Datadog Lambda layer packages the instrumentation libraries and makes them available to use in the Lambda execution environment, so you do _not_ need to specify `datadog-lambda-js` and `dd-trace` as dependencies in your `package.json`. If you do need the Datadog libraries for local build or tests, specify them as `devDependencies` so that they are excluded from the deployment package. Similarly, `serverless-plugin-datadog` is needed only for development, and should be specified under `devDependencies`.
 
-Besides Datadog dependencies, you should also inspect other dependencies (the `node_modules` folder) that are included into your deployment package and only leave the ones that you need in `dependencies`.
+Also inspect other dependencies (the `node_modules` folder) that are included into your deployment package and only keep the ones that you need in `dependencies`.
 
 ## Webpack
 
-Using a bundler like [Webpack][6] can dramatically reduce your deployment package size by only including the code that are used. See [Node.js Lambda Tracing and Webpack Compatibility][7] for required webpack configurations.
+Using a bundler like [Webpack][6] can dramatically reduce your deployment package size by only including the code that is used. See [Node.js Lambda Tracing and Webpack Compatibility][7] for required webpack configurations.
 
 ## Get help
 
-If you need the Datadog support team to help investigate, please include the following information in your ticket.
+If you need the Datadog support team to help investigate, include the following information in your ticket:
 
-1. the function's configured Lambda layers (name and version, or ARNs)
-2. the function's deployment package (or a screenshot showing the content and size of the uncompressed package) to be uploaded to AWS
-3. the project configuration files (don't forget to redact hardcoded secrets) - serverless.yaml, package.json, package-lock.json, yarn.lock, tsconfig.json and webpack.config.json.
+1. The function's configured Lambda layers (name and version, or ARNs).
+2. The function's deployment package (or a screenshot showing the content and size of the uncompressed package) to be uploaded to AWS.
+3. The project configuration files, with **redacted hardcoded secrets**: `serverless.yaml`, `package.json`, `package-lock.json`, `yarn.lock`, `tsconfig.json` and `webpack.config.json`.
 
 ## Further Reading
 

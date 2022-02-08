@@ -16,5 +16,5 @@ kind: guide
 
 {{< whatsnext desc="Troubleshooting:" >}}
     {{< nextlink href="/serverless/guide/serverless_tracing_and_webpack" >}}Node.js Lambda Tracing and Webpack Compatibility{{< /nextlink >}}
-    {{< nextlink href="/serverless/guide/serverless_package_too_large" >}}Serverless Package Too Large{{< /nextlink >}}
+    {{< nextlink href="/serverless/guide/serverless_package_too_large" >}}Troubleshooting Serverless Package Too Large Errors{{< /nextlink >}}
 {{< /whatsnext >}}
