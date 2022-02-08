@@ -23,7 +23,14 @@ Alternatively, you can use the metric `datadog.apm.appsec_host` to check if Appl
 
 1. Go to **Metrics > Summary** in Datadog.
 2. Search for the metric `datadog.apm.appsec_host`. If the metric doesn’t exist, then there are no services running Application Security. If the metric exists, the services are reported with the metric tags `host` and `service`.
-3. Select the metric, and in the **Tags** section, search for `service` to see which services are running Application Security. 
+3. Select the metric, and in the **Tags** section, search for `service` to see which services are running Application Security.
+
+Check for `datadog.trace_agent.appsec.request` metrics to confirm the Datadog Agent is receiving Application Security events.
+
+1. Go to **Metrics > Summary** in Datadog.
+2. Search for `datadog.trace_agent.appsec.request` metrics. If the metrics do not exist, then the Agent is not receiving Application Security events. If the metrics are found, but the Application Security dashboard doesn't show any data, check `datadog.trace_agent.appsec.request_error` to see if there are any errors related to sending the data to the Agent.
+
+If you are not seeing `datadog.apm.appsec_host` or `datadog.trace_agent.appsec.request`, check the [in-app instructions][3] to confirm that all steps for the initial setup are complete.
 
 ## Application Security rate limits
 
@@ -41,7 +48,7 @@ Simulate an attack to test your Application Security setup using the following c
 curl -A Arachni/v YOUR_APP_URL
 ```
 
-View the resulting Application Security event in the [Application Security dashboard][3]. 
+View the resulting Application Security event in the [Application Security dashboard][4]. 
 
 It is possible that the test attack doesn't reach your application because of a firewall or another type of proxy server. It’s known that the following services block the Arachni test:
 
@@ -53,7 +60,7 @@ To ensure that the Arachni test isn’t blocked:
 - Run the test from the machine hosting the service.
 - Verify that curl returns 200.
 - Verify that there is a trace with the attribute `@appsec.event:true`.
-- If [debug logs][4] are available, look for the following logs to see if the test is being blocked:
+- If [debug logs][5] are available, look for the following logs to see if the test is being blocked:
 
   ```
   DAS-0011-00: AppSec In-App WAF returned: <full_iaw_output> Took <exec_duration> ms
@@ -134,12 +141,12 @@ For Ruby, the Rack integration is required.
  To troubleshoot this step of the process, do the following: 
 
 - Check the details of the running Agent at this address `http://<agent-machine-name>:<agent-port>/info`, usually `http://localhost:8126/info`. 
-- Ensure there are no Agent transmission errors related to spans in your [tracer logs][4]. 
+- Ensure there are no Agent transmission errors related to spans in your [tracer logs][5]. 
 - If the Agent is installed on a separate machine, check that `DD_AGENT_HOST` and, optionally, `DD_TRACE_AGENT_PORT` are set, or that `DD_TRACE_AGENT_URL` is set for the application tracing library.
 
 ### 4. Check Datadog Agent to backend configuration
 
-Application Security events are sent over [spans][5]. To confirm that spans are successfully transmitted to Datadog, check that your tracer logs contain logs that look similar to this:
+Application Security events are sent over [spans][6]. To confirm that spans are successfully transmitted to Datadog, check that your tracer logs contain logs that look similar to this:
 
 ```
 2021-11-29 21:19:58 CET | TRACE | INFO | (pkg/trace/info/stats.go:111 in LogStats) | [lang:.NET lang_version:5.0.10 interpreter:.NET tracer_version:1.30.1.0 endpoint_version:v0.4] -> traces received: 2, traces filtered: 0, traces amount: 1230 bytes, events extracted: 0, events sampled: 0
@@ -423,7 +430,7 @@ Wait a minute for the Agent to forward the events to Datadog, then check that th
 If you continue to have issues with Application Security, contact [Datadog support][1] with the following information: 
 
 - Confirmation that the [test attack](#1-send-a-test-attack-to-your-application) was successfully sent 
-- Tracer [startup][2] or [debug][4] logs
+- Tracer [startup][2] or [debug][5] logs
 
 ## Further Reading
 
@@ -431,6 +438,7 @@ If you continue to have issues with Application Security, contact [Datadog suppo
 
 [1]: /help/
 [2]: /tracing/troubleshooting/tracer_startup_logs/
-[3]: https://app.datadoghq.com/security/appsec
-[4]: /tracing/troubleshooting/#tracer-debug-logs
-[5]: /tracing/visualization/#spans
+[3]: https://app.datadoghq.com/security/appsec?instructions=all
+[4]: https://app.datadoghq.com/security/appsec
+[5]: /tracing/troubleshooting/#tracer-debug-logs
+[6]: /tracing/visualization/#spans
