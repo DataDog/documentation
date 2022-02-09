@@ -241,12 +241,20 @@ Use this optional configuration step to assign roles on that archive and restric
 
 #### Datadog tags
 
-Use this configuration optional step to:
+Use this optional configuration step to:
 
 * Include all log tags in your archives (activated by default on all new archives). **Note**: This increases the size of resulting archives.
 * Add tags on rehydrated logs according to your Restriction Queries policy. See [logs_read_data][9] permission.
 
 {{< img src="logs/archives/tags_in_out.png" alt="Configure Archive Tags"  style="width:75%;">}}
+
+#### Define maximum scan size
+
+Use this optional configuration step to define the maximum volume of log data (in GB) that can be scanned for Rehydration on your Log Archives.
+
+For Archives with a maximum scan size defined, all users will need to first estimate the scan size before they are allowed to start a Rehydration. If the estimated scan size is greater than what is permitted for that Archive, users will have to reduce the time range over which the Rehydration is being requested to reduce the scan size before being able to start a Rehydration.
+
+{{< img src="logs/archives/max_scan_size.png" alt="Define maximum scan size on Archive"  style="width:75%;">}}
 
 #### Storage class
 
