@@ -368,101 +368,106 @@ main:
     parent: agent_amazon_ecs
     identifier: agent_amazon_ecs_data_collected
     weight: 504
+  - name: AWS Fargate
+    url: integrations/ecs_fargate/
+    parent: agent
+    identifier: ecs_fargate
+    weight: 6
   - name: IoT
     url: agent/iot/
     parent: agent
     identifier: agent_iot
-    weight: 6
+    weight: 7
   - name: Log Collection
     url: agent/logs/
     identifier: agent_logs
     parent: agent
-    weight: 7
+    weight: 8
   - name: Advanced Log Collection
     url: agent/logs/advanced_log_collection
     parent: agent_logs
-    weight: 701
+    weight: 801
   - name: Proxy
     url: agent/logs/proxy
     parent: agent_logs
-    weight: 702
+    weight: 802
   - name: Transport
     url: agent/logs/log_transport
     parent: agent_logs
-    weight: 703
+    weight: 803
   - name: Proxy
     url: agent/proxy/
     parent: agent
     identifier: agent_proxy
-    weight: 8
+    weight: 9
   - name: Versions
     url: agent/versions
     parent: agent
     identifier: agent_versions
-    weight: 9
+    weight: 10
   - name: Upgrade to Agent v7
     url: agent/versions/upgrade_to_agent_v7/
     parent: agent_versions
-    weight: 901
+    weight: 1001
   - name: Upgrade to Agent v6
     url: agent/versions/upgrade_to_agent_v6/
     parent: agent_versions
-    weight: 902
+    weight: 1002
   - name: Troubleshooting
     url: agent/troubleshooting/
     parent: agent
-    weight: 10
+    weight: 11
     identifier: agent_troubleshooting
   - name: Debug Mode
     url: agent/troubleshooting/debug_mode/
     parent: agent_troubleshooting
-    weight: 1001
+    weight: 1101
   - name: Agent Flare
     url: agent/troubleshooting/send_a_flare/
     parent: agent_troubleshooting
-    weight: 1002
+    weight: 1102
   - name: Agent Check Status
     url: agent/troubleshooting/agent_check_status/
     parent: agent_troubleshooting
-    weight: 1003
+    weight: 1103
   - name: NTP Issues
     url: agent/troubleshooting/ntp/
     parent: agent_troubleshooting
-    weight: 1004
+    weight: 1104
   - name: Permission Issues
     url: agent/troubleshooting/permissions/
     parent: agent_troubleshooting
-    weight: 1005
+    weight: 1105
   - name: Integrations Issues
     url: agent/troubleshooting/integrations/
     parent: agent_troubleshooting
-    weight: 1006
+    weight: 1106
   - name: Site Issues
     url: agent/troubleshooting/site/
     parent: agent_troubleshooting
-    weight: 1007
+    weight: 1107
   - name: Autodiscovery Issues
     url: agent/troubleshooting/autodiscovery/
     parent: agent_troubleshooting
-    weight: 1008
+    weight: 1108
   - name: Windows Container Issues
     url: agent/troubleshooting/windows_containers
-    weight: 1009
+    weight: 1109
     parent: agent_troubleshooting
   - name: Agent Runtime Configuration
     url: agent/troubleshooting/config
-    weight: 1010
+    weight: 1110
     parent: agent_troubleshooting
   - name: Guides
     url: agent/guide/
     identifier: agent_guides
     parent: agent
-    weight: 11
+    weight: 12
   - name: Security
     identifier: agent_security
     url: security/agent/
     parent: agent
-    weight: 12
+    weight: 13
   - name: Integrations
     url: integrations/
     identifier: integrations_top_level
@@ -1381,8 +1386,8 @@ main:
     parent: tracing_setup_overview
     identifier: tracing_configure_data_security
     weight: 107
-  - name: Trace Search and Analytics
-    url: tracing/trace_search_and_analytics/
+  - name: Trace Explorer
+    url: tracing/trace_explorer/
     parent: tracing
     identifier: trace_explorer
     weight: 2
@@ -1780,7 +1785,7 @@ main:
     weight: 6
   - name: Database Monitoring
     url: database_monitoring/
-    pre: dbm
+    pre: database-2
     identifier: dbm
     weight: 160000
   - name: Setting Up Postgres
@@ -2285,37 +2290,53 @@ main:
     parent: synthetics_private_location
     identifier: synthetics_private_location_monitoring
     weight: 403
-  - name: CI/CD Testing
-    url: /synthetics/cicd_testing
+  - name: CI/CD Integrations
+    url: /synthetics/cicd_integrations
     parent: synthetics
-    identifier: synthetics_cicd_testing
+    identifier: synthetics_cicd_integrations
     weight: 5
-  - name: CI Results Explorer
-    url: /synthetics/cicd_testing/ci_results_explorer
-    parent: synthetics_cicd_testing
+  - name: Configuration
+    url: /synthetics/cicd_integrations/configuration
+    parent: synthetics_cicd_integrations
+    identifier: synthetics_cicd_integrations_configuration
     weight: 501
+  - name: GitHub Actions
+    url: /synthetics/cicd_integrations/github_actions
+    parent: synthetics_cicd_integrations
+    identifier: synthetics_cicd_integrations_github_actions
+    weight: 502
+  - name: Jenkins
+    url: /synthetics/cicd_integrations/jenkins
+    parent: synthetics_cicd_integrations
+    identifier: synthetics_cicd_integrations_jenkins
+    weight: 503
+  - name: CI Results Explorer
+    url: /synthetics/ci_results_explorer
+    parent: synthetics
+    identifier: synthetics_ci_results_explorer
+    weight: 6
   - name: Testing Tunnel
     url: /synthetics/testing_tunnel
     parent: synthetics
     identifier: synthetics_testing_tunnel
-    weight: 6
+    weight: 7
   - name: APM Integration
     url: synthetics/apm/
     parent: synthetics
     identifier: synthetics_apm
-    weight: 7
+    weight: 8
   - name: Settings
     url: synthetics/settings/
     parent: synthetics
-    weight: 8
+    weight: 9
   - name: Search and Manage
     url: synthetics/search/
     parent: synthetics
-    weight: 9
+    weight: 10
   - name: Metrics
     url: synthetics/metrics/
     parent: synthetics
-    weight: 10
+    weight: 11
   - name: Guides
     url: synthetics/guide/
     parent: synthetics
@@ -2390,16 +2411,21 @@ main:
     parent: rum_android
     identifier: rum_android_advanced
     weight: 202
-  - name: Troubleshooting
-    url: real_user_monitoring/android/troubleshooting/
+  - name: Mobile Vitals
+    url: real_user_monitoring/android/mobile_vitals/
     parent: rum_android
-    identifier: rum_troubleshooting_android
+    identifier: rum_android_mobile_vitals
     weight: 203
   - name: Integrated Libraries
     url: real_user_monitoring/android/integrated_libraries/
     parent: rum_android
     identifier: rum_android_libraries
     weight: 204
+  - name: Troubleshooting
+    url: real_user_monitoring/android/troubleshooting/
+    parent: rum_android
+    identifier: rum_troubleshooting_android
+    weight: 205
   - name: iOS Monitoring
     url: real_user_monitoring/ios/
     parent: rum
@@ -2707,7 +2733,7 @@ main:
     weight: 220000
   - name: Account Management
     url: account_management/
-    pre: cog
+    pre: cog-2
     identifier: account_management
     weight: 230000
   - name: Switching Between Orgs
@@ -2848,10 +2874,15 @@ api:
     url: /api/latest/using-the-api/
     parent: API overview
     weight: 5
+  - name: Authorization Scopes
+    url: /api/latest/scopes/
+    identifier: API Scopes
+    parent: API overview
+    weight: 6
   - name: Rate Limits
     url: /api/latest/rate-limits/
     parent: API overview
-    weight: 6
+    weight: 7
     identifier: rate-limits
   - name: AWS Integration
     url: /api/latest/aws-integration/
@@ -5525,7 +5556,7 @@ api:
       operationids:
         - GetUsageSDS
       unstable: []
-      order: 34
+      order: 36
   - name: Get hourly usage for RUM Sessions
     url: '#get-hourly-usage-for-rum-sessions'
     identifier: get-hourly-usage-for-rum-sessions
@@ -5549,7 +5580,7 @@ api:
       operationids:
         - GetUsageRumUnits
       unstable: []
-      order: 35
+      order: 37
   - name: Get hourly usage for profiled hosts
     url: '#get-hourly-usage-for-profiled-hosts'
     identifier: get-hourly-usage-for-profiled-hosts
@@ -5586,6 +5617,19 @@ api:
         - GetUsageNetworkFlows
       unstable: []
       order: 15
+  - name: Get Monthly Usage Attribution
+    url: '#get-monthly-usage-attribution'
+    identifier: get-monthly-usage-attribution
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetMonthlyUsageAttribution
+      unstable:
+        - v1
+      order: 31
   - name: Get hourly usage for Logs by Index
     url: '#get-hourly-usage-for-logs-by-index'
     identifier: get-hourly-usage-for-logs-by-index
@@ -5670,6 +5714,19 @@ api:
         - GetIncidentManagement
       unstable: []
       order: 27
+  - name: Get Hourly Usage Attribution
+    url: '#get-hourly-usage-attribution'
+    identifier: get-hourly-usage-attribution
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetHourlyUsageAttribution
+      unstable:
+        - v1
+      order: 30
   - name: Get hourly usage for hosts and containers
     url: '#get-hourly-usage-for-hosts-and-containers'
     identifier: get-hourly-usage-for-hosts-and-containers
@@ -5705,7 +5762,7 @@ api:
       operationids:
         - GetUsageDBM
       unstable: []
-      order: 33
+      order: 35
   - name: Get hourly usage for Cloud Workload Security
     url: '#get-hourly-usage-for-cloud-workload-security'
     identifier: get-hourly-usage-for-cloud-workload-security
@@ -5717,7 +5774,7 @@ api:
       operationids:
         - GetUsageCWS
       unstable: []
-      order: 32
+      order: 34
   - name: Get hourly usage for CSPM
     url: '#get-hourly-usage-for-cspm'
     identifier: get-hourly-usage-for-cspm
@@ -5729,7 +5786,7 @@ api:
       operationids:
         - GetUsageCloudSecurityPostureManagement
       unstable: []
-      order: 30
+      order: 32
   - name: Get billable usage across your account
     url: '#get-billable-usage-across-your-account'
     identifier: get-billable-usage-across-your-account
@@ -5765,7 +5822,7 @@ api:
       operationids:
         - GetUsageAuditLogs
       unstable: []
-      order: 31
+      order: 33
   - name: Get Usage Attribution
     url: '#get-usage-attribution'
     identifier: get-usage-attribution
@@ -6833,6 +6890,18 @@ api:
         - RemovePermissionFromRole
       unstable: []
       order: 8
+  - name: Create a new role by cloning an existing role
+    url: '#create-a-new-role-by-cloning-an-existing-role'
+    identifier: create-a-new-role-by-cloning-an-existing-role
+    parent: roles
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CloneRole
+      unstable: []
+      order: 12
   - name: Update a role
     url: '#update-a-role'
     identifier: update-a-role
