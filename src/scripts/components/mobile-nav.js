@@ -44,3 +44,13 @@ const announcementBanner = document.querySelector('div.announcement-banner');
 if ((announcementBanner && window.getComputedStyle(announcementBanner).getPropertyValue('display') === 'none') || (!announcementBanner)) {
   mobileMenu.style.paddingTop = '65px';
 }
+
+/* Open mobile nav 3rd level where possible based off, desktop side nav state */
+window.addEventListener('load', () => {
+  $('.sidenav-nav-main ul li ul li a.active').each(function(i, el) {
+      const ul = $(`#mobile-nav a[href='${$(el).attr('href')}'] + ul.d-none`);
+      if(ul) {
+        $(ul).removeClass("d-none");
+      }
+  });
+});
