@@ -32,8 +32,8 @@ The Datadog Lambda Library is responsible for:
 - Submitting [custom metrics][2] (synchronously and asynchronously).
 - Enabling [Datadog APM and Distributed Tracing][3] for Node.js, Python, and Ruby.
 
-If you are using the Datadog Lambda library for **Ruby** or **Java**, you **must** also install and configure the Datadog Forwarder to ingest traces, enhanced Lambda metrics, or custom metrics (asynchronously) from your Lambda functions.
-If you are using the Datadog Lambda library for **Python**, **Node**, or **Go**, you may use the [Datadog Lambda Extension][4] to ingest traces, enhanced Lambda metrics, or custom metrics; or you may continue to use the Datadog Forwarder.
+If you are using the Datadog Lambda library for **Ruby**, you **must** also install and configure the Datadog Forwarder to ingest traces, enhanced Lambda metrics, or custom metrics (asynchronously) from your Lambda functions.
+If you are using the Datadog Lambda library for **Python**, **Node**, **Go**, or **Java** you may use the [Datadog Lambda Extension][4] to ingest traces, enhanced Lambda metrics, or custom metrics; or you may continue to use the Datadog Forwarder.
 
 The Datadog Lambda Library is **NOT** responsible for collecting:
 
@@ -43,7 +43,7 @@ The Datadog Lambda Library is **NOT** responsible for collecting:
 
 Datadog distributes the Lambda library as a package for Python, Node.js, Ruby, Go, and Java. Packages are installed through the common package managers, such as pip, npm, gem, maven, etc.
 
-The Datadog Lambda library is also available as [Lambda layers][8] for Python, Node.js, and Ruby.
+The Datadog Lambda library is also available as a [Lambda layer][8] for Python, Node.js, and Ruby.
 
 To install the Datadog Lambda library and instrument your serverless applications, see the [installation instructions][9].
 
