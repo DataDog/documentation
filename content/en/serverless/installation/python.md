@@ -25,15 +25,10 @@ aliases:
     - /serverless/guide/python/
 ---
 
-## Prerequisites
-
-The [Datadog Forwarder Lambda function][1] is required to ingest AWS Lambda traces, enhanced metrics, custom metrics, and logs.
-
 {{< img src="serverless/serverless_monitoring_installation_instructions.png" alt="Instrument AWS Serverless Applications"  style="width:100%;">}}
+## Configuration
 
 If your Python Lambda functions are written in [Python 3.6 or less][1] or you previously set up Datadog Serverless using the Datadog Forwarder, see the [installation instructions here][2].
-
-## Configuration
 
 Datadog offers many different ways to enable instrumentation for your serverless applications. Choose a method below that best suits your needs. Datadog generally recommends using the Datadog CLI, which does not require redeploying your whole application. The CLI can also be added to your CI/CD pipelines to enable instrumentation for applications across your entire organization.
 
