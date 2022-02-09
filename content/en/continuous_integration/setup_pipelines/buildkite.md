@@ -30,7 +30,7 @@ The steps to activate the Datadog integration for [Buildkite][1] are:
 ### Setting custom tags
 
 Custom tags can be added to Buildkite traces by using the `buildkite-agent meta-data set` command.
-Any metadata tags with a key starting by `dd_tags.` are added to the job and pipeline spans.
+Any metadata tags with a key starting with `dd_tags.` are added to the job and pipeline spans.
 
 The YAML below illustrates a simple pipeline where tags for the team name and the Go version have
 been set.
