@@ -10,7 +10,7 @@ kind: documentation
 
 ## Overview
 
-[Datadog Lambda library][1] and the [Datadog Lambda Extension][2] (in Node.js and Python) or the [Datadog Forwarder][3] (in other Lambda runtimes) together generate enhanced Lambda metrics out-of-the-box with low latency, several second granularity, and detailed metadata for cold starts and custom tags.
+[Datadog Lambda library][1] and the [Datadog Lambda Extension][2] or the [Datadog Forwarder][3] together generate enhanced Lambda metrics out-of-the-box with low latency, several second granularity, and detailed metadata for cold starts and custom tags.
 
 Enhanced Lambda metrics give you a view above and beyond the default [Lambda metrics][4] enabled with the AWS Lambda integration. These metrics are distinguished by being in the `aws.lambda.enhanced.*` namespace, and are Datadog’s best practice for setting real-time monitors on your serverless application health.
 

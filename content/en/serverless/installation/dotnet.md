@@ -31,9 +31,9 @@ The Datadog Lambda Extension supports functions deployed as zip archives and fun
 
 1. Add the [Datadog Lambda Extension][1] layer to your Lambda function:
 
-`arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:<EXTENSION_VERSION>`
+  `arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}`
 
-Note that only the `x86_64` version of the Datadog Lambda Extension is supported for .NET Lambda functions. If your .NET Lambda function uses the `arm64` architecture, you must use the Datadog Forwarder for instrumentation.
+  Note that only the `x86_64` version of the Datadog Lambda Extension is supported for .NET Lambda functions. If your .NET Lambda function uses the `arm64` architecture, you must use the Datadog Forwarder for instrumentation.
 
 2. Add the dd-trace-dotnet layer to your Lambda function:
 
