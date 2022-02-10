@@ -22,7 +22,7 @@ Datadog provides the following aggregated measures out of the box for forming an
 
 1. Count (*)
 2. Customer Impact Duration 
-3. Status Active Duration (time spent in the Active status)
+3. Status Active Duration (amount of time the incident was in `Active` status)
 4. Status Stable Duration (time spent in the Stable status)
 5. Time to Repair (customer impact end timestamp - incident creation timestamp)
 6. Time to Resolve (resolved timestamp - created timestamp)
