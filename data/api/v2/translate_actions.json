@@ -41,6 +41,30 @@
     "request_description": "",
     "request_schema_description": "Request used to update an application key."
   },
+  "ListAuthNMappings": {
+    "description": "List all AuthN Mappings in the org.",
+    "summary": "List all AuthN Mappings"
+  },
+  "CreateAuthNMapping": {
+    "description": "Create an AuthN Mapping.",
+    "summary": "Create an AuthN Mapping",
+    "request_description": "",
+    "request_schema_description": "Request for creating an AuthN Mapping."
+  },
+  "DeleteAuthNMapping": {
+    "description": "Delete an AuthN Mapping specified by AuthN Mapping UUID.",
+    "summary": "Delete an AuthN Mapping"
+  },
+  "GetAuthNMapping": {
+    "description": "Get an AuthN Mapping specified by the AuthN Mapping UUID.",
+    "summary": "Get an AuthN Mapping by UUID"
+  },
+  "UpdateAuthNMapping": {
+    "description": "Edit an AuthN Mapping.",
+    "summary": "Edit an AuthN Mapping",
+    "request_description": "",
+    "request_schema_description": "Request to update an AuthN Mapping."
+  },
   "ListCurrentUserApplicationKeys": {
     "description": "List all application keys available for current user",
     "summary": "Get all application keys owned by current user"
