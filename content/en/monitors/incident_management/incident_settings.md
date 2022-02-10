@@ -74,7 +74,7 @@ In addition to the five default fields and the fields based on metric tags, you 
 
 1. *Single-Select*: A dropdown field that can only have one value assigned at a time per incident. Values can be predefined in-line from the UI or by uploading values through a CSV file.
 2. *Multi-Select*: A dropdown field that can have multiple values assigned per incident. Values can be predefined in-line from the UI or by uploading values through a CSV file.
-3. *Text Area*: A free-form text area box for you to type written context. Values are entered by a responder on a per-incident basis.
+3. *Text Area*: A free-form text box. Values are entered by a responder on a per-incident basis.
 4. *Number*: A text area that only accepts digits and a single period as input. Values are entered by a responder on a per-incident basis.
 
 *Single-Select*, *Multi-Select*, and *Number* custom fields will become searchable facets in the [Incident Homepage][4] and [Incident Management Analytics][2] for easier filtration of incidents. *Number* fields will also become measures in Incident Management Analytics that can be graphed and visualized in [Dashboards][13] and [Notebooks][11].
