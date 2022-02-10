@@ -44,7 +44,7 @@ In [Incident Settings][5], add additional property fields using the `<KEY>:<VALU
 
 If your incident is customer-facing, specify the details of the impact below the *What happened* heading in the *Impact* heading:
 
-1. Click *Add +*.
+1. Click **Add**.
 2. Specify a start date and time for the impact.
 3. Specify an end date and time for the impact or leave this blank if the impact is still ongoing.
 4. Describe the nature of the impact on customers in `Scope of impact`.
