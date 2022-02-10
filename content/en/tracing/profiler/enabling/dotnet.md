@@ -39,7 +39,7 @@ Datadog .NET Profiler is currently in public beta. Datadog recommends evaluating
 
 **Supported languages:**
 
-Any language targeting the .NET runtime, such as C#, F#, Visual Basic and others.
+Any language that targets the .NET runtime, such as C#, F#, and Visual Basic.
 
 ## Installation
 
