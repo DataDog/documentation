@@ -188,6 +188,15 @@
           "type": "string"
         }
       },
+      "AuthNMappingID": {
+        "description": "The UUID of the AuthN Mapping.",
+        "in": "path",
+        "name": "authn_mapping_id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
       "CloudWorkloadSecurityAgentRuleID": {
         "description": "The ID of the Agent rule.",
         "example": "3b5-v82-ns6",
@@ -3107,6 +3116,1605 @@
         "type": "string",
         "x-enum-varnames": [
           "APPLICATION_KEYS"
+        ]
+      },
+      "AuthNMapping": {
+        "description": "The AuthN Mapping object returned by API.",
+        "properties": {
+          "attributes": {
+            "description": "Attributes of AuthN Mapping.",
+            "properties": {
+              "attribute_key": {
+                "description": "Key portion of a key/value pair of the attribute sent from the Identity Provider.",
+                "example": "member-of",
+                "type": "string"
+              },
+              "attribute_value": {
+                "description": "Value portion of a key/value pair of the attribute sent from the Identity Provider.",
+                "example": "Development",
+                "type": "string"
+              },
+              "created_at": {
+                "description": "Creation time of the AuthN Mapping.",
+                "format": "date-time",
+                "readOnly": true,
+                "type": "string"
+              },
+              "modified_at": {
+                "description": "Time of last AuthN Mapping modification.",
+                "format": "date-time",
+                "readOnly": true,
+                "type": "string"
+              },
+              "saml_assertion_attribute_id": {
+                "description": "The ID of the SAML assertion attribute.",
+                "example": 0,
+                "format": "int32",
+                "maximum": 2147483647,
+                "type": "integer"
+              }
+            },
+            "type": "object"
+          },
+          "id": {
+            "description": "ID of the AuthN Mapping.",
+            "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
+            "type": "string"
+          },
+          "included": {
+            "description": "Included data in the AuthN Mapping response.",
+            "items": {
+              "description": "Included data in the AuthN Mapping response.",
+              "oneOf": [
+                {
+                  "description": "SAML assertion attribute.",
+                  "properties": {
+                    "attributes": {
+                      "description": "Key/Value pair of attributes used in SAML assertion attributes.",
+                      "properties": {
+                        "attribute_key": {
+                          "description": "Key portion of a key/value pair of the attribute sent from the Identity Provider.",
+                          "example": "member-of",
+                          "type": "string"
+                        },
+                        "attribute_value": {
+                          "description": "Value portion of a key/value pair of the attribute sent from the Identity Provider.",
+                          "example": "Development",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "id": {
+                      "description": "The ID of the SAML assertion attribute.",
+                      "example": 0,
+                      "format": "int32",
+                      "maximum": 2147483647,
+                      "type": "integer"
+                    },
+                    "type": {
+                      "default": "saml_assertion_attributes",
+                      "description": "SAML assertion attributes resource type.",
+                      "enum": [
+                        "saml_assertion_attributes"
+                      ],
+                      "example": "saml_assertion_attributes",
+                      "type": "string",
+                      "x-enum-varnames": [
+                        "SAML_ASSERTION_ATTRIBUTES"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "type"
+                  ],
+                  "type": "object"
+                },
+                {
+                  "description": "Role object returned by the API.",
+                  "properties": {
+                    "attributes": {
+                      "description": "Attributes of the role.",
+                      "properties": {
+                        "created_at": {
+                          "description": "Creation time of the role.",
+                          "format": "date-time",
+                          "readOnly": true,
+                          "type": "string"
+                        },
+                        "modified_at": {
+                          "description": "Time of last role modification.",
+                          "format": "date-time",
+                          "readOnly": true,
+                          "type": "string"
+                        },
+                        "name": {
+                          "description": "Name of the role.",
+                          "type": "string"
+                        },
+                        "user_count": {
+                          "description": "Number of users with that role.",
+                          "format": "int64",
+                          "readOnly": true,
+                          "type": "integer"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "id": {
+                      "description": "ID of the role.",
+                      "type": "string"
+                    },
+                    "relationships": {
+                      "description": "Relationships of the role object returned by the API.",
+                      "properties": {
+                        "permissions": {
+                          "description": "Relationship to multiple permissions objects.",
+                          "properties": {
+                            "data": {
+                              "description": "Relationships to permission objects.",
+                              "items": {
+                                "description": "Relationship to permission object.",
+                                "properties": {
+                                  "id": {
+                                    "description": "ID of the permission.",
+                                    "type": "string"
+                                  },
+                                  "type": {
+                                    "default": "permissions",
+                                    "description": "Permissions resource type.",
+                                    "enum": [
+                                      "permissions"
+                                    ],
+                                    "example": "permissions",
+                                    "type": "string",
+                                    "x-enum-varnames": [
+                                      "PERMISSIONS"
+                                    ]
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "type": "array"
+                            }
+                          },
+                          "type": "object"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": {
+                      "default": "roles",
+                      "description": "Roles type.",
+                      "enum": [
+                        "roles"
+                      ],
+                      "example": "roles",
+                      "type": "string",
+                      "x-enum-varnames": [
+                        "ROLES"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "type"
+                  ],
+                  "type": "object"
+                }
+              ],
+              "properties": {},
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "relationships": {
+            "description": "All relationships associated with AuthN Mapping.",
+            "properties": {
+              "role": {
+                "description": "Relationship to role.",
+                "properties": {
+                  "data": {
+                    "description": "Relationship to role object.",
+                    "properties": {
+                      "id": {
+                        "description": "ID of the role.",
+                        "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
+                        "type": "string"
+                      },
+                      "type": {
+                        "default": "roles",
+                        "description": "Roles type.",
+                        "enum": [
+                          "roles"
+                        ],
+                        "example": "roles",
+                        "type": "string",
+                        "x-enum-varnames": [
+                          "ROLES"
+                        ]
+                      }
+                    },
+                    "type": "object"
+                  }
+                },
+                "type": "object"
+              },
+              "saml_assertion_attribute": {
+                "description": "AuthN Mapping relationship to SAML Assertion Attribute.",
+                "properties": {
+                  "data": {
+                    "description": "Data of AuthN Mapping relationship to SAML Assertion Attribute.",
+                    "properties": {
+                      "id": {
+                        "description": "The ID of the SAML assertion attribute.",
+                        "example": 0,
+                        "format": "int32",
+                        "maximum": 2147483647,
+                        "type": "integer"
+                      },
+                      "type": {
+                        "default": "saml_assertion_attributes",
+                        "description": "SAML assertion attributes resource type.",
+                        "enum": [
+                          "saml_assertion_attributes"
+                        ],
+                        "example": "saml_assertion_attributes",
+                        "type": "string",
+                        "x-enum-varnames": [
+                          "SAML_ASSERTION_ATTRIBUTES"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "type"
+                    ],
+                    "type": "object"
+                  }
+                },
+                "required": [
+                  "data"
+                ],
+                "type": "object"
+              }
+            },
+            "type": "object"
+          },
+          "type": {
+            "default": "authn_mappings",
+            "description": "AuthN Mappings resource type.",
+            "enum": [
+              "authn_mappings"
+            ],
+            "example": "authn_mappings",
+            "type": "string",
+            "x-enum-varnames": [
+              "AUTHN_MAPPINGS"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "type"
+        ],
+        "type": "object"
+      },
+      "AuthNMappingAttributes": {
+        "description": "Attributes of AuthN Mapping.",
+        "properties": {
+          "attribute_key": {
+            "description": "Key portion of a key/value pair of the attribute sent from the Identity Provider.",
+            "example": "member-of",
+            "type": "string"
+          },
+          "attribute_value": {
+            "description": "Value portion of a key/value pair of the attribute sent from the Identity Provider.",
+            "example": "Development",
+            "type": "string"
+          },
+          "created_at": {
+            "description": "Creation time of the AuthN Mapping.",
+            "format": "date-time",
+            "readOnly": true,
+            "type": "string"
+          },
+          "modified_at": {
+            "description": "Time of last AuthN Mapping modification.",
+            "format": "date-time",
+            "readOnly": true,
+            "type": "string"
+          },
+          "saml_assertion_attribute_id": {
+            "description": "The ID of the SAML assertion attribute.",
+            "example": 0,
+            "format": "int32",
+            "maximum": 2147483647,
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "AuthNMappingCreateAttributes": {
+        "description": "Key/Value pair of attributes used for create request.",
+        "properties": {
+          "attribute_key": {
+            "description": "Key portion of a key/value pair of the attribute sent from the Identity Provider.",
+            "example": "member-of",
+            "type": "string"
+          },
+          "attribute_value": {
+            "description": "Value portion of a key/value pair of the attribute sent from the Identity Provider.",
+            "example": "Development",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "AuthNMappingCreateData": {
+        "description": "Data for creating an AuthN Mapping.",
+        "properties": {
+          "attributes": {
+            "description": "Key/Value pair of attributes used for create request.",
+            "properties": {
+              "attribute_key": {
+                "description": "Key portion of a key/value pair of the attribute sent from the Identity Provider.",
+                "example": "member-of",
+                "type": "string"
+              },
+              "attribute_value": {
+                "description": "Value portion of a key/value pair of the attribute sent from the Identity Provider.",
+                "example": "Development",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "relationships": {
+            "description": "Relationship of AuthN Mapping create object to Role.",
+            "properties": {
+              "role": {
+                "description": "Relationship to role.",
+                "properties": {
+                  "data": {
+                    "description": "Relationship to role object.",
+                    "properties": {
+                      "id": {
+                        "description": "ID of the role.",
+                        "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
+                        "type": "string"
+                      },
+                      "type": {
+                        "default": "roles",
+                        "description": "Roles type.",
+                        "enum": [
+                          "roles"
+                        ],
+                        "example": "roles",
+                        "type": "string",
+                        "x-enum-varnames": [
+                          "ROLES"
+                        ]
+                      }
+                    },
+                    "type": "object"
+                  }
+                },
+                "type": "object"
+              }
+            },
+            "type": "object"
+          },
+          "type": {
+            "default": "authn_mappings",
+            "description": "AuthN Mappings resource type.",
+            "enum": [
+              "authn_mappings"
+            ],
+            "example": "authn_mappings",
+            "type": "string",
+            "x-enum-varnames": [
+              "AUTHN_MAPPINGS"
+            ]
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "type": "object"
+      },
+      "AuthNMappingCreateRelationships": {
+        "description": "Relationship of AuthN Mapping create object to Role.",
+        "properties": {
+          "role": {
+            "description": "Relationship to role.",
+            "properties": {
+              "data": {
+                "description": "Relationship to role object.",
+                "properties": {
+                  "id": {
+                    "description": "ID of the role.",
+                    "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
+                    "type": "string"
+                  },
+                  "type": {
+                    "default": "roles",
+                    "description": "Roles type.",
+                    "enum": [
+                      "roles"
+                    ],
+                    "example": "roles",
+                    "type": "string",
+                    "x-enum-varnames": [
+                      "ROLES"
+                    ]
+                  }
+                },
+                "type": "object"
+              }
+            },
+            "type": "object"
+          }
+        },
+        "type": "object"
+      },
+      "AuthNMappingCreateRequest": {
+        "description": "Request for creating an AuthN Mapping.",
+        "properties": {
+          "data": {
+            "description": "Data for creating an AuthN Mapping.",
+            "properties": {
+              "attributes": {
+                "description": "Key/Value pair of attributes used for create request.",
+                "properties": {
+                  "attribute_key": {
+                    "description": "Key portion of a key/value pair of the attribute sent from the Identity Provider.",
+                    "example": "member-of",
+                    "type": "string"
+                  },
+                  "attribute_value": {
+                    "description": "Value portion of a key/value pair of the attribute sent from the Identity Provider.",
+                    "example": "Development",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "relationships": {
+                "description": "Relationship of AuthN Mapping create object to Role.",
+                "properties": {
+                  "role": {
+                    "description": "Relationship to role.",
+                    "properties": {
+                      "data": {
+                        "description": "Relationship to role object.",
+                        "properties": {
+                          "id": {
+                            "description": "ID of the role.",
+                            "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
+                            "type": "string"
+                          },
+                          "type": {
+                            "default": "roles",
+                            "description": "Roles type.",
+                            "enum": [
+                              "roles"
+                            ],
+                            "example": "roles",
+                            "type": "string",
+                            "x-enum-varnames": [
+                              "ROLES"
+                            ]
+                          }
+                        },
+                        "type": "object"
+                      }
+                    },
+                    "type": "object"
+                  }
+                },
+                "type": "object"
+              },
+              "type": {
+                "default": "authn_mappings",
+                "description": "AuthN Mappings resource type.",
+                "enum": [
+                  "authn_mappings"
+                ],
+                "example": "authn_mappings",
+                "type": "string",
+                "x-enum-varnames": [
+                  "AUTHN_MAPPINGS"
+                ]
+              }
+            },
+            "required": [
+              "type"
+            ],
+            "type": "object"
+          }
+        },
+        "required": [
+          "data"
+        ],
+        "type": "object"
+      },
+      "AuthNMappingIncluded": {
+        "description": "Included data in the AuthN Mapping response.",
+        "oneOf": [
+          {
+            "description": "SAML assertion attribute.",
+            "properties": {
+              "attributes": {
+                "description": "Key/Value pair of attributes used in SAML assertion attributes.",
+                "properties": {
+                  "attribute_key": {
+                    "description": "Key portion of a key/value pair of the attribute sent from the Identity Provider.",
+                    "example": "member-of",
+                    "type": "string"
+                  },
+                  "attribute_value": {
+                    "description": "Value portion of a key/value pair of the attribute sent from the Identity Provider.",
+                    "example": "Development",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "id": {
+                "description": "The ID of the SAML assertion attribute.",
+                "example": 0,
+                "format": "int32",
+                "maximum": 2147483647,
+                "type": "integer"
+              },
+              "type": {
+                "default": "saml_assertion_attributes",
+                "description": "SAML assertion attributes resource type.",
+                "enum": [
+                  "saml_assertion_attributes"
+                ],
+                "example": "saml_assertion_attributes",
+                "type": "string",
+                "x-enum-varnames": [
+                  "SAML_ASSERTION_ATTRIBUTES"
+                ]
+              }
+            },
+            "required": [
+              "id",
+              "type"
+            ],
+            "type": "object"
+          },
+          {
+            "description": "Role object returned by the API.",
+            "properties": {
+              "attributes": {
+                "description": "Attributes of the role.",
+                "properties": {
+                  "created_at": {
+                    "description": "Creation time of the role.",
+                    "format": "date-time",
+                    "readOnly": true,
+                    "type": "string"
+                  },
+                  "modified_at": {
+                    "description": "Time of last role modification.",
+                    "format": "date-time",
+                    "readOnly": true,
+                    "type": "string"
+                  },
+                  "name": {
+                    "description": "Name of the role.",
+                    "type": "string"
+                  },
+                  "user_count": {
+                    "description": "Number of users with that role.",
+                    "format": "int64",
+                    "readOnly": true,
+                    "type": "integer"
+                  }
+                },
+                "type": "object"
+              },
+              "id": {
+                "description": "ID of the role.",
+                "type": "string"
+              },
+              "relationships": {
+                "description": "Relationships of the role object returned by the API.",
+                "properties": {
+                  "permissions": {
+                    "description": "Relationship to multiple permissions objects.",
+                    "properties": {
+                      "data": {
+                        "description": "Relationships to permission objects.",
+                        "items": {
+                          "description": "Relationship to permission object.",
+                          "properties": {
+                            "id": {
+                              "description": "ID of the permission.",
+                              "type": "string"
+                            },
+                            "type": {
+                              "default": "permissions",
+                              "description": "Permissions resource type.",
+                              "enum": [
+                                "permissions"
+                              ],
+                              "example": "permissions",
+                              "type": "string",
+                              "x-enum-varnames": [
+                                "PERMISSIONS"
+                              ]
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "type": "array"
+                      }
+                    },
+                    "type": "object"
+                  }
+                },
+                "type": "object"
+              },
+              "type": {
+                "default": "roles",
+                "description": "Roles type.",
+                "enum": [
+                  "roles"
+                ],
+                "example": "roles",
+                "type": "string",
+                "x-enum-varnames": [
+                  "ROLES"
+                ]
+              }
+            },
+            "required": [
+              "type"
+            ],
+            "type": "object"
+          }
+        ],
+        "properties": {},
+        "type": "object"
+      },
+      "AuthNMappingRelationships": {
+        "description": "All relationships associated with AuthN Mapping.",
+        "properties": {
+          "role": {
+            "description": "Relationship to role.",
+            "properties": {
+              "data": {
+                "description": "Relationship to role object.",
+                "properties": {
+                  "id": {
+                    "description": "ID of the role.",
+                    "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
+                    "type": "string"
+                  },
+                  "type": {
+                    "default": "roles",
+                    "description": "Roles type.",
+                    "enum": [
+                      "roles"
+                    ],
+                    "example": "roles",
+                    "type": "string",
+                    "x-enum-varnames": [
+                      "ROLES"
+                    ]
+                  }
+                },
+                "type": "object"
+              }
+            },
+            "type": "object"
+          },
+          "saml_assertion_attribute": {
+            "description": "AuthN Mapping relationship to SAML Assertion Attribute.",
+            "properties": {
+              "data": {
+                "description": "Data of AuthN Mapping relationship to SAML Assertion Attribute.",
+                "properties": {
+                  "id": {
+                    "description": "The ID of the SAML assertion attribute.",
+                    "example": 0,
+                    "format": "int32",
+                    "maximum": 2147483647,
+                    "type": "integer"
+                  },
+                  "type": {
+                    "default": "saml_assertion_attributes",
+                    "description": "SAML assertion attributes resource type.",
+                    "enum": [
+                      "saml_assertion_attributes"
+                    ],
+                    "example": "saml_assertion_attributes",
+                    "type": "string",
+                    "x-enum-varnames": [
+                      "SAML_ASSERTION_ATTRIBUTES"
+                    ]
+                  }
+                },
+                "required": [
+                  "id",
+                  "type"
+                ],
+                "type": "object"
+              }
+            },
+            "required": [
+              "data"
+            ],
+            "type": "object"
+          }
+        },
+        "type": "object"
+      },
+      "AuthNMappingResponse": {
+        "description": "AuthN Mapping response from the API.",
+        "properties": {
+          "data": {
+            "description": "The AuthN Mapping object returned by API.",
+            "properties": {
+              "attributes": {
+                "description": "Attributes of AuthN Mapping.",
+                "properties": {
+                  "attribute_key": {
+                    "description": "Key portion of a key/value pair of the attribute sent from the Identity Provider.",
+                    "example": "member-of",
+                    "type": "string"
+                  },
+                  "attribute_value": {
+                    "description": "Value portion of a key/value pair of the attribute sent from the Identity Provider.",
+                    "example": "Development",
+                    "type": "string"
+                  },
+                  "created_at": {
+                    "description": "Creation time of the AuthN Mapping.",
+                    "format": "date-time",
+                    "readOnly": true,
+                    "type": "string"
+                  },
+                  "modified_at": {
+                    "description": "Time of last AuthN Mapping modification.",
+                    "format": "date-time",
+                    "readOnly": true,
+                    "type": "string"
+                  },
+                  "saml_assertion_attribute_id": {
+                    "description": "The ID of the SAML assertion attribute.",
+                    "example": 0,
+                    "format": "int32",
+                    "maximum": 2147483647,
+                    "type": "integer"
+                  }
+                },
+                "type": "object"
+              },
+              "id": {
+                "description": "ID of the AuthN Mapping.",
+                "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
+                "type": "string"
+              },
+              "included": {
+                "description": "Included data in the AuthN Mapping response.",
+                "items": {
+                  "description": "Included data in the AuthN Mapping response.",
+                  "oneOf": [
+                    {
+                      "description": "SAML assertion attribute.",
+                      "properties": {
+                        "attributes": {
+                          "description": "Key/Value pair of attributes used in SAML assertion attributes.",
+                          "properties": {
+                            "attribute_key": {
+                              "description": "Key portion of a key/value pair of the attribute sent from the Identity Provider.",
+                              "example": "member-of",
+                              "type": "string"
+                            },
+                            "attribute_value": {
+                              "description": "Value portion of a key/value pair of the attribute sent from the Identity Provider.",
+                              "example": "Development",
+                              "type": "string"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "id": {
+                          "description": "The ID of the SAML assertion attribute.",
+                          "example": 0,
+                          "format": "int32",
+                          "maximum": 2147483647,
+                          "type": "integer"
+                        },
+                        "type": {
+                          "default": "saml_assertion_attributes",
+                          "description": "SAML assertion attributes resource type.",
+                          "enum": [
+                            "saml_assertion_attributes"
+                          ],
+                          "example": "saml_assertion_attributes",
+                          "type": "string",
+                          "x-enum-varnames": [
+                            "SAML_ASSERTION_ATTRIBUTES"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "type"
+                      ],
+                      "type": "object"
+                    },
+                    {
+                      "description": "Role object returned by the API.",
+                      "properties": {
+                        "attributes": {
+                          "description": "Attributes of the role.",
+                          "properties": {
+                            "created_at": {
+                              "description": "Creation time of the role.",
+                              "format": "date-time",
+                              "readOnly": true,
+                              "type": "string"
+                            },
+                            "modified_at": {
+                              "description": "Time of last role modification.",
+                              "format": "date-time",
+                              "readOnly": true,
+                              "type": "string"
+                            },
+                            "name": {
+                              "description": "Name of the role.",
+                              "type": "string"
+                            },
+                            "user_count": {
+                              "description": "Number of users with that role.",
+                              "format": "int64",
+                              "readOnly": true,
+                              "type": "integer"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "id": {
+                          "description": "ID of the role.",
+                          "type": "string"
+                        },
+                        "relationships": {
+                          "description": "Relationships of the role object returned by the API.",
+                          "properties": {
+                            "permissions": {
+                              "description": "Relationship to multiple permissions objects.",
+                              "properties": {
+                                "data": {
+                                  "description": "Relationships to permission objects.",
+                                  "items": {
+                                    "description": "Relationship to permission object.",
+                                    "properties": {
+                                      "id": {
+                                        "description": "ID of the permission.",
+                                        "type": "string"
+                                      },
+                                      "type": {
+                                        "default": "permissions",
+                                        "description": "Permissions resource type.",
+                                        "enum": [
+                                          "permissions"
+                                        ],
+                                        "example": "permissions",
+                                        "type": "string",
+                                        "x-enum-varnames": [
+                                          "PERMISSIONS"
+                                        ]
+                                      }
+                                    },
+                                    "type": "object"
+                                  },
+                                  "type": "array"
+                                }
+                              },
+                              "type": "object"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "type": {
+                          "default": "roles",
+                          "description": "Roles type.",
+                          "enum": [
+                            "roles"
+                          ],
+                          "example": "roles",
+                          "type": "string",
+                          "x-enum-varnames": [
+                            "ROLES"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "type"
+                      ],
+                      "type": "object"
+                    }
+                  ],
+                  "properties": {},
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              "relationships": {
+                "description": "All relationships associated with AuthN Mapping.",
+                "properties": {
+                  "role": {
+                    "description": "Relationship to role.",
+                    "properties": {
+                      "data": {
+                        "description": "Relationship to role object.",
+                        "properties": {
+                          "id": {
+                            "description": "ID of the role.",
+                            "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
+                            "type": "string"
+                          },
+                          "type": {
+                            "default": "roles",
+                            "description": "Roles type.",
+                            "enum": [
+                              "roles"
+                            ],
+                            "example": "roles",
+                            "type": "string",
+                            "x-enum-varnames": [
+                              "ROLES"
+                            ]
+                          }
+                        },
+                        "type": "object"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "saml_assertion_attribute": {
+                    "description": "AuthN Mapping relationship to SAML Assertion Attribute.",
+                    "properties": {
+                      "data": {
+                        "description": "Data of AuthN Mapping relationship to SAML Assertion Attribute.",
+                        "properties": {
+                          "id": {
+                            "description": "The ID of the SAML assertion attribute.",
+                            "example": 0,
+                            "format": "int32",
+                            "maximum": 2147483647,
+                            "type": "integer"
+                          },
+                          "type": {
+                            "default": "saml_assertion_attributes",
+                            "description": "SAML assertion attributes resource type.",
+                            "enum": [
+                              "saml_assertion_attributes"
+                            ],
+                            "example": "saml_assertion_attributes",
+                            "type": "string",
+                            "x-enum-varnames": [
+                              "SAML_ASSERTION_ATTRIBUTES"
+                            ]
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "type"
+                        ],
+                        "type": "object"
+                      }
+                    },
+                    "required": [
+                      "data"
+                    ],
+                    "type": "object"
+                  }
+                },
+                "type": "object"
+              },
+              "type": {
+                "default": "authn_mappings",
+                "description": "AuthN Mappings resource type.",
+                "enum": [
+                  "authn_mappings"
+                ],
+                "example": "authn_mappings",
+                "type": "string",
+                "x-enum-varnames": [
+                  "AUTHN_MAPPINGS"
+                ]
+              }
+            },
+            "required": [
+              "id",
+              "type"
+            ],
+            "type": "object"
+          }
+        },
+        "type": "object"
+      },
+      "AuthNMappingUpdateAttributes": {
+        "description": "Key/Value pair of attributes used for update request.",
+        "properties": {
+          "attribute_key": {
+            "description": "Key portion of a key/value pair of the attribute sent from the Identity Provider.",
+            "example": "member-of",
+            "type": "string"
+          },
+          "attribute_value": {
+            "description": "Value portion of a key/value pair of the attribute sent from the Identity Provider.",
+            "example": "Development",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "AuthNMappingUpdateData": {
+        "description": "Data for updating an AuthN Mapping.",
+        "properties": {
+          "attributes": {
+            "description": "Key/Value pair of attributes used for update request.",
+            "properties": {
+              "attribute_key": {
+                "description": "Key portion of a key/value pair of the attribute sent from the Identity Provider.",
+                "example": "member-of",
+                "type": "string"
+              },
+              "attribute_value": {
+                "description": "Value portion of a key/value pair of the attribute sent from the Identity Provider.",
+                "example": "Development",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "id": {
+            "description": "ID of the AuthN Mapping.",
+            "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
+            "type": "string"
+          },
+          "relationships": {
+            "description": "Relationship of AuthN Mapping update object to Role.",
+            "properties": {
+              "role": {
+                "description": "Relationship to role.",
+                "properties": {
+                  "data": {
+                    "description": "Relationship to role object.",
+                    "properties": {
+                      "id": {
+                        "description": "ID of the role.",
+                        "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
+                        "type": "string"
+                      },
+                      "type": {
+                        "default": "roles",
+                        "description": "Roles type.",
+                        "enum": [
+                          "roles"
+                        ],
+                        "example": "roles",
+                        "type": "string",
+                        "x-enum-varnames": [
+                          "ROLES"
+                        ]
+                      }
+                    },
+                    "type": "object"
+                  }
+                },
+                "type": "object"
+              }
+            },
+            "type": "object"
+          },
+          "type": {
+            "default": "authn_mappings",
+            "description": "AuthN Mappings resource type.",
+            "enum": [
+              "authn_mappings"
+            ],
+            "example": "authn_mappings",
+            "type": "string",
+            "x-enum-varnames": [
+              "AUTHN_MAPPINGS"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "type"
+        ],
+        "type": "object"
+      },
+      "AuthNMappingUpdateRelationships": {
+        "description": "Relationship of AuthN Mapping update object to Role.",
+        "properties": {
+          "role": {
+            "description": "Relationship to role.",
+            "properties": {
+              "data": {
+                "description": "Relationship to role object.",
+                "properties": {
+                  "id": {
+                    "description": "ID of the role.",
+                    "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
+                    "type": "string"
+                  },
+                  "type": {
+                    "default": "roles",
+                    "description": "Roles type.",
+                    "enum": [
+                      "roles"
+                    ],
+                    "example": "roles",
+                    "type": "string",
+                    "x-enum-varnames": [
+                      "ROLES"
+                    ]
+                  }
+                },
+                "type": "object"
+              }
+            },
+            "type": "object"
+          }
+        },
+        "type": "object"
+      },
+      "AuthNMappingUpdateRequest": {
+        "description": "Request to update an AuthN Mapping.",
+        "properties": {
+          "data": {
+            "description": "Data for updating an AuthN Mapping.",
+            "properties": {
+              "attributes": {
+                "description": "Key/Value pair of attributes used for update request.",
+                "properties": {
+                  "attribute_key": {
+                    "description": "Key portion of a key/value pair of the attribute sent from the Identity Provider.",
+                    "example": "member-of",
+                    "type": "string"
+                  },
+                  "attribute_value": {
+                    "description": "Value portion of a key/value pair of the attribute sent from the Identity Provider.",
+                    "example": "Development",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "id": {
+                "description": "ID of the AuthN Mapping.",
+                "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
+                "type": "string"
+              },
+              "relationships": {
+                "description": "Relationship of AuthN Mapping update object to Role.",
+                "properties": {
+                  "role": {
+                    "description": "Relationship to role.",
+                    "properties": {
+                      "data": {
+                        "description": "Relationship to role object.",
+                        "properties": {
+                          "id": {
+                            "description": "ID of the role.",
+                            "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
+                            "type": "string"
+                          },
+                          "type": {
+                            "default": "roles",
+                            "description": "Roles type.",
+                            "enum": [
+                              "roles"
+                            ],
+                            "example": "roles",
+                            "type": "string",
+                            "x-enum-varnames": [
+                              "ROLES"
+                            ]
+                          }
+                        },
+                        "type": "object"
+                      }
+                    },
+                    "type": "object"
+                  }
+                },
+                "type": "object"
+              },
+              "type": {
+                "default": "authn_mappings",
+                "description": "AuthN Mappings resource type.",
+                "enum": [
+                  "authn_mappings"
+                ],
+                "example": "authn_mappings",
+                "type": "string",
+                "x-enum-varnames": [
+                  "AUTHN_MAPPINGS"
+                ]
+              }
+            },
+            "required": [
+              "id",
+              "type"
+            ],
+            "type": "object"
+          }
+        },
+        "required": [
+          "data"
+        ],
+        "type": "object"
+      },
+      "AuthNMappingsResponse": {
+        "description": "Array of AuthN Mappings response.",
+        "properties": {
+          "data": {
+            "description": "Array of returned AuthN Mappings.",
+            "items": {
+              "description": "The AuthN Mapping object returned by API.",
+              "properties": {
+                "attributes": {
+                  "description": "Attributes of AuthN Mapping.",
+                  "properties": {
+                    "attribute_key": {
+                      "description": "Key portion of a key/value pair of the attribute sent from the Identity Provider.",
+                      "example": "member-of",
+                      "type": "string"
+                    },
+                    "attribute_value": {
+                      "description": "Value portion of a key/value pair of the attribute sent from the Identity Provider.",
+                      "example": "Development",
+                      "type": "string"
+                    },
+                    "created_at": {
+                      "description": "Creation time of the AuthN Mapping.",
+                      "format": "date-time",
+                      "readOnly": true,
+                      "type": "string"
+                    },
+                    "modified_at": {
+                      "description": "Time of last AuthN Mapping modification.",
+                      "format": "date-time",
+                      "readOnly": true,
+                      "type": "string"
+                    },
+                    "saml_assertion_attribute_id": {
+                      "description": "The ID of the SAML assertion attribute.",
+                      "example": 0,
+                      "format": "int32",
+                      "maximum": 2147483647,
+                      "type": "integer"
+                    }
+                  },
+                  "type": "object"
+                },
+                "id": {
+                  "description": "ID of the AuthN Mapping.",
+                  "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
+                  "type": "string"
+                },
+                "included": {
+                  "description": "Included data in the AuthN Mapping response.",
+                  "items": {
+                    "description": "Included data in the AuthN Mapping response.",
+                    "oneOf": [
+                      {
+                        "description": "SAML assertion attribute.",
+                        "properties": {
+                          "attributes": {
+                            "description": "Key/Value pair of attributes used in SAML assertion attributes.",
+                            "properties": {
+                              "attribute_key": {
+                                "description": "Key portion of a key/value pair of the attribute sent from the Identity Provider.",
+                                "example": "member-of",
+                                "type": "string"
+                              },
+                              "attribute_value": {
+                                "description": "Value portion of a key/value pair of the attribute sent from the Identity Provider.",
+                                "example": "Development",
+                                "type": "string"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "id": {
+                            "description": "The ID of the SAML assertion attribute.",
+                            "example": 0,
+                            "format": "int32",
+                            "maximum": 2147483647,
+                            "type": "integer"
+                          },
+                          "type": {
+                            "default": "saml_assertion_attributes",
+                            "description": "SAML assertion attributes resource type.",
+                            "enum": [
+                              "saml_assertion_attributes"
+                            ],
+                            "example": "saml_assertion_attributes",
+                            "type": "string",
+                            "x-enum-varnames": [
+                              "SAML_ASSERTION_ATTRIBUTES"
+                            ]
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "type"
+                        ],
+                        "type": "object"
+                      },
+                      {
+                        "description": "Role object returned by the API.",
+                        "properties": {
+                          "attributes": {
+                            "description": "Attributes of the role.",
+                            "properties": {
+                              "created_at": {
+                                "description": "Creation time of the role.",
+                                "format": "date-time",
+                                "readOnly": true,
+                                "type": "string"
+                              },
+                              "modified_at": {
+                                "description": "Time of last role modification.",
+                                "format": "date-time",
+                                "readOnly": true,
+                                "type": "string"
+                              },
+                              "name": {
+                                "description": "Name of the role.",
+                                "type": "string"
+                              },
+                              "user_count": {
+                                "description": "Number of users with that role.",
+                                "format": "int64",
+                                "readOnly": true,
+                                "type": "integer"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "id": {
+                            "description": "ID of the role.",
+                            "type": "string"
+                          },
+                          "relationships": {
+                            "description": "Relationships of the role object returned by the API.",
+                            "properties": {
+                              "permissions": {
+                                "description": "Relationship to multiple permissions objects.",
+                                "properties": {
+                                  "data": {
+                                    "description": "Relationships to permission objects.",
+                                    "items": {
+                                      "description": "Relationship to permission object.",
+                                      "properties": {
+                                        "id": {
+                                          "description": "ID of the permission.",
+                                          "type": "string"
+                                        },
+                                        "type": {
+                                          "default": "permissions",
+                                          "description": "Permissions resource type.",
+                                          "enum": [
+                                            "permissions"
+                                          ],
+                                          "example": "permissions",
+                                          "type": "string",
+                                          "x-enum-varnames": [
+                                            "PERMISSIONS"
+                                          ]
+                                        }
+                                      },
+                                      "type": "object"
+                                    },
+                                    "type": "array"
+                                  }
+                                },
+                                "type": "object"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "type": {
+                            "default": "roles",
+                            "description": "Roles type.",
+                            "enum": [
+                              "roles"
+                            ],
+                            "example": "roles",
+                            "type": "string",
+                            "x-enum-varnames": [
+                              "ROLES"
+                            ]
+                          }
+                        },
+                        "required": [
+                          "type"
+                        ],
+                        "type": "object"
+                      }
+                    ],
+                    "properties": {},
+                    "type": "object"
+                  },
+                  "type": "array"
+                },
+                "relationships": {
+                  "description": "All relationships associated with AuthN Mapping.",
+                  "properties": {
+                    "role": {
+                      "description": "Relationship to role.",
+                      "properties": {
+                        "data": {
+                          "description": "Relationship to role object.",
+                          "properties": {
+                            "id": {
+                              "description": "ID of the role.",
+                              "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
+                              "type": "string"
+                            },
+                            "type": {
+                              "default": "roles",
+                              "description": "Roles type.",
+                              "enum": [
+                                "roles"
+                              ],
+                              "example": "roles",
+                              "type": "string",
+                              "x-enum-varnames": [
+                                "ROLES"
+                              ]
+                            }
+                          },
+                          "type": "object"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "saml_assertion_attribute": {
+                      "description": "AuthN Mapping relationship to SAML Assertion Attribute.",
+                      "properties": {
+                        "data": {
+                          "description": "Data of AuthN Mapping relationship to SAML Assertion Attribute.",
+                          "properties": {
+                            "id": {
+                              "description": "The ID of the SAML assertion attribute.",
+                              "example": 0,
+                              "format": "int32",
+                              "maximum": 2147483647,
+                              "type": "integer"
+                            },
+                            "type": {
+                              "default": "saml_assertion_attributes",
+                              "description": "SAML assertion attributes resource type.",
+                              "enum": [
+                                "saml_assertion_attributes"
+                              ],
+                              "example": "saml_assertion_attributes",
+                              "type": "string",
+                              "x-enum-varnames": [
+                                "SAML_ASSERTION_ATTRIBUTES"
+                              ]
+                            }
+                          },
+                          "required": [
+                            "id",
+                            "type"
+                          ],
+                          "type": "object"
+                        }
+                      },
+                      "required": [
+                        "data"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": {
+                  "default": "authn_mappings",
+                  "description": "AuthN Mappings resource type.",
+                  "enum": [
+                    "authn_mappings"
+                  ],
+                  "example": "authn_mappings",
+                  "type": "string",
+                  "x-enum-varnames": [
+                    "AUTHN_MAPPINGS"
+                  ]
+                }
+              },
+              "required": [
+                "id",
+                "type"
+              ],
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "meta": {
+            "description": "Object describing meta attributes of response.",
+            "properties": {
+              "page": {
+                "description": "Pagination object.",
+                "properties": {
+                  "total_count": {
+                    "description": "Total count.",
+                    "format": "int64",
+                    "type": "integer"
+                  },
+                  "total_filtered_count": {
+                    "description": "Total count of elements matched by the filter.",
+                    "format": "int64",
+                    "type": "integer"
+                  }
+                },
+                "type": "object"
+              }
+            },
+            "type": "object"
+          }
+        },
+        "type": "object"
+      },
+      "AuthNMappingsSort": {
+        "description": "Sorting options for AuthN Mappings.",
+        "enum": [
+          "created_at",
+          "-created_at",
+          "role_id",
+          "-role_id",
+          "saml_assertion_attribute_id",
+          "-saml_assertion_attribute_id",
+          "role.name",
+          "-role.name",
+          "saml_assertion_attribute.attribute_key",
+          "-saml_assertion_attribute.attribute_key",
+          "saml_assertion_attribute.attribute_value",
+          "-saml_assertion_attribute.attribute_value"
+        ],
+        "type": "string",
+        "x-enum-varnames": [
+          "CREATED_AT_ASCENDING",
+          "CREATED_AT_DESCENDING",
+          "ROLE_ID_ASCENDING",
+          "ROLE_ID_DESCENDING",
+          "SAML_ASSERTION_ATTRIBUTE_ID_ASCENDING",
+          "SAML_ASSERTION_ATTRIBUTE_ID_DESCENDING",
+          "ROLE_NAME_ASCENDING",
+          "ROLE_NAME_DESCENDING",
+          "SAML_ASSERTION_ATTRIBUTE_KEY_ASCENDING",
+          "SAML_ASSERTION_ATTRIBUTE_KEY_DESCENDING",
+          "SAML_ASSERTION_ATTRIBUTE_VALUE_ASCENDING",
+          "SAML_ASSERTION_ATTRIBUTE_VALUE_DESCENDING"
+        ]
+      },
+      "AuthNMappingsType": {
+        "default": "authn_mappings",
+        "description": "AuthN Mappings resource type.",
+        "enum": [
+          "authn_mappings"
+        ],
+        "example": "authn_mappings",
+        "type": "string",
+        "x-enum-varnames": [
+          "AUTHN_MAPPINGS"
         ]
       },
       "CloudWorkloadSecurityAgentRuleAttributes": {
@@ -22789,6 +24397,73 @@
         },
         "type": "object"
       },
+      "RelationshipToSAMLAssertionAttribute": {
+        "description": "AuthN Mapping relationship to SAML Assertion Attribute.",
+        "properties": {
+          "data": {
+            "description": "Data of AuthN Mapping relationship to SAML Assertion Attribute.",
+            "properties": {
+              "id": {
+                "description": "The ID of the SAML assertion attribute.",
+                "example": 0,
+                "format": "int32",
+                "maximum": 2147483647,
+                "type": "integer"
+              },
+              "type": {
+                "default": "saml_assertion_attributes",
+                "description": "SAML assertion attributes resource type.",
+                "enum": [
+                  "saml_assertion_attributes"
+                ],
+                "example": "saml_assertion_attributes",
+                "type": "string",
+                "x-enum-varnames": [
+                  "SAML_ASSERTION_ATTRIBUTES"
+                ]
+              }
+            },
+            "required": [
+              "id",
+              "type"
+            ],
+            "type": "object"
+          }
+        },
+        "required": [
+          "data"
+        ],
+        "type": "object"
+      },
+      "RelationshipToSAMLAssertionAttributeData": {
+        "description": "Data of AuthN Mapping relationship to SAML Assertion Attribute.",
+        "properties": {
+          "id": {
+            "description": "The ID of the SAML assertion attribute.",
+            "example": 0,
+            "format": "int32",
+            "maximum": 2147483647,
+            "type": "integer"
+          },
+          "type": {
+            "default": "saml_assertion_attributes",
+            "description": "SAML assertion attributes resource type.",
+            "enum": [
+              "saml_assertion_attributes"
+            ],
+            "example": "saml_assertion_attributes",
+            "type": "string",
+            "x-enum-varnames": [
+              "SAML_ASSERTION_ATTRIBUTES"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "type"
+        ],
+        "type": "object"
+      },
       "RelationshipToUser": {
         "description": "Relationship to user.",
         "properties": {
@@ -24805,6 +26480,79 @@
         "type": "string",
         "x-enum-varnames": [
           "ROLES"
+        ]
+      },
+      "SAMLAssertionAttribute": {
+        "description": "SAML assertion attribute.",
+        "properties": {
+          "attributes": {
+            "description": "Key/Value pair of attributes used in SAML assertion attributes.",
+            "properties": {
+              "attribute_key": {
+                "description": "Key portion of a key/value pair of the attribute sent from the Identity Provider.",
+                "example": "member-of",
+                "type": "string"
+              },
+              "attribute_value": {
+                "description": "Value portion of a key/value pair of the attribute sent from the Identity Provider.",
+                "example": "Development",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "id": {
+            "description": "The ID of the SAML assertion attribute.",
+            "example": 0,
+            "format": "int32",
+            "maximum": 2147483647,
+            "type": "integer"
+          },
+          "type": {
+            "default": "saml_assertion_attributes",
+            "description": "SAML assertion attributes resource type.",
+            "enum": [
+              "saml_assertion_attributes"
+            ],
+            "example": "saml_assertion_attributes",
+            "type": "string",
+            "x-enum-varnames": [
+              "SAML_ASSERTION_ATTRIBUTES"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "type"
+        ],
+        "type": "object"
+      },
+      "SAMLAssertionAttributeAttributes": {
+        "description": "Key/Value pair of attributes used in SAML assertion attributes.",
+        "properties": {
+          "attribute_key": {
+            "description": "Key portion of a key/value pair of the attribute sent from the Identity Provider.",
+            "example": "member-of",
+            "type": "string"
+          },
+          "attribute_value": {
+            "description": "Value portion of a key/value pair of the attribute sent from the Identity Provider.",
+            "example": "Development",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "SAMLAssertionAttributesType": {
+        "default": "saml_assertion_attributes",
+        "description": "SAML assertion attributes resource type.",
+        "enum": [
+          "saml_assertion_attributes"
+        ],
+        "example": "saml_assertion_attributes",
+        "type": "string",
+        "x-enum-varnames": [
+          "SAML_ASSERTION_ATTRIBUTES"
         ]
       },
       "SecurityFilter": {
@@ -35026,6 +36774,2114 @@
           "Key Management"
         ],
         "x-codegen-request-body-name": "body",
+        "x-undo": {
+          "type": "idempotent"
+        }
+      }
+    },
+    "/api/v2/authn_mappings": {
+      "get": {
+        "description": "List all AuthN Mappings in the org.",
+        "operationId": "ListAuthNMappings",
+        "parameters": [
+          {
+            "description": "Size for a given page.",
+            "in": "query",
+            "name": "page[size]",
+            "required": false,
+            "schema": {
+              "default": 10,
+              "example": 10,
+              "format": "int64",
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Specific page number to return.",
+            "in": "query",
+            "name": "page[number]",
+            "required": false,
+            "schema": {
+              "default": 0,
+              "example": 0,
+              "format": "int64",
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Sort AuthN Mappings depending on the given field.",
+            "in": "query",
+            "name": "sort",
+            "required": false,
+            "schema": {
+              "description": "Sorting options for AuthN Mappings.",
+              "enum": [
+                "created_at",
+                "-created_at",
+                "role_id",
+                "-role_id",
+                "saml_assertion_attribute_id",
+                "-saml_assertion_attribute_id",
+                "role.name",
+                "-role.name",
+                "saml_assertion_attribute.attribute_key",
+                "-saml_assertion_attribute.attribute_key",
+                "saml_assertion_attribute.attribute_value",
+                "-saml_assertion_attribute.attribute_value"
+              ],
+              "type": "string",
+              "x-enum-varnames": [
+                "CREATED_AT_ASCENDING",
+                "CREATED_AT_DESCENDING",
+                "ROLE_ID_ASCENDING",
+                "ROLE_ID_DESCENDING",
+                "SAML_ASSERTION_ATTRIBUTE_ID_ASCENDING",
+                "SAML_ASSERTION_ATTRIBUTE_ID_DESCENDING",
+                "ROLE_NAME_ASCENDING",
+                "ROLE_NAME_DESCENDING",
+                "SAML_ASSERTION_ATTRIBUTE_KEY_ASCENDING",
+                "SAML_ASSERTION_ATTRIBUTE_KEY_DESCENDING",
+                "SAML_ASSERTION_ATTRIBUTE_VALUE_ASCENDING",
+                "SAML_ASSERTION_ATTRIBUTE_VALUE_DESCENDING"
+              ]
+            }
+          },
+          {
+            "in": "query",
+            "name": "include",
+            "required": false,
+            "schema": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            }
+          },
+          {
+            "description": "Filter all mappings by the given string.",
+            "in": "query",
+            "name": "filter",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Array of AuthN Mappings response.",
+                  "properties": {
+                    "data": {
+                      "description": "Array of returned AuthN Mappings.",
+                      "items": {
+                        "description": "The AuthN Mapping object returned by API.",
+                        "properties": {
+                          "attributes": {
+                            "description": "Attributes of AuthN Mapping.",
+                            "properties": {
+                              "attribute_key": {
+                                "description": "Key portion of a key/value pair of the attribute sent from the Identity Provider.",
+                                "example": "member-of",
+                                "type": "string"
+                              },
+                              "attribute_value": {
+                                "description": "Value portion of a key/value pair of the attribute sent from the Identity Provider.",
+                                "example": "Development",
+                                "type": "string"
+                              },
+                              "created_at": {
+                                "description": "Creation time of the AuthN Mapping.",
+                                "format": "date-time",
+                                "readOnly": true,
+                                "type": "string"
+                              },
+                              "modified_at": {
+                                "description": "Time of last AuthN Mapping modification.",
+                                "format": "date-time",
+                                "readOnly": true,
+                                "type": "string"
+                              },
+                              "saml_assertion_attribute_id": {
+                                "description": "The ID of the SAML assertion attribute.",
+                                "example": 0,
+                                "format": "int32",
+                                "maximum": 2147483647,
+                                "type": "integer"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "id": {
+                            "description": "ID of the AuthN Mapping.",
+                            "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
+                            "type": "string"
+                          },
+                          "included": {
+                            "description": "Included data in the AuthN Mapping response.",
+                            "items": {
+                              "description": "Included data in the AuthN Mapping response.",
+                              "oneOf": [
+                                {
+                                  "description": "SAML assertion attribute.",
+                                  "properties": {
+                                    "attributes": {
+                                      "description": "Key/Value pair of attributes used in SAML assertion attributes.",
+                                      "properties": {
+                                        "attribute_key": {
+                                          "description": "Key portion of a key/value pair of the attribute sent from the Identity Provider.",
+                                          "example": "member-of",
+                                          "type": "string"
+                                        },
+                                        "attribute_value": {
+                                          "description": "Value portion of a key/value pair of the attribute sent from the Identity Provider.",
+                                          "example": "Development",
+                                          "type": "string"
+                                        }
+                                      },
+                                      "type": "object"
+                                    },
+                                    "id": {
+                                      "description": "The ID of the SAML assertion attribute.",
+                                      "example": 0,
+                                      "format": "int32",
+                                      "maximum": 2147483647,
+                                      "type": "integer"
+                                    },
+                                    "type": {
+                                      "default": "saml_assertion_attributes",
+                                      "description": "SAML assertion attributes resource type.",
+                                      "enum": [
+                                        "saml_assertion_attributes"
+                                      ],
+                                      "example": "saml_assertion_attributes",
+                                      "type": "string",
+                                      "x-enum-varnames": [
+                                        "SAML_ASSERTION_ATTRIBUTES"
+                                      ]
+                                    }
+                                  },
+                                  "required": [
+                                    "id",
+                                    "type"
+                                  ],
+                                  "type": "object"
+                                },
+                                {
+                                  "description": "Role object returned by the API.",
+                                  "properties": {
+                                    "attributes": {
+                                      "description": "Attributes of the role.",
+                                      "properties": {
+                                        "created_at": {
+                                          "description": "Creation time of the role.",
+                                          "format": "date-time",
+                                          "readOnly": true,
+                                          "type": "string"
+                                        },
+                                        "modified_at": {
+                                          "description": "Time of last role modification.",
+                                          "format": "date-time",
+                                          "readOnly": true,
+                                          "type": "string"
+                                        },
+                                        "name": {
+                                          "description": "Name of the role.",
+                                          "type": "string"
+                                        },
+                                        "user_count": {
+                                          "description": "Number of users with that role.",
+                                          "format": "int64",
+                                          "readOnly": true,
+                                          "type": "integer"
+                                        }
+                                      },
+                                      "type": "object"
+                                    },
+                                    "id": {
+                                      "description": "ID of the role.",
+                                      "type": "string"
+                                    },
+                                    "relationships": {
+                                      "description": "Relationships of the role object returned by the API.",
+                                      "properties": {
+                                        "permissions": {
+                                          "description": "Relationship to multiple permissions objects.",
+                                          "properties": {
+                                            "data": {
+                                              "description": "Relationships to permission objects.",
+                                              "items": {
+                                                "description": "Relationship to permission object.",
+                                                "properties": {
+                                                  "id": {
+                                                    "description": "ID of the permission.",
+                                                    "type": "string"
+                                                  },
+                                                  "type": {
+                                                    "default": "permissions",
+                                                    "description": "Permissions resource type.",
+                                                    "enum": [
+                                                      "permissions"
+                                                    ],
+                                                    "example": "permissions",
+                                                    "type": "string",
+                                                    "x-enum-varnames": [
+                                                      "PERMISSIONS"
+                                                    ]
+                                                  }
+                                                },
+                                                "type": "object"
+                                              },
+                                              "type": "array"
+                                            }
+                                          },
+                                          "type": "object"
+                                        }
+                                      },
+                                      "type": "object"
+                                    },
+                                    "type": {
+                                      "default": "roles",
+                                      "description": "Roles type.",
+                                      "enum": [
+                                        "roles"
+                                      ],
+                                      "example": "roles",
+                                      "type": "string",
+                                      "x-enum-varnames": [
+                                        "ROLES"
+                                      ]
+                                    }
+                                  },
+                                  "required": [
+                                    "type"
+                                  ],
+                                  "type": "object"
+                                }
+                              ],
+                              "properties": {},
+                              "type": "object"
+                            },
+                            "type": "array"
+                          },
+                          "relationships": {
+                            "description": "All relationships associated with AuthN Mapping.",
+                            "properties": {
+                              "role": {
+                                "description": "Relationship to role.",
+                                "properties": {
+                                  "data": {
+                                    "description": "Relationship to role object.",
+                                    "properties": {
+                                      "id": {
+                                        "description": "ID of the role.",
+                                        "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
+                                        "type": "string"
+                                      },
+                                      "type": {
+                                        "default": "roles",
+                                        "description": "Roles type.",
+                                        "enum": [
+                                          "roles"
+                                        ],
+                                        "example": "roles",
+                                        "type": "string",
+                                        "x-enum-varnames": [
+                                          "ROLES"
+                                        ]
+                                      }
+                                    },
+                                    "type": "object"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "saml_assertion_attribute": {
+                                "description": "AuthN Mapping relationship to SAML Assertion Attribute.",
+                                "properties": {
+                                  "data": {
+                                    "description": "Data of AuthN Mapping relationship to SAML Assertion Attribute.",
+                                    "properties": {
+                                      "id": {
+                                        "description": "The ID of the SAML assertion attribute.",
+                                        "example": 0,
+                                        "format": "int32",
+                                        "maximum": 2147483647,
+                                        "type": "integer"
+                                      },
+                                      "type": {
+                                        "default": "saml_assertion_attributes",
+                                        "description": "SAML assertion attributes resource type.",
+                                        "enum": [
+                                          "saml_assertion_attributes"
+                                        ],
+                                        "example": "saml_assertion_attributes",
+                                        "type": "string",
+                                        "x-enum-varnames": [
+                                          "SAML_ASSERTION_ATTRIBUTES"
+                                        ]
+                                      }
+                                    },
+                                    "required": [
+                                      "id",
+                                      "type"
+                                    ],
+                                    "type": "object"
+                                  }
+                                },
+                                "required": [
+                                  "data"
+                                ],
+                                "type": "object"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "type": {
+                            "default": "authn_mappings",
+                            "description": "AuthN Mappings resource type.",
+                            "enum": [
+                              "authn_mappings"
+                            ],
+                            "example": "authn_mappings",
+                            "type": "string",
+                            "x-enum-varnames": [
+                              "AUTHN_MAPPINGS"
+                            ]
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "type"
+                        ],
+                        "type": "object"
+                      },
+                      "type": "array"
+                    },
+                    "meta": {
+                      "description": "Object describing meta attributes of response.",
+                      "properties": {
+                        "page": {
+                          "description": "Pagination object.",
+                          "properties": {
+                            "total_count": {
+                              "description": "Total count.",
+                              "format": "int64",
+                              "type": "integer"
+                            },
+                            "total_filtered_count": {
+                              "description": "Total count of elements matched by the filter.",
+                              "format": "int64",
+                              "type": "integer"
+                            }
+                          },
+                          "type": "object"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Authentication Error"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": []
+          }
+        ],
+        "summary": "List all AuthN Mappings",
+        "tags": [
+          "AuthN Mappings"
+        ],
+        "x-menu-order": 4,
+        "x-permission": "OPEN()",
+        "x-undo": {
+          "type": "safe"
+        }
+      },
+      "post": {
+        "description": "Create an AuthN Mapping.",
+        "operationId": "CreateAuthNMapping",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "Request for creating an AuthN Mapping.",
+                "properties": {
+                  "data": {
+                    "description": "Data for creating an AuthN Mapping.",
+                    "properties": {
+                      "attributes": {
+                        "description": "Key/Value pair of attributes used for create request.",
+                        "properties": {
+                          "attribute_key": {
+                            "description": "Key portion of a key/value pair of the attribute sent from the Identity Provider.",
+                            "example": "member-of",
+                            "type": "string"
+                          },
+                          "attribute_value": {
+                            "description": "Value portion of a key/value pair of the attribute sent from the Identity Provider.",
+                            "example": "Development",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "relationships": {
+                        "description": "Relationship of AuthN Mapping create object to Role.",
+                        "properties": {
+                          "role": {
+                            "description": "Relationship to role.",
+                            "properties": {
+                              "data": {
+                                "description": "Relationship to role object.",
+                                "properties": {
+                                  "id": {
+                                    "description": "ID of the role.",
+                                    "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
+                                    "type": "string"
+                                  },
+                                  "type": {
+                                    "default": "roles",
+                                    "description": "Roles type.",
+                                    "enum": [
+                                      "roles"
+                                    ],
+                                    "example": "roles",
+                                    "type": "string",
+                                    "x-enum-varnames": [
+                                      "ROLES"
+                                    ]
+                                  }
+                                },
+                                "type": "object"
+                              }
+                            },
+                            "type": "object"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": {
+                        "default": "authn_mappings",
+                        "description": "AuthN Mappings resource type.",
+                        "enum": [
+                          "authn_mappings"
+                        ],
+                        "example": "authn_mappings",
+                        "type": "string",
+                        "x-enum-varnames": [
+                          "AUTHN_MAPPINGS"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "type"
+                    ],
+                    "type": "object"
+                  }
+                },
+                "required": [
+                  "data"
+                ],
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "AuthN Mapping response from the API.",
+                  "properties": {
+                    "data": {
+                      "description": "The AuthN Mapping object returned by API.",
+                      "properties": {
+                        "attributes": {
+                          "description": "Attributes of AuthN Mapping.",
+                          "properties": {
+                            "attribute_key": {
+                              "description": "Key portion of a key/value pair of the attribute sent from the Identity Provider.",
+                              "example": "member-of",
+                              "type": "string"
+                            },
+                            "attribute_value": {
+                              "description": "Value portion of a key/value pair of the attribute sent from the Identity Provider.",
+                              "example": "Development",
+                              "type": "string"
+                            },
+                            "created_at": {
+                              "description": "Creation time of the AuthN Mapping.",
+                              "format": "date-time",
+                              "readOnly": true,
+                              "type": "string"
+                            },
+                            "modified_at": {
+                              "description": "Time of last AuthN Mapping modification.",
+                              "format": "date-time",
+                              "readOnly": true,
+                              "type": "string"
+                            },
+                            "saml_assertion_attribute_id": {
+                              "description": "The ID of the SAML assertion attribute.",
+                              "example": 0,
+                              "format": "int32",
+                              "maximum": 2147483647,
+                              "type": "integer"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "id": {
+                          "description": "ID of the AuthN Mapping.",
+                          "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
+                          "type": "string"
+                        },
+                        "included": {
+                          "description": "Included data in the AuthN Mapping response.",
+                          "items": {
+                            "description": "Included data in the AuthN Mapping response.",
+                            "oneOf": [
+                              {
+                                "description": "SAML assertion attribute.",
+                                "properties": {
+                                  "attributes": {
+                                    "description": "Key/Value pair of attributes used in SAML assertion attributes.",
+                                    "properties": {
+                                      "attribute_key": {
+                                        "description": "Key portion of a key/value pair of the attribute sent from the Identity Provider.",
+                                        "example": "member-of",
+                                        "type": "string"
+                                      },
+                                      "attribute_value": {
+                                        "description": "Value portion of a key/value pair of the attribute sent from the Identity Provider.",
+                                        "example": "Development",
+                                        "type": "string"
+                                      }
+                                    },
+                                    "type": "object"
+                                  },
+                                  "id": {
+                                    "description": "The ID of the SAML assertion attribute.",
+                                    "example": 0,
+                                    "format": "int32",
+                                    "maximum": 2147483647,
+                                    "type": "integer"
+                                  },
+                                  "type": {
+                                    "default": "saml_assertion_attributes",
+                                    "description": "SAML assertion attributes resource type.",
+                                    "enum": [
+                                      "saml_assertion_attributes"
+                                    ],
+                                    "example": "saml_assertion_attributes",
+                                    "type": "string",
+                                    "x-enum-varnames": [
+                                      "SAML_ASSERTION_ATTRIBUTES"
+                                    ]
+                                  }
+                                },
+                                "required": [
+                                  "id",
+                                  "type"
+                                ],
+                                "type": "object"
+                              },
+                              {
+                                "description": "Role object returned by the API.",
+                                "properties": {
+                                  "attributes": {
+                                    "description": "Attributes of the role.",
+                                    "properties": {
+                                      "created_at": {
+                                        "description": "Creation time of the role.",
+                                        "format": "date-time",
+                                        "readOnly": true,
+                                        "type": "string"
+                                      },
+                                      "modified_at": {
+                                        "description": "Time of last role modification.",
+                                        "format": "date-time",
+                                        "readOnly": true,
+                                        "type": "string"
+                                      },
+                                      "name": {
+                                        "description": "Name of the role.",
+                                        "type": "string"
+                                      },
+                                      "user_count": {
+                                        "description": "Number of users with that role.",
+                                        "format": "int64",
+                                        "readOnly": true,
+                                        "type": "integer"
+                                      }
+                                    },
+                                    "type": "object"
+                                  },
+                                  "id": {
+                                    "description": "ID of the role.",
+                                    "type": "string"
+                                  },
+                                  "relationships": {
+                                    "description": "Relationships of the role object returned by the API.",
+                                    "properties": {
+                                      "permissions": {
+                                        "description": "Relationship to multiple permissions objects.",
+                                        "properties": {
+                                          "data": {
+                                            "description": "Relationships to permission objects.",
+                                            "items": {
+                                              "description": "Relationship to permission object.",
+                                              "properties": {
+                                                "id": {
+                                                  "description": "ID of the permission.",
+                                                  "type": "string"
+                                                },
+                                                "type": {
+                                                  "default": "permissions",
+                                                  "description": "Permissions resource type.",
+                                                  "enum": [
+                                                    "permissions"
+                                                  ],
+                                                  "example": "permissions",
+                                                  "type": "string",
+                                                  "x-enum-varnames": [
+                                                    "PERMISSIONS"
+                                                  ]
+                                                }
+                                              },
+                                              "type": "object"
+                                            },
+                                            "type": "array"
+                                          }
+                                        },
+                                        "type": "object"
+                                      }
+                                    },
+                                    "type": "object"
+                                  },
+                                  "type": {
+                                    "default": "roles",
+                                    "description": "Roles type.",
+                                    "enum": [
+                                      "roles"
+                                    ],
+                                    "example": "roles",
+                                    "type": "string",
+                                    "x-enum-varnames": [
+                                      "ROLES"
+                                    ]
+                                  }
+                                },
+                                "required": [
+                                  "type"
+                                ],
+                                "type": "object"
+                              }
+                            ],
+                            "properties": {},
+                            "type": "object"
+                          },
+                          "type": "array"
+                        },
+                        "relationships": {
+                          "description": "All relationships associated with AuthN Mapping.",
+                          "properties": {
+                            "role": {
+                              "description": "Relationship to role.",
+                              "properties": {
+                                "data": {
+                                  "description": "Relationship to role object.",
+                                  "properties": {
+                                    "id": {
+                                      "description": "ID of the role.",
+                                      "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
+                                      "type": "string"
+                                    },
+                                    "type": {
+                                      "default": "roles",
+                                      "description": "Roles type.",
+                                      "enum": [
+                                        "roles"
+                                      ],
+                                      "example": "roles",
+                                      "type": "string",
+                                      "x-enum-varnames": [
+                                        "ROLES"
+                                      ]
+                                    }
+                                  },
+                                  "type": "object"
+                                }
+                              },
+                              "type": "object"
+                            },
+                            "saml_assertion_attribute": {
+                              "description": "AuthN Mapping relationship to SAML Assertion Attribute.",
+                              "properties": {
+                                "data": {
+                                  "description": "Data of AuthN Mapping relationship to SAML Assertion Attribute.",
+                                  "properties": {
+                                    "id": {
+                                      "description": "The ID of the SAML assertion attribute.",
+                                      "example": 0,
+                                      "format": "int32",
+                                      "maximum": 2147483647,
+                                      "type": "integer"
+                                    },
+                                    "type": {
+                                      "default": "saml_assertion_attributes",
+                                      "description": "SAML assertion attributes resource type.",
+                                      "enum": [
+                                        "saml_assertion_attributes"
+                                      ],
+                                      "example": "saml_assertion_attributes",
+                                      "type": "string",
+                                      "x-enum-varnames": [
+                                        "SAML_ASSERTION_ATTRIBUTES"
+                                      ]
+                                    }
+                                  },
+                                  "required": [
+                                    "id",
+                                    "type"
+                                  ],
+                                  "type": "object"
+                                }
+                              },
+                              "required": [
+                                "data"
+                              ],
+                              "type": "object"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "type": {
+                          "default": "authn_mappings",
+                          "description": "AuthN Mappings resource type.",
+                          "enum": [
+                            "authn_mappings"
+                          ],
+                          "example": "authn_mappings",
+                          "type": "string",
+                          "x-enum-varnames": [
+                            "AUTHN_MAPPINGS"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "type"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Authentication Error"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": [
+              "user_access_manage"
+            ]
+          }
+        ],
+        "summary": "Create an AuthN Mapping",
+        "tags": [
+          "AuthN Mappings"
+        ],
+        "x-codegen-request-body-name": "body",
+        "x-given": {
+          "authn_mapping": {
+            "parameters": [
+              {
+                "name": "body",
+                "value": "{\n  \"data\": {\n    \"attributes\": {\n     \"attribute_key\": \"{{ unique_lower_alnum }}\",\n     \"attribute_value\": \"{{ unique }}\"\n    },\n    \"relationships\": {\n       \"role\": {\n         \"data\": {\n           \"id\": \"{{ role.data.id }}\",\n           \"type\": \"{{ role.data.type }}\"\n         }\n      }\n    },\n    \"type\": \"authn_mappings\"\n  }\n}"
+              }
+            ],
+            "step": "there is a valid \"authn_mapping\" in the system"
+          }
+        },
+        "x-menu-order": 5,
+        "x-permission": "OR(USER_ACCESS_MANAGE)",
+        "x-undo": {
+          "operationId": "DeleteAuthNMapping",
+          "parameters": [
+            {
+              "name": "authn_mapping_id",
+              "source": "data.id"
+            }
+          ],
+          "type": "unsafe"
+        }
+      }
+    },
+    "/api/v2/authn_mappings/{authn_mapping_id}": {
+      "delete": {
+        "description": "Delete an AuthN Mapping specified by AuthN Mapping UUID.",
+        "operationId": "DeleteAuthNMapping",
+        "parameters": [
+          {
+            "description": "The UUID of the AuthN Mapping.",
+            "in": "path",
+            "name": "authn_mapping_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "OK"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Authentication Error"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": [
+              "user_access_manage"
+            ]
+          }
+        ],
+        "summary": "Delete an AuthN Mapping",
+        "tags": [
+          "AuthN Mappings"
+        ],
+        "x-menu-order": 3,
+        "x-permission": "OR(USER_ACCESS_MANAGE)",
+        "x-undo": {
+          "type": "idempotent"
+        }
+      },
+      "get": {
+        "description": "Get an AuthN Mapping specified by the AuthN Mapping UUID.",
+        "operationId": "GetAuthNMapping",
+        "parameters": [
+          {
+            "description": "The UUID of the AuthN Mapping.",
+            "in": "path",
+            "name": "authn_mapping_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "AuthN Mapping response from the API.",
+                  "properties": {
+                    "data": {
+                      "description": "The AuthN Mapping object returned by API.",
+                      "properties": {
+                        "attributes": {
+                          "description": "Attributes of AuthN Mapping.",
+                          "properties": {
+                            "attribute_key": {
+                              "description": "Key portion of a key/value pair of the attribute sent from the Identity Provider.",
+                              "example": "member-of",
+                              "type": "string"
+                            },
+                            "attribute_value": {
+                              "description": "Value portion of a key/value pair of the attribute sent from the Identity Provider.",
+                              "example": "Development",
+                              "type": "string"
+                            },
+                            "created_at": {
+                              "description": "Creation time of the AuthN Mapping.",
+                              "format": "date-time",
+                              "readOnly": true,
+                              "type": "string"
+                            },
+                            "modified_at": {
+                              "description": "Time of last AuthN Mapping modification.",
+                              "format": "date-time",
+                              "readOnly": true,
+                              "type": "string"
+                            },
+                            "saml_assertion_attribute_id": {
+                              "description": "The ID of the SAML assertion attribute.",
+                              "example": 0,
+                              "format": "int32",
+                              "maximum": 2147483647,
+                              "type": "integer"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "id": {
+                          "description": "ID of the AuthN Mapping.",
+                          "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
+                          "type": "string"
+                        },
+                        "included": {
+                          "description": "Included data in the AuthN Mapping response.",
+                          "items": {
+                            "description": "Included data in the AuthN Mapping response.",
+                            "oneOf": [
+                              {
+                                "description": "SAML assertion attribute.",
+                                "properties": {
+                                  "attributes": {
+                                    "description": "Key/Value pair of attributes used in SAML assertion attributes.",
+                                    "properties": {
+                                      "attribute_key": {
+                                        "description": "Key portion of a key/value pair of the attribute sent from the Identity Provider.",
+                                        "example": "member-of",
+                                        "type": "string"
+                                      },
+                                      "attribute_value": {
+                                        "description": "Value portion of a key/value pair of the attribute sent from the Identity Provider.",
+                                        "example": "Development",
+                                        "type": "string"
+                                      }
+                                    },
+                                    "type": "object"
+                                  },
+                                  "id": {
+                                    "description": "The ID of the SAML assertion attribute.",
+                                    "example": 0,
+                                    "format": "int32",
+                                    "maximum": 2147483647,
+                                    "type": "integer"
+                                  },
+                                  "type": {
+                                    "default": "saml_assertion_attributes",
+                                    "description": "SAML assertion attributes resource type.",
+                                    "enum": [
+                                      "saml_assertion_attributes"
+                                    ],
+                                    "example": "saml_assertion_attributes",
+                                    "type": "string",
+                                    "x-enum-varnames": [
+                                      "SAML_ASSERTION_ATTRIBUTES"
+                                    ]
+                                  }
+                                },
+                                "required": [
+                                  "id",
+                                  "type"
+                                ],
+                                "type": "object"
+                              },
+                              {
+                                "description": "Role object returned by the API.",
+                                "properties": {
+                                  "attributes": {
+                                    "description": "Attributes of the role.",
+                                    "properties": {
+                                      "created_at": {
+                                        "description": "Creation time of the role.",
+                                        "format": "date-time",
+                                        "readOnly": true,
+                                        "type": "string"
+                                      },
+                                      "modified_at": {
+                                        "description": "Time of last role modification.",
+                                        "format": "date-time",
+                                        "readOnly": true,
+                                        "type": "string"
+                                      },
+                                      "name": {
+                                        "description": "Name of the role.",
+                                        "type": "string"
+                                      },
+                                      "user_count": {
+                                        "description": "Number of users with that role.",
+                                        "format": "int64",
+                                        "readOnly": true,
+                                        "type": "integer"
+                                      }
+                                    },
+                                    "type": "object"
+                                  },
+                                  "id": {
+                                    "description": "ID of the role.",
+                                    "type": "string"
+                                  },
+                                  "relationships": {
+                                    "description": "Relationships of the role object returned by the API.",
+                                    "properties": {
+                                      "permissions": {
+                                        "description": "Relationship to multiple permissions objects.",
+                                        "properties": {
+                                          "data": {
+                                            "description": "Relationships to permission objects.",
+                                            "items": {
+                                              "description": "Relationship to permission object.",
+                                              "properties": {
+                                                "id": {
+                                                  "description": "ID of the permission.",
+                                                  "type": "string"
+                                                },
+                                                "type": {
+                                                  "default": "permissions",
+                                                  "description": "Permissions resource type.",
+                                                  "enum": [
+                                                    "permissions"
+                                                  ],
+                                                  "example": "permissions",
+                                                  "type": "string",
+                                                  "x-enum-varnames": [
+                                                    "PERMISSIONS"
+                                                  ]
+                                                }
+                                              },
+                                              "type": "object"
+                                            },
+                                            "type": "array"
+                                          }
+                                        },
+                                        "type": "object"
+                                      }
+                                    },
+                                    "type": "object"
+                                  },
+                                  "type": {
+                                    "default": "roles",
+                                    "description": "Roles type.",
+                                    "enum": [
+                                      "roles"
+                                    ],
+                                    "example": "roles",
+                                    "type": "string",
+                                    "x-enum-varnames": [
+                                      "ROLES"
+                                    ]
+                                  }
+                                },
+                                "required": [
+                                  "type"
+                                ],
+                                "type": "object"
+                              }
+                            ],
+                            "properties": {},
+                            "type": "object"
+                          },
+                          "type": "array"
+                        },
+                        "relationships": {
+                          "description": "All relationships associated with AuthN Mapping.",
+                          "properties": {
+                            "role": {
+                              "description": "Relationship to role.",
+                              "properties": {
+                                "data": {
+                                  "description": "Relationship to role object.",
+                                  "properties": {
+                                    "id": {
+                                      "description": "ID of the role.",
+                                      "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
+                                      "type": "string"
+                                    },
+                                    "type": {
+                                      "default": "roles",
+                                      "description": "Roles type.",
+                                      "enum": [
+                                        "roles"
+                                      ],
+                                      "example": "roles",
+                                      "type": "string",
+                                      "x-enum-varnames": [
+                                        "ROLES"
+                                      ]
+                                    }
+                                  },
+                                  "type": "object"
+                                }
+                              },
+                              "type": "object"
+                            },
+                            "saml_assertion_attribute": {
+                              "description": "AuthN Mapping relationship to SAML Assertion Attribute.",
+                              "properties": {
+                                "data": {
+                                  "description": "Data of AuthN Mapping relationship to SAML Assertion Attribute.",
+                                  "properties": {
+                                    "id": {
+                                      "description": "The ID of the SAML assertion attribute.",
+                                      "example": 0,
+                                      "format": "int32",
+                                      "maximum": 2147483647,
+                                      "type": "integer"
+                                    },
+                                    "type": {
+                                      "default": "saml_assertion_attributes",
+                                      "description": "SAML assertion attributes resource type.",
+                                      "enum": [
+                                        "saml_assertion_attributes"
+                                      ],
+                                      "example": "saml_assertion_attributes",
+                                      "type": "string",
+                                      "x-enum-varnames": [
+                                        "SAML_ASSERTION_ATTRIBUTES"
+                                      ]
+                                    }
+                                  },
+                                  "required": [
+                                    "id",
+                                    "type"
+                                  ],
+                                  "type": "object"
+                                }
+                              },
+                              "required": [
+                                "data"
+                              ],
+                              "type": "object"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "type": {
+                          "default": "authn_mappings",
+                          "description": "AuthN Mappings resource type.",
+                          "enum": [
+                            "authn_mappings"
+                          ],
+                          "example": "authn_mappings",
+                          "type": "string",
+                          "x-enum-varnames": [
+                            "AUTHN_MAPPINGS"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "type"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Authentication Error"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": []
+          }
+        ],
+        "summary": "Get an AuthN Mapping by UUID",
+        "tags": [
+          "AuthN Mappings"
+        ],
+        "x-menu-order": 1,
+        "x-permission": "OPEN()",
+        "x-undo": {
+          "type": "safe"
+        }
+      },
+      "patch": {
+        "description": "Edit an AuthN Mapping.",
+        "operationId": "UpdateAuthNMapping",
+        "parameters": [
+          {
+            "description": "The UUID of the AuthN Mapping.",
+            "in": "path",
+            "name": "authn_mapping_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "Request to update an AuthN Mapping.",
+                "properties": {
+                  "data": {
+                    "description": "Data for updating an AuthN Mapping.",
+                    "properties": {
+                      "attributes": {
+                        "description": "Key/Value pair of attributes used for update request.",
+                        "properties": {
+                          "attribute_key": {
+                            "description": "Key portion of a key/value pair of the attribute sent from the Identity Provider.",
+                            "example": "member-of",
+                            "type": "string"
+                          },
+                          "attribute_value": {
+                            "description": "Value portion of a key/value pair of the attribute sent from the Identity Provider.",
+                            "example": "Development",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "id": {
+                        "description": "ID of the AuthN Mapping.",
+                        "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
+                        "type": "string"
+                      },
+                      "relationships": {
+                        "description": "Relationship of AuthN Mapping update object to Role.",
+                        "properties": {
+                          "role": {
+                            "description": "Relationship to role.",
+                            "properties": {
+                              "data": {
+                                "description": "Relationship to role object.",
+                                "properties": {
+                                  "id": {
+                                    "description": "ID of the role.",
+                                    "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
+                                    "type": "string"
+                                  },
+                                  "type": {
+                                    "default": "roles",
+                                    "description": "Roles type.",
+                                    "enum": [
+                                      "roles"
+                                    ],
+                                    "example": "roles",
+                                    "type": "string",
+                                    "x-enum-varnames": [
+                                      "ROLES"
+                                    ]
+                                  }
+                                },
+                                "type": "object"
+                              }
+                            },
+                            "type": "object"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": {
+                        "default": "authn_mappings",
+                        "description": "AuthN Mappings resource type.",
+                        "enum": [
+                          "authn_mappings"
+                        ],
+                        "example": "authn_mappings",
+                        "type": "string",
+                        "x-enum-varnames": [
+                          "AUTHN_MAPPINGS"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "type"
+                    ],
+                    "type": "object"
+                  }
+                },
+                "required": [
+                  "data"
+                ],
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "AuthN Mapping response from the API.",
+                  "properties": {
+                    "data": {
+                      "description": "The AuthN Mapping object returned by API.",
+                      "properties": {
+                        "attributes": {
+                          "description": "Attributes of AuthN Mapping.",
+                          "properties": {
+                            "attribute_key": {
+                              "description": "Key portion of a key/value pair of the attribute sent from the Identity Provider.",
+                              "example": "member-of",
+                              "type": "string"
+                            },
+                            "attribute_value": {
+                              "description": "Value portion of a key/value pair of the attribute sent from the Identity Provider.",
+                              "example": "Development",
+                              "type": "string"
+                            },
+                            "created_at": {
+                              "description": "Creation time of the AuthN Mapping.",
+                              "format": "date-time",
+                              "readOnly": true,
+                              "type": "string"
+                            },
+                            "modified_at": {
+                              "description": "Time of last AuthN Mapping modification.",
+                              "format": "date-time",
+                              "readOnly": true,
+                              "type": "string"
+                            },
+                            "saml_assertion_attribute_id": {
+                              "description": "The ID of the SAML assertion attribute.",
+                              "example": 0,
+                              "format": "int32",
+                              "maximum": 2147483647,
+                              "type": "integer"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "id": {
+                          "description": "ID of the AuthN Mapping.",
+                          "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
+                          "type": "string"
+                        },
+                        "included": {
+                          "description": "Included data in the AuthN Mapping response.",
+                          "items": {
+                            "description": "Included data in the AuthN Mapping response.",
+                            "oneOf": [
+                              {
+                                "description": "SAML assertion attribute.",
+                                "properties": {
+                                  "attributes": {
+                                    "description": "Key/Value pair of attributes used in SAML assertion attributes.",
+                                    "properties": {
+                                      "attribute_key": {
+                                        "description": "Key portion of a key/value pair of the attribute sent from the Identity Provider.",
+                                        "example": "member-of",
+                                        "type": "string"
+                                      },
+                                      "attribute_value": {
+                                        "description": "Value portion of a key/value pair of the attribute sent from the Identity Provider.",
+                                        "example": "Development",
+                                        "type": "string"
+                                      }
+                                    },
+                                    "type": "object"
+                                  },
+                                  "id": {
+                                    "description": "The ID of the SAML assertion attribute.",
+                                    "example": 0,
+                                    "format": "int32",
+                                    "maximum": 2147483647,
+                                    "type": "integer"
+                                  },
+                                  "type": {
+                                    "default": "saml_assertion_attributes",
+                                    "description": "SAML assertion attributes resource type.",
+                                    "enum": [
+                                      "saml_assertion_attributes"
+                                    ],
+                                    "example": "saml_assertion_attributes",
+                                    "type": "string",
+                                    "x-enum-varnames": [
+                                      "SAML_ASSERTION_ATTRIBUTES"
+                                    ]
+                                  }
+                                },
+                                "required": [
+                                  "id",
+                                  "type"
+                                ],
+                                "type": "object"
+                              },
+                              {
+                                "description": "Role object returned by the API.",
+                                "properties": {
+                                  "attributes": {
+                                    "description": "Attributes of the role.",
+                                    "properties": {
+                                      "created_at": {
+                                        "description": "Creation time of the role.",
+                                        "format": "date-time",
+                                        "readOnly": true,
+                                        "type": "string"
+                                      },
+                                      "modified_at": {
+                                        "description": "Time of last role modification.",
+                                        "format": "date-time",
+                                        "readOnly": true,
+                                        "type": "string"
+                                      },
+                                      "name": {
+                                        "description": "Name of the role.",
+                                        "type": "string"
+                                      },
+                                      "user_count": {
+                                        "description": "Number of users with that role.",
+                                        "format": "int64",
+                                        "readOnly": true,
+                                        "type": "integer"
+                                      }
+                                    },
+                                    "type": "object"
+                                  },
+                                  "id": {
+                                    "description": "ID of the role.",
+                                    "type": "string"
+                                  },
+                                  "relationships": {
+                                    "description": "Relationships of the role object returned by the API.",
+                                    "properties": {
+                                      "permissions": {
+                                        "description": "Relationship to multiple permissions objects.",
+                                        "properties": {
+                                          "data": {
+                                            "description": "Relationships to permission objects.",
+                                            "items": {
+                                              "description": "Relationship to permission object.",
+                                              "properties": {
+                                                "id": {
+                                                  "description": "ID of the permission.",
+                                                  "type": "string"
+                                                },
+                                                "type": {
+                                                  "default": "permissions",
+                                                  "description": "Permissions resource type.",
+                                                  "enum": [
+                                                    "permissions"
+                                                  ],
+                                                  "example": "permissions",
+                                                  "type": "string",
+                                                  "x-enum-varnames": [
+                                                    "PERMISSIONS"
+                                                  ]
+                                                }
+                                              },
+                                              "type": "object"
+                                            },
+                                            "type": "array"
+                                          }
+                                        },
+                                        "type": "object"
+                                      }
+                                    },
+                                    "type": "object"
+                                  },
+                                  "type": {
+                                    "default": "roles",
+                                    "description": "Roles type.",
+                                    "enum": [
+                                      "roles"
+                                    ],
+                                    "example": "roles",
+                                    "type": "string",
+                                    "x-enum-varnames": [
+                                      "ROLES"
+                                    ]
+                                  }
+                                },
+                                "required": [
+                                  "type"
+                                ],
+                                "type": "object"
+                              }
+                            ],
+                            "properties": {},
+                            "type": "object"
+                          },
+                          "type": "array"
+                        },
+                        "relationships": {
+                          "description": "All relationships associated with AuthN Mapping.",
+                          "properties": {
+                            "role": {
+                              "description": "Relationship to role.",
+                              "properties": {
+                                "data": {
+                                  "description": "Relationship to role object.",
+                                  "properties": {
+                                    "id": {
+                                      "description": "ID of the role.",
+                                      "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
+                                      "type": "string"
+                                    },
+                                    "type": {
+                                      "default": "roles",
+                                      "description": "Roles type.",
+                                      "enum": [
+                                        "roles"
+                                      ],
+                                      "example": "roles",
+                                      "type": "string",
+                                      "x-enum-varnames": [
+                                        "ROLES"
+                                      ]
+                                    }
+                                  },
+                                  "type": "object"
+                                }
+                              },
+                              "type": "object"
+                            },
+                            "saml_assertion_attribute": {
+                              "description": "AuthN Mapping relationship to SAML Assertion Attribute.",
+                              "properties": {
+                                "data": {
+                                  "description": "Data of AuthN Mapping relationship to SAML Assertion Attribute.",
+                                  "properties": {
+                                    "id": {
+                                      "description": "The ID of the SAML assertion attribute.",
+                                      "example": 0,
+                                      "format": "int32",
+                                      "maximum": 2147483647,
+                                      "type": "integer"
+                                    },
+                                    "type": {
+                                      "default": "saml_assertion_attributes",
+                                      "description": "SAML assertion attributes resource type.",
+                                      "enum": [
+                                        "saml_assertion_attributes"
+                                      ],
+                                      "example": "saml_assertion_attributes",
+                                      "type": "string",
+                                      "x-enum-varnames": [
+                                        "SAML_ASSERTION_ATTRIBUTES"
+                                      ]
+                                    }
+                                  },
+                                  "required": [
+                                    "id",
+                                    "type"
+                                  ],
+                                  "type": "object"
+                                }
+                              },
+                              "required": [
+                                "data"
+                              ],
+                              "type": "object"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "type": {
+                          "default": "authn_mappings",
+                          "description": "AuthN Mappings resource type.",
+                          "enum": [
+                            "authn_mappings"
+                          ],
+                          "example": "authn_mappings",
+                          "type": "string",
+                          "x-enum-varnames": [
+                            "AUTHN_MAPPINGS"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "type"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Authentication Error"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": [
+              "user_access_manage"
+            ]
+          }
+        ],
+        "summary": "Edit an AuthN Mapping",
+        "tags": [
+          "AuthN Mappings"
+        ],
+        "x-codegen-request-body-name": "body",
+        "x-menu-order": 2,
+        "x-permission": "OR(USER_ACCESS_MANAGE)",
         "x-undo": {
           "type": "idempotent"
         }
@@ -76674,6 +80530,10 @@
     }
   ],
   "tags": [
+    {
+      "description": "[AuthN Mappings API] (https://docs.datadoghq.com/account_management/authn_mapping/?tab=example)\nis used to automatically map group of users to roles in Datadog using attributes\nsent from Identity Providers.",
+      "name": "AuthN Mappings"
+    },
     {
       "description": "Workload activity security rules for generating events using the Datadog security Agent.",
       "name": "Cloud Workload Security"
