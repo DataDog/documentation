@@ -87,9 +87,7 @@ To enable debug mode for the Datadog Node.js Tracer, use the environment variabl
 
 **Application Logs**
 
-By default, logging from this library is disabled. In order to get debugging information and errors sent to logs, set the `debug` options to `true` in the [init()][1] method.
-
-The tracer will then log debug information to `console.log()` and errors to `console.error()`. You can change this behavior by passing a custom logger to the tracer. The logger should contain `debug()` and `error()` methods that can handle messages and errors, respectively.
+In debug mode the tracer will log debug information to `console.log()` and errors to `console.error()`. You can change this behavior by passing a custom logger to the tracer. The logger should contain `debug()` and `error()` methods that can handle messages and errors, respectively.
 
 For example:
 
