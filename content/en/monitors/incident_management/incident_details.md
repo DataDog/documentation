@@ -48,7 +48,7 @@ If your incident is customer-facing, specify the details of the impact below the
 2. Specify a start date and time for the impact.
 3. Specify an end date and time for the impact or leave blank if the impact is still ongoing.
 4. Describe the nature of the impact on customers in `Scope of impact`.
-5. Click *Save*.
+5. Click **Save**.
 
 In addition to housing your property fields, the Overview section also provides at-a-glance summary modules on the left and at the bottom of the page:
 
