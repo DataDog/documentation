@@ -83,9 +83,9 @@ To customize what spans are indexed and retained for 15 days, you can create, mo
 4. Set a percentage of spans matching these tags to be indexed.
 5. Save your new filter.
 
-**Note**: Selecting "Top-Level Spans for Services Only" means the retention filter retains only the selected proportion of [service entry spans][4] of the service and indexes them. Use this if you want to only index service entry spans with matching tags. If "All Spans" is selected, the retention filter retains the selected proportion of all spans of the distributed trace, irrespective of their hierarchy, and indexes them. This may have an impact on your bill, and the visual indicator within the app while setting a retention filter informs you how many matching spans have been detected over the time period.
+Selecting "Top-Level Spans for Services Only" means the retention filter retains only the selected proportion of [service entry spans][4] of the service and indexes them. Use this if you want to only index service entry spans with matching tags. If "All Spans" is selected, the retention filter retains the selected proportion of all spans of the distributed trace, irrespective of their hierarchy, and indexes them. This may have an impact on your bill, and the visual indicator within the app while setting a retention filter informs you how many matching spans have been detected over the time period.
 
-**Note**: Filters retain in a serial order. If you have an upstream filter that retains spans with the tag `resource:POST /hello_world`, those spans will not show up in the edit window of a downstream filter that also searches for spans with `resource:POST /hello_world`, since they're already being retained by the upstream filter.
+Filters are retained in a serial order. If you have an upstream filter that retains spans with the `resource:POST /hello_world` tag, those spans do not show up in the **Edit** window of a downstream filter that searches for spans with the same tag because they have been retained by the upstream filter.
 
 For example, you can create filters to keep all traces for:
 
