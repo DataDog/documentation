@@ -106,7 +106,7 @@ Disk space is low @ops-team@company.com
 
 #### Email
 
-* Notify a Datadog user by email with `@<DD_USER_EMAIL_ADDRESS>`. **Note**: An email address associated with a pending Datadog user invitation is considered inactive and does not receive notifications.
+* Notify a Datadog user by email with `@<DD_USER_EMAIL_ADDRESS>`. **Note**: An email address associated with a pending Datadog user invitation is considered inactive and does not receive notifications. An email address associted with a disabled Datadog user also will not recieve notifications.
 * Notify any non-Datadog user by email with `@<EMAIL>`.
 
 #### Integrations
