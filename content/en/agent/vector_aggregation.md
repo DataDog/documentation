@@ -44,8 +44,10 @@ For logs update the following values in the `datadog.yaml` file:
 ```yaml
 vector:
   logs.enabled: true
-  logs.url: "http://<VECTOR_HOST>:<VECTOR_PORT>" # Adjust protocol to https if TLS/SSL is enabled on the Vector side
-# logs_config.use_v2_api: false # Uncomment this line if you use a version of Vector before v0.17.0
+  # Adjust protocol to https if TLS/SSL is enabled on the Vector side
+  logs.url: "http://<VECTOR_HOST>:<VECTOR_PORT>"
+# Uncomment the following line if you use a version of Vector before v0.17.0
+# logs_config.use_v2_api: false 
 ```
 
 For metrics update the following values in the `datadog.yaml` file:
@@ -53,7 +55,8 @@ For metrics update the following values in the `datadog.yaml` file:
 ```yaml
 vector:
   metrics.enabled: true
-  metrics.url: "http://<VECTOR_HOST>:<VECTOR_PORT>" # Adjust protocol to https if TLS/SSL is enabled on the Vector side
+  # Adjust protocol to https if TLS/SSL is enabled on the Vector side
+  metrics.url: "http://<VECTOR_HOST>:<VECTOR_PORT>"
 ```
 
 Where `VECTOR_HOST` is the hostname of the system running Vector and `VECTOR_PORT` is the TCP port on which
@@ -84,7 +87,8 @@ Here is a configuration example that adds a tag to every log and avery metric us
 sources:
   datadog_agents:
     type: datadog_agent
-    address: "[::]:8080" # The <VECTOR_PORT> mentioned above should be set to the port value used here
+    # The <VECTOR_PORT> mentioned above should be set to the port value used here
+    address: "[::]:8080"
     mutiple_outputs: true # To automatically separate metrics and logs
 
 transforms:
@@ -93,7 +97,8 @@ transforms:
     inputs:
       - datadog_agents.logs
     source: |
-      # The `!` shorthand is used here with the `string` function, it errors if .ddtags is not a "string".
+      # The `!` shorthand is used here with the `string` function, it errors if
+      # .ddtags is not a "string".
       # The .ddtags field is always expected to be a string.
       .ddtags = string!(.ddtags) + ",sender:vector"
   tag_metrics:
