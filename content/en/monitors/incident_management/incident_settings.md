@@ -77,7 +77,7 @@ In addition to the five default fields and the fields based on metric tags, you 
 3. *Text Area*: A free-form text box. Values are entered by a responder on a per-incident basis.
 4. *Number*: A text area that only accepts digits and a single period as input. Values are entered by a responder on a per-incident basis.
 
-*Single-Select*, *Multi-Select*, and *Number* custom fields will become searchable facets in the [Incident Homepage][4] and [Incident Management Analytics][2] for easier filtration of incidents. *Number* fields will also become measures in Incident Management Analytics that can be graphed and visualized in [Dashboards][13] and [Notebooks][11].
+*Single-Select*, *Multi-Select*, and *Number* custom fields are searchable facets in the [Incident Homepage][4] and [Incident Management Analytics][2] for easy filtering of incidents. *Number* fields are measures in Incident Management Analytics that can be graphed and visualized in [Dashboards][13] and [Notebooks][11].
 
 ### Integrations
 
