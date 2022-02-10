@@ -56,7 +56,7 @@ If you have [Datadog APM][5] configured, the `Services` property field automatic
 
 You can add more property fields to your settings by selecting one of your existing `key:value` pair [metric tags][6]. When you do this, the key of your property field is the start case of your metric tag's key (each word is capitalized and separated by spaces), and the values for the property field are equal to the values reported by the metric tag.
 
-Property fields are organized into three tables that correspond to where the fields will appear in the [Overview section of the Incident Details page][12]:
+Property fields are organized into three tables that correspond to where the fields will appear in the [Overview section][12] of the Incident Details page:
 
 1. `What Happened`
 2. `Why It Happened`
