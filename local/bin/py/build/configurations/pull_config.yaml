@@ -611,8 +611,8 @@
         - "runtime/**/*.yml"
         - "runtime/**/*.md"
         # new
-        - "workload-security/signal-rules/*.yaml"
-        - "workload-security/signal-rules/*.md"
+        - "workload-security/backend-rules/*.yaml"
+        - "workload-security/backend-rules/*.md"
         - "security-monitoring/*.json"
         - "security-monitoring/*.md"
         - "posture-management/**/*.json"
