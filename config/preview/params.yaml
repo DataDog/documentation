@@ -5,7 +5,7 @@ ga: UA-21102638-9
 
 header_scripts:
   - hotjar: true
-  - google-site-tag: true
+  - google-site-tag: false
   - google-tag-manager: false
   - marketo: false
 
