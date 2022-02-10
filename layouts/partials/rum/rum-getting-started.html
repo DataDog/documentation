@@ -1,25 +1,30 @@
 {{ $dot := . }}
 <div class="apm-languages">
-  <div class="container cards-dd col-num-4">
+  <div class="container cards-dd col-num-5">
     <div class="card-deck">
       <a class="card" href="/real_user_monitoring/browser/">
         <div class="card-body text-center py-2 px-1">
-          {{ partial "img.html" (dict "root" . "src" "integrations_logos/javascript.png" "class" "img-fluid" "alt" "browser" "width" "400") }}
+          {{ partial "img.html" (dict "root" . "src" "integrations_logos/javascript_large.svg" "class" "img-fluid" "alt" "browser" "width" "400") }}
         </div>
       </a>
       <a class="card" href="/real_user_monitoring/android/">
         <div class="card-body text-center py-2 px-1">
-          {{ partial "img.html" (dict "root" . "src" "integrations_logos/android.png" "class" "img-fluid" "alt" "android" "width" "400") }}
+          {{ partial "img.html" (dict "root" . "src" "integrations_logos/android_large.svg" "class" "img-fluid" "alt" "android" "width" "400") }}
         </div>
       </a>
       <a class="card" href="/real_user_monitoring/ios/">
         <div class="card-body text-center py-2 px-1">
-          {{ partial "img.html" (dict "root" . "src" "integrations_logos/ios_stacked.png" "class" "img-fluid" "alt" "ios" "width" "400") }}
+          {{ partial "img.html" (dict "root" . "src" "integrations_logos/ios_large.svg" "class" "img-fluid" "alt" "ios" "width" "400") }}
         </div>
       </a>
       <a class="card" href="/real_user_monitoring/reactnative/">
         <div class="card-body text-center py-2 px-1">
-          {{ partial "img.html" (dict "root" . "src" "integrations_logos/react_native.png" "class" "img-fluid" "alt" "react native" "width" "400") }}
+          {{ partial "img.html" (dict "root" . "src" "integrations_logos/react-native_large.svg" "class" "img-fluid" "alt" "react native" "width" "400") }}
+        </div>
+      </a>
+      <a class="card" href="/help">
+        <div class="card-body text-center py-2 px-1">
+          {{ partial "img.html" (dict "root" . "src" "integrations_logos/flutter_large.svg" "class" "img-fluid" "alt" "flutter" "width" "400") }}
         </div>
       </a>
     </div>
