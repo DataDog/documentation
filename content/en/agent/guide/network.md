@@ -53,7 +53,8 @@ Other: See [logs endpoints][7]
 : `orchestrator.`{{< region-param key="dd_site" code="true" >}}
 
 [Real User Monitoring (RUM)][9]
-: `rum-http-intake.logs.`{{< region-param key="dd_site" code="true" >}}
+: `rum.`{{< region-param key="browser_sdk_endpoint_domain" code="true" >}}
+`session-replay.`{{< region-param key="browser_sdk_endpoint_domain" code="true" >}}
 
 [Profiling][10]
 : `intake.profile.`{{< region-param key="dd_site" code="true" >}}
