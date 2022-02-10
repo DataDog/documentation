@@ -6641,6 +6641,70 @@ api:
         - CreateWebhooksIntegrationCustomVariable
       unstable: []
       order: 5
+  - name: AuthN Mappings
+    url: /api/latest/authn-mappings/
+    identifier: authn-mappings
+    generated: true
+  - name: Edit an AuthN Mapping
+    url: '#edit-an-authn-mapping'
+    identifier: edit-an-authn-mapping
+    parent: authn-mappings
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateAuthNMapping
+      unstable: []
+      order: 2
+  - name: Get an AuthN Mapping by UUID
+    url: '#get-an-authn-mapping-by-uuid'
+    identifier: get-an-authn-mapping-by-uuid
+    parent: authn-mappings
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetAuthNMapping
+      unstable: []
+      order: 1
+  - name: Delete an AuthN Mapping
+    url: '#delete-an-authn-mapping'
+    identifier: delete-an-authn-mapping
+    parent: authn-mappings
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteAuthNMapping
+      unstable: []
+      order: 3
+  - name: Create an AuthN Mapping
+    url: '#create-an-authn-mapping'
+    identifier: create-an-authn-mapping
+    parent: authn-mappings
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateAuthNMapping
+      unstable: []
+      order: 5
+  - name: List all AuthN Mappings
+    url: '#list-all-authn-mappings'
+    identifier: list-all-authn-mappings
+    parent: authn-mappings
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListAuthNMappings
+      unstable: []
+      order: 4
   - name: Cloud Workload Security
     url: /api/latest/cloud-workload-security/
     identifier: cloud-workload-security
