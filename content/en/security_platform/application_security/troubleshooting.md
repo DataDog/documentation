@@ -40,7 +40,7 @@ Application Security traces are rate-limited to 100 traces per second. Traces se
 
 There are a series of steps that must run successfully for Application Security events to appear in the Application Security dashboard. It is important to check each step when investigating this issue. Additional troubleshooting steps for specific languages are in the language tab at the end.
 
-### 1. Send a test attack to your application
+### Send a test attack to your application
 
 Simulate an attack to test your Application Security setup using the following command:
 
@@ -70,7 +70,7 @@ To ensure that the Arachni test isn’t blocked:
   DDAS-0012-02: Blocked attack from <full_iaw_output>
   ```
 
-### 2. Check if required tracer integrations are deactivated
+### Check if required tracer integrations are deactivated
 
 Application Security relies on certain tracer integrations. If they are deactivated, Application Security won't work. To see if there are deactivated integrations, look for `disabled_integrations` in your [startup logs][2].
 
@@ -136,7 +136,7 @@ For Ruby, the Rack integration is required.
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
-### 3. Check Datadog Agent configuration
+### Check Datadog Agent configuration
 
  To troubleshoot this step of the process, do the following: 
 
@@ -346,7 +346,7 @@ If you do not see those logs, check the following:
 
 #### Is Application Security called for each HTTP request?
 
-To confirm that Application Security is called for each HTTP request, trigger a [test attack](#1-send-a-test-attack-to-your-application) and look for these logs:
+To confirm that Application Security is called for each HTTP request, trigger a [test attack](#send-a-test-attack-to-your-application) and look for these logs:
 
 ```
 D, [2022-01-19T21:25:50.579745 #341792] DEBUG -- ddtrace: [ddtrace] (/home/lloeki/src/github.com/DataDog/dd-trace-rb/lib/datadog/security/reactive/operation.rb:14:in `initialize') operation: rack.request initialize
@@ -358,7 +358,7 @@ D, [2022-01-19T21:25:50.581061 #341792] DEBUG -- ddtrace: [ddtrace] (/home/lloek
 If you don’t see those logs, try the following:
 
 - Check that another upstream security system is not filtering requests based on the test header value, which would prevent the request from reaching the application. 
-- Send another [test attack](#1-send-a-test-attack-to-your-application) using another user's agent values in the curl command to see if the event is successfully sent.
+- Send another [test attack](#send-a-test-attack-to-your-application) using another user's agent values in the curl command to see if the event is successfully sent.
 - Look in the application logs for the exact request you ran to confirm the request reached the application, and was not responded to by another upstream system.
 
 If the Rack integration was configured manually, sometimes a known issue prevents Application Security from working. For example:
@@ -374,7 +374,7 @@ If `c.use :rack` is present, remove it to see if the check passes.
 
 #### Is Application Security detecting HTTP request security events?
 
-To confirm that Application Security is detecting security events, trigger a [test attack](#1-send-a-test-attack-to-your-application), and look for these logs:
+To confirm that Application Security is detecting security events, trigger a [test attack](#send-a-test-attack-to-your-application), and look for these logs:
 
 ```
 D, [2021-12-14T22:39:53.268820 #106051] DEBUG -- ddtrace: [ddtrace] (ddtrace/lib/datadog/security/contrib/rack/reactive/request.rb:63:in `block in subscribe') WAF: #<struct Datadog::Security::WAF::Result action=:monitor, data=[{"rule"=>{"id"=>"ua0-600-10x", "name"=>"Nessus", "tags"=>{"type"=>"security_scanner", "category"=>"attack_attempt"}}, "rule_matches"=>[{"operator"=>"match_regex", "operator_value"=>"(?i)^Nessus(/|([ :]+SOAP))", "parameters"=>[{"address"=>"server.request.headers.no_cookies", "key_path"=>["user-agent"], "value"=>"Nessus SOAP", "highlight"=>["Nessus SOAP"]}]}]}], perf_data=nil, perf_total_runtime=20519>
@@ -382,7 +382,7 @@ D, [2021-12-14T22:39:53.268820 #106051] DEBUG -- ddtrace: [ddtrace] (ddtrace/lib
 If you don’t see those logs, check that another upstream security system is not filtering out the requests or altering them based on the test header value. 
 
 #### Is the tracer sending traces with security data?
-Application Security events are sent with APM traces. To confirm that Application Security correctly detects and inserts security data into traces, trigger a [test attack](#1-send-a-test-attack-to-your-application), and look for these tracer logs:
+Application Security events are sent with APM traces. To confirm that Application Security correctly detects and inserts security data into traces, trigger a [test attack](#send-a-test-attack-to-your-application), and look for these tracer logs:
 
 ```
 Tags: [
@@ -415,7 +415,7 @@ Wait a minute for the agent to forward the traces, then check that the traces sh
 
 #### Is Application Security forwarding security events to the Agent?
 
-To confirm that Application Security is detecting and forwarding security events to the agent, trigger a [test attack](#1-send-a-test-attack-to-your-application), and look for these logs:
+To confirm that Application Security is detecting and forwarding security events to the agent, trigger a [test attack](#send-a-test-attack-to-your-application), and look for these logs:
 
 ```
 D, [2021-12-14T11:03:37.347815 #73127] DEBUG -- ddtrace: [ddtrace] (ddtrace/lib/datadog/security/worker.rb:54:in `block in perform') processed events: [{:event_id=>"eb1eca52-74e1-435b-9a6c-44046d3765ee", :event_type=>"appsec.threat.attack", :event_version=>"0.1.0", :detected_at=>"2021-12-14T10:03:37Z", :type=>"security_scanner", :blocked=>false, :rule=>{:id=>"ua0-600-10x", :name=>"Nessus", :set=>"security_scanner"}, :rule_match=>{:operator=>"match_regex", :operator_value=>"(?i)^Nessus(/|([ :]+SOAP))", :parameters=>[{:name=>"server.request.headers.no_cookies", :key_path=>["user-agent"], :value=>"Nessus SOAP", :highlight=>["Nessus SOAP"]}]}, :context=>{:actor=>{:context_version=>"0.1.0", :ip=>{:address=>"127.0.0.1"}, :identifiers=>nil, :_id=>nil}, :host=>{:os_type=>"Linux", :hostname=>"procyon-vm", :context_version=>"0.1.0"}, :http=>{:context_version=>"0.1.0", :request=>{:scheme=>"http", :method=>"GET", :url=>"http://127.0.0.1:9292/admin.php", :host=>"127.0.0.1", :port=>9292, :path=>"/admin.php", :remote_ip=>"127.0.0.1", :headers=>{"host"=>"127.0.0.1:9292", "accept"=>"*/*", "user-agent"=>"Nessus SOAP"}, :useragent=>"Nessus SOAP"}, :response=>{:status=>404, :blocked=>false, :headers=>{"Content-Type"=>"text/plain"}}}, :service=>{:context_version=>"0.1.0", :name=>"rack", :environment=>nil}, :span=>{:context_version=>"0.1.0", :id=>4439751766880249768}, :tags=>{:context_version=>"0.1.0", :values=>["_dd.appsec.enabled:1", "_dd.runtime_family:ruby", "service:rack"]}, :trace=>{:context_version=>"0.1.0", :id=>2632764434813487337}, :tracer=>{:context_version=>"0.1.0", :runtime_type=>"ruby", :runtime_version=>"3.0.2", :lib_version=>"0.54.1"}}}]
@@ -429,7 +429,7 @@ Wait a minute for the Agent to forward the events to Datadog, then check that th
 
 If you continue to have issues with Application Security, contact [Datadog support][1] with the following information: 
 
-- Confirmation that the [test attack](#1-send-a-test-attack-to-your-application) was successfully sent 
+- Confirmation that the [test attack](#send-a-test-attack-to-your-application) was successfully sent 
 - Tracer [startup][2] or [debug][5] logs
 
 ## Further Reading
