@@ -62,7 +62,7 @@ Property fields are organized into three tables that correspond to where the fie
 2. `Why It Happened`
 3. `Attributes`
 
-You can move any property field into a different table or reorder them in the same table by dragging and drop the field using the drag handle icon to the left of its name. You can preview what your property fields will look like by clicking the `Preview` button in the top right of the property field settings.
+You can move any property field into a different table or reorder them in the same table by dragging and dropping the field using the drag handle icon. Preview what your property fields look like by clicking the **Preview** button on the top right.
 
 #### Custom property fields and required fields
 
