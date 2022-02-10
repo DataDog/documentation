@@ -20,6 +20,10 @@ kind: documentation
 3. For languages other than Swift, make sure the Datadog Agent is running on the host where tests are run (accessible at `localhost:8126`), or if accessible on another hostname or port, make sure you run your tests with the appropriate Agent hostname set in the `DD_AGENT_HOST` and the appropriate port in `DD_TRACE_AGENT_PORT` environment variables. You can activate [debug mode][5] in the tracer to check if it's able to connect to the Agent.
 4. If you still don't see any results, [contact Support][1] for troubleshooting help.
 
+### You have received a "We couldn't find this pipeline" message
+
+While a pipeline is running, CI Visibility might receive partial data for stages, jobs or custom commands before the pipeline has finished. If you click on partial data you will receive this message. Please wait until the pipeline is complete and try again.
+
 ### Data appears in test runs but not tests
 
 If you can see test results data in the **Test Runs** tab, but not the **Tests** tab, Git metadata (repository, commit and/or branch) is probably missing. To confirm this is the case, open a test execution in the [Test Runs][3] section, and check that there is no `git.repository_url`, `git.commit.sha`, or `git.branch`. If these tags are not populated, nothing shows in the [Tests][4] section.
