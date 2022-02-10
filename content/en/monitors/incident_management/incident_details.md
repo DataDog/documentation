@@ -50,7 +50,7 @@ If your incident is customer-facing, specify the details in the Impact section:
 4. Describe the nature of the impact on customers in `Scope of impact`.
 5. Click **Save**.
 
-In addition to housing your property fields, the Overview section also provides at-a-glance summary modules on the left and at the bottom of the page:
+In addition to housing your property fields, the Overview section also provides the following at-a-glance summary modules:
 
 1. *Condensed Timeline*: Displays the times when the incident changes state as well as when impact started and ended for a high-level view of the incident's lifecycle.
 2. *Latest Notifications*: Displays the most recent notification sent for the incident in question, with quick access to the full notifications list in the [Notification section][14].
