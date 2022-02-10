@@ -40,7 +40,7 @@ Properties are divided into the following three sections:
 * Why it happened
 * Attributes
 
-In your [Incident Settings][5] you can configure additional property fields  by using the `<KEY>:<VALUE>` pairs reporting in your Datadog metric tags or creating fully custom ones. Assigning values to an incident's properties makes it easier to search for subsets of incidents on the [Incident Homepage][6] and to form queries when using [Incident Management Analytics][7]. You can also reorder your property fields and move them to different headings so the most important properties are in the most prominent locations.
+In [Incident Settings][5], add additional property fields using the `<KEY>:<VALUE>` pairs from your Datadog metric tags, or create custom ones. Assign values to an incident's properties to easily search for a subset of incidents on the [Incident Homepage][6] and to form queries when using [Incident Management Analytics][7]. You can also reorder your property fields and move them to different headings so the most important properties are in prominent locations.
 
 If your incident is customer-facing, specify the details of the impact below the *What happened* heading in the *Impact* heading:
 
