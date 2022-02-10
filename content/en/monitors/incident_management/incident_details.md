@@ -34,7 +34,7 @@ By default, all incidents have the following properties:
 * Detection Method
 * Summary
 
-Properties are divided into three headings:
+Properties are divided into the following three sections:
 
 * What happened
 * Why it happened
