@@ -46,7 +46,7 @@ If your incident is customer-facing, specify the details of the impact below the
 
 1. Click **Add**.
 2. Specify a start date and time for the impact.
-3. Specify an end date and time for the impact or leave this blank if the impact is still ongoing.
+3. Specify an end date and time for the impact or leave blank if the impact is still ongoing.
 4. Describe the nature of the impact on customers in `Scope of impact`.
 5. Click *Save*.
 
