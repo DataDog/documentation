@@ -55,7 +55,8 @@ In addition to housing your property fields, the Overview section also provides 
 1. *Condensed Timeline*: Displays the times when the incident changes state as well as when impact started and ended for a high-level view of the incident's lifecycle.
 2. *Latest Notifications*: Displays the most recent notification sent for the incident, with quick access to the full list of notifications in the [Notification section][14].
 3. *Pending Tasks*: Displays the most recent incomplete task, with quick access to the full tasks list in the [Remediation section][15].
-4. *Recent timeline entries*: Displays the five most recent entries in the incident timeline, with quick access to see the entire [Timeline section][16].
+4. *Responders*: Displays the current incident commander and avatars for the remaining responders assigned to the incident.
+5. *Recent timeline entries*: Displays the five most recent entries in the incident timeline, with quick access to see the entire [Timeline section][16].
 
 ## Timeline section
 
