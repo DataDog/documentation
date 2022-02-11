@@ -144,7 +144,7 @@ For Ruby, the Rack integration is required.
 - Ensure there are no Agent transmission errors related to spans in your [tracer logs][5]. 
 - If the Agent is installed on a separate machine, check that `DD_AGENT_HOST` and, optionally, `DD_TRACE_AGENT_PORT` are set, or that `DD_TRACE_AGENT_URL` is set for the application tracing library.
 
-### 4. Check Datadog Agent to backend configuration
+### Check Datadog Agent to backend configuration
 
 Application Security events are sent over [spans][6]. To confirm that spans are successfully transmitted to Datadog, check that your tracer logs contain logs that look similar to this:
 
