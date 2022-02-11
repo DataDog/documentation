@@ -40,5 +40,14 @@
   "tags": [
     "testing:browser"
   ],
-  "type": "browser"
+  "type": "browser",
+  "steps": [
+    {
+      "allowFailure": false,
+      "isCritical": true,
+      "name": "Refresh page",
+      "params": {},
+      "type": "refresh"
+    }
+  ]
 }
