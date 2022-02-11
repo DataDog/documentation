@@ -14,13 +14,10 @@ further_reading:
     - link: 'tracing/profiler/profiler_troubleshooting'
       tag: 'Documentation'
       text: 'Fix problems you encounter while using the profiler'
+    - link: 'https://www.datadoghq.com/blog/ruby-profiling-datadog-continuous-profiler/'
+      tag: 'Blog'
+      text: 'Analyze Ruby code performance with Datadog Continuous Profiler'
 ---
-
-{{< site-region region="us5" >}}
-<div class="alert alert-warning">
-  The Continuous Profiler is not available for the Datadog {{< region-param key="dd_site_name" >}} site.
-</div>
-{{< /site-region >}}
 
 The profiler is shipped within Datadog tracing libraries. If you are already using [APM to collect traces][1] for your application, you can skip installing the library and go directly to enabling the profiler.
 

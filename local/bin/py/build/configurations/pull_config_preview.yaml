@@ -121,7 +121,7 @@
     contents:
 
     - action: pull-and-push-file
-      branch: master
+      branch: main
       globs:
       - README.md
       options:
@@ -612,14 +612,16 @@
         - "runtime/**/*.yml"
         - "runtime/**/*.md"
         # new
-        - "workload-security/signal-rules/*.yaml"
-        - "workload-security/signal-rules/*.md"
+        - "workload-security/backend-rules/*.yaml"
+        - "workload-security/backend-rules/*.md"
         - "security-monitoring/*.json"
         - "security-monitoring/*.md"
         - "posture-management/**/*.json"
         - "posture-management/**/*.yaml"
         - "posture-management/**/*.yml"
         - "posture-management/**/*.md"
+        - "application-security/*.json"
+        - "application-security/*.md"
       options:
         dest_path: '/security_platform/default_rules/'
 

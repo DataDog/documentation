@@ -23,30 +23,30 @@ If you are running the Agent as a binary on a host, configure your tag extractio
 
 The Agent can autodiscover and attach tags to all data emitted by containers. The list of tags attached depends on the Agent [cardinality configuration][1].
 
-| Tag                 | Cardinality  | Requirement                          |
-|---------------------|--------------|--------------------------------------|
-| `container_name`    | High         | N/A                                  |
-| `container_id`      | High         | N/A                                  |
-| `rancher_container` | High         | Rancher environment                  |
-| `mesos_task`        | Orchestrator | Mesos environment                    |
-| `docker_image`      | Low          | N/A                                  |
-| `image_name`        | Low          | N/A                                  |
-| `short_image`       | Low          | N/A                                  |
-| `image_tag`         | Low          | N/A                                  |
-| `swarm_service`     | Low          | Swarm environment                    |
-| `swarm_namespace`   | Low          | Swarm environment                    |
-| `rancher_stack`     | Low          | Rancher environment                  |
-| `rancher_service`   | Low          | Rancher environment                  |
-| `env`               | Low          | [Unified service tagging][2] enabled |
-| `version`           | Low          | [Unified service tagging][2] enabled |
-| `service`           | Low          | [Unified service tagging][2] enabled |
-| `marathon_app`      | Low          | Marathon environment                 |
-| `chronos_job`       | Low          | Mesos environment                    |
-| `chronos_job_owner` | Low          | Mesos environment                    |
-| `nomad_task`        | Low          | Nomad environment                    |
-| `nomad_job`         | Low          | Nomad environment                    |
-| `nomad_group`       | Low          | Nomad environment                    |
-
+| Tag                 | Cardinality  | Requirement                                 |
+|---------------------|--------------|---------------------------------------------|
+| `container_name`    | High         | N/A                                         |
+| `container_id`      | High         | N/A                                         |
+| `rancher_container` | High         | Rancher environment                         |
+| `mesos_task`        | Orchestrator | Mesos environment                           |
+| `docker_image`      | Low          | N/A                                         |
+| `image_name`        | Low          | N/A                                         |
+| `short_image`       | Low          | N/A                                         |
+| `image_tag`         | Low          | N/A                                         |
+| `swarm_service`     | Low          | Swarm environment                           |
+| `swarm_namespace`   | Low          | Swarm environment                           |
+| `rancher_stack`     | Low          | Rancher environment                         |
+| `rancher_service`   | Low          | Rancher environment                         |
+| `env`               | Low          | [Unified service tagging][2] enabled        |
+| `version`           | Low          | [Unified service tagging][2] enabled        |
+| `service`           | Low          | [Unified service tagging][2] enabled        |
+| `marathon_app`      | Low          | Marathon environment                        |
+| `chronos_job`       | Low          | Mesos environment                           |
+| `chronos_job_owner` | Low          | Mesos environment                           |
+| `nomad_task`        | Low          | Nomad environment                           |
+| `nomad_job`         | Low          | Nomad environment                           |
+| `nomad_group`       | Low          | Nomad environment                           |
+| `git.commit.sha`    | Low          | [org.opencontainers.image.revision][3] used |
 
 ### Unified service tagging
 
@@ -97,7 +97,7 @@ docker_labels_as_tags:
 
 ## Extract environment variables as tags
 
-Datadog automatically collects common tags from [Docker, Kubernetes, ECS, Swarm, Mesos, Nomad, and Rancher][3]. To extract even more tags, use the following options:
+Datadog automatically collects common tags from [Docker, Kubernetes, ECS, Swarm, Mesos, Nomad, and Rancher][4]. To extract even more tags, use the following options:
 
 | Environment Variable               | Description                                    |
 |------------------------------------|------------------------------------------------|
@@ -159,4 +159,5 @@ docker_env_as_tags:
 
 [1]: /agent/docker/tag/#extract-environment-variables-as-tags
 [2]: /getting_started/tagging/unified_service_tagging
-[3]: /agent/docker/?tab=standard#tagging
+[3]: https://github.com/opencontainers/image-spec/blob/859973e32ccae7b7fc76b40b762c9fff6e912f9e/annotations.md#pre-defined-annotation-keys
+[4]: /agent/docker/?tab=standard#tagging

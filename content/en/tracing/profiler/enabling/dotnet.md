@@ -16,12 +16,6 @@ further_reading:
       text: 'Fix problems you encounter while using the profiler'
 ---
 
-{{< site-region region="us5" >}}
-<div class="alert alert-warning">
-  The Continuous Profiler is not available for the Datadog {{< region-param key="dd_site_name" >}} site.
-</div>
-{{< /site-region >}}
-
 <div class="alert alert-warning">
 Datadog .NET Profiler is currently in public beta. Datadog recommends evaluating the profiler in a non-sensitive environment before deploying in production.
 </div>
@@ -42,6 +36,10 @@ Datadog .NET Profiler is currently in public beta. Datadog recommends evaluating
 - .NET Core 2.1, 3.1
 - .NET 5
 - .NET 6
+
+**Supported languages:**
+
+Any language that targets the .NET runtime, such as C#, F#, and Visual Basic.
 
 ## Installation
 
