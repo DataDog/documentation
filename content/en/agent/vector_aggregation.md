@@ -39,7 +39,7 @@ it to Datadog and other destinations. Vector capabilities include:
 
 ### Agent configuration
 To send logs to Vector, update the Agent configuration file, `datadog.yaml`.
-For logs update the following values in the `datadog.yaml` file:
+For logs, update the following values in the `datadog.yaml` file:
 
 ```yaml
 vector:
@@ -50,7 +50,7 @@ vector:
 # logs_config.use_v2_api: false 
 ```
 
-For metrics update the following values in the `datadog.yaml` file:
+For metrics, update the following values in the `datadog.yaml` file:
 
 ```yaml
 vector:
@@ -74,14 +74,14 @@ If you are using Docker, add the following to your Agent configuration file.
 ```
 
 ### Vector configuration
-To receive logs or metrics from Datadog Agent, configure Vector with a [datadog_agent source][10]. To send logs to
+To receive logs or metrics from the Datadog Agent, configure Vector with a [datadog_agent source][10]. To send logs to
 Datadog, Vector must be configured with at least one [datadog_logs sink][11]. Similarly to send metrics to Datadog,
 Vector must be configured with at least one [datadog_metrics sink][12].
 
 See the official [Vector documentation][13] for all available configuration parameters and transforms that can be
 applied to logs while they are processed by Vector.
 
-Here is a configuration example that adds a tag to every log and avery metric using the Vector Remap Language:
+Here is a configuration example that adds a tag to every log and metric using the Vector Remap Language:
 
 ```yaml
 sources:
@@ -135,9 +135,9 @@ Vector provides an [official chart for aggregating data][15] that comes with a D
 logs source preconfigured. For more information about installing Vector using Helm,
 see to the [official Vector documentation][16].
 
-To send logs to Datadog, a `datadog_logs` sink need to be added to the Vector configuration. Similarly to send metrics
-to Datadog a `datadog_metrics` sinks need to be added to Vector configuration. Vector's chart can hold any valid Vector
-configuration in the `values.yaml` file using the `customConfig` field. To enable `datadog_logs` the same kind of
+To send logs to Datadog, a `datadog_logs` sink needs to be added to the Vector configuration. Similarly, to send metrics
+to Datadog, a `datadog_metrics` sinks needs to be added to Vector configuration. Vector's chart can hold any valid Vector
+configuration in the `values.yaml` file using the `customConfig` field. To enable `datadog_logs`, the same kind of
 configuration as described under [Vector configuration](#vector-configuration) can be directly included as-is in the
 Vector chart configuration.
 
@@ -147,9 +147,9 @@ Logs and metrics sent to Vector can benefit from the full capabilities of Vector
 for transformations.
 
 When received by Vector, logs sent by the Datadog Agent are structured using the expected schema. When submitting logs
-directly to the Datadog API, see the [API documentation][17] for a complete schema description.
+using the Datadog API, see the [API documentation][17] for a complete schema description.
 
-Logs and metrics collected by Vector from other sources can be [fully enriched][8]. VRL can be used to adjust those logs
+Logs and metrics collected by Vector from other sources can be [fully enriched][8]. VRL can be used to adjust logs
 and metrics to fill relevant fields according to the expected schema.
 
 ## Further Reading
