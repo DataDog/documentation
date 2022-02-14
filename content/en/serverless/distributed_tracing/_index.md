@@ -18,6 +18,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-serverless-view/"
   tag: "Blog"
   text: "Monitor your serverless stack in the Serverless view"
+- link: "https://www.datadoghq.com/blog/monitor-aws-fully-managed-services-datadog-serverless-monitoring/"
+  tag: "Blog"
+  text: "Datadog Serverless Monitoring for AWS fully managed services"
 ---
 
 {{< img src="tracing/serverless_functions/ServerlessDistributedTrace.png" alt="Trace Serverless Functions"  style="width:100%;">}}
