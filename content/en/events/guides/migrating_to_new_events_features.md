@@ -30,9 +30,9 @@ You do not need to take any action for configuration stored directly in Datadog.
 Datadog is responsible for migrating data stored in its servers. You do not need to take any action for configuration stored directly in Datadog. The changes to Event query syntax affect two Datadog features: monitors and dashboard widgets.
 
 Datadog migrates monitors that query Events by doing the following:
-- For each legacy Event monitor, create a duplicate and enable it.
+- For each legacy Event monitor, create a duplicate that uses the new query syntax. Enable the new Event monitor.
 - Add the prefix "legacy" to the legacy Event monitor, and mute it.
-- Update SLO and downtime links to point to the new monitors.
+- Update all SLOs and monitor downtimes that reference the legacy Event monitor to point to the new monitor.
 
 When viewing monitors, you can filter which of the two monitor types you would like to see using the **Event Migration** facet. This facet has available values "Event Monitors V1" and "Event Monitors V2."
 
