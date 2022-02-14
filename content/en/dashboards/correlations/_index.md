@@ -24,7 +24,7 @@ Metric Correlations can help you find potential root causes for an observed issu
 
 ## Search
 
-You can start your metric correlations exploration from any of your dashboards, notebooks, APM, Watchdog stories, or monitor status pages.
+You can start your metric correlations exploration from any of your dashboards, notebooks, APM, Watchdog alerts, or monitor status pages.
 
 * Left click on any graph and select **Find correlated metrics**.
 * From a full-screen graph, click the **Correlations** tab.
