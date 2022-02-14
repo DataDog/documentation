@@ -18,15 +18,33 @@ The introduction of the Events Explorer and its associated changes means that Ev
 
 * Older events (before migration) continue to be visible in the [Event Stream][2] for the remainder of their retention period (13 months).
 
-This guide describes how to migrate your organization’s event monitors and dashboard widgets so that you benefit from the new Events features, and so that you're ready when the legacy event stream and storage are sunset. It also provides [a detailed description of what's changed](#details-of-the-changes).
+This guide describes how to migrate your organization’s event monitors and dashboard widgets so that you benefit from the new Events features. Following this guide ensures that you are ready when Datadog retires the legacy event stream and storage. This guide also provides [a detailed description of what's changed](#details-of-the-changes).
 
 ## Migration process
 
-### Migrate data configured externally (Terraform, API)
-If you manage your Datadog configuration with external, API-based scripts or tools such as Terraform, update your dashboard and monitor definitions in your configuration file. Otherwise the old query syntax is applied again at the next deployment and overwrites updated queries. Review the syntax changes described below and use the [migration script][3] to see what converted queries look like. [Contact Support][4] for assistance at this stage.
-
 ### Datadog migrates data stored in Datadog servers
-Datadog is responsible for migrating data stored in its servers. You do not need to take any action for configuration stored directly in Datadog. Datadog automatically migrates Event data contained in monitors and dashboard widgets, including the event stream, timeline, and overlays.
+<div class="alert alert-info">
+You do not need to take any action for configuration stored directly in Datadog.
+</div>
+
+Datadog is responsible for migrating data stored in its servers. You do not need to take any action for configuration stored directly in Datadog. The changes to Event query syntax affect two Datadog features: monitors and dashboard widgets.
+
+Datadog migrates monitors that query Events by doing the following:
+- For each legacy Event monitor, create a duplicate and enable it.
+- Mute the legacy Event monitor, and add a "legacy" prefix to its name.
+- Update SLO and downtime links to point to the new monitors.
+
+When viewing monitors, you can filter which of the two monitor types you would like to see by using the "Event Migration" facet.
+
+Datadog directly migrates dashboard widgets that use event queries. Datadog does not create any new dashboards or widgets.
+
+### Migrate data configured externally (Terraform, API)
+
+<div class="alert alert-warning">
+You must take action to migrate Datadog configuration you manage with Terraform or scripts.
+</div>
+
+If you manage your Datadog configuration with external, API-based scripts or tools such as Terraform, update your dashboard and monitor definitions in your configuration file. Otherwise, the old query syntax is applied again at the next deployment and overwrites updated queries. Review the syntax changes described below and use the [migration script][3] to see what converted queries look like. [Contact Support][4] for assistance at this stage.
 
 ## Post migration
 
