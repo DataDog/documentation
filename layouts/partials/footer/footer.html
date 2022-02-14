@@ -13,6 +13,8 @@
     {{ $.Scratch.Set "data" $dot.Page.Site.Data.partials.footer }}
 {{ end }}
 {{ $datafile := ($.Scratch.Get "data") }}
+<!-- only ja pages on corp -->
+{{ $langPrefix := cond (eq $dot.Page.Lang "ja") "ja/" "" }}
 
 <footer class="pt-3 position-relative">
     <div class="container">
@@ -69,7 +71,7 @@
                                     {{ if eq $.Site.Params.full_translation true }}
                                         {{ partial "footer_link" (dict "footer_link" . "base_url" ( .URL | absLangURL) ) }}
                                     {{ else }}
-                                        {{ $url := cond (hasPrefix .URL "http") (.URL | absURL) (printf "https://www.datadoghq.com/%s" .URL) }}
+                                        {{ $url := cond (hasPrefix .URL "http") (.URL | absURL) (printf "https://www.datadoghq.com/%s%s" $langPrefix (strings.TrimPrefix "/" .URL)) }}
                                         {{ partial "footer_link" (dict "footer_link" . "base_url" $url ) }}
                                     {{ end }}
                                 </li>
@@ -83,7 +85,7 @@
                                     {{ if eq $.Site.Params.full_translation true }}
                                         {{ partial "footer_link" (dict "footer_link" . "base_url" ( .URL | absLangURL) ) }}
                                     {{ else }}
-                                        {{ $url := cond (hasPrefix .URL "http") (.URL | absURL) (printf "https://www.datadoghq.com/%s" .URL) }}
+                                        {{ $url := cond (hasPrefix .URL "http") (.URL | absURL) (printf "https://www.datadoghq.com/%s%s" $langPrefix (strings.TrimPrefix "/" .URL)) }}
                                         {{ partial "footer_link" (dict "footer_link" . "base_url" $url ) }}
                                     {{ end }}
                                 </li>
@@ -101,7 +103,7 @@
                                 {{ if eq $.Site.Params.full_translation true }}
                                     {{ partial "footer_link" (dict "footer_link" . "base_url" ( .URL | absLangURL) ) }}
                                 {{ else }}
-                                    {{ $url := cond (hasPrefix .URL "http") (.URL | absURL) (printf "https://www.datadoghq.com/%s" .URL) }}
+                                    {{ $url := cond (hasPrefix .URL "http") (.URL | absURL) (printf "https://www.datadoghq.com/%s%s" $langPrefix (strings.TrimPrefix "/" .URL)) }}
                                     {{ partial "footer_link" (dict "footer_link" . "base_url" $url ) }}
                                 {{ end }}
                             </li>
@@ -116,7 +118,7 @@
                                 {{ if eq $.Site.Params.full_translation true }}
                                     {{ partial "footer_link" (dict "footer_link" . "base_url" ( .URL | absLangURL) ) }}
                                 {{ else }}
-                                    {{ $url := cond (hasPrefix .URL "http") (.URL | absURL) (printf "https://www.datadoghq.com/%s" .URL) }}
+                                    {{ $url := cond (hasPrefix .URL "http") (.URL | absURL) (printf "https://www.datadoghq.com/%s%s" $langPrefix (strings.TrimPrefix "/" .URL)) }}
                                     {{ partial "footer_link" (dict "footer_link" . "base_url" $url ) }}
                                 {{ end }}
                             </li>
@@ -130,7 +132,7 @@
                                 {{ if eq $.Site.Params.full_translation true }}
                                     {{ partial "footer_link" (dict "footer_link" . "base_url" ( .URL | absLangURL) ) }}
                                 {{ else }}
-                                    {{ $url := cond (hasPrefix .URL "http") (.URL | absURL) (printf "https://www.datadoghq.com/%s" .URL) }}
+                                    {{ $url := cond (hasPrefix .URL "http") (.URL | absURL) (printf "https://www.datadoghq.com/%s%s" $langPrefix (strings.TrimPrefix "/" .URL)) }}
                                     {{ partial "footer_link" (dict "footer_link" . "base_url" $url ) }}
                                 {{ end }}
                             </li>
@@ -150,7 +152,7 @@
                                 {{ if eq $.Site.Params.full_translation true }}
                                     {{ partial "footer_link" (dict "footer_link" . "base_url" ( .URL | absLangURL) ) }}
                                 {{ else }}
-                                    {{ $url := cond (hasPrefix .URL "http") (.URL | absURL) (printf "https://www.datadoghq.com/%s" .URL) }}
+                                    {{ $url := cond (hasPrefix .URL "http") (.URL | absURL) (printf "https://www.datadoghq.com/%s%s" $langPrefix (strings.TrimPrefix "/" .URL)) }}
                                     {{ partial "footer_link" (dict "footer_link" . "base_url" $url ) }}
                                 {{ end }}
                             </li>
@@ -162,7 +164,7 @@
                         <ul class="footer-menu mt-1">
                             {{ range .Site.Menus.footer_blog }}
                             <li>
-                                {{ $url := cond (hasPrefix .URL "http") (.URL | absURL) (printf "https://www.datadoghq.com/%s" (strings.TrimPrefix "/" .URL)) }}
+                                {{ $url := cond (hasPrefix .URL "http") (.URL | absURL) (printf "https://www.datadoghq.com/%s%s" $langPrefix (strings.TrimPrefix "/" .URL)) }}
                                 {{ partial "footer_link" (dict "footer_link" . "base_url" $url ) }}
                             </li>
                             {{ end }}
@@ -228,7 +230,7 @@
                             <ul class="footer-menu d-flex align-items-center">
                                 {{ range $index, $v := .Site.Menus.footer_sub }}
                                     <li class="d-flex align-items-center">
-                                        {{ $url := cond (hasPrefix .URL "http") (.URL | absURL) (printf "https://www.datadoghq.com/%s" .URL) }}
+                                        {{ $url := cond (hasPrefix .URL "http") (.URL | absURL) (printf "https://www.datadoghq.com/%s%s" $langPrefix (strings.TrimPrefix "/" .URL)) }}
                                         {{ if eq $.Site.Params.full_translation true }}
                                             <a href="{{ $url }}">{{- $v.Name -}}</a>{{ if ne $index ( sub (len $.Site.Menus.footer_sub) 1 ) }}<span style="font-size: 16px; transform: translateY(-1px);">&nbsp;|&nbsp;</span>{{end}}
                                         {{ else }}
