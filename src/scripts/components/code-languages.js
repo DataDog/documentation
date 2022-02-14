@@ -36,6 +36,7 @@ function addCodeTabEventListeners() {
     if (codeLinks.length) {
         codeLinks.forEach((codeLink) => {
             codeLink.addEventListener('click', codeLangTabClickHandler);
+            codeLink.addEventListener('mouseover', codeLangTabHoverHandler);
         });
     }
 }
@@ -75,6 +76,29 @@ function redirectCodeLang(codeLang = '') {
 }
 
 redirectCodeLang();
+
+function codeLangTabHoverHandler(event) {
+    if (
+        document.documentElement.dataset.type === 'multi-code-lang' &&
+        (document.body.classList.contains('kind-section') || document.body.classList.contains('kind-page'))
+    ) {
+        const tabElement = event.target;
+        console.log(`Href = ${tabElement.href}`);
+        // const queryParam = window.location.search;
+        const codeLang = event.target.dataset.codeLangTrigger;
+        const { currentSection, baseUrl } = document.documentElement.dataset;
+        const newHref = `${baseUrl}${currentSection}${codeLang}`;
+        console.log(newHref);
+    } 
+
+    // if (
+    //     document.documentElement.dataset.type === 'multi-code-lang' &&
+    //     (document.body.classList.contains('kind-section') || document.body.classList.contains('kind-page'))
+    // ) {
+    //     Cookies.set('code-lang', codeLang, { path: '/' });
+    //     loadPage(`${baseUrl}${currentSection}${codeLang}`);
+    //     window.history.replaceState({}, '', `${baseUrl}${currentSection}${codeLang}`);
+}
 
 function codeLangTabClickHandler(event) {
     const queryParams = new URLSearchParams(window.location.search);
