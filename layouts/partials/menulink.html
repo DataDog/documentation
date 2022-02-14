@@ -1,3 +1,5 @@
 {{- $dot := (index $ 3) -}}
-{{- $url := cond (hasPrefix (index $ 1) "http") (index $ 1) (printf "https://www.datadoghq.com/%s" (index $ 1)) -}}
+{{/*<!-- only ja pages on corp -->*/}}
+{{- $langPrefix := cond (eq $dot.Page.Lang "ja") "ja/" "" -}}
+{{- $url := cond (hasPrefix (index $ 1) "http") ((index $ 1) | absURL) (printf "https://www.datadoghq.com/%s%s" $langPrefix (strings.TrimPrefix "/" (index $ 1))) -}}
 {{- $url -}}
