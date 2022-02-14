@@ -31,12 +31,12 @@ Datadog is responsible for migrating data stored in its servers. You do not need
 
 Datadog migrates monitors that query Events by doing the following:
 - For each legacy Event monitor, create a duplicate and enable it.
-- Mute the legacy Event monitor, and add a "legacy" prefix to its name.
+- Add the prefix "legacy" to the legacy Event monitor, and mute it.
 - Update SLO and downtime links to point to the new monitors.
 
-When viewing monitors, you can filter which of the two monitor types you would like to see by using the "Event Migration" facet.
+When viewing monitors, you can filter which of the two monitor types you would like to see using the **Event Migration** facet. This facet has available values "Event Monitors V1" and "Event Monitors V2."
 
-Datadog directly migrates dashboard widgets that use event queries. Datadog does not create any new dashboards or widgets.
+Datadog directly migrates dashboard widgets that use Event queries. Datadog does not create any new dashboards or widgets.
 
 ### Migrate data configured externally (Terraform, API)
 
