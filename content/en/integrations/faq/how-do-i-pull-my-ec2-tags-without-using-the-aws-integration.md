@@ -8,11 +8,12 @@ To pull custom AWS tags for an EC2 instance through the Datadog Agent without us
 {{< tabs >}}
 {{% tab "Agent v6 & v7 with IMDS" %}}
 
-The preferred mechanism to gather instance tags is via the EC2 Instance Metadata Service.
-This mechanism is available beginning in Datadog Agent version 7.35.0.
+Datadog recommends gathering instance tags through the EC2 Instance Metadata Service.
 
-1. Make sure the EC2 instance is configured to allow access to tags in instance metadata, using the [AWS documentation][1].
-2. In `datadog.yaml`, set `collect_ec2_tags: true` and `ec2_collect_tags_use_imds: true`.
+This mechanism is available in the Datadog Agent v7.35.0.
+
+1. Ensure that the EC2 instance is configured to allow access to tags in the instance metadata. See the [AWS documentation][1].
+2. In the `datadog.yaml` file, set `collect_ec2_tags: true` and `ec2_collect_tags_use_imds: true`.
 3. [Restart the Agent][2].
 
 [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#allow-access-to-tags-in-IMDS
@@ -20,7 +21,7 @@ This mechanism is available beginning in Datadog Agent version 7.35.0.
 {{% /tab %}}
 {{% tab "Agent v6 & v7 with EC2 API" %}}
 
-Where tags cannot be made available via the EC2 Instance Metadata Service, the Datadog Agent can use the EC2 API to gather tags.
+If tags are not available through the EC2 Instance Metadata Service, the Datadog Agent uses the EC2 API to gather tags.
 
 1. Make sure an IAM role is assigned to the EC2 **instance**, using the [AWS documentation][1]. Create one if necessary.
 2. Attach a policy to the IAM role that includes the permission `ec2:DescribeTags`.
