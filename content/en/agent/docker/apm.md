@@ -238,7 +238,7 @@ Set the environment variables before running your instrumented app:
 # Environment variables
 export CORECLR_ENABLE_PROFILING=1
 export CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
-export CORECLR_PROFILER_PATH=/opt/datadog/Datadog.Trace.ClrProfiler.Native.so
+export CORECLR_PROFILER_PATH=<SYSTEM_DEPENDENT_PATH>
 export DD_DOTNET_TRACER_HOME=/opt/datadog
 
 # For containers
@@ -248,6 +248,16 @@ export DD_TRACE_AGENT_PORT=8126
 # Start your application
 dotnet example.dll
 ```
+
+The value for the `CORECLR_PROFILER_PATH` environment variable varies based on the system where the application is running:
+
+   Operating System and Process Architecture | CORECLR_PROFILER_PATH Value
+   ------------------------------------------|----------------------------
+   Alpine Linux x64 | `<APP_DIRECTORY>/datadog/linux-musl-x64/Datadog.Trace.ClrProfiler.Native.so`
+   Linux x64        | `<APP_DIRECTORY>/datadog/linux-x64/Datadog.Trace.ClrProfiler.Native.so`
+   Linux ARM64      | `<APP_DIRECTORY>/datadog/linux-arm64/Datadog.Trace.ClrProfiler.Native.so`
+   Windows x64      | `<APP_DIRECTORY>\datadog\win-x64\Datadog.Trace.ClrProfiler.Native.dll`
+   Windows x86      | `<APP_DIRECTORY>\datadog\win-x86\Datadog.Trace.ClrProfiler.Native.dll`
 
 {{< /programming-lang >}}
 
