@@ -218,7 +218,7 @@ Enable automatic injection of trace IDs in logs for supported logging libraries.
 : Percentage of spans to sample as a float between `0` and `1`. Defaults to the rates returned by the Datadog Agent.
 
 `DD_TRACE_RATE_LIMIT`
-: Percentage of spans to sample as a float between `0` and `1`. Defaults to `100` when `DD_TRACE_SAMPLE_RATE` is set or otherwise delegate rate limiting to the Datadog agent.
+: Percentage of spans to sample as a float between `0` and `1`. Defaults to `100` when `DD_TRACE_SAMPLE_RATE` is set. Otherwise, delegates rate limiting to the Datadog Agent.
 
 `DD_RUNTIME_METRICS_ENABLED`
 : **Default**:  `false`<br>
