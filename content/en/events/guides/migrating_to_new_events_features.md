@@ -22,12 +22,12 @@ This guide describes how to migrate your organization’s event monitors and das
 
 ## Migration process
 
-### Datadog migrates data stored in Datadog servers
+### Datadog migrates monitors and dashboards configured through the UI
 <div class="alert alert-info">
-You do not need to take any action for configuration stored directly in Datadog.
+You do not need to take any action for dashboards or monitors created through Datadog.
 </div>
 
-Datadog is responsible for migrating data stored in its servers. You do not need to take any action for configuration stored directly in Datadog. The changes to Event query syntax affect two Datadog features: monitors and dashboard widgets.
+The changes to Event query syntax affect two Datadog features: monitors and dashboard widgets.
 
 Datadog migrates monitors that query Events by doing the following:
 - For each legacy Event monitor, create a duplicate that uses the new query syntax. Enable the new Event monitor.
@@ -36,7 +36,7 @@ Datadog migrates monitors that query Events by doing the following:
 
 When viewing monitors, you can filter which of the two monitor types you would like to see using the **Event Migration** facet. This facet has available values "Event Monitors V1" and "Event Monitors V2."
 
-Datadog directly migrates dashboard widgets that use Event queries. Datadog does not create any new dashboards or widgets.
+Datadog directly migrates dashboard widgets that use Event queries. These widgets include Event Stream widgets, Event Timeline widgets, and Event overlays in other widgets. Datadog does not create any new dashboards or widgets.
 
 ### Migrate data configured externally (Terraform, API)
 
@@ -57,7 +57,6 @@ You can access the new Explorer and other features through the Events menu in th
 ### User impact
 
 * Datadog automatically routes Event queries to the correct backend. Old queries continue to go to the old backend, and migrated queries go to the new backend, so you can migrate safely.
-* Users may continue to create legacy monitors through the UI and API during the transition period. After the sunset date, which is still pending, users must create event monitors with the new query syntax.
 * Event dashboard widgets must use the new query syntax.
 
 ## Details of the changes
