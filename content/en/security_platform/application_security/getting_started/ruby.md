@@ -17,7 +17,7 @@ further_reading:
 
 ## Get started
 
-1. **Update your gem file to include the Datadog library**:
+1. **Update your Gemfile to include the Datadog library**:
    ```
    gem 'ddtrace', '~> 1.0.0.beta1'
    ```
