@@ -275,6 +275,12 @@
       "description": "Update a log-based metric returns \"OK\" response"
     }
   ],
+  "CreateBulkTagsMetricsConfiguration": [
+    {
+      "suffix": "",
+      "description": "Configure tags for multiple metrics returns \"Accepted\" response"
+    }
+  ],
   "ListTagConfigurations": [
     {
       "suffix": "_1799362914",
