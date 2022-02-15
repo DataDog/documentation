@@ -259,6 +259,8 @@ The value for the `CORECLR_PROFILER_PATH` environment variable varies based on t
    Windows x64      | `<APP_DIRECTORY>\datadog\win-x64\Datadog.Trace.ClrProfiler.Native.dll`
    Windows x86      | `<APP_DIRECTORY>\datadog\win-x86\Datadog.Trace.ClrProfiler.Native.dll`
 
+In the table above, `<APP_DIRECTORY>` refers to the directory containing the application's `.dll` files.
+
 {{< /programming-lang >}}
 
 {{< /programming-lang-wrapper >}}
