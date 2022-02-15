@@ -177,7 +177,7 @@ Tracer settings can be configured with the following environment variables:
 : The service name used for this program. Defaults to the name field value in `package.json`.
 
 `DD_VERSION`
-: The version number of the application. Defaults to value of the version field in `package.json`.
+: The version number of the application. Defaults to the version field value in `package.json`.
 
 `DD_TAGS`
 : Set global tags that should be applied to all spans and runtime metrics. When passed as an environment variable, the format is `key:value,key:value`. When setting this programmatically: `tracer.init({ tags: { foo: 'bar' } })` Available for versions 0.20+
