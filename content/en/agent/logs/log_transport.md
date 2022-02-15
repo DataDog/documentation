@@ -130,6 +130,45 @@ By default, the Datadog Agent sends its logs to Datadog over TLS-encrypted TCP. 
 
 **Note**: Setting up a [SOCKS5 proxy][2] server enforces TCP transport because socks5 proxies are not yet supported in HTTPS with compression.
 
+## Additional Endpoints 
+
+In some cases you may want to send logs to multiple destinations. A destination could be a second Datadog org or your own internal infrastructure. In agent v6.34+/v7.34+ support was added for supporting multiple logs endpoints in the logs agent. 
+
+### Configuring additional endpoints
+
+When using additional endpoints you have to explicitly set `use_http` to tell the agent which transport to use. The transport is globally set and applies to all additional endpoints. 
+
+To send logs to a second Datadog org you have to supply a second API key.
+
+```yaml
+logs_enabled: true
+logs_config:
+  use_http: true
+  additional_endpoints:
+  - api_key: <YOUR_SECOND_DD_API_KEY>
+    is_reliable: true
+```
+
+The `is_reliable` setting tells the agent to treat this endpoint with the same priority as the primary endpoint. The primary endpoint is always reliable. `is_reliable` tries to ensure logs are never missed if a destination becomes unavailable. 
+
+For example: If you are sending logs to two reliable endpoints and one becomes unavailable, logs will continue to flow to the second reliable endpoint. If both endpoints becomes unavailable logs will stop flowing until at least one recovers. 
+
+If `is_reliable` is not specified it defaults to `false`. Unreliable endpoints will only send logs if they successfully send to at least one reliable endpoint. You may define multiple additional endpoints with mixed use of `is_reliable`. 
+
+To send logs to a proxy or other internal infrastructure: 
+
+```yaml
+logs_enabled: true
+logs_config:
+  use_http: true
+  additional_endpoints:
+  - Host: <HOST_NAME>
+    Port: <PORT_NUMBER>
+    is_reliable: true
+```
+
+The `api_key` is only required if you are sending the logs to the Datadog intake. 
+
 
 [1]: /agent/guide/agent-commands/?tab=agentv6v7#service-status
 [2]: /agent/logs/proxy/?tab=socks5
