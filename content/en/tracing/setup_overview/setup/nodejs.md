@@ -88,7 +88,7 @@ via environment variables, you can also use `dd-trace/init`, which loads and
 initializes in one step.
 
 ```typescript
-import `dd-trace/init`;
+import 'dd-trace/init';
 ```
 
 ### Adding the tracer via command line arguments

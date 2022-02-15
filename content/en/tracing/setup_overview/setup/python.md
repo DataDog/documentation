@@ -149,7 +149,7 @@ It is recommended to use `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `env`, 
 : Set the application’s version, for example: `1.2.3`, `6c44da20`, `2020.02.13`. Available in version 0.38+.
 
 `DD_TRACE_SAMPLE_RATE`
-: Enable [Tracing without Limits][9].
+: Enable [Tracing without Limits][8].
 
 `DD_TAGS`
 : A list of default tags to be added to every span and profile, for example: `layer:api,team:intake`. Available in version 0.38+.
@@ -182,7 +182,7 @@ Override the port that the default tracer submits DogStatsD metrics to.
 
 `DD_LOGS_INJECTION`
 : **Default**: `false`<br>
-Enable [connecting logs and trace injection][8].
+Enable [connecting logs and trace injection][9].
 
 
 ## Further Reading
@@ -196,5 +196,5 @@ Enable [connecting logs and trace injection][8].
 [5]: /getting_started/tagging/unified_service_tagging
 [6]: /tracing/guide/setting_primary_tags_to_scope/
 [7]: https://ddtrace.readthedocs.io/en/stable/integrations.html#django
-[8]: /tracing/connect_logs_and_traces/python/
-[9]: /tracing/trace_retention_and_ingestion/
+[8]: /tracing/trace_ingestion/
+[9]: /tracing/connect_logs_and_traces/python/

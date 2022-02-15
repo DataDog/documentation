@@ -6,26 +6,28 @@ description: Gain visibility into your network-connected devices, such as router
 aliases:
     - /network_performance_monitoring/devices/
 further_reading:
-- link: "https://www.datadoghq.com/knowledge-center/network-monitoring/snmp-monitoring/"
-  tag: "Knowledge Center"
-  text: "SNMP Monitoring Overview"
-- link: "https://www.datadoghq.com/blog/monitor-snmp-with-datadog/"
-  tag: "Blog"
-  text: "Monitor SNMP with Datadog"
-- link: "https://www.datadoghq.com/blog/monitor-meraki/"
-  tag: "Blog"
-  text: "Monitor Cisco Meraki with Datadog"
-- link: "https://www.datadoghq.com/blog/datacenter-monitoring-dashboards/"
-  tag: "Blog"
-  text: "Monitor datacenters and network devices with Datadog"
-- link: "https://www.datadoghq.com/blog/network-device-monitoring/"
-  tag: "Blog"
-  text: "Introducing Network Device Monitoring"
+    - link: 'https://www.datadoghq.com/knowledge-center/network-monitoring/snmp-monitoring/'
+      tag: 'Knowledge Center'
+      text: 'SNMP Monitoring Overview'
+    - link: 'https://www.datadoghq.com/blog/monitor-snmp-with-datadog/'
+      tag: 'Blog'
+      text: 'Monitor SNMP with Datadog'
+    - link: 'https://www.datadoghq.com/blog/monitor-meraki/'
+      tag: 'Blog'
+      text: 'Monitor Cisco Meraki with Datadog'
+    - link: 'https://www.datadoghq.com/blog/datacenter-monitoring-dashboards/'
+      tag: 'Blog'
+      text: 'Monitor datacenters and network devices with Datadog'
+    - link: 'https://www.datadoghq.com/blog/network-device-monitoring/'
+      tag: 'Blog'
+      text: 'Introducing Network Device Monitoring'
 ---
 
 ## Overview
 
-{{< img src="network_performance_monitoring/devices/ndm-overview.png" alt="Network Device Explorer" responsive="true" style="width:100%;">}}
+{{< vimeo 673243317 >}}
+
+<br/>
 
 Network Device Monitoring gives you visibility into your on-premise and virtual network devices, such as routers, switches, and firewalls. Automatically discover devices on any network, and quickly start collecting metrics like bandwidth utilization, volume of bytes sent, and determine whether devices are up/down.
 
@@ -37,7 +39,7 @@ Network Device Monitoring gives you visibility into your on-premise and virtual 
 4. View metrics collected on Datadog's out-of-the-box dashboards:
     - [Overview of all devices monitored][3]
     - [Across the performance on all interfaces][4]
-4. Catch issues before they arise with proactive monitoring on any [SNMP metric][5].
+5. Catch issues before they arise with proactive monitoring on any [SNMP metric][5].
 
 ## Supported devices
 
@@ -49,32 +51,31 @@ The generic profile collects metrics for all devices not supported by a vendor p
 
 The following vendor devices are supported with dedicated profiles. If a vendor/device type is supported but the specific model isn’t supported, refer to the [FAQ page][6].
 
-- Cisco Catalyst
-- Cisco ASA
-- Cisco CSR 1000v
-- Cisco ISR 4431
-- Cisco Nexus
-- Cisco ICM
-- Cisco UC Virtual Machines
-- Arista
-- Aruba
-- Checkpoint Firewall
-- Chatsworth PDU
-- APC UPS
-- F5 Big IP
-- Fortinet FortiGate
-- HP iLO
-- HP Proliant
-- Dell iDRAC
-- EMC Isilon
-- Juniper EX Series
-- Juniper MX Series
-- Juniper SRX
-- Meraki Cloud
-- Meraki On-Prem
-- NetApp
-- Palo Alto
-
+-   Cisco Catalyst
+-   Cisco ASA
+-   Cisco CSR 1000v
+-   Cisco ISR 4431
+-   Cisco Nexus
+-   Cisco ICM
+-   Cisco UC Virtual Machines
+-   Arista
+-   Aruba
+-   Checkpoint Firewall
+-   Chatsworth PDU
+-   APC UPS
+-   F5 Big IP
+-   Fortinet FortiGate
+-   HP iLO
+-   HP Proliant
+-   Dell iDRAC
+-   EMC Isilon
+-   Juniper EX Series
+-   Juniper MX Series
+-   Juniper SRX
+-   Meraki Cloud
+-   Meraki On-Prem
+-   NetApp
+-   Palo Alto
 
 ## Further Reading
 

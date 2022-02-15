@@ -12,7 +12,7 @@ further_reading:
   text: "Collect your processes"
 - link: "/tracing/"
   tag: "Documentation"
-  text: "Collect your traces"
+  text: "Collect your traces and profiles"
 ---
 
 ## Overview
@@ -213,11 +213,19 @@ frontend traces-forwarder
     option tcplog
     default_backend datadog-traces
 
+# This declares the endpoint where your Agents connects for
+# sending profiles (for example, the value of "apm_config.profiling_dd_url").
+frontend profiles-forwarder
+    bind *:3836
+    mode tcp
+    option tcplog
+    default_backend datadog-profiles
+
 # This declares the endpoint where your agents connects for
 # sending processes (for example, the value of "url" in the process
 # configuration section).
 frontend processes-forwarder
-    bind *:3836
+    bind *:3837
     mode tcp
     option tcplog
     default_backend datadog-processes
@@ -226,7 +234,7 @@ frontend processes-forwarder
 # sending Logs (e.g the value of "logs.config.logs_dd_url")
 # If sending logs with use_http: true
 frontend logs_http_frontend
-    bind *:3837
+    bind *:3838
     mode http
     option tcplog
     default_backend datadog-logs-http
@@ -241,7 +249,7 @@ frontend logs_http_frontend
 # This declares the endpoint where your Agents connects for
 # sending database monitoring metrics and activity (e.g the value of "database_monitoring.metrics.dd_url" and "database_monitoring.activity.dd_url")
 frontend database_monitoring_metrics_frontend
-    bind *:3838
+    bind *:3839
     mode http
     option tcplog
     default_backend datadog-database-monitoring-metrics
@@ -249,7 +257,7 @@ frontend database_monitoring_metrics_frontend
 # This declares the endpoint where your Agents connects for
 # sending database monitoring samples (e.g the value of "database_monitoring.samples.dd_url")
 frontend database_monitoring_samples_frontend
-    bind *:3839
+    bind *:3840
     mode http
     option tcplog
     default_backend datadog-database-monitoring-samples
@@ -286,6 +294,14 @@ backend datadog-traces
     server-template mothership 5 trace.agent.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify none check resolvers my-dns init-addr none resolve-prefer ipv4
     # Uncomment the following configuration for older HAProxy versions
     # server mothership trace.agent.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify none
+
+backend datadog-profiles
+    balance roundrobin
+    mode tcp
+    # The following configuration is for HAProxy 1.8 and newer
+    server-template mothership 5 intake.profile.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify none check resolvers my-dns init-addr none resolve-prefer ipv4
+    # Uncomment the following configuration for older HAProxy versions
+    # server mothership profile.agent.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify none
 
 backend datadog-processes
     balance roundrobin
@@ -343,29 +359,30 @@ This `dd_url` setting can be found in the `datadog.yaml` file.
 
 `dd_url: http://haproxy.example.com:3834`
 
-To send traces, processes, and logs through the proxy, setup the following in the `datadog.yaml` file:
+To send traces, profiles, processes, and logs through the proxy, setup the following in the `datadog.yaml` file:
 
 ```yaml
 apm_config:
     apm_dd_url: http://haproxy.example.com:3835
+    profiling_dd_url: http://haproxy.example.com:3836
 
 process_config:
-    process_dd_url: http://haproxy.example.com:3836
+    process_dd_url: http://haproxy.example.com:3837
 
 logs_config:
     use_http: true
-    logs_dd_url: haproxy.example.com:3837
+    logs_dd_url: haproxy.example.com:3838
     logs_no_ssl: true
 
 database_monitoring:
     metrics:
-        logs_dd_url: haproxy.example.com:3838
+        logs_dd_url: haproxy.example.com:3839
         logs_no_ssl: true
     activity:
-        logs_dd_url: haproxy.example.com:3838
+        logs_dd_url: haproxy.example.com:3839
         logs_no_ssl: true
     samples:
-        logs_dd_url: haproxy.example.com:3839
+        logs_dd_url: haproxy.example.com:3840
         logs_no_ssl: true
 ```
 
@@ -396,7 +413,7 @@ To send traces or processes through the proxy, setup the following in the `datad
 endpoint = http://haproxy.example.com:3835
 
 [process.api]
-endpoint = http://haproxy.example.com:3836
+endpoint = http://haproxy.example.com:3837
 ```
 
 Edit your supervisor configuration to disable SSL certificate verification. This is needed to prevent Python from complaining about the discrepancy between the hostname on the SSL certificate (`app.datadoghq.com`) and your HAProxy hostname. The supervisor configuration found at:
@@ -474,22 +491,27 @@ stream {
         proxy_pass trace.agent.{{< region-param key="dd_site" >}}:443;
     }
     server {
-        listen 3836; #listen for processes
+        listen 3836; #listen for profiles
+        proxy_ssl on;
+        proxy_pass profile.agent.{{< region-param key="dd_site" >}}:443;
+    }
+    server {
+        listen 3837; #listen for processes
         proxy_ssl on;
         proxy_pass process.{{< region-param key="dd_site" >}}:443;
     }
     server {
-        listen 3837; #listen for logs with use_http: true
+        listen 3838; #listen for logs with use_http: true
         proxy_ssl on;
         proxy_pass agent-http-intake.logs.{{< region-param key="dd_site" >}}:443;
     }
     server {
-        listen 3838; #listen for database monitoring metrics
+        listen 3839; #listen for database monitoring metrics
         proxy_ssl on;
         proxy_pass dbm-metrics-intake.{{< region-param key="dd_site" >}}:443;
     }
     server {
-        listen 3839; #listen for database monitoring samples
+        listen 3840; #listen for database monitoring samples
         proxy_ssl on;
         proxy_pass dbquery-intake.{{< region-param key="dd_site" >}}:443;
     }
@@ -503,16 +525,16 @@ To use the Datadog Agent v6/7.16+ as the logs collector, instruct the Agent to u
 ```yaml
 logs_config:
   use_http: true
-  logs_dd_url: "<PROXY_SERVER_DOMAIN>:3837"
+  logs_dd_url: "<PROXY_SERVER_DOMAIN>:3838"
   logs_no_ssl: true
 
 database_monitoring:
     metrics:
-        dd_url: "<PROXY_SERVER_DOMAIN>:3838"
-    activity:
-        dd_url: "<PROXY_SERVER_DOMAIN>:3838"
-    samples:
         dd_url: "<PROXY_SERVER_DOMAIN>:3839"
+    activity:
+        dd_url: "<PROXY_SERVER_DOMAIN>:3839"
+    samples:
+        dd_url: "<PROXY_SERVER_DOMAIN>:3840"
 ```
 
 When sending logs over TCP, see <a href="/agent/logs/proxy">TCP Proxy for Logs</a>.

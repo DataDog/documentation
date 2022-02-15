@@ -1,3 +1,4 @@
+/* eslint-disable prefer-rest-params */
 function updateMainContentAnchors() {
     // make header tags with ids and make clickable as anchors
     $('.main h2[id], .main h3[id], .main h4[id], .main h5[id]').each(function() {
@@ -35,9 +36,9 @@ function reloadWistiaVidScripts(vidId) {
     }
 }
 
-function gtag(...args) {
-    const dataLayer = window.dataLayer || [];
-    dataLayer.push(args);
+function gtag() {
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push(arguments);
 }
 
 const getCookieByName = (name) => {

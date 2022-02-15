@@ -1,0 +1,17 @@
+{
+  "data": {
+    "attributes": {
+      "attribute_key": "examplecreateanauthnmappingreturnsokresponse",
+      "attribute_value": "Example-Create_an_AuthN_Mapping_returns_OK_response"
+    },
+    "relationships": {
+      "role": {
+        "data": {
+          "id": "string",
+          "type": "roles"
+        }
+      }
+    },
+    "type": "authn_mappings"
+  }
+}

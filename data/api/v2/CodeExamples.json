@@ -1,4 +1,34 @@
 {
+  "CreateAuthNMapping": [
+    {
+      "suffix": "",
+      "description": "Create an AuthN Mapping returns \"OK\" response"
+    }
+  ],
+  "DeleteAuthNMapping": [
+    {
+      "suffix": "",
+      "description": "Delete an AuthN Mapping returns \"OK\" response"
+    }
+  ],
+  "UpdateAuthNMapping": [
+    {
+      "suffix": "",
+      "description": "Edit an AuthN Mapping returns \"OK\" response"
+    }
+  ],
+  "GetAuthNMapping": [
+    {
+      "suffix": "",
+      "description": "Get an AuthN Mapping by UUID returns \"OK\" response"
+    }
+  ],
+  "ListAuthNMappings": [
+    {
+      "suffix": "",
+      "description": "List all AuthN Mappings returns \"OK\" response"
+    }
+  ],
   "CreateCloudWorkloadSecurityAgentRule": [
     {
       "suffix": "",
@@ -243,6 +273,12 @@
     {
       "suffix": "",
       "description": "Update a log-based metric returns \"OK\" response"
+    }
+  ],
+  "CreateBulkTagsMetricsConfiguration": [
+    {
+      "suffix": "",
+      "description": "Configure tags for multiple metrics returns \"Accepted\" response"
     }
   ],
   "ListTagConfigurations": [

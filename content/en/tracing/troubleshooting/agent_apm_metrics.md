@@ -50,6 +50,10 @@ Increment by one every time an SQL obfuscation happens.
 : **Type**: Gauge<br>
 Increment by one on every code panic.
 
+`datadog.trace_agent.profile`
+: **Type**: Count<br>
+Increment by one every time a reverse proxy of profile endpoints is created.
+
 `datadog.trace_agent.ratelimit`
 : **Type**: Gauge<br>
 If lower than `1`, it means payloads are being refused due to high resource usage (cpu or memory).

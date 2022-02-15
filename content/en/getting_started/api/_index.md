@@ -72,7 +72,7 @@ Follow these steps to update the instance to your selected site ({{< region-para
 
     {{< img src="getting_started/postman/view-more-actions.png" alt="View more actions">}}
 
-2. On the **Variables** tab, deselect the `site` variable with the value `datadoghq.com` and select the `site` with the variable {{< region-param key="dd_site" code="true" >}}.
+2. On the **Variables** tab, deselect the `site` variable with the value `datadoghq.com` and select the `site` with the value {{< region-param key="dd_site" code="true" >}}.
 
 3. Click **Update**.
 
