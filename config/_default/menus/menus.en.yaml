@@ -4261,6 +4261,19 @@ api:
         - ListTagsByMetricName
       unstable: []
       order: 6
+  - name: Configure tags for multiple metrics
+    url: '#configure-tags-for-multiple-metrics'
+    identifier: configure-tags-for-multiple-metrics
+    parent: metrics
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteBulkTagsMetricsConfiguration
+        - CreateBulkTagsMetricsConfiguration
+      unstable: []
+      order: 9
   - name: List tag configurations
     url: '#list-tag-configurations'
     identifier: list-tag-configurations
