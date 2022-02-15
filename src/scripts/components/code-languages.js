@@ -77,27 +77,19 @@ function redirectCodeLang(codeLang = '') {
 
 redirectCodeLang();
 
+// When hovering over multi-code-lang tabs make sure proper href is reflected,
+// making it easier for support/sales teams to "Copy Link Address" and send correct URL out.
 function codeLangTabHoverHandler(event) {
     if (
         document.documentElement.dataset.type === 'multi-code-lang' &&
         (document.body.classList.contains('kind-section') || document.body.classList.contains('kind-page'))
     ) {
         const tabElement = event.target;
-        console.log(`Href = ${tabElement.href}`);
-        // const queryParam = window.location.search;
         const codeLang = event.target.dataset.codeLangTrigger;
         const { currentSection, baseUrl } = document.documentElement.dataset;
-        const newHref = `${baseUrl}${currentSection}${codeLang}`;
-        console.log(newHref);
+        const updatedHref = `${baseUrl}${currentSection}${codeLang}/?code-lang=${codeLang}`;
+        tabElement.href = updatedHref;
     } 
-
-    // if (
-    //     document.documentElement.dataset.type === 'multi-code-lang' &&
-    //     (document.body.classList.contains('kind-section') || document.body.classList.contains('kind-page'))
-    // ) {
-    //     Cookies.set('code-lang', codeLang, { path: '/' });
-    //     loadPage(`${baseUrl}${currentSection}${codeLang}`);
-    //     window.history.replaceState({}, '', `${baseUrl}${currentSection}${codeLang}`);
 }
 
 function codeLangTabClickHandler(event) {
