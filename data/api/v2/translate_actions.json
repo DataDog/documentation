@@ -283,6 +283,18 @@
     "description": "Returns all configured count/gauge/rate/distribution metric names\n(with additional filters if specified).",
     "summary": "List tag configurations"
   },
+  "DeleteBulkTagsMetricsConfiguration": {
+    "description": "Delete all custom lists of queryable tag keys for a set of existing count, gauge, rate, and distribution metrics.\nMetrics are selected by passing a metric name prefix.\nResults can be sent to a set of account email addresses, just like the same operation in the Datadog web app.\nCan only be used with application keys of users with the `Manage Tags for Metrics` permission.",
+    "summary": "Configure tags for multiple metrics",
+    "request_description": "",
+    "request_schema_description": "Wrapper object for a single bulk tag deletion request."
+  },
+  "CreateBulkTagsMetricsConfiguration": {
+    "description": "Create and define a list of queryable tag keys for a set of existing count, gauge, rate, and distribution metrics.\nMetrics are selected by passing a metric name prefix. Use the Delete method of this API path to remove tag configurations.\nResults can be sent to a set of account email addresses, just like the same operation in the Datadog web app.\nIf multiple calls include the same metric, the last configuration applied (not by submit order) is used, do not\nexpect deterministic ordering of concurrent calls.\nCan only be used with application keys of users with the `Manage Tags for Metrics` permission.",
+    "summary": "Configure tags for multiple metrics",
+    "request_description": "",
+    "request_schema_description": "Wrapper object for a single bulk tag configuration request."
+  },
   "ListTagsByMetricName": {
     "description": "View indexed tag key-value pairs for a given metric name.",
     "summary": "List tags by metric name"
