@@ -17,6 +17,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/cyber-attack-simulation-with-stratus-red-team/"
   tag: "Blog"
   text: "Elevate AWS threat detection with Stratus Red Team"
+- link: "https://www.datadoghq.com/blog/kubernetes-security-best-practices/"
+  tag: "Blog"
+  text: "Best practices for securing Kubernetes applications"
   
 ---
 
