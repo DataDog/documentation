@@ -215,7 +215,7 @@ The port of the DogStatsD Agent that metrics are submitted to.
 Enable automatic injection of trace IDs in logs for supported logging libraries.
 
 `DD_TRACE_SAMPLE_RATE`
-: Percentage of spans to sample as a float between `0` and `1`. Defaults to the rates returned by the Datadog agent.
+: Percentage of spans to sample as a float between `0` and `1`. Defaults to the rates returned by the Datadog Agent.
 
 `DD_TRACE_RATE_LIMIT`
 : Percentage of spans to sample as a float between `0` and `1`. Defaults to `100` when `DD_TRACE_SAMPLE_RATE` is set or otherwise delegate rate limiting to the Datadog agent.
