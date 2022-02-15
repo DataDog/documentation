@@ -174,7 +174,7 @@ Tracer settings can be configured with the following environment variables:
 : Set an application's environment (for example, `prod`, `pre-prod`, and `stage`). Defaults to the environment configured in the Datadog Agent.
 
 `DD_SERVICE`
-: The service name to be used for this program. Defaults to value of the name field in `package.json`.
+: The service name used for this program. Defaults to the name field value in `package.json`.
 
 `DD_VERSION`
 : The version number of the application. Defaults to value of the version field in `package.json`.
