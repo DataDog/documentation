@@ -19,19 +19,18 @@ further_reading:
 
 1. **Update your gem file to include the Datadog library**:
    ```
-   gem install ddtrace
+   gem 'ddtrace', '1.0.0.beta1'
    ```
    For information about which language and framework versions are supported by the library, see [Compatibility][1].
 
 2. **Enable Application Security**, either in your code:
    ```
    require 'datadog/security'
-   Datadog::Security.configure do |c|
-     c.use :rails
-   end
-   # not needed if require 'ddtrace/auto_instrument' is used
    Datadog.configure do |c|
-     c.use :rails
+     c.appsec.instrument :rails
+
+     # not needed if `gem 'ddtrace', require: 'ddtrace/auto_instrument'` is used
+     c.tracing.instrument :rails
    end
    ```
    Or one of the following methods, depending on where your application runs:
@@ -39,10 +38,10 @@ further_reading:
    {{< tabs >}}
 {{% tab "Docker CLI" %}}
 
-Update your configuration container for APM by adding the following argument in your `docker run` command: 
+Update your configuration container for APM by adding the following argument in your `docker run` command:
 
 ```
-docker run [...] -e DD_APPSEC_ENABLED=true [...] 
+docker run [...] -e DD_APPSEC_ENABLED=true [...]
 ```
 
 {{% /tab %}}
