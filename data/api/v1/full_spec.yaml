@@ -11344,7 +11344,7 @@ components:
             device:
               $ref: '#/components/schemas/SyntheticsDevice'
             duration:
-              description: Length in second of the browser test run.
+              description: Length in milliseconds of the browser test run.
               format: double
               type: number
             errorCount:
