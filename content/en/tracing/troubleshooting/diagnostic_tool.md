@@ -33,7 +33,8 @@ dd-trace check iis <full site name>
 The full site name is the name of the site in IIS followed by the name of the application.
 
 For instance, in this example:
-**insert screenshot**
+
+{{< img src="tracing/troubleshooting/IISManager.png" alt="IIS manager">}}
 
 The full name of "WebApplication1" would be `Default Web Site/WebApplication1`:
 ```
