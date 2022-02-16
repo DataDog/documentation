@@ -20,9 +20,9 @@ kind: documentation
 3. For languages other than Swift, make sure the Datadog Agent is running on the host where tests are run (accessible at `localhost:8126`), or if accessible on another hostname or port, make sure you run your tests with the appropriate Agent hostname set in the `DD_AGENT_HOST` and the appropriate port in `DD_TRACE_AGENT_PORT` environment variables. You can activate [debug mode][5] in the tracer to check if it's able to connect to the Agent.
 4. If you still don't see any results, [contact Support][1] for troubleshooting help.
 
-### You have received a "Pipeline not found" message
+### Pipeline not found
 
-If you have received this message, it means you have clicked on partial data coming from an in-progress pipeline. CI Visibility may receive partial data for stages, jobs, or custom commands. Wait until the pipeline has finished and try again.
+A "Pipeline not found" message is shown when you click on incomplete data coming from an in-progress pipeline. Data is received progressively for stages, jobs, or custom commands. Wait until the pipeline has finished and try again.
 
 ### Data appears in test runs but not tests
 
