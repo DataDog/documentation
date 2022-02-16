@@ -17,10 +17,10 @@ To instrument your .NET serverless application, you must use **either** the [Dat
 
 If you use the Datadog Lambda Extension, you can use Datadog's native .NET APM tracer to instrument your function. If you use the Datadog Forwarder Lambda function, you can use Datadog's integration with AWS X-Ray tracing.
 
-**Note**: only the Datadog Lambda Extension only supports the `x86_64` architecture for .NET Lambda functions. If your .NET Lambda function uses the `arm64` architecture, you must use the Datadog Forwarder for instrumentation.
+**Note**: The Datadog Lambda Extension only supports the `x86_64` architecture for .NET Lambda functions. If your .NET Lambda function uses the `arm64` architecture, you must use the Datadog Forwarder for instrumentation.
 
 ## Instrumentation
-### Datadog Lambda Extension
+### Using the Datadog Lambda Extension
 
 <div class="alert alert-warning">
 Instrumenting .NET applications with the Datadog Lambda Extension is in beta.
@@ -33,21 +33,21 @@ Datadog offers many different ways to enable instrumentation for your serverless
 
 1. Add the following layers and environment variables to each .NET Lambda Function you wish to instrument:
 
-```yml
-your-function:
-  layers:
-    - arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}
-    - arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-dotnet:{{< latest-lambda-layer-version layer="dd-trace-dotnet" >}}
-  environment:
-    DD_TRACE_ENABLED: true
-    DD_API_KEY: "<YOUR_DD_API_KEY>"
-    CORECLR_ENABLE_PROFILING: 1
-    CORECLR_PROFILER: "{846F5F1C-F9AE-4B07-969E-05C26BC060D8}"
-    CORECLR_PROFILER_PATH: "/opt/datadog/Datadog.Trace.ClrProfiler.Native.so"
-    DD_DOTNET_TRACER_HOME: "/opt/datadog"
-```
+    ```yml
+    your-function:
+      layers:
+        - arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}
+        - arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-dotnet:{{< latest-lambda-layer-version layer="dd-trace-dotnet" >}}
+      environment:
+        DD_TRACE_ENABLED: true
+        DD_API_KEY: "<YOUR_DD_API_KEY>"
+        CORECLR_ENABLE_PROFILING: 1
+        CORECLR_PROFILER: "{846F5F1C-F9AE-4B07-969E-05C26BC060D8}"
+        CORECLR_PROFILER_PATH: "/opt/datadog/Datadog.Trace.ClrProfiler.Native.so"
+        DD_DOTNET_TRACER_HOME: "/opt/datadog"
+    ```
 
-Replace `<YOUR_DD_API_KEY>` with your Datadog API key on the [API Management page][1].
+    Replace `<YOUR_DD_API_KEY>` with your Datadog API key on the [API Management page][1].
 
 2. Optionally add `service` and `env` tags with appropriate values to your function.
 
@@ -58,23 +58,23 @@ Replace `<YOUR_DD_API_KEY>` with your Datadog API key on the [API Management pag
 
 1. Add the following layers and environment variables to each .NET Lambda Function you wish to instrument:
 
-```yml
-Type: AWS::Serverless::Function
-Properties:
-  Environment:
-    Variables:
-      DD_TRACE_ENABLED: true
-      DD_API_KEY: "<YOUR_DD_API_KEY>"
-      CORECLR_ENABLE_PROFILING: 1
-      CORECLR_PROFILER: "{846F5F1C-F9AE-4B07-969E-05C26BC060D8}"
-      CORECLR_PROFILER_PATH: "/opt/datadog/Datadog.Trace.ClrProfiler.Native.so"
-      DD_DOTNET_TRACER_HOME: "/opt/datadog"
-  Layers:
-    - arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}
-    - arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-dotnet:{{< latest-lambda-layer-version layer="dd-trace-dotnet" >}}
-```
+    ```yml
+    Type: AWS::Serverless::Function
+    Properties:
+      Environment:
+        Variables:
+          DD_TRACE_ENABLED: true
+          DD_API_KEY: "<YOUR_DD_API_KEY>"
+          CORECLR_ENABLE_PROFILING: 1
+          CORECLR_PROFILER: "{846F5F1C-F9AE-4B07-969E-05C26BC060D8}"
+          CORECLR_PROFILER_PATH: "/opt/datadog/Datadog.Trace.ClrProfiler.Native.so"
+          DD_DOTNET_TRACER_HOME: "/opt/datadog"
+      Layers:
+        - arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}
+        - arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-dotnet:{{< latest-lambda-layer-version layer="dd-trace-dotnet" >}}
+    ```
 
-Replace `<YOUR_DD_API_KEY>` with your Datadog API key on the [API Management page][1].
+    Replace `<YOUR_DD_API_KEY>` with your Datadog API key on the [API Management page][1].
 
 2. Optionally add `service` and `env` tags with appropriate values to your function.
 
@@ -85,26 +85,26 @@ Replace `<YOUR_DD_API_KEY>` with your Datadog API key on the [API Management pag
 
 1. Add the following layers and environment variables to each .NET Lambda Function you wish to instrument:
 
-```typescript
-const fn = new lambda.Function(this, 'MyFunc', {
-  // ...
-  environment: {
-    DD_TRACE_ENABLED: true
-    DD_API_KEY: '<YOUR_DD_API_KEY>'
-    CORECLR_ENABLE_PROFILING: 1
-    CORECLR_PROFILER: '{846F5F1C-F9AE-4B07-969E-05C26BC060D8}'
-    CORECLR_PROFILER_PATH: '/opt/datadog/Datadog.Trace.ClrProfiler.Native.so'
-    DD_DOTNET_TRACER_HOME: '/opt/datadog'
-  }
-});
+    ```typescript
+    const fn = new lambda.Function(this, 'MyFunc', {
+      // ...
+      environment: {
+        DD_TRACE_ENABLED: true
+        DD_API_KEY: '<YOUR_DD_API_KEY>'
+        CORECLR_ENABLE_PROFILING: 1
+        CORECLR_PROFILER: '{846F5F1C-F9AE-4B07-969E-05C26BC060D8}'
+        CORECLR_PROFILER_PATH: '/opt/datadog/Datadog.Trace.ClrProfiler.Native.so'
+        DD_DOTNET_TRACER_HOME: '/opt/datadog'
+      }
+    });
 
-fn.addLayers(
-    lambda.LayerVersion.fromLayerVersionArn(this, 'extension', 'arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}'),
-    lambda.LayerVersion.fromLayerVersionArn(this, 'dd-trace-dotnet', 'arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-dotnet:{{< latest-lambda-layer-version layer="dd-trace-dotnet" >}}'),
-)
-```
+    fn.addLayers(
+        lambda.LayerVersion.fromLayerVersionArn(this, 'extension', 'arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}'),
+        lambda.LayerVersion.fromLayerVersionArn(this, 'dd-trace-dotnet', 'arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-dotnet:{{< latest-lambda-layer-version layer="dd-trace-dotnet" >}}'),
+    )
+    ```
 
-Replace `<YOUR_DD_API_KEY>` with your Datadog API key on the [API Management page][1].
+    Replace `<YOUR_DD_API_KEY>` with your Datadog API key on the [API Management page][1].
 
 2. Optionally add `service` and `env` tags with appropriate values to your function.
 
@@ -115,30 +115,30 @@ Replace `<YOUR_DD_API_KEY>` with your Datadog API key on the [API Management pag
 
 1. Add the Datadog Lambda Extension to your container image by adding the following to your Dockerfile:
 
-```dockerfile
-COPY --from=public.ecr.aws/datadog/lambda-extension:<TAG> /opt/extensions/ /opt/extensions
-```
+    ```dockerfile
+    COPY --from=public.ecr.aws/datadog/lambda-extension:<TAG> /opt/extensions/ /opt/extensions
+    ```
 
-Replace `<TAG>` with either a specific version number (for example, `{{< latest-lambda-layer-version layer="extension" >}}`) or with `latest`. You can see a complete list of possible tags in the [Amazon ECR repository][1].
+    Replace `<TAG>` with either a specific version number (for example, `{{< latest-lambda-layer-version layer="extension" >}}`) or with `latest`. You can see a complete list of possible tags in the [Amazon ECR repository][1].
 
 2. Add the Datadog .NET APM tracer to your container image and configure it with the required environment variables by adding the following to your Dockerfile:
 
-```dockerfile
-RUN yum -y install tar wget gzip
-RUN wget https://github.com/DataDog/dd-trace-dotnet/releases/download/v<TRACER_VERSION>/datadog-dotnet-apm-<TRACER_VERSION>.tar.gz
-RUN mkdir /opt/datadog
-RUN tar -C /opt/datadog -xzf datadog-dotnet-apm-<TRACER_VERSION>.tar.gz
-ENV CORECLR_ENABLE_PROFILING=1
-ENV CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
-ENV CORECLR_PROFILER_PATH=/opt/datadog/Datadog.Trace.ClrProfiler.Native.so
-ENV DD_DOTNET_TRACER_HOME=/opt/datadog
-```
+    ```dockerfile
+    RUN yum -y install tar wget gzip
+    RUN wget https://github.com/DataDog/dd-trace-dotnet/releases/download/v<TRACER_VERSION>/datadog-dotnet-apm-<TRACER_VERSION>.tar.gz
+    RUN mkdir /opt/datadog
+    RUN tar -C /opt/datadog -xzf datadog-dotnet-apm-<TRACER_VERSION>.tar.gz
+    ENV CORECLR_ENABLE_PROFILING=1
+    ENV CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
+    ENV CORECLR_PROFILER_PATH=/opt/datadog/Datadog.Trace.ClrProfiler.Native.so
+    ENV DD_DOTNET_TRACER_HOME=/opt/datadog
+    ```
 
-Replace `<TRACER_VERSION>` with the version number of `dd-trace-dotnet` you would like to use (for example, `2.3.0`). The minimum supported version is `2.3.0`. You can see the latest versions of `dd-trace-dotnet` in [GitHub][3].
+    Replace `<TRACER_VERSION>` with the version number of `dd-trace-dotnet` you would like to use (for example, `2.3.0`). The minimum supported version is `2.3.0`. You can see the latest versions of `dd-trace-dotnet` in [GitHub][3].
 
 3. Set the following environment variables in AWS:
-  - Set `DD_TRACE_ENABLED` to `true`.
-  - Set `DD_API_KEY` with your Datadog API key on the [API Management page][2].
+    - Set `DD_TRACE_ENABLED` to `true`.
+    - Set `DD_API_KEY` with your Datadog API key on the [API Management page][2].
 4. Optionally add `service` and `env` tags with appropriate values to your function.
 
 [1]: https://gallery.ecr.aws/datadog/lambda-extension
@@ -150,25 +150,25 @@ Replace `<TRACER_VERSION>` with the version number of `dd-trace-dotnet` you woul
 
 1. Add the [Datadog Lambda Extension][1] layer to your Lambda function:
 
-  `arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}`
+    `arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}`
 
-  Note that only the `x86_64` version of the Datadog Lambda Extension is supported for .NET Lambda functions. If your .NET Lambda function uses the `arm64` architecture, you must use the Datadog Forwarder for instrumentation.
+    Note that only the `x86_64` version of the Datadog Lambda Extension is supported for .NET Lambda functions. If your .NET Lambda function uses the `arm64` architecture, you must use the Datadog Forwarder for instrumentation.
 
 2. Add the dd-trace-dotnet layer to your Lambda function:
 
-  `arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-dotnet:{{< latest-lambda-layer-version layer="dotnet" >}}`
+    `arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-dotnet:{{< latest-lambda-layer-version layer="dotnet" >}}`
 
 3. Add your [Datadog API Key][2] to the Lambda function using the environment variable `DD_API_KEY`.
 
 4. Configure your Lambda function with the following additional environment variables:
 
-```
-DD_TRACE_ENABLED = true
-CORECLR_ENABLE_PROFILING = 1
-CORECLR_PROFILER = {846F5F1C-F9AE-4B07-969E-05C26BC060D8}
-CORECLR_PROFILER_PATH = /opt/datadog/Datadog.Trace.ClrProfiler.Native.so
-DD_DOTNET_TRACER_HOME = /opt/datadog
-```
+    ```
+    DD_TRACE_ENABLED = true
+    CORECLR_ENABLE_PROFILING = 1
+    CORECLR_PROFILER = {846F5F1C-F9AE-4B07-969E-05C26BC060D8}
+    CORECLR_PROFILER_PATH = /opt/datadog/Datadog.Trace.ClrProfiler.Native.so
+    DD_DOTNET_TRACER_HOME = /opt/datadog
+    ```
 
 [1]: /serverless/libraries_integrations/extension/
 [2]: https://app.datadoghq.com/organization-settings/api-keys
@@ -176,7 +176,10 @@ DD_DOTNET_TRACER_HOME = /opt/datadog
 {{% /tab %}}
 {{< /tabs >}}
 
-### Datadog Forwarder
+### Using the Datadog Forwarder
+
+As an alternative to the [Datadog Lambda Extension][1], you can use the [Datadog Forwarder Lambda function][2].
+
 #### Install
 
 1. Enable [AWS X-Ray active tracing][4] for your Lambda function.
