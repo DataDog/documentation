@@ -203,7 +203,7 @@ To create an exclusion filter, do one of the following:
 
 ## Uninstall
 
-To uninstall Application Security, remove the `DD_APPSEC_ENABLED=true` environment variable from your application configuration. If you need additional help, contact [Datadog support].
+To uninstall Application Security, remove the `DD_APPSEC_ENABLED=true` environment variable from your application configuration. If you need additional help, contact [Datadog support][4].
 
 ## Further Reading
 
@@ -212,3 +212,4 @@ To uninstall Application Security, remove the `DD_APPSEC_ENABLED=true` environme
 [1]: /tracing/setup_overview/configure_data_security/
 [2]: https://app.datadoghq.com/security/appsec/signals
 [3]: https://app.datadoghq.com/security/appsec/exclusions
+[4]: /help/
