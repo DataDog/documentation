@@ -35,7 +35,7 @@ Processing by HomeController#index as HTML
 Completed 200 OK in 79ms (Views: 78.8ms | ActiveRecord: 0.0ms)
 ```
 
-You can expect to see a single log line with the important information in a JSON format like this:
+You can expect to see a log line with the following information in JSON format:
 
 ```json
 {
