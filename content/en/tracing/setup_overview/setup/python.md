@@ -28,7 +28,7 @@ further_reading:
 
 Python versions `2.7+` and `3.5+` are supported.  For a full list of supported libraries, visit the [Compatibility Requirements][1] page.
 
-When tracing is set up, so is continuous profiling, hence the profiler need only be [enabled][2] to receive profiling data from the app.
+When you set up tracing, you're also setting up Continuous Profiler, and you need only [enable Profiler][2] to start receiving profiling data from your app.
 
 ## Installation and getting started
 
@@ -62,7 +62,7 @@ ddtrace-run python app.py
 
 ### Configure the Datadog Agent for APM
 
-By default the Datadog Agent is enabled in your `datadog.yaml` file under `apm_config` with `enabled: true` and listens for trace data by default `http://localhost:8126`. For containerized environments, follow the links below to enable trace collection within the Datadog Agent.
+Install and configure the Datadog Agent to receive traces from your now instrumented application. By default the Datadog Agent is enabled in your `datadog.yaml` file under `apm_config` with `enabled: true` and listens for trace data by default at `http://localhost:8126`. For containerized environments, follow the links below to enable trace collection within the Datadog Agent.
 
 {{< tabs >}}
 {{% tab "Containers" %}}
@@ -74,55 +74,55 @@ By default the Datadog Agent is enabled in your `datadog.yaml` file under `apm_c
 {{< partial name="apm/apm-containers.html" >}}
 </br>
 
-3. After the application has been instrumented, the trace client attempts to send traces to the `/var/run/datadog/apm.socket` Unix domain socket by default. If the socket does not exist then traces are sent to `http://localhost:8126`.
+3. After the application is instrumented, the trace client attempts to send traces to the Unix domain socket `/var/run/datadog/apm.socket` by default. If the socket does not exist, traces are sent to `http://localhost:8126`.
 
-    If a different socket, host or port is required use the `DD_TRACE_AGENT_URL` environment variable:
+   If a different socket, host, or port is required, use the `DD_TRACE_AGENT_URL` environment variable. Some examples:
 
-    `DD_TRACE_AGENT_URL=http://custom-hostname:1234`
+   ```
+   DD_TRACE_AGENT_URL=http://custom-hostname:1234
+   DD_TRACE_AGENT_URL=unix:///var/run/datadog/apm.socket
+   ```
 
-    `DD_TRACE_AGENT_URL=unix:///var/run/datadog/apm.socket`
+   The connection for traces can also be configured in code:
 
-    The connection for traces can also be configured in code:
+   ```python
+   from ddtrace import tracer
 
-    ```python
-    from ddtrace import tracer
+   # Network sockets
+   tracer.configure(
+       https=False,
+       hostname="custom-hostname",
+       port="1234",
+   )
 
-    # Network sockets
-    tracer.configure(
-        https=False,
-        hostname="custom-hostname",
-        port="1234",
-    )
+   # Unix domain socket configuration
+   tracer.configure(
+       uds_path="/var/run/datadog/apm.socket",
+   )
+   ```
 
-    # Unix domain socket configuration
-    tracer.configure(
-        uds_path="/var/run/datadog/apm.socket",
-    )
-    ```
+   Similarly, the trace client attempts to send stats to the `/var/run/datadog/dsd.socket` Unix domain socket. If the socket does not exist then stats are sent to `http://localhost:8125`.
 
-  Similarly, the trace client attempts to send stats to the `/var/run/datadog/dsd.socket` Unix domain socket. If the socket does not exist then stats are sent to `http://localhost:8125`.
+   If a different configuration is required, the `DD_DOGSTATSD_URL` environment variable can be used. Some examples:
+   ```
+   DD_DOGSTATSD_URL=http://custom-hostname:1234
+   DD_DOGSTATSD_URL=unix:///var/run/datadog/dsd.socket
+   ```
+   The connection for stats can also be configured in code:
 
-  If a different configuration is required, the `DD_DOGSTATSD_URL` environment variable can be used:
+   ```python
+   from ddtrace import tracer
 
-  `DD_DOGSTATSD_URL=http://custom-hostname:1234`
+   # Network socket
+   tracer.configure(
+     dogstatsd_url="http://localhost:8125",
+   )
 
-  `DD_DOGSTATSD_URL=unix:///var/run/datadog/dsd.socket`
-
-  The connection for stats can also be configured in code:
-
-  ```python
-  from ddtrace import tracer
-
-  # Network socket
-  tracer.configure(
-    dogstatsd_url="http://localhost:8125",
-  )
-
-  # Unix domain socket configuration
-  tracer.configure(
-    dogstatsd_url="unix:///var/run/datadog/dsd.socket",
-  )
-  ```
+   # Unix domain socket configuration
+   tracer.configure(
+     dogstatsd_url="unix:///var/run/datadog/dsd.socket",
+   )
+   ```
 {{< site-region region="us3,us5,eu,gov" >}} 
 
 4. Set `DD_SITE` in the Datadog Agent to {{< region-param key="dd_site" code="true" >}} to ensure the Agent sends data to the right Datadog location.
