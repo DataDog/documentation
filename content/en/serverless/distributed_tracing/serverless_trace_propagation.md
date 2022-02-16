@@ -22,7 +22,7 @@ Additional instrumentation is sometimes required to see a single, connected trac
 - Triggering Lambda functions via Step Functions
 - Invoking Lambda functions via non-HTTP protocols such as MQTT
 
-Tracing many AWS Managed services (listed [here][4]) are supported out-of-the-box and do not require following the steps outlined on this page.
+Tracing many AWS Managed services (listed [here][4]) is supported out-of-the-box and does not require following the steps outlined on this page.
 
 To successfully connect trace context between resources sending traces, you need to:
 - Include Datadog trace context in outgoing events. The outgoing event can originate from a host or Lambda function with `dd-trace` installed.
@@ -95,7 +95,7 @@ To extract the above trace context from the consumer Lambda function, you need t
 
 ### Sample extractors
 
-The following code samples outline sample extractors you might use for propagating trace context across a 3rd party system, or an API which does not support standard HTTP headers.
+The following code samples outline sample extractors you might use for propagating trace context across a third party system, or an API which does not support standard HTTP headers.
 
 {{< tabs >}}
 {{% tab "Python" %}}
