@@ -17,7 +17,7 @@ To instrument your .NET serverless application, you must use **either** the the 
 
 If you use the Datadog Lambda Extension, you can use Datadog's native .NET APM tracer to instrument your function. If you use the Datadog Forwarder Lambda function, you can use Datadog's integration with AWS X-Ray tracing.
 
-Note that only the Datadog Lambda Extension only supports the `x86_64` architecture for .NET Lambda functions. If your .NET Lambda function uses the `arm64` architecture, you must use the Datadog Forwarder for instrumentation.
+**Note**: only the Datadog Lambda Extension only supports the `x86_64` architecture for .NET Lambda functions. If your .NET Lambda function uses the `arm64` architecture, you must use the Datadog Forwarder for instrumentation.
 
 ## Instrumentation
 ### Datadog Lambda Extension
