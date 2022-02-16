@@ -106,7 +106,7 @@ The tracing library for .NET supports:
 
 For .NET serverless applications, Datadog recommends [installing Datadog's tracing libraries][7]. If your application requires AWS X-Ray active tracing in AWS managed services such as API Gateway or Step Functions, you may want to consider instead using [Datadog APM with AWS X-Ray tracing][3].
 
-Learn more about tracing through .NET Azure serverless applications [here][16].
+Learn more about [tracing through .NET Azure serverless applications][16].
 
 ### Hybrid environments
 
