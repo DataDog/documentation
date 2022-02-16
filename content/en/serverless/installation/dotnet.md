@@ -29,8 +29,8 @@ Instrumenting .NET applications with the Datadog Lambda Extension is in beta.
 Datadog offers many different ways to enable instrumentation for your serverless applications. Choose a method below that best suits your needs.
 
 {{< tabs >}}
-
 {{% tab "Serverless Framework" %}}
+
 1. Add the following layers and environment variables to each .NET Lambda Function you wish to instrument:
 
 ```yml
@@ -53,7 +53,7 @@ Replace `<YOUR_DD_API_KEY>` with your Datadog API key on the [API Management pag
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 
-{{ % /tab % }}
+{{% /tab %}}
 {{% tab "AWS SAM" %}}
 
 1. Add the following layers and environment variables to each .NET Lambda Function you wish to instrument:
@@ -80,7 +80,7 @@ Replace `<YOUR_DD_API_KEY>` with your Datadog API key on the [API Management pag
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 
-{{ % /tab % }}
+{{% /tab %}}
 {{% tab "AWS CDK" %}}
 
 1. Add the following layers and environment variables to each .NET Lambda Function you wish to instrument:
@@ -110,7 +110,7 @@ Replace `<YOUR_DD_API_KEY>` with your Datadog API key on the [API Management pag
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 
-{{ % /tab % }}
+{{% /tab %}}
 {{% tab "Container image" %}}
 
 1. Add the Datadog Lambda Extension to your container image by adding the following to your Dockerfile:
