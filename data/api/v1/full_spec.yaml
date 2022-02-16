@@ -2726,7 +2726,10 @@ components:
           example: '@browser.name:Chrome'
           type: string
         steps:
-          $ref: '#/components/schemas/FunnelSteps'
+          description: List of funnel steps.
+          items:
+            $ref: '#/components/schemas/FunnelStep'
+          type: array
       required:
       - query_string
       - data_source
@@ -2749,24 +2752,21 @@ components:
       type: string
       x-enum-varnames:
       - RUM
-    FunnelSteps:
-      description: List of funnel steps.
-      items:
-        description: The funnel step.
-        properties:
-          facet:
-            description: The facet of the step.
-            example: '@view.name'
-            type: string
-          value:
-            description: The value of the step.
-            example: /apm/home
-            type: string
-        required:
-        - facet
-        - value
-        type: object
-      type: array
+    FunnelStep:
+      description: The funnel step.
+      properties:
+        facet:
+          description: The facet of the step.
+          example: '@view.name'
+          type: string
+        value:
+          description: The value of the step.
+          example: /apm/home
+          type: string
+      required:
+      - facet
+      - value
+      type: object
     FunnelWidgetDefinition:
       description: 'The funnel visualization displays a funnel of user sessions that
         maps a sequence of view navigation and user interaction in your application.
@@ -3678,6 +3678,7 @@ components:
       - browser_usage
       - container_usage
       - custom_timeseries_usage
+      - estimated_indexed_logs_usage
       - fargate_usage
       - functions_usage
       - indexed_logs_usage
@@ -3694,6 +3695,7 @@ components:
       - BROWSER_USAGE
       - CONTAINER_USAGE
       - CUSTOM_TIMESERIES_USAGE
+      - ESTIMATED_INDEXED_LOGS_USAGE
       - FARGATE_USAGE
       - FUNCTIONS_USAGE
       - INDEXED_LOGS_USAGE
@@ -6822,6 +6824,8 @@ components:
       - container_percentage
       - custom_timeseries_usage
       - custom_timeseries_percentage
+      - estimated_indexed_logs_usage
+      - estimated_indexed_logs_percentage
       - fargate_usage
       - fargate_percentage
       - functions_usage
@@ -6853,6 +6857,8 @@ components:
       - CONTAINER_PERCENTAGE
       - CUSTOM_TIMESERIES_USAGE
       - CUSTOM_TIMESERIES_PERCENTAGE
+      - ESTIMATED_INDEXED_LOGS_USAGE
+      - ESTIMATED_INDEXED_LOGS_PERCENTAGE
       - FARGATE_USAGE
       - FARGATE_PERCENTAGE
       - FUNCTIONS_USAGE
@@ -6913,6 +6919,16 @@ components:
           type: number
         custom_timeseries_usage:
           description: The custom metrics usage by tag(s).
+          format: double
+          type: number
+        estimated_indexed_logs_percentage:
+          description: The percentage of estimated live indexed logs usage by tag(s).
+            This field is in private beta.
+          format: double
+          type: number
+        estimated_indexed_logs_usage:
+          description: The estimated live indexed logs usage by tag(s). This field
+            is in private beta.
           format: double
           type: number
         fargate_percentage:
@@ -11344,7 +11360,7 @@ components:
             device:
               $ref: '#/components/schemas/SyntheticsDevice'
             duration:
-              description: Length in second of the browser test run.
+              description: Length in milliseconds of the browser test run.
               format: double
               type: number
             errorCount:
@@ -12084,6 +12100,10 @@ components:
       properties:
         allowFailure:
           description: A boolean set to allow this step to fail.
+          type: boolean
+        isCritical:
+          description: A boolean to use in addition to `allowFailure` to determine
+            if the test should be marked as failed when the step fails.
           type: boolean
         name:
           description: The name of the step.
@@ -13397,6 +13417,8 @@ components:
       - lambda_invocations_percentage
       - lambda_usage
       - lambda_percentage
+      - estimated_indexed_logs_usage
+      - estimated_indexed_logs_percentage
       type: string
       x-enum-varnames:
       - API_PERCENTAGE
@@ -13421,6 +13443,8 @@ components:
       - LAMBDA_INVOCATIONS_PERCENTAGE
       - LAMBDA_USAGE
       - LAMBDA_PERCENTAGE
+      - ESTIMATED_INDEXED_LOGS_USAGE
+      - ESTIMATED_INDEXED_LOGS_PERCENTAGE
     UsageAttributionSupportedMetrics:
       description: Supported fields for usage attribution requests (valid requests
         contain one or more metrics, or `*` for all).
@@ -22419,7 +22443,8 @@ paths:
         timeframes: m, h and d. This value should not exceed 48 hours.
 
 
-        **NOTE** Only available on US1 and EU.
+        **NOTE** The Event Alert Query is being deprecated and replaced by the Event
+        V2 Alert Query. For more information, see the [Event Migration guide](https://docs.datadoghq.com/events/guides/migrating_to_new_events_features/).
 
 
         **Event V2 Alert Query**

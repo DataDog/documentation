@@ -64,7 +64,7 @@ Below the overview of the signal are tabs with detailed information related to t
 
 ### Threat intelligence
 
-Datadog Cloud SIEM offers threat intelligence feeds curated by threat intelligence partners. These feeds are constantly updated to include data about known suspicious activity (for example, IOCs), so you can quickly identify which potential threats to address.
+Datadog Cloud SIEM offers threat intelligence feeds curated by threat intelligence partners. These feeds are constantly updated to include data about known suspicious activity (for example, indicators of compromise or IOCs), so you can quickly identify which potential threats to address.
 
 {{< img src="security_platform/security_monitoring/explorer/threat_intelligence.png" alt="Threat Intelligence in the Security Signals Explorer"  >}}
 

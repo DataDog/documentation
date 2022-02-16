@@ -61,7 +61,7 @@ EVENTS_SCHEMA = {
 }
 ```
 
-Consultez la [documentation relative au flux d'événements][2] pour en savoir plus sur la syntaxe de la requête.
+Consultez la [documentation relative au flux d'événements][2] pour en savoir plus sur la syntaxe des requêtes.
 
 ### Exemples
 

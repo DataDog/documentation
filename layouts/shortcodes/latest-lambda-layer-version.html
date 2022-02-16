@@ -6,12 +6,12 @@
 
 <!-- Python Layer -->
 {{- if eq (.Get "layer") "python" -}}
-    51
+    52
 {{- end -}}
 
 <!-- Node Layer -->
 {{- if eq (.Get "layer") "node" -}}
-    67
+    69
 {{- end -}}
 
 <!-- Ruby Layer -->
@@ -27,4 +27,9 @@
 <!-- dd-trace-java Layer -->
 {{- if eq (.Get "layer") "dd-trace-java" -}}
     4
+{{- end -}}
+
+<!-- dd-trace-dotnet Layer -->
+{{- if eq (.Get "layer") "dd-trace-dotnet" -}}
+    1
 {{- end -}}

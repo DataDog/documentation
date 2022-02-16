@@ -264,7 +264,7 @@ var settings = TracerSettings.FromDefaultSources();
 settings.Environment = "prod";
 settings.ServiceName = "MyService";
 settings.ServiceVersion = "abc123";
-settings.AgentUri = new Uri("http://localhost:8126/");
+settings.Exporter.AgentUri = new Uri("http://localhost:8126/");
 
 // configure the global Tracer settings
 Tracer.Configure(settings);
@@ -308,7 +308,7 @@ To configure the Tracer using a JSON file, create `datadog.json` in the instrume
 
 ### Configuration settings
 
-Using the methods described above, customize your tracing configuration with the following variables. Use the environment variable name (for example, `DD_TRACE_AGENT_URL`) when setting environment variables or configuration files. Use the TracerSettings property (for example, `AgentUri`) when changing settings in code.
+Using the methods described above, customize your tracing configuration with the following variables. Use the environment variable name (for example, `DD_TRACE_AGENT_URL`) when setting environment variables or configuration files. Use the TracerSettings property (for example, `Exporter.AgentUri`) when changing settings in code.
 
 #### Unified Service Tagging
 
@@ -331,7 +331,7 @@ If specified, sets the version of the service. Added in version 1.17.0.
 The following configuration variables are available for both automatic and custom instrumentation:
 
 `DD_TRACE_AGENT_URL`
-: **TracerSettings property**: `AgentUri`<br>
+: **TracerSettings property**: `Exporter.AgentUri`<br>
 Sets the URL endpoint where traces are sent. Overrides `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT` if set. <br>
 **Default**: `http://<DD_AGENT_HOST>:<DD_TRACE_AGENT_PORT>`
 
@@ -360,7 +360,6 @@ The number of traces allowed to be submitted per second.
 If specified, adds all of the specified tags to all generated spans.
 
 `DD_TRACE_DEBUG`
-: **TracerSettings property**: `DebugEnabled` <br>
 Enables or disables debug logging. Valid values are: `true` or `false`.<br>
 **Default**: `false`
 

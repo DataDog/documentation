@@ -75,7 +75,7 @@ instances:
 
 ### Validation
 
-Pour vérifier que le check fonctionne correctement, consultez les métriques `system.net.tcp.rtt` dans l'interface Datadog. En outre, si vous exécutez `sudo /etc/init.d/datadog-agent status`, le message suivant devrait s'afficher :
+Pour vérifier que le check fonctionne correctement, assurez-vous que les métriques `system.net.tcp.rtt` s'affichent dans l'interface Datadog. En outre, si vous exécutez `sudo /etc/init.d/datadog-agent status`, le message suivant devrait s'afficher :
 
 ```shell
 datadog-agent.service - "Datadog Agent"
