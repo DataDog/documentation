@@ -2,12 +2,12 @@
 title: Troubleshooting Application Security Monitoring
 kind: documentation
 further_reading:
-- link: "/security_platform/getting_started/"
-  tag: "Documentation"
-  text: "Get Started Instrumenting Your Application to Send Signals"
 - link: "/security_platform/application_security/"
   tag: "Documentation"
   text: "Monitoring Threats with Datadog Application Security"
+- link: "/security_platform/application_security/getting_started/"
+  tag: "Documentation"
+  text: "Get Started Using Application Security to Detect Threats"
 - link: "/security_platform/application_security/setup_and_configure/#compatibility"
   tag: "Documentation"
   text: "Programming Language and Framework Compatibility"
@@ -15,9 +15,17 @@ further_reading:
 
 If you experience unexpected behavior with Datadog Application Security, there are common issues you can investigate, as mentioned below. If you continue to have trouble, reach out to [Datadog support][1] for further assistance. 
 
-## Application Security data is not appearing in Datadog
+## Application Security rate limits
 
-Check your [tracer startup logs][2]. If `appsec_enabled` is `true`, then Application Security is enabled and running.
+Application Security traces are rate-limited to 100 traces per second. Traces sent after the limit are not reported. Contact [Datadog support][1] if you need to change the limit.
+
+## No Suspicious Requests detected by Application Security
+
+There are a series of steps that must run successfully for threat information to appear in the Application Security [Trace and Signals Explorer][2]. It is important to check each step when investigating this issue. Additional troubleshooting steps for specific languages are in the language tab at the end.
+
+### Confirm Application Security is enabled
+
+Check your [tracer startup logs][3]. If `appsec_enabled` is `true`, then Application Security is enabled and running.
 
 Alternatively, you can use the metric `datadog.apm.appsec_host` to check if Application Security is running.
 
@@ -25,61 +33,116 @@ Alternatively, you can use the metric `datadog.apm.appsec_host` to check if Appl
 2. Search for the metric `datadog.apm.appsec_host`. If the metric doesn’t exist, then there are no services running Application Security. If the metric exists, the services are reported with the metric tags `host` and `service`.
 3. Select the metric, and in the **Tags** section, search for `service` to see which services are running Application Security.
 
-Check for `datadog.trace_agent.appsec.request` metrics to confirm the Datadog Agent is receiving Application Security events.
+If you are not seeing `datadog.apm.appsec_host`, check the [in-app instructions][4] to confirm that all steps for the initial setup are complete.
 
-1. Go to **Metrics > Summary** in Datadog.
-2. Search for `datadog.trace_agent.appsec.request` metrics. If the metrics do not exist, then the Agent is not receiving Application Security events. If the metrics are found, but the Application Security dashboard doesn't show any data, check `datadog.trace_agent.appsec.request_error` to see if there are any errors related to sending the data to the Agent.
-
-If you are not seeing `datadog.apm.appsec_host` or `datadog.trace_agent.appsec.request`, check the [in-app instructions][3] to confirm that all steps for the initial setup are complete.
-
-## Application Security rate limits
-
-Application Security traces are rate-limited to 100 traces per second. Traces sent after the limit are not reported. Contact [Datadog support][1] if you need to change the limit.
-
-## Application Security events are missing in the dashboard
-
-There are a series of steps that must run successfully for Application Security events to appear in the Application Security dashboard. It is important to check each step when investigating this issue. Additional troubleshooting steps for specific languages are in the language tab at the end.
+Application Security data is sent with APM traces. See [APM troubleshooting][5] to [confirm APM setup][6] and check for [connection errors][7].
 
 ### Send a test attack to your application
 
-Simulate an attack to test your Application Security setup using the following command:
+ To test your Application Security setup, trigger the [Security Scanner Detected][8] rule by running a file that contains the following curl script: 
 
+{{< programming-lang-wrapper langs="java,.NET,go,ruby,PHP,NodeJS" >}}
+{{< programming-lang lang="java" >}}
+
+```curl
+for ((i=1;i<=200;i++)); 
+do
+# Target existing service’s routes
+curl https://your-application-url/existing-route -A dd-test-scanner-log;
+# Target non existing service’s routes
+curl https://your-application-url/non-existing-route -A dd-test-scanner-log;
+done
 ```
-curl -A Arachni/v YOUR_APP_URL
+
+**Note:** The `dd-test-scanner-log` value is supported in the most recent releases and in the application security event configuration file version >= 1.2.5.
+
+{{< /programming-lang >}}
+{{< programming-lang lang=".NET" >}}
+
+```curl
+for ((i=1;i<=200;i++)); 
+do
+# Target existing service’s routes
+curl https://your-application-url/existing-route -A dd-test-scanner-log;
+# Target non existing service’s routes
+curl https://your-application-url/non-existing-route -A dd-test-scanner-log;
+done
 ```
 
-View the resulting Application Security event in the [Application Security dashboard][4]. 
+**Note:** The `dd-test-scanner-log` value is supported in the most recent releases and in the application security event configuration file version >= 1.2.5.
 
-It is possible that the test attack doesn't reach your application because of a firewall or another type of proxy server. It’s known that the following services block the Arachni test:
+{{< /programming-lang >}}
+{{< programming-lang lang="go" >}}
 
-- AWS API Gateway: Removes the user-agent and malicious parameters, even when its built-in WAF is deactivated
-- Extensible Service Proxy (ESP) by Google 
+ ```curl
+ for ((i=1;i<=200;i++)); 
+do
+# Target existing service’s routes
+curl https://your-application-url/existing-route -A Arachni/v1.0;
+# Target non existing service’s routes
+curl https://your-application-url/non-existing-route -A Arachni/v1.0;
+done
+```
 
-To ensure that the Arachni test isn’t blocked:
+{{< /programming-lang >}}
+{{< programming-lang lang="ruby" >}}
 
-- Run the test from the machine hosting the service.
-- Verify that curl returns 200.
-- Verify that there is a trace with the attribute `@appsec.event:true`.
-- If [debug logs][5] are available, look for the following logs to see if the test is being blocked:
+ ```curl
+ for ((i=1;i<=200;i++)); 
+do
+# Target existing service’s routes
+curl https://your-application-url/existing-route -A Arachni/v1.0;
+# Target non existing service’s routes
+curl https://your-application-url/non-existing-route -A Arachni/v1.0;
+done
+```
 
-  ```
-  DAS-0011-00: AppSec In-App WAF returned: <full_iaw_output> Took <exec_duration> ms
+{{< /programming-lang >}}
+{{< programming-lang lang="PHP" >}}
 
-  DDAS-0012-01: Detecting an attack from rule <rule_id>: <attack_info>
+```curl
+for ((i=1;i<=200;i++)); 
+do
+# Target existing service’s routes
+curl https://your-application-url/existing-route -A dd-test-scanner-log;
+# Target non existing service’s routes
+curl https://your-application-url/non-existing-route -A dd-test-scanner-log;
+done
+```
 
-  DDAS-0012-02: Blocked attack from <full_iaw_output>
-  ```
+**Note:** The `dd-test-scanner-log` value is supported in the most recent releases and in the application security event configuration file version >= 1.2.5.
+
+{{< /programming-lang >}}
+{{< programming-lang lang="NodeJS" >}}
+
+```curl
+for ((i=1;i<=200;i++)); 
+do
+# Target existing service’s routes
+curl https://your-application-url/existing-route -A dd-test-scanner-log;
+# Target non existing service’s routes
+curl https://your-application-url/non-existing-route -A dd-test-scanner-log;
+done
+```
+**Note:** The `dd-test-scanner-log` value is supported in the most recent releases and in the application security event configuration file version >= 1.2.5.
+
+{{< /programming-lang >}}
+{{< /programming-lang-wrapper >}}
+
+A few minutes after you enable your application and exercise it, and if it's successful, threat information appears in the [Trace and Signals Explorer][2].
+
+{{< img src="/security_platform/application_security/application-security-signal.png" alt="Security Signal details page showing tags, metrics, suggested next steps, and attacker IP addresses associated with a threat." style="width:100%;" >}}
 
 ### Check if required tracer integrations are deactivated
 
-Application Security relies on certain tracer integrations. If they are deactivated, Application Security won't work. To see if there are deactivated integrations, look for `disabled_integrations` in your [startup logs][2].
+Application Security relies on certain tracer integrations. If they are deactivated, Application Security won't work. To see if there are deactivated integrations, look for `disabled_integrations` in your [startup logs][3].
 
 The required integrations vary by language.
 
 {{< programming-lang-wrapper langs="java,.NET,go,ruby,PHP,NodeJS" >}}
 {{< programming-lang lang="java" >}}
 
-For Java, the required integrations are the following:
+For [Java][1], the required integrations are the following:
 
 - servlet
 - servlet-2
@@ -92,47 +155,62 @@ For Java, the required integrations are the following:
 - spring-web
 - spring-webflux
 
+
+[1]: /security_platform/application_security/setup_and_configure/
 {{< /programming-lang >}}
 {{< programming-lang lang=".NET" >}}
 
-For ..NET, the required integrations are the following:
-
-- ASP.NET
+For [.NET][1], the ASP.NET integration is required.
 
 **Note:** If ASP.NET Core is disabled, Application Security should still work with this framework.
 
+
+[1]: /security_platform/application_security/setup_and_configure/
 {{< /programming-lang >}}
 {{< programming-lang lang="PHP" >}}
 
-**[NEED INFO]**
+The are no required integrations for [PHP][1].
 
+
+[1]: /security_platform/application_security/setup_and_configure/
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
-For Go, the required integrations are the following:
+For [Go][1], the required integrations are the following:
 
-- net/http
-- Chi
-- Echo
-- Gorilla/mux
-- gRPC
+- [gRPC][2]
+- [net/http][3]
+- [Gorilla Mux][4]
+- [Echo][5]
+- [Chi][6]
 
-**Note:** They can’t be deactivated but rather just not integrated into the program’s source code.
 
+[1]: /security_platform/application_security/setup_and_configure/
+[2]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/grpc#example-package-Server
+[3]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http#example-package
+[4]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/gorilla/mux#example-package
+[5]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/labstack/echo.v4#example-package
+[6]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi.v5#example-package
 {{< /programming-lang >}}
 {{< programming-lang lang="NodeJS" >}}
 
-For Node.js, the HTTP integration is required.
+For [NodeJS][1], the HTTP integration is required.
 
 
+[1]: /security_platform/application_security/setup_and_configure/
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
-For Ruby, the Rack integration is required.
+For [Ruby][1], the [Rack][2] integration is required. Ruby tracer version `1.0.0.beta1` or higher is also required. See information on [migrating from 0.x to 1.x][3]. 
+
+**Note:** Rack can be manually added or automatically added with the [Rails][4] or [Sinatra][5] integration. If manually added, the tracer middleware must appear before the security middleware in the Rack stack.
 
 
-**Note:** Rack can be manually added or automatically added with the Rails or Sinatra integration. If manually added, the tracer middleware must appear before the security middleware in the Rack stack.
-
+[1]: /security_platform/application_security/setup_and_configure/
+[2]: /tracing/setup_overview/setup/ruby/#rack
+[3]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/UpgradeGuide.md#from-0x-to-10
+[4]: /tracing/setup_overview/setup/ruby/#rails
+[5]: /tracing/setup_overview/setup/ruby/#sinatra
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
@@ -141,12 +219,12 @@ For Ruby, the Rack integration is required.
  To troubleshoot this step of the process, do the following: 
 
 - Check the details of the running Agent at this address `http://<agent-machine-name>:<agent-port>/info`, usually `http://localhost:8126/info`. 
-- Ensure there are no Agent transmission errors related to spans in your [tracer logs][5]. 
+- Ensure there are no Agent transmission errors related to spans in your [tracer logs][8]. 
 - If the Agent is installed on a separate machine, check that `DD_AGENT_HOST` and, optionally, `DD_TRACE_AGENT_PORT` are set, or that `DD_TRACE_AGENT_URL` is set for the application tracing library.
 
 ### Check Datadog Agent to backend configuration
 
-Application Security events are sent over [spans][6]. To confirm that spans are successfully transmitted to Datadog, check that your tracer logs contain logs that look similar to this:
+Application Security data is sent over [spans][9]. To confirm that spans are successfully transmitted to Datadog, check that your tracer logs contain logs that look similar to this:
 
 ```
 2021-11-29 21:19:58 CET | TRACE | INFO | (pkg/trace/info/stats.go:111 in LogStats) | [lang:.NET lang_version:5.0.10 interpreter:.NET tracer_version:1.30.1.0 endpoint_version:v0.4] -> traces received: 2, traces filtered: 0, traces amount: 1230 bytes, events extracted: 0, events sampled: 0
@@ -157,6 +235,7 @@ If spans are not being transmitted, then the tracer logs will contain logs simil
 ```
 2021-11-29 21:18:48 CET | TRACE | INFO | (pkg/trace/info/stats.go:104 in LogStats) | No data received
 ```
+
 ## Troubleshooting by language
 
 Below are additional troubleshooting steps for specific languages.
@@ -185,7 +264,6 @@ The log files are available in the following directories:
 | Docker 	   | The container's directory `/var/log/datadog/dotnet/`. A recommended option is to mount the log folder on the host machine using [volumes][1]. |
 | Linux	     | /var/log/datadog/dotnet/	                                  |
 | Windows 	 | C:\ProgramData\Datadog .NET Tracer\logs                    |
-
 
 [1]: https://docs.docker.com/storage/volumes/
 {{< /programming-lang >}}
@@ -284,25 +362,25 @@ Follow the below instructions based on your situation:
 {{< /programming-lang >}}
 {{< programming-lang lang="NodeJS" >}}
 
-For NodeJS, if you don’t see Application Security events in the Application Security dashboard, follow these steps to troubleshoot the issue:
+For NodeJS, if you don’t see Application Security threat information in the [Trace and Signals Explorer][1], follow these steps to troubleshoot the issue:
 
-1. Confirm the latest version of Application Security is running by checking that `appsec_enabled` is `true` in the [startup logs][1]
+1. Confirm the latest version of Application Security is running by checking that `appsec_enabled` is `true` in the [startup logs][2]
 
     a. If you don’t see startup logs after a request has been sent, add the environment variable `DD_TRACE_STARTUP_LOGS=true` to enable startup logs. Check the startup logs for `appsec_enabled` is `true`.
 
-    b. If `appsec_enabled` is `false`, then Application Security was not enabled correctly. See [installation instructions][2].
+    b. If `appsec_enabled` is `false`, then Application Security was not enabled correctly. See [installation instructions][3].
 
-    c. If `appsec_enabled` is not in the startup logs, the latest Application Security version needs to be installed. See [installation instructions][2].
+    c. If `appsec_enabled` is not in the startup logs, the latest Application Security version needs to be installed. See [installation instructions][3].
 
 2. Is the tracer working? Can you see relevant traces on the APM dashboard? 
 
-    Application Security relies on the tracer so if you don’t see traces, then the tracer might not be working. See [APM Troubleshooting][3].
+    Application Security relies on the tracer so if you don’t see traces, then the tracer might not be working. See [APM Troubleshooting][4].
 
 3. In your application directory, run the command `npm explore @datadog/native-appsec -- npm run install` and restart your app.
 
-    a. If `@datadog/native-appsec` is not found then the installation is incorrect. See [installation instructions][2].
+    a. If `@datadog/native-appsec` is not found then the installation is incorrect. See [installation instructions][3].
     
-    b. If @datadog/native-appsec is found when starting your application, add the command to your runtime start script.
+    b. If `@datadog/native-appsec` is found when starting your application, add the command to your runtime start script.
 
     c. If the tracer still does not work, you might be running an unsupported runtime.
 
@@ -313,13 +391,14 @@ For NodeJS, if you don’t see Application Security events in the Application Se
     DD_TRACE_LOG_LEVEL=info
     ```
 
-[1]: /tracing/troubleshooting/tracer_startup_logs/
-[2]: /security_platform/application_security/getting_started/nodejs/?tab=dockercli
-[3]: /tracing/troubleshooting/
+[1]: https://app.datadoghq.com/security/appsec/
+[2]: /tracing/troubleshooting/tracer_startup_logs/
+[3]: /security_platform/application_security/getting_started/nodejs/?tab=dockercli
+[4]: /tracing/troubleshooting/
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
-For Ruby, if you don’t see Application Security events in your Application Security dashboard after a few minutes, enable tracer diagnostics for [debug logs][1] in the file `config/initializers/datadog-tracer.rb`. For example:
+For Ruby, if you don’t see Application Security threat information in the [Trace and Signals Explorer][1] after a few minutes, enable tracer diagnostics for [debug logs][2] in the file `config/initializers/datadog-tracer.rb`. For example:
 
 ```ruby
 Datadog.configure do |c|
@@ -358,7 +437,7 @@ D, [2022-01-19T21:25:50.581061 #341792] DEBUG -- ddtrace: [ddtrace] (/home/lloek
 If you don’t see those logs, try the following:
 
 - Check that another upstream security system is not filtering requests based on the test header value, which would prevent the request from reaching the application. 
-- Send another [test attack](#send-a-test-attack-to-your-application) using another user's agent values in the curl command to see if the event is successfully sent.
+- Send another [test attack](#send-a-test-attack-to-your-application) using another user's agent values in the curl command to see if the threat information is successfully sent.
 - Look in the application logs for the exact request you ran to confirm the request reached the application, and was not responded to by another upstream system.
 
 If the Rack integration was configured manually, sometimes a known issue prevents Application Security from working. For example:
@@ -372,9 +451,9 @@ Datadog.configure do |c|
 
 If `c.use :rack` is present, remove it to see if the check passes.
 
-#### Is Application Security detecting HTTP request security events?
+#### Is Application Security detecting HTTP request security threats?
 
-To confirm that Application Security is detecting security events, trigger a [test attack](#send-a-test-attack-to-your-application), and look for these logs:
+To confirm that Application Security is detecting security threats, trigger a [test attack](#send-a-test-attack-to-your-application), and look for these logs:
 
 ```
 D, [2021-12-14T22:39:53.268820 #106051] DEBUG -- ddtrace: [ddtrace] (ddtrace/lib/datadog/security/contrib/rack/reactive/request.rb:63:in `block in subscribe') WAF: #<struct Datadog::Security::WAF::Result action=:monitor, data=[{"rule"=>{"id"=>"ua0-600-10x", "name"=>"Nessus", "tags"=>{"type"=>"security_scanner", "category"=>"attack_attempt"}}, "rule_matches"=>[{"operator"=>"match_regex", "operator_value"=>"(?i)^Nessus(/|([ :]+SOAP))", "parameters"=>[{"address"=>"server.request.headers.no_cookies", "key_path"=>["user-agent"], "value"=>"Nessus SOAP", "highlight"=>["Nessus SOAP"]}]}]}], perf_data=nil, perf_total_runtime=20519>
@@ -382,7 +461,7 @@ D, [2021-12-14T22:39:53.268820 #106051] DEBUG -- ddtrace: [ddtrace] (ddtrace/lib
 If you don’t see those logs, check that another upstream security system is not filtering out the requests or altering them based on the test header value. 
 
 #### Is the tracer sending traces with security data?
-Application Security events are sent with APM traces. To confirm that Application Security correctly detects and inserts security data into traces, trigger a [test attack](#send-a-test-attack-to-your-application), and look for these tracer logs:
+Application Security data is sent with APM traces. To confirm that Application Security correctly detects and inserts security data into traces, trigger a [test attack](#send-a-test-attack-to-your-application), and look for these tracer logs:
 
 ```
 Tags: [
@@ -411,34 +490,39 @@ Metrics: [
    _sampling_priority_v1 => 2.0]]
 ```
 
-Wait a minute for the agent to forward the traces, then check that the traces show up in the APM dashboard. The security information in the traces may take additional time to be processed by Datadog before showing up as events in the Application Security dashboard.
+Wait a minute for the agent to forward the traces, then check that the traces show up in the APM dashboard. The security information in the traces may take additional time to be processed by Datadog before showing up as suspicious requests in the Application Security [Trace and Signals Explorer][1].
 
-#### Is Application Security forwarding security events to the Agent?
+#### Is Application Security forwarding security threats to the Agent?
 
-To confirm that Application Security is detecting and forwarding security events to the agent, trigger a [test attack](#send-a-test-attack-to-your-application), and look for these logs:
+To confirm that Application Security is detecting and forwarding security threats to the agent, trigger a [test attack](#send-a-test-attack-to-your-application), and look for these logs:
 
 ```
 D, [2021-12-14T11:03:37.347815 #73127] DEBUG -- ddtrace: [ddtrace] (ddtrace/lib/datadog/security/worker.rb:54:in `block in perform') processed events: [{:event_id=>"eb1eca52-74e1-435b-9a6c-44046d3765ee", :event_type=>"appsec.threat.attack", :event_version=>"0.1.0", :detected_at=>"2021-12-14T10:03:37Z", :type=>"security_scanner", :blocked=>false, :rule=>{:id=>"ua0-600-10x", :name=>"Nessus", :set=>"security_scanner"}, :rule_match=>{:operator=>"match_regex", :operator_value=>"(?i)^Nessus(/|([ :]+SOAP))", :parameters=>[{:name=>"server.request.headers.no_cookies", :key_path=>["user-agent"], :value=>"Nessus SOAP", :highlight=>["Nessus SOAP"]}]}, :context=>{:actor=>{:context_version=>"0.1.0", :ip=>{:address=>"127.0.0.1"}, :identifiers=>nil, :_id=>nil}, :host=>{:os_type=>"Linux", :hostname=>"procyon-vm", :context_version=>"0.1.0"}, :http=>{:context_version=>"0.1.0", :request=>{:scheme=>"http", :method=>"GET", :url=>"http://127.0.0.1:9292/admin.php", :host=>"127.0.0.1", :port=>9292, :path=>"/admin.php", :remote_ip=>"127.0.0.1", :headers=>{"host"=>"127.0.0.1:9292", "accept"=>"*/*", "user-agent"=>"Nessus SOAP"}, :useragent=>"Nessus SOAP"}, :response=>{:status=>404, :blocked=>false, :headers=>{"Content-Type"=>"text/plain"}}}, :service=>{:context_version=>"0.1.0", :name=>"rack", :environment=>nil}, :span=>{:context_version=>"0.1.0", :id=>4439751766880249768}, :tags=>{:context_version=>"0.1.0", :values=>["_dd.appsec.enabled:1", "_dd.runtime_family:ruby", "service:rack"]}, :trace=>{:context_version=>"0.1.0", :id=>2632764434813487337}, :tracer=>{:context_version=>"0.1.0", :runtime_type=>"ruby", :runtime_version=>"3.0.2", :lib_version=>"0.54.1"}}}]
 ```
 
-Wait a minute for the Agent to forward the events to Datadog, then check that the traces show up in the APM dashboard.
+Wait a minute for the Agent to forward the threat information to Datadog, then check that the traces show up in the APM dashboard.
 
-[1]: /tracing/troubleshooting/#tracer-debug-logs
+[1]: https://app.datadoghq.com/security/appsec/
+[2]: /tracing/troubleshooting/#tracer-debug-logs
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
 If you continue to have issues with Application Security, contact [Datadog support][1] with the following information: 
 
 - Confirmation that the [test attack](#send-a-test-attack-to-your-application) was successfully sent 
-- Tracer [startup][2] or [debug][5] logs
+- Tracer [startup][3] or [debug][10] logs
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /help/
-[2]: /tracing/troubleshooting/tracer_startup_logs/
-[3]: https://app.datadoghq.com/security/appsec?instructions=all
-[4]: https://app.datadoghq.com/security/appsec
-[5]: /tracing/troubleshooting/#tracer-debug-logs
-[6]: /tracing/visualization/#spans
+[2]: https://app.datadoghq.com/security/appsec/
+[3]: /tracing/troubleshooting/tracer_startup_logs/
+[4]: https://app.datadoghq.com/security/appsec?instructions=all
+[5]: /tracing/troubleshooting/
+[6]: /tracing/troubleshooting/#confirm-apm-setup-and-agent-status
+[7]: /tracing/troubleshooting/connection_errors/
+[8]: /security_platform/default_rules/security-scan-detected/
+[9]: /tracing/visualization/#spans
+[10]: /tracing/troubleshooting/#tracer-debug-logs
