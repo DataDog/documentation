@@ -30,11 +30,11 @@ You do not need to take any action for dashboards or monitors created through Da
 The changes to Event query syntax affect two Datadog features: monitors and dashboard widgets.
 
 Datadog migrates monitors that query Events by doing the following:
-- For each legacy Event monitor, create a duplicate that uses the new query syntax. Enable the new Event monitor.
-- Add the prefix "legacy" to the legacy Event monitor, and mute it.
-- Update all SLOs and monitor downtimes that reference the legacy Event monitor to point to the new monitor.
+- For each legacy Event monitor, creates a duplicate that uses the new query syntax. Enables the new monitor.
+- Adds the prefix "legacy" to the legacy Event monitor, and mutes it.
+- Updates all SLOs and monitor downtimes that reference the legacy Event monitor to point to the new monitor.
 
-When viewing monitors, you can filter which of the two monitor types you would like to see using the **Event Migration** facet. This facet has available values "Event Monitors V1" and "Event Monitors V2."
+When viewing monitors, you can filter which of the two monitor types you would like to see using the **Event Migration** facet. This facet has available values `Event Monitors V1` and `Event Monitors V2`.
 
 Datadog directly migrates dashboard widgets that use Event queries. These widgets include Event Stream widgets, Event Timeline widgets, and Event overlays in other widgets. Datadog does not create any new dashboards or widgets.
 
@@ -54,7 +54,7 @@ You can access the new Explorer and other features through the Events menu in th
 
 {{< img src="events/guides/navigation.png" alt="Events navigation" style="width:100%;" >}}
 
-### User impact
+### Impact
 
 * Datadog automatically routes Event queries to the correct backend. Old queries continue to go to the old backend, and migrated queries go to the new backend, so you can migrate safely.
 * Event dashboard widgets must use the new query syntax.
