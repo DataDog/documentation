@@ -208,6 +208,10 @@
   }
 }
 
+.mobile-nav-search-wrapper .docssearch .search-input-container .search-input-icon {
+  left: 22px;
+}
+
 .docssearch{
   position:relative;
   z-index:3;
@@ -230,7 +234,7 @@
       box-sizing: border-box;
       appearance: none;
       background-color: white !important;
-      
+
       &:focus{
           border: none;
           outline: none;
@@ -253,6 +257,10 @@
       width: 100%;
     }
 
+    .docssearch-input-mobile {
+      padding-left: 55px;
+    }
+
     .search-input-icon {
       // height: 16px;
       // width: 16px;
@@ -264,6 +272,8 @@
       pointer-events: none;
       z-index: 1;
     }
+
+
 
   }
 

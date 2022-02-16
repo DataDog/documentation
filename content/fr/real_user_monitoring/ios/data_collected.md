@@ -226,5 +226,5 @@ Les erreurs réseau comprennent des informations sur la requête HTTP ayant éch
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/real_user_monitoring/ios/advanced_configuration/#enrich-user-sessions
-[2]: /fr/real_user_monitoring/ios/advanced_configuration/#track-user-sessions
+[1]: https://docs.datadoghq.com/fr/real_user_monitoring/ios/advanced_configuration/#enrich-user-sessions
+[2]: https://docs.datadoghq.com/fr/real_user_monitoring/ios/advanced_configuration/#track-user-sessions

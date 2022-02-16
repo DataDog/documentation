@@ -25,12 +25,13 @@ further_reading:
 
 2. **Enable Application Security**, either in your code:
    ```
-   # config/initializers/datadog-tracer.rb
-
-   require 'datadog/appsec'
-
-   Datadog::AppSec.configure do |c|
-     c.enabled = true
+   require 'datadog/security'
+   Datadog::Security.configure do |c|
+     c.use :rails
+   end
+   # not needed if require 'ddtrace/auto_instrument' is used
+   Datadog.configure do |c|
+     c.use :rails
    end
    ```
    Or one of the following methods, depending on where your application runs:

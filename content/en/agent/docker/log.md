@@ -43,7 +43,9 @@ Configuring log collection depends on your current environment. Choose one of th
 {{< tabs >}}
 {{% tab "Container Installation" %}}
 
-To run a [Docker container][1] that embeds the Datadog Agent to monitor your host, use the following command:
+To run a [Docker container][1] that embeds the Datadog Agent to monitor your host, use the following command for your respective operating system:
+
+### Linux
 
 ```shell
 docker run -d --name datadog-agent \
@@ -59,7 +61,7 @@ docker run -d --name datadog-agent \
            gcr.io/datadoghq/agent:latest
 ```
 
-**Note**: On Windows systems, run this command without any volume mounts. That is:
+### Windows
 
 ```shell
 docker run -d --name datadog-agent \
@@ -69,6 +71,23 @@ docker run -d --name datadog-agent \
            -e DD_CONTAINER_EXCLUDE="name:datadog-agent" \
            -v \\.\pipe\docker_engine:\\.\pipe\docker_engine \
            -v c:\programdata\docker\containers:c:\programdata\docker\containers:ro
+           gcr.io/datadoghq/agent:latest
+```
+
+### macOS
+
+Add the path `/opt/datadog-agent/run` under Docker Desktop -> Settings -> Resources -> File sharing.
+
+```shell
+docker run -d --name datadog-agent \
+           -e DD_API_KEY=<DATADOG_API_KEY> \
+           -e DD_LOGS_ENABLED=true \
+           -e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true \
+           -e DD_LOGS_CONFIG_DOCKER_CONTAINER_USE_FILE=true \
+           -e DD_CONTAINER_EXCLUDE="name:datadog-agent" \
+           -v /var/run/docker.sock:/var/run/docker.sock:ro \
+           -v /var/lib/docker/containers:/var/lib/docker/containers:ro \
+           -v /opt/datadog-agent/run:/opt/datadog-agent/run:rw \
            gcr.io/datadoghq/agent:latest
 ```
 

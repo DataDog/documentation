@@ -2,12 +2,15 @@
 title: Using the Datadog Forwarder - Python
 kind: guide
 ---
+## Overview
 
-If you are a new user of Datadog Serverless, Datadog recommends using the [out-of-the-box Lambda functionality][1]. However, if you got set up on Datadog Serverless using the Datadog Forwarder before Lambda offered out-of-the-box functionality, use this guide to maintain your instance.
+<div class="alert alert-warning">
+If you are a new user of Datadog Serverless, follow the <a href="/serverless/installation/python">instructions to instrument your Lambda functions using the Datadog Lambda Extension</a> instead. If you have setup Datadog Serverless with the Datadog Forwarder before Lambda offered out-of-the-box functionality, use this guide to maintain your instance.
+</div>
 
 ## Prerequisites
 
-The [Datadog Forwarder Lambda function][2] is required to ingest AWS Lambda traces, enhanced metrics, custom metrics, and logs.
+The [Datadog Forwarder Lambda function][1] is required to ingest AWS Lambda traces, enhanced metrics, custom metrics, and logs.
 
 ## Configuration
 
@@ -381,11 +384,11 @@ Subscribe the Datadog Forwarder Lambda function to each of your function’s log
 
 ### Tag
 
-Although it's optional, Datadog recommends tagging you serverless applications with the `env`, `service`, and `version` tags following the [unified service tagging documentation][3].
+Although it's optional, Datadog recommends tagging you serverless applications with the `env`, `service`, and `version` tags following the [unified service tagging documentation][2].
 
 ## Explore
 
-After configuring your function following the steps above, view your metrics, logs, and traces on the [Serverless homepage][4].
+After configuring your function following the steps above, view your metrics, logs, and traces on the [Serverless homepage][3].
 
 ## Monitor custom business logic
 
@@ -426,15 +429,15 @@ def get_message():
     return 'Hello from serverless!'
 ```
 
-For more information on custom metric submission, see [here][5]. For additional details on custom instrumentation, see the Datadog APM documentation for [custom instrumentation][5].
+For more information on custom metric submission, see [here][4]. For additional details on custom instrumentation, see the Datadog APM documentation for [custom instrumentation][5].
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /serverless/installation
-[2]: /serverless/forwarder
-[3]: /getting_started/tagging/unified_service_tagging/#aws-lambda-functions
-[4]: https://app.datadoghq.com/functions
+[1]: /serverless/forwarder
+[2]: /getting_started/tagging/unified_service_tagging/#aws-lambda-functions
+[3]: https://app.datadoghq.com/functions
+[4]: /serverless/custom_metrics?tab=python
 [5]: /tracing/custom_instrumentation/python/

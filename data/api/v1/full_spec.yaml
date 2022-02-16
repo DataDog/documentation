@@ -2726,7 +2726,10 @@ components:
           example: '@browser.name:Chrome'
           type: string
         steps:
-          $ref: '#/components/schemas/FunnelSteps'
+          description: List of funnel steps.
+          items:
+            $ref: '#/components/schemas/FunnelStep'
+          type: array
       required:
       - query_string
       - data_source
@@ -2749,24 +2752,21 @@ components:
       type: string
       x-enum-varnames:
       - RUM
-    FunnelSteps:
-      description: List of funnel steps.
-      items:
-        description: The funnel step.
-        properties:
-          facet:
-            description: The facet of the step.
-            example: '@view.name'
-            type: string
-          value:
-            description: The value of the step.
-            example: /apm/home
-            type: string
-        required:
-        - facet
-        - value
-        type: object
-      type: array
+    FunnelStep:
+      description: The funnel step.
+      properties:
+        facet:
+          description: The facet of the step.
+          example: '@view.name'
+          type: string
+        value:
+          description: The value of the step.
+          example: /apm/home
+          type: string
+      required:
+      - facet
+      - value
+      type: object
     FunnelWidgetDefinition:
       description: 'The funnel visualization displays a funnel of user sessions that
         maps a sequence of view navigation and user interaction in your application.
@@ -11344,7 +11344,7 @@ components:
             device:
               $ref: '#/components/schemas/SyntheticsDevice'
             duration:
-              description: Length in second of the browser test run.
+              description: Length in milliseconds of the browser test run.
               format: double
               type: number
             errorCount:
@@ -12084,6 +12084,10 @@ components:
       properties:
         allowFailure:
           description: A boolean set to allow this step to fail.
+          type: boolean
+        isCritical:
+          description: A boolean to use in addition to `allowFailure` to determine
+            if the test should be marked as failed when the step fails.
           type: boolean
         name:
           description: The name of the step.
@@ -22419,7 +22423,8 @@ paths:
         timeframes: m, h and d. This value should not exceed 48 hours.
 
 
-        **NOTE** Only available on US1 and EU.
+        **NOTE** The Event Alert Query is being deprecated and replaced by the Event
+        V2 Alert Query. For more information, see the [Event Migration guide](https://docs.datadoghq.com/events/guides/migrating_to_new_events_features/).
 
 
         **Event V2 Alert Query**

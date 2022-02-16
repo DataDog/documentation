@@ -143,7 +143,11 @@ Click **Continue with test if this step fails** to allow your test to move on wi
 
 This ensures your tests are able to clean up after themselves. For example, a test may create a resource, perform a number of actions on that resource, and end with the deletion of that resource. In case one of the intermediary steps fail, you want to have this setting enabled on every intermediary step to ensure that the resource is deleted at the end of the test and that no false positives are created.
 
-For example, if your multistep API test runs on multiple endpoints, specify the number of times you want the step to run after a set number of milliseconds in case the step fails. This ensures your test performs all the requests even if there is an issue with one or more steps.
+Activate **Consider entire test as failed if this step fails** on your intermediary steps to ensure your overall test still generates an alert in case one of the endpoints does not answer as expected.
+
+##### Retry
+
+Your test can trigger retries X times after Y ms in case of a failed test result. Customize the retry interval to suit your alerting sensibility.
 
 #### Extract variables from the response
 

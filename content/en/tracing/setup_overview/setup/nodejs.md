@@ -88,7 +88,7 @@ via environment variables, you can also use `dd-trace/init`, which loads and
 initializes in one step.
 
 ```typescript
-import `dd-trace/init`;
+import 'dd-trace/init';
 ```
 
 ### Adding the tracer via command line arguments
@@ -166,103 +166,77 @@ See the [tracer settings][3] for the list of initialization options.
 
 ## Configuration
 
-Tracer settings can be configured as the following parameters to the `init()` method, or as environment variables.
+Tracer settings can be configured with the following environment variables:
 
 ### Tagging
 
+`DD_ENV`
+: Set an application's environment (for example, `prod`, `pre-prod`, and `stage`). Defaults to the environment configured in the Datadog Agent.
 
-`env`
-: **Environment variable**: `DD_ENV`<br>
-**Default**: `null`<br>
-Set an application's environment for example, `prod`, `pre-prod`, `stage`, etc. Available for versions 0.20+
+`DD_SERVICE`
+: The service name used for this program. Defaults to the name field value in `package.json`.
 
-`service`
-: **Environment variable**: `DD_SERVICE`<br>
-**Default**: `null`<br>
-The service name to be used for this program. Available for versions 0.20+
+`DD_VERSION`
+: The version number of the application. Defaults to the version field value in `package.json`.
 
-`version`
-: **Environment variable**: `DD_VERSION`<br>
-**Default**: `null`<br>
-The version number of the application. Defaults to value of the version field in package.json. Available for versions 0.20+
-
-`tags`
-: **Environment variable**: `DD_TAGS`<br>
-**Default**: `{}`<br>
-Set global tags that should be applied to all spans and runtime metrics. When passed as an environment variable, the format is `key:value,key:value`. When setting this programmatically: `tracer.init({ tags: { foo: 'bar' } })` Available for versions 0.20+
+`DD_TAGS`
+: Set global tags that are applied to all spans and runtime metrics. When passed as an environment variable, the format is `key:value,key:value`. When setting this programmatically, the format is `tracer.init({ tags: { foo: 'bar' } })`.
 
 It is recommended that you use `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `env`, `service`, and `version` for your services. Review the [Unified Service Tagging][2] documentation for recommendations on how to configure these environment variables.
 
 ### Instrumentation
 
-`enabled`
-: **Environment variable**: `DD_TRACE_ENABLED`<br>
-**Default**: `true`<br>
+`DD_TRACE_ENABLED`
+: **Default**: `true`<br>
 Whether to enable the tracer.
 
-`debug`
-: **Environment variable**: `DD_TRACE_DEBUG`<br>
-**Default**: `false`<br>
+`DD_TRACE_DEBUG`
+: **Default**: `false`<br>
 Enable debug logging in the tracer.
 
-`url`
-: **Environment variable**: `DD_TRACE_AGENT_URL`<br>
-**Default**: `null`<br>
+`DD_TRACE_AGENT_URL`
+: **Default**: `http://localhost:8126`<br>
 The URL of the Trace Agent that the tracer submits to. Takes priority over hostname and port, if set. Supports Unix Domain Sockets in combination with the `apm_config.receiver_socket` in your `datadog.yaml` file, or the `DD_APM_RECEIVER_SOCKET` environment variable.
 
-`hostname`
-: **Environment variable**: `DD_TRACE_AGENT_HOSTNAME`<br>
-**Default**: `localhost`<br>
+`DD_TRACE_AGENT_HOSTNAME`
+: **Default**: `localhost`<br>
 The address of the Agent that the tracer submits to.
 
-`port`
-: **Environment variable**: `DD_TRACE_AGENT_PORT`<br>
-**Default**: `8126`<br>
+`DD_TRACE_AGENT_PORT`
+: **Default**: `8126`<br>
 The port of the Trace Agent that the tracer submits to.
 
-`dogstatsd.port`
-: **Environment variable**: `DD_DOGSTATSD_PORT`<br>
-**Default**: `8125`<br>
+`DD_DOGSTATSD_PORT`
+: **Default**: `8125`<br>
 The port of the DogStatsD Agent that metrics are submitted to.
 
-`logInjection`
-: **Environment variable**: `DD_LOGS_INJECTION`<br>
-**Default**: `false`<br>
+`DD_LOGS_INJECTION`
+: **Default**: `false`<br>
 Enable automatic injection of trace IDs in logs for supported logging libraries.
 
-`sampleRate`
-: **Default**: `1`<br>
-Percentage of spans to sample as a float between `0` and `1`.
+`DD_TRACE_SAMPLE_RATE`
+: Percentage of spans to sample as a float between `0` and `1`. Defaults to the rates returned by the Datadog Agent.
 
-`flushInterval`
-: **Default**: `2000`<br>
-Interval (in milliseconds) at which the tracer submits traces to the Agent.
+`DD_TRACE_RATE_LIMIT`
+: Percentage of spans to sample as a float between `0` and `1`. Defaults to `100` when `DD_TRACE_SAMPLE_RATE` is set. Otherwise, delegates rate limiting to the Datadog Agent.
 
-`runtimeMetrics`
-: **Environment variable**: `DD_RUNTIME_METRICS_ENABLED`<br>
-**Default**:  `false`<br>
-Whether to enable capturing runtime metrics. Port `8125` (or configured with `dogstatsd.port`) must be opened on the Agent for UDP.
+`DD_RUNTIME_METRICS_ENABLED`
+: **Default**:  `false`<br>
+Whether to enable capturing runtime metrics. Port `8125` (or configured with `DD_DOGSTATSD_PORT`) must be opened on the Agent for UDP.
 
-: **Environment Variable**: `DD_SERVICE_MAPPING`<br>
-**Default**: `null`<br>
-**Example**: `mysql:my-mysql-service-name-db,pg:my-pg-service-name-db`<br>
+`DD_SERVICE_MAPPING`
+: **Example**: `mysql:my-mysql-service-name-db,pg:my-pg-service-name-db`<br>
 Provide service names for each plugin. Accepts comma separated `plugin:service-name` pairs, with or without spaces.
-
-`experimental`
-: **Default**: `{}`<br>
-Experimental features can be enabled all at once using Boolean true or individually using key/value pairs. [Contact support][4] to learn more about the available experimental features.
-
-`plugins`
-: **Default**: `true`<br>
-Whether or not to enable automatic instrumentation of external libraries using the built-in plugins.
 
 `DD_TRACE_DISABLED_PLUGINS`
 : A comma-separated string of integration names automatically disabled when tracer is initialized. Environment variable only, for example, `DD_TRACE_DISABLED_PLUGINS=express,dns`.
 
-`logLevel`
-: **Environment variable**: `DD_TRACE_LOG_LEVEL`<br>
-**Default**: `debug`<br>
+`DD_TRACE_LOG_LEVEL`
+: **Default**: `debug`<br>
 A string for the minimum log level for the tracer to use when debug logging is enabled, for example, `error`, `debug`.
+
+
+For more options including the programmatic configuration API, see the [API documentation][4].
 
 ## Further Reading
 
