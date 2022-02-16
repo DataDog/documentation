@@ -30,6 +30,7 @@ private: true
 {{< whatsnext desc="Log Processing" >}}
     {{< nextlink href="logs/guide/log-parsing-best-practice" >}}Log Parsing Best Practices{{< /nextlink >}}
     {{< nextlink href="/logs/guide/enrichment-tables/" >}}Add Custom Metadata to Logs with Enrichment Tables{{< /nextlink >}}
+    {{< nextlink href="/logs/guide/commonly-used-log-processing-rules" >}}Commonly Used Log Processing Rules{{< /nextlink >}}
 {{< /whatsnext >}}
 
 <br>

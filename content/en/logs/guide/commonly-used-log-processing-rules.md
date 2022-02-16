@@ -17,6 +17,8 @@ further_reading:
 - link: "logs/logging_without_limits"
   tag: "Documentation"
   text: "Logging without Limits*"
+aliases:
+  - /agent/faq/commonly-used-log-processing-rules
 ---
 
 Find on this page examples of commonly used log processing rules.
