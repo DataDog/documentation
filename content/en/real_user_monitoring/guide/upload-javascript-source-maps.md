@@ -87,12 +87,12 @@ The best way to upload source maps is to add an extra step in your CI pipeline a
 1. Add `@datadog/datadog-ci` to your `package.json` file (make sure you're using the latest version).
 2. [Create a dedicated Datadog API key][1] and export it as an environment variable named `DATADOG_API_KEY`.
 3. Run the following command:
-  ```bash
-  datadog-ci sourcemaps upload /path/to/dist \
-    --service=my-service \
-    --release-version=v35.2395005 \
-    --minified-path-prefix=https://hostname.com/static/js
-  ```
+   ```bash
+   datadog-ci sourcemaps upload /path/to/dist \
+     --service=my-service \
+     --release-version=v35.2395005 \
+     --minified-path-prefix=https://hostname.com/static/js
+   ```
 
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
@@ -103,12 +103,12 @@ The best way to upload source maps is to add an extra step in your CI pipeline a
 2. [Create a dedicated Datadog API key][1] and export it as an environment variable named `DATADOG_API_KEY`.
 3. Configure the CLI to upload files to the EU region by exporting two environment variables: `export DATADOG_SITE="datadoghq.eu"` and `export DATADOG_API_HOST="api.datadoghq.eu"`.
 4. Run the following command:
-  ```bash
-  datadog-ci sourcemaps upload /path/to/dist \
-    --service=my-service \
-    --release-version=v35.2395005 \
-    --minified-path-prefix=https://hostname.com/static/js
-  ```
+   ```bash
+   datadog-ci sourcemaps upload /path/to/dist \
+     --service=my-service \
+     --release-version=v35.2395005 \
+     --minified-path-prefix=https://hostname.com/static/js
+   ```
 
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
