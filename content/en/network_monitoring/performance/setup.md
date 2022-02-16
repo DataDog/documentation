@@ -211,7 +211,8 @@ To enable Network Performance Monitoring for Windows hosts:
 To enable Network Performance Monitoring with Kubernetes using Helm, add:
 
   ```yaml
-  networkMonitoring:
+  datadog:
+    networkMonitoring:
       enabled: true
   ```
 to your values.yaml. **Helm chart v2.4.39+ is required**. For more information, see the [Datadog Helm Chart documentation][1].
