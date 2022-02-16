@@ -48,6 +48,14 @@ For a full list of supported libraries and processor architectures, see [Compati
 
 ## Installation and getting started
 
+<div class="alert alert-info">
+  <div class="alert-info"><strong>It is recommended</strong> to follow the <a href="https://app.datadoghq.com/apm/docs">Quickstart instructions</a> within the Datadog app for the best experience, including:
+    <div>- Step by step instructions scoped to your deployment configuration (hosts, Docker, Kubernetes, or Amazon ECS).</div>
+    <div>- Dynamically set <code>service</code>, <code>env</code>, and <code>version</code> tags</div>
+    <div>- Enable ingesting 100% of traces, and Trace ID injection into logs during setup.</div>
+  </div>
+</div>
+
 <div class="alert alert-warning">
   <strong>Note:</strong> Datadog's automatic instrumentation relies on the .NET CLR Profiling API. This API allows only one subscriber (for example, APM). To ensure maximum visibility, run only one APM solution in your application environment.
 </div>
@@ -208,7 +216,7 @@ For information about the different methods for setting environment variables, s
 
 ### Configure the Datadog Agent for APM
 
-[Install and configure the Datadog Agent][2] to receive traces from your instrumented application. By default the Datadog Agent is enabled in your `datadog.yaml` file under `apm_config` with `enabled: true` and listens for trace traffic at `localhost:8126`.
+[Install and configure the Datadog Agent][2] to receive traces from your instrumented application. By default the Datadog Agent is enabled in your `datadog.yaml` file under `apm_config` with `enabled: true` and listens for trace data on `http://localhost:8126`.
 
 For containerized, serverless, and cloud environments:
 
@@ -223,7 +231,15 @@ For containerized, serverless, and cloud environments:
 {{< partial name="apm/apm-containers.html" >}}
 </br>
 
-3. After instrumenting your application, the tracing client sends traces to `localhost:8126` by default. If this is not the correct host and port, change it by setting the `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT` environment variables. For more information on how to set these variables, see [Configuration](#configuration).
+3. After instrumenting your application, the tracing client attempts to send traces to:
+
+    - The `/var/run/datadog/apm.socket` Unix domain socket by default.
+    - If the socket does not exist then traces are sent to `localhost:8126`.
+    - If a different socket, host or port is required use the `DD_TRACE_AGENT_URL` environment variable:
+    `DD_TRACE_AGENT_URL=http://custom-hostname:1234`
+    `DD_TRACE_AGENT_URL=unix:///var/run/datadog/apm.socket`
+
+For more information on the available variables, avalaible as environment variables or through code, see [Configuration](#configuration).
 
 {{< site-region region="us3,us5,eu,gov" >}}
 
@@ -364,16 +380,8 @@ The following configuration variables are available for both automatic and custo
 
 `DD_TRACE_AGENT_URL`
 : **TracerSettings property**: `Exporter.AgentUri`<br>
-Sets the URL endpoint where traces are sent. Overrides `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT` if set. <br>
-**Default**: `http://<DD_AGENT_HOST>:<DD_TRACE_AGENT_PORT>`
-
-`DD_AGENT_HOST`
-: Sets the host where traces are sent (the host running the Agent). Can be a hostname or an IP address. Ignored if `DD_TRACE_AGENT_URL` is set. <br>
-**Default**: `localhost`
-
-`DD_TRACE_AGENT_PORT`
-: Sets the port where traces are sent (the port where the Agent is listening for connections). Ignored if `DD_TRACE_AGENT_URL` is set. <br>
-**Default**: `8126`
+Sets the URL endpoint where traces are sent. Overrides the deprecated `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT` if set.<br>
+**Default**: `http://<DD_AGENT_HOST>:<DD_TRACE_AGENT_PORT>` if they are set, `unix:///var/run/datadog/apm.socket` if the file exists or `http://localhost:8126`
 
 `DD_LOGS_INJECTION`
 : **TracerSettings property**: `LogsInjectionEnabled` <br>
