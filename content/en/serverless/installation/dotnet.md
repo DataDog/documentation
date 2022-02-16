@@ -15,7 +15,9 @@ further_reading:
 
 To instrument your .NET serverless application, you must use **either** the the [Datadog Lambda Extension][1] (beta) or the [Datadog Forwarder Lambda function][2].
 
-Note that only the Datadog Lambda Extension supports the `x86_64` architecture only for .NET Lambda functions. If your .NET Lambda function uses the `arm64` architecture, you must use the Datadog Forwarder for instrumentation.
+If you use the Datadog Lambda Extension, you can use Datadog's native .NET APM tracer to instrument your function. If you use the Datadog Forwarder Lambda function, you can use Datadog's integration with AWS X-Ray tracing.
+
+Note that only the Datadog Lambda Extension only supports the `x86_64` architecture for .NET Lambda functions. If your .NET Lambda function uses the `arm64` architecture, you must use the Datadog Forwarder for instrumentation.
 
 ## Instrumentation
 ### Datadog Lambda Extension
@@ -27,7 +29,52 @@ Instrumenting .NET applications with the Datadog Lambda Extension is in beta.
 The Datadog Lambda Extension supports functions deployed as zip archives and functions deployed as container images. Choose your deployment package type below to see the applicable installation instructions.
 
 {{< tabs >}}
-{{% tab "Zip archive" %}}
+
+{{% tab "Serverless Framework" %}}
+{{ % /tab % }}
+
+{{% tab "AWS SAM" %}}
+{{ % /tab % }}
+
+{{% tab "AWS CDK" %}}
+{{ % /tab % }}
+
+{{% tab "Container image" %}}
+1. Add the Datadog Lambda Extension to your container image by adding the following to your Dockerfile:
+
+```dockerfile
+COPY --from=public.ecr.aws/datadog/lambda-extension:<TAG> /opt/extensions/ /opt/extensions
+```
+
+Replace `<TAG>` with either a specific version number (for example, `{{< latest-lambda-layer-version layer="extension" >}}`) or with `latest`. You can see a complete list of possible tags in the [Amazon ECR repository][1].
+
+2. Add the Datadog .NET APM tracer to your container image and configure it with the required environment variables by adding the following to your Dockerfile:
+
+```dockerfile
+RUN yum -y install tar wget gzip
+RUN wget https://github.com/DataDog/dd-trace-dotnet/releases/download/v<TRACER_VERSION>/datadog-dotnet-apm-<TRACER_VERSION>.tar.gz
+RUN mkdir /opt/datadog
+RUN tar -C /opt/datadog -xzf datadog-dotnet-apm-<TRACER_VERSION>.tar.gz
+ENV CORECLR_ENABLE_PROFILING=1
+ENV CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
+ENV CORECLR_PROFILER_PATH=/opt/datadog/Datadog.Trace.ClrProfiler.Native.so
+ENV DD_DOTNET_TRACER_HOME=/opt/datadog
+```
+
+Replace `<TRACER_VERSION>` with the version number of `dd-trace-dotnet` you would like to use (for example, `2.3.0`). The minimum supported version is `2.3.0`. You can see the latest versions of `dd-trace-dotnet` in [GitHub][3].
+
+3. Set the following environment variables in AWS:
+  - Set `DD_TRACE_ENABLED` to `true`.
+  - Set `DD_API_KEY` with your Datadog API key on the [API Management page][2].
+4. Optionally add `service` and `env` tags with appropriate values to your function.
+
+[1]: https://gallery.ecr.aws/datadog/lambda-extension
+[2]: https://app.datadoghq.com/organization-settings/api-keys
+[3]: https://github.com/DataDog/dd-trace-dotnet/releases
+
+{{% /tab %}}
+
+{{% tab "Custom" %}}
 
 1. Add the [Datadog Lambda Extension][1] layer to your Lambda function:
 
@@ -37,7 +84,7 @@ The Datadog Lambda Extension supports functions deployed as zip archives and fun
 
 2. Add the dd-trace-dotnet layer to your Lambda function:
 
-<!-- TODO: add ARN here -->
+  `arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-dotnet:{{< latest-lambda-layer-version layer="dotnet" >}}`
 
 3. Add your [Datadog API Key][2] to the Lambda function using the environment variable `DD_API_KEY`.
 
@@ -49,16 +96,10 @@ CORECLR_ENABLE_PROFILING = 1
 CORECLR_PROFILER = {846F5F1C-F9AE-4B07-969E-05C26BC060D8}
 CORECLR_PROFILER_PATH = /opt/datadog/Datadog.Trace.ClrProfiler.Native.so
 DD_DOTNET_TRACER_HOME = /opt/datadog
-DD_INTEGRATIONS = /opt/datadog/integrations.json
 ```
 
 [1]: /serverless/libraries_integrations/extension/
 [2]: https://app.datadoghq.com/organization-settings/api-keys
-
-{{% /tab %}}
-{{% tab "Container image" %}}
-
-<!-- TODO: Add instructions for container images here -->
 
 {{% /tab %}}
 {{< /tabs >}}
