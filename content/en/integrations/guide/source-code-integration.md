@@ -67,7 +67,7 @@ The git commit SHA is added to your telemetry.
 
 #### Other container setups
 
-<div class="alert alert-info">Container setups such as <code>containerd</code> and <code>CRI-O</code> running on Mesos or Swarm are not supported. Default to the non-containerized environment setup below.</div>
+<div class="alert alert-info">Container setups such as <code>CRI-O</code> running on Mesos or Swarm are not supported. Default to the non-containerized environment setup below.</div>
 
 #### Non-containerized environments
 
