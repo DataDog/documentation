@@ -26,17 +26,92 @@ Note that only the Datadog Lambda Extension only supports the `x86_64` architect
 Instrumenting .NET applications with the Datadog Lambda Extension is in beta.
 </div>
 
-The Datadog Lambda Extension supports functions deployed as zip archives and functions deployed as container images. Choose your deployment package type below to see the applicable installation instructions.
+Datadog offers many different ways to enable instrumentation for your serverless applications. Choose a method below that best suits your needs.
 
 {{< tabs >}}
 
 {{% tab "Serverless Framework" %}}
+1. Add the following layers and environment variables to each .NET Lambda Function you wish to instrument:
+
+```yml
+your-function:
+  layers:
+    - arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}
+    - arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-dotnet:{{< latest-lambda-layer-version layer="dd-trace-dotnet" >}}
+  environment:
+    DD_TRACE_ENABLED: true
+    DD_API_KEY: "<YOUR_DD_API_KEY>"
+    CORECLR_ENABLE_PROFILING: 1
+    CORECLR_PROFILER: "{846F5F1C-F9AE-4B07-969E-05C26BC060D8}"
+    CORECLR_PROFILER_PATH: "/opt/datadog/Datadog.Trace.ClrProfiler.Native.so"
+    DD_DOTNET_TRACER_HOME: "/opt/datadog"
+```
+
+Replace `<YOUR_DD_API_KEY>` with your Datadog API key on the [API Management page][1].
+
+2. Optionally add `service` and `env` tags with appropriate values to your function.
+
+[1]: https://app.datadoghq.com/organization-settings/api-keys
+
 {{ % /tab % }}
 
 {{% tab "AWS SAM" %}}
+
+1. Add the following layers and environment variables to each .NET Lambda Function you wish to instrument:
+
+```yml
+Type: AWS::Serverless::Function
+Properties:
+  Environment:
+    Variables:
+      DD_TRACE_ENABLED: true
+      DD_API_KEY: "<YOUR_DD_API_KEY>"
+      CORECLR_ENABLE_PROFILING: 1
+      CORECLR_PROFILER: "{846F5F1C-F9AE-4B07-969E-05C26BC060D8}"
+      CORECLR_PROFILER_PATH: "/opt/datadog/Datadog.Trace.ClrProfiler.Native.so"
+      DD_DOTNET_TRACER_HOME: "/opt/datadog"
+  Layers:
+    - arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}
+    - arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-dotnet:{{< latest-lambda-layer-version layer="dd-trace-dotnet" >}}
+```
+
+Replace `<YOUR_DD_API_KEY>` with your Datadog API key on the [API Management page][1].
+
+2. Optionally add `service` and `env` tags with appropriate values to your function.
+
+[1]: https://app.datadoghq.com/organization-settings/api-keys
+
 {{ % /tab % }}
 
 {{% tab "AWS CDK" %}}
+
+1. Add the following layers and environment variables to each .NET Lambda Function you wish to instrument:
+
+```typescript
+const fn = new lambda.Function(this, 'MyFunc', {
+  // ...
+  environment: {
+    DD_TRACE_ENABLED: true
+    DD_API_KEY: '<YOUR_DD_API_KEY>'
+    CORECLR_ENABLE_PROFILING: 1
+    CORECLR_PROFILER: '{846F5F1C-F9AE-4B07-969E-05C26BC060D8}'
+    CORECLR_PROFILER_PATH: '/opt/datadog/Datadog.Trace.ClrProfiler.Native.so'
+    DD_DOTNET_TRACER_HOME: '/opt/datadog'
+  }
+});
+
+fn.addLayers(
+    lambda.LayerVersion.fromLayerVersionArn(this, 'extension', 'arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}'),
+    lambda.LayerVersion.fromLayerVersionArn(this, 'dd-trace-dotnet', 'arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-dotnet:{{< latest-lambda-layer-version layer="dd-trace-dotnet" >}}'),
+)
+```
+
+Replace `<YOUR_DD_API_KEY>` with your Datadog API key on the [API Management page][1].
+
+2. Optionally add `service` and `env` tags with appropriate values to your function.
+
+[1]: https://app.datadoghq.com/organization-settings/api-keys
+
 {{ % /tab % }}
 
 {{% tab "Container image" %}}
@@ -73,7 +148,6 @@ Replace `<TRACER_VERSION>` with the version number of `dd-trace-dotnet` you woul
 [3]: https://github.com/DataDog/dd-trace-dotnet/releases
 
 {{% /tab %}}
-
 {{% tab "Custom" %}}
 
 1. Add the [Datadog Lambda Extension][1] layer to your Lambda function:
