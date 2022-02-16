@@ -123,7 +123,7 @@ The RUM SDK instantly collects errors that occur in user sessions. When a given 
 
 **Note**: Only source maps with the `.js.map` extension work to correctly unminify stack traces in Error Tracking. Source maps with other extensions such as `.mjs.map` are accepted but do not unminify stack traces.
 
-<div class="alert alert-info">Any JavaScript source file can be served from different subdomains depending on the environment (such as staging or production). You can upload the related source map once and make it work for multiple subdomains by using the absolute prefix path instead of the full URL. For example, specify <code>/static/js</code> instead of <code>https://hostname.com/static/js</code>).</div>
+<div class="alert alert-info">If you are serving the same JavaScript source files from different subdomains, upload the related source map once and make it work for multiple subdomains by using the absolute prefix path instead of the full URL. For example, specify <code>/static/js</code> instead of <code>https://hostname.com/static/js</code>).</div>
 
 If you have successfully uploaded source maps but they do not appear in the RUM dashboard, see [RUM Browser Troubleshooting][2].
 
