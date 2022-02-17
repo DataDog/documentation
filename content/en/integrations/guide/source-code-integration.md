@@ -10,9 +10,9 @@ further_reading:
 
 ## Overview
 
-The source code integration is an integration with Git that allows you to link your telemetry (such as stack traces) with your source code.
+The source code integration is an integration with Git that enables you to link your telemetry (such as stack traces) with your source code.
 
-{{< img src="integrations/guide/source_code_integration/link-to-github.png" alt="Inline code snippet" style="width:90%;">}}
+{{< img src="integrations/guide/source_code_integration/link-to-github.png" alt="Inline code snippet of a Java RuntimeException with a button to view the code in Github" style="width:90%;">}}
 
 Combined with the GitHub Apps integrations, you can see inline code snippets in your errors. For more information, see [Inline Source Code](#inline-source-code).
 
@@ -27,10 +27,10 @@ Combined with the GitHub Apps integrations, you can see inline code snippets in 
 <div class="alert alert-info">
 The source code integration supports Go and all JVM languages.
 <br>
-You need to be using Datadog Agent 7.33.0 or higher.
+Datadog Agent 7.33.0 or higher is required.
 </div>
 
-To map telemetry data with your source code, you need to:
+To map telemetry data with your source code:
 
 1. Add `git.commit.sha` and `git.repository_url` tags to your containers, or directly on your telemetry.
 2. Upload metadata about your git repository by running [`datadog-ci git-metadata upload`][1] in your CI pipeline.
@@ -47,7 +47,7 @@ To link data to a specific commit, tag your telemetry with a `git.commit.sha` ta
 This approach requires Docker, or containerd >= 1.5.6. For other container setups, see "Other".
 </div>
 
-If you are running your app in containers, Datadog can extract source code information directly from your images' Docker labels. During build time, follow the [Open Containers standard][1] to add the git commit SHA and repository URL as a Docker labels:
+If you are running your app in containers, Datadog can extract source code information directly from your images' Docker labels. During build time, follow the [Open Containers standard][1] to add the git commit SHA and repository URL as Docker labels:
 
 ```
 docker build . \
