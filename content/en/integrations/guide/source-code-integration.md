@@ -32,7 +32,7 @@ You need to be using Datadog Agent 7.33.0 or higher.
 
 To map telemetry data with your source code, you need to:
 
-1. Add a `git.commit.sha` tag to your containers, or directly on your telemetry.
+1. Add `git.commit.sha` and `git.repository_url` tags to your containers, or directly on your telemetry.
 2. Upload metadata about your git repository by running [`datadog-ci git-metadata upload`][1] in your CI pipeline.
 3. Optionally, [install a GitHub App][2] to display inline source code snippets.
 
@@ -43,10 +43,13 @@ To link data to a specific commit, tag your telemetry with a `git.commit.sha` ta
 {{< tabs >}}
 {{% tab "Docker and containerd" %}}
 
-If you are running your app in containers, Datadog can extract the commit SHA directly from your images' Docker labels. During build time, follow the [Open Containers standard][1] to add the git commit SHA as a Docker label:
+If you are running your app in containers, Datadog can extract source code information directly from your images' Docker labels. During build time, follow the [Open Containers standard][1] to add the git commit SHA and repository URL as a Docker labels:
 
 ```
-docker build -t my-application --label org.opencontainers.image.revision=$(git rev-parse HEAD)
+docker build . \
+  -t my-application \
+  --label org.opencontainers.image.revision=$(git rev-parse HEAD) \
+  --label org.opencontainers.image.source=https://git-provider.example/me/my-repo
 ```
 
 [1]: https://github.com/opencontainers/image-spec/blob/859973e32ccae7b7fc76b40b762c9fff6e912f9e/annotations.md#pre-defined-annotation-keys
@@ -56,10 +59,10 @@ docker build -t my-application --label org.opencontainers.image.revision=$(git r
 If you use Kubernetes, tag your deployed pod with a pod annotation using [Datadog's Tag Autodiscovery][1]:
 
 ```
-ad.datadoghq.com/tags: '{"git.commit.sha": "<FULL_GIT_COMMIT_SHA>"}'
+ad.datadoghq.com/tags: '{"git.commit.sha": "<FULL_GIT_COMMIT_SHA>", "git.repository_url": "<REPOSITORY_URL>"}'
 ```
 
-The git commit SHA is added to your telemetry.
+The git commit SHA and repository URL are added to your telemetry.
 
 [1]: https://docs.datadoghq.com/agent/kubernetes/tag/?tab=containerizedagent#tag-autodiscovery
 {{% /tab %}}
@@ -71,12 +74,12 @@ The git commit SHA is added to your telemetry.
 
 #### Non-containerized environments
 
-For non-containerized environments, manually tag your traces, spans, and profiles with the git commit SHA.
+For non-containerized environments, manually tag your traces, spans, and profiles with the git commit SHA and repository URL.
 
 To tag your traces, spans, and profiles with `git.commit.sha`, configure the tracer with the `DD_TAGS` environment variable:
 
 ```
-export DD_TAGS="git.commit.sha:<GIT_COMMIT_SHA>"
+export DD_TAGS="git.commit.sha:<GIT_COMMIT_SHA> git.repository_url=<REPOSITORY_URL>"
 ./my-application start
 ```
 
