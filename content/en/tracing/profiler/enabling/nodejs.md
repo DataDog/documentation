@@ -26,6 +26,8 @@ The profiler is shipped within Datadog tracing libraries. If you are already usi
 
 The Datadog Profiler requires at least Node.js 12, but Node.js 16 or higher is recommended. **If you use a version of Node.js earlier than 16, some applications see tail latency spikes every minute when starting the next profile.**
 
+Profiling is not supported on serverless platforms.
+
 ## Installation
 
 To begin profiling applications:

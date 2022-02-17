@@ -41,6 +41,8 @@ Datadog .NET Profiler is currently in public beta. Datadog recommends evaluating
 
 Any language that targets the .NET runtime, such as C#, F#, and Visual Basic.
 
+Profiling is not supported on serverless platforms.
+
 ## Installation
 
 <div class="alert alert-warning">
@@ -59,7 +61,7 @@ Any language that targets the .NET runtime, such as C#, F#, and Visual Basic.
 1. Set needed environment variables to configure and enable Profiler. To enable the Profiler for IIS applications, it is required to set the `DD_PROFILING_ENABLED`, `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` environment variables in the Registry under <code>HKLM\System\CurrentControlSet\Services\WAS</code> and <code>HKLM\System\CurrentControlSet\Services\W3SVC</code> nodes.
 
    **With the Registry Editor:**
-   
+
    In the Registry Editor, modify the multi-string value called `Environment` in the `HKLM\System\CurrentControlSet\Services\WAS` and `HKLM\System\CurrentControlSet\Services\W3SVC` nodes and set the value data as follows:
 
    For .NET Core and .NET 5+:
@@ -70,9 +72,9 @@ Any language that targets the .NET runtime, such as C#, F#, and Visual Basic.
    DD_ENV=production
    DD_VERSION=1.2.3
    ```
-   
+
    {{< img src="tracing/setup/dotnet/RegistryEditorCoreIIS.png" alt="Using the Registry Editor to create environment variables for a .NET Core application in IIS" style="width:90%" >}}
-   
+
    For .NET Framework:
    ```text
    COR_ENABLE_PROFILING=1

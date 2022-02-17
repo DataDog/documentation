@@ -24,7 +24,7 @@ The Datadog PHP Profiler is in public beta. Datadog recommends evaluating the pr
 
 The Datadog Profiler requires at least PHP 7.1, on 64-bit Linux.
 
-The following are **not** supported: 
+The following are **not** supported:
 - PHP 8.1
 - ZTS builds of PHP
 - PHP debug builds
@@ -46,6 +46,8 @@ Version 3.13 or newer of Alpine Linux is required because the profiler is built 
 
 {{% /tab %}}
 {{< /tabs >}}
+
+Profiling is not supported on serverless platforms.
 
 ## Installation
 

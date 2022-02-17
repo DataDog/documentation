@@ -21,7 +21,9 @@ The Datadog Profiler for Linux lets you collect profile data for applications ru
 
 ## Requirements
 
-The Datadog Profiler requires Linux kernel v4.17+ on an `amd64` compatible processor. It does not support macOS, BSD, Windows, or other operating systems besides Linux v4.17 or later. 
+The Datadog Profiler requires Linux kernel v4.17+ on an `amd64` compatible processor. It does not support macOS, BSD, Windows, or other operating systems besides Linux v4.17 or later.
+
+Profiling is not supported on serverless platforms.
 
 ## Installation
 

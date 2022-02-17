@@ -24,6 +24,8 @@ The Datadog Profiler requires [JDK Flight Recorder][2]. The Datadog Profiler lib
 
 All JVM-based languages, such as Java, Scala, Groovy, Kotlin, and Clojure are supported.
 
+Profiling is not supported on serverless platforms.
+
 ## Installation
 
 To begin profiling applications:
@@ -42,7 +44,7 @@ To begin profiling applications:
    {{< tabs >}}
 {{% tab "Command arguments" %}}
 
-Invoke your service: 
+Invoke your service:
 ```diff
 java \
     -javaagent:dd-java-agent.jar \
