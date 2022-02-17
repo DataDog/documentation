@@ -143,9 +143,15 @@ spec:
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**: In some setups, DNS resolution for `spec.nodeName` inside Pods may not work in AKS.
-This has been reported on all AKS Windows nodes and when cluster is setup in a Virtual Network using custom DNS on Linux nodes.
-In this case, removing the `agent.config.kubelet.host` field (defaults to `status.hostIP`) and using `tlsVerify: false` is required.
+**Notes**: 
+
+- In some setups, DNS resolution for `spec.nodeName` inside Pods may not work in AKS. This has been reported on all AKS Windows nodes and when cluster is setup in a Virtual Network using custom DNS on Linux nodes. In this case, removing the `agent.config.kubelet.host` field (defaults to `status.hostIP`) and using `tlsVerify: false` is **required**. Using the `DD_KUBELET_TLS_VERIFY=false` environment variable also resolves this issue. However, note that this disables SSL authentication.
+
+  ```
+  env:
+    - name: DD_KUBELET_TLS_VERIFY
+      value: "false"
+  ```
 
 ## Google Kubernetes Engine (GKE) {#GKE}
 
@@ -158,13 +164,15 @@ Depending on the operation mode of your cluster, the Datadog Agent needs to be c
 
 ### Standard
 
-Since Agent 7.26, no specific configuration is required for GKE anymore (whether you run `Docker` and/or `containerd`).
+Since Agent 7.26, no specific configuration is required for GKE (whether you run `Docker` or `containerd`).
 
 **Note**: When using COS (Container Optimized OS), the eBPF-based `OOM Kill` and `TCP Queue Length` checks are not supported due to missing Kernel headers.
 
 ### Autopilot
 
-GKE Autopilot comes with hardened security and limited Nodes access. Thus requiring some specific configuration.
+GKE Autopilot requires some configuration, shown below.
+
+Datadog recommends that you specify resource limits for the Agent container. Autopilot sets a relatively low default limit (50m CPU, 100Mi memory) that may quickly lead the Agent container to OOMKill depending on your environment. If applicable, also specify resource limits for the Trace Agent and Process Agent containers.
 
 {{< tabs >}}
 {{% tab "Helm" %}}
@@ -183,16 +191,42 @@ datadog:
   # Avoid deploying kube-state-metrics chart.
   # The new `kubernetes_state_core` doesn't require to deploy the kube-state-metrics anymore.
   kubeStateMetricsEnabled: false
+  
+  containers:
+    agent:
+      # resources for the Agent container
+      resources:
+        requests:
+          cpu: 200m
+          memory: 256Mi
+        limits:
+          cpu: 200m
+          memory: 256Mi
+
+    traceAgent:
+      # resources for the Trace Agent container
+      resources:
+        requests:
+          cpu: 100m
+          memory: 200Mi
+        limits:
+          cpu: 100m
+          memory: 200Mi
+
+    processAgent:
+      # resources for the Process Agent container
+      resources:
+        requests:
+          cpu: 100m
+          memory: 200Mi
+        limits:
+          cpu: 100m
+          memory: 200Mi
 
 providers:
   gke:
     autopilot: true
 ```
-
-{{% /tab %}}
-{{% tab "Operator" %}}
-
-Not supported yet. Will be available with the Datadog Operator v0.7.0.
 
 {{% /tab %}}
 {{< /tabs >}}

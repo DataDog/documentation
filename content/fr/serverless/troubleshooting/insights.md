@@ -1,28 +1,28 @@
 ---
-title: Informations exploitables pour vos applications sans serveur
+title: Insights Serverless
 kind: documentation
 further_reading:
   - link: https://www.datadoghq.com/blog/serverless-insights/
     tag: Blog
-    text: En savoir plus sur les informations exploitables liées à vos applications sans serveur
+    text: En savoir plus sur les Insights Serverless
 aliases:
   - /fr/serverless/insights/
 ---
-{{< img src="serverless/serverless_actionable_insights_detail.png" alt="Informations exploitables générées automatiquement pour vos applications sans serveur" >}}
+{{< img src="serverless/serverless_actionable_insights_detail.png" alt="Insights générées automatiquement pour vos applications sans serveur" >}}
 
-Datadog génère automatiquement des suggestions afin de corriger des erreurs, résoudre des problèmes de performance et optimiser les coûts de vos applications sans serveur.
+Datadog génère automatiquement des suggestions afin de vous aider à corriger les erreurs, résoudre les problèmes de performance et optimiser les coûts de vos applications sans serveur.
 
 ## Configuration
 
-Datadog se base sur des métriques AWS CloudWatch, des métriques AWS Lambda optimisées par Datadog et des [lignes de log Lambda `REPORT`][1] pour vous fournir des informations exploitables. Pour bénéficier de ces informations, suivez les étapes suivantes :
+Datadog se base sur les métriques AWS CloudWatch, les métriques AWS Lambda optimisées de Datadog et les [lignes de log Lambda `REPORT`][1] pour vous fournir des informations exploitables, ou insights. Pour bénéficier de ces informations, suivez ces étapes :
 
  1. Configurez l'intégration [Amazon Web Services][2].
  2. Configurez le [Forwarder Datadog][3] et vérifiez que vos logs `REPORT` Lambda sont indexés dans Datadog.
  3. Activez les [métriques Lambda optimisées][4] pour vos fonctions.
 
-**Remarque** : une fois l'[intégration AWS][2] configurée, Datadog génère par défaut des informations exploitables sur les [taux d'erreur élevés](#taux-d-erreur-eleves), les [durées élevées](#durees-elevees), les [appels limités](#appels-limites) et l'[âge élevé de l'itérateur](#age-eleve-de-l-iterateur). Pour bénéficier de toutes les autres informations exploitables, notamment celles générées par des appels individuels, vous devez utiliser le [Forwarder Datadog][3] et les [métriques Lambda optimisées][4]
+**Remarque** : une fois l'[intégration AWS][2] configurée, Datadog génère par défaut des insights sur les [taux d'erreur élevés](#taux-d-erreur-eleves), les [durées élevées](#durees-elevees), les [appels limités](#appels-limites) et l'[âge élevé de l'itérateur](#age-eleve-de-l-iterateur). Pour bénéficier de toutes les insights, notamment celles générées par des appels individuels, vous devez utiliser le [Forwarder Datadog][3] et les [métriques Lambda optimisées][4]
 
-## Informations exploitables générées
+## Insights générées
 
 ### Erreurs
 

@@ -4,10 +4,10 @@ kind: documentation
 further_reading:
 - link: "/events/explorer/"
   tag: "Documentation"
-  text: "Datadog events explorer"
+  text: "Datadog Events Explorer"
 - link: "/monitors/create/types/event/"
   tag: "Documentation"
-  text: "Event monitors"
+  text: "Event Monitors"
 aliases:
     - /developers/events/
 ---

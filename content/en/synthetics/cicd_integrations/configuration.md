@@ -12,6 +12,9 @@ further_reading:
 - link: "/synthetics/testing_tunnel"
   tag: "Documentation"
   text: "Learn about the Testing Tunnel"
+- link: https://www.datadoghq.com/blog/datadog-github-action-synthetics-ci-visibility/
+  tag: "Blog"
+  text: "Use Datadog's GitHub Action to add Synthetic testing to workflows"
 ---
 
 ## Overview

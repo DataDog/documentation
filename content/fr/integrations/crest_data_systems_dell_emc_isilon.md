@@ -37,7 +37,7 @@
 - "Supported OS::Windows"
 - "Category::Marketplace"
 - "Category::Data Store"
-- "Catégorie::Surveillance"
+- "Category::Monitoring"
 - "Offering::Integration"
 "dependencies": []
 "display_on_public_website": true

@@ -386,6 +386,7 @@ evaluate_missing_metrics:
   environment: "live"
   script:
     - chmod +x ./local/bin/py/missing_metrics.py && ./local/bin/py/missing_metrics.py -k $(get_secret 'dd-demo-api-key') -p $(get_secret 'dd-demo-app-key') -a $(get_secret 'dd_api_key') -b $(get_secret 'dd-app-key')
+  when: manual
   only:
     - master
 

@@ -9,7 +9,7 @@ further_reading:
   text: "Review the main categories of data submitted to Datadog"
 ---
 
-<div class="alert alert-info">This page is about the security of Datadog; if you're looking for the Cloud SIEM product, see the <a href="/security_monitoring" target="_blank">Cloud SIEM section</a>.</div>
+<div class="alert alert-info">This page is about the security of Datadog; if you're looking for the Cloud SIEM product, see the <a href="/cloud_siem" target="_blank">Cloud SIEM section</a>.</div>
 
 This article is part of a [series on data security][1].
 
@@ -42,7 +42,7 @@ These features are not available to customers who have signed Datadog's BAA:
 * You cannot [share][7] logs, security signals, or traces from the explorer through web integrations.
 * Security rules cannot include triggering group-by values in notification title.
 * Security rules cannot include message template variables.
-* Security rules cannot notify by webhooks.
+* Security rules cannot be notified by webhooks.
 
 If you have any questions about how the Log Management Service satisfies the applicable requirements under HIPAA, contact your account manager.
 

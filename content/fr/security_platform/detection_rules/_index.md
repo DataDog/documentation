@@ -19,7 +19,7 @@ Les règles de détection définissent la logique conditionnelle appliquée à l
 
 Chaque option de surveillance inclut des [règles de détection par défaut][1]. Il vous suffit de configurer une intégration pour pouvoir les utiliser.
 
-- La solution [Cloud SIEM][2] tire profit de la détection des logs pour analyser en temps réel les logs ingérés. Vous pouvez également créer des [règles personnalisées][3] pour répondre aux besoins de votre environnement.
+- La solution [Security Monitoring][2] tire profit de la détection des logs pour analyser en temps réel les logs ingérés. Vous pouvez également créer des [règles personnalisées][3] pour répondre aux besoins de votre environnement.
 
 - La solution [Cloud Security Posture Management][4] exploite des règles de configuration de cloud et d'infrastructure pour analyser l'intégrité de votre environnement cloud.
 

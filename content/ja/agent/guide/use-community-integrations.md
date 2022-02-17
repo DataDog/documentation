@@ -13,7 +13,7 @@ further_reading:
 ---
 ## 概要
 
-Datadog Agent のコミュニティ開発のインテグレーションは、Datadog の [Integrations-extra][1] GitHub リポジトリに格納されています。これらはAgent にはパッケージ化されていませんが、アドオンとしてインストールできます。
+Datadog Agent のコミュニティ開発のインテグレーションは、Datadog の [Integrations-extra][1] Github リポジトリに格納されています。これらはAgent にはパッケージ化されていませんが、アドオンとしてインストールできます。
 
 ## セットアップ
 

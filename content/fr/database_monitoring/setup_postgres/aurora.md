@@ -8,7 +8,7 @@ further_reading:
     text: Intégation Postgres basique
 ---
 {{< site-region region="us5,gov" >}}
-<div class="alert alert-warning">La surveillance de bases de données n'est pas prise en charge pour ce site.</div>
+<div class="alert alert-warning">La solution Database Monitoring n'est pas prise en charge pour ce site.</div>
 {{< /site-region >}}
 
 La surveillance des bases de données vous permet de bénéficier d'une visibilité complète sur vos bases de données Postgres, en exposant des métriques de requête, des échantillons de requête, des plans d'exécution, des états, des failovers et des événements de base de données.

@@ -165,6 +165,9 @@ The Go Tracer prints one of two possible diagnostic lines, one for when the Agen
 {{< /programming-lang >}}
 {{< programming-lang lang="nodejs" >}}
 
+Startup logs are disabled by default starting in verson 2.X+ of the tracer. They can enabled using the environment variable `DD_TRACE_STARTUP_LOGS=true`.
+
+
 **Configuration:**
 
 ```text

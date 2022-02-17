@@ -17,7 +17,7 @@ La solution Cloud Security Posture Management n'est pas disponible pour ce si
 
 ## Présentation
 
-En plus de passer en revue et de corriger directement les problèmes de configuration cloud sur la page des [résultats][1], vous pouvez mettre en place des notifications en cas d'échec et faire en sorte que les signaux soient mis en corrélation avec les problèmes de configuration au même endroit que les menaces en temps réel générées par les solutions [Cloud SIEM][2] et [Cloud Workload Security][3].
+En plus de passer en revue et de corriger directement les problèmes de configuration cloud sur la page des [résultats][1], vous pouvez mettre en place des notifications en cas d'échec et faire en sorte que les signaux soient mis en corrélation avec les problèmes de configuration au même endroit que les menaces en temps réel générées par les solutions [Security Monitoring][2] et [Cloud Workload Security][3].
 
 ## Limiter les alertes superflues avec les signaux de sécurité
 

@@ -10,7 +10,7 @@ Par défaut, lorsque vous vous abonnez avec une carte bancaire, vous optez pour 
 
 ## Paiement
 
-Datadog encaisse le paiement aux alentours du 10e jour ouvrable de chaque mois. En cas d'échec du paiement, nous effectuons jusqu'à deux nouvelles tentatives. Si vous receviez auparavant des factures et que vous avez récemment opté pour des paiements par carte bancaire, contactez votre [chargé de compte][2] pour vérifier que vos frais en suspens sont en attente de paiement. Les paiements à venir sont automatiquement débités. Vous ne pouvez enregistrer qu'un seul de paiement à la fois.
+Datadog encaisse le paiement aux alentours du 10e jour ouvrable de chaque mois. En cas d'échec du paiement, nous effectuons jusqu'à deux nouvelles tentatives. Si vous receviez auparavant des factures et que vous avez récemment opté pour des paiements par carte bancaire, contactez votre [chargé de compte][2] pour vérifier que vos frais en suspens sont en attente de paiement. Les paiements à venir sont automatiquement débités. Vous ne pouvez enregistrer qu'un seul mode de paiement à la fois.
 
 ## Changer de carte bancaire
 

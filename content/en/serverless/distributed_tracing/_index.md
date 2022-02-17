@@ -18,6 +18,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-serverless-view/"
   tag: "Blog"
   text: "Monitor your serverless stack in the Serverless view"
+- link: "https://www.datadoghq.com/blog/monitor-aws-fully-managed-services-datadog-serverless-monitoring/"
+  tag: "Blog"
+  text: "Datadog Serverless Monitoring for AWS fully managed services"
 ---
 
 {{< img src="tracing/serverless_functions/ServerlessDistributedTrace.png" alt="Trace Serverless Functions"  style="width:100%;">}}
@@ -52,11 +55,16 @@ The Datadog Lambda Library and tracing libraries for Python and Node.js support:
 - Installation without any code changes using Serverless Framework, AWS SAM and AWS CDK integrations.
 - Tracing HTTP requests invoking downstream Lambda functions or containers.
 - Tracing consecutive Lambda invocations made via the AWS SDK.
-- Tracing asynchronous Lambda invocations through AWS SQS.
+- Tracing asynchronous Lambda invocations through AWS Managed Services
+  - API Gateway
+  - SQS
+  - SNS
+  - SNS and SQS direct integration
+  - Kinesis
+  - EventBridge
 - Tracing dozens of additional out-of-the-box [Python][4] and [Node.js][5] libraries.
-- Tracing non-HTTP requests made through SNS, Kinesis, EventBridge, MQTT and more (requires additional instrumention outlined [here][6]).
 
-For Python and Node.js serverless applications, Datadog recommends you [install Datadog's tracing libraries][7]. If your application requires AWS X-Ray active tracing in AWS managed services such as API Gateway or Step Functions, Datadog recommends you augment AWS X-Ray traces with Datadog APM by configuring _both_ AWS X-Ray and Datadog APM tracing libraries as described in [Serverless Trace Merging][8].
+For Python and Node.js serverless applications, Datadog recommends you [install Datadog's tracing libraries][7]. If your application requires AWS X-Ray active tracing in AWS managed services such as AppSync or Step Functions, Datadog recommends you augment AWS X-Ray traces with Datadog APM by configuring _both_ AWS X-Ray and Datadog APM tracing libraries as described in [Serverless Trace Merging][8].
 
 If you are already tracing your serverless functions with X-Ray and want to continue using X-Ray, you can [install the AWS X-Ray integration][3].
 

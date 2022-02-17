@@ -18,7 +18,7 @@ further_reading:
     tag: Documentation
     text: Considérations de sécurité supplémentaires
 ---
-<div class="alert alert-info">Cette page est consacrée à la sécurité de Datadog ; si vous recherchez le produit Cloud SIEM, consultez la section <a href="/security_monitoring" target="_blank">Cloud SIEM</a>.</div>
+<div class="alert alert-info">Cette page est consacrée à la sécurité de Datadog ; si vous recherchez le produit Cloud SIEM, consultez la section <a href="/security_platform/cloud_siem" target="_blank">Cloud SIEM</a>.</div>
 
 Datadog permet aux clients d'envoyer des données de différentes façons, par exemple, via l'[Agent][1], l'[API publique][2] et les [intégrations][3]. Cet article décrit les principales catégories de données que les clients peuvent transmettre à Datadog pour l'utilisation prévue de ce produit, et met en avant des scénarios dans lesquels les données transmises peuvent contenir des données personnelles. Consultez notre [page relative à la sécurité][4] et notre [politique de confidentialité][5] pour en savoir plus.
 

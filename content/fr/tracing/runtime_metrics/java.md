@@ -39,7 +39,7 @@ Si vous exécutez l'Agent en tant que conteneur, vérifiez que `DD_DOGSTATSD_NON
 
 ## Données collectées
 
-Les métriques suivantes sont recueillies par défaut après l'activation des métriques JVM.
+Les métriques suivantes sont recueillies par défaut pour chaque process JVM après l'activation des métriques JVM.
 
 {{< get-metrics-from-git "java" >}}
 

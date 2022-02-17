@@ -8,7 +8,7 @@ further_reading:
 ---
 ## Présentation
 
-La solution [Cloud SIEM][1] vous permet de définir des règles de détection qui déclenchent des workflows de correction automatique. À l'aide de l'[intégration dédiée][2], vous pouvez configurer des webhooks afin de transmettre des charges utiles aux services à automatiser à chaque déclenchement d'une [règle de détection][3]. Chaque charge utile de webhook contient des informations à propos de l'événement à l'origine du déclenchement ainsi qu'un message personnalisé pouvant servir à initier des services en aval. Vous pouvez automatiser des commandes pour tous les services disposant d'une URL de webhook. Les outils d'orchestration de la sécurité et de réponse automatique acceptent les requêtes HTTP entrantes. Vos webhooks initient les workflows que vous avez définis.
+La solution [Security Monitoring][1] vous permet de définir des règles de détection qui déclenchent des workflows de correction automatique. À l'aide de l'[intégration dédiée][2], vous pouvez configurer des webhooks afin de transmettre des charges utiles aux services à automatiser à chaque déclenchement d'une [règle de détection][3]. Chaque charge utile de webhook contient des informations à propos de l'événement à l'origine du déclenchement ainsi qu'un message personnalisé pouvant servir à initier des services en aval. Vous pouvez automatiser des commandes pour tous les services disposant d'une URL de webhook. Les outils d'orchestration de la sécurité et de réponse automatique acceptent les requêtes HTTP entrantes. Vos webhooks initient les workflows que vous avez définis.
 
 Choisissez un scénario de sécurité ci-dessous pour commencer à automatiser la correction.
 
@@ -54,7 +54,7 @@ Voici un exemple de charge utile transmise par un webhook pertinent lorsqu'un si
 
 ## Utilisation abusive ou inappropriée d'une application
 
-Grâce à la solution Cloud SIEM Datadog, vous pouvez identifier des tendances d'[abus ou de fraude][6] dans l'ensemble de votre application. Par exemple, vous pouvez définir une [règle de détection][7] qui se déclenche lorsqu'un utilisateur tente à plusieurs reprises d'acheter un article dans votre application avec des coordonnées bancaires non valides. Configurez ensuite un webhook qui envoie une charge utile avec des instructions de correction au service qui désactivera les identifiants de l'utilisateur.
+Grâce à la solution Security Monitoring Datadog, vous pouvez identifier des tendances d'[abus ou de fraude][6] dans l'ensemble de votre application. Par exemple, vous pouvez définir une [règle de détection][7] qui se déclenche lorsqu'un utilisateur tente à plusieurs reprises d'acheter un article dans votre application avec des coordonnées bancaires non valides. Configurez ensuite un webhook qui envoie une charge utile avec des instructions de correction au service qui désactivera les identifiants de l'utilisateur.
 
 Voici un exemple de charge utile transmise par un webhook pertinent lorsqu'un signal de sécurité est généré par Datadog :
 

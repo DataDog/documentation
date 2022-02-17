@@ -22,7 +22,7 @@ This page outlines the basic features of the Datadog Agent for Red Hat. If you h
 
 Packages are available for 64-bit x86 and Arm v8 architectures. For other architectures, use the source install.
 
-**Note**: RedHat 6 and above are supported.
+**Note**: RedHat/CentOS 6 and above are supported. Since Agent 6.33.0/7.33.0, AlmaLinux/Rocky 8 and above are supported. 
 
 ## Commands
 

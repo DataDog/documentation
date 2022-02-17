@@ -1,16 +1,16 @@
 ---
-title: Configuration de Cloud SIEM pour AWS
+title: Configuration de Security Monitoring pour AWS
 kind: guide
 ---
 
 ## Présentation
 
-La solution Cloud SIEM de Datadog applique des règles de détection à l'ensemble des logs traités. Les logs des services AWS sont recueillis par une fonction Lambda Datadog. Cette dernière se déclenche sur les compartiments S3 et transmet les logs à Datadog. Suivez les instructions de configuration ci-dessous pour commencer à utiliser cette fonctionnalité :
+La solution Security Monitoring de Datadog applique des règles de détection à l'ensemble des logs traités. Les logs des services AWS sont recueillis par une fonction Lambda Datadog. Cette dernière se déclenche sur les compartiments S3 et transmet les logs à Datadog. Suivez les instructions de configuration ci-dessous pour commencer à utiliser cette fonctionnalité :
 
 ## Configuration
 
 1. Accédez à la [page Security Configuration Setup][1] dans l'application Datadog.
-2. Sélectionnez **Cloud SIEM**.
+2. Sélectionnez **Security Monitoring**.
 3. Sous **Secure your cloud environment**, sélectionnez AWS.
 4. Terminez la configuration de la section **Detect threats with cloud logs**.
 5. (Facultatif) Terminez la configuration de la section **Secure your hosts and containers**.

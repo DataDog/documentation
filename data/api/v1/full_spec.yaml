@@ -712,7 +712,7 @@ components:
             the dedicated [Request JSON schema documentation](https://docs.datadoghq.com/dashboards/graphing_json/request_json)\n
             to learn how to build the `REQUEST_SCHEMA`."
           example:
-          - q/apm_query/log_query: <METRIC_1>{<SCOPE_1>}
+          - q: <METRIC_1>{<SCOPE_1>}
           items:
             $ref: '#/components/schemas/ChangeWidgetRequest'
           maxItems: 1
@@ -2025,16 +2025,6 @@ components:
 
             Any tags associated with the host are also applied to this event.'
           type: string
-        id:
-          description: Integer ID of the event.
-          format: int64
-          readOnly: true
-          type: integer
-        payload:
-          description: Payload of the event.
-          example: '{}'
-          readOnly: true
-          type: string
         priority:
           $ref: '#/components/schemas/EventPriority'
         related_event_id:
@@ -2070,10 +2060,6 @@ components:
         title:
           description: The event title.
           example: Did you hear the news today?
-          type: string
-        url:
-          description: URL of the event.
-          readOnly: true
           type: string
       required:
       - title
@@ -2612,6 +2598,7 @@ components:
       description: A formula and functions metrics query.
       example:
         data_source: metrics
+        name: my_query
         query: avg:system.cpu.user{*}
       properties:
         aggregator:
@@ -2740,7 +2727,10 @@ components:
           example: '@browser.name:Chrome'
           type: string
         steps:
-          $ref: '#/components/schemas/FunnelSteps'
+          description: List of funnel steps.
+          items:
+            $ref: '#/components/schemas/FunnelStep'
+          type: array
       required:
       - query_string
       - data_source
@@ -2763,24 +2753,21 @@ components:
       type: string
       x-enum-varnames:
       - RUM
-    FunnelSteps:
-      description: List of funnel steps.
-      items:
-        description: The funnel step.
-        properties:
-          facet:
-            description: The facet of the step.
-            example: '@view.name'
-            type: string
-          value:
-            description: The value of the step.
-            example: /apm/home
-            type: string
-        required:
-        - facet
-        - value
-        type: object
-      type: array
+    FunnelStep:
+      description: The funnel step.
+      properties:
+        facet:
+          description: The facet of the step.
+          example: '@view.name'
+          type: string
+        value:
+          description: The value of the step.
+          example: /apm/home
+          type: string
+      required:
+      - facet
+      - value
+      type: object
     FunnelWidgetDefinition:
       description: 'The funnel visualization displays a funnel of user sessions that
         maps a sequence of view navigation and user interaction in your application.
@@ -2790,7 +2777,6 @@ components:
         requests:
           description: Request payload used to query items.
           example:
-          - request_type: funnel
           - query:
               data_source: rum
               query_string: '@browser.name:Chrome'
@@ -2799,6 +2785,7 @@ components:
                 value: /logs
               - facet: '@view.name'
                 value: /apm/home
+            request_type: funnel
           items:
             $ref: '#/components/schemas/FunnelWidgetRequest'
           maxItems: 1
@@ -2931,7 +2918,9 @@ components:
 
             for information about building the `REQUEST_SCHEMA`.'
           example:
-          - rum_query: <METRIC_1>{<SCOPE_1>}
+          - rum_query:
+              search:
+                query: <METRIC_1>{<SCOPE_1>}
           items:
             $ref: '#/components/schemas/GeomapWidgetRequest'
           maxItems: 1
@@ -3154,7 +3143,7 @@ components:
           example: payment
           type: string
       required:
-      - name
+      - message
       type: object
     HTTPMethod:
       description: The HTTP method.
@@ -3692,6 +3681,7 @@ components:
       - browser_usage
       - container_usage
       - custom_timeseries_usage
+      - estimated_indexed_logs_usage
       - fargate_usage
       - functions_usage
       - indexed_logs_usage
@@ -3708,6 +3698,7 @@ components:
       - BROWSER_USAGE
       - CONTAINER_USAGE
       - CUSTOM_TIMESERIES_USAGE
+      - ESTIMATED_INDEXED_LOGS_USAGE
       - FARGATE_USAGE
       - FUNCTIONS_USAGE
       - INDEXED_LOGS_USAGE
@@ -4053,13 +4044,13 @@ components:
         requests:
           description: Request payload used to query items.
           example:
-          - response_format: event_list
           - columns:
             - field: timestamp
               width: auto
-          - query:
+            query:
               data_source: issue_stream
               query_string: '@data_source:APM'
+            response_format: event_list
           items:
             $ref: '#/components/schemas/ListStreamWidgetRequest'
           maxItems: 1
@@ -5869,6 +5860,141 @@ components:
       - FIREFOX_LAPTOP_LARGE
       - FIREFOX_TABLET
       - FIREFOX_MOBILE_SMALL
+    MonitorFormulaAndFunctionEventAggregation:
+      description: Aggregation methods for event platform queries.
+      enum:
+      - count
+      - cardinality
+      - median
+      - pc75
+      - pc90
+      - pc95
+      - pc98
+      - pc99
+      - sum
+      - min
+      - max
+      - avg
+      example: avg
+      type: string
+      x-enum-varnames:
+      - COUNT
+      - CARDINALITY
+      - MEDIAN
+      - PC75
+      - PC90
+      - PC95
+      - PC98
+      - PC99
+      - SUM
+      - MIN
+      - MAX
+      - AVG
+    MonitorFormulaAndFunctionEventQueryDefinition:
+      description: A formula and functions events query.
+      properties:
+        compute:
+          $ref: '#/components/schemas/MonitorFormulaAndFunctionEventQueryDefinitionCompute'
+        data_source:
+          $ref: '#/components/schemas/MonitorFormulaAndFunctionEventsDataSource'
+        group_by:
+          description: Group by options.
+          items:
+            $ref: '#/components/schemas/MonitorFormulaAndFunctionEventQueryGroupBy'
+          type: array
+        indexes:
+          description: An array of index names to query in the stream. Omit or use
+            `[]` to query all indexes at once.
+          example:
+          - days-3
+          - days-7
+          items:
+            description: A log index set up for your organization. For additional
+              indexes, see the [multiple indexes](https://docs.datadoghq.com/logs/indexes/#multiple-indexes)
+              documentation.
+            type: string
+          type: array
+        name:
+          description: Name of the query for use in formulas.
+          example: query_errors
+          type: string
+        search:
+          $ref: '#/components/schemas/MonitorFormulaAndFunctionEventQueryDefinitionSearch'
+      required:
+      - data_source
+      - compute
+      - name
+      type: object
+    MonitorFormulaAndFunctionEventQueryDefinitionCompute:
+      description: Compute options.
+      properties:
+        aggregation:
+          $ref: '#/components/schemas/MonitorFormulaAndFunctionEventAggregation'
+        interval:
+          description: A time interval in milliseconds.
+          example: 60000
+          format: int64
+          type: integer
+        metric:
+          description: Measurable attribute to compute.
+          example: '@duration'
+          type: string
+      required:
+      - aggregation
+      type: object
+    MonitorFormulaAndFunctionEventQueryDefinitionSearch:
+      description: Search options.
+      properties:
+        query:
+          description: Events search string.
+          example: service:query
+          type: string
+      required:
+      - query
+      type: object
+    MonitorFormulaAndFunctionEventQueryGroupBy:
+      description: List of objects used to group by.
+      properties:
+        facet:
+          description: Event facet.
+          example: status
+          type: string
+        limit:
+          description: Number of groups to return.
+          example: 10
+          format: int64
+          type: integer
+        sort:
+          $ref: '#/components/schemas/MonitorFormulaAndFunctionEventQueryGroupBySort'
+      required:
+      - facet
+      type: object
+    MonitorFormulaAndFunctionEventQueryGroupBySort:
+      description: Options for sorting group by results.
+      properties:
+        aggregation:
+          $ref: '#/components/schemas/MonitorFormulaAndFunctionEventAggregation'
+        metric:
+          description: Metric used for sorting group by results.
+          type: string
+        order:
+          $ref: '#/components/schemas/QuerySortOrder'
+      required:
+      - aggregation
+      type: object
+    MonitorFormulaAndFunctionEventsDataSource:
+      description: Data source for event platform-based queries.
+      enum:
+      - rum
+      example: rum
+      type: string
+      x-enum-varnames:
+      - RUM
+    MonitorFormulaAndFunctionQueryDefinition:
+      description: A formula and function query.
+      oneOf:
+      - $ref: '#/components/schemas/MonitorFormulaAndFunctionEventQueryDefinition'
+      type: object
     MonitorGroupSearchResponse:
       description: The response of a monitor group search.
       example:
@@ -6101,7 +6227,7 @@ components:
             stops reporting.
           type: boolean
         renotify_interval:
-          default: none
+          default: null
           description: "The number of minutes after the last notification before a
             monitor re-notifies on the current status.\nIt only re-notifies if it\u2019s
             not resolved."
@@ -6146,13 +6272,19 @@ components:
         thresholds:
           $ref: '#/components/schemas/MonitorThresholds'
         timeout_h:
-          default: none
+          default: null
           description: The number of hours of the monitor not reporting data before
             it automatically resolves from a triggered state. The minimum allowed
             value is 0 hours. The maximum allowed value is 24 hours.
           format: int64
           nullable: true
           type: integer
+        variables:
+          description: List of requests that can be used in the monitor query. **This
+            feature is currently in beta.**
+          items:
+            $ref: '#/components/schemas/MonitorFormulaAndFunctionQueryDefinition'
+          type: array
       type: object
     MonitorOverallStates:
       description: The different states your monitor can be in.
@@ -6695,6 +6827,8 @@ components:
       - container_percentage
       - custom_timeseries_usage
       - custom_timeseries_percentage
+      - estimated_indexed_logs_usage
+      - estimated_indexed_logs_percentage
       - fargate_usage
       - fargate_percentage
       - functions_usage
@@ -6726,6 +6860,8 @@ components:
       - CONTAINER_PERCENTAGE
       - CUSTOM_TIMESERIES_USAGE
       - CUSTOM_TIMESERIES_PERCENTAGE
+      - ESTIMATED_INDEXED_LOGS_USAGE
+      - ESTIMATED_INDEXED_LOGS_PERCENTAGE
       - FARGATE_USAGE
       - FARGATE_PERCENTAGE
       - FUNCTIONS_USAGE
@@ -6786,6 +6922,16 @@ components:
           type: number
         custom_timeseries_usage:
           description: The custom metrics usage by tag(s).
+          format: double
+          type: number
+        estimated_indexed_logs_percentage:
+          description: The percentage of estimated live indexed logs usage by tag(s).
+            This field is in private beta.
+          format: double
+          type: number
+        estimated_indexed_logs_usage:
+          description: The estimated live indexed logs usage by tag(s). This field
+            is in private beta.
           format: double
           type: number
         fargate_percentage:
@@ -6965,6 +7111,7 @@ components:
           type: boolean
       type: object
     NotebookCellCreateRequest:
+      additionalProperties: false
       description: The description of a notebook cell create request.
       properties:
         attributes:
@@ -7309,7 +7456,6 @@ components:
           $ref: '#/components/schemas/NotebookMetadataType'
       type: object
     NotebookMetadataType:
-      default: null
       description: Metadata type of the notebook.
       enum:
       - postmortem
@@ -8581,17 +8727,17 @@ components:
           description: For `monitor` based SLOs, this includes the aggregated history
             as arrays that include time series and uptime data where `0=monitor` is
             in `OK` state and `1=monitor` is in `alert` state.
+          example:
+          - - 1579212382
+            - 0
           items:
             description: Represents an array time series data.
             example:
-            - - 1579212382
-              - 0
+            - 1579212382
+            - 0
             items:
               description: A time series data point which is a tuple of (timestamp,
                 value).
-              example:
-              - 1579212382
-              - 0
               format: double
               type: number
             maxItems: 2
@@ -8617,7 +8763,7 @@ components:
           deprecated: true
           description: The amount of decimal places the SLI value is accurate to for
             the given from `&&` to timestamp. Use `span_precision` instead.
-          example: 2
+          example: 2.0
           format: double
           type: number
         preview:
@@ -8635,7 +8781,7 @@ components:
         span_precision:
           description: The amount of decimal places the SLI value is accurate to for
             the given from `&&` to timestamp.
-          example: 2
+          example: 2.0
           format: double
           type: number
         uptime:
@@ -8662,7 +8808,6 @@ components:
 
 
                 This is not included in responses for `monitor` based SLOs.'
-              example: []
               items:
                 description: A grouping parameter.
                 type: string
@@ -8673,7 +8818,6 @@ components:
 
 
                 This is not included in the responses for `metric` based SLOs.'
-              example: []
               items:
                 $ref: '#/components/schemas/SLOHistoryMonitor'
               type: array
@@ -8683,7 +8827,6 @@ components:
 
 
                 This is not included in the responses for `metric` based SLOs.'
-              example: []
               items:
                 $ref: '#/components/schemas/SLOHistoryMonitor'
               type: array
@@ -8695,7 +8838,10 @@ components:
               additionalProperties:
                 $ref: '#/components/schemas/SLOThreshold'
               description: mapping of string timeframe to the SLO threshold.
-              example: {}
+              example:
+                my_service:
+                  target: 95
+                  timeframe: 7d
               type: object
             to_ts:
               description: The `to` timestamp in epoch seconds.
@@ -8760,17 +8906,17 @@ components:
           description: For `monitor` based SLOs, this includes the aggregated history
             as arrays that include time series and uptime data where `0=monitor` is
             in `OK` state and `1=monitor` is in `alert` state.
+          example:
+          - - 1579212382
+            - 0
           items:
             description: Represents an array time series data.
             example:
-            - - 1579212382
-              - 0
+            - 1579212382
+            - 0
             items:
               description: A time series data point which is a tuple of (timestamp,
                 value).
-              example:
-              - 1579212382
-              - 0
               format: double
               type: number
             maxItems: 2
@@ -8818,7 +8964,7 @@ components:
         span_precision:
           description: The amount of decimal places the SLI value is accurate to for
             the given from `&&` to timestamp.
-          example: 2
+          example: 2.0
           format: double
           type: number
         uptime:
@@ -10331,6 +10477,10 @@ components:
         assertions:
           default: []
           description: Array of assertions used for the test.
+          example:
+          - operator: lessThan
+            target: 1000
+            type: responseTime
           items:
             $ref: '#/components/schemas/SyntheticsAssertion'
           type: array
@@ -10347,6 +10497,7 @@ components:
           type: boolean
         name:
           description: The name of the step.
+          example: Example step name
           type: string
         request:
           $ref: '#/components/schemas/SyntheticsTestRequest'
@@ -10354,12 +10505,18 @@ components:
           $ref: '#/components/schemas/SyntheticsTestOptionsRetry'
         subtype:
           $ref: '#/components/schemas/SyntheticsAPIStepSubtype'
+      required:
+      - assertions
+      - request
+      - name
+      - subtype
       type: object
     SyntheticsAPIStepSubtype:
       description: The subtype of the Synthetic multistep API test step, currently
         only supporting `http`.
       enum:
       - http
+      example: http
       type: string
       x-enum-varnames:
       - HTTP
@@ -10388,7 +10545,7 @@ components:
           type: integer
         name:
           description: Name of the test.
-          example: Test name
+          example: Example test name
           type: string
         options:
           $ref: '#/components/schemas/SyntheticsTestOptions'
@@ -10411,6 +10568,12 @@ components:
           type: array
         type:
           $ref: '#/components/schemas/SyntheticsAPITestType'
+      required:
+      - name
+      - config
+      - locations
+      - options
+      - type
       type: object
     SyntheticsAPITestConfig:
       description: Configuration object for a Synthetic API test.
@@ -10452,13 +10615,10 @@ components:
       properties:
         cert:
           $ref: '#/components/schemas/SyntheticsSSLCertificate'
-        errorCode:
-          $ref: '#/components/schemas/SyntheticsErrorCode'
-        errorMessage:
-          description: The API test error message.
-          type: string
         eventType:
           $ref: '#/components/schemas/SyntheticsTestProcessStatus'
+        failure:
+          $ref: '#/components/schemas/SyntheticsApiTestResultFailure'
         httpStatusCode:
           description: The API test HTTP status code.
           format: int64
@@ -10549,6 +10709,73 @@ components:
       type: string
       x-enum-varnames:
       - API
+    SyntheticsApiTestFailureCode:
+      description: Error code that can be returned by a Synthetic test.
+      enum:
+      - BODY_TOO_LARGE
+      - DENIED
+      - TOO_MANY_REDIRECTS
+      - AUTHENTICATION_ERROR
+      - DECRYPTION
+      - INVALID_CHAR_IN_HEADER
+      - HEADER_TOO_LARGE
+      - HEADERS_INCOMPATIBLE_CONTENT_LENGTH
+      - INVALID_REQUEST
+      - REQUIRES_UPDATE
+      - UNESCAPED_CHARACTERS_IN_REQUEST_PATH
+      - MALFORMED_RESPONSE
+      - INCORRECT_ASSERTION
+      - CONNREFUSED
+      - CONNRESET
+      - DNS
+      - HOSTUNREACH
+      - NETUNREACH
+      - TIMEOUT
+      - SSL
+      - OCSP
+      - INVALID_TEST
+      - TUNNEL
+      - WEBSOCKET
+      - UNKNOWN
+      - INTERNAL_ERROR
+      type: string
+      x-enum-varnames:
+      - BODY_TOO_LARGE
+      - DENIED
+      - TOO_MANY_REDIRECTS
+      - AUTHENTICATION_ERROR
+      - DECRYPTION
+      - INVALID_CHAR_IN_HEADER
+      - HEADER_TOO_LARGE
+      - HEADERS_INCOMPATIBLE_CONTENT_LENGTH
+      - INVALID_REQUEST
+      - REQUIRES_UPDATE
+      - UNESCAPED_CHARACTERS_IN_REQUEST_PATH
+      - MALFORMED_RESPONSE
+      - INCORRECT_ASSERTION
+      - CONNREFUSED
+      - CONNRESET
+      - DNS
+      - HOSTUNREACH
+      - NETUNREACH
+      - TIMEOUT
+      - SSL
+      - OCSP
+      - INVALID_TEST
+      - TUNNEL
+      - WEBSOCKET
+      - UNKNOWN
+      - INTERNAL_ERROR
+    SyntheticsApiTestResultFailure:
+      description: The API test failure details.
+      properties:
+        code:
+          $ref: '#/components/schemas/SyntheticsApiTestFailureCode'
+        message:
+          description: The API test error message.
+          example: Error during DNS resolution (ENOTFOUND).
+          type: string
+      type: object
     SyntheticsAssertion:
       description: 'Object describing the assertions type, their associated operator,
 
@@ -10634,7 +10861,6 @@ components:
         target:
           description: Value used by the operator.
           example: 123456
-          nullable: false
         type:
           $ref: '#/components/schemas/SyntheticsAssertionType'
       required:
@@ -10680,11 +10906,103 @@ components:
       - RECEIVED_MESSAGE
     SyntheticsBasicAuth:
       description: Object to handle basic authentication when performing the test.
+      oneOf:
+      - $ref: '#/components/schemas/SyntheticsBasicAuthWeb'
+      - $ref: '#/components/schemas/SyntheticsBasicAuthSigv4'
+      - $ref: '#/components/schemas/SyntheticsBasicAuthNTLM'
+      type: object
+    SyntheticsBasicAuthNTLM:
+      description: Object to handle `NTLM` authentication when performing the test.
+      properties:
+        domain:
+          description: Domain for the authentication to use when performing the test.
+          example: DOMAINNAME
+          type: string
+        password:
+          description: Password for the authentication to use when performing the
+            test.
+          example: examplepassword
+          type: string
+        type:
+          $ref: '#/components/schemas/SyntheticsBasicAuthNTLMType'
+        username:
+          description: Username for the authentication to use when performing the
+            test.
+          example: joedoe
+          type: string
+        workstation:
+          description: Workstation for the authentication to use when performing the
+            test.
+          example: ''
+          type: string
+      required:
+      - type
+      type: object
+    SyntheticsBasicAuthNTLMType:
+      default: ntlm
+      description: The type of authentication to use when performing the test.
+      enum:
+      - ntlm
+      example: ntlm
+      type: string
+      x-enum-varnames:
+      - NTLM
+    SyntheticsBasicAuthSigv4:
+      description: Object to handle `SIGV4` authentication when performing the test.
+      properties:
+        accessKey:
+          description: Access key for the `SIGV4` authentication.
+          example: AKIAIOSFODNN7EXAMPLE
+          type: string
+        region:
+          description: Region for the `SIGV4` authentication.
+          example: us-east-1
+          type: string
+        secretKey:
+          description: Secret key for the `SIGV4` authentication.
+          example: wJalrXUtnFEMI/K7MDENG/bPxRfiCYzEXAMPLEKEY
+          type: string
+        serviceName:
+          description: Service name for the `SIGV4` authentication.
+          example: execute-api
+          type: string
+        sessionToken:
+          description: Session token for the `SIGV4` authentication.
+          example: 'AQoEXAMPLEH4aoAH0gNCAPyJxz4BlCFFxWNE1OPTgk5TthT+FvwqnKwRcOIfrRh3c/L
+
+            To6UDdyJwOOvEVPvLXCrrrUtdnniCEXAMPLE/IvU1dYUg2RVAJBanLiHb4IgRmpRV3z
+
+            rkuWJOgQs8IZZaIv2BXIa2R4OlgkBN9bkUDNCJiBeb/AXlzBBko7b15fjrBs2+cTQtp
+
+            Z3CYWFXG8C5zqx37wnOE49mRl/+OtkIKGO7fAE
+
+            '
+          type: string
+        type:
+          $ref: '#/components/schemas/SyntheticsBasicAuthSigv4Type'
+      required:
+      - accessKey
+      - secretKey
+      - type
+      type: object
+    SyntheticsBasicAuthSigv4Type:
+      default: sigv4
+      description: The type of authentication to use when performing the test.
+      enum:
+      - sigv4
+      example: sigv4
+      type: string
+      x-enum-varnames:
+      - SIGV4
+    SyntheticsBasicAuthWeb:
+      description: Object to handle basic authentication when performing the test.
       properties:
         password:
           description: Password to use for the basic authentication.
           example: ''
           type: string
+        type:
+          $ref: '#/components/schemas/SyntheticsBasicAuthWebType'
         username:
           description: Username to use for the basic authentication.
           example: ''
@@ -10692,7 +11010,17 @@ components:
       required:
       - password
       - username
+      - type
       type: object
+    SyntheticsBasicAuthWebType:
+      default: web
+      description: The type of basic authentication to use when performing the test.
+      enum:
+      - web
+      example: web
+      type: string
+      x-enum-varnames:
+      - WEB
     SyntheticsBatchDetails:
       description: Details about a batch response.
       properties:
@@ -10784,6 +11112,8 @@ components:
           $ref: '#/components/schemas/SyntheticsBrowserTestConfig'
         locations:
           description: Array of locations used to run the test.
+          example:
+          - example-location
           items:
             description: A location from which the test was run.
             type: string
@@ -10800,6 +11130,7 @@ components:
           type: integer
         name:
           description: Name of the test.
+          example: Example test name
           type: string
         options:
           $ref: '#/components/schemas/SyntheticsTestOptions'
@@ -10823,7 +11154,11 @@ components:
         type:
           $ref: '#/components/schemas/SyntheticsBrowserTestType'
       required:
-      - message
+      - config
+      - locations
+      - name
+      - options
+      - type
       type: object
     SyntheticsBrowserTestConfig:
       description: Configuration object for a Synthetic browser test.
@@ -10855,6 +11190,77 @@ components:
       - request
       - assertions
       type: object
+    SyntheticsBrowserTestFailureCode:
+      description: Error code that can be returned by a Synthetic test.
+      enum:
+      - API_REQUEST_FAILURE
+      - ASSERTION_FAILURE
+      - DOWNLOAD_FILE_TOO_LARGE
+      - ELEMENT_NOT_INTERACTABLE
+      - EMAIL_VARIABLE_NOT_DEFINED
+      - EVALUATE_JAVASCRIPT
+      - EVALUATE_JAVASCRIPT_CONTEXT
+      - EXTRACT_VARIABLE
+      - FORBIDDEN_URL
+      - FRAME_DETACHED
+      - INCONSISTENCIES
+      - INTERNAL_ERROR
+      - INVALID_TYPE_TEXT_DELAY
+      - INVALID_URL
+      - INVALID_VARIABLE_PATTERN
+      - INVISIBLE_ELEMENT
+      - LOCATE_ELEMENT
+      - NAVIGATE_TO_LINK
+      - OPEN_URL
+      - PRESS_KEY
+      - SERVER_CERTIFICATE
+      - SELECT_OPTION
+      - STEP_TIMEOUT
+      - SUB_TEST_NOT_PASSED
+      - TEST_TIMEOUT
+      - TOO_MANY_HTTP_REQUESTS
+      - UNAVAILABLE_BROWSER
+      - UNKNOWN
+      - UNSUPPORTED_AUTH_SCHEMA
+      - UPLOAD_FILES_ELEMENT_TYPE
+      - UPLOAD_FILES_DIALOG
+      - UPLOAD_FILES_DYNAMIC_ELEMENT
+      - UPLOAD_FILES_NAME
+      type: string
+      x-enum-varnames:
+      - API_REQUEST_FAILURE
+      - ASSERTION_FAILURE
+      - DOWNLOAD_FILE_TOO_LARGE
+      - ELEMENT_NOT_INTERACTABLE
+      - EMAIL_VARIABLE_NOT_DEFINED
+      - EVALUATE_JAVASCRIPT
+      - EVALUATE_JAVASCRIPT_CONTEXT
+      - EXTRACT_VARIABLE
+      - FORBIDDEN_URL
+      - FRAME_DETACHED
+      - INCONSISTENCIES
+      - INTERNAL_ERROR
+      - INVALID_TYPE_TEXT_DELAY
+      - INVALID_URL
+      - INVALID_VARIABLE_PATTERN
+      - INVISIBLE_ELEMENT
+      - LOCATE_ELEMENT
+      - NAVIGATE_TO_LINK
+      - OPEN_URL
+      - PRESS_KEY
+      - SERVER_CERTIFICATE
+      - SELECT_OPTION
+      - STEP_TIMEOUT
+      - SUB_TEST_NOT_PASSED
+      - TEST_TIMEOUT
+      - TOO_MANY_HTTP_REQUESTS
+      - UNAVAILABLE_BROWSER
+      - UNKNOWN
+      - UNSUPPORTED_AUTH_SCHEMA
+      - UPLOAD_FILES_ELEMENT_TYPE
+      - UPLOAD_FILES_DIALOG
+      - UPLOAD_FILES_DYNAMIC_ELEMENT
+      - UPLOAD_FILES_NAME
     SyntheticsBrowserTestResultData:
       description: Object containing results for your Synthetic browser test.
       properties:
@@ -10873,6 +11279,8 @@ components:
         error:
           description: Error returned for the browser test.
           type: string
+        failure:
+          $ref: '#/components/schemas/SyntheticsBrowserTestResultFailure'
         passed:
           description: Whether or not the browser test was conducted.
           type: boolean
@@ -10897,6 +11305,16 @@ components:
             reaching the start URL.'
           format: double
           type: number
+      type: object
+    SyntheticsBrowserTestResultFailure:
+      description: The browser test failure details.
+      properties:
+        code:
+          $ref: '#/components/schemas/SyntheticsBrowserTestFailureCode'
+        message:
+          description: The browser test error message.
+          example: Error during DNS resolution (ENOTFOUND).
+          type: string
       type: object
     SyntheticsBrowserTestResultFull:
       description: Object returned describing a browser test result.
@@ -10944,7 +11362,7 @@ components:
             device:
               $ref: '#/components/schemas/SyntheticsDevice'
             duration:
-              description: Length in second of the browser test run.
+              description: Length in milliseconds of the browser test run.
               format: double
               type: number
             errorCount:
@@ -11297,25 +11715,6 @@ components:
       - EDGE_LAPTOP_LARGE
       - EDGE_TABLET
       - EDGE_MOBILE_SMALL
-    SyntheticsErrorCode:
-      description: Error code that can be returned by a Synthetic test.
-      enum:
-      - NO_ERROR
-      - UNKNOWN
-      - DNS
-      - SSL
-      - TIMEOUT
-      - DENIED
-      - INCORRECT_ASSERTION
-      type: string
-      x-enum-varnames:
-      - NO_ERROR
-      - UNKNOWN
-      - DNS
-      - SSL
-      - TIMEOUT
-      - DENIED
-      - INCORRECT_ASSERTION
     SyntheticsGetAPITestLatestResultsResponse:
       description: Object with the latest Synthetic API test run.
       properties:
@@ -11703,6 +12102,10 @@ components:
       properties:
         allowFailure:
           description: A boolean set to allow this step to fail.
+          type: boolean
+        isCritical:
+          description: A boolean to use in addition to `allowFailure` to determine
+            if the test should be marked as failed when the step fails.
           type: boolean
         name:
           description: The name of the step.
@@ -12155,6 +12558,8 @@ components:
           description: Port to use when performing the test.
           format: int64
           type: integer
+        proxy:
+          $ref: '#/components/schemas/SyntheticsTestRequestProxy'
         query:
           description: Query to use for the test.
           type: object
@@ -12199,6 +12604,18 @@ components:
         updatedAt:
           description: Date of update of the certificate or key, ISO format.
           type: string
+      type: object
+    SyntheticsTestRequestProxy:
+      description: The proxy to perform the test.
+      properties:
+        headers:
+          $ref: '#/components/schemas/SyntheticsTestHeaders'
+        url:
+          description: URL of the proxy to perform the test.
+          example: https://example.com
+          type: string
+      required:
+      - url
       type: object
     SyntheticsTiming:
       description: 'Object containing all metrics and their values collected for a
@@ -12818,9 +13235,6 @@ components:
       required:
       - type
       - requests
-      - size_by
-      - color_by
-      - group_by
       type: object
     TreeMapWidgetDefinitionType:
       default: treemap
@@ -12834,9 +13248,23 @@ components:
     TreeMapWidgetRequest:
       description: An updated treemap widget.
       properties:
+        formulas:
+          description: List of formulas that operate on queries. **This feature is
+            currently in beta.**
+          items:
+            $ref: '#/components/schemas/WidgetFormula'
+          type: array
         q:
           description: The widget metrics query.
           type: string
+        queries:
+          description: List of queries that can be returned directly or used in formulas.
+            **This feature is currently in beta.**
+          items:
+            $ref: '#/components/schemas/FormulaAndFunctionQueryDefinition'
+          type: array
+        response_format:
+          $ref: '#/components/schemas/FormulaAndFunctionResponseFormat'
       type: object
     UsageAnalyzedLogsHour:
       description: The number of analyzed logs for each hour for a given organization.
@@ -12848,6 +13276,12 @@ components:
         hour:
           description: The hour for the usage.
           format: date-time
+          type: string
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
           type: string
       type: object
     UsageAnalyzedLogsResponse:
@@ -12985,6 +13419,8 @@ components:
       - lambda_invocations_percentage
       - lambda_usage
       - lambda_percentage
+      - estimated_indexed_logs_usage
+      - estimated_indexed_logs_percentage
       type: string
       x-enum-varnames:
       - API_PERCENTAGE
@@ -13009,6 +13445,8 @@ components:
       - LAMBDA_INVOCATIONS_PERCENTAGE
       - LAMBDA_USAGE
       - LAMBDA_PERCENTAGE
+      - ESTIMATED_INDEXED_LOGS_USAGE
+      - ESTIMATED_INDEXED_LOGS_PERCENTAGE
     UsageAttributionSupportedMetrics:
       description: Supported fields for usage attribution requests (valid requests
         contain one or more metrics, or `*` for all).
@@ -13478,16 +13916,36 @@ components:
       description: Cloud Security Posture Management usage for a given organization
         for a given hour.
       properties:
+        aas_host_count:
+          description: The number of Cloud Security Posture Management Azure app services
+            hosts during a given hour.
+          format: double
+          nullable: true
+          type: number
+        azure_host_count:
+          description: The number of Cloud Security Posture Management Azure hosts
+            during a given hour.
+          format: double
+          nullable: true
+          type: number
+        compliance_host_count:
+          description: The number of Cloud Security Posture Management hosts during
+            a given hour.
+          format: double
+          nullable: true
+          type: number
         container_count:
           description: The total number of Cloud Security Posture Management containers
             during a given hour.
-          format: int64
-          type: integer
+          format: double
+          nullable: true
+          type: number
         host_count:
           description: The total number of Cloud Security Posture Management hosts
             during a given hour.
-          format: int64
-          type: integer
+          format: double
+          nullable: true
+          type: number
         hour:
           description: The hour for the usage.
           format: date-time
@@ -13718,6 +14176,12 @@ components:
             for the OpenTelemetry Collector.
           format: int64
           type: integer
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
+          type: string
         vsphere_host_count:
           description: 'Contains the total number of hosts that reported through vSphere
             integration
@@ -13748,6 +14212,12 @@ components:
             of the given hour's month until the given hour.
           format: int64
           type: integer
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
+          type: string
       type: object
     UsageIncidentManagementResponse:
       description: Response containing the incident management usage for each hour
@@ -13770,6 +14240,12 @@ components:
           description: Contains the number of spans indexed.
           format: int64
           type: integer
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
+          type: string
       type: object
     UsageIndexedSpansResponse:
       description: A response containing indexed spans usage.
@@ -13793,6 +14269,12 @@ components:
             hour.
           format: int64
           type: integer
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
+          type: string
       type: object
     UsageIngestedSpansResponse:
       description: Response containing the ingested spans usage for each hour for
@@ -13815,6 +14297,12 @@ components:
           description: The total number of IoT devices during a given hour.
           format: int64
           type: integer
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
+          type: string
       type: object
     UsageIoTResponse:
       description: Response containing the IoT usage for each hour for a given organization.
@@ -13844,6 +14332,12 @@ components:
           description: Contains the sum of invocations of all functions.
           format: int64
           type: integer
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
+          type: string
       type: object
     UsageLambdaResponse:
       description: 'Response containing the number of lambda functions and sum of
@@ -13873,6 +14367,12 @@ components:
           type: string
         index_name:
           description: The user specified name for this index ID.
+          type: string
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
           type: string
         retention:
           description: The retention period (in days) for this index ID.
@@ -13904,6 +14404,12 @@ components:
             hour.
           format: int64
           type: integer
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
+          type: string
         rehydrated_indexed_events_count:
           description: Rehydrated logs indexed with this retention period during a
             given hour.
@@ -13963,6 +14469,12 @@ components:
             available as of December 1, 2020).
           format: int64
           type: integer
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
+          type: string
       type: object
     UsageLogsResponse:
       description: Response containing the number of logs for each hour.
@@ -13993,6 +14505,12 @@ components:
           description: Contains the number of netflow events indexed.
           format: int64
           type: integer
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
+          type: string
       type: object
     UsageNetworkFlowsResponse:
       description: Response containing the number of netflow events indexed for each
@@ -14014,6 +14532,12 @@ components:
         hour:
           description: The hour for the usage.
           format: date-time
+          type: string
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
           type: string
       type: object
     UsageNetworkHostsResponse:
@@ -14041,6 +14565,12 @@ components:
         hour:
           description: The hour for the usage.
           format: date-time
+          type: string
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
           type: string
       type: object
     UsageProfilingResponse:
@@ -14182,6 +14712,12 @@ components:
         hour:
           description: The hour for the usage.
           format: date-time
+          type: string
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
           type: string
         snmp_devices:
           description: Contains the number of SNMP devices.
@@ -14358,6 +14894,16 @@ components:
         container_hwm:
           description: Shows the high-water mark of all distinct containers over all
             hours in the current date for all organizations.
+          format: int64
+          type: integer
+        cspm_aas_host_top99p:
+          description: Shows the 99th percentile of all Cloud Security Posture Management
+            Azure app services hosts over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        cspm_azure_host_top99p:
+          description: Shows the 99th percentile of all Cloud Security Posture Management
+            Azure hosts over all hours in the current date for all organizations.
           format: int64
           type: integer
         cspm_container_avg:
@@ -14638,6 +15184,17 @@ components:
         container_hwm:
           description: Shows the high-water mark of all distinct containers over all
             hours in the current date for the given org.
+          format: int64
+          type: integer
+        cspm_aas_host_top99p:
+          description: Shows the 99th percentile of all Cloud Security Posture Management
+            Azure app services hosts over all hours in the current date for the given
+            org.
+          format: int64
+          type: integer
+        cspm_azure_host_top99p:
+          description: Shows the 99th percentile of all Cloud Security Posture Management
+            Azure hosts over all hours in the current date for the given org.
           format: int64
           type: integer
         cspm_container_avg:
@@ -14925,6 +15482,17 @@ components:
             over all hours in the current months for all organizations.
           format: int64
           type: integer
+        cspm_aas_host_top99p_sum:
+          description: Shows the 99th percentile of all Cloud Security Posture Management
+            Azure app services hosts over all hours in the current months for all
+            organizations.
+          format: int64
+          type: integer
+        cspm_azure_host_top99p_sum:
+          description: Shows the 99th percentile of all Cloud Security Posture Management
+            Azure hosts over all hours in the current months for all organizations.
+          format: int64
+          type: integer
         cspm_container_avg_sum:
           description: Shows the average number of Cloud Security Posture Management
             containers over all hours in the current months for all organizations.
@@ -15181,6 +15749,12 @@ components:
           description: The hour for the usage.
           format: date-time
           type: string
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
+          type: string
       type: object
     UsageSyntheticsAPIResponse:
       description: Response containing the number of Synthetics API tests run for
@@ -15204,6 +15778,12 @@ components:
           description: The hour for the usage.
           format: date-time
           type: string
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
+          type: string
       type: object
     UsageSyntheticsBrowserResponse:
       description: Response containing the number of Synthetics Browser tests run
@@ -15225,6 +15805,12 @@ components:
         hour:
           description: The hour for the usage.
           format: date-time
+          type: string
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
           type: string
       type: object
     UsageSyntheticsResponse:
@@ -15260,6 +15846,12 @@ components:
             that are outputs for aggregations.
           format: int64
           type: integer
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
+          type: string
       type: object
     UsageTimeseriesResponse:
       description: Response containing hourly usage of timeseries.
@@ -16124,6 +16716,9 @@ components:
       - WHITE_ON_RED
       - WHITE_ON_YELLOW
       - YELLOW_ON_WHITE
+      - BLACK_ON_LIGHT_YELLOW
+      - BLACK_ON_LIGHT_GREEN
+      - BLACK_ON_LIGHT_RED
     WidgetRequestStyle:
       description: Define request widget style.
       properties:
@@ -16278,7 +16873,7 @@ components:
             dashboards_public_share: The ability to share dashboards externally.
             dashboards_read: The ability to view dashboards.
             dashboards_write: The ability to create and change dashboards.
-            events_read: The ability to read events data.
+            events_read: The ability to read Events data.
             metrics_read: The ability to view custom metrics.
             monitors_downtime: The ability to set downtimes to suppress alerts from
               any monitor in an organization. The ability to write monitors is not
@@ -16291,9 +16886,11 @@ components:
               global variables for Synthetics.
             synthetics_private_location_read: The ability to view, search and use
               in tests the list of private locations available.
+            synthetics_private_location_write: The ability to create and delete private
+              locations as well as seeing the associated installation guidelines.
             synthetics_read: The ability to list and view configured Synthetic tests.
             synthetics_write: The ability to create, edit, and delete Synthetic tests.
-            timeseries_query: The ability to query timeseries data.
+            timeseries_query: The ability to query Timeseries data.
             usage_read: The ability to view your organization's usage and usage attribution.
             user_access_invite: The ability to invite other users to your organization.
             user_access_manage: The ability to disable users, manage user roles, and
@@ -16895,6 +17492,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Too many requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - usage_read
       summary: Get the list of available daily custom reports
       tags:
       - Usage Metering
@@ -16940,6 +17542,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Too many requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - usage_read
       summary: Get specified daily custom reports
       tags:
       - Usage Metering
@@ -17018,6 +17625,14 @@ paths:
           or cloned dashboards.'
         in: query
         name: filter[shared]
+        required: false
+        schema:
+          type: boolean
+      - description: 'When `true`, this query returns only deleted custom-created
+
+          or cloned dashboards. This parameter is incompatible with `filter[shared]`.'
+        in: query
+        name: filter[deleted]
         required: false
         schema:
           type: boolean
@@ -17828,6 +18443,12 @@ paths:
       summary: Delete a dashboard
       tags:
       - Dashboards
+      x-given:
+        deleted_dashboard:
+          parameters:
+          - name: dashboard_id
+            source: dashboard.id
+          step: the "dashboard" was deleted
       x-menu-order: 3
       x-undo:
         type: idempotent
@@ -18918,6 +19539,10 @@ paths:
           description: Forbidden
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
       summary: Get the total number of active hosts
       tags:
       - Hosts
@@ -19149,10 +19774,9 @@ paths:
             application/json:
               schema:
                 example:
-                  value:
-                  - namespace1
-                  - namespace2
-                  - namespace3
+                - namespace1
+                - namespace2
+                - namespace3
                 items:
                   type: string
                 type: array
@@ -20958,6 +21582,10 @@ paths:
           description: Forbidden
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
       summary: Get indexes order
       tags:
       - Logs Indexes
@@ -21026,6 +21654,10 @@ paths:
           description: Forbidden
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
       summary: Get all indexes
       tags:
       - Logs Indexes
@@ -21185,6 +21817,10 @@ paths:
           description: Forbidden
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
       summary: Get pipeline order
       tags:
       - Logs Pipelines
@@ -21266,6 +21902,10 @@ paths:
           description: Forbidden
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
       summary: Get all pipelines
       tags:
       - Logs Pipelines
@@ -21383,6 +22023,10 @@ paths:
           description: Forbidden
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
       summary: Get a pipeline
       tags:
       - Logs Pipelines
@@ -21866,7 +22510,8 @@ paths:
         timeframes: m, h and d. This value should not exceed 48 hours.
 
 
-        **NOTE** Only available on US1 and EU.
+        **NOTE** The Event Alert Query is being deprecated and replaced by the Event
+        V2 Alert Query. For more information, see the [Event Migration guide](https://docs.datadoghq.com/events/guides/migrating_to_new_events_features/).
 
 
         **Event V2 Alert Query**
@@ -22591,6 +23236,11 @@ paths:
           description: Monitor Not Found error
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - monitors_read
       summary: Get all downtimes for a monitor
       tags:
       - Downtimes
@@ -22777,6 +23427,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Too many requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - usage_read
       summary: Get the list of available monthly custom reports
       tags:
       - Usage Metering
@@ -22828,6 +23483,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Too many requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - usage_read
       summary: Get specified monthly custom reports
       tags:
       - Usage Metering
@@ -22956,6 +23616,10 @@ paths:
           description: Authentication Error
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
       summary: Get all notebooks
       tags:
       - Notebooks
@@ -23123,6 +23787,10 @@ paths:
           description: Not Found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
       summary: Get a notebook
       tags:
       - Notebooks
@@ -23580,7 +24248,7 @@ paths:
                   - metric: system.load.1
                     points:
                     - - ${NOW}
-                      - '1234.5'
+                      - 1234.5
                 x-variables:
                   NOW: $(date +%s)
             schema:
@@ -24552,6 +25220,11 @@ paths:
           description: Batch does not exist.
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - synthetics_read
       summary: Get details of batch
       tags:
       - Synthetics
@@ -24616,6 +25289,11 @@ paths:
           description: Private locations are not activated for the user
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - synthetics_private_location_write
       summary: Create a private location
       tags:
       - Synthetics
@@ -24651,6 +25329,11 @@ paths:
             - Private location does not exist'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - synthetics_private_location_write
       summary: Delete a private location
       tags:
       - Synthetics
@@ -24684,6 +25367,11 @@ paths:
             - Private location does not exist'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - synthetics_private_location_read
       summary: Get a private location
       tags:
       - Synthetics
@@ -24724,6 +25412,11 @@ paths:
             - Private location does not exist'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - synthetics_private_location_write
       summary: Edit a private location
       tags:
       - Synthetics
@@ -24997,6 +25690,11 @@ paths:
           - file: synthetics_api_test_payload.json
             name: body
           step: there is a valid "synthetics_api_test" in the system
+        synthetics_api_test_with_wrong_dns:
+          parameters:
+          - file: synthetics_api_test_with_wrong_dns.json
+            name: body
+          step: there is a "synthetics_api_test_with_wrong_dns" in the system
       x-menu-order: 1
       x-undo:
         operationId: DeleteTests
@@ -25485,10 +26183,22 @@ paths:
           description: Bad Request
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - synthetics_write
       summary: Trigger Synthetics tests
       tags:
       - Synthetics
       x-codegen-request-body-name: body
+      x-given:
+        synthetics_api_test_with_wrong_dns_result:
+          parameters:
+          - name: body
+            value: '{"tests": [{"public_id": "{{ synthetics_api_test_with_wrong_dns.public_id
+              }}"}]}'
+          step: the "synthetics_api_test_with_wrong_dns" is triggered
       x-menu-order: 7
       x-undo:
         type: safe
@@ -25518,6 +26228,11 @@ paths:
           description: JSON format is wrong
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - synthetics_write
       summary: Trigger tests from CI/CD pipelines
       tags:
       - Synthetics
@@ -25559,6 +26274,11 @@ paths:
             - Test is not owned by the user'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - synthetics_read
       summary: Get a test configuration
       tags:
       - Synthetics
@@ -25869,6 +26589,11 @@ paths:
           description: Forbidden
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - synthetics_global_variable_write
       summary: Create a global variable
       tags:
       - Synthetics
@@ -26005,6 +26730,11 @@ paths:
           description: Forbidden
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - synthetics_global_variable_write
       summary: Edit a global variable
       tags:
       - Synthetics
@@ -26464,6 +27194,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Too many requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - usage_read
       summary: Get hourly usage for audit logs
       tags:
       - Usage Metering
@@ -26624,6 +27359,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Too many requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - usage_read
       summary: Get hourly usage for CSPM
       tags:
       - Usage Metering
@@ -26737,6 +27477,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Too many requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - usage_read
       summary: Get hourly usage for Database Monitoring
       tags:
       - Usage Metering
@@ -27272,6 +28017,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Too many requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - usage_read
       summary: Get hourly logs usage by retention
       tags:
       - Usage Metering
@@ -27776,6 +28526,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Too many requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - usage_read
       summary: Get hourly usage for Sensitive Data Scanner
       tags:
       - Usage Metering
@@ -28550,6 +29305,10 @@ paths:
                 value:
                 - message: hello
                 - message: world
+            schema:
+              $ref: '#/components/schemas/HTTPLog'
+          application/json;simple:
+            examples:
               simple-json-message:
                 description: Log attributes can be passed as `key:value` pairs in
                   valid JSON messages.
@@ -28560,7 +29319,7 @@ paths:
                   hostname: fa1e1e739d95
                   message: hello world
             schema:
-              $ref: '#/components/schemas/HTTPLog'
+              $ref: '#/components/schemas/HTTPLogItem'
           application/logplex-1:
             examples:
               multi-raw-message:

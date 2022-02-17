@@ -28,7 +28,7 @@ Pylint est doté de fonctions qui vous permettent de [vérifier si vos checks cu
 
 #### Installation
 
-Commencez par l'installer sur Python 2 via [pip][3] :
+Commencez par l'installer sur Python 2 avec [pip][3] :
 
 ```bash
 $ python2 -m pip install pylint
@@ -58,7 +58,7 @@ Après avoir résolu les problèmes de compatibilité, la même commande ne renv
 
 ```bash
 $ python2 -m pylint -sn --py3k ~/dev/my-check.py
-$
+$ 
 ```
 
 Bien que `pylint` détecte tout problème susceptible d'empêcher l'interpréteur Python 3 d'exécuter du code, il ne peut pas vérifier la validité logique. Une fois les modifications de code effectuées, veillez à exécuter le check et à valider la sortie.
@@ -71,11 +71,11 @@ Bien que `pylint` détecte tout problème susceptible d'empêcher l'interpréteu
 $ 2to3 foo.py
 ```
 
-L'exécution de 2to3 permet de visualiser les différences par rapport au fichier source d'origine. Pour en savoir plus sur 2to3, reportez-vous à la [documentation 2to3 officielle][4].
+L'exécution de 2to3 permet de visualiser les différences par rapport au fichier source d'origine. Pour en savoir plus sur 2to3, consultez la [documentation 2to3 officielle][4] (en anglais).
 
 ### Éditeurs
 
-La plupart des EDI et des éditeurs modernes fournissent automatiquement des fonctionnalités avancées de linting. Assurez-vous qu'ils se basent un exécutable Python 3 afin que, lorsque vous ouvrez un ancien fichier uniquement compatible avec Python 2, les erreurs ou avertissements de linting apparaissent sur le côté sous la forme d'une coche colorée dans [PyCharm][5] ou sous forme de case cliquable en bas de [Visual Studio Code][7].
+La plupart des EDI et des éditeurs modernes fournissent automatiquement des fonctionnalités avancées de linting. Assurez-vous qu'ils se basent sur un exécutable Python 3 afin que, lorsque vous ouvrez un ancien fichier uniquement compatible avec Python 2, les erreurs ou avertissements de linting apparaissent sur le côté sous la forme d'une coche colorée dans [PyCharm][5] ou d'une case cliquable en bas de [Visual Studio Code][6].
 
 ## Migration de Python
 
@@ -123,13 +123,13 @@ La méthode `dict.has_key()` est obsolète en Python 2 et n'existe plus en Pyth
 
 ### Modifications de la bibliothèque standard
 
-Python 3 propose une bibliothèque standard réorganisée dans laquelle un certain nombre de modules et de fonctions ont été renommés ou déplacés. L'importation de modules déplacés via la commande `six.moves` fonctionne sur les deux versions de Python.
+Python 3 propose une bibliothèque standard réorganisée dans laquelle plusieurs modules et fonctions ont été renommés ou déplacés. L'importation de modules déplacés avec la commande `six.moves` fonctionne sur les deux versions de Python.
 
 | Python 2            | Python 3             | Python 2 et 3                      |
 |---------------------|----------------------|-------------------------------------|
 | `import HTMLParser` | `import html.parser` | `from six.moves import html_parser` |
 
-Consultez la [documentation Six][7] pour obtenir la liste des modules renommés. Notez que les modules `urllib`, `urllib2` et `urlparse` ont été fortement réorganisés.
+Consultez la [documentation Six][7] (en anglais) pour obtenir la liste des modules renommés. **Remarque** : les modules `urllib`, `urllib2` et `urlparse` ont été fortement réorganisés.
 
 ### Unicode
 
@@ -150,7 +150,7 @@ f = open('textfile.txt', encoding='utf-8')
 contents = f.read()  # le contenu sera décodé en unicode en utilisant ‘utf-8’ ; ce ne sont pas des octets !
 ```
 
-Consultez l'article [Pragmatic Unicode][8] de Ned Batchelder pour en savoir plus.
+Consultez l'article [Pragmatic Unicode][8] de Ned Batchelder (en anglais) pour en savoir plus.
 
 ### Print
 

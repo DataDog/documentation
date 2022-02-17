@@ -82,7 +82,7 @@ Relevez tous les défis inhérents au debugging « black box » pour les compo
 ### Bien plus que du debugging
 
 **Profiling en temps réel**
-Servez-vous de flamegraphs agiles pour mesurer la durée d'exécution d'une fonction ou d'un extrait de code, sans avoir à vous soucier des pics de performance.
+Servez-vous de flamegraphs agiles pour mesurer la durée d'exécution d'une fonction ou d'un extrait de code, sans avoir à vous soucier d'une baisse soudaine des performances.
 
 **Tracing distribué**
 Intégrez Rookout à vos outils OpenTracing et OpenTelemetry préférés afin de bénéficier d'un contexte exhaustif et de visualiser vos sessions de debugging.
