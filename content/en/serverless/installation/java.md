@@ -2,7 +2,7 @@
 title: Instrumenting Java Serverless Applications
 kind: documentation
 further_reading:
-- link: 'serverless/serverless_tagging/'
+- link: '/serverless/troubleshooting/serverless_tagging/'
   tag: "Documentation"
   text: 'Tagging Serverless Applications'
 - link: 'serverless/distributed_tracing/'

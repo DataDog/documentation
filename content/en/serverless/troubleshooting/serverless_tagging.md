@@ -13,7 +13,7 @@ aliases:
 
 ## Overview
 
-Any tag applied to your AWS Lambda function automatically becomes a new dimension on which you can filter and group your metrics, traces and logs.
+Any tag applied to your AWS Lambda function automatically becomes a new dimension on which you can filter and group your metrics, traces, and logs.
 
 Tags are especially powerful when consistent across the Datadog platform. First-class support is offered for the following tags: `env`, `service` and `version`.
 
@@ -26,7 +26,7 @@ With these tags, you can:
 
 To tag your serverless application with `env`, `service` and `version`, see the [unified service tagging documentation][1].
 
-**Note**: Lambda function names should adhere to [Datadog's tagging convention][2]. This ties all of your function's traces, logs and metrics together seamlessly.
+**Note**: Lambda function names should adhere to [Datadog's tagging convention][2]. This ties all of your function's traces, logs, and metrics together seamlessly.
 
 ### The env tag
 
