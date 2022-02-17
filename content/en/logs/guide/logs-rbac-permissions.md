@@ -56,8 +56,6 @@ Grants a role the ability to create and modify [log indexes][5]. This includes:
 
 This permission is global and enables both the creation of new indexes, and the edition of existing ones.
 
-**Note**: This permission also grants [Logs Read Index Data](#logs_read_index_data) and [Logs Write Exclusion Filters](#logs_write_exclusion_filters) permissions behind the scenes.
-
 ### `logs_write_exclusion_filters`
 
 Grants a role the ability to create or modify [exclusion filters][8] within an index.
