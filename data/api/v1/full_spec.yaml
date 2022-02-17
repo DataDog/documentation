@@ -712,7 +712,7 @@ components:
             the dedicated [Request JSON schema documentation](https://docs.datadoghq.com/dashboards/graphing_json/request_json)\n
             to learn how to build the `REQUEST_SCHEMA`."
           example:
-          - q/apm_query/log_query: <METRIC_1>{<SCOPE_1>}
+          - q: <METRIC_1>{<SCOPE_1>}
           items:
             $ref: '#/components/schemas/ChangeWidgetRequest'
           maxItems: 1
@@ -2598,6 +2598,7 @@ components:
       description: A formula and functions metrics query.
       example:
         data_source: metrics
+        name: my_query
         query: avg:system.cpu.user{*}
       properties:
         aggregator:
@@ -2776,7 +2777,6 @@ components:
         requests:
           description: Request payload used to query items.
           example:
-          - request_type: funnel
           - query:
               data_source: rum
               query_string: '@browser.name:Chrome'
@@ -2785,6 +2785,7 @@ components:
                 value: /logs
               - facet: '@view.name'
                 value: /apm/home
+            request_type: funnel
           items:
             $ref: '#/components/schemas/FunnelWidgetRequest'
           maxItems: 1
@@ -2917,7 +2918,9 @@ components:
 
             for information about building the `REQUEST_SCHEMA`.'
           example:
-          - rum_query: <METRIC_1>{<SCOPE_1>}
+          - rum_query:
+              search:
+                query: <METRIC_1>{<SCOPE_1>}
           items:
             $ref: '#/components/schemas/GeomapWidgetRequest'
           maxItems: 1
@@ -3140,7 +3143,7 @@ components:
           example: payment
           type: string
       required:
-      - name
+      - message
       type: object
     HTTPMethod:
       description: The HTTP method.
@@ -4041,13 +4044,13 @@ components:
         requests:
           description: Request payload used to query items.
           example:
-          - response_format: event_list
           - columns:
             - field: timestamp
               width: auto
-          - query:
+            query:
               data_source: issue_stream
               query_string: '@data_source:APM'
+            response_format: event_list
           items:
             $ref: '#/components/schemas/ListStreamWidgetRequest'
           maxItems: 1
@@ -6224,7 +6227,7 @@ components:
             stops reporting.
           type: boolean
         renotify_interval:
-          default: none
+          default: null
           description: "The number of minutes after the last notification before a
             monitor re-notifies on the current status.\nIt only re-notifies if it\u2019s
             not resolved."
@@ -6269,7 +6272,7 @@ components:
         thresholds:
           $ref: '#/components/schemas/MonitorThresholds'
         timeout_h:
-          default: none
+          default: null
           description: The number of hours of the monitor not reporting data before
             it automatically resolves from a triggered state. The minimum allowed
             value is 0 hours. The maximum allowed value is 24 hours.
@@ -7108,6 +7111,7 @@ components:
           type: boolean
       type: object
     NotebookCellCreateRequest:
+      additionalProperties: false
       description: The description of a notebook cell create request.
       properties:
         attributes:
@@ -7452,7 +7456,6 @@ components:
           $ref: '#/components/schemas/NotebookMetadataType'
       type: object
     NotebookMetadataType:
-      default: null
       description: Metadata type of the notebook.
       enum:
       - postmortem
@@ -8724,17 +8727,17 @@ components:
           description: For `monitor` based SLOs, this includes the aggregated history
             as arrays that include time series and uptime data where `0=monitor` is
             in `OK` state and `1=monitor` is in `alert` state.
+          example:
+          - - 1579212382
+            - 0
           items:
             description: Represents an array time series data.
             example:
-            - - 1579212382
-              - 0
+            - 1579212382
+            - 0
             items:
               description: A time series data point which is a tuple of (timestamp,
                 value).
-              example:
-              - 1579212382
-              - 0
               format: double
               type: number
             maxItems: 2
@@ -8760,7 +8763,7 @@ components:
           deprecated: true
           description: The amount of decimal places the SLI value is accurate to for
             the given from `&&` to timestamp. Use `span_precision` instead.
-          example: 2
+          example: 2.0
           format: double
           type: number
         preview:
@@ -8778,7 +8781,7 @@ components:
         span_precision:
           description: The amount of decimal places the SLI value is accurate to for
             the given from `&&` to timestamp.
-          example: 2
+          example: 2.0
           format: double
           type: number
         uptime:
@@ -8805,7 +8808,6 @@ components:
 
 
                 This is not included in responses for `monitor` based SLOs.'
-              example: []
               items:
                 description: A grouping parameter.
                 type: string
@@ -8816,7 +8818,6 @@ components:
 
 
                 This is not included in the responses for `metric` based SLOs.'
-              example: []
               items:
                 $ref: '#/components/schemas/SLOHistoryMonitor'
               type: array
@@ -8826,7 +8827,6 @@ components:
 
 
                 This is not included in the responses for `metric` based SLOs.'
-              example: []
               items:
                 $ref: '#/components/schemas/SLOHistoryMonitor'
               type: array
@@ -8838,7 +8838,10 @@ components:
               additionalProperties:
                 $ref: '#/components/schemas/SLOThreshold'
               description: mapping of string timeframe to the SLO threshold.
-              example: {}
+              example:
+                my_service:
+                  target: 95
+                  timeframe: 7d
               type: object
             to_ts:
               description: The `to` timestamp in epoch seconds.
@@ -8903,17 +8906,17 @@ components:
           description: For `monitor` based SLOs, this includes the aggregated history
             as arrays that include time series and uptime data where `0=monitor` is
             in `OK` state and `1=monitor` is in `alert` state.
+          example:
+          - - 1579212382
+            - 0
           items:
             description: Represents an array time series data.
             example:
-            - - 1579212382
-              - 0
+            - 1579212382
+            - 0
             items:
               description: A time series data point which is a tuple of (timestamp,
                 value).
-              example:
-              - 1579212382
-              - 0
               format: double
               type: number
             maxItems: 2
@@ -8961,7 +8964,7 @@ components:
         span_precision:
           description: The amount of decimal places the SLI value is accurate to for
             the given from `&&` to timestamp.
-          example: 2
+          example: 2.0
           format: double
           type: number
         uptime:
@@ -10858,7 +10861,6 @@ components:
         target:
           description: Value used by the operator.
           example: 123456
-          nullable: false
         type:
           $ref: '#/components/schemas/SyntheticsAssertionType'
       required:
@@ -19706,10 +19708,9 @@ paths:
             application/json:
               schema:
                 example:
-                  value:
-                  - namespace1
-                  - namespace2
-                  - namespace3
+                - namespace1
+                - namespace2
+                - namespace3
                 items:
                   type: string
                 type: array
@@ -24181,7 +24182,7 @@ paths:
                   - metric: system.load.1
                     points:
                     - - ${NOW}
-                      - '1234.5'
+                      - 1234.5
                 x-variables:
                   NOW: $(date +%s)
             schema:
@@ -29238,6 +29239,10 @@ paths:
                 value:
                 - message: hello
                 - message: world
+            schema:
+              $ref: '#/components/schemas/HTTPLog'
+          application/json;simple:
+            examples:
               simple-json-message:
                 description: Log attributes can be passed as `key:value` pairs in
                   valid JSON messages.
@@ -29248,7 +29253,7 @@ paths:
                   hostname: fa1e1e739d95
                   message: hello world
             schema:
-              $ref: '#/components/schemas/HTTPLog'
+              $ref: '#/components/schemas/HTTPLogItem'
           application/logplex-1:
             examples:
               multi-raw-message:
