@@ -25,21 +25,19 @@ There are a series of steps that must run successfully for threat information to
 
 ### Confirm Application Security is enabled
 
-Check your [tracer startup logs][3]. If `appsec_enabled` is `true`, then Application Security is enabled and running.
-
-Alternatively, you can use the metric `datadog.apm.appsec_host` to check if Application Security is running.
+You can use the metric `datadog.apm.appsec_host` to check if Application Security is running.
 
 1. Go to **Metrics > Summary** in Datadog.
 2. Search for the metric `datadog.apm.appsec_host`. If the metric doesn’t exist, then there are no services running Application Security. If the metric exists, the services are reported with the metric tags `host` and `service`.
 3. Select the metric, and in the **Tags** section, search for `service` to see which services are running Application Security.
 
-If you are not seeing `datadog.apm.appsec_host`, check the [in-app instructions][4] to confirm that all steps for the initial setup are complete.
+If you are not seeing `datadog.apm.appsec_host`, check the [in-app instructions][3] to confirm that all steps for the initial setup are complete.
 
-Application Security data is sent with APM traces. See [APM troubleshooting][5] to [confirm APM setup][6] and check for [connection errors][7].
+Application Security data is sent with APM traces. See [APM troubleshooting][4] to [confirm APM setup][5] and check for [connection errors][6].
 
 ### Send a test attack to your application
 
- To test your Application Security setup, trigger the [Security Scanner Detected][8] rule by running a file that contains the following curl script: 
+ To test your Application Security setup, trigger the [Security Scanner Detected][7] rule by running a file that contains the following curl script: 
 
 {{< programming-lang-wrapper langs="java,.NET,go,ruby,PHP,NodeJS" >}}
 {{< programming-lang lang="java" >}}
@@ -135,7 +133,7 @@ A few minutes after you enable your application and exercise it, and if it's suc
 
 ### Check if required tracer integrations are deactivated
 
-Application Security relies on certain tracer integrations. If they are deactivated, Application Security won't work. To see if there are deactivated integrations, look for `disabled_integrations` in your [startup logs][3].
+Application Security relies on certain tracer integrations. If they are deactivated, Application Security won't work. To see if there are deactivated integrations, look for `disabled_integrations` in your [startup logs][8].
 
 The required integrations vary by language.
 
@@ -184,7 +182,7 @@ The following [Go][1] frameworks should be instrumented using the out-of-the-box
 - [Echo][5]
 - [Chi][6]
 
-Please let us know if your framework is not supported by [creating a new issue](https://github.com/DataDog/dd-trace-go/issues/new?title=Missing%20appsec%20framework%20support) in the Go repository.
+Please let us know if your framework is not supported by [creating a new issue][7] in the Go repository.
 
 [1]: /security_platform/application_security/setup_and_configure/
 [2]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/grpc#example-package-Server
@@ -192,6 +190,7 @@ Please let us know if your framework is not supported by [creating a new issue](
 [4]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/gorilla/mux#example-package
 [5]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/labstack/echo.v4#example-package
 [6]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi.v5#example-package
+[7]: https://github.com/DataDog/dd-trace-go/issues/new?title=Missing%20appsec%20framework%20support
 {{< /programming-lang >}}
 {{< programming-lang lang="NodeJS" >}}
 
@@ -220,7 +219,7 @@ For [Ruby][1], the [Rack][2] integration is required. Ruby tracer version `1.0.0
  To troubleshoot this step of the process, do the following: 
 
 - Check the details of the running Agent at this address `http://<agent-machine-name>:<agent-port>/info`, usually `http://localhost:8126/info`. 
-- Ensure there are no Agent transmission errors related to spans in your [tracer logs][8]. 
+- Ensure there are no Agent transmission errors related to spans in your [tracer logs][7]. 
 - If the Agent is installed on a separate machine, check that `DD_AGENT_HOST` and, optionally, `DD_TRACE_AGENT_PORT` are set, or that `DD_TRACE_AGENT_URL` is set for the application tracing library.
 
 ### Check Datadog Agent to backend configuration
@@ -325,11 +324,24 @@ ddappsec.helper_lock_path = /<directory with compatible permissions>/ddappsec.lo
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
-#### Knowing if AppSec is enabled in the running application
+### Confirm AppSec is enabled in the running application
 
-The startup logs show the tracer configuration and whether AppSec in enabled or not. AppSec is enabled when the configuration field `appsec` is `true` and disabled otherwise.
+[Tracer startup logs][1] show the tracer configuration and whether Application Security is enabled or not. If `appsec` is `true`, then Application Security is enabled and running.
 
-For example, the following startup log shows the AppSec is disabled:
+For example, the following startup log shows that Application Security is disabled:
+
+```
+2022/02/17 14:49:00 Datadog Tracer v1.36.0 INFO: DATADOG TRACER CONFIGURATION {"date":"2022-02-17T14:49:00+01:00","os_name":"Linux (Unknown Distribution)","os_version":"5.13.0","version":"v1.36.0","lang":"Go","lang_version":"go1.17.1","env":"prod","service":"grpcserver","agent_url":"http://localhost:8126/v0.4/traces","debug":false,"analytics_enabled":false,"sample_rate":"NaN","sampling_rules":null,"sampling_rules_error":"","service_mappings":null,"tags":{"runtime-id":"69d99219-b68f-4718-9419-fa173a79351e"},"runtime_metrics_enabled":false,"health_metrics_enabled":false,"profiler_code_hotspots_enabled":false,"profiler_endpoints_enabled":false,"dd_version":"","architecture":"amd64","global_service":"","lambda_mode":"false","appsec":false,"agent_features":{"DropP0s":false,"Stats":false,"StatsdPort":0}}
+```
+
+### Enable debug logs
+
+Enable debug logs with the environment variable `DD_TRACE_DEBUG=1`. The Application Security library will log to the standard error output.
+
+**Note:** Application Security only outputs logs when it is enabled. Use the environment variable `DD_APPSEC_ENABLED=1` to enable Application Security.
+
+
+[1]: /tracing/troubleshooting/tracer_startup_logs/
 {{< /programming-lang >}}
 {{< programming-lang lang="NodeJS" >}}
 
@@ -463,16 +475,6 @@ Metrics: [
 
 Wait a minute for the agent to forward the traces, then check that the traces show up in the APM dashboard. The security information in the traces may take additional time to be processed by Datadog before showing up as suspicious requests in the Application Security [Trace and Signals Explorer][1].
 
-#### Is Application Security forwarding security threats to the Agent?
-
-To confirm that Application Security is detecting and forwarding security threats to the agent, trigger a [test attack](#send-a-test-attack-to-your-application), and look for these logs:
-
-```
-D, [2021-12-14T11:03:37.347815 #73127] DEBUG -- ddtrace: [ddtrace] (ddtrace/lib/datadog/security/worker.rb:54:in `block in perform') processed events: [{:event_id=>"eb1eca52-74e1-435b-9a6c-44046d3765ee", :event_type=>"appsec.threat.attack", :event_version=>"0.1.0", :detected_at=>"2021-12-14T10:03:37Z", :type=>"security_scanner", :blocked=>false, :rule=>{:id=>"ua0-600-10x", :name=>"Nessus", :set=>"security_scanner"}, :rule_match=>{:operator=>"match_regex", :operator_value=>"(?i)^Nessus(/|([ :]+SOAP))", :parameters=>[{:name=>"server.request.headers.no_cookies", :key_path=>["user-agent"], :value=>"Nessus SOAP", :highlight=>["Nessus SOAP"]}]}, :context=>{:actor=>{:context_version=>"0.1.0", :ip=>{:address=>"127.0.0.1"}, :identifiers=>nil, :_id=>nil}, :host=>{:os_type=>"Linux", :hostname=>"procyon-vm", :context_version=>"0.1.0"}, :http=>{:context_version=>"0.1.0", :request=>{:scheme=>"http", :method=>"GET", :url=>"http://127.0.0.1:9292/admin.php", :host=>"127.0.0.1", :port=>9292, :path=>"/admin.php", :remote_ip=>"127.0.0.1", :headers=>{"host"=>"127.0.0.1:9292", "accept"=>"*/*", "user-agent"=>"Nessus SOAP"}, :useragent=>"Nessus SOAP"}, :response=>{:status=>404, :blocked=>false, :headers=>{"Content-Type"=>"text/plain"}}}, :service=>{:context_version=>"0.1.0", :name=>"rack", :environment=>nil}, :span=>{:context_version=>"0.1.0", :id=>4439751766880249768}, :tags=>{:context_version=>"0.1.0", :values=>["_dd.appsec.enabled:1", "_dd.runtime_family:ruby", "service:rack"]}, :trace=>{:context_version=>"0.1.0", :id=>2632764434813487337}, :tracer=>{:context_version=>"0.1.0", :runtime_type=>"ruby", :runtime_version=>"3.0.2", :lib_version=>"0.54.1"}}}]
-```
-
-Wait a minute for the Agent to forward the threat information to Datadog, then check that the traces show up in the APM dashboard.
-
 [1]: https://app.datadoghq.com/security/appsec/
 [2]: /tracing/troubleshooting/#tracer-debug-logs
 {{< /programming-lang >}}
@@ -481,7 +483,7 @@ Wait a minute for the Agent to forward the threat information to Datadog, then c
 If you continue to have issues with Application Security, contact [Datadog support][1] with the following information: 
 
 - Confirmation that the [test attack](#send-a-test-attack-to-your-application) was successfully sent 
-- Tracer [startup][3] or [debug][10] logs
+- Tracer [startup][8] or [debug][10] logs
 
 ## Further Reading
 
@@ -489,11 +491,11 @@ If you continue to have issues with Application Security, contact [Datadog suppo
 
 [1]: /help/
 [2]: https://app.datadoghq.com/security/appsec/
-[3]: /tracing/troubleshooting/tracer_startup_logs/
-[4]: https://app.datadoghq.com/security/appsec?instructions=all
-[5]: /tracing/troubleshooting/
-[6]: /tracing/troubleshooting/#confirm-apm-setup-and-agent-status
-[7]: /tracing/troubleshooting/connection_errors/
-[8]: /security_platform/default_rules/security-scan-detected/
+[3]: https://app.datadoghq.com/security/appsec?instructions=all
+[4]: /tracing/troubleshooting/
+[5]: /tracing/troubleshooting/#confirm-apm-setup-and-agent-status
+[6]: /tracing/troubleshooting/connection_errors/
+[7]: /security_platform/default_rules/security-scan-detected/
+[8]: /tracing/troubleshooting/tracer_startup_logs/
 [9]: /tracing/visualization/#spans
 [10]: /tracing/troubleshooting/#tracer-debug-logs
