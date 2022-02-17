@@ -41,7 +41,11 @@ To map telemetry data with your source code, you need to:
 To link data to a specific commit, tag your telemetry with a `git.commit.sha` tag.
 
 {{< tabs >}}
-{{% tab "Docker and containerd" %}}
+{{% tab "Containers" %}}
+
+<div class="alert alert-warning">
+This approach requires that you are using Docker, or containerd >= 1.5.6. For other container setups, see "Other".
+</div>
 
 If you are running your app in containers, Datadog can extract source code information directly from your images' Docker labels. During build time, follow the [Open Containers standard][1] to add the git commit SHA and repository URL as a Docker labels:
 
@@ -68,13 +72,7 @@ The git commit SHA and repository URL are added to your telemetry.
 {{% /tab %}}
 {{% tab "Other" %}}
 
-#### Other container setups
-
-<div class="alert alert-info">Container setups such as <code>CRI-O</code> running on Mesos or Swarm are not supported. Default to the non-containerized environment setup below.</div>
-
-#### Non-containerized environments
-
-For non-containerized environments, manually tag your traces, spans, and profiles with the git commit SHA and repository URL.
+For non-containerized or unsupported environments, manually tag your traces, spans, and profiles with the git commit SHA and repository URL.
 
 To tag your traces, spans, and profiles with `git.commit.sha`, configure the tracer with the `DD_TAGS` environment variable:
 
