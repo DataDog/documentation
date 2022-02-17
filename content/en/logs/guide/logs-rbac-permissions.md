@@ -94,8 +94,6 @@ Grants a role the ability to create and modify [log processing pipelines][9]. Th
 - Granting another role the [Logs Write Processors](#logs_write_processors) permission, scoped for that pipeline
 - Managing [standard attributes][10] or [aliasing facets][11]
 
-**Note**: This permission also grants [Logs Write Processors](#logs_write_processors) (for all processors on all pipelines) permissions behind the scenes.
-
 ### `logs_write_processors`
 
 Grants a role the ability to create, edit, or delete processors and nested pipelines.
