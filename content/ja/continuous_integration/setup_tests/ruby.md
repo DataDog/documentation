@@ -49,20 +49,17 @@ Cucumber インテグレーションでは、`cucumber` フレームワークを
 
 ```ruby
 require 'cucumber'
-require 'datadog/ci'
+require 'ddtrace'
 
-Datadog::CI.configure do |c|
-  # CI でのみテストインスツルメンテーションをアクティブ化します
-  c.tracer.enabled = (ENV["DD_ENV"] == "ci")
-
-  # 結果が確実に配信されるようにトレーサーを構成します
-  c.ci_mode.enabled = true
-
-  # テスト中のサービスまたはライブラリの名前
-  c.service = 'my-ruby-app'
-
-  # Cucumber のインスツルメンテーションを有効にします
-  c.use :cucumber
+if ENV["DD_ENV"] == "ci"
+  Datadog.configure do |c|
+    # 結果が確実に配信されるようにトレーサーを構成します
+    c.ci.enabled = true
+    # テスト中のサービスまたはライブラリの名前
+    c.service = 'my-ruby-app'
+    # Cucumber のインスツルメンテーションを有効にします
+    c.ci.instrument :cucumber
+  end
 end
 ```
 
@@ -81,20 +78,17 @@ RSpec インテグレーションでは、`rspec` テストフレームワーク
 
 ```ruby
 require 'rspec'
-require 'datadog/ci'
+require 'ddtrace'
 
-Datadog::CI.configure do |c|
-  # CI でのみテストインスツルメンテーションをアクティブ化します
-  c.tracer.enabled = (ENV["DD_ENV"] == "ci")
-
-  # 結果が確実に配信されるようにトレーサーを構成します
-  c.ci_mode.enabled = true
-
-  # テスト中のサービスまたはライブラリの名前
-  c.service = 'my-ruby-app'
-
-  # RSpec のインスツルメンテーションを有効にします
-  c.use :rspec
+if ENV["DD_ENV"] == "ci"
+  Datadog.configure do |c|
+    # 結果が確実に配信されるようにトレーサーを構成します
+    c.ci.enabled = true
+    # テスト中のサービスまたはライブラリの名前
+    c.service = 'my-ruby-app'
+    # Cucumber のインスツルメンテーションを有効にします
+    c.ci.instrument :rspec
+  end
 end
 ```
 
@@ -109,7 +103,7 @@ DD_ENV=ci bundle exec rake spec
 
 ## コンフィギュレーション設定
 
-以下は、`Datadog::CI.configure` ブロックを使用するか、環境変数を使用するコードで、トレーサーで使用できる最も重要なコンフィギュレーション設定のリストです。
+以下は、`Datadog.configure` ブロックを使用するか、環境変数を使用するコードで、トレーサーで使用できる最も重要なコンフィギュレーション設定のリストです。
 
 `service`
 : テスト中のサービスまたはライブラリの名前。<br/>

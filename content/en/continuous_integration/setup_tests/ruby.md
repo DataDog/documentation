@@ -57,20 +57,15 @@ To activate your integration, add the following code to your application:
 
 ```ruby
 require 'cucumber'
-require 'datadog/ci'
+require 'ddtrace'
 
-Datadog::CI.configure do |c|
-  # Only activates test instrumentation on CI
-  c.tracer.enabled = (ENV["DD_ENV"] == "ci")
 
-  # Configures the tracer to ensure results delivery
-  c.ci_mode.enabled = true
-
-  # The name of the service or library under test
-  c.service = 'my-ruby-app'
-
-  # Enables the Cucumber instrumentation
-  c.use :cucumber
+if ENV["DD_ENV"] == "ci"
+    Datadog.configure do |c|
+      c.service = 'my-ruby-app'
+      c.ci.enabled = true
+      c.ci.instrument :cucumber
+    end
 end
 ```
 
@@ -89,20 +84,14 @@ To activate your integration, add this to the `spec_helper.rb` file:
 
 ```ruby
 require 'rspec'
-require 'datadog/ci'
+require 'ddtrace'
 
-Datadog::CI.configure do |c|
-  # Only activates test instrumentation on CI
-  c.tracer.enabled = (ENV["DD_ENV"] == "ci")
-
-  # Configures the tracer to ensure results delivery
-  c.ci_mode.enabled = true
-
-  # The name of the service or library under test
-  c.service = 'my-ruby-app'
-
-  # Enables the RSpec instrumentation
-  c.use :rspec
+if ENV["DD_ENV"] == "ci"
+    Datadog.configure do |c|
+      c.service = 'my-ruby-app'
+      c.ci.enabled = true
+      c.ci.instrument :rspec
+    end
 end
 ```
 
@@ -117,7 +106,7 @@ DD_ENV=ci bundle exec rake spec
 
 ## Configuration settings
 
-The following is a list of the most important configuration settings that can be used with the tracer, either in code by using a `Datadog::CI.configure` block, or using environment variables:
+The following is a list of the most important configuration settings that can be used with the tracer, either in code by using a `Datadog.configure` block, or using environment variables:
 
 `service`
 : Name of the service or library under test.<br/>
