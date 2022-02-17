@@ -31,7 +31,7 @@ further_reading:
    {{< tabs >}}
 
 {{% tab "Rails" %}}
-   The APM tracer is required to operate AppSec. If you want to enable the APM tracer via auto-instrument, update your Gemfile:
+   Note: The APM tracer is required to operate AppSec. If you want to enable the APM tracer via auto-instrument, update your Gemfile:
 
    ```
    gem 'ddtrace', '~> 1.0.0.beta1', require: 'ddtrace/auto_instrument'
@@ -56,9 +56,9 @@ further_reading:
 {{% /tab %}}
 
 {{% tab "Sinatra" %}}
-   The APM tracer is required to operate AppSec.
+   Note: The APM tracer is required to operate AppSec.
 
-   And add to your app's startup:
+   Add to your app's startup:
 
    ```
    require 'ddtrace'
@@ -104,6 +104,8 @@ further_reading:
    {{< tabs >}}
 {{% tab "Docker CLI" %}}
 
+Note: The APM tracer is required to operate AppSec.
+
 Update your configuration container for APM by adding the following argument in your `docker run` command:
 
 ```
@@ -113,6 +115,8 @@ docker run [...] -e DD_APPSEC_ENABLED=true [...]
 {{% /tab %}}
 {{% tab "Dockerfile" %}}
 
+Note: The APM tracer is required to operate AppSec.
+
 Add the following environment variable value to your container Dockerfile:
 
 ```
@@ -121,6 +125,8 @@ ENV DD_APPSEC_ENABLED=true
 
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
+
+Note: The APM tracer is required to operate AppSec.
 
 Update your configuration yaml file container for APM and add the AppSec env variable:
 
@@ -139,6 +145,8 @@ spec:
 {{% /tab %}}
 {{% tab "AWS ECS" %}}
 
+Note: The APM tracer is required to operate AppSec.
+
 Update your ECS task definition JSON file, by adding this in the  environment section:
 
 ```
@@ -153,6 +161,8 @@ Update your ECS task definition JSON file, by adding this in the  environment se
 
 {{% /tab %}}
 {{% tab "AWS Fargate" %}}
+
+Note: The APM tracer is required to operate AppSec.
 
 Initialize Application Security in your code or set `DD_APPSEC_ENABLED` environment variable to true in your service invocation:
 ```
