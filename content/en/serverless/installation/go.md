@@ -20,11 +20,9 @@ aliases:
 
 {{< img src="serverless/go-lambda-tracing.png" alt="Monitor Go Lambda Functions with Datadog"  style="width:100%;">}}
 
-## Prerequisites
+## Configuration
 
 If your Go Lambda functions are still using runtime `go1.x`, you must either [migrate][1] to `provided.al2` or use the [Datadog Forwarder][2] instead of the Datadog Lambda Extension.
-
-## Configuration
 
 ### Install the Datadog Lambda library
 

@@ -73,7 +73,7 @@ By identifying misconfigurations in failing requests, you can more easily reprod
 
 Our enhanced Lambda metrics, which appear in Datadog with the prefix `aws.lambda.enhanced`, are available at down-to-the-second granularity and in near real time. Enhanced Lambda metrics can be used to alert or for SLOs on cold starts, estimated AWS costs, timeouts, out-of-memory errors and memory usage across all of your Lambda functions. This enables you to view performance issues in your serverless environments right as they occur and troubleshoot without delay. 
 
-{{< img src="serverless/serverless_enhanced_metrics.jpeg.jpeg" alt="Datadog Serverless Monitoring"  style="width:100%;" >}}
+{{< img src="serverless/serverless_enhanced_metrics.jpeg" alt="Datadog Serverless Monitoring"  style="width:100%;" >}}
 
 ### Monitor serverless configuration changes with deployment tracking
 
