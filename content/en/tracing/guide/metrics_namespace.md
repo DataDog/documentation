@@ -103,7 +103,7 @@ With the following definitions:
 
 `trace.<SPAN_NAME>.duration`
 : **Prerequisite:** This metric exists for any APM service.<br>
-**Description:** Measure the total time for a collection of spans. Specifically, it is the total time spent by all spans over an interval - including time spent waiting on child processes.<br>
+**Description:** Measure the total time for a collection of spans. Specifically, it is the total time spent by all spans over an interval - including time spent waiting on child processes. When divided by `trace.<SPAN_NAME>.hits`, the result provides the average. To get percentiles, use [DDSketch-based metrics][11]. <br>
 **Metric type:** [GAUGE][7].<br>
 **Tags:** `env`, `service`, `resource`, `http.status_code`, all host tags from the Datadog Host Agent, and [the second primary tag][4].
 
@@ -187,3 +187,4 @@ With the following definitions:
 [8]: /tracing/visualization/services_list/#services-types
 [9]: /tracing/visualization/#services
 [10]: /tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm/
+[11]: /tracing/guide/ddsketch_trace_metrics/
