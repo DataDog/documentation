@@ -898,6 +898,7 @@ components:
           example: 23
           format: int64
           type: integer
+      type: object
     CloudWorkloadSecurityAgentRuleCreateAttributes:
       description: Create a new Cloud Workload Security Agent rule.
       properties:
