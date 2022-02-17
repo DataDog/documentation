@@ -44,7 +44,7 @@ To link data to a specific commit, tag your telemetry with a `git.commit.sha` ta
 {{% tab "Containers" %}}
 
 <div class="alert alert-warning">
-This approach requires Docker, or containerd >= 1.5.6. For other container setups, see "Other".
+This approach requires Docker, or containerd >= 1.5.6. For other container setups, see the "Other" section.
 </div>
 
 If you are running your app in containers, Datadog can extract source code information directly from your images' Docker labels. During build time, follow the [Open Containers standard][1] to add the git commit SHA and repository URL as Docker labels:
