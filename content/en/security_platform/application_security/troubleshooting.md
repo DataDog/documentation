@@ -324,7 +324,7 @@ ddappsec.helper_lock_path = /<directory with compatible permissions>/ddappsec.lo
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
-### Confirm AppSec is enabled in the running application
+#### Confirm AppSec is enabled in the running application
 
 [Tracer startup logs][1] show the tracer configuration and whether Application Security is enabled or not. If `appsec` is `true`, then Application Security is enabled and running.
 
@@ -334,7 +334,7 @@ For example, the following startup log shows that Application Security is disabl
 2022/02/17 14:49:00 Datadog Tracer v1.36.0 INFO: DATADOG TRACER CONFIGURATION {"date":"2022-02-17T14:49:00+01:00","os_name":"Linux (Unknown Distribution)","os_version":"5.13.0","version":"v1.36.0","lang":"Go","lang_version":"go1.17.1","env":"prod","service":"grpcserver","agent_url":"http://localhost:8126/v0.4/traces","debug":false,"analytics_enabled":false,"sample_rate":"NaN","sampling_rules":null,"sampling_rules_error":"","service_mappings":null,"tags":{"runtime-id":"69d99219-b68f-4718-9419-fa173a79351e"},"runtime_metrics_enabled":false,"health_metrics_enabled":false,"profiler_code_hotspots_enabled":false,"profiler_endpoints_enabled":false,"dd_version":"","architecture":"amd64","global_service":"","lambda_mode":"false","appsec":false,"agent_features":{"DropP0s":false,"Stats":false,"StatsdPort":0}}
 ```
 
-### Enable debug logs
+#### Enable debug logs
 
 Enable debug logs with the environment variable `DD_TRACE_DEBUG=1`. The Application Security library will log to the standard error output.
 
