@@ -44,7 +44,7 @@ Application Security data is sent with APM traces. See [APM troubleshooting][5] 
 {{< programming-lang-wrapper langs="java,.NET,go,ruby,PHP,NodeJS" >}}
 {{< programming-lang lang="java" >}}
 
-```curl
+```bash
 for ((i=1;i<=200;i++)); 
 do
 # Target existing service’s routes
@@ -59,7 +59,7 @@ done
 {{< /programming-lang >}}
 {{< programming-lang lang=".NET" >}}
 
-```curl
+```bash
 for ((i=1;i<=200;i++)); 
 do
 # Target existing service’s routes
@@ -74,7 +74,7 @@ done
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
- ```curl
+ ```bash
  for ((i=1;i<=200;i++)); 
 do
 # Target existing service’s routes
@@ -87,7 +87,7 @@ done
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
- ```curl
+ ```bash
  for ((i=1;i<=200;i++)); 
 do
 # Target existing service’s routes
@@ -100,7 +100,7 @@ done
 {{< /programming-lang >}}
 {{< programming-lang lang="PHP" >}}
 
-```curl
+```bash
 for ((i=1;i<=200;i++)); 
 do
 # Target existing service’s routes
@@ -115,7 +115,7 @@ done
 {{< /programming-lang >}}
 {{< programming-lang lang="NodeJS" >}}
 
-```curl
+```bash
 for ((i=1;i<=200;i++)); 
 do
 # Target existing service’s routes
@@ -176,7 +176,7 @@ The are no required integrations for [PHP][1].
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
-For [Go][1], the required integrations are the following:
+The following [Go][1] frameworks should be instrumented using the out-of-the-box APM integrations:
 
 - [gRPC][2]
 - [net/http][3]
@@ -184,6 +184,7 @@ For [Go][1], the required integrations are the following:
 - [Echo][5]
 - [Chi][6]
 
+Please let us know if your framework is not supported by [creating a new issue](https://github.com/DataDog/dd-trace-go/issues/new?title=Missing%20appsec%20framework%20support) in the Go repository.
 
 [1]: /security_platform/application_security/setup_and_configure/
 [2]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/grpc#example-package-Server
@@ -324,41 +325,11 @@ ddappsec.helper_lock_path = /<directory with compatible permissions>/ddappsec.lo
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
-#### Installing the C toolchain
+#### Knowing if AppSec is enabled in the running application
 
-CGO requires the following:
+The startup logs show the tracer configuration and whether AppSec in enabled or not. AppSec is enabled when the configuration field `appsec` is `true` and disabled otherwise.
 
-- The `gcc` compiler for the target `GOOS` and `GOARCH`.
-- The C library headers.
-
-To install those libraries, use the command based on your OS:
-
-| OS                   | Installation Command          |
-|----------------------|-------------------------------|
-| Debian, Ubuntu       | $ apt install gcc libc6-dev   |
-| Alpine               | $ apk add gcc musl-dev	       |
-| RHEL, CentOS, Fedora | $ yum install gcc glibc-devel |
-| macOS	               | xcode-select --install        |
-
-#### Enable CGO
-
-Follow the below instructions based on your situation:
-
-- **You are not explicitly disabling CGO yourself.**
-  
-  - Set the `CGO_ENABLED` environment variable to `1` during the program compilation to enable it. For example:
-
-    ```go
-      env CGO_ENABLED=1 go build -tags appsec ./my/app
-    ```
-
-  - You might also have to install the [C toolchain](#installing-the-c-toolchain). 
-
-- **You are explicitly disabling CGO to statically link your Go program.**
-  
-  Static linking isn’t supported. If you can’t enable CGO for this reason, contact [Datadog support][1] for additional help to get Application Security added to your application. 
-
-[1]: /help/
+For example, the following startup log shows the AppSec is disabled:
 {{< /programming-lang >}}
 {{< programming-lang lang="NodeJS" >}}
 
@@ -413,8 +384,8 @@ Debug logs are verbose but useful. If you open up a ticket with [Datadog support
 Application Security has been correctly enabled if you see logs such as:
 
 ```
-D, [2021-12-14T11:03:32.167125 #73127] DEBUG -- ddtrace: [ddtrace] (libddwaf/lib/datadog/security/waf.rb:296:in `block in logger=') {:level=>:ddwaf_log_info, :func=> "ddwaf_set_log_cb", :file=>"PowerWAFInterface.cpp", :message=>"Sending log messages to binding, min level trace"}
-D, [2021-12-14T11:03:32.200491 #73127] DEBUG -- ddtrace: [ddtrace] (libddwaf/lib/datadog/security/waf.rb:296:in `block in logger=') {:level=>:ddwaf_log_debug, :func= >"parse", :file=>"parser_v2.cpp", :message=>"Loaded 124 rules out of 124 available in the ruleset"}
+D, [2021-12-14T11:03:32.167125 #73127] DEBUG -- ddtrace: [ddtrace] (libddwaf/lib/datadog/appsec/waf.rb:296:in `block in logger=') {:level=>:ddwaf_log_info, :func=> "ddwaf_set_log_cb", :file=>"PowerWAFInterface.cpp", :message=>"Sending log messages to binding, min level trace"}
+D, [2021-12-14T11:03:32.200491 #73127] DEBUG -- ddtrace: [ddtrace] (libddwaf/lib/datadog/appsec/waf.rb:296:in `block in logger=') {:level=>:ddwaf_log_debug, :func= >"parse", :file=>"parser_v2.cpp", :message=>"Loaded 124 rules out of 124 available in the ruleset"}
 ```
 
 If you do not see those logs, check the following:
@@ -428,10 +399,10 @@ If you do not see those logs, check the following:
 To confirm that Application Security is called for each HTTP request, trigger a [test attack](#send-a-test-attack-to-your-application) and look for these logs:
 
 ```
-D, [2022-01-19T21:25:50.579745 #341792] DEBUG -- ddtrace: [ddtrace] (/home/lloeki/src/github.com/DataDog/dd-trace-rb/lib/datadog/security/reactive/operation.rb:14:in `initialize') operation: rack.request initialize
-D, [2022-01-19T21:25:50.580300 #341792] DEBUG -- ddtrace: [ddtrace] (/home/lloeki/src/github.com/DataDog/dd-trace-rb/lib/datadog/security/contrib/rack/gateway/watcher.rb:25:in `block (2 levels) in watch') root span: 964736568335365930
-D, [2022-01-19T21:25:50.580371 #341792] DEBUG -- ddtrace: [ddtrace] (/home/lloeki/src/github.com/DataDog/dd-trace-rb/lib/datadog/security/contrib/rack/gateway/watcher.rb:26:in `block (2 levels) in watch') active span: 964736568335365930
-D, [2022-01-19T21:25:50.581061 #341792] DEBUG -- ddtrace: [ddtrace] (/home/lloeki/src/github.com/DataDog/dd-trace-rb/lib/datadog/security/contrib/rack/reactive/request.rb:34:in `block in subscribe') reacted to ["request.headers", "request.uri.raw", "request.query", "request.cookies", "request.body.raw"]: [{"version"=>"HTTP/1.1", "host"=>"127.0.0.1:9292", "accept"=>"*/*", "user-agent"=>"Nessus SOAP"}, "http://127.0.0.1:9292/", [], {}, ""]
+D, [2022-01-19T21:25:50.579745 #341792] DEBUG -- ddtrace: [ddtrace] (/home/lloeki/src/github.com/DataDog/dd-trace-rb/lib/datadog/appsec/reactive/operation.rb:14:in `initialize') operation: rack.request initialize
+D, [2022-01-19T21:25:50.580300 #341792] DEBUG -- ddtrace: [ddtrace] (/home/lloeki/src/github.com/DataDog/dd-trace-rb/lib/datadog/appsec/contrib/rack/gateway/watcher.rb:25:in `block (2 levels) in watch') root span: 964736568335365930
+D, [2022-01-19T21:25:50.580371 #341792] DEBUG -- ddtrace: [ddtrace] (/home/lloeki/src/github.com/DataDog/dd-trace-rb/lib/datadog/appsec/contrib/rack/gateway/watcher.rb:26:in `block (2 levels) in watch') active span: 964736568335365930
+D, [2022-01-19T21:25:50.581061 #341792] DEBUG -- ddtrace: [ddtrace] (/home/lloeki/src/github.com/DataDog/dd-trace-rb/lib/datadog/appsec/contrib/rack/reactive/request.rb:34:in `block in subscribe') reacted to ["request.headers", "request.uri.raw", "request.query", "request.cookies", "request.body.raw"]: [{"version"=>"HTTP/1.1", "host"=>"127.0.0.1:9292", "accept"=>"*/*", "user-agent"=>"Nessus SOAP"}, "http://127.0.0.1:9292/", [], {}, ""]
 ```
 
 If you don’t see those logs, try the following:
@@ -444,19 +415,19 @@ If the Rack integration was configured manually, sometimes a known issue prevent
 
 ```
 Datadog.configure do |c|
-  c.use :rails
+  c.instrument :rails
   ...
-  c.use :rack, web_service_name: "something", request_queuing: true
+  c.instrument :rack, web_service_name: "something", request_queuing: true
 ```
 
-If `c.use :rack` is present, remove it to see if the check passes.
+If `c.instrument :rack` is present, remove it to see if the check passes.
 
 #### Is Application Security detecting HTTP request security threats?
 
 To confirm that Application Security is detecting security threats, trigger a [test attack](#send-a-test-attack-to-your-application), and look for these logs:
 
 ```
-D, [2021-12-14T22:39:53.268820 #106051] DEBUG -- ddtrace: [ddtrace] (ddtrace/lib/datadog/security/contrib/rack/reactive/request.rb:63:in `block in subscribe') WAF: #<struct Datadog::Security::WAF::Result action=:monitor, data=[{"rule"=>{"id"=>"ua0-600-10x", "name"=>"Nessus", "tags"=>{"type"=>"security_scanner", "category"=>"attack_attempt"}}, "rule_matches"=>[{"operator"=>"match_regex", "operator_value"=>"(?i)^Nessus(/|([ :]+SOAP))", "parameters"=>[{"address"=>"server.request.headers.no_cookies", "key_path"=>["user-agent"], "value"=>"Nessus SOAP", "highlight"=>["Nessus SOAP"]}]}]}], perf_data=nil, perf_total_runtime=20519>
+D, [2021-12-14T22:39:53.268820 #106051] DEBUG -- ddtrace: [ddtrace] (ddtrace/lib/datadog/appsec/contrib/rack/reactive/request.rb:63:in `block in subscribe') WAF: #<struct Datadog::AppSec::WAF::Result action=:monitor, data=[{"rule"=>{"id"=>"ua0-600-10x", "name"=>"Nessus", "tags"=>{"type"=>"security_scanner", "category"=>"attack_attempt"}}, "rule_matches"=>[{"operator"=>"match_regex", "operator_value"=>"(?i)^Nessus(/|([ :]+SOAP))", "parameters"=>[{"address"=>"server.request.headers.no_cookies", "key_path"=>["user-agent"], "value"=>"Nessus SOAP", "highlight"=>["Nessus SOAP"]}]}]}], perf_data=nil, perf_total_runtime=20519>
 ```
 If you don’t see those logs, check that another upstream security system is not filtering out the requests or altering them based on the test header value. 
 
