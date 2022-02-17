@@ -25,19 +25,19 @@ further_reading:
 
    For information about which language and framework versions are supported by the library, see [Compatibility][1].
 
-   See our [upgrade guide to 1.0][2] if you were using a 0.x version of `ddtrace`.
+   For more information about upgrading from a `dd-trace` 0.x version, see [the Ruby tracer upgrade guide][2].
 
 2. **Enable Application Security**, either in your code:
    {{< tabs >}}
 
 {{% tab "Rails" %}}
-   Note: The APM tracer is required to operate AppSec. If you want to enable the APM tracer via auto-instrument, update your Gemfile:
+   Either enable the tracer through auto-instrumentation by updating your Gemfile:
 
    ```
    gem 'ddtrace', '~> 1.0.0.beta1', require: 'ddtrace/auto_instrument'
    ```
 
-   Add an initializer:
+   Or enable the tracer by adding an initializer in your application code:
 
    ```
    # config/initializers/datadog.rb
@@ -46,7 +46,7 @@ further_reading:
 
    Datadog.configure do |c|
      # enable the APM tracer
-     # not needed if `gem 'ddtrace', require: 'ddtrace/auto_instrument'` is used
+     # not needed if `gem 'ddtrace', require: 'ddtrace/auto_instrument' is used
      c.tracing.instrument :rails
 
      c.appsec.enabled = true
@@ -56,9 +56,7 @@ further_reading:
 {{% /tab %}}
 
 {{% tab "Sinatra" %}}
-   Note: The APM tracer is required to operate AppSec.
-
-   Add to your app's startup:
+   Enable the tracer by adding the following to your application's startup:
 
    ```
    require 'ddtrace'
@@ -66,7 +64,6 @@ further_reading:
 
    Datadog.configure do |c|
      # enable the APM tracer
-     # not needed if `require 'ddtrace/auto_instrument'` is used
      c.tracing.instrument :sinatra
 
      # enable appsec for Sinatra
@@ -77,7 +74,7 @@ further_reading:
 {{% /tab %}}
 
 {{% tab "Rack" %}}
-   The APM tracer is required to operate AppSec. Add this to your `config.ru`:
+   Enable the tracer by adding the following to your `config.ru` file:
 
    ```
    require 'ddtrace'
@@ -104,8 +101,6 @@ further_reading:
    {{< tabs >}}
 {{% tab "Docker CLI" %}}
 
-Note: The APM tracer is required to operate AppSec.
-
 Update your configuration container for APM by adding the following argument in your `docker run` command:
 
 ```
@@ -115,8 +110,6 @@ docker run [...] -e DD_APPSEC_ENABLED=true [...]
 {{% /tab %}}
 {{% tab "Dockerfile" %}}
 
-Note: The APM tracer is required to operate AppSec.
-
 Add the following environment variable value to your container Dockerfile:
 
 ```
@@ -125,8 +118,6 @@ ENV DD_APPSEC_ENABLED=true
 
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
-
-Note: The APM tracer is required to operate AppSec.
 
 Update your configuration yaml file container for APM and add the AppSec env variable:
 
@@ -145,8 +136,6 @@ spec:
 {{% /tab %}}
 {{% tab "AWS ECS" %}}
 
-Note: The APM tracer is required to operate AppSec.
-
 Update your ECS task definition JSON file, by adding this in the  environment section:
 
 ```
@@ -161,8 +150,6 @@ Update your ECS task definition JSON file, by adding this in the  environment se
 
 {{% /tab %}}
 {{% tab "AWS Fargate" %}}
-
-Note: The APM tracer is required to operate AppSec.
 
 Initialize Application Security in your code or set `DD_APPSEC_ENABLED` environment variable to true in your service invocation:
 ```
