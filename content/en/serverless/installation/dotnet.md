@@ -2,7 +2,7 @@
 title: Instrumenting .NET Serverless Applications
 kind: documentation
 further_reading:
-- link: 'serverless/serverless_tagging/'
+- link: '/serverless/troubleshooting/serverless_tagging/'
   tag: "Serverless"
   text: 'Tagging Serverless Applications'
 - link: 'serverless/distributed_tracing/'
@@ -51,8 +51,8 @@ Datadog offers many different ways to enable instrumentation for your serverless
 
 2. Optionally add `service` and `env` tags with appropriate values to your function.
 
-[1]: https://app.datadoghq.com/organization-settings/api-keys
 
+[1]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{% tab "AWS SAM" %}}
 
@@ -78,8 +78,8 @@ Datadog offers many different ways to enable instrumentation for your serverless
 
 2. Optionally add `service` and `env` tags with appropriate values to your function.
 
-[1]: https://app.datadoghq.com/organization-settings/api-keys
 
+[1]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{% tab "AWS CDK" %}}
 
@@ -108,8 +108,8 @@ Datadog offers many different ways to enable instrumentation for your serverless
 
 2. Optionally add `service` and `env` tags with appropriate values to your function.
 
-[1]: https://app.datadoghq.com/organization-settings/api-keys
 
+[1]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{% tab "Container image" %}}
 
@@ -134,17 +134,17 @@ Datadog offers many different ways to enable instrumentation for your serverless
     ENV DD_DOTNET_TRACER_HOME=/opt/datadog
     ```
 
-    Replace `<TRACER_VERSION>` with the version number of `dd-trace-dotnet` you would like to use (for example, `2.3.0`). The minimum supported version is `2.3.0`. You can see the latest versions of `dd-trace-dotnet` in [GitHub][3].
+    Replace `<TRACER_VERSION>` with the version number of `dd-trace-dotnet` you would like to use (for example, `2.3.0`). The minimum supported version is `2.3.0`. You can see the latest versions of `dd-trace-dotnet` in [GitHub][2].
 
 3. Set the following environment variables in AWS:
     - Set `DD_TRACE_ENABLED` to `true`.
-    - Set `DD_API_KEY` with your Datadog API key, found on the [API Management page][2].
+    - Set `DD_API_KEY` with your Datadog API key, found on the [API Management page][3].
 4. Optionally add `service` and `env` tags with appropriate values to your function.
 
-[1]: https://gallery.ecr.aws/datadog/lambda-extension
-[2]: https://app.datadoghq.com/organization-settings/api-keys
-[3]: https://github.com/DataDog/dd-trace-dotnet/releases
 
+[1]: https://gallery.ecr.aws/datadog/lambda-extension
+[2]: https://github.com/DataDog/dd-trace-dotnet/releases
+[3]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{% tab "Custom" %}}
 
@@ -170,9 +170,9 @@ Datadog offers many different ways to enable instrumentation for your serverless
     DD_DOTNET_TRACER_HOME = /opt/datadog
     ```
 
+
 [1]: /serverless/libraries_integrations/extension/
 [2]: https://app.datadoghq.com/organization-settings/api-keys
-
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -182,15 +182,15 @@ As an alternative to the [Datadog Lambda Extension][1], you can use the [Datadog
 
 #### Install
 
-1. Enable [AWS X-Ray active tracing][4] for your Lambda function.
-2. Install the [AWS X-Ray SDK for .NET][5].
+1. Enable [AWS X-Ray active tracing][3] for your Lambda function.
+2. Install the [AWS X-Ray SDK for .NET][4].
 
 #### Subscribe
 
 Subscribe the Datadog Forwarder Lambda function to each of your function's log groups to send metrics, traces, and logs to Datadog.
 
-1. [Install the Datadog Forwarder if you haven't][6].
-2. [Subscribe the Datadog Forwarder to your function's log groups][7].
+1. [Install the Datadog Forwarder if you haven't][2].
+2. [Subscribe the Datadog Forwarder to your function's log groups][5].
 
 #### Monitor custom business logic
 
@@ -205,10 +205,10 @@ myMetric.Add("t", new string[] {"product:latte", "order:online"});
 LambdaLogger.Log(JsonConvert.SerializeObject(myMetric));
 ```
 
-For more information on custom metric submission, see the [Serverless Custom Metrics documentation][3].
+For more information on custom metric submission, see the [Serverless Custom Metrics documentation][6].
 #### Tagging
 
-Although it's optional, Datadog recommends tagging your serverless applications with the `env`, `service`, and `version` tags following the [unified service tagging documentation][8].
+Although it's optional, Datadog recommends tagging your serverless applications with the `env`, `service`, and `version` tags following the [unified service tagging documentation][7].
 
 ## Collect logs from AWS serverless resources
 
@@ -224,9 +224,8 @@ To collect logs from non-Lambda AWS resources, install and configure the [Datado
 
 [1]: /serverless/libraries_integrations/extension/
 [2]: /serverless/forwarder/
-[3]: /serverless/custom_metrics?tab=otherruntimes
-[4]: https://docs.aws.amazon.com/xray/latest/devguide/xray-services-lambda.html
-[5]: https://docs.aws.amazon.com/xray/latest/devguide/xray-sdk-dotnet.html
-[6]: /serverless/forwarder/
-[7]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/
-[8]: serverless/serverless_tagging/
+[3]: https://docs.aws.amazon.com/xray/latest/devguide/xray-services-lambda.html
+[4]: https://docs.aws.amazon.com/xray/latest/devguide/xray-sdk-dotnet.html
+[5]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/
+[6]: /serverless/custom_metrics?tab=otherruntimes
+[7]: /serverless/troubleshooting/serverless_tagging/
