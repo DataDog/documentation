@@ -3,7 +3,7 @@ title: Using the .NET diagnostic tool for troubleshooting
 kind: documentation
 ---
 
-If after installing the .NET tracer your application does not produce traces as expected, you can try running the troubleshooting tool for basic diagnostics. 
+If after installing the .NET tracer your application does not produce traces as expected, you can try running the diagnostic tool for basic troubleshooting. 
 
 The tool can be installed in two different ways:
 
@@ -17,7 +17,7 @@ dotnet tool install -g dd-trace
 
 ## Process diagnostics 
 
-For most applications, you will want to use the process diagnostics. For that, you need to make sure the application is running, and get the pid. You can then give to the dd-trace tool
+For most applications, you should use the process diagnostics. For that, you need to make sure the application is running, and get the pid. You can then give it to the dd-trace tool:
 ```
 dd-trace check process <pid>
 ```
@@ -26,7 +26,7 @@ This will run basic configuration checks and display recommendations if any issu
 
 ## IIS diagnostics
 
-For an IIS application, you can get more thourough check by using another command:
+For an IIS application, you can get more thourough diagnostics by using another command:
 ```
 dd-trace check iis <full site name>
 ```
