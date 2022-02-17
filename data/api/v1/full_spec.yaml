@@ -14176,6 +14176,12 @@ components:
             for the OpenTelemetry Collector.
           format: int64
           type: integer
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
+          type: string
         vsphere_host_count:
           description: 'Contains the total number of hosts that reported through vSphere
             integration
@@ -14326,6 +14332,12 @@ components:
           description: Contains the sum of invocations of all functions.
           format: int64
           type: integer
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
+          type: string
       type: object
     UsageLambdaResponse:
       description: 'Response containing the number of lambda functions and sum of
@@ -14355,6 +14367,12 @@ components:
           type: string
         index_name:
           description: The user specified name for this index ID.
+          type: string
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
           type: string
         retention:
           description: The retention period (in days) for this index ID.
@@ -14386,6 +14404,12 @@ components:
             hour.
           format: int64
           type: integer
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
+          type: string
         rehydrated_indexed_events_count:
           description: Rehydrated logs indexed with this retention period during a
             given hour.
@@ -14445,6 +14469,12 @@ components:
             available as of December 1, 2020).
           format: int64
           type: integer
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
+          type: string
       type: object
     UsageLogsResponse:
       description: Response containing the number of logs for each hour.
@@ -14475,6 +14505,12 @@ components:
           description: Contains the number of netflow events indexed.
           format: int64
           type: integer
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
+          type: string
       type: object
     UsageNetworkFlowsResponse:
       description: Response containing the number of netflow events indexed for each
@@ -14496,6 +14532,12 @@ components:
         hour:
           description: The hour for the usage.
           format: date-time
+          type: string
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
           type: string
       type: object
     UsageNetworkHostsResponse:
@@ -15707,6 +15749,12 @@ components:
           description: The hour for the usage.
           format: date-time
           type: string
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
+          type: string
       type: object
     UsageSyntheticsAPIResponse:
       description: Response containing the number of Synthetics API tests run for
@@ -15730,6 +15778,12 @@ components:
           description: The hour for the usage.
           format: date-time
           type: string
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
+          type: string
       type: object
     UsageSyntheticsBrowserResponse:
       description: Response containing the number of Synthetics Browser tests run
@@ -15751,6 +15805,12 @@ components:
         hour:
           description: The hour for the usage.
           format: date-time
+          type: string
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
           type: string
       type: object
     UsageSyntheticsResponse:
@@ -15786,6 +15846,12 @@ components:
             that are outputs for aggregations.
           format: int64
           type: integer
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
+          type: string
       type: object
     UsageTimeseriesResponse:
       description: Response containing hourly usage of timeseries.
