@@ -24,7 +24,7 @@ Combined with the GitHub Apps integrations, you can see inline code snippets in 
 
 ## Configuration
 
-<div class="alert alert-warning">
+<div class="alert alert-info">
 The source code integration supports Go and all JVM languages.
 <br>
 You need to be using Datadog Agent 7.33.0 or higher.
@@ -44,7 +44,7 @@ To link data to a specific commit, tag your telemetry with a `git.commit.sha` ta
 {{% tab "Containers" %}}
 
 <div class="alert alert-warning">
-This approach requires that you are using Docker, or containerd >= 1.5.6. For other container setups, see "Other".
+This approach requires Docker, or containerd >= 1.5.6. For other container setups, see "Other".
 </div>
 
 If you are running your app in containers, Datadog can extract source code information directly from your images' Docker labels. During build time, follow the [Open Containers standard][1] to add the git commit SHA and repository URL as a Docker labels:
@@ -74,7 +74,7 @@ The git commit SHA and repository URL are added to your telemetry.
 
 For non-containerized or unsupported environments, manually tag your traces, spans, and profiles with the git commit SHA and repository URL.
 
-To tag your traces, spans, and profiles with `git.commit.sha`, configure the tracer with the `DD_TAGS` environment variable:
+To tag your traces, spans, and profiles with `git.commit.sha` and `git.repository_url`, configure the tracer with the `DD_TAGS` environment variable:
 
 ```
 export DD_TAGS="git.commit.sha:<GIT_COMMIT_SHA> git.repository_url=<REPOSITORY_URL>"
