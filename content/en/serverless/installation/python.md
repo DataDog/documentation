@@ -25,7 +25,7 @@ aliases:
     - /serverless/guide/python/
 ---
 
-<div class="alert alert-warning">If your Python Lambda functions are written in  <a href="https://docs.aws.amazon.com/lambda/latest/dg/runtimes-extensions-api.html">Python 3.6 or less</a> or you previously set up Datadog Serverless using the Datadog Forwarder, see the <a href="docs.datadoghq.com/serverless/guide/datadog_forwarder_python">installation instructions here</a>.</div>
+<div class="alert alert-warning">If your Python Lambda functions are written in  <a href="https://docs.aws.amazon.com/lambda/latest/dg/runtimes-extensions-api.html">Python 3.6 or less</a> or you previously set up Datadog Serverless using the Datadog Forwarder, see the <a href="docs.datadoghq.com/serverless/guide/datadog_forwarder_python">installation instructions</a>.</div>
 
 ## Configuration
 
