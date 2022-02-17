@@ -231,32 +231,20 @@ W, [2020-07-08T21:19:05.765994 #143]  WARN -- ddtrace: [ddtrace] DATADOG TRACER 
 {{< /programming-lang >}}
 {{< programming-lang lang="cpp" >}}
 
-**File Location:**
-
-For C++, the startup log file is created in `/var/tmp/dd-opentracing-cpp`, for example: `/var/tmp/dd-opentracing-cpp/startup_options-1593737077369521386.json`.
-
 **Configuration:**
 
+For C++, there is no startup logs file. Tracer output configuration information in logs.
+
 ```text
-
 {"agent_url":"http://localhost:8126","analytics_enabled":false,"analytics_sample_rate":null,"date":"2020-07-03T00:44:37+0000","dd_version":"","enabled":true,"env":"test-env","lang":"cpp","lang_version":"201402","operation_name_override":"","report_hostname":false,"sampling_rules":"[{\"sample_rate\": 1.0}]","service":"service_name","tags":{},"version":"v1.2.0"}
-
 ```
-
-**Diagnostics:**
-
-For C++, there are no `DATADOG TRACER DIAGNOSTICS` lines output to the tracer logs. However, if the Agent is not reachable, errors will appear in your application logs. Alternately, in Envoy there is an increase in the metrics `tracing.datadog.reports_failed` and `tracing.datadog.reports_dropped`.
 
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
 ## Diagnostics errors
 
-Look for `DIAGNOSTICS` error output that says the tracer is unable to send traces to the Datadog Agent.
-
-If you have these errors, check that your tracer is set up to receive traces for [ECS][1], [Kubernetes][2], [Docker][3] or [any other option][4], or [contact support][5] to review your Tracer & Agent configuration.
-
-See [Connection Errors][6] for information about errors indicating that your instrumented application cannot communicate with the Datadog Agent.
+For C++, there are no `DATADOG TRACER DIAGNOSTICS` lines output to the tracer logs. However, if the Agent is not reachable, errors will appear in your application logs. Alternately, in Envoy there is an increase in the metrics `tracing.datadog.reports_failed` and `tracing.datadog.reports_dropped`.
 
 ## Configuration settings
 
