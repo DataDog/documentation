@@ -20590,6 +20590,7 @@
           "metric_bulk_configure_tags"
         ],
         "example": "metric_bulk_configure_tags",
+        "type": "string",
         "x-enum-varnames": [
           "BULK_MANAGE_TAGS"
         ]
@@ -20643,6 +20644,7 @@
               "metric_bulk_configure_tags"
             ],
             "example": "metric_bulk_configure_tags",
+            "type": "string",
             "x-enum-varnames": [
               "BULK_MANAGE_TAGS"
             ]
@@ -20740,6 +20742,7 @@
                   "metric_bulk_configure_tags"
                 ],
                 "example": "metric_bulk_configure_tags",
+                "type": "string",
                 "x-enum-varnames": [
                   "BULK_MANAGE_TAGS"
                 ]
@@ -20791,6 +20794,7 @@
               "metric_bulk_configure_tags"
             ],
             "example": "metric_bulk_configure_tags",
+            "type": "string",
             "x-enum-varnames": [
               "BULK_MANAGE_TAGS"
             ]
@@ -20858,6 +20862,7 @@
                   "metric_bulk_configure_tags"
                 ],
                 "example": "metric_bulk_configure_tags",
+                "type": "string",
                 "x-enum-varnames": [
                   "BULK_MANAGE_TAGS"
                 ]
@@ -20950,6 +20955,7 @@
                   "metric_bulk_configure_tags"
                 ],
                 "example": "metric_bulk_configure_tags",
+                "type": "string",
                 "x-enum-varnames": [
                   "BULK_MANAGE_TAGS"
                 ]
@@ -21018,6 +21024,7 @@
               "metric_bulk_configure_tags"
             ],
             "example": "metric_bulk_configure_tags",
+            "type": "string",
             "x-enum-varnames": [
               "BULK_MANAGE_TAGS"
             ]
@@ -55922,6 +55929,7 @@
                           "metric_bulk_configure_tags"
                         ],
                         "example": "metric_bulk_configure_tags",
+                        "type": "string",
                         "x-enum-varnames": [
                           "BULK_MANAGE_TAGS"
                         ]
@@ -56004,6 +56012,7 @@
                             "metric_bulk_configure_tags"
                           ],
                           "example": "metric_bulk_configure_tags",
+                          "type": "string",
                           "x-enum-varnames": [
                             "BULK_MANAGE_TAGS"
                           ]
@@ -56191,6 +56200,7 @@
                           "metric_bulk_configure_tags"
                         ],
                         "example": "metric_bulk_configure_tags",
+                        "type": "string",
                         "x-enum-varnames": [
                           "BULK_MANAGE_TAGS"
                         ]
@@ -56273,6 +56283,7 @@
                             "metric_bulk_configure_tags"
                           ],
                           "example": "metric_bulk_configure_tags",
+                          "type": "string",
                           "x-enum-varnames": [
                             "BULK_MANAGE_TAGS"
                           ]
