@@ -47,7 +47,7 @@ Version 3.13 or newer of Alpine Linux is required because the profiler is built 
 {{% /tab %}}
 {{< /tabs >}}
 
-Profiling is not supported on serverless platforms.
+Continuous Profiler is not supported on serverless platforms, such as AWS Lambda.
 
 ## Installation
 

@@ -24,7 +24,7 @@ The Datadog Profiler requires [JDK Flight Recorder][2]. The Datadog Profiler lib
 
 All JVM-based languages, such as Java, Scala, Groovy, Kotlin, and Clojure are supported.
 
-Profiling is not supported on serverless platforms.
+Continuous Profiler is not supported on serverless platforms, such as AWS Lambda.
 
 ## Installation
 

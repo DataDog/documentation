@@ -25,7 +25,7 @@ The profiler is shipped within Datadog tracing libraries. If you are already usi
 
 The Datadog Profiler requires MRI Ruby 2.1+. **Wall time profiling is available for users on every platform (including macOS and Windows), but CPU time profiles are currently only available on Linux platforms**.
 
-Profiling is not supported on serverless platforms.
+Continuous Profiler is not supported on serverless platforms, such as AWS Lambda.
 
 ## Installation
 

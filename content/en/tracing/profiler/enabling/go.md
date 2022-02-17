@@ -22,7 +22,7 @@ The profiler is shipped within Datadog tracing libraries. If you are already usi
 
 The Datadog Profiler requires Go 1.12+.
 
-Profiling is not supported on serverless platforms.
+Continuous Profiler is not supported on serverless platforms, such as AWS Lambda.
 
 ## Installation
 

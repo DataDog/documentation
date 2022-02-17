@@ -33,7 +33,7 @@ The following profiling features are available depending on your Python version:
 | Lock profiling       | Python >= 2.7                      |
 | Memory profiling     | Python >= 3.5                      |
 
-Profiling is not supported on serverless platforms.
+Continuous Profiler is not supported on serverless platforms, such as AWS Lambda.
 
 ## Installation
 

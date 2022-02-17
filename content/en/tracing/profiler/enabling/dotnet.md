@@ -29,6 +29,8 @@ Datadog .NET Profiler is currently in public beta. Datadog recommends evaluating
 - Windows 10
 - Windows Server starting from version 2012
 
+Continuous Profiler is not supported on serverless platforms, such as AWS Lambda.
+
 **Supported .NET runtimes:**
 
 64-bit applications running on:
@@ -40,8 +42,6 @@ Datadog .NET Profiler is currently in public beta. Datadog recommends evaluating
 **Supported languages:**
 
 Any language that targets the .NET runtime, such as C#, F#, and Visual Basic.
-
-Profiling is not supported on serverless platforms.
 
 ## Installation
 
