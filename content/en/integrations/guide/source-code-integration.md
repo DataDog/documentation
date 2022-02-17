@@ -41,7 +41,7 @@ To map telemetry data with your source code:
 To link data to a specific commit, tag your telemetry with a `git.commit.sha` tag.
 
 {{< tabs >}}
-{{% tab "Containers" %}}
+{{% tab "Docker Runtime" %}}
 
 <div class="alert alert-warning">
 This approach requires Docker, or containerd >= 1.5.6. For other container setups, see the "Other" section.
