@@ -202,7 +202,7 @@ To create an exclusion filter, do one of the following:
 - Click on a signal in [Application Security Signals][2] and click the **Create Exclusion Filter** button in the top left corner. This method automatically generates a filter query for the targeted service.
 - Navigate to [Exclusion Filters Configuration][3] and manually configure a new exclusion filter based on your own filter query.
 
-## Uninstall
+## Disable
 
 To uninstall Application Security, remove the `DD_APPSEC_ENABLED=true` environment variable from your application configuration. If you need additional help, contact [Datadog support][4].
 
