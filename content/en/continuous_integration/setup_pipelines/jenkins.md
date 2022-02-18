@@ -270,9 +270,9 @@ pipeline {
 
 ## Propagate Git information in pipelines without a Jenkinsfile from SCM.
 
-The Jenkins plugin uses environment variables to determine the Git information. However, these environment variables may not be available if you are not using a `Jenkinsfile` in your repository and you're configuring the pipeline directly in Jenkins using explicitly the `checkout` step.
+The Jenkins plugin uses environment variables to determine the Git information. However, these environment variables may not be available if you are not using a `Jenkinsfile` in your repository, and you're configuring the pipeline directly in Jenkins using the `checkout` step.
 
-If this happens, propagate the Git information to the environment variables in your build. You can use the `.each {k,v -> env.setProperty(k, v)}` function after executing the `checkout` or `git` steps. For example:
+In this case, you can propagate the Git information to the environment variables in your build. Use the `.each {k,v -> env.setProperty(k, v)}` function after executing the `checkout` or `git` steps. For example:
 
 {{< tabs >}}
 {{% tab "Using Declarative Pipelines" %}}
