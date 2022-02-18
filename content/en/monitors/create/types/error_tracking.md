@@ -1,5 +1,5 @@
 ---
-title: Real User Monitoring Monitor
+title: Error Tracking Monitor
 kind: documentation
 aliases:
 - /monitors/monitor_types/error_tracking
