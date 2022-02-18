@@ -172,6 +172,10 @@ body > header {
           max-height: 687px;
           left: 0;
 
+          &:lang(ja) {
+            width: 765px;
+          }
+
           i[class*='icon-'] {
             display: inline-block;
             width: 18px;
@@ -186,7 +190,7 @@ body > header {
             width: 850px;
 
             &:lang(ja) {
-              width: 950px;
+              width: 1100px;
             }
           }
 
