@@ -192,7 +192,7 @@ The Datadog Agent and some tracing libraries have options available to address t
 
 ## Exclusion filters
 
-There may be a time when an Application Security signal is a false positive. For example, Application Security repeatedly detects
+There may be a time when an Application Security signal, or a suspicious request, is a false positive. For example, Application Security repeatedly detects
 the same suspicious request and a signal is generated, but the signal has been reviewed and is not a threat.
 
 You can set an exclusion filter, which ignore events from a rule, to eliminate these noisy signal patterns and focus on legitimate suspicious requests.
