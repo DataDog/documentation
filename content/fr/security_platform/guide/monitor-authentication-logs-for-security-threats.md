@@ -38,7 +38,7 @@ Les logs qui indiquent l'identité de l'utilisateur (John Doe), le résultat de
 
 ### Enregistrer les authentifications dans un format standard analysable
 
-Vérifiez que votre application rédige des logs au format key-value avec le séparateur `=`. Ce format permet à un parser key-value, tel que le [parser Grok][3] de Datadog, de les traiter facilement. Prenons l'exemple d'un log au format suivant :
+Vérifiez que votre application rédige des logs au format key-value avec le séparateur `=`. Ce format permet à un parser key-value, tel que le [parser Grok][3] de Datadog, de les traiter. Prenons l'exemple d'un log au format suivant :
 
 {{< code-block lang="bash" >}}
 INFO 2020-01-01 12:00:01 usr.id="John Doe" evt.category=authentication evt.name="google oauth" evt.outcome=success network.client.ip=1.2.3.4
@@ -74,7 +74,7 @@ Il est important d'utiliser une [convention de nommage standard][4] pour les att
 
 Lorsque vous mettez en place un format unique pour tous vos logs d'authentification, vous pouvez utiliser les attributs de log afin de filtrer et d'organiser efficacement vos données de log dans Datadog. Par exemple, avec les attributs standard, vous pouvez découvrir les utilisateurs (`usr.id`) qui possèdent le plus grand nombre d'échecs de connexion (`evt.outcome:failure`).
 
-Le format key-value facilite également l'ajout d'attributs personnalisés dans les logs. Vous pouvez ainsi ajouter, par exemple, un score [reCAPTCHA v3][9] afin d'identifier les activités provenant potentiellement de robots. Utilisez des guillemets autour des valeurs d'attribut qui peuvent contenir des espaces. Ainsi, vous enregistrez toute la valeur et pouvez facilement la parser.
+Le format key-value facilite également l'ajout d'attributs personnalisés dans les logs. Vous pouvez ainsi ajouter, par exemple, un score [reCAPTCHA v3][9] afin d'identifier les activités provenant potentiellement de robots. Utilisez des guillemets autour des valeurs d'attribut qui peuvent contenir des espaces. Ainsi, vous enregistrez toute la valeur et pouvez la parser.
 
 ## Détecter et surveiller les menaces de sécurité
 
@@ -94,7 +94,7 @@ Datadog propose des dashboards prêts à l'emploi, tels que le [dashboard d'anal
 
 Par exemple, si une adresse IP ou un utilisateur précis déclenche plusieurs signaux de sécurité, vous pouvez cliquer sur l'adresse IP ou l'utilisateur dans une liste de dashboards ou dans un graphique et sélectionner l'option **View related Security Signals**. Cela affiche alors tous les signaux de sécurité déclenchés par l'adresse IP ou l'utilisateur en question dans le Security Signals Explorer. Si vos données sont concluantes, cette vue vous aide à mettre en corrélation une adresse IP avec un utilisateur, et vice versa. Vous pouvez alors passer en revue chaque règle pour prendre les mesures adéquates. Cliquez sur une règle et consultez les informations de triage et de réponse dans l'onglet **Message** pour évaluer efficacement l'ampleur du problème et le corriger.
 
-{{< img src="security_platform/security_monitoring/guide/monitor-authentication-logs-for-security-threats/investigation-dashboard-example.gif" alt="Étudier des signaux de sécurité déclenchés dans le dashboard d'analyse d'adresse IP">}}
+{{< img src="security_platform/security_monitoring/guide/monitor-authentication-logs-for-security-threats/investigation-dashboard-example.mp4" alt="Analyser les signaux de sécurité déclenchés dans le dashboard d'analyse" video=true >}}
 
 Vous pouvez également créer des dashboards personnalisés pour visualiser des données d'authentification essentielles, telles que le nombre de connexions par source et par résultat. Ces dashboards vous offrent une vue d'ensemble des activités pour tous vos utilisateurs. Ils vous aident également à visualiser les tendances afin de détecter les pics d'activité anormaux devant faire l'objet d'une enquête.
 
@@ -106,7 +106,7 @@ Datadog ingère et analyse [tous vos logs][18] afin de détecter les menaces con
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/security_monitoring/
+[1]: /fr/cloud_siem/
 [2]: /fr/logs/log_collection/?tab=http#application-log-collection
 [3]: /fr/logs/log_configuration/processors/#grok-parser
 [4]: https://www.datadoghq.com/blog/logs-standard-attributes/
@@ -117,8 +117,8 @@ Datadog ingère et analyse [tous vos logs][18] afin de détecter les menaces con
 [9]: https://developers.google.com/recaptcha/docs/v3
 [10]: https://app.datadoghq.com/security/configuration/rules?query=brute%20force%20attack&sort=rule
 [11]: https://app.datadoghq.com/security/configuration/rules?query=credential%20stuffing%20attack&sort=rule
-[12]: /fr/security_monitoring/default_rules/
-[13]: /fr/security_monitoring/explorer
+[12]: /fr/cloud_siem/default_rules/
+[13]: /fr/cloud_siem/explorer
 [14]: https://app.datadoghq.com/notebook/credentialstuffingrunbook
 [15]: /fr/notebooks/#commenting
 [16]: https://app.datadoghq.com/screen/integration/security-monitoring-ip-investigation
