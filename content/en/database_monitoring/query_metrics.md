@@ -22,7 +22,7 @@ further_reading:
 
 ---
 
-{{< site-region region="us3,us5,gov" >}}
+{{< site-region region="us5,gov" >}}
 <div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
 {{< /site-region >}}
 
@@ -104,13 +104,13 @@ Datadog collects explain plans continuously, so a given query can have multiple 
 
 {{< img src="database_monitoring/dbm_qd_explain_plans.png" alt="Explain plans information for a query" style="width:100%;">}}
 
-Select a plan to see cost metrics or its JSON. Click **View All Samples for This Plan** to jump over to Query Samples view for [the samples associated with it][4].
+Select a plan to see cost metrics or its JSON. Click **View All Samples for This Plan** to navigate to Query Samples view for [the samples associated with it][4].
 
 Not all queries have explain plans, for various reasons, including what type of query it is, or various configuration settings. See [Troubleshooting][5] for more details.
 
 ### Hosts running this query
 
-The **Hosts Running This Query** tab lists the hosts that run this query, with a context menu that lets you jump to related information for the hosts, such as logs or the network data, which can be useful for troubleshooting where latency problems are coming from.
+The **Hosts Running This Query** tab lists the hosts that run this query, with a context menu that lets you navigate to related information for the hosts, such as logs or the network data, which can be useful for troubleshooting where latency problems are coming from.
 
 {{< img src="database_monitoring/dbm_qd_hosts_running_query_menu.png" alt="Host action menu for pivoting to more information" style="width:100%;">}}
 

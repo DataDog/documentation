@@ -1,0 +1,31 @@
+{
+  "title": "Example-Create_a_new_dashboard_with_slo_widget",
+  "description": "",
+  "widgets": [
+    {
+      "layout": {
+        "x": 0,
+        "y": 0,
+        "width": 60,
+        "height": 21
+      },
+      "definition": {
+        "title_size": "16",
+        "title_align": "left",
+        "type": "slo",
+        "view_type": "detail",
+        "time_windows": [
+          "7d"
+        ],
+        "slo_id": "string",
+        "show_error_budget": true,
+        "view_mode": "overall",
+        "global_time_target": "0"
+      }
+    }
+  ],
+  "template_variables": [],
+  "layout_type": "free",
+  "is_read_only": false,
+  "notify_list": []
+}

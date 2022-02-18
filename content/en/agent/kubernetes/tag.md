@@ -59,6 +59,7 @@ The Agent can autodiscover and attach tags to all data emitted by the entire pod
   | `image_name`                  | Low          | Pod spec                                                                | N/A                                                 |
   | `short_image`                 | Low          | Pod spec                                                                | N/A                                                 |
   | `image_tag`                   | Low          | Pod spec                                                                | N/A                                                 |
+  | `eks_fargate_node`            | Low          | Pod spec                                                                | EKS Fargate environment                                       |
 
 </div>
 
@@ -343,6 +344,50 @@ For example:
 
 ```yaml
 container_env_as_tags:
+  app: kube_app
+```
+
+[1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+{{% /tab %}}
+{{< /tabs >}}
+
+## Container labels as tags
+
+Starting with Agent v7.33+, the Agent can collect container labels and use them as tags.  The agent attaches the tags to all metrics associated with the container.
+The Agent can generate tags from container labels for both `docker` and `containerd` containers. In the case of `containerd`, the minimum supported version is v1.5.6, because previous releases do not propagate labels correctly.
+
+{{< tabs >}}
+{{% tab "Containerized Agent" %}}
+
+To extract a given container label `<CONTAINER_LABEL>` and transform it to a tag key `<TAG_KEY>`, add the following environment variable to the Datadog Agent:
+
+```shell
+DD_CONTAINER_LABELS_AS_TAGS='{"<CONTAINER_LABEL>":"<TAG_KEY>"}'
+```
+
+For example:
+
+```shell
+DD_CONTAINER_LABELS_AS_TAGS='{"app":"kube_app"}'
+```
+
+**Note**: Custom metrics may impact billing. See [Custom Metrics Billing][1] for more details.
+
+[1]: /account_management/billing/custom_metrics
+{{% /tab %}}
+{{% tab "Agent" %}}
+
+To extract a given container label `<CONTAINER_LABEL>` and transform it to a tag key `<TAG_KEY>`, add the following configuration block in the [Agent `datadog.yaml` configuration file][1]:
+
+```yaml
+container_labels_as_tags:
+  <CONTAINER_LABEL>: <TAG_KEY>
+```
+
+For example:
+
+```yaml
+container_labels_as_tags:
   app: kube_app
 ```
 

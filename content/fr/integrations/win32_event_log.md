@@ -2,11 +2,13 @@
 aliases:
   - /fr/integrations/event_viewer/
   - /fr/integrations/eventviewer/
+  - /fr/integrations/faq/how-to-monitor-events-from-the-windows-event-logs/
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
   dashboards: {}
-  logs: {}
+  logs:
+    source: windows.events
   metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
@@ -16,13 +18,14 @@ categories:
 creates_events: true
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/win32_event_log/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/win32_event_log/README.md
 display_name: Win32
 draft: false
 git_integration_title: win32_event_log
 guid: b04d6f04-947c-4068-b73d-f861adc39959
 integration_id: win32-event-log
 integration_title: Win 32 event log
+integration_version: 2.11.1
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com
@@ -30,7 +33,7 @@ manifest_version: 1.0.0
 metric_prefix: win32_event_log.
 name: win32_event_log
 public_title: Intégration Datadog/Journal d'événements Win32
-short_description: Envoyer des événements Windows à votre flux d'événements Datadog.
+short_description: Envoyez des événements Windows à votre flux d'événements Datadog.
 support: core
 supported_os:
   - windows
@@ -54,11 +57,13 @@ Le check Journal d'événements Windows est inclus avec le package de l'[Agent D
 
 2. [Redémarrez l'Agent][4] pour commencer à envoyer des événements Windows à Datadog.
 
+**Remarque** : les événements et les logs sont configurés séparément. Les logs ne sont pas configurés au sein de chaque instance. Consultez la section [Collecte de logs](#collecte-de-logs) ci-dessous pour en savoir plus.
+
 ### Collecte de logs
 
 Vérifiez tout d'abord que vous avez défini `logs_enabled: true` dans votre fichier `datadog.yaml`.
 
-Pour recueillir des logs à partir de certains événements Windows, ajoutez manuellement les canaux au fichier `conf.d/win32_event_log.d/conf.yaml` ou via Datadog Agent Manager.
+Pour recueillir des logs à partir de certains événements Windows, ajoutez manuellement les canaux au fichier `conf.d/win32_event_log.d/conf.yaml` ou utilisez Datadog Agent Manager.
 
 Pour consulter la liste des canaux, exécutez la commande suivante dans PowerShell :
 
@@ -87,17 +92,17 @@ Ajoutez ensuite les canaux dans votre fichier de configuration `win32_event_log.
 logs:
   - type: windows_event
     channel_path: "<CANAL_1>"
-    source: "<CANAL_1>"
+    source: "windows.events"
     service: myservice
 
   - type: windows_event
     channel_path: "<CANAL_2>"
-    source: "<CANAL_2>"
+    source: "windows.events"
     service: myservice
 ```
 
 Remplacez les paramètres `<CANAL_X>` par le nom du canal Windows pour lequel vous souhaitez recueillir des événements.
-Définissez le même nom de canal pour le paramètre `source` correspondant afin de bénéficier de la [configuration de pipeline de traitement d'intégration automatique][5].
+Définissez le paramètre `source` correspondant sur `windows.events` afin de bénéficier du [pipeline de traitement d'intégration automatique][5].
 
 Enfin, [redémarrez l'Agent][4].
 
@@ -113,7 +118,7 @@ Pour déterminer les valeurs exactes, faites en sorte que vos filtres utilisent 
 Get-WmiObject -Class Win32_NTLogEvent
 ```
 
-Par exemple, pour afficher l'événement le plus récent logué dans le fichier de log `Security`, utilisez :
+Par exemple, pour afficher l'événement le plus récent écrit dans le fichier de log `Security`, utilisez :
 
 ```text
 Get-WmiObject -Class Win32_NTLogEvent -Filter "LogFile='Security'" | select -First 1
@@ -162,7 +167,7 @@ Vérifiez les valeurs de vos filtres en les comparant avec <code>Get-WmiObject</
          - System
    ```
 
-2. [Redémarrez l'Agent][4] à l'aide de l'Agent Manager (ou redémarrez le service)
+2. [Redémarrez l'Agent][4] à l'aide de l'Agent Manager (ou redémarrez le service).
 
 ### Validation
 

@@ -6,12 +6,13 @@ categories:
 ddtype: crawler
 dependencies: []
 description: "Surveillez des métriques sur vos groupes de machines virtuelles\_: octets entrants/sortants, opérations de disque, charge CPU, et plus encore."
-doc_link: 'https://docs.datadoghq.com/integrations/azure_vm_scale_set/'
+doc_link: https://docs.datadoghq.com/integrations/azure_vm_scale_set/
 draft: false
 git_integration_title: azure_vm_scale_set
 has_logo: true
 integration_id: azure-vm-scale-set
 integration_title: Azure Virtual Machine Scale Set
+integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'
@@ -35,11 +36,11 @@ Recueillez des métriques des groupes de machines virtuelles identiques Azure po
 
 ### Installation
 
-Les métriques d'intégration sont incluses avec l'[intégration Microsoft Azure][1]. Pour recueillir des métriques via l'Agent Datadog, suivez les instructions pour [déployer des Agents][2].
+Les métriques d'intégration sont incluses avec l'[intégration Microsoft Azure][1]. Pour recueillir des métriques avec l'Agent Datadog, suivez les instructions relatives au [déploiement d'Agents][2].
 
 ### Collecte de logs
 
-Pour recueillir des logs à partir de certains événements Windows, ajoutez manuellement des canaux au fichier `conf.d/win32_event_log.d/conf.yaml` ou via Datadog Agent Manager. Par exemple :
+Pour recueillir des logs à partir de certains événements Windows, ajoutez manuellement des canaux au fichier `conf.d/win32_event_log.d/conf.yaml` ou utilisez Datadog Agent Manager. Par exemple :
 
 ```yaml
 logs:

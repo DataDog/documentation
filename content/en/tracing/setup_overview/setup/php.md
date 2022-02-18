@@ -202,6 +202,18 @@ Whether to enable distributed tracing
 : **Default**: `null`<br>
 Set an application’s environment, for example: `prod`, `pre-prod`, `stage`. Added in version `0.47.0`.
 
+`DD_PROFILING_ENABLED`
+: **Default**: `false`<br>
+Enable the Datadog profiler. Added in version `0.69.0`. See [Enabling the PHP Profiler][11].
+
+`DD_PROFILING_EXPERIMENTAL_CPU_TIME_ENABLED`
+: **Default**: `false`<br>
+Enable the experimental CPU profile type. Added in version `0.69.0`.
+
+`DD_PROFILING_LOG_LEVEL`
+: **Default**: `off`<br>
+Set the profiler's log level. Acceptable values are `off`, `error`, `warn`, `info`, and `debug`. The profiler's logs are written to the standard error stream of the process. Added in version `0.69.0`.
+
 `DD_PRIORITY_SAMPLING`
 : **Default**: `true`<br>
 Whether to enable priority sampling
@@ -217,10 +229,6 @@ Change the default name of an APM integration. Rename one or more integrations a
 `DD_TRACE_AGENT_ATTEMPT_RETRY_TIME_MSEC`
 : **Default**: `5000`<br>
 IPC-based configurable circuit breaker retry time (in milliseconds)
-
-`DD_TRACE_AGENT_CONNECT_TIMEOUT`
-: **Default**: `100`<br>
-Maximum time the allowed for Agent connection setup (in milliseconds)
 
 `DD_TRACE_AGENT_CONNECT_TIMEOUT`
 : **Default**: `100`<br>
@@ -304,7 +312,7 @@ CSV of URI mappings to normalize resource naming for outgoing requests (see [Map
 
 `DD_TRACE_RETAIN_THREAD_CAPABILITIES`
 : **Default**: `false`<br>
-Works for Linux. Set to `true` to retain capabilities on Datadog background threads when you change the effective user ID. This option does not affect most setups, but some modules - to date Datadog is only aware of [Apache's mod-ruid2][11] - may invoke `setuid()` or similar syscalls, leading to crashes or loss of functionality as it loses capabilities.
+Works for Linux. Set to `true` to retain capabilities on Datadog background threads when you change the effective user ID. This option does not affect most setups, but some modules - to date Datadog is only aware of [Apache's mod-ruid2][12] - may invoke `setuid()` or similar syscalls, leading to crashes or loss of functionality as it loses capabilities.
 
 **Note:** Enabling this option may compromise security. This option, standalone, does not pose a security risk. However, an attacker being able to exploit a vulnerability in PHP or web server may be able to escalate privileges with relative ease, if the web server or PHP were started with full capabilities, as the background threads will retain their original capabilities. Datadog recommends restricting the capabilities of the web server with the `setcap` utility.
 
@@ -414,7 +422,7 @@ Note that `DD_TRACE_RESOURCE_URI_MAPPING_INCOMING` applies to only incoming requ
 
 ### `open_basedir` restrictions
 
-When [`open_basedir`][12] setting is used, then `/opt/datadog-php` should be added to the list of allowed directories.
+When [`open_basedir`][13] setting is used, then `/opt/datadog-php` should be added to the list of allowed directories.
 When the application runs in a docker container, the path `/proc/self` should also be added to the list of allowed directories.
 
 ## Tracing CLI scripts
@@ -666,7 +674,7 @@ debuginfo-install --enablerepo=remi-php74 -y php-fpm
 
 ##### PHP installed from the Sury Debian DPA
 
-If PHP was installed from the [Sury Debian DPA][13], debug symbols are already available from the DPA. For example, for PHP-FPM 7.2:
+If PHP was installed from the [Sury Debian DPA][14], debug symbols are already available from the DPA. For example, for PHP-FPM 7.2:
 
 ```
 apt update
@@ -675,7 +683,7 @@ apt install -y php7.2-fpm-dbgsym
 
 ##### PHP installed from a different package
 
-The Debian project maintains a wiki page with [instructions to install debug symbols][14].
+The Debian project maintains a wiki page with [instructions to install debug symbols][15].
 
 Edit the file `/etc/apt/sources.list`:
 
@@ -725,7 +733,7 @@ apt install -y php7.2-fpm-{package-name-returned-by-find-dbgsym-packages}
 
 ##### PHP installed from `ppa:ondrej/php`
 
-If PHP was installed from the [`ppa:ondrej/php`][15], edit the apt source file `/etc/apt/sources.list.d/ondrej-*.list` by adding the `main/debug` component.
+If PHP was installed from the [`ppa:ondrej/php`][16], edit the apt source file `/etc/apt/sources.list.d/ondrej-*.list` by adding the `main/debug` component.
 
 Before:
 
@@ -761,7 +769,7 @@ apt install -y php7.2-fpm-dbgsym
 apt install -y php7.2-fpm-dbg
 ```
 
-If the `-dbg` and `-dbgsym` packages cannot be found, enable the `ddebs` repositories. Detailed information about how to [install debug symbols][16] from the `ddebs` can be found in the Ubuntu documentation.
+If the `-dbg` and `-dbgsym` packages cannot be found, enable the `ddebs` repositories. Detailed information about how to [install debug symbols][17] from the `ddebs` can be found in the Ubuntu documentation.
 
 For example, for Ubuntu 18.04+, enable the `ddebs` repo:
 
@@ -771,7 +779,7 @@ echo "deb http://ddebs.ubuntu.com $(lsb_release -cs) main restricted universe mu
 echo "deb http://ddebs.ubuntu.com $(lsb_release -cs)-updates main restricted universe multiverse" | tee -a /etc/apt/sources.list.d/ddebs.list
 ```
 
-Import the signing key (make sure the [signing key is correct][17]):
+Import the signing key (make sure the [signing key is correct][18]):
 
 ```
 apt install ubuntu-dbgsym-keyring
@@ -848,7 +856,7 @@ When using Apache, run:
 (. /etc/apache2/envvars; USE_ZEND_ALLOC=0 valgrind --trace-children=yes -- apache2 -X)`
 {{< /code-block >}}
 
-The resulting Valgrind trace is printed by default to the standard error, follow the [official documentation][18] to print to a different target. The expected output is similar to the example below for a PHP-FPM process:
+The resulting Valgrind trace is printed by default to the standard error, follow the [official documentation][19] to print to a different target. The expected output is similar to the example below for a PHP-FPM process:
 
 ```
 ==322== Conditional jump or move depends on uninitialised value(s)
@@ -928,11 +936,12 @@ For Apache, run:
 [8]: /tracing/faq/php-tracer-manual-installation
 [9]: https://httpd.apache.org/docs/2.4/mod/mod_env.html#setenv
 [10]: /tracing/setup/nginx/#nginx-and-fastcgi
-[11]: https://github.com/mind04/mod-ruid2
-[12]: https://www.php.net/manual/en/ini.core.php#ini.open-basedir
-[13]: https://packages.sury.org/php/
-[14]: https://wiki.debian.org/HowToGetABacktrace
-[15]: https://launchpad.net/~ondrej/+archive/ubuntu/php
-[16]: https://wiki.ubuntu.com/Debug%20Symbol%20Packages
-[17]: https://wiki.ubuntu.com/Debug%20Symbol%20Packages#Getting_-dbgsym.ddeb_packages
-[18]: https://valgrind.org/docs/manual/manual-core.html#manual-core.comment
+[11]: /tracing/profiler/enabling/php/
+[12]: https://github.com/mind04/mod-ruid2
+[13]: https://www.php.net/manual/en/ini.core.php#ini.open-basedir
+[14]: https://packages.sury.org/php/
+[15]: https://wiki.debian.org/HowToGetABacktrace
+[16]: https://launchpad.net/~ondrej/+archive/ubuntu/php
+[17]: https://wiki.ubuntu.com/Debug%20Symbol%20Packages
+[18]: https://wiki.ubuntu.com/Debug%20Symbol%20Packages#Getting_-dbgsym.ddeb_packages
+[19]: https://valgrind.org/docs/manual/manual-core.html#manual-core.comment

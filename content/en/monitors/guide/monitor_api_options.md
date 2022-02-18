@@ -68,7 +68,7 @@ Example: `{'ok': 1, 'critical': 1, 'warning': 1}`
 
 - **`aggregation`** A dictionary of `type`, `metric`, and `groupBy`.
   - `type`: Three types are supported: `count`, `cardinality`, and `avg`.
-  - `metric`:  For `cardinality`, use the name of the facet. For `avg`, use the name of the metric. For `count`, put `count` as metric.
+  - `metric`: For `cardinality`, use the name of the facet. For `avg`, use the name of the metric. For `count`, put `count` as metric.
   - `groupBy`: Name of the facet on which you want to group by.
 
 Example: `{"metric": "count","type": "count","groupBy": "core_service"}`

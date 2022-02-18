@@ -47,7 +47,7 @@
        {
           "id":3364061219714354,
           "definition":{
-             "title":"Total Hosts with Datadog Agents NOT Running 7.32.3 or 6.32.3",
+             "title":"Total Hosts with Datadog Agents NOT Running 7.32.3 (6.32.3) or later",
              "title_size":"16",
              "title_align":"left",
              "time":{
@@ -71,7 +71,7 @@
                    "response_format":"scalar",
                    "queries":[
                       {
-                         "query":"sum:datadog.agent.running{!version:7.32.3,!version:6.32.3,$env}",
+                         "query":"sum:datadog.agent.running{!version:7.32.3,!version:6.32.3,!version:7.32.4,!version:6.32.4,$env}",
                          "data_source":"metrics",
                          "name":"query1",
                          "aggregator":"last"
@@ -135,7 +135,7 @@
        {
           "id":4658898100714762,
           "definition":{
-             "title":"Hosts NOT running 7.32.3 or 6.32.3",
+             "title":"Hosts NOT running 7.32.3 (6.32.3) or later",
              "title_size":"16",
              "title_align":"left",
              "time":{
@@ -161,7 +161,7 @@
                    "response_format":"scalar",
                    "queries":[
                       {
-                         "query":"avg:datadog.agent.running{!version:7.32.3,!version:6.32.3,$env} by {host,version,env}",
+                         "query":"avg:datadog.agent.running{!version:7.32.3,!version:6.32.3,!version:6.32.3,!version:7.32.4,!version:6.32.4,$env} by {host,version,env}",
                          "data_source":"metrics",
                          "name":"query1",
                          "aggregator":"avg"

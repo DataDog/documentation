@@ -72,6 +72,10 @@ This status means that logs are enabled but you haven't specified which containe
 
 ## Docker log collection from file issues
 
+The Agent collects Docker logs from the log files on disk by default in versions 6.33.0/7.33.0+ so long as the log files on disk are accessible by the Agent. `DD_LOGS_CONFIG_DOCKER_CONTAINER_USE_FILE` can be set to `false` to disable this behavior.
+
+The Agent tails containers from the Docker socket if it cannot access the logs file path. If the Agent ever collected logs from a particular container using the Docker socket, it will continue to do so (including after Agent restarts) in order to avoid sending duplicate logs. To force the Agent to collect logs from file, set `DD_LOGS_CONFIG_DOCKER_CONTAINER_FORCE_USE_FILE` to `true`. This setting may cause duplicate logs to appear in Datadog.
+
 When collecting Docker container logs from file, the Agent falls back on collection from the Docker socket if it cannot read from the directory where Docker container logs are stored (`/var/lib/docker/containers` on Linux). In some circumstances, the Datadog Agent may fail to collect logs from file. To diagnose this, check the Logs Agent status and look for a file type entry showing an error similar to the following:
 
 ```text
@@ -85,7 +89,7 @@ This status means that the Agent is unable to find a log file for a given contai
 
 If logs are collected but single lines appear to be split, check that the Docker daemon is using the [JSON logging driver](#your-containers-are-not-using-the-json-logging-driver).
 
-Log collection from file is activated when the environment variable `DD_LOGS_CONFIG_DOCKER_CONTAINER_USE_FILE` is set to `true`. However, some containers may still be tailed from the Docker socket despite this setting. Only containers started after the activation of the option will have their logs collected from file. This situation is typically found when the Datadog Agent is upgraded from a version that was not offering this feature. If desired, it is possible to force all containers (including older ones) to have their logs collected from file by setting the environment variable `DD_LOGS_CONFIG_DOCKER_CONTAINER_FORCE_USE_FILE` to `true`. This may lead to some duplicated logs when the transition occurs.
+**Note:** When you install the Agent on the host, the Agent does not have permission to access `/var/lib/docker/containers`. Therefore, the Agent collects logs from the Docker socket when it is installed on the host. 
 
 
 ### Status: pending

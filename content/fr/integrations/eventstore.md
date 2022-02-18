@@ -1,6 +1,8 @@
 ---
 aliases: []
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards: {}
   metrics_metadata: metadata.csv
   monitors: {}
@@ -10,18 +12,20 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-extras/blob/master/eventstore/README.md'
+  - https://github.com/DataDog/integrations-extras/blob/master/eventstore/README.md
 display_name: "Event\_Store"
 draft: false
 git_integration_title: eventstore
 guid: 4BEB8E51-E7DA-4145-B780-E3B3A6A8CD60
 integration_id: eventstore
 integration_title: "Event\_Store"
+integration_version: 1.1.0
 is_public: true
 kind: integration
 maintainer: '@xorima'
-manifest_version: 1.1.0
+manifest_version: 1.0.0
 metric_prefix: eventstore.
+metric_to_check: eventstore.proc.mem
 name: eventstore
 public_title: "Intégration Datadog/Event\_Store"
 short_description: "Recueille des métriques d'Event\_Store"
@@ -40,29 +44,30 @@ Recueillez des métriques d'Event Store en temps réel pour :
 
 ## Configuration
 
+Le check EventStore n'est pas inclus avec le package de l'[Agent Datadog][1] : vous devez donc l'installer.
+
 ### Installation
 
-Si vous utilisez la version 6.8 ou une version ultérieure de l'Agent, suivez les instructions ci-dessous pour installer le check EventStore sur votre host. Consultez le guide relatif à l'[installation d'intégrations développées par la communauté][1] pour installer des checks avec une [version < 6.8 de l'Agent][2] ou avec l'[Agent Docker][3] :
+Pour l'Agent v7.21+/6.21+, suivez les instructions ci-dessous afin d'installer le check EventStore sur votre host. Consultez la section [Utiliser les intégrations de la communauté][2] pour effectuer une installation avec l'Agent Docker ou avec des versions antérieures de l'Agent.
 
-1. [Téléchargez et lancez l'Agent Datadog][4].
-2. Exécutez la commande suivante pour installer le wheel de l'intégration à l'aide de l'Agent :
+1. Exécutez la commande suivante pour installer l'intégration de l'Agent :
 
    ```shell
    datadog-agent integration install -t datadog-eventstore==<INTEGRATION_VERSION>
    ```
 
-3. Configurez votre intégration comme [n'importe quelle autre intégration fournie avec l'Agent][5].
+2. Configurez votre intégration comme une [intégration][3] de base.
 
 ### Configuration
 
-1. Modifiez le fichier `eventstore.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][6] pour commencer à recueillir vos [métriques](#metriques) EventStore.
-   Consultez le [fichier d'exemple eventstore.d/conf.yaml][7] pour découvrir toutes les options de configuration disponibles.
+1. Modifiez le fichier `eventstore.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][4] pour commencer à recueillir vos [métriques](#metriques) EventStore.
+   Consultez le [fichier d'exemple eventstore.d/conf.yaml][5] pour découvrir toutes les options de configuration disponibles.
 
-2. [Redémarrez l'Agent][8].
+2. [Redémarrez l'Agent][6].
 
 ### Validation
 
-[Lancez la sous-commande status de l'Agent][9] et cherchez `eventstore` dans la section Checks.
+[Lancez la sous-commande status de l'Agent][7] et cherchez `eventstore` dans la section Checks.
 
 ## Compatibilité
 
@@ -84,16 +89,14 @@ Le check Event Store n'inclut aucun check de service.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez le [responsable de la maintenance][11] de cette intégration.
+Besoin d'aide ? Contactez le [responsable de la maintenance][9] de cette intégration.
 
-[1]: https://docs.datadoghq.com/fr/agent/guide/community-integrations-installation-with-docker-agent/
-[2]: https://docs.datadoghq.com/fr/agent/guide/community-integrations-installation-with-docker-agent/?tab=agentpriorto68
-[3]: https://docs.datadoghq.com/fr/agent/guide/community-integrations-installation-with-docker-agent/?tab=docker
-[4]: https://app.datadoghq.com/account/settings#agent
-[5]: https://docs.datadoghq.com/fr/getting_started/integrations/
-[6]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
-[7]: https://github.com/DataDog/integrations-extras/blob/master/eventstore/datadog_checks/eventstore/data/conf.yaml.example
-[8]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-restart-the-agent
-[9]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#service-status
-[10]: https://github.com/DataDog/integrations-extras/blob/master/eventstore/metadata.csv
-[11]: https://github.com/DataDog/integrations-extras/blob/master/eventstore/manifest.json
+[1]: https://app.datadoghq.com/account/settings#agent
+[2]: https://docs.datadoghq.com/fr/agent/guide/use-community-integrations/
+[3]: https://docs.datadoghq.com/fr/getting_started/integrations/
+[4]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
+[5]: https://github.com/DataDog/integrations-extras/blob/master/eventstore/datadog_checks/eventstore/data/conf.yaml.example
+[6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-restart-the-agent
+[7]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#service-status
+[8]: https://github.com/DataDog/integrations-extras/blob/master/eventstore/metadata.csv
+[9]: https://github.com/DataDog/integrations-extras/blob/master/eventstore/manifest.json

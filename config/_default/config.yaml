@@ -37,18 +37,32 @@ module:
    - path: github.com/DataDog/websites-modules
      disabled: false
      mounts:
+     - source: layouts/partials/nav/main-nav.html
+       target: layouts/partials/nav/main-nav.html
+     - source: layouts/partials/nav/nav-logo-download.html
+       target: layouts/partials/nav/nav-logo-download.html
+     - source: layouts/partials/nav/menu-mobile.html
+       target: layouts/partials/nav/menu-mobile.html
+     - source: layouts/partials/nav/mobile-documentation.html
+       target: layouts/partials/nav/mobile-documentation.html
+     - source: layouts/partials/search-bar.html
+       target: layouts/partials/search-bar.html
      - source: layouts/partials/announcement_banner.html
        target: layouts/partials/announcement_banner.html
-     - source: assets/scss/components/_announcement-banner.scss
+     - source: assets/styles/components/_announcement-banner.scss
        target: assets/styles/components/_announcement-banner.scss
-     - source: assets/scss/base/_iconfont.scss
-       target: assets/styles/components/_iconfont.scss
-     - source: static/fonts/icon-font/iconfont.woff2
+     - source: assets/styles/base/_variables.scss
+       target: assets/styles/base/_modules_variables.scss
+     - source: assets/styles/components/_main-nav.scss
+       target: assets/styles/components/_main-nav.scss
+     - source: assets/styles/components/_mobile-nav.scss
+       target: assets/styles/components/_mobile-nav.scss
+     - source: assets/styles/base/_iconfont.scss
+       target: assets/styles/base/_iconfont.scss
+     - source: static/fonts/iconfont.woff2
        target: static/fonts/iconfont.woff2
-     - source: static/fonts/icon-font/iconfont.woff
+     - source: static/fonts/iconfont.woff
        target: static/fonts/iconfont.woff
-     - source: static/fonts/icon-font/iconfont.woff2
-       target: static/fonts/iconfont.woff2
 
   mounts:
     # default mounts

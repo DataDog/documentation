@@ -39,7 +39,7 @@
     },
     "homepage": "https://github.com/DataDog/Documentation#readme",
     "engines": {
-        "node": ">= 14.8.0"
+        "node": ">= 14.16.0"
     },
     "dependencies": {
         "@apidevtools/json-schema-ref-parser": "^8.0.0",

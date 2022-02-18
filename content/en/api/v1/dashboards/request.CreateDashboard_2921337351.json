@@ -1,0 +1,34 @@
+{
+  "title": "Example-Create_a_new_dashboard_with_trace_service_widget",
+  "description": "",
+  "widgets": [
+    {
+      "layout": {
+        "x": 0,
+        "y": 0,
+        "width": 72,
+        "height": 72
+      },
+      "definition": {
+        "title": "Service Summary",
+        "time": {},
+        "type": "trace_service",
+        "env": "none",
+        "service": "",
+        "span_name": "",
+        "show_hits": true,
+        "show_errors": true,
+        "show_latency": true,
+        "show_breakdown": true,
+        "show_distribution": true,
+        "show_resource_list": false,
+        "size_format": "medium",
+        "display_format": "two_column"
+      }
+    }
+  ],
+  "template_variables": [],
+  "layout_type": "free",
+  "is_read_only": false,
+  "notify_list": []
+}

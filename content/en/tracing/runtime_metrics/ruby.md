@@ -56,7 +56,7 @@ The following metrics are collected by default after enabling Runtime metrics.
 
 {{< get-metrics-from-git "ruby" >}}
 
-Along with displaying these metrics in your APM Service Page, Datadog provides a [default Ruby Runtime Dashboard][7] with the `service` and `runtime-id` tags that are applied to these metrics.
+Along with displaying these metrics in your APM Service Page, Datadog provides a [default Ruby Runtime Dashboard][7].
 
 ## Further Reading
 

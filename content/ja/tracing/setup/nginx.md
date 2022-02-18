@@ -39,7 +39,7 @@ aliases:
 次のコマンドを使用してモジュールをダウンロードしてインストールします。
 
 ```bash
-# Github から最新のリリースバージョン番号を取得します。
+# GitHub から最新のリリースバージョン番号を取得します。
 get_latest_release() {
   wget -qO- "https://api.github.com/repos/$1/releases/latest" |
     grep '"tag_name":' |

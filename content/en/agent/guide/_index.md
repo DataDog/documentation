@@ -34,6 +34,8 @@ private: true
     {{< nextlink href="/agent/guide/docker-deprecation" >}}Deprecating Docker in Kubernetes{{< /nextlink >}}
     {{< nextlink href="/agent/guide/podman-support-with-docker-integration" >}}Using the Docker integration with Podman container runtime{{< /nextlink >}}
     {{< nextlink href="/agent/guide/changing_container_registry" >}}Changing Your Container Registry{{< /nextlink >}}
+    {{< nextlink href="/agent/guide/template_variables" >}}Autodiscovery Template Variables{{< /nextlink >}}
+    {{< nextlink href="/agent/guide/auto_conf" >}}Autodiscovery Auto-Configuration{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Agent v5 guides:" >}}

@@ -41,11 +41,11 @@ The **View in context** button updates the search request in order to show you t
 
 Click on the **Metrics** tab and access underlying infrastructure metrics in a 30 minutes time frame around the log.
 
-Interact with **Host** in the upper reserved attributes section, the related [host dashboard][5], or [network page][6]. Interact with **Container** sections to jump to the [container page][7] scoped with the underlying parameters.
+Interact with **Host** in the upper reserved attributes section, the related [host dashboard][5], or [network page][6]. Interact with **Container** sections to navigate to the [container page][7] scoped with the underlying parameters.
 
 {{< img src="logs/explorer/side_panel/infra.mp4" alt="Hub to Infra" video=true style="width:100%;">}}
 
-In case logs comes from a serverless source, the Host Section is replaced with a Serverless section that links jump to the corresponding [serverless page][8].
+When logs come from a serverless source, the Host Section is replaced with a Serverless section that links to the corresponding [serverless page][8].
 
 {{< img src="logs/explorer/side_panel/infra-serverless.png" alt="Hub to Serverless" style="width:80%;">}}
 

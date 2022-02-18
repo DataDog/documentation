@@ -1,8 +1,13 @@
 datadog:
   kubeStateMetricsEnabled: false
-  apm:
-    enabled: true
   orchestratorExplorer:
+    enabled: false
+  logs:
+    enabled: false
+  apm:
+    socketEnabled: true
+    portEnabled: true
+  processAgent:
     enabled: false
 agents:
   rbac:

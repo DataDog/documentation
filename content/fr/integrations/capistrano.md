@@ -4,12 +4,13 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Enregistrez et recherchez des déploiements pour les superposer sur des graphiques de métriques clés.
-doc_link: 'https://docs.datadoghq.com/integrations/capistrano/'
+doc_link: https://docs.datadoghq.com/integrations/capistrano/
 draft: false
 git_integration_title: capistrano
 has_logo: true
 integration_id: capistrano
 integration_title: Capistrano
+integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'
@@ -33,7 +34,7 @@ Lorsque vous activez cette intégration pour un `Capfile` donné, chaque tâche 
 
 ### Installation
 
-Installez la gemme Ruby `dogapi` :
+Installez le gem Ruby `dogapi` :
 
 ```shell
 sudo gem install dogapi --version ">=1.10.0"
@@ -54,7 +55,7 @@ Après avoir configuré votre `Capfile` et exécuté au moins une tâche Capistr
 
 1. Accédez à votre [flux d'événements][2].
 2. Saisissez `sources:capistrano` dans la barre de recherche ou cliquez sur 'Capistrano' dans la liste FROM des intégrations sur la gauche.
-3. Saisissez `priority:all` dans la barre de recherche ou cliquez sur 'All' dans la liste PRIORITY à gauche. Les tâches Capistrano sont par défaut envoyées avec la priorité Low. Ainsi, si vous consultez uniquement les événements avec une priorité Normal (le réglage par défaut), vous ne verrez pas vos tâches Capistrano dans le flux d'événements.
+3. Saisissez `priority:all` dans la barre de recherche ou cliquez sur 'All' dans la liste PRIORITY à gauche. Les tâches Capistrano étant envoyées avec la priorité Low par défaut, elles ne s'afficheront pas dans la vue par défaut du flux d'événements (priorité Normal).
 
 {{< img src="integrations/capistrano/capistranoevents.gif" >}}
 

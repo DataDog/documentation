@@ -1,3 +1,4 @@
+---
 # Source: datadog/templates/secret-api-key.yaml
 apiVersion: v1
 kind: Secret
@@ -45,7 +46,7 @@ spec:
     spec:
       containers:
         - name: agent
-          image: "gcr.io/datadoghq/agent:7.32.3"
+          image: "gcr.io/datadoghq/agent:7.33.0"
           imagePullPolicy: IfNotPresent
           command: ["agent", "run"]
           resources: {}
@@ -68,8 +69,6 @@ spec:
                   fieldPath: status.hostIP
             - name: KUBERNETES
               value: "yes"
-            - name: DD_AC_EXCLUDE
-              value: "name:datadog-agent"
             - name: DD_LOG_LEVEL
               value: "INFO"
             - name: DD_DOGSTATSD_PORT
@@ -128,7 +127,7 @@ spec:
             successThreshold: 1
             timeoutSeconds: 5
         - name: trace-agent
-          image: "gcr.io/datadoghq/agent:7.32.3"
+          image: "gcr.io/datadoghq/agent:7.33.0"
           imagePullPolicy: IfNotPresent
           command: ["trace-agent", "-foreground", "-config=C:/ProgramData/Datadog/datadog.yaml"]
           resources: {}
@@ -152,8 +151,6 @@ spec:
                   fieldPath: status.hostIP
             - name: KUBERNETES
               value: "yes"
-            - name: DD_AC_EXCLUDE
-              value: "name:datadog-agent"
             - name: DD_CLUSTER_AGENT_ENABLED
               value: "false"
             - name: DD_LOG_LEVEL
@@ -179,7 +176,7 @@ spec:
             timeoutSeconds: 5
       initContainers:
         - name: init-volume
-          image: "gcr.io/datadoghq/agent:7.32.3"
+          image: "gcr.io/datadoghq/agent:7.33.0"
           imagePullPolicy: IfNotPresent
           command: ["pwsh", "-Command"]
           args:
@@ -193,7 +190,7 @@ spec:
               mountPath: C:/Temp/install_info
           resources: {}
         - name: init-config
-          image: "gcr.io/datadoghq/agent:7.32.3"
+          image: "gcr.io/datadoghq/agent:7.33.0"
           imagePullPolicy: IfNotPresent
           command: ["pwsh", "-Command"]
           args:
@@ -220,8 +217,6 @@ spec:
                   fieldPath: status.hostIP
             - name: KUBERNETES
               value: "yes"
-            - name: DD_AC_EXCLUDE
-              value: "name:datadog-agent"
           resources: {}
       volumes:
         - name: installinfo
@@ -242,8 +237,8 @@ spec:
             path: \\.\pipe\docker_engine
           name: runtimesocket
         # If the CRI is not provided, try to mount the default containerd pipe.
-        # By default, datadog.dockerOrCriSocketPath mounts the Docker pipe.
-        # With this additional hostPath, both are mounted.
+        # By default, "datadog.dockerOrCriSocketPath" mounts the Docker pipe.
+        # So with this additional hostPath, by default, both are mounted.
         - hostPath:
             path: \\.\pipe\containerd-containerd
           name: containerdsocket

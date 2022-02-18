@@ -1,3 +1,4 @@
+---
 # Source: datadog/templates/secret-api-key.yaml
 apiVersion: v1
 kind: Secret
@@ -45,6 +46,12 @@ data:
       collect_dns_stats: true
       max_tracked_connections: 131072
       conntrack_max_state_size: 131072
+      enable_runtime_compiler: false
+      runtime_compiler_output_dir: /var/tmp/datadog-agent/system-probe/build
+      kernel_header_download_dir: /var/tmp/datadog-agent/system-probe/kernel-headers
+      apt_config_dir: /host/etc/apt
+      yum_repos_dir: /host/etc/yum.repos.d
+      zypper_repos_dir: /host/etc/zypp/repos.d
     network_config:
       enabled: true
       conntrack_init_timeout: 10s
@@ -52,7 +59,6 @@ data:
       enabled: false
     runtime_security_config:
       enabled: false
-      debug: false
       socket: /var/run/sysprobe/runtime-security.sock
       policies:
         dir: /etc/datadog-agent/runtime-security.d
@@ -112,6 +118,7 @@ data:
             "fchownat",
             "fcntl",
             "fcntl64",
+            "flock",
             "fstat",
             "fstat64",
             "fstatfs",
@@ -176,6 +183,7 @@ data:
             "recvmmsg",
             "recvmsg",
             "rename",
+            "renameat",
             "restart_syscall",
             "rmdir",
             "rt_sigaction",
@@ -216,6 +224,7 @@ data:
             "stat64",
             "statfs",
             "sysinfo",
+            "symlinkat",
             "tgkill",
             "umask",
             "uname",
@@ -274,7 +283,7 @@ spec:
     spec:
       containers:
         - name: agent
-          image: "gcr.io/datadoghq/agent:7.32.3"
+          image: "gcr.io/datadoghq/agent:7.33.0"
           imagePullPolicy: IfNotPresent
           command: ["agent", "run"]
           resources: {}
@@ -373,66 +382,8 @@ spec:
             periodSeconds: 15
             successThreshold: 1
             timeoutSeconds: 5
-        - name: trace-agent
-          image: "gcr.io/datadoghq/agent:7.32.3"
-          imagePullPolicy: IfNotPresent
-          command: ["trace-agent", "-config=/etc/datadog-agent/datadog.yaml"]
-          resources: {}
-          ports:
-            - containerPort: 8126
-              name: traceport
-              protocol: TCP
-          env:
-            # Needs to be removed when Agent N-2 is built with Golang 1.17
-            - name: GODEBUG
-              value: x509ignoreCN=0
-            - name: DD_API_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: "datadog-agent"
-                  key: api-key
-            - name: DD_KUBERNETES_KUBELET_HOST
-              valueFrom:
-                fieldRef:
-                  fieldPath: status.hostIP
-            - name: KUBERNETES
-              value: "yes"
-            - name: DD_CLUSTER_AGENT_ENABLED
-              value: "false"
-            - name: DD_LOG_LEVEL
-              value: "INFO"
-            - name: DD_APM_ENABLED
-              value: "true"
-            - name: DD_APM_NON_LOCAL_TRAFFIC
-              value: "true"
-            - name: DD_APM_RECEIVER_PORT
-              value: "8126"
-            - name: DD_APM_RECEIVER_SOCKET
-              value: "/var/run/datadog/apm.socket"
-            - name: DD_DOGSTATSD_SOCKET
-              value: "/var/run/datadog/dsd.socket"
-          volumeMounts:
-            - name: config
-              mountPath: /etc/datadog-agent
-            - name: logdatadog
-              mountPath: /var/log/datadog
-            - name: tmpdir
-              mountPath: /tmp
-              readOnly: false
-            - name: dsdsocket
-              mountPath: /var/run/datadog
-            - name: runtimesocketdir
-              mountPath: /host/var/run
-              mountPropagation: None
-              readOnly: true
-          livenessProbe:
-            initialDelaySeconds: 15
-            periodSeconds: 15
-            tcpSocket:
-              port: 8126
-            timeoutSeconds: 5
         - name: process-agent
-          image: "gcr.io/datadoghq/agent:7.32.3"
+          image: "gcr.io/datadoghq/agent:7.33.0"
           imagePullPolicy: IfNotPresent
           command: ["process-agent", "-config=/etc/datadog-agent/datadog.yaml"]
           resources: {}
@@ -498,7 +449,7 @@ spec:
               mountPath: /etc/datadog-agent/system-probe.yaml
               subPath: system-probe.yaml
         - name: system-probe
-          image: "gcr.io/datadoghq/agent:7.32.3"
+          image: "gcr.io/datadoghq/agent:7.33.0"
           imagePullPolicy: IfNotPresent
           securityContext:
             capabilities:
@@ -551,9 +502,25 @@ spec:
               mountPath: /host/proc
               mountPropagation: None
               readOnly: true
+            - name: etc-os-release
+              mountPath: /host/etc/os-release
+              mountPropagation: None
+              readOnly: true
+            - name: etc-redhat-release
+              mountPath: /host/etc/redhat-release
+              mountPropagation: None
+              readOnly: true
+            - name: etc-fedora-release
+              mountPath: /host/etc/fedora-release
+              mountPropagation: None
+              readOnly: true
+            - name: etc-lsb-release
+              mountPath: /host/etc/lsb-release
+              mountPropagation: None
+              readOnly: true
       initContainers:
         - name: init-volume
-          image: "gcr.io/datadoghq/agent:7.32.3"
+          image: "gcr.io/datadoghq/agent:7.33.0"
           imagePullPolicy: IfNotPresent
           command: ["bash", "-c"]
           args:
@@ -563,7 +530,7 @@ spec:
               mountPath: /opt/datadog-agent
           resources: {}
         - name: init-config
-          image: "gcr.io/datadoghq/agent:7.32.3"
+          image: "gcr.io/datadoghq/agent:7.33.0"
           imagePullPolicy: IfNotPresent
           command: ["bash", "-c"]
           args:
@@ -603,7 +570,7 @@ spec:
               value: "true"
           resources: {}
         - name: seccomp-setup
-          image: "gcr.io/datadoghq/agent:7.32.3"
+          image: "gcr.io/datadoghq/agent:7.33.0"
           command:
             - cp
             - /etc/config/system-probe-seccomp.json
@@ -632,13 +599,21 @@ spec:
             path: /sys/fs/cgroup
           name: cgroups
         - hostPath:
-            path: /var/run/datadog/
-            type: DirectoryOrCreate
-          name: dsdsocket
+            path: /etc/os-release
+          name: etc-os-release
+        - hostPath:
+            path: /etc/redhat-release
+          name: etc-redhat-release
+        - hostPath:
+            path: /etc/fedora-release
+          name: etc-fedora-release
+        - hostPath:
+            path: /etc/lsb-release
+          name: etc-lsb-release
         - hostPath:
             path: /var/run/datadog/
             type: DirectoryOrCreate
-          name: apmsocket
+          name: dsdsocket
         - name: s6-run
           emptyDir: {}
         - name: sysprobe-config

@@ -192,7 +192,7 @@ Le check Cacti n'inclut aucun check de service.
 
 La bibliothèque Python utilisée par cette intégration provoque des fuites de mémoire dans certaines circonstances. Si vous rencontrez ce problème, vous pouvez installer le paquet [python-rrdtool][6] au lieu de rrdtool. Cet ancien paquet n'est plus mis à jour et n'est pas officiellement pris en charge par cette intégration, mais il a permis à d'autres utilisateurs de résoudre ce problème de mémoire.
 
-Un [ticket Github][7] a été ouvert afin de suivre cette fuite de mémoire.
+Un [ticket GitHub][7] a été ouvert afin de suivre cette fuite de mémoire.
 
 Besoin d'aide ? Contactez [l'assistance Datadog][8].
 

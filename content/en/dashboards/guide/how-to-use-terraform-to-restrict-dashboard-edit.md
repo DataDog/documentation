@@ -9,7 +9,7 @@ aliases:
 
 ## Introduction
 
-Previously when you wanted to restrict editing of dashboards created and managed by [Terraform][1], you would use the `is_read_only` attribute to define that editing the dashboard is restricted to the creator or users with the Privileged Access (Admin) permission in your organization. With the introduction of `restricted_roles`, you can list specific roles that can edit this dashboard within your organization.
+Previously when you wanted to restrict editing of dashboards created and managed by [Terraform][1], you would use the `is_read_only` attribute to define that editing the dashboard is restricted to the creator or users with the Access Management (`user_access_manage`) permission in your organization. With the introduction of `restricted_roles`, you can list specific roles that can edit this dashboard within your organization.
 
 ## Restricting a dashboard
 

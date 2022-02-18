@@ -116,7 +116,7 @@ Go to your [GCP account][1] and [create a GCS bucket][2] to send your archives t
 {{< tabs >}}
 {{% tab "AWS S3" %}}
 
-Add the following two permission statements to your IAM policies. Edit the bucket names and, if desired, specify the paths that contain your log archives.
+Add the following two permission statements to your IAM policies attached to the role for the AWS Integration. Edit the bucket names and, if desired, specify the paths that contain your log archives. 
 
 **Notes**:
 
@@ -132,6 +132,9 @@ Add the following two permission statements to your IAM policies. Edit the bucke
       "Sid": "DatadogUploadAndRehydrateLogArchives",
       "Effect": "Allow",
       "Action": ["s3:PutObject", "s3:GetObject"],
+       "Principal": {
+          "AWS": "arn:aws:iam::MY_AWS_ACCOUNTID:role/<MY_ROLE_NAME>"
+       },
       "Resource": [
         "arn:aws:s3:::<MY_BUCKET_NAME_1_/_MY_OPTIONAL_BUCKET_PATH_1>/*",
         "arn:aws:s3:::<MY_BUCKET_NAME_2_/_MY_OPTIONAL_BUCKET_PATH_2>/*"
@@ -141,6 +144,9 @@ Add the following two permission statements to your IAM policies. Edit the bucke
       "Sid": "DatadogRehydrateLogArchivesListBucket",
       "Effect": "Allow",
       "Action": "s3:ListBucket",
+      "Principal": {
+          "AWS": "arn:aws:iam::MY_AWS_ACCOUNTID:role/<MY_ROLE_NAME>"
+       },
       "Resource": [
         "arn:aws:s3:::<MY_BUCKET_NAME_1>",
         "arn:aws:s3:::<MY_BUCKET_NAME_2>"
@@ -235,12 +241,20 @@ Use this optional configuration step to assign roles on that archive and restric
 
 #### Datadog tags
 
-Use this configuration optional step to:
+Use this optional configuration step to:
 
 * Include all log tags in your archives (activated by default on all new archives). **Note**: This increases the size of resulting archives.
 * Add tags on rehydrated logs according to your Restriction Queries policy. See [logs_read_data][9] permission.
 
 {{< img src="logs/archives/tags_in_out.png" alt="Configure Archive Tags"  style="width:75%;">}}
+
+#### Define maximum scan size
+
+Use this optional configuration step to define the maximum volume of log data (in GB) that can be scanned for Rehydration on your Log Archives.
+
+For Archives with a maximum scan size defined, all users need to estimate the scan size before they are allowed to start a Rehydration. If the estimated scan size is greater than what is permitted for that Archive, users must reduce the time range over which they are requesting the Rehydration. Reducing the time range will reduce the scan size and allow the user to start a Rehydration.
+
+{{< img src="logs/archives/max_scan_size.png" alt="Define maximum scan size on Archive" style="width:75%;">}}
 
 #### Storage class
 

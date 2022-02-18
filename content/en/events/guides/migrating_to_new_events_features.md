@@ -6,9 +6,11 @@ aliases:
 ---
 
 <div class="alert alert-warning">
-  The Events Explorer is in private beta. If you are looking for legacy events information, see the <a href="/events/stream/">Event Stream documentation</a>.</div>
+  Use this guide to migrate from the legacy Events Stream to the Events Explorer. The Events Explorer is being automatically rolled out to all customers in Q1 and Q2 2022. If you see the <strong>Explorer</strong> option under <strong>Events</strong> in the left navigation bar, you have the new features. For legacy events information, see the <a href="/events/stream/">Event Stream</a>.</div>
 
-The Event Stream is one of Datadog’s oldest features. The introduction of the Events Explorer and its associated changes means that Event query syntax, explorer and analytics views, processing pipelines, and other features work the same way they do for other Datadog products such as Logs. See [Events Explorer][1] for more details. 
+The Events Explorer replaces the Event Stream, one of Datadog's oldest features. The new Event query syntax requires migration of Event monitors, dashboard widgets, and any other features that query Events. 
+
+The introduction of the Events Explorer and its associated changes means that Event features work similarly to other Datadog products. Event query syntax, explorer and analytics views, processing pipelines and other features look like their counterparts in Logs or APM Traces. See [Events Explorer][1] for more details.
 
 ## What this means for your organization
 
@@ -16,25 +18,46 @@ The Event Stream is one of Datadog’s oldest features. The introduction of the 
 
 * Older events (before migration) continue to be visible in the [Event Stream][2] for the remainder of their retention period (13 months).
 
-This guide describes how to migrate your organization’s event monitors and dashboard widgets so that you benefit from the new Events features, and so that you're ready when the legacy event stream and storage are sunset. It also provides [a detailed description of what's changed](#details-of-the-changes).
+This guide describes how to migrate your organization’s event monitors and dashboard widgets so that you benefit from the new Events features. Following this guide ensures that you are ready when Datadog retires the legacy event stream and storage. This guide also provides [a detailed description of what's changed](#details-of-the-changes).
 
 ## Migration process
 
-1. **Request early access.** Events Explorer is in private beta. [Contact support][3] to request access for your organization. The support team sends you a notification when Events Explorer is enabled for your organization. You can access the new Explorer and other features through the Events menu in the main navigation, alongside the existing Stream.
+### Datadog migrates monitors and dashboards configured through the UI
+<div class="alert alert-info">
+You do not need to take any action for dashboards or monitors created through Datadog.
+</div>
 
-   {{< img src="events/guides/navigation.png" alt="Events navigation" style="width:100%;" >}}
+The changes to Event query syntax affect two Datadog features: monitors and dashboard widgets.
 
-   <div class="alert alert-warning">Don't stop here! To create event monitors and dashboard widgets for Events using the new query syntax, Datadog support must enable the new feature for your organization, and you must migrate your existing event monitors and dashboard widgets to the new syntax, as described in the following steps.</div>
+Datadog migrates monitors that query Events by doing the following:
+- For each legacy Event monitor, creates a duplicate that uses the new query syntax. Enables the new monitor.
+- Adds the prefix "legacy" to the legacy Event monitor, and mutes it.
+- Updates all SLOs and monitor downtimes that reference the legacy Event monitor to point to the new monitor.
 
-2. **Contact Support to enable the new Events feature.** [Ask Support][3] to switch your organization to the new query syntax. Datadog automatically routes queries to the correct backend. Old queries continue to go to the old backend, and migrated queries go to the new backend, so you can migrate safely. When the switch is enabled, you can no longer create monitors or dashboard widgets with the legacy query syntax, so calls to the legacy API fail with an error, but your existing monitors and dashboards remain reporting.
+When viewing monitors, you can filter which of the two monitor types you would like to see using the **Event Migration** facet. This facet has available values `Event Monitors V1` and `Event Monitors V2`.
 
-3. **Migrate data stored in Datadog servers.** Because the new events have a new query syntax and different monitor features (see below for detailed changes), event monitors and event dashboard widgets definitions that contain event queries must be updated. Use this [open source migration script][4] that connects to your account using your API key, and converts the data. [Contact Support][3] if you prefer to have Datadog run it for you.
+Datadog directly migrates dashboard widgets that use Event queries. These widgets include Event Stream widgets, Event Timeline widgets, and Event overlays in other widgets. Datadog does not create any new dashboards or widgets.
 
-4. **Migrate data configured externally (Terraform, API).** If you manage your Datadog configuration with external, API-based scripts or tools such as Terraform, update your dashboard and monitor definitions in your configuration file. Otherwise the old query syntax is applied again at next deployment and overwrites updated queries. Review the syntax changes described below and use the [migration script][4] to see what converted queries look like. [Contact Support][3] for assistance at this stage.
+### Migrate data configured externally (Terraform, API)
 
-5. **If you have SLOs based on event monitors**, update their definitions to point to the new monitors.
+<div class="alert alert-warning">
+You must take action to migrate Datadog configuration you manage with Terraform or scripts.
+</div>
 
-6. **Contact Support to disable the old pipeline.** [Let Support know][3] that you have finished migrating, and the old pipeline will be turned off. After that, all queries are routed to the new backend, and old-style queries return errors.
+If you manage your Datadog configuration with external, API-based scripts or tools such as Terraform, update your dashboard and monitor definitions in your configuration file. Otherwise, the old query syntax is applied again at the next deployment and overwrites updated queries. Review the syntax changes described below and use the [migration script][3] to see what converted queries look like. [Contact Support][4] for assistance at this stage.
+
+## Post migration
+
+### Access
+
+You can access the new Explorer and other features through the Events menu in the main navigation, alongside the existing Stream.
+
+{{< img src="events/guides/navigation.png" alt="Events navigation" style="width:100%;" >}}
+
+### Impact
+
+* Datadog automatically routes Event queries to the correct backend. Old queries continue to go to the old backend, and migrated queries go to the new backend, so you can migrate safely.
+* Event dashboard widgets must use the new query syntax.
 
 ## Details of the changes
 
@@ -154,12 +177,12 @@ Legacy Event Monitors do not support cardinality rollup.
 * **Event comments are no longer supported in the UI.** Comments created using the API with `user_update` event type are displayed as normal events.
 * **You can no longer create new events from the UI**, but you can still use the API for posting new events.
 
-If you are using these features, [contact Support][3] to get help finding an alternative solution.
+If you are using these features, [contact Support][4] to get help finding an alternative solution.
 
 
 [1]: /events/explorer/
 [2]: https://app.datadoghq.com/event/explorer
-[3]: /help/
-[4]: https://github.com/DataDog/events-v2-migration-script
+[3]: https://github.com/DataDog/events-v2-migration-script
+[4]: /help/
 [5]: /api/latest/events/#query-the-event-stream
 [6]: /api/latest/monitors/#create-a-monitor

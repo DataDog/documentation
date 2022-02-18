@@ -11,14 +11,8 @@ further_reading:
     tag: Documentation
     text: Installer la surveillance sans serveur Ruby
 ---
-### Installer l'intégration Datadog/AWS
-
-Installez [l'intégration AWS][1]. Datadog pourra ainsi ingérer les métriques Lambda depuis AWS CloudWatch.
-
 ### Instrumenter votre application sans serveur
 
 Sélectionnez un runtime Lambda ci-dessous pour découvrir comment instrumenter votre application sans serveur.
 
    {{< partial name="serverless/getting-started-languages.html" >}}
-
-[1]: /fr/integrations/amazon_web_services/#setup

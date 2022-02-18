@@ -280,7 +280,7 @@ Your application version (for example, 2.5, 202003181415, 1.3-alpha). Available 
 
 `dd.logs.injection`
 : **Environment Variable**: `DD_LOGS_INJECTION`<br>
-**Default**: `false`<br>
+**Default**: `true`<br>
 Enabled automatic MDC key injection for Datadog trace and span IDs. See [Advanced Usage][7] for details.
 
 `dd.trace.config`
@@ -682,7 +682,7 @@ Java APM has minimal impact on the overhead of an application:
 [5]: /account_management/billing/apm_tracing_profiler/
 [6]: /tracing/profiler/
 [7]: /tracing/connect_logs_and_traces/java/
-[8]: /tracing/trace_retention_and_ingestion/
+[8]: /tracing/trace_ingestion/
 [9]: https://docs.oracle.com/javase/7/docs/technotes/tools/solaris/java.html
 [10]: https://docs.oracle.com/javase/8/docs/api/java/lang/instrument/package-summary.html
 [11]: /tracing/setup/docker/

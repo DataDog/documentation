@@ -58,7 +58,7 @@ If necessary, additional metrics can be defined in the instances. These metrics 
 
 Profiles can be used interchangeably, meaning devices that share MIB dependencies can reuse the same profiles. For example, the [Cisco c3850 profile][2] can be used across many Cisco switches.
 
-For more Datadog provided profiles, see the [Github repository][2].
+For more Datadog provided profiles, see the [GitHub repository][2].
 
 ## Further Reading
 

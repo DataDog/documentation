@@ -1,3 +1,4 @@
+---
 # Source: datadog/templates/secret-api-key.yaml
 apiVersion: v1
 kind: Secret
@@ -45,7 +46,7 @@ spec:
     spec:
       containers:
         - name: agent
-          image: "gcr.io/datadoghq/agent:7.32.3"
+          image: "gcr.io/datadoghq/agent:7.33.0"
           imagePullPolicy: IfNotPresent
           command: ["agent", "run"]
           resources: {}
@@ -68,8 +69,6 @@ spec:
                   fieldPath: status.hostIP
             - name: KUBERNETES
               value: "yes"
-            - name: DD_AC_EXCLUDE
-              value: "name:datadog-agent"
             - name: DD_LOG_LEVEL
               value: "INFO"
             - name: DD_DOGSTATSD_PORT
@@ -156,7 +155,7 @@ spec:
             successThreshold: 1
             timeoutSeconds: 5
         - name: trace-agent
-          image: "gcr.io/datadoghq/agent:7.32.3"
+          image: "gcr.io/datadoghq/agent:7.33.0"
           imagePullPolicy: IfNotPresent
           command: ["trace-agent", "-config=/etc/datadog-agent/datadog.yaml"]
           resources: {}
@@ -180,8 +179,6 @@ spec:
                   fieldPath: status.hostIP
             - name: KUBERNETES
               value: "yes"
-            - name: DD_AC_EXCLUDE
-              value: "name:datadog-agent"
             - name: DD_CLUSTER_AGENT_ENABLED
               value: "false"
             - name: DD_LOG_LEVEL
@@ -216,69 +213,9 @@ spec:
             tcpSocket:
               port: 8126
             timeoutSeconds: 5
-        - name: process-agent
-          image: "gcr.io/datadoghq/agent:7.32.3"
-          imagePullPolicy: IfNotPresent
-          command: ["process-agent", "-config=/etc/datadog-agent/datadog.yaml"]
-          resources: {}
-          env:
-            # Needs to be removed when Agent N-2 is built with Golang 1.17
-            - name: GODEBUG
-              value: x509ignoreCN=0
-            - name: DD_API_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: "datadog-agent"
-                  key: api-key
-            - name: DD_KUBERNETES_KUBELET_HOST
-              valueFrom:
-                fieldRef:
-                  fieldPath: status.hostIP
-            - name: KUBERNETES
-              value: "yes"
-            - name: DD_AC_EXCLUDE
-              value: "name:datadog-agent"
-            - name: DD_CLUSTER_AGENT_ENABLED
-              value: "false"
-            - name: DD_PROCESS_AGENT_DISCOVERY_ENABLED
-              value: "false"
-            - name: DD_LOG_LEVEL
-              value: "INFO"
-            - name: DD_SYSTEM_PROBE_ENABLED
-              value: "false"
-            - name: DD_DOGSTATSD_SOCKET
-              value: "/var/run/datadog/dsd.socket"
-            - name: DD_ORCHESTRATOR_EXPLORER_ENABLED
-              value: "false"
-          volumeMounts:
-            - name: config
-              mountPath: /etc/datadog-agent
-            - name: logdatadog
-              mountPath: /var/log/datadog
-            - name: tmpdir
-              mountPath: /tmp
-              readOnly: false
-            - name: runtimesocketdir
-              mountPath: /host/var/run
-              mountPropagation: None
-              readOnly: true
-            - name: cgroups
-              mountPath: /host/sys/fs/cgroup
-              mountPropagation: None
-              readOnly: true
-            - name: passwd
-              mountPath: /etc/passwd
-              readOnly: true
-            - name: procdir
-              mountPath: /host/proc
-              mountPropagation: None
-              readOnly: true
-            - name: dsdsocket
-              mountPath: /var/run/datadog
-              readOnly: true
       initContainers:
         - name: init-volume
-          image: "gcr.io/datadoghq/agent:7.32.3"
+          image: "gcr.io/datadoghq/agent:7.33.0"
           imagePullPolicy: IfNotPresent
           command: ["bash", "-c"]
           args:
@@ -288,7 +225,7 @@ spec:
               mountPath: /opt/datadog-agent
           resources: {}
         - name: init-config
-          image: "gcr.io/datadoghq/agent:7.32.3"
+          image: "gcr.io/datadoghq/agent:7.33.0"
           imagePullPolicy: IfNotPresent
           command: ["bash", "-c"]
           args:
@@ -321,8 +258,6 @@ spec:
                   fieldPath: status.hostIP
             - name: KUBERNETES
               value: "yes"
-            - name: DD_AC_EXCLUDE
-              value: "name:datadog-agent"
             - name: DD_LEADER_ELECTION
               value: "true"
           resources: {}
@@ -352,9 +287,6 @@ spec:
           name: apmsocket
         - name: s6-run
           emptyDir: {}
-        - hostPath:
-            path: /etc/passwd
-          name: passwd
         - hostPath:
             path: /var/lib/datadog-agent/logs
           name: pointerdir

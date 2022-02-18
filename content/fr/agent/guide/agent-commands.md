@@ -266,7 +266,7 @@ Certaines options disposent de flags et d'options détaillées que vous pouvez c
 | `installservice`  | Installe l'Agent dans le gestionnaire de contrôle des services. Windows uniquement.         |
 | `jmx`             | Dépannage JMX.                                                        |
 | `launch-gui`      | Démarre l'interface graphique de l'Agent Datadog.                                                |
-| `regimport`       | Importe les paramètres de registre dans `datadog.yaml`. Windows uniquement.             |
+| `regimport`       | Importe les paramètres de registre dans `datadog.yaml`. Windows uniquement. Obsolète depuis la version 7.27.0.             |
 | `remove-service`  | Supprime l'Agent du gestionnaire de contrôle des services. Windows uniquement.            |
 | `restart-service` | Redémarre l'Agent dans le gestionnaire de contrôle des services. Windows uniquement.         |
 | `start-service`   | Démarre l'Agent dans le gestionnaire de contrôle des services. Windows uniquement.           |
