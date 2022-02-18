@@ -21,12 +21,12 @@ For most applications, you should use the process diagnostics. For that, you nee
 ```
 dd-trace check process <pid>
 ```
-This will run basic configuration checks and display recommendations if any issue is found.
+This runs basic configuration checks and displays recommendations if any issues are found.
 
 
 ## IIS diagnostics
 
-For an IIS application, you can get more thourough diagnostics by using another command:
+For an IIS application, you can get more thorough diagnostics by using another command:
 ```
 dd-trace check iis <full site name>
 ```
@@ -49,7 +49,7 @@ dd-trace check iis "Default Web Site"
 
 Because application pools are started lazily in IIS, make sure that the site has received at least one request before running the command.
 
-As for the process diagnostics, this command will run basic configuration checks and display recommendations if any issue is found.
+As for the process diagnostics, this command runs basic configuration checks and displays recommendations if any issues are found.
 
 ## Agent connectivity diagnostics
 
@@ -58,7 +58,7 @@ If you don't want to run checks for a specific application but just want to test
 dd-trace check agent [url]
 ```
 
-This command will send a request to the agent and look for any error. If the url parameter is omitted, then the location of the agent will be determined from the environment variables. The supported protocols are `http://` or `unix://` (for domain sockets).
+This command sends a request to the agent and looks for any error. If the `url` parameter is omitted, then the location of the agent is determined from the environment variables. The supported protocols are `http://` or `unix://` (for domain sockets).
 
 
 
