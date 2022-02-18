@@ -5,7 +5,7 @@ further_reading:
 - link: 'serverless/datadog_lambda_library/go'
   tag: "Documentation"
   text: 'Datadog Lambda Library for Go'
-- link: 'serverless/serverless_tagging/'
+- link: '/serverless/troubleshooting/serverless_tagging/'
   tag: "Documentation"
   text: 'Tagging Serverless Applications'
 - link: 'serverless/distributed_tracing/'
