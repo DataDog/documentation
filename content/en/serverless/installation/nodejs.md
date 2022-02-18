@@ -2,24 +2,18 @@
 title: Instrumenting Node.js Serverless Applications
 kind: documentation
 further_reading:
-- link: "/serverless/serverless_integrations/plugin/"
-  tag: "Documentation"
-  text: "Datadog Serverless Plugin"
-- link: "/serverless/serverless_integrations/macro/"
-  tag: "Documentation"
-  text: "Datadog Serverless Macro"
-- link: "/serverless/serverless_integrations/cli/"
-  tag: "Documentation"
-  text: "Datadog Serverless CLI"
-- link: '/serverless/troubleshooting/serverless_tagging/'
-  tag: "Documentation"
-  text: 'Tagging Serverless Applications'
+- link: 'serverless/datadog_lambda_library/nodejs/'
+  tag: 'Documentation'
+  text: 'Datadog Lambda Library for Node.js'
 - link: 'serverless/distributed_tracing/'
-  tag: "Documentation"
+  tag: 'Documentation'
   text: 'Tracing Serverless Applications'
 - link: 'serverless/custom_metrics/'
-  tag: "Documentation"
+  tag: 'Documentation'
   text: 'Submitting Custom Metrics from Serverless Applications'
+- link: '/serverless/guide/troubleshoot_serverless_monitoring'
+  tag: 'Documentation'
+  text: 'Troubleshoot Serverless Monitoring'
 aliases:
     - /serverless/datadog_lambda_library/nodejs/
     - /serverless/guide/nodejs/
@@ -498,6 +492,10 @@ For more information on custom metric submission, see [here][5]. For additional 
 
 If your Lambda function is running in a VPC, follow these [instructions][7] to ensure that the extension can reach Datadog API endpoints.
 
+## Troubleshooting
+
+If you have trouble collecting the monitoring data after following the instructions above, refer to the [serverless monitoring troubleshooting guide][8] for help.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -509,3 +507,4 @@ If your Lambda function is running in a VPC, follow these [instructions][7] to e
 [5]: /serverless/custom_metrics?tab=nodejs
 [6]: /tracing/custom_instrumentation/nodejs/
 [7]: /serverless/libraries_integrations/extension/#vpc
+[8]: /serverless/guide/troubleshoot_serverless_monitoring/

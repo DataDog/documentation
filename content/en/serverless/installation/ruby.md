@@ -2,15 +2,18 @@
 title: Instrumenting Ruby Serverless Applications
 kind: documentation
 further_reading:
-- link: 'serverless/serverless_tagging/'
+- link: 'serverless/datadog_lambda_library/ruby'
   tag: 'Documentation'
-  text: 'Tagging Serverless Applications'
+  text: 'Datadog Lambda Library for Ruby'
 - link: 'serverless/distributed_tracing/'
   tag: 'Documentation'
   text: 'Tracing Serverless Applications'
 - link: 'serverless/custom_metrics/'
   tag: 'Documentation'
   text: 'Submitting Custom Metrics from Serverless Applications'
+- link: '/serverless/guide/troubleshoot_serverless_monitoring'
+  tag: 'Documentation'
+  text: 'Troubleshoot Serverless Monitoring'
 aliases:
     - /serverless/datadog_lambda_library/ruby/
 ---
@@ -156,6 +159,10 @@ end
 
 For more information on custom metric submission, see [here][7]. For additional details on custom instrumentation, see the Datadog APM documentation for [custom instrumentation][8].
 
+## Troubleshooting
+
+If you have trouble collecting the monitoring data after following the instructions above, refer to the [serverless monitoring troubleshooting guide][9] for help.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -168,3 +175,4 @@ For more information on custom metric submission, see [here][7]. For additional 
 [6]: https://app.datadoghq.com/functions
 [7]: /serverless/custom_metrics?tab=ruby
 [8]: /tracing/custom_instrumentation/ruby/
+[9]: /serverless/guide/troubleshoot_serverless_monitoring/
