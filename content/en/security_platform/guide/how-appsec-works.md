@@ -19,7 +19,7 @@ For Application Security to be compatible with your Datadog configuration, you m
 
 Application Security uses processes already contained in the Agent and APM, so there are no performance implications when using it. Application Security collects and enriches trace data from APM. It doesn't require extra overhead for processes like analyzing attack attempts, because it matches against known patterns and flags them.
 
-### Data Privacy
+### Data privacy
 
 Application Security only scans HTTP request headers, it does not scan the body. 
 
