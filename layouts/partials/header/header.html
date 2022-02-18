@@ -20,50 +20,65 @@
                             {{ if eq .Identifier "solutions" }}
                               <ul class="dropdown-menu solutions-menu p-2">
                                 <div class="row">
-                                  <div class="col-4">
-                                    <p class="text-gray-dark small text-uppercase font-weight-bold no-event">Industry</p>
-                                    {{ range .Children }}
-                                      {{ if hasPrefix .Identifier "industry-" }}
-                                        <li class="nav-item">
-                                            <a class="d-block " href="{{- partial "menulink" (slice .Identifier ( .URL ) $base $dot ) | safeURL -}}"><span class="menu-text">{{ .Name | safeHTML }}</span></a>
-                                        </li>
+                                  {{ range .Children }}
+                                    <div class="col-4">
+                                      <p class="text-gray-dark small text-uppercase font-weight-bold no-event">{{ .Name }}</p>
+                                      {{ if .HasChildren }}
+                                        {{ range .Children }}
+                                          <li class="nav-item">
+                                            <a class="d-block "
+                                              href="{{- partial "menulink" (slice .Identifier ( .URL ) $base $dot ) | safeURL -}}"><span class="menu-text">{{ .Name | safeHTML }}</span></a>
+                                          </li>
+                                        {{ end }}
                                       {{ end }}
-                                    {{ end }}
-                                  </div>
-                                  <div class="col-4">
-                                    <p class="text-gray-dark small text-uppercase font-weight-bold no-event">Technology</p>
-                                    {{ range .Children }}
-                                      {{ if hasPrefix .Identifier "technology-" }}
-                                        <li class="nav-item">
-                                            <a class="d-block " href="{{- partial "menulink" (slice .Identifier ( .URL ) $base $dot ) | safeURL -}}"><span class="menu-text">{{ .Name | safeHTML }}</span></a>
-                                        </li>
-                                      {{ end }}
-                                    {{ end }}
-                                  </div>
-                                  <div class="col-4">
-                                    <p class="text-gray-dark small text-uppercase font-weight-bold no-event">Use-Case</p>
-                                    {{ range .Children }}
-                                      {{ if hasPrefix .Identifier "usecase-" }}
-                                        <li class="nav-item">
-                                            <a class="d-block " href="{{- partial "menulink" (slice .Identifier ( .URL ) $base $dot ) | safeURL -}}"><span class="menu-text">{{ .Name | safeHTML }}</span></a>
-                                        </li>
-                                      {{ end }}
-                                    {{ end }}
-                                  </div>
+                                    </div>
+                                  {{ end }}
                                 </div>
                               </ul>
                             <!--/ Menu: Solutions menu -->
                             <!-- Menu: with sub-menus -->
                             {{ else if eq .Identifier "product" }}
                               <ul class="dropdown-menu product-menu p-2">
-                                {{ range .Children }}
-                                  <li>
-                                      <a class="d-block" href="{{- partial "menulink" (slice .Identifier ( .URL ) $base $dot ) | safeURL -}}">
-                                        {{ .Pre }}
-                                        <span class="menu-text d-inline-flex">{{ .Name | safeHTML }}</span>
-                                      </a>
-                                  </li>
-                                {{end}}
+                                <div class="row">
+                                  <div class="col-6">
+                                    {{ range first 3 .Children }}
+                                    <div class="mb-half-1 pb-1">
+                                      <p class="pl-1 text-gray-dark small text-uppercase font-weight-semibold no-event">{{ .Name }}</p>
+                                      {{ if .HasChildren }}
+                                      <ul class="list-unstyled mt-half-1 pt-1">
+                                        {{ range .Children }}
+                                        <li>
+                                          <a class="d-inline-block"
+                                            href="{{- partial "menulink" (slice .Identifier ( .URL ) $base $dot ) | safeURL -}}">
+                                          {{ .Pre }}{{ .Name | safeHTML }}
+                                          </a>
+                                        </li>
+                                        {{ end }}
+                                      </ul>
+                                      {{ end }}
+                                    </div>
+                                    {{end}}
+                                  </div>
+                                  <div class="col-6">
+                                    {{ range last 3 .Children }}
+                                    <div class="mb-half-1 pb-1">
+                                      <p class="pl-1 text-gray-dark small text-uppercase font-weight-semibold no-event">{{ .Name }}</p>
+                                      {{ if .HasChildren }}
+                                      <ul class="list-unstyled mt-half-1 pt-1">
+                                        {{ range .Children }}
+                                        <li>
+                                          <a class="d-inline-block"
+                                            href="{{- partial "menulink" (slice .Identifier ( .URL ) $base $dot ) | safeURL -}}">
+                                          {{ .Pre }}{{ .Name | safeHTML }}
+                                          </a>
+                                        </li>
+                                        {{ end }}
+                                      </ul>
+                                      {{ end }}
+                                    </div>
+                                    {{end}}
+                                  </div>
+                                </div>
                               </ul>
                             {{ else }}
                               <ul class="dropdown-menu p-2">
