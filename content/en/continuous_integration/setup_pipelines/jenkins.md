@@ -272,7 +272,7 @@ pipeline {
 
 The Jenkins plugin uses environment variables to determine the Git information. However, these environment variables may not be available if you are not using a `Jenkinsfile` in your repository and you're configuring the pipeline directly in Jenkins using explicitly the `checkout` step.
 
-If this happens, propagate the Git information to the environment variables in your build. You can use the `.each {k,v -> env.setProperty(k, v)}` function after executing the `checkout` step or `git` step. For example:
+If this happens, propagate the Git information to the environment variables in your build. You can use the `.each {k,v -> env.setProperty(k, v)}` function after executing the `checkout` or `git` steps. For example:
 
 {{< tabs >}}
 {{% tab "Using Declarative Pipelines" %}}
@@ -415,10 +415,6 @@ pipeline {
   }
 }
 {{< /code-block >}}
-
-### Propagate Git information in scripted pipelines.
-
-
 
 ## Customization
 
