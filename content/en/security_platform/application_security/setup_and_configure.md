@@ -202,6 +202,8 @@ To create an exclusion filter, do one of the following:
 - Click on a signal in [Application Security Signals][2] and click the **Create Exclusion Filter** button in the top left corner. This method automatically generates a filter query for the targeted service.
 - Navigate to [Exclusion Filters Configuration][3] and manually configure a new exclusion filter based on your own filter query.
 
+**Note**: Requests (traces) matching an exclusion filter are not billed.
+
 ## Disable
 
 To disable Application Security, remove the `DD_APPSEC_ENABLED=true` environment variable from your application configuration. Once removed, restart your service.
