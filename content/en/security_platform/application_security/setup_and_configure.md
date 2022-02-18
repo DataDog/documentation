@@ -204,7 +204,7 @@ To create an exclusion filter, do one of the following:
 
 **Note**: Requests (traces) matching an exclusion filter are not billed.
 
-## Disable
+## Disable Application Security
 
 To disable Application Security, remove the `DD_APPSEC_ENABLED=true` environment variable from your application configuration. Once removed, restart your service.
 
