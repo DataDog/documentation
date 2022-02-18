@@ -64,7 +64,7 @@ To configure SAML for multi-organizations:
 
 ### SAML strict parent organizations
 
-Under some circumstances, you may be unable to access a newly created child organization. When an organization requires users to log in using SAML, the user accounts usually lack passwords. Since child organizations do not inherit SAML settings from their parents, logging into the child organization requires a password that does not exist.
+Under some circumstances, you may be unable to access a newly created child organization. When an organization requires users to log in using SAML, its user accounts may lack passwords. Since child organizations do not inherit SAML settings from their parents, logging into the child organization requires a password that does not exist.
 
 To ensure that you can log into a child organization created from a SAML strict parent organization, take the following steps in the parent organization:
 1. Click **Organization Settings** from the account menu in the bottom of the left side navigation, or select **Organization Settings** from the header dropdown at the top of the Personal Settings page.
@@ -74,7 +74,7 @@ To ensure that you can log into a child organization created from a SAML strict 
 5. Under **Select user's login methods**, place a checkmark in the **Password** checkbox.
 6. Ensure your account has a password. If you need help setting a password, contact [Datadog support][2].
 
-Following the steps above ensure that you can log into the parent account using an email and password combination. After creating your child organization, you can also log into it using your email and password.
+Following the steps above ensures that you can log into the parent account using an email and password combination. After creating your child organization, you can also log into it using your email and password.
 
 If you already created the child organization and are locked out, following the procedure allows you to log in.
 
