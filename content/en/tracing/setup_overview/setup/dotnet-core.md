@@ -239,7 +239,7 @@ For containerized, serverless, and cloud environments:
     `DD_TRACE_AGENT_URL=http://custom-hostname:1234`
     `DD_TRACE_AGENT_URL=unix:///var/run/datadog/apm.socket`
 
-For more information on the available variables, avalaible as environment variables or through code, see [Configuration](#configuration).
+For more information on the available setting knobs, avalaible as environment variables or through code, see [Configuration](#configuration).
 
 {{< site-region region="us3,us5,eu,gov" >}}
 
@@ -380,8 +380,21 @@ The following configuration variables are available for both automatic and custo
 
 `DD_TRACE_AGENT_URL`
 : **TracerSettings property**: `Exporter.AgentUri`<br>
-Sets the URL endpoint where traces are sent. Overrides the deprecated `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT` if set.<br>
+Sets the URL endpoint where traces are sent. Overrides `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT` if set. <br>
+It can contain a unix path to a socket by prefixing the path by `unix://`<br>
 **Default**: `http://<DD_AGENT_HOST>:<DD_TRACE_AGENT_PORT>` if they are set, `unix:///var/run/datadog/apm.socket` if the file exists or `http://localhost:8126`
+
+`DD_APM_RECEIVER_SOCKET`
+: **TracerSettings property**: `Exporter.TracesUnixDomainSocketPath`<br>
+Sets the path to the socket used to communicate with the agent<br>
+
+`DD_AGENT_HOST`
+: Sets the host where traces are sent (the host running the Agent). Can be a hostname or an IP address. Prefer using `DD_TRACE_AGENT_URL` that has precedence over this parameter <br>
+**Default**: `localhost`
+
+`DD_TRACE_AGENT_PORT`
+: Sets the port where traces are sent (the port where the Agent is listening for connections). Prefer using `DD_TRACE_AGENT_URL` that has precedence over this parameter <br>
+**Default**: `8126`
 
 `DD_LOGS_INJECTION`
 : **TracerSettings property**: `LogsInjectionEnabled` <br>
@@ -402,7 +415,7 @@ The number of traces allowed to be submitted per second (deprecates `DD_MAX_TRAC
 If specified, adds all of the specified tags to all generated spans.
 
 `DD_TRACE_DEBUG`
-Enables or disables debug logging. Valid values are: `true` or `false`.<br>
+: Enables or disables debug logging. Valid values are: `true` or `false`.<br>
 **Default**: `false`
 
 `DD_TRACE_HEADER_TAGS`
