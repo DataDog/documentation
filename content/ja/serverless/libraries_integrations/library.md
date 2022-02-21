@@ -31,20 +31,20 @@ Datadog Lambda ライブラリでは以下を実行します。
 - [カスタムメトリクス][2]を送信（同期および非同期）します。
 - Node.js、Python、Ruby 向けに [Datadog APM および分散型トレース][3]を有効化します。
 
-**Ruby** または **Java** 用の Datadog Lambda ライブラリを使用している場合は、Datadog Forwarder をインストールして構成し、Lambda 関数からトレース、拡張 Lambda メトリクス、またはカスタムメトリクスを (非同期で) 取り込む必要があります。
-**Python**、**Node**、または **Go** 用の Datadog Lambda ライブラリを使用している場合は、[Datadog Lambda 拡張機能][9]を使用して、トレース、拡張 Lambda メトリクス、またはカスタムメトリクスを取り込むことができます。または、Datadog Forwarder を引き続き使用できます。
+**Ruby** 用の Datadog Lambda ライブラリを使用している場合は、Datadog Forwarder をインストールして構成し、Lambda 関数からトレース、拡張 Lambda メトリクス、またはカスタムメトリクスを (非同期で) 取り込む必要があります。
+**Python**、**Node**、**Go**、または **Java** 用の Datadog Lambda ライブラリを使用している場合は、[Datadog Lambda 拡張機能][4]を使用して、トレース、拡張 Lambda メトリクス、またはカスタムメトリクスを取り込むことができます。または、Datadog Forwarder を引き続き使用できます。
 
 Datadog Lambda ライブラリは以下の収集には**対応していません**。
 
-- CloudWatch からの Lambda メトリクス ([AWS Lambda インテグレーション][4]を参照)
-- X-Ray からの Lambda トレース ([AWS X-Ray インテグレーション][5]を参照)
-- CloudWatch からの Lambda ログ ([Datadog Forwarder][6] を参照)
+- CloudWatch からの Lambda メトリクス ([AWS Lambda インテグレーション][5]を参照)
+- X-Ray からの Lambda トレース ([AWS X-Ray インテグレーション][6]を参照)
+- CloudWatch からの Lambda ログ ([Datadog Forwarder][7] を参照)
 
 Datadog は Lambda ライブラリを Python、Node.js、Ruby、Go、Java 向けパッケージとして配布しています。パッケージは pip、npm、gem、maven などの共通のパッケージマネージャーからインストールできます。
 
-Datadog Lambda ライブラリは Python、Node.js、Ruby 向けの [Lambda レイヤー][7]としても利用可能です。
+Datadog Lambda ライブラリは Python、Node.js、Ruby 向けの [Lambda レイヤー][8]としても利用可能です。
 
-Datadog Lambda ライブラリをインストールしてお使いのサーバーレスアプリケーションをインスツルメントする方法については、[インストール手順][8]を参照してください。
+Datadog Lambda ライブラリをインストールしてお使いのサーバーレスアプリケーションをインスツルメントする方法については、[インストール手順][9]を参照してください。
 
 ## その他の参考資料
 
@@ -54,9 +54,9 @@ Datadog Lambda ライブラリをインストールしてお使いのサーバ�
 [1]: /ja/serverless/enhanced_lambda_metrics/
 [2]: /ja/serverless/custom_metrics/
 [3]: /ja/tracing/
-[4]: /ja/integrations/amazon_lambda/
-[5]: /ja/integrations/amazon_xray/
-[6]: /ja/serverless/forwarder/
-[7]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
-[8]: /ja/serverless/installation/
-[9]: /ja/serverless/libraries_integrations/extension/
+[4]: /ja/serverless/libraries_integrations/extension/
+[5]: /ja/integrations/amazon_lambda/
+[6]: /ja/integrations/amazon_xray/
+[7]: /ja/serverless/forwarder/
+[8]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
+[9]: /ja/serverless/installation/
