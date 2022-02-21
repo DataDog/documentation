@@ -3,7 +3,7 @@ title: Using the .NET diagnostic tool for troubleshooting
 kind: documentation
 ---
 
-If after installing the .NET tracer your application does not produce traces as expected, you can try running the diagnostic tool for basic troubleshooting. It should help you figure out issues with your setup (e.g. missing environment variables, incomplete installation, unreachable agent...).
+If after installing the .NET tracer your application does not produce traces as expected, you can try running the diagnostic tool for basic troubleshooting. It should help you figure out issues with your setup (for example missing environment variables, incomplete installation, unreachable agent...).
 
 The tool can be installed in two different ways:
 
