@@ -403,7 +403,7 @@ database_monitoring:
 
 network_devices:
     metadata:
-        logs_dd_url: haproxy.example.com:3839
+        logs_dd_url: haproxy.example.com:3841
         logs_no_ssl: true
 ```
 
