@@ -6,7 +6,7 @@ description: "Troubleshooting for Cloud Workload Security."
 
 ## Security Agent Flare
 
-Similar to the agent flare (TODO add link), you can send necessary troubleshooting information to the Datadog support team with one flare command.
+Similar to the [Agent flare][1], you can send necessary troubleshooting information to the Datadog support team with one flare command.
 
 If needed, the flare can be reviewed prior to sending since the flare prompts a confirmation before uploading it.
 
@@ -40,3 +40,5 @@ Runtime self test: OK
 You can now see events coming from the `runtime-security-agent` in the Log Explorer.
 
 {{< img src="security_platform/cws/self_test_logs.png" alt="Self test events in the Log Explorer" style="width:90%;">}}
+
+[1]: /agent/troubleshooting/send_a_flare/?tab=agentv6v7
