@@ -55,7 +55,7 @@ In the following example, we're creating an error rate monitor using the formula
 
 {{< img src="monitors/monitor_types/ci_pipelines/define-the-search-query-fnf.png" alt="Define the search query" style="width:80%;" >}}
 
-<div class="alert alert-info"><strong>Note</strong>: There is a limit of 2 in the amount of queries that can be used to build the evaluation formula per monitor.</div>
+<div class="alert alert-info"><strong>Note</strong>: Only up to 2 queries can be used to build the evaluation formula per monitor.</div>
 
 ### Set alert conditions
 
@@ -94,7 +94,7 @@ This is a sample notification message for the repository {{cipipeline.attributes
 {{/is_alert}}
 ```
 
-#### Notifications behavior for monitors based on error rate.
+#### Notifications behavior for monitors based on error rate
 
 If you are using a CI Pipeline monitor based on an error rate formula, the current behavior when there is no data to calculate the rate in the evaluating time window is that the monitor will transition to the `RESOLVED` state.
 
