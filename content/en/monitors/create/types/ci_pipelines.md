@@ -45,6 +45,16 @@ To create a [CI Pipeline monitor][2] in Datadog, use the main navigation: *Monit
 
 {{< img src="monitors/monitor_types/ci_pipelines/define-the-search-query.png" alt="Define the search query" style="width:80%;" >}}
 
+#### Using Formulas & Functions
+
+You can create CI Pipeline monitors based on Formulas & Functions. This is useful if you want to trigger alerts for monitors based on the error rate for some pipeline.
+
+In the following example, we're creating an error rate monitor using the formula that calculates the ratio of `Failed CI Pipelines` / `Total CI Pipelines` grouped by `ci.pipeline.name`.
+
+{{< img src="monitors/monitor_types/ci_pipelines/define-the-search-query-fnf.png" alt="Define the search query" style="width:80%;" >}}
+
+<div class="alert alert-info"><strong>Note</strong>: There is a limit of 2 in the amount of queries that can be used to build the evaluation formula per monitor.</div>
+
 ### Set alert conditions
 
 * Trigger when the metric is `above`, `above or equal to`, `below`, or `below or equal to`
