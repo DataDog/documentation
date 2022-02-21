@@ -10,7 +10,7 @@ Similar to the [Agent flare][1], you can send necessary troubleshooting informat
 
 If needed, the flare can be reviewed prior to sending since the flare prompts a confirmation before uploading it.
 
-In the commands below, replace <CASE_ID> with your Datadog support case ID if you have one, then enter the email address associated with it.
+In the commands below, replace `<CASE_ID>` with your Datadog support case ID if you have one, then enter the email address associated with it.
 
 If you don’t have a case ID, just enter your email address used to login in Datadog to create a new support case.
 
