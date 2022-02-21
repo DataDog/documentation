@@ -31,15 +31,15 @@ To create a [CI Pipeline monitor][2] in Datadog, use the main navigation: *Monit
 
 1. Construct a search query using the same logic as a CI Pipeline explorer search.
 2. Select the CI Pipeline events level to monitor:
-    * **Monitor over the `Pipeline` level**: If the `Pipeline` level is selected, the monitor will check the events that
+    * **Monitor over the `Pipeline` level**: If the `Pipeline` level is selected, the monitor will only evaluate the search query in the pipeline as a whole.
     * **Monitor over the `Stage` level**: If the `Stage` level is selected, the monitor will only evaluate the search query in the stages of every pipeline.
     * **Monitor over the `Job` level**: If the `Job` level is selected, the monitor will only evaluate the search query in the jobs of every pipeline.
     * **Monitor over the `Command` level**: If the `Command` level is selected, the monitor will only evaluate the search query in the custom commands executed in every pipeline.
     * **Monitor over all the levels**: If the `All` level is selected, the monitor will evaluate the search query in all the described levels before.
 2. Choose to monitor over a CI Pipeline event count, facet, or measure:
     * **Monitor over a CI Pipeline event count**: Use the search bar (optional) and do **not** select a facet or measure. Datadog evaluates the number of CI Pipeline events over a selected time frame, then compares it to the threshold conditions.
-    * **Monitor over a facet**: If a facet is selected, the monitor alerts over the `Unique value count` of the facet.
-    * **Monitor over measure**: If a measure is selected, the monitor alerts over the numerical value of the CI Pipeline facet (similar to a metric monitor) and aggregation needs to be selected (`min`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, `pc98`, `pc99`, or `max`).
+    * **Monitor over a dimension**: If a dimension (qualitative facet) is selected, the monitor alerts over the `Unique value count` of the facet.
+    * **Monitor over a measure**: If a measure (quantitative facet) is selected, the monitor alerts over the numerical value of the CI Pipeline facet (similar to a metric monitor) and aggregation needs to be selected (`min`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, `pc98`, `pc99`, or `max`).
 3. Group CI Pipeline events by multiple dimensions (optional):
     All CI Pipeline events matching the query are aggregated into groups based on the value of up to four facets.
 4. Configure the alerting grouping strategy (optional):
@@ -72,7 +72,7 @@ For detailed instructions on the advanced alert options (evaluation delay, etc.)
 
 For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][4] page.
 
-#### Use event attributes in the message
+#### Enrich the monitor message with event attributes
 
 You can use all the attributes stored in a CI Pipeline event in your notification message using the `{{cipipeline.attributes.<attribute>}}` syntax. You can use all the CI Pipeline facets to build your custom notification message.
 
