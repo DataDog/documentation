@@ -70,6 +70,26 @@ For detailed instructions on the advanced alert options (evaluation delay, etc.)
 
 For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][4] page.
 
+Additionally, you can use all the attributes stored in a CI Pipeline event in your notification message using the `{{cipipeline.attributes.<attribute>}}` syntax. You can use all the CI Pipeline facets to build your custom notification message.
+
+In the following example, we're configuring a notification message using the Git repository URL stored in the CI Pipeline event attributes.
+
+```text
+{{#is_alert}}
+This is a sample notification message for the repository {{cipipeline.attributes.git.repository_url}}
+{{/is_alert}}
+```
+
+You can mix CI Pipeline event attributes with the variable populated through the facet used to group the alerts.
+
+In the following example, we're configuring a notification message using the Git repository URL stored in the CI Pipeline event attributes and using the variable populated using the facet to group the alerts.
+
+```text
+{{#is_alert}}
+This is a sample notification message for the repository {{cipipeline.attributes.git.repository_url}} in the {{[@ci.pipeline.name].name}}
+{{/is_alert}}
+```
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
