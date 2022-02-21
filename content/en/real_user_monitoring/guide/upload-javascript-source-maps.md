@@ -18,14 +18,14 @@ If your front-end Javascript source code is minified, upload your source maps to
 
 ## Instrument your code
 
-Configure your Javascript bundler such that when minifying your source code, it generates source maps that directly include the related source code in the `sourcesContent` attribute. Also, ensure that the size of each source map augmented with the size of the related minified file does not exceed the limit of **50MB**. 
+Configure your Javascript bundler such that when minifying your source code, it generates source maps that directly include the related source code in the `sourcesContent` attribute. Also, ensure that the size of each source map augmented with the size of the related minified file does not exceed the limit of **50MB**.
 
 See the following configurations for popular Javascript bundlers.
 
 {{< tabs >}}
 {{% tab "WebpackJS" %}}
 
-You can generate source maps by using the built-in webpack plugin named [SourceMapDevToolPlugin][1]. 
+You can generate source maps by using the built-in webpack plugin named [SourceMapDevToolPlugin][1].
 
 See the example configuration in your `webpack.config.js` file:
 
@@ -62,7 +62,7 @@ Parcel generates source maps by default when you run the build command: `parcel 
 {{% /tab %}}
 {{< /tabs >}}
 
-After building your application, bundlers generate a directory (typically named `dist`) with minified Javascript files co-located with their corresponding source maps. 
+After building your application, bundlers generate a directory (typically named `dist`) with minified Javascript files co-located with their corresponding source maps.
 
 See the following example:
 
@@ -79,7 +79,7 @@ See the following example:
 
 ## Upload your source maps
 
-The best way to upload source maps is to add an extra step in your CI pipeline and run the dedicated command from the [Datadog CLI][1]. It scans the `dist` directory and subdirectories to automatically upload source maps with relevant minified files. 
+The best way to upload source maps is to add an extra step in your CI pipeline and run the dedicated command from the [Datadog CLI][1]. It scans the `dist` directory and subdirectories to automatically upload source maps with relevant minified files.
 
 {{< tabs >}}
 {{% tab "US" %}}
@@ -117,7 +117,7 @@ The best way to upload source maps is to add an extra step in your CI pipeline a
 
 To minimize overhead on your CI's performance, the CLI is optimized to upload as many source maps as you need in a short amount of time (typically a few seconds).
 
-By running the command against the example `dist` directory, Datadog expects your server or CDN to deliver the Javascript files at `https://hostname.com/static/js/javascript.364758.min.js` and `https://hostname.com/static/js/subdirectory/javascript.464388.min.js`. 
+By running the command against the example `dist` directory, Datadog expects your server or CDN to deliver the Javascript files at `https://hostname.com/static/js/javascript.364758.min.js` and `https://hostname.com/static/js/subdirectory/javascript.464388.min.js`.
 
 The RUM SDK instantly collects errors that occur in user sessions. When a given error originates in a file that was downloaded from one of these URLs and is tagged with `version:v35.2395005` and `service:my-service`, the related source map is used to de-obfuscate the stack trace (in this example, the `javascript.464388.js.map` file).
 
@@ -127,17 +127,23 @@ The RUM SDK instantly collects errors that occur in user sessions. When a given 
 
 If you have successfully uploaded source maps but they do not appear in the RUM dashboard, see [RUM Browser Troubleshooting][2].
 
+### Link stack frames to your source code
+
+If you run `datadog-ci sourcemaps upload` withing a Git repository, it will automatically collect metadata about the repository, including the repository URL, current commit hash and the list of file paths in the repository that relate to your sourcemaps. For more details about git metadata collection, refer to [datadog-ci documentation][3].
+
+Datadog will then display links to your source code on unminified stack frames.
+
 ## Troubleshoot errors with ease
 
-Without access to the file path and the line number, a minified stack trace is not helpful in troubleshooting your code base. Also, the code snippet is minified (which means there is one long line of transformed code), making the troubleshooting process more difficult. 
+Without access to the file path and the line number, a minified stack trace is not helpful in troubleshooting your code base. Also, the code snippet is minified (which means there is one long line of transformed code), making the troubleshooting process more difficult.
 
 The following example displays a minified stack trace:
 
 {{< img src="real_user_monitoring/error_tracking/minified_stacktrace.png" alt="Error Tracking Minified Stack Trace" >}}
 
-On the other hand, an unminified stack trace provides you with all the context you need for quick, seamless troubleshooting:
+On the other hand, an unminified stack trace provides you with all the context you need for quick, seamless troubleshooting, as well as a direct link to your repository:
 
-{{< img src="real_user_monitoring/error_tracking/unminified_stacktrace.mp4" alt="Error Tracking Unminified Stack Trace" video=true >}}
+{{< img src="real_user_monitoring/error_tracking/unminified_stacktrace.png" alt="Error Tracking Unminified Stack Trace" >}}
 
 ## Further Reading
 
@@ -145,3 +151,4 @@ On the other hand, an unminified stack trace provides you with all the context y
 
 [1]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/sourcemaps
 [2]: /real_user_monitoring/browser/troubleshooting/
+[3]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/sourcemaps#link-errors-with-your-source-code
