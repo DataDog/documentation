@@ -19,6 +19,8 @@ further_reading:
 
 Once [CI Visibility is enabled][1] for your organization, you can create a CI Pipeline monitor to alert you when a specified type of CI Pipeline event exceeds a user-defined threshold over a given period of time.
 
+<div class="alert alert-info"><strong>Note</strong>: Only available in closed beta on US1, EU, US3 and US5.</div>
+
 ## Monitor creation
 
 To create a [CI Pipeline monitor][2] in Datadog, use the main navigation: *Monitors -> New Monitor --> CI Pipelines*.
@@ -70,7 +72,9 @@ For detailed instructions on the advanced alert options (evaluation delay, etc.)
 
 For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][4] page.
 
-Additionally, you can use all the attributes stored in a CI Pipeline event in your notification message using the `{{cipipeline.attributes.<attribute>}}` syntax. You can use all the CI Pipeline facets to build your custom notification message.
+#### Use event attributes in the message
+
+You can use all the attributes stored in a CI Pipeline event in your notification message using the `{{cipipeline.attributes.<attribute>}}` syntax. You can use all the CI Pipeline facets to build your custom notification message.
 
 In the following example, we're configuring a notification message using the Git repository URL stored in the CI Pipeline event attributes.
 
@@ -87,6 +91,20 @@ In the following example, we're configuring a notification message using the Git
 ```text
 {{#is_alert}}
 This is a sample notification message for the repository {{cipipeline.attributes.git.repository_url}} in the {{[@ci.pipeline.name].name}}
+{{/is_alert}}
+```
+
+#### Notifications behavior for monitors based on error rate.
+
+If you are using a CI Pipeline monitor based on an error rate formula, the current behavior when there is no data to calculate the rate in the evaluating time window is that the monitor will transition to the `RESOLVED` state.
+
+This behavior might not be expected, especially if you want to track the status of the CI Pipelines that build integration branches.
+
+In these cases, we recommend configuring the monitor notification to trigger only for alerts by wrapping the full message with the `{{#is_alert}}` and `{{/is_alert}}` directives.
+
+```text
+{{#is_alert}}
+The monitor notification will only be shown for monitor alerts!
 {{/is_alert}}
 ```
 
