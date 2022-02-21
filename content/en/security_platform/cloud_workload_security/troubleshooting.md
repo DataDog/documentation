@@ -22,7 +22,7 @@ If you don’t have a case ID, just enter your email address used to login in Da
 
 ## Agent Self tests
 
-In order to ensure that the communication between the `security-agent` and the `system-probe` is working as expected and the Cloud Workload Security probe is able to detect system events, you can manually trigger self tests by running the following command:
+In order to ensure that the communication between the `security-agent` and the `system-probe` is working as expected and that Cloud Workload Security is able to detect system events, you can manually trigger self tests by running the following command:
 
 | Platform     | Command                                                                             |
 | --------     | -------                                                                             |
