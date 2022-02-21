@@ -18,13 +18,16 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-serverless-view/"
   tag: "Blog"
   text: "Monitor your serverless stack in the Serverless view"
+- link: "https://www.datadoghq.com/blog/monitor-aws-fully-managed-services-datadog-serverless-monitoring/"
+  tag: "Blog"
+  text: "Datadog Serverless Monitoring for AWS fully managed services"
 ---
 
 {{< img src="tracing/serverless_functions/ServerlessDistributedTrace.png" alt="Trace Serverless Functions"  style="width:100%;">}}
 
 By connecting your serverless traces to metrics, Datadog provides a context-rich picture of your application’s performance, allowing you to better troubleshoot performance issues given the distributed nature of serverless applications.
 
-The Datadog Python, Node.js, Ruby, Go and Java tracing libraries support distributed tracing for AWS Lambda. The easiest way to add tracing to your application is with the [Datadog Lambda Library][1], which includes the Datadog tracing library as a dependency.
+The Datadog Python, Node.js, Ruby, Go, Java, and .NET tracing libraries support distributed tracing for AWS Lambda. For most Lambda runtimes, the easiest way to add tracing to your application is with the [Datadog Lambda Library][1], which includes the Datadog tracing library as a dependency.
 
 ## Choose your tracing library
 
@@ -39,7 +42,7 @@ To start using Datadog APM with your serverless application, you can choose betw
 | Uses Datadog APM's integration libraries for end-to-end tracing.  | Pulls traces from AWS X-Ray. |
 | Visualize your traces in Datadog in real-time. | Trace data available in Datadog after a few minutes. |
 | Tail-based sampling and fully customizable tag-based retention filters. | Sampling rate cannot be configured. |
-| Support for Python, Node.js, Ruby, Go, Java. |  Support for all Lambda runtimes. |
+| Support for Python, Node.js, Ruby, Go, Java, and .NET. |  Support for all Lambda runtimes. |
 
 ### Runtime recommendations
 
@@ -52,11 +55,16 @@ The Datadog Lambda Library and tracing libraries for Python and Node.js support:
 - Installation without any code changes using Serverless Framework, AWS SAM and AWS CDK integrations.
 - Tracing HTTP requests invoking downstream Lambda functions or containers.
 - Tracing consecutive Lambda invocations made via the AWS SDK.
-- Tracing asynchronous Lambda invocations through AWS SQS.
+- Tracing asynchronous Lambda invocations through AWS Managed Services
+  - API Gateway
+  - SQS
+  - SNS
+  - SNS and SQS direct integration
+  - Kinesis
+  - EventBridge
 - Tracing dozens of additional out-of-the-box [Python][4] and [Node.js][5] libraries.
-- Tracing non-HTTP requests made through SNS, Kinesis, EventBridge, MQTT and more (requires additional instrumention outlined [here][6]).
 
-For Python and Node.js serverless applications, Datadog recommends you [install Datadog's tracing libraries][7]. If your application requires AWS X-Ray active tracing in AWS managed services such as API Gateway or Step Functions, Datadog recommends you augment AWS X-Ray traces with Datadog APM by configuring _both_ AWS X-Ray and Datadog APM tracing libraries as described in [Serverless Trace Merging][8].
+For Python and Node.js serverless applications, Datadog recommends you [install Datadog's tracing libraries][7]. If your application requires AWS X-Ray active tracing in AWS managed services such as AppSync or Step Functions, Datadog recommends you augment AWS X-Ray traces with Datadog APM by configuring _both_ AWS X-Ray and Datadog APM tracing libraries as described in [Serverless Trace Merging][8].
 
 If you are already tracing your serverless functions with X-Ray and want to continue using X-Ray, you can [install the AWS X-Ray integration][3].
 
@@ -97,11 +105,13 @@ For Java serverless applications, Datadog recommends [installing Datadog's traci
 
 #### .NET
 
-Datadog recommends you configure tracing for your .NET AWS Lambda serverless applications by [installing our AWS X-Ray integration][3].
+The tracing library for .NET supports:
+- Tracing HTTP requests invoking downstream Lambda functions or containers.
+- Tracing dozens of additional out-of-the-box [.NET][18] libraries.
 
-Learn more about tracing through .NET Azure serverless applications [here][16].
+For .NET serverless applications, Datadog recommends [installing Datadog's tracing libraries][7]. If your application requires AWS X-Ray active tracing in AWS managed services such as API Gateway or Step Functions, you may want to consider instead using [Datadog APM with AWS X-Ray tracing][3].
 
-*Looking to trace through .NET AWS Lambda serverless applications with Datadog tracing libraries? Open a feature request [here][9].*
+Learn more about [tracing through .NET Azure serverless applications][16].
 
 ### Hybrid environments
 
@@ -115,9 +125,9 @@ Datadog's [AWS X-Ray integration][3] only provides traces for Lambda functions. 
 
 {{< img src="tracing/live_search/livesearchmain.mp4" alt="Live Search" video=true >}}
 
-The Datadog Python, Node.js, Ruby, Go and Java tracing libraries support distributed tracing for AWS Lambda. To enable tracing on your functions, follow [the installation instructions][7].
+The Datadog Python, Node.js, Ruby, Go, Java, and .NET tracing libraries support distributed tracing for AWS Lambda. To enable tracing on your functions, follow [the installation instructions][7].
 
-To enable Datadog APM without enabling logging for your functions, ensure the `DdForwarderLog` environment variable is set to `false` on your Datadog Forwarder.
+If you are using the Datadog Forwarder Lambda Function and you want to enable Datadog APM without enabling logging for your functions, ensure the `DdForwarderLog` environment variable is set to `false` on your Datadog Forwarder.
 
 ## Further Reading
 
@@ -140,3 +150,4 @@ To enable Datadog APM without enabling logging for your functions, ensure the `D
 [15]: https://chat.datadoghq.com/
 [16]: /serverless/azure_app_services
 [17]: /tracing/setup_overview/
+[18]: /tracing/setup_overview/compatibility_requirements/dotnet-core

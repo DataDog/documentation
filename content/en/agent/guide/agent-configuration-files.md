@@ -16,16 +16,8 @@ The Agent v6 configuration file uses **YAML** to better support complex configur
 |:-------------------------------------|:-------------------------------------|
 | AIX                                  | `/etc/datadog-agent/datadog.yaml`    |
 | Linux                                | `/etc/datadog-agent/datadog.yaml`    |
-| CentOS                               | `/etc/datadog-agent/datadog.yaml`    |
-| Debian                               | `/etc/datadog-agent/datadog.yaml`    |
-| Fedora                               | `/etc/datadog-agent/datadog.yaml`    |
 | macOS                                | `~/.datadog-agent/datadog.yaml`      |
-| RedHat                               | `/etc/datadog-agent/datadog.yaml`    |
-| Source                               | `/etc/datadog-agent/datadog.yaml`    |
-| Suse                                 | `/etc/datadog-agent/datadog.yaml`    |
-| Ubuntu                               | `/etc/datadog-agent/datadog.yaml`    |
 | Windows Server 2008, Vista and newer | `%ProgramData%\Datadog\datadog.yaml` |
-| Windows Server 2003, XP or older     | *unsupported platform*               |
 
 {{% /tab %}}
 {{% tab "Agent v5" %}}
@@ -33,14 +25,7 @@ The Agent v6 configuration file uses **YAML** to better support complex configur
 | Platform                             | Command                                                                    |
 |:-------------------------------------|:---------------------------------------------------------------------------|
 | Linux                                | `/etc/dd-agent/datadog.conf`                                               |
-| CentOS                               | `/etc/dd-agent/datadog.conf`                                               |
-| Debian                               | `/etc/dd-agent/datadog.conf`                                               |
-| Fedora                               | `/etc/dd-agent/datadog.conf`                                               |
-| macOS                                | `~/.datadog-agent/datadog.conf`                                            |
-| RedHat                               | `/etc/dd-agent/datadog.conf`                                               |
-| Source                               | `/etc/dd-agent/datadog.conf`                                               |
-| Suse                                 | `/etc/dd-agent/datadog.conf`                                               |
-| Ubuntu                               | `/etc/dd-agent/datadog.conf`                                               |
+| macOS                                | `~/.datadog-agent/datadog.conf`                                            |                                       |
 | Windows Server 2008, Vista and newer | `%ProgramData%\Datadog\datadog.conf`                                       |
 | Windows Server 2003, XP or older     | `\\Documents and Settings\All Users\Application Data\Datadog\datadog.conf` |
 

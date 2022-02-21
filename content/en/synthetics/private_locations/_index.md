@@ -56,7 +56,7 @@ To pull test configurations and push test results, the private location worker n
 | Port | Endpoint                                                                                             | Description                                                                                                                             |
 | ---- | ---------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
 | 443  | `intake.synthetics.datadoghq.com` for version >=0.1.6, `api.datadoghq.com` for versions <=0.1.5   | Used by the private location to pull test configurations and push test results to Datadog using an in-house protocol based on [AWS Signature Version 4 protocol][1]. |
-| 443  | `intake-v2.synthetics.datadoghq.com` for versions >=0.2.0 and <=1.4.0                                            | Used by the private location to push browser test artifacts (screenshots, errors, resources).                                                                         |
+| 443  | `intake-v2.synthetics.datadoghq.com` for versions >=0.2.0 and <=1.4.0                                            | Used by the private location to push browser test artifacts such as screenshots, errors, and resources.                                                                         |
 
 [1]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
 
@@ -95,21 +95,15 @@ To pull test configurations and push test results, the private location worker n
 
 {{< /site-region >}}
 
-### Permissions
-
-By default, only users with the Datadog Admin Role can create private locations, delete private locations, and access private location installation guidelines. Users with the [Datadog Admin][20] and [Datadog Standard roles][20] can view private locations, search for private locations, and assign Synthetic tests to private locations. You can get access to the **Private Locations** page by having your user upgraded to one of these two [default roles][19]. 
-
-If you have access to the [custom role feature][18], add users to a custom role that includes `synthetics_private_location_read` and `synthetics_private_location_write` permissions. 
-
 ## Set up your private location
 
 ### Create your private location
 
-Navigate to **Synthetic Monitoring** > **Settings** > **Private Locations** and click **Add Private Location**.
+Only **Admin** users can create private locations. For more information, see [Permissions](#permissions).
 
-{{< img src="synthetics/private_locations/synthetics_pl_add.png" alt="create a private location"  style="width:100%;">}}
+Navigate to [**Synthetic Monitoring** > **Settings** > **Private Locations**][22] and click **Add Private Location**.
 
-**Note**: Only **Admin** users can create private locations.
+{{< img src="synthetics/private_locations/synthetics_pl_add.png" alt="Create a private location" style="width:100%;">}}
 
 Fill out your private location details: 
 
@@ -427,7 +421,7 @@ Add a [healthcheck][10] mechanism so your orchestrator can ensure the workers ar
 
 The `/tmp/liveness.date` file of private location containers gets updated after every successful poll from Datadog (2s by default). The container is considered unhealthy if no poll has been performed in a while, for example: no fetch in the last minute.
 
-Use the below configuration to set up healthchecks on your containers with:
+Use the configuration below to set up healthchecks on your containers with:
 
 {{< tabs >}}
 
@@ -531,6 +525,10 @@ livenessProbe:
 
 {{< /tabs >}}
 
+#### Additional health check configurations
+
+If your container orchestrator of choice requires a health check endpoint, enable private location status probes on port `8080` in your private location deployment. For more information, see [Advanced configurations][15].
+
 ### Test your internal endpoint
 
 Once at least one private location container starts reporting to Datadog, the private location status is set to green:
@@ -549,11 +547,11 @@ If your private location reports correctly to Datadog, you should see a `REPORTI
 
 {{< img src="synthetics/private_locations/pl_monitoring_table_reporting.png" alt="Private location health" style="width:100%;">}}
 
-You can then go to any of your API or Browser test creation form, and tick your **Private locations** of interest to have them run your Synthetic test on schedule:
+You can then go to any of your API or Browser test creation form, and select your **Private Locations** of interest to have them run your Synthetic test on schedule:
 
-{{< img src="synthetics/private_locations/assign-test-pl-2.png" alt="Assign Synthetic test to private location"  style="width:100%;">}}
+{{< img src="synthetics/private_locations/assign-test-pl-2.png" alt="Assign Synthetic test to private location" style="width:100%;">}}
 
-Your private locations can be used just like any other Datadog managed locations: assign [Synthetic tests][2] to private locations, visualize test results, get [Synthetic metrics][11], etc.
+You can use private locations just like your Datadog managed locations: assign [Synthetic tests][2] to private locations, visualize test results, retrieve [Synthetic metrics][11], and more.
 
 ## Scale your private location
 
@@ -561,13 +559,21 @@ Because you can run several containers for one single private location with a si
 
 You can also **vertically scale** your private locations by increasing the load your private location containers can handle. Similarly, you should use the `concurrency` parameter to adjust the maximum number of test your workers allowed to run and update the resources allocated to your workers.
 
-For more information, see [Dimensioning private locations][18].
+For more information, see [Dimensioning Private Locations][18].
 
 ## Monitor your private location
 
 While you initially add resources that are consistent with the number and type of tests to execute from your private location, the easiest way to know if you should downscale or upscale your private location is to closely monitor them. [Private Location Monitoring][19] provides insight about the performance and state of your private location as well as out-of-the-box metrics and monitors. 
 
 For more information, see [Private Location Monitoring][19].
+
+## Permissions
+
+By default, only users with the Datadog Admin Role can create private locations, delete private locations, and access private location installation guidelines. 
+
+Users with the [Datadog Admin and Datadog Standard roles][20] can view private locations, search for private locations, and assign Synthetic tests to private locations. Grant access to the [**Private Locations** page][22] by upgrading your user to one of these two [default roles][19]. 
+
+If you have access to the [custom role feature][21], add your user to a custom role that includes `synthetics_private_location_read` and `synthetics_private_location_write` permissions. 
 
 ## Further Reading
 
@@ -592,3 +598,6 @@ For more information, see [Private Location Monitoring][19].
 [17]: /synthetics/metrics/
 [18]: /synthetics/private_locations/dimensioning
 [19]: /synthetics/private_locations/monitoring
+[20]: /account_management/rbac/permissions
+[21]: /account_management/rbac#custom-roles
+[22]: https://app.datadoghq.com/synthetics/settings/private-locations

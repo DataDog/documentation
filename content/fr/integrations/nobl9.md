@@ -29,7 +29,7 @@ manifest_version: 1.0.0
 metric_prefix: nobl9.
 name: nobl9
 public_title: Nobl9
-short_description: Utilisez Nobl9 pour recueillir des SLI, calculer des SLO et configurer des alertes de budget d'indisponibilité
+short_description: Utilisez Nobl9 pour recueillir des SLI, calculer des SLO et configurer des alertes de marge d'erreur
 support: contrib
 supported_os:
   - linux
@@ -37,13 +37,13 @@ supported_os:
   - windows
 ---
 ## Présentation
-Nobl9 est une plateforme de gestion des SLO qui offre des rapports historiques en temps réel sur vos SLO. Nobl9 peut être intégré à Datadog pour recueillir des métriques de SLI et les comparer aux cibles des SLO. Étant donné que Nobl9 calcule les budgets d'indisponibilité en fonction des seuils acceptables, il peut déclencher des processus et des alertes lorsque le budget d'indisponibilité est consommé trop rapidement ou qu'il a été dépassé.
+Nobl9 est une plateforme de gestion des SLO qui offre des rapports historiques en temps réel sur vos SLO. Nobl9 peut être intégré à Datadog pour recueillir des métriques de SLI et les comparer aux cibles des SLO. Étant donné que Nobl9 calcule les marges d'erreur en fonction des seuils acceptables, il peut déclencher des processus et des alertes lorsque la marge d'erreur est utilisée trop rapidement ou qu'elle a été dépassée.
 
 Utilisez l'intégration Datadog/Nobl9 pour :
 
 - Intégrer votre contexte métier à vos données de surveillance
 - Définir et mesurer vos objectifs de fiabilité
-- Aligner vos activités sur les priorités fixées par le budget d'indisponibilité
+- Aligner vos activités sur les priorités fixées par la marge d'erreur
 
 ### Vue d'ensemble des SLO
 ![Vue d'ensemble des SLO][1]

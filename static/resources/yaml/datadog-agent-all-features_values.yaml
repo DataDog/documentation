@@ -1,10 +1,13 @@
 datadog:
   kubeStateMetricsEnabled: false
+  orchestratorExplorer:
+    enabled: true
   logs:
     enabled: true
     containerCollectAll: true
   apm:
-    enabled: true
+    socketEnabled: true
+    portEnabled: true
   processAgent:
     enabled: true
     processCollection: true

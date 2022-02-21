@@ -78,6 +78,9 @@ Override the default trace Agent host address for trace submission.
 : **Default**: `8125` <br>
 Override the default trace Agent port for DogStatsD metric submission.
 
+`DD_TRACE_SAMPLE_RATE`
+: Enable [Tracing without Limits][9].
+
 `DD_TAGS`
 : **Default**: [] <br>
 A list of default tags to be added to every span and profile. Tags can be separated by commas or spaces, for example: `layer:api,team:intake` or `layer:api team:intake`
@@ -94,10 +97,14 @@ Enable debug logging in the tracer.
 : **Default**: `true` <br>
 Enable web framework and library instrumentation. When false, the application code doesn’t generate any traces.
 
+`DD_SERVICE_MAPPING`
+: **Default**: `null` <br>
+Dynamically rename services through configuration. Services can be separated by commas or spaces, for example: `mysql:mysql-service-name,postgres:postgres-service-name`, `mysql:mysql-service-name postgres:postgres-service-name`.
+
 
 Datadog recommends using `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `env`, `service`, and `version` for your services.
 
-Read the [Unified Service Tagging][9] documentation for recommendations on how to configure these environment variables. These variables are available for versions 1.24.0+ of the Go tracer.
+Read the [Unified Service Tagging][10] documentation for recommendations on how to configure these environment variables. These variables are available for versions 1.24.0+ of the Go tracer.
 
 You may also elect to provide `env`, `service`, and `version` through the tracer's API:
 
@@ -191,11 +198,11 @@ For other environments, please refer to the [Integrations][5] documentation for 
 
 ## Configure APM environment name
 
-The [APM environment name][10] may be configured [in the agent][11] or using the [WithEnv][8] start option of the tracer.
+The [APM environment name][11] may be configured [in the agent][12] or using the [WithEnv][8] start option of the tracer.
 
 ### B3 headers extraction and injection
 
-The Datadog APM tracer supports [B3 headers extraction][12] and injection for distributed tracing.
+The Datadog APM tracer supports [B3 headers extraction][13] and injection for distributed tracing.
 
 Distributed headers injection and extraction is controlled by
 configuring injection/extraction styles. Two styles are
@@ -227,7 +234,8 @@ extracted value is used.
 [6]: /tracing/profiler/enabling/?code-lang=go
 [7]: https://app.datadoghq.com/apm/docs
 [8]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#StartOption
-[9]: /getting_started/tagging/unified_service_tagging
-[10]: /tracing/advanced/setting_primary_tags_to_scope/#environment
-[11]: /getting_started/tracing/#environment-name
-[12]: https://github.com/openzipkin/b3-propagation
+[9]: /tracing/trace_ingestion/
+[10]: /getting_started/tagging/unified_service_tagging
+[11]: /tracing/advanced/setting_primary_tags_to_scope/#environment
+[12]: /getting_started/tracing/#environment-name
+[13]: https://github.com/openzipkin/b3-propagation

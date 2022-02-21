@@ -24,6 +24,12 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/manage-serverless-logs-datadog/"
   tag: "Blog"
   text: "Best practices for collecting and managing serverless logs"
+- link: "https://www.datadoghq.com/blog/aws-serverless-application-design/"
+  tag: "Blog"
+  text: "Designing production-ready AWS serverless applications"
+- link: "https://www.datadoghq.com/blog/well-architected-serverless-applications-best-practices/"
+  tag: "Blog"
+  text: "Best practices for building serverless applications that follow AWS's Well-Architected Framework"
 ---
 
 {{< vimeo 543362476 >}}
@@ -35,9 +41,7 @@ Serverless is a concept where you write event-driven code and upload it to a clo
 
 ## Getting started
 
-1. Install the [AWS integration][2]. This allows Datadog to ingest Lambda metrics from AWS CloudWatch. 
-2. Instrument your application. Select the Lambda runtime below for instructions to instrument your serverless application.
-
+Select the Lambda runtime below for instructions to instrument your serverless application.
 {{< partial name="serverless/getting-started-languages.html" >}}
 
 ## Other services
@@ -46,7 +50,7 @@ Serverless is a concept where you write event-driven code and upload it to a clo
 
 The Datadog extension for Azure App Service provides tracing capabilities for Azure Web Apps. 
 
-Use the [Azure App Service view][3] (beta) to:
+Use the [Azure App Service view][2] to:
 
 - Quickly identify apps with high latency or errors
 
@@ -56,18 +60,17 @@ Use the [Azure App Service view][3] (beta) to:
 
 - Map the apps running on your App Service Plans to identify apps that may be impacting costs or performance
 
-The Datadog extension for Azure App Service provides tracing capabilities for Azure Web Apps. For more information about setting up tracing in Azure, see the [Azure App Service Extension documentation][4].
+The Datadog extension for Azure App Service provides tracing capabilities for Azure Web Apps. For more information about setting up tracing in Azure, see the [Azure App Service Extension documentation][3].
 
 ### Google Cloud Functions
 
-Google Cloud Functions is a lightweight, event-based, asynchronous compute solution that allows you to create small, single-purpose functions. To monitor serverless functions running on Google Cloud Platform, enable the [Google Cloud Platform integration][5].
+Google Cloud Functions is a lightweight, event-based, asynchronous compute solution that allows you to create small, single-purpose functions. To monitor serverless functions running on Google Cloud Platform, enable the [Google Cloud Platform integration][4].
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: http://app.datadoghq.com/functions
-[2]: /integrations/amazon_web_services/
-[3]: https://app.datadoghq.com/functions?cloud=azure&config_serverless-azure-app=true&group=service
-[4]: /infrastructure/serverless/azure_app_services/#overview
-[5]: /integrations/google_cloud_platform/
+[2]: https://app.datadoghq.com/functions?cloud=azure&config_serverless-azure-app=true&group=service
+[3]: /infrastructure/serverless/azure_app_services/#overview
+[4]: /integrations/google_cloud_platform/

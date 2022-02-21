@@ -49,15 +49,14 @@ supported_os:
 
 Intégrez Vercel à Datadog pour :
 
-* Consulter et parser les logs de votre application à l'aide de la solution [Log Management de Datadog][5]
-* Consulter le nombre de requêtes et d'erreurs HTTP 4xx/5xx présentes sur vos applications sans serveur et API exécutés sur Vercel
-* Surveiller les performances frontend grâce à [Datadog Synthetics][6]
+- Consulter et parser les logs de votre application à l'aide de la solution [Log Management de Datadog][5]
+- Consulter le nombre de requêtes et d'erreurs HTTP 4xx/5xx présentes sur vos applications sans serveur et API exécutés sur Vercel
+- Surveiller les performances frontend grâce à [Datadog Synthetics][6]
 
 ## Configuration
 
-
-* Générez une [clé d'API Datadog][7]
-* Configurez l'intégration des logs par le biais du [Marketplace Vercel][8]
+- Générez une [clé d'API Datadog][7]
+- Configurez l'intégration des logs par le biais du [Marketplace Vercel][8]
 
 ## Données collectées
 

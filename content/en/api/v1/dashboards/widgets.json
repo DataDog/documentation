@@ -403,7 +403,7 @@
               "query": ""
             }
           },
-          "q": "string",
+          "q": "<METRIC_1>{<SCOPE_1>}",
           "queries": [],
           "response_format": "timeseries",
           "rum_query": {

@@ -130,6 +130,13 @@ components:
       required: true
       schema:
         type: string
+    AuthNMappingID:
+      description: The UUID of the AuthN Mapping.
+      in: path
+      name: authn_mapping_id
+      required: true
+      schema:
+        type: string
     CloudWorkloadSecurityAgentRuleID:
       description: The ID of the Agent rule.
       example: 3b5-v82-ns6
@@ -295,7 +302,7 @@ components:
       name: service_account_id
       required: true
       schema:
-        example: 00000000-0000-0000-0000-000000000000
+        example: 00000000-0000-1234-0000-000000000000
         type: string
     UserID:
       description: The ID of the user.
@@ -303,7 +310,7 @@ components:
       name: user_id
       required: true
       schema:
-        example: 00000000-0000-0000-0000-000000000000
+        example: 00000000-0000-9999-0000-000000000000
         type: string
   requestBodies: {}
   responses:
@@ -638,6 +645,213 @@ components:
       type: string
       x-enum-varnames:
       - APPLICATION_KEYS
+    AuthNMapping:
+      description: The AuthN Mapping object returned by API.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/AuthNMappingAttributes'
+        id:
+          description: ID of the AuthN Mapping.
+          example: 3653d3c6-0c75-11ea-ad28-fb5701eabc7d
+          type: string
+        included:
+          description: Included data in the AuthN Mapping response.
+          items:
+            $ref: '#/components/schemas/AuthNMappingIncluded'
+          type: array
+        relationships:
+          $ref: '#/components/schemas/AuthNMappingRelationships'
+        type:
+          $ref: '#/components/schemas/AuthNMappingsType'
+      required:
+      - id
+      - type
+      type: object
+    AuthNMappingAttributes:
+      description: Attributes of AuthN Mapping.
+      properties:
+        attribute_key:
+          description: Key portion of a key/value pair of the attribute sent from
+            the Identity Provider.
+          example: member-of
+          type: string
+        attribute_value:
+          description: Value portion of a key/value pair of the attribute sent from
+            the Identity Provider.
+          example: Development
+          type: string
+        created_at:
+          description: Creation time of the AuthN Mapping.
+          format: date-time
+          readOnly: true
+          type: string
+        modified_at:
+          description: Time of last AuthN Mapping modification.
+          format: date-time
+          readOnly: true
+          type: string
+        saml_assertion_attribute_id:
+          description: The ID of the SAML assertion attribute.
+          example: 0
+          format: int32
+          maximum: 2147483647
+          type: integer
+      type: object
+    AuthNMappingCreateAttributes:
+      description: Key/Value pair of attributes used for create request.
+      properties:
+        attribute_key:
+          description: Key portion of a key/value pair of the attribute sent from
+            the Identity Provider.
+          example: member-of
+          type: string
+        attribute_value:
+          description: Value portion of a key/value pair of the attribute sent from
+            the Identity Provider.
+          example: Development
+          type: string
+      type: object
+    AuthNMappingCreateData:
+      description: Data for creating an AuthN Mapping.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/AuthNMappingCreateAttributes'
+        relationships:
+          $ref: '#/components/schemas/AuthNMappingCreateRelationships'
+        type:
+          $ref: '#/components/schemas/AuthNMappingsType'
+      required:
+      - type
+      type: object
+    AuthNMappingCreateRelationships:
+      description: Relationship of AuthN Mapping create object to Role.
+      properties:
+        role:
+          $ref: '#/components/schemas/RelationshipToRole'
+      type: object
+    AuthNMappingCreateRequest:
+      description: Request for creating an AuthN Mapping.
+      properties:
+        data:
+          $ref: '#/components/schemas/AuthNMappingCreateData'
+      required:
+      - data
+      type: object
+    AuthNMappingIncluded:
+      description: Included data in the AuthN Mapping response.
+      oneOf:
+      - $ref: '#/components/schemas/SAMLAssertionAttribute'
+      - $ref: '#/components/schemas/Role'
+      properties: {}
+      type: object
+    AuthNMappingRelationships:
+      description: All relationships associated with AuthN Mapping.
+      properties:
+        role:
+          $ref: '#/components/schemas/RelationshipToRole'
+        saml_assertion_attribute:
+          $ref: '#/components/schemas/RelationshipToSAMLAssertionAttribute'
+      type: object
+    AuthNMappingResponse:
+      description: AuthN Mapping response from the API.
+      properties:
+        data:
+          $ref: '#/components/schemas/AuthNMapping'
+      type: object
+    AuthNMappingUpdateAttributes:
+      description: Key/Value pair of attributes used for update request.
+      properties:
+        attribute_key:
+          description: Key portion of a key/value pair of the attribute sent from
+            the Identity Provider.
+          example: member-of
+          type: string
+        attribute_value:
+          description: Value portion of a key/value pair of the attribute sent from
+            the Identity Provider.
+          example: Development
+          type: string
+      type: object
+    AuthNMappingUpdateData:
+      description: Data for updating an AuthN Mapping.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/AuthNMappingUpdateAttributes'
+        id:
+          description: ID of the AuthN Mapping.
+          example: 3653d3c6-0c75-11ea-ad28-fb5701eabc7d
+          type: string
+        relationships:
+          $ref: '#/components/schemas/AuthNMappingUpdateRelationships'
+        type:
+          $ref: '#/components/schemas/AuthNMappingsType'
+      required:
+      - id
+      - type
+      type: object
+    AuthNMappingUpdateRelationships:
+      description: Relationship of AuthN Mapping update object to Role.
+      properties:
+        role:
+          $ref: '#/components/schemas/RelationshipToRole'
+      type: object
+    AuthNMappingUpdateRequest:
+      description: Request to update an AuthN Mapping.
+      properties:
+        data:
+          $ref: '#/components/schemas/AuthNMappingUpdateData'
+      required:
+      - data
+      type: object
+    AuthNMappingsResponse:
+      description: Array of AuthN Mappings response.
+      properties:
+        data:
+          description: Array of returned AuthN Mappings.
+          items:
+            $ref: '#/components/schemas/AuthNMapping'
+          type: array
+        meta:
+          $ref: '#/components/schemas/ResponseMetaAttributes'
+      type: object
+    AuthNMappingsSort:
+      description: Sorting options for AuthN Mappings.
+      enum:
+      - created_at
+      - -created_at
+      - role_id
+      - -role_id
+      - saml_assertion_attribute_id
+      - -saml_assertion_attribute_id
+      - role.name
+      - -role.name
+      - saml_assertion_attribute.attribute_key
+      - -saml_assertion_attribute.attribute_key
+      - saml_assertion_attribute.attribute_value
+      - -saml_assertion_attribute.attribute_value
+      type: string
+      x-enum-varnames:
+      - CREATED_AT_ASCENDING
+      - CREATED_AT_DESCENDING
+      - ROLE_ID_ASCENDING
+      - ROLE_ID_DESCENDING
+      - SAML_ASSERTION_ATTRIBUTE_ID_ASCENDING
+      - SAML_ASSERTION_ATTRIBUTE_ID_DESCENDING
+      - ROLE_NAME_ASCENDING
+      - ROLE_NAME_DESCENDING
+      - SAML_ASSERTION_ATTRIBUTE_KEY_ASCENDING
+      - SAML_ASSERTION_ATTRIBUTE_KEY_DESCENDING
+      - SAML_ASSERTION_ATTRIBUTE_VALUE_ASCENDING
+      - SAML_ASSERTION_ATTRIBUTE_VALUE_DESCENDING
+    AuthNMappingsType:
+      default: authn_mappings
+      description: AuthN Mappings resource type.
+      enum:
+      - authn_mappings
+      example: authn_mappings
+      type: string
+      x-enum-varnames:
+      - AUTHN_MAPPINGS
     CloudWorkloadSecurityAgentRuleAttributes:
       description: A Cloud Workload Security Agent rule returned by the API.
       properties:
@@ -684,6 +898,7 @@ components:
           example: 23
           format: int64
           type: integer
+      type: object
     CloudWorkloadSecurityAgentRuleCreateAttributes:
       description: Create a new Cloud Workload Security Agent rule.
       properties:
@@ -1123,7 +1338,7 @@ components:
           type: string
         status:
           description: Error code.
-          example: 400
+          example: '400'
           type: string
         title:
           description: Error title.
@@ -1237,10 +1452,10 @@ components:
       description: The relationships the incident will have with other resources once
         created.
       properties:
-        commander:
-          $ref: '#/components/schemas/RelationshipToUser'
+        commander_user:
+          $ref: '#/components/schemas/NullableRelationshipToUser'
       required:
-      - commander
+      - commander_user
       type: object
     IncidentCreateRequest:
       description: Create request for an incident.
@@ -1426,7 +1641,7 @@ components:
           type: array
         postmortem_id:
           description: The UUID of the postmortem object attached to the incident.
-          example: 00000000-0000-0000-0000-000000000000
+          example: 00000000-0000-0000-7890-000000000000
           type: string
         public_id:
           description: The monotonically increasing integer ID for the incident.
@@ -1478,7 +1693,7 @@ components:
           $ref: '#/components/schemas/IncidentResponseAttributes'
         id:
           description: The incident's ID.
-          example: 00000000-0000-0000-0000-000000000000
+          example: 00000000-0000-0000-1234-000000000000
           type: string
         relationships:
           $ref: '#/components/schemas/IncidentResponseRelationships'
@@ -1493,11 +1708,38 @@ components:
       oneOf:
       - $ref: '#/components/schemas/User'
       type: object
+    IncidentResponseMeta:
+      description: The metadata object containing pagination metadata.
+      properties:
+        pagination:
+          $ref: '#/components/schemas/IncidentResponseMetaPagination'
+      readOnly: true
+      type: object
+    IncidentResponseMetaPagination:
+      description: Pagination properties.
+      properties:
+        next_offset:
+          description: The index of the first element in the next page of results.
+            Equal to page size added to the current offset.
+          example: 1000
+          format: int64
+          type: integer
+        offset:
+          description: The index of the first element in the results.
+          example: 10
+          format: int64
+          type: integer
+        size:
+          description: Maximum size of pages to return.
+          example: 1000
+          format: int64
+          type: integer
+      type: object
     IncidentResponseRelationships:
       description: The incident's relationships from a response.
       properties:
         commander_user:
-          $ref: '#/components/schemas/RelationshipToUser'
+          $ref: '#/components/schemas/NullableRelationshipToUser'
         created_by_user:
           $ref: '#/components/schemas/RelationshipToUser'
         integrations:
@@ -1662,30 +1904,7 @@ components:
           readOnly: true
           type: array
         meta:
-          description: The metadata object containing pagination metadata.
-          properties:
-            pagination:
-              description: Pagination properties.
-              properties:
-                next_offset:
-                  description: The index of the first element in the next page of
-                    results. Equal to page size added to the current offset.
-                  example: 1000
-                  format: int64
-                  type: integer
-                offset:
-                  description: The index of the first element in the results.
-                  example: 10
-                  format: int64
-                  type: integer
-                size:
-                  description: Maximum size of pages to return.
-                  example: 1000
-                  format: int64
-                  type: integer
-              type: object
-          readOnly: true
-          type: object
+          $ref: '#/components/schemas/IncidentResponseMeta'
       required:
       - data
       type: object
@@ -1773,7 +1992,7 @@ components:
           $ref: '#/components/schemas/IncidentTeamResponseAttributes'
         id:
           description: The incident team's ID.
-          example: 00000000-0000-0000-0000-000000000000
+          example: 00000000-7ea3-0000-000a-000000000000
           type: string
         relationships:
           $ref: '#/components/schemas/IncidentTeamRelationships'
@@ -1806,7 +2025,7 @@ components:
           $ref: '#/components/schemas/IncidentTeamUpdateAttributes'
         id:
           description: The incident team's ID.
-          example: 00000000-0000-0000-0000-000000000000
+          example: 00000000-7ea3-0000-0001-000000000000
           type: string
         relationships:
           $ref: '#/components/schemas/IncidentTeamRelationships'
@@ -1831,7 +2050,7 @@ components:
           example:
           - attributes:
               name: team name
-            id: 00000000-0000-0000-0000-000000000000
+            id: 00000000-7ea3-0000-0000-000000000000
             type: teams
           items:
             $ref: '#/components/schemas/IncidentTeamResponseData'
@@ -1843,30 +2062,7 @@ components:
           readOnly: true
           type: array
         meta:
-          description: The metadata object containing pagination metadata.
-          properties:
-            pagination:
-              description: Pagination properties.
-              properties:
-                next_offset:
-                  description: The index of the first element in the next page of
-                    results. Equal to page size added to the current offset.
-                  example: 1000
-                  format: int64
-                  type: integer
-                offset:
-                  description: The index of the first element in the results.
-                  example: 10
-                  format: int64
-                  type: integer
-                size:
-                  description: Maximum size of pages to return.
-                  example: 1000
-                  format: int64
-                  type: integer
-              type: object
-          readOnly: true
-          type: object
+          $ref: '#/components/schemas/IncidentResponseMeta'
       required:
       - data
       type: object
@@ -1976,7 +2172,7 @@ components:
           $ref: '#/components/schemas/IncidentUpdateAttributes'
         id:
           description: The team's ID.
-          example: 00000000-0000-0000-0000-000000000000
+          example: 00000000-0000-0000-4567-000000000000
           type: string
         relationships:
           $ref: '#/components/schemas/IncidentUpdateRelationships'
@@ -1990,13 +2186,9 @@ components:
       description: The incident's relationships for an update request.
       properties:
         commander_user:
-          $ref: '#/components/schemas/RelationshipToUser'
-        created_by_user:
-          $ref: '#/components/schemas/RelationshipToUser'
+          $ref: '#/components/schemas/NullableRelationshipToUser'
         integrations:
           $ref: '#/components/schemas/RelationshipToIncidentIntegrationMetadatas'
-        last_modified_by_user:
-          $ref: '#/components/schemas/RelationshipToUser'
         postmortem:
           $ref: '#/components/schemas/RelationshipToIncidentPostmortem'
       type: object
@@ -2024,7 +2216,7 @@ components:
               customer_impacted: false
               detected: '2020-04-14T00:00:00+00:00'
               modified: '2020-09-17T14:16:58.696424+00:00'
-              postmortem_id: 00000000-0000-0000-0000-000000000000
+              postmortem_id: 00000000-0000-bbbb-0000-000000000000
               public_id: 1
               resolved: null
               severity: SEV-1
@@ -2033,29 +2225,29 @@ components:
               time_to_repair: 0
               time_to_resolve: 0
               title: Example Incident
-            id: 00000000-0000-0000-0000-000000000000
+            id: 00000000-aaaa-0000-0000-000000000000
             relationships:
               commander_user:
                 data:
-                  id: 00000000-0000-0000-0000-000000000000
+                  id: 00000000-0000-0000-cccc-000000000000
                   type: users
               created_by_user:
                 data:
-                  id: 00000000-0000-0000-0000-000000000000
+                  id: 00000000-0000-0000-cccc-000000000000
                   type: users
               integrations:
                 data:
-                - id: 00000000-0000-0000-0000-000000000000
+                - id: 00000000-0000-0000-4444-000000000000
                   type: incident_integrations
-                - id: 00000000-0000-0000-0000-000000000000
+                - id: 00000000-0000-0000-5555-000000000000
                   type: incident_integrations
               last_modified_by_user:
                 data:
-                  id: 00000000-0000-0000-0000-000000000000
+                  id: 00000000-0000-0000-cccc-000000000000
                   type: users
               postmortem:
                 data:
-                  id: 00000000-0000-0000-0000-000000000000
+                  id: 00000000-9999-0000-0000-000000000000
                   type: incident_postmortems
             type: incidents
           - attributes:
@@ -2068,7 +2260,7 @@ components:
               customer_impacted: false
               detected: '2020-04-14T00:00:00+00:00'
               modified: '2020-09-17T14:16:58.696424+00:00'
-              postmortem_id: 00000000-0000-0000-0000-000000000000
+              postmortem_id: 00000000-6006-0000-0000-000000000000
               public_id: 2
               resolved: null
               severity: SEV-5
@@ -2077,29 +2269,29 @@ components:
               time_to_repair: 0
               time_to_resolve: 0
               title: Example Incident 2
-            id: 00000000-0000-0000-0000-000000000000
+            id: 00000000-1111-0000-0000-000000000000
             relationships:
               commander_user:
                 data:
-                  id: 00000000-0000-0000-0000-000000000000
+                  id: 00000000-aaaa-0000-0000-000000000000
                   type: users
               created_by_user:
                 data:
-                  id: 00000000-0000-0000-0000-000000000000
+                  id: 00000000-aaaa-0000-0000-000000000000
                   type: users
               integrations:
                 data:
-                - id: 00000000-0000-0000-0000-000000000000
+                - id: 00000000-0000-0000-0001-000000000000
                   type: incident_integrations
-                - id: 00000000-0000-0000-0000-000000000000
+                - id: 00000000-0000-0000-0002-000000000000
                   type: incident_integrations
               last_modified_by_user:
                 data:
-                  id: 00000000-0000-0000-0000-000000000000
+                  id: 00000000-aaaa-0000-0000-000000000000
                   type: users
               postmortem:
                 data:
-                  id: 00000000-0000-0000-0000-000000000000
+                  id: 00000000-6006-0000-0000-000000000000
                   type: incident_postmortems
             type: incidents
           items:
@@ -2112,30 +2304,7 @@ components:
           readOnly: true
           type: array
         meta:
-          description: The metadata object containing pagination metadata.
-          properties:
-            pagination:
-              description: Pagination properties.
-              properties:
-                next_offset:
-                  description: The index of the first element in the next page of
-                    results. Equal to page size added to the current offset.
-                  example: 1000
-                  format: int64
-                  type: integer
-                offset:
-                  description: The index of the first element in the results.
-                  example: 10
-                  format: int64
-                  type: integer
-                size:
-                  description: Maximum size of pages to return.
-                  example: 1000
-                  format: int64
-                  type: integer
-              type: object
-          readOnly: true
-          type: object
+          $ref: '#/components/schemas/IncidentResponseMeta'
       required:
       - data
       type: object
@@ -3236,7 +3405,7 @@ components:
       description: Object for a single metric tag configuration.
       example:
         id: metric.foo.bar
-        type: metric
+        type: metrics
       properties:
         id:
           $ref: '#/components/schemas/MetricName'
@@ -3274,6 +3443,133 @@ components:
           $ref: '#/components/schemas/MetricAllTags'
       readOnly: true
       type: object
+    MetricBulkConfigureTagsType:
+      default: metric_bulk_configure_tags
+      description: The metric bulk configure tags resource.
+      enum:
+      - metric_bulk_configure_tags
+      example: metric_bulk_configure_tags
+      type: string
+      x-enum-varnames:
+      - BULK_MANAGE_TAGS
+    MetricBulkTagConfigCreate:
+      description: Request object to bulk configure tags for metrics matching the
+        given prefix.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/MetricBulkTagConfigCreateAttributes'
+        id:
+          $ref: '#/components/schemas/MetricBulkTagConfigNamePrefix'
+        type:
+          $ref: '#/components/schemas/MetricBulkConfigureTagsType'
+      required:
+      - id
+      - type
+      type: object
+    MetricBulkTagConfigCreateAttributes:
+      description: Optional parameters for bulk creating metric tag configurations.
+      properties:
+        emails:
+          $ref: '#/components/schemas/MetricBulkTagConfigEmailList'
+        tags:
+          $ref: '#/components/schemas/MetricBulkTagConfigTagNameList'
+      type: object
+    MetricBulkTagConfigCreateRequest:
+      description: Wrapper object for a single bulk tag configuration request.
+      properties:
+        data:
+          $ref: '#/components/schemas/MetricBulkTagConfigCreate'
+      required:
+      - data
+      type: object
+    MetricBulkTagConfigDelete:
+      description: Request object to bulk delete all tag configurations for metrics
+        matching the given prefix.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/MetricBulkTagConfigDeleteAttributes'
+        id:
+          $ref: '#/components/schemas/MetricBulkTagConfigNamePrefix'
+        type:
+          $ref: '#/components/schemas/MetricBulkConfigureTagsType'
+      required:
+      - id
+      - type
+      type: object
+    MetricBulkTagConfigDeleteAttributes:
+      description: Optional parameters for bulk deleting metric tag configurations.
+      properties:
+        emails:
+          $ref: '#/components/schemas/MetricBulkTagConfigEmailList'
+      type: object
+    MetricBulkTagConfigDeleteRequest:
+      description: Wrapper object for a single bulk tag deletion request.
+      properties:
+        data:
+          $ref: '#/components/schemas/MetricBulkTagConfigDelete'
+      required:
+      - data
+      type: object
+    MetricBulkTagConfigEmailList:
+      description: A list of account emails to notify when the configuration is applied.
+      example:
+      - sue@example.com
+      - bob@example.com
+      items:
+        description: An email address.
+        format: email
+        type: string
+      type: array
+    MetricBulkTagConfigNamePrefix:
+      description: A text prefix to match against metric names.
+      example: kafka.lag
+      type: string
+    MetricBulkTagConfigResponse:
+      description: Wrapper for a single bulk tag configuration status response.
+      properties:
+        data:
+          $ref: '#/components/schemas/MetricBulkTagConfigStatus'
+      type: object
+    MetricBulkTagConfigStatus:
+      description: 'The status of a request to bulk configure metric tags.
+
+        It contains the fields from the original request for reference.'
+      properties:
+        attributes:
+          $ref: '#/components/schemas/MetricBulkTagConfigStatusAttributes'
+        id:
+          $ref: '#/components/schemas/MetricBulkTagConfigNamePrefix'
+        type:
+          $ref: '#/components/schemas/MetricBulkConfigureTagsType'
+      required:
+      - id
+      - type
+      type: object
+    MetricBulkTagConfigStatusAttributes:
+      description: Optional attributes for the status of a bulk tag configuration
+        request.
+      properties:
+        emails:
+          $ref: '#/components/schemas/MetricBulkTagConfigEmailList'
+        status:
+          description: The status of the request.
+          example: Accepted
+          type: string
+        tags:
+          $ref: '#/components/schemas/MetricBulkTagConfigTagNameList'
+      type: object
+    MetricBulkTagConfigTagNameList:
+      description: A list of tag names to apply to the configuration.
+      example:
+      - host
+      - pod_name
+      - is_shadow
+      items:
+        description: A metric tag name.
+        maxLength: 200
+        pattern: ^[A-Za-z][A-Za-z0-9\.\-\_:\/]*$
+        type: string
+      type: array
     MetricCustomAggregation:
       description: A time and space aggregation combination for use in query.
       example:
@@ -3432,9 +3728,9 @@ components:
           aggregations:
           - space: avg
             time: avg
-          created_at: '2020-03-31T09:48:37.463835Z'
+          created_at: '2020-03-25T09:48:37.463835Z'
           metric_type: gauge
-          modified_at: '2020-04-31T09:48:37.463835Z'
+          modified_at: '2020-04-25T09:48:37.463835Z'
           tags:
           - app
           - datacenter
@@ -3456,7 +3752,7 @@ components:
           $ref: '#/components/schemas/MetricCustomAggregations'
         created_at:
           description: Timestamp when the tag configuration was created.
-          example: '2020-03-31T09:48:37.463835Z'
+          example: '2020-03-25T09:48:37.463835Z'
           format: date-time
           type: string
         include_percentiles:
@@ -3470,7 +3766,7 @@ components:
           $ref: '#/components/schemas/MetricTagConfigurationMetricTypes'
         modified_at:
           description: Timestamp when the tag configuration was last modified.
-          example: '2020-03-31T09:48:37.463835Z'
+          example: '2020-03-25T09:48:37.463835Z'
           format: date-time
           type: string
         tags:
@@ -3667,6 +3963,28 @@ components:
             $ref: '#/components/schemas/MetricsAndMetricTagConfigurations'
           type: array
       readOnly: true
+      type: object
+    NullableRelationshipToUser:
+      description: Relationship to user.
+      properties:
+        data:
+          $ref: '#/components/schemas/NullableRelationshipToUserData'
+      required:
+      - data
+      type: object
+    NullableRelationshipToUserData:
+      description: Relationship to user object.
+      nullable: true
+      properties:
+        id:
+          description: A unique identifier that represents the user.
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+        type:
+          $ref: '#/components/schemas/UsersType'
+      required:
+      - id
+      - type
       type: object
     Organization:
       description: Organization object.
@@ -3984,12 +4302,12 @@ components:
     RelationshipToIncidentIntegrationMetadataData:
       description: A relationship reference for an integration metadata object.
       example:
-        id: 00000000-0000-0000-0000-000000000000
+        id: 00000000-abcd-0002-0000-000000000000
         type: incident_integrations
       properties:
         id:
           description: A unique identifier that represents the integration metadata.
-          example: 00000000-0000-0000-0000-000000000000
+          example: 00000000-abcd-0001-0000-000000000000
           type: string
         type:
           $ref: '#/components/schemas/IncidentIntegrationMetadataType'
@@ -4001,17 +4319,17 @@ components:
       description: A relationship reference for multiple integration metadata objects.
       example:
         data:
-        - id: 00000000-0000-0000-0000-000000000000
+        - id: 00000000-abcd-0005-0000-000000000000
           type: incident_integrations
-        - id: 00000000-0000-0000-0000-000000000000
+        - id: 00000000-abcd-0006-0000-000000000000
           type: incident_integrations
       properties:
         data:
           description: The integration metadata relationship array
           example:
-          - id: 00000000-0000-0000-0000-000000000000
+          - id: 00000000-abcd-0003-0000-000000000000
             type: incident_integrations
-          - id: 00000000-0000-0000-0000-000000000000
+          - id: 00000000-abcd-0004-0000-000000000000
             type: incident_integrations
           items:
             $ref: '#/components/schemas/RelationshipToIncidentIntegrationMetadataData'
@@ -4023,7 +4341,7 @@ components:
       description: A relationship reference for postmortems.
       example:
         data:
-          id: 00000000-0000-0000-0000-000000000000
+          id: 00000000-0000-abcd-3000-000000000000
           type: incident_postmortems
       properties:
         data:
@@ -4034,12 +4352,12 @@ components:
     RelationshipToIncidentPostmortemData:
       description: The postmortem relationship data.
       example:
-        id: 00000000-0000-0000-0000-000000000000
+        id: 00000000-0000-abcd-2000-000000000000
         type: incident_postmortems
       properties:
         id:
           description: A unique identifier that represents the postmortem.
-          example: 00000000-0000-0000-0000-000000000000
+          example: 00000000-0000-abcd-1000-000000000000
           type: string
         type:
           $ref: '#/components/schemas/IncidentPostmortemType'
@@ -4060,7 +4378,7 @@ components:
       properties:
         id:
           description: ID of the organization.
-          example: 00000000-0000-0000-0000-000000000000
+          example: 00000000-0000-beef-0000-000000000000
           type: string
         type:
           $ref: '#/components/schemas/OrganizationsType'
@@ -4129,6 +4447,29 @@ components:
             $ref: '#/components/schemas/RelationshipToRoleData'
           type: array
       type: object
+    RelationshipToSAMLAssertionAttribute:
+      description: AuthN Mapping relationship to SAML Assertion Attribute.
+      properties:
+        data:
+          $ref: '#/components/schemas/RelationshipToSAMLAssertionAttributeData'
+      required:
+      - data
+      type: object
+    RelationshipToSAMLAssertionAttributeData:
+      description: Data of AuthN Mapping relationship to SAML Assertion Attribute.
+      properties:
+        id:
+          description: The ID of the SAML assertion attribute.
+          example: 0
+          format: int32
+          maximum: 2147483647
+          type: integer
+        type:
+          $ref: '#/components/schemas/SAMLAssertionAttributesType'
+      required:
+      - id
+      - type
+      type: object
     RelationshipToUser:
       description: Relationship to user.
       properties:
@@ -4142,7 +4483,7 @@ components:
       properties:
         id:
           description: A unique identifier that represents the user.
-          example: 00000000-0000-0000-0000-000000000000
+          example: 00000000-0000-0000-2345-000000000000
           type: string
         type:
           $ref: '#/components/schemas/UsersType'
@@ -4173,13 +4514,13 @@ components:
       properties:
         created_at:
           description: Creation time of the restriction query.
-          example: '2020-03-17T21:06:44Z'
+          example: '2020-03-17T21:06:44.000Z'
           format: date-time
           readOnly: true
           type: string
         modified_at:
           description: Time of last restriction query modification.
-          example: '2020-03-17T21:15:15Z'
+          example: '2020-03-17T21:15:15.000Z'
           format: date-time
           readOnly: true
           type: string
@@ -4508,7 +4849,7 @@ components:
           $ref: '#/components/schemas/RoleUpdateAttributes'
         id:
           description: ID of the role.
-          example: 00000000-0000-0000-0000-000000000000
+          example: 00000000-0000-1111-0000-000000000000
           type: string
         type:
           $ref: '#/components/schemas/RolesType'
@@ -4582,6 +4923,46 @@ components:
       type: string
       x-enum-varnames:
       - ROLES
+    SAMLAssertionAttribute:
+      description: SAML assertion attribute.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SAMLAssertionAttributeAttributes'
+        id:
+          description: The ID of the SAML assertion attribute.
+          example: 0
+          format: int32
+          maximum: 2147483647
+          type: integer
+        type:
+          $ref: '#/components/schemas/SAMLAssertionAttributesType'
+      required:
+      - id
+      - type
+      type: object
+    SAMLAssertionAttributeAttributes:
+      description: Key/Value pair of attributes used in SAML assertion attributes.
+      properties:
+        attribute_key:
+          description: Key portion of a key/value pair of the attribute sent from
+            the Identity Provider.
+          example: member-of
+          type: string
+        attribute_value:
+          description: Value portion of a key/value pair of the attribute sent from
+            the Identity Provider.
+          example: Development
+          type: string
+      type: object
+    SAMLAssertionAttributesType:
+      default: saml_assertion_attributes
+      description: SAML assertion attributes resource type.
+      enum:
+      - saml_assertion_attributes
+      example: saml_assertion_attributes
+      type: string
+      x-enum-varnames:
+      - SAML_ASSERTION_ATTRIBUTES
     SecurityFilter:
       description: The security filter's properties.
       properties:
@@ -5734,7 +6115,7 @@ components:
           $ref: '#/components/schemas/UserUpdateAttributes'
         id:
           description: ID of the user.
-          example: 00000000-0000-0000-0000-000000000000
+          example: 00000000-0000-feed-0000-000000000000
           type: string
         type:
           $ref: '#/components/schemas/UsersType'
@@ -5799,6 +6180,7 @@ components:
             security_monitoring_rules_write: The ability to create and edit Detection
               Rules.
             security_monitoring_signals_read: The ability to view Security Signals.
+            usage_read: The ability to view your organization's usage and usage attribution.
             user_access_invite: The ability to invite other users to your organization.
             user_access_manage: The ability to disable users, manage user roles, and
               manage SAML-to-role mappings.
@@ -6169,6 +6551,258 @@ paths:
       tags:
       - Key Management
       x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
+  /api/v2/authn_mappings:
+    get:
+      description: List all AuthN Mappings in the org.
+      operationId: ListAuthNMappings
+      parameters:
+      - $ref: '#/components/parameters/PageSize'
+      - $ref: '#/components/parameters/PageNumber'
+      - description: Sort AuthN Mappings depending on the given field.
+        in: query
+        name: sort
+        required: false
+        schema:
+          $ref: '#/components/schemas/AuthNMappingsSort'
+      - description: Include additional information in the response.
+        in: query
+        name: include
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+      - description: Filter all mappings by the given string.
+        in: query
+        name: filter
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthNMappingsResponse'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication Error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: List all AuthN Mappings
+      tags:
+      - AuthN Mappings
+      x-menu-order: 4
+      x-permission: OPEN()
+      x-undo:
+        type: safe
+    post:
+      description: Create an AuthN Mapping.
+      operationId: CreateAuthNMapping
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthNMappingCreateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthNMappingResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication Error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - user_access_manage
+      summary: Create an AuthN Mapping
+      tags:
+      - AuthN Mappings
+      x-codegen-request-body-name: body
+      x-given:
+        authn_mapping:
+          parameters:
+          - name: body
+            value: "{\n  \"data\": {\n    \"attributes\": {\n     \"attribute_key\":
+              \"{{ unique_lower_alnum }}\",\n     \"attribute_value\": \"{{ unique
+              }}\"\n    },\n    \"relationships\": {\n       \"role\": {\n         \"data\":
+              {\n           \"id\": \"{{ role.data.id }}\",\n           \"type\":
+              \"{{ role.data.type }}\"\n         }\n      }\n    },\n    \"type\":
+              \"authn_mappings\"\n  }\n}"
+          step: there is a valid "authn_mapping" in the system
+      x-menu-order: 5
+      x-permission: OR(USER_ACCESS_MANAGE)
+      x-undo:
+        operationId: DeleteAuthNMapping
+        parameters:
+        - name: authn_mapping_id
+          source: data.id
+        type: unsafe
+  /api/v2/authn_mappings/{authn_mapping_id}:
+    delete:
+      description: Delete an AuthN Mapping specified by AuthN Mapping UUID.
+      operationId: DeleteAuthNMapping
+      parameters:
+      - $ref: '#/components/parameters/AuthNMappingID'
+      responses:
+        '204':
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication Error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - user_access_manage
+      summary: Delete an AuthN Mapping
+      tags:
+      - AuthN Mappings
+      x-menu-order: 3
+      x-permission: OR(USER_ACCESS_MANAGE)
+      x-undo:
+        type: idempotent
+    get:
+      description: Get an AuthN Mapping specified by the AuthN Mapping UUID.
+      operationId: GetAuthNMapping
+      parameters:
+      - $ref: '#/components/parameters/AuthNMappingID'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthNMappingResponse'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication Error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Get an AuthN Mapping by UUID
+      tags:
+      - AuthN Mappings
+      x-menu-order: 1
+      x-permission: OPEN()
+      x-undo:
+        type: safe
+    patch:
+      description: Edit an AuthN Mapping.
+      operationId: UpdateAuthNMapping
+      parameters:
+      - $ref: '#/components/parameters/AuthNMappingID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthNMappingUpdateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthNMappingResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication Error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Conflict
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Unprocessable Entity
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - user_access_manage
+      summary: Edit an AuthN Mapping
+      tags:
+      - AuthN Mappings
+      x-codegen-request-body-name: body
+      x-menu-order: 2
+      x-permission: OR(USER_ACCESS_MANAGE)
       x-undo:
         type: idempotent
   /api/v2/current_user/application_keys:
@@ -6729,6 +7363,7 @@ paths:
       operationId: UpdateIncident
       parameters:
       - $ref: '#/components/parameters/IncidentIDPathParameter'
+      - $ref: '#/components/parameters/IncidentIncludeQueryParameter'
       requestBody:
         content:
           application/json:
@@ -7035,6 +7670,10 @@ paths:
           description: Forbidden
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
       summary: Get archive order
       tags:
       - Logs Archives
@@ -7113,6 +7752,10 @@ paths:
           description: Forbidden
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
       summary: Get all archives
       tags:
       - Logs Archives
@@ -7228,6 +7871,10 @@ paths:
           description: Not found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
       summary: Get an archive
       tags:
       - Logs Archives
@@ -7359,6 +8006,10 @@ paths:
           description: Not found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
       summary: List read roles for an archive
       tags:
       - Logs Archives
@@ -7422,6 +8073,10 @@ paths:
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
       summary: Get all log-based metrics
       tags:
       - Logs Metrics
@@ -7515,6 +8170,10 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
       summary: Get a log-based metric
       tags:
       - Logs Metrics
@@ -7580,6 +8239,10 @@ paths:
           description: Authentication error
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
       summary: List restriction queries
       tags:
       - Logs Restriction Queries
@@ -7619,6 +8282,11 @@ paths:
           description: Authentication error
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - user_access_manage
       summary: Create a restriction query
       tags:
       - Logs Restriction Queries
@@ -7660,6 +8328,10 @@ paths:
           description: Authentication error
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
       summary: Get restriction query for a given role
       tags:
       - Logs Restriction Queries
@@ -7696,6 +8368,10 @@ paths:
           description: Authentication error
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
       summary: Get all restriction queries for a given user
       tags:
       - Logs Restriction Queries
@@ -7734,6 +8410,11 @@ paths:
           description: Not found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - user_access_manage
       summary: Delete a restriction query
       tags:
       - Logs Restriction Queries
@@ -7777,6 +8458,10 @@ paths:
           description: Not found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
       summary: Get a restriction query
       tags:
       - Logs Restriction Queries
@@ -7825,6 +8510,11 @@ paths:
           description: Not found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - user_access_manage
       summary: Update a restriction query
       tags:
       - Logs Restriction Queries
@@ -7870,6 +8560,11 @@ paths:
           description: Not found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - user_access_manage
       summary: Revoke role from a restriction query
       tags:
       - Logs Restriction Queries
@@ -7914,6 +8609,10 @@ paths:
           description: Not found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
       summary: List roles for a restriction query
       tags:
       - Logs Restriction Queries
@@ -7958,6 +8657,11 @@ paths:
           description: Not found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - user_access_manage
       summary: Grant role to a restriction query
       tags:
       - Logs Restriction Queries
@@ -8210,6 +8914,129 @@ paths:
         is only accessible for Metrics without Limits&trade; beta customers.\nIf you\u2019re
         interested in Metrics without Limits&trade;, please contact your Customer
         Success Manager.**"
+  /api/v2/metrics/config/bulk-tags:
+    delete:
+      description: 'Delete all custom lists of queryable tag keys for a set of existing
+        count, gauge, rate, and distribution metrics.
+
+        Metrics are selected by passing a metric name prefix.
+
+        Results can be sent to a set of account email addresses, just like the same
+        operation in the Datadog web app.
+
+        Can only be used with application keys of users with the `Manage Tags for
+        Metrics` permission.'
+      operationId: DeleteBulkTagsMetricsConfiguration
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MetricBulkTagConfigDeleteRequest'
+        required: true
+      responses:
+        '202':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetricBulkTagConfigResponse'
+          description: Accepted
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too Many Requests
+      summary: Configure tags for multiple metrics
+      tags:
+      - Metrics
+      x-codegen-request-body-name: body
+      x-menu-order: 9
+      x-undo:
+        type: idempotent
+    post:
+      description: 'Create and define a list of queryable tag keys for a set of existing
+        count, gauge, rate, and distribution metrics.
+
+        Metrics are selected by passing a metric name prefix. Use the Delete method
+        of this API path to remove tag configurations.
+
+        Results can be sent to a set of account email addresses, just like the same
+        operation in the Datadog web app.
+
+        If multiple calls include the same metric, the last configuration applied
+        (not by submit order) is used, do not
+
+        expect deterministic ordering of concurrent calls.
+
+        Can only be used with application keys of users with the `Manage Tags for
+        Metrics` permission.'
+      operationId: CreateBulkTagsMetricsConfiguration
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MetricBulkTagConfigCreateRequest'
+        required: true
+      responses:
+        '202':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetricBulkTagConfigResponse'
+          description: Accepted
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too Many Requests
+      summary: Configure tags for multiple metrics
+      tags:
+      - Metrics
+      x-codegen-request-body-name: body
+      x-menu-order: 8
+      x-undo:
+        operationId: DeleteBulkTagsMetricsConfiguration
+        parameters:
+        - name: body
+          source: ''
+        type: unsafe
   /api/v2/metrics/{metric_name}/all-tags:
     get:
       description: View indexed tag key-value pairs for a given metric name.
@@ -9317,11 +10144,6 @@ paths:
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - security_monitoring_cws_agent_rules_read
       summary: Get all Cloud Workload Security Agent rules
       tags:
       - Cloud Workload Security
@@ -9353,11 +10175,6 @@ paths:
           $ref: '#/components/responses/ConflictResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - security_monitoring_cws_agent_rules_write
       summary: Create a Cloud Workload Security Agent rule
       tags:
       - Cloud Workload Security
@@ -9393,11 +10210,6 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - security_monitoring_cws_agent_rules_write
       summary: Delete a Cloud Workload Security Agent rule
       tags:
       - Cloud Workload Security
@@ -9422,11 +10234,6 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - security_monitoring_cws_agent_rules_read
       summary: Get a Cloud Workload Security Agent rule
       tags:
       - Cloud Workload Security
@@ -9464,11 +10271,6 @@ paths:
           $ref: '#/components/responses/ConcurrentModificationResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - security_monitoring_cws_agent_rules_write
       summary: Update a Cloud Workload Security Agent rule
       tags:
       - Cloud Workload Security
@@ -10696,7 +11498,7 @@ paths:
         name: user_invitation_uuid
         required: true
         schema:
-          example: 00000000-0000-0000-0000-000000000000
+          example: 00000000-0000-0000-3456-000000000000
           type: string
       responses:
         '200':
@@ -11111,6 +11913,12 @@ servers:
       default: api
       description: The subdomain where the API is deployed.
 tags:
+- description: '[AuthN Mappings API] (https://docs.datadoghq.com/account_management/authn_mapping/?tab=example)
+
+    is used to automatically map group of users to roles in Datadog using attributes
+
+    sent from Identity Providers.'
+  name: AuthN Mappings
 - description: Workload activity security rules for generating events using the Datadog
     security Agent.
   name: Cloud Workload Security

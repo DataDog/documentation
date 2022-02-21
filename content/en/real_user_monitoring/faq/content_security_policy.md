@@ -13,48 +13,9 @@ If you are using [Content Security Policy (CSP)][1] on your websites, add the fo
 
 Depending on the `site` option used to initialize [Real User Monitoring][2] or [browser logs collection][3], add the appropriate `connect-src` entry:
 
-{{< site-region region="us" >}}
-
 ```txt
-connect-src https://*.browser-intake-datadoghq.com
+connect-src https://*.{{< region-param key="browser_sdk_endpoint_domain" >}}
 ```
-
-{{< /site-region >}}
-
-
-{{< site-region region="eu" >}}
-
-```txt
-connect-src https://*.browser-intake-datadoghq.eu
-```
-
-{{< /site-region >}}
-
-
-{{< site-region region="us3" >}}
-
-```txt
-connect-src https://*.browser-intake-us3-datadoghq.com
-```
-
-{{< /site-region >}}
-
-{{< site-region region="us5" >}}
-
-```txt
-connect-src https://*.browser-intake-us5-datadoghq.com
-```
-
-{{< /site-region >}}
-
-
-{{< site-region region="gov" >}}
-
-```txt
-connect-src https://*.browser-intake-ddog-gov.com
-```
-
-{{< /site-region >}}
 
 ## Session Replay worker
 
