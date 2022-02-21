@@ -56,7 +56,7 @@ The resulting pipeline looks as follows:
 
 To create numerical tags that can be use for measures the metadata command can be used. Any metadata
 with a key starting with `dd_metrics.` and a numerical value will be set as a metric tag.
-This can be used for example to set the binary size on the pipeline:
+This can be used for example to measure the binary size in a pipeline:
 
 ```yaml
 steps:
