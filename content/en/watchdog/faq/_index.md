@@ -6,5 +6,5 @@ cascade:
 ---
 
 {{< whatsnext desc="List of Frequently Asked Questions:" >}}
-    {{< nextlink href="/watchdog/faq/root_cause_not_showing" >}}Root cause not showing{{< /nextlink >}}
+    {{< nextlink href="/watchdog/faq/root-cause-not-showing" >}}Root cause not showing{{< /nextlink >}}
 {{< /whatsnext >}}
