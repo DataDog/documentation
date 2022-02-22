@@ -103,7 +103,7 @@ With the following definitions:
 
 `trace.<SPAN_NAME>.duration`
 : **Prerequisite:** This metric exists for any APM service.<br>
-**Description:** Measure the total time for a collection of spans. Specifically, it is the total time spent by all spans over an interval - including time spent waiting on child processes. When divided by `trace.<SPAN_NAME>.hits`, the result provides the average. To get percentiles, use [DDSketch-based metrics][11]. <br>
+**Description:** Measure the total time for a collection of spans. Specifically, it is the total time spent by all spans over an interval - including time spent waiting on child processes. When divided by `trace.<SPAN_NAME>.hits`, can yield an average latency but we recommend using [DDSketch-based metrics][11] for all latency calculations. <br>
 **Metric type:** [GAUGE][7].<br>
 **Tags:** `env`, `service`, `resource`, `http.status_code`, all host tags from the Datadog Host Agent, and [the second primary tag][4].
 
