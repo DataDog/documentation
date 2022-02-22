@@ -41,8 +41,7 @@ To create a [CI Pipeline monitor][2] in Datadog, use the main navigation: *Monit
     * **Monitor over the `Job` level**: If the `Job` level is selected, the monitor will only include job events for evaluation, which represent the execution of a group of commands.
     * **Monitor over the `Command` level**: If the `Command` level is selected, the monitor will only include manually instrumented [custom command][5] events for evaluation, which represent individual commands being executed in a job.
     * **Monitor over all levels**: If the `All` level is selected, the monitor will include all types of events for evaluation.
-    
-[5]: /continuous_integration/setup_pipelines/custom_commands/
+
 3. Choose to monitor over a CI Pipeline event count, facet, or measure:
     * **Monitor over a CI Pipeline event count**: Use the search bar (optional) and do **not** select a facet or measure. Datadog evaluates the number of CI Pipeline events over a selected time frame, then compares it to the threshold conditions.
     * **Monitor over a dimension**: If a dimension (qualitative facet) is selected, the monitor alerts over the `Unique value count` of the facet.
@@ -81,7 +80,7 @@ For detailed instructions on the **Say what's happening** and **Notify your team
 
 #### Notifications behavior when there is no data
 
-A monitor that uses an event count or a formula for its evaluation query will resolve after the specified evaluation period with no data, triggering a notification. For example, a monitor using a formula to alert on pipeline error rate with an evaluation window of 5 minutes will automatically resolve after 5 minutes without any data.
+A monitor that uses an event count, or a formula for its evaluation query will resolve after the specified evaluation period with no data, triggering a notification. For example, a monitor using a formula to alert on pipeline error rate with an evaluation window of 5 minutes will automatically resolve after 5 minutes without any data.
 
 As CI pipeline data is usually sparse and can have relatively long periods with no data, this might result in monitor recovery notifications that might not be desired.
 
@@ -101,4 +100,5 @@ This notification will only be sent for monitor alerts!
 [2]: https://app.datadoghq.com/monitors/create/ci-pipelines
 [3]: /monitors/create/configuration/#advanced-alert-conditions
 [4]: /monitors/notify/
+[5]: /continuous_integration/setup_pipelines/custom_commands/
 
