@@ -4,7 +4,7 @@ kind: documentation
 description: "Troubleshooting for Cloud Workload Security."
 ---
 
-## Security Agent Flare
+## Security Agent flare
 
 Similar to the [Agent flare][1], you can send necessary troubleshooting information to the Datadog support team with one flare command.
 
