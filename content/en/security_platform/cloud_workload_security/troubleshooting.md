@@ -8,7 +8,7 @@ description: "Troubleshooting for Cloud Workload Security."
 
 Similar to the [Agent flare][1], you can send necessary troubleshooting information to the Datadog support team with one flare command.
 
-If needed, the flare can be reviewed prior to sending since the flare prompts a confirmation before uploading it.
+The flare asks for confirmation before upload, so you may review the content before the Security Agent sends it.
 
 In the commands below, replace `<CASE_ID>` with your Datadog support case ID if you have one, then enter the email address associated with it.
 
