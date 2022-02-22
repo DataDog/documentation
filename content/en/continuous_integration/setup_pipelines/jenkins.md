@@ -268,6 +268,72 @@ pipeline {
 }
 {{< /code-block >}}
 
+## Propagate Git information in pipelines without a Jenkinsfile from SCM.
+
+The Jenkins plugin uses environment variables to determine the Git information. However, these environment variables may not be available if you are not using a `Jenkinsfile` in your repository, and you're configuring the pipeline directly in Jenkins using the `checkout` step.
+
+In this case, you can propagate the Git information to the environment variables in your build. Use the `.each {k,v -> env.setProperty(k, v)}` function after executing the `checkout` or `git` steps. For example:
+
+{{< tabs >}}
+{{% tab "Using Declarative Pipelines" %}}
+If you're using a declarative pipeline to configure your pipeline, propagate Git information using a `script` block as follows:
+
+Using the `checkout` step:
+{{< code-block lang="groovy" >}}
+pipeline {
+  stages {
+    stage('Checkout') {
+        script {
+          checkout(...).each {k,v -> env.setProperty(k,v)}
+        }
+    }
+    ...
+  }
+}
+{{< /code-block >}}
+
+Using the `git` step:
+{{< code-block lang="groovy" >}}
+pipeline {
+  stages {
+    stage('Checkout') {
+      script {
+        git(...).each {k,v -> env.setProperty(k,v)}
+      }
+    }
+    ...
+  }
+}
+{{< /code-block >}}
+
+{{% /tab %}}
+{{% tab "Using Scripted Pipelines" %}}
+If you're using a scripted pipeline to configure your pipeline, you can propagate the git information to environment variables directly.
+
+Using the `checkout` step:
+{{< code-block lang="groovy" >}}
+node {
+  stage('Checkout') {
+    checkout(...).each {k,v -> env.setProperty(k,v)}
+  }
+  ...
+}
+{{< /code-block >}}
+
+Using the `git` step:
+{{< code-block lang="groovy" >}}
+node {
+  stage('Checkout') {
+    git(...).each {k,v -> env.setProperty(k,v)}
+  }
+  ...
+}
+{{< /code-block >}}
+
+{{% /tab %}}
+{{< /tabs >}}
+
+
 ## Set Git information manually
 
 The Jenkins plugin uses environment variables to determine the Git information. However, these environment variables are not always set

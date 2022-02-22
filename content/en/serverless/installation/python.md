@@ -11,7 +11,7 @@ further_reading:
 - link: "/serverless/serverless_integrations/cli/"
   tag: "Documentation"
   text: "Datadog Serverless CLI"
-- link: 'serverless/serverless_tagging/'
+- link: '/serverless/troubleshooting/serverless_tagging/'
   tag: 'Documentation'
   text: 'Tagging Serverless Applications'
 - link: 'serverless/distributed_tracing/'
@@ -25,7 +25,7 @@ aliases:
     - /serverless/guide/python/
 ---
 
-<div class="alert alert-warning">If your Python Lambda functions are written in  <a href="https://docs.aws.amazon.com/lambda/latest/dg/runtimes-extensions-api.html">Python 3.6 or less</a> or you previously set up Datadog Serverless using the Datadog Forwarder, see the <a href="docs.datadoghq.com/serverless/guide/datadog_forwarder_python">installation instructions</a>.</div>
+<div class="alert alert-warning">If your Python Lambda functions are written in <a href="https://docs.aws.amazon.com/lambda/latest/dg/runtimes-extensions-api.html">Python 3.6 or less</a>, or you previously set up Datadog Serverless using the Datadog Forwarder, see the <a href="http://docs.datadoghq.com/serverless/guide/datadog_forwarder_python">Using the Datadog Forwarder - Python</a> guide.</div>
 
 ## Configuration
 
@@ -600,7 +600,7 @@ def get_message():
 
 For more information on custom metric submission, see [here][6]. For additional details on custom instrumentation, see the Datadog APM documentation for [custom instrumentation][7].
 
-If your Lambda function is running in a VPC, follow the [Datadog Lambda Extension AWS PrivateLink Setup][8] guide to ensure that the extension can reach Datadog API endpoints.
+If your Lambda function is running in a VPC, follow these [instructions][8] to ensure that the extension can reach Datadog API endpoints.
 
 ## Further Reading
 
@@ -613,4 +613,4 @@ If your Lambda function is running in a VPC, follow the [Datadog Lambda Extensio
 [5]: /serverless/libraries_integrations/forwarder
 [6]: /serverless/custom_metrics?tab=python
 [7]: /tracing/custom_instrumentation/python/
-[8]: /serverless/guide/extension_private_link/
+[8]: /serverless/libraries_integrations/extension/#vpc

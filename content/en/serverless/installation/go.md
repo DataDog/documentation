@@ -5,7 +5,7 @@ further_reading:
 - link: 'serverless/datadog_lambda_library/go'
   tag: "Documentation"
   text: 'Datadog Lambda Library for Go'
-- link: 'serverless/serverless_tagging/'
+- link: '/serverless/troubleshooting/serverless_tagging/'
   tag: "Documentation"
   text: 'Tagging Serverless Applications'
 - link: 'serverless/distributed_tracing/'
@@ -152,7 +152,8 @@ func myHandler(ctx context.Context, event MyEvent) (string, error) {
 
 For more information, see the [Custom Metrics documentation][7].
 
-If your Lambda function is running in a VPC, follow the [Datadog Lambda Extension AWS PrivateLink Setup][8] guide to ensure that the extension can reach Datadog API endpoints.
+If your Lambda function is running in a VPC, follow these [instructions][8] to ensure that the extension can reach Datadog API endpoints.
+
 
 ## Further Reading
 
@@ -165,4 +166,4 @@ If your Lambda function is running in a VPC, follow the [Datadog Lambda Extensio
 [5]: /serverless/libraries_integrations/extension/#tagging
 [6]: https://app.datadoghq.com/functions
 [7]: /serverless/custom_metrics?tab=go
-[8]: /serverless/guide/extension_private_link/
+[8]: /serverless/libraries_integrations/extension/#vpc
