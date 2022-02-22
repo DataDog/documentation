@@ -159,6 +159,11 @@ body > header {
         border-top: 3px solid #632ca6;
         border-radius: 0;
 
+        & a:hover {
+          color: $brand-primary;
+          background: rgba(0, 0, 0, 0.05);
+        }
+
         li {
           white-space: nowrap;
         }
@@ -183,6 +188,16 @@ body > header {
           }
         }
 
+        &.product-menu li a {
+          line-height: 18px;
+        }
+
+        &.product-menu i[class*='icon-'] {
+          display: inline-block;
+          margin-right: 8px;
+          vertical-align: middle;
+        }
+        
         &.solutions-menu {
           width: 480px;
 
