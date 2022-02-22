@@ -43,7 +43,7 @@ The following section outlines Datadog's solution for monitoring AWS serverless 
 
 ## Quick start
 
-If you are new to Datadog, you can get started by [signing up for a Datadog account][5], then following the instructions for [installing Datadog's Lambda Extension][6]. Completing these steps will configure your Lambda functions to send real-time metrics, logs and traces to Datadog:
+If you are new to Datadog, you can get started by [signing up for a Datadog account][5], then following the instructions for [installing Datadog's Lambda Extension][6]. These steps configure your Lambda functions to send real-time metrics, logs, and traces to Datadog:
 
 {{< img src="serverless/aws-fully-managed-services-serverless-monitoring-hero.png" alt="Datadog Serverless Monitoring"  style="width:100%;" >}}
 
@@ -57,15 +57,15 @@ For more detailed installation instructions, select the Lambda runtime below for
 
 ### Monitor your entire serverless stack in the Serverless view
 
-The Serverless view enables you to correlate high-level metrics from AWS resources with those of Lambda functions, so you can quickly spot issues and jump-start your investigation. 
+The Serverless view enables you to correlate high-level metrics from AWS resources with those of Lambda functions, so you can quickly spot issues and start your investigation. 
 
-By default, the Serverless view groups your serverless resources by service to help you easily visualize how each part of your application is performing. For each service, you will see the functions that belong to it, along with the resources (Amazon API Gateway, SNS, SQS, DynamoDB, S3, EventBridge, Kinesis) that invoked them.
+By default, the Serverless view groups your serverless resources by service to help you visualize how each part of your application is performing. For each service, you can see the functions that belong to it, along with the resources (Amazon API Gateway, SNS, SQS, DynamoDB, S3, EventBridge, Kinesis) that invoked them.
 
 {{< img src="serverless/serverless-view-hero.jpeg" alt="Datadog Serverless Monitoring"  style="width:100%;" >}}
 
 ### Resolve AWS Lambda function failures faster by monitoring invocation payloads
 
-Datadog will automatically collect function requests and responses for all of your function invocations, providing key information that can help troubleshoot issues. For example, if you’re notified that one of your Lambda functions is experiencing failures, you can dive into the relevant request payloads to check for missing parameters, mistyped resource addresses, or other misconfigurations that may be behind the failures.
+Datadog automatically collects function requests and responses for all of your function invocations, providing key information that can help troubleshoot issues. For example, if you’re notified that one of your Lambda functions is experiencing failures, you can analyze relevant request payloads to check for missing parameters, mistyped resource addresses, or other misconfigurations that may be behind the failures.
 
 By identifying misconfigurations in failing requests, you can more easily reproduce issues in your development environment—and then run tests to verify your bug fixes.
 
@@ -73,7 +73,7 @@ By identifying misconfigurations in failing requests, you can more easily reprod
 
 ### Real-time metrics for alerting on issues across your Lambda function environment
 
-Our enhanced Lambda metrics, which appear in Datadog with the prefix `aws.lambda.enhanced`, are available at down-to-the-second granularity and in near real time. Enhanced Lambda metrics can be used to alert or for SLOs on cold starts, estimated AWS costs, timeouts, out-of-memory errors and memory usage across all of your Lambda functions. This enables you to view performance issues in your serverless environments right as they occur and troubleshoot without delay. 
+Datadog's enhanced Lambda metrics, which appear in Datadog with the prefix `aws.lambda.enhanced`, are available at second granularity and in near real time. You can use enhanced Lambda metrics for alerts or SLOs on cold starts, estimated AWS costs, timeouts, out-of-memory errors, and memory usage across all of your Lambda functions. This enables you to view performance issues in your serverless environments as they occur and troubleshoot without delay. 
 
 {{< img src="serverless/serverless_enhanced_metrics.jpeg" alt="Datadog Serverless Monitoring"  style="width:100%;" >}}
 
