@@ -13,6 +13,9 @@ further_reading:
   text: "Programming Language and Framework Compatibility"
 ---
 
+
+## Overview
+
 If you experience unexpected behavior with Datadog Application Security, there are common issues you can investigate, as mentioned below. If you continue to have trouble, reach out to [Datadog support][1] for further assistance. 
 
 ## Application Security rate limits
@@ -222,7 +225,7 @@ For [Ruby][1], the [Rack][2] integration is required. Ruby tracer version `1.0.0
 - Ensure there are no Agent transmission errors related to spans in your [tracer logs][7]. 
 - If the Agent is installed on a separate machine, check that `DD_AGENT_HOST` and, optionally, `DD_TRACE_AGENT_PORT` are set, or that `DD_TRACE_AGENT_URL` is set for the application tracing library.
 
-### Check Datadog Agent to backend configuration
+### Check if spans are successfully transmitted to Datadog
 
 Application Security data is sent over [spans][9]. To confirm that spans are successfully transmitted to Datadog, check that your tracer logs contain logs that look similar to this:
 
