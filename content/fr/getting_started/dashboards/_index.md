@@ -37,9 +37,9 @@ Si vous ne l'avez pas déjà fait, créez un [compte Datadog][1]. Installez l'Ag
 
 Définissez l'objectif du dashboard que vous créez. Un dashboard peut vous aider, les membres de votre équipe et vous-même, à vous concentrer sur la bonne tâche. Un _dashboard d'équipe_ vous permet d'identifier les tâches prioritaires, les informations qui nécessitent votre attention et vos réussites. Créez un ou plusieurs dashboards d'équipe affichant les informations dont votre équipe a fréquemment besoin pour éviter d'avoir à les rechercher. Un dashboard affichant vos SLO et vos SLI constitue par exemple un excellent dashboard d'équipe.
 
-Lorsqu'ils sont connectés à des données mises à jour en temps réel, les dashboards constituent un outil puissant qui permet de faciliter les échanges entre les responsables et les cadres. Un _dashboard de direction_ peut être utilisé pour vérifier que vous travaillez sur les tâches les plus importantes, pour mesurer les coûts d'un service ou pour vérifier que vous atteignez vos objectifs, respectez vos SLO et employez une stratégie de scaling efficace. Les dashboards de direction deviennent plus efficaces que jamais lorsqu'ils affichent une réponse générale à chaque question tout en étant interconnectés pour permettre des analyses plus poussées.
+Lorsqu'ils sont connectés à des données mises à jour en temps réel, les dashboards constituent un outil puissant qui permet de faciliter les échanges entre les responsables et les cadres. Un _dashboard de direction_ peut être utilisé pour vous assurer que vous travaillez sur les tâches les plus importantes, pour mesurer les coûts d'un service ou pour vérifier que vous atteignez vos objectifs, respectez vos SLO et employez une stratégie de scaling efficace. Les dashboards de direction sont encore plus efficaces lorsqu'ils affichent une réponse générale à chaque question tout en étant interconnectés pour comparer les données et analyser les réponses.
 
-Les dashboards peuvent également vous aider à suivre les problèmes récurrents et à les résoudre. Il est possible de créer un _dashboard de dépannage_ à partir d'une quantité limitée d'informations puis de l'étoffer au fur et à mesure de votre analyse. Par exemple, vous pouvez partir d'un graphique ou d'un widget issu d'un autre dashboard ou d'une autre vue qui affiche un problème, puis effectuer une analyse plus poussée à partir de cet élément.
+Les dashboards peuvent également vous aider à suivre les problèmes récurrents et à les résoudre. Il est possible de créer un _dashboard de dépannage_ à partir d'une quantité limitée d'informations, puis de l'étoffer au fur et à mesure de votre analyse. Par exemple, vous pouvez partir d'un graphique ou d'un widget issu d'un autre dashboard ou d'une autre vue qui affiche un problème, puis effectuer une analyse plus poussée à partir de cet élément.
 
 ## Explorer les dashboards prêts à l'emploi
 
@@ -100,7 +100,7 @@ Réorganisez les graphiques de votre dashboard en fonction de votre flux de trav
 Il est possible d'ajouter des liens à un dashboard de deux façons différentes :
 
  - En ajoutant un widget Notes et Liens, qui accepte le texte au format Markdown, y compris les liens. L'éditeur du widget affiche des conseils pour vous aider à utiliser le format Markdown.
- - En créant un lien personnalisé à partir du menu des paramètres d'un widget (icône en forme d'engrenage). Les liens personnalisés peuvent interpoler des variables et des template variables de façon à ce que le lien change en fonction des sélections de l'utilisateur : celui-ci accède ainsi directement au bon endroit pour analyser les données ou prendre des mesures correctives.
+ - En créant un lien personnalisé à partir du menu des paramètres d'un widget (icône en forme d'engrenage). Les liens personnalisés peuvent interpoler des variables et des template variables de façon à ce que le lien change en fonction des sélections de l'utilisateur. Ce dernier est ainsi redirigé vers la page pertinente pour analyser les données ou prendre des mesures correctives.
      {{< img src="getting_started/dashboards/opening_custom_link.mp4" alt="Ouvrir un lien personnalisé" video=true >}}
 
 ## Et ensuite ?
