@@ -12,9 +12,9 @@ further_reading:
 
 ## Overview
 
-If your front-end Javascript source code is minified, upload your source maps to Datadog to de-obfuscate your different stack traces. For any given error, you can access the file path, line number, and code snippet for each frame of the related stack trace.
+If your front-end Javascript source code is minified, upload your source maps to Datadog to de-obfuscate your different stack traces. For any given error, you can access the file path, line number, and code snippet for each frame of the related stack trace. Datadog can also link stack frames to your source code in your repository.
 
-<div class="alert alert-info">Only errors collected by <a href="/real_user_monitoring/">Real User Monitoring (RUM)</a> can be unminified and processed by <a href="/real_user_monitoring/error_tracking/">Error Tracking</a>.</div>
+<div class="alert alert-info">Only errors collected by <a href="/real_user_monitoring/">Real User Monitoring (RUM)</a> can be unminified.</div>
 
 ## Instrument your code
 
@@ -117,19 +117,17 @@ The best way to upload source maps is to add an extra step in your CI pipeline a
 
 To minimize overhead on your CI's performance, the CLI is optimized to upload as many source maps as you need in a short amount of time (typically a few seconds).
 
-By running the command against the example `dist` directory, Datadog expects your server or CDN to deliver the Javascript files at `https://hostname.com/static/js/javascript.364758.min.js` and `https://hostname.com/static/js/subdirectory/javascript.464388.min.js`.
+The `--service` and `--release-version` parameters must match the `service` and `version` tags on your RUM events. For more information on how to setup these tags, refer to the [Browser SDK initialization documentation][2]. The sourcemaps that have been uploaded will then be used to de-obfuscate errors collected by the RUM SDK.
 
-The RUM SDK instantly collects errors that occur in user sessions. When a given error originates in a file that was downloaded from one of these URLs and is tagged with `version:v35.2395005` and `service:my-service`, the related source map is used to de-obfuscate the stack trace (in this example, the `javascript.464388.js.map` file).
+By running the command against the example `dist` directory, Datadog expects your server or CDN to deliver the Javascript files at `https://hostname.com/static/js/javascript.364758.min.js` and `https://hostname.com/static/js/subdirectory/javascript.464388.min.js`.
 
 **Note**: Only source maps with the `.js.map` extension work to correctly unminify stack traces in Error Tracking. Source maps with other extensions such as `.mjs.map` are accepted but do not unminify stack traces.
 
 <div class="alert alert-info">If you are serving the same JavaScript source files from different subdomains, upload the related source map once and make it work for multiple subdomains by using the absolute prefix path instead of the full URL. For example, specify <code>/static/js</code> instead of <code>https://hostname.com/static/js</code>).</div>
 
-If you have successfully uploaded source maps but they do not appear in the RUM dashboard, see [RUM Browser Troubleshooting][2].
-
 ### Link stack frames to your source code
 
-If you run `datadog-ci sourcemaps upload` withing a Git repository, it will automatically collect metadata about the repository, including the repository URL, current commit hash and the list of file paths in the repository that relate to your sourcemaps. For more details about git metadata collection, refer to [datadog-ci documentation][3].
+If you run `datadog-ci sourcemaps upload` withing a Git repository, it will automatically collect metadata about the repository, including the repository URL, current commit hash and the list of file paths in the repository that relate to your source maps. For more details about git metadata collection, refer to [datadog-ci documentation][3].
 
 Datadog will then display links to your source code on unminified stack frames.
 
@@ -141,7 +139,7 @@ The following example displays a minified stack trace:
 
 {{< img src="real_user_monitoring/error_tracking/minified_stacktrace.png" alt="Error Tracking Minified Stack Trace" >}}
 
-On the other hand, an unminified stack trace provides you with all the context you need for quick, seamless troubleshooting, as well as a direct link to your repository:
+On the other hand, an unminified stack trace provides you with all the context you need for quick, seamless troubleshooting. For stack frames that relate to your source code, Datadog also generates a direct link to your repository:
 
 {{< img src="real_user_monitoring/error_tracking/unminified_stacktrace.png" alt="Error Tracking Unminified Stack Trace" >}}
 
@@ -150,5 +148,5 @@ On the other hand, an unminified stack trace provides you with all the context y
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/sourcemaps
-[2]: /real_user_monitoring/browser/troubleshooting/
+[2]: https://docs.datadoghq.com/real_user_monitoring/browser/#initialization-parameters
 [3]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/sourcemaps#link-errors-with-your-source-code
