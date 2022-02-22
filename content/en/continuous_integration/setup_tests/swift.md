@@ -102,8 +102,8 @@ Set all these variables in your test target:
 **Recommended**: `$(DD_TEST_RUNNER)`<br/>
 **Example**: `true`
 
-`DATADOG_CLIENT_TOKEN`
-: Use the [Datadog Client Token][1] to report test results. Alternatively, use an API key.<br/>
+`DD_API_KEY`
+: Use the [Datadog API Key][1] to report test results.<br/>
 **Default**: `(empty)`<br/>
 **Example**: `pub0zxxxyyyxxxyyxxxzzxxyyxxxyyy`
 
@@ -682,6 +682,6 @@ Always call `session.end()` at the end so that all the test info is flushed to D
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/organization-settings/client-tokens
+[1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: /getting_started/site/
 [3]: https://opentelemetry.io/
