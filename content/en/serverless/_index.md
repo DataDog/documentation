@@ -37,7 +37,9 @@ further_reading:
  
 <div class="alert alert-info">Make sure to check out discussions going on in the <a href="https://datadoghq.slack.com/archives/CFDPB83M4">#serverless</a> channel in the <a href="https://chat.datadoghq.com/">Datadog Slack community</a>.</div>
 
-[Datadog Serverless Monitoring][1] provides full visibility into all of the managed services that power your serverless applications by bringing together real-time metrics, logs and traces from your Lambda functions as well as related fully-managed APIs, queues, streams and data stores.
+[Datadog Serverless Monitoring][1] provides full visibility into all of the managed services that power your serverless applications by bringing together real-time metrics, logs and traces from your serverless compute as well as related fully-managed APIs, queues, streams and data stores.
+
+The following section outlines Datadog's solution for monitoring AWS serverless applications and Lambda functions. You can also learn more about support for monitoring [Azure serverless][7] and [Google serverless][8] applications.
 
 ## Quick start
 
@@ -113,3 +115,5 @@ Google Cloud Functions is a lightweight, event-based, asynchronous compute solut
 [4]: /integrations/google_cloud_platform/
 [5]: https://app.datadoghq.com/signup/
 [6]: https://app.datadoghq.com/signup/agent#lambda
+[7]: /serverless/#azure-app-service
+[8]: /serverless/#google-cloud-functions
