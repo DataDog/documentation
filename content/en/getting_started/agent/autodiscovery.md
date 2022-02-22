@@ -76,76 +76,18 @@ Setting up Autodiscovery for your infrastructure requires the following two step
 
 ### Enable Autodiscovery
 
-#### With the Agent on a host
+The Agent automatically detects reachable sockets and API Endpoints (Docker, containerd, Kubernetes API, etc.) and activates Autodiscovery for you.
+If Autodiscovery is not working, you can verify the detected features by running `agent status`.
 
-{{< tabs >}}
-{{% tab "Docker" %}}
-
-Add the following configuration block in the `datadog.yaml` [configuration file][1].
-
+In case the automatic detection failed or if you want to deactivate automatically detected features, you can use these configuration parameters in `datadog.yaml` to include/exclude features:
 ```yaml
-listeners:
-  - name: docker
-config_providers:
-  - name: docker
-    polling: true
+autoconfig_exclude_features:
+- docker
+autoconfig_include_features:
+- containerd
 ```
 
-[1]: /agent/guide/agent-configuration-files/?tab=agentv6#agent-main-configuration-file
-{{% /tab %}}
-{{% tab "Kubernetes" %}}
-
-Add the following configuration block in the `datadog.yaml` [configuration file][1].
-
-```yaml
-listeners:
-  - name: kubelet
-config_providers:
-  - name: kubelet
-    polling: true
-  # needed to support legacy docker label config templates
-  - name: docker
-    polling: true
-```
-
-[1]: /agent/guide/agent-configuration-files/?tab=agentv6#agent-main-configuration-file
-{{% /tab %}}
-{{% tab "ECS Fargate" %}}
-
-ECS Fargate cannot be monitored with the Datadog Agent running as a binary on a host.
-
-{{% /tab %}}
-{{< /tabs >}}
-
-#### With the Agent as a container
-
-{{< tabs >}}
-{{% tab "Docker" %}}
-
-To automatically enable Autodiscovery over Docker containers, mount `/var/run/docker.sock` into the Containerized Agent. On Windows, mount `\\.\pipe\docker_engine`.
-
-{{% /tab %}}
-{{% tab "Kubernetes" %}}
-
-Autodiscovery is enabled by default on Kubernetes.
-
-To verify this, ensure the following environment variable is set:
-
-```shell
-KUBERNETES=yes
-```
-
-{{% /tab %}}
-{{% tab "ECS Fargate" %}}
-
-To enable Autodiscovery over containers within Kubernetes, add the following environment variable when starting the containerized Agent:
-
-```shell
-ECS_FARGATE=true
-```
-
-{{% /tab %}}
-{{< /tabs >}}
+The complete list of automatically detected features are available in `datadog.yaml` template.
 
 ### Integration templates
 
