@@ -120,11 +120,12 @@ In your docker run command to spin up the Datadog Agent, add `DD_APM_IGNORE_RESO
 
 {{< code-block lang="bash" >}}
 docker run -d --name datadog-agent \
+              --cgroupns host \
               -v /var/run/docker.sock:/var/run/docker.sock:ro \
               -v /proc/:/host/proc/:ro \
               -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
               -e DD_API_KEY=<> \
-        -e DD_APM_IGNORE_RESOURCES="Api::HealthchecksController#index$" \
+              -e DD_APM_IGNORE_RESOURCES="Api::HealthchecksController#index$" \
               -e DD_APM_ENABLED=true \
               -e DD_APM_NON_LOCAL_TRAFFIC=true \
               gcr.io/datadoghq/agent:latest

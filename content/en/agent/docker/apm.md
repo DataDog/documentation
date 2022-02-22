@@ -40,7 +40,8 @@ For example, the following command allows the Agent to receive traces from your 
 {{% tab "Linux" %}}
 
 ```shell
-docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
+docker run -d --cgroupns host \
+              -v /var/run/docker.sock:/var/run/docker.sock:ro \
               -v /proc/:/host/proc/:ro \
               -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
               -p 127.0.0.1:8126:8126/tcp \
@@ -110,6 +111,7 @@ Then start the Agent and the application container, connected to the network pre
 # Datadog Agent
 docker run -d --name datadog-agent \
               --network <NETWORK_NAME> \
+              --cgroupns host \
               -v /var/run/docker.sock:/var/run/docker.sock:ro \
               -v /proc/:/host/proc/:ro \
               -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
@@ -133,6 +135,7 @@ Where your `<DATADOG_SITE>` is {{< region-param key="dd_site" code="true" >}} (d
 ```bash
 # Datadog Agent
 docker run -d --name datadog-agent \
+              --cgroupns host \
               --network "<NETWORK_NAME>" \
               -e DD_API_KEY=<DATADOG_API_KEY> \
               -e DD_APM_ENABLED=true \
