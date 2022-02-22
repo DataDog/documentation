@@ -36,11 +36,13 @@ To create a [CI Pipeline monitor][2] in Datadog, use the main navigation: *Monit
 
 1. Construct a search query using the same logic as a CI Pipeline explorer search.
 2. Select the CI Pipeline events level to monitor:
-    * **Monitor over the `Pipeline` level**: If the `Pipeline` level is selected, the monitor will only evaluate the search query in the pipeline as a whole.
-    * **Monitor over the `Stage` level**: If the `Stage` level is selected, the monitor will only evaluate the search query in the stages of every pipeline.
-    * **Monitor over the `Job` level**: If the `Job` level is selected, the monitor will only evaluate the search query in the jobs of every pipeline.
-    * **Monitor over the `Command` level**: If the `Command` level is selected, the monitor will only evaluate the search query in the custom commands executed in every pipeline.
-    * **Monitor over all the levels**: If the `All` level is selected, the monitor will evaluate the search query in all the described levels before.
+    * **Monitor over the `Pipeline` level**: If the `Pipeline` level is selected, the monitor will only include pipeline events for evaluation, which represent the execution of an entire pipeline, usually composed of one or more jobs.
+    * **Monitor over the `Stage` level**: If the `Stage` level is selected, the monitor will only include stage events for evaluation, which represent the execution of a group of one or more jobs in CI providers that support it.
+    * **Monitor over the `Job` level**: If the `Job` level is selected, the monitor will only include job events for evaluation, which represent the execution of a group of commands.
+    * **Monitor over the `Command` level**: If the `Command` level is selected, the monitor will only include manually instrumented [custom command][5] events for evaluation, which represent individual commands being executed in a job.
+    * **Monitor over all levels**: If the `All` level is selected, the monitor will include all types of events for evaluation.
+    
+[5]: /continuous_integration/setup_pipelines/custom_commands/
 3. Choose to monitor over a CI Pipeline event count, facet, or measure:
     * **Monitor over a CI Pipeline event count**: Use the search bar (optional) and do **not** select a facet or measure. Datadog evaluates the number of CI Pipeline events over a selected time frame, then compares it to the threshold conditions.
     * **Monitor over a dimension**: If a dimension (qualitative facet) is selected, the monitor alerts over the `Unique value count` of the facet.
@@ -76,28 +78,6 @@ For detailed instructions on the advanced alert options (evaluation delay, etc.)
 ### Notifications
 
 For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][4] page.
-
-#### Enrich the monitor message with event attributes
-
-You can use all the attributes stored in a CI Pipeline event in your notification message using the `{{cipipeline.attributes.<attribute>}}` syntax. You can use all the CI Pipeline facets to build your custom notification message.
-
-In the following example, we're configuring a notification message using the Git repository URL stored in the CI Pipeline event attributes.
-
-```text
-{{#is_alert}}
-This is a sample notification message for the repository {{cipipeline.attributes.git.repository_url}}
-{{/is_alert}}
-```
-
-You can mix CI Pipeline event attributes with the variable populated through the facet used to group the alerts.
-
-In the following example, we're configuring a notification message using the Git repository URL stored in the CI Pipeline event attributes and using the variable populated using the facet to group the alerts.
-
-```text
-{{#is_alert}}
-This is a sample notification message for the repository {{cipipeline.attributes.git.repository_url}} in the {{[@ci.pipeline.name].name}}
-{{/is_alert}}
-```
 
 #### Notifications behavior when there is no data
 
