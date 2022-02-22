@@ -3,138 +3,186 @@ main_left:
     name: Produit
     url: "https://www.datadoghq.com/product/"
     weight: -500
-  - identifier: features
-    name: Fonctionnalités
-    pre: '<i class="icon-features align-middle"></i>'
-    url: 'https://www.datadoghq.com/product/'
-    weight: 1
-    parent: product
-  - identifier: integrations
-    name: Intégrations
-    pre: '<i class="icon-integrations align-middle"></i>'
-    url: 'https://www.datadoghq.com/product/platform/integrations/'
-    weight: 2
-    parent: product
-  - identifier: dashboarding
-    name: Dashboards
-    pre: '<i class="icon-dashboard align-middle"></i>'
-    url: 'https://www.datadoghq.com/product/platform/dashboards/'
-    weight: 3
-    parent: product
   - identifier: infrastructure
+    name: "Infrastructure"
+    parent: product
+    weight: 1
+  - identifier: infrastructure-monitoring
     name: Infrastructure Monitoring
     pre: '<i class="icon-host-map align-middle"></i>'
     url: 'https://www.datadoghq.com/product/infrastructure-monitoring/'
-    weight: 4
-    parent: product
-  - identifier: logs
-    name: Log Management
-    pre: '<i class="icon-log align-middle"></i>'
-    url: 'https://www.datadoghq.com/product/log-management/'
-    weight: 5
-    parent: product
-  - identifier: apm
-    name: APM
-    pre: '<i class="icon-apm align-middle"></i>'
-    url: 'https://www.datadoghq.com/product/apm/'
-    weight: 6
-    parent: product
-  - identifier: profiler
-    name: Profileur en continu
-    pre: '<i class="icon-profiling-1 align-middle"></i>'
-    url: 'https://www.datadoghq.com/product/code-profiling/'
-    weight: 7
-    parent: product
-  - identifier: ci-visibility
-    name: CI Visibility
-    pre: '<i class="icon-ci align-middle"></i>'
-    url: 'https://www.datadoghq.com/product/ci-cd-monitoring/'
-    weight: 8
-    parent: product
-  - identifier: synthetics
-    name: Surveillance Synthetics
-    pre: '<i class="icon-synthetics align-middle"></i>'
-    url: 'https://www.datadoghq.com/product/synthetic-monitoring/'
-    weight: 9
-    parent: product
-  - identifier: rum
-    name: Real User Monitoring
-    pre: '<i class="icon-rum align-middle"></i>'
-    url: 'https://www.datadoghq.com/product/real-user-monitoring/'
-    weight: 10
-    parent: product
+    parent: infrastructure
+    weight: 2
   - identifier: network-performance
     name: Network Performance Monitoring
     pre: '<i class="icon-network align-middle"></i>'
     url: 'https://www.datadoghq.com/product/network-monitoring/network-performance-monitoring/'
-    weight: 11
-    parent: product
+    parent: infrastructure
+    weight: 3
   - identifier: network-device
     name: Network Device Monitoring
     pre: '<i class="icon-ndm align-middle"></i>'
     url: 'https://www.datadoghq.com/product/network-monitoring/network-device-monitoring/'
-    weight: 12
-    parent: product
-  - identifier: security-platform
-    name: Security Platform
-    pre: '<i class="icon-security-platform align-middle"></i>'
-    url: 'https://www.datadoghq.com/product/security-platform/'
-    weight: 13
-    parent: product
-  - identifier: security-monitoring
-    name: Cloud SIEM
-    pre: '<i class="icon-siem align-middle"></i>'
-    url: 'https://www.datadoghq.com/product/security-platform/security-monitoring/'
-    weight: 14
-    parent: product
-  - identifier: cloud-security-posture-management
-    name: CSPM
-    pre: '<i class="icon-cspm align-middle"></i>'
-    url: 'https://www.datadoghq.com/product/security-platform/cloud-security-posture-management/'
-    weight: 15
-    parent: product
-  - identifier: cloud-workload-security
-    name: 'Cloud Workload Security'
-    pre: '<i class="icon-cws align-middle"></i>'
-    url: 'https://www.datadoghq.com/product/security-platform/cloud-workload-security/'
-    weight: 16
-    parent: 'product'
-  - identifier: error-tracking
-    name: 'Error Tracking'
-    pre: '<i class="icon-error-tracking align-middle"></i>'
-    url: 'https://www.datadoghq.com/product/error-tracking/'
-    weight: 17
-    parent: 'product'
-  - identifier: incident
-    name: 'Gestion des incidents'
-    pre: '<i class="icon-incidents align-middle"></i>'
-    url: 'https://www.datadoghq.com/product/incident-management/'
-    weight: 18
-    parent: 'product'
-  - identifier: database
-    name: 'Database Monitoring'
-    pre: '<i class="icon-database-2 align-middle"></i>'
-    url: 'https://www.datadoghq.com/product/database-monitoring/'
-    weight: 19
-    parent: 'product'
+    parent: infrastructure
+    weight: 4
+  # - identifier: "container-monitoring"
+  #   name: "Container Monitoring"
+  #   pre: "<i class='icon-container'></i>"
+  #   url: "product/container-monitoring/"
+  #   parent: "infrastructure"
+  #   weight: 5
   - identifier: serverless
     name: 'Sans serveur'
     pre: '<i class="icon-serverless align-middle"></i>'
     url: 'https://www.datadoghq.com/product/serverless-monitoring/'
+    parent: infrastructure
+    weight: 6
+  - identifier: logs
+    name: "Logs"
+    parent: "product"
+    weight: 7
+  - identifier: logs-management
+    name: Log Management
+    pre: '<i class="icon-log align-middle"></i>'
+    url: 'https://www.datadoghq.com/product/log-management/'
+    parent: logs
+    weight: 8
+  - identifier: "sensitive-data-scanner"
+    name: "Sensitive Data Scanner"
+    pre: "<i class='icon-sds'></i>"
+    url: "product/sensitive-data-scanner/"
+    parent: "logs"
+    weight: 9
+  - identifier: "apm"
+    name: "APM"
+    parent: "product"
+    weight: 10
+  - identifier: distributed-tracing
+    name: Distributed Tracing
+    pre: '<i class="icon-apm align-middle"></i>'
+    url: 'https://www.datadoghq.com/product/apm/'
+    parent: apm
+    weight: 11
+  - identifier: error-tracking
+    name: 'Error Tracking'
+    pre: '<i class="icon-error-tracking align-middle"></i>'
+    url: 'https://www.datadoghq.com/product/error-tracking/'
+    parent: apm
+    weight: 12
+  - identifier: profiler
+    name: Profileur en continu
+    pre: '<i class="icon-profiling-1 align-middle"></i>'
+    url: 'https://www.datadoghq.com/product/code-profiling/'
+    parent: apm
+    weight: 13
+  - identifier: database
+    name: 'Database Monitoring'
+    pre: '<i class="icon-database-2 align-middle"></i>'
+    url: 'https://www.datadoghq.com/product/database-monitoring/'
+    parent: apm
+    weight: 14
+  - identifier: ci-visibility
+    name: CI Visibility
+    pre: '<i class="icon-ci align-middle"></i>'
+    url: 'https://www.datadoghq.com/product/ci-cd-monitoring/'
+    parent: apm
+    weight: 15
+  - identifier: "digital-experience"
+    name: "Digital Experience"
+    parent: "product"
+    weight: 16
+  - identifier: rum
+    name: Real User Monitoring
+    pre: '<i class="icon-rum align-middle"></i>'
+    url: 'https://www.datadoghq.com/product/real-user-monitoring/'
+    parent: digital-experience
+    weight: 17
+  - identifier: synthetics
+    name: Surveillance Synthetics
+    pre: '<i class="icon-synthetics align-middle"></i>'
+    url: 'https://www.datadoghq.com/product/synthetic-monitoring/'
+    parent: digital-experience
+    weight: 18
+  - identifier: "session-replay"
+    name: "Session Replay"
+    pre: "<i class='icon-play-circle'></i>"
+    url: "product/real-user-monitoring/session-replay/"
+    parent: "digital-experience"
+    weight: 19
+  - identifier: "security"
+    name: "Security"
+    parent: "product"
     weight: 20
-    parent: 'product'
+  - identifier: security-platform
+    name: Security Platform
+    pre: '<i class="icon-security-platform align-middle"></i>'
+    url: 'https://www.datadoghq.com/product/security-platform/'
+    parent: security
+    weight: 21
+  - identifier: "posture-management"
+    name: "Posture Management"
+    pre: "<i class='icon-cspm'></i>"
+    url: "product/security-platform/posture-management/"
+    parent: "security"
+    weight: 22
+  - identifier: "workload-security"
+    name: "Workload Security"
+    pre: "<i class='icon-cws'></i>"
+    url: "product/security-platform/workload-security/"
+    parent: "security"
+    weight: 23
+  - identifier: "cloud-siem"
+    name: "Cloud SIEM"
+    pre: "<i class='icon-siem'></i>"
+    url: "product/security-platform/cloud-siem/"
+    parent: "security"
+    weight: 24
+  - identifier: "platform-capabilities"
+    name: "Platform Capabilities"
+    parent: "product"
+    weight: 25
+  - identifier: dashboarding
+    name: Dashboards
+    pre: '<i class="icon-dashboard align-middle"></i>'
+    url: 'https://www.datadoghq.com/product/platform/dashboards/'
+    parent: platform-capabilities
+    weight: 26
+  # - identifier: "slos"
+  #   name: "SLOs"
+  #   pre: "<i class='icon-slos'></i>"
+  #   url: "product/platform/service-level-objective/"
+  #   parent: "platform-capabilities"
+  #   weight: 27
+  # - identifier: "watchdog"
+  #   name: "Watchdog (AI/ML)"
+  #   pre: "<i class='icon-agent-fill-2'></i>"
+  #   url: "product/platform/watchdog/"
+  #   parent: "platform-capabilities"
+  #   weight: 28
   - identifier: alerts
     name: 'Alertes'
     pre: '<i class="icon-monitor align-middle"></i>'
     url: 'https://www.datadoghq.com/product/alerts/'
-    weight: 21
-    parent: 'product'
+    parent: platform-capabilities
+    weight: 29
+  - identifier: incident
+    name: 'Gestion des incidents'
+    pre: '<i class="icon-incidents align-middle"></i>'
+    url: 'https://www.datadoghq.com/product/incident-management/'
+    parent: platform-capabilities
+    weight: 30
+  - identifier: integrations
+    name: Intégrations
+    pre: '<i class="icon-integrations align-middle"></i>'
+    url: 'https://www.datadoghq.com/product/platform/integrations/'
+    parent: platform-capabilities
+    weight: 31
   - identifier: api
     name: 'API'
     pre: '<i class="icon-api align-middle"></i>'
     url: 'https://docs.datadoghq.com/fr/api'
-    weight: 22
-    parent: 'product'
+    parent: platform-capabilities
+    weight: 32
   - identifier: customers
     name: Clients
     url: "https://www.datadoghq.com/customers/"
