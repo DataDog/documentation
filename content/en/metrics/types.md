@@ -290,11 +290,12 @@ Submit your HISTOGRAM type metrics from one of the following sources:
 | [Agent check][1]  | `self.histogram(...)`      | HISTOGRAM       | GAUGE, RATE          |
 | [DogStatsD][2]    | `dog.histogram(...)`       | HISTOGRAM       | GAUGE, RATE          |
 
-**Note**: If you submit a TIMER metric to the Datadog Agent, it is equivalent to submitting a HISTOGRAM metric type within DogStatsD (not to be confused with timers in the standard StatsD). Timers represent duration data only. For example, the amount of time a section of code takes to execute or how long it takes to fully render a page.
+Submitting a TIMER metric to the Datadog Agent is equivalent to submitting a HISTOGRAM metric type within DogStatsD (not to be confused with timers in the standard StatsD). [DogStatsD `TIMER`][3] represents duration data only. For example, the amount of time a section of code takes to execute or how long it takes to fully render a page.
 
 
 [1]: /metrics/agent_metrics_submission/?tab=histogram
 [2]: /metrics/dogstatsd_metrics_submission/#histogram
+[3]: /metrics/dogstatsd_metrics_submission/#timer
 {{% /tab %}}
 {{% tab "DISTRIBUTION" %}}
 

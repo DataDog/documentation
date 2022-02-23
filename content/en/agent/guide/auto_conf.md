@@ -3,6 +3,7 @@ title: Autodiscovery Auto-Configuration
 kind: faq
 aliases:
  - /agent/autodiscovery/auto_conf
+ - /agent/faq/auto_conf
 further_reading:
 - link: "/agent/kubernetes/integrations/"
   tag: "Documentation"

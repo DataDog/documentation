@@ -1,506 +1,637 @@
 {
   "CreateAuthNMapping": [
     {
+      "group": "authn_mappings",
       "suffix": "",
       "description": "Create an AuthN Mapping returns \"OK\" response"
     }
   ],
   "DeleteAuthNMapping": [
     {
+      "group": "authn_mappings",
       "suffix": "",
       "description": "Delete an AuthN Mapping returns \"OK\" response"
     }
   ],
   "UpdateAuthNMapping": [
     {
+      "group": "authn_mappings",
       "suffix": "",
       "description": "Edit an AuthN Mapping returns \"OK\" response"
     }
   ],
   "GetAuthNMapping": [
     {
+      "group": "authn_mappings",
       "suffix": "",
       "description": "Get an AuthN Mapping by UUID returns \"OK\" response"
     }
   ],
   "ListAuthNMappings": [
     {
+      "group": "authn_mappings",
       "suffix": "",
       "description": "List all AuthN Mappings returns \"OK\" response"
     }
   ],
   "CreateCloudWorkloadSecurityAgentRule": [
     {
+      "group": "cloud_workload_security",
       "suffix": "",
       "description": "Create a Cloud Workload Security Agent rule returns \"OK\" response"
     }
   ],
   "DeleteCloudWorkloadSecurityAgentRule": [
     {
+      "group": "cloud_workload_security",
       "suffix": "",
       "description": "Delete a Cloud Workload Security Agent rule returns \"OK\" response"
     }
   ],
   "GetCloudWorkloadSecurityAgentRule": [
     {
+      "group": "cloud_workload_security",
       "suffix": "",
       "description": "Get a Cloud Workload Security Agent rule returns \"OK\" response"
     }
   ],
   "ListCloudWorkloadSecurityAgentRules": [
     {
+      "group": "cloud_workload_security",
       "suffix": "",
       "description": "Get all Cloud Workload Security Agent rules returns \"OK\" response"
     }
   ],
   "DownloadCloudWorkloadPolicyFile": [
     {
+      "group": "cloud_workload_security",
       "suffix": "",
       "description": "Get the latest Cloud Workload Security policy returns \"OK\" response"
     }
   ],
   "UpdateCloudWorkloadSecurityAgentRule": [
     {
+      "group": "cloud_workload_security",
       "suffix": "",
       "description": "Update a Cloud Workload Security Agent rule returns \"OK\" response"
     }
   ],
   "CreateIncidentService": [
     {
+      "group": "incident_services",
       "suffix": "",
       "description": "Create a new incident service returns \"CREATED\" response"
     }
   ],
   "DeleteIncidentService": [
     {
+      "group": "incident_services",
       "suffix": "",
       "description": "Delete an existing incident service returns \"OK\" response"
     }
   ],
   "ListIncidentServices": [
     {
+      "group": "incident_services",
       "suffix": "",
       "description": "Get a list of all incident services returns \"OK\" response"
     }
   ],
   "GetIncidentService": [
     {
+      "group": "incident_services",
       "suffix": "",
       "description": "Get details of an incident service returns \"OK\" response"
     }
   ],
   "UpdateIncidentService": [
     {
+      "group": "incident_services",
       "suffix": "",
       "description": "Update an existing incident service returns \"OK\" response"
     }
   ],
   "CreateIncidentTeam": [
     {
+      "group": "incident_teams",
       "suffix": "",
       "description": "Create a new incident team returns \"CREATED\" response"
     }
   ],
   "DeleteIncidentTeam": [
     {
+      "group": "incident_teams",
       "suffix": "",
       "description": "Delete an existing incident team returns \"OK\" response"
     }
   ],
   "ListIncidentTeams": [
     {
+      "group": "incident_teams",
       "suffix": "",
       "description": "Get a list of all incident teams returns \"OK\" response"
     }
   ],
   "GetIncidentTeam": [
     {
+      "group": "incident_teams",
       "suffix": "",
       "description": "Get details of an incident team returns \"OK\" response"
     }
   ],
   "UpdateIncidentTeam": [
     {
+      "group": "incident_teams",
       "suffix": "",
       "description": "Update an existing incident team returns \"OK\" response"
     }
   ],
+  "UpdateIncident": [
+    {
+      "group": "incidents",
+      "suffix": "_3369341440",
+      "description": "Add commander to an incident returns \"OK\" response"
+    },
+    {
+      "group": "incidents",
+      "suffix": "_1009194038",
+      "description": "Remove commander from an incident returns \"OK\" response"
+    },
+    {
+      "group": "incidents",
+      "suffix": "",
+      "description": "Update an existing incident returns \"OK\" response"
+    }
+  ],
+  "CreateIncident": [
+    {
+      "group": "incidents",
+      "suffix": "",
+      "description": "Create an incident returns \"CREATED\" response"
+    }
+  ],
+  "DeleteIncident": [
+    {
+      "group": "incidents",
+      "suffix": "",
+      "description": "Delete an existing incident returns \"OK\" response"
+    }
+  ],
+  "ListIncidents": [
+    {
+      "group": "incidents",
+      "suffix": "",
+      "description": "Get a list of incidents returns \"OK\" response"
+    }
+  ],
+  "GetIncident": [
+    {
+      "group": "incidents",
+      "suffix": "",
+      "description": "Get the details of an incident returns \"OK\" response"
+    }
+  ],
   "CreateAPIKey": [
     {
+      "group": "key_management",
       "suffix": "",
       "description": "Create an API key returns \"Created\" response"
     }
   ],
   "CreateCurrentUserApplicationKey": [
     {
+      "group": "key_management",
       "suffix": "_1999509896",
       "description": "Create an Application key for current user returns \"Created\" response"
     },
     {
+      "group": "key_management",
       "suffix": "_3383369233",
       "description": "Create an Application key with scopes for current user returns \"Created\" response"
     }
   ],
   "DeleteAPIKey": [
     {
+      "group": "key_management",
       "suffix": "",
       "description": "Delete an API key returns \"No Content\" response"
     }
   ],
   "DeleteCurrentUserApplicationKey": [
     {
+      "group": "key_management",
       "suffix": "_1266687064",
       "description": "Delete an Application key owned by current user returns \"No Content\" response"
     }
   ],
   "DeleteApplicationKey": [
     {
+      "group": "key_management",
       "suffix": "_771691550",
       "description": "Delete an Application key returns \"No Content\" response"
     }
   ],
   "UpdateAPIKey": [
     {
+      "group": "key_management",
       "suffix": "",
       "description": "Edit an API key returns \"OK\" response"
     }
   ],
   "UpdateCurrentUserApplicationKey": [
     {
+      "group": "key_management",
       "suffix": "",
       "description": "Edit an application key owned by current user returns \"OK\" response"
     }
   ],
   "UpdateApplicationKey": [
     {
+      "group": "key_management",
       "suffix": "",
       "description": "Edit an application key returns \"OK\" response"
     }
   ],
   "GetAPIKey": [
     {
+      "group": "key_management",
       "suffix": "",
       "description": "Get API key returns \"OK\" response"
     }
   ],
   "ListAPIKeys": [
     {
+      "group": "key_management",
       "suffix": "",
       "description": "Get all API keys returns \"OK\" response"
     }
   ],
   "ListCurrentUserApplicationKeys": [
     {
+      "group": "key_management",
       "suffix": "_1503860964",
       "description": "Get all Application keys owned by current user returns \"OK\" response"
     }
   ],
   "ListApplicationKeys": [
     {
+      "group": "key_management",
       "suffix": "_2237010090",
       "description": "Get all Application keys returns \"OK\" response"
     }
   ],
   "GetApplicationKey": [
     {
+      "group": "key_management",
       "suffix": "",
       "description": "Get an application key returns \"OK\" response"
     }
   ],
   "GetCurrentUserApplicationKey": [
     {
+      "group": "key_management",
       "suffix": "_1060640890",
       "description": "Get one Application key owned by current user returns \"OK\" response"
     }
   ],
   "AggregateLogs": [
     {
+      "group": "logs",
       "suffix": "_2527007002",
       "description": "Aggregate compute events returns \"OK\" response"
     },
     {
+      "group": "logs",
       "suffix": "",
       "description": "Aggregate events returns \"OK\" response"
     }
   ],
   "ListLogsGet": [
     {
+      "group": "logs",
       "suffix": "_2034110533",
       "description": "Get a quick list of logs returns \"OK\" response"
     }
   ],
   "ListLogs": [
     {
+      "group": "logs",
       "suffix": "",
       "description": "Search logs returns \"OK\" response"
     }
   ],
   "SubmitLog": [
     {
+      "group": "logs",
       "suffix": "_904601870",
       "description": "Send deflate logs returns \"Request accepted for processing (always 202 empty JSON).\" response"
     },
     {
+      "group": "logs",
       "suffix": "_3496222707",
       "description": "Send gzip logs returns \"Request accepted for processing (always 202 empty JSON).\" response"
     }
   ],
   "CreateLogsMetric": [
     {
+      "group": "logs_metrics",
       "suffix": "",
       "description": "Create a log-based metric returns \"OK\" response"
     }
   ],
   "DeleteLogsMetric": [
     {
+      "group": "logs_metrics",
       "suffix": "",
       "description": "Delete a log-based metric returns \"OK\" response"
     }
   ],
   "GetLogsMetric": [
     {
+      "group": "logs_metrics",
       "suffix": "",
       "description": "Get a log-based metric returns \"OK\" response"
     }
   ],
   "ListLogsMetrics": [
     {
+      "group": "logs_metrics",
       "suffix": "",
       "description": "Get all log-based metrics returns \"OK\" response"
     }
   ],
   "UpdateLogsMetric": [
     {
+      "group": "logs_metrics",
       "suffix": "",
       "description": "Update a log-based metric returns \"OK\" response"
     }
   ],
   "CreateBulkTagsMetricsConfiguration": [
     {
+      "group": "metrics",
       "suffix": "",
       "description": "Configure tags for multiple metrics returns \"Accepted\" response"
     }
   ],
   "ListTagConfigurations": [
     {
+      "group": "metrics",
       "suffix": "_1799362914",
       "description": "List tag configurations with a tag filter returns \"Success\" response"
     }
   ],
   "ListProcesses": [
     {
+      "group": "processes",
       "suffix": "",
       "description": "Get all processes returns \"OK\" response"
     }
   ],
   "AddUserToRole": [
     {
+      "group": "roles",
       "suffix": "",
       "description": "Add a user to a role returns \"OK\" response"
     }
   ],
   "CloneRole": [
     {
+      "group": "roles",
       "suffix": "",
       "description": "Create a new role by cloning an existing role returns \"OK\" response"
     }
   ],
   "CreateRole": [
     {
+      "group": "roles",
       "suffix": "",
       "description": "Create role returns \"OK\" response"
     }
   ],
   "DeleteRole": [
     {
+      "group": "roles",
       "suffix": "",
       "description": "Delete role returns \"OK\" response"
     }
   ],
   "GetRole": [
     {
+      "group": "roles",
       "suffix": "",
       "description": "Get a role returns \"OK\" response"
     }
   ],
   "ListRoleUsers": [
     {
+      "group": "roles",
       "suffix": "",
       "description": "Get all users of a role returns \"OK\" response"
     }
   ],
   "AddPermissionToRole": [
     {
+      "group": "roles",
       "suffix": "",
       "description": "Grant permission to a role returns \"OK\" response"
     }
   ],
   "ListRolePermissions": [
     {
+      "group": "roles",
       "suffix": "",
       "description": "List permissions for a role returns \"OK\" response"
     }
   ],
   "ListPermissions": [
     {
+      "group": "roles",
       "suffix": "",
       "description": "List permissions returns \"OK\" response"
     }
   ],
   "ListRoles": [
     {
+      "group": "roles",
       "suffix": "",
       "description": "List roles returns \"OK\" response"
     }
   ],
   "RemoveUserFromRole": [
     {
+      "group": "roles",
       "suffix": "",
       "description": "Remove a user from a role returns \"OK\" response"
     }
   ],
   "RemovePermissionFromRole": [
     {
+      "group": "roles",
       "suffix": "",
       "description": "Revoke permission returns \"OK\" response"
     }
   ],
   "UpdateRole": [
     {
+      "group": "roles",
       "suffix": "",
       "description": "Update a role returns \"OK\" response"
     }
   ],
   "CreateSecurityMonitoringRule": [
     {
+      "group": "security_monitoring",
       "suffix": "",
       "description": "Create a detection rule returns \"OK\" response"
     },
     {
+      "group": "security_monitoring",
       "suffix": "_498211763",
       "description": "Create a detection rule with type 'workload_security' returns \"OK\" response"
     }
   ],
   "CreateSecurityFilter": [
     {
+      "group": "security_monitoring",
       "suffix": "",
       "description": "Create a security filter returns \"OK\" response"
     }
   ],
   "DeleteSecurityFilter": [
     {
+      "group": "security_monitoring",
       "suffix": "_555029489",
       "description": "Delete a security filter returns \"No Content\" response"
     }
   ],
   "DeleteSecurityMonitoringRule": [
     {
+      "group": "security_monitoring",
       "suffix": "",
       "description": "Delete an existing rule returns \"OK\" response"
     }
   ],
   "GetSecurityFilter": [
     {
+      "group": "security_monitoring",
       "suffix": "",
       "description": "Get a security filter returns \"OK\" response"
     }
   ],
   "ListSecurityFilters": [
     {
+      "group": "security_monitoring",
       "suffix": "",
       "description": "Get all security filters returns \"OK\" response"
     }
   ],
   "UpdateSecurityFilter": [
     {
+      "group": "security_monitoring",
       "suffix": "",
       "description": "Update a security filter returns \"OK\" response"
     }
   ],
   "CreateServiceAccountApplicationKey": [
     {
+      "group": "service_accounts",
       "suffix": "_1761876297",
       "description": "Create an app key for this service account returns \"Created\" response"
     },
     {
+      "group": "service_accounts",
       "suffix": "_3480494373",
       "description": "Create an application key with scopes for this service account returns \"Created\" response"
     }
   ],
   "DeleteServiceAccountApplicationKey": [
     {
+      "group": "service_accounts",
       "suffix": "_992091161",
       "description": "Delete an app key owned by this service account returns \"No Content\" response"
     }
   ],
   "UpdateServiceAccountApplicationKey": [
     {
+      "group": "service_accounts",
       "suffix": "_768415790",
       "description": "Edit an app key owned by this service account returns \"OK\" response"
     }
   ],
   "ListServiceAccountApplicationKeys": [
     {
+      "group": "service_accounts",
       "suffix": "_1268914341",
       "description": "Get all app keys owned by this service account returns \"OK\" response"
     }
   ],
   "GetServiceAccountApplicationKey": [
     {
+      "group": "service_accounts",
       "suffix": "_819075131",
       "description": "Get one app key owned by this service account returns \"OK\" response"
     }
   ],
   "CreateServiceAccount": [
     {
+      "group": "users",
       "suffix": "",
       "description": "Create a service account returns \"OK\" response"
     }
   ],
   "CreateUser": [
     {
+      "group": "users",
       "suffix": "",
       "description": "Create a user returns \"OK\" response"
     }
   ],
   "DisableUser": [
     {
+      "group": "users",
       "suffix": "",
       "description": "Disable a user returns \"OK\" response"
     }
   ],
   "GetInvitation": [
     {
+      "group": "users",
       "suffix": "",
       "description": "Get a user invitation returns \"OK\" response"
     }
   ],
   "ListUserPermissions": [
     {
+      "group": "users",
       "suffix": "",
       "description": "Get a user permissions returns \"OK\" response"
     }
   ],
   "GetUser": [
     {
+      "group": "users",
       "suffix": "_3047557953",
       "description": "Get a user returns \"OK\" response"
     }
   ],
   "ListUsers": [
     {
+      "group": "users",
       "suffix": "",
       "description": "List all users returns \"OK\" response"
     }
   ],
   "SendInvitations": [
     {
+      "group": "users",
       "suffix": "",
       "description": "Send invitation emails returns \"OK\" response"
     }
   ],
   "UpdateUser": [
     {
+      "group": "users",
       "suffix": "",
       "description": "Update a user returns \"OK\" response"
     }

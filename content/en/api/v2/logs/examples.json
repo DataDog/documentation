@@ -10,7 +10,7 @@
           "errors": [
             {
               "detail": "Malformed payload",
-              "status": 400,
+              "status": "400",
               "title": "Bad Request"
             }
           ]
@@ -22,7 +22,7 @@
           "errors": [
             {
               "detail": "Malformed payload",
-              "status": 400,
+              "status": "400",
               "title": "Bad Request"
             }
           ]
@@ -34,7 +34,7 @@
           "errors": [
             {
               "detail": "Malformed payload",
-              "status": 400,
+              "status": "400",
               "title": "Bad Request"
             }
           ]
@@ -46,7 +46,7 @@
           "errors": [
             {
               "detail": "Malformed payload",
-              "status": 400,
+              "status": "400",
               "title": "Bad Request"
             }
           ]
@@ -58,7 +58,7 @@
           "errors": [
             {
               "detail": "Malformed payload",
-              "status": 400,
+              "status": "400",
               "title": "Bad Request"
             }
           ]
@@ -70,7 +70,7 @@
           "errors": [
             {
               "detail": "Malformed payload",
-              "status": 400,
+              "status": "400",
               "title": "Bad Request"
             }
           ]
@@ -82,7 +82,7 @@
           "errors": [
             {
               "detail": "Malformed payload",
-              "status": 400,
+              "status": "400",
               "title": "Bad Request"
             }
           ]
@@ -94,7 +94,7 @@
           "errors": [
             {
               "detail": "Malformed payload",
-              "status": 400,
+              "status": "400",
               "title": "Bad Request"
             }
           ]

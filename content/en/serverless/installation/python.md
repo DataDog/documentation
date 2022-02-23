@@ -11,7 +11,7 @@ further_reading:
 - link: "/serverless/serverless_integrations/cli/"
   tag: "Documentation"
   text: "Datadog Serverless CLI"
-- link: 'serverless/serverless_tagging/'
+- link: '/serverless/troubleshooting/serverless_tagging/'
   tag: 'Documentation'
   text: 'Tagging Serverless Applications'
 - link: 'serverless/distributed_tracing/'
@@ -25,18 +25,11 @@ aliases:
     - /serverless/guide/python/
 ---
 
-## Prerequisites
-
-The [Datadog Forwarder Lambda function][1] is required to ingest AWS Lambda traces, enhanced metrics, custom metrics, and logs.
-
-{{< img src="serverless/serverless_monitoring_installation_instructions.png" alt="Instrument AWS Serverless Applications"  style="width:100%;">}}
-
-If your Python Lambda functions are written in [Python 3.6 or less][1] or you previously set up Datadog Serverless using the Datadog Forwarder, see the [installation instructions here][2].
+<div class="alert alert-warning">If your Python Lambda functions are written in <a href="https://docs.aws.amazon.com/lambda/latest/dg/runtimes-extensions-api.html">Python 3.6 or less</a>, or you previously set up Datadog Serverless using the Datadog Forwarder, see the <a href="http://docs.datadoghq.com/serverless/guide/datadog_forwarder_python">Using the Datadog Forwarder - Python</a> guide.</div>
 
 ## Configuration
 
 Datadog offers many different ways to enable instrumentation for your serverless applications. Choose a method below that best suits your needs. Datadog generally recommends using the Datadog CLI, which does not require redeploying your whole application. The CLI can also be added to your CI/CD pipelines to enable instrumentation for applications across your entire organization.
-
 
 {{< tabs >}}
 {{% tab "Datadog CLI" %}}
@@ -607,7 +600,7 @@ def get_message():
 
 For more information on custom metric submission, see [here][6]. For additional details on custom instrumentation, see the Datadog APM documentation for [custom instrumentation][7].
 
-If your Lambda function is running in a VPC, follow the [Datadog Lambda Extension AWS PrivateLink Setup][8] guide to ensure that the extension can reach Datadog API endpoints.
+If your Lambda function is running in a VPC, follow these [instructions][8] to ensure that the extension can reach Datadog API endpoints.
 
 ## Further Reading
 
@@ -620,4 +613,4 @@ If your Lambda function is running in a VPC, follow the [Datadog Lambda Extensio
 [5]: /serverless/libraries_integrations/forwarder
 [6]: /serverless/custom_metrics?tab=python
 [7]: /tracing/custom_instrumentation/python/
-[8]: /serverless/guide/extension_private_link/
+[8]: /serverless/libraries_integrations/extension/#vpc
