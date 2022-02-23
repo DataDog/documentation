@@ -2,15 +2,15 @@
 title: Instrumenting .NET Serverless Applications
 kind: documentation
 further_reading:
-- link: '/serverless/troubleshooting/serverless_tagging/'
-  tag: "Serverless"
-  text: 'Tagging Serverless Applications'
-- link: 'serverless/distributed_tracing/'
-  tag: "Serverless"
-  text: 'Tracing Serverless Applications'
-- link: 'serverless/custom_metrics/'
-  tag: "Serverless"
-  text: 'Submitting Custom Metrics from Serverless Applications'
+    - link: '/serverless/troubleshooting/serverless_tagging/'
+      tag: 'Serverless'
+      text: 'Tagging Serverless Applications'
+    - link: 'serverless/distributed_tracing/'
+      tag: 'Serverless'
+      text: 'Tracing Serverless Applications'
+    - link: 'serverless/custom_metrics/'
+      tag: 'Serverless'
+      text: 'Submitting Custom Metrics from Serverless Applications'
 ---
 
 To instrument your .NET serverless application, you must use **either** the [Datadog Lambda Extension][1] (beta) or the [Datadog Forwarder Lambda function][2].
@@ -20,6 +20,7 @@ If you use the Datadog Lambda Extension, you can use Datadog's native .NET APM t
 **Note**: The Datadog Lambda Extension only supports the `x86_64` architecture for .NET Lambda functions. If your .NET Lambda function uses the `arm64` architecture, you must use the Datadog Forwarder for instrumentation.
 
 ## Instrumentation
+
 ### Using the Datadog Lambda Extension
 
 <div class="alert alert-warning">
@@ -33,7 +34,7 @@ Datadog offers many different ways to enable instrumentation for your serverless
 
 The Datadog CLI modifies existing Lambda functions' configurations to enable instrumentation without requiring a new deployment. It is the quickest way to get started with Datadog's serverless monitoring.
 
-You can also add the command to your CI/CD pipelines to enable instrumentation for all your serverless applications. Run the command *after* your normal serverless application deployment, so that changes made by the Datadog CLI command are not overridden.
+You can also add the command to your CI/CD pipelines to enable instrumentation for all your serverless applications. Run the command _after_ your normal serverless application deployment, so that changes made by the Datadog CLI command are not overridden.
 
 ### Install
 
@@ -57,6 +58,7 @@ export DATADOG_SITE="<DD_SITE>" # such as datadoghq.com, datadoghq.eu, us3.datad
 export AWS_ACCESS_KEY_ID="<ACCESS KEY ID>"
 export AWS_SECRET_ACCESS_KEY="<ACCESS KEY>"
 ```
+
 ### Instrument
 
 **Note**: Instrument your Lambda functions in a dev or staging environment first! Should the instrumentation result be unsatisfactory, run `uninstrument` with the same arguments to revert the changes.
@@ -64,13 +66,14 @@ export AWS_SECRET_ACCESS_KEY="<ACCESS KEY>"
 To instrument your Lambda functions, run the following command:
 
 ```sh
-datadog-ci lambda instrument -f <functionname> -f <another_functionname> -r <aws_region>  -e <extension_version>
+datadog-ci lambda instrument -f <functionname> -f <another_functionname> -r <aws_region> -e <extension_version>
 ```
 
 To fill in the placeholders:
-- Replace `<functionname>` and `<another_functionname>` with your Lambda function names.
-- Replace `<aws_region>` with the AWS region name.
-- Replace `<extension_version>` with the desired version of the Datadog Lambda Extension. The latest version is `{{< latest-lambda-layer-version layer="extension" >}}`.
+
+-   Replace `<functionname>` and `<another_functionname>` with your Lambda function names.
+-   Replace `<aws_region>` with the AWS region name.
+-   Replace `<extension_version>` with the desired version of the Datadog Lambda Extension. The latest version is `{{< latest-lambda-layer-version layer="extension" >}}`.
 
 For example:
 
@@ -80,9 +83,9 @@ datadog-ci lambda instrument -f my-function -f another-function -r us-east-1 -e 
 
 More information and additional parameters can be found in the [CLI documentation][2].
 
-[1]: https://https://docs.aws.amazon.com/sdk-for-net/v3/developer-guide/net-dg-config-creds.html
-[2]: https://docs.datadoghq.com/serverless/serverless_integrations/cli
 
+[1]: https://docs.aws.amazon.com/sdk-for-net/v3/developer-guide/net-dg-config-creds.html
+[2]: https://docs.datadoghq.com/serverless/serverless_integrations/cli
 {{% /tab %}}
 {{% tab "Serverless Framework" %}}
 
@@ -90,16 +93,16 @@ More information and additional parameters can be found in the [CLI documentatio
 
     ```yml
     your-function:
-      layers:
-        - arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}
-        - arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-dotnet:{{< latest-lambda-layer-version layer="dd-trace-dotnet" >}}
-      environment:
-        DD_TRACE_ENABLED: true
-        DD_API_KEY: "<YOUR_DD_API_KEY>"
-        CORECLR_ENABLE_PROFILING: 1
-        CORECLR_PROFILER: "{846F5F1C-F9AE-4B07-969E-05C26BC060D8}"
-        CORECLR_PROFILER_PATH: "/opt/datadog/Datadog.Trace.ClrProfiler.Native.so"
-        DD_DOTNET_TRACER_HOME: "/opt/datadog"
+        layers:
+            - arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}
+            - arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-dotnet:{{< latest-lambda-layer-version layer="dd-trace-dotnet" >}}
+        environment:
+            DD_TRACE_ENABLED: true
+            DD_API_KEY: '<YOUR_DD_API_KEY>'
+            CORECLR_ENABLE_PROFILING: 1
+            CORECLR_PROFILER: '{846F5F1C-F9AE-4B07-969E-05C26BC060D8}'
+            CORECLR_PROFILER_PATH: '/opt/datadog/Datadog.Trace.ClrProfiler.Native.so'
+            DD_DOTNET_TRACER_HOME: '/opt/datadog'
     ```
 
     Replace `<YOUR_DD_API_KEY>` with your Datadog API key, found on the [API Management page][1].
@@ -116,17 +119,17 @@ More information and additional parameters can be found in the [CLI documentatio
     ```yml
     Type: AWS::Serverless::Function
     Properties:
-      Environment:
-        Variables:
-          DD_TRACE_ENABLED: true
-          DD_API_KEY: "<YOUR_DD_API_KEY>"
-          CORECLR_ENABLE_PROFILING: 1
-          CORECLR_PROFILER: "{846F5F1C-F9AE-4B07-969E-05C26BC060D8}"
-          CORECLR_PROFILER_PATH: "/opt/datadog/Datadog.Trace.ClrProfiler.Native.so"
-          DD_DOTNET_TRACER_HOME: "/opt/datadog"
-      Layers:
-        - arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}
-        - arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-dotnet:{{< latest-lambda-layer-version layer="dd-trace-dotnet" >}}
+        Environment:
+            Variables:
+                DD_TRACE_ENABLED: true
+                DD_API_KEY: '<YOUR_DD_API_KEY>'
+                CORECLR_ENABLE_PROFILING: 1
+                CORECLR_PROFILER: '{846F5F1C-F9AE-4B07-969E-05C26BC060D8}'
+                CORECLR_PROFILER_PATH: '/opt/datadog/Datadog.Trace.ClrProfiler.Native.so'
+                DD_DOTNET_TRACER_HOME: '/opt/datadog'
+        Layers:
+            - arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}
+            - arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-dotnet:{{< latest-lambda-layer-version layer="dd-trace-dotnet" >}}
     ```
 
     Replace `<YOUR_DD_API_KEY>` with your Datadog API key, found on the [API Management page][1].
@@ -261,6 +264,7 @@ LambdaLogger.Log(JsonConvert.SerializeObject(myMetric));
 ```
 
 For more information on custom metric submission, see the [Serverless Custom Metrics documentation][6].
+
 #### Tagging
 
 Although it's optional, Datadog recommends tagging your serverless applications with the `env`, `service`, and `version` tags following the [unified service tagging documentation][7].
@@ -268,11 +272,13 @@ Although it's optional, Datadog recommends tagging your serverless applications 
 ## Collect logs from AWS serverless resources
 
 Serverless logs generated by managed resources besides AWS Lambda functions can be valuable in helping identify the root cause of issues in your serverless applications. Datadog recommends you forward logs from the following managed resources in your environment:
-- APIs: API Gateway, AppSync, Application Load Balancer (ALB)
-- Queues and streams: SQS, SNS, Kinesis
-- Data stores: DynamoDB, S3, RDS, etc.
+
+-   APIs: API Gateway, AppSync, Application Load Balancer (ALB)
+-   Queues and streams: SQS, SNS, Kinesis
+-   Data stores: DynamoDB, S3, RDS, etc.
 
 To collect logs from non-Lambda AWS resources, install and configure the [Datadog Forwarder][2] to subscribe to each of your managed resource CloudWatch log groups.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
