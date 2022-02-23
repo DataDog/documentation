@@ -522,7 +522,7 @@
         ],
         "isEnabled": true,
         "message": "",
-        "name": "My Cloud SIEM rule.",
+        "name": "My security monitoring rule.",
         "options": {},
         "queries": [
           {
@@ -548,7 +548,7 @@
         "hasExtendedTitle": true,
         "isEnabled": true,
         "message": "",
-        "name": "My Cloud SIEM rule.",
+        "name": "My security monitoring rule.",
         "options": {
           "detectionMethod": "string",
           "evaluationWindow": "integer",

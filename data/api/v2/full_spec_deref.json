@@ -28955,7 +28955,7 @@
           },
           "name": {
             "description": "The name of the rule.",
-            "example": "My security monitoring rule.",
+            "example": "My Cloud SIEM rule.",
             "type": "string"
           },
           "options": {
@@ -64753,7 +64753,7 @@
         ],
         "summary": "Get all security filters",
         "tags": [
-          "Security Monitoring"
+          "Cloud SIEM"
         ],
         "x-undo": {
           "type": "safe"
@@ -65100,7 +65100,7 @@
         ],
         "summary": "Create a security filter",
         "tags": [
-          "Security Monitoring"
+          "Cloud SIEM"
         ],
         "x-codegen-request-body-name": "body",
         "x-given": {
@@ -65234,7 +65234,7 @@
         ],
         "summary": "Delete a security filter",
         "tags": [
-          "Security Monitoring"
+          "Cloud SIEM"
         ],
         "x-undo": {
           "type": "idempotent"
@@ -65455,7 +65455,7 @@
         ],
         "summary": "Get a security filter",
         "tags": [
-          "Security Monitoring"
+          "Cloud SIEM"
         ],
         "x-undo": {
           "type": "safe"
@@ -65833,7 +65833,7 @@
         ],
         "summary": "Update a security filter",
         "tags": [
-          "Security Monitoring"
+          "Cloud SIEM"
         ],
         "x-codegen-request-body-name": "body",
         "x-undo": {
@@ -66328,7 +66328,7 @@
         ],
         "summary": "List rules",
         "tags": [
-          "Security Monitoring"
+          "Cloud SIEM"
         ],
         "x-menu-order": 1,
         "x-undo": {
@@ -66436,7 +66436,7 @@
                   },
                   "name": {
                     "description": "The name of the rule.",
-                    "example": "My security monitoring rule.",
+                    "example": "My Cloud SIEM rule.",
                     "type": "string"
                   },
                   "options": {
@@ -67138,7 +67138,7 @@
         ],
         "summary": "Create a detection rule",
         "tags": [
-          "Security Monitoring"
+          "Cloud SIEM"
         ],
         "x-codegen-request-body-name": "body",
         "x-given": {
@@ -67273,7 +67273,7 @@
         ],
         "summary": "Delete an existing rule",
         "tags": [
-          "Security Monitoring"
+          "Cloud SIEM"
         ],
         "x-menu-order": 5,
         "x-undo": {
@@ -67719,7 +67719,7 @@
         ],
         "summary": "Get a rule's details",
         "tags": [
-          "Security Monitoring"
+          "Cloud SIEM"
         ],
         "x-menu-order": 3,
         "x-undo": {
@@ -68561,7 +68561,7 @@
         ],
         "summary": "Update an existing rule",
         "tags": [
-          "Security Monitoring"
+          "Cloud SIEM"
         ],
         "x-codegen-request-body-name": "body",
         "x-menu-order": 4,
@@ -68852,7 +68852,7 @@
         ],
         "summary": "Get a quick list of security signals",
         "tags": [
-          "Security Monitoring"
+          "Cloud SIEM"
         ],
         "x-menu-order": 7,
         "x-undo": {
@@ -69135,7 +69135,7 @@
         ],
         "summary": "Get a list of security signals",
         "tags": [
-          "Security Monitoring"
+          "Cloud SIEM"
         ],
         "x-codegen-request-body-name": "body",
         "x-menu-order": 6,
@@ -81986,6 +81986,10 @@
       "name": "AuthN Mappings"
     },
     {
+      "description": "**Note**: Datadog Security Monitoring is now [Datadog Cloud SIEM](https://docs.datadoghq.com/security_platform/cloud_siem/).\nDetection rules for generating signals and listing of generated\nsignals.",
+      "name": "Cloud SIEM"
+    },
+    {
       "description": "Workload activity security rules for generating events using the Datadog security Agent.",
       "name": "Cloud Workload Security"
     },
@@ -82048,10 +82052,6 @@
     {
       "description": "The Roles API is used to create and manage Datadog roles, what\n[global permissions](https://docs.datadoghq.com/account_management/rbac/)\nthey grant, and which users belong to them.\n\nPermissions related to specific account assets can be granted to roles\nin the Datadog application without using this API. For example, granting\nread access on a specific log index to a role can be done in Datadog from the\n[Pipelines page](https://app.datadoghq.com/logs/pipelines).",
       "name": "Roles"
-    },
-    {
-      "description": "Detection rules for generating signals and listing of generated\nsignals.",
-      "name": "Security Monitoring"
     },
     {
       "description": "Create, edit, and disable service accounts.",

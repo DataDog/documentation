@@ -6216,6 +6216,156 @@ api:
         - ListAuthNMappings
       unstable: []
       order: 4
+  - name: Cloud SIEM
+    url: /api/latest/cloud-siem/
+    identifier: cloud-siem
+    generated: true
+  - name: Get a list of security signals
+    url: '#get-a-list-of-security-signals'
+    identifier: get-a-list-of-security-signals
+    parent: cloud-siem
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - SearchSecurityMonitoringSignals
+      unstable:
+        - v2
+      order: 6
+  - name: Get a quick list of security signals
+    url: '#get-a-quick-list-of-security-signals'
+    identifier: get-a-quick-list-of-security-signals
+    parent: cloud-siem
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListSecurityMonitoringSignals
+      unstable:
+        - v2
+      order: 7
+  - name: Update an existing rule
+    url: '#update-an-existing-rule'
+    identifier: update-an-existing-rule
+    parent: cloud-siem
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateSecurityMonitoringRule
+      unstable: []
+      order: 4
+  - name: Get a rule's details
+    url: '#get-a-rules-details'
+    identifier: get-a-rules-details
+    parent: cloud-siem
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetSecurityMonitoringRule
+      unstable: []
+      order: 3
+  - name: Delete an existing rule
+    url: '#delete-an-existing-rule'
+    identifier: delete-an-existing-rule
+    parent: cloud-siem
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteSecurityMonitoringRule
+      unstable: []
+      order: 5
+  - name: Create a detection rule
+    url: '#create-a-detection-rule'
+    identifier: create-a-detection-rule
+    parent: cloud-siem
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateSecurityMonitoringRule
+      unstable: []
+      order: 2
+  - name: List rules
+    url: '#list-rules'
+    identifier: list-rules
+    parent: cloud-siem
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListSecurityMonitoringRules
+      unstable: []
+      order: 1
+  - name: Update a security filter
+    url: '#update-a-security-filter'
+    identifier: update-a-security-filter
+    parent: cloud-siem
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateSecurityFilter
+      unstable: []
+      order: 0
+  - name: Get a security filter
+    url: '#get-a-security-filter'
+    identifier: get-a-security-filter
+    parent: cloud-siem
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetSecurityFilter
+      unstable: []
+      order: 0
+  - name: Delete a security filter
+    url: '#delete-a-security-filter'
+    identifier: delete-a-security-filter
+    parent: cloud-siem
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteSecurityFilter
+      unstable: []
+      order: 0
+  - name: Create a security filter
+    url: '#create-a-security-filter'
+    identifier: create-a-security-filter
+    parent: cloud-siem
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateSecurityFilter
+      unstable: []
+      order: 0
+  - name: Get all security filters
+    url: '#get-all-security-filters'
+    identifier: get-all-security-filters
+    parent: cloud-siem
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListSecurityFilters
+      unstable: []
+      order: 0
   - name: Cloud Workload Security
     url: /api/latest/cloud-workload-security/
     identifier: cloud-workload-security
@@ -6997,156 +7147,6 @@ api:
         - ListPermissions
       unstable: []
       order: 1
-  - name: Security Monitoring
-    url: /api/latest/security-monitoring/
-    identifier: security-monitoring
-    generated: true
-  - name: Get a list of security signals
-    url: '#get-a-list-of-security-signals'
-    identifier: get-a-list-of-security-signals
-    parent: security-monitoring
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - SearchSecurityMonitoringSignals
-      unstable:
-        - v2
-      order: 6
-  - name: Get a quick list of security signals
-    url: '#get-a-quick-list-of-security-signals'
-    identifier: get-a-quick-list-of-security-signals
-    parent: security-monitoring
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - ListSecurityMonitoringSignals
-      unstable:
-        - v2
-      order: 7
-  - name: Update an existing rule
-    url: '#update-an-existing-rule'
-    identifier: update-an-existing-rule
-    parent: security-monitoring
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - UpdateSecurityMonitoringRule
-      unstable: []
-      order: 4
-  - name: Get a rule's details
-    url: '#get-a-rules-details'
-    identifier: get-a-rules-details
-    parent: security-monitoring
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - GetSecurityMonitoringRule
-      unstable: []
-      order: 3
-  - name: Delete an existing rule
-    url: '#delete-an-existing-rule'
-    identifier: delete-an-existing-rule
-    parent: security-monitoring
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - DeleteSecurityMonitoringRule
-      unstable: []
-      order: 5
-  - name: Create a detection rule
-    url: '#create-a-detection-rule'
-    identifier: create-a-detection-rule
-    parent: security-monitoring
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - CreateSecurityMonitoringRule
-      unstable: []
-      order: 2
-  - name: List rules
-    url: '#list-rules'
-    identifier: list-rules
-    parent: security-monitoring
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - ListSecurityMonitoringRules
-      unstable: []
-      order: 1
-  - name: Update a security filter
-    url: '#update-a-security-filter'
-    identifier: update-a-security-filter
-    parent: security-monitoring
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - UpdateSecurityFilter
-      unstable: []
-      order: 0
-  - name: Get a security filter
-    url: '#get-a-security-filter'
-    identifier: get-a-security-filter
-    parent: security-monitoring
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - GetSecurityFilter
-      unstable: []
-      order: 0
-  - name: Delete a security filter
-    url: '#delete-a-security-filter'
-    identifier: delete-a-security-filter
-    parent: security-monitoring
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - DeleteSecurityFilter
-      unstable: []
-      order: 0
-  - name: Create a security filter
-    url: '#create-a-security-filter'
-    identifier: create-a-security-filter
-    parent: security-monitoring
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - CreateSecurityFilter
-      unstable: []
-      order: 0
-  - name: Get all security filters
-    url: '#get-all-security-filters'
-    identifier: get-all-security-filters
-    parent: security-monitoring
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - ListSecurityFilters
-      unstable: []
-      order: 0
   - name: Service Accounts
     url: /api/latest/service-accounts/
     identifier: service-accounts

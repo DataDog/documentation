@@ -5310,7 +5310,7 @@ components:
           type: string
         name:
           description: The name of the rule.
-          example: My security monitoring rule.
+          example: My Cloud SIEM rule.
           type: string
         options:
           $ref: '#/components/schemas/SecurityMonitoringRuleOptions'
@@ -10329,7 +10329,7 @@ paths:
         - security_monitoring_filters_read
       summary: Get all security filters
       tags:
-      - Security Monitoring
+      - Cloud SIEM
       x-undo:
         type: safe
     post:
@@ -10369,7 +10369,7 @@ paths:
         - security_monitoring_filters_write
       summary: Create a security filter
       tags:
-      - Security Monitoring
+      - Cloud SIEM
       x-codegen-request-body-name: body
       x-given:
         security_filter:
@@ -10410,7 +10410,7 @@ paths:
         - security_monitoring_filters_write
       summary: Delete a security filter
       tags:
-      - Security Monitoring
+      - Cloud SIEM
       x-undo:
         type: idempotent
     get:
@@ -10443,7 +10443,7 @@ paths:
         - security_monitoring_filters_read
       summary: Get a security filter
       tags:
-      - Security Monitoring
+      - Cloud SIEM
       x-undo:
         type: safe
     patch:
@@ -10484,7 +10484,7 @@ paths:
         - security_monitoring_filters_write
       summary: Update a security filter
       tags:
-      - Security Monitoring
+      - Cloud SIEM
       x-codegen-request-body-name: body
       x-undo:
         type: idempotent
@@ -10513,7 +10513,7 @@ paths:
         - security_monitoring_rules_read
       summary: List rules
       tags:
-      - Security Monitoring
+      - Cloud SIEM
       x-menu-order: 1
       x-undo:
         type: safe
@@ -10546,7 +10546,7 @@ paths:
         - security_monitoring_rules_write
       summary: Create a detection rule
       tags:
-      - Security Monitoring
+      - Cloud SIEM
       x-codegen-request-body-name: body
       x-given:
         security_rule:
@@ -10590,7 +10590,7 @@ paths:
         - security_monitoring_rules_write
       summary: Delete an existing rule
       tags:
-      - Security Monitoring
+      - Cloud SIEM
       x-menu-order: 5
       x-undo:
         type: idempotent
@@ -10617,7 +10617,7 @@ paths:
         - security_monitoring_rules_read
       summary: Get a rule's details
       tags:
-      - Security Monitoring
+      - Cloud SIEM
       x-menu-order: 3
       x-undo:
         type: safe
@@ -10662,7 +10662,7 @@ paths:
         - security_monitoring_rules_write
       summary: Update an existing rule
       tags:
-      - Security Monitoring
+      - Cloud SIEM
       x-codegen-request-body-name: body
       x-menu-order: 4
       x-undo:
@@ -10744,7 +10744,7 @@ paths:
         - security_monitoring_signals_read
       summary: Get a quick list of security signals
       tags:
-      - Security Monitoring
+      - Cloud SIEM
       x-menu-order: 7
       x-undo:
         type: safe
@@ -10785,7 +10785,7 @@ paths:
         - security_monitoring_signals_read
       summary: Get a list of security signals
       tags:
-      - Security Monitoring
+      - Cloud SIEM
       x-codegen-request-body-name: body
       x-menu-order: 6
       x-undo:
@@ -11948,6 +11948,12 @@ tags:
 
     sent from Identity Providers.'
   name: AuthN Mappings
+- description: '**Note**: Datadog Security Monitoring is now [Datadog Cloud SIEM](https://docs.datadoghq.com/security_platform/cloud_siem/).
+
+    Detection rules for generating signals and listing of generated
+
+    signals.'
+  name: Cloud SIEM
 - description: Workload activity security rules for generating events using the Datadog
     security Agent.
   name: Cloud Workload Security
@@ -12041,10 +12047,6 @@ tags:
 
     [Pipelines page](https://app.datadoghq.com/logs/pipelines).'
   name: Roles
-- description: 'Detection rules for generating signals and listing of generated
-
-    signals.'
-  name: Security Monitoring
 - description: Create, edit, and disable service accounts.
   name: Service Accounts
 - description: Create, edit, and disable users.

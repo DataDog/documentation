@@ -3,6 +3,10 @@
     "name": "AuthN Mappings",
     "description": "[AuthN Mappings API] (https://docs.datadoghq.com/account_management/authn_mapping/?tab=example)\nis used to automatically map group of users to roles in Datadog using attributes\nsent from Identity Providers."
   },
+  "cloud-siem": {
+    "name": "Cloud SIEM",
+    "description": "**Note**: Datadog Security Monitoring is now [Datadog Cloud SIEM](https://docs.datadoghq.com/security_platform/cloud_siem/).\nDetection rules for generating signals and listing of generated\nsignals."
+  },
   "cloud-workload-security": {
     "name": "Cloud Workload Security",
     "description": "Workload activity security rules for generating events using the Datadog security Agent."
@@ -54,10 +58,6 @@
   "roles": {
     "name": "Roles",
     "description": "The Roles API is used to create and manage Datadog roles, what\n[global permissions](https://docs.datadoghq.com/account_management/rbac/)\nthey grant, and which users belong to them.\n\nPermissions related to specific account assets can be granted to roles\nin the Datadog application without using this API. For example, granting\nread access on a specific log index to a role can be done in Datadog from the\n[Pipelines page](https://app.datadoghq.com/logs/pipelines)."
-  },
-  "security-monitoring": {
-    "name": "Security Monitoring",
-    "description": "Detection rules for generating signals and listing of generated\nsignals."
   },
   "service-accounts": {
     "name": "Service Accounts",

@@ -34,6 +34,60 @@
       "description": "List all AuthN Mappings returns \"OK\" response"
     }
   ],
+  "CreateSecurityMonitoringRule": [
+    {
+      "group": "cloud_siem",
+      "suffix": "",
+      "description": "Create a detection rule returns \"OK\" response"
+    },
+    {
+      "group": "cloud_siem",
+      "suffix": "_498211763",
+      "description": "Create a detection rule with type 'workload_security' returns \"OK\" response"
+    }
+  ],
+  "CreateSecurityFilter": [
+    {
+      "group": "cloud_siem",
+      "suffix": "",
+      "description": "Create a security filter returns \"OK\" response"
+    }
+  ],
+  "DeleteSecurityFilter": [
+    {
+      "group": "cloud_siem",
+      "suffix": "_555029489",
+      "description": "Delete a security filter returns \"No Content\" response"
+    }
+  ],
+  "DeleteSecurityMonitoringRule": [
+    {
+      "group": "cloud_siem",
+      "suffix": "",
+      "description": "Delete an existing rule returns \"OK\" response"
+    }
+  ],
+  "GetSecurityFilter": [
+    {
+      "group": "cloud_siem",
+      "suffix": "",
+      "description": "Get a security filter returns \"OK\" response"
+    }
+  ],
+  "ListSecurityFilters": [
+    {
+      "group": "cloud_siem",
+      "suffix": "",
+      "description": "Get all security filters returns \"OK\" response"
+    }
+  ],
+  "UpdateSecurityFilter": [
+    {
+      "group": "cloud_siem",
+      "suffix": "",
+      "description": "Update a security filter returns \"OK\" response"
+    }
+  ],
   "CreateCloudWorkloadSecurityAgentRule": [
     {
       "group": "cloud_workload_security",
@@ -477,60 +531,6 @@
       "group": "roles",
       "suffix": "",
       "description": "Update a role returns \"OK\" response"
-    }
-  ],
-  "CreateSecurityMonitoringRule": [
-    {
-      "group": "security_monitoring",
-      "suffix": "",
-      "description": "Create a detection rule returns \"OK\" response"
-    },
-    {
-      "group": "security_monitoring",
-      "suffix": "_498211763",
-      "description": "Create a detection rule with type 'workload_security' returns \"OK\" response"
-    }
-  ],
-  "CreateSecurityFilter": [
-    {
-      "group": "security_monitoring",
-      "suffix": "",
-      "description": "Create a security filter returns \"OK\" response"
-    }
-  ],
-  "DeleteSecurityFilter": [
-    {
-      "group": "security_monitoring",
-      "suffix": "_555029489",
-      "description": "Delete a security filter returns \"No Content\" response"
-    }
-  ],
-  "DeleteSecurityMonitoringRule": [
-    {
-      "group": "security_monitoring",
-      "suffix": "",
-      "description": "Delete an existing rule returns \"OK\" response"
-    }
-  ],
-  "GetSecurityFilter": [
-    {
-      "group": "security_monitoring",
-      "suffix": "",
-      "description": "Get a security filter returns \"OK\" response"
-    }
-  ],
-  "ListSecurityFilters": [
-    {
-      "group": "security_monitoring",
-      "suffix": "",
-      "description": "Get all security filters returns \"OK\" response"
-    }
-  ],
-  "UpdateSecurityFilter": [
-    {
-      "group": "security_monitoring",
-      "suffix": "",
-      "description": "Update a security filter returns \"OK\" response"
     }
   ],
   "CreateServiceAccountApplicationKey": [
