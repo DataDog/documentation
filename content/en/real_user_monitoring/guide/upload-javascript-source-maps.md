@@ -127,7 +127,7 @@ By running the command against the example `dist` directory, Datadog expects you
 
 ### Link stack frames to your source code
 
-If you run `datadog-ci sourcemaps upload` within a Git repository, it will automatically collect metadata about the repository, including the repository URL, current commit hash and the list of file paths in the repository that relate to your source maps. For more details about git metadata collection, refer to [datadog-ci documentation][3].
+If you run `datadog-ci sourcemaps upload` within a Git working directory, Datadog will collect repository metadata. The `datadog-ci` command collects the repository URL, the current commit hash, and the list of file paths in the repository that relate to your source maps. For more details about Git metadata collection, refer to the [datadog-ci documentation][3].
 
 Datadog displays links to your source code on unminified stack frames.
 
