@@ -26,7 +26,7 @@ This document details the available metrics and default dashboard for monitoring
 
 Datadog provides an out-of-the-box [Usage Dashboard][5] for monitoring your APM usage, as well as your ingested and indexed span volumes.
 
-Each metric on this dashboard is powered by one of the below three Datadog standard metrics available in your account.
+Each metric on this dashboard is powered by one of the below four Datadog standard metrics available in your account.
 
  - `datadog.estimated_usage.apm.ingested_bytes`
  - `datadog.estimated_usage.apm.ingested_spans`
