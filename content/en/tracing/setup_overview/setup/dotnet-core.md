@@ -49,9 +49,9 @@ For a full list of supported libraries and processor architectures, see [Compati
 ## Installation and getting started
 
 <div class="alert alert-info">
-  <div class="alert-info"><strong>It is recommended</strong> to follow the <a href="https://app.datadoghq.com/apm/docs">Quickstart instructions</a> within the Datadog app for the best experience, including:
-    <div>- Step by step instructions scoped to your deployment configuration (hosts, Docker, Kubernetes, or Amazon ECS).</div>
-    <div>- Dynamically set <code>service</code>, <code>env</code>, and <code>version</code> tags</div>
+  <div class="alert-info">Datadog recommends you follow the <a href="https://app.datadoghq.com/apm/docs">Quickstart instructions</a> in the Datadog app for the best experience, including:</br>
+    <div>- **Step-by-step** instructions scoped to your deployment configuration (hosts, Docker, Kubernetes, or Amazon ECS).</div>
+    <div>- Dynamically set <code>service</code>, <code>env</code>, and <code>version</code> tags.</div>
     <div>- Enable ingesting 100% of traces and Trace ID injection into logs during setup.</div>
   </div>
 </div>
@@ -382,18 +382,18 @@ The following configuration variables are available for both automatic and custo
 : **TracerSettings property**: `Exporter.AgentUri`<br>
 Sets the URL endpoint where traces are sent. Overrides `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT` if set. <br>
 It can contain a unix path to a socket by prefixing the path by `unix://`<br>
-**Default**: `http://<DD_AGENT_HOST>:<DD_TRACE_AGENT_PORT>` if they are set, `unix:///var/run/datadog/apm.socket` if the file exists or `http://localhost:8126`
+**Default**: `http://<DD_AGENT_HOST>:<DD_TRACE_AGENT_PORT>` if they are set, `unix:///var/run/datadog/apm.socket` if the file exists or `http://localhost:8126`.
 
 `DD_APM_RECEIVER_SOCKET`
 : **TracerSettings property**: `Exporter.TracesUnixDomainSocketPath`<br>
-Sets the path to the socket used to communicate with the agent<br>
+Sets the path to the socket used to communicate with the Agent.<br>
 
 `DD_AGENT_HOST`
-: Sets the host where traces are sent (the host running the Agent). Can be a hostname or an IP address. Prefer using `DD_TRACE_AGENT_URL` that has precedence over this parameter <br>
+: Sets the host where traces are sent (the host running the Agent). Can be a hostname or an IP address. Prefers using `DD_TRACE_AGENT_URL` that has precedence over this parameter. <br>
 **Default**: `localhost`
 
 `DD_TRACE_AGENT_PORT`
-: Sets the port where traces are sent (the port where the Agent is listening for connections). Prefer using `DD_TRACE_AGENT_URL` that has precedence over this parameter <br>
+: Sets the port where traces are sent (the port where the Agent is listening for connections). Prefers using `DD_TRACE_AGENT_URL` that has precedence over this parameter. <br>
 **Default**: `8126`
 
 `DD_LOGS_INJECTION`
