@@ -81,8 +81,7 @@ Si vous ne parvenez pas à vous connecter en raison d'une erreur basée sur un r
 **Remarques** :
 
 - Chaque fournisseur d'identité propose différents types d'attributs et différentes manières de les définir. Par exemple, Azure utilise des [ID d'objet][7] pour ses attributs. Si vous utilisez Okta, vous devez définir les attributs dans les [paramètres Okta][8]. Consultez la documentation relative aux attributs de votre fournisseur d'identité pour en savoir plus.
-
-- Lorsque vous désactivez les **mappings de groupe SAML**, les utilisateurs peuvent se connecter via SAML et ne perdent pas les rôles qui leur ont été attribués, même si les critères des groupes ont été modifiés dans votre fournisseur d'identité.
+- Lorsque vous désactivez les **mappings de groupe SAML**, les utilisateurs peuvent se connecter via SAML et ne perdent pas les rôles qui leur ont été attribués, même si leur appartenance au groupe a été modifié au sein de votre fournisseur d'identité.
 
 ## Erreurs concernant le fournisseur d'identité
 
