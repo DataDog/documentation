@@ -30,7 +30,7 @@ The steps to activate the Datadog integration for [Buildkite][1] are:
 ### Setting custom tags
 
 Custom tags can be added to Buildkite traces by using the `buildkite-agent meta-data set` command.
-Any metadata tags with a key starting with `dd_tags.` are added to the job and pipeline spans. This
+Any metadata tags with a key starting with `dd_tags.` are added to the job and pipeline spans. These
 tags can be used to create string facets to search and organize the pipelines.
 
 The YAML below illustrates a simple pipeline where tags for the team name and the Go version have
@@ -54,9 +54,9 @@ The resulting pipeline looks as follows:
 
 {{< img src="ci/buildkite-custom-tags.png" alt="Buildkite pipeline trace with custom tags" style="width:100%;">}}
 
-To create numerical tags that can be use for measures the metadata command can be used. Any metadata
-with a key starting with `dd_metrics.` and a numerical value will be set as a metric tag.
-This can be used for example to measure the binary size in a pipeline:
+Any metadata with a key starting with `dd-metrics.` and containing a numerical value will be set as
+a metric tag that can be used to create numerical measures. You can use the `buildkite-agent meta-data set`
+command to create such tags. This can be used for example to measure the binary size in a pipeline:
 
 ```yaml
 steps:
@@ -70,7 +70,7 @@ The resulting pipeline will have the tags shown below in the pipeline span:
 
 - `binary_size: 502` (output depends on the file size)
 
-This value can be used to plot the change in the binary size over time for example.
+In this example, you can use the value of `binary_size` to plot the change in the binary size over time.
 
 ## Visualize pipeline data in Datadog
 
