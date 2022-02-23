@@ -25,7 +25,9 @@ further_reading:
    ```
    npm install dd-trace@2
    ```
-   For information about which language and framework versions are supported by the library, see [Compatibility][1].
+   Use this [migration guide][1] to assess any breaking changes if you upgraded your library from 1.x to 2.x.
+
+   For information about which language and framework versions are supported by the library, see [Compatibility][2].
 
 2. **Where you import and initialize the NodeJS library for APM, also enable Application Security.** This might be either in your code or with environment variables. If you initialized APM in code, add `{appsec: true}` to your init statement:
       {{< tabs >}}
@@ -139,4 +141,5 @@ DD_APPSEC_ENABLED=true node app.js
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security_platform/application_security/setup_and_configure/?code-lang=nodejs#compatibility
+[1]: https://github.com/DataDog/dd-trace-js/blob/master/MIGRATING.md
+[2]: /security_platform/application_security/setup_and_configure/?code-lang=nodejs#compatibility
