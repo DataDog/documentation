@@ -52,7 +52,7 @@ For a full list of supported libraries and processor architectures, see [Compati
   <div class="alert-info"><strong>It is recommended</strong> to follow the <a href="https://app.datadoghq.com/apm/docs">Quickstart instructions</a> within the Datadog app for the best experience, including:
     <div>- Step by step instructions scoped to your deployment configuration (hosts, Docker, Kubernetes, or Amazon ECS).</div>
     <div>- Dynamically set <code>service</code>, <code>env</code>, and <code>version</code> tags</div>
-    <div>- Enable ingesting 100% of traces, and Trace ID injection into logs during setup.</div>
+    <div>- Enable ingesting 100% of traces and Trace ID injection into logs during setup.</div>
   </div>
 </div>
 
