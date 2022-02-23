@@ -76,10 +76,11 @@ Setting up Autodiscovery for your infrastructure requires the following two step
 
 ### Enable Autodiscovery
 
-The Agent automatically detects reachable sockets and API Endpoints (Docker, containerd, Kubernetes API, etc.) and activates Autodiscovery for you.
-If Autodiscovery is not working, you can verify the detected features by running `agent status`.
+The Agent not only automatically detects reachable sockets and API endpoints (such as Docker, containerd, and Kubernetes API), but also activates Autodiscovery for you.
 
-In case the automatic detection failed or if you want to deactivate automatically detected features, you can use these configuration parameters in `datadog.yaml` to include/exclude features:
+If Autodiscovery is not working, verify the detected features by running `agent status`.
+
+In case the automatic detection failed or you want to deactivate automatically detected features, use these configuration parameters in `datadog.yaml` to include/exclude features:
 ```yaml
 autoconfig_exclude_features:
 - docker
@@ -87,7 +88,7 @@ autoconfig_include_features:
 - containerd
 ```
 
-The complete list of automatically detected features are available in `datadog.yaml` template.
+The complete list of automatically detected features is available in the `datadog.yaml` template.
 
 ### Integration templates
 
