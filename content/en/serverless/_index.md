@@ -34,6 +34,7 @@ further_reading:
 
 {{< vimeo 543362476 >}}
 
+<br/>
  
 <div class="alert alert-info">Make sure to check out discussions going on in the <a href="https://datadoghq.slack.com/archives/CFDPB83M4">#serverless</a> channel in the <a href="https://chat.datadoghq.com/">Datadog Slack community</a>.</div>
 

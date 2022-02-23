@@ -97,6 +97,9 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
     plugins:
       - serverless-plugin-datadog
     ```
+
+<div class="alert alert-info">If you are instead deploying your Serverless Framework app <a href="https://www.serverless.com/framework/docs/providers/aws/guide/intro">by natively exporting a JSON object from a Javascript file</a> (e.g. using a "serverless.ts" file), follow our <a href="https://docs.datadoghq.com/serverless/installation/python?tab=custom"> custom installation instructions</a>.</div>
+
 3. In your `serverless.yml`, also add the following section:
     ```yaml
     custom:
