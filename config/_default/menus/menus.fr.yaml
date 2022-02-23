@@ -28,7 +28,7 @@ main_left:
   # - identifier: "container-monitoring"
   #   name: "Container Monitoring"
   #   pre: "<i class='icon-container'></i>"
-  #   url: "product/container-monitoring/"
+  #   url: "https://www.datadoghq.com/product/container-monitoring/"
   #   parent: "infrastructure"
   #   weight: 5
   - identifier: serverless
@@ -50,7 +50,7 @@ main_left:
   - identifier: "sensitive-data-scanner"
     name: "Sensitive Data Scanner"
     pre: "<i class='icon-sds'></i>"
-    url: "product/sensitive-data-scanner/"
+    url: "https://www.datadoghq.com/product/sensitive-data-scanner/"
     parent: "logs"
     weight: 9
   - identifier: "apm"
@@ -106,7 +106,7 @@ main_left:
   - identifier: "session-replay"
     name: "Session Replay"
     pre: "<i class='icon-play-circle'></i>"
-    url: "product/real-user-monitoring/session-replay/"
+    url: "https://www.datadoghq.com/product/real-user-monitoring/session-replay/"
     parent: "digital-experience"
     weight: 19
   - identifier: "security"
@@ -122,19 +122,19 @@ main_left:
   - identifier: "posture-management"
     name: "Posture Management"
     pre: "<i class='icon-cspm'></i>"
-    url: "product/security-platform/posture-management/"
+    url: "https://www.datadoghq.com/product/security-platform/cloud-security-posture-management/"
     parent: "security"
     weight: 22
   - identifier: "workload-security"
     name: "Workload Security"
     pre: "<i class='icon-cws'></i>"
-    url: "product/security-platform/workload-security/"
+    url: "https://www.datadoghq.com/product/security-platform/cloud-workload-security/"
     parent: "security"
     weight: 23
   - identifier: "cloud-siem"
     name: "Cloud SIEM"
     pre: "<i class='icon-siem'></i>"
-    url: "product/security-platform/cloud-siem/"
+    url: "https://www.datadoghq.com/product/security-platform/cloud-siem/"
     parent: "security"
     weight: 24
   - identifier: "platform-capabilities"
@@ -150,13 +150,13 @@ main_left:
   # - identifier: "slos"
   #   name: "SLOs"
   #   pre: "<i class='icon-slos'></i>"
-  #   url: "product/platform/service-level-objective/"
+  #   url: "https://www.datadoghq.com/product/platform/service-level-objective/"
   #   parent: "platform-capabilities"
   #   weight: 27
   # - identifier: "watchdog"
   #   name: "Watchdog (AI/ML)"
   #   pre: "<i class='icon-agent-fill-2'></i>"
-  #   url: "product/platform/watchdog/"
+  #   url: "https://www.datadoghq.com/product/platform/watchdog/"
   #   parent: "platform-capabilities"
   #   weight: 28
   - identifier: alerts
