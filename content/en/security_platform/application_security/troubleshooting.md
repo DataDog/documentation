@@ -348,23 +348,25 @@ Enable debug logs with the environment variable `DD_TRACE_DEBUG=1`. The Applicat
 {{< /programming-lang >}}
 {{< programming-lang lang="NodeJS" >}}
 
-For NodeJS, if you don’t see Application Security threat information in the [Trace and Signals Explorer][1], follow these steps to troubleshoot the issue:
+Use this [migration guide][1] to assess any breaking changes if you upgraded your NodeJS library from 1.x to 2.x.
 
-1. Confirm the latest version of Application Security is running by checking that `appsec_enabled` is `true` in the [startup logs][2]
+If you don’t see Application Security threat information in the [Trace and Signals Explorer][2] for your NodeJS application, follow these steps to troubleshoot the issue:
+
+1. Confirm the latest version of Application Security is running by checking that `appsec_enabled` is `true` in the [startup logs][3]
 
     a. If you don’t see startup logs after a request has been sent, add the environment variable `DD_TRACE_STARTUP_LOGS=true` to enable startup logs. Check the startup logs for `appsec_enabled` is `true`.
 
-    b. If `appsec_enabled` is `false`, then Application Security was not enabled correctly. See [installation instructions][3].
+    b. If `appsec_enabled` is `false`, then Application Security was not enabled correctly. See [installation instructions][4].
 
-    c. If `appsec_enabled` is not in the startup logs, the latest Application Security version needs to be installed. See [installation instructions][3].
+    c. If `appsec_enabled` is not in the startup logs, the latest Application Security version needs to be installed. See [installation instructions][4].
 
 2. Is the tracer working? Can you see relevant traces on the APM dashboard? 
 
-    Application Security relies on the tracer so if you don’t see traces, then the tracer might not be working. See [APM Troubleshooting][4].
+    Application Security relies on the tracer so if you don’t see traces, then the tracer might not be working. See [APM Troubleshooting][5].
 
 3. In your application directory, run the command `npm explore @datadog/native-appsec -- npm run install` and restart your app.
 
-    a. If `@datadog/native-appsec` is not found then the installation is incorrect. See [installation instructions][3].
+    a. If `@datadog/native-appsec` is not found then the installation is incorrect. See [installation instructions][4].
     
     b. If `@datadog/native-appsec` is found when starting your application, add the command to your runtime start script.
 
@@ -377,10 +379,11 @@ For NodeJS, if you don’t see Application Security threat information in the [T
     DD_TRACE_LOG_LEVEL=info
     ```
 
-[1]: https://app.datadoghq.com/security/appsec/
-[2]: /tracing/troubleshooting/tracer_startup_logs/
-[3]: /security_platform/application_security/getting_started/nodejs/?tab=dockercli
-[4]: /tracing/troubleshooting/
+[1]: https://github.com/DataDog/dd-trace-js/blob/master/MIGRATING.md
+[2]: https://app.datadoghq.com/security/appsec/
+[3]: /tracing/troubleshooting/tracer_startup_logs/
+[4]: /security_platform/application_security/getting_started/nodejs/?tab=dockercli
+[5]: /tracing/troubleshooting/
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
