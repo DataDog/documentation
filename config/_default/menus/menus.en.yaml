@@ -2511,16 +2511,36 @@ main:
     parent: rum_explorer
     identifier: rum_explorer_search
     weight: 601
-  - name: Analytics
-    url: real_user_monitoring/explorer/analytics/
+  - name: Search Syntax
+    url: real_user_monitoring/explorer/search_syntax/
     parent: rum_explorer
-    identifier: rum_explorer_analytics
+    identifier: rum_explorer_search_syntax
     weight: 602
-  - name: Watchdog Insights
+  - name: Group
+    url: real_user_monitoring/explorer/group/
+    parent: rum_explorer
+    identifier: rum_explorer_group
+    weight: 603
+  - name: Visualize
+    url: real_user_monitoring/explorer/visualize/
+    parent: rum_explorer
+    identifier: rum_explorer_visualize
+    weight: 604
+  - name: Events
+    url: real_user_monitoring/explorer/events/
+    parent: rum_explorer
+    identifier: rum_explorer_events
+    weight: 605
+  - name: Saved Views
+    url: real_user_monitoring/explorer/saved_views/
+    parent: rum_explorer
+    identifier: rum_explorer_saved_views
+    weight: 606
+  - name: Watchdog Insights for RUM
     url: real_user_monitoring/explorer/watchdog_insights/
     parent: rum_explorer
     identifier: rum_explorer_watchdog_insights
-    weight: 603
+    weight: 607
   - name: Connect RUM and Traces
     url: real_user_monitoring/connect_rum_and_traces
     parent: rum
