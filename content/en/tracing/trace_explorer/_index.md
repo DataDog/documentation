@@ -100,7 +100,7 @@ In addition to showing timeseries for requests that match your queries, you can 
 
 A valid query in the search bar displays traces that match your search criteria across **all spans**. The search syntax is the same in the Live Search views as in the other trace views, but here, your query is matched against all of the ingested traces across **any span** and **any tag**, and not just the indexed ones.
 
-You can choose to query the [service entry spans][9], the [root spans][10], or all spans by changing the selection to the box above the trace table. Use this feature on high traffic applications to reduce the number of spans displayed and view only the entry point spans of the services or the entry point of the trace. Selecting this box only filters the spans shown in the list; the others are still shown in the flame graph when clicking on a span to view the trace details..
+You can choose to query the [service entry spans][9], the [root spans][10], or all spans by changing the selection to the box above the trace table. Use this feature on high traffic applications to reduce the number of spans displayed and view only the entry point spans of the services or the entry point of the trace. Selecting this box only filters the spans shown in the list; the others are still shown in the flame graph when clicking on a span to view the trace details.
 
 You can also filter on attributes that are not defined as facets. For example, to filter on the `cart.value` attribute, there are two options:
 
