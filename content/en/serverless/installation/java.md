@@ -214,7 +214,7 @@ arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-java:4
 
 ## Troubleshooting
 
-If you have trouble collecting the monitoring data after following the instructions above, refer to the [serverless monitoring troubleshooting guide][15] for help.
+If you have trouble collecting monitoring data after following the instructions above, see the [serverless monitoring troubleshooting guide][15].
 
 ## Further Reading
 
