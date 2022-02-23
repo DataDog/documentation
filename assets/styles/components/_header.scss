@@ -80,7 +80,7 @@ body > header {
 
         &:hover,
         &.active {
-          color: #333;
+          color: $brand-primary;
           background-color: transparent;
         }
 
@@ -91,7 +91,7 @@ body > header {
 
       &:hover {
         a {
-          color: #333;
+          color: $brand-primary;
           background-color: #fff;
           border-color: #c8c8c8;
         }
@@ -186,6 +186,11 @@ body > header {
             width: 18px;
             margin-right: 12px;
           }
+        }
+
+
+        &.product-menu li {
+          font-size: 18px;
         }
 
         &.product-menu li a {
