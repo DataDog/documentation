@@ -25,7 +25,7 @@ aliases:
     - /serverless/guide/nodejs/
 ---
 
-<div class="alert alert-warning">If you previously set up Datadog Serverless using the Datadog Forwarder, see the <a href="docs.datadoghq.com/serverless/guide/datadog_forwarder_node">installation instructions here</a>.</div>
+<div class="alert alert-warning">If you previously set up Datadog Serverless using the Datadog Forwarder, see the <a href="docs.datadoghq.com/serverless/guide/datadog_forwarder_node">Datadog Forwarder - Node</a> guide.</div>
 
 ## Configuration
 
@@ -104,7 +104,7 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
     plugins:
       - serverless-plugin-datadog
     ```
-<div class="alert alert-info">If you are instead deploying your Serverless Framework app <a href="https://www.serverless.com/framework/docs/providers/aws/guide/intro">by natively exporting a JSON object from a Javascript file</a> (e.g. using a "serverless.ts" file), follow our <a href="https://docs.datadoghq.com/serverless/installation/nodejs?tab=custom"> custom installation instructions</a>.</div>
+<div class="alert alert-info">If you are instead deploying your Serverless Framework app <a href="https://www.serverless.com/framework/docs/providers/aws/guide/intro">by natively exporting a JSON object from a Javascript file</a> (for example, by using a <code>serverless.ts</code> file), follow the <a href="https://docs.datadoghq.com/serverless/installation/nodejs?tab=custom">custom installation instructions</a>.</div>
 
 3. In your `serverless.yml`, also add the following section:
     ```
