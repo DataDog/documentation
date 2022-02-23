@@ -32820,22 +32820,22 @@
           "authorizationCode": {
             "authorizationUrl": "/oauth2/v1/authorize",
             "scopes": {
-              "dashboards_public_share": "The ability to share dashboards externally.",
-              "dashboards_read": "The ability to view dashboards.",
-              "dashboards_write": "The ability to create and change dashboards.",
-              "events_read": "The ability to read Events data.",
-              "incident_read": "The ability to view incidents in Datadog.",
-              "incident_settings_write": "The ability to configure Incidents settings.",
-              "incident_write": "The ability to create, view, and manage incidents in Datadog.",
-              "metrics_read": "The ability to view custom metrics.",
-              "security_monitoring_filters_read": "The ability to read Security Filters.",
-              "security_monitoring_filters_write": "The ability to create, edit and delete Security Filters.",
-              "security_monitoring_rules_read": "The ability to read Detection Rules.",
-              "security_monitoring_rules_write": "The ability to create and edit Detection Rules.",
-              "security_monitoring_signals_read": "The ability to view Security Signals.",
-              "usage_read": "The ability to view your organization's usage and usage attribution.",
-              "user_access_invite": "The ability to invite other users to your organization.",
-              "user_access_manage": "The ability to disable users, manage user roles, and manage SAML-to-role mappings."
+              "dashboards_public_share": "Share dashboards externally.",
+              "dashboards_read": "View dashboards.",
+              "dashboards_write": "Create and change dashboards.",
+              "events_read": "Read Events data.",
+              "incident_read": "View incidents in Datadog.",
+              "incident_settings_write": "Configure Incidents settings.",
+              "incident_write": "Create, view, and manage incidents in Datadog.",
+              "metrics_read": "View custom metrics.",
+              "security_monitoring_filters_read": "Read Security Filters.",
+              "security_monitoring_filters_write": "Create, edit, and delete Security Filters.",
+              "security_monitoring_rules_read": "Read Detection Rules.",
+              "security_monitoring_rules_write": "Create and edit Detection Rules.",
+              "security_monitoring_signals_read": "View Security Signals.",
+              "usage_read": "View your organization's usage and usage attribution.",
+              "user_access_invite": "Invite other users to your organization.",
+              "user_access_manage": "Disable users, manage user roles, and manage SAML-to-role mappings."
             },
             "tokenUrl": "/oauth2/v1/token"
           }
