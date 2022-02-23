@@ -3,17 +3,17 @@ title: Instrumenting Go Serverless Applications
 kind: documentation
 further_reading:
 - link: 'serverless/datadog_lambda_library/go'
-  tag: "Documentation"
+  tag: 'Documentation'
   text: 'Datadog Lambda Library for Go'
-- link: '/serverless/troubleshooting/serverless_tagging/'
-  tag: "Documentation"
-  text: 'Tagging Serverless Applications'
 - link: 'serverless/distributed_tracing/'
-  tag: "Documentation"
+  tag: 'Documentation'
   text: 'Tracing Serverless Applications'
 - link: 'serverless/custom_metrics/'
-  tag: "Documentation"
+  tag: 'Documentation'
   text: 'Submitting Custom Metrics from Serverless Applications'
+- link: '/serverless/guide/troubleshoot_serverless_monitoring'
+  tag: 'Documentation'
+  text: 'Troubleshoot Serverless Monitoring'
 aliases:
     - /serverless/datadog_lambda_library/go/
 ---
@@ -155,6 +155,10 @@ For more information, see the [Custom Metrics documentation][7].
 If your Lambda function is running in a VPC, follow these [instructions][8] to ensure that the extension can reach Datadog API endpoints.
 
 
+## Troubleshooting
+
+If you have trouble collecting monitoring data after following the instructions above, see the [serverless monitoring troubleshooting guide][9].
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -167,3 +171,4 @@ If your Lambda function is running in a VPC, follow these [instructions][8] to e
 [6]: https://app.datadoghq.com/functions
 [7]: /serverless/custom_metrics?tab=go
 [8]: /serverless/libraries_integrations/extension/#vpc
+[9]: /serverless/guide/troubleshoot_serverless_monitoring/
