@@ -13,7 +13,7 @@ further_reading:
 ---
 Pour les environnements Kubernetes, l'[Agent de cluster Datadog][1] peut être configuré de façon à utiliser la logique Autodiscovery de la solution Network Device Monitoring (NDM) afin de générer des [checks de cluster][2].
 
-Lorsqu'elle est combinée avec l'Agent de cluster Datadog, la fonction Autodiscovery de l'Agent se révèle particulièrement évolutive. Elle permet de surveiller un grand nombre de services.
+Lorsqu'elle est combinée avec l'Agent de cluster Datadog, la fonction Autodiscovery de l'Agent se révèle particulièrement évolutive. Elle permet de surveiller un grand nombre d'appareils.
 
 ## Configuration
 
