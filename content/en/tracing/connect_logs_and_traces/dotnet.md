@@ -203,7 +203,7 @@ If you prefer to manually correlate your traces with your logs, you can add corr
   | `dd.service`   | Globally configures the root service name. Defaults to the name of the application or IIS site name if not set.  |
   | `dd.version`   | Globally configures `version` for the service. Defaults to `""` if not set.  |
   | `dd.trace_id`  | Active trace ID during the log statement. Defaults to `0` if no trace.  |
-  | `dd.span_id`   | Active span ID during the log statement. Defaults to `0` if no trace. |
+  | `dd.span_id`   | Active span ID during the log statement. Defaults to `0` if no span. |
 
 
 **Note:** If you are not using a [Datadog Log Integration][7] to parse your logs, custom log parsing rules must parse `dd.trace_id` and `dd.span_id` as strings. For information, see the [FAQ on this topic][8].
