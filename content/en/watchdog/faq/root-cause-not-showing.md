@@ -21,7 +21,7 @@ Watchdog Root Cause Analysis works best when:
 - You use distributed tracing, so that Watchdog knows the dependency structure between your services
 - You use [unified service tagging][4], so that Watchdog knows when you deploy new code and can link infrastructure and APM metrics
 
-Do you think Watchdog should have found something that it missed? Or, do you have another type of root cause we should prioritize adding? We're always looking to make Watchdog smarter, so [open a support request][5] to let us know.
+Do you think Watchdog should have found something that it missed? Or, do you have another type of root cause that you would like to be added? Datadog is always looking to make Watchdog smarter, so [open a support request][5] to let us know.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
