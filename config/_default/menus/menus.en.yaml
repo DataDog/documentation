@@ -200,39 +200,39 @@ main_left:
     weight: 1
   - name: "Financial Services"
     parent: "industry"
-    url: "solutions/financial-services/"
+    url: "https://www.datadoghq.com/solutions/financial-services/"
     weight: 2
   - name: "Manufacturing & Logistics"
     parent: "industry"
-    url: "solutions/manufacturing-logistics/"
+    url: "https://www.datadoghq.com/solutions/manufacturing-logistics/"
     weight: 3
   - name: "Healthcare/Life Sciences"
     parent: "industry"
-    url: "solutions/healthcare/"
+    url: "https://www.datadoghq.com/solutions/healthcare/"
     weight: 4
   - name: "Retail/E-Commerce"
     parent: "industry"
-    url: "solutions/retail-ecommerce/"
+    url: "https://www.datadoghq.com/solutions/retail-ecommerce/"
     weight: 5
   - name: "Government"
     parent: "industry"
-    url: "solutions/government/"
+    url: "https://www.datadoghq.com/solutions/government/"
     weight: 6
   - name: "Education"
     parent: "industry"
-    url: "solutions/education/"
+    url: "https://www.datadoghq.com/solutions/education/"
     weight: 7
   - name: "Media & Entertainment"
     parent: "industry"
-    url: "solutions/media-entertainment/"
+    url: "https://www.datadoghq.com/solutions/media-entertainment/"
     weight: 8
   - name: "Technology"
     parent: "industry"
-    url: "solutions/technology/"
+    url: "https://www.datadoghq.com/solutions/technology/"
     weight: 9
   - name: "Gaming"
     parent: "industry"
-    url: "solutions/gaming/"
+    url: "https://www.datadoghq.com/solutions/gaming/"
     weight: 10
   - identifier: "technology"
     name: "Technology"
@@ -240,27 +240,27 @@ main_left:
     weight: 11
   - name: "Amazon Web Services"
     parent: "technology"
-    url: "solutions/aws/"
+    url: "https://www.datadoghq.com/solutions/aws/"
     weight: 12
   - name: "Azure"
     parent: "technology"
-    url: "solutions/azure/"
+    url: "https://www.datadoghq.com/solutions/azure/"
     weight: 13
   - name: "Google Cloud Platform"
     parent: "technology"
-    url: "solutions/gcp/"
+    url: "https://www.datadoghq.com/solutions/gcp/"
     weight: 14
   - name: "Kubernetes"
     parent: "technology"
-    url: "solutions/kubernetes/"
+    url: "https://www.datadoghq.com/solutions/kubernetes/"
     weight: 15
   - name: "Red Hat OpenShift"
     parent: "technology"
-    url: "solutions/openshift/"
+    url: "https://www.datadoghq.com/solutions/openshift/"
     weight: 16
   - name: "Pivotal Platform"
     parent: "technology"
-    url: "solutions/pivotal-platform/"
+    url: "https://www.datadoghq.com/solutions/pivotal-platform/"
     weight: 17
   - identifier: "usecase"
     name: "Use-case"
@@ -268,55 +268,55 @@ main_left:
     weight: 18
   - name: "Cloud Migration"
     parent: "usecase"
-    url: "solutions/cloud-migration/"
+    url: "https://www.datadoghq.com/solutions/cloud-migration/"
     weight: 19
   - name: "Monitoring Consolidation"
     parent: "usecase"
-    url: "solutions/monitoring-consolidation/"
+    url: "https://www.datadoghq.com/solutions/monitoring-consolidation/"
     weight: 20
   - name: "DevOps"
     parent: "usecase"
-    url: "solutions/devops/"
+    url: "https://www.datadoghq.com/solutions/devops/"
     weight: 21
   - name: "Shift-Left Testing"
     parent: "usecase"
-    url: "solutions/shift-left-testing/"
+    url: "https://www.datadoghq.com/solutions/shift-left-testing/"
     weight: 22
   - name: "Digital Experience Monitoring"
     parent: "usecase"
-    url: "solutions/digital-experience-monitoring/"
+    url: "https://www.datadoghq.com/solutions/digital-experience-monitoring/"
     weight: 23
   - name: "Security Analytics"
     parent: "usecase"
-    url: "solutions/security-analytics/"
+    url: "https://www.datadoghq.com/solutions/security-analytics/"
     weight: 24
   - name: "Compliance for CIS Benchmarks"
     parent: "usecase"
-    url: "solutions/security/cis-benchmarks/"
+    url: "https://www.datadoghq.com/solutions/security/cis-benchmarks/"
     weight: 25
   - name: "Hybrid Cloud Monitoring"
     parent: "usecase"
-    url: "solutions/hybrid-cloud-monitoring/"
+    url: "https://www.datadoghq.com/solutions/hybrid-cloud-monitoring/"
     weight: 26
   - name: "IoT Monitoring"
     parent: "usecase"
-    url: "solutions/iot-monitoring/"
+    url: "https://www.datadoghq.com/solutions/iot-monitoring/"
     weight: 27
   - name: "Machine Learning"
     parent: "usecase"
-    url: "solutions/machine-learning/"
+    url: "https://www.datadoghq.com/solutions/machine-learning/"
     weight: 28
   - name: "Real-Time BI"
     parent: "usecase"
-    url: "solutions/business-analytics/"
+    url: "https://www.datadoghq.com/solutions/business-analytics/"
     weight: 29
   - name: "On-Premises Monitoring"
     parent: "usecase"
-    url: "solutions/on-premises-monitoring/"
+    url: "https://www.datadoghq.com/solutions/on-premises-monitoring/"
     weight: 30
   - name: "Log Analysis & Correlation"
     parent: "usecase"
-    url: "solutions/log-analysis-and-correlation/"
+    url: "https://www.datadoghq.com/solutions/log-analysis-and-correlation/"
     weight: 31
 main_right:
   - identifier: about
