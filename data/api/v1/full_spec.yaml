@@ -16807,31 +16807,31 @@ components:
         authorizationCode:
           authorizationUrl: /oauth2/v1/authorize
           scopes:
-            dashboards_public_share: The ability to share dashboards externally.
-            dashboards_read: The ability to view dashboards.
-            dashboards_write: The ability to create and change dashboards.
-            events_read: The ability to read Events data.
-            metrics_read: The ability to view custom metrics.
-            monitors_downtime: The ability to set downtimes to suppress alerts from
-              any monitor in an organization. The ability to write monitors is not
-              required to set downtimes.
-            monitors_read: The ability to view monitors.
-            monitors_write: The ability to change, mute, and delete individual monitors.
-            synthetics_global_variable_read: The ability to view, search and use in
-              tests the list of global variables available for Synthetics.
-            synthetics_global_variable_write: The ability to create, edit, and delete
-              global variables for Synthetics.
-            synthetics_private_location_read: The ability to view, search and use
-              in tests the list of private locations available.
-            synthetics_private_location_write: The ability to create and delete private
-              locations as well as seeing the associated installation guidelines.
-            synthetics_read: The ability to list and view configured Synthetic tests.
-            synthetics_write: The ability to create, edit, and delete Synthetic tests.
-            timeseries_query: The ability to query Timeseries data.
-            usage_read: The ability to view your organization's usage and usage attribution.
-            user_access_invite: The ability to invite other users to your organization.
-            user_access_manage: The ability to disable users, manage user roles, and
-              manage SAML-to-role mappings.
+            dashboards_public_share: Share dashboards externally.
+            dashboards_read: View dashboards.
+            dashboards_write: Create and change dashboards.
+            events_read: Read Events data.
+            metrics_read: View custom metrics.
+            monitors_downtime: Set downtimes to suppress alerts from any monitor in
+              an organization. The ability to write monitors is not required to set
+              downtimes.
+            monitors_read: View monitors.
+            monitors_write: Change, mute, and delete individual monitors.
+            synthetics_global_variable_read: View, search, and use in tests the list
+              of global variables available for Synthetics.
+            synthetics_global_variable_write: Create, edit, and delete global variables
+              for Synthetics.
+            synthetics_private_location_read: View, search, and use in tests the list
+              of available private locations.
+            synthetics_private_location_write: Create and delete private locations
+              as well as seeing the associated installation guidelines.
+            synthetics_read: List and view configured Synthetic tests.
+            synthetics_write: Create, edit, and delete Synthetic tests.
+            timeseries_query: Query Timeseries data.
+            usage_read: View your organization's usage and usage attribution.
+            user_access_invite: Invite other users to your organization.
+            user_access_manage: Disable users, manage user roles, and manage SAML-to-role
+              mappings.
           tokenUrl: /oauth2/v1/token
       type: oauth2
     apiKeyAuth:
