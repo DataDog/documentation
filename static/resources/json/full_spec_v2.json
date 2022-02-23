@@ -13028,6 +13028,18 @@
         ],
         "type": "object"
       },
+      "IncidentTimelineCellMarkdownCreateAttributesContent": {
+        "description": "The Markdown timeline cell contents.",
+        "properties": {
+          "content": {
+            "description": "The Markdown content of the cell.",
+            "example": "An example timeline cell message.",
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
       "IncidentType": {
         "default": "incidents",
         "description": "Incident resource type.",
@@ -15409,6 +15421,58 @@
         },
         "type": "object"
       },
+      "LogAttributes": {
+        "description": "JSON object containing all log attributes and their associated values.",
+        "properties": {
+          "attributes": {
+            "additionalProperties": {},
+            "description": "JSON object of attributes from your log.",
+            "example": {
+              "customAttribute": 123,
+              "duration": 2345
+            },
+            "type": "object"
+          },
+          "host": {
+            "description": "Name of the machine from where the logs are being sent.",
+            "example": "i-0123",
+            "type": "string"
+          },
+          "message": {
+            "description": "The message [reserved attribute](https://docs.datadoghq.com/logs/log_collection/#reserved-attributes)\nof your log. By default, Datadog ingests the value of the message attribute as the body of the log entry.\nThat value is then highlighted and displayed in the Logstream, where it is indexed for full text search.",
+            "example": "Host connected to remote",
+            "type": "string"
+          },
+          "service": {
+            "description": "The name of the application or service generating the log events.\nIt is used to switch from Logs to APM, so make sure you define the same\nvalue when you use both products.",
+            "example": "agent",
+            "type": "string"
+          },
+          "status": {
+            "description": "Status of the message associated with your log.",
+            "example": "INFO",
+            "type": "string"
+          },
+          "tags": {
+            "description": "Array of tags associated with your log.",
+            "example": [
+              "team:A"
+            ],
+            "items": {
+              "description": "Tag associated with your log.",
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "timestamp": {
+            "description": "Timestamp of your log.",
+            "example": "2019-01-02T09:42:36.320Z",
+            "format": "date-time",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
       "LogType": {
         "default": "log",
         "description": "Type of the event.",
@@ -15861,6 +15925,17 @@
         },
         "type": "object"
       },
+      "LogsAggregateRequestPage": {
+        "description": "Paging settings",
+        "properties": {
+          "cursor": {
+            "description": "The returned paging point to use to get the next results",
+            "example": "eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
       "LogsAggregateResponse": {
         "description": "The response object for the logs aggregate API endpoint",
         "properties": {
@@ -15997,6 +16072,74 @@
               }
             },
             "type": "object"
+          }
+        },
+        "type": "object"
+      },
+      "LogsAggregateResponseData": {
+        "description": "The query results",
+        "properties": {
+          "buckets": {
+            "description": "The list of matching buckets, one item per bucket",
+            "items": {
+              "description": "A bucket values",
+              "properties": {
+                "by": {
+                  "additionalProperties": {
+                    "description": "The values for each group by",
+                    "type": "string"
+                  },
+                  "description": "The key, value pairs for each group by",
+                  "example": {
+                    "@state": "success",
+                    "@version": "abc"
+                  },
+                  "type": "object"
+                },
+                "computes": {
+                  "additionalProperties": {
+                    "description": "A bucket value, can be either a timeseries or a single value",
+                    "oneOf": [
+                      {
+                        "description": "A single string value",
+                        "type": "string"
+                      },
+                      {
+                        "description": "A single number value",
+                        "format": "double",
+                        "type": "number"
+                      },
+                      {
+                        "description": "A timeseries array",
+                        "items": {
+                          "description": "A timeseries point",
+                          "properties": {
+                            "time": {
+                              "description": "The time value for this point",
+                              "example": "2020-06-08T11:55:00Z",
+                              "type": "string"
+                            },
+                            "value": {
+                              "description": "The value for this point",
+                              "example": 19,
+                              "format": "double",
+                              "type": "number"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "type": "array",
+                        "x-generate-alias-as-model": true
+                      }
+                    ]
+                  },
+                  "description": "A map of the metric name -> value for regular compute or list of values for a timeseries",
+                  "type": "object"
+                }
+              },
+              "type": "object"
+            },
+            "type": "array"
           }
         },
         "type": "object"
@@ -18815,6 +18958,35 @@
         ],
         "type": "object"
       },
+      "LogsGroupByHistogram": {
+        "description": "Used to perform a histogram computation (only for measure facets).\nNote: At most 100 buckets are allowed, the number of buckets is (max - min)/interval.",
+        "properties": {
+          "interval": {
+            "description": "The bin size of the histogram buckets",
+            "example": 10,
+            "format": "double",
+            "type": "number"
+          },
+          "max": {
+            "description": "The maximum value for the measure used in the histogram\n(values greater than this one are filtered out)",
+            "example": 100,
+            "format": "double",
+            "type": "number"
+          },
+          "min": {
+            "description": "The minimum value for the measure used in the histogram\n(values smaller than this one are filtered out)",
+            "example": 50,
+            "format": "double",
+            "type": "number"
+          }
+        },
+        "required": [
+          "interval",
+          "min",
+          "max"
+        ],
+        "type": "object"
+      },
       "LogsGroupByMissing": {
         "description": "The value to use for logs that don't have the facet used to group by",
         "oneOf": [
@@ -18959,6 +19131,25 @@
               "TIMESTAMP_ASCENDING",
               "TIMESTAMP_DESCENDING"
             ]
+          }
+        },
+        "type": "object"
+      },
+      "LogsListRequestPage": {
+        "description": "Paging attributes for listing logs.",
+        "properties": {
+          "cursor": {
+            "description": "List following results with a cursor provided in the previous query.",
+            "example": "eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==",
+            "type": "string"
+          },
+          "limit": {
+            "default": 10,
+            "description": "Maximum number of logs in the response.",
+            "example": 25,
+            "format": "int32",
+            "maximum": 1000,
+            "type": "integer"
           }
         },
         "type": "object"
@@ -19121,6 +19312,17 @@
               }
             },
             "type": "object"
+          }
+        },
+        "type": "object"
+      },
+      "LogsListResponseLinks": {
+        "description": "Links attributes.",
+        "properties": {
+          "next": {
+            "description": "Link for the next set of results. Note that the request can also be made using the\nPOST endpoint.",
+            "example": "https://app.datadoghq.com/api/v2/logs/event?filter[query]=foo&page[cursor]=eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==",
+            "type": "string"
           }
         },
         "type": "object"
@@ -20178,6 +20380,17 @@
               "type": "object"
             },
             "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "LogsResponseMetadataPage": {
+        "description": "Paging attributes.",
+        "properties": {
+          "after": {
+            "description": "The cursor to use to get the next results, if any. To make the next request, use the same.\nparameters with the addition of the `page[cursor]`.",
+            "example": "eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==",
+            "type": "string"
           }
         },
         "type": "object"
@@ -24142,6 +24355,24 @@
         },
         "type": "object"
       },
+      "ProcessSummariesMetaPage": {
+        "description": "Paging attributes.",
+        "properties": {
+          "after": {
+            "description": "The cursor used to get the next results, if any. To make the next request, use the same\nparameters with the addition of the `page[cursor]`.",
+            "example": "911abf1204838d9cdfcb9a96d0b6a1bd03e1b514074f1ce1737c4cbd",
+            "type": "string"
+          },
+          "size": {
+            "description": "Number of results returned.",
+            "format": "int32",
+            "maximum": 10000,
+            "minimum": 0,
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
       "ProcessSummariesResponse": {
         "description": "List of process summaries.",
         "properties": {
@@ -26315,6 +26546,95 @@
         },
         "type": "object"
       },
+      "RoleCreateResponseData": {
+        "description": "Role object returned by the API.",
+        "properties": {
+          "attributes": {
+            "description": "Attributes of the created role.",
+            "properties": {
+              "created_at": {
+                "description": "Creation time of the role.",
+                "format": "date-time",
+                "readOnly": true,
+                "type": "string"
+              },
+              "modified_at": {
+                "description": "Time of last role modification.",
+                "format": "date-time",
+                "readOnly": true,
+                "type": "string"
+              },
+              "name": {
+                "description": "Name of the role.",
+                "example": "developers",
+                "type": "string"
+              }
+            },
+            "required": [
+              "name"
+            ],
+            "type": "object"
+          },
+          "id": {
+            "description": "ID of the role.",
+            "type": "string"
+          },
+          "relationships": {
+            "description": "Relationships of the role object returned by the API.",
+            "properties": {
+              "permissions": {
+                "description": "Relationship to multiple permissions objects.",
+                "properties": {
+                  "data": {
+                    "description": "Relationships to permission objects.",
+                    "items": {
+                      "description": "Relationship to permission object.",
+                      "properties": {
+                        "id": {
+                          "description": "ID of the permission.",
+                          "type": "string"
+                        },
+                        "type": {
+                          "default": "permissions",
+                          "description": "Permissions resource type.",
+                          "enum": [
+                            "permissions"
+                          ],
+                          "example": "permissions",
+                          "type": "string",
+                          "x-enum-varnames": [
+                            "PERMISSIONS"
+                          ]
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  }
+                },
+                "type": "object"
+              }
+            },
+            "type": "object"
+          },
+          "type": {
+            "default": "roles",
+            "description": "Roles type.",
+            "enum": [
+              "roles"
+            ],
+            "example": "roles",
+            "type": "string",
+            "x-enum-varnames": [
+              "ROLES"
+            ]
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "type": "object"
+      },
       "RoleRelationships": {
         "description": "Relationships of the role object.",
         "properties": {
@@ -26749,6 +27069,91 @@
             "type": "object"
           }
         },
+        "type": "object"
+      },
+      "RoleUpdateResponseData": {
+        "description": "Role object returned by the API.",
+        "properties": {
+          "attributes": {
+            "description": "Attributes of the role.",
+            "properties": {
+              "created_at": {
+                "description": "Creation time of the role.",
+                "format": "date-time",
+                "readOnly": true,
+                "type": "string"
+              },
+              "modified_at": {
+                "description": "Time of last role modification.",
+                "format": "date-time",
+                "readOnly": true,
+                "type": "string"
+              },
+              "name": {
+                "description": "Name of the role.",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "id": {
+            "description": "ID of the role.",
+            "type": "string"
+          },
+          "relationships": {
+            "description": "Relationships of the role object returned by the API.",
+            "properties": {
+              "permissions": {
+                "description": "Relationship to multiple permissions objects.",
+                "properties": {
+                  "data": {
+                    "description": "Relationships to permission objects.",
+                    "items": {
+                      "description": "Relationship to permission object.",
+                      "properties": {
+                        "id": {
+                          "description": "ID of the permission.",
+                          "type": "string"
+                        },
+                        "type": {
+                          "default": "permissions",
+                          "description": "Permissions resource type.",
+                          "enum": [
+                            "permissions"
+                          ],
+                          "example": "permissions",
+                          "type": "string",
+                          "x-enum-varnames": [
+                            "PERMISSIONS"
+                          ]
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  }
+                },
+                "type": "object"
+              }
+            },
+            "type": "object"
+          },
+          "type": {
+            "default": "roles",
+            "description": "Roles type.",
+            "enum": [
+              "roles"
+            ],
+            "example": "roles",
+            "type": "string",
+            "x-enum-varnames": [
+              "ROLES"
+            ]
+          }
+        },
+        "required": [
+          "type"
+        ],
         "type": "object"
       },
       "RolesResponse": {
@@ -30034,6 +30439,51 @@
         },
         "type": "object"
       },
+      "SecurityMonitoringSignalAttributes": {
+        "description": "The object containing all signal attributes and their\nassociated values.",
+        "properties": {
+          "attributes": {
+            "additionalProperties": {},
+            "description": "A JSON object of attributes in the security signal.",
+            "example": {
+              "workflow": {
+                "first_seen": "2020-06-23T14:46:01.000Z",
+                "last_seen": "2020-06-23T14:46:49.000Z",
+                "rule": {
+                  "id": "0f5-e0c-805",
+                  "name": "Brute Force Attack Grouped By User ",
+                  "version": 12
+                }
+              }
+            },
+            "type": "object"
+          },
+          "message": {
+            "description": "The message in the security signal defined by the rule that generated the signal.",
+            "example": "Detect Account Take Over (ATO) through brute force attempts",
+            "type": "string"
+          },
+          "tags": {
+            "description": "An array of tags associated with the security signal.",
+            "example": [
+              "security:attack",
+              "technique:T1110-brute-force"
+            ],
+            "format": "array",
+            "items": {
+              "description": "The tag associated with the security signal.",
+              "type": "string"
+            }
+          },
+          "timestamp": {
+            "description": "The timestamp of the security signal.",
+            "example": "2019-01-02T09:42:36.320Z",
+            "format": "date-time",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
       "SecurityMonitoringSignalListRequest": {
         "description": "The request for a security signal list.",
         "properties": {
@@ -30090,6 +30540,48 @@
               "TIMESTAMP_ASCENDING",
               "TIMESTAMP_DESCENDING"
             ]
+          }
+        },
+        "type": "object"
+      },
+      "SecurityMonitoringSignalListRequestFilter": {
+        "description": "Search filters for listing security signals.",
+        "properties": {
+          "from": {
+            "description": "The minimum timestamp for requested security signals.",
+            "example": "2019-01-02T09:42:36.320Z",
+            "format": "date-time",
+            "type": "string"
+          },
+          "query": {
+            "description": "Search query for listing security signals.",
+            "example": "security:attack status:high",
+            "type": "string"
+          },
+          "to": {
+            "description": "The maximum timestamp for requested security signals.",
+            "example": "2019-01-03T09:42:36.320Z",
+            "format": "date-time",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "SecurityMonitoringSignalListRequestPage": {
+        "description": "The paging attributes for listing security signals.",
+        "properties": {
+          "cursor": {
+            "description": "A list of results using the cursor provided in the previous query.",
+            "example": "eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==",
+            "type": "string"
+          },
+          "limit": {
+            "default": 10,
+            "description": "The maximum number of security signals in the response.",
+            "example": 25,
+            "format": "int32",
+            "maximum": 1000,
+            "type": "integer"
           }
         },
         "type": "object"
@@ -30208,6 +30700,45 @@
               }
             },
             "type": "object"
+          }
+        },
+        "type": "object"
+      },
+      "SecurityMonitoringSignalsListResponseLinks": {
+        "description": "Links attributes.",
+        "properties": {
+          "next": {
+            "description": "The link for the next set of results. **Note**: The request can also be made using the\nPOST endpoint.",
+            "example": "https://app.datadoghq.com/api/v2/security_monitoring/signals?filter[query]=foo&page[cursor]=eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "SecurityMonitoringSignalsListResponseMeta": {
+        "description": "Meta attributes.",
+        "properties": {
+          "page": {
+            "description": "Paging attributes.",
+            "properties": {
+              "after": {
+                "description": "The cursor used to get the next results, if any. To make the next request, use the same\nparameters with the addition of the `page[cursor]`.",
+                "example": "eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          }
+        },
+        "type": "object"
+      },
+      "SecurityMonitoringSignalsListResponseMetaPage": {
+        "description": "Paging attributes.",
+        "properties": {
+          "after": {
+            "description": "The cursor used to get the next results, if any. To make the next request, use the same\nparameters with the addition of the `page[cursor]`.",
+            "example": "eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==",
+            "type": "string"
           }
         },
         "type": "object"
