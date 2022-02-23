@@ -12,14 +12,17 @@ further_reading:
       text: 'Installing Ruby Serverless Monitoring'
 ---
 
-### Install Datadog's AWS integration
+## Quick start
 
-Install the [AWS integration][1]. This allows Datadog to ingest Lambda metrics from AWS CloudWatch.
+If you are new to Datadog, you can get started by [signing up for a Datadog account][5], then following the instructions for [installing Datadog's Lambda Extension][6]. Completing these steps will configure your Lambda functions to send real-time metrics, logs, and traces to Datadog:
 
-### Instrument your serverless application
+{{< img src="serverless/aws-fully-managed-services-serverless-monitoring-hero.png" alt="Datadog Serverless Monitoring"  style="width:100%;" >}}
 
-Select the Lambda runtime below for instructions to instrument your serverless application.
+## Installation instructions
 
-   {{< partial name="serverless/getting-started-languages.html" >}}
+For more detailed installation instructions, select the Lambda runtime below for instructions to instrument your serverless application:
 
-[1]: /integrations/amazon_web_services/#setup
+{{< partial name="serverless/getting-started-languages.html" >}}
+
+[5]: https://app.datadoghq.com/signup/
+[6]: https://app.datadoghq.com/signup/agent#lambda

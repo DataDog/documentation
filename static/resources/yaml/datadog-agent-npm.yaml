@@ -59,7 +59,6 @@ data:
       enabled: false
     runtime_security_config:
       enabled: false
-      debug: false
       socket: /var/run/sysprobe/runtime-security.sock
       policies:
         dir: /etc/datadog-agent/runtime-security.d
@@ -262,27 +261,6 @@ data:
       ]
     }
 ---
-# Source: datadog/templates/agent-services.yaml
-apiVersion: v1
-kind: Service
-metadata:
-  name: datadog-agent
-  namespace: default
-  labels:
-    app: "datadog-agent"
-    chart: "datadog-2.28.13"
-    release: "datadog-agent"
-    heritage: "Helm"
-spec:
-  selector:
-    app: datadog-agent
-  ports:
-    - protocol: UDP
-      port: 8125
-      targetPort: 8125
-      name: dogstatsd
-  internalTrafficPolicy: Local
----
 # Source: datadog/templates/daemonset.yaml
 apiVersion: apps/v1
 kind: DaemonSet
@@ -305,7 +283,7 @@ spec:
     spec:
       containers:
         - name: agent
-          image: "gcr.io/datadoghq/agent:7.32.4"
+          image: "gcr.io/datadoghq/agent:7.33.0"
           imagePullPolicy: IfNotPresent
           command: ["agent", "run"]
           resources: {}
@@ -404,66 +382,8 @@ spec:
             periodSeconds: 15
             successThreshold: 1
             timeoutSeconds: 5
-        - name: trace-agent
-          image: "gcr.io/datadoghq/agent:7.32.4"
-          imagePullPolicy: IfNotPresent
-          command: ["trace-agent", "-config=/etc/datadog-agent/datadog.yaml"]
-          resources: {}
-          ports:
-            - containerPort: 8126
-              name: traceport
-              protocol: TCP
-          env:
-            # Needs to be removed when Agent N-2 is built with Golang 1.17
-            - name: GODEBUG
-              value: x509ignoreCN=0
-            - name: DD_API_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: "datadog-agent"
-                  key: api-key
-            - name: DD_KUBERNETES_KUBELET_HOST
-              valueFrom:
-                fieldRef:
-                  fieldPath: status.hostIP
-            - name: KUBERNETES
-              value: "yes"
-            - name: DD_CLUSTER_AGENT_ENABLED
-              value: "false"
-            - name: DD_LOG_LEVEL
-              value: "INFO"
-            - name: DD_APM_ENABLED
-              value: "true"
-            - name: DD_APM_NON_LOCAL_TRAFFIC
-              value: "true"
-            - name: DD_APM_RECEIVER_PORT
-              value: "8126"
-            - name: DD_APM_RECEIVER_SOCKET
-              value: "/var/run/datadog/apm.socket"
-            - name: DD_DOGSTATSD_SOCKET
-              value: "/var/run/datadog/dsd.socket"
-          volumeMounts:
-            - name: config
-              mountPath: /etc/datadog-agent
-            - name: logdatadog
-              mountPath: /var/log/datadog
-            - name: tmpdir
-              mountPath: /tmp
-              readOnly: false
-            - name: dsdsocket
-              mountPath: /var/run/datadog
-            - name: runtimesocketdir
-              mountPath: /host/var/run
-              mountPropagation: None
-              readOnly: true
-          livenessProbe:
-            initialDelaySeconds: 15
-            periodSeconds: 15
-            tcpSocket:
-              port: 8126
-            timeoutSeconds: 5
         - name: process-agent
-          image: "gcr.io/datadoghq/agent:7.32.4"
+          image: "gcr.io/datadoghq/agent:7.33.0"
           imagePullPolicy: IfNotPresent
           command: ["process-agent", "-config=/etc/datadog-agent/datadog.yaml"]
           resources: {}
@@ -529,7 +449,7 @@ spec:
               mountPath: /etc/datadog-agent/system-probe.yaml
               subPath: system-probe.yaml
         - name: system-probe
-          image: "gcr.io/datadoghq/agent:7.32.4"
+          image: "gcr.io/datadoghq/agent:7.33.0"
           imagePullPolicy: IfNotPresent
           securityContext:
             capabilities:
@@ -600,7 +520,7 @@ spec:
               readOnly: true
       initContainers:
         - name: init-volume
-          image: "gcr.io/datadoghq/agent:7.32.4"
+          image: "gcr.io/datadoghq/agent:7.33.0"
           imagePullPolicy: IfNotPresent
           command: ["bash", "-c"]
           args:
@@ -610,7 +530,7 @@ spec:
               mountPath: /opt/datadog-agent
           resources: {}
         - name: init-config
-          image: "gcr.io/datadoghq/agent:7.32.4"
+          image: "gcr.io/datadoghq/agent:7.33.0"
           imagePullPolicy: IfNotPresent
           command: ["bash", "-c"]
           args:
@@ -650,7 +570,7 @@ spec:
               value: "true"
           resources: {}
         - name: seccomp-setup
-          image: "gcr.io/datadoghq/agent:7.32.4"
+          image: "gcr.io/datadoghq/agent:7.33.0"
           command:
             - cp
             - /etc/config/system-probe-seccomp.json
@@ -694,10 +614,6 @@ spec:
             path: /var/run/datadog/
             type: DirectoryOrCreate
           name: dsdsocket
-        - hostPath:
-            path: /var/run/datadog/
-            type: DirectoryOrCreate
-          name: apmsocket
         - name: s6-run
           emptyDir: {}
         - name: sysprobe-config

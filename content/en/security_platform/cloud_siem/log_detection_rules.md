@@ -8,7 +8,7 @@ aliases:
 further_reading:
 - link: "/cloud_siem/default_rules/"
   tag: "Documentation"
-  text: "Configure default Cloud SIEM rules"
+  text: "Configure default Cloud SIEM detection rules"
 - link: "/cloud_siem/explorer/"
   tag: "Documentation"
   text: "Learn about the Security Signals Explorer"
@@ -29,7 +29,7 @@ To create a new log detection rule in Datadog, hover over **Security**, select *
 
 ## Rule Type
 
-For Cloud SIEM, select **Log Detection** to analyze ingested logs in real-time.
+For Cloud SIEM (Security Information and Event Management), select **Log Detection** to analyze ingested logs in real-time.
 
 ## Choose a detection method
 
@@ -213,7 +213,7 @@ A signal will "close" regardless of whether or not the anomaly is still anomalou
 
 ## Say what's happening
 
-The **Rule name** section allows you to configure the rule name that appears in the rules list view, as well as the title of the Security Signal.
+The **Rule name** section allows you to configure the rule name that appears in the detection rules list view, as well as the title of the Security Signal.
 
 The notification box has the same Markdown and preview features as those of [monitor notifications][1]. In addition to the features, you can reference the tags associated with the signal and the event attributes. The attributes can be seen on a signal in the “event attributes” tab, and you can access the attributes with the following syntax: `{{@attribute}}`. You can access inner keys of the event attributes by using JSON dot notation (for example, `{{@attribute.inner_key}}`).
 

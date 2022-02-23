@@ -1,4 +1,6 @@
 environment: default
+# do not delete repo_name, used by websites-modules as context
+repo_name: "documentation"
 integrations_img_url: "https://static.datadoghq.com/static/images/logos/"
 imgix:
   header_jpg: "?ch=Width&fit=max&fm=jpg&auto=format&lossless=true"
@@ -80,7 +82,9 @@ code_language_ids:
     dotnet-framework: ".NET Framework"
     curl: Curl
     nginx: Nginx
+    native: Native
     other: Other
+    linux: Linux
 
 branch: ""
 
@@ -91,11 +95,9 @@ header_scripts:
   - google-tag-manager: false
   - google-site-tag: false
   - marketo: false
-  - quora-pixel: false
 
 footer_scripts:
   - snowplow: false
-  - adroll: false
 
 # Docs allowed regions for redirecting
 allowedRegions:

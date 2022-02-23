@@ -33,7 +33,7 @@ If you have already indexed logs that contain sensitive data, then follow these 
 
 1. [Determine the scope of the data being sent](#determine-the-scope-of-the-data-being-sent)
 2. [Fix the source of the data upstream](#fix-the-source-of-the-data-upstream)
-3. [Handle data already sent to Datadog](#handle-data-already-sent-to-datadog)
+3. [Handle data already sent to Datadog](#handle-data-already-sent-to-and-indexed-in-datadog)
 
 ## Determine the scope of the data being sent
 

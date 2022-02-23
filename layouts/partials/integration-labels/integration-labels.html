@@ -25,6 +25,14 @@
 </div>
 {{ end }}
 
+{{ if .Params.is_beta }}
+    <div class="row">
+        <div class="beta col-12">
+            {{ partial "img.html" (dict "root" . "src" "icons/check_beta.png" "class" "static" "alt" "Beta" "width" "21") }}<span>{{ i18n "beta_check" }}</span>
+        </div>
+    </div>
+{{ end }}
+
 {{ if .Params.supported_os }}
     <div class="row integration-os">
         <div class="agent col-12">

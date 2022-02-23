@@ -12,7 +12,9 @@ further_reading:
 
 ## 概要
 
-フロントエンドの JavaScript ソースコードが縮小されている場合は、ソースマップを Datadog にアップロードして、さまざまなスタックトレースを難読化できるようにする必要があります。その後、特定のエラーについて、ファイルパス、行番号、および関連するスタックトレースの各フレームのコードスニペットにアクセスできます。
+フロントエンドの Javascript ソースコードが縮小されている場合、Datadog にソースマップをアップロードして、異なるスタックトレースを難読化できるようにする必要があります。あるエラーについて、ファイルパス、行番号、関連するスタックトレースの各フレームのコードスニペットにアクセスすることができます。
+
+<div class="alert alert-info"><strong>注</strong>: <a href="/real_user_monitoring/error_tracking/">エラー追跡</a>で最小化および処理できるのは、<a href="/real_user_monitoring/">リアルユーザーモニタリング (RUM)</a> によって収集されたエラーのみです。</div>
 
 ## コードのインスツルメンテーション
 ソースコードを縮小するときに、関連するソースコードを `sourcesContent` 属性に直接含むソースマップを生成するように、JavaScript バンドルを構成する必要があります。一般的な JavaScript バンドルのコンフィギュレーションを以下で確認してください。また、関連する縮小ファイルのサイズで拡張された各ソースマップのサイズが、__上限の 50MB__を越えないようにしてください。よく使用される JavaScript バンドルのコンフィギュレーション例については以下を参照してください。
@@ -86,7 +88,7 @@ datadog-ci sourcemaps upload /path/to/dist \
 ```
 
 
-[1]: https://app.datadoghq.com/account/settings#api
+[1]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{% tab "EU" %}}
 
@@ -102,11 +104,11 @@ datadog-ci sourcemaps upload /path/to/dist \
 ```
 
 
-[1]: https://app.datadoghq.com/account/settings#api
+[1]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{< /tabs >}}
 
-**注**: CLI は、CI のパフォーマンスのオーバーヘッドを最小限に抑えるために、必要な数のソースマップを非常に短い時間 (通常は数秒) でアップロードするように最適化されています。
+**注**: CLI は、CI のパフォーマンスのオーバーヘッドを最小限に抑えるために、必要な数のソースマップを短い時間 (通常は数秒) でアップロードするように最適化されています。
 
 このコマンドをサンプルの `dist` ディレクトリ (前のセクションを参照) に対して実行することにより、Datadog はサーバーまたは CDN が `https://hostname.com/static/js/javascript.364758.min.js` および `https://hostname.com/static/js/subdirectory/javascript.464388.min.js` で JavaScript ファイルを配信することを期待します。ユーザーの 1 人のセッションでエラーが発生すると、RUM SDK は即座にそれを収集します。指定されたエラーがこれらの URL の 1 つからダウンロードされ、`version:v35.2395005` および `service:my-service` のタグが付けられたファイルで発生した場合は常に、関連するソースマップを使用してスタックトレースを難読化します (この場合、`javascript.464388.js.map` ファイル)。
 
@@ -122,7 +124,7 @@ datadog-ci sourcemaps upload /path/to/dist \
 
 それどころか、非縮小スタックトレースは、高速でシームレスなトラブルシューティングに必要なすべてのコンテキストを提供します。
 
-{{< img src="real_user_monitoring/error_tracking/unminified_stacktrace.gif" alt="エラー追跡非縮小スタックトレース"  >}}
+{{< img src="real_user_monitoring/error_tracking/unminified_stacktrace.mp4" alt="エラー追跡非縮小スタックトレース" video=true >}}
 
 ## その他の参考資料
 

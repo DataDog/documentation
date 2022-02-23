@@ -136,5 +136,12 @@ export default {
       us5: 'The US5 functions endpoint port is not supported.',
       eu: 'The EU functions endpoint port is not supported.',
       gov: 'The GOV functions endpoint port is not supported.'
+    },
+    browser_sdk_endpoint_domain: {
+      us: 'browser-intake-datadoghq.com',
+      us3: 'browser-intake-us3-datadoghq.com',
+      us5: 'browser-intake-us5-datadoghq.com',
+      eu: 'browser-intake-datadoghq.eu',
+      gov: 'browser-intake-ddog-gov.com'
     }
 };
