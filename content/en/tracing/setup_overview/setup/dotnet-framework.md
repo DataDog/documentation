@@ -58,7 +58,7 @@ For a full list of supported libraries and processor architectures (including ol
   <div class="alert-info"><strong>It is recommended</strong> to follow the <a href="https://app.datadoghq.com/apm/docs">Quickstart instructions</a> within the Datadog app for the best experience, including:
     <div>- Step by step instructions scoped to your deployment configuration (hosts, Docker, Kubernetes, or Amazon ECS).</div>
     <div>- Dynamically set <code>service</code>, <code>env</code>, and <code>version</code> tags</div>
-    <div>- Enable ingesting 100% of traces, and Trace ID injection into logs during setup.</div>
+    <div>- Enable ingesting 100% of traces and Trace ID injection into logs during setup.</div>
   </div>
 </div>
 
@@ -186,15 +186,15 @@ For containerized, serverless, and cloud environments:
 {{< partial name="apm/apm-containers.html" >}}
 </br>
 
-3. After instrumenting your application, the tracing client attempts to send traces to:
+3. After instrumenting your application, the tracing client attempts to send traces to the following:
 
     - The `/var/run/datadog/apm.socket` Unix domain socket by default.
-    - If the socket does not exist then traces are sent to `localhost:8126`.
-    - If a different socket, host or port is required use the `DD_TRACE_AGENT_URL` environment variable:
+    - If the socket does not exist, then traces are sent to `localhost:8126`.
+    - If a different socket, host or port is required, use the `DD_TRACE_AGENT_URL` environment variable:
     `DD_TRACE_AGENT_URL=http://custom-hostname:1234`
     `DD_TRACE_AGENT_URL=unix:///var/run/datadog/apm.socket`
 
-For more information on the available setting knobs, avalaible as environment variables or through code, see [Configuration](#configuration).
+For more information on the available setting knobs, available as environment variables or through code, see [Configuration](#configuration).
 
 {{< site-region region="us3,us5,eu,gov" >}}
 

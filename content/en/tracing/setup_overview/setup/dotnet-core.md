@@ -231,15 +231,15 @@ For containerized, serverless, and cloud environments:
 {{< partial name="apm/apm-containers.html" >}}
 </br>
 
-3. After instrumenting your application, the tracing client attempts to send traces to:
+3. After instrumenting your application, the tracing client attempts to send traces to the following:
 
     - The `/var/run/datadog/apm.socket` Unix domain socket by default.
-    - If the socket does not exist then traces are sent to `localhost:8126`.
-    - If a different socket, host or port is required use the `DD_TRACE_AGENT_URL` environment variable:
+    - If the socket does not exist, then traces are sent to `localhost:8126`.
+    - If a different socket, host or port is required, use the `DD_TRACE_AGENT_URL` environment variable:
     `DD_TRACE_AGENT_URL=http://custom-hostname:1234`
     `DD_TRACE_AGENT_URL=unix:///var/run/datadog/apm.socket`
 
-For more information on the available setting knobs, avalaible as environment variables or through code, see [Configuration](#configuration).
+For more information on the available setting knobs, available as environment variables or through code, see [Configuration](#configuration).
 
 {{< site-region region="us3,us5,eu,gov" >}}
 
