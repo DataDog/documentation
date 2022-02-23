@@ -7,7 +7,7 @@ further_reading:
   text: "Watchdog Root Cause Analysis for APM"
 ---
 
-Watchdog looks for specific types of root causes. We're working on adding additional coverage. Currently, Watchdog Root Cause Analysis (RCA) detects the following root causes:
+Watchdog looks for specific types of root causes. Watchdog Root Cause Analysis (RCA) detects the following root causes:
 
 - Version changes, as captured by the `version` tag on your [APM services][1]
 - Traffic increases, as captured by hit rate metrics on your APM-instrumented services
