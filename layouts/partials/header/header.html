@@ -38,12 +38,12 @@
                             <!--/ Menu: Solutions menu -->
                             <!-- Menu: with sub-menus -->
                             {{ else if eq .Identifier "product" }}
-                              <ul class="dropdown-menu product-menu p-2">
+                              <ul class="dropdown-menu product-menu px-2 pt-3 pb-2">
                                 <div class="row">
                                   <div class="col-6">
                                     {{ range first 3 .Children }}
                                     <div class="mb-half-1 pb-1">
-                                      <p class="pl-1 text-gray-dark small text-uppercase font-weight-semibold no-event">{{ .Name }}</p>
+                                      <p class="pl-1 mb-0 text-gray-dark small text-uppercase font-weight-semibold no-event">{{ .Name }}</p>
                                       {{ if .HasChildren }}
                                       <ul class="list-unstyled mt-half-1 pt-1">
                                         {{ range .Children }}
@@ -62,7 +62,7 @@
                                   <div class="col-6">
                                     {{ range last 3 .Children }}
                                     <div class="mb-half-1 pb-1">
-                                      <p class="pl-1 text-gray-dark small text-uppercase font-weight-semibold no-event">{{ .Name }}</p>
+                                      <p class="pl-1 mb-0 text-gray-dark small text-uppercase font-weight-semibold no-event">{{ .Name }}</p>
                                       {{ if .HasChildren }}
                                       <ul class="list-unstyled mt-half-1 pt-1">
                                         {{ range .Children }}
