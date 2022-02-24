@@ -24,7 +24,6 @@ aliases:
 
 If your Go Lambda functions are still using runtime `go1.x`, you must either [migrate][1] to `provided.al2` or use the [Datadog Forwarder][2] instead of the Datadog Lambda Extension.
 
-{{< tabs >}}
 {{% tab "Datadog CLI" %}}
 
 The Datadog CLI modifies existing Lambda functions' configurations to enable instrumentation without requiring a new deployment. It is the quickest way to get started with Datadog's serverless monitoring.
@@ -78,11 +77,10 @@ datadog-ci lambda instrument -f my-function -f another-function -r us-east-1 -e 
 
 More information and additional parameters can be found in the [CLI documentation][2].
 
-
 [1]: https://https://aws.github.io/aws-sdk-go-v2/docs/getting-started/#get-your-aws-access-keys
 [2]: https://docs.datadoghq.com/serverless/serverless_integrations/cli
+
 {{% /tab %}}
-{{< tabs >}}
 {{% tab "Custom " %}}
 
 ### Install the Datadog Lambda Extension
