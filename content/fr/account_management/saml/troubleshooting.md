@@ -40,7 +40,7 @@ Si vous ne parvenez pas à modifier le fichier de métadonnées de votre fournis
 Pour valider votre fichier de métadonnées :
 
 1. Choisissez un outil de validation SAML, tel que l'[outil de développement SAML][4] de OneLogin.
-2. Collez vos métadonnées dans le champ XML et sélectionnez **Metadata** dans le champ XSD (fichier de schéma).
+2. Collez vos métadonnées dans le champ XML et sélectionnez **Metadata** dans le champ XSD (schema file).
 3. Cliquez sur **Validate XML With the XSD Schema**.
 
 ## Erreurs concernant les rôles
