@@ -213,7 +213,7 @@ If your Lambda function is running in a VPC, follow these [instructions][8] to e
 
 ## Troubleshooting
 
-If you have trouble collecting monitoring data after following the instructions above, see the [serverless monitoring troubleshooting guide][8].
+If you have trouble collecting monitoring data after following the instructions above, see the [serverless monitoring troubleshooting guide][9].
 
 ## Further Reading
 
@@ -227,3 +227,4 @@ If you have trouble collecting monitoring data after following the instructions 
 [6]: https://app.datadoghq.com/functions
 [7]: /serverless/custom_metrics?tab=go
 [8]: /serverless/libraries_integrations/extension/#vpc
+[9]: /serverless/guide/troubleshoot_serverless_monitoring/
