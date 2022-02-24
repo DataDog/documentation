@@ -49,6 +49,7 @@ To run a [Docker container][1] that embeds the Datadog Agent to monitor your hos
 
 ```shell
 docker run -d --name datadog-agent \
+           --cgroupns host \
            -e DD_API_KEY=<DATADOG_API_KEY> \
            -e DD_LOGS_ENABLED=true \
            -e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true \
@@ -65,6 +66,7 @@ docker run -d --name datadog-agent \
 
 ```shell
 docker run -d --name datadog-agent \
+           --cgroupns host \
            -e DD_API_KEY=<DATADOG_API_KEY> \
            -e DD_LOGS_ENABLED=true \
            -e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true \
@@ -80,6 +82,7 @@ Add the path `/opt/datadog-agent/run` under Docker Desktop -> Settings -> Resour
 
 ```shell
 docker run -d --name datadog-agent \
+           --cgroupns host \
            -e DD_API_KEY=<DATADOG_API_KEY> \
            -e DD_LOGS_ENABLED=true \
            -e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true \

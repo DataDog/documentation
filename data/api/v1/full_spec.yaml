@@ -12441,6 +12441,10 @@ components:
         allow_insecure:
           description: Allows loading insecure content for an HTTP request.
           type: boolean
+        checkCertificateRevocation:
+          description: For SSL test, whether or not the test should fail on revoked
+            certificate in stapled OCSP.
+          type: boolean
         device_ids:
           description: For browser test, array with the different device IDs used
             to run the test.
@@ -25727,7 +25731,7 @@ paths:
       x-given:
         synthetics_api_test:
           parameters:
-          - file: synthetics_api_test_payload.json
+          - file: synthetics_api_http_test_payload.json
             name: body
           step: there is a valid "synthetics_api_test" in the system
         synthetics_api_test_with_wrong_dns:
