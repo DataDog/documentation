@@ -21,7 +21,7 @@ aliases:
 {{< img src="serverless/java-lambda-tracing.png" alt="Monitor Java Lambda Functions with Datadog" style="width:100%;">}}
 
 <div class="alert alert-danger">
-There are versions of datadog-lambda-java that import log4j <=2.14.0 as a transitive dependency. <a href="#upgrading">Upgrade instructions</a> are below. 
+There are versions of datadog-lambda-java that import log4j <=2.14.0 as a transitive dependency. <a href="#upgrading">Upgrade instructions</a> are below.
 </div>
 
 ## Prerequisites
@@ -31,6 +31,65 @@ To fully instrument your serverless application with distributed tracing, your J
 If your Java Lambda functions were previously set up using the Datadog Forwarder, see the [installation instructions][1].
 
 ## Configuration
+
+{{< tabs >}}
+{{% tab "Datadog CLI" %}}
+The Datadog CLI modifies existing Lambda functions' configurations to enable instrumentation without requiring a new deployment. It is the quickest way to get started with Datadog's serverless monitoring.
+
+You can also add the command to your CI/CD pipelines to enable instrumentation for all your serverless applications. Run the command _after_ your normal serverless application deployment, so that changes made by the Datadog CLI command are not overridden.
+
+### Install
+
+Install the Datadog CLI with NPM or Yarn:
+
+```sh
+# NPM
+npm install -g @datadog/datadog-ci
+
+# Yarn
+yarn global add @datadog/datadog-ci
+```
+
+### Configure credentials
+
+For a quick start, configure Datadog and [AWS credentials][1] using the following command. For production applications, consider supplying the environment variables or credentials in a more secure manner.
+
+```bash
+export DATADOG_API_KEY="<DD_API_KEY>"
+export DATADOG_SITE="<DD_SITE>" # such as datadoghq.com, datadoghq.eu, us3.datadoghq.com or ddog-gov.com
+export AWS_ACCESS_KEY_ID="<ACCESS KEY ID>"
+export AWS_SECRET_ACCESS_KEY="<ACCESS KEY>"
+```
+
+### Instrument
+
+**Note**: Instrument your Lambda functions in a dev or staging environment first! Should the instrumentation result be unsatisfactory, run `uninstrument` with the same arguments to revert the changes.
+
+To instrument your Lambda functions, run the following command:
+
+```sh
+datadog-ci lambda instrument -f <functionname> -f <another_functionname> -r <aws_region> -e <extension_version>
+```
+
+To fill in the placeholders:
+
+-   Replace `<functionname>` and `<another_functionname>` with your Lambda function names.
+-   Replace `<aws_region>` with the AWS region name.
+-   Replace `<extension_version>` with the desired version of the Datadog Lambda Extension. The latest version is `{{< latest-lambda-layer-version layer="extension" >}}`.
+
+For example:
+
+```sh
+datadog-ci lambda instrument -f my-function -f another-function -r us-east-1 -e {{< latest-lambda-layer-version layer="extension" >}}
+```
+
+More information and additional parameters can be found in the [CLI documentation][2].
+
+[1]: https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/get-started.html
+[2]: https://docs.datadoghq.com/serverless/serverless_integrations/cli
+
+{{% /tab %}}
+{{% tab "Custom" %}}
 ### Install the Datadog Lambda Extension
 
 [Configure the layers][14] for your Lambda function using the ARN in the following format:
@@ -44,7 +103,9 @@ arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension-ARM:<EXTENSION_
 
 The latest `EXTENSION_VERSION` is {{< latest-lambda-layer-version layer="extension" >}}.
 
-### Install the Datadog tracing client 
+{{% /tab %}}
+{{< /tabs >}}
+### Install the Datadog tracing client
 
 [Configure the layers][14] for your Lambda function using the ARN in the following format:
 
@@ -133,7 +194,7 @@ public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, AP
         Map<String,Object> myTags = new HashMap<String, Object>();
             myTags.put("product", "latte");
             myTags.put("order","online");
-        
+
         // Submit a custom metric
         ddl.metric(
             "coffee_house.order_value", // Metric name
@@ -167,7 +228,7 @@ Some versions of `datadog-lambda-java` include a transitive dependency on log4j 
 
 The latest version of datadog-lambda java is ![Maven Cental][4]. Use this version (omitting the preceeding `v`) when following the upgrading instructions below.
 
-If you do not wish to upgrade to `1.4.x`, `0.3.x` is updated with the latest log4j security patches as well. 
+If you do not wish to upgrade to `1.4.x`, `0.3.x` is updated with the latest log4j security patches as well.
 You may find the latest version of `0.3.x` in the [datadog-lambda-java repository][13].
 
 The version of the `datadog-lambda-java` dependency in your Lambda function is set in `pom.xml` or `build.gradle` depending on whether you are using Maven or Gradle, respectively.
@@ -185,7 +246,7 @@ Your `pom.xml` file contains a section similar to the following:
 </dependency>
 ```
 
-Replace `VERSION` with the latest version of `datadog-lambda-java` (available above). 
+Replace `VERSION` with the latest version of `datadog-lambda-java` (available above).
 Then redeploy your lambda function.
 
 {{% /tab %}}
@@ -200,7 +261,7 @@ dependencies {
 }
 ```
 
-Replace `VERSION` with the latest version of `datadog-lambda-java` (available above). 
+Replace `VERSION` with the latest version of `datadog-lambda-java` (available above).
 Then redeploy your lambda function.
 
 {{% /tab %}}
