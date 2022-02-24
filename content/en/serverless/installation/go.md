@@ -277,8 +277,8 @@ If you have trouble collecting monitoring data after following the instructions 
 
 [1]: https://aws.amazon.com/blogs/compute/migrating-aws-lambda-functions-to-al2/
 [2]: /serverless/guide/datadog_forwarder_go
-[3]: /serverless/libraries_integrations/extension/#tagging
-[4]: https://app.datadoghq.com/functions
-[5]: /serverless/custom_metrics?tab=go
-[6]: /serverless/libraries_integrations/extension/#vpc
-[7]: /serverless/guide/troubleshoot_serverless_monitoring/
+[3]: https://github.com/DataDog/datadog-lambda-go
+[4]: https://app.datadoghq.com/organization-settings/api-keys
+[5]: /serverless/libraries_integrations/extension/#tagging
+[6]: https://app.datadoghq.com/functions
+[7]: /serverless/custom_metrics?tab=go
