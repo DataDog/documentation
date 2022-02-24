@@ -45,7 +45,7 @@ yarn global add @datadog/datadog-ci
 
 ### Configure credentials
 
-For a quick start, configure Datadog and [AWS credentials][10] using the following command. For production applications, consider supplying the environment variables or credentials in a more secure manner.
+For a quick start, configure Datadog and [AWS credentials][1] using the following command. For production applications, consider supplying the environment variables or credentials in a more secure manner.
 
 ```bash
 export DATADOG_API_KEY="<DD_API_KEY>"
@@ -76,7 +76,7 @@ For example:
 datadog-ci lambda instrument -f my-function -f another-function -r us-east-1 -e {{< latest-lambda-layer-version layer="extension" >}}
 ```
 
-More information and additional parameters can be found in the [CLI documentation][11].
+More information and additional parameters can be found in the [CLI documentation][2].
 
 ### Install the Datadog Lambda library
 
@@ -132,6 +132,9 @@ go get github.com/DataDog/datadog-lambda-go
     }
     ```
 
+[1]: https://aws.github.io/aws-sdk-go-v2/docs/getting-started/#get-your-aws-access-keys
+[2]: https://docs.datadoghq.com/serverless/serverless_integrations/cli
+[3]: https://github.com/DataDog/datadog-lambda-go
 {{% /tab %}}
 {{% tab "Custom" %}}
 ### Install the Datadog Lambda Extension
@@ -158,7 +161,7 @@ arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension-ARM:<EXT
 The latest `EXTENSION_VERSION` is {{< latest-lambda-layer-version layer="extension" >}}.
 ### Install the Datadog Lambda library
 
-Install the [Datadog Lambda library][3] locally by running the following command:
+Install the [Datadog Lambda library][1] locally by running the following command:
 
 ```
 go get github.com/DataDog/datadog-lambda-go
@@ -167,7 +170,7 @@ go get github.com/DataDog/datadog-lambda-go
 
 Follow these steps to instrument the function:
 
-1. Set the environment variable `DD_API_KEY` to your Datadog API key from [API Management][4].
+1. Set the environment variable `DD_API_KEY` to your Datadog API key from [API Management][2].
 1. Set the environment variable `DD_TRACE_ENABLED` to `true`.
 1. Import the required packages in the file declaring your Lambda function handler.
 
@@ -214,6 +217,9 @@ Follow these steps to instrument the function:
       s.Finish()
     }
     ```
+
+[1]: https://github.com/DataDog/datadog-lambda-go
+[2]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -275,8 +281,8 @@ If you have trouble collecting monitoring data after following the instructions 
 
 [1]: https://aws.amazon.com/blogs/compute/migrating-aws-lambda-functions-to-al2/
 [2]: /serverless/guide/datadog_forwarder_go
-[3]: https://github.com/DataDog/datadog-lambda-go
-[4]: https://app.datadoghq.com/organization-settings/api-keys
-[5]: /serverless/libraries_integrations/extension/#tagging
-[6]: https://app.datadoghq.com/functions
-[7]: /serverless/custom_metrics?tab=go
+[3]: /serverless/libraries_integrations/extension/#tagging
+[4]: https://app.datadoghq.com/functions
+[5]: /serverless/custom_metrics?tab=go
+[6]: /serverless/libraries_integrations/extension/#vpc
+[7]: /serverless/guide/troubleshoot_serverless_monitoring/
