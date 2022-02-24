@@ -8,11 +8,15 @@ further_reading:
 ---
 ## Startup logs
 
-Tracer startup logs capture all obtainable information at startup and log it either as `DATADOG TRACER CONFIGURATION` or `DATADOG TRACER DIAGNOSTICS` to simplify searching within your logs. Some languages may log to a separate file depending on language conventions and the safety of accessing `Stdout` or equivalent. In those cases, the location of logs are noted in the language tab below.
+Tracer startup logs capture all obtainable information at startup and log it either as `DATADOG TRACER CONFIGURATION` or `DATADOG TRACER DIAGNOSTICS` to simplify searching within your logs. 
 
-`DIAGNOSTICS` log entries happen when the tracer encounters an error during application startup, while  `CONFIGURATION` logs are a JSON formatted representation of settings applied to your tracer. In languages where an Agent connectivity check is performed, the configuration JSON will also include an 'agent_error' key, which indicates whether the Agent is reachable.
+Some languages log to a separate file depending on language conventions and the safety of accessing `Stdout` or equivalent. In those cases, the location of logs are noted in the language tab below. Some languages don't log diagnostics entries, also noted below. 
 
-If you see any `DIAGNOSTICS` log lines, confirm from the indicated log that settings and configurations are applied correctly.  If you do not see logs at all, ensure that your application logs are not silenced and that your log level is at least `INFO` where applicable.
+`CONFIGURATION` logs are a JSON formatted representation of settings applied to your tracer. In languages where an Agent connectivity check is performed, the configuration JSON will also include an `agent_error` key, which indicates whether the Agent is reachable.
+
+`DIAGNOSTICS` log entries, in the languages that produce them, happen when the tracer encounters an error during application startup. If you see `DIAGNOSTICS` log lines, confirm from the indicated log that settings and configurations are applied correctly. 
+
+If you do not see logs at all, ensure that your application logs are not silenced and that your log level is at least `INFO` where applicable.
 
 {{< programming-lang-wrapper langs="java,.NET,php,go,nodejs,python,ruby,cpp" >}}
 {{< programming-lang lang="java" >}}
@@ -165,6 +169,8 @@ The Go Tracer prints one of two possible diagnostic lines, one for when the Agen
 {{< /programming-lang >}}
 {{< programming-lang lang="nodejs" >}}
 
+Startup logs are disabled by default starting in version 2.x of the tracer. They can enabled using the environment variable `DD_TRACE_STARTUP_LOGS=true`.
+
 **Configuration:**
 
 ```text
@@ -228,10 +234,6 @@ W, [2020-07-08T21:19:05.765994 #143]  WARN -- ddtrace: [ddtrace] DATADOG TRACER 
 {{< /programming-lang >}}
 {{< programming-lang lang="cpp" >}}
 
-**File Location:**
-
-For C++, the startup log file is created in `/var/tmp/dd-opentracing-cpp`, for example: `/var/tmp/dd-opentracing-cpp/startup_options-1593737077369521386.json`.
-
 **Configuration:**
 
 ```text
@@ -242,22 +244,22 @@ For C++, the startup log file is created in `/var/tmp/dd-opentracing-cpp`, for e
 
 **Diagnostics:**
 
-For C++, there are no `DATADOG TRACER DIAGNOSTICS` lines output to the tracer logs. However, if the Agent is not reachable, errors will appear in your application logs. Alternately, in Envoy there is an increase in the metrics `tracing.datadog.reports_failed` and `tracing.datadog.reports_dropped`.
+For C++, there are no `DATADOG TRACER DIAGNOSTICS` lines output to the tracer logs. However, if the Agent is not reachable, errors appear in your application logs. In Envoy there is an increase in the metrics `tracing.datadog.reports_failed` and `tracing.datadog.reports_dropped`.
 
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
-## Diagnostics errors
+## Connection errors
 
-Look for `DIAGNOSTICS` error output that says the tracer is unable to send traces to the Datadog Agent.
+If your application or startup logs contain `DIAGNOSTICS` errors or messages that the Agent cannot be reached or connected to (varying depending on your language), it means the tracer is unable to send traces to the Datadog Agent.
 
-If you have these errors, check that your tracer is set up to receive traces for [ECS][1], [Kubernetes][2], [Docker][3] or [any other option][4], or [contact support][5] to review your Tracer & Agent configuration.
+If you have these errors, check that your Agent is set up to receive traces for [ECS][1], [Kubernetes][2], [Docker][3] or [any other option][4], or [contact support][5] to review your tracer and Agent configuration.
 
 See [Connection Errors][6] for information about errors indicating that your instrumented application cannot communicate with the Datadog Agent.
 
 ## Configuration settings
 
-If your logs contain only `CONFIGURATION` lines, a useful troubleshooting step is to confirm that the settings output by the tracer match the settings from your deployment and configuration of the Datadog Tracer.  Additionally, if you are not seeing specific traces in Datadog, review the [Compatibility Requirements][7] section of the documentation to confirm these integrations are supported.
+If your logs contain only `CONFIGURATION` lines, a useful troubleshooting step is to confirm that the settings output by the tracer match the settings from your deployment and configuration of the Datadog Tracer. Additionally, if you are not seeing specific traces in Datadog, review the [Compatibility Requirements][7] section of the documentation to confirm these integrations are supported.
 
 If an integration you are using is not supported, or you want a fresh pair of eyes on your configuration output to understand why traces are not appearing as expected in Datadog, [contact support][5] who can help you diagnose and create a Feature Request for a new integration.
 

@@ -2,12 +2,13 @@
 @import 'bootstrap-custom';
 @import 'webfonts';
 
-// jqmath 
+// jqmath
 @import 'jqmath-vanilla/jqmath-0.4.3';
 @import 'jqmath-vanilla/jqmath-vanilla-overrides';
 
 // base
 @import 'base/variables';
+@import 'base/modules_variables'; // imported from websites-modules
 @import 'base/mixins';
 @import 'base/colors';
 @import 'base/typography';
@@ -57,6 +58,10 @@
 @import 'components/whats-next';
 @import 'components/schema-table';
 @import 'components/tab-toggle';
+
+@import 'components/main-nav'; // imported from websites-modules
+@import 'components/mobile-nav'; // imported from websites-modules
+@import 'components/dd-navbar'; // for body-noscroll
 
 // for now just include ie fixes
 @import 'ie';

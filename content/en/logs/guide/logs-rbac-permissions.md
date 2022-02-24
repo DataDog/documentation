@@ -56,8 +56,6 @@ Grants a role the ability to create and modify [log indexes][5]. This includes:
 
 This permission is global and enables both the creation of new indexes, and the edition of existing ones.
 
-**Note**: This permission also grants [Logs Read Index Data](#logs_read_index_data) and [Logs Write Exclusion Filters](#logs_write_exclusion_filters) permissions behind the scenes.
-
 ### `logs_write_exclusion_filters`
 
 Grants a role the ability to create or modify [exclusion filters][8] within an index.
@@ -93,8 +91,6 @@ Grants a role the ability to create and modify [log processing pipelines][9]. Th
 - Reorder pipelines
 - Granting another role the [Logs Write Processors](#logs_write_processors) permission, scoped for that pipeline
 - Managing [standard attributes][10] or [aliasing facets][11]
-
-**Note**: This permission also grants [Logs Write Processors](#logs_write_processors) (for all processors on all pipelines) permissions behind the scenes.
 
 ### `logs_write_processors`
 

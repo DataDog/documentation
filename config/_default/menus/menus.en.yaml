@@ -2475,11 +2475,16 @@ main:
     url: security_platform/cspm/frameworks_and_benchmarks
     parent: cspm
     weight: 202
-  - name: OOTB Rules
-    url: security_platform/cspm/configuration_rules
+  - name: OOTB Cloud Rules
+    url: security_platform/default_rules/#cat-posture-management-cloud
     parent: cspm
-    identifier: cspm_default_rules
+    identifier: ootb_cloud_rules
     weight: 203
+  - name: OOTB Infrastructure Rules
+    url: security_platform/default_rules/#cat-posture-management-infra
+    parent: cspm
+    identifier: ootb_infrastructure_rules
+    weight: 204
   - name: Posture Findings
     url: /security_platform/cspm/findings
     parent: cspm
@@ -2525,6 +2530,11 @@ main:
     parent: cloud_workload_security
     identifier: cws_workload_signals_explorer
     weight: 306
+  - name: Troubleshooting
+    url: security_platform/cloud_workload_security/troubleshooting
+    parent: cloud_workload_security
+    identifier: cws_troubleshooting
+    weight: 307
   - name: Application Security
     url: security_platform/application_security/
     parent: security_platform
@@ -2580,6 +2590,11 @@ main:
     parent: security_platform
     identifier: security_rules
     weight: 5
+  - name: OOTB Rules
+    url: security_platform/default_rules/#all
+    parent: security_rules
+    identifier: ootb_rules
+    weight: 501
   - name: Notification Rules
     url: security_platform/notification_rules/
     parent: security_platform
@@ -2885,16 +2900,36 @@ main:
     parent: rum_explorer
     identifier: rum_explorer_search
     weight: 601
-  - name: Analytics
-    url: real_user_monitoring/explorer/analytics/
+  - name: Search Syntax
+    url: real_user_monitoring/explorer/search_syntax/
     parent: rum_explorer
-    identifier: rum_explorer_analytics
+    identifier: rum_explorer_search_syntax
     weight: 602
-  - name: Watchdog Insights
+  - name: Group
+    url: real_user_monitoring/explorer/group/
+    parent: rum_explorer
+    identifier: rum_explorer_group
+    weight: 603
+  - name: Visualize
+    url: real_user_monitoring/explorer/visualize/
+    parent: rum_explorer
+    identifier: rum_explorer_visualize
+    weight: 604
+  - name: Events
+    url: real_user_monitoring/explorer/events/
+    parent: rum_explorer
+    identifier: rum_explorer_events
+    weight: 605
+  - name: Saved Views
+    url: real_user_monitoring/explorer/saved_views/
+    parent: rum_explorer
+    identifier: rum_explorer_saved_views
+    weight: 606
+  - name: Watchdog Insights for RUM
     url: real_user_monitoring/explorer/watchdog_insights/
     parent: rum_explorer
     identifier: rum_explorer_watchdog_insights
-    weight: 603
+    weight: 607
   - name: Connect RUM and Traces
     url: real_user_monitoring/connect_rum_and_traces
     parent: rum
@@ -3249,143 +3284,6 @@ main:
     parent: agent
     identifier: vector_aggregation
     weight: 13
-footer_product:
-  - name: Features
-    url: 'https://www.datadoghq.com/product/'
-    weight: 100
-  - name: Integrations
-    url: 'https://www.datadoghq.com/product/platform/integrations/'
-    weight: 105
-  - name: Dashboards
-    url: 'https://www.datadoghq.com/product/platform/dashboards/'
-    weight: 110
-  - name: Log Management
-    url: 'https://www.datadoghq.com/product/log-management/'
-    weight: 115
-  - name: APM
-    url: 'https://www.datadoghq.com/product/apm/'
-    weight: 120
-  - name: Continuous Profiler
-    url: 'https://www.datadoghq.com/product/code-profiling/'
-    weight: 125
-  - name: Synthetic Monitoring
-    url: 'https://www.datadoghq.com/product/synthetic-monitoring/'
-    weight: 130
-  - name: RUM & Session Replay
-    url: 'https://www.datadoghq.com/product/real-user-monitoring/'
-    weight: 135
-footer_product_two:
-  - name: Security Platform
-    url: 'https://www.datadoghq.com/product/security-platform/'
-    weight: 140
-  - name: Cloud SIEM
-    url: 'https://www.datadoghq.com/product/security-platform/cloud-siem'
-    weight: 145
-  - name: CSPM
-    url: 'https://www.datadoghq.com/product/security-platform/cloud-security-posture-management/'
-    weight: 150
-  - name: Network Monitoring
-    url: 'https://www.datadoghq.com/product/network-monitoring/'
-    weight: 155
-  - name: Incident Management
-    url: 'https://www.datadoghq.com/product/incident-management/'
-    weight: 160
-  - name: Serverless
-    url: 'https://www.datadoghq.com/product/serverless-monitoring/'
-    weight: 165
-  - name: Alerts
-    url: 'https://www.datadoghq.com/product/alerts/'
-    weight: 170
-  - name: API
-    url: 'https://docs.datadoghq.com/api/'
-    weight: 175
-footer_product_three:
-  - name: Pricing
-    url: 'https://www.datadoghq.com/pricing/'
-    weight: 100
-  - name: Documentation
-    url: 'https://docs.datadoghq.com/'
-    weight: 105
-  - name: Support
-    url: 'https://www.datadoghq.com/support/'
-    weight: 110
-  - name: Learning Center
-    url: 'https://learn.datadoghq.com/'
-    weight: 115
-  - name: Resources
-    url: 'https://www.datadoghq.com/resources/'
-    weight: 150
-  - name: Webinars
-    url: 'https://www.datadoghq.com/webinars/'
-    weight: 160
-  - name: Security
-    url: 'https://www.datadoghq.com/security/'
-    weight: 180
-footer_about:
-  - name: COVID-19 Update
-    url: 'https://www.datadoghq.com/coronavirus/'
-    weight: 90
-  - name: Contact Us
-    url: 'https://www.datadoghq.com/about/contact/'
-    weight: 100
-  - name: Partners
-    url: 'https://www.datadoghq.com/partner-with-datadog/'
-    weight: 120
-  - name: Press
-    url: 'https://www.datadoghq.com/about/press/'
-    weight: 130
-  - name: Leadership
-    url: 'https://www.datadoghq.com/about/leadership/'
-    weight: 140
-  - name: Careers
-    url: 'https://www.datadoghq.com/careers/'
-    weight: 160
-  - name: Legal
-    url: 'https://www.datadoghq.com/legal/'
-    weight: 170
-  - name: Investor Relations
-    url: 'https://investors.datadoghq.com/'
-    weight: 175
-  - name: Analyst Reports
-    url: 'https://www.datadoghq.com/about/analyst/'
-    weight: 180
-footer_blog:
-  - name: English
-    url: 'https://www.datadoghq.com/blog/'
-    weight: 100
-  - name: Español
-    url: 'https://www.datadoghq.com/es/blog/'
-    weight: 110
-  - name: 日本語
-    url: 'https://www.datadoghq.com/ja/blog/'
-    weight: 120
-footer_social:
-  - name: Twitter
-    url: 'https://twitter.com/datadoghq'
-    weight: 130
-    pre: twitter.svg
-  - name: Instagram
-    url: 'https://www.instagram.com/datadoghq/'
-    weight: 140
-    pre: instagram.svg
-  - name: LinkedIn
-    url: 'https://www.LinkedIn.com/company/datadog/'
-    weight: 160
-    pre: linkedin.svg
-  - name: Youtube
-    url: 'https://www.youtube.com/user/DatadogHQ'
-    weight: 150
-    pre: youtube.svg
-footer_sub:
-  - name: Terms
-    url: 'https://www.datadoghq.com/legal/terms/'
-    weight: 100
-  - name: Privacy
-    url: 'https://www.datadoghq.com/legal/privacy/'
-    weight: 120
-  - name: Cookies
-    url: 'https://www.datadoghq.com/legal/cookies/'
-    weight: 130
 api:
   - name: Overview
     url: /api/latest/
@@ -4772,6 +4670,19 @@ api:
         - ListTagsByMetricName
       unstable: []
       order: 6
+  - name: Configure tags for multiple metrics
+    url: '#configure-tags-for-multiple-metrics'
+    identifier: configure-tags-for-multiple-metrics
+    parent: metrics
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteBulkTagsMetricsConfiguration
+        - CreateBulkTagsMetricsConfiguration
+      unstable: []
+      order: 9
   - name: List tag configurations
     url: '#list-tag-configurations'
     identifier: list-tag-configurations

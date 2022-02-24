@@ -67,6 +67,7 @@ The following command can be used to start the Runtime Security Agent and `syste
 {{< code-block lang="bash" filename="docker-runtime-security.sh" >}}
 
 docker run -d --name dd-agent \
+  --cgroupns host \
   --security-opt apparmor:unconfined \
   --cap-add SYS_ADMIN \
   --cap-add SYS_RESOURCE \

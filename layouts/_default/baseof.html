@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="{{ .Site.Language.Lang }}" data-base-url="{{ .Site.BaseURL }}" data-type="{{.Type}}" data-page-code-lang="{{ .Params.code_lang }}" data-current-section="{{ strings.TrimLeft "/" .CurrentSection.RelPermalink}}" data-relpermalink="{{.RelPermalink}}"
   data-env="{{.Site.Params.environment}}" data-commit-ref="{{ .Site.Params.branch }}" style="opacity:0"
-  class="{{ if or $.Site.Params.announcement_banner.link $.Site.Params.announcement_banner.desktop_message }}banner{{ end }}">
+  class="{{ if or $.Site.Params.announcement_banner.link $.Site.Params.announcement_banner.desktop_message }}banner announcement{{ end }}">
 
 <head>
 

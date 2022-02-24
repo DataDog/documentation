@@ -3,28 +3,26 @@ title: Instrumenting Go Serverless Applications
 kind: documentation
 further_reading:
 - link: 'serverless/datadog_lambda_library/go'
-  tag: "Documentation"
+  tag: 'Documentation'
   text: 'Datadog Lambda Library for Go'
-- link: 'serverless/serverless_tagging/'
-  tag: "Documentation"
-  text: 'Tagging Serverless Applications'
 - link: 'serverless/distributed_tracing/'
-  tag: "Documentation"
+  tag: 'Documentation'
   text: 'Tracing Serverless Applications'
 - link: 'serverless/custom_metrics/'
-  tag: "Documentation"
+  tag: 'Documentation'
   text: 'Submitting Custom Metrics from Serverless Applications'
+- link: '/serverless/guide/troubleshoot_serverless_monitoring'
+  tag: 'Documentation'
+  text: 'Troubleshoot Serverless Monitoring'
 aliases:
     - /serverless/datadog_lambda_library/go/
 ---
 
 {{< img src="serverless/go-lambda-tracing.png" alt="Monitor Go Lambda Functions with Datadog"  style="width:100%;">}}
 
-## Prerequisites
+## Configuration
 
 If your Go Lambda functions are still using runtime `go1.x`, you must either [migrate][1] to `provided.al2` or use the [Datadog Forwarder][2] instead of the Datadog Lambda Extension.
-
-## Configuration
 
 ### Install the Datadog Lambda library
 
@@ -154,7 +152,12 @@ func myHandler(ctx context.Context, event MyEvent) (string, error) {
 
 For more information, see the [Custom Metrics documentation][7].
 
-If your Lambda function is running in a VPC, follow the [Datadog Lambda Extension AWS PrivateLink Setup][8] guide to ensure that the extension can reach Datadog API endpoints.
+If your Lambda function is running in a VPC, follow these [instructions][8] to ensure that the extension can reach Datadog API endpoints.
+
+
+## Troubleshooting
+
+If you have trouble collecting monitoring data after following the instructions above, see the [serverless monitoring troubleshooting guide][9].
 
 ## Further Reading
 
@@ -167,4 +170,5 @@ If your Lambda function is running in a VPC, follow the [Datadog Lambda Extensio
 [5]: /serverless/libraries_integrations/extension/#tagging
 [6]: https://app.datadoghq.com/functions
 [7]: /serverless/custom_metrics?tab=go
-[8]: /serverless/guide/extension_private_link/
+[8]: /serverless/libraries_integrations/extension/#vpc
+[9]: /serverless/guide/troubleshoot_serverless_monitoring/
