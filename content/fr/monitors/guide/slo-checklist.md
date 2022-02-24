@@ -4,7 +4,7 @@ kind: guide
 further_reading:
   - link: https://www.datadoghq.com/blog/slo-monitoring-tracking/
     tag: Blog
-    text: Surveiller le statut et le budget d'indisponibilité de vos SLO avec Datadog
+    text: Surveiller le statut et la marge d'erreur de vos SLO avec Datadog
   - link: https://learn.datadoghq.com/course/view.php?id=34
     tag: Centre d'apprentissage
     text: Présentation des Service Level Objectives (SLO)
@@ -72,10 +72,10 @@ _Exemple : 99 % des requêtes doivent se terminer en moins de 250 ms sur une 
 
 ## Mettre en œuvre les SLI
 
-1. [Métriques custom][3] (p. ex., compteurs)
-2. [Métriques d'intégration][4] (p. ex., équilibreur de charge, requêtes HTTP)
-3. [APM Datadog][5] (p. ex., erreurs, latence au niveau des services et ressources)
-4. [Logs Datadog][6] (p. ex., métriques générées à partir de logs pour un total d'occurrences spécifiques)
+1. [Métriques custom][3] (par exemple, compteurs)
+2. [Métriques d'intégration][4] (par exemple, équilibreur de charge, requêtes HTTP)
+3. [APM Datadog][5] (par exemple, erreurs, latence au niveau des services et ressources)
+4. [Logs Datadog][6] (par exemple, métriques générées à partir de logs pour un total d'occurrences spécifiques)
 
 ## Définir l'objectif ciblé et l'intervalle
 
