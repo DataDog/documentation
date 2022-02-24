@@ -31,7 +31,7 @@ Your individual Datadog alerts with groups [have notification][1] rollups on by 
     * [Outlier Detection][3] uses other data streams of the same context to issue an alert when a stream behaves in a way different compared with its peers
     * Both can also be used in conjunction with Composite alerts.
 
-If the issue is alert routing, [template variables][5] and the separation of **warning** or **alert** states via [conditional variables][4] will be of interest!
+If the issue is alert routing, [template variables][5] and the separation of **warning** or **alert** states with [conditional variables][4] will be of interest!
 
 {{< partial name="whats-next/whats-next.html" >}}
 
