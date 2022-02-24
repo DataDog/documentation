@@ -49,6 +49,14 @@ Anomaly detection is currently in <a href="https://app.datadoghq.com/security/co
 
 When configuring a specific threshold isn't an option, you can define an anomaly detection rule instead. With anomaly detection, a dynamic threshold is automatically derived from the past observations of the events.
 
+### Impossible Travel
+
+<div class="alert alert-warning">
+Impossible travel is currently in <a href="https://app.datadoghq.com/security/configuration/rules/new">public beta</a>.
+</div>
+
+Impossible travel detects access from different locations whose distance is greater than the distance a human can travel in the time between the two access events.
+
 ## Define a search query
 
 {{< tabs >}}
@@ -125,6 +133,37 @@ Optionally, define a unique count and signal grouping. Count the number of uniqu
 Anomaly detection inspects how the `group by` attribute has behaved in the past. If a group by attribute is seen for the first time (for example, the first time an IP is communicating with your system) and is anomalous, it will not generate a security signal because the anomaly detection algorithm has no historical data to base its decision on.
 
 **Note**: The query applies to all Datadog events and ingested logs that do not require indexing.
+
+{{% /tab %}}
+
+{{% tab "Impossible Travel" %}}
+
+### Search query
+
+Construct a search query using the same logic as a [log explorer search][1]. All logs matching this query are analyzed for a potential impossible travel. You can use the `preview` section to see which logs are matched by the current query.
+
+#### User attribute
+
+For the `user attribute`, select the field in the analyzed log that contains the user ID. This can be an identifier like an email address, user name, account identifier.
+
+#### Location attribute
+
+The `location attribute` specifies which field holds the geographic information for a log. It cannot currently be changed and defaults to `@network.client.geoip`, which is the output of the [GeoIP parser][2] logs processor which enriches a log with location information based on the client's IP address.
+
+#### Baseline user locations
+
+Tick this checkbox if you'd like Datadog to learn regular access locations before triggering a signal.
+
+If selected, no signal will be triggered in the first 24 hours. In that time, Datadog learns the user's regular access locations. This can be helpful to reduce noise and infer VPN usage or credentialed API access.
+
+Leave the checkbox unticked to detect all impossible travel behavior.
+
+#### Advanced options
+
+Click the **Advanced** option to add queries that will **Only trigger a signal when:** a value is met, or **Never trigger a signal when:** a value is met. For example, if a user is triggering a signal, but their actions are benign and you no longer want signals triggered from this user, create a logs query that excludes `@user.username: john.doe` under the **Never trigger a signal when:** option.
+
+[1]: /logs/search_syntax/
+[2]: /logs/log_configuration/processors#geoip-parser
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -206,6 +245,26 @@ Once a signal is generated, the signal will remain "open" if the data remains an
 
 A signal will "close" regardless of whether or not the anomaly is still anomalous once the time exceeds the maximum signal duration. This time is calculated from the first seen timestamp.
 
+[1]: /monitors/notify/?tab=is_alert#integrations
+{{% /tab %}}
+
+{{% tab "Impossible Travel" %}}
+
+The impossible travel detection method does not require setting a rule case.
+
+### Severity and notification
+
+Select an appropriate severity level for the security signal (`INFO`, `LOW`, `MEDIUM`, `HIGH`, `CRITICAL`).
+
+In the “Notify” section, configure zero or more [notification targets][1].
+
+### Time windows
+
+An `evaluation window` is specified to match when at least one of the cases matches true. This is a sliding window and evaluates in real-time.
+
+Once a signal is generated, the signal will remain “open” if a case is matched at least once within this `keep alive` window. Each time a new event matches any of the cases, the *last updated* timestamp is updated for the signal.
+
+A signal will “close” regardless of the query being matched once the time exceeds the `maximum signal duration`. This time is calculated from the first seen timestamp.
 
 [1]: /monitors/notify/?tab=is_alert#integrations
 {{% /tab %}}
