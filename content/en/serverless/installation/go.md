@@ -45,7 +45,7 @@ yarn global add @datadog/datadog-ci
 
 ### Configure credentials
 
-For a quick start, configure Datadog and [AWS credentials][1] using the following command. For production applications, consider supplying the environment variables or credentials in a more secure manner.
+For a quick start, configure Datadog and [AWS credentials][10] using the following command. For production applications, consider supplying the environment variables or credentials in a more secure manner.
 
 ```bash
 export DATADOG_API_KEY="<DD_API_KEY>"
@@ -76,7 +76,7 @@ For example:
 datadog-ci lambda instrument -f my-function -f another-function -r us-east-1 -e {{< latest-lambda-layer-version layer="extension" >}}
 ```
 
-More information and additional parameters can be found in the [CLI documentation][2].
+More information and additional parameters can be found in the [CLI documentation][11].
 
 ### Install the Datadog Lambda library
 
@@ -132,8 +132,6 @@ go get github.com/DataDog/datadog-lambda-go
     }
     ```
 
-[1]: https://aws.github.io/aws-sdk-go-v2/docs/getting-started/#get-your-aws-access-keys
-[2]: https://docs.datadoghq.com/serverless/serverless_integrations/cli
 {{% /tab %}}
 {{% tab "Custom" %}}
 ### Install the Datadog Lambda Extension
