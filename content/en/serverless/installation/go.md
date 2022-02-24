@@ -78,6 +78,13 @@ datadog-ci lambda instrument -f my-function -f another-function -r us-east-1 -e 
 
 More information and additional parameters can be found in the [CLI documentation][2].
 
+### Install the Datadog Lambda library
+
+Install the [Datadog Lambda library][3] locally by running the following command:
+
+```
+go get github.com/DataDog/datadog-lambda-go
+```
 ### Set up tracing
 1. Import the required packages in the file declaring your Lambda function handler.
 
