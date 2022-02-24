@@ -38,7 +38,7 @@ dotnet tool update -g dd-trace
 
 ## Instrumenter des tests
 
-Pour instrumenter votre collection de test, ajoutez le préfixe `dd-trace` à la commande de votre test, en spécifiant le nom du service ou de la bibliothèque testé(e) avec le paramètre `--dd-service` ainsi que l'environnement dans lequel sont exécutés les tests (par exemple, `local` lorsque les tests sont exécutés sur la machine d'un développeur ou `ci` lorsqu'ils sont exécutés sur un fournisseur de CI) avec le paramètre `--dd-env`. Exemple :
+Pour instrumenter votre collection de tests, ajoutez le préfixe `dd-trace` à la commande de votre test, en spécifiant le nom du service ou de la bibliothèque testé(e) avec le paramètre `--dd-service` ainsi que l'environnement dans lequel sont exécutés les tests (par exemple, `local` lorsque les tests sont exécutés sur la machine d'un développeur ou `ci` lorsqu'ils sont exécutés sur un fournisseur de CI) avec le paramètre `--dd-env`. Exemple :
 
 {{< code-block lang="bash" >}}
 dd-trace --dd-service=my-dotnet-app --dd-env=ci -- dotnet test
