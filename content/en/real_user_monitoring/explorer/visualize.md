@@ -80,7 +80,7 @@ The RUM Analytics geomap shows the 75th percentile of the **Largest Contentful P
 
 ## Funnel
 
-Visualize conversation rates across user workflows and end-to-end user journeys.
+Visualize conversion rates across user workflows and end-to-end user journeys.
 
 {{< img src="real_user_monitoring/explorer/visualize/funnel.png" alt="Funnel graph in the RUM Explorer" style="width:90%;">}}
 
