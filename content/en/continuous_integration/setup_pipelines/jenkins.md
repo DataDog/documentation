@@ -44,7 +44,7 @@ Install and enable the [Datadog Jenkins plugin][3] v3.3.0 or newer:
 
 1. In your Jenkins instance web interface, go to **Manage Jenkins > Configure System**.
 2. Go to the `Datadog Plugin` section, scrolling down the configuration screen.
-3. Select the `Datadog Agent` mode. Data collection using Datadog API URL and API key is **not supported**.
+3. Select the `Datadog Agent` mode. CI Visibility is **not supported** using Datadog API URL and API key.
 4. Configure the `Agent` host.
 5. Configure the `Traces Collection` port (default `8126`).
 6. Click on `Enable CI Visibility` checkbox to activate it.
@@ -172,7 +172,7 @@ Second, enable job log collection on the Datadog Plugin:
 
 1. In the web interface of your Jenkins instance, go to **Manage Jenkins > Configure System**.
 2. Go to the `Datadog Plugin` section, scrolling down the configuration screen.
-3. Select the `Datadog Agent` mode. Data collection using Datadog API URL and API key is **not supported**.
+3. Select the `Datadog Agent` mode.
 4. Configure the `Agent` host, if not previously configured.
 5. Configure the `Log Collection` port, as configured in the previous step.
 6. Click on `Enable Log Collection` checkbox to activate it.
