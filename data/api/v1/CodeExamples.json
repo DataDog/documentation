@@ -564,8 +564,13 @@
   "CreateSyntheticsAPITest": [
     {
       "group": "synthetics",
-      "suffix": "",
-      "description": "Create an API test returns \"OK - Returns the created test details.\" response"
+      "suffix": "_1487281163",
+      "description": "Create an API HTTP test returns \"OK - Returns the created test details.\" response"
+    },
+    {
+      "group": "synthetics",
+      "suffix": "_1072503741",
+      "description": "Create an API SSL test returns \"OK - Returns the created test details.\" response"
     },
     {
       "group": "synthetics",

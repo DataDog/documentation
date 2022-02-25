@@ -11,7 +11,7 @@ further_reading:
 
 ## Use cases
 
-Datadog recommends using only the Datadog APM trace library (`dd-trace`), but in some situations users can combine Datadog tracing and AWS X-Ray using trace merging. If you aren't sure which tracing library to use, read about [choosing your tracing library][1].
+Datadog recommends using only the Datadog APM trace library (`dd-trace`), but in some advanced situations users can combine Datadog tracing and AWS X-Ray using trace merging. Trace merging is available for Node.js and Python AWS Lambda functions. If you aren't sure which tracing library to use, read about [choosing your tracing library][1].
 
 There are two primary reasons for instrumenting both `dd-trace` and AWS X-Ray tracing libraries:
 - In an AWS serverless environment, you are already tracing your Lambda functions with `dd-trace`, you require AWS X-Ray active tracing for AWS managed services such as AppSync and Step Functions, and you want to visualize the `dd-trace` and AWS X-Ray spans in one single trace.
@@ -39,7 +39,7 @@ Both the AWS X-Ray SDK and Datadog APM client libraries (`dd-trace`) add metadat
 
 If you have installed Datadog's tracing libraries (`dd-trace`) on both your Lambda functions and hosts, your traces will automatically show you the complete picture of requests that cross infrastructure boundaries, whether it be AWS Lambda, containers, on-prem hosts, or managed services.
 
-If `dd-trace` is installed on your hosts with the Datadog Agent, and your serverless functions are traced with AWS X-Ray, your setup should be similar to the following:
+If `dd-trace` is installed on your hosts with the Datadog Agent, and your Node.js or Python serverless functions are traced with AWS X-Ray, your setup should be similar to the following:
 
 1. You have installed the [AWS X-Ray integration][2] for tracing your Lambda functions, enabling both AWS X-Ray active tracing and installing the X-Ray client libraries.
 2. You have installed the [Datadog Lambda Library for your Lambda runtime][4], and the `DD_TRACE_ENABLED` environment variable is set to `false`.

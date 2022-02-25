@@ -10,7 +10,7 @@ aliases:
 ---
 ## Présentation
 
-La solution Real User Monitoring [recueille automatiquement les actions][1] effectuées sur votre application Web. Vous pouvez également choisir de recueillir des événements et des durées supplémentaires, notamment sur le remplissage de formulaires ou les transactions commerciales. Les actions RUM personnalisées vous aident à recueillir des événements et des durées importants, ainsi que tout le contexte pertinent associé. À titre d'exemple, tout au long de ce guide, nous recueillons des informations sur les paiements des utilisateurs effectués sur un site Web de e-commerce.
+La solution Real User Monitoring [recueille automatiquement les actions][1] effectuées sur votre application Web. Vous pouvez également choisir de recueillir des événements et des durées supplémentaires, notamment sur le remplissage de formulaires ou les transactions commerciales. Les actions RUM personnalisées vous aident à recueillir des événements importants tout en conservant le contexte pertinent associé. L'exemple de ce guide vise à recueillir des informations sur les paiements des utilisateurs effectués sur un site Web de e-commerce.
 
 ## Instrumenter votre code
 Pour créer une action RUM, utilisez l'API `addAction`. Nommez votre action et ajoutez les attributs de contexte de votre choix sous la forme d'un objet JavaScript. Dans l'exemple suivant, une action `checkout` est créée lorsque l'utilisateur clique sur le bouton de paiement. Elle rassemble des informations sur le panier de l'utilisateur.
@@ -18,22 +18,22 @@ Pour créer une action RUM, utilisez l'API `addAction`. Nommez votre action et a
 ```javascript
 function onCheckoutButtonClick(cart) {
     DD_RUM.addAction('checkout', {
-        'value': cart.value, // p. ex. 42.12
-        'items': cart.items, // p. ex. ['tomate', 'fraises']
+        'value': cart.value, // par exemple, 42.12
+        'items': cart.items, // par exemple, ['tomato', 'strawberries']
     })
 }
 ```
 
-Tout le contexte RUM est automatiquement associé (informations sur l'affichage de la page en cours, données geoIP, informations sur le navigateur, etc.) et des attributs supplémentaires sont fournis via l'[API de contexte global][2].
+Tout le contexte RUM (comme les informations sur l'affichage de la page en cours, les données geoIP, les informations sur le navigateur, etc.) est automatiquement associé et des attributs supplémentaires sont fournis via l'[API de contexte global][2].
 
 ## Créer des facettes et des mesures sur vos nouveaux attributs
-Après avoir déployé le code qui crée vos actions personnalisées, celles-ci commencent à s'afficher dans le [RUM Explorer][3], dans l'onglet **Actions**.
+Après avoir déployé le code qui crée vos actions personnalisées, celles-ci commencent à s'afficher dans le [RUM Explorer][3], dans l'onglet **Actions**.
 
-Pour filtrer facilement vos nouvelles actions personnalisées, utilisez l'attribut `Action Target Name` comme suit : `@action.target.name:<NOM_ACTION>`. Pour notre exemple, nous utilisons le filtre suivant : `@action.target.name:checkout`.
+Pour filtrer vos nouvelles actions personnalisées, utilisez l'attribut `Action Target Name` comme suit : `@action.target.name:<NOM_ACTION>`. Pour cet exemple, le filtre `@action.target.name:checkout` est utilisé.
 
 Lorsque vous cliquez sur l'action, toutes les métadonnées disponibles s'affichent dans le panneau latéral. Vous devez ensuite créer des facettes et des mesures pour ces attributs. Pour ce faire, il vous suffit de cliquer sur les attributs. Vous pouvez par exemple créer une facette pour les articles du panier et une mesure pour le montant du panier.
 
-{{< img src="real_user_monitoring/guide/send-custom-user-actions/facet-from-user-action.gif" alt="Créer une facette pour les actions RUM personnalisées" style="width:100%;">}}
+{{< img src="real_user_monitoring/guide/send-custom-user-actions/facet-from-user-action.mp4" alt="Créer une facette pour des actions RUM personnalisées" video=true style="width:100%;">}}
 
 **Remarque** : utilisez des facettes pour les valeurs distinctives (ID) et des mesures pour les valeurs quantitatives (calculs de temps, latence, etc.).
 

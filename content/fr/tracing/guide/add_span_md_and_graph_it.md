@@ -1,5 +1,5 @@
 ---
-title: Ajouter des tags de span et filtrer les données de performance de votre application
+title: Ajouter des tags de span et filtrer ou regrouper les données de performance de votre application
 kind: guide
 further_reading:
   - link: /tracing/guide/alert_anomalies_p99_database/
@@ -230,7 +230,7 @@ L'interface utilisateur de Datadog utilise les tags pour définir des métadonn�
 
 {{< img src="tracing/guide/add_span_md_and_graph_it/span_md_3.png" alt="Page Ressource" style="width:90%;">}}
 
-Le tableau des traces affiche la distribution de la latence globale pour l'ensemble des traces incluses dans le contexte actuel (service, ressource et intervalle) ainsi que les liens vers les traces individuelles. Vous pouvez trier ce tableau par durée ou par code d'erreur pour identifier facilement les opérations ayant généré une erreur ou les possibilités d'optimisation.
+Le tableau des traces affiche la distribution de la latence globale pour l'ensemble des traces incluses dans le contexte actuel (service, ressource et intervalle) ainsi que les liens vers les traces individuelles. Vous pouvez trier ce tableau par durée ou par code d'erreur pour identifier les opérations ayant généré une erreur ou encore des possibilités d'optimisation.
 
 3) **Cliquez sur l'une de vos traces.**
 
@@ -244,7 +244,7 @@ La partie inférieure de cette vue comprend des informations supplémentaires su
 
 ## Exploiter vos tags de span personnalisés avec Analytics
 
-4) **Accédez à la [page Trace Search][6]**.
+4) **Accédez à la [page Trace Explorer][6]**.
 
 La page Trace Search vous permet d'identifier les [traces][1] et les spans indexées spécifiques qui vous intéressent. Depuis cette vue, vous pouvez filtrer un ensemble de tags par défaut (tels que `Env`,` Service`, `Resource` et [bien d'autres][7]) en appliquant un intervalle.
 
@@ -262,7 +262,7 @@ La facette que vous avez créée devrait maintenant apparaître dans l'explorate
 
 6) **Accédez à la page [Analytics][8].**
 
-La page Analytics est un outil de création de requêtes visuel qui vous permet d'inspecter vos traces sans aucune limite de cardinalité. Il s'appuie sur les facettes pour filtrer et définir le contexte de la requête. Pour plus d'informations, consultez la section [Recherche et analyse de traces][9].
+La page Analytics propose un outil visuel de création de requêtes qui vous permet d'inspecter vos traces sans aucune limite de cardinalité. Cet outil s'appuie sur les facettes pour filtrer et définir le contexte de la requête. Pour en savoir plus, consultez la [présentation du Trace Explorer][9].
 
 7) **Choisissez le service** sur lequel vous avez travaillé dans la liste des facettes de service, **sélectionnez Error** dans la liste des statuts et **sélectionnez `customer_id** (ou tout autre tag que vous avez ajouté à vos spans) dans le champ group by.
 
@@ -288,7 +288,7 @@ Enfin, vous pouvez également afficher l'ensemble des traces associées à votre
 [4]: /fr/tracing/visualization/#resources
 [5]: /fr/tracing/visualization/#services
 [6]: https://app.datadoghq.com/apm/search
-[7]: /fr/tracing/trace_search_and_analytics/#live-search-for-15-minutes
+[7]: /fr/tracing/trace_explorer/#live-search-for-15-minutes
 [8]: https://app.datadoghq.com/apm/analytics
-[9]: /fr/tracing/trace_search_and_analytics/query_syntax/
+[9]: /fr/tracing/trace_explorer/query_syntax/
 [10]: /fr/tracing/guide/alert_anomalies_p99_database/

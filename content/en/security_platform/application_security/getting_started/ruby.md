@@ -17,32 +17,94 @@ further_reading:
 
 ## Get started
 
-1. **Update your gem file to include the Datadog library**:
+1. **Update your Gemfile to include the Datadog library**:
+
    ```
-   gem install ddtrace
+   gem 'ddtrace', '~> 1.0.0.beta1'
    ```
+
    For information about which language and framework versions are supported by the library, see [Compatibility][1].
 
+   For more information about upgrading from a `dd-trace` 0.x version, see [the Ruby tracer upgrade guide][2].
+
 2. **Enable Application Security**, either in your code:
+   {{< tabs >}}
+
+{{% tab "Rails" %}}
+   Either enable the tracer through auto-instrumentation by updating your Gemfile:
+
    ```
-   require 'datadog/security'
-   Datadog::Security.configure do |c|
-     c.use :rails
-   end
-   # not needed if require 'ddtrace/auto_instrument' is used
+   gem 'ddtrace', '~> 1.0.0.beta1', require: 'ddtrace/auto_instrument'
+   ```
+
+   Or enable the tracer by adding an initializer in your application code:
+
+   ```
+   # config/initializers/datadog.rb
+
+   require 'datadog/appsec'
+
    Datadog.configure do |c|
-     c.use :rails
+     # enable the APM tracer
+     # not needed if `gem 'ddtrace', require: 'ddtrace/auto_instrument' is used
+     c.tracing.instrument :rails
+
+     c.appsec.enabled = true
+     c.appsec.instrument :rails
    end
    ```
+{{% /tab %}}
+
+{{% tab "Sinatra" %}}
+   Enable the tracer by adding the following to your application's startup:
+
+   ```
+   require 'ddtrace'
+   require 'datadog/appsec'
+
+   Datadog.configure do |c|
+     # enable the APM tracer
+     c.tracing.instrument :sinatra
+
+     # enable appsec for Sinatra
+     c.appsec.enabled = true
+     c.appsec.instrument :sinatra
+   end
+   ```
+{{% /tab %}}
+
+{{% tab "Rack" %}}
+   Enable the tracer by adding the following to your `config.ru` file:
+
+   ```
+   require 'ddtrace'
+   require 'datadog/appsec'
+
+   Datadog.configure do |c|
+     # enable the APM tracer
+     c.tracing.instrument :rack
+
+     # enable appsec for Rack
+     c.appsec.enabled = true
+     c.appsec.instrument :rack
+   end
+
+   use Datadog::Tracing::Contrib::Rack::TraceMiddleware
+   use Datadog::AppSec::Contrib::Rack::RequestMiddleware
+   ```
+{{% /tab %}}
+
+{{< /tabs >}}
+
    Or one of the following methods, depending on where your application runs:
 
    {{< tabs >}}
 {{% tab "Docker CLI" %}}
 
-Update your configuration container for APM by adding the following argument in your `docker run` command: 
+Update your configuration container for APM by adding the following argument in your `docker run` command:
 
 ```
-docker run [...] -e DD_APPSEC_ENABLED=true [...] 
+docker run [...] -e DD_APPSEC_ENABLED=true [...]
 ```
 
 {{% /tab %}}
@@ -98,7 +160,7 @@ env DD_APPSEC_ENABLED=true rails server
 
 {{< /tabs >}}
 
-{{% appsec-getstarted-2 %}}
+{{% appsec-getstarted-2-canary %}}
 
 {{< img src="/security_platform/application_security/application-security-signal.png" alt="Security Signal details page showing tags, metrics, suggested next steps, and attacker IP addresses associated with a threat." style="width:100%;" >}}
 
@@ -107,3 +169,4 @@ env DD_APPSEC_ENABLED=true rails server
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /security_platform/application_security/setup_and_configure/?code-lang=ruby#compatibility
+[2]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/UpgradeGuide.md#from-0x-to-10
