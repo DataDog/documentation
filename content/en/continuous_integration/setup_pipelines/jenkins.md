@@ -44,7 +44,7 @@ Install and enable the [Datadog Jenkins plugin][3] v3.3.0 or newer:
 
 1. In your Jenkins instance web interface, go to **Manage Jenkins > Configure System**.
 2. Go to the `Datadog Plugin` section, scrolling down the configuration screen.
-3. Select the `Datadog Agent` mode.
+3. Select the `Datadog Agent` mode. CI Visibility is **not supported** using Datadog API URL and API key.
 4. Configure the `Agent` host.
 5. Configure the `Traces Collection` port (default `8126`).
 6. Click on `Enable CI Visibility` checkbox to activate it.
