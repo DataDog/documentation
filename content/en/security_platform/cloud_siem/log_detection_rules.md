@@ -154,7 +154,7 @@ The `location attribute` specifies which field holds the geographic information 
 
 Click the checkbox if you'd like Datadog to learn regular access locations before triggering a signal.
 
-If selected, no signal will be triggered in the first 24 hours. In that time, Datadog learns the user's regular access locations. This can be helpful to reduce noise and infer VPN usage or credentialed API access.
+When selected, signals are suppressed for the first 24 hours. In that time, Datadog learns the user's regular access locations. This can be helpful to reduce noise and infer VPN usage or credentialed API access.
 
 Do not click the checkbox if you want Datadog to detect all impossible travel behavior.
 
