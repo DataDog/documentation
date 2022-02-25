@@ -144,7 +144,7 @@ Construct a search query using the same logic as a [log explorer search][1]. All
 
 #### User attribute
 
-For the `user attribute`, select the field in the analyzed log that contains the user ID. This can be an identifier like an email address, user name, account identifier.
+For the `user attribute`, select the field in the analyzed log that contains the user ID. This can be an identifier like an email address, user name, or account identifier.
 
 #### Location attribute
 
