@@ -387,7 +387,7 @@ If you don’t see Application Security threat information in the [Trace and Sig
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
-For Ruby, if you don’t see Application Security threat information in the [Trace and Signals Explorer][1] after a few minutes, enable tracer diagnostics for [debug logs][2] in the file `config/initializers/datadog-tracer.rb`. For example:
+For Ruby, if you don’t see Application Security threat information in the [Trace and Signals Explorer][1] after a few minutes, enable tracer diagnostics for [debug logs][2]. For example:
 
 ```ruby
 Datadog.configure do |c|
