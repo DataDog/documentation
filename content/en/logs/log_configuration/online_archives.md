@@ -21,6 +21,8 @@ Online Archives is only available for AWS hosted Datadog customers (US1) site.
 
 {{< /site-region >}}
 
+{{< site-region region="us" >}}
+
 <div class="alert alert-warning">
 Online Archives is in limited availability. To request access, contact <a href="/help/">Datadog Support</a>.
 </div>
@@ -88,6 +90,8 @@ Here are examples of different log retention strategies and how to implement the
 **Note:** Index order matters since `team:security` logs go into the first index that matches the index filter in case there are multiple indexes.
 
 **Note:** Dashboards, Log Monitors, Patterns and Transactions are not available in Online Archives.
+
+{{< /site-region >}}
 
 [1]: /logs/log_configuration/indexes/#indexes-filters
 [2]: /logs/log_configuration/indexes/#exclusion-filters
