@@ -802,7 +802,7 @@ main:
     url: agent/versions/upgrade_to_agent_v6/
     parent: agent_versions
     weight: 1002
-  - name: Upgrade Between Datadog Agent Minor Versions
+  - name: Upgrade Between Agent Minor Versions
     url: agent/versions/upgrade_between_agent_minor_versions
     parent: agent_versions
     weight: 1003

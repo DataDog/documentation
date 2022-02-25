@@ -10,7 +10,7 @@ further_reading:
       text: 'Upgrade to Agent v6'
     - link: 'agent/versions/upgrade_between_agent_minor_versions'
       tag: 'Documentation'
-      text: 'Upgrade Between Datadog Agent Minor Versions'
+      text: 'Upgrade Between Agent Minor Versions'
     - link: 'agent/faq/agent_v6_changes'
       tag: 'FAQ'
       text: 'Agent v6 Changes'
