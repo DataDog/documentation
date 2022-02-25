@@ -7,9 +7,9 @@ kind: guide
 
 Application Security monitors application-level attacks aiming to exploit code-level vulnerabilities.
 
-APM records information about each HTTP request, these are referred to as traces. Application security uses the information APM is already collecting, and flags suspicious any suspicious requests or attack attempts as security signals. Depending on your settings and the severity of the attempt, you can receive notifications from Slack, email, or PagerDuty.
+APM records information about each HTTP request, these are referred to as traces. Application security uses the information APM is already collecting, and flags any suspicious requests or attack attempts as security signals. Depending on your settings and the severity of the attempt, you can receive notifications from Slack, email, or PagerDuty.
 
-Traditional Web Application Firewalls (WAFs) are usually deployed at the perimeter and have no context of the application behavior. Application Security provides WAF-like capabilities with additional application context and lower false positives.
+Traditional Web Application Firewalls (WAFs) are usually deployed at the perimeter and have no context of the application behavior. For Application Security to be effective, it’s critical to be embedded in the application to get access to the data. Application Security provides WAF-like capabilities with additional application context and lower false positives.
 
 ### Compatibility
 
@@ -56,7 +56,7 @@ Application Security includes over 100 OOTB detection rules that help protect ag
 
 ### How Application Security protects against Log4Shell
 
- Application Security identifies Log4Shell attack payloads and provides visibility into vulnerable apps that attempt to remotely load malicious code. When used in tandem with the rest of [Datadog's Security Platform][8], you can fully investigate to identify common post-exploitation activity, and proactively remediate potentially exposed Java applications acting as an attack vector.
+ Application Security identifies Log4Shell attack payloads and provides visibility into vulnerable apps that attempt to remotely load malicious code. When used in tandem with the rest of [Datadog's Security Platform][8], you can investigate to identify common post-exploitation activity, and proactively remediate potentially exposed Java applications acting as an attack vector.
 
 [1]: /tracing/setup_overview/
 [2]: /security_platform/application_security/getting_started/#prerequisites
