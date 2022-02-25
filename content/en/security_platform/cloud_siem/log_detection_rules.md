@@ -148,15 +148,15 @@ For the `user attribute`, select the field in the analyzed log that contains the
 
 #### Location attribute
 
-The `location attribute` specifies which field holds the geographic information for a log. It cannot currently be changed and defaults to `@network.client.geoip`, which is the output of the [GeoIP parser][2] logs processor which enriches a log with location information based on the client's IP address.
+The `location attribute` specifies which field holds the geographic information for a log. The only supported value is `@network.client.geoip`, which is enriched by the [GeoIP parser][2] to give a log location information based on the client's IP address.
 
 #### Baseline user locations
 
-Tick this checkbox if you'd like Datadog to learn regular access locations before triggering a signal.
+Click the checkbox if you'd like Datadog to learn regular access locations before triggering a signal.
 
 If selected, no signal will be triggered in the first 24 hours. In that time, Datadog learns the user's regular access locations. This can be helpful to reduce noise and infer VPN usage or credentialed API access.
 
-Leave the checkbox unticked to detect all impossible travel behavior.
+Do not click the checkbox if you want Datadog to detect all impossible travel behavior.
 
 #### Advanced options
 
@@ -260,11 +260,11 @@ In the “Notify” section, configure zero or more [notification targets][1].
 
 ### Time windows
 
-An `evaluation window` is specified to match when at least one of the cases matches true. This is a sliding window and evaluates in real-time.
+An `evaluation window` is specified to match when at least one of the cases is true. This is a sliding window and evaluates in real-time.
 
-Once a signal is generated, the signal will remain “open” if a case is matched at least once within this `keep alive` window. Each time a new event matches any of the cases, the *last updated* timestamp is updated for the signal.
+Once a signal is generated, the signal remains “open” if a case is matched at least once within the `keep alive` window. Each time a new event matches any of the cases, the *last updated* timestamp is updated for the signal.
 
-A signal will “close” regardless of the query being matched once the time exceeds the `maximum signal duration`. This time is calculated from the first seen timestamp.
+A signal closes regardless of the query being matched once the time exceeds the `maximum signal duration`. This time is calculated from the first seen timestamp.
 
 [1]: /monitors/notify/?tab=is_alert#integrations
 {{% /tab %}}
