@@ -8,7 +8,7 @@ further_reading:
 ---
 {{< site-region region="us,eu" >}}
 <div class="alert alert-warning">
-  The Events Explorer is being rolled out to all customers in Q1 2022. Contact <a href="/help/">Datadog support</a> to request early access.
+  The Events Explorer is being rolled out to all customers in Q1 2022. 
 </div>
 {{< /site-region >}}
 

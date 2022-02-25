@@ -93,7 +93,7 @@ Depuis la [version 2.16.0][3], grâce au paramètre d'initialisation `actionNam
 
 ## Actions personnalisées
 
-Les actions personnalisées correspondent à des actions utilisateur déclarées et envoyées manuellement, via l'API `addAction`. Elles servent à envoyer des informations sur un événement qui s'est produit lors d'un parcours utilisateur. Dans l'exemple suivant, le SDK RUM recueille les données du panier d'un utilisateur lorsqu'il appuie sur le bouton de paiement. Cette action récupère le nombre d'articles dans le panier, la liste des articles et le montant total du panier.
+Les actions personnalisées correspondent à des actions utilisateur déclarées et envoyées manuellement, via l'API `addAction`. Elles servent à envoyer des informations sur un événement qui s'est produit lors d'un parcours utilisateur. Dans l'exemple suivant, le SDK RUM recueille les données du panier d'un utilisateur lorsqu'il clique sur le bouton de paiement. Cette action récupère le nombre d'articles dans le panier, la liste des articles et le montant total du panier.
 
 {{< tabs >}}
 {{% tab "NPM" %}}

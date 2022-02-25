@@ -712,7 +712,7 @@ components:
             the dedicated [Request JSON schema documentation](https://docs.datadoghq.com/dashboards/graphing_json/request_json)\n
             to learn how to build the `REQUEST_SCHEMA`."
           example:
-          - q/apm_query/log_query: <METRIC_1>{<SCOPE_1>}
+          - q: <METRIC_1>{<SCOPE_1>}
           items:
             $ref: '#/components/schemas/ChangeWidgetRequest'
           maxItems: 1
@@ -798,17 +798,7 @@ components:
       description: Response of monitor IDs that can or can't be safely deleted.
       properties:
         data:
-          description: Wrapper object with the list of monitor IDs.
-          example: {}
-          properties:
-            ok:
-              description: An array of of Monitor IDs that can be safely deleted.
-              items:
-                description: ID of a monitor that can be safely deleted.
-                format: int64
-                type: integer
-              type: array
-          type: object
+          $ref: '#/components/schemas/CheckCanDeleteMonitorResponseData'
         errors:
           additionalProperties:
             description: Strings denoting where a monitor is used.
@@ -821,25 +811,39 @@ components:
       required:
       - data
       type: object
+    CheckCanDeleteMonitorResponseData:
+      description: Wrapper object with the list of monitor IDs.
+      example: {}
+      properties:
+        ok:
+          description: An array of of Monitor IDs that can be safely deleted.
+          items:
+            description: ID of a monitor that can be safely deleted.
+            format: int64
+            type: integer
+          type: array
+      type: object
     CheckCanDeleteSLOResponse:
       description: A service level objective response containing the requested object.
       properties:
         data:
-          description: An array of service level objective objects.
-          properties:
-            ok:
-              description: An array of of SLO IDs that can be safely deleted.
-              items:
-                description: An SLO ID.
-                type: string
-              type: array
-          type: object
+          $ref: '#/components/schemas/CheckCanDeleteSLOResponseData'
         errors:
           additionalProperties:
             description: Description of the service level objective reference.
             type: string
           description: A mapping of SLO id to it's current usages.
           type: object
+      type: object
+    CheckCanDeleteSLOResponseData:
+      description: An array of service level objective objects.
+      properties:
+        ok:
+          description: An array of of SLO IDs that can be safely deleted.
+          items:
+            description: An SLO ID.
+            type: string
+          type: array
       type: object
     CheckStatusWidgetDefinition:
       description: Check status shows the current status or number of results for
@@ -2068,74 +2072,10 @@ components:
     EventCreateResponse:
       description: Object containing an event response.
       properties:
-        alert_type:
-          $ref: '#/components/schemas/EventAlertType'
-        date_happened:
-          description: 'POSIX timestamp of the event. Must be sent as an integer (that
-            is no quotes).
-
-            Limited to events no older than 7 days.'
-          format: int64
-          type: integer
-        device_name:
-          description: A device name.
-          type: string
-        host:
-          description: 'Host name to associate with the event.
-
-            Any tags associated with the host are also applied to this event.'
-          type: string
-        id:
-          description: Integer ID of the event.
-          format: int64
-          readOnly: true
-          type: integer
-        payload:
-          description: Payload of the event.
-          example: '{}'
-          readOnly: true
-          type: string
-        priority:
-          $ref: '#/components/schemas/EventPriority'
-        related_event_id:
-          description: ID of the parent event. Must be sent as an integer (that is
-            no quotes).
-          format: int64
-          type: integer
-        source_type_name:
-          description: 'The type of event being posted. Option examples include nagios,
-            hudson, jenkins, my_apps, chef, puppet, git, bitbucket, etc.
-
-            A complete list of source attribute values [available here](https://docs.datadoghq.com/integrations/faq/list-of-api-source-attribute-value).'
-          type: string
+        event:
+          $ref: '#/components/schemas/Event'
         status:
           description: A status.
-          type: string
-        tags:
-          description: A list of tags to apply to the event.
-          example:
-          - environment:test
-          items:
-            description: A tag.
-            type: string
-          type: array
-        text:
-          description: 'The body of the event. Limited to 4000 characters. The text
-            supports markdown.
-
-            Use `msg_text` with the Datadog Ruby library.'
-          example: Oh boy!
-          maxLength: 4000
-          type: string
-        title:
-          description: The event title. Limited to 100 characters. Use `msg_title`
-            with the Datadog Ruby library.
-          example: Did you hear the news today?
-          maxLength: 100
-          type: string
-        url:
-          description: URL of the event.
-          readOnly: true
           type: string
       type: object
     EventListResponse:
@@ -2156,6 +2096,7 @@ components:
       - normal
       - low
       example: normal
+      nullable: true
       type: string
       x-enum-varnames:
       - NORMAL
@@ -2460,22 +2401,7 @@ components:
       description: A formula and functions events query.
       properties:
         compute:
-          description: Compute options.
-          properties:
-            aggregation:
-              $ref: '#/components/schemas/FormulaAndFunctionEventAggregation'
-            interval:
-              description: A time interval in milliseconds.
-              example: 60000
-              format: int64
-              type: integer
-            metric:
-              description: Measurable attribute to compute.
-              example: '@duration'
-              type: string
-          required:
-          - aggregation
-          type: object
+          $ref: '#/components/schemas/FormulaAndFunctionEventQueryDefinitionCompute'
         data_source:
           $ref: '#/components/schemas/FormulaAndFunctionEventsDataSource'
         group_by:
@@ -2500,19 +2426,38 @@ components:
           example: query_errors
           type: string
         search:
-          description: Search options.
-          properties:
-            query:
-              description: Events search string.
-              example: service:query
-              type: string
-          required:
-          - query
-          type: object
+          $ref: '#/components/schemas/FormulaAndFunctionEventQueryDefinitionSearch'
       required:
       - data_source
       - compute
       - name
+      type: object
+    FormulaAndFunctionEventQueryDefinitionCompute:
+      description: Compute options.
+      properties:
+        aggregation:
+          $ref: '#/components/schemas/FormulaAndFunctionEventAggregation'
+        interval:
+          description: A time interval in milliseconds.
+          example: 60000
+          format: int64
+          type: integer
+        metric:
+          description: Measurable attribute to compute.
+          example: '@duration'
+          type: string
+      required:
+      - aggregation
+      type: object
+    FormulaAndFunctionEventQueryDefinitionSearch:
+      description: Search options.
+      properties:
+        query:
+          description: Events search string.
+          example: service:query
+          type: string
+      required:
+      - query
       type: object
     FormulaAndFunctionEventQueryGroupBy:
       description: List of objects used to group by.
@@ -2527,20 +2472,22 @@ components:
           format: int64
           type: integer
         sort:
-          description: Options for sorting group by results.
-          properties:
-            aggregation:
-              $ref: '#/components/schemas/FormulaAndFunctionEventAggregation'
-            metric:
-              description: Metric used for sorting group by results.
-              type: string
-            order:
-              $ref: '#/components/schemas/QuerySortOrder'
-          required:
-          - aggregation
-          type: object
+          $ref: '#/components/schemas/FormulaAndFunctionEventQueryGroupBySort'
       required:
       - facet
+      type: object
+    FormulaAndFunctionEventQueryGroupBySort:
+      description: Options for sorting group by results.
+      properties:
+        aggregation:
+          $ref: '#/components/schemas/FormulaAndFunctionEventAggregation'
+        metric:
+          description: Metric used for sorting group by results.
+          type: string
+        order:
+          $ref: '#/components/schemas/QuerySortOrder'
+      required:
+      - aggregation
       type: object
     FormulaAndFunctionEventsDataSource:
       description: Data source for event platform-based queries.
@@ -2598,6 +2545,7 @@ components:
       description: A formula and functions metrics query.
       example:
         data_source: metrics
+        name: my_query
         query: avg:system.cpu.user{*}
       properties:
         aggregator:
@@ -2726,7 +2674,10 @@ components:
           example: '@browser.name:Chrome'
           type: string
         steps:
-          $ref: '#/components/schemas/FunnelSteps'
+          description: List of funnel steps.
+          items:
+            $ref: '#/components/schemas/FunnelStep'
+          type: array
       required:
       - query_string
       - data_source
@@ -2749,24 +2700,21 @@ components:
       type: string
       x-enum-varnames:
       - RUM
-    FunnelSteps:
-      description: List of funnel steps.
-      items:
-        description: The funnel step.
-        properties:
-          facet:
-            description: The facet of the step.
-            example: '@view.name'
-            type: string
-          value:
-            description: The value of the step.
-            example: /apm/home
-            type: string
-        required:
-        - facet
-        - value
-        type: object
-      type: array
+    FunnelStep:
+      description: The funnel step.
+      properties:
+        facet:
+          description: The facet of the step.
+          example: '@view.name'
+          type: string
+        value:
+          description: The value of the step.
+          example: /apm/home
+          type: string
+      required:
+      - facet
+      - value
+      type: object
     FunnelWidgetDefinition:
       description: 'The funnel visualization displays a funnel of user sessions that
         maps a sequence of view navigation and user interaction in your application.
@@ -2776,7 +2724,6 @@ components:
         requests:
           description: Request payload used to query items.
           example:
-          - request_type: funnel
           - query:
               data_source: rum
               query_string: '@browser.name:Chrome'
@@ -2785,6 +2732,7 @@ components:
                 value: /logs
               - facet: '@view.name'
                 value: /apm/home
+            request_type: funnel
           items:
             $ref: '#/components/schemas/FunnelWidgetRequest'
           maxItems: 1
@@ -2917,30 +2865,16 @@ components:
 
             for information about building the `REQUEST_SCHEMA`.'
           example:
-          - rum_query: <METRIC_1>{<SCOPE_1>}
+          - rum_query:
+              search:
+                query: <METRIC_1>{<SCOPE_1>}
           items:
             $ref: '#/components/schemas/GeomapWidgetRequest'
           maxItems: 1
           minItems: 1
           type: array
         style:
-          description: The style to apply to the widget.
-          example:
-            palette: hostmap_blues
-            palette_flip: false
-          properties:
-            palette:
-              description: The color palette to apply to the widget.
-              example: hostmap_blues
-              type: string
-            palette_flip:
-              description: Whether to flip the palette tones.
-              example: false
-              type: boolean
-          required:
-          - palette
-          - palette_flip
-          type: object
+          $ref: '#/components/schemas/GeomapWidgetDefinitionStyle'
         time:
           $ref: '#/components/schemas/WidgetTime'
         title:
@@ -2954,23 +2888,30 @@ components:
         type:
           $ref: '#/components/schemas/GeomapWidgetDefinitionType'
         view:
-          description: The view of the world that the map should render.
-          example:
-            focus: WORLD
-          properties:
-            focus:
-              description: The 2-letter ISO code of a country to focus the map on.
-                Or `WORLD`.
-              example: WORLD
-              type: string
-          required:
-          - focus
-          type: object
+          $ref: '#/components/schemas/GeomapWidgetDefinitionView'
       required:
       - type
       - requests
       - style
       - view
+      type: object
+    GeomapWidgetDefinitionStyle:
+      description: The style to apply to the widget.
+      example:
+        palette: hostmap_blues
+        palette_flip: false
+      properties:
+        palette:
+          description: The color palette to apply to the widget.
+          example: hostmap_blues
+          type: string
+        palette_flip:
+          description: Whether to flip the palette tones.
+          example: false
+          type: boolean
+      required:
+      - palette
+      - palette_flip
       type: object
     GeomapWidgetDefinitionType:
       default: geomap
@@ -2981,6 +2922,19 @@ components:
       type: string
       x-enum-varnames:
       - GEOMAP
+    GeomapWidgetDefinitionView:
+      description: The view of the world that the map should render.
+      example:
+        focus: WORLD
+      properties:
+        focus:
+          description: The 2-letter ISO code of a country to focus the map on. Or
+            `WORLD`.
+          example: WORLD
+          type: string
+      required:
+      - focus
+      type: object
     GeomapWidgetRequest:
       description: An updated geomap widget.
       properties:
@@ -3140,7 +3094,7 @@ components:
           example: payment
           type: string
       required:
-      - name
+      - message
       type: object
     HTTPMethod:
       description: The HTTP method.
@@ -3283,117 +3237,9 @@ components:
           format: int64
           type: integer
         meta:
-          description: Metadata associated with your host.
-          properties:
-            agent_checks:
-              description: A list of Agent checks running on the host.
-              items:
-                $ref: '#/components/schemas/AgentCheck'
-              type: array
-            agent_version:
-              description: The Datadog Agent version.
-              example: 7.32.3
-              type: string
-            cpuCores:
-              description: The number of cores.
-              example: 1
-              format: int64
-              type: integer
-            fbsdV:
-              description: An array of Mac versions.
-              items:
-                description: The version name.
-                example: FreeBSD
-                type: string
-              type: array
-            gohai:
-              description: JSON string containing system information.
-              example: '{"cpu":{"cache_size":"8192 KB","cpu_cores":"1","cpu_logical_processors":"1","family":"6","mhz":"2712.000","model":"142","model_name":"Intel(R)
-                Core(TM) i7-8559U CPU @ 2.70GHz","stepping":"10","vendor_id":"GenuineIntel"},"filesystem":[{"kb_size":"3966896","mounted_on":"/dev","name":"udev"},{"kb_size":"797396","mounted_on":"/run","name":"tmpfs"},{"kb_size":"64800356","mounted_on":"/","name":"/dev/mapper/vagrant--vg-root"},{"kb_size":"3986972","mounted_on":"/dev/shm","name":"tmpfs"},{"kb_size":"5120","mounted_on":"/run/lock","name":"tmpfs"},{"kb_size":"3986972","mounted_on":"/sys/fs/cgroup","name":"tmpfs"},{"kb_size":"488245288","mounted_on":"/vagrant","name":"vagrant"},{"kb_size":"797392","mounted_on":"/run/user/1000","name":"tmpfs"}],"memory":{"swap_total":"1003516kB","total":"7973944kB"},"network":{"interfaces":[{"ipv4":"10.0.2.15","ipv4-network":"10.0.2.0/24","ipv6":"fe80::a00:27ff:fec2:be11","ipv6-network":"fe80::/64","macaddress":"08:00:27:c2:be:11","name":"eth0"},{"ipv4":"192.168.122.1","ipv4-network":"192.168.122.0/24","macaddress":"52:54:00:6f:1c:bf","name":"virbr0"}],"ipaddress":"10.0.2.15","ipaddressv6":"fe80::a00:27ff:fec2:be11","macaddress":"08:00:27:c2:be:11"},"platform":{"GOOARCH":"amd64","GOOS":"linux","goV":"1.16.7","hardware_platform":"x86_64","hostname":"vagrant","kernel_name":"Linux","kernel_release":"4.15.0-29-generic","kernel_version":"#31-Ubuntu
-                SMP Tue Jul 17 15:39:52 UTC 2018","machine":"x86_64","os":"GNU/Linux","processor":"x86_64","pythonV":"2.7.15rc1"}}'
-              type: string
-            install_method:
-              description: Agent install method.
-              properties:
-                installer_version:
-                  description: The installer version.
-                  example: install_script-1.7.1
-                  type: string
-                tool:
-                  description: Tool used to install the agent.
-                  example: install_script
-                  type: string
-                tool_version:
-                  description: The tool version.
-                  example: install_script
-                  type: string
-              type: object
-            macV:
-              description: An array of Mac versions.
-              items:
-                description: Version name.
-                example: Mac
-                type: string
-              type: array
-            machine:
-              description: The machine architecture.
-              example: amd64
-              type: string
-            nixV:
-              description: Array of Unix versions.
-              items:
-                description: Version name.
-                example: Ubuntu
-                type: string
-              type: array
-            platform:
-              description: The OS platform.
-              example: linux
-              type: string
-            processor:
-              description: The processor.
-              example: Intel(R) Core(TM) i7-8559U CPU @ 2.70GHz
-              type: string
-            pythonV:
-              description: The Python version.
-              example: 3.8.11
-              type: string
-            socket-fqdn:
-              description: The socket fqdn.
-              example: vagrant.vm.
-              type: string
-            socket-hostname:
-              description: The socket hostname.
-              example: vagrant
-              type: string
-            winV:
-              description: An array of Windows versions.
-              items:
-                description: Version name.
-                example: Windows
-                type: string
-              type: array
-          type: object
+          $ref: '#/components/schemas/HostMeta'
         metrics:
-          description: Host Metrics collected.
-          properties:
-            cpu:
-              description: The percent of CPU used (everything but idle).
-              example: 99.0
-              format: double
-              type: number
-            iowait:
-              description: The percent of CPU spent waiting on the IO (not reported
-                for all platforms).
-              example: 3.2
-              format: double
-              type: number
-            load:
-              description: The system load over the last 15 minutes.
-              example: 0.5
-              format: double
-              type: number
-          type: object
+          $ref: '#/components/schemas/HostMetrics'
         mute_timeout:
           description: Timeout of the mute applied to your host.
           format: int64
@@ -3494,14 +3340,7 @@ components:
           description: Notes on the title.
           type: string
         requests:
-          description: List of definitions.
-          example: {}
-          properties:
-            fill:
-              $ref: '#/components/schemas/HostMapRequest'
-            size:
-              $ref: '#/components/schemas/HostMapRequest'
-          type: object
+          $ref: '#/components/schemas/HostMapWidgetDefinitionRequests'
         scope:
           description: List of tags used to filter the map.
           items:
@@ -3509,21 +3348,7 @@ components:
             type: string
           type: array
         style:
-          description: The style to apply to the widget.
-          properties:
-            fill_max:
-              description: Max value to use to color the map.
-              type: string
-            fill_min:
-              description: Min value to use to color the map.
-              type: string
-            palette:
-              description: Color palette to apply to the widget.
-              type: string
-            palette_flip:
-              description: Whether to flip the palette tones.
-              type: boolean
-          type: object
+          $ref: '#/components/schemas/HostMapWidgetDefinitionStyle'
         title:
           description: Title of the widget.
           type: string
@@ -3538,6 +3363,31 @@ components:
       - type
       - requests
       type: object
+    HostMapWidgetDefinitionRequests:
+      description: List of definitions.
+      example: {}
+      properties:
+        fill:
+          $ref: '#/components/schemas/HostMapRequest'
+        size:
+          $ref: '#/components/schemas/HostMapRequest'
+      type: object
+    HostMapWidgetDefinitionStyle:
+      description: The style to apply to the widget.
+      properties:
+        fill_max:
+          description: Max value to use to color the map.
+          type: string
+        fill_min:
+          description: Min value to use to color the map.
+          type: string
+        palette:
+          description: Color palette to apply to the widget.
+          type: string
+        palette_flip:
+          description: Whether to flip the palette tones.
+          type: boolean
+      type: object
     HostMapWidgetDefinitionType:
       default: hostmap
       description: Type of the host map widget.
@@ -3547,6 +3397,120 @@ components:
       type: string
       x-enum-varnames:
       - HOSTMAP
+    HostMeta:
+      description: Metadata associated with your host.
+      properties:
+        agent_checks:
+          description: A list of Agent checks running on the host.
+          items:
+            $ref: '#/components/schemas/AgentCheck'
+          type: array
+        agent_version:
+          description: The Datadog Agent version.
+          example: 7.32.3
+          type: string
+        cpuCores:
+          description: The number of cores.
+          example: 1
+          format: int64
+          type: integer
+        fbsdV:
+          description: An array of Mac versions.
+          items:
+            description: The version name.
+            example: FreeBSD
+            type: string
+          type: array
+        gohai:
+          description: JSON string containing system information.
+          example: '{"cpu":{"cache_size":"8192 KB","cpu_cores":"1","cpu_logical_processors":"1","family":"6","mhz":"2712.000","model":"142","model_name":"Intel(R)
+            Core(TM) i7-8559U CPU @ 2.70GHz","stepping":"10","vendor_id":"GenuineIntel"},"filesystem":[{"kb_size":"3966896","mounted_on":"/dev","name":"udev"},{"kb_size":"797396","mounted_on":"/run","name":"tmpfs"},{"kb_size":"64800356","mounted_on":"/","name":"/dev/mapper/vagrant--vg-root"},{"kb_size":"3986972","mounted_on":"/dev/shm","name":"tmpfs"},{"kb_size":"5120","mounted_on":"/run/lock","name":"tmpfs"},{"kb_size":"3986972","mounted_on":"/sys/fs/cgroup","name":"tmpfs"},{"kb_size":"488245288","mounted_on":"/vagrant","name":"vagrant"},{"kb_size":"797392","mounted_on":"/run/user/1000","name":"tmpfs"}],"memory":{"swap_total":"1003516kB","total":"7973944kB"},"network":{"interfaces":[{"ipv4":"10.0.2.15","ipv4-network":"10.0.2.0/24","ipv6":"fe80::a00:27ff:fec2:be11","ipv6-network":"fe80::/64","macaddress":"08:00:27:c2:be:11","name":"eth0"},{"ipv4":"192.168.122.1","ipv4-network":"192.168.122.0/24","macaddress":"52:54:00:6f:1c:bf","name":"virbr0"}],"ipaddress":"10.0.2.15","ipaddressv6":"fe80::a00:27ff:fec2:be11","macaddress":"08:00:27:c2:be:11"},"platform":{"GOOARCH":"amd64","GOOS":"linux","goV":"1.16.7","hardware_platform":"x86_64","hostname":"vagrant","kernel_name":"Linux","kernel_release":"4.15.0-29-generic","kernel_version":"#31-Ubuntu
+            SMP Tue Jul 17 15:39:52 UTC 2018","machine":"x86_64","os":"GNU/Linux","processor":"x86_64","pythonV":"2.7.15rc1"}}'
+          type: string
+        install_method:
+          $ref: '#/components/schemas/HostMetaInstallMethod'
+        macV:
+          description: An array of Mac versions.
+          items:
+            description: Version name.
+            example: Mac
+            type: string
+          type: array
+        machine:
+          description: The machine architecture.
+          example: amd64
+          type: string
+        nixV:
+          description: Array of Unix versions.
+          items:
+            description: Version name.
+            example: Ubuntu
+            type: string
+          type: array
+        platform:
+          description: The OS platform.
+          example: linux
+          type: string
+        processor:
+          description: The processor.
+          example: Intel(R) Core(TM) i7-8559U CPU @ 2.70GHz
+          type: string
+        pythonV:
+          description: The Python version.
+          example: 3.8.11
+          type: string
+        socket-fqdn:
+          description: The socket fqdn.
+          example: vagrant.vm.
+          type: string
+        socket-hostname:
+          description: The socket hostname.
+          example: vagrant
+          type: string
+        winV:
+          description: An array of Windows versions.
+          items:
+            description: Version name.
+            example: Windows
+            type: string
+          type: array
+      type: object
+    HostMetaInstallMethod:
+      description: Agent install method.
+      properties:
+        installer_version:
+          description: The installer version.
+          example: install_script-1.7.1
+          type: string
+        tool:
+          description: Tool used to install the agent.
+          example: install_script
+          type: string
+        tool_version:
+          description: The tool version.
+          example: install_script
+          type: string
+      type: object
+    HostMetrics:
+      description: Host Metrics collected.
+      properties:
+        cpu:
+          description: The percent of CPU used (everything but idle).
+          example: 99.0
+          format: double
+          type: number
+        iowait:
+          description: The percent of CPU spent waiting on the IO (not reported for
+            all platforms).
+          example: 3.2
+          format: double
+          type: number
+        load:
+          description: The system load over the last 15 minutes.
+          example: 0.5
+          format: double
+          type: number
+      type: object
     HostMuteResponse:
       description: Response with the list of muted host for your organization.
       properties:
@@ -3678,6 +3642,7 @@ components:
       - browser_usage
       - container_usage
       - custom_timeseries_usage
+      - estimated_indexed_logs_usage
       - fargate_usage
       - functions_usage
       - indexed_logs_usage
@@ -3694,6 +3659,7 @@ components:
       - BROWSER_USAGE
       - CONTAINER_USAGE
       - CUSTOM_TIMESERIES_USAGE
+      - ESTIMATED_INDEXED_LOGS_USAGE
       - FARGATE_USAGE
       - FUNCTIONS_USAGE
       - INDEXED_LOGS_USAGE
@@ -4039,13 +4005,13 @@ components:
         requests:
           description: Request payload used to query items.
           example:
-          - response_format: event_list
           - columns:
             - field: timestamp
               width: auto
-          - query:
+            query:
               data_source: issue_stream
               query_string: '@data_source:APM'
+            response_format: event_list
           items:
             $ref: '#/components/schemas/ListStreamWidgetRequest'
           maxItems: 1
@@ -4105,57 +4071,58 @@ components:
       description: Object describing a log after being processed and stored by Datadog.
       properties:
         content:
-          description: JSON object containing all log attributes and their associated
-            values.
-          properties:
-            attributes:
-              additionalProperties: {}
-              description: JSON object of attributes from your log.
-              example:
-                customAttribute: 123
-                duration: 2345
-              type: object
-            host:
-              description: Name of the machine from where the logs are being sent.
-              example: i-0123
-              type: string
-            message:
-              description: 'The message [reserved attribute](https://docs.datadoghq.com/logs/log_collection/#reserved-attributes)
-
-                of your log. By default, Datadog ingests the value of the message
-                attribute as the body of the log entry.
-
-                That value is then highlighted and displayed in the Logstream, where
-                it is indexed for full text search.'
-              example: Host connected to remote
-              type: string
-            service:
-              description: 'The name of the application or service generating the
-                log events.
-
-                It is used to switch from Logs to APM, so make sure you define the
-                same
-
-                value when you use both products.'
-              example: agent
-              type: string
-            tags:
-              description: Array of tags associated with your log.
-              example:
-              - team:A
-              format: array
-              items:
-                description: Tag associated with your log.
-                format: string
-            timestamp:
-              description: Timestamp of your log.
-              example: '2020-05-26T13:36:14Z'
-              format: date-time
-              type: string
-          type: object
+          $ref: '#/components/schemas/LogContent'
         id:
           description: Unique ID of the Log.
           example: AAAAAWgN8Xwgr1vKDQAAAABBV2dOOFh3ZzZobm1mWXJFYTR0OA
+          type: string
+      type: object
+    LogContent:
+      description: JSON object containing all log attributes and their associated
+        values.
+      properties:
+        attributes:
+          additionalProperties: {}
+          description: JSON object of attributes from your log.
+          example:
+            customAttribute: 123
+            duration: 2345
+          type: object
+        host:
+          description: Name of the machine from where the logs are being sent.
+          example: i-0123
+          type: string
+        message:
+          description: 'The message [reserved attribute](https://docs.datadoghq.com/logs/log_collection/#reserved-attributes)
+
+            of your log. By default, Datadog ingests the value of the message attribute
+            as the body of the log entry.
+
+            That value is then highlighted and displayed in the Logstream, where it
+            is indexed for full text search.'
+          example: Host connected to remote
+          type: string
+        service:
+          description: 'The name of the application or service generating the log
+            events.
+
+            It is used to switch from Logs to APM, so make sure you define the same
+
+            value when you use both products.'
+          example: agent
+          type: string
+        tags:
+          description: Array of tags associated with your log.
+          example:
+          - team:A
+          format: array
+          items:
+            description: Tag associated with your log.
+            format: string
+        timestamp:
+          description: Timestamp of your log.
+          example: '2020-05-26T13:36:14Z'
+          format: date-time
           type: string
       type: object
     LogQueryDefinition:
@@ -4179,15 +4146,7 @@ components:
             $ref: '#/components/schemas/LogsQueryCompute'
           type: array
         search:
-          description: The query being made on the logs.
-          properties:
-            query:
-              description: Search value to apply.
-              example: ''
-              type: string
-          required:
-          - query
-          type: object
+          $ref: '#/components/schemas/LogQueryDefinitionSearch'
       type: object
     LogQueryDefinitionGroupBy:
       description: Defined items in the group.
@@ -4202,24 +4161,36 @@ components:
           format: int64
           type: integer
         sort:
-          description: Define a sorting method.
-          properties:
-            aggregation:
-              description: The aggregation method.
-              example: avg
-              type: string
-            facet:
-              description: Facet name.
-              example: '@string_query.interval'
-              type: string
-            order:
-              $ref: '#/components/schemas/WidgetSort'
-          required:
-          - aggregation
-          - order
-          type: object
+          $ref: '#/components/schemas/LogQueryDefinitionGroupBySort'
       required:
       - facet
+      type: object
+    LogQueryDefinitionGroupBySort:
+      description: Define a sorting method.
+      properties:
+        aggregation:
+          description: The aggregation method.
+          example: avg
+          type: string
+        facet:
+          description: Facet name.
+          example: '@string_query.interval'
+          type: string
+        order:
+          $ref: '#/components/schemas/WidgetSort'
+      required:
+      - aggregation
+      - order
+      type: object
+    LogQueryDefinitionSearch:
+      description: The query being made on the logs.
+      properties:
+        query:
+          description: Search value to apply.
+          example: ''
+          type: string
+      required:
+      - query
       type: object
     LogStreamWidgetDefinition:
       description: The Log Stream displays a log flow matching the defined query.
@@ -4431,15 +4402,7 @@ components:
       description: Object containing logs usage data broken down by retention period.
       properties:
         orgs:
-          description: Indexed logs usage summary for each organization for each retention
-            period with usage.
-          properties:
-            usage:
-              description: Indexed logs usage summary for each organization.
-              items:
-                $ref: '#/components/schemas/LogsByRetentionOrgUsage'
-              type: array
-          type: object
+          $ref: '#/components/schemas/LogsByRetentionOrgs'
         usage:
           description: Aggregated index logs usage for each retention period with
             usage.
@@ -4470,6 +4433,16 @@ components:
           description: Indexed logs usage for each active retention for the organization.
           items:
             $ref: '#/components/schemas/LogsRetentionSumUsage'
+          type: array
+      type: object
+    LogsByRetentionOrgs:
+      description: Indexed logs usage summary for each organization for each retention
+        period with usage.
+      properties:
+        usage:
+          description: Indexed logs usage summary for each organization.
+          items:
+            $ref: '#/components/schemas/LogsByRetentionOrgUsage'
           type: array
       type: object
     LogsCategoryProcessor:
@@ -4893,30 +4866,31 @@ components:
             is out of the scope of the specified time window.'
           type: string
         time:
-          description: Timeframe to retrieve the log from.
-          properties:
-            from:
-              description: Minimum timestamp for requested logs.
-              example: '2020-02-02T02:02:02Z'
-              format: date-time
-              type: string
-            timezone:
-              description: 'Timezone can be specified both as an offset (for example
-                "UTC+03:00")
-
-                or a regional zone (for example "Europe/Paris").'
-              type: string
-            to:
-              description: Maximum timestamp for requested logs.
-              example: '2020-02-02T20:20:20Z'
-              format: date-time
-              type: string
-          required:
-          - from
-          - to
-          type: object
+          $ref: '#/components/schemas/LogsListRequestTime'
       required:
       - time
+      type: object
+    LogsListRequestTime:
+      description: Timeframe to retrieve the log from.
+      properties:
+        from:
+          description: Minimum timestamp for requested logs.
+          example: '2020-02-02T02:02:02Z'
+          format: date-time
+          type: string
+        timezone:
+          description: 'Timezone can be specified both as an offset (for example "UTC+03:00")
+
+            or a regional zone (for example "Europe/Paris").'
+          type: string
+        to:
+          description: Maximum timestamp for requested logs.
+          example: '2020-02-02T20:20:20Z'
+          format: date-time
+          type: string
+      required:
+      - from
+      - to
       type: object
     LogsListResponse:
       description: Response object with all logs matching the request and pagination
@@ -5552,15 +5526,17 @@ components:
       description: Object containing the list of metrics matching the search query.
       properties:
         results:
-          description: Search result.
-          properties:
-            metrics:
-              description: List of metrics that match the search query.
-              items:
-                description: Metric name.
-                type: string
-              type: array
-          type: object
+          $ref: '#/components/schemas/MetricSearchResponseResults'
+      type: object
+    MetricSearchResponseResults:
+      description: Search result.
+      properties:
+        metrics:
+          description: List of metrics that match the search query.
+          items:
+            description: Metric name.
+            type: string
+          type: array
       type: object
     MetricsListResponse:
       description: Object listing all metric names stored by Datadog since a given
@@ -6024,14 +6000,7 @@ components:
           total_count: 2
       properties:
         counts:
-          description: The counts of monitor groups per different criteria.
-          properties:
-            status:
-              $ref: '#/components/schemas/MonitorSearchCount'
-            type:
-              $ref: '#/components/schemas/MonitorSearchCount'
-          readOnly: true
-          type: object
+          $ref: '#/components/schemas/MonitorGroupSearchResponseCounts'
         groups:
           description: The list of found monitor groups.
           items:
@@ -6040,6 +6009,15 @@ components:
           type: array
         metadata:
           $ref: '#/components/schemas/MonitorSearchResponseMetadata'
+      type: object
+    MonitorGroupSearchResponseCounts:
+      description: The counts of monitor groups per different criteria.
+      properties:
+        status:
+          $ref: '#/components/schemas/MonitorSearchCount'
+        type:
+          $ref: '#/components/schemas/MonitorSearchCount'
+      readOnly: true
       type: object
     MonitorGroupSearchResult:
       description: A single monitor group search result.
@@ -6083,22 +6061,7 @@ components:
       description: List of options associated with your monitor.
       properties:
         aggregation:
-          description: Type of aggregation performed in the monitor query.
-          properties:
-            group_by:
-              description: Group to break down the monitor on.
-              example: host
-              type: string
-            metric:
-              description: Metric name used in the monitor.
-              example: metrics.name
-              type: string
-            type:
-              description: Metric type used in the monitor.
-              example: count
-              type: string
-          readOnly: true
-          type: object
+          $ref: '#/components/schemas/MonitorOptionsAggregation'
         device_ids:
           deprecated: true
           description: IDs of the device the Synthetics monitor is running on.
@@ -6222,7 +6185,7 @@ components:
             stops reporting.
           type: boolean
         renotify_interval:
-          default: none
+          default: null
           description: "The number of minutes after the last notification before a
             monitor re-notifies on the current status.\nIt only re-notifies if it\u2019s
             not resolved."
@@ -6267,7 +6230,7 @@ components:
         thresholds:
           $ref: '#/components/schemas/MonitorThresholds'
         timeout_h:
-          default: none
+          default: null
           description: The number of hours of the monitor not reporting data before
             it automatically resolves from a triggered state. The minimum allowed
             value is 0 hours. The maximum allowed value is 24 hours.
@@ -6280,6 +6243,23 @@ components:
           items:
             $ref: '#/components/schemas/MonitorFormulaAndFunctionQueryDefinition'
           type: array
+      type: object
+    MonitorOptionsAggregation:
+      description: Type of aggregation performed in the monitor query.
+      properties:
+        group_by:
+          description: Group to break down the monitor on.
+          example: host
+          type: string
+        metric:
+          description: Metric name used in the monitor.
+          example: metrics.name
+          type: string
+        type:
+          description: Metric type used in the monitor.
+          example: count
+          type: string
+      readOnly: true
       type: object
     MonitorOverallStates:
       description: The different states your monitor can be in.
@@ -6375,18 +6355,7 @@ components:
           type: query alert
       properties:
         counts:
-          description: The counts of monitors per different criteria.
-          properties:
-            muted:
-              $ref: '#/components/schemas/MonitorSearchCount'
-            status:
-              $ref: '#/components/schemas/MonitorSearchCount'
-            tag:
-              $ref: '#/components/schemas/MonitorSearchCount'
-            type:
-              $ref: '#/components/schemas/MonitorSearchCount'
-          readOnly: true
-          type: object
+          $ref: '#/components/schemas/MonitorSearchResponseCounts'
         metadata:
           $ref: '#/components/schemas/MonitorSearchResponseMetadata'
         monitors:
@@ -6395,6 +6364,19 @@ components:
             $ref: '#/components/schemas/MonitorSearchResult'
           readOnly: true
           type: array
+      type: object
+    MonitorSearchResponseCounts:
+      description: The counts of monitors per different criteria.
+      properties:
+        muted:
+          $ref: '#/components/schemas/MonitorSearchCount'
+        status:
+          $ref: '#/components/schemas/MonitorSearchCount'
+        tag:
+          $ref: '#/components/schemas/MonitorSearchCount'
+        type:
+          $ref: '#/components/schemas/MonitorSearchCount'
+      readOnly: true
       type: object
     MonitorSearchResponseMetadata:
       description: Metadata about the response.
@@ -6822,6 +6804,8 @@ components:
       - container_percentage
       - custom_timeseries_usage
       - custom_timeseries_percentage
+      - estimated_indexed_logs_usage
+      - estimated_indexed_logs_percentage
       - fargate_usage
       - fargate_percentage
       - functions_usage
@@ -6853,6 +6837,8 @@ components:
       - CONTAINER_PERCENTAGE
       - CUSTOM_TIMESERIES_USAGE
       - CUSTOM_TIMESERIES_PERCENTAGE
+      - ESTIMATED_INDEXED_LOGS_USAGE
+      - ESTIMATED_INDEXED_LOGS_PERCENTAGE
       - FARGATE_USAGE
       - FARGATE_PERCENTAGE
       - FUNCTIONS_USAGE
@@ -6913,6 +6899,16 @@ components:
           type: number
         custom_timeseries_usage:
           description: The custom metrics usage by tag(s).
+          format: double
+          type: number
+        estimated_indexed_logs_percentage:
+          description: The percentage of estimated live indexed logs usage by tag(s).
+            This field is in private beta.
+          format: double
+          type: number
+        estimated_indexed_logs_usage:
+          description: The estimated live indexed logs usage by tag(s). This field
+            is in private beta.
           format: double
           type: number
         fargate_percentage:
@@ -7092,6 +7088,7 @@ components:
           type: boolean
       type: object
     NotebookCellCreateRequest:
+      additionalProperties: false
       description: The description of a notebook cell create request.
       properties:
         attributes:
@@ -7436,7 +7433,6 @@ components:
           $ref: '#/components/schemas/NotebookMetadataType'
       type: object
     NotebookMetadataType:
-      default: null
       description: Metadata type of the notebook.
       enum:
       - postmortem
@@ -7736,11 +7732,7 @@ components:
             $ref: '#/components/schemas/NotebooksResponseData'
           type: array
         meta:
-          description: Searches metadata returned by the API.
-          properties:
-            page:
-              $ref: '#/components/schemas/NotebooksResponsePage'
-          type: object
+          $ref: '#/components/schemas/NotebooksResponseMeta'
       type: object
     NotebooksResponseData:
       description: The data for a notebook in get all response.
@@ -7797,6 +7789,12 @@ components:
       required:
       - name
       type: object
+    NotebooksResponseMeta:
+      description: Searches metadata returned by the API.
+      properties:
+        page:
+          $ref: '#/components/schemas/NotebooksResponsePage'
+      type: object
     NotebooksResponsePage:
       description: Pagination metadata returned by the API.
       properties:
@@ -7834,84 +7832,7 @@ components:
           example: abcdef12345
           type: string
         settings:
-          description: A JSON array of settings.
-          properties:
-            private_widget_share:
-              description: Whether or not the organization users can share widgets
-                outside of Datadog.
-              example: false
-              type: boolean
-            saml:
-              description: 'Set the boolean property enabled to enable or disable
-                single sign on with SAML.
-
-                See the SAML documentation for more information about all SAML settings.'
-              properties:
-                enabled:
-                  description: Whether or not SAML is enabled for this organization.
-                  example: false
-                  type: boolean
-              type: object
-            saml_autocreate_access_role:
-              $ref: '#/components/schemas/AccessRole'
-            saml_autocreate_users_domains:
-              description: Has two properties, `enabled` (boolean) and `domains`,
-                which is a list of domains without the @ symbol.
-              properties:
-                domains:
-                  description: List of domains where the SAML automated user creation
-                    is enabled.
-                  items:
-                    description: Domain to automate user creation from.
-                    example: example.com
-                    type: string
-                  type: array
-                enabled:
-                  description: Whether or not the automated user creation based on
-                    SAML domain is enabled.
-                  example: false
-                  type: boolean
-              type: object
-            saml_can_be_enabled:
-              description: Whether or not SAML can be enabled for this organization.
-              example: false
-              type: boolean
-            saml_idp_endpoint:
-              description: Identity provider endpoint for SAML authentication.
-              example: https://my.saml.endpoint
-              type: string
-            saml_idp_initiated_login:
-              description: Has one property enabled (boolean).
-              properties:
-                enabled:
-                  description: 'Whether SAML IdP initiated login is enabled, learn
-                    more
-
-                    in the [SAML documentation](https://docs.datadoghq.com/account_management/saml/#idp-initiated-login).'
-                  example: false
-                  type: boolean
-              type: object
-            saml_idp_metadata_uploaded:
-              description: Whether or not a SAML identity provider metadata file was
-                provided to the Datadog organization.
-              example: false
-              type: boolean
-            saml_login_url:
-              description: URL for SAML logging.
-              example: https://my.saml.login.url
-              type: string
-            saml_strict_mode:
-              description: Has one property enabled (boolean).
-              properties:
-                enabled:
-                  description: 'Whether or not the SAML strict mode is enabled. If
-                    true, all users must log in with SAML.
-
-                    Learn more on the [SAML Strict documentation](https://docs.datadoghq.com/account_management/saml/#saml-strict).'
-                  example: false
-                  type: boolean
-              type: object
-          type: object
+          $ref: '#/components/schemas/OrganizationSettings'
         subscription:
           $ref: '#/components/schemas/OrganizationSubscription'
       type: object
@@ -7966,6 +7887,91 @@ components:
       properties:
         org:
           $ref: '#/components/schemas/Organization'
+      type: object
+    OrganizationSettings:
+      description: A JSON array of settings.
+      properties:
+        private_widget_share:
+          description: Whether or not the organization users can share widgets outside
+            of Datadog.
+          example: false
+          type: boolean
+        saml:
+          $ref: '#/components/schemas/OrganizationSettingsSaml'
+        saml_autocreate_access_role:
+          $ref: '#/components/schemas/AccessRole'
+        saml_autocreate_users_domains:
+          $ref: '#/components/schemas/OrganizationSettingsSamlAutocreateUsersDomains'
+        saml_can_be_enabled:
+          description: Whether or not SAML can be enabled for this organization.
+          example: false
+          type: boolean
+        saml_idp_endpoint:
+          description: Identity provider endpoint for SAML authentication.
+          example: https://my.saml.endpoint
+          type: string
+        saml_idp_initiated_login:
+          $ref: '#/components/schemas/OrganizationSettingsSamlIdpInitiatedLogin'
+        saml_idp_metadata_uploaded:
+          description: Whether or not a SAML identity provider metadata file was provided
+            to the Datadog organization.
+          example: false
+          type: boolean
+        saml_login_url:
+          description: URL for SAML logging.
+          example: https://my.saml.login.url
+          type: string
+        saml_strict_mode:
+          $ref: '#/components/schemas/OrganizationSettingsSamlStrictMode'
+      type: object
+    OrganizationSettingsSaml:
+      description: 'Set the boolean property enabled to enable or disable single sign
+        on with SAML.
+
+        See the SAML documentation for more information about all SAML settings.'
+      properties:
+        enabled:
+          description: Whether or not SAML is enabled for this organization.
+          example: false
+          type: boolean
+      type: object
+    OrganizationSettingsSamlAutocreateUsersDomains:
+      description: Has two properties, `enabled` (boolean) and `domains`, which is
+        a list of domains without the @ symbol.
+      properties:
+        domains:
+          description: List of domains where the SAML automated user creation is enabled.
+          items:
+            description: Domain to automate user creation from.
+            example: example.com
+            type: string
+          type: array
+        enabled:
+          description: Whether or not the automated user creation based on SAML domain
+            is enabled.
+          example: false
+          type: boolean
+      type: object
+    OrganizationSettingsSamlIdpInitiatedLogin:
+      description: Has one property enabled (boolean).
+      properties:
+        enabled:
+          description: 'Whether SAML IdP initiated login is enabled, learn more
+
+            in the [SAML documentation](https://docs.datadoghq.com/account_management/saml/#idp-initiated-login).'
+          example: false
+          type: boolean
+      type: object
+    OrganizationSettingsSamlStrictMode:
+      description: Has one property enabled (boolean).
+      properties:
+        enabled:
+          description: 'Whether or not the SAML strict mode is enabled. If true, all
+            users must log in with SAML.
+
+            Learn more on the [SAML Strict documentation](https://docs.datadoghq.com/account_management/saml/#saml-strict).'
+          example: false
+          type: boolean
       type: object
     OrganizationSubscription:
       deprecated: true
@@ -8237,31 +8243,33 @@ components:
         fields in this response indicate which deletions succeeded and failed.'
       properties:
         data:
-          description: An array of service level objective objects.
-          properties:
-            deleted:
-              description: 'An array of service level objective object IDs that indicates
-
-                which objects that were completely deleted.'
-              items:
-                description: A deleted SLO ID.
-                type: string
-              type: array
-            updated:
-              description: 'An array of service level objective object IDs that indicates
-
-                which objects that were modified (objects for which at least one
-
-                threshold was deleted, but that were not completely deleted).'
-              items:
-                description: An updated SLO ID.
-                type: string
-              type: array
-          type: object
+          $ref: '#/components/schemas/SLOBulkDeleteResponseData'
         errors:
           description: Array of errors object returned.
           items:
             $ref: '#/components/schemas/SLOBulkDeleteError'
+          type: array
+      type: object
+    SLOBulkDeleteResponseData:
+      description: An array of service level objective objects.
+      properties:
+        deleted:
+          description: 'An array of service level objective object IDs that indicates
+
+            which objects that were completely deleted.'
+          items:
+            description: A deleted SLO ID.
+            type: string
+          type: array
+        updated:
+          description: 'An array of service level objective object IDs that indicates
+
+            which objects that were modified (objects for which at least one
+
+            threshold was deleted, but that were not completely deleted).'
+          items:
+            description: An updated SLO ID.
+            type: string
           type: array
       type: object
     SLOCorrection:
@@ -8397,19 +8405,7 @@ components:
           format: int64
           type: integer
         modifier:
-          description: Modifier of the object.
-          nullable: true
-          properties:
-            email:
-              description: Email of the Modifier.
-              type: string
-            handle:
-              description: Handle of the Modifier.
-              type: string
-            name:
-              description: Name of the Modifier.
-              type: string
-          type: object
+          $ref: '#/components/schemas/SLOCorrectionResponseAttributesModifier'
         rrule:
           description: 'The recurrence rules as defined in the iCalendar RFC 5545.
             The supported rules for SLO corrections
@@ -8428,6 +8424,20 @@ components:
         timezone:
           description: The timezone to display in the UI for the correction times
             (defaults to "UTC").
+          type: string
+      type: object
+    SLOCorrectionResponseAttributesModifier:
+      description: Modifier of the object.
+      nullable: true
+      properties:
+        email:
+          description: Email of the Modifier.
+          type: string
+        handle:
+          description: Handle of the Modifier.
+          type: string
+        name:
+          description: Name of the Modifier.
           type: string
       type: object
     SLOCorrectionType:
@@ -8597,47 +8607,7 @@ components:
           format: int64
           type: integer
         metadata:
-          description: Query metadata.
-          example: {}
-          properties:
-            aggr:
-              description: Query aggregator function.
-              type: string
-            expression:
-              description: Query expression.
-              type: string
-            metric:
-              description: Query metric used.
-              type: string
-            query_index:
-              description: Query index from original combined query.
-              format: int64
-              type: integer
-            scope:
-              description: Query scope.
-              type: string
-            unit:
-              description: 'An array of metric units that contains up to two unit
-                objects.
-
-                For example, bytes represents one unit object and bytes per second
-                represents two unit objects.
-
-                If a metric query only has one unit object, the second array element
-                is null.'
-              example:
-              - family: bytes
-                id: 2
-                name: byte
-                plural: bytes
-                scale_factor: 1.0
-                short_name: B
-              - null
-              items:
-                $ref: '#/components/schemas/SLOHistoryMetricsSeriesMetadataUnit'
-              nullable: true
-              type: array
-          type: object
+          $ref: '#/components/schemas/SLOHistoryMetricsSeriesMetadata'
         sum:
           description: Total sum of the query.
           example: 0.0
@@ -8655,6 +8625,47 @@ components:
       - count
       - sum
       - values
+      type: object
+    SLOHistoryMetricsSeriesMetadata:
+      description: Query metadata.
+      example: {}
+      properties:
+        aggr:
+          description: Query aggregator function.
+          type: string
+        expression:
+          description: Query expression.
+          type: string
+        metric:
+          description: Query metric used.
+          type: string
+        query_index:
+          description: Query index from original combined query.
+          format: int64
+          type: integer
+        scope:
+          description: Query scope.
+          type: string
+        unit:
+          description: 'An array of metric units that contains up to two unit objects.
+
+            For example, bytes represents one unit object and bytes per second represents
+            two unit objects.
+
+            If a metric query only has one unit object, the second array element is
+            null.'
+          example:
+          - family: bytes
+            id: 2
+            name: byte
+            plural: bytes
+            scale_factor: 1.0
+            short_name: B
+          - null
+          items:
+            $ref: '#/components/schemas/SLOHistoryMetricsSeriesMetadataUnit'
+          nullable: true
+          type: array
       type: object
     SLOHistoryMetricsSeriesMetadataUnit:
       description: An Object of metric units.
@@ -8708,17 +8719,17 @@ components:
           description: For `monitor` based SLOs, this includes the aggregated history
             as arrays that include time series and uptime data where `0=monitor` is
             in `OK` state and `1=monitor` is in `alert` state.
+          example:
+          - - 1579212382
+            - 0
           items:
             description: Represents an array time series data.
             example:
-            - - 1579212382
-              - 0
+            - 1579212382
+            - 0
             items:
               description: A time series data point which is a tuple of (timestamp,
                 value).
-              example:
-              - 1579212382
-              - 0
               format: double
               type: number
             maxItems: 2
@@ -8744,7 +8755,7 @@ components:
           deprecated: true
           description: The amount of decimal places the SLI value is accurate to for
             the given from `&&` to timestamp. Use `span_precision` instead.
-          example: 2
+          example: 2.0
           format: double
           type: number
         preview:
@@ -8762,7 +8773,7 @@ components:
         span_precision:
           description: The amount of decimal places the SLI value is accurate to for
             the given from `&&` to timestamp.
-          example: 2
+          example: 2.0
           format: double
           type: number
         uptime:
@@ -8776,70 +8787,71 @@ components:
       description: A service level objective history response.
       properties:
         data:
-          description: An array of service level objective objects.
-          properties:
-            from_ts:
-              description: The `from` timestamp in epoch seconds.
-              example: 1615323990
-              format: int64
-              type: integer
-            group_by:
-              description: 'For `metric` based SLOs where the query includes a group-by
-                clause, this represents the list of grouping parameters.
-
-
-                This is not included in responses for `monitor` based SLOs.'
-              example: []
-              items:
-                description: A grouping parameter.
-                type: string
-              type: array
-            groups:
-              description: 'For grouped SLOs, this represents SLI data for specific
-                groups.
-
-
-                This is not included in the responses for `metric` based SLOs.'
-              example: []
-              items:
-                $ref: '#/components/schemas/SLOHistoryMonitor'
-              type: array
-            monitors:
-              description: 'For multi-monitor SLOs, this represents SLI data for specific
-                monitors.
-
-
-                This is not included in the responses for `metric` based SLOs.'
-              example: []
-              items:
-                $ref: '#/components/schemas/SLOHistoryMonitor'
-              type: array
-            overall:
-              $ref: '#/components/schemas/SLOHistorySLIData'
-            series:
-              $ref: '#/components/schemas/SLOHistoryMetrics'
-            thresholds:
-              additionalProperties:
-                $ref: '#/components/schemas/SLOThreshold'
-              description: mapping of string timeframe to the SLO threshold.
-              example: {}
-              type: object
-            to_ts:
-              description: The `to` timestamp in epoch seconds.
-              example: 1615928790
-              format: int64
-              type: integer
-            type:
-              $ref: '#/components/schemas/SLOType'
-            type_id:
-              $ref: '#/components/schemas/SLOTypeNumeric'
-          type: object
+          $ref: '#/components/schemas/SLOHistoryResponseData'
         errors:
           description: A list of errors while querying the history data for the service
             level objective.
           items:
             $ref: '#/components/schemas/SLOHistoryResponseError'
           type: array
+      type: object
+    SLOHistoryResponseData:
+      description: An array of service level objective objects.
+      properties:
+        from_ts:
+          description: The `from` timestamp in epoch seconds.
+          example: 1615323990
+          format: int64
+          type: integer
+        group_by:
+          description: 'For `metric` based SLOs where the query includes a group-by
+            clause, this represents the list of grouping parameters.
+
+
+            This is not included in responses for `monitor` based SLOs.'
+          items:
+            description: A grouping parameter.
+            type: string
+          type: array
+        groups:
+          description: 'For grouped SLOs, this represents SLI data for specific groups.
+
+
+            This is not included in the responses for `metric` based SLOs.'
+          items:
+            $ref: '#/components/schemas/SLOHistoryMonitor'
+          type: array
+        monitors:
+          description: 'For multi-monitor SLOs, this represents SLI data for specific
+            monitors.
+
+
+            This is not included in the responses for `metric` based SLOs.'
+          items:
+            $ref: '#/components/schemas/SLOHistoryMonitor'
+          type: array
+        overall:
+          $ref: '#/components/schemas/SLOHistorySLIData'
+        series:
+          $ref: '#/components/schemas/SLOHistoryMetrics'
+        thresholds:
+          additionalProperties:
+            $ref: '#/components/schemas/SLOThreshold'
+          description: mapping of string timeframe to the SLO threshold.
+          example:
+            my_service:
+              target: 95
+              timeframe: 7d
+          type: object
+        to_ts:
+          description: The `to` timestamp in epoch seconds.
+          example: 1615928790
+          format: int64
+          type: integer
+        type:
+          $ref: '#/components/schemas/SLOType'
+        type_id:
+          $ref: '#/components/schemas/SLOTypeNumeric'
       type: object
     SLOHistoryResponseError:
       description: A list of errors while querying the history data for the service
@@ -8887,17 +8899,17 @@ components:
           description: For `monitor` based SLOs, this includes the aggregated history
             as arrays that include time series and uptime data where `0=monitor` is
             in `OK` state and `1=monitor` is in `alert` state.
+          example:
+          - - 1579212382
+            - 0
           items:
             description: Represents an array time series data.
             example:
-            - - 1579212382
-              - 0
+            - 1579212382
+            - 0
             items:
               description: A time series data point which is a tuple of (timestamp,
                 value).
-              example:
-              - 1579212382
-              - 0
               format: double
               type: number
             maxItems: 2
@@ -8945,7 +8957,7 @@ components:
         span_precision:
           description: The amount of decimal places the SLI value is accurate to for
             the given from `&&` to timestamp.
-          example: 2
+          example: 2.0
           format: double
           type: number
         uptime:
@@ -8973,170 +8985,37 @@ components:
             type: string
           type: array
         metadata:
-          description: The metadata object containing additional information about
-            the list of SLOs.
-          properties:
-            page:
-              description: The object containing information about the pages of the
-                list of SLOs.
-              properties:
-                total_count:
-                  description: The total number of resources that could be retrieved
-                    ignoring the parameters and filters in the request.
-                  format: int64
-                  type: integer
-                total_filtered_count:
-                  description: The total number of resources that match the parameters
-                    and filters in the request. This attribute can be used by a client
-                    to determine the total number of pages.
-                  format: int64
-                  type: integer
-              type: object
-          type: object
+          $ref: '#/components/schemas/SLOListResponseMetadata'
+      type: object
+    SLOListResponseMetadata:
+      description: The metadata object containing additional information about the
+        list of SLOs.
+      properties:
+        page:
+          $ref: '#/components/schemas/SLOListResponseMetadataPage'
+      type: object
+    SLOListResponseMetadataPage:
+      description: The object containing information about the pages of the list of
+        SLOs.
+      properties:
+        total_count:
+          description: The total number of resources that could be retrieved ignoring
+            the parameters and filters in the request.
+          format: int64
+          type: integer
+        total_filtered_count:
+          description: The total number of resources that match the parameters and
+            filters in the request. This attribute can be used by a client to determine
+            the total number of pages.
+          format: int64
+          type: integer
       type: object
     SLOResponse:
       description: A service level objective response containing a single service
         level objective.
       properties:
         data:
-          description: 'A service level objective object includes a service level
-            indicator, thresholds
-
-            for one or more timeframes, and metadata (`name`, `description`, `tags`,
-            etc.).'
-          properties:
-            configured_alert_ids:
-              description: A list of SLO monitors IDs that reference this SLO. This
-                field is returned only when `with_configured_alert_ids` parameter
-                is true in query.
-              example:
-              - 123
-              - 456
-              - 789
-              items:
-                description: A monitor ID.
-                format: int64
-                type: integer
-              type: array
-            created_at:
-              description: 'Creation timestamp (UNIX time in seconds)
-
-
-                Always included in service level objective responses.'
-              format: int64
-              readOnly: true
-              type: integer
-            creator:
-              $ref: '#/components/schemas/Creator'
-            description:
-              description: 'A user-defined description of the service level objective.
-
-
-                Always included in service level objective responses (but may be `null`).
-
-                Optional in create/update requests.'
-              nullable: true
-              type: string
-            groups:
-              description: 'A list of (up to 20) monitor groups that narrow the scope
-                of a monitor service level objective.
-
-
-                Included in service level objective responses if it is not empty.
-                Optional in
-
-                create/update requests for monitor service level objectives, but may
-                only be
-
-                used when then length of the `monitor_ids` field is one.'
-              example:
-              - env:prod
-              - role:mysql
-              items:
-                description: A group name, for instance `env:prod`.
-                type: string
-              type: array
-            id:
-              description: 'A unique identifier for the service level objective object.
-
-
-                Always included in service level objective responses.'
-              readOnly: true
-              type: string
-            modified_at:
-              description: 'Modification timestamp (UNIX time in seconds)
-
-
-                Always included in service level objective responses.'
-              format: int64
-              readOnly: true
-              type: integer
-            monitor_ids:
-              description: 'A list of monitor ids that defines the scope of a monitor
-                service level
-
-                objective. **Required if type is `monitor`**.'
-              items:
-                description: A monitor ID.
-                format: int64
-                type: integer
-              type: array
-            monitor_tags:
-              description: 'The union of monitor tags for all monitors referenced
-                by the `monitor_ids`
-
-                field.
-
-                Always included in service level objective responses for monitor service
-                level
-
-                objectives (but may be empty). Ignored in create/update requests.
-                Does not
-
-                affect which monitors are included in the service level objective
-                (that is
-
-                determined entirely by the `monitor_ids` field).'
-              items:
-                description: A monitor tag.
-                type: string
-              type: array
-            name:
-              description: The name of the service level objective object.
-              example: Custom Metric SLO
-              type: string
-            query:
-              $ref: '#/components/schemas/ServiceLevelObjectiveQuery'
-            tags:
-              description: 'A list of tags associated with this service level objective.
-
-                Always included in service level objective responses (but may be empty).
-
-                Optional in create/update requests.'
-              example:
-              - env:prod
-              - app:core
-              items:
-                description: A tag to apply to your SLO.
-                type: string
-              type: array
-            thresholds:
-              description: 'The thresholds (timeframes and associated targets) for
-                this service level
-
-                objective object.'
-              example:
-              - target: 95
-                timeframe: 7d
-              - target: 95
-                timeframe: 30d
-                warning: 97
-              items:
-                $ref: '#/components/schemas/SLOThreshold'
-              type: array
-            type:
-              $ref: '#/components/schemas/SLOType'
-          type: object
+          $ref: '#/components/schemas/SLOResponseData'
         errors:
           description: 'An array of error messages. Each endpoint documents how/whether
             this field is
@@ -9146,6 +9025,144 @@ components:
             description: The error message.
             type: string
           type: array
+      type: object
+    SLOResponseData:
+      description: 'A service level objective object includes a service level indicator,
+        thresholds
+
+        for one or more timeframes, and metadata (`name`, `description`, `tags`, etc.).'
+      properties:
+        configured_alert_ids:
+          description: A list of SLO monitors IDs that reference this SLO. This field
+            is returned only when `with_configured_alert_ids` parameter is true in
+            query.
+          example:
+          - 123
+          - 456
+          - 789
+          items:
+            description: A monitor ID.
+            format: int64
+            type: integer
+          type: array
+        created_at:
+          description: 'Creation timestamp (UNIX time in seconds)
+
+
+            Always included in service level objective responses.'
+          format: int64
+          readOnly: true
+          type: integer
+        creator:
+          $ref: '#/components/schemas/Creator'
+        description:
+          description: 'A user-defined description of the service level objective.
+
+
+            Always included in service level objective responses (but may be `null`).
+
+            Optional in create/update requests.'
+          nullable: true
+          type: string
+        groups:
+          description: 'A list of (up to 20) monitor groups that narrow the scope
+            of a monitor service level objective.
+
+
+            Included in service level objective responses if it is not empty. Optional
+            in
+
+            create/update requests for monitor service level objectives, but may only
+            be
+
+            used when then length of the `monitor_ids` field is one.'
+          example:
+          - env:prod
+          - role:mysql
+          items:
+            description: A group name, for instance `env:prod`.
+            type: string
+          type: array
+        id:
+          description: 'A unique identifier for the service level objective object.
+
+
+            Always included in service level objective responses.'
+          readOnly: true
+          type: string
+        modified_at:
+          description: 'Modification timestamp (UNIX time in seconds)
+
+
+            Always included in service level objective responses.'
+          format: int64
+          readOnly: true
+          type: integer
+        monitor_ids:
+          description: 'A list of monitor ids that defines the scope of a monitor
+            service level
+
+            objective. **Required if type is `monitor`**.'
+          items:
+            description: A monitor ID.
+            format: int64
+            type: integer
+          type: array
+        monitor_tags:
+          description: 'The union of monitor tags for all monitors referenced by the
+            `monitor_ids`
+
+            field.
+
+            Always included in service level objective responses for monitor service
+            level
+
+            objectives (but may be empty). Ignored in create/update requests. Does
+            not
+
+            affect which monitors are included in the service level objective (that
+            is
+
+            determined entirely by the `monitor_ids` field).'
+          items:
+            description: A monitor tag.
+            type: string
+          type: array
+        name:
+          description: The name of the service level objective object.
+          example: Custom Metric SLO
+          type: string
+        query:
+          $ref: '#/components/schemas/ServiceLevelObjectiveQuery'
+        tags:
+          description: 'A list of tags associated with this service level objective.
+
+            Always included in service level objective responses (but may be empty).
+
+            Optional in create/update requests.'
+          example:
+          - env:prod
+          - app:core
+          items:
+            description: A tag to apply to your SLO.
+            type: string
+          type: array
+        thresholds:
+          description: 'The thresholds (timeframes and associated targets) for this
+            service level
+
+            objective object.'
+          example:
+          - target: 95
+            timeframe: 7d
+          - target: 95
+            timeframe: 30d
+            warning: 97
+          items:
+            $ref: '#/components/schemas/SLOThreshold'
+          type: array
+        type:
+          $ref: '#/components/schemas/SLOType'
       type: object
     SLOThreshold:
       description: SLO thresholds (target and optionally warning) for a single time
@@ -9323,20 +9340,7 @@ components:
             $ref: '#/components/schemas/WidgetCustomLink'
           type: array
         requests:
-          description: Widget definition.
-          example:
-            x:
-              q: system.cpu.user
-            y:
-              q: system.mem.used
-          properties:
-            table:
-              $ref: '#/components/schemas/ScatterplotTableRequest'
-            x:
-              $ref: '#/components/schemas/ScatterPlotRequest'
-            y:
-              $ref: '#/components/schemas/ScatterPlotRequest'
-          type: object
+          $ref: '#/components/schemas/ScatterPlotWidgetDefinitionRequests'
         time:
           $ref: '#/components/schemas/WidgetTime'
         title:
@@ -9356,6 +9360,21 @@ components:
       required:
       - type
       - requests
+      type: object
+    ScatterPlotWidgetDefinitionRequests:
+      description: Widget definition.
+      example:
+        x:
+          q: system.cpu.user
+        y:
+          q: system.mem.used
+      properties:
+        table:
+          $ref: '#/components/schemas/ScatterplotTableRequest'
+        x:
+          $ref: '#/components/schemas/ScatterPlotRequest'
+        y:
+          $ref: '#/components/schemas/ScatterPlotRequest'
       type: object
     ScatterPlotWidgetDefinitionType:
       default: scatterplot
@@ -9933,19 +9952,7 @@ components:
         be shared.
       properties:
         author:
-          description: User who shared the dashboard.
-          properties:
-            handle:
-              description: Identifier of the user who shared the dashboard.
-              example: test@datadoghq.com
-              readOnly: true
-              type: string
-            name:
-              description: Name of the user who shared the dashboard.
-              readOnly: true
-              type: string
-          readOnly: true
-          type: object
+          $ref: '#/components/schemas/SharedDashboardAuthor'
         created_at:
           description: Date the dashboard was shared.
           format: date-time
@@ -10005,6 +10012,20 @@ components:
       - dashboard_id
       - dashboard_type
       type: object
+    SharedDashboardAuthor:
+      description: User who shared the dashboard.
+      properties:
+        handle:
+          description: Identifier of the user who shared the dashboard.
+          example: test@datadoghq.com
+          readOnly: true
+          type: string
+        name:
+          description: Name of the user who shared the dashboard.
+          readOnly: true
+          type: string
+      readOnly: true
+      type: object
     SharedDashboardInvites:
       description: Invitations data and metadata that exists for a shared dashboard
         returned by the API.
@@ -10017,20 +10038,7 @@ components:
         data:
           $ref: '#/components/schemas/SharedDashboardInvitesData'
         meta:
-          description: Pagination metadata returned by the API.
-          properties:
-            page:
-              description: Object containing the total count of invitations across
-                all pages
-              properties:
-                total_count:
-                  description: The total number of invitations on this shared board,
-                    across all pages.
-                  format: int64
-                  type: integer
-              type: object
-          readOnly: true
-          type: object
+          $ref: '#/components/schemas/SharedDashboardInvitesMeta'
       required:
       - data
       type: object
@@ -10068,53 +10076,71 @@ components:
         type: public_dashboard_invitation
       properties:
         attributes:
-          description: Attributes of the shared dashboard invitation
-          example:
-            created_at: '2020-12-07T20:16:27.846985+00:00'
-            email: test@datadoghq.com
-            has_session: false
-            invitation_expiry: '2020-12-07T21:16:27.840542+00:00'
-            session_expiry: null
-            share_token: XXXXXX-123456abcedfg7890hijklmnopqrstuv
-          properties:
-            created_at:
-              description: When the invitation was sent.
-              format: date-time
-              readOnly: true
-              type: string
-            email:
-              description: An email address that an invitation has been (or if used
-                in invitation request, will be) sent to.
-              nullable: false
-              type: string
-            has_session:
-              description: Indicates whether an active session exists for the invitation
-                (produced when a user clicks the link in the email).
-              readOnly: true
-              type: boolean
-            invitation_expiry:
-              description: When the invitation expires.
-              format: date-time
-              readOnly: true
-              type: string
-            session_expiry:
-              description: When the invited user's session expires. null if the invitation
-                has no associated session.
-              format: date-time
-              nullable: true
-              readOnly: true
-              type: string
-            share_token:
-              description: The unique token of the shared dashboard that was (or is
-                to be) shared.
-              readOnly: true
-              type: string
-          type: object
+          $ref: '#/components/schemas/SharedDashboardInvitesDataObjectAttributes'
         type:
           $ref: '#/components/schemas/DashboardInviteType'
       required:
       - type
       - attributes
+      type: object
+    SharedDashboardInvitesDataObjectAttributes:
+      description: Attributes of the shared dashboard invitation
+      example:
+        created_at: '2020-12-07T20:16:27.846985+00:00'
+        email: test@datadoghq.com
+        has_session: false
+        invitation_expiry: '2020-12-07T21:16:27.840542+00:00'
+        session_expiry: null
+        share_token: XXXXXX-123456abcedfg7890hijklmnopqrstuv
+      properties:
+        created_at:
+          description: When the invitation was sent.
+          format: date-time
+          readOnly: true
+          type: string
+        email:
+          description: An email address that an invitation has been (or if used in
+            invitation request, will be) sent to.
+          nullable: false
+          type: string
+        has_session:
+          description: Indicates whether an active session exists for the invitation
+            (produced when a user clicks the link in the email).
+          readOnly: true
+          type: boolean
+        invitation_expiry:
+          description: When the invitation expires.
+          format: date-time
+          readOnly: true
+          type: string
+        session_expiry:
+          description: When the invited user's session expires. null if the invitation
+            has no associated session.
+          format: date-time
+          nullable: true
+          readOnly: true
+          type: string
+        share_token:
+          description: The unique token of the shared dashboard that was (or is to
+            be) shared.
+          readOnly: true
+          type: string
+      type: object
+    SharedDashboardInvitesMeta:
+      description: Pagination metadata returned by the API.
+      properties:
+        page:
+          $ref: '#/components/schemas/SharedDashboardInvitesMetaPage'
+      readOnly: true
+      type: object
+    SharedDashboardInvitesMetaPage:
+      description: Object containing the total count of invitations across all pages
+      properties:
+        total_count:
+          description: The total number of invitations on this shared board, across
+            all pages.
+          format: int64
+          type: integer
       type: object
     SharedDashboardUpdateRequest:
       description: Update a shared dashboard's settings.
@@ -10127,14 +10153,7 @@ components:
         share_type: invite
       properties:
         global_time:
-          description: Timeframe setting for the shared dashboard.
-          example:
-            live_span: 1h
-          nullable: true
-          properties:
-            live_span:
-              $ref: '#/components/schemas/DashboardGlobalTimeLiveSpan'
-          type: object
+          $ref: '#/components/schemas/SharedDashboardUpdateRequestGlobalTime'
         global_time_selectable_enabled:
           description: Whether to allow viewers to select a different global time
             setting for the shared dashboard.
@@ -10171,6 +10190,15 @@ components:
           $ref: '#/components/schemas/DashboardShareType'
       required:
       - global_time
+      type: object
+    SharedDashboardUpdateRequestGlobalTime:
+      description: Timeframe setting for the shared dashboard.
+      example:
+        live_span: 1h
+      nullable: true
+      properties:
+        live_span:
+          $ref: '#/components/schemas/DashboardGlobalTimeLiveSpan'
       type: object
     SingleServiceDependencies:
       description: An object with information on APM services that call, and are called
@@ -10257,29 +10285,31 @@ components:
       description: The Slack channel configuration.
       properties:
         display:
-          description: Configuration options for what is shown in an alert event message.
-          properties:
-            message:
-              default: true
-              description: Show the main body of the alert event.
-              type: boolean
-            notified:
-              default: true
-              description: Show the list of @-handles in the alert event.
-              type: boolean
-            snapshot:
-              default: true
-              description: Show the alert event's snapshot image.
-              type: boolean
-            tags:
-              default: true
-              description: Show the scopes on which the monitor alerted.
-              type: boolean
-          type: object
+          $ref: '#/components/schemas/SlackIntegrationChannelDisplay'
         name:
           description: Your channel name.
           example: '#general'
           type: string
+      type: object
+    SlackIntegrationChannelDisplay:
+      description: Configuration options for what is shown in an alert event message.
+      properties:
+        message:
+          default: true
+          description: Show the main body of the alert event.
+          type: boolean
+        notified:
+          default: true
+          description: Show the list of @-handles in the alert event.
+          type: boolean
+        snapshot:
+          default: true
+          description: Show the alert event's snapshot image.
+          type: boolean
+        tags:
+          default: true
+          description: Show the scopes on which the monitor alerted.
+          type: boolean
       type: object
     SlackIntegrationChannels:
       description: A list of configured Slack channels.
@@ -10630,13 +10660,7 @@ components:
       description: Object returned describing a API test result.
       properties:
         check:
-          description: Object describing the API test configuration.
-          properties:
-            config:
-              $ref: '#/components/schemas/SyntheticsTestConfig'
-          required:
-          - config
-          type: object
+          $ref: '#/components/schemas/SyntheticsAPITestResultFullCheck'
         check_time:
           description: When the API test was conducted.
           format: double
@@ -10656,6 +10680,14 @@ components:
         status:
           $ref: '#/components/schemas/SyntheticsTestMonitorStatus'
       type: object
+    SyntheticsAPITestResultFullCheck:
+      description: Object describing the API test configuration.
+      properties:
+        config:
+          $ref: '#/components/schemas/SyntheticsTestConfig'
+      required:
+      - config
+      type: object
     SyntheticsAPITestResultShort:
       description: Object with the results of a single Synthetic API test.
       properties:
@@ -10667,19 +10699,21 @@ components:
           description: Location from which the API test was performed.
           type: string
         result:
-          description: Result of the last API test run.
-          properties:
-            passed:
-              description: Describes if the test run has passed or failed.
-              type: boolean
-            timings:
-              $ref: '#/components/schemas/SyntheticsTiming'
-          type: object
+          $ref: '#/components/schemas/SyntheticsAPITestResultShortResult'
         result_id:
           description: ID of the API test result.
           type: string
         status:
           $ref: '#/components/schemas/SyntheticsTestMonitorStatus'
+      type: object
+    SyntheticsAPITestResultShortResult:
+      description: Result of the last API test run.
+      properties:
+        passed:
+          description: Describes if the test run has passed or failed.
+          type: boolean
+        timings:
+          $ref: '#/components/schemas/SyntheticsTiming'
       type: object
     SyntheticsAPITestType:
       default: api
@@ -10782,22 +10816,24 @@ components:
           description: The associated assertion property.
           type: string
         target:
-          description: Composed target for `validatesJSONPath` operator.
-          properties:
-            jsonPath:
-              description: The JSON path to assert.
-              type: string
-            operator:
-              description: The specific operator to use on the path.
-              type: string
-            targetValue:
-              description: The path target value to compare to.
-          type: object
+          $ref: '#/components/schemas/SyntheticsAssertionJSONPathTargetTarget'
         type:
           $ref: '#/components/schemas/SyntheticsAssertionType'
       required:
       - type
       - operator
+      type: object
+    SyntheticsAssertionJSONPathTargetTarget:
+      description: Composed target for `validatesJSONPath` operator.
+      properties:
+        jsonPath:
+          description: The JSON path to assert.
+          type: string
+        operator:
+          description: The specific operator to use on the path.
+          type: string
+        targetValue:
+          description: The path target value to compare to.
       type: object
     SyntheticsAssertionOperator:
       description: Assertion operator to apply.
@@ -10842,7 +10878,6 @@ components:
         target:
           description: Value used by the operator.
           example: 123456
-          nullable: false
         type:
           $ref: '#/components/schemas/SyntheticsAssertionType'
       required:
@@ -11302,13 +11337,7 @@ components:
       description: Object returned describing a browser test result.
       properties:
         check:
-          description: Object describing the browser test configuration.
-          properties:
-            config:
-              $ref: '#/components/schemas/SyntheticsTestConfig'
-          required:
-          - config
-          type: object
+          $ref: '#/components/schemas/SyntheticsBrowserTestResultFullCheck'
         check_time:
           description: When the browser test was conducted.
           format: double
@@ -11328,6 +11357,14 @@ components:
         status:
           $ref: '#/components/schemas/SyntheticsTestMonitorStatus'
       type: object
+    SyntheticsBrowserTestResultFullCheck:
+      description: Object describing the browser test configuration.
+      properties:
+        config:
+          $ref: '#/components/schemas/SyntheticsTestConfig'
+      required:
+      - config
+      type: object
     SyntheticsBrowserTestResultShort:
       description: Object with the results of a single Synthetic browser test.
       properties:
@@ -11339,27 +11376,7 @@ components:
           description: Location from which the Browser test was performed.
           type: string
         result:
-          description: Object with the result of the last browser test run.
-          properties:
-            device:
-              $ref: '#/components/schemas/SyntheticsDevice'
-            duration:
-              description: Length in second of the browser test run.
-              format: double
-              type: number
-            errorCount:
-              description: Amount of errors collected for a single browser test run.
-              format: int64
-              type: integer
-            stepCountCompleted:
-              description: Amount of browser test steps completed before failing.
-              format: int64
-              type: integer
-            stepCountTotal:
-              description: Total amount of browser test steps.
-              format: int64
-              type: integer
-          type: object
+          $ref: '#/components/schemas/SyntheticsBrowserTestResultShortResult'
         result_id:
           description: ID of the browser test result.
           type: string
@@ -11368,6 +11385,28 @@ components:
       required:
       - from_ts
       - to_ts
+      type: object
+    SyntheticsBrowserTestResultShortResult:
+      description: Object with the result of the last browser test run.
+      properties:
+        device:
+          $ref: '#/components/schemas/SyntheticsDevice'
+        duration:
+          description: Length in milliseconds of the browser test run.
+          format: double
+          type: number
+        errorCount:
+          description: Amount of errors collected for a single browser test run.
+          format: int64
+          type: integer
+        stepCountCompleted:
+          description: Amount of browser test steps completed before failing.
+          format: int64
+          type: integer
+        stepCountTotal:
+          description: Total amount of browser test steps.
+          format: int64
+          type: integer
       type: object
     SyntheticsBrowserTestType:
       default: browser
@@ -11727,16 +11766,7 @@ components:
       description: Synthetics global variable.
       properties:
         attributes:
-          description: Attributes of the global variable.
-          properties:
-            restricted_roles:
-              description: List of role identifiers that can be pulled from the Roles
-                API.
-              items:
-                description: UUID for a role.
-                type: string
-              type: array
-          type: object
+          $ref: '#/components/schemas/SyntheticsGlobalVariableAttributes'
         description:
           description: Description of the global variable.
           example: Example description
@@ -11751,22 +11781,7 @@ components:
           example: MY_VARIABLE
           type: string
         parse_test_options:
-          description: Parser options to use for retrieving a Synthetics global variable
-            from a Synthetics Test. Used in conjunction with `parse_test_public_id`.
-          properties:
-            field:
-              description: When type is `http_header`, name of the header to use to
-                extract the value.
-              example: content-type
-              type: string
-            parser:
-              $ref: '#/components/schemas/SyntheticsVariableParser'
-            type:
-              $ref: '#/components/schemas/SyntheticsGlobalVariableParseTestOptionsType'
-          required:
-          - type
-          - parser
-          type: object
+          $ref: '#/components/schemas/SyntheticsGlobalVariableParseTestOptions'
         parse_test_public_id:
           description: A Synthetic test ID to use as a test to generate the variable
             value.
@@ -11788,6 +11803,34 @@ components:
       - name
       - tags
       - value
+      type: object
+    SyntheticsGlobalVariableAttributes:
+      description: Attributes of the global variable.
+      properties:
+        restricted_roles:
+          description: List of role identifiers that can be pulled from the Roles
+            API.
+          items:
+            description: UUID for a role.
+            type: string
+          type: array
+      type: object
+    SyntheticsGlobalVariableParseTestOptions:
+      description: Parser options to use for retrieving a Synthetics global variable
+        from a Synthetics Test. Used in conjunction with `parse_test_public_id`.
+      properties:
+        field:
+          description: When type is `http_header`, name of the header to use to extract
+            the value.
+          example: content-type
+          type: string
+        parser:
+          $ref: '#/components/schemas/SyntheticsVariableParser'
+        type:
+          $ref: '#/components/schemas/SyntheticsGlobalVariableParseTestOptionsType'
+      required:
+      - type
+      - parser
       type: object
     SyntheticsGlobalVariableParseTestOptionsType:
       description: Property of the Synthetics Test Response to use for a Synthetics
@@ -11920,31 +11963,7 @@ components:
           example: New private location
           type: string
         secrets:
-          description: Secrets for the private location. Only present in the response
-            when creating the private location.
-          properties:
-            authentication:
-              description: Authentication part of the secrets.
-              properties:
-                id:
-                  description: Access key for the private location.
-                  readOnly: true
-                  type: string
-                key:
-                  description: Secret access key for the private location.
-                  readOnly: true
-                  type: string
-              type: object
-            config_decryption:
-              description: Private key for the private location.
-              properties:
-                key:
-                  description: Private key for the private location.
-                  readOnly: true
-                  type: string
-              type: object
-          readOnly: true
-          type: object
+          $ref: '#/components/schemas/SyntheticsPrivateLocationSecrets'
         tags:
           description: Array of tags attached to the private location.
           example:
@@ -11970,15 +11989,47 @@ components:
         private_location:
           $ref: '#/components/schemas/SyntheticsPrivateLocation'
         result_encryption:
-          description: Public key for the result encryption.
-          properties:
-            id:
-              description: Fingerprint for the encryption key.
-              type: string
-            key:
-              description: Public key for result encryption.
-              type: string
-          type: object
+          $ref: '#/components/schemas/SyntheticsPrivateLocationCreationResponseResultEncryption'
+      type: object
+    SyntheticsPrivateLocationCreationResponseResultEncryption:
+      description: Public key for the result encryption.
+      properties:
+        id:
+          description: Fingerprint for the encryption key.
+          type: string
+        key:
+          description: Public key for result encryption.
+          type: string
+      type: object
+    SyntheticsPrivateLocationSecrets:
+      description: Secrets for the private location. Only present in the response
+        when creating the private location.
+      properties:
+        authentication:
+          $ref: '#/components/schemas/SyntheticsPrivateLocationSecretsAuthentication'
+        config_decryption:
+          $ref: '#/components/schemas/SyntheticsPrivateLocationSecretsConfigDecryption'
+      readOnly: true
+      type: object
+    SyntheticsPrivateLocationSecretsAuthentication:
+      description: Authentication part of the secrets.
+      properties:
+        id:
+          description: Access key for the private location.
+          readOnly: true
+          type: string
+        key:
+          description: Secret access key for the private location.
+          readOnly: true
+          type: string
+      type: object
+    SyntheticsPrivateLocationSecretsConfigDecryption:
+      description: Private key for the private location.
+      properties:
+        key:
+          description: Private key for the private location.
+          readOnly: true
+          type: string
       type: object
     SyntheticsSSLCertificate:
       description: Object describing the SSL certificate used for a Synthetic test.
@@ -12003,27 +12054,7 @@ components:
           description: SHA-1 digest of the DER-encoded Certificate information.
           type: string
         issuer:
-          description: Object describing the issuer of a SSL certificate.
-          properties:
-            C:
-              description: Country Name that issued the certificate.
-              type: string
-            CN:
-              description: Common Name that issued certificate.
-              type: string
-            L:
-              description: Locality that issued the certificate.
-              type: string
-            O:
-              description: Organization that issued the certificate.
-              type: string
-            OU:
-              description: Organizational Unit that issued the certificate.
-              type: string
-            ST:
-              description: State Or Province Name that issued the certificate.
-              type: string
-          type: object
+          $ref: '#/components/schemas/SyntheticsSSLCertificateIssuer'
         modulus:
           description: Modulus associated to the SSL certificate private key.
           type: string
@@ -12034,30 +12065,7 @@ components:
           description: Serial Number assigned by Symantec to the SSL certificate.
           type: string
         subject:
-          description: Object describing the SSL certificate used for the test.
-          properties:
-            C:
-              description: Country Name associated with the certificate.
-              type: string
-            CN:
-              description: Common Name that associated with the certificate.
-              type: string
-            L:
-              description: Locality associated with the certificate.
-              type: string
-            O:
-              description: Organization associated with the certificate.
-              type: string
-            OU:
-              description: Organizational Unit associated with the certificate.
-              type: string
-            ST:
-              description: State Or Province Name associated with the certificate.
-              type: string
-            altName:
-              description: Subject Alternative Name associated with the certificate.
-              type: string
-          type: object
+          $ref: '#/components/schemas/SyntheticsSSLCertificateSubject'
         validFrom:
           description: Date from which the SSL certificate is valid.
           format: date-time
@@ -12065,6 +12073,53 @@ components:
         validTo:
           description: Date until which the SSL certificate is valid.
           format: date-time
+          type: string
+      type: object
+    SyntheticsSSLCertificateIssuer:
+      description: Object describing the issuer of a SSL certificate.
+      properties:
+        C:
+          description: Country Name that issued the certificate.
+          type: string
+        CN:
+          description: Common Name that issued certificate.
+          type: string
+        L:
+          description: Locality that issued the certificate.
+          type: string
+        O:
+          description: Organization that issued the certificate.
+          type: string
+        OU:
+          description: Organizational Unit that issued the certificate.
+          type: string
+        ST:
+          description: State Or Province Name that issued the certificate.
+          type: string
+      type: object
+    SyntheticsSSLCertificateSubject:
+      description: Object describing the SSL certificate used for the test.
+      properties:
+        C:
+          description: Country Name associated with the certificate.
+          type: string
+        CN:
+          description: Common Name that associated with the certificate.
+          type: string
+        L:
+          description: Locality associated with the certificate.
+          type: string
+        O:
+          description: Organization associated with the certificate.
+          type: string
+        OU:
+          description: Organizational Unit associated with the certificate.
+          type: string
+        ST:
+          description: State Or Province Name associated with the certificate.
+          type: string
+        altName:
+          description: Subject Alternative Name associated with the certificate.
           type: string
       type: object
     SyntheticsStatus:
@@ -12386,6 +12441,10 @@ components:
         allow_insecure:
           description: Allows loading insecure content for an HTTP request.
           type: boolean
+        checkCertificateRevocation:
+          description: For SSL test, whether or not the test should fail on revoked
+            certificate in stapled OCSP.
+          type: boolean
         device_ids:
           description: For browser test, array with the different device IDs used
             to run the test.
@@ -12413,20 +12472,7 @@ components:
             all monitor dashboard widgets and SLOs.
           type: string
         monitor_options:
-          description: 'Object containing the options for a Synthetic test as a monitor
-
-            (for example, renotification).'
-          properties:
-            renotify_interval:
-              description: 'Time interval before renotifying if the test is still
-                failing
-
-                (in minutes).'
-              format: int64
-              maximum: 1440
-              minimum: 0
-              type: integer
-          type: object
+          $ref: '#/components/schemas/SyntheticsTestOptionsMonitorOptions'
         monitor_priority:
           description: Integer from 1 (high) to 5 (low) indicating alert severity.
           format: int32
@@ -12443,6 +12489,20 @@ components:
           format: int64
           maximum: 604800
           minimum: 30
+          type: integer
+      type: object
+    SyntheticsTestOptionsMonitorOptions:
+      description: 'Object containing the options for a Synthetic test as a monitor
+
+        (for example, renotification).'
+      properties:
+        renotify_interval:
+          description: 'Time interval before renotifying if the test is still failing
+
+            (in minutes).'
+          format: int64
+          maximum: 1440
+          minimum: 0
           type: integer
       type: object
     SyntheticsTestOptionsRetry:
@@ -13401,6 +13461,8 @@ components:
       - lambda_invocations_percentage
       - lambda_usage
       - lambda_percentage
+      - estimated_indexed_logs_usage
+      - estimated_indexed_logs_percentage
       type: string
       x-enum-varnames:
       - API_PERCENTAGE
@@ -13425,6 +13487,8 @@ components:
       - LAMBDA_INVOCATIONS_PERCENTAGE
       - LAMBDA_USAGE
       - LAMBDA_PERCENTAGE
+      - ESTIMATED_INDEXED_LOGS_USAGE
+      - ESTIMATED_INDEXED_LOGS_PERCENTAGE
     UsageAttributionSupportedMetrics:
       description: Supported fields for usage attribution requests (valid requests
         contain one or more metrics, or `*` for all).
@@ -14154,6 +14218,12 @@ components:
             for the OpenTelemetry Collector.
           format: int64
           type: integer
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
+          type: string
         vsphere_host_count:
           description: 'Contains the total number of hosts that reported through vSphere
             integration
@@ -14304,6 +14374,12 @@ components:
           description: Contains the sum of invocations of all functions.
           format: int64
           type: integer
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
+          type: string
       type: object
     UsageLambdaResponse:
       description: 'Response containing the number of lambda functions and sum of
@@ -14333,6 +14409,12 @@ components:
           type: string
         index_name:
           description: The user specified name for this index ID.
+          type: string
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
           type: string
         retention:
           description: The retention period (in days) for this index ID.
@@ -14364,6 +14446,12 @@ components:
             hour.
           format: int64
           type: integer
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
+          type: string
         rehydrated_indexed_events_count:
           description: Rehydrated logs indexed with this retention period during a
             given hour.
@@ -14423,6 +14511,12 @@ components:
             available as of December 1, 2020).
           format: int64
           type: integer
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
+          type: string
       type: object
     UsageLogsResponse:
       description: Response containing the number of logs for each hour.
@@ -14453,6 +14547,12 @@ components:
           description: Contains the number of netflow events indexed.
           format: int64
           type: integer
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
+          type: string
       type: object
     UsageNetworkFlowsResponse:
       description: Response containing the number of netflow events indexed for each
@@ -14474,6 +14574,12 @@ components:
         hour:
           description: The hour for the usage.
           format: date-time
+          type: string
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
           type: string
       type: object
     UsageNetworkHostsResponse:
@@ -15685,6 +15791,12 @@ components:
           description: The hour for the usage.
           format: date-time
           type: string
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
+          type: string
       type: object
     UsageSyntheticsAPIResponse:
       description: Response containing the number of Synthetics API tests run for
@@ -15708,6 +15820,12 @@ components:
           description: The hour for the usage.
           format: date-time
           type: string
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
+          type: string
       type: object
     UsageSyntheticsBrowserResponse:
       description: Response containing the number of Synthetics Browser tests run
@@ -15729,6 +15847,12 @@ components:
         hour:
           description: The hour for the usage.
           format: date-time
+          type: string
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
           type: string
       type: object
     UsageSyntheticsResponse:
@@ -15764,6 +15888,12 @@ components:
             that are outputs for aggregations.
           format: int64
           type: integer
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
+          type: string
       type: object
     UsageTimeseriesResponse:
       description: Response containing hourly usage of timeseries.
@@ -16295,17 +16425,19 @@ components:
           example: func(a) + b
           type: string
         limit:
-          description: Options for limiting results returned.
-          properties:
-            count:
-              description: Number of results to return.
-              format: int64
-              type: integer
-            order:
-              $ref: '#/components/schemas/QuerySortOrder'
-          type: object
+          $ref: '#/components/schemas/WidgetFormulaLimit'
       required:
       - formula
+      type: object
+    WidgetFormulaLimit:
+      description: Options for limiting results returned.
+      properties:
+        count:
+          description: Number of results to return.
+          format: int64
+          type: integer
+        order:
+          $ref: '#/components/schemas/QuerySortOrder'
       type: object
     WidgetGrouping:
       description: The kind of grouping to use.
@@ -16782,31 +16914,31 @@ components:
         authorizationCode:
           authorizationUrl: /oauth2/v1/authorize
           scopes:
-            dashboards_public_share: The ability to share dashboards externally.
-            dashboards_read: The ability to view dashboards.
-            dashboards_write: The ability to create and change dashboards.
-            events_read: The ability to read Events data.
-            metrics_read: The ability to view custom metrics.
-            monitors_downtime: The ability to set downtimes to suppress alerts from
-              any monitor in an organization. The ability to write monitors is not
-              required to set downtimes.
-            monitors_read: The ability to view monitors.
-            monitors_write: The ability to change, mute, and delete individual monitors.
-            synthetics_global_variable_read: The ability to view, search and use in
-              tests the list of global variables available for Synthetics.
-            synthetics_global_variable_write: The ability to create, edit, and delete
-              global variables for Synthetics.
-            synthetics_private_location_read: The ability to view, search and use
-              in tests the list of private locations available.
-            synthetics_private_location_write: The ability to create and delete private
-              locations as well as seeing the associated installation guidelines.
-            synthetics_read: The ability to list and view configured Synthetic tests.
-            synthetics_write: The ability to create, edit, and delete Synthetic tests.
-            timeseries_query: The ability to query Timeseries data.
-            usage_read: The ability to view your organization's usage and usage attribution.
-            user_access_invite: The ability to invite other users to your organization.
-            user_access_manage: The ability to disable users, manage user roles, and
-              manage SAML-to-role mappings.
+            dashboards_public_share: Share dashboards externally.
+            dashboards_read: View dashboards.
+            dashboards_write: Create and change dashboards.
+            events_read: Read Events data.
+            metrics_read: View custom metrics.
+            monitors_downtime: Set downtimes to suppress alerts from any monitor in
+              an organization. The ability to write monitors is not required to set
+              downtimes.
+            monitors_read: View monitors.
+            monitors_write: Change, mute, and delete individual monitors.
+            synthetics_global_variable_read: View, search, and use in tests the list
+              of global variables available for Synthetics.
+            synthetics_global_variable_write: Create, edit, and delete global variables
+              for Synthetics.
+            synthetics_private_location_read: View, search, and use in tests the list
+              of available private locations.
+            synthetics_private_location_write: Create and delete private locations
+              as well as seeing the associated installation guidelines.
+            synthetics_read: List and view configured Synthetic tests.
+            synthetics_write: Create, edit, and delete Synthetic tests.
+            timeseries_query: Query Timeseries data.
+            usage_read: View your organization's usage and usage attribution.
+            user_access_invite: Invite other users to your organization.
+            user_access_manage: Disable users, manage user roles, and manage SAML-to-role
+              mappings.
           tokenUrl: /oauth2/v1/token
       type: oauth2
     apiKeyAuth:
@@ -19686,10 +19818,9 @@ paths:
             application/json:
               schema:
                 example:
-                  value:
-                  - namespace1
-                  - namespace2
-                  - namespace3
+                - namespace1
+                - namespace2
+                - namespace3
                 items:
                   type: string
                 type: array
@@ -24161,7 +24292,7 @@ paths:
                   - metric: system.load.1
                     points:
                     - - ${NOW}
-                      - '1234.5'
+                      - 1234.5
                 x-variables:
                   NOW: $(date +%s)
             schema:
@@ -25600,7 +25731,7 @@ paths:
       x-given:
         synthetics_api_test:
           parameters:
-          - file: synthetics_api_test_payload.json
+          - file: synthetics_api_http_test_payload.json
             name: body
           step: there is a valid "synthetics_api_test" in the system
         synthetics_api_test_with_wrong_dns:
@@ -29218,6 +29349,10 @@ paths:
                 value:
                 - message: hello
                 - message: world
+            schema:
+              $ref: '#/components/schemas/HTTPLog'
+          application/json;simple:
+            examples:
               simple-json-message:
                 description: Log attributes can be passed as `key:value` pairs in
                   valid JSON messages.
@@ -29228,7 +29363,7 @@ paths:
                   hostname: fa1e1e739d95
                   message: hello world
             schema:
-              $ref: '#/components/schemas/HTTPLog'
+              $ref: '#/components/schemas/HTTPLogItem'
           application/logplex-1:
             examples:
               multi-raw-message:

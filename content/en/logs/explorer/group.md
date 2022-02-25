@@ -39,7 +39,7 @@ When aggregating by Fields, all logs matching your query filter are aggregated i
 
 **Note**: Individual logs with multiple values for a single facet belong to that many aggregates. For instance, a log having the `team:sre` and the `team:marketplace` tags are counted once in the `team:sre` aggregate and once in the `team:marketplace` aggregate.
 
-The Fields aggregation supports one dimension for the [Top list][4] visualization, and up to three dimensions for the [Timeseries][5] and [Table](#nested-tables) visualizations. When there are multiple dimensions, the top values are determined according to the first dimension, then according to the second dimension within the top values of the first dimension, then according to the third dimension within the top values of the second dimension.
+The Fields aggregation supports one dimension for the [Top list][4] visualization, and up to three dimensions for the [Timeseries][5] and [Table][6] visualizations. When there are multiple dimensions, the top values are determined according to the first dimension, then according to the second dimension within the top values of the first dimension, then according to the third dimension within the top values of the second dimension.
 
 ### Multiple queries
 
@@ -53,7 +53,7 @@ Select or deselect queries to display in the current visualization by clicking o
 
 By default, when a new query is added, it is automatically selected to be displayed in the chosen visualization.
 
-Display the timeline for one of your queries by selecting that query in the `Timeline for` dropdown. Scope one of your search queries by selecting that query in the `Use facets with` dropdown and clicking on values in the [Facet Panel][6]. Only the selected query is updated with the chosen facets.
+Display the timeline for one of your queries by selecting that query in the `Timeline for` dropdown. Scope one of your search queries by selecting that query in the `Use facets with` dropdown and clicking on values in the [Facet Panel][7]. Only the selected query is updated with the chosen facets.
 
 {{< img src="logs/explorer/group/query_selector.jpg" alt="Log Live Tail" style="width:100%;" >}}
 
@@ -67,15 +67,15 @@ Apply functions to your logs by clicking on the `Fields` aggregation in the quer
 
 All functions available for logs in the graphing editor in Dashboards can be applied to logs in the Log Explorer:
 
-- [Arithmetic][7]
-- [Interpolation][8]
-- [Timeshift][9]
-- [Rate][10]
-- [Smoothing][11]
-- [Rollup][12]
-- [Exclusion][13]
+- [Arithmetic][8]
+- [Interpolation][9]
+- [Timeshift][10]
+- [Rate][11]
+- [Smoothing][12]
+- [Rollup][13]
+- [Exclusion][14]
 
-Here is an example of how to apply an [Exclusion function][13] to exclude certain values of your logs:
+Here is an example of how to apply an [Exclusion function][14] to exclude certain values of your logs:
 
 {{< img src="logs/explorer/group/exclusion_function_logs.jpg" alt="Log Livetail" style="width:100%;" >}}
 
@@ -87,7 +87,7 @@ Apply a formula on one or multiple queries by clicking on the `+ Add` button nex
 
 **Note**: To apply formulas with multiple queries, all queries must be grouped by the same facet. In the example above, both queries are grouped by `Webstore Store Name`.
 
-You can apply a function to a formula by clicking on the `Σ` icon. Here is an example of how to apply a [Timeshift function][9] on the proportion of error logs in all logs to compare current data with data from one week before:
+You can apply a function to a formula by clicking on the `Σ` icon. Here is an example of how to apply a [Timeshift function][10] on the proportion of error logs in all logs to compare current data with data from one week before:
 
 {{< img src="logs/explorer/group/timeshift_function_logs.jpg" alt="Log Livetail" style="width:100%;" >}}
 
@@ -136,11 +136,12 @@ Transactions support the [List Aggregates](#list-aggregates-of-logs) visualizati
 [3]: /logs/log_configuration/processors/#grok-parser
 [4]: /logs/explorer/visualize/#top-list
 [5]: /logs/explorer/visualize/#timeseries
-[6]: /logs/explorer/facets/#facet-panel
-[7]: /dashboards/functions/arithmetic
-[8]: /dashboards/functions/interpolation
-[9]: /dashboards/functions/timeshift
-[10]: /dashboards/functions/rate
-[11]: /dashboards/functions/smoothing
-[12]: /dashboards/functions/rollup
-[13]: /dashboards/functions/exclusion
+[6]: /logs/explorer/visualize/#nested-tables
+[7]: /logs/explorer/facets/#facet-panel
+[8]: /dashboards/functions/arithmetic
+[9]: /dashboards/functions/interpolation
+[10]: /dashboards/functions/timeshift
+[11]: /dashboards/functions/rate
+[12]: /dashboards/functions/smoothing
+[13]: /dashboards/functions/rollup
+[14]: /dashboards/functions/exclusion

@@ -2,15 +2,18 @@
 title: Instrumenting Java Serverless Applications
 kind: documentation
 further_reading:
-- link: 'serverless/serverless_tagging/'
-  tag: "Documentation"
-  text: 'Tagging Serverless Applications'
+- link: 'serverless/datadog_lambda_library/java'
+  tag: 'Documentation'
+  text: 'Datadog Lambda Library for Java'
 - link: 'serverless/distributed_tracing/'
-  tag: "Documentation"
+  tag: 'Documentation'
   text: 'Tracing Serverless Applications'
 - link: 'serverless/custom_metrics/'
-  tag: "Documentation"
+  tag: 'Documentation'
   text: 'Submitting Custom Metrics from Serverless Applications'
+- link: '/serverless/guide/troubleshoot_serverless_monitoring'
+  tag: 'Documentation'
+  text: 'Troubleshoot Serverless Monitoring'
 aliases:
     - /serverless/datadog_lambda_library/java/
 ---
@@ -209,6 +212,10 @@ If you are upgrading from 0.3.x to 1.4.x and you wish to use the `dd-trace-java`
 arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-java:4
 ````
 
+## Troubleshooting
+
+If you have trouble collecting monitoring data after following the instructions above, see the [serverless monitoring troubleshooting guide][15].
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -227,3 +234,4 @@ arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-java:4
 [12]: https://www.datadoghq.com/log4j-vulnerability/
 [13]: https://github.com/DataDog/datadog-lambda-java/releases
 [14]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-layers.html
+[15]: /serverless/guide/troubleshoot_serverless_monitoring/
