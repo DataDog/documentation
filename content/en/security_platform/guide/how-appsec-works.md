@@ -7,7 +7,7 @@ kind: guide
 
 Application Security monitors application-level attacks aiming to exploit code-level vulnerabilities.
 
-Application Security records information about each request and applies security rules in-app. This information enriches your APM traces with security data.
+APM records information about each HTTP request, these are referred to as traces. Application security uses the information APM is already collecting, and flags suspicious any suspicious requests or attack attempts as security signals. Depending on your settings and the severity of the attempt, you can receive notifications from Slack, email, or PagerDuty.
 
 Traditional Web Application Firewalls (WAFs) are usually deployed at the perimeter and have no context of the application behavior. Application Security provides WAF-like capabilities with additional application context and lower false positives.
 
