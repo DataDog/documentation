@@ -302,6 +302,11 @@
     },
     {
       "group": "logs",
+      "suffix": "_2955613758",
+      "description": "Aggregate compute events with group by returns \"OK\" response"
+    },
+    {
+      "group": "logs",
       "suffix": "",
       "description": "Aggregate events returns \"OK\" response"
     }
