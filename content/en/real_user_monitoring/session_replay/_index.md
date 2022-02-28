@@ -133,8 +133,8 @@ Session Replay follows the same 30 days retention policy as normal RUM sessions.
 
 ### How to disable?
 
--  Set replaySampleRate to 0
--  Remove startSessionReplayRecording()
+- Remove startSessionReplayRecording() 
+- Set replaySampleRate to 0 to stop collecting resources and long tasks that are added to the usage for this feature
 
 ## Further Reading
 
