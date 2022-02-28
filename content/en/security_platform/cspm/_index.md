@@ -47,6 +47,7 @@ View your cloud security posture at a high level with the [Posture Management][2
   {{< nextlink href="/security_platform/cspm/getting_started">}}Complete setup and configuration{{< /nextlink >}}
   {{< nextlink href="/security_platform/default_rules/#cat-cloud-configuration">}}Implement out-of-the-box Cloud Security Posture Management detection rules{{< /nextlink >}}
   {{< nextlink href="/security_platform/cspm/findings">}} Learn about Cloud Security Posture Management findings{{< /nextlink >}}
+  {{< nextlink href="https://www.datadoghq.com/blog/cspm-for-azure-with-datadog/">}} Monitor the security and compliance posture of your Azure environment with Datadog{{< /nextlink >}}
 {{< /whatsnext >}}
 
 [1]: /security_platform/default_rules/#cat-cloud-configuration
