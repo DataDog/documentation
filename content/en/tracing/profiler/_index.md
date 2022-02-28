@@ -58,7 +58,7 @@ For applications that are written in compiled languages such as **C**, **C++**, 
 
 The [Getting Started with Profiler][1] guide takes a sample service with a performance problem and shows you how to use Continuous Profiler to understand and fix the problem.
 
-## Explore Datadog profiler
+## Explore Profiler
 
 After you've configured your application to send profiles to Datadog, start getting insights into your code performance:
 
