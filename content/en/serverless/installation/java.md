@@ -277,7 +277,7 @@ arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-java:4
 
 ## Troubleshooting
 
-If you have trouble collecting monitoring data after following the instructions above, see the [serverless monitoring troubleshooting guide][14].
+If you have trouble collecting monitoring data after following the instructions above, see the [serverless monitoring troubleshooting guide][15].
 
 ## Further Reading
 
@@ -296,4 +296,5 @@ If you have trouble collecting monitoring data after following the instructions 
 [11]: /tracing/connect_logs_and_traces/java/
 [12]: https://www.datadoghq.com/log4j-vulnerability/
 [13]: https://github.com/DataDog/datadog-lambda-java/releases
-[14]: /serverless/guide/troubleshoot_serverless_monitoring/
+[14]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-layers.html
+[15]: /serverless/guide/troubleshoot_serverless_monitoring/

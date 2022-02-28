@@ -52,7 +52,7 @@ yarn global add @datadog/datadog-ci
 
 ### Configure credentials
 
-For a quick start, configure Datadog and [AWS credentials][1] using the following command. For production applications, consider supplying the environment variables or credentials in a more secure manner.
+For a quick start, configure Datadog and [AWS credentials][1] using the [instrumentation command](#instrument). For production applications, provide credentials in a more secure manner by using environment variables. For example:
 
 ```bash
 export DATADOG_API_KEY="<DD_API_KEY>"
