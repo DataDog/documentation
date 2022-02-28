@@ -25,16 +25,9 @@ title: Android エラー追跡
 1. 以下のスニペットを使用して、[Gradle プラグイン][1]を Gradle プロジェクトに追加します。
 
 ```groovy
-// プロジェクトの build.gradle スクリプト内
-buildscript {
-    dependencies {
-        classpath("com.datadoghq:dd-sdk-android-gradle-plugin:x.x.x")
-    }
-}
-
-// アプリの build.gradle スクリプト内
+// アプリの build.gradle スクリプトで
 plugins {
-    id("dd-sdk-android-gradle-plugin")
+    id("com.datadoghq.dd-sdk-android-gradle-plugin") version "x.y.z"
 }
 ```
 
@@ -54,16 +47,9 @@ plugins {
 1. 以下のスニペットを使用して、[Gradle プラグイン][1]を Gradle プロジェクトに追加します。
 
 ```groovy
-// プロジェクトの build.gradle スクリプト内
-buildscript {
-    dependencies {
-        classpath("com.datadoghq:dd-sdk-android-gradle-plugin:x.x.x")
-    }
-}
-
-// アプリの build.gradle スクリプト内
+// アプリの build.gradle スクリプトで
 plugins {
-    id("dd-sdk-android-gradle-plugin")
+    id("com.datadoghq.dd-sdk-android-gradle-plugin") version "x.y.z"
 }
 ```
 

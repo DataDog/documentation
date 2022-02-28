@@ -4,7 +4,7 @@ kind: documentation
 ---
 {{< img src="serverless/serverless-view.png" alt="サーバーレスビュー" >}}
 
-デフォルトで、サーバーレスビューではサービス別にサーバーレスリソースがグループ化され、アプリケーションの各部のパフォーマンスを簡単に視覚化できます。各サービスに属する関数と、それを呼び出すリソース (Amazon API Gateway、SNS、SQS、DynamoDB、S3、EventBridge、Kinesis) を確認できます。
+デフォルトで、サーバーレスビューではサービス別にサーバーレスリソースがグループ化され、アプリケーションの各部のパフォーマンスを視覚化できます。各サービスに属する関数と、それを呼び出すリソース (Amazon API Gateway、SNS、SQS、DynamoDB、S3、EventBridge、Kinesis) を確認できます。
 
 デフォルトのサービス別の他、AWS CloudFormation スタック名、および構成した別のタグ (チーム、プロジェクト、環境など) でリソースをグループ化することも可能です。
 
