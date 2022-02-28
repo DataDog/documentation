@@ -3,7 +3,7 @@ main_left:
     name: "製品"
     url: https://www.datadoghq.com/ja/product/
     weight: -500
-  - identifier: "infrastructure"
+  - identifier: "infrastructure" ##### Nav Product Header
     name: "製品"
     parent: "product"
     weight: 1
@@ -12,141 +12,141 @@ main_left:
     pre: "<i class='icon-host-map'></i>"
     url: https://www.datadoghq.com/ja/product/infrastructure-monitoring/
     parent: "infrastructure"
-    weight: 2
+    weight: 5
+  - identifier: "container-monitoring"
+    name: "Container Monitoring"
+    pre: "<i class='icon-container'></i>"
+    url: "https://www.datadoghq.com/ja/product/container-monitoring/"
+    parent: "infrastructure"
+    weight: 10
   - identifier: "network-performance"
     name: "ネットワークパフォーマンスモニタリング"
     pre: "<i class='icon-network'></i>"
     url: https://www.datadoghq.com/ja/product/network-monitoring/network-performance-monitoring/
     parent: "infrastructure"
-    weight: 3
+    weight: 15
   - identifier: "network-device"
     name: "ネットワークデバイスモニタリング"
     pre: "<i class='icon-ndm'></i>"
     url: https://www.datadoghq.com/ja/product/network-monitoring/network-device-monitoring/
     parent: "infrastructure"
-    weight: 4
-  # - identifier: "container-monitoring"
-  #   name: "Container Monitoring"
-  #   pre: "<i class='icon-container'></i>"
-  #   url: "https://www.datadoghq.com/ja/product/container-monitoring/"
-  #   parent: "infrastructure"
-  #   weight: 5
+    weight: 20
   - identifier: "serverless"
     name: "サーバーレス"
     pre: "<i class='icon-serverless'></i>"
     url: https://www.datadoghq.com/ja/product/serverless-monitoring/
     parent: "infrastructure"
-    weight: 6
-  - identifier: "logs"
+    weight: 25
+  - identifier: "logs" ##### Nav Product Header
     name: "ログ管理"
     parent: "product"
-    weight: 7
+    weight: 30
   - identifier: "logs-management"
     name: "ログ管理"
     pre: "<i class='icon-log'></i>"
     url: https://www.datadoghq.com/ja/product/log-management/
     parent: "logs"
-    weight: 8
+    weight: 35
   - identifier: "sensitive-data-scanner"
     name: "Sensitive Data Scanner"
     pre: "<i class='icon-sds'></i>"
     url: "https://www.datadoghq.com/product/sensitive-data-scanner/"
     parent: "logs"
-    weight: 9
-  - identifier: "apm"
+    weight: 40
+  - identifier: "apm" ##### Nav Product Header
     name: "APM"
     parent: "product"
-    weight: 10
+    weight: 45
   - identifier: "distributed-tracing"
     name: "Distributed Tracing"
     pre: "<i class='icon-apm'></i>"
     url: https://www.datadoghq.com/ja/product/apm/
     parent: "apm"
-    weight: 11
+    weight: 50
   - identifier: "error-tracking"
     name: "エラー トラッキング"
     pre: "<i class='icon-error-tracking'></i>"
     url: "https://www.datadoghq.com/product/error-tracking/"
     parent: "apm"
-    weight: 12
+    weight: 55
   - identifier: "profiler"
     name: "Continuous Profiler"
     pre: "<i class='icon-profiling-1'></i>"
     url: https://www.datadoghq.com/ja/product/code-profiling/
     parent: "apm"
-    weight: 13
+    weight: 60
   - identifier: "database"
     name: "データベース モニタリング"
     pre: "<i class='icon-database-2'></i>"
     url: https://www.datadoghq.com/ja/product/database-monitoring
     parent: "apm"
-    weight: 14
+    weight: 65
   - identifier: "ci-visibility"
     name: "CI Visibility"
     pre: "<i class='icon-ci'></i>"
     url: https://www.datadoghq.com/ja/product/ci-cd-monitoring/
     parent: "apm"
-    weight: 15
-  - identifier: "digital-experience"
+    weight: 70
+  - identifier: "digital-experience" ##### Nav Product Header
     name: "Digital Experience"
     parent: "product"
-    weight: 16
+    weight: 75
   - identifier: "rum"
     name: "リアルユーザーモニタリング（RUM）"
     pre: "<i class='icon-rum'></i>"
     url: https://www.datadoghq.com/ja/product/real-user-monitoring/
     parent: "digital-experience"
-    weight: 17
+    weight: 80
   - identifier: "synthetics"
     name: "Synthetic モニタリング"
     pre: "<i class='icon-synthetics'></i>"
     url: https://www.datadoghq.com/ja/product/synthetic-monitoring/
     parent: "digital-experience"
-    weight: 18
+    weight: 85
   - identifier: "session-replay"
     name: "Session Replay"
     pre: "<i class='icon-play-circle'></i>"
     url: "https://www.datadoghq.com/product/real-user-monitoring/session-replay/"
     parent: "digital-experience"
-    weight: 19
-  - identifier: "security"
+    weight: 90
+  - identifier: "security" ##### Nav Product Header
     name: "Security"
     parent: "product"
-    weight: 20
+    weight: 95
   - identifier: "security-platform"
     name: "セキュリティプラットフォーム"
     pre: "<i class='icon-security-platform'></i>"
     url: https://www.datadoghq.com/ja/product/security-platform/
     parent: "security"
-    weight: 21
+    weight: 100
   - identifier: "posture-management"
     name: "CSPM"
     pre: "<i class='icon-cspm'></i>"
     url: https://www.datadoghq.com/ja/product/security-platform/cloud-security-posture-management/
     parent: "security"
-    weight: 22
+    weight: 105
   - identifier: "workload-security"
     name: "クラウドワークロードセキュリティ"
     pre: "<i class='icon-cws'></i>"
     url: https://www.datadoghq.com/ja/product/security-platform/cloud-workload-security/
     parent: "security"
-    weight: 23
+    weight: 110
   - identifier: "cloud-siem"
     name: "Cloud SIEM"
     pre: "<i class='icon-siem'></i>"
     url: "https://www.datadoghq.com/product/security-platform/cloud-siem/"
     parent: "security"
-    weight: 24
-  - identifier: "platform-capabilities"
+    weight: 115
+  - identifier: "platform-capabilities" ##### Nav Product Header
     name: "Platform Capabilities"
     parent: "product"
-    weight: 25
+    weight: 120
   - identifier: "dashboards"
     name: "ダッシュボード"
     pre: "<i class='icon-dashboard'></i>"
     url: https://www.datadoghq.com/ja/product/platform/dashboards/
     parent: "platform-capabilities"
-    weight: 26
+    weight: 125
   # - identifier: "slos"
   #   name: "SLOs"
   #   pre: "<i class='icon-slos'></i>"
@@ -155,7 +155,7 @@ main_left:
   #   weight: 27
   # - identifier: "watchdog"
   #   name: "Watchdog (AI/ML)"
-  #   pre: "<i class='icon-agent-fill-2'></i>"
+  #   pre: "<i class='icon-agent-fill'></i>"
   #   url: "https://www.datadoghq.com/ja/product/platform/watchdog/"
   #   parent: "platform-capabilities"
   #   weight: 28
@@ -164,25 +164,25 @@ main_left:
     pre: "<i class='icon-monitor'></i>"
     url: https://www.datadoghq.com/ja/product/platform/alerts/
     parent: "platform-capabilities"
-    weight: 29
+    weight: 130
   - identifier: "incident"
     name: "インシデント管理"
     pre: "<i class='icon-incidents'></i>"
     url: https://www.datadoghq.com/ja/product/incident-management
     parent: "platform-capabilities"
-    weight: 30
+    weight: 135
   - identifier: "integrations"
     name: "統合"
     pre: "<i class='icon-integrations'></i>"
     url: https://www.datadoghq.com/ja/product/platform/integrations/
     parent: "platform-capabilities"
-    weight: 31
+    weight: 140
   - identifier: "api"
     name: "API"
     pre: "<i class='icon-api'></i>"
     url: "ja/api/latest/"
     parent: "platform-capabilities"
-    weight: 32
+    weight: 145
   - identifier: customers
     name: お客様
     url: "https://www.datadoghq.com/ja/customers/"
@@ -190,11 +190,11 @@ main_left:
   - identifier: pricing
     name: 料金
     url: "https://www.datadoghq.com/ja/pricing/"
-    weight: -480
+    weight: -470
   - identifier: "solutions"
     name: "ソリューション"
     weight: -460
-  - identifier: "industry"
+  - identifier: "industry" ##### Nav Solutions Header
     name: "Industry"
     parent: "solutions"
     weight: 1
@@ -234,7 +234,7 @@ main_left:
     parent: "industry"
     url: https://www.datadoghq.com/ja/solutions/gaming/
     weight: 10
-  - identifier: "technology"
+  - identifier: "technology" ##### Nav Solutions Header
     name: "Technology"
     parent: "solutions"
     weight: 11
@@ -262,7 +262,7 @@ main_left:
     parent: "technology"
     url: "https://www.datadoghq.com/solutions/pivotal-platform/"
     weight: 17
-  - identifier: "usecase"
+  - identifier: "usecase" ##### Nav Solutions Header
     name: "Use-case"
     parent: "solutions"
     weight: 18
