@@ -44,7 +44,7 @@ The following metrics are collected by default per JVM process after enabling JV
 
 {{< get-metrics-from-git "java" >}}
 
-Along with displaying these metrics in your APM Service Page, Datadog provides a [default JVM Runtime Dashboard][7] with the `service` and `runtime-id` tags that are applied to these metrics.
+Along with displaying these metrics in your APM Service Page, Datadog provides a [default JVM Runtime Dashboard][7].
 
 Additional JMX metrics can be added using configuration files that are passed on using `dd.jmxfetch.config.dir` and `dd.jmxfetch.config`. You can also enable existing Datadog JMX integrations individually with the `dd.jmxfetch.<INTEGRATION_NAME>.enabled=true` parameter. This auto-embeds configuration from Datadog's [existing JMX configuration files][8]. See the [JMX Integration][9] for further details on configuration.
 

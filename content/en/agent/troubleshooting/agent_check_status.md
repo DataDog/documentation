@@ -43,7 +43,7 @@ sudo -u dd-agent datadog-agent check <CHECK_NAME> --check-rate
 sudo -u dd-agent dd-agent check <CHECK_NAME>
 ```
 
-Replace `<CHECK_NAME>` with any Agent check. For example: `activemq`, `ceph`, or `elastic`. Review an [integration's documentation][1] to confirm the Agent check name.
+Replace `<CHECK_NAME>` with any Agent check. For example: `activemq`, `ceph`, or `elastic`. Review an [integration's documentation][4] to confirm the Agent check name.
 
 If you want to include rate metrics, add `--check-rate` to your command, for instance for Agent v6.x run:
 

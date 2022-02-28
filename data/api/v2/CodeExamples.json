@@ -146,6 +146,51 @@
       "description": "Update an existing incident team returns \"OK\" response"
     }
   ],
+  "UpdateIncident": [
+    {
+      "group": "incidents",
+      "suffix": "_3369341440",
+      "description": "Add commander to an incident returns \"OK\" response"
+    },
+    {
+      "group": "incidents",
+      "suffix": "_1009194038",
+      "description": "Remove commander from an incident returns \"OK\" response"
+    },
+    {
+      "group": "incidents",
+      "suffix": "",
+      "description": "Update an existing incident returns \"OK\" response"
+    }
+  ],
+  "CreateIncident": [
+    {
+      "group": "incidents",
+      "suffix": "",
+      "description": "Create an incident returns \"CREATED\" response"
+    }
+  ],
+  "DeleteIncident": [
+    {
+      "group": "incidents",
+      "suffix": "",
+      "description": "Delete an existing incident returns \"OK\" response"
+    }
+  ],
+  "ListIncidents": [
+    {
+      "group": "incidents",
+      "suffix": "",
+      "description": "Get a list of incidents returns \"OK\" response"
+    }
+  ],
+  "GetIncident": [
+    {
+      "group": "incidents",
+      "suffix": "",
+      "description": "Get the details of an incident returns \"OK\" response"
+    }
+  ],
   "CreateAPIKey": [
     {
       "group": "key_management",
@@ -254,6 +299,11 @@
       "group": "logs",
       "suffix": "_2527007002",
       "description": "Aggregate compute events returns \"OK\" response"
+    },
+    {
+      "group": "logs",
+      "suffix": "_2955613758",
+      "description": "Aggregate compute events with group by returns \"OK\" response"
     },
     {
       "group": "logs",
