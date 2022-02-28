@@ -83,7 +83,7 @@ For example:
 datadog-ci lambda instrument -f my-function -f another-function -r us-east-1 -e {{< latest-lambda-layer-version layer="extension" >}}
 ```
 
-More information and additional parameters can be found in the [CLI documentation][2].
+More information and additional parameters can be found in [Datadog Serverless CLI][2].
 
 
 [1]: https://docs.aws.amazon.com/sdk-for-net/v3/developer-guide/net-dg-config-creds.html
