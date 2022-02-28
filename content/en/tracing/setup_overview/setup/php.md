@@ -138,9 +138,11 @@ Automatic instrumentation captures:
 
 ## Configuration
 
-The PHP tracer can be configured using environment variables.
+The PHP tracer can be configured using environment variables and INI settings.
 
-**Note**: If you use code auto-instrumentation (the recommended approach) be aware that the instrumenting code is executed before any user code. As a result, the environment variables below must be set at the server level and be available to the PHP runtime before any user code is executed. For example, `putenv()` and `.env` files would not work.
+INI settings can be configured globally, for example in the `php.ini` file, or for a specific web server or virtual host.
+
+**Note**: If you use code auto-instrumentation (the recommended approach), be aware that the instrumenting code is executed before any user code. As a result, the environment variables and the INI settings below must be set at the server level and be available to the PHP runtime before any user code is executed. For example, `putenv()` and `.env` files do not work.
 
 ### Apache
 
@@ -153,12 +155,17 @@ env[DD_AGENT_HOST] = $SOME_ENV
 ; Example of passing the value 'my-app' to the PHP
 ; process as DD_SERVICE
 env[DD_SERVICE] = my-app
+; Or using the equivalent INI setting
+php_value datadog.service my-app
 ```
 
 Alternatively, you can use [`SetEnv`][9] from the server config, virtual host, directory, or `.htaccess` file.
 
 ```text
+# In a virtual host configuration as an environment variable
 SetEnv DD_TRACE_DEBUG true
+# In a virtual host configuration as an INI setting
+php_value datadog.service my-app
 ```
 
 ### NGINX
@@ -172,6 +179,8 @@ env[DD_AGENT_HOST] = $SOME_ENV
 ; Example of passing the value 'my-app' to the PHP
 ; process as DD_SERVICE
 env[DD_SERVICE] = my-app
+; Or using the equivalent INI setting
+php_value datadog.service my-app
 ```
 
 **Note**: If you have enabled APM for your NGINX server, make sure you have properly configured the `opentracing_fastcgi_propagate_context` setting for distributed tracing to properly work. See [NGINX APM configuration][10] for more details.
@@ -181,155 +190,187 @@ env[DD_SERVICE] = my-app
 Set in the command line to start the server.
 
 ```text
-DD_TRACE_DEBUG=true php -S localhost:8888
+DD_TRACE_DEBUG=true php -d datadog.service=my-app -S localhost:8888
 ```
 
 ### Environment variable configuration
 
+The following table lists the environment variables for configuring tracing, along with corresponding INI settings (where available) and defaults.
+
 `DD_AGENT_HOST`
-: **Default**: `localhost` <br>
-The Agent host name
+: **INI**: `datadog.agent_host`<br>
+**Default**: `localhost` <br>
+The Agent host name.
 
 `DD_AUTOFINISH_SPANS`
-: **Default**: `false`<br>
-Whether spans are automatically finished when the tracer is flushed
+: **INI**: `datadog.autofinish_spans`<br>
+**Default**: `false`<br>
+Whether spans are automatically finished when the tracer is flushed.
 
 `DD_DISTRIBUTED_TRACING`
-: **Default**: `true`<br>
-Whether to enable distributed tracing
+: **INI**: `datadog.distributed_tracing`<br>
+**Default**: `true`<br>
+Whether to enable distributed tracing.
 
 `DD_ENV`
-: **Default**: `null`<br>
+: **INI**: `datadog.env`<br>
+**Default**: `null`<br>
 Set an application’s environment, for example: `prod`, `pre-prod`, `stage`. Added in version `0.47.0`.
 
 `DD_PROFILING_ENABLED`
-: **Default**: `false`<br>
+: **INI**: Not available<br>
+**Default**: `false`<br>
 Enable the Datadog profiler. Added in version `0.69.0`. See [Enabling the PHP Profiler][11].
 
 `DD_PROFILING_EXPERIMENTAL_CPU_TIME_ENABLED`
-: **Default**: `false`<br>
+: **INI**: Not available<br>
+**Default**: `false`<br>
 Enable the experimental CPU profile type. Added in version `0.69.0`.
 
 `DD_PROFILING_LOG_LEVEL`
-: **Default**: `off`<br>
+: **INI**: Not available<br>
+**Default**: `off`<br>
 Set the profiler's log level. Acceptable values are `off`, `error`, `warn`, `info`, and `debug`. The profiler's logs are written to the standard error stream of the process. Added in version `0.69.0`.
 
 `DD_PRIORITY_SAMPLING`
-: **Default**: `true`<br>
-Whether to enable priority sampling
+: **INI**: `datadog.priority_sampling`<br>
+**Default**: `true`<br>
+Whether to enable priority sampling.
 
 `DD_SERVICE`
-: **Default**: `null`<br>
+: **INI**: `datadog.service`<br>
+**Default**: `null`<br>
 The default app name. For versions <0.47.0 this is `DD_SERVICE_NAME`.
 
 `DD_SERVICE_MAPPING`
-: **Default**: `null`<br>
+: **INI**: `datadog.service_mapping`<br>
+**Default**: `null`<br>
 Change the default name of an APM integration. Rename one or more integrations at a time, for example: `DD_SERVICE_MAPPING=pdo:payments-db,mysqli:orders-db` (see [Integration names](#integration-names)).
 
 `DD_TRACE_AGENT_ATTEMPT_RETRY_TIME_MSEC`
-: **Default**: `5000`<br>
-IPC-based configurable circuit breaker retry time (in milliseconds)
+: **INI**: `datadog.trace.agent_attempt_retry_time_msec`<br>
+**Default**: `5000`<br>
+IPC-based configurable circuit breaker retry time (in milliseconds).
 
 `DD_TRACE_AGENT_CONNECT_TIMEOUT`
-: **Default**: `100`<br>
-The Agent connection timeout (in milliseconds)
+: **INI**: `datadog.trace.agent_connect_timeout`<br>
+**Default**: `100`<br>
+The Agent connection timeout (in milliseconds).
 
 `DD_TRACE_AGENT_MAX_CONSECUTIVE_FAILURES`
-: **Default**: `3`<br>
-IPC-based configurable circuit breaker max consecutive failures
+: **INI**: `datadog.trace.agent_max_consecutive_failures`<br>
+**Default**: `3`<br>
+IPC-based configurable circuit breaker max consecutive failures.
 
 `DD_TRACE_AGENT_PORT`
-: **Default**: `8126`<br>
-The Agent port number
+: **INI**: `datadog.trace.agent_port`<br>
+**Default**: `8126`<br>
+The Agent port number.
 
 `DD_TRACE_AGENT_TIMEOUT`
-: **Default**: `500`<br>
-The Agent request transfer timeout (in milliseconds)
+: **INI**: `datadog.trace.agent_timeout`<br>
+**Default**: `500`<br>
+The Agent request transfer timeout (in milliseconds).
 
 `DD_TRACE_AGENT_URL`
-: **Default**: `null`<br>
+: **INI**: `datadog.trace.agent_url`<br>
+**Default**: `null`<br>
 The Agent URL; takes precedence over `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`; for example: `https://localhost:8126`. Added in version `0.47.1`.
 
 `DD_TRACE_AUTO_FLUSH_ENABLED`
-: **Default**: `false`<br>
+: **INI**: `datadog.trace.auto_flush_enabled`<br>
+**Default**: `false`<br>
 Automatically flush the tracer when all the spans are closed; set to `true` in conjunction with `DD_TRACE_GENERATE_ROOT_SPAN=0` to trace [long-running processes](#long-running-cli-scripts).
 
 `DD_TRACE_CLI_ENABLED`
-: **Default**: `false`<br>
+: **INI**: `datadog.trace.cli_enabled`<br>
+**Default**: `false`<br>
 Enable tracing of PHP scripts from the CLI. See [Tracing CLI scripts](#tracing-cli-scripts).
 
 `DD_TRACE_DEBUG`
-: **Default**: `false`<br>
+: **INI**: `datadog.trace.debug`<br>
+**Default**: `false`<br>
 Enable debug mode. When `true`, log messages are sent to the device or file set in the `error_log` INI setting. The actual value of `error_log` might be different than the output of `php -i` as it can be overwritten in the PHP-FPM/Apache configuration files.
 
 `DD_TRACE_ENABLED`
-: **Default**: `true`<br>
-Enable the tracer globally
+: **INI**: `datadog.trace.enabled`<br>
+**Default**: `true`<br>
+Enable the tracer globally.
 
 `DD_TRACE_GENERATE_ROOT_SPAN`
-: **Default**: `true`<br>
+: **INI**: `datadog.trace.generate_root_span`<br>
+**Default**: `true`<br>
 Automatically generate a top-level span; set to `false` in conjunction with `DD_TRACE_AUTO_FLUSH_ENABLED=1` to trace [long-running processes](#long-running-cli-scripts).
 
 `DD_TAGS`
-: **Default**: `null`<br>
-Tags to be set on all spans, for example: `key1:value1,key2:value2`. Added in version `0.47.0`
+: **INI**: `datadog.tags`<br>
+**Default**: `null`<br>
+Tags to be set on all spans, for example: `key1:value1,key2:value2`. Added in version `0.47.0`.
 
 `DD_TRACE_HEADER_TAGS`
-: **Default**: `null`<br>
+: **INI**: `datadog.trace.header_tags`<br>
+**Default**: `null`<br>
 CSV of header names that are reported on the root span as tags.
 
 `DD_TRACE_HTTP_CLIENT_SPLIT_BY_DOMAIN`
-: **Default**: `false`<br>
+: **INI**: `datadog.trace.http_client_split_by_domain`<br>
+**Default**: `false`<br>
 Set the service name of HTTP requests to `host-<hostname>`, for example a `curl_exec()` call to `https://datadoghq.com` has the service name `host-datadoghq.com` instead of the default service name of `curl`.
 
 `DD_TRACE_REDIS_CLIENT_SPLIT_BY_HOST`
-: **Default**: `false`<br>
-Set the service name of Redis clients operations to `redis-<hostname>`. Added in version `0.51.0`
+: **INI**: `datadog.trace.redis_client_split_by_host`<br>
+**Default**: `false`<br>
+Set the service name of Redis clients operations to `redis-<hostname>`. Added in version `0.51.0`.
 
 `DD_TRACE_<INTEGRATION>_ENABLED`
-: **Default**: `true`<br>
+: **INI**: `datadog.trace.<INTEGRATION>_enabled`<br>
+**Default**: `true`<br>
 Enable or disable an integration; all integrations are enabled by default (see [Integration names](#integration-names)). For versions < `0.47.1`, this parameter is `DD_INTEGRATIONS_DISABLED` which takes a CSV list of integrations to disable, for example: `curl,mysqli`.
 
 `DD_TRACE_MEASURE_COMPILE_TIME`
-: **Default**: `true`<br>
-Record the compile time of the request (in milliseconds) onto the top-level span
-
-`DD_TRACE_NO_AUTOLOADER`
-: **Default**: `false`<br>
-Set to `true` to enable auto instrumentation for applications that do not use an autoloader
+: **INI**: `datadog.trace.measure_compile_time`<br>
+**Default**: `true`<br>
+Record the compile time of the request (in milliseconds) onto the top-level span.
 
 `DD_TRACE_RESOURCE_URI_FRAGMENT_REGEX`
-: **Default**: `null`<br>
+: **INI**: `datadog.trace.resource_uri_fragment_regex`<br>
+**Default**: `null`<br>
 CSV of regexes that identifies path fragments corresponding to IDs (see [Map resource names to normalized URI](#map-resource-names-to-normalized-uri)).
 
 `DD_TRACE_RESOURCE_URI_MAPPING_INCOMING`
-: **Default**: `null`<br>
+: **INI**: `datadog.trace.resource_uri_mapping_incoming`<br>
+**Default**: `null`<br>
 CSV of URI mappings to normalize resource naming for incoming requests (see [Map resource names to normalized URI](#map-resource-names-to-normalized-uri)).
 
 `DD_TRACE_RESOURCE_URI_MAPPING_OUTGOING`
-: **Default**: `null`<br>
+: **INI**: `datadog.trace.resource_uri_mapping_outgoing`<br>
+**Default**: `null`<br>
 CSV of URI mappings to normalize resource naming for outgoing requests (see [Map resource names to normalized URI](#map-resource-names-to-normalized-uri)).
 
 `DD_TRACE_RETAIN_THREAD_CAPABILITIES`
-: **Default**: `false`<br>
-Works for Linux. Set to `true` to retain capabilities on Datadog background threads when you change the effective user ID. This option does not affect most setups, but some modules - to date Datadog is only aware of [Apache's mod-ruid2][12] - may invoke `setuid()` or similar syscalls, leading to crashes or loss of functionality as it loses capabilities.
-
+: **INI**: `datadog.trace.retain_thread_capabilities`<br>
+**Default**: `false`<br>
+Works for Linux. Set to `true` to retain capabilities on Datadog background threads when you change the effective user ID. This option does not affect most setups, but some modules - to date Datadog is only aware of [Apache's mod-ruid2][12] - may invoke `setuid()` or similar syscalls, leading to crashes or loss of functionality as it loses capabilities.<br><br>
 **Note:** Enabling this option may compromise security. This option, standalone, does not pose a security risk. However, an attacker being able to exploit a vulnerability in PHP or web server may be able to escalate privileges with relative ease, if the web server or PHP were started with full capabilities, as the background threads will retain their original capabilities. Datadog recommends restricting the capabilities of the web server with the `setcap` utility.
 
 `DD_TRACE_SAMPLE_RATE`
-: **Default**: `1.0`<br>
+: **INI**: `datadog.trace.sample_rate`<br>
+**Default**: `1.0`<br>
 The sampling rate for the traces (defaults to: between `0.0` and `1.0`). For versions < `0.36.0`, this parameter is `DD_SAMPLING_RATE`.
 
 `DD_TRACE_SAMPLING_RULES`
-: **Default**: `null`<br>
+: **INI**: `datadog.trace.sampling_rules`<br>
+**Default**: `null`<br>
 A JSON encoded string to configure the sampling rate. Examples: Set the sample rate to 20%: `'[{"sample_rate": 0.2}]'`. Set the sample rate to 10% for services starting with 'a' and span name 'b' and set the sample rate to 20% for all other services: `'[{"service": "a.*", "name": "b", "sample_rate": 0.1}, {"sample_rate": 0.2}]'` (see [Integration names](#integration-names)). Note that the JSON object **must** be included in single quotes (`'`) to avoid problems with escaping of the double quote (`"`) character.|
 
 `DD_TRACE_URL_AS_RESOURCE_NAMES_ENABLED`
-: **Default**: `true`<br>
+: **INI**: `datadog.trace.url_as_resource_names_enabled`<br>
+**Default**: `true`<br>
 Enable URL's as resource names (see [Map resource names to normalized URI](#map-resource-names-to-normalized-uri)).
 
 `DD_VERSION`
-: **Default**: `null`<br>
+: **INI**: `datadog.version`<br>
+**Default**: `null`<br>
 Set an application’s version in traces and logs, for example: `1.2.3`, `6c44da20`, `2020.02.13`. Added in version `0.47.0`.
 
 #### Integration names
