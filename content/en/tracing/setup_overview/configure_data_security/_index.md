@@ -19,9 +19,9 @@ The Datadog Agent and some tracing libraries have  options available to address 
 
 If your fine-tuning needs aren't covered and you need assistance, reach out to [the Datadog support team][1].
 
-## Resource name generalization and filtering baseline
+## Generalizing resource names and filtering baseline
 
-Datadog enforces several filtering mechanisms on spans as a baseline, to provide sound defaults for basic security and generalize resource naming to facilitate grouping during analysis. In particular:
+Datadog enforces several filtering mechanisms on spans as a baseline, to provide sound defaults for basic security and generalize resource names to facilitate grouping during analysis. In particular:
 
 * **Environment variables are not collected by the Agent**
 * **SQL variables are obfuscated, even when not using prepared statements**: For example, the following `sql.query` attribute: `SELECT data FROM table WHERE key=123 LIMIT 10` has its variables obfuscated, to become the following Resource name: `SELECT data FROM table WHERE key = ? LIMIT ?`
