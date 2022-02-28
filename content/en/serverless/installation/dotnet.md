@@ -63,7 +63,7 @@ export AWS_SECRET_ACCESS_KEY="<ACCESS KEY>"
 
 ### Instrument
 
-**Note**: Instrument your Lambda functions in a dev or staging environment first! Should the instrumentation result be unsatisfactory, run `uninstrument` with the same arguments to revert the changes.
+**Note**: Instrument your Lambda functions in a dev or staging environment first. If the instrumentation needs to be reverted, run `uninstrument` with the same arguments that was used for instrumentation.
 
 To instrument your Lambda functions, run the following command:
 
@@ -83,7 +83,7 @@ For example:
 datadog-ci lambda instrument -f my-function -f another-function -r us-east-1 -e {{< latest-lambda-layer-version layer="extension" >}}
 ```
 
-More information and additional parameters can be found in the [CLI documentation][2].
+More information and additional parameters can be found in [Datadog Serverless CLI][2].
 
 
 [1]: https://docs.aws.amazon.com/sdk-for-net/v3/developer-guide/net-dg-config-creds.html
