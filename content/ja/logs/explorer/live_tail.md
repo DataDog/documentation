@@ -26,7 +26,7 @@ Live Tail では、インフラストラクチャー内のどこからでもリ�
 
 [ログエクスプローラー][3]でタイムレンジの Live Tail オプションを選択し、ログが Datadog に取り込まれる際にログのクエリを実行します。
 
-{{< img src="logs/explorer/live_tail/livetail.gif" alt="Live Tail のログ出力" style="width:100%;" >}}
+{{< img src="logs/explorer/live_tail/livetail.mp4" alt="Live Tail のログ出力" video=true style="width:100%;" >}}
 
 インデックスされたログのクエリは[ログエクスプローラー][3]で行われますが、Live Tail 内のクエリでは事前に[ファセットを宣言][4]する必要は*ありません*。
 
