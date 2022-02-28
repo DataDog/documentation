@@ -391,7 +391,8 @@ For Ruby, if you don’t see Application Security threat information in the [Tra
 
 ```ruby
 Datadog.configure do |c|
-  c.diagnostics.debug = true
+  c.diagnostics.debug = true  # increase general log level to debug
+  c.appsec.waf_debug = true   # also enable WAF-specific log verbosity to highest level
 end
 ```
 
