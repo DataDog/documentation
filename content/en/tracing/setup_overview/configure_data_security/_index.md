@@ -19,9 +19,9 @@ The Datadog Agent and some tracing libraries have  options available to address 
 
 If your fine-tuning needs aren't covered and you need assistance, reach out to [the Datadog support team][1].
 
-## Filtering baseline
+## Resource name generalization and filtering baseline
 
-Datadog enforces several filtering mechanisms on spans as a baseline, to provide sound defaults for basic security. In particular:
+Datadog enforces several filtering mechanisms on spans as a baseline, to provide sound defaults for basic security and generalize resource naming to facilitate grouping during analysis. In particular:
 
 * **Environment variables are not collected by the Agent**
 * **SQL variables are obfuscated, even when not using prepared statements**: For example, the following `sql.query` attribute: `SELECT data FROM table WHERE key=123 LIMIT 10` has its variables obfuscated, to become the following Resource name: `SELECT data FROM table WHERE key = ? LIMIT ?`
@@ -172,7 +172,7 @@ apm_config:
 {{% /tab %}}
 {{< /tabs >}}
 
-## Replace rules for tag filtering
+## Scrub sensitive data from your spans
 
 To scrub sensitive data from your [span][3]'s tags, use the `replace_tags` setting [in your datadog.yaml configuration file][4] or the `DD_APM_REPLACE_TAGS` environment variable. The value of the setting or environment variable is a list of one or more groups of parameters that specify how to replace sensitive data in your tags. These parameters are:
 
