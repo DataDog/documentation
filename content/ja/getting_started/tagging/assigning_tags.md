@@ -162,13 +162,13 @@ hostname: mymachine.mydomain
 
 Datadog は [Docker、Kubernetes、ECS、Swarm、Mesos、Nomad、Rancher][6] から一般的なタグを自動的に収集します。さらに多くのタグを抽出するには、次のオプションを使用します。
 
-| 環境変数               | 説明                                    |
-|------------------------------------|------------------------------------------------|
-| `DD_DOCKER_LABELS_AS_TAGS`         | docker コンテナラベルを抽出します                |
-| `DD_DOCKER_ENV_AS_TAGS`            | docker コンテナー環境変数を抽出します |
-| `DD_KUBERNETES_POD_LABELS_AS_TAGS` | ポッドラベルを抽出します                             |
-| `DD_CHECKS_TAG_CARDINALITY`        | タグをチェックメトリクスに追加します                      |
-| `DD_DOGSTATSD_TAG_CARDINALITY`     | タグをカスタムメトリクスに追加します                     |
+| 環境変数               | 説明                                          |
+|------------------------------------|------------------------------------------------------|
+| `DD_DOCKER_LABELS_AS_TAGS`         | docker コンテナラベルを抽出します                      |
+| `DD_DOCKER_ENV_AS_TAGS`            | docker コンテナー環境変数を抽出します       |
+| `DD_KUBERNETES_POD_LABELS_AS_TAGS` | ポッドラベルを抽出します                                   |
+| `DD_CHECKS_TAG_CARDINALITY`        | チェックメトリクスにタグを追加 (低、オーケストレーター、高)  |
+| `DD_DOGSTATSD_TAG_CARDINALITY`     | カスタムメトリクスにタグを追加 (低、オーケストレーター、高) |
 
 **例:**
 
@@ -191,7 +191,7 @@ Docker Swarm `docker-compose.yaml` ファイル内で `DD_DOCKER_LABELS_AS_TAGS`
 DD_DOCKER_LABELS_AS_TAGS={"com.docker.compose.service":"service_name"}
 ```
 
-Docker コンテナにラベルを追加する際は、`docker-compose.yaml` ファイル内で `labels:` キーワードをどこに配置するかが極めて重要となります。スムーズに設定が進むよう、[Docker の統合サービスタグ付け][2]に関するドキュメントを参照してください。
+Docker コンテナにラベルを追加する際は、`docker-compose.yaml` ファイル内で `labels:` キーワードをどこに配置するかが重要となります。スムーズに設定が進むよう、[Docker の統合サービスタグ付け][2]に関するドキュメントを参照してください。
 
  このコンフィギュレーションの外部でコンテナにラベル付けを行う必要がある場合は、`labels:` キーワードを `services:` セクションの **内部**に配置します。`deploy:` セクション内に**含めない**よう注意してください。`labels:` キーワードを `deploy:` セクション内に配置するのは、サービスに対してラベル付けが必要な場合のみです。この配置が正しくないと、Datadog Agent はコンテナからラベルを抽出することができません。
 
@@ -236,15 +236,15 @@ services:
 
 変数は、カスタムの `datadog.yaml` で定義するか、環境変数で JSON マップとして設定します。マップキーはソース (`label/envvar`) 名、マップ値は Datadog タグ名です。
 
-タグカーディナリティを設定する環境変数は、`DD_CHECKS_TAG_CARDINALITY` と `DD_DOGSTATSD_TAG_CARDINALITY` の 2 つあります。DogStatsD の料金設定が異なるため、それに応じてタグカーディナリティも細かく構成できるように分けられています。それ以外は、これらの変数は同じように機能します。使用できる値は、`low`、`orchestrator`、または `high` です。どちらもデフォルトは `low` で、ホストレベルのタグを取り込みます。
+##### タグカーディナリティ
 
-変数を `orchestrator` に設定すると、タグ `pod_name` (Kubernetes)、`oshift_deployment` (OpenShift)、`task_arn` (ECS および Fargate)、`mesos_task` (Mesos) が追加されます。
+タグカーディナリティを設定する環境変数は、`DD_CHECKS_TAG_CARDINALITY` と `DD_DOGSTATSD_TAG_CARDINALITY` の 2 つあります。DogStatsD の料金設定が異なるため、それに応じて DogStatsD タグカーディナリティも細かく構成できるように分けられています。それ以外は、これらの変数は同じように機能します。使用できる値は、`low`、`orchestrator`、または `high` です。どちらもデフォルトは `low` で、ホストレベルのタグを取り込みます。
 
-変数を `high` に設定すると、さらにタグ `container_name` (Docker)、`container_id` (Docker)、`display_container_name` (Kubelet) が追加されます。
+カーディナリティによって、[Kubernetes と OpenShift][7] と [Docker、Rancher、Mesos][8] では異なるタグがすぐに使えるように用意されています。ECS と Fargate では、変数を `orchestrator` に設定すると、`task_arn` タグが追加されます。
 
 #### トレース
 
-Datadog トレーサーは環境変数、システムプロパティ、またはコード内のコンフィギュレーションを通じて構成することができます。 各トレーサーのタグ付けオプションとコンフィギュレーションの情報は、[Datadog トレーシング設定][7]に関するドキュメントを参照してください。[統合サービスタグ付け][2]のドキュメントでも、統合サービスタグ付け用のトレーサーを構成する方法をご覧いただけます。
+Datadog トレーサーは環境変数、システムプロパティ、またはコード内のコンフィギュレーションを通じて構成することができます。 各トレーサーのタグ付けオプションとコンフィギュレーションの情報は、[Datadog トレーシング設定][9]に関するドキュメントを参照してください。[統合サービスタグ付け][2]のドキュメントでも、統合サービスタグ付け用のトレーサーを構成する方法をご覧いただけます。
 
 使用するトレーサーの種類に関わらず、スパンメタデータはタイプ化された 3 つの構造を考慮する必要があります。ツリーの各ノードは `.` で分割され、各ノードのタイプは 1 つのみとなります。
 
@@ -377,7 +377,7 @@ sum:page.views{domain:example.com} by {host}
 
 ### DogStatsD
 
-[DogStatsD][8] に送信したタグをメトリクス、イベント、サービスチェックに追加します。たとえば、アルゴリズムのバージョンでタイマー メトリクスをタグ付けして、2 つのアルゴリズムのパフォーマンスを比較します。
+[DogStatsD][9] に送信したタグをメトリクス、イベント、サービスチェックに追加します。たとえば、アルゴリズムのバージョンでタイマー メトリクスをタグ付けして、2 つのアルゴリズムのパフォーマンスを比較します。
 
 ```python
 
@@ -390,9 +390,9 @@ def algorithm_two():
     # 何らかの処理 (速度を比較) ...
 ```
 
-**注**: タグ付けは、StatsD の [Datadog 固有の拡張機能][9]です。
+**注**: タグ付けは、StatsD の [Datadog 固有の拡張機能][10]です。
 
-`host` タグを DogStatsD メトリクスに割り当てる場合は、特別な考慮事項が必要です。ホスト タグ キーの詳細については、[DogStatsD セクション][10]を参照してください。
+`host` タグを DogStatsD メトリクスに割り当てる場合は、特別な考慮事項が必要です。ホスト タグ キーの詳細については、[DogStatsD セクション][11]を参照してください。
 
 ## その他の参考資料
 
@@ -404,7 +404,8 @@ def algorithm_two():
 [4]: /ja/getting_started/agent/#setup
 [5]: /ja/integrations/#cat-web
 [6]: /ja/agent/docker/?tab=standard#tagging
-[7]: /ja/tracing/setup/
-[8]: /ja/developers/dogstatsd/
-[9]: /ja/developers/community/libraries/
-[10]: /ja/metrics/dogstatsd_metrics_submission/#host-tag-key
+[7]: /ja/agent/kubernetes/tag/?tab=containerizedagent#out-of-the-box-tags
+[8]: /ja/agent/docker/tag/?tab=containerizedagent#out-of-the-box-tagging
+[9]: /ja/tracing/setup/
+[10]: /ja/developers/dogstatsd/
+[11]: /ja/developers/community/libraries/
