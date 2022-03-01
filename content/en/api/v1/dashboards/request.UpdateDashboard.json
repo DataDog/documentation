@@ -1,0 +1,27 @@
+{
+  "layout_type": "ordered",
+  "title": "Example-Update_a_dashboard_returns_OK_response with list_stream widget",
+  "description": "Updated description",
+  "widgets": [
+    {
+      "definition": {
+        "type": "list_stream",
+        "requests": [
+          {
+            "columns": [
+              {
+                "width": "auto",
+                "field": "timestamp"
+              }
+            ],
+            "query": {
+              "data_source": "issue_stream",
+              "query_string": ""
+            },
+            "response_format": "event_list"
+          }
+        ]
+      }
+    }
+  ]
+}
