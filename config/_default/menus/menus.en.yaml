@@ -1452,6 +1452,11 @@ main:
     parent: monitor_types
     identifier: monitor_types_composite
     weight: 1036
+  - name: CI Pipelines
+    url: monitors/create/types/ci_pipelines/
+    parent: monitor_types
+    identifier: monitor_types_cipipelines
+    weight: 1037
   - name: Notifications
     url: monitors/notify/
     parent: alerting
