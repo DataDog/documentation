@@ -356,7 +356,7 @@ Sets the URL endpoint where traces are sent. Overrides `DD_AGENT_HOST` and `DD_T
 **Default**: `localhost`
 
 `DD_TRACE_AGENT_PORT`
-: Sets the TCP port where the Agent is listening for connections. Prefer using `DD_TRACE_AGENT_URL` that has precedence over this parameter. <br>
+: Sets the TCP port where the Agent is listening for connections. Use `DD_TRACE_AGENT_URL`, which has precedence over this parameter. <br>
 **Default**: `8126`
 
 `DD_LOGS_INJECTION`
