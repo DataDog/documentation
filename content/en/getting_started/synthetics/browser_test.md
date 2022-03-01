@@ -22,14 +22,17 @@ further_reading:
 
 ## Overview
 
-[Browser tests][1] are scenarios that Datadog executes on your web applications. You can configure periodic intervals to run tests from multiple locations, devices, and browsers as well as execute them from your CI/CD pipelines. These tests verify that your users can perform **key business transactions** on your applications and that they are not negatively impacted by the most recent code changes.
+[Browser tests][1] are scenarios that Datadog executes on your web applications. You can configure periodic intervals to run tests from multiple locations, devices, and browsers as well as execute them from your CI/CD pipelines. 
+
+{{< img src="getting_started/synthetics/browser-test-overview.png" alt="Overview of a Synthetics Browser Test" style="width:100%;" >}}
+
+These tests verify that your users can perform **key business transactions** on your applications and that they are not negatively impacted by the most recent code changes.
 
 ## Create a browser test
 
 The example below demonstrates the creation of a browser test that maps a user's journey from adding an item to a cart to successfully checking out. 
 
-{{< img src="getting_started/synthetics/browser-test.png" alt="Browser test" style="width:100%;" >}}
-
+{{< img src="getting_started/synthetics/browser-test-1.png" alt="Browser test mapping out a user journey" style="width:100%;" >}}
 ### Configure your test details
 
 1. In the Datadog site, hover over **UX Monitoring** in the left hand menu and select **[Synthetic Tests][2]**.
