@@ -173,9 +173,9 @@ g++ -std=c++11 -o tracer_example tracer_example.cpp -lopentracing
 
 ## Configure the Datadog Agent for APM
 
-Install and configure the Datadog Agent to receive traces from your now instrumented application.
+Install and configure the Datadog Agent to receive traces from your instrumented application.
 
-By default the Datadog Agent is enabled in your `datadog.yaml` file under `apm_config` with `enabled: true` and listens for trace traffic at `localhost:8126`.  The Agent may be configured to listen on a unix domain socket instead by setting the environment variable `DD_APM_RECEIVER_SOCKET` to the desired socket file path.
+By default the Datadog Agent is enabled in your `datadog.yaml` file under `apm_config` with `enabled: true` and listens for trace traffic at `localhost:8126`. The Agent may be configured to listen on a unix domain socket instead by setting the environment variable `DD_APM_RECEIVER_SOCKET` to the desired socket file path.
 
 For containerized environments, follow the links below to enable trace collection within the Datadog Agent.
 
