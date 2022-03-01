@@ -49,7 +49,7 @@ For a full list of supported libraries and processor architectures, see [Compati
 ## Installation and getting started
 
 <div class="alert alert-info">
-  <div class="alert-info">Datadog recommends you follow the <a href="https://app.datadoghq.com/apm/docs">Quickstart instructions</a> in the Datadog app for the best experience, including:</br>
+  <div class="alert-info">Datadog recommends you follow the <a href="https://app.datadoghq.com/apm/docs">Quickstart instructions</a> in the Datadog app for the best experience, including:<br/>
     <div>- **Step-by-step** instructions scoped to your deployment configuration (hosts, Docker, Kubernetes, or Amazon ECS).</div>
     <div>- Dynamically set <code>service</code>, <code>env</code>, and <code>version</code> tags.</div>
     <div>- Enable ingesting 100% of traces and Trace ID injection into logs during setup.</div>
@@ -409,7 +409,7 @@ The number of traces allowed to be submitted per second (deprecates `DD_MAX_TRAC
 If specified, adds all of the specified tags to all generated spans.
 
 `DD_TRACE_DEBUG`
-: Enables or disables debug logging. Valid values are: `true` or `false`.<br>
+: Enables or disables debug logging. Valid values are `true` or `false`.<br>
 **Default**: `false`
 
 `DD_TRACE_HEADER_TAGS`
