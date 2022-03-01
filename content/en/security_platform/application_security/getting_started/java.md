@@ -31,13 +31,15 @@ further_reading:
 
    Or one of the following methods, depending on where your application runs:
 
+**Note:** Read-only file systems are not currently supported. The application must have access to a writable `/tmp` directory.
+
    {{< tabs >}}
 {{% tab "Docker CLI" %}}
 
-Update your configuration container for APM by adding the following argument in your `docker run` command: 
+Update your configuration container for APM by adding the following argument in your `docker run` command:
 
 ```
-docker run [...] -e DD_APPSEC_ENABLED=true [...] 
+docker run [...] -e DD_APPSEC_ENABLED=true [...]
 ```
 
 {{% /tab %}}
