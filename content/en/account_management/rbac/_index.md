@@ -10,13 +10,13 @@ aliases:
 further_reading:
     - link: '/api/v2/roles/'
       tag: 'Documentation'
-      text: 'Manage Roles and Permissions with the Roles API'
+      text: 'Manage roles and permissions with the Roles API'
     - link: '/api/v2/roles/#list-permissions'
       tag: 'Documentation'
-      text: 'Manage your permissions with the Permission API'
+      text: 'Manage your permissions with the Permissions API'
     - link: '/account_management/rbac/permissions'
       tag: 'Documentation'
-      text: 'Discover the list of permissions available.'
+      text: 'Discover the list of permissions available'
     - link: '/account_management/saml/'
       tag: 'Documentation'
       text: 'Enable single sign on with SAML'
@@ -26,7 +26,7 @@ Roles categorize users and define what account permissions those users have, suc
 
 By granting permissions to roles, any user who is associated with that role receives that permission. When users are associated with multiple roles, they receive all the permissions granted to each of their roles. The more roles a user is associated with, the more access they have within a Datadog account.
 
-  **Note** If you use a SAML identity provider, you can integrate it with Datadog for authentication, and you can map identity attributes to Datadog default and custom roles. For more information, see [Single Sign On With SAML][1].
+**Note**: If you use a SAML identity provider, you can integrate it with Datadog for authentication, and you can map identity attributes to Datadog default and custom roles. For more information, see [Single Sign On With SAML][1].
 
 ## Datadog default roles
 
@@ -41,15 +41,13 @@ Datadog Read Only Role
 
 ## Custom roles
 
-<div class="alert alert-warning">
-Creating and modifying custom roles is an opt-in Enterprise feature. <a href="/help">Contact Datadog support</a> to get it enabled for your account.
-</div>
+Manage your custom roles through the Datadog application, the [Datadog Role API][6], or SAML directly. Find below how to create, update, delete a role. See the [Datadog Role Permissions][7] documentation for more information about available permissions. Only users with the Access Management permission can create or edit roles in Datadog.
 
-Manage your custom roles through the Datadog application, the [Datadog Role API][6], or SAML directly. Find below how to create, update, delete a role. See the [Datadog Role permissions][7] documentation for more information about available permissions. Only users with the Access Management permission can create or edit roles in Datadog.
+### Enable custom roles
+
+TODO: Include description and screenshot showing how to enable custom roles through the datadog UI.
 
 ### Create a custom role
-
-You can create custom roles with:
 
 {{< tabs >}}
 {{% tab "Datadog application" %}}
@@ -59,8 +57,9 @@ To create a custom role:
 1. Go to your [Datadog Roles page][1].
 2. Select **New Role** in the upper right corner of the page.
 3. Give a name to your role.
-4. Optional - Assigning a set of permissions to your Role. See the [Datadog Role permissions][2] documentation for more information about available permissions.
+4. Optional - Assigning a set of permissions to your role. See the [Datadog Role permissions][2] documentation for more information about available permissions.
 
+TODO: Update screenshot to reflect new roles UI.
 {{< img src="account_management/rbac/create_role.png" alt="Create a custom Role" style="width:90%;">}}
 
 Once a role is created you can [add this role to existing users][3].
@@ -72,7 +71,7 @@ Once a role is created you can [add this role to existing users][3].
 {{% /tab %}}
 {{% tab "API" %}}
 
-Find an example of how to create a Role in the [Datadog Create Role API documentation][1].
+Find an example of how to create a role in the [Datadog Create Role API documentation][1].
 
 
 [1]: /api/v2/roles/#create-role
@@ -87,10 +86,11 @@ Find an example of how to create a Role in the [Datadog Create Role API document
 To edit a custom role:
 
 1. Go to your [Datadog Roles page][1].
-2. Select the edit button on the Role you would like to modify.
-3. Modify the set of permissions to your Role. See the [Datadog Role permissions][2] documentation for more information about available permissions.
+2. Select the edit button on the role you would like to modify.
+3. Modify the set of permissions to your role. See the [Datadog Role permissions][2] documentation for more information about available permissions.
 4. Save your changes.
 
+TODO: Update screenshot to show clone option in UI.
 {{< img src="account_management/rbac/edit_role.png" alt="Edit a Role" style="width:90%;">}}
 
 Once a role is modified, permissions are updated for all users with the role.
@@ -101,7 +101,7 @@ Once a role is modified, permissions are updated for all users with the role.
 {{% /tab %}}
 {{% tab "API" %}}
 
-Find an example of how to update a Role in the [Datadog Create Role API documentation][1].
+Find an example of how to update a role in the [Datadog Create Role API documentation][1].
 
 
 [1]: /api/v2/roles/#update-a-role
@@ -116,21 +116,21 @@ Find an example of how to update a Role in the [Datadog Create Role API document
 To delete a custom role:
 
 1. Go to your [Datadog Roles page][1].
-2. Select the delete button on the Role you would like to delete.
+2. Select the delete button on the role you would like to delete.
 3. Confirm your decision.
 
 {{< img src="account_management/rbac/delete_role.png" alt="Deleting a Role" style="width:90%;">}}
 
 {{< img src="account_management/users/delete_role_confirmation.png" alt="Deleting a Role" style="width:90%;">}}
 
-Once a role is deleted, permissions are updated for all users with the role. Users without any roles cannot use Datadog effectively, but still maintain limited access. You should always make sure users either have a Role or are disabled if they do not need access to your organization.
+Once a role is deleted, permissions are updated for all users with the role. Users without any roles cannot use Datadog effectively, but still maintain limited access. You should always make sure users either have a role or are disabled if they do not need access to your organization.
 
 
 [1]: https://app.datadoghq.com/access/roles
 {{% /tab %}}
 {{% tab "API" %}}
 
-Find an example of how to delete a Role in the [Datadog Create Role API documentation][1].
+Find an example of how to delete a role in the [Datadog Create Role API documentation][1].
 
 
 [1]: /api/v2/roles/#delete-role

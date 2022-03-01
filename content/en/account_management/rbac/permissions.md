@@ -13,7 +13,7 @@ further_reading:
       text: 'Manage your permissions with the Permission API'
 ---
 
-After creating roles, assign or remove permission to this role directly by [updating the role in Datadog][1], or through the [Datadog Permission API][2]. Find below a list of available permissions.
+After creating a role, assign or remove permissions to this role directly by [updating the role in Datadog][1], or through the [Datadog Permission API][2]. Find below a list of available permissions.
 
 ## Overview
 
@@ -41,7 +41,7 @@ In addition of the general permissions, it is possible to define more granular p
 {{< partial name="whats-next/whats-next.html" >}}
 
 <br>
-\*Log Rehydration is a trademark of Datadog, Inc.
+*Log Rehydration is a trademark of Datadog, Inc.
 
 [1]: /account_management/users/#edit-a-user-s-roles
 [2]: /api/v2/roles/#list-permissions

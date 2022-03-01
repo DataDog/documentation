@@ -24,10 +24,6 @@ Logs might contain **sensitive information** that could either get [scrubbed][1]
 
 This guide provides a methodology in developing customized Datadog roles that allows users to access logs and log features in a compliant manner.
 
-<div class="alert alert-warning">
-Creating and modifying custom roles is an opt-in feature. <a href="/help">Contact Datadog support</a> to get it enabled for your account.
-</div>
-
 ### Multiple teams
 
 Assume that your organization consists of multiple teams. One of these is the **ACME** (Applicative Component Making Errors) team, whose members deal with ACME Logs for troubleshooting and auditing purposes.
@@ -123,7 +119,7 @@ This section explains how to create two roles, `ACME Admin` and `ACME User`; how
 {{< tabs >}}
 {{% tab "UI" %}}
 
-In the [Team Section][1] of Datadog, use the Add Role button within the Role tab to create the new `ACME Admin` and `ACME User`roles.
+In the [Groups Section][1] of Datadog, use the Add Role button within the Role tab to create the new `ACME Admin` and `ACME User`roles.
 
 {{< img src="logs/guide/rbac/add_role.png" alt="Add a new role"  style="width:60%;">}}
 
@@ -132,6 +128,7 @@ When creating a new role:
 * Create with Standard Access.
 * Grant Read Index Data and Live Tail permissions—these are [legacy permissions][2] that you can safely enable.
 
+TODO: Update screenshot to reflect new roles UI.
 {{< img src="logs/guide/rbac/minimal_permissions.png" alt="Grant minimal permissions"  style="width:60%;">}}
 
 More information on creating roles is available in the [Account Management][3] section.
