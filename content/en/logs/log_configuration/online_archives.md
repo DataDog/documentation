@@ -51,11 +51,16 @@ Configure Online Archives in the [Logs Index Configuration][3] page:
 
 ## Searching in Online Archives
 
-Select Online Archives from the dropdown in the Logs Explorer to begin searching in Online Archives instead of indexes. Find this dropdown next to the time picker.
+Select Online Archives from the dropdown in the Logs Explorer to begin searching in Online Archives instead of indexes. Find this dropdown next to the time picker. You can adjust the time picker with pre-set options, such as 2 or 3 months, or by selecting the calendar view to search further back in time.
+
 
 {{< img src="logs/log_configuration/online_archives/searching.png" alt="How to search your online archive" style="width:100%;">}}
 
 [Search][4] by typing in queries in the search bar or by selecting the relevant facet in the facet panel.
+
+**Notes**: 
+- You cannot export online archive logs to dashboards, notebooks, or monitors.
+- The transactions and patterns view is not available for Online Archives.
 
 ## Analytics in Online Archives
 
@@ -89,11 +94,9 @@ Here are examples of different log retention strategies and how to implement the
 
 **Note:** Index order matters since `team:security` logs go into the first index that matches the index filter in case there are multiple indexes.
 
-**Note:** Dashboards, Log Monitors, Patterns and Transactions are not available in Online Archives.
-
-{{< /site-region >}}
-
 [1]: /logs/log_configuration/indexes/#indexes-filters
 [2]: /logs/log_configuration/indexes/#exclusion-filters
 [3]: https://app.datadoghq.com/logs/pipelines/indexes
 [4]: https://app.datadoghq.com/logs
+
+{{< /site-region >}}
