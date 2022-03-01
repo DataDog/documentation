@@ -383,7 +383,7 @@ It can contain a Unix path to a socket by prefixing the path with `unix://`<br>
 **Default**: `http://<DD_AGENT_HOST>:<DD_TRACE_AGENT_PORT>` if they are set, `unix:///var/run/datadog/apm.socket` if the file exists, or `http://localhost:8126`.
 
 `DD_AGENT_HOST`
-: Sets the host where the Agent is listening for connections. Can be a hostname or an IP address. Prefer using `DD_TRACE_AGENT_URL` that has precedence over this parameter. <br>
+: Sets the host where the Agent is listening for connections. Can be a hostname or an IP address. Use `DD_TRACE_AGENT_URL`, which has precedence over this parameter. <br>
 **Default**: `localhost`
 
 `DD_TRACE_AGENT_PORT`

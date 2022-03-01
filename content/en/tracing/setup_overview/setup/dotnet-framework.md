@@ -352,7 +352,7 @@ Sets the URL endpoint where traces are sent. Overrides `DD_AGENT_HOST` and `DD_T
 **Default**: `http://<DD_AGENT_HOST>:<DD_TRACE_AGENT_PORT>` if they are set or `http://localhost:8126`
 
 `DD_AGENT_HOST`
-: Sets the host where the Agent is listening for connections. Can be a hostname or an IP address. Prefer using `DD_TRACE_AGENT_URL` that has precedence over this parameter. <br>
+: Sets the host where the Agent is listening for connections. Can be a hostname or an IP address. Use `DD_TRACE_AGENT_URL`, which has precedence over this parameter. <br>
 **Default**: `localhost`
 
 `DD_TRACE_AGENT_PORT`
