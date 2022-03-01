@@ -180,7 +180,7 @@ main_left:
   - identifier: "api"
     name: "API"
     pre: "<i class='icon-api'></i>"
-    url: "ja/api/latest/"
+    url: "https://docs.datadoghq.com/ja/api/latest/"
     parent: "platform-capabilities"
     weight: 145
   - identifier: customers
@@ -385,7 +385,7 @@ main_right:
     weight: -460
   - identifier: get_started
     name: 無料で試す
-    url: "/ja/"
+    url: "https://www.docs.datadoghq.com/ja/"
     weight: -440
 main:
   - name: はじめに
