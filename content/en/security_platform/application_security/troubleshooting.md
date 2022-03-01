@@ -143,19 +143,21 @@ The required integrations vary by language.
 {{< programming-lang-wrapper langs="java,.NET,go,ruby,PHP,NodeJS" >}}
 {{< programming-lang lang="java" >}}
 
-For [Java][1], the required integrations are the following:
+For [Java][1], if you are using any of the following technologies, the respective integration is required:
 
+- grizzly
+- grizzly-filterchain
+- jersey
+- jetty
+- ratpack
+- ratpack-request-body (also requires ratpack)
+- resteasy
 - servlet
 - servlet-2
 - servlet-3
-- servlet-request-body
-- grizzly
-- grizzly-char-body
-- grizzly-byte-body
-- grizzly-filterchain
+- servlet-request-body (also requires servlet)
 - spring-web
-- spring-webflux
-
+- tomcat
 
 [1]: /security_platform/application_security/setup_and_configure/
 {{< /programming-lang >}}
