@@ -235,9 +235,7 @@ For containerized, serverless, and cloud environments:
 
     - The `/var/run/datadog/apm.socket` Unix domain socket by default.
     - If the socket does not exist, then traces are sent to `localhost:8126`.
-    - If a different socket, host, or port is required, use the `DD_TRACE_AGENT_URL` environment variable:
-    `DD_TRACE_AGENT_URL=http://custom-hostname:1234`
-    `DD_TRACE_AGENT_URL=unix:///var/run/datadog/apm.socket`
+    - If a different socket, host, or port is required, use the `DD_TRACE_AGENT_URL` environment variable: `DD_TRACE_AGENT_URL=http://custom-hostname:1234` or `DD_TRACE_AGENT_URL=unix:///var/run/datadog/apm.socket`
 
 For more information on the available setting knobs, available as environment variables or through code, see [Configuration](#configuration).
 
