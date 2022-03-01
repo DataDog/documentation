@@ -83,7 +83,7 @@ For example:
 datadog-ci lambda instrument -f my-function -f another-function -r us-east-1 -e {{< latest-lambda-layer-version layer="extension" >}}
 ```
 
-More information and additional parameters can be found in the [CLI documentation][2].
+More information and additional parameters can be found in the [Datadog Serverless CLI][2].
 
 [1]: https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/get-started.html
 [2]: https://docs.datadoghq.com/serverless/serverless_integrations/cli
