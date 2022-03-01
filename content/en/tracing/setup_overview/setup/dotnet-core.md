@@ -381,15 +381,15 @@ The following configuration variables are available for both automatic and custo
 `DD_TRACE_AGENT_URL`
 : **TracerSettings property**: `Exporter.AgentUri`<br>
 Sets the URL endpoint where traces are sent. Overrides `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT` if set. <br>
-It can contain a unix path to a socket by prefixing the path by `unix://`<br>
-**Default**: `http://<DD_AGENT_HOST>:<DD_TRACE_AGENT_PORT>` if they are set, `unix:///var/run/datadog/apm.socket` if the file exists or `http://localhost:8126`.
+It can contain a Unix path to a socket by prefixing the path with `unix://`<br>
+**Default**: `http://<DD_AGENT_HOST>:<DD_TRACE_AGENT_PORT>` if they are set, `unix:///var/run/datadog/apm.socket` if the file exists, or `http://localhost:8126`.
 
 `DD_AGENT_HOST`
-: Sets the host where traces are sent (the host running the Agent). Can be a hostname or an IP address. Prefers using `DD_TRACE_AGENT_URL` that has precedence over this parameter. <br>
+: Sets the host where the Agent is listening for connections. Can be a hostname or an IP address. Prefer using `DD_TRACE_AGENT_URL` that has precedence over this parameter. <br>
 **Default**: `localhost`
 
 `DD_TRACE_AGENT_PORT`
-: Sets the port where traces are sent (the port where the Agent is listening for connections). Prefers using `DD_TRACE_AGENT_URL` that has precedence over this parameter. <br>
+: Sets the TCP port where the Agent is listening for connections. Prefer using `DD_TRACE_AGENT_URL` that has precedence over this parameter. <br>
 **Default**: `8126`
 
 `DD_LOGS_INJECTION`
