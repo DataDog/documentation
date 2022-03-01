@@ -1,25 +1,27 @@
 ---
 title: Categories of Data
 kind: documentation
+aliases:
+  - /security/
 further_reading:
-- link: "/security/tracing/"
+- link: "/data_security/tracing/"
   tag: "Documentation"
   text: "APM Security"
-- link: "/security/logs/"
+- link: "/data_security/logs/"
   tag: "Documentation"
   text: "Logs Security"
-- link: "/security/agent/"
+- link: "/data_security/agent/"
   tag: "Documentation"
   text: "Agent Security"
-- link: "/security/synthetics/"
+- link: "/data_security/synthetics/"
   tag: "Documentation"
   text: "Synthetic Monitoring Security"
-- link: "/security/other/"
+- link: "/data_security/other/"
   tag: "Documentation"
   text: "Additional Security Considerations"
 ---
 
-<div class="alert alert-info">This page is about the security of Datadog; if you're looking for the Cloud SIEM product, see the <a href="/security_platform/cloud_siem" target="_blank">Cloud SIEM section</a>.</div>
+<div class="alert alert-info">This page is about the security of data sent to Datadog. If you're looking for cloud and application security products and features, see the <a href="/security_platform/" target="_blank">Security Platform</a> section.</div>
 
 Datadog allows customers to submit data in multiple ways, including from the [Agent][1], the [public API][2], and [integrations][3]. This article describes the main categories of data which might be submitted by customers to Datadog as part of the intended use of its product, and highlights scenarios where submitted data may contain personal data. Read the [security page][4] and [privacy policy][5] for more information.
 
@@ -66,10 +68,10 @@ Logs consist of messages collected [by the Agent or by integrations][9], and ass
 [5]: https://www.datadoghq.com/legal/privacy
 [6]: /getting_started/tagging/
 [7]: /tracing/visualization/
-[8]: /security/tracing/
+[8]: /data_security/tracing/
 [9]: /logs/log_collection/
-[10]: /security/logs/
+[10]: /data_security/logs/
 [11]: /infrastructure/process/
-[12]: /security/other/
+[12]: /data_security/other/
 [13]: /monitors/
 [14]: /events/

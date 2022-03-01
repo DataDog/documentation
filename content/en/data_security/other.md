@@ -1,13 +1,15 @@
 ---
 title: Additional Security Considerations
 kind: documentation
+aliases:
+  - /security/other/
 further_reading:
-- link: "/security/"
+- link: "/data_security/"
   tag: "Documentation"
   text: "Review the main categories of data submitted to Datadog"
 ---
 
-<div class="alert alert-info">This page is about the security of Datadog; if you're looking for the Cloud SIEM product, see the <a href="/cloud_siem" target="_blank">Cloud SIEM section</a>.</div>
+<div class="alert alert-info">This page is about the security of data sent to Datadog. If you're looking for cloud and application security products and features, see the <a href="/security_platform/" target="_blank">Security Platform</a> section.</div>
 
 This article is part of a [series on data security][1].
 
@@ -38,7 +40,7 @@ Due to their sensitive nature, additional security guarantees are implemented wh
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/
+[1]: /data_security/
 [2]: /infrastructure/process/
 [3]: /infrastructure/process/#process-arguments-scrubbing
 [4]: /integrations/
