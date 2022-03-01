@@ -57,9 +57,28 @@ messages with one value in each. This is useful for HISTOGRAM, TIMING, and DISTR
 - `page.views:1:2:32|d`: Sample the `page.views` DISTRIBUTION metric three times with values `1`, `2` and `32`.
 - `song.length:240:234|h|@0.5`: Sample the `song.length` histogram as if it was sent half of the time, twice. Each value has the sample rate of `0.5` applied to it.
 
+### DogStatsD protocol v1.2
+
+Starting with the Agent `>=v6.35.0` && `<v7.0.0` or `>=v7.35.0`, a new container ID field is supported.
+The Datadog Agent uses the container ID value to enrich DogstatsD metrics with additional container tags.
+
+The container ID is prefixed by `c:`, for example:
+
+`<METRIC_NAME>:<VALUE>|<TYPE>|#<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>|c:<CONTAINER_ID>`
+
+**Note:** Set `dogstatsd_origin_detection_client` to `true` in your `datadog.yaml` file or the environment variable `DD_DOGSTATSD_ORIGIN_DETECTION_CLIENT=true` to instruct the Datadog Agent to extract the container ID field and attach the corresponding container tags.
+
+### Example datagrams
+
+- `page.views:1|g|#env:dev|c:83c0a99c0a54c0c187f461c7980e9b57f3f6a8b0c918c8d93df19a9de6f3fe1d`: The Datadog Agent adds container tags like `image_name` and `image_tag` to the `page.views` metric.
+
+Read more about container tags in the [Kubernetes][4] and [Docker][5] tagging documentation.
+
 [1]: /metrics/#naming-metrics
 [2]: /metrics/types/
 [3]: /getting_started/tagging/
+[4]: /agent/kubernetes/tag/?tab=containerizedagent#out-of-the-box-tags
+[5]: /agent/docker/tag/?tab=containerizedagent#out-of-the-box-tagging
 {{% /tab %}}
 {{% tab "Events" %}}
 
