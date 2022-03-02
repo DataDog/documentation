@@ -138,7 +138,7 @@ For information about the different methods for setting environment variables, s
    ```
 
    <div class="alert alert-warning">
-     <strong>Note:</strong> Use <code>stop</code> and <code>start</code> commands. A reset or restart does not always work. The IIS Manager UI to stop and start buttons also cannot be used to activate tracing.
+     <strong>Note:</strong> Always use the commands above to completely stop and restart IIS to enable the tracer. Avoid using the IIS Manager GUI application or `iisreset.exe`.
    </div>
 
 
