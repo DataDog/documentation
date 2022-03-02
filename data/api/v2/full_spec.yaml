@@ -5345,11 +5345,13 @@ components:
       - threshold
       - new_value
       - anomaly_detection
+      - impossible_travel
       type: string
       x-enum-varnames:
       - THRESHOLD
       - NEW_VALUE
       - ANOMALY_DETECTION
+      - IMPOSSIBLE_TRAVEL
     SecurityMonitoringRuleEvaluationWindow:
       description: 'A time window is specified to match when at least one of the cases
         matches true. This is a sliding window
@@ -5375,6 +5377,20 @@ components:
       - THIRTY_MINUTES
       - ONE_HOUR
       - TWO_HOURS
+    SecurityMonitoringRuleImpossibleTravelOptions:
+      description: Options on impossible travel rules.
+      properties:
+        baselineUserLocations:
+          $ref: '#/components/schemas/SecurityMonitoringRuleImpossibleTravelOptionsBaselineUserLocations'
+      type: object
+    SecurityMonitoringRuleImpossibleTravelOptionsBaselineUserLocations:
+      description: 'If true, signals are suppressed for the first 24 hours. In that
+        time, Datadog learns the user''s regular
+
+        access locations. This can be helpful to reduce noise and infer VPN usage
+        or credentialed API access.'
+      example: true
+      type: boolean
     SecurityMonitoringRuleKeepAlive:
       description: "Once a signal is generated, the signal will remain \u201Copen\u201D
         if a case is matched at least once within\nthis keep alive window."
@@ -5483,6 +5499,8 @@ components:
           $ref: '#/components/schemas/SecurityMonitoringRuleDetectionMethod'
         evaluationWindow:
           $ref: '#/components/schemas/SecurityMonitoringRuleEvaluationWindow'
+        impossibleTravelOptions:
+          $ref: '#/components/schemas/SecurityMonitoringRuleImpossibleTravelOptions'
         keepAlive:
           $ref: '#/components/schemas/SecurityMonitoringRuleKeepAlive'
         maxSignalDuration:
@@ -5527,6 +5545,7 @@ components:
       - sum
       - max
       - new_value
+      - geo_data
       type: string
       x-enum-varnames:
       - COUNT
@@ -5534,6 +5553,7 @@ components:
       - SUM
       - MAX
       - NEW_VALUE
+      - GEO_DATA
     SecurityMonitoringRuleQueryCreate:
       description: Query for matching rule.
       properties:
