@@ -69,7 +69,13 @@ kubectl exec -it <AGENT_POD_NAME> -c process-agent -- agent flare <CASE_ID> --lo
 ```bash
 kubectl exec -it <AGENT_POD_NAME> -c trace-agent -- agent flare <CASE_ID> --local
 ```
-  
+
+### Security Agent
+
+```bash
+kubectl exec -it <AGENT_POD_NAME> -c security-agent -- security-agent flare <CASE_ID>
+```
+
 ### System probe
 
 The system-probe container cannot send a flare so get container logs instead:

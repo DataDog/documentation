@@ -13,7 +13,7 @@ further_reading:
     text: Débuguer la trace la plus lente sur l'endpoint le plus lent d'un service web
   - link: /tracing/guide/add_span_md_and_graph_it/
     tag: "7\_minutes"
-    text: Ajouter des tags de span et filtrer les données de performance de votre application
+    text: Ajouter des tags de span et filtrer ou regrouper les données de performance de votre application
   - link: /tracing/guide/
     tag: ''
     text: Tous les guides
@@ -118,7 +118,7 @@ Dans ce guide, vous découvrirez comment procéder pour ajouter des métriques d
 
     {{< img src="tracing/guide/apm_dashboard/dashboard_10.mp4" alt="dashboard 10" video="true"  style="width:90%;">}}
 
-    Tirez parti de ces fonctionnalités pour mettre en œuvre les trois piliers de la visibilité de Datadog et profiter d'une visibilité optimale sur toutes vos métriques. Un dashboard simple peut être facilement transformé en outil tout-en-un puissant qui vous permettra de surveiller efficacement votre organisation :
+    Tirez parti de ces fonctionnalités pour mettre en œuvre les trois piliers de la visibilité de Datadog et profiter d'une visibilité optimale sur toutes vos métriques. Un dashboard simple peut être transformé en outil tout-en-un puissant qui vous permettra de surveiller efficacement votre organisation :
 
     {{< img src="tracing/guide/apm_dashboard/dashboard_7.mp4" alt="dashboard 7" video="true"  style="width:90%;">}}
 

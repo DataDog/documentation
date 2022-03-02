@@ -204,6 +204,24 @@ An organization's most popular dashboard displays five popularity bars. All othe
 
 **Note**: Traffic to public dashboard URLs is ignored for popularity.
 
+## Viewing dashboards on mobile devices
+
+The [Datadog Mobile App][1], available on the [Apple App Store][2] and [Google Play Store][3], enables you to view your dashboards in a mobile-friendly format.
+
+On the Dashboards page, you can view and search all of your dashboards, and filter them using the same template variables you have set up in the Datadog web app. Quickly filter your dashboards using template variable saved views. For more information about template variable saved views, see [Dashboard Saved Views][14]. Click on an individual dashboard to view it.
+
+**Note**: To set up or edit a dashboard, you must log in to the Datadog browser UI. For more information, see [Dashboards][4].
+
+{{< img src="dashboards/dashboards-list-mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Dashboards on iOS and Android">}}
+
+## Creating mobile home screen dashboards
+
+The [Datadog Mobile App][1], available on the [Apple App Store][2] and [Google Play Store][3], also comes equipped with mobile home screen widgets. These widgets enable you to monitor service health and infrastructure without having to open the mobile app.
+
+You can add SLOs, Monitors, and Open Incidents widgets to your mobile home screen alongside other development and collaboration tools to optimize your triage and incident management workflows.
+
+{{< img src="dashboards/dashboards-widget-mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Widgets on iOS and Android">}}
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -221,3 +239,4 @@ An organization's most popular dashboard displays five popularity bars. All othe
 [11]: /dashboards/guide/how-to-use-terraform-to-restrict-dashboard-edit/
 [12]: https://app.datadoghq.com/dashboard/lists
 [13]: /help/
+[14]: /dashboards/template_variables/#saved-views

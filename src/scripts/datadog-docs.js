@@ -11,8 +11,6 @@ const { env } = document.documentElement.dataset;
 const { gaTag } = configDocs[env];
 
 // gTag
-window.dataLayer = window.dataLayer || [];
-
 gtag('js', new Date());
 gtag('config', gaTag);
 
@@ -58,7 +56,7 @@ $(document).ready(function () {
 
     if (!document.body.classList.contains('api')){
         $(window).on('resize scroll', function() {
-            const headerHeight = $('body > header').height();
+            const headerHeight = $('body .main-nav').height();
             const padding = 200;
             $('.sidenav-nav').css(
                 'maxHeight',
@@ -66,7 +64,7 @@ $(document).ready(function () {
             );
         });
     }
-    
+
     updateMainContentAnchors();
 
     // add targer-blank to external links
@@ -130,7 +128,7 @@ function hasParentLi(el) {
     }
 }
 
-function getPathElement() {
+function getPathElement(event = null) {
     const domain = window.location.origin;
     let path = window.location.pathname;
     const activeMenus = document.querySelectorAll('.side .sidenav-nav-main .active, header .sidenav-nav-main .active');
@@ -151,7 +149,7 @@ function getPathElement() {
         const dataPathString = `${docsActiveSection}/guide`;
 
         sideNavPathElement = document.querySelector(`.side [data-path*="${dataPathString}"]`);
-        mobileNavPathElement = document.querySelector(`header [data-path*="${dataPathString}"]`); 
+        mobileNavPathElement = document.querySelector(`header [data-path*="${dataPathString}"]`);
     }
 
     if (path.includes('account_management/billing')) {
@@ -178,7 +176,20 @@ function getPathElement() {
             'header .nav-top-level > [data-path*="integrations"]'
         );
     }
-    
+
+    // if security rules section that has links to hashes, #cat-workload-security etc. try and highlight correct sidenav
+    if (path.includes('security_platform/default_rules')) {
+        const ref = ((event) ? event.target.href : window.location.hash) || window.location.hash;
+        if(ref) {
+          sideNavPathElement = document.querySelector(
+            `.side [href*="${ref}"]`
+          );
+          mobileNavPathElement = document.querySelector(
+            `header [href*="${ref}"]`
+          );
+        }
+    }
+
     if (sideNavPathElement) {
         sideNavPathElement.classList.add('active');
         hasParentLi(sideNavPathElement);
@@ -206,7 +217,7 @@ function closeNav(){
 
 function updateSidebar(event) {
     closeNav();
-    getPathElement();
+    getPathElement(event);
 
     const isLi = event.target.nodeName === 'LI';
 
@@ -239,7 +250,7 @@ function updateSidebar(event) {
                 }
             }
         })
-        
+
     } else {
         if (event.target.closest('li').querySelector('a')) {
             event.target
@@ -339,11 +350,21 @@ function rulesListClickHandler(event, pathString) {
     if (event.target.matches('#rules .list-group .js-group a.js-page')) {
         event.preventDefault();
         const targetURL = event.target.href;
-        
+
         if (targetURL.includes(pathString)) {
             loadPage(targetURL);
             window.history.pushState({}, '' /* title */, targetURL);
             updateSidebar(event);
+        }
+    }
+    // if security rules section that has links to hashes, #cat-workload-security etc. try and highlight correct sidenav
+    // by passing the relevant sidenav target to updateSidebar()
+    if (event.target.matches('.controls a')) {
+        const split = event.target.href.split('#')
+        const targetURL = (split.length > 1) ? `#${split[1]}` : event.target.href;
+        const target = document.querySelector(`.side [href*="${targetURL}"]`);
+        if (target) {
+          updateSidebar({target: target});
         }
     }
 }
@@ -389,3 +410,4 @@ window.addEventListener(
     },
     false
 );
+

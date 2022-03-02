@@ -123,7 +123,7 @@ Agent は、[Helm チャート][2]を使用してデプロイすることも、[
       datadog/datadog
   ```
 
-  構成可能な値の完全なリストについては、[Datadog Helm のドキュメント][1]を参照してください。
+  構成可能な値の一覧は、[Datadog helm-charts リポジトリ][1]を参照してください。
 
 
 [1]: https://github.com/DataDog/helm-charts/tree/master/charts/datadog#values

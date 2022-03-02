@@ -134,7 +134,7 @@ $('a[data-version^="v"]').click(function() {
 
 // Scroll the active top level nav item into view below Docs search input
 if (document.body.classList.contains('api')) {
-    const headerHeight = $('body > header').height();
+    const headerHeight = $('body .main-nav').height();
     const padding = 200;
     $('.sidenav-nav').css(
         'maxHeight',

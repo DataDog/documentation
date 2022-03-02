@@ -16,11 +16,24 @@ The following widgets support Incident Management Analytics:
 * Top List 
 * Query Value 
 
+### Measures
+
+Datadog provides the following aggregated measures out of the box for forming analytics queries:
+
+1. Count (*)
+2. Customer Impact Duration 
+3. Status Active Duration (amount of time the incident was in `Active` status)
+4. Status Stable Duration (amount of time the incident was in `Stable` status)
+5. Time to Repair (customer impact end timestamp - incident creation timestamp)
+6. Time to Resolve (resolved timestamp - created timestamp)
+
+In addition to these defaults, you can create new measures by adding custom *Number* property fields in your [Incident Settings][5]. 
+
 ### Graph configuration
 
 To configure your graph using Incident Management Analytics data, follow these steps:
 
-1. [Select your visualization][5].
+1. [Select your visualization][6].
 2. Select `Incidents` from the data source dropdown menu.
 3. Select a measure from the yellow dropdown menu.
      - **Default Statistic:** Counts the number of incidents.
@@ -28,7 +41,7 @@ To configure your graph using Incident Management Analytics data, follow these s
 5. (Optional) Select a rollup for the measure.
 6. (Optional) Use the search bar to filter the statistic down to a specific subset of incidents.
 7. (Optional) Select a facet in the pink dropdown menu to break the measure up by group and select a limited number of groups to display.
-8. [Title the graph][6].
+8. [Title the graph][7].
 9. Save your widget.
 
 **Example:** Weekly Outage Customer Impact Duration by Service
@@ -47,5 +60,6 @@ To configure your graph using Incident Management Analytics data, follow these s
 [2]: /notebooks/
 [3]: https://app.datadoghq.com/dash/integration/30523/incident-management-overview?from_ts=1632093826308&to_ts=1634685826308&live=true
 [4]: https://app.datadoghq.com/notebook/template/11/incident-management-overview
-[5]: /dashboards/querying/#select-your-visualization
-[6]: /dashboards/querying/#create-a-title
+[5]: /monitors/incident_management/incident_settings#property-fields
+[6]: /dashboards/querying/#select-your-visualization
+[7]: /dashboards/querying/#create-a-title

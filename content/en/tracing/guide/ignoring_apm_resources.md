@@ -10,7 +10,7 @@ There are two ways to specify that such an endpoint should be untraced and exclu
 - [Trace Agent configuration](#trace-agent-configuration-options) (in Datadog Agent), or
 - [Tracer configuration](#tracer-configuration-options).
 
-<div class="alert alert-warning"><strong>Note</strong>: Filtering traces using any of the following options removes these requests from <a href="/tracing/guide/metrics_namespace/">trace metrics</a>. For information on how to reduce ingestion without affecting the trace metrics, see <a href="/tracing/trace_retention_and_ingestion/#ingestion-controls">ingestion controls</a>.</div>
+<div class="alert alert-warning"><strong>Note</strong>: Filtering traces using any of the following options removes these requests from <a href="/tracing/guide/metrics_namespace/">trace metrics</a>. For information on how to reduce ingestion without affecting the trace metrics, see <a href="/tracing/trace_ingestion/ingestion_controls">ingestion controls</a>.</div>
 
 If you need assistance, contact [Datadog support][1].
 
@@ -54,7 +54,7 @@ apm_config:
     reject: ["http.url:http://localhost:5050/healthcheck"]
 {{< /code-block >}}
 
-<div class="alert alert-warning"><strong>Note</strong>: Filtering traces this way removes these requests from <a href="/tracing/guide/metrics_namespace/">trace metrics</a>. For information on how to reduce ingestion without affecting the trace metrics, see <a href="/tracing/trace_retention_and_ingestion/#ingestion-controls">ingestion controls</a>.</div>
+<div class="alert alert-warning"><strong>Note</strong>: Filtering traces this way removes these requests from <a href="/tracing/guide/metrics_namespace/">trace metrics</a>. For information on how to reduce ingestion without affecting the trace metrics, see <a href="/tracing/trace_ingestion/ingestion_controls">ingestion controls</a>.</div>
 
 
 ### Ignoring based on resources
@@ -120,11 +120,12 @@ In your docker run command to spin up the Datadog Agent, add `DD_APM_IGNORE_RESO
 
 {{< code-block lang="bash" >}}
 docker run -d --name datadog-agent \
+              --cgroupns host \
               -v /var/run/docker.sock:/var/run/docker.sock:ro \
               -v /proc/:/host/proc/:ro \
               -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
               -e DD_API_KEY=<> \
-        -e DD_APM_IGNORE_RESOURCES="Api::HealthchecksController#index$" \
+              -e DD_APM_IGNORE_RESOURCES="Api::HealthchecksController#index$" \
               -e DD_APM_ENABLED=true \
               -e DD_APM_NON_LOCAL_TRAFFIC=true \
               gcr.io/datadoghq/agent:latest
@@ -217,7 +218,7 @@ If you use AWS ECS (such as on EC2), in your Datadog Agent container definition,
 {{% /tab %}}
 {{< /tabs >}}
 
-<div class="alert alert-warning"><strong>Note</strong>: Filtering traces this way removes these requests from <a href="/tracing/guide/metrics_namespace/">trace metrics</a>. For information on how to reduce ingestion without affecting the trace metrics, see <a href="/tracing/trace_retention_and_ingestion/#ingestion-controls">ingestion controls</a>.</div>
+<div class="alert alert-warning"><strong>Note</strong>: Filtering traces this way removes these requests from <a href="/tracing/guide/metrics_namespace/">trace metrics</a>. For information on how to reduce ingestion without affecting the trace metrics, see <a href="/tracing/trace_ingestion/ingestion_controls">ingestion controls</a>.</div>
 
 ## Tracer configuration options
 
@@ -315,7 +316,7 @@ public class GreetingController {
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
-<div class="alert alert-warning"><strong>Note</strong>: Filtering traces this way removes these requests from <a href="/tracing/guide/metrics_namespace/">trace metrics</a>. For information on how to reduce ingestion without affecting the trace metrics, see <a href="/tracing/trace_retention_and_ingestion/#ingestion-controls">ingestion controls</a>.</div>
+<div class="alert alert-warning"><strong>Note</strong>: Filtering traces this way removes these requests from <a href="/tracing/guide/metrics_namespace/">trace metrics</a>. For information on how to reduce ingestion without affecting the trace metrics, see <a href="/tracing/trace_ingestion/ingestion_controls">ingestion controls</a>.</div>
 
 [1]: /help/
 [2]: /tracing/guide/add_span_md_and_graph_it/

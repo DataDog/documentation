@@ -81,19 +81,13 @@ func main() {
 
 {{< programming-lang lang="nodejs" >}}
 
-To enable debug mode for the Datadog Node.js Tracer, enable it during its `init`:
+To enable debug mode for the Datadog Node.js Tracer, use the environment variable `DD_TRACE_DEBUG=true`. 
 
-```javascript
-const tracer = require('dd-trace').init({
-  debug: true
-})
-```
+**Note:** For versions below 2.X, debug mode could be enabled programmatically inside the tracer initialization but this is no longer supported.
 
 **Application Logs**
 
-By default, logging from this library is disabled. In order to get debugging information and errors sent to logs, set the `debug` options to `true` in the [init()][1] method.
-
-The tracer will then log debug information to `console.log()` and errors to `console.error()`. You can change this behavior by passing a custom logger to the tracer. The logger should contain `debug()` and `error()` methods that can handle messages and errors, respectively.
+In debug mode the tracer will log debug information to `console.log()` and errors to `console.error()`. You can change this behavior by passing a custom logger to the tracer. The logger should contain `debug()` and `error()` methods that can handle messages and errors, respectively.
 
 For example:
 
@@ -108,27 +102,25 @@ const tracer = require('dd-trace').init({
   logger: {
     debug: message => logger.trace(message),
     error: err => logger.error(err)
-  },
-  debug: true
+  }
 })
 ```
 
 Then check the Agent logs to see if there is more info about your issue:
 
-* If the trace was sent to the Agent properly, you should see `Response from the Agent: OK` log entries. This indicates that the tracer is working properly, so the problem may be with the Agent itself. Refer to the [Agent troubleshooting guide][2] for more information.
+* If the trace was sent to the Agent properly, you should see `Response from the Agent: OK` log entries. This indicates that the tracer is working properly, so the problem may be with the Agent itself. Refer to the [Agent troubleshooting guide][1] for more information.
 
-* If an error was reported by the Agent (or the Agent could not be reached), you will see `Error from the Agent` log entries. In this case, validate your network configuration to ensure the Agent can be reached. If you are confident the network is functional and that the error is coming from the Agent, refer to the [Agent troubleshooting guide][2].
+* If an error was reported by the Agent (or the Agent could not be reached), you will see `Error from the Agent` log entries. In this case, validate your network configuration to ensure the Agent can be reached. If you are confident the network is functional and that the error is coming from the Agent, refer to the [Agent troubleshooting guide][1].
 
-If neither of these log entries is present, then no request was sent to the Agent, which means that the tracer is not instrumenting your application. In this case, [contact Datadog support][3] and provide the relevant log entries with [a flare][4].
+If neither of these log entries is present, then no request was sent to the Agent, which means that the tracer is not instrumenting your application. In this case, [contact Datadog support][2] and provide the relevant log entries with [a flare][3].
 
-For more tracer settings, check out the [API documentation][5].
+For more tracer settings, check out the [API documentation][4].
 
 
-[1]: https://datadog.github.io/dd-trace-js/Tracer.html#init
-[2]: /agent/troubleshooting/
-[3]: /help/
-[4]: /agent/troubleshooting/#send-a-flare
-[5]: https://datadog.github.io/dd-trace-js/#tracer-settings
+[1]: /agent/troubleshooting/
+[2]: /help/
+[3]: /agent/troubleshooting/#send-a-flare
+[4]: https://datadog.github.io/dd-trace-js/#tracer-settings
 {{< /programming-lang >}}
 
 {{< programming-lang lang=".NET" >}}

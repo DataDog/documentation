@@ -88,6 +88,12 @@ RBAC restrict access to monitors is in beta. To request access, contact <a href=
 
 Use this section to restrict access to you, everyone in your org with your role, or to specific roles in your org. For more information about roles, see the [RBAC][9] documentation.
 
+## View Monitors and Triage Alerts on Mobile
+
+You can view Monitor Saved Views from your mobile home screen or view and mute monitors by downloading the [Datadog Mobile App][10], available on the [Apple App Store][11] and [Google Play Store][12]. This helps with triaging when you are away from your laptop or desktop.
+
+{{< img src="monitors/monitors_mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Incidents on Mobile App">}}
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -101,3 +107,6 @@ Use this section to restrict access to you, everyone in your org with your role,
 [7]: /monitors/create/types/metric/?tab=threshold#set-alert-conditions
 [8]: /monitors/notify/#conditional-variables
 [9]: /account_management/rbac/
+[10]: /mobile/
+[11]: https://apps.apple.com/app/datadog/id1391380318
+[12]: https://play.google.com/store/apps/details?id=com.datadog.app

@@ -138,7 +138,7 @@ For information about the different methods for setting environment variables, s
    ```
 
    <div class="alert alert-warning">
-     <strong>Note:</strong> Use <code>stop</code> and <code>start</code> commands. A reset or restart does not always work.
+     <strong>Note:</strong> Always use the commands above to completely stop and restart IIS to enable the tracer. Avoid using the IIS Manager GUI application or <code>iisreset.exe</code>.
    </div>
 
 
@@ -309,7 +309,7 @@ var settings = TracerSettings.FromDefaultSources();
 settings.Environment = "prod";
 settings.ServiceName = "MyService";
 settings.ServiceVersion = "abc123";
-settings.AgentUri = new Uri("http://localhost:8126/");
+settings.Exporter.AgentUri = new Uri("http://localhost:8126/");
 
 // configure the global Tracer settings
 Tracer.Configure(settings);
@@ -340,7 +340,7 @@ To configure the Tracer using a JSON file, create `datadog.json` in the instrume
   <strong>Note:</strong> On Linux, the names of environment variables are case-sensitive.
 </div>
 
-Using the methods described above, customize your tracing configuration with the following variables. Use the environment variable name (for example, `DD_TRACE_AGENT_URL`) when setting environment variables or configuration files. Use the TracerSettings property (for example, `AgentUri`) when changing settings in code.
+Using the methods described above, customize your tracing configuration with the following variables. Use the environment variable name (for example, `DD_TRACE_AGENT_URL`) when setting environment variables or configuration files. Use the TracerSettings property (for example, `Exporter.AgentUri`) when changing settings in code.
 
 #### Unified Service Tagging
 
@@ -363,7 +363,7 @@ If specified, sets the version of the service. Added in version 1.17.0.
 The following configuration variables are available for both automatic and custom instrumentation:
 
 `DD_TRACE_AGENT_URL`
-: **TracerSettings property**: `AgentUri`<br>
+: **TracerSettings property**: `Exporter.AgentUri`<br>
 Sets the URL endpoint where traces are sent. Overrides `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT` if set. <br>
 **Default**: `http://<DD_AGENT_HOST>:<DD_TRACE_AGENT_PORT>`
 
@@ -392,7 +392,6 @@ The number of traces allowed to be submitted per second.
 If specified, adds all of the specified tags to all generated spans.
 
 `DD_TRACE_DEBUG`
-: **TracerSettings property**: `DebugEnabled` <br>
 Enables or disables debug logging. Valid values are: `true` or `false`.<br>
 **Default**: `false`
 
@@ -649,7 +648,7 @@ When using `systemctl` to run .NET applications as a service, you can also set e
 [2]: /agent/
 [3]: https://app.datadoghq.com/apm/traces
 [4]: /getting_started/tagging/unified_service_tagging/
-[5]: /tracing/trace_retention_and_ingestion/
+[5]: /tracing/trace_ingestion/
 [6]: /tracing/setup_overview/compatibility_requirements/dotnet-core#integrations
 [7]: /tracing/setup_overview/custom_instrumentation/dotnet/
 [8]: https://www.freedesktop.org/software/systemd/man/systemctl.html#set-environment%20VARIABLE=VALUE%E2%80%A6

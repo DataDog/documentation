@@ -112,11 +112,11 @@
   },
 
   "get_started_free": {
-    "other": "無償トライアルを開始"
+    "other": "無料で試す"
   },
 
   "get_started_free_short": {
-    "other": "無料トライアル"
+    "other": "無料で試す"
   },
 
   "documentation_search": {
@@ -314,5 +314,5 @@
   "beta_check":{
     "other": "Beta"
   }
-  
+
 }

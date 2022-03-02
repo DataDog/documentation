@@ -12,8 +12,17 @@ further_reading:
       text: 'Installing Ruby Serverless Monitoring'
 ---
 
-### Instrument your serverless application
+## Quick start
 
-Select the Lambda runtime below for instructions to instrument your serverless application.
+If you are new to Datadog, you can get started by [signing up for a Datadog account][1], then following the instructions for [installing Datadog's Lambda Extension][2]. Completing these steps will configure your Lambda functions to send real-time metrics, logs, and traces to Datadog:
 
-   {{< partial name="serverless/getting-started-languages.html" >}}
+{{< img src="serverless/aws-fully-managed-services-serverless-monitoring-hero.png" alt="Datadog Serverless Monitoring"  style="width:100%;" >}}
+
+## Installation instructions
+
+For more detailed installation instructions, select the Lambda runtime below for instructions to instrument your serverless application:
+
+{{< partial name="serverless/getting-started-languages.html" >}}
+
+[1]: https://app.datadoghq.com/signup/
+[2]: https://app.datadoghq.com/signup/agent#lambda

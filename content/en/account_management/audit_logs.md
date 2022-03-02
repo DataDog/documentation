@@ -15,7 +15,7 @@ As an administrator or security team member, you can use [Audit Logs][1] to see 
 
 There are two types of events that can occur within an audit log: **request events**, which translate all requests made to Datadog’s API into customer records, or **product-specific events**.
 
-For example, track **request events** such as breaking events so you can see what API calls led up to the event. Or, if you're an enterprise or billing admin, use audit logs to track user events that change the state of your infrastructure.
+For example, track **request events** so you can see what API calls led up to the event. Or, if you're an enterprise or billing admin, use audit logs to track user events that change the state of your infrastructure.
 
 In this circumstance, audit logs are helpful when you want to know product-specific events such as:
 

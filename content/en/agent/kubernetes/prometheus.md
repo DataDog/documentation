@@ -59,7 +59,7 @@ metadata:
         ad.datadoghq.com/<CONTAINER_IDENTIFIER>.instances: |
             [
               {
-                "prometheus_url": "http://%%host%%:%%port%%/<PROMETHEUS_ENDPOINT> ",
+                "openmetrics_endpoint": "http://%%host%%:%%port%%/<PROMETHEUS_ENDPOINT> ",
                 "namespace": "<METRICS_NAMESPACE_PREFIX_FOR_DATADOG>",
                 "metrics": [{"<METRIC_TO_FETCH>":"<NEW_METRIC_NAME>"}]
               }
@@ -113,7 +113,7 @@ For a full list of available parameters for instances, including `namespace` and
               ad.datadoghq.com/prometheus-example.instances: |
                 [
                   {
-                    "prometheus_url": "http://%%host%%:%%port%%/metrics",
+                    "openmetrics_endpoint": "http://%%host%%:%%port%%/metrics",
                     "namespace": "documentation_example_kubernetes",
                     "metrics": [ {"promhttp_metric_handler_requests_total": "prometheus.handler.requests.total"}]
                   }
