@@ -656,6 +656,13 @@
       "description": "Get Usage Attribution returns \"OK\" response"
     }
   ],
+  "GetUsageCIApp": [
+    {
+      "group": "usage_metering",
+      "suffix": "",
+      "description": "Get hourly usage for CI Visibility returns \"OK\" response"
+    }
+  ],
   "GetUsageCloudSecurityPostureManagement": [
     {
       "group": "usage_metering",
