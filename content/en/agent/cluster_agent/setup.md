@@ -238,9 +238,9 @@ Kubernetes events are beginning to flow into your Datadog account, and relevant 
 
 ### Windows containers
 
-The Datadog Cluster Agent can only deployed on Linux nodes.
+The Datadog Cluster Agent can only be deployed on Linux nodes.
 
-To monitor Windows containers, use two Helm charts in a mixed cluster. The first Helm chart deploys the Datadog Cluster Agent (with `targetSystem: linux`). The second Helm chart (with `targetSystem: windows`) targets only Windows nodes and connects to the existing Cluster Agent deployed as aprt of the first Helm chart.
+To monitor Windows containers, use two installations of the Helm chart in a mixed cluster. The first Helm chart deploys the Datadog Cluster Agent and the Agent DaemonSet for Linux nodes (with `targetSystem: linux`). The second Helm chart (with `targetSystem: windows`) deploys the Agent only on Windows nodes and connects to the existing Cluster Agent deployed as part of the first Helm chart.
 
 Use the following `values.yaml` file to configure communication between Agents deployed on Windows nodes and the Cluster Agent.
 
