@@ -12,7 +12,7 @@
       }
     },
     "relationships": {
-      "commander": {
+      "commander_user": {
         "data": {
           "type": "users",
           "id": "string"

@@ -28,7 +28,7 @@ Datadog has many pricing plans to fit your needs. For more information, see the 
 * An **Indexed Span** is an individual request against an individual service in your stack. Datadog charges based on the total number of spans indexed by [retention filters][3] within Datadog APM.
 * An **Ingested Span** is an individual request against an individual service in your stack. Datadog charges based on the total number of gigabytes of spans ingested into Datadog APM.
 
-You can put controls in place for both Indexed and Ingested span volumes. For more information, read the [Trace Retention and Ingestion Controls][4] documentation.
+You can put controls in place for both Indexed and Ingested span volumes. For more information, read the [Trace Ingestion][4] and [Retention][5] documentation.
 
 **Note:** Indexed Spans were formerly known as Analyzed Spans and renamed with the launch of Tracing Without Limits on October 20th, 2020.
 
@@ -82,14 +82,15 @@ You can put controls in place for both Indexed and Ingested span volumes. For mo
 
 ## Troubleshooting
 
-For technical questions, contact [Datadog support][5].
+For technical questions, contact [Datadog support][6].
 
-Contact [Sales][6] or your [Customer Success][7] Manager to discuss hourly pricing or billing for your account.
+Contact [Sales][7] or your [Customer Success][8] Manager to discuss hourly pricing or billing for your account.
 
 [1]: https://www.datadoghq.com/pricing
 [2]: /metrics/custom_metrics/
-[3]: /tracing/trace_retention_and_ingestion/#retention-filters
-[4]: /tracing/trace_retention_and_ingestion/
-[5]: /help/
-[6]: mailto:sales@datadoghq.com
-[7]: mailto:success@datadoghq.com
+[3]: /tracing/trace_retention/#retention-filters
+[4]: /tracing/trace_ingestion/
+[5]: /tracing/trace_retention/
+[6]: /help/
+[7]: mailto:sales@datadoghq.com
+[8]: mailto:success@datadoghq.com

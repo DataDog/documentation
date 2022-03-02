@@ -262,6 +262,14 @@ frontend database_monitoring_samples_frontend
     option tcplog
     default_backend datadog-database-monitoring-samples
 
+# This declares the endpoint where your Agents connects for
+# sending Network Devices Monitoring metadata (e.g the value of "network_devices.metadata.dd_url")
+frontend network_devices_metadata_frontend
+    bind *:3841
+    mode http
+    option tcplog
+    default_backend datadog-network-devices-metadata
+
 # This is the Datadog server. In effect any TCP request coming
 # to the forwarder frontends defined above are proxied to
 # Datadog's public endpoints.
@@ -299,7 +307,7 @@ backend datadog-profiles
     balance roundrobin
     mode tcp
     # The following configuration is for HAProxy 1.8 and newer
-    server-template mothership 5 profile.agent.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify none check resolvers my-dns init-addr none resolve-prefer ipv4
+    server-template mothership 5 intake.profile.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify none check resolvers my-dns init-addr none resolve-prefer ipv4
     # Uncomment the following configuration for older HAProxy versions
     # server mothership profile.agent.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify none
 
@@ -334,6 +342,14 @@ backend datadog-database-monitoring-samples
     server-template mothership 5 dbquery-intake.{{< region-param key="dd_site" >}}:443  check port 443 ssl verify none check resolvers my-dns init-addr none resolve-prefer ipv4
     # Uncomment the following configuration for older HAProxy versions
     # server datadog agent-http-intake.logs.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify none
+
+backend datadog-network-devices-metadata
+    balance roundrobin
+    mode http
+    # The following configuration is for HAProxy 1.8 and newer
+    server-template mothership 5 ndm-intake.{{< region-param key="dd_site" >}}:443  check port 443 ssl verify none check resolvers my-dns init-addr none resolve-prefer ipv4
+    # Uncomment the following configuration for older HAProxy versions
+    # server mothership ndm-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify none
 
 ```
 
@@ -383,6 +399,11 @@ database_monitoring:
         logs_no_ssl: true
     samples:
         logs_dd_url: haproxy.example.com:3840
+        logs_no_ssl: true
+
+network_devices:
+    metadata:
+        logs_dd_url: haproxy.example.com:3841
         logs_no_ssl: true
 ```
 
@@ -515,6 +536,11 @@ stream {
         proxy_ssl on;
         proxy_pass dbquery-intake.{{< region-param key="dd_site" >}}:443;
     }
+    server {
+        listen 3841; #listen for network devices metadata
+        proxy_ssl on;
+        proxy_pass ndm-intake.{{< region-param key="dd_site" >}}:443;
+    }
 }
 ```
 
@@ -535,6 +561,10 @@ database_monitoring:
         dd_url: "<PROXY_SERVER_DOMAIN>:3839"
     samples:
         dd_url: "<PROXY_SERVER_DOMAIN>:3840"
+
+network_devices:
+    metadata:
+        dd_url: "<PROXY_SERVER_DOMAIN>:3841"
 ```
 
 When sending logs over TCP, see <a href="/agent/logs/proxy">TCP Proxy for Logs</a>.

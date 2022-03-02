@@ -112,7 +112,7 @@
   },
 
   "get_started_free": {
-    "other": "COMMENCER GRATUITEMENT"
+    "other": "ESSAI GRATUIT"
   },
 
   "get_started_free_short": {
@@ -314,5 +314,5 @@
   "beta_check":{
     "other": "Beta"
   }
-  
+
 }

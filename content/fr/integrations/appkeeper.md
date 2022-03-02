@@ -37,7 +37,7 @@ supported_os:
 ---
 ## Présentation
 
-SIOS AppKeeper redémarre automatiquement les services Amazon EC2 ayant échoué lorsque des notifications sont envoyées par Datadog. Il n'est ainsi plus nécessaire de prévoir une intervention manuelle coûteuse. Lorsque Datadog déclenche une alerte, le service EC2 est redémarré via l'API AppKeeper Recovery.
+SIOS AppKeeper redémarre automatiquement les services Amazon EC2 ayant échoué lorsque des notifications sont envoyées par Datadog. Il n'est ainsi plus nécessaire de prévoir une intervention manuelle coûteuse. Lorsque Datadog déclenche une alerte, le service EC2 est redémarré à l'aide de l'API AppKeeper Recovery.
 
 ## Configuration
 
@@ -53,7 +53,7 @@ Récupérez la clé d'API SIOS AppKeeper à partir de l'interface graphique d'A
 
 ### Installer et configurer l'intégration Webhooks
 
-1. Dans l'app Datadog, accédez à l'[intégration Webhooks][2] et installez-la.
+1. Sur le site Datadog, accédez à l'[intégration Webhooks][2] et installez-la.
 2. Sélectionnez l'onglet **Configuration**.
 3. Sous l'en-tête **Webhooks**, cliquez sur **New**.
 4. Saisissez l'URL suivante : "https://api.appkeeper.sios.com/v2/integration/{ID_compte_AWS}/actions/recover".
@@ -76,7 +76,7 @@ Les résultats des récupérations par AppKeeper sont indiqués dans l'interface
 
 ![snapshot][6]
 
-Pour en savoir plus sur l'intégration AppKeeper, consultez la [documentation][7] AppKeeper.
+Pour en savoir plus, consultez la [documentation relative à l'intégration AppKeeper][7] (en anglais).
 
 ## Données collectées
 

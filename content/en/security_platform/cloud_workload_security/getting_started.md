@@ -25,8 +25,8 @@ There are two types of monitoring that the Datadog Agent uses for Cloud Workload
 
 * Datadog Agent >= 7.27.0
 * Data collection is done using eBPF, so Datadog minimally requires platforms that have underlying Linux kernel versions of 4.15.0+ or have eBPF features backported. CWS supports the following Linux distributions:
-  * Ubuntu 16.04+
-  * Debian 9+
+  * Ubuntu 18.04+
+  * Debian 10+
   * Amazon Linux 2
   * Fedora 26+
   * SUSE 15+
@@ -67,6 +67,7 @@ The following command can be used to start the Runtime Security Agent and `syste
 {{< code-block lang="bash" filename="docker-runtime-security.sh" >}}
 
 docker run -d --name dd-agent \
+  --cgroupns host \
   --security-opt apparmor:unconfined \
   --cap-add SYS_ADMIN \
   --cap-add SYS_RESOURCE \

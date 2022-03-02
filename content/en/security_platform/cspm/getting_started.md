@@ -13,7 +13,7 @@ further_reading:
   text: "Learn about frameworks and industry benchmarks"
 ---
 
-{{< site-region region="us3,us5,gov" >}}
+{{< site-region region="gov" >}}
 <div class="alert alert-warning">
 Cloud Security Posture Management is not currently available in this site.
 </div>

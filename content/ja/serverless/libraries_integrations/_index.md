@@ -1,5 +1,5 @@
 ---
-title: ライブラリとインテグレーション
+title: サーバーレスライブラリとインテグレーション
 kind: documentation
 further_reading:
   - link: /serverless/serverless_integrations/plugin/
@@ -53,7 +53,7 @@ aliases:
 
 3. 完了したら、[サーバレスビュー][2]に移動し、Lambda 関数で新しい `filesystemid` タグを使用します。
 
-{{< img src="integrations/amazon_lambda/efs_for_lambda.gif" alt="Amazon EFS for Lambda" >}}
+{{< img src="integrations/amazon_lambda/efs_for_lambda.mp4" alt="Amazon EFS for Lambda" video=true >}}
 
 ## Lambda@Edge
 

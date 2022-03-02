@@ -147,9 +147,8 @@ Tests can be only recorded from [Google Chrome][10]. To record your test, downlo
 3. As you click on your application going through the user journey you want to monitor, your actions are automatically recorded and used to create [steps][12] within your browser test scenario on the left.
 4. In addition to the automatically recorded steps, you can also use the [steps][12] available in the upper left corner to enrich your scenario:
     {{< img src="synthetics/browser_tests/manual_steps.png" alt="Browser Test steps" style="width:80%;" >}}
-
-    **Note**: You should always make sure to end your browser test with an [assertion][13] to confirm the journey executed by the browser test resulted in the expected state.
-5. Once you have finished your scenario, click on **Save and Launch Test**.
+    **Note**: You should always make sure to **end your browser test with an [assertion][13]** to confirm the journey executed by the browser test resulted in the expected state.
+5. Once you have finished your scenario, click **Save and Launch Test**.
 
 ## Permissions
 

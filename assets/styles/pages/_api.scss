@@ -9,21 +9,13 @@ $ddpurple: #632ca6;
         }
     }
     .api-toolbar {
-        margin-top: 40px;
-
-        @include media-breakpoint-up(lg) {
-            margin-top: 0;
-        }
+        margin-top: 0;
     }
 
     .main-api,
     .sidenav-api {
-        @include media-breakpoint-up(lg) {
-            margin-top: -20px;
-        }
-
-        @include media-breakpoint-up(xl) {
-            margin-top: 30px;
+        @include media-breakpoint-between(lg, lg) {
+          margin-top: 30px;
         }
     }
 

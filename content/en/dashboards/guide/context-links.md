@@ -26,25 +26,25 @@ This guide introduces **context links** in your dashboards.
 
 Context links bridge dashboard widgets with other pages in Datadog, as well as the third-party applications you have integrated into your workflows.
 
-Users with [edit permissions][24] to dashboards can configure which links are accessible in the link list.
+Users with [edit permissions][4] to dashboards can configure which links are accessible in the link list.
 
 ### Default context links
  
  {{< img src="dashboards/guide/context_links/default-links.png" alt="Default links" style="width:75%;" >}}
 
-By default, the widget menu displays links to your host, [traces][4], and [logs][5]—along with links that correspond to the widget's data sources. For example, the menu displays a link to the [**RUM Explorer**][6] if your widget uses [RUM data][7]. Click **More Related Data Actions** to see additional links in the dropdown menu. 
+By default, the widget menu displays links to your host, [traces][5], and [logs][6]—along with links that correspond to the widget's data sources. For example, the menu displays a link to the [**RUM Explorer**][7] if your widget uses [RUM data][8]. Click **More Related Data Actions** to see additional links in the dropdown menu. 
 
 The widget contains links to the following pages:  
 
 | Link           | Description                                                                           |
 |----------------|---------------------------------------------------------------------------------------|
-| Hosts          | Links to the [Host Map][8] if series consists of more than one host. Links to the [Host Dashboard][25] if series consists of one host.|
-| Containers     | Links to the [Live Container][9] page.                                                |
-| Processeses    | Links to the [Live Process][10] page.                                                 |
-| APM Traces     | Opens a side panel displaying underlying traces that link to the [Trace Explorer][11].|
-| RUM Events     | Links to the [RUM Explorer][12].                                                      |
-| Profiles       | Links to the APM [Profile Explorer][13].                                              |
-| Logs           | Opens a side panel displaying underlying logs that link to the [Log Explorer][14].    |
+| Hosts          | Links to the [Host Map][9] if series consists of more than one host. Links to the [Host Dashboard][10] if series consists of one host.|
+| Containers     | Links to the [Live Container][11] page.                                                |
+| Processeses    | Links to the [Live Process][12] page.                                                 |
+| APM Traces     | Opens a side panel displaying underlying traces that link to the [Trace Explorer][13].|
+| RUM Events     | Links to the [RUM Explorer][14].                                                      |
+| Profiles       | Links to the APM [Profile Explorer][15].                                              |
+| Logs           | Opens a side panel displaying underlying logs that link to the [Log Explorer][16].    |
 
 When applicable, context links embed:
 
@@ -54,7 +54,7 @@ When applicable, context links embed:
 
 ### Customize context links
 
-For any [generic widget][15], enter its edit mode to access its **Context Links** section. Here, you can create your own context links, override default links, and promote or hide links.
+For any [generic widget][17], enter its edit mode to access its **Context Links** section. Here, you can create your own context links, override default links, and promote or hide links.
 
 {{< img src="dashboards/guide/context_links/edit-links.png" alt="Edit links" style="width:75%;" >}}
 
@@ -115,7 +115,7 @@ The following example explains how to create a link from a user in a dashboard t
 
 #### Context
 
-You use Datadog to monitor your merchant website. Your customer support team uses a dashboard that your [RUM][17] and [Security][18] teams set up to proactively identify your most engaged customers—or customers with a troublesome experience, and potentially reach out to them.
+You use Datadog to monitor your merchant website. Your customer support team uses a dashboard that your [Frontend][18] and [Security][19] teams set up to proactively identify your most engaged customers—or customers with a troublesome experience, and potentially reach out to them.
 
 To accelerate this troubleshooting workflow, the customer support team would like a direct connection between dashboards and a support solution, for example: Zendesk.
 
@@ -147,11 +147,11 @@ The following example explains how to create a link from a host in a dashboard w
 
 #### Context
 
-Your platform is hosted on [AWS EC2][19] instances, and the procedures to upscale and downscale your platform are mostly manual.
+Your platform is hosted on [AWS EC2][20] instances, and the procedures to upscale and downscale your platform are mostly manual.
 
 You have a dashboard where you've consolidated key health metrics for your infrastructure in Datadog. 
 
-To accelerate this operations workflow, you would like a direct connection between this dashboard and your [AWS Console][20]—for example, to upgrade from `t2.micro` to `t2.large`.
+To accelerate this operations workflow, you would like a direct connection between this dashboard and your [AWS Console][21]—for example, to upgrade from `t2.micro` to `t2.large`.
 
 #### Approach
 
@@ -188,9 +188,9 @@ The following example explains how to create a link from a RUM event in a dashbo
 
 #### Context
 
-You monitor your corporate website with Datadog. You may use [RUM][17] to understand your users and [Logs][21] to [oversee your API Gateways][22] from a more technical perspective.
+You monitor your corporate website with Datadog. You may use [RUM][18] to understand your users and [Logs][22] to [oversee your API Gateways][23] from a more technical perspective.
 
-Your frontend engineers typically use dashboards with high-level RUM insights. You API Gateways team maintains a [Saved View][23] in the Log Explorer, which is a fine-tuned perspective that the frontend monitoring team relies on to monitor information that is relevant to them. 
+Your frontend engineers typically use dashboards with high-level RUM insights. You API Gateways team maintains a [Saved View][24] in the Log Explorer, which is a fine-tuned perspective that the frontend monitoring team relies on to monitor information that is relevant to them. 
 
 {{< img src="dashboards/guide/context_links/logs-saved-view_result.jpg" alt="Logs Saved View result" style="width:90%;" >}}
 
@@ -198,11 +198,11 @@ To accelerate this troubleshooting workflow, the frontend monitoring teams would
 
 #### Approach to Saved Views
 
-[Saved Views][23] define the default query, visualization, and configuration options in the Log Explorer. A typical saved view link is `https://app.datadoghq.com/logs?saved_view=305130`, which encodes the Log Explorer URL under the hood. 
+[Saved Views][24] define the default query, visualization, and configuration options in the Log Explorer. A typical saved view link is `https://app.datadoghq.com/logs?saved_view=305130`, which encodes the Log Explorer URL under the hood. 
 
 You can append the saved view's short link to override any parameter in the resulting Log Explorer URL.
 
-For example, `https://app.datadoghq.com/logs?saved_view=305130&query=@source:nginx @network.client.ip:123.123.12.1` takes you to the [Log Explorer][14] as if you opened the saved view first, but the default query filter is replaced with `@source:nginx @network.client.ip:123.123.12.1`.
+For example, `https://app.datadoghq.com/logs?saved_view=305130&query=@source:nginx @network.client.ip:123.123.12.1` takes you to the [Log Explorer][16] as if you opened the saved view first, but the default query filter is replaced with `@source:nginx @network.client.ip:123.123.12.1`.
 
 #### Approach to remapping attributes
 
@@ -229,29 +229,28 @@ Remapping the IP address creates a context link that connects your RUM events wi
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+
 [1]: /monitors/notify/
 [2]: /dashboards/screenboards/
 [3]: /notebooks/
-[4]: https://app.datadoghq.com/apm/traces/
-[5]: https://app.datadoghq.com/logs
-[6]: https://app.datadoghq.com/rum/explorer/
-[7]: /real_user_monitoring/data_collected/
-[8]: /infrastructure/hostmap/#overview
-[9]: /infrastructure/livecontainers/
-[10]: /infrastructure/process/?tab=linuxwindows
-[11]: /tracing/trace_explorer/?tab=listview
-[12]: /real_user_monitoring/explorer/
-[13]: /tracing/profiler/search_profiles/
-[14]: /logs/explorer/
-[15]: /dashboards/widgets/
-[16]: /dashboards/widgets/timeseries/
-[17]: /real_user_monitoring/
-[18]: /security_platform/cloud_siem/
-[19]: /integrations/amazon_ec2/
-[20]: https://aws.amazon.com/console/
-[21]: /logs/
-[22]: /integrations/#cat-log-collection
-[23]: /logs/explorer/saved_views/
-
-[24]: /dashboards/#permissions
-[25]: /getting_started/dashboards/#explore-out-of-the-box-dashboards
+[4]: /dashboards/#permissions
+[5]: https://app.datadoghq.com/apm/traces/
+[6]: https://app.datadoghq.com/logs
+[7]: https://app.datadoghq.com/rum/explorer/
+[8]: /real_user_monitoring/data_collected/
+[9]: /infrastructure/hostmap/#overview
+[10]: /getting_started/dashboards/#explore-out-of-the-box-dashboards
+[11]: /infrastructure/livecontainers/
+[12]: /infrastructure/process/?tab=linuxwindows
+[13]: /tracing/trace_explorer/?tab=listview
+[14]: /real_user_monitoring/explorer/
+[15]: /tracing/profiler/search_profiles/
+[16]: /logs/explorer/
+[17]: /dashboards/widgets/
+[18]: /real_user_monitoring/
+[19]: /security_platform/cloud_siem/
+[20]: /integrations/amazon_ec2/
+[21]: https://aws.amazon.com/console/
+[22]: /logs/
+[23]: /integrations/#cat-log-collection
+[24]: /logs/explorer/saved_views/

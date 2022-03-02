@@ -13,12 +13,6 @@ further_reading:
       text: 'Fix problems you encounter while using the profiler'
 ---
 
-{{< site-region region="us5" >}}
-<div class="alert alert-warning">
-  The Continuous Profiler is not available for the Datadog {{< region-param key="dd_site_name" >}} site.
-</div>
-{{< /site-region >}}
-
 <div class="alert alert-warning">
 The Datadog Profiler for Linux is in public beta. Datadog recommends evaluating the profiler in a non-sensitive environment before deploying in production.
 </div>
@@ -27,7 +21,9 @@ The Datadog Profiler for Linux lets you collect profile data for applications ru
 
 ## Requirements
 
-The Datadog Profiler requires Linux kernel v4.17+ on an `amd64` compatible processor. It does not support macOS, BSD, Windows, or other operating systems besides Linux v4.17 or later. 
+The Datadog Profiler requires Linux kernel v4.17+ on an `amd64` compatible processor. It does not support macOS, BSD, Windows, or other operating systems besides Linux v4.17 or later.
+
+Continuous Profiler is not supported on serverless platforms, such as AWS Lambda.
 
 ## Installation
 

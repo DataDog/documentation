@@ -16,12 +16,6 @@ further_reading:
       text: 'Fix problems you encounter while using the profiler'
 ---
 
-{{< site-region region="us5" >}}
-<div class="alert alert-warning">
-  The Continuous Profiler is not available for the Datadog {{< region-param key="dd_site_name" >}} site.
-</div>
-{{< /site-region >}}
-
 <div class="alert alert-warning">
 Datadog Node.js Profiler is currently in public beta. Datadog recommends evaluating the profiler in a non-sensitive environment before deploying in production.
 </div>
@@ -31,6 +25,8 @@ The profiler is shipped within Datadog tracing libraries. If you are already usi
 ## Requirements
 
 The Datadog Profiler requires at least Node.js 12, but Node.js 16 or higher is recommended. **If you use a version of Node.js earlier than 16, some applications see tail latency spikes every minute when starting the next profile.**
+
+Continuous Profiler is not supported on serverless platforms, such as AWS Lambda.
 
 ## Installation
 

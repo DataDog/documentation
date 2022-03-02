@@ -46,7 +46,7 @@ The Agent can autodiscover and attach tags to all data emitted by containers. Th
 | `nomad_task`        | Low          | Nomad environment                           |
 | `nomad_job`         | Low          | Nomad environment                           |
 | `nomad_group`       | Low          | Nomad environment                           |
-| `git.commit.sha`    | Low          | [org.opencontainers.image.revision][4] used |
+| `git.commit.sha`    | Low          | [org.opencontainers.image.revision][3] used |
 
 ### Unified service tagging
 
@@ -97,7 +97,7 @@ docker_labels_as_tags:
 
 ## Extract environment variables as tags
 
-Datadog automatically collects common tags from [Docker, Kubernetes, ECS, Swarm, Mesos, Nomad, and Rancher][3]. To extract even more tags, use the following options:
+Datadog automatically collects common tags from [Docker, Kubernetes, ECS, Swarm, Mesos, Nomad, and Rancher][4]. To extract even more tags, use the following options:
 
 | Environment Variable               | Description                                    |
 |------------------------------------|------------------------------------------------|
@@ -159,5 +159,5 @@ docker_env_as_tags:
 
 [1]: /agent/docker/tag/#extract-environment-variables-as-tags
 [2]: /getting_started/tagging/unified_service_tagging
-[3]: /agent/docker/?tab=standard#tagging
-[4]: https://github.com/opencontainers/image-spec/blob/859973e32ccae7b7fc76b40b762c9fff6e912f9e/annotations.md#pre-defined-annotation-keys
+[3]: https://github.com/opencontainers/image-spec/blob/859973e32ccae7b7fc76b40b762c9fff6e912f9e/annotations.md#pre-defined-annotation-keys
+[4]: /agent/docker/?tab=standard#tagging

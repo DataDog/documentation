@@ -50,7 +50,7 @@ Voici quelques conseils à suivre pour choisir les bonnes métriques :
     - Trafic réseau : débits d'entrée et de sortie en octets, nombres d'erreurs entrantes et sortantes
     - CPU et utilisation de la mémoire
     - Température : capteurs de température, conditions thermiques
-    - Alimentation : mise en tension/hors tension ou branche totale
+    - Alimentation : mise en tension/hors tension ou tension totale
 
 ## Mise en œuvre
 

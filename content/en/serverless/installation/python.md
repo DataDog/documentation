@@ -2,41 +2,28 @@
 title: Instrumenting Python Serverless Applications
 kind: documentation
 further_reading:
-- link: "/serverless/serverless_integrations/plugin/"
-  tag: "Documentation"
-  text: "Datadog Serverless Plugin"
-- link: "/serverless/serverless_integrations/macro/"
-  tag: "Documentation"
-  text: "Datadog Serverless Macro"
-- link: "/serverless/serverless_integrations/cli/"
-  tag: "Documentation"
-  text: "Datadog Serverless CLI"
-- link: 'serverless/serverless_tagging/'
+- link: 'serverless/datadog_lambda_library/python'
   tag: 'Documentation'
-  text: 'Tagging Serverless Applications'
+  text: 'Datadog Lambda Library for Python'
 - link: 'serverless/distributed_tracing/'
   tag: 'Documentation'
   text: 'Tracing Serverless Applications'
 - link: 'serverless/custom_metrics/'
   tag: 'Documentation'
   text: 'Submitting Custom Metrics from Serverless Applications'
+- link: '/serverless/guide/troubleshoot_serverless_monitoring'
+  tag: 'Documentation'
+  text: 'Troubleshoot Serverless Monitoring'
 aliases:
     - /serverless/datadog_lambda_library/python/
     - /serverless/guide/python/
 ---
 
-## Prerequisites
-
-The [Datadog Forwarder Lambda function][1] is required to ingest AWS Lambda traces, enhanced metrics, custom metrics, and logs.
-
-{{< img src="serverless/serverless_monitoring_installation_instructions.png" alt="Instrument AWS Serverless Applications"  style="width:100%;">}}
-
-If your Python Lambda functions are written in [Python 3.6 or less][1] or you previously set up Datadog Serverless using the Datadog Forwarder, see the [installation instructions here][2].
+<div class="alert alert-warning">If your Python Lambda functions are written in <a href="https://docs.aws.amazon.com/lambda/latest/dg/runtimes-extensions-api.html">Python 3.6 or less</a>, or you previously set up Datadog Serverless using the Datadog Forwarder, see the <a href="http://docs.datadoghq.com/serverless/guide/datadog_forwarder_python">Using the Datadog Forwarder - Python</a> guide.</div>
 
 ## Configuration
 
 Datadog offers many different ways to enable instrumentation for your serverless applications. Choose a method below that best suits your needs. Datadog generally recommends using the Datadog CLI, which does not require redeploying your whole application. The CLI can also be added to your CI/CD pipelines to enable instrumentation for applications across your entire organization.
-
 
 {{< tabs >}}
 {{% tab "Datadog CLI" %}}
@@ -59,7 +46,7 @@ yarn global add @datadog/datadog-ci
 
 ### Configure credentials
 
-For a quick start, configure Datadog and [AWS credentials][1] using the following command. For production applications, consider supplying the environment variables or credentials in a more secure manner.
+For a quick start, configure Datadog and [AWS credentials][1] using the [instrumentation command](#instrument). For production applications, provide credentials in a more secure manner by using environment variables. For example:
 
 ```bash
 export DATADOG_API_KEY="<DD_API_KEY>"
@@ -110,6 +97,9 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
     plugins:
       - serverless-plugin-datadog
     ```
+
+<div class="alert alert-info">If you are instead deploying your Serverless Framework app <a href="https://www.serverless.com/framework/docs/providers/aws/guide/intro">by natively exporting a JSON object from a JavaScript file</a> (for example, by using a <code>serverless.ts</code> file), follow the <a href="https://docs.datadoghq.com/serverless/installation/python?tab=custom">custom installation instructions</a>.</div>
+
 3. In your `serverless.yml`, also add the following section:
     ```yaml
     custom:
@@ -320,10 +310,10 @@ arn:aws-us-gov:lambda:us-gov-east-1:002406178527:layer:Datadog-Extension-ARM:{{<
     }
     ```
     {{< /site-region >}}
-    
+
     **Note**: For security, you may wish to store your Datadog API key in AWS Secrets Manager. In this case, set the environment variable `DD_API_KEY_SECRET_ARN` with the ARN of the Secrets Manager secret containing your Datadog API key. In other words, you can replace the line `"DD_API_KEY": "<DATADOG_API_KEY>"` in the configuration above with `"DD_API_KEY_SECRET_ARN": "<SECRET_ARN_DATADOG_API_KEY>"`. Accessing this key during a cold start adds extra latency.
-    
-2. Replace the following placeholders with appropriate values: 
+
+2. Replace the following placeholders with appropriate values:
 
 - Replace `<AWS_REGION>` with the AWS region to which your Lambda functions are deployed.
 - Replace `<EXTENSION_VERSION>` with the desired version of the Datadog Lambda Extension. The latest version is `{{< latest-lambda-layer-version layer="extension" >}}`.
@@ -497,7 +487,7 @@ arn:aws-us-gov:lambda:us-gov-east-1:002406178527:layer:Datadog-Python37-ARM:{{< 
 
 #### Using the package
 
-If you cannot use the prebuilt Datadog Lambda layer for some reason, alternatively install the `datadog-lambda` package and its dependencies locally to your function project folder using your favorite Python package manager, such as `pip`. 
+If you cannot use the prebuilt Datadog Lambda layer for some reason, alternatively install the `datadog-lambda` package and its dependencies locally to your function project folder using your favorite Python package manager, such as `pip`.
 
 ```sh
 pip install datadog-lambda -t ./
@@ -552,11 +542,11 @@ Follow these steps to configure the function:
 
 ## Explore Datadog serverless monitoring
 
-After you have configured your function following the steps above, you can view metrics, logs and traces on the [Serverless Homepage][3].
+After you have configured your function following the steps above, you can view metrics, logs and traces on the [Serverless Homepage][1].
 
 ### Unified service tagging
 
-Datadog recommends tagging your serverless applications with `DD_ENV`, `DD_SERVICE`, `DD_VERSION`, and `DD_TAGS`. See the [Lambda extension documentation][4] for more details.
+Datadog recommends tagging your serverless applications with `DD_ENV`, `DD_SERVICE`, `DD_VERSION`, and `DD_TAGS`. See the [Lambda extension documentation][2] for more details.
 
 ### Collect logs from AWS serverless resources
 
@@ -565,7 +555,7 @@ Serverless logs generated by managed resources besides AWS Lambda functions can 
 - Queues & Streams: SQS, SNS, Kinesis
 - Data Stores: DynamoDB, S3, RDS, etc.
 
-To collect logs from non-Lambda AWS resources, install and configure the [Datadog Forwarder][5] to subscribe to each of your managed resource CloudWatch log groups.
+To collect logs from non-Lambda AWS resources, install and configure the [Datadog Forwarder][3] to subscribe to each of your managed resource CloudWatch log groups.
 
 ### Monitor custom business logic
 
@@ -605,19 +595,22 @@ def get_message():
     return 'Hello from serverless!'
 ```
 
-For more information on custom metric submission, see [here][6]. For additional details on custom instrumentation, see the Datadog APM documentation for [custom instrumentation][7].
+For more information on custom metric submission, see [here][4]. For additional details on custom instrumentation, see the Datadog APM documentation for [custom instrumentation][5].
 
-If your Lambda function is running in a VPC, follow the [Datadog Lambda Extension AWS PrivateLink Setup][8] guide to ensure that the extension can reach Datadog API endpoints.
+If your Lambda function is running in a VPC, follow these [instructions][6] to ensure that the extension can reach Datadog API endpoints.
+
+## Troubleshooting
+
+If you have trouble collecting monitoring data after following the instructions above, see the [serverless monitoring troubleshooting guide][7].
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.aws.amazon.com/lambda/latest/dg/runtimes-extensions-api.html
-[2]: /serverless/guide/datadog_forwarder_python
-[3]: https://app.datadoghq.com/functions
-[4]: /serverless/libraries_integrations/extension/#tagging
-[5]: /serverless/libraries_integrations/forwarder
-[6]: /serverless/custom_metrics?tab=python
-[7]: /tracing/custom_instrumentation/python/
-[8]: /serverless/guide/extension_private_link/
+[1]: https://app.datadoghq.com/functions
+[2]: /serverless/libraries_integrations/extension/#tagging
+[3]: /serverless/libraries_integrations/forwarder
+[4]: /serverless/custom_metrics?tab=python
+[5]: /tracing/custom_instrumentation/python/
+[6]: /serverless/libraries_integrations/extension/#vpc
+[7]: /serverless/guide/troubleshoot_serverless_monitoring/

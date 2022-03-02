@@ -5,7 +5,7 @@ description: Créer et gérer des incidents
 further_reading:
   - link: dashboards/querying/#incident-management-analytics
     tag: Documentation
-    text: Données d'analyse de la gestion des incidents
+    text: Incident Management Analytics
   - link: https://www.datadoghq.com/blog/incident-postmortem-process-best-practices/
     tag: Blog
     text: Meilleures pratiques pour écrire des postmortems d'incident
@@ -170,7 +170,7 @@ La solution de gestion des incidents recueilles les données d'analyse suivantes
 * Délai avant réparation (heure de fin de l'impact sur les clients - heure de création)
 * Délai avant résolution (heure de résolution - heure de création)
 
-Pour en savoir plus sur les graphiques de gestion des incidents, consultez [Données d'analyse de la gestion des incidents][12].
+Pour en savoir plus sur les graphiques de gestion des incidents, consultez la section [Incident Management Analytics][12].
 
 ## Intégrations
 
