@@ -55,7 +55,7 @@ curl https://your-application-url/non-existing-route -A dd-test-scanner-log;
 done
 ```
 
-**Note:** The `dd-test-scanner-log` value is supported in the most recent releases and in the application security event configuration file version >= 1.2.5.
+**Note:** The `dd-test-scanner-log` value is supported in the most recent releases.
 
 {{< /programming-lang >}}
 {{< programming-lang lang=".NET" >}}
@@ -70,7 +70,7 @@ curl https://your-application-url/non-existing-route -A dd-test-scanner-log;
 done
 ```
 
-**Note:** The `dd-test-scanner-log` value is supported in the most recent releases and in the application security event configuration file version >= 1.2.5.
+**Note:** The `dd-test-scanner-log` value is supported in the most recent releases.
 
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
@@ -111,7 +111,7 @@ curl https://your-application-url/non-existing-route -A dd-test-scanner-log;
 done
 ```
 
-**Note:** The `dd-test-scanner-log` value is supported in the most recent releases and in the application security event configuration file version >= 1.2.5.
+**Note:** The `dd-test-scanner-log` value is supported in the most recent releases.
 
 {{< /programming-lang >}}
 {{< programming-lang lang="NodeJS" >}}
@@ -125,7 +125,7 @@ curl https://your-application-url/existing-route -A dd-test-scanner-log;
 curl https://your-application-url/non-existing-route -A dd-test-scanner-log;
 done
 ```
-**Note:** The `dd-test-scanner-log` value is supported in the most recent releases and in the application security event configuration file version >= 1.2.5.
+**Note:** The `dd-test-scanner-log` value is supported in the most recent releases.
 
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
