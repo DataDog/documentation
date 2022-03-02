@@ -6212,6 +6212,18 @@ api:
         - GetUsageCloudSecurityPostureManagement
       unstable: []
       order: 32
+  - name: Get hourly usage for CI Visibility
+    url: '#get-hourly-usage-for-ci-visibility'
+    identifier: get-hourly-usage-for-ci-visibility
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetUsageCIApp
+      unstable: []
+      order: 38
   - name: Get billable usage across your account
     url: '#get-billable-usage-across-your-account'
     identifier: get-billable-usage-across-your-account
