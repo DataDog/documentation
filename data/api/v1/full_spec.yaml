@@ -4418,7 +4418,7 @@ components:
       properties:
         date:
           description: The month for the usage.
-          format: datetime
+          format: date-time
           type: string
         usage:
           description: Indexed logs usage for each active retention for the month.

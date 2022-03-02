@@ -3,7 +3,7 @@ main_left:
     name: Product
     url: 'https://www.datadoghq.com/product/'
     weight: -500
-  - identifier: infrastructure ##### Nav Product Header
+  - identifier: infrastructure
     name: Infrastructure
     parent: product
     weight: 1
@@ -37,7 +37,7 @@ main_left:
     url: 'https://www.datadoghq.com/product/serverless-monitoring/'
     parent: infrastructure
     weight: 25
-  - identifier: logs ##### Nav Product Header
+  - identifier: logs
     name: Logs
     parent: product
     weight: 30
@@ -53,7 +53,7 @@ main_left:
     url: 'https://www.datadoghq.com/product/sensitive-data-scanner/'
     parent: logs
     weight: 40
-  - identifier: apm ##### Nav Product Header
+  - identifier: apm
     name: APM
     parent: product
     weight: 45
@@ -87,7 +87,7 @@ main_left:
     url: 'https://www.datadoghq.com/product/ci-cd-monitoring/'
     parent: apm
     weight: 70
-  - identifier: digital-experience ##### Nav Product Header
+  - identifier: digital-experience
     name: Digital Experience
     parent: product
     weight: 75
@@ -109,7 +109,7 @@ main_left:
     url: 'https://www.datadoghq.com/product/real-user-monitoring/session-replay/'
     parent: digital-experience
     weight: 90
-  - identifier: security ##### Nav Product Header
+  - identifier: security
     name: Security
     parent: product
     weight: 95
@@ -137,7 +137,7 @@ main_left:
     url: 'https://www.datadoghq.com/product/security-platform/cloud-siem/'
     parent: security
     weight: 115
-  - identifier: platform-capabilities ##### Nav Product Header
+  - identifier: platform-capabilities
     name: Platform Capabilities
     parent: product
     weight: 120
@@ -147,18 +147,6 @@ main_left:
     url: 'https://www.datadoghq.com/product/platform/dashboards/'
     parent: platform-capabilities
     weight: 125
-  # - identifier: "slos"
-  #   name: "SLOs"
-  #   pre: "<i class='icon-slos'></i>"
-  #   url: "product/platform/service-level-objective/"
-  #   parent: "platform-capabilities"
-  #   weight: 27
-  # - identifier: "watchdog"
-  #   name: "Watchdog (AI/ML)"
-  #   pre: "<i class='icon-agent-fill'></i>"
-  #   url: "product/platform/watchdog/"
-  #   parent: "platform-capabilities"
-  #   weight: 28
   - identifier: alerts
     name: Alerts
     pre: <i class='icon-monitor'></i>
@@ -194,7 +182,7 @@ main_left:
   - identifier: solutions
     name: Solutions
     weight: -460
-  - identifier: industry ##### Nav Solutions Header
+  - identifier: industry
     name: Industry
     parent: solutions
     weight: 1
@@ -234,7 +222,7 @@ main_left:
     parent: industry
     url: 'https://www.datadoghq.com/solutions/gaming/'
     weight: 10
-  - identifier: technology ##### Nav Solutions Header
+  - identifier: technology
     name: Technology
     parent: solutions
     weight: 11
@@ -262,7 +250,7 @@ main_left:
     parent: technology
     url: 'https://www.datadoghq.com/solutions/pivotal-platform/'
     weight: 17
-  - identifier: usecase ##### Nav Solutions Header
+  - identifier: usecase
     name: Use-case
     parent: solutions
     weight: 18
