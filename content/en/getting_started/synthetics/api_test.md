@@ -28,15 +28,16 @@ further_reading:
 
 ## Overview
 
-API tests proactively monitor to ensure your most important services are available anytime and anywhere. [Single API tests][1] come in seven different subtypes that allow you to launch requests on the different network layers of your systems (`HTTP`, `SSL`, `DNS`, `TCP`, `UDP`, `ICMP`, and `WebSocket`). [Multistep API tests][2] allow you to run HTTP tests in sequence to monitor the uptime of key journeys at the API level.
+API tests proactively monitor your business-critical applications and services to ensure they are available anytime and anywhere. [Single API tests][1] come in seven different subtypes that allow you to launch requests on the different network layers of your systems (`HTTP`, `SSL`, `DNS`, `TCP`, `UDP`, `ICMP`, and `WebSocket`). [Multistep API tests][2] allow you to run HTTP tests in sequence to monitor the uptime of key journeys at the API level.
 
 ## Create a single API test
 
-HTTP tests monitor your API endpoints and alert you when they become too slow or fail to meet any conditions you define, such as expected HTTP status code, headers, or body contents.
+HTTP tests monitor your API endpoints and alert you when response latency is high or fail to meet any conditions you define, such as expected HTTP status code, response headers, or response body content.
 
 {{< img src="getting_started/synthetics/api-test.png" alt="Overview of a Synthetics HTTP Test" style="width:100%;" >}}
 
 The example below demonstrates how to create an [HTTP test][3], a subtype of [single API tests][1].
+
 ### Define request
 
 1. In the Datadog site, hover over **UX Monitoring** and select **[Synthetic Tests][4]**.
@@ -110,7 +111,7 @@ When you're ready to run your test, click **Save Test**.
 
 {{< img src="getting_started/synthetics/multistep-api-test.png" alt="Overview of a Mulistep Synthetics API Test" style="width:100%;" >}}
 
-Similar to [HTTP tests][3], multistep API tests alert you when your endpoints become too slow or fail to meet any conditions you defined. You can create variables from individual step responses and re-inject their values in subsequent steps, chaining steps together in a way that mimics the behavior of your application.
+Similar to [HTTP tests][3], multistep API tests alert you when your endpoints become too slow or fail to meet any conditions you defined. You can create variables from individual step responses and re-inject their values in subsequent steps, chaining steps together in a way that mimics the behavior of your application or service.
 
 The example test below demonstrates the creation of a multistep API test that monitors the addition of an item to a cart. This test contains three steps: 
 
