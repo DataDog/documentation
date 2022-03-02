@@ -34,7 +34,7 @@ This guide provides an overview of the process for integrating an Amazon Web Ser
 
 At a high level, this involves creating an IAM role and associated policy to enable Datadog's AWS account to make API calls into your AWS account for collecting or pushing data. The template also deploys the [Datadog Forwarder][1] Lambda function for sending logs to Datadog. Using the CloudFormation template provides all the tools needed to send this data to your Datadog account, and Datadog maintains the CloudFormation template to provide the latest functionality.
 
-Once the initial connection is established, you can easily enable any of the sub-integrations relevant to your cloud environment. With a single click, Datadog queries AWS with the provisioned IAM role and installs the desired integration. As soon as data returns from the integration, Datadog provisions an out-of-the-box dashboard for that integration, providing immediate and customizable visibility. This guide demonstrates setting up the integration, sending logs from [CloudTrail][2] and the Forwarder Lambda function, and installing the Datadog Agent on an Amazon Linux EC2 instance. See the [Enable sub-integrations section](#enable-sub-integrations) for a list of the available sub-integrations.
+Once the initial connection is established, you can easily enable any of the individual AWS service integrations relevant to your AWS environment. With a single click, Datadog provisions the necessary resources in your AWS account and begins querying metrics and events for the services you use. For popular AWS services you are using, Datadog provisions out-of-the-box dashboards, providing immediate and customizable visibility. This guide demonstrates setting up the integration, sending logs from [CloudTrail][2] and the Forwarder Lambda function, and installing the Datadog Agent on an Amazon Linux EC2 instance. See the [Enable sub-integrations section](#enable-sub-integrations) for a list of the available sub-integrations.
 
 This process can be repeated for as many AWS accounts as necessary, or you can also use the [API][3], [AWS CLI][4], or [Terraform][5] to set up multiple accounts at once. For more information, review Datadog's [CloudFormation Guide][6].
 
@@ -73,37 +73,35 @@ Before getting started, ensure you have the following prerequisites:
     * secretsmanager:PutSecretValue
     * serverless:CreateCloudFormationTemplate
 
-2. A Datadog account and [API key][8]. If you need a Datadog account, [sign up for a free trial][9].
 
 ## Setup
 
-1. You must provide a valid Datadog [API Key][10] to the CloudFormation template. You can paste the API key directly into the CloudFront template, or you can store the value in [Secrets Manager][11] and reference the ARN of the secret. First, copy this value to your clipboard.
 
-2. From the AWS tile on the [Integrations page][12] in your Datadog account, select the CloudFormation Template option:
+2. From the AWS tile on the [Integrations page][12] in your Datadog account, scroll to the bottom of the page and click "Add another account," then subsequently click the "Automatically Using CloudFormation" option:
 {{< img src="getting_started/integrations/integration-tile-setup.png" alt="An image from the Datadog AWS integration tile showing the options for establishing the integration. The Role Delegation tab is highlighted.">}}
 
-3. This opens the AWS Console and loads the CloudFormation stack. Paste the API key into the `DdApiKey` field, or paste the Secret ARN into the `DdApiKeySecretArn` if using Secrets Manager:
+3. This opens the AWS Console and loads the CloudFormation stack. All the parameters will be correctly filled in based on your selections in the prior Datadog form, so you do not need to edit those unless desired.
+**Note:** The `DatadogAppKey` parameter enables the CloudFormation stack to add and edit the Datadog configuration for this AWS account via API calls to Datadog. This is automatically generated and tied to your Datadog account.
 {{< img src="getting_started/integrations/cloudformation-options-1.png" alt="An image from the AWS CloudFormation create-stack page that shows the Stack name as datadog, IAMRoleName as DatadogIntegrationRole, ExternalId as an obfuscated value ending in be46, DdApiKey as an obfuscated value.">}}
 
-4. Ensure that the the correct [Datadog site][13] is used for the `DdSite` parameter to match the region of your Datadog account. Check the required boxes from AWS and click `Create stack`:
+4. Check the required boxes from AWS and click `Create stack`:
 {{< img src="getting_started/integrations/cloudformation-options-2.png" alt="An image from the AWS CloudFormation create-stack page that shows the Advanced options of creating the Datadog stack. DdAWSAccountId parameter is filled in with 464622532012, DdForwarderName parameter is filled in with DatadogForwarder, and InstallDatadogPolicyMacro is set as true. Below these parameters is a Capabilities section with two checkboxes, both of which are checked. The first checkbox states 'I acknowledge that AWS CloudFormation might create IAM resources with custom names.' The second checkbox states 'I acknowledge that AWS CloudFormation might require the following capability: CAPABILITY_AUTO_EXPAND'.">}}
 
-This begins the creation process for the Datadog stack along with three nested stacks. This could take several minutes; ensure that the stack successfully creates before proceeding:
+This begins the creation process for the Datadog stack along with three nested stacks. This could take several minutes; ensure that the stack is successfully created before proceeding:
 {{< img src="getting_started/integrations/cloudformation-stacks-complete.png" alt="An image from the AWS CloudFormation Stacks page showing the four completed stacks under the 'Stacks' column along the left hand side of the page. The stacks are datadog-DatadogIntegrationRoleStack, datadog-DatadogPolicyMacroStack, datadog-ForwarderStack, and datadog. Each stack shows the timestamp of creation and a green checkmark with CREATE_COMPLETE. The 'datadog' stack and is highlighted and displaying the 'Events' tab. There are 9 events listed with their Timestamp, Logical ID, Status, and Status reason. These events reference the different stages of creation for each of the stacks.">}}
 
-5. From the integration tile on the Datadog side, enter the AWS account ID and AWS Role name. If the role name wasn't changed in the CloudFormation setup page, use `DatadogIntegrationRole`. Datadog automatically queries AWS with the provided values, and a successful query returns a status that tells you your credentials are valid. Scroll down to find the `Install Integration` button.
+5. Once the Stack has successfully created, go back to the Datadog tab you have open to the AWS  integration tile. You'll see a box for the new account you created. Click "Refresh to Check Status" and you should see a success message at the top of the page, along with the new account you just added visible on the page with the relevant details.
 
-6. Click `Install Integration`. For this demonstration, all options have been selected (only `Collect custom metrics` is unticked by default):
 {{< img src="getting_started/integrations/integration-tile-complete.png" alt="An image displaying the AWS integration tile from within the Datadog account. The left hand side shows that the EC2 automuting option is enabled. There is a section titled 'Limit metric collection by AWS Service' which displays the sub-integrations associated with the Datadog AWS integration. These are ApiGateway, ApplicationELB, AppRunner, AppStream, AppSync, Athena, AutoScaling, Billing, Budgeting, CertificateManager, CloudFront, CloudHSM, CloudSearch, CodeBuild, Cognito, and Connect. There is a heading which states 'Turning on sub-integrations can affect your CloudWatch API usage. See our AWS FAQ for more info.'. All boxes are displayed as checked. Below this is another section called 'Other options'. There are two checkboxes here, Collect CloudWatch alarms and Collect custom metrics. Both options are checked.' On the right hand side of the page there is a section showing the settings for the connected AWS account. The Account ID is displayed as an obfuscated value. The AWS Role name is displayed as DatadogIntegrationRole.">}}
 
-Depending on which AWS services you're using and your use case for monitoring, there are multiple options within the integration tile to specify the data to be collected. For example, you can limit data collection based on AWS service, namespace, or tags. Additionally, you can choose to mute monitor notifications, for instance terminations triggered manually or by autoscaling with [EC2 automuting][14] enabled. If needed, enable [Alarm Collection][15] to send your CloudWatch alarms to the Datadog [Event Stream][16] and choose whether to collect custom metrics.
+Depending on which AWS services you're using and your use case for monitoring, there are multiple options within the integration tile to specify the data to be collected. For example, you can limit data collection based on AWS service, namespace, or tags. Additionally, you can choose to mute monitor notifications. For example, terminations triggered manually or by autoscaling with [EC2 automuting][14] enabled. If needed, enable [Alarm Collection][15] to send your CloudWatch alarms to the Datadog [Event Stream][16] and choose whether to collect custom metrics.
 
 ### Validation
 
 View the out-of-the-box [AWS overview dashboard][17] to see metrics sent by your AWS services and infrastructure:
 {{< img src="getting_started/integrations/aws-dashboard.png" alt="An image displaying the AWS overview dashboard in the Datadog account. On the left is the AWS logo and an AWS events graph showing 'No matching entries found'. In the center are graphs related to EBS volumes with numerical data displayed and a heat map showing consistent data. Along the right are graphs related to ELBs showing numerical data as well as a timeseries graph showing spikey data from three sources.">}}
 
-## Enable sub-integrations
+## Enable integrations for individual AWS service
 
 See the [Integrations page][18] for a full listing of the available sub-integrations.
 
