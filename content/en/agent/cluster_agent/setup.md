@@ -236,6 +236,32 @@ Datadog Cluster Agent
 
 Kubernetes events are beginning to flow into your Datadog account, and relevant metrics collected by your Agents are tagged with their corresponding cluster level metadata.
 
+### Windows containers
+
+The Datadog Cluster Agent can only deployed on Linux nodes.
+
+To monitor Windows containers, use two Helm charts in a mixed cluster. The first Helm chart deploys the Datadog Cluster Agent (with `targetSystem: linux`). The second Helm chart (with `targetSystem: windows`) targets only Windows nodes and connects to the existing Cluster Agent deployed as aprt of the first Helm chart.
+
+Use the following `values.yaml` file to configure communication between Agents deployed on Windows nodes and the Cluster Agent.
+
+```yaml
+targetSystem: windows
+existingClusterAgent:
+  join: true
+  serviceName: "<EXISTING_DCA_SECRET_NAME>" # from the first Datadog Helm chart
+  tokenSecretName: "<EXISTING_DCA_SERVICE_NAME>" # from the first Datadog Helm chart
+
+# Disable datadogMetrics deployment since it should have been already deployed with the first chart.
+datadog-crds:
+  crds:
+    datadogMetrics: false
+# Disable kube-state-metrics deployment
+datadog:
+  kubeStateMetricsEnabled: false
+```
+
+For more information, see [Troubleshooting Windows Container Issues][2].
+
 #### Monitoring AWS managed services
 
 To monitor an AWS managed service like MSK, ElastiCache, or RDS, set `clusterChecksRunner` to create a pod with an IAM role assigned through the serviceAccountAnnotation in the Helm chart. Then, set the integration configurations under `clusterAgent.confd`.
@@ -265,3 +291,4 @@ clusterAgent:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://docs.datadoghq.com/agent/guide/agent-commands/?tab=agentv6v7#agent-information
+[2]: https://docs.datadoghq.com/agent/troubleshooting/windows_containers/#mixed-clusters-linux--windows
