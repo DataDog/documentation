@@ -28515,13 +28515,15 @@
                       "enum": [
                         "threshold",
                         "new_value",
-                        "anomaly_detection"
+                        "anomaly_detection",
+                        "impossible_travel"
                       ],
                       "type": "string",
                       "x-enum-varnames": [
                         "THRESHOLD",
                         "NEW_VALUE",
-                        "ANOMALY_DETECTION"
+                        "ANOMALY_DETECTION",
+                        "IMPOSSIBLE_TRAVEL"
                       ]
                     },
                     "evaluationWindow": {
@@ -28548,6 +28550,17 @@
                         "ONE_HOUR",
                         "TWO_HOURS"
                       ]
+                    },
+                    "impossibleTravelOptions": {
+                      "description": "Options on impossible travel rules.",
+                      "properties": {
+                        "baselineUserLocations": {
+                          "description": "If true, signals are suppressed for the first 24 hours. In that time, Datadog learns the user's regular\naccess locations. This can be helpful to reduce noise and infer VPN usage or credentialed API access.",
+                          "example": true,
+                          "type": "boolean"
+                        }
+                      },
+                      "type": "object"
                     },
                     "keepAlive": {
                       "description": "Once a signal is generated, the signal will remain “open” if a case is matched at least once within\nthis keep alive window.",
@@ -28668,7 +28681,8 @@
                           "cardinality",
                           "sum",
                           "max",
-                          "new_value"
+                          "new_value",
+                          "geo_data"
                         ],
                         "type": "string",
                         "x-enum-varnames": [
@@ -28676,7 +28690,8 @@
                           "CARDINALITY",
                           "SUM",
                           "MAX",
-                          "NEW_VALUE"
+                          "NEW_VALUE",
+                          "GEO_DATA"
                         ]
                       },
                       "distinctFields": {
@@ -28966,13 +28981,15 @@
                 "enum": [
                   "threshold",
                   "new_value",
-                  "anomaly_detection"
+                  "anomaly_detection",
+                  "impossible_travel"
                 ],
                 "type": "string",
                 "x-enum-varnames": [
                   "THRESHOLD",
                   "NEW_VALUE",
-                  "ANOMALY_DETECTION"
+                  "ANOMALY_DETECTION",
+                  "IMPOSSIBLE_TRAVEL"
                 ]
               },
               "evaluationWindow": {
@@ -28999,6 +29016,17 @@
                   "ONE_HOUR",
                   "TWO_HOURS"
                 ]
+              },
+              "impossibleTravelOptions": {
+                "description": "Options on impossible travel rules.",
+                "properties": {
+                  "baselineUserLocations": {
+                    "description": "If true, signals are suppressed for the first 24 hours. In that time, Datadog learns the user's regular\naccess locations. This can be helpful to reduce noise and infer VPN usage or credentialed API access.",
+                    "example": true,
+                    "type": "boolean"
+                  }
+                },
+                "type": "object"
               },
               "keepAlive": {
                 "description": "Once a signal is generated, the signal will remain “open” if a case is matched at least once within\nthis keep alive window.",
@@ -29120,7 +29148,8 @@
                     "cardinality",
                     "sum",
                     "max",
-                    "new_value"
+                    "new_value",
+                    "geo_data"
                   ],
                   "type": "string",
                   "x-enum-varnames": [
@@ -29128,7 +29157,8 @@
                     "CARDINALITY",
                     "SUM",
                     "MAX",
-                    "NEW_VALUE"
+                    "NEW_VALUE",
+                    "GEO_DATA"
                   ]
                 },
                 "distinctFields": {
@@ -29208,13 +29238,15 @@
         "enum": [
           "threshold",
           "new_value",
-          "anomaly_detection"
+          "anomaly_detection",
+          "impossible_travel"
         ],
         "type": "string",
         "x-enum-varnames": [
           "THRESHOLD",
           "NEW_VALUE",
-          "ANOMALY_DETECTION"
+          "ANOMALY_DETECTION",
+          "IMPOSSIBLE_TRAVEL"
         ]
       },
       "SecurityMonitoringRuleEvaluationWindow": {
@@ -29241,6 +29273,22 @@
           "ONE_HOUR",
           "TWO_HOURS"
         ]
+      },
+      "SecurityMonitoringRuleImpossibleTravelOptions": {
+        "description": "Options on impossible travel rules.",
+        "properties": {
+          "baselineUserLocations": {
+            "description": "If true, signals are suppressed for the first 24 hours. In that time, Datadog learns the user's regular\naccess locations. This can be helpful to reduce noise and infer VPN usage or credentialed API access.",
+            "example": true,
+            "type": "boolean"
+          }
+        },
+        "type": "object"
+      },
+      "SecurityMonitoringRuleImpossibleTravelOptionsBaselineUserLocations": {
+        "description": "If true, signals are suppressed for the first 24 hours. In that time, Datadog learns the user's regular\naccess locations. This can be helpful to reduce noise and infer VPN usage or credentialed API access.",
+        "example": true,
+        "type": "boolean"
       },
       "SecurityMonitoringRuleKeepAlive": {
         "description": "Once a signal is generated, the signal will remain “open” if a case is matched at least once within\nthis keep alive window.",
@@ -29390,13 +29438,15 @@
             "enum": [
               "threshold",
               "new_value",
-              "anomaly_detection"
+              "anomaly_detection",
+              "impossible_travel"
             ],
             "type": "string",
             "x-enum-varnames": [
               "THRESHOLD",
               "NEW_VALUE",
-              "ANOMALY_DETECTION"
+              "ANOMALY_DETECTION",
+              "IMPOSSIBLE_TRAVEL"
             ]
           },
           "evaluationWindow": {
@@ -29423,6 +29473,17 @@
               "ONE_HOUR",
               "TWO_HOURS"
             ]
+          },
+          "impossibleTravelOptions": {
+            "description": "Options on impossible travel rules.",
+            "properties": {
+              "baselineUserLocations": {
+                "description": "If true, signals are suppressed for the first 24 hours. In that time, Datadog learns the user's regular\naccess locations. This can be helpful to reduce noise and infer VPN usage or credentialed API access.",
+                "example": true,
+                "type": "boolean"
+              }
+            },
+            "type": "object"
           },
           "keepAlive": {
             "description": "Once a signal is generated, the signal will remain “open” if a case is matched at least once within\nthis keep alive window.",
@@ -29541,7 +29602,8 @@
               "cardinality",
               "sum",
               "max",
-              "new_value"
+              "new_value",
+              "geo_data"
             ],
             "type": "string",
             "x-enum-varnames": [
@@ -29549,7 +29611,8 @@
               "CARDINALITY",
               "SUM",
               "MAX",
-              "NEW_VALUE"
+              "NEW_VALUE",
+              "GEO_DATA"
             ]
           },
           "distinctFields": {
@@ -29590,7 +29653,8 @@
           "cardinality",
           "sum",
           "max",
-          "new_value"
+          "new_value",
+          "geo_data"
         ],
         "type": "string",
         "x-enum-varnames": [
@@ -29598,7 +29662,8 @@
           "CARDINALITY",
           "SUM",
           "MAX",
-          "NEW_VALUE"
+          "NEW_VALUE",
+          "GEO_DATA"
         ]
       },
       "SecurityMonitoringRuleQueryCreate": {
@@ -29611,7 +29676,8 @@
               "cardinality",
               "sum",
               "max",
-              "new_value"
+              "new_value",
+              "geo_data"
             ],
             "type": "string",
             "x-enum-varnames": [
@@ -29619,7 +29685,8 @@
               "CARDINALITY",
               "SUM",
               "MAX",
-              "NEW_VALUE"
+              "NEW_VALUE",
+              "GEO_DATA"
             ]
           },
           "distinctFields": {
@@ -29777,13 +29844,15 @@
                 "enum": [
                   "threshold",
                   "new_value",
-                  "anomaly_detection"
+                  "anomaly_detection",
+                  "impossible_travel"
                 ],
                 "type": "string",
                 "x-enum-varnames": [
                   "THRESHOLD",
                   "NEW_VALUE",
-                  "ANOMALY_DETECTION"
+                  "ANOMALY_DETECTION",
+                  "IMPOSSIBLE_TRAVEL"
                 ]
               },
               "evaluationWindow": {
@@ -29810,6 +29879,17 @@
                   "ONE_HOUR",
                   "TWO_HOURS"
                 ]
+              },
+              "impossibleTravelOptions": {
+                "description": "Options on impossible travel rules.",
+                "properties": {
+                  "baselineUserLocations": {
+                    "description": "If true, signals are suppressed for the first 24 hours. In that time, Datadog learns the user's regular\naccess locations. This can be helpful to reduce noise and infer VPN usage or credentialed API access.",
+                    "example": true,
+                    "type": "boolean"
+                  }
+                },
+                "type": "object"
               },
               "keepAlive": {
                 "description": "Once a signal is generated, the signal will remain “open” if a case is matched at least once within\nthis keep alive window.",
@@ -29930,7 +30010,8 @@
                     "cardinality",
                     "sum",
                     "max",
-                    "new_value"
+                    "new_value",
+                    "geo_data"
                   ],
                   "type": "string",
                   "x-enum-varnames": [
@@ -29938,7 +30019,8 @@
                     "CARDINALITY",
                     "SUM",
                     "MAX",
-                    "NEW_VALUE"
+                    "NEW_VALUE",
+                    "GEO_DATA"
                   ]
                 },
                 "distinctFields": {
@@ -30156,13 +30238,15 @@
                 "enum": [
                   "threshold",
                   "new_value",
-                  "anomaly_detection"
+                  "anomaly_detection",
+                  "impossible_travel"
                 ],
                 "type": "string",
                 "x-enum-varnames": [
                   "THRESHOLD",
                   "NEW_VALUE",
-                  "ANOMALY_DETECTION"
+                  "ANOMALY_DETECTION",
+                  "IMPOSSIBLE_TRAVEL"
                 ]
               },
               "evaluationWindow": {
@@ -30189,6 +30273,17 @@
                   "ONE_HOUR",
                   "TWO_HOURS"
                 ]
+              },
+              "impossibleTravelOptions": {
+                "description": "Options on impossible travel rules.",
+                "properties": {
+                  "baselineUserLocations": {
+                    "description": "If true, signals are suppressed for the first 24 hours. In that time, Datadog learns the user's regular\naccess locations. This can be helpful to reduce noise and infer VPN usage or credentialed API access.",
+                    "example": true,
+                    "type": "boolean"
+                  }
+                },
+                "type": "object"
               },
               "keepAlive": {
                 "description": "Once a signal is generated, the signal will remain “open” if a case is matched at least once within\nthis keep alive window.",
@@ -30309,7 +30404,8 @@
                     "cardinality",
                     "sum",
                     "max",
-                    "new_value"
+                    "new_value",
+                    "geo_data"
                   ],
                   "type": "string",
                   "x-enum-varnames": [
@@ -30317,7 +30413,8 @@
                     "CARDINALITY",
                     "SUM",
                     "MAX",
-                    "NEW_VALUE"
+                    "NEW_VALUE",
+                    "GEO_DATA"
                   ]
                 },
                 "distinctFields": {
@@ -66000,13 +66097,15 @@
                                 "enum": [
                                   "threshold",
                                   "new_value",
-                                  "anomaly_detection"
+                                  "anomaly_detection",
+                                  "impossible_travel"
                                 ],
                                 "type": "string",
                                 "x-enum-varnames": [
                                   "THRESHOLD",
                                   "NEW_VALUE",
-                                  "ANOMALY_DETECTION"
+                                  "ANOMALY_DETECTION",
+                                  "IMPOSSIBLE_TRAVEL"
                                 ]
                               },
                               "evaluationWindow": {
@@ -66033,6 +66132,17 @@
                                   "ONE_HOUR",
                                   "TWO_HOURS"
                                 ]
+                              },
+                              "impossibleTravelOptions": {
+                                "description": "Options on impossible travel rules.",
+                                "properties": {
+                                  "baselineUserLocations": {
+                                    "description": "If true, signals are suppressed for the first 24 hours. In that time, Datadog learns the user's regular\naccess locations. This can be helpful to reduce noise and infer VPN usage or credentialed API access.",
+                                    "example": true,
+                                    "type": "boolean"
+                                  }
+                                },
+                                "type": "object"
                               },
                               "keepAlive": {
                                 "description": "Once a signal is generated, the signal will remain “open” if a case is matched at least once within\nthis keep alive window.",
@@ -66153,7 +66263,8 @@
                                     "cardinality",
                                     "sum",
                                     "max",
-                                    "new_value"
+                                    "new_value",
+                                    "geo_data"
                                   ],
                                   "type": "string",
                                   "x-enum-varnames": [
@@ -66161,7 +66272,8 @@
                                     "CARDINALITY",
                                     "SUM",
                                     "MAX",
-                                    "NEW_VALUE"
+                                    "NEW_VALUE",
+                                    "GEO_DATA"
                                   ]
                                 },
                                 "distinctFields": {
@@ -66447,13 +66559,15 @@
                         "enum": [
                           "threshold",
                           "new_value",
-                          "anomaly_detection"
+                          "anomaly_detection",
+                          "impossible_travel"
                         ],
                         "type": "string",
                         "x-enum-varnames": [
                           "THRESHOLD",
                           "NEW_VALUE",
-                          "ANOMALY_DETECTION"
+                          "ANOMALY_DETECTION",
+                          "IMPOSSIBLE_TRAVEL"
                         ]
                       },
                       "evaluationWindow": {
@@ -66480,6 +66594,17 @@
                           "ONE_HOUR",
                           "TWO_HOURS"
                         ]
+                      },
+                      "impossibleTravelOptions": {
+                        "description": "Options on impossible travel rules.",
+                        "properties": {
+                          "baselineUserLocations": {
+                            "description": "If true, signals are suppressed for the first 24 hours. In that time, Datadog learns the user's regular\naccess locations. This can be helpful to reduce noise and infer VPN usage or credentialed API access.",
+                            "example": true,
+                            "type": "boolean"
+                          }
+                        },
+                        "type": "object"
                       },
                       "keepAlive": {
                         "description": "Once a signal is generated, the signal will remain “open” if a case is matched at least once within\nthis keep alive window.",
@@ -66601,7 +66726,8 @@
                             "cardinality",
                             "sum",
                             "max",
-                            "new_value"
+                            "new_value",
+                            "geo_data"
                           ],
                           "type": "string",
                           "x-enum-varnames": [
@@ -66609,7 +66735,8 @@
                             "CARDINALITY",
                             "SUM",
                             "MAX",
-                            "NEW_VALUE"
+                            "NEW_VALUE",
+                            "GEO_DATA"
                           ]
                         },
                         "distinctFields": {
@@ -66812,13 +66939,15 @@
                           "enum": [
                             "threshold",
                             "new_value",
-                            "anomaly_detection"
+                            "anomaly_detection",
+                            "impossible_travel"
                           ],
                           "type": "string",
                           "x-enum-varnames": [
                             "THRESHOLD",
                             "NEW_VALUE",
-                            "ANOMALY_DETECTION"
+                            "ANOMALY_DETECTION",
+                            "IMPOSSIBLE_TRAVEL"
                           ]
                         },
                         "evaluationWindow": {
@@ -66845,6 +66974,17 @@
                             "ONE_HOUR",
                             "TWO_HOURS"
                           ]
+                        },
+                        "impossibleTravelOptions": {
+                          "description": "Options on impossible travel rules.",
+                          "properties": {
+                            "baselineUserLocations": {
+                              "description": "If true, signals are suppressed for the first 24 hours. In that time, Datadog learns the user's regular\naccess locations. This can be helpful to reduce noise and infer VPN usage or credentialed API access.",
+                              "example": true,
+                              "type": "boolean"
+                            }
+                          },
+                          "type": "object"
                         },
                         "keepAlive": {
                           "description": "Once a signal is generated, the signal will remain “open” if a case is matched at least once within\nthis keep alive window.",
@@ -66965,7 +67105,8 @@
                               "cardinality",
                               "sum",
                               "max",
-                              "new_value"
+                              "new_value",
+                              "geo_data"
                             ],
                             "type": "string",
                             "x-enum-varnames": [
@@ -66973,7 +67114,8 @@
                               "CARDINALITY",
                               "SUM",
                               "MAX",
-                              "NEW_VALUE"
+                              "NEW_VALUE",
+                              "GEO_DATA"
                             ]
                           },
                           "distinctFields": {
@@ -67418,13 +67560,15 @@
                           "enum": [
                             "threshold",
                             "new_value",
-                            "anomaly_detection"
+                            "anomaly_detection",
+                            "impossible_travel"
                           ],
                           "type": "string",
                           "x-enum-varnames": [
                             "THRESHOLD",
                             "NEW_VALUE",
-                            "ANOMALY_DETECTION"
+                            "ANOMALY_DETECTION",
+                            "IMPOSSIBLE_TRAVEL"
                           ]
                         },
                         "evaluationWindow": {
@@ -67451,6 +67595,17 @@
                             "ONE_HOUR",
                             "TWO_HOURS"
                           ]
+                        },
+                        "impossibleTravelOptions": {
+                          "description": "Options on impossible travel rules.",
+                          "properties": {
+                            "baselineUserLocations": {
+                              "description": "If true, signals are suppressed for the first 24 hours. In that time, Datadog learns the user's regular\naccess locations. This can be helpful to reduce noise and infer VPN usage or credentialed API access.",
+                              "example": true,
+                              "type": "boolean"
+                            }
+                          },
+                          "type": "object"
                         },
                         "keepAlive": {
                           "description": "Once a signal is generated, the signal will remain “open” if a case is matched at least once within\nthis keep alive window.",
@@ -67571,7 +67726,8 @@
                               "cardinality",
                               "sum",
                               "max",
-                              "new_value"
+                              "new_value",
+                              "geo_data"
                             ],
                             "type": "string",
                             "x-enum-varnames": [
@@ -67579,7 +67735,8 @@
                               "CARDINALITY",
                               "SUM",
                               "MAX",
-                              "NEW_VALUE"
+                              "NEW_VALUE",
+                              "GEO_DATA"
                             ]
                           },
                           "distinctFields": {
@@ -67842,13 +67999,15 @@
                         "enum": [
                           "threshold",
                           "new_value",
-                          "anomaly_detection"
+                          "anomaly_detection",
+                          "impossible_travel"
                         ],
                         "type": "string",
                         "x-enum-varnames": [
                           "THRESHOLD",
                           "NEW_VALUE",
-                          "ANOMALY_DETECTION"
+                          "ANOMALY_DETECTION",
+                          "IMPOSSIBLE_TRAVEL"
                         ]
                       },
                       "evaluationWindow": {
@@ -67875,6 +68034,17 @@
                           "ONE_HOUR",
                           "TWO_HOURS"
                         ]
+                      },
+                      "impossibleTravelOptions": {
+                        "description": "Options on impossible travel rules.",
+                        "properties": {
+                          "baselineUserLocations": {
+                            "description": "If true, signals are suppressed for the first 24 hours. In that time, Datadog learns the user's regular\naccess locations. This can be helpful to reduce noise and infer VPN usage or credentialed API access.",
+                            "example": true,
+                            "type": "boolean"
+                          }
+                        },
+                        "type": "object"
                       },
                       "keepAlive": {
                         "description": "Once a signal is generated, the signal will remain “open” if a case is matched at least once within\nthis keep alive window.",
@@ -67995,7 +68165,8 @@
                             "cardinality",
                             "sum",
                             "max",
-                            "new_value"
+                            "new_value",
+                            "geo_data"
                           ],
                           "type": "string",
                           "x-enum-varnames": [
@@ -68003,7 +68174,8 @@
                             "CARDINALITY",
                             "SUM",
                             "MAX",
-                            "NEW_VALUE"
+                            "NEW_VALUE",
+                            "GEO_DATA"
                           ]
                         },
                         "distinctFields": {
@@ -68185,13 +68357,15 @@
                           "enum": [
                             "threshold",
                             "new_value",
-                            "anomaly_detection"
+                            "anomaly_detection",
+                            "impossible_travel"
                           ],
                           "type": "string",
                           "x-enum-varnames": [
                             "THRESHOLD",
                             "NEW_VALUE",
-                            "ANOMALY_DETECTION"
+                            "ANOMALY_DETECTION",
+                            "IMPOSSIBLE_TRAVEL"
                           ]
                         },
                         "evaluationWindow": {
@@ -68218,6 +68392,17 @@
                             "ONE_HOUR",
                             "TWO_HOURS"
                           ]
+                        },
+                        "impossibleTravelOptions": {
+                          "description": "Options on impossible travel rules.",
+                          "properties": {
+                            "baselineUserLocations": {
+                              "description": "If true, signals are suppressed for the first 24 hours. In that time, Datadog learns the user's regular\naccess locations. This can be helpful to reduce noise and infer VPN usage or credentialed API access.",
+                              "example": true,
+                              "type": "boolean"
+                            }
+                          },
+                          "type": "object"
                         },
                         "keepAlive": {
                           "description": "Once a signal is generated, the signal will remain “open” if a case is matched at least once within\nthis keep alive window.",
@@ -68338,7 +68523,8 @@
                               "cardinality",
                               "sum",
                               "max",
-                              "new_value"
+                              "new_value",
+                              "geo_data"
                             ],
                             "type": "string",
                             "x-enum-varnames": [
@@ -68346,7 +68532,8 @@
                               "CARDINALITY",
                               "SUM",
                               "MAX",
-                              "NEW_VALUE"
+                              "NEW_VALUE",
+                              "GEO_DATA"
                             ]
                           },
                           "distinctFields": {
