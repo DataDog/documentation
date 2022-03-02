@@ -101,7 +101,7 @@ The patterns view is helpful for detecting and filtering noisy error patterns th
 
 **Note**: The pattern detection is based on 10,000 log samples. Refine the search to see patterns limited to a specific subset of logs.
 
-Patterns support the [List Aggregates](#list-aggregates-of-logs) visualization. Clicking a pattern in the list opens the pattern side panel from which you can:
+Patterns support the [List Aggregates][15] visualization. Clicking a pattern in the list opens the pattern side panel from which you can:
 
 - Access a sample of logs from that pattern
 - Append the search filter to scope it down to logs from this pattern only
@@ -122,7 +122,7 @@ Transactions aggregate indexed logs according to instances of a **sequence** of 
 - **Finding key items:** For any `facet` with string values, calculate specific log information using the operations `count unique`, `latest`, `earliest` and `most frequent`.
 - **Getting Statistics:** For any `measure`, calculate statistical information using the operations `min`, `max`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, and `pc99`.
 
-Transactions support the [List Aggregates](#list-aggregates-of-logs) visualization. Clicking a pattern in the list opens the pattern side panel from which you can:
+Transactions support the [List Aggregates][15] visualization. Clicking a transaction in the list opens the transaction side panel from which you can:
 
 - Access all logs within that transaction
 - Search specific logs within that transaction
@@ -145,3 +145,4 @@ Transactions support the [List Aggregates](#list-aggregates-of-logs) visualizati
 [12]: /dashboards/functions/smoothing
 [13]: /dashboards/functions/rollup
 [14]: /dashboards/functions/exclusion
+[15]: /logs/explorer/visualize/#list-aggregates-of-logs
