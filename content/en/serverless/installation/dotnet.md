@@ -216,7 +216,7 @@ More information and additional parameters can be found in [Datadog Serverless C
 
 2. Add the dd-trace-dotnet layer to your Lambda function:
 
-    `arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-dotnet:{{< latest-lambda-layer-version layer="dotnet" >}}`
+    `arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-dotnet:{{< latest-lambda-layer-version layer="dd-trace-dotnet" >}}`
 
 3. Add your [Datadog API Key][2] to the Lambda function using the environment variable `DD_API_KEY`.
 
