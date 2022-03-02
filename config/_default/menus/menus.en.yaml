@@ -406,6 +406,11 @@ main:
     url: getting_started/integrations/
     parent: getting_started
     weight: 4
+  - name: AWS
+    identifier: getting_started_with_aws
+    url: getting_started/integrations/aws/
+    weight: 401
+    parent: getting_started_integrations
   - name: Dashboards
     identifier: getting_started_dashboards
     url: getting_started/dashboards/
