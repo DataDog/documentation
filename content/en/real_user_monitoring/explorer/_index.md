@@ -4,12 +4,9 @@ kind: documentation
 aliases:
 - /real_user_monitoring/rum_explorer
 further_reading:
-- link: "/real_user_monitoring/rum_explorer/"
-  tag: "Documentation"
-  text: "Explore your views within Datadog"
 - link: "/real_user_monitoring/explorer/search/"
   tag: "Documentation"
-  text: "Learn more about search in RUM Explorer"
+  text: "Learn more about search in the RUM Explorer"
 - link: "https://www.datadoghq.com/blog/core-web-vitals-monitoring-datadog-rum-synthetics/#what-are-the-core-web-vitals"
   tag: "Blog"
   text: "Monitor Core Web Vitals with RUM"
@@ -18,95 +15,43 @@ further_reading:
   text: "Start monitoring single-page applications"
 ---
 
-{{< img src="real_user_monitoring/explorer/rum_explorer.png" alt="RUM explorer"  >}}
+## Overview
 
-The Real User Monitoring (RUM) Explorer allows you to explore all data collected from your different applications. It gives you access to granular information about your RUM events, allowing you to:
-- Navigate user sessions
-- Investigate performance issues affecting views, resources or actions
+The Real User Monitoring (RUM) Explorer allows you to examine data collected from your applications and granular information about your RUM events. 
+
+Click the **Sessions** tab under **UX Monitoring** > **RUM Applications** to access the [RUM Explorer][1] and investigate any questions you have about your applications' health and usage. 
+
+You can:
+
+- Navigate through user sessions
+- Investigate performance issues affecting views, resources, or actions
 - Troubleshoot application errors
 
-## Navigate the explorer
+{{< img src="real_user_monitoring/explorer/rum_explorer_1.png" alt="RUM Explorer" style="width:95%;" >}}
 
-{{< img src="real_user_monitoring/explorer/explorer_tabs.png" alt="RUM explorer tabs"  >}}
+## Search and filter
 
-The RUM explorer displays all event types by default. Each tab gives you access to a customized list with relevant columns for the selected RUM event type.
+Search and filter your RUM events by typing in the search bar and selecting a visualization type in the [RUM Explorer][1]. You can narrow down, broaden, and shift your focus on subsets of events you are interested in.
 
-### Event side panel
+## Group
 
-{{< img src="real_user_monitoring/explorer/event_side_panel.png" alt="RUM event side panel"  >}}
+Group the RUM events you have queried into higher-level entities that may help you derive or consolidate information about an issue. To identify event patterns and aggregate events by subsets, see [Group RUM Events][2]. 
 
-Clicking a row in the RUM explorer opens the event side panel. It shows all the information relative to a RUM event. For views and actions, the waterfall is displayed along with related resources and errors.
+To start creating queries and using facets, see [Search Syntax][3]. 
 
-### Attributes tab
+## Visualize 
 
-RUM collects context information by default. You can add any additional context attributes with the Global Context API.
+Select a visualization for your filters and aggregations that displays your RUM events in a helpful perspective for you to uncover decisive information. 
 
-{{< img src="real_user_monitoring/explorer/attributes_tab.png" alt="RUM event side panel attributes tab"  >}}
+For example, you can view RUM events in a list, organize RUM data into columns, and see RUM data in a timeseries graph that displays your RUM metrics data over time. 
 
-## Context
-
-Build up a context to explore your RUM events in your RUM Explorer page first by selecting the proper [time range](#time-range), and then by using the [search bar][1] to filter your RUM events and analytics.
-
-### Time range
-
-The time range appears directly under the search bar as a timeline. This feature allows you to display RUM events in the explorer stream or analytics within a given time period.
-
-Quickly change the time range by selecting a preset range from the dropdown (or [entering a custom time frame][2]):
-
-{{< img src="real_user_monitoring/explorer/rum_time_selector.png" alt="Rum time selector"  style="width:50%;">}}
-
-All of the search parameters are contained within the URL. You can share your view by sharing the URL.
-
-
-## Setup facets and measures
-
-After being collected, your RUM events attributes can be indexed as facets or measures in order to be accessible for your [context](#context) creation and [analytics][3].
-
-{{< tabs >}}
-{{% tab "Facets" %}}
-
-A facet displays all the distinct members of an attribute or a tag and provides some basic analytics, such as the number of RUM events represented. Facets allow you to pivot or filter your datasets based on a given attribute. To filter, select the values that you want to see.
-
-{{< img src="real_user_monitoring/explorer/rum_facet.png" alt="Facets demo"  style="width:80%;">}}
-
-**Create a Facet**:
-
-To start using an attribute as a facet or in the search, click on it and add it as a facet:
-
-{{< img src="real_user_monitoring/explorer/create_facet.png" style="width:50%;" alt="Create Facet"  style="width:30%;">}}
-
-Once this is done, the value of this attribute is stored **for all new views** and can be used in [the search bar][1], the facets panel, and in the [RUM Analytics query][2].
-
-[1]: /real_user_monitoring/explorer/search/#search
-[2]: /real_user_monitoring/rum_analytics/
-{{% /tab %}}
-{{% tab "Measures" %}}
-
-A measure is an attribute with a numerical value contained in your RUM events.
-
-**Create a Measure**:
-
-To start using an attribute as a measure, click on a numerical attribute of your views:
-
-{{< img src="real_user_monitoring/explorer/create_measure.png" alt="Create a measure"  style="width:30%;">}}
-
-Once this is done, the value of this attribute is stored **for all new RUM events** and can be used in [the search bar][1], the facets panel, and in the [RUM Analytics query][2].
-
-**Select the Measure Unit**:
-
-Each measure has its own unit that is then used for display in the RUM Explorer columns and RUM Analytics.
-
-{{< img src="real_user_monitoring/explorer/edit_measure.png" alt="Edit a measure"  style="width:50%;">}}
-
-[1]: /real_user_monitoring/explorer/search/#search
-[2]: /real_user_monitoring/rum_analytics/
-{{% /tab %}}
-{{< /tabs >}}
+To start visualizing RUM data in the RUM Explorer, see [Create RUM Visualizations][4].
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/explorer/search/#search-syntax
-[2]: /dashboards/guide/custom_time_frames
-[3]: /real_user_monitoring/explorer/analytics/
+[1]: https://app.datadoghq.com/rum/explorer
+[2]: /real_user_monitoring/explorer/group
+[3]: /real_user_monitoring/explorer/search_syntax
+[4]: /real_user_monitoring/explorer/visualize

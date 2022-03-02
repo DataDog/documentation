@@ -38,6 +38,8 @@ error_budget("slo_id").over("time_window") > 75
 
 In addition, SLO error budget alerts can also be created using the [datadog_monitor resource in Terraform][6]. Below is an example `.tf` for configuring an error budget alert for a metric-based SLO using the same example query as above.
 
+**For provider versions v2.7.0 or earlier and v2.13.0 or later**
+
 **Note:** SLO error budget alerts are only supported in Terraform provider v2.7.0 or earlier and in provider v2.13.0 or later. Versions between v2.7.0 and v2.13.0 are not supported.
 
 ```
@@ -51,6 +53,25 @@ resource "datadog_monitor" "metric-based-slo" {
 
     message = "Example monitor message"
     monitor_thresholds = {
+      critical = 75
+    }
+    tags = ["foo:bar", "baz"]
+}
+```
+
+**For provider version v3+**
+
+```
+resource "datadog_monitor" "metric-based-slo" {
+    name = "SLO Error Budget Alert Example"
+    type  = "slo alert"
+    
+    query = <<EOT
+    error_budget("slo_id").over("time_window") > 75 
+    EOT
+
+    message = "Example monitor message"
+    monitor_thresholds {
       critical = 75
     }
     tags = ["foo:bar", "baz"]

@@ -4,21 +4,24 @@ kind: documentation
 disable_sidebar: true
 description: ルーター、スイッチ、サーバー、ファイアウォールなどのネットワーク接続デバイスを可視化。
 aliases:
-  - /ja/network_performance_monitoring/devices/
+    - /ja/network_performance_monitoring/devices/
 further_reading:
-  - link: https://www.datadoghq.com/blog/monitor-snmp-with-datadog/
-    tag: ブログ
-    text: Datadog での SNMP モニタリング
-  - link: https://www.datadoghq.com/blog/monitor-meraki/
-    tag: ブログ
-    text: Datadog で Cisco Meraki を監視する
-  - link: https://www.datadoghq.com/blog/datacenter-monitoring-dashboards/
-    tag: ブログ
-    text: Datadog でデータセンターおよびネットワークデバイスを監視
+    - link: https://www.datadoghq.com/blog/monitor-snmp-with-datadog/
+      tag: ブログ
+      text: Datadog での SNMP モニタリング
+    - link: https://www.datadoghq.com/blog/monitor-meraki/
+      tag: ブログ
+      text: Datadog で Cisco Meraki を監視する
+    - link: https://www.datadoghq.com/blog/datacenter-monitoring-dashboards/
+      tag: ブログ
+      text: Datadog でデータセンターおよびネットワークデバイスを監視
 ---
+
 ## 概要
 
-{{< img src="network_performance_monitoring/devices/ndm-overview.png" alt="データセンター概要ダッシュボード" responsive="true" style="width:100%;">}}
+{{< vimeo 673243317 >}}
+
+<br/>
 
 ネットワークデバイスモニタリングは、ルーター、スイッチ、ファイアウォールなどのオンプレミスおよびバーチャルのネットワークデバイスを可視化するように設計されています。任意のネットワーク上のデバイスを自動的に検出し、帯域幅使用率、送信されたバイト数、デバイスのアップ/ダウンなどのメトリクスを迅速に収集します。
 
@@ -41,32 +44,31 @@ further_reading:
 
 以下のベンダーのデバイスは、専用のプロファイルでサポートされます。ベンダー/デバイスの種類がサポートされながら、特定のモデルがサポートされていない場合は、[よくあるご質問][6]を参照してください。
 
-- Cisco Catalyst
-- Cisco ASA
-- Cisco CSR 1000v
-- Cisco ISR 4431
-- Cisco Nexus
-- Cisco ICM
-- Cisco UC Virtual Machines
-- Arista
-- Aruba
-- Checkpoint Firewall
-- Chatsworth PDU
-- APC UPS
-- F5 Big IP
-- Fortinet FortiGate
-- HP iLO
-- HP Proliant
-- Dell iDRAC
-- EMC Isilon
-- Juniper EX シリーズ
-- Juniper MX シリーズ
-- Juniper SRX
-- Meraki Cloud
-- Meraki On-Prem
-- NetApp
-- Palo Alto
-
+-   Cisco Catalyst
+-   Cisco ASA
+-   Cisco CSR 1000v
+-   Cisco ISR 4431
+-   Cisco Nexus
+-   Cisco ICM
+-   Cisco UC Virtual Machines
+-   Arista
+-   Aruba
+-   Checkpoint Firewall
+-   Chatsworth PDU
+-   APC UPS
+-   F5 Big IP
+-   Fortinet FortiGate
+-   HP iLO
+-   HP Proliant
+-   Dell iDRAC
+-   EMC Isilon
+-   Juniper EX シリーズ
+-   Juniper MX シリーズ
+-   Juniper SRX
+-   Meraki Cloud
+-   Meraki On-Prem
+-   NetApp
+-   Palo Alto
 
 ## その他の参考資料
 

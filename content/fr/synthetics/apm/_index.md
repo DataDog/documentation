@@ -106,4 +106,4 @@ Ces traces sont conservées [aussi longtemps comme vos traces APM standard][19].
 [16]: https://github.com/DataDog/dd-trace-php/releases/tag/0.33.0
 [17]: /fr/tracing/setup_overview/setup/dotnet-core/
 [18]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v1.18.2
-[19]: /fr/tracing/trace_retention_and_ingestion/
+[19]: /fr/tracing/trace_retention/

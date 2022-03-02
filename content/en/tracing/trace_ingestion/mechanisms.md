@@ -100,7 +100,7 @@ span.SetTag(ext.ManualDrop, true)
 `ingestion_reason: analytic`
 
 <div class="alert alert-warning">
-On October 20, 2020, App Analytics was replaced by Tracing without Limits.  This is a deprecated mechanism with configuration information relevant to legacy App Analytics. Now, instead, use Tracing without Limits™ <a href="#head-based-default-mechanism">head-based sampling</a> to have full control over your data ingestion.
+On October 20, 2020, App Analytics was replaced by Tracing without Limits. This is a deprecated mechanism with configuration information relevant to legacy App Analytics. Now, instead, use Tracing without Limits™ <a href="#head-based-default-mechanism">head-based sampling</a> to have full control over your data ingestion.
 </div>
 
 If you need to sample a specific span, but don't need the full trace to be available, tracers allow a sampling rate to be configured for a single span. This span will be ingested at no less than the configured rate, even when the enclosing trace is dropped.

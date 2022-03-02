@@ -1,0 +1,15 @@
+{
+  "data": {
+    "attributes": {
+      "emails": [
+        "string"
+      ],
+      "tags": [
+        "test",
+        "exampleconfiguretagsformultiplemetricsreturnsacceptedresponse"
+      ]
+    },
+    "id": "system.load.1",
+    "type": "metric_bulk_configure_tags"
+  }
+}

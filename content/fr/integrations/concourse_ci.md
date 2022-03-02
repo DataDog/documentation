@@ -51,7 +51,7 @@ Paramétrez les options suivantes de sorte que l'ATC puisse utiliser l'émetteur
 
 ### Options de l'émetteur de métriques
 
-Consultez la [documentation][4] de Concourse CI (en anglais) pour en savoir plus.
+Consultez la section de la documentation Concourse CI relative à la [configuration des métriques][4] (en anglais) pour en savoir plus.
 
 ```text
 Metric Emitter (Datadog):
