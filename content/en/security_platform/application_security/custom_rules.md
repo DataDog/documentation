@@ -1,6 +1,13 @@
 ---
 title: Custom Detection Rules
 kind: documentation
+further_reading:
+- link: "/security_platform/application_security/"
+  tag: "Documentation"
+  text: "Monitoring threats with Datadog Application Security"
+- link: "/security_platform/application_security/troubleshooting"
+  tag: "Documentation"
+  text: "Troubleshoot common Datadog Application Security issues"
 ---
 
 ## Overview
@@ -105,26 +112,22 @@ This JSON object is an example of event attributes which may be associated with 
 
 ```json
 {
-  ...
-	"attributes": {
-			"title": "Security scanner detected",
-			"http": {
-				"url": "http://www.example.com"
-			},
-			...
-				"rule": {
-					"detectionMethod": "threshold",
-					"name": "Your rule name",
-				},
-				"events_matched": 2,
-				"first_seen": "2022-01-26T13:23:33.000Z",
-				"last_seen": "2022-01-27T04:01:57.000Z"
-			},
-			"groupByPaths": [
-				"service"
-			]
-		}
-	}
+  "attributes":{
+    "title":"Security scanner detected",
+    "http":{
+      "url":"http://www.example.com"
+    },
+    "rule":{
+      "detectionMethod":"threshold",
+      "name":"Your rule name"
+    },
+    "events_matched":2,
+    "first_seen":"2022-01-26T13:23:33.000Z",
+    "last_seen":"2022-01-27T04:01:57.000Z"
+  },
+  "groupByPaths":[
+    "service"
+  ]
 }
 ```
 
@@ -159,6 +162,7 @@ Tag your signals with different tags, for example, `attack:sql-injection-attempt
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /security_platform/default_rules/#cat-application-security
 [2]: https://app.datadoghq.com/security/appsec/signals-rules
 [3]: /monitors/notify/?tab=is_alert#integrations
