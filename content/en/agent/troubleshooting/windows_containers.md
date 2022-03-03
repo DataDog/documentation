@@ -63,7 +63,7 @@ kube-state-metrics:
 
 #### Mixed clusters with the Datadog Cluster Agent
 
-With Cluster Agent v1.18+, this configuration is supported by the Datadog Cluster Agent.
+With Cluster Agent v1.18+, a configuration with mixed clusters is supported by the Datadog Cluster Agent.
 
 Use the following `values.yaml` file to configure communication between Agents deployed on Windows nodes and the Cluster Agent.
 
