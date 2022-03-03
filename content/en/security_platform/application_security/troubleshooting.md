@@ -187,7 +187,7 @@ The following [Go][1] frameworks should be instrumented using the out-of-the-box
 - [Echo][5]
 - [Chi][6]
 
-Please let us know if your framework is not supported by [creating a new issue][7] in the Go repository.
+If your framework is not supported, [create a new issue][7] in the Go repository.
 
 [1]: /security_platform/application_security/setup_and_configure/
 [2]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/grpc#example-package-Server
