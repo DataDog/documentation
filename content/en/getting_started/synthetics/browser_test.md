@@ -26,7 +26,7 @@ further_reading:
 
 {{< img src="getting_started/synthetics/browser-test-overview.png" alt="Overview of a Synthetics Browser Test" style="width:100%;" >}}
 
-These tests verify that your users can perform **key business transactions** on your applications and that they are not negatively impacted by the most recent code changes.
+These tests verify that your users can perform **key business transactions** on your applications and that they are not negatively impacted by recent code changes.
 
 ## Create a browser test
 

@@ -79,7 +79,7 @@ Your private locations test results display identically to your managed location
 Use your new private location just like a managed location in your Synthetic tests.
 
 1. Create an [API test][2], [multistep API test][8], or [browser test][9] on any internal endpoint or application you want to monitor.
-2. Under **Private Locations**, select your new private location(s):
+2. Under **Private Locations**, select your new private location:
 
     {{< img src="synthetics/private_locations/assign-test-pl-2.png" alt="Assign a Synthetic test to a private location" style="width:100%;">}}
 
