@@ -167,7 +167,7 @@ To get notified of any unwanted or unexpected behavior in your account, create [
 
 ### Serverless
 
-You can unify the metrics, traces, and logs from your AWS Lambda functions running serverless applications in Datadog. Check out [Serverless] for instructions on instrumenting your application, installing [Serverless Libraries and Integrations][42], implementing [Distributed Tracing with Serverless Applications][43], or [Serverless Troubleshooting][44].
+You can unify the metrics, traces, and logs from your AWS Lambda functions running serverless applications in Datadog. Check out [Serverless][56] for instructions on instrumenting your application, installing [Serverless Libraries and Integrations][42], implementing [Distributed Tracing with Serverless Applications][43], or [Serverless Troubleshooting][44].
 
 ### APM
 To dig even deeper and gather more data from your applications and AWS services, enable collecting distributed traces from either the [AWS X-Ray][45] integration or from a host with the Datadog Agent using [APM][46]. Then, read [Explore Datadog APM][47] for a better understanding of how to use this data to gain insights into your application performance. 
@@ -246,3 +246,4 @@ If you encounter any issues, be sure to check out the [Troubleshooting][55] sect
 [53]: /security_platform/cspm/getting_started/
 [54]: /security_platform/default_rules/#cat-cloud-configuration
 [55]: /integrations/amazon_web_services/?tab=roledelegation#troubleshooting
+[56]: /serverless
