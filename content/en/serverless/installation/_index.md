@@ -14,7 +14,7 @@ further_reading:
 
 ## Quick start
 
-If you are new to Datadog, you can get started by [signing up for a Datadog account][1], then following the instructions for [installing Datadog's Lambda Extension][2]. Completing these steps will configure your Lambda functions to send real-time metrics, logs, and traces to Datadog:
+If you are new to Datadog, you can get started by [signing up for a Datadog account][5], then following the instructions for [installing Datadog's Lambda Extension][6]. Completing these steps will configure your Lambda functions to send real-time metrics, logs, and traces to Datadog:
 
 {{< img src="serverless/aws-fully-managed-services-serverless-monitoring-hero.png" alt="Datadog Serverless Monitoring"  style="width:100%;" >}}
 
@@ -24,5 +24,5 @@ For more detailed installation instructions, select the Lambda runtime below for
 
 {{< partial name="serverless/getting-started-languages.html" >}}
 
-[1]: https://app.datadoghq.com/signup/
-[2]: https://app.datadoghq.com/signup/agent#lambda
+[5]: https://app.datadoghq.com/signup/
+[6]: https://app.datadoghq.com/signup/agent#lambda

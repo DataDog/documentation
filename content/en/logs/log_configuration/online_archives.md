@@ -94,9 +94,9 @@ Here are examples of different log retention strategies and how to implement the
 
 **Note:** Index order matters since `team:security` logs go into the first index that matches the index filter in case there are multiple indexes.
 
-
-{{< /site-region >}}
 [1]: /logs/log_configuration/indexes/#indexes-filters
 [2]: /logs/log_configuration/indexes/#exclusion-filters
 [3]: https://app.datadoghq.com/logs/pipelines/indexes
 [4]: https://app.datadoghq.com/logs
+
+{{< /site-region >}}

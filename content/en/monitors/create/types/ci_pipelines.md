@@ -39,7 +39,7 @@ To create a [CI Pipeline monitor][2] in Datadog, use the main navigation: **Moni
     * **Monitor over the `Pipeline` level**: If the `Pipeline` level is selected, the monitor will only include pipeline events for evaluation, which represent the execution of an entire pipeline, usually composed of one or more jobs.
     * **Monitor over the `Stage` level**: If the `Stage` level is selected, the monitor will only include stage events for evaluation, which represent the execution of a group of one or more jobs in CI providers that support it.
     * **Monitor over the `Job` level**: If the `Job` level is selected, the monitor will only include job events for evaluation, which represent the execution of a group of commands.
-    * **Monitor over the `Command` level**: If the `Command` level is selected, the monitor will only include manually instrumented [custom command][3] events for evaluation, which represent individual commands being executed in a job.
+    * **Monitor over the `Command` level**: If the `Command` level is selected, the monitor will only include manually instrumented [custom command][5] events for evaluation, which represent individual commands being executed in a job.
     * **Monitor over all levels**: If the `All` level is selected, the monitor will include all types of events for evaluation.
 
 3. Choose to monitor over a CI Pipeline event count, facet, or measure:
@@ -72,11 +72,11 @@ The following example is of a pipeline error rate monitor using a formula that c
 
 #### Advanced alert conditions
 
-For detailed instructions on the advanced alert options (such as evaluation delay), see the [Monitor configuration][4] page.
+For detailed instructions on the advanced alert options (such as evaluation delay), see the [Monitor configuration][3] page.
 
 ### Notifications
 
-For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][5] page.
+For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][4] page.
 
 #### Notifications behavior when there is no data
 
@@ -96,9 +96,9 @@ This notification will only be sent for monitor alerts!
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
 [1]: /continuous_integration/
 [2]: https://app.datadoghq.com/monitors/create/ci-pipelines
-[3]: /continuous_integration/setup_pipelines/custom_commands/
-[4]: /monitors/create/configuration/#advanced-alert-conditions
-[5]: /monitors/notify/
+[3]: /monitors/create/configuration/#advanced-alert-conditions
+[4]: /monitors/notify/
+[5]: /continuous_integration/setup_pipelines/custom_commands/
+
