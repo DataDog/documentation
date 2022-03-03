@@ -73,13 +73,13 @@ Additional cases can be added by clicking the **Add Case** button.
 
 **Note**: The `evaluation window` must be less than or equal to the `keep alive` and `maximum signal duration`.
 
-## Say what's happening
+### Say what's happening
 
 The **Rule name** section allows you to configure the rule name that appears in the rules list view, as well as the title of the signal.
 
 The notification box has the same Markdown and preview features.
 
-### Template variables
+#### Template variables
 
 Security rules support template variables within the markdown notification box. Template variables permit injection of dynamic context from traces directly into a security signal and its associated notifications.
 
