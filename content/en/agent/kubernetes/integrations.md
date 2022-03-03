@@ -259,8 +259,8 @@ See the [Autodiscovery Container Identifiers][1] documentation for information o
 
 **Note**: The Helm chart has two `confd` sections: one for Agent checks, and a second for cluster checks. If you are using the Cluster Agent and looking to configure Autodiscovery for a cluster check, follow the [cluster check configuration example][2] and make sure to include `cluster_check: true`. See the [Cluster Check documentation][3] for more context. 
 
-[1]: https://github.com/helm/charts/blob/fbdaa84049d93d8e40bc8c26b0987f3883fa1cac/stable/datadog/values.yaml#L244-L261
-[2]: https://github.com/helm/charts/blob/fbdaa84049d93d8e40bc8c26b0987f3883fa1cac/stable/datadog/values.yaml#L426-L438
+[1]: https://github.com/DataDog/helm-charts/blob/92fd908e3dd7b7149ce02de1fe859ae5ac717d03/charts/datadog/values.yaml#L315-L330
+[2]: https://github.com/DataDog/helm-charts/blob/92fd908e3dd7b7149ce02de1fe859ae5ac717d03/charts/datadog/values.yaml#L680-L689
 [3]: /agent/cluster_agent/clusterchecks
 {{% /tab %}}
 {{< /tabs >}}
