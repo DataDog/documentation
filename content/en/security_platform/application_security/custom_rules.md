@@ -52,9 +52,9 @@ Queries are correlated together by using a `group by` value. The `group by` valu
 
 For example, create a query that searches for the same `Service` activity, but append opposing HTTP status code queries:
 
-Query `successful_attack_trigger`: `security_activity_to_monitor` ``-@http_status_code:[500-599]`.
+Query `successful_attack_trigger`: `security_activity_to_monitor -@http_status_code:[500-599]`.
 
-Query `failed_attack_trigger`: `security_activity_to_monitor``@http_status_code:[500-599]`.
+Query `failed_attack_trigger`: `security_activity_to_monitor @http_status_code:[500-599]`.
 
 Set `group by` for both to `Service` and create rule cases for each.
 
@@ -78,7 +78,7 @@ Anomaly detection inspects how the `group by` attribute has behaved in the past.
 
 ### Trigger
 
-Rule cases, such as `succesful trigger > 0`, are evaluated as case statements. Thus, the first case to match generates the signal. Create one or multiple rule cases, and click on the grey area next to them to drag and manipulate their ordering.
+Rule cases, such as `successful trigger > 0`, are evaluated as case statements. Thus, the first case to match generates the signal. Create one or multiple rule cases, and click on the grey area next to them to drag and manipulate their ordering.
 
 A rule case contains logical operations (`>, >=, &&, ||`) to determine if a signal should be generated based on the event counts in the previously defined queries.
 
