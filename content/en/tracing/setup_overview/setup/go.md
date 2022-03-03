@@ -58,53 +58,10 @@ Datadog has a series of pluggable packages which provide out-of-the-box support 
 
 ## Configuration
 
-The Go tracer supports additional environment variables and functions for configuration.
-See all available options in the [configuration documentation][8].
-
-`DD_VERSION`
-: Set the application’s version, for example: `1.2.3`, `6c44da20`, `2020.02.13`
-
-`DD_SERVICE`
-: The service name to be used for this application. 
-
-`DD_ENV`
-: Set the application’s environment, for example: prod, pre-prod, staging.
-
-`DD_AGENT_HOST`
-: **Default**: `localhost` <br>
-Override the default trace Agent host address for trace submission.
-
-`DD_DOGSTATSD_PORT`
-: **Default**: `8125` <br>
-Override the default trace Agent port for DogStatsD metric submission.
-
-`DD_TRACE_SAMPLE_RATE`
-: Enable [Tracing without Limits][9].
-
-`DD_TAGS`
-: **Default**: [] <br>
-A list of default tags to be added to every span and profile. Tags can be separated by commas or spaces, for example: `layer:api,team:intake` or `layer:api team:intake`
-
-`DD_TRACE_STARTUP_LOGS`
-: **Default**: `true` <br>
-Enable startup configuration and the diagnostic log.
-
-`DD_TRACE_DEBUG`
-: **Default**: `false` <br>
-Enable debug logging in the tracer.
-
-`DD_TRACE_ENABLED`
-: **Default**: `true` <br>
-Enable web framework and library instrumentation. When false, the application code doesn’t generate any traces.
-
-`DD_SERVICE_MAPPING`
-: **Default**: `null` <br>
-Dynamically rename services through configuration. Services can be separated by commas or spaces, for example: `mysql:mysql-service-name,postgres:postgres-service-name`, `mysql:mysql-service-name postgres:postgres-service-name`.
-
 
 Datadog recommends using `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `env`, `service`, and `version` for your services.
 
-Read the [Unified Service Tagging][10] documentation for recommendations on how to configure these environment variables. These variables are available for versions 1.24.0+ of the Go tracer.
+Read the [Unified Service Tagging][8] documentation for recommendations on how to configure these environment variables. These variables are available for versions 1.24.0+ of the Go tracer.
 
 You may also elect to provide `env`, `service`, and `version` through the tracer's API:
 
@@ -128,6 +85,49 @@ func main() {
 }
 ```
 
+The Go tracer supports additional environment variables and functions for configuration.
+See all available options in the [configuration documentation][9].
+
+`DD_VERSION`
+: Set the application’s version, for example: `1.2.3`, `6c44da20`, `2020.02.13`
+
+`DD_SERVICE`
+: The service name to be used for this application.
+
+`DD_ENV`
+: Set the application’s environment, for example: prod, pre-prod, staging.
+
+`DD_AGENT_HOST`
+: **Default**: `localhost` <br>
+Override the default trace Agent host address for trace submission.
+
+`DD_DOGSTATSD_PORT`
+: **Default**: `8125` <br>
+Override the default trace Agent port for DogStatsD metric submission.
+
+`DD_TRACE_SAMPLE_RATE`
+: Enable [Tracing without Limits][10].
+
+`DD_TAGS`
+: **Default**: [] <br>
+A list of default tags to be added to every span and profile. Tags can be separated by commas or spaces, for example: `layer:api,team:intake` or `layer:api team:intake`
+
+`DD_TRACE_STARTUP_LOGS`
+: **Default**: `true` <br>
+Enable startup configuration and the diagnostic log.
+
+`DD_TRACE_DEBUG`
+: **Default**: `false` <br>
+Enable debug logging in the tracer.
+
+`DD_TRACE_ENABLED`
+: **Default**: `true` <br>
+Enable web framework and library instrumentation. When false, the application code doesn’t generate any traces.
+
+`DD_SERVICE_MAPPING`
+: **Default**: `null` <br>
+Dynamically rename services through configuration. Services can be separated by commas or spaces, for example: `mysql:mysql-service-name,postgres:postgres-service-name`, `mysql:mysql-service-name postgres:postgres-service-name`.
+
 ### Configure the Datadog Agent for APM
 
 Install and configure the Datadog Agent to receive traces from your now instrumented application. By default the Datadog Agent is enabled in your `datadog.yaml` file under `apm_config` with `enabled: true` and listens for trace traffic at `localhost:8126`. For containerized environments, follow the links below to enable trace collection within the Datadog Agent.
@@ -142,11 +142,16 @@ Install and configure the Datadog Agent to receive traces from your now instrume
 {{< partial name="apm/apm-containers.html" >}}
 </br>
 
-3. After having instrumented your application, the tracing client sends traces to `localhost:8126` by default.  If this is not the correct host and port change it by setting the below env variables:
+3. After the application is instrumented, the trace client attempts to send traces to the Unix domain socket `/var/run/datadog/apm.socket` by default. If the socket does not exist, traces are sent to `http://localhost:8126`.
 
-    `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`.
+   If a different socket, host, or port is required, use the `DD_TRACE_AGENT_URL` environment variable. Some examples:
 
-    You can also set a custom hostname and port in code:
+   ```
+   DD_TRACE_AGENT_URL=http://custom-hostname:1234
+   DD_TRACE_AGENT_URL=unix:///var/run/datadog/apm.socket
+   ```
+
+   The connection for traces can also be configured in code:
 
     ```go
     package main
@@ -158,15 +163,20 @@ Install and configure the Datadog Agent to receive traces from your now instrume
     )
 
     func main() {
+        // Network configuration
         addr := net.JoinHostPort(
             "custom-hostname",
             "1234",
         )
-        tracer.Start(tracer.WithAgentAddr(addr))
+
+        tracer.Start(tracer.WithAgentAddr(addr),
+            // Unix domain socket configuration
+            tracer.WithUDS("/var/run/datadog/apm.socket"),
+    )
         defer tracer.Stop()
     }
     ```
-{{< site-region region="us3,us5,eu,gov" >}} 
+{{< site-region region="us3,us5,eu,gov" >}}
 
 4. Set `DD_SITE` in the Datadog Agent to {{< region-param key="dd_site" code="true" >}} to ensure the Agent sends data to the right Datadog location.
 
@@ -198,7 +208,7 @@ For other environments, please refer to the [Integrations][5] documentation for 
 
 ## Configure APM environment name
 
-The [APM environment name][11] may be configured [in the agent][12] or using the [WithEnv][8] start option of the tracer.
+The [APM environment name][11] may be configured [in the agent][12] or using the [WithEnv][9] start option of the tracer.
 
 ### B3 headers extraction and injection
 
@@ -233,9 +243,9 @@ extracted value is used.
 [5]: https://github.com/DataDog/dd-trace-go/tree/v1/MIGRATING.md
 [6]: /tracing/profiler/enabling/?code-lang=go
 [7]: https://app.datadoghq.com/apm/docs
-[8]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#StartOption
-[9]: /tracing/trace_ingestion/
-[10]: /getting_started/tagging/unified_service_tagging
+[8]: /getting_started/tagging/unified_service_tagging
+[9]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#StartOption
+[10]: /tracing/trace_ingestion/
 [11]: /tracing/advanced/setting_primary_tags_to_scope/#environment
 [12]: /getting_started/tracing/#environment-name
 [13]: https://github.com/openzipkin/b3-propagation

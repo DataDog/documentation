@@ -682,9 +682,7 @@
         "json": {
           "data": {
             "from_ts": 1615323990,
-            "group_by": [
-              []
-            ],
+            "group_by": [],
             "groups": [
               {
                 "error_budget_remaining": {

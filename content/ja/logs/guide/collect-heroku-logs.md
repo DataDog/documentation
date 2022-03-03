@@ -20,23 +20,23 @@ Datadog の HTTP API は、コンテンツヘッダー `application/logplex-1` �
 * 以下のコマンドを使用して HTTPS ドレインをセットアップします。
 
 ```text
-heroku drains:add 'https://http-intake.logs.{{< region-param key="dd_site" >}}/v1/input/<DD_API_KEY>?ddsource=heroku&env=<ENV>&service=<SERVICE>&host=<HOST>' -a <APPLICATION_NAME>
+heroku drains:add 'https://http-intake.logs.{{< region-param key="dd_site" >}}/api/v2/logs/?dd-api-key=<DD_API_KEY>&ddsource=heroku&env=<ENV>&service=<SERVICE>&host=<HOST>' -a <APPLICATION_NAME>
 ```
 
 * `<DD_API_KEY>` は [Datadog API キー][2]に置き換えます。
-* `<ENV>` をアプリケーションの[環境][4]で置き換えます。
+* `<ENV>` をアプリケーションの[環境][3]で置き換えます。
 * `<APPLICATION_NAME>` と `<SERVICE>` はアプリケーション名に置き換えます。
-* `<HOST>` は目的のホスト名に置き換えます。**注**: この[ホストセクション][3]に基づいて、メトリクスとトレースはデフォルトのホスト名を dyno 名に設定します。dyno 名をログのホスト名として動的に設定することは、現時点ではできません。現在、メトリクス、トレース、ログの関連付けに使用できるのは、`dyno` タグと `dynotype` タグです。
+* `<HOST>` は目的のホスト名に置き換えます。**注**: この[ホストセクション][4]に基づいて、メトリクスとトレースはデフォルトのホスト名を dyno 名に設定します。dyno 名をログのホスト名として動的に設定することは、現時点ではできません。現在、メトリクス、トレース、ログの関連付けに使用できるのは、`dyno` タグと `dynotype` タグです。
 
 ### カスタム属性
 
 アプリケーションからのログにカスタム属性を追加するには、ドレイン内の URL を次のように置き換えます。
 
 ```text
-https://http-intake.logs.{{< region-param key="dd_site" >}}/v1/input/<DD_API_KEY>?ddsource=heroku&service=<SERVICE>&host=<HOST>&attribute_name=<VALUE>
+https://http-intake.logs.{{< region-param key="dd_site" >}}/api/v2/logs/?dd-api-key=<DD_API_KEY>&ddsource=heroku&service=<SERVICE>&host=<HOST>&attribute_name=<VALUE>
 ```
 
 [1]: https://devcenter.heroku.com/articles/log-drains#https-drains
-[2]: https://app.datadoghq.com/account/settings#api
-[3]: /ja/agent/basic_agent_usage/heroku/#hostname
-[4]: /ja/getting_started/tagging/#introduction
+[2]: https://app.datadoghq.com/organization-settings/api-keys
+[3]: /ja/getting_started/tagging/#introduction
+[4]: /ja/agent/basic_agent_usage/heroku/#hostname
