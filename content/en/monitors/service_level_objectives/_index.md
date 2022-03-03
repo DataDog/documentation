@@ -185,7 +185,7 @@ Each SLO has a maximum limit of corrections that can be configured to ensure que
 
 | Correction Type   | Limit per SLO |
 | ----------------- | ------------- |
-| One-time          | 30            |
+| One-time          | 100           |
 | Daily recurring   | 2             |
 | Weekly recurring  | 3             |
 | Monthly recurring | 5             |
