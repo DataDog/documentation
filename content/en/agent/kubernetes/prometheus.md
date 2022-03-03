@@ -145,13 +145,12 @@ With Prometheus Autodiscovery, the Datadog Agent is able to detect native Promet
 
 In your Helm `values.yaml`, add the following:
 
-```
-...
+```yaml
 datadog:
-...
+  # (...)
   prometheusScrape:
     enabled: true
-...
+  # (...)
 ```
 
 This instructs the Datadog Agent to detect the pods that have native Prometheus annotations and generate corresponding OpenMetrics checks.
@@ -180,7 +179,7 @@ The autodiscovery configuration can be based on container names or kubernetes an
 
 **Note:** The default value of `kubernetes_annotations` in the Datadog Agent configuration is the following:
 
-```
+```yaml
 kubernetes_annotations:
   include:
     - prometheus.io/scrape: "true"
@@ -192,9 +191,9 @@ kubernetes_annotations:
 
 In this example we're defining an advanced configuration targeting a container named `my-app` running in a pod labeled `app=my-app`. We're customizing the Openmetrics check configuration as well, by enabling the `send_distribution_buckets` option and defining a custom timeout of 5 seconds.
 
-```
+```yaml
 datadog:
-...
+  # (...)
   prometheusScrape:
     enabled: true
     additionalConfigs:
