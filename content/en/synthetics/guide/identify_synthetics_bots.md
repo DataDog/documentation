@@ -104,6 +104,7 @@ If you use the browser variable to identify Synthetic bots on Firefox and Intern
 Cookies that are applied in your browser include `datadog-synthetics-public-id` and `datadog-synthetics-result-id`.
 
 These cookies are available for all steps in Firefox and Internet Explorer 11. For Edge and Google Chrome, these cookies are set only for the start URL.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
