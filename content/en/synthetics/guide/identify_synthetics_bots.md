@@ -35,7 +35,7 @@ https://ip-ranges.{{< region-param key="dd_site" >}}/synthetics.json
 
 The listed IPs use the Classless Inter-Domain Routing (CIDR) notation and may require conversion to IPv4 address ranges before use. Except in the case of new managed locations IPs, the listed IPs rarely change. 
 
-That being said, if you want to be alerted when the listed IPs change, create an API test on the endpoint above with a JSONPath assertion such as `$.synthetics['prefixes_ipv4_by_location']['aws:ap-northeast-1'].length`.
+If you want to be alerted when the listed IPs change, create an API test on the endpoint above with a JSONPath assertion such as `$.synthetics['prefixes_ipv4_by_location']['aws:ap-northeast-1'].length`.
 
 ## Default headers
 
