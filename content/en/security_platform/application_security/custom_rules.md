@@ -1,29 +1,29 @@
 ---
-title: Writing Custom Detection Rules
+title: Custom Detection Rules
 kind: documentation
 ---
 
 ## Overview
 
-Application Security comes with a set of [out-of-the-box detection rules][2] which aim to catch attack attempts and vulnerability triggers that impact your production systems.
+Application Security comes with a set of [out-of-the-box detection rules][1] which aim to catch attack attempts and vulnerability triggers that impact your production systems.
 
 However, there are situations where you may want to customize a rule based on your environment. For example, you may want to customize a rule that catches attack attempts on a service’s route. For instance, a pre-production development route accepting SQL and returning the results. Catching SQL attempts is noisy as the route is restricted to internal developers, therefore you can customize this rule to exclude these patterns.
 
-Another example is customizing a rule to exclude an internal security scanner. Application Security detects its activity as expected. However, you may not want to be notified as it’s a regularly occurring scan.
+Another example is customizing a rule to exclude an internal security scanner. Application Security detects its activity as expected. However, you may not want to be notified of it’s regularly occurring scan.
 
-In these situations, a custom detection rule can be created to exclude such events. This guide shows you how to create such a custom detection rule for Application Security.
+In these situations, a custom detection rule can be created to exclude such events. This guide shows you how to create a custom detection rule for Application Security.
 
 ## Configuration
 
-To customize an OOTB detection rule, you must first clone an existing rule. Navigate to your [Detection Rules][3] and select a rule. Scroll to the bottom of the rule and click the Clone Rule button. This now enables you to edit the existing rule.
+To customize an OOTB detection rule, you must first clone an existing rule. Navigate to your [Detection Rules][2] and select a rule. Scroll to the bottom of the rule and click the Clone Rule button. This now enables you to edit the existing rule.
 
 ### Define AppSec query
 
-Construct an Application Security query. For example, `@appsec.type:sql_injection @http.url_details.path:"/debug-endpoint-executing-sql" env:production`.
+Construct an Application Security query. For example, create a query to monitor an endpoint for SQL injection attempts: `@appsec.type:sql_injection @http.url_details.path:"/debug-endpoint-executing-sql" env:production`.
 
 Optionally, define a unique count and signal grouping. Count the number of unique values observed for an attribute in a given timeframe. The defined group-by generates a signal for each group by value. Typically, the group by is an entity (like user, or IP). The group-by is also used to [join the queries together](#joining-queries).
 
-Add additional queries with the Add Query button.
+You can add additional queries with the Add Query button.
 
 ##### Advanced options
 
@@ -33,13 +33,15 @@ Click the **Advanced** option to add queries that will **Only trigger a signal w
 
 Joining queries to span a timeframe can increase the confidence or severity of the Security Signal. For example, to detect a successful attack, both successful and unsuccessful tiggers can be correlated for a service.
 
-Queries are correlated together by using a `group by` value. The `group by` value is typically an entity (for example, `IP address` or `Service`), but can be any attribute. In this instance, joined queries technically hold same attribute value because the value must be the same for the case to be met. If a `group by` value doesn’t exist, the case will never be met. A Security Signal is generated for each unique `group by` value when a case is matched.
+Queries are correlated together by using a `group by` value. The `group by` value is typically an entity (for example, `IP address` or `Service`), but can be any attribute.
 
-For example, create opposing queries that searches for the same `sql_injection` activity, but append opposing HTTP path queries for successful and unsuccessful attemps:
+For example, create opposing queries that searches for the same `sql_injection` activity, but append opposing HTTP path queries for successful and unsuccessful attempts:
 
 Query 1: `@appsec.type:sql_injection -@http.url_details.path:"/debug-endpoint-executing-sql" env:production`.
 
 Query 2: `@appsec.type:sql_injection @http.url_details.path:"/debug-endpoint-executing-sql" env:production`.
+
+In this instance, joined queries technically hold same attribute value because the value must be the same for the case to be met. If a `group by` value doesn’t exist, the case will never be met. A Security Signal is generated for each unique `group by` value when a case is matched.
 
 ### Set a rule case
 
@@ -57,9 +59,9 @@ Provide a **name** for each rule case. This name is appended to the rule name wh
 
 Set the severity of the signal. The dropdown allows you to select an appropriate severity level (`INFO`, `LOW`, `MEDIUM`, `HIGH`, `CRITICAL`).
 
-In the “Notify” section, configure zero or more [notification targets][4] for each rule case.
+In the “Notify” section, configure zero or more [notification targets][3] for each rule case.
 
-You can also create [notification rules][5] to eleviate manual edits to notification preferences for individual detection rules.
+You can also create [notification rules][4] to eleviate manual edits to notification preferences for individual detection rules.
 
 ### Time windows
 
@@ -81,7 +83,7 @@ The notification box has the same Markdown and preview features.
 
 #### Template variables
 
-Security rules support template variables within the markdown notification box. Template variables permit injection of dynamic context from traces directly into a security signal and its associated notifications.
+Detection rules support template variables within the markdown notification box. Template variables permit injection of dynamic context from traces directly into a security signal and its associated notifications.
 
 Template variables also permit deep linking into Datadog or a partner portal for quick access to next steps for investigation. For example:
 
@@ -157,8 +159,7 @@ Tag your signals with different tags, for example, `attack:sql-injection-attempt
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-[1]: /monitors/notify/?tab=is_alert
-[2]: /security_platform/default_rules/#cat-application-security
-[3]: https://app.datadoghq.com/security/appsec/signals-rules
-[4]: /monitors/notify/?tab=is_alert#integrations
-[5]: /security_platform/notification_rules/
+[1]: /security_platform/default_rules/#cat-application-security
+[2]: https://app.datadoghq.com/security/appsec/signals-rules
+[3]: /monitors/notify/?tab=is_alert#integrations
+[4]: /security_platform/notification_rules/
