@@ -185,6 +185,9 @@ It is recommended to use `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `env`, 
 `DD_TRACE_SAMPLE_RATE`
 : Enable [Tracing without Limits][8].
 
+`DD_TRACE_RATE_LIMIT`
+: Maximum number of spans to sample per-second, per-Python process. Defaults to `100` when `DD_TRACE_SAMPLE_RATE` is set. Otherwise, delegates rate limiting to the Datadog Agent.
+
 `DD_TAGS`
 : A list of default tags to be added to every span and profile, for example: `layer:api,team:intake`. Available in version 0.38+.
 
