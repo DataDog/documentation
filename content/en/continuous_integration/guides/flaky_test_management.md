@@ -38,3 +38,11 @@ If a flaky test has not failed in the past 30 days, it is automatically removed 
 
 3. Look at the **New Flaky** column to see the number of new flaky tests that were introduced by the latest commit. These are tests that exhibit flaky behavior and didn’t previously exist in the Flaky Tests table.
 
+### Ignore new flaky tests detected by mistake
+
+You can ignore new flaky tests detected for a certain commit if you consider those flaky tests were detected by mistake. The tests will reappear if the commit exhibits Flakiness again.
+
+1. Click on the **New Flaky** number and then click on the **Ignore flaky tests** action.
+
+{{< img src="ci/ignore-new-flaky-tests.png" alt="Ignore all new flaky tests for a commit" style="width:100%;">}}
+
