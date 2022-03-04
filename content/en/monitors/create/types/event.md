@@ -16,6 +16,12 @@ further_reading:
   text: "Check your monitor status"
 ---
 
+{{< site-region region="us,eu" >}}
+<div class="alert alert-warning">
+  Event monitors are being deprecated and replaced by a new event monitor type. For more information, see the <a href="https://docs.datadoghq.com/events/guides/migrating_to_new_events_features/">Event migration guide</a>.
+</div>
+{{< /site-region >}}
+
 ## Overview
 
 Event monitors allow you to alert on events matching a search query.
