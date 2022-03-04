@@ -119,7 +119,7 @@ With the following configuration placeholder values:
 | Placeholder             | Description                                                                                                                               |
 |-------------------------|-------------------------------------------------------------------------------------------------------------------------------------------|
 | `<PROMETHEUS_PORT>`     | Port to connect to in order to access the Prometheus endpoint. Can alternatively use the [Autodiscovery Template Variable][6] `%%port%%`. |
-| `<PROMETHEUS_ENDPOINT>` | URL for the metrics served by the container, in Prometheus format.                                                                        |
+| `<PROMETHEUS_ENDPOINT>` | URL path for the metrics served by the container, in Prometheus format.                                                                   |
 | `<NAMESPACE>`           | Set namespace to be prefixed to every metric when viewed in Datadog.                                                                      |
 | `<METRIC_TO_FETCH>`     | Prometheus metrics key to be fetched from the Prometheus endpoint.                                                                        |
 | `<NEW_METRIC_NAME>`     | Transforms the `<METRIC_TO_FETCH>` metric key to `<NEW_METRIC_NAME>` in Datadog.                                                          |
@@ -160,7 +160,7 @@ docker run -d -e DD_API_KEY="<DATADOG_API_KEY>" \
 
 2. Launch a Prometheus container exposing example metrics for the Agent to collect, with the Autodiscovery Labels for the OpenMetrics Check.
 
-    The following labels will collect the metrics `promhttp_metric_handler_requests`, `promhttp_metric_handler_requests_in_flight`, and all exposed metrics starting with `go_memory`.
+    The following labels will have the Agent collect the metrics `promhttp_metric_handler_requests`, `promhttp_metric_handler_requests_in_flight`, and all exposed metrics starting with `go_memory`.
 
     ```yaml
     labels:
@@ -179,7 +179,7 @@ docker run -d -e DD_API_KEY="<DATADOG_API_KEY>" \
           }
         ]
     ```
-    To launch an example container with these labels you can run:
+    To launch an example Prometheus container with these labels you can run:
 
     ```shell
     docker run -d -l com.datadoghq.ad.check_names='["openmetrics"]' -l com.datadoghq.ad.init_configs='[{}]' -l com.datadoghq.ad.instances='[{"openmetrics_endpoint":"http://%%host%%:%%port%%/metrics","namespace":"documentation_example_docker","metrics":[{"promhttp_metric_handler_requests":"handler.requests"},{"promhttp_metric_handler_requests_in_flight":"handler.requests.in_flight"},"go_memory.*"]}]' prom/prometheus
