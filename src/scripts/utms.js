@@ -1,8 +1,8 @@
 import CookieHandler from './utils/cookieJar';
 
 const UTMCookies = new CookieHandler({
-    // domain: `docs.datadoghq.com`,
-    domain: `localhost`,
+    domain: `.datadoghq.com`,
+    // domain: `localhost`,
     path: '/',
     sameSite: 'strict',
     secure: true
