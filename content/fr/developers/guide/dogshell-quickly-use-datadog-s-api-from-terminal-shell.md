@@ -1,5 +1,6 @@
 ---
-title: Utilisez rapidement l'API de Datadog à partir du terminal/shell avec Dogshell
+title: Dogshell
+description: Utiliser l'API de Datadog à partir du terminal ou du shell
 kind: guide
 aliases:
   - /fr/developers/faq/dogshell-quickly-use-datadog-s-api-from-terminal-shell
@@ -8,9 +9,9 @@ Vous pouvez utiliser l'API Datadog directement à partir du terminal/shell en ut
 
 ## Configuration :
 
-Dogshell est inclus dans la [bibliothèque Python datadogpy][1], qui est officiellement prise en charge et fréquemment utilisée pour envoyer des données à Datadog via [DogStatsD][2]. [Elle peut être installée en suivant ces instructions][3].
+Dogshell est inclus dans la [bibliothèque Python datadogpy][1], qui est fréquemment utilisée pour envoyer des données à Datadog avec [DogStatsD][2]. Consultez le [référentiel GitHub datadogpy][3] pour obtenir les instructions d'installation.
 
-Une fois la bibliothèque installée, la commande `dog` est disponible dans votre terminal/shell. Mais cette commande doit encore être « initialisée » : vous devez spécifier une clé d'API et une clé d'application afin qu'elle puisse être utilisée pour envoyer/recevoir des données vers et à partir de votre compte. Lorsque vous essayez d'exécuter une commande `dog` pour la première fois, celle-ci reconnaît qu'elle a besoin d'être initialisée et vous guide à travers ce processus en deux étapes.
+Une fois la bibliothèque installée, la commande `dog` est disponible dans votre terminal/shell. Mais cette commande doit encore être « initialisée » : vous devez spécifier une clé d'API et une clé d'application afin qu'elle puisse être utilisée pour envoyer et recevoir des données vers et à partir de votre compte. Lorsque vous essayez d'exécuter une commande `dog` pour la première fois, celle-ci reconnaît qu'elle a besoin d'être initialisée et vous guide à travers ce processus en deux étapes.
 
 Voici un exemple de commande `dog` permettant de déclencher l'initialisation de la configuration (bien que n'importe quelle ancienne commande dog puisse être utilisée) :
 
@@ -27,13 +28,13 @@ Si votre fichier `.dogrc` n'a pas encore été créé (c'est-à-dire, le dogshel
 Choisissez « Y ». La réponse suivante s'affiche :
 
 ```text
-What is your api key? (Get it here: https://app.datadoghq.com/account/settings#api)
+What is your api key? (Get it here: https://app.datadoghq.com/organization-settings/api-keys)
 ```
 
 Collez votre clé d'API pour accéder à l'étape suivante :
 
 ```text
-What is your application key? (Generate one here: https://app.datadoghq.com/account/settings#api)
+What is your application key? (Generate one here: https://app.datadoghq.com/organization-settings/api-keys)
 ```
 
 Collez alors votre clé d'application. Vous obtenez enfin ceci :
@@ -42,15 +43,16 @@ Collez alors votre clé d'application. Vous obtenez enfin ceci :
 Wrote ~/.dogrc.
 ```
 
-Vous êtes maintenant prêt à utiliser vos commandes `dog` pour tirer rapidement parti de l'API Datadog à partir de votre terminal/shell. Si vous avez besoin d'aide ou d'informations supplémentaires sur les commandes `dog`, exécutez `dog -h`.
+Utilisez ensuite vos commandes `dog` pour utiliser rapidement l'API Datadog à partir de votre terminal/shell. Si vous avez besoin d'aide ou d'informations supplémentaires sur les commandes `dog`, exécutez `dog -h`.
 
-Si vous préférez rédiger vous-même votre fichier `.dogrc` (par exemple pour appliquer le fichier à plusieurs de vos serveurs par programmation de façon à pouvoir exécuter les commandes `dog` à partir de n'importe quel serveur), le contenu du fichier doit ressembler à ceci :
+Si vous préférez rédiger vous-même le fichier `.dogrc`, le contenu du fichier doit ressembler à ceci :
 
 ```text
 [Connection]
 apikey = <VOTRE_CLÉ_API>
 appkey = <VOTRE_CLÉ_APPLICATION>
 ```
+Cette méthode vous permet d'appliquer le fichier à plusieurs serveurs par programmation pour que vous puissiez exécuter les commandes `dog` depuis n'importe lequel de vos serveurs.
 
 ## Commandes Dogshell
 

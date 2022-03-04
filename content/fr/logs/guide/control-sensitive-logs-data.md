@@ -21,11 +21,17 @@ further_reading:
 - Si vous avez intentionnellement configuré vos logs pour qu'ils comportent des données sensibles à des fins de dépannage et d'audit légitimes, utilisez le **RBAC** pour configurer les restrictions appropriées et faire ainsi en sorte que seuls les utilisateurs autorisés ayant accès à votre compte Datadog puissent accéder à ces données. Pour en savoir plus, consultez le [guide d'utilisation du RBAC pour les logs][1] pour découvrir comment le configurer pour votre organisation.
 - Si des données sensibles sont loguées de façon involontaire, traitez-les sans attendre pour éviter tout problème en aval. Continuez à lire cette page pour en savoir plus.
 
-Il n'est pas toujours facile de contrôler l'ensemble de vos données, en particulier sur des plateformes vastes et collaboratives. Ce guide présente les trois étapes à suivre lorsque vous ingérez dans Datadog des données sensibles pouvant aller à l'encontre des obligations de conformité :
+Il n'est pas toujours facile de contrôler l'ensemble de vos données, en particulier sur des plateformes vastes et collaboratives. Ce guide présente les différentes options pour découvrir et gérer les données sensibles qui sont ingérées dans Datadog.
+
+## Sensitive Data Scanner
+
+Le [Sensitive Data Scanner][2] est un service de détection d'expressions en temps réel que vous pouvez utiliser pour identifier, taguer et éventuellement censurer ou hacher des données sensibles. Cette fonctionnalité permet à vos équipes de conformité et de sécurité de mettre en place une ligne de défense contre les fuites de données sensibles en dehors de votre organisation. Le Sensitive Data Scanner est disponible dans vos [paramètres d'organisation][3].
+
+Si vous avez déjà indexé des logs qui contiennent des données sensibles, suivez les trois étapes ci-après :
 
 1. [Déterminer le contexte des données envoyées](#determiner-le-contexte-des-donnees-envoyees)
 2. [Corriger la source de données en amont](#corriger-la-source-de-donnees-en-amont)
-3. [Traiter les données déjà envoyées à Datadog](#traiter-les-donnees-deja-envoyees-a-datadog)
+3. [Traiter les données déjà envoyées à Datadog](#traiter-les-donnees-deja-envoyees-et-indexees-dans-datadog)
 
 ## Déterminer le contexte des données envoyées
 
@@ -33,47 +39,51 @@ Il n'est pas toujours facile de contrôler l'ensemble de vos données, en partic
 
 Définissez d'abord une requête correspondant aux données sensibles. Cette requête renverra alors tous les logs comportant des données sensibles.
 
-Des requêtes comme `version:x.y.z source:python status:debug` peuvent par exemple répondre à cette exigence. Consultez la documentation sur la [syntaxe de recherche de log][2] si vous avez besoin d'utiliser des opérateurs avancés (wildcards, opérateurs booléens, etc.).
+Des requêtes comme `version:x.y.z source:python status:debug` peuvent par exemple répondre à cette exigence. Consultez la documentation sur la [syntaxe de recherche de log][4] si vous avez besoin d'utiliser des opérateurs avancés (wildcards, opérateurs booléens, etc.).
 
 Ce guide utilise l'expression **requête de recherche des données sensibles** pour faire référence à cette requête.
-
-{{< img src="logs/guide/sensitive/sensitive_outline_query.png" alt="Requête de recherche des données sensibles" style="width:80%;" >}}
 
 ### Où se trouvent les données sensibles dans Datadog ?
 
 Une fois que des données sensibles dans des logs ont été envoyées à votre plateforme Datadog, elles peuvent se trouver à plusieurs endroits. Vérifiez donc chacun des emplacements suivants (classés selon la probabilité, de la plus forte à la plus faible, qu'ils contiennent des données sensibles) :
 
-* Les [index][3] Datadog conservent vos logs jusqu'à ce qu'ils soient trop anciens, selon le paramètre de rétention des index. Vérifiez les index Datadog en premier : il est moins probable que les logs situés ailleurs présentent des problèmes de conformité. Examinez les [filtres d'index][4] et les [filtres d'exclusion][5] pour vérifier si des logs avec des données sensibles sont indexés.
+* Les [index][5] Datadog conservent vos logs jusqu'à ce qu'ils soient trop anciens, selon le paramètre de rétention des index. Vérifiez les index Datadog en premier : il est moins probable que les logs situés ailleurs présentent des problèmes de conformité. Examinez les [filtres d'index][6] et les [filtres d'exclusion][7] pour vérifier si des logs avec des données sensibles sont indexés.
 
-* Vérifiez vos [archives][6] de logs : c'est là que les logs sont envoyés par Datadog afin d'être stockés. Configurez des filtres d'archives pour vérifier si votre archive contient des logs sensibles.
+* Vérifiez vos [archives][8] de logs : c'est là que les logs sont envoyés par Datadog afin d'être stockés. Configurez des filtres d'archives pour vérifier si votre archive contient des logs sensibles.
 
-* Vérifiez également les [métriques générées à partir de logs][7] qui stockent des métriques agrégées. Les données sensibles ont probablement été filtrées. Passez en revue les filtres de métriques custom pour vérifier si des logs avec des données sensibles ont été traités.
+* Vérifiez également les [métriques générées à partir de logs][9] qui stockent des métriques agrégées. Les données sensibles ont probablement été filtrées. Passez en revue les filtres de métriques custom pour vérifier si des logs avec des données sensibles ont été traités.
 
-* Les notifications des [log monitors][8] peuvent inclure des [exemples de log][9]. Vérifiez notamment les monitors qui se sont déclenchés pendant la période d'envoi de données sensibles.
+* Les notifications des [log monitors][10] peuvent inclure des [exemples de log][11]. Vérifiez notamment les monitors qui se sont déclenchés pendant la période d'envoi de données sensibles.
 
-* Les flux [Livetail][10] permettent aux utilisateurs de votre organisation de visualiser en temps réel les logs. Il n'y a aucune persistance au-delà des 50 logs mis en cache dans les navigateurs, et pour les requêtes plus vastes, les résultats peuvent présenter un niveau d'échantillonnage élevé.
+* Les flux [Livetail][12] permettent aux utilisateurs de votre organisation de visualiser en temps réel les logs. Il n'y a aucune persistance au-delà des 50 logs mis en cache dans les navigateurs, et pour les requêtes plus vastes, les résultats peuvent présenter un niveau d'échantillonnage très élevé.
 
 ## Corriger la source de données en amont
 
+### Censurer les données sensibles lors de streaming de logs à l'aide du Sensitive Data Scanner
+
+Utilisez des règles prêtes à l'emploi ou personnalisées pour [identifier et censurer les autres types de données sensibles][2] qui continuent d'arriver dans vos logs.
+
 ### Arrêter l'indexation de logs sensibles
 
-Il s'agit d'une étape facultative visant à empêcher l'envoi d'autres données sensibles à Datadog. Cependant, n'oubliez pas que vous devez toujours gérer les données sensibles qui ont déjà été envoyées à Datadog.
+Si vous n'utilisez pas le Sensitive Data Scanner, déterminez si vous souhaitez empêcher tous les nouveaux logs contenant des données sensibles d'être indexés. Vous devrez toujours traiter les logs contenant des données sensibles déjà indexés dans Datadog.
 
-* Identifiez les index comportant des données sensibles susceptibles d'être envoyées.
+* Recherchez les index qui contiennent des logs avec des données sensibles.
 * Pour chaque index, ajoutez un filtre d'exclusion en fonction de la requête de recherche des données sensibles.
 
 {{< img src="logs/guide/sensitive/sensitive_exclusion-filters.png" alt="Filtres d'exclusion des données sensibles" style="width:80%;" >}}
 
 ### Arrêter d'envoyer des données sensibles à Datadog
 
-Si vous pouvez modifier directement les loggers, Datadog propose des solutions pour empêcher l'envoi de données sensibles en dehors de votre plateforme lorsque vous utilisez l'[Agent Datadog][11] pour la collecte de logs :
+Si certains types de données sensibles ne doivent pas quitter votre environnement et sont ingérées dans Datadog, ajoutez des règles de nettoyage au niveau de la collection source.
 
-* [Nettoyez les données sensibles][12] de vos logs avant de les envoyer à Datadog.
-* Vous pouvez également définir avec précision les conteneurs sur lesquels la collecte de logs doit être effectuée avec [Autodiscovery][13].
+Si vous pouvez modifier directement les loggers, Datadog propose des solutions pour empêcher l'envoi de données sensibles en dehors de votre plateforme lorsque vous utilisez l'[Agent Datadog][13] pour la collecte de logs :
 
-Des fonctionnalités de nettoyage des données similaires sont disponibles pour le [Forwarder sans serveur][14].
+* [Nettoyez les données sensibles][14] de vos logs avant de les envoyer à Datadog.
+* Vous pouvez également définir avec précision les conteneurs sur lesquels la collecte de logs doit être effectuée avec [Autodiscovery][15].
 
-## Traiter les données déjà envoyées à Datadog
+Des fonctionnalités de nettoyage des données similaires sont disponibles pour le [Forwarder sans serveur][16].
+
+## Traiter les données déjà envoyées et indexées dans Datadog
 
 Effectuez les étapes suivantes conformément à vos exigences de conformité. Veuillez noter que vous n'aurez peut-être pas à effectuer toutes ces étapes.
 
@@ -81,7 +91,7 @@ Effectuez les étapes suivantes conformément à vos exigences de conformité. V
 
 Grâce à cette étape, les logs comportant des données sensibles, aussi bien ceux qui ont déjà été envoyés que ceux susceptibles d'être envoyés plus tard, ne peuvent pas faire l'objet d'une requête dans Datadog (Log Explorer, dashboards et Livetail).
 
-Accédez à la [page de configuration de l'accès aux données][15] et utilisez la requête de recherche des données sensibles pour définir une [restriction][16] qui s'applique à tous les membres de votre organisation. Il peut s'agir par exemple de la requête utilisée ci-dessus : `version:x.y.z source:python status:debug`.
+Accédez à la [page de configuration de l'accès aux données][17] et utilisez une requête de recherche de données sensibles pour définir une [restriction][18] qui s'applique à tous les membres de votre organisation. Il peut s'agir par exemple de la requête utilisée ci-dessus : `version:x.y.z source:python status:debug`.
 
 **Remarque** : si vous utilisez l'opérateur **NOT** dans la requête de recherche des données sensibles, les utilisateurs n'auront plus accès qu'aux logs correspondants.
 
@@ -89,36 +99,41 @@ Accédez à la [page de configuration de l'accès aux données][15] et utilisez 
 
 ### Modifier vos archives
 
-Si vous devez modifier vos archives afin de supprimer des données sensibles, consultez la documentation sur le [format des archives][17] générées par Datadog.
+Si vous devez modifier vos archives afin de supprimer des données sensibles, consultez la documentation sur le [format des archives][19] générées par Datadog.
 
 ## Assistance
 
-Si vous avez des questions concernant la conformité des logs ou si vous avez besoin d'aide, n'hésitez pas à contacter l'[équipe d'assistance][18] Datadog. Assurez-vous au préalable d'avoir à disposition les informations suivantes :
+Si vous avez des questions concernant la conformité des logs ou si vous avez besoin d'aide, n'hésitez pas à contacter l'[équipe d'assistance][20] Datadog. Assurez-vous au préalable d'avoir à disposition les informations suivantes :
 
 * La requête de recherche des données sensibles ou tout élément pouvant être utilisé pour définir les données sensibles, comme un intervalle, un service ou un environnement.
+* Si vous utilisez le [Sensitive Data Scanner][21] ou non.
 * Si des données sensibles sont encore envoyées à Datadog.
 * Si des données sensibles ont été indexées (et dans quels index) ou transformées en métriques.
 * Si vous avez déjà fait en sorte que les données sensibles ne puissent plus faire l'objet d'une requête.
+
 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/logs/guide/logs-rbac/
-[2]: /fr/logs/search_syntax/
-[3]: /fr/logs/indexes
-[4]: /fr/logs/indexes#indexes-filters
-[5]: /fr/logs/indexes#exclusion-filters
-[6]: /fr/logs/archives
-[7]: /fr/logs/logs_to_metrics/
-[8]: /fr/monitors/create/types/log/
-[9]: /fr/monitors/create/types/log/#notifications
-[10]: /fr/logs/explorer/live_tail/
-[11]: /fr/agent/
-[12]: /fr/agent/logs/advanced_log_collection/?tab=configurationfile#scrub-sensitive-data-from-your-logs
-[13]: /fr/agent/guide/autodiscovery-management/?tab=containerizedagent
-[14]: /fr/serverless/forwarder#log-forwarding-optional
-[15]: https://app.datadoghq.com/logs/pipelines/data-access
-[16]: /fr/account_management/rbac/permissions/?tab=ui#logs_read_data
-[17]: /fr/logs/archives/?tab=awss3#format-of-the-archives
-[18]: /fr/help/
+[2]: /fr/account_management/org_settings/sensitive_data_detection/
+[3]: /fr/account_management/org_settings/
+[4]: /fr/logs/search_syntax/
+[5]: /fr/logs/indexes
+[6]: /fr/logs/indexes#indexes-filters
+[7]: /fr/logs/indexes#exclusion-filters
+[8]: /fr/logs/archives
+[9]: /fr/logs/logs_to_metrics/
+[10]: /fr/monitors/create/types/log/
+[11]: /fr/monitors/create/types/log/#notifications
+[12]: /fr/logs/explorer/live_tail/
+[13]: /fr/agent/
+[14]: /fr/agent/logs/advanced_log_collection/?tab=configurationfile#scrub-sensitive-data-from-your-logs
+[15]: /fr/agent/guide/autodiscovery-management/?tab=containerizedagent
+[16]: /fr/serverless/forwarder#log-forwarding-optional
+[17]: https://app.datadoghq.com/logs/pipelines/data-access
+[18]: /fr/account_management/rbac/permissions/?tab=ui#logs_read_data
+[19]: /fr/logs/archives/?tab=awss3#format-of-the-archives
+[20]: /fr/help/
+[21]: https://www.datadoghq.com/blog/sensitive-data-scanner/
