@@ -21,10 +21,6 @@ further_reading:
   text: "Additional Security Considerations"
 ---
 
-- security signals? (are these events? logs? other?)
-- sensitive data scanner?
-
-
 <div class="alert alert-info">This page is about the security of data sent to Datadog. If you're looking for cloud and application security products and features, see the <a href="/security_platform/" target="_blank">Security Platform</a> section.</div>
 
 In the normal course of using Datadog as intended, you send data to Datadog. Datadog works together with you to reduce risk and help ensure that the data you send is appropriate, not a violation of someone's privacy, and secure during and after its transmission.
@@ -40,6 +36,10 @@ Datadog allows you to send data in multiple ways, including from the [Agent][], 
 While data is in motion, Datadog protects it with Transport Layer Security (TLS) and HTTP Strict Transport Security (HSTS). Data stored by Datadog is protected by encryption, access controls, and authentication. For specifics, read more at [Datadog Security][].
 
 ## Kinds of data you send 
+
+Datadog's purpose is to gather observability information from many sources around your infrastructure and services, and to bring it together in one place for you to analyze and investigate. This involves you sending a wide range of types of data content to Datadog's servers. Some of that data is structured and follow patterns that we can automatically check for and handle appropriately to protect privacy. Read about [using these automation and tools options](#datadog-automation-and-tools-for-protecting-data) next. 
+
+However, a lot of the data is the names and descriptions of things, and you must consider whether the text you are sending represent private data for you or your customers, and if so avoid sending it. Consider the following types of data you send to Datadog during the intended use of the product:
 
 Metadata and tags
 : Metadata consists primarily of [tags][6] in the `key:value` format, for example, `env:prod`. Metadata is used by Datadog to filter and group data to help you derive meaningful information. 
@@ -57,7 +57,7 @@ Database query signatures
 : Database monitoring data consists of metrics and samples, along with their associated tags, collected by the Agent and used to track historical performance of normalized queries. The granularity of this data is defined by its normalized query signature and unique host identifier. 
 
 Logs
-: Logs and their associated tags are collected [by the Agent or by integrations][9]. Logs record computer events about an operating system, application, or user activities, forming an audit trail that can help detect security violations, performance problems, and flaws in applications.
+: Logs and their associated tags are collected [by the Agent or by integrations][9]. Logs record computer events about an operating system, application, or user activities, forming an audit trail that can help detect security violations, performance problems, and flaws in applications. Log messages can contain almost any form of data.
 
 Process information
 : [Processes][11] consist of metrics and data from the `proc` filesystem, which acts as an interface to internal data structures in the kernel. Process data may contain the process command (including its path and arguments), the associated username, the ID of the process and its parent, the process state, and the working directory. Process data usually also has tag metadata associated with it.
@@ -65,20 +65,19 @@ Process information
 Events and comments
 : [Events][14] data is aggregated from multiple sources into a consolidated view, including triggered monitors, events submitted by integrations, events submitted by the application itself, and comments sent by users or through the API. Events and comments usually have associated tags metadata.
 
-RUM, Synthetics, CI, Security signals
+Continuous Integration pipelines and tests
 : ...
 
-## Automated ways Datadog protects sent data
+RUM, Synthetics, Security signals
 
+
+## Datadog automation and tools for protecting data
+
+- **Sensitive Data Scanner**: 
 - **Database queries**: All query parameters are obfuscated and discarded from collected samples before being sent to Datadog.
 - **Process arguments**: Values for the following keywords are obfuscated from process data:
 `password` `passwd` `mysql_pwd` `access_token` `auth_token` `api_key` `apikey` `secret` `credentials` `stripetoken`. In addition, you can obfuscate sensitive sequences within process commands or arguments by using the [`custom_sensitive_words` setting][3] to provide an exclusion list of one or more regular expressions.
-
-## Datadog tools you can use to further protect data
-
-
-## Additional manual steps you can take to protect data
-
+- Sensitive Data Scanner: /account_management/org_settings/sensitive_data_detection/
 
 
 ## Component-specific data security
@@ -93,7 +92,7 @@ The Datadog integrations for some third party services are configured directly i
 
 All data is encrypted at-rest and in-transit. Access to the secure credential datastore is controlled and audited, and specific services or actions within those services are limited to only what is necessary. Anomalous behavior detection continuously monitors for unauthorized access. Datadog employee access for maintenance purposes is limited to a select subset of engineers.
 
-### Security and cloud integrations
+### Cloud integrations
 
 Due to their sensitive nature, additional security guarantees are implemented where possible when integrating with cloud providers, including relying on Datadog-dedicated credentials with limited permissions. For example:
 
