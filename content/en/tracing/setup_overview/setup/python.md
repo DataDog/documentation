@@ -153,7 +153,7 @@ For other environments, please refer to the [Integrations][5] documentation for 
 {{% /tab %}}
 {{< /tabs >}}
 
-Once you've finished setup and are running the tracer with your application, you can run `ddtrace-run --status` to check that configurations are working as expected. Note that the output from this command does not reflect configuration changes made during runtime in code.
+Once you've finished setup and are running the tracer with your application, you can run `ddtrace-run --info` to check that configurations are working as expected. Note that the output from this command does not reflect configuration changes made during runtime in code.
 
 For more advanced usage, configuration, and fine-grain control, see Datadog's [API documentation][3].
 
