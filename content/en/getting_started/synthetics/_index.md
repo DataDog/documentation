@@ -32,15 +32,9 @@ Datadog tracks the performance of your webpages and APIs from the backend to the
 
 ## Synthetic test types
 
-Datadog provides several types of synthetic tests: 
+Datadog offers **API tests**, **Multistep API tests**, and **Browser tests**.
 
-- **API tests** to monitor the uptime of your API endpoints
-- **Multistep API tests** to link several HTTP requests
-- **Browser tests** to test key user journeys
-
-Run your tests from managed locations or private locations to monitor any internal-facing applications. Synthetic tests can be triggered manually, on a schedule, or directly from your CI/CD pipelines.
-
-See the Further Reading links below for complete documentation of each of these features. 
+To monitor internal-facing applications, run your tests from managed locations or private locations. Synthetic tests can be triggered manually, on a schedule, or directly from your CI/CD pipelines.
 
 ## Prerequisites
 
@@ -51,9 +45,9 @@ If you haven't already, create a [Datadog account][1].
 To set up your first Synthetic test with Datadog, choose from the following options:
 
 - [Create an API test][2] to start monitoring your API endpoints' uptime.
-- [Create a multistep API test][3] to start monitoring key workflows at the API level.
+- [Create a multistep API test][3] to link several HTTP requests and start monitoring key workflows at the API level.
 - [Create a browser test][4] to start testing critical business transactions on your applications.
-- [Create a private location][5] to monitor internal applications using all Synthetic test types.
+- [Create a private location][5] to start monitoring internal applications using all Synthetic test types.
 
 ## Further Reading
 
