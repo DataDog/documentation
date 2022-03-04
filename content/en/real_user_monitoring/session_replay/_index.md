@@ -131,6 +131,11 @@ Expected Network bandwidth impact is less than 100Kb/min. Refined estimates will
 
 Session Replay follows the same 30 days retention policy as normal RUM sessions.
 
+### How do you disable Session Replay?
+
+- Remove startSessionReplayRecording() to stop session recordings.
+- Set `replaySampleRate` to `0` to stop collecting the RUM Session Replay plan which includes resources and long tasks.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
