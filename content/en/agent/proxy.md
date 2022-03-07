@@ -271,7 +271,7 @@ frontend network_devices_metadata_frontend
     default_backend datadog-network-devices-metadata
 
 
-# This declares the endpoint where your Agents connects for
+# This declares the endpoint where your Agents connect for
 # sending appsec events (deprecated).
 frontend appsec-events-frontend
     bind *:3842
