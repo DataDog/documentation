@@ -30,6 +30,17 @@ Install the [`datadog-ci`][2] CLI globally using `npm`:
 npm install -g @datadog/datadog-ci
 {{< /code-block >}}
 
+### Standalone binary (beta)
+
+If installing node in your environment is an issue, it's possible to use the standalone binary version of the library:
+
+{{< code-block lang="bash" >}}
+curl https://raw.githubusercontent.com/DataDog/datadog-ci/master/quick-install.sh | bash
+{{< /code-block >}}
+
+<div class="alert alert-warning"><strong>Note</strong>: the standalone binary is in beta and its stability is not guaranteed.</div>
+
+
 ## Uploading test reports
 
 To upload your JUnit XML test reports to Datadog, run the following command, specifying the name of the service or library that was tested using the `--service` parameter, and one or more file paths to either the XML report files directly or directories containing them:
