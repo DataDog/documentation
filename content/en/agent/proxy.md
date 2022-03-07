@@ -273,7 +273,7 @@ frontend network_devices_metadata_frontend
 
 # This declares the endpoint where your Agents connects for
 # sending appsec events (deprecated).
-frontend traces-forwarder
+frontend appsec-events-frontend
     bind *:3842
     mode tcp
     option tcplog
