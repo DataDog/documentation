@@ -7261,6 +7261,34 @@ api:
         - ListProcesses
       unstable: []
       order: 1
+  - name: RUM
+    url: /api/latest/rum/
+    identifier: rum
+    generated: true
+  - name: Search RUM events
+    url: '#search-rum-events'
+    identifier: search-rum-events
+    parent: rum
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - SearchRUMEvents
+      unstable: []
+      order: 1
+  - name: Get a list of RUM events
+    url: '#get-a-list-of-rum-events'
+    identifier: get-a-list-of-rum-events
+    parent: rum
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListRUMEvents
+      unstable: []
+      order: 2
   - name: Roles
     url: /api/latest/roles/
     identifier: roles
