@@ -6,7 +6,7 @@ kind: guide
 
 ## Overview
 
-Transport Layer Security (TLS) is a critical security protocol used to protect web traffic. It provides confidentiality and integrity of data in transit between clients and servers exchanging information. Datadog is disabling support for older versions of TLS, below 1.2 (SSLv3, TLS v1.0, TLS v1.1) across public facing Datadog applications, beginning March 31, 2022. If you use unsupported clients to connect to Datadog after the older protocols are disabled, you will receive connection error messages.
+Transport Layer Security (TLS) is a critical security protocol used to protect web traffic. It provides confidentiality and integrity of data in transit between clients and servers exchanging information. Datadog is disabling support for older versions of TLS, below 1.2 (SSLv3, TLS v1.0, TLS v1.1) across public facing Datadog applications, beginning June 30, 2022. If you use unsupported clients to connect to Datadog after the older protocols are disabled, you will receive connection error messages.
 
 ### Reason for deprecation
 
