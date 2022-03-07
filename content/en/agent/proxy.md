@@ -270,6 +270,15 @@ frontend network_devices_metadata_frontend
     option tcplog
     default_backend datadog-network-devices-metadata
 
+
+# This declares the endpoint where your Agents connects for
+# sending appsec events (deprecated).
+frontend traces-forwarder
+    bind *:3842
+    mode tcp
+    option tcplog
+    default_backend datadog-appsec-events
+
 # This is the Datadog server. In effect any TCP request coming
 # to the forwarder frontends defined above are proxied to
 # Datadog's public endpoints.
@@ -350,6 +359,14 @@ backend datadog-network-devices-metadata
     server-template mothership 5 ndm-intake.{{< region-param key="dd_site" >}}:443  check port 443 ssl verify none check resolvers my-dns init-addr none resolve-prefer ipv4
     # Uncomment the following configuration for older HAProxy versions
     # server mothership ndm-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify none
+
+backend datadog-appsec-events # deprecated
+    balance roundrobin
+    mode tcp
+    # The following configuration is for HAProxy 1.8 and newer
+    server-template mothership 5 appsecevts-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify none check resolvers my-dns init-addr none resolve-prefer ipv4
+    # Uncomment the following configuration for older HAProxy versions
+    # server mothership appsecevts-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify none
 
 ```
 
@@ -541,6 +558,11 @@ stream {
         proxy_ssl on;
         proxy_pass ndm-intake.{{< region-param key="dd_site" >}}:443;
     }
+    server {
+        listen 3842; #listen for appsec events (deprecated)
+        proxy_ssl on;
+        proxy_pass appsecevts-intake.{{< region-param key="dd_site" >}}:443;
+    }
 }
 ```
 
@@ -565,6 +587,9 @@ database_monitoring:
 network_devices:
     metadata:
         dd_url: "<PROXY_SERVER_DOMAIN>:3841"
+
+appsec_config:
+    appsec_dd_url: "<PROXY_SERVER_DOMAIN>:3842"
 ```
 
 When sending logs over TCP, see <a href="/agent/logs/proxy">TCP Proxy for Logs</a>.
