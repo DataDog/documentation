@@ -35,4 +35,4 @@ If you are unable to download applications directly from the Chrome Web Store be
 [2]: https://app.datadoghq.com/synthetics/browser/create
 [3]: /synthetics/browser_tests/#configuration
 [4]: /synthetics/browser_tests/#record-test
-[5]: https://www.crx4chrome.com/crx/190075/
+[5]: https://github.com/DataDog/synthetics-browser-extension
