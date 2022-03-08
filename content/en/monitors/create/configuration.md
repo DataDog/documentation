@@ -1,7 +1,8 @@
 ---
 title: Configure Monitors
 kind: documentation
-description: Describe the monitor creation page. How to configure properly a monitor ?
+description: Describes the monitor creation page.
+
 ---
 
 ## Overview
@@ -143,7 +144,7 @@ Delay the evaluation start by `N` seconds for new groups.
 
 The time (in seconds) to wait before starting alerting, to allow newly created groups to boot and applications to fully start. This should be a non-negative integer.
 
-For example, if you are using containerized architecture, setting an evaluation delay prevents monitor groups scoped on containers from triggering due to high resource usage or high latency when a new container is created. The delay is applied to every new group (which has not been seen in the last 24 hours) and defaults to `60` seconds.
+For example, if you are using containerized architecture, setting a group delay prevents monitor groups scoped on containers from triggering due to high resource usage or high latency when a new container is created. The delay is applied to every new group (which has not been seen in the last 24 hours) and defaults to `60` seconds.
 
 The option is available with multi-alert mode.
 

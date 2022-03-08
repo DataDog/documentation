@@ -4,7 +4,7 @@ kind: documentation
 further_reading:
 - link: "security_platform/default_rules"
   tag: "Documentation"
-  text: "Explore default cloud configuration rules"
+  text: "Explore default cloud configuration detection rules"
 - link: "security_platform/cspm/findings"
   tag: "Documentation"
   text: "Search and explore CSPM findings"
@@ -13,7 +13,7 @@ further_reading:
   text: "Learn about frameworks and industry benchmarks"
 ---
 
-{{< site-region region="us3,us5,gov" >}}
+{{< site-region region="gov" >}}
 <div class="alert alert-warning">
 Cloud Security Posture Management is not currently available in this site.
 </div>
@@ -33,11 +33,11 @@ Select `Posture Management`. You can also configure multiple products at once by
 
 ### Assess your cloud environment
 
-Detect misconfigurations in your cloud environment. This section guides you through collecting resource configuration data from cloud providers. Resource configuration collection allows Datadog to assess your environments against Datadog’s out-of-the-box [Cloud Configuration rules][2].
+Detect misconfigurations in your cloud environment. This section guides you through collecting resource configuration data from cloud providers. Resource configuration collection allows Datadog to assess your environments against Datadog’s out-of-the-box [Posture Management cloud configuration detection rules][2].
 
 ### Assess your host and containers
 
-Evaluate the security posture of your hosts and containers. This section guides you through configuring the Datadog Agent to scan your hosts and containers. Our agent allows Datadog to continuously assess the state of your hosts and containers against Datadog’s out-of-the-box [Infrastructure Configuration rules][3].
+Evaluate the security posture of your hosts and containers. This section guides you through configuring the Datadog Agent to scan your hosts and containers. Our agent allows Datadog to continuously assess the state of your hosts and containers against Datadog’s out-of-the-box [Posture Management Infrastructure Configuration detection rules][3].
 
 ## Further reading
 

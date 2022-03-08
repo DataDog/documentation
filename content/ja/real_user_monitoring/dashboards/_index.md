@@ -12,7 +12,7 @@ RUM アプリケーションを作成すると、すべての[収集データ][1
 
 ダッシュボードには、[RUM Applications ページ][2]からアクセスできます。アプリケーションに紐付けられた **Dashboard** リンクをクリックします。
 
-{{< img src="real_user_monitoring/dashboards/rum_applications.gif" alt="RUM アプリケーション" >}}
+{{< img src="real_user_monitoring/dashboards/rum_applications.mp4" alt="RUM アプリケーション" video=true >}}
 
 {{< whatsnext desc="次のダッシュボードを使用できます" >}}
   {{< nextlink href="/real_user_monitoring/dashboards/performance_overview_dashboard" >}}<u>Performance Overview</u>: Web サイトのパフォーマンスとデモグラフィック (人口動態) について総合的な意見を取得します。{{< /nextlink >}}
@@ -28,13 +28,13 @@ RUM アプリケーションを作成すると、すべての[収集データ][1
 
 自動的に作成されるデフォルトのテンプレート変数セットと一緒に、すべてのアプリケーション用の RUM ダッシュボードが生成されます。RUM ダッシュボードを絞り込むには、テンプレート上部にあるテンプレート変数を使用します。たとえば、`applicationId` テンプレート変数を使用すると、特定のアプリケーションに絞り込めます。
 
-{{< img src="real_user_monitoring/dashboards/template_variables.gif" alt="テンプレート変数" style="width:50%;" >}}
+{{< img src="real_user_monitoring/dashboards/template_variables.mp4" alt="テンプレート変数" video=true style="width:50%;" >}}
 
 ### RUM イベントの表示
 
 すべての個別イベントを調査するには、グラフをクリックして _View RUM views_ を選択すると、現在選択中のフィルターで RUM Explore にリダイレクトされます。
 
-{{< img src="real_user_monitoring/dashboards/view_rum_events.gif" alt="RUM イベントの表示" style="width:80%;" >}}
+{{< img src="real_user_monitoring/dashboards/view_rum_events.mp4" alt="RUM イベントの表示" video=true style="width:80%;" >}}
 
 ### ダッシュボードのカスタマイズ
 

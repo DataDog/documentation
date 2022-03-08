@@ -327,8 +327,23 @@ Timeout in seconds for network interactions with the Datadog Agent.
 `dd.trace.header.tags`
 : **Environment Variable**: `DD_TRACE_HEADER_TAGS`<br>
 **Default**: `null`<br>
-**Example**: `CASE-insensitive-Header:my-tag-name,User-ID:userId`<br>
-A map of header keys to tag names. Automatically apply header values as tags on traces.
+**Example**: `CASE-insensitive-Header:my-tag-name,User-ID:userId,My-Header-And-Tag-Name`<br>
+Accepts a map of case-insensitive header keys to tag names and automatically applies matching header values as tags on traces. Also accepts entries without a specified tag name that are automatically mapped to tags of the form `http.request.headers.<header-name>` and `http.response.headers.<header-name>` respectively.<br><br>
+Prior to version 0.96.0 this setting only applied to request header tags. To change back to the old behavior, add the setting `-Ddd.trace.header.tags.legacy.parsing.enabled=true` or the environment variable `DD_TRACE_HEADER_TAGS_LEGACY_PARSING_ENABLED=true`.
+
+`dd.trace.request_header.tags`
+: **Environment Variable**: `DD_TRACE_REQUEST_HEADER_TAGS`<br>
+**Default**: `null`<br>
+**Example**: `CASE-insensitive-Header:my-tag-name,User-ID:userId,My-Header-And-Tag-Name`<br>
+Accepts a map of case-insensitive header keys to tag names and automatically applies matching request header values as tags on traces. Also accepts entries without a specified tag name that are automatically mapped to tags of the form `http.request.headers.<header-name>`.<br>
+Available since version 0.96.0.
+
+`dd.trace.response_header.tags`
+: **Environment Variable**: `DD_TRACE_RESPONSE_HEADER_TAGS`<br>
+**Default**: `null`<br>
+**Example**: `CASE-insensitive-Header:my-tag-name,User-ID:userId,My-Header-And-Tag-Name`<br>
+Accepts a map of case-insensitive header keys to tag names and automatically applies matching response header values as tags on traces. Also accepts entries without a specified tag name that are automatically mapped to tags of the form `http.response.headers.<header-name>`.<br>
+Available since version 0.96.0.
 
 `dd.trace.annotations`
 : **Environment Variable**: `DD_TRACE_ANNOTATIONS`<br>
@@ -682,7 +697,7 @@ Java APM has minimal impact on the overhead of an application:
 [5]: /account_management/billing/apm_tracing_profiler/
 [6]: /tracing/profiler/
 [7]: /tracing/connect_logs_and_traces/java/
-[8]: /tracing/trace_retention_and_ingestion/
+[8]: /tracing/trace_ingestion/
 [9]: https://docs.oracle.com/javase/7/docs/technotes/tools/solaris/java.html
 [10]: https://docs.oracle.com/javase/8/docs/api/java/lang/instrument/package-summary.html
 [11]: /tracing/setup/docker/

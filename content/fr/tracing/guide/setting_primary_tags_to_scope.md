@@ -39,8 +39,7 @@ Vous pouvez également définir manuellement le tag `env` comme tag global pour 
 
 #### Environnement de l'Agent
 
-Le tag `env` peut être défini dans la configuration de votre Agent.
-**Ne définissez pas des tags `env` différents sur le traceur et l'Agent. Cela pourrait entraîner la duplication des tags pour les [métriques de trace][6].**
+Le tag `env` peut être défini dans la configuration de votre Agent. **Ne définissez pas des tags `env` différents sur le traceur et l'Agent. Cela pourrait entraîner la duplication des tags pour les [métriques de trace][5].**
 
 Options :
 
@@ -69,7 +68,7 @@ Les environnements apparaissent en haut des pages APM. Utilisez la liste déroul
 
 ## Ajouter un deuxième tag primaire dans Datadog
 
-Si vous ajoutez un tag de host autre que `env:<ENVIRONNEMENT>` à vos traces, celui-ci peut être défini comme tag primaire en plus du tag d'environnement. Accédez à la page [APM Settings][5] pour définir, modifier ou supprimer vos tags primaires.
+Si vous ajoutez un tag de host autre que `env:<ENVIRONNEMENT>` à vos traces, celui-ci peut être défini comme tag primaire en plus du tag d'environnement. Accédez à la page [APM Settings][6] pour définir, modifier ou supprimer vos tags primaires.
 
 Remarque :
 
@@ -95,5 +94,5 @@ Les tags primaires apparaissent en haut des pages APM. Utilisez ces sélecteurs 
 [2]: /fr/getting_started/tagging/
 [3]: /fr/getting_started/tagging/unified_service_tagging
 [4]: /fr/getting_started/tagging/assigning_tags/#traces
-[5]: https://app.datadoghq.com/apm/settings
-[6]: /fr/tracing/guide/metrics_namespace/
+[5]: /fr/tracing/guide/metrics_namespace/
+[6]: https://app.datadoghq.com/apm/settings

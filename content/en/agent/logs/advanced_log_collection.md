@@ -458,6 +458,8 @@ logs_config:
   auto_multi_line_detection: true
 ```
 
+For containerized deployments, you can enable `auto_multi_line_detection` with the `DD_LOGS_CONFIG_AUTO_MULTI_LINE_DETECTION=true` environment variable.
+
 It can also be enabled or disabled (overriding the global config) per log configuration:
 
 {{< tabs >}}
@@ -532,7 +534,9 @@ logs_config:
 
 With this feature enabled, when a new log file is opened the Agent tries to detect a pattern. During this process the logs are sent as single lines. After the detection threshold is met, all future logs for that source are aggregated with the detected pattern, or as single lines if no pattern is found. Detection takes at most 30 seconds or the first 500 logs (whichever comes first).
 
-**Note**: If you can control the naming pattern of the rotated log, ensure that the rotated file replaces the previously active file with the same name. The Agent reuses a previously detected pattern on the newly rotated file to avoid re-running detection. 
+**Note**: If you can control the naming pattern of the rotated log, ensure that the rotated file replaces the previously active file with the same name. The Agent reuses a previously detected pattern on the newly rotated file to avoid re-running detection.
+
+Automatic multi-line detection detects logs that begin and comply with the following date/time formats: RFC3339, ANSIC, Unix Date Format, Ruby Date Format, RFC822, RFC822Z, RFC850, RFC1123, RFC1123Z, RFC3339Nano, and default Java logging SimpleFormatter date format.
 
 ## Commonly used log processing rules
 

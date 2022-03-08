@@ -6,13 +6,13 @@ aliases:
 further_reading:
 - link: "security_platform/default_rules"
   tag: "Documentation"
-  text: "Explore default cloud configuration rules"
+  text: "Explore default Posture Management cloud configuration detection rules"
 - link: "security_platform/cspm/frameworks_and_benchmarks"
   tag: "Documentation"
   text: "Learn about frameworks and industry benchmarks"
 ---
 
-{{< site-region region="us3,us5,gov" >}}
+{{< site-region region="gov" >}}
 <div class="alert alert-warning">
 Cloud Security Posture Management is not available in this site.
 </div>
@@ -23,7 +23,7 @@ Cloud Security Posture Management is not available in this site.
 The [Findings Explorer][1] allows you to:
 
 - Review the detailed configuration of a resource
-- Review the rules applied to your resources by CSPM
+- Review the detection rules applied to your resources by CSPM
 - Review tags for more context about who owns the resource and where it resides in your environment
 - Read descriptions and guidelines based on industry resources for remediating a misconfigured resource
 - Use the “time selector” to explore your security configuration posture at any point in the past.
@@ -44,7 +44,7 @@ Clicking on an individual finding that has **failed** to see details about the m
 
 {{< img src="security_platform/cspm/findings/signal-overview.png" alt="Failed signals in the side panel" style="width:65%;">}}
 
-Aggregate findings by rule using the query search bar. This view shows a checklist of all of the rules that Datadog scans. Filtering by `evaluation:fail` status narrows the list to all rules that have issues that need to be addressed. The side panel shows details of each resource that has been evaluated by the rule.
+Aggregate findings by rule using the query search bar. This view shows a checklist of all of the detection rules that Datadog scans. Filtering by `evaluation:fail` status narrows the list to all detection rules that have issues that need to be addressed. The side panel shows details of each resource that has been evaluated by the rule.
 
 {{< img src="security_platform/cspm/findings/evaluation-fail.png" alt="Filtering by evaluation fail" style="width:100%;">}}
 
@@ -56,7 +56,7 @@ Findings can also be aggregated by resource to rank order resources that have fa
 
 {{< img src="security_platform/cspm/findings/eval-fail-group-by-resource.png" alt="Group and aggregate by resource in search" style="width:100%;">}}
 
-The side panel lists rules that were evaluated against the resource, some of which you may choose to be addressed to improve your security configuration posture.
+The side panel lists detection rules that were evaluated against the resource, some of which you may choose to be addressed to improve your security configuration posture.
 
 {{< img src="security_platform/cspm/findings/passed-rules.png" alt="Group and aggregate by resource in search" style="width:100%;">}}
 

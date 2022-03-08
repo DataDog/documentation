@@ -36,6 +36,7 @@ function addCodeTabEventListeners() {
     if (codeLinks.length) {
         codeLinks.forEach((codeLink) => {
             codeLink.addEventListener('click', codeLangTabClickHandler);
+            codeLink.addEventListener('mouseover', codeLangTabHoverHandler);
         });
     }
 }
@@ -75,6 +76,21 @@ function redirectCodeLang(codeLang = '') {
 }
 
 redirectCodeLang();
+
+// When hovering over multi-code-lang tabs make sure proper href is reflected,
+// making it easier for support/sales teams to "Copy Link Address" and send correct URL out.
+function codeLangTabHoverHandler(event) {
+    if (
+        document.documentElement.dataset.type === 'multi-code-lang' &&
+        (document.body.classList.contains('kind-section') || document.body.classList.contains('kind-page'))
+    ) {
+        const tabElement = event.target;
+        const codeLang = event.target.dataset.codeLangTrigger;
+        const { currentSection, baseUrl } = document.documentElement.dataset;
+        const updatedHref = `${baseUrl}${currentSection}${codeLang}/?code-lang=${codeLang}`;
+        tabElement.href = updatedHref;
+    } 
+}
 
 function codeLangTabClickHandler(event) {
     const queryParams = new URLSearchParams(window.location.search);

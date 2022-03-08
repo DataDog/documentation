@@ -5,7 +5,7 @@ description: Créer et gérer des incidents
 further_reading:
   - link: dashboards/querying/#incident-management-analytics
     tag: Documentation
-    text: Données d'analyse de la gestion des incidents
+    text: Incident Management Analytics
   - link: https://www.datadoghq.com/blog/incident-postmortem-process-best-practices/
     tag: Blog
     text: Meilleures pratiques pour écrire des postmortems d'incident
@@ -27,7 +27,7 @@ Dans Datadog, les situations suivantes justifient la déclaration d'un incident�
 
 ## Utilisation
 
-La gestion des incidents ne nécessite aucune installation. Pour consulter vos incidents, accédez à la page [Incidents][1] où vous trouverez tous les incidents en cours. Vous pouvez configurer des champs supplémentaires pour tous les incidents dans les [Paramètres d'incident][2].
+La gestion des incidents ne nécessite aucune installation. Pour consulter vos incidents, accédez à la page [Incidents][1] où vous trouverez tous les incidents en cours. Vous pouvez configurer des champs supplémentaires pour tous les incidents dans les [paramètres d'incident][2].
 
 **Remarque** : créez et gérez vos incidents avec l'[application mobile Datadog][3], disponible sur l'[Apple App Store][4] et sur le [Google Play Store][5].
 
@@ -65,7 +65,7 @@ Sur l'[interface Datadog][1], cliquez sur **New Incident** pour en créer un.
 
 {{< img src="monitors/incidents/incident_declaration_modal.jpeg" alt="Fenêtre de déclaration d'un incident" style="width:80%;">}}
 
-La fenêtre de déclaration d'incident offre aux intervenants un volet latéral optionnel qui affiche des informations d'aide ainsi que les descriptions des différents niveaux de sévérité et statuts utilisés par votre organisation. Les informations d'aide et les descriptions peuvent être personnalisées depuis les [Paramètres d'incident][6].
+La fenêtre de déclaration d'incident offre aux intervenants un volet latéral optionnel qui affiche des informations d'aide ainsi que les descriptions des différents niveaux de sévérité et statuts utilisés par votre organisation. Les informations d'aide et les descriptions peuvent être personnalisées depuis les [paramètres d'incident][6].
 
 {{< img src="monitors/incidents/incident_information_settings.jpeg" alt="Écran de personnalisation des informations sur les incidents" style="width:80%;">}}
 
@@ -170,7 +170,7 @@ La solution de gestion des incidents recueilles les données d'analyse suivantes
 * Délai avant réparation (heure de fin de l'impact sur les clients - heure de création)
 * Délai avant résolution (heure de résolution - heure de création)
 
-Pour en savoir plus sur les graphiques de gestion des incidents, consultez [Données d'analyse de la gestion des incidents][12].
+Pour en savoir plus sur les graphiques de gestion des incidents, consultez la section [Incident Management Analytics][12].
 
 ## Intégrations
 

@@ -69,6 +69,24 @@
       }
     }
   }
+
+  .card-banner {
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 26px;
+    
+    p {
+      font-size: 16px;
+      line-height: 25px;
+    }
+
+    @media only screen and (min-width: 576px) and (max-width: 1200px)  {
+      p {
+        font-size: 13px;
+      }
+    }
+  }
 }
 
 .logs-languages {

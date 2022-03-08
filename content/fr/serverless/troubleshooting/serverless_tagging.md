@@ -12,7 +12,7 @@ aliases:
 
 ## Présentation
 
-Tout tag appliqué à votre fonction Lambda AWS devient automatiquement une nouvelle dimension que vous pouvez utiliser pour filtrer vos métriques, traces et logs.
+Tout tag appliqué à votre fonction Lambda AWS devient automatiquement une nouvelle dimension que vous pouvez utiliser pour filtrer et regrouper vos métriques, traces et logs.
 
 Les tags sont particulièrement utiles lorsqu'ils sont cohérents sur toute la plateforme Datadog. Les tags `env`, `service` et `version` bénéficient notamment d'une prise en charge étendue.
 

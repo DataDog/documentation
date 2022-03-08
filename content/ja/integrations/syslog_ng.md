@@ -28,10 +28,11 @@ Syslog-ng を構成して、ホスト、コンテナ、サービスからログ�
 
 ### ログの収集
 
-{{< tabs >}}
-{{% tab "Datadog US site" %}}
+{{< site-region region="us3" >}}
+**ログ収集は、Datadog {{< region-param key="dd_site_name" >}} サイトでサポートされていません**。
+{{< /site-region >}}
 
-1. `/etc/syslog-ng/syslog-ng.conf` 内のシステムログとログファイルが収集されます。ソースが正しく定義されていることを確認してください。
+1. `/etc/syslog-ng/syslog-ng.conf` 内のシステムログとログファイルを収集し、ソースが正しく定義されていることを確認してください。
 
     ```conf
     source s_src {
@@ -113,88 +114,9 @@ Syslog-ng を構成して、ホスト、コンテナ、サービスからログ�
 
 6. syslog-ng を再起動します。
 
-
-[1]: https://syslog-ng.com/documents/html/syslog-ng-ose-latest-guides/en/syslog-ng-ose-guide-admin/html/tlsoptions.html
-{{% /tab %}}
-{{% tab "Datadog EU site" %}}
-
-1. `/etc/syslog-ng/syslog-ng.conf` 内のシステムログとログファイルが収集されます。ソースが正しく定義されていることを確認してください。
-
-    ```conf
-    source s_src {
-    system();
-    internal();
-
-    };
-    ```
-
-    ファイルを監視する場合は、次のソースを追加します。
-
-    ```conf
-    #########################
-    # Sources
-    #########################
-
-    ...
-
-    source s_files {
-    file("path/to/your/file1.log",flags(no-parse),follow_freq(1),program_override("<program_name_file1>"));
-     file("path/to/your/file2.log",flags(no-parse),follow_freq(1),program_override("<program_name_file2>"));
-
-    };
-    ```
-
-2. 正しいログ形式を設定します。
-
-    ```conf
-    #########################
-    # Destination
-    #########################
-
-    ...
-
-    # For Datadog platform
-    template DatadogFormat { template("YOURAPIKEY <${PRI}>1 ${ISODATE} ${HOST:--} ${PROGRAM:--} ${PID:--} ${MSGID:--} ${SDATA:--} $MSG\n"); };
-    destination d_datadog { tcp("tcp-intake.logs.datadoghq.eu" port(1883) template(DatadogFormat)); };
-    ```
-
-3. path セクションで出力を定義します。
-
-    ```conf
-    #########################
-    # Log Path
-    #########################
-
-    ...
-
-    log { source(s_src); source(s_files); destination(d_datadog); };
-    ```
-
-4. (オプション) TLS 暗号化:
-
-    - CA 証明書をダウンロードします。
-
-        ```shell
-        sudo apt-get install ca-certificates
-        ```
-
-    - 出力先の定義を次のように変更します。
-
-        ```conf
-        destination d_datadog { tcp("tcp-intake.logs.datadoghq.eu" port(443)     tls(peer-verify(required-trusted)) template(DatadogFormat)); };
-        ```
-
-    TLS のパラメーターと可能性について詳しくは、[syslog-ng オープンソース版管理ガイド][1]を参照してください。
-
-5. syslog-ng を再起動します。
-
-
-[1]: https://syslog-ng.com/documents/html/syslog-ng-ose-latest-guides/en/syslog-ng-ose-guide-admin/html/tlsoptions.html
-{{% /tab %}}
-{{< /tabs >}}
-
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][1]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][2]までお問合せください。
 
-[1]: /ja/help/
+[1]: https://syslog-ng.com/documents/html/syslog-ng-ose-latest-guides/en/syslog-ng-ose-guide-admin/html/tlsoptions.html
+[2]: /ja/help/

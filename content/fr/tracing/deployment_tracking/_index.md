@@ -93,7 +93,7 @@ Ce tableau vous permet d'afficher les traces recueillies en temps réel ou les t
 
 **Remarque :** la comparaison d'erreurs est basée sur les types d'erreur _observés_ . Si un type d'erreur est rare, il est possible qu'il soit indiqué comme absent uniquement du fait qu'il n'a pas _encore_ été observé.
 
-{{< img src="tracing/deployment_tracking/ErrorComparison.gif" alt="Comparaison des erreurs"  style="width:100%;">}}
+{{< img src="tracing/deployment_tracking/ErrorComparison.mp4" alt="Comparaison des erreurs" video=true style="width:100%;">}}
 
 ### Comparaison des endpoints
 
@@ -160,7 +160,7 @@ Toutes ces informations peuvent être exportées vers des dashboards et des moni
 
 ### Analyse et recherche de traces
 
-{{< img src="tracing/deployment_tracking/AnalyticsErrorsByVersion.gif" alt="Version dans App Analytics"  style="width:100%;">}}
+{{< img src="tracing/deployment_tracking/AnalyticsErrorsByVersion.mp4" alt="Version dans App Analytics" video=true style="width:100%;">}}
 
 Lorsqu'il est disponible, le tag `version` peut être utilisé pour la recherche et l'analyse de traces, que ce soit pour filtrer le mode Live Search et les traces indexées, ou pour filtrer ou regrouper des requêtes d'analyse.
 

@@ -76,7 +76,7 @@ L'intégration d'événements [LaunchDarkly][1] pour Datadog vous permet d'ajout
 
 ### Widget de dashboard
 
-Le widget de dashboard de LaunchDarkly vous permet d'épingler à vos dashboards Datadog un sous-ensemble de flags de fonctionnalités ciblant des bascules, afin de déployer une fonctionnalité et de surveiller ce déploiement depuis une interface unique.
+Le widget de dashboard de LaunchDarkly vous permet d'épingler à vos dashboards Datadog un sous-ensemble de feature flags ciblant des bascules, afin de déployer une fonctionnalité et de surveiller ce déploiement depuis une interface unique.
 
 ### Intégration de métriques de proxy de relais
 
@@ -101,7 +101,7 @@ L'intégration d'événements LaunchDarkly requiert une [clé d'API Datadog][3],
    - **LaunchDarkly project** : le nom du projet LaunchDarkly à associer au widget de dashboard.
    - **LaunchDarkly environment** : le nom de l'environnement LaunchDarkly à associer au widget de dashboard.
    - **Environment template variable** : une [template variable Datadog][5] facultative pouvant remplacer l'option **LaunchDarkly environment**.
-   - **LaunchDarkly tag filter** : une liste facultative de tags séparés par des `+` permettant de filtrer les flags de fonctionnalités affichés dans le widget. Si vous ajoutez plusieurs tags, seuls les flags qui correspondent à **tous** les tags inclus s'affichent dans le widget. Si vous ne définissez pas ce paramètre, le widget présente tous les flags de fonctionnalités du projet.
+   - **LaunchDarkly tag filter** : une liste facultative de tags séparés par des `+` permettant de filtrer les feature flags affichés dans le widget. Si vous ajoutez plusieurs tags, seuls les flags qui correspondent à **tous** les tags inclus s'affichent dans le widget. Si vous ne définissez pas ce paramètre, le widget présente tous les feature flags du projet.
    - **Sort** : l'ordre dans lequel les flags s'affichent dans le widget. Valeur par défaut : **Newest**.
 
 8. Vous avez également la possibilité d'attribuer un titre au widget.
