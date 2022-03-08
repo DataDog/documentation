@@ -115,7 +115,7 @@ The Datadog tracing libraries are used to instrument your applications and servi
 
 For detailed information about how tracing-library sourced data is managed, and the tools you can use to improve data security, read [Configuring Agent and Tracer for trace data security][].
 
-### Synthetic Testing
+### Synthetic Monitoring
 
 Synthetic testing simulates requests and business transactions from testing locations around the world. Read about the encryption considerations for configurations, assets, results, and credentials, as well as how to use testing privacy options, in [Synthetic Monitoring Data Security][data_security/synthetics/].
 
