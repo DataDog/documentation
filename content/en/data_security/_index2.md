@@ -39,7 +39,7 @@ While data is in motion, Datadog protects it with Transport Layer Security (TLS)
 
 Datadog's purpose is to gather observability information from many sources around your infrastructure and services, and to bring it together in one place for you to analyze and investigate. This involves you sending a wide range of types of data content to Datadog's servers. Some of that data is structured and follow patterns that we can automatically check for and handle appropriately to protect privacy. Read about [using these automation and tools options](#datadog-automation-and-tools-for-protecting-data) next. 
 
-However, a lot of the data is the names and descriptions of things, and you must consider whether the text you are sending represent private data for you or your customers, and if so avoid sending it. Consider the following types of data you send to Datadog during the intended use of the product:
+However, a lot of the data is the names and descriptions of things, and you must consider whether the text you are sending represent private data for you or your customers, and if so avoid sending it. Consider the following (non-exhaustive) list of types of data you send to Datadog during the intended use of the product:
 
 Metadata and tags
 : Metadata consists primarily of [tags][6] in the `key:value` format, for example, `env:prod`. Metadata is used by Datadog to filter and group data to help you derive meaningful information. 
@@ -66,19 +66,15 @@ Events and comments
 : [Events][14] data is aggregated from multiple sources into a consolidated view, including triggered monitors, events submitted by integrations, events submitted by the application itself, and comments sent by users or through the API. Events and comments usually have associated tags metadata.
 
 Continuous Integration pipelines and tests
-: ...
-
-RUM, Synthetics, Security signals
+: The names of branches, pipelines, tests, and test suites are all data sent to Datadog.
 
 
 ## Datadog automation and tools for protecting data
 
-- **Sensitive Data Scanner**: 
+- **Sensitive Data Scanner**: A stream-based, pattern matching service that you can use to identify, tag, and optionally redact or hash sensitive data. With implementation, your security and compliance teams can introduce a line of defense in preventing sensitive data from leaking outside your organization. For information about the scanner and setting it up, read [Sensitive Data Scanner][/account_management/org_settings/sensitive_data_detection/]
 - **Database queries**: All query parameters are obfuscated and discarded from collected samples before being sent to Datadog.
 - **Process arguments**: Values for the following keywords are obfuscated from process data:
 `password` `passwd` `mysql_pwd` `access_token` `auth_token` `api_key` `apikey` `secret` `credentials` `stripetoken`. In addition, you can obfuscate sensitive sequences within process commands or arguments by using the [`custom_sensitive_words` setting][3] to provide an exclusion list of one or more regular expressions.
-- Sensitive Data Scanner: /account_management/org_settings/sensitive_data_detection/
-
 
 ## Component-specific data security
 
@@ -113,7 +109,11 @@ The Datadog tracing libraries are used to instrument your applications and servi
 - CI Visibility
 - Application Security Monitoring
 
-For detailed information about how tracing-library sourced data is managed, and the tools you can use to improve data security, read [Configuring Agent and Tracer for trace data security][].
+For detailed information about how tracing-library sourced data is managed, and the tools you can use to improve data security, read [Configuring Agent and Tracer for trace data security][/tracing/setup_overview/configure_data_security/].
+
+### Serverless distributed tracing
+
+You can use Datadog to collect and visualize the JSON request and response payloads of AWS Lambda functions. To prevent any sensitive data within request or response JSON objects from being sent to Datadog (like account IDs or addresses), you can to scrub specific parameters from being sent to Datadog. Read [Obfuscating AWS Lambda payload contents][/serverless/distributed_tracing/collect_lambda_payloads#obfuscating-payload-contents] for more information.
 
 ### Synthetic Monitoring
 
@@ -121,7 +121,9 @@ Synthetic testing simulates requests and business transactions from testing loca
 
 ### RUM and Session Replay
 
-The RUM SDK ,,,, Session Replay ... 
+You can modify the data collected by RUM to protect personally identifiable information and to reduce how much RUM data you’re collecting, through sampling the data. Read [Modifying RUM Data and Context][/real_user_monitoring/browser/modifying_data_and_context/] for details.
+ 
+Session Replay privacy options default to protecting end user privacy and preventing sensitive organizational information from being collected. Read about masking, overriding, and hiding elements from a session replay in [Session Replay Privacy Options][/real_user_monitoring/session_replay/privacy_options].
 
 ### Database Monitoring
 
