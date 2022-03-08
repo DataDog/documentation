@@ -55,7 +55,7 @@ Nvidia Jetson チェックは [Datadog Agent][2] パッケージに含まれて�
 
 ### 検証
 
-[Agent の status サブコマンドを実行][5]し、Checks セクションで `jetson` を探します。
+[Agent の status サブコマンド][5]を実行し、Checks セクションで `jetson` を探します。
 
 ## 収集データ
 
@@ -73,11 +73,11 @@ Nvidia Jetson チェックは [Datadog Agent][2] パッケージに含まれて�
 
 ### サービスのチェック
 
-Nvidia Jetson には、サービスのチェック機能は含まれません。 
+Nvidia Jetson インテグレーションには、サービスのチェック機能は含まれません。
 
 ### イベント
 
-Nvidia Jetson には、イベントは含まれません。
+Nvidia Jetson インテグレーションには、イベントは含まれません。
 
 ## トラブルシューティング
 

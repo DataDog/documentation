@@ -159,6 +159,8 @@ The commands related to log collection are:
 
 3. [Restart the Agent][4] to see all of your container logs in Datadog.
 
+**Note**: In order for the Agent to collect logs produced by a container with a custom log configuration, the logs must be written to a volume accessible from the host. It is recommended that container logs be written to `stdout` and `stderr` so that they can be collected automatically. 
+
 [1]: /agent/basic_agent_usage/
 [2]: /agent/logs/#custom-log-collection
 [3]: /agent/guide/agent-configuration-files/

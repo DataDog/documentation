@@ -213,6 +213,13 @@
       "description": "Create a new dashboard with trace_service widget"
     }
   ],
+  "DeleteDashboard": [
+    {
+      "group": "dashboards",
+      "suffix": "",
+      "description": "Delete a dashboard returns \"OK\" response"
+    }
+  ],
   "DeleteDashboards": [
     {
       "group": "dashboards",
@@ -221,6 +228,11 @@
     }
   ],
   "GetDashboard": [
+    {
+      "group": "dashboards",
+      "suffix": "",
+      "description": "Get a dashboard returns \"OK\" response"
+    },
     {
       "group": "dashboards",
       "suffix": "_4262333854",
@@ -237,6 +249,20 @@
       "group": "dashboards",
       "suffix": "_1773932563",
       "description": "Get deleted dashboards returns \"OK\" response"
+    }
+  ],
+  "RestoreDashboards": [
+    {
+      "group": "dashboards",
+      "suffix": "",
+      "description": "Restore deleted dashboards returns \"No Content\" response"
+    }
+  ],
+  "UpdateDashboard": [
+    {
+      "group": "dashboards",
+      "suffix": "",
+      "description": "Update a dashboard returns \"OK\" response"
     }
   ],
   "CancelDowntime": [
@@ -628,6 +654,13 @@
       "group": "usage_metering",
       "suffix": "",
       "description": "Get Usage Attribution returns \"OK\" response"
+    }
+  ],
+  "GetUsageCIApp": [
+    {
+      "group": "usage_metering",
+      "suffix": "",
+      "description": "Get hourly usage for CI Visibility returns \"OK\" response"
     }
   ],
   "GetUsageCloudSecurityPostureManagement": [

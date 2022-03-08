@@ -22,7 +22,7 @@ connect-src https://*.{{< region-param key="browser_sdk_endpoint_domain" >}}
 If you are using Session Replay, make sure to allow Workers with `blob:` URI schemes by adding the following `worker-src` entry:
 
 ```txt
-worker-src: blob:;
+worker-src blob:;
 ```
 
 ## CDN bundle URL

@@ -13,7 +13,7 @@ further_reading:
     text: ダッシュボードを作成して、APM メトリクスを追跡、関連付ける
   - link: /tracing/guide/add_span_md_and_graph_it/
     tag: 7 分
-    text: スパンタグを追加し、アプリケーションのパフォーマンスを分類する
+    text: スパンタグを追加し、アプリケーションのパフォーマンスをフィルタリングし、グループ化する
   - link: /tracing/guide/
     tag: ''
     text: すべてのガイド

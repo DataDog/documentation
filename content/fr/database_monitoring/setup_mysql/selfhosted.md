@@ -1,19 +1,19 @@
 ---
-title: Configuration de la surveillance de bases de données pour MySQL auto-hébergé
+title: Configuration de Database Monitoring pour MySQL auto-hébergé
 kind: documentation
-description: Installez et configurez la surveillance de bases de données pour MySQL auto-hébergé.
+description: Installez et configurez Database Monitoring pour MySQL auto-hébergé.
 further_reading:
   - link: /integrations/mysql/
     tag: Documentation
     text: Intégration MySQL basique
 ---
-{{< site-region region="us3,us5,gov" >}}
-<div class="alert alert-warning">La surveillance de base de données n'est pas prise en charge pour ce site.</div>
+{{< site-region region="us5,gov" >}}
+<div class="alert alert-warning">La solution Database Monitoring n'est pas prise en charge pour ce site.</div>
 {{< /site-region >}}
 
-La surveillance des bases de données vous permet de bénéficier d'une visibilité complète sur vos bases de données MySQL, en exposant des métriques de requête, des échantillons de requête, des plans d'exécution, des données sur les connexions, des métriques système et des données de télémétrie à propos du moteur de stockage InnoDB.
+La solution Database Monitoring vous permet de bénéficier d'une visibilité complète sur vos bases de données MySQL, en exposant des métriques de requête, des échantillons de requête, des plans d'exécution, des données sur les connexions, des métriques système et des données de télémétrie à propos du moteur de stockage InnoDB.
 
-L'Agent recueille la télémétrie directement depuis la base de données, en se connectant en tant qu'utilisateur en lecture seule. Suivez les étapes ci-dessous pour activer la surveillance de bases de données avec votre base de données MySQL :
+L'Agent recueille la télémétrie directement depuis la base de données, en se connectant en tant qu'utilisateur en lecture seule. Suivez les étapes ci-dessous pour activer la solution Database Monitoring avec votre base de données MySQL :
 
 1. [Configurer les paramètres de base de données](#configurer-les-parametres-mysql)
 1. [Autoriser l'Agent à accéder à la base de données](#accorder-un-acces-a-l-agent)
@@ -25,11 +25,11 @@ Versions de MySQL prises en charge
 : 5.6, 5.7 et 8.0+
 
 Versions de l'Agent prises en charge
-: 7.30.0+
+: 7.33.0+
 
 Incidence sur les performances
-: La configuration par défaut de l'Agent pour la surveillance de bases de données est relativement souple. Néanmoins, vous pouvez ajuster certains paramètres comme l'intervalle de collecte et le taux d'échantillonnage des requêtes pour mieux répondre à vos besoins. Pour la plupart des workloads, l'Agent monopolise moins d'un pour cent du temps d'exécution des requêtes sur la base de données, et moins d'un pour cent du CPU. <br/><br/>
-La surveillance de base de données Datadog fonctionne comme une intégration et vient compléter l'Agent de base ([voir les benchmarks][1]).
+: La configuration par défaut de l'Agent pour Database Monitoring est relativement souple. Néanmoins, vous pouvez ajuster certains paramètres comme l'intervalle de collecte et le taux d'échantillonnage des requêtes pour mieux répondre à vos besoins. Pour la plupart des workloads, l'Agent monopolise moins d'un pour cent du temps d'exécution des requêtes sur la base de données, et moins d'un pour cent du CPU. <br/><br/>
+La solution Database Monitoring de Datadog fonctionne comme une intégration et vient compléter l'Agent de base ([voir les benchmarks][1]).
 
 Proxies, répartiteurs de charge et outils de regroupement de connexions
 : L'Agent doit se connecter directement au host surveillé. Pour les bases de données auto-hébergées, il est préférable d'utiliser `127.0.0.1` ou le socket. L'Agent ne doit pas se connecter aux bases de données via un proxy, un répartiteur de charge ni un outil de groupement de connexions. Bien qu'il puisse s'agir d'un antipattern pour des applications client, chaque Agent doit connaître le hostname sous-jacent et rester sur un seul host pendant toute sa durée de vie, même en cas de failover. Si l'Agent Datadog se connecte à plusieurs hosts pendant son exécution, les valeurs des métriques seront incorrectes.
@@ -158,7 +158,7 @@ GRANT EXECUTE ON PROCEDURE datadog.enable_events_statements_consumers TO datadog
 
 ## Installer l'Agent
 
-L'installation de l'Agent Datadog entraîne également l'installation du check MySQL requis pour la surveillance de bases de données sur MySQL. Si vous n'avez pas encore installé l'Agent pour le host de votre base de données MySQL, consultez les [instructions d'installation de l'Agent][6].
+L'installation de l'Agent Datadog entraîne également l'installation du check MySQL requis pour utiliser la solution Database Monitoring sur MySQL. Si vous n'avez pas encore installé l'Agent pour le host de votre base de données MySQL, consultez les [instructions d'installation de l'Agent][6].
 
 Pour configurer ce check lorsque l'Agent est exécuté sur un host :
 
@@ -191,7 +191,7 @@ Pour venir compléter la télémétrie recueillie depuis la base de données par
 
 1. Par défaut, MySQL enregistre tous ses logs dans `/var/log/syslog`, dont la lecture nécessite un accès root. Pour rendre les logs plus accessibles, voici les étapes à suivre :
 
-   1. Modifiez `/etc/mysql/conf.d/mysqld_safe_syslog.cnf` et supprimez la mise en commentaire de toutes les lignes.
+   1. Modifiez `/etc/mysql/conf.d/mysqld_safe_syslog.cnf` et mettez en commentaire toutes les lignes.
    2. Modifiez `/etc/mysql/my.cnf` pour activer les paramètres de journalisation de votre choix. Par exemple, pour activer les logs globaux, d'erreur et de requêtes lentes, utilisez la configuration suivante :
 
      ```conf
@@ -278,7 +278,7 @@ Pour venir compléter la télémétrie recueillie depuis la base de données par
 
 ## Dépannage
 
-Si vous avez respecté les instructions d'installation et de configuration des intégrations et de l'Agent, mais que vous rencontrez un problème, consultez la section [Dépannage de la surveillance de bases de données][12].
+Si vous avez respecté les instructions d'installation et de configuration des intégrations et de l'Agent, mais que vous rencontrez un problème, consultez la section [Dépannage][12].
 
 ## Pour aller plus loin
 

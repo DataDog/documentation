@@ -58,6 +58,33 @@ Datadog has a series of pluggable packages which provide out-of-the-box support 
 
 ## Configuration
 
+
+Datadog recommends using `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `env`, `service`, and `version` for your services.
+
+Read the [Unified Service Tagging][10] documentation for recommendations on how to configure these environment variables. These variables are available for versions 1.24.0+ of the Go tracer.
+
+You may also elect to provide `env`, `service`, and `version` through the tracer's API:
+
+```go
+package main
+
+import (
+    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+)
+
+func main() {
+    tracer.Start(
+        tracer.WithEnv("prod"),
+        tracer.WithService("test-go"),
+        tracer.WithServiceVersion("abc123"),
+    )
+
+    // When the tracer is stopped, it will flush everything it has to the Datadog Agent before quitting.
+    // Make sure this line stays in your main function.
+    defer tracer.Stop()
+}
+```
+
 The Go tracer supports additional environment variables and functions for configuration.
 See all available options in the [configuration documentation][8].
 
@@ -65,7 +92,7 @@ See all available options in the [configuration documentation][8].
 : Set the application’s version, for example: `1.2.3`, `6c44da20`, `2020.02.13`
 
 `DD_SERVICE`
-: The service name to be used for this application. 
+: The service name to be used for this application.
 
 `DD_ENV`
 : Set the application’s environment, for example: prod, pre-prod, staging.
@@ -101,33 +128,6 @@ Enable web framework and library instrumentation. When false, the application co
 : **Default**: `null` <br>
 Dynamically rename services through configuration. Services can be separated by commas or spaces, for example: `mysql:mysql-service-name,postgres:postgres-service-name`, `mysql:mysql-service-name postgres:postgres-service-name`.
 
-
-Datadog recommends using `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `env`, `service`, and `version` for your services.
-
-Read the [Unified Service Tagging][10] documentation for recommendations on how to configure these environment variables. These variables are available for versions 1.24.0+ of the Go tracer.
-
-You may also elect to provide `env`, `service`, and `version` through the tracer's API:
-
-```go
-package main
-
-import (
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
-)
-
-func main() {
-    tracer.Start(
-        tracer.WithEnv("prod"),
-        tracer.WithService("test-go"),
-        tracer.WithServiceVersion("abc123"),
-    )
-
-    // When the tracer is stopped, it will flush everything it has to the Datadog Agent before quitting.
-    // Make sure this line stays in your main function.
-    defer tracer.Stop()
-}
-```
-
 ### Configure the Datadog Agent for APM
 
 Install and configure the Datadog Agent to receive traces from your now instrumented application. By default the Datadog Agent is enabled in your `datadog.yaml` file under `apm_config` with `enabled: true` and listens for trace traffic at `localhost:8126`. For containerized environments, follow the links below to enable trace collection within the Datadog Agent.
@@ -142,11 +142,16 @@ Install and configure the Datadog Agent to receive traces from your now instrume
 {{< partial name="apm/apm-containers.html" >}}
 </br>
 
-3. After having instrumented your application, the tracing client sends traces to `localhost:8126` by default.  If this is not the correct host and port change it by setting the below env variables:
+3. After the application is instrumented, the trace client attempts to send traces to the Unix domain socket `/var/run/datadog/apm.socket` by default. If the socket does not exist, traces are sent to `http://localhost:8126`.
 
-    `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`.
+   If a different socket, host, or port is required, use the `DD_TRACE_AGENT_URL` environment variable. Some examples:
 
-    You can also set a custom hostname and port in code:
+   ```
+   DD_TRACE_AGENT_URL=http://custom-hostname:1234
+   DD_TRACE_AGENT_URL=unix:///var/run/datadog/apm.socket
+   ```
+
+   The connection for traces can also be configured in code:
 
     ```go
     package main
@@ -158,15 +163,20 @@ Install and configure the Datadog Agent to receive traces from your now instrume
     )
 
     func main() {
+        // Network configuration
         addr := net.JoinHostPort(
             "custom-hostname",
             "1234",
         )
-        tracer.Start(tracer.WithAgentAddr(addr))
+
+        tracer.Start(tracer.WithAgentAddr(addr),
+            // Unix domain socket configuration
+            tracer.WithUDS("/var/run/datadog/apm.socket"),
+    )
         defer tracer.Stop()
     }
     ```
-{{< site-region region="us3,us5,eu,gov" >}} 
+{{< site-region region="us3,us5,eu,gov" >}}
 
 4. Set `DD_SITE` in the Datadog Agent to {{< region-param key="dd_site" code="true" >}} to ensure the Agent sends data to the right Datadog location.
 

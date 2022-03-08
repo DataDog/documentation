@@ -266,7 +266,7 @@ Agent v6 のコマンドラインインターフェイスは、サブコマン�
 | `installservice`  | サービスコントロールマネージャー内で Agent をインストールします。Windows のみです。         |
 | `jmx`             | JMX トラブルシューティング。                                                        |
 | `launch-gui`      | Datadog Agent GUI を起動します。                                                |
-| `regimport`       | レジストリ設定を `datadog.yaml` にインポートします。Windows のみです。             |
+| `regimport`       | レジストリ設定を `datadog.yaml` にインポートします。Windows のみです。7.27.0 以降では非推奨です。             |
 | `remove-service`  | サービスコントロールマネージャーから Agent を削除します。Windows のみです。            |
 | `restart-service` | サービスコントロールマネージャー内で Agent を再起動します。Windows のみです。         |
 | `start-service`   | サービスコントロールマネージャー内で Agent を起動します。Windows のみです。           |

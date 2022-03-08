@@ -24,14 +24,64 @@ aliases:
 
 If your Go Lambda functions are still using runtime `go1.x`, you must either [migrate][1] to `provided.al2` or use the [Datadog Forwarder][2] instead of the Datadog Lambda Extension.
 
-### Install the Datadog Lambda library
+{{< tabs >}}
+{{% tab "Datadog CLI" %}}
 
-Install the [Datadog Lambda library][3] locally by running the following command:
+The Datadog CLI modifies existing Lambda functions' configurations to enable instrumentation without requiring a new deployment. It is the quickest way to get started with Datadog's serverless monitoring.
 
+You can also add the [instrumentation command](#instrument) to your CI/CD pipelines to enable instrumentation for all your serverless applications. Run the command _after_ your normal serverless application deployment, so that changes made by the Datadog CLI command are not overridden.
+
+### Install
+
+Install the Datadog CLI with NPM or Yarn:
+
+```sh
+# NPM
+npm install -g @datadog/datadog-ci
+
+# Yarn
+yarn global add @datadog/datadog-ci
 ```
-go get github.com/DataDog/datadog-lambda-go
+
+### Configure credentials
+
+For a quick start, configure Datadog and [AWS credentials][1] using the [instrumentation command](#instrument). For production applications, provide credentials in a more secure manner by using environment variables. For example:
+
+```bash
+export DATADOG_API_KEY="<DD_API_KEY>"
+export DATADOG_SITE="<DD_SITE>" # such as datadoghq.com, datadoghq.eu, us3.datadoghq.com or ddog-gov.com
+export AWS_ACCESS_KEY_ID="<ACCESS KEY ID>"
+export AWS_SECRET_ACCESS_KEY="<ACCESS KEY>"
 ```
 
+### Instrument
+
+**Note**: Instrument your Lambda functions in a dev or staging environment first. If the instrumentation needs to be reverted, run `uninstrument` with the same arguments that was used for instrumentation.
+
+To instrument your Lambda functions, run the following command:
+
+```sh
+datadog-ci lambda instrument -f <functionname> -f <another_functionname> -r <aws_region> -e <extension_version>
+```
+
+To fill in the placeholders:
+
+-   Replace `<functionname>` and `<another_functionname>` with your Lambda function names.
+-   Replace `<aws_region>` with the AWS region name.
+-   Replace `<extension_version>` with the desired version of the Datadog Lambda Extension. The latest version is `{{< latest-lambda-layer-version layer="extension" >}}`.
+
+For example:
+
+```sh
+datadog-ci lambda instrument -f my-function -f another-function -r us-east-1 -e {{< latest-lambda-layer-version layer="extension" >}}
+```
+
+More information and additional parameters can be found in the [Datadog Serverless CLI][2].
+
+[1]: https://aws.github.io/aws-sdk-go-v2/docs/getting-started/#get-your-aws-access-keys
+[2]: https://docs.datadoghq.com/serverless/serverless_integrations/cli
+{{% /tab %}}
+{{% tab "Custom" %}}
 ### Install the Datadog Lambda Extension
 
 Add the Datadog Lambda Extension layer for your Lambda function using the ARN in the following format:
@@ -55,12 +105,18 @@ arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension-ARM:<EXT
 
 The latest `EXTENSION_VERSION` is {{< latest-lambda-layer-version layer="extension" >}}.
 
-### Instrument
+{{% /tab %}}
+{{< /tabs >}}
+### Install the Datadog Lambda library
 
-Follow these steps to instrument the function:
+Install the [Datadog Lambda library][3] locally by running the following command:
 
+```
+go get github.com/DataDog/datadog-lambda-go
+```
+### Set up tracing
 1. Set the environment variable `DD_API_KEY` to your Datadog API key from [API Management][4].
-1. Set the environment variable `DD_TRACE_ENABLED` to `true`.
+2. Set the environment variable `DD_TRACE_ENABLED` to `true`.
 1. Import the required packages in the file declaring your Lambda function handler.
 
     ```go

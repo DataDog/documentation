@@ -103,3 +103,4 @@ For example, you can create filters to keep all traces for:
 [4]: /tracing/visualization/#service-entry-span
 [5]: /tracing/trace_explorer/?tab=timeseriesview#indexed-spans-search-with-15-day-retention
 [6]: /tracing/trace_explorer/#historical-search-mode
+[7]: /tracing/trace_ingestion

@@ -53,7 +53,7 @@ yarn global add @datadog/datadog-ci
 
 ### Configure credentials
 
-For a quick start, configure Datadog and [AWS credentials][1] using the following command. For production applications, consider supplying the environment variables or credentials in a more secure manner.
+For a quick start, configure Datadog and [AWS credentials][1] using the [instrumentation command](#instrument). For production applications, provide credentials in a more secure manner by using environment variables. For example:
 
 ```bash
 export DATADOG_API_KEY="<DD_API_KEY>"
@@ -115,7 +115,7 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
     ```
     Find your Datadog API key on the [API Management page][3]. For additional settings, see the [plugin documentation][1].
 
-If you encounter the "Code uncompressed size is greater than max allowed size of 272629760" error after adding `serverless-plugin-datadog`, see this [troubleshooting guide][4]. 
+If you encounter the "Code uncompressed size is greater than max allowed size of 272629760" error after adding `serverless-plugin-datadog`, see this [troubleshooting guide][4].
 
 
 [1]: https://docs.datadoghq.com/serverless/serverless_integrations/plugin

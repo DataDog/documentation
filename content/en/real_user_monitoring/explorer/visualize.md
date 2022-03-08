@@ -66,7 +66,7 @@ Visualize the top values from up to three [facet][5] according to your chosen [m
 
 You can display the distribution of measure attributes over the selected time frame to see the values fluctuate. 
 
-{{< img src="real_user_monitoring/explorer/visualize/nested_table.png" alt="Distribution graph in the RUM Explorer" style="width:90%;">}}
+{{< img src="real_user_monitoring/explorer/visualize/distribution.png" alt="Distribution graph in the RUM Explorer" style="width:90%;">}}
 
 The distribution graph displays the distribution of the Largest Contentful Paint that measures the user experience of the Shopist landing page. 
 

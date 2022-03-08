@@ -302,6 +302,11 @@
     },
     {
       "group": "logs",
+      "suffix": "_2955613758",
+      "description": "Aggregate compute events with group by returns \"OK\" response"
+    },
+    {
+      "group": "logs",
       "suffix": "",
       "description": "Aggregate events returns \"OK\" response"
     }
@@ -386,6 +391,20 @@
       "group": "processes",
       "suffix": "",
       "description": "Get all processes returns \"OK\" response"
+    }
+  ],
+  "ListRUMEvents": [
+    {
+      "group": "rum",
+      "suffix": "",
+      "description": "Get a list of RUM events returns \"OK\" response"
+    }
+  ],
+  "SearchRUMEvents": [
+    {
+      "group": "rum",
+      "suffix": "",
+      "description": "Search RUM events returns \"OK\" response"
     }
   ],
   "AddUserToRole": [
@@ -484,6 +503,11 @@
       "group": "security_monitoring",
       "suffix": "",
       "description": "Create a detection rule returns \"OK\" response"
+    },
+    {
+      "group": "security_monitoring",
+      "suffix": "_461183901",
+      "description": "Create a detection rule with type 'impossible_travel' returns \"OK\" response"
     },
     {
       "group": "security_monitoring",
