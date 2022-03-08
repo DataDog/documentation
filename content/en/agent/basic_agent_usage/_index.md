@@ -257,13 +257,13 @@ Enabling JMX Checks forces the Agent to use more memory depending on the number 
 {{< tabs >}}
 {{% tab "Agent v6 & v7" %}}
 
-* Agent Test version: 6.7.0
-* CPU: ~ 0.12% of the CPU used on average
-* Memory: ~ 60MB of RAM used (RSS memory)
-* Network bandwidth: ~ 86 B/s ▼ | 260 B/s ▲
+* Agent Test version: 7.34.0
+* CPU: ~ 0.08% of the CPU used on average
+* Memory: ~ 130MB of RAM used (RSS memory)
+* Network bandwidth: ~ 140 B/s ▼ | 800 B/s ▲
 * Disk:
-  * Linux 350MB to 400MB depending on the distribution
-  * Windows: 260MB
+  * Linux 850MB to 1.2GB depending on the distribution
+  * Windows: 870MB
 
 {{% /tab %}}
 {{% tab "Agent v5" %}}
