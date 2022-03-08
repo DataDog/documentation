@@ -21,7 +21,7 @@ git_integration_title: datadog_cluster_agent
 guid: 275fd66d-2440-44e5-ac30-461062cd2825
 integration_id: datadog-cluster-agent
 integration_title: Agent de cluster Datadog
-integration_version: 1.3.1
+integration_version: 2.0.0
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com
