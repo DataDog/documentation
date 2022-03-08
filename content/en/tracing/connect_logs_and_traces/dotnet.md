@@ -50,7 +50,6 @@ To automatically inject correlation identifiers into your log messages:
 
 2. Enable auto-instrumentation tracing of your app by following the [instructions to install the .NET Tracer][1].
 
-
 [1]: https://docs.datadoghq.com/tracing/setup_overview/setup/dotnet-core/
 {{% /tab %}}
 {{% tab "log4net" %}}
@@ -193,6 +192,8 @@ The final step to enable automatic correlation identifier injection is to:
 
 After configuring the correlation identifier injection, see [C# Log Collection][7] to configure your log collection.
 
+**Note:** To correlate traces with logs, you might need to set up a [trace ID remapper][8] to parse `dd_trace_id` as the log's trace ID. See [this documentation][9] for more information.
+
 ## Manual injection
 
 If you prefer to manually correlate your traces with your logs, you can add correlation identifiers to your logs.
@@ -206,11 +207,11 @@ If you prefer to manually correlate your traces with your logs, you can add corr
   | `dd.span_id`   | Active span ID during the log statement. Defaults to `0` if no trace. |
 
 
-**Note:** If you are not using a [Datadog Log Integration][7] to parse your logs, custom log parsing rules must parse `dd.trace_id` and `dd.span_id` as strings. For information, see the [FAQ on this topic][8].
+**Note:** If you are not using a [Datadog Log Integration][7] to parse your logs, custom log parsing rules must parse `dd.trace_id` and `dd.span_id` as strings. For information, see the [FAQ on this topic][10].
 
 After completing the [getting started steps](#getting-started), finish your manual log enrichment setup:
 
-1. Reference the [`Datadog.Trace` NuGet package][9] in your project.
+1. Reference the [`Datadog.Trace` NuGet package][11] in your project.
 
 2. Use the `CorrelationIdentifier` API to retrieve correlation identifiers and add them to the log context while a span is active.
 
@@ -311,10 +312,9 @@ using(_logger.BeginScope(new Dictionary<string, object>
 {{% /tab %}}
 {{< /tabs >}}
 
-
 ## Configure log collection
 
-Ensure that log collection is configured in the Datadog Agent and that the [Logs Agent configuration][10] for the specified files to tail is set to `source: csharp` so log pipelines can parse the log files. For more information, see [C# Log Collection][7].
+Ensure that log collection is configured in the Datadog Agent and that the [Logs Agent configuration][12] for the specified files to tail is set to `source: csharp` so log pipelines can parse the log files. For more information, see [C# Log Collection][7].
 
 <div class="alert alert-warning"><strong>Note:</strong> Automatic log collection only works for logs formatted as JSON. Alternatively, use custom parsing rules.</div>
 
@@ -329,6 +329,8 @@ Ensure that log collection is configured in the Datadog Agent and that the [Logs
 [5]: https://docs.microsoft.com/en-us/dotnet/core/extensions/logging
 [6]: /tracing/setup_overview/setup/dotnet-core/#configuring-the-net-tracer
 [7]: /logs/log_collection/csharp/
-[8]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel/?tab=custom
-[9]: https://www.nuget.org/packages/Datadog.Trace/
-[10]: /logs/log_collection/csharp/#configure-your-datadog-agent
+[8]: /logs/log_configuration/processors/?tab=ui#trace-remapper
+[9]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel/?tab=withlogintegration
+[10]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel/?tab=custom
+[11]: https://www.nuget.org/packages/Datadog.Trace/
+[12]: /logs/log_collection/csharp/#configure-your-datadog-agent
