@@ -6,5 +6,5 @@ private: true
 
 
 {{< whatsnext desc="Deprecation notices:" >}}
-    {{< nextlink href="agent/guide/tls_deprecation_1_2" >}}TLS < 1.2 deprecation notice{{< /nextlink >}}
+    {{< nextlink href="security/guide/tls_deprecation_1_2" >}}TLS < 1.2 deprecation notice{{< /nextlink >}}
 {{< /whatsnext >}}
