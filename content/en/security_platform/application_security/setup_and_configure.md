@@ -115,7 +115,7 @@ To install the above requirements:
 | RHEL, CentOS, Fedora | `$ yum install gcc glibc-devel` |
 | macOS                | `$ xcode-select --install`      |
 
-**Note**: The Go toolchain disables CGO when cross-compiling and needs to be explicitly enabled.
+**Note**: The Go toolchain disables CGO when cross-compiling and so, CGO needs to be explicitly enabled.
 
 [1]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib
 [2]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/grpc#example-package-Server
