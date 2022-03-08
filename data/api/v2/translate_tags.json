@@ -51,6 +51,10 @@
     "name": "Processes",
     "description": "The processes API allows you to query processes data for your organization."
   },
+  "rum": {
+    "name": "RUM",
+    "description": "Search your RUM events over HTTP."
+  },
   "roles": {
     "name": "Roles",
     "description": "The Roles API is used to create and manage Datadog roles, what\n[global permissions](https://docs.datadoghq.com/account_management/rbac/)\nthey grant, and which users belong to them.\n\nPermissions related to specific account assets can be granted to roles\nin the Datadog application without using this API. For example, granting\nread access on a specific log index to a role can be done in Datadog from the\n[Pipelines page](https://app.datadoghq.com/logs/pipelines)."
