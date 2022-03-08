@@ -393,6 +393,20 @@
       "description": "Get all processes returns \"OK\" response"
     }
   ],
+  "ListRUMEvents": [
+    {
+      "group": "rum",
+      "suffix": "",
+      "description": "Get a list of RUM events returns \"OK\" response"
+    }
+  ],
+  "SearchRUMEvents": [
+    {
+      "group": "rum",
+      "suffix": "",
+      "description": "Search RUM events returns \"OK\" response"
+    }
+  ],
   "AddUserToRole": [
     {
       "group": "roles",
@@ -489,6 +503,11 @@
       "group": "security_monitoring",
       "suffix": "",
       "description": "Create a detection rule returns \"OK\" response"
+    },
+    {
+      "group": "security_monitoring",
+      "suffix": "_461183901",
+      "description": "Create a detection rule with type 'impossible_travel' returns \"OK\" response"
     },
     {
       "group": "security_monitoring",

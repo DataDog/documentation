@@ -11,6 +11,10 @@ further_reading:
 - link: "/security_platform/default_rules/#cat-application-security"
   tag: "Documentation"
   text: "OOTB Application Security Rules"
+- link: "/security_platform/application_security/troubleshooting"
+  tag: "Documentation"
+  text: "Troubleshooting Application Security Monitoring"
+
 ---
 
 {{% appsec-getstarted %}}

@@ -247,7 +247,7 @@ spec:
 : Si ce paramètre est spécifié, il indique la priorité du pod. `system-node-critical` et `system-cluster-critical` sont deux mots-clés spéciaux qui indiquent les niveaux de priorité les plus élevés, le premier étant le plus élevé. Tout autre nom doit être défini en créant un objet `PriorityClass` avec ce nom. Si ce paramètre n'est pas spécifié, la priorité du pod est définie sur la valeur par défaut ou sur zéro s'il n'y a pas de valeur par défaut.
 
 `agent.process.enabled`
-: Permet d'activer la surveillance des Live Processes. Remarque : `/etc/passwd` est automatiquement monté pour permettre la résolution des noms d'utilisateur. [Consultez la documentation relative aux processus][12].
+: Permet d'activer la surveillance des live processes. Remarque : `/etc/passwd` est automatiquement monté pour permettre la résolution des noms d'utilisateur. [Consultez la documentation relative aux processus][12].
 
 `agent.process.env`
 : L'Agent Datadog prend en charge de nombreuses [variables d'environnement][3].
@@ -277,7 +277,7 @@ spec:
 : Spécifie le port à utiliser pour exposer pprof et expvar pour l'Agent system-probe.
 
 `agent.systemProbe.enabled`
-: Permet d'activer la surveillance des Live Processes. Remarque : `/etc/passwd` est automatiquement monté pour permettre la résolution des noms d'utilisateur. [Consultez la documentation relative aux processus][12].
+: Permet d'activer la surveillance des live processes. Remarque : `/etc/passwd` est automatiquement monté pour permettre la résolution des noms d'utilisateur. [Consultez la documentation relative aux processus][12].
 
 `agent.systemProbe.env`
 : Le SystemProbe Datadog prend en charge de nombreuses [variables d'environnement][2].
@@ -631,7 +631,7 @@ spec:
 : Définir ce paramètre sur l'endpoint Datadog à utiliser pour le check Orchestrator Explorer.
 
 `features.orchestratorExplorer.enabled`
-: Permet d'activer la surveillance Kubernetes en direct. Consultez la section [Live Containers][18].
+: Permet d'activer la surveillance Kubernetes en direct. Consultez la section [Live containers][18].
 
 `features.orchestratorExplorer.extraTags`
 : Tags supplémentaires pour les données recueillies, avec le format `a b c`. Contrairement à `DD_TAGS`, cette option de l'Agent de cluster permet de définir des tags de cluster personnalisés.

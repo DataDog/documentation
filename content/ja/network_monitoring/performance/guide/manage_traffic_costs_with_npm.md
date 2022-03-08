@@ -55,10 +55,10 @@ AZ 内のサービス対サービスのトラフィック:
 
 ## トラフィックコストのグラフ化
 
-Datadog は、ダッシュボードとノートブックで時間の経過に伴うトラフィック量のメトリクスを追跡することを推奨しています。ネットワークページで用いたものと同じクエリを使用して、任意の 2 つのエンドポイント間のトラフィックをグラフ化することができます。**Timeseries Widget** を作成し、ドロップダウンメニューから **Network Traffic** ソースを選択してください。
+Datadog は、ダッシュボードとノートブックで時間の経過に伴うトラフィック量のメトリクスを追跡することを推奨しています。ネットワークページで用いたものと同じクエリを使用して、任意の 2 つのエンドポイント間のトラフィックをグラフ化することができます。このためには、**Timeseries Widget** を作成し、ドロップダウンメニューから **Network Traffic** ソースを選択してください。
 
 {{< img src="network_performance_monitoring/guide/manage_traffic_costs_with_npm/timeseries.png" alt="時系列を作成">}}
 
-ダッシュボードとノートブックを利用することで、チームメイトへの問題共有もしやすくなります。
+そして、その結果や問題点をダッシュボードやノートブックを使ってチームメイトと共有します。
 
 {{< img src="network_performance_monitoring/guide/manage_traffic_costs_with_npm/network-traffic.png" alt="ネットワークトラフィックの表示">}}

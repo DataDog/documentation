@@ -4418,7 +4418,7 @@ components:
       properties:
         date:
           description: The month for the usage.
-          format: datetime
+          format: date-time
           type: string
         usage:
           description: Indexed logs usage for each active retention for the month.
@@ -13919,6 +13919,41 @@ components:
             $ref: '#/components/schemas/UsageBillableSummaryHour'
           type: array
       type: object
+    UsageCIVisibilityHour:
+      description: CI visibility usage in a given hour.
+      properties:
+        ci_pipeline_indexed_spans:
+          description: The number of spans for pipelines in the queried hour.
+          type: integer
+        ci_test_indexed_spans:
+          description: The number of spans for tests in the queried hour.
+          type: integer
+        ci_visibility_pipeline_committers:
+          description: Shows the total count of all active Git committers for Pipelines
+            in the current month. A committer is active if they commit at least 3
+            times in a given month.
+          type: integer
+        ci_visibility_test_committers:
+          description: The total count of all active Git committers for tests in the
+            current month. A committer is active if they commit at least 3 times in
+            a given month.
+          type: integer
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
+          type: string
+      type: object
+    UsageCIVisibilityResponse:
+      description: CI visibility usage response
+      properties:
+        usage:
+          description: Response containing CI visibility usage.
+          items:
+            $ref: '#/components/schemas/UsageCIVisibilityHour'
+          type: array
+      type: object
     UsageCWSHour:
       description: Cloud Workload Security usage for a given organization for a given
         hour.
@@ -14928,6 +14963,26 @@ components:
             current date for all organizations.
           format: int64
           type: integer
+        ci_pipeline_indexed_spans_sum:
+          description: Shows the sum of all CI pipeline indexed spans over all hours
+            in the current month for all organizations.
+          format: int64
+          type: integer
+        ci_test_indexed_spans_sum:
+          description: Shows the sum of all CI test indexed spans over all hours in
+            the current month for all organizations.
+          format: int64
+          type: integer
+        ci_visibility_pipeline_committers_hwm:
+          description: Shows the high-water mark of all CI visibility pipeline committers
+            over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        ci_visibility_test_committers_hwm:
+          description: Shows the high-water mark of all CI visibility test committers
+            over all hours in the current month for all organizations.
+          format: int64
+          type: integer
         container_avg:
           description: Shows the average of all distinct containers over all hours
             in the current date for all organizations.
@@ -15216,6 +15271,26 @@ components:
         browser_rum_units_sum:
           description: Shows the sum of all browser RUM units over all hours in the
             current date for the given org.
+          format: int64
+          type: integer
+        ci_pipeline_indexed_spans_sum:
+          description: Shows the sum of all CI pipeline indexed spans over all hours
+            in the current date for the given org.
+          format: int64
+          type: integer
+        ci_test_indexed_spans_sum:
+          description: Shows the sum of all CI test indexed spans over all hours in
+            the current date for the given org.
+          format: int64
+          type: integer
+        ci_visibility_pipeline_committers_hwm:
+          description: Shows the high-water mark of all CI visibility pipeline committers
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        ci_visibility_test_committers_hwm:
+          description: Shows the high-water mark of all CI visibility test committers
+            over all hours in the current date for the given org.
           format: int64
           type: integer
         container_avg:
@@ -15512,6 +15587,26 @@ components:
         browser_rum_units_agg_sum:
           description: Shows the sum of all browser RUM units over all hours in the
             current months for all organizations.
+          format: int64
+          type: integer
+        ci_pipeline_indexed_spans_agg_sum:
+          description: Shows the sum of all CI pipeline indexed spans over all hours
+            in the current months for all organizations.
+          format: int64
+          type: integer
+        ci_test_indexed_spans_agg_sum:
+          description: Shows the sum of all CI test indexed spans over all hours in
+            the current months for all organizations.
+          format: int64
+          type: integer
+        ci_visibility_pipeline_committers_hwm_sum:
+          description: Shows the high-water mark of all CI visibility pipeline committers
+            over all hours in the current months for all organizations.
+          format: int64
+          type: integer
+        ci_visibility_test_committers_hwm_sum:
+          description: Shows the high-water mark of all CI visibility test committers
+            over all hours in the current months for all organizations.
           format: int64
           type: integer
         container_avg_sum:
@@ -23660,10 +23755,6 @@ paths:
           description: Authentication Error
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ: []
       summary: Get all notebooks
       tags:
       - Notebooks
@@ -23831,10 +23922,6 @@ paths:
           description: Not Found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ: []
       summary: Get a notebook
       tags:
       - Notebooks
@@ -27353,6 +27440,66 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 19
+      x-undo:
+        type: safe
+  /api/v1/usage/ci-app:
+    get:
+      description: Get hourly usage for CI Visibility (Tests, Pipeline, Combo, and
+        Spans).
+      operationId: GetUsageCIApp
+      parameters:
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage beginning at this hour.'
+        in: query
+        name: start_hr
+        required: true
+        schema:
+          format: date-time
+          type: string
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage ending
+
+          **before** this hour.'
+        in: query
+        name: end_hr
+        required: false
+        schema:
+          format: date-time
+          type: string
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/UsageCIVisibilityResponse'
+          description: OK
+        '400':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+        '429':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - usage_read
+      summary: Get hourly usage for CI Visibility
+      tags:
+      - Usage Metering
+      x-menu-order: 38
       x-undo:
         type: safe
   /api/v1/usage/cspm:

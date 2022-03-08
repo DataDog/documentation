@@ -87,6 +87,10 @@ To run a search, use the facet checkboxes on the left and the search bar at the 
 
 To edit an individual SLO, hover over it and use the buttons that appear at the right of its row: **Edit**, **Clone**, **Delete**. To see more details on an SLO, click its table row to open its details side panel.
 
+**Note**: You can view your SLOs from your mobile device home screen by downloading the [Datadog Mobile App][15], available on the [Apple App Store][16] and Google Play Store[17].
+
+{{< img src="monitors/service_level_objectives/slos-mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="SLOs on iOS and Android">}}
+
 ### SLO tags
 
 When you create or edit an SLO, you can add tags for filtering on the [SLO status page][1] or for creating [SLO saved views][9].
@@ -181,7 +185,7 @@ Each SLO has a maximum limit of corrections that can be configured to ensure que
 
 | Correction Type   | Limit per SLO |
 | ----------------- | ------------- |
-| One-time          | 30            |
+| One-time          | 100           |
 | Daily recurring   | 2             |
 | Weekly recurring  | 3             |
 | Monthly recurring | 5             |
@@ -220,3 +224,6 @@ To view, edit, and delete existing status corrections, click on the **Correction
 [12]: https://icalendar.org/iCalendar-RFC-5545/3-8-5-3-recurrence-rule.html
 [13]: /api/latest/service-level-objective-corrections/
 [14]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/slo_correction
+[15]: /mobile
+[16]: https://apps.apple.com/app/datadog/id1391380318
+[17]: https://play.google.com/store/apps/details?id=com.datadog.app
