@@ -13,11 +13,11 @@ This page details common issues with setting up and using Database Monitoring wi
 
 ### No data is showing after configuring Database Monitoring
 
-If you do not see any data after following the [setup instructions][1] and configuring the Agent, there is most likely an issue with the Agent configuration or API key. Ensure you are receiving data from the Agent by following the [troubleshooting guide][2].
+If you do not see any data after following the [setup instructions][1] and configuring the Agent, there is most likely an issue with the Agent configuration or API key. Ensure you are receiving data from the Agent by following the [troubleshooting guide](/agent/troubleshooting/).
 
 If you are receiving other data such as system metrics, but not Database Monitoring data (such as query metrics and query samples), there is probably an issue with the Agent or database configuration. Ensure your Agent configuration looks like the example in the [setup instructions][1], double-checking the location of the configuration files.
 
-To debug, start by running the [Agent status command][1] to collect debugging information about data collected and sent to Datadog.
+To debug, start by running the [Agent status command](/agent/guide/agent-commands/?tab=agentv6v7#agent-status-and-information) to collect debugging information about data collected and sent to Datadog.
 
 Check the `Config Errors` section to ensure the configuration file is valid. For instance, the following indicates a missing instance configuration or invalid file:
 
@@ -64,7 +64,7 @@ Ensure that these lines are in the output and have values greater than zero:
 Database Monitoring Query Metrics: Last Run: 2, Total: 24,274
 Database Monitoring Query Samples: Last Run: 1, Total: 17,921
 ```
-When you are confident the Agent configuration is correct, [check the Agent logs][3] for warnings or errors attempting to run the database integrations.
+When you are confident the Agent configuration is correct, [check the Agent logs](/agent/guide/agent-log-files) for warnings or errors attempting to run the database integrations.
 
 You can also explicitly execute a check by running the `check` CLI command on the Datadog Agent and inspecting the output for errors:
 
@@ -202,11 +202,4 @@ This error happens when you are missing the `postgresql-contrib` package that in
 sudo apt-get install postgresql-contrib-10
 ```
 
-See the appropriate version of the [Postgres `contrib` documentation][1] for more information.
-
-
-[1]: https://www.postgresql.org/docs/12/contrib.html
-
-[1]: /agent/guide/agent-commands/?tab=agentv6v7#agent-status-and-information
-[2]: /agent/troubleshooting/
-[3]: /agent/guide/agent-log-files
+See the appropriate version of the [Postgres `contrib` documentation](https://www.postgresql.org/docs/12/contrib.html) for more information.
