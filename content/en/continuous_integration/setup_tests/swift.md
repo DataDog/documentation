@@ -647,7 +647,7 @@ enum DDTestStatus {
   // The test passed.
   case pass
   //
-  //Test test failed.
+  //The test failed.
   case fail
   //
   //The test was skipped.
