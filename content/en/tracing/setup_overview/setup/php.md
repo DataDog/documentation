@@ -363,6 +363,11 @@ The sampling rate for the traces (defaults to: between `0.0` and `1.0`). For ver
 **Default**: `null`<br>
 A JSON encoded string to configure the sampling rate. Examples: Set the sample rate to 20%: `'[{"sample_rate": 0.2}]'`. Set the sample rate to 10% for services starting with 'a' and span name 'b' and set the sample rate to 20% for all other services: `'[{"service": "a.*", "name": "b", "sample_rate": 0.1}, {"sample_rate": 0.2}]'` (see [Integration names](#integration-names)). Note that the JSON object **must** be included in single quotes (`'`) to avoid problems with escaping of the double quote (`"`) character.|
 
+`DD_TRACE_SPANS_LIMIT`
+: **INI**: `datadog.trace.spans_limit`
+**Default**: `null`<br>
+The maximum number of spans that are generated within one trace. If this amount of span is reached, then no more spans are generated. If this limit is increased, then the amount of memory that is occupied by a pending trace will increase and might reach the PHP maximum amount of allowed memory. The maximum amount of allowed memory can be increased by the PHP INI system setting `memory_limit`.
+
 `DD_TRACE_URL_AS_RESOURCE_NAMES_ENABLED`
 : **INI**: `datadog.trace.url_as_resource_names_enabled`<br>
 **Default**: `true`<br>
