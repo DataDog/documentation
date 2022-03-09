@@ -192,7 +192,7 @@ The final step to enable automatic correlation identifier injection is to:
 
 After configuring the correlation identifier injection, see [C# Log Collection][7] to configure your log collection.
 
-**Note:** To correlate traces with logs, you might need to set up a [trace ID remapper][8] to parse `dd_trace_id` as the log's trace ID. See [this documentation][9] for more information.
+**Note:** To correlate traces with logs, you might need to set up a [trace ID remapper][8] to parse `dd_trace_id` as the log's trace ID. See [correlated logs in the Trace ID panel][9] for more information.
 
 ## Manual injection
 
