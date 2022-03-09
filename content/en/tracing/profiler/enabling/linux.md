@@ -21,22 +21,20 @@ The Datadog Profiler for Linux lets you collect profile data for applications ru
 
 ## Requirements
 
-The Datadog Profiler requires Linux kernel v4.17+ on an `amd64` compatible processor. It does not support macOS, BSD, Windows, or other operating systems besides Linux v4.17 or later.
-
-Continuous Profiler is not supported on serverless platforms, such as AWS Lambda.
+The Datadog Profiler for Linux is compatible with Linux v4.17+ on `amd64` or `arm64` processors. It is not supported on serverless platforms, such as AWS Lambda, or on operating systems other than Linux, such as Windows, BSD, and MacOS.
 
 ## Installation
 
-To begin profiling applications:
+The profiler can be used either as a standalone executable or as a library (you can skip to the library installation instructions [here][1]). To begin profiling applications with the standalone executable:
 
-1. Configure the `perf_event_paranoid` kernel setting to be at most 2. On many distributions, you can check this parameter by running `cat /proc/sys/kernel/perf_event_paranoid` or `sysctl kernel.perf_event_paranoid`. You can set this value until the next reboot by running `echo 2 | sudo tee /proc/sys/kernel/perf_event_paranoid` and set it on every system startup with `sudo sysctl -w kernel.perf_event_paranoid=2`. These commands can't usually be run from a container, as the `perf_event_paranoid` setting is an operating system parameter. These commands may not work for all configurations. For alternatives, see [Troubleshooting][1].
+1. Configure the `perf_event_paranoid` kernel setting to be at most 2. On many distributions, you can check this parameter by running `cat /proc/sys/kernel/perf_event_paranoid` or `sysctl kernel.perf_event_paranoid`. You can set this value until the next reboot by running `echo 2 | sudo tee /proc/sys/kernel/perf_event_paranoid` and set it on every system startup with `sudo sysctl -w kernel.perf_event_paranoid=2`. These commands can't usually be run from a container, as the `perf_event_paranoid` setting is an operating system parameter. These commands may not work for all configurations. For alternatives, see [Troubleshooting][2].
 
-2. Ensure you are running the Datadog Agent version [7.20.2][2]+ or [6.20.2][3]+.
+2. Ensure you are running the Datadog Agent version [7.20.2][3]+ or [6.20.2][4]+.
 
-3. Download the appropriate [ddprof binary][4] for your Linux distribution. For example, here is one way to pull the latest release:
+3. Download the appropriate [ddprof release][5] for your Linux distribution. For example, here is one way to pull the latest release for an `amd64` platform:
 
    ```shell
-   curl -L -O https://github.com/DataDog/ddprof/releases/download/v0.7.0/ddprof-x86_64-linux-gnu.tar.gz
+   curl -L -O https://github.com/DataDog/ddprof/releases/download/v0.8.0/ddprof-x86_64-linux-gnu.tar.gz
    tar xvf ddprof-x86_64-linux-gnu.tar.gz
    mv ddprof-x86_64-linux-gnu/bin/ddprof INSTALLATION_TARGET
    ```
@@ -91,7 +89,31 @@ exec ./ddprof --environment prod --service my-web-app --service_version 1.0.3 my
 {{< /tabs >}}
 
 
-5. A minute or two after starting your application, your profiles appear on the [Datadog APM > Profiler page][5].
+5. A minute or two after starting your application, your profiles appear on the [Datadog APM > Profiler page][6].
+
+## Library Installation
+
+If you would rather use a library instead of a standalone executable, the profiler is available as both shared and static libraries. There are a few notable similarities and differences between the library and standalone versions:
+
+* The profiling library is only available for Linux v4.17+ on `amd64` or `arm64`.
+* The profiling library has the same requirements (items 1 and 2 in the [Installation](#installation) section) as the standalone executable.
+* The behavior of the library is nearly identical to the standalone executable, including the sandboxing features that isolate the profiler from your application.
+* The profiling library interfaces check environment variables, but they do not have other means of configuration-passing.
+
+For generality, the library exposes a C API. Here is an example of incorporating the library into a C application.
+1. Download a release of [ddprof][5] with library support (v0.8.0 or later) and extract the tarball.  For instance, you might do something like
+   ```shell
+   curl -L -O https://github.com/DataDog/ddprof/releases/download/v0.8.0/ddprof-x86_64-linux-gnu.tar.gz
+   mkdir /tmp/datadog
+   tar xvf ddprof-x86_64-linux-gnu.tar.gz --directory /tmp/datadog/
+   ```
+2. In the build system for your project, add the `include` subdirectory of the extracted directory from the tarball to the include directories of your project.
+3. In the build system for your project, add the `lib` subdirectory of the extracted directory from the tarball to the library directories of your project.
+4. Configure your project to use the dynamic (.so) or static (.a) library provided.
+5. In your code, simply start the profiler using the `ddprof_start_profiling()` interface, defined in the _dd_profiling.h_ header provided by the release.  The profiler will stop automatically when your program closes.  If you wish to stop the profiler manually, use `ddprof_stop_profiling(ms)` with the `ms` parameter indicating the maximum amount of time to allow the profiler to shutdown gracefully, after which it will be closed forcefully (possibly losing the last upload).
+6. If using the dynamic library, be aware that it must be in the system's dependency search path at runtime.  This is not true for the static library.
+
+The library has access to all profiler options, such as [pidmode](#pidmode) and [globalmode](#globalmode), but only through the respective environment variables.
 
 ## Configuration
 
@@ -99,9 +121,9 @@ Configuration for the profiler can be set by command line parameters, environmen
 
 | Environment variable            | Long name       | Short name | Default   | Description                                                                                                                          |
 |---------------------------------|-----------------|------------|-----------|--------------------------------------------------------------------------------------------------------------------------------------|
-| DD_ENV                          | environment     | E          |           | The [environment][6] name, for example, `production`.                                                                                |
-| DD_SERVICE                      | service         | S          | myservice | The [service][6] name, for example, `web-backend`.                                                                                   |
-| DD_VERSION                      | service_version | V          |           | The [version][6] of your service.                                                                                                    |
+| DD_ENV                          | environment     | E          |           | The [environment][7] name, for example, `production`.                                                                                |
+| DD_SERVICE                      | service         | S          | myservice | The [service][7] name, for example, `web-backend`.                                                                                   |
+| DD_VERSION                      | service_version | V          |           | The [version][7] of your service.                                                                                                    |
 | DD_AGENT_HOST                   | host            | H          | localhost | The hostname for the Datadog agent.                                                                                                  |
 | DD_TRACE_AGENT_PORT             | port            | P          | 8126      | The Datadog agent listening port.                                                                                                    |
 | DD_TRACE_AGENT_URL              | url             | U          |           | `https://<hostname>:<port>` overrides other agent host/port settings.                                                                |
@@ -148,16 +170,17 @@ When the profiler has root UID, all visible processes are instrumented. For most
 
 ## Not sure what to do next?
 
-The [Getting Started with Profiler][7] guide takes a sample service with a performance problem and shows you how to use Continuous Profiler to understand and fix the problem.
+The [Getting Started with Profiler][8] guide takes a sample service with a performance problem and shows you how to use Continuous Profiler to understand and fix the problem.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/profiler/profiler_troubleshooting
-[2]: https://app.datadoghq.com/account/settings#agent/overview
-[3]: https://app.datadoghq.com/account/settings?agent_version=6#agent
-[4]: https://github.com/DataDog/ddprof/releases
-[5]: https://app.datadoghq.com/profiling
-[6]: /getting_started/tagging/unified_service_tagging
-[7]: /getting_started/profiler/
+[1]: <#library-installation>
+[2]: /tracing/profiler/profiler_troubleshooting
+[3]: https://app.datadoghq.com/account/settings#agent/overview
+[4]: https://app.datadoghq.com/account/settings?agent_version=6#agent
+[5]: https://github.com/DataDog/ddprof/releases
+[6]: https://app.datadoghq.com/profiling
+[7]: /getting_started/tagging/unified_service_tagging
+[8]: /getting_started/profiler/
