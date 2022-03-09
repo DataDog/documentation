@@ -84,7 +84,7 @@ Install and configure the Datadog Agent to receive traces from your now instrume
 
 3. After the application is instrumented, the trace client attempts to send traces to the Unix domain socket `/var/run/datadog/apm.socket` by default. If the socket does not exist, traces are sent to `http://localhost:8126`.
 
-   If a different socket, host, or port is required, use the `DD_TRACE_AGENT_URL` environment variable. Some examples:
+   If a different socket, host, or port is required, use the `DD_TRACE_AGENT_URL` environment variable. Some examples follow:
 
    ```
    DD_TRACE_AGENT_URL=http://custom-hostname:1234
