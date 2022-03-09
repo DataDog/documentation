@@ -31,7 +31,7 @@ Supported platforms:
 
 ## Installing the Swift testing SDK
 
-There are two ways of installing the testing framework:
+There are three ways you can install the testing framework:
 
 {{< tabs >}}
 {{% tab "Swift Package Manager" %}}
@@ -647,7 +647,7 @@ enum DDTestStatus {
   // The test passed.
   case pass
   //
-  //Test test failed.
+  //The test failed.
   case fail
   //
   //The test was skipped.
