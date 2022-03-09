@@ -254,9 +254,6 @@ With Agent v6+, the command line interface is based on subcommands. To run a sub
 An example of the Datadog Agent resource consumption is below. Tests were made on an AWS EC2 machine `c5.xlarge` instance (4 VCPU/ 8GB RAM) and comparable performance was seen for ARM64-based instances with similar resourcing. The vanilla `datadog-agent` was running with a process check to monitor the Agent itself. Enabling more integrations may increase Agent resource consumption.
 Enabling JMX Checks forces the Agent to use more memory depending on the number of beans exposed by the monitored JVMs. Enabling the trace and process Agents increases the resource consumption as well.
 
-{{< tabs >}}
-{{% tab "Agent v6 & v7" %}}
-
 * Agent Test version: 7.34.0
 * CPU: ~ 0.08% of the CPU used on average
 * Memory: ~ 130MB of RAM used (RSS memory)
@@ -264,22 +261,6 @@ Enabling JMX Checks forces the Agent to use more memory depending on the number 
 * Disk:
   * Linux 850MB to 1.2GB depending on the distribution
   * Windows: 870MB
-
-{{% /tab %}}
-{{% tab "Agent v5" %}}
-
-* Agent Test version: 5.24.0
-* CPU: ~ 0.35% of the CPU used on average
-* Memory: ~ 115MB of RAM used.
-* Network bandwidth: ~ 1900 B/s ▼ | 800 B/s ▲
-* Disk:
-  * Linux 312MB
-  * Windows: 295MB
-
-**Note**: Since v5.15 of the container Agent, it is recommended to set container resources to at least 256MB due to an added memory cache -- upping the limit is not to account for baseline usage but rather to accommodate temporary spikes. Agent 6 has a much more limited memory footprint.
-
-{{% /tab %}}
-{{< /tabs >}}
 
 **Log Collection**:
 
