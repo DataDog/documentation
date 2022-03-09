@@ -26,7 +26,7 @@ To customize an OOTB detection rule, you must first clone an existing rule. Navi
 
 ### Define AppSec query
 
-Construct an Application Security query. For example, create a query to monitor an endpoint for SQL injection attempts: `@appsec.type:sql_injection @http.url_details.path:"/debug-endpoint-executing-sql" env:production`.
+Construct an Application Security query. For example, create a query to monitor an endpoint for SQL injection attempts: `@appsec.type:sql_injection -@http.url_details.path:"/debug-endpoint-executing-sql" env:production`.
 
 Optionally, define a unique count and signal grouping. Count the number of unique values observed for an attribute in a given timeframe. The defined group-by generates a signal for each group by value. Typically, the group by is an entity (like user, or IP). The group-by is also used to [join the queries together](#joining-queries).
 
