@@ -3,77 +3,167 @@ title: Securing the Data Sent to Datadog
 kind: documentation
 aliases:
   - /security/
+  - /security/other/
 further_reading:
-- link: "/data_security/tracing/"
-  tag: "Documentation"
-  text: "APM Security"
 - link: "/data_security/logs/"
   tag: "Documentation"
-  text: "Logs Security"
+  text: "Logs Data Security"
 - link: "/data_security/agent/"
   tag: "Documentation"
-  text: "Agent Security"
+  text: "Agent Data Security"
 - link: "/data_security/synthetics/"
   tag: "Documentation"
-  text: "Synthetic Monitoring Security"
-- link: "/data_security/other/"
+  text: "Synthetic Monitoring Data Security"
+- link: "/tracing/setup_overview/configure_data_security/"
   tag: "Documentation"
-  text: "Additional Security Considerations"
+  text: "Tracing Data Security"
+- link: "/real_user_monitoring/browser/modifying_data_and_context/"
+  tag: "Documentation"
+  text: "RUM Data Security"
+- link: "/real_user_monitoring/session_replay/privacy_options"
+  tag: "Documentation"
+  text: "Session Replay Privacy Options"
+- link: "/account_management/org_settings/sensitive_data_detection/"
+  tag: "Documentation"
+  text: "Sensitive Data Scanner"
 ---
 
 <div class="alert alert-info">This page is about the security of data sent to Datadog. If you're looking for cloud and application security products and features, see the <a href="/security_platform/" target="_blank">Security Platform</a> section.</div>
 
-Datadog allows you to send data in multiple ways, including from the [Agent][1], the [public API][2], and [integrations][3]. This section lists the kinds of data that you might send Datadog as part of the intended use of the product, describes scenarios where submitted data may contain personal data, and provides links to ways you can obfuscate or filter sensitive information before sending it. 
+In the normal course of using Datadog as intended, you send data to Datadog. Datadog works together with you to reduce risk and help ensure that the data you send is appropriate, not a violation of someone's privacy, and secure during and after its transmission.
 
-Read the [Datadog Security page][4] and [Privacy Policy][5] for more information.
+Additional important company information is available at [Datadog Security][1] and [Privacy Policy][2].
 
-## Metadata
+Much of the data you send to Datadog for intended use in the product is innocuous and not likely to contain private or personal information. However, it's important for you to know the kind of things that are sent, ways to strip out or obfuscate sensitive data before sending, or ways to prevent inserting sensitive data in the first place.
 
-Metadata consists primarily of [tags][6], which are typically formatted in the `key:value` format, for example, `env:prod`. Metadata facilitates filtering and grouping data such as Infrastructure Metrics, APM, and Logs, within the app. Metadata should not contain personal data as part of the intended use of the service. For example, don't set tag keys or values to information that is identifiably tied to an individual person.
+## How data gets from you to Datadog
 
-## Infrastructure metrics
+Datadog allows you to send data in multiple ways, including from the [Agent][3], [DogStatsD][4], the [public API][5], and [integrations][6]. In addition, [RUM SDKs][7] and [tracing libraries][8] generate data based on your application and services code and sends it to Datadog. 
 
-Infrastructure Metrics consist of timeseries for given metric names, associated with metadata, used to populate graphs. Metric names and timeseries should not contain personal data as part of the intended use of the service.
+While data is in motion, Datadog protects it with Transport Layer Security (TLS) and HTTP Strict Transport Security (HSTS). Data stored by Datadog is protected by encryption, access controls, and authentication. For specifics, read more at [Datadog Security][1].
 
-## APM
+## Kinds of data you send 
 
-APM data consists of four levels of granularity: services, resources, traces, and spans. Read [the APM Glossary][7] for an explanation about each. Services and resources should not contain personal data as part of the intended use of the service. If needed, use filtering and obfuscation features in the Agent to remove or hide personal data before transmitting traces and spans to Datadog. Read [APM Security][8] for more information.
+Datadog's purpose is to gather observability information from many sources around your infrastructure and services, and to bring it together in one place for you to analyze and investigate. This involves you sending a wide range of types of data content to Datadog's servers. Some of that data is structured and follow patterns that we can automatically check for and handle appropriately to protect privacy. Read about [using these automation and tools options](#datadog-automation-and-tools-for-protecting-data) next. 
 
-## Database monitoring
+However, a lot of the data is the names and descriptions of things, and you must consider whether the text you are sending represent private data for you or your customers, and if so avoid sending it. Consider the following (non-exhaustive) list of types of data you send to Datadog during the intended use of the product:
 
-Database monitoring data consists of metrics and samples collected by the Agent and used to track historical performance of normalized queries. The granularity of this data is defined by its normalized query signature and unique host identifier. Database monitoring data should not contain personal data. All query parameters are obfuscated and discarded from collected samples before being sent to Datadog. 
+Metadata and tags
+: Metadata consists primarily of [tags][9] in the `key:value` format, for example, `env:prod`. Metadata is used by Datadog to filter and group data to help you derive meaningful information. 
 
-## Logs
+Dashboards, notebooks, alerts, monitors, alerts, incidents, SLOs
+: The text descriptions, titles, and names you give the things you create in Datadog are data. 
 
-Logs consist of messages collected [by the Agent or by integrations][9], and associated with optional tags metadata. Log files are immutable records of computer events about an operating system, application, or user activities, which form an audit trail. These records may be used to assist in detecting security violations, performance problems, and flaws in applications. You can use Agent features to  filter, obfuscate, or otherwise hide personal data before sending Logs to Datadog. Read the [Logs Security][10] page for more information.
+Metrics
+: Metrics, including infrastructure metrics and metrics generated from integrations and other ingested data such as logs, traces, RUM, and synthetic tests, are timeseries used to populate graphs. They usually have associated tags.
 
-## Processes
+APM data
+: APM data includes services, resources, profiles, traces, and spans, along with associated tags. Read [the APM Glossary][10] for an explanation about each. 
 
-[Processes][11] consist of metrics and data from the `proc` filesystem, which acts as an interface to internal data structures in the kernel. Process data may contain the process command (including its path and arguments), the associated username, the ID of the process and its parent, the process state, and the working directory. Process data may also be associated with optional tags metadata. Processes should not contain personal data as part of the intended use of the service. Read [Additional Security Considerations][12] for more information.
+Database query signatures
+: Database monitoring data consists of metrics and samples, along with their associated tags, collected by the Agent and used to track historical performance of normalized queries. The granularity of this data is defined by its normalized query signature and unique host identifier. 
 
-## Monitors and alerts
+Logs
+: Logs and their associated tags are collected [by the Agent or by integrations][11]. Logs record computer events about an operating system, application, or user activities, forming an audit trail that can help detect security violations, performance problems, and flaws in applications. Log messages can contain almost any form of data.
 
-You create [monitors and alerts][13] to monitor the state of your infrastructure and applications based on the data they send to Datadog. Monitors and alerts are associated with optional tags metadata. A monitor might trigger an alert when certain conditions occur, such as a metric reaching a threshold, in order to track critical changes and notify team members as needed. Ensure you don't include personal data in your monitors as part of the intended use of the service.
+Process information
+: [Processes][12] consist of metrics and data from the `proc` filesystem, which acts as an interface to internal data structures in the kernel. Process data may contain the process command (including its path and arguments), the associated username, the ID of the process and its parent, the process state, and the working directory. Process data usually also has tag metadata associated with it.
 
-## Events and comments
+Events and comments
+: [Events][13] data is aggregated from multiple sources into a consolidated view, including triggered monitors, events submitted by integrations, events submitted by the application itself, and comments sent by users or through the API. Events and comments usually have associated tags metadata.
 
-[Events][14] are aggregated from multiple sources into a consolidated view, including triggered monitors, events submitted by integrations, events submitted by the application itself, and comments sent by users or through the API. Events and comments are associated with optional tags metadata. Ensure you don't include personal data in your events and comments as part of the intended use of the service.
+Continuous Integration pipelines and tests
+: The names of branches, pipelines, tests, and test suites are all data sent to Datadog.
+
+
+## Datadog automation and tools for protecting data
+
+- **Sensitive Data Scanner**: A stream-based, pattern matching service that you can use to identify, tag, and optionally redact or hash sensitive data. With implementation, your security and compliance teams can introduce a line of defense in preventing sensitive data from leaking outside your organization. For information about the scanner and setting it up, read [Sensitive Data Scanner][14]
+- **Database queries**: All query parameters are obfuscated and discarded from collected samples before being sent to Datadog.
+- **Process arguments**: Values for the following keywords are obfuscated from process data: `password` `passwd` `mysql_pwd` `access_token` `auth_token` `api_key` `apikey` `secret` `credentials` `stripetoken`. In addition, you can obfuscate sensitive sequences within process commands or arguments by using the [`custom_sensitive_words` setting][15] to provide an exclusion list of one or more regular expressions.
+
+## Component-specific data security
+
+### The Datadog Agent
+
+The Agent is the main channel for data getting from your systems to Datadog. [Read all about data security measures in the Agent][16].
+
+### Third party services integrations
+
+The Datadog integrations for some third party services are configured directly in the Datadog, and might require you to provide credentials that allow Datadog to connect to the service on your behalf. The credentials you provide are encrypted and stored by Datadog in a secure credential datastore, with strict security guarantees enforced. 
+
+All data is encrypted at-rest and in-transit. Access to the secure credential datastore is controlled and audited, and specific services or actions within those services are limited to only what is necessary. Anomalous behavior detection continuously monitors for unauthorized access. Datadog employee access for maintenance purposes is limited to a select subset of engineers.
+
+### Cloud integrations
+
+Due to their sensitive nature, additional security guarantees are implemented where possible when integrating with cloud providers, including relying on Datadog-dedicated credentials with limited permissions. For example:
+
+* The [integration with Amazon Web Services][17] requires you to configure role delegation using AWS IAM, as per the [AWS IAM Best Practices guide][18], and to grant specific permissions with an AWS Policy.
+* The integration with [Microsoft Azure][19] relies on you defining a tenant for Datadog, with access to a specific application granted only the "reader" role for the subscriptions you would like to monitor.
+* The integration with [Google Cloud Platform][20] relies on you defining a service account for Datadog, and granting it only the "Compute Viewer" and "Monitoring Viewer" roles.
+
+### Logs Management
+
+Logs are records produced by your systems and services and the activities that happen within them. [Read about security considerations and tools for logs management][21].
+
+### APM and other tracing library based products
+
+The Datadog tracing libraries are used to instrument your applications and services and send performance data through the Agent to Datadog. Trace and span data (along with much more) is generated for the following products to use:
+
+- Application Performance Monitoring (APM)
+- Continuous Profiler
+- CI Visibility
+- Application Security Monitoring
+
+For detailed information about how tracing-library sourced data is managed, and the tools you can use to improve data security, read [Configuring Agent and Tracer for trace data security][22].
+
+### Serverless distributed tracing
+
+You can use Datadog to collect and visualize the JSON request and response payloads of AWS Lambda functions. To prevent any sensitive data within request or response JSON objects from being sent to Datadog (like account IDs or addresses), you can to scrub specific parameters from being sent to Datadog. Read [Obfuscating AWS Lambda payload contents][23] for more information.
+
+### Synthetic Monitoring
+
+Synthetic testing simulates requests and business transactions from testing locations around the world. Read about the encryption considerations for configurations, assets, results, and credentials, as well as how to use testing privacy options, in [Synthetic Monitoring Data Security][24].
+
+### RUM and Session Replay
+
+You can modify the data collected by RUM to protect personally identifiable information and to reduce how much RUM data you’re collecting, through sampling the data. Read [Modifying RUM Data and Context][25] for details.
+ 
+Session Replay privacy options default to protecting end user privacy and preventing sensitive organizational information from being collected. Read about masking, overriding, and hiding elements from a session replay in [Session Replay Privacy Options][26].
+
+### Database Monitoring
+
+The Database Monitoring Agent obfuscates all query bind parameters sent to the Datadog intake. Thus passwords, PII (Personally identifiable information), and other potentially sensitive information stored in your database will not be viewable in query metrics, query samples, or explain plans. To read about mitigating risk for other types of data involved in database performance monitoring, read [Database Monitoring Data Collected][27].
 
 ### Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/
-[2]: /api/
-[3]: /integrations/
-[4]: https://www.datadoghq.com/security
-[5]: https://www.datadoghq.com/legal/privacy
-[6]: /getting_started/tagging/
-[7]: /tracing/visualization/
-[8]: /data_security/tracing/
-[9]: /logs/log_collection/
-[10]: /data_security/logs/
-[11]: /infrastructure/process/
-[12]: /data_security/other/
-[13]: /monitors/
-[14]: /events/
+
+[1]: https://www.datadoghq.com/security/
+[2]: https://www.datadoghq.com/legal/privacy/
+[3]: /agent/
+[4]: /developers/dogstatsd/
+[5]: /api/latest/
+[6]: /integrations/
+[7]: /real_user_monitoring/
+[8]: /tracing/setup_overview/setup/
+[9]: /getting_started/tagging/
+[10]: /tracing/visualization/
+[11]: /logs/log_collection/
+[12]: /infrastructure/process/
+[13]: /events/
+[14]: /account_management/org_settings/sensitive_data_detection/
+[15]: /infrastructure/process/#process-arguments-scrubbing
+[16]: /data_security/agent/
+[17]: /integrations/amazon_web_services/
+[18]: https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#delegate-using-roles
+[19]: /integrations/azure/
+[20]: /integrations/google_cloud_platform/
+[21]: /data_security/logs/
+[22]: /tracing/setup_overview/configure_data_security/
+[23]: /serverless/distributed_tracing/collect_lambda_payloads#obfuscating-payload-contents
+[24]: /data_security/synthetics/
+[25]: /real_user_monitoring/browser/modifying_data_and_context/
+[26]: /real_user_monitoring/session_replay/privacy_options
+[27]: /database_monitoring/data_collected/#sensitive-information

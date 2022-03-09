@@ -3261,7 +3261,7 @@ main:
     url: data_security/agent/
     parent: data_security
     weight: 1
-  - name: APM (Tracing)
+  - name: Tracing
     url: /tracing/setup_overview/configure_data_security/
     parent: data_security
     weight: 2
@@ -3273,10 +3273,6 @@ main:
     url: data_security/synthetics/
     parent: data_security
     weight: 4
-  - name: Other considerations
-    url: data_security/other/
-    parent: data_security
-    weight: 5
   - name: Help
     url: help/
     pre: info-fill
