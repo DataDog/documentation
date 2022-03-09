@@ -1,5 +1,5 @@
 ---
-title: Synthetic Monitoring Security
+title: Synthetic Monitoring Data Security
 kind: documentation
 aliases:
     - /synthetics/security/

@@ -36,7 +36,7 @@ Additional important company information is available at [Datadog Security][1] a
 
 ## How data gets from you to Datadog
 
-Datadog allows you to send data in multiple ways, including from the Agent, [DogStatsD][3], the public API, and integrations. In addition, RUM SDKs and tracing libraries generate data based on your application and services code and sends it to Datadog. 
+Datadog allows you to send data in multiple ways, including from the Agent, [DogStatsD][3], the public API, and integrations. In addition, Real User Monitoring SDKs and tracing libraries generate data based on your application and services code and sends it to Datadog. 
 
 While data is in motion, Datadog protects it with Transport Layer Security (TLS) and HTTP Strict Transport Security (HSTS). Data stored by Datadog is protected by encryption, access controls, and authentication. For specifics, read more at [Datadog Security][1].
 
@@ -70,7 +70,7 @@ Sensitive Data Scanner is a stream-based, pattern matching service that you can 
 
 ### Logs Management
 
-Logs are records produced by your systems and services and the activities that happen within them. [Read about security considerations and tools for logs management][11].
+Logs are records produced by your systems and services and the activities that happen within them. Read about logs data security considerations, including information about how you can filter and obfuscate logs data in [Log Management Data Security][11].
 
 ### Process arguments
 
@@ -78,14 +78,14 @@ Values for the following keywords are obfuscated from process data: `password` `
 
 ### APM and other tracing library based products
 
-The Datadog tracing libraries are used to instrument your applications and services and send performance data through the Agent to Datadog. Trace and span data (along with much more) is generated for the following products to use:
+The Datadog tracing libraries are used to instrument your applications, services, tests, and pipelines, and send performance data through the Agent to Datadog. Trace and span data (along with much more) is generated for the following products to use:
 
 - Application Performance Monitoring (APM)
 - Continuous Profiler
 - CI Visibility
 - Application Security Monitoring
 
-For detailed information about how tracing-library sourced data is managed, and the tools you can use to improve data security, read [Configuring Agent and Tracer for trace data security][13].
+For detailed information about how tracing-library sourced data is managed, default basic security settings, and custom obfuscating, scrubbing, excluding, and modifying of trace-related elements, read [Configuring Agent and Tracer for trace data security][13].
 
 ### Serverless distributed tracing
 
@@ -95,9 +95,9 @@ You can use Datadog to collect and visualize the JSON request and response paylo
 
 Synthetic testing simulates requests and business transactions from testing locations around the world. Read about the encryption considerations for configurations, assets, results, and credentials, as well as how to use testing privacy options, in [Synthetic Monitoring Data Security][15].
 
-### RUM and Session Replay
+### RUM & Session Replay
 
-You can modify the data collected by RUM to protect personally identifiable information and to reduce how much RUM data you’re collecting, through sampling the data. Read [Modifying RUM Data and Context][16] for details.
+You can modify the data collected by Real User Monitoring in the browser to protect personally identifiable information and to sample the RUM data you’re collecting. Read [Modifying RUM Data and Context][16] for details.
  
 Session Replay privacy options default to protecting end user privacy and preventing sensitive organizational information from being collected. Read about masking, overriding, and hiding elements from a session replay in [Session Replay Privacy Options][17].
 
@@ -124,14 +124,11 @@ APM data
 Database query signatures
 : Database monitoring data consists of metrics and samples, along with their associated tags, collected by the Agent and used to track historical performance of normalized queries. The granularity of this data is defined by its normalized query signature and unique host identifier. All query parameters are obfuscated and discarded from collected samples before being sent to Datadog.
 
-Logs
-: Logs and their associated tags are collected [by the Agent or by integrations][21]. Logs record computer events about an operating system, application, or user activities, forming an audit trail that can help detect security violations, performance problems, and flaws in applications. Log messages can contain almost any form of data.
-
 Process information
-: [Processes][22] consist of metrics and data from the `proc` filesystem, which acts as an interface to internal data structures in the kernel. Process data may contain the process command (including its path and arguments), the associated username, the ID of the process and its parent, the process state, and the working directory. Process data usually also has tag metadata associated with it.
+: Processes consist of metrics and data from the `proc` filesystem, which acts as an interface to internal data structures in the kernel. Process data may contain the process command (including its path and arguments), the associated username, the ID of the process and its parent, the process state, and the working directory. Process data usually also has tag metadata associated with it.
 
 Events and comments
-: [Events][23] data is aggregated from multiple sources into a consolidated view, including triggered monitors, events submitted by integrations, events submitted by the application itself, and comments sent by users or through the API. Events and comments usually have associated tags metadata.
+: Events data is aggregated from multiple sources into a consolidated view, including triggered monitors, events submitted by integrations, events submitted by the application itself, and comments sent by users or through the API. Events and comments usually have associated tags metadata.
 
 Continuous Integration pipelines and tests
 : The names of branches, pipelines, tests, and test suites are all data sent to Datadog.
@@ -161,6 +158,3 @@ Continuous Integration pipelines and tests
 [18]: /database_monitoring/data_collected/#sensitive-information
 [19]: /getting_started/tagging/
 [20]: /tracing/visualization/
-[21]: /logs/log_collection/
-[22]: /infrastructure/process/
-[23]: /events/

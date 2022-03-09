@@ -1,5 +1,5 @@
 ---
-title: Log Management Security
+title: Log Management Data Security
 kind: documentation
 aliases:
     - /logs/security/
