@@ -40,7 +40,7 @@ If installing nodejs in the CI is an issue, standalone binaries are provided wit
 curl -L --fail "https://github.com/DataDog/datadog-ci/releases/latest/download/datadog-ci_linux-x64" --output "/usr/local/bin/datadog-ci" && chmod +x /usr/local/bin/datadog-ci
 {{< /code-block >}}
 
-Then run any command via `datadog-ci`:
+Then run any command with `datadog-ci`:
 {{< code-block lang="bash" >}}
 datadog-ci version
 {{< /code-block >}}
@@ -52,7 +52,7 @@ datadog-ci version
 curl -L --fail "https://github.com/DataDog/datadog-ci/releases/latest/download/datadog-ci_darwin-x64" --output "/usr/local/bin/datadog-ci" && chmod +x /usr/local/bin/datadog-ci
 {{< /code-block >}}
 
-Then run any command via `datadog-ci`:
+Then run any command with `datadog-ci`:
 {{< code-block lang="bash" >}}
 datadog-ci version
 {{< /code-block >}}
@@ -66,7 +66,7 @@ datadog-ci version
 Invoke-WebRequest -Uri "https://github.com/DataDog/datadog-ci/releases/latest/download/datadog-ci_win-x64.exe" -OutFile "datadog-ci.exe"
 {{< /code-block >}}
 
-Then run any command via `Start-Process -FilePath "datadog-ci.exe"`:
+Then run any command with `Start-Process -FilePath "datadog-ci.exe"`:
 {{< code-block lang="powershell" >}}
 Start-Process -FilePath "./datadog-ci.exe" -ArgumentList version
 {{< /code-block >}}
