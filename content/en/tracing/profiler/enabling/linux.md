@@ -34,9 +34,9 @@ The profiler can be used either as a standalone executable or as a library (you 
 3. Download the appropriate [ddprof release][4] for your Linux distribution. For example, here is one way to pull the latest release for an `amd64` platform:
 
    ```shell
-   curl -L -O https://github.com/DataDog/ddprof/releases/download/v0.8.0/ddprof-x86_64-linux-gnu.tar.gz
-   tar xvf ddprof-x86_64-linux-gnu.tar.gz
-   mv ddprof-x86_64-linux-gnu/bin/ddprof INSTALLATION_TARGET
+   curl -L -O https://github.com/DataDog/ddprof/releases/download/v0.8.0/ddprof-x86_64-linux-gnu.tar.xz
+   tar xvf ddprof-x86_64-linux-gnu.tar.xz
+   mv ddprof/bin/ddprof INSTALLATION_TARGET
    ```
 
    Where `INSTALLATION_TARGET` specifies the location you'd like to store the `ddprof` binary. The examples that follow assume `INSTALLATION_TARGET` is set to `./ddprof`.
@@ -103,9 +103,9 @@ If you would rather use a library instead of a standalone executable, the profil
 For generality, the library exposes a C API. Here is an example of incorporating the library into a C application.
 1. Download a release of [ddprof][4] with library support (v0.8.0 or later) and extract the tarball.  For instance, you might do something like
    ```shell
-   curl -L -O https://github.com/DataDog/ddprof/releases/download/v0.8.0/ddprof-x86_64-linux-gnu.tar.gz
+   curl -L -O https://github.com/DataDog/ddprof/releases/download/v0.8.0/ddprof-x86_64-linux-gnu.tar.xz
    mkdir /tmp/datadog
-   tar xvf ddprof-x86_64-linux-gnu.tar.gz --directory /tmp/datadog/
+   tar xvf ddprof-x86_64-linux-gnu.tar.xz --directory /tmp/datadog/
    ```
 2. In the build system for your project, add the `include` subdirectory of the extracted directory from the tarball to the include directories of your project.
 3. In the build system for your project, add the `lib` subdirectory of the extracted directory from the tarball to the library directories of your project.
