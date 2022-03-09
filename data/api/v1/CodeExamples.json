@@ -677,6 +677,13 @@
       "description": "Get hourly usage for IoT returns \"OK\" response"
     }
   ],
+  "GetUsageOnlineArchive": [
+    {
+      "group": "usage_metering",
+      "suffix": "",
+      "description": "Get hourly usage for Online Archive returns \"OK\" response"
+    }
+  ],
   "GetUsageSNMP": [
     {
       "group": "usage_metering",
