@@ -64237,6 +64237,15 @@
             "description": "Too many requests"
           }
         },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": []
+          }
+        ],
         "summary": "Get a list of RUM events",
         "tags": [
           "RUM"
@@ -64567,6 +64576,15 @@
             "description": "Too many requests"
           }
         },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": []
+          }
+        ],
         "summary": "Search RUM events",
         "tags": [
           "RUM"
