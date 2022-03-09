@@ -26,6 +26,8 @@ The app helps you prioritize flaky tests by providing the following information 
 
 Once you identify a flaky test you want to fix, click on the test to see links to view the most recent failed test run or the first flaky test run.
 
+<div class="alert alert-info"><strong>Note</strong>: The table is limited to the 1000 flaky tests that exhibited more flakiness in the selected time window.</div>
+
 ## Remediation
 
 If a flaky test has not failed in the past 30 days, it is automatically removed from the table. You can also manually remove a flaky test by clicking on the trash icon that appears when you hover over the test row. It is added again if it re-exhibits flaky behavior.
