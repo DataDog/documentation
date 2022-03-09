@@ -309,14 +309,14 @@
               tag: "Homepage"
               text: "Explore Datadog RUM"
     - action: pull-and-push-file
-      branch: master
+      branch: alai97/rum-data-collected-docs-update
       globs:
       - 'docs/mobile_data_collected.md'
       options:
         dest_path: '/real_user_monitoring/android/'
         file_name: 'data_collected.md'
         front_matters:
-          dependencies: ["https://github.com/DataDog/dd-sdk-android/blob/master/docs/mobile_data_collected.md"]
+          dependencies: ["https://github.com/DataDog/dd-sdk-android/blob/alai97/rum-data-collected-docs-update/docs/mobile_data_collected.md"]
           title: RUM Android Data Collected
           kind: documentation
           further_reading:
@@ -551,14 +551,14 @@
               text: "Explore your services, resources, and traces"
 
     - action: pull-and-push-folder
-      branch: master
+      branch: alai97/rum-data-collected-docs-update
       globs:
         - docs/rum_collection/*
       options:
         dest_dir: '/real_user_monitoring/ios/'
         path_to_remove: 'docs/rum_collection/'
         front_matters:
-          dependencies: [ "https://github.com/DataDog/dd-sdk-ios/blob/master/docs/rum_collection/" ]
+          dependencies: [ "https://github.com/DataDog/dd-sdk-ios/blob/alai97/rum-data-collected-docs-update/docs/rum_collection/" ]
 
     - action: pull-and-push-folder
       branch: master
