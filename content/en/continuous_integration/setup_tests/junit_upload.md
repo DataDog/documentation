@@ -32,16 +32,50 @@ npm install -g @datadog/datadog-ci
 
 ### Standalone binary (beta)
 
-If installing nodejs in the CI is an issue, a standalone binary is provided with releases. Only _linux-x64_, _darwin-x64_ (macOS) and _win-x64_ (Windows) are supported at the time. To install for linux:
+If installing nodejs in the CI is an issue, standalone binaries are provided with [releases][3]. Only _linux-x64_, _darwin-x64_ (MacOS) and _win-x64_ (Windows) are supported at the time. To install:
 
+{{< tabs >}}
+{{% tab "Linux" %}}
 {{< code-block lang="bash" >}}
-curl -L --fail "https://github.com/DataDog/datadog-ci/releases/latest/download/datadog-ci-linux" --output "/usr/local/bin/datadog-ci" && chmod +x /usr/local/bin/datadog-ci
+curl -L --fail "https://github.com/DataDog/datadog-ci/releases/latest/download/datadog-ci_linux-x64" --output "/usr/local/bin/datadog-ci" && chmod +x /usr/local/bin/datadog-ci
 {{< /code-block >}}
 
-For other operating systems, change the URL to the corresponding OS: https://github.com/DataDog/datadog-ci/releases/latest/download/datadog-ci-win.exe or https://github.com/DataDog/datadog-ci/releases/latest/download/datadog-ci-macos.
+Then run any command via `datadog-ci`:
+{{< code-block lang="bash" >}}
+datadog-ci version
+{{< /code-block >}}
+
+{{% /tab %}}
+
+{{% tab "MacOS" %}}
+{{< code-block lang="bash" >}}
+curl -L --fail "https://github.com/DataDog/datadog-ci/releases/latest/download/datadog-ci_darwin-x64" --output "/usr/local/bin/datadog-ci" && chmod +x /usr/local/bin/datadog-ci
+{{< /code-block >}}
+
+Then run any command via `datadog-ci`:
+{{< code-block lang="bash" >}}
+datadog-ci version
+{{< /code-block >}}
+
+{{% /tab %}}
 
 
-<div class="alert alert-warning"><strong>Note</strong>: the standalone binaries are in beta and their stability is not guaranteed.</div>
+
+{{% tab "Windows" %}}
+{{< code-block lang="powershell" >}}
+Invoke-WebRequest -Uri "https://github.com/DataDog/datadog-ci/releases/latest/download/datadog-ci_win-x64.exe" -OutFile "datadog-ci.exe"
+{{< /code-block >}}
+
+Then run any command via `Start-Process -FilePath "datadog-ci.exe"`:
+{{< code-block lang="powershell" >}}
+Start-Process -FilePath "./datadog-ci.exe" -ArgumentList version
+{{< /code-block >}}
+
+{{% /tab %}}
+
+{{< /tabs >}}
+
+<div class="alert alert-warning"><strong>Note</strong>: the standalone binaries are in <strong>beta</strong> and their stability is not guaranteed.</div>
 
 
 ## Uploading test reports
@@ -52,7 +86,7 @@ To upload your JUnit XML test reports to Datadog, run the following command, spe
 datadog-ci junit upload --service <service_name> <path> [<path> ...]
 {{< /code-block >}}
 
-Specify a valid [Datadog API key][3] in the `DATADOG_API_KEY` environment variable, and the environment where tests were run (for example, `local` when uploading results from a developer workstation, or `ci` when uploading them from a CI provider) in the `DD_ENV` environment variable. For example:
+Specify a valid [Datadog API key][4] in the `DATADOG_API_KEY` environment variable, and the environment where tests were run (for example, `local` when uploading results from a developer workstation, or `ci` when uploading them from a CI provider) in the `DD_ENV` environment variable. For example:
 
 <pre>
 <code>
@@ -97,19 +131,19 @@ Positional arguments
 The following environment variables are supported:
 
 `DATADOG_API_KEY` (Required)
-: [Datadog API key][3] used to authenticate the requests.<br/>
+: [Datadog API key][4] used to authenticate the requests.<br/>
 **Default**: (none)
 
 Additionally, configure the Datadog site to use the selected one ({{< region-param key="dd_site_name" >}}):
 
 `DATADOG_SITE` (Required)
-: The [Datadog site][4] to upload results to.<br/>
+: The [Datadog site][5] to upload results to.<br/>
 **Default**: `datadoghq.com`<br/>
 **Selected site**: {{< region-param key="dd_site" code="true" >}}
 
 ## Collecting repository and commit metadata
 
-Datadog uses Git information for visualizing your test results and grouping them by repository and commit. Git metadata is collected by the Datadog CI CLI from CI provider environment variables and the local `.git` folder in the project path, if available. To read this directory, the [`git`][5] binary is required.
+Datadog uses Git information for visualizing your test results and grouping them by repository and commit. Git metadata is collected by the Datadog CI CLI from CI provider environment variables and the local `.git` folder in the project path, if available. To read this directory, the [`git`][6] binary is required.
 
 If you are running tests in non-supported CI providers or with no `.git` folder, you can set the Git information manually using environment variables. These environment variables take precedence over any auto-detected information. Set the following environment variables to provide Git information:
 
@@ -251,6 +285,7 @@ To be processed, the `name` attribute in the `<property>` element must have the 
 
 [1]: https://junit.org/junit5/
 [2]: https://www.npmjs.com/package/@datadog/datadog-ci
-[3]: https://app.datadoghq.com/organization-settings/api-keys
-[4]: /getting_started/site/
-[5]: https://git-scm.com/downloads
+[3]: https://github.com/DataDog/datadog-ci/releases
+[4]: https://app.datadoghq.com/organization-settings/api-keys
+[5]: /getting_started/site/
+[6]: https://git-scm.com/downloads
