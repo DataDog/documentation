@@ -14,7 +14,7 @@ further_reading:
 
 Application Security comes with a set of [out-of-the-box detection rules][1] which aim to catch attack attempts and vulnerability triggers that impact your production systems.
 
-However, there are situations where you may want to customize a rule based on your environment. For example, you may want to customize a rule that catches attack attempts on a service’s route. For instance, a pre-production development route accepting SQL and returning the results. Catching SQL attempts is noisy as the route is restricted to internal developers, therefore you can customize this rule to exclude these patterns.
+However, there are situations where you may want to customize a rule based on your environment. For example, you may want to customize a detection rule that catches attack attempts on a service’s route. For instance, a pre-production development route accepting SQL and returning the results. Catching SQL attempts is noisy as the route is restricted to internal developers, therefore you can customize this rule to exclude these patterns.
 
 Another example is customizing a rule to exclude an internal security scanner. Application Security detects its activity as expected. However, you may not want to be notified of it’s regularly occurring scan.
 
