@@ -78,9 +78,9 @@ Dive deep into controlling logs data with the [Controlling sensitive logs data][
 
 A key approach to reducing risk around logs data security is access control. Read [How to set up RBAC for Logs][15] and [Logs RBAC Permissions][16] to learn how to do this in Datadog.
 
-### Process arguments
+### Live processes and containers
 
-Values for the following keywords are obfuscated from process data: `password` `passwd` `mysql_pwd` `access_token` `auth_token` `api_key` `apikey` `secret` `credentials` `stripetoken`. In addition, you can obfuscate sensitive sequences within process commands or arguments by using the [`custom_sensitive_words` setting][17] to provide an exclusion list of one or more regular expressions.
+To prevent leaking sensitive data when you're monitoring live processes and live containers, Datadog provides some default sensitive keyword scrubbing in process arguments and in Helm charts. You can obfuscate additional sensitive sequences within process commands or arguments by using the [`custom_sensitive_words` setting][17], and add to the container scrubbing word list by using the [`DD_ORCHESTRATOR_EXPLORER_CUSTOM_SENSITIVE_WORDS` environment variable][18].
 
 ### APM and other tracing library based products
 
@@ -91,32 +91,32 @@ The Datadog tracing libraries are used to instrument your applications, services
 - CI Visibility
 - Application Security Monitoring
 
-For detailed information about how tracing-library sourced data is managed, default basic security settings, and custom obfuscating, scrubbing, excluding, and modifying of trace-related elements, read [Configuring Agent and Tracer for trace data security][18].
+For detailed information about how tracing-library sourced data is managed, default basic security settings, and custom obfuscating, scrubbing, excluding, and modifying of trace-related elements, read [Configuring Agent and Tracer for trace data security][19].
 
 ### Serverless distributed tracing
 
-You can use Datadog to collect and visualize the JSON request and response payloads of AWS Lambda functions. To prevent any sensitive data within request or response JSON objects from being sent to Datadog (like account IDs or addresses), you can to scrub specific parameters from being sent to Datadog. Read [Obfuscating AWS Lambda payload contents][19] for more information.
+You can use Datadog to collect and visualize the JSON request and response payloads of AWS Lambda functions. To prevent any sensitive data within request or response JSON objects from being sent to Datadog (like account IDs or addresses), you can to scrub specific parameters from being sent to Datadog. Read [Obfuscating AWS Lambda payload contents][20] for more information.
 
 ### Synthetic Monitoring
 
-Synthetic testing simulates requests and business transactions from testing locations around the world. Read about the encryption considerations for configurations, assets, results, and credentials, as well as how to use testing privacy options, in [Synthetic Monitoring Data Security][20].
+Synthetic testing simulates requests and business transactions from testing locations around the world. Read about the encryption considerations for configurations, assets, results, and credentials, as well as how to use testing privacy options, in [Synthetic Monitoring Data Security][21].
 
 ### RUM & Session Replay
 
-You can modify the data collected by Real User Monitoring in the browser to protect personally identifiable information and to sample the RUM data you’re collecting. Read [Modifying RUM Data and Context][21] for details.
+You can modify the data collected by Real User Monitoring in the browser to protect personally identifiable information and to sample the RUM data you’re collecting. Read [Modifying RUM Data and Context][22] for details.
  
-Session Replay privacy options default to protecting end user privacy and preventing sensitive organizational information from being collected. Read about masking, overriding, and hiding elements from a session replay in [Session Replay Privacy Options][22].
+Session Replay privacy options default to protecting end user privacy and preventing sensitive organizational information from being collected. Read about masking, overriding, and hiding elements from a session replay in [Session Replay Privacy Options][23].
 
 ### Database Monitoring
 
-The Database Monitoring Agent obfuscates all query bind parameters sent to the Datadog intake. Thus passwords, PII (Personally identifiable information), and other potentially sensitive information stored in your database will not be viewable in query metrics, query samples, or explain plans. To read about mitigating risk for other types of data involved in database performance monitoring, read [Database Monitoring Data Collected][23].
+The Database Monitoring Agent obfuscates all query bind parameters sent to the Datadog intake. Thus passwords, PII (Personally identifiable information), and other potentially sensitive information stored in your database will not be viewable in query metrics, query samples, or explain plans. To read about mitigating risk for other types of data involved in database performance monitoring, read [Database Monitoring Data Collected][24].
 
 ## Other sources of potentially sensitive data 
 
 In addition to the sensitive data that you can automatically scrub, obfuscate, and otherwise avoid collecting, a lot of the data collected by Datadog is the names and descriptions of things, and you must consider whether the text you are sending represent private data for you or your customers, and if so avoid sending it. Consider the following (non-exhaustive) list of types of data you send to Datadog during the intended use of the product:
 
 Metadata and tags
-: Metadata consists primarily of [tags][24] in the `key:value` format, for example, `env:prod`. Metadata is used by Datadog to filter and group data to help you derive meaningful information. 
+: Metadata consists primarily of [tags][25] in the `key:value` format, for example, `env:prod`. Metadata is used by Datadog to filter and group data to help you derive meaningful information. 
 
 Dashboards, notebooks, alerts, monitors, alerts, incidents, SLOs
 : The text descriptions, titles, and names you give the things you create in Datadog are data. 
@@ -125,7 +125,7 @@ Metrics
 : Metrics, including infrastructure metrics and metrics generated from integrations and other ingested data such as logs, traces, RUM, and synthetic tests, are timeseries used to populate graphs. They usually have associated tags.
 
 APM data
-: APM data includes services, resources, profiles, traces, and spans, along with associated tags. Read [the APM Glossary][25] for an explanation about each. 
+: APM data includes services, resources, profiles, traces, and spans, along with associated tags. Read [the APM Glossary][26] for an explanation about each. 
 
 Database query signatures
 : Database monitoring data consists of metrics and samples, along with their associated tags, collected by the Agent and used to track historical performance of normalized queries. The granularity of this data is defined by its normalized query signature and unique host identifier. All query parameters are obfuscated and discarded from collected samples before being sent to Datadog.
@@ -161,11 +161,12 @@ Continuous Integration pipelines and tests
 [15]: /logs/guide/logs-rbac
 [16]: /logs/guide/logs-rbac-permissions
 [17]: /infrastructure/process/#process-arguments-scrubbing
-[18]: /tracing/setup_overview/configure_data_security/
-[19]: /serverless/distributed_tracing/collect_lambda_payloads#obfuscating-payload-contents
-[20]: /data_security/synthetics/
-[21]: /real_user_monitoring/browser/modifying_data_and_context/
-[22]: /real_user_monitoring/session_replay/privacy_options
-[23]: /database_monitoring/data_collected/#sensitive-information
-[24]: /getting_started/tagging/
-[25]: /tracing/visualization/
+[18]: /infrastructure/livecontainers/configuration/#scrubbing-sensitive-information
+[19]: /tracing/setup_overview/configure_data_security/
+[20]: /serverless/distributed_tracing/collect_lambda_payloads#obfuscating-payload-contents
+[21]: /data_security/synthetics/
+[22]: /real_user_monitoring/browser/modifying_data_and_context/
+[23]: /real_user_monitoring/session_replay/privacy_options
+[24]: /database_monitoring/data_collected/#sensitive-information
+[25]: /getting_started/tagging/
+[26]: /tracing/visualization/
