@@ -2014,1595 +2014,4379 @@ main:
     pre: info-fill
     identifier: help_top_level
     weight: 240000
-api_v1:
-  - name: Présentation
-    url: /api/v1/
-    identifier: Présentation de l'API V1
+api:
+  - name: Overview
+    url: /api/latest/
+    identifier: API overview
     weight: -10
-  - name: Utiliser l'API
-    url: /api/v1/using-the-api/
-    parent: Présentation de l'API V1
+  - name: Using the API
+    url: /api/latest/using-the-api/
+    parent: API overview
     weight: 5
-  - name: Limites de débit
-    url: /api/v1/rate-limits/
-    parent: Présentation de l'API V1
+  - name: Authorization Scopes
+    url: /api/latest/scopes/
+    identifier: API Scopes
+    parent: API overview
     weight: 6
+  - name: Rate Limits
+    url: /api/latest/rate-limits/
+    parent: API overview
+    weight: 7
     identifier: rate-limits
-  - name: Intégration AWS
-    url: /api/v1/aws-integration/
-    identifier: Intégration AWS
+  - name: AWS Integration
+    url: /api/latest/aws-integration/
+    identifier: aws-integration
     generated: true
-  - name: Supprimer une intégration AWS
-    parent: Intégration AWS
-    url: "#supprimer-une-integration-aws"
+  - name: Generate a new external ID
+    url: '#generate-a-new-external-id'
+    identifier: generate-a-new-external-id
+    parent: aws-integration
     generated: true
-  - name: Énumérer toutes les intégrations AWS
-    parent: Intégration AWS
-    url: "#enumerer-toutes-les-integrations-aws"
+    params:
+      versions:
+        - v1
+      operationids:
+        - CreateNewAWSExternalID
+      unstable: []
+      order: 4
+  - name: Set an AWS tag filter
+    url: '#set-an-aws-tag-filter'
+    identifier: set-an-aws-tag-filter
+    parent: aws-integration
     generated: true
-  - name: Créer une intégration AWS
-    parent: Intégration AWS
-    url: "#creer-une-integration-aws"
+    params:
+      versions:
+        - v1
+      operationids:
+        - CreateAWSTagFilter
+      unstable: []
+      order: 2
+  - name: Get all AWS tag filters
+    url: '#get-all-aws-tag-filters'
+    identifier: get-all-aws-tag-filters
+    parent: aws-integration
     generated: true
-  - name: Mettre à jour une intégration AWS
-    parent: Intégration AWS
-    url: "#mettre-a-jour-une-integration-aws"
+    params:
+      versions:
+        - v1
+      operationids:
+        - ListAWSTagFilters
+      unstable: []
+      order: 1
+  - name: Delete a tag filtering entry
+    url: '#delete-a-tag-filtering-entry'
+    identifier: delete-a-tag-filtering-entry
+    parent: aws-integration
     generated: true
-  - name: Énumérer les règles d'espace de nommage
-    parent: Intégration AWS
-    url: "#enumerer-les-regles-d-espace-de-nommage"
+    params:
+      versions:
+        - v1
+      operationids:
+        - DeleteAWSTagFilter
+      unstable: []
+      order: 3
+  - name: List namespace rules
+    url: '#list-namespace-rules'
+    identifier: list-namespace-rules
+    parent: aws-integration
     generated: true
-  - name: Supprimer une entrée de filtrage des tags
-    parent: Intégration AWS
-    url: "#supprimer-une-entree-de-filtrage-de-tags"
+    params:
+      versions:
+        - v1
+      operationids:
+        - ListAvailableAWSNamespaces
+      unstable: []
+      order: 5
+  - name: Update an AWS integration
+    url: '#update-an-aws-integration'
+    identifier: update-an-aws-integration
+    parent: aws-integration
     generated: true
-  - name: Récupérer tous les filtres de tags AWS
-    parent: Intégration AWS
-    url: "#recuperer-tous-les-filtres-de-tags-aws"
+    params:
+      versions:
+        - v1
+      operationids:
+        - UpdateAWSAccount
+      unstable: []
+      order: 9
+  - name: Create an AWS integration
+    url: '#create-an-aws-integration'
+    identifier: create-an-aws-integration
+    parent: aws-integration
     generated: true
-  - name: Définir un filtre de tags AWS
-    parent: Intégration AWS
-    url: "#definir-un-filtre-de-tags-aws"
+    params:
+      versions:
+        - v1
+      operationids:
+        - CreateAWSAccount
+      unstable: []
+      order: 8
+  - name: List all AWS integrations
+    url: '#list-all-aws-integrations'
+    identifier: list-all-aws-integrations
+    parent: aws-integration
     generated: true
-  - name: Générer un nouvel ID externe
-    parent: Intégration AWS
-    url: "#generer-un-nouvel-id-externe"
+    params:
+      versions:
+        - v1
+      operationids:
+        - ListAWSAccounts
+      unstable: []
+      order: 6
+  - name: Delete an AWS integration
+    url: '#delete-an-aws-integration'
+    identifier: delete-an-aws-integration
+    parent: aws-integration
     generated: true
-  - name: Intégration Logs AWS
-    url: /api/v1/aws-logs-integration/
-    identifier: Intégration Logs AWS
+    params:
+      versions:
+        - v1
+      operationids:
+        - DeleteAWSAccount
+      unstable: []
+      order: 7
+  - name: AWS Logs Integration
+    url: /api/latest/aws-logs-integration/
+    identifier: aws-logs-integration
     generated: true
-  - name: Supprimer une intégration de logs AWS
-    parent: Intégration de logs AWS
-    url: "#supprimer-une-integration-de-logs-aws"
+  - name: Check permissions for log services
+    url: '#check-permissions-for-log-services'
+    identifier: check-permissions-for-log-services
+    parent: aws-logs-integration
     generated: true
-  - name: Énumérer toutes les intégrations de logs AWS
-    parent: Intégration de logs AWS
-    url: "#enumerer-toutes-les-integrations-de-logs-aws"
+    params:
+      versions:
+        - v1
+      operationids:
+        - CheckAWSLogsServicesAsync
+      unstable: []
+      order: 6
+  - name: Enable an AWS Logs integration
+    url: '#enable-an-aws-logs-integration'
+    identifier: enable-an-aws-logs-integration
+    parent: aws-logs-integration
     generated: true
-  - name: Ajouter l'ARN de Lambda pour les logs AWS
-    parent: Intégration de logs AWS
-    url: "#ajouter-l-arn-de-lambda-pour-les-logs-aws"
+    params:
+      versions:
+        - v1
+      operationids:
+        - EnableAWSLogServices
+      unstable: []
+      order: 5
+  - name: Get list of AWS log ready services
+    url: '#get-list-of-aws-log-ready-services'
+    identifier: get-list-of-aws-log-ready-services
+    parent: aws-logs-integration
     generated: true
-  - name: Vérifier qu'une fonction Lambda AWS existe
-    parent: Intégration de logs AWS
-    url: "#verifier-qu-une-fonction-lambda-aws-existe"
+    params:
+      versions:
+        - v1
+      operationids:
+        - ListAWSLogsServices
+      unstable: []
+      order: 4
+  - name: Check that an AWS Lambda Function exists
+    url: '#check-that-an-aws-lambda-function-exists'
+    identifier: check-that-an-aws-lambda-function-exists
+    parent: aws-logs-integration
     generated: true
-  - name: Récupérer la liste des services AWS compatibles avec la collecte de logs
-    parent: Intégration Logs AWS
-    url: "#recuperer-la-liste-des-services-aws-compatibles-avec-la-collecte-de-logs"
+    params:
+      versions:
+        - v1
+      operationids:
+        - CheckAWSLogsLambdaAsync
+      unstable: []
+      order: 7
+  - name: Add AWS Log Lambda ARN
+    url: '#add-aws-log-lambda-arn'
+    identifier: add-aws-log-lambda-arn
+    parent: aws-logs-integration
     generated: true
-  - name: Activer une intégration de logs AWS
-    parent: Intégration Logs AWS
-    url: "#activer-une-integration-de-logs-aws"
+    params:
+      versions:
+        - v1
+      operationids:
+        - CreateAWSLambdaARN
+      unstable: []
+      order: 2
+  - name: List all AWS Logs integrations
+    url: '#list-all-aws-logs-integrations'
+    identifier: list-all-aws-logs-integrations
+    parent: aws-logs-integration
     generated: true
-  - name: Vérifier les autorisations pour les services qui génèrent des logs
-    parent: Intégration Logs AWS
-    url: "#verifier-les-autorisations-pour-les-services-qui-generent-des-logs"
+    params:
+      versions:
+        - v1
+      operationids:
+        - ListAWSLogsIntegrations
+      unstable: []
+      order: 1
+  - name: Delete an AWS Logs integration
+    url: '#delete-an-aws-logs-integration'
+    identifier: delete-an-aws-logs-integration
+    parent: aws-logs-integration
     generated: true
-  - name: Authentification
-    url: /api/v1/authentication/
-    identifier: Authentification
+    params:
+      versions:
+        - v1
+      operationids:
+        - DeleteAWSLambdaARN
+      unstable: []
+      order: 3
+  - name: Authentication
+    url: /api/latest/authentication/
+    identifier: authentication
     generated: true
-  - name: Valider la clé d'API
-    parent: Authentification
-    url: "#valider-la-cle-d-api"
+  - name: Validate API key
+    url: '#validate-api-key'
+    identifier: validate-api-key
+    parent: authentication
     generated: true
-  - name: Intégration Azure
-    url: /api/v1/azure-integration/
-    identifier: Intégration Azure
+    params:
+      versions:
+        - v1
+      operationids:
+        - Validate
+      unstable: []
+      order: 1
+  - name: Azure Integration
+    url: /api/latest/azure-integration/
+    identifier: azure-integration
     generated: true
-  - name: Supprimer une intégration Azure
-    parent: Intégration Azure
-    url: "#supprimer-une-integration-azure"
+  - name: Update Azure integration host filters
+    url: '#update-azure-integration-host-filters'
+    identifier: update-azure-integration-host-filters
+    parent: azure-integration
     generated: true
-  - name: Énumérer toutes les intégrations Azure
-    parent: Intégration Azure
-    url: "#enumerer-toutes-les-integrations-azure"
+    params:
+      versions:
+        - v1
+      operationids:
+        - UpdateAzureHostFilters
+      unstable: []
+      order: 5
+  - name: Update an Azure integration
+    url: '#update-an-azure-integration'
+    identifier: update-an-azure-integration
+    parent: azure-integration
     generated: true
-  - name: Créer une intégration Azure
-    parent: Intégration Azure
-    url: "#creer-une-integration-azure"
+    params:
+      versions:
+        - v1
+      operationids:
+        - UpdateAzureIntegration
+      unstable: []
+      order: 4
+  - name: Create an Azure integration
+    url: '#create-an-azure-integration'
+    identifier: create-an-azure-integration
+    parent: azure-integration
     generated: true
-  - name: Mettre à jour une intégration Azure
-    parent: Intégration Azure
-    url: "#mettre-a-jour-une-integration-azure"
+    params:
+      versions:
+        - v1
+      operationids:
+        - CreateAzureIntegration
+      unstable: []
+      order: 2
+  - name: List all Azure integrations
+    url: '#list-all-azure-integrations'
+    identifier: list-all-azure-integrations
+    parent: azure-integration
     generated: true
-  - name: Mettre à jour les filtres de host d'une intégration Azure
-    parent: Intégration Azure
-    url: "#mettre-a-jour-les-filtres-de-host-d-une-integration-azure"
+    params:
+      versions:
+        - v1
+      operationids:
+        - ListAzureIntegration
+      unstable: []
+      order: 1
+  - name: Delete an Azure integration
+    url: '#delete-an-azure-integration'
+    identifier: delete-an-azure-integration
+    parent: azure-integration
     generated: true
-  - name: Listes de dashboards
-    url: /api/v1/dashboard-lists/
-    identifier: Listes de dashboards
+    params:
+      versions:
+        - v1
+      operationids:
+        - DeleteAzureIntegration
+      unstable: []
+      order: 3
+  - name: Dashboard Lists
+    url: /api/latest/dashboard-lists/
+    identifier: dashboard-lists
     generated: true
-  - name: Récupérer toutes les listes de dashboards
-    parent: Listes de dashboards
-    url: "#recuperer-toutes-les-listes-de-dashboards"
+  - name: Update items of a dashboard list
+    url: '#update-items-of-a-dashboard-list'
+    identifier: update-items-of-a-dashboard-list
+    parent: dashboard-lists
     generated: true
-  - name: Créer une liste de dashboards
-    parent: Listes de dashboards
-    url: "#creer-une-liste-de-dashboards"
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateDashboardListItems
+      unstable: []
+      order: 3
+  - name: Add Items to a Dashboard List
+    url: '#add-items-to-a-dashboard-list'
+    identifier: add-items-to-a-dashboard-list
+    parent: dashboard-lists
     generated: true
-  - name: Supprimer une liste de dashboards
-    parent: Listes de dashboards
-    url: "#supprimer-une-liste-de-dashboards"
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateDashboardListItems
+      unstable: []
+      order: 2
+  - name: Get items of a Dashboard List
+    url: '#get-items-of-a-dashboard-list'
+    identifier: get-items-of-a-dashboard-list
+    parent: dashboard-lists
     generated: true
-  - name: Récupérer une liste de dashboards
-    parent: Listes de dashboards
-    url: "#recuperer-une-liste-de-dashboards"
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetDashboardListItems
+      unstable: []
+      order: 1
+  - name: Delete items from a dashboard list
+    url: '#delete-items-from-a-dashboard-list'
+    identifier: delete-items-from-a-dashboard-list
+    parent: dashboard-lists
     generated: true
-  - name: Mettre à jour une liste de dashboards
-    parent: Listes de dashboards
-    url: "#mettre-a-jour-une-liste-de-dashboards"
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteDashboardListItems
+      unstable: []
+      order: 4
+  - name: Update a dashboard list
+    url: '#update-a-dashboard-list'
+    identifier: update-a-dashboard-list
+    parent: dashboard-lists
     generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - UpdateDashboardList
+      unstable: []
+      order: 4
+  - name: Get a dashboard list
+    url: '#get-a-dashboard-list'
+    identifier: get-a-dashboard-list
+    parent: dashboard-lists
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetDashboardList
+      unstable: []
+      order: 3
+  - name: Delete a dashboard list
+    url: '#delete-a-dashboard-list'
+    identifier: delete-a-dashboard-list
+    parent: dashboard-lists
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - DeleteDashboardList
+      unstable: []
+      order: 5
+  - name: Create a dashboard list
+    url: '#create-a-dashboard-list'
+    identifier: create-a-dashboard-list
+    parent: dashboard-lists
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - CreateDashboardList
+      unstable: []
+      order: 2
+  - name: Get all dashboard lists
+    url: '#get-all-dashboard-lists'
+    identifier: get-all-dashboard-lists
+    parent: dashboard-lists
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - ListDashboardLists
+      unstable: []
+      order: 1
   - name: Dashboards
-    url: /api/v1/dashboards/
-    identifier: Dashboards
+    url: /api/latest/dashboards/
+    identifier: dashboards
     generated: true
-  - name: Récupérer tous les dashboards
-    parent: Dashboards
-    url: "#recuperer-tous-les-dashboards"
+  - name: Update a dashboard
+    url: '#update-a-dashboard'
+    identifier: update-a-dashboard
+    parent: dashboards
     generated: true
-  - name: Créer un dashboard
-    parent: Dashboards
-    url: "#creer-un-dashboard"
+    params:
+      versions:
+        - v1
+      operationids:
+        - UpdateDashboard
+      unstable: []
+      order: 6
+  - name: Get a dashboard
+    url: '#get-a-dashboard'
+    identifier: get-a-dashboard
+    parent: dashboards
     generated: true
-  - name: Créer un dashboard partagé
-    parent: Dashboards
-    url: "#creer-un-dashboard-partage"
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetDashboard
+      unstable: []
+      order: 7
+  - name: Delete a dashboard
+    url: '#delete-a-dashboard'
+    identifier: delete-a-dashboard
+    parent: dashboards
     generated: true
-  - name: Révoquer une URL de dashboard partagé
-    parent: Dashboards
-    url: "#revoquer-une-url-de-dashboard-partage"
+    params:
+      versions:
+        - v1
+      operationids:
+        - DeleteDashboard
+      unstable: []
+      order: 3
+  - name: Send shared dashboard invitation email
+    url: '#send-shared-dashboard-invitation-email'
+    identifier: send-shared-dashboard-invitation-email
+    parent: dashboards
     generated: true
-  - name: Récupérer un dashboard partagé
-    parent: Dashboards
-    url: "#recuperer-un-dashboard-partage"
+    params:
+      versions:
+        - v1
+      operationids:
+        - SendPublicDashboardInvitation
+      unstable: []
+      order: 6
+  - name: Get all invitations for a shared dashboard
+    url: '#get-all-invitations-for-a-shared-dashboard'
+    identifier: get-all-invitations-for-a-shared-dashboard
+    parent: dashboards
     generated: true
-  - name: Mettre à jour un dashboard partagé
-    parent: Dashboards
-    url: "#mettre-a-jour-un-dashboard-partage"
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetPublicDashboardInvitations
+      unstable: []
+      order: 5
+  - name: Revoke shared dashboard invitations
+    url: '#revoke-shared-dashboard-invitations'
+    identifier: revoke-shared-dashboard-invitations
+    parent: dashboards
     generated: true
-  - name: Révoquer des invitations de dashboard partagé
-    parent: Dashboards
-    url: "#revoquer-des-invitations-de-dashboard-partage"
+    params:
+      versions:
+        - v1
+      operationids:
+        - DeletePublicDashboardInvitation
+      unstable: []
+      order: 7
+  - name: Update a shared dashboard
+    url: '#update-a-shared-dashboard'
+    identifier: update-a-shared-dashboard
+    parent: dashboards
     generated: true
-  - name: Récupérer toutes les invitations pour un dashboard partagé
-    parent: Dashboards
-    url: "#recuperer-toutes-les-invitations-pour-un-dashboard-partage"
+    params:
+      versions:
+        - v1
+      operationids:
+        - UpdatePublicDashboard
+      unstable: []
+      order: 3
+  - name: Get a shared dashboard
+    url: '#get-a-shared-dashboard'
+    identifier: get-a-shared-dashboard
+    parent: dashboards
     generated: true
-  - name: Envoyer un e-mail d'invitation pour un dashboard partagé
-    parent: Dashboards
-    url: "#envoyer-un-e-mail-d-invitation-pour-un-dashboard-partage"
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetPublicDashboard
+      unstable: []
+      order: 2
+  - name: Revoke a shared dashboard URL
+    url: '#revoke-a-shared-dashboard-url'
+    identifier: revoke-a-shared-dashboard-url
+    parent: dashboards
     generated: true
-  - name: Supprimer un dashboard
-    parent: Dashboards
-    url: "#supprimer-un-dashboard"
+    params:
+      versions:
+        - v1
+      operationids:
+        - DeletePublicDashboard
+      unstable: []
+      order: 4
+  - name: Create a shared dashboard
+    url: '#create-a-shared-dashboard'
+    identifier: create-a-shared-dashboard
+    parent: dashboards
     generated: true
-  - name: Récupérer un dashboard
-    parent: Dashboards
-    url: "#recuperer-un-dashboard"
+    params:
+      versions:
+        - v1
+      operationids:
+        - CreatePublicDashboard
+      unstable: []
+      order: 1
+  - name: Create a new dashboard
+    url: '#create-a-new-dashboard'
+    identifier: create-a-new-dashboard
+    parent: dashboards
     generated: true
-  - name: Mettre à jour un dashboard
-    parent: Dashboards
-    url: "#mettre-a-jour-un-dashboard"
+    params:
+      versions:
+        - v1
+      operationids:
+        - CreateDashboard
+      unstable: []
+      order: 1
+  - name: Restore deleted dashboards
+    url: '#restore-deleted-dashboards'
+    identifier: restore-deleted-dashboards
+    parent: dashboards
     generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - RestoreDashboards
+      unstable: []
+      order: 5
+  - name: Get all dashboards
+    url: '#get-all-dashboards'
+    identifier: get-all-dashboards
+    parent: dashboards
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - ListDashboards
+      unstable: []
+      order: 2
+  - name: Delete dashboards
+    url: '#delete-dashboards'
+    identifier: delete-dashboards
+    parent: dashboards
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - DeleteDashboards
+      unstable: []
+      order: 4
   - name: Downtimes
-    url: /api/v1/downtimes/
-    identifier: Downtimes
+    url: /api/latest/downtimes/
+    identifier: downtimes
     generated: true
-  - name: Récupérer tous les downtimes
-    parent: Downtimes
-    url: "#recuperer-tous-les-downtimes"
+  - name: Get all downtimes for a monitor
+    url: '#get-all-downtimes-for-a-monitor'
+    identifier: get-all-downtimes-for-a-monitor
+    parent: downtimes
     generated: true
-  - name: Planifier un downtime
-    parent: Downtimes
-    url: "#planifier-un-downtime"
+    params:
+      versions:
+        - v1
+      operationids:
+        - ListMonitorDowntimes
+      unstable: []
+      order: 7
+  - name: Update a downtime
+    url: '#update-a-downtime'
+    identifier: update-a-downtime
+    parent: downtimes
     generated: true
-  - name: Annuler les downtimes selon le contexte
-    parent: Downtimes
-    url: "#annuler-les-downtimes-selon-le-contexte"
+    params:
+      versions:
+        - v1
+      operationids:
+        - UpdateDowntime
+      unstable: []
+      order: 6
+  - name: Get a downtime
+    url: '#get-a-downtime'
+    identifier: get-a-downtime
+    parent: downtimes
     generated: true
-  - name: Annuler un downtime
-    parent: Downtimes
-    url: "#annuler-un-downtime"
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetDowntime
+      unstable: []
+      order: 5
+  - name: Cancel a downtime
+    url: '#cancel-a-downtime'
+    identifier: cancel-a-downtime
+    parent: downtimes
     generated: true
-  - name: Récupérer un downtime
-    parent: Downtimes
-    url: "#recuperer-un-downtime"
+    params:
+      versions:
+        - v1
+      operationids:
+        - CancelDowntime
+      unstable: []
+      order: 4
+  - name: Cancel downtimes by scope
+    url: '#cancel-downtimes-by-scope'
+    identifier: cancel-downtimes-by-scope
+    parent: downtimes
     generated: true
-  - name: Mettre à jour un downtime
-    parent: Downtimes
-    url: "#mettre-a-jour-un-downtime"
+    params:
+      versions:
+        - v1
+      operationids:
+        - CancelDowntimesByScope
+      unstable: []
+      order: 3
+  - name: Schedule a downtime
+    url: '#schedule-a-downtime'
+    identifier: schedule-a-downtime
+    parent: downtimes
     generated: true
-  - name: Graphiques intégrables
-    url: /api/v1/embeddable-graphs/
-    identifier: Graphiques intégrables
+    params:
+      versions:
+        - v1
+      operationids:
+        - CreateDowntime
+      unstable: []
+      order: 2
+  - name: Get all downtimes
+    url: '#get-all-downtimes'
+    identifier: get-all-downtimes
+    parent: downtimes
     generated: true
-  - name: Récupérer tous les embeds
-    parent: Graphiques intégrables
-    url: "#recuperer-tous-les-embeds"
+    params:
+      versions:
+        - v1
+      operationids:
+        - ListDowntimes
+      unstable: []
+      order: 1
+  - name: Embeddable Graphs
+    url: /api/latest/embeddable-graphs/
+    identifier: embeddable-graphs
     generated: true
-  - name: Créer un embed
-    parent: Graphiques intégrables
-    url: "#creer-un-embed"
+  - name: Revoke embed
+    url: '#revoke-embed'
+    identifier: revoke-embed
+    parent: embeddable-graphs
     generated: true
-  - name: Récupérer un embed spécifique
-    parent: Graphiques intégrables
-    url: "#recuperer-un-embed-specifique"
+    params:
+      versions:
+        - v1
+      operationids:
+        - RevokeEmbeddableGraph
+      unstable: []
+      order: 0
+  - name: Enable embed
+    url: '#enable-embed'
+    identifier: enable-embed
+    parent: embeddable-graphs
     generated: true
-  - name: Activer un embed
-    parent: Graphiques intégrables
-    url: "#activer-un-embed"
+    params:
+      versions:
+        - v1
+      operationids:
+        - EnableEmbeddableGraph
+      unstable: []
+      order: 0
+  - name: Get specific embed
+    url: '#get-specific-embed'
+    identifier: get-specific-embed
+    parent: embeddable-graphs
     generated: true
-  - name: Révoquer un embed
-    parent: Graphiques intégrables
-    url: "#revoquer-un-embed"
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetEmbeddableGraph
+      unstable: []
+      order: 0
+  - name: Create embed
+    url: '#create-embed'
+    identifier: create-embed
+    parent: embeddable-graphs
     generated: true
-  - name: Événements
-    url: /api/v1/events/
-    identifier: Événements
+    params:
+      versions:
+        - v1
+      operationids:
+        - CreateEmbeddableGraph
+      unstable: []
+      order: 0
+  - name: Get all embeds
+    url: '#get-all-embeds'
+    identifier: get-all-embeds
+    parent: embeddable-graphs
     generated: true
-  - name: Interroger le flux d'événements
-    parent: Événements
-    url: "#interroger-le-flux-d-evenements"
+    params:
+      versions:
+        - v1
+      operationids:
+        - ListEmbeddableGraphs
+      unstable: []
+      order: 0
+  - name: Events
+    url: /api/latest/events/
+    identifier: events
     generated: true
-  - name: Envoyer un événement
-    parent: Événements
-    url: "#envoyer-un-evenement"
+  - name: Get an event
+    url: '#get-an-event'
+    identifier: get-an-event
+    parent: events
     generated: true
-  - name: Récupérer un événement
-    parent: Événements
-    url: "#recuperer-un-evenement"
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetEvent
+      unstable: []
+      order: 2
+  - name: Post an event
+    url: '#post-an-event'
+    identifier: post-an-event
+    parent: events
     generated: true
-  - name: Intégration GCP
-    url: /api/v1/gcp-integration/
-    identifier: Intégration GCP
+    params:
+      versions:
+        - v1
+      operationids:
+        - CreateEvent
+      unstable: []
+      order: 1
+  - name: Query the event stream
+    url: '#query-the-event-stream'
+    identifier: query-the-event-stream
+    parent: events
     generated: true
-  - name: Supprimer une intégration GCP
-    parent: Intégration GCP
-    url: "#supprimer-une-integration-gcp"
+    params:
+      versions:
+        - v1
+      operationids:
+        - ListEvents
+      unstable: []
+      order: 1
+  - name: GCP Integration
+    url: /api/latest/gcp-integration/
+    identifier: gcp-integration
     generated: true
-  - name: Énumérer toutes les intégrations GCP
-    parent: Intégration GCP
-    url: "#enumerer-toutes-les-integrations-gcp"
+  - name: Update a GCP integration
+    url: '#update-a-gcp-integration'
+    identifier: update-a-gcp-integration
+    parent: gcp-integration
     generated: true
-  - name: Créer une intégration GCP
-    parent: Intégration GCP
-    url: "#creer-une-integration-gcp"
+    params:
+      versions:
+        - v1
+      operationids:
+        - UpdateGCPIntegration
+      unstable: []
+      order: 4
+  - name: Create a GCP integration
+    url: '#create-a-gcp-integration'
+    identifier: create-a-gcp-integration
+    parent: gcp-integration
     generated: true
-  - name: Mettre à jour une intégration GCP
-    parent: Intégration GCP
-    url: "#mettre-a-jour-une-integration-gcp"
+    params:
+      versions:
+        - v1
+      operationids:
+        - CreateGCPIntegration
+      unstable: []
+      order: 2
+  - name: List all GCP integrations
+    url: '#list-all-gcp-integrations'
+    identifier: list-all-gcp-integrations
+    parent: gcp-integration
     generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - ListGCPIntegration
+      unstable: []
+      order: 1
+  - name: Delete a GCP integration
+    url: '#delete-a-gcp-integration'
+    identifier: delete-a-gcp-integration
+    parent: gcp-integration
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - DeleteGCPIntegration
+      unstable: []
+      order: 3
   - name: Hosts
-    url: /api/v1/hosts/
-    identifier: Hosts
+    url: /api/latest/hosts/
+    identifier: hosts
     generated: true
-  - name: Désactiver un host
-    parent: Hosts
-    url: "#desactiver-un-host"
+  - name: Get the total number of active hosts
+    url: '#get-the-total-number-of-active-hosts'
+    identifier: get-the-total-number-of-active-hosts
+    parent: hosts
     generated: true
-  - name: Réactiver un host
-    parent: Hosts
-    url: "#reactiver-un-host"
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetHostTotals
+      unstable: []
+      order: 2
+  - name: Get all hosts for your organization
+    url: '#get-all-hosts-for-your-organization'
+    identifier: get-all-hosts-for-your-organization
+    parent: hosts
     generated: true
-  - name: Récupérer tous les hosts de votre organisation
-    parent: Hosts
-    url: "#recuperer-tous-les-hosts-de-votre-organisation"
+    params:
+      versions:
+        - v1
+      operationids:
+        - ListHosts
+      unstable: []
+      order: 1
+  - name: Unmute a host
+    url: '#unmute-a-host'
+    identifier: unmute-a-host
+    parent: hosts
     generated: true
-  - name: Récupérer le nombre total de hosts actifs
-    parent: Hosts
-    url: "#recuperer-le-nombre-total-de-hosts-actifs"
+    params:
+      versions:
+        - v1
+      operationids:
+        - UnmuteHost
+      unstable: []
+      order: 4
+  - name: Mute a host
+    url: '#mute-a-host'
+    identifier: mute-a-host
+    parent: hosts
     generated: true
-  - name: Plages d'IP
-    url: /api/v1/ip-ranges/
-    identifier: Plages d'IP
+    params:
+      versions:
+        - v1
+      operationids:
+        - MuteHost
+      unstable: []
+      order: 3
+  - name: IP Ranges
+    url: /api/latest/ip-ranges/
+    identifier: ip-ranges
     generated: true
-  - name: Énumérer les plages d'IP
-    parent: Plages d'IP
-    url: "#enumerer-les-plages-d-ip"
+  - name: List IP Ranges
+    url: '#list-ip-ranges'
+    identifier: list-ip-ranges
+    parent: ip-ranges
     generated: true
-  - name: Services liés à un incident
-    url: /api/v1/incident-services/
-    identifier: Services liés à un incident
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetIPRanges
+      unstable: []
+      order: 1
+  - name: Key Management
+    url: /api/latest/key-management/
+    identifier: key-management
     generated: true
-  - name: Équipes liées à un incident
-    url: /api/v1/incident-teams/
-    identifier: Équipes liées à un incident
+  - name: Edit an application key owned by current user
+    url: '#edit-an-application-key-owned-by-current-user'
+    identifier: edit-an-application-key-owned-by-current-user
+    parent: key-management
     generated: true
-  - name: Incidents
-    url: /api/v1/incidents/
-    identifier: Incidents
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateCurrentUserApplicationKey
+      unstable: []
+      order: 0
+  - name: Get one application key owned by current user
+    url: '#get-one-application-key-owned-by-current-user'
+    identifier: get-one-application-key-owned-by-current-user
+    parent: key-management
     generated: true
-  - name: Gestion des clés
-    url: /api/v1/key-management/
-    identifier: Gestion des clés
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetCurrentUserApplicationKey
+      unstable: []
+      order: 0
+  - name: Delete an application key owned by current user
+    url: '#delete-an-application-key-owned-by-current-user'
+    identifier: delete-an-application-key-owned-by-current-user
+    parent: key-management
     generated: true
-  - name: Récupérer toutes les clés d'API
-    parent: Gestion des clés
-    url: "#recuperer-toutes-les-cles-d-api"
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteCurrentUserApplicationKey
+      unstable: []
+      order: 0
+  - name: Create an application key for current user
+    url: '#create-an-application-key-for-current-user'
+    identifier: create-an-application-key-for-current-user
+    parent: key-management
     generated: true
-  - name: Créer une clé d'API
-    parent: Gestion des clés
-    url: "#creer-une-cle-d-api"
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateCurrentUserApplicationKey
+      unstable: []
+      order: 0
+  - name: Get all application keys owned by current user
+    url: '#get-all-application-keys-owned-by-current-user'
+    identifier: get-all-application-keys-owned-by-current-user
+    parent: key-management
     generated: true
-  - name: Supprimer une clé d'API
-    parent: Gestion des clés
-    url: "#supprimer-une-cle-d-api"
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListCurrentUserApplicationKeys
+      unstable: []
+      order: 0
+  - name: Edit an application key
+    url: '#edit-an-application-key'
+    identifier: edit-an-application-key
+    parent: key-management
     generated: true
-  - name: Récupérer une clé d'API
-    parent: Gestion des clés
-    url: "#recuperer-une-cle-d-api"
+    params:
+      versions:
+        - v1
+        - v2
+      operationids:
+        - UpdateApplicationKey
+      unstable: []
+      order: 9
+  - name: Get an application key
+    url: '#get-an-application-key'
+    identifier: get-an-application-key
+    parent: key-management
     generated: true
-  - name: Modifier une clé d'API
-    parent: Gestion des clés
-    url: "#modifier-une-cle-d-api"
+    params:
+      versions:
+        - v1
+        - v2
+      operationids:
+        - GetApplicationKey
+      unstable: []
+      order: 8
+  - name: Delete an application key
+    url: '#delete-an-application-key'
+    identifier: delete-an-application-key
+    parent: key-management
     generated: true
-  - name: Récupérer toutes les clés d'application
-    parent: Gestion des clés
-    url: "#recuperer-toutes-les-cles-d-application"
+    params:
+      versions:
+        - v1
+        - v2
+      operationids:
+        - DeleteApplicationKey
+      unstable: []
+      order: 10
+  - name: Create an application key
+    url: '#create-an-application-key'
+    identifier: create-an-application-key
+    parent: key-management
     generated: true
-  - name: Créer une clé d'application
-    parent: Gestion des clés
-    url: "#creer-une-cle-d-application"
+    params:
+      versions:
+        - v1
+      operationids:
+        - CreateApplicationKey
+      unstable: []
+      order: 7
+  - name: Get all application keys
+    url: '#get-all-application-keys'
+    identifier: get-all-application-keys
+    parent: key-management
     generated: true
-  - name: Supprimer une clé d'application
-    parent: Gestion des clés
-    url: "#supprimer-une-cle-d-application"
+    params:
+      versions:
+        - v1
+        - v2
+      operationids:
+        - ListApplicationKeys
+      unstable: []
+      order: 6
+  - name: Edit an API key
+    url: '#edit-an-api-key'
+    identifier: edit-an-api-key
+    parent: key-management
     generated: true
-  - name: Récupérer une clé d'application
-    parent: Gestion des clés
-    url: "#recuperer-une-cle-d-application"
+    params:
+      versions:
+        - v1
+        - v2
+      operationids:
+        - UpdateAPIKey
+      unstable: []
+      order: 4
+  - name: Get API key
+    url: '#get-api-key'
+    identifier: get-api-key
+    parent: key-management
     generated: true
-  - name: Modifier une clé d'application
-    parent: Gestion des clés
-    url: "#modifier-une-cle-d-application"
+    params:
+      versions:
+        - v1
+        - v2
+      operationids:
+        - GetAPIKey
+      unstable: []
+      order: 3
+  - name: Delete an API key
+    url: '#delete-an-api-key'
+    identifier: delete-an-api-key
+    parent: key-management
     generated: true
+    params:
+      versions:
+        - v1
+        - v2
+      operationids:
+        - DeleteAPIKey
+      unstable: []
+      order: 5
+  - name: Create an API key
+    url: '#create-an-api-key'
+    identifier: create-an-api-key
+    parent: key-management
+    generated: true
+    params:
+      versions:
+        - v1
+        - v2
+      operationids:
+        - CreateAPIKey
+      unstable: []
+      order: 2
+  - name: Get all API keys
+    url: '#get-all-api-keys'
+    identifier: get-all-api-keys
+    parent: key-management
+    generated: true
+    params:
+      versions:
+        - v1
+        - v2
+      operationids:
+        - ListAPIKeys
+      unstable: []
+      order: 1
   - name: Logs
-    url: /api/v1/logs/
-    identifier: Logs
+    url: /api/latest/logs/
+    identifier: logs
     generated: true
-  - name: Récupérer une liste de logs
-    parent: Logs
-    url: "#recuperer-une-liste-de-logs"
+  - name: Get a list of logs
+    url: '#get-a-list-of-logs'
+    identifier: get-a-list-of-logs
+    parent: logs
     generated: true
-  - name: Envoyer des logs
-    parent: Logs
-    url: "#envoyer-des-logs"
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListLogsGet
+      unstable: []
+      order: 3
+  - name: Aggregate events
+    url: '#aggregate-events'
+    identifier: aggregate-events
+    parent: logs
     generated: true
-  - name: Archives de logs
-    url: /api/v1/logs-archives/
-    identifier: Archives de logs
+    params:
+      versions:
+        - v2
+      operationids:
+        - AggregateLogs
+      unstable: []
+      order: 1
+  - name: Send logs
+    url: '#send-logs'
+    identifier: send-logs
+    parent: logs
     generated: true
-  - name: Index de logs
-    url: /api/v1/logs-indexes/
-    identifier: Index de logs
+    params:
+      versions:
+        - v1
+        - v2
+      operationids:
+        - SubmitLog
+      unstable: []
+      order: 1
+  - name: Search logs
+    url: '#search-logs'
+    identifier: search-logs
+    parent: logs
     generated: true
-  - name: Récupérer la séquence des index
-    parent: Index de logs
-    url: "#recuperer-la-sequence-des-index"
+    params:
+      versions:
+        - v1
+        - v2
+      operationids:
+        - ListLogs
+      unstable: []
+      order: 1
+  - name: Logs Indexes
+    url: /api/latest/logs-indexes/
+    identifier: logs-indexes
     generated: true
-  - name: Mettre à jour la séquence des index
-    parent: Index de logs
-    url: "#mettre-a-jour-la-sequence-des-index"
+  - name: Update an index
+    url: '#update-an-index'
+    identifier: update-an-index
+    parent: logs-indexes
     generated: true
-  - name: Récupérer tous les index
-    parent: Index de logs
-    url: "#recuperer-tous-les-index"
+    params:
+      versions:
+        - v1
+      operationids:
+        - UpdateLogsIndex
+      unstable: []
+      order: 4
+  - name: Get an index
+    url: '#get-an-index'
+    identifier: get-an-index
+    parent: logs-indexes
     generated: true
-  - name: Récupérer un index
-    parent: Index de logs
-    url: "#recuperer-un-index"
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetLogsIndex
+      unstable: []
+      order: 3
+  - name: Create an index
+    url: '#create-an-index'
+    identifier: create-an-index
+    parent: logs-indexes
     generated: true
-  - name: Mettre à jour un index
-    parent: Index de logs
-    url: "#mettre-a-jour-un-index"
+    params:
+      versions:
+        - v1
+      operationids:
+        - CreateLogsIndex
+      unstable: []
+      order: 2
+  - name: Get all indexes
+    url: '#get-all-indexes'
+    identifier: get-all-indexes
+    parent: logs-indexes
     generated: true
-  - name: Métriques de logs
-    url: /api/v1/logs-metrics/
-    identifier: Métriques de logs
+    params:
+      versions:
+        - v1
+      operationids:
+        - ListLogIndexes
+      unstable: []
+      order: 1
+  - name: Update indexes order
+    url: '#update-indexes-order'
+    identifier: update-indexes-order
+    parent: logs-indexes
     generated: true
-  - name: Pipelines de logs
-    url: /api/v1/logs-pipelines/
-    identifier: Pipelines de logs
+    params:
+      versions:
+        - v1
+      operationids:
+        - UpdateLogsIndexOrder
+      unstable: []
+      order: 6
+  - name: Get indexes order
+    url: '#get-indexes-order'
+    identifier: get-indexes-order
+    parent: logs-indexes
     generated: true
-  - name: Récupérer la séquence des pipelines
-    parent: Pipelines de logs
-    url: "#recuperer-la-sequence-des-pipelines"
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetLogsIndexOrder
+      unstable: []
+      order: 5
+  - name: Logs Pipelines
+    url: /api/latest/logs-pipelines/
+    identifier: logs-pipelines
     generated: true
-  - name: Mettre à jour la séquence des pipelines
-    parent: Pipelines de logs
-    url: "#mettre-a-jour-la-sequence-des-pipelines"
+  - name: Update a pipeline
+    url: '#update-a-pipeline'
+    identifier: update-a-pipeline
+    parent: logs-pipelines
     generated: true
-  - name: Récupérer tous les pipelines
-    parent: Pipelines de logs
-    url: "#recuperer-tous-les-pipelines"
+    params:
+      versions:
+        - v1
+      operationids:
+        - UpdateLogsPipeline
+      unstable: []
+      order: 7
+  - name: Get a pipeline
+    url: '#get-a-pipeline'
+    identifier: get-a-pipeline
+    parent: logs-pipelines
     generated: true
-  - name: Créer un pipeline
-    parent: Pipelines de logs
-    url: "#creer-un-pipeline"
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetLogsPipeline
+      unstable: []
+      order: 5
+  - name: Delete a pipeline
+    url: '#delete-a-pipeline'
+    identifier: delete-a-pipeline
+    parent: logs-pipelines
     generated: true
-  - name: Supprimer un pipeline
-    parent: Pipelines de logs
-    url: "#supprimer-un-pipeline"
+    params:
+      versions:
+        - v1
+      operationids:
+        - DeleteLogsPipeline
+      unstable: []
+      order: 6
+  - name: Create a pipeline
+    url: '#create-a-pipeline'
+    identifier: create-a-pipeline
+    parent: logs-pipelines
     generated: true
-  - name: Récupérer un pipeline
-    parent: Pipelines de logs
-    url: "#recuperer-un-pipeline"
+    params:
+      versions:
+        - v1
+      operationids:
+        - CreateLogsPipeline
+      unstable: []
+      order: 4
+  - name: Get all pipelines
+    url: '#get-all-pipelines'
+    identifier: get-all-pipelines
+    parent: logs-pipelines
     generated: true
-  - name: Mettre à jour un pipeline
-    parent: Pipelines de logs
-    url: "#mettre-a-jour-un-pipeline"
+    params:
+      versions:
+        - v1
+      operationids:
+        - ListLogsPipelines
+      unstable: []
+      order: 3
+  - name: Update pipeline order
+    url: '#update-pipeline-order'
+    identifier: update-pipeline-order
+    parent: logs-pipelines
     generated: true
-  - name: Requêtes de restriction de logs
-    url: /api/v1/logs-restriction-queries/
-    identifier: Requêtes de restriction de logs
+    params:
+      versions:
+        - v1
+      operationids:
+        - UpdateLogsPipelineOrder
+      unstable: []
+      order: 2
+  - name: Get pipeline order
+    url: '#get-pipeline-order'
+    identifier: get-pipeline-order
+    parent: logs-pipelines
     generated: true
-  - name: Métriques
-    url: /api/v1/metrics/
-    identifier: Métriques
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetLogsPipelineOrder
+      unstable: []
+      order: 1
+  - name: Metrics
+    url: /api/latest/metrics/
+    identifier: metrics
     generated: true
-  - name: Récupérer la liste des métriques actives
-    parent: Métriques
-    url: "#recuperer-la-liste-des-metriques-actives"
+  - name: List distinct metric volumes by metric name
+    url: '#list-distinct-metric-volumes-by-metric-name'
+    identifier: list-distinct-metric-volumes-by-metric-name
+    parent: metrics
     generated: true
-  - name: Récupérer les métadonnées d'une métrique
-    parent: Métriques
-    url: "#recuperer-les-metadonnees-d-une-metrique"
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListVolumesByMetricName
+      unstable: []
+      order: 7
+  - name: Create a tag configuration
+    url: '#create-a-tag-configuration'
+    identifier: create-a-tag-configuration
+    parent: metrics
     generated: true
-  - name: Modifier les métadonnées d'une métrique
-    parent: Métriques
-    url: "#modifier-les-metadonnees-d-une-metrique"
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateTagConfiguration
+      unstable:
+        - v2
+      order: 1
+  - name: Update a tag configuration
+    url: '#update-a-tag-configuration'
+    identifier: update-a-tag-configuration
+    parent: metrics
     generated: true
-  - name: Interroger les points de séries temporelles
-    parent: Métriques
-    url: "#interroger-les-points-de-series-temporelles"
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateTagConfiguration
+      unstable:
+        - v2
+      order: 3
+  - name: List tag configuration by name
+    url: '#list-tag-configuration-by-name'
+    identifier: list-tag-configuration-by-name
+    parent: metrics
     generated: true
-  - name: Rechercher des métriques
-    parent: Métriques
-    url: "#rechercher-des-metriques"
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListTagConfigurationByName
+      unstable:
+        - v2
+      order: 2
+  - name: Delete a tag configuration
+    url: '#delete-a-tag-configuration'
+    identifier: delete-a-tag-configuration
+    parent: metrics
     generated: true
-  - name: Envoyer des métriques
-    parent: Métriques
-    url: "#envoyer-des-metriques"
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteTagConfiguration
+      unstable:
+        - v2
+      order: 4
+  - name: List tags by metric name
+    url: '#list-tags-by-metric-name'
+    identifier: list-tags-by-metric-name
+    parent: metrics
     generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListTagsByMetricName
+      unstable: []
+      order: 6
+  - name: Configure tags for multiple metrics
+    url: '#configure-tags-for-multiple-metrics'
+    identifier: configure-tags-for-multiple-metrics
+    parent: metrics
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteBulkTagsMetricsConfiguration
+        - CreateBulkTagsMetricsConfiguration
+      unstable: []
+      order: 9
+  - name: List tag configurations
+    url: '#list-tag-configurations'
+    identifier: list-tag-configurations
+    parent: metrics
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListTagConfigurations
+      unstable:
+        - v2
+      order: 5
+  - name: Submit metrics
+    url: '#submit-metrics'
+    identifier: submit-metrics
+    parent: metrics
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - SubmitMetrics
+      unstable: []
+      order: 1
+  - name: Search metrics
+    url: '#search-metrics'
+    identifier: search-metrics
+    parent: metrics
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - ListMetrics
+      unstable: []
+      order: 4
+  - name: Query timeseries points
+    url: '#query-timeseries-points'
+    identifier: query-timeseries-points
+    parent: metrics
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - QueryMetrics
+      unstable: []
+      order: 5
+  - name: Edit metric metadata
+    url: '#edit-metric-metadata'
+    identifier: edit-metric-metadata
+    parent: metrics
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - UpdateMetricMetadata
+      unstable: []
+      order: 3
+  - name: Get metric metadata
+    url: '#get-metric-metadata'
+    identifier: get-metric-metadata
+    parent: metrics
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetMetricMetadata
+      unstable: []
+      order: 2
+  - name: Get active metrics list
+    url: '#get-active-metrics-list'
+    identifier: get-active-metrics-list
+    parent: metrics
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - ListActiveMetrics
+      unstable: []
+      order: 1
   - name: Monitors
-    url: /api/v1/monitors/
-    identifier: Monitors
+    url: /api/latest/monitors/
+    identifier: monitors
     generated: true
-  - name: Récupérer tous les détails d'un monitor
-    parent: Monitors
-    url: "#recuperer-tous-les-details-d-un-monitor"
+  - name: Unmute all monitors
+    url: '#unmute-all-monitors'
+    identifier: unmute-all-monitors
+    parent: monitors
     generated: true
-  - name: Créer un monitor
-    parent: Monitors
-    url: "#creer-un-monitor"
+    params:
+      versions:
+        - v1
+      operationids:
+        - UnmuteAllMonitors
+      unstable: []
+      order: 0
+  - name: Mute all monitors
+    url: '#mute-all-monitors'
+    identifier: mute-all-monitors
+    parent: monitors
     generated: true
-  - name: Vérifier si un monitor peut être supprimé
-    parent: Monitors
-    url: "#verifier-si-un-monitor-peut-etre-supprime"
+    params:
+      versions:
+        - v1
+      operationids:
+        - MuteAllMonitors
+      unstable: []
+      order: 0
+  - name: Unmute a monitor
+    url: '#unmute-a-monitor'
+    identifier: unmute-a-monitor
+    parent: monitors
     generated: true
-  - name: Rechercher des groupes de monitors
-    parent: Monitors
-    url: "#rechercher-des-groupes-de-monitors"
+    params:
+      versions:
+        - v1
+      operationids:
+        - UnmuteMonitor
+      unstable: []
+      order: 0
+  - name: Mute a monitor
+    url: '#mute-a-monitor'
+    identifier: mute-a-monitor
+    parent: monitors
     generated: true
-  - name: Rechercher des monitors
-    parent: Monitors
-    url: "#rechercher-des-monitors"
+    params:
+      versions:
+        - v1
+      operationids:
+        - MuteMonitor
+      unstable: []
+      order: 0
+  - name: Edit a monitor
+    url: '#edit-a-monitor'
+    identifier: edit-a-monitor
+    parent: monitors
     generated: true
-  - name: Valider un monitor
-    parent: Monitors
-    url: "#valider-un-monitor"
+    params:
+      versions:
+        - v1
+      operationids:
+        - UpdateMonitor
+      unstable: []
+      order: 3
+  - name: Get a monitor's details
+    url: '#get-a-monitors-details'
+    identifier: get-a-monitors-details
+    parent: monitors
     generated: true
-  - name: Supprimer un monitor
-    parent: Monitors
-    url: "#supprimer-un-monitor"
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetMonitor
+      unstable: []
+      order: 4
+  - name: Delete a monitor
+    url: '#delete-a-monitor'
+    identifier: delete-a-monitor
+    parent: monitors
     generated: true
-  - name: Récupérer les détails d'un monitor
-    parent: Monitors
-    url: "#recuperer-les-details-d-un-monitor"
+    params:
+      versions:
+        - v1
+      operationids:
+        - DeleteMonitor
+      unstable: []
+      order: 5
+  - name: Validate a monitor
+    url: '#validate-a-monitor'
+    identifier: validate-a-monitor
+    parent: monitors
     generated: true
-  - name: Modifier un monitor
-    parent: Monitors
-    url: "#modifier-un-monitor"
+    params:
+      versions:
+        - v1
+      operationids:
+        - ValidateMonitor
+      unstable: []
+      order: 7
+  - name: Monitors search
+    url: '#monitors-search'
+    identifier: monitors-search
+    parent: monitors
     generated: true
-  - name: Désactiver un monitor
-    parent: Monitors
-    url: "#desactiver-un-monitor"
+    params:
+      versions:
+        - v1
+      operationids:
+        - SearchMonitors
+      unstable: []
+      order: 1
+  - name: Monitors group search
+    url: '#monitors-group-search'
+    identifier: monitors-group-search
+    parent: monitors
     generated: true
-  - name: Réactiver un monitor
-    parent: Monitors
-    url: "#reactiver-un-monitor"
+    params:
+      versions:
+        - v1
+      operationids:
+        - SearchMonitorGroups
+      unstable: []
+      order: 2
+  - name: Check if a monitor can be deleted
+    url: '#check-if-a-monitor-can-be-deleted'
+    identifier: check-if-a-monitor-can-be-deleted
+    parent: monitors
     generated: true
-  - name: Résoudre un monitor
-    parent: Monitors
-    url: "#resoudre-un-monitor"
+    params:
+      versions:
+        - v1
+      operationids:
+        - CheckCanDeleteMonitor
+      unstable: []
+      order: 6
+  - name: Create a monitor
+    url: '#create-a-monitor'
+    identifier: create-a-monitor
+    parent: monitors
     generated: true
-  - name: Désactiver tous les monitors
-    parent: Monitors
-    url: "#desactiver-tous-les-monitors"
+    params:
+      versions:
+        - v1
+      operationids:
+        - CreateMonitor
+      unstable: []
+      order: 1
+  - name: Get all monitor details
+    url: '#get-all-monitor-details'
+    identifier: get-all-monitor-details
+    parent: monitors
     generated: true
-  - name: Réactiver tous les monitors
-    parent: Monitors
-    url: "#reactiver-tous-les-monitors"
+    params:
+      versions:
+        - v1
+      operationids:
+        - ListMonitors
+      unstable: []
+      order: 2
+  - name: Notebooks
+    url: /api/latest/notebooks/
+    identifier: notebooks
     generated: true
-  - name: Organisations
-    url: /api/v1/organizations/
-    identifier: Organisations
+  - name: Update a notebook
+    url: '#update-a-notebook'
+    identifier: update-a-notebook
+    parent: notebooks
     generated: true
-  - name: Énumérer les organisations que vous gérez
-    parent: Organisations
-    url: "#enumerer-les-organisations-que-vous-gerez"
+    params:
+      versions:
+        - v1
+      operationids:
+        - UpdateNotebook
+      unstable: []
+      order: 0
+  - name: Get a notebook
+    url: '#get-a-notebook'
+    identifier: get-a-notebook
+    parent: notebooks
     generated: true
-  - name: Créer une organisation enfant
-    parent: Organisations
-    url: "#creer-une-organisation-enfant"
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetNotebook
+      unstable: []
+      order: 0
+  - name: Delete a notebook
+    url: '#delete-a-notebook'
+    identifier: delete-a-notebook
+    parent: notebooks
     generated: true
-  - name: Récupérer les informations sur une organisation
-    parent: Organisations
-    url: "#recuperer-les-informations-sur-une-organisation"
+    params:
+      versions:
+        - v1
+      operationids:
+        - DeleteNotebook
+      unstable: []
+      order: 0
+  - name: Create a notebook
+    url: '#create-a-notebook'
+    identifier: create-a-notebook
+    parent: notebooks
     generated: true
-  - name: Mettre à jour votre organisation
-    parent: Organisations
-    url: "#mettre-a-jour-votre-organisation"
+    params:
+      versions:
+        - v1
+      operationids:
+        - CreateNotebook
+      unstable: []
+      order: 0
+  - name: Get all notebooks
+    url: '#get-all-notebooks'
+    identifier: get-all-notebooks
+    parent: notebooks
     generated: true
-  - name: Importer les métadonnées IdP
-    parent: Organisations
-    url: "#importer-les-metadonnees-IdP"
+    params:
+      versions:
+        - v1
+      operationids:
+        - ListNotebooks
+      unstable: []
+      order: 0
+  - name: Organizations
+    url: /api/latest/organizations/
+    identifier: organizations
     generated: true
-  - name: Intégration PagerDuty
-    url: /api/v1/pagerduty-integration/
-    identifier: Intégration PagerDuty
+  - name: Upload IdP metadata
+    url: '#upload-idp-metadata'
+    identifier: upload-idp-metadata
+    parent: organizations
     generated: true
-  - name: Créer un objet de service
-    parent: Intégration PagerDuty
-    url: "#creer-un-objet-de-service"
+    params:
+      versions:
+        - v1
+      operationids:
+        - UploadIdPForOrg
+      unstable: []
+      order: 5
+  - name: Update your organization
+    url: '#update-your-organization'
+    identifier: update-your-organization
+    parent: organizations
     generated: true
-  - name: Supprimer un objet de service unique
-    parent: Intégration PagerDuty
-    url: "#supprimer-un-objet-de-service-unique"
+    params:
+      versions:
+        - v1
+      operationids:
+        - UpdateOrg
+      unstable: []
+      order: 4
+  - name: Get organization information
+    url: '#get-organization-information'
+    identifier: get-organization-information
+    parent: organizations
     generated: true
-  - name: Récupérer un objet de service unique
-    parent: Intégration PagerDuty
-    url: "#recuperer-un-objet-de-service-unique"
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetOrg
+      unstable: []
+      order: 3
+  - name: Create a child organization
+    url: '#create-a-child-organization'
+    identifier: create-a-child-organization
+    parent: organizations
     generated: true
-  - name: Mettre à jour un objet de service unique
-    parent: Intégration PagerDuty
-    url: "#mettre-a-jour-un-objet-de-service-unique"
+    params:
+      versions:
+        - v1
+      operationids:
+        - CreateChildOrg
+      unstable: []
+      order: 1
+  - name: List your managed organizations
+    url: '#list-your-managed-organizations'
+    identifier: list-your-managed-organizations
+    parent: organizations
     generated: true
-  - name: Processus
-    url: /api/v1/processes/
-    identifier: Processus
+    params:
+      versions:
+        - v1
+      operationids:
+        - ListOrgs
+      unstable: []
+      order: 2
+  - name: PagerDuty Integration
+    url: /api/latest/pagerduty-integration/
+    identifier: pagerduty-integration
     generated: true
-  - name: Rôles
-    url: /api/v1/roles/
-    identifier: Rôles
+  - name: Update a single service object
+    url: '#update-a-single-service-object'
+    identifier: update-a-single-service-object
+    parent: pagerduty-integration
     generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - UpdatePagerDutyIntegrationService
+      unstable: []
+      order: 3
+  - name: Get a single service object
+    url: '#get-a-single-service-object'
+    identifier: get-a-single-service-object
+    parent: pagerduty-integration
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetPagerDutyIntegrationService
+      unstable: []
+      order: 2
+  - name: Delete a single service object
+    url: '#delete-a-single-service-object'
+    identifier: delete-a-single-service-object
+    parent: pagerduty-integration
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - DeletePagerDutyIntegrationService
+      unstable: []
+      order: 4
+  - name: Create a new service object
+    url: '#create-a-new-service-object'
+    identifier: create-a-new-service-object
+    parent: pagerduty-integration
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - CreatePagerDutyIntegrationService
+      unstable: []
+      order: 1
   - name: Screenboards
-    url: /api/v1/screenboards/
-    identifier: Screenboards
+    url: /api/latest/screenboards/
+    identifier: screenboards
     generated: true
-  - name: Security Monitoring
-    url: /api/v1/security-monitoring/
-    identifier: Security Monitoring
+  - name: Service Checks
+    url: /api/latest/service-checks/
+    identifier: service-checks
     generated: true
-  - name: Checks de service
-    url: /api/v1/service-checks/
-    identifier: Checks de service
+  - name: Submit a Service Check
+    url: '#submit-a-service-check'
+    identifier: submit-a-service-check
+    parent: service-checks
     generated: true
-  - name: Envoyer un check de service
-    parent: Checks de service
-    url: "#envoyer-un-check-de-service"
+    params:
+      versions:
+        - v1
+      operationids:
+        - SubmitServiceCheck
+      unstable: []
+      order: 1
+  - name: Service Dependencies
+    url: /api/latest/service-dependencies/
+    identifier: service-dependencies
     generated: true
-  - name: Dépendances de service
-    url: /api/v1/service-dependencies/
-    identifier: Dépendances de service
+  - name: Get one APM service's dependencies
+    url: '#get-one-apm-services-dependencies'
+    identifier: get-one-apm-services-dependencies
+    parent: service-dependencies
     generated: true
-  - name: Récupérer toutes les dépendances de services APM
-    parent: Dépendances de service
-    url: "#recuperer-toutes-les-dependances-de-services-apm"
+    params:
+      versions:
+        - v1
+      operationids:
+        - ListSingleServiceDependencies
+      unstable:
+        - v1
+      order: 2
+  - name: Get all APM service dependencies
+    url: '#get-all-apm-service-dependencies'
+    identifier: get-all-apm-service-dependencies
+    parent: service-dependencies
     generated: true
-  - name: Récupérer les dépendances d'un service APM
-    parent: Dépendances de service
-    url: "#recuperer-les-dependances-d-un-service-apm"
+    params:
+      versions:
+        - v1
+      operationids:
+        - ListServiceDependencies
+      unstable:
+        - v1
+      order: 1
+  - name: Service Level Objective Corrections
+    url: /api/latest/service-level-objective-corrections/
+    identifier: service-level-objective-corrections
     generated: true
+  - name: Update an SLO correction
+    url: '#update-an-slo-correction'
+    identifier: update-an-slo-correction
+    parent: service-level-objective-corrections
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - UpdateSLOCorrection
+      unstable:
+        - v1
+      order: 4
+  - name: Get an SLO correction for an SLO
+    url: '#get-an-slo-correction-for-an-slo'
+    identifier: get-an-slo-correction-for-an-slo
+    parent: service-level-objective-corrections
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetSLOCorrection
+      unstable:
+        - v1
+      order: 3
+  - name: Delete an SLO correction
+    url: '#delete-an-slo-correction'
+    identifier: delete-an-slo-correction
+    parent: service-level-objective-corrections
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - DeleteSLOCorrection
+      unstable:
+        - v1
+      order: 5
+  - name: Create an SLO correction
+    url: '#create-an-slo-correction'
+    identifier: create-an-slo-correction
+    parent: service-level-objective-corrections
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - CreateSLOCorrection
+      unstable:
+        - v1
+      order: 1
+  - name: Get all SLO corrections
+    url: '#get-all-slo-corrections'
+    identifier: get-all-slo-corrections
+    parent: service-level-objective-corrections
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - ListSLOCorrection
+      unstable:
+        - v1
+      order: 2
   - name: Service Level Objectives
-    url: /api/v1/service-level-objectives/
-    identifier: Service Level Objectives
+    url: /api/latest/service-level-objectives/
+    identifier: service-level-objectives
     generated: true
-  - name: Rechercher des SLO
-    parent: Service Level Objectives
-    url: "#rechercher-des-slo"
+  - name: Get an SLO's history
+    url: '#get-an-slos-history'
+    identifier: get-an-slos-history
+    parent: service-level-objectives
     generated: true
-  - name: Créer un objet SLO
-    parent: Service Level Objectives
-    url: "#creer-un-objet-slo"
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetSLOHistory
+      unstable:
+        - v1
+      order: 6
+  - name: Get Corrections For an SLO
+    url: '#get-corrections-for-an-slo'
+    identifier: get-corrections-for-an-slo
+    parent: service-level-objectives
     generated: true
-  - name: Supprimer plusieurs intervalles de SLO
-    parent: Service Level Objectives
-    url: "#supprimer-plusieurs-intervalles-de-slo"
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetSLOCorrections
+      unstable:
+        - v1
+      order: 6
+  - name: Update an SLO
+    url: '#update-an-slo'
+    identifier: update-an-slo
+    parent: service-level-objectives
     generated: true
-  - name: Vérifier si des SLO peuvent être supprimés
-    parent: Service Level Objectives
-    url: "#verifier-si-des-slo-peuvent-etre-supprimes"
+    params:
+      versions:
+        - v1
+      operationids:
+        - UpdateSLO
+      unstable: []
+      order: 3
+  - name: Get an SLO's details
+    url: '#get-an-slos-details'
+    identifier: get-an-slos-details
+    parent: service-level-objectives
     generated: true
-  - name: Supprimer un SLO
-    parent: Service Level Objectives
-    url: "#supprimer-un-slo"
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetSLO
+      unstable: []
+      order: 4
+  - name: Delete an SLO
+    url: '#delete-an-slo'
+    identifier: delete-an-slo
+    parent: service-level-objectives
     generated: true
-  - name: Récupérer les détails d'un SLO
-    parent: Service Level Objectives
-    url: "#recuperer-les-details-d-un-slo"
+    params:
+      versions:
+        - v1
+      operationids:
+        - DeleteSLO
+      unstable: []
+      order: 5
+  - name: Check if SLOs can be safely deleted
+    url: '#check-if-slos-can-be-safely-deleted'
+    identifier: check-if-slos-can-be-safely-deleted
+    parent: service-level-objectives
     generated: true
-  - name: Mettre à jour un SLO
-    parent: Service Level Objectives
-    url: "#mettre-a-jour-un-slo"
+    params:
+      versions:
+        - v1
+      operationids:
+        - CheckCanDeleteSLO
+      unstable: []
+      order: 7
+  - name: Bulk Delete SLO Timeframes
+    url: '#bulk-delete-slo-timeframes'
+    identifier: bulk-delete-slo-timeframes
+    parent: service-level-objectives
     generated: true
-  - name: Récupérer l'historique d'un SLO
-    parent: Service Level Objectives
-    url: "#recuperer-l-historique-d-un-slo"
+    params:
+      versions:
+        - v1
+      operationids:
+        - DeleteSLOTimeframeInBulk
+      unstable: []
+      order: 8
+  - name: Create an SLO object
+    url: '#create-an-slo-object'
+    identifier: create-an-slo-object
+    parent: service-level-objectives
     generated: true
-  - name: Intégration Slack
-    url: /api/v1/slack-integration/
-    identifier: Intégration Slack
+    params:
+      versions:
+        - v1
+      operationids:
+        - CreateSLO
+      unstable: []
+      order: 1
+  - name: Get all SLOs
+    url: '#get-all-slos'
+    identifier: get-all-slos
+    parent: service-level-objectives
     generated: true
-  - name: Supprimer une intégration Slack
-    parent: Intégration Slack
-    url: "#supprimer-une-integration-slack"
+    params:
+      versions:
+        - v1
+      operationids:
+        - ListSLOs
+      unstable: []
+      order: 2
+  - name: Slack Integration
+    url: /api/latest/slack-integration/
+    identifier: slack-integration
     generated: true
-  - name: Récupérer les informations sur une intégration Slack
-    parent: Intégration Slack
-    url: "#recuperer-les-informations-sur-une-integration-slack"
+  - name: Update a Slack integration channel
+    url: '#update-a-slack-integration-channel'
+    identifier: update-a-slack-integration-channel
+    parent: slack-integration
     generated: true
-  - name: Créer une intégration Slack
-    parent: Intégration Slack
-    url: "#creer-une-integration-slack"
+    params:
+      versions:
+        - v1
+      operationids:
+        - UpdateSlackIntegrationChannel
+      unstable: []
+      order: 4
+  - name: Get a Slack integration channel
+    url: '#get-a-slack-integration-channel'
+    identifier: get-a-slack-integration-channel
+    parent: slack-integration
     generated: true
-  - name: Ajouter des canaux à l'intégration Slack
-    parent: Intégration Slack
-    url: "#ajouter-des-canaux-a-l-integration-slack"
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetSlackIntegrationChannel
+      unstable: []
+      order: 3
+  - name: Remove a Slack integration channel
+    url: '#remove-a-slack-integration-channel'
+    identifier: remove-a-slack-integration-channel
+    parent: slack-integration
     generated: true
-  - name: Récupérer tous les canaux dans une intégration Slack
-    parent: Intégration Slack
-    url: "#recuperer-tous-les-canaux-dans-une-integration-slack"
+    params:
+      versions:
+        - v1
+      operationids:
+        - RemoveSlackIntegrationChannel
+      unstable: []
+      order: 5
+  - name: Create a Slack integration channel
+    url: '#create-a-slack-integration-channel'
+    identifier: create-a-slack-integration-channel
+    parent: slack-integration
     generated: true
-  - name: Créer un canal dans une intégration Slack
-    parent: Intégration Slack
-    url: "#creer-un-canal-dans-une-integration-slack"
+    params:
+      versions:
+        - v1
+      operationids:
+        - CreateSlackIntegrationChannel
+      unstable: []
+      order: 2
+  - name: Get all channels in a Slack integration
+    url: '#get-all-channels-in-a-slack-integration'
+    identifier: get-all-channels-in-a-slack-integration
+    parent: slack-integration
     generated: true
-  - name: Supprimer un canal dans une intégration Slack
-    parent: Intégration Slack
-    url: "#supprimer-un-canal-dans-une-integration-slack"
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetSlackIntegrationChannels
+      unstable: []
+      order: 1
+  - name: Add channels to Slack integration
+    url: '#add-channels-to-slack-integration'
+    identifier: add-channels-to-slack-integration
+    parent: slack-integration
     generated: true
-  - name: Récupérer un canal dans une intégration Slack
-    parent: Intégration Slack
-    url: "#recuperer-un-canal-dans-une-integration-slack"
+    params:
+      versions:
+        - v1
+      operationids:
+        - UpdateSlackIntegration
+      unstable: []
+      order: 0
+  - name: Create a Slack integration
+    url: '#create-a-slack-integration'
+    identifier: create-a-slack-integration
+    parent: slack-integration
     generated: true
-  - name: Mettre à jour un canal dans une intégration Slack
-    parent: Intégration Slack
-    url: "#mettre-a-jour-un-canal-dans-une-integration-slack"
+    params:
+      versions:
+        - v1
+      operationids:
+        - CreateSlackIntegration
+      unstable: []
+      order: 0
+  - name: Get info about a Slack integration
+    url: '#get-info-about-a-slack-integration'
+    identifier: get-info-about-a-slack-integration
+    parent: slack-integration
     generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetSlackIntegration
+      unstable: []
+      order: 0
+  - name: Delete a Slack integration
+    url: '#delete-a-slack-integration'
+    identifier: delete-a-slack-integration
+    parent: slack-integration
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - DeleteSlackIntegration
+      unstable: []
+      order: 0
   - name: Snapshots
-    url: /api/v1/snapshots/
-    identifier: Snapshots
+    url: /api/latest/snapshots/
+    identifier: snapshots
     generated: true
-  - name: Prendre des snapshots de graphiques
-    parent: Snapshots
-    url: "#prendre-des-snapshots-de-graphiques"
+  - name: Take graph snapshots
+    url: '#take-graph-snapshots'
+    identifier: take-graph-snapshots
+    parent: snapshots
     generated: true
-  - name: Synthetic
-    url: /api/v1/synthetics/
-    identifier: Synthetic
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetGraphSnapshot
+      unstable: []
+      order: 1
+  - name: Synthetics
+    url: /api/latest/synthetics/
+    identifier: synthetics
     generated: true
-  - name: Récupérer tous les emplacements (publics et privés)
-    parent: Synthetic
-    url: "#recuperer-tous-les-emplacements-publics-et-prives"
+  - name: Edit a global variable
+    url: '#edit-a-global-variable'
+    identifier: edit-a-global-variable
+    parent: synthetics
     generated: true
-  - name: Créer un emplacement privé
-    parent: Synthetic
-    url: "#creer-un-emplacement-prive"
+    params:
+      versions:
+        - v1
+      operationids:
+        - EditGlobalVariable
+      unstable: []
+      order: 18
+  - name: Get a global variable
+    url: '#get-a-global-variable'
+    identifier: get-a-global-variable
+    parent: synthetics
     generated: true
-  - name: Supprimer un emplacement privé
-    parent: Synthetic
-    url: "#supprimer-un-emplacement-prive"
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetGlobalVariable
+      unstable: []
+      order: 19
+  - name: Delete a global variable
+    url: '#delete-a-global-variable'
+    identifier: delete-a-global-variable
+    parent: synthetics
     generated: true
-  - name: Récupérer un emplacement privé
-    parent: Synthetic
-    url: "#recuperer-un-emplacement-prive"
+    params:
+      versions:
+        - v1
+      operationids:
+        - DeleteGlobalVariable
+      unstable: []
+      order: 20
+  - name: Create a global variable
+    url: '#create-a-global-variable'
+    identifier: create-a-global-variable
+    parent: synthetics
     generated: true
-  - name: Modifier un emplacement privé
-    parent: Synthetic
-    url: "#modifier-un-emplacement-prive"
+    params:
+      versions:
+        - v1
+      operationids:
+        - CreateGlobalVariable
+      unstable: []
+      order: 17
+  - name: Get all global variables
+    url: '#get-all-global-variables'
+    identifier: get-all-global-variables
+    parent: synthetics
     generated: true
-  - name: Récupérer la liste de tous les tests
-    parent: Synthetic
-    url: "#recuperer-la-liste-de-tous-les-tests"
+    params:
+      versions:
+        - v1
+      operationids:
+        - ListGlobalVariables
+      unstable: []
+      order: 16
+  - name: Pause or start a test
+    url: '#pause-or-start-a-test'
+    identifier: pause-or-start-a-test
+    parent: synthetics
     generated: true
-  - name: Créer un test
-    parent: Synthetic
-    url: "#creer-un-test"
+    params:
+      versions:
+        - v1
+      operationids:
+        - UpdateTestPauseStatus
+      unstable: []
+      order: 5
+  - name: Get an API test result
+    url: '#get-an-api-test-result'
+    identifier: get-an-api-test-result
+    parent: synthetics
     generated: true
-  - name: Récupérer une configuration de test (Browser)
-    parent: Synthetic
-    url: "#recuperer-une-configuration-de-test-browser"
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetAPITestResult
+      unstable: []
+      order: 11
+  - name: Get an API test's latest results summaries
+    url: '#get-an-api-tests-latest-results-summaries'
+    identifier: get-an-api-tests-latest-results-summaries
+    parent: synthetics
     generated: true
-  - name: Récupérer les résumés des derniers résultats de test (Browser)
-    parent: Synthetic
-    url: "#recuperer-les-resumes-des-derniers-resultats-de-test-browser"
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetAPITestLatestResults
+      unstable: []
+      order: 13
+  - name: Edit a test
+    url: '#edit-a-test'
+    identifier: edit-a-test
+    parent: synthetics
     generated: true
-  - name: Récupérer un résultat de test (Browser)
-    parent: Synthetic
-    url: "#recuperer-un-resultat-de-test-browser"
+    params:
+      versions:
+        - v1
+      operationids:
+        - UpdateTest
+      unstable: []
+      order: 26
+  - name: Get a test configuration
+    url: '#get-a-test-configuration'
+    identifier: get-a-test-configuration
+    parent: synthetics
     generated: true
-  - name: Supprimer des tests
-    parent: Synthetic
-    url: "#supprimer-des-tests"
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetTest
+      unstable: []
+      order: 26
+  - name: Trigger tests from CI/CD pipelines
+    url: '#trigger-tests-from-ci/cd-pipelines'
+    identifier: trigger-tests-from-ci/cd-pipelines
+    parent: synthetics
     generated: true
-  - name: Déclencher des tests Synthetic spécifiques pour l'intégration continue
-    parent: Synthetic
-    url: "#declencher-des-tests-synthetics-pour-ci"
+    params:
+      versions:
+        - v1
+      operationids:
+        - TriggerCITests
+      unstable: []
+      order: 6
+  - name: Trigger Synthetics tests
+    url: '#trigger-synthetics-tests'
+    identifier: trigger-synthetics-tests
+    parent: synthetics
     generated: true
-  - name: Récupérer une configuration de test (API)
-    parent: Synthetic
-    url: "#recuperer-une-configuration-de-test-api"
+    params:
+      versions:
+        - v1
+      operationids:
+        - TriggerTests
+      unstable: []
+      order: 7
+  - name: Delete tests
+    url: '#delete-tests'
+    identifier: delete-tests
+    parent: synthetics
     generated: true
-  - name: Modifier un test
-    parent: Synthetic
-    url: "#modifier-un-test"
+    params:
+      versions:
+        - v1
+      operationids:
+        - DeleteTests
+      unstable: []
+      order: 15
+  - name: Get a browser test result
+    url: '#get-a-browser-test-result'
+    identifier: get-a-browser-test-result
+    parent: synthetics
     generated: true
-  - name: Récupérer les résumés des derniers résultats de test (API)
-    parent: Synthetic
-    url: "#recuperer-les-resumes-des-derniers-resultats-de-test-api"
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetBrowserTestResult
+      unstable: []
+      order: 12
+  - name: Get a browser test's latest results summaries
+    url: '#get-a-browser-tests-latest-results-summaries'
+    identifier: get-a-browser-tests-latest-results-summaries
+    parent: synthetics
     generated: true
-  - name: Récupérer un résultat de test (API)
-    parent: Synthetic
-    url: "#recuperer-un-resultat-de-test-api"
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetBrowserTestLatestResults
+      unstable: []
+      order: 14
+  - name: Edit a browser test
+    url: '#edit-a-browser-test'
+    identifier: edit-a-browser-test
+    parent: synthetics
     generated: true
-  - name: Interrompre ou démarrer un test
-    parent: Synthetic
-    url: "#interrompre-ou-demarrer-un-test"
+    params:
+      versions:
+        - v1
+      operationids:
+        - UpdateBrowserTest
+      unstable: []
+      order: 4
+  - name: Get a browser test
+    url: '#get-a-browser-test'
+    identifier: get-a-browser-test
+    parent: synthetics
     generated: true
-  - name: Créer une variable globale
-    parent: Synthetic
-    url: "#creer-une-variable-globale"
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetBrowserTest
+      unstable: []
+      order: 9
+  - name: Create a browser test
+    url: '#create-a-browser-test'
+    identifier: create-a-browser-test
+    parent: synthetics
     generated: true
-  - name: Supprimer une variable globale
-    parent: Synthetic
-    url: "#supprimer-une-variable-globale"
+    params:
+      versions:
+        - v1
+      operationids:
+        - CreateSyntheticsBrowserTest
+      unstable: []
+      order: 2
+  - name: Edit an API test
+    url: '#edit-an-api-test'
+    identifier: edit-an-api-test
+    parent: synthetics
     generated: true
-  - name: Récupérer une variable globale
-    parent: Synthetic
-    url: "#recuperer-une-variable-globale"
+    params:
+      versions:
+        - v1
+      operationids:
+        - UpdateAPITest
+      unstable: []
+      order: 3
+  - name: Get an API test
+    url: '#get-an-api-test'
+    identifier: get-an-api-test
+    parent: synthetics
     generated: true
-  - name: Modifier une variable globale
-    parent: Synthetic
-    url: "#modifier-une-variable-globale"
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetAPITest
+      unstable: []
+      order: 8
+  - name: Create an API test
+    url: '#create-an-api-test'
+    identifier: create-an-api-test
+    parent: synthetics
     generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - CreateSyntheticsAPITest
+      unstable: []
+      order: 1
+  - name: Create a test
+    url: '#create-a-test'
+    identifier: create-a-test
+    parent: synthetics
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - CreateTest
+      unstable: []
+      order: 27
+  - name: Get the list of all tests
+    url: '#get-the-list-of-all-tests'
+    identifier: get-the-list-of-all-tests
+    parent: synthetics
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - ListTests
+      unstable: []
+      order: 10
+  - name: Edit a private location
+    url: '#edit-a-private-location'
+    identifier: edit-a-private-location
+    parent: synthetics
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - UpdatePrivateLocation
+      unstable: []
+      order: 23
+  - name: Get a private location
+    url: '#get-a-private-location'
+    identifier: get-a-private-location
+    parent: synthetics
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetPrivateLocation
+      unstable: []
+      order: 22
+  - name: Delete a private location
+    url: '#delete-a-private-location'
+    identifier: delete-a-private-location
+    parent: synthetics
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - DeletePrivateLocation
+      unstable: []
+      order: 25
+  - name: Create a private location
+    url: '#create-a-private-location'
+    identifier: create-a-private-location
+    parent: synthetics
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - CreatePrivateLocation
+      unstable: []
+      order: 21
+  - name: Get all locations (public and private)
+    url: '#get-all-locations-public-and-private'
+    identifier: get-all-locations-public-and-private
+    parent: synthetics
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - ListLocations
+      unstable: []
+      order: 24
+  - name: Get details of batch
+    url: '#get-details-of-batch'
+    identifier: get-details-of-batch
+    parent: synthetics
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetSyntheticsCIBatch
+      unstable: []
+      order: 27
   - name: Tags
-    url: /api/v1/tags/
-    identifier: Tags
+    url: /api/latest/tags/
+    identifier: tags
     generated: true
-  - name: Récupérer des tags
-    parent: Tags
-    url: "#recuperer-des-tags"
+  - name: Update host tags
+    url: '#update-host-tags'
+    identifier: update-host-tags
+    parent: tags
     generated: true
-  - name: Supprimer les tags d'un host
-    parent: Tags
-    url: "#supprimer-les-tags-d-un-host"
+    params:
+      versions:
+        - v1
+      operationids:
+        - UpdateHostTags
+      unstable: []
+      order: 4
+  - name: Add tags to a host
+    url: '#add-tags-to-a-host'
+    identifier: add-tags-to-a-host
+    parent: tags
     generated: true
-  - name: Récupérer les tags d'un host
-    parent: Tags
-    url: "#recuperer-les-tags-d-un-host"
+    params:
+      versions:
+        - v1
+      operationids:
+        - CreateHostTags
+      unstable: []
+      order: 3
+  - name: Get host tags
+    url: '#get-host-tags'
+    identifier: get-host-tags
+    parent: tags
     generated: true
-  - name: Ajouter des tags à un host
-    parent: Tags
-    url: "#ajouter-des-tags-a-un-host"
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetHostTags
+      unstable: []
+      order: 2
+  - name: Remove host tags
+    url: '#remove-host-tags'
+    identifier: remove-host-tags
+    parent: tags
     generated: true
-  - name: Mettre à jour les tags d'un host
-    parent: Tags
-    url: "#mettre-a-jour-les-tags-d-un-host"
+    params:
+      versions:
+        - v1
+      operationids:
+        - DeleteHostTags
+      unstable: []
+      order: 5
+  - name: Get Tags
+    url: '#get-tags'
+    identifier: get-tags
+    parent: tags
     generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - ListHostTags
+      unstable: []
+      order: 1
   - name: Timeboards
-    url: /api/v1/timeboards/
-    identifier: Timeboards
-    generated: true
-  - name: Tracing
-    url: /api/v1/tracing/
-    identifier: Tracing
-    generated: true
-  - name: Envoyer des traces
-    parent: Tracing
-    url: "#envoyer-des-traces"
-    generated: true
-  - name: Mesure de l'utilisation
-    url: /api/v1/usage-metering/
-    identifier: Mesure de l'utilisation
-    generated: true
-  - name: Récupérer la liste des rapports personnalisés journaliers disponibles
-    parent: Mesure de l'utilisation
-    url: "#recuperer-la liste-des-rapports-personnalises-journaliers-disponibles"
-    generated: true
-  - name: Récupérer les rapports personnalisés journaliers spécifiés
-    parent: Mesure de l'utilisation
-    url: "#recuperer-les-rapports-personnalises-journaliers-specifies"
-    generated: true
-  - name: Récupérer la liste des rapports personnalisés mensuels disponibles
-    parent: Mesure de l'utilisation
-    url: "#recuperer-la liste-des-rapports-personnalises-mensuels-disponibles"
-    generated: true
-  - name: Récupérer les rapports personnalisés mensuels spécifiés
-    parent: Mesure de l'utilisation
-    url: "#recuperer-les-rapports-personnalises-mensuels-specifies"
-    generated: true
-  - name: Récupérer l'utilisation horaire pour les logs analysés
-    parent: Mesure de l'utilisation
-    url: "#recuperer-l-utilisation-horaire-pour-les-logs-analyses"
-    generated: true
-  - name: Récupérer l'attribution de l'utilisation
-    parent: Mesure de l'utilisation
-    url: "#recuperer-l-attribution-de-l-utilisation"
-    generated: true
-  - name: Récupérer l'utilisation horaire pour Lambda
-    parent: Mesure de l'utilisation
-    url: "#recuperer-l-utilisation-horaire-pour-lambda"
-    generated: true
-  - name: Récupérer l'utilisation facturable de votre compte
-    parent: Mesure de l'utilisation
-    url: "#recuperer-l-utilisation-facturable-de-votre-compte"
-    generated: true
-  - name: Récupérer l'utilisation horaire pour Fargate
-    parent: Mesure de l'utilisation
-    url: "#recuperer-l-utilisation-horaire-pour-fargate"
-    generated: true
-  - name: Récupérer l'utilisation horaire pour les hosts et conteneurs
-    parent: Mesure de l'utilisation
-    url: "#recuperer-l-utilisation-horaire-pour-les-hosts-et-conteneurs"
-    generated: true
-  - name: Récupérer l'utilisation horaire pour la gestion des incidents
-    parent: Mesure de l'utilisation
-    url: "#recuperer-l-utilisation-horaire-pour-la-gestion-des-incidents"
-    generated: true
-  - name: Récupérer l'utilisation horaire pour les spans indexées
-    parent: Mesure de l'utilisation
-    url: "#recuperer-l-utilisation-horaire-pour-les-spans-indexees"
-    generated: true
-  - name: Récupérer l'utilisation horaire pour les spans ingérées
-    parent: Mesure de l'utilisation
-    url: "#recuperer-l-utilisation-horaire-pour-les-spans-ingerees"
-    generated: true
-  - name: Récupérer l'utilisation horaire pour les logs
-    parent: Mesure de l'utilisation
-    url: "#recuperer-l-utilisation-horaire-pour-des-logs"
-    generated: true
-  - name: Récupérer l'utilisation horaire pour les logs par index
-    parent: Mesure de l'utilisation
-    url: "#recuperer-l-utilisation-horaire-pour-des-logs-par-index"
-    generated: true
-  - name: Récupérer l'utilisation horaire pour les flux réseau
-    parent: Mesure de l'utilisation
-    url: "#recuperer-l-utilisation-horaire-pour-les-flux-reseau"
-    generated: true
-  - name: Récupérer l'utilisation horaire pour les hosts réseau
-    parent: Mesure de l'utilisation
-    url: "#recuperer-l-utilisation-horaire-pour-les-hosts-reseau"
-    generated: true
-  - name: Récupérer l'utilisation horaire pour les hosts profilés
-    parent: Mesure de l'utilisation
-    url: "#recuperer-l-utilisation-horaire-pour-les-hosts-profiles"
-    generated: true
-  - name: Récupérer l'utilisation horaire pour les sessions RUM
-    parent: Mesure de l'utilisation
-    url: "#recuperer-l-utilisation-horaire-pour-les-sessions-rum"
-    generated: true
-  - name: Récupérer l'utilisation horaire pour les périphériques SNMP
-    parent: Mesure de l'utilisation
-    url: "#recuperer-l-utilisation-horaire-pour-les-appareils-snmp"
-    generated: true
-  - name: Récupérer l'utilisation de votre compte multi-org
-    parent: Mesure de l'utilisation
-    url: "#recuperer-l-utilisation-de-votre-compte-multi-org"
-    generated: true
-  - name: Récupérer l'utilisation horaire pour les checks Synthetic
-    parent: Mesure de l'utilisation
-    url: "#recuperer-l-utilisation-horaire-pour-les-checks-synthetics"
-    generated: true
-  - name: Récupérer l'utilisation horaire pour les checks API Synthetic
-    parent: Mesure de l'utilisation
-    url: "#recuperer-l-utilisation-horaire-pour-les-api-checks-synthetics"
-    generated: true
-  - name: Récupérer l'utilisation horaire pour les checks Browser Synthetic
-    parent: Mesure de l'utilisation
-    url: "#recuperer-l-utilisation-horaire-pour-les-browser-checks-synthetics"
-    generated: true
-  - name: Récupérer l'utilisation horaire pour les métriques custom
-    parent: Mesure de l'utilisation
-    url: "#recuperer-l-utilisation-horaire-pour-des-metriques-custom"
-    generated: true
-  - name: Récupérer les principales métriques custom selon la moyenne horaire
-    parent: Mesure de l'utilisation
-    url: "#recuperer-les-principales-metriques-custom-selon-la-moyenne-horaire"
-    generated: true
-  - name: Récupérer l'utilisation horaire pour la recherche de traces
-    parent: Mesure de l'utilisation
-    url: "#recuperer-l-utilisation-horaire-pour-la-recherche-de-traces"
-    generated: true
-  - name: Récupérer l'utilisation horaire pour le Tracing without Limits
-    parent: Mesure de l'utilisation
-    url: "#recuperer-l-utilisation-horaire-pour-le-tracing-without-limits"
-    generated: true
-  - name: Utilisateurs
-    url: /api/v1/users/
-    identifier: Utilisateurs
-    generated: true
-  - name: Énumérer tous les utilisateurs
-    parent: Utilisateurs
-    url: "#enumerer-tous-les-utilisateurs"
-    generated: true
-  - name: Créer un utilisateur
-    parent: Utilisateurs
-    url: "#creer-un-utilisateur"
-    generated: true
-  - name: Désactiver un utilisateur
-    parent: Utilisateurs
-    url: "#desactiver-un-utilisateur"
-    generated: true
-  - name: Récupérer les détails d'un utilisateur
-    parent: Utilisateurs
-    url: "#recuperer-les-details-d-un-utilisateur"
-    generated: true
-  - name: Mettre à jour un utilisateur
-    parent: Utilisateurs
-    url: "#mettre-a-jour-un-utilisateur"
-    generated: true
-  - name: Intégration Webhooks
-    url: /api/v1/webhooks-integration/
-    identifier: Intégration Webhooks
-    generated: true
-  - name: Créer une variable personnalisée
-    parent: Intégration Webhooks
-    url: "#creer-une-variable-personnalisee"
-    generated: true
-  - name: Supprimer une variable personnalisée
-    parent: Intégration Webhooks
-    url: "#supprimer-une-variable-personnalisee"
-    generated: true
-  - name: Récupérer une variable personnalisée
-    parent: Intégration Webhooks
-    url: "#recuperer-une-variable-personnalisee"
-    generated: true
-  - name: Mettre à jour une variable personnalisée
-    parent: Intégration Webhooks
-    url: "#mettre-a-jour-une-variable-personnalisee"
-    generated: true
-  - name: Créer une intégration Webhooks
-    parent: Intégration Webhooks
-    url: "#creer-une-integration-webhooks"
-    generated: true
-  - name: Supprimer un webhook
-    parent: Intégration Webhooks
-    url: "#supprimer-un-webhook"
-    generated: true
-  - name: Récupérer une intégration Webhook
-    parent: Intégration Webhooks
-    url: "#recuperer-une-integration-webhook"
-    generated: true
-  - name: Mettre à jour un webhook
-    parent: Intégration Webhooks
-    url: "#mettre-a-jour-un-webhook"
-    generated: true
-api_v2:
-  - name: Présentation
-    url: /api/v2/
-    identifier: Présentation de l'API V2
-    weight: -10
-  - name: Utiliser l'API
-    url: /api/v2/using-the-api/
-    parent: Présentation de l'API V2
-    weight: 5
-  - name: Limites de débit
-    url: /api/v2/rate-limits/
-    parent: Présentation de l'API V2
-    weight: 6
-    identifier: rate-limits
-  - name: Intégration AWS
-    url: /api/v2/aws-integration/
-    identifier: Intégration AWS
-    generated: true
-  - name: Intégration de logs AWS
-    url: /api/v2/aws-logs-integration/
-    identifier: Intégration de logs AWS
-    generated: true
-  - name: Authentification
-    url: /api/v2/authentication/
-    identifier: Authentification
-    generated: true
-  - name: Intégration Azure
-    url: /api/v2/azure-integration/
-    identifier: Intégration Azure
-    generated: true
-  - name: Listes de dashboards
-    url: /api/v2/dashboard-lists/
-    identifier: Listes de dashboards
-    generated: true
-  - name: Supprimer des éléments d'une liste de dashboards
-    parent: Listes de dashboards
-    url: "#supprimer-des-elements-d-une-liste-de-dashboards"
-    generated: true
-  - name: Récupérer une liste de dashboards
-    parent: Listes de dashboards
-    url: "#recuperer-une-liste-de-dashboards"
-    generated: true
-  - name: Ajouter des éléments à une liste de dashboards
-    parent: Listes de dashboards
-    url: "#ajouter-des-elements-a-une-liste-de-dashboards"
-    generated: true
-  - name: Mettre à jour les éléments d'une liste de dashboards
-    parent: Listes de dashboards
-    url: "#mettre-a-jour-les-elements-d-une-liste-de-dashboards"
-    generated: true
-  - name: Dashboards
-    url: /api/v2/dashboards/
-    identifier: Dashboards
-    generated: true
-  - name: Downtimes
-    url: /api/v2/downtimes/
-    identifier: Downtimes
-    generated: true
-  - name: Graphiques intégrables
-    url: /api/v2/embeddable-graphs/
-    identifier: Graphiques intégrables
-    generated: true
-  - name: Événements
-    url: /api/v2/events/
-    identifier: Événements
-    generated: true
-  - name: Intégration GCP
-    url: /api/v2/gcp-integration/
-    identifier: Intégration GCP
-    generated: true
-  - name: Hosts
-    url: /api/v2/hosts/
-    identifier: Hosts
-    generated: true
-  - name: Plages d'IP
-    url: /api/v2/ip-ranges/
-    identifier: Plages d'IP
-    generated: true
-  - name: Services liés à un incident
-    url: /api/v2/incident-services/
-    identifier: Services liés à un incident
-    generated: true
-  - name: Récupérer la liste de tous les services liés à un incident
-    parent: Services liés à un incident
-    url: "#recuperer-une-liste-de-tous-les-services-lies-a-un-incident"
-    generated: true
-  - name: Créer un service lié à un incident
-    parent: Services liés à un incident
-    url: "#creer-un-service-lie-a-un-incident"
-    generated: true
-  - name: Supprimer un service lié à un incident existant
-    parent: Services liés à un incident
-    url: "#supprimer-un-service-lie-a-un-incident-existant"
-    generated: true
-  - name: Récupérer les détails d'un service lié à un incident
-    parent: Services liés à un incident
-    url: "#recuperer-les-details-d-un-service-lie-a-un-incident"
-    generated: true
-  - name: Mettre à jour un service lié à un incident existant
-    parent: Services liés à un incident
-    url: "#mettre-a-jour-un-service-lie-a-un-incident-existant"
-    generated: true
-  - name: Équipes liées à un incident
-    url: /api/v2/incident-teams/
-    identifier: Équipes liées à un incident
-    generated: true
-  - name: Récupérer la liste de toutes les équipes liées à un incident
-    parent: Équipes liées à un incident
-    url: "#recuperer-la-liste-de-toutes-les-equipes-lies-a-un-incident"
-    generated: true
-  - name: Créer une équipe liée à un incident
-    parent: Équipes liées à un incident
-    url: "#creer-une-equipe-liee-a-un-incident"
-    generated: true
-  - name: Supprimer une équipe liée à un incident existante
-    parent: Équipes liées à un incident
-    url: "#supprimer-une-equipe-liee-a-un-incident-existante"
-    generated: true
-  - name: Récupérer les détails d'une équipe liée à un incident
-    parent: Équipes liées à un incident
-    url: "#recuperer-les-details-d-une-equipe-liee-a-un-incident"
-    generated: true
-  - name: Mettre à jour une équipe liée à un incident existante
-    parent: Équipes liées à un incident
-    url: "#mettre-a-jour-une-equipe-liee-a-un-incident-existante"
-    generated: true
+    url: /api/latest/timeboards/
+    identifier: timeboards
+    generated: true
+  - name: Usage Metering
+    url: /api/latest/usage-metering/
+    identifier: usage-metering
+    generated: true
+  - name: Get all custom metrics by hourly average
+    url: '#get-all-custom-metrics-by-hourly-average'
+    identifier: get-all-custom-metrics-by-hourly-average
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetUsageTopAvgMetrics
+      unstable: []
+      order: 5
+  - name: Get hourly usage for custom metrics
+    url: '#get-hourly-usage-for-custom-metrics'
+    identifier: get-hourly-usage-for-custom-metrics
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetUsageTimeseries
+      unstable: []
+      order: 4
+  - name: Get hourly usage for Synthetics Browser Checks
+    url: '#get-hourly-usage-for-synthetics-browser-checks'
+    identifier: get-hourly-usage-for-synthetics-browser-checks
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetUsageSyntheticsBrowser
+      unstable: []
+      order: 10
+  - name: Get hourly usage for Synthetics API Checks
+    url: '#get-hourly-usage-for-synthetics-api-checks'
+    identifier: get-hourly-usage-for-synthetics-api-checks
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetUsageSyntheticsAPI
+      unstable: []
+      order: 9
+  - name: Get hourly usage for Synthetics Checks
+    url: '#get-hourly-usage-for-synthetics-checks'
+    identifier: get-hourly-usage-for-synthetics-checks
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetUsageSynthetics
+      unstable: []
+      order: 8
+  - name: Get usage across your multi-org account
+    url: '#get-usage-across-your-multi-org-account'
+    identifier: get-usage-across-your-multi-org-account
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetUsageSummary
+      unstable: []
+      order: 16
+  - name: Get hourly usage for SNMP devices
+    url: '#get-hourly-usage-for-snmp-devices'
+    identifier: get-hourly-usage-for-snmp-devices
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetUsageSNMP
+      unstable: []
+      order: 18
+  - name: Get hourly usage for Sensitive Data Scanner
+    url: '#get-hourly-usage-for-sensitive-data-scanner'
+    identifier: get-hourly-usage-for-sensitive-data-scanner
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetUsageSDS
+      unstable: []
+      order: 36
+  - name: Get hourly usage for RUM Sessions
+    url: '#get-hourly-usage-for-rum-sessions'
+    identifier: get-hourly-usage-for-rum-sessions
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetUsageRumSessions
+      unstable: []
+      order: 13
+  - name: Get hourly usage for RUM Units
+    url: '#get-hourly-usage-for-rum-units'
+    identifier: get-hourly-usage-for-rum-units
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetUsageRumUnits
+      unstable: []
+      order: 37
+  - name: Get hourly usage for profiled hosts
+    url: '#get-hourly-usage-for-profiled-hosts'
+    identifier: get-hourly-usage-for-profiled-hosts
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetUsageProfiling
+      unstable: []
+      order: 24
+  - name: Get hourly usage for Network Hosts
+    url: '#get-hourly-usage-for-network-hosts'
+    identifier: get-hourly-usage-for-network-hosts
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetUsageNetworkHosts
+      unstable: []
+      order: 14
+  - name: Get hourly usage for Network Flows
+    url: '#get-hourly-usage-for-network-flows'
+    identifier: get-hourly-usage-for-network-flows
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetUsageNetworkFlows
+      unstable: []
+      order: 15
+  - name: Get Monthly Usage Attribution
+    url: '#get-monthly-usage-attribution'
+    identifier: get-monthly-usage-attribution
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetMonthlyUsageAttribution
+      unstable:
+        - v1
+      order: 31
+  - name: Get hourly usage for Logs by Index
+    url: '#get-hourly-usage-for-logs-by-index'
+    identifier: get-hourly-usage-for-logs-by-index
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetUsageLogsByIndex
+      unstable: []
+      order: 3
+  - name: Get hourly logs usage by retention
+    url: '#get-hourly-logs-usage-by-retention'
+    identifier: get-hourly-logs-usage-by-retention
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetUsageLogsByRetention
+      unstable: []
+      order: 0
+  - name: Get hourly usage for Logs
+    url: '#get-hourly-usage-for-logs'
+    identifier: get-hourly-usage-for-logs
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetUsageLogs
+      unstable: []
+      order: 2
+  - name: Get hourly usage for IoT
+    url: '#get-hourly-usage-for-iot'
+    identifier: get-hourly-usage-for-iot
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetUsageInternetOfThings
+      unstable: []
+      order: 28
+  - name: Get hourly usage for ingested spans
+    url: '#get-hourly-usage-for-ingested-spans'
+    identifier: get-hourly-usage-for-ingested-spans
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetIngestedSpans
+      unstable: []
+      order: 26
+  - name: Get hourly usage for indexed spans
+    url: '#get-hourly-usage-for-indexed-spans'
+    identifier: get-hourly-usage-for-indexed-spans
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetUsageIndexedSpans
+      unstable: []
+      order: 7
+  - name: Get hourly usage for incident management
+    url: '#get-hourly-usage-for-incident-management'
+    identifier: get-hourly-usage-for-incident-management
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetIncidentManagement
+      unstable: []
+      order: 27
+  - name: Get Hourly Usage Attribution
+    url: '#get-hourly-usage-attribution'
+    identifier: get-hourly-usage-attribution
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetHourlyUsageAttribution
+      unstable:
+        - v1
+      order: 30
+  - name: Get hourly usage for hosts and containers
+    url: '#get-hourly-usage-for-hosts-and-containers'
+    identifier: get-hourly-usage-for-hosts-and-containers
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetUsageHosts
+      unstable: []
+      order: 1
+  - name: Get hourly usage for Fargate
+    url: '#get-hourly-usage-for-fargate'
+    identifier: get-hourly-usage-for-fargate
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetUsageFargate
+      unstable: []
+      order: 11
+  - name: Get hourly usage for Database Monitoring
+    url: '#get-hourly-usage-for-database-monitoring'
+    identifier: get-hourly-usage-for-database-monitoring
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetUsageDBM
+      unstable: []
+      order: 35
+  - name: Get hourly usage for Cloud Workload Security
+    url: '#get-hourly-usage-for-cloud-workload-security'
+    identifier: get-hourly-usage-for-cloud-workload-security
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetUsageCWS
+      unstable: []
+      order: 34
+  - name: Get hourly usage for CSPM
+    url: '#get-hourly-usage-for-cspm'
+    identifier: get-hourly-usage-for-cspm
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetUsageCloudSecurityPostureManagement
+      unstable: []
+      order: 32
+  - name: Get hourly usage for CI Visibility
+    url: '#get-hourly-usage-for-ci-visibility'
+    identifier: get-hourly-usage-for-ci-visibility
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetUsageCIApp
+      unstable: []
+      order: 38
+  - name: Get billable usage across your account
+    url: '#get-billable-usage-across-your-account'
+    identifier: get-billable-usage-across-your-account
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetUsageBillableSummary
+      unstable: []
+      order: 19
+  - name: Get hourly usage for Lambda
+    url: '#get-hourly-usage-for-lambda'
+    identifier: get-hourly-usage-for-lambda
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetUsageLambda
+      unstable: []
+      order: 12
+  - name: Get hourly usage for audit logs
+    url: '#get-hourly-usage-for-audit-logs'
+    identifier: get-hourly-usage-for-audit-logs
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetUsageAuditLogs
+      unstable: []
+      order: 33
+  - name: Get Usage Attribution
+    url: '#get-usage-attribution'
+    identifier: get-usage-attribution
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetUsageAttribution
+      unstable:
+        - v1
+      order: 29
+  - name: Get hourly usage for analyzed logs
+    url: '#get-hourly-usage-for-analyzed-logs'
+    identifier: get-hourly-usage-for-analyzed-logs
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetUsageAnalyzedLogs
+      unstable: []
+      order: 17
+  - name: Get specified monthly custom reports
+    url: '#get-specified-monthly-custom-reports'
+    identifier: get-specified-monthly-custom-reports
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetSpecifiedMonthlyCustomReports
+      unstable:
+        - v1
+      order: 23
+  - name: Get the list of available monthly custom reports
+    url: '#get-the-list-of-available-monthly-custom-reports'
+    identifier: get-the-list-of-available-monthly-custom-reports
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetMonthlyCustomReports
+      unstable:
+        - v1
+      order: 22
+  - name: Get specified daily custom reports
+    url: '#get-specified-daily-custom-reports'
+    identifier: get-specified-daily-custom-reports
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetSpecifiedDailyCustomReports
+      unstable:
+        - v1
+      order: 21
+  - name: Get the list of available daily custom reports
+    url: '#get-the-list-of-available-daily-custom-reports'
+    identifier: get-the-list-of-available-daily-custom-reports
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetDailyCustomReports
+      unstable:
+        - v1
+      order: 20
+  - name: Users
+    url: /api/latest/users/
+    identifier: users
+    generated: true
+  - name: Get a user permissions
+    url: '#get-a-user-permissions'
+    identifier: get-a-user-permissions
+    parent: users
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListUserPermissions
+      unstable: []
+      order: 7
+  - name: Get a user organization
+    url: '#get-a-user-organization'
+    identifier: get-a-user-organization
+    parent: users
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListUserOrganizations
+      unstable: []
+      order: 6
+  - name: Get a user invitation
+    url: '#get-a-user-invitation'
+    identifier: get-a-user-invitation
+    parent: users
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetInvitation
+      unstable: []
+      order: 9
+  - name: Send invitation emails
+    url: '#send-invitation-emails'
+    identifier: send-invitation-emails
+    parent: users
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - SendInvitations
+      unstable: []
+      order: 8
+  - name: Create a service account
+    url: '#create-a-service-account'
+    identifier: create-a-service-account
+    parent: users
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateServiceAccount
+      unstable: []
+      order: 1
+  - name: Update a user
+    url: '#update-a-user'
+    identifier: update-a-user
+    parent: users
+    generated: true
+    params:
+      versions:
+        - v1
+        - v2
+      operationids:
+        - UpdateUser
+      unstable: []
+      order: 4
+  - name: Get user details
+    url: '#get-user-details'
+    identifier: get-user-details
+    parent: users
+    generated: true
+    params:
+      versions:
+        - v1
+        - v2
+      operationids:
+        - GetUser
+      unstable: []
+      order: 3
+  - name: Disable a user
+    url: '#disable-a-user'
+    identifier: disable-a-user
+    parent: users
+    generated: true
+    params:
+      versions:
+        - v1
+        - v2
+      operationids:
+        - DisableUser
+      unstable: []
+      order: 5
+  - name: Create a user
+    url: '#create-a-user'
+    identifier: create-a-user
+    parent: users
+    generated: true
+    params:
+      versions:
+        - v1
+        - v2
+      operationids:
+        - CreateUser
+      unstable: []
+      order: 1
+  - name: List all users
+    url: '#list-all-users'
+    identifier: list-all-users
+    parent: users
+    generated: true
+    params:
+      versions:
+        - v1
+        - v2
+      operationids:
+        - ListUsers
+      unstable: []
+      order: 2
+  - name: Webhooks Integration
+    url: /api/latest/webhooks-integration/
+    identifier: webhooks-integration
+    generated: true
+  - name: Update a webhook
+    url: '#update-a-webhook'
+    identifier: update-a-webhook
+    parent: webhooks-integration
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - UpdateWebhooksIntegration
+      unstable: []
+      order: 3
+  - name: Get a webhook integration
+    url: '#get-a-webhook-integration'
+    identifier: get-a-webhook-integration
+    parent: webhooks-integration
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetWebhooksIntegration
+      unstable: []
+      order: 2
+  - name: Delete a webhook
+    url: '#delete-a-webhook'
+    identifier: delete-a-webhook
+    parent: webhooks-integration
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - DeleteWebhooksIntegration
+      unstable: []
+      order: 4
+  - name: Create a webhooks integration
+    url: '#create-a-webhooks-integration'
+    identifier: create-a-webhooks-integration
+    parent: webhooks-integration
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - CreateWebhooksIntegration
+      unstable: []
+      order: 1
+  - name: Update a custom variable
+    url: '#update-a-custom-variable'
+    identifier: update-a-custom-variable
+    parent: webhooks-integration
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - UpdateWebhooksIntegrationCustomVariable
+      unstable: []
+      order: 7
+  - name: Get a custom variable
+    url: '#get-a-custom-variable'
+    identifier: get-a-custom-variable
+    parent: webhooks-integration
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetWebhooksIntegrationCustomVariable
+      unstable: []
+      order: 6
+  - name: Delete a custom variable
+    url: '#delete-a-custom-variable'
+    identifier: delete-a-custom-variable
+    parent: webhooks-integration
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - DeleteWebhooksIntegrationCustomVariable
+      unstable: []
+      order: 8
+  - name: Create a custom variable
+    url: '#create-a-custom-variable'
+    identifier: create-a-custom-variable
+    parent: webhooks-integration
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - CreateWebhooksIntegrationCustomVariable
+      unstable: []
+      order: 5
+  - name: AuthN Mappings
+    url: /api/latest/authn-mappings/
+    identifier: authn-mappings
+    generated: true
+  - name: Edit an AuthN Mapping
+    url: '#edit-an-authn-mapping'
+    identifier: edit-an-authn-mapping
+    parent: authn-mappings
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateAuthNMapping
+      unstable: []
+      order: 2
+  - name: Get an AuthN Mapping by UUID
+    url: '#get-an-authn-mapping-by-uuid'
+    identifier: get-an-authn-mapping-by-uuid
+    parent: authn-mappings
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetAuthNMapping
+      unstable: []
+      order: 1
+  - name: Delete an AuthN Mapping
+    url: '#delete-an-authn-mapping'
+    identifier: delete-an-authn-mapping
+    parent: authn-mappings
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteAuthNMapping
+      unstable: []
+      order: 3
+  - name: Create an AuthN Mapping
+    url: '#create-an-authn-mapping'
+    identifier: create-an-authn-mapping
+    parent: authn-mappings
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateAuthNMapping
+      unstable: []
+      order: 5
+  - name: List all AuthN Mappings
+    url: '#list-all-authn-mappings'
+    identifier: list-all-authn-mappings
+    parent: authn-mappings
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListAuthNMappings
+      unstable: []
+      order: 4
+  - name: Cloud Workload Security
+    url: /api/latest/cloud-workload-security/
+    identifier: cloud-workload-security
+    generated: true
+  - name: Update a Cloud Workload Security Agent rule
+    url: '#update-a-cloud-workload-security-agent-rule'
+    identifier: update-a-cloud-workload-security-agent-rule
+    parent: cloud-workload-security
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateCloudWorkloadSecurityAgentRule
+      unstable: []
+      order: 5
+  - name: Get a Cloud Workload Security Agent rule
+    url: '#get-a-cloud-workload-security-agent-rule'
+    identifier: get-a-cloud-workload-security-agent-rule
+    parent: cloud-workload-security
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetCloudWorkloadSecurityAgentRule
+      unstable: []
+      order: 2
+  - name: Delete a Cloud Workload Security Agent rule
+    url: '#delete-a-cloud-workload-security-agent-rule'
+    identifier: delete-a-cloud-workload-security-agent-rule
+    parent: cloud-workload-security
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteCloudWorkloadSecurityAgentRule
+      unstable: []
+      order: 6
+  - name: Create a Cloud Workload Security Agent rule
+    url: '#create-a-cloud-workload-security-agent-rule'
+    identifier: create-a-cloud-workload-security-agent-rule
+    parent: cloud-workload-security
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateCloudWorkloadSecurityAgentRule
+      unstable: []
+      order: 4
+  - name: Get all Cloud Workload Security Agent rules
+    url: '#get-all-cloud-workload-security-agent-rules'
+    identifier: get-all-cloud-workload-security-agent-rules
+    parent: cloud-workload-security
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListCloudWorkloadSecurityAgentRules
+      unstable: []
+      order: 3
+  - name: Get the latest Cloud Workload Security policy
+    url: '#get-the-latest-cloud-workload-security-policy'
+    identifier: get-the-latest-cloud-workload-security-policy
+    parent: cloud-workload-security
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DownloadCloudWorkloadPolicyFile
+      unstable: []
+      order: 1
+  - name: Incident Services
+    url: /api/latest/incident-services/
+    identifier: incident-services
+    generated: true
+  - name: Update an existing incident service
+    url: '#update-an-existing-incident-service'
+    identifier: update-an-existing-incident-service
+    parent: incident-services
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateIncidentService
+      unstable:
+        - v2
+      order: 0
+  - name: Get details of an incident service
+    url: '#get-details-of-an-incident-service'
+    identifier: get-details-of-an-incident-service
+    parent: incident-services
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetIncidentService
+      unstable:
+        - v2
+      order: 0
+  - name: Delete an existing incident service
+    url: '#delete-an-existing-incident-service'
+    identifier: delete-an-existing-incident-service
+    parent: incident-services
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteIncidentService
+      unstable:
+        - v2
+      order: 0
+  - name: Create a new incident service
+    url: '#create-a-new-incident-service'
+    identifier: create-a-new-incident-service
+    parent: incident-services
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateIncidentService
+      unstable:
+        - v2
+      order: 0
+  - name: Get a list of all incident services
+    url: '#get-a-list-of-all-incident-services'
+    identifier: get-a-list-of-all-incident-services
+    parent: incident-services
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListIncidentServices
+      unstable:
+        - v2
+      order: 0
+  - name: Incident Teams
+    url: /api/latest/incident-teams/
+    identifier: incident-teams
+    generated: true
+  - name: Update an existing incident team
+    url: '#update-an-existing-incident-team'
+    identifier: update-an-existing-incident-team
+    parent: incident-teams
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateIncidentTeam
+      unstable:
+        - v2
+      order: 0
+  - name: Get details of an incident team
+    url: '#get-details-of-an-incident-team'
+    identifier: get-details-of-an-incident-team
+    parent: incident-teams
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetIncidentTeam
+      unstable:
+        - v2
+      order: 0
+  - name: Delete an existing incident team
+    url: '#delete-an-existing-incident-team'
+    identifier: delete-an-existing-incident-team
+    parent: incident-teams
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteIncidentTeam
+      unstable:
+        - v2
+      order: 0
+  - name: Create a new incident team
+    url: '#create-a-new-incident-team'
+    identifier: create-a-new-incident-team
+    parent: incident-teams
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateIncidentTeam
+      unstable:
+        - v2
+      order: 0
+  - name: Get a list of all incident teams
+    url: '#get-a-list-of-all-incident-teams'
+    identifier: get-a-list-of-all-incident-teams
+    parent: incident-teams
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListIncidentTeams
+      unstable:
+        - v2
+      order: 0
   - name: Incidents
-    url: /api/v2/incidents/
-    identifier: Incidents
-    generated: true
-  - name: Récupérer la liste des incidents
-    parent: Incidents
-    url: "#recuperer-la-liste-des-incidents"
-    generated: true
-  - name: Créer un incident
-    parent: Incidents
-    url: "#creer-un-incident"
-    generated: true
-  - name: Supprimer un incident existant
-    parent: Incidents
-    url: "#supprimer-un-incident-existant"
-    generated: true
-  - name: Récupérer les détails d'un incident
-    parent: Incidents
-    url: "#recuperer-les-details-d-un-incident"
-    generated: true
-  - name: Mettre à jour un incident existant
-    parent: Incidents
-    url: "#mettre-a-jour-un-incident-existant"
-    generated: true
-  - name: Gestion des clés
-    url: /api/v2/key-management/
-    identifier: Gestion des clés
-    generated: true
-  - name: Récupérer toutes les clés d'API
-    parent: Gestion des clés
-    url: "#recuperer-toutes-les-cles-d-api"
-    generated: true
-  - name: Créer une clé d'API
-    parent: Gestion des clés
-    url: "#creer-une-cle-d-api"
-    generated: true
-  - name: Supprimer une clé d'API
-    parent: Gestion des clés
-    url: "#supprimer-une-cle-d-api"
-    generated: true
-  - name: Récupérer une clé d'API
-    parent: Gestion des clés
-    url: "#recuperer-une-cle-d-api"
-    generated: true
-  - name: Modifier une clé d'API
-    parent: Gestion des clés
-    url: "#modifier-une-cle-d-api"
-    generated: true
-  - name: Récupérer toutes les clés d'application
-    parent: Gestion des clés
-    url: "#recuperer-toutes-les-cles-d-application"
-    generated: true
-  - name: Supprimer une clé d'application
-    parent: Gestion des clés
-    url: "#supprimer-une-cle-d-application"
-    generated: true
-  - name: Modifier une clé d'application
-    parent: Gestion des clés
-    url: "#modifier-une-cle-d-application"
-    generated: true
-  - name: Récupérer toutes les clés d'application appartenant à l'utilisateur actuel
-    parent: Gestion des clés
-    url: "#recuperer-toutes-les-cles-d-application-appartenant-a-l-utilisateur-actuel"
-    generated: true
-  - name: Créer une clé d'application pour l'utilisateur actuel
-    parent: Gestion des clés
-    url: "#creer-une-cle-d-application-pour-l-utilisateur-actuel"
-    generated: true
-  - name: Supprimer une clé d'application appartenant à l'utilisateur actuel
-    parent: Gestion des clés
-    url: "#supprimer-une-clé-d-application-appartenant-a-l-utilisateur-actuel"
-    generated: true
-  - name: Récupérer une clé d'application appartenant à l'utilisateur actuel
-    parent: Gestion des clés
-    url: "#recuperer-une-cle-d-application-appartenant-a-l-utilisateur-actuel"
-    generated: true
-  - name: Modifier une clé d'application appartenant à l'utilisateur actuel
-    parent: Gestion des clés
-    url: "#modifier-une-clé-d-application-appartenant-a-l-utilisateur-actuel"
-    generated: true
-  - name: Gestion des clés
-    url: /api/v2/key-management/
-    identifier: Gestion des clés
-    generated: true
-  - name: Récupérer toutes les clés d'API
-    parent: Gestion des clés
-    url: "#recuperer-toutes-les-cles-d-api"
-    generated: true
-  - name: Créer une clé d'API
-    parent: Gestion des clés
-    url: "#creer-une-cle-d-api"
-    generated: true
-  - name: Supprimer une clé d'API
-    parent: Gestion des clés
-    url: "#supprimer-une-cle-d-api"
-    generated: true
-  - name: Récupérer une clé d'API
-    parent: Gestion des clés
-    url: "#recuperer-une-cle-d-api"
-    generated: true
-  - name: Modifier une clé d'API
-    parent: Gestion des clés
-    url: "#modifier-une-cle-d-api"
-    generated: true
-  - name: Récupérer toutes les clés d'application
-    parent: Gestion des clés
-    url: "#recuperer-toutes-les-cles-d-application"
-    generated: true
-  - name: Supprimer une clé d'application
-    parent: Gestion des clés
-    url: "#supprimer-une-cle-d-application"
-    generated: true
-  - name: Modifier une clé d'application
-    parent: Gestion des clés
-    url: "#modifier-une-cle-d-application"
-    generated: true
-  - name: Récupérer toutes les clés d'application appartenant à l'utilisateur actuel
-    parent: Gestion des clés
-    url: "#recuperer-toutes-les-cles-d-application-appartenant-a-l-utilisateur-actuel"
-    generated: true
-  - name: Créer une clé d'application pour l'utilisateur actuel
-    parent: Gestion des clés
-    url: "#creer-une-cle-d-application-pour-l-utilisateur-actuel"
-    generated: true
-  - name: Supprimer une clé d'application appartenant à l'utilisateur actuel
-    parent: Gestion des clés
-    url: "#supprimer-une-clé-d-application-appartenant-a-l-utilisateur-actuel"
-    generated: true
-  - name: Récupérer une clé d'application appartenant à l'utilisateur actuel
-    parent: Gestion des clés
-    url: "#recuperer-une-cle-d-application-appartenant-a-l-utilisateur-actuel"
-    generated: true
-  - name: Modifier une clé d'application appartenant à l'utilisateur actuel
-    parent: Gestion des clés
-    url: "#modifier-une-clé-d-application-appartenant-a-l-utilisateur-actuel"
-    generated: true
-  - name: Logs
-    url: /api/v2/logs/
-    identifier: Logs
-    generated: true
-  - name: Événements agrégés
-    parent: Logs
-    url: "#evenements-agreges"
-    generated: true
-  - name: Récupérer une liste de logs rapide
-    parent: Logs
-    url: "#recuperer-une-liste-de-logs-rapide"
-    generated: true
-  - name: Récupérer une liste de logs
-    parent: Logs
-    url: "#recuperer-une-liste-de-logs"
-    generated: true
-  - name: Archives de logs
-    url: /api/v2/logs-archives/
-    identifier: Archives de logs
-    generated: true
-  - name: Récupérer la séquence des archives
-    parent: Archives de logs
-    url: "#recuperer-l-ordre-des-archives"
-    generated: true
-  - name: Mettre à jour la séquence des archives
-    parent: Archives de logs
-    url: "#mettre-a-jour-l-ordre-des-archives"
-    generated: true
-  - name: Récupérer toutes les archives
-    parent: Archives de logs
-    url: "#recuperer-toutes-les-archives"
-    generated: true
-  - name: Créer une archive
-    parent: Archives de logs
-    url: "#creer-une-archive"
-    generated: true
-  - name: Supprimer une archive
-    parent: Archives de logs
-    url: "#supprimer-une-archive"
-    generated: true
-  - name: Récupérer une archive
-    parent: Archives de logs
-    url: "#recuperer-une-archive"
-    generated: true
-  - name: Mettre à jour une archive
-    parent: Archives de logs
-    url: "#mettre-a-jour-une-archive"
-    generated: true
-  - name: Révoquer le rôle d'une archive
-    parent: Archives de logs
-    url: "#revoquer-le-role-d-une-archive"
-    generated: true
-  - name: Énumérer les rôles de lecture pour une archive
-    parent: Archives de logs
-    url: "#enumerer-les-roles-de-lecture-pour-une-archive"
-    generated: true
-  - name: Accorder un rôle à une archive
-    parent: Archives de logs
-    url: "#accorder-un-role-a-une-archive"
-    generated: true
-  - name: Index de logs
-    url: /api/v2/logs-indexes/
-    identifier: Index de logs
-    generated: true
-  - name: Métriques de logs
-    url: /api/v2/logs-metrics/
-    identifier: Métriques de logs
-    generated: true
-  - name: Récupérer toutes les métriques basées sur des logs
-    parent: Métriques de logs
-    url: "#recuperer-toutes-les-metriques-basees-sur-des-logs"
-    generated: true
-  - name: Créer une métrique basée sur des logs
-    parent: Métriques de logs
-    url: "#creer-une-metrique-basee-sur-des-logs"
-    generated: true
-  - name: Supprimer une métrique basée sur des logs
-    parent: Métriques de logs
-    url: "#supprimer-une-metrique-basee-sur-des-logs"
-    generated: true
-  - name: Récupérer une métrique basée sur des logs
-    parent: Métriques de logs
-    url: "#recuperer-une-metrique-basee-sur-des-logs"
-    generated: true
-  - name: Mettre à jour une métrique basée sur des logs
-    parent: Métriques de logs
-    url: "#mettre-a-jour-une-metrique-basee-sur-des-logs"
-    generated: true
-  - name: Pipelines de logs
-    url: /api/v2/logs-pipelines/
-    identifier: Pipelines de logs
-    generated: true
-  - name: Requêtes de restriction de logs
-    url: /api/v2/logs-restriction-queries/
-    identifier: Requêtes de restriction de logs
-    generated: true
-  - name: Énumérer les requêtes de restriction
-    parent: Requêtes de restriction de logs
-    url: "#enumerer-les-requetes-de-restriction"
-    generated: true
-  - name: Créer une requête de restriction
-    parent: Requêtes de restriction de logs
-    url: "#creer-une-requete-de-restriction"
-    generated: true
-  - name: Récupérer une requête de restriction pour un rôle donné
-    parent: Requêtes de restriction de logs
-    url: "#recuperer-une-requete-de-restriction-pour-un-role-donne"
-    generated: true
-  - name: Récupérer toutes les requêtes de restriction pour un utilisateur donné
-    parent: Requêtes de restriction de logs
-    url: "#recuperer-toutes-les-requetes-de-restriction-pour-un-role-donne"
-    generated: true
-  - name: Supprimer une requête de restriction
-    parent: Requêtes de restriction de logs
-    url: "#supprimer-une-requete-de-restriction"
-    generated: true
-  - name: Récupérer une requête de restriction
-    parent: Requêtes de restriction de logs
-    url: "#recuperer-une-requete-de-restriction"
-    generated: true
-  - name: Mettre à jour une requête de restriction
-    parent: Requêtes de restriction de logs
-    url: "#mettre-a-jour-une-requete-de-restriction"
-    generated: true
-  - name: Révoquer un rôle d'une requête de restriction
-    parent: Requêtes de restriction de logs
-    url: "#revoquer-un-role-d-une-requete-de-restriction"
-    generated: true
-  - name: Énumérer les rôles d'une requête de restriction
-    parent: Requêtes de restriction de logs
-    url: "#enumerer-les-roles-d-une-requete-de-restriction"
-    generated: true
-  - name: Accorder un rôle à une requête de restriction
-    parent: Requêtes de restriction de logs
-    url: "#accorder-un-role-a-une-requete-de-restriction"
-    generated: true
-  - name: Métriques
-    url: /api/v2/metrics/
-    identifier: Métriques
-    generated: true
-  - name: Monitors
-    url: /api/v2/monitors/
-    identifier: Monitors
-    generated: true
-  - name: Organisations
-    url: /api/v2/organizations/
-    identifier: Organisations
-    generated: true
-  - name: Intégration PagerDuty
-    url: /api/v2/pagerduty-integration/
-    identifier: Intégration PagerDuty
-    generated: true
-  - name: Processus
-    url: /api/v2/processes/
-    identifier: Processus
-    generated: true
-  - name: Récupérer tous les processus
-    parent: Processus
-    url: "#recuperer-tous-les-processus"
-    generated: true
-  - name: Rôles
-    url: /api/v2/roles/
-    identifier: Rôles
-    generated: true
-  - name: Énumérer les autorisations
-    parent: Rôles
-    url: "#enumerer-les-autorisations"
-    generated: true
-  - name: Énumérer les rôles
-    parent: Rôles
-    url: "#enumerer-les-roles"
-    generated: true
-  - name: Créer un rôle
-    parent: Rôles
-    url: "#creer-un-role"
-    generated: true
-  - name: Supprimer un rôle
-    parent: Rôles
-    url: "#supprimer-un-role"
-    generated: true
-  - name: Récupérer un rôle
-    parent: Rôles
-    url: "#recuperer-un-role"
-    generated: true
-  - name: Mettre à jour un rôle
-    parent: Rôles
-    url: "#mettre-a-jour-un-role"
-    generated: true
-  - name: Révoquer une autorisation
-    parent: Rôles
-    url: "#revoquer-une-autorisation"
-    generated: true
-  - name: Énumérer les autorisations d'un rôle
-    parent: Rôles
-    url: "#enumerer-les-autorisations-d-un-role"
-    generated: true
-  - name: Accorder une autorisation à un rôle
-    parent: Rôles
-    url: "#accorder-une-autorisation-a-un-role"
-    generated: true
-  - name: Supprimer un utilisateur d'un rôle
-    parent: Rôles
-    url: "#supprimer-un-utilisateur-d-un-role"
-    generated: true
-  - name: Récupérer tous les utilisateurs associés à un rôle
-    parent: Rôles
-    url: "#recuperer-tous-les-utilisateurs-associes-a-un-role"
-    generated: true
-  - name: Ajouter un utilisateur à un rôle
-    parent: Rôles
-    url: "#ajouter-un-utilisateur-a-un-role"
-    generated: true
-  - name: Screenboards
-    url: /api/v2/screenboards/
-    identifier: Screenboards
-    generated: true
+    url: /api/latest/incidents/
+    identifier: incidents
+    generated: true
+  - name: Update an existing incident
+    url: '#update-an-existing-incident'
+    identifier: update-an-existing-incident
+    parent: incidents
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateIncident
+      unstable:
+        - v2
+      order: 0
+  - name: Get the details of an incident
+    url: '#get-the-details-of-an-incident'
+    identifier: get-the-details-of-an-incident
+    parent: incidents
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetIncident
+      unstable:
+        - v2
+      order: 0
+  - name: Delete an existing incident
+    url: '#delete-an-existing-incident'
+    identifier: delete-an-existing-incident
+    parent: incidents
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteIncident
+      unstable:
+        - v2
+      order: 0
+  - name: Create an incident
+    url: '#create-an-incident'
+    identifier: create-an-incident
+    parent: incidents
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateIncident
+      unstable:
+        - v2
+      order: 0
+  - name: Get a list of incidents
+    url: '#get-a-list-of-incidents'
+    identifier: get-a-list-of-incidents
+    parent: incidents
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListIncidents
+      unstable:
+        - v2
+      order: 0
+  - name: Logs Archives
+    url: /api/latest/logs-archives/
+    identifier: logs-archives
+    generated: true
+  - name: Grant role to an archive
+    url: '#grant-role-to-an-archive'
+    identifier: grant-role-to-an-archive
+    parent: logs-archives
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - AddReadRoleToArchive
+      unstable: []
+      order: 7
+  - name: List read roles for an archive
+    url: '#list-read-roles-for-an-archive'
+    identifier: list-read-roles-for-an-archive
+    parent: logs-archives
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListArchiveReadRoles
+      unstable: []
+      order: 6
+  - name: Revoke role from an archive
+    url: '#revoke-role-from-an-archive'
+    identifier: revoke-role-from-an-archive
+    parent: logs-archives
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - RemoveRoleFromArchive
+      unstable: []
+      order: 8
+  - name: Update an archive
+    url: '#update-an-archive'
+    identifier: update-an-archive
+    parent: logs-archives
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateLogsArchive
+      unstable: []
+      order: 4
+  - name: Get an archive
+    url: '#get-an-archive'
+    identifier: get-an-archive
+    parent: logs-archives
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetLogsArchive
+      unstable: []
+      order: 3
+  - name: Delete an archive
+    url: '#delete-an-archive'
+    identifier: delete-an-archive
+    parent: logs-archives
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteLogsArchive
+      unstable: []
+      order: 5
+  - name: Create an archive
+    url: '#create-an-archive'
+    identifier: create-an-archive
+    parent: logs-archives
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateLogsArchive
+      unstable: []
+      order: 2
+  - name: Get all archives
+    url: '#get-all-archives'
+    identifier: get-all-archives
+    parent: logs-archives
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListLogsArchives
+      unstable: []
+      order: 1
+  - name: Update archive order
+    url: '#update-archive-order'
+    identifier: update-archive-order
+    parent: logs-archives
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateLogsArchiveOrder
+      unstable: []
+      order: 10
+  - name: Get archive order
+    url: '#get-archive-order'
+    identifier: get-archive-order
+    parent: logs-archives
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetLogsArchiveOrder
+      unstable: []
+      order: 9
+  - name: Logs Metrics
+    url: /api/latest/logs-metrics/
+    identifier: logs-metrics
+    generated: true
+  - name: Update a log-based metric
+    url: '#update-a-log-based-metric'
+    identifier: update-a-log-based-metric
+    parent: logs-metrics
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateLogsMetric
+      unstable: []
+      order: 4
+  - name: Get a log-based metric
+    url: '#get-a-log-based-metric'
+    identifier: get-a-log-based-metric
+    parent: logs-metrics
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetLogsMetric
+      unstable: []
+      order: 3
+  - name: Delete a log-based metric
+    url: '#delete-a-log-based-metric'
+    identifier: delete-a-log-based-metric
+    parent: logs-metrics
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteLogsMetric
+      unstable: []
+      order: 5
+  - name: Create a log-based metric
+    url: '#create-a-log-based-metric'
+    identifier: create-a-log-based-metric
+    parent: logs-metrics
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateLogsMetric
+      unstable: []
+      order: 2
+  - name: Get all log-based metrics
+    url: '#get-all-log-based-metrics'
+    identifier: get-all-log-based-metrics
+    parent: logs-metrics
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListLogsMetrics
+      unstable: []
+      order: 1
+  - name: Logs Restriction Queries
+    url: /api/latest/logs-restriction-queries/
+    identifier: logs-restriction-queries
+    generated: true
+  - name: Grant role to a restriction query
+    url: '#grant-role-to-a-restriction-query'
+    identifier: grant-role-to-a-restriction-query
+    parent: logs-restriction-queries
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - AddRoleToRestrictionQuery
+      unstable:
+        - v2
+      order: 7
+  - name: List roles for a restriction query
+    url: '#list-roles-for-a-restriction-query'
+    identifier: list-roles-for-a-restriction-query
+    parent: logs-restriction-queries
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListRestrictionQueryRoles
+      unstable:
+        - v2
+      order: 6
+  - name: Revoke role from a restriction query
+    url: '#revoke-role-from-a-restriction-query'
+    identifier: revoke-role-from-a-restriction-query
+    parent: logs-restriction-queries
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - RemoveRoleFromRestrictionQuery
+      unstable:
+        - v2
+      order: 8
+  - name: Update a restriction query
+    url: '#update-a-restriction-query'
+    identifier: update-a-restriction-query
+    parent: logs-restriction-queries
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateRestrictionQuery
+      unstable:
+        - v2
+      order: 4
+  - name: Get a restriction query
+    url: '#get-a-restriction-query'
+    identifier: get-a-restriction-query
+    parent: logs-restriction-queries
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetRestrictionQuery
+      unstable:
+        - v2
+      order: 3
+  - name: Delete a restriction query
+    url: '#delete-a-restriction-query'
+    identifier: delete-a-restriction-query
+    parent: logs-restriction-queries
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteRestrictionQuery
+      unstable:
+        - v2
+      order: 5
+  - name: Get all restriction queries for a given user
+    url: '#get-all-restriction-queries-for-a-given-user'
+    identifier: get-all-restriction-queries-for-a-given-user
+    parent: logs-restriction-queries
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListUserRestrictionQueries
+      unstable:
+        - v2
+      order: 9
+  - name: Get restriction query for a given role
+    url: '#get-restriction-query-for-a-given-role'
+    identifier: get-restriction-query-for-a-given-role
+    parent: logs-restriction-queries
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetRoleRestrictionQuery
+      unstable:
+        - v2
+      order: 10
+  - name: Create a restriction query
+    url: '#create-a-restriction-query'
+    identifier: create-a-restriction-query
+    parent: logs-restriction-queries
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateRestrictionQuery
+      unstable:
+        - v2
+      order: 2
+  - name: List restriction queries
+    url: '#list-restriction-queries'
+    identifier: list-restriction-queries
+    parent: logs-restriction-queries
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListRestrictionQueries
+      unstable:
+        - v2
+      order: 1
+  - name: Processes
+    url: /api/latest/processes/
+    identifier: processes
+    generated: true
+  - name: Get all processes
+    url: '#get-all-processes'
+    identifier: get-all-processes
+    parent: processes
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListProcesses
+      unstable: []
+      order: 1
+  - name: RUM
+    url: /api/latest/rum/
+    identifier: rum
+    generated: true
+  - name: Search RUM events
+    url: '#search-rum-events'
+    identifier: search-rum-events
+    parent: rum
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - SearchRUMEvents
+      unstable: []
+      order: 1
+  - name: Get a list of RUM events
+    url: '#get-a-list-of-rum-events'
+    identifier: get-a-list-of-rum-events
+    parent: rum
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListRUMEvents
+      unstable: []
+      order: 2
+  - name: Roles
+    url: /api/latest/roles/
+    identifier: roles
+    generated: true
+  - name: Add a user to a role
+    url: '#add-a-user-to-a-role'
+    identifier: add-a-user-to-a-role
+    parent: roles
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - AddUserToRole
+      unstable: []
+      order: 10
+  - name: Get all users of a role
+    url: '#get-all-users-of-a-role'
+    identifier: get-all-users-of-a-role
+    parent: roles
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListRoleUsers
+      unstable: []
+      order: 9
+  - name: Remove a user from a role
+    url: '#remove-a-user-from-a-role'
+    identifier: remove-a-user-from-a-role
+    parent: roles
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - RemoveUserFromRole
+      unstable: []
+      order: 11
+  - name: Grant permission to a role
+    url: '#grant-permission-to-a-role'
+    identifier: grant-permission-to-a-role
+    parent: roles
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - AddPermissionToRole
+      unstable: []
+      order: 7
+  - name: List permissions for a role
+    url: '#list-permissions-for-a-role'
+    identifier: list-permissions-for-a-role
+    parent: roles
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListRolePermissions
+      unstable: []
+      order: 6
+  - name: Revoke permission
+    url: '#revoke-permission'
+    identifier: revoke-permission
+    parent: roles
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - RemovePermissionFromRole
+      unstable: []
+      order: 8
+  - name: Create a new role by cloning an existing role
+    url: '#create-a-new-role-by-cloning-an-existing-role'
+    identifier: create-a-new-role-by-cloning-an-existing-role
+    parent: roles
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CloneRole
+      unstable: []
+      order: 12
+  - name: Update a role
+    url: '#update-a-role'
+    identifier: update-a-role
+    parent: roles
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateRole
+      unstable: []
+      order: 4
+  - name: Get a role
+    url: '#get-a-role'
+    identifier: get-a-role
+    parent: roles
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetRole
+      unstable: []
+      order: 3
+  - name: Delete role
+    url: '#delete-role'
+    identifier: delete-role
+    parent: roles
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteRole
+      unstable: []
+      order: 5
+  - name: Create role
+    url: '#create-role'
+    identifier: create-role
+    parent: roles
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateRole
+      unstable: []
+      order: 2
+  - name: List roles
+    url: '#list-roles'
+    identifier: list-roles
+    parent: roles
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListRoles
+      unstable: []
+      order: 1
+  - name: List permissions
+    url: '#list-permissions'
+    identifier: list-permissions
+    parent: roles
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListPermissions
+      unstable: []
+      order: 1
   - name: Security Monitoring
-    url: /api/v2/security-monitoring/
-    identifier: Security Monitoring
+    url: /api/latest/security-monitoring/
+    identifier: security-monitoring
     generated: true
-  - name: Énumérer les règles
-    parent: Security Monitoring
-    url: "#enumerer-les-regles"
+  - name: Get a list of security signals
+    url: '#get-a-list-of-security-signals'
+    identifier: get-a-list-of-security-signals
+    parent: security-monitoring
     generated: true
-  - name: Créer une règle de détection
-    parent: Security Monitoring
-    url: "#creer-une-regle-de-detection"
+    params:
+      versions:
+        - v2
+      operationids:
+        - SearchSecurityMonitoringSignals
+      unstable:
+        - v2
+      order: 6
+  - name: Get a quick list of security signals
+    url: '#get-a-quick-list-of-security-signals'
+    identifier: get-a-quick-list-of-security-signals
+    parent: security-monitoring
     generated: true
-  - name: Supprimer une règle existante
-    parent: Security Monitoring
-    url: "#supprimer-une-regle-existante"
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListSecurityMonitoringSignals
+      unstable:
+        - v2
+      order: 7
+  - name: Update an existing rule
+    url: '#update-an-existing-rule'
+    identifier: update-an-existing-rule
+    parent: security-monitoring
     generated: true
-  - name: Récupérer les détails d'une règle
-    parent: Security Monitoring
-    url: "#recuperer-les-details-d-une-regle"
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateSecurityMonitoringRule
+      unstable: []
+      order: 4
+  - name: Get a rule's details
+    url: '#get-a-rules-details'
+    identifier: get-a-rules-details
+    parent: security-monitoring
     generated: true
-  - name: Mettre à jour une règle existante
-    parent: Security Monitoring
-    url: "#mettre-a-jour-une-regle-existante"
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetSecurityMonitoringRule
+      unstable: []
+      order: 3
+  - name: Delete an existing rule
+    url: '#delete-an-existing-rule'
+    identifier: delete-an-existing-rule
+    parent: security-monitoring
     generated: true
-  - name: Récupérer une liste rapide de signaux de sécurité
-    parent: Security Monitoring
-    url: "#recuperer-une-liste-rapide-de-signaux-de-securite"
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteSecurityMonitoringRule
+      unstable: []
+      order: 5
+  - name: Create a detection rule
+    url: '#create-a-detection-rule'
+    identifier: create-a-detection-rule
+    parent: security-monitoring
     generated: true
-  - name: Récupérer une liste de signaux de sécurité
-    parent: Security Monitoring
-    url: "#recuperer-une-liste-de-signaux-de-securite"
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateSecurityMonitoringRule
+      unstable: []
+      order: 2
+  - name: List rules
+    url: '#list-rules'
+    identifier: list-rules
+    parent: security-monitoring
     generated: true
-  - name: Checks de service
-    url: /api/v2/service-checks/
-    identifier: Checks de service
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListSecurityMonitoringRules
+      unstable: []
+      order: 1
+  - name: Update a security filter
+    url: '#update-a-security-filter'
+    identifier: update-a-security-filter
+    parent: security-monitoring
     generated: true
-  - name: Dépendances de service
-    url: /api/v2/service-dependencies/
-    identifier: Dépendances de service
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateSecurityFilter
+      unstable: []
+      order: 0
+  - name: Get a security filter
+    url: '#get-a-security-filter'
+    identifier: get-a-security-filter
+    parent: security-monitoring
     generated: true
-  - name: Service Level Objectives
-    url: /api/v2/service-level-objectives/
-    identifier: Service Level Objectives
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetSecurityFilter
+      unstable: []
+      order: 0
+  - name: Delete a security filter
+    url: '#delete-a-security-filter'
+    identifier: delete-a-security-filter
+    parent: security-monitoring
     generated: true
-  - name: Intégration Slack
-    url: /api/v2/slack-integration/
-    identifier: Intégration Slack
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteSecurityFilter
+      unstable: []
+      order: 0
+  - name: Create a security filter
+    url: '#create-a-security-filter'
+    identifier: create-a-security-filter
+    parent: security-monitoring
     generated: true
-  - name: Snapshots
-    url: /api/v2/snapshots/
-    identifier: Snapshots
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateSecurityFilter
+      unstable: []
+      order: 0
+  - name: Get all security filters
+    url: '#get-all-security-filters'
+    identifier: get-all-security-filters
+    parent: security-monitoring
     generated: true
-  - name: Synthetic
-    url: /api/v2/synthetics/
-    identifier: Synthetic
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListSecurityFilters
+      unstable: []
+      order: 0
+  - name: Service Accounts
+    url: /api/latest/service-accounts/
+    identifier: service-accounts
     generated: true
-  - name: Tags
-    url: /api/v2/tags/
-    identifier: Tags
+  - name: Edit an application key for this service account
+    url: '#edit-an-application-key-for-this-service-account'
+    identifier: edit-an-application-key-for-this-service-account
+    parent: service-accounts
     generated: true
-  - name: Timeboards
-    url: /api/v2/timeboards/
-    identifier: Timeboards
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateServiceAccountApplicationKey
+      unstable: []
+      order: 2
+  - name: Get one application key for this service account
+    url: '#get-one-application-key-for-this-service-account'
+    identifier: get-one-application-key-for-this-service-account
+    parent: service-accounts
     generated: true
-  - name: Tracing
-    url: /api/v2/tracing/
-    identifier: Tracing
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetServiceAccountApplicationKey
+      unstable: []
+      order: 1
+  - name: Delete an application key for this service account
+    url: '#delete-an-application-key-for-this-service-account'
+    identifier: delete-an-application-key-for-this-service-account
+    parent: service-accounts
     generated: true
-  - name: Mesure de l'utilisation
-    url: /api/v2/usage-metering/
-    identifier: Mesure de l'utilisation
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteServiceAccountApplicationKey
+      unstable: []
+      order: 3
+  - name: Create an application key for this service account
+    url: '#create-an-application-key-for-this-service-account'
+    identifier: create-an-application-key-for-this-service-account
+    parent: service-accounts
     generated: true
-  - name: Utilisateurs
-    url: /api/v2/users/
-    identifier: Utilisateurs
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateServiceAccountApplicationKey
+      unstable: []
+      order: 0
+  - name: List application keys for this service account
+    url: '#list-application-keys-for-this-service-account'
+    identifier: list-application-keys-for-this-service-account
+    parent: service-accounts
     generated: true
-  - name: Envoyer des invitations par e-mail
-    parent: Utilisateurs
-    url: "#envoyer-des-invitations-par-e-mail"
-    generated: true
-  - name: Récupérer une invitation d'utilisateur
-    parent: Utilisateurs
-    url: "#recuperer-une-invitation-d-utilisateur"
-    generated: true
-  - name: Énumérer tous les utilisateurs
-    parent: Utilisateurs
-    url: "#enumerer-tous-les-utilisateurs"
-    generated: true
-  - name: Créer un utilisateur
-    parent: Utilisateurs
-    url: "#creer-un-utilisateur"
-    generated: true
-  - name: Désactiver un utilisateur
-    parent: Utilisateurs
-    url: "#desactiver-un-utilisateur"
-    generated: true
-  - name: Récupérer les détails d'un utilisateur
-    parent: Utilisateurs
-    url: "#recuperer-les-details-d-un-utilisateur"
-    generated: true
-  - name: Mettre à jour un utilisateur
-    parent: Utilisateurs
-    url: "#mettre-a-jour-un-utilisateur"
-    generated: true
-  - name: Récupérer l'organisation d'un utilisateur
-    parent: Utilisateurs
-    url: "#recuperer-l-organisation-d-un-utilisateur"
-    generated: true
-  - name: Récupérer les autorisations d'un utilisateur
-    parent: Utilisateurs
-    url: "#recuperer-les-autorisations-d-un-utilisateur"
-    generated: true
-  - name: Intégration Webhooks
-    url: /api/v2/webhooks-integration/
-    identifier: Intégration Webhooks
-    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListServiceAccountApplicationKeys
+      unstable: []
+      order: 0
