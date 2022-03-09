@@ -109,7 +109,7 @@ For generality, the library exposes a C API. Here is an example of incorporating
 2. In the build system for your project, add the `include` subdirectory of the extracted directory from the tarball to the include directories of your project.
 3. In the build system for your project, add the `lib` subdirectory of the extracted directory from the tarball to the library directories of your project.
 4. Configure your project to use the dynamic (.so) or static (.a) library provided.
-5. In your code, simply start the profiler using the `ddprof_start_profiling()` interface, defined in the _dd_profiling.h_ header provided by the release. The profiler will stop automatically when your program closes. If you wish to stop the profiler manually, use `ddprof_stop_profiling(ms)` with the `ms` parameter indicating the maximum amount of time to allow the profiler to shutdown gracefully, after which it will be closed forcefully (possibly losing the last upload).
+5. In your code, simply start the profiler using the `ddprof_start_profiling()` interface, defined in the _dd_profiling.h_ header provided by the release. The profiler will stop automatically when your program closes. If you wish to stop the profiler manually, use `ddprof_stop_profiling(ms)` with the `ms` parameter indicating the maximum block time of the function in milliseconds.
 6. If using the dynamic library, be aware that it must be in the system's dependency search path at runtime. This is not true for the static library.
 
 ## Configuration
