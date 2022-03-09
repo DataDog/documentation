@@ -101,7 +101,7 @@ If you would rather use a library instead of a standalone executable, the profil
 * The profiling library interfaces check environment variables, but they do not have other means of configuration-passing.
 
 For generality, the library exposes a C API. Here is an example of incorporating the library into a C application.
-1. Download a release of [ddprof][4] with library support (v0.8.0 or later) and extract the tarball.  For instance, you might do something like
+1. Download a release of [ddprof][4] with library support (v0.8.0 or later) and extract the tarball. For instance, you might do something like
    ```shell
    curl -L -O https://github.com/DataDog/ddprof/releases/download/v0.8.0/ddprof-x86_64-linux-gnu.tar.xz
    mkdir /tmp/datadog
@@ -110,8 +110,8 @@ For generality, the library exposes a C API. Here is an example of incorporating
 2. In the build system for your project, add the `include` subdirectory of the extracted directory from the tarball to the include directories of your project.
 3. In the build system for your project, add the `lib` subdirectory of the extracted directory from the tarball to the library directories of your project.
 4. Configure your project to use the dynamic (.so) or static (.a) library provided.
-5. In your code, simply start the profiler using the `ddprof_start_profiling()` interface, defined in the _dd_profiling.h_ header provided by the release.  The profiler will stop automatically when your program closes.  If you wish to stop the profiler manually, use `ddprof_stop_profiling(ms)` with the `ms` parameter indicating the maximum amount of time to allow the profiler to shutdown gracefully, after which it will be closed forcefully (possibly losing the last upload).
-6. If using the dynamic library, be aware that it must be in the system's dependency search path at runtime.  This is not true for the static library.
+5. In your code, simply start the profiler using the `ddprof_start_profiling()` interface, defined in the _dd_profiling.h_ header provided by the release. The profiler will stop automatically when your program closes. If you wish to stop the profiler manually, use `ddprof_stop_profiling(ms)` with the `ms` parameter indicating the maximum amount of time to allow the profiler to shutdown gracefully, after which it will be closed forcefully (possibly losing the last upload).
+6. If using the dynamic library, be aware that it must be in the system's dependency search path at runtime. This is not true for the static library.
 
 The library has access to all profiler options, such as [pidmode](#pidmode) and [globalmode](#globalmode), but only through the respective environment variables.
 
