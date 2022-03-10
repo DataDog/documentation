@@ -28,7 +28,7 @@ Your host automatically trusts the new key (no further action is required) if yo
 - Containerized Agents (Docker/Kubernetes) for any version
 - Windows/MacOS Agents for any version
 
-Additionally, if you are using the DEB package and Agent v7.31.0+, your hosts should have the `datadog-signing-keys` package installed, which automatically adds the new key (no further action is needed).
+Additionally, if you are installing the DEB Agent v7.31.0+ package via `apt` from the `apt.datadoghq.com` repository, your hosts should have the `datadog-signing-keys` package installed, which automatically adds the new key (no further action is needed). If you are installing the DEB Agent package from a different source or you are not using `apt`, you might need to [take an action](#the-datadog-signing-keys-package).
 
 If you're unsure if a host trusts the new signing key, you can [check](#check-if-a-host-trusts-the-new-gpg-key).
 
@@ -93,7 +93,7 @@ $ sudo rpm --import /tmp/DATADOG_RPM_KEY_FD4BF915
 {{< tabs >}}
 {{% tab "Debian/Ubuntu" %}}
 
-If the file `/usr/share/keyrings/datadog-archive-keyring.gpg` exists, the new key is trusted and no further action is needed.
+If the file `/usr/share/keyrings/datadog-archive-keyring.gpg` exists, the new key is trusted and no further action is needed. This file is created either by an [installation method](#install-methods-that-automatically-trust-the-new-gpg-key) or by installing the [datadog-signing-keys](#the-datadog-signing-keys-package) package.
 
 {{% /tab %}}
 {{% tab "RedHat/CentOS/SUSE" %}}
@@ -117,6 +117,24 @@ Alternatively, check if your `datadog.repo` file contains `https://keys.datadogh
 {{% /tab %}}
 {{< /tabs >}}
 
+## The datadog-signing-keys package
+
+<div class="alert alert-info"><strong>Note</strong>: this section only applies to DEB Agent package users.</div>
+
+Since Agent 6.31.0/7.31.0, all Datadog DEB packages have a soft dependency on the `datadog-signing-keys` package. Upon installation, this package:
+
+- Sets up a [debsig-verify policy][13] for Datadog packages.
+- Configures APT keys in the `/usr/share/keyrings/datadog-archive-keyring.gpg` keyring and also via `apt-key` when necessary.
+
+Because the dependency of Agent 6.31.0+/7.31.0+ packages on the `datadog-signing-keys` package is optional, it might not get installed when:
+
+- You manually download the Agent DEB package and install it without having the Datadog repository configured as an APT source.
+- You mirror the Agent DEB package to your own APT repository without also mirroring the `datadog-signing-keys` package.
+
+If one of the two above possibilities is true, we recommend also installing the `datadog-signing-keys` package to ensure preparedness for the upcoming key rotation.
+
+Note that starting with Agent 6.35.0/7.35.0, the DEB packages will have a strong dependency on the `datadog-signing-keys` package and thus it will not be possible to install the Agent DEB packages without the keys package.
+
 ## Impact for Agent v5 users
 
 Agent v5 users on DEB-based systems (Debian/Ubuntu) are also required to trust the new signing key to install or upgrade the Agent after the rotation date. Agent v5 users on RPM-based systems (RedHat/CentOS/SUSE) are not affected by this rotation.
@@ -135,3 +153,4 @@ Agent v5 users on DEB-based systems (Debian/Ubuntu) are also required to trust t
 [10]: https://github.com/DataDog/heroku-buildpack-datadog
 [11]: https://docs.datadoghq.com/integrations/amazon_elasticbeanstalk
 [12]: https://app.datadoghq.com/account/settings#agent
+[13]: https://manpages.ubuntu.com/manpages/jammy/man1/debsig-verify.1.html
