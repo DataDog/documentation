@@ -41,7 +41,9 @@ Click the CI provider link (`gitlab-ci gitlab.pipeline > documentation` in the f
 
 ### Explore connections to logs
 
-If job log collection is enabled for the pipeline provider, you'll also be able to find related log events in the Logs tab of the pipeline execution view. Note that job log collection is currently only supported for [Jenkins][2].
+If job log collection is supported and enabled for the CI provider, related log events can be found in the _Logs_ tab of the pipeline execution view.
+
+**Note**: job log collection is currently only supported for [Jenkins][2].
 
 ## Pipeline executions details and traces
 
