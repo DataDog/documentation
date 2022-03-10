@@ -23,7 +23,7 @@ further_reading:
 
 Some parts of your systems may not be available to robots without the appropriate identification. You may also want to avoid collecting analytics from Datadog robots. 
 
-You can use the following methods to detect Datadog's Synthetic Monitoring robots.
+Try a combination of the following methods across your Synthetic test configurations to detect Datadog's Synthetic Monitoring robots.
 
 ## IP addresses
 
@@ -97,7 +97,7 @@ if (window._DATADOG_SYNTHETICS_BROWSER === undefined) {
 }
 ```
 
-If you use the browser variable to identify Synthetic bots on Firefox and Internet Explorer 11, Datadog cannot guarantee that the browser variable is set before your code executes. To avoid this issue, use Edge or Google Chrome.
+If you use the browser variable to identify Synthetic bots on Firefox and Internet Explorer 11, Datadog cannot guarantee that the browser variable is set before your code executes. 
 
 ## Cookies
 
