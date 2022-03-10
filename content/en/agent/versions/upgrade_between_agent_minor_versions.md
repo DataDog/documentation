@@ -32,7 +32,7 @@ Upgrading to the latest Agent 7 minor version:
 {{% /tab %}}
 {{% tab "Windows" %}}
 
-Download and install the desired installation package.
+Download and install the specific version's installation package.
 
 URL to download a specific Agent 6 minor version:
 
