@@ -20,7 +20,7 @@ further_reading:
 * HTML 要素を、X-path あるいは CSS クラス / ID（例: `div`、`h1`、`.hero-body`）を使用して選択することができます。
 * 要素を定義した後、**Test** をクリックすると、記録中の要素が右の画面でハイライト表示されます。
 
-{{< img src="synthetics/browser_tests/advanced_options/css.gif" alt="要素のハイライト表示">}}
+{{< img src="synthetics/browser_tests/advanced_options/css.mp4" alt="テストハイライト要素" video=true >}}
 
 デフォルトで、**If user specified locator fails, fail test** のチェックボックスはオンになっています。つまり、定義したロケーターが失敗した場合、テストは失敗と見なされます。
 
