@@ -15,15 +15,15 @@ However, there may be a case where you wish to continue using Agent v6 while upd
 
 By default, the Agent v6 uses the Python 2 runtime. Below are instructions for how to configure Agent v6 to use the Python 3 runtime:
 
-- Host Agent
-- Container Agent
-  - Helm
-  - Datadog Operator
-  - DaemonSet
-- Deployment tools
-  - Chef
-  - Puppet
-  - Ansible
+- [Host Agent](#host-agent)
+- [Container Agent](#container-agent)
+  - [Helm](?tab=helm#container-agent)
+  - [Datadog Operator](?tab=datadogoperator#container-agent)
+  - [DaemonSet](?tab=daemonset#container-agent)
+- [Deployment tools](#deployment-tools)
+  - [Chef](?tab=chef#deployment-tools)
+  - [Puppet](?tab=puppet#deployment-tools)
+  - [Ansible](?tab=ansible#deployment-tools)
 
 This configuration is not supported for the Azure VM Extension.
 
