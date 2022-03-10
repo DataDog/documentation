@@ -366,7 +366,7 @@ A JSON encoded string to configure the sampling rate. Examples: Set the sample r
 `DD_TRACE_SPANS_LIMIT`
 : **INI**: `datadog.trace.spans_limit`
 **Default**: `null`<br>
-The maximum number of spans that are generated within one trace. If this amount of span is reached, then no more spans are generated. If this limit is increased, then the amount of memory that is occupied by a pending trace will increase and might reach the PHP maximum amount of allowed memory. The maximum amount of allowed memory can be increased by the PHP INI system setting `memory_limit`.
+The maximum number of spans that are generated within one trace. If the maximum number of spans is reached, then spans are no longer generated. If the limit is increased, then the amount of memory that is used by a pending trace will increase and might reach the PHP maximum amount of allowed memory. The maximum amount of allowed memory can be increased with the PHP INI system setting `memory_limit`.
 
 `DD_TRACE_URL_AS_RESOURCE_NAMES_ENABLED`
 : **INI**: `datadog.trace.url_as_resource_names_enabled`<br>
