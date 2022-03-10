@@ -97,25 +97,8 @@ tags:
 integrations: 
   pagerduty: https://www.pagerduty.com/service-directory/shopping-cart
 extensions:
-  datadoghq.com/sdp: 
-    # used by SDP UI to display the team name
-    workday_team: Valid HR System Team name
-    # used by SDP UI. 
-    # If all resources are properly tagged (service:service-name), then leave empty.
-    # For resources that are tagged inconsistently, specify which tags are being used
-    datadog_tags:
-      logs:
-        - tags://special:tag
-      monitors:
-        - tags://other:tag
-      slos:
-        - tags:/another:tag
-    # Example: Lists more than one PagerDuty service/escalation policy
-    pagerduty:
-    - name: Lo-pri service
-      uri: http://pagerduty/...
-    - name: Escalation policy
-      uri: http://pagerduty/...
+  your_org/your_domain: 
+    customField: customValue
 {{< /code-block >}}
 
 ### Response
