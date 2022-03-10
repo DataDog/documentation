@@ -1265,18 +1265,6 @@ main:
     parent: serverless
     identifier: serverless_troubleshooting
     weight: 7
-  - name: Insights
-    url: serverless/troubleshooting/insights
-    parent: serverless_troubleshooting
-    weight: 701
-  - name: Serverless Tagging
-    url: serverless/troubleshooting/serverless_tagging
-    parent: serverless_troubleshooting
-    weight: 702
-  - name: Visualizing Managed Resources
-    url: serverless/troubleshooting/connect_invoking_resources
-    parent: serverless_troubleshooting
-    weight: 703
   - name: Azure App Service Extension
     url: serverless/azure_app_services
     parent: serverless
