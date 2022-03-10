@@ -6588,6 +6588,34 @@ api:
         - CreateWebhooksIntegrationCustomVariable
       unstable: []
       order: 5
+  - name: Audit
+    url: /api/latest/audit/
+    identifier: audit
+    generated: true
+  - name: Search Audit Logs events
+    url: '#search-audit-logs-events'
+    identifier: search-audit-logs-events
+    parent: audit
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - SearchAuditLogs
+      unstable: []
+      order: 1
+  - name: Get a list of Audit Logs events
+    url: '#get-a-list-of-audit-logs-events'
+    identifier: get-a-list-of-audit-logs-events
+    parent: audit
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListAuditLogs
+      unstable: []
+      order: 2
   - name: AuthN Mappings
     url: /api/latest/authn-mappings/
     identifier: authn-mappings
