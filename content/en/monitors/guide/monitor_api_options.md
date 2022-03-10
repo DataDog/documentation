@@ -22,15 +22,15 @@ kind: guide
 - **`renotify_statuses`** the states from which a monitor re-notifies. It can only be set if `renotify_interval` is set. Default: **null**. Without `renotify_states` set, it renotifies from `Alert` and `No Data` states.
 - **`renotify_occurrences`** the number of times a monitor re-notifies. It can only be set if `renotify_interval` is set. Default: **null**, it renotifies without a limit.
 - **`escalation_message`** a message to include with a re-notification. Supports the '@username' notification that is allowed elsewhere. Not applicable if `renotify_interval` is `null`. Default: **null**.
-- **`notify_audit`** a boolean indicating whether tagged users is notified on changes to this monitor. Default: **False**
-- **`include_tags`** a boolean indicating whether notifications from this monitor automatically inserts its triggering tags into the title. Default: **True**. Examples:
+- **`notify_audit`** a Boolean indicating whether tagged users are notified on changes to this monitor. Default: **False**
+- **`include_tags`** a Boolean indicating whether notifications from this monitor automatically inserts its triggering tags into the title. Default: **True**. Examples:
 
   - `True`: `[Triggered on {host:h1}] Monitor Title`
   - `False`: `[Triggered] Monitor Title`
 
 ### Permissions options
 
-- **`locked`** a boolean indicating whether changes to this monitor should be restricted to the creator and admins. Default: **False**. **Deprecated: Use `restricted_roles` instead.**
+- **`locked`** a boolean indicating whether changes to this monitor should be restricted to the creator or users with the Org Management (`org_management`) permission. Default: **False**. **Deprecated: Use `restricted_roles` instead.**
 - **`restricted_roles`** an array listing the UUIDs of the roles allowed to edit the monitor. Monitor editing includes updates to the monitor configuration, deleting the monitor, and muting of the monitor for any amount of time. Role UUIDs can be pulled from the [Roles API][1]. `restricted_roles` is the successor to `locked`. 
 
 **Note:** Do not set both the `locked` and `restricted_roles` parameters on the same monitor. If both are set, the more restrictive parameter applies. Any role set in `restricted_roles` is considered more restrictive than `locked:true`.
