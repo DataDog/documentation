@@ -52,7 +52,7 @@ POST https://api.datadoghq.com/api/unstable/services/definition
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`"key:value"`&nbsp;or&nbsp;`"value"` | string           | custom tags |
 | integrations                | object          | Configuration for supported integrations. |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pagerduty&nbsp;[_required_] | URL&nbsp;string          | `https://www.pagerduty.com/service-directory/{service-name}` If you have integrated PagerDuty within Datadog, the URL is used to retrieve PagerDuty data about the service, such as who is currently on call for the service, and active pagers. |
-| extensions                  | object          | Custom metadata. The service definition parser treats everything under extensions as a text blob. For example at Datadog, we use this extensions field to add information that enhances other services. |
+| extensions                  | object          | Custom metadata. The service definition parser treats everything under extensions as a text blob.  |
 
 
 #### Example
