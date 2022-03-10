@@ -169,7 +169,8 @@ Learn more about [custom metrics][10].
 1. If you haven't already, set up the [Microsoft Azure integration][1] first.
 
 2. The extension supports Azure App Service Web Apps. Function Apps are not supported.
-    <div class="alert alert-warning">Interested in support for additional resource types or runtimes? <a href="https://forms.gle/n4nQcxEyLqDBMCDA7">Sign up</a> to be notified when a beta becomes available.</div>
+    <div class="alert alert-warning">Support for Java Web Apps is in beta for extension v2.4+. There are no billing implications for tracing Java Web Apps during this period.<br/><br/>
+    Interested in support for other App Service resource types or runtimes? <a href="https://forms.gle/n4nQcxEyLqDBMCDA7">Sign up</a> to be notified when a beta becomes available.</div>
 
 3.  The Datadog Java APM extension supports all Java runtimes on Windows OS. Azure App Service does not support extensions on Linux. For more details about automatically instrumented libraries, see the [Tracer documentation][2].
 
