@@ -3118,6 +3118,534 @@
           "APPLICATION_KEYS"
         ]
       },
+      "AuditLogsEvent": {
+        "description": "Object description of an Audit Logs event after it is processed and stored by Datadog.",
+        "properties": {
+          "attributes": {
+            "description": "JSON object containing all event attributes and their associated values.",
+            "properties": {
+              "attributes": {
+                "additionalProperties": {},
+                "description": "JSON object of attributes from Audit Logs events.",
+                "example": {
+                  "customAttribute": 123,
+                  "duration": 2345
+                },
+                "type": "object"
+              },
+              "service": {
+                "description": "Name of the application or service generating Audit Logs events.\nThis name is used to correlate Audit Logs to APM, so make sure you specify the same\nvalue when you use both products.",
+                "example": "web-app",
+                "type": "string"
+              },
+              "tags": {
+                "description": "Array of tags associated with your event.",
+                "example": [
+                  "team:A"
+                ],
+                "items": {
+                  "description": "Tag associated with your event.",
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "timestamp": {
+                "description": "Timestamp of your event.",
+                "example": "2019-01-02T09:42:36.320Z",
+                "format": "date-time",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "id": {
+            "description": "Unique ID of the event.",
+            "example": "AAAAAWgN8Xwgr1vKDQAAAABBV2dOOFh3ZzZobm1mWXJFYTR0OA",
+            "type": "string"
+          },
+          "type": {
+            "default": "audit",
+            "description": "Type of the event.",
+            "enum": [
+              "audit"
+            ],
+            "example": "audit",
+            "type": "string",
+            "x-enum-varnames": [
+              "Audit"
+            ]
+          }
+        },
+        "type": "object"
+      },
+      "AuditLogsEventAttributes": {
+        "description": "JSON object containing all event attributes and their associated values.",
+        "properties": {
+          "attributes": {
+            "additionalProperties": {},
+            "description": "JSON object of attributes from Audit Logs events.",
+            "example": {
+              "customAttribute": 123,
+              "duration": 2345
+            },
+            "type": "object"
+          },
+          "service": {
+            "description": "Name of the application or service generating Audit Logs events.\nThis name is used to correlate Audit Logs to APM, so make sure you specify the same\nvalue when you use both products.",
+            "example": "web-app",
+            "type": "string"
+          },
+          "tags": {
+            "description": "Array of tags associated with your event.",
+            "example": [
+              "team:A"
+            ],
+            "items": {
+              "description": "Tag associated with your event.",
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "timestamp": {
+            "description": "Timestamp of your event.",
+            "example": "2019-01-02T09:42:36.320Z",
+            "format": "date-time",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "AuditLogsEventType": {
+        "default": "audit",
+        "description": "Type of the event.",
+        "enum": [
+          "audit"
+        ],
+        "example": "audit",
+        "type": "string",
+        "x-enum-varnames": [
+          "Audit"
+        ]
+      },
+      "AuditLogsEventsResponse": {
+        "description": "Response object with all events matching the request and pagination information.",
+        "properties": {
+          "data": {
+            "description": "Array of events matching the request.",
+            "items": {
+              "description": "Object description of an Audit Logs event after it is processed and stored by Datadog.",
+              "properties": {
+                "attributes": {
+                  "description": "JSON object containing all event attributes and their associated values.",
+                  "properties": {
+                    "attributes": {
+                      "additionalProperties": {},
+                      "description": "JSON object of attributes from Audit Logs events.",
+                      "example": {
+                        "customAttribute": 123,
+                        "duration": 2345
+                      },
+                      "type": "object"
+                    },
+                    "service": {
+                      "description": "Name of the application or service generating Audit Logs events.\nThis name is used to correlate Audit Logs to APM, so make sure you specify the same\nvalue when you use both products.",
+                      "example": "web-app",
+                      "type": "string"
+                    },
+                    "tags": {
+                      "description": "Array of tags associated with your event.",
+                      "example": [
+                        "team:A"
+                      ],
+                      "items": {
+                        "description": "Tag associated with your event.",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    },
+                    "timestamp": {
+                      "description": "Timestamp of your event.",
+                      "example": "2019-01-02T09:42:36.320Z",
+                      "format": "date-time",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                },
+                "id": {
+                  "description": "Unique ID of the event.",
+                  "example": "AAAAAWgN8Xwgr1vKDQAAAABBV2dOOFh3ZzZobm1mWXJFYTR0OA",
+                  "type": "string"
+                },
+                "type": {
+                  "default": "audit",
+                  "description": "Type of the event.",
+                  "enum": [
+                    "audit"
+                  ],
+                  "example": "audit",
+                  "type": "string",
+                  "x-enum-varnames": [
+                    "Audit"
+                  ]
+                }
+              },
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "links": {
+            "description": "Links attributes.",
+            "properties": {
+              "next": {
+                "description": "Link for the next set of results. Note that the request can also be made using the\nPOST endpoint.",
+                "example": "https://app.datadoghq.com/api/v2/audit/event?filter[query]=foo&page[cursor]=eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "meta": {
+            "description": "The metadata associated with a request.",
+            "properties": {
+              "elapsed": {
+                "description": "Time elapsed in milliseconds.",
+                "example": 132,
+                "format": "int64",
+                "type": "integer"
+              },
+              "page": {
+                "description": "Paging attributes.",
+                "properties": {
+                  "after": {
+                    "description": "The cursor to use to get the next results, if any. To make the next request, use the same parameters with the addition of `page[cursor]`.",
+                    "example": "eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "request_id": {
+                "description": "The identifier of the request.",
+                "example": "MWlFUjVaWGZTTTZPYzM0VXp1OXU2d3xLSVpEMjZKQ0VKUTI0dEYtM3RSOFVR",
+                "type": "string"
+              },
+              "status": {
+                "description": "The status of the response.",
+                "enum": [
+                  "done",
+                  "timeout"
+                ],
+                "example": "done",
+                "type": "string",
+                "x-enum-varnames": [
+                  "DONE",
+                  "TIMEOUT"
+                ]
+              },
+              "warnings": {
+                "description": "A list of warnings (non-fatal errors) encountered. Partial results may return if\nwarnings are present in the response.",
+                "items": {
+                  "description": "Warning message indicating something that went wrong with the query.",
+                  "properties": {
+                    "code": {
+                      "description": "Unique code for this type of warning.",
+                      "example": "unknown_index",
+                      "type": "string"
+                    },
+                    "detail": {
+                      "description": "Detailed explanation of this specific warning.",
+                      "example": "indexes: foo, bar",
+                      "type": "string"
+                    },
+                    "title": {
+                      "description": "Short human-readable summary of the warning.",
+                      "example": "One or several indexes are missing or invalid, results hold data from the other indexes",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": "array"
+              }
+            },
+            "type": "object"
+          }
+        },
+        "type": "object"
+      },
+      "AuditLogsQueryFilter": {
+        "description": "Search and filter query settings.",
+        "properties": {
+          "from": {
+            "default": "now-15m",
+            "description": "Minimum time for the requested events. Supports date, math, and regular timestamps (in milliseconds).",
+            "example": "now-15m",
+            "type": "string"
+          },
+          "query": {
+            "default": "*",
+            "description": "Search query following the Audit Logs search syntax.",
+            "example": "@type:session AND @session.type:user",
+            "type": "string"
+          },
+          "to": {
+            "default": "now",
+            "description": "Maximum time for the requested events. Supports date, math, and regular timestamps (in milliseconds).",
+            "example": "now",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "AuditLogsQueryOptions": {
+        "description": "Global query options that are used during the query.\nNote: Specify either timezone or time offset, not both. Otherwise, the query fails.",
+        "properties": {
+          "time_offset": {
+            "description": "Time offset (in seconds) to apply to the query.",
+            "format": "int64",
+            "type": "integer"
+          },
+          "timezone": {
+            "default": "UTC",
+            "description": "Timezone code. Can be specified as an offset, for example: \"UTC+03:00\".",
+            "example": "GMT",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "AuditLogsQueryPageOptions": {
+        "description": "Paging attributes for listing events.",
+        "properties": {
+          "cursor": {
+            "description": "List following results with a cursor provided in the previous query.",
+            "example": "eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==",
+            "type": "string"
+          },
+          "limit": {
+            "default": 10,
+            "description": "Maximum number of events in the response.",
+            "example": 25,
+            "format": "int32",
+            "maximum": 1000,
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "AuditLogsResponseLinks": {
+        "description": "Links attributes.",
+        "properties": {
+          "next": {
+            "description": "Link for the next set of results. Note that the request can also be made using the\nPOST endpoint.",
+            "example": "https://app.datadoghq.com/api/v2/audit/event?filter[query]=foo&page[cursor]=eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "AuditLogsResponseMetadata": {
+        "description": "The metadata associated with a request.",
+        "properties": {
+          "elapsed": {
+            "description": "Time elapsed in milliseconds.",
+            "example": 132,
+            "format": "int64",
+            "type": "integer"
+          },
+          "page": {
+            "description": "Paging attributes.",
+            "properties": {
+              "after": {
+                "description": "The cursor to use to get the next results, if any. To make the next request, use the same parameters with the addition of `page[cursor]`.",
+                "example": "eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "request_id": {
+            "description": "The identifier of the request.",
+            "example": "MWlFUjVaWGZTTTZPYzM0VXp1OXU2d3xLSVpEMjZKQ0VKUTI0dEYtM3RSOFVR",
+            "type": "string"
+          },
+          "status": {
+            "description": "The status of the response.",
+            "enum": [
+              "done",
+              "timeout"
+            ],
+            "example": "done",
+            "type": "string",
+            "x-enum-varnames": [
+              "DONE",
+              "TIMEOUT"
+            ]
+          },
+          "warnings": {
+            "description": "A list of warnings (non-fatal errors) encountered. Partial results may return if\nwarnings are present in the response.",
+            "items": {
+              "description": "Warning message indicating something that went wrong with the query.",
+              "properties": {
+                "code": {
+                  "description": "Unique code for this type of warning.",
+                  "example": "unknown_index",
+                  "type": "string"
+                },
+                "detail": {
+                  "description": "Detailed explanation of this specific warning.",
+                  "example": "indexes: foo, bar",
+                  "type": "string"
+                },
+                "title": {
+                  "description": "Short human-readable summary of the warning.",
+                  "example": "One or several indexes are missing or invalid, results hold data from the other indexes",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "AuditLogsResponsePage": {
+        "description": "Paging attributes.",
+        "properties": {
+          "after": {
+            "description": "The cursor to use to get the next results, if any. To make the next request, use the same parameters with the addition of `page[cursor]`.",
+            "example": "eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "AuditLogsResponseStatus": {
+        "description": "The status of the response.",
+        "enum": [
+          "done",
+          "timeout"
+        ],
+        "example": "done",
+        "type": "string",
+        "x-enum-varnames": [
+          "DONE",
+          "TIMEOUT"
+        ]
+      },
+      "AuditLogsSearchEventsRequest": {
+        "description": "The request for a Audit Logs events list.",
+        "properties": {
+          "filter": {
+            "description": "Search and filter query settings.",
+            "properties": {
+              "from": {
+                "default": "now-15m",
+                "description": "Minimum time for the requested events. Supports date, math, and regular timestamps (in milliseconds).",
+                "example": "now-15m",
+                "type": "string"
+              },
+              "query": {
+                "default": "*",
+                "description": "Search query following the Audit Logs search syntax.",
+                "example": "@type:session AND @session.type:user",
+                "type": "string"
+              },
+              "to": {
+                "default": "now",
+                "description": "Maximum time for the requested events. Supports date, math, and regular timestamps (in milliseconds).",
+                "example": "now",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "options": {
+            "description": "Global query options that are used during the query.\nNote: Specify either timezone or time offset, not both. Otherwise, the query fails.",
+            "properties": {
+              "time_offset": {
+                "description": "Time offset (in seconds) to apply to the query.",
+                "format": "int64",
+                "type": "integer"
+              },
+              "timezone": {
+                "default": "UTC",
+                "description": "Timezone code. Can be specified as an offset, for example: \"UTC+03:00\".",
+                "example": "GMT",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "page": {
+            "description": "Paging attributes for listing events.",
+            "properties": {
+              "cursor": {
+                "description": "List following results with a cursor provided in the previous query.",
+                "example": "eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==",
+                "type": "string"
+              },
+              "limit": {
+                "default": 10,
+                "description": "Maximum number of events in the response.",
+                "example": 25,
+                "format": "int32",
+                "maximum": 1000,
+                "type": "integer"
+              }
+            },
+            "type": "object"
+          },
+          "sort": {
+            "description": "Sort parameters when querying events.",
+            "enum": [
+              "timestamp",
+              "-timestamp"
+            ],
+            "type": "string",
+            "x-enum-varnames": [
+              "TIMESTAMP_ASCENDING",
+              "TIMESTAMP_DESCENDING"
+            ]
+          }
+        },
+        "type": "object"
+      },
+      "AuditLogsSort": {
+        "description": "Sort parameters when querying events.",
+        "enum": [
+          "timestamp",
+          "-timestamp"
+        ],
+        "type": "string",
+        "x-enum-varnames": [
+          "TIMESTAMP_ASCENDING",
+          "TIMESTAMP_DESCENDING"
+        ]
+      },
+      "AuditLogsWarning": {
+        "description": "Warning message indicating something that went wrong with the query.",
+        "properties": {
+          "code": {
+            "description": "Unique code for this type of warning.",
+            "example": "unknown_index",
+            "type": "string"
+          },
+          "detail": {
+            "description": "Detailed explanation of this specific warning.",
+            "example": "indexes: foo, bar",
+            "type": "string"
+          },
+          "title": {
+            "description": "Short human-readable summary of the warning.",
+            "example": "One or several indexes are missing or invalid, results hold data from the other indexes",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
       "AuthNMapping": {
         "description": "The AuthN Mapping object returned by API.",
         "properties": {
@@ -38357,6 +38885,657 @@
         "x-codegen-request-body-name": "body",
         "x-undo": {
           "type": "idempotent"
+        }
+      }
+    },
+    "/api/v2/audit/events": {
+      "get": {
+        "description": "List endpoint returns events that match a Audit Logs search query.\n[Results are paginated][1].\n\nUse this endpoint to see your latest Audit Logs events.\n\n[1]: https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination",
+        "operationId": "ListAuditLogs",
+        "parameters": [
+          {
+            "description": "Search query following Audit Logs syntax.",
+            "example": "@type:session @application_id:xxxx",
+            "in": "query",
+            "name": "filter[query]",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Minimum timestamp for requested events.",
+            "example": "2019-01-02T09:42:36.320Z",
+            "in": "query",
+            "name": "filter[from]",
+            "required": false,
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Maximum timestamp for requested events.",
+            "example": "2019-01-03T09:42:36.320Z",
+            "in": "query",
+            "name": "filter[to]",
+            "required": false,
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Order of events in results.",
+            "in": "query",
+            "name": "sort",
+            "required": false,
+            "schema": {
+              "description": "Sort parameters when querying events.",
+              "enum": [
+                "timestamp",
+                "-timestamp"
+              ],
+              "type": "string",
+              "x-enum-varnames": [
+                "TIMESTAMP_ASCENDING",
+                "TIMESTAMP_DESCENDING"
+              ]
+            }
+          },
+          {
+            "description": "List following results with a cursor provided in the previous query.",
+            "example": "eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==",
+            "in": "query",
+            "name": "page[cursor]",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Maximum number of events in the response.",
+            "example": 25,
+            "in": "query",
+            "name": "page[limit]",
+            "required": false,
+            "schema": {
+              "default": 10,
+              "format": "int32",
+              "maximum": 1000,
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Response object with all events matching the request and pagination information.",
+                  "properties": {
+                    "data": {
+                      "description": "Array of events matching the request.",
+                      "items": {
+                        "description": "Object description of an Audit Logs event after it is processed and stored by Datadog.",
+                        "properties": {
+                          "attributes": {
+                            "description": "JSON object containing all event attributes and their associated values.",
+                            "properties": {
+                              "attributes": {
+                                "additionalProperties": {},
+                                "description": "JSON object of attributes from Audit Logs events.",
+                                "example": {
+                                  "customAttribute": 123,
+                                  "duration": 2345
+                                },
+                                "type": "object"
+                              },
+                              "service": {
+                                "description": "Name of the application or service generating Audit Logs events.\nThis name is used to correlate Audit Logs to APM, so make sure you specify the same\nvalue when you use both products.",
+                                "example": "web-app",
+                                "type": "string"
+                              },
+                              "tags": {
+                                "description": "Array of tags associated with your event.",
+                                "example": [
+                                  "team:A"
+                                ],
+                                "items": {
+                                  "description": "Tag associated with your event.",
+                                  "type": "string"
+                                },
+                                "type": "array"
+                              },
+                              "timestamp": {
+                                "description": "Timestamp of your event.",
+                                "example": "2019-01-02T09:42:36.320Z",
+                                "format": "date-time",
+                                "type": "string"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "id": {
+                            "description": "Unique ID of the event.",
+                            "example": "AAAAAWgN8Xwgr1vKDQAAAABBV2dOOFh3ZzZobm1mWXJFYTR0OA",
+                            "type": "string"
+                          },
+                          "type": {
+                            "default": "audit",
+                            "description": "Type of the event.",
+                            "enum": [
+                              "audit"
+                            ],
+                            "example": "audit",
+                            "type": "string",
+                            "x-enum-varnames": [
+                              "Audit"
+                            ]
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    },
+                    "links": {
+                      "description": "Links attributes.",
+                      "properties": {
+                        "next": {
+                          "description": "Link for the next set of results. Note that the request can also be made using the\nPOST endpoint.",
+                          "example": "https://app.datadoghq.com/api/v2/audit/event?filter[query]=foo&page[cursor]=eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "meta": {
+                      "description": "The metadata associated with a request.",
+                      "properties": {
+                        "elapsed": {
+                          "description": "Time elapsed in milliseconds.",
+                          "example": 132,
+                          "format": "int64",
+                          "type": "integer"
+                        },
+                        "page": {
+                          "description": "Paging attributes.",
+                          "properties": {
+                            "after": {
+                              "description": "The cursor to use to get the next results, if any. To make the next request, use the same parameters with the addition of `page[cursor]`.",
+                              "example": "eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==",
+                              "type": "string"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "request_id": {
+                          "description": "The identifier of the request.",
+                          "example": "MWlFUjVaWGZTTTZPYzM0VXp1OXU2d3xLSVpEMjZKQ0VKUTI0dEYtM3RSOFVR",
+                          "type": "string"
+                        },
+                        "status": {
+                          "description": "The status of the response.",
+                          "enum": [
+                            "done",
+                            "timeout"
+                          ],
+                          "example": "done",
+                          "type": "string",
+                          "x-enum-varnames": [
+                            "DONE",
+                            "TIMEOUT"
+                          ]
+                        },
+                        "warnings": {
+                          "description": "A list of warnings (non-fatal errors) encountered. Partial results may return if\nwarnings are present in the response.",
+                          "items": {
+                            "description": "Warning message indicating something that went wrong with the query.",
+                            "properties": {
+                              "code": {
+                                "description": "Unique code for this type of warning.",
+                                "example": "unknown_index",
+                                "type": "string"
+                              },
+                              "detail": {
+                                "description": "Detailed explanation of this specific warning.",
+                                "example": "indexes: foo, bar",
+                                "type": "string"
+                              },
+                              "title": {
+                                "description": "Short human-readable summary of the warning.",
+                                "example": "One or several indexes are missing or invalid, results hold data from the other indexes",
+                                "type": "string"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "type": "array"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Not Authorized"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
+          }
+        },
+        "summary": "Get a list of Audit Logs events",
+        "tags": [
+          "Audit"
+        ],
+        "x-menu-order": 2,
+        "x-undo": {
+          "type": "safe"
+        }
+      }
+    },
+    "/api/v2/audit/events/search": {
+      "post": {
+        "description": "List endpoint returns Audit Logs events that match an Audit search query.\n[Results are paginated][1].\n\nUse this endpoint to build complex Audit Logs events filtering and search.\n\n[1]: https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination",
+        "operationId": "SearchAuditLogs",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "The request for a Audit Logs events list.",
+                "properties": {
+                  "filter": {
+                    "description": "Search and filter query settings.",
+                    "properties": {
+                      "from": {
+                        "default": "now-15m",
+                        "description": "Minimum time for the requested events. Supports date, math, and regular timestamps (in milliseconds).",
+                        "example": "now-15m",
+                        "type": "string"
+                      },
+                      "query": {
+                        "default": "*",
+                        "description": "Search query following the Audit Logs search syntax.",
+                        "example": "@type:session AND @session.type:user",
+                        "type": "string"
+                      },
+                      "to": {
+                        "default": "now",
+                        "description": "Maximum time for the requested events. Supports date, math, and regular timestamps (in milliseconds).",
+                        "example": "now",
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "options": {
+                    "description": "Global query options that are used during the query.\nNote: Specify either timezone or time offset, not both. Otherwise, the query fails.",
+                    "properties": {
+                      "time_offset": {
+                        "description": "Time offset (in seconds) to apply to the query.",
+                        "format": "int64",
+                        "type": "integer"
+                      },
+                      "timezone": {
+                        "default": "UTC",
+                        "description": "Timezone code. Can be specified as an offset, for example: \"UTC+03:00\".",
+                        "example": "GMT",
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "page": {
+                    "description": "Paging attributes for listing events.",
+                    "properties": {
+                      "cursor": {
+                        "description": "List following results with a cursor provided in the previous query.",
+                        "example": "eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==",
+                        "type": "string"
+                      },
+                      "limit": {
+                        "default": 10,
+                        "description": "Maximum number of events in the response.",
+                        "example": 25,
+                        "format": "int32",
+                        "maximum": 1000,
+                        "type": "integer"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "sort": {
+                    "description": "Sort parameters when querying events.",
+                    "enum": [
+                      "timestamp",
+                      "-timestamp"
+                    ],
+                    "type": "string",
+                    "x-enum-varnames": [
+                      "TIMESTAMP_ASCENDING",
+                      "TIMESTAMP_DESCENDING"
+                    ]
+                  }
+                },
+                "type": "object"
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Response object with all events matching the request and pagination information.",
+                  "properties": {
+                    "data": {
+                      "description": "Array of events matching the request.",
+                      "items": {
+                        "description": "Object description of an Audit Logs event after it is processed and stored by Datadog.",
+                        "properties": {
+                          "attributes": {
+                            "description": "JSON object containing all event attributes and their associated values.",
+                            "properties": {
+                              "attributes": {
+                                "additionalProperties": {},
+                                "description": "JSON object of attributes from Audit Logs events.",
+                                "example": {
+                                  "customAttribute": 123,
+                                  "duration": 2345
+                                },
+                                "type": "object"
+                              },
+                              "service": {
+                                "description": "Name of the application or service generating Audit Logs events.\nThis name is used to correlate Audit Logs to APM, so make sure you specify the same\nvalue when you use both products.",
+                                "example": "web-app",
+                                "type": "string"
+                              },
+                              "tags": {
+                                "description": "Array of tags associated with your event.",
+                                "example": [
+                                  "team:A"
+                                ],
+                                "items": {
+                                  "description": "Tag associated with your event.",
+                                  "type": "string"
+                                },
+                                "type": "array"
+                              },
+                              "timestamp": {
+                                "description": "Timestamp of your event.",
+                                "example": "2019-01-02T09:42:36.320Z",
+                                "format": "date-time",
+                                "type": "string"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "id": {
+                            "description": "Unique ID of the event.",
+                            "example": "AAAAAWgN8Xwgr1vKDQAAAABBV2dOOFh3ZzZobm1mWXJFYTR0OA",
+                            "type": "string"
+                          },
+                          "type": {
+                            "default": "audit",
+                            "description": "Type of the event.",
+                            "enum": [
+                              "audit"
+                            ],
+                            "example": "audit",
+                            "type": "string",
+                            "x-enum-varnames": [
+                              "Audit"
+                            ]
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    },
+                    "links": {
+                      "description": "Links attributes.",
+                      "properties": {
+                        "next": {
+                          "description": "Link for the next set of results. Note that the request can also be made using the\nPOST endpoint.",
+                          "example": "https://app.datadoghq.com/api/v2/audit/event?filter[query]=foo&page[cursor]=eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "meta": {
+                      "description": "The metadata associated with a request.",
+                      "properties": {
+                        "elapsed": {
+                          "description": "Time elapsed in milliseconds.",
+                          "example": 132,
+                          "format": "int64",
+                          "type": "integer"
+                        },
+                        "page": {
+                          "description": "Paging attributes.",
+                          "properties": {
+                            "after": {
+                              "description": "The cursor to use to get the next results, if any. To make the next request, use the same parameters with the addition of `page[cursor]`.",
+                              "example": "eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==",
+                              "type": "string"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "request_id": {
+                          "description": "The identifier of the request.",
+                          "example": "MWlFUjVaWGZTTTZPYzM0VXp1OXU2d3xLSVpEMjZKQ0VKUTI0dEYtM3RSOFVR",
+                          "type": "string"
+                        },
+                        "status": {
+                          "description": "The status of the response.",
+                          "enum": [
+                            "done",
+                            "timeout"
+                          ],
+                          "example": "done",
+                          "type": "string",
+                          "x-enum-varnames": [
+                            "DONE",
+                            "TIMEOUT"
+                          ]
+                        },
+                        "warnings": {
+                          "description": "A list of warnings (non-fatal errors) encountered. Partial results may return if\nwarnings are present in the response.",
+                          "items": {
+                            "description": "Warning message indicating something that went wrong with the query.",
+                            "properties": {
+                              "code": {
+                                "description": "Unique code for this type of warning.",
+                                "example": "unknown_index",
+                                "type": "string"
+                              },
+                              "detail": {
+                                "description": "Detailed explanation of this specific warning.",
+                                "example": "indexes: foo, bar",
+                                "type": "string"
+                              },
+                              "title": {
+                                "description": "Short human-readable summary of the warning.",
+                                "example": "One or several indexes are missing or invalid, results hold data from the other indexes",
+                                "type": "string"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "type": "array"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Not Authorized"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
+          }
+        },
+        "summary": "Search Audit Logs events",
+        "tags": [
+          "Audit"
+        ],
+        "x-codegen-request-body-name": "body",
+        "x-menu-order": 1,
+        "x-undo": {
+          "type": "safe"
         }
       }
     },
@@ -83365,6 +84544,10 @@
     }
   ],
   "tags": [
+    {
+      "description": "Search your Audit Logs events over HTTP.",
+      "name": "Audit"
+    },
     {
       "description": "[AuthN Mappings API] (https://docs.datadoghq.com/account_management/authn_mapping/?tab=example)\nis used to automatically map group of users to roles in Datadog using attributes\nsent from Identity Providers.",
       "name": "AuthN Mappings"
