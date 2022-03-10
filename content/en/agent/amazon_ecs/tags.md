@@ -19,7 +19,7 @@ The Datadog Agent can create and assign tags to all metrics, traces, and logs em
 
 ## Out-of-the-box tags
 
-The Agent can autodiscover and attach tags to all data emitted by the entire tasks or an individual container within this task. The list of tags attached automatically depends on the agent [cardinality configuration][5].
+The Agent can autodiscover and attach tags to all data emitted by the entire task or an individual container within this task. The list of tags attached automatically depends on the agent [cardinality configuration][5].
 
 <div style="overflow-x: auto;">
 
