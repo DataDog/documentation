@@ -625,9 +625,115 @@ Navigate to the [Service list][20] to see all your application services and your
 
 Next, enable logs. There are two options on how to send logs from your application to Datadog: setting up a Heroku log drain or using the Datadog Log Agent directly. Each of those have their benefits and limitations, but the good news is that you can set up both!
 
-The main disadvantage of the log drain is that it cannot correlate logs with traces, but this is possible using the Datadog Agent.
+The main disadvantage of the log drain is that all logs will arrive to Datadog from the same `ddsource`, usually `heroku`, so automatic parsing of logs using integrations (other than Heroku) won't happen.
 
 The main disadvantage of sending logs through the Datadog Agent is that Heroku system logs and router logs won’t be sent (you can send these using the log drain method).
+
+### Generating your Rails logs
+
+To configure your Rails logs, Datadog recommends using lograge. For this sample application we will set it so that logs and traces are correlated.
+
+```shell
+# Ensure that you are in the folder with the application code
+cd ruby-getting-started
+```
+
+Edit your `Gemfile` and add `lograge`:
+
+```ruby
+gem 'lograge'
+```
+
+Install the gem with `bundle install`:
+
+```shell
+bundle install
+```
+
+Configure Lograge. Create a new file `config/initializers/lograge.rb` file.
+
+If you will use the Heroku log drain to send logs to Datadog add the following content to that file:
+
+```ruby
+Rails.application.configure do
+  # Lograge config
+  config.lograge.enabled = true
+
+  # This specifies to log in JSON format
+  config.lograge.formatter = Lograge::Formatters::Json.new
+
+  ## Disables log coloration
+  config.colorize_logging = false
+
+  # Log to STDOUT
+  config.lograge.logger = ActiveSupport::Logger.new(STDOUT)
+
+  config.lograge.custom_options = lambda do |event|
+    # Retrieves trace information for current thread
+    correlation = Datadog.tracer.active_correlation
+
+    {
+      # Adds IDs as tags to log output
+      :dd => {
+        # To preserve precision during JSON serialization, use strings for large numbers
+        :trace_id => correlation.trace_id.to_s,
+        :span_id => correlation.span_id.to_s,
+        :env => correlation.env.to_s,
+        :service => correlation.service.to_s,
+        :version => correlation.version.to_s
+      },
+      :ddsource => ["ruby"],
+      :params => event.payload[:params].reject { |k| %w(controller action).include? k }
+    }
+  end
+end
+```
+
+If you will use the Datadog agent to send your Ruby application logs, add the following content instead:
+
+```ruby
+Rails.application.configure do
+  # Lograge config
+  config.lograge.enabled = true
+
+  # This specifies to log in JSON format
+  config.lograge.formatter = Lograge::Formatters::Json.new
+
+  ## Disables log coloration
+  config.colorize_logging = false
+
+  # Log to a dedicated file
+  config.lograge.logger = ActiveSupport::Logger.new(File.join(Rails.root, 'log', "#{Rails.env}.log"))
+
+  config.lograge.custom_options = lambda do |event|
+    # Retrieves trace information for current thread
+    correlation = Datadog.tracer.active_correlation
+
+    {
+      # Adds IDs as tags to log output
+      :dd => {
+        # To preserve precision during JSON serialization, use strings for large numbers
+        :trace_id => correlation.trace_id.to_s,
+        :span_id => correlation.span_id.to_s,
+        :env => correlation.env.to_s,
+        :service => correlation.service.to_s,
+        :version => correlation.version.to_s
+      },
+      :ddsource => ["ruby"],
+      :params => event.payload[:params].reject { |k| %w(controller action).include? k }
+    }
+  end
+end
+```
+
+Deploy to Heroku:
+
+```shell
+# Deploy to Heroku
+git add .
+git commit -m "Add lograge"
+git push heroku main
+```
 
 ### Setting up a Heroku log drain
 
@@ -637,14 +743,18 @@ Heroku has a native log router that collects logs from all the dynos running in 
 
 The first method to send logs to Datadog is by setting up a Heroku log drain that routes the same logs received in Heroku to a different platform.
 
-One of the benefits of setting up the log drain is receiving the Heroku system logs into Datadog, which is not possible directly from the dyno. The main disadvantage is that it cannot correlate logs and traces (possible if sending logs with the Datadog Agent).
+One of the benefits of setting up the log drain is receiving the Heroku system logs into Datadog, which is not possible directly from the dyno. The main disadvantage is that all logs will come from `ddsource=heroku`, enabling only the Heroku log pipeline in Datadog.
 
 Setting up the Heroku log drain also opens the door to get dyno system metrics (CPU, memory) into Datadog.
 
 To set up the Heroku log drain from a terminal, run the following:
 
 ```shell
-heroku drains:add "https://http-intake.logs.datadoghq.com/api/v2/logs?dd-api-key=$DD_API_KEY&ddsource=heroku&service=$APPNAME&host=$APPNAME" -a $APPNAME
+export APPNAME=<YOUR_APPLICATION_NAME>
+export DD_ENV=<YOUR_APPLICATION_ENVIRONMENT> # example: production, staging
+export DD_SERVICE=<YOUR_SERVICE_NAME>
+
+heroku drains:add "https://http-intake.logs.datadoghq.com/api/v2/logs?dd-api-key=$DD_API_KEY&ddsource=heroku&env=$DD_ENV&service=$DD_SERVICE&host=${APPNAME}.web.1" -a $APPNAME
 ```
 
 To get system metrics from your dynos, apart from enabling the log drain, enable [log-runtime-metrics][21] as well:
@@ -711,7 +821,7 @@ Follow the same steps explained on the previous section to generate metrics with
 
 ### Sending logs from the Datadog Agent
 
-The other option to send logs to Datadog is using the Datadog Agent to send logs directly from your application to Datadog, without using Heroku as a log router. The benefits of using the Datadog Agent to send logs is that you can use the Ruby integration to parse logs automatically without having to parse them yourself, and you have access to log and tracing correlation.
+The other option to send logs to Datadog is using the Datadog Agent to send logs directly from your application to Datadog, without using Heroku as a log router. The benefits of using the Datadog Agent to send logs is that you can use the Ruby integration to parse logs automatically without having to parse them yourself.
 
 The only logs that can be sent with this method are the logs that are generated by your application (or the Rails framework). Heroku system logs and router logs won’t be sent (you can send these using the log drain method explained in the previous section).
 
@@ -724,52 +834,7 @@ First, enable the Logs Agent:
 heroku config:add DD_LOGS_ENABLED=true -a $APPNAME
 ```
 
-To configure your Rails logs, Datadog recommends using lograge. Set it up for a sample application.
-
-```shell
-# Ensure that you are in the folder with the application code
-cd ruby-getting-started
-```
-
-Edit your `Gemfile` and add `lograge`:
-
-```ruby
-gem 'lograge'
-```
-
-Install the gem with `bundle install`:
-
-```shell
-bundle install
-```
-
-Configure Lograge. Create a new file `config/initializers/lograge.rb` file and add the following content:
-
-```ruby
-Rails.application.configure do
-  # Lograge config
-  config.lograge.enabled = true
-
-  # This specifies to log in JSON format
-  config.lograge.formatter = Lograge::Formatters::Json.new
-
-  ## Disables log coloration
-  config.colorize_logging = false
-
-  # Log to a dedicated file
-  config.lograge.logger = ActiveSupport::Logger.new(File.join(Rails.root, 'log', "#{Rails.env}.log"))
-
-  # This is useful if you want to log query parameters
-  config.lograge.custom_options = lambda do |event|
-  { :ddsource => 'ruby',
-    :params => event.payload[:params].reject { |k| %w(controller action).include? k }
-  }
-  end
-end
-```
-
-Point the Datadog Agent to the log path. 
-Create a folder at the root of the project called `datadog/conf.d`:
+Point the Datadog Agent to the log path by creating a folder at the root of the project called `datadog/conf.d`:
 
 ```shell
 # Ensure that you are in the folder with the application code
@@ -796,7 +861,7 @@ Deploy to Heroku:
 ```shell
 # Deploy to Heroku
 git add .
-git commit -m "Add lograge"
+git commit -m "Datadog log agent configuration"
 git push heroku main
 ```
 
@@ -837,45 +902,13 @@ Navigate to [logs in Datadog][24] and filter by `Source:ruby` to start seeing yo
 
 #### Correlating logs and traces
 
-Once you have set up lograge, you can correlate the logs you get from your Rails application with the traces you are already generating.
+For Ruby logs sent to Datadog from both the Datadog agent or via the Heroku log drain will be correlated to traces when following the configuration on the previous sections. 
 
-Edit the file called `config/initializers/lograge.rb` and add the following content to the file, under the `Rails.application.configure` section
+<div class="alert alert-info">
+NOTE: Heroku router and system logs are generated by Heroku, and correlating them to traces is not possible.
+</div>
 
-```ruby
-Rails.application.configure do
-[...]
-
-  config.lograge.custom_options = lambda do |event|
-    # Retrieves trace information for current thread
-    correlation = Datadog.tracer.active_correlation
-
-    {
-      # Adds IDs as tags to log output
-      :dd => {
-        # To preserve precision during JSON serialization, use strings for large numbers
-        :trace_id => correlation.trace_id.to_s,
-        :span_id => correlation.span_id.to_s,
-        :env => correlation.env.to_s,
-        :service => correlation.service.to_s,
-        :version => correlation.version.to_s
-      },
-      :ddsource => ["ruby"],
-      :params => event.payload[:params].reject { |k| %w(controller action).include? k }
-    }
-  end
-end
-```
-
-Deploy to Heroku:
-
-```shell
-# Deploy to Heroku
-git add .
-git commit -m "Add log traces correlation"
-git push heroku main
-```
-
-If you navigate to [logs in Datadog][25], the newer Rails logs have their correlated trace:
+You can check that the configuration was succesful navigating to [logs in Datadog][25], the Rails application logs have their correlated trace:
 
 {{< img src="agent/guide/heroku_ruby/log_trace_correlation.png" alt="Log and traces correlation" >}}
 
