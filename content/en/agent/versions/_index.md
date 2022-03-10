@@ -26,8 +26,6 @@ To update the Datadog Agent core between two minor versions on a given host, run
 Datadog Agent release numbering follows <a href="https://semver.org/">SemVer</a> rules.</p>
 </div>
 
-[1]: /agent/versions/upgrade_between_agent_minor_versions
-
 ## Changes between major Agent versions
 
 {{< tabs >}}
