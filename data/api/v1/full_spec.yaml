@@ -24415,12 +24415,9 @@ paths:
                 description: "Post time-series data that can be graphed on Datadog\u2019s
                   dashboards."
                 summary: Dynamic Points
-                value:
-                  series:
-                  - metric: system.load.1
-                    points:
-                    - - ${NOW}
-                      - 1234.5
+                value: "{\n  \"series\": [\n    {\n      \"metric\": \"system.load.1\",\n
+                  \     \"points\": [\n        [\n          ${NOW},\n          1234.5\n
+                  \       ]\n      ]\n    }\n  ]\n}"
                 x-variables:
                   NOW: $(date +%s)
             schema:
