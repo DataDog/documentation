@@ -324,23 +324,21 @@ This configuration ensures consistent host metadata and centralizes the configur
 
 ## OTLP ingest in Datadog Agent
 
-<div class="alert alert-warning">This functionality is beta and its behavior and configuration may change.</div>
-
-Since versions 6.32.0 and 7.32.0, the Datadog Agent supports OTLP traces and metrics ingestion through both gRPC and HTTP.
-
 The OTLP ingestion is configured through the `datadog.yaml` file. The following configuration enables the HTTP and gRPC endpoints on the default ports (4317 for gRPC and 4318 for HTTP):
 
 ```yaml
-experimental:
-  otlp:
-    receiver:
-      protocols:
-        grpc:
-        http:
+otlp_config:
+  receiver:
+    protocols:
+      grpc:
+      http:
 ```
 
 The `receiver` section follows the [OpenTelemetry Collector OTLP receiver configuration schema][18].
-You can also configure the endpoints by providing the port through the `DD_OTLP_GRPC_PORT` and `DD_OTLP_HTTP_PORT` environment variables. These must be passed to both the core Agent and trace Agent. 
+You can also enable these via environment variables. For example, the gRPC endpoint could be enabled using the environment variable setting `DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_GRPC_ENDPOINT=0.0.0.0:4317`.
+To view all settings and environment variables supported starting Datadog Agent 7.35.0, please take a look at the `otlp_config` section in [our configuration template][26].
+
+These must be passed to both the Core Agent and Trace Agent when running them in separate containers. 
 
 Check [the OpenTelemetry instrumentation documentation][19] to understand how to point your instrumentation to the Agent, and [contact Datadog support][20] to get more information on this feature and provide feedback.
 
@@ -385,3 +383,4 @@ Datadog recommends you use the OpenTelemetry Collector Datadog exporter or the O
 [23]: /tracing/setup_overview/open_standards/python#opentelemetry
 [24]: /tracing/setup_overview/open_standards/ruby#opentelemetry
 [25]: /tracing/setup_overview/open_standards/nodejs#opentelemetry
+[26]: https://github.com/DataDog/datadog-agent/blob/7.35.0-rc.1/pkg/config/config_template.yaml#L2911-L3054
