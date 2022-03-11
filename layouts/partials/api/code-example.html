@@ -38,9 +38,16 @@
         {{- range $contentType, $requestBody := . -}}
             {{- with $requestBody.examples -}}
                 {{- range $exampleId, $exampleDefinition := . -}}
-                    {{- $exampleValue := $exampleDefinition.value -}}
-                    {{- if (or (hasPrefix $contentType "application/json") (hasPrefix $contentType "text/json")) -}}
-                        {{- $exampleValue = $exampleValue | jsonify (dict "indent" "  ") -}}
+                    {{- $exampleValue := "" }}
+                    {{- if $exampleDefinition.externalValue -}}
+                      {{- with $resourcePage.Resources.GetMatch (path.Base $exampleDefinition.externalValue) -}}
+                        {{- $exampleValue = .Content }}
+                      {{- end -}}
+                    {{- else -}}
+                      {{- $exampleValue = $exampleDefinition.value -}}
+                      {{- if (or (hasPrefix $contentType "application/json") (hasPrefix $contentType "text/json")) -}}
+                          {{- $exampleValue = $exampleValue | jsonify (dict "indent" "  ") -}}
+                      {{- end -}}
                     {{- end -}}
 ## {{ default $exampleId $exampleDefinition.summary }}
 {{- range split $exampleDefinition.description "\n" }}
