@@ -23,7 +23,7 @@ further_reading:
 
 Some parts of your systems may not be available to robots without the appropriate identification. You may also want to avoid collecting analytics from Datadog robots. 
 
-Try a combination of the following methods across your Synthetic test configurations to detect Datadog's Synthetic Monitoring robots.
+Try a combination of the following methods to detect Datadog's Synthetic Monitoring robots.
 
 ## IP addresses
 
