@@ -6,7 +6,7 @@ aliases:
   - /agent/guide/upgrade-between-agent-minor-versions
 ---
 
-## Upgrade Between Minor Versions of Agent 6 and 7
+## Upgrade between minor versions of Agent 6 and 7
 
 {{< tabs >}}
 {{% tab "Linux" %}}
@@ -45,7 +45,7 @@ URL to download a specific Agent 7 minor version
 {{% /tab %}}
 {{% tab "MacOS" %}}
 
-**Note**: There is currently no way to upgrade to a specific minor version.
+**Note**: It is not possible to upgrade to a specific minor version.
 
 Command to upgrade to the latest Agent 6 minor version:
 
