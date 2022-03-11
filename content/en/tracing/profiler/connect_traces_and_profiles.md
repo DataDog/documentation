@@ -180,7 +180,7 @@ With endpoint profiling you can:
 
 ### Track the endpoints that consume the most resources
 
-It is valuable to track top endpoints that are consuming valuable resources such as CPU and Wall Time. The list can help you identify if your endpoints have regressed or if you have newly introduced endpoints that are consuming drastically more resources, slowing down your overall service. 
+It is valuable to track top endpoints that are consuming valuable resources such as CPU and wall time. The list can help you identify if your endpoints have regressed or if you have newly introduced endpoints that are consuming drastically more resources, slowing down your overall service. 
 
 {{< img src="tracing/profiling/endpoint_metric.mp4" alt="Graphing top endpoints in terms of resource consumption" video=true >}}
 
