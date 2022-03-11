@@ -54,7 +54,7 @@ For example, the URL `https://app.datadoghq.com/event/event?id=1` is associated 
 
 ## Set up SAML
 
-SAML setup is _not_ inherited by child-organizations from the parent-organization. SAML must be configured for each child-organization individually. 
+SAML setup is _not_ inherited by child-organizations from the parent-organization. SAML must be configured for each child-organization individually.
 
 To configure SAML for multi-organizations:
 
@@ -121,7 +121,7 @@ On the **Individual Organizations** usage tab, you can view the usage of your ch
 
 The default view is the "Billable" view, which shows usage that contributes to your final bill. This view removes child organizations that are not billable such as trial organizations, and other adjustments that provide a more accurate summary of what drives your bill. Switch to the "All" view to see the unadjusted, raw usage of your parent-organization and all child-organizations. Both views can be downloaded as a CSV file.
 
-To view the [Usage Details][9] of a child-organization, you can click on the child-organization's name. 
+To view the [Usage Details][9] of a child-organization, you can click on the child-organization's name.
 
 ## Usage attribution
 
@@ -143,9 +143,7 @@ Note: the following usage types are not supported in this tool:
 
 * Indexed Log Events
 * Ingested Logs
-* Indexed Spans
-
-**Note:** Indexed Spans were formerly known as Analyzed Spans and renamed with the launch of Tracing Without Limits on October 20th, 2020.
+* Indexed Spans (retained with retention filters)
 
 Usage Attribution is an advanced feature included in the Enterprise plan. For all other plans, contact your account representative or <a href="mailto:success@datadoghq.com">success@datadoghq.com</a>.
 
