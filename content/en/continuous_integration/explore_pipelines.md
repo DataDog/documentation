@@ -31,7 +31,7 @@ Get insights on the selected pipeline such as total and failed executions over t
 
 The pipeline execution list at the bottom shows all the times that pipeline (or its stages or jobs) ran during the selected time frame, for the selected branch. Use the facets on the left side to filter the list to exactly the pipelines, stages, or jobs you want to see.
 
-### Explore connections to services, resources and network events
+### Explore connections to services, resources, and network events
 
 Click one of the executions to open the pipeline execution view and see the flame graph or span list for the pipeline and its stages. The _Executions (n)_ list on the left side gives you quick access to the data for each retry of the pipeline for the same commit.
 
