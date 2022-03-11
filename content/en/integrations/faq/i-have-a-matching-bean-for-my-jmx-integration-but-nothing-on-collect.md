@@ -77,7 +77,10 @@ instances:
 
 ```
 
-Jmxfetch then knows it's a string and uses this rule to transform that into a numeric metric. Only string values are supported as keys with this custom mapping.
+
+**Note:** Boolean metrics are automatically mapped to integers.
+
+Jmxfetch can identify this string and uses this rule to transform it into a numeric metric. Only string values are supported as keys with this custom mapping.
 
 Reach out to [Datadog Support team][7] if you are still having issues.
 
