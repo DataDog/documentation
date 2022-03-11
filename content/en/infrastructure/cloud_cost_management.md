@@ -29,9 +29,10 @@ Select the following Delivery options:
 * Report versioning: **Create new report version**
 * Compression type: **GZIP**
 * Format: `text/csv`
+
 ### Configure the AWS integration
 
-Select your AWS billing account from the dropdown. Once selected, Datadog displays any associated tags with that account. If you have many similarly named billing accounts, viewing the tags associated with a selected account can help ensure that you've selected the specific one you want.
+Select your AWS billing account from the dropdown. Once selected, Datadog displays any associated tags with that account. If you have many similarly-named billing accounts, viewing the tags associated with a selected account can help ensure that you've selected the specific one you want.
 
 ### Locate the Cost and Usage Report
 
@@ -39,10 +40,10 @@ If you have navigated away from the report that you created in the setup prerequ
 
 To get Datadog to locate the Cost and Usage Report, complete the fields with their corresponding details:
 
-* **Region**:
-* **Bucket Name**:
-* **Report Path Prefix**:
-* **Report Name**:
+* **Region**: This is the region your bucket is located. For example, `us-east-1`.
+* **Bucket Name**: This is the name of the s3 bucket that the CUR is saved to.
+* **Report Path Prefix**: This is the folder name. If viewing **Report path prefix** from the AWS details page, this is the first section of the path. For example, if **Report path prefix** is displayed as `cur-report-dir/cost-report`, you would enter `cur-report-dir`.
+* **Report Name**: This is the name you entered when you generated the report in the prerequisite section. If viewing the **Report path prefix** from the AWS details page, this is the second half of the path. For example, if **Report path prefix** is displayed as `cur-report-dir/cost-report`, you would enter `cost-report`.
 
 ### Configure access to the Cost and Usage Report
  
