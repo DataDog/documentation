@@ -18,7 +18,7 @@ To setup Cloud Cost Management in Datadog, you need to generate a Cost
  
 ### Prerequisite: Generate a Cost and Usage Report
  
-Follow AWS instructions for [Creating Cost and Usage Reports][1], and select the following Content options for use with Datadog Cloud Cost Management:
+Follow AWS instructions for [Creating Cost and Usage Reports][1], and select the following content options for use with Datadog Cloud Cost Management:
  
 * **Include resource IDs**
 * **Automatically refresh your Cost & Usage Report**
@@ -32,13 +32,13 @@ Select the following Delivery options:
 
 ### Configure the AWS integration
 
-Select your AWS billing account from the dropdown. Once selected, Datadog displays any associated tags with that account. If you have many similarly-named billing accounts, viewing the tags associated with a selected account can help ensure that you've selected the specific one you want.
+Select your AWS billing account from the dropdown. Once selected, Datadog displays any associated tags with that account. If you have multiple similarly-named billing accounts, viewing the tags associated with a selected account can help ensure that you've selected the specific one you want.
 
 ### Locate the Cost and Usage Report
 
 If you have navigated away from the report that you created in the setup prerequisites section, follow AWS documentation to find and [view your Cost and Usage Reports details][2].
 
-To get Datadog to locate the Cost and Usage Report, complete the fields with their corresponding details:
+To enable Datadog to locate the Cost and Usage Report, complete the fields with their corresponding details:
 
 * **Region**: This is the region your bucket is located. For example, `us-east-1`.
 * **Bucket Name**: This is the name of the s3 bucket that the CUR is saved to.
