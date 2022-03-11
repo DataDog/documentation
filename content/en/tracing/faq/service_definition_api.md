@@ -103,7 +103,7 @@ extensions:
 
 ### Response
 
-... codes, messages, objects ...
+Status: `200 OK`
 
 ### Curl Example
 
@@ -120,7 +120,7 @@ curl --request POST 'https://api.datadoghq.com/api/unstable/services/definition'
 ## Get a service definition
 
 ```
-GET https://api.datadoghq.com/api/unstable/services/definition/{service_name}
+GET https://api.datadoghq.com/api/unstable/services/definition/{service_name}?schema_version="v2"
 ```
 
 ### Arguments 
@@ -130,6 +130,7 @@ GET https://api.datadoghq.com/api/unstable/services/definition/{service_name}
 | Required field  | Description |
 | ---------- | ----------- |
 | `service_name` | Identifies the service to retrieve its definition. |
+| `schema_version` | Use `v2` |
 
 #### Header parameters
 
@@ -140,12 +141,78 @@ GET https://api.datadoghq.com/api/unstable/services/definition/{service_name}
 
 ### Response
 
-... codes, messages, objects ...
+The service definition JSON object, for example:
 
+{{< code-block lang="json" collapsible="true" >}}
+{
+    "data": {
+        "type": "service_definitions",
+        "attributes": {
+            "service_definitions": [
+                {
+                    "docs": [],
+                    "links": [
+                        {
+                            "url": "https://wiki/shopping-cart",
+                            "type": "wiki",
+                            "name": "shopping-cart service Wiki"
+                        },
+                        {
+                            "url": "https://google.drive/shopping-cart-architecture",
+                            "type": "doc",
+                            "name": "shopping-cart architecture"
+                        },
+                        {
+                            "url": "https://runbook/shopping-cart",
+                            "type": "runbook",
+                            "name": "shopping-cart runbook"
+                        }
+                    ],
+                    "tags": [
+                        "cost-center:engineering",
+                        "business-unit:retail"
+                    ],
+                    "service_name": "shopping-cart",
+                    "repos": [],
+                    "contacts": [
+                        {
+                            "contact": "team@shopping.com",
+                            "type": "email",
+                            "name": ""
+                        },
+                        {
+                            "contact": "shopping-cart",
+                            "type": "slack",
+                            "name": ""
+                        }
+                    ],
+                    "integrations": [
+                        {
+                            "type": "pagerduty",
+                            "param": "https://www.pagerduty.com/service-directory/shopping-cart"
+                        },
+                        {
+                            "type": "github",
+                            "param": "https://www.github.com/org/shopping-cart"
+                        }
+                    ],
+                    "schema_version": "v1",
+                    "team_handle": "",
+                    "ingestion_source": "api",
+                    "extensions": {},
+                    "team": "e-commerce",
+                    "last_modified_time": "2022-03-09T14:54:38Z",
+                    "github_html_url": ""
+                }
+            ]
+        }
+    }
+}
+{{< /code-block >}}
 ### Curl Example
 
 {{< code-block lang="curl" >}}
-curl --request GET 'https://api.datadoghq.com/api/unstable/services/definition/shopping-cart' \
+curl --request GET 'https://api.datadoghq.com/api/unstable/services/definition/shopping-cart?schema_version="v2"' \
 --header 'DD-API-KEY: {API_KEY}' \
 --header 'DD-APPLICATION-KEY: {APPLICATION_KEY}' 
 {{< /code-block >}}
@@ -155,8 +222,6 @@ curl --request GET 'https://api.datadoghq.com/api/unstable/services/definition/s
 ```
 GET https://api.datadoghq.com/api/unstable/services/definition
 ```
-
-This endpoint returns every service definition that Datadog has for an organization
 
 ### Arguments
 
@@ -169,7 +234,7 @@ This endpoint returns every service definition that Datadog has for an organizat
 
 ### Response
 
-... codes, messages, objects ...
+This endpoint returns every service definition that Datadog has for an organization. See the Response example for [Get a service definition](#get-a-service-definition).
 
 ### Curl Example
 
@@ -200,7 +265,7 @@ DELETE https://api.datadoghq.com/api/unstable/services/definition/{service_name}
 
 ### Response
 
-... codes, messages, objects ...
+Status: `200 OK (Deleted)`
 
 ### Curl Example
 
