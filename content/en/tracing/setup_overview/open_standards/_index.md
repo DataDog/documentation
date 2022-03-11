@@ -324,6 +324,8 @@ This configuration ensures consistent host metadata and centralizes the configur
 
 ## OTLP ingest in Datadog Agent
 
+<div class="alert alert-warning">OpenTelemetry Metrics is still in beta and its behavior and configuration may change.</div>
+
 The OTLP ingestion is configured through the `datadog.yaml` file. The following configuration enables the HTTP and gRPC endpoints on the default ports (4317 for gRPC and 4318 for HTTP):
 
 ```yaml
@@ -335,8 +337,8 @@ otlp_config:
 ```
 
 The `receiver` section follows the [OpenTelemetry Collector OTLP receiver configuration schema][18].
-You can also enable these via environment variables. For example, the gRPC endpoint could be enabled using the environment variable setting `DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_GRPC_ENDPOINT=0.0.0.0:4317`.
-To view all settings and environment variables supported starting Datadog Agent 7.35.0, please take a look at the `otlp_config` section in [our configuration template][26].
+You can also enable these with environment variables. For example, the gRPC endpoint could be enabled using the environment variable setting `DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_GRPC_ENDPOINT=0.0.0.0:4317`.
+To view all settings and environment variables supported starting Datadog Agent 7.35.0, please take a look at the `otlp_config` section in [the configuration template][26].
 
 These must be passed to both the Core Agent and Trace Agent when running them in separate containers. 
 
