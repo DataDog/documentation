@@ -39,8 +39,8 @@
             {{- with $requestBody.examples -}}
                 {{- range $exampleId, $exampleDefinition := . -}}
                     {{- $exampleValue := "" }}
-                    {{- if isset $exampleDefinition "externalValue" -}}
-                      {{- with $resourcePage.Resources.GetMatch (path.Base $exampleDefinition.externalValue) -}}
+                    {{- with $exampleDefinition.externalValue -}}
+                      {{- with $resourcePage.Resources.GetMatch (path.Base .) -}}
                         {{- $exampleValue = .Content }}
                       {{- end -}}
                     {{- else -}}
