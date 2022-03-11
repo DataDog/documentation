@@ -39,7 +39,7 @@
             {{- with $requestBody.examples -}}
                 {{- range $exampleId, $exampleDefinition := . -}}
                     {{- $exampleValue := "" }}
-                    {{- if $exampleDefinition.externalValue -}}
+                    {{- if isset $exampleDefinition "externalValue" -}}
                       {{- with $resourcePage.Resources.GetMatch (path.Base $exampleDefinition.externalValue) -}}
                         {{- $exampleValue = .Content }}
                       {{- end -}}
