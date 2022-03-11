@@ -172,7 +172,7 @@ Endpoint profiling allows you to scope your flame graphs by any endpoint of your
 With endpoint profiling you can:
 
 - Identify the bottleneck methods that are slowing down your endpoint’s overall response time.
-- Isolate the top endpoints responsible for the consumption of valuable resources such as CPU, memory, and I/O. This is particularly helpful when you are generally trying to optimize your service for performance gains.
+- Isolate the top endpoints responsible for the consumption of valuable resources such as CPU and wall time. This is particularly helpful when you are generally trying to optimize your service for performance gains.
 - Understand if third party code or runtime libraries are the reason for your endpoints being slow or resource-consumption heavy.
 
 {{< img src="tracing/profiling/endpoint_agg_gif.mp4" alt="Troubleshooting a slow endpoint by using endpoint aggregation" video=true >}}
