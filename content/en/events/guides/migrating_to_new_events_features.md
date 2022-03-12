@@ -118,13 +118,14 @@ EC2 Instance marked for maintenance
 : Legacy syntax </br>
 `events('priority:all "Upcoming AWS maintenance event"').by('name,host').rollup('count').last('2d') >= 1`
 : New syntax </br>
-`events("Upcoming AWS maintenance event").rollup("count").last("2d") >= 1`
+`events('"Upcoming AWS maintenance event"').rollup("count").by("name,host").last("2d") >= 1`
 
 Zabbix or Prometheus has triggered an alert for a service today
 : Legacy syntax </br>
 `events('tags:service priority:all status:error sources:prometheus sources:zabbix).rollup('count').last(‘1d’) > 0`
 : New syntax </br>
-`events("source:(prometheus OR zabbix) status:error").rollup("count").by("service").last("1d") > 0`
+`events("source:(prometheus OR zabbix) status:error tags:service").rollup("count").last("1d") > 0`
+
 
 No events received in a datacenter for service `datadog-agent`
 : Legacy syntax </br>
