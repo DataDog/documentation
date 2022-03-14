@@ -259,7 +259,7 @@ Enabling JMX Checks forces the Agent to use more memory depending on the number 
 * Memory: ~ 130MB of RAM used (RSS memory)
 * Network bandwidth: ~ 140 B/s ▼ | 800 B/s ▲
 * Disk:
-  * Linux 850MB to 1.2GB depending on the distribution
+  * Linux 830MB to 880MB depending on the distribution
   * Windows: 870MB
 
 **Log Collection**:
