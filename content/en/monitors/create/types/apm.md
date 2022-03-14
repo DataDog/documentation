@@ -94,10 +94,16 @@ For detailed instructions on the advanced alert options (no data, evaluation del
 
 ### Select alert conditions
 
-* Trigger when the metric is `above` or `above or equal to`
+* Trigger when the query result is `above`, `above or equal to`, `below`, or `below or equal to`
 * the threshold during the last `5 minutes`, `15 minutes`, `1 hour`, etc. or `custom` to set a value between 5 minutes and 48 hours.
 * Alert threshold: `<NUMBER>`
 * Warning threshold: `<NUMBER>`
+
+#### No Data and below alerts
+
+`NO DATA` is a state given when no spans match the monitor query during the timeframe.
+
+To receive a notification when all groups matching a specific query have stopped sending spans, set the condition to below 1. This notifies when no logs match the monitor query in a given timeframe across all aggregate groups.
 
 #### Advanced alert conditions
 
