@@ -196,7 +196,7 @@ The 90 day limits per SLO are as follows:
 
 You may configure status corrections through the UI by selecting `Correct Status` in your SLO's side panel, the [SLO status corrections API][13], or a [Terraform resource][14].
 
-{{< img src="monitors/service_level_objectives/slo-correction-ui.png" alt="SLO correction UI"  >}}
+{{< img src="monitors/service_level_objectives/slo-corrections-ui.jpeg" alt="SLO correction UI"  >}}
 
 #### Access in the UI 
 
