@@ -13,7 +13,12 @@ further_reading:
 
 <div class="alert alert-info">If you don’t have Real User Monitoring, you can access a preview of RUM, Session Replay, Error Tracking, and additional performance data from your Synthetic browser test runs.</div>
 
-In your browser test recording, click **Collect Real User Monitoring Data on** above the **Start Recording** button and select an application to collect data on. After saving your recording and test configuration, RUM gathers test data and generates session recordings from your browser test runs.
+In your browser test recording, click **Collect RUM Data on** above the **Start Recording** button and select an application to collect data on. After saving your recording and test configuration, RUM gathers test data and generates session recordings from your browser test runs. Allowing you to:
+- **Session replay** for all tests, providing more context than the already available screenshots for each step. You can also use Dev Tools (beta) from the session replay.
+- Navigate the session in **RUM**.
+- Aggregate errors seen across your different steps, tests, and test runs with **Error Tracking**, to get a sense of the error impact and prioritize fixing the most serious ones. 
+- Access extra resources and timing information from RUM, with extra search and monitor capabilities.
+
 
 ## Synthetics to RUM Explorer
 
