@@ -105,7 +105,7 @@ extensions:
 
 Status: `200 OK`
 
-### Curl Example
+### Curl example
 
 {{< code-block lang="curl" >}}
 curl --request POST 'https://api.datadoghq.com/api/unstable/services/definition' \
@@ -209,7 +209,7 @@ The service definition JSON object, for example:
     }
 }
 {{< /code-block >}}
-### Curl Example
+### Curl example
 
 {{< code-block lang="curl" >}}
 curl --request GET 'https://api.datadoghq.com/api/unstable/services/definition/shopping-cart?schema_version="v2"' \
@@ -236,7 +236,7 @@ GET https://api.datadoghq.com/api/unstable/services/definition
 
 This endpoint returns every service definition that Datadog has for an organization. See the Response example for [Get a service definition](#get-a-service-definition).
 
-### Curl Example
+### Curl example
 
 {{< code-block lang="curl" >}}
 curl --request GET 'https://api.datadoghq.com/api/unstable/services/definition \
@@ -267,7 +267,7 @@ DELETE https://api.datadoghq.com/api/unstable/services/definition/{service_name}
 
 Status: `200 OK (Deleted)`
 
-### Curl Example
+### Curl example
 
 {{< code-block lang="curl" >}}
 curl --request DELETE 'https://api.datadoghq.com/api/unstable/services/definition/shopping-cart \
