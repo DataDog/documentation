@@ -103,7 +103,7 @@ The breakdown is composed of the following parts:
 
 ### Traces dropped before ingestion
 
-100% trace ingestion cannot be achieved if you have not set the environment variable configuration `DD_TRACE_SAMPLE_RATE=1.0` for Tracing without Limits, and:
+100% trace ingestion cannot be achieved if you have not set the environment variable configuration `DD_TRACE_SAMPLE_RATE=1.0` for trace volume control, and:
 - your applications generate above 50 traces per second;
 - your applications send intermittent traffic loads; or
 - your applications traces are large in size or otherwise have complicated trace payloads.

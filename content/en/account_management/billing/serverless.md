@@ -9,8 +9,6 @@ Purchase Serverless function invocations on [Datadog Pro and Enterprise plans][1
 
 **Note:** If you are using a previous billing model for Datadog's Serverless Monitoring and would like to move to invocation-based billing, contact your [Customer Success Manager][3].
 
-**Note:** Indexed Spans were formerly known as Analyzed Spans and renamed with the launch of Tracing Without Limits on October 20th, 2020.
-
 ## Serverless invocations
 
 Datadog charges by calculating the sum of the your AWS Lambda function invocations at the end of the month.

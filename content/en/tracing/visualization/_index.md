@@ -43,9 +43,6 @@ The APM UI provides many tools to troubleshoot application performance and corre
 | [Sublayer Metric](#sublayer-metric) | A sublayer metric is the execution duration of a given type / service within a trace.
 | [Execution Time](#execution-time) | Total time that a span is considered 'active' (not waiting for a child span to complete).
 
-
-**Note:** Indexed Spans were formerly known as Analyzed Spans and renamed with the launch of Tracing Without Limits on October 20th, 2020.
-
 ## Services
 
 After [instrumenting your application][3], the [Services List][4] is your main landing page for APM data.
@@ -149,8 +146,6 @@ Trace metrics are useful for monitoring. APM monitors can be set up on the [New 
 [Explore and perform analytics][14] on 100% of ingested traces for 15 minutes and all [indexed spans](#indexed-span) for 15 days.
 
 ## Indexed span
-
-**Note:** Indexed Spans were formerly known as Analyzed Spans and renamed with the launch of Tracing Without Limits on October 20th, 2020.
 
 Indexed Spans represent spans indexed by a [retention filter](#retention-filters) stored in Datadog for 15 days that can be used to search, query, and monitor in [Trace Search and Analytics][14] by the [tags](#span-tags) included on the span.
 

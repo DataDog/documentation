@@ -3,7 +3,7 @@ title: Usage Metrics
 kind: documentation
 aliases:
     - /tracing/trace_retention_and_ingestion/usage_metrics/
-description: "Learn how to monitor your Tracing without Limits usage."
+description: "Learn how to monitor your APM usage."
 further_reading:
 - link: "/tracing/trace_ingestion/mechanisms"
   tag: "Documentation"
@@ -22,7 +22,7 @@ This document details the available metrics and default dashboard for monitoring
 
 ## Trace analytics usage dashboard
 
-{{< img src="tracing/trace_indexing_and_ingestion/usage_metrics/AnalyticsDashboardOverview_2.png" style="width:100%;" alt="Tracing without Limits Usage Dashboard" >}}
+{{< img src="tracing/trace_indexing_and_ingestion/usage_metrics/AnalyticsDashboardOverview_2.png" style="width:100%;" alt="Trace Usage Dashboard" >}}
 
 Datadog provides an out-of-the-box [Usage Dashboard][5] for monitoring your APM usage, as well as your ingested and indexed span volumes.
 
