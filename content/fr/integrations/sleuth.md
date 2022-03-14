@@ -96,6 +96,9 @@ L'intégration Sleuth n'inclut aucun événement.
 2. Dans la carte d'intégration Datadog, cliquez sur **disable**.
 
 L'intégration Datadog est déconnectée et n'est plus disponible pour les projets de cette organisation. Les modifications apportées à l'intégration Datadog au niveau d'un projet sont perdues.
+
+
+
 [1]: https://app.sleuth.io/accounts/login/
 [2]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/sleuth/images/datadog-integration-api-key.png
 [3]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/sleuth/images/datadog-integration.png

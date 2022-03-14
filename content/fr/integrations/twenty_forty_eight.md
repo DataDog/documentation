@@ -46,11 +46,11 @@ tile:
 ---
 ## Présentation
 
-Twenty Forty Eight est un jeu amusant qui peut être ajouté à vos dashboards Datadog. Cette extension repose sur les [applications Datadog][1], qui permettent d'intégrer à l'interface utilisateur du contenu tiers qui n'est pas pris en charge nativement. Si vous souhaitez enrichir votre expérience Datadog avec de nouvelles fonctionnalités utiles ou amusantes, vous pouvez [concevoir votre propre application ou jeu][1].
+Twenty Forty Eight est un jeu amusant qui peut être ajouté à vos dashboards Datadog. Cette extension repose sur les [Apps Datadog][1], qui permettent d'intégrer à l'interface utilisateur du contenu tiers qui n'est pas pris en charge nativement. Si vous souhaitez enrichir votre expérience Datadog avec de nouvelles fonctionnalités utiles ou amusantes, vous pouvez [concevoir votre propre app ou jeu][1].
 
 ### Règles du jeu
 
-Cliquez sur le widget pour activer l'application, puis utilisez les **touches fléchées** de votre clavier pour déplacer les carrés. Les carrés qui possèdent le même nombre **fusionnent** lorsqu'ils entrent en contact. Ajoutez-les pour atteindre 2 048 et des valeurs encore plus élevées !
+Cliquez sur le widget pour activer l'app, puis utilisez les **touches fléchées** de votre clavier pour déplacer les carrés. Les carrés qui possèdent le même nombre **fusionnent** lorsqu'ils entrent en contact. Ajoutez-les pour atteindre 2 048 et des valeurs encore plus élevées !
 
 ## Configuration
 
