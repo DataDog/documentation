@@ -21,7 +21,7 @@ POST https://api.datadoghq.com/api/unstable/services/definition
 | Required field  | Description |
 | ---------- | ----------- |
 | `DD-API-KEY` | Identifies an organization. To create or reuse existing keys, go to the [API keys page][2]. |
-| `DD-APPLICATION-KEY` | Identifies a user. To create or reuse existing keys, to to the [Application keys page][3]. |
+| `DD-APPLICATION-KEY` | Identifies a user. To create or reuse existing keys, go to the [Application keys page][3]. |
 
 ### Request
 
@@ -30,7 +30,7 @@ POST https://api.datadoghq.com/api/unstable/services/definition
 | Field                       | Type            | Description |
 | --------------------------- | --------------- | ------------------------------------------------------- |
 | schema-version&nbsp;[_required_] | string          | Version of the service definition schema being used. Only value `v2` is supported.|
-| dd-service&nbsp;[_required_]     | string          | Unique identifier of the service. Must be unique across all services and it used to match with a service in Datadog. |
+| dd-service&nbsp;[_required_]     | string          | Unique identifier of the service. Must be unique across all services, and used to match with a service in Datadog. |
 | team                        | string          | Name of the team responsible for the service. |
 | contacts                    | object          | List of contacts on the team. |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type&nbsp;[_required_]      | string          | Contact type  |
@@ -230,7 +230,7 @@ GET https://api.datadoghq.com/api/unstable/services/definition
 | Required field  | Description |
 | ---------- | ----------- |
 | `DD-API-KEY` | Identifies an organization. To create or reuse existing keys, go to the [API keys page][2]. |
-| `DD-APPLICATION-KEY` | Identifies a user. To create or reuse existing keys, to to the [Application keys page][3]. |
+| `DD-APPLICATION-KEY` | Identifies a user. To create or reuse existing keys, go to the [Application keys page][3]. |
 
 ### Response
 
@@ -260,8 +260,8 @@ DELETE https://api.datadoghq.com/api/unstable/services/definition/{service_name}
 
 | Required field  | Description |
 | ---------- | ----------- |
-| `DD-API-KEY` | Identifies an org. To create or reuse existing keys, go to the [API keys page][2]. |
-| `DD-APPLICATION-KEY` | Identifies a user. To create or reuse existing keys, to to the [Application keys page][3]. |
+| `DD-API-KEY` | Identifies an organization. To create or reuse existing keys, go to the [API keys page][2]. |
+| `DD-APPLICATION-KEY` | Identifies a user. To create or reuse existing keys, go to the [Application keys page][3]. |
 
 ### Response
 
