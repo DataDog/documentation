@@ -279,7 +279,7 @@ A test is considered `FAILED` if a step does not satisfy one or several assertio
 
 By default, only users with the [Datadog Admin and Datadog Standard roles][16] can create, edit, and delete Synthetic multistep API tests. To get create, edit, and delete access to Synthetic multistep API tests, upgrade your user to one of those two [default roles][16].
 
-If you have access to the [custom role feature][17], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions for Synthetic Monitoring.
+If you are using the [custom role feature][17], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions for Synthetic Monitoring.
 
 ## Restrict access
 
