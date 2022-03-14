@@ -31,7 +31,6 @@ additional_endpoints:
 
 ```bash
 DD_ADDITIONAL_ENDPOINTS='{\"https://mydomain.datadoghq.com\": [\"apikey2\", \"apikey3\"], \"https://mydomain.datadoghq.eu\": [\"apikey4\"]}'
-
 ```
 
 {{% /tab %}}
@@ -65,7 +64,6 @@ apm_config:
 DD_APM_ADDITIONAL_ENDPOINTS='{\"https://mydomain.datadoghq.com\": [\"apikey2\", \"apikey3\"], \"https://mydomain.datadoghq.eu\": [\"apikey4\"]}'
 
 DD_APM_PROFILING_ADDITIONAL_ENDPOINTS='{\"https://mydomain.datadoghq.com\": [\"apikey2\", \"apikey3\"], \"https://mydomain.datadoghq.eu\": [\"apikey4\"]}'
-
 ```
 
 {{% /tab %}}
@@ -119,12 +117,10 @@ DD_ORCHESTRATOR_EXPLORER_ORCHESTRATOR_ADDITIONAL_ENDPOINTS='{\"https://mydomain.
 {{% /tab %}}
 {{% /tabs %}}
 
+You can add the yaml configuration to your `datadog.yaml` or launch the agent with the appropriate environment variables. 
 ## Logs and Events
 
 {{< tabs >}}
-
-You can add the yaml configuration to your `datadog.yaml` or launch the agent with the appropriate environment variables. 
-
 
 <!-- Logs -->
 {{% tab "Logs" %}}
