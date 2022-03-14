@@ -70,7 +70,7 @@ Additional [configuration options](#configuration) are described below.
 
 ### Configure the Datadog Agent for APM
 
-Install and configure the Datadog Agent to receive traces from your now instrumented application. By default the Datadog Agent is enabled in your `datadog.yaml` file under `apm_config` with `enabled: true` and listens for trace traffic at `localhost:8126`. For containerized environments, follow the links below to enable trace collection within the Datadog Agent.
+Install and configure the Datadog Agent to receive traces from your instrumented application. By default the Datadog Agent is enabled in your `datadog.yaml` file under `apm_config` with `enabled: true` and listens for trace data at `http://localhost:8126`. For containerized environments, follow the links below to enable trace collection within the Datadog Agent.
 
 {{< tabs >}}
 {{% tab "Containers" %}}
@@ -82,22 +82,29 @@ Install and configure the Datadog Agent to receive traces from your now instrume
 {{< partial name="apm/apm-containers.html" >}}
 </br>
 
-3. After having instrumented your application, the tracing client sends traces to `localhost:8126` by default.  If this is not the correct host and port, change it by setting the below env variables:
+3. After the application is instrumented, the trace client attempts to send traces to the Unix domain socket `/var/run/datadog/apm.socket` by default. If the socket does not exist, traces are sent to `http://localhost:8126`.
 
-    `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`.
+   If a different socket, host, or port is required, use the `DD_TRACE_AGENT_URL` environment variable. Some examples follow:
 
-    ```bash
-    java -javaagent:<DD-JAVA-AGENT-PATH>.jar -jar <YOUR_APPLICATION_PATH>.jar
-    ```
+   ```
+   DD_TRACE_AGENT_URL=http://custom-hostname:1234
+   DD_TRACE_AGENT_URL=unix:///var/run/datadog/apm.socket
+   ```
 
-    You can also use system properties:
+   ```bash
+   java -javaagent:<DD-JAVA-AGENT-PATH>.jar -jar <YOUR_APPLICATION_PATH>.jar
+   ```
 
-    ```bash
-    java -javaagent:<DD-JAVA-AGENT-PATH>.jar \
-        -Ddd.agent.host=$DD_AGENT_HOST \
-        -Ddd.agent.port=$DD_TRACE_AGENT_PORT \
-        -jar <YOUR_APPLICATION_PATH>.jar
-    ```
+   You can also use system properties:
+
+   ```bash
+   java -javaagent:<DD-JAVA-AGENT-PATH>.jar \
+       -Ddd.trace.agent.url=$DD_TRACE_AGENT_URL \
+       -jar <YOUR_APPLICATION_PATH>.jar
+   ```
+
+   Similarly, the trace client attempts to send stats to the `/var/run/datadog/dsd.socket` Unix domain socket. If the socket does not exist then stats are sent to `http://localhost:8125`.
+
 {{< site-region region="us3,us5,eu,gov" >}} 
 
 4. Set `DD_SITE` in the Datadog Agent to {{< region-param key="dd_site" code="true" >}} to ensure the Agent sends data to the right Datadog location.

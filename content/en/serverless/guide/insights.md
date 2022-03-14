@@ -1,11 +1,12 @@
 ---
 title: Serverless Insights
-kind: documentation
+kind: guide
 further_reading:
 - link: "https://www.datadoghq.com/blog/serverless-insights/"
   tag: "Blog"
   text: "Read more about serverless insights"
 aliases:
+    - /serverless/troubleshooting/insights/
     - /serverless/insights/
 ---
 

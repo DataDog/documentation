@@ -41,7 +41,7 @@ Le tunnel de test est une fonctionnalité incluse dans le package NPM [@datadog/
 
 ## Comment utiliser le tunnel de test
 
-Comme mentionné plus haut, le tunnel de test est inclus dans le package NPM [@datadog/datadog-ci][2] depuis la version [v0.11.0][3] de ce dernier. Consultez la rubrique [Synthetic et CI/CD][4] pour commencer.
+Comme mentionné plus haut, le tunnel de test est inclus dans le package NPM [@datadog/datadog-ci][2] depuis la version [v0.11.0][3] de ce dernier. Consultez la rubrique [Synthetics et CI/CD][4] pour commencer.
 
 Une fois que vous avez configuré votre client sur votre machine locale ou votre serveur CI, vous pouvez choisir de lancer vos tests avec le tunnel en ajoutant `--tunnel` à la commande utilisée pour lancer les tests. Par exemple, si vous utilisez un fichier de configuration globale, vous pouvez saisir la commande suivante :
 
