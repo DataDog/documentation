@@ -553,7 +553,7 @@
     - action: pull-and-push-file
       branch: alai97/rum-data-collected-docs-update
       globs:
-      - 'data_collected.md'
+      - 'docs/rum_collection/data_collected.md'
       options:
         dest_path: '/real_user_monitoring/ios/'
         file_name: 'data_collected.md'
