@@ -9,7 +9,7 @@ aliases:
 
 [APM & Continuous Profiler][1] powers you to find service bottlenecks, analyze distributed traces and code performance across your microservices architecture.
 
-There are two options available for pricing, depending on whether APM and Profiling are bundled. Control the stream of ingested data with the [ingestion controls][2] parameters and which spans to retain for a longer time period by indexing it with [tagged-based retention filters][3].
+There are two options available for pricing, depending on whether APM and Profiling are bundled. Control the stream of ingested data with [ingestion controls][2]. Control which spans are kept for the retention period by indexing them with [tagged-based retention filters][3].
 
 | Billing Parameter  | Price                                      | Ingested and Indexed Spans                                                                 | Billing                                                                                                                                                                                                                                                                                                                          |
 |--------------------|--------------------------------------------|-------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -175,5 +175,5 @@ Yes. Let Datadog know if you are interested in buying the Continuous Profiler wi
 [10]: https://docs.datadoghq.com/account_management/billing/serverless/#serverless-functions
 [11]: /account_management/billing/
 [12]: /tracing/setup_overview/setup/java/?tab=containers#configure-the-datadog-agent-for-apm
-[13]: /tracing//trace_retention/
+[13]: /tracing/trace_retention/
 [14]: /tracing/trace_retention/usage_metrics
