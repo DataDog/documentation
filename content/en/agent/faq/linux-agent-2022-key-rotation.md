@@ -125,8 +125,14 @@ Alternatively, check if your `datadog.repo` file contains `https://keys.datadogh
 
 Since Agent 6.31.0/7.31.0, all Datadog DEB packages have a soft dependency on the `datadog-signing-keys` package. Upon installation, this package:
 
-- Sets up a [debsig-verify policy][13] for Datadog packages.
 - Configures APT keys in the `/usr/share/keyrings/datadog-archive-keyring.gpg` keyring and also via `apt-key` when necessary. **This ensures that the upcoming APT repository signing key is trusted.**
+- Sets up a [debsig-verify policy][13] for Datadog packages. This allows you to verify signatures of individual DEB packages locally. For example, to verify if a locally downloaded DEB package was really built and signed by Datadog, you can run the following command:
+
+```bash
+$ debsig-verify datadog-dogstatsd_7.34.0-1_amd64.deb
+```
+
+If the verification is successful, `debsig-verify` exits with status `0` and prints a message `debsig: Verified package from 'Datadog, Inc.' (Datadog).`. Note that Datadog's DEB packages embed signatures since version 6.26.0/7.26.0, so this won't work on earlier versions.
 
 Because the dependency of Agent 6.31.0+/7.31.0+ packages on the `datadog-signing-keys` package is optional, it might not get installed when:
 
