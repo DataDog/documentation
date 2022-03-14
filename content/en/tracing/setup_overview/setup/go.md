@@ -144,11 +144,14 @@ Install and configure the Datadog Agent to receive traces from your now instrume
 
 3. After the application is instrumented, the trace client attempts to send traces to the Unix domain socket `/var/run/datadog/apm.socket` by default. If the socket does not exist, traces are sent to `http://localhost:8126`.
 
-   If a different socket, host, or port is required, use the `DD_TRACE_AGENT_URL` environment variable. Some examples:
+   A similar rule applies to all metrics sent by the Go tracer (including Runtime Metrics and internal telemetry): the client will attempt to send Dogstatsd data to the Unix domain socket `/var/run/datadog/dsd.socket` and will default to `http://localhost:8125` if that does not exist.
+
+   If different hosts or ports are required, one or more of the below environment variables can be used. The examples show the defaults but can be set to other values as well.
 
    ```
-   DD_TRACE_AGENT_URL=http://custom-hostname:1234
-   DD_TRACE_AGENT_URL=unix:///var/run/datadog/apm.socket
+   DD_AGENT_HOST=localhost   # the default host to send traces and metrics too
+   DD_TRACE_AGENT_PORT=8126  # the default port to send traces too
+   DD_DOGSTATSD_PORT=8125    # the default port to send Dogstatsd metrics too
    ```
 
    The connection for traces can also be configured in code:
@@ -156,24 +159,20 @@ Install and configure the Datadog Agent to receive traces from your now instrume
     ```go
     package main
 
-    import (
-        "net"
-
-        "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
-    )
+    import "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
 
     func main() {
-        // Network configuration
-        addr := net.JoinHostPort(
-            "custom-hostname",
-            "1234",
-        )
-
-        tracer.Start(tracer.WithAgentAddr(addr),
-            // Unix domain socket configuration
+        tracer.Start(
+            // Unix Domain Socket configuration:
             tracer.WithUDS("/var/run/datadog/apm.socket"),
-    )
+            // or, for alternative TCP connection:
+            // tracer.WithAgentAddr("localhost:8126"),
+            // or, for alternative Dogstatsd connection:
+            // tracer.WithDogstatsdAddress("localhost:8125"),
+        )
         defer tracer.Stop()
+
+        // ...
     }
     ```
 {{< site-region region="us3,us5,eu,gov" >}}
