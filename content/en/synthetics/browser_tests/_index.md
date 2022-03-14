@@ -140,7 +140,7 @@ A notification is sent according to the set of alerting conditions. To configure
 
 Tests can be only recorded from [Google Chrome][10]. To record your test, download the [Datadog Record Test extension for Google Chrome][11].
 
-{{< img src="synthetics/browser_tests/browser_check_record_test2.png" alt="Browser test record test" width="80%" >}}
+{{< img src="synthetics/browser_tests/browser_check_record_test.png" alt="Browser test record test" width="80%" >}}
 
 1. Optionally, select **Open in a pop-up** at the upper right of the page to open your test recording in a separate pop-up window. This is useful if your application does not support being opened in an iframe or if you want to avoid sizing issues at recording. You can also open the pop in **Incognito mode** to start recording your test from a fresh browser free from already logged-in sessions, cookies from your existing browser, and more.
 2. Optionally, enable Datadog to automatically collect RUM data when running step recordings from your browser test. For more information, see [Explore RUM & Session Replay][12]. 
