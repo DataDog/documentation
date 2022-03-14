@@ -7,9 +7,8 @@ kind: guide
 
 If you wish to send data to more than one destination such as a second Datadog org, or other internal infrastructure - you can configure the Agent to send data to additional endpoints. Most data sent from the Agent supports multiple endpoints or API keys.
 
-## Configuration 
 
-### Agent Metrics
+## Agent Metrics
 
 {{< tabs >}}
 
@@ -17,7 +16,8 @@ If you wish to send data to more than one destination such as a second Datadog o
 
 {{% tab "Metrics & Service checks" %}}
 
-For metrics and service checks, you can add the following to your `datadog.yaml`. This will ensure all metrics and service checks are sent to the additional URLs with their associated API keys. 
+### YAML configuration
+In `datadog.yaml` 
 ```yaml
 additional_endpoints:
   "https://mydomain.datadoghq.com":
@@ -27,7 +27,7 @@ additional_endpoints:
   - apikey4
 ```
 
-Alternatively you can also define additional endpoints as an environment variable: 
+### Environment Variable configuration
 
 ```bash
 DD_ADDITIONAL_ENDPOINTS='{\"https://mydomain.datadoghq.com\": [\"apikey2\", \"apikey3\"], \"https://mydomain.datadoghq.eu\": [\"apikey4\"]}'
@@ -40,7 +40,7 @@ DD_ADDITIONAL_ENDPOINTS='{\"https://mydomain.datadoghq.com\": [\"apikey2\", \"ap
 {{% tab "APM" %}}
 
 ### YAML configuration
-
+In `datadog.yaml` 
 ```yaml
 apm_config:
   [...]
@@ -74,7 +74,7 @@ DD_APM_PROFILING_ADDITIONAL_ENDPOINTS='{\"https://mydomain.datadoghq.com\": [\"a
 {{% tab "Process Agent" %}}
 
 ### YAML configuration
-
+In `datadog.yaml` 
 ```yaml
 process_config:
   [...]
@@ -90,7 +90,6 @@ process_config:
 
 ```bash
 DD_PROCESS_ADDITIONAL_ENDPOINTS='{\"https://mydomain.datadoghq.com\": [\"apikey2\", \"apikey3\"], \"https://mydomain.datadoghq.eu\": [\"apikey4\"]}'
-
 ```
 
 {{% /tab %}}
@@ -99,7 +98,7 @@ DD_PROCESS_ADDITIONAL_ENDPOINTS='{\"https://mydomain.datadoghq.com\": [\"apikey2
 {{% tab "Orchestrator" %}}
 
 ### YAML configuration
-
+In `datadog.yaml` 
 ```yaml
 orchestrator_explorer:
   [...]
@@ -115,7 +114,6 @@ orchestrator_explorer:
 
 ```bash
 DD_ORCHESTRATOR_EXPLORER_ORCHESTRATOR_ADDITIONAL_ENDPOINTS='{\"https://mydomain.datadoghq.com\": [\"apikey2\", \"apikey3\"], \"https://mydomain.datadoghq.eu\": [\"apikey4\"]}'
-
 ```
 
 {{% /tab %}}
@@ -125,11 +123,14 @@ DD_ORCHESTRATOR_EXPLORER_ORCHESTRATOR_ADDITIONAL_ENDPOINTS='{\"https://mydomain.
 
 {{< tabs >}}
 
+You can add the yaml configuration to your `datadog.yaml` or launch the agent with the appropriate environment variables. 
+
+
 <!-- Logs -->
 {{% tab "Logs" %}}
 
 ### YAML configuration 
-
+In `datadog.yaml` 
 ```yaml
 logs_config:
   use_http: true
@@ -145,7 +146,6 @@ logs_config:
 ```bash
 DD_LOGS_CONFIG_USE_HTTP=true
 DD_LOGS_CONFIG_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"https://mydomain.datadoghq.com\", \"Port\": 443, \"is_reliable\": true}]"
-
 ```
 
 {{% /tab %}}
@@ -154,7 +154,7 @@ DD_LOGS_CONFIG_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"htt
 {{% tab "Database Monitoring" %}}
 
 ### YAML configuration 
-
+In `datadog.yaml` 
 ```yaml
 database_monitoring:
   samples:
@@ -189,7 +189,6 @@ DD_DATABASE_MONITORING_ACTIVITY_USE_HTTP=true
 DD_DATABASE_MONITORING_ACTIVITY_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"https://mydomain.datadoghq.com\", \"Port\": 443, \"is_reliable\": true}]"
 DD_DATABASE_MONITORING_METRICS_USE_HTTP=true
 DD_DATABASE_MONITORING_METRICS_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"https://mydomain.datadoghq.com\", \"Port\": 443, \"is_reliable\": true}]"
-
 ```
 
 {{% /tab %}}
@@ -198,7 +197,7 @@ DD_DATABASE_MONITORING_METRICS_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\",
 {{% tab "Network Devices" %}}
 
 ### YAML configuration 
-
+In `datadog.yaml` 
 ```yaml
 network_devices:
   metadata:
@@ -215,7 +214,6 @@ network_devices:
 ```bash
 DD_NETWORK_DEVICES_METADATA_USE_HTTP=true
 DD_NETWORK_DEVICES_METADATA_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"https://mydomain.datadoghq.com\", \"Port\": 443, \"is_reliable\": true}]"
-
 ```
 
 {{% /tab %}}
@@ -224,7 +222,7 @@ DD_NETWORK_DEVICES_METADATA_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"
 {{% tab "Compliance" %}}
 
 ### YAML configuration 
-
+In `datadog.yaml` 
 ```yaml
 ​​compliance_config:
   endpoints:
@@ -241,7 +239,6 @@ DD_NETWORK_DEVICES_METADATA_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"
 ```bash
 DD_​​COMPLIANCE_CONFIG_ENDPOINTS_USE_HTTP=true
 DD_​​COMPLIANCE_CONFIG_ENDPOINTS_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"https://mydomain.datadoghq.com\", \"Port\": 443, \"is_reliable\": true}]"
-
 ```
 
 {{% /tab %}}
@@ -250,7 +247,7 @@ DD_​​COMPLIANCE_CONFIG_ENDPOINTS_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiK
 {{% tab "Runtime Security" %}}
 
 ### YAML configuration 
-
+In `datadog.yaml` 
 ```yaml
 runtime_security_config:
   endpoints:
@@ -267,22 +264,15 @@ runtime_security_config:
 ```bash
 DD_​​RUNTIME_SECURITY_CONFIG_ENDPOINTS_USE_HTTP=true
 DD_​​RUNTIME_SECURITY_CONFIG_ENDPOINTS_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"https://mydomain.datadoghq.com\", \"Port\": 443, \"is_reliable\": true}]"
-
 ```
 
 {{% /tab %}}
 {{% /tabs %}}
 
-When using additional endpoints you have to explicitly set `use_http` to tell the agent which transport to use. The transport is globally set and applies to all additional endpoints. 
+**Note**: When using additional endpoints you have to explicitly set `use_http` to tell the Agent component which transport to use. The same transport configuration is shared among all additional endpoints. 
 
 The `is_reliable` setting tells the agent to treat this endpoint with the same priority as the primary endpoint. The primary endpoint is always reliable. `is_reliable` tries to ensure logs are never missed if a destination becomes unavailable. 
 
 For example: If you are sending logs to two reliable endpoints and one becomes unavailable, logs will continue to flow to the second reliable endpoint. If both endpoints becomes unavailable logs will stop flowing until at least one recovers. 
 
 If `is_reliable` is not specified it defaults to `false`. Unreliable endpoints will only send logs if they successfully send to at least one reliable endpoint. You may define multiple additional endpoints with mixed use of `is_reliable`. 
-
-
-### Installation
-
-
-## Further Reading
