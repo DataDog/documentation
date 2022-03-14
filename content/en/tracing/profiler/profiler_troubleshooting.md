@@ -316,10 +316,22 @@ This error usually means that the profiler is unable to connect to the Datadog A
 
 Your profiles may be empty ("No CPU time reported") or contain few frames. Sometimes this is caused when applications have poor symbolization information. This may also be expected--the profiler activates only when the instrumented application is scheduled on the CPU, and applications may be predominately off-CPU for many reasons, such as low user load or high application wait time.
 
-The root of your profile is the frame annotated with the application name in parentheses. If this frame shows a significant amount of CPU time, but no frames, your application may have poor profiling fidelity. Consider the following:
+The root of your profile is the frame annotated with the application name in parentheses. If this frame shows a significant amount of CPU time, but no child frames, your application may have poor profiling fidelity. Consider the following:
 - Stripped binaries do not have symbols available. Try using a non-stripped binary or a non-minified container image.
 - Certain applications and libraries benefit from their debug packages being installed. This is true for services installed through your repo's package manager or similar.
 
+## "error while loading shared libraries: libdd_profiling.so"
+
+When using the Continuous Profiler for Linux as a dynamic library, your application may fail to launch with the error,
+
+```
+error while loading shared libraries: libdd_profiling.so: cannot open shared object file: No such file or directory
+```
+
+This happens when your application is build with `libdd_profiling.so` as a dependency, but it cannot be found at runtime during dependency reconciliation. This issue can be resolved in a few ways.
+
+1. Rebuild your application using the static library.  In some build systems the choice between dynamic and static libraries can be ambiguous, so it may be useful to use `ldd` to check whether the resulting binary includes an unwanted dynamic dependency on `libdd_profiling.so`.
+2. Copy `libdd_profiling.so` to one of the directories in the search path for the dynamic linker. You can get a list of these directories simply by running `ld --verbose | grep SEARCH_DIR | tr -s ' ;' \\n` on most Linux systems.
 
 [1]: /tracing/troubleshooting/#tracer-debug-logs
 [2]: /help/
