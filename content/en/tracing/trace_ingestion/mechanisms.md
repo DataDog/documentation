@@ -34,7 +34,7 @@ For instance, if service `A` has more traffic than service `B`, the Agent might 
 Set Agent's target traces-per-second in its main configuration file (`datadog.yaml`) or as an environment variable :
 ```
 @param max_traces_per_second - integer - optional - default: 10
-@env DD_APM_CONFIG_MAX_TRACES_PER_SECOND - integer - optional - default: 10
+@env DD_APM_MAX_TPS - integer - optional - default: 10
 ```
 
 ### In tracing libraries: user-defined rules
@@ -145,7 +145,7 @@ In the Agent, an additional rate limiter is set to 200 spans per second. If the 
 Set the rate in the Agent main configuration file (`datadog.yaml`) or as an environment variable:
 ```
 @param max_events_per_second - integer - optional 200
-@env DD_APM_CONFIG_MAX_EVENTS_PER_SECOND - integer - optional 200
+@env DD_APM_MAX_EPS - integer - optional 200
 ```
 
 ## Error and rare traces
