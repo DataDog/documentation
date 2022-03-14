@@ -552,7 +552,7 @@
     - action: pull-and-push-file
       branch: alai97/rum-data-collected-docs-update
       globs:
-      - 'docs/rum_collection/data_collected.md'
+      - 'data_collected.md'
       options:
         dest_path: '/real_user_monitoring/ios/'
         file_name: 'data_collected.md'
@@ -564,7 +564,7 @@
             - link: "https://github.com/DataDog/dd-sdk-ios"
               tag: "Github"
               text: "dd-sdk-ios Source code"
-            - link: "/real_user_monitoring"
+            - link: "/real_user_monitoring/"
               tag: "Documentation"
               text: "Explore Datadog RUM"
 
