@@ -9,7 +9,7 @@ Once this feature has been enabled, access the [organization creation page][3] t
 
 Note: your new organization name must be **32 characters or fewer**.
 
-Users need the the Org Management (org_management) permission to access the organization creation page. Hover over your avatar in the lower left corner, then click "New Organization".
+Users need the the Org Management (`org_management`) permission to access the organization creation page. Hover over your avatar in the lower left corner, then click "New Organization".
 
 After creating your organizations, switch between them using the menu that pops up when you hover over your avatar.
 
