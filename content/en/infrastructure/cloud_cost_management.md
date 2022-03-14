@@ -32,7 +32,7 @@ Select the following Delivery options:
 
 ### Configure the AWS integration
 
-Select your AWS billing account from the dropdown. Once selected, Datadog displays any associated tags with that account. If you have multiple similarly-named billing accounts, viewing the tags associated with a selected account can help ensure that you've selected the specific one you want.
+Select your AWS billing account from the dropdown. Once your account is selected, Datadog displays tags associated with that account. If you have multiple similarly-named billing accounts, viewing the tags associated with a selected account can help ensure that you've selected the specific one you want.
 
 ### Locate the Cost and Usage Report
 
