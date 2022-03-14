@@ -548,6 +548,7 @@
             - link: "tracing/visualization/"
               tag: "Documentation"
               text: "Explore your services, resources, and traces"
+              
     - action: pull-and-push-file
       branch: alai97/rum-data-collected-docs-update
       globs:
@@ -567,7 +568,7 @@
             - link: "/real_user_monitoring"
               tag: "Documentation"
               text: "Explore Datadog RUM"
-              
+
     - action: pull-and-push-folder
       branch: alai97/rum-data-collected-docs-update
       globs:
