@@ -567,6 +567,7 @@
             - link: "/real_user_monitoring"
               tag: "Documentation"
               text: "Explore Datadog RUM"
+              
     - action: pull-and-push-folder
       branch: alai97/rum-data-collected-docs-update
       globs:
