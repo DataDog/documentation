@@ -144,14 +144,14 @@ Install and configure the Datadog Agent to receive traces from your now instrume
 
 3. After the application is instrumented, the trace client attempts to send traces to the Unix domain socket `/var/run/datadog/apm.socket` by default. If the socket does not exist, traces are sent to `http://localhost:8126`.
 
-   A similar rule applies to all metrics sent by the Go tracer (including Runtime Metrics and internal telemetry): the client will attempt to send Dogstatsd data to the Unix domain socket `/var/run/datadog/dsd.socket` and will default to `http://localhost:8125` if that does not exist.
+   A similar rule applies to all metrics sent by the Go tracer (including Runtime Metrics and internal telemetry): the client attempts to send Dogstatsd data to the Unix domain socket `/var/run/datadog/dsd.socket` and defaults to `http://localhost:8125` if that does not exist.
 
-   If different hosts or ports are required, one or more of the below environment variables can be used. The examples show the defaults but can be set to other values as well.
+   If you require different hosts or ports, use one or more of the following environment variables. The examples show the defaults, but you can set them to other values as well.
 
    ```
-   DD_AGENT_HOST=localhost   # the host to send traces and metrics to; defaults to "localhost" when not set
-   DD_TRACE_AGENT_PORT=8126  # the port to send traces to; defaults to 8126 when not set
-   DD_DOGSTATSD_PORT=8125    # the port to send Dogstatsd metrics to; defaults to 8125 when not set
+   DD_AGENT_HOST=localhost   # The host to send traces and metrics to. Defaults to localhost.
+   DD_TRACE_AGENT_PORT=8126  # The port to send traces to. Defaults to 8126.
+   DD_DOGSTATSD_PORT=8125    # The port to send Dogstatsd metrics to. Defaults to 8125.
    ```
 
    The connection for traces can also be configured in code:
