@@ -139,7 +139,7 @@ For generality, the library exposes a C API. Here is an example of incorporating
 
 3. Pass the `include` and `lib` subdirectories of the extracted directory to your build system and link against `libdd_profiling`. For the above example:
    ```bash
-   gcc -I/tmp/ddprof/include -L/tmp/ddprof/lib profiler_demo.c -o profiler_demo -ldd_profilin
+   gcc -I/tmp/ddprof/include -L/tmp/ddprof/lib profiler_demo.c -o profiler_demo -ldd_profiling
    ```
 
 ### Deploying the shared library
