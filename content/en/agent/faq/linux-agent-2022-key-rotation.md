@@ -140,7 +140,9 @@ Because the dependency of Agent 6.31.0+/7.31.0+ packages on the `datadog-signing
 - You mirror the Agent DEB package to your own APT repository without also mirroring the `datadog-signing-keys` package.
 - Your APT configuration is set to not install _recommended_ packages, for example by running `apt` with ` --no-install-recommends` or by having `APT::Install-Recommends "0"` in `apt.conf`.
 
-This is not a problem, as neither of the above methods requires verification of Datadog's repo metadata signature and thus the key rotation doesn't affect you. However, you might still benefit from using the debsig-verify policy files shipped in the `datadog-signing-keys` package.
+This is not a problem in the first two cases, as neither of the first two methods requires verification of Datadog's repo metadata signature and thus the key rotation doesn't affect you. However, you might still benefit from using the debsig-verify policy files shipped in the `datadog-signing-keys` package.
+
+In the third case, you will need to explicitly install the `datadog-signing-keys` package, if installing Agent package from `apt.datadoghq.com` via `apt`. Alternatively, you can use one of the supported [installation methods](#install-methods-that-automatically-trust-the-new-gpg-key).
 
 ## Impact for Agent v5 users
 
