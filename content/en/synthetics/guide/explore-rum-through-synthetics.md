@@ -17,9 +17,9 @@ In your browser test recording, click **Collect RUM Data on** above the **Start 
 
 You have access to:
 
-- **Session Replay** for all tests. This provides additional context beyond the screenshots available for each step and includes Dev Tools.
-- The session in the Real User Monitoring Explorer.
-- Aggregated errors across your different steps, tests, and test runs with **Error Tracking**. This allows you to scope the error impact and prioritize fixing the most severe issues. 
+- [**Session Replay**][7] for all tests. This provides additional context beyond the screenshots available for each step and includes [**Dev Tools**][4].
+- The session in the [**RUM Explorer**][5].
+- Aggregated errors across your different steps, tests, and test runs with [**Error Tracking**][6]. This allows you to scope the error impact and prioritize fixing the most severe issues. 
 - Extra resources and timing information from RUM including additional search and monitor capabilities.
 
 
@@ -54,3 +54,7 @@ To navigate back to Synthetics and your test’s results, click **View Synthetic
 [1]: https://app.datadoghq.com/synthetics/tests?query=type%3A%28browser%29
 [2]: /real_user_monitoring/explorer/
 [3]: https://app.datadoghq.com/rum/explorer
+[4]: /real_user_monitoring/session_replay/developer_tools/
+[5]: /real_user_monitoring/explorer/
+[6]: /real_user_monitoring/error_tracking/
+[7]: /real_user_monitoring/session_replay/
