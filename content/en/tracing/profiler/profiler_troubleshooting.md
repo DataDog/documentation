@@ -20,7 +20,7 @@ If you've configured the profiler and don't see profiles in the profile search p
 
 ## Reduce overhead from default setup
 
-If the default setup overhead is not acceptable, you can use the profiler with minimal configuration settings.  Minimal configuration has the following changes compared to the default:
+If the default setup overhead is not acceptable, you can use the profiler with minimal configuration settings. Minimal configuration has the following changes compared to the default:
 
 - Increases sampling threshold to 500ms for `ThreadSleep`, `ThreadPark`, and `JavaMonitorWait` events compared to 100ms default
 - Disables `ObjectAllocationInNewTLAB`, `ObjectAllocationOutsideTLAB`, `ExceptionSample`, `ExceptionCount` events
@@ -330,7 +330,7 @@ error while loading shared libraries: libdd_profiling.so: cannot open shared obj
 
 This happens when your application is build with `libdd_profiling.so` as a dependency, but it cannot be found at runtime during dependency reconciliation. This issue can be resolved in a few ways.
 
-1. Rebuild your application using the static library.  In some build systems the choice between dynamic and static libraries can be ambiguous, so it may be useful to use `ldd` to check whether the resulting binary includes an unwanted dynamic dependency on `libdd_profiling.so`.
+1. Rebuild your application using the static library. In some build systems the choice between dynamic and static libraries can be ambiguous, so it may be useful to use `ldd` to check whether the resulting binary includes an unwanted dynamic dependency on `libdd_profiling.so`.
 2. Copy `libdd_profiling.so` to one of the directories in the search path for the dynamic linker. You can get a list of these directories simply by running `ld --verbose | grep SEARCH_DIR | tr -s ' ;' \\n` on most Linux systems.
 
 [1]: /tracing/troubleshooting/#tracer-debug-logs
