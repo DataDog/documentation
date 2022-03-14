@@ -548,14 +548,13 @@
             - link: "tracing/visualization/"
               tag: "Documentation"
               text: "Explore your services, resources, and traces"
-              
+
     - action: pull-and-push-file
       branch: alai97/rum-data-collected-docs-update
       globs:
       - 'docs/rum_collection/data_collected.md'
       options:
         dest_path: '/real_user_monitoring/ios/'
-        path_to_remove: 'docs/rum_collection/data_collected/'
         file_name: 'data_collected.md'
         front_matters:
           dependencies: ["https://github.com/DataDog/dd-sdk-ios/blob/alai97/rum-data-collected-docs-update/docs/rum_collection/data_collected.md"]
