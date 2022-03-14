@@ -99,13 +99,11 @@ Set all these variables in your test target:
 `DD_TEST_RUNNER`
 : Enables or disables the instrumentation of tests. Set this value to `$(DD_TEST_RUNNER)` so you can enable and disable test instrumentation with a environment variable defined outside of the test process (for example, in the CI build).<br/>
 **Default**: `false`<br/>
-**Recommended**: `$(DD_TEST_RUNNER)`<br/>
-**Example**: `true`
+**Recommended**: `$(DD_TEST_RUNNER)`
 
 `DD_API_KEY`
-: Use the [Datadog API Key][1] to report test results.<br/>
-**Default**: `(empty)`<br/>
-**Example**: `pub0zxxxyyyxxxyyxxxzzxxyyxxxyyy`
+: The [Datadog API key][1] used to upload the test results.<br/>
+**Default**: `(empty)`
 
 `DD_SERVICE`
 : Name of the service or library under test.<br/>
