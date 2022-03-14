@@ -24414,10 +24414,8 @@ paths:
               dynamic-points:
                 description: "Post time-series data that can be graphed on Datadog\u2019s
                   dashboards."
+                externalValue: examples/metrics/dynamic-points.json.sh
                 summary: Dynamic Points
-                value: "{\n  \"series\": [\n    {\n      \"metric\": \"system.load.1\",\n
-                  \     \"points\": [\n        [\n          ${NOW},\n          1234.5\n
-                  \       ]\n      ]\n    }\n  ]\n}"
                 x-variables:
                   NOW: $(date +%s)
             schema:
