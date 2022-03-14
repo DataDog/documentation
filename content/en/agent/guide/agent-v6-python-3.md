@@ -37,7 +37,7 @@ This configuration is not supported for the Azure VM Extension.
 
 2. [Restart the Agent][3].
 
-Alternatively, you can set the environment variable `DD_PYTHON_VERSION` to `2` or `3` to choose which Python runtime is used. Environment variables take precedence over configuration options in `datadog.yaml`. That is, if you set the environment variable `DD_PYTHON_VERSION`, the `python_version` option in `datadog.yaml` is ignored.
+Alternatively, specify which Python runtime you want to use by setting the `DD_PYTHON_VERSION` environment variable to `2` or `3`. Environment variables take precedence over configuration options in `datadog.yaml`. For example, by setting the `DD_PYTHON_VERSION` environment variable, the `python_version` option in `datadog.yaml` is ignored.
 
 This is an Agent-wide configuration option. **All Python checks launched by an Agent use the same Python runtime**.
 
@@ -46,8 +46,8 @@ This is an Agent-wide configuration option. **All Python checks launched by an A
 
 Datadog provides Agent container images for Python 2 and Python 3. 
 
-* Image tags starting with `6.`, like `6.34.0` or `6.34.0-jmx` are images containing the Python 2 runtime.
-* Image tags starting with `7.`, like `7.34.0` or `7.34.0-jmx` are images containing the Python 3 runtime.
+* Image tags starting with `6.`, like `6.34.0` or `6.34.0-jmx`, are images containing the Python 2 runtime.
+* Image tags starting with `7.`, like `7.34.0` or `7.34.0-jmx`, are images containing the Python 3 runtime.
 
 To switch from Python 2 to Python 3, update the image tag used to deploy the Agent.
 
@@ -124,7 +124,7 @@ spec:
       tag: 6.33.0
 ```
 
-or using `imageConfig.name`:
+or you are using `imageConfig.name`:
 
 ```yaml
 apiVersion: datadoghq.com/v1alpha1
