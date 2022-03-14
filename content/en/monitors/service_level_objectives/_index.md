@@ -181,7 +181,7 @@ You have the option to create one-time corrections for ad-hoc adjustments, or re
 
 For either type of correction, you must select a correction category that states why the correction is being made. The available categories are `Scheduled Maintenance`, `Outside Business Hours`, `Deployment`, and `Other`. You can optionally include a description to provide additional context if necessary.
 
-Each SLO has a maximum limit of corrections that can be configured to ensure query performance. These limits only apply to the past 90 days per SLO, thus corrections for time periods before the past 90 days do not count towards your limit. This means that: 
+Each SLO has a maximum limit of corrections that can be configured to ensure query performance. These limits only apply to the past 90 days per SLO, so corrections for time periods before the past 90 days do not count towards your limit. This means that: 
 - If the end time of a one-time correction is before the past 90 days, it will not count towards your limit
 - If the end time of the final repetition of a recurring correction is before the past 90 days, it will not count towards your limit
 
