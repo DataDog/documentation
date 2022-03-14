@@ -14627,6 +14627,32 @@ components:
             $ref: '#/components/schemas/UsageNetworkHostsHour'
           type: array
       type: object
+    UsageOnlineArchiveHour:
+      description: Online Archive usage in a given hour.
+      properties:
+        hour:
+          description: The hour for the usage.
+          format: date-time
+          type: string
+        online_archive_events_count:
+          description: Total count of online archived events within the hour.
+          type: integer
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
+          type: string
+      type: object
+    UsageOnlineArchiveResponse:
+      description: Online Archive usage response.
+      properties:
+        usage:
+          description: Response containing Online Archive usage.
+          items:
+            $ref: '#/components/schemas/UsageOnlineArchiveHour'
+          type: array
+      type: object
     UsageProfilingHour:
       description: The number of profiled hosts for each hour for a given organization.
       properties:
@@ -15132,6 +15158,11 @@ components:
             all hours in the current date for all organizations.
           format: int64
           type: integer
+        online_archive_events_count_sum:
+          description: Sum of all online archived events over all hours in the current
+            date for all organizations.
+          format: int64
+          type: integer
         opentelemetry_host_top99p:
           description: Shows the 99th percentile of all hosts reported by the Datadog
             exporter for the OpenTelemetry Collector over all hours in the current
@@ -15442,6 +15473,11 @@ components:
         npm_host_top99p:
           description: Shows the 99th percentile of all distinct Networks hosts over
             all hours in the current date for the given org.
+          format: int64
+          type: integer
+        online_archive_events_count_sum:
+          description: Sum of all online archived events over all hours in the current
+            date for the given org.
           format: int64
           type: integer
         opentelemetry_host_top99p:
@@ -15778,6 +15814,11 @@ components:
         npm_host_top99p_sum:
           description: Shows the 99th percentile of all distinct Networks hosts over
             all hours in the current months for all organizations.
+          format: int64
+          type: integer
+        online_archive_events_count_agg_sum:
+          description: Sum of all online archived events over all hours in the current
+            months for all organizations.
           format: int64
           type: integer
         opentelemetry_host_top99p_sum:
@@ -24373,13 +24414,8 @@ paths:
               dynamic-points:
                 description: "Post time-series data that can be graphed on Datadog\u2019s
                   dashboards."
+                externalValue: examples/metrics/dynamic-points.json.sh
                 summary: Dynamic Points
-                value:
-                  series:
-                  - metric: system.load.1
-                    points:
-                    - - ${NOW}
-                      - 1234.5
                 x-variables:
                   NOW: $(date +%s)
             schema:
@@ -28486,6 +28522,65 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 14
+      x-undo:
+        type: safe
+  /api/v1/usage/online-archive:
+    get:
+      description: Get hourly usage for Online Archive.
+      operationId: GetUsageOnlineArchive
+      parameters:
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage beginning at this hour.'
+        in: query
+        name: start_hr
+        required: true
+        schema:
+          format: date-time
+          type: string
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage ending
+
+          **before** this hour.'
+        in: query
+        name: end_hr
+        required: false
+        schema:
+          format: date-time
+          type: string
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/UsageOnlineArchiveResponse'
+          description: OK
+        '400':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+        '429':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - usage_read
+      summary: Get hourly usage for Online Archive
+      tags:
+      - Usage Metering
+      x-menu-order: 38
       x-undo:
         type: safe
   /api/v1/usage/profiling:

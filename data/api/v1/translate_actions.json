@@ -1028,6 +1028,10 @@
     "description": "Get hourly usage for network hosts.",
     "summary": "Get hourly usage for Network Hosts"
   },
+  "GetUsageOnlineArchive": {
+    "description": "Get hourly usage for Online Archive.",
+    "summary": "Get hourly usage for Online Archive"
+  },
   "GetUsageProfiling": {
     "description": "Get hourly usage for profiled hosts.",
     "summary": "Get hourly usage for profiled hosts"

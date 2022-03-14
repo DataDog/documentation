@@ -28,7 +28,7 @@ If you don't have a case ID, just enter your email address used to login in Data
 | Platform   | Command                                                 |
 |------------|---------------------------------------------------------|
 | AIX        | `datadog-agent flare <CASE_ID>`                         |
-| Docker     | `docker exec -it datadog-agent agent flare <CASE_ID>`   |
+| Docker     | `docker exec -it dd-agent agent flare <CASE_ID>`        |
 | macOS      | `datadog-agent flare <CASE_ID>` or via the [web GUI][1] |
 | CentOS     | `sudo datadog-agent flare <CASE_ID>`                    |
 | Debian     | `sudo datadog-agent flare <CASE_ID>`                    |

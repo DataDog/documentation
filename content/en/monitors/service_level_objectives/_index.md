@@ -177,11 +177,15 @@ When you create a correction window for an SLO, the time period you specify is r
 - For monitor-based SLOs, time in the correction window is not counted.
 - For metric-based SLOs, all good and bad events in the correction window are not counted.
 
-You have the option to create one-time corrections for ad-hoc adjustments, or recurring corrections for predictable adjustments that occur on a regular cadence. One-time corrections require a start and end time, while recurring corrections require a start time, duration, and interval. Recurring corrections are based on [iCalender RFC 5545's RRULE specification][12]. Specifying an end time for recurring corrections is optional in case you need the correction to repeat indefinitely. 
+You have the option to create one-time corrections for ad-hoc adjustments, or recurring corrections for predictable adjustments that occur on a regular cadence. One-time corrections require a start and end time, while recurring corrections require a start time, duration, and interval. Recurring corrections are based on [iCalender RFC 5545's RRULE specification][12]. Specifying an end date for recurring corrections is optional in case you need the correction to repeat indefinitely. 
 
 For either type of correction, you must select a correction category that states why the correction is being made. The available categories are `Scheduled Maintenance`, `Outside Business Hours`, `Deployment`, and `Other`. You can optionally include a description to provide additional context if necessary.
 
-Each SLO has a maximum limit of corrections that can be configured to ensure query performance. The limits per SLO are as follows:
+Each SLO has a maximum limit of corrections that can be configured to ensure query performance. These limits only apply to the past 90 days per SLO, so corrections for time periods before the past 90 days do not count towards your limit. This means that: 
+- If the end time of a one-time correction is before the past 90 days, it does count towards your limit.
+- If the end time of the final repetition of a recurring correction is before the past 90 days, it does not count towards your limit.
+
+The 90 day limits per SLO are as follows:
 
 | Correction Type   | Limit per SLO |
 | ----------------- | ------------- |
@@ -190,7 +194,9 @@ Each SLO has a maximum limit of corrections that can be configured to ensure que
 | Weekly recurring  | 3             |
 | Monthly recurring | 5             |
 
-You may configure status corrections through the UI, the [SLO status corrections API][13], or a [Terraform resource][14].
+You may configure status corrections through the UI by selecting `Correct Status` in your SLO's side panel, the [SLO status corrections API][13], or a [Terraform resource][14].
+
+{{< img src="monitors/service_level_objectives/slo-corrections-ui.png" alt="SLO correction UI"  >}}
 
 #### Access in the UI 
 

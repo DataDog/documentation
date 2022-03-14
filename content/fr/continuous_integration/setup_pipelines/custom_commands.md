@@ -64,7 +64,7 @@ Les options ci-dessous sont disponibles pour la commande `datadog-ci trace` :
 **Exemple** : `Wait for DB to be reachable`
 
 `--tags`
-: Paires key/value au format `key:value` à associer à la commande personnalisée (le paramètre`--tags` peut être fourni plusieurs fois). Lorsque vous spécifiez des tags avec `DD_TAGS`, séparez-les avec des virgules (par exemple, `team:backend,priority:high`).<br/>
+: Paires key/value au format `key:value` à associer à la commande personnalisée (le paramètre `--tags` peut être fourni plusieurs fois). Lorsque vous spécifiez des tags avec `DD_TAGS`, séparez-les avec des virgules (par exemple, `team:backend,priority:high`).<br/>
 **Variable d'environnement** : `DD_TAGS`<br/>
 **Valeur par défaut** : (aucune)<br/>
 **Exemple** : `team:backend`<br/>

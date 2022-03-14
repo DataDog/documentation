@@ -7,6 +7,9 @@ aliases:
   - /logs/languages
   - /integrations/windows_event_log/
 further_reading:
+- link: "https://www.datadoghq.com/blog/log-file-control-with-logrotate/"
+  tag: "Blog"
+  text: "How to manage log files using Logrotate"
 - link: "/logs/log_configuration/processors"
   tag: "Documentation"
   text: "Discover how to process your logs"
