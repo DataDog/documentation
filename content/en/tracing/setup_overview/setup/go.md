@@ -149,9 +149,9 @@ Install and configure the Datadog Agent to receive traces from your now instrume
    If different hosts or ports are required, one or more of the below environment variables can be used. The examples show the defaults but can be set to other values as well.
 
    ```
-   DD_AGENT_HOST=localhost   # the default host to send traces and metrics too
-   DD_TRACE_AGENT_PORT=8126  # the default port to send traces too
-   DD_DOGSTATSD_PORT=8125    # the default port to send Dogstatsd metrics too
+   DD_AGENT_HOST=localhost   # the host to send traces and metrics to; defaults to "localhost" when not set
+   DD_TRACE_AGENT_PORT=8126  # the port to send traces to; defaults to 8126 when not set
+   DD_DOGSTATSD_PORT=8125    # the port to send Dogstatsd metrics to; defaults to 8125 when not set
    ```
 
    The connection for traces can also be configured in code:
@@ -165,9 +165,9 @@ Install and configure the Datadog Agent to receive traces from your now instrume
         tracer.Start(
             // Unix Domain Socket configuration:
             tracer.WithUDS("/var/run/datadog/apm.socket"),
-            // or, for alternative TCP connection:
+            // or, for a non-default TCP connection:
             // tracer.WithAgentAddr("localhost:8126"),
-            // or, for alternative Dogstatsd connection:
+            // or, for an alternative UDP connection for Dogstatsd:
             // tracer.WithDogstatsdAddress("localhost:8125"),
         )
         defer tracer.Stop()
