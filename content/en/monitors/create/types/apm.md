@@ -29,7 +29,7 @@ Analytics monitors allow you to visualize APM data over time and set up alerts b
 
 To create an [APM monitor][2] in Datadog, use the main navigation: *Monitors --> New Monitor --> APM*.
 
-Choose between an **APM Metrics** or **Analytics** monitor:
+Choose between an **APM Metrics** or **Trace Analytics** monitor:
 
 {{< tabs >}}
 {{% tab "APM Metrics" %}}
@@ -71,7 +71,7 @@ For detailed instructions on the advanced alert options (no data, evaluation del
 [4]: /monitors/create/configuration/#advanced-alert-conditions
 [5]: /monitors/create/types/metric/#data-window
 {{% /tab %}}
-{{% tab "Analytics" %}}
+{{% tab "Trace Analytics" %}}
 
 <div class="alert alert-info"><strong>Note</strong>: There is a default limit of 1000 Trace Analytics monitors per account. <a href="/help/">Contact Support</a> to lift this limit for your account.</div>
 
@@ -101,9 +101,7 @@ For detailed instructions on the advanced alert options (no data, evaluation del
 
 #### No Data and below alerts
 
-`NO DATA` is a state given when no spans match the monitor query during the timeframe.
-
-To receive a notification when all groups matching a specific query have stopped sending spans, set the condition to below 1. This notifies when no logs match the monitor query in a given timeframe across all aggregate groups.
+To receive a notification when a group matching a specific query have stopped sending spans, set the condition to below `1`. This notifies when no spans match the monitor query in the defined evaluation period for the group.
 
 #### Advanced alert conditions
 

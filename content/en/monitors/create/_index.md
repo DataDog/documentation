@@ -35,7 +35,7 @@ Select a [monitor type][5] from the list.
 {{< nextlink href="/monitors/create/types/custom_check" >}}<u>Custom Check</u>: Monitor the status of arbitrary custom checks.{{< /nextlink >}}
 {{< nextlink href="/monitors/create/types/event" >}}<u>Event</u>: Monitor events gathered by Datadog.{{< /nextlink >}}
 {{< nextlink href="/monitors/create/types/log" >}}<u>Logs</u>: Monitor logs gathered by Datadog.{{< /nextlink >}}
-{{< nextlink href="/monitors/create/types/apm" >}}<u>APM</u>: Compare an APM metric to a user-defined threshold.{{< /nextlink >}}
+{{< nextlink href="/monitors/create/types/apm" >}}<u>APM</u>: Monitor APM metrics or trace queries{{< /nextlink >}}
 {{< nextlink href="/monitors/create/types/real_user_monitoring" >}}<u>Real User Monitoring</u>: Monitor real user data gathered by Datadog.{{< /nextlink >}}
 {{< nextlink href="/monitors/create/types/watchdog" >}}<u>Watchdog</u>: Get notified when Watchdog detects anomalous behavior.{{< /nextlink >}}
 {{< nextlink href="/monitors/create/types/composite" >}}<u>Composite</u>: Alert on an expression combining multiple monitors.{{< /nextlink >}}
