@@ -130,23 +130,23 @@ An [event][16] is created anytime a monitor is created, modified, silenced, or d
 
 ### Permissions
 
-Restrict the edition of your monitor to the monitor's creator and specific roles.
+Restrict the edition of your monitor to its creator and specific [roles][17].
 
   {{< img src="monitors/notifications/monitor_rbac_permissions.jpg" alt="Monitor RBAC Permissions" style="width:90%;" >}}
 
-Editing includes any updates to the monitor configuration, monitor deletion, and muting of the monitor for any amount of time.
+Edition includes any updates to the monitor configuration, monitor deletion, and muting of the monitor for any amount of time.
 
 **Note**: The limitations are applied both in the UI and API.
 
 ## Test notifications
 
-Test notifications are supported for the [monitor types][17]: host, metric, anomaly, outlier, forecast, logs, rum, apm, integration (check only), process (check only), network (check only), custom check, event, and composite.
+Test notifications are supported for the [monitor types][18]: host, metric, anomaly, outlier, forecast, logs, rum, apm, integration (check only), process (check only), network (check only), custom check, event, and composite.
 
 ### Run the test
 
 1. After defining your monitor, test the notifications with the **Test Notifications** button at the bottom right of the monitor page.
 
-2. From the test notifications pop-up, choose the monitor case to test. You can only test states that are available in the monitor’s configuration for the thresholds specified in the alerting conditions. [Recovery thresholds][18] are an exception, as Datadog sends a recovery notification once the monitor either is no longer in alert, or it has no warn conditions.
+2. From the test notifications pop-up, choose the monitor case to test. You can only test states that are available in the monitor’s configuration for the thresholds specified in the alerting conditions. [Recovery thresholds][19] are an exception, as Datadog sends a recovery notification once the monitor either is no longer in alert, or it has no warn conditions.
 
     {{< img src="monitors/notifications/test-notif-select.png" alt="Test the notifications for this monitor" style="width:70%;" >}}
 
@@ -187,5 +187,6 @@ Message variables auto-populate with a randomly selected group based on the scop
 [14]: /integrations/webhooks/#usage
 [15]: /integrations/#cat-notification
 [16]: /events/
-[17]: /monitors/create/types/
-[18]: /monitors/faq/what-are-recovery-thresholds/
+[17]: /account_management/rbac/?tab=datadogapplication
+[18]: /monitors/create/types/
+[19]: /monitors/faq/what-are-recovery-thresholds/
