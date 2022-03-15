@@ -128,9 +128,13 @@ See the [list of integrations][15] that can be used to notify your team.
 
 An [event][16] is created anytime a monitor is created, modified, silenced, or deleted. Set the `Notify` option to notify team members and chat services of these events.
 
-### Edit restrictions
+### Permissions
 
-If changes are restricted, only the monitor's creator or an administrator can change the monitor. Changes include any updates to the monitor definition and muting for any amount of time.
+Restrict the edition of your monitor to the monitor's creator and specific roles.
+
+  {{< img src="monitors/notifications/monitor_rbac_permissions.jpg" alt="Monitor RBAC Permissions" style="width:90%;" >}}
+
+Editing includes any updates to the monitor configuration, monitor deletion, and muting of the monitor for any amount of time.
 
 **Note**: The limitations are applied both in the UI and API.
 
