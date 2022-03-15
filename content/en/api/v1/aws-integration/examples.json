@@ -65,10 +65,10 @@
                 "us-west-2"
               ],
               "filter_tags": [
-                "$KEY:$VALUE"
+                "<KEY>:<VALUE>"
               ],
               "host_tags": [
-                "$KEY:$VALUE"
+                "<KEY>:<VALUE>"
               ],
               "metrics_collection_enabled": false,
               "resource_collection_enabled": true,
@@ -165,10 +165,10 @@
           "us-west-2"
         ],
         "filter_tags": [
-          "$KEY:$VALUE"
+          "<KEY>:<VALUE>"
         ],
         "host_tags": [
-          "$KEY:$VALUE"
+          "<KEY>:<VALUE>"
         ],
         "metrics_collection_enabled": false,
         "resource_collection_enabled": true,
@@ -231,10 +231,10 @@
           "us-west-2"
         ],
         "filter_tags": [
-          "$KEY:$VALUE"
+          "<KEY>:<VALUE>"
         ],
         "host_tags": [
-          "$KEY:$VALUE"
+          "<KEY>:<VALUE>"
         ],
         "metrics_collection_enabled": false,
         "resource_collection_enabled": true,
@@ -449,10 +449,10 @@
           "us-west-2"
         ],
         "filter_tags": [
-          "$KEY:$VALUE"
+          "<KEY>:<VALUE>"
         ],
         "host_tags": [
-          "$KEY:$VALUE"
+          "<KEY>:<VALUE>"
         ],
         "metrics_collection_enabled": false,
         "resource_collection_enabled": true,
