@@ -65,7 +65,6 @@ Navigate to the in-app [Rule Setup and Configuration][11] page to create a new r
 1. This feature exports your query and defines it in the second step of Log Detection rule setup. Select a detection method. In this instance, select **New Term** to detect when the `@aws.awslogs.owner` attribute changes to a new value, and follow the [Log Detection Rules][12] documentation to learn how to complete the rest of the configuration of your new rule.
 
 
-## Next Steps
 
 [1]: /security_platform/security_monitoring/
 [2]: https://docs.aws.amazon.com/eks/latest/userguide/create-cluster.html
