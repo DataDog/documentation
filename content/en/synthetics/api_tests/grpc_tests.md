@@ -33,31 +33,26 @@ After choosing to create an `gRPC` health check test, define your test's request
 1. Specify the **Host** and **Port** to run your health check test on. By default, the port is set to `50051`.
 2. Enter the service you want to send a health check. Leave this field blank if you want to send a health check on the gRPC server.
 
-<!--TODO. will probably have an "advanced options" section. maybe need to c/p the http advanced option section-->
-
 3. **Name** your gRPC health check test.
 
 4. Add `env` **Tags** as well as any other tag to your gRPC health check test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][5].
 
-{{< img src="synthetics/api_tests/http_test_config.png" alt="Define HTTP request" style="width:90%;" >}} 
-<!-- TODO replace with gRPC img -->
+{{< img src="synthetics/api_tests/grpc_test_config.png" alt="Define gRPC request" style="width:90%;" >}} 
 
-Click **Test URL** to try out the request configuration. A response preview is displayed on the right side of your screen.
+Click **Test service** to try out the request configuration. A response preview is displayed on the right side of your screen.
 
 ### Define assertions
 
-Assertions define what an expected test result is. When hitting `Test URL` an assertion on the `response time` is added based on the response that was obtained. You must define at least one assertion for your test to monitor.
+Assertions define what an expected test result is. When hitting `Test URL` an assertion on the `response time` and the `healthcheck status` are added based on the response that was obtained. You must define at least one assertion for your test to monitor.
 
 | Type                    | Operator                                        | Value type                           |
 |-------------------------|-------------------------------------------------|--------------------------------------|
 | response time           | `is less than`                                  | _Integer (ms)_                       |
 | healthcheck status      | `is`, `is not`                                  | _Integer (ms)_                       |
 
-<!-- TODO verify if we can do regex on healthcheck status -->
 You can create up to 20 assertions per API test by clicking on **New Assertion** or by clicking directly on the response preview:
 
-{{< img src="synthetics/api_tests/assertions.png" alt="Define assertions for your HTTP test" style="width:90%;" >}}
-<!-- TODO update screenshot -->
+{{< img src="synthetics/api_tests/assertions_grpc.png" alt="Define assertions for your gRPC test" style="width:90%;" >}}
 ### Select locations
 
 Select the **Locations** to run your gRPC health check test from. gRPC tests can run from both [managed][2] and [private locations][3] depending on your preference for running the health check test from outside or inside your network.
@@ -134,14 +129,15 @@ You can use the [global variables defined in the `Settings`][9] and the [locally
 To display your list of variables, type `{{` in your desired field:
 
 {{< img src="synthetics/api_tests/use_variable.mp4" alt="Using Variables in API tests" video="true" width="90%" >}}
-<!-- TODO change video to better reflect gRPC tests -->
 
 ## Test failure
-<!-- TODO add gRPC error docs https://grpc.github.io/grpc/core/md_doc_statuscodes.html once more info from the eng team -->
 
 A health check test is considered `FAILED` if it does not satisfy one or more assertions or if the request prematurely failed. In some cases, the health check test can fail without testing the assertions against the endpoint. 
 
 These reasons include the following:
+
+`gRPC specific errors`
+: gRPC has a list of specific status codes that can be found in this [official documentation page][10].
 
 `CONNRESET`
 : The connection was abruptly closed by the remote server. Possible causes include the web server encountering an error or crashing while responding, or loss of connectivity of the web server.
@@ -153,7 +149,7 @@ These reasons include the following:
 : The configuration of the test is invalid (for example, a typo in the URL).
 
 `SSL`
-: The SSL connection couldn't be performed. [See the dedicated error page for more information][10].
+: The SSL connection couldn't be performed. [See the dedicated error page for more information][11].
 
 `TIMEOUT`
 : The request couldn't be completed in a reasonable time. Two types of `TIMEOUT` can happen:
@@ -163,9 +159,9 @@ These reasons include the following:
 
 ## Permissions
 
-By default, only users with the [Datadog Admin and Datadog Standard roles][11] can create, edit, and delete Synthetic gRPC health check tests. To get create, edit, and delete access to Synthetic gRPC health check tests, upgrade your user to one of those two [default roles][11].
+By default, only users with the [Datadog Admin and Datadog Standard roles][12] can create, edit, and delete Synthetic gRPC health check tests. To get create, edit, and delete access to Synthetic gRPC health check tests, upgrade your user to one of those two [default roles][12].
 
-If you have access to the [custom role feature][12], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions.
+If you have access to the [custom role feature][13], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions.
 
 ## Further Reading
 
@@ -181,6 +177,7 @@ If you have access to the [custom role feature][12], add your user to any custom
 [7]: https://www.markdownguide.org/basic-syntax/
 [8]: /monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables
 [9]: /synthetics/settings/#global-variables
-[10]: /synthetics/api_tests/errors/#ssl-errors
-[11]: /account_management/rbac/
-[12]: /account_management/rbac#custom-roles
+[10]: https://grpc.github.io/grpc/core/md_doc_statuscodes.html
+[11]: /synthetics/api_tests/errors/#ssl-errors
+[12]: /account_management/rbac/
+[13]: /account_management/rbac#custom-roles
