@@ -377,7 +377,8 @@ Sets the URL endpoint where traces are sent. Overrides `DD_AGENT_HOST` and `DD_T
 
 `DD_LOGS_INJECTION`
 : **TracerSettings property**: `LogsInjectionEnabled` <br>
-Enables or disables automatic injection of correlation identifiers into application logs.
+Enables or disables automatic injection of correlation identifiers into application logs.<br/>
+Note that your logger needs to have a `source` that set to the `trace_id` mapping properly. The default source for .NET Applications, `csharp` does this automatically. For more information [see the FAQ on correlation troubleshooting](/tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel.md#trace_id-option).
 
 `DD_TRACE_SAMPLE_RATE`
 : **TracerSettings property**: `GlobalSamplingRate` <br>
