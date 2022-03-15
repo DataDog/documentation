@@ -97,7 +97,7 @@ components:
 
             For example, `env:production,instance-type:c1.*,!region:us-east-1`'
           example:
-          - <KEY>:<VALUE>
+          - $KEY:$VALUE
           items:
             description: The list of the filter_tags.
             type: string
@@ -107,7 +107,7 @@ components:
 
             and metrics reporting through this integration.'
           example:
-          - <KEY>:<VALUE>
+          - $KEY:$VALUE
           items:
             description: The list of the the host_tags.
             type: string
@@ -2795,11 +2795,11 @@ components:
           example: '123456712345671234567'
           type: string
         client_x509_cert_url:
-          description: 'Should be `https://www.googleapis.com/robot/v1/metadata/x509/<CLIENT_EMAIL>`
+          description: 'Should be `https://www.googleapis.com/robot/v1/metadata/x509/$CLIENT_EMAIL`
 
-            where `<CLIENT_EMAIL>` is the email found in your JSON service account
+            where `$CLIENT_EMAIL` is the email found in your JSON service account
             key.'
-          example: https://www.googleapis.com/robot/v1/metadata/x509/<CLIENT_EMAIL>
+          example: https://www.googleapis.com/robot/v1/metadata/x509/$CLIENT_EMAIL
           type: string
         errors:
           description: An array of errors.
