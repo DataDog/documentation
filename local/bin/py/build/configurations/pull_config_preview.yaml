@@ -397,7 +397,7 @@
               text: "dd-sdk-android Source code"
             - link: "/real_user_monitoring"
               tag: "Documentation"
-              text: "Explore Datadog RUM"
+              text: "Explore Real User Monitoring"
   - repo_name: browser-sdk
     contents:
     - action: pull-and-push-file
