@@ -17,15 +17,15 @@ In your browser test recording, click **Collect RUM Data on** above the **Start 
 
 You have access to:
 
-- [**Session Replay**][7] for all tests. This provides additional context beyond the screenshots available for each step and includes [**Dev Tools**][4].
-- The session in the [**RUM Explorer**][5].
-- Aggregated errors across your different steps, tests, and test runs with [**Error Tracking**][6]. This allows you to scope the error impact and prioritize fixing the most severe issues. 
+- [**Session Replay**][1] for all tests. This provides additional context beyond the screenshots available for each step and includes [**Dev Tools**][2].
+- The session in the [**RUM Explorer**][3].
+- Aggregated errors across your different steps, tests, and test runs with [**Error Tracking**][4]. This allows you to scope the error impact and prioritize fixing the most severe issues. 
 - Extra resources and timing information from RUM including additional search and monitor capabilities.
 
 
 ## Synthetics to RUM Explorer
 
-Navigate to your [list of browser tests][1] and click on a sample test run. 
+Navigate to your [list of browser tests][5] and click on a sample test run. 
 
 {{< img src="synthetics/guide/rum_in_synthetics/browser_test_step_side_panel.png" alt="Test Step Details Side Panel" style="width:100%;" >}}
 
@@ -33,11 +33,14 @@ The step details side panel appears with `This Synthetic test generated data in 
 
 {{< img src="synthetics/guide/rum_in_synthetics/generated_rum_data.png" alt="Synthetics Explorer" style="width:80%;" >}}
 
-To see this test step's errors, resources, and performance data in the [RUM Explorer][2], click **Go to the View in RUM**. Alternatively, click the **Replay Session** button or **View all sessions in RUM** to explore available session replays captured in your browser test.
+To see this test step's errors, resources, and performance data in the [RUM Explorer][3], click **Go to the View in RUM**. Alternatively, click the **Replay Session** button or **View all sessions in RUM** to explore available session replays captured in your browser test.
+
+### Default Settings
+Choose the Default RUM Application suggested in the Browser Test Recorder in the [Integration Settings][6] page.
 
 ## RUM Explorer to Synthetics
 
-In the RUM Explorer, navigate to your [list of sessions][3] and click on a session with a replay available. 
+In the RUM Explorer, navigate to your [list of sessions][7] and click on a session with a replay available. 
 
 {{< img src="synthetics/guide/rum_in_synthetics/sessions_details_panel.png" alt="Sessions Details Side Panel" style="width:100%;" >}}
 
@@ -51,10 +54,10 @@ To navigate back to Synthetics and your test’s results, click **View Synthetic
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/synthetics/tests?query=type%3A%28browser%29
-[2]: /real_user_monitoring/explorer/
-[3]: https://app.datadoghq.com/rum/explorer
-[4]: /real_user_monitoring/session_replay/developer_tools/
-[5]: /real_user_monitoring/explorer/
-[6]: /real_user_monitoring/error_tracking/
-[7]: /real_user_monitoring/session_replay/
+[1]: /real_user_monitoring/session_replay/
+[2]: /real_user_monitoring/session_replay/developer_tools/
+[3]: /real_user_monitoring/explorer/
+[4]: /real_user_monitoring/error_tracking/
+[5]: https://app.datadoghq.com/synthetics/tests?query=type%3A%28browser%29
+[6]: https://app.datadoghq.com/synthetics/settings/integrations
+[7]: https://app.datadoghq.com/rum/explorer
