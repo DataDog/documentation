@@ -1,0 +1,11 @@
+{
+  "index": "main",
+  "limit": 5,
+  "query": "service:web* AND @http.status_code:[200 TO 299]",
+  "sort": "asc",
+  "time": {
+    "from": "2020-02-02T02:02:02Z",
+    "timezone": "Europe/Paris",
+    "to": "2020-02-02T20:20:20Z"
+  }
+}
