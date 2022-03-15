@@ -755,8 +755,7 @@ components:
         event_query:
           $ref: '#/components/schemas/LogQueryDefinition'
         formulas:
-          description: List of formulas that operate on queries. **This feature is
-            currently in beta.**
+          description: List of formulas that operate on queries.
           items:
             $ref: '#/components/schemas/WidgetFormula'
           type: array
@@ -780,7 +779,6 @@ components:
           type: string
         queries:
           description: List of queries that can be returned directly or used in formulas.
-            **This feature is currently in beta.**
           items:
             $ref: '#/components/schemas/FormulaAndFunctionQueryDefinition'
           type: array
@@ -2623,7 +2621,7 @@ components:
       - $ref: '#/components/schemas/FormulaAndFunctionApmResourceStatsQueryDefinition'
       type: object
     FormulaAndFunctionResponseFormat:
-      description: Timeseries or Scalar response. **This feature is currently in beta.**
+      description: Timeseries or Scalar response.
       enum:
       - timeseries
       - scalar
@@ -2939,8 +2937,7 @@ components:
       description: An updated geomap widget.
       properties:
         formulas:
-          description: List of formulas that operate on queries. **This feature is
-            currently in beta.**
+          description: List of formulas that operate on queries.
           items:
             $ref: '#/components/schemas/WidgetFormula'
           type: array
@@ -2951,7 +2948,6 @@ components:
           type: string
         queries:
           description: List of queries that can be returned directly or used in formulas.
-            **This feature is currently in beta.**
           items:
             $ref: '#/components/schemas/FormulaAndFunctionQueryDefinition'
           type: array
@@ -8158,8 +8154,7 @@ components:
         event_query:
           $ref: '#/components/schemas/LogQueryDefinition'
         formulas:
-          description: List of formulas that operate on queries. **This feature is
-            currently in beta.**
+          description: List of formulas that operate on queries.
           items:
             $ref: '#/components/schemas/WidgetFormula'
           type: array
@@ -8176,7 +8171,6 @@ components:
           type: string
         queries:
           description: List of queries that can be returned directly or used in formulas.
-            **This feature is currently in beta.**
           items:
             $ref: '#/components/schemas/FormulaAndFunctionQueryDefinition'
           type: array
@@ -9403,14 +9397,12 @@ components:
       description: Scatterplot request containing formulas and functions.
       properties:
         formulas:
-          description: List of Scatterplot formulas that operate on queries. **This
-            feature is currently in beta.**
+          description: List of Scatterplot formulas that operate on queries.
           items:
             $ref: '#/components/schemas/ScatterplotWidgetFormula'
           type: array
         queries:
           description: List of queries that can be returned directly or used in formulas.
-            **This feature is currently in beta.**
           items:
             $ref: '#/components/schemas/FormulaAndFunctionQueryDefinition'
           type: array
@@ -10449,8 +10441,7 @@ components:
         event_query:
           $ref: '#/components/schemas/LogQueryDefinition'
         formulas:
-          description: List of formulas that operate on queries. **This feature is
-            currently in beta.**
+          description: List of formulas that operate on queries.
           items:
             $ref: '#/components/schemas/WidgetFormula'
           type: array
@@ -10467,7 +10458,6 @@ components:
           type: string
         queries:
           description: List of queries that can be returned directly or used in formulas.
-            **This feature is currently in beta.**
           items:
             $ref: '#/components/schemas/FormulaAndFunctionQueryDefinition'
           type: array
@@ -12895,8 +12885,7 @@ components:
         event_query:
           $ref: '#/components/schemas/LogQueryDefinition'
         formulas:
-          description: List of formulas that operate on queries. **This feature is
-            currently in beta.**
+          description: List of formulas that operate on queries.
           items:
             $ref: '#/components/schemas/WidgetFormula'
           type: array
@@ -12920,7 +12909,6 @@ components:
           type: string
         queries:
           description: List of queries that can be returned directly or used in formulas.
-            **This feature is currently in beta.**
           items:
             $ref: '#/components/schemas/FormulaAndFunctionQueryDefinition'
           type: array
@@ -13084,8 +13072,7 @@ components:
         event_query:
           $ref: '#/components/schemas/LogQueryDefinition'
         formulas:
-          description: List of formulas that operate on queries. **This feature is
-            currently in beta.**
+          description: List of formulas that operate on queries.
           items:
             $ref: '#/components/schemas/WidgetFormula'
           type: array
@@ -13110,7 +13097,6 @@ components:
           type: string
         queries:
           description: List of queries that can be returned directly or used in formulas.
-            **This feature is currently in beta.**
           items:
             $ref: '#/components/schemas/FormulaAndFunctionQueryDefinition'
           type: array
@@ -13185,8 +13171,7 @@ components:
         event_query:
           $ref: '#/components/schemas/LogQueryDefinition'
         formulas:
-          description: List of formulas that operate on queries. **This feature is
-            currently in beta.**
+          description: List of formulas that operate on queries.
           items:
             $ref: '#/components/schemas/WidgetFormula'
           type: array
@@ -13203,7 +13188,6 @@ components:
           type: string
         queries:
           description: List of queries that can be returned directly or used in formulas.
-            **This feature is currently in beta.**
           items:
             $ref: '#/components/schemas/FormulaAndFunctionQueryDefinition'
           type: array
@@ -13291,8 +13275,7 @@ components:
       description: An updated treemap widget.
       properties:
         formulas:
-          description: List of formulas that operate on queries. **This feature is
-            currently in beta.**
+          description: List of formulas that operate on queries.
           items:
             $ref: '#/components/schemas/WidgetFormula'
           type: array
@@ -13301,7 +13284,6 @@ components:
           type: string
         queries:
           description: List of queries that can be returned directly or used in formulas.
-            **This feature is currently in beta.**
           items:
             $ref: '#/components/schemas/FormulaAndFunctionQueryDefinition'
           type: array
