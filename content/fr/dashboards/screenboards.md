@@ -24,14 +24,14 @@ Les screenboards sont des dashboards qui vous permettent de représenter libreme
 
 Cliquez sur un graphique de screenboard pour ouvrir le menu des options :
 
-| Option                 | Description                                                   |
-|------------------------|---------------------------------------------------------------|
-| View in full screen    | Afficher le graphique [en plein écran][1].                     |
-| View related processes | Accéder à la page [Live Processes][2] en appliquant un filtre basé sur votre graphique.   |
-| View related hosts     | Accéder à la page [Host Map][3] en appliquant un filtre basé sur votre graphique.         |
-| View related logs      | Remplir automatiquement un volet de [logs][4] à partir des données de votre graphique.             |
-| View related traces    | Remplir automatiquement un volet de [traces][5] à partir des données de votre graphique.          |
-| View related profiles  | Accéder à la page [Profiling][6] en appliquant un filtre basé sur votre graphique.       |
+| Option                 | Description                                                      |
+|------------------------|------------------------------------------------------------------|
+| View in full screen    | Afficher le graphique [en plein écran][1].                         |
+| View related processes | Accéder à la page [Live Processes][2] filtrée sur les données de votre graphique.   |
+| View related hosts     | Accéder à la page [Host Map][3] filtrée sur les données de votre graphique.         |
+| View related logs      | Remplir automatiquement un volet de [logs][4] à partir des données de votre graphique.                 |
+| View related traces    | Remplir automatiquement un volet de [traces][5] à partir des données de votre graphique.               |
+| View related profiles  | Accéder à la page [Profiling][6] filtrée sur les données de votre graphique.        |
 
 ## Pour aller plus loin
 
