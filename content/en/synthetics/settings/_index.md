@@ -100,8 +100,7 @@ If you are using the [custom role feature][12], add your user to any custom role
 
 #### Restrict access
 
-<div class="alert alert-warning">
-Access restriction is available for customers using <a href="https://docs.datadoghq.com/account_management/rbac/?tab=datadogapplication#create-a-custom-role">custom roles</a> on their account.</div>
+Access restriction is available for customers using [custom roles][13] on their account.
 
 You can restrict access to a global variable based on the roles in your organization. When creating a global variable, choose which roles (in addition to your user) can read and write your global variable in **Permissions settings**. 
 
@@ -137,7 +136,7 @@ To enable tag enforcement, click **Enforce tags for usage attributions on all te
 
 {{< img src="synthetics/settings/tag_enforcement.png" alt="Enforce tags for usage attributions on all tests" style="width:100%;">}}
 
-For more information, see [Usage Attribution][13].
+For more information, see [Usage Attribution][14].
 
 ### Permissions
 
@@ -161,4 +160,5 @@ If you are using the [custom role feature][12], add your user to any custom role
 [10]: /synthetics/browser_tests/actions#using-variables
 [11]: /account_management/rbac/?tab=datadogapplication#datadog-default-roles
 [12]: /account_management/rbac/?tab=datadogapplication#custom-role
-[13]: /account_management/billing/usage_attribution
+[13]: /account_management/rbac/#create-a-custom-role
+[14]: /account_management/billing/usage_attribution

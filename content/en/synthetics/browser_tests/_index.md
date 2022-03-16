@@ -161,7 +161,7 @@ If you are using the [custom role feature][15], add your user to any custom role
 
 ### Restrict access
 
-Access restriction is available for customers using [custom roles][16] on their accounts.</div>
+Access restriction is available for customers using [custom roles][16] on their accounts.
 
 You can restrict access to a browser test based on the roles in your organization. When creating a browser test, choose which roles (in addition to your user) can read and write your test. 
 

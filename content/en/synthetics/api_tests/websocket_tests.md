@@ -179,7 +179,7 @@ If you are using the [custom role feature][11], add your user to any custom role
 
 ### Restrict access
 
-Access restriction is available for customers using [custom roles][12] on their accounts.</div>
+Access restriction is available for customers using [custom roles][12] on their accounts.
 
 You can restrict access to a WebSocket test based on the roles in your organization. When creating a WebSocket test, choose which roles (in addition to your user) can read and write your test. 
 

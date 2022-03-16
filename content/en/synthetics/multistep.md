@@ -283,7 +283,7 @@ If you are using the [custom role feature][17], add your user to any custom role
 
 ## Restrict access
 
-Access restriction is available for customers using [custom roles][18] on their account.
+Access restriction is available for customers using [custom roles][18] on their accounts.
 
 You can restrict access to a multistep API test based on the roles in your organization. When creating a multistep API test, choose which roles (in addition to your user) can read and write your test. 
 
