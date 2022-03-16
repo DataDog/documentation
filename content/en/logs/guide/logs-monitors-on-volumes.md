@@ -95,7 +95,7 @@ Here is an example of what the notification would look like in Slack:
 [2]: /monitors/create/types/anomaly/
 [3]: https://app.datadoghq.com/metric/summary?filter=datadog.estimated_usage.logs.ingested_bytes&metric=datadog.estimated_usage.logs.ingested_bytes
 [4]: https://app.datadoghq.com/monitors#create/anomaly
-[5]: /dash/integration/logs_estimated_usage
+[5]: https://app.datadoghq.com/dash/integration/logs_estimated_usage
 [6]: /resources/json/estimated_log_usage_dashboard_configuration.json
 [7]: https://app.datadoghq.com/logs
 [8]: /logs/explorer/search/
