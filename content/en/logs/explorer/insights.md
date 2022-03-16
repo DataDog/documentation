@@ -42,7 +42,7 @@ Clikcing on specific insight, you get access to a full description of the detect
 
 
 
-To begin searching for logs in Log Explorer, see the [Log Search Syntax documentation][1] and read the [time frame documentation][2] for more details on custom time frames.
+For more information about searching logs in the Log Explorer, see [Log Search Syntax][1] and [Custom Time Frames][2].
 
 ## Further Reading
 
