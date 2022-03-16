@@ -22,7 +22,7 @@ Datadog Logs Explorer offers Watchdog Insights to highlight signals that stand o
 
 In the Log Explorer, Watchdog Insights surface logs based on patterns and specific tags that have been flagged by algorithms such as log anomaly detection and error outliers detection.
 
-{{< img src="logs/explorer/insights/insights-carousel.png" alt="Watchdog Insights in Log Explorer" style="width:100%;" >}}
+{{< img src="logs/explorer/insights/insights-for-log-explorer.png" alt="Watchdog Insights in Log Explorer" style="width:100%;" >}}
 
 ### Log Anomaly Detection
 
@@ -37,8 +37,6 @@ The logs surface as Insights in the Log Explorer, matching the search context an
 {{< img src="logs/explorer/insights/log-anomalies-light.mp4" alt="Log Anomalies as Insights" video="true">}}
 
 Clikcing on specific insight, you get access to a full description of the detected anomaly as well as the list of patterns contributing to it.
-
-### Error Outliers
 
 
 
