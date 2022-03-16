@@ -57,7 +57,7 @@ L'Agent Datadog recueille uniquement les logs qui ont été écrits une fois qu'
 
 ## Problèmes d'autorisation lors du suivi de fichiers de log
 
-`datadog-agent` n'est pas exécuté en mode root (et nous vous déconseillons de le faire, de façon générale). C'est pourquoi lorsque vous configurez votre `datadog-agent` afin de suivre des fichiers de log (pour les logs personnalisés ou pour les intégrations), vous devez vous assurer que l'utilisateur `datadog-agent` bénéficie d'un accès en lecture aux fichiers de log dont vous souhaitez recueillir les données.
+`datadog-agent` n'est pas exécuté en mode root (et le faire est déconseillé, de façon générale). C'est pourquoi lorsque vous configurez votre `datadog-agent` afin de suivre des fichiers de log (pour les logs personnalisés ou pour les intégrations), vous devez vous assurer que l'utilisateur `datadog-agent` bénéficie d'un accès en lecture aux fichiers de log dont vous souhaitez recueillir les données.
 
 Le message d'erreur suivant devrait alors s'afficher lorsque vous consultez le [statut de l'Agent][5] :
 
@@ -85,7 +85,7 @@ Lancez la commande `namei` pour obtenir plus d'informations sur les autorisation
  -rw-r----- error.log
 ```
 
-Dans cet exemple, le dossier `application` n'est pas exécutable, l'Agent ne peut donc pas récupérer la liste de ses fichiers. De plus, l'Agent ne dispose pas des autorisations de lecture pour le fichier `error.log`.
+Dans cet exemple, le dossier `application` n'est pas exécutable par l'Agent, ce dernier ne peut donc pas récupérer la liste de ses fichiers. De plus, l'Agent ne dispose pas des autorisations de lecture pour le fichier `error.log`.
 Ajoutez les autorisations manquantes via la [commande chmod][6].
 
 {{< img src="logs/agent-log-permission-ok.png" alt="Autorisation OK"  style="width:70%;">}}

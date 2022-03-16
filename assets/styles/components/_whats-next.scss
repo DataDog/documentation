@@ -29,9 +29,6 @@ $ddpurple:    #632CA6;
     }
     .badge {
       font-weight: 200;
-      position: absolute;
-      right: 51px;
-      top: 17px;
       font-size: 14px;
       color: #555;
       border-color: transparent;
@@ -44,7 +41,6 @@ $ddpurple:    #632CA6;
       }
     }
     .text {
-      margin-right: 9px;
       &:lang(ja) {
         font-size: 15px;
         line-height: 25px;

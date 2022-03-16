@@ -13,7 +13,7 @@ further_reading:
 ---
 ## Présentation
 
-Les intégrations développées par la communauté pour l'Agent Datadog sont stockées dans le référentiel Github [integrations-extra][1]. Elles ne sont pas incluses dans le package de l'Agent Datadog, mais elles peuvent être installées comme extensions.
+Les intégrations développées par la communauté pour l'Agent Datadog sont stockées dans le référentiel GitHub [integrations-extra][1]. Elles ne sont pas incluses dans le package de l'Agent Datadog, mais elles peuvent être installées comme extensions.
 
 ## Configuration
 

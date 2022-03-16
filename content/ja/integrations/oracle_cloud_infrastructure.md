@@ -27,7 +27,7 @@ version: '1.0'
 
 Oracle Cloud Infrastructure (OCI) は、エンタープライズ規模の企業で使用されるInfrastructure-as-a-Service (IaaS) および Platform-as-a-Service (PaaS) です。ホスティング、ストレージ、ネットワーキング、データベースなどのマネージドサービスの完全なスイートを備えています。
 
-新しいインテグレーションにより、OCI ユーザーはすべてのログを Datadog に直接ストリーミングでき、そこで無期限に保存し、トラブルシューティングのために分析し、セキュリティとコンプライアンスの姿勢を監視できます。
+Datadog インテグレーションにより、OCI ユーザーはすべてのログを Datadog に直接ストリーミングでき、そこで無期限に保存し、トラブルシューティングのために分析し、セキュリティとコンプライアンスの姿勢を監視できます。
 
 ## セットアップ
 
@@ -54,16 +54,16 @@ Oracle Cloud Infrastructure (OCI) は、エンタープライズ規模の企業�
 6. *Solutions and Platform -> Logging -> Logs* に移動します。
 7. **Enable Service Log** をクリックします。
 8. **Select Resource** で、**Compartment**、ログを収集する **Service**、およびそのサービスに属する **Resource** を選択します。
-9. **Configure Log** で、**Log Catagory** として "Write Access Events" を選択し、選択した **Name** を入力します。
+9. **Configure Log** で、**Log Category** として "Write Access Events" を選択し、選択した **Name** を入力します。
 10. **Enable Log** をクリックして、新しい OCI ログを作成します。
 
-OCI ログの詳細については、[Oracle のログドキュメント][1]を参照してください。
+OCI ログの詳細については、[リソースのログを有効にする][1]を参照してください。
 
 #### OCI 関数
 
 1. OCI ポータルで、*Solutions and Platform -> Developer Services -> Functions* に移動します。
 2. 既存のアプリケーションを選択するか、**Create Application** をクリックします。
-3. アプリケーション内に新しい OCI 関数を作成します。詳細については、[Oracle の関数のドキュメント][2]を参照してください。
+3. アプリケーション内に新しい OCI 関数を作成します。詳細については、[Oracle の関数概要][2]を参照してください。
 4. 最初にボイラープレート Python 関数を作成し、自動生成されたファイルを Datadog のソースコードに置き換えることをお勧めします。
    - `func.py` を [Datadog OCI リポジトリ][3]のコードに置き換えます。
    - `func.yaml` を [Datadog OCI リポジトリ][4]のコードに置き換えます。`DATADOG_TOKEN` と `DATADOG_HOST` は、Datadog API キーとリージョンログの取り込みリンクに置き換える必要があります。
@@ -80,7 +80,7 @@ OCI ログの詳細については、[Oracle のログドキュメント][1]を�
 7. ポリシーを作成するように求められたら、**Create** をクリックします。
 8. **Save Changes** をクリックして、サービスコネクタの作成を完了します。
 
-OCI オブジェクトストレージの詳細については、[Oracle のサービスコネクタのドキュメント][6]を参照してください。
+OCI オブジェクトストレージの詳細については、[Oracle のサービスコネクタのブログ記事][6]を参照してください。
 
 
 [1]: https://docs.cloud.oracle.com/en-us/iaas/Content/Logging/Concepts/service_logs.htm#enabling_logging
@@ -112,7 +112,7 @@ OCI オブジェクトストレージの詳細については、[Oracle のサ�
 9. 入力タイプを **Log Path** に設定し、希望の入力名を入力して、ファイルパスに "/" を使用します。
 10. **Create Custom Log** をクリックすると、OCI ログが作成され、ログページで利用できるようになります。
 
-OCI ログの詳細については、[Oracle のログドキュメント][1]を参照してください。
+OCI ログの詳細については、[リソースのログを有効にする][1]を参照してください。
 
 #### OCI オブジェクトストレージ
 
@@ -126,13 +126,13 @@ OCI ログの詳細については、[Oracle のログドキュメント][1]を�
 8. **Compartment** と **Log Group** を選択します (OCI ログと同じ選択を使用します)。
 9. **Log Name** の名前を入力し、希望するログ保持を選択します。
 
-OCI オブジェクトストレージの詳細については、[Oracle のオブジェクトストレージのドキュメント][2]を参照してください。
+OCI オブジェクトストレージの詳細については、[データをオブジェクトストレージに格納する][2]を参照してください。
 
 #### OCI 関数
 
 1. OCI ポータルで、*Solutions and Platform -> Developer Services -> Functions* に移動します。
 2. 既存のアプリケーションを選択するか、**Create Application** をクリックします。
-3. アプリケーション内に新しい OCI 関数を作成します。詳細については、[Oracle の関数のドキュメント][3]を参照してください。
+3. アプリケーション内に新しい OCI 関数を作成します。詳細については、[Oracle の関数概要][3]を参照してください。
 4. 最初にボイラープレート Python 関数を作成し、自動生成されたファイルを Datadog のソースコードに置き換えることをお勧めします。
    - `func.py` を [Datadog OCI リポジトリ][4]のコードに置き換えます。
    - `func.yaml` を [Datadog OCI リポジトリ][5]のコードに置き換えます。`DATADOG_TOKEN` と `DATADOG_HOST` は、Datadog API キーとリージョンログの取り込みリンクに置き換える必要があります。
@@ -149,7 +149,7 @@ OCI オブジェクトストレージの詳細については、[Oracle のオ�
 7. 関数適用と関数を選択します (前のインストール手順に従って)。
 8. **Create Rule** をクリックすると、ルールが作成され、ルールリストで利用できるようになります。
 
-OCI オブジェクトストレージの詳細については、[Oracle のイベントのドキュメント][7]を参照してください。
+OCI オブジェクトストレージの詳細については、[イベント入門][7]を参照してください。
 
 
 [1]: https://docs.cloud.oracle.com/en-us/iaas/Content/Logging/Concepts/service_logs.htm#enabling_logging

@@ -33,7 +33,7 @@ supported_os:
 ---
 ## 概要
 
-このチェックは、Linux TCP によるキューの送受信の使用方法を監視し、キューを送受信する TCP が個々のコンテナに対して満杯の状態であるかどうかを検知します。
+このチェックは、Linux TCP によるキューの送受信の使用方法を監視します。キューを送受信する TCP が個々のコンテナに対して満杯の状態であるかどうかを検知できます。
 
 ## セットアップ
 
@@ -75,7 +75,7 @@ system_probe_config:
 
 ### Helm のインテグレーション
 
-[Datadog Helm チャート][3]を使用して、`values.yaml` ファイルで `datadog.systemProbe.enabled` を `true` に設定し、`system-probe` がアクティベートされていることを確認する必要があります。
+[Datadog Helm チャート][3]を使用して、`values.yaml` ファイルで `datadog.systemProbe.enabled` を `true` に設定し、`system-probe` がアクティベートされている必要があります。
 次に、`datadog.systemProbe.enableTCPQueueLength` パラメーターを設定してチェックをアクティベートします。
 
 ### 検証

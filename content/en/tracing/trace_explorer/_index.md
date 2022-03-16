@@ -30,9 +30,9 @@ The Trace Explorer shows an **Search - Only Indexed Data** indicator whenever yo
 
 Live Search is the default view on the Traces page. Switch from Live Search to Indexed Data Search by using the time selector in the top right-hand corner.
 
-### Tracing Without Limits (recommended)
+### Trace volume control
 
-You can customize settings for both [ingestion and retention][6] to send and keep exactly what data is most relevant to you.
+You can customize settings for both [ingestion][6] and [retention][7] to send and keep exactly what data is most relevant to you.
 
 #### Ingestion
 
@@ -46,7 +46,7 @@ DD_TRACE_SAMPLE_RATE=1.0
 
 After you instrument your services and ingest traces, set tag-based [retention filters][3] within the Datadog app so that Datadog retains spans that are relevant to you.
 
-**Note:** Both ingested and indexed spans may impact your bill. For more information, see [APM Billing][7].
+**Note:** Both ingested and indexed spans may impact your bill. For more information, see [APM Billing][8].
 
 ## Live Search for 15 minutes
 
@@ -68,7 +68,7 @@ With the Live Search **List view** you can:
 - Run one-click search queries on any span or tag directly from the trace panel view.
 - Add, remove, and sort columns from span tags for a customized view.
 
-The number of received spans per second is displayed at the top of the traces table. Since a stream of thousands of spans per second is not human readable, high throughput span streams show spans for visual clarity but all spans are still searchable. Use the Live Search query bar filtering features to filter the spans stream and the **Pause/Play** button at the top right of the screen to pause or resume the stream.
+The number of received spans per second is displayed at the top of the traces table. Since a stream of thousands of spans per second is not human readable, high throughput span streams show some spans for visual clarity. You can search for all available spans in the search query. Use the Live Search query bar filtering features to filter the spans stream and the **Pause/Play** button at the top right of the screen to pause or resume the stream.
 
 {{< img src="tracing/live_search/play-pause-button.png" alt="Pause or Play the Live Stream" style="width:75%;" >}}
 
@@ -96,11 +96,11 @@ In addition to showing timeseries for requests that match your queries, you can 
 
 ### Filtering
 
-{{< img src="tracing/live_search/all-spans-search.mp4" alt="Searching all spans" video="true" >}}
+{{< img src="tracing/live_search/service_entry_root_spans.mp4" alt="Searching all spans" video="true" >}}
 
 A valid query in the search bar displays traces that match your search criteria across **all spans**. The search syntax is the same in the Live Search views as in the other trace views, but here, your query is matched against all of the ingested traces across **any span** and **any tag**, and not just the indexed ones.
 
-**Note**: You can select only the [service entry spans][8] by changing the selection to the box above the trace table. Use this feature on high traffic applications to reduce the number of spans displayed and view only the entry point spans of the services. Selecting this box only _visually_ filters the spans shown; the others are all still present.
+You can choose to query the [service entry spans][9], the [root spans][10], or all spans by changing the selection to the box above the trace table. Use this feature on high traffic applications to reduce the number of spans displayed and view only the entry point spans of the services or the entry point of the trace. Selecting this box only filters the spans shown in the list; the others are still shown in the flame graph when clicking on a span to view the trace details.
 
 You can also filter on attributes that are not defined as facets. For example, to filter on the `cart.value` attribute, there are two options:
 
@@ -138,14 +138,16 @@ From the timeseries view, export your query to a [dashboard][1], a [monitor][2] 
 
 ### Retention configuration
 
-You can customize which spans are retained and at what retention rates. By default, [the Datadog intelligent retention filter][4] is applied, which automatically retains traces with error and latency diversity as well as low-throughput resources. To learn more about the default intelligent retention filter and how to create your own additional filters, see the [retention filters documentation][3]. Go to the [Retention Filters page][9] within the Datadog app to create or modify your own filters.
+You can customize which spans are retained and at what retention rates. By default, [the Datadog intelligent retention filter][4] is applied, which automatically retains traces with error and latency diversity as well as low-throughput resources. To learn more about the default intelligent retention filter and how to create your own additional filters, see the [retention filters documentation][3]. Go to the [Retention Filters page][11] within the Datadog app to create or modify your own filters.
 
 [1]: https://app.datadoghq.com/apm/traces
-[2]: /tracing/trace_retention_and_ingestion/#ingestion-controls
-[3]: /tracing/trace_retention_and_ingestion/#retention-filters
-[4]: /tracing/trace_retention_and_ingestion/#datadog-intelligent-retention-filter
+[2]: /tracing/trace_ingestion/ingestion_controls
+[3]: /tracing/trace_retention/#retention-filters
+[4]: /tracing/trace_retention/#datadog-intelligent-retention-filter
 [5]: /tracing/visualization/#indexed-span
-[6]: /tracing/trace_retention_and_ingestion/
-[7]: /account_management/billing/apm_distributed_tracing/
-[8]: /tracing/visualization/#service-entry-span
-[9]: https://app.datadoghq.com/apm/traces/retention-filters
+[6]: /tracing/trace_ingestion/
+[7]: /tracing/trace_retention/
+[8]: /account_management/billing/apm_distributed_tracing/
+[9]: /tracing/visualization/#service-entry-span
+[10]: /tracing/visualization/#trace-root-span
+[11]: https://app.datadoghq.com/apm/traces/retention-filters

@@ -37,7 +37,7 @@ The following metrics are collected by default after enabling runtime metrics.
 
 {{< get-metrics-from-git "node" >}}
 
-Along with displaying these metrics in your APM Service Page, Datadog provides a [default Node Runtime Dashboard][6] with the `service` and `runtime-id` tags that are applied to these metrics.
+Along with displaying these metrics in your APM Service Page, Datadog provides a [default Node Runtime Dashboard][6].
 
 ## Further Reading
 

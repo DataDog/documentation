@@ -20,6 +20,10 @@ kind: documentation
 3. For languages other than Swift, make sure the Datadog Agent is running on the host where tests are run (accessible at `localhost:8126`), or if accessible on another hostname or port, make sure you run your tests with the appropriate Agent hostname set in the `DD_AGENT_HOST` and the appropriate port in `DD_TRACE_AGENT_PORT` environment variables. You can activate [debug mode][5] in the tracer to check if it's able to connect to the Agent.
 4. If you still don't see any results, [contact Support][1] for troubleshooting help.
 
+### Pipeline not found
+
+A "Pipeline not found" message is shown when you click on incomplete data coming from an in-progress pipeline. Data is received progressively for stages, jobs, or custom commands. Wait until the pipeline has finished and try again.
+
 ### Data appears in test runs but not tests
 
 If you can see test results data in the **Test Runs** tab, but not the **Tests** tab, Git metadata (repository, commit and/or branch) is probably missing. To confirm this is the case, open a test execution in the [Test Runs][3] section, and check that there is no `git.repository_url`, `git.commit.sha`, or `git.branch`. If these tags are not populated, nothing shows in the [Tests][4] section.
@@ -84,15 +88,18 @@ If you cannot see the tests wall time it is likely that the CI provider metadata
 
 ### The tests wall time is not what is expected
 
+#### How wall time is calculated
 The wall time is defined as the time difference between the start time of the first test and the end time of the last test for the given pipeline.
 
 This is done using the following algorithm:
 
 1. Compute a hash based on CI information to group the tests.
-  a. If the tests have `ci.job.url`, this information is used to calculate the hash.
-  b. If the tests don’t have `ci.job.url`, the hash is calculated using `ci.pipeline.id` + `ci.pipeline.name` + `ci.pipeline.number`.
-2. Calculate wall time is associated with every given hash. **Note**: There can be multiple wall times for a certain pipeline, for example, if there are multiple jobs that execute tests.
-3. If there are multiple wall times, the maximum wall time calculated for a given pipeline in a certain commit is used.
+  a. If the tests include `ci.job.url`, use this tag to calculate the hash.
+  b. If the tests don’t include `ci.job.url`, use `ci.pipeline.id` + `ci.pipeline.name` + `ci.pipeline.number` to calculate the hash.
+2. The calculated wall time is associated to a given hash. **Note**: If there are multiple jobs that execute tests, the wall time is the time difference between the start of the first test in the earliest job and the end of the last test in the latest job.
+
+#### Possible issues with wall time calculation
+If you're using a library for testing time-dependent code, like [timecop][7] for Ruby or [FreezeGun][8] for Python, it is possible that test timestamps are wrong, and therefore calculated wall times. If this is the case, make sure that modifications to time are rolled back before finishing your tests.
 
 ### Need further help?
 
@@ -105,3 +112,5 @@ Still need help? Contact [Datadog support][1].
 [4]: https://app.datadoghq.com/ci/test-services
 [5]: /tracing/troubleshooting/tracer_debug_logs
 [6]: /continuous_integration/setup_tests/containers/
+[7]: https://github.com/travisjeffery/timecop
+[8]: https://github.com/spulec/freezegun

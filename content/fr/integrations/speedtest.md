@@ -57,7 +57,7 @@ Pour l'Agent v7.21+/6.21+, suivez les instructions ci-dessous afin d'installer l
 
 2. Configurez votre intégration comme une [intégration][4] de base.
 
-**Remarque** : vous devez également installer [Speedtest CLI][1] sur chaque host et accepter l'accord en tant qu'utilisateur de l'Agent Datadog (par exemple, `sudo -u dd-agent speedtest`) pour utiliser l'intégration.
+**Remarque** : vous devez installer la [CLI Speedtest][1] sur chaque host et accepter l'accord en tant qu'utilisateur de l'Agent Datadog (par exemple, `sudo -u dd-agent speedtest`) pour utiliser l'intégration.
 
 ### Configuration
 
@@ -67,7 +67,7 @@ Pour l'Agent v7.21+/6.21+, suivez les instructions ci-dessous afin d'installer l
 
 ### Validation
 
-[Lancez la sous-commande `status` de l'Agent][7] et cherchez `speedtest` dans la section Checks.
+Lancez la [sous-commande status de l'Agent][7] et cherchez `speedtest` dans la section Checks.
 
 ## Données collectées
 
@@ -77,7 +77,7 @@ Pour l'Agent v7.21+/6.21+, suivez les instructions ci-dessous afin d'installer l
 
 ### Événements
 
-Speedtest n'inclut aucun événement.
+Le check Speedtest n'inclut aucun événement.
 
 ### Checks de service
 {{< get-service-checks-from-git "speedtest" >}}

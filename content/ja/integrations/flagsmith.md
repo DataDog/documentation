@@ -50,15 +50,15 @@ Flagsmith インテグレーションには、メトリクスは含まれませ�
 
 ### サービスのチェック
 
-Flagsmith には、サービスのチェック機能は含まれません。
+Flagsmith インテグレーションには、サービスのチェック機能は含まれません。
 
 ### イベント
 
-すべてのイベントが Datadog のイベントストリームに送信されます。
+すべての Flagsmith イベントが Datadog のイベントストリームに送信されます。
 
 ## トラブルシューティング
 
-サポートが必要な場合は、 [Flagsmith のドキュメント][4]をご覧いただくか、[Datadog サポートまでお問い合わせください][5]。
+サポートが必要な場合は、 [Flagsmith のドキュメント][4]をご覧いただくか、[Datadog サポート][5]までお問い合わせください。
 
 [1]: https://www.flagsmith.com/
 [2]: https://app.datadoghq.com/account/settings#integrations/flagsmith

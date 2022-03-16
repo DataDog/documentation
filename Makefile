@@ -252,10 +252,7 @@ examples/datadog-api-client-typescript:
 EXAMPLES_DIR = $(shell pwd)/examples/content/en/api
 
 examples/go: examples/datadog-api-client-go clean-go-examples
-	echo $(EXAMPLES_DIR)
-	@cd examples/datadog-api-client-go; ./extract-code-blocks.sh $(EXAMPLES_DIR) || (echo "Error copying Go code examples, aborting build."; exit 1); if [ -d examples ]; then cp -R examples/* $(EXAMPLES_DIR)/; fi
-
-	-cp -Rn examples/content ./
+	-cp -Rn examples/datadog-api-client-go/examples/v* ./content/en/api/
 
 examples/java: examples/datadog-api-client-java clean-java-examples
 	@cd examples/datadog-api-client-java; ./extract-code-blocks.sh $(EXAMPLES_DIR) || (echo "Error copying Java code examples, aborting build."; exit 1); if [ -d examples ]; then cp -R examples/* $(EXAMPLES_DIR)/; fi

@@ -139,7 +139,7 @@ When the Agent is running, use the `datadog-agent launch-gui` command to open th
 | [Debian][2] with systemd                 | Debian 7 (wheezy)+                                        |
 | [Debian][2] with SysVinit                | Debian 7 (wheezy)+ in Agent 6.6.0+                        |
 | [Ubuntu][3]                              | Ubuntu 14.04+                                             |
-| [RedHat/CentOS][4]                       | RedHat/CentOS 6+                                          |
+| [RedHat/CentOS/AlmaLinux/Rocky][4]       | RedHat/CentOS 6+, AlmaLinux/Rocky 8+ in Agent 6.33.0+/7.33.0+ |
 | [Docker][5]                              | Version 1.12+                                             |
 | [Kubernetes][6]                          | Version 1.3+                                              |
 | [SUSE Enterprise Linux][7] with systemd  | SUSE 11 SP4+ in Agent < 6.33.0/7.33.0, SUSE 12+ in Agent 6.33.0+/7.33.0+                     |

@@ -143,9 +143,15 @@ spec:
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**: In some setups, DNS resolution for `spec.nodeName` inside Pods may not work in AKS.
-This has been reported on all AKS Windows nodes and when cluster is setup in a Virtual Network using custom DNS on Linux nodes.
-In this case, removing the `agent.config.kubelet.host` field (defaults to `status.hostIP`) and using `tlsVerify: false` is required.
+**Notes**: 
+
+- In some setups, DNS resolution for `spec.nodeName` inside Pods may not work in AKS. This has been reported on all AKS Windows nodes and when cluster is setup in a Virtual Network using custom DNS on Linux nodes. In this case, removing the `agent.config.kubelet.host` field (defaults to `status.hostIP`) and using `tlsVerify: false` is **required**. Using the `DD_KUBELET_TLS_VERIFY=false` environment variable also resolves this issue. However, note that this disables SSL authentication.
+
+  ```
+  env:
+    - name: DD_KUBELET_TLS_VERIFY
+      value: "false"
+  ```
 
 ## Google Kubernetes Engine (GKE) {#GKE}
 

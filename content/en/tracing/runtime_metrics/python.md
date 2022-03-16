@@ -46,7 +46,7 @@ The following metrics are collected by default after enabling runtime metrics:
 
 {{< get-metrics-from-git "python" >}}
 
-Along with displaying these metrics in your APM Service Page, Datadog provides a [default Python Runtime Metrics Dashboard][7] with the `service` and `runtime-id` tags that are applied to these metrics.
+Along with displaying these metrics in your APM Service Page, Datadog provides a [default Python Runtime Metrics Dashboard][7].
 
 ## Further Reading
 

@@ -39,6 +39,7 @@ Select a [monitor type][5] from the list.
 {{< nextlink href="/monitors/create/types/real_user_monitoring" >}}<u>Real User Monitoring</u>: Monitor real user data gathered by Datadog.{{< /nextlink >}}
 {{< nextlink href="/monitors/create/types/watchdog" >}}<u>Watchdog</u>: Get notified when Watchdog detects anomalous behavior.{{< /nextlink >}}
 {{< nextlink href="/monitors/create/types/composite" >}}<u>Composite</u>: Alert on an expression combining multiple monitors.{{< /nextlink >}}
+{{< nextlink href="/monitors/create/types/ci_pipelines" >}}<u>CI Pipelines</u>: Monitor CI pipelines data gathered by Datadog.{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ### Import a monitor

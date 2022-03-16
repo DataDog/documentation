@@ -6,6 +6,7 @@ disable_sidebar: true
 ---
 
 {{< whatsnext desc="General Guides:" >}}
+    {{< nextlink href="monitors/guide/monitor_api_options" >}}Monitor API Options{{< /nextlink >}}
     {{< nextlink href="monitors/guide/monitor-arithmetic-and-sparse-metrics" >}}Monitor Arithmetic and Sparse Metrics{{< /nextlink >}}
     {{< nextlink href="monitors/guide/as-count-in-monitor-evaluations" >}}as_count() Monitor Evaluations{{< /nextlink >}}
     {{< nextlink href="monitors/guide/template-variable-evaluation" >}}Template Variable Evaluation{{< /nextlink >}}
