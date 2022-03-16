@@ -18,7 +18,7 @@ further_reading:
 
 ## Overview
 
-Insights are a selection of meaningful signals that standout within your current search context (time and tags).
+Datadog Logs Explorer offers Watchdog Insights to highlight signals that stand out within your search context based on the time frame and tags.
 
 In the Log Explorer they allow our machine learning engine, Watchdog, to surface logs (caracterized by their patterns or specific tags) that have been flagged by our data science capabilities (like Log Anomaly Detection or Error Outliers Detection).
 
