@@ -35,7 +35,7 @@ Datadog can also assist you with migrating your monitors by suggesting updates o
 
 ## What's new?
 
-### Event Explorer
+### Events Explorer
 
 {{< img src="events/explorer/events-overview.png" alt="Events Explorer" style="width:80%;" >}}
 
