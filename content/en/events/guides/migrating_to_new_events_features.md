@@ -62,7 +62,7 @@ For example, check out the [Monitor Notifications Overview][3] dashboard, which 
 
 ### New event monitors experience
 
-Event monitors have also been ported to use the same standardized set of features as other products (logs, RUM, traces) with new capabilities.
+Event monitors have also been ported to use the same standardized set of features as other products (Logs, RUM, APM) with new capabilities.
 
 When you create event monitors, the new query search field uses autocomplete, rather than the legacy fill-in-the-blank query.
 
