@@ -115,7 +115,7 @@ Follow these steps to help safeguard your account:
     - New resources
     - Roles or permission changes
 
-If any unusual activity is identified, or you need additional help securing your account, contact [Support][10].
+If any unusual activity is identified, or you need additional help securing your account, contact [Datadog support][10].
 
 ## Troubleshooting
 
