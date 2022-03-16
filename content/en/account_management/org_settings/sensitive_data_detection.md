@@ -62,7 +62,7 @@ Control who can access log events containing sensitive data. Use tags added by S
 
 ### Out-of-the-box dashboard
 
-When Sensitive Data Scanner is enabled, an out-of-the-box dashboard[4] summarizing sensitive data findings is automatically installed in your account.
+When Sensitive Data Scanner is enabled, an out-of-the-box [dashboard][4] summarizing sensitive data findings is automatically installed in your account.
 
 {{<img src="account_management/sensitive_data_scanner/sdslight.png" alt="Sensitive Data Scanner Overview dashboard" style="width:70%;">}}
 
@@ -82,5 +82,5 @@ To manually import this dashboard, copy the [Sensitive Data Scanner Overview das
 [1]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner
 [2]: /logs/explorer/search_syntax/
 [3]: /logs/guide/logs-rbac-permissions/?tab=ui#overview
-[4]: /dash/integration/sensitive_data_scanner
+[4]: https://app.datadoghq.com/dash/integration/sensitive_data_scanner
 [5]: /resources/json/sensitive_data_scanner_dashboard_configuration.json
