@@ -34,7 +34,7 @@ The logs surface as Insights in the Log Explorer, matching the search context an
 
 {{< img src="logs/explorer/insights/log-anomalies-light.mp4" alt="A user scrolling through the details of a specific insight" video="true">}}
 
-Clikcing on specific insight, you get access to a full description of the detected anomaly as well as the list of patterns contributing to it.
+Click on a specific insight to see the full description of the detected anomaly as well as the list of patterns contributing to it.
 
 
 
