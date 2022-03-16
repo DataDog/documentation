@@ -34,7 +34,7 @@ These aggregated logs are then scanned for anomalous behavour:
 
 They are then surfaced as Insights in the Log Explorer when they match your current search context as well as any restrictions applied to your role.
 
-{{< img src="logs/explorer/insights/log-anomalies-light.gif" alt="Log Anomalies as Insights" style="width:100%;" >}}
+{{< img src="logs/explorer/insights/log-anomalies-light.mp4" alt="Log Anomalies as Insights" video="true">}}
 
 Clikcing on specific insight, you get access to a full description of the detected anomaly as well as the list of patterns contributing to it.
 
