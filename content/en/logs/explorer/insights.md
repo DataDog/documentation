@@ -32,7 +32,7 @@ These aggregated logs are scanned for anomalous behaviors, such as the following
 * A sudden increase of logs with a warning or error status.
 
 
-They are then surfaced as Insights in the Log Explorer when they match your current search context as well as any restrictions applied to your role.
+The logs surface as Insights in the Log Explorer, matching the search context and any restrictions applied to your role.
 
 {{< img src="logs/explorer/insights/log-anomalies-light.gif" alt="Log Anomalies as Insights" style="width:100%;" >}}
 
