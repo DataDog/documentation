@@ -50,7 +50,7 @@ Assertions define what an expected test result is. After you click **Test URL**,
 | response time           | `is less than`                                  | _Integer (ms)_                       |
 | healthcheck status      | `is`, `is not`                                  | _Integer (ms)_                       |
 
-You can create up to 20 assertions per API test by clicking on **New Assertion** or by clicking directly on the response preview:
+You can create up to 20 assertions per API test by clicking **New Assertion** or by clicking directly on the response preview:
 
 {{< img src="synthetics/api_tests/assertions_grpc.png" alt="Define assertions for your gRPC test" style="width:90%;" >}}
 ### Select locations
