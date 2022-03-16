@@ -6,7 +6,7 @@ aliases:
 ---
 
 <div class="alert alert-warning">
-  On <strong>June 30, 2022</strong>, we will retire Datadog's existing event stream and event monitors. We are migrating all customers to a new and improved events experience. This page contains important information about this migration and steps to take before the retirement date to ensure that your existing event visualizations and monitors continue to work properly.</div>
+Datadog's legacy event stream and event monitors retire on <strong>June 30, 2022</strong>. Datadog is migrating all customers to a new and improved events experience. This page contains important information about this migration. Before the retirement date, follow the steps on this page to ensure that your existing event visualizations and monitors continue to work properly.</div>
 
 ## Table of Contents
 - [Why the migration?](#why-the-migration)
