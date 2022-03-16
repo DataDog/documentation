@@ -179,8 +179,7 @@ If you are using the [custom role feature][11], add your user to any custom role
 
 ### Restrict access
 
-<div class="alert alert-warning">
-Access restriction is available for customers using <a href="https://docs.datadoghq.com/account_management/rbac/?tab=datadogapplication#create-a-custom-role">custom roles</a> on their accounts.</div>
+Access restriction is available for customers using [custom roles][12] on their accounts.</div>
 
 You can restrict access to a WebSocket test based on the roles in your organization. When creating a WebSocket test, choose which roles (in addition to your user) can read and write your test. 
 
@@ -201,3 +200,4 @@ You can restrict access to a WebSocket test based on the roles in your organizat
 [9]: /synthetics/api_tests/errors/#ssl-errors
 [10]: /account_management/rbac/
 [11]: /account_management/rbac#custom-roles
+[12]: /account_management/rbac/#create-a-custom-role

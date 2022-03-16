@@ -283,8 +283,7 @@ If you are using the [custom role feature][17], add your user to any custom role
 
 ## Restrict access
 
-<div class="alert alert-warning">
-Access restriction is available for customers using <a href="https://docs.datadoghq.com/account_management/rbac/?tab=datadogapplication#create-a-custom-role">custom roles</a> on their account.</div>
+Access restriction is available for customers using [custom roles][18] on their account.
 
 You can restrict access to a multistep API test based on the roles in your organization. When creating a multistep API test, choose which roles (in addition to your user) can read and write your test. 
 
@@ -311,3 +310,4 @@ You can restrict access to a multistep API test based on the roles in your organ
 [15]: /synthetics/api_tests/errors/#ssl-errors
 [16]: /account_management/rbac/
 [17]: /account_management/rbac#custom-roles
+[18]: /account_management/rbac/#create-a-custom-role

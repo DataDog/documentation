@@ -175,8 +175,7 @@ If you are using the [custom role feature][12], add your user to any custom role
 
 ### Restrict access
 
-<div class="alert alert-warning">
-Access restriction is available for customers using <a href="https://docs.datadoghq.com/account_management/rbac/?tab=datadogapplication#create-a-custom-role">custom roles</a> on their account.</div>
+Access restriction is available for customers using [custom roles][13] on their account.
 
 You can restrict access to an SSL test based on the roles in your organization. When creating an SSL test, choose which roles (in addition to your user) can read and write your test. 
 
@@ -198,3 +197,4 @@ You can restrict access to an SSL test based on the roles in your organization. 
 [10]: /synthetics/api_tests/errors/#ssl-errors
 [11]: /account_management/rbac/
 [12]: /account_management/rbac#custom-roles
+[13]: /account_management/rbac/#create-a-custom-role
