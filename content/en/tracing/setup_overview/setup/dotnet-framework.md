@@ -341,7 +341,7 @@ The following configuration variables are available for both automatic and custo
 `DD_TRACE_AGENT_URL`
 : **TracerSettings property**: `Exporter.AgentUri`<br>
 Sets the URL endpoint where traces are sent. Overrides `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT` if set.<br>
-**Default**: `http://<DD_AGENT_HOST>:<DD_TRACE_AGENT_PORT>` if they are set or `http://localhost:8126`
+**Default**: `http://<DD_AGENT_HOST>:<DD_TRACE_AGENT_PORT>` if they are set or `http://localhost:8126`.
 
 `DD_AGENT_HOST`
 : Sets the host where the Agent is listening for connections. Can be a hostname or an IP address. Use `DD_TRACE_AGENT_URL`, which has precedence over this parameter. <br>

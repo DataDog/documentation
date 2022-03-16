@@ -379,7 +379,7 @@ The following configuration variables are available for both automatic and custo
 `DD_TRACE_AGENT_URL`
 : **TracerSettings property**: `Exporter.AgentUri`<br>
 Sets the URL endpoint where traces are sent. Overrides `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT` if set. <br>
-It can contain a Unix path to a socket by prefixing the path with `unix://`<br>
+It can contain a Unix path to a socket by prefixing the path with `unix://`. <br>
 **Default**: `http://<DD_AGENT_HOST>:<DD_TRACE_AGENT_PORT>` if they are set, `unix:///var/run/datadog/apm.socket` if the file exists, or `http://localhost:8126`.
 
 `DD_AGENT_HOST`
