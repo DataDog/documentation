@@ -15,7 +15,7 @@ Launched more than 10 years ago, Datadog's event stream is one of its earliest f
 
 ## What is the migration timeline?
 
-<strong>March 5, 2022</strong> - The new Events Explorer and analytics were made available. We began to migrate customer dashboards and monitors not managed using our API.
+<strong>March 5, 2022</strong> - All US organizations can access the new Events Explorer and analytics. Datadog begins to migrate customer dashboards and monitors not managed using the API.
 
 <strong>April 30, 2022</strong> - The event stream will be retired in favor of the Event Explorer.
 
