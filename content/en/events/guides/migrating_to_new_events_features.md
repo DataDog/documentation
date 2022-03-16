@@ -11,7 +11,7 @@ Datadog's legacy event stream and event monitors retire on <strong>June 30, 2022
 
 ## Why change Events features?
 
-Launched more than 10 years ago, Datadog's event stream is one of our earliest features. Our new events experience includes many new features that allow you to get even more value from your events. These include event analytics, the ability to generate metrics from your events, and a much friendlier and more intuitive query syntax that is better aligned with other Datadog products, such as Log Management and APM.
+Launched more than 10 years ago, Datadog's event stream is one of its earliest features. The new events experience includes many new features that allow you to get even more value from your events. These include event analytics, the ability to generate metrics from your events, and a much friendlier and more intuitive query syntax that is better aligned with other Datadog products, such as Log Management and APM.
 
 ## What is the migration timeline?
 
