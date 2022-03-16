@@ -73,7 +73,7 @@ This means you can use complex queries in event monitors with new capabilities s
 ## What Changed?
 
 ### Event aggregations are no longer performed or displayed in the UI
-Events aggregation will no longer be performed automatically or via the `aggregation_key` attribute. The will also not be displayed in the UI.
+Datadog no longer automatically performs Event aggregation, and no longer groups Events by the `aggregation_key` attribute. The UI no longer displays Event aggregation. 
 
 ### Event comments are no longer supported or displayed in the UI
 Comments created using the API with `user_update` event type will be displayed as normal events.
