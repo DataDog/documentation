@@ -100,7 +100,7 @@ If you are using the [custom role feature][12], add your user to any custom role
 
 #### Restrict access
 
-Access restriction is available for customers using [custom roles][13] on their account.
+Access restriction is available for customers using [custom roles][13] on their accounts.
 
 You can restrict access to a global variable based on the roles in your organization. When creating a global variable, choose which roles (in addition to your user) can read and write your global variable in **Permissions settings**. 
 
