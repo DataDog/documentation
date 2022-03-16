@@ -1,1413 +1,2202 @@
 {
-    "title": "Log Management - estimated usage dashboard",
-    "description": "## Log monitoring\n\nThis dashboard aims to give you insights into the Datadog log management estimated usage metrics.\n\nSee the [log management documentation](https://docs.datadoghq.com/logs/) to learn more about the product.\n\nSee the [log management pricing page](https://www.datadoghq.com/pricing/?product=log-management#log-management) to learn more about the different plans available.",
-    "widgets": [
-        {
-            "id": 6552793753419422,
+  "author_name": "Datadog",
+  "title": "Log Management - Estimated Usage",
+  "description": "This dashboard aims to give you insights into the Datadog Log Management estimated usage metrics.\n\nSee the [Log Management documentation](https://docs.datadoghq.com/logs/) to learn more about the product.\n\nSee the [Log Management pricing page](https://www.datadoghq.com/pricing/?product=log-management#log-management) to learn more about the different plans available.",
+  "widgets": [
+    {
+      "id": 8221369612802192,
+      "definition": {
+        "title": "Log Management - Estimated Usage ",
+        "type": "group",
+        "banner_img": "https://cdn.dribbble.com/users/375563/screenshots/7569995/media/875d4407f8d348adb755fc3db0d9993c.png",
+        "show_title": false,
+        "layout_type": "ordered",
+        "widgets": [
+          {
+            "id": 8768481022034702,
             "definition": {
-                "title": "Ingested bytes",
-                "title_size": "16",
-                "title_align": "left",
-                "type": "query_value",
-                "requests": [
-                    {
-                        "q": "sum:datadog.estimated_usage.logs.ingested_bytes{$service,$datadog_index}.as_count()",
-                        "aggregator": "sum"
-                    }
-                ],
-                "autoscale": true,
-                "precision": 2
+              "type": "note",
+              "content": "# Get detailed insights into your log usage and volumes.\n\n[Product Page ↗](https://www.datadoghq.com/product/log-management/)\n| [Docs ↗](https://docs.datadoghq.com/logs/) | [Configuration ↗](https://app.datadoghq.com/logs/pipelines)\n\n[Guide: Monitor your log usage ↗](https://docs.datadoghq.com/logs/guide/logs-monitors-on-volumes/)\n\nTip: Clone this dashboard to rearrange, modify and add widgets and visualizations.\n\n*Empty dashboard?* [Start](https://docs.datadoghq.com/getting_started/logs/) collecting logs today!",
+              "background_color": "transparent",
+              "font_size": "16",
+              "text_align": "left",
+              "vertical_align": "center",
+              "show_tick": false,
+              "tick_pos": "50%",
+              "tick_edge": "left",
+              "has_padding": true
             },
             "layout": {
-                "x": 0,
-                "y": 0,
-                "width": 2,
-                "height": 2
+              "x": 0,
+              "y": 0,
+              "width": 4,
+              "height": 3
             }
-        },
-        {
+          },
+          {
             "id": 6343744624606678,
             "definition": {
-                "title": "Ingested logs",
-                "title_size": "16",
-                "title_align": "left",
-                "type": "query_value",
-                "requests": [
+              "title": "Ingested logs",
+              "title_size": "16",
+              "title_align": "left",
+              "type": "query_value",
+              "requests": [
+                {
+                  "response_format": "scalar",
+                  "queries": [
                     {
-                        "q": "sum:datadog.estimated_usage.logs.ingested_events{$service,$datadog_index}.as_count()",
-                        "aggregator": "sum"
+                      "query": "sum:datadog.estimated_usage.logs.ingested_events{$service,$datadog_index}.as_count()",
+                      "data_source": "metrics",
+                      "name": "query1",
+                      "aggregator": "sum"
                     }
-                ],
-                "autoscale": true,
-                "custom_unit": "logs",
-                "precision": 2
+                  ]
+                }
+              ],
+              "autoscale": true,
+              "precision": 2
             },
             "layout": {
-                "x": 2,
-                "y": 0,
-                "width": 2,
-                "height": 2
+              "x": 4,
+              "y": 0,
+              "width": 2,
+              "height": 2
             }
-        },
-        {
+          },
+          {
             "id": 3320287321495002,
             "definition": {
-                "title": "Indexed logs",
-                "title_size": "16",
-                "title_align": "left",
-                "type": "query_value",
-                "requests": [
+              "title": "Indexed logs",
+              "title_size": "16",
+              "title_align": "left",
+              "type": "query_value",
+              "requests": [
+                {
+                  "response_format": "scalar",
+                  "queries": [
                     {
-                        "q": "sum:datadog.estimated_usage.logs.ingested_events{datadog_is_excluded:false,$service,$datadog_index}.as_count()",
-                        "aggregator": "sum"
+                      "query": "sum:datadog.estimated_usage.logs.ingested_events{datadog_is_excluded:false,$service,$datadog_index}.as_count()",
+                      "data_source": "metrics",
+                      "name": "query1",
+                      "aggregator": "sum"
                     }
-                ],
-                "autoscale": true,
-                "custom_unit": "logs",
-                "precision": 2
+                  ]
+                }
+              ],
+              "autoscale": true,
+              "precision": 2
             },
             "layout": {
-                "x": 4,
-                "y": 0,
-                "width": 2,
-                "height": 2
+              "x": 6,
+              "y": 0,
+              "width": 2,
+              "height": 2
             }
-        },
-        {
-            "id": 3275218952380954,
-            "definition": {
-                "title": "Ingested bytes and Indexed logs #",
-                "title_size": "16",
-                "title_align": "left",
-                "show_legend": true,
-                "legend_layout": "auto",
-                "legend_columns": [
-                    "avg",
-                    "min",
-                    "max",
-                    "value",
-                    "sum"
-                ],
-                "type": "timeseries",
-                "requests": [
-                    {
-                        "q": "sum:datadog.estimated_usage.logs.ingested_bytes{$service,$datadog_index}.as_count()",
-                        "on_right_yaxis": false,
-                        "metadata": [
-                            {
-                                "expression": "sum:datadog.estimated_usage.logs.ingested_bytes{$service,$datadog_index}.as_count()",
-                                "alias_name": "Ingested bytes"
-                            }
-                        ],
-                        "style": {
-                            "palette": "orange",
-                            "line_type": "solid",
-                            "line_width": "normal"
-                        },
-                        "display_type": "line"
-                    },
-                    {
-                        "q": "sum:datadog.estimated_usage.logs.ingested_events{datadog_is_excluded:false,$service,$datadog_index}.as_count()",
-                        "on_right_yaxis": true,
-                        "metadata": [
-                            {
-                                "expression": "sum:datadog.estimated_usage.logs.ingested_events{datadog_is_excluded:false,$service,$datadog_index}.as_count()",
-                                "alias_name": "# of indexed logs"
-                            }
-                        ],
-                        "style": {
-                            "palette": "cool",
-                            "line_type": "solid",
-                            "line_width": "normal"
-                        },
-                        "display_type": "line"
-                    }
-                ],
-                "yaxis": {
-                    "include_zero": false
-                },
-                "right_yaxis": {
-                    "include_zero": false
-                },
-                "markers": []
-            },
-            "layout": {
-                "x": 6,
-                "y": 0,
-                "width": 4,
-                "height": 2
-            }
-        },
-        {
+          },
+          {
             "id": 6888629454432310,
             "definition": {
-                "title": "Overall exclusion ratio",
-                "title_size": "16",
-                "title_align": "left",
-                "type": "query_value",
-                "requests": [
+              "title": "Overall exclusion ratio",
+              "title_size": "16",
+              "title_align": "left",
+              "type": "query_value",
+              "requests": [
+                {
+                  "formulas": [
                     {
-                        "q": "sum:datadog.estimated_usage.logs.ingested_events{datadog_is_excluded:true,$service,$datadog_index}.as_count()/sum:datadog.estimated_usage.logs.ingested_events{$service,$datadog_index}.as_count()*100",
-                        "aggregator": "sum"
+                      "formula": "query1 / query2 * 100"
                     }
-                ],
-                "custom_unit": "%",
-                "precision": 2
+                  ],
+                  "conditional_formats": [
+                    {
+                      "comparator": ">",
+                      "palette": "white_on_green",
+                      "value": 50
+                    },
+                    {
+                      "comparator": "<",
+                      "palette": "white_on_red",
+                      "value": 10
+                    }
+                  ],
+                  "response_format": "scalar",
+                  "queries": [
+                    {
+                      "query": "sum:datadog.estimated_usage.logs.ingested_events{datadog_is_excluded:true,$service,$datadog_index}.as_count()",
+                      "data_source": "metrics",
+                      "name": "query1",
+                      "aggregator": "sum"
+                    },
+                    {
+                      "query": "sum:datadog.estimated_usage.logs.ingested_events{$service,$datadog_index}.as_count()",
+                      "data_source": "metrics",
+                      "name": "query2",
+                      "aggregator": "sum"
+                    }
+                  ]
+                }
+              ],
+              "custom_unit": "%",
+              "precision": 2
             },
             "layout": {
-                "x": 10,
-                "y": 0,
-                "width": 2,
-                "height": 2
+              "x": 4,
+              "y": 2,
+              "width": 4,
+              "height": 1
             }
-        },
-        {
-            "id": 5539510496389024,
+          }
+        ]
+      },
+      "layout": {
+        "x": 0,
+        "y": 0,
+        "width": 8,
+        "height": 6
+      }
+    },
+    {
+      "id": 1644703848874038,
+      "definition": {
+        "title": "Ingested logs per service",
+        "title_size": "16",
+        "title_align": "left",
+        "type": "toplist",
+        "requests": [
+          {
+            "formulas": [
+              {
+                "formula": "query1",
+                "limit": {
+                  "count": 50,
+                  "order": "desc"
+                }
+              }
+            ],
+            "response_format": "scalar",
+            "queries": [
+              {
+                "query": "sum:datadog.estimated_usage.logs.ingested_events{$service,$datadog_index} by {service}.as_count()",
+                "data_source": "metrics",
+                "name": "query1",
+                "aggregator": "sum"
+              }
+            ]
+          }
+        ],
+        "custom_links": []
+      },
+      "layout": {
+        "x": 8,
+        "y": 0,
+        "width": 2,
+        "height": 3
+      }
+    },
+    {
+      "id": 7526103588751068,
+      "definition": {
+        "title": "Indexed logs per service",
+        "title_size": "16",
+        "title_align": "left",
+        "type": "toplist",
+        "requests": [
+          {
+            "q": "top(sum:datadog.estimated_usage.logs.ingested_events{datadog_is_excluded:false,$service,$datadog_index} by {service}.as_count(), 50, \"sum\", \"desc\")"
+          }
+        ]
+      },
+      "layout": {
+        "x": 10,
+        "y": 0,
+        "width": 2,
+        "height": 3
+      }
+    },
+    {
+      "id": 5539510496389024,
+      "definition": {
+        "title": "Ingested bytes per service",
+        "title_size": "16",
+        "title_align": "left",
+        "type": "toplist",
+        "requests": [
+          {
+            "formulas": [
+              {
+                "formula": "query1",
+                "limit": {
+                  "count": 50,
+                  "order": "desc"
+                }
+              }
+            ],
+            "response_format": "scalar",
+            "queries": [
+              {
+                "query": "sum:datadog.estimated_usage.logs.ingested_bytes{$service,$datadog_index} by {service}",
+                "data_source": "metrics",
+                "name": "query1",
+                "aggregator": "sum"
+              }
+            ]
+          }
+        ],
+        "custom_links": []
+      },
+      "layout": {
+        "x": 8,
+        "y": 3,
+        "width": 2,
+        "height": 3
+      }
+    },
+    {
+      "id": 1704413790779002,
+      "definition": {
+        "title": "Services excluding the most logs",
+        "title_size": "16",
+        "title_align": "left",
+        "type": "toplist",
+        "requests": [
+          {
+            "formulas": [
+              {
+                "formula": "query1",
+                "limit": {
+                  "count": 50,
+                  "order": "desc"
+                }
+              }
+            ],
+            "response_format": "scalar",
+            "queries": [
+              {
+                "query": "sum:datadog.estimated_usage.logs.ingested_events{datadog_is_excluded:true,*,*,$service,$datadog_index} by {service}.as_count()",
+                "data_source": "metrics",
+                "name": "query1",
+                "aggregator": "sum"
+              }
+            ]
+          }
+        ],
+        "custom_links": []
+      },
+      "layout": {
+        "x": 10,
+        "y": 3,
+        "width": 2,
+        "height": 3
+      }
+    },
+    {
+      "id": 68196618582064,
+      "definition": {
+        "title": "Log Pipeline Statistics",
+        "type": "group",
+        "background_color": "vivid_blue",
+        "show_title": true,
+        "layout_type": "ordered",
+        "widgets": [
+          {
+            "id": 1525594149252268,
             "definition": {
-                "title": "Ingested bytes per service",
-                "title_size": "16",
-                "title_align": "left",
-                "type": "toplist",
-                "requests": [
+              "title": "% of indexed log events not modified by any Pipeline",
+              "title_size": "16",
+              "title_align": "left",
+              "type": "query_value",
+              "requests": [
+                {
+                  "formulas": [
                     {
-                        "q": "top(sum:datadog.estimated_usage.logs.ingested_bytes{*,*,$service,$datadog_index} by {service}, 50, 'sum', 'desc')"
+                      "formula": "(query1 / query2) * 100"
                     }
-                ],
-                "custom_links": []
+                  ],
+                  "response_format": "scalar",
+                  "queries": [
+                    {
+                      "search": {
+                        "query": "datadog.pipelines:false"
+                      },
+                      "data_source": "logs",
+                      "compute": {
+                        "aggregation": "count"
+                      },
+                      "name": "query1",
+                      "indexes": [
+                        "*"
+                      ],
+                      "group_by": []
+                    },
+                    {
+                      "search": {
+                        "query": ""
+                      },
+                      "data_source": "logs",
+                      "compute": {
+                        "aggregation": "count"
+                      },
+                      "name": "query2",
+                      "indexes": [
+                        "*"
+                      ],
+                      "group_by": []
+                    }
+                  ]
+                }
+              ],
+              "autoscale": false,
+              "custom_unit": "%",
+              "precision": 2
             },
             "layout": {
-                "x": 0,
-                "y": 2,
-                "width": 2,
-                "height": 3
+              "x": 0,
+              "y": 0,
+              "width": 4,
+              "height": 1
             }
-        },
-        {
-            "id": 1644703848874038,
+          },
+          {
+            "id": 8251032386772996,
             "definition": {
-                "title": "Ingested logs per service",
-                "title_size": "16",
-                "title_align": "left",
-                "type": "toplist",
-                "requests": [
+              "title": "% of all ingested log events modified by Pipeline: $log_pipeline_name.value",
+              "title_size": "16",
+              "title_align": "left",
+              "type": "query_value",
+              "requests": [
+                {
+                  "formulas": [
                     {
-                        "q": "top(sum:datadog.estimated_usage.logs.ingested_events{*,*,$service,$datadog_index} by {service}.as_count(), 50, 'sum', 'desc')"
+                      "formula": "(query1 / query2) * 100"
                     }
-                ],
-                "custom_links": []
+                  ],
+                  "response_format": "scalar",
+                  "queries": [
+                    {
+                      "query": "sum:datadog.estimated_usage.logs.pipelines.ingested_events{$log_pipeline_id,is_transformed:true}.as_count()",
+                      "data_source": "metrics",
+                      "name": "query1",
+                      "aggregator": "avg"
+                    },
+                    {
+                      "query": "sum:datadog.estimated_usage.logs.pipelines.ingested_events{*}.as_count()",
+                      "data_source": "metrics",
+                      "name": "query2",
+                      "aggregator": "avg"
+                    }
+                  ]
+                }
+              ],
+              "autoscale": false,
+              "custom_unit": "%",
+              "precision": 2
             },
             "layout": {
-                "x": 2,
-                "y": 2,
-                "width": 2,
-                "height": 3
+              "x": 4,
+              "y": 0,
+              "width": 4,
+              "height": 1
             }
-        },
-        {
-            "id": 7526103588751068,
+          },
+          {
+            "id": 8937567915829536,
             "definition": {
-                "title": "Indexed logs per service",
-                "title_size": "16",
-                "title_align": "left",
-                "type": "toplist",
-                "requests": [
+              "title": "% of all modified log events modified by Pipeline: $log_pipeline_name.value",
+              "title_size": "16",
+              "title_align": "left",
+              "type": "query_value",
+              "requests": [
+                {
+                  "formulas": [
                     {
-                        "q": "top(sum:datadog.estimated_usage.logs.ingested_events{datadog_is_excluded:false,$service,$datadog_index} by {service}.as_count(), 50, 'sum', 'desc')"
+                      "formula": "(query1 / query2) * 100"
                     }
-                ]
+                  ],
+                  "response_format": "scalar",
+                  "queries": [
+                    {
+                      "query": "sum:datadog.estimated_usage.logs.pipelines.ingested_events{$log_pipeline_id,is_transformed:true}.as_count()",
+                      "data_source": "metrics",
+                      "name": "query1",
+                      "aggregator": "avg"
+                    },
+                    {
+                      "query": "sum:datadog.estimated_usage.logs.pipelines.ingested_events{is_transformed:true}.as_count()",
+                      "data_source": "metrics",
+                      "name": "query2",
+                      "aggregator": "avg"
+                    }
+                  ]
+                }
+              ],
+              "autoscale": false,
+              "custom_unit": "%",
+              "precision": 2
             },
             "layout": {
-                "x": 4,
-                "y": 2,
-                "width": 2,
-                "height": 3
+              "x": 8,
+              "y": 0,
+              "width": 4,
+              "height": 1
             }
-        },
-        {
-            "id": 682036891834090,
+          },
+          {
+            "id": 6958240903611506,
             "definition": {
-                "title": "% of excluded logs",
-                "title_size": "16",
-                "title_align": "left",
-                "show_legend": false,
-                "type": "timeseries",
-                "requests": [
+              "type": "note",
+              "content": "Compare the **count** of log events ingested and log events modified by pipeline(s): `$log_pipeline_name.value `",
+              "background_color": "blue",
+              "font_size": "16",
+              "text_align": "left",
+              "vertical_align": "center",
+              "show_tick": true,
+              "tick_pos": "50%",
+              "tick_edge": "right"
+            },
+            "layout": {
+              "x": 0,
+              "y": 1,
+              "width": 2,
+              "height": 2
+            }
+          },
+          {
+            "id": 1520024552221738,
+            "definition": {
+              "title": "Count of log events ingested vs. modified by Pipeline: $log_pipeline_name.value",
+              "title_size": "16",
+              "title_align": "left",
+              "show_legend": false,
+              "legend_layout": "auto",
+              "legend_columns": [
+                "avg",
+                "min",
+                "max",
+                "value",
+                "sum"
+              ],
+              "type": "timeseries",
+              "requests": [
+                {
+                  "formulas": [
                     {
-                        "q": "sum:datadog.estimated_usage.logs.ingested_events{datadog_is_excluded:true,$service,$datadog_index}.as_count()/sum:datadog.estimated_usage.logs.ingested_events{$service,$datadog_index}.as_count()*100",
-                        "metadata": [
-                            {
-                                "expression": "sum:datadog.estimated_usage.logs.ingested_events{datadog_is_excluded:true,$service,$datadog_index}.as_count()/sum:datadog.estimated_usage.logs.ingested_events{$service,$datadog_index}.as_count()*100",
-                                "alias_name": "% of excluded logs"
-                            }
-                        ],
-                        "style": {
-                            "palette": "dog_classic",
-                            "line_type": "solid",
-                            "line_width": "normal"
-                        },
-                        "display_type": "line"
+                      "alias": "Ingested Log Events",
+                      "formula": "query1"
+                    },
+                    {
+                      "alias": "Modified Log Events",
+                      "formula": "query2"
                     }
-                ],
-                "yaxis": {
-                    "scale": "linear",
-                    "label": "",
-                    "include_zero": true,
-                    "min": "auto",
-                    "max": "auto"
+                  ],
+                  "response_format": "timeseries",
+                  "queries": [
+                    {
+                      "query": "sum:datadog.estimated_usage.logs.pipelines.ingested_events{$log_pipeline_id}.as_count()",
+                      "data_source": "metrics",
+                      "name": "query1"
+                    },
+                    {
+                      "query": "sum:datadog.estimated_usage.logs.pipelines.ingested_events{$log_pipeline_id,is_transformed:true}.as_count()",
+                      "data_source": "metrics",
+                      "name": "query2"
+                    }
+                  ],
+                  "style": {
+                    "palette": "blue",
+                    "line_type": "solid",
+                    "line_width": "normal"
+                  },
+                  "display_type": "area"
+                }
+              ]
+            },
+            "layout": {
+              "x": 2,
+              "y": 1,
+              "width": 10,
+              "height": 2
+            }
+          },
+          {
+            "id": 570573685263932,
+            "definition": {
+              "type": "note",
+              "content": "Analyze **change over the last week** in the percentage of ingested log events modified by pipeline(s):  `$log_pipeline_name.value `",
+              "background_color": "blue",
+              "font_size": "16",
+              "text_align": "left",
+              "vertical_align": "center",
+              "show_tick": true,
+              "tick_pos": "50%",
+              "tick_edge": "right"
+            },
+            "layout": {
+              "x": 0,
+              "y": 3,
+              "width": 2,
+              "height": 2
+            }
+          },
+          {
+            "id": 257742535988836,
+            "definition": {
+              "title": "Last 7 Days: % of ingested log events modified by Pipeline: $log_pipeline_name.value",
+              "title_size": "16",
+              "title_align": "left",
+              "show_legend": false,
+              "legend_layout": "auto",
+              "legend_columns": [
+                "avg",
+                "min",
+                "max",
+                "value",
+                "sum"
+              ],
+              "time": {
+                "live_span": "1w"
+              },
+              "type": "timeseries",
+              "requests": [
+                {
+                  "formulas": [
+                    {
+                      "alias": "% of Ingested Log Events Modified",
+                      "formula": "(query1 / query2) * 100"
+                    }
+                  ],
+                  "response_format": "timeseries",
+                  "queries": [
+                    {
+                      "query": "sum:datadog.estimated_usage.logs.pipelines.ingested_events{$log_pipeline_id,is_transformed:true}.as_count()",
+                      "data_source": "metrics",
+                      "name": "query1"
+                    },
+                    {
+                      "query": "sum:datadog.estimated_usage.logs.pipelines.ingested_events{$log_pipeline_id}.as_count()",
+                      "data_source": "metrics",
+                      "name": "query2"
+                    }
+                  ],
+                  "style": {
+                    "palette": "blue",
+                    "line_type": "solid",
+                    "line_width": "normal"
+                  },
+                  "display_type": "line"
+                }
+              ],
+              "yaxis": {
+                "max": "100"
+              }
+            },
+            "layout": {
+              "x": 2,
+              "y": 3,
+              "width": 8,
+              "height": 2
+            }
+          },
+          {
+            "id": 5857856836537540,
+            "definition": {
+              "title": "Last 7 Days: % Delta",
+              "title_size": "16",
+              "title_align": "left",
+              "time": {},
+              "type": "query_value",
+              "requests": [
+                {
+                  "formulas": [
+                    {
+                      "alias": "% ingested log events that were modified",
+                      "formula": "query3 / query4 * 100 - week_before(query1) / week_before(query2) * 100"
+                    }
+                  ],
+                  "conditional_formats": [
+                    {
+                      "comparator": ">",
+                      "palette": "black_on_light_green",
+                      "value": 0
+                    },
+                    {
+                      "comparator": "<=",
+                      "palette": "black_on_light_red",
+                      "value": 0
+                    }
+                  ],
+                  "response_format": "scalar",
+                  "queries": [
+                    {
+                      "query": "sum:datadog.estimated_usage.logs.pipelines.ingested_events{$log_pipeline_id,is_transformed:true}.as_count()",
+                      "data_source": "metrics",
+                      "name": "query3",
+                      "aggregator": "sum"
+                    },
+                    {
+                      "query": "sum:datadog.estimated_usage.logs.pipelines.ingested_events{$log_pipeline_id}.as_count()",
+                      "data_source": "metrics",
+                      "name": "query4",
+                      "aggregator": "sum"
+                    },
+                    {
+                      "query": "sum:datadog.estimated_usage.logs.pipelines.ingested_events{$log_pipeline_id,is_transformed:true}.as_count()",
+                      "data_source": "metrics",
+                      "name": "query1",
+                      "aggregator": "sum"
+                    },
+                    {
+                      "query": "sum:datadog.estimated_usage.logs.pipelines.ingested_events{$log_pipeline_id}.as_count()",
+                      "data_source": "metrics",
+                      "name": "query2",
+                      "aggregator": "sum"
+                    }
+                  ]
+                }
+              ],
+              "autoscale": false,
+              "precision": 2,
+              "timeseries_background": {
+                "type": "bars"
+              }
+            },
+            "layout": {
+              "x": 10,
+              "y": 3,
+              "width": 2,
+              "height": 2
+            }
+          },
+          {
+            "id": 3697072063140346,
+            "definition": {
+              "type": "note",
+              "content": "Compare the **size** of log events ingested and log events modified by pipeline(s): `$log_pipeline_name.value `",
+              "background_color": "purple",
+              "font_size": "16",
+              "text_align": "left",
+              "vertical_align": "center",
+              "show_tick": true,
+              "tick_pos": "50%",
+              "tick_edge": "right"
+            },
+            "layout": {
+              "x": 0,
+              "y": 5,
+              "width": 2,
+              "height": 2
+            }
+          },
+          {
+            "id": 8916585153894718,
+            "definition": {
+              "title": "Count of log bytes ingested vs. modified by Pipeline: $log_pipeline_name.value",
+              "title_size": "16",
+              "title_align": "left",
+              "show_legend": false,
+              "legend_layout": "auto",
+              "legend_columns": [
+                "avg",
+                "min",
+                "max",
+                "value",
+                "sum"
+              ],
+              "type": "timeseries",
+              "requests": [
+                {
+                  "formulas": [
+                    {
+                      "alias": "Ingested Log Bytes",
+                      "formula": "query1"
+                    },
+                    {
+                      "alias": "Modified Log Bytes",
+                      "formula": "query2"
+                    }
+                  ],
+                  "response_format": "timeseries",
+                  "queries": [
+                    {
+                      "query": "sum:datadog.estimated_usage.logs.pipelines.ingested_bytes{$log_pipeline_id}.as_count()",
+                      "data_source": "metrics",
+                      "name": "query1"
+                    },
+                    {
+                      "query": "sum:datadog.estimated_usage.logs.pipelines.ingested_bytes{$log_pipeline_id,is_transformed:true}.as_count()",
+                      "data_source": "metrics",
+                      "name": "query2"
+                    }
+                  ],
+                  "style": {
+                    "palette": "purple",
+                    "line_type": "solid",
+                    "line_width": "normal"
+                  },
+                  "display_type": "area"
+                }
+              ]
+            },
+            "layout": {
+              "x": 2,
+              "y": 5,
+              "width": 10,
+              "height": 2
+            }
+          },
+          {
+            "id": 6935739185113916,
+            "definition": {
+              "type": "note",
+              "content": "Analyze **change over the last week** in the percentage of ingested log bytes modified by pipeline(s):  `$log_pipeline_name.value `",
+              "background_color": "purple",
+              "font_size": "16",
+              "text_align": "left",
+              "vertical_align": "center",
+              "show_tick": true,
+              "tick_pos": "50%",
+              "tick_edge": "right"
+            },
+            "layout": {
+              "x": 0,
+              "y": 7,
+              "width": 2,
+              "height": 2
+            }
+          },
+          {
+            "id": 8430600157074204,
+            "definition": {
+              "title": "Last 7 Days: % of ingested log bytes modified by Pipeline: $log_pipeline_name.value",
+              "title_size": "16",
+              "title_align": "left",
+              "show_legend": false,
+              "legend_layout": "auto",
+              "legend_columns": [
+                "avg",
+                "min",
+                "max",
+                "value",
+                "sum"
+              ],
+              "time": {
+                "live_span": "1w"
+              },
+              "type": "timeseries",
+              "requests": [
+                {
+                  "formulas": [
+                    {
+                      "alias": "% of Ingested Log Bytes Modified",
+                      "formula": "(query1 / query2) * 100"
+                    }
+                  ],
+                  "response_format": "timeseries",
+                  "queries": [
+                    {
+                      "query": "sum:datadog.estimated_usage.logs.pipelines.ingested_bytes{$log_pipeline_id,is_transformed:true}.as_count()",
+                      "data_source": "metrics",
+                      "name": "query1"
+                    },
+                    {
+                      "query": "sum:datadog.estimated_usage.logs.pipelines.ingested_bytes{$log_pipeline_id}.as_count()",
+                      "data_source": "metrics",
+                      "name": "query2"
+                    }
+                  ],
+                  "style": {
+                    "palette": "purple",
+                    "line_type": "solid",
+                    "line_width": "normal"
+                  },
+                  "display_type": "line"
+                }
+              ],
+              "yaxis": {
+                "max": "100"
+              }
+            },
+            "layout": {
+              "x": 2,
+              "y": 7,
+              "width": 8,
+              "height": 2
+            }
+          },
+          {
+            "id": 5118358354102164,
+            "definition": {
+              "title": "Last 7 Days: % Delta",
+              "title_size": "16",
+              "title_align": "left",
+              "time": {},
+              "type": "query_value",
+              "requests": [
+                {
+                  "formulas": [
+                    {
+                      "alias": "% ingested log events that were modified",
+                      "formula": "query3 / query4 * 100 - week_before(query1) / week_before(query2) * 100"
+                    }
+                  ],
+                  "conditional_formats": [
+                    {
+                      "comparator": ">",
+                      "palette": "black_on_light_green",
+                      "value": 0
+                    },
+                    {
+                      "comparator": "<=",
+                      "palette": "black_on_light_red",
+                      "value": 0
+                    }
+                  ],
+                  "response_format": "scalar",
+                  "queries": [
+                    {
+                      "query": "sum:datadog.estimated_usage.logs.pipelines.ingested_bytes{$log_pipeline_id,is_transformed:true}.as_count()",
+                      "data_source": "metrics",
+                      "name": "query3",
+                      "aggregator": "sum"
+                    },
+                    {
+                      "query": "sum:datadog.estimated_usage.logs.pipelines.ingested_bytes{$log_pipeline_id}.as_count()",
+                      "data_source": "metrics",
+                      "name": "query4",
+                      "aggregator": "sum"
+                    },
+                    {
+                      "query": "sum:datadog.estimated_usage.logs.pipelines.ingested_bytes{$log_pipeline_id,is_transformed:true}.as_count()",
+                      "data_source": "metrics",
+                      "name": "query1",
+                      "aggregator": "sum"
+                    },
+                    {
+                      "query": "sum:datadog.estimated_usage.logs.pipelines.ingested_bytes{$log_pipeline_id}.as_count()",
+                      "data_source": "metrics",
+                      "name": "query2",
+                      "aggregator": "sum"
+                    }
+                  ]
+                }
+              ],
+              "autoscale": false,
+              "precision": 2,
+              "timeseries_background": {
+                "type": "bars"
+              }
+            },
+            "layout": {
+              "x": 10,
+              "y": 7,
+              "width": 2,
+              "height": 2
+            }
+          }
+        ]
+      },
+      "layout": {
+        "x": 0,
+        "y": 6,
+        "width": 12,
+        "height": 10
+      }
+    },
+    {
+      "id": 564521826686982,
+      "definition": {
+        "title": "Ingestion: Log Events",
+        "type": "group",
+        "background_color": "purple",
+        "show_title": true,
+        "layout_type": "ordered",
+        "widgets": [
+          {
+            "id": 3473265475092990,
+            "definition": {
+              "title": "Ingested logs",
+              "title_size": "16",
+              "title_align": "left",
+              "type": "query_value",
+              "requests": [
+                {
+                  "q": "sum:datadog.estimated_usage.logs.ingested_events{$service,$datadog_index}.as_count()",
+                  "aggregator": "sum"
+                }
+              ],
+              "autoscale": true,
+              "custom_unit": "logs",
+              "precision": 2
+            },
+            "layout": {
+              "x": 0,
+              "y": 0,
+              "width": 3,
+              "height": 2
+            }
+          },
+          {
+            "id": 6609381276279116,
+            "definition": {
+              "title": "Ingested logs",
+              "title_size": "16",
+              "title_align": "left",
+              "show_legend": false,
+              "legend_size": "0",
+              "type": "timeseries",
+              "requests": [
+                {
+                  "q": "forecast(sum:datadog.estimated_usage.logs.ingested_events{$service,$datadog_index}.as_count(), \"seasonal\", 1)",
+                  "on_right_yaxis": false,
+                  "metadata": [
+                    {
+                      "expression": "forecast(sum:datadog.estimated_usage.logs.ingested_events{$service,$datadog_index}.as_count(), 'seasonal', 1)",
+                      "alias_name": "# of ingested logs"
+                    }
+                  ],
+                  "style": {
+                    "palette": "purple",
+                    "line_type": "solid",
+                    "line_width": "normal"
+                  },
+                  "display_type": "line"
+                }
+              ],
+              "yaxis": {
+                "include_zero": false
+              },
+              "markers": []
+            },
+            "layout": {
+              "x": 3,
+              "y": 0,
+              "width": 9,
+              "height": 2
+            }
+          },
+          {
+            "id": 8505779798471122,
+            "definition": {
+              "title": "Ingested logs per service",
+              "title_size": "16",
+              "title_align": "left",
+              "type": "toplist",
+              "requests": [
+                {
+                  "q": "top(sum:datadog.estimated_usage.logs.ingested_events{*,*,$service,$datadog_index} by {service}.as_count(), 50, \"sum\", \"desc\")"
+                }
+              ],
+              "custom_links": []
+            },
+            "layout": {
+              "x": 0,
+              "y": 2,
+              "width": 4,
+              "height": 4
+            }
+          },
+          {
+            "id": 8796454055115538,
+            "definition": {
+              "title": "Ingested logs per service",
+              "title_size": "16",
+              "title_align": "left",
+              "show_legend": false,
+              "legend_size": "0",
+              "type": "timeseries",
+              "requests": [
+                {
+                  "q": "sum:datadog.estimated_usage.logs.ingested_events{$service,$datadog_index} by {service}.as_count()",
+                  "on_right_yaxis": false,
+                  "metadata": [
+                    {
+                      "expression": "sum:datadog.estimated_usage.logs.ingested_events{$service,$datadog_index} by {service}.as_count()",
+                      "alias_name": "# of ingested logs"
+                    }
+                  ],
+                  "style": {
+                    "palette": "purple",
+                    "line_type": "solid",
+                    "line_width": "normal"
+                  },
+                  "display_type": "line"
+                }
+              ],
+              "yaxis": {
+                "include_zero": true,
+                "scale": "linear",
+                "label": "",
+                "min": "auto",
+                "max": "auto"
+              },
+              "markers": []
+            },
+            "layout": {
+              "x": 4,
+              "y": 2,
+              "width": 8,
+              "height": 4
+            }
+          },
+          {
+            "id": 2209625948290228,
+            "definition": {
+              "title": "Contribution % to the amount of logs ingested per service",
+              "title_size": "16",
+              "title_align": "left",
+              "requests": [
+                {
+                  "formulas": [
+                    {
+                      "formula": "query1"
+                    }
+                  ],
+                  "response_format": "scalar",
+                  "queries": [
+                    {
+                      "query": "sum:datadog.estimated_usage.logs.ingested_events{$service,$datadog_index} by {service}.as_count()",
+                      "data_source": "metrics",
+                      "name": "query1",
+                      "aggregator": "sum"
+                    }
+                  ]
+                }
+              ],
+              "type": "sunburst"
+            },
+            "layout": {
+              "x": 0,
+              "y": 6,
+              "width": 4,
+              "height": 4
+            }
+          },
+          {
+            "id": 3041758933373202,
+            "definition": {
+              "title": "Contribution % to the amount of logs ingested per service",
+              "title_size": "16",
+              "title_align": "left",
+              "show_legend": false,
+              "legend_layout": "auto",
+              "legend_columns": [
+                "avg",
+                "min",
+                "max",
+                "value",
+                "sum"
+              ],
+              "type": "timeseries",
+              "requests": [
+                {
+                  "formulas": [
+                    {
+                      "formula": "(query1 / query2) * 100",
+                      "alias": "% of ingested logs"
+                    }
+                  ],
+                  "response_format": "timeseries",
+                  "on_right_yaxis": false,
+                  "queries": [
+                    {
+                      "query": "sum:datadog.estimated_usage.logs.ingested_events{$service,$datadog_index} by {service}.as_count()",
+                      "data_source": "metrics",
+                      "name": "query1"
+                    },
+                    {
+                      "query": "sum:datadog.estimated_usage.logs.ingested_events{$service,$datadog_index}.as_count()",
+                      "data_source": "metrics",
+                      "name": "query2"
+                    }
+                  ],
+                  "style": {
+                    "palette": "purple",
+                    "line_type": "solid",
+                    "line_width": "normal"
+                  },
+                  "display_type": "area"
+                }
+              ],
+              "yaxis": {
+                "min": "0",
+                "max": "100"
+              },
+              "markers": []
+            },
+            "layout": {
+              "x": 4,
+              "y": 6,
+              "width": 8,
+              "height": 4
+            }
+          }
+        ]
+      },
+      "layout": {
+        "x": 0,
+        "y": 16,
+        "width": 12,
+        "height": 11
+      }
+    },
+    {
+      "id": 2495007734117906,
+      "definition": {
+        "title": "Ingestion: Log Bytes",
+        "type": "group",
+        "background_color": "vivid_green",
+        "show_title": true,
+        "layout_type": "ordered",
+        "widgets": [
+          {
+            "id": 3140389630790260,
+            "definition": {
+              "title": "Ingested bytes",
+              "title_size": "16",
+              "title_align": "left",
+              "type": "query_value",
+              "requests": [
+                {
+                  "q": "sum:datadog.estimated_usage.logs.ingested_bytes{$service,$datadog_index}.as_count()",
+                  "aggregator": "sum"
+                }
+              ],
+              "autoscale": true,
+              "precision": 2
+            },
+            "layout": {
+              "x": 0,
+              "y": 0,
+              "width": 3,
+              "height": 2
+            }
+          },
+          {
+            "id": 6798992646351070,
+            "definition": {
+              "title": "Ingested bytes",
+              "title_size": "16",
+              "title_align": "left",
+              "show_legend": false,
+              "type": "timeseries",
+              "requests": [
+                {
+                  "q": "forecast(sum:datadog.estimated_usage.logs.ingested_bytes{$service,$datadog_index}.as_count(), \"seasonal\", 1)",
+                  "on_right_yaxis": false,
+                  "metadata": [
+                    {
+                      "expression": "forecast(sum:datadog.estimated_usage.logs.ingested_bytes{$service,$datadog_index}.as_count(), 'seasonal', 1)",
+                      "alias_name": "Ingested bytes"
+                    }
+                  ],
+                  "style": {
+                    "palette": "cool",
+                    "line_type": "solid",
+                    "line_width": "normal"
+                  },
+                  "display_type": "line"
+                }
+              ],
+              "yaxis": {
+                "include_zero": false
+              },
+              "markers": []
+            },
+            "layout": {
+              "x": 3,
+              "y": 0,
+              "width": 9,
+              "height": 2
+            }
+          },
+          {
+            "id": 6066799451924882,
+            "definition": {
+              "title": "Ingested bytes per service",
+              "title_size": "16",
+              "title_align": "left",
+              "type": "toplist",
+              "requests": [
+                {
+                  "formulas": [
+                    {
+                      "formula": "query1",
+                      "limit": {
+                        "count": 50,
+                        "order": "desc"
+                      }
+                    }
+                  ],
+                  "response_format": "scalar",
+                  "queries": [
+                    {
+                      "query": "sum:datadog.estimated_usage.logs.ingested_bytes{$service,$datadog_index} by {service}",
+                      "data_source": "metrics",
+                      "name": "query1",
+                      "aggregator": "sum"
+                    }
+                  ]
+                }
+              ],
+              "custom_links": []
+            },
+            "layout": {
+              "x": 0,
+              "y": 2,
+              "width": 4,
+              "height": 4
+            }
+          },
+          {
+            "id": 5554495524784648,
+            "definition": {
+              "title": "Ingested bytes per service",
+              "title_size": "16",
+              "title_align": "left",
+              "show_legend": false,
+              "legend_size": "0",
+              "type": "timeseries",
+              "requests": [
+                {
+                  "q": "sum:datadog.estimated_usage.logs.ingested_bytes{$service,$datadog_index} by {service}.as_count()",
+                  "on_right_yaxis": false,
+                  "metadata": [
+                    {
+                      "expression": "sum:datadog.estimated_usage.logs.ingested_bytes{$service,$datadog_index} by {service}.as_count()",
+                      "alias_name": "Ingested bytes"
+                    }
+                  ],
+                  "style": {
+                    "palette": "cool",
+                    "line_type": "solid",
+                    "line_width": "normal"
+                  },
+                  "display_type": "line"
+                }
+              ],
+              "yaxis": {
+                "include_zero": true,
+                "scale": "linear",
+                "label": "",
+                "min": "auto",
+                "max": "auto"
+              },
+              "markers": []
+            },
+            "layout": {
+              "x": 4,
+              "y": 2,
+              "width": 8,
+              "height": 4
+            }
+          },
+          {
+            "id": 7012213432940210,
+            "definition": {
+              "title": "Contribution % to the amount of bytes ingested per service",
+              "title_size": "16",
+              "title_align": "left",
+              "requests": [
+                {
+                  "formulas": [
+                    {
+                      "formula": "query1",
+                      "limit": {
+                        "count": 50,
+                        "order": "desc"
+                      }
+                    }
+                  ],
+                  "response_format": "scalar",
+                  "queries": [
+                    {
+                      "query": "sum:datadog.estimated_usage.logs.ingested_bytes{$service,$datadog_index} by {service}.as_count()",
+                      "data_source": "metrics",
+                      "name": "query1",
+                      "aggregator": "sum"
+                    }
+                  ]
+                }
+              ],
+              "type": "sunburst"
+            },
+            "layout": {
+              "x": 0,
+              "y": 6,
+              "width": 4,
+              "height": 4
+            }
+          },
+          {
+            "id": 8474698101818746,
+            "definition": {
+              "title": "Contribution % to the amount of bytes ingested per service",
+              "title_size": "16",
+              "title_align": "left",
+              "show_legend": false,
+              "legend_size": "0",
+              "type": "timeseries",
+              "requests": [
+                {
+                  "q": "(sum:datadog.estimated_usage.logs.ingested_bytes{$service,$datadog_index} by {service}.as_count() / sum:datadog.estimated_usage.logs.ingested_bytes{$service,$datadog_index}.as_count()) * 100",
+                  "on_right_yaxis": false,
+                  "metadata": [
+                    {
+                      "expression": "(sum:datadog.estimated_usage.logs.ingested_bytes{$service,$datadog_index} by {service}.as_count()/sum:datadog.estimated_usage.logs.ingested_bytes{$service,$datadog_index}.as_count())*100",
+                      "alias_name": "% of Ingested bytes"
+                    }
+                  ],
+                  "style": {
+                    "palette": "cool",
+                    "line_type": "solid",
+                    "line_width": "normal"
+                  },
+                  "display_type": "area"
+                }
+              ],
+              "yaxis": {
+                "min": "0",
+                "max": "100"
+              },
+              "markers": []
+            },
+            "layout": {
+              "x": 4,
+              "y": 6,
+              "width": 8,
+              "height": 4
+            }
+          }
+        ]
+      },
+      "layout": {
+        "x": 0,
+        "y": 27,
+        "width": 12,
+        "height": 11
+      }
+    },
+    {
+      "id": 3011194267152040,
+      "definition": {
+        "title": "Indexing Overview",
+        "type": "group",
+        "background_color": "green",
+        "show_title": true,
+        "layout_type": "ordered",
+        "widgets": [
+          {
+            "id": 7939556967967594,
+            "definition": {
+              "title": "Indexed logs",
+              "title_size": "16",
+              "title_align": "left",
+              "type": "query_value",
+              "requests": [
+                {
+                  "q": "sum:datadog.estimated_usage.logs.ingested_events{datadog_is_excluded:false,$service,$datadog_index}.as_count()",
+                  "aggregator": "sum"
+                }
+              ],
+              "autoscale": true,
+              "custom_unit": "logs",
+              "precision": 2
+            },
+            "layout": {
+              "x": 0,
+              "y": 0,
+              "width": 3,
+              "height": 2
+            }
+          },
+          {
+            "id": 1154925800047330,
+            "definition": {
+              "title": "Indexed logs",
+              "title_size": "16",
+              "title_align": "left",
+              "show_legend": false,
+              "legend_size": "0",
+              "type": "timeseries",
+              "requests": [
+                {
+                  "q": "forecast(sum:datadog.estimated_usage.logs.ingested_events{datadog_is_excluded:false,$service,$datadog_index}.as_count(), \"seasonal\", 1)",
+                  "on_right_yaxis": false,
+                  "metadata": [
+                    {
+                      "expression": "forecast(sum:datadog.estimated_usage.logs.ingested_events{datadog_is_excluded:false,$service,$datadog_index}.as_count(), 'seasonal', 1)",
+                      "alias_name": "# of indexed logs"
+                    }
+                  ],
+                  "style": {
+                    "palette": "green",
+                    "line_type": "solid",
+                    "line_width": "normal"
+                  },
+                  "display_type": "line"
+                }
+              ],
+              "yaxis": {
+                "include_zero": true,
+                "scale": "linear",
+                "label": "",
+                "min": "auto",
+                "max": "auto"
+              },
+              "markers": []
+            },
+            "layout": {
+              "x": 3,
+              "y": 0,
+              "width": 9,
+              "height": 2
+            }
+          },
+          {
+            "id": 6970430934837094,
+            "definition": {
+              "title": "Indexed logs per service",
+              "title_size": "16",
+              "title_align": "left",
+              "type": "toplist",
+              "requests": [
+                {
+                  "q": "top(sum:datadog.estimated_usage.logs.ingested_events{datadog_is_excluded:false,$service,$datadog_index} by {service}.as_count(), 50, \"sum\", \"desc\")"
+                }
+              ]
+            },
+            "layout": {
+              "x": 0,
+              "y": 2,
+              "width": 3,
+              "height": 3
+            }
+          },
+          {
+            "id": 790216789422616,
+            "definition": {
+              "title": "Indexed logs per service",
+              "title_size": "16",
+              "title_align": "left",
+              "show_legend": false,
+              "legend_size": "0",
+              "type": "timeseries",
+              "requests": [
+                {
+                  "q": "sum:datadog.estimated_usage.logs.ingested_events{datadog_is_excluded:false,$service,$datadog_index} by {service}.as_count()",
+                  "on_right_yaxis": false,
+                  "metadata": [
+                    {
+                      "expression": "sum:datadog.estimated_usage.logs.ingested_events{datadog_is_excluded:false,$service,$datadog_index} by {service}.as_count()",
+                      "alias_name": "# of indexed logs"
+                    }
+                  ],
+                  "style": {
+                    "palette": "green",
+                    "line_type": "solid",
+                    "line_width": "normal"
+                  },
+                  "display_type": "line"
+                }
+              ],
+              "yaxis": {
+                "include_zero": true,
+                "scale": "linear",
+                "label": "",
+                "min": "auto",
+                "max": "auto"
+              },
+              "markers": []
+            },
+            "layout": {
+              "x": 3,
+              "y": 2,
+              "width": 9,
+              "height": 3
+            }
+          },
+          {
+            "id": 283325793331474,
+            "definition": {
+              "title": "Contribution % to number of indexed logs per service",
+              "title_size": "16",
+              "title_align": "left",
+              "requests": [
+                {
+                  "formulas": [
+                    {
+                      "formula": "query1"
+                    }
+                  ],
+                  "response_format": "scalar",
+                  "queries": [
+                    {
+                      "query": "sum:datadog.estimated_usage.logs.ingested_events{$service,$datadog_index,datadog_is_excluded:false} by {service}.as_count()",
+                      "data_source": "metrics",
+                      "name": "query1",
+                      "aggregator": "sum"
+                    }
+                  ]
+                }
+              ],
+              "type": "sunburst"
+            },
+            "layout": {
+              "x": 0,
+              "y": 5,
+              "width": 3,
+              "height": 4
+            }
+          },
+          {
+            "id": 2890693303808278,
+            "definition": {
+              "title": "Contribution % to number of indexed logs per service",
+              "title_size": "16",
+              "title_align": "left",
+              "show_legend": false,
+              "type": "timeseries",
+              "requests": [
+                {
+                  "q": "sum:datadog.estimated_usage.logs.ingested_events{$service,$datadog_index,datadog_is_excluded:false} by {service}.as_count() / sum:datadog.estimated_usage.logs.ingested_events{$service,$datadog_index,datadog_is_excluded:false}.as_count() * 100",
+                  "on_right_yaxis": false,
+                  "metadata": [
+                    {
+                      "expression": "sum:datadog.estimated_usage.logs.ingested_events{$service,$datadog_index,datadog_is_excluded:false} by {service}.as_count()/sum:datadog.estimated_usage.logs.ingested_events{$service,$datadog_index,datadog_is_excluded:false}.as_count()*100",
+                      "alias_name": "% of indexed logs"
+                    }
+                  ],
+                  "style": {
+                    "palette": "green",
+                    "line_type": "solid",
+                    "line_width": "normal"
+                  },
+                  "display_type": "area"
+                }
+              ],
+              "yaxis": {
+                "min": "0",
+                "max": "100"
+              },
+              "markers": []
+            },
+            "layout": {
+              "x": 3,
+              "y": 5,
+              "width": 9,
+              "height": 4
+            }
+          },
+          {
+            "id": 386983657933882,
+            "definition": {
+              "title": "Indexed logs by index",
+              "title_size": "16",
+              "title_align": "left",
+              "requests": [
+                {
+                  "formulas": [
+                    {
+                      "formula": "query1"
+                    }
+                  ],
+                  "response_format": "scalar",
+                  "queries": [
+                    {
+                      "query": "sum:datadog.estimated_usage.logs.ingested_events{datadog_is_excluded:false,$service,$datadog_index} by {datadog_index}.as_count()",
+                      "data_source": "metrics",
+                      "name": "query1",
+                      "aggregator": "sum"
+                    }
+                  ]
+                }
+              ],
+              "type": "sunburst"
+            },
+            "layout": {
+              "x": 0,
+              "y": 9,
+              "width": 3,
+              "height": 3
+            }
+          },
+          {
+            "id": 5721999135923774,
+            "definition": {
+              "title": "% of Indexed logs per index",
+              "title_size": "16",
+              "title_align": "left",
+              "show_legend": false,
+              "legend_size": "0",
+              "type": "timeseries",
+              "requests": [
+                {
+                  "q": "sum:datadog.estimated_usage.logs.ingested_events{datadog_is_excluded:false,$service,$datadog_index} by {datadog_index}.as_count() / sum:datadog.estimated_usage.logs.ingested_events{datadog_is_excluded:false,$service,$datadog_index}.as_count() * 100",
+                  "on_right_yaxis": false,
+                  "metadata": [
+                    {
+                      "expression": "sum:datadog.estimated_usage.logs.ingested_events{datadog_is_excluded:false,$service,$datadog_index} by {datadog_index}.as_count()/sum:datadog.estimated_usage.logs.ingested_events{datadog_is_excluded:false,$service,$datadog_index}.as_count()*100",
+                      "alias_name": "% per index"
+                    }
+                  ],
+                  "style": {
+                    "palette": "grey",
+                    "line_type": "solid",
+                    "line_width": "normal"
+                  },
+                  "display_type": "area"
+                }
+              ],
+              "yaxis": {
+                "min": "0",
+                "max": "100"
+              },
+              "markers": []
+            },
+            "layout": {
+              "x": 3,
+              "y": 9,
+              "width": 9,
+              "height": 3
+            }
+          }
+        ]
+      },
+      "layout": {
+        "x": 0,
+        "y": 38,
+        "width": 12,
+        "height": 13,
+        "is_column_break": true
+      }
+    },
+    {
+      "id": 6353274994438708,
+      "definition": {
+        "title": "Sampling Overview",
+        "type": "group",
+        "background_color": "orange",
+        "show_title": true,
+        "layout_type": "ordered",
+        "widgets": [
+          {
+            "id": 4175932859454450,
+            "definition": {
+              "title": "Overall exclusion ratio",
+              "title_size": "16",
+              "title_align": "left",
+              "type": "query_value",
+              "requests": [
+                {
+                  "q": "sum:datadog.estimated_usage.logs.ingested_events{datadog_is_excluded:true,$service,$datadog_index}.as_count() / sum:datadog.estimated_usage.logs.ingested_events{$service,$datadog_index}.as_count() * 100",
+                  "aggregator": "sum"
+                }
+              ],
+              "custom_unit": "%",
+              "precision": 2
+            },
+            "layout": {
+              "x": 0,
+              "y": 0,
+              "width": 2,
+              "height": 2
+            }
+          },
+          {
+            "id": 1518123082240178,
+            "definition": {
+              "title": "Services excluding the most logs",
+              "title_size": "16",
+              "title_align": "left",
+              "type": "toplist",
+              "requests": [
+                {
+                  "formulas": [
+                    {
+                      "formula": "query1",
+                      "limit": {
+                        "count": 50,
+                        "order": "desc"
+                      }
+                    }
+                  ],
+                  "response_format": "scalar",
+                  "queries": [
+                    {
+                      "query": "sum:datadog.estimated_usage.logs.ingested_events{datadog_is_excluded:true,*,*,$service,$datadog_index} by {service}.as_count()",
+                      "data_source": "metrics",
+                      "name": "query1",
+                      "aggregator": "sum"
+                    }
+                  ]
+                }
+              ],
+              "custom_links": []
+            },
+            "layout": {
+              "x": 2,
+              "y": 0,
+              "width": 5,
+              "height": 4
+            }
+          },
+          {
+            "id": 3484762832864918,
+            "definition": {
+              "title": "Services excluding the least logs",
+              "title_size": "16",
+              "title_align": "left",
+              "type": "toplist",
+              "requests": [
+                {
+                  "formulas": [
+                    {
+                      "formula": "query1",
+                      "limit": {
+                        "count": 50,
+                        "order": "asc"
+                      }
+                    }
+                  ],
+                  "response_format": "scalar",
+                  "queries": [
+                    {
+                      "query": "sum:datadog.estimated_usage.logs.ingested_events{datadog_is_excluded:true,*,*,$service,$datadog_index} by {service}.as_count()",
+                      "data_source": "metrics",
+                      "name": "query1",
+                      "aggregator": "sum"
+                    }
+                  ]
+                }
+              ],
+              "custom_links": []
+            },
+            "layout": {
+              "x": 7,
+              "y": 0,
+              "width": 5,
+              "height": 4
+            }
+          },
+          {
+            "id": 8730798479844324,
+            "definition": {
+              "title": "Excluded logs",
+              "title_size": "16",
+              "title_align": "left",
+              "type": "query_value",
+              "requests": [
+                {
+                  "q": "sum:datadog.estimated_usage.logs.ingested_events{datadog_is_excluded:true,$service,$datadog_index}.as_count()",
+                  "aggregator": "sum"
+                }
+              ],
+              "autoscale": true,
+              "custom_unit": "logs",
+              "precision": 2
+            },
+            "layout": {
+              "x": 0,
+              "y": 2,
+              "width": 2,
+              "height": 2
+            }
+          },
+          {
+            "id": 2009147206720634,
+            "definition": {
+              "title": "% of excluded logs",
+              "title_size": "16",
+              "title_align": "left",
+              "show_legend": false,
+              "type": "timeseries",
+              "requests": [
+                {
+                  "q": "sum:datadog.estimated_usage.logs.ingested_events{datadog_is_excluded:true,$service,$datadog_index}.as_count() / sum:datadog.estimated_usage.logs.ingested_events{$service,$datadog_index}.as_count() * 100",
+                  "metadata": [
+                    {
+                      "expression": "sum:datadog.estimated_usage.logs.ingested_events{datadog_is_excluded:true,$service,$datadog_index}.as_count()/sum:datadog.estimated_usage.logs.ingested_events{$service,$datadog_index}.as_count()*100",
+                      "alias_name": "% of excluded logs"
+                    }
+                  ],
+                  "style": {
+                    "palette": "dog_classic",
+                    "line_type": "solid",
+                    "line_width": "normal"
+                  },
+                  "display_type": "line"
+                }
+              ],
+              "yaxis": {
+                "include_zero": true,
+                "scale": "linear",
+                "label": "",
+                "min": "auto",
+                "max": "auto"
+              },
+              "markers": []
+            },
+            "layout": {
+              "x": 0,
+              "y": 4,
+              "width": 6,
+              "height": 4
+            }
+          },
+          {
+            "id": 5059618711997494,
+            "definition": {
+              "title": "% of excluded logs for the top 10 and bottom 10 services",
+              "title_size": "16",
+              "title_align": "left",
+              "show_legend": false,
+              "legend_size": "0",
+              "type": "timeseries",
+              "requests": [
+                {
+                  "q": "top(sum:datadog.estimated_usage.logs.ingested_events{datadog_is_excluded:true,$service,$datadog_index} by {service}.as_count(), 10, \"sum\", \"desc\") / sum:datadog.estimated_usage.logs.ingested_events{$service,$datadog_index} by {service}.as_count() * 100",
+                  "metadata": [
+                    {
+                      "expression": "top(sum:datadog.estimated_usage.logs.ingested_events{datadog_is_excluded:true,$service,$datadog_index} by {service}.as_count(), 10, 'sum', 'desc')/sum:datadog.estimated_usage.logs.ingested_events{$service,$datadog_index} by {service}.as_count()*100",
+                      "alias_name": "% of excluded logs"
+                    }
+                  ],
+                  "style": {
+                    "palette": "dog_classic",
+                    "line_type": "solid",
+                    "line_width": "normal"
+                  },
+                  "display_type": "line"
                 },
-                "markers": []
+                {
+                  "q": "top(sum:datadog.estimated_usage.logs.ingested_events{datadog_is_excluded:true,$service,$datadog_index} by {service}.as_count(), 10, \"sum\", \"asc\") / sum:datadog.estimated_usage.logs.ingested_events{$service,$datadog_index} by {service}.as_count() * 100",
+                  "metadata": [
+                    {
+                      "expression": "top(sum:datadog.estimated_usage.logs.ingested_events{datadog_is_excluded:true,$service,$datadog_index} by {service}.as_count(), 10, 'sum', 'asc')/sum:datadog.estimated_usage.logs.ingested_events{$service,$datadog_index} by {service}.as_count()*100",
+                      "alias_name": "% of excluded logs"
+                    }
+                  ],
+                  "style": {
+                    "palette": "dog_classic",
+                    "line_type": "solid",
+                    "line_width": "normal"
+                  },
+                  "display_type": "line"
+                }
+              ],
+              "yaxis": {
+                "include_zero": true,
+                "scale": "linear",
+                "label": "",
+                "min": "auto",
+                "max": "auto"
+              },
+              "markers": []
             },
             "layout": {
-                "x": 6,
-                "y": 2,
-                "width": 4,
-                "height": 3
+              "x": 6,
+              "y": 4,
+              "width": 6,
+              "height": 4
             }
-        },
-        {
-            "id": 1992190028282392,
+          }
+        ]
+      },
+      "layout": {
+        "x": 0,
+        "y": 51,
+        "width": 12,
+        "height": 9
+      }
+    },
+    {
+      "id": 6690824491662456,
+      "definition": {
+        "title": "Management, as in log management",
+        "type": "group",
+        "background_color": "gray",
+        "show_title": true,
+        "layout_type": "ordered",
+        "widgets": [
+          {
+            "id": 666066186598628,
             "definition": {
-                "title": "Service excluding the most logs",
-                "title_size": "16",
-                "title_align": "left",
-                "type": "toplist",
-                "requests": [
-                    {
-                        "q": "top(sum:datadog.estimated_usage.logs.ingested_events{datadog_is_excluded:true,$service,$datadog_index} by {service}.as_count(), 25, 'sum', 'desc')"
-                    }
-                ]
+              "type": "note",
+              "content": "This scatter plot displays the amount of logs ingested vs the combined size of those logs in bytes for each one of your service.\n\nThe more a service is in the upper right corner the more it might impact your ingestion costs as it means it's ingesting lots of logs and the combined size of all those logs is \"very big\"",
+              "background_color": "blue",
+              "font_size": "14",
+              "text_align": "left",
+              "show_tick": true,
+              "tick_pos": "50%",
+              "tick_edge": "right"
             },
             "layout": {
-                "x": 10,
-                "y": 2,
-                "width": 2,
-                "height": 3
+              "x": 0,
+              "y": 0,
+              "width": 2,
+              "height": 4
             }
-        },
-        {
-            "id": 2495007734117906,
+          },
+          {
+            "id": 4907985128663654,
             "definition": {
-                "title": "Ingestion: Ingested Bytes",
-                "type": "group",
-                "background_color": "blue",
-                "show_title": true,
-                "layout_type": "ordered",
-                "widgets": [
-                    {
-                        "id": 3140389630790260,
-                        "definition": {
-                            "title": "Ingested bytes",
-                            "title_size": "16",
-                            "title_align": "left",
-                            "type": "query_value",
-                            "requests": [
-                                {
-                                    "q": "sum:datadog.estimated_usage.logs.ingested_bytes{$service,$datadog_index}.as_count()",
-                                    "aggregator": "sum"
-                                }
-                            ],
-                            "autoscale": true,
-                            "precision": 2
-                        },
-                        "layout": {
-                            "x": 0,
-                            "y": 0,
-                            "width": 3,
-                            "height": 2
-                        }
-                    },
-                    {
-                        "id": 6798992646351070,
-                        "definition": {
-                            "title": "Ingested bytes",
-                            "title_size": "16",
-                            "title_align": "left",
-                            "show_legend": false,
-                            "type": "timeseries",
-                            "requests": [
-                                {
-                                    "q": "forecast(sum:datadog.estimated_usage.logs.ingested_bytes{$service,$datadog_index}.as_count(), 'seasonal', 1)",
-                                    "on_right_yaxis": false,
-                                    "metadata": [
-                                        {
-                                            "expression": "forecast(sum:datadog.estimated_usage.logs.ingested_bytes{$service,$datadog_index}.as_count(), 'seasonal', 1)",
-                                            "alias_name": "Ingested bytes"
-                                        }
-                                    ],
-                                    "style": {
-                                        "palette": "cool",
-                                        "line_type": "solid",
-                                        "line_width": "normal"
-                                    },
-                                    "display_type": "line"
-                                }
-                            ],
-                            "yaxis": {
-                                "include_zero": false
-                            },
-                            "markers": []
-                        },
-                        "layout": {
-                            "x": 3,
-                            "y": 0,
-                            "width": 9,
-                            "height": 2
-                        }
-                    },
-                    {
-                        "id": 6066799451924882,
-                        "definition": {
-                            "title": "Ingested bytes per service",
-                            "title_size": "16",
-                            "title_align": "left",
-                            "type": "toplist",
-                            "requests": [
-                                {
-                                    "q": "top(sum:datadog.estimated_usage.logs.ingested_bytes{*,*,$service,$datadog_index} by {service}, 50, 'sum', 'desc')"
-                                }
-                            ],
-                            "custom_links": []
-                        },
-                        "layout": {
-                            "x": 0,
-                            "y": 2,
-                            "width": 4,
-                            "height": 4
-                        }
-                    },
-                    {
-                        "id": 5554495524784648,
-                        "definition": {
-                            "title": "Ingested bytes per service",
-                            "title_size": "16",
-                            "title_align": "left",
-                            "show_legend": false,
-                            "legend_size": "0",
-                            "type": "timeseries",
-                            "requests": [
-                                {
-                                    "q": "sum:datadog.estimated_usage.logs.ingested_bytes{$service,$datadog_index} by {service}.as_count()",
-                                    "on_right_yaxis": false,
-                                    "metadata": [
-                                        {
-                                            "expression": "sum:datadog.estimated_usage.logs.ingested_bytes{$service,$datadog_index} by {service}.as_count()",
-                                            "alias_name": "Ingested bytes"
-                                        }
-                                    ],
-                                    "style": {
-                                        "palette": "cool",
-                                        "line_type": "solid",
-                                        "line_width": "normal"
-                                    },
-                                    "display_type": "line"
-                                }
-                            ],
-                            "yaxis": {
-                                "scale": "linear",
-                                "label": "",
-                                "include_zero": true,
-                                "min": "auto",
-                                "max": "auto"
-                            },
-                            "markers": []
-                        },
-                        "layout": {
-                            "x": 4,
-                            "y": 2,
-                            "width": 8,
-                            "height": 4
-                        }
-                    },
-                    {
-                        "id": 7012213432940210,
-                        "definition": {
-                            "title": "Contribution % to the amount of bytes ingested per service",
-                            "title_size": "16",
-                            "title_align": "left",
-                            "type": "toplist",
-                            "requests": [
-                                {
-                                    "q": "top((sum:datadog.estimated_usage.logs.ingested_bytes{$service,$datadog_index} by {service}.as_count()/sum:datadog.estimated_usage.logs.ingested_bytes{$service,$datadog_index}.as_count())*100,50,'mean','desc')"
-                                }
-                            ]
-                        },
-                        "layout": {
-                            "x": 0,
-                            "y": 6,
-                            "width": 4,
-                            "height": 4
-                        }
-                    },
-                    {
-                        "id": 8474698101818746,
-                        "definition": {
-                            "title": "Contribution % to the amount of bytes ingested per service",
-                            "title_size": "16",
-                            "title_align": "left",
-                            "show_legend": false,
-                            "legend_size": "0",
-                            "type": "timeseries",
-                            "requests": [
-                                {
-                                    "q": "(sum:datadog.estimated_usage.logs.ingested_bytes{$service,$datadog_index} by {service}.as_count()/sum:datadog.estimated_usage.logs.ingested_bytes{$service,$datadog_index}.as_count())*100",
-                                    "on_right_yaxis": false,
-                                    "metadata": [
-                                        {
-                                            "expression": "(sum:datadog.estimated_usage.logs.ingested_bytes{$service,$datadog_index} by {service}.as_count()/sum:datadog.estimated_usage.logs.ingested_bytes{$service,$datadog_index}.as_count())*100",
-                                            "alias_name": "% of Ingested bytes"
-                                        }
-                                    ],
-                                    "style": {
-                                        "palette": "cool",
-                                        "line_type": "solid",
-                                        "line_width": "normal"
-                                    },
-                                    "display_type": "area"
-                                }
-                            ],
-                            "yaxis": {
-                                "min": "0",
-                                "max": "100"
-                            },
-                            "markers": []
-                        },
-                        "layout": {
-                            "x": 4,
-                            "y": 6,
-                            "width": 8,
-                            "height": 4
-                        }
-                    }
-                ]
+              "title": "Number of logs vs Size of logs per service",
+              "title_size": "16",
+              "title_align": "left",
+              "type": "scatterplot",
+              "requests": {
+                "x": {
+                  "q": "sum:datadog.estimated_usage.logs.ingested_bytes{$datadog_index,$service} by {service}.as_count()",
+                  "aggregator": "sum"
+                },
+                "y": {
+                  "q": "sum:datadog.estimated_usage.logs.ingested_events{$datadog_index,$service} by {service}.as_count()",
+                  "aggregator": "sum"
+                }
+              },
+              "xaxis": {
+                "include_zero": false,
+                "scale": "log"
+              },
+              "yaxis": {
+                "include_zero": false,
+                "scale": "log"
+              },
+              "color_by_groups": [
+                "service"
+              ]
+            },
+            "layout": {
+              "x": 2,
+              "y": 0,
+              "width": 10,
+              "height": 4
             }
-        },
-        {
-            "id": 564521826686982,
+          },
+          {
+            "id": 5781268478806462,
             "definition": {
-                "title": "Ingestion: number of logs",
-                "type": "group",
-                "background_color": "purple",
-                "show_title": true,
-                "layout_type": "ordered",
-                "widgets": [
-                    {
-                        "id": 3473265475092990,
-                        "definition": {
-                            "title": "Ingested logs",
-                            "title_size": "16",
-                            "title_align": "left",
-                            "type": "query_value",
-                            "requests": [
-                                {
-                                    "q": "sum:datadog.estimated_usage.logs.ingested_events{$service,$datadog_index}.as_count()",
-                                    "aggregator": "sum"
-                                }
-                            ],
-                            "autoscale": true,
-                            "custom_unit": "logs",
-                            "precision": 2
-                        },
-                        "layout": {
-                            "x": 0,
-                            "y": 0,
-                            "width": 3,
-                            "height": 2
-                        }
-                    },
-                    {
-                        "id": 6609381276279116,
-                        "definition": {
-                            "title": "Ingested logs",
-                            "title_size": "16",
-                            "title_align": "left",
-                            "show_legend": false,
-                            "legend_size": "0",
-                            "type": "timeseries",
-                            "requests": [
-                                {
-                                    "q": "forecast(sum:datadog.estimated_usage.logs.ingested_events{$service,$datadog_index}.as_count(), 'seasonal', 1)",
-                                    "on_right_yaxis": false,
-                                    "metadata": [
-                                        {
-                                            "expression": "forecast(sum:datadog.estimated_usage.logs.ingested_events{$service,$datadog_index}.as_count(), 'seasonal', 1)",
-                                            "alias_name": "# of ingested logs"
-                                        }
-                                    ],
-                                    "style": {
-                                        "palette": "purple",
-                                        "line_type": "solid",
-                                        "line_width": "normal"
-                                    },
-                                    "display_type": "line"
-                                }
-                            ],
-                            "yaxis": {
-                                "include_zero": false
-                            },
-                            "markers": []
-                        },
-                        "layout": {
-                            "x": 3,
-                            "y": 0,
-                            "width": 9,
-                            "height": 2
-                        }
-                    },
-                    {
-                        "id": 8505779798471122,
-                        "definition": {
-                            "title": "Ingested logs per service",
-                            "title_size": "16",
-                            "title_align": "left",
-                            "type": "toplist",
-                            "requests": [
-                                {
-                                    "q": "top(sum:datadog.estimated_usage.logs.ingested_events{*,*,$service,$datadog_index} by {service}.as_count(), 50, 'sum', 'desc')"
-                                }
-                            ],
-                            "custom_links": []
-                        },
-                        "layout": {
-                            "x": 0,
-                            "y": 2,
-                            "width": 4,
-                            "height": 4
-                        }
-                    },
-                    {
-                        "id": 8796454055115538,
-                        "definition": {
-                            "title": "Ingested logs per service",
-                            "title_size": "16",
-                            "title_align": "left",
-                            "show_legend": false,
-                            "legend_size": "0",
-                            "type": "timeseries",
-                            "requests": [
-                                {
-                                    "q": "sum:datadog.estimated_usage.logs.ingested_events{$service,$datadog_index} by {service}.as_count()",
-                                    "on_right_yaxis": false,
-                                    "metadata": [
-                                        {
-                                            "expression": "sum:datadog.estimated_usage.logs.ingested_events{$service,$datadog_index} by {service}.as_count()",
-                                            "alias_name": "# of ingested logs"
-                                        }
-                                    ],
-                                    "style": {
-                                        "palette": "purple",
-                                        "line_type": "solid",
-                                        "line_width": "normal"
-                                    },
-                                    "display_type": "line"
-                                }
-                            ],
-                            "yaxis": {
-                                "scale": "linear",
-                                "label": "",
-                                "include_zero": true,
-                                "min": "auto",
-                                "max": "auto"
-                            },
-                            "markers": []
-                        },
-                        "layout": {
-                            "x": 4,
-                            "y": 2,
-                            "width": 8,
-                            "height": 4
-                        }
-                    },
-                    {
-                        "id": 2209625948290228,
-                        "definition": {
-                            "title": "Contribution % to the amount of Ingested logs per service",
-                            "title_size": "16",
-                            "title_align": "left",
-                            "type": "toplist",
-                            "requests": [
-                                {
-                                    "q": "top((sum:datadog.estimated_usage.logs.ingested_events{$service,$datadog_index} by {service}.as_count()/sum:datadog.estimated_usage.logs.ingested_events{$service,$datadog_index}.as_count())*100,50,'mean','desc')"
-                                }
-                            ]
-                        },
-                        "layout": {
-                            "x": 0,
-                            "y": 6,
-                            "width": 4,
-                            "height": 4
-                        }
-                    },
-                    {
-                        "id": 3041758933373202,
-                        "definition": {
-                            "title": "Contribution % to the amount of Ingested logs per service",
-                            "title_size": "16",
-                            "title_align": "left",
-                            "show_legend": false,
-                            "legend_size": "0",
-                            "type": "timeseries",
-                            "requests": [
-                                {
-                                    "q": "(sum:datadog.estimated_usage.logs.ingested_events{$service,$datadog_index} by {service}.as_count()/sum:datadog.estimated_usage.logs.ingested_events{$service,$datadog_index}.as_count())*100",
-                                    "on_right_yaxis": false,
-                                    "metadata": [
-                                        {
-                                            "expression": "(sum:datadog.estimated_usage.logs.ingested_events{$service,$datadog_index} by {service}.as_count()/sum:datadog.estimated_usage.logs.ingested_events{$service,$datadog_index}.as_count())*100",
-                                            "alias_name": "% of ingested logs"
-                                        }
-                                    ],
-                                    "style": {
-                                        "palette": "purple",
-                                        "line_type": "solid",
-                                        "line_width": "normal"
-                                    },
-                                    "display_type": "area"
-                                }
-                            ],
-                            "yaxis": {
-                                "min": "0",
-                                "max": "100"
-                            },
-                            "markers": []
-                        },
-                        "layout": {
-                            "x": 4,
-                            "y": 6,
-                            "width": 8,
-                            "height": 4
-                        }
-                    }
-                ]
+              "type": "note",
+              "content": "This scatter plot displays the ratio of logs indexed vs the overall amount of logs ingested per service\n\nThe more a service is in the upper right corner the more it might impact your indexation costs as it means it's indexing a high % of logs from an elevated amount of logs ingested",
+              "background_color": "pink",
+              "font_size": "14",
+              "text_align": "left",
+              "show_tick": true,
+              "tick_pos": "50%",
+              "tick_edge": "right"
+            },
+            "layout": {
+              "x": 0,
+              "y": 4,
+              "width": 2,
+              "height": 5
             }
-        },
-        {
-            "id": 3011194267152040,
+          },
+          {
+            "id": 5896017346923514,
             "definition": {
-                "title": "Indexing overview",
-                "type": "group",
-                "background_color": "green",
-                "show_title": true,
-                "layout_type": "ordered",
-                "widgets": [
-                    {
-                        "id": 7939556967967594,
-                        "definition": {
-                            "title": "Indexed logs",
-                            "title_size": "16",
-                            "title_align": "left",
-                            "type": "query_value",
-                            "requests": [
-                                {
-                                    "q": "sum:datadog.estimated_usage.logs.ingested_events{datadog_is_excluded:false,$service,$datadog_index}.as_count()",
-                                    "aggregator": "sum"
-                                }
-                            ],
-                            "autoscale": true,
-                            "custom_unit": "logs",
-                            "precision": 2
-                        },
-                        "layout": {
-                            "x": 0,
-                            "y": 0,
-                            "width": 3,
-                            "height": 2
-                        }
-                    },
-                    {
-                        "id": 1154925800047330,
-                        "definition": {
-                            "title": "Indexed logs",
-                            "title_size": "16",
-                            "title_align": "left",
-                            "show_legend": false,
-                            "legend_size": "0",
-                            "type": "timeseries",
-                            "requests": [
-                                {
-                                    "q": "forecast(sum:datadog.estimated_usage.logs.ingested_events{datadog_is_excluded:false,$service,$datadog_index}.as_count(), 'seasonal', 1)",
-                                    "on_right_yaxis": false,
-                                    "metadata": [
-                                        {
-                                            "expression": "forecast(sum:datadog.estimated_usage.logs.ingested_events{datadog_is_excluded:false,$service,$datadog_index}.as_count(), 'seasonal', 1)",
-                                            "alias_name": "# of indexed logs"
-                                        }
-                                    ],
-                                    "style": {
-                                        "palette": "green",
-                                        "line_type": "solid",
-                                        "line_width": "normal"
-                                    },
-                                    "display_type": "line"
-                                }
-                            ],
-                            "yaxis": {
-                                "scale": "linear",
-                                "label": "",
-                                "include_zero": true,
-                                "min": "auto",
-                                "max": "auto"
-                            },
-                            "markers": []
-                        },
-                        "layout": {
-                            "x": 3,
-                            "y": 0,
-                            "width": 9,
-                            "height": 2
-                        }
-                    },
-                    {
-                        "id": 6970430934837094,
-                        "definition": {
-                            "title": "Indexed logs per service",
-                            "title_size": "16",
-                            "title_align": "left",
-                            "type": "toplist",
-                            "requests": [
-                                {
-                                    "q": "top(sum:datadog.estimated_usage.logs.ingested_events{datadog_is_excluded:false,$service,$datadog_index} by {service}.as_count(), 50, 'sum', 'desc')"
-                                }
-                            ]
-                        },
-                        "layout": {
-                            "x": 0,
-                            "y": 2,
-                            "width": 3,
-                            "height": 3
-                        }
-                    },
-                    {
-                        "id": 790216789422616,
-                        "definition": {
-                            "title": "Indexed logs per service",
-                            "title_size": "16",
-                            "title_align": "left",
-                            "show_legend": false,
-                            "legend_size": "0",
-                            "type": "timeseries",
-                            "requests": [
-                                {
-                                    "q": "sum:datadog.estimated_usage.logs.ingested_events{datadog_is_excluded:false,$service,$datadog_index} by {service}.as_count()",
-                                    "on_right_yaxis": false,
-                                    "metadata": [
-                                        {
-                                            "expression": "sum:datadog.estimated_usage.logs.ingested_events{datadog_is_excluded:false,$service,$datadog_index} by {service}.as_count()",
-                                            "alias_name": "# of indexed logs"
-                                        }
-                                    ],
-                                    "style": {
-                                        "palette": "green",
-                                        "line_type": "solid",
-                                        "line_width": "normal"
-                                    },
-                                    "display_type": "line"
-                                }
-                            ],
-                            "yaxis": {
-                                "scale": "linear",
-                                "label": "",
-                                "include_zero": true,
-                                "min": "auto",
-                                "max": "auto"
-                            },
-                            "markers": []
-                        },
-                        "layout": {
-                            "x": 3,
-                            "y": 2,
-                            "width": 9,
-                            "height": 3
-                        }
-                    },
-                    {
-                        "id": 283325793331474,
-                        "definition": {
-                            "title": "Contribution % to number of indexed logs per service",
-                            "title_size": "16",
-                            "title_align": "left",
-                            "type": "toplist",
-                            "requests": [
-                                {
-                                    "q": "top(sum:datadog.estimated_usage.logs.ingested_events{$service,$datadog_index,datadog_is_excluded:false} by {service}.as_count()/sum:datadog.estimated_usage.logs.ingested_events{$service,$datadog_index,datadog_is_excluded:false}.as_count()*100,50,'mean','desc')"
-                                }
-                            ]
-                        },
-                        "layout": {
-                            "x": 0,
-                            "y": 5,
-                            "width": 3,
-                            "height": 4
-                        }
-                    },
-                    {
-                        "id": 2890693303808278,
-                        "definition": {
-                            "title": "Contribution % to number of indexed logs per service",
-                            "title_size": "16",
-                            "title_align": "left",
-                            "show_legend": false,
-                            "type": "timeseries",
-                            "requests": [
-                                {
-                                    "q": "sum:datadog.estimated_usage.logs.ingested_events{$service,$datadog_index,datadog_is_excluded:false} by {service}.as_count()/sum:datadog.estimated_usage.logs.ingested_events{$service,$datadog_index,datadog_is_excluded:false}.as_count()*100",
-                                    "on_right_yaxis": false,
-                                    "metadata": [
-                                        {
-                                            "expression": "sum:datadog.estimated_usage.logs.ingested_events{$service,$datadog_index,datadog_is_excluded:false} by {service}.as_count()/sum:datadog.estimated_usage.logs.ingested_events{$service,$datadog_index,datadog_is_excluded:false}.as_count()*100",
-                                            "alias_name": "% of indexed logs"
-                                        }
-                                    ],
-                                    "style": {
-                                        "palette": "green",
-                                        "line_type": "solid",
-                                        "line_width": "normal"
-                                    },
-                                    "display_type": "area"
-                                }
-                            ],
-                            "yaxis": {
-                                "min": "0",
-                                "max": "100"
-                            },
-                            "markers": []
-                        },
-                        "layout": {
-                            "x": 3,
-                            "y": 5,
-                            "width": 9,
-                            "height": 4
-                        }
-                    },
-                    {
-                        "id": 386983657933882,
-                        "definition": {
-                            "title": "Indexed logs by index",
-                            "title_size": "16",
-                            "title_align": "left",
-                            "type": "toplist",
-                            "requests": [
-                                {
-                                    "q": "top(sum:datadog.estimated_usage.logs.ingested_events{datadog_is_excluded:false,$service,$datadog_index} by {datadog_index}.as_count(), 50, 'sum', 'desc')"
-                                }
-                            ]
-                        },
-                        "layout": {
-                            "x": 0,
-                            "y": 9,
-                            "width": 3,
-                            "height": 3
-                        }
-                    },
-                    {
-                        "id": 5721999135923774,
-                        "definition": {
-                            "title": "% of Indexed logs per index",
-                            "title_size": "16",
-                            "title_align": "left",
-                            "show_legend": false,
-                            "legend_size": "0",
-                            "type": "timeseries",
-                            "requests": [
-                                {
-                                    "q": "sum:datadog.estimated_usage.logs.ingested_events{datadog_is_excluded:false,$service,$datadog_index} by {datadog_index}.as_count()/sum:datadog.estimated_usage.logs.ingested_events{datadog_is_excluded:false,$service,$datadog_index}.as_count()*100",
-                                    "on_right_yaxis": false,
-                                    "metadata": [
-                                        {
-                                            "expression": "sum:datadog.estimated_usage.logs.ingested_events{datadog_is_excluded:false,$service,$datadog_index} by {datadog_index}.as_count()/sum:datadog.estimated_usage.logs.ingested_events{datadog_is_excluded:false,$service,$datadog_index}.as_count()*100",
-                                            "alias_name": "% per index"
-                                        }
-                                    ],
-                                    "style": {
-                                        "palette": "grey",
-                                        "line_type": "solid",
-                                        "line_width": "normal"
-                                    },
-                                    "display_type": "area"
-                                }
-                            ],
-                            "yaxis": {
-                                "min": "0",
-                                "max": "100"
-                            },
-                            "markers": []
-                        },
-                        "layout": {
-                            "x": 3,
-                            "y": 9,
-                            "width": 9,
-                            "height": 3
-                        }
-                    }
-                ]
+              "title": "% of logs being indexed per service vs # of logs ingested",
+              "title_size": "16",
+              "title_align": "left",
+              "type": "scatterplot",
+              "requests": {
+                "x": {
+                  "q": "sum:datadog.estimated_usage.logs.ingested_events{$datadog_index,$service} by {service}.as_count()",
+                  "aggregator": "sum"
+                },
+                "y": {
+                  "q": "sum:datadog.estimated_usage.logs.ingested_events{datadog_is_excluded:false,$datadog_index,$service} by {service}.as_count() / sum:datadog.estimated_usage.logs.ingested_events{$datadog_index,$service} by {service}.as_count() * 100",
+                  "aggregator": "avg"
+                }
+              },
+              "xaxis": {
+                "include_zero": false,
+                "scale": "log"
+              },
+              "yaxis": {
+                "min": "0",
+                "max": "100"
+              },
+              "color_by_groups": [
+                "service"
+              ]
+            },
+            "layout": {
+              "x": 2,
+              "y": 4,
+              "width": 10,
+              "height": 5
             }
-        },
-        {
-            "id": 6353274994438708,
+          },
+          {
+            "id": 6993081319188498,
             "definition": {
-                "title": "Sampling Overview",
-                "type": "group",
-                "background_color": "orange",
-                "show_title": true,
-                "layout_type": "ordered",
-                "widgets": [
-                    {
-                        "id": 4175932859454450,
-                        "definition": {
-                            "title": "Overall exclusion ratio",
-                            "title_size": "16",
-                            "title_align": "left",
-                            "type": "query_value",
-                            "requests": [
-                                {
-                                    "q": "sum:datadog.estimated_usage.logs.ingested_events{datadog_is_excluded:true,$service,$datadog_index}.as_count()/sum:datadog.estimated_usage.logs.ingested_events{$service,$datadog_index}.as_count()*100",
-                                    "aggregator": "sum"
-                                }
-                            ],
-                            "custom_unit": "%",
-                            "precision": 2
-                        },
-                        "layout": {
-                            "x": 0,
-                            "y": 0,
-                            "width": 2,
-                            "height": 2
-                        }
-                    },
-                    {
-                        "id": 1518123082240178,
-                        "definition": {
-                            "title": "Service excluding the most logs",
-                            "title_size": "16",
-                            "title_align": "left",
-                            "type": "toplist",
-                            "requests": [
-                                {
-                                    "q": "top(sum:datadog.estimated_usage.logs.ingested_events{datadog_is_excluded:true,*,*,$service,$datadog_index} by {service}.as_count(), 50, 'sum', 'desc')"
-                                }
-                            ],
-                            "custom_links": []
-                        },
-                        "layout": {
-                            "x": 2,
-                            "y": 0,
-                            "width": 5,
-                            "height": 4
-                        }
-                    },
-                    {
-                        "id": 3484762832864918,
-                        "definition": {
-                            "title": "Service excluding the less logs",
-                            "title_size": "16",
-                            "title_align": "left",
-                            "type": "toplist",
-                            "requests": [
-                                {
-                                    "q": "top(sum:datadog.estimated_usage.logs.ingested_events{datadog_is_excluded:true,*,*,$service,$datadog_index} by {service}.as_count(), 50, 'sum', 'asc')"
-                                }
-                            ],
-                            "custom_links": []
-                        },
-                        "layout": {
-                            "x": 7,
-                            "y": 0,
-                            "width": 5,
-                            "height": 4
-                        }
-                    },
-                    {
-                        "id": 8730798479844324,
-                        "definition": {
-                            "title": "Excluded logs",
-                            "title_size": "16",
-                            "title_align": "left",
-                            "type": "query_value",
-                            "requests": [
-                                {
-                                    "q": "sum:datadog.estimated_usage.logs.ingested_events{datadog_is_excluded:true,$service,$datadog_index}.as_count()",
-                                    "aggregator": "sum"
-                                }
-                            ],
-                            "autoscale": true,
-                            "custom_unit": "logs",
-                            "precision": 2
-                        },
-                        "layout": {
-                            "x": 0,
-                            "y": 2,
-                            "width": 2,
-                            "height": 2
-                        }
-                    },
-                    {
-                        "id": 2009147206720634,
-                        "definition": {
-                            "title": "% of excluded logs",
-                            "title_size": "16",
-                            "title_align": "left",
-                            "show_legend": false,
-                            "type": "timeseries",
-                            "requests": [
-                                {
-                                    "q": "sum:datadog.estimated_usage.logs.ingested_events{datadog_is_excluded:true,$service,$datadog_index}.as_count()/sum:datadog.estimated_usage.logs.ingested_events{$service,$datadog_index}.as_count()*100",
-                                    "metadata": [
-                                        {
-                                            "expression": "sum:datadog.estimated_usage.logs.ingested_events{datadog_is_excluded:true,$service,$datadog_index}.as_count()/sum:datadog.estimated_usage.logs.ingested_events{$service,$datadog_index}.as_count()*100",
-                                            "alias_name": "% of excluded logs"
-                                        }
-                                    ],
-                                    "style": {
-                                        "palette": "dog_classic",
-                                        "line_type": "solid",
-                                        "line_width": "normal"
-                                    },
-                                    "display_type": "line"
-                                }
-                            ],
-                            "yaxis": {
-                                "scale": "linear",
-                                "label": "",
-                                "include_zero": true,
-                                "min": "auto",
-                                "max": "auto"
-                            },
-                            "markers": []
-                        },
-                        "layout": {
-                            "x": 0,
-                            "y": 4,
-                            "width": 6,
-                            "height": 4
-                        }
-                    },
-                    {
-                        "id": 5059618711997494,
-                        "definition": {
-                            "title": "% of excluded logs for the top 10 and bottom 10 services",
-                            "title_size": "16",
-                            "title_align": "left",
-                            "show_legend": false,
-                            "legend_size": "0",
-                            "type": "timeseries",
-                            "requests": [
-                                {
-                                    "q": "top(sum:datadog.estimated_usage.logs.ingested_events{datadog_is_excluded:true,$service,$datadog_index} by {service}.as_count(), 10, 'sum', 'desc')/sum:datadog.estimated_usage.logs.ingested_events{$service,$datadog_index} by {service}.as_count()*100",
-                                    "metadata": [
-                                        {
-                                            "expression": "top(sum:datadog.estimated_usage.logs.ingested_events{datadog_is_excluded:true,$service,$datadog_index} by {service}.as_count(), 10, 'sum', 'desc')/sum:datadog.estimated_usage.logs.ingested_events{$service,$datadog_index} by {service}.as_count()*100",
-                                            "alias_name": "% of excluded logs"
-                                        }
-                                    ],
-                                    "style": {
-                                        "palette": "dog_classic",
-                                        "line_type": "solid",
-                                        "line_width": "normal"
-                                    },
-                                    "display_type": "line"
-                                },
-                                {
-                                    "q": "top(sum:datadog.estimated_usage.logs.ingested_events{datadog_is_excluded:true,$service,$datadog_index} by {service}.as_count(), 10, 'sum', 'asc')/sum:datadog.estimated_usage.logs.ingested_events{$service,$datadog_index} by {service}.as_count()*100",
-                                    "metadata": [
-                                        {
-                                            "expression": "top(sum:datadog.estimated_usage.logs.ingested_events{datadog_is_excluded:true,$service,$datadog_index} by {service}.as_count(), 10, 'sum', 'asc')/sum:datadog.estimated_usage.logs.ingested_events{$service,$datadog_index} by {service}.as_count()*100",
-                                            "alias_name": "% of excluded logs"
-                                        }
-                                    ],
-                                    "style": {
-                                        "palette": "dog_classic",
-                                        "line_type": "solid",
-                                        "line_width": "normal"
-                                    },
-                                    "display_type": "line"
-                                }
-                            ],
-                            "yaxis": {
-                                "scale": "linear",
-                                "label": "",
-                                "include_zero": true,
-                                "min": "auto",
-                                "max": "auto"
-                            },
-                            "markers": []
-                        },
-                        "layout": {
-                            "x": 6,
-                            "y": 4,
-                            "width": 6,
-                            "height": 4
-                        }
-                    }
-                ]
+              "type": "note",
+              "content": "Relative and absolute change of the amount of indexed logs per service compared to last week.  \n     \n   \n----------------------------------------------------------------------     \n----------------------------------------------------------------------        \n   \nRelative and absolute change of the amount of indexed logs per service compared to last month.",
+              "background_color": "green",
+              "font_size": "14",
+              "text_align": "left",
+              "show_tick": true,
+              "tick_pos": "50%",
+              "tick_edge": "right"
+            },
+            "layout": {
+              "x": 0,
+              "y": 9,
+              "width": 2,
+              "height": 4
             }
-        },
-        {
-            "id": 6690824491662456,
+          },
+          {
+            "id": 8645525443329152,
             "definition": {
-                "title": "Management, as in log management",
-                "type": "group",
-                "background_color": "gray",
-                "show_title": true,
-                "layout_type": "ordered",
-                "widgets": [
-                    {
-                        "id": 666066186598628,
-                        "definition": {
-                            "type": "note",
-                            "content": "This scatter plot displays the amount of logs ingested vs the combined size of those logs in bytes for each one of your service.\n\nThe more a service is in the upper right corner the more it might impact your ingestion costs as it means it's ingesting lots of logs and the combined size of all those logs is \"very big\"",
-                            "background_color": "blue",
-                            "font_size": "14",
-                            "text_align": "left",
-                            "show_tick": true,
-                            "tick_pos": "50%",
-                            "tick_edge": "right"
-                        },
-                        "layout": {
-                            "x": 0,
-                            "y": 0,
-                            "width": 2,
-                            "height": 4
-                        }
-                    },
-                    {
-                        "id": 4907985128663654,
-                        "definition": {
-                            "title": "Number of logs vs Size of logs per service",
-                            "title_size": "16",
-                            "title_align": "left",
-                            "type": "scatterplot",
-                            "requests": {
-                                "x": {
-                                    "q": "sum:datadog.estimated_usage.logs.ingested_bytes{$datadog_index,$service} by {service}.as_count()",
-                                    "aggregator": "sum"
-                                },
-                                "y": {
-                                    "q": "sum:datadog.estimated_usage.logs.ingested_events{$datadog_index,$service} by {service}.as_count()",
-                                    "aggregator": "sum"
-                                }
-                            },
-                            "xaxis": {
-                                "scale": "log",
-                                "include_zero": false
-                            },
-                            "yaxis": {
-                                "scale": "log",
-                                "include_zero": false
-                            },
-                            "color_by_groups": [
-                                "service"
-                            ]
-                        },
-                        "layout": {
-                            "x": 2,
-                            "y": 0,
-                            "width": 10,
-                            "height": 4
-                        }
-                    },
-                    {
-                        "id": 5781268478806462,
-                        "definition": {
-                            "type": "note",
-                            "content": "This scatter plot displays the ratio of logs indexed vs the overall amount of logs ingested per service\n\nThe more a service is in the upper right corner the more it might impact your indexation costs as it means it's indexing a high % of logs from an elevated amount of logs ingested",
-                            "background_color": "pink",
-                            "font_size": "14",
-                            "text_align": "left",
-                            "show_tick": true,
-                            "tick_pos": "50%",
-                            "tick_edge": "right"
-                        },
-                        "layout": {
-                            "x": 0,
-                            "y": 4,
-                            "width": 2,
-                            "height": 5
-                        }
-                    },
-                    {
-                        "id": 5896017346923514,
-                        "definition": {
-                            "title": "% of logs being indexed per service vs # of logs ingested",
-                            "title_size": "16",
-                            "title_align": "left",
-                            "type": "scatterplot",
-                            "requests": {
-                                "x": {
-                                    "q": "sum:datadog.estimated_usage.logs.ingested_events{$datadog_index,$service} by {service}.as_count()",
-                                    "aggregator": "sum"
-                                },
-                                "y": {
-                                    "q": "sum:datadog.estimated_usage.logs.ingested_events{datadog_is_excluded:false,$datadog_index,$service} by {service}.as_count()/sum:datadog.estimated_usage.logs.ingested_events{$datadog_index,$service} by {service}.as_count()*100",
-                                    "aggregator": "avg"
-                                }
-                            },
-                            "xaxis": {
-                                "scale": "log",
-                                "include_zero": false
-                            },
-                            "yaxis": {
-                                "min": "0",
-                                "max": "100"
-                            },
-                            "color_by_groups": [
-                                "service"
-                            ]
-                        },
-                        "layout": {
-                            "x": 2,
-                            "y": 4,
-                            "width": 10,
-                            "height": 5
-                        }
-                    },
-                    {
-                        "id": 6993081319188498,
-                        "definition": {
-                            "type": "note",
-                            "content": "Relative and absolute change of the amount of indexed logs per service compared to last week.  \n.     \n   \n----------------------------------------------------------------------     \n   \n.   \nRelative and absolute change of the amount of indexed logs per service compared to last month.",
-                            "background_color": "green",
-                            "font_size": "14",
-                            "text_align": "left",
-                            "show_tick": true,
-                            "tick_pos": "50%",
-                            "tick_edge": "right"
-                        },
-                        "layout": {
-                            "x": 0,
-                            "y": 9,
-                            "width": 2,
-                            "height": 4
-                        }
-                    },
-                    {
-                        "id": 8645525443329152,
-                        "definition": {
-                            "title": "% of indexing volume change compared to last week",
-                            "title_size": "16",
-                            "title_align": "left",
-                            "time": {
-                                "live_span": "1w"
-                            },
-                            "type": "change",
-                            "requests": [
-                                {
-                                    "q": "sum:datadog.estimated_usage.logs.ingested_events{datadog_is_excluded:false,$datadog_index,$service} by {service}",
-                                    "order_by": "change",
-                                    "order_dir": "desc",
-                                    "compare_to": "week_before",
-                                    "increase_good": false,
-                                    "change_type": "relative"
-                                }
-                            ]
-                        },
-                        "layout": {
-                            "x": 2,
-                            "y": 9,
-                            "width": 5,
-                            "height": 2
-                        }
-                    },
-                    {
-                        "id": 1176432783788764,
-                        "definition": {
-                            "title": "# of indexing volume change compared to last week",
-                            "title_size": "16",
-                            "title_align": "left",
-                            "time": {
-                                "live_span": "1w"
-                            },
-                            "type": "change",
-                            "requests": [
-                                {
-                                    "q": "sum:datadog.estimated_usage.logs.ingested_events{datadog_is_excluded:false,$datadog_index,$service} by {service}",
-                                    "order_by": "change",
-                                    "order_dir": "desc",
-                                    "compare_to": "week_before",
-                                    "increase_good": false,
-                                    "change_type": "absolute"
-                                }
-                            ]
-                        },
-                        "layout": {
-                            "x": 7,
-                            "y": 9,
-                            "width": 5,
-                            "height": 2
-                        }
-                    },
-                    {
-                        "id": 1473268488367874,
-                        "definition": {
-                            "title": "% of indexing volume change compared to last month",
-                            "title_size": "16",
-                            "title_align": "left",
-                            "time": {
-                                "live_span": "1mo"
-                            },
-                            "type": "change",
-                            "requests": [
-                                {
-                                    "q": "sum:datadog.estimated_usage.logs.ingested_events{datadog_is_excluded:false,$datadog_index,$service} by {service}",
-                                    "order_by": "change",
-                                    "order_dir": "desc",
-                                    "compare_to": "month_before",
-                                    "increase_good": false,
-                                    "change_type": "relative"
-                                }
-                            ]
-                        },
-                        "layout": {
-                            "x": 2,
-                            "y": 11,
-                            "width": 5,
-                            "height": 2
-                        }
-                    },
-                    {
-                        "id": 8910751823217706,
-                        "definition": {
-                            "title": "# of indexing volume change compared to last month",
-                            "title_size": "16",
-                            "title_align": "left",
-                            "time": {
-                                "live_span": "1mo"
-                            },
-                            "type": "change",
-                            "requests": [
-                                {
-                                    "q": "sum:datadog.estimated_usage.logs.ingested_events{datadog_is_excluded:false,$datadog_index,$service} by {service}",
-                                    "order_by": "change",
-                                    "order_dir": "desc",
-                                    "compare_to": "month_before",
-                                    "increase_good": false,
-                                    "change_type": "absolute"
-                                }
-                            ]
-                        },
-                        "layout": {
-                            "x": 7,
-                            "y": 11,
-                            "width": 5,
-                            "height": 2
-                        }
-                    }
-                ]
+              "title": "% of indexing volume change compared to last week",
+              "title_size": "16",
+              "title_align": "left",
+              "time": {
+                "live_span": "1w"
+              },
+              "type": "change",
+              "requests": [
+                {
+                  "order_by": "change",
+                  "order_dir": "desc",
+                  "compare_to": "week_before",
+                  "q": "sum:datadog.estimated_usage.logs.ingested_events{datadog_is_excluded:false,$datadog_index,$service} by {service}",
+                  "increase_good": false,
+                  "change_type": "relative"
+                }
+              ]
+            },
+            "layout": {
+              "x": 2,
+              "y": 9,
+              "width": 5,
+              "height": 2
             }
-        }
-    ],
-    "template_variables": [
-        {
-            "name": "service",
-            "default": "*",
-            "prefix": "service"
-        },
-        {
-            "name": "datadog_index",
-            "default": "*",
-            "prefix": "datadog_index"
-        }
-    ],
-    "layout_type": "ordered",
-    "is_read_only": true,
-    "notify_list": [],
-    "reflow_type": "fixed"
+          },
+          {
+            "id": 1176432783788764,
+            "definition": {
+              "title": "# of indexing volume change compared to last week",
+              "title_size": "16",
+              "title_align": "left",
+              "time": {
+                "live_span": "1w"
+              },
+              "type": "change",
+              "requests": [
+                {
+                  "order_by": "change",
+                  "order_dir": "desc",
+                  "compare_to": "week_before",
+                  "q": "sum:datadog.estimated_usage.logs.ingested_events{datadog_is_excluded:false,$datadog_index,$service} by {service}",
+                  "increase_good": false,
+                  "change_type": "absolute"
+                }
+              ]
+            },
+            "layout": {
+              "x": 7,
+              "y": 9,
+              "width": 5,
+              "height": 2
+            }
+          },
+          {
+            "id": 1473268488367874,
+            "definition": {
+              "title": "% of indexing volume change compared to last month",
+              "title_size": "16",
+              "title_align": "left",
+              "time": {
+                "live_span": "1mo"
+              },
+              "type": "change",
+              "requests": [
+                {
+                  "order_by": "change",
+                  "order_dir": "desc",
+                  "compare_to": "month_before",
+                  "q": "sum:datadog.estimated_usage.logs.ingested_events{datadog_is_excluded:false,$datadog_index,$service} by {service}",
+                  "increase_good": false,
+                  "change_type": "relative"
+                }
+              ]
+            },
+            "layout": {
+              "x": 2,
+              "y": 11,
+              "width": 5,
+              "height": 2
+            }
+          },
+          {
+            "id": 8910751823217706,
+            "definition": {
+              "title": "# of indexing volume change compared to last month",
+              "title_size": "16",
+              "title_align": "left",
+              "time": {
+                "live_span": "1mo"
+              },
+              "type": "change",
+              "requests": [
+                {
+                  "order_by": "change",
+                  "order_dir": "desc",
+                  "compare_to": "month_before",
+                  "q": "sum:datadog.estimated_usage.logs.ingested_events{datadog_is_excluded:false,$datadog_index,$service} by {service}",
+                  "increase_good": false,
+                  "change_type": "absolute"
+                }
+              ]
+            },
+            "layout": {
+              "x": 7,
+              "y": 11,
+              "width": 5,
+              "height": 2
+            }
+          }
+        ]
+      },
+      "layout": {
+        "x": 0,
+        "y": 60,
+        "width": 12,
+        "height": 14
+      }
+    }
+  ],
+  "template_variables": [
+    {
+      "name": "service",
+      "default": "*",
+      "prefix": "service",
+      "available_values": []
+    },
+    {
+      "name": "datadog_index",
+      "default": "*",
+      "prefix": "datadog_index",
+      "available_values": []
+    },
+    {
+      "name": "log_pipeline_id",
+      "default": "*",
+      "prefix": "pipeline_id",
+      "available_values": []
+    },
+    {
+      "name": "log_pipeline_name",
+      "default": "*",
+      "prefix": "",
+      "available_values": []
+    }
+  ],
+  "layout_type": "ordered",
+  "is_read_only": false,
+  "notify_list": [],
+  "reflow_type": "fixed",
+  "id": "ahh-qbc-3hm"
 }
