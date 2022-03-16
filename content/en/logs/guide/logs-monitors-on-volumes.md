@@ -56,7 +56,7 @@ An unexpected amount of logs has been indexed in index {{datadog_index.name}}
 
 Once you begin ingesting logs, an out-of-the-box [dashboard][5] summarizing your log usage metrics is automatically installed in your account.
 
-{{< img src="logs/guide/log_estimated_usage_dashboard.png" alt="Log estimated usage dashboard" style="width:70%;">}}
+{{< img src="logs/guide/logslight.png" alt="Log estimated usage dashboard" style="width:70%;">}}
 
 **Note**: The metrics used in this dashboard are estimates and might differ from official billing numbers.
 
