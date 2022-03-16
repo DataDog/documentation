@@ -64,7 +64,7 @@ For example, check out the [Monitor Notifications Overview][3] dashboard, which 
 
 Event monitors have also been ported to use the same standardized set of features as other products (logs, RUM, traces) with new capabilities.
 
-When you create event monitors, the new query search field has autocomplete, rather than the legacy fill-in-the-blank query
+When you create event monitors, the new query search field uses autocomplete, rather than the legacy fill-in-the-blank query.
 
 {{< img src="events/guides/events-migration-monitor-new.png" alt="New UI for monitor query syntax" style="width:100%;" >}}
 
