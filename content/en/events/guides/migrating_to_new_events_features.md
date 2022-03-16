@@ -11,7 +11,7 @@ Datadog's legacy event stream and event monitors retire on <strong>June 30, 2022
 
 ## Why change Events features?
 
-Launched more than 10 years ago, Datadog's event stream is one of its earliest features. The new events experience includes many new features that allow you to get even more value from your events. These include event analytics, the ability to generate metrics from your events, and a much friendlier and more intuitive query syntax that is better aligned with other Datadog products, such as Log Management and APM.
+Launched more than 10 years ago, Datadog's event stream is one of its earliest features. The new events experience includes many new features that allow you to get even more value from your events. These include event analytics, the ability to generate metrics from your events, the ability to create pipelines to post process events and a much friendlier and more intuitive query syntax that is better aligned with other Datadog products, such as Log Management and APM.
 
 ## What is the migration timeline?
 
@@ -70,10 +70,14 @@ When you create event monitors, the new query search field uses autocomplete, ra
 
 This means you can use complex queries in event monitors with new capabilities such as Boolean operators or wildcards.
 
+### Pipelines
+
+With pipelines, events are parsed and enriched by chaining them sequentially through processors. This extracts meaningful information or attributes from semi-structured text to reuse as facets. Each event that comes through the pipelines is tested against every pipeline filter. If it matches a filter, then all the processors are applied sequentially before moving to the next pipeline.
+
 ## What Changed?
 
 ### Event aggregations are no longer performed or displayed in the UI
-Datadog no longer automatically performs Event aggregation, and no longer groups Events by the `aggregation_key` attribute. The UI no longer displays Event aggregation. 
+Datadog no longer automatically performs Event aggregation, and no longer groups Events by the `aggregation_key` attribute. The UI no longer displays Event aggregation.
 
 ### Event comments are no longer supported or displayed in the UI
 Comments created using the API with `user_update` event type will be displayed as normal events.
