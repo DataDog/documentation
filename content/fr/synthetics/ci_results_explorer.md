@@ -30,7 +30,7 @@ Vous pouvez :
 
 ## Explorer les lots de tests
 
-L'explorateur de résultats CI affiche des lots de tests exécutés par [Synthetic et votre fournisseur CI/CD][1]. Chaque lot correspond à un appel de l'API Datadog (par le biais de l'une de vos [intégrations CI/CD][1], du package NPM [datadog-ci][2] ou directement de l'endpoint de l'API) et déclenche une ou plusieurs exécutions de tests. 
+L'explorateur de résultats CI affiche des lots de tests exécutés par [Synthetics et votre fournisseur CI/CD][1]. Chaque lot correspond à un appel de l'API Datadog (par le biais de l'une de vos [intégrations CI/CD][1], du package NPM [datadog-ci][2] ou directement de l'endpoint de l'API) et déclenche une ou plusieurs exécutions de tests. 
 
 1. Cliquez sur un lot pour ouvrir un volet latéral contenant les métadonnées CI du lot et les résultats des tests. 
 2. Explorez les exécutions de tests effectuées dans le cadre du lot et identifiez les tests ayant échoué. 

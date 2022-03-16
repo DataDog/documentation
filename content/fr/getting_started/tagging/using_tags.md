@@ -240,11 +240,11 @@ Pour [les recherches de traces][1], filtrez les traces avec des tags à l'aide d
 [1]: /fr/tracing/app_analytics/search/
 [2]: /fr/tracing/app_analytics/search/#search-bar
 {{% /tab %}}
-{{% tab "Service map" %}}
+{{% tab "Service Map" %}}
 
-Après avoir [assigné des tags][1], utilisez la Service Map pour accéder facilement à différentes sections de l'application en cliquant sur un service spécifique. L'exemple ci-dessous affiche les données [Analytics][2], les [monitors][3], les [logs][4] et la [hostmap][5] correspondant au tag `service:coffee-house`.
+Après avoir [assigné des tags][1], utilisez la Service Map pour accéder à différentes sections de l'application en cliquant sur un service spécifique. L'exemple ci-dessous affiche les données [Analytics][2], les [monitors][3], les [logs][4] et la [hostmap][5] correspondant au tag `service:coffee-house`.
 
-{{< img src="tagging/using_tags/servicemaptags.png" alt="Tags service map" style="width:80%;">}}
+{{< img src="tagging/using_tags/servicemaptags.png" alt="Tags Service Map" style="width:80%;">}}
 
 [1]: /fr/getting_started/tagging/assigning_tags/
 [2]: /fr/tracing/app_analytics/search/
@@ -314,7 +314,7 @@ Pour filtrer des SLO en fonction des [tags qui leur sont assignés][1], utilisez
 Lorsque vous créez un [SLO basé sur des métriques][1], utilisez les tags de métrique dans les requêtes de calcul du taux de réussite du SLO (toutes les métriques doivent utiliser le même ensemble de tags de métrique) :
 
 * La zone de texte **from** permet de limiter le contexte de la métrique à ces tags uniquement.
-* La zone de texte **sum by** permet de créer un SLO groupé basé sur des métriques qui affiche un pourcentage de statut ainsi que le budget d'indisponibilité restant pour le SLO global et pour chaque valeur de tag.
+* La zone de texte **sum by** permet de créer un SLO groupé basé sur des métriques qui affiche un pourcentage de statut ainsi que la marge d'erreur restante pour le SLO global et pour chaque valeur de tag.
 
 {{< img src="tagging/using_tags/metric_based_slo_tags.png" alt="Tags de SLO basé sur des métriques" style="width:80%;">}}
 
@@ -322,7 +322,7 @@ Lorsque vous créez un [SLO basé sur des métriques][1], utilisez les tags de m
 {{% /tab %}}
 {{% tab "SLO basés sur des monitors" %}}
 
-Lorsque vous créez un SLO [basé sur des monitors][1] à partir d'un seul [monitor groupé][2], utilisez l'option **Calculate on selected groups** pour sélectionner jusqu'à 20 valeurs de tag associées au monitor sous-jacent et afficher le pourcentage de statut et le budget d'indisponibilité restant pour le SLO global et pour chaque valeur de tag :
+Lorsque vous créez un SLO [basé sur des monitors][1] à partir d'un seul [monitor groupé][2], utilisez l'option **Calculate on selected groups** pour sélectionner jusqu'à 20 valeurs de tag associées au monitor sous-jacent et afficher le pourcentage de statut et la marge d'erreur restante pour le SLO global et pour chaque valeur de tag :
 
 {{< img src="tagging/using_tags/monitor_based_slo_tags.png" alt="Tags de SLO basé sur des monitors" style="width:80%;">}}
 

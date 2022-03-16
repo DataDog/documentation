@@ -316,7 +316,7 @@ This error usually means that the profiler is unable to connect to the Datadog A
 
 Your profiles may be empty ("No CPU time reported") or contain few frames. Sometimes this is caused when applications have poor symbolization information. This may also be expected--the profiler activates only when the instrumented application is scheduled on the CPU, and applications may be predominately off-CPU for many reasons, such as low user load or high application wait time.
 
-The root of your profile is the frame annotated with the application name in parentheses. If this frame shows a significant amount of CPU time, but no frames, your application may have poor profiling fidelity. Consider the following:
+The root of your profile is the frame annotated with the application name in parentheses. If this frame shows a significant amount of CPU time, but no child frames, your application may have poor profiling fidelity. Consider the following:
 - Stripped binaries do not have symbols available. Try using a non-stripped binary or a non-minified container image.
 - Certain applications and libraries benefit from their debug packages being installed. This is true for services installed through your repo's package manager or similar.
 

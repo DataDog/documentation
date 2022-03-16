@@ -1,6 +1,8 @@
 ---
 title: Deeper Visibility into Resources Invoking Lambda Functions
-kind: documentation
+kind: guide
+aliases:
+    - /serverless/troubleshooting/connect_invoking_resources/
 ---
 
 {{< img src="serverless/serverless-view.png" alt="Serverless View" >}}

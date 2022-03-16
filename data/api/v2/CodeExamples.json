@@ -1,4 +1,18 @@
 {
+  "ListAuditLogs": [
+    {
+      "group": "audit",
+      "suffix": "",
+      "description": "Get a list of Audit Logs events returns \"OK\" response"
+    }
+  ],
+  "SearchAuditLogs": [
+    {
+      "group": "audit",
+      "suffix": "",
+      "description": "Search Audit Logs events returns \"OK\" response"
+    }
+  ],
   "CreateAuthNMapping": [
     {
       "group": "authn_mappings",
