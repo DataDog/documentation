@@ -20,7 +20,7 @@ further_reading:
 
 Datadog Logs Explorer offers Watchdog Insights to highlight signals that stand out within your search context based on the time frame and tags.
 
-In the Log Explorer they allow our machine learning engine, Watchdog, to surface logs (caracterized by their patterns or specific tags) that have been flagged by our data science capabilities (like Log Anomaly Detection or Error Outliers Detection).
+In the Log Explorer, Watchdog Insights surface logs based on patterns and specific tags that have been flagged by algorithms such as log anomaly detection and error outliers detection.
 
 {{< img src="logs/explorer/insights/insights-carousel.png" alt="Watchdog Insights in Log Explorer" style="width:100%;" >}}
 
