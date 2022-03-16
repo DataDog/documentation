@@ -68,7 +68,7 @@ When you create event monitors, the new query search field uses autocomplete, ra
 
 {{< img src="events/guides/events-migration-monitor-new.png" alt="New UI for monitor query syntax" style="width:100%;" >}}
 
-This means you can use complex queries in event monitors with new capabilities such as Boolean operators or wildcards.
+The new query search allows you to use complex queries in event monitors with new capabilities such as Boolean operators or wildcards.
 
 ### Pipelines
 
