@@ -89,7 +89,7 @@ Some status values have changed:
 | error         | ERROR      |
 
 ### Source remapping in queries
-Many Event source names have changed. See the full list of affected source names [here][4].
+Many Event source names have changed. See the full list of affected [source names][4].
 
 ### The monitor evaluation window is limited to 48 hours.
 Your monitors are not evaluated beyond a 48 hour window. If you need to use a longer evaluation window, you can generate custom metrics from events and use a metrics monitor, where the evaluation window can be up to one month.
