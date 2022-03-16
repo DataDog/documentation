@@ -27,7 +27,7 @@ In the Log Explorer, Watchdog Insights surface logs based on patterns and specif
 ### Log Anomaly Detection
 
 Ingested logs are analyzed at the intake level where Watchdog performs aggregations on detected patterns as well as `environment`, `service`,`source` and `status`tags.
-These aggregated logs are then scanned for anomalous behavour:
+These aggregated logs are scanned for anomalous behaviors, such as the following:
 * There is an emergence of logs in statuses warning, error or above.
 * The count of Logs in statuses warning, error or above is showing a sudden increase.
 
