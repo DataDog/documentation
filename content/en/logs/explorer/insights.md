@@ -1,7 +1,7 @@
 ---
 title: Watchdog Insights for Log Explorer
 kind: documentation
-description: 'Rely on Watchdog Insights to surface meaningful signals within your current seach context.'
+description: 'Rely on Watchdog Insights to surface anomalous logs within your search context.'
 aliases:
     - /logs/explorer/insights
 further_reading:
