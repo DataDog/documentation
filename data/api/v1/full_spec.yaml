@@ -5782,8 +5782,12 @@ components:
           example: avg(last_5m):sum:system.net.bytes_rcvd{host:host0} > 100
           type: string
         restricted_roles:
-          description: A list of role identifiers that can be pulled from the Roles
-            API. Cannot be used with `locked` option.
+          description: A list of unique role identifiers to define which roles are
+            allowed to edit the monitor. Editing a monitor includes any updates to
+            the monitor configuration, monitor deletion, and muting of the monitor
+            for any amount of time. Roles unique identifiers can be pulled from the
+            [Roles API](https://docs.datadoghq.com/api/latest/roles/#list-roles) in
+            the `data.id` field.
           items:
             description: A role UUID.
             type: string
@@ -6108,8 +6112,9 @@ components:
             - If `False`, `[Triggered] Monitor Title`'
           type: boolean
         locked:
+          deprecated: true
           description: Whether or not the monitor is locked (only editable by creator
-            and admins).
+            and admins). Use `restricted_roles` instead.
           type: boolean
         min_failure_duration:
           default: 0
@@ -6716,8 +6721,12 @@ components:
           description: The monitor query.
           type: string
         restricted_roles:
-          description: A list of role identifiers that can be pulled from the Roles
-            API. Cannot be used with `locked` option.
+          description: A list of unique role identifiers to define which roles are
+            allowed to edit the monitor. Editing a monitor includes any updates to
+            the monitor configuration, monitor deletion, and muting of the monitor
+            for any amount of time. Roles unique identifiers can be pulled from the
+            [Roles API](https://docs.datadoghq.com/api/latest/roles/#list-roles) in
+            the `data.id` field.
           items:
             description: A role UUID.
             type: string
