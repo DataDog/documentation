@@ -21,6 +21,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/monitor-aws-fully-managed-services-datadog-serverless-monitoring/"
   tag: "Blog"
   text: "Datadog Serverless Monitoring for AWS fully managed services"
+- link: "https://www.datadoghq.com/blog/dotnet-lambda-functions-distributed-tracing/"
+  tag: "Blog"
+  text: "Real-time distributed tracing for .NET Lambda functions"
 ---
 
 {{< img src="tracing/serverless_functions/ServerlessDistributedTrace.png" alt="Trace Serverless Functions"  style="width:100%;">}}

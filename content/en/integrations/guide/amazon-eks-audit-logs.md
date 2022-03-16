@@ -73,8 +73,8 @@ Navigate to the in-app [Rule Setup and Configuration][11] page to create a new r
 [5]: /logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=awsconsole#set-up-triggers
 [6]: https://console.aws.amazon.com/lambda/home#/functions
 [7]: https://app.datadoghq.com/logs
-[8]: /security_platform/security_monitoring/log_detection_rules
+[8]: /security_platform/cloud_siem/log_detection_rules/
 [9]: /security_platform/security_monitoring/getting_started#inspect-a-security-signal
 [10]: https://app.datadoghq.com/security
 [11]: https://app.datadoghq.com/security/configuration/rules/new
-[12]: /security_platform/security_monitoring/log_detection_rules?tab=threshold#choose-a-detection-method
+[12]: /security_platform/cloud_siem/log_detection_rules/?tab=threshold#choose-a-detection-method
