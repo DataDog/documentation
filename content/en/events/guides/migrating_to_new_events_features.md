@@ -21,7 +21,7 @@ Launched more than 10 years ago, Datadog's event stream is one of its earliest f
 
 <strong>May 15, 2022</strong> - Starting on this date, while Datadog will continue to evaluate event monitors that have not been migrated, they will no longer be editable. New event monitors must use the new syntax.
 
-<strong>June 30, 2022</strong> - On this date, Datadog will stop evaluating event monitors that have not been migrated.
+<strong>June 30, 2022</strong> - On this date, Datadog will stop evaluating legacy event monitors.
 
 ## What action do I need to take?
 
