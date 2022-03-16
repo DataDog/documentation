@@ -62,9 +62,9 @@ Control who can access log events containing sensitive data. Use tags added by S
 
 ### Out-of-the-box dashboard
 
-When Sensitive Data Scanner is enabled, an out-of-the-box dashboard[4] summarizing findings is automatically installed in your account.
+When Sensitive Data Scanner is enabled, an out-of-the-box dashboard[4] summarizing sensitive data findings is automatically installed in your account.
 
-{{<img src="account_management/org_settings/sensitive_data_scanner_dashboard.png" alt="Log estimated usage dashboard" style="width:70%;">}}
+{{<img src="account_management/sensitive_data_scanner/sdslight.png" alt="Sensitive Data Scanner Overview dashboard" style="width:70%;">}}
 
 To manually import this dashboard, copy the [Sensitive Data Scanner Overview dashboard JSON definition][5] and paste it as a New Dashboard. Alternatively use the `Import Dashboard JSON` option in the settings cog menu in the upper right corner of a New Dashboard.
 
