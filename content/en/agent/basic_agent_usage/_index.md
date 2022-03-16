@@ -273,9 +273,6 @@ The results below are obtained from a collection of *110KB of logs per seconds* 
 * CPU: ~ 1.5% of the CPU used on average
 * Memory: ~ 95MB of RAM used.
 * Network bandwidth: ~ 14 KB/s ▲
-* Disk:
-  * Linux 350MB to 400MB depending on the distribution
-  * Windows: 260MB
 
 {{% /tab %}}
 {{% tab "HTTP compression level 1" %}}
@@ -284,9 +281,6 @@ The results below are obtained from a collection of *110KB of logs per seconds* 
 * CPU: ~ 1% of the CPU used on average
 * Memory: ~ 95MB of RAM used.
 * Network bandwidth: ~ 20 KB/s ▲
-* Disk:
-  * Linux 350MB to 400MB depending on the distribution
-  * Windows: 260MB
 
 {{% /tab %}}
 {{% tab "HTTP Uncompressed" %}}
@@ -295,9 +289,6 @@ The results below are obtained from a collection of *110KB of logs per seconds* 
 * CPU: ~ 0.7% of the CPU used on average
 * Memory: ~ 90MB of RAM used (RSS memory)
 * Network bandwidth: ~ 200 KB/s ▲
-* Disk:
-  * Linux 350MB to 400MB depending on the distribution
-  * Windows: 260MB
 
 {{% /tab %}}
 {{< /tabs >}}
