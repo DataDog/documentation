@@ -16,7 +16,7 @@ further_reading:
 
 ## Overview
 
-Datadog Logs Explorer offers Watchdog Insights to highlight signals that stand out within your search context based on the time frame and tags.
+Datadog Log Explorer offers Watchdog Insights to highlight signals that stand out within your search context based on the time frame and tags.
 
 In the Log Explorer, Watchdog Insights surface logs based on patterns and specific tags that have been flagged by algorithms such as log anomaly detection and error outliers detection.
 
