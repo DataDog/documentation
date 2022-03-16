@@ -98,24 +98,24 @@ Alternatively, organizations have asked whether they can create a “service acc
 
 ## What to do if an API or Application key was exposed
 
-If a private key has been compromised or publicly exposed steps should be taken as quickly as possible to ensure the security of your account. Removing the file containing the key from a public site such as GitHub **does not** guarantee it was not already accessed by another party.
+If a private key has been compromised or publicly exposed, steps should be taken as quickly as possible to ensure the security of your account. Removing the file containing the key from a public site such as GitHub **does not** guarantee it was not already accessed by another party.
 
 Follow these steps to help safeguard your account:
 
-**Note:** Revoking an active key may cause an impact to your services. If the scope of usage is large or undetermined consider steps 2-5 before revoking the affected key.
+**Note:** Revoking an active key may cause an impact to your services. If the scope of usage is large or undetermined, consider steps 2-5 **before** revoking the affected key.
 
-1. Revoke the affected key
-2. Remove code containing the private key from any publicly accessible files
-    - Publish the sanitized file to your public repository
-    - Remove the sensitive data from your commit history
-3. Create a new key
-4. Update affected services with the new key
+1. Revoke the affected key.
+2. Remove code containing the private key from any publicly accessible files:
+    - Publish the sanitized file to your public repository.
+    - Remove the sensitive data from your commit history.
+3. Create a new key.
+4. Update affected services with the new key.
 5. Review your account for any unapproved access:
     - Users that have been recently added
     - New resources
-    - Roles or permissions changes
+    - Roles or permission changes
 
-If any unusual activity is identified, or you need additional help securing your account contact [Support][10].
+If any unusual activity is identified, or you need additional help securing your account, contact [Support][10].
 
 ## Troubleshooting
 
