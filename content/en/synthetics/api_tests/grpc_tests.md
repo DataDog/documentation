@@ -43,7 +43,7 @@ Click **Test service** to try out the request configuration. A response preview 
 
 ### Define assertions
 
-Assertions define what an expected test result is. When hitting `Test URL` an assertion on the `response time` and the `healthcheck status` are added based on the response that was obtained. You must define at least one assertion for your test to monitor.
+Assertions define what an expected test result is. After you click **Test URL**, an assertion on the `response time` and the `healthcheck status` are added based on the response that was obtained. You must define at least one assertion for your test to monitor.
 
 | Type                    | Operator                                        | Value type                           |
 |-------------------------|-------------------------------------------------|--------------------------------------|
