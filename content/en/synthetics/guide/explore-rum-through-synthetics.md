@@ -13,7 +13,7 @@ further_reading:
 
 <div class="alert alert-info">If you don’t have Real User Monitoring, you can access a preview of RUM, Session Replay, Error Tracking, and additional performance data from your Synthetic browser test runs.</div>
 
-You can explore:
+Synthetics Browser tests embed the RUM SDK, allowing you to explore:
 
 - [Session Replay][1] for all tests. This provides additional context beyond the screenshots available for each step and includes [Dev Tools][2].
 - The session in the [RUM Explorer][3].
@@ -24,7 +24,7 @@ You can explore:
 
 In your browser test recording, click **Collect RUM Data on** above the **Start Recording** button and select an application to collect data on. After saving your recording and test configuration, RUM gathers test data and generates session recordings from your browser test runs. 
 
-Optionally, to enable preview access of Synthetics data in RUM & Session Replay:
+Optionally, you can choose the Default RUM Application displayed in the Browser Test Recorder:
 
 1. Navigate to [**UX Monitoring** > **Settings** > **Integration Settings**][5].
 2. Under **Synthetic Data RUM Applications**, select a default RUM application suggested in the Browser Test Recorder from the dropdown menu. 
