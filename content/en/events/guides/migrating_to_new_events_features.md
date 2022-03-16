@@ -72,7 +72,7 @@ The new query search allows you to use complex queries in event monitors with ne
 
 ### Pipelines
 
-With pipelines, events are parsed and enriched by chaining them sequentially through processors. This extracts meaningful information or attributes from semi-structured text to reuse as facets. Each event that comes through the pipelines is tested against every pipeline filter. If it matches a filter, then all the processors are applied sequentially before moving to the next pipeline.
+With pipelines, events are parsed and enriched by chaining them sequentially through processors. Processors extract meaningful information or attributes from semi-structured text to reuse as facets. Each event that comes through the pipelines is tested against every pipeline filter. If it matches a filter, then all the processors are applied sequentially before moving to the next pipeline.
 
 ## What Changed?
 
