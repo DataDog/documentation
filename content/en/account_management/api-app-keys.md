@@ -98,7 +98,7 @@ Alternatively, organizations have asked whether they can create a “service acc
 
 ## What to do if an API or Application key was exposed
 
-If a private key has been compromised or publicly exposed steps should be taken as quickly as possible to ensure the security of your account. Removing the file containing the key from a public site such as GitHub **does not** guarantee that the key was not already accessed by another party.
+If a private key has been compromised or publicly exposed steps should be taken as quickly as possible to ensure the security of your account. Removing the file containing the key from a public site such as GitHub **does not** guarantee it was not already accessed by another party.
 
 Follow these steps to help safeguard your account:
 
@@ -115,7 +115,7 @@ Follow these steps to help safeguard your account:
     - New resources
     - Roles or permissions changes
 
-If any unusual activity is identified, or you need additional help securing your account please contact [Support][10].
+If any unusual activity is identified, or you need additional help securing your account contact [Support][10].
 
 ## Troubleshooting
 
