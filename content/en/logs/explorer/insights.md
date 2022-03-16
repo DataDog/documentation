@@ -1,5 +1,5 @@
 ---
-title: Logs from Watchdog Insights
+title: Watchdog Insights for Log Explorer
 kind: documentation
 description: 'Rely on Watchdog Insights to surface meaningful signals within your current seach context.'
 aliases:
