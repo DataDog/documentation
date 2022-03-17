@@ -1,0 +1,100 @@
+{{/*
+  This navigation is used on the left of the site when on the api, and is the main api documentation nav.
+  Looking for the header nav? see website-modules
+*/}}
+
+{{ $dot := . }}
+{{ $ctx := . }}
+{{ $menu := .Site.Menus.main }}
+{{/* Menu identifiers to apply class to */}}
+{{ $excludeAsyc := (slice "api" "dev_tools_metrics_api" "dev_tools_events_api" "integrations_top_level" "tracing api" "watchdog_top_level" "glossary_top_level" "video_top_level" "help_top_level" "other_integrations") }}
+
+{{ $path := (printf "%s/" $.Site.Params.branch) }}
+
+{{/* account for branch name in preview site for data-path */}}
+{{ if eq $.Site.Params.environment "preview"}}
+    {{ $.Scratch.Set "branch_path" $path }}
+{{ else }}
+    {{ $.Scratch.Set "branch_path" "" }}
+{{ end }}
+
+{{ $branchPath := trim ($.Scratch.Get "branch_path") "/" }}
+{{ $url_without_anchor := "" }}
+
+<ul class="list-unstyled">
+    {{ $currentPage := . }}
+    {{ range $menu }}
+        {{ if .HasChildren }}
+            <li class="nav-top-level {{ if (not (or (in $excludeAsyc .Identifier) (and (in .URL "api/") (not (in .URL "_api/")) (not (in .URL "-api/"))))) }} js-load {{ end }}
+            {{ if $currentPage.HasMenuCurrent "main" . }}active{{ end }}">
+                {{ $url_without_anchor = (index (split .URL "#") 0) }}
+                <a href="{{ .URL | relLangURL }}" class="d-flex align-items-center" data-path="{{ trim (print $branchPath ((print $url_without_anchor) | relLangURL)) "/" }}">
+                    {{ if .Pre }}
+                      {{ partial "icon" (dict "name" .Pre "size" "18px" )}}
+                    {{ end }}
+                    <div>
+                      <span>{{ .Name }}</span>
+                    </div>
+                </a>
+                <ul class="list-unstyled sub-menu {{ if (or (eq .Name "Guides") (eq .Name "Widgets")) }} d-none {{ end }}">
+                    {{ range .Children }}
+                        <li class="{{ if (not (or (in $excludeAsyc .Identifier) (and (in .URL "api/") (not (in .URL "_api/")) (not (in .URL "-api/"))))) }} js-load {{ end }} {{ if $currentPage.IsMenuCurrent "main" . }}active{{ end }}">
+                            {{ $url_without_anchor = (index (split .URL "#") 0) }}
+                            <a href="{{ .URL | relLangURL }}" data-path="{{ trim (print $branchPath ((print $url_without_anchor) | relLangURL)) "/" }}">
+                                {{ if .Pre }}
+                                  {{- partial "img.html" (dict "root" $ctx "src" (print "icons/" (.Pre) ".png") "class" "static" "alt" "icon" "width" "21" "img_param" "?ch=Width,DPR&fit=max&auto=format&w=21") -}}
+                                  {{- partial "img.html" (dict "root" $ctx "src" (print "icons/" (.Pre) "_p.png") "class" "hover" "alt" "icon" "width" "21" "img_param" "?ch=Width,DPR&fit=max&auto=format&w=21" "disable_lazy" "true") -}}
+                                {{ end }}
+                                <span>{{ .Name }}</span>
+                            </a>
+                        {{ if .HasChildren }}
+                            <ul class="list-unstyled sub-menu {{ if (or (eq .Name "Guides") (eq .Name "Widgets")) }} d-none {{ end }}">
+                            {{ range .Children }}
+                                <li class="{{ if $currentPage.IsMenuCurrent "main" . }}active{{ end }} {{ if (not (or (in $excludeAsyc .Identifier) (and (in .URL "api/") (not (in .URL "_api/")) (not (in .URL "-api/"))))) }} js-load {{ end }}" >
+                                    {{ $url_without_anchor = (index (split .URL "#") 0) }}
+                                    <a href="{{ .URL | relLangURL }}" data-type="{{- with site.GetPage .URL -}}{{- .Type -}}{{- end -}}" data-path="{{ trim (print $branchPath ((print $url_without_anchor) | relLangURL)) "/" }}">
+                                        {{ if .Pre }}
+                                          {{- partial "img.html" (dict "root" $ctx "src" (print "icons/" (.Pre) ".png") "class" "static" "alt" "icon" "width" "21" "img_param" "?ch=Width,DPR&fit=max&auto=format&w=21") -}}
+                                          {{- partial "img.html" (dict "root" $ctx "src" (print "icons/" (.Pre) "_p.png") "class" "hover" "alt" "icon" "width" "21" "img_param" "?ch=Width,DPR&fit=max&auto=format&w=21" "disable_lazy" "true") -}}
+                                        {{ end }}
+                                        <span>{{ .Name }}</span>
+                                    </a>
+                                    {{/* 4th level, hide */}}
+                                    {{ if .HasChildren }}
+                                        <ul class="list-unstyled sub-menu d-none">
+                                        {{ range .Children }}
+                                            <li class="{{ if $currentPage.IsMenuCurrent "main" . }}active{{ end }} {{ if (not (or (in $excludeAsyc .Identifier) (and (in .URL "api/") (not (in .URL "_api/")) (not (in .URL "-api/"))))) }} js-load {{ end }}" >
+                                                {{ $url_without_anchor = (index (split .URL "#") 0) }}
+                                                <a data-name="{{- delimit (last 1 (split (strings.TrimSuffix "/" .URL) "/")) "" -}}" href="{{ .URL | relLangURL }}" data-path="{{ trim (print $branchPath ((print $url_without_anchor) | relLangURL)) "/" }}">
+                                                    {{ if .Pre }}
+                                                      {{- partial "img.html" (dict "root" $ctx "src" (print "icons/" (.Pre) ".png") "class" "static" "alt" "icon" "width" "21" "img_param" "?ch=Width,DPR&fit=max&auto=format&w=21") -}}
+                                                      {{- partial "img.html" (dict "root" $ctx "src" (print "icons/" (.Pre) "_p.png") "class" "hover" "alt" "icon" "width" "21" "img_param" "?ch=Width,DPR&fit=max&auto=format&w=21" "disable_lazy" "true") -}}
+                                                    {{ end }}
+                                                    <span>{{ .Name }}</span>
+                                                </a>
+                                            </li>
+                                        {{ end }}
+                                        </ul>
+                                    {{ end }}
+                                </li>
+                            {{ end }}
+                            </ul>
+                        {{ end }}
+                        </li>
+                    {{ end }}
+                </ul>
+            </li>
+        {{ else }}
+            <li class="nav-top-level {{ if (not (or (in $excludeAsyc .Identifier) (and (in .URL "api/") (not (in .URL "_api/")) (not (in .URL "-api/"))))) }} js-load {{ end }}">
+                <a href="{{ .URL | absLangURL }}" class="d-flex align-items-center" data-path="{{ trim (print $branchPath ((print .URL) | relLangURL)) "/" }}">
+                    {{ if .Pre }}
+                      {{ partial "icon" (dict "name" .Pre "size" "18px" )}}
+                    {{ end }}
+                    <div>
+                      <span>{{ .Name }}</span>
+                    </div>
+                </a>
+            </li>
+        {{ end }}
+    {{ end }}
+</ul>

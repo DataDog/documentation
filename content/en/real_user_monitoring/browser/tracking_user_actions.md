@@ -11,9 +11,9 @@ further_reading:
   - link: "/real_user_monitoring/explorer/"
     tag: "Documentation"
     text: "Explore your views within Datadog"
-  - link: "/real_user_monitoring/explorer/analytics/"
+  - link: "/real_user_monitoring/explorer/visualize/"
     tag: "Documentation"
-    text: "Build analytics upon your events"
+    text: "Apply visualizations on your events"
   - link: "/real_user_monitoring/dashboards/"
     tag: "Documentation"
     text: "RUM Dashboards"
@@ -159,7 +159,6 @@ window.DD_RUM &&
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: /real_user_monitoring/browser/modifying_data_and_context/
 [2]: /real_user_monitoring/browser/data_collected/#default-attributes

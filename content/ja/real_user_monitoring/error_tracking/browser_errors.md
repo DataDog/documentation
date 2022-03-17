@@ -25,7 +25,7 @@ Error Tracking は、RUM SDK によってブラウザから収集されたエラ
 
 ソースマップの送信に加えて、新バージョンの [Datadog CLI][6] はコミットハッシュ、レポジトリ URL、コードレポジトリで追跡されたファイルパスのリストといった Git 上の情報を報告します。この情報を使用して Error Tracking と RUM がエラーをソースコードと関連付けるため、あらゆるスタックトレースから [GitHub][7]、[GitLab][8]、および [Bitbucket][9] のコード内の関連する行を開くことができます。
 
-{{< img src="real_user_monitoring/error_tracking/link_to_git_js_example.gif" alt="スタックフレームからソースコードへのリンク"  >}}
+{{< img src="real_user_monitoring/error_tracking/link_to_git_js_example.mp4" alt="スタックフレームからソースコードへのリンク" video=true >}}
 
 <div class="alert alert-info">スタックフレームからソースコードへのリンクは <a href="https://github.com/DataDog/datadog-ci/tree/master/src/commands/sourcemaps#sourcemaps-command">Datadog CLI</a> のバージョン <code>0.12.0</code>以降でサポートされています。</div>
 

@@ -41,6 +41,40 @@
     "request_description": "",
     "request_schema_description": "Request used to update an application key."
   },
+  "ListAuditLogs": {
+    "description": "List endpoint returns events that match a Audit Logs search query.\n[Results are paginated][1].\n\nUse this endpoint to see your latest Audit Logs events.\n\n[1]: https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination",
+    "summary": "Get a list of Audit Logs events"
+  },
+  "SearchAuditLogs": {
+    "description": "List endpoint returns Audit Logs events that match an Audit search query.\n[Results are paginated][1].\n\nUse this endpoint to build complex Audit Logs events filtering and search.\n\n[1]: https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination",
+    "summary": "Search Audit Logs events",
+    "request_description": "",
+    "request_schema_description": "The request for a Audit Logs events list."
+  },
+  "ListAuthNMappings": {
+    "description": "List all AuthN Mappings in the org.",
+    "summary": "List all AuthN Mappings"
+  },
+  "CreateAuthNMapping": {
+    "description": "Create an AuthN Mapping.",
+    "summary": "Create an AuthN Mapping",
+    "request_description": "",
+    "request_schema_description": "Request for creating an AuthN Mapping."
+  },
+  "DeleteAuthNMapping": {
+    "description": "Delete an AuthN Mapping specified by AuthN Mapping UUID.",
+    "summary": "Delete an AuthN Mapping"
+  },
+  "GetAuthNMapping": {
+    "description": "Get an AuthN Mapping specified by the AuthN Mapping UUID.",
+    "summary": "Get an AuthN Mapping by UUID"
+  },
+  "UpdateAuthNMapping": {
+    "description": "Edit an AuthN Mapping.",
+    "summary": "Edit an AuthN Mapping",
+    "request_description": "",
+    "request_schema_description": "Request to update an AuthN Mapping."
+  },
   "ListCurrentUserApplicationKeys": {
     "description": "List all application keys available for current user",
     "summary": "Get all application keys owned by current user"
@@ -259,6 +293,18 @@
     "description": "Returns all configured count/gauge/rate/distribution metric names\n(with additional filters if specified).",
     "summary": "List tag configurations"
   },
+  "DeleteBulkTagsMetricsConfiguration": {
+    "description": "Delete all custom lists of queryable tag keys for a set of existing count, gauge, rate, and distribution metrics.\nMetrics are selected by passing a metric name prefix.\nResults can be sent to a set of account email addresses, just like the same operation in the Datadog web app.\nCan only be used with application keys of users with the `Manage Tags for Metrics` permission.",
+    "summary": "Configure tags for multiple metrics",
+    "request_description": "",
+    "request_schema_description": "Wrapper object for a single bulk tag deletion request."
+  },
+  "CreateBulkTagsMetricsConfiguration": {
+    "description": "Create and define a list of queryable tag keys for a set of existing count, gauge, rate, and distribution metrics.\nMetrics are selected by passing a metric name prefix. Use the Delete method of this API path to remove tag configurations.\nResults can be sent to a set of account email addresses, just like the same operation in the Datadog web app.\nIf multiple calls include the same metric, the last configuration applied (not by submit order) is used, do not\nexpect deterministic ordering of concurrent calls.\nCan only be used with application keys of users with the `Manage Tags for Metrics` permission.",
+    "summary": "Configure tags for multiple metrics",
+    "request_description": "",
+    "request_schema_description": "Wrapper object for a single bulk tag configuration request."
+  },
   "ListTagsByMetricName": {
     "description": "View indexed tag key-value pairs for a given metric name.",
     "summary": "List tags by metric name"
@@ -296,7 +342,7 @@
     "summary": "Get all processes"
   },
   "ListRoles": {
-    "description": "Returns all roles, including their names and IDs.",
+    "description": "Returns all roles, including their names and their unique identifiers.",
     "summary": "List roles"
   },
   "CreateRole": {
@@ -356,6 +402,16 @@
     "summary": "Add a user to a role",
     "request_description": "",
     "request_schema_description": "Relationship to user."
+  },
+  "ListRUMEvents": {
+    "description": "List endpoint returns events that match a RUM search query.\n[Results are paginated][1].\n\nUse this endpoint to see your latest RUM events.\n\n[1]: https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination",
+    "summary": "Get a list of RUM events"
+  },
+  "SearchRUMEvents": {
+    "description": "List endpoint returns RUM events that match a RUM search query.\n[Results are paginated][1].\n\nUse this endpoint to build complex RUM events filtering and search.\n\n[1]: https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination",
+    "summary": "Search RUM events",
+    "request_description": "",
+    "request_schema_description": "The request for a RUM events list."
   },
   "DownloadCloudWorkloadPolicyFile": {
     "description": "The download endpoint generates a Cloud Workload Security policy file from your currently active\nCloud Workload Security rules, and downloads them as a .policy file. This file can then be deployed to\nyour agents to update the policy running in your environment.",

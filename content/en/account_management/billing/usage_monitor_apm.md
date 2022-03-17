@@ -6,8 +6,6 @@ kind: documentation
 Datadog has many pricing plans to fit your needs. For more information, see the [Pricing page][1].
 Read APM documentation on [APM Billing][2] to understand how billing works for APM and Distributed Tracing.
 
-**Note:** Indexed Spans were formerly known as Analyzed Spans and renamed with the launch of Tracing Without Limits on October 20th, 2020.
-
 ## Usage page
 
 If you are an admin of your account, you can view your account usage using the [Usage Page][3] which gets updated every 72 hours.

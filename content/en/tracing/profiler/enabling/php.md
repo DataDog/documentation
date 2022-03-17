@@ -16,12 +16,6 @@ further_reading:
       text: 'Fix problems you encounter while using the profiler'
 ---
 
-{{< site-region region="us5" >}}
-<div class="alert alert-warning">
-  The Continuous Profiler is not available for the Datadog {{< region-param key="dd_site_name" >}} site.
-</div>
-{{< /site-region >}}
-
 <div class="alert alert-warning">
 The Datadog PHP Profiler is in public beta. Datadog recommends evaluating the profiler in a non-sensitive environment before deploying in production.
 </div>
@@ -30,7 +24,7 @@ The Datadog PHP Profiler is in public beta. Datadog recommends evaluating the pr
 
 The Datadog Profiler requires at least PHP 7.1, on 64-bit Linux.
 
-The following are **not** supported: 
+The following are **not** supported:
 - PHP 8.1
 - ZTS builds of PHP
 - PHP debug builds
@@ -52,6 +46,8 @@ Version 3.13 or newer of Alpine Linux is required because the profiler is built 
 
 {{% /tab %}}
 {{< /tabs >}}
+
+Continuous Profiler is not supported on serverless platforms, such as AWS Lambda.
 
 ## Installation
 

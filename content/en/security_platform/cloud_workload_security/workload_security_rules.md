@@ -152,7 +152,7 @@ Copy the `default.policy` file over to the target host in the `{$DD_AGENT}/runti
         policies:
           # datadog.securityAgent.runtime.policies.configMap
           # Place custom policies here
-    configMap: *jdefaultpol*
+          configMap: jdefaultpol
       syscallMonitor:
         # datadog.securityAgent.runtime.syscallMonitor.enabled
         # Set to true to enable Syscall monitoring.

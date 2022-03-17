@@ -94,7 +94,7 @@ To dive deeper into issues, tap any open incident displayed in the widget to hav
 Also, you can customize your Open Incidents widgets by filtering on:
 
 - Organization
-- Serverity levels
+- Severity levels
 - Customers impacted
 - Ordering
 

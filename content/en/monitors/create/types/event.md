@@ -16,6 +16,12 @@ further_reading:
   text: "Check your monitor status"
 ---
 
+{{< site-region region="us,eu" >}}
+<div class="alert alert-warning">
+  Event monitors are being deprecated and replaced by a new event monitor type. For more information, see the <a href="https://docs.datadoghq.com/events/guides/migrating_to_new_events_features/">Event migration guide</a>.
+</div>
+{{< /site-region >}}
+
 ## Overview
 
 Event monitors allow you to alert on events matching a search query.
@@ -50,7 +56,10 @@ Choose your alert grouping:
 
 As you fill in the parameters below, the list of events above the search fields is filtered.
 
-* Match events containing `<TEXT>`
+* Match events containing `<TEXT>`:
+    * Multiple terms have an implied `AND`. For example `a b` finds events with both `a` and `b` somewhere in them.
+    * Use quotation marks `"a b"` to find events with the exact string `a b`.
+    * Use `OR` to find events that contain at least one of multiple terms. For example `a OR b` finds events with either `a` or `b` in them.
 * with status `error`, `warning`, `info`, or `success`
 * and priority `all`, `normal`, or `low`
 * from `<SOURCE>`

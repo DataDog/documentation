@@ -98,7 +98,9 @@
       }
     },
     "request": {
-      "json_curl": {},
+      "json_curl": {
+        "message": "2019-11-19T14:37:58,995 INFO [process.name][20081] Hello World"
+      },
       "json": {
         "ddsource": "nginx",
         "ddtags": "env:staging,version:5.1",

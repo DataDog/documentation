@@ -320,6 +320,20 @@ using (var log = new LoggerConfiguration()
 ```
 
 {{< /site-region >}}
+
+{{< site-region region="us3" >}}
+
+```csharp
+using (var log = new LoggerConfiguration()
+    .WriteTo.DatadogLogs("<API_KEY>", configuration: new DatadogConfiguration(){ Url = "https://http-intake.logs.us3.datadoghq.com" })
+    .CreateLogger())
+{
+    // Some code
+}
+```
+
+{{< /site-region >}}
+
 {{< site-region region="eu" >}}
 
 ```csharp

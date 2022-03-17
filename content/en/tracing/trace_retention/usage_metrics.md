@@ -3,7 +3,7 @@ title: Usage Metrics
 kind: documentation
 aliases:
     - /tracing/trace_retention_and_ingestion/usage_metrics/
-description: "Learn how to monitor your Tracing without Limits usage."
+description: "Learn how to monitor your APM usage."
 further_reading:
 - link: "/tracing/trace_ingestion/mechanisms"
   tag: "Documentation"
@@ -22,11 +22,11 @@ This document details the available metrics and default dashboard for monitoring
 
 ## Trace analytics usage dashboard
 
-{{< img src="tracing/trace_indexing_and_ingestion/usage_metrics/AnalyticsDashboardOverview_2.png" style="width:100%;" alt="Tracing without Limits Usage Dashboard" >}}
+{{< img src="tracing/trace_indexing_and_ingestion/usage_metrics/AnalyticsDashboardOverview_2.png" style="width:100%;" alt="Trace Usage Dashboard" >}}
 
 Datadog provides an out-of-the-box [Usage Dashboard][5] for monitoring your APM usage, as well as your ingested and indexed span volumes.
 
-Each metric on this dashboard is powered by one of the below three Datadog standard metrics available in your account.
+Each metric on this dashboard is powered by one of the below four Datadog standard metrics available in your account.
 
  - `datadog.estimated_usage.apm.ingested_bytes`
  - `datadog.estimated_usage.apm.ingested_spans`
@@ -43,11 +43,11 @@ The default [Trace Analytics Dashboard][5] has several groups of widgets to see 
 
 {{< img src="tracing/trace_indexing_and_ingestion/RetentionFilters.png" style="width:100%;" alt="Span Indexing" >}}
 
-Each retention filter set on your services, including the default [Datadog Intelligent Retention Filter][6], results in an _increase_ to the number of Indexed Spans for your Datadog account.
+Each retention filter set on your services results in an _increase_ to the number of Indexed Spans for your Datadog account.
 
 Because Indexed Spans can impact your bill, the 'Spans Indexed' column appears alongside each filter you set, showing the number of spans indexed based on the timeframe selected for that filter.
 
-**Note:** The Datadog Intelligent Retention Filter on its own does not cause any billing implications outside of the included Indexed Spans with your APM Host pricing.
+**Note:** The [Datadog Intelligent Retention Filter][6] does not have any billing implications.
 
 **Note**: Admin rights are required to create, modify, or disable retention filters.
 
@@ -59,5 +59,5 @@ Because Indexed Spans can impact your bill, the 'Spans Indexed' column appears a
 [2]: /tracing/trace_ingestion/ingestion_controls
 [3]: https://www.datadoghq.com/pricing/?product=apm#apm
 [4]: /account_management/billing/apm_distributed_tracing/
-[5]: https://app.datadoghq.com/dashboard/lists?q=APM+Traces+-+Estimated+Usage
+[5]: https://app.datadoghq.com/dash/integration/30337/apm-traces---estimated-usage
 [6]: /tracing/trace_retention/#datadog-intelligent-retention-filter

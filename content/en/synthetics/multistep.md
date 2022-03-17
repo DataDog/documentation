@@ -143,7 +143,11 @@ Click **Continue with test if this step fails** to allow your test to move on wi
 
 This ensures your tests are able to clean up after themselves. For example, a test may create a resource, perform a number of actions on that resource, and end with the deletion of that resource. In case one of the intermediary steps fail, you want to have this setting enabled on every intermediary step to ensure that the resource is deleted at the end of the test and that no false positives are created.
 
-For example, if your multistep API test runs on multiple endpoints, specify the number of times you want the step to run after a set number of milliseconds in case the step fails. This ensures your test performs all the requests even if there is an issue with one or more steps.
+Activate **Consider entire test as failed if this step fails** on your intermediary steps to ensure your overall test still generates an alert in case one of the endpoints does not answer as expected.
+
+##### Retry
+
+Your test can trigger retries X times after Y ms in case of a failed test result. Customize the retry interval to suit your alerting sensibility.
 
 #### Extract variables from the response
 
@@ -275,12 +279,11 @@ A test is considered `FAILED` if a step does not satisfy one or several assertio
 
 By default, only users with the [Datadog Admin and Datadog Standard roles][16] can create, edit, and delete Synthetic multistep API tests. To get create, edit, and delete access to Synthetic multistep API tests, upgrade your user to one of those two [default roles][16].
 
-If you have access to the [custom role feature][17], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions for Synthetic Monitoring.
+If you are using the [custom role feature][17], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions for Synthetic Monitoring.
 
 ## Restrict access
 
-<div class="alert alert-warning">
-Access restriction is available for customers with <a href="https://docs.datadoghq.com/account_management/rbac/?tab=datadogapplication#create-a-custom-role">custom roles</a> enabled on their account.</div>
+Access restriction is available for customers using [custom roles][18] on their accounts.
 
 You can restrict access to a multistep API test based on the roles in your organization. When creating a multistep API test, choose which roles (in addition to your user) can read and write your test. 
 
@@ -307,3 +310,4 @@ You can restrict access to a multistep API test based on the roles in your organ
 [15]: /synthetics/api_tests/errors/#ssl-errors
 [16]: /account_management/rbac/
 [17]: /account_management/rbac#custom-roles
+[18]: /account_management/rbac/#create-a-custom-role

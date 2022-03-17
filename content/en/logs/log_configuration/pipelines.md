@@ -146,7 +146,7 @@ Specify alternate attributes to use as the source of a log's trace ID by setting
 
 
 [1]: /tracing/connect_logs_and_traces/
-[2]: /logs/log_configuration/#trace-remapper
+[2]: /logs/log_configuration/processors/#trace-remapper
 {{% /tab %}}
 {{< /tabs >}}
 

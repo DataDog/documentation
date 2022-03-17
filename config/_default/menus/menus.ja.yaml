@@ -1,140 +1,188 @@
 main_left:
-  - identifier: product
-    name: 製品
-    url: "https://www.datadoghq.com/ja/product/"
+  - identifier: "product"
+    name: "製品"
+    url: https://www.datadoghq.com/ja/product/
     weight: -500
-  - identifier: features
-    name: 機能
-    pre: '<i class="icon-features align-middle"></i>'
-    url: "https://www.datadoghq.com/ja/product/"
+  - identifier: "infrastructure" ##### Nav Product Header
+    name: "製品"
+    parent: "product"
     weight: 1
-    parent: product
-  - identifier: integrations
-    name: インテグレーション
-    pre: '<i class="icon-integrations align-middle"></i>'
-    url: "https://www.datadoghq.com/ja/product/platform/integrations/"
-    weight: 2
-    parent: product
-  - identifier: dashboarding
-    name: ダッシュボード
-    pre: '<i class="icon-dashboard align-middle"></i>'
-    url: "https://www.datadoghq.com/ja/product/platform/dashboards/"
-    weight: 3
-    parent: product
-  - identifier: infrastructure
-    name: インフラストラクチャーのモニタリング
-    pre: '<i class="icon-host-map align-middle"></i>'
-    url: "https://www.datadoghq.com/ja/product/infrastructure-monitoring/"
-    weight: 4
-    parent: product
-  - identifier: logs
-    name: ログ管理
-    pre: '<i class="icon-log align-middle"></i>'
-    url: "https://www.datadoghq.com/ja/product/log-management/"
+  - identifier: "infrastructure-monitoring"
+    name: "インフラ モニタリング"
+    pre: "<i class='icon-host-map'></i>"
+    url: https://www.datadoghq.com/ja/product/infrastructure-monitoring/
+    parent: "infrastructure"
     weight: 5
-    parent: product
-  - identifier: apm
-    name: APM
-    pre: '<i class="icon-apm align-middle"></i>'
-    url: "https://www.datadoghq.com/ja/product/apm/"
-    weight: 6
-    parent: product
-  - identifier: profiler
-    name: Continuous Profiler
-    pre: '<i class="icon-profiling-1 align-middle"></i>'
-    url: "https://www.datadoghq.com/ja/product/code-profiling/"
-    weight: 7
-    parent: product
-  - identifier: ci-visibility
-    name: CI Visibility
-    pre: "<i class='icon-ci align-middle'></i>"
-    url: "https://www.datadoghq.com/ja/product/ci-cd-monitoring/"
-    weight: 8
-    parent: product
-  - identifier: synthetics
-    name: Synthetic モニタリング
-    pre: '<i class="icon-synthetics align-middle"></i>'
-    url: "https://www.datadoghq.com/ja/product/synthetic-monitoring/"
-    weight: 9
-    parent: product
-  - identifier: rum
-    name: リアルユーザーモニタリング
-    pre: '<i class="icon-rum align-middle"></i>'
-    url: "https://www.datadoghq.com/ja/product/real-user-monitoring/"
+  - identifier: "container-monitoring"
+    name: "Container Monitoring"
+    pre: "<i class='icon-container'></i>"
+    url: "https://www.datadoghq.com/ja/product/container-monitoring/"
+    parent: "infrastructure"
     weight: 10
-    parent: product
-  - identifier: network-performance
-    name: Network Performance Monitoring
-    pre: '<i class="icon-network align-middle"></i>'
-    url: "https://www.datadoghq.com/ja/product/network-monitoring/network-performance-monitoring/"
-    weight: 11
-    parent: product
-  - identifier: network-device
-    name: Network Device Monitoring
-    pre: "<i class='icon-ndm align-middle'></i>"
-    url: "https://www.datadoghq.com/ja/product/network-monitoring/network-device-monitoring/"
-    weight: 12
-    parent: product
-  - identifier: security-platform
-    name: セキュリティプラットフォーム
-    pre: '<i class="icon-security-platform align-middle"></i>'
-    url: "https://www.datadoghq.com/ja/product/security-platform/"
-    weight: 13
-    parent: product
-  - identifier: security-monitoring
-    name: セキュリティモニタリング
-    pre: '<i class="icon-siem align-middle"></i>'
-    url: "https://www.datadoghq.com/ja/product/security-platform/security-monitoring/"
-    weight: 14
-    parent: product
-  - identifier: cloud-security-posture-management
-    name: セキュリティポスチャ CSPM
-    pre: '<i class="icon-security-platform align-middle"></i>'
-    url: "https://www.datadoghq.com/ja/product/security-platform/cloud-security-posture-management/"
+  - identifier: "network-performance"
+    name: "ネットワークパフォーマンスモニタリング"
+    pre: "<i class='icon-network'></i>"
+    url: https://www.datadoghq.com/ja/product/network-monitoring/network-performance-monitoring/
+    parent: "infrastructure"
     weight: 15
-    parent: product
-  - identifier: cloud-workload-security
-    name: クラウドワークロードセキュリティ
-    pre: '<i class="icon-cws align-middle"></i>'
-    url: 'https://www.datadoghq.com/ja/product/security-platform/cloud-workload-security/'
-    weight: 16
-    parent: 'product'
-  - identifier: error-tracking
-    name: Error Tracking
-    pre: '<i class="icon-error-tracking align-middle"></i>'
-    url: 'https://www.datadoghq.com/ja/product/security-platform/error-tracking/'
-    weight: 17
-    parent: 'product'
-  - identifier: incident
-    name: インシデント管理
-    pre: '<i class="icon-incidents align-middle"></i>'
-    url: 'https://www.datadoghq.com/ja/product/incident-management'
-    weight: 18
-    parent: 'product'
-  - identifier: database
-    name: データベース モニタリング
-    pre: '<i class="icon-database-2 align-middle"></i>'
-    url: 'https://www.datadoghq.com/ja/product/database-monitoring'
-    weight: 19
-    parent: 'product'
-  - identifier: serverless
-    name: サーバーレス
-    pre: '<i class="icon-serverless align-middle"></i>'
-    url: 'https://www.datadoghq.com/ja/product/serverless-monitoring/'
+  - identifier: "network-device"
+    name: "ネットワークデバイスモニタリング"
+    pre: "<i class='icon-ndm'></i>"
+    url: https://www.datadoghq.com/ja/product/network-monitoring/network-device-monitoring/
+    parent: "infrastructure"
     weight: 20
-    parent: 'product'
-  - identifier: alerts
-    name: アラート
-    pre: '<i class="icon-monitor align-middle"></i>'
-    url: 'https://www.datadoghq.com/ja/product/alerts/'
-    weight: 21
-    parent: 'product'
-  - identifier: api
-    name: API
-    pre: '<i class="icon-api align-middle"></i>'
-    url: 'https://docs.datadoghq.com/api/ja/'
-    weight: 22
-    parent: 'product'
+  - identifier: "serverless"
+    name: "サーバーレス"
+    pre: "<i class='icon-serverless'></i>"
+    url: https://www.datadoghq.com/ja/product/serverless-monitoring/
+    parent: "infrastructure"
+    weight: 25
+  - identifier: "logs" ##### Nav Product Header
+    name: "ログ管理"
+    parent: "product"
+    weight: 30
+  - identifier: "logs-management"
+    name: "ログ管理"
+    pre: "<i class='icon-log'></i>"
+    url: https://www.datadoghq.com/ja/product/log-management/
+    parent: "logs"
+    weight: 35
+  - identifier: "sensitive-data-scanner"
+    name: "Sensitive Data Scanner"
+    pre: "<i class='icon-sds'></i>"
+    url: "https://www.datadoghq.com/product/sensitive-data-scanner/"
+    parent: "logs"
+    weight: 40
+  - identifier: "apm" ##### Nav Product Header
+    name: "APM"
+    parent: "product"
+    weight: 45
+  - identifier: "distributed-tracing"
+    name: "Distributed Tracing"
+    pre: "<i class='icon-apm'></i>"
+    url: https://www.datadoghq.com/ja/product/apm/
+    parent: "apm"
+    weight: 50
+  - identifier: "error-tracking"
+    name: "エラー トラッキング"
+    pre: "<i class='icon-error-tracking'></i>"
+    url: "https://www.datadoghq.com/product/error-tracking/"
+    parent: "apm"
+    weight: 55
+  - identifier: "profiler"
+    name: "Continuous Profiler"
+    pre: "<i class='icon-profiling-1'></i>"
+    url: https://www.datadoghq.com/ja/product/code-profiling/
+    parent: "apm"
+    weight: 60
+  - identifier: "database"
+    name: "データベース モニタリング"
+    pre: "<i class='icon-database-2'></i>"
+    url: https://www.datadoghq.com/ja/product/database-monitoring
+    parent: "apm"
+    weight: 65
+  - identifier: "ci-visibility"
+    name: "CI Visibility"
+    pre: "<i class='icon-ci'></i>"
+    url: https://www.datadoghq.com/ja/product/ci-cd-monitoring/
+    parent: "apm"
+    weight: 70
+  - identifier: "digital-experience" ##### Nav Product Header
+    name: "Digital Experience"
+    parent: "product"
+    weight: 75
+  - identifier: "rum"
+    name: "リアルユーザーモニタリング（RUM）"
+    pre: "<i class='icon-rum'></i>"
+    url: https://www.datadoghq.com/ja/product/real-user-monitoring/
+    parent: "digital-experience"
+    weight: 80
+  - identifier: "synthetics"
+    name: "Synthetic モニタリング"
+    pre: "<i class='icon-synthetics'></i>"
+    url: https://www.datadoghq.com/ja/product/synthetic-monitoring/
+    parent: "digital-experience"
+    weight: 85
+  - identifier: "session-replay"
+    name: "Session Replay"
+    pre: "<i class='icon-play-circle'></i>"
+    url: "https://www.datadoghq.com/product/real-user-monitoring/session-replay/"
+    parent: "digital-experience"
+    weight: 90
+  - identifier: "security" ##### Nav Product Header
+    name: "Security"
+    parent: "product"
+    weight: 95
+  - identifier: "security-platform"
+    name: "セキュリティプラットフォーム"
+    pre: "<i class='icon-security-platform'></i>"
+    url: https://www.datadoghq.com/ja/product/security-platform/
+    parent: "security"
+    weight: 100
+  - identifier: "posture-management"
+    name: "CSPM"
+    pre: "<i class='icon-cspm'></i>"
+    url: https://www.datadoghq.com/ja/product/security-platform/cloud-security-posture-management/
+    parent: "security"
+    weight: 105
+  - identifier: "workload-security"
+    name: "クラウドワークロードセキュリティ"
+    pre: "<i class='icon-cws'></i>"
+    url: https://www.datadoghq.com/ja/product/security-platform/cloud-workload-security/
+    parent: "security"
+    weight: 110
+  - identifier: "cloud-siem"
+    name: "Cloud SIEM"
+    pre: "<i class='icon-siem'></i>"
+    url: "https://www.datadoghq.com/product/security-platform/cloud-siem/"
+    parent: "security"
+    weight: 115
+  - identifier: "platform-capabilities" ##### Nav Product Header
+    name: "Platform Capabilities"
+    parent: "product"
+    weight: 120
+  - identifier: "dashboards"
+    name: "ダッシュボード"
+    pre: "<i class='icon-dashboard'></i>"
+    url: https://www.datadoghq.com/ja/product/platform/dashboards/
+    parent: "platform-capabilities"
+    weight: 125
+  # - identifier: "slos"
+  #   name: "SLOs"
+  #   pre: "<i class='icon-slos'></i>"
+  #   url: "https://www.datadoghq.com/ja/product/platform/service-level-objective/"
+  #   parent: "platform-capabilities"
+  #   weight: 27
+  # - identifier: "watchdog"
+  #   name: "Watchdog (AI/ML)"
+  #   pre: "<i class='icon-agent-fill'></i>"
+  #   url: "https://www.datadoghq.com/ja/product/platform/watchdog/"
+  #   parent: "platform-capabilities"
+  #   weight: 28
+  - identifier: "alerts"
+    name: "アラート"
+    pre: "<i class='icon-monitor'></i>"
+    url: https://www.datadoghq.com/ja/product/platform/alerts/
+    parent: "platform-capabilities"
+    weight: 130
+  - identifier: "incident"
+    name: "インシデント管理"
+    pre: "<i class='icon-incidents'></i>"
+    url: https://www.datadoghq.com/ja/product/incident-management
+    parent: "platform-capabilities"
+    weight: 135
+  - identifier: "integrations"
+    name: "統合"
+    pre: "<i class='icon-integrations'></i>"
+    url: https://www.datadoghq.com/ja/product/platform/integrations/
+    parent: "platform-capabilities"
+    weight: 140
+  - identifier: "api"
+    name: "API"
+    pre: "<i class='icon-api'></i>"
+    url: "https://docs.datadoghq.com/ja/api/latest/"
+    parent: "platform-capabilities"
+    weight: 145
   - identifier: customers
     name: お客様
     url: "https://www.datadoghq.com/ja/customers/"
@@ -142,161 +190,134 @@ main_left:
   - identifier: pricing
     name: 料金
     url: "https://www.datadoghq.com/ja/pricing/"
-    weight: -480
-  - identifier: solutions
-    name: ソリューション
-    url: "/ja/"
+    weight: -470
+  - identifier: "solutions"
+    name: "ソリューション"
     weight: -460
-  - identifier: industry-financial
-    name: 金融サービス
-    parent: solutions
-    title: 業種
-    url: "https://www.datadoghq.com/ja/solutions/financial-services/"
-    weight: -460
-  - identifier: industry-manufacturing
-    name: 製造 / 物流
-    parent: solutions
-    title: 業種
-    url: "https://www.datadoghq.com/ja/solutions/manufacturing-logistics/"
-    weight: -459
-  - identifier: industry-healthcare
-    name: 医療 / ライフサイエンス
-    parent: solutions
-    title: 業種
-    url: "https://www.datadoghq.com/ja/solutions/healthcare/"
-    weight: -458
-  - identifier: industry-retail
-    name: 流通 / e コマース
-    parent: solutions
-    title: 業種
-    url: "https://www.datadoghq.com/ja/solutions/retail-ecommerce/"
-    weight: -457
-  - identifier: industry-public
-    name: 公共部門
-    parent: solutions
-    title: 業種
-    url: "https://www.datadoghq.com/ja/solutions/public-sector/"
-    weight: -456
-  - identifier: industry-media
-    name: メディア / エンターテインメント
-    parent: solutions
-    title: 業種
-    url: "https://www.datadoghq.com/ja/solutions/media-entertainment/"
-    weight: -455
-  - identifier: industry-technology
-    name: IT業界
-    parent: solutions
-    title: 業種
-    url: "https://www.datadoghq.com/ja/solutions/technology/"
-    weight: -454
-  - identifier: industry-gaming
-    name: ゲーム業界
-    parent: solutions
-    title: 業種
-    url: "https://www.datadoghq.com/ja/solutions/gaming/"
-    weight: -453
-  - identifier: technology-aws
-    name: アマゾン ウェブ サービス (AWS)
-    parent: solutions
-    title: テクノロジー
-    url: "https://www.datadoghq.com/ja/solutions/aws/"
-    weight: -452
-  - identifier: technology-azure
-    name: Azure
-    parent: solutions
-    title: テクノロジー
-    url: "https://www.datadoghq.com/ja/solutions/azure/"
-    weight: -451
-  - identifier: technology-gcp
-    name: Google Cloud Platform
-    parent: solutions
-    title: テクノロジー
-    url: "https://www.datadoghq.com/ja/solutions/gcp/"
-    weight: -450
-  - identifier: technology-kubernetes
-    name: Kubernetes
-    parent: solutions
-    title: テクノロジー
-    url: "https://www.datadoghq.com/ja/solutions/kubernetes/"
-    weight: -449
-  - identifier: technology-openshift
-    name: Red Hat OpenShift
-    parent: solutions
-    title: テクノロジー
-    url: "https://www.datadoghq.com/ja/solutions/openshift/"
-    weight: -448
-  - identifier: usecase-migration
-    name: クラウド移行
-    parent: solutions
-    title: ユースケース
-    url: "https://www.datadoghq.com/ja/solutions/cloud-migration/"
-    weight: -447
-  - identifier: usecase-consolidate
-    name: モニタリング統合
-    parent: solutions
-    title: ユースケース
-    url: "https://www.datadoghq.com/ja/solutions/monitoring-consolidation/"
-    weight: -446
-  - identifier: usecase-devops
-    name: DevOps
-    parent: solutions
-    title: ユースケース
-    url: "https://www.datadoghq.com/ja/solutions/devops/"
-    weight: -445
-  - identifier: usecase-testing
-    name: シフトレフト テスト
-    parent: solutions
-    title: ユースケース
-    url: "https://www.datadoghq.com/ja/solutions/shift-left-testing/"
-    weight: -444
-  - identifier: usecase-security
-    name: セキュリティ アナリティクス
-    parent: solutions
-    title: ユースケース
-    url: "https://www.datadoghq.com/ja/solutions/security-analytics/"
-    weight: -443
-  - identifier: usecase-compliance
-    name: CIS ベンチマーク コンプライアンス
-    parent: solutions
-    title: ユースケース
-    url: "https://www.datadoghq.com/ja/solutions/security/cis-benchmarks/"
-    weight: -442
-  - identifier: usecase-hybrid
-    name: ハイブリッドクラウドモニタリング
-    parent: solutions
-    title: ユースケース
-    url: "https://www.datadoghq.com/ja/solutions/hybrid-cloud-monitoring/"
-    weight: -441
-  - identifier: usecase-iot
-    name: IoT モニタリング
-    parent: solutions
-    title: ユースケース
-    url: "https://www.datadoghq.com/ja/solutions/iot-monitoring/"
-    weight: -440
-  - identifier: usecase-machine
-    name: 機械学習
-    parent: solutions
-    title: ユースケース
-    url: "https://www.datadoghq.com/ja/solutions/machine-learning/"
-    weight: -439
-  - identifier: usecase-analytics
-    name: リアルタイム BI
-    parent: solutions
-    title: ユースケース
-    url: "https://www.datadoghq.com/ja/solutions/business-analytics/"
-    weight: -438
-  - identifier: usecase-onprem
-    name: オンプレミス モニタリング
-    parent: solutions
-    title: ユースケース
-    url: "https://www.datadoghq.com/ja/solutions/on-premises-monitoring/"
-    weight: -437
-  - identifier: usecase-logs
-    name: ログ分析と相関
-    parent: solutions
-    title: ユースケース
-    url: "https://www.datadoghq.com/ja/solutions/log-analysis-and-correlation/"
-    weight: -436
+  - identifier: "industry" ##### Nav Solutions Header
+    name: "Industry"
+    parent: "solutions"
+    weight: 1
+  - name: "金融サービス"
+    parent: "industry"
+    url: https://www.datadoghq.com/ja/solutions/financial-services/
+    weight: 2
+  - name: "製造 / 物流"
+    parent: "industry"
+    url: https://www.datadoghq.com/ja/solutions/manufacturing-logistics/
+    weight: 3
+  - name: "医療 / ライフサイエンス"
+    parent: "industry"
+    url: https://www.datadoghq.com/ja/solutions/healthcare/
+    weight: 4
+  - name: "流通 / e コマース"
+    parent: "industry"
+    url: https://www.datadoghq.com/ja/solutions/retail-ecommerce/
+    weight: 5
+  - name: "行政機関"
+    parent: "industry"
+    url: "https://www.datadoghq.com/solutions/government/"
+    weight: 6
+  - name: "文教・教育"
+    parent: "industry"
+    url: "https://www.datadoghq.com/solutions/education/"
+    weight: 7
+  - name: "メディア / エンターテインメント"
+    parent: "industry"
+    url: https://www.datadoghq.com/ja/solutions/media-entertainment/
+    weight: 8
+  - name: "IT業界"
+    parent: "industry"
+    url: https://www.datadoghq.com/ja/solutions/technology/
+    weight: 9
+  - name: "ゲーム業界"
+    parent: "industry"
+    url: https://www.datadoghq.com/ja/solutions/gaming/
+    weight: 10
+  - identifier: "technology" ##### Nav Solutions Header
+    name: "Technology"
+    parent: "solutions"
+    weight: 11
+  - name: "アマゾン ウェブ サービス (AWS)"
+    parent: "technology"
+    url: https://www.datadoghq.com/ja/solutions/aws/
+    weight: 12
+  - name: "Azure"
+    parent: "technology"
+    url: https://www.datadoghq.com/ja/solutions/azure/
+    weight: 13
+  - name: "Google Cloud Platform"
+    parent: "technology"
+    url: https://www.datadoghq.com/ja/solutions/gcp/
+    weight: 14
+  - name: "Kubernetes"
+    parent: "technology"
+    url: https://www.datadoghq.com/ja/solutions/kubernetes/
+    weight: 15
+  - name: "Red Hat OpenShift"
+    parent: "technology"
+    url: https://www.datadoghq.com/ja/solutions/openshift/
+    weight: 16
+  - name: "Pivotal プラットフォーム"
+    parent: "technology"
+    url: "https://www.datadoghq.com/solutions/pivotal-platform/"
+    weight: 17
+  - identifier: "usecase" ##### Nav Solutions Header
+    name: "Use-case"
+    parent: "solutions"
+    weight: 18
+  - name: "クラウド移行"
+    parent: "usecase"
+    url: https://www.datadoghq.com/ja/solutions/cloud-migration/
+    weight: 19
+  - name: "モニタリング統合"
+    parent: "usecase"
+    url: https://www.datadoghq.com/ja/solutions/monitoring-consolidation/
+    weight: 20
+  - name: "DevOps"
+    parent: "usecase"
+    url: https://www.datadoghq.com/ja/solutions/devops/
+    weight: 22
+  - name: "シフトレフト テスト"
+    parent: "usecase"
+    url: https://www.datadoghq.com/ja/solutions/shift-left-testing/
+    weight: 22
+  - name: "デジタル エクスペリエンス モニタリング"
+    parent: "usecase"
+    url: "https://www.datadoghq.com/solutions/digital-experience-monitoring/"
+    weight: 23
+  - name: "セキュリティ アナリティクス"
+    parent: "usecase"
+    url: https://www.datadoghq.com/ja/solutions/security-analytics/
+    weight: 24
+  - name: "CIS ベンチマーク コンプライアンス"
+    parent: "usecase"
+    url: https://www.datadoghq.com/ja/solutions/security/cis-benchmarks/
+    weight: 25
+  - name: "ハイブリッドクラウドモニタリング"
+    parent: "usecase"
+    url: https://www.datadoghq.com/ja/solutions/hybrid-cloud-monitoring/
+    weight: 26
+  - name: "IoT モニタリング"
+    parent: "usecase"
+    url: https://www.datadoghq.com/ja/solutions/iot-monitoring/
+    weight: 27
+  - name: "機械学習"
+    parent: "usecase"
+    url: https://www.datadoghq.com/ja/solutions/machine-learning/
+    weight: 28
+  - name: "リアルタイム BI"
+    parent: "usecase"
+    url: https://www.datadoghq.com/ja/solutions/business-analytics/
+    weight: 29
+  - name: "オンプレミス モニタリング"
+    parent: "usecase"
+    url: https://www.datadoghq.com/ja/solutions/on-premises-monitoring/
+    weight: 30
+  - name: "ログ分析と相関"
+    parent: "usecase"
+    url: https://www.datadoghq.com/ja/solutions/log-analysis-and-correlation/
+    weight: 31
   - identifier: docs
     name: ドキュメント
     url: "https://docs.datadoghq.com/ja/"
@@ -364,7 +385,7 @@ main_right:
     weight: -460
   - identifier: get_started
     name: 無料で試す
-    url: "/ja/"
+    url: "https://www.docs.datadoghq.com/ja/"
     weight: -440
 main:
   - name: はじめに
@@ -2328,7 +2349,7 @@ main:
     weight: 210000
   - name: アカウントの管理
     url: account_management/
-    pre: cog-2
+    pre: cog
     identifier: account_management
     weight: 220000
   - name: ユーザー管理
@@ -2425,155 +2446,6 @@ main:
     pre: info-fill
     identifier: help_top_level
     weight: 240000
-footer_product:
-  - name: 機能
-    url: "https://www.datadoghq.com/ja/product/"
-    weight: 100
-  - name: インテグレーション
-    url: "https://www.datadoghq.com/ja/product/platform/integrations/"
-    weight: 105
-  - name: ダッシュボード
-    url: "https://www.datadoghq.com/ja/product/platform/dashboards/"
-    weight: 110
-  - name: インフラストラクチャーのモニタリング
-    url: "https://www.datadoghq.com/ja/product/infrastructure-monitoring/"
-    weight: 115
-  - name: ログ管理
-    url: "https://www.datadoghq.com/ja/product/log-management/"
-    weight: 120
-  - name: APM
-    url: "https://www.datadoghq.com/ja/product/apm/"
-    weight: 125
-  - name: Continuous Profiler
-    url: "https://www.datadoghq.com/ja/product/code-profiling/"
-    weight: 130
-  - name: CI Visibility
-    url: "https://www.datadoghq.com/ja/product/ci-cd-monitoring/"
-    weight: 135
-  - name: Synthetic モニタリング
-    url: "https://www.datadoghq.com/ja/product/synthetic-monitoring/"
-    weight: 140
-  - name: リアルユーザーモニタリング
-    url: "https://www.datadoghq.com/ja/product/real-user-monitoring/"
-    weight: 145
-  - name: ネットワークモニタリング
-    url: "https://www.datadoghq.com/ja/product/network-monitoring/"
-    weight: 150
-footer_product_two:
-  - name: セキュリティプラットフォーム
-    url: "https://www.datadoghq.com/ja/product/security-platform/"
-    weight: 100
-  - name: セキュリティモニタリング
-    url: "https://www.datadoghq.com/ja/product/security-platform/security-monitoring/"
-    weight: 105
-  - name: セキュリティポスチャ CSPM
-    url: "https://www.datadoghq.com/ja/product/security-platform/cloud-security-posture-management/"
-    weight: 110
-  - name: クラウドワークロードセキュリティ
-    url: "https://www.datadoghq.com/ja/product/security-platform/cloud-workload-security/"
-    weight: 115
-  - name: Error Tracking
-    url: "https://www.datadoghq.com/ja/product/error-tracking/"
-    weight: 120
-  - name: インシデント管理
-    url: "https://www.datadoghq.com/ja/product/incident-management/"
-    weight: 130
-  - name: データベース モニタリング
-    url: "https://www.datadoghq.com/ja/product/database-monitoring/"
-    weight: 135
-  - name: サーバーレス
-    url: "https://www.datadoghq.com/ja/product/serverless-monitoring/"
-    weight: 130
-  - name: アラート
-    url: "https://www.datadoghq.com/ja/product/alerts/"
-    weight: 131
-  - name: API
-    url: "https://docs.datadoghq.com/ja/api/"
-    weight: 132
-footer_product_three:
-  - name: 料金
-    url: "https://www.datadoghq.com/ja/pricing/"
-    weight: 100
-  - name: Documentation
-    url: "https://docs.datadoghq.com/ja/"
-    weight: 105
-  - name: サポート
-    url: "https://www.datadoghq.com/ja/support/"
-    weight: 110
-  - name: リソース
-    url: "https://www.datadoghq.com/ja/resources/"
-    weight: 150
-  - name: Webinars
-    url: 'https://www.datadoghq.com/ja/webinars/'
-    weight: 160
-  - name: セキュリティ
-    url: "https://www.datadoghq.com/ja/security/"
-    weight: 180
-footer_about:
-  - name: COVID-19（新型コロナウイルス感染症）への対応
-    url: "https://www.datadoghq.com/coronavirus/"
-    weight: 90
-  - name: お問い合わせ
-    url: "https://www.datadoghq.com/ja/about/contact/"
-    weight: 100
-  - name: パートナー
-    url: "https://www.datadoghq.com/ja/partner-with-datadog/"
-    weight: 120
-  - name: プレス
-    url: "https://www.datadoghq.com/ja/about/press/"
-    weight: 130
-  - name: 経営陣
-    url: "https://www.datadoghq.com/about/leadership/"
-    weight: 140
-  - name: 採用情報
-    url: "https://www.datadoghq.com/ja/careers/"
-    weight: 160
-  - name: 各種規約
-    url: "https://www.datadoghq.com/ja/legal/"
-    weight: 170
-  - name: Investor Relations
-    url: "https://investors.datadoghq.com/"
-    weight: 175
-  - name: アナリストレポート
-    url: "https://www.datadoghq.com/ja/about/analyst/"
-    weight: 180
-footer_blog:
-  - name: 英語
-    url: "https://www.datadoghq.com/ja/blog/"
-    weight: 100
-  - name: スペイン語
-    url: "https://www.datadoghq.com/es/blog/"
-    weight: 110
-  - name: 日本語
-    url: "https://www.datadoghq.com/ja/blog/"
-    weight: 120
-footer_social:
-  - name: Twitter
-    url: "https://twitter.com/datadoghq"
-    weight: 130
-    pre: twitter.svg
-  - name: Instagram
-    url: "https://www.instagram.com/datadoghq/"
-    weight: 140
-    pre: instagram.svg
-  - name: LinkedIn
-    url: "https://www.LinkedIn.com/company/datadog/"
-    weight: 160
-    pre: linkedin.svg
-  - name: Youtube
-    url: "https://www.youtube.com/user/DatadogHQ"
-    weight: 150
-    pre: youtube.svg
-footer_sub:
-  - name: 利用規約
-    url: "https://www.datadoghq.com/legal/terms/"
-    weight: 100
-  - name: Privacy
-    url: "https://www.datadoghq.com/legal/privacy/"
-    weight: 120
-  - name: Cookie
-    url: "https://www.datadoghq.com/legal/cookies/"
-    weight: 130
 api:
   - name: 概要
     url: /api/latest/
