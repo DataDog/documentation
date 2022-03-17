@@ -7,7 +7,7 @@ kind: guide
 
 Datadog Application Security monitors application-level attacks aiming to exploit code-level vulnerabilities.
 
-APM records information about each HTTP request, these are referred to as traces. Datadog Application Security uses the information APM is already collecting, and flags any attack attempts based on suspicious requests as security signals. Depending on your security signal settings, you can receive notifications from Slack, email, or PagerDuty.
+APM records information about each HTTP request, these are referred to as traces. Datadog Application Security uses the information APM is already collecting, and flags any attack attempts based or suspicious requests that match known attack patterns. Security signals are an aggregation of suspicious requests. Depending on your security signal settings, you can receive notifications from Slack, email, or PagerDuty.
 
 Traditional Web Application Firewalls (WAFs) are usually deployed at the perimeter and have no context of the application behavior. For application security to be effective, it’s critical to be embedded in the application to get access to the data. Datadog Application Security leverages known attack patterns, similar to a Web Application Firewall (WAF) but with additional application context to increase the signal to noise ratio, lowering false positives.
 
