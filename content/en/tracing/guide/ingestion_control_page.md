@@ -1,7 +1,7 @@
 ---
 title: Ingestion Control Page v2
 kind: documentation
-description: "Learn how to control Ingestion and Indexing rates with Tracing without Limits."
+description: "Learn how to control Ingestion and Indexing rates with APM."
 ---
 
 <div class="alert alert-warning">

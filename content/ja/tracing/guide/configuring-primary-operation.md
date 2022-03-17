@@ -56,40 +56,173 @@ APM サービスは、エラー、スループット、レイテンシーのト�
 
 すべてのトレースがインスツルメンテーション以外でも Datadog に正しく送信されているか確認するには、追加スパン名によりリソースを表示できます。追加スパン名はセカンダリオペレーションとしてドロップダウンメニューで表示されます。ただし、追加スパン名はサービスレベルの統計の計算には使用されません。
 
-{{< img src="tracing/guide/primary_operation/dropdown.gif" alt="APM の保存"  >}}
+{{< img src="tracing/guide/primary_operation/dropdown.mp4" alt="APM の保存" video=true >}}
 
 ## 手動インスツルメンテーション
 
-コードを手動でインスツルメントしている場合は、リソースが確実に同じプライマリオペレーション (例: `web.request`) で分類されるよう、スパン名を静的に設定します。スパン名が動的に設定されている場合は、リソースとして設定します。
+カスタムスパンを作成する際は、リソースが確実に同じプライマリオペレーション (例: `web.request`) で分類されるよう、スパン名を静的に設定します。スパン名が動的に設定されている場合は、リソースとして設定します (たとえば `/user/profile`)。
 
-Python のプライマリオペレーションの変更
-
-```text
-  @tracer.wrap('tornado.notify',
-                service='tornado-notification',
-                resource='MainHandler.do_something')
-    @tornado.gen.coroutine
-    def do_something(self):
-        # 操作を実行
-```
-
-この関数はサービス名とプライマリオペレーションを、それぞれ `tornado-notification` と `tornado.notify` として明示的に設定します。
-
-また、リソース名は `MainHandler.do_something` として手動で設定されています。
-
-デフォルトでは、リソース名は、その関数名と Tornado 配下のクラスにより設定されます。
+詳細は、プログラミング言語の[カスタムインスツルメンテーション][3]をご参照ください。
 
 ## OpenTracing
 
-Datadog を使用している場合、Opentracing オペレーション名はリソース、Opentracing "component" タグは Datadog のスパン名となります。リソースが "/user/profile"、スパン名が "http.request" の スパンを Opentracing 用語で定義するには、次の Go の例を使用します。
+Datadog を使用している場合、OpenTracing オペレーション名はリソース、OpenTracing "component" タグは Datadog のスパン名となります。たとえば、リソースが "/user/profile"、スパン名が "http.request" のスパンを OpenTracing 用語で定義するには、次のようになります。
 
-```text
+{{< programming-lang-wrapper langs="java,python,ruby,go,nodejs,.NET,php,cpp" >}}
+{{< programming-lang lang="java" >}}
+
+
+
+```java
+Span span = tracer.buildSpan("http.request").start();
+
+try (Scope scope = tracer.activateSpan(span)) {
+    span.setTag("service.name", "service_name");
+    span.setTag("resource.name", "/user/profile");
+    // トレースされるコード
+} finally {
+    span.finish();
+}
+
+```
+
+詳細は、[Java および OpenTracing のセットアップ][1]をご参照ください。
+
+
+[1]: /ja/tracing/setup_overview/open_standards/java/#opentracing
+{{< /programming-lang >}}
+{{< programming-lang lang="python" >}}
+
+```python
+from ddtrace.opentracer.tags import Tags
+import opentracing
+span = opentracing.tracer.start_span('http.request')
+span.set_tag(Tags.RESOURCE_NAME, '/user/profile')
+span.set_tag(Tags.SPAN_TYPE, 'web')
+
+# ...
+span.finish()
+
+```
+
+詳細は、[Python および OpenTracing のセットアップ][1]をご参照ください。
+
+
+[1]: /ja/tracing/setup_overview/open_standards/python/#opentracing
+{{< /programming-lang >}}
+{{< programming-lang lang="ruby" >}}
+
+
+```ruby
+OpenTracing.start_active_span('http.request') do |scope|
+  scope.span.datadog_span.resource = '/user/profile'
+  # トレースされるコード
+end
+```
+詳細は、[Ruby および OpenTracing のセットアップ][1]をご参照ください。
+
+
+[1]: /ja/tracing/setup_overview/open_standards/ruby/#opentracing
+{{< /programming-lang >}}
+{{< programming-lang lang="go" >}}
+
+
+```go
 opentracing.StartSpan("http.request", opentracer.ResourceName("/user/profile"))
 ```
+
+詳細は、[Go および OpenTracing のセットアップ][1]をご参照ください。
+
+
+[1]: /ja/tracing/setup_overview/open_standards/go/#opentracing
+{{< /programming-lang >}}
+{{< programming-lang lang="nodejs" >}}
+
+
+```javascript
+const span = tracer.startSpan('http.request');
+span.setTag('resource.name',  '/user/profile')
+span.setTag('span.type', 'web')
+// トレースされるコード
+span.finish();
+```
+
+詳細は、[Nodejs および OpenTracing のセットアップ][1]をご参照ください。
+
+
+[1]: /ja/tracing/setup_overview/open_standards/nodejs/#opentracing
+{{< /programming-lang >}}
+{{< programming-lang lang=".NET" >}}
+
+
+```csharp
+using OpenTracing;
+using OpenTracing.Util;
+
+using (var scope = GlobalTracer.Instance.BuildSpan("http.request").StartActive(finishSpanOnDispose: true))
+{
+    scope.Span.SetTag("resource.name", "/user/profile");
+    // トレースされるコード
+}
+
+```
+
+詳細は、[.NET および OpenTracing のセットアップ][1]をご参照ください。
+
+
+[1]: /ja/tracing/setup_overview/open_standards/dotnet/#opentracing
+{{< /programming-lang >}}
+{{< programming-lang lang="php" >}}
+
+
+```php
+// Composer のオートローダーのインポート後、index.php の初めに一度。
+// OpenTracing 1.0-beta6 以下の場合
+$otTracer = new \DDTrace\OpenTracer\Tracer(\DDTrace\GlobalTracer::get());
+// OpenTracing >= 1.0 以降の場合
+$otTracer = new \DDTrace\OpenTracer1\Tracer(\DDTrace\GlobalTracer::get());
+// グローバルのトレーサーラッパーを登録
+ \OpenTracing\GlobalTracer::set($otTracer);
+
+// アプリケーションコードの任意の場所
+$otTracer = \OpenTracing\GlobalTracer::get();
+$scope = $otTracer->startActiveSpan('http.request');
+$span = $scope->getSpan();
+$span->setTag('service.name', 'service_name');
+$span->setTag('resource.name', '/user/profile');
+$span->setTag('span.type', 'web');
+// ...OpenTracing を予期されるとおりに使用
+$scope->close();
+```
+
+詳細は、[PHP および OpenTracing のセットアップ][1]をご参照ください。
+
+
+[1]: /ja/tracing/setup_overview/open_standards/php/#opentracing
+{{< /programming-lang >}}
+{{< programming-lang lang="cpp" >}}
+
+
+```cpp
+// 現在のリクエストにルートスパンを作成。
+auto root_span = tracer->StartSpan("web.request");
+// ルートスパンにリソース名を設定。
+root_span->SetTag(datadog::tags::resource_name, "/user/profile");
+```
+
+詳細は、[CPP および カスタムインスツルメンテーションのセットアップ][1]をご参照ください。
+
+
+[1]: /ja/tracing/setup_overview/custom_instrumentation/cpp/#manually-instrument-a-method
+{{< /programming-lang >}}
+{{< /programming-lang-wrapper >}}
+
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+
 [1]: /ja/tracing/guide/metrics_namespace/
 [2]: https://app.datadoghq.com/apm/settings
+[3]: /ja/tracing/setup_overview/custom_instrumentation/

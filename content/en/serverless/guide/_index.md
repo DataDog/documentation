@@ -3,6 +3,12 @@ title: Serverless Monitoring Guides
 kind: guide
 ---
 
+{{< whatsnext desc="Serverless monitoring:" >}}
+    {{< nextlink href="/serverless/guide/connect_invoking_resources" >}}Deeper visibility into resources invoking Lambda functions{{< /nextlink >}}
+    {{< nextlink href="/serverless/guide/insights" >}}Serverless Insights{{< /nextlink >}}
+    {{< nextlink href="/serverless/guide/serverless_tagging" >}}Serverless Tagging{{< /nextlink >}}
+{{< /whatsnext >}}
+
 {{< whatsnext desc="Using the Datadog Forwarder:" >}}
     {{< nextlink href="/serverless/guide/datadog_forwarder_node" >}}Installing Serverless with the Datadog Forwarder - Node.js{{< /nextlink >}}
     {{< nextlink href="/serverless/guide/datadog_forwarder_python" >}}Installing Serverless with the Datadog Forwarder - Python{{< /nextlink >}}
@@ -16,7 +22,7 @@ kind: guide
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Troubleshooting:" >}}
-    {{< nextlink href="/serverless/guide/troubleshoot_serverless_monitoring" >}}Troubleshooting Serverless Monitoring{{< /nextlink >}}
+    {{< nextlink href="/serverless/troubleshooting" >}}Troubleshooting Serverless Monitoring{{< /nextlink >}}
     {{< nextlink href="/serverless/guide/serverless_tracing_and_webpack" >}}Node.js Lambda Tracing and Webpack Compatibility{{< /nextlink >}}
     {{< nextlink href="/serverless/guide/serverless_package_too_large" >}}Troubleshooting Serverless Package Too Large Errors{{< /nextlink >}}
 {{< /whatsnext >}}

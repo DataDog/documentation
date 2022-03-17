@@ -16,7 +16,7 @@ further_reading:
 
 {{< img src="tracing/live_search_and_analytics/tracing_without_limits_lifecycle-2.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace Journey: Ingestion" >}}
 
-With Tracing without Limits™, the ingestion of traces to Datadog is fully customizable.
+With APM, the ingestion of traces to Datadog is fully customizable.
 
 ## Ingestion mechanisms
 

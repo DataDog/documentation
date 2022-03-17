@@ -52,7 +52,7 @@ Pour configurer l'intégration Datadog/Hasura Cloud pour votre projet Hasura Clo
 
 Consultez la [documentation d'Hasura Cloud][2] afin de configurer l'intégration Datadog pour votre projet Hasura Cloud.
 
-Une fois cette première étape effectuée, accédez à la [section Logs][3] dans Datadog et créez des facettes pour les champs de premier niveau suivants :
+Une fois cette première étape effectuée, accédez à la [section Logs][3] de Datadog et créez des facettes pour les champs de premier niveau suivants :
 
 * `operation_name`
 * `operation_type`

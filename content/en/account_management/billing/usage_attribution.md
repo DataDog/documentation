@@ -30,8 +30,6 @@ Administrators can access the Usage Attribution tab from the Plan & Usage sectio
 - Network Flows
 - Real User Monitoring
 
-**Note: Indexed Spans were formerly known as Analyzed Spans and renamed with the launch of Tracing Without Limits on October 20th, 2020.**
-
 ### Getting started
 
 To start receiving daily data, an administrator needs to create a new report with the user interface.
