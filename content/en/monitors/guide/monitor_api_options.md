@@ -23,12 +23,21 @@ kind: guide
 - **`renotify_occurrences`** the number of times a monitor re-notifies. It can only be set if `renotify_interval` is set. Default: **null**, it renotifies without a limit.
 - **`escalation_message`** a message to include with a re-notification. Supports the '@username' notification that is allowed elsewhere. Not applicable if `renotify_interval` is `null`. Default: **null**.
 - **`notify_audit`** a Boolean indicating whether tagged users is notified on changes to this monitor. Default: **False**
-- **`locked`** a Boolean indicating whether changes to this monitor should be restricted to the creator and admins. Default: **False**. **Deprecated: Use `restricted_roles` instead.**
-- **`restricted_roles`** an Array listing the UUIDs of the roles allowed to edit the monitor. Monitor edition includes any updates to the monitor configuration, monitor deletion, and muting of the monitor for any amount of time. Role UUIDs can be pulled from the [Roles API][1].
 - **`include_tags`** a Boolean indicating whether notifications from this monitor automatically inserts its triggering tags into the title. Default: **True**. Examples:
 
   - `True`: `[Triggered on {host:h1}] Monitor Title`
   - `False`: `[Triggered] Monitor Title`
+
+### Permissions options
+
+- **`locked`** a Boolean indicating whether changes to this monitor should be restricted to the creator and admins. Default: **False**. **Deprecated: Use `restricted_roles` instead.**
+- **`restricted_roles`** an Array listing the UUIDs of the roles allowed to edit the monitor. Monitor edition includes any updates to the monitor configuration, monitor deletion, and muting of the monitor for any amount of time. Role UUIDs can be pulled from the [Roles API][1]. `restricted_roles` is the successor of `locked`. 
+
+It is not recommended to use both `locked` and `restricted_roles` parameters alongside, but in case you do, the most restrictive parameter applies (with any role set in `restricted_roles` being considered more restrictive than `locked:true`).
+Examples: 
+- If a monitor is set to `locked:false` and `"restricted_roles": [ "er6ec1b6-903c-15ec-8686-da7fd0960002" ]`, the `restricted_roles` parameter applies.
+- If a monitor is set to `locked:true` and `"restricted_roles": [ "er6ec1b6-903c-15ec-8686-da7fd0960002" ]`, the `restricted_roles` parameter applies.
+- If a monitor is set to `locked:true` and no `"restricted_roles"` parameter is set, the `locked:true` parameter applies.
 
 ## Anomaly options
 
