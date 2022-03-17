@@ -66,7 +66,7 @@ When Sensitive Data Scanner is enabled, an out-of-the-box [dashboard][4] summari
 
 {{<img src="account_management/sensitive_data_scanner/sdslight.png" alt="Sensitive Data Scanner Overview dashboard" style="width:70%;">}}
 
-To manually import this dashboard, copy the [Sensitive Data Scanner Overview dashboard JSON definition][5] and paste it as a New Dashboard. Alternatively use the `Import Dashboard JSON` option in the settings cog menu in the upper right corner of a New Dashboard.
+To access this dashboard, go to **Dashboards > Dashboards List** and search for `Sensitive Data Scanner Overview`.
 
 **Note:**
 - Any rules that you add or update only affect data coming into Datadog after the rule was defined.
@@ -83,4 +83,3 @@ To manually import this dashboard, copy the [Sensitive Data Scanner Overview das
 [2]: /logs/explorer/search_syntax/
 [3]: /logs/guide/logs-rbac-permissions/?tab=ui#overview
 [4]: https://app.datadoghq.com/dash/integration/sensitive_data_scanner
-[5]: /resources/json/sensitive_data_scanner_dashboard_configuration.json
