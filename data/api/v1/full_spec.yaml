@@ -7830,7 +7830,7 @@ components:
         name:
           description: The name of the new child-organization, limited to 32 characters.
           example: New child org
-          maxLength: 32
+          maximum: 32
           type: string
         public_id:
           description: The `public_id` of the organization you are operating within.
@@ -7859,7 +7859,7 @@ components:
         name:
           description: The name of the new child-organization, limited to 32 characters.
           example: New child org
-          maxLength: 32
+          maximum: 32
           type: string
         subscription:
           $ref: '#/components/schemas/OrganizationSubscription'
