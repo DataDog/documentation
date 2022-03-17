@@ -121,7 +121,7 @@ To create a local variable, click **Create Local Variable** at the top right han
 `{{ timestamp(n, unit) }}` 
 : Generates a timestamp in one of our accepted units with a value corresponding to the timestamp the test is initiated at +/- `n` chosen unit.
 
-When you have entered a name and a value, click **Add Variable**. (standardize this sentence)
+When you have entered a name and a value, click **Add Variable**.
 
 ### Use variables
 
