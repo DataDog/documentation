@@ -15,7 +15,8 @@ further_reading:
 ---
 ## Overview
 
-gRPC health checks allow you to determine whether or not your gRPC servers and services can handle remote procedure calls (RPCs).
+gRPC health checks allow you to determine whether or not your gRPC servers and services can handle remote procedure calls (RPCs). 
+
 You can implement the health checking mechanism as a gRPC service on a gRPC server. To access the health checks proto file example shared by the gRPC community, see the [open-source gRPC repository][1].
 
 gRPC health check tests can run from both [managed][2] and [private locations][3] depending on your preference for running the test from outside or inside your network. gRPC tests can run on a schedule, on-demand, or directly within your [CI/CD pipelines][4].
@@ -53,9 +54,10 @@ Assertions define what an expected test result is. After you click **Test URL**,
 You can create up to 20 assertions per API test by clicking **New Assertion** or by clicking directly on the response preview:
 
 {{< img src="synthetics/api_tests/assertions_grpc.png" alt="Define assertions for your gRPC test" style="width:90%;" >}}
+
 ### Select locations
 
-Select the **Locations** to run your gRPC health check test from. gRPC tests can run from both [managed][2] and [private locations][3] depending on your preference for running the health check test from outside or inside your network.
+Select the **Locations** to run your gRPC health check test from. gRPC health check tests can run from both [managed][2] and [private locations][3] depending on your preference for running the health check test from outside or inside your network.
 
 ### Specify test frequency
 
@@ -137,13 +139,13 @@ A health check test is considered `FAILED` if it does not satisfy one or more as
 These reasons include the following:
 
 `gRPC specific errors`
-: gRPC has a list of specific status codes that can be found in this [official documentation page][10].
+: gRPC has a list of specific status codes that can be found in the [official gRPC documentation][10].
 
 `CONNRESET`
-: The connection was abruptly closed by the remote server. Possible causes include the web server encountering an error or crashing while responding, or loss of connectivity of the web server.
+: The connection was abruptly closed by the remote server. Possible causes include the web server encountering an error or crashing while responding, or losing connectivity to the web server.
 
 `DNS`
-: DNS entry not found for the test URL. Possible causes include misconfigured test URL or the wrong configuration of your DNS entries.
+: DNS entry not found for the test URL. Possible causes include a misconfigured test URL or the wrong configuration of your DNS entries.
 
 `INVALID_REQUEST` 
 : The configuration of the test is invalid (for example, a typo in the URL).
@@ -153,20 +155,28 @@ These reasons include the following:
 
 `TIMEOUT`
 : The request couldn't be completed in a reasonable time. Two types of `TIMEOUT` can happen:
-  - `TIMEOUT: The request couldn’t be completed in a reasonable time.` indicates that the request duration hit the test defined timeout (default is set to 60s). 
-  For each request only the completed stages for the request are displayed in the network waterfall. For example in the case of `Total response time` only being displayed, the timeout occurred during the DNS resolution.
-  - `TIMEOUT: Overall test execution couldn't be completed in a reasonable time.` indicates that the test duration (request + assertions) hits the maximum duration (60.5s).
+  - `TIMEOUT: The request couldn’t be completed in a reasonable time.` indicates that the request duration hit the test defined timeout (default is set to 60 seconds). 
+  For each request, only the completed stages for the request are displayed in the network waterfall. For example, in the case of `Total response time` only being displayed, the timeout occurred during the DNS resolution.
+  - `TIMEOUT: Overall test execution couldn't be completed in a reasonable time.` indicates that the test duration (request and assertions) hits the maximum duration of 60.5 seconds.
 
 ## Permissions
 
 By default, only users with the [Datadog Admin and Datadog Standard roles][12] can create, edit, and delete Synthetic gRPC health check tests. To get create, edit, and delete access to Synthetic gRPC health check tests, upgrade your user to one of those two [default roles][12].
 
-If you have access to the [custom role feature][13], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions.
+If you are using the [custom role feature][13], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions.
+
+## Restrict access
+
+Access restriction is available for customers using [custom roles][14] on their accounts. 
+
+You can restrict access to a browser test based on the roles in your organization. When creating a browser test, choose which roles (in addition to your user) can read and write your test. 
+
+{{< img src="synthetics/settings/restrict_access.png" alt="Set permissions for your test" style="width:70%;" >}}
+
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: https://github.com/grpc/grpc/blob/master/doc/health-checking.md
 [2]: /api/v1/synthetics/#get-all-locations-public-and-private
@@ -181,3 +191,4 @@ If you have access to the [custom role feature][13], add your user to any custom
 [11]: /synthetics/api_tests/errors/#ssl-errors
 [12]: /account_management/rbac/
 [13]: /account_management/rbac#custom-roles
+[14]: /account_management/rbac/#create-a-custom-role
