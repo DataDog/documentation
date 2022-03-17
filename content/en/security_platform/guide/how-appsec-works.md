@@ -24,7 +24,6 @@ Datadog Application Security uses processes already contained in the Agent and A
 
 There are multiple methods used to avoid your sensitive information being indexed. To take further action, you can set up [custom and static scrubbers][3], and use [exclusion filters][4].
 
-The [Sensitive Data Scanner][5] automatically scans traces that have been flagged by Datadog Application Security.
 
 **Note:** Datadog Application Security does not automatically obfuscate sensitive information or PII. To keep this sensitive data from being sent to Datadog, [configure the Datadog Agent or Tracer for data security][3].
 
