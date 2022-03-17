@@ -40,11 +40,11 @@ After choosing to create an `gRPC` health check test, define your test's request
 
 {{< img src="synthetics/api_tests/grpc_test_config.png" alt="Define gRPC request" style="width:90%;" >}} 
 
-Click **Test service** to try out the request configuration. A response preview is displayed on the right side of your screen.
+Click **Test Service** to try out the request configuration. A response preview is displayed on the right side of your screen.
 
 ### Define assertions
 
-Assertions define what an expected test result is. After you click **Test URL**, an assertion on the `response time` and the `healthcheck status` are added based on the response that was obtained. You must define at least one assertion for your test to monitor.
+Assertions define what an expected test result is. After you click **Test Service**, an assertion on the `response time` and the `healthcheck status` are added based on the response that was obtained. You must define at least one assertion for your test to monitor.
 
 | Type                    | Operator                                        | Value type                           |
 |-------------------------|-------------------------------------------------|--------------------------------------|
@@ -63,7 +63,7 @@ Select the **Locations** to run your gRPC health check test from. gRPC health ch
 
 gRPC health check tests can run:
 
-* **On a schedule** to ensure your most important endpoints are always accessible to your users. Select the frequency at which you want Datadog to run your gRPC test.
+* **On a schedule** to ensure your most important services are always accessible to your users. Select the frequency at which you want Datadog to run your gRPC test.
 * [**Within your CI/CD pipelines**][4] to start shipping without fearing faulty code might impact your customers experience.
 * **On-demand** to run your tests whenever makes the most sense for your team.
 
