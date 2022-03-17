@@ -24,7 +24,7 @@ Synthetic browser tests embed the Real User Monitoring SDK, allowing you to expl
 
 In your browser test recording, click **Collect RUM Data on** above the **Start Recording** button and select an application to collect data on. After saving your recording and test configuration, RUM gathers test data and generates session recordings from your browser test runs. 
 
-Optionally, you can choose which RUM application is displayed in the Browser Test Recorder:
+Optionally, click `Synthetic Tests Default` and select another RUM application from the dropdown menu. This application is displayed in the browser test recording:
 
 1. Navigate to [**UX Monitoring** > **Settings** > **Integration Settings**][5].
 2. Under **Synthetic Data RUM Applications**, select a default RUM application suggested in the Browser Test Recorder from the dropdown menu. 
