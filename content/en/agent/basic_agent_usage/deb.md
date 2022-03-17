@@ -24,7 +24,7 @@ This page outlines the basic features of the Datadog Agent for Debian. If you ha
 
 Packages are available for 64-bit x86 and Arm v8 architectures. For other architectures, use the source install.
 
-**Note**: Debian 7 (wheezy) and above is supported. SysVinit is supported in Agent v6.6.0+.
+**Note**: Debian 7 (wheezy) and above is supported in Agent < 6.36.0/7.36.0. Debian 8 (jessie) is supported in Agent >= 6.36.0/7.36.0. SysVinit is supported in Agent v6.6.0+.
 
 ## Commands
 
