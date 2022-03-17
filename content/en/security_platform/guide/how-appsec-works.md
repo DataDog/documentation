@@ -44,7 +44,7 @@ Datadog Application Security categorizes attack attempts into different threat t
 * **Contextualized attacks** have a correlation between known attack patterns and business-logic.
 * A **Vulnerability is triggered** when there is a correlation between attack patterns, and there's evidence of a successful vulnerability trigger.
 
-Datadog Application Security includes over 100 attack patterns that help protect against [many different kinds of attacks][8], including the following:
+Datadog Application Security includes over 100 attack patterns that help protect against [many different kinds of attacks][8], including the following vulnerabilities:
 
 * SQL injections
 * Code injections
