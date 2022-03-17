@@ -17,7 +17,7 @@ further_reading:
 
 ## Overview
 
-Datadog Log Management offers Watchdog Insights to help you navigate to the root cause of problems with contextual insights in the Log Explorer. Watchdog Insights complement your expertise and instincts by recommending outliers and potential performance bottlenecks impacting a subset of users.
+Datadog Log Management offers Watchdog Insights to help you resolve incidents faster with contextual insights in the Log Explorer. Watchdog Insights complement your expertise and instincts by surfacing suspect anomalies, outliers, and potential performance bottlenecks impacting a subset of users.
 
 {{< img src="logs/explorer/watchdog_insights/insights-for-log-explorer.png" alt="The log explorer showing the Watchdog Insights banner with five log anomalies" style="width:100%;" >}}
 
@@ -41,7 +41,7 @@ Every insight comes with embedded interactions and a side panel with troubleshoo
 
 ### Log Anomaly Detection
 
-Ingested logs are analyzed at the intake level where Watchdog Insights perform aggregations on detected patterns as well as `environment`, `service`, `source` and `status` tags.
+Ingested logs are analyzed at the intake level where Watchdog performs aggregations on detected patterns as well as `environment`, `service`, `source` and `status` tags.
 These aggregated logs are scanned for anomalous behaviors, such as the following:
 
 - An emergence of logs with a warning or error status.
@@ -56,7 +56,7 @@ Click on a specific insight to see the full description of the detected anomaly 
 
 For more information about searching logs in the Log Explorer, see [Log Search Syntax][2] and [Custom Time Frames][3].
 
-### Error outliers
+### Error Outliers
 
 Error outliers display fields such as [faceted tags or attributes][2] containing characteristics of errors that match the current query. Statistically overrepresented `key:value` pairs among errors provide hints into the root cause of problems.
 
