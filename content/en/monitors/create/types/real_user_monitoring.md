@@ -40,9 +40,10 @@ As you define the search query, the graph above the search fields updates.
     * **Simple alert**: Simple alerts aggregate over all reporting sources. You receive one alert when the aggregated value meets the set conditions.</br>
     If the query has a `group by` and you select simple-Alert mode, you get **one** alert when one or multiple groups values breach the threshold. This strategy may be selected to reduce notification noise.
     * **Multi alert**: Multi alerts apply the alert to each source according to your group parameters. An alerting event is generated for each group that meets the set conditions. For example, you could group a query by `@browser.name` to receive a separate alert for each browser when the number of errors is high.
-
 {{< img src="monitors/monitor_types/rum/define-the-search-query.png" alt="Define the search query" style="width:80%;" >}}
-
+5. Add multiple queries and apply formulas and functions (optional):
+    * **Multiple queries**: The 'Add Query' button will allow you analyze multiple different sets of RUM data in relation to each other.
+    * **Formulas and functions**: After adding your desired queries, you can click on 'Add Formula' to add a mathematical computation. In the example below, we are calculating the percentage of sessions that experienced an error using the formula '(b/a)* 100'
 ### Set alert conditions
 
 * Trigger when the metric is `above`, `above or equal to`, `below`, or `below or equal to`
