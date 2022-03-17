@@ -103,7 +103,7 @@ Some or all queries may not have plans available. This can be due to unsupported
 [6]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example
 [7]: /database_monitoring/setup_postgres/advanced_configuration
 
-### Query metrics are missing
+### Query metrics are missing {#pg-stat-statements-not-created}
 
 Before following these steps to diagnose missing query metric data, ensure the Agent is running successfully and you have followed [the steps to diagnose missing agent data](#no-data-is-showing-after-configuring-database-monitoring).
 
