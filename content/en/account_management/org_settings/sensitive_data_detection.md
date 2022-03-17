@@ -22,7 +22,7 @@ Sensitive data, such as credit card numbers, bank routing numbers, API keys, OAu
 
 Often businesses are required to identify, remediate, and prevent the exposure of such sensitive data within their logs due to organizational policies, compliance requirements, industry regulations, and privacy concerns. This is especially true for industries such as banking, financial services, healthcare, and insurance among others.
 
-## Sensitive data scanner
+## Sensitive Data Scanner
 
 Sensitive data scanner is a stream-based, pattern matching service that you can use to identify, tag, and optionally redact or hash sensitive data. With implementation, your security and compliance teams can introduce a new line of defense in preventing sensitive data from leaking outside your organization.
 
@@ -60,6 +60,14 @@ By default, users with the Datadog Admin role have access to view and define the
 
 Control who can access log events containing sensitive data. Use tags added by Sensitive Data Scanner to build queries with RBAC and restrict access to specific individuals or teams until the data ages out after the retention period.
 
+### Out-of-the-box dashboard
+
+When Sensitive Data Scanner is enabled, an out-of-the-box [dashboard][4] summarizing sensitive data findings is automatically installed in your account.
+
+{{<img src="account_management/sensitive_data_scanner/sdslight.png" alt="Sensitive Data Scanner Overview dashboard" style="width:70%;">}}
+
+To access this dashboard, go to **Dashboards > Dashboards List** and search for `Sensitive Data Scanner Overview`.
+
 **Note:**
 - Any rules that you add or update only affect data coming into Datadog after the rule was defined.
 - Sensitive Data Scanner does not affect any rules you define on the Datadog Agent directly.
@@ -74,3 +82,4 @@ Control who can access log events containing sensitive data. Use tags added by S
 [1]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner
 [2]: /logs/explorer/search_syntax/
 [3]: /logs/guide/logs-rbac-permissions/?tab=ui#overview
+[4]: https://app.datadoghq.com/dash/integration/sensitive_data_scanner
