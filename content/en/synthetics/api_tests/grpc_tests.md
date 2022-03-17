@@ -15,7 +15,7 @@ further_reading:
 ---
 ## Overview
 
-gRPC health checks allow you to determine whether or not your gRPC servers and services can handle remote procedure calls (RPCs). 
+gRPC health checks is a standard for reporting the health of gRPC services. It allows you to determine whether or not your gRPC servers and services are responsive, running, and capable of handling remote procedure calls (RPCs). 
 
 You can implement the health checking mechanism as a gRPC service on a gRPC server. To access the health checks proto file example shared by the gRPC community, see the [open-source gRPC repository][1].
 
