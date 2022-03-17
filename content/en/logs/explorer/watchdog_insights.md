@@ -58,7 +58,7 @@ For more information about searching logs in the Log Explorer, see [Log Search S
 
 ### Error Outliers
 
-Error outliers display fields such as [faceted tags or attributes][2] containing characteristics of errors that match the current query. Statistically overrepresented `key:value` pairs among errors provide hints into the root cause of problems.
+Error outliers display fields such as [faceted tags or attributes][4] containing characteristics of errors that match the current query. Statistically overrepresented `key:value` pairs among errors provide hints into the root cause of problems.
 
 Typical examples of error outliers include `env:staging`, `docker_image:acme:3.1`, and `http.useragent_details.browser.family:curl`.
 
@@ -69,7 +69,7 @@ In the **banner card** view, you can see:
 
 {{< img src="logs/explorer/watchdog_insights/error_outlier_s_card.png" alt="The error outlier card showing a red bar with 73.3% of total errors and a blue bar with 8.31% of total errors" style="width:50%;" >}}
 
-In the **side panel card** view, you can see the main [log pattern][3] of error logs with the field.
+In the **side panel card** view, you can see the main [log pattern][5] of error logs with the field.
 
 {{< img src="logs/explorer/watchdog_insights/error_outlier_l_card.png" alt="Error Outlier card (L)" style="width:100%;" >}}
 
@@ -77,7 +77,7 @@ In the **full side panel** view, you can see:
 
   * The timeseries of error logs that contain the field.
   * Tags that are often associated with the error logs.
-  * A comprehensive list of [log patterns][3].
+  * A comprehensive list of [log patterns][5].
 
 {{< img src="logs/explorer/watchdog_insights/error_outlier_side_panel.png" alt="Error Outlier side panel" style="width:100%;" >}}
 
@@ -85,6 +85,10 @@ In the **full side panel** view, you can see:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+
+
 [1]: https://app.datadoghq.com/logs
-[2]: /logs/explorer/facets/
-[3]: /logs/explorer/group/#patterns
+[2]: /logs/search-syntax
+[3]: /dashboards/guide/custom_time_frames
+[4]: /logs/explorer/facets/
+[5]: /logs/explorer/group/#patterns
