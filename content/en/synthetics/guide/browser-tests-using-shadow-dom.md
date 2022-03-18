@@ -25,9 +25,13 @@ Depending on the [encapsulation mode][2] and the step objective, you can leverag
 
 ## Open mode
 
+{{< img src="synthetics/guide/browser-tests-using-shadow-dom/open-shadow-dom.png" alt="Open Shadow DOM" style="width:50%;" >}}
+
 In `open` mode, you can use JavaScript assertions to interact with and validate elements rendered in a shadow DOM with the `Element.shadowRoot` property. 
 
 ### Assert text presence
+
+{{< img src="synthetics/guide/browser-tests-using-shadow-dom/validate-text-in-shadow-dom.png" alt="Validate text rendered in a shadow DOM" style="width:90%;" >}}
 
 To validate that the text "TODO" appears on a page, query the `innerHTML` property directly from the `<body>` element of the main document.
 
@@ -48,13 +52,15 @@ let element = document.querySelector("body > editable-list")
 // use shadowRoot property to locate the <h3> element in the Shadow DOM:
 let shadowDomElement = element.shadowRoot.querySelector("div > h3")
  
-// check textContent of Shadow DOM element:
+// check textContent of the Shadow DOM element:
 return shadowDomElement.textContent.includes("TODO")
 ```
 
 ### Confirm entered text
 
 To enter text into a text `<input>` field rendered in a shadow DOM, locate the `<input>` element and set the `value` field.
+
+{{< img src="synthetics/guide/browser-tests-using-shadow-dom/validate-text-type.png" alt="Validate entered text rendered in a shadow DOM" style="width:90%;" >}}
 
 For example, the following code snippet validates that the text "Item added with JS assertion" is added in the input field:
 
@@ -65,7 +71,7 @@ let element = document.querySelector("body > editable-list")
 // use shadowRoot property to locate the <input> element in the Shadow DOM:
 let shadowDomInput = element.shadowRoot.querySelector("input")
  
-// Set value property of <input> element:
+// set the value property of the <input> element:
 shadowDomInput.value = "Item added with JS assertion"
  
 return true
@@ -74,6 +80,8 @@ return true
 ### Click on an element
 
 To trigger a click on an element rendered in a shadow DOM, locate the respective element and run `.click()` on it.
+
+{{< img src="synthetics/guide/browser-tests-using-shadow-dom/validate-trigger-click.png" alt="Validate triggered click on an element rendered in a shadow DOM" style="width:80%;" >}}
 
 For example, the following code snippet triggers a click on a button element.
 
@@ -84,7 +92,7 @@ let element = document.querySelector("body > editable-list")
 // use shadowRoot property to locate the <button> element in the Shadow DOM:
 let shadowDomButton = element.shadowRoot.querySelector("button.editable-list-add-item")
  
-// Trigger click on button:
+// trigger a click on the button:
 shadowDomButton.click()
  
 return true
@@ -95,6 +103,8 @@ return true
 TBD
 
 ## Closed mode
+
+{{< img src="synthetics/guide/browser-tests-using-shadow-dom/closed-shadow-dom.png" alt="Closed Shadow DOM" style="width:30%;" >}}
 
 In `closed` mode, the elements rendered in a shadow DOM are not accessible with JavaScript. You cannot use JavaScript assertions in your browser tests.
 
