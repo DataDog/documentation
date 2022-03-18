@@ -11,9 +11,11 @@ This locked mechanism is deprecated and monitors now rely on a new role restrict
 You might have a number of old monitors still leveraging locked under the hood. The locked parameter is still supported, which means that at the API/Terraform level, the migration from locked to restricted_roles can be done progressively.
 In the UI, the migration to this new role restriction option is done automatically on save.
 
-Below are some instructions on how to proceed in case your monitor is locked.
+Below are some instructions on how to proceed in case your monitor is locked, depending on your permissions/roles.
 
-## How to proceed
+
+
+## Locked monitors with Admin/creator permissions
 
 You are editing your monitor and seeing the below warning.
 
@@ -34,6 +36,18 @@ Add a random role, remove it, click **Save**.
 **3. You want to your monitor to be restricted to some roles, but not the exact equivalent of the previous locked option**
 
 Select the roles you want this monitor to be restricted to. This will override the locked equivalent set of roles to only the ones you specify.
+
+  
+  
+## Locked monitors with non Admin/creator permissions
+
+You are editing your monitor and seeing the below warning.
+
+<TO DO: ADD SCREENSHOT OF WARNING>
+
+As mentioned in the warning, this monitor was locked in the previous system. You should consequently reach out to admin/creator of the monitor for them to update the monitor to include one of the roles you belong to. Your admin will have to follow guidelines in the above section (2. or 3.).
+
+The discrepancy you are seeing between the warning and the below option is expected. The warning reflects the current state of the monitor that is still using the old lcoked parameter. The option reflects the new option that your monitor will be migrated to once an admin/its creator edits it. Restricted roles will only populate the dropdown after the migration.
 
 
 [1]: link
