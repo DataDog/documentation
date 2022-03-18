@@ -4,15 +4,105 @@ kind: guide
 further_reading:
     - link: '/synthetics/browser_tests'
       tag: 'Documentation'
-      text: 'Learn about browser tests'
+      text: 'Learn about Browser Tests'
 ---
 
 ## Overview
 
-Shadow Document Object Model (DOM) is a lightweight mechanism to scope CSS and hide DOM trees in a web component. 
+The Shadow Document Object Model (DOM) API is a web component that allows an encapsulated DOM tree to be attached to an HTML element. The [shadow DOM][1] is self-contained and stays isolated from the main document's DOM. 
 
+You may use a shadow DOM for the following use cases:
+
+- Forms and components from third-party libraries
+- Embedded content (such as a video or an image)
+- Chat pop-up integrations
+
+<div class="alert alert-info">
+Because the shadow DOM is encapsulated from the HTML element, Synthetic browser tests have limited access to elements rendered in the shadow DOM. The full suite of available actions and assertions may not be supported for shadow DOM elements.
+</div>
+
+Depending on the [encapsulation mode][2] and the step objective, you can leverage browser test actions to configure a test that interacts with and validates elements rendered within a shadow DOM. 
+
+## Open mode
+
+In `open` mode, you can use JavaScript assertions to interact with and validate elements rendered in a shadow DOM with the `Element.shadowRoot` property. 
+
+### Assert text presence
+
+To validate that the text "TODO" appears on a page, query the `innerHTML` property directly from the `<body>` element of the main document.
+
+```HTML
+return document.querySelector("body").innerHTML.includes("TODO")
+```
+
+### Validate rendered text
+
+To validate that text is rendered within a given element rendered in a shadow DOM, use the `shadowRoot` property to access the respective element and `innerHTML` or `textContent` properties to validate the text is rendered.
+
+For example, the following code snippet validates the text "TODO" rendered in an `<h3>` HTML tag:
+
+```
+// find element to which the Shadow DOM is attached:
+let element = document.querySelector("body > editable-list")
+ 
+// use shadowRoot property to locate the <h3> element in the Shadow DOM:
+let shadowDomElement = element.shadowRoot.querySelector("div > h3")
+ 
+// check textContent of Shadow DOM element:
+return shadowDomElement.textContent.includes("TODO")
+```
+
+### Confirm entered text
+
+To enter text into a text `<input>` field rendered in a shadow DOM, locate the `<input>` element and set the `value` field.
+
+For example, the following code snippet validates that the text "Item added with JS assertion" is added in the input field:
+
+```
+// find element to which the Shadow DOM is attached:
+let element = document.querySelector("body > editable-list")
+ 
+// use shadowRoot property to locate the <input> element in the Shadow DOM:
+let shadowDomInput = element.shadowRoot.querySelector("input")
+ 
+// Set value property of <input> element:
+shadowDomInput.value = "Item added with JS assertion"
+ 
+return true
+```
+
+### Click on an element
+
+To trigger a click on an element rendered in a shadow DOM, locate the respective element and run `.click()` on it.
+
+For example, the following code snippet triggers a click on a button element.
+
+```
+// find element to which the Shadow DOM is attached:
+let element = document.querySelector("body > editable-list")
+ 
+// use shadowRoot property to locate the <button> element in the Shadow DOM:
+let shadowDomButton = element.shadowRoot.querySelector("button.editable-list-add-item")
+ 
+// Trigger click on button:
+shadowDomButton.click()
+ 
+return true
+```
+
+### Advanced form submission
+
+TBD
+
+## Closed mode
+
+In `closed` mode, the elements rendered in a shadow DOM are not accessible with JavaScript. You cannot use JavaScript assertions in your browser tests.
+
+However, you can use the `Press Key` action to select the appropriate option. For example, to navigate to a different page by selecting an option from a navigation menu and the menu is rendered in a shadow DOM, use the `tab` key to navigate to the respective option and click the `enter` key to select an option.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+[1]: https://developers.google.com/web/fundamentals/web-components/shadowdom
+[2]: https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM#basic_usage
