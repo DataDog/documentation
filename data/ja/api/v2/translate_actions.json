@@ -1,0 +1,622 @@
+{
+  "ListAPIKeys": {
+    "description": "アカウントで利用できるすべての API キーを一覧表示します。",
+    "summary": "すべての API キーを取得"
+  },
+  "CreateAPIKey": {
+    "description": "API キーを作成します。",
+    "summary": "API キーの作成",
+    "request_description": "",
+    "request_schema_description": "API キーの作成に使用されるリクエスト。"
+  },
+  "DeleteAPIKey": {
+    "description": "API キーを削除します。",
+    "summary": "API キーの削除"
+  },
+  "GetAPIKey": {
+    "description": "API キーを取得します。",
+    "summary": "API キーを取得する"
+  },
+  "UpdateAPIKey": {
+    "description": "API キーを更新します。",
+    "summary": "API キーの編集",
+    "request_description": "",
+    "request_schema_description": "API キーの更新に使用されるリクエスト。"
+  },
+  "ListApplicationKeys": {
+    "description": "組織で利用できるすべてのアプリケーションキーを一覧表示",
+    "summary": "すべてのアプリケーションキーを取得"
+  },
+  "DeleteApplicationKey": {
+    "description": "アプリケーションキーの削除",
+    "summary": "アプリケーションキーの削除"
+  },
+  "GetApplicationKey": {
+    "description": "オーガニゼーションのアプリケーションキーを取得します。",
+    "summary": "アプリケーションキーの取得"
+  },
+  "UpdateApplicationKey": {
+    "description": "アプリケーションキーの編集",
+    "summary": "アプリケーションキーの編集",
+    "request_description": "",
+    "request_schema_description": "アプリケーションキーの更新に使用されるリクエスト。"
+  },
+  "ListAuditLogs": {
+    "description": "リストエンドポイントは、監査ログ検索クエリと一致するイベントを返します。\n[結果はページ区切りされます][1]。\n\nこのエンドポイントを使用して、最新の監査ログイベントを確認します。\n\n[1]: https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination",
+    "summary": "監査ログイベントのリストを取得"
+  },
+  "SearchAuditLogs": {
+    "description": "リストエンドポイントは、監査検索クエリと一致する監査ログイベントを返します。\n[結果はページ区切りされます][1]。\n\nこのエンドポイントを使用して、複雑な監査ログイベントの絞り込みと検索を構築します。\n\n[1]: https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination",
+    "summary": "監査ログイベントの検索",
+    "request_description": "",
+    "request_schema_description": "監査ログイベントリストのリクエスト。"
+  },
+  "ListAuthNMappings": {
+    "description": "オーガニゼーション内のすべての AuthN Mappings のリスト。",
+    "summary": "すべての AuthN Mappings のリスト"
+  },
+  "CreateAuthNMapping": {
+    "description": "AuthN Mapping を作成します。",
+    "summary": "AuthN Mapping を作成",
+    "request_description": "",
+    "request_schema_description": "AuthN Mapping の作成リクエスト。"
+  },
+  "DeleteAuthNMapping": {
+    "description": "AuthN Mapping UUID で指定された AuthN Mapping を削除します。",
+    "summary": "AuthN Mapping を削除"
+  },
+  "GetAuthNMapping": {
+    "description": "AuthN Mapping UUID で指定された AuthN Mapping を取得します。",
+    "summary": "AuthN Mapping を取得"
+  },
+  "UpdateAuthNMapping": {
+    "description": "AuthN Mapping を編集します。",
+    "summary": "AuthN Mapping を編集",
+    "request_description": "",
+    "request_schema_description": "AuthN Mapping の更新リクエスト。"
+  },
+  "ListCurrentUserApplicationKeys": {
+    "description": "現在のユーザーが利用できるすべてのアプリケーションキーを一覧表示",
+    "summary": "現在のユーザーが所有するすべてのアプリケーションキーを取得する"
+  },
+  "CreateCurrentUserApplicationKey": {
+    "description": "現在のユーザーのアプリケーションキーを作成します",
+    "summary": "現在のユーザーのアプリケーションキーを作成します",
+    "request_description": "",
+    "request_schema_description": "アプリケーションキーの作成に使用されるリクエスト。"
+  },
+  "DeleteCurrentUserApplicationKey": {
+    "description": "現在のユーザーが所有するアプリケーションキーを削除します",
+    "summary": "現在のユーザーが所有するアプリケーションキーを削除します"
+  },
+  "GetCurrentUserApplicationKey": {
+    "description": "現在のユーザーが所有するアプリケーションキーを 1 つ取得",
+    "summary": "現在のユーザーが所有するアプリケーションキーを 1 つ取得します"
+  },
+  "UpdateCurrentUserApplicationKey": {
+    "description": "現在のユーザーが所有するアプリケーションキーを編集します",
+    "summary": "現在のユーザーが所有するアプリケーションキーを編集します",
+    "request_description": "",
+    "request_schema_description": "アプリケーションキーの更新に使用されるリクエスト。"
+  },
+  "DeleteDashboardListItems": {
+    "description": "既存のダッシュボードリストからダッシュボードを削除します。",
+    "summary": "ダッシュボードリストからアイテムを削除する",
+    "request_description": "ダッシュボードリストから削除するダッシュボード。",
+    "request_schema_description": "削除するダッシュボードのリストを含むリクエスト。"
+  },
+  "GetDashboardListItems": {
+    "description": "ダッシュボードリストのダッシュボード定義を取得します。",
+    "summary": "ダッシュボードリストのアイテムを取得する"
+  },
+  "CreateDashboardListItems": {
+    "description": "既存のダッシュボードリストにダッシュボードを追加します。",
+    "summary": "ダッシュボードリストへの項目の追加",
+    "request_description": "ダッシュボードリストに追加するダッシュボード。",
+    "request_schema_description": "追加するダッシュボードのリストを含むリクエスト。"
+  },
+  "UpdateDashboardListItems": {
+    "description": "既存のダッシュボードリストのダッシュボードを更新します。",
+    "summary": "ダッシュボードリストのアイテムを更新する",
+    "request_description": "ダッシュボードリストの新しいダッシュボード。",
+    "request_schema_description": "更新するダッシュボードのリストを含むリクエスト。"
+  },
+  "ListIncidents": {
+    "description": "ユーザーの組織のすべてのインシデントを取得します。",
+    "summary": "インシデントリストを取得"
+  },
+  "CreateIncident": {
+    "description": "インシデントを作成します。",
+    "summary": "インシデントを作成",
+    "request_description": "インシデントのペイロード。",
+    "request_schema_description": "インシデントのリクエストを作成します。"
+  },
+  "DeleteIncident": {
+    "description": "ユーザーの組織から既存のインシデントを削除します。",
+    "summary": "既存のインシデントを削除"
+  },
+  "GetIncident": {
+    "description": "`incident_id` でインシデントの詳細を取得します。",
+    "summary": "インシデントの詳細を取得"
+  },
+  "UpdateIncident": {
+    "description": "インシデントを更新します。このリクエストは部分的な更新なので、更新が必要な属性のみを指定してください。",
+    "summary": "既存のインシデントを更新",
+    "request_description": "インシデントのペイロード。",
+    "request_schema_description": "インシデントのリクエストを更新します。"
+  },
+  "SubmitLog": {
+    "description": "HTTP を使用して Datadog プラットフォームにログを送信します。HTTP リクエストごとの制限は以下のとおりです。\n\n- ペイロードあたりの最大コンテンツサイズ (非圧縮) : 5MB\n- 単一ログの最大サイズ : 1MB\n- アレイで複数のログを送信する場合の最大アレイサイズ : 1000 エントリ\n\n1MB を超えるログは、Datadog によって受け入れられ、切り捨てられます。\n- 単一のログリクエストの場合、API はログを 1MB で切り捨て、2xx を返します.\n- マルチログリクエストの場合、API はすべてのログを処理し、1MB を超えるログのみを切り捨て、2xx を返します。\n\nDatadog では、圧縮されたログを送信することをお勧めしています。\n圧縮されたログを送信するときは、リクエストに `Content-Encoding: gzip` ヘッダーを追加します。\n\nHTTP API により回答されるステータスコード :\n- 202: Accepted: 処理リクエストを受信済み\n- 400: Bad request (ペイロードの形式の問題など)- 401: Unauthorized (API キーの不足など)\n\n- 403: Permission issue (無効な API キーの使用など)\n- 408: Request Timeout (しばらくしてからリクエストを再試行)\n- 413: Payload too large (バッチのサイズが非圧縮で 5MB 以上)\n- 429: Too Many Requests (しばらくしてからリクエストを再試行)\n- 500: Internal Server Error (サーバーがリクエストの遂行を阻む予期せぬ状況がサーバーに発生、しばらくしてからリクエストを再試行)\n- 503: Service Unavailable (おそらく過負荷によりサーバーがリクエストに対応できないため、しばらくしてからリクエストを再試行)",
+    "summary": "ログを送信する",
+    "request_description": "送信するログ (JSON 形式) 。",
+    "request_schema_description": "構造化されたログメッセージ。"
+  },
+  "AggregateLogs": {
+    "description": "イベントをバケットに集約しメトリクスと時系列を計算する API エンドポイント。",
+    "summary": "イベントを集計する",
+    "request_description": "",
+    "request_schema_description": "オーガニゼーションからログのリストを取得するリクエストと共に送信されたオブジェクト。"
+  },
+  "GetLogsArchiveOrder": {
+    "description": "アーカイブの現在の順序を取得します。\nこのエンドポイントは、JSON 引数を受け取りません。",
+    "summary": "アーカイブの順序を取得する"
+  },
+  "UpdateLogsArchiveOrder": {
+    "description": "アーカイブの順序を更新します。ログは順番に処理されるため、アーカイブの順序を変更すると、\n他のアーカイブで処理されるデータの構造や内容が変化する可能性があります。\n\n**注**: `PUT` メソッドを使用すると、現在の順序を新しい順序に置き換えてアーカイブの順序が\n更新されます。",
+    "summary": "アーカイブの順序を更新する",
+    "request_description": "新しい順序のアーカイブ ID リストを含むオブジェクト",
+    "request_schema_description": "アーカイブ ID の順序付きリスト。"
+  },
+  "ListLogsArchives": {
+    "description": "構成されたログアーカイブとその定義のリストを取得します。",
+    "summary": "すべてのアーカイブを取得する"
+  },
+  "CreateLogsArchive": {
+    "description": "オーガニゼーションにアーカイブを作成します。",
+    "summary": "アーカイブを作成する",
+    "request_description": "新しいアーカイブの定義。",
+    "request_schema_description": "ログアーカイブ。"
+  },
+  "DeleteLogsArchive": {
+    "description": "指定されたアーカイブをオーガニゼーションから削除します。",
+    "summary": "アーカイブを削除する"
+  },
+  "GetLogsArchive": {
+    "description": "オーガニゼーションから特定のアーカイブを取得します。",
+    "summary": "アーカイブを取得する"
+  },
+  "UpdateLogsArchive": {
+    "description": "特定のアーカイブ構成を更新します。\n\n**注**: このメソッドを使用すると、現在の構成を Datadog Organization に送信された新しい構成に**置き換えて**、アーカイブ構成が更新されます。",
+    "summary": "アーカイブを更新する",
+    "request_description": "アーカイブの新しい定義。",
+    "request_schema_description": "ログアーカイブ。"
+  },
+  "RemoveRoleFromArchive": {
+    "description": "アーカイブからロールを削除する。([Roles API](https://docs.datadoghq.com/api/v2/roles/))",
+    "summary": "アーカイブからロールを取り消す",
+    "request_description": "",
+    "request_schema_description": "ロールとの関係。"
+  },
+  "ListArchiveReadRoles": {
+    "description": "指定されたアーカイブが制限されているすべての読み取りロールを返します。",
+    "summary": "アーカイブの読み取りロールを一覧表示する"
+  },
+  "AddReadRoleToArchive": {
+    "description": "アーカイブに読み取りロールを追加する。([Roles API](https://docs.datadoghq.com/api/v2/roles/))",
+    "summary": "アーカイブにロールを付与する",
+    "request_description": "",
+    "request_schema_description": "ロールとの関係。"
+  },
+  "ListLogsMetrics": {
+    "description": "構成されたログベースのメトリクスとその定義のリストを取得します。",
+    "summary": "すべてのログベースのメトリクスを取得する"
+  },
+  "CreateLogsMetric": {
+    "description": "オーガニゼーションで収集されたログに基づきメトリクスを作成します。\nリクエストが正常に完了すると、リクエスト本文からログベースのメトリクスオブジェクトを返します。",
+    "summary": "ログベースのメトリクスを作成する",
+    "request_description": "新しいログベースメトリクスの定義。",
+    "request_schema_description": "新しいログベースのメトリクス本文。"
+  },
+  "DeleteLogsMetric": {
+    "description": "オーガニゼーションから特定のログベースメトリクスを削除します。",
+    "summary": "ログベースのメトリクスを削除する"
+  },
+  "GetLogsMetric": {
+    "description": "オーガニゼーションから特定のログベースメトリクスを取得します。",
+    "summary": "ログベースのメトリクスを取得する"
+  },
+  "UpdateLogsMetric": {
+    "description": "オーガニゼーションの特定のログベースメトリクスを更新します。\nリクエストが正常に完了すると、リクエスト本文からログベースのメトリクスオブジェクトを返します。",
+    "summary": "ログベースのメトリクスを更新する",
+    "request_description": "ログベースメトリクスの新しい定義。",
+    "request_schema_description": "新しいログベースのメトリクス本文。"
+  },
+  "ListRestrictionQueries": {
+    "description": "名前と ID を含むすべての制限クエリを返します。",
+    "summary": "制限クエリを一覧表示する"
+  },
+  "CreateRestrictionQuery": {
+    "description": "オーガニゼーション用に新しい制限クエリを作成します。",
+    "summary": "制限クエリを作成する",
+    "request_description": "",
+    "request_schema_description": "制限クエリを作成します。"
+  },
+  "GetRoleRestrictionQuery": {
+    "description": "特定のロールの制限クエリを取得します。",
+    "summary": "特定のロールの制限クエリを取得する"
+  },
+  "ListUserRestrictionQueries": {
+    "description": "特定のユーザーのすべての制限クエリを取得します。",
+    "summary": "特定のユーザーのすべての制限クエリを取得する"
+  },
+  "DeleteRestrictionQuery": {
+    "description": "制限クエリを削除します。",
+    "summary": "制限クエリを削除する"
+  },
+  "GetRestrictionQuery": {
+    "description": "制限クエリの `restriction_query_id` に基づいて、オーガニゼーション内の制限クエリを取得します。",
+    "summary": "制限クエリを取得する"
+  },
+  "UpdateRestrictionQuery": {
+    "description": "制限クエリを編集します。",
+    "summary": "制限クエリを更新する",
+    "request_description": "",
+    "request_schema_description": "制限クエリを更新します。"
+  },
+  "RemoveRoleFromRestrictionQuery": {
+    "description": "制限クエリからロールを削除します。",
+    "summary": "制限クエリからロールを取り消す",
+    "request_description": "",
+    "request_schema_description": "ロールとの関係。"
+  },
+  "ListRestrictionQueryRoles": {
+    "description": "指定された制限クエリを持つすべてのロールを返します。",
+    "summary": "制限クエリのロールを一覧表示する"
+  },
+  "AddRoleToRestrictionQuery": {
+    "description": "制限クエリにロールを追加します。",
+    "summary": "制限クエリにロールを付与する",
+    "request_description": "",
+    "request_schema_description": "ロールとの関係。"
+  },
+  "ListLogsGet": {
+    "description": "リストエンドポイントは、ログ検索クエリと一致するログを返します。\n[結果はページ区切りされます][1]。\n\n最新のログを見るにはこのエンドポイントを使用してください。\n\n**オーガニゼーションのためのログのアーカイブを目的とする場合は、\nログリスト API の代わりに Datadog のアーカイブ機能の使用を検討してください。\n[Datadog のログのアーカイブに関するドキュメント][2]を参照してください。**\n\n[1]: /logs/guide/collect-multiple-logs-with-pagination\n[2]: https://docs.datadoghq.com/logs/archives",
+    "summary": "ログのリストの取得"
+  },
+  "ListLogs": {
+    "description": "リストエンドポイントは、ログ検索クエリと一致するログを返します。\n[結果はページ区切りされます][1]。\n\n複雑なログフィルタリングおよび検索を構築するにはこのエンドポイントを使用してください。\n\n**オーガニゼーションのためのログのアーカイブを目的とする場合は、\nログリスト API の代わりに Datadog のアーカイブ機能の使用を検討してください。\n[Datadog のログのアーカイブに関するドキュメント][2]を参照してください。**\n\n[1]: /logs/guide/collect-multiple-logs-with-pagination\n[2]: https://docs.datadoghq.com/logs/archives",
+    "summary": "Search logs",
+    "request_description": "",
+    "request_schema_description": "ログリストのリクエスト。"
+  },
+  "ListTagConfigurations": {
+    "description": "構成済みの count/gauge/rate/distribution メトリクス名をすべて返します\n(指定された場合は追加のフィルターを適用)。",
+    "summary": "タグコンフィギュレーションを一覧表示する"
+  },
+  "DeleteBulkTagsMetricsConfiguration": {
+    "description": "既存の count、gauge、rate、distribution メトリクスについて、クエリが可能なタグキーのすべてのカスタムリストを削除します。\nメトリクスは、メトリクス名のプレフィックスを渡すことで選択できます。\nDatadog ウェブアプリでの操作と同様に、結果はアカウントのメールアドレスに送信できます。\n`Manage Tags for Metrics` 権限を持つユーザーが発行したアプリケーションキーのみで使用できます。",
+    "summary": "複数のメトリクスにタグを構成",
+    "request_description": "",
+    "request_schema_description": "1 回の一括タグ削除リクエストのラッパーオブジェクト。"
+  },
+  "CreateBulkTagsMetricsConfiguration": {
+    "description": "既存の count、gauge、rate、distribution メトリクスについて、クエリが可能なタグキーの一覧を作成および定義します。\nメトリクスは、メトリクス名のプレフィックスを渡すことで選択できます。タグのコンフィギュレーションを削除するには、この API パスの削除メソッドを使用します。\n Datadog ウェブアプリでの操作と同様に、結果はアカウントのメールアドレスに送信できます。\n複数の呼び出しに同じメトリクスが含まれる場合は、最後に適用されたコンフィギュレーションが使用され（送信した順ではない）ます。\n同時に実行される呼び出しの決定論的順序を期待しないようにしてください。\n`Manage Tags for Metrics` 権限を持つユーザーが発行したアプリケーションキーのみで使用できます。",
+    "summary": "複数のメトリクスにタグを構成",
+    "request_description": "",
+    "request_schema_description": "1 回の一括タグコンフィギュレーションリクエストのラッパーオブジェクト。"
+  },
+  "ListTagsByMetricName": {
+    "description": "特定のメトリクス名のインデックス付きタグキーと値ペアを表示します。",
+    "summary": "メトリクス名でタグを一覧表示する"
+  },
+  "DeleteTagConfiguration": {
+    "description": "メトリクスのタグ付けコンフィギュレーションを削除します。`Manage Tags for Metrics` 権限を持つ\nユーザーが発行したアプリケーションキーのみを使用できます。",
+    "summary": "タグコンフィギュレーションを削除する"
+  },
+  "ListTagConfigurationByName": {
+    "description": "特定のメトリクス名のタグ付けコンフィギュレーションを返します。",
+    "summary": "タグコンフィギュレーションを名前で一覧表示する"
+  },
+  "UpdateTagConfiguration": {
+    "description": "メトリクス、分散型メトリクスのパーセンタイル集計、または既存の count、gauge、rate、distribution メトリクスのカスタム集計のタグ付けコンフィギュレーションを更新します。\n`Manage Tags for Metrics` 権限を持つユーザーが発行したアプリケーションキーのみを使用できます。",
+    "summary": "タグコンフィギュレーションを更新する",
+    "request_description": "",
+    "request_schema_description": "タグ付けコンフィギュレーションを編集したいメトリクスを含むオブジェクトをリクエストします。"
+  },
+  "CreateTagConfiguration": {
+    "description": "既存の count/gauge/rate/distribution メトリクスについて、クエリが可能なタグキーの一覧を作成および定義します。\nオプションで、任意の分散型メトリクスについてのパーセンタイル集計を含めるか、任意の count、rate、または gauge メトリクスのカスタム集計を構成することができます。\n`Manage Tags for Metrics` 権限を持つユーザーが発行したアプリケーションキーのみを使用できます。",
+    "summary": "タグコンフィギュレーションを作成する",
+    "request_description": "",
+    "request_schema_description": "タグを構成したいメトリクスを含むオブジェクトをリクエストします。"
+  },
+  "ListVolumesByMetricName": {
+    "description": "特定のメトリクス名の個別のメトリクスボリュームを表示します。\n\nカスタムディストリビューションメトリクスは、取り込まれたカスタムメトリクスボリュームとインデックス化されたカスタムメトリクスボリュームの両方を返します。\nMetrics without Limits™ のベータ版をご利用の場合、すべてのメトリクスが取り込まれたボリュームとインデックス化されたボリュームの両方を返します。\n他の製品のアプリ内で生成されたカスタムメトリクスは、取り込まれたボリュームに対し `null` を返します。",
+    "summary": "メトリクス名で個別のメトリクスボリュームを一覧表示する"
+  },
+  "ListPermissions": {
+    "description": "名前、説明、ID を含むすべてのアクセス許可のリストを返します。",
+    "summary": "アクセス許可を一覧表示する"
+  },
+  "ListProcesses": {
+    "description": "組織のすべてのプロセスを取得します。",
+    "summary": "すべてのプロセスを取得"
+  },
+  "ListRoles": {
+    "description": "名前とその一意の識別子を含むすべてのロールを返します。",
+    "summary": "ロールを一覧表示する"
+  },
+  "CreateRole": {
+    "description": "オーガニゼーション用に新しいロールを作成します。",
+    "summary": "ロールを作成する",
+    "request_description": "",
+    "request_schema_description": "ロールを作成します。"
+  },
+  "DeleteRole": {
+    "description": "ロールを無効にします。",
+    "summary": "ロールの削除"
+  },
+  "GetRole": {
+    "description": "ロールの `role_id` に基づいて、オーガニゼーション内のロールを取得します。",
+    "summary": "ロールを取得する"
+  },
+  "UpdateRole": {
+    "description": "ロールを編集します。この機能は、管理者に属するアプリケーションキーを持つ場合にのみ使用できます。",
+    "summary": "ロールを更新する",
+    "request_description": "",
+    "request_schema_description": "ロールを更新します。"
+  },
+  "CloneRole": {
+    "description": "既存ロールのクローンを作成",
+    "summary": "既存のロールのクローンを作成して新しいロールを作成",
+    "request_description": "",
+    "request_schema_description": "既存のロールのクローンを作成して新しいロールの作成をリクエストします。"
+  },
+  "RemovePermissionFromRole": {
+    "description": "ロールからアクセス許可を削除。",
+    "summary": "アクセス許可の取り消し",
+    "request_description": "",
+    "request_schema_description": "アクセス許可オブジェクトとの関係。"
+  },
+  "ListRolePermissions": {
+    "description": "単一のロールのすべてのアクセス許可のリストを返します。",
+    "summary": "ロールのアクセス許可を一覧表示する"
+  },
+  "AddPermissionToRole": {
+    "description": "ロールにアクセス許可を追加する。",
+    "summary": "ロールにアクセス許可を付与する",
+    "request_description": "",
+    "request_schema_description": "アクセス許可オブジェクトとの関係。"
+  },
+  "RemoveUserFromRole": {
+    "description": "ロールからユーザーを削除",
+    "summary": "ロールからユーザーを削除",
+    "request_description": "",
+    "request_schema_description": "ユーザーとの関係。"
+  },
+  "ListRoleUsers": {
+    "description": "ロールのすべてのユーザーの取得",
+    "summary": "ロールのすべてのユーザーの取得"
+  },
+  "AddUserToRole": {
+    "description": "ロールにユーザーを追加する。",
+    "summary": "ロールにユーザーを追加する",
+    "request_description": "",
+    "request_schema_description": "ユーザーとの関係。"
+  },
+  "ListRUMEvents": {
+    "description": "リストエンドポイントは、RUM 検索クエリと一致するイベントを返します。\n[結果はページ区切りされます][1]。\n\nこのエンドポイントを使用して、最新の RUM イベントを確認します。\n\n[1]: https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination",
+    "summary": "RUM イベントのリストを取得"
+  },
+  "SearchRUMEvents": {
+    "description": "リストエンドポイントは、RUM 検索クエリと一致する RUM イベントを返します。\n[結果はページ区切りされます][1]。\n\nこのエンドポイントを使用して、複雑な RUM イベントの絞り込みと検索を構築します。\n\n[1]: https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination",
+    "summary": "RUM イベントの検索",
+    "request_description": "",
+    "request_schema_description": "RUM イベントリストのリクエスト。"
+  },
+  "DownloadCloudWorkloadPolicyFile": {
+    "description": "ダウンロードエンドポイントは、現在有効なクラウドワークロードセキュリティルールからクラウドワークロードセキュリティポリシーファイルを生成し、\n .policy ファイルとしてダウンロードします。それからこのファイルは　\nAgent にデプロイされ、環境で実行中のポリシーを更新します。",
+    "summary": "最新のクラウドワークロードセキュリティポリシーを取得"
+  },
+  "ListCloudWorkloadSecurityAgentRules": {
+    "description": "Agent ルールのリストを取得します。",
+    "summary": "すべての Cloud Workload Security Agent ルールを取得"
+  },
+  "CreateCloudWorkloadSecurityAgentRule": {
+    "description": "指定されたパラメーターで新しい Agent ルールを作成します。",
+    "summary": "Cloud Workload Security Agent ルールを作成",
+    "request_description": "新しい Agent ルールの定義。",
+    "request_schema_description": "作成する Agent ルールを含むオブジェクトをリクエストします。"
+  },
+  "DeleteCloudWorkloadSecurityAgentRule": {
+    "description": "特定の Agent ルールを削除します。",
+    "summary": "Cloud Workload Security Agent ルールを削除"
+  },
+  "GetCloudWorkloadSecurityAgentRule": {
+    "description": "特定の Agent ルールの詳細を取得します。",
+    "summary": "Cloud Workload Security Agent ルールを取得"
+  },
+  "UpdateCloudWorkloadSecurityAgentRule": {
+    "description": "特定の Agent ルールを更新します。\nリクエストが正常に完了すると、Agent ルールオブジェクトを返します。",
+    "summary": "Cloud Workload Security Agent ルールを更新",
+    "request_description": "Agent ルールの新しい定義。",
+    "request_schema_description": "更新する属性のある Agent ルールを含むオブジェクトをリクエストします。"
+  },
+  "ListSecurityFilters": {
+    "description": "構成されたセキュリティフィルターとその定義のリストを取得します。",
+    "summary": "すべてのセキュリティフィルターを取得"
+  },
+  "CreateSecurityFilter": {
+    "description": "セキュリティフィルターを作成します。\n\nほかの例については、[セキュリティフィルターガイド](https://docs.datadoghq.com/security_platform/guide/how-to-setup-security-filters-using-security-monitoring-api/)\nを参照してください。",
+    "summary": "セキュリティフィルターを作成",
+    "request_description": "新しいセキュリティフィルターの定義。",
+    "request_schema_description": "作成したいセキュリティフィルターを含むオブジェクトをリクエストします。"
+  },
+  "DeleteSecurityFilter": {
+    "description": "特定のセキュリティフィルターを削除します。",
+    "summary": "セキュリティフィルターを削除"
+  },
+  "GetSecurityFilter": {
+    "description": "特定のセキュリティフィルターの詳細を取得します。\n\nほかの例については、[セキュリティフィルターガイド](https://docs.datadoghq.com/security_platform/guide/how-to-setup-security-filters-using-security-monitoring-api/)\nを参照してください。",
+    "summary": "セキュリティフィルターを取得"
+  },
+  "UpdateSecurityFilter": {
+    "description": "特定のセキュリティフィルターを更新します。\nリクエストが正常に完了すると、セキュリティフィルターオブジェクトを返します。",
+    "summary": "セキュリティフィルターを更新",
+    "request_description": "セキュリティフィルターの新たな定義。",
+    "request_schema_description": "新しいセキュリティフィルターの本文。"
+  },
+  "ListSecurityMonitoringRules": {
+    "description": "規則のリスト。",
+    "summary": "規則のリスト"
+  },
+  "CreateSecurityMonitoringRule": {
+    "description": "検出ルールを作成します。",
+    "summary": "検出ルールを作成する",
+    "request_description": "",
+    "request_schema_description": "新しい規則を作成します。"
+  },
+  "DeleteSecurityMonitoringRule": {
+    "description": "既存の規則を削除します。デフォルトの規則は削除できません。",
+    "summary": "既存の規則を削除します"
+  },
+  "GetSecurityMonitoringRule": {
+    "description": "規則の詳細を取得します。",
+    "summary": "規則の詳細を取得する"
+  },
+  "UpdateSecurityMonitoringRule": {
+    "description": "既存の規則を更新します。`cases`、`queries`、`options` を更新する場合、フィールド全体を\n含める必要があります。たとえば、クエリを変更する場合、全てのクエリを含める必要があります。\nデフォルトの規則は、有効にして通知を変更する場合にのみ更新できます。",
+    "summary": "既存の規則を更新します",
+    "request_description": "",
+    "request_schema_description": "既存の規則を更新します。"
+  },
+  "ListSecurityMonitoringSignals": {
+    "description": "リストエンドポイントは、検索クエリと一致するセキュリティシグナルを返します。\nこのエンドポイントと POST エンドポイントは、セキュリティシグナルを一覧表示する際に互いに交換して使用できます。 ",
+    "summary": "セキュリティシグナルの簡易リストの取得"
+  },
+  "SearchSecurityMonitoringSignals": {
+    "description": "検索クエリと一致するセキュリティシグナルを返します。\nこのエンドポイントと GET エンドポイントは、セキュリティシグナルを一覧表示する際に互いに交換して使用できます。",
+    "summary": "セキュリティシグナルのリストの取得",
+    "request_description": "",
+    "request_schema_description": "セキュリティシグナルのリストをリクエスト"
+  },
+  "CreateServiceAccount": {
+    "description": "オーガニゼーションのサービスアカウントを作成します。",
+    "summary": "サービスアカウントを作成する",
+    "request_description": "",
+    "request_schema_description": "サービスアカウントを作成します。"
+  },
+  "ListServiceAccountApplicationKeys": {
+    "description": "このサービスアカウントで利用できるすべてのアプリケーションキーを一覧表示します。",
+    "summary": "このサービスアカウントのアプリケーションキーを一覧表示する"
+  },
+  "CreateServiceAccountApplicationKey": {
+    "description": "このサービスアカウントのアプリケーションキーを作成します。",
+    "summary": "このサービスアカウントのアプリケーションキーを作成する",
+    "request_description": "",
+    "request_schema_description": "アプリケーションキーの作成に使用されるリクエスト。"
+  },
+  "DeleteServiceAccountApplicationKey": {
+    "description": "このサービスアカウントが所有するアプリケーションキーを削除します。",
+    "summary": "このサービスアカウントのアプリケーションキーを削除する"
+  },
+  "GetServiceAccountApplicationKey": {
+    "description": "このサービスアカウントが所有するアプリケーションキーを取得します。",
+    "summary": "このサービスアカウントのアプリケーションキーを 1 つ取得する"
+  },
+  "UpdateServiceAccountApplicationKey": {
+    "description": "このサービスアカウントが所有するアプリケーションキーを編集します。",
+    "summary": "このサービスアカウントのアプリケーションキーを編集する",
+    "request_description": "",
+    "request_schema_description": "アプリケーションキーの更新に使用されるリクエスト。"
+  },
+  "ListIncidentServices": {
+    "description": "要求するユーザーのオーガニゼーションにアップロードされたすべてのインシデントサービスを取得します。 `include[users]` クエリパラメータが指定される場合、included 属性にはこれらのインシデントサービスに関連するユーザーが含まれます。",
+    "summary": "すべてのインシデントサービスのリストを取得する"
+  },
+  "CreateIncidentService": {
+    "description": "新しいインシデントサービスを作成します。",
+    "summary": "新しいインシデントサービスを作成する",
+    "request_description": "インシデントサービスのペイロード。",
+    "request_schema_description": "インシデントサービスペイロードを使用してリクエストを作成します。"
+  },
+  "DeleteIncidentService": {
+    "description": "既存のインシデントサービスを削除します。",
+    "summary": "既存のインシデントサービスを削除する"
+  },
+  "GetIncidentService": {
+    "description": "インシデントサービスの詳細を取得します。 `include[users]` クエリパラメータが指定される場合、\nincluded 属性にはこれらのインシデントサービスに関連するユーザーが含まれます。",
+    "summary": "インシデントサービスの詳細を取得する"
+  },
+  "UpdateIncidentService": {
+    "description": "既存のインシデントサービスを更新します。このリクエストは部分的な更新なので、更新すべき属性のみを指定してください。",
+    "summary": "既存のインシデントサービスを更新する",
+    "request_description": "インシデントサービスのペイロード。",
+    "request_schema_description": "インシデントサービスペイロードを使用してリクエストを更新します。"
+  },
+  "ListIncidentTeams": {
+    "description": "要求するユーザーのオーガニゼーションのすべてのインシデントチームを取得します。 `include[users]` クエリパラメータが指定される場合、included 属性にはこれらのインシデントチームに関連するユーザーが含まれます。",
+    "summary": "すべてのインシデントチームのリストを取得する"
+  },
+  "CreateIncidentTeam": {
+    "description": "新しいインシデントチームを作成します。",
+    "summary": "新しいインシデントチームを作成する",
+    "request_description": "インシデントチームのペイロード。",
+    "request_schema_description": "インシデントチームペイロードを使用してリクエストを作成します。"
+  },
+  "DeleteIncidentTeam": {
+    "description": "既存のインシデントチームを削除します。",
+    "summary": "既存のインシデントチームを削除する"
+  },
+  "GetIncidentTeam": {
+    "description": "インシデントチームの詳細を取得します。 `include[users]` クエリパラメータが指定される場合、\nincluded 属性にはこれらのインシデントチームに関連するユーザーが含まれます。",
+    "summary": "インシデントチームの詳細を取得する"
+  },
+  "UpdateIncidentTeam": {
+    "description": "既存のインシデントチームを更新します。このリクエストは部分的な更新なので、更新すべき属性のみを指定してください。",
+    "summary": "既存のインシデントチームを更新する",
+    "request_description": "インシデントチームのペイロード。",
+    "request_schema_description": "インシデントチームペイロードを使用してリクエストを更新します。"
+  },
+  "SendInvitations": {
+    "description": "組織への参加を招待するメールを 1 人以上のユーザーに送信します。",
+    "summary": "招待メールを送信する",
+    "request_description": "",
+    "request_schema_description": "ユーザーを組織に招待するオブジェクト。"
+  },
+  "GetInvitation": {
+    "description": "UUID によって単一のユーザー招待を返します。",
+    "summary": "ユーザー招待を取得"
+  },
+  "ListUsers": {
+    "description": "オーガニゼーション内のすべてのユーザーのリストを取得します。このリストには、\n無効または未承認のユーザーを含むすべてのユーザーが含まれます。",
+    "summary": "すべてのユーザーを一覧表示する"
+  },
+  "CreateUser": {
+    "description": "オーガニゼーションのユーザーを作成します。",
+    "summary": "ユーザーを作成する",
+    "request_description": "",
+    "request_schema_description": "ユーザーを作成します。"
+  },
+  "DisableUser": {
+    "description": "ユーザーを無効にします。この機能は、管理者ユーザーに属するアプリケーションキーを持つ場合にのみ使用できます。",
+    "summary": "ユーザーを無効にする"
+  },
+  "GetUser": {
+    "description": "ユーザーの `user_id` に基づいて、オーガニゼーション内のユーザーを取得します。",
+    "summary": "ユーザーの詳細を取得する"
+  },
+  "UpdateUser": {
+    "description": "ユーザーを編集します。この機能は、管理者ユーザーに属するアプリケーションキーを持つ場合にのみ使用できます。",
+    "summary": "ユーザーを更新する",
+    "request_description": "",
+    "request_schema_description": "ユーザーを更新します。"
+  },
+  "ListUserOrganizations": {
+    "description": "ユーザーの組織を取得します。ユーザー情報とそのユーザーが参加するすべての組織を返します。",
+    "summary": "ユーザー組織を取得する"
+  },
+  "ListUserPermissions": {
+    "description": "ユーザーのアクセス許可を取得します。関連するユーザーのロールにより付与されたユーザーのアクセス許可のリストを返します。",
+    "summary": "ユーザーアクセス許可を取得する"
+  }
+}
