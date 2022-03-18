@@ -32,6 +32,8 @@ The .NET Tracer supports the following logging libraries:
 
 ## Getting started
 
+Before you begin, 
+
 To inject correlation identifiers into your log messages, follow the instructions for your logging library.
 
 {{< tabs >}}
@@ -224,6 +226,8 @@ Examples:
 
 **Note**: The Serilog library requires message property names to be valid C# identifiers. The required property names are: `dd_env`, `dd_service`, `dd_version`, `dd_trace_id`, and `dd_span_id`.
 
+**Note**: If you are using Serilog through ILogger, see the [ILogger section](?tab=microsoftextensionslogging#configure-log-collection) to configure these properties via `BeginScope()`.
+
 ```csharp
 using Datadog.Trace;
 using Serilog.Context;
@@ -289,6 +293,8 @@ using (MappedDiagnosticsLogicalContext.SetScoped("dd.span_id", CorrelationIdenti
 {{% /tab %}}
 {{% tab "Microsoft.Extensions.Logging" %}}
 
+*Note:* If you are using Serilog as an ILogger provider, it is preferrably to use this `ILogger.BeginScope()` method as opposed to the Serilog static properties. Passing an `ILogger.BeginScope()` an `IDictionary<string,object>`. See [this blog by the author of Serilog][13].
+
 ```csharp
 using Datadog.Trace;
 using Microsoft.Extensions.Logging;
@@ -314,7 +320,7 @@ using(_logger.BeginScope(new Dictionary<string, object>
 
 ## Configure log collection
 
-Ensure that log collection is configured in the Datadog Agent and that the [Logs Agent configuration][12] for the specified files to tail is set to `source: csharp` so log pipelines can parse the log files. For more information, see [C# Log Collection][7].
+Ensure that log collection is configured in the Datadog Agent and that the [Logs Agent configuration][12] for the specified files to tail is set to `source: csharp` so log pipelines can parse the log files. For more information, see [C# Log Collection][7]. If you do configure the `source` to a value other than `csharp`, add a [trace remapper](/logs/log_configuration/processors/?tab=ui#trace-remapper) to that source so the trace id gets marked. Otherwise correlation will not occur.
 
 <div class="alert alert-warning"><strong>Note:</strong> Automatic log collection only works for logs formatted as JSON. Alternatively, use custom parsing rules.</div>
 
@@ -334,3 +340,4 @@ Ensure that log collection is configured in the Datadog Agent and that the [Logs
 [10]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel/?tab=custom
 [11]: https://www.nuget.org/packages/Datadog.Trace/
 [12]: /logs/log_collection/csharp/#configure-your-datadog-agent
+[13]: https://nblumhardt.com/2016/11/ilogger-beginscope/
