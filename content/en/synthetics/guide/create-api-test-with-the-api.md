@@ -408,8 +408,7 @@ configuration = Configuration(
     api_key= {"apiKeyAuth": "<YOUR_API_KEY>","appKeyAuth": "<YOUR_APPLICATION_KEY>"}
 )
 
-// Enter a context with an instance of the API client
-with ApiClient(configuration) as api_client:
+// Enter a context with an instance of the API client where ApiClient(configuration) is set as api_client:
     // Create an instance of the API class
     api_instance = synthetics_api.SyntheticsApi(api_client)
     body = SyntheticsAPITest(

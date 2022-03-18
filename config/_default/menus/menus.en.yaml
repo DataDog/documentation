@@ -795,6 +795,10 @@ main:
     url: agent/versions/upgrade_to_agent_v6/
     parent: agent_versions
     weight: 1002
+  - name: Upgrade Between Agent Minor Versions
+    url: agent/versions/upgrade_between_agent_minor_versions
+    parent: agent_versions
+    weight: 1003
   - name: Troubleshooting
     url: agent/troubleshooting/
     parent: agent
@@ -1265,18 +1269,6 @@ main:
     parent: serverless
     identifier: serverless_troubleshooting
     weight: 7
-  - name: Insights
-    url: serverless/troubleshooting/insights
-    parent: serverless_troubleshooting
-    weight: 701
-  - name: Serverless Tagging
-    url: serverless/troubleshooting/serverless_tagging
-    parent: serverless_troubleshooting
-    weight: 702
-  - name: Visualizing Managed Resources
-    url: serverless/troubleshooting/connect_invoking_resources
-    parent: serverless_troubleshooting
-    weight: 703
   - name: Azure App Service Extension
     url: serverless/azure_app_services
     parent: serverless
@@ -2405,6 +2397,10 @@ main:
     url: logs/explorer/export/
     parent: log_explorer
     weight: 508
+  - name: Watchdog Insights for Logs
+    url: logs/explorer/watchdog_insights/
+    parent: log_explorer
+    weight: 509
   - name: Saved Views
     url: logs/explorer/saved_views/
     parent: log_explorer
@@ -6028,6 +6024,18 @@ api:
         - GetUsageProfiling
       unstable: []
       order: 24
+  - name: Get hourly usage for Online Archive
+    url: '#get-hourly-usage-for-online-archive'
+    identifier: get-hourly-usage-for-online-archive
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetUsageOnlineArchive
+      unstable: []
+      order: 38
   - name: Get hourly usage for Network Hosts
     url: '#get-hourly-usage-for-network-hosts'
     identifier: get-hourly-usage-for-network-hosts
@@ -6576,6 +6584,34 @@ api:
         - CreateWebhooksIntegrationCustomVariable
       unstable: []
       order: 5
+  - name: Audit
+    url: /api/latest/audit/
+    identifier: audit
+    generated: true
+  - name: Search Audit Logs events
+    url: '#search-audit-logs-events'
+    identifier: search-audit-logs-events
+    parent: audit
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - SearchAuditLogs
+      unstable: []
+      order: 1
+  - name: Get a list of Audit Logs events
+    url: '#get-a-list-of-audit-logs-events'
+    identifier: get-a-list-of-audit-logs-events
+    parent: audit
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListAuditLogs
+      unstable: []
+      order: 2
   - name: AuthN Mappings
     url: /api/latest/authn-mappings/
     identifier: authn-mappings
@@ -7261,6 +7297,34 @@ api:
         - ListProcesses
       unstable: []
       order: 1
+  - name: RUM
+    url: /api/latest/rum/
+    identifier: rum
+    generated: true
+  - name: Search RUM events
+    url: '#search-rum-events'
+    identifier: search-rum-events
+    parent: rum
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - SearchRUMEvents
+      unstable: []
+      order: 1
+  - name: Get a list of RUM events
+    url: '#get-a-list-of-rum-events'
+    identifier: get-a-list-of-rum-events
+    parent: rum
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListRUMEvents
+      unstable: []
+      order: 2
   - name: Roles
     url: /api/latest/roles/
     identifier: roles

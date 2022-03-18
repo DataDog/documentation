@@ -356,6 +356,13 @@
       "description": "List IP Ranges returns \"OK\" response"
     }
   ],
+  "ListLogs": [
+    {
+      "group": "logs",
+      "suffix": "_235998668",
+      "description": "Search test logs returns \"OK\" response"
+    }
+  ],
   "SubmitLog": [
     {
       "group": "logs",
@@ -414,6 +421,11 @@
       "group": "monitors",
       "suffix": "",
       "description": "Create a monitor returns \"OK\" response"
+    },
+    {
+      "group": "monitors",
+      "suffix": "_440013737",
+      "description": "Create an Error Tracking monitor returns \"OK\" response"
     }
   ],
   "DeleteMonitor": [
@@ -566,6 +578,34 @@
       "description": "Get Corrections For an SLO returns \"OK\" response"
     }
   ],
+  "ListSLOs": [
+    {
+      "group": "service_level_objectives",
+      "suffix": "",
+      "description": "Get all SLOs returns \"OK\" response"
+    }
+  ],
+  "GetSLO": [
+    {
+      "group": "service_level_objectives",
+      "suffix": "",
+      "description": "Get an SLO's details returns \"OK\" response"
+    }
+  ],
+  "GetSLOHistory": [
+    {
+      "group": "service_level_objectives",
+      "suffix": "",
+      "description": "Get an SLO's history returns \"OK\" response"
+    }
+  ],
+  "UpdateSLO": [
+    {
+      "group": "service_level_objectives",
+      "suffix": "",
+      "description": "Update an SLO returns \"OK\" response"
+    }
+  ],
   "GetGraphSnapshot": [
     {
       "group": "snapshots",
@@ -675,6 +715,13 @@
       "group": "usage_metering",
       "suffix": "",
       "description": "Get hourly usage for IoT returns \"OK\" response"
+    }
+  ],
+  "GetUsageOnlineArchive": [
+    {
+      "group": "usage_metering",
+      "suffix": "",
+      "description": "Get hourly usage for Online Archive returns \"OK\" response"
     }
   ],
   "GetUsageSNMP": [

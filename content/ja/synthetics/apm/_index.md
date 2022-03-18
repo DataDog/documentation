@@ -106,4 +106,4 @@ Datadog は、分散型トレーシングプロトコルを使用し、以下の
 [16]: https://github.com/DataDog/dd-trace-php/releases/tag/0.33.0
 [17]: /ja/tracing/setup_overview/setup/dotnet-core/
 [18]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v1.18.2
-[19]: /ja/tracing/trace_retention_and_ingestion/
+[19]: /ja/tracing/trace_retention/

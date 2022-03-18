@@ -30,7 +30,7 @@ The Trace Explorer shows an **Search - Only Indexed Data** indicator whenever yo
 
 Live Search is the default view on the Traces page. Switch from Live Search to Indexed Data Search by using the time selector in the top right-hand corner.
 
-### Tracing Without Limits (recommended)
+### Trace volume control
 
 You can customize settings for both [ingestion][6] and [retention][7] to send and keep exactly what data is most relevant to you.
 

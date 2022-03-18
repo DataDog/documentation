@@ -157,12 +157,11 @@ Tests can be only recorded from [Google Chrome][10]. To record your test, downlo
 
 By default, only users with the [Datadog Admin and Datadog Standard roles][14] can create, edit, and delete Synthetic browser tests. To get create, edit, and delete access to Synthetic browser tests, upgrade your user to one of those two [default roles][14].
 
-If you have access to the [custom role feature][15], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions.
+If you are using the [custom role feature][15], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions.
 
 ### Restrict access
 
-<div class="alert alert-warning">
-Access restriction is available for customers with <a href="https://docs.datadoghq.com/account_management/rbac/?tab=datadogapplication#create-a-custom-role">custom roles</a> enabled on their accounts.</div>
+Access restriction is available for customers using [custom roles][16] on their accounts.
 
 You can restrict access to a browser test based on the roles in your organization. When creating a browser test, choose which roles (in addition to your user) can read and write your test. 
 
@@ -187,3 +186,4 @@ You can restrict access to a browser test based on the roles in your organizatio
 [13]: /synthetics/browser_tests/actions/#assertion
 [14]: /account_management/rbac/
 [15]: /account_management/rbac#custom-roles
+[16]: /account_management/rbac/#create-a-custom-role

@@ -1,4 +1,18 @@
 {
+  "ListAuditLogs": [
+    {
+      "group": "audit",
+      "suffix": "",
+      "description": "Get a list of Audit Logs events returns \"OK\" response"
+    }
+  ],
+  "SearchAuditLogs": [
+    {
+      "group": "audit",
+      "suffix": "",
+      "description": "Search Audit Logs events returns \"OK\" response"
+    }
+  ],
   "CreateAuthNMapping": [
     {
       "group": "authn_mappings",
@@ -391,6 +405,20 @@
       "group": "processes",
       "suffix": "",
       "description": "Get all processes returns \"OK\" response"
+    }
+  ],
+  "ListRUMEvents": [
+    {
+      "group": "rum",
+      "suffix": "",
+      "description": "Get a list of RUM events returns \"OK\" response"
+    }
+  ],
+  "SearchRUMEvents": [
+    {
+      "group": "rum",
+      "suffix": "",
+      "description": "Search RUM events returns \"OK\" response"
     }
   ],
   "AddUserToRole": [

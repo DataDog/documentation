@@ -62,6 +62,9 @@ Your private locations test results display identically to your managed location
     ```shell
     docker run --rm -v $PWD/worker-config-<LOCATION_ID>.json:/etc/datadog/synthetics-check-runner.json datadog/synthetics-private-location-worker
     ```
+    
+    This command starts a Docker container and prepares your private location to run tests. Datadog recommends running the container in detached mode with proper restart policy.
+    
 11. If your private location reports correctly to Datadog, an `OK` health status displays under **Private Location Status** and on the **Private Locations** list in the **Settings** page:
 
     {{< img src="synthetics/private_locations/pl_health.png" alt="Private Location Health" style="width:100%;">}}

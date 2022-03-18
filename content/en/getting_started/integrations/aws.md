@@ -90,11 +90,9 @@ Before getting started, ensure you have the following prerequisites:
 **Note:** The `DatadogAppKey` parameter enables the CloudFormation stack to make API calls to Datadog to add and edit the Datadog configuration for this AWS account. The key is automatically generated and tied to your Datadog account.
 {{< img src="getting_started/integrations/params.png" alt="The AWS CloudFormation create-stack page showing the Stack name as datadog, IAMRoleName as DatadogIntegrationRole, ExternalId as an obfuscated value ending in be46, DdApiKey as an obfuscated value.">}}
 
-6. Check the required boxes from AWS and click `Create stack`:
-{{< img src="getting_started/integrations/cloudformation-options-2.png" alt="The AWS CloudFormation create-stack page showing the Advanced options of creating the Datadog stack. DdAWSAccountId parameter is filled in with 464622532012, DdForwarderName parameter is filled in with DatadogForwarder, and InstallDatadogPolicyMacro is set as true. Below these parameters is a Capabilities section with two checkboxes, both of which are checked. The first checkbox states 'I acknowledge that AWS CloudFormation might create IAM resources with custom names.' The second checkbox states 'I acknowledge that AWS CloudFormation might require the following capability: CAPABILITY_AUTO_EXPAND'.">}}
-
-    This launches the creation process for the Datadog stack along with three nested stacks. This could take several minutes. Ensure that the stack is successfully created before proceeding:
+6. Check the required boxes from AWS and click `Create stack`: 
     {{< img src="getting_started/integrations/cloudformation-complete.png" alt="The AWS CloudFormation Stacks page showing the four completed stacks under the 'Stacks' column along the left hand side of the page. The stacks are datadog-DatadogIntegrationRoleStack, datadog-DatadogPolicyMacroStack, datadog-ForwarderStack, and datadog. Each stack shows the timestamp of creation and a green checkmark with CREATE_COMPLETE. The 'datadog' stack and is highlighted and displaying the 'Events' tab. There are 9 events listed with their Timestamp, Logical ID, Status, and Status reason. These events reference the different stages of creation for each of the stacks.">}}
+This launches the creation process for the Datadog stack along with three nested stacks. This could take several minutes. Ensure that the stack is successfully created before proceeding.
 
 7. After the Stack is created, go back to the AWS integration tile in Datadog and find the box for the new account you created. Click "Refresh to Check Status" to see a success message at the top of the page, along with the new account visible on the page with the relevant details.
 
@@ -180,10 +178,10 @@ Review [Getting Started with Cloud SIEM][50] to evaluate your logs against the o
 
 #### CSPM
 
-Use the [Getting Started with CSPM][54] guide to learn about detecting and assessing misconfigurations in your cloud environment. Resource configuration data is evaluated against the [out-of-the-box Cloud Configuration Rules][55] to flag attacker techniques and potential misconfigurations, allowing for fast response and remediation.
+Use the [Getting Started with CSPM][54] guide to learn about detecting and assessing misconfigurations in your cloud environment. Resource configuration data is evaluated against the out-of-the-box Posture Management [Cloud][55] and [Infrastructure][56] Detection Rules to flag attacker techniques and potential misconfigurations, allowing for fast response and remediation.
 
 ### Troubleshooting
-If you encounter any issues, be sure to check out the [Troubleshooting][56] section.
+If you encounter any issues, be sure to check out the [Troubleshooting][57] section.
 
 ## Further Reading
 
@@ -243,5 +241,6 @@ If you encounter any issues, be sure to check out the [Troubleshooting][56] sect
 [52]: /security_platform/explorer/
 [53]: /security_platform/notification_rules/
 [54]: /security_platform/cspm/getting_started/
-[55]: /security_platform/default_rules/#cat-cloud-configuration
-[56]: /integrations/amazon_web_services/?tab=roledelegation#troubleshooting
+[55]: /security_platform/default_rules/#cat-posture-management-cloud
+[56]: /security_platform/default_rules/#cat-posture-management-infra
+[57]: /integrations/amazon_web_services/?tab=roledelegation#troubleshooting
