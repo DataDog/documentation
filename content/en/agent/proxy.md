@@ -270,6 +270,14 @@ frontend network_devices_metadata_frontend
     option tcplog
     default_backend datadog-network-devices-metadata
 
+# This declares the endpoint where your Agents connect for
+# sending Instrumentations Telemetry data (e.g. the value of "apm_config.telemetry.dd_url")
+frontend instrumentation_telemetry_data_frontend
+    bind *:3843
+    mode tcp
+    option tcplog
+    default_backend datadog-instrumentations-telemetry
+
 # This is the Datadog server. In effect any TCP request coming
 # to the forwarder frontends defined above are proxied to
 # Datadog's public endpoints.
@@ -351,6 +359,13 @@ backend datadog-network-devices-metadata
     # Uncomment the following configuration for older HAProxy versions
     # server mothership ndm-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify none
 
+backend datadog-instrumentations-telemetry
+    balance roundrobin
+    mode tcp
+    # The following configuration is for HAProxy 1.8 and newer
+    server-template mothership 5 instrumentation-telemetry-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify none check resolvers my-dns init-addr none resolve-prefer ipv4
+    # Uncomment the following configuration for older HAProxy versions
+    # server mothership instrumentation-telemetry-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify none
 ```
 
 **Note**: Download the certificate with one of the following commands:
@@ -381,6 +396,8 @@ To send traces, profiles, processes, and logs through the proxy, setup the follo
 apm_config:
     apm_dd_url: http://haproxy.example.com:3835
     profiling_dd_url: http://haproxy.example.com:3836
+    telemetry:
+        dd_url: http://haproxy.example.com:3841
 
 process_config:
     process_dd_url: http://haproxy.example.com:3837
@@ -540,6 +557,11 @@ stream {
         listen 3841; #listen for network devices metadata
         proxy_ssl on;
         proxy_pass ndm-intake.{{< region-param key="dd_site" >}}:443;
+    }
+    server {
+        listen 3843; #listen for instrumentations telemetry data
+        proxy_ssl on;
+        proxy_pass instrumentation-telemetry-intake.{{< region-param key="dd_site" >}}:443;
     }
 }
 ```
