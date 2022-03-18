@@ -6,70 +6,83 @@ disable_sidebar: true
 aliases:
   - /fr/integrations/synthetics/
 further_reading:
-  - link: 'https://www.datadoghq.com/blog/introducing-synthetic-monitoring/'
+  - link: https://www.datadoghq.com/blog/introducing-synthetic-monitoring/
     tag: Blog
     text: Présentation de la surveillance Datadog Synthetic
-  - link: 'https://www.datadoghq.com/blog/browser-tests/'
-    tag: Blog
-    text: Surveillance de l'expérience utilisateur avec les tests Browser de Datadog
-  - link: 'https://www.datadoghq.com/blog/test-creation-best-practices/'
-    tag: Blog
-    text: Pratiques recommandées pour la création de tests de bout en bout
+  - link: https://learn.datadoghq.com/course/view.php?id=39
+    tag: Centre d'apprentissage
+    text: Présentation des tests Synthetic
   - link: /synthetics/guide/
     tag: Documentation
     text: Guides d'utilisation de la surveillance Synthetic
-  - link: /synthetics/troubleshooting/
-    tag: Documentation
-    text: Dépannage de la surveillance Synthetic
+  - link: https://www.datadoghq.com/blog/monitor-cdn-performance-with-synthetic-testing/
+    tag: Blog
+    text: Surveillez les performances des CDN au sein de vos tests Synthetic
 ---
-{{< img src="synthetics/synthetics_home.png" alt="Page d'accueil Surveillance Synthetic" >}}
+{{< vimeo 447241955 >}}
 
-Les tests Synthetic vous permettent d'observer le fonctionnement de vos systèmes et applications à l'aide de **requêtes et actions simulées dans le monde entier**. Datadog **surveille le fonctionnement de vos pages Web et de vos API** du backend au frontend, et à différents niveaux du réseau (`HTTP`, `TCP`, `SSL` et `DNS`) de manière contrôlée et stable, en vous envoyant des alertes en cas de comportement anormal (régression, fonctionnalité défaillante, temps de réponse élevé, code de statut inattendu, etc.). **Les tests de bout en bout dans les environnements de production et d'intégration continue** améliorent la rapidité des équipes de développement, car ils éliminent tout risque que le code défectueux soit mis en production. **La configuration de SLO** sur les principaux endpoints et parcours utilisateur permet de mieux répondre aux objectifs de performance des applications et, à terme, de proposer une expérience client robuste.
+<br/>
 
-## Prise en main
-Créez votre premier test Synthetic et commencez à surveiller des applications Web pour améliorer leurs performances en quelques minutes seulement.
+Les tests Synthetic vous permettent de contrôler le bon fonctionnement de vos systèmes et applications à l'aide de **requêtes et actions simulées dans le monde entier**. Datadog surveille les performances de vos pages Web et de vos API du backend au frontend, et à différents niveaux du réseau (`HTTP`, `SSL`, `DNS`, `TCP`, `UDP`, `ICMP` et `WebSocket`) de manière contrôlée et stable, en vous envoyant des alertes en cas de comportement anormal (régression, fonctionnalité défaillante, temps de réponse élevé ou code de statut inattendu).
 
-### Configurer des tests API et API à plusieurs étapes
+Avec les **tests de bout en bout en production et les environnements CI**, vos équipes de développement peuvent s'assurer de façon proactive qu'aucune ligne de code problématique n'est mise en production. En **calculant des SLO** sur vos endpoints et parcours utilisateur clés, vous atteindrez plus facilement vos objectifs de performance pour votre application, ce qui se traduira par une expérience utilisateur plus cohérente.
 
-Les tests API vous permettent de lancer des requêtes [individuelles][1] ou des [chaînes][2] de requêtes afin d'effectuer des vérifications sur vos systèmes essentiels à différents niveaux du réseau : `HTTP`, `TCP`, `SSL` et `DNS`. Créez votre premier test [HTTP][3], [TCP][4], [SSL][5] ou [DNS][6] pour commencer à surveiller vos API et votre réseau.
+Vous pouvez créer des tests Synthetic dans l'[application Datadog][1], avec l'[API][2] ou avec [Terraform][3].
 
-{{< img src="synthetics/api_test.png" alt="Tests API"  style="width:100%;">}}
+## Configurer des tests API et API à plusieurs étapes
 
-### Enregistrer des tests Browser
+Les tests API vous permettent de lancer des requêtes [individuelles][4] ou des [chaînes][5] de requêtes afin d'effectuer des vérifications sur vos systèmes essentiels à différents niveaux du réseau : [test HTTP][6], [test SSL][7], [test DNS][8], [test WebSocket][9], [test TCP][10], [test UDP test][11] et [test ICMP][12]. 
 
-Enregistrez des tests de bout en bout pour surveiller l'expérience de vos clients sur vos pages Web dans le monde entier à l'aide des [tests Browser Synthetic][7].
+{{< img src="synthetics/api_test.png" alt="Tests API" style="width:100%;">}}
 
-{{< img src="synthetics/browser_test.gif" alt="Tests Browser"  style="width:100%;">}}
+## Enregistrer des tests Browser
 
-### Lancer des emplacements privés
+Utilisez des [tests Browser Synthetic][13] pour surveiller l'expérience de vos clients sur vos pages Web dans le monde entier à l'aide des tests de bout en bout.
 
-Utilisez des [emplacements privés Synthetic][8] pour surveiller des API et sites web internes ou pour créer des emplacements personnalisés dans des zones stratégiques pour votre entreprise.
+{{< img src="synthetics/browser_test.mp4" alt="Tests Browser" video=true style="width:100%;">}}
 
-{{< img src="synthetics/private_locations.png" alt="Emplacements privés"  style="width:100%;">}}
+## Lancer des emplacements privés
 
-### Exécuter des tests au sein de vos processus d'intégration et de déploiement
+Utilisez des [Emplacements privés Synthetic][14] pour surveiller des API et sites Web internes ou pour créer des emplacements personnalisés dans des zones stratégiques pour votre entreprise.
 
-Utilisez vos tests Synthetic comme [tests Canary][9] ou exécutez-les directement dans vos [pipelines d'intégration continue][9] pour déployer votre code sans crainte de dégrader l'expérience de vos utilisateurs.
+{{< img src="synthetics/private_locations.png" alt="Emplacements privés" style="width:100%;">}}
 
- {{< img src="synthetics/ci.png" alt="Tests d'intégration continue"  style="width:100%;">}}
+## Exécuter des tests au sein de vos processus d'intégration et de déploiement
 
-### Associer vos données de surveillance Synthetic à vos traces
+Utilisez vos tests Synthetic comme [déploiements Canary][15] ou exécutez-les directement dans vos [pipelines d'intégration continue][15] pour déployer votre code sans crainte de dégrader l'expérience de vos utilisateurs.
 
-Datadog vous permet d'[intégrer vos tests Synthetic à vos traces d'APM][10] pour identifier l'origine des échecs parmi vos requêtes frontend, réseau et backend.
+ {{< img src="synthetics/ci.png" alt="Tests d'intégration continue" style="width:100%;">}}
 
-{{< img src="synthetics/synthetics_traces.gif" alt="Surveillance Synthetic" style="width:100%;">}}
+## Associer vos données à vos traces
+
+Datadog vous permet d'[intégrer vos tests Synthetic à vos traces d'APM][16] pour identifier l'origine des échecs parmi vos requêtes frontend, réseau et backend.
+
+{{< img src="synthetics/synthetics_traces.mp4" alt="Surveillance Synthetic" video=true style="width:100%;">}}
+
+## Prêt à vous lancer ?
+
+Consultez [Débuter avec la surveillance Synthetic][17] pour découvrir comment créer votre premier test Synthetic et surveiller vos applications Web. Ensuite, explorez [Débuter avec les emplacements privés][18] pour découvrir comment créer votre emplacement privé et exécuter des tests Synthetic depuis celui-ci.
 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/synthetics/api_tests/
-[2]: /fr/synthetics/multistep
-[3]: /fr/getting_started/synthetics/api_test
-[4]: /fr/synthetics/api_tests/?tab=tcptest
-[5]: /fr/synthetics/api_tests/?tab=ssltest
-[6]: /fr/synthetics/api_tests/?tab=dnstest
-[7]: /fr/getting_started/synthetics/browser_test
-[8]: /fr/getting_started/synthetics/private_location
-[9]: /fr/synthetics/ci/
-[10]: /fr/synthetics/apm/
+
+[1]: https://app.datadoghq.com/synthetics/create#
+[2]: /fr/api/latest/synthetics/#create-an-api-test
+[3]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_test
+[4]: /fr/synthetics/api_tests/
+[5]: /fr/synthetics/multistep
+[6]: /fr/synthetics/api_tests/http_tests
+[7]: /fr/synthetics/api_tests/ssl_tests
+[8]: /fr/synthetics/api_tests/dns_tests
+[9]: /fr/synthetics/api_tests/websocket_tests
+[10]: /fr/synthetics/api_tests/tcp_tests
+[11]: /fr/synthetics/api_tests/udp_tests
+[12]: /fr/synthetics/api_tests/icmp_tests
+[13]: /fr/synthetics/browser_tests
+[14]: /fr/synthetics/private_locations
+[15]: /fr/synthetics/cicd_testing
+[16]: /fr/synthetics/apm/
+[17]: /fr/getting_started/synthetics
+[18]: /fr/getting_started/synthetics/private_location
