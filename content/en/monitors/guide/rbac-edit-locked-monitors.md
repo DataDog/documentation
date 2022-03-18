@@ -23,7 +23,7 @@ You are editing your monitor and seeing the below warning.
 
 You have different ways to go about handling this warning depending on the changes you are willing to make on your monitor.
 
-**1. You do not want to perform any particular action on your monitor permissions **
+**1. You do not want to perform any particular action on your monitor permissions**
 
 You can just save the monitor to have the migration from locked to restricted_roles be performed automatically, along with any other updates you might have done on your monitor (e.g. threshold update, message, etc.).
 
