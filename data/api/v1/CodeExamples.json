@@ -421,6 +421,11 @@
       "group": "monitors",
       "suffix": "",
       "description": "Create a monitor returns \"OK\" response"
+    },
+    {
+      "group": "monitors",
+      "suffix": "_440013737",
+      "description": "Create an Error Tracking monitor returns \"OK\" response"
     }
   ],
   "DeleteMonitor": [
