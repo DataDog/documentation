@@ -161,7 +161,7 @@ data:
       <INSTANCES_CONFIG>
 ```
 
-Then in the manifest for the Cluster Agent Deployment define the `volumeMounts` and `volumes` with respect to your ConfigMap.
+Then in the manifest for the Cluster Agent Deployment define the `volumeMounts` and `volumes` with respect to your `ConfigMap` and the corresponding key of your data.
 
 ```yaml
         volumeMounts:
@@ -263,7 +263,7 @@ Due to the distributed nature of cluster checks, troubleshooting them is a bit m
 
 ### Kubernetes: find the leader Cluster Agent
 
-When leader election is enabled, only the leader serves Cluster Check configurations to the node-based Agents. If you only have 1 replica of the Cluster Agent pod running, that will be the leader. Otherwise, you can identify the name of the leader in the `datadog-leader-election` ConfigMap:
+When leader election is enabled, only the leader serves Cluster Check configurations to the node-based Agents. If you only have 1 replica of the Cluster Agent pod running, that will be the leader. Otherwise, you can identify the name of the leader in the `datadog-leader-election` `ConfigMap`:
 
 ```yaml
 # kubectl get cm datadog-leader-election -o yaml
