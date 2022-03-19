@@ -86,17 +86,15 @@ Enable the `clusterchecks` configuration provider on the Datadog **Node** Agent.
         - name: clusterchecks
           polling: true
     ```
-[1]: /agent/cluster_agent/setup/
-[1]: /agent/kubernetes/integrations/
-[2]: /agent/cluster_agent/
 
+[1]: /agent/cluster_agent/setup/
 {{% /tab %}}
 {{< /tabs >}}
 
 
 **Note**: When running Cluster Checks the metrics reported by the Agent are not linked to a given hostname. As these are meant to be cluster centric metrics, and not necessarily host based metrics. As a result these metrics will also not inherit any host-level tags associated with that host. Such as those inherited from a cloud provider or added by the Agent's `DD_TAGS` environment variable. To add tags to cluster check metrics use the `DD_CLUSTER_CHECKS_EXTRA_TAGS` environment variable.
 
-The [Datadog Helm Chart][4] and the [Datadog Operator][11] additionally offer the possibility to deploy Cluster Check Runners. Which are a Deployment for a small set of Datadog Agents configured to run these dispatched cluster checks only, as opposed to dispatching these to the normal node-based Agents.
+The [Datadog Helm Chart][3] and the [Datadog Operator][4] additionally offer the possibility to deploy Cluster Check Runners. Which are a Deployment for a small set of Datadog Agents configured to run these dispatched cluster checks only, as opposed to dispatching these to the normal node-based Agents.
 
 ### Advanced dispatching
 
@@ -181,8 +179,8 @@ Then in the manifest for the Cluster Agent Deployment define the `volumeMounts` 
 ```
 This should result in a file in the `/conf.d/` directory of the Cluster Agent with respect to your desired integration. For example: `/conf.d/mysql.yaml` or `/conf.d/http_check.yaml`.
 
-[1]: /agent/kubernetes/integrations/?tab=configmap#configuration
 
+[1]: /agent/kubernetes/integrations/?tab=configmap#configuration
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -202,7 +200,7 @@ instances:
 
 #### Example: HTTP_Check on an external URL
 
-If there is a URL you would like the to perform an [HTTP check][9] against once per cluster, mount a `/conf.d/http_check.yaml` file in the Cluster Agent container with the following content:
+If there is a URL you would like the to perform an [HTTP check][7] against once per cluster, mount a `/conf.d/http_check.yaml` file in the Cluster Agent container with the following content:
 
 ```yaml
 cluster_check: true
@@ -222,11 +220,11 @@ ad.datadoghq.com/service.init_configs: '[<INIT_CONFIG>]'
 ad.datadoghq.com/service.instances: '[<INSTANCE_CONFIG>]'
 ```
 
-The `%%host%%` [template variable][7] is supported and is replaced by the service's IP. The `kube_namespace` and `kube_service` tags are automatically added to the instance.
+The `%%host%%` [template variable][8] is supported and is replaced by the service's IP. The `kube_namespace` and `kube_service` tags are automatically added to the instance.
 
 #### Example: HTTP check on an NGINX-backed service
 
-The following Service definition exposes the Pods from the `my-nginx` deployment and runs an [HTTP check][9] to measure the latency of the load balanced service:
+The following Service definition exposes the Pods from the `my-nginx` deployment and runs an [HTTP check][7] to measure the latency of the load balanced service:
 
 ```yaml
 apiVersion: v1
@@ -257,7 +255,7 @@ spec:
         run: my-nginx
 ```
 
-In addition, each pod should be monitored with the [NGINX check][10], as it enables the monitoring of each worker as well as the aggregated service.
+In addition, each pod should be monitored with the [NGINX check][9], as it enables the monitoring of each worker as well as the aggregated service.
 
 ## Troubleshooting
 
@@ -391,12 +389,10 @@ The Agent `status` command should show the check instance running and reporting 
 
 [1]: /agent/kubernetes/integrations/
 [2]: /agent/cluster_agent/
-[3]: /agent/cluster_agent/setup/
-[4]: /agent/cluster_agent/clusterchecksrunner?tab=helm
+[3]: /agent/cluster_agent/clusterchecksrunner?tab=helm
+[4]: /agent/cluster_agent/clusterchecksrunner?tab=operator
 [5]: /developers/custom_checks/write_agent_check/
 [6]: /integrations/mysql/
-[7]: /agent/faq/template_variables/
-[8]: /getting_started/tagging/unified_service_tagging
-[9]: /integrations/http_check/
-[10]: /integrations/nginx/
-[11]: /agent/cluster_agent/clusterchecksrunner?tab=operator
+[7]: /integrations/http_check/
+[8]: /agent/faq/template_variables/
+[9]: /integrations/nginx/
