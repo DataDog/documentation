@@ -1,0 +1,1121 @@
+{
+  "GetIPRanges": {
+    "description": "Datadog の IP 範囲についての情報を取得します。",
+    "summary": "IP 範囲を一覧表示する"
+  },
+  "ListAPIKeys": {
+    "description": "現在のアカウントで利用できるすべての API キーを取得します。",
+    "summary": "すべての API キーを取得"
+  },
+  "CreateAPIKey": {
+    "description": "名前を指定して API キーを作成します。",
+    "summary": "API キーの作成",
+    "request_description": "",
+    "request_schema_description": "Datadog API キー。"
+  },
+  "DeleteAPIKey": {
+    "description": "特定の API キーを削除します。",
+    "summary": "API キーの削除"
+  },
+  "GetAPIKey": {
+    "description": "特定の API キーを取得します。",
+    "summary": "API キーを取得する"
+  },
+  "UpdateAPIKey": {
+    "description": "API キーの名前を編集します。",
+    "summary": "API キーの編集",
+    "request_description": "",
+    "request_schema_description": "Datadog API キー。"
+  },
+  "ListApplicationKeys": {
+    "description": "現在の Datadog アカウントで利用できるすべてのアプリケーションキーを取得します。",
+    "summary": "すべてのアプリケーションキーを取得"
+  },
+  "CreateApplicationKey": {
+    "description": "名前を指定してアプリケーションキーを作成します。",
+    "summary": "アプリケーションキーの作成",
+    "request_description": "",
+    "request_schema_description": "関連するメタデータとアプリケーションキー。"
+  },
+  "DeleteApplicationKey": {
+    "description": "特定のアプリケーションキーを削除します。",
+    "summary": "アプリケーションキーの削除"
+  },
+  "GetApplicationKey": {
+    "description": "特定のアプリケーションキーを取得します。",
+    "summary": "アプリケーションキーの取得"
+  },
+  "UpdateApplicationKey": {
+    "description": "アプリケーションキーの名前を編集します。",
+    "summary": "アプリケーションキーの編集",
+    "request_description": "",
+    "request_schema_description": "関連するメタデータとアプリケーションキー。"
+  },
+  "SubmitServiceCheck": {
+    "description": "サービスチェックのリストを提出します。\n\n**注**:\n- 有効な API キーが必要です。\n- サービスチェックは、過去 10 分まで送信可能です。",
+    "summary": "サービスチェックを送信する",
+    "request_description": "サービスチェックのリクエスト本文。",
+    "request_schema_description": "サービスチェック。"
+  },
+  "GetDailyCustomReports": {
+    "description": "日刊カスタムレポートを取得します。",
+    "summary": "利用可能な日刊カスタムレポートのリストを取得"
+  },
+  "GetSpecifiedDailyCustomReports": {
+    "description": "指定された日刊カスタムレポートを取得します。",
+    "summary": "指定された日刊カスタムレポートを取得"
+  },
+  "DeleteDashboards": {
+    "description": "指定された ID を使用するダッシュボードを削除します。エラーがあった場合、ダッシュボードは削除されません (部分的に成功した場合も完了とはみなされません)。",
+    "summary": "ダッシュボードの削除",
+    "request_description": "ダッシュボードのリクエスト本文を削除します。",
+    "request_schema_description": "ダッシュボードの一括削除リクエスト本文。"
+  },
+  "ListDashboards": {
+    "description": "すべてのダッシュボードを取得します。\n\n**注**: このクエリはカスタマイズして作成された、または複製されたダッシュボードのみを返します。\nこのクエリではプリセットされたダッシュボードは取得できません。",
+    "summary": "すべてのダッシュボードを取得する"
+  },
+  "RestoreDashboards": {
+    "description": "指定された ID を使用するダッシュボードを復元します。エラーがあった場合、ダッシュボードは復元されません (部分的に成功した場合も完了とはみなされません)。",
+    "summary": "削除されたダッシュボードの復元",
+    "request_description": "ダッシュボードのリクエスト本文を復元します。",
+    "request_schema_description": "ダッシュボードの復元リクエスト本文。"
+  },
+  "CreateDashboard": {
+    "description": "指定されたオプションを使用してダッシュボードを作成します。ウィジェットでクエリを定義するときは、どのクエリに `as_count()` または `as_rate()` 修飾子を追加する必要があるかに注意してください。\nこれらの修飾子の詳細については、次の[ドキュメント](https://docs.datadoghq.com/developers/metrics/type_modifiers/?tab=count#in-application-modifiers)を参照してください。",
+    "summary": "新しいダッシュボードを作成する",
+    "request_description": "ダッシュボードのリクエスト本文を作成します。",
+    "request_schema_description": "ダッシュボードは Datadog で利用可能なツールのひとつで、主要なパフォーマンスメトリクスを\n視覚的に追跡、分析、表示することでインフラストラクチャーの健全性の監視をサポートします。"
+  },
+  "ListDashboardLists": {
+    "description": "既存のダッシュボードリストの定義をすべて取得します。",
+    "summary": "すべてのダッシュボードリストを取得する"
+  },
+  "CreateDashboardList": {
+    "description": "空のダッシュボードリストを作成します。",
+    "summary": "ダッシュボードリストを作成する",
+    "request_description": "ダッシュボードリストのリクエスト本文を作成します。",
+    "request_schema_description": "ご利用いただいている Datadog のダッシュボードです。"
+  },
+  "DeleteDashboardList": {
+    "description": "ダッシュボードリストを削除します。",
+    "summary": "ダッシュボードリストを削除する"
+  },
+  "GetDashboardList": {
+    "description": "既存のダッシュボードリストの定義を取得します。",
+    "summary": "ダッシュボードリストを取得する"
+  },
+  "UpdateDashboardList": {
+    "description": "ダッシュボードリストの名前を更新します。",
+    "summary": "ダッシュボードリストを更新する",
+    "request_description": "ダッシュボードリストのリクエスト本文を更新します。",
+    "request_schema_description": "ご利用いただいている Datadog のダッシュボードです。"
+  },
+  "CreatePublicDashboard": {
+    "description": "指定した非公開ダッシュボードを共有し、公開表示できる URL を生成します。",
+    "summary": "共有ダッシュボードの作成",
+    "request_description": "共有ダッシュボードのリクエスト本文を作成します。",
+    "request_schema_description": "ダッシュボードが公開された/公開される方法に関連付けられたメタデータオブジェクト。"
+  },
+  "DeletePublicDashboard": {
+    "description": "指定されたトークンに関連付けられているダッシュボードのパブリック URL を取り消します (プライベートにレンダリングします)。",
+    "summary": "共有ダッシュボード URL を取り消す"
+  },
+  "GetPublicDashboard": {
+    "description": "指定されたトークンに関連付けられている既存の共有ダッシュボードの共有メタデータをフェッチします。",
+    "summary": "共有ダッシュボードの取得"
+  },
+  "UpdatePublicDashboard": {
+    "description": "指定されたトークンに関連付けられている共有ダッシュボードを更新します。",
+    "summary": "共有ダッシュボードの更新",
+    "request_description": "ダッシュボードのリクエスト本文を更新します。",
+    "request_schema_description": "共有ダッシュボードの設定を更新します。"
+  },
+  "DeletePublicDashboardInvitation": {
+    "description": "特定のメールアドレスの指定された共有ダッシュボードにアクセスするために使用された、以前に送信された招待メールとアクティブなセッションを取り消します。",
+    "summary": "共有ダッシュボードの招待を取り消す",
+    "request_description": "共有ダッシュボードの招待削除のリクエスト本文。",
+    "request_schema_description": "API によって返される共有ダッシュボードに存在する招待データとメタデータ。"
+  },
+  "GetPublicDashboardInvitations": {
+    "description": "特定の共有ダッシュボードに存在する招待について記述します (ページ区切り)。",
+    "summary": "共有ダッシュボードへのすべての招待の取得"
+  },
+  "SendPublicDashboardInvitation": {
+    "description": "特定の認証済み共有ダッシュボードにアクセスするためのリンクを含む指定されたメールアドレスにメールを送信します。メールアドレスは、認証された共有ダッシュボードの share_list にすでに属している必要があります。",
+    "summary": "共有ダッシュボードの招待メールの送信",
+    "request_description": "共有ダッシュボードの招待リクエスト本文。",
+    "request_schema_description": "API によって返される共有ダッシュボードに存在する招待データとメタデータ。"
+  },
+  "DeleteDashboard": {
+    "description": "指定の ID を使用してダッシュボードを削除します。",
+    "summary": "ダッシュボードを削除する"
+  },
+  "GetDashboard": {
+    "description": "指定の ID を使用してダッシュボードを取得します。",
+    "summary": "ダッシュボードを取得する"
+  },
+  "UpdateDashboard": {
+    "description": "指定の ID を使用してダッシュボードを更新します。",
+    "summary": "ダッシュボードを更新する",
+    "request_description": "ダッシュボードのリクエスト本文を更新します。",
+    "request_schema_description": "ダッシュボードは Datadog で利用可能なツールのひとつで、主要なパフォーマンスメトリクスを\n視覚的に追跡、分析、表示することでインフラストラクチャーの健全性の監視をサポートします。"
+  },
+  "ListDowntimes": {
+    "description": "すべてのスケジュール済みダウンタイムを取得します。",
+    "summary": "すべてのダウンタイムを取得する"
+  },
+  "CreateDowntime": {
+    "description": "ダウンタイムのスケジュールを設定します。",
+    "summary": "ダウンタイムをスケジュールする",
+    "request_description": "ダウンタイムリクエスト本文のスケジュールを設定します。",
+    "request_schema_description": "ダウンタイム設定を使用すると、アラートからいくつかのスコープをグローバルに除外することで、\nモニター通知をより詳細に制御できます。\nダウンタイム設定は、開始時間と終了時間を指定してスケジューリングされ、\n指定された Datadog タグに関連するすべてのアラートの発生を抑止します。"
+  },
+  "CancelDowntimesByScope": {
+    "description": "`X` のスコープに一致するすべてのダウンタイムを削除します。",
+    "summary": "スコープごとにダウンタイムをキャンセルする",
+    "request_description": "キャンセルしたいダウンタイムのスコープ。",
+    "request_schema_description": "スコープに基づいてダウンタイムをキャンセルします。"
+  },
+  "CancelDowntime": {
+    "description": "ダウンタイムをキャンセルします。",
+    "summary": "ダウンタイムをキャンセルする"
+  },
+  "GetDowntime": {
+    "description": "`downtime_id` でダウンタイムの詳細を取得します。",
+    "summary": "ダウンタイムを取得する"
+  },
+  "UpdateDowntime": {
+    "description": "`downtime_id` で単一のダウンタイムを更新します。",
+    "summary": "ダウンタイムを更新する",
+    "request_description": "ダウンタイムのリクエスト本文を更新します。",
+    "request_schema_description": "ダウンタイム設定を使用すると、アラートからいくつかのスコープをグローバルに除外することで、\nモニター通知をより詳細に制御できます。\nダウンタイム設定は、開始時間と終了時間を指定してスケジューリングされ、\n指定された Datadog タグに関連するすべてのアラートの発生を抑止します。"
+  },
+  "ListEvents": {
+    "description": "イベントストリームにクエリを発行して、時間、優先度、ソース、タグなどで絞り込むことができます。\n\n**注**:\n- クエリ対象のイベントに何らかのマークダウン形式が含まれている場合は、出力に `%`、`\\`、`n` などの文字が表示される場合があります。\n\n- このエンドポイントは最新の結果を最大 `1000` 件返します。さらに多くの結果を返すには、最新の結果の最新のタイムスタンプを特定し、それを `end` クエリに設定して結果をページ区切りします。また、ページパラメーターを使って、どのセットの `1000` の結果を返すかを指定することもできます。",
+    "summary": "イベントストリームのクエリ"
+  },
+  "CreateEvent": {
+    "description": "このエンドポイントを使用して、イベントをストリームにポストできます。\nイベントにタグ付けし、優先度を設定し、他のイベントと統合します。",
+    "summary": "イベントのポスト",
+    "request_description": "イベントリクエストオブジェクト",
+    "request_schema_description": "イベントを表すオブジェクト。"
+  },
+  "GetEvent": {
+    "description": "このエンドポイントを使用して、イベント詳細に対するクエリを発行できます。\n\n**注**: クエリ対象のイベントに何らかのマークダウン形式が含まれている場合は、\n出力に `%`、`\\`、`n` などの文字が表示される場合があります。",
+    "summary": "イベントの取得"
+  },
+  "ListEmbeddableGraphs": {
+    "description": "これまでに作成された埋め込み可能なグラフのリストを取得します。",
+    "summary": "すべての Embed を取得"
+  },
+  "CreateEmbeddableGraph": {
+    "description": "埋め込み可能なグラフを新規作成します。\n\n注: \nある組織内の同じクエリに対して既に埋め込みが存在する場合、\n埋め込みは新規作成されず、古い埋め込みデータが返されます。\n\nテンプレート変数の使用を検討されている場合は、\n[テンプレート変数で埋め込み可能なグラフ](https://docs.datadoghq.com/dashboards/faq/embeddable-graphs-with-template-variables)を参照してください。",
+    "summary": "Embed の作成",
+    "request_description": "埋め込み可能なグラフ本文",
+    "request_schema_description": "埋め込み可能なグラフを新しく作成するペイロード。"
+  },
+  "GetEmbeddableGraph": {
+    "description": "`embed_id` を指定して、以前に作成した埋め込みの HTML フラグメントを取得します。",
+    "summary": "特定の Embed を取得"
+  },
+  "EnableEmbeddableGraph": {
+    "description": "特定の Embed を有効にします。",
+    "summary": "Embed の有効化"
+  },
+  "RevokeEmbeddableGraph": {
+    "description": "特定の Embed を無効にします。",
+    "summary": "Embed の無効化"
+  },
+  "GetGraphSnapshot": {
+    "description": "グラフのスナップショットを作成します。\n**注**: スナップショットは、作成されてから利用できるようになるまで若干の時間がかかります。",
+    "summary": "グラフのスナップショットを撮る"
+  },
+  "MuteHost": {
+    "description": "ホストをミュートします。",
+    "summary": "ホストのミュート",
+    "request_description": "ホストのリクエスト本文をミュートします。",
+    "request_schema_description": "ホストのミュート設定の組み合わせ。"
+  },
+  "UnmuteHost": {
+    "description": "ホストのミュートを解除します。このエンドポイントは JSON 引数を受け取りません。",
+    "summary": "ホストのミュートを解除"
+  },
+  "ListHosts": {
+    "description": "このエンドポイントを使用して、名前、エイリアス、タグによりホストを検索できます。\n過去 3 時間以内に動作したホストが対象です。\n保持期間は 7 日間です。\n1 回につき最大 1000 件の検索結果がページ調整され表示されます。",
+    "summary": "組織のすべてのホストを取得する"
+  },
+  "GetHostTotals": {
+    "description": "このエンドポイントは、Datadog アカウントでアクティブなホストと作動中のホストの総数を返します。\nアクティブなホストとは、過去 1 時間以内に報告を行ったホストで、作動中のホストとは、過去 2 時間以内に報告を行ったホストです。",
+    "summary": "アクティブなホストの総数を取得する"
+  },
+  "DeleteAWSAccount": {
+    "description": "指定の `account_id` と `role_name parameters` に一致する Datadog-AWS インテグレーションを削除します。",
+    "summary": "AWS インテグレーションの削除",
+    "request_description": "AWS リクエストオブジェクト",
+    "request_schema_description": "削除する AWS アカウントのリスト。"
+  },
+  "ListAWSAccounts": {
+    "description": "Datadog Organization で使用できるすべての Datadog-AWS インテグレーションをリストします。",
+    "summary": "すべての AWS インテグレーションのリスト"
+  },
+  "CreateAWSAccount": {
+    "description": "Datadog と Amazon Web Services のインテグレーションを作成します。\n`POST` メソッドを使用すると、Datadog オーガニゼーションの既存の構成に\n新しい構成を追加する形でインテグレーション構成が更新されます。\nこれはロールベース認証用の一意の AWS アカウント ID となります。",
+    "summary": "AWS インテグレーションの作成",
+    "request_description": "AWS リクエストオブジェクト",
+    "request_schema_description": "このインテグレーションに関連付けられている AWS アカウントを返します。"
+  },
+  "UpdateAWSAccount": {
+    "description": "Datadog-Amazon Web Services インテグレーションを更新します。",
+    "summary": "AWS インテグレーションの更新",
+    "request_description": "AWS リクエストオブジェクト",
+    "request_schema_description": "このインテグレーションに関連付けられている AWS アカウントを返します。"
+  },
+  "ListAvailableAWSNamespaces": {
+    "description": "特定の Datadog-AWS インテグレーションのすべてのネームスペース規則をリストします。このエンドポイントは引数を受け取りません。",
+    "summary": "ネームスペース規則のリスト"
+  },
+  "DeleteAWSTagFilter": {
+    "description": "タグのフィルタリングエントリを削除します。",
+    "summary": "タグのフィルタリング入力を削除する",
+    "request_description": "特定の AWS アカウントと `dd-aws` ネームスペースのタグフィルタリングエントリを削除します。",
+    "request_schema_description": "AWS タグフィルターエントリの削除に使用されるオブジェクト。"
+  },
+  "ListAWSTagFilters": {
+    "description": "すべての AWS タグフィルターを取得します。",
+    "summary": "すべての AWS タグのフィルターを取得する"
+  },
+  "CreateAWSTagFilter": {
+    "description": "AWS タグフィルターを設定します。",
+    "summary": "AWS タグのフィルターを設定する",
+    "request_description": "`aws_account_identifier`、`namespace`、フィルタリング文字列を使用して、AWS タブフィルターを設定します。\nネームスペースには、`application_elb`、`elb`、`lambda`、`network_elb`、`rds`、`sqs`、`custom` を使用できます。",
+    "request_schema_description": "AWS タグフィルターの設定に使用されるオブジェクト。"
+  },
+  "CreateNewAWSExternalID": {
+    "description": "特定の AWS アカウント ID/ロール名ペアに対して新しい AWS 外部 ID を作成します。",
+    "summary": "新しい外部 ID を生成する",
+    "request_description": "Datadog ロールの委任名です。\nAWS アカウントのロール名の詳細については、\n[Datadog AWS インテグレーションのコンフィギュレーション情報](https://docs.datadoghq.com/integrations/amazon_web_services/#setup)を参照してください。",
+    "request_schema_description": "このインテグレーションに関連付けられている AWS アカウントを返します。"
+  },
+  "DeleteAWSLambdaARN": {
+    "description": "特定の AWS アカウントに関連する 指定の Lambda ARN を削除することで、Datadog-AWS のログコンフィギュレーションを削除します。",
+    "summary": "AWS ログインテグレーションの削除",
+    "request_description": "AWS Lambda ARN のリクエスト本文を削除します。",
+    "request_schema_description": "AWS アカウント ID と Lambda ARN。"
+  },
+  "ListAWSLogsIntegrations": {
+    "description": "お使いの Datadog アカウントで構成されたすべての Datadog-AWS ログインテグレーションをリストします。",
+    "summary": "すべての AWS ログインテグレーションのリスト"
+  },
+  "CreateAWSLambdaARN": {
+    "description": "Datadog-AWS ログ収集のために作成された Lambda の Lambda ARN を AWS アカウント ID に追加して、ログ収集を有効にします。",
+    "summary": "AWS ログ Lambda ARN の追加",
+    "request_description": "AWS ログ Lambda Async のリクエスト本文です。",
+    "request_schema_description": "AWS アカウント ID と Lambda ARN。"
+  },
+  "CheckAWSLogsLambdaAsync": {
+    "description": "特定のサービスと AWS アカウントについて、ログ転送トリガーに追加するアクセス許可が存在するかどうかをテストします。\n入力は AWS サービスのログ収集の有効化を行う場合と同じです。後続のリクエストは常に上記の動作を繰り返すため、\nブロックの代わりにこのエンドポイントで断続的にポーリングを行うことができます。\n\n- Lambda がアカウントに存在するかを確認し、'created' ステータスを返します。\n- 確認中は 'waiting' ステータスを返します。\n- Lambda が存在した場合は 'checked and ok' ステータスを返します。\n- Lambda が存在しない場合は 'error' ステータスを返します。",
+    "summary": "AWS Lambda 関数の存在を確認",
+    "request_description": "AWS ログ Lambda Async のリクエスト本文を確認します。",
+    "request_schema_description": "AWS アカウント ID と Lambda ARN。"
+  },
+  "ListAWSLogsServices": {
+    "description": "Datadog が自動ログ収集で提供する 現在の AWS サービスのリストを取得します。返されたサービス ID とサービスパラメーターを使用して、AWS サービスのログ収集 API エンドポイントを有効化します。",
+    "summary": "AWS ログレディサービスのリストを取得"
+  },
+  "EnableAWSLogServices": {
+    "description": "サービスのリストに対して自動ログ収集を有効にします。コンフィギュレーションを保存するため、この操作は `CreateAWSLambdaARN` を実行した後で行う必要があります。",
+    "summary": "AWS ログインテグレーションの有効化",
+    "request_description": "AWS ログサービスのリクエスト本文を有効化します。",
+    "request_schema_description": "Datadog が自動ログ収集で提供する現在の AWS サービスのリストです。"
+  },
+  "CheckAWSLogsServicesAsync": {
+    "description": "特定のサービスと AWS アカウントについて、ログ転送トリガーに\n追加するアクセス許可が存在するかどうかをテストします。入力は `EnableAWSLogServices` と同じです。\n非同期処理を実行するため、非同期リクエストが完了するまでブロッキングモードで\n繰り返しポーリングを行うことができます。\n\n- アクセス許可が AWS アカウントに存在するかを確認し、\n'created' ステータスを返します。\n- 確認中は 'waiting' ステータスを返します。\n- Lambda が存在した場合は 'checked and ok' ステータスを返します。\n- Lambda が存在しない場合は 'error' ステータスを返します。",
+    "summary": "ログサービスのアクセス許可を確認する",
+    "request_description": "AWS ログ Async サービスのリクエスト本文を確認します。",
+    "request_schema_description": "Datadog が自動ログ収集で提供する現在の AWS サービスのリストです。"
+  },
+  "DeleteAzureIntegration": {
+    "description": "Datadog アカウントから 特定の Datadog-Azure インテグレーションを削除します。",
+    "summary": "Azure インテグレーションの削除",
+    "request_description": "特定の Datadog-Azure インテグレーションのリクエスト本文を削除します。",
+    "request_schema_description": "現在のオーガニゼーションに構成されている Datadog-Azure インテグレーションです。"
+  },
+  "ListAzureIntegration": {
+    "description": "お使いの Datadog アカウントで構成されたすべての Datadog-Azure インテグレーションをリストします。",
+    "summary": "すべての Azure インテグレーションのリスト"
+  },
+  "CreateAzureIntegration": {
+    "description": "Datadog-Azure インテグレーションを作成します。\n\n`POST` メソッドを使用すると、Datadog Organization の既存の構成に\n新しい構成を追加してインテグレーション構成が更新されます。\n\n`PUT` メソッドを使用すると、既存の構成を Datadog オーガニゼーションに送信された新しい構成で\n置き換える形でインテグレーション構成が更新されます。",
+    "summary": "Azure インテグレーションの作成",
+    "request_description": "Datadog アカウントのリクエスト本文に対応する Datadog-Azure インテグレーションを作成します。",
+    "request_schema_description": "現在のオーガニゼーションに構成されている Datadog-Azure インテグレーションです。"
+  },
+  "UpdateAzureIntegration": {
+    "description": "Datadog-Azure インテグレーションを更新します。既存の `tenant_name` と `client_id` が必要です。\nその他フィールドの既存の値は提供されたフィールドの値で上書きされます。`tenant_name` および `client_id` を上書きするには、\n`new_tenant_name` と `new_client_id` を使用します。フィールドを変更しない場合は、ペイロードで該当するフィールドを提供する必要はありません。",
+    "summary": "Azure インテグレーションの更新",
+    "request_description": "Datadog-Azure インテグレーションのリクエスト本文を更新します。",
+    "request_schema_description": "現在のオーガニゼーションに構成されている Datadog-Azure インテグレーションです。"
+  },
+  "UpdateAzureHostFilters": {
+    "description": "特定の Datadog-Azure インテグレーション用に定義されたホストフィルターのリストを更新します。",
+    "summary": "Azure インテグレーションホストフィルターを更新する",
+    "request_description": "Datadog-Azure インテグレーションホストフィルターのリクエスト本文を更新します。",
+    "request_schema_description": "現在のオーガニゼーションに構成されている Datadog-Azure インテグレーションです。"
+  },
+  "DeleteGCPIntegration": {
+    "description": "特定の Datadog-GCP インテグレーションを削除します。",
+    "summary": "GCP インテグレーションの削除",
+    "request_description": "特定の Datadog-GCP インテグレーションを削除します。",
+    "request_schema_description": "お使いの Google Cloud Platform アカウントです。"
+  },
+  "ListGCPIntegration": {
+    "description": "お使いの Datadog アカウントで構成されたすべての Datadog-GCP インテグレーションをリストします。",
+    "summary": "すべての GCP インテグレーションのリスト"
+  },
+  "CreateGCPIntegration": {
+    "description": "Datadog-GCP インテグレーションを作成します。",
+    "summary": "GCP インテグレーションの作成",
+    "request_description": "Datadog-GCP インテグレーションを作成します。",
+    "request_schema_description": "お使いの Google Cloud Platform アカウントです。"
+  },
+  "UpdateGCPIntegration": {
+    "description": "Datadog-GCP インテグレーションの host_filters および/または automute を更新します。\n処理には `project_id` と `client_email` が必要ですが、これらのフィールドは更新できません。\nこれらのフィールドの更新が必要な場合は、削除してエンドポイント作成 (`POST`) を使用してください。\n指定のないフィールドには元の値がそのまま保持されます。",
+    "summary": "GCP インテグレーションを更新する",
+    "request_description": "Datadog-GCP インテグレーションを更新します。",
+    "request_schema_description": "お使いの Google Cloud Platform アカウントです。"
+  },
+  "CreatePagerDutyIntegrationService": {
+    "description": "PagerDuty インテグレーションに新しいサービスオブジェクトを作成します。",
+    "summary": "新しいサービスオブジェクトを作成する",
+    "request_description": "新しいサービスオブジェクトのリクエスト本文を作成します。",
+    "request_schema_description": "Datadog とのインテグレーションが利用可能な PagerDuty サービスです。"
+  },
+  "DeletePagerDutyIntegrationService": {
+    "description": "Datadog-PagerDuty インテグレーションの単一のサービスオブジェクトを削除します。",
+    "summary": "単一のサービスオブジェクトを削除する"
+  },
+  "GetPagerDutyIntegrationService": {
+    "description": "Datadog-PagerDuty インテグレーションのサービス名を取得します。",
+    "summary": "単一のサービスオブジェクトを取得する"
+  },
+  "UpdatePagerDutyIntegrationService": {
+    "description": "Datadog-PagerDuty インテグレーションの単一のサービスオブジェクトを更新します。",
+    "summary": "単一のサービスオブジェクトを更新する",
+    "request_description": "既存サービスオブジェクトのリクエスト本文を更新します。",
+    "request_schema_description": "PagerDuty のサービスオブジェクトキーです。"
+  },
+  "DeleteSlackIntegration": {
+    "description": "Datadog-Slack インテグレーションを削除します。",
+    "summary": "Slack インテグレーションの削除"
+  },
+  "GetSlackIntegration": {
+    "description": "Datadog-Slack インテグレーションのすべての情報を取得します。",
+    "summary": "Slack インテグレーションに関する情報を取得する"
+  },
+  "CreateSlackIntegration": {
+    "description": "Datadog-Slack インテグレーションを作成します。作成が完了したら、\n[Slack インテグレーションエンドポイントにチャンネルを追加する](https://docs.datadoghq.com/api/?lang=bash#add-channels-to-slack-integration)に従ってチャンネルを追加してください。\n\nこのメソッドを使用すると、Datadog オーガニゼーションの既存のデータに新しい構成を**追加する**形でインテグレーション構成が更新されます。",
+    "summary": "Slack インテグレーションの作成",
+    "request_description": "Datadog-Slack インテグレーションのリクエスト本文を作成します。",
+    "request_schema_description": "新しい Datadog-Slack インテグレーションです。"
+  },
+  "UpdateSlackIntegration": {
+    "description": "既存の Datadog-Slack インテグレーションにチャンネルを追加します。\n\nこのメソッドを使用すると、現在の構成を Datadog オーガニゼーションに送信された\n新しい構成に**置き換えて**、インテグレーション構成が更新されます。",
+    "summary": "Slack インテグレーションにチャネルを追加",
+    "request_description": "既存の Datadog-Slack インテグレーションのリクエスト本文を更新します。",
+    "request_schema_description": "Slack チャンネルのコンフィギュレーションです。"
+  },
+  "GetSlackIntegrationChannels": {
+    "description": "Datadog-Slack インテグレーションに構成されたすべてのチャンネルのリストを取得します。",
+    "summary": "Slack インテグレーションのすべてのチャンネルを取得"
+  },
+  "CreateSlackIntegrationChannel": {
+    "description": "Datadog-Slack インテグレーションにチャンネルを追加します。",
+    "summary": "Slack インテグレーションチャンネルの作成",
+    "request_description": "作成される Slack チャンネルを説明するペイロード",
+    "request_schema_description": "Slack チャンネルのコンフィギュレーション。"
+  },
+  "RemoveSlackIntegrationChannel": {
+    "description": "Datadog-Slack インテグレーションからチャンネルを削除します。",
+    "summary": "Slack インテグレーションチャンネルの削除"
+  },
+  "GetSlackIntegrationChannel": {
+    "description": "Datadog-Slack インテグレーションに構成されたチャンネルを取得します。",
+    "summary": "Slack インテグレーションチャンネルの取得"
+  },
+  "UpdateSlackIntegrationChannel": {
+    "description": "Datadog-Slack インテグレーションに使用されるチャンネルを更新します。",
+    "summary": "Slack インテグレーションチャンネルの更新",
+    "request_description": "更新されるフィールドと値を説明するペイロード。",
+    "request_schema_description": "Slack チャネルのコンフィギュレーション。"
+  },
+  "CreateWebhooksIntegrationCustomVariable": {
+    "description": "`<CUSTOM_VARIABLE_NAME>` という名のエンドポイントを作成します。",
+    "summary": "カスタム変数を作成する",
+    "request_description": "カスタム変数のリクエスト本文を定義します。",
+    "request_schema_description": "Webhook インテグレーション用のカスタム変数です。"
+  },
+  "DeleteWebhooksIntegrationCustomVariable": {
+    "description": "`<CUSTOM_VARIABLE_NAME>` という名のエンドポイントを削除します。",
+    "summary": "カスタム変数を削除する"
+  },
+  "GetWebhooksIntegrationCustomVariable": {
+    "description": "`<CUSTOM_VARIABLE_NAME>` という名前のカスタム変数の内容を表示します。\n\nカスタム変数がシークレットの場合、値は応答ペイロードに返されません。",
+    "summary": "カスタム変数を取得する"
+  },
+  "UpdateWebhooksIntegrationCustomVariable": {
+    "description": "`<CUSTOM_VARIABLE_NAME>` という名のエンドポイントを更新します。",
+    "summary": "カスタム変数を更新する",
+    "request_description": "既存カスタム変数のリクエスト本文を更新します。",
+    "request_schema_description": "カスタム変数オブジェクトのリクエストを更新します。\n\n*すべてのプロパティはオプションとなります。*"
+  },
+  "CreateWebhooksIntegration": {
+    "description": "`<WEBHOOK_NAME>` という名のエンドポイントを作成します。",
+    "summary": "Webhook インテグレーションを作成する",
+    "request_description": "Webhooks インテグレーションのリクエスト本文を作成します。",
+    "request_schema_description": "Datadog-Webhooks インテグレーションです。"
+  },
+  "DeleteWebhooksIntegration": {
+    "description": "`<WEBHOOK 名>` という名前のエンドポイントを削除します。",
+    "summary": "Webhook を削除する"
+  },
+  "GetWebhooksIntegration": {
+    "description": "`<WEBHOOK_名>` という名前の Webhook のコンテンツを取得します。",
+    "summary": "Webhook インテグレーションを取得する"
+  },
+  "UpdateWebhooksIntegration": {
+    "description": "`<WEBHOOK_NAME>` という名前のエンドポイントを更新します。",
+    "summary": "Webhook を更新する",
+    "request_description": "既存の Datadog-Webhooks インテグレーションを更新します。",
+    "request_schema_description": "Webhooks インテグレーションオブジェクトのリクエストを更新します。\n\n*すべてのプロパティはオプションとなります。*"
+  },
+  "ListLogs": {
+    "description": "リストエンドポイントは、ログ検索クエリと一致するログを返します。\n[結果はページ区切りされます][1]。\n\n**オーガニゼーションのためのログのアーカイブを目的とする場合は、\nログリスト API の代わりに Datadog のアーカイブ機能の使用を検討してください。\n[Datadog のログのアーカイブに関するドキュメント][2]を参照してください。**\n\n[1]: /logs/guide/collect-multiple-logs-with-pagination\n[2]: https://docs.datadoghq.com/logs/archives",
+    "summary": "Search logs",
+    "request_description": "ログフィルター",
+    "request_schema_description": "オーガニゼーションからログのリストを取得するリクエストと共に送信するオブジェクト。"
+  },
+  "GetLogsIndexOrder": {
+    "description": "ログインデックスの現在の順序を取得します。このエンドポイントは、JSON 引数を受け取りません。",
+    "summary": "インデックス順序を取得する"
+  },
+  "UpdateLogsIndexOrder": {
+    "description": "このエンドポイントは、オーガニゼーションのインデックス順序を更新します。\nリクエストが正常に完了したときに、リクエスト本文で渡される インデックス順序オブジェクトを返します。",
+    "summary": "インデックス順序を更新する",
+    "request_description": "新しい順序のインデックス名リストを含むオブジェクト",
+    "request_schema_description": "順序付きのログインデックス名リストを含むオブジェクト。"
+  },
+  "ListLogIndexes": {
+    "description": "インデックスオブジェクトはログインデックスの構成を記述します。\nこのエンドポイントはオーガニゼーションの `LogIndex` オブジェクトの配列を返します。",
+    "summary": "すべてのインデックスを取得する"
+  },
+  "CreateLogsIndex": {
+    "description": "新しいインデックスを作成します。リクエストが正常に完了したときに、リクエスト本文で渡される Index オブジェクトを返します。",
+    "summary": "インデックスを作成",
+    "request_description": "新しいインデックスを含むオブジェクト。",
+    "request_schema_description": "Datadog のログインデックスを記述するオブジェクト。"
+  },
+  "GetLogsIndex": {
+    "description": "オーガニゼーションからログインデックスを取得します。このエンドポイントは、JSON 引数を受け取りません。",
+    "summary": "インデックスを取得する"
+  },
+  "UpdateLogsIndex": {
+    "description": "名前による識別に従ってインデックスを更新します。\nリクエストが正常に完了したときに、リクエスト本文で渡されるインデックスオブジェクトを返します。\n\nPUT` メソッドを使用すると、現在の構成を Datadog Organization に送信された\n新しい構成に**置き換えて**、インデックス構成が更新されます。",
+    "summary": "インデックスを更新する",
+    "request_description": "新しい `LogsIndexUpdateRequest` を含むオブジェクト。",
+    "request_schema_description": "Datadog ログのインデックスを更新するオブジェクト。"
+  },
+  "GetLogsPipelineOrder": {
+    "description": "パイプラインの現在の順序を取得します。\nこのエンドポイントは、JSON 引数を受け取りません。",
+    "summary": "パイプライン順序を取得する"
+  },
+  "UpdateLogsPipelineOrder": {
+    "description": "パイプラインの順序を更新します。ログは順番に処理されるため、パイプラインの順序を変更すると、\n他のパイプラインで処理されるデータの構造や内容が変化する可能性があります。\n\n**注**: `PUT` メソッドを使用すると、現在の順序を Datadog オーガニゼーションに送信される\n新しい順序に置き換えてパイプラインの順序が更新されます。",
+    "summary": "パイプライン順序を更新する",
+    "request_description": "新しい順序のパイプライン ID リストを含むオブジェクト。",
+    "request_schema_description": "順序付きのパイプライン ID リストを含むオブジェクト。"
+  },
+  "ListLogsPipelines": {
+    "description": "オーガニゼーションからすべてのパイプラインを取得します。\nこのエンドポイントは、JSON 引数を受け取りません。",
+    "summary": "すべてのパイプラインを取得する"
+  },
+  "CreateLogsPipeline": {
+    "description": "オーガニゼーションにパイプラインを作成します。",
+    "summary": "パイプラインを作成する",
+    "request_description": "新しいパイプラインの定義。",
+    "request_schema_description": "パイプラインとプロセッサーは、受信ログに対して操作を行い、\nログをパースして構造化属性に変換することで、クエリを容易に行えるようにします。\n\n**注**: これらのエンドポイントを使用できるのは管理者ユーザーだけです。\n管理者によって作成されたアプリケーションキーを使用してください。"
+  },
+  "DeleteLogsPipeline": {
+    "description": "オーガニゼーションから特定のパイプラインを取得します。\nこのエンドポイントは、JSON 引数を受け取りません。",
+    "summary": "パイプラインを削除する"
+  },
+  "GetLogsPipeline": {
+    "description": "オーガニゼーションから指定されたパイプラインを取得します。\nこのエンドポイントは、JSON 引数を受け取りません。",
+    "summary": "パイプラインを取得する"
+  },
+  "UpdateLogsPipeline": {
+    "description": "特定のパイプライン構成を更新し、プロセッサーまたは順序を変更します。\n\n**注**: このメソッドを使用すると、現在の構成を Datadog Organization に送信された新しい構成に**置き換えて**、パイプライン構成が更新されます。",
+    "summary": "パイプラインを更新する",
+    "request_description": "パイプラインの新しい定義。",
+    "request_schema_description": "パイプラインとプロセッサーは、受信ログに対して操作を行い、\nログをパースして構造化属性に変換することで、クエリを容易に行えるようにします。\n\n**注**: これらのエンドポイントを使用できるのは管理者ユーザーだけです。\n管理者によって作成されたアプリケーションキーを使用してください。"
+  },
+  "ListActiveMetrics": {
+    "description": "特定の時間から現在までアクティブに報告しているメトリクスのリストを取得します。",
+    "summary": "アクティブメトリクスのリストを取得する"
+  },
+  "GetMetricMetadata": {
+    "description": "指定されたメトリクスに関するメタデータを取得します。",
+    "summary": "メトリクスのメタデータを取得する"
+  },
+  "UpdateMetricMetadata": {
+    "description": "指定されたメトリクスのメタデータを編集します。詳しくは[サポートされる種類](https://docs.datadoghq.com/developers/metrics)を参照してください。",
+    "summary": "メトリクスのメタデータを編集",
+    "request_description": "新しいメタデータです。",
+    "request_schema_description": "メトリクスに関連するすべてのメタデータを含むオブジェクト。"
+  },
+  "ListMonitors": {
+    "description": "オーガニゼーションから指定されたモニターに関する詳細を取得します。",
+    "summary": "全モニターの詳細を取得"
+  },
+  "CreateMonitor": {
+    "description": "指定されたオプションを使用してモニターを作成します。\n\n#### モニタータイプ\n\n次から選択したモニターのタイプ:\n\n- 異常検知: `query alert`\n- APM: `query alert` または `trace-analytics alert`\n- 複合条件: `composite`\n- カスタム: `service check`\n- イベント: `event alert`\n- 予測: `query alert`\n- ホスト: `service check`\n- インテグレーション: `query alert` または `service check`\n- ライブプロセス: `process alert`\n- ログ: `log alert`\n- メトリクス: `query alert`\n- ネットワーク: `service check`\n-外れ値: `query alert`\n- process: `service check`\n- rum: `rum alert`\n- SLO: `slo alert`\n- watchdog: `event alert`\n- event-v2: `event-v2 alert`\n- 監査: `audit alert`\n- エラー追跡: `error-tracking alert`\n\n#### クエリタイプ\n\n**メトリクスアラートクエリ**\n\n例: `time_aggr(time_window):space_aggr:metric{tags} [by {key}] operator #`\n\n- `time_aggr`: avg、sum、max、min、change、または pct_change\n- `time_window`: `last_#m` (モニタータイプに応じて、1〜10080 の `#`) または `last_#h`(モニタータイプに応じて、1〜168 の `#`) または `last_1d`、または `last_1w`\n- `space_aggr`: avg、sum、min、または max\n- `tags`: 1 つまたは複数のタグ (カンマ区切り)、または *\n- `key`: key:value タグ構文における 'key'、グループ内の各タグに対して個別のアラートを定義します (マルチアラート)\n- `operator`: <、<=、>、>=、==、または !=\n- `#`: しきい値の設定に用いる整数または 10 進数\n\n `_change_` または `_pct_change_` の時間アグリゲータを使用している場合は、代わりに以下を使用\n`change_aggr(time_aggr(time_window),\ntimeshift):space_aggr:metric{tags} [by {key}] operator #`:\n\n- `change_aggr` change、pct_change\n- `time_aggr` avg、sum、max、min [詳細](https://docs.datadoghq.com/monitors/create/types/#define-the-conditions)\n- `time_window` last\\_#m (モニタータイプに応じて、1〜2880)、last\\_#h (モニタータイプに応じて、1〜48)、または last_#d (1 or 2)\n- `timeshift` #m_ago (5、10、15、または 30)、#h_ago (1、2、または 4)、または 1d_ago\n\nこれを利用して、以下のクエリで異常値モニタを作成します。\n`avg(last_30m):outliers(avg:system.cpu.user{role:es-events-data} by {host}, 'dbscan', 7) > 0`\n\n**サービスチェッククエリ**\n\n例: `\"check\".over(tags).last(count).by(group).count_by_status()`\n\n- **`check`** チェックの名前。例: `datadog.agent.up`\n- **`tags`** 1 つ以上の引用符付きタグ (カンマ区切り)、または \"*\"。 例: `.over(\"env:prod\", \"role:db\")`、**`over`** を空白にすることはできません。\n- **`count`** 最大しきい値 (`options` で定義) 以上でなければなりません。最大値は 100 です。\n例えば、1 つの critical、3 つの ok、2 つの warn のステータスに対して通知するように指定した場合、`count` は最低でも 3 でなければなりません。\n- **`group`** チェックモニターに指定する必要があります。一部のサービスチェックでは、チェックごとのグループ化がすでに明示的に知られています。\n例えば、Postgres インテグレーションモニターは `db`、`host`、`port` でタグ付けされ、ネットワークモニターは `host`、`instance`、`url` でタグ付けされます。詳しくは [サービスチェック](https://docs.datadoghq.com/api/latest/service-checks/)のドキュメントを参照してください。\n\n**イベントアラートクエリ**\n\n例: `events('sources:nagios status:error,warning priority:normal tags: \"string query\"').rollup(\"count\").last(\"1h\")\"`\n\n- **`event`**、イベントのクエリ文字列:\n- **`string_query`** イベントのタイトルとテキストにマッチするフリーテキストクエリ。\n- **`sources`** イベントソース (カンマ区切り)。\n- **`status`** イベントステータス (カンマ区切り)。有効なオプション: error、warn、info\n- **`priority`**イベントの優先順位 (カンマ区切り)。有効なオプション: low、normal、all\n- **`host`** イベント報告ホスト (カンマ区切り)。\n- **`tags`** イベントタグ (カンマ区切り)。\n- **`excluded_tags`** 除外されたイベントタグ (カンマ区切り)。\n- **`rollup`** 統計のロールアップの方法。現在では `count` が唯一のサポート方法です。\n- **`last`** カウントをロールアップする時間枠。例: 45m、4h。サポートされるタイムフレーム: m、h、d。この値は 48 時間を超えてはなりません。\n\n**注** イベントアラートクエリは非推奨になり、イベント V2 アラートクエリに置き換わります。詳細については、[イベント移行ガイド](https://docs.datadoghq.com/events/guides/migrating_to_new_events_features/)を参照してください。\n\n**イベント V2 アラートクエリ**\n\n例: `events(query).rollup(rollup_method[, measure]).last(time_window) operator #`\n\n- **`query`** 検索クエリ - [ログ検索構文](https://docs.datadoghq.com/logs/search_syntax/)に従います。\n- **`rollup_method`** 統計情報のロールアップの方法 - `count`、`avg`、`cardinality` をサポートします。\n- **`measure`** `avg` とカーディナリティ `rollup_method` の場合 - 使用するメジャーまたはファセット名を指定します。\n- **`time_window`** #m (1〜2880)、#h (1〜48).\n- **`operator`** `<`、`<=`、`>`、`>=`、`==`、または `!=`\n- **`#`** しきい値の設定に使用する整数または 10 進数。\n\n**注** US1-FED、US3、US5 でのみ利用可能で、EU と US1 ではクローズドベータ版となります。\n\n**プロセスアラートクエリ**\n\n例: `processes(search).over(tags).rollup('count').last(timeframe) operator #`\n\n- **`search`** プロセスをクエリするためのフリーテキスト検索文字列。\n一致したプロセスは、[Live Processes](https://docs.datadoghq.com/infrastructure/process/?tab=linuxwindows) ページの結果と一致します。\n- **`tags`** 1 つ以上のタグ (カンマ区切り)\n- **`timeframe`** カウントをロールアップする時間枠。例: 10m、4h。サポートされているタイムフレーム: S、M、H、D\n- **`operator`** <、<=、>、>=、==、または !=\n- **`#`** しきい値の設定に用いる整数または 10 進数。\n\n**ログアラートクエリ**\n\n例: `logs(query).index(index_name).rollup(rollup_method[, measure]).last(time_window) operator #`\n\n- **`query`** 検索クエリ - [ログ検索構文](https://docs.datadoghq.com/logs/search_syntax/)に従います。\n- **`index_name`** 複数インデックスの組織の場合、リクエストが実行されるログインデックス。\n- **`rollup_method`** 統計情報のロールアップの方法 - `count`、`avg`、`cardinality` をサポートします。\n- **`measure`** `avg` とカーディナリティ `rollup_method` の場合 - 使用するメジャーまたはファセット名を指定します。\n- **`time_window`** #m (1〜2880)、#h (1〜48)。\n- **`operator`** `<`、`<=`、`>`、`>=`、`==`、または `!=`\n- **`#`** しきい値の設定に用いる整数または 10 進数。\n\n**複合条件クエリ**\n\n例: `12345 && 67890`, where `12345` and `67890` are the IDs of non-composite monitors\n\n* **`name`** [*必須*、*デフォルト* = **動的、クエリに基づく**]: アラートの名前。\n* **`message`** [*必須*、*デフォルト* = **動的、クエリに基づく**]: このモニターに対する通知に含めるメッセージ。\nイベントと同じ「@ユーザー名」表記で、特定のユーザーに対してメール通知を行うことができます。\n* **`tags`** [*オプション*、*デフォルト* = **空リスト**]: モニターに関連付けるタグの一覧。\nAPI 経由ですべてのモニターの詳細を取得する場合、`monitor_tags` 引数を使用して、これらのタグで結果をフィルタリングします。\nこれは、API 経由でのみ利用可能で、Datadog UI では表示も編集もできません。\n\n**SLO アラートクエリ**\n\n例: `error_budget(\"slo_id\").over(\"time_window\") operator #`\n\n- **`slo_id`**: 警告を構成する SLO の英数字の SLO ID。\n- **`time_window`**: 警告したい SLO ターゲットのタイムウィンドウ。有効なオプション: 7d`、`30d`、`90d`。\n- **`operator`**: `>=` または `>`\n\n**監査アラートクエリ**\n\n例: `audits(query).rollup(rollup_method[, measure]).last(time_window) operator #`\n\n- **`query`** 検索クエリ - [ログ検索構文](https://docs.datadoghq.com/logs/search_syntax/)に従います。\n- **`rollup_method`** 統計情報のロールアップの方法 - `count`、`avg`、`cardinality` をサポートします。\n- **`measure`** `avg` とカーディナリティ `rollup_method` の場合 - 使用するメジャーまたはファセット名を指定します。\n- **`time_window`** #m (1〜2880)、#h (1〜48)。\n- **`operator`** `<`、`<=`、`>`、`>=`、`==`、または `!=`\n- **`#`** しきい値の設定に用いる整数または 10 進数。\n\n**注** US1-FED でのみ利用可能で、US1、EU、US3、US5 ではクローズドベータ版となります。\n\n**CI パイプラインのアラートクエリ**\n\n例: `ci-pipelines(query).rollup(rollup_method[, measure]).last(time_window) operator #`\n\n- **`query`** 検索クエリ - [ログ検索構文](https://docs.datadoghq.com/logs/search_syntax/)に従います。\n- **`rollup_method`** 統計情報のロールアップの方法 - `count`、`avg`、`cardinality` をサポートします。\n- **`measure`** `avg` とカーディナリティ `rollup_method` の場合 - 使用するメジャーまたはファセット名を指定します。\n- **`time_window`** #m (1〜2880)、#h (1〜48)。\n- **`operator`** `<`、`<=`、`>`、`>=`、`==`、または `!=`\n- **`#`** しきい値の設定に用いる整数または 10 進数。\n\n**注** クローズドベータ版では US1、EU、US3、US5 でのみ利用可能です。\n\n**エラー追跡アラートクエリ**\n\n例(RUM): `error-tracking-rum(query).rollup(rollup_method[, measure]).last(time_window) operator #`\n例(APM トレース): `error-tracking-traces(query).rollup(rollup_method[, measure]).last(time_window) operator #`\n\n- **`query`** 検索クエリ - [ログ検索構文](https://docs.datadoghq.com/logs/search_syntax/)に従います。\n- **`rollup_method`** 統計情報のロールアップの方法 - `count`、`avg`、`cardinality` をサポートします。\n- **`measure`** `avg` とカーディナリティ `rollup_method` の場合 - 使用するメジャーまたはファセット名を指定します。\n- **`time_window`** #m (1〜2880)、#h (1〜48)。\n- **`operator`** `<`、`<=`、`>`、`>=`、`==`、または `!=`\n- **`#`** しきい値の設定に用いる整数または 10 進数。",
+    "summary": "モニターの作成",
+    "request_description": "モニターのリクエスト本文を作成します。",
+    "request_schema_description": "モニターを記述するオブジェクト。"
+  },
+  "CheckCanDeleteMonitor": {
+    "description": "特定のモニターが検知可能かどうかを確認します。",
+    "summary": "モニターの削除が可能かどうか確認"
+  },
+  "SearchMonitorGroups": {
+    "description": "モニターグループの詳細を検索および絞り込みをします。",
+    "summary": "モニターグループの検索"
+  },
+  "SearchMonitors": {
+    "description": "モニターの詳細を検索および絞り込みをします。",
+    "summary": "モニターの検索"
+  },
+  "ValidateMonitor": {
+    "description": "リクエストで提供されたモニターを検証します。",
+    "summary": "モニターの検証",
+    "request_description": "モニターリクエストオブジェクト",
+    "request_schema_description": "モニターを記述するオブジェクト。"
+  },
+  "DeleteMonitor": {
+    "description": "指定されたモニターを削除",
+    "summary": "モニターの削除"
+  },
+  "GetMonitor": {
+    "description": "オーガニゼーションから指定されたモニターに関する詳細を取得します。",
+    "summary": "モニターの詳細を取得"
+  },
+  "UpdateMonitor": {
+    "description": "指定されたモニターを編集します。",
+    "summary": "モニターの編集",
+    "request_description": "モニターのリクエスト本文を編集します。",
+    "request_schema_description": "モニターの更新リクエストを記述するオブジェクト。"
+  },
+  "ListMonitorDowntimes": {
+    "description": "指定したモニターのすべてのアクティブダウンタイムを取得。",
+    "summary": "モニターのすべてのダウンタイムを取得"
+  },
+  "MuteMonitor": {
+    "description": "指定されたモニターをミュートします。",
+    "summary": "モニターのミュート"
+  },
+  "UnmuteMonitor": {
+    "description": "指定されたモニターのミュートを解除します。",
+    "summary": "モニターのミュートを解除"
+  },
+  "GetMonthlyCustomReports": {
+    "description": "月刊カスタムレポートを取得します。",
+    "summary": "利用可能な月刊カスタムレポートのリストを取得します"
+  },
+  "GetSpecifiedMonthlyCustomReports": {
+    "description": "指定された月刊カスタムレポートを取得します。",
+    "summary": "特定の月刊カスタムレポートを取得します"
+  },
+  "ListNotebooks": {
+    "description": "すべてのノートブックを取得します。これは、ノートブックの `name` または著者の `handle` で\n特定の `query` を持つノートブックを検索するのにも使えます。",
+    "summary": "すべてのノートブックを取得"
+  },
+  "CreateNotebook": {
+    "description": "指定のオプションを使用してノートブックを作成します。",
+    "summary": "ノートブックの作成",
+    "request_description": "作成したいノートブックの JSON 説明です。",
+    "request_schema_description": "ノートブック作成リクエストの説明です。"
+  },
+  "DeleteNotebook": {
+    "description": "指定の ID を使用してノートブックを削除します。",
+    "summary": "ノートブックの削除"
+  },
+  "GetNotebook": {
+    "description": "指定のノートブック ID を使用してノートブックを取得します。",
+    "summary": "ノートブックの取得"
+  },
+  "UpdateNotebook": {
+    "description": "指定の ID を使用してノートブックを更新します。",
+    "summary": "ノートブックの更新",
+    "request_description": "ノートブックのリクエスト本文を更新します。",
+    "request_schema_description": "ノートブック更新リクエストの説明です。"
+  },
+  "ListOrgs": {
+    "description": "管理している組織を一覧表示します。",
+    "summary": "管理している組織を一覧表示する"
+  },
+  "CreateChildOrg": {
+    "description": "子オーガニゼーションを作成します。\n\nこのエンドポイントには[マルチオーガニゼーションアカウント](https://docs.datadoghq.com/account_management/multi_organization/)\n機能が必要です。\n[サポートに連絡](https://docs.datadoghq.com/help/)して有効化してください。\n\n新しい子オーガニゼーションが作成されたら、応答で渡された`org.public_id`、`api_key.key`、`application_key.hash` を使用して操作することができます。",
+    "summary": "子組織を作成する",
+    "request_description": "作成が必要となるオーガニゼーションのオブジェクト",
+    "request_schema_description": "作成するオーガニゼーションを記述するオブジェクト。"
+  },
+  "GetOrg": {
+    "description": "オーガニゼーションの情報を取得します。",
+    "summary": "組織情報を取得する"
+  },
+  "UpdateOrg": {
+    "description": "オーガニゼーションを更新します。",
+    "summary": "組織を更新する",
+    "request_description": "",
+    "request_schema_description": "オーガニゼーションを作成、編集、管理します。"
+  },
+  "UploadIdPForOrg": {
+    "description": "SAML IdP に含まれる ID プロバイダー (IdP) のメタデータを\n更新するオプションはいくつかあります。\n\n* **マルチパートフォームデータ**: フォームポストを使用して IdP のメタデータファイルをポストします。\n\n* **XML 本文**: IdP のメタデータファイルをリクエスト本文としてポストします。",
+    "summary": "IdP メタデータをアップロード",
+    "request_description": ""
+  },
+  "QueryMetrics": {
+    "description": "時系列ポイントのクエリ。",
+    "summary": "時系列ポイントのクエリ"
+  },
+  "ListMetrics": {
+    "description": "Datadog にある過去 24 時間のメトリクスを検索します。",
+    "summary": "メトリクスの検索"
+  },
+  "SubmitMetrics": {
+    "description": "メトリクスエンドポイントを使用して、Datadog のダッシュボードでグラフ化できる時系列データをポストできます。\nペイロードの上限は 3.2 メガバイト (3200000 バイト) です。非圧縮ペイロードの場合、サイズは 62 メガバイト (62914560 バイト) までとなります。\n\nDogStatsD を使用せず、Datadog API に直接メトリクスを送信する場合は以下の仕様に従ってください。\n\n- タイムスタンプ: 64 ビット\n- 値: 32 ビット\n- メトリクス名: 20 バイト\n- 時系列: 50 バイト\n- 最大ペイロードは約 100 バイトまでですが、DogStatsD API を使用する場合は\n圧縮が適用されるためペイロードのサイズも小さくなります。",
+    "summary": "メトリクスを送信する",
+    "request_description": "",
+    "request_schema_description": "メトリクスのペイロード。"
+  },
+  "ListServiceDependencies": {
+    "description": "APM サービスのリストと依存関係を取得します。取得されたサービスは環境およびプライマリタグ (定義されている場合) でフィルタリングされます。",
+    "summary": "すべての APM サービスの依存関係を取得"
+  },
+  "ListSingleServiceDependencies": {
+    "description": "指定のサービスのすぐ上流および下流のサービスを取得します。\n取得されたサービスは環境およびプライマリタグ (定義されている場合) でフィルタリングされます。",
+    "summary": "1 つの APM サービスの依存関係を取得"
+  },
+  "ListSLOs": {
+    "description": "オーガニゼーションのサービスレベル目標オブジェクトのリストを取得します。",
+    "summary": "すべての SLO を取得する"
+  },
+  "CreateSLO": {
+    "description": "サービスレベル目標オブジェクトを作成します。",
+    "summary": "SLO オブジェクトを作成する",
+    "request_description": "サービスレベル目標のリクエストオブジェクト。",
+    "request_schema_description": "サービスレベル目標オブジェクトにはサービスレベル指標、1 つ以上のタイムフレームに関わる\nしきい値、およびメタデータ (`name`、`description`、`tags` など) が含まれます。"
+  },
+  "DeleteSLOTimeframeInBulk": {
+    "description": "複数のサービスレベル目標オブジェクトを削除 (または一部削除) します。\n\nこのエンドポイントは 1 つ以上のサービスレベル目標オブジェクトに関わる\n 1 つ以上のしきい値の削除を行います。すべてのしきい値が削除された場合は、\nサービスレベル目標オブジェクトも同様に削除されます。",
+    "summary": "SLO タイムフレームを一括削除する",
+    "request_description": "複数のサービスレベル目標オブジェクトのリクエスト本文を削除します。",
+    "request_schema_description": "各 ID で削除するしきい値を示すタイムフレームの配列に対する、サービスレベル目標オブジェクト ID のマップです。"
+  },
+  "CheckCanDeleteSLO": {
+    "description": "SLO が安全に削除されたかを確認します。たとえば、\nSLO の削除によりダッシュボードに問題が発生していないことを確認します。",
+    "summary": "SLO を安全に削除できるかどうかを確認する"
+  },
+  "ListSLOCorrection": {
+    "description": "サービスレベル目標の補正をすべて取得します。",
+    "summary": "Get all SLO corrections"
+  },
+  "CreateSLOCorrection": {
+    "description": "SLO 補正を作成します。",
+    "summary": "Create an SLO correction",
+    "request_description": "SLO 補正を作成",
+    "request_schema_description": "SLO に適用される補正を定義するオブジェクト。"
+  },
+  "DeleteSLOCorrection": {
+    "description": "指定した SLO 補正オブジェクトを完全に削除します。",
+    "summary": "Delete an SLO correction"
+  },
+  "GetSLOCorrection": {
+    "description": "SLO 補正を取得します。",
+    "summary": "Get an SLO correction for an SLO"
+  },
+  "UpdateSLOCorrection": {
+    "description": "指定した SLO 補正オブジェクトを更新します。",
+    "summary": "Update an SLO correction",
+    "request_description": "編集済みの SLO 補正オブジェクト",
+    "request_schema_description": "SLO に適用される補正を定義するオブジェクト。"
+  },
+  "DeleteSLO": {
+    "description": "指定のサービスレベル目標オブジェクトを完全に削除します。\n\nSLO を使用するダッシュボードの場合はダッシュボード内で SLO が参照されているため、\n`DELETE /v1/slo/` エンドポイントは 409 競合エラーを返します。",
+    "summary": "SLO を削除する"
+  },
+  "GetSLO": {
+    "description": "サービスレベル目標オブジェクトを取得します。",
+    "summary": "SLO の詳細を取得する"
+  },
+  "UpdateSLO": {
+    "description": "指定のサービスレベル目標オブジェクトを更新します。",
+    "summary": "SLO を更新する",
+    "request_description": "編集されたサービスレベル目標のリクエストオブジェクト。",
+    "request_schema_description": "サービスレベル目標オブジェクトにはサービスレベル指標、1 つ以上のタイムフレームに関わる\nしきい値、およびメタデータ (`name`、`description`、`tags` など) が含まれます。"
+  },
+  "GetSLOCorrections": {
+    "description": "SLO に修正を適用させる",
+    "summary": "SLO の修正を受ける"
+  },
+  "GetSLOHistory": {
+    "description": "SLO の種類に関わらず、指定された SLO 履歴を取得します。\n\n詳細な履歴データはソースデータの種類に応じて構造化されます。\nたとえば、メトリクスのデータはそのメトリクスのソースを使用するイベントの SLO に、モニターの遷移履歴はそのモニターの SLO 種類に含まれます。\n\n**注:** 応答の形式は、SLO がイベントベースか時間ベースかによって異なります。 \n事例では両方の形式をご紹介しています。",
+    "summary": "SLO の履歴を取得する"
+  },
+  "GetSyntheticsCIBatch": {
+    "description": "バッチの更新情報を取得します。",
+    "summary": "バッチの詳細の取得"
+  },
+  "ListLocations": {
+    "description": "Synthetic テストで利用可能なパブリックおよびプライベートのロケーションリストを取得します。引数は不要です。",
+    "summary": "ロケーションをすべて取得する（パブリックおよびプライベート）"
+  },
+  "CreatePrivateLocation": {
+    "description": "新しい Synthetics プライベートロケーションを作成します。",
+    "summary": "プライベートロケーションを作成する",
+    "request_description": "作成するプライベートロケーションの詳細。",
+    "request_schema_description": "作成するプライベートロケーションに関する情報を含むオブジェクト。"
+  },
+  "DeletePrivateLocation": {
+    "description": "Synthetics プライベートロケーションを削除します。",
+    "summary": "プライベートロケーションを削除する"
+  },
+  "GetPrivateLocation": {
+    "description": "Synthetics プライベートロケーションを取得します。",
+    "summary": "プライベートロケーションを取得する"
+  },
+  "UpdatePrivateLocation": {
+    "description": "Synthetics プライベートロケーションを編集します。",
+    "summary": "プライベートロケーションを編集する",
+    "request_description": "更新するプライベートロケーションの詳細。",
+    "request_schema_description": "作成するプライベートロケーションに関する情報を含むオブジェクト。"
+  },
+  "ListTests": {
+    "description": "すべての Synthetic テストのリストを取得します。",
+    "summary": "すべてのテストのリストを取得する"
+  },
+  "CreateTest": {
+    "description": "このエンドポイントは非推奨です。テストを作成するには、[Create an API test](https://docs.datadoghq.com/api/latest/synthetics/#create-an-api-test) または [Create a browser test](https://docs.datadoghq.com/api/latest/synthetics/#create-a-browser-test) を使用してください。",
+    "summary": "テストの作成",
+    "request_description": "作成するテストの詳細。",
+    "request_schema_description": "Synthetic テストについての詳細を含むオブジェクト。"
+  },
+  "CreateSyntheticsAPITest": {
+    "description": "Synthetic API テストを作成します。",
+    "summary": "API テストの作成",
+    "request_description": "作成するテストの詳細。",
+    "request_schema_description": "Synthetic API テストについての詳細を含むオブジェクト。"
+  },
+  "GetAPITest": {
+    "description": "Synthetic API テストに関連する\n詳細なコンフィギュレーションを取得します。",
+    "summary": "API テストを取得する"
+  },
+  "UpdateAPITest": {
+    "description": "Synthetic API テストのコンフィギュレーションを編集します。",
+    "summary": "API テストを編集する",
+    "request_description": "保存する新しいテストの詳細。",
+    "request_schema_description": "Synthetic API テストについての詳細を含むオブジェクト。"
+  },
+  "CreateSyntheticsBrowserTest": {
+    "description": "Synthetic ブラウザテストを作成します。",
+    "summary": "ブラウザテストを作成",
+    "request_description": "作成するテストの詳細。",
+    "request_schema_description": "Synthetic ブラウザテストについての詳細を含むオブジェクト。"
+  },
+  "GetBrowserTest": {
+    "description": "Synthetic ブラウザテストに関連する詳細なコンフィギュレーション (手順を含む) を取得します。",
+    "summary": "ブラウザテストを取得"
+  },
+  "UpdateBrowserTest": {
+    "description": "Synthetic ブラウザテストのコンフィギュレーションを編集します。",
+    "summary": "ブラウザテストを編集する",
+    "request_description": "保存する新しいテストの詳細。",
+    "request_schema_description": "Synthetic ブラウザテストについての詳細を含むオブジェクト。"
+  },
+  "GetBrowserTestLatestResults": {
+    "description": "特定の Synthetic ブラウザテストの最新結果の要約 50 件を取得します。",
+    "summary": "ブラウザテストの最新結果概要を取得"
+  },
+  "GetBrowserTestResult": {
+    "description": "特定の (ブラウザ) Synthetic テストの完全な結果を取得します。",
+    "summary": "ブラウザテストの結果を取得"
+  },
+  "DeleteTests": {
+    "description": "複数の Synthetic テストを ID で削除します。",
+    "summary": "テストの削除",
+    "request_description": "削除する Synthetic テストのパブリック ID リスト。",
+    "request_schema_description": "削除したい Synthetic テスト ID の \nJSON リスト。"
+  },
+  "TriggerTests": {
+    "description": "Synthetics のテストのセットをトリガーします。",
+    "summary": "Synthetics テストをトリガーする",
+    "request_description": "トリガーするテストの識別子。",
+    "request_schema_description": "トリガーする Synthetics テストを記述するオブジェクト。"
+  },
+  "TriggerCITests": {
+    "description": "継続的なインテグレーションに向けた一連の Synthetics テストをトリガーします。",
+    "summary": "CI/CD パイプラインからのテストをトリガー",
+    "request_description": "トリガーするテストの詳細。",
+    "request_schema_description": "トリガーする Synthetics テストを記述するオブジェクト。"
+  },
+  "GetTest": {
+    "description": "Synthetics テストに関連する詳細なコンフィギュレーションを取得します。",
+    "summary": "テストコンフィギュレーションを取得する"
+  },
+  "UpdateTest": {
+    "description": "このエンドポイントは非推奨です。テストを編集するには、[Edit an API test](https://docs.datadoghq.com/api/latest/synthetics/#edit-an-api-test) または [Edit a browser test](https://docs.datadoghq.com/api/latest/synthetics/#edit-a-browser-test) を使用してください。",
+    "summary": "テストの編集",
+    "request_description": "保存する新しいテストの詳細。",
+    "request_schema_description": "Synthetic テストについての詳細を含むオブジェクト。"
+  },
+  "GetAPITestLatestResults": {
+    "description": "特定の Synthetic API テストの最新結果の要約 50 件を取得します。",
+    "summary": "API テストの最新結果概要を取得"
+  },
+  "GetAPITestResult": {
+    "description": "特定の (API) Synthetic テストの完全な結果を取得します。",
+    "summary": "API テスト結果を取得"
+  },
+  "UpdateTestPauseStatus": {
+    "description": "Synthetics テストのステータスを変更し、一時停止または開始します。",
+    "summary": "テストを一時停止または開始する",
+    "request_description": "特定の Synthetic テストに設定されるステータス。",
+    "request_schema_description": "既存の Synthetic テストを開始または一時停止するオブジェクト。"
+  },
+  "ListGlobalVariables": {
+    "description": "すべての Synthetic グローバル変数のリストを削除します。",
+    "summary": "すべてのグローバル変数を取得する"
+  },
+  "CreateGlobalVariable": {
+    "description": "Synthetic グローバル変数を作成します。",
+    "summary": "グローバル変数を作成する",
+    "request_description": "作成するグローバル変数の詳細。",
+    "request_schema_description": "Synthetic グローバル変数。"
+  },
+  "DeleteGlobalVariable": {
+    "description": "Synthetic グローバル変数を削除します。",
+    "summary": "グローバル変数を削除する"
+  },
+  "GetGlobalVariable": {
+    "description": "グローバル変数の詳細なコンフィギュレーションを取得します。",
+    "summary": "グローバル変数を取得する"
+  },
+  "EditGlobalVariable": {
+    "description": "Synthetic グローバル変数を編集します。",
+    "summary": "グローバル変数を編集する",
+    "request_description": "更新するグローバル変数の詳細。",
+    "request_schema_description": "Synthetic グローバル変数。"
+  },
+  "ListHostTags": {
+    "description": "インフラストラクチャー全体のホストとタグのマッピングを返します。",
+    "summary": "タグを取得する"
+  },
+  "DeleteHostTags": {
+    "description": "このエンドポイントを使用して、1 つのホストにユーザーが割り当てた\nすべてのタグを削除できます。",
+    "summary": "ホストタグの削除"
+  },
+  "GetHostTags": {
+    "description": "特定のホストに適用されているタグのリストを返します。",
+    "summary": "ホストタグの取得"
+  },
+  "CreateHostTags": {
+    "description": "このエンドポイントを使用して、新しいタグをホストに追加できます。\nオプションで、タグの由来を指定できます。",
+    "summary": "ホストへのタグの追加",
+    "request_description": "ホストタグのリクエスト本文を更新します。",
+    "request_schema_description": "ホストに関連付けられているタグセット。"
+  },
+  "UpdateHostTags": {
+    "description": "このエンドポイントを使用して、インテグレーションソース内のすべてのタグを\nリクエストで提供されたタグで更新/置換できます。",
+    "summary": "ホストタグの更新",
+    "request_description": "ホストへのタグの追加",
+    "request_schema_description": "ホストに関連付けられているタグセット。"
+  },
+  "GetUsageAnalyzedLogs": {
+    "description": "分析されたログの 1 時間あたり使用量を取得します (セキュリティモニタリング) 。",
+    "summary": "分析されたログの 1 時間あたり使用量の取得"
+  },
+  "GetUsageAttribution": {
+    "description": "使用属性を取得します。",
+    "summary": "使用属性を取得する"
+  },
+  "GetUsageAuditLogs": {
+    "description": "監査ログの 1 時間あたり使用量を取得します。",
+    "summary": "監査ログの 1 時間あたり使用量の取得"
+  },
+  "GetUsageLambda": {
+    "description": "Lambda の 1 時間あたり使用量を取得します。",
+    "summary": "Lambda の 1 時間あたり使用量の取得"
+  },
+  "GetUsageBillableSummary": {
+    "description": "アカウント全体の請求対象使用量を取得します。",
+    "summary": "アカウント全体の請求対象使用量を取得します"
+  },
+  "GetUsageCIApp": {
+    "description": "CI Visibility (Tests、Pipeline、Combo、Spans) の 1 時間ごとの使用量を取得します。",
+    "summary": "CI Visibility の 1 時間ごとの使用量を取得する"
+  },
+  "GetUsageCloudSecurityPostureManagement": {
+    "description": "クラウドセキュリティポスチャ管理 (CSPM) の 1 時間あたり使用量を取得します。",
+    "summary": "CSPM の 1 時間あたり使用量の取得"
+  },
+  "GetUsageCWS": {
+    "description": "クラウドワークロードセキュリティの 1 時間あたり使用量を取得します。",
+    "summary": "クラウドワークロードセキュリティの 1 時間あたり使用量の取得"
+  },
+  "GetUsageDBM": {
+    "description": "データベースモニタリングの 1 時間あたり使用量を取得",
+    "summary": "データベースモニタリングの 1 時間あたり使用量を取得"
+  },
+  "GetUsageFargate": {
+    "description": "[Fargate](https://docs.datadoghq.com/integrations/ecs_fargate/) の 1 時間あたり使用量を取得します。",
+    "summary": "Fargate の 1 時間あたり使用量の取得"
+  },
+  "GetUsageHosts": {
+    "description": "ホストとコンテナの 1 時間あたり使用量を取得します。",
+    "summary": "ホストとコンテナの 1 時間あたり使用量の取得"
+  },
+  "GetHourlyUsageAttribution": {
+    "description": "1 時間ごとの使用量属性を取得します。",
+    "summary": "1 時間ごとの使用量属性を取得する"
+  },
+  "GetIncidentManagement": {
+    "description": "インシデント管理の 1 時間あたり使用量を取得します。",
+    "summary": "インシデント管理の 1 時間あたり使用量を取得する"
+  },
+  "GetUsageIndexedSpans": {
+    "description": "Indexed span の 1 時間あたり使用量を取得します。",
+    "summary": "インデックス化されたスパンの 1 時間あたり使用量を取得"
+  },
+  "GetIngestedSpans": {
+    "description": "取り込まれたスパンの 1 時間あたり使用量を取得します。",
+    "summary": "取り込まれたスパンの 1 時間あたり使用量を取得"
+  },
+  "GetUsageInternetOfThings": {
+    "description": "IoT の 1 時間あたり使用量を取得します。",
+    "summary": "IoT の 1 時間あたりの使用量を取得する"
+  },
+  "GetUsageLogs": {
+    "description": "ログの 1 時間あたり使用量を取得します。",
+    "summary": "ログの 1 時間あたり使用量の取得"
+  },
+  "GetUsageLogsByRetention": {
+    "description": "インデックスされたログの保持期間別の 1 時間あたり使用量を取得します。",
+    "summary": "保持によるログの 1 時間あたり使用量の取得"
+  },
+  "GetUsageLogsByIndex": {
+    "description": "インデックスごとにログの 1 時間あたり使用量を取得します。",
+    "summary": "インデックスごとにログの 1 時間あたり使用量を取得"
+  },
+  "GetMonthlyUsageAttribution": {
+    "description": "1 か月ごとの使用量属性を取得します。",
+    "summary": "1 か月ごとの使用量属性を取得する"
+  },
+  "GetUsageNetworkFlows": {
+    "description": "ネットワークフローの 1 時間あたり使用量を取得します。",
+    "summary": "ネットワークフローの 1 時間あたり使用量の取得"
+  },
+  "GetUsageNetworkHosts": {
+    "description": "ネットワークホストの 1 時間あたり使用量を取得します。",
+    "summary": "ネットワークホストの 1 時間あたり使用量の取得"
+  },
+  "GetUsageOnlineArchive": {
+    "description": "Online Archive の 1 時間ごとの使用量を取得します。",
+    "summary": "Online Archive の 1 時間ごとの使用量を取得する"
+  },
+  "GetUsageProfiling": {
+    "description": "プロファイルされたホストの 1 時間あたり使用量を取得します。",
+    "summary": "プロファイルされたホストの 1 時間あたり使用量の取得"
+  },
+  "GetUsageRumUnits": {
+    "description": "[RUM](https://docs.datadoghq.com/real_user_monitoring/) ユニットの 1 時間あたり使用量を取得します。",
+    "summary": "RUM ユニットの 1 時間ごとの使用量を取得する"
+  },
+  "GetUsageRumSessions": {
+    "description": "[RUM](https://docs.datadoghq.com/real_user_monitoring/) セッションの 1 時間あたり使用量を取得します。",
+    "summary": "RUM セッションの 1 時間あたり使用量の取得"
+  },
+  "GetUsageSDS": {
+    "description": "Sensitive Data Scanner の 1 時間ごとの使用量を取得します。",
+    "summary": "Sensitive Data Scanner の 1 時間ごとの使用量を取得する"
+  },
+  "GetUsageSNMP": {
+    "description": "SNMP デバイスの 1 時間あたり使用量を取得します。",
+    "summary": "SNMP デバイスの 1 時間あたり使用量の取得"
+  },
+  "GetUsageSummary": {
+    "description": "マルチオーガニゼーションのアカウント全体の使用量を取得します。マルチオーガニゼーション機能を有効にする必要があります。",
+    "summary": "マルチオーガニゼーションのアカウント全体の使用量の取得"
+  },
+  "GetUsageSynthetics": {
+    "description": "[Synthetics チェック](https://docs.datadoghq.com/synthetics/)の 1 時間あたり使用量を取得します。",
+    "summary": "Synthetics チェックの 1 時間あたり使用量の取得"
+  },
+  "GetUsageSyntheticsAPI": {
+    "description": "[Synthetics API チェック](https://docs.datadoghq.com/synthetics/)の 1 時間あたり使用量を取得します。",
+    "summary": "Synthetics API チェックの 1 時間あたり使用量の取得"
+  },
+  "GetUsageSyntheticsBrowser": {
+    "description": "Synthetics ブラウザチェックの 1 時間あたり使用量を取得します。",
+    "summary": "Synthetics Browser チェックの 1 時間あたり使用量の取得"
+  },
+  "GetUsageTimeseries": {
+    "description": "[カスタムメトリクス](https://docs.datadoghq.com/developers/metrics/custom_metrics/)の 1 時間あたり使用量を取得します。",
+    "summary": "カスタムメトリクスの 1 時間あたり使用量の取得"
+  },
+  "GetUsageTopAvgMetrics": {
+    "description": "時間平均に基づくすべての[カスタムメトリクス](https://docs.datadoghq.com/developers/metrics/custom_metrics/)を取得します。 当月のデータを取得する場合は month パラメータを使用し、日ごとのデータを取得する場合は day パラメータを使用します。2 つのうち 1 つは必須ですが、許可されるのは 1 つのみです。",
+    "summary": "時間平均に基づくすべてのカスタムメトリクスを取得"
+  },
+  "ListUsers": {
+    "description": "オーガニゼーションのすべてのユーザーのリストを作成します。",
+    "summary": "すべてのユーザーを一覧表示する"
+  },
+  "CreateUser": {
+    "description": "オーガニゼーションのユーザーを作成します。\n\n**注**: ユーザーを作成できるのは、管理者に属する\nアプリケーションキーを持つ管理者アクセスロールだけです。",
+    "summary": "ユーザーを作成する",
+    "request_description": "作成が必要となるユーザーオブジェクト。",
+    "request_schema_description": "ユーザーを作成、編集、無効化します。"
+  },
+  "DisableUser": {
+    "description": "オーガニゼーションからユーザーを削除します。\n\n**注**: このエンドポイントは管理者に属する\nアプリケーションキーでのみ使用できます。",
+    "summary": "ユーザーを無効にする"
+  },
+  "GetUser": {
+    "description": "ユーザーの詳細を取得します。",
+    "summary": "ユーザーの詳細を取得する"
+  },
+  "UpdateUser": {
+    "description": "ユーザー情報を更新します。\n\n**注**: このエンドポイントは管理者に属するアプリケーションキーでのみ使用できます。",
+    "summary": "ユーザーを更新する",
+    "request_description": "更新内容の説明。",
+    "request_schema_description": "ユーザーを作成、編集、無効化します。"
+  },
+  "Validate": {
+    "description": "API キー (APP キーとは異なります)が有効かどうかを確認します。有効でない場合は 403 を返します。",
+    "summary": "API キーを検証する"
+  },
+  "SubmitLog": {
+    "description": "HTTP を使用して Datadog プラットフォームにログを送信します。HTTP リクエストごとの制限は以下のとおりです。\n\n- ペイロードあたりの最大コンテンツサイズ (非圧縮) : 5MB\n- 単一ログの最大サイズ : 1MB\n- アレイで複数のログを送信する場合の最大アレイサイズ : 1000 エントリ\n\n1MB を超えるログは、Datadog によって受け入れられ、切り捨てられます。\n- 単一のログリクエストの場合、API はログを 1MB で切り捨て、2xx を返します.\n- マルチログリクエストの場合、API はすべてのログを処理し、1MB を超えるログのみを切り捨て、2xx を返します。\n\nDatadog では、圧縮されたログを送信することをお勧めしています。 \n圧縮されたログを送信するときは、リクエストに `Content-Encoding: gzip` ヘッダーを追加します。\n\nHTTP API により回答されるステータスコード :\n- 200: OK\n- 400: Bad request (ペイロードの形式の問題など)\n- 403: Permission issue (無効な API キーの使用な)\n- 413: Payload too large (バッチのサイズが非圧縮で 5MB 以上)\n- 5xx: Internal error, request should be retried after some time",
+    "summary": "ログを送信する",
+    "request_description": "送信するログ (JSON 形式) 。",
+    "request_schema_description": "構造化されたログメッセージ。"
+  },
+  "MuteAllMonitors": {
+    "description": "ミュートすると、すべてのモニターが電子メールによる通知と[イベントストリーム](https://docs.datadoghq.com/events)へのポストを停止します。\nアラートページをチェックしないと、状態変更は表示されません。",
+    "summary": "全モニターのミュート"
+  },
+  "UnmuteAllMonitors": {
+    "description": "すべてのモニターのミュートを無効にします。ミュートがすべて\n有効になっていなかった場合は、エラーを生成します。",
+    "summary": "全モニターのミュートを解除"
+  }
+}
