@@ -5,6 +5,19 @@ kind: guide
 
 ## Overview
 
+Monitors ensure your teams get alerted in case of issues on your systems. Making sure only the right subset of users can edit the right subset of monitors is critical to **avoid accidental changes in your monitors' configurations**.
+
+You can now manage your monitors more safely by **restricting edit permissions of each individual monitor to some specific roles** of your account:
+
+
+
+
+
+
+
+
+## Overview
+
 Previously, your monitors could be locked which meant that only its creator and admins would be able to edit it. 
 This locked mechanism is deprecated and monitors now rely on a new role restriction option.
 
