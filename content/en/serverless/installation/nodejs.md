@@ -2,24 +2,24 @@
 title: Instrumenting Node.js Serverless Applications
 kind: documentation
 further_reading:
-- link: "/serverless/serverless_integrations/plugin/"
-  tag: "Documentation"
-  text: "Datadog Serverless Plugin"
-- link: "/serverless/serverless_integrations/macro/"
-  tag: "Documentation"
-  text: "Datadog Serverless Macro"
-- link: "/serverless/serverless_integrations/cli/"
-  tag: "Documentation"
-  text: "Datadog Serverless CLI"
-- link: 'serverless/serverless_tagging/'
-  tag: "Documentation"
-  text: 'Tagging Serverless Applications'
-- link: 'serverless/distributed_tracing/'
-  tag: "Documentation"
-  text: 'Tracing Serverless Applications'
-- link: 'serverless/custom_metrics/'
-  tag: "Documentation"
-  text: 'Submitting Custom Metrics from Serverless Applications'
+    - link: '/serverless/serverless_integrations/plugin/'
+      tag: 'Documentation'
+      text: 'Datadog Serverless Plugin'
+    - link: '/serverless/serverless_integrations/macro/'
+      tag: 'Documentation'
+      text: 'Datadog Serverless Macro'
+    - link: '/serverless/serverless_integrations/cli/'
+      tag: 'Documentation'
+      text: 'Datadog Serverless CLI'
+    - link: 'serverless/serverless_tagging/'
+      tag: 'Documentation'
+      text: 'Tagging Serverless Applications'
+    - link: 'serverless/distributed_tracing/'
+      tag: 'Documentation'
+      text: 'Tracing Serverless Applications'
+    - link: 'serverless/custom_metrics/'
+      tag: 'Documentation'
+      text: 'Submitting Custom Metrics from Serverless Applications'
 aliases:
     - /serverless/datadog_lambda_library/nodejs/
     - /serverless/guide/nodejs/
@@ -31,13 +31,12 @@ aliases:
 
 Datadog offers many different ways to enable instrumentation for your serverless applications. Choose a method below that best suits your needs. Datadog generally recommends using the Datadog CLI, which does not require redeploying your whole application. The CLI can also be added to your CI/CD pipelines to enable instrumentation for applications across your entire organization.
 
-
 {{< tabs >}}
 {{% tab "Datadog CLI" %}}
 
 The Datadog CLI modifies existing Lambda functions' configurations to enable instrumentation without requiring a new deployment. It is the quickest way to get started with Datadog's serverless monitoring.
 
-You can also add the command to your CI/CD pipelines to enable instrumentation for all your serverless applications. Run the command *after* your normal serverless application deployment, so that changes made by the Datadog CLI command are not overridden.
+You can also add the command to your CI/CD pipelines to enable instrumentation for all your serverless applications. Run the command _after_ your normal serverless application deployment, so that changes made by the Datadog CLI command are not overridden.
 
 ### Install
 
@@ -73,10 +72,11 @@ datadog-ci lambda instrument -f <functionname> -f <another_functionname> -r <aws
 ```
 
 To fill in the placeholders:
-- Replace `<functionname>` and `<another_functionname>` with your Lambda function names.
-- Replace `<aws_region>` with the AWS region name.
-- Replace `<layer_version>` with the desired version of the Datadog Lambda Library. The latest version is `{{< latest-lambda-layer-version layer="node" >}}`.
-- Replace `<extension_version>` with the desired version of the Datadog Lambda Extension. The latest version is `{{< latest-lambda-layer-version layer="extension" >}}`.
+
+-   Replace `<functionname>` and `<another_functionname>` with your Lambda function names.
+-   Replace `<aws_region>` with the AWS region name.
+-   Replace `<layer_version>` with the desired version of the Datadog Lambda Library. The latest version is `{{< latest-lambda-layer-version layer="node" >}}`.
+-   Replace `<extension_version>` with the desired version of the Datadog Lambda Extension. The latest version is `{{< latest-lambda-layer-version layer="extension" >}}`.
 
 For example:
 
@@ -85,6 +85,7 @@ datadog-ci lambda instrument -f my-function -f another-function -r us-east-1 -v 
 ```
 
 More information and additional parameters can be found in the [CLI documentation][2].
+
 
 [1]: https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/setting-credentials-node.html
 [2]: https://docs.datadoghq.com/serverless/serverless_integrations/cli
@@ -96,21 +97,17 @@ The [Datadog Serverless Plugin][1] automatically adds the Datadog Lambda Library
 To install and configure the Datadog Serverless Plugin, follow these steps:
 
 1. Install the Datadog Serverless Plugin:
-	  ```
+    ```
     yarn add --dev serverless-plugin-datadog
     ```
 2. In your `serverless.yml`, add the following:
-    ```
-    plugins:
-      - serverless-plugin-datadog
-    ```
-<div class="alert alert-info">If you are instead deploying your Serverless Framework app <a href="https://www.serverless.com/framework/docs/providers/aws/guide/intro">by natively exporting a JSON object from a Javascript file</a> (for example, by using a <code>serverless.ts</code> file), follow the <a href="https://docs.datadoghq.com/serverless/installation/nodejs?tab=custom">custom installation instructions</a>.</div>
+`plugins: - serverless-plugin-datadog`
+  <div class="alert alert-info">If you are instead deploying your Serverless Framework app <a href="https://www.serverless.com/framework/docs/providers/aws/guide/intro">by natively exporting a JSON object from a Javascript file</a> (for example, by using a <code>serverless.ts</code> file), follow the <a href="https://docs.datadoghq.com/serverless/installation/nodejs?tab=custom">custom installation instructions</a>.</div>
 
 3. In your `serverless.yml`, also add the following section:
     ```
     custom:
       datadog:
-        addExtension: true
         apiKey: # Your Datadog API Key goes here.
     ```
     Find your Datadog API key on the [API Management page][3]. For additional settings, see the [plugin documentation][1].
@@ -146,20 +143,21 @@ In your `template.yml`, add the following under the `Transform` section, **after
 
 ```yaml
 Transform:
-  - AWS::Serverless-2016-10-31
-  - Name: DatadogServerless
-    Parameters:
-      stackName: !Ref "AWS::StackName"
-      apiKey: <DATADOG_API_KEY>
-      nodeLayerVersion: {{< latest-lambda-layer-version layer="node" >}}
-      extensionLayerVersion: {{< latest-lambda-layer-version layer="extension" >}}
-      service: "<SERVICE>" # Optional
-      env: "<ENV>" # Optional
+    - AWS::Serverless-2016-10-31
+    - Name: DatadogServerless
+      Parameters:
+          stackName: !Ref 'AWS::StackName'
+          apiKey: <DATADOG_API_KEY>
+          nodeLayerVersion: { { < latest-lambda-layer-version layer="node" > } }
+          extensionLayerVersion: { { < latest-lambda-layer-version layer="extension" > } }
+          service: '<SERVICE>' # Optional
+          env: '<ENV>' # Optional
 ```
 
 To fill in the placeholders:
-- Replace `<DATADOG_API_KEY>` with your Datadog API key from the [API Management page][4].
-- Replace `<SERVICE>` and `<ENV>` with appropriate values.
+
+-   Replace `<DATADOG_API_KEY>` with your Datadog API key from the [API Management page][4].
+-   Replace `<SERVICE>` and `<ENV>` with appropriate values.
 
 More information and additional parameters can be found in the [macro documentation][1].
 
@@ -238,7 +236,6 @@ yarn add datadog-lambda-js dd-trace
 
 ### Configure
 
-
 ### Install the Datadog Lambda Extension
 
 Add the Datadog Lambda Extension to your container image by adding the following to your Dockerfile:
@@ -253,10 +250,13 @@ Replace `<TAG>` with either a specific version number (for example, `{{< latest-
 
 1. Set your image's `CMD` value to `node_modules/datadog-lambda-js/dist/handler.handler`. You can set this in AWS or directly in your Dockerfile. **Note**: The value set in AWS overrides the value in the Dockerfile if you set both.
 2. Set the following environment variables in AWS:
-  - Set `DD_LAMBDA_HANDLER` to your original handler, for example, `myfunc.handler`.
-  - Set `DD_TRACE_ENABLED` to `true`.
-  - Set `DD_API_KEY` with your Datadog API key from the [API Management page][2].
+
+-   Set `DD_LAMBDA_HANDLER` to your original handler, for example, `myfunc.handler`.
+-   Set `DD_TRACE_ENABLED` to `true`.
+-   Set `DD_API_KEY` with your Datadog API key from the [API Management page][2].
+
 3. Optionally add `service` and `env` tags with appropriate values to your function.
+
 
 [1]: https://gallery.ecr.aws/datadog/lambda-extension
 [2]: https://app.datadoghq.com/organization-settings/api-keys
@@ -268,6 +268,7 @@ Replace `<TAG>` with either a specific version number (for example, `{{< latest-
 1. Add the following configurations to the `aws_lambda_function` resources in your .tf files:
 
 {{< site-region region="us,us3,us5,eu" >}}
+
 ```hcl
 variable "dd_api_key" {
   type        = string
@@ -289,8 +290,10 @@ resource "aws_lambda_function" "my_func" {
   }
 }
 ```
+
 {{< /site-region >}}
 {{< site-region region="gov" >}}
+
 ```hcl
 variable "dd_api_key" {
   type        = string
@@ -312,6 +315,7 @@ resource "aws_lambda_function" "my_func" {
   }
 }
 ```
+
 {{< /site-region >}}
 
 2. Replace the following placeholders with appropriate values:
@@ -326,6 +330,7 @@ resource "aws_lambda_function" "my_func" {
     ```bash
     terraform apply -var "dd_api_key=<DD_API_KEY>"
     ```
+
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
@@ -355,6 +360,7 @@ arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:<VERSION>
 ```
 arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:<VERSION>
 ```
+
 {{< /site-region >}}
 
 The available `RUNTIME` options are `Node10-x`, `Node12-x`, and `Node14-x`. The latest `VERSION` is `{{< latest-lambda-layer-version layer="node" >}}`. For example:
@@ -391,7 +397,6 @@ yarn add datadog-lambda-js dd-trace
 ```
 
 See the [latest release][2].
-
 
 ### Install the Datadog Lambda Extension
 
@@ -431,6 +436,7 @@ Follow these steps to configure the function:
 4. Set the environment variable `DD_API_KEY` to your Datadog API key from the [API Management page][3].
 5. Optionally add a `service` and `env` tag with appropriate values to your function.
 
+
 [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
 [2]: https://www.npmjs.com/package/datadog-lambda-js
 [3]: https://app.datadoghq.com/organization-settings/api-keys
@@ -448,9 +454,10 @@ Datadog recommends tagging your serverless applications with `DD_ENV`, `DD_SERVI
 ### Collect logs from AWS serverless resources
 
 Serverless logs generated by managed resources besides AWS Lambda functions can be hugely valuable in helping identify the root cause of issues in your serverless applications. Datadog recommends you forward logs from the following managed resources in your environment:
-- API's: API Gateway, AppSync, ALB
-- Queues & Streams: SQS, SNS, Kinesis
-- Data Stores: DynamoDB, S3, RDS, etc.
+
+-   API's: API Gateway, AppSync, ALB
+-   Queues & Streams: SQS, SNS, Kinesis
+-   Data Stores: DynamoDB, S3, RDS, etc.
 
 To collect logs from non-Lambda AWS resources, install and configure the [Datadog Forwarder][3] to subscribe to each of your managed resource CloudWatch log groups.
 
@@ -459,40 +466,40 @@ To collect logs from non-Lambda AWS resources, install and configure the [Datado
 If you would like to submit a custom metric or span, see the sample code below:
 
 ```javascript
-const { sendDistributionMetric, sendDistributionMetricWithDate } = require("datadog-lambda-js");
-const tracer = require("dd-trace");
+const { sendDistributionMetric, sendDistributionMetricWithDate } = require('datadog-lambda-js');
+const tracer = require('dd-trace');
 
 // submit a custom span named "sleep"
-const sleep = tracer.wrap("sleep", (ms) => {
-  return new Promise((resolve) => setTimeout(resolve, ms));
+const sleep = tracer.wrap('sleep', (ms) => {
+    return new Promise((resolve) => setTimeout(resolve, ms));
 });
 
 exports.handler = async (event) => {
-  // add custom tags to the lambda function span,
-  // does NOT work when X-Ray tracing is enabled
-  const span = tracer.scope().active();
-  span.setTag('customer_id', '123456');
+    // add custom tags to the lambda function span,
+    // does NOT work when X-Ray tracing is enabled
+    const span = tracer.scope().active();
+    span.setTag('customer_id', '123456');
 
-  await sleep(100);
+    await sleep(100);
 
-  // submit a custom span
-  const sandwich = tracer.trace('hello.world', () => {
-    console.log('Hello, World!');
-  });
+    // submit a custom span
+    const sandwich = tracer.trace('hello.world', () => {
+        console.log('Hello, World!');
+    });
 
-  // submit a custom metric
-  sendDistributionMetric(
-    "coffee_house.order_value", // metric name
-    12.45, // metric value
-    "product:latte", // tag
-    "order:online", // another tag
-  );
+    // submit a custom metric
+    sendDistributionMetric(
+        'coffee_house.order_value', // metric name
+        12.45, // metric value
+        'product:latte', // tag
+        'order:online' // another tag
+    );
 
-  const response = {
-    statusCode: 200,
-    body: JSON.stringify("Hello from serverless!"),
-  };
-  return response;
+    const response = {
+        statusCode: 200,
+        body: JSON.stringify('Hello from serverless!')
+    };
+    return response;
 };
 ```
 

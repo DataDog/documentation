@@ -78,8 +78,41 @@ datadog-ci lambda instrument -f my-function -f another-function -r us-east-1 -e 
 
 More information and additional parameters can be found in the [Datadog Serverless CLI][2].
 
+
 [1]: https://aws.github.io/aws-sdk-go-v2/docs/getting-started/#get-your-aws-access-keys
 [2]: https://docs.datadoghq.com/serverless/serverless_integrations/cli
+{{% /tab %}}
+{{% tab "Serverless Framework" %}}
+
+The [Datadog Serverless Plugin][1] automatically adds the Datadog Lambda Library to your functions using Lambda Layers, and configures your functions to send metrics, traces, and logs to Datadog through the [Datadog Lambda Extension][2].
+
+To install and configure the Datadog Serverless Plugin, follow these steps:
+
+1. Install the Datadog Serverless Plugin:
+	  ```sh
+    yarn add --dev serverless-plugin-datadog
+    ```
+2. In your `serverless.yml`, add the following:
+    ```yaml
+    plugins:
+      - serverless-plugin-datadog
+    ```
+
+<div class="alert alert-info">If you are instead deploying your Serverless Framework app <a href="https://www.serverless.com/framework/docs/providers/aws/guide/intro">by natively exporting a JSON object from a JavaScript file</a> (for example, by using a <code>serverless.ts</code> file), follow the <a href="https://docs.datadoghq.com/serverless/installation/go?tab=custom">custom installation instructions</a>.</div>
+
+3. In your `serverless.yml`, also add the following section:
+    ```yaml
+    custom:
+      datadog:
+        apiKey: # Your Datadog API Key goes here.
+    ```
+    Find your Datadog API key on the [API Management page][3]. For additional settings, see the [plugin documentation][1].
+
+
+
+[1]: https://docs.datadoghq.com/serverless/serverless_integrations/plugin
+[2]: https://docs.datadoghq.com/serverless/libraries_integrations/extension
+[3]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{% tab "Custom" %}}
 ### Install the Datadog Lambda Extension

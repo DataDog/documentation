@@ -2,18 +2,18 @@
 title: Instrumenting Python Serverless Applications
 kind: documentation
 further_reading:
-- link: 'serverless/datadog_lambda_library/python'
-  tag: 'Documentation'
-  text: 'Datadog Lambda Library for Python'
-- link: 'serverless/distributed_tracing/'
-  tag: 'Documentation'
-  text: 'Tracing Serverless Applications'
-- link: 'serverless/custom_metrics/'
-  tag: 'Documentation'
-  text: 'Submitting Custom Metrics from Serverless Applications'
-- link: '/serverless/guide/troubleshoot_serverless_monitoring'
-  tag: 'Documentation'
-  text: 'Troubleshoot Serverless Monitoring'
+    - link: 'serverless/datadog_lambda_library/python'
+      tag: 'Documentation'
+      text: 'Datadog Lambda Library for Python'
+    - link: 'serverless/distributed_tracing/'
+      tag: 'Documentation'
+      text: 'Tracing Serverless Applications'
+    - link: 'serverless/custom_metrics/'
+      tag: 'Documentation'
+      text: 'Submitting Custom Metrics from Serverless Applications'
+    - link: '/serverless/guide/troubleshoot_serverless_monitoring'
+      tag: 'Documentation'
+      text: 'Troubleshoot Serverless Monitoring'
 aliases:
     - /serverless/datadog_lambda_library/python/
     - /serverless/guide/python/
@@ -30,7 +30,7 @@ Datadog offers many different ways to enable instrumentation for your serverless
 
 The Datadog CLI modifies existing Lambda functions' configurations to enable instrumentation without requiring a new deployment. It is the quickest way to get started with Datadog's serverless monitoring.
 
-You can also add the command to your CI/CD pipelines to enable instrumentation for all your serverless applications. Run the command *after* your normal serverless application deployment, so that changes made by the Datadog CLI command are not overridden.
+You can also add the command to your CI/CD pipelines to enable instrumentation for all your serverless applications. Run the command _after_ your normal serverless application deployment, so that changes made by the Datadog CLI command are not overridden.
 
 ### Install
 
@@ -66,10 +66,11 @@ datadog-ci lambda instrument -f <functionname> -f <another_functionname> -r <aws
 ```
 
 To fill in the placeholders:
-- Replace `<functionname>` and `<another_functionname>` with your Lambda function names.
-- Replace `<aws_region>` with the AWS region name.
-- Replace `<layer_version>` with the desired version of the Datadog Lambda Library. The latest version is `{{< latest-lambda-layer-version layer="python" >}}`.
-- Replace `<extension_version>` with the desired version of the Datadog Lambda Extension. The latest version is `{{< latest-lambda-layer-version layer="extension" >}}`.
+
+-   Replace `<functionname>` and `<another_functionname>` with your Lambda function names.
+-   Replace `<aws_region>` with the AWS region name.
+-   Replace `<layer_version>` with the desired version of the Datadog Lambda Library. The latest version is `{{< latest-lambda-layer-version layer="python" >}}`.
+-   Replace `<extension_version>` with the desired version of the Datadog Lambda Extension. The latest version is `{{< latest-lambda-layer-version layer="extension" >}}`.
 
 For example:
 
@@ -78,6 +79,7 @@ datadog-ci lambda instrument -f my-function -f another-function -r us-east-1 -v 
 ```
 
 More information and additional parameters can be found in the [CLI documentation][2].
+
 
 [1]: https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/setting-credentials-node.html
 [2]: https://docs.datadoghq.com/serverless/serverless_integrations/cli
@@ -89,13 +91,13 @@ The [Datadog Serverless Plugin][1] automatically adds the Datadog Lambda Library
 To install and configure the Datadog Serverless Plugin, follow these steps:
 
 1. Install the Datadog Serverless Plugin:
-	  ```sh
+    ```sh
     yarn add --dev serverless-plugin-datadog
     ```
 2. In your `serverless.yml`, add the following:
     ```yaml
     plugins:
-      - serverless-plugin-datadog
+        - serverless-plugin-datadog
     ```
 
 <div class="alert alert-info">If you are instead deploying your Serverless Framework app <a href="https://www.serverless.com/framework/docs/providers/aws/guide/intro">by natively exporting a JSON object from a JavaScript file</a> (for example, by using a <code>serverless.ts</code> file), follow the <a href="https://docs.datadoghq.com/serverless/installation/python?tab=custom">custom installation instructions</a>.</div>
@@ -103,9 +105,8 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
 3. In your `serverless.yml`, also add the following section:
     ```yaml
     custom:
-      datadog:
-        addExtension: true
-        apiKey: # Your Datadog API Key goes here.
+        datadog:
+            apiKey: # Your Datadog API Key goes here.
     ```
     Find your Datadog API key on the [API Management page][3]. For additional settings, see the [plugin documentation][1].
 
@@ -137,20 +138,21 @@ To instrument your function, add the following to `template.yml` under the `Tran
 
 ```yaml
 Transform:
-  - AWS::Serverless-2016-10-31
-  - Name: DatadogServerless
-    Parameters:
-      stackName: !Ref "AWS::StackName"
-      apiKey: <DATADOG_API_KEY>
-      pythonLayerVersion: {{< latest-lambda-layer-version layer="python" >}}
-      extensionLayerVersion: {{< latest-lambda-layer-version layer="extension" >}}
-      service: "<SERVICE>" # Optional
-      env: "<ENV>" # Optional
+    - AWS::Serverless-2016-10-31
+    - Name: DatadogServerless
+      Parameters:
+          stackName: !Ref 'AWS::StackName'
+          apiKey: <DATADOG_API_KEY>
+          pythonLayerVersion: { { < latest-lambda-layer-version layer="python" > } }
+          extensionLayerVersion: { { < latest-lambda-layer-version layer="extension" > } }
+          service: '<SERVICE>' # Optional
+          env: '<ENV>' # Optional
 ```
 
 To fill in the placeholders:
-- Replace `<DATADOG_API_KEY>` with your Datadog API key from the [API Management page][4].
-- Replace `<SERVICE>` and `<ENV>` with appropriate values.
+
+-   Replace `<DATADOG_API_KEY>` with your Datadog API key from the [API Management page][4].
+-   Replace `<SERVICE>` and `<ENV>` with appropriate values.
 
 More information and additional parameters can be found in the [macro documentation][1].
 
@@ -161,7 +163,6 @@ More information and additional parameters can be found in the [macro documentat
 [4]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{% tab "AWS CDK" %}}
-
 
 The [Datadog CDK Construct][1] automatically adds the Datadog Lambda Library to your functions using Lambda Layers, and configures your functions to send metrics, traces, and logs to Datadog through the [Datadog Lambda Extension][2].
 
@@ -193,6 +194,7 @@ Replace `<DATADOG_API_KEY>` with your Datadog API key on the [API Management pag
 
 More information and additional parameters can be found on the [Datadog CDK NPM page][2].
 
+
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: https://www.npmjs.com/package/datadog-cdk-constructs
 {{% /tab %}}
@@ -202,40 +204,44 @@ More information and additional parameters can be found on the [Datadog CDK NPM 
 
 1. Add the following settings to your `zappa_settings.json`:
 
-  {{< site-region region="us,us3,us5,eu" >}}
-  ```json
-  {
+{{< site-region region="us,us3,us5,eu" >}}
+
+```json
+{
     "dev": {
-      "layers": [
-        "arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:<LIBRARY_VERSION>", "arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:<EXTENSION_VERSION>"
-      ],
-      "lambda_handler": "datadog_lambda.handler.handler",
-      "aws_environment_variables": {
-        "DD_LAMBDA_HANDLER": "handler.lambda_handler",
-        "DD_TRACE_ENABLED": "true",
-        "DD_API_KEY": "<DATADOG_API_KEY>",
-      }
+        "layers": [
+            "arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:<LIBRARY_VERSION>",
+            "arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:<EXTENSION_VERSION>"
+        ],
+        "lambda_handler": "datadog_lambda.handler.handler",
+        "aws_environment_variables": {
+            "DD_LAMBDA_HANDLER": "handler.lambda_handler",
+            "DD_TRACE_ENABLED": "true",
+            "DD_API_KEY": "<DATADOG_API_KEY>"
+        }
+    }
+}
+```
+
+{{< /site-region >}}
+{{< site-region region="gov" >}}
+
+````json
+{
+  "dev": {
+    "layers": [
+      "arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:<LIBRARY_VERSION>", "arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension:<EXTENSION_VERSION>"
+    ],
+    "lambda_handler": "datadog_lambda.handler.handler",
+    "aws_environment_variables": {
+      "DD_LAMBDA_HANDLER": "handler.lambda_handler",
+      "DD_TRACE_ENABLED": "true",
+      "DD_API_KEY": "<DATADOG_API_KEY>"
+    },
     }
   }
   ```
-  {{< /site-region >}}
-  {{< site-region region="gov" >}}
-  ```json
-  {
-    "dev": {
-      "layers": [
-        "arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:<LIBRARY_VERSION>", "arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension:<EXTENSION_VERSION>"
-      ],
-      "lambda_handler": "datadog_lambda.handler.handler",
-      "aws_environment_variables": {
-        "DD_LAMBDA_HANDLER": "handler.lambda_handler",
-        "DD_TRACE_ENABLED": "true",
-        "DD_API_KEY": "<DATADOG_API_KEY>"
-      },
-      }
-    }
-    ```
-  {{< /site-region >}}
+{{< /site-region >}}
 2. Replace the following placeholders with appropriate values:
 
 - Replace `<AWS_REGION>` with the AWS region to which your Lambda functions are deployed.
@@ -248,24 +254,28 @@ More information and additional parameters can be found on the [Datadog CDK NPM 
 For example:
 
 {{< site-region region="us,us3,us5,eu" >}}
-```
+````
+
 // For x86 architecture
 arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Python38:{{< latest-lambda-layer-version layer="python" >}}
 arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}
 // For arm64 architecture
 arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Python38-ARM:{{< latest-lambda-layer-version layer="python" >}}
 arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Extension-ARM:{{< latest-lambda-layer-version layer="extension" >}}
+
 ```
 {{< /site-region >}}
 {{< site-region region="gov" >}}
 ```
+
 // For x86 architecture
 arn:aws-us-gov:lambda:us-gov-east-1:002406178527:layer:Datadog-Python38:{{< latest-lambda-layer-version layer="python" >}}
 arn:aws-us-gov:lambda:us-gov-east-1:002406178527:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}
 // For arm64 architecture
 arn:aws-us-gov:lambda:us-gov-east-1:002406178527:layer:Datadog-Python38-ARM:{{< latest-lambda-layer-version layer="python" >}}
 arn:aws-us-gov:lambda:us-gov-east-1:002406178527:layer:Datadog-Extension-ARM:{{< latest-lambda-layer-version layer="extension" >}}
-```
+
+````
 {{< /site-region >}}
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
@@ -291,27 +301,29 @@ arn:aws-us-gov:lambda:us-gov-east-1:002406178527:layer:Datadog-Extension-ARM:{{<
       }
     }
   }
+````
+
+{{< /site-region >}}
+{{< site-region region="gov" >}}
+
+````json
+{
+  "version": "2.0",
+  "app_name": "hello-chalice",
+  "stages": {
+    "dev": {
+      "api_gateway_stage": "api",
+      "environment_variables": {
+        "DD_TRACE_ENABLED": "true",
+        "DD_API_KEY": "<DATADOG_API_KEY>",
+      },
+      "layers": ["arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension:<EXTENSION_VERSION>"],
+    }
+  }
   ```
   {{< /site-region >}}
-  {{< site-region region="gov" >}}
-  ```json
-  {
-    "version": "2.0",
-    "app_name": "hello-chalice",
-    "stages": {
-      "dev": {
-        "api_gateway_stage": "api",
-        "environment_variables": {
-          "DD_TRACE_ENABLED": "true",
-          "DD_API_KEY": "<DATADOG_API_KEY>",
-        },
-        "layers": ["arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension:<EXTENSION_VERSION>"],
-      }
-    }
-    ```
-    {{< /site-region >}}
 
-    **Note**: For security, you may wish to store your Datadog API key in AWS Secrets Manager. In this case, set the environment variable `DD_API_KEY_SECRET_ARN` with the ARN of the Secrets Manager secret containing your Datadog API key. In other words, you can replace the line `"DD_API_KEY": "<DATADOG_API_KEY>"` in the configuration above with `"DD_API_KEY_SECRET_ARN": "<SECRET_ARN_DATADOG_API_KEY>"`. Accessing this key during a cold start adds extra latency.
+  **Note**: For security, you may wish to store your Datadog API key in AWS Secrets Manager. In this case, set the environment variable `DD_API_KEY_SECRET_ARN` with the ARN of the Secrets Manager secret containing your Datadog API key. In other words, you can replace the line `"DD_API_KEY": "<DATADOG_API_KEY>"` in the configuration above with `"DD_API_KEY_SECRET_ARN": "<SECRET_ARN_DATADOG_API_KEY>"`. Accessing this key during a cold start adds extra latency.
 
 2. Replace the following placeholders with appropriate values:
 
@@ -321,18 +333,18 @@ arn:aws-us-gov:lambda:us-gov-east-1:002406178527:layer:Datadog-Extension-ARM:{{<
 
 3. Add `datadog_lambda` to your `requirements.txt`.
 4. Register `datadog_lambda_wrapper` as a [middleware][2] in your `app.py`:
-    ```python
-    from chalice import Chalice, ConvertToMiddleware
-    from datadog_lambda.wrapper import datadog_lambda_wrapper
+  ```python
+  from chalice import Chalice, ConvertToMiddleware
+  from datadog_lambda.wrapper import datadog_lambda_wrapper
 
-    app = Chalice(app_name='hello-chalice')
+  app = Chalice(app_name='hello-chalice')
 
-    app.register_middleware(ConvertToMiddleware(datadog_lambda_wrapper))
+  app.register_middleware(ConvertToMiddleware(datadog_lambda_wrapper))
 
-    @app.route('/')
-    def index():
-        return {'hello': 'world'}
-    ```
+  @app.route('/')
+  def index():
+      return {'hello': 'world'}
+  ```
 
 [1]: /serverless/libraries_integrations/extension/
 [2]: https://aws.github.io/chalice/topics/middleware.html?highlight=handler#registering-middleware
@@ -346,27 +358,29 @@ arn:aws-us-gov:lambda:us-gov-east-1:002406178527:layer:Datadog-Extension-ARM:{{<
 {{< site-region region="us,us3,us5,eu" >}}
 ```hcl
 variable "dd_api_key" {
-  type        = string
-  description = "Datadog API key"
+type        = string
+description = "Datadog API key"
 }
 resource "aws_lambda_function" "my_func" {
-  function_name = "my_func"
-  handler = "datadog_lambda.handler.handler"
-  layers = [
-      "arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:<LIBRARY_VERSION>",
-      "arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:<EXTENSION_VERSION>",
-  ]
-  environment {
-    variables = {
-      DD_LAMBDA_HANDLER = "my_func.handler"
-      DD_TRACE_ENABLED = true
-      DD_API_KEY = var.dd_api_key
-    }
+function_name = "my_func"
+handler = "datadog_lambda.handler.handler"
+layers = [
+    "arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:<LIBRARY_VERSION>",
+    "arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:<EXTENSION_VERSION>",
+]
+environment {
+  variables = {
+    DD_LAMBDA_HANDLER = "my_func.handler"
+    DD_TRACE_ENABLED = true
+    DD_API_KEY = var.dd_api_key
   }
 }
-```
+}
+````
+
 {{< /site-region >}}
 {{< site-region region="gov" >}}
+
 ```hcl
 variable "dd_api_key" {
   type        = string
@@ -388,6 +402,7 @@ resource "aws_lambda_function" "my_func" {
   }
 }
 ```
+
 {{< /site-region >}}
 
 2. Replace the following placeholders with appropriate values:
@@ -402,6 +417,7 @@ resource "aws_lambda_function" "my_func" {
     ```bash
     terraform apply -var "dd_api_key=<DD_API_KEY>"
     ```
+
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
@@ -431,10 +447,13 @@ Replace `<TAG>` with either a specific version number (for example, `{{< latest-
 
 1. Set your image's `CMD` value to `datadog_lambda.handler.handler`. You can set this in AWS or directly in your Dockerfile. Note that the value set in AWS overrides the value in the Dockerfile if you set both.
 2. Set the following environment variables in AWS:
-  - Set `DD_LAMBDA_HANDLER` to your original handler, for example, `myfunc.handler`.
-  - Set `DD_TRACE_ENABLED` to `true`.
-  - Set `DD_API_KEY` with your Datadog API key on the [API Management page][2].
+
+-   Set `DD_LAMBDA_HANDLER` to your original handler, for example, `myfunc.handler`.
+-   Set `DD_TRACE_ENABLED` to `true`.
+-   Set `DD_API_KEY` with your Datadog API key on the [API Management page][2].
+
 3. Optionally add `service` and `env` tags with appropriate values to your function.
+
 
 [1]: https://gallery.ecr.aws/datadog/lambda-extension
 [2]: https://app.datadoghq.com/organization-settings/api-keys
@@ -454,19 +473,24 @@ The minor version of the `datadog-lambda` package always matches the layer versi
 [Configure the layers][1] for your Lambda function using the ARN in the following format:
 
 {{< site-region region="us,us3,us5,eu" >}}
+
 ```
 arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:<VERSION>
 ```
+
 {{< /site-region >}}
 {{< site-region region="gov" >}}
+
 ```
 arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:<VERSION>
 ```
+
 {{< /site-region >}}
 
 The available `RUNTIME` options are `Python27`, `Python36`, `Python37`, and `Python38`. The latest `VERSION` is `{{< latest-lambda-layer-version layer="python" >}}`. For example:
 
 {{< site-region region="us,us3,us5,eu" >}}
+
 ```
 // If using x86 architecture
 arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Python37:{{< latest-lambda-layer-version layer="python" >}}
@@ -474,8 +498,10 @@ arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Python37:{{< latest-lambda-l
 // If using arm64 architecture
 arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Python37-ARM:{{< latest-lambda-layer-version layer="python" >}}
 ```
+
 {{< /site-region >}}
 {{< site-region region="gov" >}}
+
 ```
 // If using x86 architecture
 arn:aws-us-gov:lambda:us-gov-east-1:002406178527:layer:Datadog-Python37:{{< latest-lambda-layer-version layer="python" >}}
@@ -483,6 +509,7 @@ arn:aws-us-gov:lambda:us-gov-east-1:002406178527:layer:Datadog-Python37:{{< late
 arn:aws-us-gov:lambda:us-gov-east-1:002406178527:layer:Datadog-Python37-ARM:{{< latest-lambda-layer-version layer="python" >}}
 
 ```
+
 {{< /site-region >}}
 
 #### Using the package
@@ -502,20 +529,24 @@ See the [latest release][5].
 [Configure the layers][1] for your Lambda function using the ARN in the following format:
 
 {{< site-region region="us,us3,us5,eu" >}}
+
 ```
 // For x86 architecture
 arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:<EXTENSION_VERSION>
 // For arm64 architecture
 arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension-ARM:<EXTENSION_VERSION>
 ```
+
 {{< /site-region >}}
 {{< site-region region="gov" >}}
+
 ```
 // For x86 architecture
 arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension:<EXTENSION_VERSION>
 // For arm64 architecture
 arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension-ARM:<EXTENSION_VERSION>
 ```
+
 {{< /site-region >}}
 
 The latest `EXTENSION_VERSION` is {{< latest-lambda-layer-version layer="extension" >}}.
@@ -551,9 +582,10 @@ Datadog recommends tagging your serverless applications with `DD_ENV`, `DD_SERVI
 ### Collect logs from AWS serverless resources
 
 Serverless logs generated by managed resources besides AWS Lambda functions can be hugely valuable in helping identify the root cause of issues in your serverless applications. Datadog recommends you forward logs from the following managed resources in your environment:
-- API's: API Gateway, AppSync, ALB
-- Queues & Streams: SQS, SNS, Kinesis
-- Data Stores: DynamoDB, S3, RDS, etc.
+
+-   API's: API Gateway, AppSync, ALB
+-   Queues & Streams: SQS, SNS, Kinesis
+-   Data Stores: DynamoDB, S3, RDS, etc.
 
 To collect logs from non-Lambda AWS resources, install and configure the [Datadog Forwarder][3] to subscribe to each of your managed resource CloudWatch log groups.
 
