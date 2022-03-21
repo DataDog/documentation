@@ -29,7 +29,7 @@ The setup process involves enabling the dispatching ability in the Cluster Agent
 
 {{< tabs >}}
 {{% tab "Helm" %}}
-This is enabled by default in the Helm deployment of the Cluster Agent, with respect to the `datadog.clusterChecks.enabled` configuration key. The configuration can be set as:
+Cluster check dispatching is enabled by default in the Helm deployment of the Cluster Agent through the `datadog.clusterChecks.enabled` configuration key:
 ```yaml
 datadog:
   clusterChecks:
@@ -40,10 +40,10 @@ clusterAgent:
   # (...)
 ```
 
-This will enable the Cluster Check setup in the Cluster Agent and allow it to process configurations from the Kubernetes Service Annotations (`kube_services`).
+This enables the cluster check setup in the Cluster Agent and allows it to process configurations from the Kubernetes Service Annotations (`kube_services`).
 {{% /tab %}}
 {{% tab "Operator" %}}
-This can be enabled in the Operator deployment of the Cluster Agent with respect to the `clusterAgent.config.clusterChecksEnabled` configuration key. The configuration can be set as:
+Cluster check dispatching is enabled in the Operator deployment of the Cluster Agent by using the `clusterAgent.config.clusterChecksEnabled` configuration key:
 ```yaml
 apiVersion: datadoghq.com/v1alpha1
 kind: DatadogAgent
@@ -56,7 +56,7 @@ spec:
       clusterChecksEnabled: true
 ```
 
-This will enable the Cluster Check setup in the Cluster Agent and allow it to process configurations from the Kubernetes Service Annotations (`kube_services`).
+This enables the cluster check setup in the Cluster Agent and allows it to process configurations from the Kubernetes Service Annotations (`kube_services`).
 
 {{% /tab %}}
 {{% tab "Daemonset" %}}
@@ -73,7 +73,7 @@ This feature requires a running [Cluster Agent][1]. Once that is running make th
 
 Enable the `clusterchecks` configuration provider on the Datadog **Node** Agent. This can be done in two ways:
 
-- (Recommended) By setting the `DD_EXTRA_CONFIG_PROVIDERS` environment variable in your Agent DaemonSet. This takes a space separated string if you have multiple values:
+- **Recommended**: By setting the `DD_EXTRA_CONFIG_PROVIDERS` environment variable in your Agent DaemonSet. This takes a space-separated string if you have multiple values:
 
     ```text
     DD_EXTRA_CONFIG_PROVIDERS="clusterchecks"
@@ -92,9 +92,9 @@ Enable the `clusterchecks` configuration provider on the Datadog **Node** Agent.
 {{< /tabs >}}
 
 
-**Note**: When running Cluster Checks the metrics reported by the Agent are not linked to a given hostname. As these are meant to be cluster centric metrics, and not necessarily host based metrics. As a result these metrics will also not inherit any host-level tags associated with that host. Such as those inherited from a cloud provider or added by the Agent's `DD_TAGS` environment variable. To add tags to cluster check metrics use the `DD_CLUSTER_CHECKS_EXTRA_TAGS` environment variable.
+**Note**: With cluster checks, the metrics reported by the Agent are not linked to a given hostname because they are meant to be cluster-centric metrics and not necessarily host-based metrics. As a result, these metrics do not inherit any host-level tags associated with that host, such as those inherited from a cloud provider or added by the Agent's `DD_TAGS` environment variable. To add tags to cluster check metrics, use the `DD_CLUSTER_CHECKS_EXTRA_TAGS` environment variable.
 
-The [Datadog Helm Chart][3] and the [Datadog Operator][4] additionally offer the possibility to deploy Cluster Check Runners. Which are a Deployment for a small set of Datadog Agents configured to run these dispatched cluster checks only, as opposed to dispatching these to the normal node-based Agents.
+The [Datadog Helm Chart][3] and the [Datadog Operator][4] additionally offer the possibility to deploy cluster check runners, which are a deployment for a small set of Datadog Agents configured to run these dispatched cluster checks only, as opposed to dispatching these to the normal node-based Agents.
 
 ### Advanced dispatching
 
@@ -106,7 +106,7 @@ In addition to the steps mentioned in the Cluster Agent Setup section, you must 
 
 #### Agent setup
 
-The following environment variables are required to configure the node Agents (or Cluster Check Runners) to expose their check stats. The stats are consumed by the Cluster Agent and are used to optimize the cluster checks' dispatching logic.
+The following environment variables are required to configure the node Agents (or cluster check runners) to expose their check stats. The stats are consumed by the Cluster Agent and are used to optimize the cluster checks' dispatching logic.
 
 ```yaml
   env:
@@ -126,11 +126,11 @@ Running [custom Agent checks][5] as cluster checks is supported, as long as all 
 ## Setting up check configurations
 
 ### Configuration from static configuration files
-When the URL or IP of a given resource is constant (eg. external service endpoint, public URL, etc.), a static configuration can be passed to the Cluster Agent as YAML files. The file name convention and syntax are the same as the static configurations on the node-based Agent. With the **required** addition of the `cluster_check: true` line.
+When the URL or IP of a given resource is constant (for example, an external service endpoint or a public URL), a static configuration can be passed to the Cluster Agent as YAML files. The file name convention and syntax are the same as the static configurations on the node-based Agent, with the **required** addition of the `cluster_check: true` line.
 
 {{< tabs >}}
 {{% tab "Helm" %}}
-With Helm these configuration files can be created within the `clusterAgent.confd` section. **Note**: This is separate from the `datadog.confd` section where the files are created in the node-based Agents. The `<INTEGRATION_NAME>` must exactly match the desired integration check you want to run.
+With Helm, these configuration files can be created within the `clusterAgent.confd` section. **Note**: This is separate from the `datadog.confd` section where the files are created in the node-based Agents. The `<INTEGRATION_NAME>` must exactly match the desired integration check you want to run.
 
 ```yaml
 #(...)
@@ -145,7 +145,7 @@ clusterAgent:
 ```
 {{% /tab %}}
 {{% tab "Daemonset" %}}
-With the manual approach you must create a `ConfigMap` storing the desired static configuration files and mount that into the corresponding `/conf.d` file of the Cluster Agent container. This follows the same approach for [mounting ConfigMaps into the Agent container][1]. For example:
+With the manual approach you must create a `ConfigMap` to store the desired static configuration files, and mount it into the corresponding `/conf.d` file of the Cluster Agent container. This follows the same approach for [mounting ConfigMaps into the Agent container][1]. For example:
 
 ```yaml
 kind: ConfigMap
@@ -177,7 +177,7 @@ Then in the manifest for the Cluster Agent Deployment define the `volumeMounts` 
                 path: <INTEGRATION_NAME>.yaml
           #(...)
 ```
-This should result in a file in the `/conf.d/` directory of the Cluster Agent with respect to your desired integration. For example: `/conf.d/mysql.yaml` or `/conf.d/http_check.yaml`.
+This creates a file in the `/conf.d/` directory of the Cluster Agent corresponding to the integration. For example: `/conf.d/mysql.yaml` or `/conf.d/http_check.yaml`.
 
 
 [1]: /agent/kubernetes/integrations/?tab=configmap#configuration
@@ -186,7 +186,7 @@ This should result in a file in the `/conf.d/` directory of the Cluster Agent wi
 
 #### Example: MySQL check on an externally hosted database
 
-After setting up an externally hosted database, such as CloudSQL or RDS, and a corresponding [Datadog user][6] to access the database, mount a `/conf.d/mysql.yaml` file in the Cluster Agent container with the following content:
+After you set up an externally hosted database, such as CloudSQL or RDS, and a corresponding [Datadog user][6] to access the database, mount a `/conf.d/mysql.yaml` file in the Cluster Agent container with the following content:
 
 ```yaml
 cluster_check: true
@@ -210,7 +210,7 @@ instances:
       url: "<EXAMPLE_URL>"
 ```
 
-### Configuration from kubernetes service annotations
+### Configuration from Kubernetes service annotations
 
 You can annotate services with the following syntax, similar to the syntax for [annotating Kubernetes Pods][1]:
 
@@ -263,7 +263,7 @@ Due to the distributed nature of cluster checks, troubleshooting them is a bit m
 
 ### Kubernetes: find the leader Cluster Agent
 
-When leader election is enabled, only the leader serves Cluster Check configurations to the node-based Agents. If you only have 1 replica of the Cluster Agent pod running, that will be the leader. Otherwise, you can identify the name of the leader in the `datadog-leader-election` `ConfigMap`:
+When leader election is enabled, only the leader serves Cluster Check configurations to the node-based Agents. If only one replica of the Cluster Agent pod is running, it is the leader. Otherwise, you can identify the name of the leader in the `datadog-leader-election` `ConfigMap`:
 
 ```yaml
 # kubectl get cm datadog-leader-election -o yaml
