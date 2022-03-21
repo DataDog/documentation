@@ -293,7 +293,7 @@ using (MappedDiagnosticsLogicalContext.SetScoped("dd.span_id", CorrelationIdenti
 {{% /tab %}}
 {{% tab "Microsoft.Extensions.Logging" %}}
 
-*Note:* If you are using Serilog as an ILogger provider, it is preferrably to use this `ILogger.BeginScope()` method as opposed to the Serilog static properties. Passing an `ILogger.BeginScope()` an `IDictionary<string,object>`. See [this blog by the author of Serilog][13].
+*Note:* If you are using Serilog as an ILogger provider, it is preferrably to use this `ILogger.BeginScope()` method as opposed to the Serilog static properties. Passing an `ILogger.BeginScope()` an `IDictionary<string,object>` as the same effect as `LogContext.PushProperty()`. See [this blog by the author of Serilog][13].
 
 ```csharp
 using Datadog.Trace;
