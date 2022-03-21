@@ -56,7 +56,7 @@ To discover all of the roles available and how to create custom ones, see the [R
 
 ## Edit a user's login methods
 
-Only users with the User Access Management permission, such as users with the Datadog Admin Role, can change another user's login methods.
+Only users with the Org Management permission, such as users with the Datadog Admin Role, can change another user's login methods.
 
 Default login methods for an organization can be set through the Login Methods page. There you can allow or disallow all users in your organization to use a Datadog username and password, to sign in with Google, or to sign in with SAML. In User Management you can override on a per-user basis to allow a specific user to use one method or multiple methods. This is helpful in circumstances where you want all users to use SAML but need to enable a set of users to log in with username and password in an emergency.
 
