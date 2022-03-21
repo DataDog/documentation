@@ -84,7 +84,8 @@ Please note that sending events does not change. You can continue sending events
 Datadog no longer automatically performs Event aggregation, and no longer groups Events by the `aggregation_key` attribute. The UI no longer displays Event aggregation.
 
 ### Event comments are no longer supported or displayed in the UI
-Comments created using the API with `user_update` event type will be displayed as normal events.
+Comments created using the API with the `user_update` event type will be displayed as normal events.
+
 
 ### Status remapping in queries
 Some status values have changed:
