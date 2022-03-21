@@ -86,7 +86,6 @@ Datadog no longer automatically performs Event aggregation, and no longer groups
 ### Event comments are no longer supported or displayed in the UI
 Comments created using the API with the `user_update` event type will be displayed as normal events.
 
-
 ### Status remapping in queries
 Some status values have changed:
 
