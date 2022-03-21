@@ -32,7 +32,7 @@ For more information about default and custom roles, how to create them, assign 
 * Create a new monitor or edit an existing one
 * At the bottom of the form, specify which roles are allowed to edit the monitor, in addition to the monitor's creator
 
-{{< img src="/monitors/guide/monitor_rbac_permissions.jpg" alt="Monitor RBAC Permissions"  >}}
+{{< img src="/monitors/guide/monitor_rbac_restricted.jpg" alt="RBAC Restricted Monitor"  >}}
 
 For more information, see [Monitors documentation][1].
 
@@ -126,7 +126,7 @@ For more information, see [Roles][5] and [Monitors API documentation][6] .
 
 Previous to the above described role restriction option, monitors could be locked, meaning only their creator and users with the [Datadog Admin Role][2] would be able to edit them. 
 
-{{< img src="/monitors/guide/monitor_rbac_locked_monitor.jpeg" alt="Monitor RBAC Non Locked Monitor with Locked UI"  style="width:70%;">}}
+{{< img src="/monitors/guide/monitor_rbac_locked.jpg" alt="RBAC Locked Monitor"  style="width:70%;">}}
 
 This locked mechanism was deprecated and it is now recommended to use the role restriction option, which gives you more flexibility to define users allowed to edit monitors.
 
@@ -145,7 +145,7 @@ For more information on how to update your monitors' definitions, see the [Edit 
 All new monitors created from the UI use the new `restricted_roles` parameter. 
 All monitors (existing and new) also display the new role restriction option regardless of the mechanism used under the hood:
 
-{{< img src="/monitors/guide/monitor_rbac_permissions.jpg" alt="Monitor RBAC Permissions"  >}}
+{{< img src="/monitors/guide/monitor_rbac_non_restricted.jpg" alt="RBAC Non Restricted Monitor"  >}}
 
 Existing monitors have their definitions updated from the old locked mechanism to the new role restriction one on the fly whenever a monitor is saved.
 
@@ -174,9 +174,9 @@ Save the monitor, edit it again, and remove all roles that were generated for th
 
 Select the roles you want this monitor to be restricted to. This will override the locked equivalent set of roles to only the ones you specify.
   
-#### Locked monitors (`locked:true`) edited by a non creator or user without Datadog Admin Role
+#### Locked monitors (`locked:true`) edited by non creator or user without Datadog Admin Role
 
-You are a user without [Datadog Admin Role][2] and/or are not the creator of the monitor. You are editing your monitor and seeing the below warning:
+You are a user without [Datadog Admin Role][2] and/or are not the creator of the monitor. You are editing a locked monitor and seeing the below warning:
 
 <TO DO: ADD SCREENSHOT OF WARNING>
 
@@ -190,9 +190,9 @@ The warning reflects the current state of the monitor that is still using the ol
 
 #### Non locked monitors (`locked:false`, `locked:null`, undefined `locked`)
 
-You are editing a locked monitor and seeing the below option:
+You are editing a non locked monitor and seeing the below option:
 
-{{< img src="/monitors/guide/rbac_non_locked_monitor.jpg" alt="RBAC Non Locked Monitor with Restricted Roles UI"  >}}
+{{< img src="/monitors/guide/monitor_rbac_non_restricted.jpg" alt="RBAC Non Restricted Monitor"  >}}
 
 You have different ways to handle this option depending on the changes you are willing to make on your monitor:
 

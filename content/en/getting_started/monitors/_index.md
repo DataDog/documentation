@@ -83,7 +83,7 @@ Removing the `@notification` from either section removes it from both sections.
 
 ### Permissions
 
-{{< img src="getting_started/monitors/monitor_rbac_permissions.jpg" alt="Monitor RBAC permissions" style="width:90%;" >}}
+{{< img src="getting_started/monitors/monitor_rbac_restricted.jpg" alt="RBAC Restricted Monitor" style="width:90%;" >}}
 
 Use this option to restrict the edition of your monitor to its creator and to specific roles in your org. For more information about roles, see the [RBAC][9] documentation.
 

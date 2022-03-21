@@ -134,13 +134,13 @@ By default, only users attached to roles with [Monitor Write permissions][17] ca
 
 You can further restrict your monitor by specifying a subset of [roles][20] allowed to edit it in addition to the monitor's creator. 
 
-  {{< img src="monitors/notifications/monitor_rbac_permissions.jpg" alt="Monitor RBAC Permissions" style="width:90%;" >}}
+  {{< img src="monitors/notifications/monitor_rbac_restricted.jpg" alt="RBAC Restricted Monitor" style="width:90%;" >}}
 
 Edition includes any updates to the monitor configuration, monitor deletion, and muting of the monitor for any amount of time.
 
 **Note**: The limitations are applied both in the UI and API.
 
-For more information on how to set up RBAC for Monitors and on the update from the locked machanism to the role restriction one, see the [dedicated guide][21].
+For more information on how to set up RBAC for Monitors and on the update from the locked mechanism to the role restriction one, see the [dedicated guide][21].
 
 ## Test notifications
 

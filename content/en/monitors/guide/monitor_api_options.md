@@ -39,7 +39,7 @@ Examples:
 - If a monitor is set to `locked:true` and `"restricted_roles": [ "er6ec1b6-903c-15ec-8686-da7fd0960002" ]`, the `restricted_roles` parameter applies.
 - If a monitor is set to `locked:true` and no `"restricted_roles"` parameter is set, the `locked:true` parameter applies.
 
-For more information on how to set up RBAC for Monitors and on the update from the locked machanism to the role restriction one, see the [dedicated guide][2].
+For more information on how to set up RBAC for Monitors and on the update from the locked mechanism to the role restriction one, see the [dedicated guide][2].
 
 ## Anomaly options
 
