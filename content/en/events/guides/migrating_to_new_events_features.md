@@ -23,7 +23,7 @@ The following timeline applies to US-based customers:
 
 <strong>May 15, 2022</strong> - Starting on this date, while Datadog continues to evaluate event monitors that have not been migrated, they are no longer editable. New event monitors must use the new syntax.
 
-<strong>June 30, 2022</strong> - Datadog will stop evaluating event monitors that have not been migrated. They will stop working.
+<strong>June 30, 2022</strong> - Datadog stops evaluating event monitors that have not been migrated. Legacy event monitors stop working.
 
 ## What action do I need to take?
 
