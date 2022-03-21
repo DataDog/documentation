@@ -50,7 +50,7 @@ further_reading:
 ### Supported .NET Framework runtimes
 The .NET Tracer supports instrumentation on .NET Framework 4.6.1 and above.
 
-For a full list of supported libraries and processor architectures, see [Compatibility Requirements][1].
+For a full list of supported libraries and processor architectures (including older versions of .NET Framework), see [Compatibility Requirements][1].
 
 ## Installation and getting started
 
@@ -351,9 +351,10 @@ Enables or disables automatic injection of correlation identifiers into applicat
 : **TracerSettings property**: `GlobalSamplingRate` <br>
 Enables ingestion rate control.
 
-`DD_MAX_TRACES_PER_SECOND`
+`DD_TRACE_RATE_LIMIT`
 : **TracerSettings property**: `MaxTracesSubmittedPerSecond` <br>
-The number of traces allowed to be submitted per second.
+The number of traces allowed to be submitted per second (deprecates `DD_MAX_TRACES_PER_SECOND`). <br>
+**Default**: `100` when `DD_TRACE_SAMPLE_RATE` is set. Otherwise, delegates rate limiting to the Datadog Agent. <br>
 
 `DD_TRACE_GLOBAL_TAGS`
 : **TracerSettings property**: `GlobalTags`<br>

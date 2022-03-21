@@ -236,7 +236,7 @@ Provide service names for each plugin. Accepts comma separated `plugin:service-n
 A string for the minimum log level for the tracer to use when debug logging is enabled, for example, `error`, `debug`.
 
 
-For more options including the programmatic configuration API, see the [API documentation][4].
+For more options including the programmatic configuration API, see the [API documentation][3].
 
 ## Further Reading
 
