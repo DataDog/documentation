@@ -130,7 +130,9 @@ An [event][16] is created anytime a monitor is created, modified, silenced, or d
 
 ### Permissions
 
-Restrict the edition of your monitor to its creator and specific [roles][17].
+By default, only users attached to roles with [Monitor Write permissions][17] can edit monitors and only [Datadog Admin Role and Datadog Standard Role][18] have these permissions. The latter can however vary if your account uses [Custom Roles][19].
+
+You can further restrict your monitor by specifying a subset of [roles][20] allowed to edit it in addition to the monitor's creator. 
 
   {{< img src="monitors/notifications/monitor_rbac_permissions.jpg" alt="Monitor RBAC Permissions" style="width:90%;" >}}
 
@@ -138,15 +140,17 @@ Edition includes any updates to the monitor configuration, monitor deletion, and
 
 **Note**: The limitations are applied both in the UI and API.
 
+For more information on how to set up RBAC for Monitors and on the update from the locked machanism to the role restriction one, see the [dedicated guide][21].
+
 ## Test notifications
 
-Test notifications are supported for the [monitor types][18]: host, metric, anomaly, outlier, forecast, logs, rum, apm, integration (check only), process (check only), network (check only), custom check, event, and composite.
+Test notifications are supported for the [monitor types][22]: host, metric, anomaly, outlier, forecast, logs, rum, apm, integration (check only), process (check only), network (check only), custom check, event, and composite.
 
 ### Run the test
 
 1. After defining your monitor, test the notifications with the **Test Notifications** button at the bottom right of the monitor page.
 
-2. From the test notifications pop-up, choose the monitor case to test. You can only test states that are available in the monitor’s configuration for the thresholds specified in the alerting conditions. [Recovery thresholds][19] are an exception, as Datadog sends a recovery notification once the monitor either is no longer in alert, or it has no warn conditions.
+2. From the test notifications pop-up, choose the monitor case to test. You can only test states that are available in the monitor’s configuration for the thresholds specified in the alerting conditions. [Recovery thresholds][23] are an exception, as Datadog sends a recovery notification once the monitor either is no longer in alert, or it has no warn conditions.
 
     {{< img src="monitors/notifications/test-notif-select.png" alt="Test the notifications for this monitor" style="width:70%;" >}}
 
@@ -187,6 +191,10 @@ Message variables auto-populate with a randomly selected group based on the scop
 [14]: /integrations/webhooks/#usage
 [15]: /integrations/#cat-notification
 [16]: /events/
-[17]: /account_management/rbac/?tab=datadogapplication
-[18]: /monitors/create/types/
-[19]: /monitors/faq/what-are-recovery-thresholds/
+[17]: /account_management/rbac/permissions/#monitors
+[18]: /account_management/rbac/?tab=datadogapplication#datadog-default-roles
+[19]: /account_management/rbac/?tab=datadogapplication#custom-roles
+[20]: /account_management/rbac/?tab=datadogapplication
+[21]: /monitors/guide/how-to-set-up-rbac-for-monitors/
+[22]: /monitors/create/types/
+[23]: /monitors/faq/what-are-recovery-thresholds/

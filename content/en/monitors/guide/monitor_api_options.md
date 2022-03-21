@@ -39,6 +39,8 @@ Examples:
 - If a monitor is set to `locked:true` and `"restricted_roles": [ "er6ec1b6-903c-15ec-8686-da7fd0960002" ]`, the `restricted_roles` parameter applies.
 - If a monitor is set to `locked:true` and no `"restricted_roles"` parameter is set, the `locked:true` parameter applies.
 
+For more information on how to set up RBAC for Monitors and on the update from the locked machanism to the role restriction one, see the [dedicated guide][2].
+
 ## Anomaly options
 
 _These options only apply to anomaly monitors and are ignored for other monitor types._
@@ -54,7 +56,7 @@ Example: `{'threshold_windows': {'recovery_window': 'last_15m', 'trigger_window'
 
 _These options only apply to metric alerts._
 
-- **`thresholds`** a dictionary of thresholds by threshold type. There are two threshold types for metric alerts: *critical* and *warning*. *Critical* is defined in the query, but can also be specified in this option. *Warning* threshold can only be specified using the thresholds option. If you want to use [recovery thresholds][2] for your monitor, use the attributes `critical_recovery` and `warning_recovery`.
+- **`thresholds`** a dictionary of thresholds by threshold type. There are two threshold types for metric alerts: *critical* and *warning*. *Critical* is defined in the query, but can also be specified in this option. *Warning* threshold can only be specified using the thresholds option. If you want to use [recovery thresholds][3] for your monitor, use the attributes `critical_recovery` and `warning_recovery`.
 
 Example: `{'critical': 90, 'warning': 80,  'critical_recovery': 70, 'warning_recovery': 50}`
 
@@ -86,4 +88,5 @@ Example: `{"metric": "count","type": "count","groupBy": "core_service"}`
 - **`enable_logs_sample`** a Boolean to add samples or values to the notification message. Default: `False`
 
 [1]: /api/latest/roles/
-[2]: ../../faq/what-are-recovery-thresholds/
+[2]: /monitors/guide/how-to-set-up-rbac-for-monitors/
+[3]: ../../faq/what-are-recovery-thresholds/
