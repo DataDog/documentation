@@ -126,7 +126,7 @@ For more information, see [Roles][5] and [Monitors API documentation][6] .
 
 Previous to the above described role restriction option, monitors could be locked, meaning only their creator and users with the [Datadog Admin Role][2] would be able to edit them. 
 
-{{< img src="/monitors/guide/monitor_rbac_locked.jpg" alt="RBAC Locked Monitor"  style="width:70%;">}}
+{{< img src="/monitors/guide/monitor_rbac_locked.jpg" alt="RBAC Locked Monitor" style="width:70%;">}}
 
 This locked mechanism was deprecated and it is now recommended to use the role restriction option, which gives you more flexibility to define users allowed to edit monitors.
 
