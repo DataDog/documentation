@@ -12642,7 +12642,7 @@ servers:
 tags:
 - description: Search your Audit Logs events over HTTP.
   name: Audit
-- description: '[AuthN Mappings API] (https://docs.datadoghq.com/account_management/authn_mapping/?tab=example)
+- description: '[AuthN Mappings API](https://docs.datadoghq.com/account_management/authn_mapping/?tab=example)
 
     is used to automatically map group of users to roles in Datadog using attributes
 
