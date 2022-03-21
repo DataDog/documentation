@@ -178,10 +178,10 @@ Review [Getting Started with Cloud SIEM][50] to evaluate your logs against the o
 
 #### CSPM
 
-Use the [Getting Started with CSPM][54] guide to learn about detecting and assessing misconfigurations in your cloud environment. Resource configuration data is evaluated against the [out-of-the-box Cloud Configuration Rules][55] to flag attacker techniques and potential misconfigurations, allowing for fast response and remediation.
+Use the [Getting Started with CSPM][54] guide to learn about detecting and assessing misconfigurations in your cloud environment. Resource configuration data is evaluated against the out-of-the-box Posture Management [Cloud][55] and [Infrastructure][56] Detection Rules to flag attacker techniques and potential misconfigurations, allowing for fast response and remediation.
 
 ### Troubleshooting
-If you encounter any issues, be sure to check out the [Troubleshooting][56] section.
+If you encounter any issues, be sure to check out the [Troubleshooting][57] section.
 
 ## Further Reading
 
@@ -241,5 +241,6 @@ If you encounter any issues, be sure to check out the [Troubleshooting][56] sect
 [52]: /security_platform/explorer/
 [53]: /security_platform/notification_rules/
 [54]: /security_platform/cspm/getting_started/
-[55]: /security_platform/default_rules/#cat-cloud-configuration
-[56]: /integrations/amazon_web_services/?tab=roledelegation#troubleshooting
+[55]: /security_platform/default_rules/#cat-posture-management-cloud
+[56]: /security_platform/default_rules/#cat-posture-management-infra
+[57]: /integrations/amazon_web_services/?tab=roledelegation#troubleshooting

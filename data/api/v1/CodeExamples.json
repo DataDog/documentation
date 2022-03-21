@@ -356,6 +356,13 @@
       "description": "List IP Ranges returns \"OK\" response"
     }
   ],
+  "ListLogs": [
+    {
+      "group": "logs",
+      "suffix": "_235998668",
+      "description": "Search test logs returns \"OK\" response"
+    }
+  ],
   "SubmitLog": [
     {
       "group": "logs",
@@ -414,6 +421,11 @@
       "group": "monitors",
       "suffix": "",
       "description": "Create a monitor returns \"OK\" response"
+    },
+    {
+      "group": "monitors",
+      "suffix": "_440013737",
+      "description": "Create an Error Tracking monitor returns \"OK\" response"
     }
   ],
   "DeleteMonitor": [
