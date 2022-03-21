@@ -84,7 +84,7 @@ curl --request GET 'https://api.datadoghq.com/api/v2/roles' \
 }
 ```
 
-Use the [Create a monitor][2] or [Edit a monitor][3] API endpoint and the `restricted_roles` parameter to restrict the edition of your monitor to a specific set of roles and to the monitor's creator. 
+Use the [Create][2] or [Edit a monitor][3] API endpoint and the `restricted_roles` parameter to restrict monitor edition to a specific set of roles and to the monitor's creator. 
 
 **Note:** You can specify one or multiple role UUIDs. Setting `restricted_roles` to `null` allows monitor edition for all users with [Monitor Write permissions][4].
 
