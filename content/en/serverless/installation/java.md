@@ -152,7 +152,7 @@ Configure the following environment variables on your function:
 
 ```yaml
 DD_API_KEY: <DATADOG_API_KEY> # Replace <DATADOG_API_KEY> with your Datadog API key
-JAVA_TOOL_OPTIONS: -javaagent:"/opt/java/lib/dd-java-agent.jar"
+JAVA_TOOL_OPTIONS: -javaagent:"/opt/java/lib/dd-java-agent.jar" -XX:+TieredCompilation -XX:TieredStopAtLevel=1
 DD_LOGS_INJECTION: true
 DD_JMXFETCH_ENABLED: false
 DD_TRACE_ENABLED: true
