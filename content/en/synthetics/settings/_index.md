@@ -96,12 +96,11 @@ Once created, global variables can be used in all Synthetic tests by typing `{{`
 
 By default, only users with the [Datadog Admin and Datadog Standard roles][11] can access the Synthetic Monitoring **Global Variables** page. You can get access to the **Global Variables** page by having your user upgraded to one of those two [default roles][11]. 
 
-If you have access to the [custom role feature][12], add your user to any custom role that includes `synthetics_global_variable_read` and `synthetics_global_variable_write` permissions. 
+If you are using the [custom role feature][12], add your user to any custom role that includes `synthetics_global_variable_read` and `synthetics_global_variable_write` permissions. 
 
 #### Restrict access
 
-<div class="alert alert-warning">
-Access restriction is available for customers with <a href="https://docs.datadoghq.com/account_management/rbac/?tab=datadogapplication#create-a-custom-role">custom roles</a> enabled on their account.</div>
+Access restriction is available for customers using [custom roles][13] on their accounts.
 
 You can restrict access to a global variable based on the roles in your organization. When creating a global variable, choose which roles (in addition to your user) can read and write your global variable in **Permissions settings**. 
 
@@ -137,13 +136,13 @@ To enable tag enforcement, click **Enforce tags for usage attributions on all te
 
 {{< img src="synthetics/settings/tag_enforcement.png" alt="Enforce tags for usage attributions on all tests" style="width:100%;">}}
 
-For more information, see [Usage Attribution][13].
+For more information, see [Usage Attribution][14].
 
 ### Permissions
 
 By default, only users with the [Datadog Admin and Datadog Standard roles][11] can access the Synthetic Monitoring **Default Settings** page. To get access to the **Default Settings** page, upgrade your user to one of those two [default roles][11]. 
 
-If you have access to the [custom role feature][12], add your user to any custom role that includes `synthetics_default_settings_read` and `synthetics_default_settings_write` permissions. 
+If you are using the [custom role feature][12], add your user to any custom role that includes `synthetics_default_settings_read` and `synthetics_default_settings_write` permissions. 
 
 ## Further Reading
 
@@ -161,4 +160,5 @@ If you have access to the [custom role feature][12], add your user to any custom
 [10]: /synthetics/browser_tests/actions#using-variables
 [11]: /account_management/rbac/?tab=datadogapplication#datadog-default-roles
 [12]: /account_management/rbac/?tab=datadogapplication#custom-role
-[13]: /account_management/billing/usage_attribution
+[13]: /account_management/rbac/#create-a-custom-role
+[14]: /account_management/billing/usage_attribution

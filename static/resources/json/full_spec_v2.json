@@ -389,7 +389,7 @@
         }
       },
       "RoleID": {
-        "description": "The ID of the role.",
+        "description": "The unique identifier of the role.",
         "in": "path",
         "name": "role_id",
         "required": true,
@@ -1163,12 +1163,12 @@
                           "description": "Relationship to roles.",
                           "properties": {
                             "data": {
-                              "description": "An array containing type and ID of a role.",
+                              "description": "An array containing type and the unique identifier of a role.",
                               "items": {
                                 "description": "Relationship to role object.",
                                 "properties": {
                                   "id": {
-                                    "description": "ID of the role.",
+                                    "description": "The unique identifier of the role.",
                                     "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
                                     "type": "string"
                                   },
@@ -1407,12 +1407,12 @@
                     "description": "Relationship to roles.",
                     "properties": {
                       "data": {
-                        "description": "An array containing type and ID of a role.",
+                        "description": "An array containing type and the unique identifier of a role.",
                         "items": {
                           "description": "Relationship to role object.",
                           "properties": {
                             "id": {
-                              "description": "ID of the role.",
+                              "description": "The unique identifier of the role.",
                               "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
                               "type": "string"
                             },
@@ -1894,12 +1894,12 @@
                           "description": "Relationship to roles.",
                           "properties": {
                             "data": {
-                              "description": "An array containing type and ID of a role.",
+                              "description": "An array containing type and the unique identifier of a role.",
                               "items": {
                                 "description": "Relationship to role object.",
                                 "properties": {
                                   "id": {
-                                    "description": "ID of the role.",
+                                    "description": "The unique identifier of the role.",
                                     "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
                                     "type": "string"
                                   },
@@ -2469,12 +2469,12 @@
                           "description": "Relationship to roles.",
                           "properties": {
                             "data": {
-                              "description": "An array containing type and ID of a role.",
+                              "description": "An array containing type and the unique identifier of a role.",
                               "items": {
                                 "description": "Relationship to role object.",
                                 "properties": {
                                   "id": {
-                                    "description": "ID of the role.",
+                                    "description": "The unique identifier of the role.",
                                     "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
                                     "type": "string"
                                   },
@@ -2535,7 +2535,7 @@
                           "type": "string"
                         },
                         "name": {
-                          "description": "Name of the role.",
+                          "description": "The name of the role. The name is neither unique nor a stable identifier of the role.",
                           "type": "string"
                         },
                         "user_count": {
@@ -2548,7 +2548,7 @@
                       "type": "object"
                     },
                     "id": {
-                      "description": "ID of the role.",
+                      "description": "The unique identifier of the role.",
                       "type": "string"
                     },
                     "relationships": {
@@ -2804,12 +2804,12 @@
                     "description": "Relationship to roles.",
                     "properties": {
                       "data": {
-                        "description": "An array containing type and ID of a role.",
+                        "description": "An array containing type and the unique identifier of a role.",
                         "items": {
                           "description": "Relationship to role object.",
                           "properties": {
                             "id": {
-                              "description": "ID of the role.",
+                              "description": "The unique identifier of the role.",
                               "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
                               "type": "string"
                             },
@@ -2870,7 +2870,7 @@
                     "type": "string"
                   },
                   "name": {
-                    "description": "Name of the role.",
+                    "description": "The name of the role. The name is neither unique nor a stable identifier of the role.",
                     "type": "string"
                   },
                   "user_count": {
@@ -2883,7 +2883,7 @@
                 "type": "object"
               },
               "id": {
-                "description": "ID of the role.",
+                "description": "The unique identifier of the role.",
                 "type": "string"
               },
               "relationships": {
@@ -3758,7 +3758,7 @@
                           "type": "string"
                         },
                         "name": {
-                          "description": "Name of the role.",
+                          "description": "The name of the role. The name is neither unique nor a stable identifier of the role.",
                           "type": "string"
                         },
                         "user_count": {
@@ -3771,7 +3771,7 @@
                       "type": "object"
                     },
                     "id": {
-                      "description": "ID of the role.",
+                      "description": "The unique identifier of the role.",
                       "type": "string"
                     },
                     "relationships": {
@@ -3846,7 +3846,7 @@
                     "description": "Relationship to role object.",
                     "properties": {
                       "id": {
-                        "description": "ID of the role.",
+                        "description": "The unique identifier of the role.",
                         "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
                         "type": "string"
                       },
@@ -4008,7 +4008,7 @@
                     "description": "Relationship to role object.",
                     "properties": {
                       "id": {
-                        "description": "ID of the role.",
+                        "description": "The unique identifier of the role.",
                         "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
                         "type": "string"
                       },
@@ -4061,7 +4061,7 @@
                 "description": "Relationship to role object.",
                 "properties": {
                   "id": {
-                    "description": "ID of the role.",
+                    "description": "The unique identifier of the role.",
                     "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
                     "type": "string"
                   },
@@ -4118,7 +4118,7 @@
                         "description": "Relationship to role object.",
                         "properties": {
                           "id": {
-                            "description": "ID of the role.",
+                            "description": "The unique identifier of the role.",
                             "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
                             "type": "string"
                           },
@@ -4234,7 +4234,7 @@
                     "type": "string"
                   },
                   "name": {
-                    "description": "Name of the role.",
+                    "description": "The name of the role. The name is neither unique nor a stable identifier of the role.",
                     "type": "string"
                   },
                   "user_count": {
@@ -4247,7 +4247,7 @@
                 "type": "object"
               },
               "id": {
-                "description": "ID of the role.",
+                "description": "The unique identifier of the role.",
                 "type": "string"
               },
               "relationships": {
@@ -4320,7 +4320,7 @@
                 "description": "Relationship to role object.",
                 "properties": {
                   "id": {
-                    "description": "ID of the role.",
+                    "description": "The unique identifier of the role.",
                     "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
                     "type": "string"
                   },
@@ -4498,7 +4498,7 @@
                               "type": "string"
                             },
                             "name": {
-                              "description": "Name of the role.",
+                              "description": "The name of the role. The name is neither unique nor a stable identifier of the role.",
                               "type": "string"
                             },
                             "user_count": {
@@ -4511,7 +4511,7 @@
                           "type": "object"
                         },
                         "id": {
-                          "description": "ID of the role.",
+                          "description": "The unique identifier of the role.",
                           "type": "string"
                         },
                         "relationships": {
@@ -4586,7 +4586,7 @@
                         "description": "Relationship to role object.",
                         "properties": {
                           "id": {
-                            "description": "ID of the role.",
+                            "description": "The unique identifier of the role.",
                             "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
                             "type": "string"
                           },
@@ -4721,7 +4721,7 @@
                     "description": "Relationship to role object.",
                     "properties": {
                       "id": {
-                        "description": "ID of the role.",
+                        "description": "The unique identifier of the role.",
                         "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
                         "type": "string"
                       },
@@ -4775,7 +4775,7 @@
                 "description": "Relationship to role object.",
                 "properties": {
                   "id": {
-                    "description": "ID of the role.",
+                    "description": "The unique identifier of the role.",
                     "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
                     "type": "string"
                   },
@@ -4837,7 +4837,7 @@
                         "description": "Relationship to role object.",
                         "properties": {
                           "id": {
-                            "description": "ID of the role.",
+                            "description": "The unique identifier of the role.",
                             "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
                             "type": "string"
                           },
@@ -5004,7 +5004,7 @@
                                 "type": "string"
                               },
                               "name": {
-                                "description": "Name of the role.",
+                                "description": "The name of the role. The name is neither unique nor a stable identifier of the role.",
                                 "type": "string"
                               },
                               "user_count": {
@@ -5017,7 +5017,7 @@
                             "type": "object"
                           },
                           "id": {
-                            "description": "ID of the role.",
+                            "description": "The unique identifier of the role.",
                             "type": "string"
                           },
                           "relationships": {
@@ -5092,7 +5092,7 @@
                           "description": "Relationship to role object.",
                           "properties": {
                             "id": {
-                              "description": "ID of the role.",
+                              "description": "The unique identifier of the role.",
                               "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
                               "type": "string"
                             },
@@ -8623,12 +8623,12 @@
                           "description": "Relationship to roles.",
                           "properties": {
                             "data": {
-                              "description": "An array containing type and ID of a role.",
+                              "description": "An array containing type and the unique identifier of a role.",
                               "items": {
                                 "description": "Relationship to role object.",
                                 "properties": {
                                   "id": {
-                                    "description": "ID of the role.",
+                                    "description": "The unique identifier of the role.",
                                     "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
                                     "type": "string"
                                   },
@@ -9537,12 +9537,12 @@
                     "description": "Relationship to roles.",
                     "properties": {
                       "data": {
-                        "description": "An array containing type and ID of a role.",
+                        "description": "An array containing type and the unique identifier of a role.",
                         "items": {
                           "description": "Relationship to role object.",
                           "properties": {
                             "id": {
-                              "description": "ID of the role.",
+                              "description": "The unique identifier of the role.",
                               "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
                               "type": "string"
                             },
@@ -10309,12 +10309,12 @@
                     "description": "Relationship to roles.",
                     "properties": {
                       "data": {
-                        "description": "An array containing type and ID of a role.",
+                        "description": "An array containing type and the unique identifier of a role.",
                         "items": {
                           "description": "Relationship to role object.",
                           "properties": {
                             "id": {
-                              "description": "ID of the role.",
+                              "description": "The unique identifier of the role.",
                               "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
                               "type": "string"
                             },
@@ -10761,12 +10761,12 @@
                           "description": "Relationship to roles.",
                           "properties": {
                             "data": {
-                              "description": "An array containing type and ID of a role.",
+                              "description": "An array containing type and the unique identifier of a role.",
                               "items": {
                                 "description": "Relationship to role object.",
                                 "properties": {
                                   "id": {
-                                    "description": "ID of the role.",
+                                    "description": "The unique identifier of the role.",
                                     "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
                                     "type": "string"
                                   },
@@ -11578,12 +11578,12 @@
                           "description": "Relationship to roles.",
                           "properties": {
                             "data": {
-                              "description": "An array containing type and ID of a role.",
+                              "description": "An array containing type and the unique identifier of a role.",
                               "items": {
                                 "description": "Relationship to role object.",
                                 "properties": {
                                   "id": {
-                                    "description": "ID of the role.",
+                                    "description": "The unique identifier of the role.",
                                     "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
                                     "type": "string"
                                   },
@@ -12108,12 +12108,12 @@
                     "description": "Relationship to roles.",
                     "properties": {
                       "data": {
-                        "description": "An array containing type and ID of a role.",
+                        "description": "An array containing type and the unique identifier of a role.",
                         "items": {
                           "description": "Relationship to role object.",
                           "properties": {
                             "id": {
-                              "description": "ID of the role.",
+                              "description": "The unique identifier of the role.",
                               "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
                               "type": "string"
                             },
@@ -12556,12 +12556,12 @@
                           "description": "Relationship to roles.",
                           "properties": {
                             "data": {
-                              "description": "An array containing type and ID of a role.",
+                              "description": "An array containing type and the unique identifier of a role.",
                               "items": {
                                 "description": "Relationship to role object.",
                                 "properties": {
                                   "id": {
-                                    "description": "ID of the role.",
+                                    "description": "The unique identifier of the role.",
                                     "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
                                     "type": "string"
                                   },
@@ -13368,12 +13368,12 @@
                           "description": "Relationship to roles.",
                           "properties": {
                             "data": {
-                              "description": "An array containing type and ID of a role.",
+                              "description": "An array containing type and the unique identifier of a role.",
                               "items": {
                                 "description": "Relationship to role object.",
                                 "properties": {
                                   "id": {
-                                    "description": "ID of the role.",
+                                    "description": "The unique identifier of the role.",
                                     "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
                                     "type": "string"
                                   },
@@ -15336,12 +15336,12 @@
                           "description": "Relationship to roles.",
                           "properties": {
                             "data": {
-                              "description": "An array containing type and ID of a role.",
+                              "description": "An array containing type and the unique identifier of a role.",
                               "items": {
                                 "description": "Relationship to role object.",
                                 "properties": {
                                   "id": {
-                                    "description": "ID of the role.",
+                                    "description": "The unique identifier of the role.",
                                     "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
                                     "type": "string"
                                   },
@@ -15728,12 +15728,12 @@
                           "description": "Relationship to roles.",
                           "properties": {
                             "data": {
-                              "description": "An array containing type and ID of a role.",
+                              "description": "An array containing type and the unique identifier of a role.",
                               "items": {
                                 "description": "Relationship to role object.",
                                 "properties": {
                                   "id": {
-                                    "description": "ID of the role.",
+                                    "description": "The unique identifier of the role.",
                                     "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
                                     "type": "string"
                                   },
@@ -15794,7 +15794,7 @@
                           "type": "string"
                         },
                         "name": {
-                          "description": "Name of the role.",
+                          "description": "The name of the role. The name is neither unique nor a stable identifier of the role.",
                           "type": "string"
                         },
                         "user_count": {
@@ -15807,7 +15807,7 @@
                       "type": "object"
                     },
                     "id": {
-                      "description": "ID of the role.",
+                      "description": "The unique identifier of the role.",
                       "type": "string"
                     },
                     "relationships": {
@@ -24536,12 +24536,12 @@
                           "description": "Relationship to roles.",
                           "properties": {
                             "data": {
-                              "description": "An array containing type and ID of a role.",
+                              "description": "An array containing type and the unique identifier of a role.",
                               "items": {
                                 "description": "Relationship to role object.",
                                 "properties": {
                                   "id": {
-                                    "description": "ID of the role.",
+                                    "description": "The unique identifier of the role.",
                                     "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
                                     "type": "string"
                                   },
@@ -24602,7 +24602,7 @@
                           "type": "string"
                         },
                         "name": {
-                          "description": "Name of the role.",
+                          "description": "The name of the role. The name is neither unique nor a stable identifier of the role.",
                           "type": "string"
                         },
                         "user_count": {
@@ -24615,7 +24615,7 @@
                       "type": "object"
                     },
                     "id": {
-                      "description": "ID of the role.",
+                      "description": "The unique identifier of the role.",
                       "type": "string"
                     },
                     "relationships": {
@@ -26031,7 +26031,7 @@
             "description": "Relationship to role object.",
             "properties": {
               "id": {
-                "description": "ID of the role.",
+                "description": "The unique identifier of the role.",
                 "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
                 "type": "string"
               },
@@ -26057,7 +26057,7 @@
         "description": "Relationship to role object.",
         "properties": {
           "id": {
-            "description": "ID of the role.",
+            "description": "The unique identifier of the role.",
             "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
             "type": "string"
           },
@@ -26080,12 +26080,12 @@
         "description": "Relationship to roles.",
         "properties": {
           "data": {
-            "description": "An array containing type and ID of a role.",
+            "description": "An array containing type and the unique identifier of a role.",
             "items": {
               "description": "Relationship to role object.",
               "properties": {
                 "id": {
-                  "description": "ID of the role.",
+                  "description": "The unique identifier of the role.",
                   "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
                   "type": "string"
                 },
@@ -26462,12 +26462,12 @@
             "description": "Relationship to roles.",
             "properties": {
               "data": {
-                "description": "An array containing type and ID of a role.",
+                "description": "An array containing type and the unique identifier of a role.",
                 "items": {
                   "description": "Relationship to role object.",
                   "properties": {
                     "id": {
-                      "description": "ID of the role.",
+                      "description": "The unique identifier of the role.",
                       "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
                       "type": "string"
                     },
@@ -26729,12 +26729,12 @@
                 "description": "Relationship to roles.",
                 "properties": {
                   "data": {
-                    "description": "An array containing type and ID of a role.",
+                    "description": "An array containing type and the unique identifier of a role.",
                     "items": {
                       "description": "Relationship to role object.",
                       "properties": {
                         "id": {
-                          "description": "ID of the role.",
+                          "description": "The unique identifier of the role.",
                           "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
                           "type": "string"
                         },
@@ -26819,12 +26819,12 @@
                     "description": "Relationship to roles.",
                     "properties": {
                       "data": {
-                        "description": "An array containing type and ID of a role.",
+                        "description": "An array containing type and the unique identifier of a role.",
                         "items": {
                           "description": "Relationship to role object.",
                           "properties": {
                             "id": {
-                              "description": "ID of the role.",
+                              "description": "The unique identifier of the role.",
                               "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
                               "type": "string"
                             },
@@ -27025,7 +27025,7 @@
                 "type": "string"
               },
               "name": {
-                "description": "Name of the role.",
+                "description": "The name of the role. The name is neither unique nor a stable identifier of the role.",
                 "type": "string"
               },
               "user_count": {
@@ -27038,7 +27038,7 @@
             "type": "object"
           },
           "id": {
-            "description": "ID of the role.",
+            "description": "The unique identifier of the role.",
             "type": "string"
           },
           "relationships": {
@@ -27113,7 +27113,7 @@
             "type": "string"
           },
           "name": {
-            "description": "Name of the role.",
+            "description": "The name of the role. The name is neither unique nor a stable identifier of the role.",
             "type": "string"
           },
           "user_count": {
@@ -27540,7 +27540,7 @@
                 "type": "object"
               },
               "id": {
-                "description": "ID of the role.",
+                "description": "The unique identifier of the role.",
                 "type": "string"
               },
               "relationships": {
@@ -27632,7 +27632,7 @@
             "type": "object"
           },
           "id": {
-            "description": "ID of the role.",
+            "description": "The unique identifier of the role.",
             "type": "string"
           },
           "relationships": {
@@ -27792,7 +27792,7 @@
                     "type": "string"
                   },
                   "name": {
-                    "description": "Name of the role.",
+                    "description": "The name of the role. The name is neither unique nor a stable identifier of the role.",
                     "type": "string"
                   },
                   "user_count": {
@@ -27805,7 +27805,7 @@
                 "type": "object"
               },
               "id": {
-                "description": "ID of the role.",
+                "description": "The unique identifier of the role.",
                 "type": "string"
               },
               "relationships": {
@@ -27953,7 +27953,7 @@
             "type": "object"
           },
           "id": {
-            "description": "ID of the role.",
+            "description": "The unique identifier of the role.",
             "example": "00000000-0000-1111-0000-000000000000",
             "type": "string"
           },
@@ -28006,7 +28006,7 @@
                 "type": "object"
               },
               "id": {
-                "description": "ID of the role.",
+                "description": "The unique identifier of the role.",
                 "example": "00000000-0000-1111-0000-000000000000",
                 "type": "string"
               },
@@ -28065,7 +28065,7 @@
                 "type": "object"
               },
               "id": {
-                "description": "ID of the role.",
+                "description": "The unique identifier of the role.",
                 "type": "string"
               },
               "relationships": {
@@ -28153,7 +28153,7 @@
             "type": "object"
           },
           "id": {
-            "description": "ID of the role.",
+            "description": "The unique identifier of the role.",
             "type": "string"
           },
           "relationships": {
@@ -28236,7 +28236,7 @@
                       "type": "string"
                     },
                     "name": {
-                      "description": "Name of the role.",
+                      "description": "The name of the role. The name is neither unique nor a stable identifier of the role.",
                       "type": "string"
                     },
                     "user_count": {
@@ -28249,7 +28249,7 @@
                   "type": "object"
                 },
                 "id": {
-                  "description": "ID of the role.",
+                  "description": "The unique identifier of the role.",
                   "type": "string"
                 },
                 "relationships": {
@@ -31974,12 +31974,12 @@
                 "description": "Relationship to roles.",
                 "properties": {
                   "data": {
-                    "description": "An array containing type and ID of a role.",
+                    "description": "An array containing type and the unique identifier of a role.",
                     "items": {
                       "description": "Relationship to role object.",
                       "properties": {
                         "id": {
-                          "description": "ID of the role.",
+                          "description": "The unique identifier of the role.",
                           "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
                           "type": "string"
                         },
@@ -32066,12 +32066,12 @@
                     "description": "Relationship to roles.",
                     "properties": {
                       "data": {
-                        "description": "An array containing type and ID of a role.",
+                        "description": "An array containing type and the unique identifier of a role.",
                         "items": {
                           "description": "Relationship to role object.",
                           "properties": {
                             "id": {
-                              "description": "ID of the role.",
+                              "description": "The unique identifier of the role.",
                               "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
                               "type": "string"
                             },
@@ -32309,12 +32309,12 @@
                 "description": "Relationship to roles.",
                 "properties": {
                   "data": {
-                    "description": "An array containing type and ID of a role.",
+                    "description": "An array containing type and the unique identifier of a role.",
                     "items": {
                       "description": "Relationship to role object.",
                       "properties": {
                         "id": {
-                          "description": "ID of the role.",
+                          "description": "The unique identifier of the role.",
                           "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
                           "type": "string"
                         },
@@ -32464,12 +32464,12 @@
                 "description": "Relationship to roles.",
                 "properties": {
                   "data": {
-                    "description": "An array containing type and ID of a role.",
+                    "description": "An array containing type and the unique identifier of a role.",
                     "items": {
                       "description": "Relationship to role object.",
                       "properties": {
                         "id": {
-                          "description": "ID of the role.",
+                          "description": "The unique identifier of the role.",
                           "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
                           "type": "string"
                         },
@@ -32550,12 +32550,12 @@
                     "description": "Relationship to roles.",
                     "properties": {
                       "data": {
-                        "description": "An array containing type and ID of a role.",
+                        "description": "An array containing type and the unique identifier of a role.",
                         "items": {
                           "description": "Relationship to role object.",
                           "properties": {
                             "id": {
-                              "description": "ID of the role.",
+                              "description": "The unique identifier of the role.",
                               "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
                               "type": "string"
                             },
@@ -32997,12 +32997,12 @@
             "description": "Relationship to roles.",
             "properties": {
               "data": {
-                "description": "An array containing type and ID of a role.",
+                "description": "An array containing type and the unique identifier of a role.",
                 "items": {
                   "description": "Relationship to role object.",
                   "properties": {
                     "id": {
-                      "description": "ID of the role.",
+                      "description": "The unique identifier of the role.",
                       "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
                       "type": "string"
                     },
@@ -33218,12 +33218,12 @@
                     "description": "Relationship to roles.",
                     "properties": {
                       "data": {
-                        "description": "An array containing type and ID of a role.",
+                        "description": "An array containing type and the unique identifier of a role.",
                         "items": {
                           "description": "Relationship to role object.",
                           "properties": {
                             "id": {
-                              "description": "ID of the role.",
+                              "description": "The unique identifier of the role.",
                               "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
                               "type": "string"
                             },
@@ -33414,7 +33414,7 @@
                           "type": "string"
                         },
                         "name": {
-                          "description": "Name of the role.",
+                          "description": "The name of the role. The name is neither unique nor a stable identifier of the role.",
                           "type": "string"
                         },
                         "user_count": {
@@ -33427,7 +33427,7 @@
                       "type": "object"
                     },
                     "id": {
-                      "description": "ID of the role.",
+                      "description": "The unique identifier of the role.",
                       "type": "string"
                     },
                     "relationships": {
@@ -33641,7 +33641,7 @@
                     "type": "string"
                   },
                   "name": {
-                    "description": "Name of the role.",
+                    "description": "The name of the role. The name is neither unique nor a stable identifier of the role.",
                     "type": "string"
                   },
                   "user_count": {
@@ -33654,7 +33654,7 @@
                 "type": "object"
               },
               "id": {
-                "description": "ID of the role.",
+                "description": "The unique identifier of the role.",
                 "type": "string"
               },
               "relationships": {
@@ -33841,12 +33841,12 @@
             "description": "Relationship to roles.",
             "properties": {
               "data": {
-                "description": "An array containing type and ID of a role.",
+                "description": "An array containing type and the unique identifier of a role.",
                 "items": {
                   "description": "Relationship to role object.",
                   "properties": {
                     "id": {
-                      "description": "ID of the role.",
+                      "description": "The unique identifier of the role.",
                       "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
                       "type": "string"
                     },
@@ -34183,12 +34183,12 @@
                       "description": "Relationship to roles.",
                       "properties": {
                         "data": {
-                          "description": "An array containing type and ID of a role.",
+                          "description": "An array containing type and the unique identifier of a role.",
                           "items": {
                             "description": "Relationship to role object.",
                             "properties": {
                               "id": {
-                                "description": "ID of the role.",
+                                "description": "The unique identifier of the role.",
                                 "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
                                 "type": "string"
                               },
@@ -34381,7 +34381,7 @@
                           "type": "string"
                         },
                         "name": {
-                          "description": "Name of the role.",
+                          "description": "The name of the role. The name is neither unique nor a stable identifier of the role.",
                           "type": "string"
                         },
                         "user_count": {
@@ -34394,7 +34394,7 @@
                       "type": "object"
                     },
                     "id": {
-                      "description": "ID of the role.",
+                      "description": "The unique identifier of the role.",
                       "type": "string"
                     },
                     "relationships": {
@@ -35008,12 +35008,12 @@
                                     "description": "Relationship to roles.",
                                     "properties": {
                                       "data": {
-                                        "description": "An array containing type and ID of a role.",
+                                        "description": "An array containing type and the unique identifier of a role.",
                                         "items": {
                                           "description": "Relationship to role object.",
                                           "properties": {
                                             "id": {
-                                              "description": "ID of the role.",
+                                              "description": "The unique identifier of the role.",
                                               "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
                                               "type": "string"
                                             },
@@ -35542,12 +35542,12 @@
                                     "description": "Relationship to roles.",
                                     "properties": {
                                       "data": {
-                                        "description": "An array containing type and ID of a role.",
+                                        "description": "An array containing type and the unique identifier of a role.",
                                         "items": {
                                           "description": "Relationship to role object.",
                                           "properties": {
                                             "id": {
-                                              "description": "ID of the role.",
+                                              "description": "The unique identifier of the role.",
                                               "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
                                               "type": "string"
                                             },
@@ -36168,12 +36168,12 @@
                                     "description": "Relationship to roles.",
                                     "properties": {
                                       "data": {
-                                        "description": "An array containing type and ID of a role.",
+                                        "description": "An array containing type and the unique identifier of a role.",
                                         "items": {
                                           "description": "Relationship to role object.",
                                           "properties": {
                                             "id": {
-                                              "description": "ID of the role.",
+                                              "description": "The unique identifier of the role.",
                                               "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
                                               "type": "string"
                                             },
@@ -36719,12 +36719,12 @@
                                     "description": "Relationship to roles.",
                                     "properties": {
                                       "data": {
-                                        "description": "An array containing type and ID of a role.",
+                                        "description": "An array containing type and the unique identifier of a role.",
                                         "items": {
                                           "description": "Relationship to role object.",
                                           "properties": {
                                             "id": {
-                                              "description": "ID of the role.",
+                                              "description": "The unique identifier of the role.",
                                               "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
                                               "type": "string"
                                             },
@@ -37281,12 +37281,12 @@
                                     "description": "Relationship to roles.",
                                     "properties": {
                                       "data": {
-                                        "description": "An array containing type and ID of a role.",
+                                        "description": "An array containing type and the unique identifier of a role.",
                                         "items": {
                                           "description": "Relationship to role object.",
                                           "properties": {
                                             "id": {
-                                              "description": "ID of the role.",
+                                              "description": "The unique identifier of the role.",
                                               "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
                                               "type": "string"
                                             },
@@ -37347,7 +37347,7 @@
                                     "type": "string"
                                   },
                                   "name": {
-                                    "description": "Name of the role.",
+                                    "description": "The name of the role. The name is neither unique nor a stable identifier of the role.",
                                     "type": "string"
                                   },
                                   "user_count": {
@@ -37360,7 +37360,7 @@
                                 "type": "object"
                               },
                               "id": {
-                                "description": "ID of the role.",
+                                "description": "The unique identifier of the role.",
                                 "type": "string"
                               },
                               "relationships": {
@@ -37977,12 +37977,12 @@
                                     "description": "Relationship to roles.",
                                     "properties": {
                                       "data": {
-                                        "description": "An array containing type and ID of a role.",
+                                        "description": "An array containing type and the unique identifier of a role.",
                                         "items": {
                                           "description": "Relationship to role object.",
                                           "properties": {
                                             "id": {
-                                              "description": "ID of the role.",
+                                              "description": "The unique identifier of the role.",
                                               "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
                                               "type": "string"
                                             },
@@ -38043,7 +38043,7 @@
                                     "type": "string"
                                   },
                                   "name": {
-                                    "description": "Name of the role.",
+                                    "description": "The name of the role. The name is neither unique nor a stable identifier of the role.",
                                     "type": "string"
                                   },
                                   "user_count": {
@@ -38056,7 +38056,7 @@
                                 "type": "object"
                               },
                               "id": {
-                                "description": "ID of the role.",
+                                "description": "The unique identifier of the role.",
                                 "type": "string"
                               },
                               "relationships": {
@@ -38627,12 +38627,12 @@
                                     "description": "Relationship to roles.",
                                     "properties": {
                                       "data": {
-                                        "description": "An array containing type and ID of a role.",
+                                        "description": "An array containing type and the unique identifier of a role.",
                                         "items": {
                                           "description": "Relationship to role object.",
                                           "properties": {
                                             "id": {
-                                              "description": "ID of the role.",
+                                              "description": "The unique identifier of the role.",
                                               "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
                                               "type": "string"
                                             },
@@ -38693,7 +38693,7 @@
                                     "type": "string"
                                   },
                                   "name": {
-                                    "description": "Name of the role.",
+                                    "description": "The name of the role. The name is neither unique nor a stable identifier of the role.",
                                     "type": "string"
                                   },
                                   "user_count": {
@@ -38706,7 +38706,7 @@
                                 "type": "object"
                               },
                               "id": {
-                                "description": "ID of the role.",
+                                "description": "The unique identifier of the role.",
                                 "type": "string"
                               },
                               "relationships": {
@@ -39749,7 +39749,7 @@
                                           "type": "string"
                                         },
                                         "name": {
-                                          "description": "Name of the role.",
+                                          "description": "The name of the role. The name is neither unique nor a stable identifier of the role.",
                                           "type": "string"
                                         },
                                         "user_count": {
@@ -39762,7 +39762,7 @@
                                       "type": "object"
                                     },
                                     "id": {
-                                      "description": "ID of the role.",
+                                      "description": "The unique identifier of the role.",
                                       "type": "string"
                                     },
                                     "relationships": {
@@ -39837,7 +39837,7 @@
                                     "description": "Relationship to role object.",
                                     "properties": {
                                       "id": {
-                                        "description": "ID of the role.",
+                                        "description": "The unique identifier of the role.",
                                         "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
                                         "type": "string"
                                       },
@@ -40058,7 +40058,7 @@
                                 "description": "Relationship to role object.",
                                 "properties": {
                                   "id": {
-                                    "description": "ID of the role.",
+                                    "description": "The unique identifier of the role.",
                                     "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
                                     "type": "string"
                                   },
@@ -40230,7 +40230,7 @@
                                         "type": "string"
                                       },
                                       "name": {
-                                        "description": "Name of the role.",
+                                        "description": "The name of the role. The name is neither unique nor a stable identifier of the role.",
                                         "type": "string"
                                       },
                                       "user_count": {
@@ -40243,7 +40243,7 @@
                                     "type": "object"
                                   },
                                   "id": {
-                                    "description": "ID of the role.",
+                                    "description": "The unique identifier of the role.",
                                     "type": "string"
                                   },
                                   "relationships": {
@@ -40318,7 +40318,7 @@
                                   "description": "Relationship to role object.",
                                   "properties": {
                                     "id": {
-                                      "description": "ID of the role.",
+                                      "description": "The unique identifier of the role.",
                                       "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
                                       "type": "string"
                                     },
@@ -40798,7 +40798,7 @@
                                         "type": "string"
                                       },
                                       "name": {
-                                        "description": "Name of the role.",
+                                        "description": "The name of the role. The name is neither unique nor a stable identifier of the role.",
                                         "type": "string"
                                       },
                                       "user_count": {
@@ -40811,7 +40811,7 @@
                                     "type": "object"
                                   },
                                   "id": {
-                                    "description": "ID of the role.",
+                                    "description": "The unique identifier of the role.",
                                     "type": "string"
                                   },
                                   "relationships": {
@@ -40886,7 +40886,7 @@
                                   "description": "Relationship to role object.",
                                   "properties": {
                                     "id": {
-                                      "description": "ID of the role.",
+                                      "description": "The unique identifier of the role.",
                                       "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
                                       "type": "string"
                                     },
@@ -41124,7 +41124,7 @@
                                 "description": "Relationship to role object.",
                                 "properties": {
                                   "id": {
-                                    "description": "ID of the role.",
+                                    "description": "The unique identifier of the role.",
                                     "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
                                     "type": "string"
                                   },
@@ -41297,7 +41297,7 @@
                                         "type": "string"
                                       },
                                       "name": {
-                                        "description": "Name of the role.",
+                                        "description": "The name of the role. The name is neither unique nor a stable identifier of the role.",
                                         "type": "string"
                                       },
                                       "user_count": {
@@ -41310,7 +41310,7 @@
                                     "type": "object"
                                   },
                                   "id": {
-                                    "description": "ID of the role.",
+                                    "description": "The unique identifier of the role.",
                                     "type": "string"
                                   },
                                   "relationships": {
@@ -41385,7 +41385,7 @@
                                   "description": "Relationship to role object.",
                                   "properties": {
                                     "id": {
-                                      "description": "ID of the role.",
+                                      "description": "The unique identifier of the role.",
                                       "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
                                       "type": "string"
                                     },
@@ -42040,12 +42040,12 @@
                                     "description": "Relationship to roles.",
                                     "properties": {
                                       "data": {
-                                        "description": "An array containing type and ID of a role.",
+                                        "description": "An array containing type and the unique identifier of a role.",
                                         "items": {
                                           "description": "Relationship to role object.",
                                           "properties": {
                                             "id": {
-                                              "description": "ID of the role.",
+                                              "description": "The unique identifier of the role.",
                                               "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
                                               "type": "string"
                                             },
@@ -42106,7 +42106,7 @@
                                     "type": "string"
                                   },
                                   "name": {
-                                    "description": "Name of the role.",
+                                    "description": "The name of the role. The name is neither unique nor a stable identifier of the role.",
                                     "type": "string"
                                   },
                                   "user_count": {
@@ -42119,7 +42119,7 @@
                                 "type": "object"
                               },
                               "id": {
-                                "description": "ID of the role.",
+                                "description": "The unique identifier of the role.",
                                 "type": "string"
                               },
                               "relationships": {
@@ -42676,12 +42676,12 @@
                                     "description": "Relationship to roles.",
                                     "properties": {
                                       "data": {
-                                        "description": "An array containing type and ID of a role.",
+                                        "description": "An array containing type and the unique identifier of a role.",
                                         "items": {
                                           "description": "Relationship to role object.",
                                           "properties": {
                                             "id": {
-                                              "description": "ID of the role.",
+                                              "description": "The unique identifier of the role.",
                                               "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
                                               "type": "string"
                                             },
@@ -42742,7 +42742,7 @@
                                     "type": "string"
                                   },
                                   "name": {
-                                    "description": "Name of the role.",
+                                    "description": "The name of the role. The name is neither unique nor a stable identifier of the role.",
                                     "type": "string"
                                   },
                                   "user_count": {
@@ -42755,7 +42755,7 @@
                                 "type": "object"
                               },
                               "id": {
-                                "description": "ID of the role.",
+                                "description": "The unique identifier of the role.",
                                 "type": "string"
                               },
                               "relationships": {
@@ -43355,12 +43355,12 @@
                                     "description": "Relationship to roles.",
                                     "properties": {
                                       "data": {
-                                        "description": "An array containing type and ID of a role.",
+                                        "description": "An array containing type and the unique identifier of a role.",
                                         "items": {
                                           "description": "Relationship to role object.",
                                           "properties": {
                                             "id": {
-                                              "description": "ID of the role.",
+                                              "description": "The unique identifier of the role.",
                                               "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
                                               "type": "string"
                                             },
@@ -43421,7 +43421,7 @@
                                     "type": "string"
                                   },
                                   "name": {
-                                    "description": "Name of the role.",
+                                    "description": "The name of the role. The name is neither unique nor a stable identifier of the role.",
                                     "type": "string"
                                   },
                                   "user_count": {
@@ -43434,7 +43434,7 @@
                                 "type": "object"
                               },
                               "id": {
-                                "description": "ID of the role.",
+                                "description": "The unique identifier of the role.",
                                 "type": "string"
                               },
                               "relationships": {
@@ -43980,12 +43980,12 @@
                                     "description": "Relationship to roles.",
                                     "properties": {
                                       "data": {
-                                        "description": "An array containing type and ID of a role.",
+                                        "description": "An array containing type and the unique identifier of a role.",
                                         "items": {
                                           "description": "Relationship to role object.",
                                           "properties": {
                                             "id": {
-                                              "description": "ID of the role.",
+                                              "description": "The unique identifier of the role.",
                                               "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
                                               "type": "string"
                                             },
@@ -44046,7 +44046,7 @@
                                     "type": "string"
                                   },
                                   "name": {
-                                    "description": "Name of the role.",
+                                    "description": "The name of the role. The name is neither unique nor a stable identifier of the role.",
                                     "type": "string"
                                   },
                                   "user_count": {
@@ -44059,7 +44059,7 @@
                                 "type": "object"
                               },
                               "id": {
-                                "description": "ID of the role.",
+                                "description": "The unique identifier of the role.",
                                 "type": "string"
                               },
                               "relationships": {
@@ -46014,12 +46014,12 @@
                                     "description": "Relationship to roles.",
                                     "properties": {
                                       "data": {
-                                        "description": "An array containing type and ID of a role.",
+                                        "description": "An array containing type and the unique identifier of a role.",
                                         "items": {
                                           "description": "Relationship to role object.",
                                           "properties": {
                                             "id": {
-                                              "description": "ID of the role.",
+                                              "description": "The unique identifier of the role.",
                                               "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
                                               "type": "string"
                                             },
@@ -47173,12 +47173,12 @@
                                     "description": "Relationship to roles.",
                                     "properties": {
                                       "data": {
-                                        "description": "An array containing type and ID of a role.",
+                                        "description": "An array containing type and the unique identifier of a role.",
                                         "items": {
                                           "description": "Relationship to role object.",
                                           "properties": {
                                             "id": {
-                                              "description": "ID of the role.",
+                                              "description": "The unique identifier of the role.",
                                               "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
                                               "type": "string"
                                             },
@@ -48259,12 +48259,12 @@
                                     "description": "Relationship to roles.",
                                     "properties": {
                                       "data": {
-                                        "description": "An array containing type and ID of a role.",
+                                        "description": "An array containing type and the unique identifier of a role.",
                                         "items": {
                                           "description": "Relationship to role object.",
                                           "properties": {
                                             "id": {
-                                              "description": "ID of the role.",
+                                              "description": "The unique identifier of the role.",
                                               "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
                                               "type": "string"
                                             },
@@ -49507,12 +49507,12 @@
                                     "description": "Relationship to roles.",
                                     "properties": {
                                       "data": {
-                                        "description": "An array containing type and ID of a role.",
+                                        "description": "An array containing type and the unique identifier of a role.",
                                         "items": {
                                           "description": "Relationship to role object.",
                                           "properties": {
                                             "id": {
-                                              "description": "ID of the role.",
+                                              "description": "The unique identifier of the role.",
                                               "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
                                               "type": "string"
                                             },
@@ -53293,7 +53293,7 @@
                     "description": "Relationship to role object.",
                     "properties": {
                       "id": {
-                        "description": "ID of the role.",
+                        "description": "The unique identifier of the role.",
                         "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
                         "type": "string"
                       },
@@ -53476,7 +53476,7 @@
                                 "type": "string"
                               },
                               "name": {
-                                "description": "Name of the role.",
+                                "description": "The name of the role. The name is neither unique nor a stable identifier of the role.",
                                 "type": "string"
                               },
                               "user_count": {
@@ -53489,7 +53489,7 @@
                             "type": "object"
                           },
                           "id": {
-                            "description": "ID of the role.",
+                            "description": "The unique identifier of the role.",
                             "type": "string"
                           },
                           "relationships": {
@@ -53723,7 +53723,7 @@
                     "description": "Relationship to role object.",
                     "properties": {
                       "id": {
-                        "description": "ID of the role.",
+                        "description": "The unique identifier of the role.",
                         "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
                         "type": "string"
                       },
@@ -55917,12 +55917,12 @@
                               "description": "Relationship to roles.",
                               "properties": {
                                 "data": {
-                                  "description": "An array containing type and ID of a role.",
+                                  "description": "An array containing type and the unique identifier of a role.",
                                   "items": {
                                     "description": "Relationship to role object.",
                                     "properties": {
                                       "id": {
-                                        "description": "ID of the role.",
+                                        "description": "The unique identifier of the role.",
                                         "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
                                         "type": "string"
                                       },
@@ -56399,7 +56399,7 @@
                     "description": "Relationship to role object.",
                     "properties": {
                       "id": {
-                        "description": "ID of the role.",
+                        "description": "The unique identifier of the role.",
                         "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
                         "type": "string"
                       },
@@ -56782,7 +56782,7 @@
                     "description": "Relationship to role object.",
                     "properties": {
                       "id": {
-                        "description": "ID of the role.",
+                        "description": "The unique identifier of the role.",
                         "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
                         "type": "string"
                       },
@@ -60765,7 +60765,7 @@
     },
     "/api/v2/roles": {
       "get": {
-        "description": "Returns all roles, including their names and IDs.",
+        "description": "Returns all roles, including their names and their unique identifiers.",
         "operationId": "ListRoles",
         "parameters": [
           {
@@ -60857,7 +60857,7 @@
                                 "type": "string"
                               },
                               "name": {
-                                "description": "Name of the role.",
+                                "description": "The name of the role. The name is neither unique nor a stable identifier of the role.",
                                 "type": "string"
                               },
                               "user_count": {
@@ -60870,7 +60870,7 @@
                             "type": "object"
                           },
                           "id": {
-                            "description": "ID of the role.",
+                            "description": "The unique identifier of the role.",
                             "type": "string"
                           },
                           "relationships": {
@@ -61211,7 +61211,7 @@
                           "type": "object"
                         },
                         "id": {
-                          "description": "ID of the role.",
+                          "description": "The unique identifier of the role.",
                           "type": "string"
                         },
                         "relationships": {
@@ -61399,7 +61399,7 @@
         "operationId": "DeleteRole",
         "parameters": [
           {
-            "description": "The ID of the role.",
+            "description": "The unique identifier of the role.",
             "in": "path",
             "name": "role_id",
             "required": true,
@@ -61514,7 +61514,7 @@
         "operationId": "GetRole",
         "parameters": [
           {
-            "description": "The ID of the role.",
+            "description": "The unique identifier of the role.",
             "in": "path",
             "name": "role_id",
             "required": true,
@@ -61549,7 +61549,7 @@
                               "type": "string"
                             },
                             "name": {
-                              "description": "Name of the role.",
+                              "description": "The name of the role. The name is neither unique nor a stable identifier of the role.",
                               "type": "string"
                             },
                             "user_count": {
@@ -61562,7 +61562,7 @@
                           "type": "object"
                         },
                         "id": {
-                          "description": "ID of the role.",
+                          "description": "The unique identifier of the role.",
                           "type": "string"
                         },
                         "relationships": {
@@ -61728,7 +61728,7 @@
         "operationId": "UpdateRole",
         "parameters": [
           {
-            "description": "The ID of the role.",
+            "description": "The unique identifier of the role.",
             "in": "path",
             "name": "role_id",
             "required": true,
@@ -61769,7 +61769,7 @@
                         "type": "object"
                       },
                       "id": {
-                        "description": "ID of the role.",
+                        "description": "The unique identifier of the role.",
                         "example": "00000000-0000-1111-0000-000000000000",
                         "type": "string"
                       },
@@ -61836,7 +61836,7 @@
                           "type": "object"
                         },
                         "id": {
-                          "description": "ID of the role.",
+                          "description": "The unique identifier of the role.",
                           "type": "string"
                         },
                         "relationships": {
@@ -62056,7 +62056,7 @@
         "operationId": "CloneRole",
         "parameters": [
           {
-            "description": "The ID of the role.",
+            "description": "The unique identifier of the role.",
             "in": "path",
             "name": "role_id",
             "required": true,
@@ -62143,7 +62143,7 @@
                               "type": "string"
                             },
                             "name": {
-                              "description": "Name of the role.",
+                              "description": "The name of the role. The name is neither unique nor a stable identifier of the role.",
                               "type": "string"
                             },
                             "user_count": {
@@ -62156,7 +62156,7 @@
                           "type": "object"
                         },
                         "id": {
-                          "description": "ID of the role.",
+                          "description": "The unique identifier of the role.",
                           "type": "string"
                         },
                         "relationships": {
@@ -62384,7 +62384,7 @@
         "operationId": "RemovePermissionFromRole",
         "parameters": [
           {
-            "description": "The ID of the role.",
+            "description": "The unique identifier of the role.",
             "in": "path",
             "name": "role_id",
             "required": true,
@@ -62633,7 +62633,7 @@
         "operationId": "ListRolePermissions",
         "parameters": [
           {
-            "description": "The ID of the role.",
+            "description": "The unique identifier of the role.",
             "in": "path",
             "name": "role_id",
             "required": true,
@@ -62820,7 +62820,7 @@
         "operationId": "AddPermissionToRole",
         "parameters": [
           {
-            "description": "The ID of the role.",
+            "description": "The unique identifier of the role.",
             "in": "path",
             "name": "role_id",
             "required": true,
@@ -63086,7 +63086,7 @@
         "operationId": "RemoveUserFromRole",
         "parameters": [
           {
-            "description": "The ID of the role.",
+            "description": "The unique identifier of the role.",
             "in": "path",
             "name": "role_id",
             "required": true,
@@ -63333,12 +63333,12 @@
                                 "description": "Relationship to roles.",
                                 "properties": {
                                   "data": {
-                                    "description": "An array containing type and ID of a role.",
+                                    "description": "An array containing type and the unique identifier of a role.",
                                     "items": {
                                       "description": "Relationship to role object.",
                                       "properties": {
                                         "id": {
-                                          "description": "ID of the role.",
+                                          "description": "The unique identifier of the role.",
                                           "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
                                           "type": "string"
                                         },
@@ -63531,7 +63531,7 @@
                                     "type": "string"
                                   },
                                   "name": {
-                                    "description": "Name of the role.",
+                                    "description": "The name of the role. The name is neither unique nor a stable identifier of the role.",
                                     "type": "string"
                                   },
                                   "user_count": {
@@ -63544,7 +63544,7 @@
                                 "type": "object"
                               },
                               "id": {
-                                "description": "ID of the role.",
+                                "description": "The unique identifier of the role.",
                                 "type": "string"
                               },
                               "relationships": {
@@ -63765,7 +63765,7 @@
         "operationId": "ListRoleUsers",
         "parameters": [
           {
-            "description": "The ID of the role.",
+            "description": "The unique identifier of the role.",
             "in": "path",
             "name": "role_id",
             "required": true,
@@ -64012,12 +64012,12 @@
                                 "description": "Relationship to roles.",
                                 "properties": {
                                   "data": {
-                                    "description": "An array containing type and ID of a role.",
+                                    "description": "An array containing type and the unique identifier of a role.",
                                     "items": {
                                       "description": "Relationship to role object.",
                                       "properties": {
                                         "id": {
-                                          "description": "ID of the role.",
+                                          "description": "The unique identifier of the role.",
                                           "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
                                           "type": "string"
                                         },
@@ -64210,7 +64210,7 @@
                                     "type": "string"
                                   },
                                   "name": {
-                                    "description": "Name of the role.",
+                                    "description": "The name of the role. The name is neither unique nor a stable identifier of the role.",
                                     "type": "string"
                                   },
                                   "user_count": {
@@ -64223,7 +64223,7 @@
                                 "type": "object"
                               },
                               "id": {
-                                "description": "ID of the role.",
+                                "description": "The unique identifier of the role.",
                                 "type": "string"
                               },
                               "relationships": {
@@ -64416,7 +64416,7 @@
         "operationId": "AddUserToRole",
         "parameters": [
           {
-            "description": "The ID of the role.",
+            "description": "The unique identifier of the role.",
             "in": "path",
             "name": "role_id",
             "required": true,
@@ -64663,12 +64663,12 @@
                                 "description": "Relationship to roles.",
                                 "properties": {
                                   "data": {
-                                    "description": "An array containing type and ID of a role.",
+                                    "description": "An array containing type and the unique identifier of a role.",
                                     "items": {
                                       "description": "Relationship to role object.",
                                       "properties": {
                                         "id": {
-                                          "description": "ID of the role.",
+                                          "description": "The unique identifier of the role.",
                                           "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
                                           "type": "string"
                                         },
@@ -64861,7 +64861,7 @@
                                     "type": "string"
                                   },
                                   "name": {
-                                    "description": "Name of the role.",
+                                    "description": "The name of the role. The name is neither unique nor a stable identifier of the role.",
                                     "type": "string"
                                   },
                                   "user_count": {
@@ -64874,7 +64874,7 @@
                                 "type": "object"
                               },
                               "id": {
-                                "description": "ID of the role.",
+                                "description": "The unique identifier of the role.",
                                 "type": "string"
                               },
                               "relationships": {
@@ -71756,12 +71756,12 @@
                             "description": "Relationship to roles.",
                             "properties": {
                               "data": {
-                                "description": "An array containing type and ID of a role.",
+                                "description": "An array containing type and the unique identifier of a role.",
                                 "items": {
                                   "description": "Relationship to role object.",
                                   "properties": {
                                     "id": {
-                                      "description": "ID of the role.",
+                                      "description": "The unique identifier of the role.",
                                       "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
                                       "type": "string"
                                     },
@@ -72010,12 +72010,12 @@
                               "description": "Relationship to roles.",
                               "properties": {
                                 "data": {
-                                  "description": "An array containing type and ID of a role.",
+                                  "description": "An array containing type and the unique identifier of a role.",
                                   "items": {
                                     "description": "Relationship to role object.",
                                     "properties": {
                                       "id": {
-                                        "description": "ID of the role.",
+                                        "description": "The unique identifier of the role.",
                                         "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
                                         "type": "string"
                                       },
@@ -72206,7 +72206,7 @@
                                     "type": "string"
                                   },
                                   "name": {
-                                    "description": "Name of the role.",
+                                    "description": "The name of the role. The name is neither unique nor a stable identifier of the role.",
                                     "type": "string"
                                   },
                                   "user_count": {
@@ -72219,7 +72219,7 @@
                                 "type": "object"
                               },
                               "id": {
-                                "description": "ID of the role.",
+                                "description": "The unique identifier of the role.",
                                 "type": "string"
                               },
                               "relationships": {
@@ -72797,12 +72797,12 @@
                                     "description": "Relationship to roles.",
                                     "properties": {
                                       "data": {
-                                        "description": "An array containing type and ID of a role.",
+                                        "description": "An array containing type and the unique identifier of a role.",
                                         "items": {
                                           "description": "Relationship to role object.",
                                           "properties": {
                                             "id": {
-                                              "description": "ID of the role.",
+                                              "description": "The unique identifier of the role.",
                                               "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
                                               "type": "string"
                                             },
@@ -72863,7 +72863,7 @@
                                     "type": "string"
                                   },
                                   "name": {
-                                    "description": "Name of the role.",
+                                    "description": "The name of the role. The name is neither unique nor a stable identifier of the role.",
                                     "type": "string"
                                   },
                                   "user_count": {
@@ -72876,7 +72876,7 @@
                                 "type": "object"
                               },
                               "id": {
-                                "description": "ID of the role.",
+                                "description": "The unique identifier of the role.",
                                 "type": "string"
                               },
                               "relationships": {
@@ -73445,12 +73445,12 @@
                                     "description": "Relationship to roles.",
                                     "properties": {
                                       "data": {
-                                        "description": "An array containing type and ID of a role.",
+                                        "description": "An array containing type and the unique identifier of a role.",
                                         "items": {
                                           "description": "Relationship to role object.",
                                           "properties": {
                                             "id": {
-                                              "description": "ID of the role.",
+                                              "description": "The unique identifier of the role.",
                                               "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
                                               "type": "string"
                                             },
@@ -73511,7 +73511,7 @@
                                     "type": "string"
                                   },
                                   "name": {
-                                    "description": "Name of the role.",
+                                    "description": "The name of the role. The name is neither unique nor a stable identifier of the role.",
                                     "type": "string"
                                   },
                                   "user_count": {
@@ -73524,7 +73524,7 @@
                                 "type": "object"
                               },
                               "id": {
-                                "description": "ID of the role.",
+                                "description": "The unique identifier of the role.",
                                 "type": "string"
                               },
                               "relationships": {
@@ -74147,12 +74147,12 @@
                                     "description": "Relationship to roles.",
                                     "properties": {
                                       "data": {
-                                        "description": "An array containing type and ID of a role.",
+                                        "description": "An array containing type and the unique identifier of a role.",
                                         "items": {
                                           "description": "Relationship to role object.",
                                           "properties": {
                                             "id": {
-                                              "description": "ID of the role.",
+                                              "description": "The unique identifier of the role.",
                                               "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
                                               "type": "string"
                                             },
@@ -74213,7 +74213,7 @@
                                     "type": "string"
                                   },
                                   "name": {
-                                    "description": "Name of the role.",
+                                    "description": "The name of the role. The name is neither unique nor a stable identifier of the role.",
                                     "type": "string"
                                   },
                                   "user_count": {
@@ -74226,7 +74226,7 @@
                                 "type": "object"
                               },
                               "id": {
-                                "description": "ID of the role.",
+                                "description": "The unique identifier of the role.",
                                 "type": "string"
                               },
                               "relationships": {
@@ -74777,12 +74777,12 @@
                                     "description": "Relationship to roles.",
                                     "properties": {
                                       "data": {
-                                        "description": "An array containing type and ID of a role.",
+                                        "description": "An array containing type and the unique identifier of a role.",
                                         "items": {
                                           "description": "Relationship to role object.",
                                           "properties": {
                                             "id": {
-                                              "description": "ID of the role.",
+                                              "description": "The unique identifier of the role.",
                                               "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
                                               "type": "string"
                                             },
@@ -74843,7 +74843,7 @@
                                     "type": "string"
                                   },
                                   "name": {
-                                    "description": "Name of the role.",
+                                    "description": "The name of the role. The name is neither unique nor a stable identifier of the role.",
                                     "type": "string"
                                   },
                                   "user_count": {
@@ -74856,7 +74856,7 @@
                                 "type": "object"
                               },
                               "id": {
-                                "description": "ID of the role.",
+                                "description": "The unique identifier of the role.",
                                 "type": "string"
                               },
                               "relationships": {
@@ -75432,12 +75432,12 @@
                                     "description": "Relationship to roles.",
                                     "properties": {
                                       "data": {
-                                        "description": "An array containing type and ID of a role.",
+                                        "description": "An array containing type and the unique identifier of a role.",
                                         "items": {
                                           "description": "Relationship to role object.",
                                           "properties": {
                                             "id": {
-                                              "description": "ID of the role.",
+                                              "description": "The unique identifier of the role.",
                                               "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
                                               "type": "string"
                                             },
@@ -76133,12 +76133,12 @@
                                     "description": "Relationship to roles.",
                                     "properties": {
                                       "data": {
-                                        "description": "An array containing type and ID of a role.",
+                                        "description": "An array containing type and the unique identifier of a role.",
                                         "items": {
                                           "description": "Relationship to role object.",
                                           "properties": {
                                             "id": {
-                                              "description": "ID of the role.",
+                                              "description": "The unique identifier of the role.",
                                               "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
                                               "type": "string"
                                             },
@@ -76884,12 +76884,12 @@
                                     "description": "Relationship to roles.",
                                     "properties": {
                                       "data": {
-                                        "description": "An array containing type and ID of a role.",
+                                        "description": "An array containing type and the unique identifier of a role.",
                                         "items": {
                                           "description": "Relationship to role object.",
                                           "properties": {
                                             "id": {
-                                              "description": "ID of the role.",
+                                              "description": "The unique identifier of the role.",
                                               "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
                                               "type": "string"
                                             },
@@ -77570,12 +77570,12 @@
                                     "description": "Relationship to roles.",
                                     "properties": {
                                       "data": {
-                                        "description": "An array containing type and ID of a role.",
+                                        "description": "An array containing type and the unique identifier of a role.",
                                         "items": {
                                           "description": "Relationship to role object.",
                                           "properties": {
                                             "id": {
-                                              "description": "ID of the role.",
+                                              "description": "The unique identifier of the role.",
                                               "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
                                               "type": "string"
                                             },
@@ -78173,12 +78173,12 @@
                                     "description": "Relationship to roles.",
                                     "properties": {
                                       "data": {
-                                        "description": "An array containing type and ID of a role.",
+                                        "description": "An array containing type and the unique identifier of a role.",
                                         "items": {
                                           "description": "Relationship to role object.",
                                           "properties": {
                                             "id": {
-                                              "description": "ID of the role.",
+                                              "description": "The unique identifier of the role.",
                                               "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
                                               "type": "string"
                                             },
@@ -78870,12 +78870,12 @@
                                     "description": "Relationship to roles.",
                                     "properties": {
                                       "data": {
-                                        "description": "An array containing type and ID of a role.",
+                                        "description": "An array containing type and the unique identifier of a role.",
                                         "items": {
                                           "description": "Relationship to role object.",
                                           "properties": {
                                             "id": {
-                                              "description": "ID of the role.",
+                                              "description": "The unique identifier of the role.",
                                               "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
                                               "type": "string"
                                             },
@@ -79617,12 +79617,12 @@
                                     "description": "Relationship to roles.",
                                     "properties": {
                                       "data": {
-                                        "description": "An array containing type and ID of a role.",
+                                        "description": "An array containing type and the unique identifier of a role.",
                                         "items": {
                                           "description": "Relationship to role object.",
                                           "properties": {
                                             "id": {
-                                              "description": "ID of the role.",
+                                              "description": "The unique identifier of the role.",
                                               "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
                                               "type": "string"
                                             },
@@ -80299,12 +80299,12 @@
                                     "description": "Relationship to roles.",
                                     "properties": {
                                       "data": {
-                                        "description": "An array containing type and ID of a role.",
+                                        "description": "An array containing type and the unique identifier of a role.",
                                         "items": {
                                           "description": "Relationship to role object.",
                                           "properties": {
                                             "id": {
-                                              "description": "ID of the role.",
+                                              "description": "The unique identifier of the role.",
                                               "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
                                               "type": "string"
                                             },
@@ -81224,12 +81224,12 @@
                                 "description": "Relationship to roles.",
                                 "properties": {
                                   "data": {
-                                    "description": "An array containing type and ID of a role.",
+                                    "description": "An array containing type and the unique identifier of a role.",
                                     "items": {
                                       "description": "Relationship to role object.",
                                       "properties": {
                                         "id": {
-                                          "description": "ID of the role.",
+                                          "description": "The unique identifier of the role.",
                                           "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
                                           "type": "string"
                                         },
@@ -81422,7 +81422,7 @@
                                     "type": "string"
                                   },
                                   "name": {
-                                    "description": "Name of the role.",
+                                    "description": "The name of the role. The name is neither unique nor a stable identifier of the role.",
                                     "type": "string"
                                   },
                                   "user_count": {
@@ -81435,7 +81435,7 @@
                                 "type": "object"
                               },
                               "id": {
-                                "description": "ID of the role.",
+                                "description": "The unique identifier of the role.",
                                 "type": "string"
                               },
                               "relationships": {
@@ -81665,12 +81665,12 @@
                             "description": "Relationship to roles.",
                             "properties": {
                               "data": {
-                                "description": "An array containing type and ID of a role.",
+                                "description": "An array containing type and the unique identifier of a role.",
                                 "items": {
                                   "description": "Relationship to role object.",
                                   "properties": {
                                     "id": {
-                                      "description": "ID of the role.",
+                                      "description": "The unique identifier of the role.",
                                       "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
                                       "type": "string"
                                     },
@@ -81919,12 +81919,12 @@
                               "description": "Relationship to roles.",
                               "properties": {
                                 "data": {
-                                  "description": "An array containing type and ID of a role.",
+                                  "description": "An array containing type and the unique identifier of a role.",
                                   "items": {
                                     "description": "Relationship to role object.",
                                     "properties": {
                                       "id": {
-                                        "description": "ID of the role.",
+                                        "description": "The unique identifier of the role.",
                                         "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
                                         "type": "string"
                                       },
@@ -82115,7 +82115,7 @@
                                     "type": "string"
                                   },
                                   "name": {
-                                    "description": "Name of the role.",
+                                    "description": "The name of the role. The name is neither unique nor a stable identifier of the role.",
                                     "type": "string"
                                   },
                                   "user_count": {
@@ -82128,7 +82128,7 @@
                                 "type": "object"
                               },
                               "id": {
-                                "description": "ID of the role.",
+                                "description": "The unique identifier of the role.",
                                 "type": "string"
                               },
                               "relationships": {
@@ -82640,12 +82640,12 @@
                               "description": "Relationship to roles.",
                               "properties": {
                                 "data": {
-                                  "description": "An array containing type and ID of a role.",
+                                  "description": "An array containing type and the unique identifier of a role.",
                                   "items": {
                                     "description": "Relationship to role object.",
                                     "properties": {
                                       "id": {
-                                        "description": "ID of the role.",
+                                        "description": "The unique identifier of the role.",
                                         "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
                                         "type": "string"
                                       },
@@ -82836,7 +82836,7 @@
                                     "type": "string"
                                   },
                                   "name": {
-                                    "description": "Name of the role.",
+                                    "description": "The name of the role. The name is neither unique nor a stable identifier of the role.",
                                     "type": "string"
                                   },
                                   "user_count": {
@@ -82849,7 +82849,7 @@
                                 "type": "object"
                               },
                               "id": {
-                                "description": "ID of the role.",
+                                "description": "The unique identifier of the role.",
                                 "type": "string"
                               },
                               "relationships": {
@@ -83285,12 +83285,12 @@
                               "description": "Relationship to roles.",
                               "properties": {
                                 "data": {
-                                  "description": "An array containing type and ID of a role.",
+                                  "description": "An array containing type and the unique identifier of a role.",
                                   "items": {
                                     "description": "Relationship to role object.",
                                     "properties": {
                                       "id": {
-                                        "description": "ID of the role.",
+                                        "description": "The unique identifier of the role.",
                                         "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
                                         "type": "string"
                                       },
@@ -83481,7 +83481,7 @@
                                     "type": "string"
                                   },
                                   "name": {
-                                    "description": "Name of the role.",
+                                    "description": "The name of the role. The name is neither unique nor a stable identifier of the role.",
                                     "type": "string"
                                   },
                                   "user_count": {
@@ -83494,7 +83494,7 @@
                                 "type": "object"
                               },
                               "id": {
-                                "description": "ID of the role.",
+                                "description": "The unique identifier of the role.",
                                 "type": "string"
                               },
                               "relationships": {
@@ -83922,12 +83922,12 @@
                               "description": "Relationship to roles.",
                               "properties": {
                                 "data": {
-                                  "description": "An array containing type and ID of a role.",
+                                  "description": "An array containing type and the unique identifier of a role.",
                                   "items": {
                                     "description": "Relationship to role object.",
                                     "properties": {
                                       "id": {
-                                        "description": "ID of the role.",
+                                        "description": "The unique identifier of the role.",
                                         "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
                                         "type": "string"
                                       },
@@ -84118,7 +84118,7 @@
                                     "type": "string"
                                   },
                                   "name": {
-                                    "description": "Name of the role.",
+                                    "description": "The name of the role. The name is neither unique nor a stable identifier of the role.",
                                     "type": "string"
                                   },
                                   "user_count": {
@@ -84131,7 +84131,7 @@
                                 "type": "object"
                               },
                               "id": {
-                                "description": "ID of the role.",
+                                "description": "The unique identifier of the role.",
                                 "type": "string"
                               },
                               "relationships": {
@@ -84549,7 +84549,7 @@
       "name": "Audit"
     },
     {
-      "description": "[AuthN Mappings API] (https://docs.datadoghq.com/account_management/authn_mapping/?tab=example)\nis used to automatically map group of users to roles in Datadog using attributes\nsent from Identity Providers.",
+      "description": "[AuthN Mappings API](https://docs.datadoghq.com/account_management/authn_mapping/?tab=example)\nis used to automatically map group of users to roles in Datadog using attributes\nsent from Identity Providers.",
       "name": "AuthN Mappings"
     },
     {

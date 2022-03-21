@@ -56,7 +56,10 @@ Choose your alert grouping:
 
 As you fill in the parameters below, the list of events above the search fields is filtered.
 
-* Match events containing `<TEXT>`
+* Match events containing `<TEXT>`:
+    * Multiple terms have an implied `AND`. For example `a b` finds events with both `a` and `b` somewhere in them.
+    * Use quotation marks `"a b"` to find events with the exact string `a b`.
+    * Use `OR` to find events that contain at least one of multiple terms. For example `a OR b` finds events with either `a` or `b` in them.
 * with status `error`, `warning`, `info`, or `success`
 * and priority `all`, `normal`, or `low`
 * from `<SOURCE>`

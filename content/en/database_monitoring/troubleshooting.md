@@ -287,7 +287,7 @@ Some or all queries may not have plans available. This can be due to unsupported
 | The query is in a database ignored by the Agent instance config `ignore_databases`. | Default databases such as the `postgres` database are ignored in the `ignore_databases` setting. Queries in these databases will not have samples or explain plans. Check the the value of this setting in your instance config and the default values in the [example config file][6]. |
 | The query cannot be explained. | Some queries such as BEGIN, COMMIT, SHOW, USE, and ALTER queries cannot yield a valid explain plan from the database. Only SELECT, UPDATE, INSERT, DELETE, and REPLACE queries have support for explain plans. |
 | The query is relatively infrequent or executes quickly. | The query may not have been sampled for selection because it does not represent a significant proportion of the database's total execution time. Try [raising the sampling rates][7] to capture the query. |
-
+| The application is relying on [search paths][8] for specifying which schema to query. | Postgres does not expose the current search path in [pg_stat_activity][9] so it's not possible for the Datadog Agent to find out which search path is being used for any active Postgres processes. The only way to work around this limitation is to update the application code to use fully qualified queries instead of relying on search paths. For example, do `select * from schema_A.table_B` instead of `SET search_path TO schema_A; select * from table_B`. |
 
 [1]: /database_monitoring/setup_postgres/
 [2]: https://www.postgresql.org/docs/current/protocol-flow.html#PROTOCOL-FLOW-EXT-QUERY
@@ -296,6 +296,8 @@ Some or all queries may not have plans available. This can be due to unsupported
 [5]: https://jdbc.postgresql.org/documentation/head/connect.html
 [6]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example
 [7]: /database_monitoring/setup_postgres/advanced_configuration
+[8]: https://www.postgresql.org/docs/14/ddl-schemas.html#DDL-SCHEMAS-PATH
+[9]: https://www.postgresql.org/docs/14/monitoring-stats.html#MONITORING-PG-STAT-ACTIVITY-VIEW
 {{% /tab %}}
 {{% tab "MySQL" %}}
 
