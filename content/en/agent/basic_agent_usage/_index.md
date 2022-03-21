@@ -238,6 +238,7 @@ With Agent v6+, the command line interface is based on subcommands. To run a sub
 | `start`           | [Start the Agent][3].                                                       |
 | `start-service`   | Start the Agent within the service control manager.                         |
 | `status`          | [Print the current Agent status][4].                                        |
+| `stream-logs`     | Stream the logs being processed by a running agent.                         |
 | `stop`            | [Stop the Agent][5].                                                        |
 | `stopservice`     | Stop the Agent within the service control manager.                          |
 | `version`         | Print version info.                                                         |

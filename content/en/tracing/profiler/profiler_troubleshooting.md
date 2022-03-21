@@ -20,7 +20,7 @@ If you've configured the profiler and don't see profiles in the profile search p
 
 ## Reduce overhead from default setup
 
-If the default setup overhead is not acceptable, you can use the profiler with minimal configuration settings.  Minimal configuration has the following changes compared to the default:
+If the default setup overhead is not acceptable, you can use the profiler with minimal configuration settings. Minimal configuration has the following changes compared to the default:
 
 - Increases sampling threshold to 500ms for `ThreadSleep`, `ThreadPark`, and `JavaMonitorWait` events compared to 100ms default
 - Disables `ObjectAllocationInNewTLAB`, `ObjectAllocationOutsideTLAB`, `ExceptionSample`, `ExceptionCount` events
@@ -320,6 +320,18 @@ The root of your profile is the frame annotated with the application name in par
 - Stripped binaries do not have symbols available. Try using a non-stripped binary or a non-minified container image.
 - Certain applications and libraries benefit from their debug packages being installed. This is true for services installed through your repo's package manager or similar.
 
+## Error while loading shared libraries
+
+When using the Continuous Profiler for Linux as a dynamic library, your application may fail to launch with the following error:
+
+```
+error while loading shared libraries: libdd_profiling.so: cannot open shared object file: No such file or directory
+```
+
+This happens when your application is built with `libdd_profiling.so` as a dependency, but it cannot be found at runtime during dependency reconciliation. You can fix this by doing one of the following:
+
+- Rebuild your application using the static library. In some build systems the choice between dynamic and static libraries can be ambiguous, so use `ldd` to check whether the resulting binary includes an unwanted dynamic dependency on `libdd_profiling.so`.
+- Copy `libdd_profiling.so` to one of the directories in the search path for the dynamic linker. You can get a list of these directories by running `ld --verbose | grep SEARCH_DIR | tr -s ' ;' \\n` on most Linux systems.
 
 [1]: /tracing/troubleshooting/#tracer-debug-logs
 [2]: /help/
