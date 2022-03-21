@@ -280,7 +280,7 @@ Enabling JMX Checks forces the Agent to use more memory depending on the number 
 {{% /tab %}}
 {{< /tabs >}}
 
-**Log Collection**:
+**Log collection**:
 
 The results below are obtained from a collection of *110KB of logs per seconds* from a file with the [HTTP forwarder][6] enabled. It shows the evolution of resource usage for the different compression levels available.
 
