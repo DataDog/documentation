@@ -78,7 +78,7 @@ With pipelines, events are parsed and enriched by chaining them sequentially thr
 
 ## What Changed?
 
-Please note that sending events does not change. You can continue sending events via the API, agent or using events via email feature as before. However, there are a number of changes to note.
+**Note:** The process for sending events remains the same. You can continue sending events using the API, the Agent, or the events via email feature as before.
 
 ### Event aggregations are no longer performed or displayed in the UI
 Datadog no longer automatically performs Event aggregation, and no longer groups Events by the `aggregation_key` attribute. The UI no longer displays Event aggregation.
