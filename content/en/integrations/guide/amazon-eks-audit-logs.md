@@ -5,7 +5,7 @@ kind: guide
 
 ## Overview
 
-Amazon EKS audit logs give cluster administrators insight into actions within an EKS cluster. Once you enable log collection for your Amazon EKS audit logs, you can setup and use [Datadog Security Monitoring][1] to monitor unwarranted actions or immediate threats as they occur within your EKS cluster.
+Amazon EKS audit logs give cluster administrators insight into actions within an EKS cluster. Once you enable log collection for your Amazon EKS audit logs, you can setup and use [Datadog Cloud SIEM][1] to monitor unwarranted actions or immediate threats as they occur within your EKS cluster.
 
 ## Setup
 
@@ -42,19 +42,19 @@ Once setup of Amazon EKS audit logs, the Datadog AWS integration, and Datadog Fo
 
 To view only EKS audit logs in the Log Explorer, query `source:kubernetes.aduit` in Log Explorer search or, under **Source** in the facets panel, select the `kubernetes.audit` facet to filter by EKS audit logs.
 
-## Security Monitoring
+## Cloud SIEM
 
-You can use Datadog Security Monitoring to detect potential misconfigurations or targeted attacks to your EKS clusters.
+You can use Datadog Cloud SIEM to detect potential misconfigurations or targeted attacks to your EKS clusters.
 
-To start monitoring your Amazon EKS audit logs with Security Monitoring, setup Security Monitoring and create a custom [log detection rule][8] that generates a [Security Signal][9] in the [Security Signals Explorer][10] whenever a misconfiguration or threat is detected.
+To start monitoring your Amazon EKS audit logs with Cloud SIEM, setup Cloud SIEM and create a custom [log detection rule][8] that generates a [Security Signal][9] in the [Security Signals Explorer][10] whenever a misconfiguration or threat is detected.
 
 ### Setup
 
-Setup and configure Security Monitoring. See the in-app [Security Monitoring setup and configuration instructions][1].
+Setup and configure Cloud SIEM. See the in-app [Cloud SIEM setup and configuration instructions][1].
 
-Once Security Monitoring is set up and configured, you can either create a new Security Monitoring rule from scratch or export a query in Log Explorer to a new rule.
+Once Cloud SIEM is set up and configured, you can either create a new Cloud SIEM rule from scratch or export a query in Log Explorer to a new rule.
 
-### Create a new Security Monitoring rule
+### Create a new Cloud SIEM rule
 
 Navigate to the in-app [Rule Setup and Configuration][11] page to create a new rule. Follow the [Log Detection Rules][12] documentation to complete setup.
 
@@ -66,15 +66,15 @@ Navigate to the in-app [Rule Setup and Configuration][11] page to create a new r
 
 
 
-[1]: /security_platform/security_monitoring/
+[1]: /security_platform/cloud_siem/
 [2]: https://docs.aws.amazon.com/eks/latest/userguide/create-cluster.html
 [3]: /integrations/amazon_web_services/?tab=roledelegation#setup
 [4]: /serverless/libraries_integrations/forwarder/
 [5]: /logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=awsconsole#set-up-triggers
 [6]: https://console.aws.amazon.com/lambda/home#/functions
 [7]: https://app.datadoghq.com/logs
-[8]: /security_platform/security_monitoring/log_detection_rules
-[9]: /security_platform/security_monitoring/getting_started#inspect-a-security-signal
+[8]: /security_platform/cloud_siem/log_detection_rules/
+[9]: /security_platform/cloud_siem/getting_started#review-detection-rules
 [10]: https://app.datadoghq.com/security
 [11]: https://app.datadoghq.com/security/configuration/rules/new
-[12]: /security_platform/security_monitoring/log_detection_rules?tab=threshold#choose-a-detection-method
+[12]: /security_platform/cloud_siem/log_detection_rules/?tab=threshold#choose-a-detection-method

@@ -4,18 +4,18 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   labels:
-    app: "datadog-agent"
-    chart: "datadog-2.30.1"
+    app: "datadog"
+    chart: "datadog-2.30.16"
     heritage: "Helm"
-    release: "datadog-agent"
-  name: datadog-agent-cluster-agent
+    release: "datadog"
+  name: datadog-cluster-agent
   namespace: default
 ---
 # Source: datadog/templates/secret-api-key.yaml
 apiVersion: v1
 kind: Secret
 metadata:
-  name: datadog-agent
+  name: datadog
   namespace: default
   labels: {}
 type: Opaque
@@ -26,7 +26,7 @@ data:
 apiVersion: v1
 kind: Secret
 metadata:
-  name: datadog-agent-cluster-agent
+  name: datadog-cluster-agent
   namespace: default
   labels: {}
 type: Opaque
@@ -37,7 +37,7 @@ data:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: datadog-agent-installinfo
+  name: datadog-installinfo
   namespace: default
   labels: {}
   annotations: {}
@@ -53,7 +53,7 @@ data:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: datadog-agent-system-probe-config
+  name: datadog-system-probe-config
   namespace: default
   labels: {}
 data:
@@ -92,7 +92,7 @@ data:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: datadog-agent-security
+  name: datadog-security
   namespace: default
   labels: {}
 data:
@@ -289,7 +289,7 @@ apiVersion: "rbac.authorization.k8s.io/v1"
 kind: ClusterRole
 metadata:
   labels: {}
-  name: datadog-agent-cluster-agent
+  name: datadog-cluster-agent
 rules:
   - apiGroups:
       - ""
@@ -375,6 +375,16 @@ rules:
       - get
       - update
   - apiGroups:
+      - ""
+    resources:
+      - persistentvolumes
+      - persistentvolumeclaims
+      - serviceaccounts
+    verbs:
+      - list
+      - get
+      - watch
+  - apiGroups:
       - "apps"
     resources:
       - deployments
@@ -390,6 +400,25 @@ rules:
     resources:
       - cronjobs
       - jobs
+    verbs:
+      - list
+      - get
+      - watch
+  - apiGroups:
+      - networking.k8s.io
+    resources:
+      - ingresses
+    verbs:
+      - list
+      - get
+      - watch
+  - apiGroups:
+      - "rbac.authorization.k8s.io"
+    resources:
+      - roles
+      - rolebindings
+      - clusterroles
+      - clusterrolebindings
     verbs:
       - list
       - get
@@ -429,7 +458,7 @@ rules:
     verbs:
       - use
     resourceNames:
-      - datadog-agent-cluster-agent
+      - datadog-cluster-agent
   - apiGroups:
       - "security.openshift.io"
     resources:
@@ -437,7 +466,7 @@ rules:
     verbs:
       - use
     resourceNames:
-      - datadog-agent-cluster-agent
+      - datadog-cluster-agent
       - hostnetwork
 ---
 # Source: datadog/templates/cluster-agent-rbac.yaml
@@ -445,27 +474,27 @@ apiVersion: "rbac.authorization.k8s.io/v1"
 kind: ClusterRoleBinding
 metadata:
   labels: {}
-  name: datadog-agent-cluster-agent
+  name: datadog-cluster-agent
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: datadog-agent-cluster-agent
+  name: datadog-cluster-agent
 subjects:
   - kind: ServiceAccount
-    name: datadog-agent-cluster-agent
+    name: datadog-cluster-agent
     namespace: default
 ---
 # Source: datadog/templates/agent-services.yaml
 apiVersion: v1
 kind: Service
 metadata:
-  name: datadog-agent-cluster-agent
+  name: datadog-cluster-agent
   namespace: default
   labels: {}
 spec:
   type: ClusterIP
   selector:
-    app: datadog-agent-cluster-agent
+    app: datadog-cluster-agent
   ports:
     - port: 5005
       name: agentport
@@ -475,18 +504,18 @@ spec:
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
-  name: datadog-agent
+  name: datadog
   namespace: default
   labels: {}
 spec:
   selector:
     matchLabels:
-      app: datadog-agent
+      app: datadog
   template:
     metadata:
       labels:
-        app: datadog-agent
-      name: datadog-agent
+        app: datadog
+      name: datadog
       annotations:
         container.apparmor.security.beta.kubernetes.io/system-probe: unconfined
         container.seccomp.security.alpha.kubernetes.io/system-probe: localhost/system-probe
@@ -494,7 +523,7 @@ spec:
       hostPID: true
       containers:
         - name: agent
-          image: "gcr.io/datadoghq/agent:7.33.0"
+          image: "gcr.io/datadoghq/agent:7.34.0"
           imagePullPolicy: IfNotPresent
           command: ["agent", "run"]
           resources: {}
@@ -509,7 +538,7 @@ spec:
             - name: DD_API_KEY
               valueFrom:
                 secretKeyRef:
-                  name: "datadog-agent"
+                  name: "datadog"
                   key: api-key
             - name: DD_KUBERNETES_KUBELET_HOST
               valueFrom:
@@ -526,11 +555,11 @@ spec:
             - name: DD_CLUSTER_AGENT_ENABLED
               value: "true"
             - name: DD_CLUSTER_AGENT_KUBERNETES_SERVICE_NAME
-              value: datadog-agent-cluster-agent
+              value: datadog-cluster-agent
             - name: DD_CLUSTER_AGENT_AUTH_TOKEN
               valueFrom:
                 secretKeyRef:
-                  name: datadog-agent-cluster-agent
+                  name: datadog-cluster-agent
                   key: token
             - name: DD_APM_ENABLED
               value: "false"
@@ -540,6 +569,8 @@ spec:
               value: "true"
             - name: DD_LOGS_CONFIG_K8S_CONTAINER_USE_FILE
               value: "true"
+            - name: DD_LOGS_CONFIG_AUTO_MULTI_LINE_DETECTION
+              value: "false"
             - name: DD_HEALTH_PORT
               value: "5555"
             - name: DD_DOGSTATSD_SOCKET
@@ -616,7 +647,7 @@ spec:
             successThreshold: 1
             timeoutSeconds: 5
         - name: trace-agent
-          image: "gcr.io/datadoghq/agent:7.33.0"
+          image: "gcr.io/datadoghq/agent:7.34.0"
           imagePullPolicy: IfNotPresent
           command: ["trace-agent", "-config=/etc/datadog-agent/datadog.yaml"]
           resources: {}
@@ -632,7 +663,7 @@ spec:
             - name: DD_API_KEY
               valueFrom:
                 secretKeyRef:
-                  name: "datadog-agent"
+                  name: "datadog"
                   key: api-key
             - name: DD_KUBERNETES_KUBELET_HOST
               valueFrom:
@@ -643,11 +674,11 @@ spec:
             - name: DD_CLUSTER_AGENT_ENABLED
               value: "true"
             - name: DD_CLUSTER_AGENT_KUBERNETES_SERVICE_NAME
-              value: datadog-agent-cluster-agent
+              value: datadog-cluster-agent
             - name: DD_CLUSTER_AGENT_AUTH_TOKEN
               valueFrom:
                 secretKeyRef:
-                  name: datadog-agent-cluster-agent
+                  name: datadog-cluster-agent
                   key: token
             - name: DD_LOG_LEVEL
               value: "INFO"
@@ -682,7 +713,7 @@ spec:
               port: 8126
             timeoutSeconds: 5
         - name: process-agent
-          image: "gcr.io/datadoghq/agent:7.33.0"
+          image: "gcr.io/datadoghq/agent:7.34.0"
           imagePullPolicy: IfNotPresent
           command: ["process-agent", "-config=/etc/datadog-agent/datadog.yaml"]
           resources: {}
@@ -693,7 +724,7 @@ spec:
             - name: DD_API_KEY
               valueFrom:
                 secretKeyRef:
-                  name: "datadog-agent"
+                  name: "datadog"
                   key: api-key
             - name: DD_KUBERNETES_KUBELET_HOST
               valueFrom:
@@ -704,11 +735,11 @@ spec:
             - name: DD_CLUSTER_AGENT_ENABLED
               value: "true"
             - name: DD_CLUSTER_AGENT_KUBERNETES_SERVICE_NAME
-              value: datadog-agent-cluster-agent
+              value: datadog-cluster-agent
             - name: DD_CLUSTER_AGENT_AUTH_TOKEN
               valueFrom:
                 secretKeyRef:
-                  name: datadog-agent-cluster-agent
+                  name: datadog-cluster-agent
                   key: token
             - name: DD_PROCESS_AGENT_ENABLED
               value: "true"
@@ -757,7 +788,7 @@ spec:
               mountPath: /etc/datadog-agent/system-probe.yaml
               subPath: system-probe.yaml
         - name: system-probe
-          image: "gcr.io/datadoghq/agent:7.33.0"
+          image: "gcr.io/datadoghq/agent:7.34.0"
           imagePullPolicy: IfNotPresent
           securityContext:
             capabilities:
@@ -779,7 +810,7 @@ spec:
             - name: DD_API_KEY
               valueFrom:
                 secretKeyRef:
-                  name: "datadog-agent"
+                  name: "datadog"
                   key: api-key
             - name: DD_KUBERNETES_KUBELET_HOST
               valueFrom:
@@ -827,7 +858,7 @@ spec:
               mountPropagation: None
               readOnly: true
         - name: security-agent
-          image: "gcr.io/datadoghq/agent:7.33.0"
+          image: "gcr.io/datadoghq/agent:7.34.0"
           imagePullPolicy: IfNotPresent
           securityContext:
             capabilities:
@@ -841,7 +872,7 @@ spec:
             - name: DD_API_KEY
               valueFrom:
                 secretKeyRef:
-                  name: "datadog-agent"
+                  name: "datadog"
                   key: api-key
             - name: DD_KUBERNETES_KUBELET_HOST
               valueFrom:
@@ -860,11 +891,11 @@ spec:
             - name: DD_CLUSTER_AGENT_ENABLED
               value: "true"
             - name: DD_CLUSTER_AGENT_KUBERNETES_SERVICE_NAME
-              value: datadog-agent-cluster-agent
+              value: datadog-cluster-agent
             - name: DD_CLUSTER_AGENT_AUTH_TOKEN
               valueFrom:
                 secretKeyRef:
-                  name: datadog-agent-cluster-agent
+                  name: datadog-cluster-agent
                   key: token
             - name: DD_RUNTIME_SECURITY_CONFIG_ENABLED
               value: "true"
@@ -914,7 +945,7 @@ spec:
               subPath: system-probe.yaml
       initContainers:
         - name: init-volume
-          image: "gcr.io/datadoghq/agent:7.33.0"
+          image: "gcr.io/datadoghq/agent:7.34.0"
           imagePullPolicy: IfNotPresent
           command: ["bash", "-c"]
           args:
@@ -924,7 +955,7 @@ spec:
               mountPath: /opt/datadog-agent
           resources: {}
         - name: init-config
-          image: "gcr.io/datadoghq/agent:7.33.0"
+          image: "gcr.io/datadoghq/agent:7.34.0"
           imagePullPolicy: IfNotPresent
           command: ["bash", "-c"]
           args:
@@ -952,7 +983,7 @@ spec:
             - name: DD_API_KEY
               valueFrom:
                 secretKeyRef:
-                  name: "datadog-agent"
+                  name: "datadog"
                   key: api-key
             - name: DD_KUBERNETES_KUBELET_HOST
               valueFrom:
@@ -962,7 +993,7 @@ spec:
               value: "yes"
           resources: {}
         - name: seccomp-setup
-          image: "gcr.io/datadoghq/agent:7.33.0"
+          image: "gcr.io/datadoghq/agent:7.34.0"
           command:
             - cp
             - /etc/config/system-probe-seccomp.json
@@ -977,7 +1008,7 @@ spec:
       volumes:
         - name: installinfo
           configMap:
-            name: datadog-agent-installinfo
+            name: datadog-installinfo
         - name: config
           emptyDir: {}
         - name: logdatadog
@@ -1014,10 +1045,10 @@ spec:
           emptyDir: {}
         - name: sysprobe-config
           configMap:
-            name: datadog-agent-system-probe-config
+            name: datadog-system-probe-config
         - name: datadog-agent-security
           configMap:
-            name: datadog-agent-security
+            name: datadog-security
         - hostPath:
             path: /var/lib/kubelet/seccomp
           name: seccomp-root
@@ -1064,7 +1095,7 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: datadog-agent-cluster-agent
+  name: datadog-cluster-agent
   namespace: default
   labels: {}
 spec:
@@ -1076,18 +1107,18 @@ spec:
     type: RollingUpdate
   selector:
     matchLabels:
-      app: datadog-agent-cluster-agent
+      app: datadog-cluster-agent
   template:
     metadata:
       labels:
-        app: datadog-agent-cluster-agent
-      name: datadog-agent-cluster-agent
+        app: datadog-cluster-agent
+      name: datadog-cluster-agent
       annotations: {}
     spec:
-      serviceAccountName: datadog-agent-cluster-agent
+      serviceAccountName: datadog-cluster-agent
       containers:
         - name: cluster-agent
-          image: "gcr.io/datadoghq/cluster-agent:1.17.0"
+          image: "gcr.io/datadoghq/cluster-agent:1.18.0"
           imagePullPolicy: IfNotPresent
           resources: {}
           ports:
@@ -1103,7 +1134,7 @@ spec:
             - name: DD_API_KEY
               valueFrom:
                 secretKeyRef:
-                  name: "datadog-agent"
+                  name: "datadog"
                   key: api-key
                   optional: true
             - name: DD_CLUSTER_CHECKS_ENABLED
@@ -1119,11 +1150,11 @@ spec:
             - name: DD_COLLECT_KUBERNETES_EVENTS
               value: "true"
             - name: DD_CLUSTER_AGENT_KUBERNETES_SERVICE_NAME
-              value: datadog-agent-cluster-agent
+              value: datadog-cluster-agent
             - name: DD_CLUSTER_AGENT_AUTH_TOKEN
               valueFrom:
                 secretKeyRef:
-                  name: datadog-agent-cluster-agent
+                  name: datadog-cluster-agent
                   key: token
             - name: DD_KUBE_RESOURCES_NAMESPACE
               value: default
@@ -1163,7 +1194,7 @@ spec:
       volumes:
         - name: installinfo
           configMap:
-            name: datadog-agent-installinfo
+            name: datadog-installinfo
       affinity:
         # Prefer scheduling the cluster agents on different nodes
         # to guarantee that the standby instance can immediately take the lead from a leader running of a faulty node.
@@ -1173,7 +1204,7 @@ spec:
               podAffinityTerm:
                 labelSelector:
                   matchLabels:
-                    app: datadog-agent-cluster-agent
+                    app: datadog-cluster-agent
                 topologyKey: kubernetes.io/hostname
       nodeSelector:
         kubernetes.io/os: linux

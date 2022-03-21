@@ -21,24 +21,22 @@ The Datadog Profiler for Linux lets you collect profile data for applications ru
 
 ## Requirements
 
-The Datadog Profiler requires Linux kernel v4.17+ on an `amd64` compatible processor. It does not support macOS, BSD, Windows, or other operating systems besides Linux v4.17 or later.
+The Datadog Profiler for Linux is compatible with Linux v4.17+ on `amd64` or `arm64` processors. It is not supported on serverless platforms, such as AWS Lambda, or on operating systems other than Linux, such as Windows, BSD, and MacOS.
 
-Continuous Profiler is not supported on serverless platforms, such as AWS Lambda.
+## Standalone installation
 
-## Installation
-
-To begin profiling applications:
+The profiler can be used either as a standalone executable or as a library. Skip to [library installation instructions](#library-installation) if you want to use it as a library. Otherwise, to begin profiling applications with the standalone executable:
 
 1. Configure the `perf_event_paranoid` kernel setting to be at most 2. On many distributions, you can check this parameter by running `cat /proc/sys/kernel/perf_event_paranoid` or `sysctl kernel.perf_event_paranoid`. You can set this value until the next reboot by running `echo 2 | sudo tee /proc/sys/kernel/perf_event_paranoid` and set it on every system startup with `sudo sysctl -w kernel.perf_event_paranoid=2`. These commands can't usually be run from a container, as the `perf_event_paranoid` setting is an operating system parameter. These commands may not work for all configurations. For alternatives, see [Troubleshooting][1].
 
 2. Ensure you are running the Datadog Agent version [7.20.2][2]+ or [6.20.2][3]+.
 
-3. Download the appropriate [ddprof binary][4] for your Linux distribution. For example, here is one way to pull the latest release:
+3. Download the appropriate [ddprof release][4] for your Linux distribution. For example, here is one way to pull the latest release for an `amd64` platform:
 
-   ```shell
-   curl -L -O https://github.com/DataDog/ddprof/releases/download/v0.7.0/ddprof-x86_64-linux-gnu.tar.gz
-   tar xvf ddprof-x86_64-linux-gnu.tar.gz
-   mv ddprof-x86_64-linux-gnu/bin/ddprof INSTALLATION_TARGET
+   ```bash
+   curl -L -O https://github.com/DataDog/ddprof/releases/download/v0.8.1/ddprof-x86_64-linux-gnu.tar.xz
+   tar xvf ddprof-x86_64-linux-gnu.tar.xz
+   mv ddprof/bin/ddprof INSTALLATION_TARGET
    ```
 
    Where `INSTALLATION_TARGET` specifies the location you'd like to store the `ddprof` binary. The examples that follow assume `INSTALLATION_TARGET` is set to `./ddprof`.
@@ -47,7 +45,7 @@ To begin profiling applications:
    {{< tabs >}}
 {{% tab "Environment variables" %}}
 
-```shell
+```bash
 export DD_ENV=prod
 export DD_SERVICE=my-web-app
 export DD_VERSION=1.0.3
@@ -55,13 +53,13 @@ export DD_VERSION=1.0.3
 ```
 **Note**: If you usually launch your application using a shell builtin, for example:
 
-```shell
+```bash
 exec myapp --arg1 --arg2
 ```
 
 Then you must invoke `ddprof` with that builtin instead:
 
-```shell
+```bash
 export DD_ENV=prod
 export DD_SERVICE=my-web-app
 export DD_VERSION=1.0.3
@@ -71,19 +69,19 @@ exec ./ddprof myapp --arg1 --arg2
 {{% /tab %}}
 {{% tab "In code" %}}
 
-```shell
+```bash
 ./ddprof --environment prod --service my-web-app --service_version 1.0.3 myapp --arg1 --arg2
 ```
 
 **Note**: If you usually launch your application using a shell builtin, for example:
 
-```shell
+```bash
 exec myapp --arg1
 ```
 
 Then you must invoke `ddprof` with that builtin instead:
 
-```shell
+```bash
 exec ./ddprof --environment prod --service my-web-app --service_version 1.0.3 myapp --arg1 --arg2
 ```
 
@@ -92,6 +90,82 @@ exec ./ddprof --environment prod --service my-web-app --service_version 1.0.3 my
 
 
 5. A minute or two after starting your application, your profiles appear on the [Datadog APM > Profiler page][5].
+
+## Library installation
+
+Alternatively, you can use a library instead of a standalone executable. The profiler is available as both shared and static libraries. There are a few notable similarities and differences between the library and standalone versions:
+
+* The profiling library is available only for Linux v4.17+ on `amd64` or `arm64`.
+* The profiling library has the same requirements (items 1 and 2 in the [Standalone installation](#standalone-installation) section) as the standalone executable.
+* The behavior of the library is nearly identical to the standalone executable, including the sandboxing features that isolate the profiler from your application.
+* The profiling library interfaces check environment variables, but they do not have other means of configuration-passing.
+
+For generality, the library exposes a C API. Here is an example of incorporating the library into a C application:
+1. Download a release of [ddprof][4] with library support (v0.8.0 or later) and extract the tarball. For example:
+
+   ```bash
+   curl -L -O https://github.com/DataDog/ddprof/releases/download/v0.8.1/ddprof-x86_64-linux-gnu.tar.xz
+   tar xvf ddprof-x86_64-linux-gnu.tar.xz --directory /tmp
+   ```
+
+2. In your code, start the profiler using the `ddprof_start_profiling()` interface, defined in the `_dd_profiling.h_` header provided by the release. The profiler stops automatically when your program closes. To stop the profiler manually, use `ddprof_stop_profiling(ms)` with the `ms` parameter indicating the maximum block time of the function in milliseconds. Here is a standalone example (`profiler_demo.c`) in C:
+   ```cpp
+   #include <stdlib.h>
+   #include "dd_profiling.h"
+  
+   int foo(void) {
+     int n = 0;
+     for (int i = 0; i < 1000; i++) {
+       n += 1;
+     }
+     return n;
+   }
+  
+   int main(void) {
+     // Initialize and start the Datadog profiler. Uses agent defaults if not
+     // specified
+     setenv("DD_ENV", "prod", 1);
+     setenv("DD_SERVICE", "c_testservice", 1);
+     setenv("DD_VERSION", "1.0.3", 1);
+     ddprof_start_profiling();
+  
+     // Do some work
+     for (int i = 0; i < 1e6; i++) {
+       foo();
+     }
+     return 0;
+   }
+   ```
+
+3. Pass the `include` and `lib` subdirectories of the extracted directory to your build system and link against `libdd_profiling`. For the above example:
+   ```bash
+   gcc -I/tmp/ddprof/include -L/tmp/ddprof/lib profiler_demo.c -o profiler_demo -ldd_profiling
+   ```
+
+### Deploying the shared library
+
+The shared library must be present in the system's library search path. Otherwise, the application will fail to start. Using the example from before:
+```bash
+./profiler_demo
+./profiler_demo: error while loading shared libraries: libdd_profiling.so: cannot open shared object file: No such file or directory
+```
+
+Avoid this by linking against the static library.
+
+#### Installing the library
+
+Add the library to the search path by copying it to any existing search directory. To find out what your search directories are, on Linux systems, run:
+```bash
+ld --verbose | grep SEARCH_DIR | tr -s ' ;' \\n
+```
+
+#### Appending a search directory
+
+Use the `LD_LIBRARY_PATH` environment variable to add additional search paths to the runtime linker. For example, using the directory layout from before:
+
+```bash
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/tmp/ddprof/lib
+```
 
 ## Configuration
 

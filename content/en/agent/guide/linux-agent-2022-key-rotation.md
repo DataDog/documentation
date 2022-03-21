@@ -1,6 +1,8 @@
 ---
 title: 2022 Linux Agent Key Rotation
-kind: faq
+kind: guide
+aliases:
+  - /agent/faq/linux-agent-2022-key-rotation
 ---
 
 As a common best practice, Datadog periodically rotates the keys and certificates used to sign Datadog's Agent packages. The following GPG keys, used to sign the Agent RPM and DEB packages, reach their end-of-life in June 2022 and will be rotated in April 2022:
@@ -131,7 +133,7 @@ Since Agent v6.31.0 and v7.31.0, all Datadog DEB packages have a soft dependency
 Upon installation, this package:
 
 - Configures APT keys in the `/usr/share/keyrings/datadog-archive-keyring.gpg` keyring and also through `apt-key` when necessary. **This ensures that the upcoming APT repository signing key is trusted.**
-- Sets up a [`debsig-verify` policy][13] for Datadog packages. This allows you to verify signatures for individual DEB packages locally. 
+- Sets up a [`debsig-verify` policy][12] for Datadog packages. This allows you to verify signatures for individual DEB packages locally. 
 
 For example, to verify that a locally downloaded DEB package was built and signed by Datadog, run the following command:
 
@@ -155,7 +157,7 @@ With the third method, you need to explicitly install the `datadog-signing-keys`
 
 Agent v5 users on DEB-based systems (Debian/Ubuntu) are also required to trust the new signing key to install or upgrade the Agent after the rotation date. Agent v5 users on RPM-based systems (RedHat/CentOS/SUSE) are not affected by this rotation.
 
-**Note**: Agent v5 uses Python 2 which reached end-of-life on January 1, 2021. Datadog recommends [upgrading to Agent v7][12].
+**Note**: Agent v5 uses Python 2 which reached end-of-life on January 1, 2021. Datadog recommends [upgrading to Agent v7][13].
 
 [1]: https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
 [2]: https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
@@ -168,5 +170,5 @@ Agent v5 users on DEB-based systems (Debian/Ubuntu) are also required to trust t
 [9]: https://github.com/DataDog/datadog-formula
 [10]: https://github.com/DataDog/heroku-buildpack-datadog
 [11]: https://docs.datadoghq.com/integrations/amazon_elasticbeanstalk
-[12]: https://app.datadoghq.com/account/settings#agent
-[13]: https://manpages.ubuntu.com/manpages/jammy/man1/debsig-verify.1.html
+[12]: https://manpages.ubuntu.com/manpages/jammy/man1/debsig-verify.1.html
+[13]: https://app.datadoghq.com/account/settings#agent

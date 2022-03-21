@@ -2020,6 +2020,10 @@ main:
     url: logs/explorer/export/
     parent: log_explorer
     weight: 508
+  - name: Watchdog Insights for Logs
+    url: logs/explorer/watchdog_insights/
+    parent: log_explorer
+    weight: 509
   - name: Saved Views
     url: logs/explorer/saved_views/
     parent: log_explorer

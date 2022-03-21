@@ -1,0 +1,10 @@
+{
+  "index": "main",
+  "query": "service:web*",
+  "sort": "asc",
+  "time": {
+    "from": "2021-11-11T10:11:11+00:00",
+    "timezone": "Europe/Paris",
+    "to": "2021-11-11T11:11:11+00:00"
+  }
+}

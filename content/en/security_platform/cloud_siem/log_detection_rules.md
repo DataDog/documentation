@@ -37,7 +37,7 @@ For Cloud SIEM (Security Information and Event Management), select **Log Detecti
 
 Define when events exceed a user-defined threshold. For example, if you create a trigger with a threshold of `>10`, a security signal occurs when the condition is met.
 
-### New term
+### New value
 
 Detect when an attribute changes to a new value. For example, if you create a trigger based on a specific attribute, such as `country` or `IP address`, a security signal will be generated whenever a new value is seen which has not been seen before.
 
@@ -99,7 +99,7 @@ In this example, when greater than five failed logins and a successful login exi
 [1]: /logs/search_syntax/
 {{% /tab %}}
 
-{{% tab "New Term" %}}
+{{% tab "New Value" %}}
 
 ### Search query
 
@@ -206,7 +206,7 @@ Additional cases can be added by clicking the **Add Case** button.
 [1]: /monitors/notify/?tab=is_alert#integrations
 {{% /tab %}}
 
-{{% tab "New Term" %}}
+{{% tab "New Value" %}}
 
 {{< img src="security_platform/security_monitoring/detection_rules/new_term_rule_case.png" alt="Define the rule case" >}}
 
