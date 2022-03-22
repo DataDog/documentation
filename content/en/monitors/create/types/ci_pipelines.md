@@ -19,7 +19,7 @@ further_reading:
 <div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
-<div class="alert alert-info">CI Pipeline monitors are in beta.
+<div class="alert alert-info">CI Pipeline monitors are in alpha.
 </div>
 
 ## Overview

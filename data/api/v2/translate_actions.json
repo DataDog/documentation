@@ -342,7 +342,7 @@
     "summary": "Get all processes"
   },
   "ListRoles": {
-    "description": "Returns all roles, including their names and IDs.",
+    "description": "Returns all roles, including their names and their unique identifiers.",
     "summary": "List roles"
   },
   "CreateRole": {

@@ -65,6 +65,9 @@ API test results for worker v>0.1.6 `intake.synthetics.`{{< region-param key="dd
 Browser test results for worker v>0.2.0 `intake-v2.synthetics.`{{< region-param key="dd_site" code="true" >}}<br>
 API test results for worker v<0.1.5 `api.`{{< region-param key="dd_site" code="true" >}}
 
+[Network Device Monitoring][13]
+: `ndm-intake.`{{< region-param key="dd_site" code="true" >}}
+
 All other Agent data
 : `<VERSION>-app.agent.`{{< region-param key="dd_site" code="true" >}}<br>
 For example, Agent v7.31.0 reports to `7-31-0-app.agent.`{{< region-param key="dd_site" code="true" >}}. Therefore you must add `*.agent.`{{< region-param key="dd_site" code="true" >}} to your inclusion list in your firewall(s).<br>
@@ -226,3 +229,4 @@ To avoid running out of storage space, the Agent stores the metrics on disk only
 [10]: /tracing/profiler/
 [11]: /synthetics/private_locations
 [12]: /agent/proxy/
+[13]: /network_monitoring/devices

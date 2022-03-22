@@ -248,17 +248,17 @@ La partie inférieure de cette vue comprend des informations supplémentaires su
 
 La page Trace Search vous permet d'identifier les [traces][1] et les spans indexées spécifiques qui vous intéressent. Depuis cette vue, vous pouvez filtrer un ensemble de tags par défaut (tels que `Env`,` Service`, `Resource` et [bien d'autres][7]) en appliquant un intervalle.
 
-5) **Trouvez une trace qui possède le nouveau tag**. Pour ce faire, utilisez l'explorateur de facettes sur la gauche. Recherchez le nom de la ressource que vous avez définie au début de ce guide, puis cliquez sur l'une des lignes que vous voyez à cet endroit.
+5) **Trouvez une trace qui possède le nouveau tag**. Pour ce faire, utilisez le Facet Explorer sur la gauche. Recherchez le nom de la ressource que vous avez définie au début de ce guide, puis cliquez sur l'une des lignes que vous voyez à cet endroit.
 
 6) **Trouvez le nouveau tag que vous avez ajouté à la trace**. Cliquez dessus et sélectionnez **Create facet** pour `@[nom de votre facette]` (dans notre exemple, il s'agit de customer_id)
 
 {{< img src="tracing/guide/add_span_md_and_graph_it/span_md_5.png" alt="Menu Créer une facette" style="width:90%;">}}
 
-Vous pouvez désormais spécifier le nom d'affichage de votre facette ainsi que son emplacement dans l'explorateur de facettes.
+Vous pouvez désormais spécifier le nom d'affichage de votre facette ainsi que son emplacement dans le Facet Explorer.
 
 {{< img src="tracing/guide/add_span_md_and_graph_it/span_md_8.png" alt="Fenêtre Créer une facette" style="width:60%;">}}
 
-La facette que vous avez créée devrait maintenant apparaître dans l'explorateur de facettes. Utilisez la case `Search facets` pour la retrouver facilement.
+La facette que vous avez créée devrait maintenant apparaître dans le Facet Explorer. Utilisez la case `Search facets` pour la retrouver facilement.
 
 6) **Accédez à la page [Analytics][8].**
 

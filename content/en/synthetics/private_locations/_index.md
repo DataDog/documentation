@@ -571,7 +571,7 @@ By default, only users with the Datadog Admin Role can create private locations,
 
 Users with the [Datadog Admin and Datadog Standard roles][20] can view private locations, search for private locations, and assign Synthetic tests to private locations. Grant access to the [**Private Locations** page][22] by upgrading your user to one of these two [default roles][19]. 
 
-If you have access to the [custom role feature][21], add your user to a custom role that includes `synthetics_private_location_read` and `synthetics_private_location_write` permissions. 
+If you are using the [custom role feature][21], add your user to a custom role that includes `synthetics_private_location_read` and `synthetics_private_location_write` permissions. 
 
 ## Further Reading
 
