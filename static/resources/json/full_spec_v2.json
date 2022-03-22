@@ -84549,7 +84549,7 @@
       "name": "Audit"
     },
     {
-      "description": "[AuthN Mappings API] (https://docs.datadoghq.com/account_management/authn_mapping/?tab=example)\nis used to automatically map group of users to roles in Datadog using attributes\nsent from Identity Providers.",
+      "description": "[AuthN Mappings API](https://docs.datadoghq.com/account_management/authn_mapping/?tab=example)\nis used to automatically map group of users to roles in Datadog using attributes\nsent from Identity Providers.",
       "name": "AuthN Mappings"
     },
     {

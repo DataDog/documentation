@@ -15,13 +15,15 @@ Launched more than 10 years ago, Datadog's event stream is one of its earliest f
 
 ## What is the migration timeline?
 
-<strong>March 5, 2022</strong> - All US organizations can access the new Events Explorer and analytics. Datadog begins to migrate customer dashboards and monitors not managed using the API.
+The following timeline applies to US-based customers:
 
-<strong>April 30, 2022</strong> - The event stream will be retired in favor of the Event Explorer.
+<strong>March 5, 2022</strong> - New Events Explorer and analytics are accessible. Datadog begins to migrate customer dashboards and monitors not managed using the API.
 
-<strong>May 15, 2022</strong> - Starting on this date, while Datadog will continue to evaluate event monitors that have not been migrated, they will no longer be editable. New event monitors must use the new syntax.
+<strong>April 30, 2022</strong> - The event stream is retired in favor of the Event Explorer.
 
-<strong>June 30, 2022</strong> - On this date, Datadog will stop evaluating legacy event monitors.
+<strong>May 15, 2022</strong> - Starting on this date, while Datadog continues to evaluate event monitors that have not been migrated, they are no longer editable. New event monitors must use the new syntax.
+
+<strong>June 30, 2022</strong> - Datadog stops evaluating event monitors that have not been migrated. Legacy event monitors stop working.
 
 ## What action do I need to take?
 
@@ -75,6 +77,8 @@ The new query search allows you to use complex queries in event monitors with ne
 With pipelines, events are parsed and enriched by chaining them sequentially through processors. Processors extract meaningful information or attributes from semi-structured text to reuse as facets. Each event that comes through the pipelines is tested against every pipeline filter. If it matches a filter, then all the processors are applied sequentially before moving to the next pipeline.
 
 ## What Changed?
+
+**Note:** The process for sending events remains the same. You can continue sending events using the API, the Agent, or the events via email feature as before.
 
 ### Event aggregations are no longer performed or displayed in the UI
 Datadog no longer automatically performs Event aggregation, and no longer groups Events by the `aggregation_key` attribute. The UI no longer displays Event aggregation.
