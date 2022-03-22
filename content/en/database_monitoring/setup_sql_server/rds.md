@@ -1,7 +1,7 @@
 ---
-title: Setting Up Database Monitoring for self-hosted SQL Server
+title: Setting Up Database Monitoring for SQL Server on Amazon RDS
 kind: documentation
-description: Install and configure Database Monitoring for self-hosted SQL Server
+description: Install and configure Database Monitoring for SQL Server managed on RDS.
 further_reading:
 - link: "/integrations/sqlserver/"
   tag: "Documentation"
@@ -23,17 +23,13 @@ Database Monitoring provides deep visibility into your Microsoft SQL Server data
 
 Do the following steps to enable Database Monitoring with your database:
 
-1. [Configure the database](#configure-sql-server-settings)
-2. [Grant the Agent access to the database](#grant-the-agent-access)
-3. [Install the Agent](#install-the-agent)
+1. [Grant the Agent access to the database](#grant-the-agent-access)
+2. [Install the Agent](#install-the-agent)
+3. [Install the RDS integration](#install-the-rds-integration)
 
 ## Before you begin
 
 {{% dbm-sqlserver-before-you-begin %}}
-
-## Configure SQL Server settings
-
-In the server properties for your SQL Server instance, navigate to **Server Properties** -> **Security** -> **SQL Server and Windows Authentication mode** and ensure that your SQL Server instance supports SQL Server authentication by enabling `SQL Server and Windows Authentication mode`.
 
 ## Grant the Agent access
 
@@ -51,6 +47,8 @@ GRANT VIEW ANY DEFINITION to datadog;
 
 ## Install the Agent
 
+Since AWS does not grant direct host access, the Datadog Agent must be installed somewhere separately where it has access to the RDS host. There are several options for installing and running the agent.
+
 {{< tabs >}}
 {{% tab "Windows Host" %}}
 {{% dbm-sqlserver-agent-setup-windows %}}
@@ -58,8 +56,20 @@ GRANT VIEW ANY DEFINITION to datadog;
 {{% tab "Linux Host" %}}
 {{% dbm-sqlserver-agent-setup-linux %}}
 {{% /tab %}}
+{{% tab "Docker" %}}
+{{% dbm-sqlserver-agent-setup-docker %}}
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
+{{% dbm-sqlserver-agent-setup-kubernetes %}}
+{{% /tab %}}
 {{< /tabs >}}
+
+## Install the RDS Integration
+
+To collect more comprehensive database metrics and logs from AWS, install the [RDS integration][1].
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /integrations/amazon_rds

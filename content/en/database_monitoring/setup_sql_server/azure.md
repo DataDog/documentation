@@ -1,7 +1,7 @@
 ---
-title: Setting Up Database Monitoring for self-hosted SQL Server
+title: Setting Up Database Monitoring for Azure SQL Server
 kind: documentation
-description: Install and configure Database Monitoring for self-hosted SQL Server
+description: Install and configure Database Monitoring for SQL Server managed on Azure.
 further_reading:
 - link: "/integrations/sqlserver/"
   tag: "Documentation"
@@ -23,21 +23,36 @@ Database Monitoring provides deep visibility into your Microsoft SQL Server data
 
 Do the following steps to enable Database Monitoring with your database:
 
-1. [Configure the database](#configure-sql-server-settings)
-2. [Grant the Agent access to the database](#grant-the-agent-access)
-3. [Install the Agent](#install-the-agent)
+1. [Grant the Agent access to the database](#grant-the-agent-access)
+2. [Install the Agent](#install-the-agent)
+3. [Install the Azure integration](#install-the-azure-integration)
 
 ## Before you begin
 
 {{% dbm-sqlserver-before-you-begin %}}
 
-## Configure SQL Server settings
-
-In the server properties for your SQL Server instance, navigate to **Server Properties** -> **Security** -> **SQL Server and Windows Authentication mode** and ensure that your SQL Server instance supports SQL Server authentication by enabling `SQL Server and Windows Authentication mode`.
-
 ## Grant the Agent access
 
 The Datadog Agent requires read-only access to the database server in order to collect statistics and queries.
+
+{{< tabs >}}
+
+{{% tab "Azure SQL Database" %}}
+
+Create a read-only login to connect to your server and grant the required [Azure SQL Roles][1]:
+```SQL
+CREATE LOGIN datadog WITH PASSWORD = '<PASSWORD>';
+CREATE USER datadog FOR LOGIN datadog;
+GRANT CONNECT ANY DATABASE to datadog;
+ALTER SERVER ROLE ##MS_ServerStateReader## ADD MEMBER datadog;
+ALTER SERVER ROLE ##MS_DefinitionReader## ADD MEMBER datadog;
+```
+
+
+[1]: https://docs.microsoft.com/en-us/azure/azure-sql/database/security-server-roles
+{{% /tab %}}
+
+{{% tab "Azure SQL Managed Instance" %}}
 
 Create a read-only login to connect to your server and grant the required permissions:
 
@@ -49,6 +64,18 @@ GRANT VIEW SERVER STATE to datadog;
 GRANT VIEW ANY DEFINITION to datadog;
 ```
 
+{{% /tab %}}
+
+{{% tab "SQL Server on Windows Azure VM" %}}
+
+For [SQL Server on Windows Azure VM][1] follow the [Self-hosted instructions][2] to install the Datadog Agent directly on the Windows Server host VM.
+
+[1]: https://docs.microsoft.com/en-us/azure/azure-sql/virtual-machines/windows/sql-server-on-azure-vm-iaas-what-is-overview
+[2]: /database_monitoring/setup_sql_server/selfhosted/
+{{% /tab %}}
+
+{{< /tabs >}}
+
 ## Install the Agent
 
 {{< tabs >}}
@@ -58,8 +85,20 @@ GRANT VIEW ANY DEFINITION to datadog;
 {{% tab "Linux Host" %}}
 {{% dbm-sqlserver-agent-setup-linux %}}
 {{% /tab %}}
+{{% tab "Docker" %}}
+{{% dbm-sqlserver-agent-setup-docker %}}
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
+{{% dbm-sqlserver-agent-setup-kubernetes %}}
+{{% /tab %}}
 {{< /tabs >}}
+
+## Install the Azure Integration
+
+To collect more comprehensive database metrics and logs from Azure, install the [Azure integration][1].
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /integrations/azure
