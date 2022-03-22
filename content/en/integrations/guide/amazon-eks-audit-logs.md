@@ -66,7 +66,7 @@ Navigate to the in-app [Rule Setup and Configuration][13] page to create a new r
 
 1. In Log Explorer, create a query in the search bar. For example, filter by `source:kubernetes.audit @objectRef.resource:pods @objectRef.subresource:exec @http.method:create @http.status_code:[101 TO 299]`.
 1. Click the **Export** button and select **Export to detection rule**.
-1. This feature exports your query and defines it in the second step of Log Detection rule setup. Select a detection method. In this instance, select **New Value**. For the Detect new value option, select the attribute `@usr.name`. This will alert you the first time a user execs into a pod. After the first alert, Datadog doesn't alert on the same user again. Alternatively, to detect when these events exceed a user-defined threshold, use **threshold rule** for the detection method. 
+1. This feature exports your query and defines it in the second step of Log Detection rule setup. Select a detection method. In this instance, select **New Value**. For the Detect new value dropdown, select the attribute `@usr.name`. This will alert you the first time a user execs into a pod. After the first alert, Datadog won't alert on the same user again. Alternatively, to detect when these events exceed a user-defined threshold, use **threshold rule** for the detection method. 
 1. Follow the [Log Detection Rules][14] documentation to learn how to complete the rest of the configuration of your new rule.
 
 [1]: /security_platform/cloud_siem/
