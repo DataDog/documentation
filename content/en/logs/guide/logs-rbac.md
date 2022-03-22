@@ -119,9 +119,9 @@ This section explains how to create two roles, `ACME Admin` and `ACME User`; how
 {{< tabs >}}
 {{% tab "UI" %}}
 
-In the [Groups Section][1] of Datadog, use the Add Role button within the Role tab to create the new `ACME Admin` and `ACME User`roles.
+In the [Groups Section][1] of Datadog Organization Settings, use the Add Role button within the Role tab to create the new `ACME Admin` and `ACME User`roles.
 
-{{< img src="logs/guide/rbac/add_role.png" alt="Add a new role"  style="width:60%;">}}
+{{< img src="logs/guide/rbac/add_role.png" alt="Add a new role" style="width:60%;">}}
 
 When creating a new role:
 
