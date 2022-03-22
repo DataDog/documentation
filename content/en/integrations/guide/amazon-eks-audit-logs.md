@@ -54,17 +54,20 @@ Setup and configure Cloud SIEM. See the in-app [Cloud SIEM setup and configurati
 
 Once Cloud SIEM is set up and configured, you can either create a new Cloud SIEM rule from scratch or export a query in Log Explorer to a new rule.
 
+### Review Security Monitoring Rules
+
+See out-of-the-box [Cloud SIEM detection rules][11] that are detecting threats in your environment. For more information on searching, editing, and cloning these rules, see [creating and managing detection rules][12].
+
 ### Create a new Cloud SIEM rule
 
-Navigate to the in-app [Rule Setup and Configuration][11] page to create a new rule. Follow the [Log Detection Rules][12] documentation to complete setup.
+Navigate to the in-app [Rule Setup and Configuration][13] page to create a new rule. Follow the [Log Detection Rules][14] documentation to complete setup.
 
 ### Export a query to a rule in Log Explorer
 
-1. In Log Explorer, create a query in the search bar. For example, filter by `source:kubernetes.audit @aws.awslogs.owner:601427279990`.
+1. In Log Explorer, create a query in the search bar. For example, filter by `source:kubernetes.audit @objectRef.resource:pods @objectRef.subresource:exec @http.method:create @http.status_code:[101 TO 299]`.
 1. Click the **Export** button and select **Export to detection rule**.
-1. This feature exports your query and defines it in the second step of Log Detection rule setup. Select a detection method. In this instance, select **New Term** to detect when the `@aws.awslogs.owner` attribute changes to a new value, and follow the [Log Detection Rules][12] documentation to learn how to complete the rest of the configuration of your new rule.
-
-
+1. This feature exports your query and defines it in the second step of Log Detection rule setup. Select a detection method. In this instance, select **New Value**. For the Detect new value option, select the attribute `@usr.name`. This will alert you the first time a user execs into a pod. After the first alert, Datadog doesn't alert on the same user again. Alternatively, to detect when these events exceed a user-defined threshold, use **threshold rule** for the detection method. 
+1. Follow the [Log Detection Rules][14] documentation to learn how to complete the rest of the configuration of your new rule.
 
 [1]: /security_platform/cloud_siem/
 [2]: https://docs.aws.amazon.com/eks/latest/userguide/create-cluster.html
@@ -76,5 +79,7 @@ Navigate to the in-app [Rule Setup and Configuration][11] page to create a new r
 [8]: /security_platform/cloud_siem/log_detection_rules/
 [9]: /security_platform/cloud_siem/getting_started#review-detection-rules
 [10]: https://app.datadoghq.com/security
-[11]: https://app.datadoghq.com/security/configuration/rules/new
-[12]: /security_platform/cloud_siem/log_detection_rules/?tab=threshold#choose-a-detection-method
+[11]: /security_platform/default_rules/#cat-cloud-siem
+[12]: /security_platform/detection_rules/#creating-and-managing-detection-rules
+[13]: https://app.datadoghq.com/security/configuration/rules/new
+[14]: /security_platform/cloud_siem/log_detection_rules/?tab=threshold#choose-a-detection-method
