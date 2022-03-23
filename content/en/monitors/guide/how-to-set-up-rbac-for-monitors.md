@@ -171,7 +171,7 @@ Clicking **Save** without making any changes also performs the update for your m
 
 **2. You want to allow all users to edit this monitor**
 
-Save the monitor, edit it again, and remove all roles that were generated for this monitor. 
+Save the monitor, causing Datadog to migrate it to restricted roles. Reopen the editing page. In the **Restrict editing of this monitor to** dropdown menu, remove all roles. Click **Save** a second time.
 
 **3. You want your monitor to be restricted to some roles, but not the exact equivalent of the previous locked option**
 
