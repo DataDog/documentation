@@ -75,7 +75,7 @@ Alternatively, find the historical view from the Log Explorer directly from the 
 
 {{< img src="logs/archives/log_archives_historical_index_selector.png" alt="Log Explorer" width="75%">}}
 
-### Canceling ongoing historical views
+### Cancel ongoing historical views
 
 Cancel ongoing Rehydrations directly in the Rehydrate from Archives page to avoid starting Rehydrations with the incorrect time range or when you accidentally make typos in your indexing query.
 
