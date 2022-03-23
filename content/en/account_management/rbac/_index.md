@@ -41,7 +41,7 @@ Datadog Read Only Role
 
 ## Custom roles
 
-Manage your custom roles through the Datadog application, the [Datadog Role API][6], or SAML directly. Find below how to create, update, delete a role. See the [Datadog Role Permissions][7] documentation for more information about available permissions. Only users with the Access Management permission can create or edit roles in Datadog.
+Manage your custom roles through the Datadog site, the [Datadog Role API][6], or SAML directly. Find instructions below on how to create, update, or delete a role. See[Datadog Role Permissions][7] for more information about available permissions. Only users with the User Access Manage permission can create or edit roles in Datadog.
 
 ### Enable custom roles
 
@@ -57,12 +57,12 @@ To create a custom role:
 1. Go to your [Datadog Roles page][1].
 2. Select **New Role** in the upper right corner of the page.
 3. Give a name to your role.
-4. Optional - Assigning a set of permissions to your role. See the [Datadog Role permissions][2] documentation for more information about available permissions.
+4. Optionally, assign a set of permissions to your role. See [Datadog Role Permissions][2] for more information about available permissions.
 
 TODO: Update screenshot to reflect new roles UI.
 {{< img src="account_management/rbac/create_role.png" alt="Create a custom Role" style="width:90%;">}}
 
-Once a role is created you can [add this role to existing users][3].
+Once a role is created, you can [add the role to existing users][3].
 
 
 [1]: https://app.datadoghq.com/access/roles
@@ -71,10 +71,10 @@ Once a role is created you can [add this role to existing users][3].
 {{% /tab %}}
 {{% tab "API" %}}
 
-Find an example of how to create a role in the [Datadog Create Role API documentation][1].
+Find an example of how to create a role in [Create Role API Reference][1].
 
 
-[1]: /api/v2/roles/#create-role
+[1]: /api/latest/roles/#create-role
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -87,7 +87,7 @@ To edit a custom role:
 
 1. Go to your [Datadog Roles page][1].
 2. Select the edit button on the role you would like to modify.
-3. Modify the set of permissions to your role. See the [Datadog Role permissions][2] documentation for more information about available permissions.
+3. Modify the set of permissions for your role. See [Role Permissions][2] for more information about available permissions.
 4. Save your changes.
 
 TODO: Update screenshot to show clone option in UI.
@@ -101,10 +101,10 @@ Once a role is modified, permissions are updated for all users with the role.
 {{% /tab %}}
 {{% tab "API" %}}
 
-Find an example of how to update a role in the [Datadog Create Role API documentation][1].
+Find an example of how to update a role in [Update Role API Reference][1].
 
 
-[1]: /api/v2/roles/#update-a-role
+[1]: /api/latest/roles/#update-a-role
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -123,23 +123,23 @@ To delete a custom role:
 
 {{< img src="account_management/users/delete_role_confirmation.png" alt="Deleting a Role" style="width:90%;">}}
 
-Once a role is deleted, permissions are updated for all users with the role. Users without any roles cannot use Datadog effectively, but still maintain limited access. You should always make sure users either have a role or are disabled if they do not need access to your organization.
+Once a role is deleted, permissions are updated for all users with the role. Users without any roles cannot use Datadog effectively, but still maintain limited access.
 
 
 [1]: https://app.datadoghq.com/access/roles
 {{% /tab %}}
 {{% tab "API" %}}
 
-Find an example of how to delete a role in the [Datadog Create Role API documentation][1].
+Find an example of how to delete a role in the [Delete Role API reference][1].
 
 
-[1]: /api/v2/roles/#delete-role
+[1]: /api/latest/roles/#delete-role
 {{% /tab %}}
 {{< /tabs >}}
 
 ## Restrict access to dashboards and monitors
 
-Once you have RBAC roles set up, you can restrict access to dashboards, monitors, and synthetic tests by user role. For more information, see [Dashboard Permissions][8], [Monitor Permissions][9], and [Synthetics Permissions][10].
+Once you have RBAC roles set up, you can restrict access to dashboards, monitors, and synthetic tests by user role. For more information, see [Dashboard Permissions][8], [Monitors Permissions][9], and [Synthetics Permissions][10].
 
 ## Further Reading
 
