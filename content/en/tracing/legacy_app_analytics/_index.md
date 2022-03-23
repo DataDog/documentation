@@ -15,7 +15,7 @@ This page describes deprecated features with configuration information relevant 
 
 Navigate the [ingestion control page][1] to spot services with legacy configuration. These are flagged with a `Legacy Setup` status.
 
-To move away from App Analytics, remove every [configuration option](#app-analytics-setup) related to this setup. Instead, use our agent and libraries [sampling mechanisms][2] that ensure to keep complete traces.
+To move away from the legacy App Analytics setup, remove every [configuration option](#app-analytics-setup) related to it. Instead, use the Datadog Agent and tracing libraries [sampling mechanisms][2] that ensure to keep complete traces.
 
 ## App Analytics setup
 
