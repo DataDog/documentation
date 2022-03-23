@@ -8,6 +8,9 @@ aliases:
   - /integrations/docker_daemon/
   - /docker/
 further_reading:
+- link: "https://app.datadoghq.com/release-notes?category=Container%20Monitoring"
+  tag: "Release Notes"
+  text: "Check out the latest Datadog Containers releases! (App login required)."
 - link: "/agent/docker/log/"
   tag: "Documentation"
   text: "Collect your application logs"

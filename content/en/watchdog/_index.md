@@ -5,6 +5,9 @@ description: Automatically detect potential application and infrastructure issue
 aliases:
   - /tracing/watchdog
 further_reading:
+- link: "https://app.datadoghq.com/release-notes?category=Watchdog"
+  tag: "Release Notes"
+  text: "Check out the latest Datadog Watchdog releases! (App login required)."
 - link: "/logs/"
   tag: "Documentation"
   text: "Collect your logs"

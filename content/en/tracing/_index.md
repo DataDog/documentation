@@ -4,6 +4,9 @@ title: APM & Continuous Profiler
 kind: documentation
 description: Instrument your code to improve performance
 further_reading:
+- link: "https://app.datadoghq.com/release-notes?category=APM"
+  tag: "Release Notes"
+  text: "Check out the latest Datadog APM releases! (App login required)."
 - link: "/tracing/guide/setting_primary_tags_to_scope/"
   tag: "Documentation"
   text: "Add primary and secondary tags to your traces"

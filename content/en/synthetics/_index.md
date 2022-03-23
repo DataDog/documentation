@@ -6,6 +6,9 @@ disable_sidebar: true
 aliases:
   - /integrations/synthetics/
 further_reading:
+- link: "https://app.datadoghq.com/release-notes?category=Synthetic%20Monitoring"
+  tag: "Release Notes"
+  text: "Check out the latest Datadog Synthetics Monitoring releases! (App login required)."
 - link: "https://www.datadoghq.com/blog/introducing-synthetic-monitoring/"
   tag: "Blog"
   text: "Introduction to Datadog Synthetic Monitoring"

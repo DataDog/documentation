@@ -5,6 +5,9 @@ aliases:
   - compliance_monitoring
   - cloud_siem
 further_reading:
+- link: "https://app.datadoghq.com/release-notes?category=Security%20%26%20Compliance"
+  tag: "Release Notes"
+  text: "Check out the latest Datadog Security releases! (App login required)."
 - link: "/security_platform/cloud_siem/getting_started"
   tag: "Documentation"
   text: "Begin detecting threats with Cloud SIEM"

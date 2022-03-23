@@ -3,6 +3,9 @@ title: Incident Management
 kind: documentation
 description: Create and manage incidents
 further_reading:
+- link: "https://app.datadoghq.com/release-notes?category=Incident%20Management"
+  tag: "Release Notes"
+  text: "Check out the latest Incident Management releases! (App login required)."
 - link: "dashboards/querying/#incident-management-analytics"
   tag: "Documentation"
   text: "Incident Management Analytics"

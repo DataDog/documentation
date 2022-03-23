@@ -7,6 +7,9 @@ aliases:
     - /guides/logs/
     - /logs/logging_without_limits
 further_reading:
+- link: "https://app.datadoghq.com/release-notes?category=Log%20Management"
+  tag: "Release Notes"
+  text: "Check out the latest Datadog Log Management releases! (App login required)."
 - link: "/logs/log_collection/"
   tag: "Documentation"
   text: "Starting collecting your logs"

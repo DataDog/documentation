@@ -6,6 +6,9 @@ disable_sidebar: true
 aliases:
   - /real_user_monitoring/installation
 further_reading:
+- link: "https://app.datadoghq.com/release-notes?category=Real%20User%20Monitoring"
+  tag: "Release Notes"
+  text: "Check out the latest Datadog RUM releases! (App login required)."
 - link: "https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/"
   tag: "Blog"
   text: "Introducing Datadog Real User Monitoring"

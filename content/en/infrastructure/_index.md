@@ -3,6 +3,10 @@ title: Infrastructure
 kind: documentation
 aliases:
   - /graphing/infrastructure/
+further_reading:
+- link: "https://app.datadoghq.com/release-notes?category=Infrastructure%20Monitoring"
+  tag: "Release Notes"
+  text: "Check out the latest Datadog Infrastructure Monitoring releases! (App login required)."
 ---
 
 {{< whatsnext desc="This section includes the following topics:">}}

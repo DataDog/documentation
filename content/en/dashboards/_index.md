@@ -11,6 +11,9 @@ aliases:
     - /graphing/
 description: Visualize your data to gain insight
 further_reading:
+- link: "https://app.datadoghq.com/release-notes?category=Dashboards"
+  tag: "Release Notes"
+  text: "Check out the latest Datadog Dashboards releases! (App login required)."
 - link: "/dashboards/template_variables/"
   tag: "Documentation"
   text: "Enhance your Dashboards with Template Variables"
