@@ -6,9 +6,6 @@ widget_type: "manage_status"
 aliases:
     - /graphing/widgets/monitor_summary/
 further_reading:
-- link: "/dashboards/screenboards/"
-  tag: "Documentation"
-  text: "Screenboard"
 - link: "/dashboards/graphing_json/"
   tag: "Documentation"
   text: "Building Dashboard using JSON"

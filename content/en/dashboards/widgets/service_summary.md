@@ -6,9 +6,6 @@ widget_type: "trace_service"
 aliases:
     - /graphing/widgets/service_summary/
 further_reading:
-- link: "/dashboards/screenboards/"
-  tag: "Documentation"
-  text: "Screenboard"
 - link: "/dashboards/graphing_json/"
   tag: "Documentation"
   text: "Building Dashboard using JSON"

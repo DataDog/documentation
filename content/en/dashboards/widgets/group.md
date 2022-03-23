@@ -5,12 +5,9 @@ description: "Group your widgets together in a Timeboard."
 aliases:
     - /graphing/widgets/group/
 further_reading:
-- link: "/dashboards/timeboards/"
-  tag: "Documentation"
-  text: "Timeboards"
 - link: "/dashboards/graphing_json/"
   tag: "Documentation"
-  text: "Building Dashboard using JSON"
+  text: "Building Dashboards using JSON"
 ---
 
 The groups widget allows you to keep similar graphs together on your [timeboard][1]. Each group has a custom header, can hold one to many graphs, and is collapsible:

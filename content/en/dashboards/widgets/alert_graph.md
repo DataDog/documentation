@@ -5,12 +5,6 @@ description: "Graph the current status of any monitor defined on your system."
 aliases:
     - /graphing/widgets/alert_graph/
 further_reading:
-- link: "/dashboards/screenboards/"
-  tag: "Documentation"
-  text: "Screenboard"
-- link: "/dashboards/timeboards/"
-  tag: "Documentation"
-  text: "Timeboards"
 - link: "/dashboards/graphing_json/"
   tag: "Documentation"
   text: "Building Dashboard using JSON"

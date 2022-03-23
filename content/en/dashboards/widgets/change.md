@@ -5,12 +5,6 @@ description: "Graph the change in a value over a chosen time period."
 aliases:
     - /graphing/widgets/change/
 further_reading:
-- link: "/dashboards/timeboards/"
-  tag: "Documentation"
-  text: "Timeboards"
-- link: "/dashboards/screenboards/"
-  tag: "Documentation"
-  text: "Screenboard"
 - link: "/dashboards/graphing_json/"
   tag: "Documentation"
   text: "Building Dashboard using JSON"
