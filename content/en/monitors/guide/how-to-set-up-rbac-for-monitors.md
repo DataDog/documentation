@@ -34,7 +34,7 @@ For more information about default and custom roles, how to create custom roles,
 
 {{< img src="/monitors/guide/monitor_rbac_restricted.jpg" alt="RBAC Restricted Monitor"  >}}
 
-For more information, see [Monitors documentation][1].
+For more information, see [Monitors Permissions][1].
 
 [1]: /monitors/notify/#permissions
 {{% /tab %}}
