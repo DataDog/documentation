@@ -248,7 +248,8 @@ You can add SLOs, Monitors, and Open Incidents widgets to your mobile home scree
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-[1]: /mobile
+
+[1]: /mobile/
 [2]: https://apps.apple.com/app/datadog/id1391380318
 [3]: https://play.google.com/store/apps/details?id=com.datadog.app
 [4]: /dashboards/widgets/#full-screen
