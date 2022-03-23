@@ -42,12 +42,12 @@ This guide walks you through the following steps so that you can start detecting
 5. Select or create the Datadog API Key used to send data from your AWS account to Datadog.
 6. Click **Launch CloudFormation Template**. This opens the AWS Console and loads the CloudFormation stack with the parameters filled in based on your selections in the prior Datadog form. 
 
-    **Note:** The DatadogAppKey parameter enables the CloudFormation stack to make API calls to Datadog to add and edit the Datadog configuration for this AWS account. The key is automatically generated and tied to your Datadog account. 
+    **Note:** The `DatadogAppKey` parameter enables the CloudFormation stack to make API calls to Datadog to add and edit the Datadog configuration for this AWS account. The key is automatically generated and tied to your Datadog account. 
 
 7. Check the required boxes from AWS and click **Create stack**.
-8. After the Stack is created, go back to the AWS integration tile in Datadog and find the box for the new account you created. Click **Refresh to Check Status** to see a success message at the top of the page, along with the new account visible on the page with the relevant details.
+8. After the CloudFormation stack is created, go back to the AWS integration tile in Datadog and find the box for the new account you created. Click **Refresh to Check Status** to see a success message at the top of the page, along with the new account visible on the page with the relevant details.
 
-See [Getting Started with AWS][3] for more information about Datadog’s AWS integration and CloudFormation template. See [AWS manual setup instructions][4], if you need to set up the AWS integration manually.
+See [Getting Started with AWS][3] for more information about Datadog’s AWS integration and CloudFormation template. See [AWS manual setup instructions][4] if you need to set up the AWS integration manually.
 
 ## Enable AWS CloudTrail logging 
 
@@ -57,7 +57,7 @@ Enable AWS CloudTrail logging so that logs are sent to a S3 bucket. If you alrea
 2. Enter in the name for your trail.
 3. Create a new S3 bucket or use an existing S3 bucket to store the CloudTrail logs. 
 4. Create a new AWS KMS key or use an existing AWS KMS key. Click **Next**.
-5. Leave the event type with the default Management read and write events, or choose additional event types you want to send to Datadog. Click **Next**.
+5. Leave the event type with the default management read and write events, or choose additional event types you want to send to Datadog. Click **Next**.
 6. Review and click **Create trail**.
 
 ## Send AWS CloudTrail logs to Datadog

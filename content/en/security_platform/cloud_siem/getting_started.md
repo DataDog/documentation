@@ -27,7 +27,7 @@ To get started with Datadog Cloud SIEM (Security Information and Event Managemen
 - [Explore Security Signals](#explore-security-signals)
 - [Further reading](#further-reading)
 
-For step-by-step instructions to start detecting threats in your AWS Cloudtrail logs, see [AWS Configuration Guide for Cloud SIEM][1].
+For step-by-step instructions on how to start detecting threats in your AWS CloudTrail logs, see the [AWS Configuration Guide for Cloud SIEM][1].
 
 ## Ingest logs
 
