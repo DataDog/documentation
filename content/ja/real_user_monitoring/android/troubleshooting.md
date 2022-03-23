@@ -57,11 +57,11 @@ GlobalRum.registerIfAbsent(monitor)
 
 ## デバイスがオフラインの時のデータ送信
 
-RUM では、ユーザーのデバイスがオフラインのときにもデータを確実に利用できます。ネットワークの状態が悪いエリアやデバイスのバッテリーが非常に少ないなどの場合でも、すべての RUM イベントは最初にローカルデバイスにバッチで格納されます。各バッチはインテークの仕様に従います。ネットワークが利用可能で、Datadog SDK がエンドユーザーのエクスペリエンスに影響を与えないようにバッテリーの残量が十分にあれば、バッチはすぐに送信されます。アプリケーションがフォアグラウンドにあるときにネットワークが利用できない場合、またはデータのアップロードが失敗した場合、バッチは正常に送信されるまで保持されます。
+RUM では、ユーザーのデバイスがオフラインのときにもデータを確実に利用できます。ネットワークの状態が悪いエリアやデバイスのバッテリーが非常に少ないなどの場合でも、すべての RUM イベントは最初にローカルデバイスにバッチで格納されます。
 
-つまり、ユーザーがオフラインでアプリケーションを開いても、データが失われることはありません。
+各バッチはインテークの仕様に従います。ネットワークが利用可能で、Datadog SDK がエンドユーザーのエクスペリエンスに影響を与えないようにバッテリーの残量が十分にあれば、バッチはすぐに送信されます。アプリケーションがフォアグラウンドにあるときにネットワークが利用できない場合、またはデータのアップロードが失敗した場合、バッチは正常に送信されるまで保持されます。
 
-**注**: ディスク上のデータは、古すぎる場合は SDK がディスク容量を使いすぎないようにするために自動的に破棄されます。
+つまり、ユーザーがオフラインでアプリケーションを開いても、データが失われることはありません。SDK がディスク容量を使いすぎないようにするため、ディスク上のデータは、古すぎる場合自動的に破棄されます。
 
 ## 1.0.0 への移行
 
@@ -83,12 +83,12 @@ logger = new LoggerBuilder()
 ```java
 Datadog.initialize(context, "my-api-key");
 
-// …
+// ...
 
 logger = new Logger.Builder()
         .setNetworkInfoEnabled(true)
-        .setServiceName("android-sample-java") // Sets the service name
-        .setLoggerName("my_logger") // Sets the logger name (within the service)
+        .setServiceName("android-sample-java") // サービス名を設定
+        .setLoggerName("my_logger") // ロガー名を設定 (サービス内)
         .setLogcatLogsEnabled(true)
         .build();
 ```
@@ -102,6 +102,7 @@ logger = new Logger.Builder()
 
 
 ## その他の参考資料
+
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]:/ja/real_user_monitoring/android/
+[1]: https://docs.datadoghq.com/ja/real_user_monitoring/android/
