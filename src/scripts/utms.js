@@ -18,8 +18,6 @@ function utmHandler() {
             UTMCookies.set(`dd-${param.replace('_', '-')}`, value);
         }
     });
-
-    document.body.classList.add('dd-utm-cookies-set');
 }
 // TODO: deprecate irrelevant func for Docs?
 // function langToggleQueryStringHandler() {
