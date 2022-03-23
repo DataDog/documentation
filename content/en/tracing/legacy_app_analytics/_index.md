@@ -19,7 +19,7 @@ To move away from the legacy App Analytics setup, remove every [configuration op
 
 ## App Analytics setup
 
-App Analytics is used to filter Indexed Spans by user-defined tags such as `customer_id`, `error_type`, or `app_name` to help troubleshoot and filter your requests. To enable it, either:
+To enable App Analytics, either:
 
 * Configure your APM tracer to emit the relevant analytics from your services—this can be done either [automatically](#automatic-configuration) or [manually](#custom-instrumentation).
 
