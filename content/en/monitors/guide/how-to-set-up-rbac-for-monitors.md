@@ -21,7 +21,7 @@ Safely manage your monitors by **restricting edit permissions of each individual
 
 ## Set up roles
 
-For more information about default and custom roles, how to create them, assign permissions to them, and assign them to users, see [RBAC documentation][1].
+For more information about default and custom roles, how to create custom roles, assign permissions to roles, and assign roles to users, see [Role Based Access Control][1].
 
 ## Restrict access to monitors
 
