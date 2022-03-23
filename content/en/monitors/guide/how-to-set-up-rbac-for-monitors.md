@@ -17,7 +17,7 @@ further_reading:
 
 Monitors alert your teams to potential issues with your systems. Making sure only authorized users can edit your monitors prevents accidental changes in your monitors' configurations.
 
-Safely manage your monitors by **restricting edit permissions of each individual monitor to some specific roles** of your account.
+Safely manage your monitors by restricting edit permissions for each individual monitor to specific roles.
 
 ## Set up roles
 
