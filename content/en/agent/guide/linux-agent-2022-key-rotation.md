@@ -105,7 +105,7 @@ A host correctly trusts the new key either one of these conditions is true:
 - The file `/usr/share/keyrings/datadog-archive-keyring.gpg` exists and the Datadog source list file (usually `/etc/apt/sources.list.d/datadog.list`) contains the option `[signed-by=/usr/share/keyrings/datadog-archive-keyring.gpg]`.
 - The Datadog source list file doesn't contain the `signed-by` option, but `datadog-signing-keys` version 1.1.0 or later is installed, which results in presence of `/etc/apt/trusted.gpg.d/datadog-archive-keyring.gpg` file.
 
-Files `/usr/share/keyrings/datadog-archive-keyring.gpg` and, optionally, `/etc/apt/trusted.gpg.d/datadog-archive-keyring.gpg` are created either by an [installation method](#install-methods-that-automatically-trust-the-new-gpg-key) or by installing the [`datadog-signing-keys` package](#the-datadog-signing-keys-package). Please ensure that `datadog-signing-keys` [version 1.1.0](#datadog-signing-keys-version-110) or later is installed unless using a supported [installation method](#install-methods-that-automatically-trust-the-new-gpg-key).
+Files `/usr/share/keyrings/datadog-archive-keyring.gpg` and, optionally, `/etc/apt/trusted.gpg.d/datadog-archive-keyring.gpg` are created either by an [installation method](#install-methods-that-automatically-trust-the-new-gpg-key) or by installing the [`datadog-signing-keys` package](#the-datadog-signing-keys-package). Please ensure that `datadog-signing-keys` [version 1.1.0](#datadog-signing-keys-version-110) or later is installed unless using one of the [installation method versions listed above](#install-methods-that-automatically-trust-the-new-gpg-key).
 
 {{% /tab %}}
 {{% tab "RedHat/CentOS/SUSE" %}}
