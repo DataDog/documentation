@@ -53,13 +53,13 @@ To create a dashboard, click **+New Dashboard** on the [Dashboard List][1] page 
 {{< img src="dashboards/create-dashboard.png" alt="Adding a new dashboard" style="width:70%;">}}
 
 ### Dashboards
-[Dashboards][4] are on a next-gen grid based layout which can include a variety of objects such as images, graphs, and logs. They are commonly used as status boards or storytelling view, which update in real-time and can represent fixed points in the past. They also work well for debugging.
+Dashboards are on a grid based layout, which can include a variety of objects such as images, graphs, and logs. They are commonly used as status boards or storytelling view, which update in real-time and can represent fixed points in the past. They also work well for debugging.
 
 ### Timeboards
-[Timeboards][5] have automatic layouts, and represent a single point in time—either fixed or real-time—across the entire dashboard. They are commonly used for troubleshooting, correlation, and general data exploration.
+Timeboards have automatic layouts, and represent a single point in time—either fixed or real-time—across the entire dashboard. They are commonly used for troubleshooting, correlation, and general data exploration.
 
 ### Screenboards
-[Screenboards][6] are dashboards with free-form layouts which can include a variety of objects such as images, graphs, and logs. They are commonly used as status boards or storytelling views that update in real-time or represent fixed points in the past.
+Screenboards are dashboards with free-form layouts which can include a variety of objects such as images, graphs, and logs. They are commonly used as status boards or storytelling views that update in real-time or represent fixed points in the past.
 
 ## Configuring dashboards
 
@@ -71,17 +71,17 @@ Click on any dashboard graph to open an options menu:
 |------------------------|---------------------------------------------------------------|
 | Send snapshot          | Create and send a snapshot of your graph.                     |
 | Find correlated metrics| Find correlations from APM services, integrations, and dashboards. |
-| View in full screen    | View the graph in [full screen mode][7].                     |
+| View in full screen    | View the graph in [full screen mode][4].                     |
 | Lock cursor            | Lock the cursor in place on the page.                         |
-| View related processes | Jump to the [Live Processes][8] page scoped to your graph.   |
-| View related hosts     | Jump to the [Host Map][9] page scoped to your graph.         |
-| View related logs      | Jump to the [Log Explorer][10] page scoped to your graph.     |
-| View related traces    | Populate a [Traces][11] panel scoped to your graph.           |
-| View related profiles  | Jump to the [Profiling][12] page scoped to your graph.        |
+| View related processes | Jump to the [Live Processes][5] page scoped to your graph.   |
+| View related hosts     | Jump to the [Host Map][6] page scoped to your graph.         |
+| View related logs      | Jump to the [Log Explorer][7] page scoped to your graph.     |
+| View related traces    | Populate a [Traces][8] panel scoped to your graph.           |
+| View related profiles  | Jump to the [Profiling][9] page scoped to your graph.        |
 ### Global time selector
 To use the global time selector, at least one time-based widget must be set to use `Global Time`. Make the selection in the widget editor under **Set display preferences**, or add a widget (global time is the default time setting).
 
-The global time selector sets the same time frame for all widgets using the `Global Time` option on the same dashboard. Select a moving window in the past (`Past 1 Hour`, `Past 1 Day`, etc.) or a fixed period with the `Select from calendar…` option or [enter a custom time frame][13]. If a moving window is chosen, the widgets are updated to move along with the time window.
+The global time selector sets the same time frame for all widgets using the `Global Time` option on the same dashboard. Select a moving window in the past (`Past 1 Hour`, `Past 1 Day`, etc.) or a fixed period with the `Select from calendar…` option or [enter a custom time frame][10]. If a moving window is chosen, the widgets are updated to move along with the time window.
 
 Widgets not linked to global time show the data for their local time frame as applied to the global window. For example, if the global time selector is set to January 1, 2019 through January 2, 2019, a widget set with the local time frame for `Past 1 Minute` shows the last minute of January 2, 2019 from 11:59 pm.
 
@@ -93,7 +93,7 @@ Dashboards are useful for displaying key performance metrics on large screens or
 
 #### Generate public URL
 
-Share a dashboard with external users by generating a public URL. For more details, see [Sharing dashboards][14].
+Share a dashboard with external users by generating a public URL. For more details, see [Sharing dashboards][11].
 
 #### Display UTC time
 
@@ -101,7 +101,7 @@ Toggle between UTC time and your default time zone.
 
 #### Notifications
 
-If notifications are activated for a dashboard, an event is created in the [event stream][15]. This event provides information on text changes, widget changes, dashboard cloning, and dashboard deletion along with the name of the user performing the action.
+If notifications are activated for a dashboard, an event is created in the [event stream][12]. This event provides information on text changes, widget changes, dashboard cloning, and dashboard deletion along with the name of the user performing the action.
 
 Additionally, individual users who activate the notification receive an email alert. Any user in the organization, regardless of administrative privileges, can sign up to receive change notifications for a dashboard.
 
@@ -123,11 +123,11 @@ Use the pop up to restrict access to you, everyone in your organization with you
 
 {{< img src="dashboards/dashboard-role-restrictions.png" alt="Role restrictions in settings" style="width:70%;">}}
 
-Creators are always able to edit the dashboard, but other users who are allowed to edit the dashboard can add or remove any role from the access control list (ACL) as long as the final ACL includes one of their roles. For more information about roles, see the [RBAC documentation][16].
+Creators are always able to edit the dashboard, but other users who are allowed to edit the dashboard can add or remove any role from the access control list (ACL) as long as the final ACL includes one of their roles. For more information about roles, see the [RBAC documentation][13].
 
 If the dashboard was created with the deprecated "read only" setting, the access control list pre-populates with a list of roles that have the Access Management (`user_access_manage`) permission.
 
-If you manage your Dashboards with Terraform, you can use the latest version of the Datadog Terraform provider to control which roles can edit your Dashboards. For more information, see the [Terraform Dashboard role restriction guide][17].
+If you manage your Dashboards with Terraform, you can use the latest version of the Datadog Terraform provider to control which roles can edit your Dashboards. For more information, see the [Terraform Dashboard role restriction guide][14].
 
 #### High-density mode
 
@@ -162,7 +162,7 @@ From an individual dashboard, Datadog offers suggestions for viewing related das
 
 ## Dashboard list
 
-Search, view, or create dashboards and lists on the [Dashboard List][18] page. By default, this is the landing page after you login to Datadog. To change the default landing page for your organization, contact [Datadog support][19].
+Search, view, or create dashboards and lists on the [Dashboard List][15] page. By default, this is the landing page after you login to Datadog. To change the default landing page for your organization, contact [Datadog support][16].
 
 {{< img src="dashboards/dashboard_list.png" alt="Dashboard List page"  >}}
 
@@ -231,9 +231,9 @@ An organization's most popular dashboard displays five popularity bars. All othe
 
 The [Datadog Mobile App][1], available on the [Apple App Store][2] and [Google Play Store][3], enables you to view your dashboards in a mobile-friendly format.
 
-On the Dashboards page, you can view and search all of your dashboards, and filter them using the same template variables you have set up in the Datadog web app. Quickly filter your dashboards using template variable saved views. For more information about template variable saved views, see [Dashboard Saved Views][20]. Click on an individual dashboard to view it.
+On the Dashboards page, you can view and search all of your dashboards, and filter them using the same template variables you have set up in the Datadog web app. Quickly filter your dashboards using template variable saved views. For more information about template variable saved views, see [Dashboard Saved Views][17]. Click on an individual dashboard to view it.
 
-**Note**: To set up or edit a dashboard, you must log in to the Datadog browser UI. For more information, see [Dashboards][4].
+**Note**: To set up or edit a dashboard, you must log in to the Datadog browser UI.
 
 {{< img src="dashboards/dashboards-list-mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Dashboards on iOS and Android">}}
 
@@ -251,20 +251,17 @@ You can add SLOs, Monitors, and Open Incidents widgets to your mobile home scree
 [1]: /mobile
 [2]: https://apps.apple.com/app/datadog/id1391380318
 [3]: https://play.google.com/store/apps/details?id=com.datadog.app
-[4]: /dashboards/dashboards
-[5]: /dashboards/timeboards
-[6]: /dashboards/screenboards
-[7]: /dashboards/widgets/#full-screen
-[8]: https://app.datadoghq.com/process
-[9]: https://app.datadoghq.com/infrastructure/map
-[10]: https://app.datadoghq.com/logs
-[11]: /tracing/
-[12]: /tracing/profiler/
-[13]: /dashboards/guide/custom_time_frames/
-[14]: /dashboards/sharing/#dashboards
-[15]: /events/
-[16]: /account_management/rbac/
-[17]: /dashboards/guide/how-to-use-terraform-to-restrict-dashboard-edit/
-[18]: https://app.datadoghq.com/dashboard/lists
-[19]: /help/
-[20]: /dashboards/template_variables/#saved-views
+[4]: /dashboards/widgets/#full-screen
+[5]: https://app.datadoghq.com/process
+[6]: https://app.datadoghq.com/infrastructure/map
+[7]: https://app.datadoghq.com/logs
+[8]: /tracing/
+[9]: /tracing/profiler/
+[10]: /dashboards/guide/custom_time_frames/
+[11]: /dashboards/sharing/#dashboards
+[12]: /events/
+[13]: /account_management/rbac/
+[14]: /dashboards/guide/how-to-use-terraform-to-restrict-dashboard-edit/
+[15]: https://app.datadoghq.com/dashboard/lists
+[16]: /help/
+[17]: /dashboards/template_variables/#saved-views
