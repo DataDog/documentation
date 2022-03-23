@@ -68,8 +68,8 @@ Requires tracing library version 0.49.0 or greater.
 Code Hotspots identification for Go is disabled by default. To enable it, [turn on profiling for your service][1] and ensure that:
 
 - You are using [dd-trace-go][2] version 1.35.0 or later.
-- [`DD_PROFILING_CODE_HOTSPOTS_COLLECTION_ENABLED=true`][3] is set in your environment, or the [`tracer.WithProfilerCodeHotspots(true)`][3] option is passed to [`tracer.Start()`][4].
-- [`profiler.CPUDuration(60*time.Second)`][5] and [`profiler.WithPeriod(60*time.Second)`][6] are passed to [`profiler.Start()`][7] to capture hotspot information for 100% of all spans.
+- [`DD_PROFILING_CODE_HOTSPOTS_COLLECTION_ENABLED=true`][3] is set in your environment, or the [`tracer.WithProfilerCodeHotspots(true)`][3] option is passed to [`tracer.Start()`][4]. This option is enabled by default in [dd-trace-go][2] versions 1.37.0+.
+- [`profiler.CPUDuration(60*time.Second)`][5] and [`profiler.WithPeriod(60*time.Second)`][6] are passed to [`profiler.Start()`][7] to capture hotspot information for 100% of all spans. These values are set by default in [dd-trace-go][2] versions 1.37.0+.
 
 
 **Warning:** Go 1.17 and below has several bugs (see [GH-35057][8], [GH-48577][9], [CL-369741][10], [CL-369983][11]) that can reduce the accuracy of this feature, especially when using a lot of CGO. They are scheduled to be fixed in the 1.18 release.
@@ -143,7 +143,7 @@ Endpoint profiling is enabled by default when you turn on profiling for your [Py
 Endpoint profiling is disabled by default when you turn on profiling for your [Go][1] service. To enable it, you need to ensure that:
 
 - You are using [dd-trace-go][2] version 1.35.0 or later.
-- [`DD_PROFILING_ENDPOINT_COLLECTION_ENABLED=true`][3] is set in your environment, or the [`tracer.WithProfilerEndpoints(true)`][3] option is passed to [`tracer.Start()`][4].
+- [`DD_PROFILING_ENDPOINT_COLLECTION_ENABLED=true`][3] is set in your environment, or the [`tracer.WithProfilerEndpoints(true)`][3] option is passed to [`tracer.Start()`][4]. This option is enabled by default in [dd-trace-go][2] versions 1.37.0+.
 
 **Warning:** Go 1.17 and below has several bugs (see [GH-35057][5], [GH-48577][6], [CL-369741][7], [CL-369983][8]) that can reduce the accuracy of this feature, especially when using a lot of CGO. They are scheduled to be fixed in the 1.18 release.
 
@@ -172,7 +172,7 @@ Endpoint profiling allows you to scope your flame graphs by any endpoint of your
 With endpoint profiling you can:
 
 - Identify the bottleneck methods that are slowing down your endpoint’s overall response time.
-- Isolate the top endpoints responsible for the consumption of valuable resources such as CPU, memory, and I/O. This is particularly helpful when you are generally trying to optimize your service for performance gains.
+- Isolate the top endpoints responsible for the consumption of valuable resources such as CPU and wall time. This is particularly helpful when you are generally trying to optimize your service for performance gains.
 - Understand if third party code or runtime libraries are the reason for your endpoints being slow or resource-consumption heavy.
 
 {{< img src="tracing/profiling/endpoint_agg_gif.mp4" alt="Troubleshooting a slow endpoint by using endpoint aggregation" video=true >}}
@@ -180,7 +180,7 @@ With endpoint profiling you can:
 
 ### Track the endpoints that consume the most resources
 
-It is valuable to track top endpoints that are consuming valuable resources such as CPU, memory, and I/O. The list can help you identify if your endpoints have regressed or if you have newly introduced endpoints that are consuming drastically more resources, slowing down your overall service. 
+It is valuable to track top endpoints that are consuming valuable resources such as CPU and wall time. The list can help you identify if your endpoints have regressed or if you have newly introduced endpoints that are consuming drastically more resources, slowing down your overall service. 
 
 {{< img src="tracing/profiling/endpoint_metric.mp4" alt="Graphing top endpoints in terms of resource consumption" video=true >}}
 

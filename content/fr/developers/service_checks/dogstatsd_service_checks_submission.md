@@ -9,7 +9,7 @@ further_reading:
   - link: /developers/community/libraries/
     tag: Documentation
     text: Bibliothèques client de Datadog et sa communauté pour DogStatsD et les API
-  - link: https://github.com/DataDog/datadog-agent/tree/master/pkg/dogstatsd
+  - link: https://github.com/DataDog/datadog-agent/tree/main/pkg/dogstatsd
     tag: GitHub
     text: Code source de DogStatsD
 ---
@@ -35,7 +35,7 @@ Paramètres de la fonction check de service :
 
 ### Exemples de code
 
-Exécutez le code suivant pour envoyer un check de service à Datadog via DogStatsD. N'oubliez pas de `flush` ou `close` le client une fois sa mission accomplie.
+Exécutez le code suivant pour envoyer un check de service à Datadog via DogStatsD. N'oubliez pas de `flush`/`close` le client une fois sa mission accomplie.
 
 {{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php" >}}
 

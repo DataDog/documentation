@@ -1,7 +1,15 @@
 {
+  "audit": {
+    "name": "監査",
+    "description": "HTTP 経由で監査ログイベントを検索します。"
+  },
+  "authn-mappings": {
+    "name": "AuthN Mappings",
+    "description": "[AuthN Mappings API] (https://docs.datadoghq.com/account_management/authn_mapping/?tab=example)\nは、ID プロバイダーから送信される属性を使用して、Datadogでユーザーグループをロールに自動的にマッピングするために使用されます。"
+  },
   "cloud-workload-security": {
     "name": "クラウドワークロードセキュリティ",
-    "description": "ワークロードで生成されたファイルおよびプロセスアクティビティに基づいてセキュリティシグナルが生成されます。"
+    "description": "Datadog セキュリティエージェントを使用してイベントを生成するためのワークロードアクティビティセキュリティルール。"
   },
   "dashboard-lists": {
     "name": "ダッシュボードリスト",
@@ -29,7 +37,7 @@
   },
   "logs-archives": {
     "name": "ログアーカイブ",
-    "description": "アーカイブは、取り込んだすべてのログをクラウドストレージシステムに転送します。\n\nUI で現在構成されているアーカイブのリストについては、[アーカイブページ](https://app.datadoghq.com/logs/pipelines/archives)を参照してください。"
+    "description": "アーカイブは、取り込んだすべてのログをクラウドストレージシステムに転送します。\n\nウェブ UI で現在構成されているアーカイブのリストについては、[アーカイブページ](https://app.datadoghq.com/logs/pipelines/archives)を参照してください。"
   },
   "logs-metrics": {
     "name": "ログメトリクス",
@@ -46,6 +54,10 @@
   "processes": {
     "name": "プロセス",
     "description": "処理 API により、オーガニゼーションのプロセスデータのクエリを作成できます。"
+  },
+  "rum": {
+    "name": "RUM",
+    "description": "HTTP 経由で RUM イベントを検索します。"
   },
   "roles": {
     "name": "ロール",

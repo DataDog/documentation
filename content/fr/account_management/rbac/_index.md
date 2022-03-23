@@ -139,7 +139,7 @@ Pour découvrir un exemple de suppression de rôle avec l'API, consultez la [doc
 
 ## Restreindre l'accès aux dashboards et monitors
 
-Une fois vos rôles RBAC configurés, vous pouvez restreindre l'accès aux dashboards et monitors eà certains rôles utilisateur. Pour en savoir plus, consultez la documentation relative aux [autorisations des dashboards][8] et aux [autorisations des monitors][9].
+Une fois vos rôles RBAC configurés, vous pouvez restreindre l'accès aux dashboards, monitors et tests Synthetic à certains rôles utilisateur. Pour en savoir plus, consultez la documentation relative aux [autorisations des dashboards][8], aux [autorisations des monitors][9] et aux [autorisations Synthetics][10].
 
 ## Pour aller plus loin
 
@@ -154,3 +154,4 @@ Une fois vos rôles RBAC configurés, vous pouvez restreindre l'accès aux dashb
 [7]: /fr/account_management/rbac/permissions/
 [8]: /fr/dashboards/#restrict-access
 [9]: /fr/getting_started/monitors/#restrict-access
+[10]: /fr/synthetics/browser_tests/#permissions

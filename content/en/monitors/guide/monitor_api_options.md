@@ -5,9 +5,9 @@ kind: guide
 
 ## Common options
 
-- **`silenced`** dictionary of scopes to timestamps or `None`. Each scope is muted until the given POSIX timestamp or forever if the value is `None`. Default: **None**. Examples:
+- **`silenced`** dictionary of scopes to timestamps or `null`. Each scope is muted until the given POSIX timestamp or forever if the value is `null`. Default: **null**. Examples:
 
-  - To mute the alert completely: `{'*': None}`
+  - To mute the alert completely: `{'*': null}`
   - To mute `role:db` for a short time: `{'role:db': 1412798116}`
 
 - **`new_group_delay`** Time (in seconds) before starting alerting on new groups, to allow newly created applications or containers to fully start. Should be a non negative integer. Default: **60**. Example: If you are using a containerized architecture, setting an evaluation delay prevents your monitor's group-by containers from triggering when a new container is created, which may cause some latency or a spike in CPU usage in the first minutes.
@@ -16,12 +16,12 @@ kind: guide
 
 - **`notify_no_data`** a Boolean indicating whether this monitor notifies when data stops reporting. Default: **False**.
 - **`no_data_timeframe`** The number of minutes before a monitor notifies after data stops reporting. Datadog recommends at least 2x the monitor timeframe for metric alerts or 2 minutes for service checks.  **If omitted, 2x the evaluation timeframe is used for metric alerts, and 24 hours is used for service checks.**
-- **`timeout_h`** the number of hours of the monitor not reporting data before it automatically resolves from a triggered state. Default: **None**.
+- **`timeout_h`** the number of hours of the monitor not reporting data before it automatically resolves from a triggered state. Default: **null**.
 -  **`require_full_window`** a Boolean indicating whether this monitor needs a full window of data before it's evaluated. Datadog recommends you set this to `False` for sparse metrics, otherwise some evaluations are skipped. Default: **False**.
-- **`renotify_interval`** the number of minutes after the last notification before a monitor re-notifies on the current status. It only re-notifies if it's not resolved. Default: **None**.
-- **`renotify_statuses`** the states from which a monitor re-notifies. It can only be set if `renotify_interval` is set. Default: **None**. Without `renotify_states` set, it renotifies from `Alert` and `No Data` states.
-- **`renotify_occurrences`** the number of times a monitor re-notifies. It can only be set if `renotify_interval` is set. Default: **None**, it renotifies without a limit.
-- **`escalation_message`** a message to include with a re-notification. Supports the '@username' notification that is allowed elsewhere. Not applicable if `renotify_interval` is `None`. Default: **None**.
+- **`renotify_interval`** the number of minutes after the last notification before a monitor re-notifies on the current status. It only re-notifies if it's not resolved. Default: **null**.
+- **`renotify_statuses`** the states from which a monitor re-notifies. It can only be set if `renotify_interval` is set. Default: **null**. Without `renotify_states` set, it renotifies from `Alert` and `No Data` states.
+- **`renotify_occurrences`** the number of times a monitor re-notifies. It can only be set if `renotify_interval` is set. Default: **null**, it renotifies without a limit.
+- **`escalation_message`** a message to include with a re-notification. Supports the '@username' notification that is allowed elsewhere. Not applicable if `renotify_interval` is `null`. Default: **null**.
 - **`notify_audit`** a Boolean indicating whether tagged users is notified on changes to this monitor. Default: **False**
 - **`locked`** a Boolean indicating whether changes to to this monitor should be restricted to the creator or admins. Default: **False**
 - **`include_tags`** a Boolean indicating whether notifications from this monitor automatically inserts its triggering tags into the title. Default: **True**. Examples:

@@ -96,6 +96,27 @@ Due to security reasons, Datadog does not transfer API/application keys from one
 
 Alternatively, organizations have asked whether they can create a “service account” with which to own API/application keys. There are many cases where it makes sense to use a “service account” to own API keys. That being said, it is important that this is more than just a shared account that everyone has access to. If you plan on using a “service account”, it is important to secure storage of the service account credentials (such as using a password manager) as well as the principle of least privilege. To prevent the accidental leakage of service account credentials, there should only be a small number of people who have access—ideally, only those who truly need to be able to maintain the account.
 
+## What to do if an API or Application key was exposed
+
+If a private key has been compromised or publicly exposed, steps should be taken as quickly as possible to ensure the security of your account. Removing the file containing the key from a public site such as GitHub **does not** guarantee it was not already accessed by another party.
+
+Follow these steps to help safeguard your account:
+
+**Note:** Revoking an active key may cause an impact to your services. If the scope of usage is large or undetermined, consider steps 2-5 **before** revoking the affected key.
+
+1. Revoke the affected key.
+2. Remove code containing the private key from any publicly accessible files:
+    - Publish the sanitized file to your public repository.
+    - Remove the sensitive data from your commit history.
+3. Create a new key.
+4. Update affected services with the new key.
+5. Review your account for any unapproved access:
+    - Users that have been recently added
+    - New resources
+    - Roles or permission changes
+
+If any unusual activity is identified, or you need additional help securing your account, contact [Datadog support][10].
+
 ## Troubleshooting
 
 Need help? Contact [Datadog support][10].

@@ -40,7 +40,7 @@
 
 ## Présentation
 
-Sleuth est un outil de suivi de déploiement qui vous permet de surveiller les déploiements logiciels sur l'ensemble de votre cycle DevOps. Grâce à l'intégration Datadog, Sleuth vous fournit des données pertinentes, utiles et actionnables en temps réel qui vous permettent, à vous et à votre équipe, de voir clairement l'impact des modifications que vous apportez à votre code.
+Sleuth est un outil de suivi de déploiement qui vous permet de surveiller les déploiements logiciels sur l'ensemble de votre cycle DevOps. Grâce à l'intégration Datadog, Sleuth vous fournit des données pertinentes, utiles et exploitables en temps réel qui vous permettent, à votre équipe et vous-même, de voir clairement l'impact des modifications que vous apportez à votre code.
 
 ## Configuration
 
@@ -50,14 +50,14 @@ Pour ajouter l'intégration Datadag :
 2. Cliquez sur **Integrations** dans la barre latérale.
 3. Cliquez sur l'onglet _Metric Trackers_, puis sur **enable** dans la carte Datadog.
 4. Entrez votre clé d'API et votre clé d'application Datadog dans les champs correspondants.
-5. Si vos serveurs Datadog se trouvent dans l'Union européenne, cochez la case _My Datadog servers are in the EU_. Ne la cochez pas si vous ne savez pas.
-6. Sélectionnez **Save**. 
+5. Si vos serveurs Datadog se trouvent dans l'Union européenne, cochez la case _My Datadog servers are in the EU_. Ne la cochez pas si vous ne le savez pas.
+6. Sélectionnez **Save**.
 
 > Votre clé d'API et votre clé d'application Datadog se trouvent dans **Integrations** &gt; **API**. Sinon, vous pouvez cliquer sur le lien **generate** dans la boîte de dialogue de Sleuth (visible ci-dessous) pour accéder à l'espace des clés d'API/d'application dans votre console Datadog. 
 
 ![][2]
 
-> Une fois l'intégration Datadog ajoutée, vous verrez le message **Datadog is connected** s'afficher. 
+> Une fois l'intégration Datadog installée, le message **Datadog is connected** s'affiche.
 
 ![][3]
 
@@ -67,13 +67,13 @@ L'installation de l'intégration Datadog/Sleuth se fait entièrement à partir d
 
 ### Configuration
 
-* Cliquez sur le menu déroulant **Add metric** et sélectionnez un projet Sleuth qui traitera les métriques d'application Datadog entrantes. Tous les projets de votre organisation Sleuth sont affichés dans le menu déroulant.
+- Cliquez sur le menu déroulant **Add metric** et sélectionnez le projet Sleuth qui traitera les métriques Datadog entrantes. Tous les projets de votre organisation Sleuth sont affichés dans le menu déroulant.
 
 ![][4]
 
 > Les intégrations sont effectuées au niveau de l'organisation Sleuth, et sont disponibles pour tous les projets au sein de cette organisation. Les paramètres spécifiques à une intégration sont appliqués au niveau du projet.
 
-Sleuth va maintenant commencer à afficher les métriques Datadog dans vos déploiements. Consultez la page [**Dashboard**][5] pour en savoir plus sur la façon dont les métriques sont communiquées dans les cartes de déploiement de Sleuth.
+Une fois la configuration terminée, Sleuth affiche les métriques Datadog dans vos déploiements. Consultez la page [**Dashboard**][5] pour en savoir plus sur la façon dont les métriques sont communiquées dans les cartes de déploiement de Sleuth.
 
 
 ## Données collectées
@@ -95,7 +95,10 @@ L'intégration Sleuth n'inclut aucun événement.
 1. Dans votre Dashboard Sleuth, cliquez sur **Integrations** dans la barre latérale de gauche, puis sur **Metric Trackers**. 
 2. Dans la carte d'intégration Datadog, cliquez sur **disable**.
 
-L'intégration Datadog est déconnectée et n'est plus disponible pour les projets de cette organisation. Les modifications apportées à l'intégration Datadog au niveau d'un projet seront perdues.
+L'intégration Datadog est déconnectée et n'est plus disponible pour les projets de cette organisation. Les modifications apportées à l'intégration Datadog au niveau d'un projet sont perdues.
+
+
+
 [1]: https://app.sleuth.io/accounts/login/
 [2]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/sleuth/images/datadog-integration-api-key.png
 [3]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/sleuth/images/datadog-integration.png

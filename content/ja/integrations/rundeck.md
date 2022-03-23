@@ -61,7 +61,7 @@ Datadog アラートを使ってトリガーしたい Rundeck ジョブを最低
 
 1. Rundeck プロジェクト内でナビゲーションの **Webhooks** オプションをクリックします。
 2. **Add** をクリックします。
-3. Webhook に名前を設定します。(例: *Datadog-Restart Service*)
+3. Webhook に名前を設定します。(例: `Datadog-Restart Service`)
 4. **Choose Webhook Plugin** ボタンをクリックして **Run Job** を選択します。
 5. Webhook がトリガーされたら実行したいジョブを選択します。
 6. [オプション] **Options** の行に次のテキストを入力します:
@@ -91,7 +91,6 @@ Datadog アラートを使ってトリガーしたい Rundeck ジョブを最低
 `@webhook-Rundeck_Restart_Service` の受信者を追加して、このインテグレーションを Datadog 内の任意の通知に追加します。ここでの名前は、ステップ 4a で設定した Webhook 名によって異なります。モニターからアラートがトリガーされると、Webhook が関連するジョブを実行します。
 
 場合に応じて、Advanced Run Job などのその他プラグインも利用可能です。
-
 
 ## 収集データ
 

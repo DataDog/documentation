@@ -8,9 +8,9 @@ further_reading:
   - link: /real_user_monitoring/explorer/
     tag: Documentation
     text: Explorer vos vues dans Datadog
-  - link: /real_user_monitoring/explorer/analytics/
+  - link: /real_user_monitoring/explorer/visualize/
     tag: Documentation
-    text: Générer des analyses à partir de vos événements
+    text: Appliquer des visualisations sur vos événements
   - link: /real_user_monitoring/dashboards/
     tag: Documentation
     text: Dashboards RUM

@@ -38,12 +38,12 @@ Launch the Docker Agent next to your other containers by replacing `<DATADOG_API
 
 ```shell
 docker run -d --cgroupns host \
-              -v /var/run/docker.sock:/var/run/docker.sock:ro \
-              -v /proc/:/host/proc/:ro \
-              -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
-              -e DD_API_KEY="<DATADOG_API_KEY>" \
-              -e DD_SITE="<YOUR_DATADOG_SITE>" \
-              gcr.io/datadoghq/agent:latest
+    -v /var/run/docker.sock:/var/run/docker.sock:ro \
+    -v /proc/:/host/proc/:ro \
+    -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
+    -e DD_API_KEY="<DATADOG_API_KEY>" \
+    -e DD_SITE="<YOUR_DATADOG_SITE>" \
+    gcr.io/datadoghq/agent:latest
 ```
 
 {{% /tab %}}
@@ -51,12 +51,11 @@ docker run -d --cgroupns host \
 
 ```shell
 docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro \
-                              -v /proc/:/host/proc/:ro \
-                              -v /cgroup/:/host/sys/fs/cgroup:ro \
-                              -e DD_API_KEY="<DATADOG_API_KEY>" \
-                              -e DD_SITE="<YOUR_DATADOG_SITE>" \
-                              gcr.io/datadoghq/agent:latest
-
+    -v /proc/:/host/proc/:ro \
+    -v /cgroup/:/host/sys/fs/cgroup:ro \
+    -e DD_API_KEY="<DATADOG_API_KEY>" \
+    -e DD_SITE="<YOUR_DATADOG_SITE>" \
+    gcr.io/datadoghq/agent:latest
 ```
 
 {{% /tab %}}
@@ -64,8 +63,8 @@ docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro \
 
 ```shell
 docker run -d -e DD_API_KEY="<DATADOG_API_KEY>" \
-              -e DD_SITE="<YOUR_DATADOG_SITE>" \
-              gcr.io/datadoghq/agent:latest
+    -e DD_SITE="<YOUR_DATADOG_SITE>" \
+    gcr.io/datadoghq/agent:latest
 ```
 
 {{% /tab %}}
@@ -91,17 +90,15 @@ LABEL "com.datadoghq.ad.instances"='["{\"openmetrics_endpoint\":\"http://%%host%
 
 ```yaml
 labels:
-    com.datadoghq.ad.check_names: '["openmetrics"]'
-    com.datadoghq.ad.init_configs: '[{}]'
-    com.datadoghq.ad.instances: |
+  com.datadoghq.ad.check_names: '["openmetrics"]'
+  com.datadoghq.ad.init_configs: '[{}]'
+  com.datadoghq.ad.instances: |
     [
       {
         "openmetrics_endpoint": "http://%%host%%:<PROMETHEUS_PORT>/<PROMETHEUS_ENDPOINT>",
         "namespace": "<NAMESPACE>",
         "metrics": [
-          {
-            "<METRIC_TO_FETCH>": "<NEW_METRIC_NAME>"
-          }
+          {"<METRIC_TO_FETCH>": "<NEW_METRIC_NAME>"}
         ]
       }
     ]
@@ -119,15 +116,18 @@ labels:
 
 With the following configuration placeholder values:
 
-| Placeholder                              | Description                                                                                                                                                                                                    |
-| ---------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `<PROMETHEUS_PORT>`                      | Port to connect to in order to access the Prometheus endpoint.                                                                                                                                                 |
-| `<PROMETHEUS_ENDPOINT>`                  | URL for the metrics served by the container, in Prometheus format.                                                                                                                                             |
-| `<NAMESPACE>` | Set namespace to be prefixed to every metric when viewed in Datadog.                                                                                                                                           |
-| `<METRIC_TO_FETCH>`                      | Prometheus metrics key to be fetched from the Prometheus endpoint.                                                                                                                                             |
-| `<NEW_METRIC_NAME>`                      | Optional parameter which, if set, transforms the `<METRIC_TO_FETCH>` metric key to `<NEW_METRIC_NAME>` in Datadog. If you choose not to use this option, pass a list of strings rather than `key:value` pairs. |
+| Placeholder             | Description                                                                                                                               |
+|-------------------------|-------------------------------------------------------------------------------------------------------------------------------------------|
+| `<PROMETHEUS_PORT>`     | Port to connect to in order to access the Prometheus endpoint. Can alternatively use the [Autodiscovery Template Variable][6] `%%port%%`. |
+| `<PROMETHEUS_ENDPOINT>` | URL path for the metrics served by the container, in Prometheus format.                                                                   |
+| `<NAMESPACE>`           | Set namespace to be prefixed to every metric when viewed in Datadog.                                                                      |
+| `<METRIC_TO_FETCH>`     | Prometheus metrics key to be fetched from the Prometheus endpoint.                                                                        |
+| `<NEW_METRIC_NAME>`     | Transforms the `<METRIC_TO_FETCH>` metric key to `<NEW_METRIC_NAME>` in Datadog.                                                          |
 
-**Note**: See the [sample openmetrics.d/conf.yaml][6] for all available configuration options.
+
+The `metrics` configuration is a list of metrics to retrieve as custom metrics. Include each metric to fetch and the desired metric name in Datadog as key value pairs, for example, `{"<METRIC_TO_FETCH>":"<NEW_METRIC_NAME>"}`. You can alternatively provide a list of metric names strings, interpreted as regular expressions, to bring the desired metrics with their current names. **Note:** Regular expressions can potentially send a lot of custom metrics.
+
+For a full list of available parameters for instances, including `namespace` and `metrics`, see the [sample configuration openmetrics.d/conf.yaml][7].
 
 ## Getting started
 
@@ -141,44 +141,59 @@ To get started with collecting metrics exposed by Prometheus running within a co
 
 ```shell
 docker run -d --cgroupns host \
-              -v /var/run/docker.sock:/var/run/docker.sock:ro \
-              -v /proc/:/host/proc/:ro \
-              -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
-              -e DD_API_KEY="<DATADOG_API_KEY>" \
-              gcr.io/datadoghq/agent:latest
+    -v /var/run/docker.sock:/var/run/docker.sock:ro \
+    -v /proc/:/host/proc/:ro \
+    -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
+    -e DD_API_KEY="<DATADOG_API_KEY>" \
+    gcr.io/datadoghq/agent:latest
 ```
     {{% /tab %}}
     {{% tab "Windows" %}}
 
 ```shell
 docker run -d -e DD_API_KEY="<DATADOG_API_KEY>" \
-              gcr.io/datadoghq/agent:latest \
-              -v \\.\pipe\docker_engine:\\.\pipe\docker_engine
+    gcr.io/datadoghq/agent:latest \
+    -v \\.\pipe\docker_engine:\\.\pipe\docker_engine
 ```
     {{% /tab %}}
     {{< /tabs >}}
 
-2. To launch Prometheus in a container, run: `docker run -p 9090:9090 prom/prometheus`. In order to notify the Agent to query this container with the OpenMetrics check, add the following configuration:
+2. Launch a Prometheus container exposing example metrics for the Agent to collect, with the Autodiscovery Labels for the OpenMetrics Check.
+
+    The following labels will have the Agent collect the metrics `promhttp_metric_handler_requests`, `promhttp_metric_handler_requests_in_flight`, and all exposed metrics starting with `go_memory`.
+
+    ```yaml
+    labels:
+      com.datadoghq.ad.check_names: '["openmetrics"]'
+      com.datadoghq.ad.init_configs: '[{}]'
+      com.datadoghq.ad.instances:  |
+        [
+          {
+            "openmetrics_endpoint": "http://%%host%%:%%port%%/metrics",
+            "namespace": "documentation_example_docker",
+            "metrics": [
+              {"promhttp_metric_handler_requests": "handler.requests"},
+              {"promhttp_metric_handler_requests_in_flight": "handler.requests.in_flight"},
+              "go_memory.*"
+            ]
+          }
+        ]
+    ```
+    To launch an example Prometheus container with these labels you can run:
 
     ```shell
-    -l com.datadoghq.ad.check_names='["openmetrics"]' -l com.datadoghq.ad.init_configs='[{}]' -l com.datadoghq.ad.instances='[  {"openmetrics_endpoint":"http://%%host%%:%%port%%/metrics","namespace":"documentation_example_docker","metrics":[ {"promhttp_metric_handler_requests_total": "prometheus.handler.requests.total"}]}]'
+    docker run -d -l com.datadoghq.ad.check_names='["openmetrics"]' -l com.datadoghq.ad.init_configs='[{}]' -l com.datadoghq.ad.instances='[{"openmetrics_endpoint":"http://%%host%%:%%port%%/metrics","namespace":"documentation_example_docker","metrics":[{"promhttp_metric_handler_requests":"handler.requests"},{"promhttp_metric_handler_requests_in_flight":"handler.requests.in_flight"},"go_memory.*"]}]' prom/prometheus
     ```
 
-     To launch the Prometheus container with the right annotations for Autodiscovery to work, run:
+3. Go into your [Metric summary][8] page to see the collected metrics:
 
-    ```shell
-    docker run -p 9090:9090 -l com.datadoghq.ad.check_names='["openmetrics"]' -l com.datadoghq.ad.init_configs='[{}]' -l com. datadoghq.ad.instances='[{"openmetrics_endpoint":"http://%%host%%:%%port%%/metrics","namespace":"documentation_example_docker",  "metrics":[{"promhttp_metric_handler_requests_total": "prometheus.handler.requests.total"}]}]' prom/prometheus
-    ```
-
-3. Go into your [Metric summary][7] page to see the collected metrics: `prometheus_target_interval_length_seconds*`
-
-    {{< img src="integrations/guide/prometheus_docker/prometheus_collected_metric_docker.png" alt="Prometheus metric collected docker">}}
+    {{< img src="integrations/guide/prometheus_docker/openmetrics_v2_collected_metric_docker.png" alt="Prometheus metric collected docker">}}
 
 ## From custom to official integration
 
 By default, all metrics retrieved by the generic Prometheus check are considered custom metrics. If you are monitoring off-the-shelf software and think it deserves an official integration, don't hesitate to [contribute][5]!
 
-Official integrations have their own dedicated directories. There's a default instance mechanism in the generic check to hardcode the default configuration and metrics metadata. For example, reference the [kube-proxy][8] integration.
+Official integrations have their own dedicated directories. There's a default instance mechanism in the generic check to hardcode the default configuration and metrics metadata. For example, reference the [kube-proxy][9] integration.
 
 ## Further Reading
 
@@ -189,6 +204,7 @@ Official integrations have their own dedicated directories. There's a default in
 [3]: https://github.com/DataDog/integrations-core/tree/master/openmetrics
 [4]: https://github.com/DataDog/integrations-core/tree/master/prometheus
 [5]: /developers/custom_checks/prometheus/
-[6]: https://github.com/DataDog/integrations-core/blob/master/openmetrics/datadog_checks/openmetrics/data/conf.yaml.example
-[7]: https://app.datadoghq.com/metric/summary
-[8]: https://github.com/DataDog/integrations-core/tree/master/kube_proxy
+[6]: https://docs.datadoghq.com/agent/guide/template_variables/
+[7]: https://github.com/DataDog/integrations-core/blob/master/openmetrics/datadog_checks/openmetrics/data/conf.yaml.example
+[8]: https://app.datadoghq.com/metric/summary
+[9]: https://github.com/DataDog/integrations-core/tree/master/kube_proxy
