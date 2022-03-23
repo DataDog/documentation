@@ -62,14 +62,15 @@ For example, in the context of Docker Log Collection, attach the `team:acme` tag
 
 ### Log in as a Datadog Admin
 
-The actions you have to perform in that guide require you belong to a Datadog Admin role. More specifically, you need:
+To execute the remaining actions in this guide, your user account requires the Datadog Admin role or similar. You need the following permissions:
 
-* Permissions to create roles and assign users to roles (actual privileged access).
+* Permissions to create roles and assign users to roles.
 * Permissions to create [Log Pipelines][4], [Log Indexes][5], and [Log Archives][6].
 * If you wish to perform those operations through the API, permissions to interact through the [Log Configuration API][7].
 
-Check in [Datadog][8] that you have all these permissions. If you are missing any, ask a Datadog Admin user to set them for you.
+Check in the [Users list][8] that you have all these permissions. If you are missing any, ask a Datadog Admin user to set them for you.
 
+TODO check/remove screenshot
 {{< img src="logs/guide/rbac/admin_permissions.png" alt="Check your permissions as an admin"  style="width:60%;">}}
 
 ### Get an API key and an app key
@@ -390,7 +391,7 @@ Assign the [Write Historical View][19] permission to members of `ACME Admin`. Th
 [5]: /account_management/rbac/permissions?tab=ui#logs_modify_indexes
 [6]: /account_management/rbac/permissions?tab=ui#logs_write_archives
 [7]: /account_management/rbac/permissions?tab=ui#logs_public_config_api
-[8]: https://app.datadoghq.com/access/users
+[8]: https://app.datadoghq.com/organization-settings/users
 [9]: https://app.datadoghq.com/organization-settings/api-keys
 [10]: /account_management/api-app-keys/
 [11]: /api/v2/roles/#list-permissions

@@ -57,7 +57,7 @@ To create a custom role:
 1. Go to your [Datadog Roles page][1].
 2. Select **New Role** in the upper right corner of the page.
 3. Give a name to your role.
-4. Optionally, assign a set of permissions to your role. See [Datadog Role Permissions][2] for more information about available permissions.
+4. Assign a set of permissions to your role. See [Datadog Role Permissions][2] for more information about available permissions.
 
 TODO: Update screenshot to reflect new roles UI.
 {{< img src="account_management/rbac/create_role.png" alt="Create a custom Role" style="width:90%;">}}
