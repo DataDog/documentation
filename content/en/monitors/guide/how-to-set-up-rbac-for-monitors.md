@@ -30,7 +30,7 @@ For more information about default and custom roles, how to create custom roles,
 {{% tab "UI" %}}
 
 * Navigate to the monitor editing page by creating a new monitor or editing an existing one.
-* At the bottom of the form, specify which roles are allowed to edit the monitor, in addition to the monitor's creator
+* At the bottom of the form, specify which roles, in addition to the creator, are allowed to edit the monitor.
 
 {{< img src="/monitors/guide/monitor_rbac_restricted.jpg" alt="RBAC Restricted Monitor"  >}}
 
