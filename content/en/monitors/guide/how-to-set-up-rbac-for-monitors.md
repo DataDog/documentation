@@ -158,7 +158,7 @@ You are a user with [Datadog Admin Role][2] and/or are the creator of the monito
 <TO DO: ADD SCREENSHOT OF WARNING>
 
 On save, your monitor's definition will be updated to all roles with Admin permissions.
-You have different ways to handle this warning depending on the changes you are willing to make on your monitor:
+You have different ways to handle this warning depending on the changes you are willing to make to your monitor:
 
 **1. You do not want to change anything about your monitor permissions**
 
