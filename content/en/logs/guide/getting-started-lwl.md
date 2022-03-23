@@ -62,7 +62,7 @@ The pattern context panel lists every instance (event) of a log pattern and crea
 1. Click on a pattern from the pattern view list.
 2. Click the **Add Exclusion Filter** button in the top right corner. This button will be disabled if less than half of the logs in this pattern fall into a single index.
 3. Upon clicking the button, the Log Index Configuration page will be opened in a new tab with a pre-filled exclusion filter for the index where majority of the logs for that pattern reside.
-4. The exclusion filter will be populated with an automatically generated search query associated with this pattern. Input the filter name and set an exclusion percentage before saving the new exclusion filter.
+4. The exclusion filter is populated with an automatically generated search query associated with the pattern. Input the filter name and set an exclusion percentage and then save the new exclusion filter.
 
 {{< img src="logs/guide/getting-started-lwl/exclusion_filter.mp4" alt="Exclusion Filter" video=true style="width:100%;">}}
 
