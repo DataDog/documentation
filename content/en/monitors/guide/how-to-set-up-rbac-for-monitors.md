@@ -138,7 +138,7 @@ The sections below describe how to migrate from the locked mechanism to restrict
 
 Although deprecated, the `locked` parameter corresponding to the above mentioned locked mechanism is still supported. This means you can progressively update the definition of your monitors managed through API/Terraform to stop using `locked` and start using `restricted_roles` (parameter attached with the new role restriction option).
 
-For more information on how to update your monitors' definitions, see the [Edit a monitor API endpoint documentation][3] and the dedicated [Monitor API Options guide][4].
+For more information on how to update your monitors' definitions, see [Edit a monitor API endpoint][3] and the [Monitor API Options][4].
 
 ### UI
 
