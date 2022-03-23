@@ -143,7 +143,7 @@ For more information on how to update your monitors' definitions, see the [Edit 
 ### UI
 
 All new monitors created from the UI use the `restricted_roles` parameter. 
-All monitors (existing and new) also display the new role restriction option regardless of the mechanism used under the hood:
+All monitors also display the role restriction option regardless of the underlying mechanism:
 
 {{< img src="/monitors/guide/monitor_rbac_non_restricted.jpg" alt="RBAC Non Restricted Monitor"  >}}
 
