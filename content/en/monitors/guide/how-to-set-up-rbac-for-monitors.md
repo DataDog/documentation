@@ -182,7 +182,7 @@ Select the roles you want this monitor to be restricted to. This will override t
 You are a user without the [Datadog Admin Role][2] and are not the creator of the monitor. You edit a locked monitor and see the warning below:
 
 ```
-This monitor is locked: only its creator and admins can edit it. Read more [here](https://docs.datadoghq.com/monitors/guide/how-to-set-up-rbac-for-monitors/?tab=ui#locked-monitors-lockedtrue-edited-by-non-creator-or-user-without-datadog-admin-role).
+This monitor is locked: only its creator and admins can edit it. Read more here.
 ```
 
 This monitor is locked. Reach out to a user with the [Datadog Admin Role][2] or to the creator of the monitor and ask them to add one of your roles to the monitor role restrictions. Your admin will have to follow steps two or three above for [locked monitors](#locked-monitors-lockedtrue-edited-by-creator-or-user-with-datadog-admin-role).
