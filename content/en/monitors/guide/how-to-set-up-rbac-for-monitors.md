@@ -110,7 +110,7 @@ curl --location --request POST 'https://api.datadoghq.com/api/v1/monitor' \
 }'
 ```
 
-For more information, see [Roles][5] and [Monitors API documentation][6] .
+For more information, see [Roles][5] and [Monitors API Reference][6] .
 
 
 [1]: /api/latest/roles/#list-roles
