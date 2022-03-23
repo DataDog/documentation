@@ -86,7 +86,7 @@ curl --request GET 'https://api.datadoghq.com/api/v2/roles' \
 
 Use the [Create][2] or [Edit a monitor][3] API endpoint and the `restricted_roles` parameter to restrict monitor editing to a specific set of roles and to the monitor's creator. 
 
-**Note:** You can specify one or multiple role UUIDs. Setting `restricted_roles` to `null` allows monitor edition for all users with [Monitor Write permissions][4].
+**Note:** You can specify one or multiple role UUIDs. Setting `restricted_roles` to `null` allows monitor editing for all users with [Monitor Write permissions][4].
 
 ```bash
 curl --location --request POST 'https://api.datadoghq.com/api/v1/monitor' \
