@@ -31,7 +31,7 @@ kind: guide
 ### Permissions options
 
 - **`locked`** a Boolean indicating whether changes to this monitor should be restricted to the creator and admins. Default: **False**. **Deprecated: Use `restricted_roles` instead.**
-- **`restricted_roles`** an Array listing the UUIDs of the roles allowed to edit the monitor. Monitor edition includes any updates to the monitor configuration, monitor deletion, and muting of the monitor for any amount of time. Role UUIDs can be pulled from the [Roles API][1]. `restricted_roles` is the successor of `locked`. 
+- **`restricted_roles`** an array listing the UUIDs of the roles allowed to edit the monitor. Monitor editing includes updates to the monitor configuration, deleting the monitor, and muting of the monitor for any amount of time. Role UUIDs can be pulled from the [Roles API][1]. `restricted_roles` is the successor to `locked`. 
 
 **Note:** Do not set both the `locked` and `restricted_roles` parameters on the same monitor. If both are set, the more restrictive parameter applies. Any role set in `restricted_roles` is considered more restrictive than `locked:true`.
 Examples: 
