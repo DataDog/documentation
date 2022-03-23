@@ -156,7 +156,7 @@ Below are some instructions to help you determine how to proceed in case you nee
 You are a user with [Datadog Admin Role][2] and/or are the creator of the monitor. You are editing a locked monitor and seeing the below warning:
 
 ```
-This monitor is using the `locked` attribute: only its creator and admins can edit it. `locked` is deprecated in favor of `restricted_roles`. On save, the monitor will be automatically updated to use a `restricted_roles` attribute set to all roles with Admin permissions. 
+This monitor is using the locked attribute: only its creator and admins can edit it. locked is deprecated in favor of restricted_roles. On save, the monitor will be automatically updated to use a restricted_roles attribute set to all roles with Admin permissions. 
 If there is no specific change you want to apply to this monitor’s permissions, click Save. If you want to update this monitor’s permissions, read [this doc](https://docs.datadoghq.com/monitors/guide/how-to-set-up-rbac-for-monitors/?tab=ui#locked-monitors-lockedtrue-edited-by-creator-or-user-with-datadog-admin-role).
 ```
 
