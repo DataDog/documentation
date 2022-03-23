@@ -30,7 +30,7 @@ Your host automatically trusts the new key (no further action is required) if yo
 - Containerized Agents (Docker/Kubernetes) for any version
 - Windows/MacOS Agents for any version
 
-Additionally, if you are installing the DEB Agent v7.31.0+ package through `apt` from the `apt.datadoghq.com` repository, your hosts should have the `datadog-signing-keys` package installed, which automatically adds the new key. If you have `datadog-signing-keys` version 1.1.0 or later installed, no further action is needed. If relying on the `datadog-signing-keys` package, upgrading to [version 1.1.0](#datadog-signing-keys-1-1-0) is required to ensure preparedness of your hosts for the key rotation.
+Additionally, if you are installing the DEB Agent v7.31.0+ package through `apt` from the `apt.datadoghq.com` repository, your hosts should have the `datadog-signing-keys` package installed, which automatically adds the new key. If you have `datadog-signing-keys` version 1.1.0 or later installed, no further action is needed. If relying on the `datadog-signing-keys` package, upgrading to [version 1.1.0](#datadog-signing-keys-110) is required to ensure preparedness of your hosts for the key rotation.
 
 If you are installing the DEB Agent package from a different repository or you are not using `apt` (or a similar tool that checks repo metadata signatures), your system doesn't need to know the Datadog signing keys (no further action is needed). However, you may benefit from the [`datadog-signing-keys` package](#the-datadog-signing-keys-package).
 
@@ -105,7 +105,7 @@ A host correctly trusts the new key either one of these conditions is true:
 - The file `/usr/share/keyrings/datadog-archive-keyring.gpg` exists and the Datadog source list file (usually `/etc/apt/sources.list.d/datadog.list`) contains the option `[signed-by=/usr/share/keyrings/datadog-archive-keyring.gpg]`.
 - The Datadog source list file doesn't contain the `signed-by` option, but `datadog-signing-keys` version 1.1.0 or later is installed, which results in presence of `/etc/apt/trusted.gpg.d/datadog-archive-keyring.gpg` file.
 
-Files `/usr/share/keyrings/datadog-archive-keyring.gpg` and, optionally, `/etc/apt/trusted.gpg.d/datadog-archive-keyring.gpg` are created either by an [installation method](#install-methods-that-automatically-trust-the-new-gpg-key) or by installing the [`datadog-signing-keys` package](#the-datadog-signing-keys-package). Please ensure that `datadog-signing-keys` [version 1.1.0](#datadog-signing-keys-version-1-1-0) or later is installed unless using a supported [installation method](#install-methods-that-automatically-trust-the-new-gpg-key).
+Files `/usr/share/keyrings/datadog-archive-keyring.gpg` and, optionally, `/etc/apt/trusted.gpg.d/datadog-archive-keyring.gpg` are created either by an [installation method](#install-methods-that-automatically-trust-the-new-gpg-key) or by installing the [`datadog-signing-keys` package](#the-datadog-signing-keys-package). Please ensure that `datadog-signing-keys` [version 1.1.0](#datadog-signing-keys-version-110) or later is installed unless using a supported [installation method](#install-methods-that-automatically-trust-the-new-gpg-key).
 
 {{% /tab %}}
 {{% tab "RedHat/CentOS/SUSE" %}}
@@ -137,7 +137,7 @@ Since Agent v6.31.0 and v7.31.0, all Datadog DEB packages have a soft dependency
 
 Upon installation, this package:
 
-- Configures APT keys in the `/usr/share/keyrings/datadog-archive-keyring.gpg` keyring and also in `/etc/apt/trusted.gpg.d/datadog-archive-keyring.gpg` when necessary. **This ensures that the upcoming APT repository signing key is trusted.** [`datadog-signing-keys` version 1.1.0](#datadog-signing-keys-version-1-1-0) is recommended to ensure preparedness for the upcoming key rotation.
+- Configures APT keys in the `/usr/share/keyrings/datadog-archive-keyring.gpg` keyring and also in `/etc/apt/trusted.gpg.d/datadog-archive-keyring.gpg` when necessary. **This ensures that the upcoming APT repository signing key is trusted.** [`datadog-signing-keys` version 1.1.0](#datadog-signing-keys-version-110) is recommended to ensure preparedness for the upcoming key rotation.
 - Sets up a [`debsig-verify` policy][12] for Datadog packages. This allows you to verify signatures for individual DEB packages locally. 
 
 For example, to verify that a locally downloaded DEB package was built and signed by Datadog, run the following command:
