@@ -155,7 +155,10 @@ Below are some instructions to help you determine how to proceed in case you nee
 
 You are a user with [Datadog Admin Role][2] and/or are the creator of the monitor. You are editing a locked monitor and seeing the below warning:
 
-<TO DO: ADD SCREENSHOT OF WARNING>
+```
+This monitor is using the `locked` attribute: only its creator and admins can edit it. `locked` is deprecated in favor of `restricted_roles`. On save, the monitor will be automatically updated to use a `restricted_roles` attribute set to all roles with Admin permissions. 
+If there is no specific change you want to apply to this monitor’s permissions, click Save. If you want to update this monitor’s permissions, read [this doc](https://docs.datadoghq.com/monitors/guide/how-to-set-up-rbac-for-monitors/?tab=ui#locked-monitors-lockedtrue-edited-by-creator-or-user-with-datadog-admin-role).
+```
 
 On save, your monitor's definition will be updated to all roles with Admin permissions.
 You have different ways to handle this warning depending on the changes you are willing to make to your monitor:
@@ -178,15 +181,13 @@ Select the roles you want this monitor to be restricted to. This will override t
 
 You are a user without [Datadog Admin Role][2] and/or are not the creator of the monitor. You are editing a locked monitor and seeing the below warning:
 
-<TO DO: ADD SCREENSHOT OF WARNING>
+```
+This monitor is locked: only its creator and admins can edit it. Read more [here](https://docs.datadoghq.com/monitors/guide/how-to-set-up-rbac-for-monitors/?tab=ui#locked-monitors-lockedtrue-edited-by-non-creator-or-user-without-datadog-admin-role).
+```
 
 As mentioned in the warning, this monitor was locked in the previous system. You should consequently reach out to a user with a [Datadog Admin Role][2] or to the creator of the monitor for them to update the monitor to include one of the roles you belong to. Your admin will have to follow guidelines in the [above section](#locked-monitors-lockedtrue-edited-by-creator-or-user-with-datadog-admin-role) (2. or 3.).
 
-**Note:** The discrepancy you are seeing between the warning and the option is expected:
-
-<TO DO: ADD SCREENSHOT OF WARNING AND OPTION>
-
-The warning reflects the current state of the monitor that is still using the old locked parameter. The option reflects the new role restriction option your monitor will be updated to once a user with a [Datadog Admin Role][2]/the monitor's creator edits and saves it. Once saved, the warning will disappear and the adequate restricted roles will populate the dropdown.
+**Note:** The discrepancy you are seeing between the warning and the option is expected. The warning reflects the current state of the monitor that is still using the old locked parameter. The option reflects the new role restriction option your monitor will be updated to once a user with a [Datadog Admin Role][2]/the monitor's creator edits and saves it. Once saved, the warning will disappear and the adequate restricted roles will populate the dropdown.
 
 #### Non locked monitors (`locked:false`, `locked:null`, undefined `locked`)
 
