@@ -153,7 +153,7 @@ Below are some instructions to help you determine how to proceed in case you nee
 
 #### Locked monitors (`locked:true`) edited by creator or user with Datadog Admin Role
 
-You are a user with [Datadog Admin Role][2] and/or are the creator of the monitor. You are editing a locked monitor and seeing the below warning:
+You are a user with the [Datadog Admin Role][2] and/or are the creator of the monitor. You edit a locked monitor and see the below warning:
 
 ```
 This monitor is using the locked attribute: only its creator and admins can edit it. locked is deprecated in favor of restricted_roles. On save, the monitor will be automatically updated to use a restricted_roles attribute set to all roles with Admin permissions. 
