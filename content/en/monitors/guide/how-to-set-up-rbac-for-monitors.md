@@ -191,7 +191,7 @@ This monitor is locked. Reach out to a user with the [Datadog Admin Role][2] or 
 
 #### Non locked monitors (`locked:false`, `locked:null`, undefined `locked`)
 
-You are editing a non locked monitor and seeing the below option:
+You edit a non locked monitor and see the option below:
 
 {{< img src="/monitors/guide/monitor_rbac_non_restricted.jpg" alt="RBAC Non Restricted Monitor"  >}}
 
