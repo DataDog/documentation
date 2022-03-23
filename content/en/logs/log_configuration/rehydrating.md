@@ -77,7 +77,7 @@ Alternatively, find the historical view from the Log Explorer directly from the 
 
 ### Cancel ongoing historical views
 
-Cancel ongoing Rehydrations directly in the Rehydrate from Archives page to avoid starting Rehydrations with the incorrect time range or when you accidentally make typos in your indexing query.
+Cancel ongoing Rehydrations directly in the Rehydrate from Archives page to avoid starting Rehydrations with the incorrect time range or when there are typos in your indexing query.
 
 The logs already indexed will remain queryable until the end of the retention period selected for that historical view, and all the logs already scanned and indexed will still be billed. 
 
