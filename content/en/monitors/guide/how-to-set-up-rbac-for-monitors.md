@@ -128,7 +128,7 @@ Before Datadog released the feature allowing restriction of monitor editing to s
 
 {{< img src="/monitors/guide/monitor_rbac_locked.jpg" alt="RBAC Locked Monitor" style="width:70%;">}}
 
-This locked mechanism was deprecated and it is now recommended to use the role restriction option, which gives you more flexibility to define users allowed to edit monitors.
+Locked monitors are deprecated. Datadog recommends using the role restriction option, which gives you more flexibility to define the users allowed to edit monitors.
 
 You might however have a number of existing monitors still leveraging the locked mechanism under the hood. This mechanism is still supported and respected for now, which means locked monitors should not be editable by users who do not have the [Datadog Admin Role][2] attached or are not the monitor's creator.
 
