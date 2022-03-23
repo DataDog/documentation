@@ -15,7 +15,7 @@ further_reading:
 
 ## Overview
 
-Monitors ensure your teams get alerted in case of issues with your systems. Making sure only the right subset of users can edit the right subset of monitors is critical to **avoid accidental changes in your monitors' configurations**.
+Monitors alert your teams to potential issues with your systems. Making sure only authorized users can edit your monitors prevents accidental changes in your monitors' configurations.
 
 Safely manage your monitors by **restricting edit permissions of each individual monitor to some specific roles** of your account.
 
