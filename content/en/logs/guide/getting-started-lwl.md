@@ -70,7 +70,7 @@ The pattern context panel lists every instance (event) of a log pattern and crea
 
 In this example, the service `email-api-py`, status `INFO` pattern `response code from ses 200` is filtered with an exclusion filter. Removing any high volume logging pattern similar to this one from Log Explorer helps you reduce noise and identify issues quicker. However, these logs are **only** excluded from indexing. They are still ingested and available to view in [Live Tail][5] and can be sent to [log archives][6] or used to [generate metrics][7].
 
-{{< img src="logs/guide/getting-started-lwl/live_tail.png" alt="Live Tail" style="width:100%;">}}
+{{< img src="logs/guide/getting-started-lwl/live_tail.png" alt="The Live Tail page showing a list of logs and the time frame dropdown" style="width:100%;">}}
 
 Exclusion filters can be disabled at any time by toggling the disable option to the right of the filter. They can also be modified and removed by hovering over the filter and selecting the edit or delete option.
 
