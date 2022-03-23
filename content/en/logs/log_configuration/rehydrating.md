@@ -81,7 +81,7 @@ Cancel ongoing Rehydrations directly in the Rehydrate from Archives page to avoi
 
 The logs already indexed remain queryable until the end of the retention period that was selected for that historical view. All logs already scanned and indexed are still billed. 
 
-{{< img src="logs/archives/log_archives_cancel_ongoing_rehydration.png" alt="Canceling Ongoing Rehydrations" width="75%" >}}
+{{< img src="logs/archives/log_archives_cancel_ongoing_rehydration.png" alt="The Rehydrate from Archives page showing a historical view in calculating status and the cancel rehydration option" width="75%" >}}
 
 ### Deleting historical views
 
