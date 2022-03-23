@@ -30,7 +30,7 @@ Your host automatically trusts the new key (no further action is required) if yo
 - Containerized Agents (Docker/Kubernetes) for any version
 - Windows/MacOS Agents for any version
 
-Additionally, if you are installing the DEB Agent v7.31.0+ package through `apt` from the `apt.datadoghq.com` repository, your hosts should have the `datadog-signing-keys` package installed, which automatically adds the new key. If you have `datadog-signing-keys` version 1.1.0 or later installed, no further action is needed. If relying on the `datadog-signing-keys` package, upgrading to [version 1.1.0](#datadog-signing-keys-110) is required to ensure preparedness of your hosts for the key rotation.
+Additionally, if you are installing the DEB Agent v7.31.0+ package through `apt` from the `apt.datadoghq.com` repository, your hosts should have the `datadog-signing-keys` package installed, which automatically adds the new key. If you have `datadog-signing-keys` version 1.1.0 or later installed, no further action is needed. If relying on the `datadog-signing-keys` package, upgrading to [version 1.1.0](#datadog-signing-keys-version-110) is required to ensure preparedness of your hosts for the key rotation.
 
 If you are installing the DEB Agent package from a different repository or you are not using `apt` (or a similar tool that checks repo metadata signatures), your system doesn't need to know the Datadog signing keys (no further action is needed). However, you may benefit from the [`datadog-signing-keys` package](#the-datadog-signing-keys-package).
 
