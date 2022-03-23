@@ -147,7 +147,7 @@ All monitors (existing and new) also display the new role restriction option reg
 
 {{< img src="/monitors/guide/monitor_rbac_non_restricted.jpg" alt="RBAC Non Restricted Monitor"  >}}
 
-Existing monitors have their definitions updated from the old locked mechanism to the new role restriction one on the fly whenever a monitor is saved.
+Datadog updates existing monitor definitions from the old locked mechanism to the new role restriction one whenever a monitor is saved.
 
 Below are some instructions to help you determine how to proceed in case you need to save a monitor that is using the previous locked mechanism.
 
