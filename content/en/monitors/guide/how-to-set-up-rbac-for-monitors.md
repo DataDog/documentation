@@ -185,7 +185,7 @@ You are a user without the [Datadog Admin Role][2] and are not the creator of th
 This monitor is locked: only its creator and admins can edit it. Read more [here](https://docs.datadoghq.com/monitors/guide/how-to-set-up-rbac-for-monitors/?tab=ui#locked-monitors-lockedtrue-edited-by-non-creator-or-user-without-datadog-admin-role).
 ```
 
-As mentioned in the warning, this monitor was locked in the previous system. You should consequently reach out to a user with a [Datadog Admin Role][2] or to the creator of the monitor for them to update the monitor to include one of the roles you belong to. Your admin will have to follow guidelines in the [above section](#locked-monitors-lockedtrue-edited-by-creator-or-user-with-datadog-admin-role) (2. or 3.).
+This monitor is locked. Reach out to a user with the [Datadog Admin Role][2] or to the creator of the monitor and ask them to add one of your roles to the monitor role restrictions. Your admin will have to follow steps two or three above for [locked monitors](#locked-monitors-lockedtrue-edited-by-creator-or-user-with-datadog-admin-role).
 
 **Note:** The discrepancy you are seeing between the warning and the option is expected. The warning reflects the current state of the monitor that is still using the old locked parameter. The option reflects the new role restriction option your monitor will be updated to once a user with a [Datadog Admin Role][2]/the monitor's creator edits and saves it. Once saved, the warning will disappear and the adequate restricted roles will populate the dropdown.
 
