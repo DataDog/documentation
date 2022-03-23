@@ -136,7 +136,7 @@ You can further restrict your monitor by specifying a subset of [roles][20] allo
 
   {{< img src="monitors/notifications/monitor_rbac_restricted.jpg" alt="RBAC Restricted Monitor" style="width:90%;" >}}
 
-Edition includes any updates to the monitor configuration, monitor deletion, and muting of the monitor for any amount of time.
+Editing includes any updates to the monitor configuration, deleting the monitor, and muting the monitor for any amount of time.
 
 **Note**: The limitations are applied both in the UI and API.
 
