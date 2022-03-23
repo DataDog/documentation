@@ -19,21 +19,6 @@ function utmHandler() {
         }
     });
 }
-// TODO: deprecate irrelevant func for Docs?
-// function langToggleQueryStringHandler() {
-//     const langToggleContainer = document.getElementById('lang-toggle');
-
-//     if (bodyClassContains('dg-webinar') && langToggleContainer) {
-//         const queryParameterString = window.location.search;
-//         const dropdownLinkNodeList = langToggleContainer.querySelectorAll('.dropdown-menu-item');
-
-//         if (window.location.search !== '') {
-//             dropdownLinkNodeList.forEach((link) => {
-//                 link.href += queryParameterString;
-//             });
-//         }
-//     }
-// }
 
 function ctaHandler() {
     const ctaList = document.querySelectorAll('[class*=js-cta-]');
@@ -90,5 +75,4 @@ function ctaHandler() {
 window.addEventListener('DOMContentLoaded', () => {
     utmHandler();
     ctaHandler();
-    // langToggleQueryStringHandler();
 });
