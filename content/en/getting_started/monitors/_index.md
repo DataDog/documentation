@@ -85,7 +85,7 @@ Removing the `@notification` from either section removes it from both sections.
 
 {{< img src="getting_started/monitors/monitor_rbac_restricted.jpg" alt="RBAC Restricted Monitor" style="width:90%;" >}}
 
-Use this option to restrict the edition of your monitor to its creator and to specific roles in your org. For more information about roles, see the [RBAC][9] documentation.
+Use this option to restrict the editing of your monitor to its creator and to specific roles in your org. For more information about roles, see [Role Based Access Control][9].
 
 ## View Monitors and Triage Alerts on Mobile
 
