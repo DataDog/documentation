@@ -130,7 +130,7 @@ Before Datadog released the feature allowing restriction of monitor editing to s
 
 Locked monitors are deprecated. Datadog recommends using the role restriction option, which gives you more flexibility to define the users allowed to edit monitors.
 
-You might however have a number of existing monitors still leveraging the locked mechanism under the hood. This mechanism is still supported and respected for now, which means locked monitors should not be editable by users who do not have the [Datadog Admin Role][2] attached or are not the monitor's creator.
+Your organization may have existing locked monitors. Datadog still supports locked monitors. Editing of locked monitors is restricted to users with the [Datadog Admin Role][2] and the monitor's creator.
 
 Below sections describe how the change from the old locked mechanism to the new role restriction one is performed, depending on the way you manage your monitors.
 
