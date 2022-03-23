@@ -132,7 +132,7 @@ An [event][16] is created anytime a monitor is created, modified, silenced, or d
 
 By default, only users attached to roles with [Monitors Write permissions][17] can edit monitors. [Datadog Admin Role and Datadog Standard Role][18] have Monitors Write permission by default. If your organization uses [Custom Roles][19], other custom roles may have the Monitors Write permission.
 
-You can further restrict your monitor by specifying a subset of [roles][20] allowed to edit it in addition to the monitor's creator. 
+You can further restrict your monitor by specifying a list of [roles][20] allowed to edit it. The monitor's creator can always edit the monitor. 
 
   {{< img src="monitors/notifications/monitor_rbac_restricted.jpg" alt="RBAC Restricted Monitor" style="width:90%;" >}}
 
