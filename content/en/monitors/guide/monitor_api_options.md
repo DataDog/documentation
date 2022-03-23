@@ -15,7 +15,7 @@ kind: guide
 - **`new_host_delay`** time (in seconds) to allow a host to boot and applications to fully start before starting the evaluation of monitor results. Should be a non negative integer. **Deprecated: Use `new_group_delay` instead.**
 
 - **`notify_no_data`** a boolean indicating whether this monitor notifies when data stops reporting. Default: **False**.
-- **`no_data_timeframe`** The number of minutes before a monitor notifies after data stops reporting. Datadog recommends at least 2x the monitor timeframe for metric alerts or 2 minutes for service checks.  **If omitted, 2x the evaluation timeframe is used for metric alerts, and 24 hours is used for service checks.**
+- **`no_data_timeframe`** the number of minutes before a monitor notifies after data stops reporting. Datadog recommends at least 2x the monitor timeframe for metric alerts or 2 minutes for service checks.  **If omitted, 2x the evaluation timeframe is used for metric alerts, and 24 hours is used for service checks.**
 - **`timeout_h`** the number of hours of the monitor not reporting data before it automatically resolves from a triggered state. Default: **null**.
 -  **`require_full_window`** a boolean indicating whether this monitor needs a full window of data before it's evaluated. Datadog recommends you set this to `False` for sparse metrics, otherwise some evaluations are skipped. Default: **False**.
 - **`renotify_interval`** the number of minutes after the last notification before a monitor re-notifies on the current status. It only re-notifies if it's not resolved. Default: **null**.
@@ -85,7 +85,7 @@ Example: `{'ok': 1, 'critical': 1, 'warning': 1}`
 
 Example: `{"metric": "count","type": "count","groupBy": "core_service"}`
 
-- **`enable_logs_sample`** a Boolean to add samples or values to the notification message. Default: `False`
+- **`enable_logs_sample`** a boolean to add samples or values to the notification message. Default: `False`
 
 [1]: /api/latest/roles/
 [2]: /monitors/guide/how-to-set-up-rbac-for-monitors/
