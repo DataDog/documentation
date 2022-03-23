@@ -187,7 +187,7 @@ This monitor is locked: only its creator and admins can edit it. Read more [here
 
 This monitor is locked. Reach out to a user with the [Datadog Admin Role][2] or to the creator of the monitor and ask them to add one of your roles to the monitor role restrictions. Your admin will have to follow steps two or three above for [locked monitors](#locked-monitors-lockedtrue-edited-by-creator-or-user-with-datadog-admin-role).
 
-**Note:** The discrepancy you are seeing between the warning and the option is expected. The warning reflects the current state of the monitor that is still using the locked parameter. The option reflects the role restriction option your monitor will be updated to once a user with the [Datadog Admin Role][2] or the monitor's creator edits and saves it. Once saved, the warning will disappear and the adequate restricted roles will populate the dropdown.
+**Note:** The discrepancy you are seeing between the warning and the option is expected. The warning reflects the current state of the monitor that is using the locked parameter. The option reflects the role restriction option your monitor will be updated to once a user with the [Datadog Admin Role][2] or the monitor's creator edits and saves it. Once the monitor is saved, the warning disappears and the appropriate restricted roles populate the dropdown.
 
 #### Non locked monitors (`locked:false`, `locked:null`, undefined `locked`)
 
