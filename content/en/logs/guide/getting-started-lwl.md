@@ -60,7 +60,7 @@ The pattern context panel lists every instance (event) of a log pattern and crea
 **To create an exclusion filter**:
 
 1. Click on a pattern from the pattern view list.
-2. Click the **Add Exclusion Filter** button in the top right corner. This button will be disabled if less than half of the logs in this pattern fall into a single index.
+2. Click the **Add Exclusion Filter** button in the top right corner. This button is disabled if less than half of the logs in this pattern fall into a single index.
 3. The Log Index Configuration page opens in a new tab with a pre-filled exclusion filter for the index where the majority of the logs for that pattern show up.
 4. The exclusion filter is populated with an automatically generated search query associated with the pattern. Input the filter name and set an exclusion percentage and then save the new exclusion filter.
 
