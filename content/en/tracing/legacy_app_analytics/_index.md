@@ -11,17 +11,16 @@ aliases:
 This page describes deprecated features with configuration information relevant to legacy App Analytics, useful for troubleshooting or modifying some old setups. To have full control over your traces, use <a href="/tracing/trace_ingestion">ingestion controls</a> and <a href="/tracing/trace_retention">retention filters</a> instead.
 </div>
 
-### Move away from the legacy setup
+##  Migrate to the new configuration options
 
-Navigate the [ingestion control page][1] to spot services with legacy configuration. These are flagged with a `Legacy Setup` status.
+Navigate to the [ingestion control page][1] to see services with legacy configurations. These are flagged with a `Legacy Setup` status.
 
-To move away from the legacy App Analytics setup, remove every [configuration option](#app-analytics-setup) related to it. Instead, use the Datadog Agent and tracing libraries [sampling mechanisms][2] that ensure to keep complete traces.
+To migrate to the new configuration options, remove all legacy App Analytics [configuration options](#app-analytics-setup) from the services flagged with `Legacy Setup`. Then, implement the Datadog Agent and tracing libraries' [sampling mechanisms][2] that ensure to keep complete traces.
 
 ## App Analytics setup
 
-To enable App Analytics, either:
+To enable App Analytics, either [automatically](#automatic-configuration) or [manually](#custom-instrumentation), configure your APM tracer to emit the relevant analytics from your services.
 
-* Configure your APM tracer to emit the relevant analytics from your services—this can be done either [automatically](#automatic-configuration) or [manually](#custom-instrumentation).
 
 **Note**: to use App Analytics, you must be using Agent v6.7+.
 
