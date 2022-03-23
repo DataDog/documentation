@@ -149,7 +149,7 @@ All monitors (existing and new) also display the new role restriction option reg
 
 Datadog updates existing monitor definitions from the old locked mechanism to the new role restriction one whenever a monitor is saved.
 
-Below are some instructions to help you determine how to proceed in case you need to save a monitor that is using the previous locked mechanism.
+Below are some instructions to help you determine how to proceed in case you need to save a monitor that is using the locked mechanism.
 
 #### Locked monitors (`locked:true`) edited by creator or user with Datadog Admin Role
 
