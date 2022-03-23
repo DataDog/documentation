@@ -165,7 +165,7 @@ You have different ways to handle this warning depending on the changes you are 
 
 **1. You do not want to change anything about your monitor permissions**
 
-Save the monitor to have the update from the locked mechanism to the restricted_roles one be performed automatically, along with any other updates you might have done on your monitor (e.g. threshold update, message, etc.).
+Save the monitor. Datadog automatically migrates the monitor from the locked mechanism to restricted roles. Any other updates you made to your monitor, such as threshold update or message, are saved at the same time.
 
 If you were just opening the edit page to see more details about your monitor configuration, you can also hit **Save**. That also performs the update for your monitor.
 
