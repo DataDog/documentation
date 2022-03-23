@@ -160,6 +160,8 @@ With the third method, you need to explicitly install the `datadog-signing-keys`
 
 ### datadog-signing-keys version 1.1.0
 
+<div class="alert alert-info"><strong>Note:</strong> This section only applies to DEB Agent package users.</div>
+
 `datadog-signing-keys` versions before 1.1.0 didn't handle the following corner case:
 
 * On Ubuntu >= 16 and Debian >= 9, only `/usr/share/keyrings/datadog-archive-keyring.gpg` was created, but `/etc/apt/trusted.gpg.d/datadog-archive-keyring.gpg` was not.
