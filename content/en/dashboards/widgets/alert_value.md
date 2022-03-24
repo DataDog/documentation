@@ -5,15 +5,9 @@ description: "Graph the current value of a metric in any monitor defined on your
 aliases:
     - /graphing/widgets/alert_value/
 further_reading:
-- link: "/dashboards/screenboards/"
-  tag: "Documentation"
-  text: "Screenboard"
-- link: "/dashboards/timeboards/"
-  tag: "Documentation"
-  text: "Timeboards"
 - link: "/dashboards/graphing_json/"
   tag: "Documentation"
-  text: "Building Dashboard using JSON"
+  text: "Building Dashboards using JSON"
 ---
 
 Alert values are query values showing the current value of the metric in any monitor defined on your system:
