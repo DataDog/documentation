@@ -281,6 +281,8 @@ If your facet has periods, use brackets around the facet, for example:
 
 _Available for [Log monitors][2], [Trace Analytics monitors][3] (APM), [RUM monitors][4] and [CI Pipeline monitors][5]_
 
+<div class="alert alert-info"><strong>Note</strong>: This feature is only available for monitors that do not use Formulas & Functions in their queries.</div>
+
 To include **any** attribute or tag from a log, a trace span, a RUM event, or a CI Pipeline event matching the monitor query, use the following variables:
 
 | Monitor type    | Variable syntax                                         |
