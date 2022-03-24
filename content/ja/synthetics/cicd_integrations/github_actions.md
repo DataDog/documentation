@@ -3,7 +3,8 @@ dependencies:
 - https://github.com/DataDog/synthetics-ci-github-action/blob/main/README.md
 kind: documentation
 title: Synthetics と CI GitHub アクション
----## 概要
+---
+## 概要
 
 [Datadog CI Synthetics コマンド][1]を使って、GitHub のワークフローから Synthetic テストをトリガーすることができます。
 
