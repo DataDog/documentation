@@ -27,7 +27,7 @@ Share feedback about your gRPC use cases for Synthetic tests with the <a href="h
 
 ## Configuration
 
-After choosing to create an `gRPC` health check test, define your test's request.
+After choosing to create a `gRPC` health check test, define your test's request.
 
 ### Define request
 
