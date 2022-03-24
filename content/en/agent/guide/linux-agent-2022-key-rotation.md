@@ -100,12 +100,12 @@ $ sudo rpm --import /tmp/DATADOG_RPM_KEY_FD4BF915
 {{< tabs >}}
 {{% tab "Debian/Ubuntu" %}}
 
-A host correctly trusts the new key either one of these conditions is true:
+A host correctly trusts the new key if either one of these conditions is true:
 
 - The file `/usr/share/keyrings/datadog-archive-keyring.gpg` exists and the Datadog source list file (usually `/etc/apt/sources.list.d/datadog.list`) contains the option `[signed-by=/usr/share/keyrings/datadog-archive-keyring.gpg]`.
-- The Datadog source list file doesn't contain the `signed-by` option, but `datadog-signing-keys` version 1.1.0 or later is installed, which results in presence of `/etc/apt/trusted.gpg.d/datadog-archive-keyring.gpg` file.
+- The Datadog source list file doesn't contain the `signed-by` option, but `datadog-signing-keys` version 1.1.0 or later is installed, which results in the presence of a `/etc/apt/trusted.gpg.d/datadog-archive-keyring.gpg` file.
 
-Files `/usr/share/keyrings/datadog-archive-keyring.gpg` and, optionally, `/etc/apt/trusted.gpg.d/datadog-archive-keyring.gpg` are created either by a supported [installation method](#install-methods-that-automatically-trust-the-new-gpg-key) or by installing the [`datadog-signing-keys` package](#the-datadog-signing-keys-package). Please ensure that `datadog-signing-keys` [version 1.1.0](#datadog-signing-keys-version-110) or later is installed unless using one of the [installation method versions listed above](#install-methods-that-automatically-trust-the-new-gpg-key).
+Files `/usr/share/keyrings/datadog-archive-keyring.gpg` and, optionally, `/etc/apt/trusted.gpg.d/datadog-archive-keyring.gpg` are created either by a supported [installation method](#install-methods-that-automatically-trust-the-new-gpg-key) or by installing the [`datadog-signing-keys` package](#the-datadog-signing-keys-package). Ensure that `datadog-signing-keys` [version 1.1.0](#datadog-signing-keys-version-110) or later is installed unless using one of the [installation method versions listed above](#install-methods-that-automatically-trust-the-new-gpg-key).
 
 {{% /tab %}}
 {{% tab "RedHat/CentOS/SUSE" %}}
@@ -162,14 +162,14 @@ With the third method, you need to explicitly install the `datadog-signing-keys`
 
 <div class="alert alert-info"><strong>Note:</strong> This section only applies to DEB Agent package users.</div>
 
-`datadog-signing-keys` versions before 1.1.0 didn't handle the following corner case:
+`datadog-signing-keys` versions before 1.1.0 do not handle the following corner cases:
 
 * On Ubuntu >= 16 and Debian >= 9, only `/usr/share/keyrings/datadog-archive-keyring.gpg` was created, but `/etc/apt/trusted.gpg.d/datadog-archive-keyring.gpg` was not.
-* If the APT source list file (e.g. `/etc/apt/sources.list.d/datadog.list`) didn't contain the option `[signed-by=/usr/share/keyrings/datadog-archive-keyring.gpg]`, APT would never know about the new key and thus any operations with the Datadog repository would fail after the key rotation.
+* If the APT source list file (e.g. `/etc/apt/sources.list.d/datadog.list`) does not contain the option `[signed-by=/usr/share/keyrings/datadog-archive-keyring.gpg]`, APT never knows about the new key. Any operations with the Datadog repository will fail after the key rotation.
 
 `datadog-signing-keys` version 1.1.0 addresses this issue by creating `/etc/apt/trusted.gpg.d/datadog-archive-keyring.gpg` when `/etc/apt/sources.list.d/datadog.list` doesn't contain the proper `signed-by` option. This ensures that the above corner case is covered as well.
 
-Users of supported up-to-date [installation methods](#install-methods-that-automatically-trust-the-new-gpg-key) using the default Datadog sources always have the proper `signed-by` option configured, so they are not affected by this issue. We highly recommend that all other users to upgrade to `datadog-signing-keys` 1.1.0 to ensure preparedness for the upcoming key rotation.
+Users of supported up-to-date [installation methods](#install-methods-that-automatically-trust-the-new-gpg-key) using the default Datadog sources always have the proper `signed-by` option configured, so they are not affected by this issue. Datadog highly recommends that all other users to upgrade to `datadog-signing-keys` 1.1.0 to ensure preparedness for the upcoming key rotation.
 
 ## Impact for Agent v5 users
 
