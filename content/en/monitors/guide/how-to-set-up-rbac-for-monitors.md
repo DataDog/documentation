@@ -175,7 +175,7 @@ Save the monitor, causing Datadog to migrate it to restricted roles. Reopen the 
 
 **3. You want your monitor to be restricted to some roles, but not to all roles with Admin permissions**
 
-Select the roles you want this monitor to be restricted to. This will override the locked equivalent set of roles to only the ones you specify.
+In the **Restrict editing of this monitor to** dropdown menu, select the roles that can modify this monitor. Save the monitor. Monitor is restricted only to the roles you selected.
   
 #### Locked monitors (`locked:true`) edited by non creator or user without Datadog Admin Role
 
