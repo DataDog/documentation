@@ -94,7 +94,7 @@ When you change the value of a template variable, the dashboard URL updates to r
 To include just the value in the query, use the syntax `$<TEMPLATE_VARIABLE_NAME>.value`. For example, with a template variable named `env`, use `environment:$env.value`.
 
 #### Associated template variables
-When selecting a template variable value, the **Associated Values** and **Other Values** sections are displayed. Associated values are calculated from the other template variable values selected on the page, and seamlessly identifies the related values without any configuration.
+When selecting a template variable value, the **Associated Values** and **Other Values** sections are displayed. Associated values are calculated from the other template variable values selected on the page, and seamlessly identify the related values without any configuration.
 
 {{< img src="dashboards/template_variables/associated_template_variables.png" alt="Associated template variables" style="width:75%;">}}
 
