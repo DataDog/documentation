@@ -160,7 +160,7 @@ For more information, see [Visualize StatsD metrics with Counts Graphing][9].
 Documentation about [StatsD/DogStatsD][10].
 
 [1]: /dashboards/#timeboards
-[2]: /dashboards/screenboard/
+[2]: /dashboards/#screenboards
 [3]: /agent/
 [4]: /metrics/custom_metrics/
 [5]: /dashboards/faq/how-is-data-aggregated-in-graphs/

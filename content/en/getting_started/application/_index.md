@@ -159,7 +159,7 @@ The [Datadog Mobile App][23], available on the [Apple App Store][24] and [Google
 [13]: /events/#@-notifications
 [14]: /help/
 [15]: /dashboards/
-[16]: /dashboards/screenboard/
+[16]: /dashboards/#screenboards
 [17]: /dashboards/functions/
 [18]: /real_user_monitoring/
 [19]: /real_user_monitoring/session_replay/

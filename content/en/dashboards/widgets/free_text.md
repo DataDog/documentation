@@ -37,6 +37,6 @@ The dedicated [widget JSON schema definition][3] for the free text widget is:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /dashboards/screenboard/
+[1]: /dashboards/#screenboards
 [2]: /api/v1/dashboards/
 [3]: /dashboards/graphing_json/widget_json/
