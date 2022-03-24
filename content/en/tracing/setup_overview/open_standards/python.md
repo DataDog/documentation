@@ -46,7 +46,7 @@ The tracer can now be used like in any other OpenTracing application. See [opent
 ## OpenTelemetry
 
 <div class="alert alert-warning">
-This exporter has been deprecated. To export your OTLP traces from OpenTelemetry SDK directly to Datadog Agent, see <a href="https://docs.datadoghq.com/tracing/setup_overview/open_standards/#otlp-ingest-in-datadog-agent">OTLP Ingest in the Agent</a>. <a href="https://docs.datadoghq.com/help/">Reach out to support</a> for questions.
+This exporter is deprecated. To export your OTLP traces from OpenTelemetry SDK directly to Datadog Agent, see <a href="/tracing/setup_overview/open_standards/#otlp-ingest-in-datadog-agent">OTLP Ingest in the Agent</a>. <a href="/help/">Reach out to support</a> for questions.
 </div>
 
 OpenTelemetry support is available by using the `opentelemetry-exporter-datadog` package to export traces from OpenTelemetry to Datadog.
