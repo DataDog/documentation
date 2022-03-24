@@ -29,8 +29,8 @@ For more information about default and custom roles, how to create custom roles,
 
 {{% tab "UI" %}}
 
-* Navigate to the monitor editing page by creating a new monitor or editing an existing one.
-* At the bottom of the form, specify which roles, in addition to the creator, are allowed to edit the monitor.
+1. Navigate to the monitor editing page by creating a new monitor or editing an existing one.
+2. At the bottom of the form, specify which roles, in addition to the creator, are allowed to edit the monitor.
 
 {{< img src="/monitors/guide/monitor_rbac_restricted.jpg" alt="RBAC Restricted Monitor"  >}}
 
@@ -41,7 +41,7 @@ For more information, see [Monitors Permissions][1].
 
 {{% tab "API" %}}
 
-Use the [List Roles API endpoint][1] to get the list of roles and their id.
+Use the [List Roles API endpoint][1] to get the list of roles and their ids.
 
 ```bash
 curl --request GET 'https://api.datadoghq.com/api/v2/roles' \
@@ -136,9 +136,9 @@ The sections below describe how to migrate from the locked mechanism to restrict
 
 ### API
 
-Although deprecated, the `locked` parameter corresponding to the above mentioned locked mechanism is still supported. This means you can progressively update the definition of your monitors managed through API/Terraform to stop using `locked` and start using `restricted_roles` (parameter attached with the new role restriction option).
+Although deprecated, the `locked` parameter corresponding to the above mentioned locked mechanism is still supported. This means you can progressively update the definition of your monitors managed through API or Terraform to stop using `locked` and start using `restricted_roles` (parameter attached with the new role restriction option).
 
-For more information on how to update your monitors' definitions, see [Edit a monitor API endpoint][3] and the [Monitor API Options][4].
+For more information on how to update your monitors' definitions, see [Edit a monitor API endpoint][3] and [Monitor API Options][4].
 
 ### UI
 
@@ -153,7 +153,7 @@ Below are some instructions to help you determine how to proceed in case you nee
 
 #### Locked monitors (`locked:true`) edited by creator or user with Datadog Admin Role
 
-You are a user with the [Datadog Admin Role][2] and/or are the creator of the monitor. You edit a locked monitor and see the below warning:
+You are a user with the [Datadog Admin Role][2] and/or are the creator of the monitor. You edit a locked monitor and see the following warning:
 
 ```
 This monitor is using the locked attribute: only its creator and admins can edit it. locked is deprecated in favor of restricted_roles. On save, the monitor will be automatically updated to use a restricted_roles attribute set to all roles with Admin permissions. 
