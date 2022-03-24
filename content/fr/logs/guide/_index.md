@@ -1,9 +1,8 @@
 ---
-title: Guides sur les logs
 kind: guide
 private: true
+title: Guides sur les logs
 ---
-
 {{< whatsnext desc="Logging Without Limits™" >}}
  {{< nextlink href="logs/guide/access-your-log-data-programmatically" >}}Programmation de l'accès aux données de log à l'aide de l'API Logs Search{{< /nextlink >}}
     {{< nextlink href="logs/guide/getting-started-lwl" >}}Guide de la fonctionnalité Logging Without Limits™{{< /nextlink >}}
@@ -28,8 +27,9 @@ private: true
 <br>
 
 {{< whatsnext desc="Traitement des logs" >}}
-    {{< nextlink href="logs/guide/log-parsing-best-practice" >}}Bonnes pratiques à adopter pour le parsing de log{{< /nextlink >}}
+    {{< nextlink href="logs/guide/log-parsing-best-practice" >}}Parsing de log : bonnes pratiques à adopter{{< /nextlink >}}
     {{< nextlink href="/logs/guide/enrichment-tables/" >}}Ajouter des métadonnées personnalisées aux logs grâce aux tables d'enrichissement{{< /nextlink >}}
+    {{< nextlink href="/logs/guide/commonly-used-log-processing-rules" >}}Règles de nettoyage de logs couramment utilisées{{< /nextlink >}}
 {{< /whatsnext >}}
 
 <br>
@@ -51,4 +51,3 @@ private: true
 {{< whatsnext desc="Corrélation entre produits" >}}
 {{< nextlink href="logs/guide/ease-troubleshooting-with-cross-product-correlation" >}}Diagnostics simplifiés grâce à la mise en corrélation entre produits{{< /nextlink >}}
 {{< /whatsnext >}}
-
