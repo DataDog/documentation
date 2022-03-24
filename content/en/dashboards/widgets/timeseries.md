@@ -134,8 +134,8 @@ The dedicated [widget JSON schema definition][12] for the timeseries widget is:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /dashboards/timeboard/
-[2]: /dashboards/screenboard/
+[1]: /dashboards/#timeboards
+[2]: /dashboards/#screenboards
 [3]: /dashboards/querying/
 [4]: /tracing/app_analytics/search/#search-bar
 [5]: /logs/search_syntax/

@@ -63,7 +63,7 @@ See the [Tracing documentation][10] for more information.
 [2]: /api/
 [3]: /developers/community/libraries/
 [4]: /dashboards/screenboard/
-[5]: /dashboards/timeboard/
+[5]: /dashboards/#timeboards
 [6]: https://www.datadoghq.com/blog/statsd
 [7]: /developers/dogstatsd/
 [8]: /developers/integrations/
