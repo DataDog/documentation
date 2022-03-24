@@ -122,7 +122,7 @@ For more information, see [Roles][5] and [Monitors API Reference][6] .
 {{% /tab %}}
 {{< /tabs >}}
 
-## Migrate locked monitors to use RBAC
+## Migrate monitors from locked to restricted roles
 
 Before Datadog released the feature allowing restriction of monitor editing to specific roles, monitors could be locked. Only the creator and users with the [Datadog Admin Role][2] can edit a locked monitor. 
 
