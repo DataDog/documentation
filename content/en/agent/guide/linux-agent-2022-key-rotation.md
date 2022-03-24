@@ -30,7 +30,7 @@ Your host automatically trusts the new key (no further action is required) if yo
 - Containerized Agents (Docker/Kubernetes) for any version
 - Windows/MacOS Agents for any version
 
-Additionally, if you are installing the DEB Agent v7.31.0+ package through `apt` from the `apt.datadoghq.com` repository, your hosts should have the `datadog-signing-keys` package installed, which automatically adds the new key (no further action is needed). 
+Additionally, if you are installing the DEB Agent v7.31.0+ package through `apt` from the `apt.datadoghq.com` repository, your hosts should have the `datadog-signing-keys` package installed, which automatically adds the new key. If you have `datadog-signing-keys` version 1.1.0 or later installed, no further action is needed. If you are relying on the `datadog-signing-keys` package, upgrading to [version 1.1.0](#datadog-signing-keys-version-110) is required to ensure preparedness of your hosts for the key rotation.
 
 If you are installing the DEB Agent package from a different repository or you are not using `apt` (or a similar tool that checks repo metadata signatures), your system doesn't need to know the Datadog signing keys (no further action is needed). However, you may benefit from the [`datadog-signing-keys` package](#the-datadog-signing-keys-package).
 
@@ -67,7 +67,7 @@ Check that the correct key URLs are configured for this repository.
 
 ## Manual update
 
-Datadog encourages you to use one of the install methods above, which trust the new GPG key as well as all future keys automatically. If this is not an option, use the following instructions to manually download and trust the new key.
+Datadog encourages you to use one of the [install methods](#install-methods-that-automatically-trust-the-new-gpg-key) above, which trust the new GPG key as well as all future keys automatically. If this is not an option, use the following instructions to manually download and trust the new key.
 
 {{< tabs >}}
 {{% tab "Debian/Ubuntu" %}}
@@ -100,7 +100,12 @@ $ sudo rpm --import /tmp/DATADOG_RPM_KEY_FD4BF915
 {{< tabs >}}
 {{% tab "Debian/Ubuntu" %}}
 
-If the file `/usr/share/keyrings/datadog-archive-keyring.gpg` exists, the new key is trusted and no further action is needed. This file is created either by an [installation method](#install-methods-that-automatically-trust-the-new-gpg-key) or by installing the [`datadog-signing-keys` package](#the-datadog-signing-keys-package).
+A host correctly trusts the new key if either one of these conditions is true:
+
+- The file `/usr/share/keyrings/datadog-archive-keyring.gpg` exists and the Datadog source list file (usually `/etc/apt/sources.list.d/datadog.list`) contains the option `[signed-by=/usr/share/keyrings/datadog-archive-keyring.gpg]`.
+- The Datadog source list file doesn't contain the `signed-by` option, but `datadog-signing-keys` version 1.1.0 or later is installed, which results in the presence of a `/etc/apt/trusted.gpg.d/datadog-archive-keyring.gpg` file.
+
+Files `/usr/share/keyrings/datadog-archive-keyring.gpg` and, optionally, `/etc/apt/trusted.gpg.d/datadog-archive-keyring.gpg` are created either by a supported [installation method](#install-methods-that-automatically-trust-the-new-gpg-key) or by installing the [`datadog-signing-keys` package](#the-datadog-signing-keys-package). Ensure that `datadog-signing-keys` [version 1.1.0](#datadog-signing-keys-version-110) or later is installed unless using one of the [installation method versions listed above](#install-methods-that-automatically-trust-the-new-gpg-key).
 
 {{% /tab %}}
 {{% tab "RedHat/CentOS/SUSE" %}}
@@ -132,7 +137,7 @@ Since Agent v6.31.0 and v7.31.0, all Datadog DEB packages have a soft dependency
 
 Upon installation, this package:
 
-- Configures APT keys in the `/usr/share/keyrings/datadog-archive-keyring.gpg` keyring and also through `apt-key` when necessary. **This ensures that the upcoming APT repository signing key is trusted.**
+- Configures APT keys in the `/usr/share/keyrings/datadog-archive-keyring.gpg` keyring and also in `/etc/apt/trusted.gpg.d/datadog-archive-keyring.gpg` when necessary. **This ensures that the upcoming APT repository signing key is trusted.** Using the package [`datadog-signing-keys` version 1.1.0](#datadog-signing-keys-version-110) is recommended to ensure preparedness for the upcoming key rotation.
 - Sets up a [`debsig-verify` policy][12] for Datadog packages. This allows you to verify signatures for individual DEB packages locally. 
 
 For example, to verify that a locally downloaded DEB package was built and signed by Datadog, run the following command:
@@ -152,6 +157,19 @@ Because the Agent v6.31.0+/7.31.0+'s package dependency on `datadog-signing-keys
 The first two methods do not require verification for Datadog's repo metadata, so the key rotation has no impact. However, you may benefit from using the `debsig-verify` policy files shipped in the `datadog-signing-keys` package.
 
 With the third method, you need to explicitly install the `datadog-signing-keys` package if you are installing the Agent package from `apt.datadoghq.com` through `apt`. Alternatively, use one of the supported [installation methods](#install-methods-that-automatically-trust-the-new-gpg-key).
+
+### datadog-signing-keys version 1.1.0
+
+<div class="alert alert-info"><strong>Note:</strong> This section only applies to DEB Agent package users.</div>
+
+`datadog-signing-keys` versions before 1.1.0 do not handle the following corner cases:
+
+* On Ubuntu >= 16 and Debian >= 9, only `/usr/share/keyrings/datadog-archive-keyring.gpg` was created, but `/etc/apt/trusted.gpg.d/datadog-archive-keyring.gpg` was not.
+* If the APT source list file (e.g. `/etc/apt/sources.list.d/datadog.list`) does not contain the option `[signed-by=/usr/share/keyrings/datadog-archive-keyring.gpg]`, APT never knows about the new key. Any operations with the Datadog repository will fail after the key rotation.
+
+`datadog-signing-keys` version 1.1.0 addresses this issue by creating `/etc/apt/trusted.gpg.d/datadog-archive-keyring.gpg` when `/etc/apt/sources.list.d/datadog.list` doesn't contain the proper `signed-by` option. This ensures that the above corner case is covered as well.
+
+Users of supported up-to-date [installation methods](#install-methods-that-automatically-trust-the-new-gpg-key) using the default Datadog sources always have the proper `signed-by` option configured, so they are not affected by this issue. Datadog highly recommends that all other users to upgrade to `datadog-signing-keys` 1.1.0 to ensure preparedness for the upcoming key rotation.
 
 ## Impact for Agent v5 users
 
