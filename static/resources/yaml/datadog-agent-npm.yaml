@@ -3,7 +3,7 @@
 apiVersion: v1
 kind: Secret
 metadata:
-  name: datadog-agent
+  name: datadog
   namespace: default
   labels: {}
 type: Opaque
@@ -14,7 +14,7 @@ data:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: datadog-agent-installinfo
+  name: datadog-installinfo
   namespace: default
   labels: {}
   annotations: {}
@@ -30,7 +30,7 @@ data:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: datadog-agent-system-probe-config
+  name: datadog-system-probe-config
   namespace: default
   labels: {}
 data:
@@ -69,7 +69,7 @@ data:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: datadog-agent-security
+  name: datadog-security
   namespace: default
   labels: {}
 data:
@@ -265,25 +265,25 @@ data:
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
-  name: datadog-agent
+  name: datadog
   namespace: default
   labels: {}
 spec:
   selector:
     matchLabels:
-      app: datadog-agent
+      app: datadog
   template:
     metadata:
       labels:
-        app: datadog-agent
-      name: datadog-agent
+        app: datadog
+      name: datadog
       annotations:
         container.apparmor.security.beta.kubernetes.io/system-probe: unconfined
         container.seccomp.security.alpha.kubernetes.io/system-probe: localhost/system-probe
     spec:
       containers:
         - name: agent
-          image: "gcr.io/datadoghq/agent:7.33.0"
+          image: "gcr.io/datadoghq/agent:7.34.0"
           imagePullPolicy: IfNotPresent
           command: ["agent", "run"]
           resources: {}
@@ -298,7 +298,7 @@ spec:
             - name: DD_API_KEY
               valueFrom:
                 secretKeyRef:
-                  name: "datadog-agent"
+                  name: "datadog"
                   key: api-key
             - name: DD_KUBERNETES_KUBELET_HOST
               valueFrom:
@@ -324,6 +324,8 @@ spec:
               value: "false"
             - name: DD_LOGS_CONFIG_K8S_CONTAINER_USE_FILE
               value: "true"
+            - name: DD_LOGS_CONFIG_AUTO_MULTI_LINE_DETECTION
+              value: "false"
             - name: DD_HEALTH_PORT
               value: "5555"
             - name: DD_DOGSTATSD_SOCKET
@@ -383,7 +385,7 @@ spec:
             successThreshold: 1
             timeoutSeconds: 5
         - name: process-agent
-          image: "gcr.io/datadoghq/agent:7.33.0"
+          image: "gcr.io/datadoghq/agent:7.34.0"
           imagePullPolicy: IfNotPresent
           command: ["process-agent", "-config=/etc/datadog-agent/datadog.yaml"]
           resources: {}
@@ -394,7 +396,7 @@ spec:
             - name: DD_API_KEY
               valueFrom:
                 secretKeyRef:
-                  name: "datadog-agent"
+                  name: "datadog"
                   key: api-key
             - name: DD_KUBERNETES_KUBELET_HOST
               valueFrom:
@@ -449,7 +451,7 @@ spec:
               mountPath: /etc/datadog-agent/system-probe.yaml
               subPath: system-probe.yaml
         - name: system-probe
-          image: "gcr.io/datadoghq/agent:7.33.0"
+          image: "gcr.io/datadoghq/agent:7.34.0"
           imagePullPolicy: IfNotPresent
           securityContext:
             capabilities:
@@ -471,7 +473,7 @@ spec:
             - name: DD_API_KEY
               valueFrom:
                 secretKeyRef:
-                  name: "datadog-agent"
+                  name: "datadog"
                   key: api-key
             - name: DD_KUBERNETES_KUBELET_HOST
               valueFrom:
@@ -520,7 +522,7 @@ spec:
               readOnly: true
       initContainers:
         - name: init-volume
-          image: "gcr.io/datadoghq/agent:7.33.0"
+          image: "gcr.io/datadoghq/agent:7.34.0"
           imagePullPolicy: IfNotPresent
           command: ["bash", "-c"]
           args:
@@ -530,7 +532,7 @@ spec:
               mountPath: /opt/datadog-agent
           resources: {}
         - name: init-config
-          image: "gcr.io/datadoghq/agent:7.33.0"
+          image: "gcr.io/datadoghq/agent:7.34.0"
           imagePullPolicy: IfNotPresent
           command: ["bash", "-c"]
           args:
@@ -558,7 +560,7 @@ spec:
             - name: DD_API_KEY
               valueFrom:
                 secretKeyRef:
-                  name: "datadog-agent"
+                  name: "datadog"
                   key: api-key
             - name: DD_KUBERNETES_KUBELET_HOST
               valueFrom:
@@ -570,7 +572,7 @@ spec:
               value: "true"
           resources: {}
         - name: seccomp-setup
-          image: "gcr.io/datadoghq/agent:7.33.0"
+          image: "gcr.io/datadoghq/agent:7.34.0"
           command:
             - cp
             - /etc/config/system-probe-seccomp.json
@@ -585,7 +587,7 @@ spec:
       volumes:
         - name: installinfo
           configMap:
-            name: datadog-agent-installinfo
+            name: datadog-installinfo
         - name: config
           emptyDir: {}
         - name: logdatadog
@@ -618,10 +620,10 @@ spec:
           emptyDir: {}
         - name: sysprobe-config
           configMap:
-            name: datadog-agent-system-probe-config
+            name: datadog-system-probe-config
         - name: datadog-agent-security
           configMap:
-            name: datadog-agent-security
+            name: datadog-security
         - hostPath:
             path: /var/lib/kubelet/seccomp
           name: seccomp-root

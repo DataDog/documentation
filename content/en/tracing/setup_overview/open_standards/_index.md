@@ -350,11 +350,7 @@ To connect OpenTelemetry traces and logs so that your application logs monitorin
 
 ## Other alternatives
 
-Datadog recommends you use the OpenTelemetry Collector Datadog exporter or the OTLP Ingest in the Datadog Agent in conjunction with OpenTelemetry tracing clients. However, if that doesn't work for you:
-
-  - Each of the supported languages also has support for [sending OpenTracing data to Datadog][22].
-
-  - [Python][23], [Ruby][24], and [NodeJS][25] also have language-specific OpenTelemetry Datadog span exporters, which export traces directly from OpenTelemetry tracing clients to a Datadog Agent.
+Datadog recommends you use the OpenTelemetry Collector Datadog exporter or the OTLP Ingest in the Datadog Agent in conjunction with OpenTelemetry tracing clients. However, if that doesn't work for you, each of the supported languages also has support for [sending OpenTracing data to Datadog][22].
 
 ## Further Reading
 
@@ -382,6 +378,3 @@ Datadog recommends you use the OpenTelemetry Collector Datadog exporter or the O
 [20]: https://docs.datadoghq.com/help/
 [21]: /tracing/connect_logs_and_traces/opentelemetry
 [22]: /tracing/setup_overview/open_standards/java
-[23]: /tracing/setup_overview/open_standards/python#opentelemetry
-[24]: /tracing/setup_overview/open_standards/ruby#opentelemetry
-[25]: /tracing/setup_overview/open_standards/nodejs#opentelemetry

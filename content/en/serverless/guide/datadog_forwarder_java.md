@@ -2,11 +2,16 @@
 title: Using the Datadog Forwarder - Java
 kind: guide
 ---
+## Overview
+
+<div class="alert alert-warning">
+If you are a new user of Datadog Serverless, follow the <a href="/serverless/installation/java">instructions to instrument your Lambda functions using the Datadog Lambda Extension</a> instead. If you have setup Datadog Serverless with the Datadog Forwarder before Lambda offered out-of-the-box functionality, use this guide to maintain your instance.
+</div>
 
 {{< img src="serverless/java-lambda-tracing.png" alt="Monitor Java Lambda Functions with Datadog" style="width:100%;">}}
 
 <div class="alert alert-danger">
-Some older versions of <code>datadog-lambda-java</code> import <code>log4j <=2.14.0</code> as a transitive dependency. <a href="#upgrading">Upgrade instructions</a> are below. 
+Some older versions of <code>datadog-lambda-java</code> import <code>log4j <=2.14.0</code> as a transitive dependency. <a href="#upgrading">Upgrade instructions</a> are below.
 </div>
 
 ## Prerequisites
@@ -58,7 +63,7 @@ dependencies {
 2. Configure the following environment variables on your function:
 
     ```yaml
-    JAVA_TOOL_OPTIONS: -javaagent:"/opt/java/lib/dd-java-agent.jar"
+    JAVA_TOOL_OPTIONS: -javaagent:"/opt/java/lib/dd-java-agent.jar" -XX:+TieredCompilation -XX:TieredStopAtLevel=1
     DD_LOGS_INJECTION: true
     DD_JMXFETCH_ENABLED: false
     DD_TRACE_ENABLED: true

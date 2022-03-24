@@ -5,12 +5,15 @@ aliases:
   - /security_monitoring/detection_rules/
   - /cloud_siem/detection_rules/
 further_reading:
-- link: "cloud_siem/default_rules"
+- link: "/cloud_siem/default_rules"
   tag: "Documentation"
   text: "Explore default detection rules"
 - link: "https://www.datadoghq.com/blog/detect-abuse-of-functionality-with-datadog/"
   tag: "Blog"
   text: "Detect Abuse of Functionality with Datadog"
+- link: "https://www.datadoghq.com/blog/impossible-travel-detection-rules/"
+  tag: "Blog"
+  text: "Detect suspicious login activity with impossible travel detection rules"
 ---
 
 ## Overview
@@ -25,11 +28,11 @@ For each of monitoring option, there are [default detection rules][1] that work 
 
 - With [Cloud Workload Security][5], the Datadog Agent actively monitors system activity and evaluates it against a set of detection rules.
 
-- [Application Security][7] leverages Datadog [APM][8], the [Datadog Agent][9], and detection rules to detect threats in your application environment.
+- [Application Security][6] leverages Datadog [APM][7], the [Datadog Agent][8], and detection rules to detect threats in your application environment.
 
 ## Creating and managing detection rules
 
-The [Detection Rules][6] page lets you search all detection rules by rule type. Quickly enable, disable, edit, delete, and clone rules. To create a custom [detection rule][3], click on the **New Rule** button in the top right corner of the page.
+The [Detection Rules][9] page lets you search all detection rules by rule type. Quickly enable, disable, edit, delete, and clone rules. To create a custom [detection rule][3], click on the **New Rule** button in the top right corner of the page.
 
 ### Finding detection rules
 
@@ -63,7 +66,7 @@ Click on the three dot menu, next to the rule toggle, and select any of the prov
   -  **Note**: You can only edit an out-of-the-box (OOTB) rule by first cloning the rule, and then modifying the rule. To edit a default rule, click **Edit** and scroll to the bottom of the rule configuration page. Click **Clone**, and then modify the rule.
 - Cloning a rule is helpful if you wish to duplicate an existing rule and lightly modify settings to cover other areas of detection. For example, you could duplicate a log detection rule and modify it from **Threshold** to **Anomaly** to add new dimension to threat detection using the same queries and triggers.
 - The delete option is **only** available for custom rules. You cannot delete an out-of-the-box (OOTB) rule as they are native to the platform. To permanently delete a custom rule, click **Delete**. To disable an OOTB rule, click the disable toggle.
-- Click **View generated signals** to pivot to the [Signals Explorer][7] and query by a rule's ID. This is useful when correlating signals across multiple sources by rule, or when completeing an audit of rules. 
+- Click **View generated signals** to pivot to the [Signals Explorer][6] and query by a rule's ID. This is useful when correlating signals across multiple sources by rule, or when completeing an audit of rules. 
 
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}
@@ -74,7 +77,7 @@ Click on the three dot menu, next to the rule toggle, and select any of the prov
 [3]: /security_platform/cloud_siem/log_detection_rules/
 [4]: /security_platform/cspm/
 [5]: /security_platform/cloud_workload_security/
-[6]: https://app.datadoghq.com/security/configuration/rules
-[7]: /security_platform/explorer/
-[8]: /tracing/
-[9]: /agent/
+[6]: /security_platform/explorer/
+[7]: /tracing/
+[8]: /agent/
+[9]: https://app.datadoghq.com/security/configuration/rules

@@ -11,6 +11,9 @@ further_reading:
     - link: "/security_platform/default_rules/#cat-application-security"
       tag: "Documentation"
       text: "OOTB Application Security Rules"
+    - link: "/security_platform/application_security/troubleshooting"
+      tag: "Documentation"
+      text: "Troubleshooting Application Security Monitoring"
 ---
 
 {{% appsec-getstarted %}}
@@ -174,7 +177,7 @@ ENV DD_APPSEC_ENABLED=true
 
 3. **Restart the application** using a full stop and start.
 
-{{% appsec-getstarted-2 %}}
+{{% appsec-getstarted-2-canary %}}
 
 {{< img src="/security_platform/application_security/application-security-signal.png" alt="Security Signal details page showing tags, metrics, suggested next steps, and attacker IP addresses associated with a threat." style="width:100%;" >}}
 

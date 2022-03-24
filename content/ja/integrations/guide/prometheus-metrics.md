@@ -45,7 +45,7 @@ Datadog の Prometheus または OpenMetrics チェックをお使いの場合�
 
 パラメーター `send_histograms_buckets` が `true` の場合、それぞれの `_bucket` 値もまた Datadog の `gauge` にマッピングされます。
 
-パラメーター `send_distribution_buckets` が `true` の場合、それぞれの `_bucket` は Datadog の `distribution` にマッピングされます。Prometheus/OpenMetrics の histogram データは Datadog のディストリビューションメトリクスに変換され、Datadog で Kubernetes のメトリクスをパーセンタイルとして簡単に監視できるようになります。Datadog のディストリビューションメトリクスは [DDSketch アルゴリズム][7]に基づいています。詳しくは、関連する Datadog の [OpenMetrics とディストリビューションメトリクスに関するブログ記事][8]を参照してください。
+パラメーター `send_distribution_buckets` が `true` の場合、それぞれの `_bucket` は Datadog の `distribution` にマッピングされます。Prometheus/OpenMetrics の histogram データは Datadog のディストリビューションメトリクスに変換され、Datadog で Kubernetes のメトリクスをパーセンタイルとして監視できるようになります。Datadog のディストリビューションメトリクスは [DDSketch アルゴリズム][7]に基づいています。詳しくは、関連する Datadog の [OpenMetrics とディストリビューションメトリクスに関するブログ記事][8]を参照してください。
 
 パラメーター `send_distribution_counts_as_monotonic` が `true` の場合、`_count` で終わる各メトリクスは `monotonic_count` として送信されます。[単調カウンターについての詳細はこちらを参照してください][4]。
 

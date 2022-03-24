@@ -30,3 +30,7 @@ Les logs de navigateur sont automatiquement liés à la session RUM correspondan
 ## Est-ce que Datadog recueille des cookies ?
 
 Oui. Datadog utilise des cookies pour relier les différentes actions effectuées par vos utilisateurs au cours d'une session. Ce processus n'implique aucun transfert de cookies d'un domaine à un autre et n'effectue pas le suivi des actions de vos utilisateurs en dehors de vos applications.
+
+## Des replays de session s'affichent sur la page Usage alors que Session Replay n'a pas été configuré dans l'environnement
+
+Session Replay inclut des replays, des tâches longues et des ressources. Si vous recueillez l'un de ces trois éléments, vous encourez des frais relatifs à Session Replay.

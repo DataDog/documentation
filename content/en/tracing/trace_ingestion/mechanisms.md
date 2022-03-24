@@ -34,7 +34,7 @@ For instance, if service `A` has more traffic than service `B`, the Agent might 
 Set Agent's target traces-per-second in its main configuration file (`datadog.yaml`) or as an environment variable :
 ```
 @param max_traces_per_second - integer - optional - default: 10
-@env DD_APM_CONFIG_MAX_TRACES_PER_SECOND - integer - optional - default: 10
+@env DD_APM_MAX_TPS - integer - optional - default: 10
 ```
 
 ### In tracing libraries: user-defined rules
@@ -100,7 +100,7 @@ span.SetTag(ext.ManualDrop, true)
 `ingestion_reason: analytic`
 
 <div class="alert alert-warning">
-On October 20, 2020, App Analytics was replaced by Tracing without Limits.  This is a deprecated mechanism with configuration information relevant to legacy App Analytics. Now, instead, use Tracing without Limits™ <a href="#head-based-default-mechanism">head-based sampling</a> to have full control over your data ingestion.
+On October 20, 2020, App Analytics was replaced by Tracing without Limits. This is a deprecated mechanism with configuration information relevant to legacy App Analytics. Instead, use new configuration options <a href="#head-based-default-mechanism">head-based sampling</a> to have full control over your data ingestion.
 </div>
 
 If you need to sample a specific span, but don't need the full trace to be available, tracers allow a sampling rate to be configured for a single span. This span will be ingested at no less than the configured rate, even when the enclosing trace is dropped.
@@ -145,7 +145,7 @@ In the Agent, an additional rate limiter is set to 200 spans per second. If the 
 Set the rate in the Agent main configuration file (`datadog.yaml`) or as an environment variable:
 ```
 @param max_events_per_second - integer - optional 200
-@env DD_APM_CONFIG_MAX_EVENTS_PER_SECOND - integer - optional 200
+@env DD_APM_MAX_EPS - integer - optional 200
 ```
 
 ## Error and rare traces

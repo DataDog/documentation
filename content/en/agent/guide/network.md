@@ -53,7 +53,8 @@ Other: See [logs endpoints][7]
 : `orchestrator.`{{< region-param key="dd_site" code="true" >}}
 
 [Real User Monitoring (RUM)][9]
-: `rum-http-intake.logs.`{{< region-param key="dd_site" code="true" >}}
+: `rum.`{{< region-param key="browser_sdk_endpoint_domain" code="true" >}}<br>
+`session-replay.`{{< region-param key="browser_sdk_endpoint_domain" code="true" >}}
 
 [Profiling][10]
 : `intake.profile.`{{< region-param key="dd_site" code="true" >}}
@@ -63,6 +64,9 @@ Other: See [logs endpoints][7]
 API test results for worker v>0.1.6 `intake.synthetics.`{{< region-param key="dd_site" code="true" >}}<br>
 Browser test results for worker v>0.2.0 `intake-v2.synthetics.`{{< region-param key="dd_site" code="true" >}}<br>
 API test results for worker v<0.1.5 `api.`{{< region-param key="dd_site" code="true" >}}
+
+[Network Device Monitoring][13]
+: `ndm-intake.`{{< region-param key="dd_site" code="true" >}}
 
 All other Agent data
 : `<VERSION>-app.agent.`{{< region-param key="dd_site" code="true" >}}<br>
@@ -158,7 +162,7 @@ Used for Agent services communicating with each other locally within the host on
 
 [1]: /agent/faq/network-time-protocol-ntp-offset-issues/
 [2]: /integrations/ntp/#overview
-[3]: /logs/log_collection/#datadog-logs-endpoints
+[3]: /logs/log_collection/#logging-endpoints
 [4]: /agent/basic_agent_usage/kubernetes/
 [5]: /integrations/go_expvar/
 [6]: /agent/basic_agent_usage/#gui
@@ -219,9 +223,10 @@ To avoid running out of storage space, the Agent stores the metrics on disk only
 [4]: /infrastructure/process/
 [5]: /logs/
 [6]: /security/logs/#hipaa-enabled-customers
-[7]: /logs/log_collection/#datadog-logs-endpoints
+[7]: /logs/log_collection/#logging-endpoints
 [8]: /infrastructure/livecontainers/#kubernetes-resources-1
 [9]: /real_user_monitoring/
 [10]: /tracing/profiler/
 [11]: /synthetics/private_locations
 [12]: /agent/proxy/
+[13]: /network_monitoring/devices

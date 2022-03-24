@@ -130,6 +130,13 @@ components:
       required: true
       schema:
         type: string
+    AuthNMappingID:
+      description: The UUID of the AuthN Mapping.
+      in: path
+      name: authn_mapping_id
+      required: true
+      schema:
+        type: string
     CloudWorkloadSecurityAgentRuleID:
       description: The ID of the Agent rule.
       example: 3b5-v82-ns6
@@ -269,7 +276,7 @@ components:
       schema:
         type: string
     RoleID:
-      description: The ID of the role.
+      description: The unique identifier of the role.
       in: path
       name: role_id
       required: true
@@ -295,7 +302,7 @@ components:
       name: service_account_id
       required: true
       schema:
-        example: 00000000-0000-0000-0000-000000000000
+        example: 00000000-0000-1234-0000-000000000000
         type: string
     UserID:
       description: The ID of the user.
@@ -303,7 +310,7 @@ components:
       name: user_id
       required: true
       schema:
-        example: 00000000-0000-0000-0000-000000000000
+        example: 00000000-0000-9999-0000-000000000000
         type: string
   requestBodies: {}
   responses:
@@ -638,6 +645,430 @@ components:
       type: string
       x-enum-varnames:
       - APPLICATION_KEYS
+    AuditLogsEvent:
+      description: Object description of an Audit Logs event after it is processed
+        and stored by Datadog.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/AuditLogsEventAttributes'
+        id:
+          description: Unique ID of the event.
+          example: AAAAAWgN8Xwgr1vKDQAAAABBV2dOOFh3ZzZobm1mWXJFYTR0OA
+          type: string
+        type:
+          $ref: '#/components/schemas/AuditLogsEventType'
+      type: object
+    AuditLogsEventAttributes:
+      description: JSON object containing all event attributes and their associated
+        values.
+      properties:
+        attributes:
+          additionalProperties: {}
+          description: JSON object of attributes from Audit Logs events.
+          example:
+            customAttribute: 123
+            duration: 2345
+          type: object
+        service:
+          description: 'Name of the application or service generating Audit Logs events.
+
+            This name is used to correlate Audit Logs to APM, so make sure you specify
+            the same
+
+            value when you use both products.'
+          example: web-app
+          type: string
+        tags:
+          description: Array of tags associated with your event.
+          example:
+          - team:A
+          items:
+            description: Tag associated with your event.
+            type: string
+          type: array
+        timestamp:
+          description: Timestamp of your event.
+          example: '2019-01-02T09:42:36.320Z'
+          format: date-time
+          type: string
+      type: object
+    AuditLogsEventType:
+      default: audit
+      description: Type of the event.
+      enum:
+      - audit
+      example: audit
+      type: string
+      x-enum-varnames:
+      - Audit
+    AuditLogsEventsResponse:
+      description: Response object with all events matching the request and pagination
+        information.
+      properties:
+        data:
+          description: Array of events matching the request.
+          items:
+            $ref: '#/components/schemas/AuditLogsEvent'
+          type: array
+        links:
+          $ref: '#/components/schemas/AuditLogsResponseLinks'
+        meta:
+          $ref: '#/components/schemas/AuditLogsResponseMetadata'
+      type: object
+    AuditLogsQueryFilter:
+      description: Search and filter query settings.
+      properties:
+        from:
+          default: now-15m
+          description: Minimum time for the requested events. Supports date, math,
+            and regular timestamps (in milliseconds).
+          example: now-15m
+          type: string
+        query:
+          default: '*'
+          description: Search query following the Audit Logs search syntax.
+          example: '@type:session AND @session.type:user'
+          type: string
+        to:
+          default: now
+          description: Maximum time for the requested events. Supports date, math,
+            and regular timestamps (in milliseconds).
+          example: now
+          type: string
+      type: object
+    AuditLogsQueryOptions:
+      description: 'Global query options that are used during the query.
+
+        Note: Specify either timezone or time offset, not both. Otherwise, the query
+        fails.'
+      properties:
+        time_offset:
+          description: Time offset (in seconds) to apply to the query.
+          format: int64
+          type: integer
+        timezone:
+          default: UTC
+          description: 'Timezone code. Can be specified as an offset, for example:
+            "UTC+03:00".'
+          example: GMT
+          type: string
+      type: object
+    AuditLogsQueryPageOptions:
+      description: Paging attributes for listing events.
+      properties:
+        cursor:
+          description: List following results with a cursor provided in the previous
+            query.
+          example: eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==
+          type: string
+        limit:
+          default: 10
+          description: Maximum number of events in the response.
+          example: 25
+          format: int32
+          maximum: 1000
+          type: integer
+      type: object
+    AuditLogsResponseLinks:
+      description: Links attributes.
+      properties:
+        next:
+          description: 'Link for the next set of results. Note that the request can
+            also be made using the
+
+            POST endpoint.'
+          example: https://app.datadoghq.com/api/v2/audit/event?filter[query]=foo&page[cursor]=eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==
+          type: string
+      type: object
+    AuditLogsResponseMetadata:
+      description: The metadata associated with a request.
+      properties:
+        elapsed:
+          description: Time elapsed in milliseconds.
+          example: 132
+          format: int64
+          type: integer
+        page:
+          $ref: '#/components/schemas/AuditLogsResponsePage'
+        request_id:
+          description: The identifier of the request.
+          example: MWlFUjVaWGZTTTZPYzM0VXp1OXU2d3xLSVpEMjZKQ0VKUTI0dEYtM3RSOFVR
+          type: string
+        status:
+          $ref: '#/components/schemas/AuditLogsResponseStatus'
+        warnings:
+          description: 'A list of warnings (non-fatal errors) encountered. Partial
+            results may return if
+
+            warnings are present in the response.'
+          items:
+            $ref: '#/components/schemas/AuditLogsWarning'
+          type: array
+      type: object
+    AuditLogsResponsePage:
+      description: Paging attributes.
+      properties:
+        after:
+          description: The cursor to use to get the next results, if any. To make
+            the next request, use the same parameters with the addition of `page[cursor]`.
+          example: eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==
+          type: string
+      type: object
+    AuditLogsResponseStatus:
+      description: The status of the response.
+      enum:
+      - done
+      - timeout
+      example: done
+      type: string
+      x-enum-varnames:
+      - DONE
+      - TIMEOUT
+    AuditLogsSearchEventsRequest:
+      description: The request for a Audit Logs events list.
+      properties:
+        filter:
+          $ref: '#/components/schemas/AuditLogsQueryFilter'
+        options:
+          $ref: '#/components/schemas/AuditLogsQueryOptions'
+        page:
+          $ref: '#/components/schemas/AuditLogsQueryPageOptions'
+        sort:
+          $ref: '#/components/schemas/AuditLogsSort'
+      type: object
+    AuditLogsSort:
+      description: Sort parameters when querying events.
+      enum:
+      - timestamp
+      - -timestamp
+      type: string
+      x-enum-varnames:
+      - TIMESTAMP_ASCENDING
+      - TIMESTAMP_DESCENDING
+    AuditLogsWarning:
+      description: Warning message indicating something that went wrong with the query.
+      properties:
+        code:
+          description: Unique code for this type of warning.
+          example: unknown_index
+          type: string
+        detail:
+          description: Detailed explanation of this specific warning.
+          example: 'indexes: foo, bar'
+          type: string
+        title:
+          description: Short human-readable summary of the warning.
+          example: One or several indexes are missing or invalid, results hold data
+            from the other indexes
+          type: string
+      type: object
+    AuthNMapping:
+      description: The AuthN Mapping object returned by API.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/AuthNMappingAttributes'
+        id:
+          description: ID of the AuthN Mapping.
+          example: 3653d3c6-0c75-11ea-ad28-fb5701eabc7d
+          type: string
+        included:
+          description: Included data in the AuthN Mapping response.
+          items:
+            $ref: '#/components/schemas/AuthNMappingIncluded'
+          type: array
+        relationships:
+          $ref: '#/components/schemas/AuthNMappingRelationships'
+        type:
+          $ref: '#/components/schemas/AuthNMappingsType'
+      required:
+      - id
+      - type
+      type: object
+    AuthNMappingAttributes:
+      description: Attributes of AuthN Mapping.
+      properties:
+        attribute_key:
+          description: Key portion of a key/value pair of the attribute sent from
+            the Identity Provider.
+          example: member-of
+          type: string
+        attribute_value:
+          description: Value portion of a key/value pair of the attribute sent from
+            the Identity Provider.
+          example: Development
+          type: string
+        created_at:
+          description: Creation time of the AuthN Mapping.
+          format: date-time
+          readOnly: true
+          type: string
+        modified_at:
+          description: Time of last AuthN Mapping modification.
+          format: date-time
+          readOnly: true
+          type: string
+        saml_assertion_attribute_id:
+          description: The ID of the SAML assertion attribute.
+          example: 0
+          format: int32
+          maximum: 2147483647
+          type: integer
+      type: object
+    AuthNMappingCreateAttributes:
+      description: Key/Value pair of attributes used for create request.
+      properties:
+        attribute_key:
+          description: Key portion of a key/value pair of the attribute sent from
+            the Identity Provider.
+          example: member-of
+          type: string
+        attribute_value:
+          description: Value portion of a key/value pair of the attribute sent from
+            the Identity Provider.
+          example: Development
+          type: string
+      type: object
+    AuthNMappingCreateData:
+      description: Data for creating an AuthN Mapping.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/AuthNMappingCreateAttributes'
+        relationships:
+          $ref: '#/components/schemas/AuthNMappingCreateRelationships'
+        type:
+          $ref: '#/components/schemas/AuthNMappingsType'
+      required:
+      - type
+      type: object
+    AuthNMappingCreateRelationships:
+      description: Relationship of AuthN Mapping create object to Role.
+      properties:
+        role:
+          $ref: '#/components/schemas/RelationshipToRole'
+      type: object
+    AuthNMappingCreateRequest:
+      description: Request for creating an AuthN Mapping.
+      properties:
+        data:
+          $ref: '#/components/schemas/AuthNMappingCreateData'
+      required:
+      - data
+      type: object
+    AuthNMappingIncluded:
+      description: Included data in the AuthN Mapping response.
+      oneOf:
+      - $ref: '#/components/schemas/SAMLAssertionAttribute'
+      - $ref: '#/components/schemas/Role'
+      properties: {}
+      type: object
+    AuthNMappingRelationships:
+      description: All relationships associated with AuthN Mapping.
+      properties:
+        role:
+          $ref: '#/components/schemas/RelationshipToRole'
+        saml_assertion_attribute:
+          $ref: '#/components/schemas/RelationshipToSAMLAssertionAttribute'
+      type: object
+    AuthNMappingResponse:
+      description: AuthN Mapping response from the API.
+      properties:
+        data:
+          $ref: '#/components/schemas/AuthNMapping'
+      type: object
+    AuthNMappingUpdateAttributes:
+      description: Key/Value pair of attributes used for update request.
+      properties:
+        attribute_key:
+          description: Key portion of a key/value pair of the attribute sent from
+            the Identity Provider.
+          example: member-of
+          type: string
+        attribute_value:
+          description: Value portion of a key/value pair of the attribute sent from
+            the Identity Provider.
+          example: Development
+          type: string
+      type: object
+    AuthNMappingUpdateData:
+      description: Data for updating an AuthN Mapping.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/AuthNMappingUpdateAttributes'
+        id:
+          description: ID of the AuthN Mapping.
+          example: 3653d3c6-0c75-11ea-ad28-fb5701eabc7d
+          type: string
+        relationships:
+          $ref: '#/components/schemas/AuthNMappingUpdateRelationships'
+        type:
+          $ref: '#/components/schemas/AuthNMappingsType'
+      required:
+      - id
+      - type
+      type: object
+    AuthNMappingUpdateRelationships:
+      description: Relationship of AuthN Mapping update object to Role.
+      properties:
+        role:
+          $ref: '#/components/schemas/RelationshipToRole'
+      type: object
+    AuthNMappingUpdateRequest:
+      description: Request to update an AuthN Mapping.
+      properties:
+        data:
+          $ref: '#/components/schemas/AuthNMappingUpdateData'
+      required:
+      - data
+      type: object
+    AuthNMappingsResponse:
+      description: Array of AuthN Mappings response.
+      properties:
+        data:
+          description: Array of returned AuthN Mappings.
+          items:
+            $ref: '#/components/schemas/AuthNMapping'
+          type: array
+        meta:
+          $ref: '#/components/schemas/ResponseMetaAttributes'
+      type: object
+    AuthNMappingsSort:
+      description: Sorting options for AuthN Mappings.
+      enum:
+      - created_at
+      - -created_at
+      - role_id
+      - -role_id
+      - saml_assertion_attribute_id
+      - -saml_assertion_attribute_id
+      - role.name
+      - -role.name
+      - saml_assertion_attribute.attribute_key
+      - -saml_assertion_attribute.attribute_key
+      - saml_assertion_attribute.attribute_value
+      - -saml_assertion_attribute.attribute_value
+      type: string
+      x-enum-varnames:
+      - CREATED_AT_ASCENDING
+      - CREATED_AT_DESCENDING
+      - ROLE_ID_ASCENDING
+      - ROLE_ID_DESCENDING
+      - SAML_ASSERTION_ATTRIBUTE_ID_ASCENDING
+      - SAML_ASSERTION_ATTRIBUTE_ID_DESCENDING
+      - ROLE_NAME_ASCENDING
+      - ROLE_NAME_DESCENDING
+      - SAML_ASSERTION_ATTRIBUTE_KEY_ASCENDING
+      - SAML_ASSERTION_ATTRIBUTE_KEY_DESCENDING
+      - SAML_ASSERTION_ATTRIBUTE_VALUE_ASCENDING
+      - SAML_ASSERTION_ATTRIBUTE_VALUE_DESCENDING
+    AuthNMappingsType:
+      default: authn_mappings
+      description: AuthN Mappings resource type.
+      enum:
+      - authn_mappings
+      example: authn_mappings
+      type: string
+      x-enum-varnames:
+      - AUTHN_MAPPINGS
     CloudWorkloadSecurityAgentRuleAttributes:
       description: A Cloud Workload Security Agent rule returned by the API.
       properties:
@@ -684,6 +1115,7 @@ components:
           example: 23
           format: int64
           type: integer
+      type: object
     CloudWorkloadSecurityAgentRuleCreateAttributes:
       description: Create a new Cloud Workload Security Agent rule.
       properties:
@@ -1123,7 +1555,7 @@ components:
           type: string
         status:
           description: Error code.
-          example: 400
+          example: '400'
           type: string
         title:
           description: Error title.
@@ -1237,10 +1669,10 @@ components:
       description: The relationships the incident will have with other resources once
         created.
       properties:
-        commander:
-          $ref: '#/components/schemas/RelationshipToUser'
+        commander_user:
+          $ref: '#/components/schemas/NullableRelationshipToUser'
       required:
-      - commander
+      - commander_user
       type: object
     IncidentCreateRequest:
       description: Create request for an incident.
@@ -1426,7 +1858,7 @@ components:
           type: array
         postmortem_id:
           description: The UUID of the postmortem object attached to the incident.
-          example: 00000000-0000-0000-0000-000000000000
+          example: 00000000-0000-0000-7890-000000000000
           type: string
         public_id:
           description: The monotonically increasing integer ID for the incident.
@@ -1478,7 +1910,7 @@ components:
           $ref: '#/components/schemas/IncidentResponseAttributes'
         id:
           description: The incident's ID.
-          example: 00000000-0000-0000-0000-000000000000
+          example: 00000000-0000-0000-1234-000000000000
           type: string
         relationships:
           $ref: '#/components/schemas/IncidentResponseRelationships'
@@ -1493,11 +1925,38 @@ components:
       oneOf:
       - $ref: '#/components/schemas/User'
       type: object
+    IncidentResponseMeta:
+      description: The metadata object containing pagination metadata.
+      properties:
+        pagination:
+          $ref: '#/components/schemas/IncidentResponseMetaPagination'
+      readOnly: true
+      type: object
+    IncidentResponseMetaPagination:
+      description: Pagination properties.
+      properties:
+        next_offset:
+          description: The index of the first element in the next page of results.
+            Equal to page size added to the current offset.
+          example: 1000
+          format: int64
+          type: integer
+        offset:
+          description: The index of the first element in the results.
+          example: 10
+          format: int64
+          type: integer
+        size:
+          description: Maximum size of pages to return.
+          example: 1000
+          format: int64
+          type: integer
+      type: object
     IncidentResponseRelationships:
       description: The incident's relationships from a response.
       properties:
         commander_user:
-          $ref: '#/components/schemas/RelationshipToUser'
+          $ref: '#/components/schemas/NullableRelationshipToUser'
         created_by_user:
           $ref: '#/components/schemas/RelationshipToUser'
         integrations:
@@ -1662,30 +2121,7 @@ components:
           readOnly: true
           type: array
         meta:
-          description: The metadata object containing pagination metadata.
-          properties:
-            pagination:
-              description: Pagination properties.
-              properties:
-                next_offset:
-                  description: The index of the first element in the next page of
-                    results. Equal to page size added to the current offset.
-                  example: 1000
-                  format: int64
-                  type: integer
-                offset:
-                  description: The index of the first element in the results.
-                  example: 10
-                  format: int64
-                  type: integer
-                size:
-                  description: Maximum size of pages to return.
-                  example: 1000
-                  format: int64
-                  type: integer
-              type: object
-          readOnly: true
-          type: object
+          $ref: '#/components/schemas/IncidentResponseMeta'
       required:
       - data
       type: object
@@ -1773,7 +2209,7 @@ components:
           $ref: '#/components/schemas/IncidentTeamResponseAttributes'
         id:
           description: The incident team's ID.
-          example: 00000000-0000-0000-0000-000000000000
+          example: 00000000-7ea3-0000-000a-000000000000
           type: string
         relationships:
           $ref: '#/components/schemas/IncidentTeamRelationships'
@@ -1806,7 +2242,7 @@ components:
           $ref: '#/components/schemas/IncidentTeamUpdateAttributes'
         id:
           description: The incident team's ID.
-          example: 00000000-0000-0000-0000-000000000000
+          example: 00000000-7ea3-0000-0001-000000000000
           type: string
         relationships:
           $ref: '#/components/schemas/IncidentTeamRelationships'
@@ -1831,7 +2267,7 @@ components:
           example:
           - attributes:
               name: team name
-            id: 00000000-0000-0000-0000-000000000000
+            id: 00000000-7ea3-0000-0000-000000000000
             type: teams
           items:
             $ref: '#/components/schemas/IncidentTeamResponseData'
@@ -1843,30 +2279,7 @@ components:
           readOnly: true
           type: array
         meta:
-          description: The metadata object containing pagination metadata.
-          properties:
-            pagination:
-              description: Pagination properties.
-              properties:
-                next_offset:
-                  description: The index of the first element in the next page of
-                    results. Equal to page size added to the current offset.
-                  example: 1000
-                  format: int64
-                  type: integer
-                offset:
-                  description: The index of the first element in the results.
-                  example: 10
-                  format: int64
-                  type: integer
-                size:
-                  description: Maximum size of pages to return.
-                  example: 1000
-                  format: int64
-                  type: integer
-              type: object
-          readOnly: true
-          type: object
+          $ref: '#/components/schemas/IncidentResponseMeta'
       required:
       - data
       type: object
@@ -1890,14 +2303,7 @@ components:
         cell_type:
           $ref: '#/components/schemas/IncidentTimelineCellMarkdownContentType'
         content:
-          description: The Markdown timeline cell contents.
-          properties:
-            content:
-              description: The Markdown content of the cell.
-              example: An example timeline cell message.
-              nullable: false
-              type: string
-          type: object
+          $ref: '#/components/schemas/IncidentTimelineCellMarkdownCreateAttributesContent'
         important:
           default: false
           description: A flag indicating whether the timeline cell is important and
@@ -1907,6 +2313,15 @@ components:
       required:
       - content
       - cell_type
+      type: object
+    IncidentTimelineCellMarkdownCreateAttributesContent:
+      description: The Markdown timeline cell contents.
+      properties:
+        content:
+          description: The Markdown content of the cell.
+          example: An example timeline cell message.
+          nullable: false
+          type: string
       type: object
     IncidentType:
       default: incidents
@@ -1976,7 +2391,7 @@ components:
           $ref: '#/components/schemas/IncidentUpdateAttributes'
         id:
           description: The team's ID.
-          example: 00000000-0000-0000-0000-000000000000
+          example: 00000000-0000-0000-4567-000000000000
           type: string
         relationships:
           $ref: '#/components/schemas/IncidentUpdateRelationships'
@@ -1990,13 +2405,9 @@ components:
       description: The incident's relationships for an update request.
       properties:
         commander_user:
-          $ref: '#/components/schemas/RelationshipToUser'
-        created_by_user:
-          $ref: '#/components/schemas/RelationshipToUser'
+          $ref: '#/components/schemas/NullableRelationshipToUser'
         integrations:
           $ref: '#/components/schemas/RelationshipToIncidentIntegrationMetadatas'
-        last_modified_by_user:
-          $ref: '#/components/schemas/RelationshipToUser'
         postmortem:
           $ref: '#/components/schemas/RelationshipToIncidentPostmortem'
       type: object
@@ -2024,7 +2435,7 @@ components:
               customer_impacted: false
               detected: '2020-04-14T00:00:00+00:00'
               modified: '2020-09-17T14:16:58.696424+00:00'
-              postmortem_id: 00000000-0000-0000-0000-000000000000
+              postmortem_id: 00000000-0000-bbbb-0000-000000000000
               public_id: 1
               resolved: null
               severity: SEV-1
@@ -2033,29 +2444,29 @@ components:
               time_to_repair: 0
               time_to_resolve: 0
               title: Example Incident
-            id: 00000000-0000-0000-0000-000000000000
+            id: 00000000-aaaa-0000-0000-000000000000
             relationships:
               commander_user:
                 data:
-                  id: 00000000-0000-0000-0000-000000000000
+                  id: 00000000-0000-0000-cccc-000000000000
                   type: users
               created_by_user:
                 data:
-                  id: 00000000-0000-0000-0000-000000000000
+                  id: 00000000-0000-0000-cccc-000000000000
                   type: users
               integrations:
                 data:
-                - id: 00000000-0000-0000-0000-000000000000
+                - id: 00000000-0000-0000-4444-000000000000
                   type: incident_integrations
-                - id: 00000000-0000-0000-0000-000000000000
+                - id: 00000000-0000-0000-5555-000000000000
                   type: incident_integrations
               last_modified_by_user:
                 data:
-                  id: 00000000-0000-0000-0000-000000000000
+                  id: 00000000-0000-0000-cccc-000000000000
                   type: users
               postmortem:
                 data:
-                  id: 00000000-0000-0000-0000-000000000000
+                  id: 00000000-9999-0000-0000-000000000000
                   type: incident_postmortems
             type: incidents
           - attributes:
@@ -2068,7 +2479,7 @@ components:
               customer_impacted: false
               detected: '2020-04-14T00:00:00+00:00'
               modified: '2020-09-17T14:16:58.696424+00:00'
-              postmortem_id: 00000000-0000-0000-0000-000000000000
+              postmortem_id: 00000000-6006-0000-0000-000000000000
               public_id: 2
               resolved: null
               severity: SEV-5
@@ -2077,29 +2488,29 @@ components:
               time_to_repair: 0
               time_to_resolve: 0
               title: Example Incident 2
-            id: 00000000-0000-0000-0000-000000000000
+            id: 00000000-1111-0000-0000-000000000000
             relationships:
               commander_user:
                 data:
-                  id: 00000000-0000-0000-0000-000000000000
+                  id: 00000000-aaaa-0000-0000-000000000000
                   type: users
               created_by_user:
                 data:
-                  id: 00000000-0000-0000-0000-000000000000
+                  id: 00000000-aaaa-0000-0000-000000000000
                   type: users
               integrations:
                 data:
-                - id: 00000000-0000-0000-0000-000000000000
+                - id: 00000000-0000-0000-0001-000000000000
                   type: incident_integrations
-                - id: 00000000-0000-0000-0000-000000000000
+                - id: 00000000-0000-0000-0002-000000000000
                   type: incident_integrations
               last_modified_by_user:
                 data:
-                  id: 00000000-0000-0000-0000-000000000000
+                  id: 00000000-aaaa-0000-0000-000000000000
                   type: users
               postmortem:
                 data:
-                  id: 00000000-0000-0000-0000-000000000000
+                  id: 00000000-6006-0000-0000-000000000000
                   type: incident_postmortems
             type: incidents
           items:
@@ -2112,30 +2523,7 @@ components:
           readOnly: true
           type: array
         meta:
-          description: The metadata object containing pagination metadata.
-          properties:
-            pagination:
-              description: Pagination properties.
-              properties:
-                next_offset:
-                  description: The index of the first element in the next page of
-                    results. Equal to page size added to the current offset.
-                  example: 1000
-                  format: int64
-                  type: integer
-                offset:
-                  description: The index of the first element in the results.
-                  example: 10
-                  format: int64
-                  type: integer
-                size:
-                  description: Maximum size of pages to return.
-                  example: 1000
-                  format: int64
-                  type: integer
-              type: object
-          readOnly: true
-          type: object
+          $ref: '#/components/schemas/IncidentResponseMeta'
       required:
       - data
       type: object
@@ -2158,64 +2546,65 @@ components:
         Datadog.
       properties:
         attributes:
-          description: JSON object containing all log attributes and their associated
-            values.
-          properties:
-            attributes:
-              additionalProperties: {}
-              description: JSON object of attributes from your log.
-              example:
-                customAttribute: 123
-                duration: 2345
-              type: object
-            host:
-              description: Name of the machine from where the logs are being sent.
-              example: i-0123
-              type: string
-            message:
-              description: 'The message [reserved attribute](https://docs.datadoghq.com/logs/log_collection/#reserved-attributes)
-
-                of your log. By default, Datadog ingests the value of the message
-                attribute as the body of the log entry.
-
-                That value is then highlighted and displayed in the Logstream, where
-                it is indexed for full text search.'
-              example: Host connected to remote
-              type: string
-            service:
-              description: 'The name of the application or service generating the
-                log events.
-
-                It is used to switch from Logs to APM, so make sure you define the
-                same
-
-                value when you use both products.'
-              example: agent
-              type: string
-            status:
-              description: Status of the message associated with your log.
-              example: INFO
-              type: string
-            tags:
-              description: Array of tags associated with your log.
-              example:
-              - team:A
-              items:
-                description: Tag associated with your log.
-                type: string
-              type: array
-            timestamp:
-              description: Timestamp of your log.
-              example: '2019-01-02T09:42:36.320Z'
-              format: date-time
-              type: string
-          type: object
+          $ref: '#/components/schemas/LogAttributes'
         id:
           description: Unique ID of the Log.
           example: AAAAAWgN8Xwgr1vKDQAAAABBV2dOOFh3ZzZobm1mWXJFYTR0OA
           type: string
         type:
           $ref: '#/components/schemas/LogType'
+      type: object
+    LogAttributes:
+      description: JSON object containing all log attributes and their associated
+        values.
+      properties:
+        attributes:
+          additionalProperties: {}
+          description: JSON object of attributes from your log.
+          example:
+            customAttribute: 123
+            duration: 2345
+          type: object
+        host:
+          description: Name of the machine from where the logs are being sent.
+          example: i-0123
+          type: string
+        message:
+          description: 'The message [reserved attribute](https://docs.datadoghq.com/logs/log_collection/#reserved-attributes)
+
+            of your log. By default, Datadog ingests the value of the message attribute
+            as the body of the log entry.
+
+            That value is then highlighted and displayed in the Logstream, where it
+            is indexed for full text search.'
+          example: Host connected to remote
+          type: string
+        service:
+          description: 'The name of the application or service generating the log
+            events.
+
+            It is used to switch from Logs to APM, so make sure you define the same
+
+            value when you use both products.'
+          example: agent
+          type: string
+        status:
+          description: Status of the message associated with your log.
+          example: INFO
+          type: string
+        tags:
+          description: Array of tags associated with your log.
+          example:
+          - team:A
+          items:
+            description: Tag associated with your log.
+            type: string
+          type: array
+        timestamp:
+          description: Timestamp of your log.
+          example: '2019-01-02T09:42:36.320Z'
+          format: date-time
+          type: string
       type: object
     LogType:
       default: log
@@ -2297,28 +2686,32 @@ components:
         options:
           $ref: '#/components/schemas/LogsQueryOptions'
         page:
-          description: Paging settings
-          properties:
-            cursor:
-              description: The returned paging point to use to get the next results
-              example: eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==
-              type: string
-          type: object
+          $ref: '#/components/schemas/LogsAggregateRequestPage'
+      type: object
+    LogsAggregateRequestPage:
+      description: Paging settings
+      properties:
+        cursor:
+          description: The returned paging point to use to get the next results
+          example: eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==
+          type: string
       type: object
     LogsAggregateResponse:
       description: The response object for the logs aggregate API endpoint
       properties:
         data:
-          description: The query results
-          properties:
-            buckets:
-              description: The list of matching buckets, one item per bucket
-              items:
-                $ref: '#/components/schemas/LogsAggregateBucket'
-              type: array
-          type: object
+          $ref: '#/components/schemas/LogsAggregateResponseData'
         meta:
           $ref: '#/components/schemas/LogsResponseMetadata'
+      type: object
+    LogsAggregateResponseData:
+      description: The query results
+      properties:
+        buckets:
+          description: The list of matching buckets, one item per bucket
+          items:
+            $ref: '#/components/schemas/LogsAggregateBucket'
+          type: array
       type: object
     LogsAggregateResponseStatus:
       description: The status of the response
@@ -2767,36 +3160,7 @@ components:
           example: host
           type: string
         histogram:
-          description: 'Used to perform a histogram computation (only for measure
-            facets).
-
-            Note: At most 100 buckets are allowed, the number of buckets is (max -
-            min)/interval.'
-          properties:
-            interval:
-              description: The bin size of the histogram buckets
-              example: 10
-              format: double
-              type: number
-            max:
-              description: 'The maximum value for the measure used in the histogram
-
-                (values greater than this one are filtered out)'
-              example: 100
-              format: double
-              type: number
-            min:
-              description: 'The minimum value for the measure used in the histogram
-
-                (values smaller than this one are filtered out)'
-              example: 50
-              format: double
-              type: number
-          required:
-          - interval
-          - min
-          - max
-          type: object
+          $ref: '#/components/schemas/LogsGroupByHistogram'
         limit:
           default: 10
           description: The maximum buckets to return for this group by
@@ -2810,6 +3174,35 @@ components:
           $ref: '#/components/schemas/LogsGroupByTotal'
       required:
       - facet
+      type: object
+    LogsGroupByHistogram:
+      description: 'Used to perform a histogram computation (only for measure facets).
+
+        Note: At most 100 buckets are allowed, the number of buckets is (max - min)/interval.'
+      properties:
+        interval:
+          description: The bin size of the histogram buckets
+          example: 10
+          format: double
+          type: number
+        max:
+          description: 'The maximum value for the measure used in the histogram
+
+            (values greater than this one are filtered out)'
+          example: 100
+          format: double
+          type: number
+        min:
+          description: 'The minimum value for the measure used in the histogram
+
+            (values smaller than this one are filtered out)'
+          example: 50
+          format: double
+          type: number
+      required:
+      - interval
+      - min
+      - max
       type: object
     LogsGroupByMissing:
       description: The value to use for logs that don't have the facet used to group
@@ -2850,23 +3243,25 @@ components:
         options:
           $ref: '#/components/schemas/LogsQueryOptions'
         page:
-          description: Paging attributes for listing logs.
-          properties:
-            cursor:
-              description: List following results with a cursor provided in the previous
-                query.
-              example: eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==
-              type: string
-            limit:
-              default: 10
-              description: Maximum number of logs in the response.
-              example: 25
-              format: int32
-              maximum: 1000
-              type: integer
-          type: object
+          $ref: '#/components/schemas/LogsListRequestPage'
         sort:
           $ref: '#/components/schemas/LogsSort'
+      type: object
+    LogsListRequestPage:
+      description: Paging attributes for listing logs.
+      properties:
+        cursor:
+          description: List following results with a cursor provided in the previous
+            query.
+          example: eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==
+          type: string
+        limit:
+          default: 10
+          description: Maximum number of logs in the response.
+          example: 25
+          format: int32
+          maximum: 1000
+          type: integer
       type: object
     LogsListResponse:
       description: Response object with all logs matching the request and pagination
@@ -2878,18 +3273,20 @@ components:
             $ref: '#/components/schemas/Log'
           type: array
         links:
-          description: Links attributes.
-          properties:
-            next:
-              description: 'Link for the next set of results. Note that the request
-                can also be made using the
-
-                POST endpoint.'
-              example: https://app.datadoghq.com/api/v2/logs/event?filter[query]=foo&page[cursor]=eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==
-              type: string
-          type: object
+          $ref: '#/components/schemas/LogsListResponseLinks'
         meta:
           $ref: '#/components/schemas/LogsResponseMetadata'
+      type: object
+    LogsListResponseLinks:
+      description: Links attributes.
+      properties:
+        next:
+          description: 'Link for the next set of results. Note that the request can
+            also be made using the
+
+            POST endpoint.'
+          example: https://app.datadoghq.com/api/v2/logs/event?filter[query]=foo&page[cursor]=eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==
+          type: string
       type: object
     LogsMetricCompute:
       description: The compute rule to compute the log-based metric.
@@ -3161,16 +3558,7 @@ components:
           format: int64
           type: integer
         page:
-          description: Paging attributes.
-          properties:
-            after:
-              description: 'The cursor to use to get the next results, if any. To
-                make the next request, use the same.
-
-                parameters with the addition of the `page[cursor]`.'
-              example: eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==
-              type: string
-          type: object
+          $ref: '#/components/schemas/LogsResponseMetadataPage'
         request_id:
           description: The identifier of the request
           example: MWlFUjVaWGZTTTZPYzM0VXp1OXU2d3xLSVpEMjZKQ0VKUTI0dEYtM3RSOFVR
@@ -3185,6 +3573,17 @@ components:
           items:
             $ref: '#/components/schemas/LogsWarning'
           type: array
+      type: object
+    LogsResponseMetadataPage:
+      description: Paging attributes.
+      properties:
+        after:
+          description: 'The cursor to use to get the next results, if any. To make
+            the next request, use the same.
+
+            parameters with the addition of the `page[cursor]`.'
+          example: eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==
+          type: string
       type: object
     LogsRestrictionQueriesType:
       default: logs_restriction_queries
@@ -3236,7 +3635,7 @@ components:
       description: Object for a single metric tag configuration.
       example:
         id: metric.foo.bar
-        type: metric
+        type: metrics
       properties:
         id:
           $ref: '#/components/schemas/MetricName'
@@ -3274,6 +3673,133 @@ components:
           $ref: '#/components/schemas/MetricAllTags'
       readOnly: true
       type: object
+    MetricBulkConfigureTagsType:
+      default: metric_bulk_configure_tags
+      description: The metric bulk configure tags resource.
+      enum:
+      - metric_bulk_configure_tags
+      example: metric_bulk_configure_tags
+      type: string
+      x-enum-varnames:
+      - BULK_MANAGE_TAGS
+    MetricBulkTagConfigCreate:
+      description: Request object to bulk configure tags for metrics matching the
+        given prefix.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/MetricBulkTagConfigCreateAttributes'
+        id:
+          $ref: '#/components/schemas/MetricBulkTagConfigNamePrefix'
+        type:
+          $ref: '#/components/schemas/MetricBulkConfigureTagsType'
+      required:
+      - id
+      - type
+      type: object
+    MetricBulkTagConfigCreateAttributes:
+      description: Optional parameters for bulk creating metric tag configurations.
+      properties:
+        emails:
+          $ref: '#/components/schemas/MetricBulkTagConfigEmailList'
+        tags:
+          $ref: '#/components/schemas/MetricBulkTagConfigTagNameList'
+      type: object
+    MetricBulkTagConfigCreateRequest:
+      description: Wrapper object for a single bulk tag configuration request.
+      properties:
+        data:
+          $ref: '#/components/schemas/MetricBulkTagConfigCreate'
+      required:
+      - data
+      type: object
+    MetricBulkTagConfigDelete:
+      description: Request object to bulk delete all tag configurations for metrics
+        matching the given prefix.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/MetricBulkTagConfigDeleteAttributes'
+        id:
+          $ref: '#/components/schemas/MetricBulkTagConfigNamePrefix'
+        type:
+          $ref: '#/components/schemas/MetricBulkConfigureTagsType'
+      required:
+      - id
+      - type
+      type: object
+    MetricBulkTagConfigDeleteAttributes:
+      description: Optional parameters for bulk deleting metric tag configurations.
+      properties:
+        emails:
+          $ref: '#/components/schemas/MetricBulkTagConfigEmailList'
+      type: object
+    MetricBulkTagConfigDeleteRequest:
+      description: Wrapper object for a single bulk tag deletion request.
+      properties:
+        data:
+          $ref: '#/components/schemas/MetricBulkTagConfigDelete'
+      required:
+      - data
+      type: object
+    MetricBulkTagConfigEmailList:
+      description: A list of account emails to notify when the configuration is applied.
+      example:
+      - sue@example.com
+      - bob@example.com
+      items:
+        description: An email address.
+        format: email
+        type: string
+      type: array
+    MetricBulkTagConfigNamePrefix:
+      description: A text prefix to match against metric names.
+      example: kafka.lag
+      type: string
+    MetricBulkTagConfigResponse:
+      description: Wrapper for a single bulk tag configuration status response.
+      properties:
+        data:
+          $ref: '#/components/schemas/MetricBulkTagConfigStatus'
+      type: object
+    MetricBulkTagConfigStatus:
+      description: 'The status of a request to bulk configure metric tags.
+
+        It contains the fields from the original request for reference.'
+      properties:
+        attributes:
+          $ref: '#/components/schemas/MetricBulkTagConfigStatusAttributes'
+        id:
+          $ref: '#/components/schemas/MetricBulkTagConfigNamePrefix'
+        type:
+          $ref: '#/components/schemas/MetricBulkConfigureTagsType'
+      required:
+      - id
+      - type
+      type: object
+    MetricBulkTagConfigStatusAttributes:
+      description: Optional attributes for the status of a bulk tag configuration
+        request.
+      properties:
+        emails:
+          $ref: '#/components/schemas/MetricBulkTagConfigEmailList'
+        status:
+          description: The status of the request.
+          example: Accepted
+          type: string
+        tags:
+          $ref: '#/components/schemas/MetricBulkTagConfigTagNameList'
+      type: object
+    MetricBulkTagConfigTagNameList:
+      description: A list of tag names to apply to the configuration.
+      example:
+      - host
+      - pod_name
+      - is_shadow
+      items:
+        description: A metric tag name.
+        maxLength: 200
+        pattern: ^[A-Za-z][A-Za-z0-9\.\-\_:\/]*$
+        type: string
+      type: array
     MetricCustomAggregation:
       description: A time and space aggregation combination for use in query.
       example:
@@ -3432,9 +3958,9 @@ components:
           aggregations:
           - space: avg
             time: avg
-          created_at: '2020-03-31T09:48:37.463835Z'
+          created_at: '2020-03-25T09:48:37.463835Z'
           metric_type: gauge
-          modified_at: '2020-04-31T09:48:37.463835Z'
+          modified_at: '2020-04-25T09:48:37.463835Z'
           tags:
           - app
           - datacenter
@@ -3456,7 +3982,7 @@ components:
           $ref: '#/components/schemas/MetricCustomAggregations'
         created_at:
           description: Timestamp when the tag configuration was created.
-          example: '2020-03-31T09:48:37.463835Z'
+          example: '2020-03-25T09:48:37.463835Z'
           format: date-time
           type: string
         include_percentiles:
@@ -3470,7 +3996,7 @@ components:
           $ref: '#/components/schemas/MetricTagConfigurationMetricTypes'
         modified_at:
           description: Timestamp when the tag configuration was last modified.
-          example: '2020-03-31T09:48:37.463835Z'
+          example: '2020-03-25T09:48:37.463835Z'
           format: date-time
           type: string
         tags:
@@ -3667,6 +4193,28 @@ components:
             $ref: '#/components/schemas/MetricsAndMetricTagConfigurations'
           type: array
       readOnly: true
+      type: object
+    NullableRelationshipToUser:
+      description: Relationship to user.
+      properties:
+        data:
+          $ref: '#/components/schemas/NullableRelationshipToUserData'
+      required:
+      - data
+      type: object
+    NullableRelationshipToUserData:
+      description: Relationship to user object.
+      nullable: true
+      properties:
+        id:
+          description: A unique identifier that represents the user.
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+        type:
+          $ref: '#/components/schemas/UsersType'
+      required:
+      - id
+      - type
       type: object
     Organization:
       description: Organization object.
@@ -3890,22 +4438,24 @@ components:
       description: Response metadata object.
       properties:
         page:
-          description: Paging attributes.
-          properties:
-            after:
-              description: 'The cursor used to get the next results, if any. To make
-                the next request, use the same
+          $ref: '#/components/schemas/ProcessSummariesMetaPage'
+      type: object
+    ProcessSummariesMetaPage:
+      description: Paging attributes.
+      properties:
+        after:
+          description: 'The cursor used to get the next results, if any. To make the
+            next request, use the same
 
-                parameters with the addition of the `page[cursor]`.'
-              example: 911abf1204838d9cdfcb9a96d0b6a1bd03e1b514074f1ce1737c4cbd
-              type: string
-            size:
-              description: Number of results returned.
-              format: int32
-              maximum: 10000
-              minimum: 0
-              type: integer
-          type: object
+            parameters with the addition of the `page[cursor]`.'
+          example: 911abf1204838d9cdfcb9a96d0b6a1bd03e1b514074f1ce1737c4cbd
+          type: string
+        size:
+          description: Number of results returned.
+          format: int32
+          maximum: 10000
+          minimum: 0
+          type: integer
       type: object
     ProcessSummariesResponse:
       description: List of process summaries.
@@ -3981,15 +4531,232 @@ components:
       x-enum-varnames:
       - ASC
       - DESC
+    RUMEvent:
+      description: Object description of a RUM event after being processed and stored
+        by Datadog.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/RUMEventAttributes'
+        id:
+          description: Unique ID of the event.
+          example: AAAAAWgN8Xwgr1vKDQAAAABBV2dOOFh3ZzZobm1mWXJFYTR0OA
+          type: string
+        type:
+          $ref: '#/components/schemas/RUMEventType'
+      type: object
+    RUMEventAttributes:
+      description: JSON object containing all event attributes and their associated
+        values.
+      properties:
+        attributes:
+          additionalProperties: {}
+          description: JSON object of attributes from RUM events.
+          example:
+            customAttribute: 123
+            duration: 2345
+          type: object
+        service:
+          description: 'The name of the application or service generating RUM events.
+
+            It is used to switch from RUM to APM, so make sure you define the same
+
+            value when you use both products.'
+          example: web-app
+          type: string
+        tags:
+          description: Array of tags associated with your event.
+          example:
+          - team:A
+          items:
+            description: Tag associated with your event.
+            type: string
+          type: array
+        timestamp:
+          description: Timestamp of your event.
+          example: '2019-01-02T09:42:36.320Z'
+          format: date-time
+          type: string
+      type: object
+    RUMEventType:
+      default: rum
+      description: Type of the event.
+      enum:
+      - rum
+      example: rum
+      type: string
+      x-enum-varnames:
+      - RUM
+    RUMEventsResponse:
+      description: Response object with all events matching the request and pagination
+        information.
+      properties:
+        data:
+          description: Array of events matching the request.
+          items:
+            $ref: '#/components/schemas/RUMEvent'
+          type: array
+        links:
+          $ref: '#/components/schemas/RUMResponseLinks'
+        meta:
+          $ref: '#/components/schemas/RUMResponseMetadata'
+      type: object
+    RUMQueryFilter:
+      description: The search and filter query settings.
+      properties:
+        from:
+          default: now-15m
+          description: The minimum time for the requested events; supports date, math,
+            and regular timestamps (in milliseconds).
+          example: now-15m
+          type: string
+        query:
+          default: '*'
+          description: The search query following the RUM search syntax.
+          example: '@type:session AND @session.type:user'
+          type: string
+        to:
+          default: now
+          description: The maximum time for the requested events; supports date, math,
+            and regular timestamps (in milliseconds).
+          example: now
+          type: string
+      type: object
+    RUMQueryOptions:
+      description: 'Global query options that are used during the query.
+
+        Note: Only supply timezone or time offset, not both. Otherwise, the query
+        fails.'
+      properties:
+        time_offset:
+          description: The time offset (in seconds) to apply to the query.
+          format: int64
+          type: integer
+        timezone:
+          default: UTC
+          description: 'The timezone can be specified both as an offset, for example:
+            "UTC+03:00".'
+          example: GMT
+          type: string
+      type: object
+    RUMQueryPageOptions:
+      description: Paging attributes for listing events.
+      properties:
+        cursor:
+          description: List following results with a cursor provided in the previous
+            query.
+          example: eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==
+          type: string
+        limit:
+          default: 10
+          description: Maximum number of events in the response.
+          example: 25
+          format: int32
+          maximum: 1000
+          type: integer
+      type: object
+    RUMResponseLinks:
+      description: Links attributes.
+      properties:
+        next:
+          description: 'Link for the next set of results. Note that the request can
+            also be made using the
+
+            POST endpoint.'
+          example: https://app.datadoghq.com/api/v2/rum/event?filter[query]=foo&page[cursor]=eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==
+          type: string
+      type: object
+    RUMResponseMetadata:
+      description: The metadata associated with a request.
+      properties:
+        elapsed:
+          description: The time elapsed in milliseconds.
+          example: 132
+          format: int64
+          type: integer
+        page:
+          $ref: '#/components/schemas/RUMResponsePage'
+        request_id:
+          description: The identifier of the request.
+          example: MWlFUjVaWGZTTTZPYzM0VXp1OXU2d3xLSVpEMjZKQ0VKUTI0dEYtM3RSOFVR
+          type: string
+        status:
+          $ref: '#/components/schemas/RUMResponseStatus'
+        warnings:
+          description: 'A list of warnings (non-fatal errors) encountered. Partial
+            results may return if
+
+            warnings are present in the response.'
+          items:
+            $ref: '#/components/schemas/RUMWarning'
+          type: array
+      type: object
+    RUMResponsePage:
+      description: Paging attributes.
+      properties:
+        after:
+          description: The cursor to use to get the next results, if any. To make
+            the next request, use the same parameters with the addition of `page[cursor]`.
+          example: eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==
+          type: string
+      type: object
+    RUMResponseStatus:
+      description: The status of the response.
+      enum:
+      - done
+      - timeout
+      example: done
+      type: string
+      x-enum-varnames:
+      - DONE
+      - TIMEOUT
+    RUMSearchEventsRequest:
+      description: The request for a RUM events list.
+      properties:
+        filter:
+          $ref: '#/components/schemas/RUMQueryFilter'
+        options:
+          $ref: '#/components/schemas/RUMQueryOptions'
+        page:
+          $ref: '#/components/schemas/RUMQueryPageOptions'
+        sort:
+          $ref: '#/components/schemas/RUMSort'
+      type: object
+    RUMSort:
+      description: Sort parameters when querying events.
+      enum:
+      - timestamp
+      - -timestamp
+      type: string
+      x-enum-varnames:
+      - TIMESTAMP_ASCENDING
+      - TIMESTAMP_DESCENDING
+    RUMWarning:
+      description: A warning message indicating something that went wrong with the
+        query.
+      properties:
+        code:
+          description: A unique code for this type of warning.
+          example: unknown_index
+          type: string
+        detail:
+          description: A detailed explanation of this specific warning.
+          example: 'indexes: foo, bar'
+          type: string
+        title:
+          description: A short human-readable summary of the warning.
+          example: One or several indexes are missing or invalid, results hold data
+            from the other indexes
+          type: string
+      type: object
     RelationshipToIncidentIntegrationMetadataData:
       description: A relationship reference for an integration metadata object.
       example:
-        id: 00000000-0000-0000-0000-000000000000
+        id: 00000000-abcd-0002-0000-000000000000
         type: incident_integrations
       properties:
         id:
           description: A unique identifier that represents the integration metadata.
-          example: 00000000-0000-0000-0000-000000000000
+          example: 00000000-abcd-0001-0000-000000000000
           type: string
         type:
           $ref: '#/components/schemas/IncidentIntegrationMetadataType'
@@ -4001,17 +4768,17 @@ components:
       description: A relationship reference for multiple integration metadata objects.
       example:
         data:
-        - id: 00000000-0000-0000-0000-000000000000
+        - id: 00000000-abcd-0005-0000-000000000000
           type: incident_integrations
-        - id: 00000000-0000-0000-0000-000000000000
+        - id: 00000000-abcd-0006-0000-000000000000
           type: incident_integrations
       properties:
         data:
           description: The integration metadata relationship array
           example:
-          - id: 00000000-0000-0000-0000-000000000000
+          - id: 00000000-abcd-0003-0000-000000000000
             type: incident_integrations
-          - id: 00000000-0000-0000-0000-000000000000
+          - id: 00000000-abcd-0004-0000-000000000000
             type: incident_integrations
           items:
             $ref: '#/components/schemas/RelationshipToIncidentIntegrationMetadataData'
@@ -4023,7 +4790,7 @@ components:
       description: A relationship reference for postmortems.
       example:
         data:
-          id: 00000000-0000-0000-0000-000000000000
+          id: 00000000-0000-abcd-3000-000000000000
           type: incident_postmortems
       properties:
         data:
@@ -4034,12 +4801,12 @@ components:
     RelationshipToIncidentPostmortemData:
       description: The postmortem relationship data.
       example:
-        id: 00000000-0000-0000-0000-000000000000
+        id: 00000000-0000-abcd-2000-000000000000
         type: incident_postmortems
       properties:
         id:
           description: A unique identifier that represents the postmortem.
-          example: 00000000-0000-0000-0000-000000000000
+          example: 00000000-0000-abcd-1000-000000000000
           type: string
         type:
           $ref: '#/components/schemas/IncidentPostmortemType'
@@ -4060,7 +4827,7 @@ components:
       properties:
         id:
           description: ID of the organization.
-          example: 00000000-0000-0000-0000-000000000000
+          example: 00000000-0000-beef-0000-000000000000
           type: string
         type:
           $ref: '#/components/schemas/OrganizationsType'
@@ -4114,7 +4881,7 @@ components:
       description: Relationship to role object.
       properties:
         id:
-          description: ID of the role.
+          description: The unique identifier of the role.
           example: 3653d3c6-0c75-11ea-ad28-fb5701eabc7d
           type: string
         type:
@@ -4124,10 +4891,33 @@ components:
       description: Relationship to roles.
       properties:
         data:
-          description: An array containing type and ID of a role.
+          description: An array containing type and the unique identifier of a role.
           items:
             $ref: '#/components/schemas/RelationshipToRoleData'
           type: array
+      type: object
+    RelationshipToSAMLAssertionAttribute:
+      description: AuthN Mapping relationship to SAML Assertion Attribute.
+      properties:
+        data:
+          $ref: '#/components/schemas/RelationshipToSAMLAssertionAttributeData'
+      required:
+      - data
+      type: object
+    RelationshipToSAMLAssertionAttributeData:
+      description: Data of AuthN Mapping relationship to SAML Assertion Attribute.
+      properties:
+        id:
+          description: The ID of the SAML assertion attribute.
+          example: 0
+          format: int32
+          maximum: 2147483647
+          type: integer
+        type:
+          $ref: '#/components/schemas/SAMLAssertionAttributesType'
+      required:
+      - id
+      - type
       type: object
     RelationshipToUser:
       description: Relationship to user.
@@ -4142,7 +4932,7 @@ components:
       properties:
         id:
           description: A unique identifier that represents the user.
-          example: 00000000-0000-0000-0000-000000000000
+          example: 00000000-0000-0000-2345-000000000000
           type: string
         type:
           $ref: '#/components/schemas/UsersType'
@@ -4173,13 +4963,13 @@ components:
       properties:
         created_at:
           description: Creation time of the restriction query.
-          example: '2020-03-17T21:06:44Z'
+          example: '2020-03-17T21:06:44.000Z'
           format: date-time
           readOnly: true
           type: string
         modified_at:
           description: Time of last restriction query modification.
-          example: '2020-03-17T21:15:15Z'
+          example: '2020-03-17T21:15:15.000Z'
           format: date-time
           readOnly: true
           type: string
@@ -4344,7 +5134,7 @@ components:
         attributes:
           $ref: '#/components/schemas/RoleAttributes'
         id:
-          description: ID of the role.
+          description: The unique identifier of the role.
           type: string
         relationships:
           $ref: '#/components/schemas/RoleResponseRelationships'
@@ -4367,7 +5157,8 @@ components:
           readOnly: true
           type: string
         name:
-          description: Name of the role.
+          description: The name of the role. The name is neither unique nor a stable
+            identifier of the role.
           type: string
         user_count:
           description: Number of users with that role.
@@ -4449,20 +5240,22 @@ components:
       description: Response containing information about a created role.
       properties:
         data:
-          description: Role object returned by the API.
-          properties:
-            attributes:
-              $ref: '#/components/schemas/RoleCreateAttributes'
-            id:
-              description: ID of the role.
-              type: string
-            relationships:
-              $ref: '#/components/schemas/RoleResponseRelationships'
-            type:
-              $ref: '#/components/schemas/RolesType'
-          required:
-          - type
-          type: object
+          $ref: '#/components/schemas/RoleCreateResponseData'
+      type: object
+    RoleCreateResponseData:
+      description: Role object returned by the API.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/RoleCreateAttributes'
+        id:
+          description: The unique identifier of the role.
+          type: string
+        relationships:
+          $ref: '#/components/schemas/RoleResponseRelationships'
+        type:
+          $ref: '#/components/schemas/RolesType'
+      required:
+      - type
       type: object
     RoleRelationships:
       description: Relationships of the role object.
@@ -4507,8 +5300,8 @@ components:
         attributes:
           $ref: '#/components/schemas/RoleUpdateAttributes'
         id:
-          description: ID of the role.
-          example: 00000000-0000-0000-0000-000000000000
+          description: The unique identifier of the role.
+          example: 00000000-0000-1111-0000-000000000000
           type: string
         type:
           $ref: '#/components/schemas/RolesType'
@@ -4529,20 +5322,22 @@ components:
       description: Response containing information about an updated role.
       properties:
         data:
-          description: Role object returned by the API.
-          properties:
-            attributes:
-              $ref: '#/components/schemas/RoleUpdateAttributes'
-            id:
-              description: ID of the role.
-              type: string
-            relationships:
-              $ref: '#/components/schemas/RoleResponseRelationships'
-            type:
-              $ref: '#/components/schemas/RolesType'
-          required:
-          - type
-          type: object
+          $ref: '#/components/schemas/RoleUpdateResponseData'
+      type: object
+    RoleUpdateResponseData:
+      description: Role object returned by the API.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/RoleUpdateAttributes'
+        id:
+          description: The unique identifier of the role.
+          type: string
+        relationships:
+          $ref: '#/components/schemas/RoleResponseRelationships'
+        type:
+          $ref: '#/components/schemas/RolesType'
+      required:
+      - type
       type: object
     RolesResponse:
       description: Response containing information about multiple roles.
@@ -4582,6 +5377,46 @@ components:
       type: string
       x-enum-varnames:
       - ROLES
+    SAMLAssertionAttribute:
+      description: SAML assertion attribute.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SAMLAssertionAttributeAttributes'
+        id:
+          description: The ID of the SAML assertion attribute.
+          example: 0
+          format: int32
+          maximum: 2147483647
+          type: integer
+        type:
+          $ref: '#/components/schemas/SAMLAssertionAttributesType'
+      required:
+      - id
+      - type
+      type: object
+    SAMLAssertionAttributeAttributes:
+      description: Key/Value pair of attributes used in SAML assertion attributes.
+      properties:
+        attribute_key:
+          description: Key portion of a key/value pair of the attribute sent from
+            the Identity Provider.
+          example: member-of
+          type: string
+        attribute_value:
+          description: Value portion of a key/value pair of the attribute sent from
+            the Identity Provider.
+          example: Development
+          type: string
+      type: object
+    SAMLAssertionAttributesType:
+      default: saml_assertion_attributes
+      description: SAML assertion attributes resource type.
+      enum:
+      - saml_assertion_attributes
+      example: saml_assertion_attributes
+      type: string
+      x-enum-varnames:
+      - SAML_ASSERTION_ATTRIBUTES
     SecurityFilter:
       description: The security filter's properties.
       properties:
@@ -4945,11 +5780,13 @@ components:
       - threshold
       - new_value
       - anomaly_detection
+      - impossible_travel
       type: string
       x-enum-varnames:
       - THRESHOLD
       - NEW_VALUE
       - ANOMALY_DETECTION
+      - IMPOSSIBLE_TRAVEL
     SecurityMonitoringRuleEvaluationWindow:
       description: 'A time window is specified to match when at least one of the cases
         matches true. This is a sliding window
@@ -4975,6 +5812,20 @@ components:
       - THIRTY_MINUTES
       - ONE_HOUR
       - TWO_HOURS
+    SecurityMonitoringRuleImpossibleTravelOptions:
+      description: Options on impossible travel rules.
+      properties:
+        baselineUserLocations:
+          $ref: '#/components/schemas/SecurityMonitoringRuleImpossibleTravelOptionsBaselineUserLocations'
+      type: object
+    SecurityMonitoringRuleImpossibleTravelOptionsBaselineUserLocations:
+      description: 'If true, signals are suppressed for the first 24 hours. In that
+        time, Datadog learns the user''s regular
+
+        access locations. This can be helpful to reduce noise and infer VPN usage
+        or credentialed API access.'
+      example: true
+      type: boolean
     SecurityMonitoringRuleKeepAlive:
       description: "Once a signal is generated, the signal will remain \u201Copen\u201D
         if a case is matched at least once within\nthis keep alive window."
@@ -5083,6 +5934,8 @@ components:
           $ref: '#/components/schemas/SecurityMonitoringRuleDetectionMethod'
         evaluationWindow:
           $ref: '#/components/schemas/SecurityMonitoringRuleEvaluationWindow'
+        impossibleTravelOptions:
+          $ref: '#/components/schemas/SecurityMonitoringRuleImpossibleTravelOptions'
         keepAlive:
           $ref: '#/components/schemas/SecurityMonitoringRuleKeepAlive'
         maxSignalDuration:
@@ -5127,6 +5980,7 @@ components:
       - sum
       - max
       - new_value
+      - geo_data
       type: string
       x-enum-varnames:
       - COUNT
@@ -5134,6 +5988,7 @@ components:
       - SUM
       - MAX
       - NEW_VALUE
+      - GEO_DATA
     SecurityMonitoringRuleQueryCreate:
       description: Query for matching rule.
       properties:
@@ -5323,42 +6178,7 @@ components:
       description: Object description of a security signal.
       properties:
         attributes:
-          description: 'The object containing all signal attributes and their
-
-            associated values.'
-          properties:
-            attributes:
-              additionalProperties: {}
-              description: A JSON object of attributes in the security signal.
-              example:
-                workflow:
-                  first_seen: '2020-06-23T14:46:01.000Z'
-                  last_seen: '2020-06-23T14:46:49.000Z'
-                  rule:
-                    id: 0f5-e0c-805
-                    name: 'Brute Force Attack Grouped By User '
-                    version: 12
-              type: object
-            message:
-              description: The message in the security signal defined by the rule
-                that generated the signal.
-              example: Detect Account Take Over (ATO) through brute force attempts
-              type: string
-            tags:
-              description: An array of tags associated with the security signal.
-              example:
-              - security:attack
-              - technique:T1110-brute-force
-              format: array
-              items:
-                description: The tag associated with the security signal.
-                type: string
-            timestamp:
-              description: The timestamp of the security signal.
-              example: '2019-01-02T09:42:36.320Z'
-              format: date-time
-              type: string
-          type: object
+          $ref: '#/components/schemas/SecurityMonitoringSignalAttributes'
         id:
           description: The unique ID of the security signal.
           example: AAAAAWgN8Xwgr1vKDQAAAABBV2dOOFh3ZzZobm1mWXJFYTR0OA
@@ -5366,45 +6186,86 @@ components:
         type:
           $ref: '#/components/schemas/SecurityMonitoringSignalType'
       type: object
+    SecurityMonitoringSignalAttributes:
+      description: 'The object containing all signal attributes and their
+
+        associated values.'
+      properties:
+        attributes:
+          additionalProperties: {}
+          description: A JSON object of attributes in the security signal.
+          example:
+            workflow:
+              first_seen: '2020-06-23T14:46:01.000Z'
+              last_seen: '2020-06-23T14:46:49.000Z'
+              rule:
+                id: 0f5-e0c-805
+                name: 'Brute Force Attack Grouped By User '
+                version: 12
+          type: object
+        message:
+          description: The message in the security signal defined by the rule that
+            generated the signal.
+          example: Detect Account Take Over (ATO) through brute force attempts
+          type: string
+        tags:
+          description: An array of tags associated with the security signal.
+          example:
+          - security:attack
+          - technique:T1110-brute-force
+          format: array
+          items:
+            description: The tag associated with the security signal.
+            type: string
+        timestamp:
+          description: The timestamp of the security signal.
+          example: '2019-01-02T09:42:36.320Z'
+          format: date-time
+          type: string
+      type: object
     SecurityMonitoringSignalListRequest:
       description: The request for a security signal list.
       properties:
         filter:
-          description: Search filters for listing security signals.
-          properties:
-            from:
-              description: The minimum timestamp for requested security signals.
-              example: '2019-01-02T09:42:36.320Z'
-              format: date-time
-              type: string
-            query:
-              description: Search query for listing security signals.
-              example: security:attack status:high
-              type: string
-            to:
-              description: The maximum timestamp for requested security signals.
-              example: '2019-01-03T09:42:36.320Z'
-              format: date-time
-              type: string
-          type: object
+          $ref: '#/components/schemas/SecurityMonitoringSignalListRequestFilter'
         page:
-          description: The paging attributes for listing security signals.
-          properties:
-            cursor:
-              description: A list of results using the cursor provided in the previous
-                query.
-              example: eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==
-              type: string
-            limit:
-              default: 10
-              description: The maximum number of security signals in the response.
-              example: 25
-              format: int32
-              maximum: 1000
-              type: integer
-          type: object
+          $ref: '#/components/schemas/SecurityMonitoringSignalListRequestPage'
         sort:
           $ref: '#/components/schemas/SecurityMonitoringSignalsSort'
+      type: object
+    SecurityMonitoringSignalListRequestFilter:
+      description: Search filters for listing security signals.
+      properties:
+        from:
+          description: The minimum timestamp for requested security signals.
+          example: '2019-01-02T09:42:36.320Z'
+          format: date-time
+          type: string
+        query:
+          description: Search query for listing security signals.
+          example: security:attack status:high
+          type: string
+        to:
+          description: The maximum timestamp for requested security signals.
+          example: '2019-01-03T09:42:36.320Z'
+          format: date-time
+          type: string
+      type: object
+    SecurityMonitoringSignalListRequestPage:
+      description: The paging attributes for listing security signals.
+      properties:
+        cursor:
+          description: A list of results using the cursor provided in the previous
+            query.
+          example: eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==
+          type: string
+        limit:
+          default: 10
+          description: The maximum number of security signals in the response.
+          example: 25
+          format: int32
+          maximum: 1000
+          type: integer
       type: object
     SecurityMonitoringSignalType:
       default: signal
@@ -5426,31 +6287,37 @@ components:
             $ref: '#/components/schemas/SecurityMonitoringSignal'
           type: array
         links:
-          description: Links attributes.
-          properties:
-            next:
-              description: 'The link for the next set of results. **Note**: The request
-                can also be made using the
-
-                POST endpoint.'
-              example: https://app.datadoghq.com/api/v2/security_monitoring/signals?filter[query]=foo&page[cursor]=eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==
-              type: string
-          type: object
+          $ref: '#/components/schemas/SecurityMonitoringSignalsListResponseLinks'
         meta:
-          description: Meta attributes.
-          properties:
-            page:
-              description: Paging attributes.
-              properties:
-                after:
-                  description: 'The cursor used to get the next results, if any. To
-                    make the next request, use the same
+          $ref: '#/components/schemas/SecurityMonitoringSignalsListResponseMeta'
+      type: object
+    SecurityMonitoringSignalsListResponseLinks:
+      description: Links attributes.
+      properties:
+        next:
+          description: 'The link for the next set of results. **Note**: The request
+            can also be made using the
 
-                    parameters with the addition of the `page[cursor]`.'
-                  example: eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==
-                  type: string
-              type: object
-          type: object
+            POST endpoint.'
+          example: https://app.datadoghq.com/api/v2/security_monitoring/signals?filter[query]=foo&page[cursor]=eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==
+          type: string
+      type: object
+    SecurityMonitoringSignalsListResponseMeta:
+      description: Meta attributes.
+      properties:
+        page:
+          $ref: '#/components/schemas/SecurityMonitoringSignalsListResponseMetaPage'
+      type: object
+    SecurityMonitoringSignalsListResponseMetaPage:
+      description: Paging attributes.
+      properties:
+        after:
+          description: 'The cursor used to get the next results, if any. To make the
+            next request, use the same
+
+            parameters with the addition of the `page[cursor]`.'
+          example: eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==
+          type: string
       type: object
     SecurityMonitoringSignalsSort:
       description: The sort parameters used for querying security signals.
@@ -5734,7 +6601,7 @@ components:
           $ref: '#/components/schemas/UserUpdateAttributes'
         id:
           description: ID of the user.
-          example: 00000000-0000-0000-0000-000000000000
+          example: 00000000-0000-feed-0000-000000000000
           type: string
         type:
           $ref: '#/components/schemas/UsersType'
@@ -5784,25 +6651,23 @@ components:
         authorizationCode:
           authorizationUrl: /oauth2/v1/authorize
           scopes:
-            dashboards_public_share: The ability to share dashboards externally.
-            dashboards_read: The ability to view dashboards.
-            dashboards_write: The ability to create and change dashboards.
-            events_read: The ability to read Events data.
-            incident_read: The ability to view incidents in Datadog.
-            incident_settings_write: The ability to configure Incidents settings.
-            incident_write: The ability to create, view, and manage incidents in Datadog.
-            metrics_read: The ability to view custom metrics.
-            security_monitoring_filters_read: The ability to read Security Filters.
-            security_monitoring_filters_write: The ability to create, edit and delete
-              Security Filters.
-            security_monitoring_rules_read: The ability to read Detection Rules.
-            security_monitoring_rules_write: The ability to create and edit Detection
-              Rules.
-            security_monitoring_signals_read: The ability to view Security Signals.
-            usage_read: The ability to view your organization's usage and usage attribution.
-            user_access_invite: The ability to invite other users to your organization.
-            user_access_manage: The ability to disable users, manage user roles, and
-              manage SAML-to-role mappings.
+            dashboards_public_share: Share dashboards externally.
+            dashboards_read: View dashboards.
+            dashboards_write: Create and change dashboards.
+            events_read: Read Events data.
+            incident_read: View incidents in Datadog.
+            incident_settings_write: Configure Incidents settings.
+            incident_write: Create, view, and manage incidents in Datadog.
+            metrics_read: View custom metrics.
+            security_monitoring_filters_read: Read Security Filters.
+            security_monitoring_filters_write: Create, edit, and delete Security Filters.
+            security_monitoring_rules_read: Read Detection Rules.
+            security_monitoring_rules_write: Create and edit Detection Rules.
+            security_monitoring_signals_read: View Security Signals.
+            usage_read: View your organization's usage and usage attribution.
+            user_access_invite: Invite other users to your organization.
+            user_access_manage: Disable users, manage user roles, and manage SAML-to-role
+              mappings.
           tokenUrl: /oauth2/v1/token
       type: oauth2
     apiKeyAuth:
@@ -6170,6 +7035,376 @@ paths:
       tags:
       - Key Management
       x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
+  /api/v2/audit/events:
+    get:
+      description: 'List endpoint returns events that match a Audit Logs search query.
+
+        [Results are paginated][1].
+
+
+        Use this endpoint to see your latest Audit Logs events.
+
+
+        [1]: https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination'
+      operationId: ListAuditLogs
+      parameters:
+      - description: Search query following Audit Logs syntax.
+        example: '@type:session @application_id:xxxx'
+        in: query
+        name: filter[query]
+        required: false
+        schema:
+          type: string
+      - description: Minimum timestamp for requested events.
+        example: '2019-01-02T09:42:36.320Z'
+        in: query
+        name: filter[from]
+        required: false
+        schema:
+          format: date-time
+          type: string
+      - description: Maximum timestamp for requested events.
+        example: '2019-01-03T09:42:36.320Z'
+        in: query
+        name: filter[to]
+        required: false
+        schema:
+          format: date-time
+          type: string
+      - description: Order of events in results.
+        in: query
+        name: sort
+        required: false
+        schema:
+          $ref: '#/components/schemas/AuditLogsSort'
+      - description: List following results with a cursor provided in the previous
+          query.
+        example: eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==
+        in: query
+        name: page[cursor]
+        required: false
+        schema:
+          type: string
+      - description: Maximum number of events in the response.
+        example: 25
+        in: query
+        name: page[limit]
+        required: false
+        schema:
+          default: 10
+          format: int32
+          maximum: 1000
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuditLogsEventsResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get a list of Audit Logs events
+      tags:
+      - Audit
+      x-menu-order: 2
+      x-undo:
+        type: safe
+  /api/v2/audit/events/search:
+    post:
+      description: 'List endpoint returns Audit Logs events that match an Audit search
+        query.
+
+        [Results are paginated][1].
+
+
+        Use this endpoint to build complex Audit Logs events filtering and search.
+
+
+        [1]: https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination'
+      operationId: SearchAuditLogs
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuditLogsSearchEventsRequest'
+        required: false
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuditLogsEventsResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Search Audit Logs events
+      tags:
+      - Audit
+      x-codegen-request-body-name: body
+      x-menu-order: 1
+      x-undo:
+        type: safe
+  /api/v2/authn_mappings:
+    get:
+      description: List all AuthN Mappings in the org.
+      operationId: ListAuthNMappings
+      parameters:
+      - $ref: '#/components/parameters/PageSize'
+      - $ref: '#/components/parameters/PageNumber'
+      - description: Sort AuthN Mappings depending on the given field.
+        in: query
+        name: sort
+        required: false
+        schema:
+          $ref: '#/components/schemas/AuthNMappingsSort'
+      - description: Include additional information in the response.
+        in: query
+        name: include
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+      - description: Filter all mappings by the given string.
+        in: query
+        name: filter
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthNMappingsResponse'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication Error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: List all AuthN Mappings
+      tags:
+      - AuthN Mappings
+      x-menu-order: 4
+      x-permission: OPEN()
+      x-undo:
+        type: safe
+    post:
+      description: Create an AuthN Mapping.
+      operationId: CreateAuthNMapping
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthNMappingCreateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthNMappingResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication Error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - user_access_manage
+      summary: Create an AuthN Mapping
+      tags:
+      - AuthN Mappings
+      x-codegen-request-body-name: body
+      x-given:
+        authn_mapping:
+          parameters:
+          - name: body
+            value: "{\n  \"data\": {\n    \"attributes\": {\n     \"attribute_key\":
+              \"{{ unique_lower_alnum }}\",\n     \"attribute_value\": \"{{ unique
+              }}\"\n    },\n    \"relationships\": {\n       \"role\": {\n         \"data\":
+              {\n           \"id\": \"{{ role.data.id }}\",\n           \"type\":
+              \"{{ role.data.type }}\"\n         }\n      }\n    },\n    \"type\":
+              \"authn_mappings\"\n  }\n}"
+          step: there is a valid "authn_mapping" in the system
+      x-menu-order: 5
+      x-permission: OR(USER_ACCESS_MANAGE)
+      x-undo:
+        operationId: DeleteAuthNMapping
+        parameters:
+        - name: authn_mapping_id
+          source: data.id
+        type: unsafe
+  /api/v2/authn_mappings/{authn_mapping_id}:
+    delete:
+      description: Delete an AuthN Mapping specified by AuthN Mapping UUID.
+      operationId: DeleteAuthNMapping
+      parameters:
+      - $ref: '#/components/parameters/AuthNMappingID'
+      responses:
+        '204':
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication Error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - user_access_manage
+      summary: Delete an AuthN Mapping
+      tags:
+      - AuthN Mappings
+      x-menu-order: 3
+      x-permission: OR(USER_ACCESS_MANAGE)
+      x-undo:
+        type: idempotent
+    get:
+      description: Get an AuthN Mapping specified by the AuthN Mapping UUID.
+      operationId: GetAuthNMapping
+      parameters:
+      - $ref: '#/components/parameters/AuthNMappingID'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthNMappingResponse'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication Error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Get an AuthN Mapping by UUID
+      tags:
+      - AuthN Mappings
+      x-menu-order: 1
+      x-permission: OPEN()
+      x-undo:
+        type: safe
+    patch:
+      description: Edit an AuthN Mapping.
+      operationId: UpdateAuthNMapping
+      parameters:
+      - $ref: '#/components/parameters/AuthNMappingID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthNMappingUpdateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthNMappingResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication Error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Conflict
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Unprocessable Entity
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - user_access_manage
+      summary: Edit an AuthN Mapping
+      tags:
+      - AuthN Mappings
+      x-codegen-request-body-name: body
+      x-menu-order: 2
+      x-permission: OR(USER_ACCESS_MANAGE)
       x-undo:
         type: idempotent
   /api/v2/current_user/application_keys:
@@ -6730,6 +7965,7 @@ paths:
       operationId: UpdateIncident
       parameters:
       - $ref: '#/components/parameters/IncidentIDPathParameter'
+      - $ref: '#/components/parameters/IncidentIncludeQueryParameter'
       requestBody:
         content:
           application/json:
@@ -8280,6 +9516,129 @@ paths:
         is only accessible for Metrics without Limits&trade; beta customers.\nIf you\u2019re
         interested in Metrics without Limits&trade;, please contact your Customer
         Success Manager.**"
+  /api/v2/metrics/config/bulk-tags:
+    delete:
+      description: 'Delete all custom lists of queryable tag keys for a set of existing
+        count, gauge, rate, and distribution metrics.
+
+        Metrics are selected by passing a metric name prefix.
+
+        Results can be sent to a set of account email addresses, just like the same
+        operation in the Datadog web app.
+
+        Can only be used with application keys of users with the `Manage Tags for
+        Metrics` permission.'
+      operationId: DeleteBulkTagsMetricsConfiguration
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MetricBulkTagConfigDeleteRequest'
+        required: true
+      responses:
+        '202':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetricBulkTagConfigResponse'
+          description: Accepted
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too Many Requests
+      summary: Configure tags for multiple metrics
+      tags:
+      - Metrics
+      x-codegen-request-body-name: body
+      x-menu-order: 9
+      x-undo:
+        type: idempotent
+    post:
+      description: 'Create and define a list of queryable tag keys for a set of existing
+        count, gauge, rate, and distribution metrics.
+
+        Metrics are selected by passing a metric name prefix. Use the Delete method
+        of this API path to remove tag configurations.
+
+        Results can be sent to a set of account email addresses, just like the same
+        operation in the Datadog web app.
+
+        If multiple calls include the same metric, the last configuration applied
+        (not by submit order) is used, do not
+
+        expect deterministic ordering of concurrent calls.
+
+        Can only be used with application keys of users with the `Manage Tags for
+        Metrics` permission.'
+      operationId: CreateBulkTagsMetricsConfiguration
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MetricBulkTagConfigCreateRequest'
+        required: true
+      responses:
+        '202':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetricBulkTagConfigResponse'
+          description: Accepted
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too Many Requests
+      summary: Configure tags for multiple metrics
+      tags:
+      - Metrics
+      x-codegen-request-body-name: body
+      x-menu-order: 8
+      x-undo:
+        operationId: DeleteBulkTagsMetricsConfiguration
+        parameters:
+        - name: body
+          source: ''
+        type: unsafe
   /api/v2/metrics/{metric_name}/all-tags:
     get:
       description: View indexed tag key-value pairs for a given metric name.
@@ -8734,7 +10093,7 @@ paths:
         type: safe
   /api/v2/roles:
     get:
-      description: Returns all roles, including their names and IDs.
+      description: Returns all roles, including their names and their unique identifiers.
       operationId: ListRoles
       parameters:
       - $ref: '#/components/parameters/PageSize'
@@ -9337,6 +10696,131 @@ paths:
               \"{{ user.data.type }}\"\n  }\n}"
           step: the "user" has the "role"
       x-menu-order: 10
+      x-undo:
+        type: safe
+  /api/v2/rum/events:
+    get:
+      description: 'List endpoint returns events that match a RUM search query.
+
+        [Results are paginated][1].
+
+
+        Use this endpoint to see your latest RUM events.
+
+
+        [1]: https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination'
+      operationId: ListRUMEvents
+      parameters:
+      - description: Search query following RUM syntax.
+        example: '@type:session @application_id:xxxx'
+        in: query
+        name: filter[query]
+        required: false
+        schema:
+          type: string
+      - description: Minimum timestamp for requested events.
+        example: '2019-01-02T09:42:36.320Z'
+        in: query
+        name: filter[from]
+        required: false
+        schema:
+          format: date-time
+          type: string
+      - description: Maximum timestamp for requested events.
+        example: '2019-01-03T09:42:36.320Z'
+        in: query
+        name: filter[to]
+        required: false
+        schema:
+          format: date-time
+          type: string
+      - description: Order of events in results.
+        in: query
+        name: sort
+        required: false
+        schema:
+          $ref: '#/components/schemas/RUMSort'
+      - description: List following results with a cursor provided in the previous
+          query.
+        example: eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==
+        in: query
+        name: page[cursor]
+        required: false
+        schema:
+          type: string
+      - description: Maximum number of events in the response.
+        example: 25
+        in: query
+        name: page[limit]
+        required: false
+        schema:
+          default: 10
+          format: int32
+          maximum: 1000
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RUMEventsResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Get a list of RUM events
+      tags:
+      - RUM
+      x-menu-order: 2
+      x-undo:
+        type: safe
+  /api/v2/rum/events/search:
+    post:
+      description: 'List endpoint returns RUM events that match a RUM search query.
+
+        [Results are paginated][1].
+
+
+        Use this endpoint to build complex RUM events filtering and search.
+
+
+        [1]: https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination'
+      operationId: SearchRUMEvents
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RUMSearchEventsRequest'
+        required: false
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RUMEventsResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Search RUM events
+      tags:
+      - RUM
+      x-codegen-request-body-name: body
+      x-menu-order: 1
       x-undo:
         type: safe
   /api/v2/security/cloud_workload/policy/download:
@@ -10741,7 +12225,7 @@ paths:
         name: user_invitation_uuid
         required: true
         schema:
-          example: 00000000-0000-0000-0000-000000000000
+          example: 00000000-0000-0000-3456-000000000000
           type: string
       responses:
         '200':
@@ -11156,6 +12640,14 @@ servers:
       default: api
       description: The subdomain where the API is deployed.
 tags:
+- description: Search your Audit Logs events over HTTP.
+  name: Audit
+- description: '[AuthN Mappings API](https://docs.datadoghq.com/account_management/authn_mapping/?tab=example)
+
+    is used to automatically map group of users to roles in Datadog using attributes
+
+    sent from Identity Providers.'
+  name: AuthN Mappings
 - description: Workload activity security rules for generating events using the Datadog
     security Agent.
   name: Cloud Workload Security
@@ -11234,6 +12726,8 @@ tags:
   name: Metrics
 - description: The processes API allows you to query processes data for your organization.
   name: Processes
+- description: Search your RUM events over HTTP.
+  name: RUM
 - description: 'The Roles API is used to create and manage Datadog roles, what
 
     [global permissions](https://docs.datadoghq.com/account_management/rbac/)

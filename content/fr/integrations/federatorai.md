@@ -46,12 +46,12 @@ supported_os:
 Grâce à ses algorithmes avancés d'apprentissage automatique capables de prédire les charges des applications, Federator.ai propose les fonctionnalités suivantes :
 * Un système de prédiction des charges soutenu par l'IA pour les applications conteneurisées dans des clusters Kubernetes ainsi que pour les VM dans les clusters VMWare et le service Elastic Compute Cloud (EC2) d'Amazon Web Services (AWS)
 * Des recommandations de ressources basées sur des métriques relatives à la prédiction des charges, aux applications ou encore à Kubernetes
-* Un provisionnement automatique du CPU et de la mémoire pour les contrôleurs et espaces de nommage des applications Kubernetes génériques
+* Un provisionnement automatique du CPU et de la mémoire pour les contrôleurs et espaces de nommage génériques des applications Kubernetes
 * Un autoscaling des conteneurs d'application Kubernetes, des groupes de consommateurs Kafka et des services en amont NGINX Ingress
 * Des analyses de coûts pour des environnements avec plusieurs clouds, ainsi que des recommandations reposant sur les prédictions de charge pour les clusters Kubernetes et clusters de VM
 * Un système de calcul des coûts réels et des réductions de coûts potentielles reposant sur les recommandations de clusters, d'applications Kubernetes, de VM et d'espaces de nommage Kubernetes
 
-L'intégration de ProphetStor Federator.ai vous permet de surveiller et de prédire l'utilisation des ressources de vos conteneurs Kubernetes, espaces de nommage et nœuds de cluster. Vous pouvez ainsi formuler des recommandations pertinentes afin d'éviter tout coût supplémentaire lié à un surprovisionnement ou tout problème de performance lié à un sous-provisionnement. Grâce à son intégration fluide au pipeline CI/CD, Federator.ai vous permet d'optimiser en permanence vos conteneurs, où qu'ils soient déployés dans votre cluster Kubernetes. À l'aide de ses prédictions de charge pour les applications, Federator.ai effectue au moment opportun l'autoscaling des conteneurs d'application. Cette solution optimise également vos performances en utilisant le nombre optimal de réplicas de conteneurs, par l'intermédiaire de l'Autoscaler de pods horizontaux de Kubernetes ou de la solution [Watermark Pod Autoscaling (WPA) de Datadog][2].
+L'intégration de ProphetStor Federator.ai vous permet de surveiller et de prédire l'utilisation des ressources de vos conteneurs Kubernetes, espaces de nommage et nœuds de cluster. Vous pouvez ainsi formuler des recommandations pertinentes afin d'éviter tout coût supplémentaire lié à un surprovisionnement ou tout problème de performance lié à un sous-provisionnement. Grâce à son intégration fluide au pipeline de CI/CD, Federator.ai vous permet d'optimiser en permanence vos conteneurs, où qu'ils soient déployés dans votre cluster Kubernetes. À l'aide de ses prédictions de workload pour les applications, Federator.ai effectue au moment opportun l'autoscaling des conteneurs d'application. Cette solution optimise également vos performances en utilisant le nombre optimal de réplicas de conteneurs, par l'intermédiaire de l'Autoscaler de pods horizontaux de Kubernetes ou de la solution [Watermark Pod Autoscaling (WPA) de Datadog][2].
 
 Pour en savoir plus sur Federator.ai, consultez les vidéos de [démonstration des fonctionnalités de ProphetStor Federator.ai][3] et de [présentation de ProphetStor Federator.ai pour Datadog][4] (en anglais).
 
@@ -293,7 +293,7 @@ Besoin d'aide ? Consultez le [guide d'installation et de configuration de Feder
 
 [1]: https://prophetstor.com/federator_ai/
 [2]: https://github.com/DataDog/watermarkpodautoscaler
-[3]: https://youtu.be/IooFJnB8bb8
+[3]: https://youtu.be/AeSH8yGGA3Q
 [4]: https://youtu.be/qX_HF_zZ4BA
 [5]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/federatorai/images/cluster_overview_dashboard.png
 [6]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/federatorai/images/application_overview_dashboard.png

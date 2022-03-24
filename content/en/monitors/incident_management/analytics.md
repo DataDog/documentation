@@ -16,6 +16,19 @@ The following widgets support Incident Management Analytics:
 * Top List 
 * Query Value 
 
+### Measures
+
+Datadog provides the following aggregated measures out of the box for forming analytics queries:
+
+1. Count (*)
+2. Customer Impact Duration 
+3. Status Active Duration (amount of time the incident was in `Active` status)
+4. Status Stable Duration (amount of time the incident was in `Stable` status)
+5. Time to Repair (customer impact end timestamp - incident creation timestamp)
+6. Time to Resolve (resolved timestamp - created timestamp)
+
+In addition to these defaults, you can create new measures by adding custom *Number* property fields in your [Incident Settings][7]. 
+
 ### Graph configuration
 
 To configure your graph using Incident Management Analytics data, follow these steps:
@@ -49,3 +62,4 @@ To configure your graph using Incident Management Analytics data, follow these s
 [4]: https://app.datadoghq.com/notebook/template/11/incident-management-overview
 [5]: /dashboards/querying/#select-your-visualization
 [6]: /dashboards/querying/#create-a-title
+[7]: /monitors/incident_management/incident_settings#property-fields

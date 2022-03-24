@@ -92,7 +92,10 @@ Define the configuration of your browser test.
 
 3. **Name**: The name of your browser test.
 4. **Select tags**: The `env` and related tags attached to your browser test. Use the `<KEY>:<VALUE>` format to filter on a `<VALUE>` for a given `<KEY>`.
-5. **Browsers & Devices**: The browsers (`Chrome`, `Firefox`, and `Edge`) and devices (`Laptop Large`, `Tablet`, and `Mobile Small`) to run your test on. 
+5. **Browsers & Devices**: The browsers (such as `Chrome`, `Firefox`, `Edge`, and `Internet Explorer 11`), and devices (such as `Laptop Large`, `Tablet`, and `Mobile Small`) to run your test on. 
+   - For a large laptop device, the dimensions are 1440 x 1100 pixels. 
+   - For a tablet device, the dimensions are 768 pixels x 1020 pixels.
+   - For a small mobile device, the dimensions are 320 pixels x 550 pixels.  
 6. **Select locations**: The Datadog managed locations to run your test from. Many AWS locations from around the world are available for each site. You can also set up [private locations][1] to run your browser test from custom locations or from inside private networks. See a full list of locations in the [Datadog app][2] or use the [API][3]. {{< site-region region="gov" >}}**Note**: The West US (AWS GovCloud) location is supported on the Datadog for Government site.{{< /site-region >}}
 7. **Select test frequency**: The intervals vary from every five minutes to once per week. [Contact Support][4] for one-minute frequency.
 
@@ -154,12 +157,11 @@ Tests can be only recorded from [Google Chrome][10]. To record your test, downlo
 
 By default, only users with the [Datadog Admin and Datadog Standard roles][14] can create, edit, and delete Synthetic browser tests. To get create, edit, and delete access to Synthetic browser tests, upgrade your user to one of those two [default roles][14].
 
-If you have access to the [custom role feature][15], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions.
+If you are using the [custom role feature][15], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions.
 
 ### Restrict access
 
-<div class="alert alert-warning">
-Access restriction is available for customers with <a href="https://docs.datadoghq.com/account_management/rbac/?tab=datadogapplication#create-a-custom-role">custom roles</a> enabled on their accounts.</div>
+Access restriction is available for customers using [custom roles][16] on their accounts.
 
 You can restrict access to a browser test based on the roles in your organization. When creating a browser test, choose which roles (in addition to your user) can read and write your test. 
 
@@ -184,3 +186,4 @@ You can restrict access to a browser test based on the roles in your organizatio
 [13]: /synthetics/browser_tests/actions/#assertion
 [14]: /account_management/rbac/
 [15]: /account_management/rbac#custom-roles
+[16]: /account_management/rbac/#create-a-custom-role

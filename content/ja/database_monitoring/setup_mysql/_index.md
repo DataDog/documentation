@@ -5,7 +5,7 @@ description: MySQL データベースでのデータベースモニタリング�
 disable_sidebar: true
 ---
 
-{{< site-region region="us3,us5,gov" >}}
+{{< site-region region="us5,gov" >}}
 <div class="alert alert-warning">データベースモニタリングはこのサイトでサポートされていません。</div>
 {{< /site-region >}}
 

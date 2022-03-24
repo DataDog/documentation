@@ -17,6 +17,29 @@ further_reading:
 
 The Datadog Agent can create and assign tags to all metrics, traces, and logs emitted by a container based on its labels or environment variables.
 
+## Out-of-the-box tags
+
+The Agent can autodiscover and attach tags to all data emitted by the entire task or an individual container within this task. The list of tags attached automatically depends on the agent [cardinality configuration][5].
+
+<div style="overflow-x: auto;">
+
+  | Tag                           | Cardinality  | Source               |
+  |-------------------------------|--------------|----------------------|
+  | `container_name`              | High         | Docker               |
+  | `container_id`                | High         | Docker               |
+  | `docker_image`                | Low          | Docker               |
+  | `image_name`                  | Low          | Docker               |
+  | `short_image`                 | Low          | Docker               |
+  | `image_tag`                   | Low          | Docker               |
+  | `ecs_cluster_name`            | Low          | ECS API              |
+  | `ecs_container_name`          | Low          | ECS API              |
+  | `task_arn`                    | Orchestrator | ECS API              |
+  | `task_family`                 | Low          | ECS API              |
+  | `task_name`                   | Low          | ECS API              |
+  | `task_version`                | Low          | ECS API              |
+
+</div>
+
 ## Unified service tagging
 
 As a best practice in containerized environments, Datadog recommends using unified service tagging when assigning tags. Unified service tagging ties Datadog telemetry together through the use of three standard tags: `env`, `service`, and `version`. To learn how to configure your environment with unified tagging, see the [Amazon ECS unified service tagging documentation][1].
@@ -51,3 +74,4 @@ If you do not have unified service tagging enabled, complete the following steps
 [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ECS_instances.html
 [3]: https://docs.datadoghq.com/resources/json/datadog-agent-ecs.json
 [4]: https://docs.datadoghq.com/resources/json/datadog-agent-ecs1.json
+[5]: /getting_started/tagging/assigning_tags/?tab=containerizedenvironments#environment-variables

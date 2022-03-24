@@ -51,7 +51,7 @@ Concourse CI には Datadog メトリクスエミッターが付属していま�
 
 ### メトリクスエミッターオプション
 
-詳細については、Concourse CI の[ドキュメント][4]を参照してください。
+詳しくは、Concourse CI のドキュメントの [Configuring Metrics][4] を参照してください。
 
 ```text
 Metric Emitter (Datadog):

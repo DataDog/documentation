@@ -55,7 +55,8 @@ Les numéros des nouvelles versions de l'Agent Datadog respectent les règles  <
   {{< nextlink href="/agent/kubernetes">}}<u>Kubernetes</u> : installez et configurez l'Agent Datadog sur Kubernetes.{{< /nextlink >}}
   {{< nextlink href="/agent/cluster_agent">}}<u>Agent de cluster</u> : installez et configurez l'Agent de cluster pour Kubernetes, une version de l'Agent Datadog conçue pour rassembler efficacement des données depuis un cluster orchestré.{{< /nextlink >}}
   {{< nextlink href="/agent/amazon_ecs">}}<u>Amazon ECS</u> : installez et configurez l'Agent Datadog sur Amazon ECS.{{< /nextlink >}}
-  {{< nextlink href="/agent/iot">}}<u>IoT</u> : installez et configurez l'Agent IoT Datadog, une version de l'Agent Datadog optimisée pour la surveillance d'appareils IoT et d'applications intégrées.{{< /nextlink >}}
+  {{< nextlink href="integrations/ecs_fargate/">}}<u>AWS Fargate</u> : installez et configurez l'Agent Datadog avec Amazon ECS sur AWS Fargate.{{< /nextlink >}}
+  {{< nextlink href="/agent/iot">}}<u>IoT</u>: installez et configurez l'Agent IoT Datadog, une version de l'Agent Datadog optimisée pour la surveillance d'appareils IoT et d'applications intégrées.{{< /nextlink >}}
   {{< nextlink href="/agent/logs">}}<u>Collecte de logs</u> : activez et configurez la collecte de logs dans l'Agent Datadog.{{< /nextlink >}}
   {{< nextlink href="/agent/proxy">}}<u>Proxy</u> : si votre configuration réseau limite le trafic sortant, utilisez un proxy pour le trafic de l'Agent.{{< /nextlink >}}
   {{< nextlink href="/agent/versions/">}}<u>Versions</u> : l'Agent 7 est la dernière version majeure de l'Agent Datadog ; découvrez les différences entre chaque version majeure ainsi que la procédure à suivre pour mettre l'Agent à niveau.{{< /nextlink >}}

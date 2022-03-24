@@ -10,6 +10,7 @@ further_reading:
       text: 'AWS Lambda Functions running on AWS Graviton2 processors'
 aliases:
     - /serverless/datadog_lambda_library/extension/
+    - /serverless/guide/extension_private_link/
 ---
 
 ## Overview
@@ -22,7 +23,7 @@ The Datadog Lambda Extension is responsible for:
 - Pushing real-time [enhanced Lambda metrics][1], [custom metrics][2], and [traces][3] from the Datadog Lambda Library to Datadog.
 - Forwarding logs from your Lambda function to Datadog.
 
-The Datadog extension submits custom metrics, enhanced metrics, traces, and logs [asynchronously][4]. Submitting Lambda logs with the extension is supported in all Lambda runtimes. Submitting custom metrics, enhanced metrics and traces is supported in Node.js, Python, and Go Lambda runtimes.
+The Datadog extension submits custom metrics, enhanced metrics, traces, and logs [asynchronously][4]. Submitting Lambda logs with the extension is supported in all Lambda runtimes. Submitting custom metrics, enhanced metrics and traces is supported in Node.js, Python, Go, and .NET Lambda runtimes.
 
 ## Installation
 
@@ -72,17 +73,17 @@ The Datadog Lambda Extension needs access to public internet to send data to Dat
 
 ### Using AWS PrivateLink
 
-If you are sending data to a Datadog site that is hosted on AWS, such as US1, then you can [send data over AWS PrivateLink][10]. See [Datadog Sites][11] or file a ticket at [help.datadoghq.com][12] if you are unsure about your Datadog site.
+If you are sending data to the Datadog site US1, then you can [send data over AWS PrivateLink][10]. See [Datadog Sites][11] if you are unsure about your Datadog site.
 
 ### Using a proxy
 
-If you are sending data to a Datadog site that is _NOT_ hosted on AWS, such as EU1, then you need to [send data over a proxy][13].
+If you are sending data to a Datadog site that is _NOT_ hosted on AWS, such as EU1, then you need to [send data over a proxy][12].
 
 ## Overhead
 
 The Datadog Lambda Extension introduces a small amount of overhead to your Lambda function's cold starts (that is, the higher init duration), as the Extension needs to initialize. Datadog is continuously optimizing the Lambda extension performance and recommend always using the latest release.
 
-You may notice an increase of your Lambda function's reported duration. This is because the Datadog Lambda Extension needs to flush data back to the Datadog API. Although the time spent by the extension flushing data is reported as part of the duration, it's done *after* AWS returns your function's response back to the client. In other words, the added duration does not slow down your Lambda function. See this [AWS blog post][14] for more technical information. To monitor your function's actual performance and exclude the duration added by the Datadog extension, use the metric `aws.lambda.enhanced.runtime_duration`.
+You may notice an increase of your Lambda function's reported duration. This is because the Datadog Lambda Extension needs to flush data back to the Datadog API. Although the time spent by the extension flushing data is reported as part of the duration, it's done *after* AWS returns your function's response back to the client. In other words, the added duration does not slow down your Lambda function. See this [AWS blog post][13] for more technical information. To monitor your function's actual performance and exclude the duration added by the Datadog extension, use the metric `aws.lambda.enhanced.runtime_duration`.
 
 By default, the Extension sends data back to Datadog at the end of each invocation. This avoids delays of data arrival for sporadic invocations from low-traffic applications, cron jobs, and manual tests. Once the Extension detects a steady and frequent invocation pattern (more than once per minute), it batches data from multiple invocations and flushes periodically at the beginning of the invocation when it's due. This means that *the busier your function is, the lower the average duration overhead per invocation*. 
 
@@ -102,8 +103,7 @@ For Lambda functions deployed in a region that is far from the Datadog site, for
 [7]: /tracing/guide/ignoring_apm_resources/
 [8]: /tracing/setup_overview/configure_data_security/
 [9]: /tracing/deployment_tracking/
-[10]: /serverless/guide/extension_private_link/
+[10]: /agent/guide/private-link/
 [11]: /getting_started/site/
-[12]: https://help.datadoghq.com/
-[13]: /agent/proxy/
-[14]: https://aws.amazon.com/blogs/compute/performance-and-functionality-improvements-for-aws-lambda-extensions/
+[12]: /agent/proxy/
+[13]: https://aws.amazon.com/blogs/compute/performance-and-functionality-improvements-for-aws-lambda-extensions/

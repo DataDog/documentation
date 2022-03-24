@@ -80,10 +80,10 @@ nav_sections:
         link: mobile/
         icon: mobile
         desc: View Datadog alerts, incidents, and more on your mobile device
-      - title: Watchdog
+      - title: Datadog Watchdog
         link: watchdog/
         icon: watchdog
-        desc: Observe trends and patterns in your APM and infrastructure metrics
+        desc: Proactively detect and surface application and infrastructure anomalies
       - title: CI Visibility
         link: continuous_integration/
         icon: ci

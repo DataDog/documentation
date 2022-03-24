@@ -203,7 +203,7 @@
         dest_path: '/tracing/setup_overview/setup/'
         file_name: 'ruby.md'
         front_matters:
-          dependencies: ["https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md"]
+          dependencies: ["https://github.com/DataDog/dd-trace-rb/blob/release/docs/GettingStarted.md"]
           title: Tracing Ruby Applications
           kind: documentation
           code_lang: ruby
@@ -611,8 +611,8 @@
         - "runtime/**/*.yml"
         - "runtime/**/*.md"
         # new
-        - "workload-security/signal-rules/*.yaml"
-        - "workload-security/signal-rules/*.md"
+        - "workload-security/backend-rules/*.yaml"
+        - "workload-security/backend-rules/*.md"
         - "security-monitoring/*.json"
         - "security-monitoring/*.md"
         - "posture-management/**/*.json"
