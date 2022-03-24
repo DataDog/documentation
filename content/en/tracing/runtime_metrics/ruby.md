@@ -67,5 +67,5 @@ Along with displaying these metrics in your APM Service Page, Datadog provides a
 [3]: https://app.datadoghq.com/apm/service
 [4]: /agent/docker/#dogstatsd-custom-metrics
 [5]: /developers/dogstatsd/?tab=kubernetes#agent
-[6]: /integrations/amazon_ecs/?tab=python#create-an-ecs-task
+[6]: /agent/amazon_ecs/#create-an-ecs-task
 [7]: https://app.datadoghq.com/dash/integration/30268/ruby-runtime-metrics
